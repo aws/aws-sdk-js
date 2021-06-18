@@ -1367,6 +1367,63 @@
         "shape": "Device"
       }
     },
+    "EFSAuthorizationConfig": {
+      "type": "structure",
+      "members": {
+        "accessPointId": {
+          "shape": "String",
+          "documentation": "<p>The Amazon EFS access point ID to use. If an access point is specified, the root directory value specified in the <code>EFSVolumeConfiguration</code> must either be omitted or set to <code>/</code> which will enforce the path set on the EFS access point. If an access point is used, transit encryption must be enabled in the <code>EFSVolumeConfiguration</code>. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-access-points.html\">Working with Amazon EFS Access Points</a> in the <i>Amazon Elastic File System User Guide</i>.</p>"
+        },
+        "iam": {
+          "shape": "EFSAuthorizationConfigIAM",
+          "documentation": "<p>Whether or not to use the AWS Batch execution IAM role defined in a job definition when mounting the Amazon EFS file system. If enabled, transit encryption must be enabled in the <code>EFSVolumeConfiguration</code>. If this parameter is omitted, the default value of <code>DISABLED</code> is used. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/ug/efs-volumes.html#efs-volume-accesspoints\">Using Amazon EFS Access Points</a> in the <i>AWS Batch User Guide</i>. EFS IAM authorization requires that <code>TransitEncryption</code> be <code>ENABLED</code> and that a <code>JobRoleArn</code> is specified.</p>"
+        }
+      },
+      "documentation": "<p>The authorization configuration details for the Amazon EFS file system.</p>"
+    },
+    "EFSAuthorizationConfigIAM": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "EFSTransitEncryption": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "EFSVolumeConfiguration": {
+      "type": "structure",
+      "required": [
+        "fileSystemId"
+      ],
+      "members": {
+        "fileSystemId": {
+          "shape": "String",
+          "documentation": "<p>The Amazon EFS file system ID to use.</p>"
+        },
+        "rootDirectory": {
+          "shape": "String",
+          "documentation": "<p>The directory within the Amazon EFS file system to mount as the root directory inside the host. If this parameter is omitted, the root of the Amazon EFS volume will be used. Specifying <code>/</code> will have the same effect as omitting this parameter.</p> <important> <p>If an EFS access point is specified in the <code>authorizationConfig</code>, the root directory parameter must either be omitted or set to <code>/</code> which will enforce the path set on the Amazon EFS access point.</p> </important>"
+        },
+        "transitEncryption": {
+          "shape": "EFSTransitEncryption",
+          "documentation": "<p>Whether or not to enable encryption for Amazon EFS data in transit between the Amazon ECS host and the Amazon EFS server. Transit encryption must be enabled if Amazon EFS IAM authorization is used. If this parameter is omitted, the default value of <code>DISABLED</code> is used. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html\">Encrypting data in transit</a> in the <i>Amazon Elastic File System User Guide</i>.</p>"
+        },
+        "transitEncryptionPort": {
+          "shape": "Integer",
+          "documentation": "<p>The port to use when sending encrypted data between the Amazon ECS host and the Amazon EFS server. If you do not specify a transit encryption port, it will use the port selection strategy that the Amazon EFS mount helper uses. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/efs-mount-helper.html\">EFS Mount Helper</a> in the <i>Amazon Elastic File System User Guide</i>.</p>"
+        },
+        "authorizationConfig": {
+          "shape": "EFSAuthorizationConfig",
+          "documentation": "<p>The authorization configuration details for the Amazon EFS file system.</p>"
+        }
+      },
+      "documentation": "<p>This parameter is specified when you are using an Amazon Elastic File System file system for task storage. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/ug/efs-volumes.html\">Amazon EFS Volumes</a> in the <i>AWS Batch User Guide</i>.</p>"
+    },
     "Ec2Configuration": {
       "type": "structure",
       "required": [
@@ -1375,14 +1432,14 @@
       "members": {
         "imageType": {
           "shape": "ImageType",
-          "documentation": "<p>The image type to match with the instance type to select an AMI. If the <code>imageIdOverride</code> parameter isn't specified, then a recent <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized AMI</a> is used.</p> <dl> <dt>ECS_AL2</dt> <dd> <p> <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami\">Amazon Linux 2</a>− Default for all AWS Graviton-based instance families (for example, <code>C6g</code>, <code>M6g</code>, <code>R6g</code>, and <code>T4g</code>) and can be used for all non-GPU instance types.</p> </dd> <dt>ECS_AL2_NVIDIA</dt> <dd> <p> <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami\">Amazon Linux 2 (GPU)</a>−Default for all GPU instance families (for example <code>P4</code> and <code>G4</code>) and can be used for all non-AWS Graviton-based instance types.</p> </dd> <dt>ECS_AL1</dt> <dd> <p> <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami\">Amazon Linux</a>−Default for all non-GPU, non-AWS Graviton instance families. Amazon Linux is reaching the end-of-life of standard support. For more information, see <a href=\"http://aws.amazon.com/amazon-linux-ami/\">Amazon Linux AMI</a>.</p> </dd> </dl>"
+          "documentation": "<p>The image type to match with the instance type to select an AMI. If the <code>imageIdOverride</code> parameter isn't specified, then a recent <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html\">Amazon ECS-optimized AMI</a> (<code>ECS_AL1</code>) is used. Starting on March 31, 2021, this default will be changing to <code>ECS_AL2</code> (<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami\">Amazon Linux 2</a>).</p> <dl> <dt>ECS_AL2</dt> <dd> <p> <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami\">Amazon Linux 2</a>− Default for all AWS Graviton-based instance families (for example, <code>C6g</code>, <code>M6g</code>, <code>R6g</code>, and <code>T4g</code>) and can be used for all non-GPU instance types.</p> </dd> <dt>ECS_AL2_NVIDIA</dt> <dd> <p> <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami\">Amazon Linux 2 (GPU)</a>−Default for all GPU instance families (for example <code>P4</code> and <code>G4</code>) and can be used for all non-AWS Graviton-based instance types.</p> </dd> <dt>ECS_AL1</dt> <dd> <p> <a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami\">Amazon Linux</a>−Default for all non-GPU, non-AWS Graviton instance families. Amazon Linux is reaching the end-of-life of standard support. For more information, see <a href=\"http://aws.amazon.com/amazon-linux-ami/\">Amazon Linux AMI</a>.</p> </dd> </dl>"
         },
         "imageIdOverride": {
           "shape": "ImageIdOverride",
           "documentation": "<p>The AMI ID used for instances launched in the compute environment that match the image type. This setting overrides the <code>imageId</code> set in the <code>computeResource</code> object.</p>"
         }
       },
-      "documentation": "<p>Provides information used to select Amazon Machine Images (AMIs) for instances in the compute environment. If the <code>Ec2Configuration</code> isn't specified, the default is <code>ECS_AL1</code>.</p> <note> <p>This object isn't applicable to jobs running on Fargate resources.</p> </note>"
+      "documentation": "<p>Provides information used to select Amazon Machine Images (AMIs) for instances in the compute environment. If <code>Ec2Configuration</code> isn't specified, the default is currently <code>ECS_AL1</code> (<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami\">Amazon Linux</a>) for non-GPU, non-Graviton instances. Starting on March 31, 2021, this default will be changing to <code>ECS_AL2</code> (<a href=\"https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami\">Amazon Linux 2</a>).</p> <note> <p>This object isn't applicable to jobs running on Fargate resources.</p> </note>"
     },
     "Ec2ConfigurationList": {
       "type": "list",
@@ -1843,7 +1900,7 @@
         },
         "version": {
           "shape": "String",
-          "documentation": "<p>The version number of the launch template, <code>$Latest</code>, or <code>$Default</code>.</p> <p>If the value is <code>$Latest</code>, the latest version of the launch template is used. If the value is <code>$Default</code>, the default version of the launch template is used.</p> <p>Default: <code>$Default</code>.</p>"
+          "documentation": "<p>The version number of the launch template, <code>$Latest</code>, or <code>$Default</code>.</p> <p>If the value is <code>$Latest</code>, the latest version of the launch template is used. If the value is <code>$Default</code>, the default version of the launch template is used.</p> <important> <p>After the compute environment is created, the launch template version used will not be changed, even if the <code>$Default</code> or <code>$Latest</code> version for the launch template is updated. To use a new launch template version, create a new compute environment, add the new compute environment to the existing job queue, remove the old compute environment from the job queue, and delete the old compute environment.</p> </important> <p>Default: <code>$Default</code>.</p>"
         }
       },
       "documentation": "<p>An object representing a launch template associated with a compute resource. You must specify either the launch template ID or launch template name in the request, but not both.</p> <p>If security groups are specified using both the <code>securityGroupIds</code> parameter of <code>CreateComputeEnvironment</code> and the launch template, the values in the <code>securityGroupIds</code> parameter of <code>CreateComputeEnvironment</code> will be used.</p> <note> <p>This object isn't applicable to jobs running on Fargate resources.</p> </note>"
@@ -2609,7 +2666,7 @@
         },
         "serviceRole": {
           "shape": "String",
-          "documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html\">AWS Batch service IAM role</a> in the <i>AWS Batch User Guide</i>.</p> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.</p> <note> <p>Depending on how you created your AWS Batch service role, its ARN might contain the <code>service-role</code> path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN doesn't use the <code>service-role</code> path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments.</p> </note>"
+          "documentation": "<p>The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html\">AWS Batch service IAM role</a> in the <i>AWS Batch User Guide</i>.</p> <important> <p>If the compute environment has a service-linked role, it cannot be changed to use a regular IAM role. If the compute environment has a regular IAM role, it cannot be changed to use a service-linked role.</p> </important> <p>If your specified role has a path other than <code>/</code>, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.</p> <note> <p>Depending on how you created your AWS Batch service role, its ARN might contain the <code>service-role</code> path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN doesn't use the <code>service-role</code> path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments.</p> </note>"
         }
       },
       "documentation": "<p>Contains the parameters for <code>UpdateComputeEnvironment</code>.</p>"
@@ -2675,6 +2732,10 @@
         "name": {
           "shape": "String",
           "documentation": "<p>The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. This name is referenced in the <code>sourceVolume</code> parameter of container definition <code>mountPoints</code>.</p>"
+        },
+        "efsVolumeConfiguration": {
+          "shape": "EFSVolumeConfiguration",
+          "documentation": "<p>This parameter is specified when you are using an Amazon Elastic File System file system for job storage. Jobs running on Fargate resources must specify a <code>platformVersion</code> of at least <code>1.4.0</code>.</p>"
         }
       },
       "documentation": "<p>A data volume used in a job's container properties.</p>"
@@ -2686,5 +2747,5 @@
       }
     }
   },
-  "documentation": "<p>Using AWS Batch, you can run batch computing workloads on the AWS Cloud. Batch computing is a common means for developers, scientists, and engineers to access large amounts of compute resources. AWS Batch uses the advantages of this computing workload to remove the undifferentiated heavy lifting of configuring and managing required infrastructure. At the same time, it also adopts a familiar batch computing software approach. Given these advantages, AWS Batch can help you to efficiently provision resources in response to jobs submitted, thus effectively helping you to eliminate capacity constraints, reduce compute costs, and deliver your results more quickly.</p> <p>As a fully managed service, AWS Batch can run batch computing workloads of any scale. AWS Batch automatically provisions compute resources and optimizes workload distribution based on the quantity and scale of your specific workloads. With AWS Batch, there's no need to install or manage batch computing software. This means that you can focus your time and energy on analyzing results and solving your specific problems. </p>"
+  "documentation": "<p>Using AWS Batch, you can run batch computing workloads on the AWS Cloud. Batch computing is a common means for developers, scientists, and engineers to access large amounts of compute resources. AWS Batch uses the advantages of this computing workload to remove the undifferentiated heavy lifting of configuring and managing required infrastructure. At the same time, it also adopts a familiar batch computing software approach. Given these advantages, AWS Batch can help you to efficiently provision resources in response to jobs submitted, thus effectively helping you to eliminate capacity constraints, reduce compute costs, and deliver your results more quickly.</p> <p>As a fully managed service, AWS Batch can run batch computing workloads of any scale. AWS Batch automatically provisions compute resources and optimizes workload distribution based on the quantity and scale of your specific workloads. With AWS Batch, there's no need to install or manage batch computing software. This means that you can focus your time and energy on analyzing results and solving your specific problems.</p>"
 }

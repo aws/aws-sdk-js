@@ -70,6 +70,56 @@
       "documentation": "<p>Cancels an existing Amazon FSx for Lustre data repository task if that task is in either the <code>PENDING</code> or <code>EXECUTING</code> state. When you cancel a task, Amazon FSx does the following.</p> <ul> <li> <p>Any files that FSx has already exported are not reverted.</p> </li> <li> <p>FSx continues to export any files that are \"in-flight\" when the cancel operation is received.</p> </li> <li> <p>FSx does not export any files that have not yet been exported.</p> </li> </ul>",
       "idempotent": true
     },
+    "CopyBackup": {
+      "name": "CopyBackup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CopyBackupRequest"
+      },
+      "output": {
+        "shape": "CopyBackupResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "BackupNotFound"
+        },
+        {
+          "shape": "ServiceLimitExceeded"
+        },
+        {
+          "shape": "UnsupportedOperation"
+        },
+        {
+          "shape": "IncompatibleParameterError"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "InvalidSourceKmsKey"
+        },
+        {
+          "shape": "InvalidDestinationKmsKey"
+        },
+        {
+          "shape": "InvalidRegion"
+        },
+        {
+          "shape": "SourceBackupUnavailable"
+        },
+        {
+          "shape": "IncompatibleRegionForMultiAZ"
+        }
+      ],
+      "documentation": "<p>Copies an existing backup within the same AWS account to another Region (cross-Region copy) or within the same Region (in-Region copy). You can have up to five backup copy requests in progress to a single destination Region per account.</p> <p>You can use cross-Region backup copies for cross-region disaster recovery. You periodically take backups and copy them to another Region so that in the event of a disaster in the primary Region, you can restore from backup and recover availability quickly in the other Region. You can make cross-Region copies only within your AWS partition.</p> <p> You can also use backup copies to clone your file data set to another Region or within the same Region.</p> <p>You can use the <code>SourceRegion</code> parameter to specify the AWS Region from which the backup will be copied. For example, if you make the call from the <code>us-west-1</code> Region and want to copy a backup from the <code>us-east-2</code> Region, you specify <code>us-east-2</code> in the <code>SourceRegion</code> parameter to make a cross-Region copy. If you don't specify a Region, the backup copy is created in the same Region where the request is sent from (in-Region copy).</p> <p>For more information on creating backup copies, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#copy-backups\"> Copying backups</a> in the <i>Amazon FSx for Windows User Guide</i> and <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html#copy-backups\">Copying backups</a> in the <i>Amazon FSx for Lustre User Guide</i>.</p>",
+      "idempotent": true
+    },
     "CreateBackup": {
       "name": "CreateBackup",
       "http": {
@@ -265,6 +315,9 @@
         },
         {
           "shape": "InternalServerError"
+        },
+        {
+          "shape": "BackupBeingCopied"
         }
       ],
       "documentation": "<p>Deletes an Amazon FSx backup, deleting its contents. After deletion, the backup no longer exists, and its data is gone.</p> <p>The <code>DeleteBackup</code> call returns instantly. The backup will not show up in later <code>DescribeBackups</code> calls.</p> <important> <p>The data in a deleted backup is also deleted and can't be recovered by any means.</p> </important>",
@@ -563,7 +616,7 @@
           "shape": "ServiceLimitExceeded"
         }
       ],
-      "documentation": "<p>Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request.</p> <p>For Amazon FSx for Windows File Server file systems, you can update the following properties:</p> <ul> <li> <p>AutomaticBackupRetentionDays</p> </li> <li> <p>DailyAutomaticBackupStartTime</p> </li> <li> <p>SelfManagedActiveDirectoryConfiguration</p> </li> <li> <p>StorageCapacity</p> </li> <li> <p>ThroughputCapacity</p> </li> <li> <p>WeeklyMaintenanceStartTime</p> </li> </ul> <p>For Amazon FSx for Lustre file systems, you can update the following properties:</p> <ul> <li> <p>AutoImportPolicy</p> </li> <li> <p>AutomaticBackupRetentionDays</p> </li> <li> <p>DailyAutomaticBackupStartTime</p> </li> <li> <p>StorageCapacity</p> </li> <li> <p>WeeklyMaintenanceStartTime</p> </li> </ul>"
+      "documentation": "<p>Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request.</p> <p>For Amazon FSx for Windows File Server file systems, you can update the following properties:</p> <ul> <li> <p>AuditLogConfiguration</p> </li> <li> <p>AutomaticBackupRetentionDays</p> </li> <li> <p>DailyAutomaticBackupStartTime</p> </li> <li> <p>SelfManagedActiveDirectoryConfiguration</p> </li> <li> <p>StorageCapacity</p> </li> <li> <p>ThroughputCapacity</p> </li> <li> <p>WeeklyMaintenanceStartTime</p> </li> </ul> <p>For Amazon FSx for Lustre file systems, you can update the following properties:</p> <ul> <li> <p>AutoImportPolicy</p> </li> <li> <p>AutomaticBackupRetentionDays</p> </li> <li> <p>DailyAutomaticBackupStartTime</p> </li> <li> <p>DataCompressionType</p> </li> <li> <p>StorageCapacity</p> </li> <li> <p>WeeklyMaintenanceStartTime</p> </li> </ul>"
     }
   },
   "shapes": {
@@ -584,6 +637,9 @@
         "ActiveDirectoryId": {
           "shape": "DirectoryId",
           "documentation": "<p>The ID of the AWS Managed Microsoft Active Directory instance to which the file system is joined.</p>"
+        },
+        "ResourceARN": {
+          "shape": "ResourceARN"
         }
       },
       "documentation": "<p>The Microsoft AD attributes of the Amazon FSx for Windows File Server file system.</p>"
@@ -654,7 +710,7 @@
       "members": {
         "Name": {
           "shape": "AlternateDNSName",
-          "documentation": "<p>The name of the DNS alias. The alias name has to meet the following requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>"
+          "documentation": "<p>The name of the DNS alias. The alias name has to meet the following requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters, the underscore (_), and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>"
         },
         "Lifecycle": {
           "shape": "AliasLifecycle",
@@ -762,7 +818,7 @@
         },
         "Lifecycle": {
           "shape": "BackupLifecycle",
-          "documentation": "<p>The lifecycle status of the backup.</p> <ul> <li> <p> <code>AVAILABLE</code> - The backup is fully available.</p> </li> <li> <p> <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the backup.</p> </li> <li> <p> <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is transferring the backup to S3.</p> </li> <li> <p> <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx could not complete the backup.</p> </li> </ul>"
+          "documentation": "<p>The lifecycle status of the backup.</p> <ul> <li> <p> <code>AVAILABLE</code> - The backup is fully available.</p> </li> <li> <p> <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the backup.</p> </li> <li> <p> <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is transferring the backup to S3.</p> </li> <li> <p> <code>COPYING</code> - Amazon FSx is copying the backup.</p> </li> <li> <p> <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx could not complete the backup.</p> </li> </ul>"
         },
         "FailureDetails": {
           "shape": "BackupFailureDetails",
@@ -798,9 +854,19 @@
         "DirectoryInformation": {
           "shape": "ActiveDirectoryBackupAttributes",
           "documentation": "<p>The configuration of the self-managed Microsoft Active Directory (AD) to which the Windows File Server instance is joined.</p>"
+        },
+        "OwnerId": {
+          "shape": "AWSAccountId"
+        },
+        "SourceBackupId": {
+          "shape": "BackupId"
+        },
+        "SourceBackupRegion": {
+          "shape": "Region",
+          "documentation": "<p>The source Region of the backup. Specifies the Region from where this backup is copied.</p>"
         }
       },
-      "documentation": "<p>A backup of an Amazon FSx file system. For more information see:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html\">Working with backups for Windows file systems</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html\">Working with backups for Lustre file systems</a> </p> </li> </ul>"
+      "documentation": "<p>A backup of an Amazon FSx file system.</p>"
     },
     "BackupFailureDetails": {
       "type": "structure",
@@ -814,7 +880,7 @@
     },
     "BackupId": {
       "type": "string",
-      "documentation": "<p>The ID of the backup. Specifies the backup to use if you're creating a file system from an existing backup.</p>",
+      "documentation": "<p>The ID of the source backup. Specifies the backup you are copying.</p>",
       "max": 128,
       "min": 12,
       "pattern": "^(backup-[0-9a-f]{8,})$"
@@ -829,14 +895,15 @@
     },
     "BackupLifecycle": {
       "type": "string",
-      "documentation": "<p>The lifecycle status of the backup.</p> <ul> <li> <p> <code>AVAILABLE</code> - The backup is fully available.</p> </li> <li> <p> <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the new user-intiated backup</p> </li> <li> <p> <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is backing up the file system.</p> </li> <li> <p> <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx could not complete the backup.</p> </li> </ul>",
+      "documentation": "<p>The lifecycle status of the backup.</p> <ul> <li> <p> <code>AVAILABLE</code> - The backup is fully available.</p> </li> <li> <p> <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the new user-intiated backup</p> </li> <li> <p> <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is backing up the file system.</p> </li> <li> <p> <code>COPYING</code> - Amazon FSx is copying the backup.</p> </li> <li> <p> <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx could not complete the backup.</p> </li> </ul>",
       "enum": [
         "AVAILABLE",
         "CREATING",
         "TRANSFERRING",
         "DELETED",
         "FAILED",
-        "PENDING"
+        "PENDING",
+        "COPYING"
       ]
     },
     "BackupType": {
@@ -913,6 +980,44 @@
         }
       },
       "documentation": "<p>Provides a report detailing the data repository task results of the files processed that match the criteria specified in the report <code>Scope</code> parameter. FSx delivers the report to the file system's linked data repository in Amazon S3, using the path specified in the report <code>Path</code> parameter. You can specify whether or not a report gets generated for a task using the <code>Enabled</code> parameter.</p>"
+    },
+    "CopyBackupRequest": {
+      "type": "structure",
+      "required": [
+        "SourceBackupId"
+      ],
+      "members": {
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        },
+        "SourceBackupId": {
+          "shape": "SourceBackupId",
+          "documentation": "<p>The ID of the source backup. Specifies the ID of the backup that is being copied.</p>"
+        },
+        "SourceRegion": {
+          "shape": "Region",
+          "documentation": "<p>The source AWS Region of the backup. Specifies the AWS Region from which the backup is being copied. The source and destination Regions must be in the same AWS partition. If you don't specify a Region, it defaults to the Region where the request is sent from (in-Region copy).</p>"
+        },
+        "KmsKeyId": {
+          "shape": "KmsKeyId"
+        },
+        "CopyTags": {
+          "shape": "Flag",
+          "documentation": "<p>A boolean flag indicating whether tags from the source backup should be copied to the backup copy. This value defaults to false.</p> <p>If you set <code>CopyTags</code> to true and the source backup has existing tags, you can use the <code>Tags</code> parameter to create new tags, provided that the sum of the source backup tags and the new tags doesn't exceed 50. Both sets of tags are merged. If there are tag conflicts (for example, two tags with the same key but different values), the tags created with the <code>Tags</code> parameter take precedence.</p>"
+        },
+        "Tags": {
+          "shape": "Tags"
+        }
+      }
+    },
+    "CopyBackupResponse": {
+      "type": "structure",
+      "members": {
+        "Backup": {
+          "shape": "Backup"
+        }
+      }
     },
     "CreateBackupRequest": {
       "type": "structure",
@@ -1024,6 +1129,9 @@
         "StorageType": {
           "shape": "StorageType",
           "documentation": "<p>Sets the storage type for the Windows file system you're creating from a backup. Valid values are <code>SSD</code> and <code>HDD</code>.</p> <ul> <li> <p>Set to <code>SSD</code> to use solid state drive storage. Supported on all Windows deployment types.</p> </li> <li> <p>Set to <code>HDD</code> to use hard disk drive storage. Supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types. </p> </li> </ul> <p> Default value is <code>SSD</code>. </p> <note> <p>HDD and SSD storage types have different minimum storage capacity requirements. A restored file system's storage capacity is tied to the file system that was backed up. You can create a file system that uses HDD storage from a backup of a file system that used SSD storage only if the original SSD file system had a storage capacity of at least 2000 GiB. </p> </note>"
+        },
+        "KmsKeyId": {
+          "shape": "KmsKeyId"
         }
       },
       "documentation": "<p>The request object for the <code>CreateFileSystemFromBackup</code> operation.</p>"
@@ -1082,6 +1190,10 @@
         "DriveCacheType": {
           "shape": "DriveCacheType",
           "documentation": "<p>The type of drive cache used by PERSISTENT_1 file systems that are provisioned with HDD storage devices. This parameter is required when storage type is HDD. Set to <code>READ</code>, improve the performance for frequently accessed files and allows 20% of the total storage capacity of the file system to be cached. </p> <p>This parameter is required when <code>StorageType</code> is set to HDD.</p>"
+        },
+        "DataCompressionType": {
+          "shape": "DataCompressionType",
+          "documentation": "<p>Sets the data compression configuration for the file system. <code>DataCompressionType</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - (Default) Data compression is turned off when the file system is created.</p> </li> <li> <p> <code>LZ4</code> - Data compression is turned on with the LZ4 algorithm.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html\">Lustre data compression</a>.</p>"
         }
       },
       "documentation": "<p>The Lustre configuration for the file system being created. </p>"
@@ -1113,7 +1225,7 @@
         },
         "SubnetIds": {
           "shape": "SubnetIds",
-          "documentation": "<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> property.</p> <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet's Availability Zone.</p>"
+          "documentation": "<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> property. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html\"> Availability and durability: Single-AZ and Multi-AZ file systems</a>.</p> <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet's Availability Zone.</p>"
         },
         "SecurityGroupIds": {
           "shape": "SecurityGroupIds",
@@ -1189,7 +1301,11 @@
         },
         "Aliases": {
           "shape": "AlternateDNSNames",
-          "documentation": "<p>An array of one or more DNS alias names that you want to associate with the Amazon FSx file system. Aliases allow you to use existing DNS names to access the data in your Amazon FSx file system. You can associate up to 50 aliases with a file system at any time. You can associate additional DNS aliases after you create the file system using the AssociateFileSystemAliases operation. You can remove DNS aliases from the file system after it is created using the DisassociateFileSystemAliases operation. You only need to specify the alias name in the request payload.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html\">Working with DNS Aliases</a> and <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html\">Walkthrough 5: Using DNS aliases to access your file system</a>, including additional steps you must take to be able to access your file system using a DNS alias.</p> <p>An alias name has to meet the following requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>"
+          "documentation": "<p>An array of one or more DNS alias names that you want to associate with the Amazon FSx file system. Aliases allow you to use existing DNS names to access the data in your Amazon FSx file system. You can associate up to 50 aliases with a file system at any time. You can associate additional DNS aliases after you create the file system using the AssociateFileSystemAliases operation. You can remove DNS aliases from the file system after it is created using the DisassociateFileSystemAliases operation. You only need to specify the alias name in the request payload.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html\">Working with DNS Aliases</a> and <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html\">Walkthrough 5: Using DNS aliases to access your file system</a>, including additional steps you must take to be able to access your file system using a DNS alias.</p> <p>An alias name has to meet the following requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters, the underscore (_), and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>"
+        },
+        "AuditLogConfiguration": {
+          "shape": "WindowsAuditLogCreateConfiguration",
+          "documentation": "<p>The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system.</p>"
         }
       },
       "documentation": "<p>The configuration object for the Microsoft Windows file system used in <code>CreateFileSystem</code> and <code>CreateFileSystemFromBackup</code> operations.</p>"
@@ -1211,6 +1327,13 @@
       "max": 5,
       "min": 5,
       "pattern": "^([01]\\d|2[0-3]):?([0-5]\\d)$"
+    },
+    "DataCompressionType": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "LZ4"
+      ]
     },
     "DataRepositoryConfiguration": {
       "type": "structure",
@@ -1588,7 +1711,7 @@
       "members": {
         "Backups": {
           "shape": "Backups",
-          "documentation": "<p>Any array of backups.</p>"
+          "documentation": "<p>An array of backups.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -1977,6 +2100,12 @@
     "Flag": {
       "type": "boolean"
     },
+    "GeneralARN": {
+      "type": "string",
+      "max": 1024,
+      "min": 8,
+      "pattern": "^arn:[^:]{1,63}:[^:]{0,63}:[^:]{0,63}:(?:|\\d{12}):[^/].{0,1023}$"
+    },
     "IpAddress": {
       "type": "string",
       "max": 15,
@@ -2071,6 +2200,10 @@
         "DriveCacheType": {
           "shape": "DriveCacheType",
           "documentation": "<p>The type of drive cache used by PERSISTENT_1 file systems that are provisioned with HDD storage devices. This parameter is required when storage type is HDD. Set to <code>READ</code>, improve the performance for frequently accessed files and allows 20% of the total storage capacity of the file system to be cached. </p> <p>This parameter is required when <code>StorageType</code> is set to HDD.</p>"
+        },
+        "DataCompressionType": {
+          "shape": "DataCompressionType",
+          "documentation": "<p>The data compression configuration for the file system. <code>DataCompressionType</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - Data compression is turned off for the file system.</p> </li> <li> <p> <code>LZ4</code> - Data compression is turned on with the LZ4 algorithm.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html\">Lustre data compression</a>.</p>"
         }
       },
       "documentation": "<p>The configuration for the Amazon FSx for Lustre file system.</p>"
@@ -2136,6 +2269,12 @@
       "documentation": "<p>The current percent of progress of an asynchronous task.</p>",
       "max": 100,
       "min": 0
+    },
+    "Region": {
+      "type": "string",
+      "max": 20,
+      "min": 1,
+      "pattern": "^[a-z0-9-]{1,20}$"
     },
     "ReportFormat": {
       "type": "string",
@@ -2231,10 +2370,10 @@
         },
         "DnsIps": {
           "shape": "DnsIps",
-          "documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the one in which your Amazon FSx file system is being created, or in the private IP version 4 (IPv4) address ranges, as specified in <a href=\"http://www.faqs.org/rfcs/rfc1918.html\">RFC 1918</a>:</p> <ul> <li> <p>10.0.0.0 - 10.255.255.255 (10/8 prefix)</p> </li> <li> <p>172.16.0.0 - 172.31.255.255 (172.16/12 prefix)</p> </li> <li> <p>192.168.0.0 - 192.168.255.255 (192.168/16 prefix)</p> </li> </ul>"
+          "documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. </p>"
         }
       },
-      "documentation": "<p>The configuration that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory.</p>"
+      "documentation": "<p>The configuration that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html\"> Using Amazon FSx with your self-managed Microsoft Active Directory</a>.</p>"
     },
     "SelfManagedActiveDirectoryConfigurationUpdates": {
       "type": "structure",
@@ -2253,6 +2392,12 @@
         }
       },
       "documentation": "<p>The configuration that Amazon FSx uses to join the Windows File Server instance to a self-managed Microsoft Active Directory (AD) directory.</p>"
+    },
+    "SourceBackupId": {
+      "type": "string",
+      "max": 128,
+      "min": 12,
+      "pattern": "^(backup-[0-9a-f]{8,})$"
     },
     "StartTime": {
       "type": "timestamp"
@@ -2427,6 +2572,10 @@
         "AutoImportPolicy": {
           "shape": "AutoImportPolicyType",
           "documentation": "<p> (Optional) When you create your file system, your existing S3 objects appear as file and directory listings. Use this property to choose how Amazon FSx keeps your file and directory listing up to date as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates file and directory listings from the linked S3 bucket when the file system is created. FSx does not update the file and directory listing for any new or changed objects after choosing this option.</p> </li> <li> <p> <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports directory listings of any new objects added to the linked S3 bucket that do not currently exist in the FSx file system. </p> </li> <li> <p> <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports file and directory listings of any new objects added to the S3 bucket and any existing objects that are changed in the S3 bucket after you choose this option. </p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html\">Automatically import updates from your S3 bucket</a>.</p>"
+        },
+        "DataCompressionType": {
+          "shape": "DataCompressionType",
+          "documentation": "<p>Sets the data compression configuration for the file system. <code>DataCompressionType</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - Data compression is turned off for the file system.</p> </li> <li> <p> <code>LZ4</code> - Data compression is turned on with the LZ4 algorithm.</p> </li> </ul> <p>If you don't use <code>DataCompressionType</code>, the file system retains its current data compression configuration.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html\">Lustre data compression</a>.</p>"
         }
       },
       "documentation": "<p>The configuration object for Amazon FSx for Lustre file systems used in the <code>UpdateFileSystem</code> operation.</p>"
@@ -2492,6 +2641,10 @@
         "SelfManagedActiveDirectoryConfiguration": {
           "shape": "SelfManagedActiveDirectoryConfigurationUpdates",
           "documentation": "<p>The configuration Amazon FSx uses to join the Windows File Server instance to the self-managed Microsoft AD directory. You cannot make a self-managed Microsoft AD update request if there is an existing self-managed Microsoft AD update request in progress.</p>"
+        },
+        "AuditLogConfiguration": {
+          "shape": "WindowsAuditLogCreateConfiguration",
+          "documentation": "<p>The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system..</p>"
         }
       },
       "documentation": "<p>Updates the configuration for an existing Amazon FSx for Windows File Server file system. Amazon FSx only overwrites existing properties with non-null values provided in the request.</p>"
@@ -2510,6 +2663,59 @@
       "min": 7,
       "pattern": "^[1-7]:([01]\\d|2[0-3]):?([0-5]\\d)$"
     },
+    "WindowsAccessAuditLogLevel": {
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "SUCCESS_ONLY",
+        "FAILURE_ONLY",
+        "SUCCESS_AND_FAILURE"
+      ]
+    },
+    "WindowsAuditLogConfiguration": {
+      "type": "structure",
+      "required": [
+        "FileAccessAuditLogLevel",
+        "FileShareAccessAuditLogLevel"
+      ],
+      "members": {
+        "FileAccessAuditLogLevel": {
+          "shape": "WindowsAccessAuditLogLevel",
+          "documentation": "<p>Sets which attempt type is logged by Amazon FSx for file and folder accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access files or folders are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of files and folders is turned off.</p> </li> </ul>"
+        },
+        "FileShareAccessAuditLogLevel": {
+          "shape": "WindowsAccessAuditLogLevel",
+          "documentation": "<p>Sets which attempt type is logged by Amazon FSx for file share accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access file shares are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access file shares are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access file shares are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of file shares is turned off.</p> </li> </ul>"
+        },
+        "AuditLogDestination": {
+          "shape": "GeneralARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the destination of the audit logs. The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN.</p> <p>The name of the Amazon CloudWatch Logs log group must begin with the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the <code>aws-fsx</code> prefix.</p> <p>The destination ARN (either CloudWatch Logs log group or Kinesis Data Firehose delivery stream) must be in the same AWS partition, AWS region, and AWS account as your Amazon FSx file system.</p>"
+        }
+      },
+      "documentation": "<p>The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/file-access-auditing.html\"> File access auditing</a>.</p>"
+    },
+    "WindowsAuditLogCreateConfiguration": {
+      "type": "structure",
+      "required": [
+        "FileAccessAuditLogLevel",
+        "FileShareAccessAuditLogLevel"
+      ],
+      "members": {
+        "FileAccessAuditLogLevel": {
+          "shape": "WindowsAccessAuditLogLevel",
+          "documentation": "<p>Sets which attempt type is logged by Amazon FSx for file and folder accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access files or folders are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of files and folders is turned off.</p> </li> </ul>"
+        },
+        "FileShareAccessAuditLogLevel": {
+          "shape": "WindowsAccessAuditLogLevel",
+          "documentation": "<p>Sets which attempt type is logged by Amazon FSx for file share accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access file shares are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access file shares are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access file shares are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of file shares is turned off.</p> </li> </ul>"
+        },
+        "AuditLogDestination": {
+          "shape": "GeneralARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) that specifies the destination of the audit logs.</p> <p>The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN, with the following requirements:</p> <ul> <li> <p>The destination ARN that you provide (either CloudWatch Logs log group or Kinesis Data Firehose delivery stream) must be in the same AWS partition, AWS region, and AWS account as your Amazon FSx file system.</p> </li> <li> <p>The name of the Amazon CloudWatch Logs log group must begin with the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the <code>aws-fsx</code> prefix.</p> </li> <li> <p>If you do not provide a destination in <code>AuditLogDestination</code>, Amazon FSx will create and use a log stream in the CloudWatch Logs <code>/aws/fsx/windows</code> log group.</p> </li> <li> <p>If <code>AuditLogDestination</code> is provided and the resource does not exist, the request will fail with a <code>BadRequest</code> error.</p> </li> <li> <p>If <code>FileAccessAuditLogLevel</code> and <code>FileShareAccessAuditLogLevel</code> are both set to <code>DISABLED</code>, you cannot specify a destination in <code>AuditLogDestination</code>.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>The Windows file access auditing configuration used when creating or updating an Amazon FSx for Windows File Server file system.</p>"
+    },
     "WindowsDeploymentType": {
       "type": "string",
       "enum": [
@@ -2523,7 +2729,7 @@
       "members": {
         "ActiveDirectoryId": {
           "shape": "DirectoryId",
-          "documentation": "<p>The ID for an existing Microsoft Active Directory instance that the file system should join when it's created.</p>"
+          "documentation": "<p>The ID for an existing AWS Managed Microsoft Active Directory instance that the file system is joined to.</p>"
         },
         "SelfManagedActiveDirectoryConfiguration": {
           "shape": "SelfManagedActiveDirectoryAttributes"
@@ -2538,7 +2744,7 @@
         },
         "PreferredSubnetId": {
           "shape": "SubnetId",
-          "documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, it specifies the ID of the subnet where the preferred file server is located. Must be one of the two subnet IDs specified in <code>SubnetIds</code> property. Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server.</p> <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this value is the same as that for <code>SubnetIDs</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources\">Availability and Durability: Single-AZ and Multi-AZ File Systems</a> </p>"
+          "documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, it specifies the ID of the subnet where the preferred file server is located. Must be one of the two subnet IDs specified in <code>SubnetIds</code> property. Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server.</p> <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this value is the same as that for <code>SubnetIDs</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources\">Availability and durability: Single-AZ and Multi-AZ file systems</a>.</p>"
         },
         "PreferredFileServerIp": {
           "shape": "IpAddress",
@@ -2546,7 +2752,7 @@
         },
         "ThroughputCapacity": {
           "shape": "MegabytesPerSecond",
-          "documentation": "<p>The throughput of an Amazon FSx file system, measured in megabytes per second.</p>"
+          "documentation": "<p>The throughput of the Amazon FSx file system, measured in megabytes per second.</p>"
         },
         "MaintenanceOperationsInProgress": {
           "shape": "FileSystemMaintenanceOperations",
@@ -2570,6 +2776,10 @@
         },
         "Aliases": {
           "shape": "Aliases"
+        },
+        "AuditLogConfiguration": {
+          "shape": "WindowsAuditLogConfiguration",
+          "documentation": "<p>The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system.</p>"
         }
       },
       "documentation": "<p>The configuration for this Microsoft Windows file system.</p>"

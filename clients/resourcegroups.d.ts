@@ -68,11 +68,11 @@ declare class ResourceGroups extends Service {
    */
   groupResources(callback?: (err: AWSError, data: ResourceGroups.Types.GroupResourcesOutput) => void): Request<ResourceGroups.Types.GroupResourcesOutput, AWSError>;
   /**
-   * Returns a list of ARNs of the resources that are members of a specified resource group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:ListGroupResources   
+   * Returns a list of ARNs of the resources that are members of a specified resource group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:ListGroupResources     cloudformation:DescribeStacks     cloudformation:ListStackResources     tag:GetResources   
    */
   listGroupResources(params: ResourceGroups.Types.ListGroupResourcesInput, callback?: (err: AWSError, data: ResourceGroups.Types.ListGroupResourcesOutput) => void): Request<ResourceGroups.Types.ListGroupResourcesOutput, AWSError>;
   /**
-   * Returns a list of ARNs of the resources that are members of a specified resource group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:ListGroupResources   
+   * Returns a list of ARNs of the resources that are members of a specified resource group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:ListGroupResources     cloudformation:DescribeStacks     cloudformation:ListStackResources     tag:GetResources   
    */
   listGroupResources(callback?: (err: AWSError, data: ResourceGroups.Types.ListGroupResourcesOutput) => void): Request<ResourceGroups.Types.ListGroupResourcesOutput, AWSError>;
   /**
@@ -92,11 +92,11 @@ declare class ResourceGroups extends Service {
    */
   putGroupConfiguration(callback?: (err: AWSError, data: ResourceGroups.Types.PutGroupConfigurationOutput) => void): Request<ResourceGroups.Types.PutGroupConfigurationOutput, AWSError>;
   /**
-   * Returns a list of AWS resource identifiers that matches the specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:SearchResources   
+   * Returns a list of AWS resource identifiers that matches the specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:SearchResources     cloudformation:DescribeStacks     cloudformation:ListStackResources     tag:GetResources   
    */
   searchResources(params: ResourceGroups.Types.SearchResourcesInput, callback?: (err: AWSError, data: ResourceGroups.Types.SearchResourcesOutput) => void): Request<ResourceGroups.Types.SearchResourcesOutput, AWSError>;
   /**
-   * Returns a list of AWS resource identifiers that matches the specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:SearchResources   
+   * Returns a list of AWS resource identifiers that matches the specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:SearchResources     cloudformation:DescribeStacks     cloudformation:ListStackResources     tag:GetResources   
    */
   searchResources(callback?: (err: AWSError, data: ResourceGroups.Types.SearchResourcesOutput) => void): Request<ResourceGroups.Types.SearchResourcesOutput, AWSError>;
   /**

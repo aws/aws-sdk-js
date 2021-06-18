@@ -13,6 +13,43 @@
     "uid": "route53resolver-2018-04-01"
   },
   "operations": {
+    "AssociateFirewallRuleGroup": {
+      "name": "AssociateFirewallRuleGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssociateFirewallRuleGroupRequest"
+      },
+      "output": {
+        "shape": "AssociateFirewallRuleGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Associates a <a>FirewallRuleGroup</a> with a VPC, to provide DNS filtering for the VPC. </p>"
+    },
     "AssociateResolverEndpointIpAddress": {
       "name": "AssociateResolverEndpointIpAddress",
       "http": {
@@ -129,6 +166,102 @@
         }
       ],
       "documentation": "<p>Associates a Resolver rule with a VPC. When you associate a rule with a VPC, Resolver forwards all DNS queries for the domain name that is specified in the rule and that originate in the VPC. The queries are forwarded to the IP addresses for the DNS resolvers that are specified in the rule. For more information about rules, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_CreateResolverRule.html\">CreateResolverRule</a>. </p>"
+    },
+    "CreateFirewallDomainList": {
+      "name": "CreateFirewallDomainList",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateFirewallDomainListRequest"
+      },
+      "output": {
+        "shape": "CreateFirewallDomainListResponse"
+      },
+      "errors": [
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Creates an empty firewall domain list for use in DNS Firewall rules. You can populate the domains for the new list with a file, using <a>ImportFirewallDomains</a>, or with domain strings, using <a>UpdateFirewallDomains</a>. </p>"
+    },
+    "CreateFirewallRule": {
+      "name": "CreateFirewallRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateFirewallRuleRequest"
+      },
+      "output": {
+        "shape": "CreateFirewallRuleResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Creates a single DNS Firewall rule in the specified rule group, using the specified domain list.</p>"
+    },
+    "CreateFirewallRuleGroup": {
+      "name": "CreateFirewallRuleGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateFirewallRuleGroupRequest"
+      },
+      "output": {
+        "shape": "CreateFirewallRuleGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Creates an empty DNS Firewall rule group for filtering DNS network traffic in a VPC. You can add rules to the new rule group by calling <a>CreateFirewallRule</a>. </p>"
     },
     "CreateResolverEndpoint": {
       "name": "CreateResolverEndpoint",
@@ -247,6 +380,99 @@
       ],
       "documentation": "<p>For DNS queries that originate in your VPCs, specifies which Resolver endpoint the queries pass through, one domain name that you want to forward to your network, and the IP addresses of the DNS resolvers in your network.</p>"
     },
+    "DeleteFirewallDomainList": {
+      "name": "DeleteFirewallDomainList",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteFirewallDomainListRequest"
+      },
+      "output": {
+        "shape": "DeleteFirewallDomainListResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified domain list. </p>"
+    },
+    "DeleteFirewallRule": {
+      "name": "DeleteFirewallRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteFirewallRuleRequest"
+      },
+      "output": {
+        "shape": "DeleteFirewallRuleResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified firewall rule.</p>"
+    },
+    "DeleteFirewallRuleGroup": {
+      "name": "DeleteFirewallRuleGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteFirewallRuleGroupRequest"
+      },
+      "output": {
+        "shape": "DeleteFirewallRuleGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified firewall rule group. </p>"
+    },
     "DeleteResolverEndpoint": {
       "name": "DeleteResolverEndpoint",
       "http": {
@@ -343,6 +569,40 @@
       ],
       "documentation": "<p>Deletes a Resolver rule. Before you can delete a Resolver rule, you must disassociate it from all the VPCs that you associated the Resolver rule with. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverRule.html\">DisassociateResolverRule</a>.</p>"
     },
+    "DisassociateFirewallRuleGroup": {
+      "name": "DisassociateFirewallRuleGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisassociateFirewallRuleGroupRequest"
+      },
+      "output": {
+        "shape": "DisassociateFirewallRuleGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Disassociates a <a>FirewallRuleGroup</a> from a VPC, to remove DNS filtering from the VPC. </p>"
+    },
     "DisassociateResolverEndpointIpAddress": {
       "name": "DisassociateResolverEndpointIpAddress",
       "http": {
@@ -409,7 +669,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Disassociates a VPC from a query logging configuration.</p> <note> <p>Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. If you used Resource Access Manager (RAM) to share a query logging configuration with other accounts, VPCs can be disassociated from the configuration in the following ways:</p> <ul> <li> <p>The accounts that you shared the configuration with can disassociate VPCs from the configuration.</p> </li> <li> <p>You can stop sharing the configuration.</p> </li> </ul> </note>"
+      "documentation": "<p>Disassociates a VPC from a query logging configuration.</p> <note> <p>Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. If you used AWS Resource Access Manager (AWS RAM) to share a query logging configuration with other accounts, VPCs can be disassociated from the configuration in the following ways:</p> <ul> <li> <p>The accounts that you shared the configuration with can disassociate VPCs from the configuration.</p> </li> <li> <p>You can stop sharing the configuration.</p> </li> </ul> </note>"
     },
     "DisassociateResolverRule": {
       "name": "DisassociateResolverRule",
@@ -438,6 +698,152 @@
         }
       ],
       "documentation": "<p>Removes the association between a specified Resolver rule and a specified VPC.</p> <important> <p>If you disassociate a Resolver rule from a VPC, Resolver stops forwarding DNS queries for the domain name that you specified in the Resolver rule. </p> </important>"
+    },
+    "GetFirewallConfig": {
+      "name": "GetFirewallConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetFirewallConfigRequest"
+      },
+      "output": {
+        "shape": "GetFirewallConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Retrieves the configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC). </p>"
+    },
+    "GetFirewallDomainList": {
+      "name": "GetFirewallDomainList",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetFirewallDomainListRequest"
+      },
+      "output": {
+        "shape": "GetFirewallDomainListResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Retrieves the specified firewall domain list.</p>"
+    },
+    "GetFirewallRuleGroup": {
+      "name": "GetFirewallRuleGroup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetFirewallRuleGroupRequest"
+      },
+      "output": {
+        "shape": "GetFirewallRuleGroupResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Retrieves the specified firewall rule group. </p>"
+    },
+    "GetFirewallRuleGroupAssociation": {
+      "name": "GetFirewallRuleGroupAssociation",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetFirewallRuleGroupAssociationRequest"
+      },
+      "output": {
+        "shape": "GetFirewallRuleGroupAssociationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Retrieves a firewall rule group association, which enables DNS filtering for a VPC with one rule group. A VPC can have more than one firewall rule group association, and a rule group can be associated with more than one VPC.</p>"
+    },
+    "GetFirewallRuleGroupPolicy": {
+      "name": "GetFirewallRuleGroupPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetFirewallRuleGroupPolicyRequest"
+      },
+      "output": {
+        "shape": "GetFirewallRuleGroupPolicyResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). </p>"
     },
     "GetResolverDnssecConfig": {
       "name": "GetResolverDnssecConfig",
@@ -680,6 +1086,217 @@
         }
       ],
       "documentation": "<p>Gets information about the Resolver rule policy for a specified rule. A Resolver rule policy includes the rule that you want to share with another account, the account that you want to share the rule with, and the Resolver operations that you want to allow the account to use. </p>"
+    },
+    "ImportFirewallDomains": {
+      "name": "ImportFirewallDomains",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ImportFirewallDomainsRequest"
+      },
+      "output": {
+        "shape": "ImportFirewallDomainsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Imports domain names from a file into a domain list, for use in a DNS firewall rule group. </p> <p>Each domain specification in your domain list must satisfy the following requirements: </p> <ul> <li> <p>It can optionally start with <code>*</code> (asterisk).</p> </li> <li> <p>With the exception of the optional starting asterisk, it must only contain the following characters: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, <code>-</code> (hyphen).</p> </li> <li> <p>It must be from 1-255 characters in length. </p> </li> </ul>"
+    },
+    "ListFirewallConfigs": {
+      "name": "ListFirewallConfigs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListFirewallConfigsRequest"
+      },
+      "output": {
+        "shape": "ListFirewallConfigsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Retrieves the firewall configurations that you have defined. DNS Firewall uses the configurations to manage firewall behavior for your VPCs. </p> <p>A single call might return only a partial list of the configurations. For information, see <code>MaxResults</code>. </p>"
+    },
+    "ListFirewallDomainLists": {
+      "name": "ListFirewallDomainLists",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListFirewallDomainListsRequest"
+      },
+      "output": {
+        "shape": "ListFirewallDomainListsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Retrieves the firewall domain lists that you have defined. For each firewall domain list, you can retrieve the domains that are defined for a list by calling <a>ListFirewallDomains</a>. </p> <p>A single call to this list operation might return only a partial list of the domain lists. For information, see <code>MaxResults</code>. </p>"
+    },
+    "ListFirewallDomains": {
+      "name": "ListFirewallDomains",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListFirewallDomainsRequest"
+      },
+      "output": {
+        "shape": "ListFirewallDomainsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Retrieves the domains that you have defined for the specified firewall domain list. </p> <p>A single call might return only a partial list of the domains. For information, see <code>MaxResults</code>. </p>"
+    },
+    "ListFirewallRuleGroupAssociations": {
+      "name": "ListFirewallRuleGroupAssociations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListFirewallRuleGroupAssociationsRequest"
+      },
+      "output": {
+        "shape": "ListFirewallRuleGroupAssociationsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Retrieves the firewall rule group associations that you have defined. Each association enables DNS filtering for a VPC with one rule group. </p> <p>A single call might return only a partial list of the associations. For information, see <code>MaxResults</code>. </p>"
+    },
+    "ListFirewallRuleGroups": {
+      "name": "ListFirewallRuleGroups",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListFirewallRuleGroupsRequest"
+      },
+      "output": {
+        "shape": "ListFirewallRuleGroupsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Retrieves the minimal high-level information for the rule groups that you have defined. </p> <p>A single call might return only a partial list of the rule groups. For information, see <code>MaxResults</code>. </p>"
+    },
+    "ListFirewallRules": {
+      "name": "ListFirewallRules",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListFirewallRulesRequest"
+      },
+      "output": {
+        "shape": "ListFirewallRulesResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Retrieves the firewall rules that you have defined for the specified firewall rule group. DNS Firewall uses the rules in a rule group to filter DNS network traffic for a VPC. </p> <p>A single call might return only a partial list of the rules. For information, see <code>MaxResults</code>. </p>"
     },
     "ListResolverDnssecConfigs": {
       "name": "ListResolverDnssecConfigs",
@@ -941,6 +1558,37 @@
       ],
       "documentation": "<p>Lists the tags that you associated with the specified resource.</p>"
     },
+    "PutFirewallRuleGroupPolicy": {
+      "name": "PutFirewallRuleGroupPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutFirewallRuleGroupPolicyRequest"
+      },
+      "output": {
+        "shape": "PutFirewallRuleGroupPolicyResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). </p>"
+    },
     "PutResolverQueryLogConfigPolicy": {
       "name": "PutResolverQueryLogConfigPolicy",
       "http": {
@@ -1071,6 +1719,142 @@
       ],
       "documentation": "<p>Removes one or more tags from a specified resource.</p>"
     },
+    "UpdateFirewallConfig": {
+      "name": "UpdateFirewallConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateFirewallConfigRequest"
+      },
+      "output": {
+        "shape": "UpdateFirewallConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Updates the configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC). </p>"
+    },
+    "UpdateFirewallDomains": {
+      "name": "UpdateFirewallDomains",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateFirewallDomainsRequest"
+      },
+      "output": {
+        "shape": "UpdateFirewallDomainsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Updates the firewall domain list from an array of domain specifications. </p>"
+    },
+    "UpdateFirewallRule": {
+      "name": "UpdateFirewallRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateFirewallRuleRequest"
+      },
+      "output": {
+        "shape": "UpdateFirewallRuleResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Updates the specified firewall rule. </p>"
+    },
+    "UpdateFirewallRuleGroupAssociation": {
+      "name": "UpdateFirewallRuleGroupAssociation",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateFirewallRuleGroupAssociationRequest"
+      },
+      "output": {
+        "shape": "UpdateFirewallRuleGroupAssociationResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServiceErrorException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Changes the association of a <a>FirewallRuleGroup</a> with a VPC. The association enables DNS filtering for the VPC. </p>"
+    },
     "UpdateResolverDnssecConfig": {
       "name": "UpdateResolverDnssecConfig",
       "http": {
@@ -1180,10 +1964,70 @@
       "max": 32,
       "min": 12
     },
+    "Action": {
+      "type": "string",
+      "enum": [
+        "ALLOW",
+        "BLOCK",
+        "ALERT"
+      ]
+    },
     "Arn": {
       "type": "string",
       "max": 255,
       "min": 1
+    },
+    "AssociateFirewallRuleGroupRequest": {
+      "type": "structure",
+      "required": [
+        "CreatorRequestId",
+        "FirewallRuleGroupId",
+        "VpcId",
+        "Priority",
+        "Name"
+      ],
+      "members": {
+        "CreatorRequestId": {
+          "shape": "CreatorRequestId",
+          "documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
+          "idempotencyToken": true
+        },
+        "FirewallRuleGroupId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The unique identifier of the firewall rule group. </p>"
+        },
+        "VpcId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The unique identifier of the VPC that you want to associate with the rule group. </p>"
+        },
+        "Priority": {
+          "shape": "Priority",
+          "documentation": "<p>The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from the rule group with the lowest numeric priority setting. </p> <p>You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 101, 200, and so on. You can change the priority setting for a rule group association after you create it.</p> <p>The allowed values for <code>Priority</code> are between 100 and 9900.</p>"
+        },
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>A name that lets you identify the association, to manage and use it.</p>"
+        },
+        "MutationProtection": {
+          "shape": "MutationProtectionStatus",
+          "documentation": "<p>If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections. When you create the association, the default setting is <code>DISABLED</code>. </p>",
+          "box": true
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of the tag keys and values that you want to associate with the rule group association. </p>",
+          "box": true
+        }
+      }
+    },
+    "AssociateFirewallRuleGroupResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallRuleGroupAssociation": {
+          "shape": "FirewallRuleGroupAssociation",
+          "documentation": "<p>The association that you just created. The association has an ID that you can use to identify it in other requests, like update and delete.</p>"
+        }
+      }
     },
     "AssociateResolverEndpointIpAddressRequest": {
       "type": "structure",
@@ -1267,11 +2111,166 @@
         }
       }
     },
+    "BlockOverrideDnsType": {
+      "type": "string",
+      "enum": [
+        "CNAME"
+      ]
+    },
+    "BlockOverrideDomain": {
+      "type": "string",
+      "max": 255,
+      "min": 1
+    },
+    "BlockOverrideTtl": {
+      "type": "integer",
+      "max": 604800,
+      "min": 0
+    },
+    "BlockResponse": {
+      "type": "string",
+      "enum": [
+        "NODATA",
+        "NXDOMAIN",
+        "OVERRIDE"
+      ]
+    },
     "Boolean": {
       "type": "boolean"
     },
     "Count": {
       "type": "integer"
+    },
+    "CreateFirewallDomainListRequest": {
+      "type": "structure",
+      "required": [
+        "CreatorRequestId",
+        "Name"
+      ],
+      "members": {
+        "CreatorRequestId": {
+          "shape": "CreatorRequestId",
+          "documentation": "<p>A unique string that identifies the request and that allows you to retry failed requests without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
+          "idempotencyToken": true
+        },
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>A name that lets you identify the domain list to manage and use it.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of the tag keys and values that you want to associate with the domain list. </p>",
+          "box": true
+        }
+      }
+    },
+    "CreateFirewallDomainListResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallDomainList": {
+          "shape": "FirewallDomainList",
+          "documentation": "<p>The domain list that you just created.</p>"
+        }
+      }
+    },
+    "CreateFirewallRuleGroupRequest": {
+      "type": "structure",
+      "required": [
+        "CreatorRequestId",
+        "Name"
+      ],
+      "members": {
+        "CreatorRequestId": {
+          "shape": "CreatorRequestId",
+          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. </p>",
+          "idempotencyToken": true
+        },
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>A name that lets you identify the rule group, to manage and use it.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A list of the tag keys and values that you want to associate with the rule group. </p>",
+          "box": true
+        }
+      }
+    },
+    "CreateFirewallRuleGroupResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallRuleGroup": {
+          "shape": "FirewallRuleGroup",
+          "documentation": "<p>A collection of rules used to filter DNS network traffic. </p>"
+        }
+      }
+    },
+    "CreateFirewallRuleRequest": {
+      "type": "structure",
+      "required": [
+        "CreatorRequestId",
+        "FirewallRuleGroupId",
+        "FirewallDomainListId",
+        "Priority",
+        "Action",
+        "Name"
+      ],
+      "members": {
+        "CreatorRequestId": {
+          "shape": "CreatorRequestId",
+          "documentation": "<p>A unique string that identifies the request and that allows you to retry failed requests without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
+          "idempotencyToken": true
+        },
+        "FirewallRuleGroupId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The unique identifier of the firewall rule group where you want to create the rule. </p>"
+        },
+        "FirewallDomainListId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the domain list that you want to use in the rule. </p>"
+        },
+        "Priority": {
+          "shape": "Priority",
+          "documentation": "<p>The setting that determines the processing order of the rule in the rule group. DNS Firewall processes the rules in a rule group by order of priority, starting from the lowest setting.</p> <p>You must specify a unique priority for each rule in a rule group. To make it easier to insert rules later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for the rules in a rule group at any time.</p>"
+        },
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list:</p> <ul> <li> <p> <code>ALLOW</code> - Permit the request to go through.</p> </li> <li> <p> <code>ALERT</code> - Permit the request and send metrics and logs to Cloud Watch.</p> </li> <li> <p> <code>BLOCK</code> - Disallow the request. This option requires additional details in the rule's <code>BlockResponse</code>. </p> </li> </ul>"
+        },
+        "BlockResponse": {
+          "shape": "BlockResponse",
+          "documentation": "<p>The way that you want DNS Firewall to block the request, used with the rule action setting <code>BLOCK</code>. </p> <ul> <li> <p> <code>NODATA</code> - Respond indicating that the query was successful, but no response is available for it.</p> </li> <li> <p> <code>NXDOMAIN</code> - Respond indicating that the domain name that's in the query doesn't exist.</p> </li> <li> <p> <code>OVERRIDE</code> - Provide a custom override in the response. This option requires custom handling details in the rule's <code>BlockOverride*</code> settings. </p> </li> </ul> <p>This setting is required if the rule action setting is <code>BLOCK</code>.</p>",
+          "box": true
+        },
+        "BlockOverrideDomain": {
+          "shape": "BlockOverrideDomain",
+          "documentation": "<p>The custom DNS record to send back in response to the query. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p> <p>This setting is required if the <code>BlockResponse</code> setting is <code>OVERRIDE</code>.</p>",
+          "box": true
+        },
+        "BlockOverrideDnsType": {
+          "shape": "BlockOverrideDnsType",
+          "documentation": "<p>The DNS record's type. This determines the format of the record value that you provided in <code>BlockOverrideDomain</code>. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p> <p>This setting is required if the <code>BlockResponse</code> setting is <code>OVERRIDE</code>.</p>",
+          "box": true
+        },
+        "BlockOverrideTtl": {
+          "shape": "BlockOverrideTtl",
+          "documentation": "<p>The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p> <p>This setting is required if the <code>BlockResponse</code> setting is <code>OVERRIDE</code>.</p>",
+          "box": true
+        },
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>A name that lets you identify the rule in the rule group.</p>"
+        }
+      }
+    },
+    "CreateFirewallRuleResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallRule": {
+          "shape": "FirewallRule",
+          "documentation": "<p>The firewall rule that you just created. </p>"
+        }
+      }
     },
     "CreateResolverEndpointRequest": {
       "type": "structure",
@@ -1284,7 +2283,7 @@
       "members": {
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>"
+          "documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>"
         },
         "Name": {
           "shape": "Name",
@@ -1329,7 +2328,7 @@
       "members": {
         "Name": {
           "shape": "ResolverQueryLogConfigName",
-          "documentation": "<p>The name that you want to give the query logging configuration</p>"
+          "documentation": "<p>The name that you want to give the query logging configuration.</p>"
         },
         "DestinationArn": {
           "shape": "DestinationArn",
@@ -1337,7 +2336,7 @@
         },
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
+          "documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>",
           "idempotencyToken": true
         },
         "Tags": {
@@ -1366,7 +2365,7 @@
       "members": {
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of executing the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>"
+          "documentation": "<p>A unique string that identifies the request and that allows failed requests to be retried without the risk of running the operation twice. <code>CreatorRequestId</code> can be any unique string, for example, a date/time stamp. </p>"
         },
         "Name": {
           "shape": "Name",
@@ -1382,7 +2381,7 @@
         },
         "TargetIps": {
           "shape": "TargetList",
-          "documentation": "<p>The IPs that you want Resolver to forward DNS queries to. You can specify only IPv4 addresses. Separate IP addresses with a comma.</p> <p> <code>TargetIps</code> is available only when the value of <code>Rule type</code> is <code>FORWARD</code>.</p>",
+          "documentation": "<p>The IPs that you want Resolver to forward DNS queries to. You can specify only IPv4 addresses. Separate IP addresses with a space.</p> <p> <code>TargetIps</code> is available only when the value of <code>Rule type</code> is <code>FORWARD</code>.</p>",
           "box": true
         },
         "ResolverEndpointId": {
@@ -1410,6 +2409,74 @@
       "type": "string",
       "max": 255,
       "min": 1
+    },
+    "DeleteFirewallDomainListRequest": {
+      "type": "structure",
+      "required": [
+        "FirewallDomainListId"
+      ],
+      "members": {
+        "FirewallDomainListId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the domain list that you want to delete. </p>"
+        }
+      }
+    },
+    "DeleteFirewallDomainListResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallDomainList": {
+          "shape": "FirewallDomainList",
+          "documentation": "<p>The domain list that you just deleted. </p>"
+        }
+      }
+    },
+    "DeleteFirewallRuleGroupRequest": {
+      "type": "structure",
+      "required": [
+        "FirewallRuleGroupId"
+      ],
+      "members": {
+        "FirewallRuleGroupId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The unique identifier of the firewall rule group that you want to delete. </p>"
+        }
+      }
+    },
+    "DeleteFirewallRuleGroupResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallRuleGroup": {
+          "shape": "FirewallRuleGroup",
+          "documentation": "<p>A collection of rules used to filter DNS network traffic. </p>"
+        }
+      }
+    },
+    "DeleteFirewallRuleRequest": {
+      "type": "structure",
+      "required": [
+        "FirewallRuleGroupId",
+        "FirewallDomainListId"
+      ],
+      "members": {
+        "FirewallRuleGroupId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The unique identifier of the firewall rule group that you want to delete the rule from. </p>"
+        },
+        "FirewallDomainListId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the domain list that's used in the rule. </p>"
+        }
+      }
+    },
+    "DeleteFirewallRuleResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallRule": {
+          "shape": "FirewallRule",
+          "documentation": "<p>The specification for the firewall rule that you just deleted.</p>"
+        }
+      }
     },
     "DeleteResolverEndpointRequest": {
       "type": "structure",
@@ -1478,6 +2545,27 @@
       "type": "string",
       "max": 600,
       "min": 1
+    },
+    "DisassociateFirewallRuleGroupRequest": {
+      "type": "structure",
+      "required": [
+        "FirewallRuleGroupAssociationId"
+      ],
+      "members": {
+        "FirewallRuleGroupAssociationId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The identifier of the <a>FirewallRuleGroupAssociation</a>. </p>"
+        }
+      }
+    },
+    "DisassociateFirewallRuleGroupResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallRuleGroupAssociation": {
+          "shape": "FirewallRuleGroupAssociation",
+          "documentation": "<p>The firewall rule group association that you just removed. </p>"
+        }
+      }
     },
     "DisassociateResolverEndpointIpAddressRequest": {
       "type": "structure",
@@ -1557,6 +2645,11 @@
         }
       }
     },
+    "DomainListFileUrl": {
+      "type": "string",
+      "max": 1024,
+      "min": 1
+    },
     "DomainName": {
       "type": "string",
       "max": 256,
@@ -1596,6 +2689,489 @@
       "type": "list",
       "member": {
         "shape": "Filter"
+      }
+    },
+    "FirewallConfig": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the firewall configuration.</p>"
+        },
+        "ResourceId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the VPC that this firewall configuration applies to.</p>"
+        },
+        "OwnerId": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS account ID of the owner of the VPC that this firewall configuration applies to.</p>"
+        },
+        "FirewallFailOpen": {
+          "shape": "FirewallFailOpenStatus",
+          "documentation": "<p>Determines how DNS Firewall operates during failures, for example when all traffic that is sent to DNS Firewall fails to receive a reply. </p> <ul> <li> <p>By default, fail open is disabled, which means the failure mode is closed. This approach favors security over availability. DNS Firewall returns a failure error when it is unable to properly evaluate a query. </p> </li> <li> <p>If you enable this option, the failure mode is open. This approach favors availability over security. DNS Firewall allows queries to proceed if it is unable to properly evaluate them. </p> </li> </ul> <p>This behavior is only enforced for VPCs that have at least one DNS Firewall rule group association. </p>"
+        }
+      },
+      "documentation": "<p>Configuration of the firewall behavior provided by DNS Firewall for a single VPC from Amazon Virtual Private Cloud (Amazon VPC). </p>"
+    },
+    "FirewallConfigList": {
+      "type": "list",
+      "member": {
+        "shape": "FirewallConfig"
+      }
+    },
+    "FirewallDomainImportOperation": {
+      "type": "string",
+      "enum": [
+        "REPLACE"
+      ]
+    },
+    "FirewallDomainList": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the domain list. </p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the firewall domain list.</p>"
+        },
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the domain list. </p>"
+        },
+        "DomainCount": {
+          "shape": "Unsigned",
+          "documentation": "<p>The number of domain names that are specified in the domain list.</p>"
+        },
+        "Status": {
+          "shape": "FirewallDomainListStatus",
+          "documentation": "<p>The status of the domain list. </p>"
+        },
+        "StatusMessage": {
+          "shape": "StatusMessage",
+          "documentation": "<p>Additional information about the status of the list, if available.</p>"
+        },
+        "ManagedOwnerName": {
+          "shape": "ServicePrinciple",
+          "documentation": "<p>The owner of the list, used only for lists that are not managed by you. For example, the managed domain list <code>AWSManagedDomainsMalwareDomainList</code> has the managed owner name <code>Route 53 Resolver DNS Firewall</code>.</p>"
+        },
+        "CreatorRequestId": {
+          "shape": "CreatorRequestId",
+          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. </p>"
+        },
+        "CreationTime": {
+          "shape": "Rfc3339TimeString",
+          "documentation": "<p>The date and time that the domain list was created, in Unix time format and Coordinated Universal Time (UTC). </p>"
+        },
+        "ModificationTime": {
+          "shape": "Rfc3339TimeString",
+          "documentation": "<p>The date and time that the domain list was last modified, in Unix time format and Coordinated Universal Time (UTC). </p>"
+        }
+      },
+      "documentation": "<p>High-level information about a list of firewall domains for use in a <a>FirewallRule</a>. This is returned by <a>GetFirewallDomainList</a>.</p> <p>To retrieve the domains that are defined for this domain list, call <a>ListFirewallDomains</a>.</p>"
+    },
+    "FirewallDomainListMetadata": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the domain list. </p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the firewall domain list metadata.</p>"
+        },
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the domain list. </p>"
+        },
+        "CreatorRequestId": {
+          "shape": "CreatorRequestId",
+          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. </p>"
+        },
+        "ManagedOwnerName": {
+          "shape": "ServicePrinciple",
+          "documentation": "<p>The owner of the list, used only for lists that are not managed by you. For example, the managed domain list <code>AWSManagedDomainsMalwareDomainList</code> has the managed owner name <code>Route 53 Resolver DNS Firewall</code>.</p>"
+        }
+      },
+      "documentation": "<p>Minimal high-level information for a firewall domain list. The action <a>ListFirewallDomainLists</a> returns an array of these objects. </p> <p>To retrieve full information for a firewall domain list, call <a>GetFirewallDomainList</a> and <a>ListFirewallDomains</a>.</p>"
+    },
+    "FirewallDomainListMetadataList": {
+      "type": "list",
+      "member": {
+        "shape": "FirewallDomainListMetadata"
+      }
+    },
+    "FirewallDomainListStatus": {
+      "type": "string",
+      "enum": [
+        "COMPLETE",
+        "COMPLETE_IMPORT_FAILED",
+        "IMPORTING",
+        "DELETING",
+        "UPDATING"
+      ]
+    },
+    "FirewallDomainName": {
+      "type": "string",
+      "max": 255,
+      "min": 1
+    },
+    "FirewallDomainUpdateOperation": {
+      "type": "string",
+      "enum": [
+        "ADD",
+        "REMOVE",
+        "REPLACE"
+      ]
+    },
+    "FirewallDomains": {
+      "type": "list",
+      "member": {
+        "shape": "FirewallDomainName"
+      }
+    },
+    "FirewallFailOpenStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "FirewallRule": {
+      "type": "structure",
+      "members": {
+        "FirewallRuleGroupId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The unique identifier of the firewall rule group of the rule. </p>"
+        },
+        "FirewallDomainListId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the domain list that's used in the rule. </p>"
+        },
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the rule. </p>"
+        },
+        "Priority": {
+          "shape": "Priority",
+          "documentation": "<p>The priority of the rule in the rule group. This value must be unique within the rule group. DNS Firewall processes the rules in a rule group by order of priority, starting from the lowest setting.</p>"
+        },
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list:</p> <ul> <li> <p> <code>ALLOW</code> - Permit the request to go through.</p> </li> <li> <p> <code>ALERT</code> - Permit the request to go through but send an alert to the logs.</p> </li> <li> <p> <code>BLOCK</code> - Disallow the request. If this is specified, additional handling details are provided in the rule's <code>BlockResponse</code> setting. </p> </li> </ul>"
+        },
+        "BlockResponse": {
+          "shape": "BlockResponse",
+          "documentation": "<p>The way that you want DNS Firewall to block the request. Used for the rule action setting <code>BLOCK</code>.</p> <ul> <li> <p> <code>NODATA</code> - Respond indicating that the query was successful, but no response is available for it.</p> </li> <li> <p> <code>NXDOMAIN</code> - Respond indicating that the domain name that's in the query doesn't exist.</p> </li> <li> <p> <code>OVERRIDE</code> - Provide a custom override in the response. This option requires custom handling details in the rule's <code>BlockOverride*</code> settings. </p> </li> </ul>"
+        },
+        "BlockOverrideDomain": {
+          "shape": "BlockOverrideDomain",
+          "documentation": "<p>The custom DNS record to send back in response to the query. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p>"
+        },
+        "BlockOverrideDnsType": {
+          "shape": "BlockOverrideDnsType",
+          "documentation": "<p>The DNS record's type. This determines the format of the record value that you provided in <code>BlockOverrideDomain</code>. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p>"
+        },
+        "BlockOverrideTtl": {
+          "shape": "Unsigned",
+          "documentation": "<p>The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p>"
+        },
+        "CreatorRequestId": {
+          "shape": "CreatorRequestId",
+          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of executing the operation twice. This can be any unique string, for example, a timestamp. </p>"
+        },
+        "CreationTime": {
+          "shape": "Rfc3339TimeString",
+          "documentation": "<p>The date and time that the rule was created, in Unix time format and Coordinated Universal Time (UTC). </p>"
+        },
+        "ModificationTime": {
+          "shape": "Rfc3339TimeString",
+          "documentation": "<p>The date and time that the rule was last modified, in Unix time format and Coordinated Universal Time (UTC).</p>"
+        }
+      },
+      "documentation": "<p>A single firewall rule in a rule group.</p>"
+    },
+    "FirewallRuleGroup": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the rule group. </p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN (Amazon Resource Name) of the rule group.</p>"
+        },
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the rule group.</p>"
+        },
+        "RuleCount": {
+          "shape": "Unsigned",
+          "documentation": "<p>The number of rules in the rule group.</p>"
+        },
+        "Status": {
+          "shape": "FirewallRuleGroupStatus",
+          "documentation": "<p>The status of the domain list. </p>"
+        },
+        "StatusMessage": {
+          "shape": "StatusMessage",
+          "documentation": "<p>Additional information about the status of the rule group, if available.</p>"
+        },
+        "OwnerId": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS account ID for the account that created the rule group. When a rule group is shared with your account, this is the account that has shared the rule group with you. </p>"
+        },
+        "CreatorRequestId": {
+          "shape": "CreatorRequestId",
+          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. </p>"
+        },
+        "ShareStatus": {
+          "shape": "ShareStatus",
+          "documentation": "<p>Whether the rule group is shared with other AWS accounts, or was shared with the current account by another AWS account. Sharing is configured through AWS Resource Access Manager (AWS RAM).</p>"
+        },
+        "CreationTime": {
+          "shape": "Rfc3339TimeString",
+          "documentation": "<p>The date and time that the rule group was created, in Unix time format and Coordinated Universal Time (UTC). </p>"
+        },
+        "ModificationTime": {
+          "shape": "Rfc3339TimeString",
+          "documentation": "<p>The date and time that the rule group was last modified, in Unix time format and Coordinated Universal Time (UTC).</p>"
+        }
+      },
+      "documentation": "<p>High-level information for a firewall rule group. A firewall rule group is a collection of rules that DNS Firewall uses to filter DNS network traffic for a VPC. To retrieve the rules for the rule group, call <a>ListFirewallRules</a>.</p>"
+    },
+    "FirewallRuleGroupAssociation": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "ResourceId",
+          "documentation": "<p>The identifier for the association.</p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the firewall rule group association.</p>"
+        },
+        "FirewallRuleGroupId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The unique identifier of the firewall rule group. </p>"
+        },
+        "VpcId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The unique identifier of the VPC that is associated with the rule group. </p>"
+        },
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the association.</p>"
+        },
+        "Priority": {
+          "shape": "Priority",
+          "documentation": "<p>The setting that determines the processing order of the rule group among the rule groups that are associated with a single VPC. DNS Firewall filters VPC traffic starting from rule group with the lowest numeric priority setting. </p>"
+        },
+        "MutationProtection": {
+          "shape": "MutationProtectionStatus",
+          "documentation": "<p>If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections. </p>"
+        },
+        "ManagedOwnerName": {
+          "shape": "ServicePrinciple",
+          "documentation": "<p>The owner of the association, used only for associations that are not managed by you. If you use AWS Firewall Manager to manage your DNS Firewalls, then this reports Firewall Manager as the managed owner.</p>"
+        },
+        "Status": {
+          "shape": "FirewallRuleGroupAssociationStatus",
+          "documentation": "<p>The current status of the association.</p>"
+        },
+        "StatusMessage": {
+          "shape": "StatusMessage",
+          "documentation": "<p>Additional information about the status of the response, if available.</p>"
+        },
+        "CreatorRequestId": {
+          "shape": "CreatorRequestId",
+          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. </p>"
+        },
+        "CreationTime": {
+          "shape": "Rfc3339TimeString",
+          "documentation": "<p>The date and time that the association was created, in Unix time format and Coordinated Universal Time (UTC). </p>"
+        },
+        "ModificationTime": {
+          "shape": "Rfc3339TimeString",
+          "documentation": "<p>The date and time that the association was last modified, in Unix time format and Coordinated Universal Time (UTC).</p>"
+        }
+      },
+      "documentation": "<p>An association between a firewall rule group and a VPC, which enables DNS filtering for the VPC. </p>"
+    },
+    "FirewallRuleGroupAssociationStatus": {
+      "type": "string",
+      "enum": [
+        "COMPLETE",
+        "DELETING",
+        "UPDATING"
+      ]
+    },
+    "FirewallRuleGroupAssociations": {
+      "type": "list",
+      "member": {
+        "shape": "FirewallRuleGroupAssociation"
+      }
+    },
+    "FirewallRuleGroupMetadata": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the rule group. </p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN (Amazon Resource Name) of the rule group.</p>"
+        },
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the rule group.</p>"
+        },
+        "OwnerId": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS account ID for the account that created the rule group. When a rule group is shared with your account, this is the account that has shared the rule group with you. </p>"
+        },
+        "CreatorRequestId": {
+          "shape": "CreatorRequestId",
+          "documentation": "<p>A unique string defined by you to identify the request. This allows you to retry failed requests without the risk of running the operation twice. This can be any unique string, for example, a timestamp. </p>"
+        },
+        "ShareStatus": {
+          "shape": "ShareStatus",
+          "documentation": "<p>Whether the rule group is shared with other AWS accounts, or was shared with the current account by another AWS account. Sharing is configured through AWS Resource Access Manager (AWS RAM).</p>"
+        }
+      },
+      "documentation": "<p>Minimal high-level information for a firewall rule group. The action <a>ListFirewallRuleGroups</a> returns an array of these objects. </p> <p>To retrieve full information for a firewall rule group, call <a>GetFirewallRuleGroup</a> and <a>ListFirewallRules</a>.</p>"
+    },
+    "FirewallRuleGroupMetadataList": {
+      "type": "list",
+      "member": {
+        "shape": "FirewallRuleGroupMetadata"
+      }
+    },
+    "FirewallRuleGroupPolicy": {
+      "type": "string",
+      "max": 5000
+    },
+    "FirewallRuleGroupStatus": {
+      "type": "string",
+      "enum": [
+        "COMPLETE",
+        "DELETING",
+        "UPDATING"
+      ]
+    },
+    "FirewallRules": {
+      "type": "list",
+      "member": {
+        "shape": "FirewallRule"
+      }
+    },
+    "GetFirewallConfigRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceId"
+      ],
+      "members": {
+        "ResourceId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the VPC from Amazon VPC that the configuration is for.</p>"
+        }
+      }
+    },
+    "GetFirewallConfigResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallConfig": {
+          "shape": "FirewallConfig",
+          "documentation": "<p>Configuration of the firewall behavior provided by DNS Firewall for a single VPC from AmazonVPC. </p>"
+        }
+      }
+    },
+    "GetFirewallDomainListRequest": {
+      "type": "structure",
+      "required": [
+        "FirewallDomainListId"
+      ],
+      "members": {
+        "FirewallDomainListId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the domain list. </p>"
+        }
+      }
+    },
+    "GetFirewallDomainListResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallDomainList": {
+          "shape": "FirewallDomainList",
+          "documentation": "<p>The domain list that you requested. </p>"
+        }
+      }
+    },
+    "GetFirewallRuleGroupAssociationRequest": {
+      "type": "structure",
+      "required": [
+        "FirewallRuleGroupAssociationId"
+      ],
+      "members": {
+        "FirewallRuleGroupAssociationId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The identifier of the <a>FirewallRuleGroupAssociation</a>. </p>"
+        }
+      }
+    },
+    "GetFirewallRuleGroupAssociationResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallRuleGroupAssociation": {
+          "shape": "FirewallRuleGroupAssociation",
+          "documentation": "<p>The association that you requested. </p>"
+        }
+      }
+    },
+    "GetFirewallRuleGroupPolicyRequest": {
+      "type": "structure",
+      "required": [
+        "Arn"
+      ],
+      "members": {
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN (Amazon Resource Name) for the rule group.</p>"
+        }
+      }
+    },
+    "GetFirewallRuleGroupPolicyResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallRuleGroupPolicy": {
+          "shape": "FirewallRuleGroupPolicy",
+          "documentation": "<p>The AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). </p>"
+        }
+      }
+    },
+    "GetFirewallRuleGroupRequest": {
+      "type": "structure",
+      "required": [
+        "FirewallRuleGroupId"
+      ],
+      "members": {
+        "FirewallRuleGroupId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The unique identifier of the firewall rule group. </p>"
+        }
+      }
+    },
+    "GetFirewallRuleGroupResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallRuleGroup": {
+          "shape": "FirewallRuleGroup",
+          "documentation": "<p>A collection of rules used to filter DNS network traffic. </p>"
+        }
       }
     },
     "GetResolverDnssecConfigRequest": {
@@ -1766,6 +3342,49 @@
         }
       }
     },
+    "ImportFirewallDomainsRequest": {
+      "type": "structure",
+      "required": [
+        "FirewallDomainListId",
+        "Operation",
+        "DomainFileUrl"
+      ],
+      "members": {
+        "FirewallDomainListId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the domain list that you want to modify with the import operation.</p>"
+        },
+        "Operation": {
+          "shape": "FirewallDomainImportOperation",
+          "documentation": "<p>What you want DNS Firewall to do with the domains that are listed in the file. This must be set to <code>REPLACE</code>, which updates the domain list to exactly match the list in the file. </p>"
+        },
+        "DomainFileUrl": {
+          "shape": "DomainListFileUrl",
+          "documentation": "<p>The fully qualified URL or URI of the file stored in Amazon Simple Storage Service (Amazon S3) that contains the list of domains to import.</p> <p>The file must be in an S3 bucket that's in the same Region as your DNS Firewall. The file must be a text file and must contain a single domain per line.</p>"
+        }
+      }
+    },
+    "ImportFirewallDomainsResponse": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "ResourceId",
+          "documentation": "<p>The Id of the firewall domain list that DNS Firewall just updated.</p>"
+        },
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the domain list. </p>"
+        },
+        "Status": {
+          "shape": "FirewallDomainListStatus",
+          "documentation": "<p> </p>"
+        },
+        "StatusMessage": {
+          "shape": "StatusMessage",
+          "documentation": "<p>Additional information about the status of the list, if available.</p>"
+        }
+      }
+    },
     "Ip": {
       "type": "string",
       "max": 36,
@@ -1874,6 +3493,228 @@
       "type": "list",
       "member": {
         "shape": "IpAddressResponse"
+      }
+    },
+    "ListDomainMaxResults": {
+      "type": "integer",
+      "max": 5000,
+      "min": 1
+    },
+    "ListFirewallConfigsMaxResult": {
+      "type": "integer",
+      "max": 10,
+      "min": 5
+    },
+    "ListFirewallConfigsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "ListFirewallConfigsMaxResult",
+          "documentation": "<p>The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> <p>If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>",
+          "box": true
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>For the first call to this list request, omit this value.</p> <p>When you request a list of objects, Resolver returns at most the number of objects specified in <code>MaxResults</code>. If more objects are available for retrieval, Resolver returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>",
+          "box": true
+        }
+      }
+    },
+    "ListFirewallConfigsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.</p>"
+        },
+        "FirewallConfigs": {
+          "shape": "FirewallConfigList",
+          "documentation": "<p>The configurations for the firewall behavior provided by DNS Firewall for VPCs from Amazon Virtual Private Cloud (Amazon VPC). </p>"
+        }
+      }
+    },
+    "ListFirewallDomainListsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> <p>If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>",
+          "box": true
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>For the first call to this list request, omit this value.</p> <p>When you request a list of objects, Resolver returns at most the number of objects specified in <code>MaxResults</code>. If more objects are available for retrieval, Resolver returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>",
+          "box": true
+        }
+      }
+    },
+    "ListFirewallDomainListsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.</p>"
+        },
+        "FirewallDomainLists": {
+          "shape": "FirewallDomainListMetadataList",
+          "documentation": "<p>A list of the domain lists that you have defined. </p> <p>This might be a partial list of the domain lists that you've defined. For information, see <code>MaxResults</code>. </p>"
+        }
+      }
+    },
+    "ListFirewallDomainsRequest": {
+      "type": "structure",
+      "required": [
+        "FirewallDomainListId"
+      ],
+      "members": {
+        "FirewallDomainListId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the domain list whose domains you want to retrieve. </p>"
+        },
+        "MaxResults": {
+          "shape": "ListDomainMaxResults",
+          "documentation": "<p>The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> <p>If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>",
+          "box": true
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>For the first call to this list request, omit this value.</p> <p>When you request a list of objects, Resolver returns at most the number of objects specified in <code>MaxResults</code>. If more objects are available for retrieval, Resolver returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>",
+          "box": true
+        }
+      }
+    },
+    "ListFirewallDomainsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.</p>"
+        },
+        "Domains": {
+          "shape": "FirewallDomains",
+          "documentation": "<p>A list of the domains in the firewall domain list. </p> <p>This might be a partial list of the domains that you've defined in the domain list. For information, see <code>MaxResults</code>. </p>"
+        }
+      }
+    },
+    "ListFirewallRuleGroupAssociationsRequest": {
+      "type": "structure",
+      "members": {
+        "FirewallRuleGroupId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The unique identifier of the firewall rule group that you want to retrieve the associations for. Leave this blank to retrieve associations for any rule group. </p>",
+          "box": true
+        },
+        "VpcId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The unique identifier of the VPC that you want to retrieve the associations for. Leave this blank to retrieve associations for any VPC. </p>",
+          "box": true
+        },
+        "Priority": {
+          "shape": "Priority",
+          "documentation": "<p>The setting that determines the processing order of the rule group among the rule groups that are associated with a single VPC. DNS Firewall filters VPC traffic starting from the rule group with the lowest numeric priority setting. </p>",
+          "box": true
+        },
+        "Status": {
+          "shape": "FirewallRuleGroupAssociationStatus",
+          "documentation": "<p>The association <code>Status</code> setting that you want DNS Firewall to filter on for the list. If you don't specify this, then DNS Firewall returns all associations, regardless of status.</p>",
+          "box": true
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> <p>If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>",
+          "box": true
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>For the first call to this list request, omit this value.</p> <p>When you request a list of objects, Resolver returns at most the number of objects specified in <code>MaxResults</code>. If more objects are available for retrieval, Resolver returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>",
+          "box": true
+        }
+      }
+    },
+    "ListFirewallRuleGroupAssociationsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.</p>"
+        },
+        "FirewallRuleGroupAssociations": {
+          "shape": "FirewallRuleGroupAssociations",
+          "documentation": "<p>A list of your firewall rule group associations.</p> <p>This might be a partial list of the associations that you have defined. For information, see <code>MaxResults</code>. </p>"
+        }
+      }
+    },
+    "ListFirewallRuleGroupsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> <p>If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>",
+          "box": true
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>For the first call to this list request, omit this value.</p> <p>When you request a list of objects, Resolver returns at most the number of objects specified in <code>MaxResults</code>. If more objects are available for retrieval, Resolver returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>",
+          "box": true
+        }
+      }
+    },
+    "ListFirewallRuleGroupsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.</p>"
+        },
+        "FirewallRuleGroups": {
+          "shape": "FirewallRuleGroupMetadataList",
+          "documentation": "<p>A list of your firewall rule groups.</p> <p>This might be a partial list of the rule groups that you have defined. For information, see <code>MaxResults</code>. </p>"
+        }
+      }
+    },
+    "ListFirewallRulesRequest": {
+      "type": "structure",
+      "required": [
+        "FirewallRuleGroupId"
+      ],
+      "members": {
+        "FirewallRuleGroupId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The unique identifier of the firewall rule group that you want to retrieve the rules for. </p>"
+        },
+        "Priority": {
+          "shape": "Priority",
+          "documentation": "<p>Optional additional filter for the rules to retrieve.</p> <p>The setting that determines the processing order of the rules in a rule group. DNS Firewall processes the rules in a rule group by order of priority, starting from the lowest setting.</p>",
+          "box": true
+        },
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p>Optional additional filter for the rules to retrieve.</p> <p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list:</p> <ul> <li> <p> <code>ALLOW</code> - Permit the request to go through.</p> </li> <li> <p> <code>ALERT</code> - Permit the request to go through but send an alert to the logs.</p> </li> <li> <p> <code>BLOCK</code> - Disallow the request. If this is specified, additional handling details are provided in the rule's <code>BlockResponse</code> setting. </p> </li> </ul>",
+          "box": true
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of objects that you want Resolver to return for this request. If more objects are available, in the response, Resolver provides a <code>NextToken</code> value that you can use in a subsequent call to get the next batch of objects.</p> <p>If you don't specify a value for <code>MaxResults</code>, Resolver returns up to 100 objects. </p>",
+          "box": true
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>For the first call to this list request, omit this value.</p> <p>When you request a list of objects, Resolver returns at most the number of objects specified in <code>MaxResults</code>. If more objects are available for retrieval, Resolver returns a <code>NextToken</code> value in the response. To retrieve the next batch of objects, use the token that was returned for the prior request in your next request.</p>",
+          "box": true
+        }
+      }
+    },
+    "ListFirewallRulesResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If objects are still available for retrieval, Resolver returns this token in the response. To retrieve the next batch of objects, provide this token in your next request.</p>"
+        },
+        "FirewallRules": {
+          "shape": "FirewallRules",
+          "documentation": "<p>A list of the rules that you have defined. </p> <p>This might be a partial list of the firewall rules that you've defined. For information, see <code>MaxResults</code>. </p>"
+        }
       }
     },
     "ListResolverDnssecConfigsRequest": {
@@ -2194,6 +4035,13 @@
       "max": 100,
       "min": 1
     },
+    "MutationProtectionStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
     "Name": {
       "type": "string",
       "max": 64,
@@ -2206,6 +4054,35 @@
       "type": "integer",
       "max": 65535,
       "min": 0
+    },
+    "Priority": {
+      "type": "integer"
+    },
+    "PutFirewallRuleGroupPolicyRequest": {
+      "type": "structure",
+      "required": [
+        "Arn",
+        "FirewallRuleGroupPolicy"
+      ],
+      "members": {
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The ARN (Amazon Resource Name) for the rule group that you want to share.</p>"
+        },
+        "FirewallRuleGroupPolicy": {
+          "shape": "FirewallRuleGroupPolicy",
+          "documentation": "<p>The AWS Identity and Access Management (AWS IAM) policy to attach to the rule group.</p>"
+        }
+      }
+    },
+    "PutFirewallRuleGroupPolicyResponse": {
+      "type": "structure",
+      "members": {
+        "ReturnValue": {
+          "shape": "Boolean",
+          "documentation": "<p/>"
+        }
+      }
     },
     "PutResolverQueryLogConfigPolicyRequest": {
       "type": "structure",
@@ -2307,7 +4184,7 @@
         },
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string that identifies the request that created the Resolver endpoint. The <code>CreatorRequestId</code> allows failed requests to be retried without the risk of executing the operation twice.</p>"
+          "documentation": "<p>A unique string that identifies the request that created the Resolver endpoint. The <code>CreatorRequestId</code> allows failed requests to be retried without the risk of running the operation twice.</p>"
         },
         "Arn": {
           "shape": "Arn",
@@ -2413,7 +4290,7 @@
         },
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string that identifies the request that created the query logging configuration. The <code>CreatorRequestId</code> allows failed requests to be retried without the risk of executing the operation twice.</p>"
+          "documentation": "<p>A unique string that identifies the request that created the query logging configuration. The <code>CreatorRequestId</code> allows failed requests to be retried without the risk of running the operation twice.</p>"
         },
         "CreationTime": {
           "shape": "Rfc3339TimeString",
@@ -2518,7 +4395,7 @@
         },
         "CreatorRequestId": {
           "shape": "CreatorRequestId",
-          "documentation": "<p>A unique string that you specified when you created the Resolver rule. <code>CreatorRequestId</code> identifies the request and allows failed requests to be retried without the risk of executing the operation twice. </p>"
+          "documentation": "<p>A unique string that you specified when you created the Resolver rule. <code>CreatorRequestId</code> identifies the request and allows failed requests to be retried without the risk of running the operation twice. </p>"
         },
         "Arn": {
           "shape": "Arn",
@@ -2558,7 +4435,7 @@
         },
         "ShareStatus": {
           "shape": "ShareStatus",
-          "documentation": "<p>Whether the rules is shared and, if so, whether the current account is sharing the rule with another account, or another account is sharing the rule with the current account.</p>"
+          "documentation": "<p>Whether the rule is shared and, if so, whether the current account is sharing the rule with another account, or another account is sharing the rule with the current account.</p>"
         },
         "CreationTime": {
           "shape": "Rfc3339TimeString",
@@ -2678,6 +4555,11 @@
         "shape": "ResourceId"
       }
     },
+    "ServicePrinciple": {
+      "type": "string",
+      "max": 512,
+      "min": 1
+    },
     "ShareStatus": {
       "type": "string",
       "enum": [
@@ -2795,6 +4677,9 @@
       },
       "min": 1
     },
+    "Unsigned": {
+      "type": "integer"
+    },
     "UntagResourceRequest": {
       "type": "structure",
       "required": [
@@ -2815,6 +4700,172 @@
     "UntagResourceResponse": {
       "type": "structure",
       "members": {}
+    },
+    "UpdateFirewallConfigRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceId",
+        "FirewallFailOpen"
+      ],
+      "members": {
+        "ResourceId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the VPC that the configuration is for.</p>"
+        },
+        "FirewallFailOpen": {
+          "shape": "FirewallFailOpenStatus",
+          "documentation": "<p>Determines how Route 53 Resolver handles queries during failures, for example when all traffic that is sent to DNS Firewall fails to receive a reply. </p> <ul> <li> <p>By default, fail open is disabled, which means the failure mode is closed. This approach favors security over availability. DNS Firewall blocks queries that it is unable to evaluate properly. </p> </li> <li> <p>If you enable this option, the failure mode is open. This approach favors availability over security. DNS Firewall allows queries to proceed if it is unable to properly evaluate them. </p> </li> </ul> <p>This behavior is only enforced for VPCs that have at least one DNS Firewall rule group association. </p>"
+        }
+      }
+    },
+    "UpdateFirewallConfigResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallConfig": {
+          "shape": "FirewallConfig",
+          "documentation": "<p>Configuration of the firewall behavior provided by DNS Firewall for a single VPC. </p>"
+        }
+      }
+    },
+    "UpdateFirewallDomainsRequest": {
+      "type": "structure",
+      "required": [
+        "FirewallDomainListId",
+        "Operation",
+        "Domains"
+      ],
+      "members": {
+        "FirewallDomainListId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the domain list whose domains you want to update. </p>"
+        },
+        "Operation": {
+          "shape": "FirewallDomainUpdateOperation",
+          "documentation": "<p>What you want DNS Firewall to do with the domains that you are providing: </p> <ul> <li> <p> <code>ADD</code> - Add the domains to the ones that are already in the domain list. </p> </li> <li> <p> <code>REMOVE</code> - Search the domain list for the domains and remove them from the list.</p> </li> <li> <p> <code>REPLACE</code> - Update the domain list to exactly match the list that you are providing. </p> </li> </ul>"
+        },
+        "Domains": {
+          "shape": "FirewallDomains",
+          "documentation": "<p>A list of domains to use in the update operation.</p> <p>Each domain specification in your domain list must satisfy the following requirements: </p> <ul> <li> <p>It can optionally start with <code>*</code> (asterisk).</p> </li> <li> <p>With the exception of the optional starting asterisk, it must only contain the following characters: <code>A-Z</code>, <code>a-z</code>, <code>0-9</code>, <code>-</code> (hyphen).</p> </li> <li> <p>It must be from 1-255 characters in length. </p> </li> </ul>"
+        }
+      }
+    },
+    "UpdateFirewallDomainsResponse": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the firewall domain list that DNS Firewall just updated.</p>"
+        },
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the domain list. </p>"
+        },
+        "Status": {
+          "shape": "FirewallDomainListStatus",
+          "documentation": "<p> </p>"
+        },
+        "StatusMessage": {
+          "shape": "StatusMessage",
+          "documentation": "<p>Additional information about the status of the list, if available.</p>"
+        }
+      }
+    },
+    "UpdateFirewallRuleGroupAssociationRequest": {
+      "type": "structure",
+      "required": [
+        "FirewallRuleGroupAssociationId"
+      ],
+      "members": {
+        "FirewallRuleGroupAssociationId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The identifier of the <a>FirewallRuleGroupAssociation</a>. </p>"
+        },
+        "Priority": {
+          "shape": "Priority",
+          "documentation": "<p>The setting that determines the processing order of the rule group among the rule groups that you associate with the specified VPC. DNS Firewall filters VPC traffic starting from the rule group with the lowest numeric priority setting. </p> <p>You must specify a unique priority for each rule group that you associate with a single VPC. To make it easier to insert rule groups later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for a rule group association after you create it.</p>",
+          "box": true
+        },
+        "MutationProtection": {
+          "shape": "MutationProtectionStatus",
+          "documentation": "<p>If enabled, this setting disallows modification or removal of the association, to help prevent against accidentally altering DNS firewall protections. </p>",
+          "box": true
+        },
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the rule group association.</p>",
+          "box": true
+        }
+      }
+    },
+    "UpdateFirewallRuleGroupAssociationResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallRuleGroupAssociation": {
+          "shape": "FirewallRuleGroupAssociation",
+          "documentation": "<p>The association that you just updated. </p>"
+        }
+      }
+    },
+    "UpdateFirewallRuleRequest": {
+      "type": "structure",
+      "required": [
+        "FirewallRuleGroupId",
+        "FirewallDomainListId"
+      ],
+      "members": {
+        "FirewallRuleGroupId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The unique identifier of the firewall rule group for the rule. </p>"
+        },
+        "FirewallDomainListId": {
+          "shape": "ResourceId",
+          "documentation": "<p>The ID of the domain list to use in the rule. </p>"
+        },
+        "Priority": {
+          "shape": "Priority",
+          "documentation": "<p>The setting that determines the processing order of the rule in the rule group. DNS Firewall processes the rules in a rule group by order of priority, starting from the lowest setting.</p> <p>You must specify a unique priority for each rule in a rule group. To make it easier to insert rules later, leave space between the numbers, for example, use 100, 200, and so on. You can change the priority setting for the rules in a rule group at any time.</p>",
+          "box": true
+        },
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p>The action that DNS Firewall should take on a DNS query when it matches one of the domains in the rule's domain list:</p> <ul> <li> <p> <code>ALLOW</code> - Permit the request to go through.</p> </li> <li> <p> <code>ALERT</code> - Permit the request to go through but send an alert to the logs.</p> </li> <li> <p> <code>BLOCK</code> - Disallow the request. This option requires additional details in the rule's <code>BlockResponse</code>. </p> </li> </ul>",
+          "box": true
+        },
+        "BlockResponse": {
+          "shape": "BlockResponse",
+          "documentation": "<p>The way that you want DNS Firewall to block the request. Used for the rule action setting <code>BLOCK</code>.</p> <ul> <li> <p> <code>NODATA</code> - Respond indicating that the query was successful, but no response is available for it.</p> </li> <li> <p> <code>NXDOMAIN</code> - Respond indicating that the domain name that's in the query doesn't exist.</p> </li> <li> <p> <code>OVERRIDE</code> - Provide a custom override in the response. This option requires custom handling details in the rule's <code>BlockOverride*</code> settings. </p> </li> </ul>",
+          "box": true
+        },
+        "BlockOverrideDomain": {
+          "shape": "BlockOverrideDomain",
+          "documentation": "<p>The custom DNS record to send back in response to the query. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p>",
+          "box": true
+        },
+        "BlockOverrideDnsType": {
+          "shape": "BlockOverrideDnsType",
+          "documentation": "<p>The DNS record's type. This determines the format of the record value that you provided in <code>BlockOverrideDomain</code>. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p>",
+          "box": true
+        },
+        "BlockOverrideTtl": {
+          "shape": "BlockOverrideTtl",
+          "documentation": "<p>The recommended amount of time, in seconds, for the DNS resolver or web browser to cache the provided override record. Used for the rule action <code>BLOCK</code> with a <code>BlockResponse</code> setting of <code>OVERRIDE</code>.</p>",
+          "box": true
+        },
+        "Name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the rule.</p>",
+          "box": true
+        }
+      }
+    },
+    "UpdateFirewallRuleResponse": {
+      "type": "structure",
+      "members": {
+        "FirewallRule": {
+          "shape": "FirewallRule",
+          "documentation": "<p>The firewall rule that you just updated. </p>"
+        }
+      }
     },
     "UpdateResolverDnssecConfigRequest": {
       "type": "structure",
@@ -2902,5 +4953,5 @@
       ]
     }
   },
-  "documentation": "<p>When you create a VPC using Amazon VPC, you automatically get DNS resolution within the VPC from Route 53 Resolver. By default, Resolver answers DNS queries for VPC domain names such as domain names for EC2 instances or ELB load balancers. Resolver performs recursive lookups against public name servers for all other domain names.</p> <p>You can also configure DNS resolution between your VPC and your network over a Direct Connect or VPN connection:</p> <p> <b>Forward DNS queries from resolvers on your network to Route 53 Resolver</b> </p> <p>DNS resolvers on your network can forward DNS queries to Resolver in a specified VPC. This allows your DNS resolvers to easily resolve domain names for AWS resources such as EC2 instances or records in a Route 53 private hosted zone. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-network-to-vpc\">How DNS Resolvers on Your Network Forward DNS Queries to Route 53 Resolver</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p> <b>Conditionally forward queries from a VPC to resolvers on your network</b> </p> <p>You can configure Resolver to forward queries that it receives from EC2 instances in your VPCs to DNS resolvers on your network. To forward selected queries, you create Resolver rules that specify the domain names for the DNS queries that you want to forward (such as example.com), and the IP addresses of the DNS resolvers on your network that you want to forward the queries to. If a query matches multiple rules (example.com, acme.example.com), Resolver chooses the rule with the most specific match (acme.example.com) and forwards the query to the IP addresses that you specified in that rule. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-vpc-to-network\">How Route 53 Resolver Forwards DNS Queries from Your VPCs to Your Network</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>Like Amazon VPC, Resolver is regional. In each region where you have VPCs, you can choose whether to forward queries from your VPCs to your network (outbound queries), from your network to your VPCs (inbound queries), or both.</p>"
+  "documentation": "<p>When you create a VPC using Amazon VPC, you automatically get DNS resolution within the VPC from Route 53 Resolver. By default, Resolver answers DNS queries for VPC domain names such as domain names for EC2 instances or Elastic Load Balancing load balancers. Resolver performs recursive lookups against public name servers for all other domain names.</p> <p>You can also configure DNS resolution between your VPC and your network over a Direct Connect or VPN connection:</p> <p> <b>Forward DNS queries from resolvers on your network to Route 53 Resolver</b> </p> <p>DNS resolvers on your network can forward DNS queries to Resolver in a specified VPC. This allows your DNS resolvers to easily resolve domain names for AWS resources such as EC2 instances or records in a Route 53 private hosted zone. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-network-to-vpc\">How DNS Resolvers on Your Network Forward DNS Queries to Route 53 Resolver</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p> <b>Conditionally forward queries from a VPC to resolvers on your network</b> </p> <p>You can configure Resolver to forward queries that it receives from EC2 instances in your VPCs to DNS resolvers on your network. To forward selected queries, you create Resolver rules that specify the domain names for the DNS queries that you want to forward (such as example.com), and the IP addresses of the DNS resolvers on your network that you want to forward the queries to. If a query matches multiple rules (example.com, acme.example.com), Resolver chooses the rule with the most specific match (acme.example.com) and forwards the query to the IP addresses that you specified in that rule. For more information, see <a href=\"https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/resolver.html#resolver-overview-forward-vpc-to-network\">How Route 53 Resolver Forwards DNS Queries from Your VPCs to Your Network</a> in the <i>Amazon Route 53 Developer Guide</i>.</p> <p>Like Amazon VPC, Resolver is Regional. In each Region where you have VPCs, you can choose whether to forward queries from your VPCs to your network (outbound queries), from your network to your VPCs (inbound queries), or both.</p>"
 }

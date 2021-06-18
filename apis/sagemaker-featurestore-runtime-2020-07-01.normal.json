@@ -12,6 +12,34 @@
     "uid": "sagemaker-featurestore-runtime-2020-07-01"
   },
   "operations": {
+    "BatchGetRecord": {
+      "name": "BatchGetRecord",
+      "http": {
+        "method": "POST",
+        "requestUri": "/BatchGetRecord"
+      },
+      "input": {
+        "shape": "BatchGetRecordRequest"
+      },
+      "output": {
+        "shape": "BatchGetRecordResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationError"
+        },
+        {
+          "shape": "InternalFailure"
+        },
+        {
+          "shape": "ServiceUnavailable"
+        },
+        {
+          "shape": "AccessForbidden"
+        }
+      ],
+      "documentation": "<p>Retrieves a batch of <code>Records</code> from a <code>FeatureGroup</code>.</p>"
+    },
     "DeleteRecord": {
       "name": "DeleteRecord",
       "http": {
@@ -95,6 +123,135 @@
     }
   },
   "shapes": {
+    "BatchGetRecordError": {
+      "type": "structure",
+      "required": [
+        "FeatureGroupName",
+        "RecordIdentifierValueAsString",
+        "ErrorCode",
+        "ErrorMessage"
+      ],
+      "members": {
+        "FeatureGroupName": {
+          "shape": "ValueAsString",
+          "documentation": "<p>The name of the feature group that the record belongs to.</p>"
+        },
+        "RecordIdentifierValueAsString": {
+          "shape": "ValueAsString",
+          "documentation": "<p>The value for the <code>RecordIdentifier</code> in string format of a Record from a <code>FeatureGroup</code> that is causing an error when attempting to be retrieved.</p>"
+        },
+        "ErrorCode": {
+          "shape": "ValueAsString",
+          "documentation": "<p>The error code of an error that has occured when attempting to retrieve a batch of Records. For more information on errors, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_GetRecord.html#API_feature_store_GetRecord_Errors\"> Errors</a>.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "Message",
+          "documentation": "<p>The error message of an error that has occured when attempting to retrieve a record in the batch.</p>"
+        }
+      },
+      "documentation": "<p>The error that has occurred when attempting to retrieve a batch of Records.</p>"
+    },
+    "BatchGetRecordErrors": {
+      "type": "list",
+      "member": {
+        "shape": "BatchGetRecordError"
+      },
+      "min": 0
+    },
+    "BatchGetRecordIdentifier": {
+      "type": "structure",
+      "required": [
+        "FeatureGroupName",
+        "RecordIdentifiersValueAsString"
+      ],
+      "members": {
+        "FeatureGroupName": {
+          "shape": "FeatureGroupName",
+          "documentation": "<p>A <code>FeatureGroupName</code> containing Records you are retrieving in a batch.</p>"
+        },
+        "RecordIdentifiersValueAsString": {
+          "shape": "RecordIdentifiers",
+          "documentation": "<p>The value for a list of record identifiers in string format.</p>"
+        },
+        "FeatureNames": {
+          "shape": "FeatureNames",
+          "documentation": "<p>List of names of Features to be retrieved. If not specified, the latest value for all the Features are returned.</p>"
+        }
+      },
+      "documentation": "<p>The identifier that identifies the batch of Records you are retrieving in a batch.</p>"
+    },
+    "BatchGetRecordIdentifiers": {
+      "type": "list",
+      "member": {
+        "shape": "BatchGetRecordIdentifier"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "BatchGetRecordRequest": {
+      "type": "structure",
+      "required": [
+        "Identifiers"
+      ],
+      "members": {
+        "Identifiers": {
+          "shape": "BatchGetRecordIdentifiers",
+          "documentation": "<p>A list of <code>FeatureGroup</code> names, with their corresponding <code>RecordIdentifier</code> value, and Feature name that have been requested to be retrieved in batch.</p>"
+        }
+      }
+    },
+    "BatchGetRecordResponse": {
+      "type": "structure",
+      "required": [
+        "Records",
+        "Errors",
+        "UnprocessedIdentifiers"
+      ],
+      "members": {
+        "Records": {
+          "shape": "BatchGetRecordResultDetails",
+          "documentation": "<p>A list of Records you requested to be retrieved in batch.</p>"
+        },
+        "Errors": {
+          "shape": "BatchGetRecordErrors",
+          "documentation": "<p>A list of errors that have occured when retrieving a batch of Records.</p>"
+        },
+        "UnprocessedIdentifiers": {
+          "shape": "UnprocessedIdentifiers",
+          "documentation": "<p>A unprocessed list of <code>FeatureGroup</code> names, with their corresponding <code>RecordIdentifier</code> value, and Feature name.</p>"
+        }
+      }
+    },
+    "BatchGetRecordResultDetail": {
+      "type": "structure",
+      "required": [
+        "FeatureGroupName",
+        "RecordIdentifierValueAsString",
+        "Record"
+      ],
+      "members": {
+        "FeatureGroupName": {
+          "shape": "ValueAsString",
+          "documentation": "<p>The <code>FeatureGroupName</code> containing Records you retrieved in a batch.</p>"
+        },
+        "RecordIdentifierValueAsString": {
+          "shape": "ValueAsString",
+          "documentation": "<p>The value of the record identifer in string format.</p>"
+        },
+        "Record": {
+          "shape": "Record",
+          "documentation": "<p>The <code>Record</code> retrieved.</p>"
+        }
+      },
+      "documentation": "<p>The output of Records that have been retrieved in a batch.</p>"
+    },
+    "BatchGetRecordResultDetails": {
+      "type": "list",
+      "member": {
+        "shape": "BatchGetRecordResultDetail"
+      },
+      "min": 0
+    },
     "DeleteRecordRequest": {
       "type": "structure",
       "required": [
@@ -196,6 +353,10 @@
         }
       }
     },
+    "Message": {
+      "type": "string",
+      "max": 2048
+    },
     "PutRecordRequest": {
       "type": "structure",
       "required": [
@@ -221,6 +382,21 @@
         "shape": "FeatureValue"
       },
       "min": 1
+    },
+    "RecordIdentifiers": {
+      "type": "list",
+      "member": {
+        "shape": "ValueAsString"
+      },
+      "max": 100,
+      "min": 1
+    },
+    "UnprocessedIdentifiers": {
+      "type": "list",
+      "member": {
+        "shape": "BatchGetRecordIdentifier"
+      },
+      "min": 0
     },
     "ValueAsString": {
       "type": "string",

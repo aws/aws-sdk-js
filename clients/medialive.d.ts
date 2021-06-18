@@ -1332,7 +1332,7 @@ one destination per packager.
     /**
      * Settings for VPC output
      */
-    Vpc?: VpcOutputSettings;
+    Vpc?: VpcOutputSettingsDescription;
   }
   export type ChannelClass = "STANDARD"|"SINGLE_PIPELINE"|string;
   export interface ChannelEgressEndpoint {
@@ -1402,7 +1402,7 @@ one destination per packager.
     /**
      * Settings for VPC output
      */
-    Vpc?: VpcOutputSettings;
+    Vpc?: VpcOutputSettingsDescription;
   }
   export interface ColorSpacePassthroughSettings {
   }
@@ -1673,7 +1673,7 @@ one destination per packager.
     /**
      * Settings for VPC output
      */
-    Vpc?: VpcOutputSettings;
+    Vpc?: VpcOutputSettingsDescription;
   }
   export interface DeleteInputRequest {
     /**
@@ -1937,7 +1937,7 @@ one destination per packager.
     /**
      * Settings for VPC output
      */
-    Vpc?: VpcOutputSettings;
+    Vpc?: VpcOutputSettingsDescription;
   }
   export interface DescribeInputDeviceRequest {
     /**
@@ -2470,7 +2470,13 @@ during input switch actions. Presently, this functionality only works with MP4_F
   }
   export type DvbSubDestinationShadowColor = "BLACK"|"NONE"|"WHITE"|string;
   export type DvbSubDestinationTeletextGridControl = "FIXED"|"SCALED"|string;
+  export type DvbSubOcrLanguage = "DEU"|"ENG"|"FRA"|"NLD"|"POR"|"SPA"|string;
   export interface DvbSubSourceSettings {
+    /**
+     * If you will configure a WebVTT caption description that references this caption selector, use this field to
+provide the language to consider when translating the image-based source to text.
+     */
+    OcrLanguage?: DvbSubOcrLanguage;
     /**
      * When using DVB-Sub with Burn-In or SMPTE-TT, use this PID for the source content. Unused for DVB-Sub passthrough. All DVB-Sub content is passed through, regardless of selectors.
      */
@@ -2660,6 +2666,10 @@ You specify only the font family. All other style information (color, bold, posi
      */
     GlobalConfiguration?: GlobalConfiguration;
     /**
+     * Settings for motion graphics.
+     */
+    MotionGraphicsConfiguration?: MotionGraphicsConfiguration;
+    /**
      * Nielsen configuration settings.
      */
     NielsenConfiguration?: NielsenConfiguration;
@@ -2818,7 +2828,7 @@ EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipelin
   export type GlobalConfigurationLowFramerateInputs = "DISABLED"|"ENABLED"|string;
   export type GlobalConfigurationOutputLockingMode = "EPOCH_LOCKING"|"PIPELINE_LOCKING"|string;
   export type GlobalConfigurationOutputTimingSource = "INPUT_CLOCK"|"SYSTEM_CLOCK"|string;
-  export type H264AdaptiveQuantization = "HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
+  export type H264AdaptiveQuantization = "AUTO"|"HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
   export type H264ColorMetadata = "IGNORE"|"INSERT"|string;
   export interface H264ColorSpaceSettings {
     ColorSpacePassthroughSettings?: ColorSpacePassthroughSettings;
@@ -2844,7 +2854,7 @@ EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipelin
   export type H264SceneChangeDetect = "DISABLED"|"ENABLED"|string;
   export interface H264Settings {
     /**
-     * Adaptive quantization. Allows intra-frame quantizers to vary to improve visual quality.
+     * Enables or disables adaptive quantization, which is a technique MediaLive can apply to video on a frame-by-frame basis to produce more compression without losing quality. There are three types of adaptive quantization: flicker, spatial, and temporal. Set the field in one of these ways: Set to Auto. Recommended. For each type of AQ, MediaLive will determine if AQ is needed, and if so, the appropriate strength. Set a strength (a value other than Auto or Disable). This strength will apply to any of the AQ fields that you choose to enable. Set to Disabled to disable all types of adaptive quantization.
      */
     AdaptiveQuantization?: H264AdaptiveQuantization;
     /**
@@ -2884,7 +2894,7 @@ EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each pipelin
      */
     FixedAfd?: FixedAfd;
     /**
-     * If set to enabled, adjust quantization within each frame to reduce flicker or 'pop' on I-frames.
+     * Flicker AQ makes adjustments within each frame to reduce flicker or 'pop' on I-frames. The value to enter in this field depends on the value in the Adaptive quantization field: If you have set the Adaptive quantization field to Auto, MediaLive ignores any value in this field. MediaLive will determine if flicker AQ is appropriate and will apply the appropriate strength. If you have set the Adaptive quantization field to a strength, you can set this field to Enabled or Disabled. Enabled: MediaLive will apply flicker AQ using the specified strength. Disabled: MediaLive won't apply flicker AQ. If you have set the Adaptive quantization to Disabled, MediaLive ignores any value in this field and doesn't apply flicker AQ.
      */
     FlickerAq?: H264FlickerAq;
     /**
@@ -2972,10 +2982,11 @@ For VBR: Set the maximum bitrate in order to accommodate expected spikes in the 
      */
     QualityLevel?: H264QualityLevel;
     /**
-     * Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. Set values for the QVBR quality level field and Max bitrate field that suit your most important viewing devices. Recommended values are:
+     * Controls the target quality for the video encode. Applies only when the rate control mode is QVBR. You can set a target quality or you can let MediaLive determine the best quality. To set a target quality, enter values in the QVBR quality level field and the Max bitrate field. Enter values that suit your most important viewing devices. Recommended values are:
 - Primary screen: Quality level: 8 to 10. Max bitrate: 4M
 - PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M
 - Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M
+To let MediaLive decide, leave the QVBR quality level field empty, and in Max bitrate enter the maximum rate you want in the video. For more information, see the section called "Video - rate control mode" in the MediaLive user guide
      */
     QvbrQualityLevel?: __integerMin1Max10;
     /**
@@ -3016,7 +3027,7 @@ This field is optional; when no value is specified the encoder will choose the n
      */
     Softness?: __integerMin0Max128;
     /**
-     * If set to enabled, adjust quantization within each frame based on spatial variation of content complexity.
+     * Spatial AQ makes adjustments within each frame based on spatial variation of content complexity. The value to enter in this field depends on the value in the Adaptive quantization field: If you have set the Adaptive quantization field to Auto, MediaLive ignores any value in this field. MediaLive will determine if spatial AQ is appropriate and will apply the appropriate strength. If you have set the Adaptive quantization field to a strength, you can set this field to Enabled or Disabled. Enabled: MediaLive will apply spatial AQ using the specified strength. Disabled: MediaLive won't apply spatial AQ. If you have set the Adaptive quantization to Disabled, MediaLive ignores any value in this field and doesn't apply spatial AQ.
      */
     SpatialAq?: H264SpatialAq;
     /**
@@ -3028,7 +3039,7 @@ This field is optional; when no value is specified the encoder will choose the n
      */
     Syntax?: H264Syntax;
     /**
-     * If set to enabled, adjust quantization within each frame based on temporal variation of content complexity.
+     * Temporal makes adjustments within each frame based on temporal variation of content complexity. The value to enter in this field depends on the value in the Adaptive quantization field: If you have set the Adaptive quantization field to Auto, MediaLive ignores any value in this field. MediaLive will determine if temporal AQ is appropriate and will apply the appropriate strength. If you have set the Adaptive quantization field to a strength, you can set this field to Enabled or Disabled. Enabled: MediaLive will apply temporal AQ using the specified strength. Disabled: MediaLive won't apply temporal AQ. If you have set the Adaptive quantization to Disabled, MediaLive ignores any value in this field and doesn't apply temporal AQ.
      */
     TemporalAq?: H264TemporalAq;
     /**
@@ -3043,7 +3054,7 @@ This field is optional; when no value is specified the encoder will choose the n
   export type H264Syntax = "DEFAULT"|"RP2027"|string;
   export type H264TemporalAq = "DISABLED"|"ENABLED"|string;
   export type H264TimecodeInsertionBehavior = "DISABLED"|"PIC_TIMING_SEI"|string;
-  export type H265AdaptiveQuantization = "HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
+  export type H265AdaptiveQuantization = "AUTO"|"HIGH"|"HIGHER"|"LOW"|"MAX"|"MEDIUM"|"OFF"|string;
   export type H265AlternativeTransferFunction = "INSERT"|"OMIT"|string;
   export type H265ColorMetadata = "IGNORE"|"INSERT"|string;
   export interface H265ColorSpaceSettings {
@@ -3505,6 +3516,10 @@ SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
      * The number of seconds between retries when an attempt to read a manifest or segment fails.
      */
     RetryInterval?: __integerMin0;
+    /**
+     * Identifies the source for the SCTE-35 messages that MediaLive will ingest. Messages can be ingested from the content segments (in the stream) or from tags in the playlist (the HLS manifest). MediaLive ignores SCTE-35 information in the source that is not selected.
+     */
+    Scte35Source?: HlsScte35SourceType;
   }
   export type HlsIvInManifest = "EXCLUDE"|"INCLUDE"|string;
   export type HlsIvSource = "EXPLICIT"|"FOLLOWS_SEGMENT_NUMBER"|string;
@@ -3562,6 +3577,7 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
      */
     CannedAcl?: S3CannedAcl;
   }
+  export type HlsScte35SourceType = "MANIFEST"|"SEGMENTS"|string;
   export type HlsSegmentationMode = "USE_INPUT_SEGMENTATION"|"USE_SEGMENT_DURATION"|string;
   export interface HlsSettings {
     AudioOnlyHlsSettings?: AudioOnlyHlsSettings;
@@ -3600,6 +3616,8 @@ Specifies whether MP4 segments should be packaged as HEV1 or HVC1.
      * If a streaming output fails, number of seconds to wait until a restart is initiated. A value of 0 means never restart.
      */
     RestartDelay?: __integerMin0Max15;
+  }
+  export interface HtmlMotionGraphicsSettings {
   }
   export type IFrameOnlyPlaylistType = "DISABLED"|"STANDARD"|string;
   export interface ImmediateModeScheduleActionStartSettings {
@@ -4687,6 +4705,37 @@ When a segmentation style of "maintainCadence" is selected and a segment is trun
   }
   export interface MediaPackageOutputSettings {
   }
+  export interface MotionGraphicsActivateScheduleActionSettings {
+    /**
+     * Duration (in milliseconds) that motion graphics should render on to the video stream. Leaving out this property or setting to 0 will result in rendering continuing until a deactivate action is processed.
+     */
+    Duration?: __longMin0Max86400000;
+    /**
+     * Key used to extract the password from EC2 Parameter store
+     */
+    PasswordParam?: __string;
+    /**
+     * URI of the HTML5 content to be rendered into the live stream.
+     */
+    Url?: __string;
+    /**
+     * Documentation update needed
+     */
+    Username?: __string;
+  }
+  export interface MotionGraphicsConfiguration {
+    MotionGraphicsInsertion?: MotionGraphicsInsertion;
+    /**
+     * Motion Graphics Settings
+     */
+    MotionGraphicsSettings: MotionGraphicsSettings;
+  }
+  export interface MotionGraphicsDeactivateScheduleActionSettings {
+  }
+  export type MotionGraphicsInsertion = "DISABLED"|"ENABLED"|string;
+  export interface MotionGraphicsSettings {
+    HtmlMotionGraphicsSettings?: HtmlMotionGraphicsSettings;
+  }
   export type Mp2CodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|string;
   export interface Mp2Settings {
     /**
@@ -5318,6 +5367,14 @@ When this field is defined, ConstantBitrate must be undefined.
      */
     ActiveInputSwitchActionName?: __string;
     /**
+     * The name of the motion graphics activate action that occurred most recently and that resulted in the current graphics URI for this pipeline.
+     */
+    ActiveMotionGraphicsActionName?: __string;
+    /**
+     * The current URI being used for HTML5 motion graphics for this pipeline.
+     */
+    ActiveMotionGraphicsUri?: __string;
+    /**
      * Pipeline ID
      */
     PipelineId?: __string;
@@ -5501,7 +5558,7 @@ Valid values: 1, 2, 4, 6, 8
     VideoQuality?: ReservationVideoQuality;
   }
   export type ReservationResourceType = "INPUT"|"OUTPUT"|"MULTIPLEX"|"CHANNEL"|string;
-  export type ReservationSpecialFeature = "ADVANCED_AUDIO"|"AUDIO_NORMALIZATION"|string;
+  export type ReservationSpecialFeature = "ADVANCED_AUDIO"|"AUDIO_NORMALIZATION"|"MGHD"|"MGUHD"|string;
   export type ReservationState = "ACTIVE"|"EXPIRED"|"CANCELED"|"DELETED"|string;
   export type ReservationVideoQuality = "STANDARD"|"ENHANCED"|"PREMIUM"|string;
   export type RtmpAdMarkers = "ON_CUE_POINT_SCTE35"|string;
@@ -5594,6 +5651,14 @@ Valid values: 1, 2, 4, 6, 8
      */
     InputSwitchSettings?: InputSwitchScheduleActionSettings;
     /**
+     * Action to activate a motion graphics image overlay
+     */
+    MotionGraphicsImageActivateSettings?: MotionGraphicsActivateScheduleActionSettings;
+    /**
+     * Action to deactivate a motion graphics image overlay
+     */
+    MotionGraphicsImageDeactivateSettings?: MotionGraphicsDeactivateScheduleActionSettings;
+    /**
      * Action to pause or unpause one or both channel pipelines
      */
     PauseStateSettings?: PauseStateScheduleActionSettings;
@@ -5647,7 +5712,13 @@ Valid values: 1, 2, 4, 6, 8
   }
   export interface Scte27DestinationSettings {
   }
+  export type Scte27OcrLanguage = "DEU"|"ENG"|"FRA"|"NLD"|"POR"|"SPA"|string;
   export interface Scte27SourceSettings {
+    /**
+     * If you will configure a WebVTT caption description that references this caption selector, use this field to
+provide the language to consider when translating the image-based source to text.
+     */
+    OcrLanguage?: Scte27OcrLanguage;
     /**
      * The pid field is used in conjunction with the caption selector languageCode field as follows:
   - Specify PID and Language: Extracts captions from that PID; the language is "informational".
@@ -5881,7 +5952,7 @@ one destination per packager.
     /**
      * Settings for VPC output
      */
-    Vpc?: VpcOutputSettings;
+    Vpc?: VpcOutputSettingsDescription;
   }
   export interface StartMultiplexRequest {
     /**
@@ -6070,7 +6141,7 @@ one destination per packager.
     /**
      * Settings for VPC output
      */
-    Vpc?: VpcOutputSettings;
+    Vpc?: VpcOutputSettingsDescription;
   }
   export interface StopMultiplexRequest {
     /**
@@ -6542,6 +6613,10 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
      */
     ColorSpace?: VideoSelectorColorSpace;
     /**
+     * Color space settings
+     */
+    ColorSpaceSettings?: VideoSelectorColorSpaceSettings;
+    /**
      * Applies only if colorSpace is a value other than follow. This field controls how the value in the colorSpace field will be used. fallback means that when the input does include color space data, that data will be used, but when the input has no color space data, the value in colorSpace will be used. Choose fallback if your input is sometimes missing color space data, but when it does have color space data, that data is correct. force means to always use the value in colorSpace. Choose force if your input usually has no color space data or might have unreliable color space data.
      */
     ColorSpaceUsage?: VideoSelectorColorSpaceUsage;
@@ -6550,7 +6625,10 @@ NONE: MediaLive does not clip the input video and does not include the AFD value
      */
     SelectorSettings?: VideoSelectorSettings;
   }
-  export type VideoSelectorColorSpace = "FOLLOW"|"REC_601"|"REC_709"|string;
+  export type VideoSelectorColorSpace = "FOLLOW"|"HDR10"|"HLG_2020"|"REC_601"|"REC_709"|string;
+  export interface VideoSelectorColorSpaceSettings {
+    Hdr10Settings?: Hdr10Settings;
+  }
   export type VideoSelectorColorSpaceUsage = "FALLBACK"|"FORCE"|string;
   export interface VideoSelectorPid {
     /**
@@ -6587,6 +6665,31 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
 
      */
     SubnetIds: __listOf__string;
+  }
+  export interface VpcOutputSettingsDescription {
+    /**
+     * The Availability Zones where the vpc subnets are located.
+The first Availability Zone applies to the first subnet in the list of subnets.
+The second Availability Zone applies to the second subnet.
+
+     */
+    AvailabilityZones?: __listOf__string;
+    /**
+     * A list of Elastic Network Interfaces created by MediaLive in the customer's VPC
+
+     */
+    NetworkInterfaceIds?: __listOf__string;
+    /**
+     * A list of up EC2 VPC security group IDs attached to the Output VPC network interfaces.
+
+     */
+    SecurityGroupIds?: __listOf__string;
+    /**
+     * A list of VPC subnet IDs from the same VPC.
+If STANDARD channel, subnet IDs must be mapped to two unique availability zones (AZ).
+
+     */
+    SubnetIds?: __listOf__string;
   }
   export type WavCodingMode = "CODING_MODE_1_0"|"CODING_MODE_2_0"|"CODING_MODE_4_0"|"CODING_MODE_8_0"|string;
   export interface WavSettings {
@@ -6714,6 +6817,7 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
   export type __longMin0Max1099511627775 = number;
   export type __longMin0Max4294967295 = number;
   export type __longMin0Max8589934591 = number;
+  export type __longMin0Max86400000 = number;
   export type __string = string;
   export type __stringMax1000 = string;
   export type __stringMax256 = string;

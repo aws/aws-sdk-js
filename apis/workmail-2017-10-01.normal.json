@@ -199,6 +199,34 @@
       "documentation": "<p>Creates a group that can be used in Amazon WorkMail by calling the <a>RegisterToWorkMail</a> operation.</p>",
       "idempotent": true
     },
+    "CreateMobileDeviceAccessRule": {
+      "name": "CreateMobileDeviceAccessRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateMobileDeviceAccessRuleRequest"
+      },
+      "output": {
+        "shape": "CreateMobileDeviceAccessRuleResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Creates a new mobile device access rule for the specified Amazon WorkMail organization.</p>"
+    },
     "CreateOrganization": {
       "name": "CreateOrganization",
       "http": {
@@ -436,6 +464,31 @@
       ],
       "documentation": "<p>Deletes permissions granted to a member (user or group).</p>",
       "idempotent": true
+    },
+    "DeleteMobileDeviceAccessRule": {
+      "name": "DeleteMobileDeviceAccessRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteMobileDeviceAccessRuleRequest"
+      },
+      "output": {
+        "shape": "DeleteMobileDeviceAccessRuleResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Deletes a mobile device access rule for the specified Amazon WorkMail organization.</p>"
     },
     "DeleteOrganization": {
       "name": "DeleteOrganization",
@@ -883,6 +936,31 @@
       "documentation": "<p>Requests a user's mailbox details for a specified organization and user.</p>",
       "idempotent": true
     },
+    "GetMobileDeviceAccessEffect": {
+      "name": "GetMobileDeviceAccessEffect",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMobileDeviceAccessEffectRequest"
+      },
+      "output": {
+        "shape": "GetMobileDeviceAccessEffectResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access rules for the Amazon WorkMail organization for a particular user's attributes.</p>"
+    },
     "ListAccessControlRules": {
       "name": "ListAccessControlRules",
       "http": {
@@ -1052,6 +1130,31 @@
       ],
       "documentation": "<p>Lists the mailbox permissions associated with a user, group, or resource mailbox.</p>",
       "idempotent": true
+    },
+    "ListMobileDeviceAccessRules": {
+      "name": "ListMobileDeviceAccessRules",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListMobileDeviceAccessRulesRequest"
+      },
+      "output": {
+        "shape": "ListMobileDeviceAccessRulesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Lists the mobile device access rules for the specified Amazon WorkMail organization.</p>"
     },
     "ListOrganizations": {
       "name": "ListOrganizations",
@@ -1470,6 +1573,34 @@
       "documentation": "<p>Updates a user's current mailbox quota for a specified organization and user.</p>",
       "idempotent": true
     },
+    "UpdateMobileDeviceAccessRule": {
+      "name": "UpdateMobileDeviceAccessRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateMobileDeviceAccessRuleRequest"
+      },
+      "output": {
+        "shape": "UpdateMobileDeviceAccessRuleResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Updates a mobile device access rule for the specified Amazon WorkMail organization.</p>"
+    },
     "UpdatePrimaryEmailAddress": {
       "name": "UpdatePrimaryEmailAddress",
       "http": {
@@ -1834,6 +1965,78 @@
         }
       }
     },
+    "CreateMobileDeviceAccessRuleRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "Name",
+        "Effect"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization under which the rule will be created.</p>"
+        },
+        "ClientToken": {
+          "shape": "IdempotencyClientToken",
+          "documentation": "<p>The idempotency token for the client request.</p>",
+          "idempotencyToken": true
+        },
+        "Name": {
+          "shape": "MobileDeviceAccessRuleName",
+          "documentation": "<p>The rule name.</p>"
+        },
+        "Description": {
+          "shape": "MobileDeviceAccessRuleDescription",
+          "documentation": "<p>The rule description.</p>"
+        },
+        "Effect": {
+          "shape": "MobileDeviceAccessRuleEffect",
+          "documentation": "<p>The effect of the rule when it matches. Allowed values are <code>ALLOW</code> or <code>DENY</code>.</p>"
+        },
+        "DeviceTypes": {
+          "shape": "DeviceTypeList",
+          "documentation": "<p>Device types that the rule will match.</p>"
+        },
+        "NotDeviceTypes": {
+          "shape": "DeviceTypeList",
+          "documentation": "<p>Device types that the rule <b>will not</b> match. All other device types will match.</p>"
+        },
+        "DeviceModels": {
+          "shape": "DeviceModelList",
+          "documentation": "<p>Device models that the rule will match.</p>"
+        },
+        "NotDeviceModels": {
+          "shape": "DeviceModelList",
+          "documentation": "<p>Device models that the rule <b>will not</b> match. All other device models will match.</p>"
+        },
+        "DeviceOperatingSystems": {
+          "shape": "DeviceOperatingSystemList",
+          "documentation": "<p>Device operating systems that the rule will match.</p>"
+        },
+        "NotDeviceOperatingSystems": {
+          "shape": "DeviceOperatingSystemList",
+          "documentation": "<p>Device operating systems that the rule <b>will not</b> match. All other device operating systems will match.</p>"
+        },
+        "DeviceUserAgents": {
+          "shape": "DeviceUserAgentList",
+          "documentation": "<p>Device user agents that the rule will match.</p>"
+        },
+        "NotDeviceUserAgents": {
+          "shape": "DeviceUserAgentList",
+          "documentation": "<p>Device user agents that the rule <b>will not</b> match. All other device user agents will match.</p>"
+        }
+      }
+    },
+    "CreateMobileDeviceAccessRuleResponse": {
+      "type": "structure",
+      "members": {
+        "MobileDeviceAccessRuleId": {
+          "shape": "MobileDeviceAccessRuleId",
+          "documentation": "<p>The identifier for the newly created mobile device access rule.</p>"
+        }
+      }
+    },
     "CreateOrganizationRequest": {
       "type": "structure",
       "required": [
@@ -2052,6 +2255,27 @@
       }
     },
     "DeleteMailboxPermissionsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteMobileDeviceAccessRuleRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "MobileDeviceAccessRuleId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization under which the rule will be deleted.</p>"
+        },
+        "MobileDeviceAccessRuleId": {
+          "shape": "MobileDeviceAccessRuleId",
+          "documentation": "<p>The identifier of the rule to be deleted.</p>"
+        }
+      }
+    },
+    "DeleteMobileDeviceAccessRuleResponse": {
       "type": "structure",
       "members": {}
     },
@@ -2457,6 +2681,62 @@
       "min": 0,
       "pattern": "[\\S\\s]*"
     },
+    "DeviceModel": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[\\u0020-\\u00FF]+"
+    },
+    "DeviceModelList": {
+      "type": "list",
+      "member": {
+        "shape": "DeviceModel"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "DeviceOperatingSystem": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[\\u0020-\\u00FF]+"
+    },
+    "DeviceOperatingSystemList": {
+      "type": "list",
+      "member": {
+        "shape": "DeviceOperatingSystem"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "DeviceType": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[\\u0020-\\u00FF]+"
+    },
+    "DeviceTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "DeviceType"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "DeviceUserAgent": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[\\u0020-\\u00FF]+"
+    },
+    "DeviceUserAgentList": {
+      "type": "list",
+      "member": {
+        "shape": "DeviceUserAgent"
+      },
+      "max": 10,
+      "min": 1
+    },
     "DirectoryId": {
       "type": "string",
       "max": 12,
@@ -2695,6 +2975,47 @@
         "MailboxSize": {
           "shape": "MailboxSize",
           "documentation": "<p>The current mailbox size, in MB, for the specified user.</p>"
+        }
+      }
+    },
+    "GetMobileDeviceAccessEffectRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization to simulate the access effect for.</p>"
+        },
+        "DeviceType": {
+          "shape": "DeviceType",
+          "documentation": "<p>Device type the simulated user will report.</p>"
+        },
+        "DeviceModel": {
+          "shape": "DeviceModel",
+          "documentation": "<p>Device model the simulated user will report.</p>"
+        },
+        "DeviceOperatingSystem": {
+          "shape": "DeviceOperatingSystem",
+          "documentation": "<p>Device operating system the simulated user will report.</p>"
+        },
+        "DeviceUserAgent": {
+          "shape": "DeviceUserAgent",
+          "documentation": "<p>Device user agent the simulated user will report.</p>"
+        }
+      }
+    },
+    "GetMobileDeviceAccessEffectResponse": {
+      "type": "structure",
+      "members": {
+        "Effect": {
+          "shape": "MobileDeviceAccessRuleEffect",
+          "documentation": "<p>The effect of the simulated access, <code>ALLOW</code> or <code>DENY</code>, after evaluating mobile device access rules in the Amazon WorkMail organization for the simulated user parameters.</p>"
+        },
+        "MatchedRules": {
+          "shape": "MobileDeviceAccessMatchedRuleList",
+          "documentation": "<p>A list of the rules which matched the simulated user input and produced the effect.</p>"
         }
       }
     },
@@ -2985,6 +3306,27 @@
         }
       }
     },
+    "ListMobileDeviceAccessRulesRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization for which to list the rules.</p>"
+        }
+      }
+    },
+    "ListMobileDeviceAccessRulesResponse": {
+      "type": "structure",
+      "members": {
+        "Rules": {
+          "shape": "MobileDeviceAccessRulesList",
+          "documentation": "<p>The list of mobile device access rules that exist under the specified Amazon WorkMail organization.</p>"
+        }
+      }
+    },
     "ListOrganizationsRequest": {
       "type": "structure",
       "members": {
@@ -3256,6 +3598,123 @@
       "member": {
         "shape": "Member"
       }
+    },
+    "MobileDeviceAccessMatchedRule": {
+      "type": "structure",
+      "members": {
+        "MobileDeviceAccessRuleId": {
+          "shape": "MobileDeviceAccessRuleId",
+          "documentation": "<p>Identifier of the rule that a simulated user matches.</p>"
+        },
+        "Name": {
+          "shape": "MobileDeviceAccessRuleName",
+          "documentation": "<p>Name of a rule that a simulated user matches.</p>"
+        }
+      },
+      "documentation": "<p>The rule that a simulated user matches.</p>"
+    },
+    "MobileDeviceAccessMatchedRuleList": {
+      "type": "list",
+      "member": {
+        "shape": "MobileDeviceAccessMatchedRule"
+      },
+      "max": 10,
+      "min": 0
+    },
+    "MobileDeviceAccessRule": {
+      "type": "structure",
+      "members": {
+        "MobileDeviceAccessRuleId": {
+          "shape": "MobileDeviceAccessRuleId",
+          "documentation": "<p>The ID assigned to a mobile access rule. </p>"
+        },
+        "Name": {
+          "shape": "MobileDeviceAccessRuleName",
+          "documentation": "<p>The name of a mobile access rule.</p>"
+        },
+        "Description": {
+          "shape": "MobileDeviceAccessRuleDescription",
+          "documentation": "<p>The description of a mobile access rule.</p>"
+        },
+        "Effect": {
+          "shape": "MobileDeviceAccessRuleEffect",
+          "documentation": "<p>The effect of the rule when it matches. Allowed values are <code>ALLOW</code> or <code>DENY</code>.</p>"
+        },
+        "DeviceTypes": {
+          "shape": "DeviceTypeList",
+          "documentation": "<p>Device types that a rule will match. </p>"
+        },
+        "NotDeviceTypes": {
+          "shape": "DeviceTypeList",
+          "documentation": "<p>Device types that a rule <b>will not</b> match. All other device types will match.</p>"
+        },
+        "DeviceModels": {
+          "shape": "DeviceModelList",
+          "documentation": "<p>Device models that a rule will match.</p>"
+        },
+        "NotDeviceModels": {
+          "shape": "DeviceModelList",
+          "documentation": "<p>Device models that a rule <b>will not</b> match. All other device models will match.</p>"
+        },
+        "DeviceOperatingSystems": {
+          "shape": "DeviceOperatingSystemList",
+          "documentation": "<p>Device operating systems that a rule will match.</p>"
+        },
+        "NotDeviceOperatingSystems": {
+          "shape": "DeviceOperatingSystemList",
+          "documentation": "<p>Device operating systems that a rule <b>will not</b> match. All other device types will match.</p>"
+        },
+        "DeviceUserAgents": {
+          "shape": "DeviceUserAgentList",
+          "documentation": "<p>Device user agents that a rule will match.</p>"
+        },
+        "NotDeviceUserAgents": {
+          "shape": "DeviceUserAgentList",
+          "documentation": "<p>Device user agents that a rule <b>will not</b> match. All other device user agents will match.</p>"
+        },
+        "DateCreated": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time at which an access rule was created.</p>"
+        },
+        "DateModified": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time at which an access rule was modified.</p>"
+        }
+      },
+      "documentation": "<p>A rule that controls access to mobile devices for an Amazon WorkMail group.</p>"
+    },
+    "MobileDeviceAccessRuleDescription": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[\\S\\s]+"
+    },
+    "MobileDeviceAccessRuleEffect": {
+      "type": "string",
+      "enum": [
+        "ALLOW",
+        "DENY"
+      ]
+    },
+    "MobileDeviceAccessRuleId": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9_-]+"
+    },
+    "MobileDeviceAccessRuleName": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "[\\S\\s]+"
+    },
+    "MobileDeviceAccessRulesList": {
+      "type": "list",
+      "member": {
+        "shape": "MobileDeviceAccessRule"
+      },
+      "max": 10,
+      "min": 0
     },
     "NextToken": {
       "type": "string",
@@ -3813,6 +4272,73 @@
       }
     },
     "UpdateMailboxQuotaResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "UpdateMobileDeviceAccessRuleRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "MobileDeviceAccessRuleId",
+        "Name",
+        "Effect"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization under which the rule will be updated.</p>"
+        },
+        "MobileDeviceAccessRuleId": {
+          "shape": "MobileDeviceAccessRuleId",
+          "documentation": "<p>The identifier of the rule to be updated.</p>"
+        },
+        "Name": {
+          "shape": "MobileDeviceAccessRuleName",
+          "documentation": "<p>The updated rule name.</p>"
+        },
+        "Description": {
+          "shape": "MobileDeviceAccessRuleDescription",
+          "documentation": "<p>The updated rule description.</p>"
+        },
+        "Effect": {
+          "shape": "MobileDeviceAccessRuleEffect",
+          "documentation": "<p>The effect of the rule when it matches. Allowed values are <code>ALLOW</code> or <code>DENY</code>.</p>"
+        },
+        "DeviceTypes": {
+          "shape": "DeviceTypeList",
+          "documentation": "<p>Device types that the updated rule will match.</p>"
+        },
+        "NotDeviceTypes": {
+          "shape": "DeviceTypeList",
+          "documentation": "<p>Device types that the updated rule <b>will not</b> match. All other device types will match.</p>"
+        },
+        "DeviceModels": {
+          "shape": "DeviceModelList",
+          "documentation": "<p>Device models that the updated rule will match.</p>"
+        },
+        "NotDeviceModels": {
+          "shape": "DeviceModelList",
+          "documentation": "<p>Device models that the updated rule <b>will not</b> match. All other device models will match.</p>"
+        },
+        "DeviceOperatingSystems": {
+          "shape": "DeviceOperatingSystemList",
+          "documentation": "<p>Device operating systems that the updated rule will match.</p>"
+        },
+        "NotDeviceOperatingSystems": {
+          "shape": "DeviceOperatingSystemList",
+          "documentation": "<p>Device operating systems that the updated rule <b>will not</b> match. All other device operating systems will match.</p>"
+        },
+        "DeviceUserAgents": {
+          "shape": "DeviceUserAgentList",
+          "documentation": "<p>User agents that the updated rule will match.</p>"
+        },
+        "NotDeviceUserAgents": {
+          "shape": "DeviceUserAgentList",
+          "documentation": "<p>User agents that the updated rule <b>will not</b> match. All other user agents will match.</p>"
+        }
+      }
+    },
+    "UpdateMobileDeviceAccessRuleResponse": {
       "type": "structure",
       "members": {}
     },

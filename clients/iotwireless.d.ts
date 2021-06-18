@@ -204,6 +204,14 @@ declare class IoTWireless extends Service {
    */
   getDeviceProfile(callback?: (err: AWSError, data: IoTWireless.Types.GetDeviceProfileResponse) => void): Request<IoTWireless.Types.GetDeviceProfileResponse, AWSError>;
   /**
+   * Returns current default log-levels, or log levels by resource types, could be for wireless device log options or wireless gateway log options.
+   */
+  getLogLevelsByResourceTypes(params: IoTWireless.Types.GetLogLevelsByResourceTypesRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.GetLogLevelsByResourceTypesResponse, AWSError>;
+  /**
+   * Returns current default log-levels, or log levels by resource types, could be for wireless device log options or wireless gateway log options.
+   */
+  getLogLevelsByResourceTypes(callback?: (err: AWSError, data: IoTWireless.Types.GetLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.GetLogLevelsByResourceTypesResponse, AWSError>;
+  /**
    * Gets information about a partner account. If PartnerAccountId and PartnerType are null, returns all partner accounts.
    */
   getPartnerAccount(params: IoTWireless.Types.GetPartnerAccountRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetPartnerAccountResponse) => void): Request<IoTWireless.Types.GetPartnerAccountResponse, AWSError>;
@@ -211,6 +219,14 @@ declare class IoTWireless extends Service {
    * Gets information about a partner account. If PartnerAccountId and PartnerType are null, returns all partner accounts.
    */
   getPartnerAccount(callback?: (err: AWSError, data: IoTWireless.Types.GetPartnerAccountResponse) => void): Request<IoTWireless.Types.GetPartnerAccountResponse, AWSError>;
+  /**
+   * Fetches the log-level override if any for a given resource-ID and resource-type, coulde be a wireless device or a wireless gateway.
+   */
+  getResourceLogLevel(params: IoTWireless.Types.GetResourceLogLevelRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetResourceLogLevelResponse) => void): Request<IoTWireless.Types.GetResourceLogLevelResponse, AWSError>;
+  /**
+   * Fetches the log-level override if any for a given resource-ID and resource-type, coulde be a wireless device or a wireless gateway.
+   */
+  getResourceLogLevel(callback?: (err: AWSError, data: IoTWireless.Types.GetResourceLogLevelResponse) => void): Request<IoTWireless.Types.GetResourceLogLevelResponse, AWSError>;
   /**
    * Gets the account-specific endpoint for Configuration and Update Server (CUPS) protocol or LoRaWAN Network Server (LNS) connections.
    */
@@ -356,6 +372,30 @@ declare class IoTWireless extends Service {
    */
   listWirelessGateways(callback?: (err: AWSError, data: IoTWireless.Types.ListWirelessGatewaysResponse) => void): Request<IoTWireless.Types.ListWirelessGatewaysResponse, AWSError>;
   /**
+   * Sets the log-level override for a resource-ID and resource-type, could be a wireless gateway or a wireless device.
+   */
+  putResourceLogLevel(params: IoTWireless.Types.PutResourceLogLevelRequest, callback?: (err: AWSError, data: IoTWireless.Types.PutResourceLogLevelResponse) => void): Request<IoTWireless.Types.PutResourceLogLevelResponse, AWSError>;
+  /**
+   * Sets the log-level override for a resource-ID and resource-type, could be a wireless gateway or a wireless device.
+   */
+  putResourceLogLevel(callback?: (err: AWSError, data: IoTWireless.Types.PutResourceLogLevelResponse) => void): Request<IoTWireless.Types.PutResourceLogLevelResponse, AWSError>;
+  /**
+   * Remove log-level overrides if any for all resources (both wireless devices and wireless gateways).
+   */
+  resetAllResourceLogLevels(params: IoTWireless.Types.ResetAllResourceLogLevelsRequest, callback?: (err: AWSError, data: IoTWireless.Types.ResetAllResourceLogLevelsResponse) => void): Request<IoTWireless.Types.ResetAllResourceLogLevelsResponse, AWSError>;
+  /**
+   * Remove log-level overrides if any for all resources (both wireless devices and wireless gateways).
+   */
+  resetAllResourceLogLevels(callback?: (err: AWSError, data: IoTWireless.Types.ResetAllResourceLogLevelsResponse) => void): Request<IoTWireless.Types.ResetAllResourceLogLevelsResponse, AWSError>;
+  /**
+   * Remove log-level override if any for a specific resource-ID and resource-type, could be a wireless device or a wireless gateway.
+   */
+  resetResourceLogLevel(params: IoTWireless.Types.ResetResourceLogLevelRequest, callback?: (err: AWSError, data: IoTWireless.Types.ResetResourceLogLevelResponse) => void): Request<IoTWireless.Types.ResetResourceLogLevelResponse, AWSError>;
+  /**
+   * Remove log-level override if any for a specific resource-ID and resource-type, could be a wireless device or a wireless gateway.
+   */
+  resetResourceLogLevel(callback?: (err: AWSError, data: IoTWireless.Types.ResetResourceLogLevelResponse) => void): Request<IoTWireless.Types.ResetResourceLogLevelResponse, AWSError>;
+  /**
    * Sends a decrypted application data frame to a device.
    */
   sendDataToWirelessDevice(params: IoTWireless.Types.SendDataToWirelessDeviceRequest, callback?: (err: AWSError, data: IoTWireless.Types.SendDataToWirelessDeviceResponse) => void): Request<IoTWireless.Types.SendDataToWirelessDeviceResponse, AWSError>;
@@ -395,6 +435,14 @@ declare class IoTWireless extends Service {
    * Updates properties of a destination.
    */
   updateDestination(callback?: (err: AWSError, data: IoTWireless.Types.UpdateDestinationResponse) => void): Request<IoTWireless.Types.UpdateDestinationResponse, AWSError>;
+  /**
+   * Set default log level, or log levels by resource types, could be for wireless device log options or wireless gateways log options. This is to control the log messages that will be displayed in CloudWatch.
+   */
+  updateLogLevelsByResourceTypes(params: IoTWireless.Types.UpdateLogLevelsByResourceTypesRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse, AWSError>;
+  /**
+   * Set default log level, or log levels by resource types, could be for wireless device log options or wireless gateways log options. This is to control the log messages that will be displayed in CloudWatch.
+   */
+  updateLogLevelsByResourceTypes(callback?: (err: AWSError, data: IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse, AWSError>;
   /**
    * Updates properties of a partner account.
    */
@@ -459,7 +507,7 @@ declare namespace IoTWireless {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+     * The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
   }
@@ -514,11 +562,24 @@ declare namespace IoTWireless {
   export interface AssociateWirelessGatewayWithThingResponse {
   }
   export type AutoCreateTasks = boolean;
+  export type BatteryLevel = "normal"|"low"|"critical"|string;
+  export interface CertificateList {
+    /**
+     * The certificate chain algorithm provided by sidewalk.
+     */
+    SigningAlg: SigningAlg;
+    /**
+     * The value of the chosen sidewalk certificate.
+     */
+    Value: CertificateValue;
+  }
   export type CertificatePEM = string;
+  export type CertificateValue = string;
   export type ChannelMask = string;
   export type ClassBTimeout = number;
   export type ClassCTimeout = number;
   export type ClientRequestToken = string;
+  export type ConnectionStatus = "Connected"|"Disconnected"|string;
   export type Crc = number;
   export interface CreateDestinationRequest {
     /**
@@ -542,7 +603,7 @@ declare namespace IoTWireless {
      */
     RoleArn: RoleArn;
     /**
-     * The tags to attach to the new destination. Tags are metadata that can be used to manage a resource.
+     * The tags to attach to the new destination. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
     /**
@@ -570,7 +631,7 @@ declare namespace IoTWireless {
      */
     LoRaWAN?: LoRaWANDeviceProfile;
     /**
-     * The tags to attach to the new device profile Tags are metadata that can be used to manage a resource.
+     * The tags to attach to the new device profile. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
     /**
@@ -598,7 +659,7 @@ declare namespace IoTWireless {
      */
     LoRaWAN?: LoRaWANServiceProfile;
     /**
-     * The tags to attach to the new service profile. Tags are metadata that can be used to manage a resource.
+     * The tags to attach to the new service profile. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
     /**
@@ -641,6 +702,10 @@ declare namespace IoTWireless {
      * The device configuration information to use to create the wireless device.
      */
     LoRaWAN?: LoRaWANDevice;
+    /**
+     * The tags to attach to the new wireless device. Tags are metadata that you can use to manage a resource.
+     */
+    Tags?: TagList;
   }
   export interface CreateWirelessDeviceResponse {
     /**
@@ -666,7 +731,7 @@ declare namespace IoTWireless {
      */
     LoRaWAN: LoRaWANGateway;
     /**
-     * The tags to attach to the new wireless gateway. Tags are metadata that can be used to manage a resource.
+     * The tags to attach to the new wireless gateway. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
     /**
@@ -702,7 +767,7 @@ declare namespace IoTWireless {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+     * The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
   }
@@ -825,6 +890,7 @@ declare namespace IoTWireless {
   export type DevAddr = string;
   export type DevEui = string;
   export type DevStatusReqFreq = number;
+  export type DeviceCertificateList = CertificateList[];
   export interface DeviceProfile {
     /**
      * The Amazon Resource Name of the resource.
@@ -843,6 +909,7 @@ declare namespace IoTWireless {
   export type DeviceProfileId = string;
   export type DeviceProfileList = DeviceProfile[];
   export type DeviceProfileName = string;
+  export type DeviceState = "Provisioned"|"RegisteredNotSeen"|"RegisteredReachable"|"RegisteredUnreachable"|string;
   export interface DisassociateAwsAccountFromPartnerAccountRequest {
     /**
      * The partner account ID to disassociate from the AWS account.
@@ -886,6 +953,7 @@ declare namespace IoTWireless {
   export type DrMax = number;
   export type DrMin = number;
   export type EndPoint = string;
+  export type Event = "discovered"|"lost"|"ack"|"nack"|"passthrough"|string;
   export type Expression = string;
   export type ExpressionType = "RuleName"|"MqttTopic"|string;
   export type FNwkSIntKey = string;
@@ -949,6 +1017,13 @@ declare namespace IoTWireless {
      */
     LoRaWAN?: LoRaWANDeviceProfile;
   }
+  export interface GetLogLevelsByResourceTypesRequest {
+  }
+  export interface GetLogLevelsByResourceTypesResponse {
+    DefaultLogLevel?: LogLevel;
+    WirelessGatewayLogOptions?: WirelessGatewayLogOptionList;
+    WirelessDeviceLogOptions?: WirelessDeviceLogOptionList;
+  }
   export interface GetPartnerAccountRequest {
     /**
      * The partner account ID to disassociate from the AWS account.
@@ -968,6 +1043,16 @@ declare namespace IoTWireless {
      * Whether the partner account is linked to the AWS account.
      */
     AccountLinked?: AccountLinked;
+  }
+  export interface GetResourceLogLevelRequest {
+    ResourceIdentifier: ResourceIdentifier;
+    /**
+     * The type of the resource, currently support WirelessDevice and WirelessGateway.
+     */
+    ResourceType: ResourceType;
+  }
+  export interface GetResourceLogLevelResponse {
+    LogLevel?: LogLevel;
   }
   export interface GetServiceEndpointRequest {
     /**
@@ -1060,6 +1145,10 @@ declare namespace IoTWireless {
      * Information about the wireless device.
      */
     LoRaWAN?: LoRaWANDevice;
+    /**
+     * Sidewalk device object.
+     */
+    Sidewalk?: SidewalkDevice;
   }
   export interface GetWirelessDeviceStatisticsRequest {
     /**
@@ -1080,6 +1169,10 @@ declare namespace IoTWireless {
      * Information about the wireless device's operations.
      */
     LoRaWAN?: LoRaWANDeviceMetadata;
+    /**
+     * MetaData for Sidewalk device.
+     */
+    Sidewalk?: SidewalkDeviceMetadata;
   }
   export interface GetWirelessGatewayCertificateRequest {
     /**
@@ -1164,6 +1257,10 @@ declare namespace IoTWireless {
      * The date and time when the most recent uplink was received.
      */
     LastUplinkReceivedAt?: ISODateTimeString;
+    /**
+     * The connection status of the wireless gateway.
+     */
+    ConnectionStatus?: ConnectionStatus;
   }
   export interface GetWirelessGatewayTaskDefinitionRequest {
     /**
@@ -1223,6 +1320,8 @@ declare namespace IoTWireless {
   export type Integer = number;
   export type IotCertificateId = string;
   export type JoinEui = string;
+  export type JoinEuiFilters = JoinEuiRange[];
+  export type JoinEuiRange = JoinEui[];
   export interface ListDestinationsRequest {
     /**
      * The maximum number of results to return in this operation.
@@ -1305,13 +1404,13 @@ declare namespace IoTWireless {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The ARN of the resource for which to list tags.
+     * The ARN of the resource for which you want to list tags.
      */
     ResourceArn: AmazonResourceName;
   }
   export interface ListTagsForResourceResponse {
     /**
-     * The tags attached to the specified resource. Tags are metadata that can be used to manage a resource
+     * The tags to attach to the specified resource. Tags are metadata that you can use to manage a resource.
      */
     Tags?: TagList;
   }
@@ -1538,6 +1637,9 @@ declare namespace IoTWireless {
      * The frequency band (RFRegion) value.
      */
     RfRegion?: RfRegion;
+    JoinEuiFilters?: JoinEuiFilters;
+    NetIdFilters?: NetIdFilters;
+    SubBands?: SubBands;
   }
   export interface LoRaWANGatewayCurrentVersion {
     /**
@@ -1708,13 +1810,17 @@ declare namespace IoTWireless {
      */
     UpdateVersion?: LoRaWANGatewayVersion;
   }
+  export type LogLevel = "INFO"|"ERROR"|"DISABLED"|string;
   export type MacVersion = string;
   export type MaxDutyCycle = number;
   export type MaxEirp = number;
   export type MaxResults = number;
   export type MessageId = string;
+  export type MessageType = "CUSTOM_COMMAND_ID_NOTIFY"|"CUSTOM_COMMAND_ID_GET"|"CUSTOM_COMMAND_ID_SET"|"CUSTOM_COMMAND_ID_RESP"|string;
   export type MinGwDiversity = number;
   export type Model = string;
+  export type NetId = string;
+  export type NetIdFilters = NetId[];
   export type NextToken = string;
   export type NwkGeoLoc = boolean;
   export type NwkKey = string;
@@ -1754,10 +1860,35 @@ declare namespace IoTWireless {
   export type PingSlotPeriod = number;
   export type PrAllowed = boolean;
   export type PresetFreq = number;
+  export interface PutResourceLogLevelRequest {
+    ResourceIdentifier: ResourceIdentifier;
+    /**
+     * The type of the resource, currently support WirelessDevice and WirelessGateway.
+     */
+    ResourceType: ResourceType;
+    LogLevel: LogLevel;
+  }
+  export interface PutResourceLogLevelResponse {
+  }
   export type RaAllowed = boolean;
   export type RegParamsRevision = string;
   export type ReportDevStatusBattery = boolean;
   export type ReportDevStatusMargin = boolean;
+  export interface ResetAllResourceLogLevelsRequest {
+  }
+  export interface ResetAllResourceLogLevelsResponse {
+  }
+  export interface ResetResourceLogLevelRequest {
+    ResourceIdentifier: ResourceIdentifier;
+    /**
+     * The type of the resource, currently support WirelessDevice and WirelessGateway.
+     */
+    ResourceType: ResourceType;
+  }
+  export interface ResetResourceLogLevelResponse {
+  }
+  export type ResourceIdentifier = string;
+  export type ResourceType = string;
   export type Result = string;
   export type RfRegion = string;
   export type RoleArn = string;
@@ -1862,17 +1993,64 @@ declare namespace IoTWireless {
     Arn?: PartnerAccountArn;
   }
   export type SidewalkAccountList = SidewalkAccountInfoWithFingerprint[];
+  export interface SidewalkDevice {
+    /**
+     * The sidewalk device identification.
+     */
+    SidewalkId?: SidewalkId;
+    /**
+     * The Sidewalk manufacturing series number.
+     */
+    SidewalkManufacturingSn?: SidewalkManufacturingSn;
+    /**
+     * The sidewalk device certificates for Ed25519 and P256r1.
+     */
+    DeviceCertificates?: DeviceCertificateList;
+  }
+  export interface SidewalkDeviceMetadata {
+    /**
+     * The RSSI value.
+     */
+    Rssi?: Integer;
+    /**
+     * Sidewalk device battery level.
+     */
+    BatteryLevel?: BatteryLevel;
+    /**
+     * Sidewalk device status notification.
+     */
+    Event?: Event;
+    /**
+     * Device state defines the device status of sidewalk device.
+     */
+    DeviceState?: DeviceState;
+  }
+  export type SidewalkId = string;
   export interface SidewalkListDevice {
     /**
      * The Sidewalk Amazon ID.
      */
     AmazonId?: AmazonId;
+    /**
+     * The sidewalk device identification.
+     */
+    SidewalkId?: SidewalkId;
+    /**
+     * The Sidewalk manufacturing series number.
+     */
+    SidewalkManufacturingSn?: SidewalkManufacturingSn;
+    /**
+     * The sidewalk device certificates for Ed25519 and P256r1.
+     */
+    DeviceCertificates?: DeviceCertificateList;
   }
+  export type SidewalkManufacturingSn = string;
   export interface SidewalkSendDataToDevice {
     /**
      * The sequence number.
      */
     Seq?: Seq;
+    MessageType?: MessageType;
   }
   export interface SidewalkUpdateAccount {
     /**
@@ -1880,7 +2058,10 @@ declare namespace IoTWireless {
      */
     AppServerPrivateKey?: AppServerPrivateKey;
   }
+  export type SigningAlg = "Ed25519"|"P256r1"|string;
   export type Station = string;
+  export type SubBand = number;
+  export type SubBands = SubBand[];
   export type Supports32BitFCnt = boolean;
   export type SupportsClassB = boolean;
   export type SupportsClassC = boolean;
@@ -1904,7 +2085,7 @@ declare namespace IoTWireless {
      */
     ResourceArn: AmazonResourceName;
     /**
-     * Adds to or modifies the tags of the given resource. Tags are metadata that can be used to manage a resource.
+     * Adds to or modifies the tags of the given resource. Tags are metadata that you can use to manage a resource.
      */
     Tags: TagList;
   }
@@ -1967,6 +2148,13 @@ declare namespace IoTWireless {
   }
   export interface UpdateDestinationResponse {
   }
+  export interface UpdateLogLevelsByResourceTypesRequest {
+    DefaultLogLevel?: LogLevel;
+    WirelessDeviceLogOptions?: WirelessDeviceLogOptionList;
+    WirelessGatewayLogOptions?: WirelessGatewayLogOptionList;
+  }
+  export interface UpdateLogLevelsByResourceTypesResponse {
+  }
   export interface UpdatePartnerAccountRequest {
     /**
      * The Sidewalk account credentials.
@@ -2021,6 +2209,8 @@ declare namespace IoTWireless {
      * A new description of the resource.
      */
     Description?: Description;
+    JoinEuiFilters?: JoinEuiFilters;
+    NetIdFilters?: NetIdFilters;
   }
   export interface UpdateWirelessGatewayResponse {
   }
@@ -2053,8 +2243,23 @@ declare namespace IoTWireless {
     Arn?: WirelessGatewayTaskDefinitionArn;
   }
   export type WirelessDeviceArn = string;
+  export type WirelessDeviceEvent = "Join"|"Rejoin"|"Uplink_Data"|"Downlink_Data"|"Registration"|string;
+  export interface WirelessDeviceEventLogOption {
+    Event: WirelessDeviceEvent;
+    LogLevel: LogLevel;
+  }
+  export type WirelessDeviceEventLogOptionList = WirelessDeviceEventLogOption[];
   export type WirelessDeviceId = string;
   export type WirelessDeviceIdType = "WirelessDeviceId"|"DevEui"|"ThingName"|string;
+  export interface WirelessDeviceLogOption {
+    /**
+     * The wireless device type.
+     */
+    Type: WirelessDeviceType;
+    LogLevel: LogLevel;
+    Events?: WirelessDeviceEventLogOptionList;
+  }
+  export type WirelessDeviceLogOptionList = WirelessDeviceLogOption[];
   export type WirelessDeviceName = string;
   export interface WirelessDeviceStatistics {
     /**
@@ -2093,8 +2298,20 @@ declare namespace IoTWireless {
   export type WirelessDeviceStatisticsList = WirelessDeviceStatistics[];
   export type WirelessDeviceType = "Sidewalk"|"LoRaWAN"|string;
   export type WirelessGatewayArn = string;
+  export type WirelessGatewayEvent = "CUPS_Request"|"Certificate"|string;
+  export interface WirelessGatewayEventLogOption {
+    Event: WirelessGatewayEvent;
+    LogLevel: LogLevel;
+  }
+  export type WirelessGatewayEventLogOptionList = WirelessGatewayEventLogOption[];
   export type WirelessGatewayId = string;
   export type WirelessGatewayIdType = "GatewayEui"|"WirelessGatewayId"|"ThingName"|string;
+  export interface WirelessGatewayLogOption {
+    Type: WirelessGatewayType;
+    LogLevel: LogLevel;
+    Events?: WirelessGatewayEventLogOptionList;
+  }
+  export type WirelessGatewayLogOptionList = WirelessGatewayLogOption[];
   export type WirelessGatewayName = string;
   export type WirelessGatewayServiceType = "CUPS"|"LNS"|string;
   export interface WirelessGatewayStatistics {
@@ -2130,6 +2347,7 @@ declare namespace IoTWireless {
   export type WirelessGatewayTaskDefinitionType = "UPDATE"|string;
   export type WirelessGatewayTaskName = string;
   export type WirelessGatewayTaskStatus = "PENDING"|"IN_PROGRESS"|"FIRST_RETRY"|"SECOND_RETRY"|"COMPLETED"|"FAILED"|string;
+  export type WirelessGatewayType = "LoRaWAN"|string;
   export interface WirelessMetadata {
     /**
      * LoRaWAN device info.

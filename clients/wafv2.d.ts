@@ -334,11 +334,22 @@ declare class WAFV2 extends Service {
 }
 declare namespace WAFV2 {
   export type Action = string;
+  export interface ActionCondition {
+    /**
+     * The action setting that a log record must contain in order to meet the condition. 
+     */
+    Action: ActionValue;
+  }
+  export type ActionValue = "ALLOW"|"BLOCK"|"COUNT"|string;
   export interface All {
   }
   export interface AllQueryArguments {
   }
   export interface AllowAction {
+    /**
+     * Defines custom handling for the web request. For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide. 
+     */
+    CustomRequestHandling?: CustomRequestHandling;
   }
   export interface AndStatement {
     /**
@@ -359,6 +370,10 @@ declare namespace WAFV2 {
   export interface AssociateWebACLResponse {
   }
   export interface BlockAction {
+    /**
+     * Defines a custom response for the web request. For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide. 
+     */
+    CustomResponse?: CustomResponse;
   }
   export interface Body {
   }
@@ -400,8 +415,23 @@ declare namespace WAFV2 {
     Capacity?: ConsumedCapacity;
   }
   export type ComparisonOperator = "EQ"|"NE"|"LE"|"LT"|"GE"|"GT"|string;
+  export interface Condition {
+    /**
+     * A single action condition.
+     */
+    ActionCondition?: ActionCondition;
+    /**
+     * A single label name condition.
+     */
+    LabelNameCondition?: LabelNameCondition;
+  }
+  export type Conditions = Condition[];
   export type ConsumedCapacity = number;
   export interface CountAction {
+    /**
+     * Defines custom handling for the web request. For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide. 
+     */
+    CustomRequestHandling?: CustomRequestHandling;
   }
   export type Country = string;
   export type CountryCode = "AF"|"AX"|"AL"|"DZ"|"AS"|"AD"|"AO"|"AI"|"AQ"|"AG"|"AR"|"AM"|"AW"|"AU"|"AT"|"AZ"|"BS"|"BH"|"BD"|"BB"|"BY"|"BE"|"BZ"|"BJ"|"BM"|"BT"|"BO"|"BQ"|"BA"|"BW"|"BV"|"BR"|"IO"|"BN"|"BG"|"BF"|"BI"|"KH"|"CM"|"CA"|"CV"|"KY"|"CF"|"TD"|"CL"|"CN"|"CX"|"CC"|"CO"|"KM"|"CG"|"CD"|"CK"|"CR"|"CI"|"HR"|"CU"|"CW"|"CY"|"CZ"|"DK"|"DJ"|"DM"|"DO"|"EC"|"EG"|"SV"|"GQ"|"ER"|"EE"|"ET"|"FK"|"FO"|"FJ"|"FI"|"FR"|"GF"|"PF"|"TF"|"GA"|"GM"|"GE"|"DE"|"GH"|"GI"|"GR"|"GL"|"GD"|"GP"|"GU"|"GT"|"GG"|"GN"|"GW"|"GY"|"HT"|"HM"|"VA"|"HN"|"HK"|"HU"|"IS"|"IN"|"ID"|"IR"|"IQ"|"IE"|"IM"|"IL"|"IT"|"JM"|"JP"|"JE"|"JO"|"KZ"|"KE"|"KI"|"KP"|"KR"|"KW"|"KG"|"LA"|"LV"|"LB"|"LS"|"LR"|"LY"|"LI"|"LT"|"LU"|"MO"|"MK"|"MG"|"MW"|"MY"|"MV"|"ML"|"MT"|"MH"|"MQ"|"MR"|"MU"|"YT"|"MX"|"FM"|"MD"|"MC"|"MN"|"ME"|"MS"|"MA"|"MZ"|"MM"|"NA"|"NR"|"NP"|"NL"|"NC"|"NZ"|"NI"|"NE"|"NG"|"NU"|"NF"|"MP"|"NO"|"OM"|"PK"|"PW"|"PS"|"PA"|"PG"|"PY"|"PE"|"PH"|"PN"|"PL"|"PT"|"PR"|"QA"|"RE"|"RO"|"RU"|"RW"|"BL"|"SH"|"KN"|"LC"|"MF"|"PM"|"VC"|"WS"|"SM"|"ST"|"SA"|"SN"|"RS"|"SC"|"SL"|"SG"|"SX"|"SK"|"SI"|"SB"|"SO"|"ZA"|"GS"|"SS"|"ES"|"LK"|"SD"|"SR"|"SJ"|"SZ"|"SE"|"CH"|"SY"|"TW"|"TJ"|"TZ"|"TH"|"TL"|"TG"|"TK"|"TO"|"TT"|"TN"|"TR"|"TM"|"TC"|"TV"|"UG"|"UA"|"AE"|"GB"|"US"|"UM"|"UY"|"UZ"|"VU"|"VE"|"VN"|"VG"|"VI"|"WF"|"EH"|"YE"|"ZM"|"ZW"|string;
@@ -495,6 +525,10 @@ declare namespace WAFV2 {
      * An array of key:value pairs to associate with the resource.
      */
     Tags?: TagList;
+    /**
+     * A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the rule group, and then use them in the rules that you define in the rule group.  For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    CustomResponseBodies?: CustomResponseBodies;
   }
   export interface CreateRuleGroupResponse {
     /**
@@ -531,12 +565,60 @@ declare namespace WAFV2 {
      * An array of key:value pairs to associate with the resource.
      */
     Tags?: TagList;
+    /**
+     * A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the web ACL, and then use them in the rules and default actions that you define in the web ACL.  For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    CustomResponseBodies?: CustomResponseBodies;
   }
   export interface CreateWebACLResponse {
     /**
      * High-level information about a WebACL, returned by operations like create and list. This provides information like the ID, that you can use to retrieve and manage a WebACL, and the ARN, that you provide to operations like AssociateWebACL.
      */
     Summary?: WebACLSummary;
+  }
+  export interface CustomHTTPHeader {
+    /**
+     * The name of the custom header.  For custom request header insertion, when AWS WAF inserts the header into the request, it prefixes this name x-amzn-waf-, to avoid confusion with the headers that are already in the request. For example, for the header name sample, AWS WAF inserts the header x-amzn-waf-sample.
+     */
+    Name: CustomHTTPHeaderName;
+    /**
+     * The value of the custom header.
+     */
+    Value: CustomHTTPHeaderValue;
+  }
+  export type CustomHTTPHeaderName = string;
+  export type CustomHTTPHeaderValue = string;
+  export type CustomHTTPHeaders = CustomHTTPHeader[];
+  export interface CustomRequestHandling {
+    /**
+     * The HTTP headers to insert into the request. Duplicate header names are not allowed.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    InsertHeaders: CustomHTTPHeaders;
+  }
+  export interface CustomResponse {
+    /**
+     * The HTTP status code to return to the client.  For a list of status codes that you can use in your custom reqponses, see Supported status codes for custom response in the AWS WAF Developer Guide. 
+     */
+    ResponseCode: ResponseStatusCode;
+    /**
+     * References the response body that you want AWS WAF to return to the web request client. You can define a custom response for a rule action or a default web ACL action that is set to block. To do this, you first define the response body key and value in the CustomResponseBodies setting for the WebACL or RuleGroup where you want to use it. Then, in the rule action or web ACL default action BlockAction setting, you reference the response body using this key. 
+     */
+    CustomResponseBodyKey?: EntityName;
+    /**
+     * The HTTP headers to use in the response. Duplicate header names are not allowed.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    ResponseHeaders?: CustomHTTPHeaders;
+  }
+  export type CustomResponseBodies = {[key: string]: CustomResponseBody};
+  export interface CustomResponseBody {
+    /**
+     * The type of content in the payload that you are defining in the Content string.
+     */
+    ContentType: ResponseContentType;
+    /**
+     * The payload of the custom response.  You can use JSON escape strings in JSON content. To do this, you must specify JSON content in the ContentType setting.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    Content: ResponseContent;
   }
   export interface DefaultAction {
     /**
@@ -683,6 +765,18 @@ declare namespace WAFV2 {
      * 
      */
     Rules?: RuleSummaries;
+    /**
+     * The label namespace prefix for this rule group. All labels added by rules in this rule group have this prefix.    The syntax for the label namespace prefix for a managed rule group is the following:   awswaf:managed:&lt;vendor&gt;:&lt;rule group name&gt;:   When a rule with a label matches a web request, AWS WAF adds the fully qualified label to the request. A fully qualified label is made up of the label namespace from the rule group or web ACL where the rule is defined and the label from the rule, separated by a colon:   &lt;label namespace&gt;:&lt;label from rule&gt;   
+     */
+    LabelNamespace?: LabelName;
+    /**
+     * The labels that one or more rules in this rule group add to matching web ACLs. These labels are defined in the RuleLabels for a Rule.
+     */
+    AvailableLabels?: LabelSummaries;
+    /**
+     * The labels that one or more rules in this rule group match against in label match statements. These labels are defined in a LabelMatchStatement specification, in the Statement definition of a rule. 
+     */
+    ConsumedLabels?: LabelSummaries;
   }
   export interface DisassociateWebACLRequest {
     /**
@@ -738,6 +832,23 @@ declare namespace WAFV2 {
     JsonBody?: JsonBody;
   }
   export type FieldToMatchData = string;
+  export interface Filter {
+    /**
+     * How to handle logs that satisfy the filter's conditions and requirement. 
+     */
+    Behavior: FilterBehavior;
+    /**
+     * Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.
+     */
+    Requirement: FilterRequirement;
+    /**
+     * Match conditions for the filter.
+     */
+    Conditions: Conditions;
+  }
+  export type FilterBehavior = "KEEP"|"DROP"|string;
+  export type FilterRequirement = "MEETS_ALL"|"MEETS_ANY"|string;
+  export type Filters = Filter[];
   export interface FirewallManagerRuleGroup {
     /**
      * The name of the rule group. You cannot change the name of a rule group after you create it.
@@ -1122,6 +1233,39 @@ declare namespace WAFV2 {
   export type JsonMatchScope = "ALL"|"KEY"|"VALUE"|string;
   export type JsonPointerPath = string;
   export type JsonPointerPaths = JsonPointerPath[];
+  export interface Label {
+    /**
+     * The label string. 
+     */
+    Name: LabelName;
+  }
+  export type LabelMatchKey = string;
+  export type LabelMatchScope = "LABEL"|"NAMESPACE"|string;
+  export interface LabelMatchStatement {
+    /**
+     * Specify whether you want to match using the label name or just the namespace. 
+     */
+    Scope: LabelMatchScope;
+    /**
+     * The string to match against. The setting you provide for this depends on the match statement's Scope settings:    If the Scope indicates LABEL, then this specification must include the name and can include any number of preceding namespace specifications and prefix up to providing the fully qualified label name.    If the Scope indicates NAMESPACE, then this specification can include any number of contiguous namespace strings, and can include the entire label namespace prefix from the rule group or web ACL where the label originates.   Labels are case sensitive and components of a label must be separated by colon, for example NS1:NS2:name.
+     */
+    Key: LabelMatchKey;
+  }
+  export type LabelName = string;
+  export interface LabelNameCondition {
+    /**
+     * The label name that a log record must contain in order to meet the condition. This must be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. 
+     */
+    LabelName: LabelName;
+  }
+  export type LabelSummaries = LabelSummary[];
+  export interface LabelSummary {
+    /**
+     * An individual label specification.
+     */
+    Name?: LabelName;
+  }
+  export type Labels = Label[];
   export interface ListAvailableManagedRuleGroupsRequest {
     /**
      * Specifies whether this is for an AWS CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an API Gateway REST API, or an AppSync GraphQL API.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
@@ -1326,8 +1470,22 @@ declare namespace WAFV2 {
      * Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration. 
      */
     ManagedByFirewallManager?: Boolean;
+    /**
+     * Filtering that specifies which web requests are kept in the logs and which are dropped. You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation. 
+     */
+    LoggingFilter?: LoggingFilter;
   }
   export type LoggingConfigurations = LoggingConfiguration[];
+  export interface LoggingFilter {
+    /**
+     * The filters that you want to apply to the logs. 
+     */
+    Filters: Filters;
+    /**
+     * Default handling for logs that don't match any of the specified filtering conditions. 
+     */
+    DefaultBehavior: FilterBehavior;
+  }
   export interface ManagedRuleGroupStatement {
     /**
      * The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.
@@ -1341,6 +1499,7 @@ declare namespace WAFV2 {
      * The rules whose actions are set to COUNT by the web ACL, regardless of the action that is set on the rule. This effectively excludes the rule from acting on web requests. 
      */
     ExcludedRules?: ExcludedRules;
+    ScopeDownStatement?: Statement;
   }
   export type ManagedRuleGroupSummaries = ManagedRuleGroupSummary[];
   export interface ManagedRuleGroupSummary {
@@ -1513,6 +1672,9 @@ declare namespace WAFV2 {
   export type ResourceArn = string;
   export type ResourceArns = ResourceArn[];
   export type ResourceType = "APPLICATION_LOAD_BALANCER"|"API_GATEWAY"|"APPSYNC"|string;
+  export type ResponseContent = string;
+  export type ResponseContentType = "TEXT_PLAIN"|"TEXT_HTML"|"APPLICATION_JSON"|string;
+  export type ResponseStatusCode = number;
   export interface Rule {
     /**
      * The name of the rule. You can't change the name of a Rule after you create it. 
@@ -1534,6 +1696,10 @@ declare namespace WAFV2 {
      * The override action to apply to the rules in a rule group. Used only for rule statements that reference a rule group, like RuleGroupReferenceStatement and ManagedRuleGroupStatement.  Set the override action to none to leave the rule actions in effect. Set it to count to only count matches, regardless of the rule action settings.  In a Rule, you must specify either this OverrideAction setting or the rule Action setting, but not both:   If the rule statement references a rule group, use this override action setting and not the action setting.    If the rule statement does not reference a rule group, use the rule action setting and not this rule override action setting.   
      */
     OverrideAction?: OverrideAction;
+    /**
+     * Labels to apply to web requests that match the rule match statement. AWS WAF applies fully qualified labels to matching web requests. A fully qualified label is the concatenation of a label namespace and a rule label. The rule's rule group or web ACL defines the label namespace.  Rules that run after this rule in the web ACL can match against these labels using a LabelMatchStatement. For each label, provide a case-sensitive string containing optional namespaces and a label name, according to the following guidelines:   Separate each component of the label with a colon.    Each namespace or name can have up to 128 characters.   You can specify up to 5 namespaces in a label.   Don't use the following reserved words in your label specification: aws, waf, managed, rulegroup, webacl, regexpatternset, or ipset.   For example, myLabelName or nameSpace1:nameSpace2:myLabelName. 
+     */
+    RuleLabels?: Labels;
     /**
      * Defines and enables Amazon CloudWatch metrics and web request sample collection. 
      */
@@ -1582,6 +1748,22 @@ declare namespace WAFV2 {
      * Defines and enables Amazon CloudWatch metrics and web request sample collection. 
      */
     VisibilityConfig: VisibilityConfig;
+    /**
+     * The label namespace prefix for this rule group. All labels added by rules in this rule group have this prefix.    The syntax for the label namespace prefix for your rule groups is the following:   awswaf:&lt;account ID&gt;:rulegroup:&lt;rule group name&gt;:    When a rule with a label matches a web request, AWS WAF adds the fully qualified label to the request. A fully qualified label is made up of the label namespace from the rule group or web ACL where the rule is defined and the label from the rule, separated by a colon:   &lt;label namespace&gt;:&lt;label from rule&gt;   
+     */
+    LabelNamespace?: LabelName;
+    /**
+     * A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the rule group, and then use them in the rules that you define in the rule group.  For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    CustomResponseBodies?: CustomResponseBodies;
+    /**
+     * The labels that one or more rules in this rule group add to matching web ACLs. These labels are defined in the RuleLabels for a Rule.
+     */
+    AvailableLabels?: LabelSummaries;
+    /**
+     * The labels that one or more rules in this rule group match against in label match statements. These labels are defined in a LabelMatchStatement specification, in the Statement definition of a rule. 
+     */
+    ConsumedLabels?: LabelSummaries;
   }
   export interface RuleGroupReferenceStatement {
     /**
@@ -1648,6 +1830,18 @@ declare namespace WAFV2 {
      * The name of the Rule that the request matched. For managed rule groups, the format for this name is &lt;vendor name&gt;#&lt;managed rule group name&gt;#&lt;rule name&gt;. For your own rule groups, the format for this name is &lt;rule group name&gt;#&lt;rule name&gt;. If the rule is not in a rule group, this field is absent. 
      */
     RuleNameWithinRuleGroup?: EntityName;
+    /**
+     * Custom request headers inserted by AWS WAF into the request, according to the custom request configuration for the matching rule action.
+     */
+    RequestHeadersInserted?: HTTPHeaders;
+    /**
+     * The response code that was sent for the request.
+     */
+    ResponseCodeSent?: ResponseStatusCode;
+    /**
+     * Labels applied to the web request by matching rules. AWS WAF applies fully qualified labels to matching web requests. A fully qualified label is the concatenation of a label namespace and a rule label. The rule's rule group or web ACL defines the label namespace.  For example, awswaf:111122223333:myRuleGroup:testRules:testNS1:testNS2:labelNameA or awswaf:managed:aws:managed-rule-set:header:encoding:utf8. 
+     */
+    Labels?: Labels;
   }
   export type SampledHTTPRequests = SampledHTTPRequest[];
   export type Scope = "CLOUDFRONT"|"REGIONAL"|string;
@@ -1746,6 +1940,10 @@ declare namespace WAFV2 {
      * A rule statement used to run the rules that are defined in a managed rule group. To use this, provide the vendor name and the name of the rule group in this statement. You can retrieve the required names by calling ListAvailableManagedRuleGroups. You can't nest a ManagedRuleGroupStatement, for example for use inside a NotStatement or OrStatement. It can only be referenced as a top-level statement within a rule.
      */
     ManagedRuleGroupStatement?: ManagedRuleGroupStatement;
+    /**
+     * A rule statement that defines a string match search against labels that have been added to the web request by rules that have already run in the web ACL.  The label match statement provides the label or namespace string to search for. The label string can represent a part or all of the fully qualified label name that had been added to the web request. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. If you do not provide the fully qualified name in your label match string, AWS WAF performs the search for labels that were added in the same context as the label match statement. 
+     */
+    LabelMatchStatement?: LabelMatchStatement;
   }
   export type Statements = Statement[];
   export interface Tag {
@@ -1914,6 +2112,10 @@ declare namespace WAFV2 {
      * A token used for optimistic locking. AWS WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. AWS WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a WAFOptimisticLockException. If this happens, perform another get, and use the new token returned by that operation. 
      */
     LockToken: LockToken;
+    /**
+     * A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the rule group, and then use them in the rules that you define in the rule group.  For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    CustomResponseBodies?: CustomResponseBodies;
   }
   export interface UpdateRuleGroupResponse {
     /**
@@ -1954,6 +2156,10 @@ declare namespace WAFV2 {
      * A token used for optimistic locking. AWS WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. AWS WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a WAFOptimisticLockException. If this happens, perform another get, and use the new token returned by that operation. 
      */
     LockToken: LockToken;
+    /**
+     * A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the web ACL, and then use them in the rules and default actions that you define in the web ACL.  For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    CustomResponseBodies?: CustomResponseBodies;
   }
   export interface UpdateWebACLResponse {
     /**
@@ -2023,6 +2229,14 @@ declare namespace WAFV2 {
      * Indicates whether this web ACL is managed by AWS Firewall Manager. If true, then only AWS Firewall Manager can delete the web ACL or any Firewall Manager rule groups in the web ACL. 
      */
     ManagedByFirewallManager?: Boolean;
+    /**
+     * The label namespace prefix for this web ACL. All labels added by rules in this web ACL have this prefix.    The syntax for the label namespace prefix for a web ACL is the following:   awswaf:&lt;account ID&gt;:webacl:&lt;web ACL name&gt;:    When a rule with a label matches a web request, AWS WAF adds the fully qualified label to the request. A fully qualified label is made up of the label namespace from the rule group or web ACL where the rule is defined and the label from the rule, separated by a colon:   &lt;label namespace&gt;:&lt;label from rule&gt;   
+     */
+    LabelNamespace?: LabelName;
+    /**
+     * A map of custom response keys and content bodies. When you create a rule with a block action, you can send a custom response to the web request. You define these for the web ACL, and then use them in the rules and default actions that you define in the web ACL.  For information about customizing web requests and responses, see Customizing web requests and responses in AWS WAF in the AWS WAF Developer Guide.  For information about the limits on count and size for custom request and response settings, see AWS WAF quotas in the AWS WAF Developer Guide. 
+     */
+    CustomResponseBodies?: CustomResponseBodies;
   }
   export type WebACLSummaries = WebACLSummary[];
   export interface WebACLSummary {

@@ -1333,7 +1333,7 @@ declare namespace RoboMaker {
      */
     createdAt?: CreatedAt;
   }
-  export type DeploymentJobErrorCode = "ResourceNotFound"|"EnvironmentSetupError"|"EtagMismatch"|"FailureThresholdBreached"|"RobotDeploymentAborted"|"RobotDeploymentNoResponse"|"RobotAgentConnectionTimeout"|"GreengrassDeploymentFailed"|"InvalidGreengrassGroup"|"MissingRobotArchitecture"|"MissingRobotApplicationArchitecture"|"MissingRobotDeploymentResource"|"GreengrassGroupVersionDoesNotExist"|"LambdaDeleted"|"ExtractingBundleFailure"|"PreLaunchFileFailure"|"PostLaunchFileFailure"|"BadPermissionError"|"DownloadConditionFailed"|"InternalServerError"|string;
+  export type DeploymentJobErrorCode = "ResourceNotFound"|"EnvironmentSetupError"|"EtagMismatch"|"FailureThresholdBreached"|"RobotDeploymentAborted"|"RobotDeploymentNoResponse"|"RobotAgentConnectionTimeout"|"GreengrassDeploymentFailed"|"InvalidGreengrassGroup"|"MissingRobotArchitecture"|"MissingRobotApplicationArchitecture"|"MissingRobotDeploymentResource"|"GreengrassGroupVersionDoesNotExist"|"LambdaDeleted"|"ExtractingBundleFailure"|"PreLaunchFileFailure"|"PostLaunchFileFailure"|"BadPermissionError"|"DownloadConditionFailed"|"BadLambdaAssociated"|"InternalServerError"|"RobotApplicationDoesNotExist"|"DeploymentFleetDoesNotExist"|"FleetDeploymentTimeout"|string;
   export type DeploymentJobs = DeploymentJob[];
   export interface DeploymentLaunchConfig {
     /**
@@ -1920,6 +1920,7 @@ declare namespace RoboMaker {
   export type EnvironmentVariableKey = string;
   export type EnvironmentVariableMap = {[key: string]: EnvironmentVariableValue};
   export type EnvironmentVariableValue = string;
+  export type ExitBehavior = "FAIL"|"RESTART"|string;
   export type FailedAt = Date;
   export interface FailedCreateSimulationJobRequest {
     /**
@@ -2512,6 +2513,14 @@ declare namespace RoboMaker {
      * A Boolean indicating whether to use default upload configurations. By default, .ros and .gazebo files are uploaded when the application terminates and all ROS topics will be recorded. If you set this value, you must specify an outputLocation. 
      */
     useDefaultUploadConfigurations?: BoxedBoolean;
+    /**
+     * Information about tools configured for the robot application.
+     */
+    tools?: Tools;
+    /**
+     * A Boolean indicating whether to use default robot application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is False. 
+     */
+    useDefaultTools?: BoxedBoolean;
   }
   export type RobotApplicationConfigs = RobotApplicationConfig[];
   export type RobotApplicationNames = Name[];
@@ -2581,7 +2590,7 @@ declare namespace RoboMaker {
     version?: RobotSoftwareSuiteVersionType;
   }
   export type RobotSoftwareSuiteType = "ROS"|"ROS2"|string;
-  export type RobotSoftwareSuiteVersionType = "Kinetic"|"Melodic"|"Dashing"|string;
+  export type RobotSoftwareSuiteVersionType = "Kinetic"|"Melodic"|"Dashing"|"Foxy"|string;
   export type RobotStatus = "Available"|"Registered"|"PendingNewDeployment"|"Deploying"|"Failed"|"InSync"|"NoResponse"|string;
   export type Robots = Robot[];
   export type S3Bucket = string;
@@ -2639,6 +2648,14 @@ declare namespace RoboMaker {
      * A Boolean indicating whether to use default upload configurations. By default, .ros and .gazebo files are uploaded when the application terminates and all ROS topics will be recorded. If you set this value, you must specify an outputLocation. 
      */
     useDefaultUploadConfigurations?: BoxedBoolean;
+    /**
+     * Information about tools configured for the simulation application.
+     */
+    tools?: Tools;
+    /**
+     * A Boolean indicating whether to use default simulation application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is False. 
+     */
+    useDefaultTools?: BoxedBoolean;
   }
   export type SimulationApplicationConfigs = SimulationApplicationConfig[];
   export type SimulationApplicationNames = Name[];
@@ -2788,7 +2805,7 @@ declare namespace RoboMaker {
      */
     createdRequestCount?: Integer;
   }
-  export type SimulationJobErrorCode = "InternalServiceError"|"RobotApplicationCrash"|"SimulationApplicationCrash"|"BadPermissionsRobotApplication"|"BadPermissionsSimulationApplication"|"BadPermissionsS3Object"|"BadPermissionsS3Output"|"BadPermissionsCloudwatchLogs"|"SubnetIpLimitExceeded"|"ENILimitExceeded"|"BadPermissionsUserCredentials"|"InvalidBundleRobotApplication"|"InvalidBundleSimulationApplication"|"InvalidS3Resource"|"LimitExceeded"|"MismatchedEtag"|"RobotApplicationVersionMismatchedEtag"|"SimulationApplicationVersionMismatchedEtag"|"ResourceNotFound"|"RequestThrottled"|"BatchTimedOut"|"BatchCanceled"|"InvalidInput"|"WrongRegionS3Bucket"|"WrongRegionS3Output"|"WrongRegionRobotApplication"|"WrongRegionSimulationApplication"|"UploadContentMismatchError"|string;
+  export type SimulationJobErrorCode = "InternalServiceError"|"RobotApplicationCrash"|"SimulationApplicationCrash"|"RobotApplicationHealthCheckFailure"|"SimulationApplicationHealthCheckFailure"|"BadPermissionsRobotApplication"|"BadPermissionsSimulationApplication"|"BadPermissionsS3Object"|"BadPermissionsS3Output"|"BadPermissionsCloudwatchLogs"|"SubnetIpLimitExceeded"|"ENILimitExceeded"|"BadPermissionsUserCredentials"|"InvalidBundleRobotApplication"|"InvalidBundleSimulationApplication"|"InvalidS3Resource"|"ThrottlingError"|"LimitExceeded"|"MismatchedEtag"|"RobotApplicationVersionMismatchedEtag"|"SimulationApplicationVersionMismatchedEtag"|"ResourceNotFound"|"RequestThrottled"|"BatchTimedOut"|"BatchCanceled"|"InvalidInput"|"WrongRegionS3Bucket"|"WrongRegionS3Output"|"WrongRegionRobotApplication"|"WrongRegionSimulationApplication"|"UploadContentMismatchError"|string;
   export interface SimulationJobRequest {
     outputLocation?: OutputLocation;
     loggingConfig?: LoggingConfig;
@@ -3066,6 +3083,30 @@ declare namespace RoboMaker {
      */
     name?: TemplateName;
   }
+  export interface Tool {
+    /**
+     * Boolean indicating whether a streaming session will be configured for the tool. If True, AWS RoboMaker will configure a connection so you can interact with the tool as it is running in the simulation. It must have a graphical user interface. The default is False. 
+     */
+    streamUI?: BoxedBoolean;
+    /**
+     * The name of the tool.
+     */
+    name: Name;
+    /**
+     * Command-line arguments for the tool. It must include the tool executable name.
+     */
+    command: UnrestrictedCommand;
+    /**
+     * Boolean indicating whether logs will be recorded in CloudWatch for the tool. The default is False. 
+     */
+    streamOutputToCloudWatch?: BoxedBoolean;
+    /**
+     * Exit behavior determines what happens when your tool quits running. RESTART will cause your tool to be restarted. FAIL will cause your job to exit. The default is RESTART. 
+     */
+    exitBehavior?: ExitBehavior;
+  }
+  export type Tools = Tool[];
+  export type UnrestrictedCommand = string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are removing tags.
@@ -3237,7 +3278,7 @@ declare namespace RoboMaker {
      */
     path: Path;
     /**
-     * Specifies how to upload the files:  UPLOAD_ON_TERMINATE  Matching files are uploaded once the simulation enters the TERMINATING state. Matching files are not uploaded until all of your code (including tools) have stopped.  If there is a problem uploading a file, the upload is retried. If problems persist, no further upload attempts will be made.  UPLOAD_ROLLING_AUTO_REMOVE  Matching files are uploaded as they are created. They are deleted after they are uploaded. The specified path is checked every 5 seconds. A final check is made when all of your code (including tools) have stopped.   
+     * Specifies when to upload the files:  UPLOAD_ON_TERMINATE  Matching files are uploaded once the simulation enters the TERMINATING state. Matching files are not uploaded until all of your code (including tools) have stopped.  If there is a problem uploading a file, the upload is retried. If problems persist, no further upload attempts will be made.  UPLOAD_ROLLING_AUTO_REMOVE  Matching files are uploaded as they are created. They are deleted after they are uploaded. The specified path is checked every 5 seconds. A final check is made when all of your code (including tools) have stopped.   
      */
     uploadBehavior: UploadBehavior;
   }

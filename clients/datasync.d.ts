@@ -52,11 +52,11 @@ declare class DataSync extends Service {
    */
   createLocationNfs(callback?: (err: AWSError, data: DataSync.Types.CreateLocationNfsResponse) => void): Request<DataSync.Types.CreateLocationNfsResponse, AWSError>;
   /**
-   * Creates an endpoint for a self-managed object storage bucket. For more information about self-managed object storage locations, see create-object-location.
+   * Creates an endpoint for a self-managed object storage bucket. For more information about self-managed object storage locations, see Creating a location for object storage.
    */
   createLocationObjectStorage(params: DataSync.Types.CreateLocationObjectStorageRequest, callback?: (err: AWSError, data: DataSync.Types.CreateLocationObjectStorageResponse) => void): Request<DataSync.Types.CreateLocationObjectStorageResponse, AWSError>;
   /**
-   * Creates an endpoint for a self-managed object storage bucket. For more information about self-managed object storage locations, see create-object-location.
+   * Creates an endpoint for a self-managed object storage bucket. For more information about self-managed object storage locations, see Creating a location for object storage.
    */
   createLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.CreateLocationObjectStorageResponse) => void): Request<DataSync.Types.CreateLocationObjectStorageResponse, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class DataSync extends Service {
    */
   describeLocationNfs(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationNfsResponse) => void): Request<DataSync.Types.DescribeLocationNfsResponse, AWSError>;
   /**
-   * Returns metadata about a self-managed object storage server location. For more information about self-managed object storage locations, see create-object-location.
+   * Returns metadata about a self-managed object storage server location. For more information about self-managed object storage locations, see Creating a location for object storage.
    */
   describeLocationObjectStorage(params: DataSync.Types.DescribeLocationObjectStorageRequest, callback?: (err: AWSError, data: DataSync.Types.DescribeLocationObjectStorageResponse) => void): Request<DataSync.Types.DescribeLocationObjectStorageResponse, AWSError>;
   /**
-   * Returns metadata about a self-managed object storage server location. For more information about self-managed object storage locations, see create-object-location.
+   * Returns metadata about a self-managed object storage server location. For more information about self-managed object storage locations, see Creating a location for object storage.
    */
   describeLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.DescribeLocationObjectStorageResponse) => void): Request<DataSync.Types.DescribeLocationObjectStorageResponse, AWSError>;
   /**
@@ -252,27 +252,27 @@ declare class DataSync extends Service {
    */
   updateAgent(callback?: (err: AWSError, data: DataSync.Types.UpdateAgentResponse) => void): Request<DataSync.Types.UpdateAgentResponse, AWSError>;
   /**
-   * Updates some of the parameters of a previously created location for Network File System (NFS) access. For information about creating an NFS location, see create-nfs-location.
+   * Updates some of the parameters of a previously created location for Network File System (NFS) access. For information about creating an NFS location, see Creating a location for NFS.
    */
   updateLocationNfs(params: DataSync.Types.UpdateLocationNfsRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationNfsResponse) => void): Request<DataSync.Types.UpdateLocationNfsResponse, AWSError>;
   /**
-   * Updates some of the parameters of a previously created location for Network File System (NFS) access. For information about creating an NFS location, see create-nfs-location.
+   * Updates some of the parameters of a previously created location for Network File System (NFS) access. For information about creating an NFS location, see Creating a location for NFS.
    */
   updateLocationNfs(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationNfsResponse) => void): Request<DataSync.Types.UpdateLocationNfsResponse, AWSError>;
   /**
-   * Updates some of the parameters of a previously created location for self-managed object storage server access. For information about creating a self-managed object storage location, see create-object-location.
+   * Updates some of the parameters of a previously created location for self-managed object storage server access. For information about creating a self-managed object storage location, see Creating a location for object storage.
    */
   updateLocationObjectStorage(params: DataSync.Types.UpdateLocationObjectStorageRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationObjectStorageResponse) => void): Request<DataSync.Types.UpdateLocationObjectStorageResponse, AWSError>;
   /**
-   * Updates some of the parameters of a previously created location for self-managed object storage server access. For information about creating a self-managed object storage location, see create-object-location.
+   * Updates some of the parameters of a previously created location for self-managed object storage server access. For information about creating a self-managed object storage location, see Creating a location for object storage.
    */
   updateLocationObjectStorage(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationObjectStorageResponse) => void): Request<DataSync.Types.UpdateLocationObjectStorageResponse, AWSError>;
   /**
-   * Updates some of the parameters of a previously created location for Server Message Block (SMB) file system access. For information about creating an SMB location, see create-smb-location.
+   * Updates some of the parameters of a previously created location for Server Message Block (SMB) file system access. For information about creating an SMB location, see Creating a location for SMB.
    */
   updateLocationSmb(params: DataSync.Types.UpdateLocationSmbRequest, callback?: (err: AWSError, data: DataSync.Types.UpdateLocationSmbResponse) => void): Request<DataSync.Types.UpdateLocationSmbResponse, AWSError>;
   /**
-   * Updates some of the parameters of a previously created location for Server Message Block (SMB) file system access. For information about creating an SMB location, see create-smb-location.
+   * Updates some of the parameters of a previously created location for Server Message Block (SMB) file system access. For information about creating an SMB location, see Creating a location for SMB.
    */
   updateLocationSmb(callback?: (err: AWSError, data: DataSync.Types.UpdateLocationSmbResponse) => void): Request<DataSync.Types.UpdateLocationSmbResponse, AWSError>;
   /**
@@ -344,7 +344,7 @@ declare namespace DataSync {
      */
     SubnetArns?: PLSubnetArnList;
     /**
-     * The ARNs of the security groups used to protect your data transfer task subnets. See CreateAgentRequest$SubnetArns.
+     * The ARNs of the security groups used to protect your data transfer task subnets. See SecurityGroupArns.
      */
     SecurityGroupArns?: PLSecurityGroupArnList;
   }
@@ -396,7 +396,7 @@ declare namespace DataSync {
      */
     Tags?: InputTagList;
     /**
-     * The user who has the permissions to access files and folders in the FSx for Windows File Server file system.
+     * The user who has the permissions to access files and folders in the FSx for Windows File Server file system. For information about choosing a user name that ensures sufficient permissions to files, folders, and metadata, see user.
      */
     User: SmbUser;
     /**
@@ -496,12 +496,12 @@ declare namespace DataSync {
      */
     S3BucketArn: S3BucketArn;
     /**
-     * The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. For buckets in AWS Regions, the storage class defaults to Standard. For buckets on AWS Outposts, the storage class defaults to AWS S3 Outposts. For more information about S3 storage classes, see Amazon S3 Storage Classes. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see using-storage-classes.
+     * The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. For buckets in AWS Regions, the storage class defaults to Standard. For buckets on AWS Outposts, the storage class defaults to AWS S3 Outposts. For more information about S3 storage classes, see Amazon S3 Storage Classes. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see Considerations when working with S3 storage classes in DataSync.
      */
     S3StorageClass?: S3StorageClass;
     S3Config: S3Config;
     /**
-     * If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names (ARNs) of the DataSync agents deployed on your Outpost. For more information about launching a DataSync agent on an AWS Outpost, see outposts-agent.
+     * If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names (ARNs) of the DataSync agents deployed on your Outpost. For more information about launching a DataSync agent on an AWS Outpost, see Deploy your DataSync agent on AWS Outposts.
      */
     AgentArns?: AgentArnList;
     /**
@@ -525,7 +525,7 @@ declare namespace DataSync {
      */
     ServerHostname: ServerHostname;
     /**
-     * The user who can mount the share, has the permissions to access files and folders in the SMB share.
+     * The user who can mount the share, has the permissions to access files and folders in the SMB share. For information about choosing a user name that ensures sufficient permissions to files, folders, and metadata, see user.
      */
     User: SmbUser;
     /**
@@ -573,7 +573,7 @@ declare namespace DataSync {
      */
     Name?: TagValue;
     /**
-     * The set of configuration options that control the behavior of a single execution of the task that occurs when you call StartTaskExecution. You can configure these options to preserve metadata such as user ID (UID) and group ID (GID), file permissions, data integrity verification, and so on. For each individual task execution, you can override these options by specifying the OverrideOptions before starting the task execution. For more information, see the operation. 
+     * The set of configuration options that control the behavior of a single execution of the task that occurs when you call StartTaskExecution. You can configure these options to preserve metadata such as user ID (UID) and group ID (GID), file permissions, data integrity verification, and so on. For each individual task execution, you can override these options by specifying the OverrideOptions before starting the task execution. For more information, see the StartTaskExecution operation. 
      */
     Options?: Options;
     /**
@@ -581,7 +581,7 @@ declare namespace DataSync {
      */
     Excludes?: FilterList;
     /**
-     * Specifies a schedule used to periodically transfer files from a source to a destination location. The schedule should be specified in UTC time. For more information, see task-scheduling.
+     * Specifies a schedule used to periodically transfer files from a source to a destination location. The schedule should be specified in UTC time. For more information, see Scheduling your task.
      */
     Schedule?: TaskSchedule;
     /**
@@ -639,7 +639,7 @@ declare namespace DataSync {
      */
     Status?: AgentStatus;
     /**
-     * The time that the agent last connected to DataSyc.
+     * The time that the agent last connected to DataSync.
      */
     LastConnectionTime?: Time;
     /**
@@ -785,12 +785,12 @@ declare namespace DataSync {
      */
     LocationUri?: LocationUri;
     /**
-     * The Amazon S3 storage class that you chose to store your files in when this location is used as a task destination. For more information about S3 storage classes, see Amazon S3 Storage Classes. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see using-storage-classes.
+     * The Amazon S3 storage class that you chose to store your files in when this location is used as a task destination. For more information about S3 storage classes, see Amazon S3 Storage Classes. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see Considerations when working with S3 storage classes in DataSync.
      */
     S3StorageClass?: S3StorageClass;
     S3Config?: S3Config;
     /**
-     * If you are using DataSync on an AWS Outpost, the Amazon Resource Name (ARNs) of the EC2 agents deployed on your Outpost. For more information about launching a DataSync agent on an AWS Outpost, see outposts-agent.
+     * If you are using DataSync on an AWS Outpost, the Amazon Resource Name (ARNs) of the EC2 agents deployed on your Outpost. For more information about launching a DataSync agent on an AWS Outpost, see Deploy your DataSync agent on AWS Outposts.
      */
     AgentArns?: AgentArnList;
     /**
@@ -810,7 +810,7 @@ declare namespace DataSync {
      */
     LocationArn?: LocationArn;
     /**
-     * The URL of the source SBM location that was described.
+     * The URL of the source SMB location that was described.
      */
     LocationUri?: LocationUri;
     /**
@@ -931,7 +931,7 @@ declare namespace DataSync {
      */
     DestinationNetworkInterfaceArns?: DestinationNetworkInterfaceArns;
     /**
-     * The set of configuration options that control the behavior of a single execution of the task that occurs when you call StartTaskExecution. You can configure these options to preserve metadata such as user ID (UID) and group (GID), file permissions, data integrity verification, and so on. For each individual task execution, you can override these options by specifying the overriding OverrideOptions value to operation. 
+     * The set of configuration options that control the behavior of a single execution of the task that occurs when you call StartTaskExecution. You can configure these options to preserve metadata such as user ID (UID) and group (GID), file permissions, data integrity verification, and so on. For each individual task execution, you can override these options by specifying the overriding OverrideOptions value to StartTaskExecution operation. 
      */
     Options?: Options;
     /**
@@ -1121,7 +1121,7 @@ declare namespace DataSync {
      */
     Values: FilterValues;
     /**
-     * The operator that is used to compare filter values (for example, Equals or Contains). For more about API filtering operators, see query-resources.
+     * The operator that is used to compare filter values (for example, Equals or Contains). For more about API filtering operators, see API filters for ListTasks and ListLocations.
      */
     Operator: Operator;
   }
@@ -1167,11 +1167,11 @@ declare namespace DataSync {
   export type Operator = "Equals"|"NotEquals"|"In"|"LessThanOrEqual"|"LessThan"|"GreaterThanOrEqual"|"GreaterThan"|"Contains"|"NotContains"|"BeginsWith"|string;
   export interface Options {
     /**
-     * A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. For more information, see create-task  Default value: POINT_IN_TIME_CONSISTENT. ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred.  POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination at the end of the transfer to verify that source and destination are fully synchronized. This option isn't supported when transferring to S3 Glacier or S3 Glacier Deep Archive storage classes. NONE: No additional verification is done at the end of the transfer, but all data transmissions are integrity-checked with checksum verification during the transfer.
+     * A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred. For more information, see Configure task settings.  Default value: POINT_IN_TIME_CONSISTENT. ONLY_FILES_TRANSFERRED (recommended): Perform verification only on files that were transferred.  POINT_IN_TIME_CONSISTENT: Scan the entire source and entire destination at the end of the transfer to verify that source and destination are fully synchronized. This option isn't supported when transferring to S3 Glacier or S3 Glacier Deep Archive storage classes. NONE: No additional verification is done at the end of the transfer, but all data transmissions are integrity-checked with checksum verification during the transfer.
      */
     VerifyMode?: VerifyMode;
     /**
-     * A value that determines whether files at the destination should be overwritten or preserved when copying files. If set to NEVER a destination file will not be replaced by a source file, even if the destination file differs from the source file. If you modify files in the destination and you sync the files, you can use this value to protect against overwriting those changes.  Some storage classes have specific behaviors that can affect your S3 storage cost. For detailed information, see using-storage-classes in the AWS DataSync User Guide.
+     * A value that determines whether files at the destination should be overwritten or preserved when copying files. If set to NEVER a destination file will not be replaced by a source file, even if the destination file differs from the source file. If you modify files in the destination and you sync the files, you can use this value to protect against overwriting those changes.  Some storage classes have specific behaviors that can affect your S3 storage cost. For detailed information, see Considerations when working with Amazon S3 storage classes in DataSync  in the AWS DataSync User Guide.
      */
     OverwriteMode?: OverwriteMode;
     /**
@@ -1179,27 +1179,27 @@ declare namespace DataSync {
      */
     Atime?: Atime;
     /**
-     * A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.  Default value: PRESERVE.  PRESERVE: Preserve original Mtime (recommended)  NONE: Ignore Mtime.   If Mtime is set to PRESERVE, Atime must be set to BEST_EFFORT. If Mtime is set to NONE, Atime must also be set to NONE.  
+     * A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase. This option is required for cases when you need to run the same task more than one time.  Default value: PRESERVE.  PRESERVE: Preserve original Mtime (recommended)  NONE: Ignore Mtime.   If Mtime is set to PRESERVE, Atime must be set to BEST_EFFORT. If Mtime is set to NONE, Atime must also be set to NONE.  
      */
     Mtime?: Mtime;
     /**
-     * The user ID (UID) of the file's owner.  Default value: INT_VALUE. This preserves the integer value of the ID. INT_VALUE: Preserve the integer value of UID and group ID (GID) (recommended). NONE: Ignore UID and GID. 
+     * The POSIX user ID (UID) of the file's owner. This option should only be set for NFS, EFS, and S3 locations. To learn more about what metadata is copied by DataSync, see Metadata Copied by DataSync. Default value: INT_VALUE. This preserves the integer value of the ID. INT_VALUE: Preserve the integer value of UID and group ID (GID) (recommended). NONE: Ignore UID and GID. 
      */
     Uid?: Uid;
     /**
-     * The group ID (GID) of the file's owners.  Default value: INT_VALUE. This preserves the integer value of the ID. INT_VALUE: Preserve the integer value of user ID (UID) and GID (recommended). NONE: Ignore UID and GID. 
+     * The POSIX group ID (GID) of the file's owners. This option should only be set for NFS, EFS, and S3 locations. For more information about what metadata is copied by DataSync, see Metadata Copied by DataSync.  Default value: INT_VALUE. This preserves the integer value of the ID. INT_VALUE: Preserve the integer value of user ID (UID) and GID (recommended). NONE: Ignore UID and GID. 
      */
     Gid?: Gid;
     /**
-     * A value that specifies whether files in the destination that don't exist in the source file system should be preserved. This option can affect your storage cost. If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed information, see using-storage-classes in the AWS DataSync User Guide. Default value: PRESERVE. PRESERVE: Ignore such destination files (recommended).  REMOVE: Delete destination files that aren’t present in the source.
+     * A value that specifies whether files in the destination that don't exist in the source file system should be preserved. This option can affect your storage cost. If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed information, see Considerations when working with Amazon S3 storage classes in DataSync  in the AWS DataSync User Guide. Default value: PRESERVE. PRESERVE: Ignore such destination files (recommended).  REMOVE: Delete destination files that aren’t present in the source.
      */
     PreserveDeletedFiles?: PreserveDeletedFiles;
     /**
-     * A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.  AWS DataSync can't sync the actual contents of such devices, because they are nonterminal and don't return an end-of-file (EOF) marker.  Default value: NONE. NONE: Ignore special devices (recommended).  PRESERVE: Preserve character and block device metadata. This option isn't currently supported for Amazon EFS. 
+     * A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and re-create the files with that device name and metadata on the destination. DataSync does not copy the contents of such devices, only the name and metadata.   AWS DataSync can't sync the actual contents of such devices, because they are nonterminal and don't return an end-of-file (EOF) marker.  Default value: NONE. NONE: Ignore special devices (recommended).  PRESERVE: Preserve character and block device metadata. This option isn't currently supported for Amazon EFS. 
      */
     PreserveDevices?: PreserveDevices;
     /**
-     * A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.  Default value: PRESERVE. PRESERVE: Preserve POSIX-style permissions (recommended). NONE: Ignore permissions.   AWS DataSync can preserve extant permissions of a source location. 
+     * A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file. This option should only be set for NFS, EFS, and S3 locations. For more information about what metadata is copied by DataSync, see Metadata Copied by DataSync.  Default value: PRESERVE. PRESERVE: Preserve POSIX-style permissions (recommended). NONE: Ignore permissions.   AWS DataSync can preserve extant permissions of a source location. 
      */
     PosixPermissions?: PosixPermissions;
     /**
@@ -1207,7 +1207,7 @@ declare namespace DataSync {
      */
     BytesPerSecond?: BytesPerSecond;
     /**
-     * A value that determines whether tasks should be queued before executing the tasks. If set to ENABLED, the tasks will be queued. The default is ENABLED. If you use the same agent to run multiple tasks, you can enable the tasks to run in series. For more information, see queue-task-execution.
+     * A value that determines whether tasks should be queued before executing the tasks. If set to ENABLED, the tasks will be queued. The default is ENABLED. If you use the same agent to run multiple tasks, you can enable the tasks to run in series. For more information, see Queueing task executions.
      */
     TaskQueueing?: TaskQueueing;
     /**
@@ -1218,6 +1218,10 @@ declare namespace DataSync {
      * A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.  CHANGED: DataSync copies only data or metadata that is new or different content from the source location to the destination location. ALL: DataSync copies all source location content to the destination, without comparing to existing content on the destination.
      */
     TransferMode?: TransferMode;
+    /**
+     * A value that determines which components of the SMB security descriptor are copied from source to destination objects.  This value is only used for transfers between SMB and Amazon FSx for Windows File Server locations, or between two Amazon FSx for Windows File Server locations. For more information about how DataSync handles metadata, see How DataSync Handles Metadata and Special Files.  Default value: OWNER_DACL.  OWNER_DACL: For each copied object, DataSync copies the following metadata:   Object owner.   NTFS discretionary access control lists (DACLs), which determine whether to grant access to an object.   When choosing this option, DataSync does NOT copy the NTFS system access control lists (SACLs), which are used by administrators to log attempts to access a secured object.  OWNER_DACL_SACL: For each copied object, DataSync copies the following metadata:   Object owner.   NTFS discretionary access control lists (DACLs), which determine whether to grant access to an object.   NTFS system access control lists (SACLs), which are used by administrators to log attempts to access a secured object.   Copying SACLs requires granting additional permissions to the Windows user that DataSync uses to access your SMB location. For information about choosing a user that ensures sufficient permissions to files, folders, and metadata, see user.  NONE: None of the SMB security descriptor components are copied. Destination objects are owned by the user that was provided for accessing the destination location. DACLs and SACLs are set based on the destination server’s configuration. 
+     */
+    SecurityDescriptorCopyFlags?: SmbSecurityDescriptorCopyFlags;
   }
   export type OutputTagList = TagListEntry[];
   export type OverwriteMode = "ALWAYS"|"NEVER"|string;
@@ -1264,6 +1268,7 @@ declare namespace DataSync {
     Version?: SmbVersion;
   }
   export type SmbPassword = string;
+  export type SmbSecurityDescriptorCopyFlags = "NONE"|"OWNER_DACL"|"OWNER_DACL_SACL"|string;
   export type SmbSubdirectory = string;
   export type SmbUser = string;
   export type SmbVersion = "AUTOMATIC"|"SMB2"|"SMB3"|string;
@@ -1373,7 +1378,7 @@ declare namespace DataSync {
      */
     Values: FilterValues;
     /**
-     * The operator that is used to compare filter values (for example, Equals or Contains). For more about API filtering operators, see query-resources.
+     * The operator that is used to compare filter values (for example, Equals or Contains). For more about API filtering operators, see API filters for ListTasks and ListLocations.
      */
     Operator: Operator;
   }
@@ -1524,7 +1529,7 @@ declare namespace DataSync {
      */
     Excludes?: FilterList;
     /**
-     * Specifies a schedule used to periodically transfer files from a source to a destination location. You can configure your task to execute hourly, daily, weekly or on specific days of the week. You control when in the day or hour you want the task to execute. The time you specify is UTC time. For more information, see task-scheduling.
+     * Specifies a schedule used to periodically transfer files from a source to a destination location. You can configure your task to execute hourly, daily, weekly or on specific days of the week. You control when in the day or hour you want the task to execute. The time you specify is UTC time. For more information, see Scheduling your task.
      */
     Schedule?: TaskSchedule;
     /**

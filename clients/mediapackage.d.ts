@@ -200,6 +200,10 @@ declare namespace MediaPackage {
   }
   export interface CmafEncryption {
     /**
+     * An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).
+     */
+    ConstantInitializationVector?: __string;
+    /**
      * Time (in seconds) between each encryption key rotation.
      */
     KeyRotationIntervalSeconds?: __integer;
@@ -699,6 +703,16 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     LogGroupName?: __string;
   }
+  export interface EncryptionContractConfiguration {
+    /**
+     * A collection of audio encryption presets.
+     */
+    PresetSpeke20Audio: PresetSpeke20Audio;
+    /**
+     * A collection of video encryption presets.
+     */
+    PresetSpeke20Video: PresetSpeke20Video;
+  }
   export type EncryptionMethod = "AES_128"|"SAMPLE_AES"|string;
   export interface HarvestJob {
     /**
@@ -1115,6 +1129,8 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
   }
   export type Origination = "ALLOW"|"DENY"|string;
   export type PlaylistType = "NONE"|"EVENT"|"VOD"|string;
+  export type PresetSpeke20Audio = "PRESET-AUDIO-1"|string;
+  export type PresetSpeke20Video = "PRESET-VIDEO-1"|string;
   export type Profile = "NONE"|"HBBTV_1_5"|string;
   export interface RotateChannelCredentialsRequest {
     /**
@@ -1194,6 +1210,7 @@ transfer with the key provider service.
 
      */
     CertificateArn?: __string;
+    EncryptionContractConfiguration?: EncryptionContractConfiguration;
     /**
      * The resource ID to include in key requests.
      */

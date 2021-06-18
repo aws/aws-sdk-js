@@ -908,11 +908,11 @@ declare class Lightsail extends Service {
    */
   getRelationalDatabases(callback?: (err: AWSError, data: Lightsail.Types.GetRelationalDatabasesResult) => void): Request<Lightsail.Types.GetRelationalDatabasesResult, AWSError>;
   /**
-   * Returns information about a specific static IP.
+   * Returns information about an Amazon Lightsail static IP.
    */
   getStaticIp(params: Lightsail.Types.GetStaticIpRequest, callback?: (err: AWSError, data: Lightsail.Types.GetStaticIpResult) => void): Request<Lightsail.Types.GetStaticIpResult, AWSError>;
   /**
-   * Returns information about a specific static IP.
+   * Returns information about an Amazon Lightsail static IP.
    */
   getStaticIp(callback?: (err: AWSError, data: Lightsail.Types.GetStaticIpResult) => void): Request<Lightsail.Types.GetStaticIpResult, AWSError>;
   /**
@@ -1853,9 +1853,13 @@ declare namespace Lightsail {
      */
     powerId?: string;
     /**
-     * The current state of the container service. The state can be:    Pending - The container service is being created.    Ready - The container service is created but does not have a container deployment.    Disabled - The container service is disabled.    Updating - The container service capacity or other setting is being updated.    Deploying - The container service is launching a container deployment.    Running - The container service is created and it has a container deployment.  
+     * The current state of the container service. The following container service states are possible:    PENDING - The container service is being created.    READY - The container service is running but it does not have an active container deployment.    DEPLOYING - The container service is launching a container deployment.    RUNNING - The container service is running and it has an active container deployment.    UPDATING - The container service capacity or its custom domains are being updated.    DELETING - The container service is being deleted.    DISABLED - The container service is disabled, and its active deployment and containers, if any, are shut down.  
      */
     state?: ContainerServiceState;
+    /**
+     * An object that describes the current state of the container service.  The state detail is populated only when a container service is in a PENDING, DEPLOYING, or UPDATING state. 
+     */
+    stateDetail?: ContainerServiceStateDetail;
     /**
      * The scale specification of the container service. The scale specifies the allocated compute nodes of the container service.
      */
@@ -2029,7 +2033,18 @@ declare namespace Lightsail {
     registry?: string;
   }
   export type ContainerServiceScale = number;
-  export type ContainerServiceState = "PENDING"|"READY"|"RUNNING"|"UPDATING"|"DELETING"|"DISABLED"|string;
+  export type ContainerServiceState = "PENDING"|"READY"|"RUNNING"|"UPDATING"|"DELETING"|"DISABLED"|"DEPLOYING"|string;
+  export interface ContainerServiceStateDetail {
+    /**
+     * The state code of the container service. The following state codes are possible:   The following state codes are possible if your container service is in a DEPLOYING or UPDATING state:    CREATING_SYSTEM_RESOURCES - The system resources for your container service are being created.    CREATING_NETWORK_INFRASTRUCTURE - The network infrastructure for your container service are being created.    PROVISIONING_CERTIFICATE - The SSL/TLS certificate for your container service is being created.    PROVISIONING_SERVICE - Your container service is being provisioned.    CREATING_DEPLOYMENT - Your deployment is being created on your container service.    EVALUATING_HEALTH_CHECK - The health of your deployment is being evaluated.    ACTIVATING_DEPLOYMENT - Your deployment is being activated.     The following state codes are possible if your container service is in a PENDING state:    CERTIFICATE_LIMIT_EXCEEDED - The SSL/TLS certificate required for your container service exceeds the maximum number of certificates allowed for your account.    UNKNOWN_ERROR - An error was experienced when your container service was being created.    
+     */
+    code?: ContainerServiceStateDetailCode;
+    /**
+     * A message that provides more information for the state code.  The state detail is populated only when a container service is in a PENDING, DEPLOYING, or UPDATING state. 
+     */
+    message?: string;
+  }
+  export type ContainerServiceStateDetailCode = "CREATING_SYSTEM_RESOURCES"|"CREATING_NETWORK_INFRASTRUCTURE"|"PROVISIONING_CERTIFICATE"|"PROVISIONING_SERVICE"|"CREATING_DEPLOYMENT"|"EVALUATING_HEALTH_CHECK"|"ACTIVATING_DEPLOYMENT"|"CERTIFICATE_LIMIT_EXCEEDED"|"UNKNOWN_ERROR"|string;
   export interface ContainerServicesListResult {
     /**
      * An array of objects that describe one or more container services.
@@ -2352,7 +2367,7 @@ declare namespace Lightsail {
   }
   export interface CreateDomainRequest {
     /**
-     * The domain name to manage (e.g., example.com).  You cannot register a new domain name using Lightsail. You must register a domain name using Amazon Route 53 or another domain name registrar. If you have already registered your domain, you can enter its name in this parameter to manage the DNS records for that domain. 
+     * The domain name to manage (e.g., example.com).  You cannot register a new domain name using Lightsail. You must register a domain name using Amazon Route 53 or another domain name registrar. If you have already registered your domain, you can enter its name in this parameter to manage the DNS records for that domain using Lightsail. 
      */
     domainName: DomainName;
     /**
@@ -2592,7 +2607,7 @@ declare namespace Lightsail {
   }
   export interface CreateRelationalDatabaseFromSnapshotRequest {
     /**
-     * The name to use for your new database. Constraints:   Must contain from 2 to 255 alphanumeric characters, or hyphens.   The first and last character must be a letter or number.  
+     * The name to use for your new Lightsail database resource. Constraints:   Must contain from 2 to 255 alphanumeric characters, or hyphens.   The first and last character must be a letter or number.  
      */
     relationalDatabaseName: ResourceName;
     /**
@@ -2652,15 +2667,15 @@ declare namespace Lightsail {
      */
     relationalDatabaseBundleId: string;
     /**
-     * The name of the master database created when the Lightsail database resource is created. Constraints:   Must contain from 1 to 64 alphanumeric characters.   Cannot be a word reserved by the specified database engine  
+     * The meaning of this parameter differs according to the database engine you use.  MySQL  The name of the database to create when the Lightsail database resource is created. If this parameter isn't specified, no database is created in the database resource. Constraints:   Must contain 1 to 64 letters or numbers.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0- 9).   Can't be a word reserved by the specified database engine. For more information about reserved words in MySQL, see the Keywords and Reserved Words articles for MySQL 5.6, MySQL 5.7, and MySQL 8.0.    PostgreSQL  The name of the database to create when the Lightsail database resource is created. If this parameter isn't specified, a database named postgres is created in the database resource. Constraints:   Must contain 1 to 63 letters or numbers.   Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0- 9).   Can't be a word reserved by the specified database engine. For more information about reserved words in PostgreSQL, see the SQL Key Words articles for PostgreSQL 9.6, PostgreSQL 10, PostgreSQL 11, and PostgreSQL 12.  
      */
     masterDatabaseName: string;
     /**
-     * The master user name for your new database. Constraints:   Master user name is required.   Must contain from 1 to 16 alphanumeric characters.   The first character must be a letter.   Cannot be a reserved word for the database engine you choose. For more information about reserved words in MySQL 5.6 or 5.7, see the Keywords and Reserved Words articles for MySQL 5.6 or MySQL 5.7 respectively.  
+     * The name for the master user.  MySQL  Constraints:   Required for MySQL.   Must be 1 to 16 letters or numbers. Can contain underscores.   First character must be a letter.   Can't be a reserved word for the chosen database engine. For more information about reserved words in MySQL 5.6 or 5.7, see the Keywords and Reserved Words articles for MySQL 5.6, MySQL 5.7, or MySQL 8.0.    PostgreSQL  Constraints:   Required for PostgreSQL.   Must be 1 to 63 letters or numbers. Can contain underscores.   First character must be a letter.   Can't be a reserved word for the chosen database engine. For more information about reserved words in MySQL 5.6 or 5.7, see the Keywords and Reserved Words articles for PostgreSQL 9.6, PostgreSQL 10, PostgreSQL 11, and PostgreSQL 12.  
      */
     masterUsername: string;
     /**
-     * The password for the master user of your new database. The password can include any printable ASCII character except "/", """, or "@". Constraints: Must contain 8 to 41 characters.
+     * The password for the master user. The password can include any printable ASCII character except "/", """, or "@". It cannot contain spaces.  MySQL  Constraints: Must contain from 8 to 41 characters.  PostgreSQL  Constraints: Must contain from 8 to 128 characters.
      */
     masterUserPassword?: SensitiveString;
     /**
@@ -3281,7 +3296,7 @@ declare namespace Lightsail {
      */
     name?: DomainName;
     /**
-     * The target AWS name server (e.g., ns-111.awsdns-22.com.). For Lightsail load balancers, the value looks like ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com. Be sure to also set isAlias to true when setting up an A record for a load balancer.
+     * The target IP address (e.g., 192.0.2.0), or AWS name server (e.g., ns-111.awsdns-22.com.). For Lightsail load balancers, the value looks like ab1234c56789c6b86aba6fb203d443bc-123456789.us-east-2.elb.amazonaws.com. For Lightsail distributions, the value looks like exampled1182ne.cloudfront.net. For Lightsail container services, the value looks like container-service-1.example23scljs.us-west-2.cs.amazonlightsail.com. Be sure to also set isAlias to true when setting up an A record for a Lightsail load balancer, distribution, or container service.
      */
     target?: string;
     /**
@@ -3289,7 +3304,7 @@ declare namespace Lightsail {
      */
     isAlias?: boolean;
     /**
-     * The type of domain entry, such as address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The following domain entry types can be used:    A     CNAME     MX     NS     SOA     SRV     TXT   
+     * The type of domain entry, such as address for IPv4 (A), address for IPv6 (AAAA), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT). The following domain entry types can be used:    A     AAAA     CNAME     MX     NS     SOA     SRV     TXT   
      */
     type?: DomainEntryType;
     /**
@@ -6409,11 +6424,11 @@ declare namespace Lightsail {
   }
   export interface UpdateRelationalDatabaseRequest {
     /**
-     * The name of your database to update.
+     * The name of your Lightsail database resource to update.
      */
     relationalDatabaseName: ResourceName;
     /**
-     * The password for the master user of your database. The password can include any printable ASCII character except "/", """, or "@". Constraints: Must contain 8 to 41 characters.
+     * The password for the master user. The password can include any printable ASCII character except "/", """, or "@". MySQL  Constraints: Must contain from 8 to 41 characters.  PostgreSQL  Constraints: Must contain from 8 to 128 characters.
      */
     masterUserPassword?: SensitiveString;
     /**

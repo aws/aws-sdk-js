@@ -52,6 +52,14 @@ declare class WorkMail extends Service {
    */
   createGroup(callback?: (err: AWSError, data: WorkMail.Types.CreateGroupResponse) => void): Request<WorkMail.Types.CreateGroupResponse, AWSError>;
   /**
+   * Creates a new mobile device access rule for the specified Amazon WorkMail organization.
+   */
+  createMobileDeviceAccessRule(params: WorkMail.Types.CreateMobileDeviceAccessRuleRequest, callback?: (err: AWSError, data: WorkMail.Types.CreateMobileDeviceAccessRuleResponse) => void): Request<WorkMail.Types.CreateMobileDeviceAccessRuleResponse, AWSError>;
+  /**
+   * Creates a new mobile device access rule for the specified Amazon WorkMail organization.
+   */
+  createMobileDeviceAccessRule(callback?: (err: AWSError, data: WorkMail.Types.CreateMobileDeviceAccessRuleResponse) => void): Request<WorkMail.Types.CreateMobileDeviceAccessRuleResponse, AWSError>;
+  /**
    * Creates a new Amazon WorkMail organization. Optionally, you can choose to associate an existing AWS Directory Service directory with your organization. If an AWS Directory Service directory ID is specified, the organization alias must match the directory alias. If you choose not to associate an existing directory with your organization, then we create a new Amazon WorkMail directory for you. For more information, see Adding an organization in the Amazon WorkMail Administrator Guide. You can associate multiple email domains with an organization, then set your default email domain from the Amazon WorkMail console. You can also associate a domain that is managed in an Amazon Route 53 public hosted zone. For more information, see Adding a domain and Choosing the default domain in the Amazon WorkMail Administrator Guide. Optionally, you can use a customer managed master key from AWS Key Management Service (AWS KMS) to encrypt email for your organization. If you don't associate an AWS KMS key, Amazon WorkMail creates a default AWS managed master key for you.
    */
   createOrganization(params: WorkMail.Types.CreateOrganizationRequest, callback?: (err: AWSError, data: WorkMail.Types.CreateOrganizationResponse) => void): Request<WorkMail.Types.CreateOrganizationResponse, AWSError>;
@@ -107,6 +115,14 @@ declare class WorkMail extends Service {
    * Deletes permissions granted to a member (user or group).
    */
   deleteMailboxPermissions(callback?: (err: AWSError, data: WorkMail.Types.DeleteMailboxPermissionsResponse) => void): Request<WorkMail.Types.DeleteMailboxPermissionsResponse, AWSError>;
+  /**
+   * Deletes a mobile device access rule for the specified Amazon WorkMail organization.
+   */
+  deleteMobileDeviceAccessRule(params: WorkMail.Types.DeleteMobileDeviceAccessRuleRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteMobileDeviceAccessRuleResponse) => void): Request<WorkMail.Types.DeleteMobileDeviceAccessRuleResponse, AWSError>;
+  /**
+   * Deletes a mobile device access rule for the specified Amazon WorkMail organization.
+   */
+  deleteMobileDeviceAccessRule(callback?: (err: AWSError, data: WorkMail.Types.DeleteMobileDeviceAccessRuleResponse) => void): Request<WorkMail.Types.DeleteMobileDeviceAccessRuleResponse, AWSError>;
   /**
    * Deletes an Amazon WorkMail organization and all underlying AWS resources managed by Amazon WorkMail as part of the organization. You can choose whether to delete the associated directory. For more information, see Removing an organization in the Amazon WorkMail Administrator Guide.
    */
@@ -228,6 +244,14 @@ declare class WorkMail extends Service {
    */
   getMailboxDetails(callback?: (err: AWSError, data: WorkMail.Types.GetMailboxDetailsResponse) => void): Request<WorkMail.Types.GetMailboxDetailsResponse, AWSError>;
   /**
+   * Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access rules for the Amazon WorkMail organization for a particular user's attributes.
+   */
+  getMobileDeviceAccessEffect(params: WorkMail.Types.GetMobileDeviceAccessEffectRequest, callback?: (err: AWSError, data: WorkMail.Types.GetMobileDeviceAccessEffectResponse) => void): Request<WorkMail.Types.GetMobileDeviceAccessEffectResponse, AWSError>;
+  /**
+   * Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access rules for the Amazon WorkMail organization for a particular user's attributes.
+   */
+  getMobileDeviceAccessEffect(callback?: (err: AWSError, data: WorkMail.Types.GetMobileDeviceAccessEffectResponse) => void): Request<WorkMail.Types.GetMobileDeviceAccessEffectResponse, AWSError>;
+  /**
    * Lists the access control rules for the specified organization.
    */
   listAccessControlRules(params: WorkMail.Types.ListAccessControlRulesRequest, callback?: (err: AWSError, data: WorkMail.Types.ListAccessControlRulesResponse) => void): Request<WorkMail.Types.ListAccessControlRulesResponse, AWSError>;
@@ -275,6 +299,14 @@ declare class WorkMail extends Service {
    * Lists the mailbox permissions associated with a user, group, or resource mailbox.
    */
   listMailboxPermissions(callback?: (err: AWSError, data: WorkMail.Types.ListMailboxPermissionsResponse) => void): Request<WorkMail.Types.ListMailboxPermissionsResponse, AWSError>;
+  /**
+   * Lists the mobile device access rules for the specified Amazon WorkMail organization.
+   */
+  listMobileDeviceAccessRules(params: WorkMail.Types.ListMobileDeviceAccessRulesRequest, callback?: (err: AWSError, data: WorkMail.Types.ListMobileDeviceAccessRulesResponse) => void): Request<WorkMail.Types.ListMobileDeviceAccessRulesResponse, AWSError>;
+  /**
+   * Lists the mobile device access rules for the specified Amazon WorkMail organization.
+   */
+  listMobileDeviceAccessRules(callback?: (err: AWSError, data: WorkMail.Types.ListMobileDeviceAccessRulesResponse) => void): Request<WorkMail.Types.ListMobileDeviceAccessRulesResponse, AWSError>;
   /**
    * Returns summaries of the customer's organizations.
    */
@@ -387,6 +419,14 @@ declare class WorkMail extends Service {
    * Updates a user's current mailbox quota for a specified organization and user.
    */
   updateMailboxQuota(callback?: (err: AWSError, data: WorkMail.Types.UpdateMailboxQuotaResponse) => void): Request<WorkMail.Types.UpdateMailboxQuotaResponse, AWSError>;
+  /**
+   * Updates a mobile device access rule for the specified Amazon WorkMail organization.
+   */
+  updateMobileDeviceAccessRule(params: WorkMail.Types.UpdateMobileDeviceAccessRuleRequest, callback?: (err: AWSError, data: WorkMail.Types.UpdateMobileDeviceAccessRuleResponse) => void): Request<WorkMail.Types.UpdateMobileDeviceAccessRuleResponse, AWSError>;
+  /**
+   * Updates a mobile device access rule for the specified Amazon WorkMail organization.
+   */
+  updateMobileDeviceAccessRule(callback?: (err: AWSError, data: WorkMail.Types.UpdateMobileDeviceAccessRuleResponse) => void): Request<WorkMail.Types.UpdateMobileDeviceAccessRuleResponse, AWSError>;
   /**
    * Updates the primary email for a user, group, or resource. The current email is moved into the list of aliases (or swapped between an existing alias and the current primary email), and the email provided in the input is promoted as the primary.
    */
@@ -555,6 +595,66 @@ declare namespace WorkMail {
      */
     GroupId?: WorkMailIdentifier;
   }
+  export interface CreateMobileDeviceAccessRuleRequest {
+    /**
+     * The Amazon WorkMail organization under which the rule will be created.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The idempotency token for the client request.
+     */
+    ClientToken?: IdempotencyClientToken;
+    /**
+     * The rule name.
+     */
+    Name: MobileDeviceAccessRuleName;
+    /**
+     * The rule description.
+     */
+    Description?: MobileDeviceAccessRuleDescription;
+    /**
+     * The effect of the rule when it matches. Allowed values are ALLOW or DENY.
+     */
+    Effect: MobileDeviceAccessRuleEffect;
+    /**
+     * Device types that the rule will match.
+     */
+    DeviceTypes?: DeviceTypeList;
+    /**
+     * Device types that the rule will not match. All other device types will match.
+     */
+    NotDeviceTypes?: DeviceTypeList;
+    /**
+     * Device models that the rule will match.
+     */
+    DeviceModels?: DeviceModelList;
+    /**
+     * Device models that the rule will not match. All other device models will match.
+     */
+    NotDeviceModels?: DeviceModelList;
+    /**
+     * Device operating systems that the rule will match.
+     */
+    DeviceOperatingSystems?: DeviceOperatingSystemList;
+    /**
+     * Device operating systems that the rule will not match. All other device operating systems will match.
+     */
+    NotDeviceOperatingSystems?: DeviceOperatingSystemList;
+    /**
+     * Device user agents that the rule will match.
+     */
+    DeviceUserAgents?: DeviceUserAgentList;
+    /**
+     * Device user agents that the rule will not match. All other device user agents will match.
+     */
+    NotDeviceUserAgents?: DeviceUserAgentList;
+  }
+  export interface CreateMobileDeviceAccessRuleResponse {
+    /**
+     * The identifier for the newly created mobile device access rule.
+     */
+    MobileDeviceAccessRuleId?: MobileDeviceAccessRuleId;
+  }
   export interface CreateOrganizationRequest {
     /**
      * The AWS Directory Service directory ID.
@@ -696,6 +796,18 @@ declare namespace WorkMail {
     GranteeId: WorkMailIdentifier;
   }
   export interface DeleteMailboxPermissionsResponse {
+  }
+  export interface DeleteMobileDeviceAccessRuleRequest {
+    /**
+     * The Amazon WorkMail organization under which the rule will be deleted.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The identifier of the rule to be deleted.
+     */
+    MobileDeviceAccessRuleId: MobileDeviceAccessRuleId;
+  }
+  export interface DeleteMobileDeviceAccessRuleResponse {
   }
   export interface DeleteOrganizationRequest {
     /**
@@ -998,6 +1110,14 @@ declare namespace WorkMail {
     DisabledDate?: Timestamp;
   }
   export type Description = string;
+  export type DeviceModel = string;
+  export type DeviceModelList = DeviceModel[];
+  export type DeviceOperatingSystem = string;
+  export type DeviceOperatingSystemList = DeviceOperatingSystem[];
+  export type DeviceType = string;
+  export type DeviceTypeList = DeviceType[];
+  export type DeviceUserAgent = string;
+  export type DeviceUserAgentList = DeviceUserAgent[];
   export type DirectoryId = string;
   export interface DisassociateDelegateFromResourceRequest {
     /**
@@ -1132,6 +1252,38 @@ declare namespace WorkMail {
      * The current mailbox size, in MB, for the specified user.
      */
     MailboxSize?: MailboxSize;
+  }
+  export interface GetMobileDeviceAccessEffectRequest {
+    /**
+     * The Amazon WorkMail organization to simulate the access effect for.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * Device type the simulated user will report.
+     */
+    DeviceType?: DeviceType;
+    /**
+     * Device model the simulated user will report.
+     */
+    DeviceModel?: DeviceModel;
+    /**
+     * Device operating system the simulated user will report.
+     */
+    DeviceOperatingSystem?: DeviceOperatingSystem;
+    /**
+     * Device user agent the simulated user will report.
+     */
+    DeviceUserAgent?: DeviceUserAgent;
+  }
+  export interface GetMobileDeviceAccessEffectResponse {
+    /**
+     * The effect of the simulated access, ALLOW or DENY, after evaluating mobile device access rules in the Amazon WorkMail organization for the simulated user parameters.
+     */
+    Effect?: MobileDeviceAccessRuleEffect;
+    /**
+     * A list of the rules which matched the simulated user input and produced the effect.
+     */
+    MatchedRules?: MobileDeviceAccessMatchedRuleList;
   }
   export interface Group {
     /**
@@ -1311,6 +1463,18 @@ declare namespace WorkMail {
      * The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
      */
     NextToken?: NextToken;
+  }
+  export interface ListMobileDeviceAccessRulesRequest {
+    /**
+     * The Amazon WorkMail organization for which to list the rules.
+     */
+    OrganizationId: OrganizationId;
+  }
+  export interface ListMobileDeviceAccessRulesResponse {
+    /**
+     * The list of mobile device access rules that exist under the specified Amazon WorkMail organization.
+     */
+    Rules?: MobileDeviceAccessRulesList;
   }
   export interface ListOrganizationsRequest {
     /**
@@ -1492,6 +1656,80 @@ declare namespace WorkMail {
   }
   export type MemberType = "GROUP"|"USER"|string;
   export type Members = Member[];
+  export interface MobileDeviceAccessMatchedRule {
+    /**
+     * Identifier of the rule that a simulated user matches.
+     */
+    MobileDeviceAccessRuleId?: MobileDeviceAccessRuleId;
+    /**
+     * Name of a rule that a simulated user matches.
+     */
+    Name?: MobileDeviceAccessRuleName;
+  }
+  export type MobileDeviceAccessMatchedRuleList = MobileDeviceAccessMatchedRule[];
+  export interface MobileDeviceAccessRule {
+    /**
+     * The ID assigned to a mobile access rule. 
+     */
+    MobileDeviceAccessRuleId?: MobileDeviceAccessRuleId;
+    /**
+     * The name of a mobile access rule.
+     */
+    Name?: MobileDeviceAccessRuleName;
+    /**
+     * The description of a mobile access rule.
+     */
+    Description?: MobileDeviceAccessRuleDescription;
+    /**
+     * The effect of the rule when it matches. Allowed values are ALLOW or DENY.
+     */
+    Effect?: MobileDeviceAccessRuleEffect;
+    /**
+     * Device types that a rule will match. 
+     */
+    DeviceTypes?: DeviceTypeList;
+    /**
+     * Device types that a rule will not match. All other device types will match.
+     */
+    NotDeviceTypes?: DeviceTypeList;
+    /**
+     * Device models that a rule will match.
+     */
+    DeviceModels?: DeviceModelList;
+    /**
+     * Device models that a rule will not match. All other device models will match.
+     */
+    NotDeviceModels?: DeviceModelList;
+    /**
+     * Device operating systems that a rule will match.
+     */
+    DeviceOperatingSystems?: DeviceOperatingSystemList;
+    /**
+     * Device operating systems that a rule will not match. All other device types will match.
+     */
+    NotDeviceOperatingSystems?: DeviceOperatingSystemList;
+    /**
+     * Device user agents that a rule will match.
+     */
+    DeviceUserAgents?: DeviceUserAgentList;
+    /**
+     * Device user agents that a rule will not match. All other device user agents will match.
+     */
+    NotDeviceUserAgents?: DeviceUserAgentList;
+    /**
+     * The date and time at which an access rule was created.
+     */
+    DateCreated?: Timestamp;
+    /**
+     * The date and time at which an access rule was modified.
+     */
+    DateModified?: Timestamp;
+  }
+  export type MobileDeviceAccessRuleDescription = string;
+  export type MobileDeviceAccessRuleEffect = "ALLOW"|"DENY"|string;
+  export type MobileDeviceAccessRuleId = string;
+  export type MobileDeviceAccessRuleName = string;
+  export type MobileDeviceAccessRulesList = MobileDeviceAccessRule[];
   export type NextToken = string;
   export type OrganizationId = string;
   export type OrganizationName = string;
@@ -1794,6 +2032,62 @@ declare namespace WorkMail {
     MailboxQuota: MailboxQuota;
   }
   export interface UpdateMailboxQuotaResponse {
+  }
+  export interface UpdateMobileDeviceAccessRuleRequest {
+    /**
+     * The Amazon WorkMail organization under which the rule will be updated.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The identifier of the rule to be updated.
+     */
+    MobileDeviceAccessRuleId: MobileDeviceAccessRuleId;
+    /**
+     * The updated rule name.
+     */
+    Name: MobileDeviceAccessRuleName;
+    /**
+     * The updated rule description.
+     */
+    Description?: MobileDeviceAccessRuleDescription;
+    /**
+     * The effect of the rule when it matches. Allowed values are ALLOW or DENY.
+     */
+    Effect: MobileDeviceAccessRuleEffect;
+    /**
+     * Device types that the updated rule will match.
+     */
+    DeviceTypes?: DeviceTypeList;
+    /**
+     * Device types that the updated rule will not match. All other device types will match.
+     */
+    NotDeviceTypes?: DeviceTypeList;
+    /**
+     * Device models that the updated rule will match.
+     */
+    DeviceModels?: DeviceModelList;
+    /**
+     * Device models that the updated rule will not match. All other device models will match.
+     */
+    NotDeviceModels?: DeviceModelList;
+    /**
+     * Device operating systems that the updated rule will match.
+     */
+    DeviceOperatingSystems?: DeviceOperatingSystemList;
+    /**
+     * Device operating systems that the updated rule will not match. All other device operating systems will match.
+     */
+    NotDeviceOperatingSystems?: DeviceOperatingSystemList;
+    /**
+     * User agents that the updated rule will match.
+     */
+    DeviceUserAgents?: DeviceUserAgentList;
+    /**
+     * User agents that the updated rule will not match. All other user agents will match.
+     */
+    NotDeviceUserAgents?: DeviceUserAgentList;
+  }
+  export interface UpdateMobileDeviceAccessRuleResponse {
   }
   export interface UpdatePrimaryEmailAddressRequest {
     /**

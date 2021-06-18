@@ -11,6 +11,48 @@
     "signatureVersion": "v4"
   },
   "operations": {
+    "AddFlowMediaStreams": {
+      "name": "AddFlowMediaStreams",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/flows/{flowArn}/mediaStreams",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "AddFlowMediaStreamsRequest"
+      },
+      "output": {
+        "shape": "AddFlowMediaStreamsResponse",
+        "documentation": "MediaConnect created the new resource successfully."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        }
+      ],
+      "documentation": "Adds media streams to an existing flow. After you add a media stream to a flow, you can associate it with a source and/or an output that uses the ST 2110 JPEG XS or CDI protocol."
+    },
     "AddFlowOutputs": {
       "name": "AddFlowOutputs",
       "http": {
@@ -597,6 +639,48 @@
       ],
       "documentation": "Submits a request to purchase an offering. If you already have an active reservation, you can't purchase another offering."
     },
+    "RemoveFlowMediaStream": {
+      "name": "RemoveFlowMediaStream",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/flows/{flowArn}/mediaStreams/{mediaStreamName}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "RemoveFlowMediaStreamRequest"
+      },
+      "output": {
+        "shape": "RemoveFlowMediaStreamResponse",
+        "documentation": "The media stream was successfully removed from the flow."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        }
+      ],
+      "documentation": "Removes a media stream from a flow. This action is only available if the media stream is not associated with a source or output."
+    },
     "RemoveFlowOutput": {
       "name": "RemoveFlowOutput",
       "http": {
@@ -985,6 +1069,48 @@
       ],
       "documentation": "You can change an entitlement's description, subscribers, and encryption. If you change the subscribers, the service will remove the outputs that are are used by the subscribers that are removed."
     },
+    "UpdateFlowMediaStream": {
+      "name": "UpdateFlowMediaStream",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/flows/{flowArn}/mediaStreams/{mediaStreamName}",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateFlowMediaStreamRequest"
+      },
+      "output": {
+        "shape": "UpdateFlowMediaStreamResponse",
+        "documentation": "MediaConnect is updating the media stream."
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "The request that you submitted is not valid."
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "AWS Elemental MediaConnect can't fulfill your request because it encountered an unexpected condition."
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "You don't have the required permissions to perform this operation."
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "AWS Elemental MediaConnect did not find the resource that you specified in the request."
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "AWS Elemental MediaConnect is currently unavailable. Try again later."
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "You have exceeded the service request rate limit for your AWS Elemental MediaConnect account."
+        }
+      ],
+      "documentation": "Updates an existing media stream."
+    },
     "UpdateFlowOutput": {
       "name": "UpdateFlowOutput",
       "http": {
@@ -1071,6 +1197,43 @@
     }
   },
   "shapes": {
+    "AddFlowMediaStreamsRequest": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
+          "location": "uri",
+          "locationName": "flowArn",
+          "documentation": "The Amazon Resource Name (ARN) of the flow."
+        },
+        "MediaStreams": {
+          "shape": "__listOfAddMediaStreamRequest",
+          "locationName": "mediaStreams",
+          "documentation": "The media streams that you want to add to the flow."
+        }
+      },
+      "documentation": "A request to add media streams to the flow.",
+      "required": [
+        "FlowArn",
+        "MediaStreams"
+      ]
+    },
+    "AddFlowMediaStreamsResponse": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "locationName": "flowArn",
+          "documentation": "The ARN of the flow that you added media streams to."
+        },
+        "MediaStreams": {
+          "shape": "__listOfMediaStream",
+          "locationName": "mediaStreams",
+          "documentation": "The media streams that you added to the flow."
+        }
+      }
+    },
     "AddFlowOutputsRequest": {
       "type": "structure",
       "members": {
@@ -1179,6 +1342,52 @@
         }
       }
     },
+    "AddMediaStreamRequest": {
+      "type": "structure",
+      "members": {
+        "Attributes": {
+          "shape": "MediaStreamAttributesRequest",
+          "locationName": "attributes",
+          "documentation": "The attributes that you want to assign to the new media stream."
+        },
+        "ClockRate": {
+          "shape": "__integer",
+          "locationName": "clockRate",
+          "documentation": "The sample rate (in Hz) for the stream. If the media stream type is video or ancillary data, set this value to 90000. If the media stream type is audio, set this value to either 48000 or 96000."
+        },
+        "Description": {
+          "shape": "__string",
+          "locationName": "description",
+          "documentation": "A description that can help you quickly identify what your media stream is used for."
+        },
+        "MediaStreamId": {
+          "shape": "__integer",
+          "locationName": "mediaStreamId",
+          "documentation": "A unique identifier for the media stream."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "locationName": "mediaStreamName",
+          "documentation": "A name that helps you distinguish one media stream from another."
+        },
+        "MediaStreamType": {
+          "shape": "MediaStreamType",
+          "locationName": "mediaStreamType",
+          "documentation": "The type of media stream."
+        },
+        "VideoFormat": {
+          "shape": "__string",
+          "locationName": "videoFormat",
+          "documentation": "The resolution of the video."
+        }
+      },
+      "documentation": "The media stream that you want to add to the flow.",
+      "required": [
+        "MediaStreamType",
+        "MediaStreamId",
+        "MediaStreamName"
+      ]
+    },
     "AddOutputRequest": {
       "type": "structure",
       "members": {
@@ -1206,6 +1415,11 @@
           "shape": "__integer",
           "locationName": "maxLatency",
           "documentation": "The maximum latency in milliseconds for Zixi-based streams."
+        },
+        "MediaStreamOutputConfigurations": {
+          "shape": "__listOfMediaStreamOutputConfigurationRequest",
+          "locationName": "mediaStreamOutputConfigurations",
+          "documentation": "The media streams that are associated with the output, and the parameters for those associations."
         },
         "MinLatency": {
           "shape": "__integer",
@@ -1261,6 +1475,18 @@
         "aes256"
       ]
     },
+    "Colorimetry": {
+      "type": "string",
+      "enum": [
+        "BT601",
+        "BT709",
+        "BT2020",
+        "BT2100",
+        "ST2065-1",
+        "ST2065-3",
+        "XYZ"
+      ]
+    },
     "CreateFlowRequest": {
       "type": "structure",
       "members": {
@@ -1273,6 +1499,11 @@
           "shape": "__listOfGrantEntitlementRequest",
           "locationName": "entitlements",
           "documentation": "The entitlements that you want to grant on a flow."
+        },
+        "MediaStreams": {
+          "shape": "__listOfAddMediaStreamRequest",
+          "locationName": "mediaStreams",
+          "documentation": "The media streams that you want to add to the flow. You can associate these media streams with sources and outputs on the flow."
         },
         "Name": {
           "shape": "__string",
@@ -1418,10 +1649,124 @@
         }
       }
     },
+    "DestinationConfiguration": {
+      "type": "structure",
+      "members": {
+        "DestinationIp": {
+          "shape": "__string",
+          "locationName": "destinationIp",
+          "documentation": "The IP address where contents of the media stream will be sent."
+        },
+        "DestinationPort": {
+          "shape": "__integer",
+          "locationName": "destinationPort",
+          "documentation": "The port to use when the content of the media stream is distributed to the output."
+        },
+        "Interface": {
+          "shape": "Interface",
+          "locationName": "interface",
+          "documentation": "The VPC interface that is used for the media stream associated with the output."
+        },
+        "OutboundIp": {
+          "shape": "__string",
+          "locationName": "outboundIp",
+          "documentation": "The IP address that the receiver requires in order to establish a connection with the flow. This value is represented by the elastic network interface IP address of the VPC. This field applies only to outputs that use the CDI or ST 2110 JPEG XS protocol."
+        }
+      },
+      "documentation": "The transport parameters that are associated with an outbound media stream.",
+      "required": [
+        "DestinationIp",
+        "DestinationPort",
+        "Interface",
+        "OutboundIp"
+      ]
+    },
+    "DestinationConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "DestinationIp": {
+          "shape": "__string",
+          "locationName": "destinationIp",
+          "documentation": "The IP address where you want MediaConnect to send contents of the media stream."
+        },
+        "DestinationPort": {
+          "shape": "__integer",
+          "locationName": "destinationPort",
+          "documentation": "The port that you want MediaConnect to use when it distributes the media stream to the output."
+        },
+        "Interface": {
+          "shape": "InterfaceRequest",
+          "locationName": "interface",
+          "documentation": "The VPC interface that you want to use for the media stream associated with the output."
+        }
+      },
+      "documentation": "The transport parameters that you want to associate with an outbound media stream.",
+      "required": [
+        "DestinationIp",
+        "DestinationPort",
+        "Interface"
+      ]
+    },
     "DurationUnits": {
       "type": "string",
       "enum": [
         "MONTHS"
+      ]
+    },
+    "EncoderProfile": {
+      "type": "string",
+      "enum": [
+        "main",
+        "high"
+      ]
+    },
+    "EncodingName": {
+      "type": "string",
+      "enum": [
+        "jxsv",
+        "raw",
+        "smpte291",
+        "pcm"
+      ]
+    },
+    "EncodingParameters": {
+      "type": "structure",
+      "members": {
+        "CompressionFactor": {
+          "shape": "__double",
+          "locationName": "compressionFactor",
+          "documentation": "A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are floating point numbers in the range of 3.0 to 10.0, inclusive."
+        },
+        "EncoderProfile": {
+          "shape": "EncoderProfile",
+          "locationName": "encoderProfile",
+          "documentation": "A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol."
+        }
+      },
+      "documentation": "A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.",
+      "required": [
+        "EncoderProfile",
+        "CompressionFactor"
+      ]
+    },
+    "EncodingParametersRequest": {
+      "type": "structure",
+      "members": {
+        "CompressionFactor": {
+          "shape": "__double",
+          "locationName": "compressionFactor",
+          "documentation": "A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are floating point numbers in the range of 3.0 to 10.0, inclusive."
+        },
+        "EncoderProfile": {
+          "shape": "EncoderProfile",
+          "locationName": "encoderProfile",
+          "documentation": "A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, if at least one source on the flow uses the CDI protocol."
+        }
+      },
+      "documentation": "A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.",
+      "required": [
+        "EncoderProfile",
+        "CompressionFactor"
       ]
     },
     "Encryption": {
@@ -1534,10 +1879,20 @@
     "FailoverConfig": {
       "type": "structure",
       "members": {
+        "FailoverMode": {
+          "shape": "FailoverMode",
+          "locationName": "failoverMode",
+          "documentation": "The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams."
+        },
         "RecoveryWindow": {
           "shape": "__integer",
           "locationName": "recoveryWindow",
           "documentation": "Search window time to look for dash-7 packets"
+        },
+        "SourcePriority": {
+          "shape": "SourcePriority",
+          "locationName": "sourcePriority",
+          "documentation": "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams."
         },
         "State": {
           "shape": "State",
@@ -1545,6 +1900,13 @@
         }
       },
       "documentation": "The settings for source failover"
+    },
+    "FailoverMode": {
+      "type": "string",
+      "enum": [
+        "MERGE",
+        "FAILOVER"
+      ]
     },
     "Flow": {
       "type": "structure",
@@ -1573,6 +1935,11 @@
           "shape": "__string",
           "locationName": "flowArn",
           "documentation": "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow."
+        },
+        "MediaStreams": {
+          "shape": "__listOfMediaStream",
+          "locationName": "mediaStreams",
+          "documentation": "The media streams that are associated with the flow. After you associate a media stream with a source, you can also associate it with outputs on the flow."
         },
         "Name": {
           "shape": "__string",
@@ -1617,6 +1984,88 @@
         "Source",
         "Name"
       ]
+    },
+    "Fmtp": {
+      "type": "structure",
+      "members": {
+        "ChannelOrder": {
+          "shape": "__string",
+          "locationName": "channelOrder",
+          "documentation": "The format of the audio channel."
+        },
+        "Colorimetry": {
+          "shape": "Colorimetry",
+          "locationName": "colorimetry",
+          "documentation": "The format that is used for the representation of color."
+        },
+        "ExactFramerate": {
+          "shape": "__string",
+          "locationName": "exactFramerate",
+          "documentation": "The frame rate for the video stream, in frames/second. For example: 60000/1001. If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if you specify 60, MediaConnect uses 60/1 as the exactFramerate."
+        },
+        "Par": {
+          "shape": "__string",
+          "locationName": "par",
+          "documentation": "The pixel aspect ratio (PAR) of the video."
+        },
+        "Range": {
+          "shape": "Range",
+          "locationName": "range",
+          "documentation": "The encoding range of the video."
+        },
+        "ScanMode": {
+          "shape": "ScanMode",
+          "locationName": "scanMode",
+          "documentation": "The type of compression that was used to smooth the video’s appearance"
+        },
+        "Tcs": {
+          "shape": "Tcs",
+          "locationName": "tcs",
+          "documentation": "The transfer characteristic system (TCS) that is used in the video."
+        }
+      },
+      "documentation": "FMTP"
+    },
+    "FmtpRequest": {
+      "type": "structure",
+      "members": {
+        "ChannelOrder": {
+          "shape": "__string",
+          "locationName": "channelOrder",
+          "documentation": "The format of the audio channel."
+        },
+        "Colorimetry": {
+          "shape": "Colorimetry",
+          "locationName": "colorimetry",
+          "documentation": "The format that is used for the representation of color."
+        },
+        "ExactFramerate": {
+          "shape": "__string",
+          "locationName": "exactFramerate",
+          "documentation": "The frame rate for the video stream, in frames/second. For example: 60000/1001. If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if you specify 60, MediaConnect uses 60/1 as the exactFramerate."
+        },
+        "Par": {
+          "shape": "__string",
+          "locationName": "par",
+          "documentation": "The pixel aspect ratio (PAR) of the video."
+        },
+        "Range": {
+          "shape": "Range",
+          "locationName": "range",
+          "documentation": "The encoding range of the video."
+        },
+        "ScanMode": {
+          "shape": "ScanMode",
+          "locationName": "scanMode",
+          "documentation": "The type of compression that was used to smooth the video’s appearance."
+        },
+        "Tcs": {
+          "shape": "Tcs",
+          "locationName": "tcs",
+          "documentation": "The transfer characteristic system (TCS) that is used in the video."
+        }
+      },
+      "documentation": "The settings that you want to use to define the media stream."
     },
     "GrantEntitlementRequest": {
       "type": "structure",
@@ -1692,6 +2141,80 @@
           "documentation": "The ARN of the flow that these entitlements were granted to."
         }
       }
+    },
+    "InputConfiguration": {
+      "type": "structure",
+      "members": {
+        "InputIp": {
+          "shape": "__string",
+          "locationName": "inputIp",
+          "documentation": "The IP address that the flow listens on for incoming content for a media stream."
+        },
+        "InputPort": {
+          "shape": "__integer",
+          "locationName": "inputPort",
+          "documentation": "The port that the flow listens on for an incoming media stream."
+        },
+        "Interface": {
+          "shape": "Interface",
+          "locationName": "interface",
+          "documentation": "The VPC interface where the media stream comes in from."
+        }
+      },
+      "documentation": "The transport parameters that are associated with an incoming media stream.",
+      "required": [
+        "InputPort",
+        "InputIp",
+        "Interface"
+      ]
+    },
+    "InputConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "InputPort": {
+          "shape": "__integer",
+          "locationName": "inputPort",
+          "documentation": "The port that you want the flow to listen on for an incoming media stream."
+        },
+        "Interface": {
+          "shape": "InterfaceRequest",
+          "locationName": "interface",
+          "documentation": "The VPC interface that you want to use for the incoming media stream."
+        }
+      },
+      "documentation": "The transport parameters that you want to associate with an incoming media stream.",
+      "required": [
+        "InputPort",
+        "Interface"
+      ]
+    },
+    "Interface": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the VPC interface."
+        }
+      },
+      "documentation": "The VPC interface that is used for the media stream associated with the source or output.",
+      "required": [
+        "Name"
+      ]
+    },
+    "InterfaceRequest": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "__string",
+          "locationName": "name",
+          "documentation": "The name of the VPC interface."
+        }
+      },
+      "documentation": "The VPC interface that you want to designate where the media stream is coming from or going to.",
+      "required": [
+        "Name"
+      ]
     },
     "KeyType": {
       "type": "string",
@@ -1927,6 +2450,211 @@
       "min": 1,
       "max": 1000
     },
+    "MediaStream": {
+      "type": "structure",
+      "members": {
+        "Attributes": {
+          "shape": "MediaStreamAttributes",
+          "locationName": "attributes",
+          "documentation": "Attributes that are related to the media stream."
+        },
+        "ClockRate": {
+          "shape": "__integer",
+          "locationName": "clockRate",
+          "documentation": "The sample rate for the stream. This value is measured in Hz."
+        },
+        "Description": {
+          "shape": "__string",
+          "locationName": "description",
+          "documentation": "A description that can help you quickly identify what your media stream is used for."
+        },
+        "Fmt": {
+          "shape": "__integer",
+          "locationName": "fmt",
+          "documentation": "The format type number (sometimes referred to as RTP payload type) of the media stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS outputs, you need to provide this value to the receiver."
+        },
+        "MediaStreamId": {
+          "shape": "__integer",
+          "locationName": "mediaStreamId",
+          "documentation": "A unique identifier for the media stream."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "locationName": "mediaStreamName",
+          "documentation": "A name that helps you distinguish one media stream from another."
+        },
+        "MediaStreamType": {
+          "shape": "MediaStreamType",
+          "locationName": "mediaStreamType",
+          "documentation": "The type of media stream."
+        },
+        "VideoFormat": {
+          "shape": "__string",
+          "locationName": "videoFormat",
+          "documentation": "The resolution of the video."
+        }
+      },
+      "documentation": "A single track or stream of media that contains video, audio, or ancillary data. After you add a media stream to a flow, you can associate it with sources and outputs on that flow, as long as they use the CDI protocol or the ST 2110 JPEG XS protocol. Each source or output can consist of one or many media streams.",
+      "required": [
+        "MediaStreamType",
+        "MediaStreamId",
+        "MediaStreamName",
+        "Fmt"
+      ]
+    },
+    "MediaStreamAttributes": {
+      "type": "structure",
+      "members": {
+        "Fmtp": {
+          "shape": "Fmtp",
+          "locationName": "fmtp",
+          "documentation": "A set of parameters that define the media stream."
+        },
+        "Lang": {
+          "shape": "__string",
+          "locationName": "lang",
+          "documentation": "The audio language, in a format that is recognized by the receiver."
+        }
+      },
+      "documentation": "Attributes that are related to the media stream.",
+      "required": [
+        "Fmtp"
+      ]
+    },
+    "MediaStreamAttributesRequest": {
+      "type": "structure",
+      "members": {
+        "Fmtp": {
+          "shape": "FmtpRequest",
+          "locationName": "fmtp",
+          "documentation": "The settings that you want to use to define the media stream."
+        },
+        "Lang": {
+          "shape": "__string",
+          "locationName": "lang",
+          "documentation": "The audio language, in a format that is recognized by the receiver."
+        }
+      },
+      "documentation": "Attributes that are related to the media stream."
+    },
+    "MediaStreamOutputConfiguration": {
+      "type": "structure",
+      "members": {
+        "DestinationConfigurations": {
+          "shape": "__listOfDestinationConfiguration",
+          "locationName": "destinationConfigurations",
+          "documentation": "The transport parameters that are associated with each outbound media stream."
+        },
+        "EncodingName": {
+          "shape": "EncodingName",
+          "locationName": "encodingName",
+          "documentation": "The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv."
+        },
+        "EncodingParameters": {
+          "shape": "EncodingParameters",
+          "locationName": "encodingParameters",
+          "documentation": "Encoding parameters"
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "locationName": "mediaStreamName",
+          "documentation": "The name of the media stream."
+        }
+      },
+      "documentation": "The media stream that is associated with the output, and the parameters for that association.",
+      "required": [
+        "MediaStreamName",
+        "EncodingName"
+      ]
+    },
+    "MediaStreamOutputConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "DestinationConfigurations": {
+          "shape": "__listOfDestinationConfigurationRequest",
+          "locationName": "destinationConfigurations",
+          "documentation": "The transport parameters that you want to associate with the media stream."
+        },
+        "EncodingName": {
+          "shape": "EncodingName",
+          "locationName": "encodingName",
+          "documentation": "The format that will be used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv."
+        },
+        "EncodingParameters": {
+          "shape": "EncodingParametersRequest",
+          "locationName": "encodingParameters",
+          "documentation": "A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "locationName": "mediaStreamName",
+          "documentation": "The name of the media stream that is associated with the output."
+        }
+      },
+      "documentation": "The media stream that you want to associate with the output, and the parameters for that association.",
+      "required": [
+        "MediaStreamName",
+        "EncodingName"
+      ]
+    },
+    "MediaStreamSourceConfiguration": {
+      "type": "structure",
+      "members": {
+        "EncodingName": {
+          "shape": "EncodingName",
+          "locationName": "encodingName",
+          "documentation": "The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv."
+        },
+        "InputConfigurations": {
+          "shape": "__listOfInputConfiguration",
+          "locationName": "inputConfigurations",
+          "documentation": "The transport parameters that are associated with an incoming media stream."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "locationName": "mediaStreamName",
+          "documentation": "The name of the media stream."
+        }
+      },
+      "documentation": "The media stream that is associated with the source, and the parameters for that association.",
+      "required": [
+        "MediaStreamName",
+        "EncodingName"
+      ]
+    },
+    "MediaStreamSourceConfigurationRequest": {
+      "type": "structure",
+      "members": {
+        "EncodingName": {
+          "shape": "EncodingName",
+          "locationName": "encodingName",
+          "documentation": "The format you want to use to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv."
+        },
+        "InputConfigurations": {
+          "shape": "__listOfInputConfigurationRequest",
+          "locationName": "inputConfigurations",
+          "documentation": "The transport parameters that you want to associate with the media stream."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "locationName": "mediaStreamName",
+          "documentation": "The name of the media stream."
+        }
+      },
+      "documentation": "The definition of a media stream that you want to associate with the source.",
+      "required": [
+        "MediaStreamName",
+        "EncodingName"
+      ]
+    },
+    "MediaStreamType": {
+      "type": "string",
+      "enum": [
+        "video",
+        "audio",
+        "ancillary-data"
+      ]
+    },
     "Messages": {
       "type": "structure",
       "members": {
@@ -1939,6 +2667,13 @@
       "documentation": "Messages that provide the state of the flow.",
       "required": [
         "Errors"
+      ]
+    },
+    "NetworkInterfaceType": {
+      "type": "string",
+      "enum": [
+        "ena",
+        "efa"
       ]
     },
     "Offering": {
@@ -2025,10 +2760,20 @@
           "locationName": "entitlementArn",
           "documentation": "The ARN of the entitlement on the originator''s flow. This value is relevant only on entitled flows."
         },
+        "ListenerAddress": {
+          "shape": "__string",
+          "locationName": "listenerAddress",
+          "documentation": "The IP address that the receiver requires in order to establish a connection with the flow. For public networking, the ListenerAddress is represented by the elastic IP address of the flow. For private networking, the ListenerAddress is represented by the elastic network interface IP address of the VPC. This field applies only to outputs that use the Zixi pull or SRT listener protocol."
+        },
         "MediaLiveInputArn": {
           "shape": "__string",
           "locationName": "mediaLiveInputArn",
           "documentation": "The input ARN of the AWS Elemental MediaLive channel. This parameter is relevant only for outputs that were added by creating a MediaLive input."
+        },
+        "MediaStreamOutputConfigurations": {
+          "shape": "__listOfMediaStreamOutputConfiguration",
+          "locationName": "mediaStreamOutputConfigurations",
+          "documentation": "The configuration for each media stream that is associated with the output."
         },
         "Name": {
           "shape": "__string",
@@ -2076,6 +2821,8 @@
         "rtp",
         "zixi-pull",
         "rist",
+        "st2110-jpegxs",
+        "cdi",
         "srt-listener"
       ]
     },
@@ -2112,6 +2859,51 @@
         "Reservation": {
           "shape": "Reservation",
           "locationName": "reservation"
+        }
+      }
+    },
+    "Range": {
+      "type": "string",
+      "enum": [
+        "NARROW",
+        "FULL",
+        "FULLPROTECT"
+      ]
+    },
+    "RemoveFlowMediaStreamRequest": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
+          "location": "uri",
+          "locationName": "flowArn",
+          "documentation": "The Amazon Resource Name (ARN) of the flow."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "mediaStreamName",
+          "documentation": "The name of the media stream that you want to remove."
+        }
+      },
+      "required": [
+        "FlowArn",
+        "MediaStreamName"
+      ]
+    },
+    "RemoveFlowMediaStreamResponse": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "locationName": "flowArn",
+          "documentation": "The Amazon Resource Name (ARN) of the flow."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "locationName": "mediaStreamName",
+          "documentation": "The name of the media stream that was removed."
         }
       }
     },
@@ -2384,6 +3176,14 @@
         }
       }
     },
+    "ScanMode": {
+      "type": "string",
+      "enum": [
+        "progressive",
+        "interlace",
+        "progressive-segmented-frame"
+      ]
+    },
     "SetSourceRequest": {
       "type": "structure",
       "members": {
@@ -2416,6 +3216,16 @@
           "shape": "__integer",
           "locationName": "maxLatency",
           "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
+        },
+        "MaxSyncBuffer": {
+          "shape": "__integer",
+          "locationName": "maxSyncBuffer",
+          "documentation": "The size of the buffer (in milliseconds) to use to sync incoming source data."
+        },
+        "MediaStreamSourceConfigurations": {
+          "shape": "__listOfMediaStreamSourceConfigurationRequest",
+          "locationName": "mediaStreamSourceConfigurations",
+          "documentation": "The media streams that are associated with the source, and the parameters for those associations."
         },
         "MinLatency": {
           "shape": "__integer",
@@ -2483,6 +3293,11 @@
           "locationName": "ingestPort",
           "documentation": "The port that the flow will be listening on for incoming content."
         },
+        "MediaStreamSourceConfigurations": {
+          "shape": "__listOfMediaStreamSourceConfiguration",
+          "locationName": "mediaStreamSourceConfigurations",
+          "documentation": "The media streams that are associated with the source, and the parameters for those associations."
+        },
         "Name": {
           "shape": "__string",
           "locationName": "name",
@@ -2501,7 +3316,7 @@
         "VpcInterfaceName": {
           "shape": "__string",
           "locationName": "vpcInterfaceName",
-          "documentation": "The name of the VPC Interface this Source is configured with."
+          "documentation": "The name of the VPC interface that is used for this source."
         },
         "WhitelistCidr": {
           "shape": "__string",
@@ -2514,6 +3329,17 @@
         "SourceArn",
         "Name"
       ]
+    },
+    "SourcePriority": {
+      "type": "structure",
+      "members": {
+        "PrimarySource": {
+          "shape": "__string",
+          "locationName": "primarySource",
+          "documentation": "The name of the source you choose as the primary source for this flow."
+        }
+      },
+      "documentation": "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams."
     },
     "SourceType": {
       "type": "string",
@@ -2620,6 +3446,20 @@
         "Tags"
       ]
     },
+    "Tcs": {
+      "type": "string",
+      "enum": [
+        "SDR",
+        "PQ",
+        "HLG",
+        "LINEAR",
+        "BT2100LINPQ",
+        "BT2100LINHLG",
+        "ST2065-1",
+        "ST428-1",
+        "DENSITY"
+      ]
+    },
     "Transport": {
       "type": "structure",
       "members": {
@@ -2637,6 +3477,11 @@
           "shape": "__integer",
           "locationName": "maxLatency",
           "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
+        },
+        "MaxSyncBuffer": {
+          "shape": "__integer",
+          "locationName": "maxSyncBuffer",
+          "documentation": "The size of the buffer (in milliseconds) to use to sync incoming source data."
         },
         "MinLatency": {
           "shape": "__integer",
@@ -2744,10 +3589,20 @@
     "UpdateFailoverConfig": {
       "type": "structure",
       "members": {
+        "FailoverMode": {
+          "shape": "FailoverMode",
+          "locationName": "failoverMode",
+          "documentation": "The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams."
+        },
         "RecoveryWindow": {
           "shape": "__integer",
           "locationName": "recoveryWindow",
           "documentation": "Recovery window time to look for dash-7 packets"
+        },
+        "SourcePriority": {
+          "shape": "SourcePriority",
+          "locationName": "sourcePriority",
+          "documentation": "The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams."
         },
         "State": {
           "shape": "State",
@@ -2813,6 +3668,69 @@
         }
       }
     },
+    "UpdateFlowMediaStreamRequest": {
+      "type": "structure",
+      "members": {
+        "Attributes": {
+          "shape": "MediaStreamAttributesRequest",
+          "locationName": "attributes",
+          "documentation": "The attributes that you want to assign to the media stream."
+        },
+        "ClockRate": {
+          "shape": "__integer",
+          "locationName": "clockRate",
+          "documentation": "The sample rate (in Hz) for the stream. If the media stream type is video or ancillary data, set this value to 90000. If the media stream type is audio, set this value to either 48000 or 96000."
+        },
+        "Description": {
+          "shape": "__string",
+          "locationName": "description",
+          "documentation": "Description"
+        },
+        "FlowArn": {
+          "shape": "__string",
+          "pattern": "^arn:.+:mediaconnect.+:flow:.+$",
+          "location": "uri",
+          "locationName": "flowArn",
+          "documentation": "The Amazon Resource Name (ARN) of the flow."
+        },
+        "MediaStreamName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "mediaStreamName",
+          "documentation": "The name of the media stream that you want to update."
+        },
+        "MediaStreamType": {
+          "shape": "MediaStreamType",
+          "locationName": "mediaStreamType",
+          "documentation": "The type of media stream."
+        },
+        "VideoFormat": {
+          "shape": "__string",
+          "locationName": "videoFormat",
+          "documentation": "The resolution of the video."
+        }
+      },
+      "documentation": "The fields that you want to update in the media stream.",
+      "required": [
+        "FlowArn",
+        "MediaStreamName"
+      ]
+    },
+    "UpdateFlowMediaStreamResponse": {
+      "type": "structure",
+      "members": {
+        "FlowArn": {
+          "shape": "__string",
+          "locationName": "flowArn",
+          "documentation": "The ARN of the flow that is associated with the media stream that you updated."
+        },
+        "MediaStream": {
+          "shape": "MediaStream",
+          "locationName": "mediaStream",
+          "documentation": "The media stream that you updated."
+        }
+      }
+    },
     "UpdateFlowOutputRequest": {
       "type": "structure",
       "members": {
@@ -2846,6 +3764,11 @@
           "shape": "__integer",
           "locationName": "maxLatency",
           "documentation": "The maximum latency in milliseconds for Zixi-based streams."
+        },
+        "MediaStreamOutputConfigurations": {
+          "shape": "__listOfMediaStreamOutputConfigurationRequest",
+          "locationName": "mediaStreamOutputConfigurations",
+          "documentation": "The media streams that are associated with the output, and the parameters for those associations."
         },
         "MinLatency": {
           "shape": "__integer",
@@ -2977,6 +3900,16 @@
           "locationName": "maxLatency",
           "documentation": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams."
         },
+        "MaxSyncBuffer": {
+          "shape": "__integer",
+          "locationName": "maxSyncBuffer",
+          "documentation": "The size of the buffer (in milliseconds) to use to sync incoming source data."
+        },
+        "MediaStreamSourceConfigurations": {
+          "shape": "__listOfMediaStreamSourceConfigurationRequest",
+          "locationName": "mediaStreamSourceConfigurations",
+          "documentation": "The media streams that are associated with the source, and the parameters for those associations."
+        },
         "MinLatency": {
           "shape": "__integer",
           "locationName": "minLatency",
@@ -3001,7 +3934,7 @@
         "VpcInterfaceName": {
           "shape": "__string",
           "locationName": "vpcInterfaceName",
-          "documentation": "The name of the VPC Interface to configure this Source with."
+          "documentation": "The name of the VPC interface to use for this source."
         },
         "WhitelistCidr": {
           "shape": "__string",
@@ -3043,6 +3976,11 @@
           "locationName": "networkInterfaceIds",
           "documentation": "IDs of the network interfaces created in customer's account by MediaConnect."
         },
+        "NetworkInterfaceType": {
+          "shape": "NetworkInterfaceType",
+          "locationName": "networkInterfaceType",
+          "documentation": "The type of network interface."
+        },
         "RoleArn": {
           "shape": "__string",
           "locationName": "roleArn",
@@ -3061,6 +3999,7 @@
       },
       "documentation": "The settings for a VPC Source.",
       "required": [
+        "NetworkInterfaceType",
         "NetworkInterfaceIds",
         "SubnetId",
         "SecurityGroupIds",
@@ -3087,6 +4026,11 @@
           "locationName": "name",
           "documentation": "The name of the VPC Interface. This value must be unique within the current flow."
         },
+        "NetworkInterfaceType": {
+          "shape": "NetworkInterfaceType",
+          "locationName": "networkInterfaceType",
+          "documentation": "The type of network interface. If this value is not included in the request, MediaConnect uses ENA as the networkInterfaceType."
+        },
         "RoleArn": {
           "shape": "__string",
           "locationName": "roleArn",
@@ -3111,13 +4055,34 @@
         "Name"
       ]
     },
+    "__double": {
+      "type": "double"
+    },
     "__integer": {
       "type": "integer"
+    },
+    "__listOfAddMediaStreamRequest": {
+      "type": "list",
+      "member": {
+        "shape": "AddMediaStreamRequest"
+      }
     },
     "__listOfAddOutputRequest": {
       "type": "list",
       "member": {
         "shape": "AddOutputRequest"
+      }
+    },
+    "__listOfDestinationConfiguration": {
+      "type": "list",
+      "member": {
+        "shape": "DestinationConfiguration"
+      }
+    },
+    "__listOfDestinationConfigurationRequest": {
+      "type": "list",
+      "member": {
+        "shape": "DestinationConfigurationRequest"
       }
     },
     "__listOfEntitlement": {
@@ -3132,6 +4097,18 @@
         "shape": "GrantEntitlementRequest"
       }
     },
+    "__listOfInputConfiguration": {
+      "type": "list",
+      "member": {
+        "shape": "InputConfiguration"
+      }
+    },
+    "__listOfInputConfigurationRequest": {
+      "type": "list",
+      "member": {
+        "shape": "InputConfigurationRequest"
+      }
+    },
     "__listOfListedEntitlement": {
       "type": "list",
       "member": {
@@ -3142,6 +4119,36 @@
       "type": "list",
       "member": {
         "shape": "ListedFlow"
+      }
+    },
+    "__listOfMediaStream": {
+      "type": "list",
+      "member": {
+        "shape": "MediaStream"
+      }
+    },
+    "__listOfMediaStreamOutputConfiguration": {
+      "type": "list",
+      "member": {
+        "shape": "MediaStreamOutputConfiguration"
+      }
+    },
+    "__listOfMediaStreamOutputConfigurationRequest": {
+      "type": "list",
+      "member": {
+        "shape": "MediaStreamOutputConfigurationRequest"
+      }
+    },
+    "__listOfMediaStreamSourceConfiguration": {
+      "type": "list",
+      "member": {
+        "shape": "MediaStreamSourceConfiguration"
+      }
+    },
+    "__listOfMediaStreamSourceConfigurationRequest": {
+      "type": "list",
+      "member": {
+        "shape": "MediaStreamSourceConfigurationRequest"
       }
     },
     "__listOfOffering": {

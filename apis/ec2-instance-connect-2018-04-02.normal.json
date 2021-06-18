@@ -42,7 +42,50 @@
           "shape": "EC2InstanceNotFoundException"
         }
       ],
-      "documentation": "<p>Pushes an SSH public key to a particular OS user on a given EC2 instance for 60 seconds.</p>"
+      "documentation": "<p>Pushes an SSH public key to the specified EC2 instance for use by the specified user. The key remains for 60 seconds. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Connect-using-EC2-Instance-Connect.html\">Connect to your Linux instance using EC2 Instance Connect</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+    },
+    "SendSerialConsoleSSHPublicKey": {
+      "name": "SendSerialConsoleSSHPublicKey",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "SendSerialConsoleSSHPublicKeyRequest"
+      },
+      "output": {
+        "shape": "SendSerialConsoleSSHPublicKeyResponse"
+      },
+      "errors": [
+        {
+          "shape": "AuthException"
+        },
+        {
+          "shape": "SerialConsoleAccessDisabledException"
+        },
+        {
+          "shape": "InvalidArgsException"
+        },
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "EC2InstanceNotFoundException"
+        },
+        {
+          "shape": "EC2InstanceTypeInvalidException"
+        },
+        {
+          "shape": "SerialConsoleSessionLimitExceededException"
+        },
+        {
+          "shape": "SerialConsoleSessionUnavailableException"
+        }
+      ],
+      "documentation": "<p>Pushes an SSH public key to the specified EC2 instance. The key remains for 60 seconds, which gives you 60 seconds to establish a serial console connection to the instance using SSH. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-serial-console.html\">EC2 Serial Console</a> in the <i>Amazon EC2 User Guide</i>.</p>"
     }
   },
   "shapes": {
@@ -83,19 +126,19 @@
       "members": {
         "InstanceId": {
           "shape": "InstanceId",
-          "documentation": "<p>The EC2 instance you wish to publish the SSH key to.</p>"
+          "documentation": "<p>The ID of the EC2 instance.</p>"
         },
         "InstanceOSUser": {
           "shape": "InstanceOSUser",
-          "documentation": "<p>The OS user on the EC2 instance whom the key may be used to authenticate as.</p>"
+          "documentation": "<p>The OS user on the EC2 instance for whom the key can be used to authenticate.</p>"
         },
         "SSHPublicKey": {
           "shape": "SSHPublicKey",
-          "documentation": "<p>The public key to be published to the instance. To use it after publication you must have the matching private key.</p>"
+          "documentation": "<p>The public key material. To use the public key, you must have the matching private key.</p>"
         },
         "AvailabilityZone": {
           "shape": "AvailabilityZone",
-          "documentation": "<p>The availability zone the EC2 instance was launched in.</p>"
+          "documentation": "<p>The Availability Zone in which the EC2 instance was launched.</p>"
         }
       }
     },
@@ -104,17 +147,56 @@
       "members": {
         "RequestId": {
           "shape": "RequestId",
-          "documentation": "<p>The request ID as logged by EC2 Connect. Please provide this when contacting AWS Support.</p>"
+          "documentation": "<p>The ID of the request. Please provide this ID when contacting AWS Support for assistance.</p>"
         },
         "Success": {
           "shape": "Success",
-          "documentation": "<p>Indicates request success.</p>"
+          "documentation": "<p>Is true if the request succeeds and an error otherwise.</p>"
         }
       }
+    },
+    "SendSerialConsoleSSHPublicKeyRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "SSHPublicKey"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The ID of the EC2 instance.</p>"
+        },
+        "SerialPort": {
+          "shape": "SerialPort",
+          "documentation": "<p>The serial port of the EC2 instance. Currently only port 0 is supported.</p> <p>Default: 0</p>"
+        },
+        "SSHPublicKey": {
+          "shape": "SSHPublicKey",
+          "documentation": "<p>The public key material. To use the public key, you must have the matching private key. For information about the supported key formats and lengths, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws\">Requirements for key pairs</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+        }
+      }
+    },
+    "SendSerialConsoleSSHPublicKeyResponse": {
+      "type": "structure",
+      "members": {
+        "RequestId": {
+          "shape": "RequestId",
+          "documentation": "<p>The ID of the request. Please provide this ID when contacting AWS Support for assistance.</p>"
+        },
+        "Success": {
+          "shape": "Success",
+          "documentation": "<p>Is true if the request succeeds and an error otherwise.</p>"
+        }
+      }
+    },
+    "SerialPort": {
+      "type": "integer",
+      "max": 0,
+      "min": 0
     },
     "Success": {
       "type": "boolean"
     }
   },
-  "documentation": "<p>AWS EC2 Connect Service is a service that enables system administrators to publish temporary SSH keys to their EC2 instances in order to establish connections to their instances without leaving a permanent authentication option.</p>"
+  "documentation": "<p>Amazon EC2 Instance Connect enables system administrators to publish one-time use SSH public keys to EC2, providing users a simple and secure way to connect to their instances.</p>"
 }

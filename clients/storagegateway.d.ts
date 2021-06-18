@@ -36,11 +36,11 @@ declare class StorageGateway extends Service {
    */
   addTagsToResource(callback?: (err: AWSError, data: StorageGateway.Types.AddTagsToResourceOutput) => void): Request<StorageGateway.Types.AddTagsToResourceOutput, AWSError>;
   /**
-   * Configures one or more gateway local disks as upload buffer for a specified gateway. This operation is supported for the stored volume, cached volume and tape gateway types. In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add upload buffer, and one or more disk IDs that you want to configure as upload buffer.
+   * Configures one or more gateway local disks as upload buffer for a specified gateway. This operation is supported for the stored volume, cached volume, and tape gateway types. In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add upload buffer, and one or more disk IDs that you want to configure as upload buffer.
    */
   addUploadBuffer(params: StorageGateway.Types.AddUploadBufferInput, callback?: (err: AWSError, data: StorageGateway.Types.AddUploadBufferOutput) => void): Request<StorageGateway.Types.AddUploadBufferOutput, AWSError>;
   /**
-   * Configures one or more gateway local disks as upload buffer for a specified gateway. This operation is supported for the stored volume, cached volume and tape gateway types. In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add upload buffer, and one or more disk IDs that you want to configure as upload buffer.
+   * Configures one or more gateway local disks as upload buffer for a specified gateway. This operation is supported for the stored volume, cached volume, and tape gateway types. In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add upload buffer, and one or more disk IDs that you want to configure as upload buffer.
    */
   addUploadBuffer(callback?: (err: AWSError, data: StorageGateway.Types.AddUploadBufferOutput) => void): Request<StorageGateway.Types.AddUploadBufferOutput, AWSError>;
   /**
@@ -59,6 +59,14 @@ declare class StorageGateway extends Service {
    * Assigns a tape to a tape pool for archiving. The tape assigned to a pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the S3 storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool. Valid Values: GLACIER | DEEP_ARCHIVE 
    */
   assignTapePool(callback?: (err: AWSError, data: StorageGateway.Types.AssignTapePoolOutput) => void): Request<StorageGateway.Types.AssignTapePoolOutput, AWSError>;
+  /**
+   * Associate an Amazon FSx file system with the Amazon FSx file gateway. After the association process is complete, the file shares on the Amazon FSx file system are available for access through the gateway. This operation only supports the Amazon FSx file gateway type.
+   */
+  associateFileSystem(params: StorageGateway.Types.AssociateFileSystemInput, callback?: (err: AWSError, data: StorageGateway.Types.AssociateFileSystemOutput) => void): Request<StorageGateway.Types.AssociateFileSystemOutput, AWSError>;
+  /**
+   * Associate an Amazon FSx file system with the Amazon FSx file gateway. After the association process is complete, the file shares on the Amazon FSx file system are available for access through the gateway. This operation only supports the Amazon FSx file gateway type.
+   */
+  associateFileSystem(callback?: (err: AWSError, data: StorageGateway.Types.AssociateFileSystemOutput) => void): Request<StorageGateway.Types.AssociateFileSystemOutput, AWSError>;
   /**
    * Connects a volume to an iSCSI connection and then attaches the volume to the specified gateway. Detaching and attaching a volume enables you to recover your data from one gateway to a different gateway without creating a snapshot. It also makes it easier to move your volumes from an on-premises gateway to a gateway hosted on an Amazon EC2 instance.
    */
@@ -108,11 +116,11 @@ declare class StorageGateway extends Service {
    */
   createSMBFileShare(callback?: (err: AWSError, data: StorageGateway.Types.CreateSMBFileShareOutput) => void): Request<StorageGateway.Types.CreateSMBFileShareOutput, AWSError>;
   /**
-   * Initiates a snapshot of a volume. AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take an ad hoc snapshot. For more information, see Editing a snapshot schedule. In the CreateSnapshot request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the Amazon Elastic Compute Cloud API Reference.   Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the Welcome page. 
+   * Initiates a snapshot of a volume. AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, and also import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take an ad hoc snapshot. For more information, see Editing a snapshot schedule. In the CreateSnapshot request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the Amazon Elastic Compute Cloud API Reference.   Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the Welcome page. 
    */
   createSnapshot(params: StorageGateway.Types.CreateSnapshotInput, callback?: (err: AWSError, data: StorageGateway.Types.CreateSnapshotOutput) => void): Request<StorageGateway.Types.CreateSnapshotOutput, AWSError>;
   /**
-   * Initiates a snapshot of a volume. AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take an ad hoc snapshot. For more information, see Editing a snapshot schedule. In the CreateSnapshot request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the Amazon Elastic Compute Cloud API Reference.   Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the Welcome page. 
+   * Initiates a snapshot of a volume. AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, and also import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take an ad hoc snapshot. For more information, see Editing a snapshot schedule. In the CreateSnapshot request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.  To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see DescribeSnapshots or DeleteSnapshot in the Amazon Elastic Compute Cloud API Reference.   Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the Welcome page. 
    */
   createSnapshot(callback?: (err: AWSError, data: StorageGateway.Types.CreateSnapshotOutput) => void): Request<StorageGateway.Types.CreateSnapshotOutput, AWSError>;
   /**
@@ -236,11 +244,11 @@ declare class StorageGateway extends Service {
    */
   deleteVolume(callback?: (err: AWSError, data: StorageGateway.Types.DeleteVolumeOutput) => void): Request<StorageGateway.Types.DeleteVolumeOutput, AWSError>;
   /**
-   * Returns information about the most recent High Availability monitoring test that was performed on the host in a cluster. If a test isn't performed, the status and start time in the response would be null.
+   * Returns information about the most recent high availability monitoring test that was performed on the host in a cluster. If a test isn't performed, the status and start time in the response would be null.
    */
   describeAvailabilityMonitorTest(params: StorageGateway.Types.DescribeAvailabilityMonitorTestInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeAvailabilityMonitorTestOutput) => void): Request<StorageGateway.Types.DescribeAvailabilityMonitorTestOutput, AWSError>;
   /**
-   * Returns information about the most recent High Availability monitoring test that was performed on the host in a cluster. If a test isn't performed, the status and start time in the response would be null.
+   * Returns information about the most recent high availability monitoring test that was performed on the host in a cluster. If a test isn't performed, the status and start time in the response would be null.
    */
   describeAvailabilityMonitorTest(callback?: (err: AWSError, data: StorageGateway.Types.DescribeAvailabilityMonitorTestOutput) => void): Request<StorageGateway.Types.DescribeAvailabilityMonitorTestOutput, AWSError>;
   /**
@@ -283,6 +291,14 @@ declare class StorageGateway extends Service {
    * Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI target, one for each target-initiator pair. This operation is supported in the volume and tape gateway types.
    */
   describeChapCredentials(callback?: (err: AWSError, data: StorageGateway.Types.DescribeChapCredentialsOutput) => void): Request<StorageGateway.Types.DescribeChapCredentialsOutput, AWSError>;
+  /**
+   * Gets the file system association information. This operation is only supported for Amazon FSx file gateways.
+   */
+  describeFileSystemAssociations(params: StorageGateway.Types.DescribeFileSystemAssociationsInput, callback?: (err: AWSError, data: StorageGateway.Types.DescribeFileSystemAssociationsOutput) => void): Request<StorageGateway.Types.DescribeFileSystemAssociationsOutput, AWSError>;
+  /**
+   * Gets the file system association information. This operation is only supported for Amazon FSx file gateways.
+   */
+  describeFileSystemAssociations(callback?: (err: AWSError, data: StorageGateway.Types.DescribeFileSystemAssociationsOutput) => void): Request<StorageGateway.Types.DescribeFileSystemAssociationsOutput, AWSError>;
   /**
    * Returns metadata about a gateway such as its name, network interfaces, configured time zone, and the state (whether the gateway is running or not). To specify which gateway to describe, use the Amazon Resource Name (ARN) of the gateway in your request.
    */
@@ -404,6 +420,14 @@ declare class StorageGateway extends Service {
    */
   disableGateway(callback?: (err: AWSError, data: StorageGateway.Types.DisableGatewayOutput) => void): Request<StorageGateway.Types.DisableGatewayOutput, AWSError>;
   /**
+   * Disassociates an Amazon FSx file system from the specified gateway. After the disassociation process finishes, the gateway can no longer access the Amazon FSx file system. This operation is only supported in the Amazon FSx file gateway type.
+   */
+  disassociateFileSystem(params: StorageGateway.Types.DisassociateFileSystemInput, callback?: (err: AWSError, data: StorageGateway.Types.DisassociateFileSystemOutput) => void): Request<StorageGateway.Types.DisassociateFileSystemOutput, AWSError>;
+  /**
+   * Disassociates an Amazon FSx file system from the specified gateway. After the disassociation process finishes, the gateway can no longer access the Amazon FSx file system. This operation is only supported in the Amazon FSx file gateway type.
+   */
+  disassociateFileSystem(callback?: (err: AWSError, data: StorageGateway.Types.DisassociateFileSystemOutput) => void): Request<StorageGateway.Types.DisassociateFileSystemOutput, AWSError>;
+  /**
    * Adds a file gateway to an Active Directory domain. This operation is only supported for file gateways that support the SMB file protocol.
    */
   joinDomain(params: StorageGateway.Types.JoinDomainInput, callback?: (err: AWSError, data: StorageGateway.Types.JoinDomainOutput) => void): Request<StorageGateway.Types.JoinDomainOutput, AWSError>;
@@ -427,6 +451,14 @@ declare class StorageGateway extends Service {
    * Gets a list of the file shares for a specific file gateway, or the list of file shares that belong to the calling user account. This operation is only supported for file gateways.
    */
   listFileShares(callback?: (err: AWSError, data: StorageGateway.Types.ListFileSharesOutput) => void): Request<StorageGateway.Types.ListFileSharesOutput, AWSError>;
+  /**
+   * Gets a list of FileSystemAssociationSummary objects. Each object contains a summary of a file system association. This operation is only supported for Amazon FSx file gateways.
+   */
+  listFileSystemAssociations(params: StorageGateway.Types.ListFileSystemAssociationsInput, callback?: (err: AWSError, data: StorageGateway.Types.ListFileSystemAssociationsOutput) => void): Request<StorageGateway.Types.ListFileSystemAssociationsOutput, AWSError>;
+  /**
+   * Gets a list of FileSystemAssociationSummary objects. Each object contains a summary of a file system association. This operation is only supported for Amazon FSx file gateways.
+   */
+  listFileSystemAssociations(callback?: (err: AWSError, data: StorageGateway.Types.ListFileSystemAssociationsOutput) => void): Request<StorageGateway.Types.ListFileSystemAssociationsOutput, AWSError>;
   /**
    * Lists gateways owned by an AWS account in an AWS Region specified in the request. The returned list is ordered by gateway Amazon Resource Name (ARN). By default, the operation returns a maximum of 100 gateways. This operation supports pagination that allows you to optionally reduce the number of gateways returned in a response. If you have more gateways than are returned in a response (that is, the response returns only a truncated list of your gateways), the response contains a marker that you can specify in your next request to fetch the next page of gateways.
    */
@@ -500,11 +532,11 @@ declare class StorageGateway extends Service {
    */
   notifyWhenUploaded(callback?: (err: AWSError, data: StorageGateway.Types.NotifyWhenUploadedOutput) => void): Request<StorageGateway.Types.NotifyWhenUploadedOutput, AWSError>;
   /**
-   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your RefreshCache operation completes. Throttle limit: This API is asynchronous so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an InvalidGatewayRequestException error because too many requests were sent to the server. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide.
+   * Refreshes the cached inventory of objects for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket's contents and cached the results. This operation does not import files into the file gateway cache storage. It only updates the cached inventory to reflect changes in the inventory of the objects in the S3 bucket. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through a CloudWatch event when your RefreshCache operation completes. Throttle limit: This API is asynchronous, so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an InvalidGatewayRequestException error because too many requests were sent to the server. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide.
    */
   refreshCache(params: StorageGateway.Types.RefreshCacheInput, callback?: (err: AWSError, data: StorageGateway.Types.RefreshCacheOutput) => void): Request<StorageGateway.Types.RefreshCacheOutput, AWSError>;
   /**
-   * Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your RefreshCache operation completes. Throttle limit: This API is asynchronous so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an InvalidGatewayRequestException error because too many requests were sent to the server. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide.
+   * Refreshes the cached inventory of objects for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket's contents and cached the results. This operation does not import files into the file gateway cache storage. It only updates the cached inventory to reflect changes in the inventory of the objects in the S3 bucket. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through a CloudWatch event when your RefreshCache operation completes. Throttle limit: This API is asynchronous, so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide. If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an InvalidGatewayRequestException error because too many requests were sent to the server. For more information, see Getting notified about file operations in the AWS Storage Gateway User Guide.
    */
   refreshCache(callback?: (err: AWSError, data: StorageGateway.Types.RefreshCacheOutput) => void): Request<StorageGateway.Types.RefreshCacheOutput, AWSError>;
   /**
@@ -611,6 +643,14 @@ declare class StorageGateway extends Service {
    * Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target. By default, a gateway does not have CHAP enabled; however, for added security, you might use it. This operation is supported in the volume and tape gateway types.  When you update CHAP credentials, all existing connections on the target are closed and initiators must reconnect with the new credentials. 
    */
   updateChapCredentials(callback?: (err: AWSError, data: StorageGateway.Types.UpdateChapCredentialsOutput) => void): Request<StorageGateway.Types.UpdateChapCredentialsOutput, AWSError>;
+  /**
+   * Updates a file system association. This operation is only supported in the Amazon FSx file gateway type.
+   */
+  updateFileSystemAssociation(params: StorageGateway.Types.UpdateFileSystemAssociationInput, callback?: (err: AWSError, data: StorageGateway.Types.UpdateFileSystemAssociationOutput) => void): Request<StorageGateway.Types.UpdateFileSystemAssociationOutput, AWSError>;
+  /**
+   * Updates a file system association. This operation is only supported in the Amazon FSx file gateway type.
+   */
+  updateFileSystemAssociation(callback?: (err: AWSError, data: StorageGateway.Types.UpdateFileSystemAssociationOutput) => void): Request<StorageGateway.Types.UpdateFileSystemAssociationOutput, AWSError>;
   /**
    * Updates a gateway's metadata, which includes the gateway's name and time zone. To specify which gateway to update, use the Amazon Resource Name (ARN) of the gateway in your request.  For gateways activated after September 2, 2015, the gateway's ARN contains the gateway ID rather than the gateway name. However, changing the name of the gateway has no effect on the gateway's ARN. 
    */
@@ -790,6 +830,40 @@ declare namespace StorageGateway {
      */
     TapeARN?: TapeARN;
   }
+  export interface AssociateFileSystemInput {
+    /**
+     * The user name of the user credential that has permission to access the root share D$ of the Amazon FSx file system. The user account must belong to the Amazon FSx delegated admin user group.
+     */
+    UserName: DomainUserName;
+    /**
+     * The password of the user credential.
+     */
+    Password: DomainUserPassword;
+    /**
+     * A unique string value that you supply that is used by the file gateway to ensure idempotent file system association creation.
+     */
+    ClientToken: ClientToken;
+    GatewayARN: GatewayARN;
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon FSx file system to associate with the Amazon FSx file gateway.
+     */
+    LocationARN: FileSystemLocationARN;
+    /**
+     * A list of up to 50 tags that can be assigned to the file system association. Each tag is a key-value pair.
+     */
+    Tags?: Tags;
+    /**
+     * The Amazon Resource Name (ARN) of the storage used for the audit logs.
+     */
+    AuditDestinationARN?: AuditDestinationARN;
+    CacheAttributes?: CacheAttributes;
+  }
+  export interface AssociateFileSystemOutput {
+    /**
+     * The ARN of the newly created file system association.
+     */
+    FileSystemAssociationARN?: FileSystemAssociationARN;
+  }
   export interface AttachVolumeInput {
     /**
      * The Amazon Resource Name (ARN) of the gateway that you want to attach the volume to.
@@ -875,7 +949,7 @@ declare namespace StorageGateway {
      */
     EndMinuteOfHour: MinuteOfHour;
     /**
-     *  The days of the week component of the bandwidth rate limit interval, represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 Saturday. 
+     *  The days of the week component of the bandwidth rate limit interval, represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents Saturday. 
      */
     DaysOfWeek: DaysOfWeek;
     /**
@@ -893,7 +967,7 @@ declare namespace StorageGateway {
   export type Boolean = boolean;
   export interface CacheAttributes {
     /**
-     * Refreshes a file share's cache by using Time To Live (TTL). TTL is the length of time since the last refresh after which access to the directory would cause the file gateway to first refresh that directory's contents from the Amazon S3 bucket. The TTL duration is in seconds. Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)
+     * Refreshes a file share's cache by using Time To Live (TTL). TTL is the length of time since the last refresh after which access to the directory would cause the file gateway to first refresh that directory's contents from the Amazon S3 bucket or Amazon FSx file system. The TTL duration is in seconds. Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)
      */
     CacheStaleTimeoutInSeconds?: CacheStaleTimeoutInSeconds;
   }
@@ -1114,11 +1188,11 @@ declare namespace StorageGateway {
      */
     FileShareName?: FileShareName;
     /**
-     * Refresh cache information.
+     * Specifies refresh cache information for the file share.
      */
     CacheAttributes?: CacheAttributes;
     /**
-     * The notification policy of the file share.
+     * The notification policy of the file share. SettlingTimeInSeconds controls the number of seconds to wait after the last point in time a client wrote to a file before generating an ObjectUploaded notification. Because clients can make many small writes to files, it's best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.   SettlingTimeInSeconds has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.  The following example sets NotificationPolicy on with SettlingTimeInSeconds set to 60.  {\"Upload\": {\"SettlingTimeInSeconds\": 60}}  The following example sets NotificationPolicy off.  {} 
      */
     NotificationPolicy?: NotificationPolicy;
   }
@@ -1184,17 +1258,17 @@ declare namespace StorageGateway {
     /**
      * A list of users or groups in the Active Directory that will be granted administrator privileges on the file share. These users can do all file operations as the super-user. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1.  Use this option very carefully, because any user in this list can do anything they like on the file share, regardless of file permissions. 
      */
-    AdminUserList?: FileShareUserList;
+    AdminUserList?: UserList;
     /**
      * A list of users or groups in the Active Directory that are allowed to access the file  share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
-    ValidUserList?: FileShareUserList;
+    ValidUserList?: UserList;
     /**
      * A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
-    InvalidUserList?: FileShareUserList;
+    InvalidUserList?: UserList;
     /**
-     * The Amazon Resource Name (ARN) of the storage used for the audit logs.
+     * The Amazon Resource Name (ARN) of the storage used for audit logs.
      */
     AuditDestinationARN?: AuditDestinationARN;
     /**
@@ -1214,11 +1288,11 @@ declare namespace StorageGateway {
      */
     FileShareName?: FileShareName;
     /**
-     * Refresh cache information.
+     * Specifies refresh cache information for the file share.
      */
     CacheAttributes?: CacheAttributes;
     /**
-     * The notification policy of the file share.
+     * The notification policy of the file share. SettlingTimeInSeconds controls the number of seconds to wait after the last point in time a client wrote to a file before generating an ObjectUploaded notification. Because clients can make many small writes to files, it's best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.   SettlingTimeInSeconds has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.  The following example sets NotificationPolicy on with SettlingTimeInSeconds set to 60.  {\"Upload\": {\"SettlingTimeInSeconds\": 60}}  The following example sets NotificationPolicy off.  {} 
      */
     NotificationPolicy?: NotificationPolicy;
   }
@@ -1287,11 +1361,11 @@ declare namespace StorageGateway {
      */
     DiskId: DiskId;
     /**
-     * The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI storage volume from a snapshot; otherwise, do not include this field. To list snapshots for your account use DescribeSnapshots in the Amazon Elastic Compute Cloud API Reference.
+     * The snapshot ID (e.g., "snap-1122aabb") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI storage volume from a snapshot; otherwise, do not include this field. To list snapshots for your account use DescribeSnapshots in the Amazon Elastic Compute Cloud API Reference.
      */
     SnapshotId?: SnapshotId;
     /**
-     * Set to true true if you want to preserve the data on the local disk. Otherwise, set to false to create an empty volume. Valid Values: true | false 
+     * Set to true if you want to preserve the data on the local disk. Otherwise, set to false to create an empty volume. Valid Values: true | false 
      */
     PreserveExistingData: boolean;
     /**
@@ -1415,7 +1489,7 @@ declare namespace StorageGateway {
      */
     NumTapesToCreate: NumTapesToCreate;
     /**
-     * A prefix that you append to the barcode of the virtual tape you are creating. This prefix makes the barcode unique.  The prefix must be 1 to 4 characters in length and must be one of the uppercase letters from A to Z. 
+     * A prefix that you append to the barcode of the virtual tape you are creating. This prefix makes the barcode unique.  The prefix must be 1-4 characters in length and must be one of the uppercase letters from A to Z. 
      */
     TapeBarcodePrefix: TapeBarcodePrefix;
     /**
@@ -1586,11 +1660,11 @@ declare namespace StorageGateway {
   export interface DescribeAvailabilityMonitorTestOutput {
     GatewayARN?: GatewayARN;
     /**
-     * The status of the High Availability monitoring test. If a test hasn't been performed, the value of this field is null.
+     * The status of the high availability monitoring test. If a test hasn't been performed, the value of this field is null.
      */
     Status?: AvailabilityMonitorTestStatus;
     /**
-     * The time the High Availability monitoring test was started. If a test hasn't been performed, the value of this field is null.
+     * The time the high availability monitoring test was started. If a test hasn't been performed, the value of this field is null.
      */
     StartTime?: Time;
   }
@@ -1671,6 +1745,18 @@ declare namespace StorageGateway {
      * An array of ChapInfo objects that represent CHAP credentials. Each object in the array contains CHAP credential information for one target-initiator pair. If no CHAP credentials are set, an empty array is returned. CHAP credential information is provided in a JSON object with the following fields:    InitiatorName: The iSCSI initiator that connects to the target.    SecretToAuthenticateInitiator: The secret key that the initiator (for example, the Windows client) must provide to participate in mutual CHAP with the target.    SecretToAuthenticateTarget: The secret key that the target must provide to participate in mutual CHAP with the initiator (e.g. Windows client).    TargetARN: The Amazon Resource Name (ARN) of the storage volume.  
      */
     ChapCredentials?: ChapCredentials;
+  }
+  export interface DescribeFileSystemAssociationsInput {
+    /**
+     * An array containing the Amazon Resource Name (ARN) of each file system association to be described.
+     */
+    FileSystemAssociationARNList: FileSystemAssociationARNList;
+  }
+  export interface DescribeFileSystemAssociationsOutput {
+    /**
+     * An array containing the FileSystemAssociationInfo data type of each file system association to be described. 
+     */
+    FileSystemAssociationInfoList?: FileSystemAssociationInfoList;
   }
   export interface DescribeGatewayInformationInput {
     GatewayARN: GatewayARN;
@@ -1933,7 +2019,7 @@ declare namespace StorageGateway {
      */
     Tapes?: Tapes;
     /**
-     * An opaque string which can be used as part of a subsequent DescribeTapes call to retrieve the next page of results. If a response does not contain a marker, then there are no more results to be retrieved.
+     * An opaque string that can be used as part of a subsequent DescribeTapes call to retrieve the next page of results. If a response does not contain a marker, then there are no more results to be retrieved.
      */
     Marker?: Marker;
   }
@@ -2044,6 +2130,22 @@ declare namespace StorageGateway {
      */
     GatewayARN?: GatewayARN;
   }
+  export interface DisassociateFileSystemInput {
+    /**
+     * The Amazon Resource Name (ARN) of the file system association to be deleted.
+     */
+    FileSystemAssociationARN: FileSystemAssociationARN;
+    /**
+     * If this value is set to true, the operation disassociates an Amazon FSx file system immediately. It ends all data uploads to the file system, and the file system association enters the FORCE_DELETING status. If this value is set to false, the Amazon FSx file system does not disassociate until all data is uploaded.
+     */
+    ForceDelete?: boolean;
+  }
+  export interface DisassociateFileSystemOutput {
+    /**
+     * The Amazon Resource Name (ARN) of the deleted file system association.
+     */
+    FileSystemAssociationARN?: FileSystemAssociationARN;
+  }
   export interface Disk {
     /**
      * The unique device ID or other distinguishing data that identifies a local disk.
@@ -2100,8 +2202,52 @@ declare namespace StorageGateway {
   export type FileShareName = string;
   export type FileShareStatus = string;
   export type FileShareType = "NFS"|"SMB"|string;
-  export type FileShareUser = string;
-  export type FileShareUserList = FileShareUser[];
+  export type FileSystemAssociationARN = string;
+  export type FileSystemAssociationARNList = FileSystemAssociationARN[];
+  export type FileSystemAssociationId = string;
+  export interface FileSystemAssociationInfo {
+    /**
+     * The Amazon Resource Name (ARN) of the file system association.
+     */
+    FileSystemAssociationARN?: FileSystemAssociationARN;
+    /**
+     * The ARN of the backend Amazon FSx file system used for storing file data. For information, see FileSystem in the Amazon FSx API Reference.
+     */
+    LocationARN?: FileSystemLocationARN;
+    /**
+     * The status of the file system association. Valid Values: AVAILABLE | CREATING | DELETING | FORCE_DELETING | MISCONFIGURED | UPDATING | UNAVAILABLE 
+     */
+    FileSystemAssociationStatus?: FileSystemAssociationStatus;
+    /**
+     * The Amazon Resource Name (ARN) of the storage used for the audit logs.
+     */
+    AuditDestinationARN?: AuditDestinationARN;
+    GatewayARN?: GatewayARN;
+    /**
+     * A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by key name. Each tag is a key-value pair.
+     */
+    Tags?: Tags;
+    CacheAttributes?: CacheAttributes;
+  }
+  export type FileSystemAssociationInfoList = FileSystemAssociationInfo[];
+  export type FileSystemAssociationStatus = string;
+  export interface FileSystemAssociationSummary {
+    /**
+     * The ID of the file system association.
+     */
+    FileSystemAssociationId?: FileSystemAssociationId;
+    /**
+     * The Amazon Resource Name (ARN) of the file system association.
+     */
+    FileSystemAssociationARN?: FileSystemAssociationARN;
+    /**
+     * The status of the file share. Valid Values: AVAILABLE | CREATING | DELETING | FORCE_DELETING | MISCONFIGURED | UPDATING | UNAVAILABLE 
+     */
+    FileSystemAssociationStatus?: FileSystemAssociationStatus;
+    GatewayARN?: GatewayARN;
+  }
+  export type FileSystemAssociationSummaryList = FileSystemAssociationSummary[];
+  export type FileSystemLocationARN = string;
   export type Folder = string;
   export type FolderList = Folder[];
   export type GatewayARN = string;
@@ -2229,6 +2375,31 @@ declare namespace StorageGateway {
      * An array of information about the file gateway's file shares.
      */
     FileShareInfoList?: FileShareInfoList;
+  }
+  export interface ListFileSystemAssociationsInput {
+    GatewayARN?: GatewayARN;
+    /**
+     * The maximum number of file system associations to return in the response. If present, Limit must be an integer with a value greater than zero. Optional.
+     */
+    Limit?: PositiveIntObject;
+    /**
+     * Opaque pagination token returned from a previous ListFileSystemAssociations operation. If present, Marker specifies where to continue the list from after a previous call to ListFileSystemAssociations. Optional.
+     */
+    Marker?: Marker;
+  }
+  export interface ListFileSystemAssociationsOutput {
+    /**
+     * If the request includes Marker, the response returns that value in this field.
+     */
+    Marker?: Marker;
+    /**
+     * If a value is present, there are more file system associations to return. In a subsequent request, use NextMarker as the value for Marker to retrieve the next set of file system associations.
+     */
+    NextMarker?: Marker;
+    /**
+     * An array of information about the Amazon FSx gateway's file system associations.
+     */
+    FileSystemAssociationSummaryList?: FileSystemAssociationSummaryList;
   }
   export interface ListGatewaysInput {
     /**
@@ -2440,11 +2611,11 @@ declare namespace StorageGateway {
      */
     FileShareName?: FileShareName;
     /**
-     * Refresh cache information.
+     * Refresh cache information for the file share.
      */
     CacheAttributes?: CacheAttributes;
     /**
-     * The notification policy of the file share.
+     * The notification policy of the file share. SettlingTimeInSeconds controls the number of seconds to wait after the last point in time a client wrote to a file before generating an ObjectUploaded notification. Because clients can make many small writes to files, it's best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.   SettlingTimeInSeconds has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.  The following example sets NotificationPolicy on with SettlingTimeInSeconds set to 60.  {\"Upload\": {\"SettlingTimeInSeconds\": 60}}  The following example sets NotificationPolicy off.  {} 
      */
     NotificationPolicy?: NotificationPolicy;
   }
@@ -2632,17 +2803,17 @@ declare namespace StorageGateway {
     /**
      * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
-    AdminUserList?: FileShareUserList;
+    AdminUserList?: UserList;
     /**
      * A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
-    ValidUserList?: FileShareUserList;
+    ValidUserList?: UserList;
     /**
      * A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
-    InvalidUserList?: FileShareUserList;
+    InvalidUserList?: UserList;
     /**
-     * The Amazon Resource Name (ARN) of the storage used for the audit logs.
+     * The Amazon Resource Name (ARN) of the storage used for audit logs.
      */
     AuditDestinationARN?: AuditDestinationARN;
     Authentication?: Authentication;
@@ -2659,11 +2830,11 @@ declare namespace StorageGateway {
      */
     FileShareName?: FileShareName;
     /**
-     * Refresh cache information.
+     * Refresh cache information for the file share.
      */
     CacheAttributes?: CacheAttributes;
     /**
-     * The notification policy of the file share.
+     * The notification policy of the file share. SettlingTimeInSeconds controls the number of seconds to wait after the last point in time a client wrote to a file before generating an ObjectUploaded notification. Because clients can make many small writes to files, it's best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.   SettlingTimeInSeconds has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.  The following example sets NotificationPolicy on with SettlingTimeInSeconds set to 60.  {\"Upload\": {\"SettlingTimeInSeconds\": 60}}  The following example sets NotificationPolicy off.  {} 
      */
     NotificationPolicy?: NotificationPolicy;
   }
@@ -3025,6 +3196,31 @@ declare namespace StorageGateway {
      */
     InitiatorName?: IqnName;
   }
+  export interface UpdateFileSystemAssociationInput {
+    /**
+     * The Amazon Resource Name (ARN) of the file system association that you want to update.
+     */
+    FileSystemAssociationARN: FileSystemAssociationARN;
+    /**
+     * The user name of the user credential that has permission to access the root share D$ of the Amazon FSx file system. The user account must belong to the Amazon FSx delegated admin user group.
+     */
+    UserName?: DomainUserName;
+    /**
+     * The password of the user credential.
+     */
+    Password?: DomainUserPassword;
+    /**
+     * The Amazon Resource Name (ARN) of the storage used for the audit logs.
+     */
+    AuditDestinationARN?: AuditDestinationARN;
+    CacheAttributes?: CacheAttributes;
+  }
+  export interface UpdateFileSystemAssociationOutput {
+    /**
+     * The ARN of the updated file system association.
+     */
+    FileSystemAssociationARN?: FileSystemAssociationARN;
+  }
   export interface UpdateGatewayInformationInput {
     GatewayARN: GatewayARN;
     GatewayName?: GatewayName;
@@ -3122,11 +3318,11 @@ declare namespace StorageGateway {
      */
     FileShareName?: FileShareName;
     /**
-     * Refresh cache information.
+     * specifies refresh cache information for the file share.
      */
     CacheAttributes?: CacheAttributes;
     /**
-     * The notification policy of the file share.
+     * The notification policy of the file share. SettlingTimeInSeconds controls the number of seconds to wait after the last point in time a client wrote to a file before generating an ObjectUploaded notification. Because clients can make many small writes to files, it's best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.   SettlingTimeInSeconds has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.  The following example sets NotificationPolicy on with SettlingTimeInSeconds set to 60.  {\"Upload\": {\"SettlingTimeInSeconds\": 60}}  The following example sets NotificationPolicy off.  {} 
      */
     NotificationPolicy?: NotificationPolicy;
   }
@@ -3180,17 +3376,17 @@ declare namespace StorageGateway {
     /**
      * A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
-    AdminUserList?: FileShareUserList;
+    AdminUserList?: UserList;
     /**
      * A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
-    ValidUserList?: FileShareUserList;
+    ValidUserList?: UserList;
     /**
      * A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if Authentication is set to ActiveDirectory.
      */
-    InvalidUserList?: FileShareUserList;
+    InvalidUserList?: UserList;
     /**
-     * The Amazon Resource Name (ARN) of the storage used for the audit logs.
+     * The Amazon Resource Name (ARN) of the storage used for audit logs.
      */
     AuditDestinationARN?: AuditDestinationARN;
     /**
@@ -3202,11 +3398,11 @@ declare namespace StorageGateway {
      */
     FileShareName?: FileShareName;
     /**
-     * Refresh cache information.
+     * Specifies refresh cache information for the file share.
      */
     CacheAttributes?: CacheAttributes;
     /**
-     * The notification policy of the file share.
+     * The notification policy of the file share. SettlingTimeInSeconds controls the number of seconds to wait after the last point in time a client wrote to a file before generating an ObjectUploaded notification. Because clients can make many small writes to files, it's best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.   SettlingTimeInSeconds has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.  The following example sets NotificationPolicy on with SettlingTimeInSeconds set to 60.  {\"Upload\": {\"SettlingTimeInSeconds\": 60}}  The following example sets NotificationPolicy off.  {} 
      */
     NotificationPolicy?: NotificationPolicy;
   }
@@ -3280,6 +3476,8 @@ declare namespace StorageGateway {
      */
     VTLDeviceARN?: VTLDeviceARN;
   }
+  export type UserList = UserListUser[];
+  export type UserListUser = string;
   export interface VTLDevice {
     /**
      * Specifies the unique Amazon Resource Name (ARN) of the device (tape drive or media changer).

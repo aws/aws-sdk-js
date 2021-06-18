@@ -1862,7 +1862,7 @@
       "type": "string",
       "max": 300,
       "min": 1,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[^\\\\]*$"
     },
     "AssessmentReport": {
       "type": "structure",
@@ -2521,7 +2521,7 @@
       "type": "string",
       "max": 300,
       "min": 1,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[^\\\\]*$"
     },
     "ControlResponse": {
       "type": "string",
@@ -2623,6 +2623,9 @@
     },
     "CreateAssessmentFrameworkControlSet": {
       "type": "structure",
+      "required": [
+        "name"
+      ],
       "members": {
         "name": {
           "shape": "ControlSetName",
@@ -3216,7 +3219,7 @@
         },
         "assessmentReportSelection": {
           "shape": "String",
-          "documentation": "<p> Specifies whether the evidence is inclded in the assessment report. </p>"
+          "documentation": "<p> Specifies whether the evidence is included in the assessment report. </p>"
         }
       },
       "documentation": "<p> A record that contains the information needed to demonstrate compliance with the requirements specified by a control. Examples of evidence include change activity triggered by a user, or a system configuration snapshot. </p>"
@@ -3366,7 +3369,7 @@
       "type": "string",
       "max": 300,
       "min": 1,
-      "pattern": "^[\\w\\W\\s\\S]*$"
+      "pattern": "^[^\\\\]*$"
     },
     "FrameworkType": {
       "type": "string",
@@ -3465,6 +3468,9 @@
       "members": {
         "assessment": {
           "shape": "Assessment"
+        },
+        "userRole": {
+          "shape": "Role"
         }
       }
     },
@@ -4295,7 +4301,7 @@
           "documentation": "<p> The Amazon Resource Name (ARN) of the IAM role. </p>"
         }
       },
-      "documentation": "<p> The wrapper that contains AWS Audit Manager role information, such as the role type and IAM Amazon Resource Name (ARN). </p>"
+      "documentation": "<p> The wrapper that contains the AWS Audit Manager role information of the current user, such as the role type and IAM Amazon Resource Name (ARN). </p>"
     },
     "RoleType": {
       "type": "string",
@@ -4428,10 +4434,10 @@
         },
         "keywordValue": {
           "shape": "KeywordValue",
-          "documentation": "<p> The value of the keyword used to search AWS CloudTrail logs when mapping a control data source. </p>"
+          "documentation": "<p> The value of the keyword used to search AWS CloudTrail logs, AWS Config rules, AWS Security Hub checks, and AWS API names when mapping a control data source. </p>"
         }
       },
-      "documentation": "<p> The keyword to search for in AWS CloudTrail logs. </p>"
+      "documentation": "<p> The keyword to search for in AWS CloudTrail logs, AWS Config rules, AWS Security Hub checks, and AWS API names. </p>"
     },
     "SourceName": {
       "type": "string",
@@ -4672,9 +4678,12 @@
     },
     "UpdateAssessmentFrameworkControlSet": {
       "type": "structure",
+      "required": [
+        "name"
+      ],
       "members": {
         "id": {
-          "shape": "UUID",
+          "shape": "ControlSetName",
           "documentation": "<p> The unique identifier for the control set. </p>"
         },
         "name": {

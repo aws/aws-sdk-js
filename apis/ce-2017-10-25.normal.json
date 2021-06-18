@@ -1022,9 +1022,33 @@
         "ProcessingStatus": {
           "shape": "CostCategoryProcessingStatusList",
           "documentation": "<p> The list of processing statuses for Cost Management products for a specific cost category. </p>"
+        },
+        "DefaultValue": {
+          "shape": "CostCategoryValue"
         }
       },
       "documentation": "<p>The structure of Cost Categories. This includes detailed metadata and the set of rules for the <code>CostCategory</code> object.</p>"
+    },
+    "CostCategoryInheritedValueDimension": {
+      "type": "structure",
+      "members": {
+        "DimensionName": {
+          "shape": "CostCategoryInheritedValueDimensionName",
+          "documentation": "<p>The name of dimension for which to group costs.</p> <p>If you specify <code>LINKED_ACCOUNT_NAME</code>, the cost category value will be based on account name. If you specify <code>TAG</code>, the cost category value will be based on the value of the specified tag key.</p>"
+        },
+        "DimensionKey": {
+          "shape": "GenericString",
+          "documentation": "<p>The key to extract cost category values.</p>"
+        }
+      },
+      "documentation": "<p>When creating or updating a cost category, you can define the <code>CostCategoryRule</code> rule type as <code>INHERITED_VALUE</code>. This rule type adds the flexibility of defining a rule that dynamically inherits the cost category value from the dimension value defined by <code>CostCategoryInheritedValueDimension</code>. For example, if you wanted to dynamically group costs based on the value of a specific tag key, you would first choose an inherited value rule type, then choose the tag dimension and specify the tag key to use.</p>"
+    },
+    "CostCategoryInheritedValueDimensionName": {
+      "type": "string",
+      "enum": [
+        "LINKED_ACCOUNT_NAME",
+        "TAG"
+      ]
     },
     "CostCategoryMaxResults": {
       "type": "integer",
@@ -1034,7 +1058,7 @@
     "CostCategoryName": {
       "type": "string",
       "documentation": "<p>The unique name of the Cost Category.</p>",
-      "max": 255,
+      "max": 50,
       "min": 1,
       "pattern": "^(?! )[\\p{L}\\p{N}\\p{Z}-_]*(?<! )$"
     },
@@ -1093,6 +1117,9 @@
         "Values": {
           "shape": "CostCategoryValuesList",
           "documentation": "<p> A list of unique cost category values in a specific cost category. </p>"
+        },
+        "DefaultValue": {
+          "shape": "CostCategoryValue"
         }
       },
       "documentation": "<p>A reference to a Cost Category containing only enough information to identify the Cost Category.</p> <p>You can use this information to retrieve the full Cost Category information using <code>DescribeCostCategory</code>.</p>"
@@ -1105,10 +1132,6 @@
     },
     "CostCategoryRule": {
       "type": "structure",
-      "required": [
-        "Value",
-        "Rule"
-      ],
       "members": {
         "Value": {
           "shape": "CostCategoryValue"
@@ -1116,9 +1139,24 @@
         "Rule": {
           "shape": "Expression",
           "documentation": "<p>An <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html\">Expression</a> object used to categorize costs. This supports dimensions, tags, and nested expressions. Currently the only dimensions supported are <code>LINKED_ACCOUNT</code>, <code>SERVICE_CODE</code>, <code>RECORD_TYPE</code>, and <code>LINKED_ACCOUNT_NAME</code>.</p> <p>Root level <code>OR</code> is not supported. We recommend that you create a separate rule instead.</p> <p> <code>RECORD_TYPE</code> is a dimension used for Cost Explorer APIs, and is also supported for Cost Category expressions. This dimension uses different terms, depending on whether you're using the console or API/JSON editor. For a detailed comparison, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/manage-cost-categories.html#cost-categories-terms\">Term Comparisons</a> in the <i>AWS Billing and Cost Management User Guide</i>.</p>"
+        },
+        "InheritedValue": {
+          "shape": "CostCategoryInheritedValueDimension",
+          "documentation": "<p>The value the line item will be categorized as, if the line item contains the matched dimension.</p>"
+        },
+        "Type": {
+          "shape": "CostCategoryRuleType",
+          "documentation": "<p>You can define the <code>CostCategoryRule</code> rule type as either <code>REGULAR</code> or <code>INHERITED_VALUE</code>. The <code>INHERITED_VALUE</code> rule type adds the flexibility of defining a rule that dynamically inherits the cost category value from the dimension value defined by <code>CostCategoryInheritedValueDimension</code>. For example, if you wanted to dynamically group costs based on the value of a specific tag key, you would first choose an inherited value rule type, then choose the tag dimension and specify the tag key to use.</p>"
         }
       },
       "documentation": "<p>Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value.</p>"
+    },
+    "CostCategoryRuleType": {
+      "type": "string",
+      "enum": [
+        "REGULAR",
+        "INHERITED_VALUE"
+      ]
     },
     "CostCategoryRuleVersion": {
       "type": "string",
@@ -1150,8 +1188,8 @@
     },
     "CostCategoryValue": {
       "type": "string",
-      "documentation": "<p>The value a line item will be categorized as, if it matches the rule.</p>",
-      "max": 255,
+      "documentation": "<p>The default value for the cost category.</p>",
+      "max": 50,
       "min": 1,
       "pattern": "^(?! )[\\p{L}\\p{N}\\p{Z}-_]*(?<! )$"
     },
@@ -1345,6 +1383,9 @@
         "Rules": {
           "shape": "CostCategoryRulesList",
           "documentation": "<p>The Cost Category rules used to categorize costs. For more information, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html\">CostCategoryRule</a>.</p>"
+        },
+        "DefaultValue": {
+          "shape": "CostCategoryValue"
         }
       }
     },
@@ -1584,6 +1625,28 @@
         "shape": "DimensionValuesWithAttributes"
       }
     },
+    "DiskResourceUtilization": {
+      "type": "structure",
+      "members": {
+        "DiskReadOpsPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The maximum number of read operations per second. </p>"
+        },
+        "DiskWriteOpsPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The maximum number of write operations per second. </p>"
+        },
+        "DiskReadBytesPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The maximum read throughput operations per second. </p>"
+        },
+        "DiskWriteBytesPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The maximum write throughput operations per second. </p>"
+        }
+      },
+      "documentation": "<p> The field that contains a list of disk (local storage) metrics associated with the current instance. </p>"
+    },
     "EBSResourceUtilization": {
       "type": "structure",
       "members": {
@@ -1704,6 +1767,14 @@
         "EBSResourceUtilization": {
           "shape": "EBSResourceUtilization",
           "documentation": "<p> The EBS field that contains a list of EBS metrics associated with the current instance. </p>"
+        },
+        "DiskResourceUtilization": {
+          "shape": "DiskResourceUtilization",
+          "documentation": "<p> The field that contains a list of disk (local storage) metrics associated with the current instance. </p>"
+        },
+        "NetworkResourceUtilization": {
+          "shape": "NetworkResourceUtilization",
+          "documentation": "<p> The network field that contains a list of network metrics associated with the current instance. </p>"
         }
       },
       "documentation": "<p> Utilization metrics of the instance. </p>"
@@ -1814,6 +1885,33 @@
       "type": "list",
       "member": {
         "shape": "Expression"
+      }
+    },
+    "FindingReasonCode": {
+      "type": "string",
+      "enum": [
+        "CPU_OVER_PROVISIONED",
+        "CPU_UNDER_PROVISIONED",
+        "MEMORY_OVER_PROVISIONED",
+        "MEMORY_UNDER_PROVISIONED",
+        "EBS_THROUGHPUT_OVER_PROVISIONED",
+        "EBS_THROUGHPUT_UNDER_PROVISIONED",
+        "EBS_IOPS_OVER_PROVISIONED",
+        "EBS_IOPS_UNDER_PROVISIONED",
+        "NETWORK_BANDWIDTH_OVER_PROVISIONED",
+        "NETWORK_BANDWIDTH_UNDER_PROVISIONED",
+        "NETWORK_PPS_OVER_PROVISIONED",
+        "NETWORK_PPS_UNDER_PROVISIONED",
+        "DISK_IOPS_OVER_PROVISIONED",
+        "DISK_IOPS_UNDER_PROVISIONED",
+        "DISK_THROUGHPUT_OVER_PROVISIONED",
+        "DISK_THROUGHPUT_UNDER_PROVISIONED"
+      ]
+    },
+    "FindingReasonCodes": {
+      "type": "list",
+      "member": {
+        "shape": "FindingReasonCode"
       }
     },
     "ForecastResult": {
@@ -1978,6 +2076,7 @@
       "type": "structure",
       "required": [
         "TimePeriod",
+        "Granularity",
         "Metrics"
       ],
       "members": {
@@ -2032,6 +2131,7 @@
       "type": "structure",
       "required": [
         "TimePeriod",
+        "Granularity",
         "Filter"
       ],
       "members": {
@@ -3066,6 +3166,28 @@
     "NetRISavings": {
       "type": "string"
     },
+    "NetworkResourceUtilization": {
+      "type": "structure",
+      "members": {
+        "NetworkInBytesPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The network ingress throughput utilization measured in Bytes per second. </p>"
+        },
+        "NetworkOutBytesPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The network outgress throughput utilization measured in Bytes per second. </p>"
+        },
+        "NetworkPacketsInPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The network ingress packets measured in packets per second. </p>"
+        },
+        "NetworkPacketsOutPerSecond": {
+          "shape": "GenericString",
+          "documentation": "<p> The network outgress packets measured in packets per second. </p>"
+        }
+      },
+      "documentation": "<p> The network field that contains a list of network metrics associated with the current instance. </p>"
+    },
     "NextPageToken": {
       "type": "string",
       "max": 8192,
@@ -3123,6 +3245,22 @@
         "MEDIUM_UTILIZATION",
         "HEAVY_UTILIZATION"
       ]
+    },
+    "PlatformDifference": {
+      "type": "string",
+      "enum": [
+        "HYPERVISOR",
+        "NETWORK_INTERFACE",
+        "STORAGE_INTERFACE",
+        "INSTANCE_STORE_AVAILABILITY",
+        "VIRTUALIZATION_TYPE"
+      ]
+    },
+    "PlatformDifferences": {
+      "type": "list",
+      "member": {
+        "shape": "PlatformDifference"
+      }
     },
     "PredictionIntervalLevel": {
       "type": "integer",
@@ -3609,6 +3747,10 @@
         "TerminateRecommendationDetail": {
           "shape": "TerminateRecommendationDetail",
           "documentation": "<p>Details for termination recommendations.</p>"
+        },
+        "FindingReasonCodes": {
+          "shape": "FindingReasonCodes",
+          "documentation": "<p> The list of possible reasons why the recommendation is generated such as under or over utilization of specific metrics (for example, CPU, Memory, Network). </p>"
         }
       },
       "documentation": "<p>Recommendations to rightsize resources.</p>"
@@ -4213,7 +4355,8 @@
       "type": "string",
       "enum": [
         "COMPUTE_SP",
-        "EC2_INSTANCE_SP"
+        "EC2_INSTANCE_SP",
+        "SAGEMAKER_SP"
       ]
     },
     "TagKey": {
@@ -4278,6 +4421,10 @@
         "ExpectedResourceUtilization": {
           "shape": "ResourceUtilization",
           "documentation": "<p> Expected utilization metrics for target instance type.</p>"
+        },
+        "PlatformDifferences": {
+          "shape": "PlatformDifferences",
+          "documentation": "<p> Explains the actions you might need to take in order to successfully migrate your workloads from the current instance type to the recommended instance type. </p>"
         }
       },
       "documentation": "<p> Details on recommended instance.</p>"
@@ -4448,6 +4595,9 @@
         "Rules": {
           "shape": "CostCategoryRulesList",
           "documentation": "<p>The <code>Expression</code> object used to categorize costs. For more information, see <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_CostCategoryRule.html\">CostCategoryRule </a>. </p>"
+        },
+        "DefaultValue": {
+          "shape": "CostCategoryValue"
         }
       }
     },

@@ -44,6 +44,37 @@
       ],
       "documentation": "<p>Adds or overwrites one or more tags for the specified resource. Tags are metadata that you can assign to your documents, managed instances, maintenance windows, Parameter Store parameters, and patch baselines. Tags enable you to categorize your resources in different ways, for example, by purpose, owner, or environment. Each tag consists of a key and an optional value, both of which you define. For example, you could define a set of tags for your account's managed instances that helps you track each instance's owner and stack level. For example: Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and Value=Production, Pre-Production, or Test.</p> <p>Each resource can have a maximum of 50 tags. </p> <p>We recommend that you devise a set of tag keys that meets your needs for each resource type. Using a consistent set of tag keys makes it easier for you to manage your resources. You can search and filter the resources based on the tags you add. Tags don't have any semantic meaning to and are interpreted strictly as a string of characters. </p> <p>For more information about using tags with EC2 instances, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html\">Tagging your Amazon EC2 resources</a> in the <i>Amazon EC2 User Guide</i>.</p>"
     },
+    "AssociateOpsItemRelatedItem": {
+      "name": "AssociateOpsItemRelatedItem",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssociateOpsItemRelatedItemRequest"
+      },
+      "output": {
+        "shape": "AssociateOpsItemRelatedItemResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "OpsItemNotFoundException"
+        },
+        {
+          "shape": "OpsItemLimitExceededException"
+        },
+        {
+          "shape": "OpsItemInvalidParameterException"
+        },
+        {
+          "shape": "OpsItemRelatedItemAlreadyExistsException"
+        }
+      ],
+      "documentation": "<p>Associates a related resource to a Systems Manager OpsCenter OpsItem. For example, you can associate an Incident Manager incident or analysis with an OpsItem. Incident Manager is a capability of AWS Systems Manager.</p>"
+    },
     "CancelCommand": {
       "name": "CancelCommand",
       "http": {
@@ -1496,6 +1527,34 @@
       ],
       "documentation": "<p>Retrieves a list of all active sessions (both connected and disconnected) or terminated sessions from the past 30 days.</p>"
     },
+    "DisassociateOpsItemRelatedItem": {
+      "name": "DisassociateOpsItemRelatedItem",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisassociateOpsItemRelatedItemRequest"
+      },
+      "output": {
+        "shape": "DisassociateOpsItemRelatedItemResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "OpsItemRelatedItemAssociationNotFoundException"
+        },
+        {
+          "shape": "OpsItemNotFoundException"
+        },
+        {
+          "shape": "OpsItemInvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Deletes the association between an OpsItem and a related resource. For example, this API action can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability of AWS Systems Manager.</p>"
+    },
     "GetAutomationExecution": {
       "name": "GetAutomationExecution",
       "http": {
@@ -1575,7 +1634,7 @@
           "shape": "InvocationDoesNotExist"
         }
       ],
-      "documentation": "<p>Returns detailed information about command execution for an invocation or plugin. </p>"
+      "documentation": "<p>Returns detailed information about command execution for an invocation or plugin.</p> <p> <code>GetCommandInvocation</code> only gives the execution status of a plugin in a document. To get the command execution status on a specific instance, use <a>ListCommandInvocations</a>. To get the command execution status across instances, use <a>ListCommands</a>.</p>"
     },
     "GetConnectionStatus": {
       "name": "GetConnectionStatus",
@@ -2125,7 +2184,7 @@
           "shape": "ParameterVersionLabelLimitExceeded"
         }
       ],
-      "documentation": "<p>A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions. </p> <p>Parameter labels have the following requirements and restrictions.</p> <ul> <li> <p>A version of a parameter can have a maximum of 10 labels.</p> </li> <li> <p>You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.</p> </li> <li> <p>You can move a label from one version of a parameter to another.</p> </li> <li> <p>You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.</p> </li> <li> <p>You can't delete a parameter label. If you no longer want to use a parameter label, then you must move it to a different version of a parameter.</p> </li> <li> <p>A label can have a maximum of 100 characters.</p> </li> <li> <p>Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).</p> </li> <li> <p>Labels can't begin with a number, \"aws,\" or \"ssm\" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.</p> </li> </ul>"
+      "documentation": "<p>A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions. </p> <p>Parameter labels have the following requirements and restrictions.</p> <ul> <li> <p>A version of a parameter can have a maximum of 10 labels.</p> </li> <li> <p>You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.</p> </li> <li> <p>You can move a label from one version of a parameter to another.</p> </li> <li> <p>You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.</p> </li> <li> <p>If you no longer want to use a parameter label, then you can either delete it or move it to a different version of a parameter.</p> </li> <li> <p>A label can have a maximum of 100 characters.</p> </li> <li> <p>Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).</p> </li> <li> <p>Labels can't begin with a number, \"aws,\" or \"ssm\" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.</p> </li> </ul>"
     },
     "ListAssociationVersions": {
       "name": "ListAssociationVersions",
@@ -2428,6 +2487,28 @@
         }
       ],
       "documentation": "<p>Returns a list of all OpsItem events in the current AWS account and Region. You can limit the results to events associated with specific OpsItems by specifying a filter.</p>"
+    },
+    "ListOpsItemRelatedItems": {
+      "name": "ListOpsItemRelatedItems",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListOpsItemRelatedItemsRequest"
+      },
+      "output": {
+        "shape": "ListOpsItemRelatedItemsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "OpsItemInvalidParameterException"
+        }
+      ],
+      "documentation": "<p>Lists all related-item resources associated with an OpsItem.</p>"
     },
     "ListOpsMetadata": {
       "name": "ListOpsMetadata",
@@ -3142,6 +3223,34 @@
       ],
       "documentation": "<p>Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the instance. A terminated session cannot be resumed.</p>"
     },
+    "UnlabelParameterVersion": {
+      "name": "UnlabelParameterVersion",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UnlabelParameterVersionRequest"
+      },
+      "output": {
+        "shape": "UnlabelParameterVersionResult"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "TooManyUpdates"
+        },
+        {
+          "shape": "ParameterNotFound"
+        },
+        {
+          "shape": "ParameterVersionNotFound"
+        }
+      ],
+      "documentation": "<p>Remove a label or labels from a parameter.</p>"
+    },
     "UpdateAssociation": {
       "name": "UpdateAssociation",
       "http": {
@@ -3684,7 +3793,7 @@
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p> One or more tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string. </p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>"
+          "documentation": "<p>One or more tags. The value parameter is required.</p> <important> <p>Do not enter personally identifiable information in this field.</p> </important>"
         }
       }
     },
@@ -3709,8 +3818,44 @@
     },
     "ApproveAfterDays": {
       "type": "integer",
-      "max": 100,
+      "max": 360,
       "min": 0
+    },
+    "AssociateOpsItemRelatedItemRequest": {
+      "type": "structure",
+      "required": [
+        "OpsItemId",
+        "AssociationType",
+        "ResourceType",
+        "ResourceUri"
+      ],
+      "members": {
+        "OpsItemId": {
+          "shape": "OpsItemId",
+          "documentation": "<p>The ID of the OpsItem to which you want to associate a resource as a related item.</p>"
+        },
+        "AssociationType": {
+          "shape": "OpsItemRelatedItemAssociationType",
+          "documentation": "<p>The type of association that you want to create between an OpsItem and a resource. OpsCenter supports <code>IsParentOf</code> and <code>RelatesTo</code> association types.</p>"
+        },
+        "ResourceType": {
+          "shape": "OpsItemRelatedItemAssociationResourceType",
+          "documentation": "<p>The type of resource that you want to associate with an OpsItem. OpsCenter supports the following types:</p> <p> <code>AWS::SSMIncidents::IncidentRecord</code>: an Incident Manager incident. Incident Manager is a capability of AWS Systems Manager.</p> <p> <code>AWS::SSM::Document</code>: a Systems Manager (SSM) document.</p>"
+        },
+        "ResourceUri": {
+          "shape": "OpsItemRelatedItemAssociationResourceUri",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS resource that you want to associate with the OpsItem.</p>"
+        }
+      }
+    },
+    "AssociateOpsItemRelatedItemResponse": {
+      "type": "structure",
+      "members": {
+        "AssociationId": {
+          "shape": "OpsItemRelatedItemAssociationId",
+          "documentation": "<p>The association ID.</p>"
+        }
+      }
     },
     "Association": {
       "type": "structure",
@@ -3749,7 +3894,7 @@
         },
         "ScheduleExpression": {
           "shape": "ScheduleExpression",
-          "documentation": "<p>A cron expression that specifies a schedule when the association runs.</p>"
+          "documentation": "<p>A cron expression that specifies a schedule when the association runs. The schedule runs in Coordinated Universal Time (UTC).</p>"
         },
         "AssociationName": {
           "shape": "AssociationName",
@@ -3858,6 +4003,10 @@
         "ApplyOnlyAtCronInterval": {
           "shape": "ApplyOnlyAtCronInterval",
           "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.</p>"
+        },
+        "CalendarNames": {
+          "shape": "CalendarNameOrARNList",
+          "documentation": "<p>The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents your associations are gated under. The associations only run when that Change Calendar is open. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">AWS Systems Manager Change Calendar</a>.</p>"
         },
         "TargetLocations": {
           "shape": "TargetLocations",
@@ -4264,6 +4413,10 @@
         "ApplyOnlyAtCronInterval": {
           "shape": "ApplyOnlyAtCronInterval",
           "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.</p>"
+        },
+        "CalendarNames": {
+          "shape": "CalendarNameOrARNList",
+          "documentation": "<p>The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents your associations are gated under. The associations for this version only run when that Change Calendar is open. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">AWS Systems Manager Change Calendar</a>.</p>"
         },
         "TargetLocations": {
           "shape": "TargetLocations",
@@ -4774,7 +4927,7 @@
       "member": {
         "shape": "AutomationParameterValue"
       },
-      "max": 10,
+      "max": 50,
       "min": 0
     },
     "AutomationSubtype": {
@@ -4916,6 +5069,11 @@
           "documentation": "<p>The ID of the maintenance window execution that has been stopped.</p>"
         }
       }
+    },
+    "ChangeDetailsValue": {
+      "type": "string",
+      "max": 32768,
+      "min": 1
     },
     "ChangeRequestName": {
       "type": "string",
@@ -5149,7 +5307,8 @@
           "documentation": "<p>The URL to the plugin's StdErr file in Amazon S3, if the S3 bucket was defined for the parent command. For an invocation, StandardErrorUrl is populated if there is just one plugin defined for the command, and the S3 bucket was defined for the command.</p>"
         },
         "CommandPlugins": {
-          "shape": "CommandPluginList"
+          "shape": "CommandPluginList",
+          "documentation": "<p>Plugins processed by the command.</p>"
         },
         "ServiceRole": {
           "shape": "ServiceRole",
@@ -5615,7 +5774,7 @@
         },
         "ExpirationDate": {
           "shape": "ExpirationDate",
-          "documentation": "<p>The date by which this activation request should expire. The default value is 24 hours.</p>"
+          "documentation": "<p>The date by which this activation request should expire, in timestamp format, such as \"2021-07-07T00:00:00\". You can specify a date up to 30 days in advance. If you don't provide an expiration date, the activation code expires in 24 hours.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -5717,6 +5876,10 @@
           "shape": "ApplyOnlyAtCronInterval",
           "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.</p>"
         },
+        "CalendarNames": {
+          "shape": "CalendarNameOrARNList",
+          "documentation": "<p>The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents your associations are gated under. The associations only run when that Change Calendar is open. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">AWS Systems Manager Change Calendar</a>.</p>"
+        },
         "TargetLocations": {
           "shape": "TargetLocations",
           "documentation": "<p>Use this action to create an association in multiple Regions and multiple accounts.</p>"
@@ -5797,7 +5960,11 @@
         },
         "ApplyOnlyAtCronInterval": {
           "shape": "ApplyOnlyAtCronInterval",
-          "documentation": "<p>By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.</p>"
+          "documentation": "<p>By default, when you create a new association, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.</p>"
+        },
+        "CalendarNames": {
+          "shape": "CalendarNameOrARNList",
+          "documentation": "<p>The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents you want to gate your associations under. The associations only run when that Change Calendar is open. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">AWS Systems Manager Change Calendar</a>.</p>"
         },
         "TargetLocations": {
           "shape": "TargetLocations",
@@ -5837,6 +6004,10 @@
           "shape": "DocumentName",
           "documentation": "<p>A name for the Systems Manager document.</p> <important> <p>You can't use the following strings as document name prefixes. These are reserved by AWS for use as document name prefixes:</p> <ul> <li> <p> <code>aws-</code> </p> </li> <li> <p> <code>amazon</code> </p> </li> <li> <p> <code>amzn</code> </p> </li> </ul> </important>"
         },
+        "DisplayName": {
+          "shape": "DocumentDisplayName",
+          "documentation": "<p>An optional field where you can specify a friendly name for the Systems Manager document. This value can differ for each version of the document. You can update this value at a later time using the <a>UpdateDocument</a> action.</p>"
+        },
         "VersionName": {
           "shape": "DocumentVersionName",
           "documentation": "<p>An optional field specifying the version of the artifact you are creating with the document. For example, \"Release 12, Update 6\". This value is unique across all versions of a document, and cannot be changed.</p>"
@@ -5851,7 +6022,7 @@
         },
         "TargetType": {
           "shape": "TargetType",
-          "documentation": "<p>Specify a target type to define the kinds of resources the document can run on. For example, to run a document on EC2 instances, specify the following value: /AWS::EC2::Instance. If you specify a value of '/' the document can run on all types of resources. If you don't specify a value, the document can't run on any resources. For a list of valid resource types, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
+          "documentation": "<p>Specify a target type to define the kinds of resources the document can run on. For example, to run a document on EC2 instances, specify the following value: /AWS::EC2::Instance. If you specify a value of '/' the document can run on all types of resources. If you don't specify a value, the document can't run on any resources. For a list of valid resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -6727,7 +6898,7 @@
         },
         "ReverseOrder": {
           "shape": "Boolean",
-          "documentation": "<p>A boolean that indicates whether to list step executions in reverse order by start time. The default value is false.</p>",
+          "documentation": "<p>Indicates whether to list step executions in reverse order by start time. The default value is 'false'.</p>",
           "box": true
         }
       }
@@ -7583,6 +7754,21 @@
           "shape": "Integer",
           "documentation": "<p>The number of instances with <code>NotApplicable</code> patches beyond the supported limit, which are not reported by name to Systems Manager Inventory.</p>",
           "box": true
+        },
+        "InstancesWithCriticalNonCompliantPatches": {
+          "shape": "InstancesCount",
+          "documentation": "<p>The number of instances where patches that are specified as \"Critical\" for compliance reporting in the patch baseline are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is <code>NON_COMPLIANT</code>.</p>",
+          "box": true
+        },
+        "InstancesWithSecurityNonCompliantPatches": {
+          "shape": "InstancesCount",
+          "documentation": "<p>The number of instances where patches that are specified as \"Security\" in a patch advisory are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is <code>NON_COMPLIANT</code>.</p>",
+          "box": true
+        },
+        "InstancesWithOtherNonCompliantPatches": {
+          "shape": "InstancesCount",
+          "documentation": "<p>The number of instances with patches installed that are specified as other than \"Critical\" or \"Security\" but are not compliant with the patch baseline. The status of these instances is NON_COMPLIANT.</p>",
+          "box": true
         }
       }
     },
@@ -7701,6 +7887,27 @@
     "DescriptionInDocument": {
       "type": "string"
     },
+    "DisassociateOpsItemRelatedItemRequest": {
+      "type": "structure",
+      "required": [
+        "OpsItemId",
+        "AssociationId"
+      ],
+      "members": {
+        "OpsItemId": {
+          "shape": "OpsItemId",
+          "documentation": "<p>The ID of the OpsItem for which you want to delete an association between the OpsItem and a related resource.</p>"
+        },
+        "AssociationId": {
+          "shape": "OpsItemRelatedItemAssociationId",
+          "documentation": "<p>The ID of the association for which you want to delete an association between the OpsItem and a related resource.</p>"
+        }
+      }
+    },
+    "DisassociateOpsItemRelatedItemResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DocumentARN": {
       "type": "string",
       "pattern": "^[a-zA-Z0-9_\\-.:/]{3,128}$"
@@ -7748,6 +7955,10 @@
         "Name": {
           "shape": "DocumentARN",
           "documentation": "<p>The name of the Systems Manager document.</p>"
+        },
+        "DisplayName": {
+          "shape": "DocumentDisplayName",
+          "documentation": "<p>The friendly name of the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see <a>UpdateDocument</a>.</p>"
         },
         "VersionName": {
           "shape": "DocumentVersionName",
@@ -7807,7 +8018,7 @@
         },
         "TargetType": {
           "shape": "TargetType",
-          "documentation": "<p>The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
+          "documentation": "<p>The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -7843,6 +8054,11 @@
         }
       },
       "documentation": "<p>Describes a Systems Manager document. </p>"
+    },
+    "DocumentDisplayName": {
+      "type": "string",
+      "max": 1024,
+      "pattern": "^[\\w\\.\\-\\:\\/ ]*$"
     },
     "DocumentFilter": {
       "type": "structure",
@@ -7908,6 +8124,14 @@
           "shape": "DocumentARN",
           "documentation": "<p>The name of the Systems Manager document.</p>"
         },
+        "CreatedDate": {
+          "shape": "DateTime",
+          "documentation": "<p>The date the Systems Manager document was created.</p>"
+        },
+        "DisplayName": {
+          "shape": "DocumentDisplayName",
+          "documentation": "<p>An optional field where you can specify a friendly name for the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see <a>UpdateDocument</a>.</p>"
+        },
         "Owner": {
           "shape": "DocumentOwner",
           "documentation": "<p>The AWS user account that created the document.</p>"
@@ -7938,7 +8162,7 @@
         },
         "TargetType": {
           "shape": "TargetType",
-          "documentation": "<p>The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
+          "documentation": "<p>The target type which defines the kinds of resources the document can run on. For example, /AWS::EC2::Instance. For a list of valid resource types, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -7977,7 +8201,7 @@
           "documentation": "<p>The value for the filter key.</p>"
         }
       },
-      "documentation": "<p>One or more filters. Use a filter to return a more specific list of documents.</p> <p>For keys, you can specify one or more tags that have been applied to a document. </p> <p>You can also use AWS-provided keys, some of which have specific allowed values. These keys and their associated values are as follows:</p> <dl> <dt>DocumentType</dt> <dd> <ul> <li> <p>ApplicationConfiguration</p> </li> <li> <p>ApplicationConfigurationSchema</p> </li> <li> <p>Automation</p> </li> <li> <p>ChangeCalendar</p> </li> <li> <p>Command</p> </li> <li> <p>DeploymentStrategy</p> </li> <li> <p>Package</p> </li> <li> <p>Policy</p> </li> <li> <p>Session</p> </li> </ul> </dd> <dt>Owner</dt> <dd> <p>Note that only one <code>Owner</code> can be specified in a request. For example: <code>Key=Owner,Values=Self</code>.</p> <ul> <li> <p>Amazon</p> </li> <li> <p>Private</p> </li> <li> <p>Public</p> </li> <li> <p>Self</p> </li> <li> <p>ThirdParty</p> </li> </ul> </dd> <dt>PlatformTypes</dt> <dd> <ul> <li> <p>Linux</p> </li> <li> <p>Windows</p> </li> </ul> </dd> </dl> <p> <code>Name</code> is another AWS-provided key. If you use <code>Name</code> as a key, you can use a name prefix to return a list of documents. For example, in the AWS CLI, to return a list of all documents that begin with <code>Te</code>, run the following command:</p> <p> <code>aws ssm list-documents --filters Key=Name,Values=Te</code> </p> <p>You can also use the <code>TargetType</code> AWS-provided key. For a list of valid resource type values that can be used with this key, see <a href=\"http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>.</p> <p>If you specify more than two keys, only documents that are identified by all the tags are returned in the results. If you specify more than two values for a key, documents that are identified by any of the values are returned in the results.</p> <p>To specify a custom key and value pair, use the format <code>Key=tag:tagName,Values=valueName</code>.</p> <p>For example, if you created a key called region and are using the AWS CLI to call the <code>list-documents</code> command: </p> <p> <code>aws ssm list-documents --filters Key=tag:region,Values=east,west Key=Owner,Values=Self</code> </p>"
+      "documentation": "<p>One or more filters. Use a filter to return a more specific list of documents.</p> <p>For keys, you can specify one or more tags that have been applied to a document. </p> <p>You can also use AWS-provided keys, some of which have specific allowed values. These keys and their associated values are as follows:</p> <dl> <dt>DocumentType</dt> <dd> <ul> <li> <p>ApplicationConfiguration</p> </li> <li> <p>ApplicationConfigurationSchema</p> </li> <li> <p>Automation</p> </li> <li> <p>ChangeCalendar</p> </li> <li> <p>Command</p> </li> <li> <p>DeploymentStrategy</p> </li> <li> <p>Package</p> </li> <li> <p>Policy</p> </li> <li> <p>Session</p> </li> </ul> </dd> <dt>Owner</dt> <dd> <p>Note that only one <code>Owner</code> can be specified in a request. For example: <code>Key=Owner,Values=Self</code>.</p> <ul> <li> <p>Amazon</p> </li> <li> <p>Private</p> </li> <li> <p>Public</p> </li> <li> <p>Self</p> </li> <li> <p>ThirdParty</p> </li> </ul> </dd> <dt>PlatformTypes</dt> <dd> <ul> <li> <p>Linux</p> </li> <li> <p>Windows</p> </li> </ul> </dd> </dl> <p> <code>Name</code> is another AWS-provided key. If you use <code>Name</code> as a key, you can use a name prefix to return a list of documents. For example, in the AWS CLI, to return a list of all documents that begin with <code>Te</code>, run the following command:</p> <p> <code>aws ssm list-documents --filters Key=Name,Values=Te</code> </p> <p>You can also use the <code>TargetType</code> AWS-provided key. For a list of valid resource type values that can be used with this key, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html\">AWS resource and property types reference</a> in the <i>AWS CloudFormation User Guide</i>.</p> <p>If you specify more than two keys, only documents that are identified by all the tags are returned in the results. If you specify more than two values for a key, documents that are identified by any of the values are returned in the results.</p> <p>To specify a custom key and value pair, use the format <code>Key=tag:tagName,Values=valueName</code>.</p> <p>For example, if you created a key called region and are using the AWS CLI to call the <code>list-documents</code> command: </p> <p> <code>aws ssm list-documents --filters Key=tag:region,Values=east,west Key=Owner,Values=Self</code> </p>"
     },
     "DocumentKeyValuesFilterKey": {
       "type": "string",
@@ -8230,7 +8454,9 @@
         "ApplicationConfigurationSchema",
         "DeploymentStrategy",
         "ChangeCalendar",
-        "Automation.ChangeTemplate"
+        "Automation.ChangeTemplate",
+        "ProblemAnalysis",
+        "ProblemAnalysisTemplate"
       ]
     },
     "DocumentVersion": {
@@ -8243,6 +8469,10 @@
         "Name": {
           "shape": "DocumentName",
           "documentation": "<p>The document name.</p>"
+        },
+        "DisplayName": {
+          "shape": "DocumentDisplayName",
+          "documentation": "<p>The friendly name of the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see <a>UpdateDocument</a>.</p>"
         },
         "DocumentVersion": {
           "shape": "DocumentVersion",
@@ -8336,7 +8566,7 @@
       "type": "string",
       "max": 64,
       "min": 1,
-      "pattern": "[\\w+=,.@-]+"
+      "pattern": "[\\w+=,.@/-]+"
     },
     "ExpirationDate": {
       "type": "timestamp"
@@ -8458,11 +8688,11 @@
         },
         "InstanceId": {
           "shape": "InstanceId",
-          "documentation": "<p>(Required) The ID of the managed instance targeted by the command. A managed instance can be an EC2 instance or an instance in your hybrid environment that is configured for Systems Manager.</p>"
+          "documentation": "<p>(Required) The ID of the managed instance targeted by the command. A managed instance can be an Amazon Elastic Compute Cloud (Amazon EC2) instance or an instance in your hybrid environment that is configured for AWS Systems Manager.</p>"
         },
         "PluginName": {
           "shape": "CommandPluginName",
-          "documentation": "<p>The name of the plugin for which you want detailed results. If the document contains only one plugin, you can omit the name and details for that plugin are returned. If the document contains more than one plugin, you must specify the name of the plugin for which you want to view details.</p> <p>Plugin names are also referred to as <i>step names</i> in Systems Manager documents. For example, <code>aws:RunShellScript</code> is a plugin.</p>"
+          "documentation": "<p>The name of the plugin for which you want detailed results. If the document contains only one plugin, you can omit the name and details for that plugin. If the document contains more than one plugin, you must specify the name of the plugin for which you want to view details.</p> <p>Plugin names are also referred to as <i>step names</i> in Systems Manager documents. For example, <code>aws:RunShellScript</code> is a plugin.</p> <p>To find the <code>PluginName</code>, check the document content and find the name of the plugin. Alternatively, use <a>ListCommandInvocations</a> with the <code>CommandId</code> and <code>Details</code> parameters. The <code>PluginName</code> is the <code>Name</code> attribute of the <code>CommandPlugin</code> object in the <code>CommandPlugins</code> list.</p>"
         }
       }
     },
@@ -8483,7 +8713,7 @@
         },
         "DocumentName": {
           "shape": "DocumentName",
-          "documentation": "<p>The name of the document that was run. For example, AWS-RunShellScript.</p>"
+          "documentation": "<p>The name of the document that was run. For example, <code>AWS-RunShellScript</code>.</p>"
         },
         "DocumentVersion": {
           "shape": "DocumentVersion",
@@ -8495,7 +8725,7 @@
         },
         "ResponseCode": {
           "shape": "ResponseCode",
-          "documentation": "<p>The error level response code for the plugin script. If the response code is -1, then the command has not started running on the instance, or it was not received by the instance.</p>"
+          "documentation": "<p>The error level response code for the plugin script. If the response code is <code>-1</code>, then the command has not started running on the instance, or it was not received by the instance.</p>"
         },
         "ExecutionStartDateTime": {
           "shape": "StringDateTime",
@@ -8503,35 +8733,35 @@
         },
         "ExecutionElapsedTime": {
           "shape": "StringDateTime",
-          "documentation": "<p>Duration since ExecutionStartDateTime.</p>"
+          "documentation": "<p>Duration since <code>ExecutionStartDateTime</code>.</p>"
         },
         "ExecutionEndDateTime": {
           "shape": "StringDateTime",
-          "documentation": "<p>The date and time the plugin was finished running. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the <code>InvokedAfter</code> filter.</p> <p> <code>aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z</code> </p> <p>If the plugin has not started to run, the string is empty.</p>"
+          "documentation": "<p>The date and time the plugin finished running. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the <code>InvokedAfter</code> filter.</p> <p> <code>aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z</code> </p> <p>If the plugin has not started to run, the string is empty.</p>"
         },
         "Status": {
           "shape": "CommandInvocationStatus",
-          "documentation": "<p>The status of this invocation plugin. This status can be different than StatusDetails.</p>"
+          "documentation": "<p>The status of this invocation plugin. This status can be different than <code>StatusDetails</code>.</p>"
         },
         "StatusDetails": {
           "shape": "StatusDetails",
-          "documentation": "<p>A detailed status of the command execution for an invocation. StatusDetails includes more information than Status because it includes states resulting from error and concurrency control parameters. StatusDetails can show different results than Status. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command statuses</a> in the <i>AWS Systems Manager User Guide</i>. StatusDetails can be one of the following values:</p> <ul> <li> <p>Pending: The command has not been sent to the instance.</p> </li> <li> <p>In Progress: The command has been sent to the instance but has not reached a terminal state.</p> </li> <li> <p>Delayed: The system attempted to send the command to the target, but the target was not available. The instance might not be available because of network issues, because the instance was stopped, or for similar reasons. The system will try to send the command again.</p> </li> <li> <p>Success: The command or plugin ran successfully. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command's MaxErrors limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Execution Timed Out: The command started to run on the instance, but the execution was not complete before the timeout expired. Execution timeouts count against the MaxErrors limit of the parent command. This is a terminal state.</p> </li> <li> <p>Failed: The command wasn't run successfully on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the MaxErrors limit of the parent command. This is a terminal state.</p> </li> <li> <p>Canceled: The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Undeliverable: The command can't be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don't count against the parent command's MaxErrors limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Terminated: The parent command exceeded its MaxErrors limit and subsequent command invocations were canceled by the system. This is a terminal state.</p> </li> </ul>"
+          "documentation": "<p>A detailed status of the command execution for an invocation. <code>StatusDetails</code> includes more information than <code>Status</code> because it includes states resulting from error and concurrency control parameters. <code>StatusDetails</code> can show different results than <code>Status</code>. For more information about these statuses, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/monitor-commands.html\">Understanding command statuses</a> in the <i>AWS Systems Manager User Guide</i>. <code>StatusDetails</code> can be one of the following values:</p> <ul> <li> <p>Pending: The command has not been sent to the instance.</p> </li> <li> <p>In Progress: The command has been sent to the instance but has not reached a terminal state.</p> </li> <li> <p>Delayed: The system attempted to send the command to the target, but the target was not available. The instance might not be available because of network issues, because the instance was stopped, or for similar reasons. The system will try to send the command again.</p> </li> <li> <p>Success: The command or plugin ran successfully. This is a terminal state.</p> </li> <li> <p>Delivery Timed Out: The command was not delivered to the instance before the delivery timeout expired. Delivery timeouts do not count against the parent command's <code>MaxErrors</code> limit, but they do contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Execution Timed Out: The command started to run on the instance, but the execution was not complete before the timeout expired. Execution timeouts count against the <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p> </li> <li> <p>Failed: The command wasn't run successfully on the instance. For a plugin, this indicates that the result code was not zero. For a command invocation, this indicates that the result code for one or more plugins was not zero. Invocation failures count against the <code>MaxErrors</code> limit of the parent command. This is a terminal state.</p> </li> <li> <p>Canceled: The command was terminated before it was completed. This is a terminal state.</p> </li> <li> <p>Undeliverable: The command can't be delivered to the instance. The instance might not exist or might not be responding. Undeliverable invocations don't count against the parent command's <code>MaxErrors</code> limit and don't contribute to whether the parent command status is Success or Incomplete. This is a terminal state.</p> </li> <li> <p>Terminated: The parent command exceeded its <code>MaxErrors</code> limit and subsequent command invocations were canceled by the system. This is a terminal state.</p> </li> </ul>"
         },
         "StandardOutputContent": {
           "shape": "StandardOutputContent",
-          "documentation": "<p>The first 24,000 characters written by the plugin to stdout. If the command has not finished running, if ExecutionStatus is neither Succeeded nor Failed, then this string is empty.</p>"
+          "documentation": "<p>The first 24,000 characters written by the plugin to <code>stdout</code>. If the command has not finished running, if <code>ExecutionStatus</code> is neither Succeeded nor Failed, then this string is empty.</p>"
         },
         "StandardOutputUrl": {
           "shape": "Url",
-          "documentation": "<p>The URL for the complete text written by the plugin to stdout in Amazon S3. If an S3 bucket was not specified, then this string is empty.</p>"
+          "documentation": "<p>The URL for the complete text written by the plugin to <code>stdout</code> in Amazon Simple Storage Service (Amazon S3). If an S3 bucket was not specified, then this string is empty.</p>"
         },
         "StandardErrorContent": {
           "shape": "StandardErrorContent",
-          "documentation": "<p>The first 8,000 characters written by the plugin to stderr. If the command has not finished running, then this string is empty.</p>"
+          "documentation": "<p>The first 8,000 characters written by the plugin to <code>stderr</code>. If the command has not finished running, then this string is empty.</p>"
         },
         "StandardErrorUrl": {
           "shape": "Url",
-          "documentation": "<p>The URL for the complete text written by the plugin to stderr. If the command has not finished running, then this string is empty.</p>"
+          "documentation": "<p>The URL for the complete text written by the plugin to <code>stderr</code>. If the command has not finished running, then this string is empty.</p>"
         },
         "CloudWatchOutputConfig": {
           "shape": "CloudWatchOutputConfig",
@@ -8658,6 +8888,14 @@
         "Name": {
           "shape": "DocumentARN",
           "documentation": "<p>The name of the Systems Manager document.</p>"
+        },
+        "CreatedDate": {
+          "shape": "DateTime",
+          "documentation": "<p>The date the Systems Manager document was created.</p>"
+        },
+        "DisplayName": {
+          "shape": "DocumentDisplayName",
+          "documentation": "<p>The friendly name of the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see <a>UpdateDocument</a>.</p>"
         },
         "VersionName": {
           "shape": "DocumentVersionName",
@@ -9505,7 +9743,7 @@
       "members": {
         "SettingId": {
           "shape": "ServiceSettingId",
-          "documentation": "<p>The ID of the service setting to get. The setting ID can be <code>/ssm/automation/customer-script-log-destination</code>, <code>/ssm/automation/customer-script-log-group-name</code>, <code>/ssm/parameter-store/default-parameter-tier</code>, <code>/ssm/parameter-store/high-throughput-enabled</code>, or <code>/ssm/managed-instance/activation-tier</code>.</p>"
+          "documentation": "<p>The ID of the service setting to get. The setting ID can be one of the following.</p> <ul> <li> <p> <code>/ssm/automation/customer-script-log-destination</code> </p> </li> <li> <p> <code>/ssm/automation/customer-script-log-group-name</code> </p> </li> <li> <p> <code>/ssm/documents/console/public-sharing-permission</code> </p> </li> <li> <p> <code>/ssm/parameter-store/default-parameter-tier</code> </p> </li> <li> <p> <code>/ssm/parameter-store/high-throughput-enabled</code> </p> </li> <li> <p> <code>/ssm/managed-instance/activation-tier</code> </p> </li> </ul>"
         }
       },
       "documentation": "<p>The request body of the GetServiceSetting API action.</p>"
@@ -9738,7 +9976,7 @@
         },
         "IamRole": {
           "shape": "IamRole",
-          "documentation": "<p>The Amazon Identity and Access Management (IAM) role assigned to the on-premises Systems Manager managed instance. This call does not return the IAM role for EC2 instances. To retrieve the IAM role for an EC2 instance, use the Amazon EC2 <code>DescribeInstances</code> action. For information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html\">describe-instances</a> in the <i>AWS CLI Command Reference</i>.</p>"
+          "documentation": "<p>The Amazon Identity and Access Management (IAM) role assigned to the on-premises Systems Manager managed instance. This call does not return the IAM role for EC2 instances. To retrieve the IAM role for an EC2 instance, use the Amazon EC2 <code>DescribeInstances</code> action. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html\">describe-instances</a> in the <i>AWS CLI Command Reference</i>.</p>"
         },
         "RegistrationDate": {
           "shape": "DateTime",
@@ -9751,7 +9989,7 @@
         },
         "Name": {
           "shape": "String",
-          "documentation": "<p>The name assigned to an on-premises server or virtual machine (VM) when it is activated as a Systems Manager managed instance. The name is specified as the <code>DefaultInstanceName</code> property using the <a>CreateActivation</a> command. It is applied to the managed instance by specifying the Activation Code and Activation ID when you install SSM Agent on the instance, as explained in <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html\">Install SSM Agent for a hybrid environment (Linux)</a> and <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html\">Install SSM Agent for a hybrid environment (Windows)</a>. To retrieve the Name tag of an EC2 instance, use the Amazon EC2 <code>DescribeInstances</code> action. For information, see <a href=\"http://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"http://docs.aws.amazon.com/cli/latest/reference/ec2/describe-instances.html\">describe-instances</a> in the <i>AWS CLI Command Reference</i>.</p>"
+          "documentation": "<p>The name assigned to an on-premises server or virtual machine (VM) when it is activated as a Systems Manager managed instance. The name is specified as the <code>DefaultInstanceName</code> property using the <a>CreateActivation</a> command. It is applied to the managed instance by specifying the Activation Code and Activation ID when you install SSM Agent on the instance, as explained in <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-linux.html\">Install SSM Agent for a hybrid environment (Linux)</a> and <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-install-managed-win.html\">Install SSM Agent for a hybrid environment (Windows)</a>. To retrieve the Name tag of an EC2 instance, use the Amazon EC2 <code>DescribeInstances</code> action. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> in the <i>Amazon EC2 API Reference</i> or <a href=\"https://docs.aws.amazon.com/cli/latest/ec2/describe-instances.html\">describe-instances</a> in the <i>AWS CLI Command Reference</i>.</p>"
         },
         "IPAddress": {
           "shape": "IPAddress",
@@ -9954,6 +10192,21 @@
         "RebootOption": {
           "shape": "RebootOption",
           "documentation": "<p>Indicates the reboot option specified in the patch baseline.</p> <note> <p>Reboot options apply to <code>Install</code> operations only. Reboots are not attempted for Patch Manager <code>Scan</code> operations.</p> </note> <ul> <li> <p> <b>RebootIfNeeded</b>: Patch Manager tries to reboot the instance if it installed any patches, or if any patches are detected with a status of <code>InstalledPendingReboot</code>.</p> </li> <li> <p> <b>NoReboot</b>: Patch Manager attempts to install missing packages without trying to reboot the system. Patches installed with this option are assigned a status of <code>InstalledPendingReboot</code>. These patches might not be in effect until a reboot is performed.</p> </li> </ul>"
+        },
+        "CriticalNonCompliantCount": {
+          "shape": "PatchCriticalNonCompliantCount",
+          "documentation": "<p>The number of instances where patches that are specified as \"Critical\" for compliance reporting in the patch baseline are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is <code>NON_COMPLIANT</code>.</p>",
+          "box": true
+        },
+        "SecurityNonCompliantCount": {
+          "shape": "PatchSecurityNonCompliantCount",
+          "documentation": "<p>The number of instances where patches that are specified as \"Security\" in a patch advisory are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is <code>NON_COMPLIANT</code>.</p>",
+          "box": true
+        },
+        "OtherNonCompliantCount": {
+          "shape": "PatchOtherNonCompliantCount",
+          "documentation": "<p>The number of instances with patches installed that are specified as other than \"Critical\" or \"Security\" but are not compliant with the patch baseline. The status of these instances is NON_COMPLIANT.</p>",
+          "box": true
         }
       },
       "documentation": "<p>Defines the high-level patch compliance state for a managed instance, providing information about the number of installed, missing, not applicable, and failed patches along with metadata about the operation when this information was gathered for the instance.</p>"
@@ -10651,7 +10904,7 @@
         },
         "Details": {
           "shape": "Boolean",
-          "documentation": "<p>(Optional) If set this returns the response of the command executions and any command output. By default this is set to False. </p>"
+          "documentation": "<p>(Optional) If set this returns the response of the command executions and any command output. The default value is 'false'. </p>"
         }
       }
     },
@@ -10987,6 +11240,40 @@
         "Summaries": {
           "shape": "OpsItemEventSummaries",
           "documentation": "<p>A list of event information for the specified OpsItems.</p>"
+        }
+      }
+    },
+    "ListOpsItemRelatedItemsRequest": {
+      "type": "structure",
+      "members": {
+        "OpsItemId": {
+          "shape": "OpsItemId",
+          "documentation": "<p>The ID of the OpsItem for which you want to list all related-item resources.</p>"
+        },
+        "Filters": {
+          "shape": "OpsItemRelatedItemsFilters",
+          "documentation": "<p>One or more OpsItem filters. Use a filter to return a more specific list of results. </p>"
+        },
+        "MaxResults": {
+          "shape": "OpsItemRelatedItemsMaxResults",
+          "documentation": "<p>The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next set of items to return. (You received this token from a previous call.)</p>"
+        }
+      }
+    },
+    "ListOpsItemRelatedItemsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next set of items to return. Use this token to get the next set of results.</p>"
+        },
+        "Summaries": {
+          "shape": "OpsItemRelatedItemSummaries",
+          "documentation": "<p>A list of related-item resources for the specified OpsItem.</p>"
         }
       }
     },
@@ -12361,7 +12648,7 @@
     },
     "OpsItemDescription": {
       "type": "string",
-      "max": 1024,
+      "max": 2048,
       "min": 1,
       "pattern": "[\\s\\S]*\\S[\\s\\S]*"
     },
@@ -12461,7 +12748,7 @@
           "documentation": "<p>The date and time the OpsItem event was created.</p>"
         }
       },
-      "documentation": "<p>Summary information about an OpsItem event.</p>"
+      "documentation": "<p>Summary information about an OpsItem event or that associated an OpsItem with a related item.</p>"
     },
     "OpsItemFilter": {
       "type": "structure",
@@ -12594,6 +12881,121 @@
     "OpsItemPriority": {
       "type": "integer",
       "max": 5,
+      "min": 1
+    },
+    "OpsItemRelatedItemAssociationId": {
+      "type": "string"
+    },
+    "OpsItemRelatedItemAssociationResourceType": {
+      "type": "string"
+    },
+    "OpsItemRelatedItemAssociationResourceUri": {
+      "type": "string"
+    },
+    "OpsItemRelatedItemAssociationType": {
+      "type": "string"
+    },
+    "OpsItemRelatedItemSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "OpsItemRelatedItemSummary"
+      }
+    },
+    "OpsItemRelatedItemSummary": {
+      "type": "structure",
+      "members": {
+        "OpsItemId": {
+          "shape": "OpsItemId",
+          "documentation": "<p>The OpsItem ID.</p>"
+        },
+        "AssociationId": {
+          "shape": "OpsItemRelatedItemAssociationId",
+          "documentation": "<p>The association ID.</p>"
+        },
+        "ResourceType": {
+          "shape": "OpsItemRelatedItemAssociationResourceType",
+          "documentation": "<p>The resource type.</p>"
+        },
+        "AssociationType": {
+          "shape": "OpsItemRelatedItemAssociationType",
+          "documentation": "<p>The association type.</p>"
+        },
+        "ResourceUri": {
+          "shape": "OpsItemRelatedItemAssociationResourceUri",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the related-item resource.</p>"
+        },
+        "CreatedBy": {
+          "shape": "OpsItemIdentity"
+        },
+        "CreatedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The time the related-item association was created.</p>"
+        },
+        "LastModifiedBy": {
+          "shape": "OpsItemIdentity"
+        },
+        "LastModifiedTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The time the related-item association was last updated.</p>"
+        }
+      },
+      "documentation": "<p>Summary information about related-item resources for an OpsItem.</p>"
+    },
+    "OpsItemRelatedItemsFilter": {
+      "type": "structure",
+      "required": [
+        "Key",
+        "Values",
+        "Operator"
+      ],
+      "members": {
+        "Key": {
+          "shape": "OpsItemRelatedItemsFilterKey",
+          "documentation": "<p>The name of the filter key. Supported values include <code>ResourceUri</code>, <code>ResourceType</code>, or <code>AssociationId</code>.</p>"
+        },
+        "Values": {
+          "shape": "OpsItemRelatedItemsFilterValues",
+          "documentation": "<p>The values for the filter.</p>"
+        },
+        "Operator": {
+          "shape": "OpsItemRelatedItemsFilterOperator",
+          "documentation": "<p>The operator used by the filter call. The only supported operator is <code>EQUAL</code>.</p>"
+        }
+      },
+      "documentation": "<p>Describes a filter for a specific list of related-item resources. </p>"
+    },
+    "OpsItemRelatedItemsFilterKey": {
+      "type": "string",
+      "enum": [
+        "ResourceType",
+        "AssociationId",
+        "ResourceUri"
+      ]
+    },
+    "OpsItemRelatedItemsFilterOperator": {
+      "type": "string",
+      "enum": [
+        "Equal"
+      ]
+    },
+    "OpsItemRelatedItemsFilterValue": {
+      "type": "string"
+    },
+    "OpsItemRelatedItemsFilterValues": {
+      "type": "list",
+      "member": {
+        "shape": "OpsItemRelatedItemsFilterValue"
+      }
+    },
+    "OpsItemRelatedItemsFilters": {
+      "type": "list",
+      "member": {
+        "shape": "OpsItemRelatedItemsFilter"
+      }
+    },
+    "OpsItemRelatedItemsMaxResults": {
+      "type": "integer",
+      "max": 50,
       "min": 1
     },
     "OpsItemSeverity": {
@@ -13499,6 +13901,9 @@
     "PatchContentUrl": {
       "type": "string"
     },
+    "PatchCriticalNonCompliantCount": {
+      "type": "integer"
+    },
     "PatchDeploymentStatus": {
       "type": "string",
       "enum": [
@@ -13722,6 +14127,9 @@
         "shape": "PatchOrchestratorFilterValue"
       }
     },
+    "PatchOtherNonCompliantCount": {
+      "type": "integer"
+    },
     "PatchProduct": {
       "type": "string"
     },
@@ -13812,6 +14220,9 @@
       },
       "max": 10,
       "min": 0
+    },
+    "PatchSecurityNonCompliantCount": {
+      "type": "integer"
     },
     "PatchSet": {
       "type": "string",
@@ -14065,7 +14476,7 @@
         },
         "Overwrite": {
           "shape": "Boolean",
-          "documentation": "<p>Overwrite an existing parameter. If not specified, will default to \"false\".</p>",
+          "documentation": "<p>Overwrite an existing parameter. The default value is 'false'.</p>",
           "box": true
         },
         "AllowedPattern": {
@@ -14086,7 +14497,7 @@
         },
         "DataType": {
           "shape": "ParameterDataType",
-          "documentation": "<p>The data type for a <code>String</code> parameter. Supported data types include plain text and Amazon Machine Image IDs.</p> <p> <b>The following data type values are supported.</b> </p> <ul> <li> <p> <code>text</code> </p> </li> <li> <p> <code>aws:ec2:image</code> </p> </li> </ul> <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>, Systems Manager validates the parameter value is in the required format, such as <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your AWS account. For more information, see <a href=\"http://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native parameter support for Amazon Machine Image IDs</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>The data type for a <code>String</code> parameter. Supported data types include plain text and Amazon Machine Image IDs.</p> <p> <b>The following data type values are supported.</b> </p> <ul> <li> <p> <code>text</code> </p> </li> <li> <p> <code>aws:ec2:image</code> </p> </li> </ul> <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>, Systems Manager validates the parameter value is in the required format, such as <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your AWS account. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native parameter support for Amazon Machine Image IDs</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         }
       }
     },
@@ -14366,7 +14777,7 @@
       "members": {
         "SettingId": {
           "shape": "ServiceSettingId",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be <code>/ssm/automation/customer-script-log-destination</code>, <code>/ssm/automation/customer-script-log-group-name</code>, <code>/ssm/parameter-store/default-parameter-tier</code>, <code>/ssm/parameter-store/high-throughput-enabled</code>, or <code>/ssm/managed-instance/activation-tier</code>. For example, <code>arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled</code>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be one of the following.</p> <ul> <li> <p> <code>/ssm/automation/customer-script-log-destination</code> </p> </li> <li> <p> <code>/ssm/automation/customer-script-log-group-name</code> </p> </li> <li> <p> <code>/ssm/documents/console/public-sharing-permission</code> </p> </li> <li> <p> <code>/ssm/parameter-store/default-parameter-tier</code> </p> </li> <li> <p> <code>/ssm/parameter-store/high-throughput-enabled</code> </p> </li> <li> <p> <code>/ssm/managed-instance/activation-tier</code> </p> </li> </ul>"
         }
       },
       "documentation": "<p>The request body of the ResetServiceSetting API action.</p>"
@@ -14485,6 +14896,9 @@
       "type": "string",
       "max": 64,
       "min": 1
+    },
+    "ResourceDataSyncEnableAllOpsDataSources": {
+      "type": "boolean"
     },
     "ResourceDataSyncIncludeFutureRegions": {
       "type": "boolean"
@@ -14643,7 +15057,7 @@
       "members": {
         "SourceType": {
           "shape": "ResourceDataSyncSourceType",
-          "documentation": "<p>The type of data source for the resource data sync. <code>SourceType</code> is either <code>AwsOrganizations</code> (if an organization is present in AWS Organizations) or <code>singleAccountMultiRegions</code>.</p>"
+          "documentation": "<p>The type of data source for the resource data sync. <code>SourceType</code> is either <code>AwsOrganizations</code> (if an organization is present in AWS Organizations) or <code>SingleAccountMultiRegions</code>.</p>"
         },
         "AwsOrganizationsSource": {
           "shape": "ResourceDataSyncAwsOrganizationsSource",
@@ -14656,6 +15070,10 @@
         "IncludeFutureRegions": {
           "shape": "ResourceDataSyncIncludeFutureRegions",
           "documentation": "<p>Whether to automatically synchronize and aggregate data from new AWS Regions when those Regions come online.</p>"
+        },
+        "EnableAllOpsDataSources": {
+          "shape": "ResourceDataSyncEnableAllOpsDataSources",
+          "documentation": "<p>When you create a resource data sync, if you choose one of the AWS Organizations options, then Systems Manager automatically enables all OpsData sources in the selected AWS Regions for all AWS accounts in your organization (or in the selected organization units). For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html\">About multiple account and Region resource data syncs</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         }
       },
       "documentation": "<p>Information about the source of the data included in the resource data sync.</p>"
@@ -14698,6 +15116,10 @@
         "State": {
           "shape": "ResourceDataSyncState",
           "documentation": "<p>The data type name for including resource data sync state. There are four sync states:</p> <p> <code>OrganizationNotExists</code>: Your organization doesn't exist.</p> <p> <code>NoPermissions</code>: The system can't locate the service-linked role. This role is automatically created when a user creates a resource data sync in Explorer.</p> <p> <code>InvalidOrganizationalUnit</code>: You specified or selected an invalid unit in the resource data sync configuration.</p> <p> <code>TrustedAccessDisabled</code>: You disabled Systems Manager access in the organization in AWS Organizations.</p>"
+        },
+        "EnableAllOpsDataSources": {
+          "shape": "ResourceDataSyncEnableAllOpsDataSources",
+          "documentation": "<p>When you create a resource data sync, if you choose one of the AWS Organizations options, then Systems Manager automatically enables all OpsData sources in the selected AWS Regions for all AWS accounts in your organization (or in the selected organization units). For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html\">About multiple account and Region resource data syncs</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
         }
       },
       "documentation": "<p>The data type name for including resource data sync state. There are four sync states:</p> <p> <code>OrganizationNotExists</code> (Your organization doesn't exist)</p> <p> <code>NoPermissions</code> (The system can't locate the service-linked role. This role is automatically created when a user creates a resource data sync in Explorer.)</p> <p> <code>InvalidOrganizationalUnit</code> (You specified or selected an invalid unit in the resource data sync configuration.)</p> <p> <code>TrustedAccessDisabled</code> (You disabled Systems Manager access in the organization in AWS Organizations.)</p>"
@@ -15470,6 +15892,14 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for a change request. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a change request to identify an environment or target AWS Region. In this case, you could specify the following key-value pairs:</p> <ul> <li> <p> <code>Key=Environment,Value=Production</code> </p> </li> <li> <p> <code>Key=Region,Value=us-east-2</code> </p> </li> </ul>"
+        },
+        "ScheduledEndTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The time that the requester expects the runbook workflow related to the change request to complete. The time is an estimate only that the requester provides for reviewers.</p>"
+        },
+        "ChangeDetails": {
+          "shape": "ChangeDetailsValue",
+          "documentation": "<p>User-provided details about the change. If no details are provided, content specified in the <b>Template information</b> section of the associated change template is added.</p>"
         }
       }
     },
@@ -15782,7 +16212,7 @@
         },
         "Values": {
           "shape": "TargetValues",
-          "documentation": "<p>User-defined criteria that maps to <code>Key</code>. For example, if you specified <code>tag:ServerRole</code>, you could specify <code>value:WebServer</code> to run a command on instances that include EC2 tags of <code>ServerRole,WebServer</code>. </p>"
+          "documentation": "<p>User-defined criteria that maps to <code>Key</code>. For example, if you specified <code>tag:ServerRole</code>, you could specify <code>value:WebServer</code> to run a command on instances that include EC2 tags of <code>ServerRole,WebServer</code>. </p> <p>Depending on the type of <code>Target</code>, the maximum number of values for a <code>Key</code> might be lower than the global maximum of 50.</p>"
         }
       },
       "documentation": "<p>An array of search criteria that targets instances using a Key,Value combination that you specify.</p> <note> <p> One or more targets must be specified for maintenance window Run Command-type tasks. Depending on the task, targets are optional for other maintenance window task types (Automation, AWS Lambda, and AWS Step Functions). For more information about running tasks that do not specify targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering maintenance window tasks without targets</a> in the <i>AWS Systems Manager User Guide</i>.</p> </note> <p>Supported formats include the following.</p> <ul> <li> <p> <code>Key=InstanceIds,Values=<i>instance-id-1</i>,<i>instance-id-2</i>,<i>instance-id-3</i> </code> </p> </li> <li> <p> <code>Key=tag:<i>my-tag-key</i>,Values=<i>my-tag-value-1</i>,<i>my-tag-value-2</i> </code> </p> </li> <li> <p> <code>Key=tag-key,Values=<i>my-tag-key-1</i>,<i>my-tag-key-2</i> </code> </p> </li> <li> <p> <b>Run Command and Maintenance window targets only</b>: <code>Key=resource-groups:Name,Values=<i>resource-group-name</i> </code> </p> </li> <li> <p> <b>Maintenance window targets only</b>: <code>Key=resource-groups:ResourceTypeFilters,Values=<i>resource-type-1</i>,<i>resource-type-2</i> </code> </p> </li> <li> <p> <b>Automation targets only</b>: <code>Key=ResourceGroup;Values=<i>resource-group-name</i> </code> </p> </li> </ul> <p>For example:</p> <ul> <li> <p> <code>Key=InstanceIds,Values=i-02573cafcfEXAMPLE,i-0471e04240EXAMPLE,i-07782c72faEXAMPLE</code> </p> </li> <li> <p> <code>Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3</code> </p> </li> <li> <p> <code>Key=tag-key,Values=Name,Instance-Type,CostCenter</code> </p> </li> <li> <p> <b>Run Command and Maintenance window targets only</b>: <code>Key=resource-groups:Name,Values=ProductionResourceGroup</code> </p> <p>This example demonstrates how to target all resources in the resource group <b>ProductionResourceGroup</b> in your maintenance window.</p> </li> <li> <p> <b>Maintenance window targets only</b>: <code>Key=resource-groups:ResourceTypeFilters,Values=<i>AWS::EC2::INSTANCE</i>,<i>AWS::EC2::VPC</i> </code> </p> <p>This example demonstrates how to target only EC2 instances and VPCs in your maintenance window.</p> </li> <li> <p> <b>Automation targets only</b>: <code>Key=ResourceGroup,Values=MyResourceGroup</code> </p> </li> <li> <p> <b>State Manager association targets only</b>: <code>Key=InstanceIds,Values=<i>*</i> </code> </p> <p>This example demonstrates how to target all managed instances in the AWS Region where the association was created.</p> </li> </ul> <p>For more information about how to send commands that target instances using <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Targeting multiple instances</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
@@ -15938,6 +16368,42 @@
       "type": "string",
       "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
     },
+    "UnlabelParameterVersionRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "ParameterVersion",
+        "Labels"
+      ],
+      "members": {
+        "Name": {
+          "shape": "PSParameterName",
+          "documentation": "<p>The parameter name of which you want to delete one or more labels.</p>"
+        },
+        "ParameterVersion": {
+          "shape": "PSParameterVersion",
+          "documentation": "<p>The specific version of the parameter which you want to delete one or more labels from. If it is not present, the call will fail.</p>",
+          "box": true
+        },
+        "Labels": {
+          "shape": "ParameterLabelList",
+          "documentation": "<p>One or more labels to delete from the specified parameter version.</p>"
+        }
+      }
+    },
+    "UnlabelParameterVersionResult": {
+      "type": "structure",
+      "members": {
+        "RemovedLabels": {
+          "shape": "ParameterLabelList",
+          "documentation": "<p>A list of all labels deleted from the parameter.</p>"
+        },
+        "InvalidLabels": {
+          "shape": "ParameterLabelList",
+          "documentation": "<p>The labels that are not attached to the given parameter version.</p>"
+        }
+      }
+    },
     "UpdateAssociationRequest": {
       "type": "structure",
       "required": [
@@ -16003,6 +16469,10 @@
         "ApplyOnlyAtCronInterval": {
           "shape": "ApplyOnlyAtCronInterval",
           "documentation": "<p>By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you update it. This parameter is not supported for rate expressions.</p> <p>Also, if you specified this option when you created the association, you can reset it. To do so, specify the <code>no-apply-only-at-cron-interval</code> parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.</p>"
+        },
+        "CalendarNames": {
+          "shape": "CalendarNameOrARNList",
+          "documentation": "<p>The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents you want to gate your associations under. The associations only run when that Change Calendar is open. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar\">AWS Systems Manager Change Calendar</a>.</p>"
         },
         "TargetLocations": {
           "shape": "TargetLocations",
@@ -16118,7 +16588,11 @@
         },
         "Name": {
           "shape": "DocumentName",
-          "documentation": "<p>The name of the document that you want to update.</p>"
+          "documentation": "<p>The name of the Systems Manager document that you want to update.</p>"
+        },
+        "DisplayName": {
+          "shape": "DocumentDisplayName",
+          "documentation": "<p>The friendly name of the Systems Manager document that you want to update. This value can differ for each version of the document. If you do not specify a value for this parameter in your request, the existing value is applied to the new document version.</p>"
         },
         "VersionName": {
           "shape": "DocumentVersionName",
@@ -16126,7 +16600,7 @@
         },
         "DocumentVersion": {
           "shape": "DocumentVersion",
-          "documentation": "<p>(Required) The latest version of the document that you want to update. The latest document version can be specified using the $LATEST variable or by the version number. Updating a previous version of a document is not supported.</p>"
+          "documentation": "<p>The version of the document that you want to update. Currently, Systems Manager supports updating only the latest version of the document. You can specify the version number of the latest version or use the <code>$LATEST</code> variable.</p>"
         },
         "DocumentFormat": {
           "shape": "DocumentFormat",
@@ -16735,11 +17209,11 @@
       "members": {
         "SettingId": {
           "shape": "ServiceSettingId",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the service setting to reset. For example, <code>arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled</code>. The setting ID can be one of the following.</p> <ul> <li> <p> <code>/ssm/automation/customer-script-log-destination</code> </p> </li> <li> <p> <code>/ssm/automation/customer-script-log-group-name</code> </p> </li> <li> <p> <code>/ssm/parameter-store/default-parameter-tier</code> </p> </li> <li> <p> <code>/ssm/parameter-store/high-throughput-enabled</code> </p> </li> <li> <p> <code>/ssm/managed-instance/activation-tier</code> </p> </li> </ul>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the service setting to reset. For example, <code>arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled</code>. The setting ID can be one of the following.</p> <ul> <li> <p> <code>/ssm/automation/customer-script-log-destination</code> </p> </li> <li> <p> <code>/ssm/automation/customer-script-log-group-name</code> </p> </li> <li> <p> <code>/ssm/documents/console/public-sharing-permission</code> </p> </li> <li> <p> <code>/ssm/parameter-store/default-parameter-tier</code> </p> </li> <li> <p> <code>/ssm/parameter-store/high-throughput-enabled</code> </p> </li> <li> <p> <code>/ssm/managed-instance/activation-tier</code> </p> </li> </ul>"
         },
         "SettingValue": {
           "shape": "ServiceSettingValue",
-          "documentation": "<p>The new value to specify for the service setting. For the <code>/ssm/parameter-store/default-parameter-tier</code> setting ID, the setting value can be one of the following.</p> <ul> <li> <p>Standard</p> </li> <li> <p>Advanced</p> </li> <li> <p>Intelligent-Tiering</p> </li> </ul> <p>For the <code>/ssm/parameter-store/high-throughput-enabled</code>, and <code>/ssm/managed-instance/activation-tier</code> setting IDs, the setting value can be true or false.</p> <p>For the <code>/ssm/automation/customer-script-log-destination</code> setting ID, the setting value can be CloudWatch.</p> <p>For the <code>/ssm/automation/customer-script-log-group-name</code> setting ID, the setting value can be the name of a CloudWatch Logs log group.</p>"
+          "documentation": "<p>The new value to specify for the service setting. For the <code>/ssm/parameter-store/default-parameter-tier</code> setting ID, the setting value can be one of the following.</p> <ul> <li> <p>Standard</p> </li> <li> <p>Advanced</p> </li> <li> <p>Intelligent-Tiering</p> </li> </ul> <p>For the <code>/ssm/parameter-store/high-throughput-enabled</code>, and <code>/ssm/managed-instance/activation-tier</code> setting IDs, the setting value can be true or false.</p> <p>For the <code>/ssm/automation/customer-script-log-destination</code> setting ID, the setting value can be CloudWatch.</p> <p>For the <code>/ssm/automation/customer-script-log-group-name</code> setting ID, the setting value can be the name of a CloudWatch Logs log group.</p> <p>For the <code>/ssm/documents/console/public-sharing-permission</code> setting ID, the setting value can be Enable or Disable.</p>"
         }
       },
       "documentation": "<p>The request body of the UpdateServiceSetting API action.</p>"
@@ -16768,5 +17242,5 @@
       "pattern": "^[0-9]{1,6}(\\.[0-9]{1,6}){2,3}$"
     }
   },
-  "documentation": "<fullname>AWS Systems Manager</fullname> <p>AWS Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon Elastic Compute Cloud instance (EC2 instance), or any on-premises server or virtual machine (VM) in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">AWS Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up AWS Systems Manager</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p>For information about other API actions you can perform on EC2 instances, see the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/\">Amazon EC2 API Reference</a>. For information about how to use a Query API, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html\">Making API requests</a>. </p>"
+  "documentation": "<fullname>AWS Systems Manager</fullname> <p>AWS Systems Manager is a collection of capabilities that helps you automate management tasks such as collecting system inventory, applying operating system (OS) patches, automating the creation of Amazon Machine Images (AMIs), and configuring operating systems (OSs) and applications at scale. Systems Manager lets you remotely and securely manage the configuration of your managed instances. A <i>managed instance</i> is any Amazon Elastic Compute Cloud instance (EC2 instance), or any on-premises server or virtual machine (VM) in your hybrid environment that has been configured for Systems Manager.</p> <p>This reference is intended to be used with the <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/\">AWS Systems Manager User Guide</a>.</p> <p>To get started, verify prerequisites and configure managed instances. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-setting-up.html\">Setting up AWS Systems Manager</a> in the <i>AWS Systems Manager User Guide</i>.</p> <p class=\"title\"> <b>Related resources</b> </p> <ul> <li> <p>For information about how to use a Query API, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/making-api-requests.html\">Making API requests</a>. </p> </li> <li> <p>For information about other API actions you can perform on EC2 instances, see the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/\">Amazon EC2 API Reference</a>.</p> </li> <li> <p>For information about AWS AppConfig, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/appconfig/latest/userguide/\">AWS AppConfig User Guide</a> and the <a href=\"https://docs.aws.amazon.com/appconfig/2019-10-09/APIReference/\">AWS AppConfig API Reference</a>.</p> </li> <li> <p>For information about AWS Incident Manager, a capability of Systems Manager, see the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/userguide/\">AWS Incident Manager User Guide</a> and the <a href=\"https://docs.aws.amazon.com/incident-manager/latest/APIReference/\">AWS Incident Manager API Reference</a>.</p> </li> </ul>"
 }

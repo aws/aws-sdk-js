@@ -151,7 +151,7 @@ declare namespace Braket {
     quantumTaskArn: QuantumTaskArn;
   }
   export type DeviceArn = string;
-  export type DeviceStatus = "ONLINE"|"OFFLINE"|string;
+  export type DeviceStatus = "ONLINE"|"OFFLINE"|"RETIRED"|string;
   export interface DeviceSummary {
     /**
      * The ARN of the device.
@@ -419,7 +419,7 @@ declare namespace Braket {
      */
     resourceArn: String;
     /**
-     * pecify the keys for the tags to remove from the resource.
+     * Specify the keys for the tags to remove from the resource.
      */
     tagKeys: TagKeys;
   }

@@ -22,6 +22,10 @@ declare class Detective extends Service {
   /**
    * Creates a new behavior graph for the calling account, and sets that account as the administrator account. This operation is called by the account that is enabling Detective. Before you try to enable Detective, make sure that your account has been enrolled in Amazon GuardDuty for at least 48 hours. If you do not meet this requirement, you cannot enable Detective. If you do meet the GuardDuty prerequisite, then when you make the request to enable Detective, it checks whether your data volume is within the Detective quota. If it exceeds the quota, then you cannot enable Detective.  The operation also enables Detective for the calling account in the currently selected Region. It returns the ARN of the new behavior graph.  CreateGraph triggers a process to create the corresponding data tables for the new behavior graph. An account can only be the administrator account for one behavior graph within a Region. If the same account calls CreateGraph with the same administrator account, it always returns the same behavior graph ARN. It does not create a new behavior graph.
    */
+  createGraph(params: Detective.Types.CreateGraphRequest, callback?: (err: AWSError, data: Detective.Types.CreateGraphResponse) => void): Request<Detective.Types.CreateGraphResponse, AWSError>;
+  /**
+   * Creates a new behavior graph for the calling account, and sets that account as the administrator account. This operation is called by the account that is enabling Detective. Before you try to enable Detective, make sure that your account has been enrolled in Amazon GuardDuty for at least 48 hours. If you do not meet this requirement, you cannot enable Detective. If you do meet the GuardDuty prerequisite, then when you make the request to enable Detective, it checks whether your data volume is within the Detective quota. If it exceeds the quota, then you cannot enable Detective.  The operation also enables Detective for the calling account in the currently selected Region. It returns the ARN of the new behavior graph.  CreateGraph triggers a process to create the corresponding data tables for the new behavior graph. An account can only be the administrator account for one behavior graph within a Region. If the same account calls CreateGraph with the same administrator account, it always returns the same behavior graph ARN. It does not create a new behavior graph.
+   */
   createGraph(callback?: (err: AWSError, data: Detective.Types.CreateGraphResponse) => void): Request<Detective.Types.CreateGraphResponse, AWSError>;
   /**
    * Sends a request to invite the specified AWS accounts to be member accounts in the behavior graph. This operation can only be called by the administrator account for a behavior graph.   CreateMembers verifies the accounts and then invites the verified accounts. The administrator can optionally specify to not send invitation emails to the member accounts. This would be used when the administrator manages their member accounts centrally. The request provides the behavior graph ARN and the list of accounts to invite. The response separates the requested accounts into two lists:   The accounts that CreateMembers was able to start the verification for. This list includes member accounts that are being verified, that have passed verification and are to be invited, and that have failed verification.   The accounts that CreateMembers was unable to process. This list includes accounts that were already invited to be member accounts in the behavior graph.  
@@ -88,6 +92,14 @@ declare class Detective extends Service {
    */
   listMembers(callback?: (err: AWSError, data: Detective.Types.ListMembersResponse) => void): Request<Detective.Types.ListMembersResponse, AWSError>;
   /**
+   * Returns the tag values that are assigned to a behavior graph.
+   */
+  listTagsForResource(params: Detective.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Detective.Types.ListTagsForResourceResponse) => void): Request<Detective.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Returns the tag values that are assigned to a behavior graph.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Detective.Types.ListTagsForResourceResponse) => void): Request<Detective.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Rejects an invitation to contribute the account data to a behavior graph. This operation must be called by a member account that has the INVITED status.
    */
   rejectInvitation(params: Detective.Types.RejectInvitationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -103,6 +115,22 @@ declare class Detective extends Service {
    * Sends a request to enable data ingest for a member account that has a status of ACCEPTED_BUT_DISABLED. For valid member accounts, the status is updated as follows.   If Detective enabled the member account, then the new status is ENABLED.   If Detective cannot enable the member account, the status remains ACCEPTED_BUT_DISABLED.   
    */
   startMonitoringMember(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Applies tag values to a behavior graph.
+   */
+  tagResource(params: Detective.Types.TagResourceRequest, callback?: (err: AWSError, data: Detective.Types.TagResourceResponse) => void): Request<Detective.Types.TagResourceResponse, AWSError>;
+  /**
+   * Applies tag values to a behavior graph.
+   */
+  tagResource(callback?: (err: AWSError, data: Detective.Types.TagResourceResponse) => void): Request<Detective.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes tags from a behavior graph.
+   */
+  untagResource(params: Detective.Types.UntagResourceRequest, callback?: (err: AWSError, data: Detective.Types.UntagResourceResponse) => void): Request<Detective.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes tags from a behavior graph.
+   */
+  untagResource(callback?: (err: AWSError, data: Detective.Types.UntagResourceResponse) => void): Request<Detective.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace Detective {
   export interface AcceptInvitationRequest {
@@ -125,6 +153,13 @@ declare namespace Detective {
   export type AccountIdList = AccountId[];
   export type AccountList = Account[];
   export type Boolean = boolean;
+  export type ByteValue = number;
+  export interface CreateGraphRequest {
+    /**
+     * The tags to assign to the new behavior graph. You can add up to 50 tags. For each tag, you provide the tag key and the tag value. Each tag key can contain up to 128 characters. Each tag value can contain up to 256 characters.
+     */
+    Tags?: TagMap;
+  }
   export interface CreateGraphResponse {
     /**
      * The ARN of the new behavior graph.
@@ -145,7 +180,7 @@ declare namespace Detective {
      */
     DisableEmailNotification?: Boolean;
     /**
-     * The list of AWS accounts to invite to become member accounts in the behavior graph. For each invited account, the account list contains the account identifier and the AWS account root user email address.
+     * The list of AWS accounts to invite to become member accounts in the behavior graph. You can invite up to 50 accounts at a time. For each invited account, the account list contains the account identifier and the AWS account root user email address.
      */
     Accounts: AccountList;
   }
@@ -171,7 +206,7 @@ declare namespace Detective {
      */
     GraphArn: GraphArn;
     /**
-     * The list of AWS account identifiers for the member accounts to delete from the behavior graph.
+     * The list of AWS account identifiers for the member accounts to delete from the behavior graph. You can delete up to 50 member accounts at a time.
      */
     AccountIds: AccountIdList;
   }
@@ -199,7 +234,7 @@ declare namespace Detective {
      */
     GraphArn: GraphArn;
     /**
-     * The list of AWS account identifiers for the member account for which to return member details. You cannot use GetMembers to retrieve information about member accounts that were removed from the behavior graph.
+     * The list of AWS account identifiers for the member account for which to return member details. You can request details for up to 50 member accounts at a time. You cannot use GetMembers to retrieve information about member accounts that were removed from the behavior graph.
      */
     AccountIds: AccountIdList;
   }
@@ -289,6 +324,18 @@ declare namespace Detective {
      */
     NextToken?: PaginationToken;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the behavior graph for which to retrieve the tag values.
+     */
+    ResourceArn: GraphArn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The tag values that are assigned to the behavior graph. The request returns up to 50 tag values.
+     */
+    Tags?: TagMap;
+  }
   export interface MemberDetail {
     /**
      * The AWS account identifier for the member account.
@@ -303,7 +350,7 @@ declare namespace Detective {
      */
     GraphArn?: GraphArn;
     /**
-     * Deprecated. Instead of MasterId, use AdministratorId. The AWS account identifier of the administrator account for the behavior graph.
+     * The AWS account identifier of the administrator account for the behavior graph.
      */
     MasterId?: AccountId;
     /**
@@ -326,6 +373,14 @@ declare namespace Detective {
      * The date and time that the member account was last updated. The value is in milliseconds since the epoch.
      */
     UpdatedTime?: Timestamp;
+    /**
+     * The data volume in bytes per day for the member account.
+     */
+    VolumeUsageInBytes?: ByteValue;
+    /**
+     * The data and time when the member account data volume was last updated.
+     */
+    VolumeUsageUpdatedTime?: Timestamp;
     /**
      * The member account data volume as a percentage of the maximum allowed data volume. 0 indicates 0 percent, and 100 indicates 100 percent. Note that this is not the percentage of the behavior graph data volume. For example, the data volume for the behavior graph is 80 GB per day. The maximum data volume is 160 GB per day. If the data volume for the member account is 40 GB per day, then PercentOfGraphUtilization is 25. It represents 25% of the maximum allowed data volume. 
      */
@@ -357,6 +412,22 @@ declare namespace Detective {
      */
     AccountId: AccountId;
   }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the behavior graph to assign the tags to.
+     */
+    ResourceArn: GraphArn;
+    /**
+     * The tags to assign to the behavior graph. You can add up to 50 tags. For each tag, you provide the tag key and the tag value. Each tag key can contain up to 128 characters. Each tag value can contain up to 256 characters.
+     */
+    Tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Timestamp = Date;
   export interface UnprocessedAccount {
     /**
@@ -370,6 +441,18 @@ declare namespace Detective {
   }
   export type UnprocessedAccountList = UnprocessedAccount[];
   export type UnprocessedReason = string;
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the behavior graph to remove the tags from.
+     */
+    ResourceArn: GraphArn;
+    /**
+     * The tag keys of the tags to remove from the behavior graph. You can remove up to 50 tags at a time.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

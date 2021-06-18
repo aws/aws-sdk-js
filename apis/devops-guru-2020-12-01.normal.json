@@ -231,7 +231,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p> Returns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in resource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. </p>"
+      "documentation": "<p> Returns the number of open proactive insights, open reactive insights, and the Mean Time to Recover (MTTR) for all closed insights in resource collections in your account. You specify the type of AWS resources collection. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. </p>"
     },
     "DescribeServiceIntegration": {
       "name": "DescribeServiceIntegration",
@@ -261,6 +261,38 @@
         }
       ],
       "documentation": "<p> Returns the integration status of services that are integrated with DevOps Guru. The one service that can be integrated with DevOps Guru is AWS Systems Manager, which can be used to create an OpsItem for each generated insight. </p>"
+    },
+    "GetCostEstimation": {
+      "name": "GetCostEstimation",
+      "http": {
+        "method": "GET",
+        "requestUri": "/cost-estimation",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetCostEstimationRequest"
+      },
+      "output": {
+        "shape": "GetCostEstimationResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Returns an estimate of the monthly cost for DevOps Guru to analyze your AWS resources. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html\">Estimate your Amazon DevOps Guru costs</a> and <a href=\"http://aws.amazon.com/devops-guru/pricing/\">Amazon DevOps Guru pricing</a>.</p>"
     },
     "GetResourceCollection": {
       "name": "GetResourceCollection",
@@ -292,7 +324,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p> Returns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. </p>"
+      "documentation": "<p> Returns lists AWS resources that are of the specified resource collection type. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. </p>"
     },
     "ListAnomaliesForInsight": {
       "name": "ListAnomaliesForInsight",
@@ -547,6 +579,41 @@
       ],
       "documentation": "<p> Returns a list of insights in your AWS account. You can specify which insights are returned by their start time, one or more statuses (<code>ONGOING</code>, <code>CLOSED</code>, and <code>CLOSED</code>), one or more severities (<code>LOW</code>, <code>MEDIUM</code>, and <code>HIGH</code>), and type (<code>REACTIVE</code> or <code>PROACTIVE</code>). </p> <p> Use the <code>Filters</code> parameter to specify status and severity search parameters. Use the <code>Type</code> parameter to specify <code>REACTIVE</code> or <code>PROACTIVE</code> in your search. </p>"
     },
+    "StartCostEstimation": {
+      "name": "StartCostEstimation",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/cost-estimation",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "StartCostEstimationRequest"
+      },
+      "output": {
+        "shape": "StartCostEstimationResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Starts the creation of an estimate of the monthly cost to analyze your AWS resources.</p>"
+    },
     "UpdateResourceCollection": {
       "name": "UpdateResourceCollection",
       "http": {
@@ -577,7 +644,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p> Updates the collection of resources that DevOps Guru analyzes. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. This method also creates the IAM role required for you to use DevOps Guru. </p>"
+      "documentation": "<p> Updates the collection of resources that DevOps Guru analyzes. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. This method also creates the IAM role required for you to use DevOps Guru. </p>"
     },
     "UpdateServiceIntegration": {
       "name": "UpdateServiceIntegration",
@@ -695,6 +762,12 @@
         "shape": "NotificationChannel"
       }
     },
+    "ClientToken": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9-]*$"
+    },
     "CloudFormationCollection": {
       "type": "structure",
       "members": {
@@ -703,7 +776,7 @@
           "documentation": "<p> An array of CloudFormation stack names. </p>"
         }
       },
-      "documentation": "<p> Information about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
+      "documentation": "<p> Information about AWS CloudFormation stacks. You can use up to 500 stacks to specify which AWS resources in your account to analyze. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
     },
     "CloudFormationCollectionFilter": {
       "type": "structure",
@@ -713,7 +786,17 @@
           "documentation": "<p> An array of CloudFormation stack names. </p>"
         }
       },
-      "documentation": "<p> Information about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
+      "documentation": "<p> Information about AWS CloudFormation stacks. You can use up to 500 stacks to specify which AWS resources in your account to analyze. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
+    },
+    "CloudFormationCostEstimationResourceCollectionFilter": {
+      "type": "structure",
+      "members": {
+        "StackNames": {
+          "shape": "CostEstimationStackNames",
+          "documentation": "<p>An array of CloudFormation stack names. Its size is fixed at 1 item.</p>"
+        }
+      },
+      "documentation": "<p>Information about an AWS CloudFormation stack used to create a monthly cost estimate for DevOps Guru to analyze AWS resources. The maximum number of stacks you can specify for a cost estimate is one. The estimate created is for the cost to analyze the AWS resources defined by the stack. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> in the <i>AWS CloudFormation User Guide</i>.</p>"
     },
     "CloudFormationHealth": {
       "type": "structure",
@@ -822,6 +905,58 @@
     "CloudWatchMetricsUnit": {
       "type": "string"
     },
+    "Cost": {
+      "type": "double"
+    },
+    "CostEstimationResourceCollectionFilter": {
+      "type": "structure",
+      "members": {
+        "CloudFormation": {
+          "shape": "CloudFormationCostEstimationResourceCollectionFilter",
+          "documentation": "<p>An object that specifies the CloudFormation stack that defines the AWS resources used to create a monthly estimate for DevOps Guru.</p>"
+        }
+      },
+      "documentation": "<p>Information about a filter used to specify which AWS resources are analyzed to create a monthly DevOps Guru cost estimate. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html\">Estimate your Amazon DevOps Guru costs</a> and <a href=\"http://aws.amazon.com/devops-guru/pricing/\">Amazon DevOps Guru pricing</a>. </p>"
+    },
+    "CostEstimationServiceResourceCount": {
+      "type": "integer"
+    },
+    "CostEstimationServiceResourceState": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE"
+      ]
+    },
+    "CostEstimationStackNames": {
+      "type": "list",
+      "member": {
+        "shape": "StackName"
+      },
+      "max": 1,
+      "min": 1
+    },
+    "CostEstimationStatus": {
+      "type": "string",
+      "enum": [
+        "ONGOING",
+        "COMPLETED"
+      ]
+    },
+    "CostEstimationTimeRange": {
+      "type": "structure",
+      "members": {
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The start time of the cost estimation.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The end time of the cost estimation.</p>"
+        }
+      },
+      "documentation": "<p>The time range of a cost estimation.</p>"
+    },
     "DescribeAccountHealthRequest": {
       "type": "structure",
       "members": {}
@@ -910,11 +1045,11 @@
       "members": {
         "ProactiveAnomaly": {
           "shape": "ProactiveAnomaly",
-          "documentation": "<p> An <code>ReactiveAnomaly</code> object that represents the requested anomaly. </p>"
+          "documentation": "<p> A <code>ReactiveAnomaly</code> object that represents the requested anomaly. </p>"
         },
         "ReactiveAnomaly": {
           "shape": "ReactiveAnomaly",
-          "documentation": "<p> An <code>ProactiveAnomaly</code> object that represents the requested anomaly. </p>"
+          "documentation": "<p> A <code>ProactiveAnomaly</code> object that represents the requested anomaly. </p>"
         }
       }
     },
@@ -954,11 +1089,11 @@
       "members": {
         "ProactiveInsight": {
           "shape": "ProactiveInsight",
-          "documentation": "<p> An <code>ProactiveInsight</code> object that represents the requested insight. </p>"
+          "documentation": "<p> A <code>ProactiveInsight</code> object that represents the requested insight. </p>"
         },
         "ReactiveInsight": {
           "shape": "ReactiveInsight",
-          "documentation": "<p> An <code>ReactiveInsight</code> object that represents the requested insight. </p>"
+          "documentation": "<p> A <code>ReactiveInsight</code> object that represents the requested insight. </p>"
         }
       }
     },
@@ -970,7 +1105,7 @@
       "members": {
         "ResourceCollectionType": {
           "shape": "ResourceCollectionType",
-          "documentation": "<p> An AWS resource collection type. This type specifies how analyzed AWS resources are defined. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. </p>",
+          "documentation": "<p> An AWS resource collection type. This type specifies how analyzed AWS resources are defined. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. </p>",
           "location": "uri",
           "locationName": "ResourceCollectionType"
         },
@@ -991,6 +1126,10 @@
         "CloudFormation": {
           "shape": "CloudFormationHealths",
           "documentation": "<p> The returned <code>CloudFormationHealthOverview</code> object that contains an <code>InsightHealthOverview</code> object with the requested system health information. </p>"
+        },
+        "Service": {
+          "shape": "ServiceHealths",
+          "documentation": "<p>An array of <code>ServiceHealth</code> objects that describes the health of the AWS services associated with the resources in the collection.</p>"
         },
         "NextToken": {
           "shape": "UuidNextToken",
@@ -1158,6 +1297,46 @@
         "shape": "Event"
       }
     },
+    "GetCostEstimationRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "UuidNextToken",
+          "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>",
+          "location": "querystring",
+          "locationName": "NextToken"
+        }
+      }
+    },
+    "GetCostEstimationResponse": {
+      "type": "structure",
+      "members": {
+        "ResourceCollection": {
+          "shape": "CostEstimationResourceCollectionFilter",
+          "documentation": "<p>The collection of the AWS resources used to create your monthly DevOps Guru cost estimate.</p>"
+        },
+        "Status": {
+          "shape": "CostEstimationStatus",
+          "documentation": "<p>The status of creating this cost estimate. If it's still in progress, the status <code>ONGOING</code> is returned. If it is finished, the status <code>COMPLETED</code> is returned.</p>"
+        },
+        "Costs": {
+          "shape": "ServiceResourceCosts",
+          "documentation": "<p>An array of <code>ResourceCost</code> objects that each contains details about the monthly cost estimate to analyze one of your AWS resources.</p>"
+        },
+        "TimeRange": {
+          "shape": "CostEstimationTimeRange",
+          "documentation": "<p>The start and end time of the cost estimation.</p>"
+        },
+        "TotalCost": {
+          "shape": "Cost",
+          "documentation": "<p>The estimated monthly cost to analyze the AWS resources. This value is the sum of the estimated costs to analyze each resource in the <code>Costs</code> object in this response.</p>"
+        },
+        "NextToken": {
+          "shape": "UuidNextToken",
+          "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
+        }
+      }
+    },
     "GetResourceCollectionRequest": {
       "type": "structure",
       "required": [
@@ -1183,7 +1362,7 @@
       "members": {
         "ResourceCollection": {
           "shape": "ResourceCollectionFilter",
-          "documentation": "<p> The requested list of AWS resource collections. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. </p>"
+          "documentation": "<p> The requested list of AWS resource collections. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. </p>"
         },
         "NextToken": {
           "shape": "UuidNextToken",
@@ -1562,6 +1741,10 @@
         "NextToken": {
           "shape": "UuidNextToken",
           "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If this value is null, it retrieves the first page.</p>"
+        },
+        "Locale": {
+          "shape": "Locale",
+          "documentation": "<p>A locale that specifies the language to use for recommendations.</p>"
         }
       }
     },
@@ -1577,6 +1760,22 @@
           "documentation": "<p>The pagination token to use to retrieve the next page of results for this operation. If there are no more pages, this value is null.</p>"
         }
       }
+    },
+    "Locale": {
+      "type": "string",
+      "enum": [
+        "DE_DE",
+        "EN_US",
+        "EN_GB",
+        "ES_ES",
+        "FR_FR",
+        "IT_IT",
+        "JA_JP",
+        "KO_KR",
+        "PT_BR",
+        "ZH_CN",
+        "ZH_TW"
+      ]
     },
     "MeanTimeToRecoverInMilliseconds": {
       "type": "long"
@@ -1828,6 +2027,10 @@
         },
         "ResourceCollection": {
           "shape": "ResourceCollection"
+        },
+        "ServiceCollection": {
+          "shape": "ServiceCollection",
+          "documentation": "<p>A collection of the names of AWS services.</p>"
         }
       },
       "documentation": "<p>Details about a proactive insight. This object is returned by <code>DescribeInsight.</code> </p>"
@@ -1977,6 +2180,10 @@
         },
         "ResourceCollection": {
           "shape": "ResourceCollection"
+        },
+        "ServiceCollection": {
+          "shape": "ServiceCollection",
+          "documentation": "<p>A collection of the names of AWS services.</p>"
         }
       },
       "documentation": "<p> Information about a reactive insight. This object is returned by <code>DescribeInsight.</code> </p>"
@@ -2120,7 +2327,7 @@
         },
         "Resources": {
           "shape": "RecommendationRelatedEventResources",
-          "documentation": "<p> A <code>ResourceCollection</code> object that contains arrays of the names of AWS CloudFormation stacks. </p>"
+          "documentation": "<p> A <code>ResourceCollection</code> object that contains arrays of the names of AWS CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks. </p>"
         }
       },
       "documentation": "<p> Information about an event that is related to a recommendation. </p>"
@@ -2197,17 +2404,17 @@
       "members": {
         "CloudFormation": {
           "shape": "CloudFormationCollection",
-          "documentation": "<p> An array of the names of AWS CloudFormation stacks. The stacks define AWS resources that DevOps Guru analyzes. </p>"
+          "documentation": "<p> An array of the names of AWS CloudFormation stacks. The stacks define AWS resources that DevOps Guru analyzes. You can specify up to 500 AWS CloudFormation stacks. </p>"
         }
       },
-      "documentation": "<p> A collection of AWS resources supported by DevOps Guru. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. </p>"
+      "documentation": "<p> A collection of AWS resources supported by DevOps Guru. The one type of AWS resource collection supported is AWS CloudFormation stacks. DevOps Guru can be configured to analyze only the AWS resources that are defined in the stacks. You can specify up to 500 AWS CloudFormation stacks. </p>"
     },
     "ResourceCollectionFilter": {
       "type": "structure",
       "members": {
         "CloudFormation": {
           "shape": "CloudFormationCollectionFilter",
-          "documentation": "<p> Information about AWS CloudFormation stacks. You can use stacks to specify which AWS resources in your account to analyze. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
+          "documentation": "<p> Information about AWS CloudFormation stacks. You can use up to 500 stacks to specify which AWS resources in your account to analyze. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html\">Stacks</a> in the <i>AWS CloudFormation User Guide</i>. </p>"
         }
       },
       "documentation": "<p> Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru. </p>"
@@ -2215,11 +2422,18 @@
     "ResourceCollectionType": {
       "type": "string",
       "enum": [
-        "AWS_CLOUD_FORMATION"
+        "AWS_CLOUD_FORMATION",
+        "AWS_SERVICE"
       ]
     },
     "ResourceHours": {
       "type": "long"
+    },
+    "ResourceType": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^[a-zA-Z]+[a-zA-Z0-9-_:]*$"
     },
     "SearchInsightsFilters": {
       "type": "structure",
@@ -2234,6 +2448,10 @@
         },
         "ResourceCollection": {
           "shape": "ResourceCollection"
+        },
+        "ServiceCollection": {
+          "shape": "ServiceCollection",
+          "documentation": "<p>A collection of the names of AWS services.</p>"
         }
       },
       "documentation": "<p> Specifies one or more severity values and one or more status values that are used to search for insights. </p>"
@@ -2289,6 +2507,50 @@
         }
       }
     },
+    "ServiceCollection": {
+      "type": "structure",
+      "members": {
+        "ServiceNames": {
+          "shape": "ServiceNames",
+          "documentation": "<p>An array of strings that each specifies the name of an AWS service.</p>"
+        }
+      },
+      "documentation": "<p>A collection of the names of AWS services.</p>"
+    },
+    "ServiceHealth": {
+      "type": "structure",
+      "members": {
+        "ServiceName": {
+          "shape": "ServiceName",
+          "documentation": "<p>The name of the AWS service.</p>"
+        },
+        "Insight": {
+          "shape": "ServiceInsightHealth",
+          "documentation": "<p>Represents the health of an AWS service. This is a <code>ServiceInsightHealth</code> that contains the number of open proactive and reactive insights for this service.</p>"
+        }
+      },
+      "documentation": "<p>Represents the health of an AWS service.</p>"
+    },
+    "ServiceHealths": {
+      "type": "list",
+      "member": {
+        "shape": "ServiceHealth"
+      }
+    },
+    "ServiceInsightHealth": {
+      "type": "structure",
+      "members": {
+        "OpenProactiveInsights": {
+          "shape": "NumOpenProactiveInsights",
+          "documentation": "<p>The number of open proactive insights in the AWS service</p>"
+        },
+        "OpenReactiveInsights": {
+          "shape": "NumOpenReactiveInsights",
+          "documentation": "<p>The number of open reactive insights in the AWS service</p>"
+        }
+      },
+      "documentation": "<p>Contains the number of open proactive and reactive insights in an analyzed AWS service.</p>"
+    },
     "ServiceIntegrationConfig": {
       "type": "structure",
       "members": {
@@ -2298,6 +2560,74 @@
         }
       },
       "documentation": "<p> Information about the integration of DevOps Guru with another AWS service, such as AWS Systems Manager. </p>"
+    },
+    "ServiceName": {
+      "type": "string",
+      "enum": [
+        "API_GATEWAY",
+        "APPLICATION_ELB",
+        "AUTO_SCALING_GROUP",
+        "CLOUD_FRONT",
+        "DYNAMO_DB",
+        "EC2",
+        "ECS",
+        "EKS",
+        "ELASTIC_BEANSTALK",
+        "ELASTI_CACHE",
+        "ELB",
+        "ES",
+        "KINESIS",
+        "LAMBDA",
+        "NAT_GATEWAY",
+        "NETWORK_ELB",
+        "RDS",
+        "REDSHIFT",
+        "ROUTE_53",
+        "S3",
+        "SAGE_MAKER",
+        "SNS",
+        "SQS",
+        "STEP_FUNCTIONS",
+        "SWF"
+      ]
+    },
+    "ServiceNames": {
+      "type": "list",
+      "member": {
+        "shape": "ServiceName"
+      }
+    },
+    "ServiceResourceCost": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "ResourceType",
+          "documentation": "<p>The type of the AWS resource.</p>"
+        },
+        "State": {
+          "shape": "CostEstimationServiceResourceState",
+          "documentation": "<p>The state of the resource. The resource is <code>ACTIVE</code> if it produces metrics, events, or logs within an hour, otherwise it is <code>INACTIVE</code>. You pay for the number of active AWS resource hours analyzed for each resource. Inactive resources are not charged. </p>"
+        },
+        "Count": {
+          "shape": "CostEstimationServiceResourceCount",
+          "documentation": "<p>The number of active resources analyzed for this service to create a monthly cost estimate.</p>"
+        },
+        "UnitCost": {
+          "shape": "Cost",
+          "documentation": "<p>The price per hour to analyze the resources in the service. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html\">Estimate your Amazon DevOps Guru costs</a> and <a href=\"http://aws.amazon.com/devops-guru/pricing/\">Amazon DevOps Guru pricing</a>.</p>"
+        },
+        "Cost": {
+          "shape": "Cost",
+          "documentation": "<p>The total estimated monthly cost to analyze the active resources for this resource.</p>"
+        }
+      },
+      "documentation": "<p>An object that contains information about the estimated monthly cost to analyze an AWS resource. For more information, see <a href=\"https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html\">Estimate your Amazon DevOps Guru costs</a> and <a href=\"http://aws.amazon.com/devops-guru/pricing/\">Amazon DevOps Guru pricing</a>.</p>"
+    },
+    "ServiceResourceCosts": {
+      "type": "list",
+      "member": {
+        "shape": "ServiceResourceCost"
+      }
     },
     "SnsChannelConfig": {
       "type": "structure",
@@ -2327,6 +2657,27 @@
         "shape": "StackName"
       }
     },
+    "StartCostEstimationRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceCollection"
+      ],
+      "members": {
+        "ResourceCollection": {
+          "shape": "CostEstimationResourceCollectionFilter",
+          "documentation": "<p>The collection of AWS resources used to create a monthly DevOps Guru cost estimate.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>The idempotency token used to identify each cost estimate request.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "StartCostEstimationResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "StartTimeRange": {
       "type": "structure",
       "members": {
@@ -2355,10 +2706,10 @@
       "members": {
         "StackNames": {
           "shape": "UpdateStackNames",
-          "documentation": "<p> An array of the name of stacks to update. </p>"
+          "documentation": "<p> An array of the names of the AWS CloudFormation stacks to update. You can specify up to 500 AWS CloudFormation stacks. </p>"
         }
       },
-      "documentation": "<p> Contains the names of AWS CloudFormation stacks used to update a collection of stacks. </p>"
+      "documentation": "<p> Contains the names of AWS CloudFormation stacks used to update a collection of stacks. You can specify up to 500 AWS CloudFormation stacks.</p>"
     },
     "UpdateResourceCollectionAction": {
       "type": "string",
@@ -2372,7 +2723,7 @@
       "members": {
         "CloudFormation": {
           "shape": "UpdateCloudFormationCollectionFilter",
-          "documentation": "<p> An collection of AWS CloudFormation stacks. </p>"
+          "documentation": "<p> An collection of AWS CloudFormation stacks. You can specify up to 500 AWS CloudFormation stacks. </p>"
         }
       },
       "documentation": "<p> Contains information used to update a collection of AWS resources. </p>"

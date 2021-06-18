@@ -871,6 +871,11 @@
       },
       "documentation": "<p>Details of the rule violation in a security group when compared to the master security group of the AWS Firewall Manager policy.</p>"
     },
+    "BasicInteger": {
+      "type": "integer",
+      "max": 2147483647,
+      "min": -2147483648
+    },
     "Boolean": {
       "type": "boolean"
     },
@@ -994,6 +999,75 @@
     "DisassociateAdminAccountRequest": {
       "type": "structure",
       "members": {}
+    },
+    "DnsDuplicateRuleGroupViolation": {
+      "type": "structure",
+      "members": {
+        "ViolationTarget": {
+          "shape": "ViolationTarget",
+          "documentation": "<p>The ID of the VPC. </p>"
+        },
+        "ViolationTargetDescription": {
+          "shape": "LengthBoundedString",
+          "documentation": "<p>A description of the violation that specifies the rule group and VPC.</p>"
+        }
+      },
+      "documentation": "<p>A DNS Firewall rule group that Firewall Manager tried to associate with a VPC is already associated with the VPC and can't be associated again. </p>"
+    },
+    "DnsRuleGroupLimitExceededViolation": {
+      "type": "structure",
+      "members": {
+        "ViolationTarget": {
+          "shape": "ViolationTarget",
+          "documentation": "<p>The ID of the VPC. </p>"
+        },
+        "ViolationTargetDescription": {
+          "shape": "LengthBoundedString",
+          "documentation": "<p>A description of the violation that specifies the rule group and VPC.</p>"
+        },
+        "NumberOfRuleGroupsAlreadyAssociated": {
+          "shape": "BasicInteger",
+          "documentation": "<p>The number of rule groups currently associated with the VPC. </p>"
+        }
+      },
+      "documentation": "<p>The VPC that Firewall Manager was applying a DNS Fireall policy to reached the limit for associated DNS Firewall rule groups. Firewall Manager tried to associate another rule group with the VPC and failed due to the limit. </p>"
+    },
+    "DnsRuleGroupPriorities": {
+      "type": "list",
+      "member": {
+        "shape": "DnsRuleGroupPriority"
+      }
+    },
+    "DnsRuleGroupPriority": {
+      "type": "integer",
+      "max": 10000,
+      "min": 0
+    },
+    "DnsRuleGroupPriorityConflictViolation": {
+      "type": "structure",
+      "members": {
+        "ViolationTarget": {
+          "shape": "ViolationTarget",
+          "documentation": "<p>The ID of the VPC. </p>"
+        },
+        "ViolationTargetDescription": {
+          "shape": "LengthBoundedString",
+          "documentation": "<p>A description of the violation that specifies the VPC and the rule group that's already associated with it.</p>"
+        },
+        "ConflictingPriority": {
+          "shape": "DnsRuleGroupPriority",
+          "documentation": "<p>The priority setting of the two conflicting rule groups.</p>"
+        },
+        "ConflictingPolicyId": {
+          "shape": "PolicyId",
+          "documentation": "<p>The ID of the Firewall Manager DNS Firewall policy that was already applied to the VPC. This policy contains the rule group that's already associated with the VPC. </p>"
+        },
+        "UnavailablePriorities": {
+          "shape": "DnsRuleGroupPriorities",
+          "documentation": "<p>The priorities of rule groups that are already associated with the VPC. To retry your operation, choose priority settings that aren't in this list for the rule groups in your new DNS Firewall policy. </p>"
+        }
+      },
+      "documentation": "<p>A rule group that Firewall Manager tried to associate with a VPC has the same priority as a rule group that's already associated. </p>"
     },
     "EvaluationResult": {
       "type": "structure",
@@ -2140,6 +2214,18 @@
         "NetworkFirewallPolicyModifiedViolation": {
           "shape": "NetworkFirewallPolicyModifiedViolation",
           "documentation": "<p>Violation detail for an Network Firewall policy that indicates that a firewall policy in an individual account has been modified in a way that makes it noncompliant. For example, the individual account owner might have deleted a rule group, changed the priority of a stateless rule group, or changed a policy default action.</p>"
+        },
+        "DnsRuleGroupPriorityConflictViolation": {
+          "shape": "DnsRuleGroupPriorityConflictViolation",
+          "documentation": "<p>Violation detail for a DNS Firewall policy that indicates that a rule group that Firewall Manager tried to associate with a VPC has the same priority as a rule group that's already associated. </p>"
+        },
+        "DnsDuplicateRuleGroupViolation": {
+          "shape": "DnsDuplicateRuleGroupViolation",
+          "documentation": "<p>Violation detail for a DNS Firewall policy that indicates that a rule group that Firewall Manager tried to associate with a VPC is already associated with the VPC and can't be associated again. </p>"
+        },
+        "DnsRuleGroupLimitExceededViolation": {
+          "shape": "DnsRuleGroupLimitExceededViolation",
+          "documentation": "<p>Violation details for a DNS Firewall policy that indicates that the VPC reached the limit for associated DNS Firewall rule groups. Firewall Manager tried to associate another rule group with the VPC and failed. </p>"
         }
       },
       "documentation": "<p>Violation detail based on resource type.</p>"
@@ -2234,7 +2320,8 @@
         "SECURITY_GROUPS_COMMON",
         "SECURITY_GROUPS_CONTENT_AUDIT",
         "SECURITY_GROUPS_USAGE_AUDIT",
-        "NETWORK_FIREWALL"
+        "NETWORK_FIREWALL",
+        "DNS_FIREWALL"
       ]
     },
     "StatefulRuleGroup": {
@@ -2448,10 +2535,12 @@
         "RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP",
         "SECURITY_GROUP_UNUSED",
         "SECURITY_GROUP_REDUNDANT",
+        "FMS_CREATED_SECURITY_GROUP_EDITED",
         "MISSING_FIREWALL",
         "MISSING_FIREWALL_SUBNET_IN_AZ",
         "MISSING_EXPECTED_ROUTE_TABLE",
-        "NETWORK_FIREWALL_POLICY_MODIFIED"
+        "NETWORK_FIREWALL_POLICY_MODIFIED",
+        "RESOURCE_MISSING_DNS_FIREWALL"
       ]
     },
     "ViolationTarget": {

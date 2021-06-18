@@ -212,6 +212,44 @@
       ],
       "documentation": "<p> Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>. </p>"
     },
+    "BatchCreateChannelMembership": {
+      "name": "BatchCreateChannelMembership",
+      "http": {
+        "method": "POST",
+        "requestUri": "/channels/{channelArn}/memberships?operation=batch-create",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "BatchCreateChannelMembershipRequest"
+      },
+      "output": {
+        "shape": "BatchCreateChannelMembershipResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServiceFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        }
+      ],
+      "documentation": "<p>Adds a specified number of users to a channel. </p>",
+      "endpoint": {
+        "hostPrefix": "messaging-"
+      }
+    },
     "BatchCreateRoomMembership": {
       "name": "BatchCreateRoomMembership",
       "http": {
@@ -400,7 +438,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p> Updates phone number product types or calling names. You can update one attribute at a time for each <code>UpdatePhoneNumberRequestItem</code> . For example, you can update either the product type or the calling name. </p> <p>For product types, choose from Amazon Chime Business Calling and Amazon Chime Voice Connector. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>"
+      "documentation": "<p>Updates phone number product types or calling names. You can update one attribute at a time for each <code>UpdatePhoneNumberRequestItem</code>. For example, you can update the product type or the calling name.</p> <p>For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>"
     },
     "BatchUpdateUser": {
       "name": "BatchUpdateUser",
@@ -438,7 +476,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p> Updates user details within the <a>UpdateUserRequestItem</a> object for up to 20 users for the specified Amazon Chime account. Currently, only <code>LicenseType</code> updates are supported for this action. </p>"
+      "documentation": "<p>Updates user details within the <a>UpdateUserRequestItem</a> object for up to 20 users for the specified Amazon Chime account. Currently, only <code>LicenseType</code> updates are supported for this action.</p>"
     },
     "CreateAccount": {
       "name": "CreateAccount",
@@ -1021,7 +1059,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p>"
+      "documentation": "<p>Creates an order for phone numbers to be provisioned. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type.</p>"
     },
     "CreateProxySession": {
       "name": "CreateProxySession",
@@ -1434,7 +1472,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Deletes the specified Amazon Chime account. You must suspend all users before deleting <code>Team</code> account. You can use the <a>BatchSuspendUser</a> action to dodo.</p> <p>For <code>EnterpriseLWA</code> and <code>EnterpriseAD</code> accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended.</p> <p>Deleted accounts appear in your <code>Disabled</code> accounts list for 90 days. To restore deleted account from your <code>Disabled</code> accounts list, you must contact AWS Support.</p> <p> After 90 days, deleted accounts are permanently removed from your <code>Disabled</code> accounts list. </p>"
+      "documentation": "<p>Deletes the specified Amazon Chime account. You must suspend all users before deleting <code>Team</code> account. You can use the <a>BatchSuspendUser</a> action to dodo.</p> <p>For <code>EnterpriseLWA</code> and <code>EnterpriseAD</code> accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended.</p> <p>Deleted accounts appear in your <code>Disabled</code> accounts list for 90 days. To restore deleted account from your <code>Disabled</code> accounts list, you must contact AWS Support.</p> <p>After 90 days, deleted accounts are permanently removed from your <code>Disabled</code> accounts list.</p>"
     },
     "DeleteAppInstance": {
       "name": "DeleteAppInstance",
@@ -1612,7 +1650,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p> Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their <code>JoinToken</code> . Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . </p>"
+      "documentation": "<p>Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their <code>JoinToken</code>. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
     },
     "DeleteChannel": {
       "name": "DeleteChannel",
@@ -1703,6 +1741,9 @@
         },
         {
           "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ConflictException"
         },
         {
           "shape": "ThrottledClientException"
@@ -1854,7 +1895,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Deletes the specified Amazon Chime SDK meeting. When a meeting is deleted, its attendees are also deleted, clients connected to the meeting are disconnected, and clients can no longer join the meeting. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
+      "documentation": "<p>Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
     },
     "DeletePhoneNumber": {
       "name": "DeletePhoneNumber",
@@ -1889,7 +1930,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Moves the specified phone number into the <b>Deletionqueue</b>. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted.</p> <p> Deleted phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently. </p>"
+      "documentation": "<p>Moves the specified phone number into the <b>Deletion queue</b>. A phone number must be disassociated from any users or Amazon Chime Voice Connectors before it can be deleted.</p> <p>Deleted phone numbers remain in the <b>Deletion queue</b> for 7 days before they are deleted permanently.</p>"
     },
     "DeleteProxySession": {
       "name": "DeleteProxySession",
@@ -2181,7 +2222,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p> Deletes the specified Amazon Chime Voice Connector group. Any <code>VoiceConnectorItems</code> and phone numbers associated with the group must be removed before it can be deleted. </p>"
+      "documentation": "<p>Deletes the specified Amazon Chime Voice Connector group. Any <code>VoiceConnectorItems</code> and phone numbers associated with the group must be removed before it can be deleted.</p>"
     },
     "DeleteVoiceConnectorOrigination": {
       "name": "DeleteVoiceConnectorOrigination",
@@ -3796,7 +3837,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p> Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps,name, and associated <code>VoiceConnectorItems</code> . </p>"
+      "documentation": "<p> Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps,name, and associated <code>VoiceConnectorItems</code>.</p>"
     },
     "GetVoiceConnectorLoggingConfiguration": {
       "name": "GetVoiceConnectorLoggingConfiguration",
@@ -4099,7 +4140,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Lists the Amazon Chime accounts under the administrator's AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, toucan filter by the user's email address, which returns one account result.</p>"
+      "documentation": "<p>Lists the Amazon Chime accounts under the administrator's AWS account. You can filter accounts by account name prefix. To find out which Amazon Chime account a user belongs to, you can filter by the user's email address, which returns one account result.</p>"
     },
     "ListAppInstanceAdmins": {
       "name": "ListAppInstanceAdmins",
@@ -4476,7 +4517,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>. By default, sorted by creation timestamp in descending order .</p> <note> <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message.</p> <p>Also, the x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>",
+      "documentation": "<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>. By default, sorted by creation timestamp in descending order.</p> <note> <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message.</p> <p>Also, the x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>",
       "endpoint": {
         "hostPrefix": "messaging-"
       }
@@ -4552,7 +4593,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.</p> <p class=\"title\"> <b>Functionality &amp; restrictions</b> </p> <ul> <li> <p> Use privacy = <code>PUBLIC</code> to retrieve all public channels in the account </p> </li> <li> <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to list the private channels in an account.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>",
+      "documentation": "<p>Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.</p> <p class=\"title\"> <b>Functionality &amp; restrictions</b> </p> <ul> <li> <p>Use privacy = <code>PUBLIC</code> to retrieve all public channels in the account.</p> </li> <li> <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to list the private channels in an account.</p> </li> </ul> <note> <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the value in the header.</p> </note>",
       "endpoint": {
         "hostPrefix": "messaging-"
       }
@@ -4666,7 +4707,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p> Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i> . </p>"
+      "documentation": "<p> Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see <a href=\"https://docs.aws.amazon.com/chime/latest/dg/meetings-sdk.html\">Using the Amazon Chime SDK</a> in the <i>Amazon Chime Developer Guide</i>.</p>"
     },
     "ListPhoneNumberOrders": {
       "name": "ListPhoneNumberOrders",
@@ -4923,6 +4964,44 @@
         }
       ],
       "documentation": "<p>Lists the SIP rules under the administrator's AWS account.</p>"
+    },
+    "ListSupportedPhoneNumberCountries": {
+      "name": "ListSupportedPhoneNumberCountries",
+      "http": {
+        "method": "GET",
+        "requestUri": "/phone-number-countries",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListSupportedPhoneNumberCountriesRequest"
+      },
+      "output": {
+        "shape": "ListSupportedPhoneNumberCountriesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Lists supported phone number countries.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -5301,7 +5380,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p> Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/cloudtrail.html\">Logging Amazon Chime API Calls with AWS CloudTrail</a> in the <i>Amazon Chime Administration Guide</i> . </p> <p> To turn off existing retention settings, remove the number of days from the corresponding <b>RetentionDays</b> field in the <b>RetentionSettings</b> object. For more information about retention settings, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html\">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i> . </p>"
+      "documentation": "<p> Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/cloudtrail.html\">Logging Amazon Chime API Calls with AWS CloudTrail</a> in the <i>Amazon Chime Administration Guide</i>.</p> <p> To turn off existing retention settings, remove the number of days from the corresponding <b>RetentionDays</b> field in the <b>RetentionSettings</b> object. For more information about retention settings, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/chat-retention.html\">Managing Chat Retention Policies</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
     },
     "PutSipMediaApplicationLoggingConfiguration": {
       "name": "PutSipMediaApplicationLoggingConfiguration",
@@ -5875,7 +5954,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Searches phone numbers that can be ordered.</p>"
+      "documentation": "<p>Searches for phone numbers that can be ordered. For US numbers, provide at least one of the following search filters: <code>AreaCode</code>, <code>City</code>, <code>State</code>, or <code>TollFreePrefix</code>. If you provide <code>City</code>, you must also provide <code>State</code>. Numbers outside the US only support the <code>PhoneNumberType</code> filter, which you must use.</p>"
     },
     "SendChannelMessage": {
       "name": "SendChannelMessage",
@@ -6164,7 +6243,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Updates account details for the specified Amazon Chime account. Currently, only account name updates are supported for this action.</p>"
+      "documentation": "<p>Updates account details for the specified Amazon Chime account. Currently, only account name and default license updates are supported for this action.</p>"
     },
     "UpdateAccountSettings": {
       "name": "UpdateAccountSettings",
@@ -6518,7 +6597,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action.</p> <p>For toll-free numbers, you must use the Amazon Chime Voice Connector product type.</p> <p>Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>"
+      "documentation": "<p>Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action.</p> <p>For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type.</p> <p>Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.</p>"
     },
     "UpdatePhoneNumberSettings": {
       "name": "UpdatePhoneNumberSettings",
@@ -6706,6 +6785,47 @@
         }
       ],
       "documentation": "<p>Updates the details of the specified SIP media application.</p>"
+    },
+    "UpdateSipMediaApplicationCall": {
+      "name": "UpdateSipMediaApplicationCall",
+      "http": {
+        "method": "POST",
+        "requestUri": "/sip-media-applications/{sipMediaApplicationId}/calls/{transactionId}",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateSipMediaApplicationCallRequest"
+      },
+      "output": {
+        "shape": "UpdateSipMediaApplicationCallResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Allows you to trigger a Lambda function at any time while a call is active, and replace the current actions with new actions returned by the invocation.</p>"
     },
     "UpdateSipRule": {
       "name": "UpdateSipRule",
@@ -7360,6 +7480,27 @@
       "max": 10,
       "min": 1
     },
+    "BatchChannelMemberships": {
+      "type": "structure",
+      "members": {
+        "InvitedBy": {
+          "shape": "Identity"
+        },
+        "Type": {
+          "shape": "ChannelMembershipType",
+          "documentation": "<p>The membership types set for the channel users.</p>"
+        },
+        "Members": {
+          "shape": "Members",
+          "documentation": "<p>The users successfully added to the request.</p>"
+        },
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel to which you're adding users.</p>"
+        }
+      },
+      "documentation": "<p>The membership information, including member ARNs, the channel ARN, and membership types.</p>"
+    },
     "BatchCreateAttendeeErrorList": {
       "type": "list",
       "member": {
@@ -7395,6 +7536,72 @@
         "Errors": {
           "shape": "BatchCreateAttendeeErrorList",
           "documentation": "<p>If the action fails for one or more of the attendees in the request, a list of the attendees is returned, along with error codes and error messages.</p>"
+        }
+      }
+    },
+    "BatchCreateChannelMembershipError": {
+      "type": "structure",
+      "members": {
+        "MemberArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the member that the service couldn't add.</p>"
+        },
+        "ErrorCode": {
+          "shape": "ErrorCode",
+          "documentation": "<p>The error code.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>The error message.</p>"
+        }
+      },
+      "documentation": "<p>A list of failed member ARNs, error codes, and error messages.</p>"
+    },
+    "BatchCreateChannelMembershipErrors": {
+      "type": "list",
+      "member": {
+        "shape": "BatchCreateChannelMembershipError"
+      }
+    },
+    "BatchCreateChannelMembershipRequest": {
+      "type": "structure",
+      "required": [
+        "ChannelArn",
+        "MemberArns"
+      ],
+      "members": {
+        "ChannelArn": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The ARN of the channel to which you're adding users.</p>",
+          "location": "uri",
+          "locationName": "channelArn"
+        },
+        "Type": {
+          "shape": "ChannelMembershipType",
+          "documentation": "<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.</p>"
+        },
+        "MemberArns": {
+          "shape": "MemberArns",
+          "documentation": "<p>The ARNs of the members you want to add to the channel.</p>"
+        },
+        "ChimeBearer": {
+          "shape": "ChimeArn",
+          "documentation": "<p>The <code>AppInstanceUserArn</code> of the user that makes the API call.</p> <p/>",
+          "location": "header",
+          "locationName": "x-amz-chime-bearer"
+        }
+      }
+    },
+    "BatchCreateChannelMembershipResponse": {
+      "type": "structure",
+      "members": {
+        "BatchChannelMemberships": {
+          "shape": "BatchChannelMemberships",
+          "documentation": "<p>The list of channel memberships in the response.</p>"
+        },
+        "Errors": {
+          "shape": "BatchCreateChannelMembershipErrors",
+          "documentation": "<p>If the action fails for one or more of the memberships in the request, a list of the memberships is returned, along with error codes and error messages.</p>"
         }
       }
     },
@@ -8522,7 +8729,7 @@
         },
         "JoinToken": {
           "shape": "JoinTokenString",
-          "documentation": "<p>Token used by the Amazon Chime SDK attendee. Call the <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_Attendee.htmlCreateAttendee\">CreateAttendee</a> action to get a join token.</p>"
+          "documentation": "<p>Token used by the Amazon Chime SDK attendee. Call the <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_CreateAttendee.html\">CreateAttendee</a> action to get a join token.</p>"
         }
       }
     },
@@ -8798,11 +9005,11 @@
       "members": {
         "FromPhoneNumber": {
           "shape": "E164PhoneNumber",
-          "documentation": "<p>The phone number that a user calls from.</p>"
+          "documentation": "<p>The phone number that a user calls from. This is a phone number in your Amazon Chime phone number inventory.</p>"
         },
         "ToPhoneNumber": {
           "shape": "E164PhoneNumber",
-          "documentation": "<p>The phone number that the user dials in order to connect to a meeting.</p>"
+          "documentation": "<p>The phone number that the service should call.</p>"
         },
         "SipMediaApplicationId": {
           "shape": "NonEmptyString",
@@ -9635,7 +9842,7 @@
       "members": {
         "ChannelBan": {
           "shape": "ChannelBan",
-          "documentation": "<p>The the details of the ban.</p>"
+          "documentation": "<p>The details of the ban.</p>"
         }
       }
     },
@@ -11483,7 +11690,7 @@
         },
         "Privacy": {
           "shape": "ChannelPrivacy",
-          "documentation": "<p> The privacy setting. <code>PUBLIC</code> retrieves all the public channels. <code>PRIVATE</code> retrieves private channels. Only an <code>AppInstanceAdmin</code> can retrieve private channels. </p>",
+          "documentation": "<p>The privacy setting. <code>PUBLIC</code> retrieves all the public channels. <code>PRIVATE</code> retrieves private channels. Only an <code>AppInstanceAdmin</code> can retrieve private channels. </p>",
           "location": "querystring",
           "locationName": "privacy"
         },
@@ -11859,6 +12066,29 @@
         }
       }
     },
+    "ListSupportedPhoneNumberCountriesRequest": {
+      "type": "structure",
+      "required": [
+        "ProductType"
+      ],
+      "members": {
+        "ProductType": {
+          "shape": "PhoneNumberProductType",
+          "documentation": "<p>The phone number product type.</p>",
+          "location": "querystring",
+          "locationName": "product-type"
+        }
+      }
+    },
+    "ListSupportedPhoneNumberCountriesResponse": {
+      "type": "structure",
+      "members": {
+        "PhoneNumberCountries": {
+          "shape": "PhoneNumberCountriesList",
+          "documentation": "<p>The supported phone number countries.</p>"
+        }
+      }
+    },
     "ListTagsForResourceRequest": {
       "type": "structure",
       "required": [
@@ -12107,7 +12337,7 @@
         },
         "MediaRegion": {
           "shape": "String",
-          "documentation": "<p> The Region in which you create the meeting. Available values: <code>af-south-1</code> , <code>ap-northeast-1</code> , <code>ap-northeast-2</code> , <code>ap-south-1</code> , <code>ap-southeast-1</code> , <code>ap-southeast-2</code> , <code>ca-central-1</code> , <code>eu-central-1</code> , <code>eu-north-1</code> , <code>eu-south-1</code> , <code>eu-west-1</code> , <code>eu-west-2</code> , <code>eu-west-3</code> , <code>sa-east-1</code> , <code>us-east-1</code> , <code>us-east-2</code> , <code>us-west-1</code> , <code>us-west-2</code> . </p>"
+          "documentation": "<p>The Region in which you create the meeting. Available values: <code>af-south-1</code>, <code>ap-northeast-1</code>, <code>ap-northeast-2</code>, <code>ap-south-1</code>, <code>ap-southeast-1</code>, <code>ap-southeast-2</code>, <code>ca-central-1</code>, <code>eu-central-1</code>, <code>eu-north-1</code>, <code>eu-south-1</code>, <code>eu-west-1</code>, <code>eu-west-2</code>, <code>eu-west-3</code>, <code>sa-east-1</code>, <code>us-east-1</code>, <code>us-east-2</code>, <code>us-west-1</code>, <code>us-west-2</code>.</p>"
         }
       },
       "documentation": "<p>A meeting created using the Amazon Chime SDK.</p>"
@@ -12174,6 +12404,14 @@
       },
       "documentation": "<p>The member details, such as email address, name, member ID, and member type.</p>"
     },
+    "MemberArns": {
+      "type": "list",
+      "member": {
+        "shape": "ChimeArn"
+      },
+      "max": 100,
+      "min": 1
+    },
     "MemberError": {
       "type": "structure",
       "members": {
@@ -12205,6 +12443,12 @@
         "Bot",
         "Webhook"
       ]
+    },
+    "Members": {
+      "type": "list",
+      "member": {
+        "shape": "Identity"
+      }
     },
     "MembershipItem": {
       "type": "structure",
@@ -12442,6 +12686,10 @@
           "shape": "E164PhoneNumber",
           "documentation": "<p>The phone number, in E.164 format.</p>"
         },
+        "Country": {
+          "shape": "Alpha2CountryCode",
+          "documentation": "<p>The phone number country. Format: ISO 3166-1 alpha-2.</p>"
+        },
         "Type": {
           "shape": "PhoneNumberType",
           "documentation": "<p>The phone number type.</p>"
@@ -12549,6 +12797,26 @@
       },
       "documentation": "<p>The phone number capabilities for Amazon Chime Business Calling phone numbers, such as enabled inbound and outbound calling and text messaging.</p>"
     },
+    "PhoneNumberCountriesList": {
+      "type": "list",
+      "member": {
+        "shape": "PhoneNumberCountry"
+      }
+    },
+    "PhoneNumberCountry": {
+      "type": "structure",
+      "members": {
+        "CountryCode": {
+          "shape": "Alpha2CountryCode",
+          "documentation": "<p>The phone number country code. Format: ISO 3166-1 alpha-2.</p>"
+        },
+        "SupportedPhoneNumberTypes": {
+          "shape": "PhoneNumberTypeList",
+          "documentation": "<p>The supported phone number types. </p>"
+        }
+      },
+      "documentation": "<p>The phone number country.</p>"
+    },
     "PhoneNumberError": {
       "type": "structure",
       "members": {
@@ -12633,7 +12901,8 @@
       "type": "string",
       "enum": [
         "BusinessCalling",
-        "VoiceConnector"
+        "VoiceConnector",
+        "SipMediaApplicationDialIn"
       ]
     },
     "PhoneNumberStatus": {
@@ -12655,6 +12924,12 @@
         "Local",
         "TollFree"
       ]
+    },
+    "PhoneNumberTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "PhoneNumberType"
+      }
     },
     "Port": {
       "type": "integer",
@@ -13432,38 +13707,55 @@
       },
       "documentation": "<p>The retention settings that determine how long to retain chat-room messages for an Amazon Chime Enterprise account.</p>"
     },
+    "SMAUpdateCallArgumentsMap": {
+      "type": "map",
+      "key": {
+        "shape": "SensitiveString"
+      },
+      "value": {
+        "shape": "SensitiveString"
+      },
+      "max": 20,
+      "min": 0
+    },
     "SearchAvailablePhoneNumbersRequest": {
       "type": "structure",
       "members": {
         "AreaCode": {
           "shape": "String",
-          "documentation": "<p>The area code used to filter results.</p>",
+          "documentation": "<p>The area code used to filter results. Only applies to the US.</p>",
           "location": "querystring",
           "locationName": "area-code"
         },
         "City": {
           "shape": "String",
-          "documentation": "<p>The city used to filter results.</p>",
+          "documentation": "<p>The city used to filter results. Only applies to the US.</p>",
           "location": "querystring",
           "locationName": "city"
         },
         "Country": {
-          "shape": "String",
-          "documentation": "<p>The country used to filter results.</p>",
+          "shape": "Alpha2CountryCode",
+          "documentation": "<p>The country used to filter results. Defaults to the US Format: ISO 3166-1 alpha-2.</p>",
           "location": "querystring",
           "locationName": "country"
         },
         "State": {
           "shape": "String",
-          "documentation": "<p>The state used to filter results.</p>",
+          "documentation": "<p>The state used to filter results. Required only if you provide <code>City</code>. Only applies to the US.</p>",
           "location": "querystring",
           "locationName": "state"
         },
         "TollFreePrefix": {
           "shape": "TollFreePrefix",
-          "documentation": "<p>The toll-free prefix that you use to filter results.</p>",
+          "documentation": "<p>The toll-free prefix that you use to filter results. Only applies to the US.</p>",
           "location": "querystring",
           "locationName": "toll-free-prefix"
+        },
+        "PhoneNumberType": {
+          "shape": "PhoneNumberType",
+          "documentation": "<p>The phone number type used to filter results. Required for non-US numbers.</p>",
+          "location": "querystring",
+          "locationName": "phone-number-type"
         },
         "MaxResults": {
           "shape": "PhoneNumberMaxResults",
@@ -13473,7 +13765,7 @@
         },
         "NextToken": {
           "shape": "String",
-          "documentation": "<p>The token to use to retrieve the next page of results.</p>",
+          "documentation": "<p>The token used to retrieve the next page of results.</p>",
           "location": "querystring",
           "locationName": "next-token"
         }
@@ -13485,6 +13777,10 @@
         "E164PhoneNumbers": {
           "shape": "E164PhoneNumberList",
           "documentation": "<p>List of phone numbers, in E.164 format.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token used to retrieve the next page of search results.</p>"
         }
       }
     },
@@ -14056,6 +14352,10 @@
         "Name": {
           "shape": "AccountName",
           "documentation": "<p>The new name for the specified Amazon Chime account.</p>"
+        },
+        "DefaultLicense": {
+          "shape": "License",
+          "documentation": "<p>The default license applied when you add users to an Amazon Chime account.</p>"
         }
       }
     },
@@ -14367,7 +14667,7 @@
           "documentation": "<p>The outbound calling name to update.</p>"
         }
       },
-      "documentation": "<p> The phone number ID, product type, or calling name fields to update, used with the <a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions. </p>"
+      "documentation": "<p>The phone number ID, product type, or calling name fields to update, used with the <a>BatchUpdatePhoneNumber</a> and <a>UpdatePhoneNumber</a> actions.</p>"
     },
     "UpdatePhoneNumberRequestItemList": {
       "type": "list",
@@ -14510,6 +14810,40 @@
         }
       }
     },
+    "UpdateSipMediaApplicationCallRequest": {
+      "type": "structure",
+      "required": [
+        "SipMediaApplicationId",
+        "TransactionId",
+        "Arguments"
+      ],
+      "members": {
+        "SipMediaApplicationId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the SIP media application handling the call.</p>",
+          "location": "uri",
+          "locationName": "sipMediaApplicationId"
+        },
+        "TransactionId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the call transaction.</p>",
+          "location": "uri",
+          "locationName": "transactionId"
+        },
+        "Arguments": {
+          "shape": "SMAUpdateCallArgumentsMap",
+          "documentation": "<p>Arguments made available to the Lambda function as part of the <code>CALL_UPDATE_REQUESTED</code> event. Can contain 0-20 key-value pairs.</p>"
+        }
+      }
+    },
+    "UpdateSipMediaApplicationCallResponse": {
+      "type": "structure",
+      "members": {
+        "SipMediaApplicationCall": {
+          "shape": "SipMediaApplicationCall"
+        }
+      }
+    },
     "UpdateSipMediaApplicationRequest": {
       "type": "structure",
       "required": [
@@ -14633,7 +14967,7 @@
           "documentation": "<p>The Alexa for Business metadata.</p>"
         }
       },
-      "documentation": "<p> The user ID and user fields to update, used with the <a>BatchUpdateUser</a> action. </p>"
+      "documentation": "<p>The user ID and user fields to update, used with the <a>BatchUpdateUser</a> action.</p>"
     },
     "UpdateUserRequestItemList": {
       "type": "list",
@@ -14697,7 +15031,7 @@
         },
         "VoiceConnectorItems": {
           "shape": "VoiceConnectorItemList",
-          "documentation": "<p> The <code>VoiceConnectorItems</code> to associate with the group. </p>"
+          "documentation": "<p>The <code>VoiceConnectorItems</code> to associate with the group.</p>"
         }
       }
     },
@@ -14845,9 +15179,9 @@
     },
     "UserId": {
       "type": "string",
-      "max": 50,
+      "max": 64,
       "min": 1,
-      "pattern": "[A-Za-z0-9][A-Za-z0-9\\:\\-\\_\\.\\@]{3,50}[A-Za-z0-9]",
+      "pattern": "[A-Za-z0-9]([A-Za-z0-9\\:\\-\\_\\.\\@]{0,62}[A-Za-z0-9])?",
       "sensitive": true
     },
     "UserIdList": {
@@ -14984,7 +15318,7 @@
           "documentation": "<p>The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first.</p>"
         }
       },
-      "documentation": "<p> For Amazon Chime Voice Connector groups, the Amazon Chime Voice Connectors to which to route inbound calls. Includes priority configuration settings. Limit: 3 <code>VoiceConnectorItems</code> per Amazon Chime Voice Connector group. </p>"
+      "documentation": "<p>For Amazon Chime Voice Connector groups, the Amazon Chime Voice Connectors to which to route inbound calls. Includes priority configuration settings. Limit: 3 <code>VoiceConnectorItems</code> per Amazon Chime Voice Connector group.</p>"
     },
     "VoiceConnectorItemList": {
       "type": "list",

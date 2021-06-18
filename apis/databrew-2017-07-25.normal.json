@@ -1070,7 +1070,7 @@
           "documentation": "<p>A column to apply this condition to.</p>"
         }
       },
-      "documentation": "<p>Represents an individual condition that evaluates to true or false.</p> <p>Conditions are used with recipe actions: The action is only performed for column values where the condition evaluates to true.</p> <p>If a recipe requires more than one condition, then the recipe must specify multiple <code>ConditionExpression</code> elements. Each condition is applied to the rows in a dataset first, before the recipe action is performed.</p>"
+      "documentation": "<p>Represents an individual condition that evaluates to true or false.</p> <p>Conditions are used with recipe actions. The action is only performed for column values where the condition evaluates to true.</p> <p>If a recipe requires more than one condition, then the recipe must specify multiple <code>ConditionExpression</code> elements. Each condition is applied to the rows in a dataset first, before the recipe action is performed.</p>"
     },
     "ConditionExpressionList": {
       "type": "list",
@@ -1081,6 +1081,9 @@
     "ConditionValue": {
       "type": "string",
       "max": 1024
+    },
+    "CreateColumn": {
+      "type": "boolean"
     },
     "CreateDatasetRequest": {
       "type": "structure",
@@ -1095,13 +1098,17 @@
         },
         "Format": {
           "shape": "InputFormat",
-          "documentation": "<p>Specifies the file format of a dataset created from an S3 file or folder.</p>"
+          "documentation": "<p>The file format of a dataset that is created from an S3 file or folder.</p>"
         },
         "FormatOptions": {
           "shape": "FormatOptions"
         },
         "Input": {
           "shape": "Input"
+        },
+        "PathOptions": {
+          "shape": "PathOptions",
+          "documentation": "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -1397,24 +1404,24 @@
       "members": {
         "Delimiter": {
           "shape": "Delimiter",
-          "documentation": "<p>A single character that specifies the delimiter being used in the Csv file.</p>"
+          "documentation": "<p>A single character that specifies the delimiter being used in the CSV file.</p>"
         },
         "HeaderRow": {
           "shape": "HeaderRow",
-          "documentation": "<p>A variable that specifies whether the first row in the file will be parsed as the header. If false, column names will be auto-generated.</p>"
+          "documentation": "<p>A variable that specifies whether the first row in the file is parsed as the header. If this value is false, column names are auto-generated.</p>"
         }
       },
-      "documentation": "<p>Options that define how DataBrew will read a Csv file when creating a dataset from that file.</p>"
+      "documentation": "<p>Represents a set of options that define how DataBrew will read a comma-separated value (CSV) file when creating a dataset from that file.</p>"
     },
     "CsvOutputOptions": {
       "type": "structure",
       "members": {
         "Delimiter": {
           "shape": "Delimiter",
-          "documentation": "<p>A single character that specifies the delimiter used to create Csv job output.</p>"
+          "documentation": "<p>A single character that specifies the delimiter used to create CSV job output.</p>"
         }
       },
-      "documentation": "<p>Options that define how DataBrew will write a Csv file.</p>"
+      "documentation": "<p>Represents a set of options that define how DataBrew will write a comma-separated value (CSV) file.</p>"
     },
     "DataCatalogInputDefinition": {
       "type": "structure",
@@ -1442,7 +1449,33 @@
       },
       "documentation": "<p>Represents how metadata stored in the AWS Glue Data Catalog is defined in a DataBrew dataset. </p>"
     },
+    "DatabaseInputDefinition": {
+      "type": "structure",
+      "required": [
+        "GlueConnectionName",
+        "DatabaseTableName"
+      ],
+      "members": {
+        "GlueConnectionName": {
+          "shape": "GlueConnectionName",
+          "documentation": "<p>The AWS Glue Connection that stores the connection information for the target database.</p>"
+        },
+        "DatabaseTableName": {
+          "shape": "DatabaseTableName",
+          "documentation": "<p>The table within the target database.</p>"
+        },
+        "TempDirectory": {
+          "shape": "S3Location"
+        }
+      },
+      "documentation": "<p>Connection information for dataset input files stored in a database.</p>"
+    },
     "DatabaseName": {
+      "type": "string",
+      "max": 255,
+      "min": 1
+    },
+    "DatabaseTableName": {
       "type": "string",
       "max": 255,
       "min": 1
@@ -1472,11 +1505,11 @@
         },
         "Format": {
           "shape": "InputFormat",
-          "documentation": "<p>Specifies the file format of a dataset created from an S3 file or folder.</p>"
+          "documentation": "<p>The file format of a dataset that is created from an S3 file or folder.</p>"
         },
         "FormatOptions": {
           "shape": "FormatOptions",
-          "documentation": "<p>Options that define how DataBrew interprets the data in the dataset.</p>"
+          "documentation": "<p>A set of options that define how DataBrew interprets the data in the dataset.</p>"
         },
         "Input": {
           "shape": "Input",
@@ -1493,6 +1526,10 @@
         "Source": {
           "shape": "Source",
           "documentation": "<p>The location of the data for the dataset, either Amazon S3 or the AWS Glue Data Catalog.</p>"
+        },
+        "PathOptions": {
+          "shape": "PathOptions",
+          "documentation": "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -1516,8 +1553,64 @@
       "max": 255,
       "min": 1
     },
+    "DatasetParameter": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Type"
+      ],
+      "members": {
+        "Name": {
+          "shape": "PathParameterName",
+          "documentation": "<p>The name of the parameter that is used in the dataset's S3 path.</p>"
+        },
+        "Type": {
+          "shape": "ParameterType",
+          "documentation": "<p>The type of the dataset parameter, can be one of a 'String', 'Number' or 'Datetime'.</p>"
+        },
+        "DatetimeOptions": {
+          "shape": "DatetimeOptions",
+          "documentation": "<p>Additional parameter options such as a format and a timezone. Required for datetime parameters.</p>"
+        },
+        "CreateColumn": {
+          "shape": "CreateColumn",
+          "documentation": "<p>Optional boolean value that defines whether the captured value of this parameter should be loaded as an additional column in the dataset.</p>"
+        },
+        "Filter": {
+          "shape": "FilterExpression",
+          "documentation": "<p>The optional filter expression structure to apply additional matching criteria to the parameter.</p>"
+        }
+      },
+      "documentation": "<p>Represents a dataset paramater that defines type and conditions for a parameter in the S3 path of the dataset.</p>"
+    },
     "Date": {
       "type": "timestamp"
+    },
+    "DatetimeFormat": {
+      "type": "string",
+      "max": 100,
+      "min": 2
+    },
+    "DatetimeOptions": {
+      "type": "structure",
+      "required": [
+        "Format"
+      ],
+      "members": {
+        "Format": {
+          "shape": "DatetimeFormat",
+          "documentation": "<p>Required option, that defines the datetime format used for a date parameter in the S3 path. Should use only supported datetime specifiers and separation characters, all litera a-z or A-Z character should be escaped with single quotes. E.g. \"MM.dd.yyyy-'at'-HH:mm\".</p>"
+        },
+        "TimezoneOffset": {
+          "shape": "TimezoneOffset",
+          "documentation": "<p>Optional value for a timezone offset of the datetime parameter value in the S3 path. Shouldn't be used if Format for this parameter includes timezone fields. If no offset specified, UTC is assumed.</p>"
+        },
+        "LocaleCode": {
+          "shape": "LocaleCode",
+          "documentation": "<p>Optional value for a non-US locale code, needed for correct interpretation of some date formats.</p>"
+        }
+      },
+      "documentation": "<p>Represents additional options for correct interpretation of datetime parameters used in the S3 path of a dataset.</p>"
     },
     "DeleteDatasetRequest": {
       "type": "structure",
@@ -1701,7 +1794,7 @@
         },
         "Format": {
           "shape": "InputFormat",
-          "documentation": "<p>Specifies the file format of a dataset created from an S3 file or folder.</p>"
+          "documentation": "<p>The file format of a dataset that is created from an S3 file or folder.</p>"
         },
         "FormatOptions": {
           "shape": "FormatOptions"
@@ -1720,6 +1813,10 @@
         "Source": {
           "shape": "Source",
           "documentation": "<p>The location of the data for this dataset, Amazon S3 or the AWS Glue Data Catalog.</p>"
+        },
+        "PathOptions": {
+          "shape": "PathOptions",
+          "documentation": "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -2156,21 +2253,66 @@
       "members": {
         "SheetNames": {
           "shape": "SheetNameList",
-          "documentation": "<p>Specifies one or more named sheets in the Excel file, which will be included in the dataset.</p>"
+          "documentation": "<p>One or more named sheets in the Excel file that will be included in the dataset.</p>"
         },
         "SheetIndexes": {
           "shape": "SheetIndexList",
-          "documentation": "<p>Specifies one or more sheet numbers in the Excel file, which will be included in the dataset.</p>"
+          "documentation": "<p>One or more sheet numbers in the Excel file that will be included in the dataset.</p>"
         },
         "HeaderRow": {
           "shape": "HeaderRow",
-          "documentation": "<p>A variable that specifies whether the first row in the file will be parsed as the header. If false, column names will be auto-generated.</p>"
+          "documentation": "<p>A variable that specifies whether the first row in the file is parsed as the header. If this value is false, column names are auto-generated.</p>"
         }
       },
-      "documentation": "<p>Options that define how DataBrew will interpret a Microsoft Excel file, when creating a dataset from that file.</p>"
+      "documentation": "<p>Represents a set of options that define how DataBrew will interpret a Microsoft Excel file when creating a dataset from that file.</p>"
     },
     "ExecutionTime": {
       "type": "integer"
+    },
+    "Expression": {
+      "type": "string",
+      "max": 1024,
+      "min": 4,
+      "pattern": "^[<>0-9A-Za-z_:)(!= ]+$"
+    },
+    "FilesLimit": {
+      "type": "structure",
+      "required": [
+        "MaxFiles"
+      ],
+      "members": {
+        "MaxFiles": {
+          "shape": "MaxFiles",
+          "documentation": "<p>The number of S3 files to select.</p>"
+        },
+        "OrderedBy": {
+          "shape": "OrderedBy",
+          "documentation": "<p>A criteria to use for S3 files sorting before their selection. By default uses LAST_MODIFIED_DATE as a sorting criteria. Currently it's the only allowed value.</p>"
+        },
+        "Order": {
+          "shape": "Order",
+          "documentation": "<p>A criteria to use for S3 files sorting before their selection. By default uses DESCENDING order, i.e. most recent files are selected first. Anotherpossible value is ASCENDING.</p>"
+        }
+      },
+      "documentation": "<p>Represents a limit imposed on number of S3 files that should be selected for a dataset from a connected S3 path.</p>"
+    },
+    "FilterExpression": {
+      "type": "structure",
+      "required": [
+        "Expression",
+        "ValuesMap"
+      ],
+      "members": {
+        "Expression": {
+          "shape": "Expression",
+          "documentation": "<p>The expression which includes condition names followed by substitution variables, possibly grouped and combined with other conditions. For example, \"(starts_with :prefix1 or starts_with :prefix2) and (ends_with :suffix1 or ends_with :suffix2)\". Substitution variables should start with ':' symbol.</p>"
+        },
+        "ValuesMap": {
+          "shape": "ValuesMap",
+          "documentation": "<p>The map of substitution variable names to their values used in this filter expression.</p>"
+        }
+      },
+      "documentation": "<p>Represents a structure for defining parameter conditions.</p>"
     },
     "FormatOptions": {
       "type": "structure",
@@ -2185,10 +2327,15 @@
         },
         "Csv": {
           "shape": "CsvOptions",
-          "documentation": "<p>Options that define how Csv input is to be interpreted by DataBrew.</p>"
+          "documentation": "<p>Options that define how CSV input is to be interpreted by DataBrew.</p>"
         }
       },
-      "documentation": "<p>Options that define the structure of either Csv, Excel, or JSON input.</p>"
+      "documentation": "<p>Represents a set of options that define the structure of either comma-separated value (CSV), Excel, or JSON input.</p>"
+    },
+    "GlueConnectionName": {
+      "type": "string",
+      "max": 255,
+      "min": 1
     },
     "HeaderRow": {
       "type": "boolean"
@@ -2209,9 +2356,13 @@
         "DataCatalogInputDefinition": {
           "shape": "DataCatalogInputDefinition",
           "documentation": "<p>The AWS Glue Data Catalog parameters for the data.</p>"
+        },
+        "DatabaseInputDefinition": {
+          "shape": "DatabaseInputDefinition",
+          "documentation": "<p>Connection information for dataset input files stored in a database.</p>"
         }
       },
-      "documentation": "<p>Information on how DataBrew can find data, in either the AWS Glue Data Catalog or Amazon S3.</p>"
+      "documentation": "<p>Represents information on how DataBrew can find data, in either the AWS Glue Data Catalog or Amazon S3.</p>"
     },
     "InputFormat": {
       "type": "string",
@@ -2250,7 +2401,7 @@
         },
         "EncryptionMode": {
           "shape": "EncryptionMode",
-          "documentation": "<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with AWS KMS-managed keys.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>"
+          "documentation": "<p>The encryption mode for the job, which can be one of the following:</p> <ul> <li> <p> <code>SSE-KMS</code> - Server-side encryption with keys managed by AWS KMS.</p> </li> <li> <p> <code>SSE-S3</code> - Server-side encryption with keys managed by Amazon S3.</p> </li> </ul>"
         },
         "Name": {
           "shape": "JobName",
@@ -2298,7 +2449,7 @@
         },
         "RoleArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the role that will be assumed for this job.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the role to be assumed for this job.</p>"
         },
         "Timeout": {
           "shape": "Timeout",
@@ -2310,7 +2461,7 @@
         },
         "JobSample": {
           "shape": "JobSample",
-          "documentation": "<p>Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed. If a JobSample value is not provided, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.</p>"
+          "documentation": "<p>A sample configuration for profile jobs only, which determines the number of rows on which the profile job is run. If a <code>JobSample</code> value isn't provided, the default value is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the size parameter.</p>"
         }
       },
       "documentation": "<p>Represents all of the attributes of a DataBrew job.</p>"
@@ -2394,7 +2545,7 @@
         },
         "JobSample": {
           "shape": "JobSample",
-          "documentation": "<p>Sample configuration for profile jobs only. Determines the number of rows on which the profile job will be executed. If a JobSample value is not provided, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.</p>"
+          "documentation": "<p>A sample configuration for profile jobs only, which determines the number of rows on which the profile job is run. If a <code>JobSample</code> value isn't provided, the default is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the size parameter.</p>"
         }
       },
       "documentation": "<p>Represents one run of a DataBrew job.</p>"
@@ -2430,14 +2581,14 @@
       "members": {
         "Mode": {
           "shape": "SampleMode",
-          "documentation": "<p>Determines whether the profile job will be executed on the entire dataset or on a specified number of rows. Must be one of the following:</p> <ul> <li> <p>FULL_DATASET: Profile job will be executed on the entire dataset.</p> </li> <li> <p>CUSTOM_ROWS: Profile job will be executed on the number of rows specified in the Size parameter.</p> </li> </ul>"
+          "documentation": "<p>A value that determines whether the profile job is run on the entire dataset or a specified number of rows. This value must be one of the following:</p> <ul> <li> <p>FULL_DATASET - The profile job is run on the entire dataset.</p> </li> <li> <p>CUSTOM_ROWS - The profile job is run on the number of rows specified in the <code>Size</code> parameter.</p> </li> </ul>"
         },
         "Size": {
           "shape": "JobSize",
-          "documentation": "<p>Size parameter is only required when the mode is CUSTOM_ROWS. Profile job will be executed on the the specified number of rows. The maximum value for size is Long.MAX_VALUE.</p> <p>Long.MAX_VALUE = 9223372036854775807</p>"
+          "documentation": "<p>The <code>Size</code> parameter is only required when the mode is CUSTOM_ROWS. The profile job is run on the specified number of rows. The maximum value for size is Long.MAX_VALUE.</p> <p>Long.MAX_VALUE = 9223372036854775807</p>"
         }
       },
-      "documentation": "<p>Sample configuration for Profile Jobs only. Determines the number of rows on which the Profile job will be executed. If a JobSample value is not provided for profile jobs, the default value will be used. The default value is CUSTOM_ROWS for the mode parameter and 20000 for the size parameter.</p>"
+      "documentation": "<p>A sample configuration for profile jobs only, which determines the number of rows on which the profile job is run. If a <code>JobSample</code> value isn't provided, the default is used. The default value is CUSTOM_ROWS for the mode parameter and 20,000 for the size parameter.</p>"
     },
     "JobSize": {
       "type": "long"
@@ -2763,6 +2914,12 @@
         }
       }
     },
+    "LocaleCode": {
+      "type": "string",
+      "max": 100,
+      "min": 2,
+      "pattern": "^[A-Za-z0-9_\\.#@\\-]+$"
+    },
     "LogGroupName": {
       "type": "string",
       "max": 512,
@@ -2777,6 +2934,10 @@
     },
     "MaxCapacity": {
       "type": "integer"
+    },
+    "MaxFiles": {
+      "type": "integer",
+      "min": 1
     },
     "MaxResults100": {
       "type": "integer",
@@ -2803,6 +2964,19 @@
       "max": 128,
       "min": 1,
       "pattern": "^[A-Z\\_]+$"
+    },
+    "Order": {
+      "type": "string",
+      "enum": [
+        "DESCENDING",
+        "ASCENDING"
+      ]
+    },
+    "OrderedBy": {
+      "type": "string",
+      "enum": [
+        "LAST_MODIFIED_DATE"
+      ]
     },
     "Output": {
       "type": "structure",
@@ -2832,10 +3006,10 @@
         },
         "FormatOptions": {
           "shape": "OutputFormatOptions",
-          "documentation": "<p>Options that define how DataBrew formats job output files.</p>"
+          "documentation": "<p>Represents options that define how DataBrew formats job output files.</p>"
         }
       },
-      "documentation": "<p>Parameters that specify how and where DataBrew will write the output generated by recipe jobs or profile jobs.</p>"
+      "documentation": "<p>Represents options that specify how and where DataBrew writes the output generated by recipe jobs or profile jobs.</p>"
     },
     "OutputFormat": {
       "type": "string",
@@ -2854,10 +3028,10 @@
       "members": {
         "Csv": {
           "shape": "CsvOutputOptions",
-          "documentation": "<p>Options that define how DataBrew writes Csv output.</p>"
+          "documentation": "<p>Represents a set of options that define the structure of comma-separated value (CSV) job output.</p>"
         }
       },
-      "documentation": "<p>Options that define the structure of Csv job output.</p>"
+      "documentation": "<p>Represents a set of options that define the structure of comma-separated (CSV) job output.</p>"
     },
     "OutputList": {
       "type": "list",
@@ -2884,9 +3058,52 @@
       "min": 1,
       "pattern": "^[A-Za-z0-9]+$"
     },
+    "ParameterType": {
+      "type": "string",
+      "enum": [
+        "Datetime",
+        "Number",
+        "String"
+      ]
+    },
     "ParameterValue": {
       "type": "string",
       "max": 12288,
+      "min": 1
+    },
+    "PathOptions": {
+      "type": "structure",
+      "members": {
+        "LastModifiedDateCondition": {
+          "shape": "FilterExpression",
+          "documentation": "<p>If provided, this structure defines a date range for matching S3 objects based on their LastModifiedDate attribute in S3.</p>"
+        },
+        "FilesLimit": {
+          "shape": "FilesLimit",
+          "documentation": "<p>If provided, this structure imposes a limit on a number of files that should be selected.</p>"
+        },
+        "Parameters": {
+          "shape": "PathParametersMap",
+          "documentation": "<p>A structure that maps names of parameters used in the S3 path of a dataset to their definitions.</p>"
+        }
+      },
+      "documentation": "<p>Represents a set of options that define how DataBrew selects files for a given S3 path in a dataset.</p>"
+    },
+    "PathParameterName": {
+      "type": "string",
+      "max": 255,
+      "min": 1
+    },
+    "PathParametersMap": {
+      "type": "map",
+      "key": {
+        "shape": "PathParameterName"
+      },
+      "value": {
+        "shape": "DatasetParameter"
+      },
+      "documentation": "<p>A structure that map names of parameters used in the S3 path of a dataset to their definitions. A definition includes parameter type and conditions.</p>",
+      "max": 10,
       "min": 1
     },
     "Preview": {
@@ -2937,7 +3154,7 @@
         },
         "Sample": {
           "shape": "Sample",
-          "documentation": "<p>The sample size and sampling type to apply to the data. If this parameter isn't specified, then the sample will consiste of the first 500 rows from the dataset.</p>"
+          "documentation": "<p>The sample size and sampling type to apply to the data. If this parameter isn't specified, then the sample consists of the first 500 rows from the dataset.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -3058,7 +3275,7 @@
         },
         "RecipeVersion": {
           "shape": "RecipeVersion",
-          "documentation": "<p>The identifier for the version for the recipe. Must be one of the following:</p> <ul> <li> <p>Numeric version (<code>X.Y</code>) - <code>X</code> and <code>Y</code> stand for major and minor version numbers. The maximum length of each is 6 digits, and neither can be negative values. Both <code>X</code> and <code>Y</code> are required, and \"0.0\" is not a valid version.</p> </li> <li> <p> <code>LATEST_WORKING</code> - the most recent valid version being developed in a DataBrew project.</p> </li> <li> <p> <code>LATEST_PUBLISHED</code> - the most recent published version.</p> </li> </ul>"
+          "documentation": "<p>The identifier for the version for the recipe. Must be one of the following:</p> <ul> <li> <p>Numeric version (<code>X.Y</code>) - <code>X</code> and <code>Y</code> stand for major and minor version numbers. The maximum length of each is 6 digits, and neither can be negative values. Both <code>X</code> and <code>Y</code> are required, and \"0.0\" isn't a valid version.</p> </li> <li> <p> <code>LATEST_WORKING</code> - the most recent valid version being developed in a DataBrew project.</p> </li> <li> <p> <code>LATEST_PUBLISHED</code> - the most recent published version.</p> </li> </ul>"
         }
       },
       "documentation": "<p>Represents one or more actions to be performed on a DataBrew dataset.</p>"
@@ -3133,7 +3350,7 @@
         },
         "ConditionExpressions": {
           "shape": "ConditionExpressionList",
-          "documentation": "<p>One or more conditions that must be met, in order for the recipe step to succeed.</p> <note> <p>All of the conditions in the array must be met. In other words, all of the conditions must be combined using a logical AND operation.</p> </note>"
+          "documentation": "<p>One or more conditions that must be met for the recipe step to succeed.</p> <note> <p>All of the conditions in the array must be met. In other words, all of the conditions must be combined using a logical AND operation.</p> </note>"
         }
       },
       "documentation": "<p>Represents a single step from a DataBrew recipe to be performed.</p>"
@@ -3193,7 +3410,7 @@
           "documentation": "<p>The unique name of the object in the bucket.</p>"
         }
       },
-      "documentation": "<p>An Amazon S3 location (bucket name an object key) where DataBrew can read input data, or write output from a job.</p>"
+      "documentation": "<p>Represents an Amazon S3 location (bucket name and object key) where DataBrew can read input data, or write output from a job.</p>"
     },
     "Sample": {
       "type": "structure",
@@ -3268,7 +3485,7 @@
         },
         "CronExpression": {
           "shape": "CronExpression",
-          "documentation": "<p>The date(s) and time(s) when the job will run. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron expressions</a> in the <i>AWS Glue DataBrew Developer Guide</i>.</p>"
+          "documentation": "<p>The dates and times when the job is to run. For more information, see <a href=\"https://docs.aws.amazon.com/databrew/latest/dg/jobs.cron.html\">Cron expressions</a> in the <i>AWS Glue DataBrew Developer Guide</i>.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -3389,7 +3606,8 @@
       "type": "string",
       "enum": [
         "S3",
-        "DATA-CATALOG"
+        "DATA-CATALOG",
+        "DATABASE"
       ]
     },
     "StartColumnIndex": {
@@ -3561,6 +3779,12 @@
       "type": "integer",
       "min": 0
     },
+    "TimezoneOffset": {
+      "type": "string",
+      "max": 6,
+      "min": 1,
+      "pattern": "^(Z|[-+](\\d|\\d{2}|\\d{2}:?\\d{2}))$"
+    },
     "UntagResourceRequest": {
       "type": "structure",
       "required": [
@@ -3601,13 +3825,17 @@
         },
         "Format": {
           "shape": "InputFormat",
-          "documentation": "<p>Specifies the file format of a dataset created from an S3 file or folder.</p>"
+          "documentation": "<p>The file format of a dataset that is created from an S3 file or folder.</p>"
         },
         "FormatOptions": {
           "shape": "FormatOptions"
         },
         "Input": {
           "shape": "Input"
+        },
+        "PathOptions": {
+          "shape": "PathOptions",
+          "documentation": "<p>A set of options that defines how DataBrew interprets an S3 path of the dataset.</p>"
         }
       }
     },
@@ -3853,6 +4081,21 @@
         }
       }
     },
+    "ValueReference": {
+      "type": "string",
+      "max": 128,
+      "min": 2,
+      "pattern": "^:[A-Za-z0-9_]+$"
+    },
+    "ValuesMap": {
+      "type": "map",
+      "key": {
+        "shape": "ValueReference"
+      },
+      "value": {
+        "shape": "ConditionValue"
+      }
+    },
     "ViewFrame": {
       "type": "structure",
       "required": [
@@ -3872,7 +4115,7 @@
           "documentation": "<p>A list of columns to hide in the view frame.</p>"
         }
       },
-      "documentation": "<p>Represents the data being being transformed during an action.</p>"
+      "documentation": "<p>Represents the data being transformed during an action.</p>"
     }
   },
   "documentation": "<p>AWS Glue DataBrew is a visual, cloud-scale data-preparation service. DataBrew simplifies data preparation tasks, targeting data issues that are hard to spot and time-consuming to fix. DataBrew empowers users of all technical levels to visualize the data and perform one-click data transformations, with no coding required.</p>"

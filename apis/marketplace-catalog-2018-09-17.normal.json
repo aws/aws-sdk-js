@@ -206,7 +206,7 @@
           "shape": "ServiceQuotaExceededException"
         }
       ],
-      "documentation": "<p>This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a <code>ResourceInUseException</code>.</p> <p>For example, you cannot start the ChangeSet described in the <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples\">example</a> below because it contains two changes to execute the same change type (<code>AddRevisions</code>) against the same entity (<code>entity-id@1)</code>.</p>"
+      "documentation": "<p>This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a <code>ResourceInUseException</code>.</p> <p>For example, you cannot start the ChangeSet described in the <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples\">example</a> later in this topic, because it contains two changes to execute the same change type (<code>AddRevisions</code>) against the same entity (<code>entity-id@1)</code>.</p> <p>For more information about working with change sets, see <a href=\"https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets\"> Working with change sets</a>.</p>"
     }
   },
   "shapes": {
@@ -275,9 +275,19 @@
         "Details": {
           "shape": "Json",
           "documentation": "<p>This object contains details specific to the change type of the requested change.</p>"
+        },
+        "ChangeName": {
+          "shape": "ChangeName",
+          "documentation": "<p>Optional name for the change.</p>"
         }
       },
       "documentation": "<p>An object that contains the <code>ChangeType</code>, <code>Details</code>, and <code>Entity</code>.</p>"
+    },
+    "ChangeName": {
+      "type": "string",
+      "max": 72,
+      "min": 1,
+      "pattern": "^[a-zA-Z]$"
     },
     "ChangeSetDescription": {
       "type": "list",
@@ -363,6 +373,10 @@
         "ErrorDetailList": {
           "shape": "ErrorDetailList",
           "documentation": "<p>An array of <code>ErrorDetail</code> objects associated with the change.</p>"
+        },
+        "ChangeName": {
+          "shape": "ChangeName",
+          "documentation": "<p>Optional name for the change.</p>"
         }
       },
       "documentation": "<p>This object is a container for common summary information about the change. The summary doesn't contain the whole change structure.</p>"
@@ -438,7 +452,7 @@
           "documentation": "<p>Returned if the change set is in <code>FAILED</code> status. Can be either <code>CLIENT_ERROR</code>, which means that there are issues with the request (see the <code>ErrorDetailList</code>), or <code>SERVER_FAULT</code>, which means that there is a problem in the system, and you should retry your request.</p>"
         },
         "FailureDescription": {
-          "shape": "StringValue",
+          "shape": "ExceptionMessageContent",
           "documentation": "<p>Returned if there is a failure on the change set, but that failure is not related to any of the changes in the request.</p>"
         },
         "ChangeSet": {
@@ -484,7 +498,7 @@
           "documentation": "<p>The ARN associated to the unique identifier for the change set referenced in this request.</p>"
         },
         "LastModifiedDate": {
-          "shape": "StringValue",
+          "shape": "DateTimeISO8601",
           "documentation": "<p>The last modified date of the entity, in ISO 8601 format (2018-02-27T13:45:22Z).</p>"
         },
         "Details": {
@@ -508,13 +522,19 @@
           "documentation": "<p>The identifier for the entity.</p>"
         }
       },
-      "documentation": "<p>A product entity contains data that describes your product, its supported features, and how it can be used or launched by your customer. </p>"
+      "documentation": "<p>An entity contains data that describes your product, its supported features, and how it can be used or launched by your customer. </p>"
+    },
+    "EntityNameString": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^\\\\S+[\\\\S\\\\s]*"
     },
     "EntitySummary": {
       "type": "structure",
       "members": {
         "Name": {
-          "shape": "StringValue",
+          "shape": "EntityNameString",
           "documentation": "<p>The name for the entity. This value is not unique. It is defined by the seller.</p>"
         },
         "EntityType": {
@@ -530,11 +550,11 @@
           "documentation": "<p>The ARN associated with the unique identifier for the entity.</p>"
         },
         "LastModifiedDate": {
-          "shape": "StringValue",
+          "shape": "DateTimeISO8601",
           "documentation": "<p>The last time the entity was published, using ISO 8601 format (2018-02-27T13:45:22Z).</p>"
         },
         "Visibility": {
-          "shape": "StringValue",
+          "shape": "VisibilityValue",
           "documentation": "<p>The visibility status of the entity to buyers. This value can be <code>Public</code> (everyone can view the entity), <code>Limited</code> (the entity is visible to limited accounts only), or <code>Restricted</code> (the entity was published and then unpublished and only existing buyers can view it). </p>"
         }
       },
@@ -552,15 +572,21 @@
       "min": 1,
       "pattern": "^[a-zA-Z]+$"
     },
+    "ErrorCodeString": {
+      "type": "string",
+      "max": 72,
+      "min": 1,
+      "pattern": "^[a-zA-Z_]+$"
+    },
     "ErrorDetail": {
       "type": "structure",
       "members": {
         "ErrorCode": {
-          "shape": "StringValue",
+          "shape": "ErrorCodeString",
           "documentation": "<p>The error code that identifies the type of error.</p>"
         },
         "ErrorMessage": {
-          "shape": "StringValue",
+          "shape": "ExceptionMessageContent",
           "documentation": "<p>The message for the error.</p>"
         }
       },
@@ -571,6 +597,12 @@
       "member": {
         "shape": "ErrorDetail"
       }
+    },
+    "ExceptionMessageContent": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "^(.)+$"
     },
     "FailureCode": {
       "type": "string",
@@ -606,6 +638,12 @@
       "max": 255,
       "min": 1,
       "pattern": "^[a-zA-Z]+$"
+    },
+    "FilterValueContent": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^(.)+$"
     },
     "Identifier": {
       "type": "string",
@@ -803,16 +841,19 @@
         }
       }
     },
-    "StringValue": {
-      "type": "string"
-    },
     "ValueList": {
       "type": "list",
       "member": {
-        "shape": "StringValue"
+        "shape": "FilterValueContent"
       },
       "max": 10,
       "min": 1
+    },
+    "VisibilityValue": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "^[a-zA-Z]+$"
     }
   },
   "documentation": "<p>Catalog API actions allow you to manage your entities through list, describe, and update capabilities. An entity can be a product or an offer on AWS Marketplace. </p> <p>You can automate your entity update process by integrating the AWS Marketplace Catalog API with your AWS Marketplace product build or deployment pipelines. You can also create your own applications on top of the Catalog API to manage your products on AWS Marketplace.</p>"

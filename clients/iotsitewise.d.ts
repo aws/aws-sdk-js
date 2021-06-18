@@ -37,11 +37,11 @@ declare class IoTSiteWise extends Service {
    */
   batchDisassociateProjectAssets(callback?: (err: AWSError, data: IoTSiteWise.Types.BatchDisassociateProjectAssetsResponse) => void): Request<IoTSiteWise.Types.BatchDisassociateProjectAssetsResponse, AWSError>;
   /**
-   * Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see Ingesting data using the API in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.    With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 7 days in the past and no more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-7 days, +5 minutes] and returns a TimestampOutOfRangeException error. For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV {T1, GOOD, V1}, then storing {T1, GOOD, V2} replaces the existing TQV.  AWS IoT SiteWise authorizes access to each BatchPutAssetPropertyValue entry individually. For more information, see BatchPutAssetPropertyValue authorization in the AWS IoT SiteWise User Guide.
+   * Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see Ingesting data using the API in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.    With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 7 days in the past and no more than 10 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-7 days, +10 minutes] and returns a TimestampOutOfRangeException error. For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV {T1, GOOD, V1}, then storing {T1, GOOD, V2} replaces the existing TQV.  AWS IoT SiteWise authorizes access to each BatchPutAssetPropertyValue entry individually. For more information, see BatchPutAssetPropertyValue authorization in the AWS IoT SiteWise User Guide.
    */
   batchPutAssetPropertyValue(params: IoTSiteWise.Types.BatchPutAssetPropertyValueRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.BatchPutAssetPropertyValueResponse) => void): Request<IoTSiteWise.Types.BatchPutAssetPropertyValueResponse, AWSError>;
   /**
-   * Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see Ingesting data using the API in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.    With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 7 days in the past and no more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-7 days, +5 minutes] and returns a TimestampOutOfRangeException error. For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV {T1, GOOD, V1}, then storing {T1, GOOD, V2} replaces the existing TQV.  AWS IoT SiteWise authorizes access to each BatchPutAssetPropertyValue entry individually. For more information, see BatchPutAssetPropertyValue authorization in the AWS IoT SiteWise User Guide.
+   * Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see Ingesting data using the API in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.    With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 7 days in the past and no more than 10 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-7 days, +10 minutes] and returns a TimestampOutOfRangeException error. For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV {T1, GOOD, V1}, then storing {T1, GOOD, V2} replaces the existing TQV.  AWS IoT SiteWise authorizes access to each BatchPutAssetPropertyValue entry individually. For more information, see BatchPutAssetPropertyValue authorization in the AWS IoT SiteWise User Guide.
    */
   batchPutAssetPropertyValue(callback?: (err: AWSError, data: IoTSiteWise.Types.BatchPutAssetPropertyValueResponse) => void): Request<IoTSiteWise.Types.BatchPutAssetPropertyValueResponse, AWSError>;
   /**
@@ -276,6 +276,14 @@ declare class IoTSiteWise extends Service {
    * Gets the history of an asset property's values. For more information, see Querying historical values in the AWS IoT SiteWise User Guide. To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
    */
   getAssetPropertyValueHistory(callback?: (err: AWSError, data: IoTSiteWise.Types.GetAssetPropertyValueHistoryResponse) => void): Request<IoTSiteWise.Types.GetAssetPropertyValueHistoryResponse, AWSError>;
+  /**
+   * Get interpolated values for an asset property for a specified time interval, during a period of time. For example, you can use the this operation to return the interpolated temperature values for a wind turbine every 24 hours over a duration of 7 days.  This API isn't available in China (Beijing).  To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
+   */
+  getInterpolatedAssetPropertyValues(params: IoTSiteWise.Types.GetInterpolatedAssetPropertyValuesRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.GetInterpolatedAssetPropertyValuesResponse) => void): Request<IoTSiteWise.Types.GetInterpolatedAssetPropertyValuesResponse, AWSError>;
+  /**
+   * Get interpolated values for an asset property for a specified time interval, during a period of time. For example, you can use the this operation to return the interpolated temperature values for a wind turbine every 24 hours over a duration of 7 days.  This API isn't available in China (Beijing).  To identify an asset property, you must specify one of the following:   The assetId and propertyId of an asset property.   A propertyAlias, which is a data stream alias (for example, /company/windfarm/3/turbine/7/temperature). To define an asset property's alias, see UpdateAssetProperty.  
+   */
+  getInterpolatedAssetPropertyValues(callback?: (err: AWSError, data: IoTSiteWise.Types.GetInterpolatedAssetPropertyValuesResponse) => void): Request<IoTSiteWise.Types.GetInterpolatedAssetPropertyValuesResponse, AWSError>;
   /**
    * Retrieves a paginated list of access policies for an identity (an AWS SSO user, an AWS SSO group, or an IAM user) or an AWS IoT SiteWise Monitor resource (a portal or project).
    */
@@ -589,6 +597,16 @@ declare namespace IoTSiteWise {
      * The standard deviation of the time series over a time interval window.
      */
     standardDeviation?: AggregatedDoubleValue;
+  }
+  export interface Alarms {
+    /**
+     * The ARN of the IAM role that allows the alarm to perform actions and access AWS resources, including AWS IoT Events.
+     */
+    alarmRoleArn: ARN;
+    /**
+     * The ARN of the AWS Lambda function that manages alarm notifications. For more information, see Managing alarm notifications in the AWS IoT Events Developer Guide.
+     */
+    notificationLambdaArn?: ARN;
   }
   export type AmazonResourceName = string;
   export interface AssetCompositeModel {
@@ -1288,6 +1306,14 @@ declare namespace IoTSiteWise {
      * The service to use to authenticate users to the portal. Choose from the following options:    SSO – The portal uses AWS Single Sign-On to authenticate users and manage user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO. For more information, see Enabling AWS SSO in the AWS IoT SiteWise User Guide. This option is only available in AWS Regions other than the China Regions.    IAM – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage user permissions. This option is only available in the China Regions.   You can't change this value after you create a portal. Default: SSO 
      */
     portalAuthMode?: AuthMode;
+    /**
+     * The email address that sends alarm notifications.  If you use the AWS IoT Events managed AWS Lambda function to manage your emails, you must verify the sender email address in Amazon SES. 
+     */
+    notificationSenderEmail?: Email;
+    /**
+     * Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .
+     */
+    alarms?: Alarms;
   }
   export interface CreatePortalResponse {
     /**
@@ -1809,6 +1835,14 @@ declare namespace IoTSiteWise {
      * The service to use to authenticate users to the portal.
      */
     portalAuthMode?: AuthMode;
+    /**
+     * The email address that sends alarm notifications.
+     */
+    notificationSenderEmail?: Email;
+    /**
+     * Contains the configuration information of an alarm created in a AWS IoT SiteWise Monitor portal.
+     */
+    alarms?: Alarms;
   }
   export interface DescribeProjectRequest {
     /**
@@ -2056,6 +2090,66 @@ declare namespace IoTSiteWise {
      */
     propertyValue?: AssetPropertyValue;
   }
+  export interface GetInterpolatedAssetPropertyValuesRequest {
+    /**
+     * The ID of the asset.
+     */
+    assetId?: ID;
+    /**
+     * The ID of the asset property.
+     */
+    propertyId?: ID;
+    /**
+     * The property alias that identifies the property, such as an OPC-UA server data stream path (for example, /company/windfarm/3/turbine/7/temperature). For more information, see Mapping industrial data streams to asset properties in the AWS IoT SiteWise User Guide.
+     */
+    propertyAlias?: AssetPropertyAlias;
+    /**
+     * The exclusive start of the range from which to interpolate data, expressed in seconds in Unix epoch time.
+     */
+    startTimeInSeconds: TimeInSeconds;
+    /**
+     * The nanosecond offset converted from startTimeInSeconds.
+     */
+    startTimeOffsetInNanos?: OffsetInNanos;
+    /**
+     * The inclusive end of the range from which to interpolate data, expressed in seconds in Unix epoch time.
+     */
+    endTimeInSeconds: TimeInSeconds;
+    /**
+     * The nanosecond offset converted from endTimeInSeconds.
+     */
+    endTimeOffsetInNanos?: OffsetInNanos;
+    /**
+     * The quality of the asset property value. You can use this parameter as a filter to choose only the asset property values that have a specific quality.
+     */
+    quality: Quality;
+    /**
+     * The time interval in seconds over which to interpolate data. Each interval starts when the previous one ends.
+     */
+    intervalInSeconds: IntervalInSeconds;
+    /**
+     * The token to be used for the next set of paginated results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to be returned per paginated request. If not specified, the default value is 10.
+     */
+    maxResults?: MaxInterpolatedResults;
+    /**
+     * The interpolation type. Valid values: LINEAR_INTERPOLATION 
+     */
+    type: InterpolationType;
+  }
+  export interface GetInterpolatedAssetPropertyValuesResponse {
+    /**
+     * The requested interpolated values.
+     */
+    interpolatedAssetPropertyValues: InterpolatedAssetPropertyValues;
+    /**
+     * The token for the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
   export interface Greengrass {
     /**
      * The ARN of the Greengrass group. For more information about how to find a group's ARN, see ListGroups and GetGroup in the AWS IoT Greengrass API Reference.
@@ -2131,7 +2225,14 @@ declare namespace IoTSiteWise {
      */
     url: Url;
   }
+  export interface InterpolatedAssetPropertyValue {
+    timestamp: TimeInNanos;
+    value: Variant;
+  }
+  export type InterpolatedAssetPropertyValues = InterpolatedAssetPropertyValue[];
+  export type InterpolationType = string;
   export type Interval = string;
+  export type IntervalInSeconds = number;
   export type KmsKeyId = string;
   export interface ListAccessPoliciesRequest {
     /**
@@ -2414,6 +2515,7 @@ declare namespace IoTSiteWise {
     level: LoggingLevel;
   }
   export type Macro = string;
+  export type MaxInterpolatedResults = number;
   export type MaxResults = number;
   export interface Measurement {
   }
@@ -2915,6 +3017,14 @@ declare namespace IoTSiteWise {
      * A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.
      */
     clientToken?: ClientToken;
+    /**
+     * The email address that sends alarm notifications.
+     */
+    notificationSenderEmail?: Email;
+    /**
+     * Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .
+     */
+    alarms?: Alarms;
   }
   export interface UpdatePortalResponse {
     /**

@@ -52,6 +52,14 @@ declare class LexModelsV2 extends Service {
    */
   createBotVersion(callback?: (err: AWSError, data: LexModelsV2.Types.CreateBotVersionResponse) => void): Request<LexModelsV2.Types.CreateBotVersionResponse, AWSError>;
   /**
+   * Creates a zip archive containing the contents of a bot or a bot locale. The archive contains a directory structure that contains JSON files that define the bot. You can create an archive that contains the complete definition of a bot, or you can specify that the archive contain only the definition of a single bot locale. For more information about exporting bots, and about the structure of the export archive, see  Importing and exporting bots  
+   */
+  createExport(params: LexModelsV2.Types.CreateExportRequest, callback?: (err: AWSError, data: LexModelsV2.Types.CreateExportResponse) => void): Request<LexModelsV2.Types.CreateExportResponse, AWSError>;
+  /**
+   * Creates a zip archive containing the contents of a bot or a bot locale. The archive contains a directory structure that contains JSON files that define the bot. You can create an archive that contains the complete definition of a bot, or you can specify that the archive contain only the definition of a single bot locale. For more information about exporting bots, and about the structure of the export archive, see  Importing and exporting bots  
+   */
+  createExport(callback?: (err: AWSError, data: LexModelsV2.Types.CreateExportResponse) => void): Request<LexModelsV2.Types.CreateExportResponse, AWSError>;
+  /**
    * Creates an intent. To define the interaction between the user and your bot, you define one or more intents. For example, for a pizza ordering bot you would create an OrderPizza intent. When you create an intent, you must provide a name. You can optionally provide the following:   Sample utterances. For example, "I want to order a pizza" and "Can I order a pizza." You can't provide utterances for built-in intents.   Information to be gathered. You specify slots for the information that you bot requests from the user. You can specify standard slot types, such as date and time, or custom slot types for your application.   How the intent is fulfilled. You can provide a Lambda function or configure the intent to return the intent information to your client application. If you use a Lambda function, Amazon Lex invokes the function when all of the intent information is available.   A confirmation prompt to send to the user to confirm an intent. For example, "Shall I order your pizza?"   A conclusion statement to send to the user after the intent is fulfilled. For example, "I ordered your pizza."   A follow-up prompt that asks the user for additional activity. For example, "Do you want a drink with your pizza?"  
    */
   createIntent(params: LexModelsV2.Types.CreateIntentRequest, callback?: (err: AWSError, data: LexModelsV2.Types.CreateIntentResponse) => void): Request<LexModelsV2.Types.CreateIntentResponse, AWSError>;
@@ -59,6 +67,22 @@ declare class LexModelsV2 extends Service {
    * Creates an intent. To define the interaction between the user and your bot, you define one or more intents. For example, for a pizza ordering bot you would create an OrderPizza intent. When you create an intent, you must provide a name. You can optionally provide the following:   Sample utterances. For example, "I want to order a pizza" and "Can I order a pizza." You can't provide utterances for built-in intents.   Information to be gathered. You specify slots for the information that you bot requests from the user. You can specify standard slot types, such as date and time, or custom slot types for your application.   How the intent is fulfilled. You can provide a Lambda function or configure the intent to return the intent information to your client application. If you use a Lambda function, Amazon Lex invokes the function when all of the intent information is available.   A confirmation prompt to send to the user to confirm an intent. For example, "Shall I order your pizza?"   A conclusion statement to send to the user after the intent is fulfilled. For example, "I ordered your pizza."   A follow-up prompt that asks the user for additional activity. For example, "Do you want a drink with your pizza?"  
    */
   createIntent(callback?: (err: AWSError, data: LexModelsV2.Types.CreateIntentResponse) => void): Request<LexModelsV2.Types.CreateIntentResponse, AWSError>;
+  /**
+   * Creates a new resource policy with the specified policy statements.
+   */
+  createResourcePolicy(params: LexModelsV2.Types.CreateResourcePolicyRequest, callback?: (err: AWSError, data: LexModelsV2.Types.CreateResourcePolicyResponse) => void): Request<LexModelsV2.Types.CreateResourcePolicyResponse, AWSError>;
+  /**
+   * Creates a new resource policy with the specified policy statements.
+   */
+  createResourcePolicy(callback?: (err: AWSError, data: LexModelsV2.Types.CreateResourcePolicyResponse) => void): Request<LexModelsV2.Types.CreateResourcePolicyResponse, AWSError>;
+  /**
+   * Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created. You can't create a resource policy statement that allows cross-account access.
+   */
+  createResourcePolicyStatement(params: LexModelsV2.Types.CreateResourcePolicyStatementRequest, callback?: (err: AWSError, data: LexModelsV2.Types.CreateResourcePolicyStatementResponse) => void): Request<LexModelsV2.Types.CreateResourcePolicyStatementResponse, AWSError>;
+  /**
+   * Adds a new resource policy statement to a bot or bot alias. If a resource policy exists, the statement is added to the current resource policy. If a policy doesn't exist, a new policy is created. You can't create a resource policy statement that allows cross-account access.
+   */
+  createResourcePolicyStatement(callback?: (err: AWSError, data: LexModelsV2.Types.CreateResourcePolicyStatementResponse) => void): Request<LexModelsV2.Types.CreateResourcePolicyStatementResponse, AWSError>;
   /**
    * Creates a slot in an intent. A slot is a variable needed to fulfill an intent. For example, an OrderPizza intent might need slots for size, crust, and number of pizzas. For each slot, you define one or more utterances that Amazon Lex uses to elicit a response from the user. 
    */
@@ -75,6 +99,14 @@ declare class LexModelsV2 extends Service {
    * Creates a custom slot type  To create a custom slot type, specify a name for the slot type and a set of enumeration values, the values that a slot of this type can assume. 
    */
   createSlotType(callback?: (err: AWSError, data: LexModelsV2.Types.CreateSlotTypeResponse) => void): Request<LexModelsV2.Types.CreateSlotTypeResponse, AWSError>;
+  /**
+   * Gets a pre-signed S3 write URL that you use to upload the zip archive when importing a bot or a bot locale. 
+   */
+  createUploadUrl(params: LexModelsV2.Types.CreateUploadUrlRequest, callback?: (err: AWSError, data: LexModelsV2.Types.CreateUploadUrlResponse) => void): Request<LexModelsV2.Types.CreateUploadUrlResponse, AWSError>;
+  /**
+   * Gets a pre-signed S3 write URL that you use to upload the zip archive when importing a bot or a bot locale. 
+   */
+  createUploadUrl(callback?: (err: AWSError, data: LexModelsV2.Types.CreateUploadUrlResponse) => void): Request<LexModelsV2.Types.CreateUploadUrlResponse, AWSError>;
   /**
    * Deletes all versions of a bot, including the Draft version. To delete a specific version, use the DeleteBotVersion operation. When you delete a bot, all of the resources contained in the bot are also deleted. Deleting a bot removes all locales, intents, slot, and slot types defined for the bot. If a bot has an alias, the DeleteBot operation returns a ResourceInUseException exception. If you want to delete the bot and the alias, set the skipResourceInUseCheck parameter to true.
    */
@@ -108,6 +140,22 @@ declare class LexModelsV2 extends Service {
    */
   deleteBotVersion(callback?: (err: AWSError, data: LexModelsV2.Types.DeleteBotVersionResponse) => void): Request<LexModelsV2.Types.DeleteBotVersionResponse, AWSError>;
   /**
+   * Removes a previous export and the associated files stored in an S3 bucket.
+   */
+  deleteExport(params: LexModelsV2.Types.DeleteExportRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DeleteExportResponse) => void): Request<LexModelsV2.Types.DeleteExportResponse, AWSError>;
+  /**
+   * Removes a previous export and the associated files stored in an S3 bucket.
+   */
+  deleteExport(callback?: (err: AWSError, data: LexModelsV2.Types.DeleteExportResponse) => void): Request<LexModelsV2.Types.DeleteExportResponse, AWSError>;
+  /**
+   * Removes a previous import and the associated file stored in an S3 bucket.
+   */
+  deleteImport(params: LexModelsV2.Types.DeleteImportRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DeleteImportResponse) => void): Request<LexModelsV2.Types.DeleteImportResponse, AWSError>;
+  /**
+   * Removes a previous import and the associated file stored in an S3 bucket.
+   */
+  deleteImport(callback?: (err: AWSError, data: LexModelsV2.Types.DeleteImportResponse) => void): Request<LexModelsV2.Types.DeleteImportResponse, AWSError>;
+  /**
    * Removes the specified intent. Deleting an intent also deletes the slots associated with the intent.
    */
   deleteIntent(params: LexModelsV2.Types.DeleteIntentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -115,6 +163,22 @@ declare class LexModelsV2 extends Service {
    * Removes the specified intent. Deleting an intent also deletes the slots associated with the intent.
    */
   deleteIntent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes an existing policy from a bot or bot alias. If the resource doesn't have a policy attached, Amazon Lex returns an exception.
+   */
+  deleteResourcePolicy(params: LexModelsV2.Types.DeleteResourcePolicyRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DeleteResourcePolicyResponse) => void): Request<LexModelsV2.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Removes an existing policy from a bot or bot alias. If the resource doesn't have a policy attached, Amazon Lex returns an exception.
+   */
+  deleteResourcePolicy(callback?: (err: AWSError, data: LexModelsV2.Types.DeleteResourcePolicyResponse) => void): Request<LexModelsV2.Types.DeleteResourcePolicyResponse, AWSError>;
+  /**
+   * Deletes a policy statement from a resource policy. If you delete the last statement from a policy, the policy is deleted. If you specify a statement ID that doesn't exist in the policy, or if the bot or bot alias doesn't have a policy attached, Amazon Lex returns an exception.
+   */
+  deleteResourcePolicyStatement(params: LexModelsV2.Types.DeleteResourcePolicyStatementRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DeleteResourcePolicyStatementResponse) => void): Request<LexModelsV2.Types.DeleteResourcePolicyStatementResponse, AWSError>;
+  /**
+   * Deletes a policy statement from a resource policy. If you delete the last statement from a policy, the policy is deleted. If you specify a statement ID that doesn't exist in the policy, or if the bot or bot alias doesn't have a policy attached, Amazon Lex returns an exception.
+   */
+  deleteResourcePolicyStatement(callback?: (err: AWSError, data: LexModelsV2.Types.DeleteResourcePolicyStatementResponse) => void): Request<LexModelsV2.Types.DeleteResourcePolicyStatementResponse, AWSError>;
   /**
    * Deletes the specified slot from an intent.
    */
@@ -164,6 +228,22 @@ declare class LexModelsV2 extends Service {
    */
   describeBotVersion(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeBotVersionResponse) => void): Request<LexModelsV2.Types.DescribeBotVersionResponse, AWSError>;
   /**
+   * Gets information about a specific export.
+   */
+  describeExport(params: LexModelsV2.Types.DescribeExportRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DescribeExportResponse) => void): Request<LexModelsV2.Types.DescribeExportResponse, AWSError>;
+  /**
+   * Gets information about a specific export.
+   */
+  describeExport(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeExportResponse) => void): Request<LexModelsV2.Types.DescribeExportResponse, AWSError>;
+  /**
+   * Gets information about a specific import.
+   */
+  describeImport(params: LexModelsV2.Types.DescribeImportRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DescribeImportResponse) => void): Request<LexModelsV2.Types.DescribeImportResponse, AWSError>;
+  /**
+   * Gets information about a specific import.
+   */
+  describeImport(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeImportResponse) => void): Request<LexModelsV2.Types.DescribeImportResponse, AWSError>;
+  /**
    * Returns metadata about an intent.
    */
   describeIntent(params: LexModelsV2.Types.DescribeIntentRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DescribeIntentResponse) => void): Request<LexModelsV2.Types.DescribeIntentResponse, AWSError>;
@@ -171,6 +251,14 @@ declare class LexModelsV2 extends Service {
    * Returns metadata about an intent.
    */
   describeIntent(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeIntentResponse) => void): Request<LexModelsV2.Types.DescribeIntentResponse, AWSError>;
+  /**
+   * Gets the resource policy and policy revision for a bot or bot alias.
+   */
+  describeResourcePolicy(params: LexModelsV2.Types.DescribeResourcePolicyRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DescribeResourcePolicyResponse) => void): Request<LexModelsV2.Types.DescribeResourcePolicyResponse, AWSError>;
+  /**
+   * Gets the resource policy and policy revision for a bot or bot alias.
+   */
+  describeResourcePolicy(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeResourcePolicyResponse) => void): Request<LexModelsV2.Types.DescribeResourcePolicyResponse, AWSError>;
   /**
    * Gets metadata information about a slot.
    */
@@ -236,6 +324,22 @@ declare class LexModelsV2 extends Service {
    */
   listBuiltInSlotTypes(callback?: (err: AWSError, data: LexModelsV2.Types.ListBuiltInSlotTypesResponse) => void): Request<LexModelsV2.Types.ListBuiltInSlotTypesResponse, AWSError>;
   /**
+   * Lists the exports for a bot or bot locale. Exports are kept in the list for 7 days.
+   */
+  listExports(params: LexModelsV2.Types.ListExportsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListExportsResponse) => void): Request<LexModelsV2.Types.ListExportsResponse, AWSError>;
+  /**
+   * Lists the exports for a bot or bot locale. Exports are kept in the list for 7 days.
+   */
+  listExports(callback?: (err: AWSError, data: LexModelsV2.Types.ListExportsResponse) => void): Request<LexModelsV2.Types.ListExportsResponse, AWSError>;
+  /**
+   * Lists the imports for a bot or bot locale. Imports are kept in the list for 7 days.
+   */
+  listImports(params: LexModelsV2.Types.ListImportsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListImportsResponse) => void): Request<LexModelsV2.Types.ListImportsResponse, AWSError>;
+  /**
+   * Lists the imports for a bot or bot locale. Imports are kept in the list for 7 days.
+   */
+  listImports(callback?: (err: AWSError, data: LexModelsV2.Types.ListImportsResponse) => void): Request<LexModelsV2.Types.ListImportsResponse, AWSError>;
+  /**
    * Get a list of intents that meet the specified criteria.
    */
   listIntents(params: LexModelsV2.Types.ListIntentsRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListIntentsResponse) => void): Request<LexModelsV2.Types.ListIntentsResponse, AWSError>;
@@ -267,6 +371,14 @@ declare class LexModelsV2 extends Service {
    * Gets a list of tags associated with a resource. Only bots, bot aliases, and bot channels can have tags associated with them.
    */
   listTagsForResource(callback?: (err: AWSError, data: LexModelsV2.Types.ListTagsForResourceResponse) => void): Request<LexModelsV2.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Starts importing a bot or bot locale from a zip archive that you uploaded to an S3 bucket.
+   */
+  startImport(params: LexModelsV2.Types.StartImportRequest, callback?: (err: AWSError, data: LexModelsV2.Types.StartImportResponse) => void): Request<LexModelsV2.Types.StartImportResponse, AWSError>;
+  /**
+   * Starts importing a bot or bot locale from a zip archive that you uploaded to an S3 bucket.
+   */
+  startImport(callback?: (err: AWSError, data: LexModelsV2.Types.StartImportResponse) => void): Request<LexModelsV2.Types.StartImportResponse, AWSError>;
   /**
    * Adds the specified tags to the specified resource. If a tag key already exists, the existing value is replaced with the new value.
    */
@@ -308,6 +420,14 @@ declare class LexModelsV2 extends Service {
    */
   updateBotLocale(callback?: (err: AWSError, data: LexModelsV2.Types.UpdateBotLocaleResponse) => void): Request<LexModelsV2.Types.UpdateBotLocaleResponse, AWSError>;
   /**
+   * Updates the password used to protect an export zip archive. The password is not required. If you don't supply a password, Amazon Lex generates a zip file that is not protected by a password. This is the archive that is available at the pre-signed S3 URL provided by the operation.
+   */
+  updateExport(params: LexModelsV2.Types.UpdateExportRequest, callback?: (err: AWSError, data: LexModelsV2.Types.UpdateExportResponse) => void): Request<LexModelsV2.Types.UpdateExportResponse, AWSError>;
+  /**
+   * Updates the password used to protect an export zip archive. The password is not required. If you don't supply a password, Amazon Lex generates a zip file that is not protected by a password. This is the archive that is available at the pre-signed S3 URL provided by the operation.
+   */
+  updateExport(callback?: (err: AWSError, data: LexModelsV2.Types.UpdateExportResponse) => void): Request<LexModelsV2.Types.UpdateExportResponse, AWSError>;
+  /**
    * Updates the settings for an intent.
    */
   updateIntent(params: LexModelsV2.Types.UpdateIntentRequest, callback?: (err: AWSError, data: LexModelsV2.Types.UpdateIntentResponse) => void): Request<LexModelsV2.Types.UpdateIntentResponse, AWSError>;
@@ -315,6 +435,14 @@ declare class LexModelsV2 extends Service {
    * Updates the settings for an intent.
    */
   updateIntent(callback?: (err: AWSError, data: LexModelsV2.Types.UpdateIntentResponse) => void): Request<LexModelsV2.Types.UpdateIntentResponse, AWSError>;
+  /**
+   * Replaces the existing resource policy for a bot or bot alias with a new one. If the policy doesn't exist, Amazon Lex returns an exception.
+   */
+  updateResourcePolicy(params: LexModelsV2.Types.UpdateResourcePolicyRequest, callback?: (err: AWSError, data: LexModelsV2.Types.UpdateResourcePolicyResponse) => void): Request<LexModelsV2.Types.UpdateResourcePolicyResponse, AWSError>;
+  /**
+   * Replaces the existing resource policy for a bot or bot alias with a new one. If the policy doesn't exist, Amazon Lex returns an exception.
+   */
+  updateResourcePolicy(callback?: (err: AWSError, data: LexModelsV2.Types.UpdateResourcePolicyResponse) => void): Request<LexModelsV2.Types.UpdateResourcePolicyResponse, AWSError>;
   /**
    * Updates the settings for a slot.
    */
@@ -410,6 +538,16 @@ declare namespace LexModelsV2 {
     lastUpdatedDateTime?: Timestamp;
   }
   export type BotAliasSummaryList = BotAliasSummary[];
+  export interface BotExportSpecification {
+    /**
+     * The identifier of the bot assigned by Amazon Lex.
+     */
+    botId: Id;
+    /**
+     * The version of the bot that was exported. This will be either DRAFT or the version number.
+     */
+    botVersion: BotVersion;
+  }
   export interface BotFilter {
     /**
      * The name of the field to filter the list of bots.
@@ -427,6 +565,43 @@ declare namespace LexModelsV2 {
   export type BotFilterName = "BotName"|string;
   export type BotFilterOperator = "CO"|"EQ"|string;
   export type BotFilters = BotFilter[];
+  export interface BotImportSpecification {
+    /**
+     * The name that Amazon Lex should use for the bot.
+     */
+    botName: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM role used to build and run the bot.
+     */
+    roleArn: RoleArn;
+    dataPrivacy: DataPrivacy;
+    /**
+     * The time, in seconds, that Amazon Lex should keep information about a user's conversation with the bot.  A user interaction remains active for the amount of time specified. If no conversation occurs during this time, the session expires and Amazon Lex deletes any data provided before the timeout. You can specify between 60 (1 minute) and 86,400 (24 hours) seconds.
+     */
+    idleSessionTTLInSeconds?: SessionTTL;
+    /**
+     * A list of tags to add to the bot. You can only add tags when you import a bot. You can't use the UpdateBot operation to update tags. To update tags, use the TagResource operation.
+     */
+    botTags?: TagMap;
+    /**
+     * A list of tags to add to the test alias for a bot. You can only add tags when you import a bot. You can't use the UpdateAlias operation to update tags. To update tags on the test alias, use the TagResource operation.
+     */
+    testBotAliasTags?: TagMap;
+  }
+  export interface BotLocaleExportSpecification {
+    /**
+     * The identifier of the bot to create the locale for.
+     */
+    botId: Id;
+    /**
+     * The version of the bot to export.
+     */
+    botVersion: BotVersion;
+    /**
+     * The identifier of the language and locale to export. The string must match one of the locales in the bot.
+     */
+    localeId: LocaleId;
+  }
   export interface BotLocaleFilter {
     /**
      * The name of the field to filter the list of bots.
@@ -456,6 +631,25 @@ declare namespace LexModelsV2 {
   }
   export type BotLocaleHistoryEventDescription = string;
   export type BotLocaleHistoryEventsList = BotLocaleHistoryEvent[];
+  export interface BotLocaleImportSpecification {
+    /**
+     * The identifier of the bot to import the locale to.
+     */
+    botId: Id;
+    /**
+     * The version of the bot to import the locale to. This can only be the DRAFT version of the bot.
+     */
+    botVersion: DraftBotVersion;
+    /**
+     * The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see Supported languages.
+     */
+    localeId: LocaleId;
+    /**
+     * Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot.  For example, suppose a bot is configured with the confidence threshold of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns three alternative intents with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the PostText operation would be:    AMAZON.FallbackIntent     IntentA     IntentB     IntentC   
+     */
+    nluIntentConfidenceThreshold?: ConfidenceThreshold;
+    voiceSettings?: VoiceSettings;
+  }
   export type BotLocaleSortAttribute = "BotLocaleName"|string;
   export interface BotLocaleSortBy {
     /**
@@ -467,7 +661,7 @@ declare namespace LexModelsV2 {
      */
     order: SortOrder;
   }
-  export type BotLocaleStatus = "Creating"|"Building"|"Built"|"ReadyExpressTesting"|"Failed"|"Deleting"|"NotBuilt"|string;
+  export type BotLocaleStatus = "Creating"|"Building"|"Built"|"ReadyExpressTesting"|"Failed"|"Deleting"|"NotBuilt"|"Importing"|string;
   export interface BotLocaleSummary {
     /**
      * The language and locale of the bot locale.
@@ -506,7 +700,7 @@ declare namespace LexModelsV2 {
      */
     order: SortOrder;
   }
-  export type BotStatus = "Creating"|"Available"|"Inactive"|"Deleting"|"Failed"|"Versioning"|string;
+  export type BotStatus = "Creating"|"Available"|"Inactive"|"Deleting"|"Failed"|"Versioning"|"Importing"|string;
   export interface BotSummary {
     /**
      * The unique identifier assigned to the bot. Use this ID to get detailed information about the bot with the DescribeBot operation.
@@ -587,7 +781,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: DraftBotVersion;
     /**
-     * The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see Supported languages.
      */
     localeId: LocaleId;
   }
@@ -688,6 +882,11 @@ declare namespace LexModelsV2 {
   export interface CodeHookSpecification {
     lambdaCodeHook: LambdaCodeHook;
   }
+  export type ConditionKey = string;
+  export type ConditionKeyValueMap = {[key: string]: ConditionValue};
+  export type ConditionMap = {[key: string]: ConditionKeyValueMap};
+  export type ConditionOperator = string;
+  export type ConditionValue = string;
   export type ConfidenceThreshold = number;
   export type ContextTimeToLiveInSeconds = number;
   export type ContextTurnsToLive = number;
@@ -785,7 +984,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: DraftBotVersion;
     /**
-     * The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale that the bot will be used in. The string must match one of the supported locales. All of the intents, slot types, and slots used in the bot must have the same locale. For more information, see Supported languages.
      */
     localeId: LocaleId;
     /**
@@ -951,6 +1150,42 @@ declare namespace LexModelsV2 {
      */
     creationDateTime?: Timestamp;
   }
+  export interface CreateExportRequest {
+    /**
+     * Specifies the type of resource to export, either a bot or a bot locale. You can only specify one type of resource to export.
+     */
+    resourceSpecification: ExportResourceSpecification;
+    /**
+     * The file format of the bot or bot locale definition files.
+     */
+    fileFormat: ImportExportFileFormat;
+    /**
+     * An password to use to encrypt the exported archive. Using a password is optional, but you should encrypt the archive to protect the data in transit between Amazon Lex and your local computer.
+     */
+    filePassword?: ImportExportFilePassword;
+  }
+  export interface CreateExportResponse {
+    /**
+     * An identifier for a specific request to create an export.
+     */
+    exportId?: Id;
+    /**
+     * A description of the type of resource that was exported, either a bot or a bot locale.
+     */
+    resourceSpecification?: ExportResourceSpecification;
+    /**
+     * The file format used for the bot or bot locale definition files.
+     */
+    fileFormat?: ImportExportFileFormat;
+    /**
+     * The status of the export. When the status is Completed, you can use the operation to get the pre-signed S3 URL link to your exported bot or bot locale.
+     */
+    exportStatus?: ExportStatus;
+    /**
+     * The date and time that the request to export a bot was created.
+     */
+    creationDateTime?: Timestamp;
+  }
   export interface CreateIntentRequest {
     /**
      * The name of the intent. Intent names must be unique in the locale that contains the intent and cannot match the name of any built-in intent.
@@ -1005,7 +1240,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: DraftBotVersion;
     /**
-     * The identifier of the language and locale where this intent is used. All of the bots, slot types, and slots used by the intent must have the same locale.
+     * The identifier of the language and locale where this intent is used. All of the bots, slot types, and slots used by the intent must have the same locale. For more information, see Supported languages.
      */
     localeId: LocaleId;
   }
@@ -1075,6 +1310,66 @@ declare namespace LexModelsV2 {
      */
     creationDateTime?: Timestamp;
   }
+  export interface CreateResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * A resource policy to add to the resource. The policy is a JSON structure that contains one or more statements that define the policy. The policy must follow the IAM syntax. For more information about the contents of a JSON policy document, see  IAM JSON policy reference .  If the policy isn't valid, Amazon Lex returns a validation exception.
+     */
+    policy: Policy;
+  }
+  export interface CreateResourcePolicyResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy was attached to.
+     */
+    resourceArn?: AmazonResourceName;
+    /**
+     * The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.
+     */
+    revisionId?: RevisionId;
+  }
+  export interface CreateResourcePolicyStatementRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * The name of the statement. The ID is the same as the Sid IAM property. The statement name must be unique within the policy. For more information, see IAM JSON policy elements: Sid. 
+     */
+    statementId: Name;
+    /**
+     * Determines whether the statement allows or denies access to the resource.
+     */
+    effect: Effect;
+    /**
+     * An IAM principal, such as an IAM users, IAM roles, or AWS services that is allowed or denied access to a resource. For more information, see AWS JSON policy elements: Principal.
+     */
+    principal: PrincipalList;
+    /**
+     * The Amazon Lex action that this policy either allows or denies. The action must apply to the resource type of the specified ARN. For more information, see  Actions, resources, and condition keys for Amazon Lex V2.
+     */
+    action: OperationList;
+    /**
+     * Specifies a condition when the policy is in effect. If the principal of the policy is a service principal, you must provide two condition blocks, one with a SourceAccount global condition key and one with a SourceArn global condition key. For more information, see IAM JSON policy elements: Condition .
+     */
+    condition?: ConditionMap;
+    /**
+     * The identifier of the revision of the policy to edit. If this revision ID doesn't match the current revision ID, Amazon Lex throws an exception. If you don't specify a revision, Amazon Lex overwrites the contents of the policy with the new values.
+     */
+    expectedRevisionId?: RevisionId;
+  }
+  export interface CreateResourcePolicyStatementResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn?: AmazonResourceName;
+    /**
+     * The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.
+     */
+    revisionId?: RevisionId;
+  }
   export interface CreateSlotRequest {
     /**
      * The name of the slot. Slot names must be unique within the bot that contains the slot.
@@ -1105,13 +1400,17 @@ declare namespace LexModelsV2 {
      */
     botVersion: DraftBotVersion;
     /**
-     * The identifier of the language and locale that the slot will be used in. The string must match one of the supported locales. All of the bots, intents, slot types used by the slot must have the same locale. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale that the slot will be used in. The string must match one of the supported locales. All of the bots, intents, slot types used by the slot must have the same locale. For more information, see Supported languages.
      */
     localeId: LocaleId;
     /**
      * The identifier of the intent that contains the slot.
      */
     intentId: Id;
+    /**
+     * Indicates whether the slot returns multiple values in one response. Multi-value slots are only available in the en-US locale. If you set this value to true in any other locale, Amazon Lex throws a ValidationException.  If the multipleValuesSetting is not set, the default value is false.
+     */
+    multipleValuesSetting?: MultipleValuesSetting;
   }
   export interface CreateSlotResponse {
     /**
@@ -1158,6 +1457,10 @@ declare namespace LexModelsV2 {
      * The timestamp of the date and time that the slot was created.
      */
     creationDateTime?: Timestamp;
+    /**
+     * Indicates whether the slot returns multiple values in one response.
+     */
+    multipleValuesSetting?: MultipleValuesSetting;
   }
   export interface CreateSlotTypeRequest {
     /**
@@ -1189,7 +1492,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: DraftBotVersion;
     /**
-     * The identifier of the language and locale that the slot type will be used in. The string must match one of the supported locales. All of the bots, intents, and slots used by the slot type must have the same locale. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale that the slot type will be used in. The string must match one of the supported locales. All of the bots, intents, and slots used by the slot type must have the same locale. For more information, see Supported languages.
      */
     localeId: LocaleId;
   }
@@ -1234,6 +1537,18 @@ declare namespace LexModelsV2 {
      * A timestamp of the date and time that the slot type was created.
      */
     creationDateTime?: Timestamp;
+  }
+  export interface CreateUploadUrlRequest {
+  }
+  export interface CreateUploadUrlResponse {
+    /**
+     * An identifier for a unique import job. Use it when you call the operation.
+     */
+    importId?: Id;
+    /**
+     * A pre-signed S3 write URL. Upload the zip archive file that contains the definition of your bot or bot locale.
+     */
+    uploadUrl?: PresignedS3Url;
   }
   export interface CustomPayload {
     /**
@@ -1286,7 +1601,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: DraftBotVersion;
     /**
-     * The identifier of the language and locale that will be deleted. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale that will be deleted. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
   }
@@ -1356,6 +1671,38 @@ declare namespace LexModelsV2 {
      */
     botStatus?: BotStatus;
   }
+  export interface DeleteExportRequest {
+    /**
+     * The unique identifier of the export to delete.
+     */
+    exportId: Id;
+  }
+  export interface DeleteExportResponse {
+    /**
+     * The unique identifier of the deleted export.
+     */
+    exportId?: Id;
+    /**
+     * The current status of the deletion. When the deletion is complete, the export will no longer be returned by the operation and calls to the with the export identifier will fail.
+     */
+    exportStatus?: ExportStatus;
+  }
+  export interface DeleteImportRequest {
+    /**
+     * The unique identifier of the import to delete.
+     */
+    importId: Id;
+  }
+  export interface DeleteImportResponse {
+    /**
+     * The unique identifier of the deleted import.
+     */
+    importId?: Id;
+    /**
+     * The current status of the deletion. When the deletion is complete, the import will no longer be returned by the operation and calls to the with the import identifier will fail.
+     */
+    importStatus?: ImportStatus;
+  }
   export interface DeleteIntentRequest {
     /**
      * The unique identifier of the intent to delete.
@@ -1370,9 +1717,53 @@ declare namespace LexModelsV2 {
      */
     botVersion: DraftBotVersion;
     /**
-     * The identifier of the language and locale where the bot will be deleted. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale where the bot will be deleted. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
+  }
+  export interface DeleteResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that has the resource policy attached.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * The identifier of the revision to edit. If this ID doesn't match the current revision number, Amazon Lex returns an exception If you don't specify a revision ID, Amazon Lex will delete the current policy.
+     */
+    expectedRevisionId?: RevisionId;
+  }
+  export interface DeleteResourcePolicyResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy was deleted from.
+     */
+    resourceArn?: AmazonResourceName;
+    /**
+     * The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.
+     */
+    revisionId?: RevisionId;
+  }
+  export interface DeleteResourcePolicyStatementRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * The name of the statement (SID) to delete from the policy.
+     */
+    statementId: Name;
+    /**
+     * The identifier of the revision of the policy to delete the statement from. If this revision ID doesn't match the current revision ID, Amazon Lex throws an exception. If you don't specify a revision, Amazon Lex removes the current contents of the statement. 
+     */
+    expectedRevisionId?: RevisionId;
+  }
+  export interface DeleteResourcePolicyStatementResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy statement was removed from.
+     */
+    resourceArn?: AmazonResourceName;
+    /**
+     * The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.
+     */
+    revisionId?: RevisionId;
   }
   export interface DeleteSlotRequest {
     /**
@@ -1388,7 +1779,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: DraftBotVersion;
     /**
-     * The identifier of the language and locale that the slot will be deleted from. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale that the slot will be deleted from. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
     /**
@@ -1410,7 +1801,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: DraftBotVersion;
     /**
-     * The identifier of the language and locale that the slot type will be deleted from. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale that the slot type will be deleted from. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
     /**
@@ -1485,7 +1876,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: BotVersion;
     /**
-     * The unique identifier of the locale to describe. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html. 
+     * The unique identifier of the locale to describe. The string must match one of the supported locales. For more information, see Supported languages. 
      */
     localeId: LocaleId;
   }
@@ -1647,6 +2038,90 @@ declare namespace LexModelsV2 {
      */
     creationDateTime?: Timestamp;
   }
+  export interface DescribeExportRequest {
+    /**
+     * The unique identifier of the export to describe.
+     */
+    exportId: Id;
+  }
+  export interface DescribeExportResponse {
+    /**
+     * The unique identifier of the described export.
+     */
+    exportId?: Id;
+    /**
+     * The bot, bot ID, and optional locale ID of the exported bot or bot locale.
+     */
+    resourceSpecification?: ExportResourceSpecification;
+    /**
+     * The file format used in the files that describe the bot or bot locale.
+     */
+    fileFormat?: ImportExportFileFormat;
+    /**
+     * The status of the export. When the status is Complete the export archive file is available for download.
+     */
+    exportStatus?: ExportStatus;
+    /**
+     * If the exportStatus is failed, contains one or more reasons why the export could not be completed.
+     */
+    failureReasons?: FailureReasons;
+    /**
+     * A pre-signed S3 URL that points to the bot or bot locale archive. The URL is only available for 5 minutes after calling the DescribeExport operation.
+     */
+    downloadUrl?: PresignedS3Url;
+    /**
+     * The date and time that the export was created.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The last date and time that the export was updated.
+     */
+    lastUpdatedDateTime?: Timestamp;
+  }
+  export interface DescribeImportRequest {
+    /**
+     * The unique identifier of the import to describe.
+     */
+    importId: Id;
+  }
+  export interface DescribeImportResponse {
+    /**
+     * The unique identifier of the described import.
+     */
+    importId?: Id;
+    /**
+     * The specifications of the imported bot or bot locale.
+     */
+    resourceSpecification?: ImportResourceSpecification;
+    /**
+     * The unique identifier that Amazon Lex assigned to the resource created by the import.
+     */
+    importedResourceId?: ImportedResourceId;
+    /**
+     * The name of the imported resource.
+     */
+    importedResourceName?: Name;
+    /**
+     * The strategy used when there was a name conflict between the imported resource and an existing resource. When the merge strategy is FailOnConflict existing resources are not overwritten and the import fails.
+     */
+    mergeStrategy?: MergeStrategy;
+    /**
+     * The status of the import process. When the status is Completed the resource is imported and ready for use.
+     */
+    importStatus?: ImportStatus;
+    /**
+     * If the importStatus field is Failed, this provides one or more reasons for the failture.
+     */
+    failureReasons?: FailureReasons;
+    /**
+     * The date and time that the import was created.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The date and time that the import was last updated.
+     */
+    lastUpdatedDateTime?: Timestamp;
+  }
   export interface DescribeIntentRequest {
     /**
      * The identifier of the intent to describe.
@@ -1661,7 +2136,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: BotVersion;
     /**
-     * The identifier of the language and locale of the intent to describe. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale of the intent to describe. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
   }
@@ -1739,6 +2214,26 @@ declare namespace LexModelsV2 {
      */
     lastUpdatedDateTime?: Timestamp;
   }
+  export interface DescribeResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn: AmazonResourceName;
+  }
+  export interface DescribeResourcePolicyResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn?: AmazonResourceName;
+    /**
+     * The JSON structure that contains the resource policy. For more information about the contents of a JSON policy document, see  IAM JSON policy reference .
+     */
+    policy?: Policy;
+    /**
+     * The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.
+     */
+    revisionId?: RevisionId;
+  }
   export interface DescribeSlotRequest {
     /**
      * The unique identifier for the slot.
@@ -1753,7 +2248,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: BotVersion;
     /**
-     * The identifier of the language and locale of the slot to describe. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale of the slot to describe. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
     /**
@@ -1810,6 +2305,10 @@ declare namespace LexModelsV2 {
      * A timestamp of the date and time that the slot was last updated.
      */
     lastUpdatedDateTime?: Timestamp;
+    /**
+     * Indicates whether the slot accepts multiple values in a single utterance. If the multipleValuesSetting is not set, the default value is false.
+     */
+    multipleValuesSetting?: MultipleValuesSetting;
   }
   export interface DescribeSlotTypeRequest {
     /**
@@ -1825,7 +2324,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: BotVersion;
     /**
-     * The identifier of the language and locale of the slot type to describe. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale of the slot type to describe. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
   }
@@ -1883,6 +2382,73 @@ declare namespace LexModelsV2 {
     enabled: Boolean;
   }
   export type DraftBotVersion = string;
+  export type Effect = "Allow"|"Deny"|string;
+  export interface ExportFilter {
+    /**
+     * The name of the field to use for filtering.
+     */
+    name: ExportFilterName;
+    /**
+     * The values to use to fileter the response.
+     */
+    values: FilterValues;
+    /**
+     * The operator to use for the filter. Specify EQ when the ListExports operation should return only resource types that equal the specified value. Specify CO when the ListExports operation should return resource types that contain the specified value.
+     */
+    operator: ExportFilterOperator;
+  }
+  export type ExportFilterName = "ExportResourceType"|string;
+  export type ExportFilterOperator = "CO"|"EQ"|string;
+  export type ExportFilters = ExportFilter[];
+  export interface ExportResourceSpecification {
+    /**
+     * Parameters for exporting a bot.
+     */
+    botExportSpecification?: BotExportSpecification;
+    /**
+     * Parameters for exporting a bot locale.
+     */
+    botLocaleExportSpecification?: BotLocaleExportSpecification;
+  }
+  export type ExportSortAttribute = "LastUpdatedDateTime"|string;
+  export interface ExportSortBy {
+    /**
+     * The export field to use for sorting.
+     */
+    attribute: ExportSortAttribute;
+    /**
+     * The order to sort the list.
+     */
+    order: SortOrder;
+  }
+  export type ExportStatus = "InProgress"|"Completed"|"Failed"|"Deleting"|string;
+  export interface ExportSummary {
+    /**
+     * The unique identifier that Amazon Lex assigned to the export.
+     */
+    exportId?: Id;
+    /**
+     * Information about the bot or bot locale that was exported.
+     */
+    resourceSpecification?: ExportResourceSpecification;
+    /**
+     * The file format used in the export files.
+     */
+    fileFormat?: ImportExportFileFormat;
+    /**
+     * The status of the export. When the status is Completed the export is ready to download.
+     */
+    exportStatus?: ExportStatus;
+    /**
+     * The date and time that the export was created.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The date and time that the export was last updated.
+     */
+    lastUpdatedDateTime?: Timestamp;
+  }
+  export type ExportSummaryList = ExportSummary[];
   export type FailureReason = string;
   export type FailureReasons = FailureReason[];
   export type FilterValue = string;
@@ -1912,6 +2478,79 @@ declare namespace LexModelsV2 {
      */
     buttons?: ButtonsList;
   }
+  export type ImportExportFileFormat = "LexJson"|string;
+  export type ImportExportFilePassword = string;
+  export interface ImportFilter {
+    /**
+     * The name of the field to use for filtering.
+     */
+    name: ImportFilterName;
+    /**
+     * The values to use to filter the response.
+     */
+    values: FilterValues;
+    /**
+     * The operator to use for the filter. Specify EQ when the ListImports operation should return only resource types that equal the specified value. Specify CO when the ListImports operation should return resource types that contain the specified value.
+     */
+    operator: ImportFilterOperator;
+  }
+  export type ImportFilterName = "ImportResourceType"|string;
+  export type ImportFilterOperator = "CO"|"EQ"|string;
+  export type ImportFilters = ImportFilter[];
+  export interface ImportResourceSpecification {
+    /**
+     * Parameters for importing a bot.
+     */
+    botImportSpecification?: BotImportSpecification;
+    /**
+     * Parameters for importing a bot locale.
+     */
+    botLocaleImportSpecification?: BotLocaleImportSpecification;
+  }
+  export type ImportSortAttribute = "LastUpdatedDateTime"|string;
+  export interface ImportSortBy {
+    /**
+     * The export field to use for sorting.
+     */
+    attribute: ImportSortAttribute;
+    /**
+     * The order to sort the list.
+     */
+    order: SortOrder;
+  }
+  export type ImportStatus = "InProgress"|"Completed"|"Failed"|"Deleting"|string;
+  export interface ImportSummary {
+    /**
+     * The unique identifier that Amazon Lex assigned to the import.
+     */
+    importId?: Id;
+    /**
+     * The unique identifier that Amazon Lex assigned to the imported resource.
+     */
+    importedResourceId?: ImportedResourceId;
+    /**
+     * The name that you gave the imported resource.
+     */
+    importedResourceName?: Name;
+    /**
+     * The status of the resource. When the status is Completed the resource is ready to build.
+     */
+    importStatus?: ImportStatus;
+    /**
+     * The strategy used to merge existing bot or bot locale definitions with the imported definition.
+     */
+    mergeStrategy?: MergeStrategy;
+    /**
+     * The date and time that the import was created.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The date and time that the import was last updated.
+     */
+    lastUpdatedDateTime?: Timestamp;
+  }
+  export type ImportSummaryList = ImportSummary[];
+  export type ImportedResourceId = string;
   export interface InputContext {
     /**
      * The name of the context.
@@ -2156,7 +2795,7 @@ declare namespace LexModelsV2 {
   }
   export interface ListBuiltInIntentsRequest {
     /**
-     * The identifier of the language and locale of the intents to list. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale of the intents to list. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
     /**
@@ -2188,7 +2827,7 @@ declare namespace LexModelsV2 {
   }
   export interface ListBuiltInSlotTypesRequest {
     /**
-     * The identifier of the language and locale of the slot types to list. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale of the slot types to list. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
     /**
@@ -2218,6 +2857,94 @@ declare namespace LexModelsV2 {
      */
     localeId?: LocaleId;
   }
+  export interface ListExportsRequest {
+    /**
+     * The unique identifier that Amazon Lex assigned to the bot.
+     */
+    botId?: Id;
+    /**
+     * The version of the bot to list exports for. 
+     */
+    botVersion?: BotVersion;
+    /**
+     * Determines the field that the list of exports is sorted by. You can sort by the LastUpdatedDateTime field in ascending or descending order.
+     */
+    sortBy?: ExportSortBy;
+    /**
+     * Provides the specification of a filter used to limit the exports in the response to only those that match the filter specification. You can only specify one filter and one string to filter on.
+     */
+    filters?: ExportFilters;
+    /**
+     * The maximum number of exports to return in each page of results. If there are fewer results than the max page size, only the actual number of results are returned.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the response from the ListExports operation contans more results that specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListExportsResponse {
+    /**
+     * The unique identifier assigned to the bot by Amazon Lex.
+     */
+    botId?: Id;
+    /**
+     * The version of the bot that was exported.
+     */
+    botVersion?: BotVersion;
+    /**
+     * Summary information for the exports that meet the filter criteria specified in the request. The length of the list is specified in the maxResults parameter. If there are more exports available, the nextToken field contains a token to get the next page of results.
+     */
+    exportSummaries?: ExportSummaryList;
+    /**
+     * A token that indicates whether there are more results to return in a response to the ListExports operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListExports operation request to get the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListImportsRequest {
+    /**
+     * The unique identifier that Amazon Lex assigned to the bot.
+     */
+    botId?: Id;
+    /**
+     * The version of the bot to list imports for.
+     */
+    botVersion?: DraftBotVersion;
+    /**
+     * Determines the field that the list of imports is sorted by. You can sort by the LastUpdatedDateTime field in ascending or descending order.
+     */
+    sortBy?: ImportSortBy;
+    /**
+     * Provides the specification of a filter used to limit the bots in the response to only those that match the filter specification. You can only specify one filter and one string to filter on.
+     */
+    filters?: ImportFilters;
+    /**
+     * The maximum number of imports to return in each page of results. If there are fewer results than the max page size, only the actual number of results are returned.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the response from the ListImports operation contains more results than specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListImportsResponse {
+    /**
+     * The unique identifier assigned by Amazon Lex to the bot.
+     */
+    botId?: Id;
+    /**
+     * The version of the bot that was imported. It will always be DRAFT.
+     */
+    botVersion?: DraftBotVersion;
+    /**
+     * Summary information for the imports that meet the filter criteria specified in the request. The length of the list is specified in the maxResults parameter. If there are more imports available, the nextToken field contains a token to get the next page of results.
+     */
+    importSummaries?: ImportSummaryList;
+    /**
+     * A token that indicates whether there are more results to return in a response to the ListImports operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListImports operation request to get the next page of results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListIntentsRequest {
     /**
      * The unique identifier of the bot that contains the intent.
@@ -2228,7 +2955,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: BotVersion;
     /**
-     * The identifier of the language and locale of the intents to list. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale of the intents to list. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
     /**
@@ -2280,7 +3007,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: BotVersion;
     /**
-     * The identifier of the language and locale of the slot types to list. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale of the slot types to list. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
     /**
@@ -2332,7 +3059,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: BotVersion;
     /**
-     * The identifier of the language and locale of the slots to list. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale of the slots to list. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
     /**
@@ -2398,6 +3125,7 @@ declare namespace LexModelsV2 {
   export type LocaleName = string;
   export type LogPrefix = string;
   export type MaxResults = number;
+  export type MergeStrategy = "Overwrite"|"FailOnConflict"|string;
   export interface Message {
     /**
      * A message in plain text format.
@@ -2428,6 +3156,12 @@ declare namespace LexModelsV2 {
   }
   export type MessageGroupsList = MessageGroup[];
   export type MessageVariationsList = Message[];
+  export interface MultipleValuesSetting {
+    /**
+     * Indicates whether a slot can return multiple values. When true, the slot may return more than one value in a response. When false, the slot returns only a single value. Multi-value slots are only available in the en-US locale. If you set this value to true in any other locale, Amazon Lex throws a ValidationException. If the allowMutlipleValues is not set, the default value is false.
+     */
+    allowMultipleValues?: Boolean;
+  }
   export type Name = string;
   export type NextToken = string;
   export type NumericalBotVersion = string;
@@ -2438,6 +3172,8 @@ declare namespace LexModelsV2 {
     obfuscationSettingType: ObfuscationSettingType;
   }
   export type ObfuscationSettingType = "None"|"DefaultObfuscation"|string;
+  export type Operation = string;
+  export type OperationList = Operation[];
   export interface OutputContext {
     /**
      * The name of the output context.
@@ -2460,6 +3196,20 @@ declare namespace LexModelsV2 {
     value: PlainTextMessageValue;
   }
   export type PlainTextMessageValue = string;
+  export type Policy = string;
+  export type PresignedS3Url = string;
+  export interface Principal {
+    /**
+     * The name of the AWS service that should allowed or denied access to an Amazon Lex action.
+     */
+    service?: ServicePrincipal;
+    /**
+     * The Amazon Resource Name (ARN) of the principal.
+     */
+    arn?: PrincipalArn;
+  }
+  export type PrincipalArn = string;
+  export type PrincipalList = Principal[];
   export type PriorityValue = number;
   export type PromptMaxRetries = number;
   export interface PromptSpecification {
@@ -2489,6 +3239,7 @@ declare namespace LexModelsV2 {
      */
     allowInterrupt?: BoxedBoolean;
   }
+  export type RevisionId = string;
   export type RoleArn = string;
   export type S3BucketArn = string;
   export interface S3BucketLogDestination {
@@ -2531,6 +3282,7 @@ declare namespace LexModelsV2 {
      */
     detectSentiment: Boolean;
   }
+  export type ServicePrincipal = string;
   export type SessionTTL = number;
   export type SkipResourceInUseCheck = boolean;
   export type SlotConstraint = "Required"|"Optional"|string;
@@ -2718,6 +3470,46 @@ declare namespace LexModelsV2 {
     regexFilter?: SlotValueRegexFilter;
   }
   export type SortOrder = "Ascending"|"Descending"|string;
+  export interface StartImportRequest {
+    /**
+     * The unique identifier for the import. It is included in the response from the operation.
+     */
+    importId: Id;
+    /**
+     * Parameters for creating the bot or bot locale.
+     */
+    resourceSpecification: ImportResourceSpecification;
+    /**
+     * The strategy to use when there is a name conflict between the imported resource and an existing resource. When the merge strategy is FailOnConflict existing resources are not overwritten and the import fails.
+     */
+    mergeStrategy: MergeStrategy;
+    /**
+     * The password used to encrypt the zip archive that contains the bot or bot locale definition. You should always encrypt the zip archive to protect it during transit between your site and Amazon Lex.
+     */
+    filePassword?: ImportExportFilePassword;
+  }
+  export interface StartImportResponse {
+    /**
+     * A unique identifier for the import.
+     */
+    importId?: Id;
+    /**
+     * The parameters used when importing the bot or bot locale.
+     */
+    resourceSpecification?: ImportResourceSpecification;
+    /**
+     * The strategy used when there was a name conflict between the imported resource and an existing resource. When the merge strategy is FailOnConflict existing resources are not overwritten and the import fails.
+     */
+    mergeStrategy?: MergeStrategy;
+    /**
+     * The current status of the import. When the status is Complete the bot or bot alias is ready to use.
+     */
+    importStatus?: ImportStatus;
+    /**
+     * The date and time that the import request was created.
+     */
+    creationDateTime?: Timestamp;
+  }
   export type StillWaitingResponseFrequency = number;
   export interface StillWaitingResponseSpecification {
     /**
@@ -2866,7 +3658,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: DraftBotVersion;
     /**
-     * The identifier of the language and locale to update. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale to update. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
     /**
@@ -2992,6 +3784,42 @@ declare namespace LexModelsV2 {
      */
     lastUpdatedDateTime?: Timestamp;
   }
+  export interface UpdateExportRequest {
+    /**
+     * The unique identifier Amazon Lex assigned to the export.
+     */
+    exportId: Id;
+    /**
+     * The new password to use to encrypt the export zip archive.
+     */
+    filePassword?: ImportExportFilePassword;
+  }
+  export interface UpdateExportResponse {
+    /**
+     * The unique identifier Amazon Lex assigned to the export.
+     */
+    exportId?: Id;
+    /**
+     * A description of the type of resource that was exported, either a bot or a bot locale.
+     */
+    resourceSpecification?: ExportResourceSpecification;
+    /**
+     * The file format used for the files that define the resource.
+     */
+    fileFormat?: ImportExportFileFormat;
+    /**
+     * The status of the export. When the status is Completed the export archive is available for download.
+     */
+    exportStatus?: ExportStatus;
+    /**
+     * The date and time that the export was created.
+     */
+    creationDateTime?: Timestamp;
+    /**
+     * The date and time that the export was last updated.
+     */
+    lastUpdatedDateTime?: Timestamp;
+  }
   export interface UpdateIntentRequest {
     /**
      * The unique identifier of the intent to update.
@@ -3054,7 +3882,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: DraftBotVersion;
     /**
-     * The identifier of the language and locale where this intent is used. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale where this intent is used. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
   }
@@ -3132,6 +3960,30 @@ declare namespace LexModelsV2 {
      */
     lastUpdatedDateTime?: Timestamp;
   }
+  export interface UpdateResourcePolicyRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn: AmazonResourceName;
+    /**
+     * A resource policy to add to the resource. The policy is a JSON structure that contains one or more statements that define the policy. The policy must follow the IAM syntax. For more information about the contents of a JSON policy document, see  IAM JSON policy reference .  If the policy isn't valid, Amazon Lex returns a validation exception.
+     */
+    policy: Policy;
+    /**
+     * The identifier of the revision of the policy to update. If this revision ID doesn't match the current revision ID, Amazon Lex throws an exception. If you don't specify a revision, Amazon Lex overwrites the contents of the policy with the new values.
+     */
+    expectedRevisionId?: RevisionId;
+  }
+  export interface UpdateResourcePolicyResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the bot or bot alias that the resource policy is attached to.
+     */
+    resourceArn?: AmazonResourceName;
+    /**
+     * The current revision of the resource policy. Use the revision ID to make sure that you are updating the most current version of a resource policy when you add a policy statement to a resource, delete a resource, or update a resource.
+     */
+    revisionId?: RevisionId;
+  }
   export interface UpdateSlotRequest {
     /**
      * The unique identifier for the slot to update.
@@ -3166,13 +4018,17 @@ declare namespace LexModelsV2 {
      */
     botVersion: DraftBotVersion;
     /**
-     * The identifier of the language and locale that contains the slot. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale that contains the slot. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
     /**
      * The identifier of the intent that contains the slot.
      */
     intentId: Id;
+    /**
+     * Determines whether the slot accepts multiple values in one response. Multiple value slots are only available in the en-US locale. If you set this value to true in any other locale, Amazon Lex throws a ValidationException. If the multipleValuesSetting is not set, the default value is false.
+     */
+    multipleValuesSetting?: MultipleValuesSetting;
   }
   export interface UpdateSlotResponse {
     /**
@@ -3223,6 +4079,10 @@ declare namespace LexModelsV2 {
      * The timestamp of the date and time that the slot was last updated.
      */
     lastUpdatedDateTime?: Timestamp;
+    /**
+     * Indicates whether the slot accepts multiple values in one response.
+     */
+    multipleValuesSetting?: MultipleValuesSetting;
   }
   export interface UpdateSlotTypeRequest {
     /**
@@ -3258,7 +4118,7 @@ declare namespace LexModelsV2 {
      */
     botVersion: DraftBotVersion;
     /**
-     * The identifier of the language and locale that contains the slot type. The string must match one of the supported locales. For more information, see https://docs.aws.amazon.com/lex/latest/dg/supported-locales.html.
+     * The identifier of the language and locale that contains the slot type. The string must match one of the supported locales. For more information, see Supported languages.
      */
     localeId: LocaleId;
   }

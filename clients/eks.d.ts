@@ -237,11 +237,11 @@ declare class EKS extends Service {
    */
   updateAddon(callback?: (err: AWSError, data: EKS.Types.UpdateAddonResponse) => void): Request<EKS.Types.UpdateAddonResponse, AWSError>;
   /**
-   * Updates an Amazon EKS cluster configuration. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the DescribeUpdate API operation. You can use this API operation to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs in the  Amazon EKS User Guide .  CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see Amazon CloudWatch Pricing.  You can also use this API operation to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see Amazon EKS Cluster Endpoint Access Control in the  Amazon EKS User Guide .   At this time, you can not update the subnets or security group IDs for an existing cluster.  Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to UPDATING (this status transition is eventually consistent). When the update is complete (either Failed or Successful), the cluster status moves to Active.
+   * Updates an Amazon EKS cluster configuration. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the DescribeUpdate API operation. You can use this API operation to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs in the  Amazon EKS User Guide .  CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see Amazon CloudWatch Pricing.  You can also use this API operation to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see Amazon EKS Cluster Endpoint Access Control in the  Amazon EKS User Guide .   You can't update the subnets or security group IDs for an existing cluster.  Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to UPDATING (this status transition is eventually consistent). When the update is complete (either Failed or Successful), the cluster status moves to Active.
    */
   updateClusterConfig(params: EKS.Types.UpdateClusterConfigRequest, callback?: (err: AWSError, data: EKS.Types.UpdateClusterConfigResponse) => void): Request<EKS.Types.UpdateClusterConfigResponse, AWSError>;
   /**
-   * Updates an Amazon EKS cluster configuration. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the DescribeUpdate API operation. You can use this API operation to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs in the  Amazon EKS User Guide .  CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see Amazon CloudWatch Pricing.  You can also use this API operation to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see Amazon EKS Cluster Endpoint Access Control in the  Amazon EKS User Guide .   At this time, you can not update the subnets or security group IDs for an existing cluster.  Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to UPDATING (this status transition is eventually consistent). When the update is complete (either Failed or Successful), the cluster status moves to Active.
+   * Updates an Amazon EKS cluster configuration. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the DescribeUpdate API operation. You can use this API operation to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see Amazon EKS Cluster Control Plane Logs in the  Amazon EKS User Guide .  CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see Amazon CloudWatch Pricing.  You can also use this API operation to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see Amazon EKS Cluster Endpoint Access Control in the  Amazon EKS User Guide .   You can't update the subnets or security group IDs for an existing cluster.  Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to UPDATING (this status transition is eventually consistent). When the update is complete (either Failed or Successful), the cluster status moves to Active.
    */
   updateClusterConfig(callback?: (err: AWSError, data: EKS.Types.UpdateClusterConfigResponse) => void): Request<EKS.Types.UpdateClusterConfigResponse, AWSError>;
   /**
@@ -318,7 +318,7 @@ declare class EKS extends Service {
   waitFor(state: "addonDeleted", callback?: (err: AWSError, data: EKS.Types.DescribeAddonResponse) => void): Request<EKS.Types.DescribeAddonResponse, AWSError>;
 }
 declare namespace EKS {
-  export type AMITypes = "AL2_x86_64"|"AL2_x86_64_GPU"|"AL2_ARM_64"|string;
+  export type AMITypes = "AL2_x86_64"|"AL2_x86_64_GPU"|"AL2_ARM_64"|"CUSTOM"|string;
   export interface Addon {
     /**
      * The name of the add-on.
@@ -357,7 +357,7 @@ declare namespace EKS {
      */
     serviceAccountRoleArn?: String;
     /**
-     * The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Cluster tags do not propagate to any other resources associated with the cluster. 
+     * The metadata that you apply to the add-on to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Add-on tags do not propagate to any other resources associated with the cluster. 
      */
     tags?: TagMap;
   }
@@ -688,7 +688,7 @@ declare namespace EKS {
      */
     diskSize?: BoxedInteger;
     /**
-     * The subnets to use for the Auto Scaling group that is created for your node group. These subnets must have the tag key kubernetes.io/cluster/CLUSTER_NAME with a value of shared, where CLUSTER_NAME is replaced with the name of your cluster. If you specify launchTemplate, then don't specify  SubnetId  in your launch template, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see Launch template support in the Amazon EKS User Guide.
+     * The subnets to use for the Auto Scaling group that is created for your node group. If you specify launchTemplate, then don't specify  SubnetId  in your launch template, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see Launch template support in the Amazon EKS User Guide.
      */
     subnets: StringList;
     /**
@@ -712,6 +712,10 @@ declare namespace EKS {
      */
     labels?: labelsMap;
     /**
+     * The Kubernetes taints to be applied to the nodes in the node group.
+     */
+    taints?: taintsList;
+    /**
      * The metadata to apply to the node group to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Node group tags do not propagate to any other resources associated with the node group, such as the Amazon EC2 instances or subnets.
      */
     tags?: TagMap;
@@ -723,6 +727,7 @@ declare namespace EKS {
      * An object representing a node group's launch template specification. If specified, then do not specify instanceTypes, diskSize, or remoteAccess and make sure that the launch template meets the requirements in launchTemplateSpecification.
      */
     launchTemplate?: LaunchTemplateSpecification;
+    updateConfig?: NodegroupUpdateConfig;
     /**
      * The capacity type for your node group.
      */
@@ -948,7 +953,7 @@ declare namespace EKS {
      */
     resources?: StringList;
     /**
-     * AWS Key Management Service (AWS KMS) customer master key (CMK). Either the ARN or the alias can be used.
+     * AWS Key Management Service (AWS KMS) key. Either the ARN or the alias can be used.
      */
     provider?: Provider;
   }
@@ -1335,6 +1340,10 @@ declare namespace EKS {
      */
     labels?: labelsMap;
     /**
+     * The Kubernetes taints to be applied to the nodes in the node group when they are created. Effect is one of NoSchedule, PreferNoSchedule, or NoExecute. Kubernetes taints can be used together with tolerations to control how workloads are scheduled to your nodes.
+     */
+    taints?: taintsList;
+    /**
      * The resources associated with the node group, such as Auto Scaling groups and security groups for remote access.
      */
     resources?: NodegroupResources;
@@ -1346,6 +1355,7 @@ declare namespace EKS {
      * The health status of the node group. If there are issues with your node group's health, they are listed here.
      */
     health?: NodegroupHealth;
+    updateConfig?: NodegroupUpdateConfig;
     /**
      * If a launch template was used to create the node group, then this is the launch template that was used.
      */
@@ -1376,7 +1386,7 @@ declare namespace EKS {
     /**
      * The minimum number of nodes that the managed node group can scale in to. This number must be greater than zero.
      */
-    minSize?: Capacity;
+    minSize?: ZeroCapacity;
     /**
      * The maximum number of nodes that the managed node group can scale out to. For information about the maximum number that you can specify, see Amazon EKS service quotas in the Amazon EKS User Guide.
      */
@@ -1384,9 +1394,14 @@ declare namespace EKS {
     /**
      * The current number of nodes that the managed node group should maintain.
      */
-    desiredSize?: Capacity;
+    desiredSize?: ZeroCapacity;
   }
   export type NodegroupStatus = "CREATING"|"ACTIVE"|"UPDATING"|"DELETING"|"CREATE_FAILED"|"DELETE_FAILED"|"DEGRADED"|string;
+  export interface NodegroupUpdateConfig {
+    maxUnavailable?: NonZeroInteger;
+    maxUnavailablePercentage?: PercentCapacity;
+  }
+  export type NonZeroInteger = number;
   export interface OIDC {
     /**
      * The issuer URL for the OIDC identity provider.
@@ -1477,9 +1492,10 @@ declare namespace EKS {
      */
     requiredClaims?: requiredClaimsMap;
   }
+  export type PercentCapacity = number;
   export interface Provider {
     /**
-     * Amazon Resource Name (ARN) or alias of the customer master key (CMK). The CMK must be symmetric, created in the same region as the cluster, and if the CMK was created in a different account, the user must have access to the CMK. For more information, see Allowing Users in Other Accounts to Use a CMK in the AWS Key Management Service Developer Guide.
+     * Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key. For more information, see Allowing Users in Other Accounts to Use a KMS key in the AWS Key Management Service Developer Guide.
      */
     keyArn?: String;
   }
@@ -1513,6 +1529,21 @@ declare namespace EKS {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface Taint {
+    /**
+     * The key of the taint.
+     */
+    key?: taintKey;
+    /**
+     * The value of the taint.
+     */
+    value?: taintValue;
+    /**
+     * The effect of the taint.
+     */
+    effect?: TaintEffect;
+  }
+  export type TaintEffect = "NO_SCHEDULE"|"NO_EXECUTE"|"PREFER_NO_SCHEDULE"|string;
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
@@ -1643,9 +1674,14 @@ declare namespace EKS {
      */
     labels?: UpdateLabelsPayload;
     /**
+     * The Kubernetes taints to be applied to the nodes in the node group after the update.
+     */
+    taints?: UpdateTaintsPayload;
+    /**
      * The scaling configuration details for the Auto Scaling group after the update.
      */
     scalingConfig?: NodegroupScalingConfig;
+    updateConfig?: NodegroupUpdateConfig;
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
@@ -1697,9 +1733,19 @@ declare namespace EKS {
      */
     value?: String;
   }
-  export type UpdateParamType = "Version"|"PlatformVersion"|"EndpointPrivateAccess"|"EndpointPublicAccess"|"ClusterLogging"|"DesiredSize"|"LabelsToAdd"|"LabelsToRemove"|"MaxSize"|"MinSize"|"ReleaseVersion"|"PublicAccessCidrs"|"IdentityProviderConfig"|"EncryptionConfig"|"AddonVersion"|"ServiceAccountRoleArn"|"ResolveConflicts"|string;
+  export type UpdateParamType = "Version"|"PlatformVersion"|"EndpointPrivateAccess"|"EndpointPublicAccess"|"ClusterLogging"|"DesiredSize"|"LabelsToAdd"|"LabelsToRemove"|"TaintsToAdd"|"TaintsToRemove"|"MaxSize"|"MinSize"|"ReleaseVersion"|"PublicAccessCidrs"|"LaunchTemplateName"|"LaunchTemplateVersion"|"IdentityProviderConfig"|"EncryptionConfig"|"AddonVersion"|"ServiceAccountRoleArn"|"ResolveConflicts"|"MaxUnavailable"|"MaxUnavailablePercentage"|string;
   export type UpdateParams = UpdateParam[];
   export type UpdateStatus = "InProgress"|"Failed"|"Cancelled"|"Successful"|string;
+  export interface UpdateTaintsPayload {
+    /**
+     * Kubernetes taints to be added or updated.
+     */
+    addOrUpdateTaints?: taintsList;
+    /**
+     * Kubernetes taints to be removed.
+     */
+    removeTaints?: taintsList;
+  }
   export type UpdateType = "VersionUpdate"|"EndpointAccessUpdate"|"LoggingUpdate"|"ConfigUpdate"|"AssociateIdentityProviderConfig"|"DisassociateIdentityProviderConfig"|"AssociateEncryptionConfig"|"AddonUpdate"|string;
   export interface VpcConfigRequest {
     /**
@@ -1753,6 +1799,7 @@ declare namespace EKS {
      */
     publicAccessCidrs?: StringList;
   }
+  export type ZeroCapacity = number;
   export type configStatus = "CREATING"|"DELETING"|"ACTIVE"|string;
   export type labelKey = string;
   export type labelValue = string;
@@ -1761,6 +1808,9 @@ declare namespace EKS {
   export type requiredClaimsKey = string;
   export type requiredClaimsMap = {[key: string]: requiredClaimsValue};
   export type requiredClaimsValue = string;
+  export type taintKey = string;
+  export type taintValue = string;
+  export type taintsList = Taint[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -12,6 +12,14 @@ declare class SageMakerFeatureStoreRuntime extends Service {
   constructor(options?: SageMakerFeatureStoreRuntime.Types.ClientConfiguration)
   config: Config & SageMakerFeatureStoreRuntime.Types.ClientConfiguration;
   /**
+   * Retrieves a batch of Records from a FeatureGroup.
+   */
+  batchGetRecord(params: SageMakerFeatureStoreRuntime.Types.BatchGetRecordRequest, callback?: (err: AWSError, data: SageMakerFeatureStoreRuntime.Types.BatchGetRecordResponse) => void): Request<SageMakerFeatureStoreRuntime.Types.BatchGetRecordResponse, AWSError>;
+  /**
+   * Retrieves a batch of Records from a FeatureGroup.
+   */
+  batchGetRecord(callback?: (err: AWSError, data: SageMakerFeatureStoreRuntime.Types.BatchGetRecordResponse) => void): Request<SageMakerFeatureStoreRuntime.Types.BatchGetRecordResponse, AWSError>;
+  /**
    * Deletes a Record from a FeatureGroup. A new record will show up in the OfflineStore when the DeleteRecord API is called. This record will have a value of True in the is_deleted column.
    */
   deleteRecord(params: SageMakerFeatureStoreRuntime.Types.DeleteRecordRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -37,6 +45,75 @@ declare class SageMakerFeatureStoreRuntime extends Service {
   putRecord(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
 declare namespace SageMakerFeatureStoreRuntime {
+  export interface BatchGetRecordError {
+    /**
+     * The name of the feature group that the record belongs to.
+     */
+    FeatureGroupName: ValueAsString;
+    /**
+     * The value for the RecordIdentifier in string format of a Record from a FeatureGroup that is causing an error when attempting to be retrieved.
+     */
+    RecordIdentifierValueAsString: ValueAsString;
+    /**
+     * The error code of an error that has occured when attempting to retrieve a batch of Records. For more information on errors, see  Errors.
+     */
+    ErrorCode: ValueAsString;
+    /**
+     * The error message of an error that has occured when attempting to retrieve a record in the batch.
+     */
+    ErrorMessage: Message;
+  }
+  export type BatchGetRecordErrors = BatchGetRecordError[];
+  export interface BatchGetRecordIdentifier {
+    /**
+     * A FeatureGroupName containing Records you are retrieving in a batch.
+     */
+    FeatureGroupName: FeatureGroupName;
+    /**
+     * The value for a list of record identifiers in string format.
+     */
+    RecordIdentifiersValueAsString: RecordIdentifiers;
+    /**
+     * List of names of Features to be retrieved. If not specified, the latest value for all the Features are returned.
+     */
+    FeatureNames?: FeatureNames;
+  }
+  export type BatchGetRecordIdentifiers = BatchGetRecordIdentifier[];
+  export interface BatchGetRecordRequest {
+    /**
+     * A list of FeatureGroup names, with their corresponding RecordIdentifier value, and Feature name that have been requested to be retrieved in batch.
+     */
+    Identifiers: BatchGetRecordIdentifiers;
+  }
+  export interface BatchGetRecordResponse {
+    /**
+     * A list of Records you requested to be retrieved in batch.
+     */
+    Records: BatchGetRecordResultDetails;
+    /**
+     * A list of errors that have occured when retrieving a batch of Records.
+     */
+    Errors: BatchGetRecordErrors;
+    /**
+     * A unprocessed list of FeatureGroup names, with their corresponding RecordIdentifier value, and Feature name.
+     */
+    UnprocessedIdentifiers: UnprocessedIdentifiers;
+  }
+  export interface BatchGetRecordResultDetail {
+    /**
+     * The FeatureGroupName containing Records you retrieved in a batch.
+     */
+    FeatureGroupName: ValueAsString;
+    /**
+     * The value of the record identifer in string format.
+     */
+    RecordIdentifierValueAsString: ValueAsString;
+    /**
+     * The Record retrieved.
+     */
+    Record: Record;
+  }
+  export type BatchGetRecordResultDetails = BatchGetRecordResultDetail[];
   export interface DeleteRecordRequest {
     /**
      * The name of the feature group to delete the record from. 
@@ -84,6 +161,7 @@ declare namespace SageMakerFeatureStoreRuntime {
      */
     Record?: Record;
   }
+  export type Message = string;
   export interface PutRecordRequest {
     /**
      * The name of the feature group that you want to insert the record into.
@@ -95,6 +173,8 @@ declare namespace SageMakerFeatureStoreRuntime {
     Record: Record;
   }
   export type Record = FeatureValue[];
+  export type RecordIdentifiers = ValueAsString[];
+  export type UnprocessedIdentifiers = BatchGetRecordIdentifier[];
   export type ValueAsString = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

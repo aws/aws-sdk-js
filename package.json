@@ -1,7 +1,7 @@
 {
   "name": "aws-sdk",
   "description": "AWS SDK for JavaScript",
-  "version": "2.869.0",
+  "version": "2.931.0",
   "author": {
     "name": "Amazon Web Services",
     "email": "",
@@ -19,7 +19,7 @@
     "@types/node": "6.0.92",
     "browserify": "13.1.0",
     "chai": "^3.0",
-    "codecov": "^3.6.5",
+    "codecov": "^3.8.2",
     "coffeeify": "*",
     "coffeescript": "^1.12.7",
     "cucumber": "0.5.x",
@@ -144,6 +144,7 @@
     "translate-api-test": "mocha scripts/lib/translate-api.spec.js",
     "typings-generator-test": "mocha scripts/lib/prune-shapes.spec.js",
     "helper-test": "mocha scripts/lib/test-helper.spec.js",
-    "csm-functional-test": "mocha test/publisher/functional_test"
+    "csm-functional-test": "mocha test/publisher/functional_test",
+    "postinstall": "node scripts/check-node-version.js"
   }
 }

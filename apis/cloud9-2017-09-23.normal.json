@@ -522,6 +522,10 @@
           "shape": "SubnetId",
           "documentation": "<p>The ID of the subnet in Amazon VPC that AWS Cloud9 will use to communicate with the Amazon EC2 instance.</p>"
         },
+        "imageId": {
+          "shape": "ImageId",
+          "documentation": "<p>The identifier for the Amazon Machine Image (AMI) that's used to create the EC2 instance. To choose an AMI for the instance, you must specify a valid AMI alias or a valid AWS Systems Manager (SSM) path.</p> <p>The default AMI is used if the parameter isn't explicitly assigned a value in the request. </p> <p> <b>AMI aliases </b> </p> <ul> <li> <p> <b>Amazon Linux (default): <code>amazonlinux-1-x86_64</code> </b> </p> </li> <li> <p>Amazon Linux 2: <code>amazonlinux-2-x86_64</code> </p> </li> <li> <p>Ubuntu 18.04: <code>ubuntu-18.04-x86_64</code> </p> </li> </ul> <p> <b>SSM paths</b> </p> <ul> <li> <p> <b>Amazon Linux (default): <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64</code> </b> </p> </li> <li> <p>Amazon Linux 2: <code>resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64</code> </p> </li> <li> <p>Ubuntu 18.04: <code>resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64</code> </p> </li> </ul>"
+        },
         "automaticStopTimeMinutes": {
           "shape": "AutomaticStopTimeMinutes",
           "documentation": "<p>The number of minutes until the running instance is shut down after the environment has last been used.</p>"
@@ -536,7 +540,7 @@
         },
         "connectionType": {
           "shape": "ConnectionType",
-          "documentation": "<p>The connection type used for connecting to an Amazon EC2 environment.</p>"
+          "documentation": "<p>The connection type used for connecting to an Amazon EC2 environment. Valid values are <code>CONNECT_SSH</code> (default) and <code>CONNECT_SSM</code> (connected through AWS Systems Manager).</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html\">Accessing no-ingress EC2 instances with AWS Systems Manager</a> in the <i>AWS Cloud9 User Guide</i>.</p>"
         }
       }
     },
@@ -573,6 +577,9 @@
     },
     "CreateEnvironmentMembershipResult": {
       "type": "structure",
+      "required": [
+        "membership"
+      ],
       "members": {
         "membership": {
           "shape": "EnvironmentMember",
@@ -669,6 +676,10 @@
     },
     "DescribeEnvironmentStatusResult": {
       "type": "structure",
+      "required": [
+        "status",
+        "message"
+      ],
       "members": {
         "status": {
           "shape": "EnvironmentStatus",
@@ -703,6 +714,11 @@
     },
     "Environment": {
       "type": "structure",
+      "required": [
+        "type",
+        "arn",
+        "ownerArn"
+      ],
       "members": {
         "id": {
           "shape": "EnvironmentId",
@@ -722,7 +738,7 @@
         },
         "connectionType": {
           "shape": "ConnectionType",
-          "documentation": "<p>The connection type used for connecting to an Amazon EC2 environment.</p>"
+          "documentation": "<p>The connection type used for connecting to an Amazon EC2 environment. <code>CONNECT_SSH</code> is selected by default.</p>"
         },
         "arn": {
           "shape": "String",
@@ -735,13 +751,17 @@
         "lifecycle": {
           "shape": "EnvironmentLifecycle",
           "documentation": "<p>The state of the environment in its creation or deletion lifecycle.</p>"
+        },
+        "managedCredentialsStatus": {
+          "shape": "ManagedCredentialsStatus",
+          "documentation": "<p>Describes the status of AWS managed temporary credentials for the AWS Cloud9 environment. Available values are:</p> <ul> <li> <p> <code>ENABLED_ON_CREATE</code> </p> </li> <li> <p> <code>ENABLED_BY_OWNER</code> </p> </li> <li> <p> <code>DISABLED_BY_DEFAULT</code> </p> </li> <li> <p> <code>DISABLED_BY_OWNER</code> </p> </li> <li> <p> <code>DISABLED_BY_COLLABORATOR</code> </p> </li> <li> <p> <code>PENDING_REMOVAL_BY_COLLABORATOR</code> </p> </li> <li> <p> <code>PENDING_REMOVAL_BY_OWNER</code> </p> </li> <li> <p> <code>FAILED_REMOVAL_BY_COLLABORATOR</code> </p> </li> <li> <p> <code>ENABLED_BY_OWNER</code> </p> </li> <li> <p> <code>DISABLED_BY_DEFAULT</code> </p> </li> </ul>"
         }
       },
       "documentation": "<p>Information about an AWS Cloud9 development environment.</p>"
     },
     "EnvironmentArn": {
       "type": "string",
-      "pattern": "arn:aws:cloud9:([a-z]{2}-[a-z]+-\\d{1}):[0-9]{12}:environment:[a-zA-Z0-9]{8,32}"
+      "pattern": "arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):cloud9:([a-z]{2}-[a-z]+-\\d{1}):[0-9]{12}:environment:[a-zA-Z0-9]{8,32}"
     },
     "EnvironmentDescription": {
       "type": "string",
@@ -794,6 +814,12 @@
     },
     "EnvironmentMember": {
       "type": "structure",
+      "required": [
+        "permissions",
+        "userId",
+        "userArn",
+        "environmentId"
+      ],
       "members": {
         "permissions": {
           "shape": "Permissions",
@@ -848,6 +874,10 @@
         "ec2"
       ]
     },
+    "ImageId": {
+      "type": "string",
+      "max": 512
+    },
     "InstanceType": {
       "type": "string",
       "max": 20,
@@ -901,6 +931,22 @@
         }
       }
     },
+    "ManagedCredentialsStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED_ON_CREATE",
+        "ENABLED_BY_OWNER",
+        "DISABLED_BY_DEFAULT",
+        "DISABLED_BY_OWNER",
+        "DISABLED_BY_COLLABORATOR",
+        "PENDING_REMOVAL_BY_COLLABORATOR",
+        "PENDING_START_REMOVAL_BY_COLLABORATOR",
+        "PENDING_REMOVAL_BY_OWNER",
+        "PENDING_START_REMOVAL_BY_OWNER",
+        "FAILED_REMOVAL_BY_COLLABORATOR",
+        "FAILED_REMOVAL_BY_OWNER"
+      ]
+    },
     "MaxResults": {
       "type": "integer",
       "box": true,
@@ -933,8 +979,9 @@
     },
     "SubnetId": {
       "type": "string",
-      "max": 30,
-      "min": 5
+      "max": 24,
+      "min": 15,
+      "pattern": "^(subnet-[0-9a-f]{8}|subnet-[0-9a-f]{17})$"
     },
     "Tag": {
       "type": "structure",
@@ -952,12 +999,14 @@
           "documentation": "<p>The <b>value</b> part of a tag.</p>"
         }
       },
-      "documentation": "<p>Metadata that is associated with AWS resources. In particular, a name-value pair that can be associated with an AWS Cloud9 development environment. There are two types of tags: <i>user tags</i> and <i>system tags</i>. A user tag is created by the user. A system tag is automatically created by AWS services. A system tag is prefixed with \"aws:\" and cannot be modified by the user.</p>"
+      "documentation": "<p>Metadata that is associated with AWS resources. In particular, a name-value pair that can be associated with an AWS Cloud9 development environment. There are two types of tags: <i>user tags</i> and <i>system tags</i>. A user tag is created by the user. A system tag is automatically created by AWS services. A system tag is prefixed with \"aws:\" and cannot be modified by the user.</p>",
+      "sensitive": true
     },
     "TagKey": {
       "type": "string",
       "max": 128,
-      "min": 1
+      "min": 1,
+      "sensitive": true
     },
     "TagKeyList": {
       "type": "list",
@@ -965,7 +1014,8 @@
         "shape": "TagKey"
       },
       "max": 200,
-      "min": 0
+      "min": 0,
+      "sensitive": true
     },
     "TagList": {
       "type": "list",
@@ -973,7 +1023,8 @@
         "shape": "Tag"
       },
       "max": 200,
-      "min": 0
+      "min": 0,
+      "sensitive": true
     },
     "TagResourceRequest": {
       "type": "structure",
@@ -999,7 +1050,8 @@
     "TagValue": {
       "type": "string",
       "max": 256,
-      "min": 0
+      "min": 0,
+      "sensitive": true
     },
     "Timestamp": {
       "type": "timestamp"
@@ -1082,7 +1134,7 @@
     },
     "UserArn": {
       "type": "string",
-      "pattern": "^arn:aws:(iam|sts)::\\d+:(root|(user\\/[\\w+=/:,.@-]{1,64}|federated-user\\/[\\w+=/:,.@-]{2,32}|assumed-role\\/[\\w+=:,.@-]{1,64}\\/[\\w+=,.@-]{1,64}))$"
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):(iam|sts)::\\d+:(root|(user\\/[\\w+=/:,.@-]{1,64}|federated-user\\/[\\w+=/:,.@-]{2,32}|assumed-role\\/[\\w+=:,.@-]{1,64}\\/[\\w+=,.@-]{1,64}))$"
     }
   },
   "documentation": "<fullname>AWS Cloud9</fullname> <p>AWS Cloud9 is a collection of tools that you can use to code, build, run, test, debug, and release software in the cloud.</p> <p>For more information about AWS Cloud9, see the <a href=\"https://docs.aws.amazon.com/cloud9/latest/user-guide\">AWS Cloud9 User Guide</a>.</p> <p>AWS Cloud9 supports these operations:</p> <ul> <li> <p> <code>CreateEnvironmentEC2</code>: Creates an AWS Cloud9 development environment, launches an Amazon EC2 instance, and then connects from the instance to the environment.</p> </li> <li> <p> <code>CreateEnvironmentMembership</code>: Adds an environment member to an environment.</p> </li> <li> <p> <code>DeleteEnvironment</code>: Deletes an environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.</p> </li> <li> <p> <code>DeleteEnvironmentMembership</code>: Deletes an environment member from an environment.</p> </li> <li> <p> <code>DescribeEnvironmentMemberships</code>: Gets information about environment members for an environment.</p> </li> <li> <p> <code>DescribeEnvironments</code>: Gets information about environments.</p> </li> <li> <p> <code>DescribeEnvironmentStatus</code>: Gets status information for an environment.</p> </li> <li> <p> <code>ListEnvironments</code>: Gets a list of environment identifiers.</p> </li> <li> <p> <code>ListTagsForResource</code>: Gets the tags for an environment.</p> </li> <li> <p> <code>TagResource</code>: Adds tags to an environment.</p> </li> <li> <p> <code>UntagResource</code>: Removes tags from an environment.</p> </li> <li> <p> <code>UpdateEnvironment</code>: Changes the settings of an existing environment.</p> </li> <li> <p> <code>UpdateEnvironmentMembership</code>: Changes the settings of an existing environment member for an environment.</p> </li> </ul>"

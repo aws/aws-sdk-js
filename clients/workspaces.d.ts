@@ -697,7 +697,7 @@ declare namespace WorkSpaces {
     UserStorage: UserStorage;
     RootStorage?: RootStorage;
     /**
-     * The tags associated with the bundle.  To add tags at the same time that you're creating the bundle, you must create an IAM policy that grants your IAM user permissions to use workspaces:CreateTags.  
+     * The tags associated with the bundle.  To add tags at the same time when you're creating the bundle, you must create an IAM policy that grants your IAM user permissions to use workspaces:CreateTags.  
      */
     Tags?: TagList;
   }
@@ -1743,6 +1743,10 @@ declare namespace WorkSpaces {
      * Indicates whether users can use zero client devices to access their WorkSpaces.
      */
     DeviceTypeZeroClient?: AccessPropertyValue;
+    /**
+     * Indicates whether users can use Linux clients to access their WorkSpaces.
+     */
+    DeviceTypeLinux?: AccessPropertyValue;
   }
   export interface WorkspaceBundle {
     /**

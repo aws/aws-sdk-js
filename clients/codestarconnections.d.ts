@@ -186,12 +186,14 @@ declare namespace CodeStarconnections {
      * The VPC configuration to be provisioned for the host. A VPC must be configured and the infrastructure to be represented by the host must already be connected to the VPC.
      */
     VpcConfiguration?: VpcConfiguration;
+    Tags?: TagList;
   }
   export interface CreateHostOutput {
     /**
      * The Amazon Resource Name (ARN) of the host to be created.
      */
     HostArn?: HostArn;
+    Tags?: TagList;
   }
   export interface DeleteConnectionInput {
     /**

@@ -46,7 +46,41 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Removes one or more documents from an index. The documents must have been added with the <a>BatchPutDocument</a> operation.</p> <p>The documents are deleted asynchronously. You can see the progress of the deletion by using AWS CloudWatch. Any error messages releated to the processing of the batch are sent to you CloudWatch log.</p>"
+      "documentation": "<p>Removes one or more documents from an index. The documents must have been added with the <code>BatchPutDocument</code> operation.</p> <p>The documents are deleted asynchronously. You can see the progress of the deletion by using AWS CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.</p>"
+    },
+    "BatchGetDocumentStatus": {
+      "name": "BatchGetDocumentStatus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchGetDocumentStatusRequest"
+      },
+      "output": {
+        "shape": "BatchGetDocumentStatusResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Returns the indexing status for one or more documents submitted with the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html\"> BatchPutDocument</a> operation.</p> <p>When you use the <code>BatchPutDocument</code> operation, documents are indexed asynchronously. You can use the <code>BatchGetDocumentStatus</code> operation to get the current status of a list of documents so that you can determine if they have been successfully indexed.</p> <p>You can also use the <code>BatchGetDocumentStatus</code> operation to check the status of the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_BatchDeleteDocument.html\"> BatchDeleteDocument</a> operation. When a document is deleted from the index, Amazon Kendra returns <code>NOT_FOUND</code> as the status.</p>"
     },
     "BatchPutDocument": {
       "name": "BatchPutDocument",
@@ -84,6 +118,37 @@
         }
       ],
       "documentation": "<p>Adds one or more documents to an index.</p> <p>The <code>BatchPutDocument</code> operation enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this operation to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index.</p> <p>The documents are indexed asynchronously. You can see the progress of the batch using AWS CloudWatch. Any error messages related to processing the batch are sent to your AWS CloudWatch log.</p>"
+    },
+    "ClearQuerySuggestions": {
+      "name": "ClearQuerySuggestions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ClearQuerySuggestionsRequest"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Clears existing query suggestions from an index.</p> <p>This deletes existing suggestions only, not the queries in the query log. After you clear suggestions, Amazon Kendra learns new suggestions based on new queries added to the query log from the time you cleared suggestions. If you do not see any new suggestions, then please allow Amazon Kendra to collect enough queries to learn new suggestions.</p>"
     },
     "CreateDataSource": {
       "name": "CreateDataSource",
@@ -197,7 +262,44 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Creates a new Amazon Kendra index. Index creation is an asynchronous operation. To determine if index creation has completed, check the <code>Status</code> field returned from a call to . The <code>Status</code> field is set to <code>ACTIVE</code> when the index is ready to use.</p> <p>Once the index is active you can index your documents using the operation or using one of the supported data sources. </p>"
+      "documentation": "<p>Creates a new Amazon Kendra index. Index creation is an asynchronous operation. To determine if index creation has completed, check the <code>Status</code> field returned from a call to <code>DescribeIndex</code>. The <code>Status</code> field is set to <code>ACTIVE</code> when the index is ready to use.</p> <p>Once the index is active you can index your documents using the <code>BatchPutDocument</code> operation or using one of the supported data sources. </p>"
+    },
+    "CreateQuerySuggestionsBlockList": {
+      "name": "CreateQuerySuggestionsBlockList",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateQuerySuggestionsBlockListRequest"
+      },
+      "output": {
+        "shape": "CreateQuerySuggestionsBlockListResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Creates a block list to exlcude certain queries from suggestions.</p> <p>Any query that contains words or phrases specified in the block list is blocked or filtered out from being shown as a suggestion.</p> <p>You need to provide the file location of your block list text file in your S3 bucket. In your text file, enter each block word or phrase on a separate line.</p> <p>For information on the current quota limits for block lists, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas for Amazon Kendra</a>.</p>"
     },
     "CreateThesaurus": {
       "name": "CreateThesaurus",
@@ -265,7 +367,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the <code>Status</code> field returned by a call to the operation is set to <code>DELETING</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html\">Deleting Data Sources</a>.</p>"
+      "documentation": "<p>Deletes an Amazon Kendra data source. An exception is not thrown if the data source is already being deleted. While the data source is being deleted, the <code>Status</code> field returned by a call to the <code>DescribeDataSource</code> operation is set to <code>DELETING</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/delete-data-source.html\">Deleting Data Sources</a>.</p>"
     },
     "DeleteFaq": {
       "name": "DeleteFaq",
@@ -327,7 +429,38 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Deletes an existing Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the <code>Status</code> field returned by a call to the <a>DescribeIndex</a> operation is set to <code>DELETING</code>.</p>"
+      "documentation": "<p>Deletes an existing Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the <code>Status</code> field returned by a call to the <code>DescribeIndex</code> operation is set to <code>DELETING</code>.</p>"
+    },
+    "DeleteQuerySuggestionsBlockList": {
+      "name": "DeleteQuerySuggestionsBlockList",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteQuerySuggestionsBlockListRequest"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Deletes a block list used for query suggestions for an index.</p> <p>A deleted block list might not take effect right away. Amazon Kendra needs to refresh the entire suggestions list to add back the queries that were previously blocked.</p>"
     },
     "DeleteThesaurus": {
       "name": "DeleteThesaurus",
@@ -453,6 +586,68 @@
       ],
       "documentation": "<p>Describes an existing Amazon Kendra index</p>"
     },
+    "DescribeQuerySuggestionsBlockList": {
+      "name": "DescribeQuerySuggestionsBlockList",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeQuerySuggestionsBlockListRequest"
+      },
+      "output": {
+        "shape": "DescribeQuerySuggestionsBlockListResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Describes a block list used for query suggestions for an index.</p> <p>This is used to check the current settings that are applied to a block list.</p>"
+    },
+    "DescribeQuerySuggestionsConfig": {
+      "name": "DescribeQuerySuggestionsConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeQuerySuggestionsConfigRequest"
+      },
+      "output": {
+        "shape": "DescribeQuerySuggestionsConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Describes the settings of query suggestions for an index.</p> <p>This is used to check the current settings applied to query suggestions.</p>"
+    },
     "DescribeThesaurus": {
       "name": "DescribeThesaurus",
       "http": {
@@ -483,6 +678,43 @@
         }
       ],
       "documentation": "<p>Describes an existing Amazon Kendra thesaurus.</p>"
+    },
+    "GetQuerySuggestions": {
+      "name": "GetQuerySuggestions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetQuerySuggestionsRequest"
+      },
+      "output": {
+        "shape": "GetQuerySuggestionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Fetches the queries that are suggested to your users.</p>"
     },
     "ListDataSourceSyncJobs": {
       "name": "ListDataSourceSyncJobs",
@@ -607,6 +839,37 @@
         }
       ],
       "documentation": "<p>Lists the Amazon Kendra indexes that you have created.</p>"
+    },
+    "ListQuerySuggestionsBlockLists": {
+      "name": "ListQuerySuggestionsBlockLists",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListQuerySuggestionsBlockListsRequest"
+      },
+      "output": {
+        "shape": "ListQuerySuggestionsBlockListsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Lists the block lists used for query suggestions for an index.</p> <p>For information on the current quota limits for block lists, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas for Amazon Kendra</a>.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -930,6 +1193,68 @@
       ],
       "documentation": "<p>Updates an existing Amazon Kendra index.</p>"
     },
+    "UpdateQuerySuggestionsBlockList": {
+      "name": "UpdateQuerySuggestionsBlockList",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateQuerySuggestionsBlockListRequest"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Updates a block list used for query suggestions for an index.</p> <p>Updates to a block list might not take effect right away. Amazon Kendra needs to refresh the entire suggestions list to apply any updates to the block list. Other changes not related to the block list apply immediately.</p> <p>If a block list is updating, then you need to wait for the first update to finish before submitting another update.</p> <p>Amazon Kendra supports partial updates, so you only need to provide the fields you want to update.</p>"
+    },
+    "UpdateQuerySuggestionsConfig": {
+      "name": "UpdateQuerySuggestionsConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateQuerySuggestionsConfigRequest"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Updates the settings of query suggestions for an index.</p> <p>Amazon Kendra supports partial updates, so you only need to provide the fields you want to update.</p> <p>If an update is currently processing (i.e. 'happening'), you need to wait for the update to finish before making another update.</p> <p>Updates to query suggestions settings might not take effect right away. The time for your updated settings to take effect depends on the updates made and the number of search queries in your index.</p> <p>You can still enable/disable query suggestions at any time.</p>"
+    },
     "UpdateThesaurus": {
       "name": "UpdateThesaurus",
       "http": {
@@ -981,7 +1306,7 @@
       "members": {
         "AllowedGroupsColumnName": {
           "shape": "ColumnName",
-          "documentation": "<p>A list of groups, separated by semi-colons, that filters a query response based on user context. The document is only returned to users that are in one of the groups specified in the <code>UserContext</code> field of the <a>Query</a> operation.</p>"
+          "documentation": "<p>A list of groups, separated by semi-colons, that filters a query response based on user context. The document is only returned to users that are in one of the groups specified in the <code>UserContext</code> field of the <code>Query</code> operation.</p>"
         }
       },
       "documentation": "<p>Provides information about the column that should be used for filtering the query response by groups.</p>"
@@ -1088,6 +1413,47 @@
         "shape": "AttributeFilter"
       }
     },
+    "AuthenticationConfiguration": {
+      "type": "structure",
+      "members": {
+        "BasicAuthentication": {
+          "shape": "BasicAuthenticationConfigurationList",
+          "documentation": "<p>The list of configuration information that's required to connect to and crawl a website host using basic authentication credentials.</p> <p>The list includes the name and port number of the website host.</p>"
+        }
+      },
+      "documentation": "<p>Provides the configuration information to connect to websites that require user authentication.</p>"
+    },
+    "BasicAuthenticationConfiguration": {
+      "type": "structure",
+      "required": [
+        "Host",
+        "Port",
+        "Credentials"
+      ],
+      "members": {
+        "Host": {
+          "shape": "Host",
+          "documentation": "<p>The name of the website host you want to connect to using authentication credentials.</p> <p>For example, the host name of https://a.example.com/page1.html is \"a.example.com\".</p>"
+        },
+        "Port": {
+          "shape": "Port",
+          "documentation": "<p>The port number of the website host you want to connect to using authentication credentials.</p> <p>For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.</p>"
+        },
+        "Credentials": {
+          "shape": "SecretArn",
+          "documentation": "<p>Your secret ARN, which you can create in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a> </p> <p>You use a secret if basic authentication credentials are required to connect to a website. The secret stores your credentials of user name and password.</p>"
+        }
+      },
+      "documentation": "<p>Provides the configuration information to connect to websites that require basic user authentication.</p>"
+    },
+    "BasicAuthenticationConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "BasicAuthenticationConfiguration"
+      },
+      "max": 10,
+      "min": 0
+    },
     "BatchDeleteDocumentRequest": {
       "type": "structure",
       "required": [
@@ -1133,12 +1499,66 @@
           "documentation": "<p>An explanation for why the document couldn't be removed from the index.</p>"
         }
       },
-      "documentation": "<p>Provides information about documents that could not be removed from an index by the <a>BatchDeleteDocument</a> operation.</p>"
+      "documentation": "<p>Provides information about documents that could not be removed from an index by the <code>BatchDeleteDocument</code> operation.</p>"
     },
     "BatchDeleteDocumentResponseFailedDocuments": {
       "type": "list",
       "member": {
         "shape": "BatchDeleteDocumentResponseFailedDocument"
+      }
+    },
+    "BatchGetDocumentStatusRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId",
+        "DocumentInfoList"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index to add documents to. The index ID is returned by the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_CreateIndex.html\"> CreateIndex </a> operation.</p>"
+        },
+        "DocumentInfoList": {
+          "shape": "DocumentInfoList",
+          "documentation": "<p>A list of <code>DocumentInfo</code> objects that identify the documents for which to get the status. You identify the documents by their document ID and optional attributes.</p>"
+        }
+      }
+    },
+    "BatchGetDocumentStatusResponse": {
+      "type": "structure",
+      "members": {
+        "Errors": {
+          "shape": "BatchGetDocumentStatusResponseErrors",
+          "documentation": "<p>A list of documents that Amazon Kendra couldn't get the status for. The list includes the ID of the document and the reason that the status couldn't be found.</p>"
+        },
+        "DocumentStatusList": {
+          "shape": "DocumentStatusList",
+          "documentation": "<p>The status of documents. The status indicates if the document is waiting to be indexed, is in the process of indexing, has completed indexing, or failed indexing. If a document failed indexing, the status provides the reason why.</p>"
+        }
+      }
+    },
+    "BatchGetDocumentStatusResponseError": {
+      "type": "structure",
+      "members": {
+        "DocumentId": {
+          "shape": "DocumentId",
+          "documentation": "<p>The unique identifier of the document whose status could not be retrieved.</p>"
+        },
+        "ErrorCode": {
+          "shape": "ErrorCode",
+          "documentation": "<p>Indicates the source of the error.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "ErrorMessage",
+          "documentation": "<p>States that the API could not get the status of a document. This could be because the request is not valid or there is a system error.</p>"
+        }
+      },
+      "documentation": "<p>Provides a response when the status of a document could not be retrieved.</p>"
+    },
+    "BatchGetDocumentStatusResponseErrors": {
+      "type": "list",
+      "member": {
+        "shape": "BatchGetDocumentStatusResponseError"
       }
     },
     "BatchPutDocumentRequest": {
@@ -1150,7 +1570,7 @@
       "members": {
         "IndexId": {
           "shape": "IndexId",
-          "documentation": "<p>The identifier of the index to add the documents to. You need to create the index first using the <a>CreateIndex</a> operation.</p>"
+          "documentation": "<p>The identifier of the index to add the documents to. You need to create the index first using the <code>CreateIndex</code> operation.</p>"
         },
         "RoleArn": {
           "shape": "RoleArn",
@@ -1158,7 +1578,7 @@
         },
         "Documents": {
           "shape": "DocumentList",
-          "documentation": "<p>One or more documents to add to the index. </p> <p>Documents have the following file size limits.</p> <ul> <li> <p>5 MB total size for inline documents</p> </li> <li> <p>50 MB total size for files from an S3 bucket</p> </li> <li> <p>5 MB extracted text for any file</p> </li> </ul> <p>For more information about file size and transaction per second quotas, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas</a>.</p>"
+          "documentation": "<p>One or more documents to add to the index.</p> <p>Documents can include custom attributes. For example, 'DataSourceId' and 'DataSourceSyncJobId' are custom attributes that provide information on the synchronization of documents running on a data source. Note, 'DataSourceSyncJobId' could be an optional custom attribute as Amazon Kendra will use the ID of a running sync job.</p> <p>Documents have the following file size limits.</p> <ul> <li> <p>5 MB total size for inline documents</p> </li> <li> <p>50 MB total size for files from an S3 bucket</p> </li> <li> <p>5 MB extracted text for any file</p> </li> </ul> <p>For more information about file size and transaction per second quotas, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas</a>.</p>"
         }
       }
     },
@@ -1210,14 +1630,14 @@
       "members": {
         "StorageCapacityUnits": {
           "shape": "StorageCapacityUnit",
-          "documentation": "<p>The amount of extra storage capacity for an index. Each capacity unit provides 150 Gb of storage space or 500,000 documents, whichever is reached first.</p>"
+          "documentation": "<p>The amount of extra storage capacity for an index. A single capacity unit for an index provides 150 GB of storage space or 500,000 documents, whichever is reached first.</p>"
         },
         "QueryCapacityUnits": {
           "shape": "QueryCapacityUnit",
-          "documentation": "<p>The amount of extra query capacity for an index. Each capacity unit provides 0.5 queries per second and 40,000 queries per day.</p>"
+          "documentation": "<p>The amount of extra query capacity for an index and <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html\">GetQuerySuggestions</a> capacity.</p> <p>A single extra capacity unit for an index provides 0.5 queries per second or approximately 40,000 queries per day.</p> <p> <code>GetQuerySuggestions</code> capacity is 5 times the provisioned query capacity for an index. For example, the base capacity for an index is 0.5 queries per second, so GetQuerySuggestions capacity is 2.5 calls per second. If adding another 0.5 queries per second to total 1 queries per second for an index, the <code>GetQuerySuggestions</code> capacity is 5 calls per second.</p>"
         }
       },
-      "documentation": "<p>Specifies capacity units configured for your index. You can add and remove capacity units to tune an index to your requirements.</p>"
+      "documentation": "<p>Specifies capacity units configured for your enterprise edition index. You can add and remove capacity units to tune an index to your requirements.</p>"
     },
     "ChangeDetectingColumns": {
       "type": "list",
@@ -1232,6 +1652,18 @@
       "max": 100,
       "min": 1,
       "pattern": "^\\P{C}*$"
+    },
+    "ClearQuerySuggestionsRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index you want to clear query suggestions from.</p>"
+        }
+      }
     },
     "ClickFeedback": {
       "type": "structure",
@@ -1249,7 +1681,7 @@
           "documentation": "<p>The Unix timestamp of the date and time that the result was clicked.</p>"
         }
       },
-      "documentation": "<p>Gathers information about when a particular result was clicked by a user. Your application uses the <a>SubmitFeedback</a> operation to provide click information.</p>"
+      "documentation": "<p>Gathers information about when a particular result was clicked by a user. Your application uses the <code>SubmitFeedback</code> operation to provide click information.</p>"
     },
     "ClickFeedbackList": {
       "type": "list",
@@ -1284,7 +1716,7 @@
         },
         "FieldMappings": {
           "shape": "DataSourceToIndexFieldMappingList",
-          "documentation": "<p>An array of objects that map database column names to the corresponding fields in an index. You must first create the fields in the index using the <a>UpdateIndex</a> operation.</p>"
+          "documentation": "<p>An array of objects that map database column names to the corresponding fields in an index. You must first create the fields in the index using the <code>UpdateIndex</code> operation.</p>"
         },
         "ChangeDetectingColumns": {
           "shape": "ChangeDetectingColumns",
@@ -1342,7 +1774,7 @@
       "members": {
         "DataSourceFieldName": {
           "shape": "ConfluenceAttachmentFieldName",
-          "documentation": "<p>The name of the field in the data source. </p> <p>You must first create the index field using the operation. </p>"
+          "documentation": "<p>The name of the field in the data source. </p> <p>You must first create the index field using the <code>UpdateIndex</code> operation. </p>"
         },
         "DateFieldFormat": {
           "shape": "DataSourceDateFieldFormat",
@@ -1353,7 +1785,7 @@
           "documentation": "<p>The name of the index field to map to the Confluence data source field. The index field type must match the Confluence field type.</p>"
         }
       },
-      "documentation": "<p>Defines the mapping between a field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the operation. </p>"
+      "documentation": "<p>Defines the mapping between a field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the <code>UpdateIndex</code> operation. </p>"
     },
     "ConfluenceBlogConfiguration": {
       "type": "structure",
@@ -1363,7 +1795,7 @@
           "documentation": "<p>Defines how blog metadata fields should be mapped to index fields. Before you can map a field, you must first create an index field with a matching type using the console or the <code>UpdateIndex</code> operation.</p> <p>If you specify the <code>BlogFieldMappings</code> parameter, you must specify at least one field mapping.</p>"
         }
       },
-      "documentation": "<p>Specifies the blog settings for the Confluence data source. Blogs are always indexed unless filtered from the index by the <code>ExclusionPatterns</code> or <code>InclusionPatterns</code> fields in the data type.</p>"
+      "documentation": "<p>Specifies the blog settings for the Confluence data source. Blogs are always indexed unless filtered from the index by the <code>ExclusionPatterns</code> or <code>InclusionPatterns</code> fields in the <code>ConfluenceConfiguration</code> type.</p>"
     },
     "ConfluenceBlogFieldMappingsList": {
       "type": "list",
@@ -1403,7 +1835,7 @@
           "documentation": "<p>The name of the index field to map to the Confluence data source field. The index field type must match the Confluence field type.</p>"
         }
       },
-      "documentation": "<p>Defines the mapping between a blog field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the operation. </p>"
+      "documentation": "<p>Defines the mapping between a blog field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the <code>UpdateIndex</code> operation. </p>"
     },
     "ConfluenceConfiguration": {
       "type": "structure",
@@ -1507,7 +1939,7 @@
           "documentation": "<p>The name of the index field to map to the Confluence data source field. The index field type must match the Confluence field type.</p>"
         }
       },
-      "documentation": "<p>Defines the mapping between a field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the operation. </p>"
+      "documentation": "<p>Defines the mapping between a field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the <code>UpdateIndex</code> operation. </p>"
     },
     "ConfluenceSpaceConfiguration": {
       "type": "structure",
@@ -1581,7 +2013,7 @@
           "documentation": "<p>The name of the index field to map to the Confluence data source field. The index field type must match the Confluence field type.</p>"
         }
       },
-      "documentation": "<p>Defines the mapping between a field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the operation. </p>"
+      "documentation": "<p>Defines the mapping between a field in the Confluence data source to a Amazon Kendra index field.</p> <p>You must first create the index field using the <code>UpdateIndex</code> operation. </p>"
     },
     "ConfluenceVersion": {
       "type": "string",
@@ -1632,6 +2064,11 @@
         "PLAIN_TEXT",
         "PPT"
       ]
+    },
+    "CrawlDepth": {
+      "type": "integer",
+      "max": 10,
+      "min": 0
     },
     "CreateDataSourceRequest": {
       "type": "structure",
@@ -1800,6 +2237,55 @@
         }
       }
     },
+    "CreateQuerySuggestionsBlockListRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId",
+        "Name",
+        "SourceS3Path",
+        "RoleArn"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index you want to create a query suggestions block list for.</p>"
+        },
+        "Name": {
+          "shape": "QuerySuggestionsBlockListName",
+          "documentation": "<p>A user friendly name for the block list.</p> <p>For example, the block list named 'offensive-words' includes all offensive words that could appear in user queries and need to be blocked from suggestions.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>A user-friendly description for the block list.</p> <p>For example, the description \"List of all offensive words that can appear in user queries and need to be blocked from suggestions.\"</p>"
+        },
+        "SourceS3Path": {
+          "shape": "S3Path",
+          "documentation": "<p>The S3 path to your block list text file in your S3 bucket.</p> <p>Each block word or phrase should be on a separate line in a text file.</p> <p>For information on the current quota limits for block lists, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas for Amazon Kendra</a>.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientTokenName",
+          "documentation": "<p>A token that you provide to identify the request to create a query suggestions block list.</p>",
+          "idempotencyToken": true
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The IAM (Identity and Access Management) role used by Amazon Kendra to access the block list text file in your S3 bucket.</p> <p>You need permissions to the role ARN (Amazon Resource Name). The role needs S3 read permissions to your file in S3 and needs to give STS (Security Token Service) assume role permissions to Amazon Kendra.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>A tag that you can assign to a block list that categorizes the block list.</p>"
+        }
+      }
+    },
+    "CreateQuerySuggestionsBlockListResponse": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "QuerySuggestionsBlockListId",
+          "documentation": "<p>The unique identifier of the created block list.</p>"
+        }
+      }
+    },
     "CreateThesaurusRequest": {
       "type": "structure",
       "required": [
@@ -1883,6 +2369,9 @@
         "GoogleDriveConfiguration": {
           "shape": "GoogleDriveConfiguration",
           "documentation": "<p>Provides configuration for data sources that connect to Google Drive. </p>"
+        },
+        "WebCrawlerConfiguration": {
+          "shape": "WebCrawlerConfiguration"
         }
       },
       "documentation": "<p>Configuration information for a Amazon Kendra data source.</p>"
@@ -1959,10 +2448,10 @@
         },
         "Status": {
           "shape": "DataSourceStatus",
-          "documentation": "<p>The status of the data source. When the status is <code>ATIVE</code> the data source is ready to use.</p>"
+          "documentation": "<p>The status of the data source. When the status is <code>ACTIVE</code> the data source is ready to use.</p>"
         }
       },
-      "documentation": "<p>Summary information for a Amazon Kendra data source. Returned in a call to .</p>"
+      "documentation": "<p>Summary information for a Amazon Kendra data source. Returned in a call to the <code>DescribeDataSource</code> operation.</p>"
     },
     "DataSourceSummaryList": {
       "type": "list",
@@ -2023,8 +2512,7 @@
     "DataSourceSyncJobMetricTarget": {
       "type": "structure",
       "required": [
-        "DataSourceId",
-        "DataSourceSyncJobId"
+        "DataSourceId"
       ],
       "members": {
         "DataSourceId": {
@@ -2033,7 +2521,7 @@
         },
         "DataSourceSyncJobId": {
           "shape": "DataSourceSyncJobId",
-          "documentation": "<p>The ID of the sync job that is running on the data source.</p>"
+          "documentation": "<p>The ID of the sync job that is running on the data source.</p> <p>If the ID of a sync job is not provided and there is a sync job running, then the ID of this sync job is used and metrics are generated for this sync job.</p> <p>If the ID of a sync job is not provided and there is no sync job running, then no metrics are generated and documents are indexed/deleted at the index level without sync job metrics included.</p>"
         }
       },
       "documentation": "<p>Maps a particular data source sync job to a particular data source.</p>"
@@ -2096,7 +2584,7 @@
           "documentation": "<p>The name of the field in the index.</p>"
         }
       },
-      "documentation": "<p>Maps a column or attribute in the data source to an index field. You must first create the fields in the index using the <a>UpdateIndex</a> operation.</p>"
+      "documentation": "<p>Maps a column or attribute in the data source to an index field. You must first create the fields in the index using the <code>UpdateIndex</code> operation.</p>"
     },
     "DataSourceToIndexFieldMappingList": {
       "type": "list",
@@ -2117,7 +2605,8 @@
         "SERVICENOW",
         "CUSTOM",
         "CONFLUENCE",
-        "GOOGLEDRIVE"
+        "GOOGLEDRIVE",
+        "WEBCRAWLER"
       ]
     },
     "DataSourceVpcConfiguration": {
@@ -2240,6 +2729,23 @@
         "Id": {
           "shape": "IndexId",
           "documentation": "<p>The identifier of the index to delete.</p>"
+        }
+      }
+    },
+    "DeleteQuerySuggestionsBlockListRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId",
+        "Id"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the you want to delete a block list from.</p>"
+        },
+        "Id": {
+          "shape": "QuerySuggestionsBlockListId",
+          "documentation": "<p>The unique identifier of the block list that needs to be deleted.</p>"
         }
       }
     },
@@ -2460,7 +2966,7 @@
         },
         "CapacityUnits": {
           "shape": "CapacityUnitsConfiguration",
-          "documentation": "<p>For enterprise edtion indexes, you can choose to use additional capacity to meet the needs of your application. This contains the capacity units used for the index. A 0 for the query capacity or the storage capacity indicates that the index is using the default capacity for the index.</p>"
+          "documentation": "<p>For Enterprise edition indexes, you can choose to use additional capacity to meet the needs of your application. This contains the capacity units used for the index. A 0 for the query capacity or the storage capacity indicates that the index is using the default capacity for the index.</p>"
         },
         "UserTokenConfigurations": {
           "shape": "UserTokenConfigurationList",
@@ -2469,6 +2975,129 @@
         "UserContextPolicy": {
           "shape": "UserContextPolicy",
           "documentation": "<p>The user context policy for the Amazon Kendra index.</p>"
+        }
+      }
+    },
+    "DescribeQuerySuggestionsBlockListRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId",
+        "Id"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index for the block list.</p>"
+        },
+        "Id": {
+          "shape": "QuerySuggestionsBlockListId",
+          "documentation": "<p>The unique identifier of the block list.</p>"
+        }
+      }
+    },
+    "DescribeQuerySuggestionsBlockListResponse": {
+      "type": "structure",
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>Shows the identifier of the index for the block list.</p>"
+        },
+        "Id": {
+          "shape": "QuerySuggestionsBlockListId",
+          "documentation": "<p>Shows the unique identifier of the block list.</p>"
+        },
+        "Name": {
+          "shape": "QuerySuggestionsBlockListName",
+          "documentation": "<p>Shows the name of the block list.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>Shows the description for the block list.</p>"
+        },
+        "Status": {
+          "shape": "QuerySuggestionsBlockListStatus",
+          "documentation": "<p>Shows whether the current status of the block list is <code>ACTIVE</code> or <code>INACTIVE</code>.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "ErrorMessage",
+          "documentation": "<p>Shows the error message with details when there are issues in processing the block list.</p>"
+        },
+        "CreatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>Shows the date-time a block list for query suggestions was last created.</p>"
+        },
+        "UpdatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>Shows the date-time a block list for query suggestions was last updated.</p>"
+        },
+        "SourceS3Path": {
+          "shape": "S3Path",
+          "documentation": "<p>Shows the current S3 path to your block list text file in your S3 bucket.</p> <p>Each block word or phrase should be on a separate line in a text file.</p> <p>For information on the current quota limits for block lists, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas for Amazon Kendra</a>.</p>"
+        },
+        "ItemCount": {
+          "shape": "Integer",
+          "documentation": "<p>Shows the current number of valid, non-empty words or phrases in the block list text file.</p>"
+        },
+        "FileSizeBytes": {
+          "shape": "Long",
+          "documentation": "<p>Shows the current size of the block list text file in S3.</p>"
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>Shows the current IAM (Identity and Access Management) role used by Amazon Kendra to access the block list text file in S3.</p> <p>The role needs S3 read permissions to your file in S3 and needs to give STS (Security Token Service) assume role permissions to Amazon Kendra.</p>"
+        }
+      }
+    },
+    "DescribeQuerySuggestionsConfigRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index you want to describe query suggestions settings for.</p>"
+        }
+      }
+    },
+    "DescribeQuerySuggestionsConfigResponse": {
+      "type": "structure",
+      "members": {
+        "Mode": {
+          "shape": "Mode",
+          "documentation": "<p>Shows whether query suggestions are currently in <code>ENABLED</code> mode or <code>LEARN_ONLY</code> mode.</p> <p>By default, Amazon Kendra enables query suggestions.<code>LEARN_ONLY</code> turns off query suggestions for your users. You can change the mode using the <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html\">UpdateQuerySuggestionsConfig</a> operation.</p>"
+        },
+        "Status": {
+          "shape": "QuerySuggestionsStatus",
+          "documentation": "<p>Shows whether the status of query suggestions settings is currently Active or Updating.</p> <p>Active means the current settings apply and Updating means your changed settings are in the process of applying.</p>"
+        },
+        "QueryLogLookBackWindowInDays": {
+          "shape": "Integer",
+          "documentation": "<p>Shows how recent your queries are in your query log time window (in days).</p>"
+        },
+        "IncludeQueriesWithoutUserInformation": {
+          "shape": "ObjectBoolean",
+          "documentation": "<p>Shows whether Amazon Kendra uses all queries or only uses queries that include user information to generate query suggestions.</p>"
+        },
+        "MinimumNumberOfQueryingUsers": {
+          "shape": "MinimumNumberOfQueryingUsers",
+          "documentation": "<p>Shows the minimum number of unique users who must search a query in order for the query to be eligible to suggest to your users.</p>"
+        },
+        "MinimumQueryCount": {
+          "shape": "MinimumQueryCount",
+          "documentation": "<p>Shows the minimum number of times a query must be searched in order for the query to be eligible to suggest to your users.</p>"
+        },
+        "LastSuggestionsBuildTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>Shows the date-time query suggestions for an index was last updated.</p>"
+        },
+        "LastClearTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>Shows the date-time query suggestions for an index was last cleared.</p> <p>After you clear suggestions, Amazon Kendra learns new suggestions based on new queries added to the query log from the time you cleared suggestions. Amazon Kendra only considers re-occurences of a query from the time you cleared suggestions. </p>"
+        },
+        "TotalSuggestionsCount": {
+          "shape": "Integer",
+          "documentation": "<p>Shows the current total count of query suggestions for an index.</p> <p>This count can change when you update your query suggestions settings, if you filter out certain queries from suggestions using a block list, and as the query log accumulates more queries for Amazon Kendra to learn from.</p>"
         }
       }
     },
@@ -2653,7 +3282,7 @@
         },
         "DateValue": {
           "shape": "Timestamp",
-          "documentation": "<p>A date expressed as an ISO 8601 string.</p>"
+          "documentation": "<p>A date expressed as an ISO 8601 string.</p> <p>It is important for the time zone to be included in the ISO 8601 date-time format. For example, 20120325T123010+01:00 is the ISO 8601 date-time format for March 25th 2012 at 12:30PM (plus 10 seconds) in Central European Time.</p>"
         }
       },
       "documentation": "<p>The value of a custom document attribute. You can only provide one value for a custom attribute.</p>"
@@ -2696,6 +3325,31 @@
       "type": "list",
       "member": {
         "shape": "DocumentId"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "DocumentInfo": {
+      "type": "structure",
+      "required": [
+        "DocumentId"
+      ],
+      "members": {
+        "DocumentId": {
+          "shape": "DocumentId",
+          "documentation": "<p>The unique identifier of the document.</p>"
+        },
+        "Attributes": {
+          "shape": "DocumentAttributeList",
+          "documentation": "<p>Attributes that identify a specific version of a document to check.</p> <p>The only valid attributes are:</p> <ul> <li> <p>version</p> </li> <li> <p>datasourceId</p> </li> <li> <p>jobExecutionId</p> </li> </ul> <p>The attributes follow these rules:</p> <ul> <li> <p> <code>dataSourceId</code> and <code>jobExecutionId</code> must be used together.</p> </li> <li> <p> <code>version</code> is ignored if <code>dataSourceId</code> and <code>jobExecutionId</code> are not provided.</p> </li> <li> <p>If <code>dataSourceId</code> and <code>jobExecutionId</code> are provided, but <code>version</code> is not, the version defaults to \"0\".</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Identifies a document for which to retrieve status information</p>"
+    },
+    "DocumentInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "DocumentInfo"
       },
       "max": 10,
       "min": 1
@@ -2749,6 +3403,48 @@
       "type": "string",
       "max": 30,
       "min": 1
+    },
+    "DocumentRelevanceConfiguration": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Relevance"
+      ],
+      "members": {
+        "Name": {
+          "shape": "DocumentMetadataConfigurationName",
+          "documentation": "<p>The name of the tuning configuration to override document relevance at the index level.</p>"
+        },
+        "Relevance": {
+          "shape": "Relevance"
+        }
+      },
+      "documentation": "<p>Overrides the document relevance properties of a custom index field.</p>"
+    },
+    "DocumentRelevanceOverrideConfigurationList": {
+      "type": "list",
+      "member": {
+        "shape": "DocumentRelevanceConfiguration"
+      },
+      "max": 500,
+      "min": 0
+    },
+    "DocumentStatus": {
+      "type": "string",
+      "enum": [
+        "NOT_FOUND",
+        "PROCESSING",
+        "INDEXED",
+        "UPDATED",
+        "FAILED",
+        "UPDATE_FAILED"
+      ]
+    },
+    "DocumentStatusList": {
+      "type": "list",
+      "member": {
+        "shape": "Status"
+      }
     },
     "DocumentsMetadataConfiguration": {
       "type": "structure",
@@ -2928,6 +3624,40 @@
       "min": 1,
       "pattern": "^\\P{C}*.\\P{C}*$"
     },
+    "GetQuerySuggestionsRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId",
+        "QueryText"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index you want to get query suggestions from.</p>"
+        },
+        "QueryText": {
+          "shape": "SuggestionQueryText",
+          "documentation": "<p>The text of a user's query to generate query suggestions.</p> <p>A query is suggested if the query prefix matches what a user starts to type as their query.</p> <p>Amazon Kendra does not show any suggestions if a user types fewer than two characters or more than 60 characters. A query must also have at least one search result and contain at least one word of more than four characters.</p>"
+        },
+        "MaxSuggestionsCount": {
+          "shape": "Integer",
+          "documentation": "<p>The maximum number of query suggestions you want to show to your users.</p>"
+        }
+      }
+    },
+    "GetQuerySuggestionsResponse": {
+      "type": "structure",
+      "members": {
+        "QuerySuggestionsId": {
+          "shape": "QuerySuggestionsId",
+          "documentation": "<p>The unique identifier for a list of query suggestions for an index.</p>"
+        },
+        "Suggestions": {
+          "shape": "SuggestionList",
+          "documentation": "<p>A list of query suggestions for an index.</p>"
+        }
+      }
+    },
     "GoogleDriveConfiguration": {
       "type": "structure",
       "required": [
@@ -2948,7 +3678,7 @@
         },
         "FieldMappings": {
           "shape": "DataSourceToIndexFieldMappingList",
-          "documentation": "<p>Defines mapping between a field in the Google Drive and a Amazon Kendra index field.</p> <p>If you are using the console, you can define index fields when creating the mapping. If you are using the API, you must first create the field using the <a>UpdateIndex</a> operation.</p>"
+          "documentation": "<p>Defines mapping between a field in the Google Drive and a Amazon Kendra index field.</p> <p>If you are using the console, you can define index fields when creating the mapping. If you are using the API, you must first create the field using the <code>UpdateIndex</code> operation.</p>"
         },
         "ExcludeMimeTypes": {
           "shape": "ExcludeMimeTypesList",
@@ -3009,6 +3739,12 @@
         "STANDARD",
         "THESAURUS_SYNONYM"
       ]
+    },
+    "Host": {
+      "type": "string",
+      "max": 253,
+      "min": 1,
+      "pattern": "([^\\s]*)"
     },
     "Importance": {
       "type": "integer",
@@ -3337,6 +4073,39 @@
         }
       }
     },
+    "ListQuerySuggestionsBlockListsRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index for a list of all block lists that exist for that index.</p> <p>For information on the current quota limits for block lists, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas for Amazon Kendra</a>.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of block lists (<code>BlockListSummaryItems</code>).</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResultsIntegerForListQuerySuggestionsBlockLists",
+          "documentation": "<p>The maximum number of block lists to return.</p>"
+        }
+      }
+    },
+    "ListQuerySuggestionsBlockListsResponse": {
+      "type": "structure",
+      "members": {
+        "BlockListSummaryItems": {
+          "shape": "QuerySuggestionsBlockListSummaryItems",
+          "documentation": "<p>Summary items for a block list.</p> <p>This includes summary items on the block list ID, block list name, when the block list was created, when the block list was last updated, and the count of block words/phrases in the block list.</p> <p>For information on the current quota limits for block lists, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas for Amazon Kendra</a>.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of block lists.</p>"
+        }
+      }
+    },
     "ListTagsForResourceRequest": {
       "type": "structure",
       "required": [
@@ -3394,6 +4163,16 @@
     "Long": {
       "type": "long"
     },
+    "MaxContentSizePerPageInMegaBytes": {
+      "type": "float",
+      "max": 50,
+      "min": 0.000001
+    },
+    "MaxLinksPerPage": {
+      "type": "integer",
+      "max": 1000,
+      "min": 1
+    },
     "MaxResultsIntegerForListDataSourceSyncJobsRequest": {
       "type": "integer",
       "max": 10,
@@ -3414,9 +4193,19 @@
       "max": 100,
       "min": 1
     },
+    "MaxResultsIntegerForListQuerySuggestionsBlockLists": {
+      "type": "integer",
+      "max": 100,
+      "min": 1
+    },
     "MaxResultsIntegerForListThesauriRequest": {
       "type": "integer",
       "max": 100,
+      "min": 1
+    },
+    "MaxUrlsPerMinuteCrawlRate": {
+      "type": "integer",
+      "max": 300,
       "min": 1
     },
     "MetricValue": {
@@ -3429,10 +4218,30 @@
       "min": 1,
       "pattern": "^\\P{C}*$"
     },
+    "MinimumNumberOfQueryingUsers": {
+      "type": "integer",
+      "max": 10000,
+      "min": 1
+    },
+    "MinimumQueryCount": {
+      "type": "integer",
+      "max": 10000,
+      "min": 1
+    },
+    "Mode": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "LEARN_ONLY"
+      ]
+    },
     "NextToken": {
       "type": "string",
       "max": 800,
       "min": 1
+    },
+    "ObjectBoolean": {
+      "type": "boolean"
     },
     "OneDriveConfiguration": {
       "type": "structure",
@@ -3508,6 +4317,11 @@
         "DESCENDING"
       ]
     },
+    "Port": {
+      "type": "integer",
+      "max": 65535,
+      "min": 1
+    },
     "Principal": {
       "type": "structure",
       "required": [
@@ -3550,6 +4364,28 @@
         "GROUP"
       ]
     },
+    "ProxyConfiguration": {
+      "type": "structure",
+      "required": [
+        "Host",
+        "Port"
+      ],
+      "members": {
+        "Host": {
+          "shape": "Host",
+          "documentation": "<p>The name of the website host you want to connect to via a web proxy server.</p> <p>For example, the host name of https://a.example.com/page1.html is \"a.example.com\".</p>"
+        },
+        "Port": {
+          "shape": "Port",
+          "documentation": "<p>The port number of the website host you want to connect to via a web proxy server. </p> <p>For example, the port for https://a.example.com/page1.html is 443, the standard port for HTTPS.</p>"
+        },
+        "Credentials": {
+          "shape": "SecretArn",
+          "documentation": "<p>Your secret ARN, which you can create in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a> </p> <p>The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.</p>"
+        }
+      },
+      "documentation": "<p>Provides the configuration information for a web proxy to connect to website hosts.</p>"
+    },
     "QueryCapacityUnit": {
       "type": "integer",
       "min": 0
@@ -3576,7 +4412,7 @@
       "members": {
         "IndexId": {
           "shape": "IndexId",
-          "documentation": "<p>The unique identifier of the index to search. The identifier is returned in the response from the operation.</p>"
+          "documentation": "<p>The unique identifier of the index to search. The identifier is returned in the response from the <code>CreateIndex</code> operation.</p>"
         },
         "QueryText": {
           "shape": "QueryText",
@@ -3597,6 +4433,10 @@
         "QueryResultTypeFilter": {
           "shape": "QueryResultType",
           "documentation": "<p>Sets the type of query. Only results for the specified query type are returned.</p>"
+        },
+        "DocumentRelevanceOverrideConfigurations": {
+          "shape": "DocumentRelevanceOverrideConfigurationList",
+          "documentation": "<p>Overrides relevance tuning configurations of fields or attributes set at the index level.</p> <p>If you use this API to override the relevance tuning configured at the index level, but there is no relevance tuning configured at the index level, then Amazon Kendra does not apply any relevance tuning.</p> <p>If there is relevance tuning configured at the index level, but you do not use this API to override any relevance tuning in the index, then Amazon Kendra uses the relevance tuning that is configured at the index level.</p> <p>If there is relevance tuning configured for fields at the index level, but you use this API to override only some of these fields, then for the fields you did not override, the importance is set to 1.</p>"
         },
         "PageNumber": {
           "shape": "Integer",
@@ -3701,6 +4541,77 @@
         "ANSWER"
       ]
     },
+    "QuerySuggestionsBlockListId": {
+      "type": "string",
+      "max": 36,
+      "min": 36,
+      "pattern": "[a-zA-Z0-9][a-zA-Z0-9-]*"
+    },
+    "QuerySuggestionsBlockListName": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+    },
+    "QuerySuggestionsBlockListStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "CREATING",
+        "DELETING",
+        "UPDATING",
+        "ACTIVE_BUT_UPDATE_FAILED",
+        "FAILED"
+      ]
+    },
+    "QuerySuggestionsBlockListSummary": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "QuerySuggestionsBlockListId",
+          "documentation": "<p>The identifier of a block list.</p>"
+        },
+        "Name": {
+          "shape": "QuerySuggestionsBlockListName",
+          "documentation": "<p>The name of the block list.</p>"
+        },
+        "Status": {
+          "shape": "QuerySuggestionsBlockListStatus",
+          "documentation": "<p>The status of the block list.</p>"
+        },
+        "CreatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date-time summary information for a query suggestions block list was last created.</p>"
+        },
+        "UpdatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date-time the block list was last updated.</p>"
+        },
+        "ItemCount": {
+          "shape": "Integer",
+          "documentation": "<p>The number of items in the block list file.</p>"
+        }
+      },
+      "documentation": "<p>Summary information on a query suggestions block list.</p> <p>This includes information on the block list ID, block list name, when the block list was created, when the block list was last updated, and the count of block words/phrases in the block list.</p> <p>For information on the current quota limits for block lists, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas for Amazon Kendra</a>.</p>"
+    },
+    "QuerySuggestionsBlockListSummaryItems": {
+      "type": "list",
+      "member": {
+        "shape": "QuerySuggestionsBlockListSummary"
+      }
+    },
+    "QuerySuggestionsId": {
+      "type": "string",
+      "max": 36,
+      "min": 1
+    },
+    "QuerySuggestionsStatus": {
+      "type": "string",
+      "enum": [
+        "ACTIVE",
+        "UPDATING"
+      ]
+    },
     "QueryText": {
       "type": "string",
       "max": 1000,
@@ -3756,7 +4667,7 @@
           "documentation": "<p>Whether to document was relevant or not relevant to the search.</p>"
         }
       },
-      "documentation": "<p>Provides feedback on how relevant a document is to a search. Your application uses the <a>SubmitFeedback</a> operation to provide relevance information.</p>"
+      "documentation": "<p>Provides feedback on how relevant a document is to a search. Your application uses the <code>SubmitFeedback</code> operation to provide relevance information.</p>"
     },
     "RelevanceFeedbackList": {
       "type": "list",
@@ -3804,11 +4715,11 @@
         },
         "InclusionPatterns": {
           "shape": "DataSourceInclusionsExclusionsStrings",
-          "documentation": "<p>A list of glob patterns for documents that should be indexed. If a document that matches an inclusion pattern also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href=\"https://en.wikipedia.org/wiki/Glob_(programming)\">glob (programming)</a> in <i>Wikipedia</i>.</p>"
+          "documentation": "<p>A list of glob patterns for documents that should be indexed. If a document that matches an inclusion pattern also matches an exclusion pattern, the document is not indexed.</p> <p>Some <a href=\"https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters\">examples</a> are:</p> <ul> <li> <p> <i>*.txt</i> will include all text files in a directory (files with the extension .txt).</p> </li> <li> <p> <i>**/*.txt</i> will include all text files in a directory and its subdirectories.</p> </li> <li> <p> <i>*tax*</i> will include all files in a directory that contain 'tax' in the file name, such as 'tax', 'taxes', 'income_tax'.</p> </li> </ul>"
         },
         "ExclusionPatterns": {
           "shape": "DataSourceInclusionsExclusionsStrings",
-          "documentation": "<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix or inclusion pattern also matches an exclusion pattern, the document is not indexed.</p> <p>For more information about glob patterns, see <a href=\"https://en.wikipedia.org/wiki/Glob_(programming)\">glob (programming)</a> in <i>Wikipedia</i>.</p>"
+          "documentation": "<p>A list of glob patterns for documents that should not be indexed. If a document that matches an inclusion prefix or inclusion pattern also matches an exclusion pattern, the document is not indexed.</p> <p>Some <a href=\"https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters\">examples</a> are:</p> <ul> <li> <p> <i>*.png , *.jpg</i> will exclude all PNG and JPEG image files in a directory (files with the extensions .png and .jpg).</p> </li> <li> <p> <i>*internal*</i> will exclude all files in a directory that contain 'internal' in the file name, such as 'internal', 'internal_only', 'company_internal'.</p> </li> <li> <p> <i>**/*internal*</i> will exclude all internal-related files in a directory and its subdirectories.</p> </li> </ul>"
         },
         "DocumentsMetadataConfiguration": {
           "shape": "DocumentsMetadataConfiguration"
@@ -3855,7 +4766,7 @@
         },
         "DocumentTitleFieldName": {
           "shape": "DataSourceFieldName",
-          "documentation": "<p>The name of the column in the Salesforce FeedItem table that contains the title of the document. This is typically the <code>Title</code> collumn.</p>"
+          "documentation": "<p>The name of the column in the Salesforce FeedItem table that contains the title of the document. This is typically the <code>Title</code> column.</p>"
         },
         "FieldMappings": {
           "shape": "DataSourceToIndexFieldMappingList",
@@ -3904,7 +4815,7 @@
         },
         "KnowledgeArticleConfiguration": {
           "shape": "SalesforceKnowledgeArticleConfiguration",
-          "documentation": "<p>Specifies configuration information for the knowlege article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both.</p>"
+          "documentation": "<p>Specifies configuration information for the knowledge article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both.</p>"
         },
         "ChatterFeedConfiguration": {
           "shape": "SalesforceChatterFeedConfiguration",
@@ -3988,7 +4899,7 @@
           "documentation": "<p>Provides configuration information for custom Salesforce knowledge articles.</p>"
         }
       },
-      "documentation": "<p>Specifies configuration information for the knowlege article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both </p>"
+      "documentation": "<p>Specifies configuration information for the knowledge article types that Amazon Kendra indexes. Amazon Kendra indexes standard knowledge articles and the standard fields of knowledge articles, or the custom fields of custom knowledge articles, but not both </p>"
     },
     "SalesforceKnowledgeArticleState": {
       "type": "string",
@@ -4058,14 +4969,14 @@
         },
         "DocumentTitleFieldName": {
           "shape": "DataSourceFieldName",
-          "documentation": "<p>The name of the field in the standard object table that contains the document titleB.</p>"
+          "documentation": "<p>The name of the field in the standard object table that contains the document title.</p>"
         },
         "FieldMappings": {
           "shape": "DataSourceToIndexFieldMappingList",
           "documentation": "<p>One or more objects that map fields in the standard object to Amazon Kendra index fields. The index field must exist before you can map a Salesforce field to it.</p>"
         }
       },
-      "documentation": "<p>Specifies confguration information for indexing a single standard object.</p>"
+      "documentation": "<p>Specifies configuration information for indexing a single standard object.</p>"
     },
     "SalesforceStandardObjectConfigurationList": {
       "type": "list",
@@ -4156,6 +5067,37 @@
       "max": 10,
       "min": 1
     },
+    "SeedUrl": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "^(https?):\\/\\/([^\\s]*)"
+    },
+    "SeedUrlConfiguration": {
+      "type": "structure",
+      "required": [
+        "SeedUrls"
+      ],
+      "members": {
+        "SeedUrls": {
+          "shape": "SeedUrlList",
+          "documentation": "<p>The list of seed or starting point URLs of the websites you want to crawl.</p> <p>The list can include a maximum of 100 seed URLs.</p>"
+        },
+        "WebCrawlerMode": {
+          "shape": "WebCrawlerMode",
+          "documentation": "<p>You can choose one of the following modes:</p> <ul> <li> <p> <code>HOST_ONLY</code> – crawl only the website host names. For example, if the seed URL is \"abc.example.com\", then only URLs with host name \"abc.example.com\" are crawled.</p> </li> <li> <p> <code>SUBDOMAINS</code> – crawl the website host names with subdomains. For example, if the seed URL is \"abc.example.com\", then \"a.abc.example.com\" and \"b.abc.example.com\" are also crawled.</p> </li> <li> <p> <code>EVERYTHING</code> – crawl the website host names with subdomains and other domains that the webpages link to.</p> </li> </ul> <p>The default mode is set to <code>HOST_ONLY</code>.</p>"
+        }
+      },
+      "documentation": "<p>Provides the configuration information of the seed or starting point URLs to crawl.</p> <p> <i>When selecting websites to index, you must adhere to the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>"
+    },
+    "SeedUrlList": {
+      "type": "list",
+      "member": {
+        "shape": "SeedUrl"
+      },
+      "max": 100,
+      "min": 0
+    },
     "ServerSideEncryptionConfiguration": {
       "type": "structure",
       "members": {
@@ -4165,6 +5107,13 @@
         }
       },
       "documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.</p>"
+    },
+    "ServiceNowAuthenticationType": {
+      "type": "string",
+      "enum": [
+        "HTTP_BASIC",
+        "OAUTH2"
+      ]
     },
     "ServiceNowBuildVersionType": {
       "type": "string",
@@ -4200,6 +5149,10 @@
         "ServiceCatalogConfiguration": {
           "shape": "ServiceNowServiceCatalogConfiguration",
           "documentation": "<p>Provides configuration information for crawling service catalogs in the ServiceNow site.</p>"
+        },
+        "AuthenticationType": {
+          "shape": "ServiceNowAuthenticationType",
+          "documentation": "<p>Determines the type of authentication used to connect to the ServiceNow instance. If you choose <code>HTTP_BASIC</code>, Amazon Kendra is authenticated using the user name and password provided in the AWS Secrets Manager secret in the <code>SecretArn</code> field. When you choose <code>OAUTH2</code>, Amazon Kendra is authenticated using the OAuth token and secret provided in the Secrets Manager secret, and the user name and password are used to determine which information Amazon Kendra has access to.</p> <p>When you use <code>OAUTH2</code> authentication, you must generate a token and a client secret using the ServiceNow console. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-servicenow.html\">Using a ServiceNow data source</a>.</p>"
         }
       },
       "documentation": "<p>Provides configuration information required to connect to a ServiceNow data source.</p>"
@@ -4239,9 +5192,19 @@
         "FieldMappings": {
           "shape": "DataSourceToIndexFieldMappingList",
           "documentation": "<p>Mapping between ServiceNow fields and Amazon Kendra index fields. You must create the index field before you map the field.</p>"
+        },
+        "FilterQuery": {
+          "shape": "ServiceNowKnowledgeArticleFilterQuery",
+          "documentation": "<p>A query that selects the knowledge articles to index. The query can return articles from multiple knowledge bases, and the knowledge bases can be public or private.</p> <p>The query string must be one generated by the ServiceNow console. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/servicenow-query.html\">Specifying documents to index with a query</a>. </p>"
         }
       },
       "documentation": "<p>Provides configuration information for crawling knowledge articles in the ServiceNow site.</p>"
+    },
+    "ServiceNowKnowledgeArticleFilterQuery": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "^\\P{C}*$"
     },
     "ServiceNowServiceCatalogConfiguration": {
       "type": "structure",
@@ -4255,11 +5218,11 @@
         },
         "IncludeAttachmentFilePatterns": {
           "shape": "DataSourceInclusionsExclusionsStrings",
-          "documentation": "<p>Determines the types of file attachments that are included in the index. </p>"
+          "documentation": "<p>A list of regular expression patterns. Documents that match the patterns are included in the index. Documents that don't match the patterns are excluded from the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the file name of the attachment.</p>"
         },
         "ExcludeAttachmentFilePatterns": {
           "shape": "DataSourceInclusionsExclusionsStrings",
-          "documentation": "<p>Determines the types of file attachments that are excluded from the index.</p>"
+          "documentation": "<p>A list of regular expression patterns. Documents that match the patterns are excluded from the index. Documents that don't match the patterns are included in the index. If a document matches both an exclusion pattern and an inclusion pattern, the document is not included in the index.</p> <p>The regex is applied to the file name of the attachment.</p>"
         },
         "DocumentDataFieldName": {
           "shape": "DataSourceFieldName",
@@ -4317,7 +5280,7 @@
         },
         "FieldMappings": {
           "shape": "DataSourceToIndexFieldMappingList",
-          "documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map Microsoft SharePoint attributes to custom fields in the Amazon Kendra index. You must first create the index fields using the operation before you map SharePoint attributes. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping Data Source Fields</a>.</p>"
+          "documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map Microsoft SharePoint attributes to custom fields in the Amazon Kendra index. You must first create the index fields using the <code>UpdateIndex</code> operation before you map SharePoint attributes. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping Data Source Fields</a>.</p>"
         },
         "DocumentTitleFieldName": {
           "shape": "DataSourceFieldName",
@@ -4349,6 +5312,33 @@
       "max": 256,
       "min": 1,
       "pattern": "^\\P{C}*$"
+    },
+    "SiteMap": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "^(https?):\\/\\/([^\\s]*)"
+    },
+    "SiteMapsConfiguration": {
+      "type": "structure",
+      "required": [
+        "SiteMaps"
+      ],
+      "members": {
+        "SiteMaps": {
+          "shape": "SiteMapsList",
+          "documentation": "<p>The list of sitemap URLs of the websites you want to crawl.</p> <p>The list can include a maximum of three sitemap URLs.</p>"
+        }
+      },
+      "documentation": "<p>Provides the configuration information of the sitemap URLs to crawl.</p> <p> <i>When selecting websites to index, you must adhere to the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>"
+    },
+    "SiteMapsList": {
+      "type": "list",
+      "member": {
+        "shape": "SiteMap"
+      },
+      "max": 3,
+      "min": 0
     },
     "SortOrder": {
       "type": "string",
@@ -4411,6 +5401,28 @@
         }
       }
     },
+    "Status": {
+      "type": "structure",
+      "members": {
+        "DocumentId": {
+          "shape": "DocumentId",
+          "documentation": "<p>The unique identifier of the document.</p>"
+        },
+        "DocumentStatus": {
+          "shape": "DocumentStatus",
+          "documentation": "<p>The current status of a document.</p> <p>If the document was submitted for deletion, the status is <code>NOT_FOUND</code> after the document is deleted.</p>"
+        },
+        "FailureCode": {
+          "shape": "String",
+          "documentation": "<p>Indicates the source of the error.</p>"
+        },
+        "FailureReason": {
+          "shape": "String",
+          "documentation": "<p>Provides detailed information about why the document couldn't be indexed. Use this information to correct the error before you resubmit the document for indexing.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about the status of documents submitted for indexing.</p>"
+    },
     "StopDataSourceSyncJobRequest": {
       "type": "structure",
       "required": [
@@ -4450,7 +5462,7 @@
         },
         "QueryId": {
           "shape": "QueryId",
-          "documentation": "<p>The identifier of the specific query for which you are submitting feedback. The query ID is returned in the response to the operation.</p>"
+          "documentation": "<p>The identifier of the specific query for which you are submitting feedback. The query ID is returned in the response to the <code>Query</code> operation.</p>"
         },
         "ClickFeedbackItems": {
           "shape": "ClickFeedbackList",
@@ -4475,6 +5487,74 @@
       },
       "max": 6,
       "min": 1
+    },
+    "Suggestion": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "ResultId",
+          "documentation": "<p>The unique UUID (universally unique identifier) of a single query suggestion.</p>"
+        },
+        "Value": {
+          "shape": "SuggestionValue",
+          "documentation": "<p>The value for the unique UUID (universally unique identifier) of a single query suggestion.</p> <p>The value is the text string of a suggestion.</p>"
+        }
+      },
+      "documentation": "<p>A single query suggestion.</p>"
+    },
+    "SuggestionHighlight": {
+      "type": "structure",
+      "members": {
+        "BeginOffset": {
+          "shape": "Integer",
+          "documentation": "<p>The zero-based location in the response string where the highlight starts.</p>"
+        },
+        "EndOffset": {
+          "shape": "Integer",
+          "documentation": "<p>The zero-based location in the response string where the highlight ends.</p>"
+        }
+      },
+      "documentation": "<p>The text highlights for a single query suggestion.</p>"
+    },
+    "SuggestionHighlightList": {
+      "type": "list",
+      "member": {
+        "shape": "SuggestionHighlight"
+      }
+    },
+    "SuggestionList": {
+      "type": "list",
+      "member": {
+        "shape": "Suggestion"
+      }
+    },
+    "SuggestionQueryText": {
+      "type": "string",
+      "pattern": "^\\P{C}*$"
+    },
+    "SuggestionTextWithHighlights": {
+      "type": "structure",
+      "members": {
+        "Text": {
+          "shape": "String",
+          "documentation": "<p>The query suggestion text to display to the user.</p>"
+        },
+        "Highlights": {
+          "shape": "SuggestionHighlightList",
+          "documentation": "<p>The beginning and end of the query suggestion text that should be highlighted.</p>"
+        }
+      },
+      "documentation": "<p>Provides text and information about where to highlight the query suggestion text.</p>"
+    },
+    "SuggestionValue": {
+      "type": "structure",
+      "members": {
+        "Text": {
+          "shape": "SuggestionTextWithHighlights",
+          "documentation": "<p>The <code>SuggestionTextWithHighlights</code> structure that contains the query suggestion text and highlights.</p>"
+        }
+      },
+      "documentation": "<p>The <code>SuggestionTextWithHighlights</code> structure information.</p>"
     },
     "TableName": {
       "type": "string",
@@ -4751,7 +5831,7 @@
         },
         "CapacityUnits": {
           "shape": "CapacityUnitsConfiguration",
-          "documentation": "<p>Sets the number of addtional storage and query capacity units that should be used by the index. You can change the capacity of the index up to 5 times per day.</p> <p>If you are using extra storage units, you can't reduce the storage capacity below that required to meet the storage needs for your index.</p>"
+          "documentation": "<p>Sets the number of additional storage and query capacity units that should be used by the index. You can change the capacity of the index up to 5 times per day.</p> <p>If you are using extra storage units, you can't reduce the storage capacity below that required to meet the storage needs for your index.</p>"
         },
         "UserTokenConfigurations": {
           "shape": "UserTokenConfigurationList",
@@ -4760,6 +5840,71 @@
         "UserContextPolicy": {
           "shape": "UserContextPolicy",
           "documentation": "<p>The user user token context policy.</p>"
+        }
+      }
+    },
+    "UpdateQuerySuggestionsBlockListRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId",
+        "Id"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index for a block list.</p>"
+        },
+        "Id": {
+          "shape": "QuerySuggestionsBlockListId",
+          "documentation": "<p>The unique identifier of a block list.</p>"
+        },
+        "Name": {
+          "shape": "QuerySuggestionsBlockListName",
+          "documentation": "<p>The name of a block list.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The description for a block list.</p>"
+        },
+        "SourceS3Path": {
+          "shape": "S3Path",
+          "documentation": "<p>The S3 path where your block list text file sits in S3.</p> <p>If you update your block list and provide the same path to the block list text file in S3, then Amazon Kendra reloads the file to refresh the block list. Amazon Kendra does not automatically refresh your block list. You need to call the <code>UpdateQuerySuggestionsBlockList</code> API to refresh you block list.</p> <p>If you update your block list, then Amazon Kendra asynchronously refreshes all query suggestions with the latest content in the S3 file. This means changes might not take effect immediately.</p>"
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The IAM (Identity and Access Management) role used to access the block list text file in S3.</p>"
+        }
+      }
+    },
+    "UpdateQuerySuggestionsConfigRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index you want to update query suggestions settings for.</p>"
+        },
+        "Mode": {
+          "shape": "Mode",
+          "documentation": "<p>Set the mode to <code>ENABLED</code> or <code>LEARN_ONLY</code>.</p> <p>By default, Amazon Kendra enables query suggestions. <code>LEARN_ONLY</code> mode allows you to turn off query suggestions. You can to update this at any time.</p> <p>In <code>LEARN_ONLY</code> mode, Amazon Kendra continues to learn from new queries to keep suggestions up to date for when you are ready to switch to ENABLED mode again.</p>"
+        },
+        "QueryLogLookBackWindowInDays": {
+          "shape": "Integer",
+          "documentation": "<p>How recent your queries are in your query log time window.</p> <p>The time window is the number of days from current day to past days.</p> <p>By default, Amazon Kendra sets this to 180.</p>"
+        },
+        "IncludeQueriesWithoutUserInformation": {
+          "shape": "ObjectBoolean",
+          "documentation": "<p> <code>TRUE</code> to include queries without user information (i.e. all queries, irrespective of the user), otherwise <code>FALSE</code> to only include queries with user information.</p> <p>If you pass user information to Amazon Kendra along with the queries, you can set this flag to <code>FALSE</code> and instruct Amazon Kendra to only consider queries with user information.</p> <p>If you set to <code>FALSE</code>, Amazon Kendra only considers queries searched at least <code>MinimumQueryCount</code> times across <code>MinimumNumberOfQueryingUsers</code> unique users for suggestions.</p> <p>If you set to <code>TRUE</code>, Amazon Kendra ignores all user information and learns from all queries.</p>"
+        },
+        "MinimumNumberOfQueryingUsers": {
+          "shape": "MinimumNumberOfQueryingUsers",
+          "documentation": "<p>The minimum number of unique users who must search a query in order for the query to be eligible to suggest to your users.</p> <p>Increasing this number might decrease the number of suggestions. However, this ensures a query is searched by many users and is truly popular to suggest to users.</p> <p>How you tune this setting depends on your specific needs.</p>"
+        },
+        "MinimumQueryCount": {
+          "shape": "MinimumQueryCount",
+          "documentation": "<p>The the minimum number of times a query must be searched in order to be eligible to suggest to your users.</p> <p>Decreasing this number increases the number of suggestions. However, this affects the quality of suggestions as it sets a low bar for a query to be considered popular to suggest to users.</p> <p>How you tune this setting depends on your specific needs.</p>"
         }
       }
     },
@@ -4800,6 +5945,20 @@
       "max": 2048,
       "min": 1,
       "pattern": "^(https?|ftp|file):\\/\\/([^\\s]*)"
+    },
+    "Urls": {
+      "type": "structure",
+      "members": {
+        "SeedUrlConfiguration": {
+          "shape": "SeedUrlConfiguration",
+          "documentation": "<p>Provides the configuration of the seed or starting point URLs of the websites you want to crawl.</p> <p>You can choose to crawl only the website host names, or the website host names with subdomains, or the website host names with subdomains and other domains that the webpages link to.</p> <p>You can list up to 100 seed URLs.</p>"
+        },
+        "SiteMapsConfiguration": {
+          "shape": "SiteMapsConfiguration",
+          "documentation": "<p>Provides the configuration of the sitemap URLs of the websites you want to crawl.</p> <p>Only URLs belonging to the same website host names are crawled. You can list up to three sitemap URLs.</p>"
+        }
+      },
+      "documentation": "<p>Provides the configuration information of the URLs to crawl.</p> <p> <i>When selecting websites to index, you must adhere to the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>"
     },
     "UserAccount": {
       "type": "string",
@@ -4876,6 +6035,59 @@
       "max": 200,
       "min": 1,
       "pattern": "[-0-9a-zA-Z]+"
+    },
+    "WebCrawlerConfiguration": {
+      "type": "structure",
+      "required": [
+        "Urls"
+      ],
+      "members": {
+        "Urls": {
+          "shape": "Urls",
+          "documentation": "<p>Specifies the seed or starting point URLs of the websites or the sitemap URLs of the websites you want to crawl.</p> <p>You can include website subdomains. You can list up to 100 seed URLs and up to three sitemap URLs.</p> <p> <i>When selecting websites to index, you must adhere to the <a href=\"https://aws.amazon.com/aup/\">Amazon Acceptable Use Policy</a> and all other Amazon terms. Remember that you must only use the Amazon Kendra web crawler to index your own webpages, or webpages that you have authorization to index.</i> </p>"
+        },
+        "CrawlDepth": {
+          "shape": "CrawlDepth",
+          "documentation": "<p>Specifies the number of levels in a website that you want to crawl.</p> <p>The first level begins from the website seed or starting point URL. For example, if a website has 3 levels – index level (i.e. seed in this example), sections level, and subsections level – and you are only interested in crawling information up to the sections level (i.e. levels 0-1), you can set your depth to 1.</p> <p>The default crawl depth is set to 2.</p>"
+        },
+        "MaxLinksPerPage": {
+          "shape": "MaxLinksPerPage",
+          "documentation": "<p>The maximum number of URLs on a webpage to include when crawling a website. This number is per webpage.</p> <p>As a website’s webpages are crawled, any URLs the webpages link to are also crawled. URLs on a webpage are crawled in order of appearance.</p> <p>The default maximum links per page is 100.</p>"
+        },
+        "MaxContentSizePerPageInMegaBytes": {
+          "shape": "MaxContentSizePerPageInMegaBytes",
+          "documentation": "<p>The maximum size (in MB) of a webpage or attachment to crawl.</p> <p>Files larger than this size (in MB) are skipped/not crawled.</p> <p>The default maximum size of a webpage or attachment is set to 50 MB.</p>"
+        },
+        "MaxUrlsPerMinuteCrawlRate": {
+          "shape": "MaxUrlsPerMinuteCrawlRate",
+          "documentation": "<p>The maximum number of URLs crawled per website host per minute.</p> <p>A minimum of one URL is required.</p> <p>The default maximum number of URLs crawled per website host per minute is 300.</p>"
+        },
+        "UrlInclusionPatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>The regular expression pattern to include certain URLs to crawl.</p> <p>If there is a regular expression pattern to exclude certain URLs that conflicts with the include pattern, the exclude pattern takes precedence.</p>"
+        },
+        "UrlExclusionPatterns": {
+          "shape": "DataSourceInclusionsExclusionsStrings",
+          "documentation": "<p>The regular expression pattern to exclude certain URLs to crawl.</p> <p>If there is a regular expression pattern to include certain URLs that conflicts with the exclude pattern, the exclude pattern takes precedence.</p>"
+        },
+        "ProxyConfiguration": {
+          "shape": "ProxyConfiguration",
+          "documentation": "<p>Provides configuration information required to connect to your internal websites via a web proxy.</p> <p>You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is \"a.example.com\" and the port is 443, the standard port for HTTPS.</p> <p>Web proxy credentials are optional and you can use them to connect to a web proxy server that requires basic authentication. To store web proxy credentials, you use a secret in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a>.</p>"
+        },
+        "AuthenticationConfiguration": {
+          "shape": "AuthenticationConfiguration",
+          "documentation": "<p>Provides configuration information required to connect to websites using authentication.</p> <p>You can connect to websites using basic authentication of user name and password.</p> <p>You must provide the website host name and port number. For example, the host name of https://a.example.com/page1.html is \"a.example.com\" and the port is 443, the standard port for HTTPS. You use a secret in <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\">AWS Secrets Manager</a> to store your authentication credentials.</p>"
+        }
+      },
+      "documentation": "<p>Provides the configuration information required for Amazon Kendra web crawler.</p>"
+    },
+    "WebCrawlerMode": {
+      "type": "string",
+      "enum": [
+        "HOST_ONLY",
+        "SUBDOMAINS",
+        "EVERYTHING"
+      ]
     }
   },
   "documentation": "<p>Amazon Kendra is a service for indexing large document sets.</p>"

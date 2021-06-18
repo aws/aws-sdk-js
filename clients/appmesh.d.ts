@@ -44,11 +44,11 @@ declare class AppMesh extends Service {
    */
   createVirtualGateway(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualGatewayOutput) => void): Request<AppMesh.Types.CreateVirtualGatewayOutput, AWSError>;
   /**
-   * Creates a virtual node within a service mesh.  A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS). You define a listener for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a backend. The response metadata for your new virtual node contains the arn that is associated with the virtual node. Set this value to the full ARN; for example, arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp) as the APPMESH_RESOURCE_ARN environment variable for your task group's Envoy proxy container in your task definition or pod spec. This is then mapped to the node.id and node.cluster Envoy parameters.  By default, App Mesh uses the name of the resource you specified in APPMESH_RESOURCE_ARN when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the APPMESH_RESOURCE_CLUSTER environment variable with your own name. AWS Cloud Map is not available in the eu-south-1 Region.  For more information about virtual nodes, see Virtual nodes. You must be using 1.15.0 or later of the Envoy image when setting these variables. For more information about App Mesh Envoy variables, see Envoy image in the AWS App Mesh User Guide.
+   * Creates a virtual node within a service mesh.  A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS). You define a listener for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a backend. The response metadata for your new virtual node contains the arn that is associated with the virtual node. Set this value to the full ARN; for example, arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp) as the APPMESH_RESOURCE_ARN environment variable for your task group's Envoy proxy container in your task definition or pod spec. This is then mapped to the node.id and node.cluster Envoy parameters.  By default, App Mesh uses the name of the resource you specified in APPMESH_RESOURCE_ARN when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the APPMESH_RESOURCE_CLUSTER environment variable with your own name.  For more information about virtual nodes, see Virtual nodes. You must be using 1.15.0 or later of the Envoy image when setting these variables. For more information aboutApp Mesh Envoy variables, see Envoy image in the AWS App Mesh User Guide.
    */
   createVirtualNode(params: AppMesh.Types.CreateVirtualNodeInput, callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualNodeOutput) => void): Request<AppMesh.Types.CreateVirtualNodeOutput, AWSError>;
   /**
-   * Creates a virtual node within a service mesh.  A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS). You define a listener for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a backend. The response metadata for your new virtual node contains the arn that is associated with the virtual node. Set this value to the full ARN; for example, arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp) as the APPMESH_RESOURCE_ARN environment variable for your task group's Envoy proxy container in your task definition or pod spec. This is then mapped to the node.id and node.cluster Envoy parameters.  By default, App Mesh uses the name of the resource you specified in APPMESH_RESOURCE_ARN when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the APPMESH_RESOURCE_CLUSTER environment variable with your own name. AWS Cloud Map is not available in the eu-south-1 Region.  For more information about virtual nodes, see Virtual nodes. You must be using 1.15.0 or later of the Envoy image when setting these variables. For more information about App Mesh Envoy variables, see Envoy image in the AWS App Mesh User Guide.
+   * Creates a virtual node within a service mesh.  A virtual node acts as a logical pointer to a particular task group, such as an Amazon ECS service or a Kubernetes deployment. When you create a virtual node, you can specify the service discovery information for your task group, and whether the proxy running in a task group will communicate with other proxies using Transport Layer Security (TLS). You define a listener for any inbound traffic that your virtual node expects. Any virtual service that your virtual node expects to communicate to is specified as a backend. The response metadata for your new virtual node contains the arn that is associated with the virtual node. Set this value to the full ARN; for example, arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp) as the APPMESH_RESOURCE_ARN environment variable for your task group's Envoy proxy container in your task definition or pod spec. This is then mapped to the node.id and node.cluster Envoy parameters.  By default, App Mesh uses the name of the resource you specified in APPMESH_RESOURCE_ARN when Envoy is referring to itself in metrics and traces. You can override this behavior by setting the APPMESH_RESOURCE_CLUSTER environment variable with your own name.  For more information about virtual nodes, see Virtual nodes. You must be using 1.15.0 or later of the Envoy image when setting these variables. For more information aboutApp Mesh Envoy variables, see Envoy image in the AWS App Mesh User Guide.
    */
   createVirtualNode(callback?: (err: AWSError, data: AppMesh.Types.CreateVirtualNodeOutput) => void): Request<AppMesh.Types.CreateVirtualNodeOutput, AWSError>;
   /**
@@ -327,11 +327,11 @@ declare namespace AppMesh {
   export type Arn = string;
   export interface AwsCloudMapInstanceAttribute {
     /**
-     * The name of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service instance that contains the specified key and value is returned.
+     * The name of an Cloud Map service instance attribute key. Any Cloud Map service instance that contains the specified key and value is returned.
      */
     key: AwsCloudMapInstanceAttributeKey;
     /**
-     * The value of an AWS Cloud Map service instance attribute key. Any AWS Cloud Map service instance that contains the specified key and value is returned.
+     * The value of an Cloud Map service instance attribute key. Any Cloud Map service instance that contains the specified key and value is returned.
      */
     value: AwsCloudMapInstanceAttributeValue;
   }
@@ -345,11 +345,11 @@ declare namespace AppMesh {
      */
     attributes?: AwsCloudMapInstanceAttributes;
     /**
-     * The name of the AWS Cloud Map namespace to use.
+     * The name of the Cloud Map namespace to use.
      */
     namespaceName: AwsCloudMapName;
     /**
-     * The name of the AWS Cloud Map service to use.
+     * The name of the Cloud Map service to use.
      */
     serviceName: AwsCloudMapName;
   }
@@ -393,6 +393,9 @@ declare namespace AppMesh {
     validation: TlsValidationContext;
   }
   export interface ClientTlsCertificate {
+    /**
+     * An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see Transport Layer Security (TLS).
+     */
     file?: ListenerTlsFileCertificate;
     /**
      * A reference to an object that represents a client's TLS Secret Discovery Service certificate.
@@ -623,6 +626,7 @@ declare namespace AppMesh {
      */
     virtualService: VirtualServiceData;
   }
+  export type DefaultGatewayRouteRewrite = "ENABLED"|"DISABLED"|string;
   export interface DeleteGatewayRouteInput {
     /**
      * The name of the gateway route to delete.
@@ -907,11 +911,16 @@ declare namespace AppMesh {
      */
     virtualService: VirtualServiceData;
   }
+  export type DnsResponseType = "LOADBALANCER"|"ENDPOINTS"|string;
   export interface DnsServiceDiscovery {
     /**
      * Specifies the DNS service discovery hostname for the virtual node. 
      */
     hostname: Hostname;
+    /**
+     * Specifies the DNS response type for the virtual node.
+     */
+    responseType?: DnsResponseType;
   }
   export interface Duration {
     /**
@@ -927,11 +936,12 @@ declare namespace AppMesh {
   export type DurationValue = number;
   export interface EgressFilter {
     /**
-     * The egress filter type. By default, the type is DROP_ALL, which allows egress only from virtual nodes to other defined resources in the service mesh (and any traffic to *.amazonaws.com for AWS API calls). You can set the egress filter type to ALLOW_ALL to allow egress to any endpoint inside or outside of the service mesh.
+     * The egress filter type. By default, the type is DROP_ALL, which allows egress only from virtual nodes to other defined resources in the service mesh (and any traffic to *.amazonaws.com for Amazon Web Services API calls). You can set the egress filter type to ALLOW_ALL to allow egress to any endpoint inside or outside of the service mesh.
      */
     type: EgressFilterType;
   }
   export type EgressFilterType = "ALLOW_ALL"|"DROP_ALL"|string;
+  export type ExactHostName = string;
   export interface FileAccessLog {
     /**
      * The file path to write access logs to. You can use /dev/stdout to send access logs to standard out and configure your Envoy container to use a log driver, such as awslogs, to export the access logs to a log storage service such as Amazon CloudWatch Logs. You can also specify a path in the Envoy container's file system to write the files to disk.  The Envoy process must have write permissions to the path that you specify here. Otherwise, Envoy fails to bootstrap properly. 
@@ -962,7 +972,24 @@ declare namespace AppMesh {
      */
     virtualGatewayName: ResourceName;
   }
+  export interface GatewayRouteHostnameMatch {
+    /**
+     * The exact host name to match on.
+     */
+    exact?: ExactHostName;
+    /**
+     * The specified ending characters of the host name to match on.
+     */
+    suffix?: SuffixHostname;
+  }
+  export interface GatewayRouteHostnameRewrite {
+    /**
+     * The default target host name to write to.
+     */
+    defaultTargetHostname?: DefaultGatewayRouteRewrite;
+  }
   export type GatewayRouteList = GatewayRouteRef[];
+  export type GatewayRoutePriority = number;
   export interface GatewayRouteRef {
     /**
      * The full Amazon Resource Name (ARN) for the gateway route.
@@ -1014,6 +1041,10 @@ declare namespace AppMesh {
      * An object that represents the specification of an HTTP gateway route.
      */
     httpRoute?: HttpGatewayRoute;
+    /**
+     * The ordering of the gateway routes spec.
+     */
+    priority?: GatewayRoutePriority;
   }
   export interface GatewayRouteStatus {
     /**
@@ -1046,15 +1077,67 @@ declare namespace AppMesh {
   }
   export interface GrpcGatewayRouteAction {
     /**
+     * The gateway route action to rewrite.
+     */
+    rewrite?: GrpcGatewayRouteRewrite;
+    /**
      * An object that represents the target that traffic is routed to when a request matches the gateway route.
      */
     target: GatewayRouteTarget;
   }
   export interface GrpcGatewayRouteMatch {
     /**
+     * The gateway route host name to be matched on.
+     */
+    hostname?: GatewayRouteHostnameMatch;
+    /**
+     * The gateway route metadata to be matched on.
+     */
+    metadata?: GrpcGatewayRouteMetadataList;
+    /**
      * The fully qualified domain name for the service to match from the request.
      */
     serviceName?: ServiceName;
+  }
+  export interface GrpcGatewayRouteMetadata {
+    /**
+     * Specify True to match anything except the match criteria. The default value is False.
+     */
+    invert?: Boolean;
+    /**
+     * The criteria for determining a metadata match.
+     */
+    match?: GrpcMetadataMatchMethod;
+    /**
+     * A name for the gateway route metadata.
+     */
+    name: HeaderName;
+  }
+  export type GrpcGatewayRouteMetadataList = GrpcGatewayRouteMetadata[];
+  export interface GrpcGatewayRouteRewrite {
+    /**
+     * The host name of the gateway route to rewrite.
+     */
+    hostname?: GatewayRouteHostnameRewrite;
+  }
+  export interface GrpcMetadataMatchMethod {
+    /**
+     * The exact method header to be matched on.
+     */
+    exact?: HeaderMatch;
+    /**
+     * The specified beginning characters of the method header to be matched on.
+     */
+    prefix?: HeaderMatch;
+    range?: MatchRange;
+    /**
+     * The regex used to match the method header.
+     */
+    regex?: HeaderMatch;
+    /**
+     * The specified ending characters of the method header to match on.
+     */
+    suffix?: HeaderMatch;
   }
   export interface GrpcRetryPolicy {
     /**
@@ -1235,17 +1318,107 @@ declare namespace AppMesh {
   }
   export interface HttpGatewayRouteAction {
     /**
+     * The gateway route action to rewrite.
+     */
+    rewrite?: HttpGatewayRouteRewrite;
+    /**
      * An object that represents the target that traffic is routed to when a request matches the gateway route.
      */
     target: GatewayRouteTarget;
   }
+  export interface HttpGatewayRouteHeader {
+    /**
+     * Specify True to match anything except the match criteria. The default value is False.
+     */
+    invert?: Boolean;
+    match?: HeaderMatchMethod;
+    /**
+     * A name for the HTTP header in the gateway route that will be matched on.
+     */
+    name: HeaderName;
+  }
+  export type HttpGatewayRouteHeaders = HttpGatewayRouteHeader[];
   export interface HttpGatewayRouteMatch {
+    /**
+     * The client request headers to match on.
+     */
+    headers?: HttpGatewayRouteHeaders;
+    /**
+     * The host name to match on.
+     */
+    hostname?: GatewayRouteHostnameMatch;
+    /**
+     * The method to match on.
+     */
+    method?: HttpMethod;
+    /**
+     * The path to match on.
+     */
+    path?: HttpPathMatch;
     /**
      * Specifies the path to match requests with. This parameter must always start with /, which by itself matches all requests to the virtual service name. You can also match for path-based routing of requests. For example, if your virtual service name is my-service.local and you want the route to match requests to my-service.local/metrics, your prefix should be /metrics.
      */
-    prefix: String;
+    prefix?: String;
+    /**
+     * The query parameter to match on.
+     */
+    queryParameters?: HttpQueryParameters;
+  }
+  export interface HttpGatewayRoutePathRewrite {
+    /**
+     * The exact path to rewrite.
+     */
+    exact?: HttpPathExact;
+  }
+  export type HttpGatewayRoutePrefix = string;
+  export interface HttpGatewayRoutePrefixRewrite {
+    /**
+     * The default prefix used to replace the incoming route prefix when rewritten.
+     */
+    defaultPrefix?: DefaultGatewayRouteRewrite;
+    /**
+     * The value used to replace the incoming route prefix when rewritten.
+     */
+    value?: HttpGatewayRoutePrefix;
+  }
+  export interface HttpGatewayRouteRewrite {
+    /**
+     * The host name to rewrite.
+     */
+    hostname?: GatewayRouteHostnameRewrite;
+    /**
+     * The path to rewrite.
+     */
+    path?: HttpGatewayRoutePathRewrite;
+    /**
+     * The specified beginning characters to rewrite.
+     */
+    prefix?: HttpGatewayRoutePrefixRewrite;
   }
   export type HttpMethod = "GET"|"HEAD"|"POST"|"PUT"|"DELETE"|"CONNECT"|"OPTIONS"|"TRACE"|"PATCH"|string;
+  export type HttpPathExact = string;
+  export interface HttpPathMatch {
+    /**
+     * The exact path to match on.
+     */
+    exact?: HttpPathExact;
+    /**
+     * The regex used to match the path.
+     */
+    regex?: HttpPathRegex;
+  }
+  export type HttpPathRegex = string;
+  export interface HttpQueryParameter {
+    /**
+     * The query parameter to match on.
+     */
+    match?: QueryParameterMatch;
+    /**
+     * A name for the query parameter that will be matched on.
+     */
+    name: QueryParameterName;
+  }
+  export type HttpQueryParameters = HttpQueryParameter[];
   export interface HttpRetryPolicy {
     /**
      * Specify at least one of the following values.    server-error – HTTP status codes 500, 501, 502, 503, 504, 505, 506, 507, 508, 510, and 511    gateway-error – HTTP status codes 502, 503, and 504    client-error – HTTP status code 409    stream-error – Retry on refused stream  
@@ -1307,7 +1480,7 @@ declare namespace AppMesh {
   export type HttpRouteHeaders = HttpRouteHeader[];
   export interface HttpRouteMatch {
     /**
-     * An object that represents the client request headers to match on.
+     * The client request headers to match on.
      */
     headers?: HttpRouteHeaders;
     /**
@@ -1315,11 +1488,19 @@ declare namespace AppMesh {
      */
     method?: HttpMethod;
     /**
+     * The client request path to match on.
+     */
+    path?: HttpPathMatch;
+    /**
      * Specifies the path to match requests with. This parameter must always start with /, which by itself matches all requests to the virtual service name. You can also match for path-based routing of requests. For example, if your virtual service name is my-service.local and you want the route to match requests to my-service.local/metrics, your prefix should be /metrics.
      */
-    prefix: String;
+    prefix?: String;
     /**
-     * The client request scheme to match on. Specify only one.
+     * The client request query parameters to match on.
+     */
+    queryParameters?: HttpQueryParameters;
+    /**
+     * The client request scheme to match on. Specify only one. Applicable only for HTTP2 routes.
      */
     scheme?: HttpScheme;
   }
@@ -1588,6 +1769,9 @@ declare namespace AppMesh {
     tls?: ListenerTls;
   }
   export interface ListenerTimeout {
+    /**
+     * An object that represents types of timeouts. 
+     */
     grpc?: GrpcTimeout;
     /**
      * An object that represents types of timeouts. 
@@ -1664,6 +1848,9 @@ declare namespace AppMesh {
     trust: ListenerTlsValidationContextTrust;
   }
   export interface ListenerTlsValidationContextTrust {
+    /**
+     * An object that represents a Transport Layer Security (TLS) validation context trust for a local file.
+     */
     file?: TlsValidationContextFileTrust;
     /**
      * A reference to an object that represents a listener's Transport Layer Security (TLS) Secret Discovery Service validation context trust.
@@ -1789,6 +1976,13 @@ declare namespace AppMesh {
   export type PortNumber = number;
   export type PortProtocol = "http"|"tcp"|"http2"|"grpc"|string;
   export type PortSet = PortNumber[];
+  export interface QueryParameterMatch {
+    /**
+     * The exact query parameter to match on.
+     */
+    exact?: String;
+  }
+  export type QueryParameterName = string;
   export interface ResourceMetadata {
     /**
      * The full Amazon Resource Name (ARN) for the resource.
@@ -1918,7 +2112,7 @@ declare namespace AppMesh {
   export type SdsSecretName = string;
   export interface ServiceDiscovery {
     /**
-     * Specifies any AWS Cloud Map information for the virtual node.
+     * Specifies any Cloud Map information for the virtual node.
      */
     awsCloudMap?: AwsCloudMapServiceDiscovery;
     /**
@@ -1942,6 +2136,7 @@ declare namespace AppMesh {
      */
     match: SubjectAlternativeNameMatchers;
   }
+  export type SuffixHostname = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagList = TagRef[];
@@ -2024,7 +2219,7 @@ declare namespace AppMesh {
   }
   export interface TlsValidationContextTrust {
     /**
-     * A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.
+     * A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager certificate.
      */
     acm?: TlsValidationContextAcmTrust;
     /**
@@ -2279,6 +2474,9 @@ declare namespace AppMesh {
     validation: VirtualGatewayTlsValidationContext;
   }
   export interface VirtualGatewayClientTlsCertificate {
+    /**
+     * An object that represents a local file certificate. The certificate must meet specific requirements and you must have proxy authorization enabled. For more information, see  Transport Layer Security (TLS) .
+     */
     file?: VirtualGatewayListenerTlsFileCertificate;
     /**
      * A reference to an object that represents a virtual gateway's client's Secret Discovery Service certificate.
@@ -2420,7 +2618,7 @@ declare namespace AppMesh {
   }
   export interface VirtualGatewayListenerTlsCertificate {
     /**
-     * A reference to an object that represents an AWS Certicate Manager (ACM) certificate.
+     * A reference to an object that represents an Certificate Manager certificate.
      */
     acm?: VirtualGatewayListenerTlsAcmCertificate;
     /**
@@ -2460,6 +2658,9 @@ declare namespace AppMesh {
     trust: VirtualGatewayListenerTlsValidationContextTrust;
   }
   export interface VirtualGatewayListenerTlsValidationContextTrust {
+    /**
+     * An object that represents a Transport Layer Security (TLS) validation context trust for a local file.
+     */
     file?: VirtualGatewayTlsValidationContextFileTrust;
     /**
      * A reference to an object that represents a virtual gateway's listener's Transport Layer Security (TLS) Secret Discovery Service validation context trust.
@@ -2567,7 +2768,7 @@ declare namespace AppMesh {
   }
   export interface VirtualGatewayTlsValidationContextTrust {
     /**
-     * A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an AWS Certicate Manager (ACM) certificate.
+     * A reference to an object that represents a Transport Layer Security (TLS) validation context trust for an Certificate Manager certificate.
      */
     acm?: VirtualGatewayTlsValidationContextAcmTrust;
     /**

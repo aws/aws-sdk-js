@@ -12,11 +12,11 @@ declare class CodeGuruReviewer extends Service {
   constructor(options?: CodeGuruReviewer.Types.ClientConfiguration)
   config: Config & CodeGuruReviewer.Types.ClientConfiguration;
   /**
-   *  Use to associate an AWS CodeCommit repository or a repostory managed by AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see Recommendations in Amazon CodeGuru Reviewer in the Amazon CodeGuru Reviewer User Guide.  If you associate a CodeCommit repository, it must be in the same AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured. Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar Connections to connect to CodeGuru Reviewer. For more information, see Connect to a repository source provider in the Amazon CodeGuru Reviewer User Guide.    You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see Getting started with CodeGuru Reviewer in the CodeGuru Reviewer User Guide.  
+   *  Use to associate an AWS CodeCommit repository or a repostory managed by AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see Recommendations in Amazon CodeGuru Reviewer in the Amazon CodeGuru Reviewer User Guide.  If you associate a CodeCommit repository, it must be in the same AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured. Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar Connections to connect to CodeGuru Reviewer. For more information, see Associate a repository in the Amazon CodeGuru Reviewer User Guide.    You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see Getting started with CodeGuru Reviewer in the CodeGuru Reviewer User Guide.  
    */
   associateRepository(params: CodeGuruReviewer.Types.AssociateRepositoryRequest, callback?: (err: AWSError, data: CodeGuruReviewer.Types.AssociateRepositoryResponse) => void): Request<CodeGuruReviewer.Types.AssociateRepositoryResponse, AWSError>;
   /**
-   *  Use to associate an AWS CodeCommit repository or a repostory managed by AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see Recommendations in Amazon CodeGuru Reviewer in the Amazon CodeGuru Reviewer User Guide.  If you associate a CodeCommit repository, it must be in the same AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured. Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar Connections to connect to CodeGuru Reviewer. For more information, see Connect to a repository source provider in the Amazon CodeGuru Reviewer User Guide.    You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see Getting started with CodeGuru Reviewer in the CodeGuru Reviewer User Guide.  
+   *  Use to associate an AWS CodeCommit repository or a repostory managed by AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see Recommendations in Amazon CodeGuru Reviewer in the Amazon CodeGuru Reviewer User Guide.  If you associate a CodeCommit repository, it must be in the same AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured. Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar Connections to connect to CodeGuru Reviewer. For more information, see Associate a repository in the Amazon CodeGuru Reviewer User Guide.    You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see Getting started with CodeGuru Reviewer in the CodeGuru Reviewer User Guide.  
    */
   associateRepository(callback?: (err: AWSError, data: CodeGuruReviewer.Types.AssociateRepositoryResponse) => void): Request<CodeGuruReviewer.Types.AssociateRepositoryResponse, AWSError>;
   /**
@@ -139,6 +139,10 @@ declare namespace CodeGuruReviewer {
      *  An array of key-value pairs used to tag an associated repository. A tag is a custom attribute label with two parts:    A tag key (for example, CostCenter, Environment, Project, or Secret). Tag keys are case sensitive.   An optional field known as a tag value (for example, 111122223333, Production, or a team name). Omitting the tag value is the same as using an empty string. Like tag keys, tag values are case sensitive.  
      */
     Tags?: TagMap;
+    /**
+     * A KMSKeyDetails object that contains:   The encryption option for this repository association. It is either owned by AWS Key Management Service (KMS) (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).   The ID of the AWS KMS key that is associated with this respository association.  
+     */
+    KMSKeyDetails?: KMSKeyDetails;
   }
   export interface AssociateRepositoryResponse {
     /**
@@ -268,7 +272,7 @@ declare namespace CodeGuruReviewer {
   }
   export interface CodeReviewType {
     /**
-     *  A code review that analyzes all code under a specified branch in an associated respository. The assocated repository is specified using its ARN in  CreateCodeReview . 
+     *  A code review that analyzes all code under a specified branch in an associated repository. The associated repository is specified using its ARN in  CreateCodeReview . 
      */
     RepositoryAnalysis: RepositoryAnalysis;
   }
@@ -369,10 +373,22 @@ declare namespace CodeGuruReviewer {
      */
     Tags?: TagMap;
   }
+  export type EncryptionOption = "AWS_OWNED_CMK"|"CUSTOMER_MANAGED_CMK"|string;
   export type FilePath = string;
   export type FindingsCount = number;
   export type JobState = "Completed"|"Pending"|"Failed"|"Deleting"|string;
   export type JobStates = JobState[];
+  export interface KMSKeyDetails {
+    /**
+     * The ID of the AWS KMS key that is associated with a respository association.
+     */
+    KMSKeyId?: KMSKeyId;
+    /**
+     * The encryption option for a repository association. It is either owned by AWS Key Management Service (KMS) (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).
+     */
+    EncryptionOption?: EncryptionOption;
+  }
+  export type KMSKeyId = string;
   export type LineNumber = number;
   export type ListCodeReviewsMaxResults = number;
   export interface ListCodeReviewsRequest {
@@ -690,6 +706,10 @@ declare namespace CodeGuruReviewer {
      * The time, in milliseconds since the epoch, when the repository association was created.
      */
     CreatedTimeStamp?: TimeStamp;
+    /**
+     * A KMSKeyDetails object that contains:   The encryption option for this repository association. It is either owned by AWS Key Management Service (KMS) (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).   The ID of the AWS KMS key that is associated with this respository association.  
+     */
+    KMSKeyDetails?: KMSKeyDetails;
   }
   export type RepositoryAssociationState = "Associated"|"Associating"|"Failed"|"Disassociating"|"Disassociated"|string;
   export type RepositoryAssociationStates = RepositoryAssociationState[];

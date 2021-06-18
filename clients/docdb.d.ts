@@ -13,6 +13,14 @@ declare class DocDB extends Service {
   constructor(options?: DocDB.Types.ClientConfiguration)
   config: Config & DocDB.Types.ClientConfiguration;
   /**
+   * Adds a source identifier to an existing event notification subscription.
+   */
+  addSourceIdentifierToSubscription(params: DocDB.Types.AddSourceIdentifierToSubscriptionMessage, callback?: (err: AWSError, data: DocDB.Types.AddSourceIdentifierToSubscriptionResult) => void): Request<DocDB.Types.AddSourceIdentifierToSubscriptionResult, AWSError>;
+  /**
+   * Adds a source identifier to an existing event notification subscription.
+   */
+  addSourceIdentifierToSubscription(callback?: (err: AWSError, data: DocDB.Types.AddSourceIdentifierToSubscriptionResult) => void): Request<DocDB.Types.AddSourceIdentifierToSubscriptionResult, AWSError>;
+  /**
    * Adds metadata tags to an Amazon DocumentDB resource. You can use these tags with cost allocation reporting to track costs that are associated with Amazon DocumentDB resources. or in a Condition statement in an AWS Identity and Access Management (IAM) policy for Amazon DocumentDB.
    */
   addTagsToResource(params: DocDB.Types.AddTagsToResourceMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -85,6 +93,22 @@ declare class DocDB extends Service {
    */
   createDBSubnetGroup(callback?: (err: AWSError, data: DocDB.Types.CreateDBSubnetGroupResult) => void): Request<DocDB.Types.CreateDBSubnetGroupResult, AWSError>;
   /**
+   * Creates an Amazon DocumentDB event notification subscription. This action requires a topic Amazon Resource Name (ARN) created by using the Amazon DocumentDB console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the Amazon SNS console. You can specify the type of source (SourceType) that you want to be notified of. You can also provide a list of Amazon DocumentDB sources (SourceIds) that trigger the events, and you can provide a list of event categories (EventCategories) for events that you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup. If you specify both the SourceType and SourceIds (such as SourceType = db-instance and SourceIdentifier = myDBInstance1), you are notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you receive notice of the events for that source type for all your Amazon DocumentDB sources. If you do not specify either the SourceType or the SourceIdentifier, you are notified of events generated from all Amazon DocumentDB sources belonging to your customer account.
+   */
+  createEventSubscription(params: DocDB.Types.CreateEventSubscriptionMessage, callback?: (err: AWSError, data: DocDB.Types.CreateEventSubscriptionResult) => void): Request<DocDB.Types.CreateEventSubscriptionResult, AWSError>;
+  /**
+   * Creates an Amazon DocumentDB event notification subscription. This action requires a topic Amazon Resource Name (ARN) created by using the Amazon DocumentDB console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the Amazon SNS console. You can specify the type of source (SourceType) that you want to be notified of. You can also provide a list of Amazon DocumentDB sources (SourceIds) that trigger the events, and you can provide a list of event categories (EventCategories) for events that you want to be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and EventCategories = Availability, Backup. If you specify both the SourceType and SourceIds (such as SourceType = db-instance and SourceIdentifier = myDBInstance1), you are notified of all the db-instance events for the specified source. If you specify a SourceType but do not specify a SourceIdentifier, you receive notice of the events for that source type for all your Amazon DocumentDB sources. If you do not specify either the SourceType or the SourceIdentifier, you are notified of events generated from all Amazon DocumentDB sources belonging to your customer account.
+   */
+  createEventSubscription(callback?: (err: AWSError, data: DocDB.Types.CreateEventSubscriptionResult) => void): Request<DocDB.Types.CreateEventSubscriptionResult, AWSError>;
+  /**
+   * Creates an Amazon DocumentDB global cluster that can span multiple multiple AWS Regions. The global cluster contains one primary cluster with read-write capability, and up-to give read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.  You can create a global cluster that is initially empty, and then add a primary and a secondary to it. Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster.   This action only applies to Amazon DocumentDB clusters. 
+   */
+  createGlobalCluster(params: DocDB.Types.CreateGlobalClusterMessage, callback?: (err: AWSError, data: DocDB.Types.CreateGlobalClusterResult) => void): Request<DocDB.Types.CreateGlobalClusterResult, AWSError>;
+  /**
+   * Creates an Amazon DocumentDB global cluster that can span multiple multiple AWS Regions. The global cluster contains one primary cluster with read-write capability, and up-to give read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.  You can create a global cluster that is initially empty, and then add a primary and a secondary to it. Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster.   This action only applies to Amazon DocumentDB clusters. 
+   */
+  createGlobalCluster(callback?: (err: AWSError, data: DocDB.Types.CreateGlobalClusterResult) => void): Request<DocDB.Types.CreateGlobalClusterResult, AWSError>;
+  /**
    * Deletes a previously provisioned cluster. When you delete a cluster, all automated backups for that cluster are deleted and can't be recovered. Manual DB cluster snapshots of the specified cluster are not deleted. 
    */
   deleteDBCluster(params: DocDB.Types.DeleteDBClusterMessage, callback?: (err: AWSError, data: DocDB.Types.DeleteDBClusterResult) => void): Request<DocDB.Types.DeleteDBClusterResult, AWSError>;
@@ -124,6 +148,22 @@ declare class DocDB extends Service {
    * Deletes a subnet group.  The specified database subnet group must not be associated with any DB instances. 
    */
   deleteDBSubnetGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an Amazon DocumentDB event notification subscription.
+   */
+  deleteEventSubscription(params: DocDB.Types.DeleteEventSubscriptionMessage, callback?: (err: AWSError, data: DocDB.Types.DeleteEventSubscriptionResult) => void): Request<DocDB.Types.DeleteEventSubscriptionResult, AWSError>;
+  /**
+   * Deletes an Amazon DocumentDB event notification subscription.
+   */
+  deleteEventSubscription(callback?: (err: AWSError, data: DocDB.Types.DeleteEventSubscriptionResult) => void): Request<DocDB.Types.DeleteEventSubscriptionResult, AWSError>;
+  /**
+   * Deletes a global cluster. The primary and secondary clusters must already be detached or deleted before attempting to delete a global cluster.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  deleteGlobalCluster(params: DocDB.Types.DeleteGlobalClusterMessage, callback?: (err: AWSError, data: DocDB.Types.DeleteGlobalClusterResult) => void): Request<DocDB.Types.DeleteGlobalClusterResult, AWSError>;
+  /**
+   * Deletes a global cluster. The primary and secondary clusters must already be detached or deleted before attempting to delete a global cluster.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  deleteGlobalCluster(callback?: (err: AWSError, data: DocDB.Types.DeleteGlobalClusterResult) => void): Request<DocDB.Types.DeleteGlobalClusterResult, AWSError>;
   /**
    * Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account.
    */
@@ -213,6 +253,14 @@ declare class DocDB extends Service {
    */
   describeEventCategories(callback?: (err: AWSError, data: DocDB.Types.EventCategoriesMessage) => void): Request<DocDB.Types.EventCategoriesMessage, AWSError>;
   /**
+   * Lists all the subscription descriptions for a customer account. The description for a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status. If you specify a SubscriptionName, lists the description for that subscription.
+   */
+  describeEventSubscriptions(params: DocDB.Types.DescribeEventSubscriptionsMessage, callback?: (err: AWSError, data: DocDB.Types.EventSubscriptionsMessage) => void): Request<DocDB.Types.EventSubscriptionsMessage, AWSError>;
+  /**
+   * Lists all the subscription descriptions for a customer account. The description for a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status. If you specify a SubscriptionName, lists the description for that subscription.
+   */
+  describeEventSubscriptions(callback?: (err: AWSError, data: DocDB.Types.EventSubscriptionsMessage) => void): Request<DocDB.Types.EventSubscriptionsMessage, AWSError>;
+  /**
    * Returns events related to instances, security groups, snapshots, and DB parameter groups for the past 14 days. You can obtain events specific to a particular DB instance, security group, snapshot, or parameter group by providing the name as a parameter. By default, the events of the past hour are returned.
    */
   describeEvents(params: DocDB.Types.DescribeEventsMessage, callback?: (err: AWSError, data: DocDB.Types.EventsMessage) => void): Request<DocDB.Types.EventsMessage, AWSError>;
@@ -220,6 +268,14 @@ declare class DocDB extends Service {
    * Returns events related to instances, security groups, snapshots, and DB parameter groups for the past 14 days. You can obtain events specific to a particular DB instance, security group, snapshot, or parameter group by providing the name as a parameter. By default, the events of the past hour are returned.
    */
   describeEvents(callback?: (err: AWSError, data: DocDB.Types.EventsMessage) => void): Request<DocDB.Types.EventsMessage, AWSError>;
+  /**
+   * Returns information about Amazon DocumentDB global clusters. This API supports pagination.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  describeGlobalClusters(params: DocDB.Types.DescribeGlobalClustersMessage, callback?: (err: AWSError, data: DocDB.Types.GlobalClustersMessage) => void): Request<DocDB.Types.GlobalClustersMessage, AWSError>;
+  /**
+   * Returns information about Amazon DocumentDB global clusters. This API supports pagination.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  describeGlobalClusters(callback?: (err: AWSError, data: DocDB.Types.GlobalClustersMessage) => void): Request<DocDB.Types.GlobalClustersMessage, AWSError>;
   /**
    * Returns a list of orderable instance options for the specified engine.
    */
@@ -293,6 +349,22 @@ declare class DocDB extends Service {
    */
   modifyDBSubnetGroup(callback?: (err: AWSError, data: DocDB.Types.ModifyDBSubnetGroupResult) => void): Request<DocDB.Types.ModifyDBSubnetGroupResult, AWSError>;
   /**
+   * Modifies an existing Amazon DocumentDB event notification subscription.
+   */
+  modifyEventSubscription(params: DocDB.Types.ModifyEventSubscriptionMessage, callback?: (err: AWSError, data: DocDB.Types.ModifyEventSubscriptionResult) => void): Request<DocDB.Types.ModifyEventSubscriptionResult, AWSError>;
+  /**
+   * Modifies an existing Amazon DocumentDB event notification subscription.
+   */
+  modifyEventSubscription(callback?: (err: AWSError, data: DocDB.Types.ModifyEventSubscriptionResult) => void): Request<DocDB.Types.ModifyEventSubscriptionResult, AWSError>;
+  /**
+   * Modify a setting for an Amazon DocumentDB global cluster. You can change one or more configuration parameters (for example: deletion protection), or the global cluster identifier by specifying these parameters and the new values in the request.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  modifyGlobalCluster(params: DocDB.Types.ModifyGlobalClusterMessage, callback?: (err: AWSError, data: DocDB.Types.ModifyGlobalClusterResult) => void): Request<DocDB.Types.ModifyGlobalClusterResult, AWSError>;
+  /**
+   * Modify a setting for an Amazon DocumentDB global cluster. You can change one or more configuration parameters (for example: deletion protection), or the global cluster identifier by specifying these parameters and the new values in the request.  This action only applies to Amazon DocumentDB clusters. 
+   */
+  modifyGlobalCluster(callback?: (err: AWSError, data: DocDB.Types.ModifyGlobalClusterResult) => void): Request<DocDB.Types.ModifyGlobalClusterResult, AWSError>;
+  /**
    * You might need to reboot your instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the cluster parameter group that is associated with the instance, you must reboot the instance for the changes to take effect.  Rebooting an instance restarts the database engine service. Rebooting an instance results in a momentary outage, during which the instance status is set to rebooting. 
    */
   rebootDBInstance(params: DocDB.Types.RebootDBInstanceMessage, callback?: (err: AWSError, data: DocDB.Types.RebootDBInstanceResult) => void): Request<DocDB.Types.RebootDBInstanceResult, AWSError>;
@@ -300,6 +372,22 @@ declare class DocDB extends Service {
    * You might need to reboot your instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the cluster parameter group that is associated with the instance, you must reboot the instance for the changes to take effect.  Rebooting an instance restarts the database engine service. Rebooting an instance results in a momentary outage, during which the instance status is set to rebooting. 
    */
   rebootDBInstance(callback?: (err: AWSError, data: DocDB.Types.RebootDBInstanceResult) => void): Request<DocDB.Types.RebootDBInstanceResult, AWSError>;
+  /**
+   * Detaches an Amazon DocumentDB secondary cluster from a global cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary in a different region.   This action only applies to Amazon DocumentDB clusters. 
+   */
+  removeFromGlobalCluster(params: DocDB.Types.RemoveFromGlobalClusterMessage, callback?: (err: AWSError, data: DocDB.Types.RemoveFromGlobalClusterResult) => void): Request<DocDB.Types.RemoveFromGlobalClusterResult, AWSError>;
+  /**
+   * Detaches an Amazon DocumentDB secondary cluster from a global cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary in a different region.   This action only applies to Amazon DocumentDB clusters. 
+   */
+  removeFromGlobalCluster(callback?: (err: AWSError, data: DocDB.Types.RemoveFromGlobalClusterResult) => void): Request<DocDB.Types.RemoveFromGlobalClusterResult, AWSError>;
+  /**
+   * Removes a source identifier from an existing Amazon DocumentDB event notification subscription.
+   */
+  removeSourceIdentifierFromSubscription(params: DocDB.Types.RemoveSourceIdentifierFromSubscriptionMessage, callback?: (err: AWSError, data: DocDB.Types.RemoveSourceIdentifierFromSubscriptionResult) => void): Request<DocDB.Types.RemoveSourceIdentifierFromSubscriptionResult, AWSError>;
+  /**
+   * Removes a source identifier from an existing Amazon DocumentDB event notification subscription.
+   */
+  removeSourceIdentifierFromSubscription(callback?: (err: AWSError, data: DocDB.Types.RemoveSourceIdentifierFromSubscriptionResult) => void): Request<DocDB.Types.RemoveSourceIdentifierFromSubscriptionResult, AWSError>;
   /**
    * Removes metadata tags from an Amazon DocumentDB resource.
    */
@@ -366,6 +454,19 @@ declare class DocDB extends Service {
   waitFor(state: "dBInstanceDeleted", callback?: (err: AWSError, data: DocDB.Types.DBInstanceMessage) => void): Request<DocDB.Types.DBInstanceMessage, AWSError>;
 }
 declare namespace DocDB {
+  export interface AddSourceIdentifierToSubscriptionMessage {
+    /**
+     * The name of the Amazon DocumentDB event notification subscription that you want to add a source identifier to.
+     */
+    SubscriptionName: String;
+    /**
+     * The identifier of the event source to be added:   If the source type is an instance, a DBInstanceIdentifier must be provided.   If the source type is a security group, a DBSecurityGroupName must be provided.   If the source type is a parameter group, a DBParameterGroupName must be provided.   If the source type is a snapshot, a DBSnapshotIdentifier must be provided.  
+     */
+    SourceIdentifier: String;
+  }
+  export interface AddSourceIdentifierToSubscriptionResult {
+    EventSubscription?: EventSubscription;
+  }
   export interface AddTagsToResourceMessage {
     /**
      * The Amazon DocumentDB resource that the tags are added to. This value is an Amazon Resource Name .
@@ -542,11 +643,11 @@ declare namespace DocDB {
     /**
      * The name of the master user for the cluster. Constraints:   Must be from 1 to 63 letters or numbers.   The first character must be a letter.   Cannot be a reserved word for the chosen database engine.   
      */
-    MasterUsername: String;
+    MasterUsername?: String;
     /**
      * The password for the master database user. This password can contain any printable ASCII character except forward slash (/), double quote ("), or the "at" symbol (@). Constraints: Must contain from 8 to 100 characters.
      */
-    MasterUserPassword: String;
+    MasterUserPassword?: String;
     /**
      * The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter.  The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region.  Constraints:   Must be in the format hh24:mi-hh24:mi.   Must be in Universal Coordinated Time (UTC).   Must not conflict with the preferred maintenance window.    Must be at least 30 minutes.  
      */
@@ -579,6 +680,10 @@ declare namespace DocDB {
      * Specifies whether this cluster can be deleted. If DeletionProtection is enabled, the cluster cannot be deleted unless it is modified and DeletionProtection is disabled. DeletionProtection protects clusters from being accidentally deleted.
      */
     DeletionProtection?: BooleanOptional;
+    /**
+     * The cluster identifier of the new global cluster.
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
   }
   export interface CreateDBClusterParameterGroupMessage {
     /**
@@ -683,6 +788,72 @@ declare namespace DocDB {
   export interface CreateDBSubnetGroupResult {
     DBSubnetGroup?: DBSubnetGroup;
   }
+  export interface CreateEventSubscriptionMessage {
+    /**
+     * The name of the subscription. Constraints: The name must be fewer than 255 characters.
+     */
+    SubscriptionName: String;
+    /**
+     * The Amazon Resource Name (ARN) of the SNS topic created for event notification. Amazon SNS creates the ARN when you create a topic and subscribe to it.
+     */
+    SnsTopicArn: String;
+    /**
+     * The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, you would set this parameter to db-instance. If this value is not specified, all events are returned. Valid values: db-instance, db-cluster, db-parameter-group, db-security-group, db-snapshot, db-cluster-snapshot 
+     */
+    SourceType?: String;
+    /**
+     *  A list of event categories for a SourceType that you want to subscribe to. 
+     */
+    EventCategories?: EventCategoriesList;
+    /**
+     * The list of identifiers of the event sources for which events are returned. If not specified, then all sources are included in the response. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens. Constraints:   If SourceIds are provided, SourceType must also be provided.   If the source type is an instance, a DBInstanceIdentifier must be provided.   If the source type is a security group, a DBSecurityGroupName must be provided.   If the source type is a parameter group, a DBParameterGroupName must be provided.   If the source type is a snapshot, a DBSnapshotIdentifier must be provided.  
+     */
+    SourceIds?: SourceIdsList;
+    /**
+     *  A Boolean value; set to true to activate the subscription, set to false to create the subscription but not active it. 
+     */
+    Enabled?: BooleanOptional;
+    /**
+     * The tags to be assigned to the event subscription.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateEventSubscriptionResult {
+    EventSubscription?: EventSubscription;
+  }
+  export interface CreateGlobalClusterMessage {
+    /**
+     * The cluster identifier of the new global cluster.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) to use as the primary cluster of the global cluster. This parameter is optional.
+     */
+    SourceDBClusterIdentifier?: String;
+    /**
+     * The name of the database engine to be used for this cluster.
+     */
+    Engine?: String;
+    /**
+     * The engine version of the global cluster.
+     */
+    EngineVersion?: String;
+    /**
+     * The deletion protection setting for the new global cluster. The global cluster can't be deleted when deletion protection is enabled. 
+     */
+    DeletionProtection?: BooleanOptional;
+    /**
+     * The name for your database of up to 64 alpha-numeric characters. If you do not provide a name, Amazon DocumentDB will not create a database in the global cluster you are creating.
+     */
+    DatabaseName?: String;
+    /**
+     * The storage encryption setting for the new global cluster. 
+     */
+    StorageEncrypted?: BooleanOptional;
+  }
+  export interface CreateGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface DBCluster {
     /**
      * Provides the list of Amazon EC2 Availability Zones that instances in the cluster can be created in.
@@ -756,6 +927,14 @@ declare namespace DocDB {
      * Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
      */
     PreferredMaintenanceWindow?: String;
+    /**
+     * Contains the identifier of the source cluster if this cluster is a secondary cluster.
+     */
+    ReplicationSourceIdentifier?: String;
+    /**
+     * Contains one or more identifiers of the secondary clusters that are associated with this cluster.
+     */
+    ReadReplicaIdentifiers?: ReadReplicaIdentifierList;
     /**
      * Provides the list of instances that make up the cluster.
      */
@@ -1254,6 +1433,24 @@ declare namespace DocDB {
      */
     DBSubnetGroupName: String;
   }
+  export interface DeleteEventSubscriptionMessage {
+    /**
+     * The name of the Amazon DocumentDB event notification subscription that you want to delete.
+     */
+    SubscriptionName: String;
+  }
+  export interface DeleteEventSubscriptionResult {
+    EventSubscription?: EventSubscription;
+  }
+  export interface DeleteGlobalClusterMessage {
+    /**
+     * The cluster identifier of the global cluster being deleted.
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+  }
+  export interface DeleteGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
   export interface DescribeCertificatesMessage {
     /**
      * The user-supplied certificate identifier. If this parameter is specified, information for only the specified certificate is returned. If this parameter is omitted, a list of up to MaxRecords certificates is returned. This parameter is not case sensitive. Constraints   Must match an existing CertificateIdentifier.  
@@ -1331,7 +1528,7 @@ declare namespace DocDB {
      */
     DBClusterSnapshotIdentifier?: String;
     /**
-     * The type of cluster snapshots to be returned. You can specify one of the following values:    automated - Return all cluster snapshots that Amazon DocumentDB has automatically created for your AWS account.    manual - Return all cluster snapshots that you have manually created for your AWS account.    shared - Return all manual cluster snapshots that have been shared to your AWS account.    public - Return all cluster snapshots that have been marked as public.   If you don't specify a SnapshotType value, then both automated and manual cluster snapshots are returned. You can include shared cluster snapshots with these results by setting the IncludeShared parameter to true. You can include public cluster snapshots with these results by setting the IncludePublic parameter to true. The IncludeShared and IncludePublic parameters don't apply for SnapshotType values of manual or automated. The IncludePublic parameter doesn't apply when SnapshotType is set to shared. The IncludeShared parameter doesn't apply when SnapshotType is set to public.
+     * The type of cluster snapshots to be returned. You can specify one of the following values:    automated - Return all cluster snapshots that Amazon DocumentDB has automatically created for your AWS account.    manual - Return all cluster snapshots that you have manually created for your AWS account.    shared - Return all manual cluster snapshots that have been shared to your AWS account.    public - Return all cluster snapshots that have been marked as public.   If you don't specify a SnapshotType value, then both automated and manual cluster snapshots are returned. You can include shared cluster snapshots with these results by setting the IncludeShared parameter to true. You can include public cluster snapshots with these results by setting theIncludePublic parameter to true. The IncludeShared and IncludePublic parameters don't apply for SnapshotType values of manual or automated. The IncludePublic parameter doesn't apply when SnapshotType is set to shared. The IncludeShared parameter doesn't apply when SnapshotType is set to public.
      */
     SnapshotType?: String;
     /**
@@ -1478,6 +1675,24 @@ declare namespace DocDB {
      */
     Filters?: FilterList;
   }
+  export interface DescribeEventSubscriptionsMessage {
+    /**
+     * The name of the Amazon DocumentDB event notification subscription that you want to describe.
+     */
+    SubscriptionName?: String;
+    /**
+     * This parameter is not currently supported.
+     */
+    Filters?: FilterList;
+    /**
+     *  The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token (marker) is included in the response so that the remaining results can be retrieved. Default: 100 Constraints: Minimum 20, maximum 100.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+  }
   export interface DescribeEventsMessage {
     /**
      * The identifier of the event source for which events are returned. If not specified, then all sources are included in the response. Constraints:   If SourceIdentifier is provided, SourceType must also be provided.   If the source type is DBInstance, a DBInstanceIdentifier must be provided.   If the source type is DBSecurityGroup, a DBSecurityGroupName must be provided.   If the source type is DBParameterGroup, a DBParameterGroupName must be provided.   If the source type is DBSnapshot, a DBSnapshotIdentifier must be provided.   Cannot end with a hyphen or contain two consecutive hyphens.  
@@ -1513,6 +1728,24 @@ declare namespace DocDB {
     MaxRecords?: IntegerOptional;
     /**
      * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+  }
+  export interface DescribeGlobalClustersMessage {
+    /**
+     * The user-supplied cluster identifier. If this parameter is specified, information from only the specific cluster is returned. This parameter isn't case-sensitive.
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * A filter that specifies one or more global DB clusters to describe. Supported filters: db-cluster-id accepts cluster identifiers and cluster Amazon Resource Names (ARNs). The results list will only include information about the clusters identified by these ARNs.
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. 
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous DescribeGlobalClusters request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
      */
     Marker?: String;
   }
@@ -1641,6 +1874,59 @@ declare namespace DocDB {
     EventCategoriesMapList?: EventCategoriesMapList;
   }
   export type EventList = Event[];
+  export interface EventSubscription {
+    /**
+     * The AWS customer account that is associated with the Amazon DocumentDB event notification subscription.
+     */
+    CustomerAwsId?: String;
+    /**
+     * The Amazon DocumentDB event notification subscription ID.
+     */
+    CustSubscriptionId?: String;
+    /**
+     * The topic ARN of the Amazon DocumentDB event notification subscription.
+     */
+    SnsTopicArn?: String;
+    /**
+     * The status of the Amazon DocumentDB event notification subscription. Constraints: Can be one of the following: creating, modifying, deleting, active, no-permission, topic-not-exist  The no-permission status indicates that Amazon DocumentDB no longer has permission to post to the SNS topic. The topic-not-exist status indicates that the topic was deleted after the subscription was created.
+     */
+    Status?: String;
+    /**
+     * The time at which the Amazon DocumentDB event notification subscription was created.
+     */
+    SubscriptionCreationTime?: String;
+    /**
+     * The source type for the Amazon DocumentDB event notification subscription.
+     */
+    SourceType?: String;
+    /**
+     * A list of source IDs for the Amazon DocumentDB event notification subscription.
+     */
+    SourceIdsList?: SourceIdsList;
+    /**
+     * A list of event categories for the Amazon DocumentDB event notification subscription.
+     */
+    EventCategoriesList?: EventCategoriesList;
+    /**
+     * A Boolean value indicating whether the subscription is enabled. A value of true indicates that the subscription is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * The Amazon Resource Name (ARN) for the event subscription.
+     */
+    EventSubscriptionArn?: String;
+  }
+  export type EventSubscriptionsList = EventSubscription[];
+  export interface EventSubscriptionsMessage {
+    /**
+     * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
+     */
+    Marker?: String;
+    /**
+     * A list of event subscriptions.
+     */
+    EventSubscriptionsList?: EventSubscriptionsList;
+  }
   export interface EventsMessage {
     /**
      * An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by MaxRecords.
@@ -1676,6 +1962,75 @@ declare namespace DocDB {
   }
   export type FilterList = Filter[];
   export type FilterValueList = String[];
+  export interface GlobalCluster {
+    /**
+     * Contains a user-supplied global cluster identifier. This identifier is the unique key that identifies a global cluster. 
+     */
+    GlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * The AWS Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS customer master key (CMK) for the cluster is accessed. 
+     */
+    GlobalClusterResourceId?: String;
+    /**
+     * The Amazon Resource Name (ARN) for the global cluster.
+     */
+    GlobalClusterArn?: String;
+    /**
+     * Specifies the current state of this global cluster.
+     */
+    Status?: String;
+    /**
+     * The Amazon DocumentDB database engine used by the global cluster. 
+     */
+    Engine?: String;
+    /**
+     * Indicates the database engine version.
+     */
+    EngineVersion?: String;
+    /**
+     * The default database name within the new global cluster.
+     */
+    DatabaseName?: String;
+    /**
+     * The storage encryption setting for the global cluster.
+     */
+    StorageEncrypted?: BooleanOptional;
+    /**
+     * The deletion protection setting for the new global cluster.
+     */
+    DeletionProtection?: BooleanOptional;
+    /**
+     * The list of cluster IDs for secondary clusters within the global cluster. Currently limited to one item. 
+     */
+    GlobalClusterMembers?: GlobalClusterMemberList;
+  }
+  export type GlobalClusterIdentifier = string;
+  export type GlobalClusterList = GlobalCluster[];
+  export interface GlobalClusterMember {
+    /**
+     * The Amazon Resource Name (ARN) for each Amazon DocumentDB cluster.
+     */
+    DBClusterArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) for each read-only secondary cluster associated with the Aurora global cluster.
+     */
+    Readers?: ReadersArnList;
+    /**
+     *  Specifies whether the Amazon DocumentDB cluster is the primary cluster (that is, has read-write capability) for the Amazon DocumentDB global cluster with which it is associated. 
+     */
+    IsWriter?: Boolean;
+  }
+  export type GlobalClusterMemberList = GlobalClusterMember[];
+  export interface GlobalClustersMessage {
+    /**
+     * 
+     */
+    Marker?: String;
+    /**
+     * 
+     */
+    GlobalClusters?: GlobalClusterList;
+  }
   export type Integer = number;
   export type IntegerOptional = number;
   export type KeyList = String[];
@@ -1736,7 +2091,7 @@ declare namespace DocDB {
      */
     CloudwatchLogsExportConfiguration?: CloudwatchLogsExportConfiguration;
     /**
-     * The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the ApplyImmediately parameter is set to true.
+     * The version number of the database engine to which you want to upgrade. Modifying engine version is not supported on Amazon DocumentDB.
      */
     EngineVersion?: String;
     /**
@@ -1831,6 +2186,48 @@ declare namespace DocDB {
   }
   export interface ModifyDBSubnetGroupResult {
     DBSubnetGroup?: DBSubnetGroup;
+  }
+  export interface ModifyEventSubscriptionMessage {
+    /**
+     * The name of the Amazon DocumentDB event notification subscription.
+     */
+    SubscriptionName: String;
+    /**
+     * The Amazon Resource Name (ARN) of the SNS topic created for event notification. The ARN is created by Amazon SNS when you create a topic and subscribe to it.
+     */
+    SnsTopicArn?: String;
+    /**
+     * The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, set this parameter to db-instance. If this value is not specified, all events are returned. Valid values: db-instance, db-parameter-group, db-security-group, db-snapshot 
+     */
+    SourceType?: String;
+    /**
+     *  A list of event categories for a SourceType that you want to subscribe to.
+     */
+    EventCategories?: EventCategoriesList;
+    /**
+     *  A Boolean value; set to true to activate the subscription. 
+     */
+    Enabled?: BooleanOptional;
+  }
+  export interface ModifyEventSubscriptionResult {
+    EventSubscription?: EventSubscription;
+  }
+  export interface ModifyGlobalClusterMessage {
+    /**
+     * The identifier for the global cluster being modified. This parameter isn't case-sensitive. Constraints:   Must match the identifier of an existing global cluster.  
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The new identifier for a global cluster when you modify a global cluster. This value is stored as a lowercase string.   Must contain from 1 to 63 letters, numbers, or hyphens The first character must be a letter Can't end with a hyphen or contain two consecutive hyphens   Example: my-cluster2 
+     */
+    NewGlobalClusterIdentifier?: GlobalClusterIdentifier;
+    /**
+     * Indicates if the global cluster has deletion protection enabled. The global cluster can't be deleted when deletion protection is enabled. 
+     */
+    DeletionProtection?: BooleanOptional;
+  }
+  export interface ModifyGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
   }
   export interface OrderableDBInstanceOption {
     /**
@@ -2018,6 +2415,8 @@ declare namespace DocDB {
      */
     PendingCloudwatchLogsExports?: PendingCloudwatchLogsExports;
   }
+  export type ReadReplicaIdentifierList = String[];
+  export type ReadersArnList = String[];
   export interface RebootDBInstanceMessage {
     /**
      * The instance identifier. This parameter is stored as a lowercase string. Constraints:   Must match the identifier of an existing DBInstance.  
@@ -2030,6 +2429,32 @@ declare namespace DocDB {
   }
   export interface RebootDBInstanceResult {
     DBInstance?: DBInstance;
+  }
+  export interface RemoveFromGlobalClusterMessage {
+    /**
+     * The cluster identifier to detach from the Amazon DocumentDB global cluster. 
+     */
+    GlobalClusterIdentifier: GlobalClusterIdentifier;
+    /**
+     * The Amazon Resource Name (ARN) identifying the cluster that was detached from the Amazon DocumentDB global cluster. 
+     */
+    DbClusterIdentifier: String;
+  }
+  export interface RemoveFromGlobalClusterResult {
+    GlobalCluster?: GlobalCluster;
+  }
+  export interface RemoveSourceIdentifierFromSubscriptionMessage {
+    /**
+     * The name of the Amazon DocumentDB event notification subscription that you want to remove a source identifier from.
+     */
+    SubscriptionName: String;
+    /**
+     *  The source identifier to be removed from the subscription, such as the instance identifier for an instance, or the name of a security group. 
+     */
+    SourceIdentifier: String;
+  }
+  export interface RemoveSourceIdentifierFromSubscriptionResult {
+    EventSubscription?: EventSubscription;
   }
   export interface RemoveTagsFromResourceMessage {
     /**
@@ -2167,6 +2592,7 @@ declare namespace DocDB {
   export interface RestoreDBClusterToPointInTimeResult {
     DBCluster?: DBCluster;
   }
+  export type SourceIdsList = String[];
   export type SourceType = "db-instance"|"db-parameter-group"|"db-security-group"|"db-snapshot"|"db-cluster"|"db-cluster-snapshot"|string;
   export interface StartDBClusterMessage {
     /**

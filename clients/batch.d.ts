@@ -832,9 +832,43 @@ declare namespace Batch {
   export type DeviceCgroupPermission = "READ"|"WRITE"|"MKNOD"|string;
   export type DeviceCgroupPermissions = DeviceCgroupPermission[];
   export type DevicesList = Device[];
+  export interface EFSAuthorizationConfig {
+    /**
+     * The Amazon EFS access point ID to use. If an access point is specified, the root directory value specified in the EFSVolumeConfiguration must either be omitted or set to / which will enforce the path set on the EFS access point. If an access point is used, transit encryption must be enabled in the EFSVolumeConfiguration. For more information, see Working with Amazon EFS Access Points in the Amazon Elastic File System User Guide.
+     */
+    accessPointId?: String;
+    /**
+     * Whether or not to use the AWS Batch execution IAM role defined in a job definition when mounting the Amazon EFS file system. If enabled, transit encryption must be enabled in the EFSVolumeConfiguration. If this parameter is omitted, the default value of DISABLED is used. For more information, see Using Amazon EFS Access Points in the AWS Batch User Guide. EFS IAM authorization requires that TransitEncryption be ENABLED and that a JobRoleArn is specified.
+     */
+    iam?: EFSAuthorizationConfigIAM;
+  }
+  export type EFSAuthorizationConfigIAM = "ENABLED"|"DISABLED"|string;
+  export type EFSTransitEncryption = "ENABLED"|"DISABLED"|string;
+  export interface EFSVolumeConfiguration {
+    /**
+     * The Amazon EFS file system ID to use.
+     */
+    fileSystemId: String;
+    /**
+     * The directory within the Amazon EFS file system to mount as the root directory inside the host. If this parameter is omitted, the root of the Amazon EFS volume will be used. Specifying / will have the same effect as omitting this parameter.  If an EFS access point is specified in the authorizationConfig, the root directory parameter must either be omitted or set to / which will enforce the path set on the Amazon EFS access point. 
+     */
+    rootDirectory?: String;
+    /**
+     * Whether or not to enable encryption for Amazon EFS data in transit between the Amazon ECS host and the Amazon EFS server. Transit encryption must be enabled if Amazon EFS IAM authorization is used. If this parameter is omitted, the default value of DISABLED is used. For more information, see Encrypting data in transit in the Amazon Elastic File System User Guide.
+     */
+    transitEncryption?: EFSTransitEncryption;
+    /**
+     * The port to use when sending encrypted data between the Amazon ECS host and the Amazon EFS server. If you do not specify a transit encryption port, it will use the port selection strategy that the Amazon EFS mount helper uses. For more information, see EFS Mount Helper in the Amazon Elastic File System User Guide.
+     */
+    transitEncryptionPort?: Integer;
+    /**
+     * The authorization configuration details for the Amazon EFS file system.
+     */
+    authorizationConfig?: EFSAuthorizationConfig;
+  }
   export interface Ec2Configuration {
     /**
-     * The image type to match with the instance type to select an AMI. If the imageIdOverride parameter isn't specified, then a recent Amazon ECS-optimized AMI is used.  ECS_AL2   Amazon Linux 2− Default for all AWS Graviton-based instance families (for example, C6g, M6g, R6g, and T4g) and can be used for all non-GPU instance types.  ECS_AL2_NVIDIA   Amazon Linux 2 (GPU)−Default for all GPU instance families (for example P4 and G4) and can be used for all non-AWS Graviton-based instance types.  ECS_AL1   Amazon Linux−Default for all non-GPU, non-AWS Graviton instance families. Amazon Linux is reaching the end-of-life of standard support. For more information, see Amazon Linux AMI.  
+     * The image type to match with the instance type to select an AMI. If the imageIdOverride parameter isn't specified, then a recent Amazon ECS-optimized AMI (ECS_AL1) is used. Starting on March 31, 2021, this default will be changing to ECS_AL2 (Amazon Linux 2).  ECS_AL2   Amazon Linux 2− Default for all AWS Graviton-based instance families (for example, C6g, M6g, R6g, and T4g) and can be used for all non-GPU instance types.  ECS_AL2_NVIDIA   Amazon Linux 2 (GPU)−Default for all GPU instance families (for example P4 and G4) and can be used for all non-AWS Graviton-based instance types.  ECS_AL1   Amazon Linux−Default for all non-GPU, non-AWS Graviton instance families. Amazon Linux is reaching the end-of-life of standard support. For more information, see Amazon Linux AMI.  
      */
     imageType: ImageType;
     /**
@@ -1147,7 +1181,7 @@ declare namespace Batch {
      */
     launchTemplateName?: String;
     /**
-     * The version number of the launch template, $Latest, or $Default. If the value is $Latest, the latest version of the launch template is used. If the value is $Default, the default version of the launch template is used. Default: $Default.
+     * The version number of the launch template, $Latest, or $Default. If the value is $Latest, the latest version of the launch template is used. If the value is $Default, the default version of the launch template is used.  After the compute environment is created, the launch template version used will not be changed, even if the $Default or $Latest version for the launch template is updated. To use a new launch template version, create a new compute environment, add the new compute environment to the existing job queue, remove the old compute environment from the job queue, and delete the old compute environment.  Default: $Default.
      */
     version?: String;
   }
@@ -1592,7 +1626,7 @@ declare namespace Batch {
      */
     computeResources?: ComputeResourceUpdate;
     /**
-     * The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf. For more information, see AWS Batch service IAM role in the AWS Batch User Guide. If your specified role has a path other than /, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.  Depending on how you created your AWS Batch service role, its ARN might contain the service-role path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN doesn't use the service-role path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments. 
+     * The full Amazon Resource Name (ARN) of the IAM role that allows AWS Batch to make calls to other AWS services on your behalf. For more information, see AWS Batch service IAM role in the AWS Batch User Guide.  If the compute environment has a service-linked role, it cannot be changed to use a regular IAM role. If the compute environment has a regular IAM role, it cannot be changed to use a service-linked role.  If your specified role has a path other than /, then you must either specify the full role ARN (this is recommended) or prefix the role name with the path.  Depending on how you created your AWS Batch service role, its ARN might contain the service-role path prefix. When you only specify the name of the service role, AWS Batch assumes that your ARN doesn't use the service-role path prefix. Because of this, we recommend that you specify the full ARN of your service role when you create compute environments. 
      */
     serviceRole?: String;
   }
@@ -1643,6 +1677,10 @@ declare namespace Batch {
      * The name of the volume. Up to 255 letters (uppercase and lowercase), numbers, hyphens, and underscores are allowed. This name is referenced in the sourceVolume parameter of container definition mountPoints.
      */
     name?: String;
+    /**
+     * This parameter is specified when you are using an Amazon Elastic File System file system for job storage. Jobs running on Fargate resources must specify a platformVersion of at least 1.4.0.
+     */
+    efsVolumeConfiguration?: EFSVolumeConfiguration;
   }
   export type Volumes = Volume[];
   /**

@@ -2763,7 +2763,10 @@
           "shape": "Tags",
           "documentation": "Tag(s) to add to the new resource."
         }
-      }
+      },
+      "required": [
+        "Name"
+      ]
     },
     "CreateGroupResponse": {
       "type": "structure",

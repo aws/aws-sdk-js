@@ -12,6 +12,30 @@ declare class IoTEventsData extends Service {
   constructor(options?: IoTEventsData.Types.ClientConfiguration)
   config: Config & IoTEventsData.Types.ClientConfiguration;
   /**
+   * Acknowledges one or more alarms. The alarms change to the ACKNOWLEDGED state after you acknowledge them.
+   */
+  batchAcknowledgeAlarm(params: IoTEventsData.Types.BatchAcknowledgeAlarmRequest, callback?: (err: AWSError, data: IoTEventsData.Types.BatchAcknowledgeAlarmResponse) => void): Request<IoTEventsData.Types.BatchAcknowledgeAlarmResponse, AWSError>;
+  /**
+   * Acknowledges one or more alarms. The alarms change to the ACKNOWLEDGED state after you acknowledge them.
+   */
+  batchAcknowledgeAlarm(callback?: (err: AWSError, data: IoTEventsData.Types.BatchAcknowledgeAlarmResponse) => void): Request<IoTEventsData.Types.BatchAcknowledgeAlarmResponse, AWSError>;
+  /**
+   * Disables one or more alarms. The alarms change to the DISABLED state after you disable them.
+   */
+  batchDisableAlarm(params: IoTEventsData.Types.BatchDisableAlarmRequest, callback?: (err: AWSError, data: IoTEventsData.Types.BatchDisableAlarmResponse) => void): Request<IoTEventsData.Types.BatchDisableAlarmResponse, AWSError>;
+  /**
+   * Disables one or more alarms. The alarms change to the DISABLED state after you disable them.
+   */
+  batchDisableAlarm(callback?: (err: AWSError, data: IoTEventsData.Types.BatchDisableAlarmResponse) => void): Request<IoTEventsData.Types.BatchDisableAlarmResponse, AWSError>;
+  /**
+   * Enables one or more alarms. The alarms change to the NORMAL state after you enable them.
+   */
+  batchEnableAlarm(params: IoTEventsData.Types.BatchEnableAlarmRequest, callback?: (err: AWSError, data: IoTEventsData.Types.BatchEnableAlarmResponse) => void): Request<IoTEventsData.Types.BatchEnableAlarmResponse, AWSError>;
+  /**
+   * Enables one or more alarms. The alarms change to the NORMAL state after you enable them.
+   */
+  batchEnableAlarm(callback?: (err: AWSError, data: IoTEventsData.Types.BatchEnableAlarmResponse) => void): Request<IoTEventsData.Types.BatchEnableAlarmResponse, AWSError>;
+  /**
    * Sends a set of messages to the AWS IoT Events system. Each message payload is transformed into the input you specify ("inputName") and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed isn't guaranteed. To guarantee ordering, you must send messages one at a time and wait for a successful response.
    */
   batchPutMessage(params: IoTEventsData.Types.BatchPutMessageRequest, callback?: (err: AWSError, data: IoTEventsData.Types.BatchPutMessageResponse) => void): Request<IoTEventsData.Types.BatchPutMessageResponse, AWSError>;
@@ -19,6 +43,22 @@ declare class IoTEventsData extends Service {
    * Sends a set of messages to the AWS IoT Events system. Each message payload is transformed into the input you specify ("inputName") and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed isn't guaranteed. To guarantee ordering, you must send messages one at a time and wait for a successful response.
    */
   batchPutMessage(callback?: (err: AWSError, data: IoTEventsData.Types.BatchPutMessageResponse) => void): Request<IoTEventsData.Types.BatchPutMessageResponse, AWSError>;
+  /**
+   * Resets one or more alarms. The alarms return to the NORMAL state after you reset them.
+   */
+  batchResetAlarm(params: IoTEventsData.Types.BatchResetAlarmRequest, callback?: (err: AWSError, data: IoTEventsData.Types.BatchResetAlarmResponse) => void): Request<IoTEventsData.Types.BatchResetAlarmResponse, AWSError>;
+  /**
+   * Resets one or more alarms. The alarms return to the NORMAL state after you reset them.
+   */
+  batchResetAlarm(callback?: (err: AWSError, data: IoTEventsData.Types.BatchResetAlarmResponse) => void): Request<IoTEventsData.Types.BatchResetAlarmResponse, AWSError>;
+  /**
+   * Changes one or more alarms to the snooze mode. The alarms change to the SNOOZE_DISABLED state after you set them to the snooze mode.
+   */
+  batchSnoozeAlarm(params: IoTEventsData.Types.BatchSnoozeAlarmRequest, callback?: (err: AWSError, data: IoTEventsData.Types.BatchSnoozeAlarmResponse) => void): Request<IoTEventsData.Types.BatchSnoozeAlarmResponse, AWSError>;
+  /**
+   * Changes one or more alarms to the snooze mode. The alarms change to the SNOOZE_DISABLED state after you set them to the snooze mode.
+   */
+  batchSnoozeAlarm(callback?: (err: AWSError, data: IoTEventsData.Types.BatchSnoozeAlarmResponse) => void): Request<IoTEventsData.Types.BatchSnoozeAlarmResponse, AWSError>;
   /**
    * Updates the state, variable values, and timer settings of one or more detectors (instances) of a specified detector model.
    */
@@ -28,6 +68,14 @@ declare class IoTEventsData extends Service {
    */
   batchUpdateDetector(callback?: (err: AWSError, data: IoTEventsData.Types.BatchUpdateDetectorResponse) => void): Request<IoTEventsData.Types.BatchUpdateDetectorResponse, AWSError>;
   /**
+   * Retrieves information about an alarm.
+   */
+  describeAlarm(params: IoTEventsData.Types.DescribeAlarmRequest, callback?: (err: AWSError, data: IoTEventsData.Types.DescribeAlarmResponse) => void): Request<IoTEventsData.Types.DescribeAlarmResponse, AWSError>;
+  /**
+   * Retrieves information about an alarm.
+   */
+  describeAlarm(callback?: (err: AWSError, data: IoTEventsData.Types.DescribeAlarmResponse) => void): Request<IoTEventsData.Types.DescribeAlarmResponse, AWSError>;
+  /**
    * Returns information about the specified detector (instance).
    */
   describeDetector(params: IoTEventsData.Types.DescribeDetectorRequest, callback?: (err: AWSError, data: IoTEventsData.Types.DescribeDetectorResponse) => void): Request<IoTEventsData.Types.DescribeDetectorResponse, AWSError>;
@@ -35,6 +83,14 @@ declare class IoTEventsData extends Service {
    * Returns information about the specified detector (instance).
    */
   describeDetector(callback?: (err: AWSError, data: IoTEventsData.Types.DescribeDetectorResponse) => void): Request<IoTEventsData.Types.DescribeDetectorResponse, AWSError>;
+  /**
+   * Lists one or more alarms. The operation returns only the metadata associated with each alarm.
+   */
+  listAlarms(params: IoTEventsData.Types.ListAlarmsRequest, callback?: (err: AWSError, data: IoTEventsData.Types.ListAlarmsResponse) => void): Request<IoTEventsData.Types.ListAlarmsResponse, AWSError>;
+  /**
+   * Lists one or more alarms. The operation returns only the metadata associated with each alarm.
+   */
+  listAlarms(callback?: (err: AWSError, data: IoTEventsData.Types.ListAlarmsResponse) => void): Request<IoTEventsData.Types.ListAlarmsResponse, AWSError>;
   /**
    * Lists detectors (the instances of a detector model).
    */
@@ -45,6 +101,160 @@ declare class IoTEventsData extends Service {
   listDetectors(callback?: (err: AWSError, data: IoTEventsData.Types.ListDetectorsResponse) => void): Request<IoTEventsData.Types.ListDetectorsResponse, AWSError>;
 }
 declare namespace IoTEventsData {
+  export interface AcknowledgeActionConfiguration {
+    /**
+     * The note that you can leave when you acknowledge the alarm.
+     */
+    note?: Note;
+  }
+  export interface AcknowledgeAlarmActionRequest {
+    /**
+     * The request ID. Each ID must be unique within each batch.
+     */
+    requestId: RequestId;
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName: AlarmModelName;
+    /**
+     * The value of the key used as a filter to select only the alarms associated with the key.
+     */
+    keyValue?: KeyValue;
+    /**
+     * The note that you can leave when you acknowledge the alarm.
+     */
+    note?: Note;
+  }
+  export type AcknowledgeAlarmActionRequests = AcknowledgeAlarmActionRequest[];
+  export interface Alarm {
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName?: AlarmModelName;
+    /**
+     * The version of the alarm model.
+     */
+    alarmModelVersion?: AlarmModelVersion;
+    /**
+     * The value of the key used as a filter to select only the alarms associated with the key.
+     */
+    keyValue?: KeyValue;
+    /**
+     * Contains information about the current state of the alarm.
+     */
+    alarmState?: AlarmState;
+    /**
+     * A non-negative integer that reflects the severity level of the alarm.
+     */
+    severity?: Severity;
+    /**
+     * The time the alarm was created, in the Unix epoch format.
+     */
+    creationTime?: Timestamp;
+    /**
+     * The time the alarm was last updated, in the Unix epoch format.
+     */
+    lastUpdateTime?: Timestamp;
+  }
+  export type AlarmModelName = string;
+  export type AlarmModelVersion = string;
+  export interface AlarmState {
+    /**
+     * The name of the alarm state. The state name can be one of the following values:    DISABLED - When the alarm is in the DISABLED state, it isn't ready to evaluate data. To enable the alarm, you must change the alarm to the NORMAL state.    NORMAL - When the alarm is in the NORMAL state, it's ready to evaluate data.    ACTIVE - If the alarm is in the ACTIVE state, the alarm is invoked.    ACKNOWLEDGED - When the alarm is in the ACKNOWLEDGED state, the alarm was invoked and you acknowledged the alarm.    SNOOZE_DISABLED - When the alarm is in the SNOOZE_DISABLED state, the alarm is disabled for a specified period of time. After the snooze time, the alarm automatically changes to the NORMAL state.     LATCHED - When the alarm is in the LATCHED state, the alarm was invoked. However, the data that the alarm is currently evaluating is within the specified range. To change the alarm to the NORMAL state, you must acknowledge the alarm.  
+     */
+    stateName?: AlarmStateName;
+    /**
+     * Information needed to evaluate data.
+     */
+    ruleEvaluation?: RuleEvaluation;
+    /**
+     * Contains information about the action that you can take to respond to the alarm.
+     */
+    customerAction?: CustomerAction;
+    /**
+     * Contains information about alarm state changes.
+     */
+    systemEvent?: SystemEvent;
+  }
+  export type AlarmStateName = "DISABLED"|"NORMAL"|"ACTIVE"|"ACKNOWLEDGED"|"SNOOZE_DISABLED"|"LATCHED"|string;
+  export type AlarmSummaries = AlarmSummary[];
+  export interface AlarmSummary {
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName?: AlarmModelName;
+    /**
+     * The version of the alarm model.
+     */
+    alarmModelVersion?: AlarmModelVersion;
+    /**
+     * The value of the key used as a filter to select only the alarms associated with the key.
+     */
+    keyValue?: KeyValue;
+    /**
+     * The name of the alarm state. The state name can be one of the following values:    DISABLED - When the alarm is in the DISABLED state, it isn't ready to evaluate data. To enable the alarm, you must change the alarm to the NORMAL state.    NORMAL - When the alarm is in the NORMAL state, it's ready to evaluate data.    ACTIVE - If the alarm is in the ACTIVE state, the alarm is invoked.    ACKNOWLEDGED - When the alarm is in the ACKNOWLEDGED state, the alarm was invoked and you acknowledged the alarm.    SNOOZE_DISABLED - When the alarm is in the SNOOZE_DISABLED state, the alarm is disabled for a specified period of time. After the snooze time, the alarm automatically changes to the NORMAL state.     LATCHED - When the alarm is in the LATCHED state, the alarm was invoked. However, the data that the alarm is currently evaluating is within the specified range. To change the alarm to the NORMAL state, you must acknowledge the alarm.  
+     */
+    stateName?: AlarmStateName;
+    /**
+     * The time the alarm was created, in the Unix epoch format.
+     */
+    creationTime?: Timestamp;
+    /**
+     * The time the alarm was last updated, in the Unix epoch format.
+     */
+    lastUpdateTime?: Timestamp;
+  }
+  export interface BatchAcknowledgeAlarmRequest {
+    /**
+     * The list of acknowledge action requests. You can specify up to 10 requests per operation.
+     */
+    acknowledgeActionRequests: AcknowledgeAlarmActionRequests;
+  }
+  export interface BatchAcknowledgeAlarmResponse {
+    /**
+     * A list of errors associated with the request, or null if there are no errors. Each error entry contains an entry ID that helps you identify the entry that failed.
+     */
+    errorEntries?: BatchAlarmActionErrorEntries;
+  }
+  export type BatchAlarmActionErrorEntries = BatchAlarmActionErrorEntry[];
+  export interface BatchAlarmActionErrorEntry {
+    /**
+     * The request ID. Each ID must be unique within each batch.
+     */
+    requestId?: RequestId;
+    /**
+     * The error code.
+     */
+    errorCode?: ErrorCode;
+    /**
+     * A message that describes the error.
+     */
+    errorMessage?: ErrorMessage;
+  }
+  export interface BatchDisableAlarmRequest {
+    /**
+     * The list of disable action requests. You can specify up to 10 requests per operation.
+     */
+    disableActionRequests: DisableAlarmActionRequests;
+  }
+  export interface BatchDisableAlarmResponse {
+    /**
+     * A list of errors associated with the request, or null if there are no errors. Each error entry contains an entry ID that helps you identify the entry that failed.
+     */
+    errorEntries?: BatchAlarmActionErrorEntries;
+  }
+  export interface BatchEnableAlarmRequest {
+    /**
+     * The list of enable action requests. You can specify up to 10 requests per operation.
+     */
+    enableActionRequests: EnableAlarmActionRequests;
+  }
+  export interface BatchEnableAlarmResponse {
+    /**
+     * A list of errors associated with the request, or null if there are no errors. Each error entry contains an entry ID that helps you identify the entry that failed.
+     */
+    errorEntries?: BatchAlarmActionErrorEntries;
+  }
   export type BatchPutMessageErrorEntries = BatchPutMessageErrorEntry[];
   export interface BatchPutMessageErrorEntry {
     /**
@@ -52,11 +262,11 @@ declare namespace IoTEventsData {
      */
     messageId?: MessageId;
     /**
-     * The code associated with the error.
+     * The error code.
      */
     errorCode?: ErrorCode;
     /**
-     * More information about the error.
+     * A message that describes the error.
      */
     errorMessage?: ErrorMessage;
   }
@@ -72,6 +282,30 @@ declare namespace IoTEventsData {
      */
     BatchPutMessageErrorEntries?: BatchPutMessageErrorEntries;
   }
+  export interface BatchResetAlarmRequest {
+    /**
+     * The list of reset action requests. You can specify up to 10 requests per operation.
+     */
+    resetActionRequests: ResetAlarmActionRequests;
+  }
+  export interface BatchResetAlarmResponse {
+    /**
+     * A list of errors associated with the request, or null if there are no errors. Each error entry contains an entry ID that helps you identify the entry that failed.
+     */
+    errorEntries?: BatchAlarmActionErrorEntries;
+  }
+  export interface BatchSnoozeAlarmRequest {
+    /**
+     * The list of snooze action requests. You can specify up to 10 requests per operation.
+     */
+    snoozeActionRequests: SnoozeAlarmActionRequests;
+  }
+  export interface BatchSnoozeAlarmResponse {
+    /**
+     * A list of errors associated with the request, or null if there are no errors. Each error entry contains an entry ID that helps you identify the entry that failed.
+     */
+    errorEntries?: BatchAlarmActionErrorEntries;
+  }
   export type BatchUpdateDetectorErrorEntries = BatchUpdateDetectorErrorEntry[];
   export interface BatchUpdateDetectorErrorEntry {
     /**
@@ -79,11 +313,11 @@ declare namespace IoTEventsData {
      */
     messageId?: MessageId;
     /**
-     * The code of the error.
+     * The error code.
      */
     errorCode?: ErrorCode;
     /**
-     * A message describing the error.
+     * A message that describes the error.
      */
     errorMessage?: ErrorMessage;
   }
@@ -98,6 +332,50 @@ declare namespace IoTEventsData {
      * A list of those detector updates that resulted in errors. (If an error is listed here, the specific update did not occur.)
      */
     batchUpdateDetectorErrorEntries?: BatchUpdateDetectorErrorEntries;
+  }
+  export type ComparisonOperator = "GREATER"|"GREATER_OR_EQUAL"|"LESS"|"LESS_OR_EQUAL"|"EQUAL"|"NOT_EQUAL"|string;
+  export interface CustomerAction {
+    /**
+     * The name of the action. The action name can be one of the following values:    SNOOZE - When you snooze the alarm, the alarm state changes to SNOOZE_DISABLED.    ENABLE - When you enable the alarm, the alarm state changes to NORMAL.    DISABLE - When you disable the alarm, the alarm state changes to DISABLED.    ACKNOWLEDGE - When you acknowledge the alarm, the alarm state changes to ACKNOWLEDGED.    RESET - When you reset the alarm, the alarm state changes to NORMAL.   For more information, see the AlarmState API.
+     */
+    actionName?: CustomerActionName;
+    /**
+     * Contains the configuration information of a snooze action.
+     */
+    snoozeActionConfiguration?: SnoozeActionConfiguration;
+    /**
+     * Contains the configuration information of an enable action.
+     */
+    enableActionConfiguration?: EnableActionConfiguration;
+    /**
+     * Contains the configuration information of a disable action.
+     */
+    disableActionConfiguration?: DisableActionConfiguration;
+    /**
+     * Contains the configuration information of an acknowledge action.
+     */
+    acknowledgeActionConfiguration?: AcknowledgeActionConfiguration;
+    /**
+     * Contains the configuration information of a reset action.
+     */
+    resetActionConfiguration?: ResetActionConfiguration;
+  }
+  export type CustomerActionName = "SNOOZE"|"ENABLE"|"DISABLE"|"ACKNOWLEDGE"|"RESET"|string;
+  export interface DescribeAlarmRequest {
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName: AlarmModelName;
+    /**
+     * The value of the key used as a filter to select only the alarms associated with the key.
+     */
+    keyValue?: KeyValue;
+  }
+  export interface DescribeAlarmResponse {
+    /**
+     * Contains information about an alarm.
+     */
+    alarm?: Alarm;
   }
   export interface DescribeDetectorRequest {
     /**
@@ -204,10 +482,87 @@ declare namespace IoTEventsData {
      */
     lastUpdateTime?: Timestamp;
   }
+  export interface DisableActionConfiguration {
+    /**
+     * The note that you can leave when you disable the alarm.
+     */
+    note?: Note;
+  }
+  export interface DisableAlarmActionRequest {
+    /**
+     * The request ID. Each ID must be unique within each batch.
+     */
+    requestId: RequestId;
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName: AlarmModelName;
+    /**
+     * The value of the key used as a filter to select only the alarms associated with the key.
+     */
+    keyValue?: KeyValue;
+    /**
+     * The note that you can leave when you disable the alarm.
+     */
+    note?: Note;
+  }
+  export type DisableAlarmActionRequests = DisableAlarmActionRequest[];
+  export interface EnableActionConfiguration {
+    /**
+     * The note that you can leave when you enable the alarm.
+     */
+    note?: Note;
+  }
+  export interface EnableAlarmActionRequest {
+    /**
+     * The request ID. Each ID must be unique within each batch.
+     */
+    requestId: RequestId;
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName: AlarmModelName;
+    /**
+     * The value of the key used as a filter to select only the alarms associated with the key.
+     */
+    keyValue?: KeyValue;
+    /**
+     * The note that you can leave when you enable the alarm.
+     */
+    note?: Note;
+  }
+  export type EnableAlarmActionRequests = EnableAlarmActionRequest[];
+  export type EphemeralInputName = string;
+  export type EpochMilliTimestamp = number;
   export type ErrorCode = "ResourceNotFoundException"|"InvalidRequestException"|"InternalFailureException"|"ServiceUnavailableException"|"ThrottlingException"|string;
   export type ErrorMessage = string;
-  export type InputName = string;
+  export type EventType = "STATE_CHANGE"|string;
+  export type InputPropertyValue = string;
   export type KeyValue = string;
+  export interface ListAlarmsRequest {
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName: AlarmModelName;
+    /**
+     * The token that you can use to return the next set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListAlarmsResponse {
+    /**
+     * A list that summarizes each alarm.
+     */
+    alarmSummaries?: AlarmSummaries;
+    /**
+     * The token that you can use to return the next set of results, or null if there are no more results.
+     */
+    nextToken?: NextToken;
+  }
   export interface ListDetectorsRequest {
     /**
      * The name of the detector model whose detectors (instances) are listed.
@@ -218,11 +573,11 @@ declare namespace IoTEventsData {
      */
     stateName?: StateName;
     /**
-     * The token for the next set of results.
+     * The token that you can use to return the next set of results.
      */
     nextToken?: NextToken;
     /**
-     * The maximum number of results to return at one time.
+     * The maximum number of results to be returned per request.
      */
     maxResults?: MaxResults;
   }
@@ -232,7 +587,7 @@ declare namespace IoTEventsData {
      */
     detectorSummaries?: DetectorSummaries;
     /**
-     * A token to retrieve the next set of results, or null if there are no additional results.
+     * The token that you can use to return the next set of results, or null if there are no more results.
      */
     nextToken?: NextToken;
   }
@@ -245,18 +600,121 @@ declare namespace IoTEventsData {
     /**
      * The name of the input into which the message payload is transformed.
      */
-    inputName: InputName;
+    inputName: EphemeralInputName;
     /**
      * The payload of the message. This can be a JSON string or a Base-64-encoded string representing binary data (in which case you must decode it).
      */
     payload: Payload;
+    /**
+     * The timestamp associated with the message.
+     */
+    timestamp?: TimestampValue;
   }
   export type MessageId = string;
   export type Messages = Message[];
   export type NextToken = string;
+  export type Note = string;
   export type Payload = Buffer|Uint8Array|Blob|string;
+  export type RequestId = string;
+  export interface ResetActionConfiguration {
+    /**
+     * The note that you can leave when you reset the alarm.
+     */
+    note?: Note;
+  }
+  export interface ResetAlarmActionRequest {
+    /**
+     * The request ID. Each ID must be unique within each batch.
+     */
+    requestId: RequestId;
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName: AlarmModelName;
+    /**
+     * The value of the key used as a filter to select only the alarms associated with the key.
+     */
+    keyValue?: KeyValue;
+    /**
+     * The note that you can leave when you reset the alarm.
+     */
+    note?: Note;
+  }
+  export type ResetAlarmActionRequests = ResetAlarmActionRequest[];
+  export interface RuleEvaluation {
+    /**
+     * Information needed to compare two values with a comparison operator.
+     */
+    simpleRuleEvaluation?: SimpleRuleEvaluation;
+  }
   export type Seconds = number;
+  export type Severity = number;
+  export interface SimpleRuleEvaluation {
+    /**
+     * The value of the input property, on the left side of the comparison operator.
+     */
+    inputPropertyValue?: InputPropertyValue;
+    /**
+     * The comparison operator.
+     */
+    operator?: ComparisonOperator;
+    /**
+     * The threshold value, on the right side of the comparison operator.
+     */
+    thresholdValue?: ThresholdValue;
+  }
+  export interface SnoozeActionConfiguration {
+    /**
+     * The snooze time in seconds. The alarm automatically changes to the NORMAL state after this duration.
+     */
+    snoozeDuration?: SnoozeDuration;
+    /**
+     * The note that you can leave when you snooze the alarm.
+     */
+    note?: Note;
+  }
+  export interface SnoozeAlarmActionRequest {
+    /**
+     * The request ID. Each ID must be unique within each batch.
+     */
+    requestId: RequestId;
+    /**
+     * The name of the alarm model.
+     */
+    alarmModelName: AlarmModelName;
+    /**
+     * The value of the key used as a filter to select only the alarms associated with the key.
+     */
+    keyValue?: KeyValue;
+    /**
+     * The note that you can leave when you snooze the alarm.
+     */
+    note?: Note;
+    /**
+     * The snooze time in seconds. The alarm automatically changes to the NORMAL state after this duration.
+     */
+    snoozeDuration: SnoozeDuration;
+  }
+  export type SnoozeAlarmActionRequests = SnoozeAlarmActionRequest[];
+  export type SnoozeDuration = number;
+  export interface StateChangeConfiguration {
+    /**
+     * The trigger type. If the value is SNOOZE_TIMEOUT, the snooze duration ends and the alarm automatically changes to the NORMAL state.
+     */
+    triggerType?: TriggerType;
+  }
   export type StateName = string;
+  export interface SystemEvent {
+    /**
+     * The event type. If the value is STATE_CHANGE, the event contains information about alarm state changes.
+     */
+    eventType?: EventType;
+    /**
+     * Contains the configuration information of alarm state changes.
+     */
+    stateChangeConfiguration?: StateChangeConfiguration;
+  }
+  export type ThresholdValue = string;
   export interface Timer {
     /**
      * The name of the timer.
@@ -281,6 +739,13 @@ declare namespace IoTEventsData {
   export type TimerName = string;
   export type Timers = Timer[];
   export type Timestamp = Date;
+  export interface TimestampValue {
+    /**
+     * The value of the timestamp, in the Unix epoch format.
+     */
+    timeInMillis?: EpochMilliTimestamp;
+  }
+  export type TriggerType = "SNOOZE_TIMEOUT"|string;
   export interface UpdateDetectorRequest {
     /**
      * The ID to assign to the detector update "message". Each "messageId" must be unique within each batch sent.

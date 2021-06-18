@@ -412,7 +412,19 @@ declare namespace CostExplorer {
      *  The list of processing statuses for Cost Management products for a specific cost category. 
      */
     ProcessingStatus?: CostCategoryProcessingStatusList;
+    DefaultValue?: CostCategoryValue;
   }
+  export interface CostCategoryInheritedValueDimension {
+    /**
+     * The name of dimension for which to group costs. If you specify LINKED_ACCOUNT_NAME, the cost category value will be based on account name. If you specify TAG, the cost category value will be based on the value of the specified tag key.
+     */
+    DimensionName?: CostCategoryInheritedValueDimensionName;
+    /**
+     * The key to extract cost category values.
+     */
+    DimensionKey?: GenericString;
+  }
+  export type CostCategoryInheritedValueDimensionName = "LINKED_ACCOUNT_NAME"|"TAG"|string;
   export type CostCategoryMaxResults = number;
   export type CostCategoryName = string;
   export type CostCategoryNamesList = CostCategoryName[];
@@ -453,15 +465,25 @@ declare namespace CostExplorer {
      *  A list of unique cost category values in a specific cost category. 
      */
     Values?: CostCategoryValuesList;
+    DefaultValue?: CostCategoryValue;
   }
   export type CostCategoryReferencesList = CostCategoryReference[];
   export interface CostCategoryRule {
-    Value: CostCategoryValue;
+    Value?: CostCategoryValue;
     /**
      * An Expression object used to categorize costs. This supports dimensions, tags, and nested expressions. Currently the only dimensions supported are LINKED_ACCOUNT, SERVICE_CODE, RECORD_TYPE, and LINKED_ACCOUNT_NAME. Root level OR is not supported. We recommend that you create a separate rule instead.  RECORD_TYPE is a dimension used for Cost Explorer APIs, and is also supported for Cost Category expressions. This dimension uses different terms, depending on whether you're using the console or API/JSON editor. For a detailed comparison, see Term Comparisons in the AWS Billing and Cost Management User Guide.
      */
-    Rule: Expression;
+    Rule?: Expression;
+    /**
+     * The value the line item will be categorized as, if the line item contains the matched dimension.
+     */
+    InheritedValue?: CostCategoryInheritedValueDimension;
+    /**
+     * You can define the CostCategoryRule rule type as either REGULAR or INHERITED_VALUE. The INHERITED_VALUE rule type adds the flexibility of defining a rule that dynamically inherits the cost category value from the dimension value defined by CostCategoryInheritedValueDimension. For example, if you wanted to dynamically group costs based on the value of a specific tag key, you would first choose an inherited value rule type, then choose the tag dimension and specify the tag key to use.
+     */
+    Type?: CostCategoryRuleType;
   }
+  export type CostCategoryRuleType = "REGULAR"|"INHERITED_VALUE"|string;
   export type CostCategoryRuleVersion = "CostCategoryExpression.v1"|string;
   export type CostCategoryRulesList = CostCategoryRule[];
   export type CostCategoryStatus = "PROCESSING"|"APPLIED"|string;
@@ -583,6 +605,7 @@ declare namespace CostExplorer {
      * The Cost Category rules used to categorize costs. For more information, see CostCategoryRule.
      */
     Rules: CostCategoryRulesList;
+    DefaultValue?: CostCategoryValue;
   }
   export interface CreateCostCategoryDefinitionResponse {
     /**
@@ -721,6 +744,24 @@ declare namespace CostExplorer {
     Attributes?: Attributes;
   }
   export type DimensionValuesWithAttributesList = DimensionValuesWithAttributes[];
+  export interface DiskResourceUtilization {
+    /**
+     *  The maximum number of read operations per second. 
+     */
+    DiskReadOpsPerSecond?: GenericString;
+    /**
+     *  The maximum number of write operations per second. 
+     */
+    DiskWriteOpsPerSecond?: GenericString;
+    /**
+     *  The maximum read throughput operations per second. 
+     */
+    DiskReadBytesPerSecond?: GenericString;
+    /**
+     *  The maximum write throughput operations per second. 
+     */
+    DiskWriteBytesPerSecond?: GenericString;
+  }
   export interface EBSResourceUtilization {
     /**
      *  The maximum number of read operations per second. 
@@ -828,6 +869,14 @@ declare namespace CostExplorer {
      *  The EBS field that contains a list of EBS metrics associated with the current instance. 
      */
     EBSResourceUtilization?: EBSResourceUtilization;
+    /**
+     *  The field that contains a list of disk (local storage) metrics associated with the current instance. 
+     */
+    DiskResourceUtilization?: DiskResourceUtilization;
+    /**
+     *  The network field that contains a list of network metrics associated with the current instance. 
+     */
+    NetworkResourceUtilization?: NetworkResourceUtilization;
   }
   export interface EC2Specification {
     /**
@@ -912,6 +961,8 @@ declare namespace CostExplorer {
     CostCategories?: CostCategoryValues;
   }
   export type Expressions = Expression[];
+  export type FindingReasonCode = "CPU_OVER_PROVISIONED"|"CPU_UNDER_PROVISIONED"|"MEMORY_OVER_PROVISIONED"|"MEMORY_UNDER_PROVISIONED"|"EBS_THROUGHPUT_OVER_PROVISIONED"|"EBS_THROUGHPUT_UNDER_PROVISIONED"|"EBS_IOPS_OVER_PROVISIONED"|"EBS_IOPS_UNDER_PROVISIONED"|"NETWORK_BANDWIDTH_OVER_PROVISIONED"|"NETWORK_BANDWIDTH_UNDER_PROVISIONED"|"NETWORK_PPS_OVER_PROVISIONED"|"NETWORK_PPS_UNDER_PROVISIONED"|"DISK_IOPS_OVER_PROVISIONED"|"DISK_IOPS_UNDER_PROVISIONED"|"DISK_THROUGHPUT_OVER_PROVISIONED"|"DISK_THROUGHPUT_UNDER_PROVISIONED"|string;
+  export type FindingReasonCodes = FindingReasonCode[];
   export interface ForecastResult {
     /**
      * The period of time that the forecast covers.
@@ -1030,7 +1081,7 @@ declare namespace CostExplorer {
     /**
      * Sets the AWS cost granularity to MONTHLY or DAILY, or HOURLY. If Granularity isn't set, the response object doesn't include the Granularity, either MONTHLY or DAILY, or HOURLY. 
      */
-    Granularity?: Granularity;
+    Granularity: Granularity;
     /**
      * Filters AWS costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression. 
      */
@@ -1074,7 +1125,7 @@ declare namespace CostExplorer {
     /**
      * Sets the AWS cost granularity to MONTHLY, DAILY, or HOURLY. If Granularity isn't set, the response object doesn't include the Granularity, MONTHLY, DAILY, or HOURLY. 
      */
-    Granularity?: Granularity;
+    Granularity: Granularity;
     /**
      * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression.  The GetCostAndUsageWithResources operation requires that you either group by or filter by a ResourceId. It requires the Expression "SERVICE = Amazon Elastic Compute Cloud - Compute" in the filter.
      */
@@ -1771,6 +1822,24 @@ declare namespace CostExplorer {
   export type MonitorDimension = "SERVICE"|string;
   export type MonitorType = "DIMENSIONAL"|"CUSTOM"|string;
   export type NetRISavings = string;
+  export interface NetworkResourceUtilization {
+    /**
+     *  The network ingress throughput utilization measured in Bytes per second. 
+     */
+    NetworkInBytesPerSecond?: GenericString;
+    /**
+     *  The network outgress throughput utilization measured in Bytes per second. 
+     */
+    NetworkOutBytesPerSecond?: GenericString;
+    /**
+     *  The network ingress packets measured in packets per second. 
+     */
+    NetworkPacketsInPerSecond?: GenericString;
+    /**
+     *  The network outgress packets measured in packets per second. 
+     */
+    NetworkPacketsOutPerSecond?: GenericString;
+  }
   export type NextPageToken = string;
   export type NonNegativeInteger = number;
   export type NullableNonNegativeDouble = number;
@@ -1782,6 +1851,8 @@ declare namespace CostExplorer {
   export type OnDemandNormalizedUnits = string;
   export type PageSize = number;
   export type PaymentOption = "NO_UPFRONT"|"PARTIAL_UPFRONT"|"ALL_UPFRONT"|"LIGHT_UTILIZATION"|"MEDIUM_UTILIZATION"|"HEAVY_UTILIZATION"|string;
+  export type PlatformDifference = "HYPERVISOR"|"NETWORK_INTERFACE"|"STORAGE_INTERFACE"|"INSTANCE_STORE_AVAILABILITY"|"VIRTUALIZATION_TYPE"|string;
+  export type PlatformDifferences = PlatformDifference[];
   export type PredictionIntervalLevel = number;
   export interface ProvideAnomalyFeedbackRequest {
     /**
@@ -2154,6 +2225,10 @@ declare namespace CostExplorer {
      * Details for termination recommendations.
      */
     TerminateRecommendationDetail?: TerminateRecommendationDetail;
+    /**
+     *  The list of possible reasons why the recommendation is generated such as under or over utilization of specific metrics (for example, CPU, Memory, Network). 
+     */
+    FindingReasonCodes?: FindingReasonCodes;
   }
   export interface RightsizingRecommendationConfiguration {
     /**
@@ -2559,7 +2634,7 @@ declare namespace CostExplorer {
   export type SubscriberStatus = "CONFIRMED"|"DECLINED"|string;
   export type SubscriberType = "EMAIL"|"SNS"|string;
   export type Subscribers = Subscriber[];
-  export type SupportedSavingsPlansType = "COMPUTE_SP"|"EC2_INSTANCE_SP"|string;
+  export type SupportedSavingsPlansType = "COMPUTE_SP"|"EC2_INSTANCE_SP"|"SAGEMAKER_SP"|string;
   export type TagKey = string;
   export type TagList = Entity[];
   export interface TagValues {
@@ -2602,6 +2677,10 @@ declare namespace CostExplorer {
      *  Expected utilization metrics for target instance type.
      */
     ExpectedResourceUtilization?: ResourceUtilization;
+    /**
+     *  Explains the actions you might need to take in order to successfully migrate your workloads from the current instance type to the recommended instance type. 
+     */
+    PlatformDifferences?: PlatformDifferences;
   }
   export type TargetInstancesList = TargetInstance[];
   export type TermInYears = "ONE_YEAR"|"THREE_YEARS"|string;
@@ -2696,6 +2775,7 @@ declare namespace CostExplorer {
      * The Expression object used to categorize costs. For more information, see CostCategoryRule . 
      */
     Rules: CostCategoryRulesList;
+    DefaultValue?: CostCategoryValue;
   }
   export interface UpdateCostCategoryDefinitionResponse {
     /**

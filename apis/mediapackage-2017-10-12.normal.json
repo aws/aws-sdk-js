@@ -719,6 +719,11 @@
     "CmafEncryption": {
       "documentation": "A Common Media Application Format (CMAF) encryption configuration.",
       "members": {
+        "ConstantInitializationVector": {
+          "documentation": "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
+          "locationName": "constantInitializationVector",
+          "shape": "__string"
+        },
         "KeyRotationIntervalSeconds": {
           "documentation": "Time (in seconds) between each encryption key rotation.",
           "locationName": "keyRotationIntervalSeconds",
@@ -1497,6 +1502,26 @@
       },
       "type": "structure"
     },
+    "EncryptionContractConfiguration": {
+      "documentation": "Use encryptionContractConfiguration to configure one or more content encryption keys for your endpoints that use SPEKE 2.0. \nThe encryption contract defines which content keys are used to encrypt the audio and video tracks in your stream. \nTo configure the encryption contract, specify which audio and video encryption presets to use.\nNote the following considerations when using encryptionContractConfiguration:\nencryptionContractConfiguration can be used for DASH endpoints that use SPEKE 2.0. SPEKE 2.0 relies on the CPIX 2.3 specification.\nYou must disable key rotation for this endpoint by setting keyRotationIntervalSeconds to 0.\n",
+      "members": {
+        "PresetSpeke20Audio": {
+          "documentation": "A collection of audio encryption presets.",
+          "locationName": "presetSpeke20Audio",
+          "shape": "PresetSpeke20Audio"
+        },
+        "PresetSpeke20Video": {
+          "documentation": "A collection of video encryption presets.",
+          "locationName": "presetSpeke20Video",
+          "shape": "PresetSpeke20Video"
+        }
+      },
+      "required": [
+        "PresetSpeke20Audio",
+        "PresetSpeke20Video"
+      ],
+      "type": "structure"
+    },
     "EncryptionMethod": {
       "enum": [
         "AES_128",
@@ -2073,6 +2098,18 @@
       ],
       "type": "string"
     },
+    "PresetSpeke20Audio": {
+      "enum": [
+        "PRESET-AUDIO-1"
+      ],
+      "type": "string"
+    },
+    "PresetSpeke20Video": {
+      "enum": [
+        "PRESET-VIDEO-1"
+      ],
+      "type": "string"
+    },
     "Profile": {
       "enum": [
         "NONE",
@@ -2230,6 +2267,10 @@
           "documentation": "An Amazon Resource Name (ARN) of a Certificate Manager certificate\nthat MediaPackage will use for enforcing secure end-to-end data\ntransfer with the key provider service.\n",
           "locationName": "certificateArn",
           "shape": "__string"
+        },
+        "EncryptionContractConfiguration": {
+          "locationName": "encryptionContractConfiguration",
+          "shape": "EncryptionContractConfiguration"
         },
         "ResourceId": {
           "documentation": "The resource ID to include in key requests.",

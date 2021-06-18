@@ -814,6 +814,10 @@ declare namespace Comprehend {
      * Indicates the mode in which the classifier will be trained. The classifier can be trained in multi-class mode, which identifies one and only one class for each document, or multi-label mode, which identifies one or more labels for each document. In multi-label mode, multiple labels for an individual document are separated by a delimiter. The default delimiter between labels is a pipe (|).
      */
     Mode?: DocumentClassifierMode;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    ModelKmsKeyId?: KmsKeyId;
   }
   export interface CreateDocumentClassifierResponse {
     /**
@@ -842,6 +846,10 @@ declare namespace Comprehend {
      * Tags associated with the endpoint being created. A tag is a key-value pair that adds metadata to the endpoint. For example, a tag with "Sales" as the key might be added to an endpoint to indicate its use by the sales department. 
      */
     Tags?: TagList;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
+     */
+    DataAccessRoleArn?: IamRoleArn;
   }
   export interface CreateEndpointResponse {
     /**
@@ -882,6 +890,10 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your custom entity recognizer. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    ModelKmsKeyId?: KmsKeyId;
   }
   export interface CreateEntityRecognizerResponse {
     /**
@@ -1331,6 +1343,10 @@ declare namespace Comprehend {
      * Indicates the mode in which the specific classifier was trained. This also indicates the format of input documents and the format of the confusion matrix. Each classifier can only be trained in one mode and this cannot be changed once the classifier is trained.
      */
     Mode?: DocumentClassifierMode;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    ModelKmsKeyId?: KmsKeyId;
   }
   export type DocumentClassifierPropertiesList = DocumentClassifierProperties[];
   export interface DocumentLabel {
@@ -1470,6 +1486,10 @@ declare namespace Comprehend {
      * The date and time that the endpoint was last modified.
      */
     LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
+     */
+    DataAccessRoleArn?: IamRoleArn;
   }
   export type EndpointPropertiesList = EndpointProperties[];
   export type EndpointStatus = "CREATING"|"DELETING"|"FAILED"|"IN_SERVICE"|"UPDATING"|string;
@@ -1740,6 +1760,10 @@ declare namespace Comprehend {
      *  Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your custom entity recognizer. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:    KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    ModelKmsKeyId?: KmsKeyId;
   }
   export type EntityRecognizerPropertiesList = EntityRecognizerProperties[];
   export type EntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"COMMERCIAL_ITEM"|"EVENT"|"DATE"|"QUANTITY"|"TITLE"|"OTHER"|string;

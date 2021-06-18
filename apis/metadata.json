@@ -448,7 +448,8 @@
     "name": "MarketplaceEntitlementService"
   },
   "athena": {
-    "name": "Athena"
+    "name": "Athena",
+    "cors": true
   },
   "greengrass": {
     "name": "Greengrass"
@@ -986,7 +987,8 @@
     "name": "IoTWireless"
   },
   "location": {
-    "name": "Location"
+    "name": "Location",
+    "cors": true
   },
   "wellarchitected": {
     "name": "WellArchitected"
@@ -1002,5 +1004,41 @@
   },
   "fis": {
     "name": "Fis"
+  },
+  "lookoutmetrics": {
+    "name": "LookoutMetrics"
+  },
+  "mgn": {
+    "name": "Mgn"
+  },
+  "lookoutequipment": {
+    "name": "LookoutEquipment"
+  },
+  "nimble": {
+    "name": "Nimble"
+  },
+  "finspace": {
+    "name": "Finspace"
+  },
+  "finspacedata": {
+    "prefix": "finspace-data",
+    "name": "Finspacedata"
+  },
+  "ssmcontacts": {
+    "prefix": "ssm-contacts",
+    "name": "SSMContacts"
+  },
+  "ssmincidents": {
+    "prefix": "ssm-incidents",
+    "name": "SSMIncidents"
+  },
+  "applicationcostprofiler": {
+    "name": "ApplicationCostProfiler"
+  },
+  "apprunner": {
+    "name": "AppRunner"
+  },
+  "proton": {
+    "name": "Proton"
   }
 }

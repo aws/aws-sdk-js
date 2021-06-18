@@ -1138,6 +1138,15 @@
     "Boolean": {
       "type": "boolean"
     },
+    "BucketOwnerAccess": {
+      "type": "string",
+      "documentation": "<p>Specifies the access for objects that are uploaded to an Amazon S3 bucket that is owned by another account.</p> <p>By default, only the account that uploads the objects to the bucket has access to these objects. This property allows you to give the bucket owner access to these objects.</p> <dl> <dt>NONE</dt> <dd> <p>The bucket owner does not have access to the objects. This is the default.</p> </dd> <dt>READ_ONLY</dt> <dd> <p>The bucket owner has read only access to the objects. The uploading account retains ownership of the objects.</p> </dd> <dt>FULL</dt> <dd> <p>The bucket owner has full access to the objects. Object ownership is determined by the following criteria:</p> <ul> <li> <p>If the bucket is configured with the <b>Bucket owner preferred</b> setting, the bucket owner owns the objects. The uploading account will have object access as specified by the bucket's policy.</p> </li> <li> <p>Otherwise, the uploading account retains ownership of the objects.</p> </li> </ul> <p>For more information about Amazon S3 object ownership, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html\">Controlling ownership of uploaded objects using S3 Object Ownership</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> </dd> </dl>",
+      "enum": [
+        "NONE",
+        "READ_ONLY",
+        "FULL"
+      ]
+    },
     "Build": {
       "type": "structure",
       "members": {
@@ -1251,7 +1260,7 @@
         },
         "exportedEnvironmentVariables": {
           "shape": "ExportedEnvironmentVariables",
-          "documentation": "<p> A list of exported environment variables for this build. </p>"
+          "documentation": "<p>A list of exported environment variables for this build.</p> <p>Exported environment variables are used in conjunction with AWS CodePipeline to export environment variables from the current build stage to subsequent stages in the pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html\">Working with variables</a> in the <i>AWS CodePipeline User Guide</i>.</p>"
         },
         "reportArns": {
           "shape": "BuildReportArns",
@@ -1298,6 +1307,9 @@
         "artifactIdentifier": {
           "shape": "String",
           "documentation": "<p> An identifier for this artifact definition. </p>"
+        },
+        "bucketOwnerAccess": {
+          "shape": "BucketOwnerAccess"
         }
       },
       "documentation": "<p>Information about build output artifacts.</p>"
@@ -1425,7 +1437,7 @@
         },
         "debugSessionEnabled": {
           "shape": "WrapperBoolean",
-          "documentation": "<p/> <p>Specifies if session debugging is enabled for this batch build. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html\">Viewing a running build in Session Manager</a>. Batch session debugging is not supported for matrix batch builds.</p>"
+          "documentation": "<p>Specifies if session debugging is enabled for this batch build. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html\">Viewing a running build in Session Manager</a>. Batch session debugging is not supported for matrix batch builds.</p>"
         }
       },
       "documentation": "<p>Contains information about a batch build.</p>"
@@ -2336,14 +2348,14 @@
       "members": {
         "name": {
           "shape": "NonEmptyString",
-          "documentation": "<p> The name of this exported environment variable. </p>"
+          "documentation": "<p>The name of the exported environment variable.</p>"
         },
         "value": {
           "shape": "String",
-          "documentation": "<p> The value assigned to this exported environment variable. </p> <note> <p> During a build, the value of a variable is available starting with the <code>install</code> phase. It can be updated between the start of the <code>install</code> phase and the end of the <code>post_build</code> phase. After the <code>post_build</code> phase ends, the value of exported variables cannot change.</p> </note>"
+          "documentation": "<p>The value assigned to the exported environment variable.</p>"
         }
       },
-      "documentation": "<p> Information about an exported environment variable. </p>"
+      "documentation": "<p>Contains information about an exported environment variable. </p> <p>Exported environment variables are used in conjunction with AWS CodePipeline to export environment variables from the current build stage to subsequent stages in the pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html\">Working with variables</a> in the <i>AWS CodePipeline User Guide</i>.</p> <note> <p> During a build, the value of a variable is available starting with the <code>install</code> phase. It can be updated between the start of the <code>install</code> phase and the end of the <code>post_build</code> phase. After the <code>post_build</code> phase ends, the value of exported variables cannot change.</p> </note>"
     },
     "ExportedEnvironmentVariables": {
       "type": "list",
@@ -3175,6 +3187,9 @@
         "artifactIdentifier": {
           "shape": "String",
           "documentation": "<p> An identifier for this artifact definition. </p>"
+        },
+        "bucketOwnerAccess": {
+          "shape": "BucketOwnerAccess"
         }
       },
       "documentation": "<p>Information about the build output artifacts for the build project.</p>"
@@ -3846,6 +3861,9 @@
         "encryptionDisabled": {
           "shape": "WrapperBoolean",
           "documentation": "<p> Set to true if you do not want your S3 build log output encrypted. By default S3 build logs are encrypted. </p>"
+        },
+        "bucketOwnerAccess": {
+          "shape": "BucketOwnerAccess"
         }
       },
       "documentation": "<p> Information about S3 logs for a build project. </p>"

@@ -98,7 +98,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Configures one or more gateway local disks as upload buffer for a specified gateway. This operation is supported for the stored volume, cached volume and tape gateway types.</p> <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add upload buffer, and one or more disk IDs that you want to configure as upload buffer.</p>"
+      "documentation": "<p>Configures one or more gateway local disks as upload buffer for a specified gateway. This operation is supported for the stored volume, cached volume, and tape gateway types.</p> <p>In the request, you specify the gateway Amazon Resource Name (ARN) to which you want to add upload buffer, and one or more disk IDs that you want to configure as upload buffer.</p>"
     },
     "AddWorkingStorage": {
       "name": "AddWorkingStorage",
@@ -143,6 +143,28 @@
         }
       ],
       "documentation": "<p>Assigns a tape to a tape pool for archiving. The tape assigned to a pool is archived in the S3 storage class that is associated with the pool. When you use your backup application to eject the tape, the tape is archived directly into the S3 storage class (S3 Glacier or S3 Glacier Deep Archive) that corresponds to the pool.</p> <p>Valid Values: <code>GLACIER</code> | <code>DEEP_ARCHIVE</code> </p>"
+    },
+    "AssociateFileSystem": {
+      "name": "AssociateFileSystem",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssociateFileSystemInput"
+      },
+      "output": {
+        "shape": "AssociateFileSystemOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Associate an Amazon FSx file system with the Amazon FSx file gateway. After the association process is complete, the file shares on the Amazon FSx file system are available for access through the gateway. This operation only supports the Amazon FSx file gateway type.</p>"
     },
     "AttachVolume": {
       "name": "AttachVolume",
@@ -299,7 +321,7 @@
           "shape": "ServiceUnavailableError"
         }
       ],
-      "documentation": "<p>Initiates a snapshot of a volume.</p> <p>AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, as well as import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take an ad hoc snapshot. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot\">Editing a snapshot schedule</a>.</p> <p>In the <code>CreateSnapshot</code> request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a> or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html\">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note> <important> <p>Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html\">Welcome</a> page.</p> </important>"
+      "documentation": "<p>Initiates a snapshot of a volume.</p> <p>AWS Storage Gateway provides the ability to back up point-in-time snapshots of your data to Amazon Simple Storage (Amazon S3) for durable off-site recovery, and also import the data to an Amazon Elastic Block Store (EBS) volume in Amazon Elastic Compute Cloud (EC2). You can take snapshots of your gateway volume on a scheduled or ad hoc basis. This API enables you to take an ad hoc snapshot. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/managing-volumes.html#SchedulingSnapshot\">Editing a snapshot schedule</a>.</p> <p>In the <code>CreateSnapshot</code> request, you identify the volume by providing its Amazon Resource Name (ARN). You must also provide description for the snapshot. When AWS Storage Gateway takes the snapshot of specified volume, the snapshot and description appears in the AWS Storage Gateway console. In response, AWS Storage Gateway returns you a snapshot ID. You can use this snapshot ID to check the snapshot progress or later use it when you want to create a volume from a snapshot. This operation is only supported in stored and cached volume gateway type.</p> <note> <p>To list or delete a snapshot, you must use the Amazon EC2 API. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html\">DescribeSnapshots</a> or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html\">DeleteSnapshot</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p> </note> <important> <p>Volume and snapshot IDs are changing to a longer length ID format. For more information, see the important note on the <a href=\"https://docs.aws.amazon.com/storagegateway/latest/APIReference/Welcome.html\">Welcome</a> page.</p> </important>"
     },
     "CreateSnapshotFromVolumeRecoveryPoint": {
       "name": "CreateSnapshotFromVolumeRecoveryPoint",
@@ -654,7 +676,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Returns information about the most recent High Availability monitoring test that was performed on the host in a cluster. If a test isn't performed, the status and start time in the response would be null.</p>"
+      "documentation": "<p>Returns information about the most recent high availability monitoring test that was performed on the host in a cluster. If a test isn't performed, the status and start time in the response would be null.</p>"
     },
     "DescribeBandwidthRateLimit": {
       "name": "DescribeBandwidthRateLimit",
@@ -765,6 +787,28 @@
         }
       ],
       "documentation": "<p>Returns an array of Challenge-Handshake Authentication Protocol (CHAP) credentials information for a specified iSCSI target, one for each target-initiator pair. This operation is supported in the volume and tape gateway types.</p>"
+    },
+    "DescribeFileSystemAssociations": {
+      "name": "DescribeFileSystemAssociations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeFileSystemAssociationsInput"
+      },
+      "output": {
+        "shape": "DescribeFileSystemAssociationsOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Gets the file system association information. This operation is only supported for Amazon FSx file gateways.</p>"
     },
     "DescribeGatewayInformation": {
       "name": "DescribeGatewayInformation",
@@ -1096,6 +1140,28 @@
       ],
       "documentation": "<p>Disables a tape gateway when the gateway is no longer functioning. For example, if your gateway VM is damaged, you can disable the gateway so you can recover virtual tapes.</p> <p>Use this operation for a tape gateway that is not reachable or not functioning. This operation is only supported in the tape gateway type.</p> <important> <p>After a gateway is disabled, it cannot be enabled.</p> </important>"
     },
+    "DisassociateFileSystem": {
+      "name": "DisassociateFileSystem",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisassociateFileSystemInput"
+      },
+      "output": {
+        "shape": "DisassociateFileSystemOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Disassociates an Amazon FSx file system from the specified gateway. After the disassociation process finishes, the gateway can no longer access the Amazon FSx file system. This operation is only supported in the Amazon FSx file gateway type.</p>"
+    },
     "JoinDomain": {
       "name": "JoinDomain",
       "http": {
@@ -1161,6 +1227,28 @@
         }
       ],
       "documentation": "<p>Gets a list of the file shares for a specific file gateway, or the list of file shares that belong to the calling user account. This operation is only supported for file gateways.</p>"
+    },
+    "ListFileSystemAssociations": {
+      "name": "ListFileSystemAssociations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListFileSystemAssociationsInput"
+      },
+      "output": {
+        "shape": "ListFileSystemAssociationsOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Gets a list of <code>FileSystemAssociationSummary</code> objects. Each object contains a summary of a file system association. This operation is only supported for Amazon FSx file gateways.</p>"
     },
     "ListGateways": {
       "name": "ListGateways",
@@ -1380,7 +1468,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Refreshes the cache for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket's contents and cached the results. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your RefreshCache operation completes. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through an CloudWatch event when your <code>RefreshCache</code> operation completes.</p> <p>Throttle limit: This API is asynchronous so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an <code>InvalidGatewayRequestException</code> error because too many requests were sent to the server.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p>"
+      "documentation": "<p>Refreshes the cached inventory of objects for the specified file share. This operation finds objects in the Amazon S3 bucket that were added, removed, or replaced since the gateway last listed the bucket's contents and cached the results. This operation does not import files into the file gateway cache storage. It only updates the cached inventory to reflect changes in the inventory of the objects in the S3 bucket. This operation is only supported in the file gateway type. You can subscribe to be notified through an Amazon CloudWatch event when your <code>RefreshCache</code> operation completes. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>When this API is called, it only initiates the refresh operation. When the API call completes and returns a success code, it doesn't necessarily mean that the file refresh has completed. You should use the refresh-complete notification to determine that the operation has completed before you check for new files on the gateway file share. You can subscribe to be notified through a CloudWatch event when your <code>RefreshCache</code> operation completes.</p> <p>Throttle limit: This API is asynchronous, so the gateway will accept no more than two refreshes at any time. We recommend using the refresh-complete CloudWatch event notification before issuing additional requests. For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p> <p>If you invoke the RefreshCache API when two requests are already being processed, any new request will cause an <code>InvalidGatewayRequestException</code> error because too many requests were sent to the server.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/storagegateway/latest/userguide/monitoring-file-gateway.html#get-notification\">Getting notified about file operations</a> in the <i>AWS Storage Gateway User Guide</i>.</p>"
     },
     "RemoveTagsFromResource": {
       "name": "RemoveTagsFromResource",
@@ -1667,6 +1755,28 @@
         }
       ],
       "documentation": "<p>Updates the Challenge-Handshake Authentication Protocol (CHAP) credentials for a specified iSCSI target. By default, a gateway does not have CHAP enabled; however, for added security, you might use it. This operation is supported in the volume and tape gateway types.</p> <important> <p>When you update CHAP credentials, all existing connections on the target are closed and initiators must reconnect with the new credentials.</p> </important>"
+    },
+    "UpdateFileSystemAssociation": {
+      "name": "UpdateFileSystemAssociation",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateFileSystemAssociationInput"
+      },
+      "output": {
+        "shape": "UpdateFileSystemAssociationOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidGatewayRequestException"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Updates a file system association. This operation is only supported in the Amazon FSx file gateway type.</p>"
     },
     "UpdateGatewayInformation": {
       "name": "UpdateGatewayInformation",
@@ -2070,6 +2180,57 @@
         }
       }
     },
+    "AssociateFileSystemInput": {
+      "type": "structure",
+      "required": [
+        "UserName",
+        "Password",
+        "ClientToken",
+        "GatewayARN",
+        "LocationARN"
+      ],
+      "members": {
+        "UserName": {
+          "shape": "DomainUserName",
+          "documentation": "<p>The user name of the user credential that has permission to access the root share D$ of the Amazon FSx file system. The user account must belong to the Amazon FSx delegated admin user group.</p>"
+        },
+        "Password": {
+          "shape": "DomainUserPassword",
+          "documentation": "<p>The password of the user credential.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientToken",
+          "documentation": "<p>A unique string value that you supply that is used by the file gateway to ensure idempotent file system association creation.</p>"
+        },
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        },
+        "LocationARN": {
+          "shape": "FileSystemLocationARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon FSx file system to associate with the Amazon FSx file gateway.</p>"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>A list of up to 50 tags that can be assigned to the file system association. Each tag is a key-value pair.</p>"
+        },
+        "AuditDestinationARN": {
+          "shape": "AuditDestinationARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>"
+        },
+        "CacheAttributes": {
+          "shape": "CacheAttributes"
+        }
+      }
+    },
+    "AssociateFileSystemOutput": {
+      "type": "structure",
+      "members": {
+        "FileSystemAssociationARN": {
+          "shape": "FileSystemAssociationARN",
+          "documentation": "<p>The ARN of the newly created file system association.</p>"
+        }
+      }
+    },
     "AttachVolumeInput": {
       "type": "structure",
       "required": [
@@ -2224,7 +2385,7 @@
         },
         "DaysOfWeek": {
           "shape": "DaysOfWeek",
-          "documentation": "<p> The days of the week component of the bandwidth rate limit interval, represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 Saturday. </p>"
+          "documentation": "<p> The days of the week component of the bandwidth rate limit interval, represented as ordinal numbers from 0 to 6, where 0 represents Sunday and 6 represents Saturday. </p>"
         },
         "AverageUploadRateLimitInBitsPerSec": {
           "shape": "BandwidthUploadRateLimit",
@@ -2262,10 +2423,10 @@
       "members": {
         "CacheStaleTimeoutInSeconds": {
           "shape": "CacheStaleTimeoutInSeconds",
-          "documentation": "<p>Refreshes a file share's cache by using Time To Live (TTL). TTL is the length of time since the last refresh after which access to the directory would cause the file gateway to first refresh that directory's contents from the Amazon S3 bucket. The TTL duration is in seconds.</p> <p>Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)</p>"
+          "documentation": "<p>Refreshes a file share's cache by using Time To Live (TTL). TTL is the length of time since the last refresh after which access to the directory would cause the file gateway to first refresh that directory's contents from the Amazon S3 bucket or Amazon FSx file system. The TTL duration is in seconds.</p> <p>Valid Values: 300 to 2,592,000 seconds (5 minutes to 30 days)</p>"
         }
       },
-      "documentation": "<p>Lists refresh cache information.</p>"
+      "documentation": "<p>The refresh cache information for the file share.</p>"
     },
     "CacheStaleTimeoutInSeconds": {
       "type": "integer"
@@ -2576,11 +2737,11 @@
         },
         "CacheAttributes": {
           "shape": "CacheAttributes",
-          "documentation": "<p>Refresh cache information.</p>"
+          "documentation": "<p>Specifies refresh cache information for the file share.</p>"
         },
         "NotificationPolicy": {
           "shape": "NotificationPolicy",
-          "documentation": "<p>The notification policy of the file share.</p>"
+          "documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it's best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>"
         }
       },
       "documentation": "<p>CreateNFSFileShareInput</p>"
@@ -2657,20 +2818,20 @@
           "documentation": "<p>The files and folders on this share will only be visible to users with read access.</p>"
         },
         "AdminUserList": {
-          "shape": "FileShareUserList",
+          "shape": "UserList",
           "documentation": "<p>A list of users or groups in the Active Directory that will be granted administrator privileges on the file share. These users can do all file operations as the super-user. Acceptable formats include: <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\\group1</code>.</p> <important> <p>Use this option very carefully, because any user in this list can do anything they like on the file share, regardless of file permissions.</p> </important>"
         },
         "ValidUserList": {
-          "shape": "FileShareUserList",
+          "shape": "UserList",
           "documentation": "<p>A list of users or groups in the Active Directory that are allowed to access the file <a href=\"\"/> share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.</p>"
         },
         "InvalidUserList": {
-          "shape": "FileShareUserList",
+          "shape": "UserList",
           "documentation": "<p>A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.</p>"
         },
         "AuditDestinationARN": {
           "shape": "AuditDestinationARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>"
         },
         "Authentication": {
           "shape": "Authentication",
@@ -2690,11 +2851,11 @@
         },
         "CacheAttributes": {
           "shape": "CacheAttributes",
-          "documentation": "<p>Refresh cache information.</p>"
+          "documentation": "<p>Specifies refresh cache information for the file share.</p>"
         },
         "NotificationPolicy": {
           "shape": "NotificationPolicy",
-          "documentation": "<p>The notification policy of the file share.</p>"
+          "documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it's best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>"
         }
       },
       "documentation": "<p>CreateSMBFileShareInput</p>"
@@ -2802,11 +2963,11 @@
         },
         "SnapshotId": {
           "shape": "SnapshotId",
-          "documentation": "<p>The snapshot ID (e.g. \"snap-1122aabb\") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI storage volume from a snapshot; otherwise, do not include this field. To list snapshots for your account use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p>"
+          "documentation": "<p>The snapshot ID (e.g., \"snap-1122aabb\") of the snapshot to restore as the new stored volume. Specify this field if you want to create the iSCSI storage volume from a snapshot; otherwise, do not include this field. To list snapshots for your account use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/ApiReference-query-DescribeSnapshots.html\">DescribeSnapshots</a> in the <i>Amazon Elastic Compute Cloud API Reference</i>.</p>"
         },
         "PreserveExistingData": {
           "shape": "boolean",
-          "documentation": "<p>Set to true <code>true</code> if you want to preserve the data on the local disk. Otherwise, set to <code>false</code> to create an empty volume.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>"
+          "documentation": "<p>Set to <code>true</code> if you want to preserve the data on the local disk. Otherwise, set to <code>false</code> to create an empty volume.</p> <p>Valid Values: <code>true</code> | <code>false</code> </p>"
         },
         "TargetName": {
           "shape": "TargetName",
@@ -2968,7 +3129,7 @@
         },
         "TapeBarcodePrefix": {
           "shape": "TapeBarcodePrefix",
-          "documentation": "<p>A prefix that you append to the barcode of the virtual tape you are creating. This prefix makes the barcode unique.</p> <note> <p>The prefix must be 1 to 4 characters in length and must be one of the uppercase letters from A to Z.</p> </note>"
+          "documentation": "<p>A prefix that you append to the barcode of the virtual tape you are creating. This prefix makes the barcode unique.</p> <note> <p>The prefix must be 1-4 characters in length and must be one of the uppercase letters from A to Z.</p> </note>"
         },
         "KMSEncrypted": {
           "shape": "Boolean",
@@ -3297,11 +3458,11 @@
         },
         "Status": {
           "shape": "AvailabilityMonitorTestStatus",
-          "documentation": "<p>The status of the High Availability monitoring test. If a test hasn't been performed, the value of this field is null.</p>"
+          "documentation": "<p>The status of the high availability monitoring test. If a test hasn't been performed, the value of this field is null.</p>"
         },
         "StartTime": {
           "shape": "Time",
-          "documentation": "<p>The time the High Availability monitoring test was started. If a test hasn't been performed, the value of this field is null.</p>"
+          "documentation": "<p>The time the high availability monitoring test was started. If a test hasn't been performed, the value of this field is null.</p>"
         }
       }
     },
@@ -3444,6 +3605,27 @@
         }
       },
       "documentation": "<p>A JSON object containing the following fields:</p>"
+    },
+    "DescribeFileSystemAssociationsInput": {
+      "type": "structure",
+      "required": [
+        "FileSystemAssociationARNList"
+      ],
+      "members": {
+        "FileSystemAssociationARNList": {
+          "shape": "FileSystemAssociationARNList",
+          "documentation": "<p>An array containing the Amazon Resource Name (ARN) of each file system association to be described.</p>"
+        }
+      }
+    },
+    "DescribeFileSystemAssociationsOutput": {
+      "type": "structure",
+      "members": {
+        "FileSystemAssociationInfoList": {
+          "shape": "FileSystemAssociationInfoList",
+          "documentation": "<p>An array containing the <code>FileSystemAssociationInfo</code> data type of each file system association to be described. </p>"
+        }
+      }
     },
     "DescribeGatewayInformationInput": {
       "type": "structure",
@@ -3826,7 +4008,7 @@
         },
         "Marker": {
           "shape": "Marker",
-          "documentation": "<p>An opaque string which can be used as part of a subsequent DescribeTapes call to retrieve the next page of results.</p> <p>If a response does not contain a marker, then there are no more results to be retrieved.</p>"
+          "documentation": "<p>An opaque string that can be used as part of a subsequent <code>DescribeTapes</code> call to retrieve the next page of results.</p> <p>If a response does not contain a marker, then there are no more results to be retrieved.</p>"
         }
       },
       "documentation": "<p>DescribeTapesOutput</p>"
@@ -4017,6 +4199,31 @@
       },
       "documentation": "<p>DisableGatewayOutput</p>"
     },
+    "DisassociateFileSystemInput": {
+      "type": "structure",
+      "required": [
+        "FileSystemAssociationARN"
+      ],
+      "members": {
+        "FileSystemAssociationARN": {
+          "shape": "FileSystemAssociationARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the file system association to be deleted.</p>"
+        },
+        "ForceDelete": {
+          "shape": "boolean",
+          "documentation": "<p>If this value is set to true, the operation disassociates an Amazon FSx file system immediately. It ends all data uploads to the file system, and the file system association enters the <code>FORCE_DELETING</code> status. If this value is set to false, the Amazon FSx file system does not disassociate until all data is uploaded.</p>"
+        }
+      }
+    },
+    "DisassociateFileSystemOutput": {
+      "type": "structure",
+      "members": {
+        "FileSystemAssociationARN": {
+          "shape": "FileSystemAssociationARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the deleted file system association.</p>"
+        }
+      }
+    },
     "Disk": {
       "type": "structure",
       "members": {
@@ -4198,18 +4405,98 @@
         "SMB"
       ]
     },
-    "FileShareUser": {
+    "FileSystemAssociationARN": {
       "type": "string",
-      "max": 64,
-      "min": 1
+      "max": 500,
+      "min": 50
     },
-    "FileShareUserList": {
+    "FileSystemAssociationARNList": {
       "type": "list",
       "member": {
-        "shape": "FileShareUser"
+        "shape": "FileSystemAssociationARN"
       },
-      "max": 100,
-      "min": 0
+      "max": 10,
+      "min": 1
+    },
+    "FileSystemAssociationId": {
+      "type": "string",
+      "max": 30,
+      "min": 10
+    },
+    "FileSystemAssociationInfo": {
+      "type": "structure",
+      "members": {
+        "FileSystemAssociationARN": {
+          "shape": "FileSystemAssociationARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the file system association.</p>"
+        },
+        "LocationARN": {
+          "shape": "FileSystemLocationARN",
+          "documentation": "<p>The ARN of the backend Amazon FSx file system used for storing file data. For information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/APIReference/API_FileSystem.html\">FileSystem</a> in the <i>Amazon FSx API Reference</i>.</p>"
+        },
+        "FileSystemAssociationStatus": {
+          "shape": "FileSystemAssociationStatus",
+          "documentation": "<p>The status of the file system association. Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | <code>FORCE_DELETING</code> | <code>MISCONFIGURED</code> | <code>UPDATING</code> | <code>UNAVAILABLE</code> </p>"
+        },
+        "AuditDestinationARN": {
+          "shape": "AuditDestinationARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>"
+        },
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        },
+        "Tags": {
+          "shape": "Tags",
+          "documentation": "<p>A list of up to 50 tags assigned to the SMB file share, sorted alphabetically by key name. Each tag is a key-value pair.</p>"
+        },
+        "CacheAttributes": {
+          "shape": "CacheAttributes"
+        }
+      },
+      "documentation": "<p>Describes the object returned by <code>DescribeFileSystemAssociations</code> that describes a created file system association.</p>"
+    },
+    "FileSystemAssociationInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "FileSystemAssociationInfo"
+      }
+    },
+    "FileSystemAssociationStatus": {
+      "type": "string",
+      "max": 50,
+      "min": 3
+    },
+    "FileSystemAssociationSummary": {
+      "type": "structure",
+      "members": {
+        "FileSystemAssociationId": {
+          "shape": "FileSystemAssociationId",
+          "documentation": "<p>The ID of the file system association.</p>"
+        },
+        "FileSystemAssociationARN": {
+          "shape": "FileSystemAssociationARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the file system association.</p>"
+        },
+        "FileSystemAssociationStatus": {
+          "shape": "FileSystemAssociationStatus",
+          "documentation": "<p>The status of the file share. Valid Values: <code>AVAILABLE</code> | <code>CREATING</code> | <code>DELETING</code> | <code>FORCE_DELETING</code> | <code>MISCONFIGURED</code> | <code>UPDATING</code> | <code>UNAVAILABLE</code> </p>"
+        },
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        }
+      },
+      "documentation": "<p>Gets the summary returned by <code>ListFileSystemAssociation</code>, which is a summary of a created file system association.</p>"
+    },
+    "FileSystemAssociationSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "FileSystemAssociationSummary"
+      }
+    },
+    "FileSystemLocationARN": {
+      "type": "string",
+      "max": 512,
+      "min": 8
     },
     "Folder": {
       "type": "string",
@@ -4474,6 +4761,39 @@
         }
       },
       "documentation": "<p>ListFileShareOutput</p>"
+    },
+    "ListFileSystemAssociationsInput": {
+      "type": "structure",
+      "members": {
+        "GatewayARN": {
+          "shape": "GatewayARN"
+        },
+        "Limit": {
+          "shape": "PositiveIntObject",
+          "documentation": "<p>The maximum number of file system associations to return in the response. If present, <code>Limit</code> must be an integer with a value greater than zero. Optional.</p>"
+        },
+        "Marker": {
+          "shape": "Marker",
+          "documentation": "<p>Opaque pagination token returned from a previous <code>ListFileSystemAssociations</code> operation. If present, <code>Marker</code> specifies where to continue the list from after a previous call to <code>ListFileSystemAssociations</code>. Optional.</p>"
+        }
+      }
+    },
+    "ListFileSystemAssociationsOutput": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "Marker",
+          "documentation": "<p>If the request includes <code>Marker</code>, the response returns that value in this field.</p>"
+        },
+        "NextMarker": {
+          "shape": "Marker",
+          "documentation": "<p>If a value is present, there are more file system associations to return. In a subsequent request, use <code>NextMarker</code> as the value for <code>Marker</code> to retrieve the next set of file system associations.</p>"
+        },
+        "FileSystemAssociationSummaryList": {
+          "shape": "FileSystemAssociationSummaryList",
+          "documentation": "<p>An array of information about the Amazon FSx gateway's file system associations.</p>"
+        }
+      }
     },
     "ListGatewaysInput": {
       "type": "structure",
@@ -4829,11 +5149,11 @@
         },
         "CacheAttributes": {
           "shape": "CacheAttributes",
-          "documentation": "<p>Refresh cache information.</p>"
+          "documentation": "<p>Refresh cache information for the file share.</p>"
         },
         "NotificationPolicy": {
           "shape": "NotificationPolicy",
-          "documentation": "<p>The notification policy of the file share.</p>"
+          "documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it's best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>"
         }
       },
       "documentation": "<p>The Unix file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported in file gateways.</p>"
@@ -5242,20 +5562,20 @@
           "documentation": "<p>Indicates whether <code>AccessBasedEnumeration</code> is enabled.</p>"
         },
         "AdminUserList": {
-          "shape": "FileShareUserList",
+          "shape": "UserList",
           "documentation": "<p>A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.</p>"
         },
         "ValidUserList": {
-          "shape": "FileShareUserList",
+          "shape": "UserList",
           "documentation": "<p>A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.</p>"
         },
         "InvalidUserList": {
-          "shape": "FileShareUserList",
+          "shape": "UserList",
           "documentation": "<p>A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.</p>"
         },
         "AuditDestinationARN": {
           "shape": "AuditDestinationARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>"
         },
         "Authentication": {
           "shape": "Authentication"
@@ -5274,11 +5594,11 @@
         },
         "CacheAttributes": {
           "shape": "CacheAttributes",
-          "documentation": "<p>Refresh cache information.</p>"
+          "documentation": "<p>Refresh cache information for the file share.</p>"
         },
         "NotificationPolicy": {
           "shape": "NotificationPolicy",
-          "documentation": "<p>The notification policy of the file share.</p>"
+          "documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it's best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>"
         }
       },
       "documentation": "<p>The Windows file permissions and ownership information assigned, by default, to native S3 objects when file gateway discovers them in S3 buckets. This operation is only supported for file gateways.</p>"
@@ -5941,6 +6261,42 @@
       },
       "documentation": "<p>A JSON object containing the following fields:</p>"
     },
+    "UpdateFileSystemAssociationInput": {
+      "type": "structure",
+      "required": [
+        "FileSystemAssociationARN"
+      ],
+      "members": {
+        "FileSystemAssociationARN": {
+          "shape": "FileSystemAssociationARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the file system association that you want to update.</p>"
+        },
+        "UserName": {
+          "shape": "DomainUserName",
+          "documentation": "<p>The user name of the user credential that has permission to access the root share D$ of the Amazon FSx file system. The user account must belong to the Amazon FSx delegated admin user group.</p>"
+        },
+        "Password": {
+          "shape": "DomainUserPassword",
+          "documentation": "<p>The password of the user credential.</p>"
+        },
+        "AuditDestinationARN": {
+          "shape": "AuditDestinationARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>"
+        },
+        "CacheAttributes": {
+          "shape": "CacheAttributes"
+        }
+      }
+    },
+    "UpdateFileSystemAssociationOutput": {
+      "type": "structure",
+      "members": {
+        "FileSystemAssociationARN": {
+          "shape": "FileSystemAssociationARN",
+          "documentation": "<p>The ARN of the updated file system association.</p>"
+        }
+      }
+    },
     "UpdateGatewayInformationInput": {
       "type": "structure",
       "required": [
@@ -6092,11 +6448,11 @@
         },
         "CacheAttributes": {
           "shape": "CacheAttributes",
-          "documentation": "<p>Refresh cache information.</p>"
+          "documentation": "<p>specifies refresh cache information for the file share.</p>"
         },
         "NotificationPolicy": {
           "shape": "NotificationPolicy",
-          "documentation": "<p>The notification policy of the file share.</p>"
+          "documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it's best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>"
         }
       },
       "documentation": "<p>UpdateNFSFileShareInput</p>"
@@ -6158,20 +6514,20 @@
           "documentation": "<p>The files and folders on this share will only be visible to users with read access.</p>"
         },
         "AdminUserList": {
-          "shape": "FileShareUserList",
+          "shape": "UserList",
           "documentation": "<p>A list of users or groups in the Active Directory that have administrator rights to the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.</p>"
         },
         "ValidUserList": {
-          "shape": "FileShareUserList",
+          "shape": "UserList",
           "documentation": "<p>A list of users or groups in the Active Directory that are allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.</p>"
         },
         "InvalidUserList": {
-          "shape": "FileShareUserList",
+          "shape": "UserList",
           "documentation": "<p>A list of users or groups in the Active Directory that are not allowed to access the file share. A group must be prefixed with the @ character. Acceptable formats include: <code>DOMAIN\\User1</code>, <code>user1</code>, <code>@group1</code>, and <code>@DOMAIN\\group1</code>. Can only be set if Authentication is set to <code>ActiveDirectory</code>.</p>"
         },
         "AuditDestinationARN": {
           "shape": "AuditDestinationARN",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the storage used for the audit logs.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the storage used for audit logs.</p>"
         },
         "CaseSensitivity": {
           "shape": "CaseSensitivity",
@@ -6183,11 +6539,11 @@
         },
         "CacheAttributes": {
           "shape": "CacheAttributes",
-          "documentation": "<p>Refresh cache information.</p>"
+          "documentation": "<p>Specifies refresh cache information for the file share.</p>"
         },
         "NotificationPolicy": {
           "shape": "NotificationPolicy",
-          "documentation": "<p>The notification policy of the file share.</p>"
+          "documentation": "<p>The notification policy of the file share. <code>SettlingTimeInSeconds</code> controls the number of seconds to wait after the last point in time a client wrote to a file before generating an <code>ObjectUploaded</code> notification. Because clients can make many small writes to files, it's best to set this parameter for as long as possible to avoid generating multiple notifications for the same file in a small time period.</p> <note> <p> <code>SettlingTimeInSeconds</code> has no effect on the timing of the object uploading to Amazon S3, only the timing of the notification.</p> </note> <p>The following example sets <code>NotificationPolicy</code> on with <code>SettlingTimeInSeconds</code> set to 60.</p> <p> <code>{\\\"Upload\\\": {\\\"SettlingTimeInSeconds\\\": 60}}</code> </p> <p>The following example sets <code>NotificationPolicy</code> off.</p> <p> <code>{}</code> </p>"
         }
       },
       "documentation": "<p>UpdateSMBFileShareInput</p>"
@@ -6317,6 +6673,19 @@
         }
       },
       "documentation": "<p>UpdateVTLDeviceTypeOutput</p>"
+    },
+    "UserList": {
+      "type": "list",
+      "member": {
+        "shape": "UserListUser"
+      },
+      "max": 100,
+      "min": 0
+    },
+    "UserListUser": {
+      "type": "string",
+      "max": 64,
+      "min": 1
     },
     "VTLDevice": {
       "type": "structure",

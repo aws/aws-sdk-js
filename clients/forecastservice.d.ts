@@ -124,6 +124,14 @@ declare class ForecastService extends Service {
    */
   deletePredictorBacktestExportJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes an entire resource tree. This operation will delete the parent resource and its child resources. Child resources are resources that were created from another resource. For example, when a forecast is generated from a predictor, the forecast is the child resource and the predictor is the parent resource. Amazon Forecast resources possess the following parent-child resource hierarchies:    Dataset: dataset import jobs    Dataset Group: predictors, predictor backtest export jobs, forecasts, forecast export jobs    Predictor: predictor backtest export jobs, forecasts, forecast export jobs    Forecast: forecast export jobs     DeleteResourceTree will only delete Amazon Forecast resources, and will not delete datasets or exported files stored in Amazon S3.  
+   */
+  deleteResourceTree(params: ForecastService.Types.DeleteResourceTreeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an entire resource tree. This operation will delete the parent resource and its child resources. Child resources are resources that were created from another resource. For example, when a forecast is generated from a predictor, the forecast is the child resource and the predictor is the parent resource. Amazon Forecast resources possess the following parent-child resource hierarchies:    Dataset: dataset import jobs    Dataset Group: predictors, predictor backtest export jobs, forecasts, forecast export jobs    Predictor: predictor backtest export jobs, forecasts, forecast export jobs    Forecast: forecast export jobs     DeleteResourceTree will only delete Amazon Forecast resources, and will not delete datasets or exported files stored in Amazon S3.  
+   */
+  deleteResourceTree(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Describes an Amazon Forecast dataset created using the CreateDataset operation. In addition to listing the parameters specified in the CreateDataset request, this operation includes the following dataset properties:    CreationTime     LastModificationTime     Status   
    */
   describeDataset(params: ForecastService.Types.DescribeDatasetRequest, callback?: (err: AWSError, data: ForecastService.Types.DescribeDatasetResponse) => void): Request<ForecastService.Types.DescribeDatasetResponse, AWSError>;
@@ -288,6 +296,7 @@ declare namespace ForecastService {
   export type Arn = string;
   export type ArnList = Arn[];
   export type AttributeType = "string"|"integer"|"float"|"timestamp"|"geolocation"|string;
+  export type AutoMLOverrideStrategy = "LatencyOptimized"|string;
   export type Boolean = boolean;
   export interface CategoricalParameterRange {
     /**
@@ -510,6 +519,10 @@ declare namespace ForecastService {
      */
     PerformAutoML?: Boolean;
     /**
+     * Used to overide the default AutoML strategy, which is to optimize predictor accuracy. To apply an AutoML strategy that minimizes training time, use LatencyOptimized. This parameter is only valid for predictors trained using AutoML.
+     */
+    AutoMLOverrideStrategy?: AutoMLOverrideStrategy;
+    /**
      * Whether to perform hyperparameter optimization (HPO). HPO finds optimal hyperparameter values for your training data. The process of performing HPO is known as running a hyperparameter tuning job. The default value is false. In this case, Amazon Forecast uses default hyperparameter values from the chosen algorithm. To override the default values, set PerformHPO to true and, optionally, supply the HyperParameterTuningJobConfig object. The tuning job specifies a metric to optimize, which hyperparameters participate in tuning, and the valid range for each tunable hyperparameter. In this case, you are required to specify an algorithm and PerformAutoML must be false. The following algorithms support HPO:   DeepAR+   CNN-QR  
      */
     PerformHPO?: Boolean;
@@ -680,6 +693,12 @@ declare namespace ForecastService {
      */
     PredictorArn: Arn;
   }
+  export interface DeleteResourceTreeRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the parent resource to delete. All child resources of the parent resource will also be deleted.
+     */
+    ResourceArn: Arn;
+  }
   export interface DescribeDatasetGroupRequest {
     /**
      * The Amazon Resource Name (ARN) of the dataset group.
@@ -755,6 +774,10 @@ declare namespace ForecastService {
      * The location of the training data to import and an AWS Identity and Access Management (IAM) role that Amazon Forecast can assume to access the data. If encryption is used, DataSource includes an AWS Key Management Service (KMS) key.
      */
     DataSource?: DataSource;
+    /**
+     * The estimated time remaining in minutes for the dataset import job to complete.
+     */
+    EstimatedTimeRemainingInMinutes?: Long;
     /**
      * Statistical information about each field in the input data.
      */
@@ -896,6 +919,10 @@ declare namespace ForecastService {
      */
     DatasetGroupArn?: Arn;
     /**
+     * The estimated time remaining in minutes for the forecast job to complete.
+     */
+    EstimatedTimeRemainingInMinutes?: Long;
+    /**
      * The status of the forecast. States include:    ACTIVE     CREATE_PENDING, CREATE_IN_PROGRESS, CREATE_FAILED     CREATE_STOPPING, CREATE_STOPPED     DELETE_PENDING, DELETE_IN_PROGRESS, DELETE_FAILED     The Status of the forecast must be ACTIVE before you can query or export the forecast. 
      */
     Status?: String;
@@ -981,6 +1008,10 @@ declare namespace ForecastService {
      */
     PerformAutoML?: Boolean;
     /**
+     * The AutoML strategy used to train the predictor. Unless LatencyOptimized is specified, the AutoML strategy optimizes predictor accuracy. This parameter is only valid for predictors trained using AutoML.
+     */
+    AutoMLOverrideStrategy?: AutoMLOverrideStrategy;
+    /**
      * Whether the predictor is set to perform hyperparameter optimization (HPO).
      */
     PerformHPO?: Boolean;
@@ -1012,6 +1043,10 @@ declare namespace ForecastService {
      * Details on the the status and results of the backtests performed to evaluate the accuracy of the predictor. You specify the number of backtests to perform when you call the operation.
      */
     PredictorExecutionDetails?: PredictorExecutionDetails;
+    /**
+     * The estimated time remaining in minutes for the predictor training job to complete.
+     */
+    EstimatedTimeRemainingInMinutes?: Long;
     /**
      * An array of the ARNs of the dataset import jobs used to import training data for the predictor.
      */
@@ -1223,6 +1258,10 @@ declare namespace ForecastService {
      * An array of results from evaluating the predictor.
      */
     PredictorEvaluationResults?: PredictorEvaluationResults;
+    /**
+     * The AutoML strategy used to train the predictor. Unless LatencyOptimized is specified, the AutoML strategy optimizes predictor accuracy. This parameter is only valid for predictors trained using AutoML.
+     */
+    AutoMLOverrideStrategy?: AutoMLOverrideStrategy;
   }
   export interface HyperParameterTuningJobConfig {
     /**
@@ -1433,6 +1472,7 @@ declare namespace ForecastService {
      */
     Tags?: Tags;
   }
+  export type Long = number;
   export type MaxResults = number;
   export type Message = string;
   export interface Metrics {
@@ -1579,19 +1619,19 @@ declare namespace ForecastService {
   export type SchemaAttributes = SchemaAttribute[];
   export interface Statistics {
     /**
-     * The number of values in the field.
+     * The number of values in the field. If the response value is -1, refer to CountLong.
      */
     Count?: Integer;
     /**
-     * The number of distinct values in the field.
+     * The number of distinct values in the field. If the response value is -1, refer to CountDistinctLong.
      */
     CountDistinct?: Integer;
     /**
-     * The number of null values in the field.
+     * The number of null values in the field. If the response value is -1, refer to CountNullLong.
      */
     CountNull?: Integer;
     /**
-     * The number of NAN (not a number) values in the field.
+     * The number of NAN (not a number) values in the field. If the response value is -1, refer to CountNanLong.
      */
     CountNan?: Integer;
     /**
@@ -1610,6 +1650,22 @@ declare namespace ForecastService {
      * For a numeric field, the standard deviation.
      */
     Stddev?: Double;
+    /**
+     * The number of values in the field. CountLong is used instead of Count if the value is greater than 2,147,483,647.
+     */
+    CountLong?: Long;
+    /**
+     * The number of distinct values in the field. CountDistinctLong is used instead of CountDistinct if the value is greater than 2,147,483,647.
+     */
+    CountDistinctLong?: Long;
+    /**
+     * The number of null values in the field. CountNullLong is used instead of CountNull if the value is greater than 2,147,483,647.
+     */
+    CountNullLong?: Long;
+    /**
+     * The number of NAN (not a number) values in the field. CountNanLong is used instead of CountNan if the value is greater than 2,147,483,647.
+     */
+    CountNanLong?: Long;
   }
   export type Status = string;
   export interface StopResourceRequest {

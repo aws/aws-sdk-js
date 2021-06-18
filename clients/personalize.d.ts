@@ -36,6 +36,14 @@ declare class Personalize extends Service {
    */
   createDataset(callback?: (err: AWSError, data: Personalize.Types.CreateDatasetResponse) => void): Request<Personalize.Types.CreateDatasetResponse, AWSError>;
   /**
+   *  Creates a job that exports data from your dataset to an Amazon S3 bucket. To allow Amazon Personalize to export the training data, you must specify an service-linked AWS Identity and Access Management (IAM) role that gives Amazon Personalize PutObject permissions for your Amazon S3 bucket. For information, see Exporting a dataset in the Amazon Personalize developer guide.   Status  A dataset export job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED    To get the status of the export job, call DescribeDatasetExportJob, and specify the Amazon Resource Name (ARN) of the dataset export job. The dataset export is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed. 
+   */
+  createDatasetExportJob(params: Personalize.Types.CreateDatasetExportJobRequest, callback?: (err: AWSError, data: Personalize.Types.CreateDatasetExportJobResponse) => void): Request<Personalize.Types.CreateDatasetExportJobResponse, AWSError>;
+  /**
+   *  Creates a job that exports data from your dataset to an Amazon S3 bucket. To allow Amazon Personalize to export the training data, you must specify an service-linked AWS Identity and Access Management (IAM) role that gives Amazon Personalize PutObject permissions for your Amazon S3 bucket. For information, see Exporting a dataset in the Amazon Personalize developer guide.   Status  A dataset export job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED    To get the status of the export job, call DescribeDatasetExportJob, and specify the Amazon Resource Name (ARN) of the dataset export job. The dataset export is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed. 
+   */
+  createDatasetExportJob(callback?: (err: AWSError, data: Personalize.Types.CreateDatasetExportJobResponse) => void): Request<Personalize.Types.CreateDatasetExportJobResponse, AWSError>;
+  /**
    * Creates an empty dataset group. A dataset group contains related datasets that supply data for training a model. A dataset group can contain at most three datasets, one for each type of dataset:   Interactions   Items   Users   To train a model (create a solution), a dataset group that contains an Interactions dataset is required. Call CreateDataset to add a dataset to the group. A dataset group can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   DELETE PENDING   To get the status of the dataset group, call DescribeDatasetGroup. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the creation failed.  You must wait until the status of the dataset group is ACTIVE before adding a dataset to the group.  You can specify an AWS Key Management Service (KMS) key to encrypt the datasets in the group. If you specify a KMS key, you must also include an AWS Identity and Access Management (IAM) role that has permission to access the key.  APIs that require a dataset group ARN in the request     CreateDataset     CreateEventTracker     CreateSolution     Related APIs     ListDatasetGroups     DescribeDatasetGroup     DeleteDatasetGroup   
    */
   createDatasetGroup(params: Personalize.Types.CreateDatasetGroupRequest, callback?: (err: AWSError, data: Personalize.Types.CreateDatasetGroupResponse) => void): Request<Personalize.Types.CreateDatasetGroupResponse, AWSError>;
@@ -44,11 +52,11 @@ declare class Personalize extends Service {
    */
   createDatasetGroup(callback?: (err: AWSError, data: Personalize.Types.CreateDatasetGroupResponse) => void): Request<Personalize.Types.CreateDatasetGroupResponse, AWSError>;
   /**
-   * Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it in an internal AWS system.  The dataset import job replaces any existing data in the dataset that you imported in bulk.   Status  A dataset import job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   To get the status of the import job, call DescribeDatasetImportJob, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.   Related APIs     ListDatasetImportJobs     DescribeDatasetImportJob   
+   * Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) service role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it in an internal AWS system. For information on granting access to your Amazon S3 bucket, see Giving Amazon Personalize Access to Amazon S3 Resources.   The dataset import job replaces any existing data in the dataset that you imported in bulk.   Status  A dataset import job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   To get the status of the import job, call DescribeDatasetImportJob, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.   Related APIs     ListDatasetImportJobs     DescribeDatasetImportJob   
    */
   createDatasetImportJob(params: Personalize.Types.CreateDatasetImportJobRequest, callback?: (err: AWSError, data: Personalize.Types.CreateDatasetImportJobResponse) => void): Request<Personalize.Types.CreateDatasetImportJobResponse, AWSError>;
   /**
-   * Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it in an internal AWS system.  The dataset import job replaces any existing data in the dataset that you imported in bulk.   Status  A dataset import job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   To get the status of the import job, call DescribeDatasetImportJob, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.   Related APIs     ListDatasetImportJobs     DescribeDatasetImportJob   
+   * Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) service role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it in an internal AWS system. For information on granting access to your Amazon S3 bucket, see Giving Amazon Personalize Access to Amazon S3 Resources.   The dataset import job replaces any existing data in the dataset that you imported in bulk.   Status  A dataset import job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   To get the status of the import job, call DescribeDatasetImportJob, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.   Related APIs     ListDatasetImportJobs     DescribeDatasetImportJob   
    */
   createDatasetImportJob(callback?: (err: AWSError, data: Personalize.Types.CreateDatasetImportJobResponse) => void): Request<Personalize.Types.CreateDatasetImportJobResponse, AWSError>;
   /**
@@ -84,11 +92,11 @@ declare class Personalize extends Service {
    */
   createSolution(callback?: (err: AWSError, data: Personalize.Types.CreateSolutionResponse) => void): Request<Personalize.Types.CreateSolutionResponse, AWSError>;
   /**
-   * Trains or retrains an active solution. A solution is created using the CreateSolution operation and must be in the ACTIVE state before calling CreateSolutionVersion. A new version of the solution is created every time you call this operation.  Status  A solution version can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   To get the status of the version, call DescribeSolutionVersion. Wait until the status shows as ACTIVE before calling CreateCampaign. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Related APIs     ListSolutionVersions     DescribeSolutionVersion       ListSolutions     CreateSolution     DescribeSolution     DeleteSolution   
+   * Trains or retrains an active solution. A solution is created using the CreateSolution operation and must be in the ACTIVE state before calling CreateSolutionVersion. A new version of the solution is created every time you call this operation.  Status  A solution version can be in one of the following states:   CREATE PENDING   CREATE IN_PROGRESS   ACTIVE   CREATE FAILED   CREATE STOPPING   CREATE STOPPED   To get the status of the version, call DescribeSolutionVersion. Wait until the status shows as ACTIVE before calling CreateCampaign. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Related APIs     ListSolutionVersions     DescribeSolutionVersion       ListSolutions     CreateSolution     DescribeSolution     DeleteSolution   
    */
   createSolutionVersion(params: Personalize.Types.CreateSolutionVersionRequest, callback?: (err: AWSError, data: Personalize.Types.CreateSolutionVersionResponse) => void): Request<Personalize.Types.CreateSolutionVersionResponse, AWSError>;
   /**
-   * Trains or retrains an active solution. A solution is created using the CreateSolution operation and must be in the ACTIVE state before calling CreateSolutionVersion. A new version of the solution is created every time you call this operation.  Status  A solution version can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED   To get the status of the version, call DescribeSolutionVersion. Wait until the status shows as ACTIVE before calling CreateCampaign. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Related APIs     ListSolutionVersions     DescribeSolutionVersion       ListSolutions     CreateSolution     DescribeSolution     DeleteSolution   
+   * Trains or retrains an active solution. A solution is created using the CreateSolution operation and must be in the ACTIVE state before calling CreateSolutionVersion. A new version of the solution is created every time you call this operation.  Status  A solution version can be in one of the following states:   CREATE PENDING   CREATE IN_PROGRESS   ACTIVE   CREATE FAILED   CREATE STOPPING   CREATE STOPPED   To get the status of the version, call DescribeSolutionVersion. Wait until the status shows as ACTIVE before calling CreateCampaign. If the status shows as CREATE FAILED, the response includes a failureReason key, which describes why the job failed.  Related APIs     ListSolutionVersions     DescribeSolutionVersion       ListSolutions     CreateSolution     DescribeSolution     DeleteSolution   
    */
   createSolutionVersion(callback?: (err: AWSError, data: Personalize.Types.CreateSolutionVersionResponse) => void): Request<Personalize.Types.CreateSolutionVersionResponse, AWSError>;
   /**
@@ -179,6 +187,14 @@ declare class Personalize extends Service {
    * Describes the given dataset. For more information on datasets, see CreateDataset.
    */
   describeDataset(callback?: (err: AWSError, data: Personalize.Types.DescribeDatasetResponse) => void): Request<Personalize.Types.DescribeDatasetResponse, AWSError>;
+  /**
+   * Describes the dataset export job created by CreateDatasetExportJob, including the export job status.
+   */
+  describeDatasetExportJob(params: Personalize.Types.DescribeDatasetExportJobRequest, callback?: (err: AWSError, data: Personalize.Types.DescribeDatasetExportJobResponse) => void): Request<Personalize.Types.DescribeDatasetExportJobResponse, AWSError>;
+  /**
+   * Describes the dataset export job created by CreateDatasetExportJob, including the export job status.
+   */
+  describeDatasetExportJob(callback?: (err: AWSError, data: Personalize.Types.DescribeDatasetExportJobResponse) => void): Request<Personalize.Types.DescribeDatasetExportJobResponse, AWSError>;
   /**
    * Describes the given dataset group. For more information on dataset groups, see CreateDatasetGroup.
    */
@@ -276,6 +292,14 @@ declare class Personalize extends Service {
    */
   listCampaigns(callback?: (err: AWSError, data: Personalize.Types.ListCampaignsResponse) => void): Request<Personalize.Types.ListCampaignsResponse, AWSError>;
   /**
+   * Returns a list of dataset export jobs that use the given dataset. When a dataset is not specified, all the dataset export jobs associated with the account are listed. The response provides the properties for each dataset export job, including the Amazon Resource Name (ARN). For more information on dataset export jobs, see CreateDatasetExportJob. For more information on datasets, see CreateDataset.
+   */
+  listDatasetExportJobs(params: Personalize.Types.ListDatasetExportJobsRequest, callback?: (err: AWSError, data: Personalize.Types.ListDatasetExportJobsResponse) => void): Request<Personalize.Types.ListDatasetExportJobsResponse, AWSError>;
+  /**
+   * Returns a list of dataset export jobs that use the given dataset. When a dataset is not specified, all the dataset export jobs associated with the account are listed. The response provides the properties for each dataset export job, including the Amazon Resource Name (ARN). For more information on dataset export jobs, see CreateDatasetExportJob. For more information on datasets, see CreateDataset.
+   */
+  listDatasetExportJobs(callback?: (err: AWSError, data: Personalize.Types.ListDatasetExportJobsResponse) => void): Request<Personalize.Types.ListDatasetExportJobsResponse, AWSError>;
+  /**
    * Returns a list of dataset groups. The response provides the properties for each dataset group, including the Amazon Resource Name (ARN). For more information on dataset groups, see CreateDatasetGroup.
    */
   listDatasetGroups(params: Personalize.Types.ListDatasetGroupsRequest, callback?: (err: AWSError, data: Personalize.Types.ListDatasetGroupsResponse) => void): Request<Personalize.Types.ListDatasetGroupsResponse, AWSError>;
@@ -347,6 +371,14 @@ declare class Personalize extends Service {
    * Returns a list of solutions that use the given dataset group. When a dataset group is not specified, all the solutions associated with the account are listed. The response provides the properties for each solution, including the Amazon Resource Name (ARN). For more information on solutions, see CreateSolution.
    */
   listSolutions(callback?: (err: AWSError, data: Personalize.Types.ListSolutionsResponse) => void): Request<Personalize.Types.ListSolutionsResponse, AWSError>;
+  /**
+   * Stops creating a solution version that is in a state of CREATE_PENDING or CREATE IN_PROGRESS.  Depending on the current state of the solution version, the solution version state changes as follows:   CREATE_PENDING &gt; CREATE_STOPPED or   CREATE_IN_PROGRESS &gt; CREATE_STOPPING &gt; CREATE_STOPPED   You are billed for all of the training completed up until you stop the solution version creation. You cannot resume creating a solution version once it has been stopped.
+   */
+  stopSolutionVersionCreation(params: Personalize.Types.StopSolutionVersionCreationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Stops creating a solution version that is in a state of CREATE_PENDING or CREATE IN_PROGRESS.  Depending on the current state of the solution version, the solution version state changes as follows:   CREATE_PENDING &gt; CREATE_STOPPED or   CREATE_IN_PROGRESS &gt; CREATE_STOPPING &gt; CREATE_STOPPED   You are billed for all of the training completed up until you stop the solution version creation. You cannot resume creating a solution version once it has been stopped.
+   */
+  stopSolutionVersionCreation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Updates a campaign by either deploying a new solution or changing the value of the campaign's minProvisionedTPS parameter. To update a campaign, the campaign status must be ACTIVE or CREATE FAILED. Check the campaign status using the DescribeCampaign API.  You must wait until the status of the updated campaign is ACTIVE before asking the campaign for recommendations.  For more information on campaigns, see CreateCampaign.
    */
@@ -485,7 +517,7 @@ declare namespace Personalize {
   }
   export interface BatchInferenceJobConfig {
     /**
-     * A string to string map specifying the exploration configuration hyperparameters, including explorationWeight and explorationItemAgeCutOff, you want to use to configure the amount of item exploration Amazon Personalize uses when recommending items. See native-recipe-new-item-USER_PERSONALIZATION.
+     * A string to string map specifying the exploration configuration hyperparameters, including explorationWeight and explorationItemAgeCutOff, you want to use to configure the amount of item exploration Amazon Personalize uses when recommending items. See User-Personalization.
      */
     itemExplorationConfig?: HyperParameters;
   }
@@ -672,7 +704,7 @@ declare namespace Personalize {
      */
     solutionVersionArn: Arn;
     /**
-     * The ARN of the filter to apply to the batch inference job. For more information on using filters, see Using Filters with Amazon Personalize.
+     * The ARN of the filter to apply to the batch inference job. For more information on using filters, see Filtering Batch Recommendations..
      */
     filterArn?: Arn;
     /**
@@ -688,7 +720,7 @@ declare namespace Personalize {
      */
     jobOutput: BatchInferenceJobOutput;
     /**
-     * The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and out Amazon S3 buckets respectively.
+     * The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and output Amazon S3 buckets respectively.
      */
     roleArn: RoleArn;
     /**
@@ -725,6 +757,34 @@ declare namespace Personalize {
      * The Amazon Resource Name (ARN) of the campaign.
      */
     campaignArn?: Arn;
+  }
+  export interface CreateDatasetExportJobRequest {
+    /**
+     * The name for the dataset export job.
+     */
+    jobName: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the dataset that contains the data to export.
+     */
+    datasetArn: Arn;
+    /**
+     * The data to export, based on how you imported the data. You can choose to export only BULK data that you imported using a dataset import job, only PUT data that you imported incrementally (using the console, PutEvents, PutUsers and PutItems operations), or ALL for both types. The default value is PUT. 
+     */
+    ingestionMode?: IngestionMode;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management service role that has permissions to add data to your output Amazon S3 bucket.
+     */
+    roleArn: RoleArn;
+    /**
+     * The path to the Amazon S3 bucket where the job's output is stored.
+     */
+    jobOutput: DatasetExportJobOutput;
+  }
+  export interface CreateDatasetExportJobResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the dataset export job.
+     */
+    datasetExportJobArn?: Arn;
   }
   export interface CreateDatasetGroupRequest {
     /**
@@ -904,7 +964,7 @@ declare namespace Personalize {
   }
   export interface DataSource {
     /**
-     * The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored. For example:   s3://bucket-name/training-data.csv 
+     * The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored. For example:   s3://bucket-name/folder-name/ 
      */
     dataLocation?: S3Location;
   }
@@ -942,6 +1002,78 @@ declare namespace Personalize {
      */
     lastUpdatedDateTime?: _Date;
   }
+  export interface DatasetExportJob {
+    /**
+     * The name of the export job.
+     */
+    jobName?: Name;
+    /**
+     * The Amazon Resource Name (ARN) of the dataset export job.
+     */
+    datasetExportJobArn?: Arn;
+    /**
+     * The Amazon Resource Name (ARN) of the dataset to export.
+     */
+    datasetArn?: Arn;
+    /**
+     * The data to export, based on how you imported the data. You can choose to export BULK data that you imported using a dataset import job, PUT data that you imported incrementally (using the console, PutEvents, PutUsers and PutItems operations), or ALL for both types. The default value is PUT. 
+     */
+    ingestionMode?: IngestionMode;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management service role that has permissions to add data to your output Amazon S3 bucket.
+     */
+    roleArn?: Arn;
+    /**
+     * The status of the dataset export job. A dataset export job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED  
+     */
+    status?: Status;
+    /**
+     * The path to the Amazon S3 bucket where the job's output is stored. For example:  s3://bucket-name/folder-name/ 
+     */
+    jobOutput?: DatasetExportJobOutput;
+    /**
+     * The creation date and time (in Unix time) of the dataset export job.
+     */
+    creationDateTime?: _Date;
+    /**
+     * The date and time (in Unix time) the status of the dataset export job was last updated.
+     */
+    lastUpdatedDateTime?: _Date;
+    /**
+     * If a dataset export job fails, provides the reason why.
+     */
+    failureReason?: FailureReason;
+  }
+  export interface DatasetExportJobOutput {
+    s3DataDestination: S3DataConfig;
+  }
+  export interface DatasetExportJobSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the dataset export job.
+     */
+    datasetExportJobArn?: Arn;
+    /**
+     * The name of the dataset export job.
+     */
+    jobName?: Name;
+    /**
+     * The status of the dataset export job. A dataset export job can be in one of the following states:   CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED  
+     */
+    status?: Status;
+    /**
+     * The date and time (in Unix time) that the dataset export job was created.
+     */
+    creationDateTime?: _Date;
+    /**
+     * The date and time (in Unix time) that the dataset export job status was last updated.
+     */
+    lastUpdatedDateTime?: _Date;
+    /**
+     * If a dataset export job fails, the reason behind the failure.
+     */
+    failureReason?: FailureReason;
+  }
+  export type DatasetExportJobs = DatasetExportJobSummary[];
   export interface DatasetGroup {
     /**
      * The name of the dataset group.
@@ -1059,7 +1191,7 @@ declare namespace Personalize {
      */
     creationDateTime?: _Date;
     /**
-     * The date and time (in Unix time) that the dataset was last updated.
+     * The date and time (in Unix time) that the dataset import job status was last updated.
      */
     lastUpdatedDateTime?: _Date;
     /**
@@ -1281,6 +1413,18 @@ declare namespace Personalize {
      * The properties of the campaign.
      */
     campaign?: Campaign;
+  }
+  export interface DescribeDatasetExportJobRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the dataset export job to describe.
+     */
+    datasetExportJobArn: Arn;
+  }
+  export interface DescribeDatasetExportJobResponse {
+    /**
+     * Information about the dataset export job, including the status. The status is one of the following values:   CREATE PENDING   CREATE IN_PROGRESS   ACTIVE   CREATE FAILED  
+     */
+    datasetExportJob?: DatasetExportJob;
   }
   export interface DescribeDatasetGroupRequest {
     /**
@@ -1629,6 +1773,7 @@ declare namespace Personalize {
     categoricalHyperParameterRanges?: CategoricalHyperParameterRanges;
   }
   export type HyperParameters = {[key: string]: ParameterValue};
+  export type IngestionMode = "BULK"|"PUT"|"ALL"|string;
   export interface IntegerHyperParameterRange {
     /**
      * The name of the hyperparameter.
@@ -1646,6 +1791,7 @@ declare namespace Personalize {
   export type IntegerHyperParameterRanges = IntegerHyperParameterRange[];
   export type IntegerMaxValue = number;
   export type IntegerMinValue = number;
+  export type ItemAttribute = string;
   export type KmsKeyArn = string;
   export interface ListBatchInferenceJobsRequest {
     /**
@@ -1667,7 +1813,7 @@ declare namespace Personalize {
      */
     batchInferenceJobs?: BatchInferenceJobs;
     /**
-     * The token to use to retreive the next page of results. The value is null when there are no more results to return.
+     * The token to use to retrieve the next page of results. The value is null when there are no more results to return.
      */
     nextToken?: NextToken;
   }
@@ -1692,6 +1838,30 @@ declare namespace Personalize {
     campaigns?: Campaigns;
     /**
      * A token for getting the next set of campaigns (if they exist).
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListDatasetExportJobsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the dataset to list the dataset export jobs for.
+     */
+    datasetArn?: Arn;
+    /**
+     * A token returned from the previous call to ListDatasetExportJobs for getting the next set of dataset export jobs (if they exist).
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of dataset export jobs to return.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListDatasetExportJobsResponse {
+    /**
+     * The list of dataset export jobs.
+     */
+    datasetExportJobs?: DatasetExportJobs;
+    /**
+     * A token for getting the next set of dataset export jobs (if they exist).
      */
     nextToken?: NextToken;
   }
@@ -1911,6 +2081,17 @@ declare namespace Personalize {
   export type Name = string;
   export type NextToken = string;
   export type NumBatchResults = number;
+  export type ObjectiveSensitivity = "LOW"|"MEDIUM"|"HIGH"|"OFF"|string;
+  export interface OptimizationObjective {
+    /**
+     * The numerical metadata column in an Items dataset related to the optimization objective. For example, VIDEO_LENGTH (to maximize streaming minutes), or PRICE (to maximize revenue).
+     */
+    itemAttribute?: ItemAttribute;
+    /**
+     * Specifies how Amazon Personalize balances the importance of your optimization objective versus relevance.
+     */
+    objectiveSensitivity?: ObjectiveSensitivity;
+  }
   export type ParameterName = string;
   export type ParameterValue = string;
   export type PerformAutoML = boolean;
@@ -2067,6 +2248,10 @@ declare namespace Personalize {
      * The AutoMLConfig object containing a list of recipes to search when AutoML is performed.
      */
     autoMLConfig?: AutoMLConfig;
+    /**
+     * Describes the additional objective for the solution, such as maximizing streaming minutes or increasing revenue. For more information see Optimizing a solution.
+     */
+    optimizationObjective?: OptimizationObjective;
   }
   export interface SolutionSummary {
     /**
@@ -2136,7 +2321,7 @@ declare namespace Personalize {
      */
     tunedHPOParams?: TunedHPOParams;
     /**
-     * The status of the solution version. A solution version can be in one of the following states:   CREATE PENDING   CREATE IN_PROGRESS   ACTIVE   CREATE FAILED  
+     * The status of the solution version. A solution version can be in one of the following states:   CREATE PENDING   CREATE IN_PROGRESS   ACTIVE   CREATE FAILED   CREATE STOPPING   CREATE STOPPED  
      */
     status?: Status;
     /**
@@ -2177,6 +2362,12 @@ declare namespace Personalize {
   export type SolutionVersions = SolutionVersionSummary[];
   export type Solutions = SolutionSummary[];
   export type Status = string;
+  export interface StopSolutionVersionCreationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the solution version you want to stop creating.
+     */
+    solutionVersionArn: Arn;
+  }
   export type TrackingId = string;
   export type TrainingHours = number;
   export type TrainingInputMode = string;

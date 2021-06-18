@@ -1176,11 +1176,35 @@
         "CODING_MODE_3_2_LFE"
       ]
     },
-    "Ac3DynamicRangeCompressionProfile": {
+    "Ac3DynamicRangeCompressionLine": {
       "type": "string",
-      "documentation": "If set to FILM_STANDARD, adds dynamic range compression signaling to the output bitstream as defined in the Dolby Digital specification.",
+      "documentation": "Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the line operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.",
       "enum": [
         "FILM_STANDARD",
+        "FILM_LIGHT",
+        "MUSIC_STANDARD",
+        "MUSIC_LIGHT",
+        "SPEECH",
+        "NONE"
+      ]
+    },
+    "Ac3DynamicRangeCompressionProfile": {
+      "type": "string",
+      "documentation": "When you want to add Dolby dynamic range compression (DRC) signaling to your output stream, we recommend that you use the mode-specific settings instead of Dynamic range compression profile (DynamicRangeCompressionProfile). The mode-specific settings are Dynamic range compression profile, line mode (dynamicRangeCompressionLine) and Dynamic range compression profile, RF mode (dynamicRangeCompressionRf). Note that when you specify values for all three settings, MediaConvert ignores the value of this setting in favor of the mode-specific settings. If you do use this setting instead of the mode-specific settings, choose None (NONE) to leave out DRC signaling. Keep the default Film standard (FILM_STANDARD) to set the profile to Dolby's film standard profile for all operating modes.",
+      "enum": [
+        "FILM_STANDARD",
+        "NONE"
+      ]
+    },
+    "Ac3DynamicRangeCompressionRf": {
+      "type": "string",
+      "documentation": "Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the RF operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.",
+      "enum": [
+        "FILM_STANDARD",
+        "FILM_LIGHT",
+        "MUSIC_STANDARD",
+        "MUSIC_LIGHT",
+        "SPEECH",
         "NONE"
       ]
     },
@@ -1223,10 +1247,20 @@
           "locationName": "dialnorm",
           "documentation": "Sets the dialnorm for the output. If blank and input audio is Dolby Digital, dialnorm will be passed through."
         },
+        "DynamicRangeCompressionLine": {
+          "shape": "Ac3DynamicRangeCompressionLine",
+          "locationName": "dynamicRangeCompressionLine",
+          "documentation": "Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the line operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf."
+        },
         "DynamicRangeCompressionProfile": {
           "shape": "Ac3DynamicRangeCompressionProfile",
           "locationName": "dynamicRangeCompressionProfile",
-          "documentation": "If set to FILM_STANDARD, adds dynamic range compression signaling to the output bitstream as defined in the Dolby Digital specification."
+          "documentation": "When you want to add Dolby dynamic range compression (DRC) signaling to your output stream, we recommend that you use the mode-specific settings instead of Dynamic range compression profile (DynamicRangeCompressionProfile). The mode-specific settings are Dynamic range compression profile, line mode (dynamicRangeCompressionLine) and Dynamic range compression profile, RF mode (dynamicRangeCompressionRf). Note that when you specify values for all three settings, MediaConvert ignores the value of this setting in favor of the mode-specific settings. If you do use this setting instead of the mode-specific settings, choose None (NONE) to leave out DRC signaling. Keep the default Film standard (FILM_STANDARD) to set the profile to Dolby's film standard profile for all operating modes."
+        },
+        "DynamicRangeCompressionRf": {
+          "shape": "Ac3DynamicRangeCompressionRf",
+          "locationName": "dynamicRangeCompressionRf",
+          "documentation": "Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the RF operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf."
         },
         "LfeFilter": {
           "shape": "Ac3LfeFilter",
@@ -1413,7 +1447,7 @@
     },
     "AudioCodec": {
       "type": "string",
-      "documentation": "Type of Audio codec.",
+      "documentation": "Choose the audio codec for this output. Note that the option Dolby Digital passthrough (PASSTHROUGH) applies only to Dolby Digital and Dolby Digital Plus audio inputs. Make sure that you choose a codec that's supported with your output container: https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#reference-codecs-containers-output-audio For audio-only outputs, make sure that both your input audio codec and your output audio codec are supported for audio-only workflows. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers-input.html#reference-codecs-containers-input-audio-only and https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#audio-only-output",
       "enum": [
         "AAC",
         "MP2",
@@ -1449,7 +1483,7 @@
         "Codec": {
           "shape": "AudioCodec",
           "locationName": "codec",
-          "documentation": "Type of Audio codec."
+          "documentation": "Choose the audio codec for this output. Note that the option Dolby Digital passthrough (PASSTHROUGH) applies only to Dolby Digital and Dolby Digital Plus audio inputs. Make sure that you choose a codec that's supported with your output container: https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#reference-codecs-containers-output-audio For audio-only outputs, make sure that both your input audio codec and your output audio codec are supported for audio-only workflows. For more information, see: https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers-input.html#reference-codecs-containers-input-audio-only and https://docs.aws.amazon.com/mediaconvert/latest/ug/reference-codecs-containers.html#audio-only-output"
         },
         "Eac3AtmosSettings": {
           "shape": "Eac3AtmosSettings",
@@ -1487,7 +1521,7 @@
           "documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value WAV."
         }
       },
-      "documentation": "Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings * VORBIS, VorbisSettings * OPUS, OpusSettings"
+      "documentation": "Settings related to audio encoding. The settings in this group vary depending on the value that you choose for your audio codec."
     },
     "AudioDefaultSelection": {
       "type": "string",
@@ -1528,7 +1562,7 @@
         "CodecSettings": {
           "shape": "AudioCodecSettings",
           "locationName": "codecSettings",
-          "documentation": "Audio codec settings (CodecSettings) under (AudioDescriptions) contains the group of settings related to audio encoding. The settings in this group vary depending on the value that you choose for Audio codec (Codec). For each codec enum that you choose, define the corresponding settings object. The following lists the codec enum, settings object pairs. * AAC, AacSettings * MP2, Mp2Settings * MP3, Mp3Settings * WAV, WavSettings * AIFF, AiffSettings * AC3, Ac3Settings * EAC3, Eac3Settings * EAC3_ATMOS, Eac3AtmosSettings * VORBIS, VorbisSettings * OPUS, OpusSettings"
+          "documentation": "Settings related to audio encoding. The settings in this group vary depending on the value that you choose for your audio codec."
         },
         "CustomLanguageCode": {
           "shape": "__stringPatternAZaZ23AZaZ",
@@ -1556,7 +1590,7 @@
           "documentation": "Specify a label for this output audio stream. For example, \"English\", \"Director commentary\", or \"track_2\". For streaming outputs, MediaConvert passes this information into destination manifests for display on the end-viewer's player device. For outputs in other output groups, the service ignores this setting."
         }
       },
-      "documentation": "Description of audio output"
+      "documentation": "Settings related to one audio tab on the MediaConvert console. In your job JSON, an instance of AudioDescription is equivalent to one audio tab in the console. Usually, one audio tab corresponds to one output audio track. Depending on how you set up your input audio selectors and whether you use audio selector groups, one audio tab can correspond to a group of output audio tracks."
     },
     "AudioLanguageCodeControl": {
       "type": "string",
@@ -1690,7 +1724,7 @@
           "documentation": "Identify a track from the input audio to include in this selector by entering the track index number. To include several tracks in a single audio selector, specify multiple tracks as follows. Using the console, enter a comma-separated list. For examle, type \"1,2,3\" to include tracks 1 through 3. Specifying directly in your JSON job file, provide the track numbers in an array. For example, \"tracks\": [1,2,3]."
         }
       },
-      "documentation": "Selector for Audio"
+      "documentation": "Use Audio selectors (AudioSelectors) to specify a track or set of tracks from the input that you will use in your outputs. You can use multiple Audio selectors per input."
     },
     "AudioSelectorGroup": {
       "type": "structure",
@@ -1701,7 +1735,7 @@
           "documentation": "Name of an Audio Selector within the same input to include in the group.  Audio selector names are standardized, based on their order within the input (e.g., \"Audio Selector 1\"). The audio selector name parameter can be repeated to add any number of audio selectors to the group."
         }
       },
-      "documentation": "Group of Audio Selectors"
+      "documentation": "Use audio selector groups to combine multiple sidecar audio inputs so that you can assign them to a single output audio tab (AudioDescription). Note that, if you're working with embedded audio, it's simpler to assign multiple input tracks into a single audio selector rather than use an audio selector group."
     },
     "AudioSelectorType": {
       "type": "string",
@@ -1843,9 +1877,9 @@
           "documentation": "Maximum bitrate in bits/second. For example, enter five megabits per second as 5000000. Required when Rate control mode is QVBR."
         },
         "NumberBFramesBetweenReferenceFrames": {
-          "shape": "__integerMin7Max15",
+          "shape": "__integerMin0Max15",
           "locationName": "numberBFramesBetweenReferenceFrames",
-          "documentation": "Specify the number of B-frames. With AV1, MediaConvert supports only 7 or 15."
+          "documentation": "Specify from the number of B-frames, in the range of 0-15. For AV1 encoding, we recommend using 7 or 15. Choose a larger number for a lower bitrate and smaller file size; choose a smaller number for better video quality."
         },
         "QvbrSettings": {
           "shape": "Av1QvbrSettings",
@@ -1887,7 +1921,7 @@
           "documentation": "Blanking image to be used. Leave empty for solid black. Only bmp and png images are supported."
         }
       },
-      "documentation": "Settings for Avail Blanking"
+      "documentation": "Use ad avail blanking settings to specify your output content during SCTE-35 triggered ad avails. You can blank your video or overlay it with an image. MediaConvert also removes any audio and embedded captions during the ad avail. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/ad-avail-blanking.html."
     },
     "AvcIntraClass": {
       "type": "string",
@@ -1989,7 +2023,7 @@
           "documentation": "When you do frame rate conversion from 23.976 frames per second (fps) to 29.97 fps, and your output scan type is interlaced, you can optionally enable hard telecine (HARD) to create a smoother picture. When you keep the default value, None (NONE), MediaConvert does a standard frame rate conversion to 29.97 without doing anything with the field polarity to create a smoother picture."
         }
       },
-      "documentation": "Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in AVC-I, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf."
+      "documentation": "Required when you choose AVC-Intra for your output video codec. For more information about the AVC-Intra settings, see the relevant specification. For detailed information about SD and HD in AVC-Intra, see https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in AVC-Intra, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf."
     },
     "AvcIntraSlowPal": {
       "type": "string",
@@ -2125,7 +2159,7 @@
           "documentation": "Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit y_position is provided, the caption will be positioned towards the bottom of the output. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
         }
       },
-      "documentation": "Burn-In Destination Settings."
+      "documentation": "Settings related to burn-in captions. Set up burn-in captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/burn-in-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to BURN_IN."
     },
     "BurninSubtitleAlignment": {
       "type": "string",
@@ -2219,7 +2253,7 @@
         "DestinationSettings": {
           "shape": "CaptionDestinationSettings",
           "locationName": "destinationSettings",
-          "documentation": "Specific settings required by destination type. Note that burnin_destination_settings are not available if the source of the caption data is Embedded or Teletext."
+          "documentation": "Settings related to one captions tab on the MediaConvert console. In your job JSON, an instance of captions DestinationSettings is equivalent to one captions tab in the console. Usually, one captions tab corresponds to one output captions track. Depending on your output captions format, one tab might correspond to a set of output captions tracks. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/including-captions.html."
         },
         "LanguageCode": {
           "shape": "LanguageCode",
@@ -2232,7 +2266,7 @@
           "documentation": "Specify a label for this set of output captions. For example, \"English\", \"Director commentary\", or \"track_2\". For streaming outputs, MediaConvert passes this information into destination manifests for display on the end-viewer's player device. For outputs in other output groups, the service ignores this setting."
         }
       },
-      "documentation": "Description of Caption output"
+      "documentation": "This object holds groups of settings related to captions for one output. For each output that has captions, include one instance of CaptionDescriptions."
     },
     "CaptionDescriptionPreset": {
       "type": "structure",
@@ -2245,7 +2279,7 @@
         "DestinationSettings": {
           "shape": "CaptionDestinationSettings",
           "locationName": "destinationSettings",
-          "documentation": "Specific settings required by destination type. Note that burnin_destination_settings are not available if the source of the caption data is Embedded or Teletext."
+          "documentation": "Settings related to one captions tab on the MediaConvert console. In your job JSON, an instance of captions DestinationSettings is equivalent to one captions tab in the console. Usually, one captions tab corresponds to one output captions track. Depending on your output captions format, one tab might correspond to a set of output captions tracks. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/including-captions.html."
         },
         "LanguageCode": {
           "shape": "LanguageCode",
@@ -2266,49 +2300,54 @@
         "BurninDestinationSettings": {
           "shape": "BurninDestinationSettings",
           "locationName": "burninDestinationSettings",
-          "documentation": "Burn-In Destination Settings."
+          "documentation": "Settings related to burn-in captions. Set up burn-in captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/burn-in-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to BURN_IN."
         },
         "DestinationType": {
           "shape": "CaptionDestinationType",
           "locationName": "destinationType",
-          "documentation": "Specify the format for this set of captions on this output. The default format is embedded without SCTE-20. Other options are embedded with SCTE-20, burn-in, DVB-sub, IMSC, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20, choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED) to create an output that complies with the SCTE-43 spec. To create a non-compliant output where the embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20)."
+          "documentation": "Specify the format for this set of captions on this output. The default format is embedded without SCTE-20. Note that your choice of video output container constrains your choice of output captions format. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/captions-support-tables.html. If you are using SCTE-20 and you want to create an output that complies with the SCTE-43 spec, choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED). To create a non-compliant output where the embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20)."
         },
         "DvbSubDestinationSettings": {
           "shape": "DvbSubDestinationSettings",
           "locationName": "dvbSubDestinationSettings",
-          "documentation": "DVB-Sub Destination Settings"
+          "documentation": "Settings related to DVB-Sub captions. Set up DVB-Sub captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/dvb-sub-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to DVB_SUB."
         },
         "EmbeddedDestinationSettings": {
           "shape": "EmbeddedDestinationSettings",
           "locationName": "embeddedDestinationSettings",
-          "documentation": "Settings specific to embedded/ancillary caption outputs, including 608/708 Channel destination number."
+          "documentation": "Settings related to CEA/EIA-608 and CEA/EIA-708 (also called embedded or ancillary) captions. Set up embedded captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/embedded-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to EMBEDDED, EMBEDDED_PLUS_SCTE20, or SCTE20_PLUS_EMBEDDED."
         },
         "ImscDestinationSettings": {
           "shape": "ImscDestinationSettings",
           "locationName": "imscDestinationSettings",
-          "documentation": "Settings specific to IMSC caption outputs."
+          "documentation": "Settings related to IMSC captions. IMSC is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to IMSC."
         },
         "SccDestinationSettings": {
           "shape": "SccDestinationSettings",
           "locationName": "sccDestinationSettings",
-          "documentation": "Settings for SCC caption output."
+          "documentation": "Settings related to SCC captions. SCC is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/scc-srt-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to SCC."
         },
         "TeletextDestinationSettings": {
           "shape": "TeletextDestinationSettings",
           "locationName": "teletextDestinationSettings",
-          "documentation": "Settings for Teletext caption output"
+          "documentation": "Settings related to teletext captions. Set up teletext captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/teletext-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to TELETEXT."
         },
         "TtmlDestinationSettings": {
           "shape": "TtmlDestinationSettings",
           "locationName": "ttmlDestinationSettings",
-          "documentation": "Settings specific to TTML caption outputs, including Pass style information (TtmlStylePassthrough)."
+          "documentation": "Settings related to TTML captions. TTML is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to TTML."
+        },
+        "WebvttDestinationSettings": {
+          "shape": "WebvttDestinationSettings",
+          "locationName": "webvttDestinationSettings",
+          "documentation": "WEBVTT Destination Settings"
         }
       },
-      "documentation": "Specific settings required by destination type. Note that burnin_destination_settings are not available if the source of the caption data is Embedded or Teletext."
+      "documentation": "Settings related to one captions tab on the MediaConvert console. In your job JSON, an instance of captions DestinationSettings is equivalent to one captions tab in the console. Usually, one captions tab corresponds to one output captions track. Depending on your output captions format, one tab might correspond to a set of output captions tracks. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/including-captions.html."
     },
     "CaptionDestinationType": {
       "type": "string",
-      "documentation": "Specify the format for this set of captions on this output. The default format is embedded without SCTE-20. Other options are embedded with SCTE-20, burn-in, DVB-sub, IMSC, SCC, SRT, teletext, TTML, and web-VTT. If you are using SCTE-20, choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED) to create an output that complies with the SCTE-43 spec. To create a non-compliant output where the embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20).",
+      "documentation": "Specify the format for this set of captions on this output. The default format is embedded without SCTE-20. Note that your choice of video output container constrains your choice of output captions format. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/captions-support-tables.html. If you are using SCTE-20 and you want to create an output that complies with the SCTE-43 spec, choose SCTE-20 plus embedded (SCTE20_PLUS_EMBEDDED). To create a non-compliant output where the embedded captions come first, choose Embedded plus SCTE-20 (EMBEDDED_PLUS_SCTE20).",
       "enum": [
         "BURN_IN",
         "DVB_SUB",
@@ -2343,7 +2382,7 @@
           "documentation": "If your input captions are SCC, TTML, STL, SMI, SRT, or IMSC in an xml file, specify the URI of the input captions source file. If your input captions are IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings."
         }
       },
-      "documentation": "Set up captions in your outputs by first selecting them from your input here."
+      "documentation": "Use captions selectors to specify the captions data from your input that you use in your outputs. You can use up to 20 captions selectors per input."
     },
     "CaptionSourceFramerate": {
       "type": "structure",
@@ -2382,7 +2421,7 @@
         "FileSourceSettings": {
           "shape": "FileSourceSettings",
           "locationName": "fileSourceSettings",
-          "documentation": "If your input captions are SCC, SMI, SRT, STL, TTML, or IMSC 1.1 in an xml file, specify the URI of the input caption source file. If your caption source is IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings."
+          "documentation": "If your input captions are SCC, SMI, SRT, STL, TTML, WebVTT, or IMSC 1.1 in an xml file, specify the URI of the input caption source file. If your caption source is IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings."
         },
         "SourceType": {
           "shape": "CaptionSourceType",
@@ -2418,7 +2457,8 @@
         "SMPTE_TT",
         "TELETEXT",
         "NULL_SOURCE",
-        "IMSC"
+        "IMSC",
+        "WEBVTT"
       ]
     },
     "ChannelMapping": {
@@ -2576,6 +2616,11 @@
           "locationName": "mpdProfile",
           "documentation": "Specify whether your DASH profile is on-demand or main. When you choose Main profile (MAIN_PROFILE), the service signals  urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE), the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd. When you choose On-demand, you must also set the output group setting Segment control (SegmentControl) to Single file (SINGLE_FILE)."
         },
+        "PtsOffsetHandlingForBFrames": {
+          "shape": "CmafPtsOffsetHandlingForBFrames",
+          "locationName": "ptsOffsetHandlingForBFrames",
+          "documentation": "Use this setting only when your output video stream has B-frames, which causes the initial presentation time stamp (PTS) to be offset from the initial decode time stamp (DTS). Specify how MediaConvert handles PTS when writing time stamps in output DASH manifests. Choose Match initial PTS (MATCH_INITIAL_PTS) when you want MediaConvert to use the initial PTS as the first time stamp in the manifest. Choose Zero-based (ZERO_BASED) to have MediaConvert ignore the initial PTS in the video stream and instead write the initial time stamp as zero in the manifest. For outputs that don't have B-frames, the time stamps in your DASH manifests start at zero regardless of your choice here."
+        },
         "SegmentControl": {
           "shape": "CmafSegmentControl",
           "locationName": "segmentControl",
@@ -2607,7 +2652,7 @@
           "documentation": "When you enable Precise segment duration in DASH manifests (writeSegmentTimelineInRepresentation), your DASH manifest shows precise segment durations. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When this feature isn't enabled, the segment durations in your DASH manifest are approximate. The segment duration information appears in the duration attribute of the SegmentTemplate element."
         }
       },
-      "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to CMAF_GROUP_SETTINGS. Each output in a CMAF Output Group may only contain a single video, audio, or caption output."
+      "documentation": "Settings related to your CMAF output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When you work directly in your JSON job specification, include this object and any required children when you set Type, under OutputGroupSettings, to CMAF_GROUP_SETTINGS."
     },
     "CmafInitializationVectorInManifest": {
       "type": "string",
@@ -2647,6 +2692,14 @@
       "enum": [
         "MAIN_PROFILE",
         "ON_DEMAND_PROFILE"
+      ]
+    },
+    "CmafPtsOffsetHandlingForBFrames": {
+      "type": "string",
+      "documentation": "Use this setting only when your output video stream has B-frames, which causes the initial presentation time stamp (PTS) to be offset from the initial decode time stamp (DTS). Specify how MediaConvert handles PTS when writing time stamps in output DASH manifests. Choose Match initial PTS (MATCH_INITIAL_PTS) when you want MediaConvert to use the initial PTS as the first time stamp in the manifest. Choose Zero-based (ZERO_BASED) to have MediaConvert ignore the initial PTS in the video stream and instead write the initial time stamp as zero in the manifest. For outputs that don't have B-frames, the time stamps in your DASH manifests start at zero regardless of your choice here.",
+      "enum": [
+        "ZERO_BASED",
+        "MATCH_INITIAL_PTS"
       ]
     },
     "CmafSegmentControl": {
@@ -2697,6 +2750,23 @@
         "MATCH_VIDEO_DURATION"
       ]
     },
+    "CmfcAudioTrackType": {
+      "type": "string",
+      "documentation": "Use this setting to control the values that MediaConvert puts in your HLS parent playlist to control how the client player selects which audio track to play. The other options for this setting determine the values that MediaConvert writes for the DEFAULT and AUTOSELECT attributes of the EXT-X-MEDIA entry for the audio variant. For more information about these attributes, see the Apple documentation article https://developer.apple.com/documentation/http_live_streaming/example_playlists_for_http_live_streaming/adding_alternate_media_to_a_playlist. Choose Alternate audio, auto select, default (ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT) to set DEFAULT=YES and AUTOSELECT=YES. Choose this value for only one variant in your output group. Choose Alternate audio, auto select, not default (ALTERNATE_AUDIO_AUTO_SELECT) to set DEFAULT=NO and AUTOSELECT=YES. Choose Alternate Audio, Not Auto Select to set DEFAULT=NO and AUTOSELECT=NO. When you don't specify a value for this setting, MediaConvert defaults to Alternate audio, auto select, default. When there is more than one variant in your output group, you must explicitly choose a value for this setting.",
+      "enum": [
+        "ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT",
+        "ALTERNATE_AUDIO_AUTO_SELECT",
+        "ALTERNATE_AUDIO_NOT_AUTO_SELECT"
+      ]
+    },
+    "CmfcDescriptiveVideoServiceFlag": {
+      "type": "string",
+      "documentation": "Specify whether to flag this audio track as descriptive video service (DVS) in your HLS parent manifest. When you choose Flag (FLAG), MediaConvert includes the parameter CHARACTERISTICS=\"public.accessibility.describes-video\" in the EXT-X-MEDIA entry for this track. When you keep the default choice, Don't flag (DONT_FLAG), MediaConvert leaves this parameter out. The DVS flag can help with accessibility on Apple devices. For more information, see the Apple documentation.",
+      "enum": [
+        "DONT_FLAG",
+        "FLAG"
+      ]
+    },
     "CmfcIFrameOnlyManifest": {
       "type": "string",
       "documentation": "Choose Include (INCLUDE) to have MediaConvert generate an HLS child manifest that lists only the I-frames for this rendition, in addition to your regular manifest for this rendition. You might use this manifest as part of a workflow that creates preview functions for your video. MediaConvert adds both the I-frame only child manifest and the regular child manifest to the parent manifest. When you don't need the I-frame only child manifest, keep the default value Exclude (EXCLUDE).",
@@ -2729,6 +2799,26 @@
           "locationName": "audioDuration",
           "documentation": "Specify this setting only when your output will be consumed by a downstream repackaging workflow that is sensitive to very small duration differences between video and audio. For this situation, choose Match video duration (MATCH_VIDEO_DURATION). In all other cases, keep the default value, Default codec duration (DEFAULT_CODEC_DURATION). When you choose Match video duration, MediaConvert pads the output audio streams with silence or trims them to ensure that the total duration of each audio stream is at least as long as the total duration of the video stream. After padding or trimming, the audio stream duration is no more than one frame longer than the video stream. MediaConvert applies audio padding or trimming only to the end of the last segment of the output. For unsegmented outputs, MediaConvert adds padding only to the end of the file. When you keep the default value, any minor discrepancies between audio and video duration will depend on your output audio codec."
         },
+        "AudioGroupId": {
+          "shape": "__string",
+          "locationName": "audioGroupId",
+          "documentation": "Specify the audio rendition group for this audio rendition. Specify up to one value for each audio output in your output group. This value appears in your HLS parent manifest in the EXT-X-MEDIA tag of TYPE=AUDIO, as the value for the GROUP-ID attribute. For example, if you specify \"audio_aac_1\" for Audio group ID, it appears in your manifest like this: #EXT-X-MEDIA:TYPE=AUDIO,GROUP-ID=\"audio_aac_1\". Related setting: To associate the rendition group that this audio track belongs to with a video rendition, include the same value that you provide here for that video output's setting Audio rendition sets (audioRenditionSets)."
+        },
+        "AudioRenditionSets": {
+          "shape": "__string",
+          "locationName": "audioRenditionSets",
+          "documentation": "List the audio rendition groups that you want included with this video rendition. Use a comma-separated list. For example, say you want to include the audio rendition groups that have the audio group IDs \"audio_aac_1\" and \"audio_dolby\". Then you would specify this value: \"audio_aac_1, audio_dolby\". Related setting: The rendition groups that you include in your comma-separated list should all match values that you specify in the setting Audio group ID (AudioGroupId) for audio renditions in the same output group as this video rendition. Default behavior: If you don't specify anything here and for Audio group ID, MediaConvert puts each audio variant in its own audio rendition group and associates it with every video variant. Each value in your list appears in your HLS parent manifest in the EXT-X-STREAM-INF tag as the value for the AUDIO attribute. To continue the previous example, say that the file name for the child manifest for your video rendition is \"amazing_video_1.m3u8\". Then, in your parent manifest, each value will appear on separate lines, like this: #EXT-X-STREAM-INF:AUDIO=\"audio_aac_1\"... amazing_video_1.m3u8 #EXT-X-STREAM-INF:AUDIO=\"audio_dolby\"... amazing_video_1.m3u8"
+        },
+        "AudioTrackType": {
+          "shape": "CmfcAudioTrackType",
+          "locationName": "audioTrackType",
+          "documentation": "Use this setting to control the values that MediaConvert puts in your HLS parent playlist to control how the client player selects which audio track to play. The other options for this setting determine the values that MediaConvert writes for the DEFAULT and AUTOSELECT attributes of the EXT-X-MEDIA entry for the audio variant. For more information about these attributes, see the Apple documentation article https://developer.apple.com/documentation/http_live_streaming/example_playlists_for_http_live_streaming/adding_alternate_media_to_a_playlist. Choose Alternate audio, auto select, default (ALTERNATE_AUDIO_AUTO_SELECT_DEFAULT) to set DEFAULT=YES and AUTOSELECT=YES. Choose this value for only one variant in your output group. Choose Alternate audio, auto select, not default (ALTERNATE_AUDIO_AUTO_SELECT) to set DEFAULT=NO and AUTOSELECT=YES. Choose Alternate Audio, Not Auto Select to set DEFAULT=NO and AUTOSELECT=NO. When you don't specify a value for this setting, MediaConvert defaults to Alternate audio, auto select, default. When there is more than one variant in your output group, you must explicitly choose a value for this setting."
+        },
+        "DescriptiveVideoServiceFlag": {
+          "shape": "CmfcDescriptiveVideoServiceFlag",
+          "locationName": "descriptiveVideoServiceFlag",
+          "documentation": "Specify whether to flag this audio track as descriptive video service (DVS) in your HLS parent manifest. When you choose Flag (FLAG), MediaConvert includes the parameter CHARACTERISTICS=\"public.accessibility.describes-video\" in the EXT-X-MEDIA entry for this track. When you keep the default choice, Don't flag (DONT_FLAG), MediaConvert leaves this parameter out. The DVS flag can help with accessibility on Apple devices. For more information, see the Apple documentation."
+        },
         "IFrameOnlyManifest": {
           "shape": "CmfcIFrameOnlyManifest",
           "locationName": "iFrameOnlyManifest",
@@ -2745,7 +2835,7 @@
           "documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output."
         }
       },
-      "documentation": "Settings for MP4 segments in CMAF"
+      "documentation": "These settings relate to the fragmented MP4 container for the segments in your CMAF outputs."
     },
     "ColorCorrector": {
       "type": "structure",
@@ -2834,7 +2924,7 @@
         "CmfcSettings": {
           "shape": "CmfcSettings",
           "locationName": "cmfcSettings",
-          "documentation": "Settings for MP4 segments in CMAF"
+          "documentation": "These settings relate to the fragmented MP4 container for the segments in your CMAF outputs."
         },
         "Container": {
           "shape": "ContainerType",
@@ -2854,27 +2944,27 @@
         "M3u8Settings": {
           "shape": "M3u8Settings",
           "locationName": "m3u8Settings",
-          "documentation": "Settings for TS segments in HLS"
+          "documentation": "These settings relate to the MPEG-2 transport stream (MPEG2-TS) container for the MPEG2-TS segments in your HLS outputs."
         },
         "MovSettings": {
           "shape": "MovSettings",
           "locationName": "movSettings",
-          "documentation": "Settings for MOV Container."
+          "documentation": "These settings relate to your QuickTime MOV output container."
         },
         "Mp4Settings": {
           "shape": "Mp4Settings",
           "locationName": "mp4Settings",
-          "documentation": "Settings for MP4 container. You can create audio-only AAC outputs with this container."
+          "documentation": "These settings relate to your MP4 output container. You can create audio only outputs with this container. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/supported-codecs-containers-audio-only.html#output-codecs-and-containers-supported-for-audio-only."
         },
         "MpdSettings": {
           "shape": "MpdSettings",
           "locationName": "mpdSettings",
-          "documentation": "Settings for MP4 segments in DASH"
+          "documentation": "These settings relate to the fragmented MP4 container for the segments in your DASH outputs."
         },
         "MxfSettings": {
           "shape": "MxfSettings",
           "locationName": "mxfSettings",
-          "documentation": "MXF settings"
+          "documentation": "These settings relate to your MXF output container."
         }
       },
       "documentation": "Container specific settings."
@@ -3174,6 +3264,14 @@
       },
       "documentation": "Specifies DRM settings for DASH outputs."
     },
+    "DashIsoGroupAudioChannelConfigSchemeIdUri": {
+      "type": "string",
+      "documentation": "Use this setting only when your audio codec is a Dolby one (AC3, EAC3, or Atmos) and your downstream workflow requires that your DASH manifest use the Dolby channel configuration tag, rather than the MPEG one. For example, you might need to use this to make dynamic ad insertion work. Specify which audio channel configuration scheme ID URI MediaConvert writes in your DASH manifest. Keep the default value, MPEG channel configuration (MPEG_CHANNEL_CONFIGURATION), to have MediaConvert write this: urn:mpeg:mpegB:cicp:ChannelConfiguration. Choose Dolby channel configuration (DOLBY_CHANNEL_CONFIGURATION) to have MediaConvert write this instead: tag:dolby.com,2014:dash:audio_channel_configuration:2011.",
+      "enum": [
+        "MPEG_CHANNEL_CONFIGURATION",
+        "DOLBY_CHANNEL_CONFIGURATION"
+      ]
+    },
     "DashIsoGroupSettings": {
       "type": "structure",
       "members": {
@@ -3181,6 +3279,11 @@
           "shape": "__listOfDashAdditionalManifest",
           "locationName": "additionalManifests",
           "documentation": "By default, the service creates one .mpd DASH manifest for each DASH ISO output group in your job. This default manifest references every output in the output group. To create additional DASH manifests that reference a subset of the outputs in the output group, specify a list of them here."
+        },
+        "AudioChannelConfigSchemeIdUri": {
+          "shape": "DashIsoGroupAudioChannelConfigSchemeIdUri",
+          "locationName": "audioChannelConfigSchemeIdUri",
+          "documentation": "Use this setting only when your audio codec is a Dolby one (AC3, EAC3, or Atmos) and your downstream workflow requires that your DASH manifest use the Dolby channel configuration tag, rather than the MPEG one. For example, you might need to use this to make dynamic ad insertion work. Specify which audio channel configuration scheme ID URI MediaConvert writes in your DASH manifest. Keep the default value, MPEG channel configuration (MPEG_CHANNEL_CONFIGURATION), to have MediaConvert write this: urn:mpeg:mpegB:cicp:ChannelConfiguration. Choose Dolby channel configuration (DOLBY_CHANNEL_CONFIGURATION) to have MediaConvert write this instead: tag:dolby.com,2014:dash:audio_channel_configuration:2011."
         },
         "BaseUrl": {
           "shape": "__string",
@@ -3227,6 +3330,11 @@
           "locationName": "mpdProfile",
           "documentation": "Specify whether your DASH profile is on-demand or main. When you choose Main profile (MAIN_PROFILE), the service signals  urn:mpeg:dash:profile:isoff-main:2011 in your .mpd DASH manifest. When you choose On-demand (ON_DEMAND_PROFILE), the service signals urn:mpeg:dash:profile:isoff-on-demand:2011 in your .mpd. When you choose On-demand, you must also set the output group setting Segment control (SegmentControl) to Single file (SINGLE_FILE)."
         },
+        "PtsOffsetHandlingForBFrames": {
+          "shape": "DashIsoPtsOffsetHandlingForBFrames",
+          "locationName": "ptsOffsetHandlingForBFrames",
+          "documentation": "Use this setting only when your output video stream has B-frames, which causes the initial presentation time stamp (PTS) to be offset from the initial decode time stamp (DTS). Specify how MediaConvert handles PTS when writing time stamps in output DASH manifests. Choose Match initial PTS (MATCH_INITIAL_PTS) when you want MediaConvert to use the initial PTS as the first time stamp in the manifest. Choose Zero-based (ZERO_BASED) to have MediaConvert ignore the initial PTS in the video stream and instead write the initial time stamp as zero in the manifest. For outputs that don't have B-frames, the time stamps in your DASH manifests start at zero regardless of your choice here."
+        },
         "SegmentControl": {
           "shape": "DashIsoSegmentControl",
           "locationName": "segmentControl",
@@ -3243,7 +3351,7 @@
           "documentation": "If you get an HTTP error in the 400 range when you play back your DASH output, enable this setting and run your transcoding job again. When you enable this setting, the service writes precise segment durations in the DASH manifest. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When you don't enable this setting, the service writes approximate segment durations in your DASH manifest."
         }
       },
-      "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to DASH_ISO_GROUP_SETTINGS."
+      "documentation": "Settings related to your DASH output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When you work directly in your JSON job specification, include this object and any required children when you set Type, under OutputGroupSettings, to DASH_ISO_GROUP_SETTINGS."
     },
     "DashIsoHbbtvCompliance": {
       "type": "string",
@@ -3267,6 +3375,14 @@
       "enum": [
         "CENC_V1",
         "UNENCRYPTED_SEI"
+      ]
+    },
+    "DashIsoPtsOffsetHandlingForBFrames": {
+      "type": "string",
+      "documentation": "Use this setting only when your output video stream has B-frames, which causes the initial presentation time stamp (PTS) to be offset from the initial decode time stamp (DTS). Specify how MediaConvert handles PTS when writing time stamps in output DASH manifests. Choose Match initial PTS (MATCH_INITIAL_PTS) when you want MediaConvert to use the initial PTS as the first time stamp in the manifest. Choose Zero-based (ZERO_BASED) to have MediaConvert ignore the initial PTS in the video stream and instead write the initial time stamp as zero in the manifest. For outputs that don't have B-frames, the time stamps in your DASH manifests start at zero regardless of your choice here.",
+      "enum": [
+        "ZERO_BASED",
+        "MATCH_INITIAL_PTS"
       ]
     },
     "DashIsoSegmentControl": {
@@ -3488,7 +3604,7 @@
           "documentation": "In the current MediaConvert implementation, the Dolby Vision profile is always 5 (PROFILE_5). Therefore, all of your inputs must contain Dolby Vision frame interleaved data."
         }
       },
-      "documentation": "Settings for Dolby Vision"
+      "documentation": "With AWS Elemental MediaConvert, you can create profile 5 Dolby Vision outputs from MXF and IMF sources that contain mastering information as frame-interleaved Dolby Vision metadata."
     },
     "DolbyVisionLevel6Metadata": {
       "type": "structure",
@@ -3549,7 +3665,7 @@
           "documentation": "The number of milliseconds between instances of this table in the output transport stream."
         }
       },
-      "documentation": "Inserts DVB Network Information Table (NIT) at the specified table repetition interval."
+      "documentation": "Use these settings to insert a DVB Network Information Table (NIT) in the transport stream of this output. When you work directly in your JSON job specification, include this object only when your job has a transport stream output and the container settings contain the object M2tsSettings."
     },
     "DvbSdtSettings": {
       "type": "structure",
@@ -3575,7 +3691,7 @@
           "documentation": "The service provider name placed in the service_descriptor in the Service Description Table. Maximum length is 256 characters."
         }
       },
-      "documentation": "Inserts DVB Service Description Table (NIT) at the specified table repetition interval."
+      "documentation": "Use these settings to insert a DVB Service Description Table (SDT) in the transport stream of this output. When you work directly in your JSON job specification, include this object only when your job has a transport stream output and the container settings contain the object M2tsSettings."
     },
     "DvbSubDestinationSettings": {
       "type": "structure",
@@ -3594,6 +3710,21 @@
           "shape": "__integerMin0Max255",
           "locationName": "backgroundOpacity",
           "documentation": "Specifies the opacity of the background rectangle. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent). All burn-in and DVB-Sub font settings must match."
+        },
+        "DdsHandling": {
+          "shape": "DvbddsHandling",
+          "locationName": "ddsHandling",
+          "documentation": "Specify how MediaConvert handles the display definition segment (DDS). Keep the default, None (NONE), to exclude the DDS from this set of captions. Choose No display window (NO_DISPLAY_WINDOW) to have MediaConvert include the DDS but not include display window data. In this case, MediaConvert writes that information to the page composition segment (PCS) instead. Choose Specify (SPECIFIED) to have MediaConvert set up the display window based on the values that you specify in related job settings. For video resolutions that are 576 pixels or smaller in height, MediaConvert doesn't include the DDS, regardless of the value you choose for DDS handling (ddsHandling). In this case, it doesn't write the display window data to the PCS either. Related settings: Use the settings DDS x-coordinate (ddsXCoordinate) and DDS y-coordinate (ddsYCoordinate) to specify the offset between the top left corner of the display window and the top left corner of the video frame. All burn-in and DVB-Sub font settings must match."
+        },
+        "DdsXCoordinate": {
+          "shape": "__integerMin0Max2147483647",
+          "locationName": "ddsXCoordinate",
+          "documentation": "Use this setting, along with DDS y-coordinate (ddsYCoordinate), to specify the upper left corner of the display definition segment (DDS) display window. With this setting, specify the distance, in pixels, between the left side of the frame and the left side of the DDS display window. Keep the default value, 0, to have MediaConvert automatically choose this offset. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). MediaConvert uses these values to determine whether to write page position data to the DDS or to the page composition segment (PCS). All burn-in and DVB-Sub font settings must match."
+        },
+        "DdsYCoordinate": {
+          "shape": "__integerMin0Max2147483647",
+          "locationName": "ddsYCoordinate",
+          "documentation": "Use this setting, along with DDS x-coordinate (ddsXCoordinate), to specify the upper left corner of the display definition segment (DDS) display window. With this setting, specify the distance, in pixels, between the top of the frame and the top of the DDS display window. Keep the default value, 0, to have MediaConvert automatically choose this offset. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). MediaConvert uses these values to determine whether to write page position data to the DDS or to the page composition segment (PCS). All burn-in and DVB-Sub font settings must match."
         },
         "FontColor": {
           "shape": "DvbSubtitleFontColor",
@@ -3619,6 +3750,11 @@
           "shape": "__integerMin0Max96",
           "locationName": "fontSize",
           "documentation": "A positive integer indicates the exact font size in points. Set to 0 for automatic font size selection. All burn-in and DVB-Sub font settings must match."
+        },
+        "Height": {
+          "shape": "__integerMin1Max2147483647",
+          "locationName": "height",
+          "documentation": "Specify the height, in pixels, of this set of DVB-Sub captions. The default value is 576 pixels. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). All burn-in and DVB-Sub font settings must match."
         },
         "OutlineColor": {
           "shape": "DvbSubtitleOutlineColor",
@@ -3660,6 +3796,11 @@
           "locationName": "teletextSpacing",
           "documentation": "Only applies to jobs with input captions in Teletext or STL formats. Specify whether the spacing between letters in your captions is set by the captions grid or varies depending on letter width. Choose fixed grid to conform to the spacing specified in the captions file more accurately. Choose proportional to make the text easier to read if the captions are closed caption."
         },
+        "Width": {
+          "shape": "__integerMin1Max2147483647",
+          "locationName": "width",
+          "documentation": "Specify the width, in pixels, of this set of DVB-Sub captions. The default value is 720 pixels. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). All burn-in and DVB-Sub font settings must match."
+        },
         "XPosition": {
           "shape": "__integerMin0Max2147483647",
           "locationName": "xPosition",
@@ -3671,7 +3812,7 @@
           "documentation": "Specifies the vertical position of the caption relative to the top of the output in pixels. A value of 10 would result in the captions starting 10 pixels from the top of the output. If no explicit y_position is provided, the caption will be positioned towards the bottom of the output. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match."
         }
       },
-      "documentation": "DVB-Sub Destination Settings"
+      "documentation": "Settings related to DVB-Sub captions. Set up DVB-Sub captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/dvb-sub-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to DVB_SUB."
     },
     "DvbSubSourceSettings": {
       "type": "structure",
@@ -3759,7 +3900,16 @@
           "documentation": "The number of milliseconds between instances of this table in the output transport stream."
         }
       },
-      "documentation": "Inserts DVB Time and Date Table (TDT) at the specified table repetition interval."
+      "documentation": "Use these settings to insert a DVB Time and Date Table (TDT) in the transport stream of this output. When you work directly in your JSON job specification, include this object only when your job has a transport stream output and the container settings contain the object M2tsSettings."
+    },
+    "DvbddsHandling": {
+      "type": "string",
+      "documentation": "Specify how MediaConvert handles the display definition segment (DDS). Keep the default, None (NONE), to exclude the DDS from this set of captions. Choose No display window (NO_DISPLAY_WINDOW) to have MediaConvert include the DDS but not include display window data. In this case, MediaConvert writes that information to the page composition segment (PCS) instead. Choose Specify (SPECIFIED) to have MediaConvert set up the display window based on the values that you specify in related job settings. For video resolutions that are 576 pixels or smaller in height, MediaConvert doesn't include the DDS, regardless of the value you choose for DDS handling (ddsHandling). In this case, it doesn't write the display window data to the PCS either. Related settings: Use the settings DDS x-coordinate (ddsXCoordinate) and DDS y-coordinate (ddsYCoordinate) to specify the offset between the top left corner of the display window and the top left corner of the video frame. All burn-in and DVB-Sub font settings must match.",
+      "enum": [
+        "NONE",
+        "SPECIFIED",
+        "NO_DISPLAY_WINDOW"
+      ]
     },
     "Eac3AtmosBitstreamMode": {
       "type": "string",
@@ -3956,7 +4106,7 @@
     },
     "Eac3DynamicRangeCompressionLine": {
       "type": "string",
-      "documentation": "Specify the absolute peak level for a signal with dynamic range compression.",
+      "documentation": "Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the line operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.",
       "enum": [
         "NONE",
         "FILM_STANDARD",
@@ -3968,7 +4118,7 @@
     },
     "Eac3DynamicRangeCompressionRf": {
       "type": "string",
-      "documentation": "Specify how the service limits the audio dynamic range when compressing the audio.",
+      "documentation": "Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the RF operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf.",
       "enum": [
         "NONE",
         "FILM_STANDARD",
@@ -4054,12 +4204,12 @@
         "DynamicRangeCompressionLine": {
           "shape": "Eac3DynamicRangeCompressionLine",
           "locationName": "dynamicRangeCompressionLine",
-          "documentation": "Specify the absolute peak level for a signal with dynamic range compression."
+          "documentation": "Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the line operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf."
         },
         "DynamicRangeCompressionRf": {
           "shape": "Eac3DynamicRangeCompressionRf",
           "locationName": "dynamicRangeCompressionRf",
-          "documentation": "Specify how the service limits the audio dynamic range when compressing the audio."
+          "documentation": "Choose the Dolby Digital dynamic range control (DRC) profile that MediaConvert uses when encoding the metadata in the Dolby Digital stream for the RF operating mode. Related setting: When you use this setting, MediaConvert ignores any value you provide for Dynamic range compression profile (DynamicRangeCompressionProfile). For information about the Dolby Digital DRC operating modes and profiles, see the Dynamic Range Control chapter of the Dolby Metadata Guide at https://developer.dolby.com/globalassets/professional/documents/dolby-metadata-guide.pdf."
         },
         "LfeControl": {
           "shape": "Eac3LfeControl",
@@ -4179,7 +4329,7 @@
           "documentation": "Ignore this setting unless your input captions are SCC format and you want both 608 and 708 captions embedded in your output stream. Optionally, specify the 708 service number for each output captions channel. Choose a different number for each channel. To use this setting, also set Force 608 to 708 upconvert (Convert608To708) to Upconvert (UPCONVERT) in your input captions selector settings. If you choose to upconvert but don't specify a 708 service number, MediaConvert uses the number that you specify for CC channel number (destination608ChannelNumber) for the 708 service number. For more information, see https://docs.aws.amazon.com/console/mediaconvert/dual-scc-to-embedded."
         }
       },
-      "documentation": "Settings specific to embedded/ancillary caption outputs, including 608/708 Channel destination number."
+      "documentation": "Settings related to CEA/EIA-608 and CEA/EIA-708 (also called embedded or ancillary) captions. Set up embedded captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/embedded-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to EMBEDDED, EMBEDDED_PLUS_SCTE20, or SCTE20_PLUS_EMBEDDED."
     },
     "EmbeddedSourceSettings": {
       "type": "structure",
@@ -4302,7 +4452,7 @@
           "documentation": "Settings associated with the destination. Will vary based on the type of destination"
         }
       },
-      "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to FILE_GROUP_SETTINGS."
+      "documentation": "Settings related to your File output group. MediaConvert uses this group of settings to generate a single standalone file, rather than a streaming package. When you work directly in your JSON job specification, include this object and any required children when you set Type, under OutputGroupSettings, to FILE_GROUP_SETTINGS."
     },
     "FileSourceConvert608To708": {
       "type": "string",
@@ -4326,9 +4476,9 @@
           "documentation": "Ignore this setting unless your input captions format is SCC. To have the service compensate for differing frame rates between your input captions and input video, specify the frame rate of the captions file. Specify this value as a fraction, using the settings Framerate numerator (framerateNumerator) and Framerate denominator (framerateDenominator). For example, you might specify 24 / 1 for 24 fps, 25 / 1 for 25 fps, 24000 / 1001 for 23.976 fps, or 30000 / 1001 for 29.97 fps."
         },
         "SourceFile": {
-          "shape": "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI",
+          "shape": "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT",
           "locationName": "sourceFile",
-          "documentation": "External caption file used for loading captions. Accepted file extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', 'xml', and 'smi'."
+          "documentation": "External caption file used for loading captions. Accepted file extensions are 'scc', 'ttml', 'dfxp', 'stl', 'srt', 'xml', 'smi', and 'vtt'."
         },
         "TimeDelta": {
           "shape": "__integerMinNegative2147483648Max2147483647",
@@ -4336,7 +4486,7 @@
           "documentation": "Specifies a time delta in seconds to offset the captions from the source file."
         }
       },
-      "documentation": "If your input captions are SCC, SMI, SRT, STL, TTML, or IMSC 1.1 in an xml file, specify the URI of the input caption source file. If your caption source is IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings."
+      "documentation": "If your input captions are SCC, SMI, SRT, STL, TTML, WebVTT, or IMSC 1.1 in an xml file, specify the URI of the input caption source file. If your caption source is IMSC in an IMF package, use TrackSourceSettings instead of FileSoureSettings."
     },
     "FontScript": {
       "type": "string",
@@ -5544,6 +5694,14 @@
         "RFC_4281"
       ]
     },
+    "HlsDescriptiveVideoServiceFlag": {
+      "type": "string",
+      "documentation": "Specify whether to flag this audio track as descriptive video service (DVS) in your HLS parent manifest. When you choose Flag (FLAG), MediaConvert includes the parameter CHARACTERISTICS=\"public.accessibility.describes-video\" in the EXT-X-MEDIA entry for this track. When you keep the default choice, Don't flag (DONT_FLAG), MediaConvert leaves this parameter out. The DVS flag can help with accessibility on Apple devices. For more information, see the Apple documentation.",
+      "enum": [
+        "DONT_FLAG",
+        "FLAG"
+      ]
+    },
     "HlsDirectoryStructure": {
       "type": "string",
       "documentation": "Indicates whether segments should be placed in subdirectories.",
@@ -5735,7 +5893,7 @@
           "documentation": "Provides an extra millisecond delta offset to fine tune the timestamps."
         }
       },
-      "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to HLS_GROUP_SETTINGS."
+      "documentation": "Settings related to your HLS output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When you work directly in your JSON job specification, include this object and any required children when you set Type, under OutputGroupSettings, to HLS_GROUP_SETTINGS."
     },
     "HlsIFrameOnlyManifest": {
       "type": "string",
@@ -5815,7 +5973,7 @@
         "AudioGroupId": {
           "shape": "__string",
           "locationName": "audioGroupId",
-          "documentation": "Specifies the group to which the audio Rendition belongs."
+          "documentation": "Specifies the group to which the audio rendition belongs."
         },
         "AudioOnlyContainer": {
           "shape": "HlsAudioOnlyContainer",
@@ -5831,6 +5989,11 @@
           "shape": "HlsAudioTrackType",
           "locationName": "audioTrackType",
           "documentation": "Four types of audio-only tracks are supported: Audio-Only Variant Stream The client can play back this audio-only stream instead of video in low-bandwidth scenarios. Represented as an EXT-X-STREAM-INF in the HLS manifest. Alternate Audio, Auto Select, Default Alternate rendition that the client should try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=YES, AUTOSELECT=YES Alternate Audio, Auto Select, Not Default Alternate rendition that the client may try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=YES Alternate Audio, not Auto Select Alternate rendition that the client will not try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=NO"
+        },
+        "DescriptiveVideoServiceFlag": {
+          "shape": "HlsDescriptiveVideoServiceFlag",
+          "locationName": "descriptiveVideoServiceFlag",
+          "documentation": "Specify whether to flag this audio track as descriptive video service (DVS) in your HLS parent manifest. When you choose Flag (FLAG), MediaConvert includes the parameter CHARACTERISTICS=\"public.accessibility.describes-video\" in the EXT-X-MEDIA entry for this track. When you keep the default choice, Don't flag (DONT_FLAG), MediaConvert leaves this parameter out. The DVS flag can help with accessibility on Apple devices. For more information, see the Apple documentation."
         },
         "IFrameOnlyManifest": {
           "shape": "HlsIFrameOnlyManifest",
@@ -5908,7 +6071,7 @@
           "documentation": "Specify the images that you want to overlay on your video. The images must be PNG or TGA files."
         }
       },
-      "documentation": "Enable the image inserter feature to include a graphic overlay on your video. Enable or disable this feature for each input or output individually. This setting is disabled by default."
+      "documentation": "Use the image inserter feature to include a graphic overlay on your video. Enable or disable this feature for each input or output individually. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/graphic-overlay.html. This setting is disabled by default."
     },
     "ImscDestinationSettings": {
       "type": "structure",
@@ -5919,7 +6082,7 @@
           "documentation": "Keep this setting enabled to have MediaConvert use the font style and position information from the captions source in the output. This option is available only when your input captions are IMSC, SMPTE-TT, or TTML. Disable this setting for simplified output captions."
         }
       },
-      "documentation": "Settings specific to IMSC caption outputs."
+      "documentation": "Settings related to IMSC captions. IMSC is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to IMSC."
     },
     "ImscStylePassthrough": {
       "type": "string",
@@ -5935,7 +6098,7 @@
         "AudioSelectorGroups": {
           "shape": "__mapOfAudioSelectorGroup",
           "locationName": "audioSelectorGroups",
-          "documentation": "Specifies set of audio selectors within an input to combine. An input may have multiple audio selector groups. See \"Audio Selector Group\":#inputs-audio_selector_group for more information."
+          "documentation": "Use audio selector groups to combine multiple sidecar audio inputs so that you can assign them to a single output audio tab (AudioDescription). Note that, if you're working with embedded audio, it's simpler to assign multiple input tracks into a single audio selector rather than use an audio selector group."
         },
         "AudioSelectors": {
           "shape": "__mapOfAudioSelector",
@@ -6030,10 +6193,10 @@
         "VideoSelector": {
           "shape": "VideoSelector",
           "locationName": "videoSelector",
-          "documentation": "Selector for video."
+          "documentation": "Input video selectors contain the video settings for the input. Each of your inputs can have up to one video selector."
         }
       },
-      "documentation": "Specifies media input"
+      "documentation": "Use inputs to define the source files used in your transcoding job. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/specify-input-settings.html. You can use multiple video inputs to do input stitching. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/assembling-multiple-inputs-and-input-clips.html"
     },
     "InputClipping": {
       "type": "structure",
@@ -6049,7 +6212,7 @@
           "documentation": "Set Start timecode (StartTimecode) to the beginning of the portion of the input you are clipping. The frame corresponding to the Start timecode value is included in the clip. Start timecode or End timecode may be left blank, but not both. Use the format HH:MM:SS:FF or HH:MM:SS;FF, where HH is the hour, MM is the minute, SS is the second, and FF is the frame number. When choosing this value, take into account your setting for Input timecode source. For example, if you have embedded timecodes that start at 01:00:00:00 and you want your clip to begin five minutes into the video, use 01:05:00:00."
         }
       },
-      "documentation": "To transcode only portions of your input (clips), include one Input clipping (one instance of InputClipping in the JSON job file) for each input clip. All input clips you specify will be included in every output of the job."
+      "documentation": "To transcode only portions of your input, include one input clip for each part of your input that you want in your output. All input clips that you specify will be included in every output of the job. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/assembling-multiple-inputs-and-input-clips.html."
     },
     "InputDeblockFilter": {
       "type": "string",
@@ -6121,6 +6284,15 @@
         "AUTO"
       ]
     },
+    "InputSampleRange": {
+      "type": "string",
+      "documentation": "Use this setting when your input video codec is AVC-Intra. Ignore this setting for all other inputs. If the sample range metadata in your input video is accurate, or if you don't know about sample range, keep the default value, Follow (FOLLOW), for this setting. When you do, the service automatically detects your input sample range. If your input video has metadata indicating the wrong sample range, specify the accurate sample range here. When you do, MediaConvert ignores any sample range information in the input metadata. Regardless of whether MediaConvert uses the input sample range or the sample range that you specify, MediaConvert uses the sample range for transcoding and also writes it to the output metadata.",
+      "enum": [
+        "FOLLOW",
+        "FULL_RANGE",
+        "LIMITED_RANGE"
+      ]
+    },
     "InputScanType": {
       "type": "string",
       "documentation": "When you have a progressive segmented frame (PsF) input, use this setting to flag the input as PsF. MediaConvert doesn't automatically detect PsF. Therefore, flagging your input as PsF results in better preservation of video quality when you do deinterlacing and frame rate conversion. If you don't specify, the default value is Auto (AUTO). Auto is the correct setting for all inputs that are not PsF. Don't set this value to PsF when your input is interlaced. Doing so creates horizontal interlacing artifacts.",
@@ -6135,7 +6307,7 @@
         "AudioSelectorGroups": {
           "shape": "__mapOfAudioSelectorGroup",
           "locationName": "audioSelectorGroups",
-          "documentation": "Specifies set of audio selectors within an input to combine. An input may have multiple audio selector groups. See \"Audio Selector Group\":#inputs-audio_selector_group for more information."
+          "documentation": "Use audio selector groups to combine multiple sidecar audio inputs so that you can assign them to a single output audio tab (AudioDescription). Note that, if you're working with embedded audio, it's simpler to assign multiple input tracks into a single audio selector rather than use an audio selector group."
         },
         "AudioSelectors": {
           "shape": "__mapOfAudioSelector",
@@ -6215,7 +6387,7 @@
         "VideoSelector": {
           "shape": "VideoSelector",
           "locationName": "videoSelector",
-          "documentation": "Selector for video."
+          "documentation": "Input video selectors contain the video settings for the input. Each of your inputs can have up to one video selector."
         }
       },
       "documentation": "Specified video input in a template."
@@ -6288,7 +6460,7 @@
           "documentation": "Specify the width of the inserted image in pixels. If you specify a value that's larger than the video resolution width, the service will crop your overlaid image to fit. To use the native width of the image, keep this setting blank."
         }
       },
-      "documentation": "Settings that specify how your still graphic overlay appears."
+      "documentation": "These settings apply to a specific graphic overlay. You can include multiple overlays in your job."
     },
     "Job": {
       "type": "structure",
@@ -6466,17 +6638,22 @@
         "Esam": {
           "shape": "EsamSettings",
           "locationName": "esam",
-          "documentation": "Settings for Event Signaling And Messaging (ESAM)."
+          "documentation": "Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion, you can ignore these settings."
         },
         "Inputs": {
           "shape": "__listOfInput",
           "locationName": "inputs",
           "documentation": "Use Inputs (inputs) to define source file used in the transcode job. There can be multiple inputs add in a job. These inputs will be concantenated together to create the output."
         },
+        "KantarWatermark": {
+          "shape": "KantarWatermarkSettings",
+          "locationName": "kantarWatermark",
+          "documentation": "Use these settings only when you use Kantar watermarking. Specify the values that MediaConvert uses to generate and place Kantar watermarks in your output audio. These settings apply to every output in your job. In addition to specifying these values, you also need to store your Kantar credentials in AWS Secrets Manager. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html."
+        },
         "MotionImageInserter": {
           "shape": "MotionImageInserter",
           "locationName": "motionImageInserter",
-          "documentation": "Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups."
+          "documentation": "Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html."
         },
         "NielsenConfiguration": {
           "shape": "NielsenConfiguration",
@@ -6496,7 +6673,7 @@
         "TimecodeConfig": {
           "shape": "TimecodeConfig",
           "locationName": "timecodeConfig",
-          "documentation": "Contains settings used to acquire and adjust timecode information from inputs."
+          "documentation": "These settings control how the service handles timecodes throughout the job. These settings don't affect input clipping."
         },
         "TimedMetadataInsertion": {
           "shape": "TimedMetadataInsertion",
@@ -6617,17 +6794,22 @@
         "Esam": {
           "shape": "EsamSettings",
           "locationName": "esam",
-          "documentation": "Settings for Event Signaling And Messaging (ESAM)."
+          "documentation": "Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion, you can ignore these settings."
         },
         "Inputs": {
           "shape": "__listOfInputTemplate",
           "locationName": "inputs",
           "documentation": "Use Inputs (inputs) to define the source file used in the transcode job. There can only be one input in a job template.  Using the API, you can include multiple inputs when referencing a job template."
         },
+        "KantarWatermark": {
+          "shape": "KantarWatermarkSettings",
+          "locationName": "kantarWatermark",
+          "documentation": "Use these settings only when you use Kantar watermarking. Specify the values that MediaConvert uses to generate and place Kantar watermarks in your output audio. These settings apply to every output in your job. In addition to specifying these values, you also need to store your Kantar credentials in AWS Secrets Manager. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html."
+        },
         "MotionImageInserter": {
           "shape": "MotionImageInserter",
           "locationName": "motionImageInserter",
-          "documentation": "Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups."
+          "documentation": "Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html."
         },
         "NielsenConfiguration": {
           "shape": "NielsenConfiguration",
@@ -6647,7 +6829,7 @@
         "TimecodeConfig": {
           "shape": "TimecodeConfig",
           "locationName": "timecodeConfig",
-          "documentation": "Contains settings used to acquire and adjust timecode information from inputs."
+          "documentation": "These settings control how the service handles timecodes throughout the job. These settings don't affect input clipping."
         },
         "TimedMetadataInsertion": {
           "shape": "TimedMetadataInsertion",
@@ -6656,6 +6838,77 @@
         }
       },
       "documentation": "JobTemplateSettings contains all the transcode settings saved in the template that will be applied to jobs created from it."
+    },
+    "KantarWatermarkSettings": {
+      "type": "structure",
+      "members": {
+        "ChannelName": {
+          "shape": "__stringMin1Max20",
+          "locationName": "channelName",
+          "documentation": "Provide an audio channel name from your Kantar audio license."
+        },
+        "ContentReference": {
+          "shape": "__stringMin1Max50PatternAZAZ09",
+          "locationName": "contentReference",
+          "documentation": "Specify a unique identifier for Kantar to use for this piece of content."
+        },
+        "CredentialsSecretName": {
+          "shape": "__stringMin1Max512PatternAZAZ09",
+          "locationName": "credentialsSecretName",
+          "documentation": "Provide the name of the AWS Secrets Manager secret where your Kantar credentials are stored. Note that your MediaConvert service role must provide access to this secret. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/granting-permissions-for-mediaconvert-to-access-secrets-manager-secret.html. For instructions on creating a secret, see https://docs.aws.amazon.com/secretsmanager/latest/userguide/tutorials_basic.html, in the AWS Secrets Manager User Guide."
+        },
+        "FileOffset": {
+          "shape": "__doubleMin0",
+          "locationName": "fileOffset",
+          "documentation": "Optional. Specify an offset, in whole seconds, from the start of your output and the beginning of the watermarking. When you don't specify an offset, Kantar defaults to zero."
+        },
+        "KantarLicenseId": {
+          "shape": "__integerMin0Max2147483647",
+          "locationName": "kantarLicenseId",
+          "documentation": "Provide your Kantar license ID number. You should get this number from Kantar."
+        },
+        "KantarServerUrl": {
+          "shape": "__stringPatternHttpsKantarmediaCom",
+          "locationName": "kantarServerUrl",
+          "documentation": "Provide the HTTPS endpoint to the Kantar server. You should get this endpoint from Kantar."
+        },
+        "LogDestination": {
+          "shape": "__stringPatternS3",
+          "locationName": "logDestination",
+          "documentation": "Optional. Specify the Amazon S3 bucket where you want MediaConvert to store your Kantar watermark XML logs. When you don't specify a bucket, MediaConvert doesn't save these logs. Note that your MediaConvert service role must provide access to this location. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/iam-role.html"
+        },
+        "Metadata3": {
+          "shape": "__stringMin1Max50",
+          "locationName": "metadata3",
+          "documentation": "You can optionally use this field to specify the first timestamp that Kantar embeds during watermarking. Kantar suggests that you be very cautious when using this Kantar feature, and that you use it only on channels that are managed specifically for use with this feature by your Audience Measurement Operator. For more information about this feature, contact Kantar technical support."
+        },
+        "Metadata4": {
+          "shape": "__stringMin1Max50",
+          "locationName": "metadata4",
+          "documentation": "Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters."
+        },
+        "Metadata5": {
+          "shape": "__stringMin1Max50",
+          "locationName": "metadata5",
+          "documentation": "Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters."
+        },
+        "Metadata6": {
+          "shape": "__stringMin1Max50",
+          "locationName": "metadata6",
+          "documentation": "Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters."
+        },
+        "Metadata7": {
+          "shape": "__stringMin1Max50",
+          "locationName": "metadata7",
+          "documentation": "Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters."
+        },
+        "Metadata8": {
+          "shape": "__stringMin1Max50",
+          "locationName": "metadata8",
+          "documentation": "Additional metadata that MediaConvert sends to Kantar. Maximum length is 50 characters."
+        }
+      },
+      "documentation": "Use these settings only when you use Kantar watermarking. Specify the values that MediaConvert uses to generate and place Kantar watermarks in your output audio. These settings apply to every output in your job. In addition to specifying these values, you also need to store your Kantar credentials in AWS Secrets Manager. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/kantar-watermarking.html."
     },
     "LanguageCode": {
       "type": "string",
@@ -7227,12 +7480,12 @@
         "DvbNitSettings": {
           "shape": "DvbNitSettings",
           "locationName": "dvbNitSettings",
-          "documentation": "Inserts DVB Network Information Table (NIT) at the specified table repetition interval."
+          "documentation": "Use these settings to insert a DVB Network Information Table (NIT) in the transport stream of this output. When you work directly in your JSON job specification, include this object only when your job has a transport stream output and the container settings contain the object M2tsSettings."
         },
         "DvbSdtSettings": {
           "shape": "DvbSdtSettings",
           "locationName": "dvbSdtSettings",
-          "documentation": "Inserts DVB Service Description Table (NIT) at the specified table repetition interval."
+          "documentation": "Use these settings to insert a DVB Service Description Table (SDT) in the transport stream of this output. When you work directly in your JSON job specification, include this object only when your job has a transport stream output and the container settings contain the object M2tsSettings."
         },
         "DvbSubPids": {
           "shape": "__listOf__integerMin32Max8182",
@@ -7242,7 +7495,7 @@
         "DvbTdtSettings": {
           "shape": "DvbTdtSettings",
           "locationName": "dvbTdtSettings",
-          "documentation": "Inserts DVB Time and Date Table (TDT) at the specified table repetition interval."
+          "documentation": "Use these settings to insert a DVB Time and Date Table (TDT) in the transport stream of this output. When you work directly in your JSON job specification, include this object only when your job has a transport stream output and the container settings contain the object M2tsSettings."
         },
         "DvbTeletextPid": {
           "shape": "__integerMin32Max8182",
@@ -7432,6 +7685,11 @@
           "locationName": "audioPids",
           "documentation": "Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation."
         },
+        "MaxPcrInterval": {
+          "shape": "__integerMin0Max500",
+          "locationName": "maxPcrInterval",
+          "documentation": "Specify the maximum time, in milliseconds, between Program Clock References (PCRs) inserted into the transport stream."
+        },
         "NielsenId3": {
           "shape": "M3u8NielsenId3",
           "locationName": "nielsenId3",
@@ -7503,7 +7761,7 @@
           "documentation": "Packet Identifier (PID) of the elementary video stream in the transport stream."
         }
       },
-      "documentation": "Settings for TS segments in HLS"
+      "documentation": "These settings relate to the MPEG-2 transport stream (MPEG2-TS) container for the MPEG2-TS segments in your HLS outputs."
     },
     "MotionImageInserter": {
       "type": "structure",
@@ -7539,7 +7797,7 @@
           "documentation": "Specify when the motion overlay begins. Use timecode format (HH:MM:SS:FF or HH:MM:SS;FF). Make sure that the timecode you provide here takes into account how you have set up your timecode configuration under both job settings and input settings. The simplest way to do that is to set both to start at 0. If you need to set up your job to follow timecodes embedded in your source that don't start at zero, make sure that you specify a start time that is after the first embedded timecode. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/setting-up-timecode.html Find job-wide and input timecode configuration settings in your JSON job settings specification at settings>timecodeConfig>source and settings>inputs>timecodeSource."
         }
       },
-      "documentation": "Overlay motion graphics on top of your video at the time that you specify."
+      "documentation": "Overlay motion graphics on top of your video. The motion graphics that you specify here appear on all outputs in all output groups. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/motion-graphic-overlay.html."
     },
     "MotionImageInsertionFramerate": {
       "type": "structure",
@@ -7658,7 +7916,7 @@
           "documentation": "Always keep the default value (SELF_CONTAINED) for this setting."
         }
       },
-      "documentation": "Settings for MOV Container."
+      "documentation": "These settings relate to your QuickTime MOV output container."
     },
     "Mp2Settings": {
       "type": "structure",
@@ -7778,7 +8036,7 @@
           "documentation": "Overrides the \"Major Brand\" field in the output file. Usually not necessary to specify."
         }
       },
-      "documentation": "Settings for MP4 container. You can create audio-only AAC outputs with this container."
+      "documentation": "These settings relate to your MP4 output container. You can create audio only outputs with this container. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/supported-codecs-containers-audio-only.html#output-codecs-and-containers-supported-for-audio-only."
     },
     "MpdAccessibilityCaptionHints": {
       "type": "string",
@@ -7849,7 +8107,7 @@
           "documentation": "Ignore this setting unless you have SCTE-35 markers in your input video file. Choose Passthrough (PASSTHROUGH) if you want SCTE-35 markers that appear in your input to also appear in this output. Choose None (NONE) if you don't want those SCTE-35 markers in this output."
         }
       },
-      "documentation": "Settings for MP4 segments in DASH"
+      "documentation": "These settings relate to the fragmented MP4 container for the segments in your DASH outputs."
     },
     "Mpeg2AdaptiveQuantization": {
       "type": "string",
@@ -8256,7 +8514,7 @@
           "documentation": "Use Manifest encoding (MsSmoothManifestEncoding) to specify the encoding format for the server and client manifest. Valid options are utf8 and utf16."
         }
       },
-      "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to MS_SMOOTH_GROUP_SETTINGS."
+      "documentation": "Settings related to your Microsoft Smooth Streaming output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When you work directly in your JSON job specification, include this object and any required children when you set Type, under OutputGroupSettings, to MS_SMOOTH_GROUP_SETTINGS."
     },
     "MsSmoothManifestEncoding": {
       "type": "string",
@@ -8297,7 +8555,7 @@
           "documentation": "Specify the MXF profile, also called shim, for this output. When you choose Auto, MediaConvert chooses a profile based on the video codec and resolution. For a list of codecs supported with each MXF profile, see https://docs.aws.amazon.com/mediaconvert/latest/ug/codecs-supported-with-each-mxf-profile.html. For more information about the automatic selection behavior, see https://docs.aws.amazon.com/mediaconvert/latest/ug/default-automatic-selection-of-mxf-profiles.html."
         }
       },
-      "documentation": "MXF settings"
+      "documentation": "These settings relate to your MXF output container."
     },
     "NexGuardFileMarkerSettings": {
       "type": "structure",
@@ -8604,10 +8862,10 @@
         "VideoDescription": {
           "shape": "VideoDescription",
           "locationName": "videoDescription",
-          "documentation": "(VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec that you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output."
+          "documentation": "VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of VideoDescription per output."
         }
       },
-      "documentation": "An output object describes the settings for a single output file or stream in an output group."
+      "documentation": "Each output in your job is a collection of settings that describes how you want MediaConvert to encode a single output file or stream. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/create-outputs.html."
     },
     "OutputChannelMapping": {
       "type": "structure",
@@ -8689,27 +8947,27 @@
         "CmafGroupSettings": {
           "shape": "CmafGroupSettings",
           "locationName": "cmafGroupSettings",
-          "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to CMAF_GROUP_SETTINGS. Each output in a CMAF Output Group may only contain a single video, audio, or caption output."
+          "documentation": "Settings related to your CMAF output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When you work directly in your JSON job specification, include this object and any required children when you set Type, under OutputGroupSettings, to CMAF_GROUP_SETTINGS."
         },
         "DashIsoGroupSettings": {
           "shape": "DashIsoGroupSettings",
           "locationName": "dashIsoGroupSettings",
-          "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to DASH_ISO_GROUP_SETTINGS."
+          "documentation": "Settings related to your DASH output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When you work directly in your JSON job specification, include this object and any required children when you set Type, under OutputGroupSettings, to DASH_ISO_GROUP_SETTINGS."
         },
         "FileGroupSettings": {
           "shape": "FileGroupSettings",
           "locationName": "fileGroupSettings",
-          "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to FILE_GROUP_SETTINGS."
+          "documentation": "Settings related to your File output group. MediaConvert uses this group of settings to generate a single standalone file, rather than a streaming package. When you work directly in your JSON job specification, include this object and any required children when you set Type, under OutputGroupSettings, to FILE_GROUP_SETTINGS."
         },
         "HlsGroupSettings": {
           "shape": "HlsGroupSettings",
           "locationName": "hlsGroupSettings",
-          "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to HLS_GROUP_SETTINGS."
+          "documentation": "Settings related to your HLS output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When you work directly in your JSON job specification, include this object and any required children when you set Type, under OutputGroupSettings, to HLS_GROUP_SETTINGS."
         },
         "MsSmoothGroupSettings": {
           "shape": "MsSmoothGroupSettings",
           "locationName": "msSmoothGroupSettings",
-          "documentation": "Required when you set (Type) under (OutputGroups)>(OutputGroupSettings) to MS_SMOOTH_GROUP_SETTINGS."
+          "documentation": "Settings related to your Microsoft Smooth Streaming output package. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/outputs-file-ABR.html. When you work directly in your JSON job specification, include this object and any required children when you set Type, under OutputGroupSettings, to MS_SMOOTH_GROUP_SETTINGS."
         },
         "Type": {
           "shape": "OutputGroupType",
@@ -8832,7 +9090,7 @@
         "CaptionDescriptions": {
           "shape": "__listOfCaptionDescriptionPreset",
           "locationName": "captionDescriptions",
-          "documentation": "Caption settings for this preset. There can be multiple caption settings in a single output."
+          "documentation": "This object holds groups of settings related to captions for one output. For each output that has captions, include one instance of CaptionDescriptions."
         },
         "ContainerSettings": {
           "shape": "ContainerSettings",
@@ -8842,7 +9100,7 @@
         "VideoDescription": {
           "shape": "VideoDescription",
           "locationName": "videoDescription",
-          "documentation": "(VideoDescription) contains a group of video encoding settings. The specific video settings depend on the video codec that you choose when you specify a value for Video codec (codec). Include one instance of (VideoDescription) per output."
+          "documentation": "VideoDescription contains a group of video encoding settings. The specific video settings depend on the video codec that you choose for the property codec. Include one instance of VideoDescription per output."
         }
       },
       "documentation": "Settings for preset"
@@ -9331,7 +9589,7 @@
           "documentation": "Set Framerate (SccDestinationFramerate) to make sure that the captions and the video are synchronized in the output. Specify a frame rate that matches the frame rate of the associated video. If the video frame rate is 29.97, choose 29.97 dropframe (FRAMERATE_29_97_DROPFRAME) only if the video has video_insertion=true and drop_frame_timecode=true; otherwise, choose 29.97 non-dropframe (FRAMERATE_29_97_NON_DROPFRAME)."
         }
       },
-      "documentation": "Settings for SCC caption output."
+      "documentation": "Settings related to SCC captions. SCC is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/scc-srt-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to SCC."
     },
     "SimulateReservedQueue": {
       "type": "string",
@@ -9482,7 +9740,7 @@
           "documentation": "Specify the page types for this Teletext page. If you don't specify a value here, the service sets the page type to the default value Subtitle (PAGE_TYPE_SUBTITLE). If you pass through the entire set of Teletext data, don't use this field. When you pass through a set of Teletext pages, your output has the same page types as your input."
         }
       },
-      "documentation": "Settings for Teletext caption output"
+      "documentation": "Settings related to teletext captions. Set up teletext captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/teletext-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to TELETEXT."
     },
     "TeletextPageType": {
       "type": "string",
@@ -9525,7 +9783,7 @@
           "documentation": "Use Prefix (Prefix) to place ASCII characters before any burned-in timecode. For example, a prefix of \"EZ-\" will result in the timecode \"EZ-00:00:00:00\". Provide either the characters themselves or the ASCII code equivalents. The supported range of characters is 0x20 through 0x7e. This includes letters, numbers, and all special characters represented on a standard English keyboard."
         }
       },
-      "documentation": "Timecode burn-in (TimecodeBurnIn)--Burns the output timecode and specified prefix into the output."
+      "documentation": "Settings for burning the output timecode and specified prefix into the output."
     },
     "TimecodeBurninPosition": {
       "type": "string",
@@ -9634,14 +9892,14 @@
         "StylePassthrough": {
           "shape": "TtmlStylePassthrough",
           "locationName": "stylePassthrough",
-          "documentation": "Pass through style and position information from a TTML-like input source (TTML, SMPTE-TT) to the TTML output."
+          "documentation": "Pass through style and position information from a TTML-like input source (TTML, IMSC, SMPTE-TT) to the TTML output."
         }
       },
-      "documentation": "Settings specific to TTML caption outputs, including Pass style information (TtmlStylePassthrough)."
+      "documentation": "Settings related to TTML captions. TTML is a sidecar format that holds captions in a file that is separate from the video container. Set up sidecar captions in the same output group, but different output from your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/ttml-and-webvtt-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to TTML."
     },
     "TtmlStylePassthrough": {
       "type": "string",
-      "documentation": "Pass through style and position information from a TTML-like input source (TTML, SMPTE-TT) to the TTML output.",
+      "documentation": "Pass through style and position information from a TTML-like input source (TTML, IMSC, SMPTE-TT) to the TTML output.",
       "enum": [
         "ENABLED",
         "DISABLED"
@@ -9955,7 +10213,7 @@
         "AvcIntraSettings": {
           "shape": "AvcIntraSettings",
           "locationName": "avcIntraSettings",
-          "documentation": "Required when you set your output video codec to AVC-Intra. For more information about the AVC-I settings, see the relevant specification. For detailed information about SD and HD in AVC-I, see https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in AVC-I, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf."
+          "documentation": "Required when you choose AVC-Intra for your output video codec. For more information about the AVC-Intra settings, see the relevant specification. For detailed information about SD and HD in AVC-Intra, see https://ieeexplore.ieee.org/document/7290936. For information about 4K/2K in AVC-Intra, see https://pro-av.panasonic.net/en/avc-ultra/AVC-ULTRAoverview.pdf."
         },
         "Codec": {
           "shape": "VideoCodec",
@@ -10084,7 +10342,7 @@
           "documentation": "Use Width (Width) to define the video resolution width, in pixels, for this output. If you don't provide a value here, the service will use the input width."
         }
       },
-      "documentation": "Settings for video outputs"
+      "documentation": "Settings related to video encoding of your output. The specific video settings depend on the video codec that you choose. When you work directly in your JSON job specification, include one instance of Video description (VideoDescription) per output."
     },
     "VideoDetail": {
       "type": "structure",
@@ -10108,12 +10366,12 @@
         "ColorCorrector": {
           "shape": "ColorCorrector",
           "locationName": "colorCorrector",
-          "documentation": "Enable the Color corrector (ColorCorrector) feature if necessary. Enable or disable this feature for each output individually. This setting is disabled by default."
+          "documentation": "Use these settings to convert the color space or to modify properties such as hue and contrast for this output. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/converting-the-color-space.html."
         },
         "Deinterlacer": {
           "shape": "Deinterlacer",
           "locationName": "deinterlacer",
-          "documentation": "Use Deinterlacer (Deinterlacer) to produce smoother motion and a clearer picture."
+          "documentation": "Use the deinterlacer to produce smoother motion and a clearer picture. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/working-with-scan-type.html."
         },
         "DolbyVision": {
           "shape": "DolbyVision",
@@ -10138,7 +10396,7 @@
         "TimecodeBurnin": {
           "shape": "TimecodeBurnin",
           "locationName": "timecodeBurnin",
-          "documentation": "Timecode burn-in (TimecodeBurnIn)--Burns the output timecode and specified prefix into the output."
+          "documentation": "Settings for burning the output timecode and specified prefix into the output."
         }
       },
       "documentation": "Find additional transcoding features under Preprocessors (VideoPreprocessors). Enable the features at each output individually. These features are disabled by default."
@@ -10180,9 +10438,14 @@
           "shape": "InputRotate",
           "locationName": "rotate",
           "documentation": "Use Rotate (InputRotate) to specify how the service rotates your video. You can choose automatic rotation or specify a rotation. You can specify a clockwise rotation of 0, 90, 180, or 270 degrees. If your input video container is .mov or .mp4 and your input has rotation metadata, you can choose Automatic to have the service rotate your video according to the rotation specified in the metadata. The rotation must be within one degree of 90, 180, or 270 degrees. If the rotation metadata specifies any other rotation, the service will default to no rotation. By default, the service does no rotation, even if your input video has rotation metadata. The service doesn't pass through rotation metadata."
+        },
+        "SampleRange": {
+          "shape": "InputSampleRange",
+          "locationName": "sampleRange",
+          "documentation": "Use this setting when your input video codec is AVC-Intra. Ignore this setting for all other inputs. If the sample range metadata in your input video is accurate, or if you don't know about sample range, keep the default value, Follow (FOLLOW), for this setting. When you do, the service automatically detects your input sample range. If your input video has metadata indicating the wrong sample range, specify the accurate sample range here. When you do, MediaConvert ignores any sample range information in the input metadata. Regardless of whether MediaConvert uses the input sample range or the sample range that you specify, MediaConvert uses the sample range for transcoding and also writes it to the output metadata."
         }
       },
-      "documentation": "Selector for video."
+      "documentation": "Input video selectors contain the video settings for the input. Each of your inputs can have up to one video selector."
     },
     "VideoTimecodeInsertion": {
       "type": "string",
@@ -10479,6 +10742,25 @@
         }
       },
       "documentation": "Required when you set (Codec) under (AudioDescriptions)>(CodecSettings) to the value WAV."
+    },
+    "WebvttDestinationSettings": {
+      "type": "structure",
+      "members": {
+        "StylePassthrough": {
+          "shape": "WebvttStylePassthrough",
+          "locationName": "stylePassthrough",
+          "documentation": "Choose Enabled (ENABLED) to have MediaConvert use the font style, color, and position information from the captions source in the input. Keep the default value, Disabled (DISABLED), for simplified output captions."
+        }
+      },
+      "documentation": "WEBVTT Destination Settings"
+    },
+    "WebvttStylePassthrough": {
+      "type": "string",
+      "documentation": "Choose Enabled (ENABLED) to have MediaConvert use the font style, color, and position information from the captions source in the input. Keep the default value, Disabled (DISABLED), for simplified output captions.",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
     },
     "__doubleMin0": {
       "type": "double"
@@ -10862,11 +11144,6 @@
       "min": 64000,
       "max": 640000
     },
-    "__integerMin7Max15": {
-      "type": "integer",
-      "min": 7,
-      "max": 15
-    },
     "__integerMin8000Max192000": {
       "type": "integer",
       "min": 8000,
@@ -11216,10 +11493,10 @@
       "min": 14,
       "pattern": "^((s3://(.*)(\\.mov|[0-9]+\\.png))|(https?://(.*)(\\.mov|[0-9]+\\.png)(\\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$"
     },
-    "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMI": {
+    "__stringMin14PatternS3SccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTTHttpsSccSCCTtmlTTMLDfxpDFXPStlSTLSrtSRTXmlXMLSmiSMIVttVTT": {
       "type": "string",
       "min": 14,
-      "pattern": "^((s3://(.*?)\\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI))|(https?://(.*?)\\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI)(\\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$"
+      "pattern": "^((s3://(.*?)\\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI|vtt|VTT))|(https?://(.*?)\\.(scc|SCC|ttml|TTML|dfxp|DFXP|stl|STL|srt|SRT|xml|XML|smi|SMI|vtt|VTT)(\\?([^&=]+=[^&]+&)*[^&=]+=[^&]+)?))$"
     },
     "__stringMin16Max24PatternAZaZ0922AZaZ0916": {
       "type": "string",
@@ -11246,6 +11523,18 @@
       "type": "string",
       "min": 1,
       "max": 50
+    },
+    "__stringMin1Max50PatternAZAZ09": {
+      "type": "string",
+      "min": 1,
+      "max": 50,
+      "pattern": "^[a-zA-Z0-9_\\/_+=.@-]*$"
+    },
+    "__stringMin1Max512PatternAZAZ09": {
+      "type": "string",
+      "min": 1,
+      "max": 512,
+      "pattern": "^[a-zA-Z0-9_\\/_+=.@-]*$"
     },
     "__stringMin24Max512PatternAZaZ0902": {
       "type": "string",
@@ -11334,6 +11623,10 @@
     "__stringPatternHttps": {
       "type": "string",
       "pattern": "^https:\\/\\/"
+    },
+    "__stringPatternHttpsKantarmediaCom": {
+      "type": "string",
+      "pattern": "^https:\\/\\/.*.kantarmedia.com$"
     },
     "__stringPatternIdentityAZaZ26AZaZ09163": {
       "type": "string",

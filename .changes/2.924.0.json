@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "FSx",
+        "description": "This release adds support for auditing end-user access to files, folders, and file shares using Windows event logs, enabling customers to meet their security and compliance needs."
+    },
+    {
+        "type": "feature",
+        "category": "Macie2",
+        "description": "This release of the Amazon Macie API introduces stricter validation of S3 object criteria for classification jobs."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "increase max pagesize for List/Search apis"
+    }
+]

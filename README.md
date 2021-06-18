@@ -29,7 +29,7 @@ For release notes, see the [CHANGELOG](https://github.com/aws/aws-sdk-js/blob/ma
 To use the SDK in the browser, simply add the following script tag to your
 HTML pages:
 
-    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.869.0.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.931.0.min.js"></script>
 
 You can also build a custom browser SDK with your specified set of AWS services.
 This can allow you to reduce the SDK's size, specify different API versions of
@@ -156,8 +156,8 @@ You can [open an issue](https://github.com/aws/aws-sdk-js/issues/new/choose) and
 [bug reports](https://github.com/aws/aws-sdk-js/issues/new?assignees=&labels=bug%2C+needs-triage&template=---bug-report.md&title=), 
 [feature requests](https://github.com/aws/aws-sdk-js/issues/new?assignees=&labels=feature-request&template=---feature-request.md&title=) 
 or [guidance](https://github.com/aws/aws-sdk-js/issues/new?assignees=&labels=guidance%2C+needs-triage&template=---questions---help.md&title=). 
-You may also find help on community resources such as [StackOverFlow](https://stackoverflow.com/questions/tagged/aws-sdk-js) with the tag #aws-sdk-js 
-or If you have a support plan with [AWS Support](https://aws.amazon.com/premiumsupport/), you can also create a new support case.
+You may also find help on community resources such as [StackOverFlow](https://stackoverflow.com/questions/tagged/aws-sdk-js) with the tag #aws-sdk-js.
+If you have a support plan with [AWS Support](https://aws.amazon.com/premiumsupport/), you can also create a new support case.
 
 Please make sure to check out our resources too before opening an issue:
 * Our [Developer Guide](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/welcome.html) and [API reference](https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/)

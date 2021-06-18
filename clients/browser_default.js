@@ -67,6 +67,7 @@ module.exports = {
   WAF: require('./waf'),
   WorkDocs: require('./workdocs'),
   LexModelBuildingService: require('./lexmodelbuildingservice'),
+  Athena: require('./athena'),
   Pricing: require('./pricing'),
   CostExplorer: require('./costexplorer'),
   MediaStoreData: require('./mediastoredata'),
@@ -86,5 +87,6 @@ module.exports = {
   ForecastService: require('./forecastservice'),
   ForecastQueryService: require('./forecastqueryservice'),
   KinesisVideoSignalingChannels: require('./kinesisvideosignalingchannels'),
+  Location: require('./location'),
   LexRuntimeV2: require('./lexruntimev2')
 };

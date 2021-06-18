@@ -107,6 +107,12 @@
           "shape": "ThrottlingException"
         },
         {
+          "shape": "DeviceOfflineException"
+        },
+        {
+          "shape": "DeviceRetiredException"
+        },
+        {
           "shape": "InternalServiceException"
         },
         {
@@ -380,7 +386,7 @@
     },
     "CreateQuantumTaskRequestDeviceParametersString": {
       "type": "string",
-      "max": 2048,
+      "max": 48000,
       "min": 1
     },
     "CreateQuantumTaskRequestOutputS3BucketString": {
@@ -419,7 +425,8 @@
       "type": "string",
       "enum": [
         "ONLINE",
-        "OFFLINE"
+        "OFFLINE",
+        "RETIRED"
       ]
     },
     "DeviceSummary": {
@@ -941,7 +948,7 @@
         },
         "tagKeys": {
           "shape": "TagKeys",
-          "documentation": "<p>pecify the keys for the tags to remove from the resource.</p>",
+          "documentation": "<p>Specify the keys for the tags to remove from the resource.</p>",
           "location": "querystring",
           "locationName": "tagKeys"
         }

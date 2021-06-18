@@ -21,6 +21,14 @@ declare class Redshift extends Service {
    */
   acceptReservedNodeExchange(callback?: (err: AWSError, data: Redshift.Types.AcceptReservedNodeExchangeOutputMessage) => void): Request<Redshift.Types.AcceptReservedNodeExchangeOutputMessage, AWSError>;
   /**
+   * Adds a partner integration to a cluster. This operation authorizes a partner to push status updates for the specified database. To complete the integration, you also set up the integration on the partner website.
+   */
+  addPartner(params: Redshift.Types.PartnerIntegrationInputMessage, callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
+  /**
+   * Adds a partner integration to a cluster. This operation authorizes a partner to push status updates for the specified database. To complete the integration, you also set up the integration on the partner website.
+   */
+  addPartner(callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
+  /**
    * Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. If you authorize access to an Amazon EC2 security group, specify EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS Region.  If you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing.  You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to Working with Security Groups in the Amazon Redshift Cluster Management Guide.
    */
   authorizeClusterSecurityGroupIngress(params: Redshift.Types.AuthorizeClusterSecurityGroupIngressMessage, callback?: (err: AWSError, data: Redshift.Types.AuthorizeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.AuthorizeClusterSecurityGroupIngressResult, AWSError>;
@@ -28,6 +36,14 @@ declare class Redshift extends Service {
    * Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. If you authorize access to an Amazon EC2 security group, specify EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS Region.  If you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing.  You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to Working with Security Groups in the Amazon Redshift Cluster Management Guide.
    */
   authorizeClusterSecurityGroupIngress(callback?: (err: AWSError, data: Redshift.Types.AuthorizeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.AuthorizeClusterSecurityGroupIngressResult, AWSError>;
+  /**
+   * Grants access to a cluster.
+   */
+  authorizeEndpointAccess(params: Redshift.Types.AuthorizeEndpointAccessMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAuthorization) => void): Request<Redshift.Types.EndpointAuthorization, AWSError>;
+  /**
+   * Grants access to a cluster.
+   */
+  authorizeEndpointAccess(callback?: (err: AWSError, data: Redshift.Types.EndpointAuthorization) => void): Request<Redshift.Types.EndpointAuthorization, AWSError>;
   /**
    * Authorizes the specified AWS customer account to restore the specified snapshot.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
@@ -108,6 +124,14 @@ declare class Redshift extends Service {
    * Creates a new Amazon Redshift subnet group. You must provide a list of one or more subnets in your existing Amazon Virtual Private Cloud (Amazon VPC) when creating Amazon Redshift subnet group.  For information about subnet groups, go to Amazon Redshift Cluster Subnet Groups in the Amazon Redshift Cluster Management Guide.
    */
   createClusterSubnetGroup(callback?: (err: AWSError, data: Redshift.Types.CreateClusterSubnetGroupResult) => void): Request<Redshift.Types.CreateClusterSubnetGroupResult, AWSError>;
+  /**
+   * Creates a Redshift-managed VPC endpoint.
+   */
+  createEndpointAccess(params: Redshift.Types.CreateEndpointAccessMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAccess) => void): Request<Redshift.Types.EndpointAccess, AWSError>;
+  /**
+   * Creates a Redshift-managed VPC endpoint.
+   */
+  createEndpointAccess(callback?: (err: AWSError, data: Redshift.Types.EndpointAccess) => void): Request<Redshift.Types.EndpointAccess, AWSError>;
   /**
    * Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console. You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities. Notifications will be sent for all events you want that match those criteria. For example, you can specify source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and Backup categories for the specified clusters. If you specify both the source type and source IDs, such as source type = cluster and source identifier = my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type but do not specify a source identifier, you will receive notice of the events for the objects of that type in your AWS account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all Amazon Redshift sources belonging to your AWS account. You must specify a source type if you specify a source ID.
    */
@@ -213,6 +237,14 @@ declare class Redshift extends Service {
    */
   deleteClusterSubnetGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a Redshift-managed VPC endpoint.
+   */
+  deleteEndpointAccess(params: Redshift.Types.DeleteEndpointAccessMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAccess) => void): Request<Redshift.Types.EndpointAccess, AWSError>;
+  /**
+   * Deletes a Redshift-managed VPC endpoint.
+   */
+  deleteEndpointAccess(callback?: (err: AWSError, data: Redshift.Types.EndpointAccess) => void): Request<Redshift.Types.EndpointAccess, AWSError>;
+  /**
    * Deletes an Amazon Redshift event notification subscription.
    */
   deleteEventSubscription(params: Redshift.Types.DeleteEventSubscriptionMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -236,6 +268,14 @@ declare class Redshift extends Service {
    * Deletes the specified Amazon Redshift HSM configuration.
    */
   deleteHsmConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a partner integration from a cluster. Data can still flow to the cluster until the integration is deleted at the partner's website.
+   */
+  deletePartner(params: Redshift.Types.PartnerIntegrationInputMessage, callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
+  /**
+   * Deletes a partner integration from a cluster. Data can still flow to the cluster until the integration is deleted at the partner's website.
+   */
+  deletePartner(callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
   /**
    * Deletes a scheduled action. 
    */
@@ -365,6 +405,22 @@ declare class Redshift extends Service {
    */
   describeDefaultClusterParameters(callback?: (err: AWSError, data: Redshift.Types.DescribeDefaultClusterParametersResult) => void): Request<Redshift.Types.DescribeDefaultClusterParametersResult, AWSError>;
   /**
+   * Describes a Redshift-managed VPC endpoint.
+   */
+  describeEndpointAccess(params: Redshift.Types.DescribeEndpointAccessMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAccessList) => void): Request<Redshift.Types.EndpointAccessList, AWSError>;
+  /**
+   * Describes a Redshift-managed VPC endpoint.
+   */
+  describeEndpointAccess(callback?: (err: AWSError, data: Redshift.Types.EndpointAccessList) => void): Request<Redshift.Types.EndpointAccessList, AWSError>;
+  /**
+   * Describes an endpoint authorization.
+   */
+  describeEndpointAuthorization(params: Redshift.Types.DescribeEndpointAuthorizationMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAuthorizationList) => void): Request<Redshift.Types.EndpointAuthorizationList, AWSError>;
+  /**
+   * Describes an endpoint authorization.
+   */
+  describeEndpointAuthorization(callback?: (err: AWSError, data: Redshift.Types.EndpointAuthorizationList) => void): Request<Redshift.Types.EndpointAuthorizationList, AWSError>;
+  /**
    * Displays a list of event categories for all event source types, or for a specified source type. For a list of the event categories and source types, go to Amazon Redshift Event Notifications.
    */
   describeEventCategories(params: Redshift.Types.DescribeEventCategoriesMessage, callback?: (err: AWSError, data: Redshift.Types.EventCategoriesMessage) => void): Request<Redshift.Types.EventCategoriesMessage, AWSError>;
@@ -428,6 +484,14 @@ declare class Redshift extends Service {
    * Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   describeOrderableClusterOptions(callback?: (err: AWSError, data: Redshift.Types.OrderableClusterOptionsMessage) => void): Request<Redshift.Types.OrderableClusterOptionsMessage, AWSError>;
+  /**
+   * Returns information about the partner integrations defined for a cluster.
+   */
+  describePartners(params: Redshift.Types.DescribePartnersInputMessage, callback?: (err: AWSError, data: Redshift.Types.DescribePartnersOutputMessage) => void): Request<Redshift.Types.DescribePartnersOutputMessage, AWSError>;
+  /**
+   * Returns information about the partner integrations defined for a cluster.
+   */
+  describePartners(callback?: (err: AWSError, data: Redshift.Types.DescribePartnersOutputMessage) => void): Request<Redshift.Types.DescribePartnersOutputMessage, AWSError>;
   /**
    * Returns a list of the available reserved node offerings by Amazon Redshift with their descriptions including the node type, the fixed and recurring costs of reserving the node and duration the node will be reserved for you. These descriptions help you determine which reserve node offering you want to purchase. You then use the unique offering ID in you call to PurchaseReservedNodeOffering to reserve one or more nodes for your Amazon Redshift cluster.   For more information about reserved node offerings, go to Purchasing Reserved Nodes in the Amazon Redshift Cluster Management Guide.
    */
@@ -625,6 +689,14 @@ declare class Redshift extends Service {
    */
   modifyClusterSubnetGroup(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterSubnetGroupResult) => void): Request<Redshift.Types.ModifyClusterSubnetGroupResult, AWSError>;
   /**
+   * Modifies a Redshift-managed VPC endpoint.
+   */
+  modifyEndpointAccess(params: Redshift.Types.ModifyEndpointAccessMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAccess) => void): Request<Redshift.Types.EndpointAccess, AWSError>;
+  /**
+   * Modifies a Redshift-managed VPC endpoint.
+   */
+  modifyEndpointAccess(callback?: (err: AWSError, data: Redshift.Types.EndpointAccess) => void): Request<Redshift.Types.EndpointAccess, AWSError>;
+  /**
    * Modifies an existing Amazon Redshift event notification subscription.
    */
   modifyEventSubscription(params: Redshift.Types.ModifyEventSubscriptionMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyEventSubscriptionResult) => void): Request<Redshift.Types.ModifyEventSubscriptionResult, AWSError>;
@@ -737,6 +809,14 @@ declare class Redshift extends Service {
    */
   revokeClusterSecurityGroupIngress(callback?: (err: AWSError, data: Redshift.Types.RevokeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.RevokeClusterSecurityGroupIngressResult, AWSError>;
   /**
+   * Revokes access to a cluster.
+   */
+  revokeEndpointAccess(params: Redshift.Types.RevokeEndpointAccessMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAuthorization) => void): Request<Redshift.Types.EndpointAuthorization, AWSError>;
+  /**
+   * Revokes access to a cluster.
+   */
+  revokeEndpointAccess(callback?: (err: AWSError, data: Redshift.Types.EndpointAuthorization) => void): Request<Redshift.Types.EndpointAuthorization, AWSError>;
+  /**
    * Removes the ability of the specified AWS customer account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
   revokeSnapshotAccess(params: Redshift.Types.RevokeSnapshotAccessMessage, callback?: (err: AWSError, data: Redshift.Types.RevokeSnapshotAccessResult) => void): Request<Redshift.Types.RevokeSnapshotAccessResult, AWSError>;
@@ -752,6 +832,14 @@ declare class Redshift extends Service {
    * Rotates the encryption keys for a cluster.
    */
   rotateEncryptionKey(callback?: (err: AWSError, data: Redshift.Types.RotateEncryptionKeyResult) => void): Request<Redshift.Types.RotateEncryptionKeyResult, AWSError>;
+  /**
+   * Updates the status of a partner integration.
+   */
+  updatePartnerStatus(params: Redshift.Types.UpdatePartnerStatusInputMessage, callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
+  /**
+   * Updates the status of a partner integration.
+   */
+  updatePartnerStatus(callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
   /**
    * Waits for the clusterAvailable state by periodically calling the underlying Redshift.describeClustersoperation every 60 seconds (at most 30 times).
    */
@@ -852,6 +940,7 @@ declare namespace Redshift {
      */
     AttributeValue?: String;
   }
+  export type AuthorizationStatus = "Authorized"|"Revoking"|string;
   export interface AuthorizeClusterSecurityGroupIngressMessage {
     /**
      * The name of the security group to which the ingress rule is added.
@@ -872,6 +961,20 @@ declare namespace Redshift {
   }
   export interface AuthorizeClusterSecurityGroupIngressResult {
     ClusterSecurityGroup?: ClusterSecurityGroup;
+  }
+  export interface AuthorizeEndpointAccessMessage {
+    /**
+     * The cluster identifier of the cluster to grant access to.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The AWS account ID to grant access to.
+     */
+    Account: String;
+    /**
+     * The virtual private cloud (VPC) identifiers to grant access to.
+     */
+    VpcIds?: VpcIdentifierList;
   }
   export interface AuthorizeSnapshotAccessMessage {
     /**
@@ -1680,6 +1783,28 @@ declare namespace Redshift {
   export interface CreateClusterSubnetGroupResult {
     ClusterSubnetGroup?: ClusterSubnetGroup;
   }
+  export interface CreateEndpointAccessMessage {
+    /**
+     * The cluster identifier of the cluster to access.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The AWS account ID of the owner of the cluster. This is only required if the cluster is in another AWS account.
+     */
+    ResourceOwner?: String;
+    /**
+     * The Redshift-managed VPC endpoint name. An endpoint name must contain 1-30 characters. Valid characters are A-Z, a-z, 0-9, and hyphen(-). The first character must be a letter. The name can't contain two consecutive hyphens or end with a hyphen.
+     */
+    EndpointName: String;
+    /**
+     * The subnet group from which Amazon Redshift chooses the subnet to deploy the endpoint.
+     */
+    SubnetGroupName: String;
+    /**
+     * The security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.
+     */
+    VpcSecurityGroupIds?: VpcSecurityGroupIdList;
+  }
   export interface CreateEventSubscriptionMessage {
     /**
      * The name of the event subscription to be created. Constraints:   Cannot be null, empty, or blank.   Must contain from 1 to 255 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
@@ -1999,6 +2124,12 @@ declare namespace Redshift {
      */
     ClusterSubnetGroupName: String;
   }
+  export interface DeleteEndpointAccessMessage {
+    /**
+     * The Redshift-managed VPC endpoint to delete.
+     */
+    EndpointName: String;
+  }
   export interface DeleteEventSubscriptionMessage {
     /**
      * The name of the Amazon Redshift event notification subscription to be deleted.
@@ -2276,6 +2407,54 @@ declare namespace Redshift {
   export interface DescribeDefaultClusterParametersResult {
     DefaultClusterParameters?: DefaultClusterParameters;
   }
+  export interface DescribeEndpointAccessMessage {
+    /**
+     * The cluster identifier associated with the described endpoint.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The AWS account ID of the owner of the cluster.
+     */
+    ResourceOwner?: String;
+    /**
+     * The name of the endpoint to be described.
+     */
+    EndpointName?: String;
+    /**
+     * The virtual private cloud (VPC) identifier with access to the cluster.
+     */
+    VpcId?: String;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a Marker is included in the response so that the remaining results can be retrieved.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous DescribeEndpointAccess request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter.
+     */
+    Marker?: String;
+  }
+  export interface DescribeEndpointAuthorizationMessage {
+    /**
+     * The cluster identifier of the cluster to access.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The AWS account ID of either the cluster owner (grantor) or grantee. If Grantee parameter is true, then the Account value is of the grantor.
+     */
+    Account?: String;
+    /**
+     * Indicates whether to check authorization from a grantor or grantee point of view. If true, Amazon Redshift returns endpoint authorizations that you've been granted. If false (default), checks authorization from a grantor point of view.
+     */
+    Grantee?: BooleanOptional;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a Marker is included in the response so that the remaining results can be retrieved.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous DescribeEndpointAuthorization request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter.
+     */
+    Marker?: String;
+  }
   export interface DescribeEventCategoriesMessage {
     /**
      * The source type, such as cluster or parameter group, to which the described event categories apply. Valid values: cluster, cluster-snapshot, cluster-parameter-group, cluster-security-group, and scheduled-action.
@@ -2431,6 +2610,30 @@ declare namespace Redshift {
      * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeOrderableClusterOptions request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
+  }
+  export interface DescribePartnersInputMessage {
+    /**
+     * The AWS account ID that owns the cluster.
+     */
+    AccountId: PartnerIntegrationAccountId;
+    /**
+     * The cluster identifier of the cluster whose partner integration is being described.
+     */
+    ClusterIdentifier: PartnerIntegrationClusterIdentifier;
+    /**
+     * The name of the database whose partner integration is being described. If database name is not specified, then all databases in the cluster are described.
+     */
+    DatabaseName?: PartnerIntegrationDatabaseName;
+    /**
+     * The name of the partner that is being described. If partner name is not specified, then all partner integrations are described.
+     */
+    PartnerName?: PartnerIntegrationPartnerName;
+  }
+  export interface DescribePartnersOutputMessage {
+    /**
+     * A list of partner integrations.
+     */
+    PartnerIntegrationInfoList?: PartnerIntegrationInfoList;
   }
   export interface DescribeReservedNodeOfferingsMessage {
     /**
@@ -2732,6 +2935,105 @@ declare namespace Redshift {
      */
     VpcEndpoints?: VpcEndpointsList;
   }
+  export interface EndpointAccess {
+    /**
+     * The cluster identifier of the cluster associated with the endpoint.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The AWS account ID of the owner of the cluster.
+     */
+    ResourceOwner?: String;
+    /**
+     * The subnet group name where Amazon Redshift chooses to deploy the endpoint.
+     */
+    SubnetGroupName?: String;
+    /**
+     * The status of the endpoint.
+     */
+    EndpointStatus?: String;
+    /**
+     * The name of the endpoint.
+     */
+    EndpointName?: String;
+    /**
+     * The time (UTC) that the endpoint was created.
+     */
+    EndpointCreateTime?: TStamp;
+    /**
+     * The port number on which the cluster accepts incoming connections.
+     */
+    Port?: Integer;
+    /**
+     * The DNS address of the endpoint.
+     */
+    Address?: String;
+    /**
+     * The security groups associated with the endpoint.
+     */
+    VpcSecurityGroups?: VpcSecurityGroupMembershipList;
+    VpcEndpoint?: VpcEndpoint;
+  }
+  export interface EndpointAccessList {
+    /**
+     * The list of endpoints with access to the cluster.
+     */
+    EndpointAccessList?: EndpointAccesses;
+    /**
+     * An optional pagination token provided by a previous DescribeEndpointAccess request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter.
+     */
+    Marker?: String;
+  }
+  export type EndpointAccesses = EndpointAccess[];
+  export interface EndpointAuthorization {
+    /**
+     * The AWS account ID of the cluster owner.
+     */
+    Grantor?: String;
+    /**
+     * The AWS account ID of the grantee of the cluster.
+     */
+    Grantee?: String;
+    /**
+     * The cluster identifier.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The time (UTC) when the authorization was created.
+     */
+    AuthorizeTime?: TStamp;
+    /**
+     * The status of the cluster.
+     */
+    ClusterStatus?: String;
+    /**
+     * The status of the authorization action.
+     */
+    Status?: AuthorizationStatus;
+    /**
+     * Indicates whether all VPCs in the grantee account are allowed access to the cluster.
+     */
+    AllowedAllVPCs?: Boolean;
+    /**
+     * The VPCs allowed access to the cluster.
+     */
+    AllowedVPCs?: VpcIdentifierList;
+    /**
+     * The number of Redshift-managed VPC endpoints created for the authorization.
+     */
+    EndpointCount?: Integer;
+  }
+  export interface EndpointAuthorizationList {
+    /**
+     * The authorizations to an endpoint.
+     */
+    EndpointAuthorizationList?: EndpointAuthorizations;
+    /**
+     * An optional pagination token provided by a previous DescribeEndpointAuthorization request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter.
+     */
+    Marker?: String;
+  }
+  export type EndpointAuthorizations = EndpointAuthorization[];
   export interface Event {
     /**
      * The identifier for the source of the event.
@@ -3291,6 +3593,16 @@ declare namespace Redshift {
   export interface ModifyClusterSubnetGroupResult {
     ClusterSubnetGroup?: ClusterSubnetGroup;
   }
+  export interface ModifyEndpointAccessMessage {
+    /**
+     * The endpoint to be modified.
+     */
+    EndpointName: String;
+    /**
+     * The complete list of VPC security groups associated with the endpoint after the endpoint is modified.
+     */
+    VpcSecurityGroupIds?: VpcSecurityGroupIdList;
+  }
   export interface ModifyEventSubscriptionMessage {
     /**
      * The name of the modified Amazon Redshift event notification subscription.
@@ -3534,6 +3846,67 @@ declare namespace Redshift {
   export type ParameterApplyType = "static"|"dynamic"|string;
   export type ParameterGroupList = ClusterParameterGroup[];
   export type ParametersList = Parameter[];
+  export type PartnerIntegrationAccountId = string;
+  export type PartnerIntegrationClusterIdentifier = string;
+  export type PartnerIntegrationDatabaseName = string;
+  export interface PartnerIntegrationInfo {
+    /**
+     * The name of the database that receives data from a partner.
+     */
+    DatabaseName?: PartnerIntegrationDatabaseName;
+    /**
+     * The name of the partner.
+     */
+    PartnerName?: PartnerIntegrationPartnerName;
+    /**
+     * The partner integration status.
+     */
+    Status?: PartnerIntegrationStatus;
+    /**
+     * The status message provided by the partner.
+     */
+    StatusMessage?: PartnerIntegrationStatusMessage;
+    /**
+     * The date (UTC) that the partner integration was created.
+     */
+    CreatedAt?: TStamp;
+    /**
+     * The date (UTC) that the partner integration status was last updated by the partner.
+     */
+    UpdatedAt?: TStamp;
+  }
+  export type PartnerIntegrationInfoList = PartnerIntegrationInfo[];
+  export interface PartnerIntegrationInputMessage {
+    /**
+     * The AWS account ID that owns the cluster.
+     */
+    AccountId: PartnerIntegrationAccountId;
+    /**
+     * The cluster identifier of the cluster that receives data from the partner.
+     */
+    ClusterIdentifier: PartnerIntegrationClusterIdentifier;
+    /**
+     * The name of the database that receives data from the partner.
+     */
+    DatabaseName: PartnerIntegrationDatabaseName;
+    /**
+     * The name of the partner that is authorized to send data.
+     */
+    PartnerName: PartnerIntegrationPartnerName;
+  }
+  export interface PartnerIntegrationOutputMessage {
+    /**
+     * The name of the database that receives data from the partner.
+     */
+    DatabaseName?: PartnerIntegrationDatabaseName;
+    /**
+     * The name of the partner that is authorized to send data.
+     */
+    PartnerName?: PartnerIntegrationPartnerName;
+  }
+  export type PartnerIntegrationPartnerName = string;
+  export type PartnerIntegrationStatus = "Active"|"Inactive"|"RuntimeFailure"|"ConnectionFailure"|string;
+  export type PartnerIntegrationStatusMessage = string;
   export interface PauseClusterMessage {
     /**
      * The identifier of the cluster to be paused.
@@ -4030,6 +4403,10 @@ declare namespace Redshift {
      * The name of the table to create as a result of the current request.
      */
     NewTableName: String;
+    /**
+     * Indicates whether name identifiers for database, schema, and table are case sensitive. If true, the names are case sensitive. If false (default), the names are not case sensitive.
+     */
+    EnableCaseSensitiveIdentifier?: BooleanOptional;
   }
   export interface RestoreTableFromClusterSnapshotResult {
     TableRestoreStatus?: TableRestoreStatus;
@@ -4078,6 +4455,24 @@ declare namespace Redshift {
   }
   export interface RevokeClusterSecurityGroupIngressResult {
     ClusterSecurityGroup?: ClusterSecurityGroup;
+  }
+  export interface RevokeEndpointAccessMessage {
+    /**
+     * The cluster to revoke access from.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The AWS account ID whose access is to be revoked.
+     */
+    Account?: String;
+    /**
+     * The virtual private cloud (VPC) identifiers for which access is to be revoked.
+     */
+    VpcIds?: VpcIdentifierList;
+    /**
+     * Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.
+     */
+    Force?: Boolean;
   }
   export interface RevokeSnapshotAccessMessage {
     /**
@@ -4577,6 +4972,32 @@ declare namespace Redshift {
      */
     Marker?: String;
   }
+  export interface UpdatePartnerStatusInputMessage {
+    /**
+     * The AWS account ID that owns the cluster.
+     */
+    AccountId: PartnerIntegrationAccountId;
+    /**
+     * The cluster identifier of the cluster whose partner integration status is being updated.
+     */
+    ClusterIdentifier: PartnerIntegrationClusterIdentifier;
+    /**
+     * The name of the database whose partner integration status is being updated.
+     */
+    DatabaseName: PartnerIntegrationDatabaseName;
+    /**
+     * The name of the partner whose integration status is being updated.
+     */
+    PartnerName: PartnerIntegrationPartnerName;
+    /**
+     * The value of the updated status.
+     */
+    Status: PartnerIntegrationStatus;
+    /**
+     * The status message provided by the partner.
+     */
+    StatusMessage?: PartnerIntegrationStatusMessage;
+  }
   export interface UpdateTarget {
     /**
      * The name of the new maintenance track.
@@ -4656,6 +5077,7 @@ declare namespace Redshift {
     NetworkInterfaces?: NetworkInterfaceList;
   }
   export type VpcEndpointsList = VpcEndpoint[];
+  export type VpcIdentifierList = String[];
   export type VpcSecurityGroupIdList = String[];
   export interface VpcSecurityGroupMembership {
     /**

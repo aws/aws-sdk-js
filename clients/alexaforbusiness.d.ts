@@ -1402,6 +1402,10 @@ declare namespace AlexaForBusiness {
      */
     PSTNEnabled?: Boolean;
     /**
+     * Whether data retention of the profile is enabled.
+     */
+    DataRetentionOptIn?: Boolean;
+    /**
      * The meeting room settings of a room profile.
      */
     MeetingRoomConfiguration?: CreateMeetingRoomConfiguration;
@@ -2630,6 +2634,10 @@ declare namespace AlexaForBusiness {
      */
     PSTNEnabled?: Boolean;
     /**
+     * Whether data retention of the profile is enabled.
+     */
+    DataRetentionOptIn?: Boolean;
+    /**
      * The ARN of the address book.
      */
     AddressBookArn?: Arn;
@@ -3726,6 +3734,10 @@ declare namespace AlexaForBusiness {
      * Whether the PSTN setting of the room profile is enabled.
      */
     PSTNEnabled?: Boolean;
+    /**
+     * Whether data retention of the profile is enabled.
+     */
+    DataRetentionOptIn?: Boolean;
     /**
      * The updated meeting room settings of a room profile.
      */

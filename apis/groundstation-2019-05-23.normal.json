@@ -761,6 +761,9 @@
       "type": "boolean",
       "box": true
     },
+    "BucketArn": {
+      "type": "string"
+    },
     "CancelContactRequest": {
       "type": "structure",
       "required": [
@@ -787,7 +790,8 @@
         "antenna-uplink",
         "dataflow-endpoint",
         "tracking",
-        "uplink-echo"
+        "uplink-echo",
+        "s3-recording"
       ]
     },
     "ConfigDetails": {
@@ -799,9 +803,14 @@
         },
         "endpointDetails": {
           "shape": "EndpointDetails"
+        },
+        "s3RecordingDetails": {
+          "shape": "S3RecordingDetails",
+          "documentation": "<p>Details for an S3 recording <code>Config</code> in a contact.</p>"
         }
       },
-      "documentation": "<p>Details for certain <code>Config</code> object types in a contact.</p>"
+      "documentation": "<p>Details for certain <code>Config</code> object types in a contact.</p>",
+      "union": true
     },
     "ConfigIdResponse": {
       "type": "structure",
@@ -868,6 +877,10 @@
           "shape": "DataflowEndpointConfig",
           "documentation": "<p>Information about the dataflow endpoint <code>Config</code>.</p>"
         },
+        "s3RecordingConfig": {
+          "shape": "S3RecordingConfig",
+          "documentation": "<p>Information about an S3 recording <code>Config</code>.</p>"
+        },
         "trackingConfig": {
           "shape": "TrackingConfig",
           "documentation": "<p>Object that determines whether tracking should be used during a contact executed with this <code>Config</code> in the mission profile. </p>"
@@ -877,7 +890,8 @@
           "documentation": "<p>Information about an uplink echo <code>Config</code>.</p> <p>Parameters from the <code>AntennaUplinkConfig</code>, corresponding to the specified <code>AntennaUplinkConfigArn</code>, are used when this <code>UplinkEchoConfig</code> is used in a contact.</p>"
         }
       },
-      "documentation": "<p>Object containing the parameters of a <code>Config</code>.</p> <p>See the subtype definitions for what each type of <code>Config</code> contains.</p>"
+      "documentation": "<p>Object containing the parameters of a <code>Config</code>.</p> <p>See the subtype definitions for what each type of <code>Config</code> contains.</p>",
+      "union": true
     },
     "ContactData": {
       "type": "structure",
@@ -1096,7 +1110,7 @@
           "documentation": "<p>Socket address of a dataflow endpoint.</p>"
         },
         "mtu": {
-          "shape": "DataflowEndpointmtuInteger",
+          "shape": "DataflowEndpointMtuInteger",
           "documentation": "<p>Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.</p>"
         },
         "name": {
@@ -1160,7 +1174,7 @@
       },
       "documentation": "<p>Item in a list of <code>DataflowEndpoint</code> groups.</p>"
     },
-    "DataflowEndpointmtuInteger": {
+    "DataflowEndpointMtuInteger": {
       "type": "integer",
       "box": true,
       "max": 1500,
@@ -2088,6 +2102,48 @@
     },
     "RoleArn": {
       "type": "string"
+    },
+    "S3KeyPrefix": {
+      "type": "string",
+      "max": 900,
+      "min": 1,
+      "pattern": "^([a-zA-Z0-9_\\-=/]|\\{satellite_id\\}|\\{config\\-name}|\\{s3\\-config-id}|\\{year\\}|\\{month\\}|\\{day\\}){1,900}$"
+    },
+    "S3RecordingConfig": {
+      "type": "structure",
+      "required": [
+        "bucketArn",
+        "roleArn"
+      ],
+      "members": {
+        "bucketArn": {
+          "shape": "BucketArn",
+          "documentation": "<p>ARN of the bucket to record to.</p>"
+        },
+        "prefix": {
+          "shape": "S3KeyPrefix",
+          "documentation": "<p>S3 Key prefix to prefice data files.</p>"
+        },
+        "roleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>ARN of the role Ground Station assumes to write data to the bucket.</p>"
+        }
+      },
+      "documentation": "<p>Information about an S3 recording <code>Config</code>.</p>"
+    },
+    "S3RecordingDetails": {
+      "type": "structure",
+      "members": {
+        "bucketArn": {
+          "shape": "BucketArn",
+          "documentation": "<p>ARN of the bucket used.</p>"
+        },
+        "keyTemplate": {
+          "shape": "String",
+          "documentation": "<p>Template of the S3 key used.</p>"
+        }
+      },
+      "documentation": "<p>Details about an S3 recording <code>Config</code> used in a contact.</p>"
     },
     "SafeName": {
       "type": "string",

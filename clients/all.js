@@ -259,5 +259,16 @@ module.exports = {
   WellArchitected: require('./wellarchitected'),
   LexModelsV2: require('./lexmodelsv2'),
   LexRuntimeV2: require('./lexruntimev2'),
-  Fis: require('./fis')
+  Fis: require('./fis'),
+  LookoutMetrics: require('./lookoutmetrics'),
+  Mgn: require('./mgn'),
+  LookoutEquipment: require('./lookoutequipment'),
+  Nimble: require('./nimble'),
+  Finspace: require('./finspace'),
+  Finspacedata: require('./finspacedata'),
+  SSMContacts: require('./ssmcontacts'),
+  SSMIncidents: require('./ssmincidents'),
+  ApplicationCostProfiler: require('./applicationcostprofiler'),
+  AppRunner: require('./apprunner'),
+  Proton: require('./proton')
 };

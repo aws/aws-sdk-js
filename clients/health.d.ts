@@ -52,19 +52,19 @@ declare class Health extends Service {
    */
   describeEventAggregates(callback?: (err: AWSError, data: Health.Types.DescribeEventAggregatesResponse) => void): Request<Health.Types.DescribeEventAggregatesResponse, AWSError>;
   /**
-   * Returns detailed information about one or more specified events. Information includes standard event data (AWS Region, service, and so on, as returned by DescribeEvents), a detailed event description, and possible additional metadata that depends upon the nature of the event. Affected entities are not included. To retrieve those, use the DescribeAffectedEntities operation. If a specified event cannot be retrieved, an error message is returned for that event.  This operation supports resource-level permissions. You can use this operation to allow or deny access to specific AWS Health events. For more information, see Resource- and action-based conditions in the AWS Health User Guide. 
+   * Returns detailed information about one or more specified events. Information includes standard event data (AWS Region, service, and so on, as returned by DescribeEvents), a detailed event description, and possible additional metadata that depends upon the nature of the event. Affected entities are not included. To retrieve the entities, use the DescribeAffectedEntities operation. If a specified event can't be retrieved, an error message is returned for that event.  This operation supports resource-level permissions. You can use this operation to allow or deny access to specific AWS Health events. For more information, see Resource- and action-based conditions in the AWS Health User Guide. 
    */
   describeEventDetails(params: Health.Types.DescribeEventDetailsRequest, callback?: (err: AWSError, data: Health.Types.DescribeEventDetailsResponse) => void): Request<Health.Types.DescribeEventDetailsResponse, AWSError>;
   /**
-   * Returns detailed information about one or more specified events. Information includes standard event data (AWS Region, service, and so on, as returned by DescribeEvents), a detailed event description, and possible additional metadata that depends upon the nature of the event. Affected entities are not included. To retrieve those, use the DescribeAffectedEntities operation. If a specified event cannot be retrieved, an error message is returned for that event.  This operation supports resource-level permissions. You can use this operation to allow or deny access to specific AWS Health events. For more information, see Resource- and action-based conditions in the AWS Health User Guide. 
+   * Returns detailed information about one or more specified events. Information includes standard event data (AWS Region, service, and so on, as returned by DescribeEvents), a detailed event description, and possible additional metadata that depends upon the nature of the event. Affected entities are not included. To retrieve the entities, use the DescribeAffectedEntities operation. If a specified event can't be retrieved, an error message is returned for that event.  This operation supports resource-level permissions. You can use this operation to allow or deny access to specific AWS Health events. For more information, see Resource- and action-based conditions in the AWS Health User Guide. 
    */
   describeEventDetails(callback?: (err: AWSError, data: Health.Types.DescribeEventDetailsResponse) => void): Request<Health.Types.DescribeEventDetailsResponse, AWSError>;
   /**
-   * Returns detailed information about one or more specified events for one or more accounts in your organization. Information includes standard event data (AWS Region, service, and so on, as returned by DescribeEventsForOrganization), a detailed event description, and possible additional metadata that depends upon the nature of the event. Affected entities are not included; to retrieve those, use the DescribeAffectedEntitiesForOrganization operation. Before you can call this operation, you must first enable AWS Health to work with AWS Organizations. To do this, call the EnableHealthServiceAccessForOrganization operation from your organization's management account. When you call the DescribeEventDetailsForOrganization operation, you specify the organizationEventDetailFilters object in the request. Depending on the AWS Health event type, note the following differences:   If the event is public, the awsAccountId parameter must be empty. If you specify an account ID for a public event, then an error message is returned. That's because the event might apply to all AWS accounts and isn't specific to an account in your organization.   If the event is specific to an account, then you must specify the awsAccountId parameter in the request. If you don't specify an account ID, an error message returns because the event is specific to an AWS account in your organization.    For more information, see Event.  This operation doesn't support resource-level permissions. You can't use this operation to allow or deny access to specific AWS Health events. For more information, see Resource- and action-based conditions in the AWS Health User Guide. 
+   * Returns detailed information about one or more specified events for one or more AWS accounts in your organization. This information includes standard event data (such as the AWS Region and service), an event description, and (depending on the event) possible metadata. This operation doesn't return affected entities, such as the resources related to the event. To return affected entities, use the DescribeAffectedEntitiesForOrganization operation.  Before you can call this operation, you must first enable AWS Health to work with AWS Organizations. To do this, call the EnableHealthServiceAccessForOrganization operation from your organization's management account.  When you call the DescribeEventDetailsForOrganization operation, specify the organizationEventDetailFilters object in the request. Depending on the AWS Health event type, note the following differences:   To return event details for a public event, you must specify a null value for the awsAccountId parameter. If you specify an account ID for a public event, AWS Health returns an error message because public events aren't specific to an account.   To return event details for an event that is specific to an account in your organization, you must specify the awsAccountId parameter in the request. If you don't specify an account ID, AWS Health returns an error message because the event is specific to an account in your organization.    For more information, see Event.  This operation doesn't support resource-level permissions. You can't use this operation to allow or deny access to specific AWS Health events. For more information, see Resource- and action-based conditions in the AWS Health User Guide. 
    */
   describeEventDetailsForOrganization(params: Health.Types.DescribeEventDetailsForOrganizationRequest, callback?: (err: AWSError, data: Health.Types.DescribeEventDetailsForOrganizationResponse) => void): Request<Health.Types.DescribeEventDetailsForOrganizationResponse, AWSError>;
   /**
-   * Returns detailed information about one or more specified events for one or more accounts in your organization. Information includes standard event data (AWS Region, service, and so on, as returned by DescribeEventsForOrganization), a detailed event description, and possible additional metadata that depends upon the nature of the event. Affected entities are not included; to retrieve those, use the DescribeAffectedEntitiesForOrganization operation. Before you can call this operation, you must first enable AWS Health to work with AWS Organizations. To do this, call the EnableHealthServiceAccessForOrganization operation from your organization's management account. When you call the DescribeEventDetailsForOrganization operation, you specify the organizationEventDetailFilters object in the request. Depending on the AWS Health event type, note the following differences:   If the event is public, the awsAccountId parameter must be empty. If you specify an account ID for a public event, then an error message is returned. That's because the event might apply to all AWS accounts and isn't specific to an account in your organization.   If the event is specific to an account, then you must specify the awsAccountId parameter in the request. If you don't specify an account ID, an error message returns because the event is specific to an AWS account in your organization.    For more information, see Event.  This operation doesn't support resource-level permissions. You can't use this operation to allow or deny access to specific AWS Health events. For more information, see Resource- and action-based conditions in the AWS Health User Guide. 
+   * Returns detailed information about one or more specified events for one or more AWS accounts in your organization. This information includes standard event data (such as the AWS Region and service), an event description, and (depending on the event) possible metadata. This operation doesn't return affected entities, such as the resources related to the event. To return affected entities, use the DescribeAffectedEntitiesForOrganization operation.  Before you can call this operation, you must first enable AWS Health to work with AWS Organizations. To do this, call the EnableHealthServiceAccessForOrganization operation from your organization's management account.  When you call the DescribeEventDetailsForOrganization operation, specify the organizationEventDetailFilters object in the request. Depending on the AWS Health event type, note the following differences:   To return event details for a public event, you must specify a null value for the awsAccountId parameter. If you specify an account ID for a public event, AWS Health returns an error message because public events aren't specific to an account.   To return event details for an event that is specific to an account in your organization, you must specify the awsAccountId parameter in the request. If you don't specify an account ID, AWS Health returns an error message because the event is specific to an account in your organization.    For more information, see Event.  This operation doesn't support resource-level permissions. You can't use this operation to allow or deny access to specific AWS Health events. For more information, see Resource- and action-based conditions in the AWS Health User Guide. 
    */
   describeEventDetailsForOrganization(callback?: (err: AWSError, data: Health.Types.DescribeEventDetailsForOrganizationResponse) => void): Request<Health.Types.DescribeEventDetailsForOrganizationResponse, AWSError>;
   /**
@@ -100,7 +100,7 @@ declare class Health extends Service {
    */
   disableHealthServiceAccessForOrganization(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Enables AWS Health to work with AWS Organizations. You can use the organizational view feature to aggregate events from all AWS accounts in your organization in a centralized location.  This operation also creates a service-linked role for the management account in the organization.   To call this operation, you must meet the following requirements:   You must have a Business or Enterprise support plan from AWS Support to use the AWS Health API. If you call the AWS Health API from an AWS account that doesn't have a Business or Enterprise support plan, you receive a SubscriptionRequiredException error.   You must have permission to call this operation from the organization's management account. For example IAM policies, see AWS Health identity-based policy examples.    If you don't have the required support plan, you can instead use the AWS Health console to enable the organizational view feature. For more information, see Aggregating AWS Health events in the AWS Health User Guide.
+   * Enables AWS Health to work with AWS Organizations. You can use the organizational view feature to aggregate events from all AWS accounts in your organization in a centralized location.  This operation also creates a service-linked role for the management account in the organization.   To call this operation, you must meet the following requirements:   You must have a Business or Enterprise Support plan from AWS Support to use the AWS Health API. If you call the AWS Health API from an AWS account that doesn't have a Business or Enterprise Support plan, you receive a SubscriptionRequiredException error.   You must have permission to call this operation from the organization's management account. For example IAM policies, see AWS Health identity-based policy examples.    If you don't have the required support plan, you can instead use the AWS Health console to enable the organizational view feature. For more information, see Aggregating AWS Health events in the AWS Health User Guide.
    */
   enableHealthServiceAccessForOrganization(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
 }
@@ -111,7 +111,7 @@ declare namespace Health {
      */
     entityArn?: entityArn;
     /**
-     * The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
+     * The unique identifier for the event. The event ARN has the arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID  format. For example, an event ARN might look like the following:  arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
      */
     eventArn?: eventArn;
     /**
@@ -151,7 +151,7 @@ declare namespace Health {
   }
   export interface DescribeAffectedAccountsForOrganizationRequest {
     /**
-     * The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
+     * The unique identifier for the event. The event ARN has the arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID  format. For example, an event ARN might look like the following:  arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
      */
     eventArn: eventArn;
     /**
@@ -414,7 +414,7 @@ declare namespace Health {
   }
   export interface EntityAggregate {
     /**
-     * The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
+     * The unique identifier for the event. The event ARN has the arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID  format. For example, an event ARN might look like the following:  arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
      */
     eventArn?: eventArn;
     /**
@@ -452,7 +452,7 @@ declare namespace Health {
   export type EntityList = AffectedEntity[];
   export interface Event {
     /**
-     * The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
+     * The unique identifier for the event. The event ARN has the arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID  format. For example, an event ARN might look like the following:  arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
      */
     arn?: eventArn;
     /**
@@ -468,7 +468,7 @@ declare namespace Health {
      */
     eventTypeCategory?: eventTypeCategory;
     /**
-     * The AWS region name of the event.
+     * The AWS Region name of the event.
      */
     region?: region;
     /**
@@ -498,7 +498,7 @@ declare namespace Health {
   }
   export interface EventAccountFilter {
     /**
-     * The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
+     * The unique identifier for the event. The event ARN has the arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID  format. For example, an event ARN might look like the following:  arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
      */
     eventArn: eventArn;
     /**
@@ -540,7 +540,7 @@ declare namespace Health {
   }
   export interface EventDetailsErrorItem {
     /**
-     * The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
+     * The unique identifier for the event. The event ARN has the arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID  format. For example, an event ARN might look like the following:  arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
      */
     eventArn?: eventArn;
     /**
@@ -566,11 +566,11 @@ declare namespace Health {
      */
     services?: serviceList;
     /**
-     * A list of AWS regions.
+     * A list of AWS Regions.
      */
     regions?: regionList;
     /**
-     * A list of AWS availability zones.
+     * A list of AWS Availability Zones.
      */
     availabilityZones?: availabilityZones;
     /**
@@ -644,7 +644,7 @@ declare namespace Health {
      */
     awsAccountId?: accountId;
     /**
-     * The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
+     * The unique identifier for the event. The event ARN has the arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID  format. For example, an event ARN might look like the following:  arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
      */
     eventArn?: eventArn;
     /**
@@ -659,11 +659,11 @@ declare namespace Health {
   export type OrganizationEntityFiltersList = EventAccountFilter[];
   export interface OrganizationEvent {
     /**
-     * The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
+     * The unique identifier for the event. The event ARN has the arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID  format. For example, an event ARN might look like the following:  arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
      */
     arn?: eventArn;
     /**
-     * The AWS service that is affected by the event. For example, EC2, RDS.
+     * The AWS service that is affected by the event, such as EC2 and RDS.
      */
     service?: service;
     /**
@@ -714,11 +714,11 @@ declare namespace Health {
   }
   export interface OrganizationEventDetailsErrorItem {
     /**
-     * Error information returned when a DescribeEventDetailsForOrganization operation cannot find a specified event.
+     * Error information returned when a DescribeEventDetailsForOrganization operation can't find a specified event.
      */
     awsAccountId?: accountId;
     /**
-     * The unique identifier for the event. Format: arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID . Example: Example: arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
+     * The unique identifier for the event. The event ARN has the arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID  format. For example, an event ARN might look like the following:  arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456 
      */
     eventArn?: eventArn;
     /**
@@ -726,7 +726,7 @@ declare namespace Health {
      */
     errorName?: string;
     /**
-     * A message that describes the error.
+     * A message that describes the error. If you call the DescribeEventDetailsForOrganization operation and receive one of the following errors, follow the recommendations in the message:   We couldn't find a public event that matches your request. To find an event that is account specific, you must enter an AWS account ID in the request.   We couldn't find an account specific event for the specified AWS account. To find an event that is public, you must enter a null value for the AWS account ID in the request.   Your AWS account doesn't include the AWS Support plan required to use the AWS Health API. You must have either a Business or Enterprise Support plan.  
      */
     errorMessage?: string;
   }

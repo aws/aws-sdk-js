@@ -262,7 +262,7 @@
           "shape": "TextSizeLimitExceededException"
         }
       ],
-      "documentation": "<p>InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts.</p>"
+      "documentation": "<p>InferICD10CM detects medical conditions as entities listed in a patient record and links those entities to normalized concept identifiers in the ICD-10-CM knowledge base from the Centers for Disease Control. Amazon Comprehend Medical only detects medical entities in English language texts. </p>"
     },
     "InferRxNorm": {
       "name": "InferRxNorm",
@@ -296,7 +296,7 @@
           "shape": "TextSizeLimitExceededException"
         }
       ],
-      "documentation": "<p>InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts.</p>"
+      "documentation": "<p>InferRxNorm detects medications as entities listed in a patient record and links to the normalized concept identifiers in the RxNorm database from the National Library of Medicine. Amazon Comprehend Medical only detects medical entities in English language texts. </p>"
     },
     "ListEntitiesDetectionV2Jobs": {
       "name": "ListEntitiesDetectionV2Jobs",
@@ -1115,6 +1115,14 @@
         "Traits": {
           "shape": "ICD10CMTraitList",
           "documentation": "<p>The contextual information for the attribute. The traits recognized by InferICD10CM are <code>DIAGNOSIS</code>, <code>SIGN</code>, <code>SYMPTOM</code>, and <code>NEGATION</code>.</p>"
+        },
+        "Category": {
+          "shape": "ICD10CMEntityType",
+          "documentation": "<p>The category of attribute. Can be either of <code>DX_NAME</code> or <code>TIME_EXPRESSION</code>.</p>"
+        },
+        "RelationshipType": {
+          "shape": "ICD10CMRelationshipType",
+          "documentation": "<p>The type of relationship between the entity and attribute. Type for the relationship can be either of <code>OVERLAP</code> or <code>SYSTEM_ORGAN_SITE</code>.</p>"
         }
       },
       "documentation": "<p>The detected attributes that relate to an entity. This includes an extracted segment of the text that is an attribute of an entity, or otherwise related to an entity. InferICD10CM detects the following attributes: <code>Direction</code>, <code>System, Organ or Site</code>, and <code>Acuity</code>.</p>"
@@ -1132,7 +1140,9 @@
         "DIRECTION",
         "SYSTEM_ORGAN_SITE",
         "QUALITY",
-        "QUANTITY"
+        "QUANTITY",
+        "TIME_TO_DX_NAME",
+        "TIME_EXPRESSION"
       ]
     },
     "ICD10CMConcept": {
@@ -1176,7 +1186,7 @@
         },
         "Type": {
           "shape": "ICD10CMEntityType",
-          "documentation": "<p>Describes the specific type of entity with category of entities. InferICD10CM detects entities of the type <code>DX_NAME</code>.</p>"
+          "documentation": "<p>Describes the specific type of entity with category of entities. InferICD10CM detects entities of the type <code>DX_NAME</code> and <code>TIME_EXPRESSION</code>.</p>"
         },
         "Score": {
           "shape": "Float",
@@ -1220,7 +1230,15 @@
     "ICD10CMEntityType": {
       "type": "string",
       "enum": [
-        "DX_NAME"
+        "DX_NAME",
+        "TIME_EXPRESSION"
+      ]
+    },
+    "ICD10CMRelationshipType": {
+      "type": "string",
+      "enum": [
+        "OVERLAP",
+        "SYSTEM_ORGAN_SITE"
       ]
     },
     "ICD10CMTrait": {
@@ -1337,7 +1355,7 @@
           "documentation": "<p>The path to the input data files in the S3 bucket.</p>"
         }
       },
-      "documentation": "<p>The input properties for an entities detection job. This includes the name of the S3 bucket and the path to the files to be analyzed. See <a>batch-manifest</a> for more information. </p>"
+      "documentation": "<p>The input properties for an entities detection job. This includes the name of the S3 bucket and the path to the files to be analyzed. </p>"
     },
     "Integer": {
       "type": "integer"

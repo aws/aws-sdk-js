@@ -213,6 +213,28 @@
       ],
       "documentation": "<p>Associates a hosted connection and its virtual interfaces with a link aggregation group (LAG) or interconnect. If the target interconnect or LAG has an existing hosted connection with a conflicting VLAN number or IP address, the operation fails. This action temporarily interrupts the hosted connection's connectivity to AWS as it is being migrated.</p> <note> <p>Intended for use by AWS Direct Connect Partners only.</p> </note>"
     },
+    "AssociateMacSecKey": {
+      "name": "AssociateMacSecKey",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssociateMacSecKeyRequest"
+      },
+      "output": {
+        "shape": "AssociateMacSecKeyResponse"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Associates a MAC Security (MACsec) Connection Key Name (CKN)/ Connectivity Association Key (CAK) pair with an AWS Direct Connect dedicated connection.</p> <p>You must supply either the <code>secretARN,</code> or the CKN/CAK (<code>ckn</code> and <code>cak</code>) pair in the request.</p> <p>For information about MAC Security (MACsec) key considerations, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-key-consideration\">MACsec pre-shared CKN/CAK key considerations </a> in the <i>AWS Direct Connect User Guide</i>.</p>"
+    },
     "AssociateVirtualInterface": {
       "name": "AssociateVirtualInterface",
       "http": {
@@ -1126,6 +1148,28 @@
       ],
       "documentation": "<p>Disassociates a connection from a link aggregation group (LAG). The connection is interrupted and re-established as a standalone connection (the connection is not deleted; to delete the connection, use the <a>DeleteConnection</a> request). If the LAG has associated virtual interfaces or hosted connections, they remain associated with the LAG. A disassociated connection owned by an AWS Direct Connect Partner is automatically converted to an interconnect.</p> <p>If disassociating the connection would cause the LAG to fall below its setting for minimum number of operational connections, the request fails, except when it's the last member of the LAG. If all connections are disassociated, the LAG continues to exist as an empty LAG with no physical connections. </p>"
     },
+    "DisassociateMacSecKey": {
+      "name": "DisassociateMacSecKey",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisassociateMacSecKeyRequest"
+      },
+      "output": {
+        "shape": "DisassociateMacSecKeyResponse"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Removes the association between a MAC Security (MACsec) security key and an AWS Direct Connect dedicated connection.</p>"
+    },
     "ListVirtualInterfaceTestHistory": {
       "name": "ListVirtualInterfaceTestHistory",
       "http": {
@@ -1242,6 +1286,28 @@
       ],
       "documentation": "<p>Removes one or more tags from the specified AWS Direct Connect resource.</p>"
     },
+    "UpdateConnection": {
+      "name": "UpdateConnection",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateConnectionRequest"
+      },
+      "output": {
+        "shape": "Connection"
+      },
+      "errors": [
+        {
+          "shape": "DirectConnectServerException"
+        },
+        {
+          "shape": "DirectConnectClientException"
+        }
+      ],
+      "documentation": "<p>Updates the AWS Direct Connect dedicated connection configuration.</p> <p>You can update the following parameters for a connection:</p> <ul> <li> <p>The connection name</p> </li> <li> <p>The connection's MAC Security (MACsec) encryption mode.</p> </li> </ul>"
+    },
     "UpdateDirectConnectGatewayAssociation": {
       "name": "UpdateDirectConnectGatewayAssociation",
       "http": {
@@ -1284,7 +1350,7 @@
           "shape": "DirectConnectClientException"
         }
       ],
-      "documentation": "<p>Updates the attributes of the specified link aggregation group (LAG).</p> <p>You can update the following attributes:</p> <ul> <li> <p>The name of the LAG.</p> </li> <li> <p>The value for the minimum number of connections that must be operational for the LAG itself to be operational. </p> </li> </ul> <p>When you create a LAG, the default value for the minimum number of operational connections is zero (0). If you update this value and the number of operational connections falls below the specified value, the LAG automatically goes down to avoid over-utilization of the remaining connections. Adjust this value with care, as it could force the LAG down if it is set higher than the current number of operational connections.</p>"
+      "documentation": "<p>Updates the attributes of the specified link aggregation group (LAG).</p> <p>You can update the following LAG attributes:</p> <ul> <li> <p>The name of the LAG.</p> </li> <li> <p>The value for the minimum number of connections that must be operational for the LAG itself to be operational. </p> </li> <li> <p>The LAG's MACsec encryption mode.</p> <p>AWS assigns this value to each connection which is part of the LAG.</p> </li> <li> <p>The tags</p> </li> </ul> <note> <p>If you adjust the threshold value for the minimum number of operational connections, ensure that the new value does not cause the LAG to fall below the threshold and become non-operational.</p> </note>"
     },
     "UpdateVirtualInterfaceAttributes": {
       "name": "UpdateVirtualInterfaceAttributes",
@@ -1533,6 +1599,43 @@
         }
       }
     },
+    "AssociateMacSecKeyRequest": {
+      "type": "structure",
+      "required": [
+        "connectionId"
+      ],
+      "members": {
+        "connectionId": {
+          "shape": "ConnectionId",
+          "documentation": "<p>The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).</p> <p>You can use <a>DescribeConnections</a> or <a>DescribeLags</a> to retrieve connection ID.</p>"
+        },
+        "secretARN": {
+          "shape": "SecretARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key to associate with the dedicated connection.</p> <p>You can use <a>DescribeConnections</a> or <a>DescribeLags</a> to retrieve the MAC Security (MACsec) secret key.</p> <p>If you use this request parameter, you do not use the <code>ckn</code> and <code>cak</code> request parameters.</p>"
+        },
+        "ckn": {
+          "shape": "Ckn",
+          "documentation": "<p>The MAC Security (MACsec) CKN to associate with the dedicated connection.</p> <p>You can create the CKN/CAK pair using an industry standard tool.</p> <p> The valid values are 64 hexadecimal characters (0-9, A-E).</p> <p>If you use this request parameter, you must use the <code>cak</code> request parameter and not use the <code>secretARN</code> request parameter.</p>"
+        },
+        "cak": {
+          "shape": "Cak",
+          "documentation": "<p>The MAC Security (MACsec) CAK to associate with the dedicated connection.</p> <p>You can create the CKN/CAK pair using an industry standard tool.</p> <p> The valid values are 64 hexadecimal characters (0-9, A-E).</p> <p>If you use this request parameter, you must use the <code>ckn</code> request parameter and not use the <code>secretARN</code> request parameter.</p>"
+        }
+      }
+    },
+    "AssociateMacSecKeyResponse": {
+      "type": "structure",
+      "members": {
+        "connectionId": {
+          "shape": "ConnectionId",
+          "documentation": "<p>The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).</p>"
+        },
+        "macSecKeys": {
+          "shape": "MacSecKeyList",
+          "documentation": "<p>The MAC Security (MACsec) security keys associated with the dedicated connection.</p>"
+        }
+      }
+    },
     "AssociateVirtualInterfaceRequest": {
       "type": "structure",
       "required": [
@@ -1574,6 +1677,12 @@
     },
     "AssociatedGatewayId": {
       "type": "string"
+    },
+    "AvailableMacSecPortSpeeds": {
+      "type": "list",
+      "member": {
+        "shape": "PortSpeed"
+      }
     },
     "AvailablePortSpeeds": {
       "type": "list",
@@ -1673,6 +1782,12 @@
       "type": "boolean"
     },
     "CIDR": {
+      "type": "string"
+    },
+    "Cak": {
+      "type": "string"
+    },
+    "Ckn": {
       "type": "string"
     },
     "ConfirmConnectionRequest": {
@@ -1842,6 +1957,22 @@
         "providerName": {
           "shape": "ProviderName",
           "documentation": "<p>The name of the service provider associated with the connection.</p>"
+        },
+        "macSecCapable": {
+          "shape": "MacSecCapable",
+          "documentation": "<p>Indicates whether the connection supports MAC Security (MACsec).</p>"
+        },
+        "portEncryptionStatus": {
+          "shape": "PortEncryptionStatus",
+          "documentation": "<p>The MAC Security (MACsec) port link status of the connection.</p> <p>The valid values are <code>Encryption Up</code>, which means that there is an active Connection Key Name, or <code>Encryption Down</code>.</p>"
+        },
+        "encryptionMode": {
+          "shape": "EncryptionMode",
+          "documentation": "<p>The MAC Security (MACsec) connection encryption mode.</p> <p>The valid values are <code>no_encrypt</code>, <code>should_encrypt</code>, and <code>must_encrypt</code>.</p>"
+        },
+        "macSecKeys": {
+          "shape": "MacSecKeyList",
+          "documentation": "<p>The MAC Security (MACsec) security keys associated with the connection.</p>"
         }
       },
       "documentation": "<p>Information about an AWS Direct Connect connection.</p>"
@@ -1937,6 +2068,10 @@
         "providerName": {
           "shape": "ProviderName",
           "documentation": "<p>The name of the service provider associated with the requested connection.</p>"
+        },
+        "requestMACSec": {
+          "shape": "RequestMACSec",
+          "documentation": "<p>Indicates whether you want the connection to support MAC Security (MACsec).</p> <p>MAC Security (MACsec) is only available on dedicated connections. For information about MAC Security (MACsec) prerequisties, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites\">MACsec prerequisties</a> in the <i>AWS Direct Connect User Guide</i>.</p>"
         }
       }
     },
@@ -2111,6 +2246,10 @@
         "providerName": {
           "shape": "ProviderName",
           "documentation": "<p>The name of the service provider associated with the LAG.</p>"
+        },
+        "requestMACSec": {
+          "shape": "RequestMACSec",
+          "documentation": "<p>Indicates whether the connection will support MAC Security (MACsec).</p> <note> <p>All connections in the LAG must be capable of supporting MAC Security (MACsec). For information about MAC Security (MACsec) prerequisties, see <a href=\"https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites\">MACsec prerequisties</a> in the <i>AWS Direct Connect User Guide</i>.</p> </note>"
         }
       }
     },
@@ -2887,6 +3026,39 @@
         }
       }
     },
+    "DisassociateMacSecKeyRequest": {
+      "type": "structure",
+      "required": [
+        "connectionId",
+        "secretARN"
+      ],
+      "members": {
+        "connectionId": {
+          "shape": "ConnectionId",
+          "documentation": "<p>The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).</p> <p>You can use <a>DescribeConnections</a> or <a>DescribeLags</a> to retrieve connection ID.</p>"
+        },
+        "secretARN": {
+          "shape": "SecretARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key.</p> <p>You can use <a>DescribeConnections</a> to retrieve the ARN of the MAC Security (MACsec) secret key.</p>"
+        }
+      }
+    },
+    "DisassociateMacSecKeyResponse": {
+      "type": "structure",
+      "members": {
+        "connectionId": {
+          "shape": "ConnectionId",
+          "documentation": "<p>The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).</p>"
+        },
+        "macSecKeys": {
+          "shape": "MacSecKeyList",
+          "documentation": "<p>The MAC Security (MACsec) security keys no longer associated with the dedicated connection.</p>"
+        }
+      }
+    },
+    "EncryptionMode": {
+      "type": "string"
+    },
     "EndTime": {
       "type": "timestamp"
     },
@@ -3082,6 +3254,18 @@
         "providerName": {
           "shape": "ProviderName",
           "documentation": "<p>The name of the service provider associated with the LAG.</p>"
+        },
+        "macSecCapable": {
+          "shape": "MacSecCapable",
+          "documentation": "<p>Indicates whether the LAG supports MAC Security (MACsec).</p>"
+        },
+        "encryptionMode": {
+          "shape": "EncryptionMode",
+          "documentation": "<p>The LAG MAC Security (MACsec) encryption mode.</p> <p>The valid values are <code>no_encrypt</code>, <code>should_encrypt</code>, and <code>must_encrypt</code>.</p>"
+        },
+        "macSecKeys": {
+          "shape": "MacSecKeyList",
+          "documentation": "<p>The MAC Security (MACsec) security keys associated with the LAG.</p>"
         }
       },
       "documentation": "<p>Information about a link aggregation group (LAG).</p>"
@@ -3209,6 +3393,10 @@
         "availableProviders": {
           "shape": "ProviderList",
           "documentation": "<p>The name of the service provider for the location.</p>"
+        },
+        "availableMacSecPortSpeeds": {
+          "shape": "AvailableMacSecPortSpeeds",
+          "documentation": "<p>The available MAC Security (MACsec) port speeds for the location.</p>"
         }
       },
       "documentation": "<p>Information about an AWS Direct Connect location.</p>"
@@ -3239,6 +3427,37 @@
     },
     "MTU": {
       "type": "integer"
+    },
+    "MacSecCapable": {
+      "type": "boolean"
+    },
+    "MacSecKey": {
+      "type": "structure",
+      "members": {
+        "secretARN": {
+          "shape": "SecretARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key.</p>"
+        },
+        "ckn": {
+          "shape": "Ckn",
+          "documentation": "<p>The Connection Key Name (CKN) for the MAC Security secret key.</p>"
+        },
+        "state": {
+          "shape": "State",
+          "documentation": "<p>The state of the MAC Security (MACsec) secret key.</p> <p>The possible values are:</p> <ul> <li> <p> <code>associating</code>: The MAC Security (MACsec) secret key is being validated and not yet associated with the connection or LAG.</p> </li> <li> <p> <code>associated</code>: The MAC Security (MACsec) secret key is validated and associated with the connection or LAG.</p> </li> <li> <p> <code>disassociating</code>: The MAC Security (MACsec) secret key is being disassociated from the connection or LAG</p> </li> <li> <p> <code>disassociated</code>: The MAC Security (MACsec) secret key is no longer associated with the connection or LAG.</p> </li> </ul>"
+        },
+        "startOn": {
+          "shape": "StartOnDate",
+          "documentation": "<p>The date that the MAC Security (MACsec) secret key takes effect. The value is displayed in UTC format.</p>"
+        }
+      },
+      "documentation": "<p>Information about the MAC Security (MACsec) secret key.</p>"
+    },
+    "MacSecKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "MacSecKey"
+      }
     },
     "MaxResultSetSize": {
       "type": "integer",
@@ -3563,6 +3782,9 @@
     "PartnerName": {
       "type": "string"
     },
+    "PortEncryptionStatus": {
+      "type": "string"
+    },
     "PortSpeed": {
       "type": "string"
     },
@@ -3577,6 +3799,9 @@
     },
     "Region": {
       "type": "string"
+    },
+    "RequestMACSec": {
+      "type": "boolean"
     },
     "ResourceArn": {
       "type": "string"
@@ -3626,6 +3851,9 @@
     "RouterConfig": {
       "type": "string"
     },
+    "SecretARN": {
+      "type": "string"
+    },
     "StartBgpFailoverTestRequest": {
       "type": "structure",
       "required": [
@@ -3655,8 +3883,14 @@
         }
       }
     },
+    "StartOnDate": {
+      "type": "string"
+    },
     "StartTime": {
       "type": "timestamp"
+    },
+    "State": {
+      "type": "string"
     },
     "StateChangeError": {
       "type": "string"
@@ -3773,6 +4007,26 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateConnectionRequest": {
+      "type": "structure",
+      "required": [
+        "connectionId"
+      ],
+      "members": {
+        "connectionId": {
+          "shape": "ConnectionId",
+          "documentation": "<p>The ID of the dedicated connection.</p> <p>You can use <a>DescribeConnections</a> to retrieve the connection ID.</p>"
+        },
+        "connectionName": {
+          "shape": "ConnectionName",
+          "documentation": "<p>The name of the connection.</p>"
+        },
+        "encryptionMode": {
+          "shape": "EncryptionMode",
+          "documentation": "<p>The connection MAC Security (MACsec) encryption mode.</p> <p>The valid values are <code>no_encrypt</code>, <code>should_encrypt</code>, and <code>must_encrypt</code>.</p>"
+        }
+      }
+    },
     "UpdateDirectConnectGatewayAssociationRequest": {
       "type": "structure",
       "members": {
@@ -3815,6 +4069,10 @@
         "minimumLinks": {
           "shape": "Count",
           "documentation": "<p>The minimum number of physical connections that must be operational for the LAG itself to be operational.</p>"
+        },
+        "encryptionMode": {
+          "shape": "EncryptionMode",
+          "documentation": "<p>The LAG MAC Security (MACsec) encryption mode.</p> <p>AWS applies the value to all connections which are part of the LAG.</p>"
         }
       }
     },

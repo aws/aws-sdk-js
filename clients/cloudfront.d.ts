@@ -62,6 +62,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   createFieldLevelEncryptionProfile(callback?: (err: AWSError, data: CloudFront.Types.CreateFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.CreateFieldLevelEncryptionProfileResult, AWSError>;
   /**
+   * Creates a CloudFront function. To create a function, you provide the function code and some configuration information about the function. The response contains an Amazon Resource Name (ARN) that uniquely identifies the function. When you create a function, it’s in the DEVELOPMENT stage. In this stage, you can test the function with TestFunction, and update it with UpdateFunction. When you’re ready to use your function with a CloudFront distribution, use PublishFunction to copy the function from the DEVELOPMENT stage to LIVE. When it’s live, you can attach the function to a distribution’s cache behavior, using the function’s ARN.
+   */
+  createFunction(params: CloudFront.Types.CreateFunctionRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateFunctionResult) => void): Request<CloudFront.Types.CreateFunctionResult, AWSError>;
+  /**
+   * Creates a CloudFront function. To create a function, you provide the function code and some configuration information about the function. The response contains an Amazon Resource Name (ARN) that uniquely identifies the function. When you create a function, it’s in the DEVELOPMENT stage. In this stage, you can test the function with TestFunction, and update it with UpdateFunction. When you’re ready to use your function with a CloudFront distribution, use PublishFunction to copy the function from the DEVELOPMENT stage to LIVE. When it’s live, you can attach the function to a distribution’s cache behavior, using the function’s ARN.
+   */
+  createFunction(callback?: (err: AWSError, data: CloudFront.Types.CreateFunctionResult) => void): Request<CloudFront.Types.CreateFunctionResult, AWSError>;
+  /**
    * Create a new invalidation. 
    */
   createInvalidation(params: CloudFront.Types.CreateInvalidationRequest, callback?: (err: AWSError, data: CloudFront.Types.CreateInvalidationResult) => void): Request<CloudFront.Types.CreateInvalidationResult, AWSError>;
@@ -166,6 +174,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   deleteFieldLevelEncryptionProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a CloudFront function. You cannot delete a function if it’s associated with a cache behavior. First, update your distributions to remove the function association from all cache behaviors, then delete the function. To delete a function, you must provide the function’s name and version (ETag value). To get these values, you can use ListFunctions and DescribeFunction.
+   */
+  deleteFunction(params: CloudFront.Types.DeleteFunctionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a CloudFront function. You cannot delete a function if it’s associated with a cache behavior. First, update your distributions to remove the function association from all cache behaviors, then delete the function. To delete a function, you must provide the function’s name and version (ETag value). To get these values, you can use ListFunctions and DescribeFunction.
+   */
+  deleteFunction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes a key group. You cannot delete a key group that is referenced in a cache behavior. First update your distributions to remove the key group from all cache behaviors, then delete the key group. To delete a key group, you must provide the key group’s identifier and version. To get these values, use ListKeyGroups followed by GetKeyGroup or GetKeyGroupConfig.
    */
   deleteKeyGroup(params: CloudFront.Types.DeleteKeyGroupRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -213,6 +229,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Delete a streaming distribution. To delete an RTMP distribution using the CloudFront API, perform the following steps.  To delete an RTMP distribution using the CloudFront API:   Disable the RTMP distribution.   Submit a GET Streaming Distribution Config request to get the current configuration and the Etag header for the distribution.    Update the XML document that was returned in the response to your GET Streaming Distribution Config request to change the value of Enabled to false.   Submit a PUT Streaming Distribution Config request to update the configuration for your distribution. In the request body, include the XML document that you updated in Step 3. Then set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to the PUT Streaming Distribution Config request to confirm that the distribution was successfully disabled.   Submit a GET Streaming Distribution Config request to confirm that your changes have propagated. When propagation is complete, the value of Status is Deployed.   Submit a DELETE Streaming Distribution request. Set the value of the HTTP If-Match header to the value of the ETag header that CloudFront returned when you submitted the GET Streaming Distribution Config request in Step 2.   Review the response to your DELETE Streaming Distribution request to confirm that the distribution was successfully deleted.   For information about deleting a distribution using the CloudFront console, see Deleting a Distribution in the Amazon CloudFront Developer Guide.
    */
   deleteStreamingDistribution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Gets configuration information and metadata about a CloudFront function, but not the function’s code. To get a function’s code, use GetFunction. To get configuration information and metadata about a function, you must provide the function’s name and stage. To get these values, you can use ListFunctions.
+   */
+  describeFunction(params: CloudFront.Types.DescribeFunctionRequest, callback?: (err: AWSError, data: CloudFront.Types.DescribeFunctionResult) => void): Request<CloudFront.Types.DescribeFunctionResult, AWSError>;
+  /**
+   * Gets configuration information and metadata about a CloudFront function, but not the function’s code. To get a function’s code, use GetFunction. To get configuration information and metadata about a function, you must provide the function’s name and stage. To get these values, you can use ListFunctions.
+   */
+  describeFunction(callback?: (err: AWSError, data: CloudFront.Types.DescribeFunctionResult) => void): Request<CloudFront.Types.DescribeFunctionResult, AWSError>;
   /**
    * Gets a cache policy, including the following metadata:   The policy’s identifier.   The date and time when the policy was last modified.   To get a cache policy, you must provide the policy’s identifier. If the cache policy is attached to a distribution’s cache behavior, you can get the policy’s identifier using ListDistributions or GetDistribution. If the cache policy is not attached to a cache behavior, you can get the identifier using ListCachePolicies.
    */
@@ -293,6 +317,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Get the field-level encryption profile configuration information.
    */
   getFieldLevelEncryptionProfileConfig(callback?: (err: AWSError, data: CloudFront.Types.GetFieldLevelEncryptionProfileConfigResult) => void): Request<CloudFront.Types.GetFieldLevelEncryptionProfileConfigResult, AWSError>;
+  /**
+   * Gets the code of a CloudFront function. To get configuration information and metadata about a function, use DescribeFunction. To get a function’s code, you must provide the function’s name and stage. To get these values, you can use ListFunctions.
+   */
+  getFunction(params: CloudFront.Types.GetFunctionRequest, callback?: (err: AWSError, data: CloudFront.Types.GetFunctionResult) => void): Request<CloudFront.Types.GetFunctionResult, AWSError>;
+  /**
+   * Gets the code of a CloudFront function. To get configuration information and metadata about a function, use DescribeFunction. To get a function’s code, you must provide the function’s name and stage. To get these values, you can use ListFunctions.
+   */
+  getFunction(callback?: (err: AWSError, data: CloudFront.Types.GetFunctionResult) => void): Request<CloudFront.Types.GetFunctionResult, AWSError>;
   /**
    * Get the information about an invalidation. 
    */
@@ -462,6 +494,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   listFieldLevelEncryptionProfiles(callback?: (err: AWSError, data: CloudFront.Types.ListFieldLevelEncryptionProfilesResult) => void): Request<CloudFront.Types.ListFieldLevelEncryptionProfilesResult, AWSError>;
   /**
+   * Gets a list of all CloudFront functions in your AWS account. You can optionally apply a filter to return only the functions that are in the specified stage, either DEVELOPMENT or LIVE. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listFunctions(params: CloudFront.Types.ListFunctionsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListFunctionsResult) => void): Request<CloudFront.Types.ListFunctionsResult, AWSError>;
+  /**
+   * Gets a list of all CloudFront functions in your AWS account. You can optionally apply a filter to return only the functions that are in the specified stage, either DEVELOPMENT or LIVE. You can optionally specify the maximum number of items to receive in the response. If the total number of items in the list exceeds the maximum that you specify, or the default maximum, the response is paginated. To get the next page of items, send a subsequent request that specifies the NextMarker value from the current response as the Marker value in the subsequent request.
+   */
+  listFunctions(callback?: (err: AWSError, data: CloudFront.Types.ListFunctionsResult) => void): Request<CloudFront.Types.ListFunctionsResult, AWSError>;
+  /**
    * Lists invalidation batches. 
    */
   listInvalidations(params: CloudFront.Types.ListInvalidationsRequest, callback?: (err: AWSError, data: CloudFront.Types.ListInvalidationsResult) => void): Request<CloudFront.Types.ListInvalidationsResult, AWSError>;
@@ -518,6 +558,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    */
   listTagsForResource(callback?: (err: AWSError, data: CloudFront.Types.ListTagsForResourceResult) => void): Request<CloudFront.Types.ListTagsForResourceResult, AWSError>;
   /**
+   * Publishes a CloudFront function by copying the function code from the DEVELOPMENT stage to LIVE. This automatically updates all cache behaviors that are using this function to use the newly published copy in the LIVE stage. When a function is published to the LIVE stage, you can attach the function to a distribution’s cache behavior, using the function’s Amazon Resource Name (ARN). To publish a function, you must provide the function’s name and version (ETag value). To get these values, you can use ListFunctions and DescribeFunction.
+   */
+  publishFunction(params: CloudFront.Types.PublishFunctionRequest, callback?: (err: AWSError, data: CloudFront.Types.PublishFunctionResult) => void): Request<CloudFront.Types.PublishFunctionResult, AWSError>;
+  /**
+   * Publishes a CloudFront function by copying the function code from the DEVELOPMENT stage to LIVE. This automatically updates all cache behaviors that are using this function to use the newly published copy in the LIVE stage. When a function is published to the LIVE stage, you can attach the function to a distribution’s cache behavior, using the function’s Amazon Resource Name (ARN). To publish a function, you must provide the function’s name and version (ETag value). To get these values, you can use ListFunctions and DescribeFunction.
+   */
+  publishFunction(callback?: (err: AWSError, data: CloudFront.Types.PublishFunctionResult) => void): Request<CloudFront.Types.PublishFunctionResult, AWSError>;
+  /**
    * Add tags to a CloudFront resource.
    */
   tagResource(params: CloudFront.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -525,6 +573,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Add tags to a CloudFront resource.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Tests a CloudFront function. To test a function, you provide an event object that represents an HTTP request or response that your CloudFront distribution could receive in production. CloudFront runs the function, passing it the event object that you provided, and returns the function’s result (the modified event object) in the response. The response also contains function logs and error messages, if any exist. For more information about testing functions, see Testing functions in the Amazon CloudFront Developer Guide. To test a function, you provide the function’s name and version (ETag value) along with the event object. To get the function’s name and version, you can use ListFunctions and DescribeFunction.
+   */
+  testFunction(params: CloudFront.Types.TestFunctionRequest, callback?: (err: AWSError, data: CloudFront.Types.TestFunctionResult) => void): Request<CloudFront.Types.TestFunctionResult, AWSError>;
+  /**
+   * Tests a CloudFront function. To test a function, you provide an event object that represents an HTTP request or response that your CloudFront distribution could receive in production. CloudFront runs the function, passing it the event object that you provided, and returns the function’s result (the modified event object) in the response. The response also contains function logs and error messages, if any exist. For more information about testing functions, see Testing functions in the Amazon CloudFront Developer Guide. To test a function, you provide the function’s name and version (ETag value) along with the event object. To get the function’s name and version, you can use ListFunctions and DescribeFunction.
+   */
+  testFunction(callback?: (err: AWSError, data: CloudFront.Types.TestFunctionResult) => void): Request<CloudFront.Types.TestFunctionResult, AWSError>;
   /**
    * Remove tags from a CloudFront resource.
    */
@@ -573,6 +629,14 @@ declare class CloudFront extends CloudFrontCustomizations {
    * Update a field-level encryption profile. 
    */
   updateFieldLevelEncryptionProfile(callback?: (err: AWSError, data: CloudFront.Types.UpdateFieldLevelEncryptionProfileResult) => void): Request<CloudFront.Types.UpdateFieldLevelEncryptionProfileResult, AWSError>;
+  /**
+   * Updates a CloudFront function. You can update a function’s code or the comment that describes the function. You cannot update a function’s name. To update a function, you provide the function’s name and version (ETag value) along with the updated function code. To get the name and version, you can use ListFunctions and DescribeFunction.
+   */
+  updateFunction(params: CloudFront.Types.UpdateFunctionRequest, callback?: (err: AWSError, data: CloudFront.Types.UpdateFunctionResult) => void): Request<CloudFront.Types.UpdateFunctionResult, AWSError>;
+  /**
+   * Updates a CloudFront function. You can update a function’s code or the comment that describes the function. You cannot update a function’s name. To update a function, you provide the function’s name and version (ETag value) along with the updated function code. To get the name and version, you can use ListFunctions and DescribeFunction.
+   */
+  updateFunction(callback?: (err: AWSError, data: CloudFront.Types.UpdateFunctionResult) => void): Request<CloudFront.Types.UpdateFunctionResult, AWSError>;
   /**
    * Updates a key group. When you update a key group, all the fields are updated with the values provided in the request. You cannot update some fields independent of others. To update a key group:   Get the current key group with GetKeyGroup or GetKeyGroupConfig.   Locally modify the fields in the key group that you want to update. For example, add or remove public key IDs.   Call UpdateKeyGroup with the entire key group object, including the fields that you modified and those that you didn’t.  
    */
@@ -739,6 +803,10 @@ declare namespace CloudFront {
      */
     LambdaFunctionAssociations?: LambdaFunctionAssociations;
     /**
+     * A list of CloudFront functions that are associated with this cache behavior. CloudFront functions must be published to the LIVE stage to associate them with a cache behavior.
+     */
+    FunctionAssociations?: FunctionAssociations;
+    /**
      * The value of ID for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for this cache behavior.
      */
     FieldLevelEncryptionId?: string;
@@ -747,7 +815,7 @@ declare namespace CloudFront {
      */
     RealtimeLogConfigArn?: string;
     /**
-     * The unique identifier of the cache policy that is attached to this cache behavior. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide.
+     * The unique identifier of the cache policy that is attached to this cache behavior. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide. A CacheBehavior must include either a CachePolicyId or ForwardedValues. We recommend that you use a CachePolicyId.
      */
     CachePolicyId?: string;
     /**
@@ -755,7 +823,7 @@ declare namespace CloudFront {
      */
     OriginRequestPolicyId?: string;
     /**
-     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. For more information, see Working with policies in the Amazon CloudFront Developer Guide. If you want to include values in the cache key, use a cache policy. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide. If you want to send values to the origin but not include them in the cache key, use an origin request policy. For more information, see Creating origin request policies or Using the managed origin request policies in the Amazon CloudFront Developer Guide. A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.
+     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. For more information, see Working with policies in the Amazon CloudFront Developer Guide. If you want to include values in the cache key, use a cache policy. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide. If you want to send values to the origin but not include them in the cache key, use an origin request policy. For more information, see Creating origin request policies or Using the managed origin request policies in the Amazon CloudFront Developer Guide. A CacheBehavior must include either a CachePolicyId or ForwardedValues. We recommend that you use a CachePolicyId. A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.
      */
     ForwardedValues?: ForwardedValues;
     /**
@@ -798,7 +866,7 @@ declare namespace CloudFront {
   }
   export interface CachePolicyConfig {
     /**
-     * A comment to describe the cache policy.
+     * A comment to describe the cache policy. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
     /**
@@ -910,7 +978,7 @@ declare namespace CloudFront {
      */
     CallerReference: string;
     /**
-     * Any comments you want to include about the origin access identity. 
+     * A comment to describe the origin access identity. The comment cannot be longer than 128 characters.
      */
     Comment: string;
   }
@@ -1129,6 +1197,34 @@ declare namespace CloudFront {
     Location?: string;
     /**
      * The current version of the field level encryption profile. For example: E2QWRUHAPOMQZL.
+     */
+    ETag?: string;
+  }
+  export interface CreateFunctionRequest {
+    /**
+     * A name to identify the function.
+     */
+    Name: FunctionName;
+    /**
+     * Configuration information about the function, including an optional comment and the function’s runtime.
+     */
+    FunctionConfig: FunctionConfig;
+    /**
+     * The function code. For more information about writing a CloudFront function, see Writing function code for CloudFront Functions in the Amazon CloudFront Developer Guide.
+     */
+    FunctionCode: FunctionBlob;
+  }
+  export interface CreateFunctionResult {
+    /**
+     * Contains configuration information and metadata about a CloudFront function.
+     */
+    FunctionSummary?: FunctionSummary;
+    /**
+     * The URL of the CloudFront function. Use the URL to manage the function with the CloudFront API.
+     */
+    Location?: string;
+    /**
+     * The version identifier for the current version of the CloudFront function.
      */
     ETag?: string;
   }
@@ -1388,6 +1484,10 @@ declare namespace CloudFront {
      */
     LambdaFunctionAssociations?: LambdaFunctionAssociations;
     /**
+     * A list of CloudFront functions that are associated with this cache behavior. CloudFront functions must be published to the LIVE stage to associate them with a cache behavior.
+     */
+    FunctionAssociations?: FunctionAssociations;
+    /**
      * The value of ID for the field-level encryption configuration that you want CloudFront to use for encrypting specific fields of data for the default cache behavior.
      */
     FieldLevelEncryptionId?: string;
@@ -1396,7 +1496,7 @@ declare namespace CloudFront {
      */
     RealtimeLogConfigArn?: string;
     /**
-     * The unique identifier of the cache policy that is attached to the default cache behavior. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide.
+     * The unique identifier of the cache policy that is attached to the default cache behavior. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide. A DefaultCacheBehavior must include either a CachePolicyId or ForwardedValues. We recommend that you use a CachePolicyId.
      */
     CachePolicyId?: string;
     /**
@@ -1404,7 +1504,7 @@ declare namespace CloudFront {
      */
     OriginRequestPolicyId?: string;
     /**
-     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. For more information, see Working with policies in the Amazon CloudFront Developer Guide. If you want to include values in the cache key, use a cache policy. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide. If you want to send values to the origin but not include them in the cache key, use an origin request policy. For more information, see Creating origin request policies or Using the managed origin request policies in the Amazon CloudFront Developer Guide. A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.
+     * This field is deprecated. We recommend that you use a cache policy or an origin request policy instead of this field. For more information, see Working with policies in the Amazon CloudFront Developer Guide. If you want to include values in the cache key, use a cache policy. For more information, see Creating cache policies or Using the managed cache policies in the Amazon CloudFront Developer Guide. If you want to send values to the origin but not include them in the cache key, use an origin request policy. For more information, see Creating origin request policies or Using the managed origin request policies in the Amazon CloudFront Developer Guide. A DefaultCacheBehavior must include either a CachePolicyId or ForwardedValues. We recommend that you use a CachePolicyId. A complex type that specifies how CloudFront handles query strings, cookies, and HTTP headers.
      */
     ForwardedValues?: ForwardedValues;
     /**
@@ -1470,6 +1570,16 @@ declare namespace CloudFront {
      */
     IfMatch?: string;
   }
+  export interface DeleteFunctionRequest {
+    /**
+     * The name of the function that you are deleting.
+     */
+    Name: string;
+    /**
+     * The current version (ETag value) of the function that you are deleting, which you can get using DescribeFunction.
+     */
+    IfMatch: string;
+  }
   export interface DeleteKeyGroupRequest {
     /**
      * The identifier of the key group that you are deleting. To get the identifier, use ListKeyGroups.
@@ -1527,6 +1637,26 @@ declare namespace CloudFront {
      * The value of the ETag header that you received when you disabled the streaming distribution. For example: E2QWRUHAPOMQZL.
      */
     IfMatch?: string;
+  }
+  export interface DescribeFunctionRequest {
+    /**
+     * The name of the function that you are getting information about.
+     */
+    Name: string;
+    /**
+     * The function’s stage, either DEVELOPMENT or LIVE.
+     */
+    Stage?: FunctionStage;
+  }
+  export interface DescribeFunctionResult {
+    /**
+     * Contains configuration information and metadata about a CloudFront function.
+     */
+    FunctionSummary?: FunctionSummary;
+    /**
+     * The version identifier for the current version of the CloudFront function.
+     */
+    ETag?: string;
   }
   export interface Distribution {
     /**
@@ -1604,7 +1734,7 @@ declare namespace CloudFront {
      */
     CustomErrorResponses?: CustomErrorResponses;
     /**
-     * Any comments you want to include about the distribution. If you don't want to specify a comment, include an empty Comment element. To delete an existing comment, update the distribution configuration and include an empty Comment element. To add or change a comment, update the distribution configuration and specify the new comment.
+     * An optional comment to describe the distribution. The comment cannot be longer than 128 characters.
      */
     Comment: CommentType;
     /**
@@ -1843,7 +1973,7 @@ declare namespace CloudFront {
      */
     CallerReference: string;
     /**
-     * An optional comment about the configuration.
+     * An optional comment about the configuration. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
     /**
@@ -1897,7 +2027,7 @@ declare namespace CloudFront {
      */
     CallerReference: string;
     /**
-     * An optional comment for the field-level encryption profile.
+     * An optional comment for the field-level encryption profile. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
     /**
@@ -1941,7 +2071,7 @@ declare namespace CloudFront {
      */
     EncryptionEntities: EncryptionEntities;
     /**
-     * An optional comment for the field-level encryption profile summary.
+     * An optional comment for the field-level encryption profile summary. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
   }
@@ -1956,7 +2086,7 @@ declare namespace CloudFront {
      */
     LastModifiedTime: timestamp;
     /**
-     * An optional comment about the field-level encryption item.
+     * An optional comment about the field-level encryption item. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
     /**
@@ -2000,6 +2130,99 @@ declare namespace CloudFront {
      */
     QueryStringCacheKeys?: QueryStringCacheKeys;
   }
+  export type FunctionARN = string;
+  export interface FunctionAssociation {
+    /**
+     * The Amazon Resource Name (ARN) of the function.
+     */
+    FunctionARN: FunctionARN;
+    /**
+     * The event type of the function, either viewer-request or viewer-response. You cannot use origin-facing event types (origin-request and origin-response) with a CloudFront function.
+     */
+    EventType: EventType;
+  }
+  export type FunctionAssociationList = FunctionAssociation[];
+  export interface FunctionAssociations {
+    /**
+     * The number of CloudFront functions in the list.
+     */
+    Quantity: integer;
+    /**
+     * The CloudFront functions that are associated with a cache behavior in a CloudFront distribution. CloudFront functions must be published to the LIVE stage to associate them with a cache behavior.
+     */
+    Items?: FunctionAssociationList;
+  }
+  export type FunctionBlob = Buffer|Uint8Array|Blob|string;
+  export interface FunctionConfig {
+    /**
+     * A comment to describe the function.
+     */
+    Comment: string;
+    /**
+     * The function’s runtime environment. The only valid value is cloudfront-js-1.0.
+     */
+    Runtime: FunctionRuntime;
+  }
+  export type FunctionEventObject = Buffer|Uint8Array|Blob|string;
+  export type FunctionExecutionLogList = string[];
+  export interface FunctionList {
+    /**
+     * If there are more items in the list than are in this response, this element is present. It contains the value that you should use in the Marker field of a subsequent request to continue listing functions where you left off.
+     */
+    NextMarker?: string;
+    /**
+     * The maximum number of functions requested.
+     */
+    MaxItems: integer;
+    /**
+     * The number of functions returned in the response.
+     */
+    Quantity: integer;
+    /**
+     * Contains the functions in the list.
+     */
+    Items?: FunctionSummaryList;
+  }
+  export interface FunctionMetadata {
+    /**
+     * The Amazon Resource Name (ARN) of the function. The ARN uniquely identifies the function.
+     */
+    FunctionARN: string;
+    /**
+     * The stage that the function is in, either DEVELOPMENT or LIVE. When a function is in the DEVELOPMENT stage, you can test the function with TestFunction, and update it with UpdateFunction. When a function is in the LIVE stage, you can attach the function to a distribution’s cache behavior, using the function’s ARN.
+     */
+    Stage?: FunctionStage;
+    /**
+     * The date and time when the function was created.
+     */
+    CreatedTime?: timestamp;
+    /**
+     * The date and time when the function was most recently updated.
+     */
+    LastModifiedTime: timestamp;
+  }
+  export type FunctionName = string;
+  export type FunctionRuntime = "cloudfront-js-1.0"|string;
+  export type FunctionStage = "DEVELOPMENT"|"LIVE"|string;
+  export interface FunctionSummary {
+    /**
+     * The name of the CloudFront function.
+     */
+    Name: FunctionName;
+    /**
+     * The status of the CloudFront function.
+     */
+    Status?: string;
+    /**
+     * Contains configuration information about a CloudFront function.
+     */
+    FunctionConfig: FunctionConfig;
+    /**
+     * Contains metadata about a CloudFront function.
+     */
+    FunctionMetadata: FunctionMetadata;
+  }
+  export type FunctionSummaryList = FunctionSummary[];
   export interface GeoRestriction {
     /**
      * The method that you want to use to restrict distribution of your content by country:    none: No geo restriction is enabled, meaning access to content is not restricted by client geo location.    blacklist: The Location elements specify the countries in which you don't want CloudFront to distribute your content.    whitelist: The Location elements specify the countries in which you want CloudFront to distribute your content.  
@@ -2174,6 +2397,30 @@ declare namespace CloudFront {
      * The current version of the field level encryption configuration. For example: E2QWRUHAPOMQZL.
      */
     ETag?: string;
+  }
+  export interface GetFunctionRequest {
+    /**
+     * The name of the function whose code you are getting.
+     */
+    Name: string;
+    /**
+     * The function’s stage, either DEVELOPMENT or LIVE.
+     */
+    Stage?: FunctionStage;
+  }
+  export interface GetFunctionResult {
+    /**
+     * The function code of a CloudFront function.
+     */
+    FunctionCode?: FunctionBlob;
+    /**
+     * The version identifier for the current version of the CloudFront function.
+     */
+    ETag?: string;
+    /**
+     * The content type (media type) of the response.
+     */
+    ContentType?: string;
   }
   export interface GetInvalidationRequest {
     /**
@@ -2462,7 +2709,7 @@ declare namespace CloudFront {
      */
     Items: PublicKeyIdList;
     /**
-     * A comment to describe the key group.
+     * A comment to describe the key group. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
   }
@@ -2719,6 +2966,26 @@ declare namespace CloudFront {
      * Returns a list of the field-level encryption profiles that have been created in CloudFront for this account.
      */
     FieldLevelEncryptionProfileList?: FieldLevelEncryptionProfileList;
+  }
+  export interface ListFunctionsRequest {
+    /**
+     * Use this field when paginating results to indicate where to begin in your list of functions. The response includes functions in the list that occur after the marker. To get the next page of the list, set this field’s value to the value of NextMarker from the current page’s response.
+     */
+    Marker?: string;
+    /**
+     * The maximum number of functions that you want in the response.
+     */
+    MaxItems?: string;
+    /**
+     * An optional filter to return only the functions that are in the specified stage, either DEVELOPMENT or LIVE.
+     */
+    Stage?: FunctionStage;
+  }
+  export interface ListFunctionsResult {
+    /**
+     * A list of CloudFront functions.
+     */
+    FunctionList?: FunctionList;
   }
   export interface ListInvalidationsRequest {
     /**
@@ -2979,7 +3246,7 @@ declare namespace CloudFront {
   }
   export interface OriginRequestPolicyConfig {
     /**
-     * A comment to describe the origin request policy.
+     * A comment to describe the origin request policy. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
     /**
@@ -3149,7 +3416,7 @@ declare namespace CloudFront {
      */
     EncodedKey: string;
     /**
-     * A comment to describe the public key.
+     * A comment to describe the public key. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
   }
@@ -3190,11 +3457,27 @@ declare namespace CloudFront {
      */
     EncodedKey: string;
     /**
-     * A comment to describe the public key.
+     * A comment to describe the public key. The comment cannot be longer than 128 characters.
      */
     Comment?: string;
   }
   export type PublicKeySummaryList = PublicKeySummary[];
+  export interface PublishFunctionRequest {
+    /**
+     * The name of the function that you are publishing.
+     */
+    Name: string;
+    /**
+     * The current version (ETag value) of the function that you are publishing, which you can get using DescribeFunction.
+     */
+    IfMatch: string;
+  }
+  export interface PublishFunctionResult {
+    /**
+     * Contains configuration information and metadata about a CloudFront function.
+     */
+    FunctionSummary?: FunctionSummary;
+  }
   export interface QueryArgProfile {
     /**
      * Query argument for field-level encryption query argument-profile mapping.
@@ -3545,6 +3828,52 @@ declare namespace CloudFront {
      */
     Items?: TagList;
   }
+  export interface TestFunctionRequest {
+    /**
+     * The name of the function that you are testing.
+     */
+    Name: string;
+    /**
+     * The current version (ETag value) of the function that you are testing, which you can get using DescribeFunction.
+     */
+    IfMatch: string;
+    /**
+     * The stage of the function that you are testing, either DEVELOPMENT or LIVE.
+     */
+    Stage?: FunctionStage;
+    /**
+     * The event object to test the function with. For more information about the structure of the event object, see Testing functions in the Amazon CloudFront Developer Guide.
+     */
+    EventObject: FunctionEventObject;
+  }
+  export interface TestFunctionResult {
+    /**
+     * An object that represents the result of running the function with the provided event object.
+     */
+    TestResult?: TestResult;
+  }
+  export interface TestResult {
+    /**
+     * Contains configuration information and metadata about the CloudFront function that was tested.
+     */
+    FunctionSummary?: FunctionSummary;
+    /**
+     * The amount of time that the function took to run as a percentage of the maximum allowed time. For example, a compute utilization of 35 means that the function completed in 35% of the maximum allowed time.
+     */
+    ComputeUtilization?: string;
+    /**
+     * Contains the log lines that the function wrote (if any) when running the test.
+     */
+    FunctionExecutionLogs?: FunctionExecutionLogList;
+    /**
+     * If the result of testing the function was an error, this field contains the error message.
+     */
+    FunctionErrorMessage?: string;
+    /**
+     * The event object returned by the function. For more information about the structure of the event object, see Event object structure in the Amazon CloudFront Developer Guide.
+     */
+    FunctionOutput?: string;
+  }
   export type TrustedKeyGroupIdList = string[];
   export interface TrustedKeyGroups {
     /**
@@ -3701,6 +4030,34 @@ declare namespace CloudFront {
     FieldLevelEncryptionProfile?: FieldLevelEncryptionProfile;
     /**
      * The result of the field-level encryption profile request. 
+     */
+    ETag?: string;
+  }
+  export interface UpdateFunctionRequest {
+    /**
+     * The name of the function that you are updating.
+     */
+    Name: string;
+    /**
+     * The current version (ETag value) of the function that you are updating, which you can get using DescribeFunction.
+     */
+    IfMatch: string;
+    /**
+     * Configuration information about the function.
+     */
+    FunctionConfig: FunctionConfig;
+    /**
+     * The function code. For more information about writing a CloudFront function, see Writing function code for CloudFront Functions in the Amazon CloudFront Developer Guide.
+     */
+    FunctionCode: FunctionBlob;
+  }
+  export interface UpdateFunctionResult {
+    /**
+     * Contains configuration information and metadata about a CloudFront function.
+     */
+    FunctionSummary?: FunctionSummary;
+    /**
+     * The version identifier for the current version of the CloudFront function.
      */
     ETag?: string;
   }

@@ -45,6 +45,14 @@ declare class CloudWatch extends Service {
    */
   deleteInsightRules(callback?: (err: AWSError, data: CloudWatch.Types.DeleteInsightRulesOutput) => void): Request<CloudWatch.Types.DeleteInsightRulesOutput, AWSError>;
   /**
+   * Permanently deletes the metric stream that you specify.
+   */
+  deleteMetricStream(params: CloudWatch.Types.DeleteMetricStreamInput, callback?: (err: AWSError, data: CloudWatch.Types.DeleteMetricStreamOutput) => void): Request<CloudWatch.Types.DeleteMetricStreamOutput, AWSError>;
+  /**
+   * Permanently deletes the metric stream that you specify.
+   */
+  deleteMetricStream(callback?: (err: AWSError, data: CloudWatch.Types.DeleteMetricStreamOutput) => void): Request<CloudWatch.Types.DeleteMetricStreamOutput, AWSError>;
+  /**
    * Retrieves the history for the specified alarm. You can filter the results by date range or item type. If an alarm name is not specified, the histories for either all metric alarms or all composite alarms are returned. CloudWatch retains the history of an alarm even if you delete the alarm.
    */
   describeAlarmHistory(params: CloudWatch.Types.DescribeAlarmHistoryInput, callback?: (err: AWSError, data: CloudWatch.Types.DescribeAlarmHistoryOutput) => void): Request<CloudWatch.Types.DescribeAlarmHistoryOutput, AWSError>;
@@ -149,6 +157,14 @@ declare class CloudWatch extends Service {
    */
   getMetricStatistics(callback?: (err: AWSError, data: CloudWatch.Types.GetMetricStatisticsOutput) => void): Request<CloudWatch.Types.GetMetricStatisticsOutput, AWSError>;
   /**
+   * Returns information about the metric stream that you specify.
+   */
+  getMetricStream(params: CloudWatch.Types.GetMetricStreamInput, callback?: (err: AWSError, data: CloudWatch.Types.GetMetricStreamOutput) => void): Request<CloudWatch.Types.GetMetricStreamOutput, AWSError>;
+  /**
+   * Returns information about the metric stream that you specify.
+   */
+  getMetricStream(callback?: (err: AWSError, data: CloudWatch.Types.GetMetricStreamOutput) => void): Request<CloudWatch.Types.GetMetricStreamOutput, AWSError>;
+  /**
    * You can use the GetMetricWidgetImage API to retrieve a snapshot graph of one or more Amazon CloudWatch metrics as a bitmap image. You can then embed this image into your services and products, such as wiki pages, reports, and documents. You could also retrieve images regularly, such as every minute, and create your own custom live dashboard. The graph you retrieve can include all CloudWatch metric graph features, including metric math and horizontal and vertical annotations. There is a limit of 20 transactions per second for this API. Each GetMetricWidgetImage action has the following limits:   As many as 100 metrics in the graph.   Up to 100 KB uncompressed payload.  
    */
   getMetricWidgetImage(params: CloudWatch.Types.GetMetricWidgetImageInput, callback?: (err: AWSError, data: CloudWatch.Types.GetMetricWidgetImageOutput) => void): Request<CloudWatch.Types.GetMetricWidgetImageOutput, AWSError>;
@@ -164,6 +180,14 @@ declare class CloudWatch extends Service {
    * Returns a list of the dashboards for your account. If you include DashboardNamePrefix, only those dashboards with names starting with the prefix are listed. Otherwise, all dashboards in your account are listed.   ListDashboards returns up to 1000 results on one page. If there are more than 1000 dashboards, you can call ListDashboards again and include the value you received for NextToken in the first call, to receive the next 1000 results.
    */
   listDashboards(callback?: (err: AWSError, data: CloudWatch.Types.ListDashboardsOutput) => void): Request<CloudWatch.Types.ListDashboardsOutput, AWSError>;
+  /**
+   * Returns a list of metric streams in this account.
+   */
+  listMetricStreams(params: CloudWatch.Types.ListMetricStreamsInput, callback?: (err: AWSError, data: CloudWatch.Types.ListMetricStreamsOutput) => void): Request<CloudWatch.Types.ListMetricStreamsOutput, AWSError>;
+  /**
+   * Returns a list of metric streams in this account.
+   */
+  listMetricStreams(callback?: (err: AWSError, data: CloudWatch.Types.ListMetricStreamsOutput) => void): Request<CloudWatch.Types.ListMetricStreamsOutput, AWSError>;
   /**
    * List the specified metrics. You can use the returned metrics with GetMetricData or GetMetricStatistics to obtain statistical data. Up to 500 results are returned for any one call. To retrieve additional results, use the returned token with subsequent calls. After you create a metric, allow up to 15 minutes before the metric appears. You can see statistics about the metric sooner by using GetMetricData or GetMetricStatistics.  ListMetrics doesn't return information about metrics if those metrics haven't reported data in the past two weeks. To retrieve those metrics, use GetMetricData or GetMetricStatistics.
    */
@@ -213,11 +237,11 @@ declare class CloudWatch extends Service {
    */
   putInsightRule(callback?: (err: AWSError, data: CloudWatch.Types.PutInsightRuleOutput) => void): Request<CloudWatch.Types.PutInsightRuleOutput, AWSError>;
   /**
-   * Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model. Alarms based on anomaly detection models cannot have Auto Scaling actions. When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:   The iam:CreateServiceLinkedRole for all alarms with EC2 actions   The iam:CreateServiceLinkedRole to create an alarm with Systems Manager OpsItem actions.   The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked rolea for you. The service-linked roles are called AWSServiceRoleForCloudWatchEvents and AWSServiceRoleForCloudWatchAlarms_ActionSSM. For more information, see AWS service-linked role.
+   * Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model. Alarms based on anomaly detection models cannot have Auto Scaling actions. When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:   The iam:CreateServiceLinkedRole for all alarms with EC2 actions   The iam:CreateServiceLinkedRole to create an alarm with Systems Manager OpsItem actions.   The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked roles are called AWSServiceRoleForCloudWatchEvents and AWSServiceRoleForCloudWatchAlarms_ActionSSM. For more information, see AWS service-linked role.
    */
   putMetricAlarm(params: CloudWatch.Types.PutMetricAlarmInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model. Alarms based on anomaly detection models cannot have Auto Scaling actions. When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:   The iam:CreateServiceLinkedRole for all alarms with EC2 actions   The iam:CreateServiceLinkedRole to create an alarm with Systems Manager OpsItem actions.   The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked rolea for you. The service-linked roles are called AWSServiceRoleForCloudWatchEvents and AWSServiceRoleForCloudWatchAlarms_ActionSSM. For more information, see AWS service-linked role.
+   * Creates or updates an alarm and associates it with the specified metric, metric math expression, or anomaly detection model. Alarms based on anomaly detection models cannot have Auto Scaling actions. When this operation creates an alarm, the alarm state is immediately set to INSUFFICIENT_DATA. The alarm is then evaluated and its state is set appropriately. Any actions associated with the new state are then executed. When you update an existing alarm, its state is left unchanged, but the update completely overwrites the previous configuration of the alarm. If you are an IAM user, you must have Amazon EC2 permissions for some alarm operations:   The iam:CreateServiceLinkedRole for all alarms with EC2 actions   The iam:CreateServiceLinkedRole to create an alarm with Systems Manager OpsItem actions.   The first time you create an alarm in the AWS Management Console, the CLI, or by using the PutMetricAlarm API, CloudWatch creates the necessary service-linked role for you. The service-linked roles are called AWSServiceRoleForCloudWatchEvents and AWSServiceRoleForCloudWatchAlarms_ActionSSM. For more information, see AWS service-linked role.
    */
   putMetricAlarm(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -229,6 +253,14 @@ declare class CloudWatch extends Service {
    */
   putMetricData(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics to AWS destinations including Amazon S3 and to many third-party solutions. For more information, see  Using Metric Streams. To create a metric stream, you must be logged on to an account that has the iam:PassRole permission and either the CloudWatchFullAccess policy or the cloudwatch:PutMetricStream permission. When you create or update a metric stream, you choose one of the following:   Stream metrics from all metric namespaces in the account.   Stream metrics from all metric namespaces in the account, except for the namespaces that you list in ExcludeFilters.   Stream metrics from only the metric namespaces that you list in IncludeFilters.   When you use PutMetricStream to create a new metric stream, the stream is created in the running state. If you use it to update an existing stream, the state of the stream is not changed.
+   */
+  putMetricStream(params: CloudWatch.Types.PutMetricStreamInput, callback?: (err: AWSError, data: CloudWatch.Types.PutMetricStreamOutput) => void): Request<CloudWatch.Types.PutMetricStreamOutput, AWSError>;
+  /**
+   * Creates or updates a metric stream. Metric streams can automatically stream CloudWatch metrics to AWS destinations including Amazon S3 and to many third-party solutions. For more information, see  Using Metric Streams. To create a metric stream, you must be logged on to an account that has the iam:PassRole permission and either the CloudWatchFullAccess policy or the cloudwatch:PutMetricStream permission. When you create or update a metric stream, you choose one of the following:   Stream metrics from all metric namespaces in the account.   Stream metrics from all metric namespaces in the account, except for the namespaces that you list in ExcludeFilters.   Stream metrics from only the metric namespaces that you list in IncludeFilters.   When you use PutMetricStream to create a new metric stream, the stream is created in the running state. If you use it to update an existing stream, the state of the stream is not changed.
+   */
+  putMetricStream(callback?: (err: AWSError, data: CloudWatch.Types.PutMetricStreamOutput) => void): Request<CloudWatch.Types.PutMetricStreamOutput, AWSError>;
+  /**
    * Temporarily sets the state of an alarm for testing purposes. When the updated state differs from the previous value, the action configured for the appropriate state is invoked. For example, if your alarm is configured to send an Amazon SNS message when an alarm is triggered, temporarily changing the alarm state to ALARM sends an SNS message. Metric alarms returns to their actual state quickly, often within seconds. Because the metric alarm state change happens quickly, it is typically only visible in the alarm's History tab in the Amazon CloudWatch console or through DescribeAlarmHistory. If you use SetAlarmState on a composite alarm, the composite alarm is not guaranteed to return to its actual state. It returns to its actual state only once any of its children alarms change state. It is also reevaluated if you update its configuration. If an alarm triggers EC2 Auto Scaling policies or application Auto Scaling policies, you must include information in the StateReasonData parameter to enable the policy to take the correct action.
    */
   setAlarmState(params: CloudWatch.Types.SetAlarmStateInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -236,6 +268,22 @@ declare class CloudWatch extends Service {
    * Temporarily sets the state of an alarm for testing purposes. When the updated state differs from the previous value, the action configured for the appropriate state is invoked. For example, if your alarm is configured to send an Amazon SNS message when an alarm is triggered, temporarily changing the alarm state to ALARM sends an SNS message. Metric alarms returns to their actual state quickly, often within seconds. Because the metric alarm state change happens quickly, it is typically only visible in the alarm's History tab in the Amazon CloudWatch console or through DescribeAlarmHistory. If you use SetAlarmState on a composite alarm, the composite alarm is not guaranteed to return to its actual state. It returns to its actual state only once any of its children alarms change state. It is also reevaluated if you update its configuration. If an alarm triggers EC2 Auto Scaling policies or application Auto Scaling policies, you must include information in the StateReasonData parameter to enable the policy to take the correct action.
    */
   setAlarmState(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Starts the streaming of metrics for one or more of your metric streams.
+   */
+  startMetricStreams(params: CloudWatch.Types.StartMetricStreamsInput, callback?: (err: AWSError, data: CloudWatch.Types.StartMetricStreamsOutput) => void): Request<CloudWatch.Types.StartMetricStreamsOutput, AWSError>;
+  /**
+   * Starts the streaming of metrics for one or more of your metric streams.
+   */
+  startMetricStreams(callback?: (err: AWSError, data: CloudWatch.Types.StartMetricStreamsOutput) => void): Request<CloudWatch.Types.StartMetricStreamsOutput, AWSError>;
+  /**
+   * Stops the streaming of metrics for one or more of your metric streams.
+   */
+  stopMetricStreams(params: CloudWatch.Types.StopMetricStreamsInput, callback?: (err: AWSError, data: CloudWatch.Types.StopMetricStreamsOutput) => void): Request<CloudWatch.Types.StopMetricStreamsOutput, AWSError>;
+  /**
+   * Stops the streaming of metrics for one or more of your metric streams.
+   */
+  stopMetricStreams(callback?: (err: AWSError, data: CloudWatch.Types.StopMetricStreamsOutput) => void): Request<CloudWatch.Types.StopMetricStreamsOutput, AWSError>;
   /**
    * Assigns one or more tags (key-value pairs) to the specified CloudWatch resource. Currently, the only CloudWatch resources that can be tagged are alarms and Contributor Insights rules. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with an alarm that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a CloudWatch resource.
    */
@@ -527,6 +575,14 @@ declare namespace CloudWatch {
      * An array listing the rules that could not be deleted. You cannot delete built-in rules.
      */
     Failures?: BatchFailures;
+  }
+  export interface DeleteMetricStreamInput {
+    /**
+     * The name of the metric stream to delete.
+     */
+    Name: MetricStreamName;
+  }
+  export interface DeleteMetricStreamOutput {
   }
   export interface DescribeAlarmHistoryInput {
     /**
@@ -950,6 +1006,54 @@ declare namespace CloudWatch {
      */
     Datapoints?: Datapoints;
   }
+  export interface GetMetricStreamInput {
+    /**
+     * The name of the metric stream to retrieve information about.
+     */
+    Name: MetricStreamName;
+  }
+  export interface GetMetricStreamOutput {
+    /**
+     * The ARN of the metric stream.
+     */
+    Arn?: AmazonResourceName;
+    /**
+     * The name of the metric stream.
+     */
+    Name?: MetricStreamName;
+    /**
+     * If this array of metric namespaces is present, then these namespaces are the only metric namespaces that are streamed by this metric stream.
+     */
+    IncludeFilters?: MetricStreamFilters;
+    /**
+     * If this array of metric namespaces is present, then these namespaces are the only metric namespaces that are not streamed by this metric stream. In this case, all other metric namespaces in the account are streamed by this metric stream.
+     */
+    ExcludeFilters?: MetricStreamFilters;
+    /**
+     * The ARN of the Amazon Kinesis Firehose delivery stream that is used by this metric stream.
+     */
+    FirehoseArn?: AmazonResourceName;
+    /**
+     * The ARN of the IAM role that is used by this metric stream.
+     */
+    RoleArn?: AmazonResourceName;
+    /**
+     * The state of the metric stream. The possible values are running and stopped.
+     */
+    State?: MetricStreamState;
+    /**
+     * The date that the metric stream was created.
+     */
+    CreationDate?: Timestamp;
+    /**
+     * The date of the most recent update to the metric stream's configuration.
+     */
+    LastUpdateDate?: Timestamp;
+    /**
+     * 
+     */
+    OutputFormat?: MetricStreamOutputFormat;
+  }
   export interface GetMetricWidgetImageInput {
     /**
      * A JSON string that defines the bitmap graph to be retrieved. The string includes the metrics to include in the graph, statistics, annotations, title, axis limits, and so on. You can include only one MetricWidget parameter in each GetMetricWidgetImage call. For more information about the syntax of MetricWidget see GetMetricWidgetImage: Metric Widget Structure and Syntax. If any metric on the graph could not load all the requested data points, an orange triangle with an exclamation point appears next to the graph legend.
@@ -1092,6 +1196,27 @@ declare namespace CloudWatch {
      * The token that marks the start of the next batch of returned results.
      */
     NextToken?: NextToken;
+  }
+  export interface ListMetricStreamsInput {
+    /**
+     * Include this value, if it was returned by the previous call, to get the next set of metric streams.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return in one operation.
+     */
+    MaxResults?: ListMetricStreamsMaxResults;
+  }
+  export type ListMetricStreamsMaxResults = number;
+  export interface ListMetricStreamsOutput {
+    /**
+     * The token that marks the start of the next batch of returned results. You can use this token in a subsequent operation to get the next batch of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The array of metric stream information.
+     */
+    Entries?: MetricStreamEntries;
   }
   export interface ListMetricsInput {
     /**
@@ -1393,6 +1518,48 @@ declare namespace CloudWatch {
      */
     Unit?: StandardUnit;
   }
+  export type MetricStreamEntries = MetricStreamEntry[];
+  export interface MetricStreamEntry {
+    /**
+     * The ARN of the metric stream.
+     */
+    Arn?: AmazonResourceName;
+    /**
+     * The date that the metric stream was originally created.
+     */
+    CreationDate?: Timestamp;
+    /**
+     * The date that the configuration of this metric stream was most recently updated.
+     */
+    LastUpdateDate?: Timestamp;
+    /**
+     * The name of the metric stream.
+     */
+    Name?: MetricStreamName;
+    /**
+     * The ARN of the Kinesis Firehose devlivery stream that is used for this metric stream.
+     */
+    FirehoseArn?: AmazonResourceName;
+    /**
+     * The current state of this stream. Valid values are running and stopped.
+     */
+    State?: MetricStreamState;
+    /**
+     * The output format of this metric stream. Valid values are json and opentelemetry0.7.
+     */
+    OutputFormat?: MetricStreamOutputFormat;
+  }
+  export interface MetricStreamFilter {
+    /**
+     * The name of the metric namespace in the filter.
+     */
+    Namespace?: Namespace;
+  }
+  export type MetricStreamFilters = MetricStreamFilter[];
+  export type MetricStreamName = string;
+  export type MetricStreamNames = MetricStreamName[];
+  export type MetricStreamOutputFormat = "json"|"opentelemetry0.7"|string;
+  export type MetricStreamState = string;
   export type MetricWidget = string;
   export type MetricWidgetImage = Buffer|Uint8Array|Blob|string;
   export type Metrics = Metric[];
@@ -1526,7 +1693,7 @@ declare namespace CloudWatch {
      */
     ActionsEnabled?: ActionsEnabled;
     /**
-     * The actions to execute when this alarm transitions to an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN). Valid Values: arn:aws:automate:region:ec2:stop | arn:aws:automate:region:ec2:terminate | arn:aws:automate:region:ec2:recover | arn:aws:automate:region:ec2:reboot | arn:aws:sns:region:account-id:sns-topic-name  | arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name   Valid Values (for use with IAM roles): arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0 
+     * The actions to execute when this alarm transitions to an OK state from any other state. Each action is specified as an Amazon Resource Name (ARN). Valid Values: arn:aws:automate:region:ec2:stop | arn:aws:automate:region:ec2:terminate | arn:aws:automate:region:ec2:recover | arn:aws:automate:region:ec2:reboot | arn:aws:sns:region:account-id:sns-topic-name  | arn:aws:autoscaling:region:account-id:scalingPolicy:policy-id:autoScalingGroupName/group-friendly-name:policyName/policy-friendly-name   Valid Values (for use with IAM roles): arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Stop/1.0 | arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Terminate/1.0 | arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Reboot/1.0 | arn:aws:swf:region:account-id:action/actions/AWS_EC2.InstanceId.Recover/1.0 
      */
     OKActions?: ResourceList;
     /**
@@ -1612,6 +1779,42 @@ declare namespace CloudWatch {
      */
     MetricData: MetricData;
   }
+  export interface PutMetricStreamInput {
+    /**
+     * If you are creating a new metric stream, this is the name for the new stream. The name must be different than the names of other metric streams in this account and Region. If you are updating a metric stream, specify the name of that stream here. Valid characters are A-Z, a-z, 0-9, "-" and "_".
+     */
+    Name: MetricStreamName;
+    /**
+     * If you specify this parameter, the stream sends only the metrics from the metric namespaces that you specify here. You cannot include IncludeFilters and ExcludeFilters in the same operation.
+     */
+    IncludeFilters?: MetricStreamFilters;
+    /**
+     * If you specify this parameter, the stream sends metrics from all metric namespaces except for the namespaces that you specify here. You cannot include ExcludeFilters and IncludeFilters in the same operation.
+     */
+    ExcludeFilters?: MetricStreamFilters;
+    /**
+     * The ARN of the Amazon Kinesis Firehose delivery stream to use for this metric stream. This Amazon Kinesis Firehose delivery stream must already exist and must be in the same account as the metric stream.
+     */
+    FirehoseArn: AmazonResourceName;
+    /**
+     * The ARN of an IAM role that this metric stream will use to access Amazon Kinesis Firehose resources. This IAM role must already exist and must be in the same account as the metric stream. This IAM role must include the following permissions:   firehose:PutRecord   firehose:PutRecordBatch  
+     */
+    RoleArn: AmazonResourceName;
+    /**
+     * The output format for the stream. Valid values are json and opentelemetry0.7. For more information about metric stream output formats, see  Metric streams output formats.
+     */
+    OutputFormat: MetricStreamOutputFormat;
+    /**
+     * A list of key-value pairs to associate with the metric stream. You can associate as many as 50 tags with a metric stream. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values.
+     */
+    Tags?: TagList;
+  }
+  export interface PutMetricStreamOutput {
+    /**
+     * The ARN of the metric stream.
+     */
+    Arn?: AmazonResourceName;
+  }
   export interface Range {
     /**
      * The start time of the range to exclude. The format is yyyy-MM-dd'T'HH:mm:ss. For example, 2019-07-01T23:59:59.
@@ -1647,6 +1850,14 @@ declare namespace CloudWatch {
   }
   export type Size = number;
   export type StandardUnit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None"|string;
+  export interface StartMetricStreamsInput {
+    /**
+     * The array of the names of metric streams to start streaming. This is an "all or nothing" operation. If you do not have permission to access all of the metric streams that you list here, then none of the streams that you list in the operation will start streaming.
+     */
+    Names: MetricStreamNames;
+  }
+  export interface StartMetricStreamsOutput {
+  }
   export type Stat = string;
   export type StateReason = string;
   export type StateReasonData = string;
@@ -1672,6 +1883,14 @@ declare namespace CloudWatch {
   }
   export type Statistics = Statistic[];
   export type StatusCode = "Complete"|"InternalError"|"PartialData"|string;
+  export interface StopMetricStreamsInput {
+    /**
+     * The array of the names of metric streams to stop streaming. This is an "all or nothing" operation. If you do not have permission to access all of the metric streams that you list here, then none of the streams that you list in the operation will stop streaming.
+     */
+    Names: MetricStreamNames;
+  }
+  export interface StopMetricStreamsOutput {
+  }
   export type StorageResolution = number;
   export interface Tag {
     /**

@@ -76,6 +76,14 @@ declare class DirectConnect extends Service {
    */
   associateHostedConnection(callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
+   * Associates a MAC Security (MACsec) Connection Key Name (CKN)/ Connectivity Association Key (CAK) pair with an AWS Direct Connect dedicated connection. You must supply either the secretARN, or the CKN/CAK (ckn and cak) pair in the request. For information about MAC Security (MACsec) key considerations, see MACsec pre-shared CKN/CAK key considerations  in the AWS Direct Connect User Guide.
+   */
+  associateMacSecKey(params: DirectConnect.Types.AssociateMacSecKeyRequest, callback?: (err: AWSError, data: DirectConnect.Types.AssociateMacSecKeyResponse) => void): Request<DirectConnect.Types.AssociateMacSecKeyResponse, AWSError>;
+  /**
+   * Associates a MAC Security (MACsec) Connection Key Name (CKN)/ Connectivity Association Key (CAK) pair with an AWS Direct Connect dedicated connection. You must supply either the secretARN, or the CKN/CAK (ckn and cak) pair in the request. For information about MAC Security (MACsec) key considerations, see MACsec pre-shared CKN/CAK key considerations  in the AWS Direct Connect User Guide.
+   */
+  associateMacSecKey(callback?: (err: AWSError, data: DirectConnect.Types.AssociateMacSecKeyResponse) => void): Request<DirectConnect.Types.AssociateMacSecKeyResponse, AWSError>;
+  /**
    * Associates a virtual interface with a specified link aggregation group (LAG) or connection. Connectivity to AWS is temporarily interrupted as the virtual interface is being migrated. If the target connection or LAG has an associated virtual interface with a conflicting VLAN number or a conflicting IP address, the operation fails. Virtual interfaces associated with a hosted connection cannot be associated with a LAG; hosted connections must be migrated along with their virtual interfaces using AssociateHostedConnection. To reassociate a virtual interface to a new connection or LAG, the requester must own either the virtual interface itself or the connection to which the virtual interface is currently associated. Additionally, the requester must own the connection or LAG for the association.
    */
   associateVirtualInterface(params: DirectConnect.Types.AssociateVirtualInterfaceRequest, callback?: (err: AWSError, data: DirectConnect.Types.VirtualInterface) => void): Request<DirectConnect.Types.VirtualInterface, AWSError>;
@@ -388,6 +396,14 @@ declare class DirectConnect extends Service {
    */
   disassociateConnectionFromLag(callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
   /**
+   * Removes the association between a MAC Security (MACsec) security key and an AWS Direct Connect dedicated connection.
+   */
+  disassociateMacSecKey(params: DirectConnect.Types.DisassociateMacSecKeyRequest, callback?: (err: AWSError, data: DirectConnect.Types.DisassociateMacSecKeyResponse) => void): Request<DirectConnect.Types.DisassociateMacSecKeyResponse, AWSError>;
+  /**
+   * Removes the association between a MAC Security (MACsec) security key and an AWS Direct Connect dedicated connection.
+   */
+  disassociateMacSecKey(callback?: (err: AWSError, data: DirectConnect.Types.DisassociateMacSecKeyResponse) => void): Request<DirectConnect.Types.DisassociateMacSecKeyResponse, AWSError>;
+  /**
    * Lists the virtual interface failover test history.
    */
   listVirtualInterfaceTestHistory(params: DirectConnect.Types.ListVirtualInterfaceTestHistoryRequest, callback?: (err: AWSError, data: DirectConnect.Types.ListVirtualInterfaceTestHistoryResponse) => void): Request<DirectConnect.Types.ListVirtualInterfaceTestHistoryResponse, AWSError>;
@@ -428,6 +444,14 @@ declare class DirectConnect extends Service {
    */
   untagResource(callback?: (err: AWSError, data: DirectConnect.Types.UntagResourceResponse) => void): Request<DirectConnect.Types.UntagResourceResponse, AWSError>;
   /**
+   * Updates the AWS Direct Connect dedicated connection configuration. You can update the following parameters for a connection:   The connection name   The connection's MAC Security (MACsec) encryption mode.  
+   */
+  updateConnection(params: DirectConnect.Types.UpdateConnectionRequest, callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
+  /**
+   * Updates the AWS Direct Connect dedicated connection configuration. You can update the following parameters for a connection:   The connection name   The connection's MAC Security (MACsec) encryption mode.  
+   */
+  updateConnection(callback?: (err: AWSError, data: DirectConnect.Types.Connection) => void): Request<DirectConnect.Types.Connection, AWSError>;
+  /**
    * Updates the specified attributes of the Direct Connect gateway association. Add or remove prefixes from the association.
    */
   updateDirectConnectGatewayAssociation(params: DirectConnect.Types.UpdateDirectConnectGatewayAssociationRequest, callback?: (err: AWSError, data: DirectConnect.Types.UpdateDirectConnectGatewayAssociationResult) => void): Request<DirectConnect.Types.UpdateDirectConnectGatewayAssociationResult, AWSError>;
@@ -436,11 +460,11 @@ declare class DirectConnect extends Service {
    */
   updateDirectConnectGatewayAssociation(callback?: (err: AWSError, data: DirectConnect.Types.UpdateDirectConnectGatewayAssociationResult) => void): Request<DirectConnect.Types.UpdateDirectConnectGatewayAssociationResult, AWSError>;
   /**
-   * Updates the attributes of the specified link aggregation group (LAG). You can update the following attributes:   The name of the LAG.   The value for the minimum number of connections that must be operational for the LAG itself to be operational.    When you create a LAG, the default value for the minimum number of operational connections is zero (0). If you update this value and the number of operational connections falls below the specified value, the LAG automatically goes down to avoid over-utilization of the remaining connections. Adjust this value with care, as it could force the LAG down if it is set higher than the current number of operational connections.
+   * Updates the attributes of the specified link aggregation group (LAG). You can update the following LAG attributes:   The name of the LAG.   The value for the minimum number of connections that must be operational for the LAG itself to be operational.    The LAG's MACsec encryption mode. AWS assigns this value to each connection which is part of the LAG.   The tags    If you adjust the threshold value for the minimum number of operational connections, ensure that the new value does not cause the LAG to fall below the threshold and become non-operational. 
    */
   updateLag(params: DirectConnect.Types.UpdateLagRequest, callback?: (err: AWSError, data: DirectConnect.Types.Lag) => void): Request<DirectConnect.Types.Lag, AWSError>;
   /**
-   * Updates the attributes of the specified link aggregation group (LAG). You can update the following attributes:   The name of the LAG.   The value for the minimum number of connections that must be operational for the LAG itself to be operational.    When you create a LAG, the default value for the minimum number of operational connections is zero (0). If you update this value and the number of operational connections falls below the specified value, the LAG automatically goes down to avoid over-utilization of the remaining connections. Adjust this value with care, as it could force the LAG down if it is set higher than the current number of operational connections.
+   * Updates the attributes of the specified link aggregation group (LAG). You can update the following LAG attributes:   The name of the LAG.   The value for the minimum number of connections that must be operational for the LAG itself to be operational.    The LAG's MACsec encryption mode. AWS assigns this value to each connection which is part of the LAG.   The tags    If you adjust the threshold value for the minimum number of operational connections, ensure that the new value does not cause the LAG to fall below the threshold and become non-operational. 
    */
   updateLag(callback?: (err: AWSError, data: DirectConnect.Types.Lag) => void): Request<DirectConnect.Types.Lag, AWSError>;
   /**
@@ -590,6 +614,34 @@ declare namespace DirectConnect {
      */
     parentConnectionId: ConnectionId;
   }
+  export interface AssociateMacSecKeyRequest {
+    /**
+     * The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx). You can use DescribeConnections or DescribeLags to retrieve connection ID.
+     */
+    connectionId: ConnectionId;
+    /**
+     * The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key to associate with the dedicated connection. You can use DescribeConnections or DescribeLags to retrieve the MAC Security (MACsec) secret key. If you use this request parameter, you do not use the ckn and cak request parameters.
+     */
+    secretARN?: SecretARN;
+    /**
+     * The MAC Security (MACsec) CKN to associate with the dedicated connection. You can create the CKN/CAK pair using an industry standard tool.  The valid values are 64 hexadecimal characters (0-9, A-E). If you use this request parameter, you must use the cak request parameter and not use the secretARN request parameter.
+     */
+    ckn?: Ckn;
+    /**
+     * The MAC Security (MACsec) CAK to associate with the dedicated connection. You can create the CKN/CAK pair using an industry standard tool.  The valid values are 64 hexadecimal characters (0-9, A-E). If you use this request parameter, you must use the ckn request parameter and not use the secretARN request parameter.
+     */
+    cak?: Cak;
+  }
+  export interface AssociateMacSecKeyResponse {
+    /**
+     * The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).
+     */
+    connectionId?: ConnectionId;
+    /**
+     * The MAC Security (MACsec) security keys associated with the dedicated connection.
+     */
+    macSecKeys?: MacSecKeyList;
+  }
   export interface AssociateVirtualInterfaceRequest {
     /**
      * The ID of the virtual interface.
@@ -619,6 +671,7 @@ declare namespace DirectConnect {
     region?: Region;
   }
   export type AssociatedGatewayId = string;
+  export type AvailableMacSecPortSpeeds = PortSpeed[];
   export type AvailablePortSpeeds = PortSpeed[];
   export type AwsDevice = string;
   export type AwsDeviceV2 = string;
@@ -669,6 +722,8 @@ declare namespace DirectConnect {
   export type Bandwidth = string;
   export type BooleanFlag = boolean;
   export type CIDR = string;
+  export type Cak = string;
+  export type Ckn = string;
   export interface ConfirmConnectionRequest {
     /**
      * The ID of the hosted connection.
@@ -798,6 +853,22 @@ declare namespace DirectConnect {
      * The name of the service provider associated with the connection.
      */
     providerName?: ProviderName;
+    /**
+     * Indicates whether the connection supports MAC Security (MACsec).
+     */
+    macSecCapable?: MacSecCapable;
+    /**
+     * The MAC Security (MACsec) port link status of the connection. The valid values are Encryption Up, which means that there is an active Connection Key Name, or Encryption Down.
+     */
+    portEncryptionStatus?: PortEncryptionStatus;
+    /**
+     * The MAC Security (MACsec) connection encryption mode. The valid values are no_encrypt, should_encrypt, and must_encrypt.
+     */
+    encryptionMode?: EncryptionMode;
+    /**
+     * The MAC Security (MACsec) security keys associated with the connection.
+     */
+    macSecKeys?: MacSecKeyList;
   }
   export type ConnectionId = string;
   export type ConnectionList = Connection[];
@@ -851,6 +922,10 @@ declare namespace DirectConnect {
      * The name of the service provider associated with the requested connection.
      */
     providerName?: ProviderName;
+    /**
+     * Indicates whether you want the connection to support MAC Security (MACsec). MAC Security (MACsec) is only available on dedicated connections. For information about MAC Security (MACsec) prerequisties, see MACsec prerequisties in the AWS Direct Connect User Guide.
+     */
+    requestMACSec?: RequestMACSec;
   }
   export interface CreateDirectConnectGatewayAssociationProposalRequest {
     /**
@@ -979,6 +1054,10 @@ declare namespace DirectConnect {
      * The name of the service provider associated with the LAG.
      */
     providerName?: ProviderName;
+    /**
+     * Indicates whether the connection will support MAC Security (MACsec).  All connections in the LAG must be capable of supporting MAC Security (MACsec). For information about MAC Security (MACsec) prerequisties, see MACsec prerequisties in the AWS Direct Connect User Guide. 
+     */
+    requestMACSec?: RequestMACSec;
   }
   export interface CreatePrivateVirtualInterfaceRequest {
     /**
@@ -1495,6 +1574,27 @@ declare namespace DirectConnect {
      */
     lagId: LagId;
   }
+  export interface DisassociateMacSecKeyRequest {
+    /**
+     * The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx). You can use DescribeConnections or DescribeLags to retrieve connection ID.
+     */
+    connectionId: ConnectionId;
+    /**
+     * The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key. You can use DescribeConnections to retrieve the ARN of the MAC Security (MACsec) secret key.
+     */
+    secretARN: SecretARN;
+  }
+  export interface DisassociateMacSecKeyResponse {
+    /**
+     * The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG (dxlag-xxxx).
+     */
+    connectionId?: ConnectionId;
+    /**
+     * The MAC Security (MACsec) security keys no longer associated with the dedicated connection.
+     */
+    macSecKeys?: MacSecKeyList;
+  }
+  export type EncryptionMode = string;
   export type EndTime = Date;
   export type FailureTestHistoryStatus = string;
   export type GatewayIdToAssociate = string;
@@ -1639,6 +1739,18 @@ declare namespace DirectConnect {
      * The name of the service provider associated with the LAG.
      */
     providerName?: ProviderName;
+    /**
+     * Indicates whether the LAG supports MAC Security (MACsec).
+     */
+    macSecCapable?: MacSecCapable;
+    /**
+     * The LAG MAC Security (MACsec) encryption mode. The valid values are no_encrypt, should_encrypt, and must_encrypt.
+     */
+    encryptionMode?: EncryptionMode;
+    /**
+     * The MAC Security (MACsec) security keys associated with the LAG.
+     */
+    macSecKeys?: MacSecKeyList;
   }
   export type LagId = string;
   export type LagList = Lag[];
@@ -1720,6 +1832,10 @@ declare namespace DirectConnect {
      * The name of the service provider for the location.
      */
     availableProviders?: ProviderList;
+    /**
+     * The available MAC Security (MACsec) port speeds for the location.
+     */
+    availableMacSecPortSpeeds?: AvailableMacSecPortSpeeds;
   }
   export type LocationCode = string;
   export type LocationList = Location[];
@@ -1732,6 +1848,26 @@ declare namespace DirectConnect {
   }
   export type LongAsn = number;
   export type MTU = number;
+  export type MacSecCapable = boolean;
+  export interface MacSecKey {
+    /**
+     * The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key.
+     */
+    secretARN?: SecretARN;
+    /**
+     * The Connection Key Name (CKN) for the MAC Security secret key.
+     */
+    ckn?: Ckn;
+    /**
+     * The state of the MAC Security (MACsec) secret key. The possible values are:    associating: The MAC Security (MACsec) secret key is being validated and not yet associated with the connection or LAG.    associated: The MAC Security (MACsec) secret key is validated and associated with the connection or LAG.    disassociating: The MAC Security (MACsec) secret key is being disassociated from the connection or LAG    disassociated: The MAC Security (MACsec) secret key is no longer associated with the connection or LAG.  
+     */
+    state?: State;
+    /**
+     * The date that the MAC Security (MACsec) secret key takes effect. The value is displayed in UTC format.
+     */
+    startOn?: StartOnDate;
+  }
+  export type MacSecKeyList = MacSecKey[];
   export type MaxResultSetSize = number;
   export interface NewBGPPeer {
     /**
@@ -1998,10 +2134,12 @@ declare namespace DirectConnect {
   export type OwnerAccount = string;
   export type PaginationToken = string;
   export type PartnerName = string;
+  export type PortEncryptionStatus = string;
   export type PortSpeed = string;
   export type ProviderList = ProviderName[];
   export type ProviderName = string;
   export type Region = string;
+  export type RequestMACSec = boolean;
   export type ResourceArn = string;
   export type ResourceArnList = ResourceArn[];
   export interface ResourceTag {
@@ -2023,6 +2161,7 @@ declare namespace DirectConnect {
   }
   export type RouteFilterPrefixList = RouteFilterPrefix[];
   export type RouterConfig = string;
+  export type SecretARN = string;
   export interface StartBgpFailoverTestRequest {
     /**
      * The ID of the virtual interface you want to test.
@@ -2043,7 +2182,9 @@ declare namespace DirectConnect {
      */
     virtualInterfaceTest?: VirtualInterfaceTestHistory;
   }
+  export type StartOnDate = string;
   export type StartTime = Date;
+  export type State = string;
   export type StateChangeError = string;
   export interface StopBgpFailoverTestRequest {
     /**
@@ -2097,6 +2238,20 @@ declare namespace DirectConnect {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateConnectionRequest {
+    /**
+     * The ID of the dedicated connection. You can use DescribeConnections to retrieve the connection ID.
+     */
+    connectionId: ConnectionId;
+    /**
+     * The name of the connection.
+     */
+    connectionName?: ConnectionName;
+    /**
+     * The connection MAC Security (MACsec) encryption mode. The valid values are no_encrypt, should_encrypt, and must_encrypt.
+     */
+    encryptionMode?: EncryptionMode;
+  }
   export interface UpdateDirectConnectGatewayAssociationRequest {
     /**
      * The ID of the Direct Connect gateway association.
@@ -2127,6 +2282,10 @@ declare namespace DirectConnect {
      * The minimum number of physical connections that must be operational for the LAG itself to be operational.
      */
     minimumLinks?: Count;
+    /**
+     * The LAG MAC Security (MACsec) encryption mode. AWS applies the value to all connections which are part of the LAG.
+     */
+    encryptionMode?: EncryptionMode;
   }
   export interface UpdateVirtualInterfaceAttributesRequest {
     /**

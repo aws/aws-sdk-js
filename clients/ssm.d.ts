@@ -21,6 +21,14 @@ declare class SSM extends Service {
    */
   addTagsToResource(callback?: (err: AWSError, data: SSM.Types.AddTagsToResourceResult) => void): Request<SSM.Types.AddTagsToResourceResult, AWSError>;
   /**
+   * Associates a related resource to a Systems Manager OpsCenter OpsItem. For example, you can associate an Incident Manager incident or analysis with an OpsItem. Incident Manager is a capability of AWS Systems Manager.
+   */
+  associateOpsItemRelatedItem(params: SSM.Types.AssociateOpsItemRelatedItemRequest, callback?: (err: AWSError, data: SSM.Types.AssociateOpsItemRelatedItemResponse) => void): Request<SSM.Types.AssociateOpsItemRelatedItemResponse, AWSError>;
+  /**
+   * Associates a related resource to a Systems Manager OpsCenter OpsItem. For example, you can associate an Incident Manager incident or analysis with an OpsItem. Incident Manager is a capability of AWS Systems Manager.
+   */
+  associateOpsItemRelatedItem(callback?: (err: AWSError, data: SSM.Types.AssociateOpsItemRelatedItemResponse) => void): Request<SSM.Types.AssociateOpsItemRelatedItemResponse, AWSError>;
+  /**
    * Attempts to cancel the command specified by the Command ID. There is no guarantee that the command will be terminated and the underlying process stopped.
    */
   cancelCommand(params: SSM.Types.CancelCommandRequest, callback?: (err: AWSError, data: SSM.Types.CancelCommandResult) => void): Request<SSM.Types.CancelCommandResult, AWSError>;
@@ -477,6 +485,14 @@ declare class SSM extends Service {
    */
   describeSessions(callback?: (err: AWSError, data: SSM.Types.DescribeSessionsResponse) => void): Request<SSM.Types.DescribeSessionsResponse, AWSError>;
   /**
+   * Deletes the association between an OpsItem and a related resource. For example, this API action can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability of AWS Systems Manager.
+   */
+  disassociateOpsItemRelatedItem(params: SSM.Types.DisassociateOpsItemRelatedItemRequest, callback?: (err: AWSError, data: SSM.Types.DisassociateOpsItemRelatedItemResponse) => void): Request<SSM.Types.DisassociateOpsItemRelatedItemResponse, AWSError>;
+  /**
+   * Deletes the association between an OpsItem and a related resource. For example, this API action can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability of AWS Systems Manager.
+   */
+  disassociateOpsItemRelatedItem(callback?: (err: AWSError, data: SSM.Types.DisassociateOpsItemRelatedItemResponse) => void): Request<SSM.Types.DisassociateOpsItemRelatedItemResponse, AWSError>;
+  /**
    * Get detailed information about a particular Automation execution.
    */
   getAutomationExecution(params: SSM.Types.GetAutomationExecutionRequest, callback?: (err: AWSError, data: SSM.Types.GetAutomationExecutionResult) => void): Request<SSM.Types.GetAutomationExecutionResult, AWSError>;
@@ -493,11 +509,11 @@ declare class SSM extends Service {
    */
   getCalendarState(callback?: (err: AWSError, data: SSM.Types.GetCalendarStateResponse) => void): Request<SSM.Types.GetCalendarStateResponse, AWSError>;
   /**
-   * Returns detailed information about command execution for an invocation or plugin. 
+   * Returns detailed information about command execution for an invocation or plugin.  GetCommandInvocation only gives the execution status of a plugin in a document. To get the command execution status on a specific instance, use ListCommandInvocations. To get the command execution status across instances, use ListCommands.
    */
   getCommandInvocation(params: SSM.Types.GetCommandInvocationRequest, callback?: (err: AWSError, data: SSM.Types.GetCommandInvocationResult) => void): Request<SSM.Types.GetCommandInvocationResult, AWSError>;
   /**
-   * Returns detailed information about command execution for an invocation or plugin. 
+   * Returns detailed information about command execution for an invocation or plugin.  GetCommandInvocation only gives the execution status of a plugin in a document. To get the command execution status on a specific instance, use ListCommandInvocations. To get the command execution status across instances, use ListCommands.
    */
   getCommandInvocation(callback?: (err: AWSError, data: SSM.Types.GetCommandInvocationResult) => void): Request<SSM.Types.GetCommandInvocationResult, AWSError>;
   /**
@@ -669,11 +685,11 @@ declare class SSM extends Service {
    */
   getServiceSetting(callback?: (err: AWSError, data: SSM.Types.GetServiceSettingResult) => void): Request<SSM.Types.GetServiceSettingResult, AWSError>;
   /**
-   * A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions.  Parameter labels have the following requirements and restrictions.   A version of a parameter can have a maximum of 10 labels.   You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.   You can move a label from one version of a parameter to another.   You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.   You can't delete a parameter label. If you no longer want to use a parameter label, then you must move it to a different version of a parameter.   A label can have a maximum of 100 characters.   Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).   Labels can't begin with a number, "aws," or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.  
+   * A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions.  Parameter labels have the following requirements and restrictions.   A version of a parameter can have a maximum of 10 labels.   You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.   You can move a label from one version of a parameter to another.   You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.   If you no longer want to use a parameter label, then you can either delete it or move it to a different version of a parameter.   A label can have a maximum of 100 characters.   Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).   Labels can't begin with a number, "aws," or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.  
    */
   labelParameterVersion(params: SSM.Types.LabelParameterVersionRequest, callback?: (err: AWSError, data: SSM.Types.LabelParameterVersionResult) => void): Request<SSM.Types.LabelParameterVersionResult, AWSError>;
   /**
-   * A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions.  Parameter labels have the following requirements and restrictions.   A version of a parameter can have a maximum of 10 labels.   You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.   You can move a label from one version of a parameter to another.   You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.   You can't delete a parameter label. If you no longer want to use a parameter label, then you must move it to a different version of a parameter.   A label can have a maximum of 100 characters.   Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).   Labels can't begin with a number, "aws," or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.  
+   * A parameter label is a user-defined alias to help you manage different versions of a parameter. When you modify a parameter, Systems Manager automatically saves a new version and increments the version number by one. A label can help you remember the purpose of a parameter when there are multiple versions.  Parameter labels have the following requirements and restrictions.   A version of a parameter can have a maximum of 10 labels.   You can't attach the same label to different versions of the same parameter. For example, if version 1 has the label Production, then you can't attach Production to version 2.   You can move a label from one version of a parameter to another.   You can't create a label when you create a new parameter. You must attach a label to a specific version of a parameter.   If you no longer want to use a parameter label, then you can either delete it or move it to a different version of a parameter.   A label can have a maximum of 100 characters.   Labels can contain letters (case sensitive), numbers, periods (.), hyphens (-), or underscores (_).   Labels can't begin with a number, "aws," or "ssm" (not case sensitive). If a label fails to meet these requirements, then the label is not associated with a parameter and the system displays it in the list of InvalidLabels.  
    */
   labelParameterVersion(callback?: (err: AWSError, data: SSM.Types.LabelParameterVersionResult) => void): Request<SSM.Types.LabelParameterVersionResult, AWSError>;
   /**
@@ -764,6 +780,14 @@ declare class SSM extends Service {
    * Returns a list of all OpsItem events in the current AWS account and Region. You can limit the results to events associated with specific OpsItems by specifying a filter.
    */
   listOpsItemEvents(callback?: (err: AWSError, data: SSM.Types.ListOpsItemEventsResponse) => void): Request<SSM.Types.ListOpsItemEventsResponse, AWSError>;
+  /**
+   * Lists all related-item resources associated with an OpsItem.
+   */
+  listOpsItemRelatedItems(params: SSM.Types.ListOpsItemRelatedItemsRequest, callback?: (err: AWSError, data: SSM.Types.ListOpsItemRelatedItemsResponse) => void): Request<SSM.Types.ListOpsItemRelatedItemsResponse, AWSError>;
+  /**
+   * Lists all related-item resources associated with an OpsItem.
+   */
+  listOpsItemRelatedItems(callback?: (err: AWSError, data: SSM.Types.ListOpsItemRelatedItemsResponse) => void): Request<SSM.Types.ListOpsItemRelatedItemsResponse, AWSError>;
   /**
    * Systems Manager calls this API action when displaying all Application Manager OpsMetadata objects or blobs.
    */
@@ -948,6 +972,14 @@ declare class SSM extends Service {
    * Permanently ends a session and closes the data connection between the Session Manager client and SSM Agent on the instance. A terminated session cannot be resumed.
    */
   terminateSession(callback?: (err: AWSError, data: SSM.Types.TerminateSessionResponse) => void): Request<SSM.Types.TerminateSessionResponse, AWSError>;
+  /**
+   * Remove a label or labels from a parameter.
+   */
+  unlabelParameterVersion(params: SSM.Types.UnlabelParameterVersionRequest, callback?: (err: AWSError, data: SSM.Types.UnlabelParameterVersionResult) => void): Request<SSM.Types.UnlabelParameterVersionResult, AWSError>;
+  /**
+   * Remove a label or labels from a parameter.
+   */
+  unlabelParameterVersion(callback?: (err: AWSError, data: SSM.Types.UnlabelParameterVersionResult) => void): Request<SSM.Types.UnlabelParameterVersionResult, AWSError>;
   /**
    * Updates an association. You can update the association name and version, the document version, schedule, parameters, and Amazon S3 output.  In order to call this API action, your IAM user account, group, or role must be configured with permission to call the DescribeAssociation API action. If you don't have permission to call DescribeAssociation, then you receive the following error: An error occurred (AccessDeniedException) when calling the UpdateAssociation operation: User: &lt;user_arn&gt; is not authorized to perform: ssm:DescribeAssociation on resource: &lt;resource_arn&gt;   When you update an association, the association immediately runs against the specified targets. 
    */
@@ -1141,7 +1173,7 @@ declare namespace SSM {
      */
     ResourceId: ResourceId;
     /**
-     *  One or more tags. The value parameter is required, but if you don't want the tag to have a value, specify the parameter with no value, and we set the value to an empty string.   Do not enter personally identifiable information in this field. 
+     * One or more tags. The value parameter is required.  Do not enter personally identifiable information in this field. 
      */
     Tags: TagList;
   }
@@ -1152,6 +1184,30 @@ declare namespace SSM {
   export type AllowedPattern = string;
   export type ApplyOnlyAtCronInterval = boolean;
   export type ApproveAfterDays = number;
+  export interface AssociateOpsItemRelatedItemRequest {
+    /**
+     * The ID of the OpsItem to which you want to associate a resource as a related item.
+     */
+    OpsItemId: OpsItemId;
+    /**
+     * The type of association that you want to create between an OpsItem and a resource. OpsCenter supports IsParentOf and RelatesTo association types.
+     */
+    AssociationType: OpsItemRelatedItemAssociationType;
+    /**
+     * The type of resource that you want to associate with an OpsItem. OpsCenter supports the following types:  AWS::SSMIncidents::IncidentRecord: an Incident Manager incident. Incident Manager is a capability of AWS Systems Manager.  AWS::SSM::Document: a Systems Manager (SSM) document.
+     */
+    ResourceType: OpsItemRelatedItemAssociationResourceType;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS resource that you want to associate with the OpsItem.
+     */
+    ResourceUri: OpsItemRelatedItemAssociationResourceUri;
+  }
+  export interface AssociateOpsItemRelatedItemResponse {
+    /**
+     * The association ID.
+     */
+    AssociationId?: OpsItemRelatedItemAssociationId;
+  }
   export interface Association {
     /**
      * The name of the Systems Manager document.
@@ -1186,7 +1242,7 @@ declare namespace SSM {
      */
     Overview?: AssociationOverview;
     /**
-     * A cron expression that specifies a schedule when the association runs.
+     * A cron expression that specifies a schedule when the association runs. The schedule runs in Coordinated Universal Time (UTC).
      */
     ScheduleExpression?: ScheduleExpression;
     /**
@@ -1284,6 +1340,10 @@ declare namespace SSM {
      * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
+    /**
+     * The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents your associations are gated under. The associations only run when that Change Calendar is open. For more information, see AWS Systems Manager Change Calendar.
+     */
+    CalendarNames?: CalendarNameOrARNList;
     /**
      * The combination of AWS Regions and AWS accounts where you want to run the association.
      */
@@ -1512,6 +1572,10 @@ declare namespace SSM {
      * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
+    /**
+     * The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents your associations are gated under. The associations for this version only run when that Change Calendar is open. For more information, see AWS Systems Manager Change Calendar.
+     */
+    CalendarNames?: CalendarNameOrARNList;
     /**
      * The combination of AWS Regions and AWS accounts where you wanted to run the association when this association version was created.
      */
@@ -1902,6 +1966,7 @@ declare namespace SSM {
      */
     WindowExecutionId?: MaintenanceWindowExecutionId;
   }
+  export type ChangeDetailsValue = string;
   export type ChangeRequestName = string;
   export type ClientToken = string;
   export type CloudWatchLogGroupName = string;
@@ -2077,6 +2142,9 @@ declare namespace SSM {
      * The URL to the plugin's StdErr file in Amazon S3, if the S3 bucket was defined for the parent command. For an invocation, StandardErrorUrl is populated if there is just one plugin defined for the command, and the S3 bucket was defined for the command.
      */
     StandardErrorUrl?: Url;
+    /**
+     * Plugins processed by the command.
+     */
     CommandPlugins?: CommandPluginList;
     /**
      * The IAM service role that Run Command uses to act on your behalf when sending notifications about command status changes on a per instance basis.
@@ -2308,7 +2376,7 @@ declare namespace SSM {
      */
     RegistrationLimit?: RegistrationLimit;
     /**
-     * The date by which this activation request should expire. The default value is 24 hours.
+     * The date by which this activation request should expire, in timestamp format, such as "2021-07-07T00:00:00". You can specify a date up to 30 days in advance. If you don't provide an expiration date, the activation code expires in 24 hours.
      */
     ExpirationDate?: ExpirationDate;
     /**
@@ -2391,6 +2459,10 @@ declare namespace SSM {
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
     /**
+     * The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents your associations are gated under. The associations only run when that Change Calendar is open. For more information, see AWS Systems Manager Change Calendar.
+     */
+    CalendarNames?: CalendarNameOrARNList;
+    /**
      * Use this action to create an association in multiple Regions and multiple accounts.
      */
     TargetLocations?: TargetLocations;
@@ -2459,9 +2531,13 @@ declare namespace SSM {
      */
     SyncCompliance?: AssociationSyncCompliance;
     /**
-     * By default, when you create a new associations, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
+     * By default, when you create a new association, the system runs it immediately after it is created and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you create it. This parameter is not supported for rate expressions.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
+    /**
+     * The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents you want to gate your associations under. The associations only run when that Change Calendar is open. For more information, see AWS Systems Manager Change Calendar.
+     */
+    CalendarNames?: CalendarNameOrARNList;
     /**
      * A location is a combination of AWS Regions and AWS accounts where you want to run the association. Use this action to create an association in multiple Regions and multiple accounts.
      */
@@ -2490,6 +2566,10 @@ declare namespace SSM {
      * A name for the Systems Manager document.  You can't use the following strings as document name prefixes. These are reserved by AWS for use as document name prefixes:    aws-     amazon     amzn    
      */
     Name: DocumentName;
+    /**
+     * An optional field where you can specify a friendly name for the Systems Manager document. This value can differ for each version of the document. You can update this value at a later time using the UpdateDocument action.
+     */
+    DisplayName?: DocumentDisplayName;
     /**
      * An optional field specifying the version of the artifact you are creating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
      */
@@ -3124,7 +3204,7 @@ declare namespace SSM {
      */
     MaxResults?: MaxResults;
     /**
-     * A boolean that indicates whether to list step executions in reverse order by start time. The default value is false.
+     * Indicates whether to list step executions in reverse order by start time. The default value is 'false'.
      */
     ReverseOrder?: Boolean;
   }
@@ -3769,6 +3849,18 @@ declare namespace SSM {
      * The number of instances with NotApplicable patches beyond the supported limit, which are not reported by name to Systems Manager Inventory.
      */
     InstancesWithUnreportedNotApplicablePatches?: Integer;
+    /**
+     * The number of instances where patches that are specified as "Critical" for compliance reporting in the patch baseline are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     */
+    InstancesWithCriticalNonCompliantPatches?: InstancesCount;
+    /**
+     * The number of instances where patches that are specified as "Security" in a patch advisory are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     */
+    InstancesWithSecurityNonCompliantPatches?: InstancesCount;
+    /**
+     * The number of instances with patches installed that are specified as other than "Critical" or "Security" but are not compliant with the patch baseline. The status of these instances is NON_COMPLIANT.
+     */
+    InstancesWithOtherNonCompliantPatches?: InstancesCount;
   }
   export interface DescribePatchGroupsRequest {
     /**
@@ -3855,6 +3947,18 @@ declare namespace SSM {
     NextToken?: NextToken;
   }
   export type DescriptionInDocument = string;
+  export interface DisassociateOpsItemRelatedItemRequest {
+    /**
+     * The ID of the OpsItem for which you want to delete an association between the OpsItem and a related resource.
+     */
+    OpsItemId: OpsItemId;
+    /**
+     * The ID of the association for which you want to delete an association between the OpsItem and a related resource.
+     */
+    AssociationId: OpsItemRelatedItemAssociationId;
+  }
+  export interface DisassociateOpsItemRelatedItemResponse {
+  }
   export type DocumentARN = string;
   export type DocumentAuthor = string;
   export type DocumentContent = string;
@@ -3889,6 +3993,10 @@ declare namespace SSM {
      * The name of the Systems Manager document.
      */
     Name?: DocumentARN;
+    /**
+     * The friendly name of the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see UpdateDocument.
+     */
+    DisplayName?: DocumentDisplayName;
     /**
      * The version of the artifact associated with the document.
      */
@@ -3982,6 +4090,7 @@ declare namespace SSM {
      */
     ReviewStatus?: ReviewStatus;
   }
+  export type DocumentDisplayName = string;
   export interface DocumentFilter {
     /**
      * The name of the filter.
@@ -4003,6 +4112,14 @@ declare namespace SSM {
      * The name of the Systems Manager document.
      */
     Name?: DocumentARN;
+    /**
+     * The date the Systems Manager document was created.
+     */
+    CreatedDate?: DateTime;
+    /**
+     * An optional field where you can specify a friendly name for the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see UpdateDocument.
+     */
+    DisplayName?: DocumentDisplayName;
     /**
      * The AWS user account that created the document.
      */
@@ -4163,13 +4280,17 @@ declare namespace SSM {
   export type DocumentSha1 = string;
   export type DocumentStatus = "Creating"|"Active"|"Updating"|"Deleting"|"Failed"|string;
   export type DocumentStatusInformation = string;
-  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|"ApplicationConfiguration"|"ApplicationConfigurationSchema"|"DeploymentStrategy"|"ChangeCalendar"|"Automation.ChangeTemplate"|string;
+  export type DocumentType = "Command"|"Policy"|"Automation"|"Session"|"Package"|"ApplicationConfiguration"|"ApplicationConfigurationSchema"|"DeploymentStrategy"|"ChangeCalendar"|"Automation.ChangeTemplate"|"ProblemAnalysis"|"ProblemAnalysisTemplate"|string;
   export type DocumentVersion = string;
   export interface DocumentVersionInfo {
     /**
      * The document name.
      */
     Name?: DocumentName;
+    /**
+     * The friendly name of the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see UpdateDocument.
+     */
+    DisplayName?: DocumentDisplayName;
     /**
      * The document version.
      */
@@ -4295,11 +4416,11 @@ declare namespace SSM {
      */
     CommandId: CommandId;
     /**
-     * (Required) The ID of the managed instance targeted by the command. A managed instance can be an EC2 instance or an instance in your hybrid environment that is configured for Systems Manager.
+     * (Required) The ID of the managed instance targeted by the command. A managed instance can be an Amazon Elastic Compute Cloud (Amazon EC2) instance or an instance in your hybrid environment that is configured for AWS Systems Manager.
      */
     InstanceId: InstanceId;
     /**
-     * The name of the plugin for which you want detailed results. If the document contains only one plugin, you can omit the name and details for that plugin are returned. If the document contains more than one plugin, you must specify the name of the plugin for which you want to view details. Plugin names are also referred to as step names in Systems Manager documents. For example, aws:RunShellScript is a plugin.
+     * The name of the plugin for which you want detailed results. If the document contains only one plugin, you can omit the name and details for that plugin. If the document contains more than one plugin, you must specify the name of the plugin for which you want to view details. Plugin names are also referred to as step names in Systems Manager documents. For example, aws:RunShellScript is a plugin. To find the PluginName, check the document content and find the name of the plugin. Alternatively, use ListCommandInvocations with the CommandId and Details parameters. The PluginName is the Name attribute of the CommandPlugin object in the CommandPlugins list.
      */
     PluginName?: CommandPluginName;
   }
@@ -4341,7 +4462,7 @@ declare namespace SSM {
      */
     ExecutionElapsedTime?: StringDateTime;
     /**
-     * The date and time the plugin was finished running. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the InvokedAfter filter.  aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z  If the plugin has not started to run, the string is empty.
+     * The date and time the plugin finished running. Date and time are written in ISO 8601 format. For example, June 7, 2017 is represented as 2017-06-7. The following sample AWS CLI command uses the InvokedAfter filter.  aws ssm list-commands --filters key=InvokedAfter,value=2017-06-07T00:00:00Z  If the plugin has not started to run, the string is empty.
      */
     ExecutionEndDateTime?: StringDateTime;
     /**
@@ -4357,7 +4478,7 @@ declare namespace SSM {
      */
     StandardOutputContent?: StandardOutputContent;
     /**
-     * The URL for the complete text written by the plugin to stdout in Amazon S3. If an S3 bucket was not specified, then this string is empty.
+     * The URL for the complete text written by the plugin to stdout in Amazon Simple Storage Service (Amazon S3). If an S3 bucket was not specified, then this string is empty.
      */
     StandardOutputUrl?: Url;
     /**
@@ -4460,6 +4581,14 @@ declare namespace SSM {
      * The name of the Systems Manager document.
      */
     Name?: DocumentARN;
+    /**
+     * The date the Systems Manager document was created.
+     */
+    CreatedDate?: DateTime;
+    /**
+     * The friendly name of the Systems Manager document. This value can differ for each version of the document. If you want to update this value, see UpdateDocument.
+     */
+    DisplayName?: DocumentDisplayName;
     /**
      * The version of the artifact associated with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
      */
@@ -5134,7 +5263,7 @@ declare namespace SSM {
   }
   export interface GetServiceSettingRequest {
     /**
-     * The ID of the service setting to get. The setting ID can be /ssm/automation/customer-script-log-destination, /ssm/automation/customer-script-log-group-name, /ssm/parameter-store/default-parameter-tier, /ssm/parameter-store/high-throughput-enabled, or /ssm/managed-instance/activation-tier.
+     * The ID of the service setting to get. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled     /ssm/managed-instance/activation-tier   
      */
     SettingId: ServiceSettingId;
   }
@@ -5428,6 +5557,18 @@ declare namespace SSM {
      * Indicates the reboot option specified in the patch baseline.  Reboot options apply to Install operations only. Reboots are not attempted for Patch Manager Scan operations.     RebootIfNeeded: Patch Manager tries to reboot the instance if it installed any patches, or if any patches are detected with a status of InstalledPendingReboot.    NoReboot: Patch Manager attempts to install missing packages without trying to reboot the system. Patches installed with this option are assigned a status of InstalledPendingReboot. These patches might not be in effect until a reboot is performed.  
      */
     RebootOption?: RebootOption;
+    /**
+     * The number of instances where patches that are specified as "Critical" for compliance reporting in the patch baseline are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     */
+    CriticalNonCompliantCount?: PatchCriticalNonCompliantCount;
+    /**
+     * The number of instances where patches that are specified as "Security" in a patch advisory are not installed. These patches might be missing, have failed installation, were rejected, or were installed but awaiting a required instance reboot. The status of these instances is NON_COMPLIANT.
+     */
+    SecurityNonCompliantCount?: PatchSecurityNonCompliantCount;
+    /**
+     * The number of instances with patches installed that are specified as other than "Critical" or "Security" but are not compliant with the patch baseline. The status of these instances is NON_COMPLIANT.
+     */
+    OtherNonCompliantCount?: PatchOtherNonCompliantCount;
   }
   export interface InstancePatchStateFilter {
     /**
@@ -5770,7 +5911,7 @@ declare namespace SSM {
      */
     Filters?: CommandFilterList;
     /**
-     * (Optional) If set this returns the response of the command executions and any command output. By default this is set to False. 
+     * (Optional) If set this returns the response of the command executions and any command output. The default value is 'false'. 
      */
     Details?: Boolean;
   }
@@ -6039,6 +6180,34 @@ declare namespace SSM {
      * A list of event information for the specified OpsItems.
      */
     Summaries?: OpsItemEventSummaries;
+  }
+  export interface ListOpsItemRelatedItemsRequest {
+    /**
+     * The ID of the OpsItem for which you want to list all related-item resources.
+     */
+    OpsItemId?: OpsItemId;
+    /**
+     * One or more OpsItem filters. Use a filter to return a more specific list of results. 
+     */
+    Filters?: OpsItemRelatedItemsFilters;
+    /**
+     * The maximum number of items to return for this call. The call also returns a token that you can specify in a subsequent call to get the next set of results.
+     */
+    MaxResults?: OpsItemRelatedItemsMaxResults;
+    /**
+     * The token for the next set of items to return. (You received this token from a previous call.)
+     */
+    NextToken?: String;
+  }
+  export interface ListOpsItemRelatedItemsResponse {
+    /**
+     * The token for the next set of items to return. Use this token to get the next set of results.
+     */
+    NextToken?: String;
+    /**
+     * A list of related-item resources for the specified OpsItem.
+     */
+    Summaries?: OpsItemRelatedItemSummaries;
   }
   export type ListOpsMetadataMaxResults = number;
   export interface ListOpsMetadataRequest {
@@ -6896,6 +7065,63 @@ declare namespace SSM {
   export type OpsItemOperationalData = {[key: string]: OpsItemDataValue};
   export type OpsItemOpsDataKeysList = String[];
   export type OpsItemPriority = number;
+  export type OpsItemRelatedItemAssociationId = string;
+  export type OpsItemRelatedItemAssociationResourceType = string;
+  export type OpsItemRelatedItemAssociationResourceUri = string;
+  export type OpsItemRelatedItemAssociationType = string;
+  export type OpsItemRelatedItemSummaries = OpsItemRelatedItemSummary[];
+  export interface OpsItemRelatedItemSummary {
+    /**
+     * The OpsItem ID.
+     */
+    OpsItemId?: OpsItemId;
+    /**
+     * The association ID.
+     */
+    AssociationId?: OpsItemRelatedItemAssociationId;
+    /**
+     * The resource type.
+     */
+    ResourceType?: OpsItemRelatedItemAssociationResourceType;
+    /**
+     * The association type.
+     */
+    AssociationType?: OpsItemRelatedItemAssociationType;
+    /**
+     * The Amazon Resource Name (ARN) of the related-item resource.
+     */
+    ResourceUri?: OpsItemRelatedItemAssociationResourceUri;
+    CreatedBy?: OpsItemIdentity;
+    /**
+     * The time the related-item association was created.
+     */
+    CreatedTime?: DateTime;
+    LastModifiedBy?: OpsItemIdentity;
+    /**
+     * The time the related-item association was last updated.
+     */
+    LastModifiedTime?: DateTime;
+  }
+  export interface OpsItemRelatedItemsFilter {
+    /**
+     * The name of the filter key. Supported values include ResourceUri, ResourceType, or AssociationId.
+     */
+    Key: OpsItemRelatedItemsFilterKey;
+    /**
+     * The values for the filter.
+     */
+    Values: OpsItemRelatedItemsFilterValues;
+    /**
+     * The operator used by the filter call. The only supported operator is EQUAL.
+     */
+    Operator: OpsItemRelatedItemsFilterOperator;
+  }
+  export type OpsItemRelatedItemsFilterKey = "ResourceType"|"AssociationId"|"ResourceUri"|string;
+  export type OpsItemRelatedItemsFilterOperator = "Equal"|string;
+  export type OpsItemRelatedItemsFilterValue = string;
+  export type OpsItemRelatedItemsFilterValues = OpsItemRelatedItemsFilterValue[];
+  export type OpsItemRelatedItemsFilters = OpsItemRelatedItemsFilter[];
+  export type OpsItemRelatedItemsMaxResults = number;
   export type OpsItemSeverity = string;
   export type OpsItemSource = string;
   export type OpsItemStatus = "Open"|"InProgress"|"Resolved"|"Pending"|"TimedOut"|"Cancelling"|"Cancelled"|"Failed"|"CompletedWithSuccess"|"CompletedWithFailure"|"Scheduled"|"RunbookInProgress"|"PendingChangeCalendarOverride"|"ChangeCalendarOverrideApproved"|"ChangeCalendarOverrideRejected"|"PendingApproval"|"Approved"|"Rejected"|string;
@@ -7400,6 +7626,7 @@ declare namespace SSM {
   export type PatchComplianceLevel = "CRITICAL"|"HIGH"|"MEDIUM"|"LOW"|"INFORMATIONAL"|"UNSPECIFIED"|string;
   export type PatchComplianceMaxResults = number;
   export type PatchContentUrl = string;
+  export type PatchCriticalNonCompliantCount = number;
   export type PatchDeploymentStatus = "APPROVED"|"PENDING_APPROVAL"|"EXPLICIT_APPROVED"|"EXPLICIT_REJECTED"|string;
   export type PatchDescription = string;
   export type PatchEpoch = number;
@@ -7466,6 +7693,7 @@ declare namespace SSM {
   export type PatchOrchestratorFilterList = PatchOrchestratorFilter[];
   export type PatchOrchestratorFilterValue = string;
   export type PatchOrchestratorFilterValues = PatchOrchestratorFilterValue[];
+  export type PatchOtherNonCompliantCount = number;
   export type PatchProduct = string;
   export type PatchProductFamily = string;
   export type PatchPropertiesList = PatchPropertyEntry[];
@@ -7502,6 +7730,7 @@ declare namespace SSM {
     PatchRules: PatchRuleList;
   }
   export type PatchRuleList = PatchRule[];
+  export type PatchSecurityNonCompliantCount = number;
   export type PatchSet = "OS"|"APPLICATION"|string;
   export type PatchSeverity = string;
   export interface PatchSource {
@@ -7639,7 +7868,7 @@ declare namespace SSM {
      */
     KeyId?: ParameterKeyId;
     /**
-     * Overwrite an existing parameter. If not specified, will default to "false".
+     * Overwrite an existing parameter. The default value is 'false'.
      */
     Overwrite?: Boolean;
     /**
@@ -7836,7 +8065,7 @@ declare namespace SSM {
   }
   export interface ResetServiceSettingRequest {
     /**
-     * The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be /ssm/automation/customer-script-log-destination, /ssm/automation/customer-script-log-group-name, /ssm/parameter-store/default-parameter-tier, /ssm/parameter-store/high-throughput-enabled, or /ssm/managed-instance/activation-tier. For example, arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled.
+     * The Amazon Resource Name (ARN) of the service setting to reset. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled     /ssm/managed-instance/activation-tier   
      */
     SettingId: ServiceSettingId;
   }
@@ -7912,6 +8141,7 @@ declare namespace SSM {
     DestinationDataSharingType?: ResourceDataSyncDestinationDataSharingType;
   }
   export type ResourceDataSyncDestinationDataSharingType = string;
+  export type ResourceDataSyncEnableAllOpsDataSources = boolean;
   export type ResourceDataSyncIncludeFutureRegions = boolean;
   export interface ResourceDataSyncItem {
     /**
@@ -7999,7 +8229,7 @@ declare namespace SSM {
   export type ResourceDataSyncS3Region = string;
   export interface ResourceDataSyncSource {
     /**
-     * The type of data source for the resource data sync. SourceType is either AwsOrganizations (if an organization is present in AWS Organizations) or singleAccountMultiRegions.
+     * The type of data source for the resource data sync. SourceType is either AwsOrganizations (if an organization is present in AWS Organizations) or SingleAccountMultiRegions.
      */
     SourceType: ResourceDataSyncSourceType;
     /**
@@ -8014,6 +8244,10 @@ declare namespace SSM {
      * Whether to automatically synchronize and aggregate data from new AWS Regions when those Regions come online.
      */
     IncludeFutureRegions?: ResourceDataSyncIncludeFutureRegions;
+    /**
+     * When you create a resource data sync, if you choose one of the AWS Organizations options, then Systems Manager automatically enables all OpsData sources in the selected AWS Regions for all AWS accounts in your organization (or in the selected organization units). For more information, see About multiple account and Region resource data syncs in the AWS Systems Manager User Guide.
+     */
+    EnableAllOpsDataSources?: ResourceDataSyncEnableAllOpsDataSources;
   }
   export type ResourceDataSyncSourceRegion = string;
   export type ResourceDataSyncSourceRegionList = ResourceDataSyncSourceRegion[];
@@ -8039,6 +8273,10 @@ declare namespace SSM {
      * The data type name for including resource data sync state. There are four sync states:  OrganizationNotExists: Your organization doesn't exist.  NoPermissions: The system can't locate the service-linked role. This role is automatically created when a user creates a resource data sync in Explorer.  InvalidOrganizationalUnit: You specified or selected an invalid unit in the resource data sync configuration.  TrustedAccessDisabled: You disabled Systems Manager access in the organization in AWS Organizations.
      */
     State?: ResourceDataSyncState;
+    /**
+     * When you create a resource data sync, if you choose one of the AWS Organizations options, then Systems Manager automatically enables all OpsData sources in the selected AWS Regions for all AWS accounts in your organization (or in the selected organization units). For more information, see About multiple account and Region resource data syncs in the AWS Systems Manager User Guide.
+     */
+    EnableAllOpsDataSources?: ResourceDataSyncEnableAllOpsDataSources;
   }
   export type ResourceDataSyncState = string;
   export type ResourceDataSyncType = string;
@@ -8489,6 +8727,14 @@ declare namespace SSM {
      * Optional metadata that you assign to a resource. You can specify a maximum of five tags for a change request. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a change request to identify an environment or target AWS Region. In this case, you could specify the following key-value pairs:    Key=Environment,Value=Production     Key=Region,Value=us-east-2   
      */
     Tags?: TagList;
+    /**
+     * The time that the requester expects the runbook workflow related to the change request to complete. The time is an estimate only that the requester provides for reviewers.
+     */
+    ScheduledEndTime?: DateTime;
+    /**
+     * User-provided details about the change. If no details are provided, content specified in the Template information section of the associated change template is added.
+     */
+    ChangeDetails?: ChangeDetailsValue;
   }
   export interface StartChangeRequestExecutionResult {
     /**
@@ -8669,7 +8915,7 @@ declare namespace SSM {
      */
     Key?: TargetKey;
     /**
-     * User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to run a command on instances that include EC2 tags of ServerRole,WebServer. 
+     * User-defined criteria that maps to Key. For example, if you specified tag:ServerRole, you could specify value:WebServer to run a command on instances that include EC2 tags of ServerRole,WebServer.  Depending on the type of Target, the maximum number of values for a Key might be lower than the global maximum of 50.
      */
     Values?: TargetValues;
   }
@@ -8724,6 +8970,30 @@ declare namespace SSM {
   export type TokenValue = string;
   export type TotalCount = number;
   export type UUID = string;
+  export interface UnlabelParameterVersionRequest {
+    /**
+     * The parameter name of which you want to delete one or more labels.
+     */
+    Name: PSParameterName;
+    /**
+     * The specific version of the parameter which you want to delete one or more labels from. If it is not present, the call will fail.
+     */
+    ParameterVersion: PSParameterVersion;
+    /**
+     * One or more labels to delete from the specified parameter version.
+     */
+    Labels: ParameterLabelList;
+  }
+  export interface UnlabelParameterVersionResult {
+    /**
+     * A list of all labels deleted from the parameter.
+     */
+    RemovedLabels?: ParameterLabelList;
+    /**
+     * The labels that are not attached to the given parameter version.
+     */
+    InvalidLabels?: ParameterLabelList;
+  }
   export interface UpdateAssociationRequest {
     /**
      * The ID of the association you want to update. 
@@ -8785,6 +9055,10 @@ declare namespace SSM {
      * By default, when you update an association, the system runs it immediately after it is updated and then according to the schedule you specified. Specify this option if you don't want an association to run immediately after you update it. This parameter is not supported for rate expressions. Also, if you specified this option when you created the association, you can reset it. To do so, specify the no-apply-only-at-cron-interval parameter when you update the association from the command line. This parameter forces the association to run immediately after updating it and according to the interval specified.
      */
     ApplyOnlyAtCronInterval?: ApplyOnlyAtCronInterval;
+    /**
+     * The names or Amazon Resource Names (ARNs) of the Systems Manager Change Calendar type documents you want to gate your associations under. The associations only run when that Change Calendar is open. For more information, see AWS Systems Manager Change Calendar.
+     */
+    CalendarNames?: CalendarNameOrARNList;
     /**
      * A location is a combination of AWS Regions and AWS accounts where you want to run the association. Use this action to update an association in multiple Regions and multiple accounts.
      */
@@ -8858,15 +9132,19 @@ declare namespace SSM {
      */
     Attachments?: AttachmentsSourceList;
     /**
-     * The name of the document that you want to update.
+     * The name of the Systems Manager document that you want to update.
      */
     Name: DocumentName;
+    /**
+     * The friendly name of the Systems Manager document that you want to update. This value can differ for each version of the document. If you do not specify a value for this parameter in your request, the existing value is applied to the new document version.
+     */
+    DisplayName?: DocumentDisplayName;
     /**
      * An optional field specifying the version of the artifact you are updating with the document. For example, "Release 12, Update 6". This value is unique across all versions of a document, and cannot be changed.
      */
     VersionName?: DocumentVersionName;
     /**
-     * (Required) The latest version of the document that you want to update. The latest document version can be specified using the $LATEST variable or by the version number. Updating a previous version of a document is not supported.
+     * The version of the document that you want to update. Currently, Systems Manager supports updating only the latest version of the document. You can specify the version number of the latest version or use the $LATEST variable.
      */
     DocumentVersion?: DocumentVersion;
     /**
@@ -9378,11 +9656,11 @@ declare namespace SSM {
   }
   export interface UpdateServiceSettingRequest {
     /**
-     * The Amazon Resource Name (ARN) of the service setting to reset. For example, arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled     /ssm/managed-instance/activation-tier   
+     * The Amazon Resource Name (ARN) of the service setting to reset. For example, arn:aws:ssm:us-east-1:111122223333:servicesetting/ssm/parameter-store/high-throughput-enabled. The setting ID can be one of the following.    /ssm/automation/customer-script-log-destination     /ssm/automation/customer-script-log-group-name     /ssm/documents/console/public-sharing-permission     /ssm/parameter-store/default-parameter-tier     /ssm/parameter-store/high-throughput-enabled     /ssm/managed-instance/activation-tier   
      */
     SettingId: ServiceSettingId;
     /**
-     * The new value to specify for the service setting. For the /ssm/parameter-store/default-parameter-tier setting ID, the setting value can be one of the following.   Standard   Advanced   Intelligent-Tiering   For the /ssm/parameter-store/high-throughput-enabled, and /ssm/managed-instance/activation-tier setting IDs, the setting value can be true or false. For the /ssm/automation/customer-script-log-destination setting ID, the setting value can be CloudWatch. For the /ssm/automation/customer-script-log-group-name setting ID, the setting value can be the name of a CloudWatch Logs log group.
+     * The new value to specify for the service setting. For the /ssm/parameter-store/default-parameter-tier setting ID, the setting value can be one of the following.   Standard   Advanced   Intelligent-Tiering   For the /ssm/parameter-store/high-throughput-enabled, and /ssm/managed-instance/activation-tier setting IDs, the setting value can be true or false. For the /ssm/automation/customer-script-log-destination setting ID, the setting value can be CloudWatch. For the /ssm/automation/customer-script-log-group-name setting ID, the setting value can be the name of a CloudWatch Logs log group. For the /ssm/documents/console/public-sharing-permission setting ID, the setting value can be Enable or Disable.
      */
     SettingValue: ServiceSettingValue;
   }

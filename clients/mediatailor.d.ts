@@ -266,8 +266,12 @@ declare namespace MediaTailor {
      * The type of authentication used to access content from HttpConfiguration::BaseUrl on your source location. Accepted value: S3_SIGV4. S3_SIGV4 - AWS Signature Version 4 authentication for Amazon S3 hosted virtual-style access. If your source location base URL is an Amazon S3 bucket, MediaTailor can use AWS Signature Version 4 (SigV4) authentication to access the bucket where your source content is stored. Your MediaTailor source location baseURL must follow the S3 virtual hosted-style request URL format. For example, https://bucket-name.s3.Region.amazonaws.com/key-name. Before you can use S3_SIGV4, you must meet these requirements: • You must allow MediaTailor to access your S3 bucket by granting mediatailor.amazonaws.com principal access in IAM. For information about configuring access in IAM, see Access management in the IAM User Guide. • The mediatailor.amazonaws.com service principal must have permissions to read all top level manifests referenced by the VodSource packaging configurations. • The caller of the API must have s3:GetObject IAM permissions to read all top level manifests referenced by your MediaTailor VodSource packaging configurations.
      */
     AccessType?: AccessType;
+    /**
+     * AWS Secrets Manager access token configuration parameters.
+     */
+    SecretsManagerAccessTokenConfiguration?: SecretsManagerAccessTokenConfiguration;
   }
-  export type AccessType = "S3_SIGV4"|string;
+  export type AccessType = "S3_SIGV4"|"SECRETS_MANAGER_ACCESS_TOKEN"|string;
   export interface AdBreak {
     /**
      * The SCTE-35 ad insertion type. Accepted value: SPLICE_INSERT.
@@ -1401,6 +1405,20 @@ declare namespace MediaTailor {
      * The name of the VOD source.
      */
     VodSourceName: __string;
+  }
+  export interface SecretsManagerAccessTokenConfiguration {
+    /**
+     * The name of the HTTP header used to supply the access token in requests to the source location.
+     */
+    HeaderName?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Secrets Manager secret that contains the access token.
+     */
+    SecretArn?: __string;
+    /**
+     * The AWS Secrets Manager SecretString key associated with the access token. MediaTailor uses the key to look up SecretString key and value pair containing the access token.
+     */
+    SecretStringKey?: __string;
   }
   export interface SlateSource {
     /**

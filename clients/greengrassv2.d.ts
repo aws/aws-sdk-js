@@ -12,6 +12,22 @@ declare class GreengrassV2 extends Service {
   constructor(options?: GreengrassV2.Types.ClientConfiguration)
   config: Config & GreengrassV2.Types.ClientConfiguration;
   /**
+   * Associate a list of client devices with a core device. Use this API operation to specify which client devices can discover a core device through cloud discovery. With cloud discovery, client devices connect to AWS IoT Greengrass to retrieve associated core devices' connectivity information and certificates. For more information, see Configure cloud discovery in the AWS IoT Greengrass V2 Developer Guide.  Client devices are local IoT devices that connect to and communicate with an AWS IoT Greengrass core device over MQTT. You can connect client devices to a core device to sync MQTT messages and data to AWS IoT Core and interact with client devices in AWS IoT Greengrass components. For more information, see Interact with local IoT devices in the AWS IoT Greengrass V2 Developer Guide. 
+   */
+  batchAssociateClientDeviceWithCoreDevice(params: GreengrassV2.Types.BatchAssociateClientDeviceWithCoreDeviceRequest, callback?: (err: AWSError, data: GreengrassV2.Types.BatchAssociateClientDeviceWithCoreDeviceResponse) => void): Request<GreengrassV2.Types.BatchAssociateClientDeviceWithCoreDeviceResponse, AWSError>;
+  /**
+   * Associate a list of client devices with a core device. Use this API operation to specify which client devices can discover a core device through cloud discovery. With cloud discovery, client devices connect to AWS IoT Greengrass to retrieve associated core devices' connectivity information and certificates. For more information, see Configure cloud discovery in the AWS IoT Greengrass V2 Developer Guide.  Client devices are local IoT devices that connect to and communicate with an AWS IoT Greengrass core device over MQTT. You can connect client devices to a core device to sync MQTT messages and data to AWS IoT Core and interact with client devices in AWS IoT Greengrass components. For more information, see Interact with local IoT devices in the AWS IoT Greengrass V2 Developer Guide. 
+   */
+  batchAssociateClientDeviceWithCoreDevice(callback?: (err: AWSError, data: GreengrassV2.Types.BatchAssociateClientDeviceWithCoreDeviceResponse) => void): Request<GreengrassV2.Types.BatchAssociateClientDeviceWithCoreDeviceResponse, AWSError>;
+  /**
+   * Disassociate a list of client devices from a core device. After you disassociate a client device from a core device, the client device won't be able to use cloud discovery to retrieve the core device's connectivity information and certificates.
+   */
+  batchDisassociateClientDeviceFromCoreDevice(params: GreengrassV2.Types.BatchDisassociateClientDeviceFromCoreDeviceRequest, callback?: (err: AWSError, data: GreengrassV2.Types.BatchDisassociateClientDeviceFromCoreDeviceResponse) => void): Request<GreengrassV2.Types.BatchDisassociateClientDeviceFromCoreDeviceResponse, AWSError>;
+  /**
+   * Disassociate a list of client devices from a core device. After you disassociate a client device from a core device, the client device won't be able to use cloud discovery to retrieve the core device's connectivity information and certificates.
+   */
+  batchDisassociateClientDeviceFromCoreDevice(callback?: (err: AWSError, data: GreengrassV2.Types.BatchDisassociateClientDeviceFromCoreDeviceResponse) => void): Request<GreengrassV2.Types.BatchDisassociateClientDeviceFromCoreDeviceResponse, AWSError>;
+  /**
    * Cancels a deployment. This operation cancels the deployment for devices that haven't yet received it. If a device already received the deployment, this operation doesn't change anything for that device.
    */
   cancelDeployment(params: GreengrassV2.Types.CancelDeploymentRequest, callback?: (err: AWSError, data: GreengrassV2.Types.CancelDeploymentResponse) => void): Request<GreengrassV2.Types.CancelDeploymentResponse, AWSError>;
@@ -92,11 +108,19 @@ declare class GreengrassV2 extends Service {
    */
   getDeployment(callback?: (err: AWSError, data: GreengrassV2.Types.GetDeploymentResponse) => void): Request<GreengrassV2.Types.GetDeploymentResponse, AWSError>;
   /**
-   * Retrieves a paginated list of all versions for a component.
+   * Retrieves a paginated list of client devices that are associated with a core device.
+   */
+  listClientDevicesAssociatedWithCoreDevice(params: GreengrassV2.Types.ListClientDevicesAssociatedWithCoreDeviceRequest, callback?: (err: AWSError, data: GreengrassV2.Types.ListClientDevicesAssociatedWithCoreDeviceResponse) => void): Request<GreengrassV2.Types.ListClientDevicesAssociatedWithCoreDeviceResponse, AWSError>;
+  /**
+   * Retrieves a paginated list of client devices that are associated with a core device.
+   */
+  listClientDevicesAssociatedWithCoreDevice(callback?: (err: AWSError, data: GreengrassV2.Types.ListClientDevicesAssociatedWithCoreDeviceResponse) => void): Request<GreengrassV2.Types.ListClientDevicesAssociatedWithCoreDeviceResponse, AWSError>;
+  /**
+   * Retrieves a paginated list of all versions for a component. Greater versions are listed first.
    */
   listComponentVersions(params: GreengrassV2.Types.ListComponentVersionsRequest, callback?: (err: AWSError, data: GreengrassV2.Types.ListComponentVersionsResponse) => void): Request<GreengrassV2.Types.ListComponentVersionsResponse, AWSError>;
   /**
-   * Retrieves a paginated list of all versions for a component.
+   * Retrieves a paginated list of all versions for a component. Greater versions are listed first.
    */
   listComponentVersions(callback?: (err: AWSError, data: GreengrassV2.Types.ListComponentVersionsResponse) => void): Request<GreengrassV2.Types.ListComponentVersionsResponse, AWSError>;
   /**
@@ -173,6 +197,71 @@ declare class GreengrassV2 extends Service {
   untagResource(callback?: (err: AWSError, data: GreengrassV2.Types.UntagResourceResponse) => void): Request<GreengrassV2.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace GreengrassV2 {
+  export interface AssociateClientDeviceWithCoreDeviceEntry {
+    /**
+     * The name of the AWS IoT thing that represents the client device to associate.
+     */
+    thingName: IoTThingName;
+  }
+  export type AssociateClientDeviceWithCoreDeviceEntryList = AssociateClientDeviceWithCoreDeviceEntry[];
+  export interface AssociateClientDeviceWithCoreDeviceErrorEntry {
+    /**
+     * The name of the AWS IoT thing whose associate request failed.
+     */
+    thingName?: IoTThingName;
+    /**
+     * The error code for the request.
+     */
+    code?: NonEmptyString;
+    /**
+     * A message that provides additional information about the error.
+     */
+    message?: NonEmptyString;
+  }
+  export type AssociateClientDeviceWithCoreDeviceErrorList = AssociateClientDeviceWithCoreDeviceErrorEntry[];
+  export interface AssociatedClientDevice {
+    /**
+     * The name of the AWS IoT thing that represents the associated client device.
+     */
+    thingName?: IoTThingName;
+    /**
+     * The time that the client device was associated, expressed in ISO 8601 format.
+     */
+    associationTimestamp?: Timestamp;
+  }
+  export type AssociatedClientDeviceList = AssociatedClientDevice[];
+  export interface BatchAssociateClientDeviceWithCoreDeviceRequest {
+    /**
+     * The list of client devices to associate.
+     */
+    entries?: AssociateClientDeviceWithCoreDeviceEntryList;
+    /**
+     * The name of the core device. This is also the name of the AWS IoT thing.
+     */
+    coreDeviceThingName: IoTThingName;
+  }
+  export interface BatchAssociateClientDeviceWithCoreDeviceResponse {
+    /**
+     * The list of any errors for the entries in the request. Each error entry contains the name of the AWS IoT thing that failed to associate.
+     */
+    errorEntries?: AssociateClientDeviceWithCoreDeviceErrorList;
+  }
+  export interface BatchDisassociateClientDeviceFromCoreDeviceRequest {
+    /**
+     * The list of client devices to disassociate.
+     */
+    entries?: DisassociateClientDeviceFromCoreDeviceEntryList;
+    /**
+     * The name of the core device. This is also the name of the AWS IoT thing.
+     */
+    coreDeviceThingName: IoTThingName;
+  }
+  export interface BatchDisassociateClientDeviceFromCoreDeviceResponse {
+    /**
+     * The list of errors (if any) for the entries in the request. Each error entry contains the name of the AWS IoT thing that failed to disassociate.
+     */
+    errorEntries?: DisassociateClientDeviceFromCoreDeviceErrorList;
+  }
   export interface CancelDeploymentRequest {
     /**
      * The ID of the deployment.
@@ -569,6 +658,28 @@ declare namespace GreengrassV2 {
   }
   export type Description = string;
   export type DescriptionString = string;
+  export interface DisassociateClientDeviceFromCoreDeviceEntry {
+    /**
+     * The name of the AWS IoT thing that represents the client device to disassociate.
+     */
+    thingName: IoTThingName;
+  }
+  export type DisassociateClientDeviceFromCoreDeviceEntryList = DisassociateClientDeviceFromCoreDeviceEntry[];
+  export interface DisassociateClientDeviceFromCoreDeviceErrorEntry {
+    /**
+     * The name of the AWS IoT thing whose disassociate request failed.
+     */
+    thingName?: IoTThingName;
+    /**
+     * The error code for the request.
+     */
+    code?: NonEmptyString;
+    /**
+     * A message that provides additional information about the error.
+     */
+    message?: NonEmptyString;
+  }
+  export type DisassociateClientDeviceFromCoreDeviceErrorList = DisassociateClientDeviceFromCoreDeviceErrorEntry[];
   export interface EffectiveDeployment {
     /**
      * The ID of the deployment.
@@ -852,6 +963,7 @@ declare namespace GreengrassV2 {
      */
     inProgressTimeoutInMinutes?: IoTJobInProgressTimeoutInMinutes;
   }
+  export type IoTThingName = string;
   export type IsLatestForTarget = boolean;
   export type IsRoot = boolean;
   export interface LambdaContainerParams {
@@ -1008,6 +1120,30 @@ declare namespace GreengrassV2 {
     addGroupOwner?: OptionalBoolean;
   }
   export type LifecycleStateDetails = string;
+  export interface ListClientDevicesAssociatedWithCoreDeviceRequest {
+    /**
+     * The name of the core device. This is also the name of the AWS IoT thing.
+     */
+    coreDeviceThingName: IoTThingName;
+    /**
+     * The maximum number of results to be returned per paginated request.
+     */
+    maxResults?: DefaultMaxResults;
+    /**
+     * The token to be used for the next set of paginated results.
+     */
+    nextToken?: NextTokenString;
+  }
+  export interface ListClientDevicesAssociatedWithCoreDeviceResponse {
+    /**
+     * A list that describes the client devices that are associated with the core device.
+     */
+    associatedClientDevices?: AssociatedClientDeviceList;
+    /**
+     * The token for the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextTokenString;
+  }
   export interface ListComponentVersionsRequest {
     /**
      * The ARN of the component version.

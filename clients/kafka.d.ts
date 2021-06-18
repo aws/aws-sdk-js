@@ -1261,6 +1261,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     BootstrapBrokerStringSaslScram?: __string;
+    /**
+     * 
+            A string that contains one or more DNS names (or IP addresses) and SASL IAM port pairs.
+         
+     */
+    BootstrapBrokerStringSaslIam?: __string;
   }
   export interface GetCompatibleKafkaVersionsRequest {
     /**
@@ -1686,11 +1692,25 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     Scram?: Scram;
+    /**
+     * 
+            Indicates whether IAM access control is enabled.
+         
+     */
+    Iam?: Iam;
   }
   export interface Scram {
     /**
      * 
             SASL/SCRAM authentication is enabled or not.
+         
+     */
+    Enabled?: __boolean;
+  }
+  export interface Iam {
+    /**
+     * 
+            Indicates whether IAM access control is enabled.
          
      */
     Enabled?: __boolean;

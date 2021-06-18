@@ -93,6 +93,14 @@ declare class AppStream extends Service {
    */
   createStreamingURL(callback?: (err: AWSError, data: AppStream.Types.CreateStreamingURLResult) => void): Request<AppStream.Types.CreateStreamingURLResult, AWSError>;
   /**
+   * Creates a new image with the latest Windows operating system updates, driver updates, and AppStream 2.0 agent software. For more information, see the "Update an Image by Using Managed AppStream 2.0 Image Updates" section in Administer Your AppStream 2.0 Images, in the Amazon AppStream 2.0 Administration Guide.
+   */
+  createUpdatedImage(params: AppStream.Types.CreateUpdatedImageRequest, callback?: (err: AWSError, data: AppStream.Types.CreateUpdatedImageResult) => void): Request<AppStream.Types.CreateUpdatedImageResult, AWSError>;
+  /**
+   * Creates a new image with the latest Windows operating system updates, driver updates, and AppStream 2.0 agent software. For more information, see the "Update an Image by Using Managed AppStream 2.0 Image Updates" section in Administer Your AppStream 2.0 Images, in the Amazon AppStream 2.0 Administration Guide.
+   */
+  createUpdatedImage(callback?: (err: AWSError, data: AppStream.Types.CreateUpdatedImageResult) => void): Request<AppStream.Types.CreateUpdatedImageResult, AWSError>;
+  /**
    * Creates a usage report subscription. Usage reports are generated daily.
    */
   createUsageReportSubscription(params: AppStream.Types.CreateUsageReportSubscriptionRequest, callback?: (err: AWSError, data: AppStream.Types.CreateUsageReportSubscriptionResult) => void): Request<AppStream.Types.CreateUsageReportSubscriptionResult, AWSError>;
@@ -832,6 +840,39 @@ declare namespace AppStream {
      */
     Expires?: Timestamp;
   }
+  export interface CreateUpdatedImageRequest {
+    /**
+     * The name of the image to update.
+     */
+    existingImageName: Name;
+    /**
+     * The name of the new image. The name must be unique within the AWS account and Region.
+     */
+    newImageName: Name;
+    /**
+     * The description to display for the new image.
+     */
+    newImageDescription?: Description;
+    /**
+     * The name to display for the new image.
+     */
+    newImageDisplayName?: DisplayName;
+    /**
+     * The tags to associate with the new image. A tag is a key-value pair, and the value is optional. For example, Environment=Test. If you do not specify a value, Environment=.  Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following special characters:  _ . : / = + \ - @ If you do not specify a value, the value is set to an empty string. For more information about tags, see Tagging Your Resources in the Amazon AppStream 2.0 Administration Guide.
+     */
+    newImageTags?: Tags;
+    /**
+     * Indicates whether to display the status of image update availability before AppStream 2.0 initiates the process of creating a new updated image. If this value is set to true, AppStream 2.0 displays whether image updates are available. If this value is set to false, AppStream 2.0 initiates the process of creating a new updated image without displaying whether image updates are available.
+     */
+    dryRun?: Boolean;
+  }
+  export interface CreateUpdatedImageResult {
+    image?: Image;
+    /**
+     * Indicates whether a new image can be created.
+     */
+    canUpdateImage?: Boolean;
+  }
   export interface CreateUsageReportSubscriptionRequest {
   }
   export interface CreateUsageReportSubscriptionResult {
@@ -1455,6 +1496,10 @@ declare namespace AppStream {
      * The permissions to provide to the destination AWS account for the specified image.
      */
     ImagePermissions?: ImagePermissions;
+    /**
+     * Describes the errors that are returned when a new image can't be created.
+     */
+    ImageErrors?: ResourceErrors;
   }
   export interface ImageBuilder {
     /**
@@ -1528,7 +1573,7 @@ declare namespace AppStream {
     AccessEndpoints?: AccessEndpointList;
   }
   export type ImageBuilderList = ImageBuilder[];
-  export type ImageBuilderState = "PENDING"|"UPDATING_AGENT"|"RUNNING"|"STOPPING"|"STOPPED"|"REBOOTING"|"SNAPSHOTTING"|"DELETING"|"FAILED"|string;
+  export type ImageBuilderState = "PENDING"|"UPDATING_AGENT"|"RUNNING"|"STOPPING"|"STOPPED"|"REBOOTING"|"SNAPSHOTTING"|"DELETING"|"FAILED"|"UPDATING"|"PENDING_QUALIFICATION"|string;
   export interface ImageBuilderStateChangeReason {
     /**
      * The state change reason code.

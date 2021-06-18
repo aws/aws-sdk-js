@@ -332,6 +332,7 @@ declare namespace FMS {
      */
     PossibleSecurityGroupRemediationActions?: SecurityGroupRemediationActions;
   }
+  export type BasicInteger = number;
   export type Boolean = boolean;
   export type CIDR = string;
   export interface ComplianceViolator {
@@ -380,6 +381,54 @@ declare namespace FMS {
   export type DependentServiceName = "AWSCONFIG"|"AWSWAF"|"AWSSHIELD_ADVANCED"|"AWSVPC"|string;
   export type DetailedInfo = string;
   export interface DisassociateAdminAccountRequest {
+  }
+  export interface DnsDuplicateRuleGroupViolation {
+    /**
+     * The ID of the VPC. 
+     */
+    ViolationTarget?: ViolationTarget;
+    /**
+     * A description of the violation that specifies the rule group and VPC.
+     */
+    ViolationTargetDescription?: LengthBoundedString;
+  }
+  export interface DnsRuleGroupLimitExceededViolation {
+    /**
+     * The ID of the VPC. 
+     */
+    ViolationTarget?: ViolationTarget;
+    /**
+     * A description of the violation that specifies the rule group and VPC.
+     */
+    ViolationTargetDescription?: LengthBoundedString;
+    /**
+     * The number of rule groups currently associated with the VPC. 
+     */
+    NumberOfRuleGroupsAlreadyAssociated?: BasicInteger;
+  }
+  export type DnsRuleGroupPriorities = DnsRuleGroupPriority[];
+  export type DnsRuleGroupPriority = number;
+  export interface DnsRuleGroupPriorityConflictViolation {
+    /**
+     * The ID of the VPC. 
+     */
+    ViolationTarget?: ViolationTarget;
+    /**
+     * A description of the violation that specifies the VPC and the rule group that's already associated with it.
+     */
+    ViolationTargetDescription?: LengthBoundedString;
+    /**
+     * The priority setting of the two conflicting rule groups.
+     */
+    ConflictingPriority?: DnsRuleGroupPriority;
+    /**
+     * The ID of the Firewall Manager DNS Firewall policy that was already applied to the VPC. This policy contains the rule group that's already associated with the VPC. 
+     */
+    ConflictingPolicyId?: PolicyId;
+    /**
+     * The priorities of rule groups that are already associated with the VPC. To retry your operation, choose priority settings that aren't in this list for the rule groups in your new DNS Firewall policy. 
+     */
+    UnavailablePriorities?: DnsRuleGroupPriorities;
   }
   export interface EvaluationResult {
     /**
@@ -1114,6 +1163,18 @@ declare namespace FMS {
      * Violation detail for an Network Firewall policy that indicates that a firewall policy in an individual account has been modified in a way that makes it noncompliant. For example, the individual account owner might have deleted a rule group, changed the priority of a stateless rule group, or changed a policy default action.
      */
     NetworkFirewallPolicyModifiedViolation?: NetworkFirewallPolicyModifiedViolation;
+    /**
+     * Violation detail for a DNS Firewall policy that indicates that a rule group that Firewall Manager tried to associate with a VPC has the same priority as a rule group that's already associated. 
+     */
+    DnsRuleGroupPriorityConflictViolation?: DnsRuleGroupPriorityConflictViolation;
+    /**
+     * Violation detail for a DNS Firewall policy that indicates that a rule group that Firewall Manager tried to associate with a VPC is already associated with the VPC and can't be associated again. 
+     */
+    DnsDuplicateRuleGroupViolation?: DnsDuplicateRuleGroupViolation;
+    /**
+     * Violation details for a DNS Firewall policy that indicates that the VPC reached the limit for associated DNS Firewall rule groups. Firewall Manager tried to associate another rule group with the VPC and failed. 
+     */
+    DnsRuleGroupLimitExceededViolation?: DnsRuleGroupLimitExceededViolation;
   }
   export type ResourceViolations = ResourceViolation[];
   export interface SecurityGroupRemediationAction {
@@ -1171,7 +1232,7 @@ declare namespace FMS {
      */
     ManagedServiceData?: ManagedServiceData;
   }
-  export type SecurityServiceType = "WAF"|"WAFV2"|"SHIELD_ADVANCED"|"SECURITY_GROUPS_COMMON"|"SECURITY_GROUPS_CONTENT_AUDIT"|"SECURITY_GROUPS_USAGE_AUDIT"|"NETWORK_FIREWALL"|string;
+  export type SecurityServiceType = "WAF"|"WAFV2"|"SHIELD_ADVANCED"|"SECURITY_GROUPS_COMMON"|"SECURITY_GROUPS_CONTENT_AUDIT"|"SECURITY_GROUPS_USAGE_AUDIT"|"NETWORK_FIREWALL"|"DNS_FIREWALL"|string;
   export interface StatefulRuleGroup {
     /**
      * The name of the rule group.
@@ -1271,7 +1332,7 @@ declare namespace FMS {
      */
     ResourceDescription?: LengthBoundedString;
   }
-  export type ViolationReason = "WEB_ACL_MISSING_RULE_GROUP"|"RESOURCE_MISSING_WEB_ACL"|"RESOURCE_INCORRECT_WEB_ACL"|"RESOURCE_MISSING_SHIELD_PROTECTION"|"RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION"|"RESOURCE_MISSING_SECURITY_GROUP"|"RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP"|"SECURITY_GROUP_UNUSED"|"SECURITY_GROUP_REDUNDANT"|"MISSING_FIREWALL"|"MISSING_FIREWALL_SUBNET_IN_AZ"|"MISSING_EXPECTED_ROUTE_TABLE"|"NETWORK_FIREWALL_POLICY_MODIFIED"|string;
+  export type ViolationReason = "WEB_ACL_MISSING_RULE_GROUP"|"RESOURCE_MISSING_WEB_ACL"|"RESOURCE_INCORRECT_WEB_ACL"|"RESOURCE_MISSING_SHIELD_PROTECTION"|"RESOURCE_MISSING_WEB_ACL_OR_SHIELD_PROTECTION"|"RESOURCE_MISSING_SECURITY_GROUP"|"RESOURCE_VIOLATES_AUDIT_SECURITY_GROUP"|"SECURITY_GROUP_UNUSED"|"SECURITY_GROUP_REDUNDANT"|"FMS_CREATED_SECURITY_GROUP_EDITED"|"MISSING_FIREWALL"|"MISSING_FIREWALL_SUBNET_IN_AZ"|"MISSING_EXPECTED_ROUTE_TABLE"|"NETWORK_FIREWALL_POLICY_MODIFIED"|"RESOURCE_MISSING_DNS_FIREWALL"|string;
   export type ViolationTarget = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

@@ -318,6 +318,9 @@
         },
         {
           "shape": "OperationNotPermittedException"
+        },
+        {
+          "shape": "InvalidStateTransitionException"
         }
       ],
       "documentation": "<p>Disassociates an AWS RAM permission from a resource share.</p>"
@@ -490,7 +493,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Gets the invitations for resource sharing that you've received.</p>"
+      "documentation": "<p>Gets the invitations that you have received for resource shares.</p>"
     },
     "GetResourceShares": {
       "name": "GetResourceShares",
@@ -753,6 +756,9 @@
           "shape": "MalformedArnException"
         },
         {
+          "shape": "ResourceShareLimitExceededException"
+        },
+        {
           "shape": "OperationNotPermittedException"
         },
         {
@@ -837,6 +843,9 @@
         },
         {
           "shape": "MalformedArnException"
+        },
+        {
+          "shape": "UnknownResourceException"
         },
         {
           "shape": "TagLimitExceededException"
@@ -968,7 +977,7 @@
         },
         "permissionArn": {
           "shape": "String",
-          "documentation": "<p>The ARN of the AWS RAM permission to associate with the resource share.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS RAM permissions to associate with the resource share.</p>"
         },
         "replace": {
           "shape": "Boolean",
@@ -977,6 +986,10 @@
         "clientToken": {
           "shape": "String",
           "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+        },
+        "permissionVersion": {
+          "shape": "Integer",
+          "documentation": "<p>The version of the AWS RAM permissions to associate with the resource share.</p>"
         }
       }
     },
@@ -1009,7 +1022,7 @@
         },
         "principals": {
           "shape": "PrincipalArnOrIdList",
-          "documentation": "<p>The principals.</p>"
+          "documentation": "<p>The principals to associate with the resource share. The possible values are IDs of AWS accounts, and the ARNs of organizational units (OU) or organizations from AWS Organizations.</p>"
         },
         "clientToken": {
           "shape": "String",
@@ -1355,7 +1368,7 @@
       "members": {
         "resourceShareArns": {
           "shape": "ResourceShareArnList",
-          "documentation": "<p>The Amazon Resource Names (ARN) of the resource shares.</p>"
+          "documentation": "<p>The ARNs of the resource shares.</p>"
         },
         "resourceShareStatus": {
           "shape": "ResourceShareStatus",
@@ -1380,6 +1393,10 @@
         "maxResults": {
           "shape": "MaxResults",
           "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
+        },
+        "permissionArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS RAM permission that is associated with the resource share.</p>"
         }
       }
     },
@@ -1482,7 +1499,7 @@
         },
         "resourceType": {
           "shape": "String",
-          "documentation": "<p>The resource type.</p> <p>Valid values: <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>license-manager:LicenseConfiguration</code> I <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> </p>"
+          "documentation": "<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> </p>"
         },
         "resourceShareArns": {
           "shape": "ResourceShareArnList",
@@ -1586,7 +1603,7 @@
         },
         "resourceType": {
           "shape": "String",
-          "documentation": "<p>The resource type.</p> <p>Valid values: <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>license-manager:LicenseConfiguration</code> I <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverRule</code> </p>"
+          "documentation": "<p>The resource type.</p> <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> </p>"
         },
         "resourceArns": {
           "shape": "ResourceArnList",
@@ -1947,6 +1964,10 @@
           "documentation": "<p>To view the resources associated with a pending resource share invitation, use <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html\"> ListPendingInvitationResources</a>.</p>",
           "deprecated": true,
           "deprecatedMessage": "This member has been deprecated. Use ListPendingInvitationResources."
+        },
+        "receiverArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM user or IAM role that received the invitation.</p>"
         }
       },
       "documentation": "<p>Describes an invitation to join a resource share.</p>"
@@ -1991,7 +2012,7 @@
         },
         "defaultVersion": {
           "shape": "Boolean",
-          "documentation": "<p>The identifier for the version of the permission that is set as the default version.</p>"
+          "documentation": "<p>Specifies whether the version of the permission is set to the default version for this permission.</p>"
         },
         "name": {
           "shape": "String",
@@ -2012,6 +2033,10 @@
         "lastUpdatedTime": {
           "shape": "DateTime",
           "documentation": "<p>The date and time when the permission was last updated.</p>"
+        },
+        "isResourceTypeDefault": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether the version of the permission is set to the default version for this resource type.</p>"
         }
       },
       "documentation": "<p>Information about an AWS RAM permission.</p>"
@@ -2035,7 +2060,7 @@
         },
         "defaultVersion": {
           "shape": "Boolean",
-          "documentation": "<p>The identifier for the version of the permission that is set as the default version.</p>"
+          "documentation": "<p>Specifies whether the version of the permission is set to the default version for this permission.</p>"
         },
         "name": {
           "shape": "String",
@@ -2056,6 +2081,10 @@
         "lastUpdatedTime": {
           "shape": "DateTime",
           "documentation": "<p>The date and time when the permission was last updated.</p>"
+        },
+        "isResourceTypeDefault": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifies whether the version of the permission is set to the default version for this resource type.</p>"
         }
       },
       "documentation": "<p>Information about a permission that is associated with a resource share.</p>"

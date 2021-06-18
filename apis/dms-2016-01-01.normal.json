@@ -531,6 +531,20 @@
       ],
       "documentation": "<p>Describes the status of the connections that have been made between the replication instance and an endpoint. Connections are created when you test an endpoint.</p>"
     },
+    "DescribeEndpointSettings": {
+      "name": "DescribeEndpointSettings",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeEndpointSettingsMessage"
+      },
+      "output": {
+        "shape": "DescribeEndpointSettingsResponse"
+      },
+      "documentation": "<p>Returns information about the possible endpoint settings available when you create an endpoint for a specific database engine.</p>"
+    },
     "DescribeEndpointTypes": {
       "name": "DescribeEndpointTypes",
       "http": {
@@ -1084,6 +1098,9 @@
         },
         {
           "shape": "ResourceNotFoundFault"
+        },
+        {
+          "shape": "KMSKeyNotAccessibleFault"
         }
       ],
       "documentation": "<p>Moves a replication task from its current replication instance to a different target replication instance using the specified parameters. The target replication instance must be created with the same or later AWS DMS version as the current replication instance.</p>"
@@ -1324,6 +1341,9 @@
         },
         {
           "shape": "ResourceQuotaExceededFault"
+        },
+        {
+          "shape": "AccessDeniedFault"
         }
       ],
       "documentation": "<p>Tests the connection between the replication instance and the endpoint.</p>"
@@ -2301,6 +2321,39 @@
       },
       "documentation": "<p/>"
     },
+    "DescribeEndpointSettingsMessage": {
+      "type": "structure",
+      "required": [
+        "EngineName"
+      ],
+      "members": {
+        "EngineName": {
+          "shape": "String",
+          "documentation": "<p>The databse engine used for your source or target endpoint.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that the remaining results can be retrieved.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        }
+      }
+    },
+    "DescribeEndpointSettingsResponse": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        },
+        "EndpointSettings": {
+          "shape": "EndpointSettingsList",
+          "documentation": "<p>Descriptions of the endpoint settings available for your source or target database engine.</p>"
+        }
+      }
+    },
     "DescribeEndpointTypesMessage": {
       "type": "structure",
       "members": {
@@ -3153,6 +3206,65 @@
         "shape": "Endpoint"
       }
     },
+    "EndpointSetting": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name that you want to give the endpoint settings.</p>"
+        },
+        "Type": {
+          "shape": "EndpointSettingTypeValue",
+          "documentation": "<p>The type of endpoint. Valid values are <code>source</code> and <code>target</code>.</p>"
+        },
+        "EnumValues": {
+          "shape": "EndpointSettingEnumValues",
+          "documentation": "<p>Enumerated values to use for this endpoint.</p>"
+        },
+        "Sensitive": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>A value that marks this endpoint setting as sensitive.</p>"
+        },
+        "Units": {
+          "shape": "String",
+          "documentation": "<p>The unit of measure for this endpoint setting.</p>"
+        },
+        "Applicability": {
+          "shape": "String",
+          "documentation": "<p>The relevance or validity of an endpoint setting for an engine name and its endpoint type.</p>"
+        },
+        "IntValueMin": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The minimum value of an endpoint setting that is of type <code>int</code>.</p>"
+        },
+        "IntValueMax": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum value of an endpoint setting that is of type <code>int</code>.</p>"
+        }
+      },
+      "documentation": "<p>Endpoint settings.</p>"
+    },
+    "EndpointSettingEnumValues": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
+    "EndpointSettingTypeValue": {
+      "type": "string",
+      "enum": [
+        "string",
+        "boolean",
+        "integer",
+        "enum"
+      ]
+    },
+    "EndpointSettingsList": {
+      "type": "list",
+      "member": {
+        "shape": "EndpointSetting"
+      }
+    },
     "Event": {
       "type": "structure",
       "members": {
@@ -3352,7 +3464,7 @@
           "documentation": "<p>A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.</p>"
         },
         "CertificatePem": {
-          "shape": "String",
+          "shape": "SecretString",
           "documentation": "<p>The contents of a <code>.pem</code> file, which contains an X.509 certificate.</p>"
         },
         "CertificateWallet": {
@@ -3392,12 +3504,21 @@
     "IntegerOptional": {
       "type": "integer"
     },
+    "KafkaSecurityProtocol": {
+      "type": "string",
+      "enum": [
+        "plaintext",
+        "ssl-authentication",
+        "ssl-encryption",
+        "sasl-ssl"
+      ]
+    },
     "KafkaSettings": {
       "type": "structure",
       "members": {
         "Broker": {
           "shape": "String",
-          "documentation": "<p>The broker location and port of the Kafka broker that hosts your Kafka instance. Specify the broker in the form <code> <i>broker-hostname-or-ip</i>:<i>port</i> </code>. For example, <code>\"ec2-12-345-678-901.compute-1.amazonaws.com:2345\"</code>.</p>"
+          "documentation": "<p>A comma-separated list of one or more broker locations in your Kafka cluster that host your Kafka instance. Specify each broker location in the form <code> <i>broker-hostname-or-ip</i>:<i>port</i> </code>. For example, <code>\"ec2-12-345-678-901.compute-1.amazonaws.com:2345\"</code>. For more information and examples of specifying a list of broker locations, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Kafka.html\">Using Apache Kafka as a target for AWS Database Migration Service</a> in the <i>AWS Data Migration Service User Guide</i>. </p>"
         },
         "Topic": {
           "shape": "String",
@@ -3434,6 +3555,34 @@
         "IncludeNullAndEmpty": {
           "shape": "BooleanOptional",
           "documentation": "<p>Include NULL and empty columns for records migrated to the endpoint. The default is <code>false</code>.</p>"
+        },
+        "SecurityProtocol": {
+          "shape": "KafkaSecurityProtocol",
+          "documentation": "<p>Set secure connection to a Kafka target endpoint using Transport Layer Security (TLS). Options include <code>ssl-encryption</code>, <code>ssl-authentication</code>, and <code>sasl-ssl</code>. <code>sasl-ssl</code> requires <code>SaslUsername</code> and <code>SaslPassword</code>.</p>"
+        },
+        "SslClientCertificateArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the client certificate used to securely connect to a Kafka target endpoint.</p>"
+        },
+        "SslClientKeyArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the client private key used to securely connect to a Kafka target endpoint.</p>"
+        },
+        "SslClientKeyPassword": {
+          "shape": "SecretString",
+          "documentation": "<p> The password for the client private key used to securely connect to a Kafka target endpoint.</p>"
+        },
+        "SslCaCertificateArn": {
+          "shape": "String",
+          "documentation": "<p> The Amazon Resource Name (ARN) for the private Certification Authority (CA) cert that AWS DMS uses to securely connect to your Kafka target endpoint.</p>"
+        },
+        "SaslUsername": {
+          "shape": "String",
+          "documentation": "<p> The secure username you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.</p>"
+        },
+        "SaslPassword": {
+          "shape": "SecretString",
+          "documentation": "<p>The secure password you created when you first set up your MSK cluster to validate a client identity and make an encrypted connection between server and client using SASL-SSL authentication.</p>"
         }
       },
       "documentation": "<p>Provides information that describes an Apache Kafka endpoint. This information includes the output format of records applied to the endpoint and details of transaction and control table data information.</p>"
@@ -3542,6 +3691,10 @@
           "shape": "SecretString",
           "documentation": "<p>Endpoint connection password.</p>"
         },
+        "QuerySingleAlwaysOnNode": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Cleans and recreates table metadata information on the replication instance when a mismatch occurs. An example is a situation where running an alter DDL statement on a table might result in different information about the table cached in the replication instance.</p>"
+        },
         "ReadBackupOnly": {
           "shape": "BooleanOptional",
           "documentation": "<p>When this attribute is set to <code>Y</code>, AWS DMS only reads changes from transaction log backups and doesn't read from the active transaction log file during ongoing replication. Setting this parameter to <code>Y</code> enables you to control active transaction log file growth during full load and ongoing replication tasks. However, it can add some source latency to ongoing replication.</p>"
@@ -3561,6 +3714,10 @@
         "UseBcpFullLoad": {
           "shape": "BooleanOptional",
           "documentation": "<p>Use this to attribute to transfer data for full-load operations using BCP. When the target table contains an identity column that does not exist in the source table, you must disable the use BCP for loading table option.</p>"
+        },
+        "UseThirdPartyBackupDevice": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>When this attribute is set to <code>Y</code>, DMS processes third-party transaction log backups if they are created in native format.</p>"
         },
         "SecretsManagerAccessRoleArn": {
           "shape": "String",
@@ -3873,7 +4030,7 @@
         },
         "TableMappings": {
           "shape": "String",
-          "documentation": "<p>When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with <code>file://</code>. When working with the DMS API, provide the JSON as the parameter value, for example: <code>--table-mappings file://mappingfile.json</code> </p>"
+          "documentation": "<p>When using the AWS CLI or boto3, provide the path of the JSON file that contains the table mappings. Precede the path with <code>file://</code>. For example, <code>--table-mappings file://mappingfile.json</code>. When working with the DMS API, provide the JSON as the parameter value. </p>"
         },
         "ReplicationTaskSettings": {
           "shape": "String",
@@ -4004,6 +4161,10 @@
         "AfterConnectScript": {
           "shape": "String",
           "documentation": "<p>Specifies a script to run immediately after AWS DMS connects to the endpoint. The migration task continues running regardless if the SQL statement succeeds or fails.</p>"
+        },
+        "CleanSourceMetadataOnMismatch": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Adjusts the behavior of DMS when migrating from an SQL Server source database that is hosted as part of an Always On availability group cluster. If you need DMS to poll all the nodes in the Always On cluster for transaction backups, set this attribute to <code>false</code>.</p>"
         },
         "DatabaseName": {
           "shape": "String",
@@ -4219,6 +4380,10 @@
         "ServerName": {
           "shape": "String",
           "documentation": "<p>Fully qualified domain name of the endpoint.</p>"
+        },
+        "SpatialDataOptionToGeoJsonFunctionName": {
+          "shape": "String",
+          "documentation": "<p>Use this attribute to convert <code>SDO_GEOMETRY</code> to <code>GEOJSON</code> format. By default, DMS calls the <code>SDO2GEOJSON</code> custom function if present and accessible. Or you can create your own custom function that mimics the operation of <code>SDOGEOJSON</code> and set <code>SpatialDataOptionToGeoJsonFunctionName</code> to call it instead. </p>"
         },
         "Username": {
           "shape": "String",
@@ -5187,7 +5352,7 @@
       "members": {
         "ServiceAccessRoleArn": {
           "shape": "String",
-          "documentation": "<p> The Amazon Resource Name (ARN) used by the service access IAM role. It is a required parameter that enables DMS to write and read objects from an 3S bucket.</p>"
+          "documentation": "<p> The Amazon Resource Name (ARN) used by the service access IAM role. It is a required parameter that enables DMS to write and read objects from an S3 bucket.</p>"
         },
         "ExternalTableDefinition": {
           "shape": "String",

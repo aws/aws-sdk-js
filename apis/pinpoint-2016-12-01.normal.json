@@ -10895,6 +10895,10 @@
         "MessagesPerSecond": {
           "shape": "__integer",
           "documentation": "<p>The maximum number of messages that the journey can send each second.</p>"
+        },
+        "EndpointReentryInterval": {
+          "shape": "__string",
+          "documentation": "<p>Minimum time that must pass before an endpoint can re-enter a given journey. The duration should use an ISO 8601 format, such as PT1H. </p>"
         }
       },
       "documentation": "<p>Specifies limits on the messages that a journey can send and the number of times participants can enter a journey.</p>"
@@ -10972,6 +10976,14 @@
           "shape": "MapOf__string",
           "locationName": "tags",
           "documentation": "<p>This object is not used or supported.</p>"
+        },
+        "WaitForQuietTime": {
+          "shape": "__boolean",
+          "documentation": "<p>Specifies whether endpoints in quiet hours should enter a wait till the end of their quiet hours.</p>"
+        },
+        "RefreshOnSegmentUpdate": {
+          "shape": "__boolean",
+          "documentation": "<p>Specifies whether a journey should be refreshed on segment update.</p>"
         }
       },
       "documentation": "<p>Provides information about the status, configuration, and other settings for a journey.</p>",
@@ -11030,7 +11042,7 @@
       "members": {
         "State": {
           "shape": "State",
-          "documentation": "<p>The status of the journey. Currently, the only supported value is CANCELLED.</p> <p>If you cancel a journey, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Amazon Pinpoint also continues to collect and aggregate analytics data for those activities, until they are complete, and any activities that were complete when you cancelled the journey.</p> <p>After you cancel a journey, you can't add, change, or remove any activities from the journey. In addition, Amazon Pinpoint stops evaluating the journey and doesn't perform any activities that haven't started.</p>"
+          "documentation": "<p>The status of the journey. Currently, Supported values are ACTIVE, PAUSED, and CANCELLED</p> <p>If you cancel a journey, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Amazon Pinpoint also continues to collect and aggregate analytics data for those activities, until they are complete, and any activities that were complete when you cancelled the journey.</p> <p>After you cancel a journey, you can't add, change, or remove any activities from the journey. In addition, Amazon Pinpoint stops evaluating the journey and doesn't perform any activities that haven't started.</p> <p>When the journey is paused, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Endpoints will stop entering journeys when the journey is paused and will resume entering the journey after the journey is resumed. For wait activities, wait time is paused when the journey is paused. Currently, PAUSED only supports journeys with a segment refresh interval.</p>"
         }
       },
       "documentation": "<p>Changes the status of a journey.</p>"
@@ -12830,7 +12842,8 @@
         "ACTIVE",
         "COMPLETED",
         "CANCELLED",
-        "CLOSED"
+        "CLOSED",
+        "PAUSED"
       ]
     },
     "TagResourceRequest": {
@@ -14354,7 +14367,15 @@
         },
         "State": {
           "shape": "State",
-          "documentation": "<p>The status of the journey. Valid values are:</p> <ul><li><p>DRAFT - Saves the journey and doesn't publish it.</p></li> <li><p>ACTIVE - Saves and publishes the journey. Depending on the journey's schedule, the journey starts running immediately or at the scheduled start time. If a journey's status is ACTIVE, you can't add, change, or remove activities from it.</p></li></ul> <p>The CANCELLED, COMPLETED, and CLOSED values are not supported in requests to create or update a journey. To cancel a journey, use the <link  linkend=\"apps-application-id-journeys-journey-id-state\">Journey State</link> resource.</p>"
+          "documentation": "<p>The status of the journey. Valid values are:</p> <ul><li><p>DRAFT - Saves the journey and doesn't publish it.</p></li> <li><p>ACTIVE - Saves and publishes the journey. Depending on the journey's schedule, the journey starts running immediately or at the scheduled start time. If a journey's status is ACTIVE, you can't add, change, or remove activities from it.</p></li></ul> <p>PAUSED, CANCELLED, COMPLETED, and CLOSED states are not supported in requests to create or update a journey. To cancel, pause, or resume a journey, use the <link  linkend=\"apps-application-id-journeys-journey-id-state\">Journey State</link> resource.</p>"
+        },
+        "WaitForQuietTime": {
+          "shape": "__boolean",
+          "documentation": "<p>Specifies whether endpoints in quiet hours should enter a wait till the end of their quiet hours.</p>"
+        },
+        "RefreshOnSegmentUpdate": {
+          "shape": "__boolean",
+          "documentation": "<p>Specifies whether a journey should be refreshed on segment update.</p>"
         }
       },
       "documentation": "<p>Specifies the configuration and other settings for a journey.</p>",

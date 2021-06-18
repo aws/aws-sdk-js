@@ -892,7 +892,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Updates an Amazon EKS cluster configuration. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the <a>DescribeUpdate</a> API operation.</p> <p>You can use this API operation to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster Control Plane Logs</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p> <note> <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p> </note> <p>You can also use this API operation to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>. </p> <important> <p>At this time, you can not update the subnets or security group IDs for an existing cluster.</p> </important> <p>Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to <code>UPDATING</code> (this status transition is eventually consistent). When the update is complete (either <code>Failed</code> or <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>"
+      "documentation": "<p>Updates an Amazon EKS cluster configuration. Your cluster continues to function during the update. The response output includes an update ID that you can use to track the status of your cluster update with the <a>DescribeUpdate</a> API operation.</p> <p>You can use this API operation to enable or disable exporting the Kubernetes control plane logs for your cluster to CloudWatch Logs. By default, cluster control plane logs aren't exported to CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html\">Amazon EKS Cluster Control Plane Logs</a> in the <i> <i>Amazon EKS User Guide</i> </i>.</p> <note> <p>CloudWatch Logs ingestion, archive storage, and data scanning rates apply to exported control plane logs. For more information, see <a href=\"http://aws.amazon.com/cloudwatch/pricing/\">Amazon CloudWatch Pricing</a>.</p> </note> <p>You can also use this API operation to enable or disable public and private access to your cluster's Kubernetes API server endpoint. By default, public access is enabled, and private access is disabled. For more information, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/cluster-endpoint.html\">Amazon EKS Cluster Endpoint Access Control</a> in the <i> <i>Amazon EKS User Guide</i> </i>. </p> <important> <p>You can't update the subnets or security group IDs for an existing cluster.</p> </important> <p>Cluster updates are asynchronous, and they should finish within a few minutes. During an update, the cluster status moves to <code>UPDATING</code> (this status transition is eventually consistent). When the update is complete (either <code>Failed</code> or <code>Successful</code>), the cluster status moves to <code>Active</code>.</p>"
     },
     "UpdateClusterVersion": {
       "name": "UpdateClusterVersion",
@@ -1003,7 +1003,8 @@
       "enum": [
         "AL2_x86_64",
         "AL2_x86_64_GPU",
-        "AL2_ARM_64"
+        "AL2_ARM_64",
+        "CUSTOM"
       ]
     },
     "Addon": {
@@ -1047,7 +1048,7 @@
         },
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p>The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Cluster tags do not propagate to any other resources associated with the cluster. </p>"
+          "documentation": "<p>The metadata that you apply to the add-on to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Add-on tags do not propagate to any other resources associated with the cluster. </p>"
         }
       },
       "documentation": "<p>An Amazon EKS add-on.</p>"
@@ -1571,7 +1572,7 @@
         },
         "subnets": {
           "shape": "StringList",
-          "documentation": "<p>The subnets to use for the Auto Scaling group that is created for your node group. These subnets must have the tag key <code>kubernetes.io/cluster/CLUSTER_NAME</code> with a value of <code>shared</code>, where <code>CLUSTER_NAME</code> is replaced with the name of your cluster. If you specify <code>launchTemplate</code>, then don't specify <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\"> <code>SubnetId</code> </a> in your launch template, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
+          "documentation": "<p>The subnets to use for the Auto Scaling group that is created for your node group. If you specify <code>launchTemplate</code>, then don't specify <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\"> <code>SubnetId</code> </a> in your launch template, or the node group deployment will fail. For more information about using launch templates with Amazon EKS, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html\">Launch template support</a> in the Amazon EKS User Guide.</p>"
         },
         "instanceTypes": {
           "shape": "StringList",
@@ -1593,6 +1594,10 @@
           "shape": "labelsMap",
           "documentation": "<p>The Kubernetes labels to be applied to the nodes in the node group when they are created.</p>"
         },
+        "taints": {
+          "shape": "taintsList",
+          "documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group.</p>"
+        },
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The metadata to apply to the node group to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Node group tags do not propagate to any other resources associated with the node group, such as the Amazon EC2 instances or subnets.</p>"
@@ -1605,6 +1610,9 @@
         "launchTemplate": {
           "shape": "LaunchTemplateSpecification",
           "documentation": "<p>An object representing a node group's launch template specification. If specified, then do not specify <code>instanceTypes</code>, <code>diskSize</code>, or <code>remoteAccess</code> and make sure that the launch template meets the requirements in <code>launchTemplateSpecification</code>.</p>"
+        },
+        "updateConfig": {
+          "shape": "NodegroupUpdateConfig"
         },
         "capacityType": {
           "shape": "CapacityTypes",
@@ -2012,7 +2020,7 @@
         },
         "provider": {
           "shape": "Provider",
-          "documentation": "<p>AWS Key Management Service (AWS KMS) customer master key (CMK). Either the ARN or the alias can be used.</p>"
+          "documentation": "<p>AWS Key Management Service (AWS KMS) key. Either the ARN or the alias can be used.</p>"
         }
       },
       "documentation": "<p>The encryption configuration for the cluster.</p>"
@@ -2664,6 +2672,10 @@
           "shape": "labelsMap",
           "documentation": "<p>The Kubernetes labels applied to the nodes in the node group.</p> <note> <p>Only labels that are applied with the Amazon EKS API are shown here. There may be other Kubernetes labels applied to the nodes in this group.</p> </note>"
         },
+        "taints": {
+          "shape": "taintsList",
+          "documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group when they are created. Effect is one of <code>NoSchedule</code>, <code>PreferNoSchedule</code>, or <code>NoExecute</code>. Kubernetes taints can be used together with tolerations to control how workloads are scheduled to your nodes.</p>"
+        },
         "resources": {
           "shape": "NodegroupResources",
           "documentation": "<p>The resources associated with the node group, such as Auto Scaling groups and security groups for remote access.</p>"
@@ -2675,6 +2687,9 @@
         "health": {
           "shape": "NodegroupHealth",
           "documentation": "<p>The health status of the node group. If there are issues with your node group's health, they are listed here.</p>"
+        },
+        "updateConfig": {
+          "shape": "NodegroupUpdateConfig"
         },
         "launchTemplate": {
           "shape": "LaunchTemplateSpecification",
@@ -2738,7 +2753,7 @@
       "type": "structure",
       "members": {
         "minSize": {
-          "shape": "Capacity",
+          "shape": "ZeroCapacity",
           "documentation": "<p>The minimum number of nodes that the managed node group can scale in to. This number must be greater than zero.</p>"
         },
         "maxSize": {
@@ -2746,11 +2761,11 @@
           "documentation": "<p>The maximum number of nodes that the managed node group can scale out to. For information about the maximum number that you can specify, see <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/service-quotas.html\">Amazon EKS service quotas</a> in the <i>Amazon EKS User Guide</i>.</p>"
         },
         "desiredSize": {
-          "shape": "Capacity",
+          "shape": "ZeroCapacity",
           "documentation": "<p>The current number of nodes that the managed node group should maintain.</p>"
         }
       },
-      "documentation": "<p>An object representing the scaling configuration details for the Auto Scaling group that is associated with your node group. If you specify a value for any property, then you must specify values for all of the properties.</p>"
+      "documentation": "<p>An object representing the scaling configuration details for the Auto Scaling group that is associated with your node group. When creating a node group, you must specify all or none of the properties. When updating a node group, you can specify any or none of the properties.</p>"
     },
     "NodegroupStatus": {
       "type": "string",
@@ -2763,6 +2778,22 @@
         "DELETE_FAILED",
         "DEGRADED"
       ]
+    },
+    "NodegroupUpdateConfig": {
+      "type": "structure",
+      "members": {
+        "maxUnavailable": {
+          "shape": "NonZeroInteger"
+        },
+        "maxUnavailablePercentage": {
+          "shape": "PercentCapacity"
+        }
+      }
+    },
+    "NonZeroInteger": {
+      "type": "integer",
+      "box": true,
+      "min": 1
     },
     "OIDC": {
       "type": "structure",
@@ -2871,15 +2902,21 @@
       },
       "documentation": "<p>An object representing an OpenID Connect (OIDC) configuration. Before associating an OIDC identity provider to your cluster, review the considerations in <a href=\"https://docs.aws.amazon.com/eks/latest/userguide/authenticate-oidc-identity-provider.html\">Authenticating users for your cluster from an OpenID Connect identity provider</a> in the <i>Amazon EKS User Guide</i>.</p>"
     },
+    "PercentCapacity": {
+      "type": "integer",
+      "box": true,
+      "max": 100,
+      "min": 1
+    },
     "Provider": {
       "type": "structure",
       "members": {
         "keyArn": {
           "shape": "String",
-          "documentation": "<p>Amazon Resource Name (ARN) or alias of the customer master key (CMK). The CMK must be symmetric, created in the same region as the cluster, and if the CMK was created in a different account, the user must have access to the CMK. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html\">Allowing Users in Other Accounts to Use a CMK</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
+          "documentation": "<p>Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-modifying-external-accounts.html\">Allowing Users in Other Accounts to Use a KMS key</a> in the <i>AWS Key Management Service Developer Guide</i>.</p>"
         }
       },
-      "documentation": "<p>Identifies the AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the secrets.</p>"
+      "documentation": "<p>Identifies the AWS Key Management Service (AWS KMS) key used to encrypt the secrets.</p>"
     },
     "RemoteAccessConfig": {
       "type": "structure",
@@ -2966,6 +3003,32 @@
     "TagValue": {
       "type": "string",
       "max": 256
+    },
+    "Taint": {
+      "type": "structure",
+      "members": {
+        "key": {
+          "shape": "taintKey",
+          "documentation": "<p>The key of the taint.</p>"
+        },
+        "value": {
+          "shape": "taintValue",
+          "documentation": "<p>The value of the taint.</p>"
+        },
+        "effect": {
+          "shape": "TaintEffect",
+          "documentation": "<p>The effect of the taint.</p>"
+        }
+      },
+      "documentation": "<p>A property that allows a node to repel a set of pods.</p>"
+    },
+    "TaintEffect": {
+      "type": "string",
+      "enum": [
+        "NO_SCHEDULE",
+        "NO_EXECUTE",
+        "PREFER_NO_SCHEDULE"
+      ]
     },
     "Timestamp": {
       "type": "timestamp"
@@ -3175,9 +3238,16 @@
           "shape": "UpdateLabelsPayload",
           "documentation": "<p>The Kubernetes labels to be applied to the nodes in the node group after the update.</p>"
         },
+        "taints": {
+          "shape": "UpdateTaintsPayload",
+          "documentation": "<p>The Kubernetes taints to be applied to the nodes in the node group after the update.</p>"
+        },
         "scalingConfig": {
           "shape": "NodegroupScalingConfig",
           "documentation": "<p>The scaling configuration details for the Auto Scaling group after the update.</p>"
+        },
+        "updateConfig": {
+          "shape": "NodegroupUpdateConfig"
         },
         "clientRequestToken": {
           "shape": "String",
@@ -3269,15 +3339,21 @@
         "DesiredSize",
         "LabelsToAdd",
         "LabelsToRemove",
+        "TaintsToAdd",
+        "TaintsToRemove",
         "MaxSize",
         "MinSize",
         "ReleaseVersion",
         "PublicAccessCidrs",
+        "LaunchTemplateName",
+        "LaunchTemplateVersion",
         "IdentityProviderConfig",
         "EncryptionConfig",
         "AddonVersion",
         "ServiceAccountRoleArn",
-        "ResolveConflicts"
+        "ResolveConflicts",
+        "MaxUnavailable",
+        "MaxUnavailablePercentage"
       ]
     },
     "UpdateParams": {
@@ -3294,6 +3370,20 @@
         "Cancelled",
         "Successful"
       ]
+    },
+    "UpdateTaintsPayload": {
+      "type": "structure",
+      "members": {
+        "addOrUpdateTaints": {
+          "shape": "taintsList",
+          "documentation": "<p>Kubernetes taints to be added or updated.</p>"
+        },
+        "removeTaints": {
+          "shape": "taintsList",
+          "documentation": "<p>Kubernetes taints to be removed.</p>"
+        }
+      },
+      "documentation": "<p>An object representing the details of an update to a taints payload.</p>"
     },
     "UpdateType": {
       "type": "string",
@@ -3368,6 +3458,11 @@
       },
       "documentation": "<p>An object representing an Amazon EKS cluster VPC configuration response.</p>"
     },
+    "ZeroCapacity": {
+      "type": "integer",
+      "box": true,
+      "min": 0
+    },
     "configStatus": {
       "type": "string",
       "enum": [
@@ -3383,7 +3478,7 @@
     },
     "labelValue": {
       "type": "string",
-      "max": 253,
+      "max": 63,
       "min": 1
     },
     "labelsKeyList": {
@@ -3419,6 +3514,22 @@
       "type": "string",
       "max": 253,
       "min": 1
+    },
+    "taintKey": {
+      "type": "string",
+      "max": 63,
+      "min": 1
+    },
+    "taintValue": {
+      "type": "string",
+      "max": 63,
+      "min": 0
+    },
+    "taintsList": {
+      "type": "list",
+      "member": {
+        "shape": "Taint"
+      }
     }
   },
   "documentation": "<p>Amazon Elastic Kubernetes Service (Amazon EKS) is a managed service that makes it easy for you to run Kubernetes on AWS without needing to stand up or maintain your own Kubernetes control plane. Kubernetes is an open-source system for automating the deployment, scaling, and management of containerized applications. </p> <p>Amazon EKS runs up-to-date versions of the open-source Kubernetes software, so you can use all the existing plugins and tooling from the Kubernetes community. Applications running on Amazon EKS are fully compatible with applications running on any standard Kubernetes environment, whether running in on-premises data centers or public clouds. This means that you can easily migrate any standard Kubernetes application to Amazon EKS without any code modification required.</p>"

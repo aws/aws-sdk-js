@@ -20,6 +20,14 @@ declare class Connect extends Service {
    */
   associateApprovedOrigin(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and is subject to change. Allows the specified Amazon Connect instance to access the specified Amazon Lex or Amazon Lex V2 bot.
+   */
+  associateBot(params: Connect.Types.AssociateBotRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Allows the specified Amazon Connect instance to access the specified Amazon Lex or Amazon Lex V2 bot.
+   */
+  associateBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * This API is in preview release for Amazon Connect and is subject to change. Associates a storage resource type for the first time. You can only associate one type of storage configuration in a single call. This means, for example, that you can't define an instance with multiple S3 buckets for storing chat transcripts. This API does not create a resource that doesn't exist. It only associates it to the instance. Ensure that the resource being specified in the storage configuration, like an S3 bucket, exists when being used for association.
    */
   associateInstanceStorageConfig(params: Connect.Types.AssociateInstanceStorageConfigRequest, callback?: (err: AWSError, data: Connect.Types.AssociateInstanceStorageConfigResponse) => void): Request<Connect.Types.AssociateInstanceStorageConfigResponse, AWSError>;
@@ -76,19 +84,19 @@ declare class Connect extends Service {
    */
   createContactFlow(callback?: (err: AWSError, data: Connect.Types.CreateContactFlowResponse) => void): Request<Connect.Types.CreateContactFlowResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon Kinesis. It also does not allow for any configurations on features, such as Contact Lens for Amazon Connect. 
+   * This API is in preview release for Amazon Connect and is subject to change. Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon Kinesis. It also does not allow for any configurations on features, such as Contact Lens for Amazon Connect.  Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. You must wait 30 days before you can restart creating and deleting instances in your account.
    */
   createInstance(params: Connect.Types.CreateInstanceRequest, callback?: (err: AWSError, data: Connect.Types.CreateInstanceResponse) => void): Request<Connect.Types.CreateInstanceResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon Kinesis. It also does not allow for any configurations on features, such as Contact Lens for Amazon Connect. 
+   * This API is in preview release for Amazon Connect and is subject to change. Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon Kinesis. It also does not allow for any configurations on features, such as Contact Lens for Amazon Connect.  Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. You must wait 30 days before you can restart creating and deleting instances in your account.
    */
   createInstance(callback?: (err: AWSError, data: Connect.Types.CreateInstanceResponse) => void): Request<Connect.Types.CreateInstanceResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Create an AppIntegration association with an Amazon Connect instance.
+   * Create an AppIntegration association with an Amazon Connect instance.
    */
   createIntegrationAssociation(params: Connect.Types.CreateIntegrationAssociationRequest, callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Create an AppIntegration association with an Amazon Connect instance.
+   * Create an AppIntegration association with an Amazon Connect instance.
    */
   createIntegrationAssociation(callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
   /**
@@ -116,11 +124,11 @@ declare class Connect extends Service {
    */
   createRoutingProfile(callback?: (err: AWSError, data: Connect.Types.CreateRoutingProfileResponse) => void): Request<Connect.Types.CreateRoutingProfileResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Creates a use case for an AppIntegration association.
+   * Creates a use case for an AppIntegration association.
    */
   createUseCase(params: Connect.Types.CreateUseCaseRequest, callback?: (err: AWSError, data: Connect.Types.CreateUseCaseResponse) => void): Request<Connect.Types.CreateUseCaseResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Creates a use case for an AppIntegration association.
+   * Creates a use case for an AppIntegration association.
    */
   createUseCase(callback?: (err: AWSError, data: Connect.Types.CreateUseCaseResponse) => void): Request<Connect.Types.CreateUseCaseResponse, AWSError>;
   /**
@@ -140,19 +148,19 @@ declare class Connect extends Service {
    */
   createUserHierarchyGroup(callback?: (err: AWSError, data: Connect.Types.CreateUserHierarchyGroupResponse) => void): Request<Connect.Types.CreateUserHierarchyGroupResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Deletes the Amazon Connect instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes the Amazon Connect instance. Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. You must wait 30 days before you can restart creating and deleting instances in your account.
    */
   deleteInstance(params: Connect.Types.DeleteInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Deletes the Amazon Connect instance.
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes the Amazon Connect instance. Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. You must wait 30 days before you can restart creating and deleting instances in your account.
    */
   deleteInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Deletes an AppIntegration association from an Amazon Connect instance. The association must not have any use cases associated with it.
+   * Deletes an AppIntegration association from an Amazon Connect instance. The association must not have any use cases associated with it.
    */
   deleteIntegrationAssociation(params: Connect.Types.DeleteIntegrationAssociationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Deletes an AppIntegration association from an Amazon Connect instance. The association must not have any use cases associated with it.
+   * Deletes an AppIntegration association from an Amazon Connect instance. The association must not have any use cases associated with it.
    */
   deleteIntegrationAssociation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -164,11 +172,11 @@ declare class Connect extends Service {
    */
   deleteQuickConnect(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Deletes a use case from an AppIntegration association.
+   * Deletes a use case from an AppIntegration association.
    */
   deleteUseCase(params: Connect.Types.DeleteUseCaseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Deletes a use case from an AppIntegration association.
+   * Deletes a use case from an AppIntegration association.
    */
   deleteUseCase(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -284,6 +292,14 @@ declare class Connect extends Service {
    */
   disassociateApprovedOrigin(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and is subject to change. Revokes authorization from the specified instance to access the specified Amazon Lex or Amazon Lex V2 bot. 
+   */
+  disassociateBot(params: Connect.Types.DisassociateBotRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Revokes authorization from the specified instance to access the specified Amazon Lex or Amazon Lex V2 bot. 
+   */
+  disassociateBot(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * This API is in preview release for Amazon Connect and is subject to change. Removes the storage type configurations for the specified resource type and association ID.
    */
   disassociateInstanceStorageConfig(params: Connect.Types.DisassociateInstanceStorageConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -348,11 +364,11 @@ declare class Connect extends Service {
    */
   getCurrentMetricData(callback?: (err: AWSError, data: Connect.Types.GetCurrentMetricDataResponse) => void): Request<Connect.Types.GetCurrentMetricDataResponse, AWSError>;
   /**
-   * Retrieves a token for federation.
+   * Retrieves a token for federation.  This API doesn't support root users. If you try to invoke GetFederationToken with root credentials, an error message similar to the following one appears:   Provided identity: Principal: .... User: .... cannot be used for federation with Amazon Connect  
    */
   getFederationToken(params: Connect.Types.GetFederationTokenRequest, callback?: (err: AWSError, data: Connect.Types.GetFederationTokenResponse) => void): Request<Connect.Types.GetFederationTokenResponse, AWSError>;
   /**
-   * Retrieves a token for federation.
+   * Retrieves a token for federation.  This API doesn't support root users. If you try to invoke GetFederationToken with root credentials, an error message similar to the following one appears:   Provided identity: Principal: .... User: .... cannot be used for federation with Amazon Connect  
    */
   getFederationToken(callback?: (err: AWSError, data: Connect.Types.GetFederationTokenResponse) => void): Request<Connect.Types.GetFederationTokenResponse, AWSError>;
   /**
@@ -371,6 +387,14 @@ declare class Connect extends Service {
    * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all approved origins associated with the instance.
    */
   listApprovedOrigins(callback?: (err: AWSError, data: Connect.Types.ListApprovedOriginsResponse) => void): Request<Connect.Types.ListApprovedOriginsResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. For the specified version of Amazon Lex, returns a paginated list of all the Amazon Lex bots currently associated with the instance. 
+   */
+  listBots(params: Connect.Types.ListBotsRequest, callback?: (err: AWSError, data: Connect.Types.ListBotsResponse) => void): Request<Connect.Types.ListBotsResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. For the specified version of Amazon Lex, returns a paginated list of all the Amazon Lex bots currently associated with the instance. 
+   */
+  listBots(callback?: (err: AWSError, data: Connect.Types.ListBotsResponse) => void): Request<Connect.Types.ListBotsResponse, AWSError>;
   /**
    * Provides information about the contact flows for the specified Amazon Connect instance. You can also create and update contact flows using the Amazon Connect Flow language. For more information about contact flows, see Contact Flows in the Amazon Connect Administrator Guide.
    */
@@ -412,11 +436,11 @@ declare class Connect extends Service {
    */
   listInstances(callback?: (err: AWSError, data: Connect.Types.ListInstancesResponse) => void): Request<Connect.Types.ListInstancesResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Provides summary information about the AppIntegration associations for the specified Amazon Connect instance.
+   * Provides summary information about the AppIntegration associations for the specified Amazon Connect instance.
    */
   listIntegrationAssociations(params: Connect.Types.ListIntegrationAssociationsRequest, callback?: (err: AWSError, data: Connect.Types.ListIntegrationAssociationsResponse) => void): Request<Connect.Types.ListIntegrationAssociationsResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Provides summary information about the AppIntegration associations for the specified Amazon Connect instance.
+   * Provides summary information about the AppIntegration associations for the specified Amazon Connect instance.
    */
   listIntegrationAssociations(callback?: (err: AWSError, data: Connect.Types.ListIntegrationAssociationsResponse) => void): Request<Connect.Types.ListIntegrationAssociationsResponse, AWSError>;
   /**
@@ -460,11 +484,11 @@ declare class Connect extends Service {
    */
   listQueueQuickConnects(callback?: (err: AWSError, data: Connect.Types.ListQueueQuickConnectsResponse) => void): Request<Connect.Types.ListQueueQuickConnectsResponse, AWSError>;
   /**
-   * Provides information about the queues for the specified Amazon Connect instance. For more information about queues, see Queues: Standard and Agent in the Amazon Connect Administrator Guide.
+   * Provides information about the queues for the specified Amazon Connect instance. If you do not specify a QueueTypes parameter, both standard and agent queues are returned. This might cause an unexpected truncation of results if you have more than 1000 agents and you limit the number of results of the API call in code. For more information about queues, see Queues: Standard and Agent in the Amazon Connect Administrator Guide.
    */
   listQueues(params: Connect.Types.ListQueuesRequest, callback?: (err: AWSError, data: Connect.Types.ListQueuesResponse) => void): Request<Connect.Types.ListQueuesResponse, AWSError>;
   /**
-   * Provides information about the queues for the specified Amazon Connect instance. For more information about queues, see Queues: Standard and Agent in the Amazon Connect Administrator Guide.
+   * Provides information about the queues for the specified Amazon Connect instance. If you do not specify a QueueTypes parameter, both standard and agent queues are returned. This might cause an unexpected truncation of results if you have more than 1000 agents and you limit the number of results of the API call in code. For more information about queues, see Queues: Standard and Agent in the Amazon Connect Administrator Guide.
    */
   listQueues(callback?: (err: AWSError, data: Connect.Types.ListQueuesResponse) => void): Request<Connect.Types.ListQueuesResponse, AWSError>;
   /**
@@ -516,11 +540,11 @@ declare class Connect extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Connect.Types.ListTagsForResourceResponse) => void): Request<Connect.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Lists the use cases. 
+   * Lists the use cases. 
    */
   listUseCases(params: Connect.Types.ListUseCasesRequest, callback?: (err: AWSError, data: Connect.Types.ListUseCasesResponse) => void): Request<Connect.Types.ListUseCasesResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Lists the use cases. 
+   * Lists the use cases. 
    */
   listUseCases(callback?: (err: AWSError, data: Connect.Types.ListUseCasesResponse) => void): Request<Connect.Types.ListUseCasesResponse, AWSError>;
   /**
@@ -548,11 +572,11 @@ declare class Connect extends Service {
    */
   resumeContactRecording(callback?: (err: AWSError, data: Connect.Types.ResumeContactRecordingResponse) => void): Request<Connect.Types.ResumeContactRecordingResponse, AWSError>;
   /**
-   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in two situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception from the API Gateway.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   For more information about chat, see Chat in the Amazon Connect Administrator Guide.
+   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in two situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   For more information about chat, see Chat in the Amazon Connect Administrator Guide.
    */
   startChatContact(params: Connect.Types.StartChatContactRequest, callback?: (err: AWSError, data: Connect.Types.StartChatContactResponse) => void): Request<Connect.Types.StartChatContactResponse, AWSError>;
   /**
-   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in two situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception from the API Gateway.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   For more information about chat, see Chat in the Amazon Connect Administrator Guide.
+   * Initiates a contact flow to start a new chat for the customer. Response of this API provides a token required to obtain credentials from the CreateParticipantConnection API in the Amazon Connect Participant Service. When a new chat contact is successfully created, clients must subscribe to the participant’s connection for the created chat within 5 minutes. This is achieved by invoking CreateParticipantConnection with WEBSOCKET and CONNECTION_CREDENTIALS.  A 429 error occurs in two situations:   API rate limit is exceeded. API TPS throttling returns a TooManyRequests exception.   The quota for concurrent active chats is exceeded. Active chat throttling returns a LimitExceededException.   For more information about chat, see Chat in the Amazon Connect Administrator Guide.
    */
   startChatContact(callback?: (err: AWSError, data: Connect.Types.StartChatContactResponse) => void): Request<Connect.Types.StartChatContactResponse, AWSError>;
   /**
@@ -620,11 +644,11 @@ declare class Connect extends Service {
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates the contact attributes associated with the specified contact. You can add or update attributes for both ongoing and completed contacts. For example, while the call is active, you can update the customer's name or the reason the customer called. You can add notes about steps that the agent took during the call that display to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or to identify abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted.  Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, which was September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
+   * Creates or updates user-defined contact attributes associated with the specified contact. You can create or update user-defined attributes for both ongoing and completed contacts. For example, while the call is active, you can update the customer's name or the reason the customer called. You can add notes about steps that the agent took during the call that display to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or to identify abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted. For information about CTR retention and the maximum size of the CTR attributes section, see Feature specifications in the Amazon Connect Administrator Guide.   Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, which was September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
    */
   updateContactAttributes(params: Connect.Types.UpdateContactAttributesRequest, callback?: (err: AWSError, data: Connect.Types.UpdateContactAttributesResponse) => void): Request<Connect.Types.UpdateContactAttributesResponse, AWSError>;
   /**
-   * Creates or updates the contact attributes associated with the specified contact. You can add or update attributes for both ongoing and completed contacts. For example, while the call is active, you can update the customer's name or the reason the customer called. You can add notes about steps that the agent took during the call that display to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or to identify abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted.  Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, which was September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
+   * Creates or updates user-defined contact attributes associated with the specified contact. You can create or update user-defined attributes for both ongoing and completed contacts. For example, while the call is active, you can update the customer's name or the reason the customer called. You can add notes about steps that the agent took during the call that display to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or to identify abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted. For information about CTR retention and the maximum size of the CTR attributes section, see Feature specifications in the Amazon Connect Administrator Guide.   Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, which was September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
    */
   updateContactAttributes(callback?: (err: AWSError, data: Connect.Types.UpdateContactAttributesResponse) => void): Request<Connect.Types.UpdateContactAttributesResponse, AWSError>;
   /**
@@ -810,9 +834,10 @@ declare namespace Connect {
   export type AgentFirstName = string;
   export type AgentLastName = string;
   export type AgentUsername = string;
+  export type AliasArn = string;
   export interface AssociateApprovedOriginRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -820,9 +845,20 @@ declare namespace Connect {
      */
     Origin: Origin;
   }
+  export interface AssociateBotRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    LexBot?: LexBot;
+    /**
+     * The Amazon Lex V2 bot to associate with the instance.
+     */
+    LexV2Bot?: LexV2Bot;
+  }
   export interface AssociateInstanceStorageConfigRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -842,7 +878,7 @@ declare namespace Connect {
   }
   export interface AssociateLambdaFunctionRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -852,17 +888,17 @@ declare namespace Connect {
   }
   export interface AssociateLexBotRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
-     * The Amazon Lex box to associate with the instance.
+     * The Amazon Lex bot to associate with the instance.
      */
     LexBot: LexBot;
   }
   export interface AssociateQueueQuickConnectsRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -876,7 +912,7 @@ declare namespace Connect {
   }
   export interface AssociateRoutingProfileQueuesRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -890,7 +926,7 @@ declare namespace Connect {
   }
   export interface AssociateSecurityKeyRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1072,7 +1108,7 @@ declare namespace Connect {
   }
   export interface CreateIntegrationAssociationRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1095,6 +1131,10 @@ declare namespace Connect {
      * The type of the data source.
      */
     SourceType: SourceType;
+    /**
+     * One or more tags.
+     */
+    Tags?: TagMap;
   }
   export interface CreateIntegrationAssociationResponse {
     /**
@@ -1108,7 +1148,7 @@ declare namespace Connect {
   }
   export interface CreateQueueRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1152,7 +1192,7 @@ declare namespace Connect {
   }
   export interface CreateQuickConnectRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1184,7 +1224,7 @@ declare namespace Connect {
   }
   export interface CreateRoutingProfileRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1224,7 +1264,7 @@ declare namespace Connect {
   }
   export interface CreateUseCaseRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1235,6 +1275,10 @@ declare namespace Connect {
      * The type of use case to associate to the AppIntegration association. Each AppIntegration association can have only one of each use case type.
      */
     UseCaseType: UseCaseType;
+    /**
+     * One or more tags.
+     */
+    Tags?: TagMap;
   }
   export interface CreateUseCaseResponse {
     /**
@@ -1256,7 +1300,7 @@ declare namespace Connect {
      */
     ParentGroupId?: HierarchyGroupId;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -1304,7 +1348,7 @@ declare namespace Connect {
      */
     HierarchyGroupId?: HierarchyGroupId;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1377,13 +1421,13 @@ declare namespace Connect {
   export type Delay = number;
   export interface DeleteInstanceRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }
   export interface DeleteIntegrationAssociationRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1393,7 +1437,7 @@ declare namespace Connect {
   }
   export interface DeleteQuickConnectRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1403,7 +1447,7 @@ declare namespace Connect {
   }
   export interface DeleteUseCaseRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1421,13 +1465,13 @@ declare namespace Connect {
      */
     HierarchyGroupId: HierarchyGroupId;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }
   export interface DeleteUserRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1453,7 +1497,7 @@ declare namespace Connect {
   }
   export interface DescribeHoursOfOperationRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1469,7 +1513,7 @@ declare namespace Connect {
   }
   export interface DescribeInstanceAttributeRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1485,7 +1529,7 @@ declare namespace Connect {
   }
   export interface DescribeInstanceRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -1497,7 +1541,7 @@ declare namespace Connect {
   }
   export interface DescribeInstanceStorageConfigRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1517,7 +1561,7 @@ declare namespace Connect {
   }
   export interface DescribeQueueRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1533,7 +1577,7 @@ declare namespace Connect {
   }
   export interface DescribeQuickConnectRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1549,7 +1593,7 @@ declare namespace Connect {
   }
   export interface DescribeRoutingProfileRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1569,7 +1613,7 @@ declare namespace Connect {
      */
     HierarchyGroupId: HierarchyGroupId;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -1581,7 +1625,7 @@ declare namespace Connect {
   }
   export interface DescribeUserHierarchyStructureRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -1597,7 +1641,7 @@ declare namespace Connect {
      */
     UserId: UserId;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -1624,7 +1668,7 @@ declare namespace Connect {
   export type DirectoryUserId = string;
   export interface DisassociateApprovedOriginRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1632,9 +1676,20 @@ declare namespace Connect {
      */
     Origin: Origin;
   }
+  export interface DisassociateBotRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    LexBot?: LexBot;
+    /**
+     * The Amazon Lex V2 bot to disassociate from the instance.
+     */
+    LexV2Bot?: LexV2Bot;
+  }
   export interface DisassociateInstanceStorageConfigRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1648,7 +1703,7 @@ declare namespace Connect {
   }
   export interface DisassociateLambdaFunctionRequest {
     /**
-     * The identifier of the Amazon Connect instance..
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance..
      */
     InstanceId: InstanceId;
     /**
@@ -1658,7 +1713,7 @@ declare namespace Connect {
   }
   export interface DisassociateLexBotRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1672,7 +1727,7 @@ declare namespace Connect {
   }
   export interface DisassociateQueueQuickConnectsRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1686,7 +1741,7 @@ declare namespace Connect {
   }
   export interface DisassociateRoutingProfileQueuesRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1700,7 +1755,7 @@ declare namespace Connect {
   }
   export interface DisassociateSecurityKeyRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1751,7 +1806,7 @@ declare namespace Connect {
   }
   export interface GetCurrentMetricDataRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1791,7 +1846,7 @@ declare namespace Connect {
   }
   export interface GetFederationTokenRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -1803,7 +1858,7 @@ declare namespace Connect {
   }
   export interface GetMetricDataRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -1815,15 +1870,15 @@ declare namespace Connect {
      */
     EndTime: timestamp;
     /**
-     * The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. VOICE, CHAT, and TASK channels are supported.
+     * The queues, up to 100, or channels, to use to filter the metrics returned. Metric data is retrieved only for the resources associated with the queues or channels included in the filter. You can include both queue IDs and queue ARNs in the same request. VOICE, CHAT, and TASK channels are supported.  To filter by Queues, enter the queue ID/ARN, not the name of the queue. 
      */
     Filters: Filters;
     /**
-     * The grouping applied to the metrics returned. For example, when results are grouped by queue, the metrics returned are grouped by queue. The values returned apply to the metrics for each queue rather than aggregated for all queues. The only supported grouping is QUEUE. If no grouping is specified, a summary of metrics for all queues is returned.
+     * The grouping applied to the metrics returned. For example, when results are grouped by queue, the metrics returned are grouped by queue. The values returned apply to the metrics for each queue rather than aggregated for all queues. If no grouping is specified, a summary of metrics for all queues is returned.
      */
     Groupings?: Groupings;
     /**
-     * The metrics to retrieve. Specify the name, unit, and statistic for each metric. The following historical metrics are available. For a description of each metric, see Historical Metrics Definitions in the Amazon Connect Administrator Guide.  ABANDON_TIME  Unit: SECONDS Statistic: AVG  AFTER_CONTACT_WORK_TIME  Unit: SECONDS Statistic: AVG  API_CONTACTS_HANDLED  Unit: COUNT Statistic: SUM  CALLBACK_CONTACTS_HANDLED  Unit: COUNT Statistic: SUM  CONTACTS_ABANDONED  Unit: COUNT Statistic: SUM  CONTACTS_AGENT_HUNG_UP_FIRST  Unit: COUNT Statistic: SUM  CONTACTS_CONSULTED  Unit: COUNT Statistic: SUM  CONTACTS_HANDLED  Unit: COUNT Statistic: SUM  CONTACTS_HANDLED_INCOMING  Unit: COUNT Statistic: SUM  CONTACTS_HANDLED_OUTBOUND  Unit: COUNT Statistic: SUM  CONTACTS_HOLD_ABANDONS  Unit: COUNT Statistic: SUM  CONTACTS_MISSED  Unit: COUNT Statistic: SUM  CONTACTS_QUEUED  Unit: COUNT Statistic: SUM  CONTACTS_TRANSFERRED_IN  Unit: COUNT Statistic: SUM  CONTACTS_TRANSFERRED_IN_FROM_QUEUE  Unit: COUNT Statistic: SUM  CONTACTS_TRANSFERRED_OUT  Unit: COUNT Statistic: SUM  CONTACTS_TRANSFERRED_OUT_FROM_QUEUE  Unit: COUNT Statistic: SUM  HANDLE_TIME  Unit: SECONDS Statistic: AVG  HOLD_TIME  Unit: SECONDS Statistic: AVG  INTERACTION_AND_HOLD_TIME  Unit: SECONDS Statistic: AVG  INTERACTION_TIME  Unit: SECONDS Statistic: AVG  OCCUPANCY  Unit: PERCENT Statistic: AVG  QUEUE_ANSWER_TIME  Unit: SECONDS Statistic: AVG  QUEUED_TIME  Unit: SECONDS Statistic: MAX  SERVICE_LEVEL  Unit: PERCENT Statistic: AVG Threshold: Only "Less than" comparisons are supported, with the following service level thresholds: 15, 20, 25, 30, 45, 60, 90, 120, 180, 240, 300, 600  
+     * The metrics to retrieve. Specify the name, unit, and statistic for each metric. The following historical metrics are available. For a description of each metric, see Historical Metrics Definitions in the Amazon Connect Administrator Guide.  This API does not support a contacts incoming metric (there's no CONTACTS_INCOMING metric missing from the documented list).    ABANDON_TIME  Unit: SECONDS Statistic: AVG  AFTER_CONTACT_WORK_TIME  Unit: SECONDS Statistic: AVG  API_CONTACTS_HANDLED  Unit: COUNT Statistic: SUM  CALLBACK_CONTACTS_HANDLED  Unit: COUNT Statistic: SUM  CONTACTS_ABANDONED  Unit: COUNT Statistic: SUM  CONTACTS_AGENT_HUNG_UP_FIRST  Unit: COUNT Statistic: SUM  CONTACTS_CONSULTED  Unit: COUNT Statistic: SUM  CONTACTS_HANDLED  Unit: COUNT Statistic: SUM  CONTACTS_HANDLED_INCOMING  Unit: COUNT Statistic: SUM  CONTACTS_HANDLED_OUTBOUND  Unit: COUNT Statistic: SUM  CONTACTS_HOLD_ABANDONS  Unit: COUNT Statistic: SUM  CONTACTS_MISSED  Unit: COUNT Statistic: SUM  CONTACTS_QUEUED  Unit: COUNT Statistic: SUM  CONTACTS_TRANSFERRED_IN  Unit: COUNT Statistic: SUM  CONTACTS_TRANSFERRED_IN_FROM_QUEUE  Unit: COUNT Statistic: SUM  CONTACTS_TRANSFERRED_OUT  Unit: COUNT Statistic: SUM  CONTACTS_TRANSFERRED_OUT_FROM_QUEUE  Unit: COUNT Statistic: SUM  HANDLE_TIME  Unit: SECONDS Statistic: AVG  HOLD_TIME  Unit: SECONDS Statistic: AVG  INTERACTION_AND_HOLD_TIME  Unit: SECONDS Statistic: AVG  INTERACTION_TIME  Unit: SECONDS Statistic: AVG  OCCUPANCY  Unit: PERCENT Statistic: AVG  QUEUE_ANSWER_TIME  Unit: SECONDS Statistic: AVG  QUEUED_TIME  Unit: SECONDS Statistic: MAX  SERVICE_LEVEL  You can include up to 20 SERVICE_LEVEL metrics in a request. Unit: PERCENT Statistic: AVG Threshold: For ThresholdValue, enter any whole number from 1 to 604800 (inclusive), in seconds. For Comparison, you must enter LT (for "Less than").   
      */
     HistoricalMetrics: HistoricalMetrics;
     /**
@@ -2094,7 +2149,7 @@ declare namespace Connect {
   export type InboundCallsEnabled = boolean;
   export interface Instance {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     Id?: InstanceId;
     /**
@@ -2222,7 +2277,7 @@ declare namespace Connect {
      */
     IntegrationAssociationArn?: ARN;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId?: InstanceId;
     /**
@@ -2285,11 +2340,26 @@ declare namespace Connect {
      */
     LexRegion?: LexRegion;
   }
+  export interface LexBotConfig {
+    LexBot?: LexBot;
+    /**
+     * Configuration information of an Amazon Lex V2 bot.
+     */
+    LexV2Bot?: LexV2Bot;
+  }
+  export type LexBotConfigList = LexBotConfig[];
   export type LexBotsList = LexBot[];
   export type LexRegion = string;
+  export interface LexV2Bot {
+    /**
+     * The Amazon Resource Name (ARN) of the Amazon Lex V2 bot.
+     */
+    AliasArn?: AliasArn;
+  }
+  export type LexVersion = "V1"|"V2"|string;
   export interface ListApprovedOriginsRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2311,9 +2381,37 @@ declare namespace Connect {
      */
     NextToken?: NextToken;
   }
+  export interface ListBotsRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult25;
+    /**
+     * The version of Amazon Lex or Amazon Lex V2.
+     */
+    LexVersion: LexVersion;
+  }
+  export interface ListBotsResponse {
+    /**
+     * The names and Regions of the Amazon Lex or Amazon Lex V2 bots associated with the specified instance.
+     */
+    LexBots?: LexBotConfigList;
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListContactFlowsRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2341,7 +2439,7 @@ declare namespace Connect {
   }
   export interface ListHoursOfOperationsRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2365,7 +2463,7 @@ declare namespace Connect {
   }
   export interface ListInstanceAttributesRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2389,7 +2487,7 @@ declare namespace Connect {
   }
   export interface ListInstanceStorageConfigsRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2437,7 +2535,7 @@ declare namespace Connect {
   }
   export interface ListIntegrationAssociationsRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2461,7 +2559,7 @@ declare namespace Connect {
   }
   export interface ListLambdaFunctionsRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2485,7 +2583,7 @@ declare namespace Connect {
   }
   export interface ListLexBotsRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2509,7 +2607,7 @@ declare namespace Connect {
   }
   export interface ListPhoneNumbersRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2565,7 +2663,7 @@ declare namespace Connect {
   }
   export interface ListQueueQuickConnectsRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2593,7 +2691,7 @@ declare namespace Connect {
   }
   export interface ListQueuesRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2621,7 +2719,7 @@ declare namespace Connect {
   }
   export interface ListQuickConnectsRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2649,7 +2747,7 @@ declare namespace Connect {
   }
   export interface ListRoutingProfileQueuesRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2677,7 +2775,7 @@ declare namespace Connect {
   }
   export interface ListRoutingProfilesRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2701,7 +2799,7 @@ declare namespace Connect {
   }
   export interface ListSecurityKeysRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2725,7 +2823,7 @@ declare namespace Connect {
   }
   export interface ListSecurityProfilesRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2761,7 +2859,7 @@ declare namespace Connect {
   }
   export interface ListUseCasesRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2789,7 +2887,7 @@ declare namespace Connect {
   }
   export interface ListUserHierarchyGroupsRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2813,7 +2911,7 @@ declare namespace Connect {
   }
   export interface ListUsersRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -2848,7 +2946,7 @@ declare namespace Connect {
      */
     Channel: Channel;
     /**
-     * The number of contacts an agent can have on a channel simultaneously.
+     * The number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 5. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
      */
     Concurrency: Concurrency;
   }
@@ -3107,7 +3205,7 @@ declare namespace Connect {
   export type ReferenceValue = string;
   export interface ResumeContactRecordingRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3123,7 +3221,7 @@ declare namespace Connect {
   }
   export interface RoutingProfile {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId?: InstanceId;
     /**
@@ -3278,7 +3376,7 @@ declare namespace Connect {
   export type SourceType = "SALESFORCE"|"ZENDESK"|string;
   export interface StartChatContactRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3318,7 +3416,7 @@ declare namespace Connect {
   }
   export interface StartContactRecordingRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3346,11 +3444,11 @@ declare namespace Connect {
      */
     ContactFlowId: ContactFlowId;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. The token is valid for 7 days after creation. If a contact is already started, the contact ID is returned. If the contact is disconnected, a new contact is started.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request. The token is valid for 7 days after creation. If a contact is already started, the contact ID is returned. 
      */
     ClientToken?: ClientToken;
     /**
@@ -3374,7 +3472,7 @@ declare namespace Connect {
   }
   export interface StartTaskContactRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3415,7 +3513,7 @@ declare namespace Connect {
   export type Statistic = "SUM"|"MAX"|"AVG"|string;
   export interface StopContactRecordingRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3435,7 +3533,7 @@ declare namespace Connect {
      */
     ContactId: ContactId;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -3445,7 +3543,7 @@ declare namespace Connect {
   export type String = string;
   export interface SuspendContactRecordingRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3504,7 +3602,7 @@ declare namespace Connect {
      */
     InitialContactId: ContactId;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3548,7 +3646,7 @@ declare namespace Connect {
   }
   export interface UpdateInstanceAttributeRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3562,7 +3660,7 @@ declare namespace Connect {
   }
   export interface UpdateInstanceStorageConfigRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3577,7 +3675,7 @@ declare namespace Connect {
   }
   export interface UpdateQueueHoursOfOperationRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3591,7 +3689,7 @@ declare namespace Connect {
   }
   export interface UpdateQueueMaxContactsRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3601,11 +3699,11 @@ declare namespace Connect {
     /**
      * The maximum number of contacts that can be in the queue before it is considered full.
      */
-    MaxContacts: QueueMaxContacts;
+    MaxContacts?: QueueMaxContacts;
   }
   export interface UpdateQueueNameRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3623,7 +3721,7 @@ declare namespace Connect {
   }
   export interface UpdateQueueOutboundCallerConfigRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3637,7 +3735,7 @@ declare namespace Connect {
   }
   export interface UpdateQueueStatusRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3651,7 +3749,7 @@ declare namespace Connect {
   }
   export interface UpdateQuickConnectConfigRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3665,7 +3763,7 @@ declare namespace Connect {
   }
   export interface UpdateQuickConnectNameRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3683,7 +3781,7 @@ declare namespace Connect {
   }
   export interface UpdateRoutingProfileConcurrencyRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3697,7 +3795,7 @@ declare namespace Connect {
   }
   export interface UpdateRoutingProfileDefaultOutboundQueueRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3711,7 +3809,7 @@ declare namespace Connect {
   }
   export interface UpdateRoutingProfileNameRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3729,7 +3827,7 @@ declare namespace Connect {
   }
   export interface UpdateRoutingProfileQueuesRequest {
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
     /**
@@ -3751,7 +3849,7 @@ declare namespace Connect {
      */
     HierarchyGroupId: HierarchyGroupId;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -3765,7 +3863,7 @@ declare namespace Connect {
      */
     UserId: UserId;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -3775,7 +3873,7 @@ declare namespace Connect {
      */
     HierarchyStructure: HierarchyStructureUpdate;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -3789,7 +3887,7 @@ declare namespace Connect {
      */
     UserId: UserId;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -3803,7 +3901,7 @@ declare namespace Connect {
      */
     UserId: UserId;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -3817,7 +3915,7 @@ declare namespace Connect {
      */
     UserId: UserId;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }
@@ -3831,7 +3929,7 @@ declare namespace Connect {
      */
     UserId: UserId;
     /**
-     * The identifier of the Amazon Connect instance.
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
      */
     InstanceId: InstanceId;
   }

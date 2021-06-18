@@ -1617,6 +1617,19 @@
       },
       "documentation": "<p>Status of the Cognito options for the specified Elasticsearch domain.</p>"
     },
+    "ColdStorageOptions": {
+      "type": "structure",
+      "required": [
+        "Enabled"
+      ],
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>True to enable cold storage for an Elasticsearch domain.</p>"
+        }
+      },
+      "documentation": "<p>Specifies settings for cold storage.</p>"
+    },
     "CommitMessage": {
       "type": "string",
       "max": 160
@@ -2667,6 +2680,10 @@
         "WarmCount": {
           "shape": "IntegerClass",
           "documentation": "<p>The number of warm nodes in the cluster.</p>"
+        },
+        "ColdStorageOptions": {
+          "shape": "ColdStorageOptions",
+          "documentation": "<p>Specifies the <code>ColdStorageOptions</code> configuration for an Elasticsearch domain.</p>"
         }
       },
       "documentation": "<p>Specifies the configuration for the domain cluster, such as the type and number of instances.</p>"

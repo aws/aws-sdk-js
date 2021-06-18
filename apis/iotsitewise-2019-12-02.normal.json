@@ -148,7 +148,7 @@
           "shape": "ConflictingOperationException"
         }
       ],
-      "documentation": "<p>Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ingest-api.html\">Ingesting data using the API</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <p>To identify an asset property, you must specify one of the following:</p> <ul> <li> <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p> </li> <li> <p>A <code>propertyAlias</code>, which is a data stream alias (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property's alias, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p> </li> </ul> <important> <p>With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 7 days in the past and no more than 5 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-7 days, +5 minutes] and returns a <code>TimestampOutOfRangeException</code> error.</p> <p>For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV <code>{T1, GOOD, V1}</code>, then storing <code>{T1, GOOD, V2}</code> replaces the existing TQV.</p> </important> <p>AWS IoT SiteWise authorizes access to each <code>BatchPutAssetPropertyValue</code> entry individually. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-batchputassetpropertyvalue-action\">BatchPutAssetPropertyValue authorization</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>",
+      "documentation": "<p>Sends a list of asset property values to AWS IoT SiteWise. Each value is a timestamp-quality-value (TQV) data point. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/ingest-api.html\">Ingesting data using the API</a> in the <i>AWS IoT SiteWise User Guide</i>.</p> <p>To identify an asset property, you must specify one of the following:</p> <ul> <li> <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p> </li> <li> <p>A <code>propertyAlias</code>, which is a data stream alias (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property's alias, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p> </li> </ul> <important> <p>With respect to Unix epoch time, AWS IoT SiteWise accepts only TQVs that have a timestamp of no more than 7 days in the past and no more than 10 minutes in the future. AWS IoT SiteWise rejects timestamps outside of the inclusive range of [-7 days, +10 minutes] and returns a <code>TimestampOutOfRangeException</code> error.</p> <p>For each asset property, AWS IoT SiteWise overwrites TQVs with duplicate timestamps unless the newer TQV has a different quality. For example, if you store a TQV <code>{T1, GOOD, V1}</code>, then storing <code>{T1, GOOD, V2}</code> replaces the existing TQV.</p> </important> <p>AWS IoT SiteWise authorizes access to each <code>BatchPutAssetPropertyValue</code> entry individually. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-batchputassetpropertyvalue-action\">BatchPutAssetPropertyValue authorization</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>",
       "endpoint": {
         "hostPrefix": "data."
       }
@@ -1111,6 +1111,40 @@
         "hostPrefix": "data."
       }
     },
+    "GetInterpolatedAssetPropertyValues": {
+      "name": "GetInterpolatedAssetPropertyValues",
+      "http": {
+        "method": "GET",
+        "requestUri": "/properties/interpolated"
+      },
+      "input": {
+        "shape": "GetInterpolatedAssetPropertyValuesRequest"
+      },
+      "output": {
+        "shape": "GetInterpolatedAssetPropertyValuesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Get interpolated values for an asset property for a specified time interval, during a period of time. For example, you can use the this operation to return the interpolated temperature values for a wind turbine every 24 hours over a duration of 7 days.</p> <note> <p>This API isn't available in China (Beijing).</p> </note> <p>To identify an asset property, you must specify one of the following:</p> <ul> <li> <p>The <code>assetId</code> and <code>propertyId</code> of an asset property.</p> </li> <li> <p>A <code>propertyAlias</code>, which is a data stream alias (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). To define an asset property's alias, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html\">UpdateAssetProperty</a>.</p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "data."
+      }
+    },
     "ListAccessPolicies": {
       "name": "ListAccessPolicies",
       "http": {
@@ -2022,6 +2056,23 @@
         }
       },
       "documentation": "<p>Contains the (pre-calculated) aggregate values for an asset property.</p>"
+    },
+    "Alarms": {
+      "type": "structure",
+      "required": [
+        "alarmRoleArn"
+      ],
+      "members": {
+        "alarmRoleArn": {
+          "shape": "ARN",
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the IAM role that allows the alarm to perform actions and access AWS resources, including AWS IoT Events.</p>"
+        },
+        "notificationLambdaArn": {
+          "shape": "ARN",
+          "documentation": "<p>The <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">ARN</a> of the AWS Lambda function that manages alarm notifications. For more information, see <a href=\"https://docs.aws.amazon.com/\">Managing alarm notifications</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
+        }
+      },
+      "documentation": "<p>Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .</p>"
     },
     "AmazonResourceName": {
       "type": "string",
@@ -3246,6 +3297,14 @@
         "portalAuthMode": {
           "shape": "AuthMode",
           "documentation": "<p>The service to use to authenticate users to the portal. Choose from the following options:</p> <ul> <li> <p> <code>SSO</code> – The portal uses AWS Single Sign-On to authenticate users and manage user permissions. Before you can create a portal that uses AWS SSO, you must enable AWS SSO. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-get-started.html#mon-gs-sso\">Enabling AWS SSO</a> in the <i>AWS IoT SiteWise User Guide</i>. This option is only available in AWS Regions other than the China Regions.</p> </li> <li> <p> <code>IAM</code> – The portal uses AWS Identity and Access Management (IAM) to authenticate users and manage user permissions. This option is only available in the China Regions.</p> </li> </ul> <p>You can't change this value after you create a portal.</p> <p>Default: <code>SSO</code> </p>"
+        },
+        "notificationSenderEmail": {
+          "shape": "Email",
+          "documentation": "<p>The email address that sends alarm notifications.</p> <important> <p>If you use the AWS IoT Events managed AWS Lambda function to manage your emails, you must <a href=\"https://docs.aws.amazon.com/ses/latest/DeveloperGuide/verify-email-addresses.html\">verify the sender email address in Amazon SES</a>.</p> </important>"
+        },
+        "alarms": {
+          "shape": "Alarms",
+          "documentation": "<p>Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .</p>"
         }
       }
     },
@@ -4094,6 +4153,14 @@
         "portalAuthMode": {
           "shape": "AuthMode",
           "documentation": "<p>The service to use to authenticate users to the portal.</p>"
+        },
+        "notificationSenderEmail": {
+          "shape": "Email",
+          "documentation": "<p>The email address that sends alarm notifications.</p>"
+        },
+        "alarms": {
+          "shape": "Alarms",
+          "documentation": "<p>Contains the configuration information of an alarm created in a AWS IoT SiteWise Monitor portal.</p>"
         }
       }
     },
@@ -4538,6 +4605,106 @@
         }
       }
     },
+    "GetInterpolatedAssetPropertyValuesRequest": {
+      "type": "structure",
+      "required": [
+        "startTimeInSeconds",
+        "endTimeInSeconds",
+        "quality",
+        "intervalInSeconds",
+        "type"
+      ],
+      "members": {
+        "assetId": {
+          "shape": "ID",
+          "documentation": "<p>The ID of the asset.</p>",
+          "location": "querystring",
+          "locationName": "assetId"
+        },
+        "propertyId": {
+          "shape": "ID",
+          "documentation": "<p>The ID of the asset property.</p>",
+          "location": "querystring",
+          "locationName": "propertyId"
+        },
+        "propertyAlias": {
+          "shape": "AssetPropertyAlias",
+          "documentation": "<p>The property alias that identifies the property, such as an OPC-UA server data stream path (for example, <code>/company/windfarm/3/turbine/7/temperature</code>). For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html\">Mapping industrial data streams to asset properties</a> in the <i>AWS IoT SiteWise User Guide</i>.</p>",
+          "location": "querystring",
+          "locationName": "propertyAlias"
+        },
+        "startTimeInSeconds": {
+          "shape": "TimeInSeconds",
+          "documentation": "<p>The exclusive start of the range from which to interpolate data, expressed in seconds in Unix epoch time.</p>",
+          "location": "querystring",
+          "locationName": "startTimeInSeconds"
+        },
+        "startTimeOffsetInNanos": {
+          "shape": "OffsetInNanos",
+          "documentation": "<p>The nanosecond offset converted from <code>startTimeInSeconds</code>.</p>",
+          "location": "querystring",
+          "locationName": "startTimeOffsetInNanos"
+        },
+        "endTimeInSeconds": {
+          "shape": "TimeInSeconds",
+          "documentation": "<p>The inclusive end of the range from which to interpolate data, expressed in seconds in Unix epoch time.</p>",
+          "location": "querystring",
+          "locationName": "endTimeInSeconds"
+        },
+        "endTimeOffsetInNanos": {
+          "shape": "OffsetInNanos",
+          "documentation": "<p>The nanosecond offset converted from <code>endTimeInSeconds</code>.</p>",
+          "location": "querystring",
+          "locationName": "endTimeOffsetInNanos"
+        },
+        "quality": {
+          "shape": "Quality",
+          "documentation": "<p>The quality of the asset property value. You can use this parameter as a filter to choose only the asset property values that have a specific quality.</p>",
+          "location": "querystring",
+          "locationName": "quality"
+        },
+        "intervalInSeconds": {
+          "shape": "IntervalInSeconds",
+          "documentation": "<p>The time interval in seconds over which to interpolate data. Each interval starts when the previous one ends.</p>",
+          "location": "querystring",
+          "locationName": "intervalInSeconds"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to be used for the next set of paginated results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "maxResults": {
+          "shape": "MaxInterpolatedResults",
+          "documentation": "<p>The maximum number of results to be returned per paginated request. If not specified, the default value is 10.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "type": {
+          "shape": "InterpolationType",
+          "documentation": "<p>The interpolation type.</p> <p>Valid values: <code>LINEAR_INTERPOLATION</code> </p>",
+          "location": "querystring",
+          "locationName": "type"
+        }
+      }
+    },
+    "GetInterpolatedAssetPropertyValuesResponse": {
+      "type": "structure",
+      "required": [
+        "interpolatedAssetPropertyValues"
+      ],
+      "members": {
+        "interpolatedAssetPropertyValues": {
+          "shape": "InterpolatedAssetPropertyValues",
+          "documentation": "<p>The requested interpolated values.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of results, or null if there are no additional results.</p>"
+        }
+      }
+    },
     "Greengrass": {
       "type": "structure",
       "required": [
@@ -4572,7 +4739,7 @@
       "members": {
         "arn": {
           "shape": "ARN",
-          "documentation": "<p>The ARN of the IAM role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.htmll#identifiers-arns\">IAM ARNs</a> in the <i>IAM User Guide</i>.</p>"
+          "documentation": "<p>The ARN of the IAM role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html\">IAM ARNs</a> in the <i>IAM User Guide</i>.</p>"
         }
       },
       "documentation": "<p>Contains information about an AWS Identity and Access Management (IAM) role. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM roles</a> in the <i>IAM User Guide</i>.</p>"
@@ -4700,11 +4867,43 @@
       },
       "documentation": "<p>Contains an image that is uploaded to AWS IoT SiteWise and available at a URL.</p>"
     },
+    "InterpolatedAssetPropertyValue": {
+      "type": "structure",
+      "required": [
+        "timestamp",
+        "value"
+      ],
+      "members": {
+        "timestamp": {
+          "shape": "TimeInNanos"
+        },
+        "value": {
+          "shape": "Variant"
+        }
+      },
+      "documentation": "<p>Contains information about an interpolated asset property value.</p>"
+    },
+    "InterpolatedAssetPropertyValues": {
+      "type": "list",
+      "member": {
+        "shape": "InterpolatedAssetPropertyValue"
+      }
+    },
+    "InterpolationType": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
     "Interval": {
       "type": "string",
       "max": 3,
       "min": 2,
       "pattern": "1w|1d|1h|15m|5m|1m"
+    },
+    "IntervalInSeconds": {
+      "type": "long",
+      "max": 320000000,
+      "min": 1
     },
     "KmsKeyId": {
       "type": "string",
@@ -5201,6 +5400,10 @@
       "min": 1,
       "pattern": "[^\\u0000-\\u001F\\u007F]+"
     },
+    "MaxInterpolatedResults": {
+      "type": "integer",
+      "min": 1
+    },
     "MaxResults": {
       "type": "integer",
       "max": 250,
@@ -5277,7 +5480,7 @@
     },
     "NextToken": {
       "type": "string",
-      "max": 2048,
+      "max": 4096,
       "min": 1,
       "pattern": "[A-Za-z0-9+/=]+"
     },
@@ -6152,6 +6355,14 @@
           "shape": "ClientToken",
           "documentation": "<p>A unique case-sensitive identifier that you can provide to ensure the idempotency of the request. Don't reuse this client token if a new idempotent request is required.</p>",
           "idempotencyToken": true
+        },
+        "notificationSenderEmail": {
+          "shape": "Email",
+          "documentation": "<p>The email address that sends alarm notifications.</p>"
+        },
+        "alarms": {
+          "shape": "Alarms",
+          "documentation": "<p>Contains the configuration information of an alarm created in an AWS IoT SiteWise Monitor portal. You can use the alarm to monitor an asset property and get notified when the asset property value is outside a specified range. For more information, see .</p>"
         }
       }
     },

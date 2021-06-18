@@ -1234,7 +1234,7 @@ declare namespace AuditManager {
     /**
      *  The name of the specified control set. 
      */
-    name?: ControlSetName;
+    name: ControlSetName;
     /**
      *  The list of controls within the control set. This does not contain the control set ID. 
      */
@@ -1611,7 +1611,7 @@ declare namespace AuditManager {
      */
     id?: UUID;
     /**
-     *  Specifies whether the evidence is inclded in the assessment report. 
+     *  Specifies whether the evidence is included in the assessment report. 
      */
     assessmentReportSelection?: String;
   }
@@ -1744,6 +1744,7 @@ declare namespace AuditManager {
   }
   export interface GetAssessmentResponse {
     assessment?: Assessment;
+    userRole?: Role;
   }
   export interface GetChangeLogsRequest {
     /**
@@ -2289,7 +2290,7 @@ declare namespace AuditManager {
      */
     keywordInputType?: KeywordInputType;
     /**
-     *  The value of the keyword used to search AWS CloudTrail logs when mapping a control data source. 
+     *  The value of the keyword used to search AWS CloudTrail logs, AWS Config rules, AWS Security Hub checks, and AWS API names when mapping a control data source. 
      */
     keywordValue?: KeywordValue;
   }
@@ -2397,11 +2398,11 @@ declare namespace AuditManager {
     /**
      *  The unique identifier for the control set. 
      */
-    id?: UUID;
+    id?: ControlSetName;
     /**
      *  The name of the control set. 
      */
-    name?: ControlSetName;
+    name: ControlSetName;
     /**
      *  The list of controls contained within the control set. 
      */

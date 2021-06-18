@@ -68,11 +68,11 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   createApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.CreateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.CreateApplicationResponse, AWSError>;
   /**
-   * Creates and returns a URL that you can use to connect to an application's extension. Currently, the only available extension is the Apache Flink dashboard. The IAM role or user used to call this API defines the permissions to access the extension. Once the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request that attempts to connect to the extension.   The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes to be valid. If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error. 
+   * Creates and returns a URL that you can use to connect to an application's extension. Currently, the only available extension is the Apache Flink dashboard. The IAM role or user used to call this API defines the permissions to access the extension. After the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request that attempts to connect to the extension.  You control the amount of time that the URL will be valid using the SessionExpirationDurationInSeconds parameter. If you do not provide this parameter, the returned URL is valid for twelve hours.  The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes to be valid. If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error. 
    */
   createApplicationPresignedUrl(params: KinesisAnalyticsV2.Types.CreateApplicationPresignedUrlRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.CreateApplicationPresignedUrlResponse) => void): Request<KinesisAnalyticsV2.Types.CreateApplicationPresignedUrlResponse, AWSError>;
   /**
-   * Creates and returns a URL that you can use to connect to an application's extension. Currently, the only available extension is the Apache Flink dashboard. The IAM role or user used to call this API defines the permissions to access the extension. Once the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request that attempts to connect to the extension.   The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes to be valid. If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error. 
+   * Creates and returns a URL that you can use to connect to an application's extension. Currently, the only available extension is the Apache Flink dashboard. The IAM role or user used to call this API defines the permissions to access the extension. After the presigned URL is created, no additional permission is required to access this URL. IAM authorization policies for this API are also enforced for every HTTP request that attempts to connect to the extension.  You control the amount of time that the URL will be valid using the SessionExpirationDurationInSeconds parameter. If you do not provide this parameter, the returned URL is valid for twelve hours.  The URL that you get from a call to CreateApplicationPresignedUrl must be used within 3 minutes to be valid. If you first try to use the URL after the 3-minute limit expires, the service returns an HTTP 403 Forbidden error. 
    */
   createApplicationPresignedUrl(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.CreateApplicationPresignedUrlResponse) => void): Request<KinesisAnalyticsV2.Types.CreateApplicationPresignedUrlResponse, AWSError>;
   /**
@@ -156,6 +156,14 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   describeApplicationSnapshot(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationSnapshotResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationSnapshotResponse, AWSError>;
   /**
+   * Provides a detailed description of a specified version of the application. To see a list of all the versions of an application, invoke the ListApplicationVersions operation.  This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink. 
+   */
+  describeApplicationVersion(params: KinesisAnalyticsV2.Types.DescribeApplicationVersionRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationVersionResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationVersionResponse, AWSError>;
+  /**
+   * Provides a detailed description of a specified version of the application. To see a list of all the versions of an application, invoke the ListApplicationVersions operation.  This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink. 
+   */
+  describeApplicationVersion(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DescribeApplicationVersionResponse) => void): Request<KinesisAnalyticsV2.Types.DescribeApplicationVersionResponse, AWSError>;
+  /**
    * Infers a schema for a SQL-based Kinesis Data Analytics application by evaluating sample records on the specified streaming source (Kinesis data stream or Kinesis Data Firehose delivery stream) or Amazon S3 object. In the response, the operation returns the inferred schema and also the sample records that the operation used to infer the schema.  You can use the inferred schema when configuring a streaming source for your application. When you create an application using the Kinesis Data Analytics console, the console uses this operation to infer a schema and show it in the console user interface. 
    */
   discoverInputSchema(params: KinesisAnalyticsV2.Types.DiscoverInputSchemaRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.DiscoverInputSchemaResponse) => void): Request<KinesisAnalyticsV2.Types.DiscoverInputSchemaResponse, AWSError>;
@@ -172,6 +180,14 @@ declare class KinesisAnalyticsV2 extends Service {
    */
   listApplicationSnapshots(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationSnapshotsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationSnapshotsResponse, AWSError>;
   /**
+   * Lists all the versions for the specified application, including versions that were rolled back. The response also includes a summary of the configuration associated with each version. To get the complete description of a specific application version, invoke the DescribeApplicationVersion operation.  This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink. 
+   */
+  listApplicationVersions(params: KinesisAnalyticsV2.Types.ListApplicationVersionsRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationVersionsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationVersionsResponse, AWSError>;
+  /**
+   * Lists all the versions for the specified application, including versions that were rolled back. The response also includes a summary of the configuration associated with each version. To get the complete description of a specific application version, invoke the DescribeApplicationVersion operation.  This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink. 
+   */
+  listApplicationVersions(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationVersionsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationVersionsResponse, AWSError>;
+  /**
    * Returns a list of Kinesis Data Analytics applications in your account. For each application, the response includes the application name, Amazon Resource Name (ARN), and status.  If you want detailed information about a specific application, use DescribeApplication.
    */
   listApplications(params: KinesisAnalyticsV2.Types.ListApplicationsRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListApplicationsResponse) => void): Request<KinesisAnalyticsV2.Types.ListApplicationsResponse, AWSError>;
@@ -187,6 +203,14 @@ declare class KinesisAnalyticsV2 extends Service {
    * Retrieves the list of key-value tags assigned to the application. For more information, see Using Tagging.
    */
   listTagsForResource(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.ListTagsForResourceResponse) => void): Request<KinesisAnalyticsV2.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Reverts the application to the previous running version. You can roll back an application if you suspect it is stuck in a transient status.  You can roll back an application only if it is in the UPDATING or AUTOSCALING status. When you rollback an application, it loads state data from the last successful snapshot. If the application has no snapshots, Kinesis Data Analytics rejects the rollback request. This action is not supported for Kinesis Data Analytics for SQL applications.
+   */
+  rollbackApplication(params: KinesisAnalyticsV2.Types.RollbackApplicationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.RollbackApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.RollbackApplicationResponse, AWSError>;
+  /**
+   * Reverts the application to the previous running version. You can roll back an application if you suspect it is stuck in a transient status.  You can roll back an application only if it is in the UPDATING or AUTOSCALING status. When you rollback an application, it loads state data from the last successful snapshot. If the application has no snapshots, Kinesis Data Analytics rejects the rollback request. This action is not supported for Kinesis Data Analytics for SQL applications.
+   */
+  rollbackApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.RollbackApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.RollbackApplicationResponse, AWSError>;
   /**
    * Starts the specified Kinesis Data Analytics application. After creating an application, you must exclusively call this operation to start your application.
    */
@@ -227,6 +251,14 @@ declare class KinesisAnalyticsV2 extends Service {
    * Updates an existing Kinesis Data Analytics application. Using this operation, you can update application code, input configuration, and output configuration.  Kinesis Data Analytics updates the ApplicationVersionId each time you update your application.   You cannot update the RuntimeEnvironment of an existing application. If you need to update an application's RuntimeEnvironment, you must delete the application and create it again. 
    */
   updateApplication(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UpdateApplicationResponse) => void): Request<KinesisAnalyticsV2.Types.UpdateApplicationResponse, AWSError>;
+  /**
+   * Updates the maintenance configuration of the Kinesis Data Analytics application.  You can invoke this operation on an application that is in one of the two following states: READY or RUNNING. If you invoke it when the application is in a state other than these two states, it throws a ResourceInUseException. The service makes use of the updated configuration the next time it schedules maintenance for the application. If you invoke this operation after the service schedules maintenance, the service will apply the configuration update the next time it schedules maintenance for the application. This means that you might not see the maintenance configuration update applied to the maintenance process that follows a successful invocation of this operation, but to the following maintenance process instead. To see the current maintenance configuration of your application, invoke the DescribeApplication operation. For information about application maintenance, see Kinesis Data Analytics for Apache Flink Maintenance.  This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink. 
+   */
+  updateApplicationMaintenanceConfiguration(params: KinesisAnalyticsV2.Types.UpdateApplicationMaintenanceConfigurationRequest, callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UpdateApplicationMaintenanceConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.UpdateApplicationMaintenanceConfigurationResponse, AWSError>;
+  /**
+   * Updates the maintenance configuration of the Kinesis Data Analytics application.  You can invoke this operation on an application that is in one of the two following states: READY or RUNNING. If you invoke it when the application is in a state other than these two states, it throws a ResourceInUseException. The service makes use of the updated configuration the next time it schedules maintenance for the application. If you invoke this operation after the service schedules maintenance, the service will apply the configuration update the next time it schedules maintenance for the application. This means that you might not see the maintenance configuration update applied to the maintenance process that follows a successful invocation of this operation, but to the following maintenance process instead. To see the current maintenance configuration of your application, invoke the DescribeApplication operation. For information about application maintenance, see Kinesis Data Analytics for Apache Flink Maintenance.  This operation is supported only for Amazon Kinesis Data Analytics for Apache Flink. 
+   */
+  updateApplicationMaintenanceConfiguration(callback?: (err: AWSError, data: KinesisAnalyticsV2.Types.UpdateApplicationMaintenanceConfigurationResponse) => void): Request<KinesisAnalyticsV2.Types.UpdateApplicationMaintenanceConfigurationResponse, AWSError>;
 }
 declare namespace KinesisAnalyticsV2 {
   export interface AddApplicationCloudWatchLoggingOptionRequest {
@@ -235,13 +267,17 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The version ID of the Kinesis Data Analytics application. You can retrieve the application version ID using DescribeApplication.
+     * The version ID of the Kinesis Data Analytics application. You must provide the CurrentApplicationVersionId or the ConditionalToken.You can retrieve the application version ID using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
      */
-    CurrentApplicationVersionId: ApplicationVersionId;
+    CurrentApplicationVersionId?: ApplicationVersionId;
     /**
      * Provides the Amazon CloudWatch log stream Amazon Resource Name (ARN). 
      */
     CloudWatchLoggingOption: CloudWatchLoggingOption;
+    /**
+     * A value you use to implement strong concurrency for application updates. You must provide the CurrentApplicationVersionId or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
+     */
+    ConditionalToken?: ConditionalToken;
   }
   export interface AddApplicationCloudWatchLoggingOptionResponse {
     /**
@@ -281,7 +317,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationARN?: ResourceARN;
     /**
-     * Provides the current application version.
+     * Provides the current application version. 
      */
     ApplicationVersionId?: ApplicationVersionId;
     /**
@@ -299,7 +335,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The current version of your application. You can use the DescribeApplication operation to find the current application version.
+     * The current version of your application. You must provide the ApplicationVersionID or the ConditionalToken.You can use the DescribeApplication operation to find the current application version.
      */
     CurrentApplicationVersionId: ApplicationVersionId;
     /**
@@ -383,13 +419,17 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The version of the application to which you want to add the VPC configuration. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned.
+     * The version of the application to which you want to add the VPC configuration. You must provide the CurrentApplicationVersionId or the ConditionalToken. You can use the DescribeApplication operation to get the current application version. If the version specified is not the current version, the ConcurrentModificationException is returned. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
      */
-    CurrentApplicationVersionId: ApplicationVersionId;
+    CurrentApplicationVersionId?: ApplicationVersionId;
     /**
      * Description of the VPC to add to the application.
      */
     VpcConfiguration: VpcConfiguration;
+    /**
+     * A value you use to implement strong concurrency for application updates. You must provide the ApplicationVersionID or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
+     */
+    ConditionalToken?: ConditionalToken;
   }
   export interface AddApplicationVpcConfigurationResponse {
     /**
@@ -397,7 +437,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationARN?: ResourceARN;
     /**
-     * Provides the current application version. Kinesis Data Analytics updates the ApplicationVersionId each time you update the application. 
+     * Provides the current application version. Kinesis Data Analytics updates the ApplicationVersionId each time you update the application.
      */
     ApplicationVersionId?: ApplicationVersionId;
     /**
@@ -451,7 +491,7 @@ declare namespace KinesisAnalyticsV2 {
     /**
      * The code location and type parameters for a Flink-based Kinesis Data Analytics application.
      */
-    ApplicationCodeConfiguration: ApplicationCodeConfiguration;
+    ApplicationCodeConfiguration?: ApplicationCodeConfiguration;
     /**
      * Describes whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
      */
@@ -460,6 +500,10 @@ declare namespace KinesisAnalyticsV2 {
      * The array of descriptions of VPC configurations available to the application.
      */
     VpcConfigurations?: VpcConfigurations;
+    /**
+     * The configuration parameters for a Kinesis Data Analytics Studio notebook.
+     */
+    ZeppelinApplicationConfiguration?: ZeppelinApplicationConfiguration;
   }
   export interface ApplicationConfigurationDescription {
     /**
@@ -490,6 +534,10 @@ declare namespace KinesisAnalyticsV2 {
      * The array of descriptions of VPC configurations available to the application.
      */
     VpcConfigurationDescriptions?: VpcConfigurationDescriptions;
+    /**
+     * The configuration parameters for a Kinesis Data Analytics Studio notebook.
+     */
+    ZeppelinApplicationConfigurationDescription?: ZeppelinApplicationConfigurationDescription;
   }
   export interface ApplicationConfigurationUpdate {
     /**
@@ -497,7 +545,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     SqlApplicationConfigurationUpdate?: SqlApplicationConfigurationUpdate;
     /**
-     * Describes updates to a Flink-based Kinesis Data Analytics application's code configuration.
+     * Describes updates to an application's code configuration.
      */
     ApplicationCodeConfigurationUpdate?: ApplicationCodeConfigurationUpdate;
     /**
@@ -516,6 +564,10 @@ declare namespace KinesisAnalyticsV2 {
      * Updates to the array of descriptions of VPC configurations available to the application.
      */
     VpcConfigurationUpdates?: VpcConfigurationUpdates;
+    /**
+     * Updates to the configuration of a Kinesis Data Analytics Studio notebook.
+     */
+    ZeppelinApplicationConfigurationUpdate?: ZeppelinApplicationConfigurationUpdate;
   }
   export type ApplicationDescription = string;
   export interface ApplicationDetail {
@@ -532,7 +584,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The runtime environment for the application (SQL-1.0, FLINK-1_6, or FLINK-1_8).
+     * The runtime environment for the application (SQL-1_0, FLINK-1_6, FLINK-1_8, or FLINK-1_11).
      */
     RuntimeEnvironment: RuntimeEnvironment;
     /**
@@ -556,14 +608,57 @@ declare namespace KinesisAnalyticsV2 {
      */
     LastUpdateTimestamp?: Timestamp;
     /**
-     * Provides details about the application's Java, SQL, or Scala code and starting parameters.
+     * Describes details about the application code and starting parameters for a Kinesis Data Analytics application.
      */
     ApplicationConfigurationDescription?: ApplicationConfigurationDescription;
     /**
      * Describes the application Amazon CloudWatch logging options.
      */
     CloudWatchLoggingOptionDescriptions?: CloudWatchLoggingOptionDescriptions;
+    /**
+     * The details of the maintenance configuration for the application.
+     */
+    ApplicationMaintenanceConfigurationDescription?: ApplicationMaintenanceConfigurationDescription;
+    /**
+     * The previous application version before the latest application update. RollbackApplication reverts the application to this version.
+     */
+    ApplicationVersionUpdatedFrom?: ApplicationVersionId;
+    /**
+     * If you reverted the application using RollbackApplication, the application version when RollbackApplication was called.
+     */
+    ApplicationVersionRolledBackFrom?: ApplicationVersionId;
+    /**
+     * A value you use to implement strong concurrency for application updates.
+     */
+    ConditionalToken?: ConditionalToken;
+    /**
+     * The version to which you want to roll back the application.
+     */
+    ApplicationVersionRolledBackTo?: ApplicationVersionId;
+    /**
+     * To create a Kinesis Data Analytics Studio notebook, you must set the mode to INTERACTIVE. However, for a Kinesis Data Analytics for Apache Flink application, the mode is optional.
+     */
+    ApplicationMode?: ApplicationMode;
   }
+  export interface ApplicationMaintenanceConfigurationDescription {
+    /**
+     * The start time for the maintenance window.
+     */
+    ApplicationMaintenanceWindowStartTime: ApplicationMaintenanceWindowStartTime;
+    /**
+     * The end time for the maintenance window.
+     */
+    ApplicationMaintenanceWindowEndTime: ApplicationMaintenanceWindowEndTime;
+  }
+  export interface ApplicationMaintenanceConfigurationUpdate {
+    /**
+     * The updated start time for the maintenance window.
+     */
+    ApplicationMaintenanceWindowStartTimeUpdate: ApplicationMaintenanceWindowStartTime;
+  }
+  export type ApplicationMaintenanceWindowEndTime = string;
+  export type ApplicationMaintenanceWindowStartTime = string;
+  export type ApplicationMode = "STREAMING"|"INTERACTIVE"|string;
   export type ApplicationName = string;
   export interface ApplicationRestoreConfiguration {
     /**
@@ -590,11 +685,11 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface ApplicationSnapshotConfigurationUpdate {
     /**
-     * Describes updates to whether snapshots are enabled for a Flink-based Kinesis Data Analytics application.
+     * Describes updates to whether snapshots are enabled for an application.
      */
     SnapshotsEnabledUpdate: BooleanObject;
   }
-  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|"AUTOSCALING"|"FORCE_STOPPING"|string;
+  export type ApplicationStatus = "DELETING"|"STARTING"|"STOPPING"|"READY"|"RUNNING"|"UPDATING"|"AUTOSCALING"|"FORCE_STOPPING"|"MAINTENANCE"|"ROLLING_BACK"|"ROLLED_BACK"|string;
   export type ApplicationSummaries = ApplicationSummary[];
   export interface ApplicationSummary {
     /**
@@ -614,12 +709,29 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationVersionId: ApplicationVersionId;
     /**
-     * The runtime environment for the application (SQL-1.0, FLINK-1_6, or FLINK-1_8).
+     * The runtime environment for the application.
      */
     RuntimeEnvironment: RuntimeEnvironment;
+    /**
+     * For a Kinesis Data Analytics for Apache Flink application, the mode is STREAMING. For a Kinesis Data Analytics Studio notebook, it is INTERACTIVE.
+     */
+    ApplicationMode?: ApplicationMode;
   }
   export type ApplicationVersionId = number;
+  export type ApplicationVersionSummaries = ApplicationVersionSummary[];
+  export interface ApplicationVersionSummary {
+    /**
+     * The ID of the application version. Kinesis Data Analytics updates the ApplicationVersionId each time you update the application.
+     */
+    ApplicationVersionId: ApplicationVersionId;
+    /**
+     * The status of the application.
+     */
+    ApplicationStatus: ApplicationStatus;
+  }
+  export type ArtifactType = "UDF"|"DEPENDENCY_JAR"|string;
   export type AuthorizedUrl = string;
+  export type BasePath = string;
   export type BooleanObject = boolean;
   export type BucketARN = string;
   export interface CSVMappingParameters {
@@ -632,6 +744,24 @@ declare namespace KinesisAnalyticsV2 {
      */
     RecordColumnDelimiter: RecordColumnDelimiter;
   }
+  export interface CatalogConfiguration {
+    /**
+     * The configuration parameters for the default AWS Glue database. You use this database for Apache Flink SQL queries and table API transforms that you write in a Kinesis Data Analytics Studio notebook.
+     */
+    GlueDataCatalogConfiguration: GlueDataCatalogConfiguration;
+  }
+  export interface CatalogConfigurationDescription {
+    /**
+     * The configuration parameters for the default AWS Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
+     */
+    GlueDataCatalogConfigurationDescription: GlueDataCatalogConfigurationDescription;
+  }
+  export interface CatalogConfigurationUpdate {
+    /**
+     * Updates to the configuration parameters for the default AWS Glue database. You use this database for SQL queries that you write in a Kinesis Data Analytics Studio notebook.
+     */
+    GlueDataCatalogConfigurationUpdate: GlueDataCatalogConfigurationUpdate;
+  }
   export interface CheckpointConfiguration {
     /**
      * Describes whether the application uses Kinesis Data Analytics' default checkpointing behavior. You must set this property to CUSTOM in order to set the CheckpointingEnabled, CheckpointInterval, or MinPauseBetweenCheckpoints parameters.  If this value is set to DEFAULT, the application will use the following values, even if they are set to other values using APIs or application code:    CheckpointingEnabled: true    CheckpointInterval: 60000    MinPauseBetweenCheckpoints: 5000   
@@ -642,7 +772,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     CheckpointingEnabled?: BooleanObject;
     /**
-     * Describes the interval in milliseconds between checkpoint operations.   If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointInterval vaue of 60000, even if this value is set to another value using this API or in application code. 
+     * Describes the interval in milliseconds between checkpoint operations.   If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointInterval value of 60000, even if this value is set to another value using this API or in application code. 
      */
     CheckpointInterval?: CheckpointInterval;
     /**
@@ -660,7 +790,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     CheckpointingEnabled?: BooleanObject;
     /**
-     * Describes the interval in milliseconds between checkpoint operations.   If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointInterval vaue of 60000, even if this value is set to another value using this API or in application code. 
+     * Describes the interval in milliseconds between checkpoint operations.   If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointInterval value of 60000, even if this value is set to another value using this API or in application code. 
      */
     CheckpointInterval?: CheckpointInterval;
     /**
@@ -678,7 +808,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     CheckpointingEnabledUpdate?: BooleanObject;
     /**
-     * Describes updates to the interval in milliseconds between checkpoint operations.  If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointInterval vaue of 60000, even if this value is set to another value using this API or in application code. 
+     * Describes updates to the interval in milliseconds between checkpoint operations.  If CheckpointConfiguration.ConfigurationType is DEFAULT, the application will use a CheckpointInterval value of 60000, even if this value is set to another value using this API or in application code. 
      */
     CheckpointIntervalUpdate?: CheckpointInterval;
     /**
@@ -730,7 +860,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ZipFileContent?: ZipFileContent;
     /**
-     * Information about the Amazon S3 bucket containing the application code.
+     * Information about the Amazon S3 bucket that contains the application code.
      */
     S3ContentLocation?: S3ContentLocation;
   }
@@ -769,6 +899,7 @@ declare namespace KinesisAnalyticsV2 {
   }
   export type CodeMD5 = string;
   export type CodeSize = number;
+  export type ConditionalToken = string;
   export type ConfigurationType = "DEFAULT"|"CUSTOM"|string;
   export interface CreateApplicationPresignedUrlRequest {
     /**
@@ -800,7 +931,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationDescription?: ApplicationDescription;
     /**
-     * The runtime environment for the application (SQL-1.0, FLINK-1_6, or FLINK-1_8).
+     * The runtime environment for the application (SQL-1_0, FLINK-1_6, FLINK-1_8, or FLINK-1_11).
      */
     RuntimeEnvironment: RuntimeEnvironment;
     /**
@@ -819,6 +950,10 @@ declare namespace KinesisAnalyticsV2 {
      * A list of one or more tags to assign to the application. A tag is a key-value pair that identifies an application. Note that the maximum number of application tags includes system tags. The maximum number of user-defined application tags is 50. For more information, see Using Tagging.
      */
     Tags?: Tags;
+    /**
+     * Use the STREAMING mode to create a Kinesis Data Analytics Studio notebook. To create a Kinesis Data Analytics Studio notebook, use the INTERACTIVE mode.
+     */
+    ApplicationMode?: ApplicationMode;
   }
   export interface CreateApplicationResponse {
     /**
@@ -838,19 +973,48 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface CreateApplicationSnapshotResponse {
   }
+  export interface CustomArtifactConfiguration {
+    /**
+     *  UDF stands for user-defined functions. This type of artifact must be in an S3 bucket. A DEPENDENCY_JAR can be in either Maven or an S3 bucket.
+     */
+    ArtifactType: ArtifactType;
+    S3ContentLocation?: S3ContentLocation;
+    /**
+     * The parameters required to fully specify a Maven reference.
+     */
+    MavenReference?: MavenReference;
+  }
+  export interface CustomArtifactConfigurationDescription {
+    /**
+     *  UDF stands for user-defined functions. This type of artifact must be in an S3 bucket. A DEPENDENCY_JAR can be in either Maven or an S3 bucket.
+     */
+    ArtifactType?: ArtifactType;
+    S3ContentLocationDescription?: S3ContentLocation;
+    /**
+     * The parameters that are required to specify a Maven dependency.
+     */
+    MavenReferenceDescription?: MavenReference;
+  }
+  export type CustomArtifactsConfigurationDescriptionList = CustomArtifactConfigurationDescription[];
+  export type CustomArtifactsConfigurationList = CustomArtifactConfiguration[];
+  export type DatabaseARN = string;
   export interface DeleteApplicationCloudWatchLoggingOptionRequest {
     /**
      * The application name.
      */
     ApplicationName: ApplicationName;
     /**
-     * The version ID of the application. You can retrieve the application version ID using DescribeApplication.
+     * The version ID of the application. You must provide the CurrentApplicationVersionId or the ConditionalToken. You can retrieve the application version ID using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
      */
-    CurrentApplicationVersionId: ApplicationVersionId;
+    CurrentApplicationVersionId?: ApplicationVersionId;
     /**
      * The CloudWatchLoggingOptionId of the Amazon CloudWatch logging option to delete. You can get the CloudWatchLoggingOptionId by using the DescribeApplication operation. 
      */
     CloudWatchLoggingOptionId: Id;
+    /**
+     * A value you use to implement strong concurrency for application updates. You must provide the CurrentApplicationVersionId or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
+     */
+    ConditionalToken?: ConditionalToken;
   }
   export interface DeleteApplicationCloudWatchLoggingOptionResponse {
     /**
@@ -972,13 +1136,17 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationName: ApplicationName;
     /**
-     * The current application version ID. You can retrieve the application version ID using DescribeApplication.
+     * The current application version ID. You must provide the CurrentApplicationVersionId or the ConditionalToken. You can retrieve the application version ID using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
      */
-    CurrentApplicationVersionId: ApplicationVersionId;
+    CurrentApplicationVersionId?: ApplicationVersionId;
     /**
      * The ID of the VPC configuration to delete.
      */
     VpcConfigurationId: Id;
+    /**
+     * A value you use to implement strong concurrency for application updates. You must provide the CurrentApplicationVersionId or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
+     */
+    ConditionalToken?: ConditionalToken;
   }
   export interface DeleteApplicationVpcConfigurationResponse {
     /**
@@ -989,6 +1157,24 @@ declare namespace KinesisAnalyticsV2 {
      * The updated version ID of the application.
      */
     ApplicationVersionId?: ApplicationVersionId;
+  }
+  export interface DeployAsApplicationConfiguration {
+    /**
+     * The description of an Amazon S3 object that contains the Amazon Data Analytics application, including the Amazon Resource Name (ARN) of the S3 bucket, the name of the Amazon S3 object that contains the data, and the version number of the Amazon S3 object that contains the data. 
+     */
+    S3ContentLocation: S3ContentBaseLocation;
+  }
+  export interface DeployAsApplicationConfigurationDescription {
+    /**
+     * The location that holds the data required to specify an Amazon Data Analytics application.
+     */
+    S3ContentLocationDescription: S3ContentBaseLocationDescription;
+  }
+  export interface DeployAsApplicationConfigurationUpdate {
+    /**
+     * Updates to the location that holds the data required to specify an Amazon Data Analytics application.
+     */
+    S3ContentLocationUpdate: S3ContentBaseLocationUpdate;
   }
   export interface DescribeApplicationRequest {
     /**
@@ -1021,6 +1207,19 @@ declare namespace KinesisAnalyticsV2 {
      * An object containing information about the application snapshot.
      */
     SnapshotDetails: SnapshotDetails;
+  }
+  export interface DescribeApplicationVersionRequest {
+    /**
+     * The name of the application for which you want to get the version description.
+     */
+    ApplicationName: ApplicationName;
+    /**
+     * The ID of the application version for which you want to get the description.
+     */
+    ApplicationVersionId: ApplicationVersionId;
+  }
+  export interface DescribeApplicationVersionResponse {
+    ApplicationVersionDetail?: ApplicationDetail;
   }
   export interface DestinationSchema {
     /**
@@ -1138,6 +1337,24 @@ declare namespace KinesisAnalyticsV2 {
      * When restoring from a snapshot, specifies whether the runtime is allowed to skip a state that cannot be mapped to the new program. This will happen if the program is updated between snapshots to remove stateful parameters, and state data in the snapshot no longer corresponds to valid application data. For more information, see  Allowing Non-Restored State in the Apache Flink documentation.  This value defaults to false. If you update your application without specifying this parameter, AllowNonRestoredState will be set to false, even if it was previously set to true. 
      */
     AllowNonRestoredState?: BooleanObject;
+  }
+  export interface GlueDataCatalogConfiguration {
+    /**
+     * The Amazon Resource Name (ARN) of the database.
+     */
+    DatabaseARN: DatabaseARN;
+  }
+  export interface GlueDataCatalogConfigurationDescription {
+    /**
+     * The Amazon Resource Name (ARN) of the database.
+     */
+    DatabaseARN: DatabaseARN;
+  }
+  export interface GlueDataCatalogConfigurationUpdate {
+    /**
+     * The updated Amazon Resource Name (ARN) of the database.
+     */
+    DatabaseARNUpdate?: DatabaseARN;
   }
   export type Id = string;
   export type InAppStreamName = string;
@@ -1456,6 +1673,31 @@ declare namespace KinesisAnalyticsV2 {
      */
     NextToken?: NextToken;
   }
+  export type ListApplicationVersionsInputLimit = number;
+  export interface ListApplicationVersionsRequest {
+    /**
+     * The name of the application for which you want to list all versions.
+     */
+    ApplicationName: ApplicationName;
+    /**
+     * The maximum number of versions to list in this invocation of the operation.
+     */
+    Limit?: ListApplicationVersionsInputLimit;
+    /**
+     * If a previous invocation of this operation returned a pagination token, pass it into this value to retrieve the next set of results. For more information about pagination, see Using the AWS Command Line Interface's Pagination Options.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListApplicationVersionsResponse {
+    /**
+     * A list of the application versions and the associated configuration summaries. The list includes application versions that were rolled back. To get the complete description of a specific application version, invoke the DescribeApplicationVersion operation.
+     */
+    ApplicationVersionSummaries?: ApplicationVersionSummaries;
+    /**
+     * The pagination token for the next set of results, or null if there are no additional results. To retrieve the next set of items, pass this token into a subsequent invocation of this operation. For more information about pagination, see Using the AWS Command Line Interface's Pagination Options.
+     */
+    NextToken?: NextToken;
+  }
   export type ListApplicationsInputLimit = number;
   export interface ListApplicationsRequest {
     /**
@@ -1502,6 +1744,23 @@ declare namespace KinesisAnalyticsV2 {
      */
     CSVMappingParameters?: CSVMappingParameters;
   }
+  export type MavenArtifactId = string;
+  export type MavenGroupId = string;
+  export interface MavenReference {
+    /**
+     * The group ID of the Maven reference.
+     */
+    GroupId: MavenGroupId;
+    /**
+     * The artifact ID of the Maven reference.
+     */
+    ArtifactId: MavenArtifactId;
+    /**
+     * The version of the Maven reference.
+     */
+    Version: MavenVersion;
+  }
+  export type MavenVersion = string;
   export type MetricsLevel = "APPLICATION"|"TASK"|"OPERATOR"|"PARALLELISM"|string;
   export type MinPauseBetweenCheckpoints = number;
   export interface MonitoringConfiguration {
@@ -1680,7 +1939,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ParallelismPerKPUUpdate?: ParallelismPerKPU;
     /**
-     * Describes updates to whether the Kinesis Data Analytics service can increase the parallelism of the application in response to increased throughput.
+     * Describes updates to whether the Kinesis Data Analytics service can increase the parallelism of a Flink-based Kinesis Data Analytics application in response to increased throughput.
      */
     AutoScalingEnabledUpdate?: BooleanObject;
   }
@@ -1794,6 +2053,19 @@ declare namespace KinesisAnalyticsV2 {
   export type ReferenceDataSources = ReferenceDataSource[];
   export type ResourceARN = string;
   export type RoleARN = string;
+  export interface RollbackApplicationRequest {
+    /**
+     * The name of the application.
+     */
+    ApplicationName: ApplicationName;
+    /**
+     * The current application version ID. You can retrieve the application version ID using DescribeApplication.
+     */
+    CurrentApplicationVersionId: ApplicationVersionId;
+  }
+  export interface RollbackApplicationResponse {
+    ApplicationDetail: ApplicationDetail;
+  }
   export interface RunConfiguration {
     /**
      * Describes the starting parameters for a Flink-based Kinesis Data Analytics application.
@@ -1825,7 +2097,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationRestoreConfiguration?: ApplicationRestoreConfiguration;
   }
-  export type RuntimeEnvironment = "SQL-1_0"|"FLINK-1_6"|"FLINK-1_8"|"FLINK-1_11"|string;
+  export type RuntimeEnvironment = "SQL-1_0"|"FLINK-1_6"|"FLINK-1_8"|"FLINK-1_11"|"ZEPPELIN-FLINK-1_0"|string;
   export interface S3ApplicationCodeLocationDescription {
     /**
      * The Amazon Resource Name (ARN) for the S3 bucket containing the application code.
@@ -1849,6 +2121,36 @@ declare namespace KinesisAnalyticsV2 {
      * The name of the object that contains the data.
      */
     FileKey: FileKey;
+  }
+  export interface S3ContentBaseLocation {
+    /**
+     * The Amazon Resource Name (ARN) of the S3 bucket.
+     */
+    BucketARN: BucketARN;
+    /**
+     * The base path for the S3 bucket.
+     */
+    BasePath?: BasePath;
+  }
+  export interface S3ContentBaseLocationDescription {
+    /**
+     * The Amazon Resource Name (ARN) of the S3 bucket.
+     */
+    BucketARN: BucketARN;
+    /**
+     * The base path for the S3 bucket.
+     */
+    BasePath?: BasePath;
+  }
+  export interface S3ContentBaseLocationUpdate {
+    /**
+     * The updated Amazon Resource Name (ARN) of the S3 bucket.
+     */
+    BucketARNUpdate: BucketARN;
+    /**
+     * The updated S3 bucket path.
+     */
+    BasePathUpdate?: BasePath;
   }
   export interface S3ContentLocation {
     /**
@@ -2011,7 +2313,7 @@ declare namespace KinesisAnalyticsV2 {
     /**
      * Identifies the run configuration (start parameters) of a Kinesis Data Analytics application.
      */
-    RunConfiguration: RunConfiguration;
+    RunConfiguration?: RunConfiguration;
   }
   export interface StartApplicationResponse {
   }
@@ -2069,15 +2371,35 @@ declare namespace KinesisAnalyticsV2 {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateApplicationMaintenanceConfigurationRequest {
+    /**
+     * The name of the application for which you want to update the maintenance configuration.
+     */
+    ApplicationName: ApplicationName;
+    /**
+     * Describes the application maintenance configuration update.
+     */
+    ApplicationMaintenanceConfigurationUpdate: ApplicationMaintenanceConfigurationUpdate;
+  }
+  export interface UpdateApplicationMaintenanceConfigurationResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the application.
+     */
+    ApplicationARN?: ResourceARN;
+    /**
+     * The application maintenance configuration description after the update.
+     */
+    ApplicationMaintenanceConfigurationDescription?: ApplicationMaintenanceConfigurationDescription;
+  }
   export interface UpdateApplicationRequest {
     /**
      * The name of the application to update.
      */
     ApplicationName: ApplicationName;
     /**
-     * The current application version ID. You can retrieve the application version ID using DescribeApplication.
+     * The current application version ID. You must provide the CurrentApplicationVersionId or the ConditionalToken.You can retrieve the application version ID using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
      */
-    CurrentApplicationVersionId: ApplicationVersionId;
+    CurrentApplicationVersionId?: ApplicationVersionId;
     /**
      * Describes application configuration updates.
      */
@@ -2094,6 +2416,10 @@ declare namespace KinesisAnalyticsV2 {
      * Describes application Amazon CloudWatch logging option updates. You can only update existing CloudWatch logging options with this action. To add a new CloudWatch logging option, use AddApplicationCloudWatchLoggingOption.
      */
     CloudWatchLoggingOptionUpdates?: CloudWatchLoggingOptionUpdates;
+    /**
+     * A value you use to implement strong concurrency for application updates. You must provide the CurrentApplicationVersionId or the ConditionalToken. You get the application's current ConditionalToken using DescribeApplication. For better concurrency support, use the ConditionalToken parameter instead of CurrentApplicationVersionId.
+     */
+    ConditionalToken?: ConditionalToken;
   }
   export interface UpdateApplicationResponse {
     /**
@@ -2101,7 +2427,7 @@ declare namespace KinesisAnalyticsV2 {
      */
     ApplicationDetail: ApplicationDetail;
   }
-  export type UrlType = "FLINK_DASHBOARD_URL"|string;
+  export type UrlType = "FLINK_DASHBOARD_URL"|"ZEPPELIN_UI_URL"|string;
   export interface VpcConfiguration {
     /**
      * The array of Subnet IDs used by the VPC configuration.
@@ -2148,6 +2474,75 @@ declare namespace KinesisAnalyticsV2 {
   export type VpcConfigurationUpdates = VpcConfigurationUpdate[];
   export type VpcConfigurations = VpcConfiguration[];
   export type VpcId = string;
+  export interface ZeppelinApplicationConfiguration {
+    /**
+     * The monitoring configuration of a Kinesis Data Analytics Studio notebook.
+     */
+    MonitoringConfiguration?: ZeppelinMonitoringConfiguration;
+    /**
+     * The AWS Glue Data Catalog that you use in queries in a Kinesis Data Analytics Studio notebook.
+     */
+    CatalogConfiguration?: CatalogConfiguration;
+    /**
+     * The information required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state..
+     */
+    DeployAsApplicationConfiguration?: DeployAsApplicationConfiguration;
+    /**
+     * Custom artifacts are dependency JARs and user-defined functions (UDF).
+     */
+    CustomArtifactsConfiguration?: CustomArtifactsConfigurationList;
+  }
+  export interface ZeppelinApplicationConfigurationDescription {
+    /**
+     * The monitoring configuration of a Kinesis Data Analytics Studio notebook.
+     */
+    MonitoringConfigurationDescription: ZeppelinMonitoringConfigurationDescription;
+    /**
+     * The AWS Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.
+     */
+    CatalogConfigurationDescription?: CatalogConfigurationDescription;
+    /**
+     * The parameters required to deploy a Kinesis Data Analytics Studio notebook as an application with durable state..
+     */
+    DeployAsApplicationConfigurationDescription?: DeployAsApplicationConfigurationDescription;
+    /**
+     * Custom artifacts are dependency JARs and user-defined functions (UDF).
+     */
+    CustomArtifactsConfigurationDescription?: CustomArtifactsConfigurationDescriptionList;
+  }
+  export interface ZeppelinApplicationConfigurationUpdate {
+    /**
+     * Updates to the monitoring configuration of a Kinesis Data Analytics Studio notebook.
+     */
+    MonitoringConfigurationUpdate?: ZeppelinMonitoringConfigurationUpdate;
+    /**
+     * Updates to the configuration of the AWS Glue Data Catalog that is associated with the Kinesis Data Analytics Studio notebook.
+     */
+    CatalogConfigurationUpdate?: CatalogConfigurationUpdate;
+    DeployAsApplicationConfigurationUpdate?: DeployAsApplicationConfigurationUpdate;
+    /**
+     * Updates to the customer artifacts. Custom artifacts are dependency JAR files and user-defined functions (UDF).
+     */
+    CustomArtifactsConfigurationUpdate?: CustomArtifactsConfigurationList;
+  }
+  export interface ZeppelinMonitoringConfiguration {
+    /**
+     * The verbosity of the CloudWatch Logs for an application.
+     */
+    LogLevel: LogLevel;
+  }
+  export interface ZeppelinMonitoringConfigurationDescription {
+    /**
+     * Describes the verbosity of the CloudWatch Logs for an application.
+     */
+    LogLevel?: LogLevel;
+  }
+  export interface ZeppelinMonitoringConfigurationUpdate {
+    /**
+     * Updates to the logging level for Apache Zeppelin within a Kinesis Data Analytics Studio notebook.
+     */
+    LogLevelUpdate: LogLevel;
+  }
   export type ZipFileContent = Buffer|Uint8Array|Blob|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

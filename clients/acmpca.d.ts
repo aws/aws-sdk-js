@@ -13,19 +13,19 @@ declare class ACMPCA extends Service {
   constructor(options?: ACMPCA.Types.ClientConfiguration)
   config: Config & ACMPCA.Types.ClientConfiguration;
   /**
-   * Creates a root or subordinate private certificate authority (CA). You must specify the CA configuration, the certificate revocation list (CRL) configuration, the CA type, and an optional idempotency token to avoid accidental creation of multiple CAs. The CA configuration specifies the name of the algorithm and key size to be used to create the CA private key, the type of signing algorithm that the CA uses, and X.500 subject information. The CRL configuration specifies the CRL expiration period in days (the validity period of the CRL), the Amazon S3 bucket that will contain the CRL, and a CNAME alias for the S3 bucket that is included in certificates issued by the CA. If successful, this action returns the Amazon Resource Name (ARN) of the CA. ACM Private CAA assets that are stored in Amazon S3 can be protected with encryption. For more information, see Encrypting Your CRLs.  Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see Configure Access to ACM Private CA. 
+   * Creates a root or subordinate private certificate authority (CA). You must specify the CA configuration, the certificate revocation list (CRL) configuration, the CA type, and an optional idempotency token to avoid accidental creation of multiple CAs. The CA configuration specifies the name of the algorithm and key size to be used to create the CA private key, the type of signing algorithm that the CA uses, and X.500 subject information. The CRL configuration specifies the CRL expiration period in days (the validity period of the CRL), the Amazon S3 bucket that will contain the CRL, and a CNAME alias for the S3 bucket that is included in certificates issued by the CA. If successful, this action returns the Amazon Resource Name (ARN) of the CA. ACM Private CA assets that are stored in Amazon S3 can be protected with encryption. For more information, see Encrypting Your CRLs.  Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see Configure Access to ACM Private CA. 
    */
   createCertificateAuthority(params: ACMPCA.Types.CreateCertificateAuthorityRequest, callback?: (err: AWSError, data: ACMPCA.Types.CreateCertificateAuthorityResponse) => void): Request<ACMPCA.Types.CreateCertificateAuthorityResponse, AWSError>;
   /**
-   * Creates a root or subordinate private certificate authority (CA). You must specify the CA configuration, the certificate revocation list (CRL) configuration, the CA type, and an optional idempotency token to avoid accidental creation of multiple CAs. The CA configuration specifies the name of the algorithm and key size to be used to create the CA private key, the type of signing algorithm that the CA uses, and X.500 subject information. The CRL configuration specifies the CRL expiration period in days (the validity period of the CRL), the Amazon S3 bucket that will contain the CRL, and a CNAME alias for the S3 bucket that is included in certificates issued by the CA. If successful, this action returns the Amazon Resource Name (ARN) of the CA. ACM Private CAA assets that are stored in Amazon S3 can be protected with encryption. For more information, see Encrypting Your CRLs.  Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see Configure Access to ACM Private CA. 
+   * Creates a root or subordinate private certificate authority (CA). You must specify the CA configuration, the certificate revocation list (CRL) configuration, the CA type, and an optional idempotency token to avoid accidental creation of multiple CAs. The CA configuration specifies the name of the algorithm and key size to be used to create the CA private key, the type of signing algorithm that the CA uses, and X.500 subject information. The CRL configuration specifies the CRL expiration period in days (the validity period of the CRL), the Amazon S3 bucket that will contain the CRL, and a CNAME alias for the S3 bucket that is included in certificates issued by the CA. If successful, this action returns the Amazon Resource Name (ARN) of the CA. ACM Private CA assets that are stored in Amazon S3 can be protected with encryption. For more information, see Encrypting Your CRLs.  Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see Configure Access to ACM Private CA. 
    */
   createCertificateAuthority(callback?: (err: AWSError, data: ACMPCA.Types.CreateCertificateAuthorityResponse) => void): Request<ACMPCA.Types.CreateCertificateAuthorityResponse, AWSError>;
   /**
-   * Creates an audit report that lists every time that your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The IssueCertificate and RevokeCertificate actions use the private key.   Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see Configure Access to ACM Private CA.  ACM Private CAA assets that are stored in Amazon S3 can be protected with encryption. For more information, see Encrypting Your Audit Reports.
+   * Creates an audit report that lists every time that your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The IssueCertificate and RevokeCertificate actions use the private key.   Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see Configure Access to ACM Private CA.  ACM Private CA assets that are stored in Amazon S3 can be protected with encryption. For more information, see Encrypting Your Audit Reports.
    */
   createCertificateAuthorityAuditReport(params: ACMPCA.Types.CreateCertificateAuthorityAuditReportRequest, callback?: (err: AWSError, data: ACMPCA.Types.CreateCertificateAuthorityAuditReportResponse) => void): Request<ACMPCA.Types.CreateCertificateAuthorityAuditReportResponse, AWSError>;
   /**
-   * Creates an audit report that lists every time that your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The IssueCertificate and RevokeCertificate actions use the private key.   Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see Configure Access to ACM Private CA.  ACM Private CAA assets that are stored in Amazon S3 can be protected with encryption. For more information, see Encrypting Your Audit Reports.
+   * Creates an audit report that lists every time that your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The IssueCertificate and RevokeCertificate actions use the private key.   Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see Configure Access to ACM Private CA.  ACM Private CA assets that are stored in Amazon S3 can be protected with encryption. For more information, see Encrypting Your Audit Reports.
    */
   createCertificateAuthorityAuditReport(callback?: (err: AWSError, data: ACMPCA.Types.CreateCertificateAuthorityAuditReportResponse) => void): Request<ACMPCA.Types.CreateCertificateAuthorityAuditReportResponse, AWSError>;
   /**
@@ -373,6 +373,10 @@ declare namespace ACMPCA {
      * The period during which a deleted CA can be restored. For more information, see the PermanentDeletionTimeInDays parameter of the DeleteCertificateAuthorityRequest action. 
      */
     RestorableUntil?: TStamp;
+    /**
+     * Defines a cryptographic key management compliance standard used for handling CA keys.  Default: FIPS_140_2_LEVEL_3_OR_HIGHER Note: AWS Region ap-northeast-3 supports only FIPS_140_2_LEVEL_2_OR_HIGHER. You must explicitly specify this parameter and value when creating a CA in that Region. Specifying a different value (or no value) results in an InvalidArgsException with the message "A certificate authority cannot be created in this region with the specified security standard."
+     */
+    KeyStorageSecurityStandard?: KeyStorageSecurityStandard;
   }
   export interface CertificateAuthorityConfiguration {
     /**
@@ -442,6 +446,10 @@ declare namespace ACMPCA {
      */
     IdempotencyToken?: IdempotencyToken;
     /**
+     * Specifies a cryptographic key management compliance standard used for handling CA keys. Default: FIPS_140_2_LEVEL_3_OR_HIGHER Note: FIPS_140_2_LEVEL_3_OR_HIGHER is not supported in Region ap-northeast-3. When creating a CA in the ap-northeast-3, you must provide FIPS_140_2_LEVEL_2_OR_HIGHER as the argument for KeyStorageSecurityStandard. Failure to do this results in an InvalidArgsException with the message, "A certificate authority cannot be created in this region with the specified security standard."
+     */
+    KeyStorageSecurityStandard?: KeyStorageSecurityStandard;
+    /**
      * Key-value pairs that will be attached to the new private CA. You can associate up to 50 tags with a private CA. For information using tags with IAM to manage permissions, see Controlling Access Using IAM Tags.
      */
     Tags?: TagList;
@@ -487,6 +495,10 @@ declare namespace ACMPCA {
      * Name of the S3 bucket that contains the CRL. If you do not provide a value for the CustomCname argument, the name of your S3 bucket is placed into the CRL Distribution Points extension of the issued certificate. You can change the name of your bucket by calling the UpdateCertificateAuthority action. You must specify a bucket policy that allows ACM Private CA to write the CRL to your bucket.
      */
     S3BucketName?: String3To255;
+    /**
+     * Determines whether the CRL will be publicly readable or privately held in the CRL Amazon S3 bucket. If you choose PUBLIC_READ, the CRL will be accessible over the public internet. If you choose BUCKET_OWNER_FULL_CONTROL, only the owner of the CRL S3 bucket can access the CRL, and your PKI clients may need an alternative method of access.  If no value is specified, the default is PUBLIC_READ.  Note: This default can cause CA creation to fail in some circumstances. If you have have enabled the Block Public Access (BPA) feature in your S3 account, then you must specify the value of this parameter as BUCKET_OWNER_FULL_CONTROL, and not doing so results in an error. If you have disabled BPA in S3, then you can specify either BUCKET_OWNER_FULL_CONTROL or PUBLIC_READ as the value. For more information, see Blocking public access to the S3 bucket.
+     */
+    S3ObjectAcl?: S3ObjectAcl;
   }
   export type CsrBlob = Buffer|Uint8Array|Blob|string;
   export type CsrBody = string;
@@ -758,6 +770,7 @@ declare namespace ACMPCA {
     CertificateArn?: Arn;
   }
   export type KeyAlgorithm = "RSA_2048"|"RSA_4096"|"EC_prime256v1"|"EC_secp384r1"|string;
+  export type KeyStorageSecurityStandard = "FIPS_140_2_LEVEL_2_OR_HIGHER"|"FIPS_140_2_LEVEL_3_OR_HIGHER"|string;
   export interface KeyUsage {
     /**
      *  Key can be used for digital signing.
@@ -978,6 +991,7 @@ declare namespace ACMPCA {
   }
   export type S3BucketName = string;
   export type S3Key = string;
+  export type S3ObjectAcl = "PUBLIC_READ"|"BUCKET_OWNER_FULL_CONTROL"|string;
   export type SigningAlgorithm = "SHA256WITHECDSA"|"SHA384WITHECDSA"|"SHA512WITHECDSA"|"SHA256WITHRSA"|"SHA384WITHRSA"|"SHA512WITHRSA"|string;
   export type String = string;
   export type String128 = string;

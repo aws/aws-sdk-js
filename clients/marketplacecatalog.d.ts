@@ -52,11 +52,11 @@ declare class MarketplaceCatalog extends Service {
    */
   listEntities(callback?: (err: AWSError, data: MarketplaceCatalog.Types.ListEntitiesResponse) => void): Request<MarketplaceCatalog.Types.ListEntitiesResponse, AWSError>;
   /**
-   * This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a ResourceInUseException. For example, you cannot start the ChangeSet described in the example below because it contains two changes to execute the same change type (AddRevisions) against the same entity (entity-id@1).
+   * This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a ResourceInUseException. For example, you cannot start the ChangeSet described in the example later in this topic, because it contains two changes to execute the same change type (AddRevisions) against the same entity (entity-id@1). For more information about working with change sets, see  Working with change sets.
    */
   startChangeSet(params: MarketplaceCatalog.Types.StartChangeSetRequest, callback?: (err: AWSError, data: MarketplaceCatalog.Types.StartChangeSetResponse) => void): Request<MarketplaceCatalog.Types.StartChangeSetResponse, AWSError>;
   /**
-   * This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a ResourceInUseException. For example, you cannot start the ChangeSet described in the example below because it contains two changes to execute the same change type (AddRevisions) against the same entity (entity-id@1).
+   * This operation allows you to request changes for your entities. Within a single ChangeSet, you cannot start the same change type against the same entity multiple times. Additionally, when a ChangeSet is running, all the entities targeted by the different changes are locked until the ChangeSet has completed (either succeeded, cancelled, or failed). If you try to start a ChangeSet containing a change against an entity that is already locked, you will receive a ResourceInUseException. For example, you cannot start the ChangeSet described in the example later in this topic, because it contains two changes to execute the same change type (AddRevisions) against the same entity (entity-id@1). For more information about working with change sets, see  Working with change sets.
    */
   startChangeSet(callback?: (err: AWSError, data: MarketplaceCatalog.Types.StartChangeSetResponse) => void): Request<MarketplaceCatalog.Types.StartChangeSetResponse, AWSError>;
 }
@@ -96,7 +96,12 @@ declare namespace MarketplaceCatalog {
      * This object contains details specific to the change type of the requested change.
      */
     Details: Json;
+    /**
+     * Optional name for the change.
+     */
+    ChangeName?: ChangeName;
   }
+  export type ChangeName = string;
   export type ChangeSetDescription = ChangeSummary[];
   export type ChangeSetName = string;
   export type ChangeSetSummaryList = ChangeSetSummaryListItem[];
@@ -152,6 +157,10 @@ declare namespace MarketplaceCatalog {
      * An array of ErrorDetail objects associated with the change.
      */
     ErrorDetailList?: ErrorDetailList;
+    /**
+     * Optional name for the change.
+     */
+    ChangeName?: ChangeName;
   }
   export type ChangeType = string;
   export type ClientRequestToken = string;
@@ -198,7 +207,7 @@ declare namespace MarketplaceCatalog {
     /**
      * Returned if there is a failure on the change set, but that failure is not related to any of the changes in the request.
      */
-    FailureDescription?: StringValue;
+    FailureDescription?: ExceptionMessageContent;
     /**
      * An array of ChangeSummary objects.
      */
@@ -230,7 +239,7 @@ declare namespace MarketplaceCatalog {
     /**
      * The last modified date of the entity, in ISO 8601 format (2018-02-27T13:45:22Z).
      */
-    LastModifiedDate?: StringValue;
+    LastModifiedDate?: DateTimeISO8601;
     /**
      * This stringified JSON object includes the details of the entity.
      */
@@ -246,11 +255,12 @@ declare namespace MarketplaceCatalog {
      */
     Identifier?: Identifier;
   }
+  export type EntityNameString = string;
   export interface EntitySummary {
     /**
      * The name for the entity. This value is not unique. It is defined by the seller.
      */
-    Name?: StringValue;
+    Name?: EntityNameString;
     /**
      * The type of the entity.
      */
@@ -266,25 +276,27 @@ declare namespace MarketplaceCatalog {
     /**
      * The last time the entity was published, using ISO 8601 format (2018-02-27T13:45:22Z).
      */
-    LastModifiedDate?: StringValue;
+    LastModifiedDate?: DateTimeISO8601;
     /**
      * The visibility status of the entity to buyers. This value can be Public (everyone can view the entity), Limited (the entity is visible to limited accounts only), or Restricted (the entity was published and then unpublished and only existing buyers can view it). 
      */
-    Visibility?: StringValue;
+    Visibility?: VisibilityValue;
   }
   export type EntitySummaryList = EntitySummary[];
   export type EntityType = string;
+  export type ErrorCodeString = string;
   export interface ErrorDetail {
     /**
      * The error code that identifies the type of error.
      */
-    ErrorCode?: StringValue;
+    ErrorCode?: ErrorCodeString;
     /**
      * The message for the error.
      */
-    ErrorMessage?: StringValue;
+    ErrorMessage?: ExceptionMessageContent;
   }
   export type ErrorDetailList = ErrorDetail[];
+  export type ExceptionMessageContent = string;
   export type FailureCode = "CLIENT_ERROR"|"SERVER_FAULT"|string;
   export interface Filter {
     /**
@@ -298,6 +310,7 @@ declare namespace MarketplaceCatalog {
   }
   export type FilterList = Filter[];
   export type FilterName = string;
+  export type FilterValueContent = string;
   export type Identifier = string;
   export type Json = string;
   export interface ListChangeSetsRequest {
@@ -413,8 +426,8 @@ declare namespace MarketplaceCatalog {
      */
     ChangeSetArn?: ARN;
   }
-  export type StringValue = string;
-  export type ValueList = StringValue[];
+  export type ValueList = FilterValueContent[];
+  export type VisibilityValue = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

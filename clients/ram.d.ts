@@ -100,11 +100,11 @@ declare class RAM extends Service {
    */
   getResourceShareAssociations(callback?: (err: AWSError, data: RAM.Types.GetResourceShareAssociationsResponse) => void): Request<RAM.Types.GetResourceShareAssociationsResponse, AWSError>;
   /**
-   * Gets the invitations for resource sharing that you've received.
+   * Gets the invitations that you have received for resource shares.
    */
   getResourceShareInvitations(params: RAM.Types.GetResourceShareInvitationsRequest, callback?: (err: AWSError, data: RAM.Types.GetResourceShareInvitationsResponse) => void): Request<RAM.Types.GetResourceShareInvitationsResponse, AWSError>;
   /**
-   * Gets the invitations for resource sharing that you've received.
+   * Gets the invitations that you have received for resource shares.
    */
   getResourceShareInvitations(callback?: (err: AWSError, data: RAM.Types.GetResourceShareInvitationsResponse) => void): Request<RAM.Types.GetResourceShareInvitationsResponse, AWSError>;
   /**
@@ -231,7 +231,7 @@ declare namespace RAM {
      */
     resourceShareArn: String;
     /**
-     * The ARN of the AWS RAM permission to associate with the resource share.
+     * The Amazon Resource Name (ARN) of the AWS RAM permissions to associate with the resource share.
      */
     permissionArn: String;
     /**
@@ -242,6 +242,10 @@ declare namespace RAM {
      * A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
     clientToken?: String;
+    /**
+     * The version of the AWS RAM permissions to associate with the resource share.
+     */
+    permissionVersion?: Integer;
   }
   export interface AssociateResourceSharePermissionResponse {
     /**
@@ -263,7 +267,7 @@ declare namespace RAM {
      */
     resourceArns?: ResourceArnList;
     /**
-     * The principals.
+     * The principals to associate with the resource share. The possible values are IDs of AWS accounts, and the ARNs of organizational units (OU) or organizations from AWS Organizations.
      */
     principals?: PrincipalArnOrIdList;
     /**
@@ -517,7 +521,7 @@ declare namespace RAM {
   }
   export interface GetResourceSharesRequest {
     /**
-     * The Amazon Resource Names (ARN) of the resource shares.
+     * The ARNs of the resource shares.
      */
     resourceShareArns?: ResourceShareArnList;
     /**
@@ -544,6 +548,10 @@ declare namespace RAM {
      * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
     maxResults?: MaxResults;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS RAM permission that is associated with the resource share.
+     */
+    permissionArn?: String;
   }
   export interface GetResourceSharesResponse {
     /**
@@ -618,7 +626,7 @@ declare namespace RAM {
      */
     principals?: PrincipalArnOrIdList;
     /**
-     * The resource type. Valid values: codebuild:Project | codebuild:ReportGroup | ec2:CapacityReservation | ec2:DedicatedHost | ec2:Subnet | ec2:TrafficMirrorTarget | ec2:TransitGateway | imagebuilder:Component | imagebuilder:Image | imagebuilder:ImageRecipe | license-manager:LicenseConfiguration I resource-groups:Group | rds:Cluster | route53resolver:ResolverRule 
+     * The resource type. Valid values: acm-pca:CertificateAuthority | appmesh:Mesh | codebuild:Project | codebuild:ReportGroup | ec2:CapacityReservation | ec2:DedicatedHost | ec2:LocalGatewayRouteTable | ec2:PrefixList | ec2:Subnet | ec2:TrafficMirrorTarget | ec2:TransitGateway | imagebuilder:Component | imagebuilder:Image | imagebuilder:ImageRecipe | imagebuilder:ContainerRecipe | glue:Catalog | glue:Database | glue:Table | license-manager:LicenseConfiguration I network-firewall:FirewallPolicy | network-firewall:StatefulRuleGroup | network-firewall:StatelessRuleGroup | outposts:Outpost | resource-groups:Group | rds:Cluster | route53resolver:ResolverQueryLogConfig | route53resolver:ResolverRule 
      */
     resourceType?: String;
     /**
@@ -698,7 +706,7 @@ declare namespace RAM {
      */
     principal?: String;
     /**
-     * The resource type. Valid values: codebuild:Project | codebuild:ReportGroup | ec2:CapacityReservation | ec2:DedicatedHost | ec2:Subnet | ec2:TrafficMirrorTarget | ec2:TransitGateway | imagebuilder:Component | imagebuilder:Image | imagebuilder:ImageRecipe | license-manager:LicenseConfiguration I resource-groups:Group | rds:Cluster | route53resolver:ResolverRule 
+     * The resource type. Valid values: acm-pca:CertificateAuthority | appmesh:Mesh | codebuild:Project | codebuild:ReportGroup | ec2:CapacityReservation | ec2:DedicatedHost | ec2:LocalGatewayRouteTable | ec2:PrefixList | ec2:Subnet | ec2:TrafficMirrorTarget | ec2:TransitGateway | imagebuilder:Component | imagebuilder:Image | imagebuilder:ImageRecipe | imagebuilder:ContainerRecipe | glue:Catalog | glue:Database | glue:Table | license-manager:LicenseConfiguration I network-firewall:FirewallPolicy | network-firewall:StatefulRuleGroup | network-firewall:StatelessRuleGroup | outposts:Outpost | resource-groups:Group | rds:Cluster | route53resolver:ResolverQueryLogConfig | route53resolver:ResolverRule 
      */
     resourceType?: String;
     /**
@@ -943,6 +951,10 @@ declare namespace RAM {
      * To view the resources associated with a pending resource share invitation, use  ListPendingInvitationResources.
      */
     resourceShareAssociations?: ResourceShareAssociationList;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM user or IAM role that received the invitation.
+     */
+    receiverArn?: String;
   }
   export type ResourceShareInvitationArnList = String[];
   export type ResourceShareInvitationList = ResourceShareInvitation[];
@@ -958,7 +970,7 @@ declare namespace RAM {
      */
     version?: String;
     /**
-     * The identifier for the version of the permission that is set as the default version.
+     * Specifies whether the version of the permission is set to the default version for this permission.
      */
     defaultVersion?: Boolean;
     /**
@@ -981,6 +993,10 @@ declare namespace RAM {
      * The date and time when the permission was last updated.
      */
     lastUpdatedTime?: DateTime;
+    /**
+     * Specifies whether the version of the permission is set to the default version for this resource type.
+     */
+    isResourceTypeDefault?: Boolean;
   }
   export type ResourceSharePermissionList = ResourceSharePermissionSummary[];
   export interface ResourceSharePermissionSummary {
@@ -993,7 +1009,7 @@ declare namespace RAM {
      */
     version?: String;
     /**
-     * The identifier for the version of the permission that is set as the default version.
+     * Specifies whether the version of the permission is set to the default version for this permission.
      */
     defaultVersion?: Boolean;
     /**
@@ -1016,6 +1032,10 @@ declare namespace RAM {
      * The date and time when the permission was last updated.
      */
     lastUpdatedTime?: DateTime;
+    /**
+     * Specifies whether the version of the permission is set to the default version for this resource type.
+     */
+    isResourceTypeDefault?: Boolean;
   }
   export type ResourceShareStatus = "PENDING"|"ACTIVE"|"FAILED"|"DELETING"|"DELETED"|string;
   export type ResourceStatus = "AVAILABLE"|"ZONAL_RESOURCE_INACCESSIBLE"|"LIMIT_EXCEEDED"|"UNAVAILABLE"|"PENDING"|string;

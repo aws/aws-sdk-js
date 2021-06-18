@@ -100,6 +100,14 @@ declare class CustomerProfiles extends Service {
    */
   getIntegration(callback?: (err: AWSError, data: CustomerProfiles.Types.GetIntegrationResponse) => void): Request<CustomerProfiles.Types.GetIntegrationResponse, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and subject to change. Before calling this API, use CreateDomain or UpdateDomain to enable identity resolution: set Matching to true. GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process.   Amazon Connect runs a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.  Amazon Connect uses the following profile attributes to identify matches:   PhoneNumber   HomePhoneNumber   BusinessPhoneNumber   MobilePhoneNumber   EmailAddress   PersonalEmailAddress   BusinessEmailAddress   FullName   BusinessName  
+   */
+  getMatches(params: CustomerProfiles.Types.GetMatchesRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetMatchesResponse) => void): Request<CustomerProfiles.Types.GetMatchesResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and subject to change. Before calling this API, use CreateDomain or UpdateDomain to enable identity resolution: set Matching to true. GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process.   Amazon Connect runs a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.  Amazon Connect uses the following profile attributes to identify matches:   PhoneNumber   HomePhoneNumber   BusinessPhoneNumber   MobilePhoneNumber   EmailAddress   PersonalEmailAddress   BusinessEmailAddress   FullName   BusinessName  
+   */
+  getMatches(callback?: (err: AWSError, data: CustomerProfiles.Types.GetMatchesResponse) => void): Request<CustomerProfiles.Types.GetMatchesResponse, AWSError>;
+  /**
    * Returns the object types for a specific domain.
    */
   getProfileObjectType(params: CustomerProfiles.Types.GetProfileObjectTypeRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetProfileObjectTypeResponse) => void): Request<CustomerProfiles.Types.GetProfileObjectTypeResponse, AWSError>;
@@ -172,6 +180,14 @@ declare class CustomerProfiles extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: CustomerProfiles.Types.ListTagsForResourceResponse) => void): Request<CustomerProfiles.Types.ListTagsForResourceResponse, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and subject to change. Runs an AWS Lambda job that does the following:   All the profileKeys in the ProfileToBeMerged will be moved to the main profile.   All the objects in the ProfileToBeMerged will be moved to the main profile.   All the ProfileToBeMerged will be deleted at the end.   All the profileKeys in the ProfileIdsToBeMerged will be moved to the main profile.   Standard fields are merged as follows:   Fields are always "union"-ed if there are no conflicts in standard fields or attributeKeys.   When there are conflicting fields:   If no SourceProfileIds entry is specified, the main Profile value is always taken.    If a SourceProfileIds entry is specified, the specified profileId is always taken, even if it is a NULL value.       You can use MergeProfiles together with GetMatches, which returns potentially matching profiles, or use it with the results of another matching system. After profiles have been merged, they cannot be separated (unmerged).
+   */
+  mergeProfiles(params: CustomerProfiles.Types.MergeProfilesRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.MergeProfilesResponse) => void): Request<CustomerProfiles.Types.MergeProfilesResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and subject to change. Runs an AWS Lambda job that does the following:   All the profileKeys in the ProfileToBeMerged will be moved to the main profile.   All the objects in the ProfileToBeMerged will be moved to the main profile.   All the ProfileToBeMerged will be deleted at the end.   All the profileKeys in the ProfileIdsToBeMerged will be moved to the main profile.   Standard fields are merged as follows:   Fields are always "union"-ed if there are no conflicts in standard fields or attributeKeys.   When there are conflicting fields:   If no SourceProfileIds entry is specified, the main Profile value is always taken.    If a SourceProfileIds entry is specified, the specified profileId is always taken, even if it is a NULL value.       You can use MergeProfiles together with GetMatches, which returns potentially matching profiles, or use it with the results of another matching system. After profiles have been merged, they cannot be separated (unmerged).
+   */
+  mergeProfiles(callback?: (err: AWSError, data: CustomerProfiles.Types.MergeProfilesResponse) => void): Request<CustomerProfiles.Types.MergeProfilesResponse, AWSError>;
+  /**
    * Adds an integration between the service and a third-party service, which includes Amazon AppFlow and Amazon Connect. An integration can belong to only one domain.
    */
   putIntegration(params: CustomerProfiles.Types.PutIntegrationRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.PutIntegrationResponse) => void): Request<CustomerProfiles.Types.PutIntegrationResponse, AWSError>;
@@ -220,11 +236,11 @@ declare class CustomerProfiles extends Service {
    */
   untagResource(callback?: (err: AWSError, data: CustomerProfiles.Types.UntagResourceResponse) => void): Request<CustomerProfiles.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. Once a domain is created, the name can’t be changed.
+   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed.
    */
   updateDomain(params: CustomerProfiles.Types.UpdateDomainRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.UpdateDomainResponse) => void): Request<CustomerProfiles.Types.UpdateDomainResponse, AWSError>;
   /**
-   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. Once a domain is created, the name can’t be changed.
+   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed.
    */
   updateDomain(callback?: (err: AWSError, data: CustomerProfiles.Types.UpdateDomainResponse) => void): Request<CustomerProfiles.Types.UpdateDomainResponse, AWSError>;
   /**
@@ -308,7 +324,33 @@ declare namespace CustomerProfiles {
      */
     PostalCode?: string1To255;
   }
+  export type AttributeSourceIdMap = {[key: string]: uuid};
   export type Attributes = {[key: string]: string1To255};
+  export type BucketName = string;
+  export type BucketPrefix = string;
+  export interface ConnectorOperator {
+    /**
+     * The operation to be performed on the provided Marketo source fields.
+     */
+    Marketo?: MarketoConnectorOperator;
+    /**
+     * The operation to be performed on the provided Amazon S3 source fields.
+     */
+    S3?: S3ConnectorOperator;
+    /**
+     * The operation to be performed on the provided Salesforce source fields.
+     */
+    Salesforce?: SalesforceConnectorOperator;
+    /**
+     * The operation to be performed on the provided ServiceNow source fields.
+     */
+    ServiceNow?: ServiceNowConnectorOperator;
+    /**
+     * The operation to be performed on the provided Zendesk source fields.
+     */
+    Zendesk?: ZendeskConnectorOperator;
+  }
+  export type ConnectorProfileName = string;
   export interface CreateDomainRequest {
     /**
      * The unique name of the domain.
@@ -326,6 +368,10 @@ declare namespace CustomerProfiles {
      * The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications. You must set up a policy on the DeadLetterQueue for the SendMessage operation to enable Amazon Connect Customer Profiles to send messages to the DeadLetterQueue.
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
+    /**
+     * The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+     */
+    Matching?: MatchingRequest;
     /**
      * The tags used to organize, track, or control access for this resource.
      */
@@ -349,6 +395,10 @@ declare namespace CustomerProfiles {
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
     /**
+     * The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+     */
+    Matching?: MatchingResponse;
+    /**
      * The timestamp of when the domain was created.
      */
     CreatedAt: timestamp;
@@ -371,7 +421,7 @@ declare namespace CustomerProfiles {
      */
     AccountNumber?: string1To255;
     /**
-     * Any additional information relevant to the customer's profile.
+     * Any additional information relevant to the customer’s profile.
      */
     AdditionalInformation?: string1To1000;
     /**
@@ -395,15 +445,15 @@ declare namespace CustomerProfiles {
      */
     LastName?: string1To255;
     /**
-     * The customer’s birth date.
+     * The customer’s birth date. 
      */
     BirthDate?: string1To255;
     /**
-     * The gender with which the customer identifies.
+     * The gender with which the customer identifies. 
      */
     Gender?: Gender;
     /**
-     * The customer's phone number, which has not been specified as a mobile, home, or business number.
+     * The customer’s phone number, which has not been specified as a mobile, home, or business number. 
      */
     PhoneNumber?: string1To255;
     /**
@@ -419,7 +469,7 @@ declare namespace CustomerProfiles {
      */
     BusinessPhoneNumber?: string1To255;
     /**
-     * The customer's email address, which has not been specified as a personal or business address.
+     * The customer’s email address, which has not been specified as a personal or business address. 
      */
     EmailAddress?: string1To255;
     /**
@@ -457,6 +507,9 @@ declare namespace CustomerProfiles {
      */
     ProfileId: uuid;
   }
+  export type DataPullMode = "Incremental"|"Complete"|string;
+  export type _Date = Date;
+  export type DatetimeTypeFieldName = string;
   export interface DeleteDomainRequest {
     /**
      * The unique name of the domain.
@@ -565,6 +618,7 @@ declare namespace CustomerProfiles {
      */
     Message?: message;
   }
+  export type DestinationField = string;
   export type DomainList = ListDomainItem[];
   export interface DomainStats {
     /**
@@ -587,10 +641,124 @@ declare namespace CustomerProfiles {
   export type FieldContentType = "STRING"|"NUMBER"|"PHONE_NUMBER"|"EMAIL_ADDRESS"|"NAME"|string;
   export type FieldMap = {[key: string]: ObjectTypeField};
   export type FieldNameList = name[];
+  export interface FieldSourceProfileIds {
+    /**
+     * A unique identifier for the account number field to be merged. 
+     */
+    AccountNumber?: uuid;
+    /**
+     * A unique identifier for the additional information field to be merged.
+     */
+    AdditionalInformation?: uuid;
+    /**
+     * A unique identifier for the party type field to be merged.
+     */
+    PartyType?: uuid;
+    /**
+     * A unique identifier for the business name field to be merged.
+     */
+    BusinessName?: uuid;
+    /**
+     * A unique identifier for the first name field to be merged.
+     */
+    FirstName?: uuid;
+    /**
+     * A unique identifier for the middle name field to be merged.
+     */
+    MiddleName?: uuid;
+    /**
+     * A unique identifier for the last name field to be merged.
+     */
+    LastName?: uuid;
+    /**
+     * A unique identifier for the birthdate field to be merged.
+     */
+    BirthDate?: uuid;
+    /**
+     * A unique identifier for the gender field to be merged.
+     */
+    Gender?: uuid;
+    /**
+     * A unique identifier for the phone number field to be merged.
+     */
+    PhoneNumber?: uuid;
+    /**
+     * A unique identifier for the mobile phone number field to be merged.
+     */
+    MobilePhoneNumber?: uuid;
+    /**
+     * A unique identifier for the home phone number field to be merged.
+     */
+    HomePhoneNumber?: uuid;
+    /**
+     * A unique identifier for the business phone number field to be merged.
+     */
+    BusinessPhoneNumber?: uuid;
+    /**
+     * A unique identifier for the email address field to be merged.
+     */
+    EmailAddress?: uuid;
+    /**
+     * A unique identifier for the personal email address field to be merged.
+     */
+    PersonalEmailAddress?: uuid;
+    /**
+     * A unique identifier for the party type field to be merged.
+     */
+    BusinessEmailAddress?: uuid;
+    /**
+     * A unique identifier for the party type field to be merged.
+     */
+    Address?: uuid;
+    /**
+     * A unique identifier for the shipping address field to be merged.
+     */
+    ShippingAddress?: uuid;
+    /**
+     * A unique identifier for the mailing address field to be merged.
+     */
+    MailingAddress?: uuid;
+    /**
+     * A unique identifier for the billing type field to be merged.
+     */
+    BillingAddress?: uuid;
+    /**
+     * A unique identifier for the attributes field to be merged.
+     */
+    Attributes?: AttributeSourceIdMap;
+  }
+  export interface FlowDefinition {
+    /**
+     * A description of the flow you want to create.
+     */
+    Description?: FlowDescription;
+    /**
+     * The specified name of the flow. Use underscores (_) or hyphens (-) only. Spaces are not allowed.
+     */
+    FlowName: FlowName;
+    /**
+     * The Amazon Resource Name of the AWS Key Management Service (KMS) key you provide for encryption.
+     */
+    KmsArn: KmsArn;
+    /**
+     * The configuration that controls how Customer Profiles retrieves data from the source.
+     */
+    SourceFlowConfig: SourceFlowConfig;
+    /**
+     * A list of tasks that Customer Profiles performs while transferring the data in the flow run.
+     */
+    Tasks: Tasks;
+    /**
+     * The trigger settings that determine how and when the flow runs.
+     */
+    TriggerConfig: TriggerConfig;
+  }
+  export type FlowDescription = string;
+  export type FlowName = string;
   export type Gender = "MALE"|"FEMALE"|"UNSPECIFIED"|string;
   export interface GetDomainRequest {
     /**
-     * A unique name for the domain.
+     * The unique name of the domain.
      */
     DomainName: name;
   }
@@ -615,6 +783,10 @@ declare namespace CustomerProfiles {
      * Usage-specific statistics about the domain.
      */
     Stats?: DomainStats;
+    /**
+     * The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+     */
+    Matching?: MatchingResponse;
     /**
      * The timestamp of when the domain was created.
      */
@@ -663,6 +835,38 @@ declare namespace CustomerProfiles {
      * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
+  }
+  export interface GetMatchesRequest {
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: token;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: maxSize100;
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+  }
+  export interface GetMatchesResponse {
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: token;
+    /**
+     * The timestamp this version of Match Result generated.
+     */
+    MatchGenerationDate?: timestamp;
+    /**
+     * The number of potential matches found.
+     */
+    PotentialMatches?: matchesNumber;
+    /**
+     * The list of matched profiles for this instance.
+     */
+    Matches?: MatchesList;
   }
   export interface GetProfileObjectTypeRequest {
     /**
@@ -752,8 +956,15 @@ declare namespace CustomerProfiles {
      */
     Keys?: KeyMap;
   }
+  export interface IncrementalPullConfig {
+    /**
+     * A field that specifies the date time or timestamp field as the criteria to use when importing incremental records from the source.
+     */
+    DatetimeTypeFieldName?: DatetimeTypeFieldName;
+  }
   export type IntegrationList = ListIntegrationItem[];
   export type KeyMap = {[key: string]: ObjectTypeKeyList};
+  export type KmsArn = string;
   export interface ListAccountIntegrationsRequest {
     /**
      * The URI of the S3 bucket or any other type of data source.
@@ -1004,6 +1215,61 @@ declare namespace CustomerProfiles {
      */
     tags?: TagMap;
   }
+  export type MarketoConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export interface MarketoSourceProperties {
+    /**
+     * The object specified in the Marketo flow source.
+     */
+    Object: Object;
+  }
+  export interface MatchItem {
+    /**
+     * The unique identifiers for this group of profiles that match.
+     */
+    MatchId?: string1To255;
+    /**
+     * A list of identifiers for profiles that match.
+     */
+    ProfileIds?: ProfileIdList;
+  }
+  export type MatchesList = MatchItem[];
+  export interface MatchingRequest {
+    /**
+     * The flag that enables the matching process of duplicate profiles.
+     */
+    Enabled: optionalBoolean;
+  }
+  export interface MatchingResponse {
+    /**
+     * The flag that enables the matching process of duplicate profiles.
+     */
+    Enabled?: optionalBoolean;
+  }
+  export interface MergeProfilesRequest {
+    /**
+     * The unique name of the domain.
+     */
+    DomainName: name;
+    /**
+     * The identifier of the profile to be taken.
+     */
+    MainProfileId: uuid;
+    /**
+     * The identifier of the profile to be merged into MainProfileId.
+     */
+    ProfileIdsToBeMerged: ProfileIdToBeMergedList;
+    /**
+     * The identifiers of the fields in the profile that has the information you want to apply to the merge. For example, say you want to merge EmailAddress from Profile1 into MainProfile. This would be the identifier of the EmailAddress field in Profile1. 
+     */
+    FieldSourceProfileIds?: FieldSourceProfileIds;
+  }
+  export interface MergeProfilesResponse {
+    /**
+     * A message that indicates the merge request is complete.
+     */
+    Message?: message;
+  }
+  export type Object = string;
   export interface ObjectTypeField {
     /**
      * A field of a ProfileObject. For example: _source.FirstName, where “_source” is a ProfileObjectType of a Zendesk user and “FirstName” is a field in that ObjectType.
@@ -1029,6 +1295,7 @@ declare namespace CustomerProfiles {
     FieldNames?: FieldNameList;
   }
   export type ObjectTypeKeyList = ObjectTypeKey[];
+  export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP"|string;
   export type PartyType = "INDIVIDUAL"|"BUSINESS"|"OTHER"|string;
   export interface Profile {
     /**
@@ -1040,7 +1307,7 @@ declare namespace CustomerProfiles {
      */
     AccountNumber?: string1To255;
     /**
-     * Any additional information relevant to the customer's profile.
+     * Any additional information relevant to the customer’s profile.
      */
     AdditionalInformation?: string1To1000;
     /**
@@ -1064,11 +1331,11 @@ declare namespace CustomerProfiles {
      */
     LastName?: string1To255;
     /**
-     * The customer’s birth date.
+     * The customer’s birth date. 
      */
     BirthDate?: string1To255;
     /**
-     * The gender with which the customer identifies.
+     * The gender with which the customer identifies. 
      */
     Gender?: Gender;
     /**
@@ -1088,7 +1355,7 @@ declare namespace CustomerProfiles {
      */
     BusinessPhoneNumber?: string1To255;
     /**
-     * The customer's email address, which has not been specified as a personal or business address.
+     * The customer’s email address, which has not been specified as a personal or business address. 
      */
     EmailAddress?: string1To255;
     /**
@@ -1120,10 +1387,13 @@ declare namespace CustomerProfiles {
      */
     Attributes?: Attributes;
   }
+  export type ProfileIdList = uuid[];
+  export type ProfileIdToBeMergedList = uuid[];
   export type ProfileList = Profile[];
   export type ProfileObjectList = ListProfileObjectsItem[];
   export type ProfileObjectTypeList = ListProfileObjectTypeItem[];
   export type ProfileObjectTypeTemplateList = ListProfileObjectTypeTemplateItem[];
+  export type Property = string;
   export interface PutIntegrationRequest {
     /**
      * The unique name of the domain.
@@ -1132,7 +1402,7 @@ declare namespace CustomerProfiles {
     /**
      * The URI of the S3 bucket or any other type of data source.
      */
-    Uri: string1To255;
+    Uri?: string1To255;
     /**
      * The name of the profile object type.
      */
@@ -1141,6 +1411,10 @@ declare namespace CustomerProfiles {
      * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
+    /**
+     * The configuration that controls how Customer Profiles retrieves data from the source.
+     */
+    FlowDefinition?: FlowDefinition;
   }
   export interface PutIntegrationResponse {
     /**
@@ -1276,6 +1550,64 @@ declare namespace CustomerProfiles {
      */
     Tags?: TagMap;
   }
+  export type S3ConnectorOperator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export interface S3SourceProperties {
+    /**
+     * The Amazon S3 bucket name where the source files are stored.
+     */
+    BucketName: BucketName;
+    /**
+     * The object key for the Amazon S3 bucket in which the source files are stored.
+     */
+    BucketPrefix?: BucketPrefix;
+  }
+  export type SalesforceConnectorOperator = "PROJECTION"|"LESS_THAN"|"CONTAINS"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export interface SalesforceSourceProperties {
+    /**
+     * The object specified in the Salesforce flow source.
+     */
+    Object: Object;
+    /**
+     * The flag that enables dynamic fetching of new (recently added) fields in the Salesforce objects while running a flow.
+     */
+    EnableDynamicFieldUpdate?: boolean;
+    /**
+     * Indicates whether Amazon AppFlow includes deleted files in the flow run.
+     */
+    IncludeDeletedRecords?: boolean;
+  }
+  export type ScheduleExpression = string;
+  export type ScheduleOffset = number;
+  export interface ScheduledTriggerProperties {
+    /**
+     * The scheduling expression that determines the rate at which the schedule will run, for example rate (5 minutes).
+     */
+    ScheduleExpression: ScheduleExpression;
+    /**
+     * Specifies whether a scheduled flow has an incremental data transfer or a complete data transfer for each flow run.
+     */
+    DataPullMode?: DataPullMode;
+    /**
+     * Specifies the scheduled start time for a scheduled-trigger flow.
+     */
+    ScheduleStartTime?: _Date;
+    /**
+     * Specifies the scheduled end time for a scheduled-trigger flow.
+     */
+    ScheduleEndTime?: _Date;
+    /**
+     * Specifies the time zone used when referring to the date and time of a scheduled-triggered flow, such as America/New_York.
+     */
+    Timezone?: Timezone;
+    /**
+     * Specifies the optional offset that is added to the time interval for a schedule-triggered flow.
+     */
+    ScheduleOffset?: ScheduleOffset;
+    /**
+     * Specifies the date range for the records to import from the connector in the first flow run.
+     */
+    FirstExecutionFrom?: _Date;
+  }
   export interface SearchProfilesRequest {
     /**
      * The pagination token from the previous SearchProfiles API call.
@@ -1308,6 +1640,55 @@ declare namespace CustomerProfiles {
      */
     NextToken?: token;
   }
+  export type ServiceNowConnectorOperator = "PROJECTION"|"CONTAINS"|"LESS_THAN"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export interface ServiceNowSourceProperties {
+    /**
+     * The object specified in the ServiceNow flow source.
+     */
+    Object: Object;
+  }
+  export interface SourceConnectorProperties {
+    /**
+     * The properties that are applied when Marketo is being used as a source.
+     */
+    Marketo?: MarketoSourceProperties;
+    /**
+     * The properties that are applied when Amazon S3 is being used as the flow source.
+     */
+    S3?: S3SourceProperties;
+    /**
+     * The properties that are applied when Salesforce is being used as a source.
+     */
+    Salesforce?: SalesforceSourceProperties;
+    /**
+     * The properties that are applied when ServiceNow is being used as a source.
+     */
+    ServiceNow?: ServiceNowSourceProperties;
+    /**
+     * The properties that are applied when using Zendesk as a flow source.
+     */
+    Zendesk?: ZendeskSourceProperties;
+  }
+  export type SourceConnectorType = "Salesforce"|"Marketo"|"Zendesk"|"Servicenow"|"S3"|string;
+  export type SourceFields = stringTo2048[];
+  export interface SourceFlowConfig {
+    /**
+     * The name of the AppFlow connector profile. This name must be unique for each connector profile in the AWS account.
+     */
+    ConnectorProfileName?: ConnectorProfileName;
+    /**
+     * The type of connector, such as Salesforce, Marketo, and so on.
+     */
+    ConnectorType: SourceConnectorType;
+    /**
+     * Defines the configuration for a scheduled incremental data pull. If a valid configuration is provided, the fields specified in the configuration are used when querying for the incremental data pull.
+     */
+    IncrementalPullConfig?: IncrementalPullConfig;
+    /**
+     * Specifies the information that is required to query a particular source connector.
+     */
+    SourceConnectorProperties: SourceConnectorProperties;
+  }
   export type StandardIdentifier = "PROFILE"|"UNIQUE"|"SECONDARY"|"LOOKUP_ONLY"|"NEW_ONLY"|string;
   export type StandardIdentifierList = StandardIdentifier[];
   export type TagArn = string;
@@ -1327,6 +1708,49 @@ declare namespace CustomerProfiles {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export interface Task {
+    /**
+     * The operation to be performed on the provided source fields.
+     */
+    ConnectorOperator?: ConnectorOperator;
+    /**
+     * A field in a destination connector, or a field value against which Amazon AppFlow validates a source field.
+     */
+    DestinationField?: DestinationField;
+    /**
+     * The source fields to which a particular task is applied.
+     */
+    SourceFields: SourceFields;
+    /**
+     * A map used to store task-related information. The service looks for particular information based on the TaskType.
+     */
+    TaskProperties?: TaskPropertiesMap;
+    /**
+     * Specifies the particular task implementation that Amazon AppFlow performs.
+     */
+    TaskType: TaskType;
+  }
+  export type TaskPropertiesMap = {[key: string]: Property};
+  export type TaskType = "Arithmetic"|"Filter"|"Map"|"Mask"|"Merge"|"Truncate"|"Validate"|string;
+  export type Tasks = Task[];
+  export type Timezone = string;
+  export interface TriggerConfig {
+    /**
+     * Specifies the type of flow trigger. It can be OnDemand, Scheduled, or Event.
+     */
+    TriggerType: TriggerType;
+    /**
+     * Specifies the configuration details of a schedule-triggered flow that you define. Currently, these settings only apply to the Scheduled trigger type.
+     */
+    TriggerProperties?: TriggerProperties;
+  }
+  export interface TriggerProperties {
+    /**
+     * Specifies the configuration details of a schedule-triggered flow that you define.
+     */
+    Scheduled?: ScheduledTriggerProperties;
+  }
+  export type TriggerType = "Scheduled"|"Event"|"OnDemand"|string;
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource from which you are removing tags.
@@ -1384,7 +1808,7 @@ declare namespace CustomerProfiles {
   export type UpdateAttributes = {[key: string]: string0To255};
   export interface UpdateDomainRequest {
     /**
-     * The unique name for the domain.
+     * The unique name of the domain.
      */
     DomainName: name;
     /**
@@ -1400,13 +1824,17 @@ declare namespace CustomerProfiles {
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
     /**
+     * The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+     */
+    Matching?: MatchingRequest;
+    /**
      * The tags used to organize, track, or control access for this resource.
      */
     Tags?: TagMap;
   }
   export interface UpdateDomainResponse {
     /**
-     * The unique name for the domain.
+     * The unique name of the domain.
      */
     DomainName: name;
     /**
@@ -1421,6 +1849,10 @@ declare namespace CustomerProfiles {
      * The URL of the SQS dead letter queue, which is used for reporting errors associated with ingesting data from third party applications.
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
+    /**
+     * The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+     */
+    Matching?: MatchingResponse;
     /**
      * The timestamp of when the domain was created.
      */
@@ -1444,7 +1876,7 @@ declare namespace CustomerProfiles {
      */
     ProfileId: uuid;
     /**
-     * Any additional information relevant to the customer's profile.
+     * Any additional information relevant to the customer’s profile.
      */
     AdditionalInformation?: string0To1000;
     /**
@@ -1472,15 +1904,15 @@ declare namespace CustomerProfiles {
      */
     LastName?: string0To255;
     /**
-     * The customer’s birth date.
+     * The customer’s birth date. 
      */
     BirthDate?: string0To255;
     /**
-     * The gender with which the customer identifies.
+     * The gender with which the customer identifies. 
      */
     Gender?: Gender;
     /**
-     * The customer's phone number, which has not been specified as a mobile, home, or business number.
+     * The customer’s phone number, which has not been specified as a mobile, home, or business number. 
      */
     PhoneNumber?: string0To255;
     /**
@@ -1496,7 +1928,7 @@ declare namespace CustomerProfiles {
      */
     BusinessPhoneNumber?: string0To255;
     /**
-     * The customer's email address, which has not been specified as a personal or business address.
+     * The customer’s email address, which has not been specified as a personal or business address. 
      */
     EmailAddress?: string0To255;
     /**
@@ -1534,17 +1966,27 @@ declare namespace CustomerProfiles {
      */
     ProfileId: uuid;
   }
+  export type ZendeskConnectorOperator = "PROJECTION"|"GREATER_THAN"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export interface ZendeskSourceProperties {
+    /**
+     * The object specified in the Zendesk flow source.
+     */
+    Object: Object;
+  }
   export type encryptionKey = string;
   export type expirationDaysInteger = number;
   export type long = number;
+  export type matchesNumber = number;
   export type maxSize100 = number;
   export type message = string;
+  export type optionalBoolean = boolean;
   export type requestValueList = string1To255[];
   export type sqsQueueUrl = string;
   export type string0To1000 = string;
   export type string0To255 = string;
   export type string1To1000 = string;
   export type string1To255 = string;
+  export type stringTo2048 = string;
   export type stringifiedJson = string;
   export type text = string;
   export type timestamp = Date;

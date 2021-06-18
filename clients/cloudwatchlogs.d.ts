@@ -252,11 +252,11 @@ declare class CloudWatchLogs extends Service {
    */
   putDestination(callback?: (err: AWSError, data: CloudWatchLogs.Types.PutDestinationResponse) => void): Request<CloudWatchLogs.Types.PutDestinationResponse, AWSError>;
   /**
-   * Creates or updates an access policy associated with an existing destination. An access policy is an IAM policy document that is used to authorize claims to register a subscription filter against a given destination.
+   * Creates or updates an access policy associated with an existing destination. An access policy is an IAM policy document that is used to authorize claims to register a subscription filter against a given destination. If multiple AWS accounts are sending logs to this destination, each sender account must be listed separately in the policy. The policy does not support specifying * as the Principal or the use of the aws:PrincipalOrgId global key.
    */
   putDestinationPolicy(params: CloudWatchLogs.Types.PutDestinationPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates an access policy associated with an existing destination. An access policy is an IAM policy document that is used to authorize claims to register a subscription filter against a given destination.
+   * Creates or updates an access policy associated with an existing destination. An access policy is an IAM policy document that is used to authorize claims to register a subscription filter against a given destination. If multiple AWS accounts are sending logs to this destination, each sender account must be listed separately in the policy. The policy does not support specifying * as the Principal or the use of the aws:PrincipalOrgId global key.
    */
   putDestinationPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -268,11 +268,11 @@ declare class CloudWatchLogs extends Service {
    */
   putLogEvents(callback?: (err: AWSError, data: CloudWatchLogs.Types.PutLogEventsResponse) => void): Request<CloudWatchLogs.Types.PutLogEventsResponse, AWSError>;
   /**
-   * Creates or updates a metric filter and associates it with the specified log group. Metric filters allow you to configure rules to extract metric data from log events ingested through PutLogEvents. The maximum number of metric filters that can be associated with a log group is 100.
+   * Creates or updates a metric filter and associates it with the specified log group. Metric filters allow you to configure rules to extract metric data from log events ingested through PutLogEvents. The maximum number of metric filters that can be associated with a log group is 100. When you create a metric filter, you can also optionally assign a unit and dimensions to the metric that is created.  Metrics extracted from log events are charged as custom metrics. To prevent unexpected high charges, do not specify high-cardinality fields such as IPAddress or requestID as dimensions. Each different value found for a dimension is treated as a separate metric and accrues charges as a separate custom metric.  To help prevent accidental high charges, Amazon disables a metric filter if it generates 1000 different name/value pairs for the dimensions that you have specified within a certain amount of time. You can also set up a billing alarm to alert you if your charges are higher than expected. For more information, see  Creating a Billing Alarm to Monitor Your Estimated AWS Charges.  
    */
   putMetricFilter(params: CloudWatchLogs.Types.PutMetricFilterRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates a metric filter and associates it with the specified log group. Metric filters allow you to configure rules to extract metric data from log events ingested through PutLogEvents. The maximum number of metric filters that can be associated with a log group is 100.
+   * Creates or updates a metric filter and associates it with the specified log group. Metric filters allow you to configure rules to extract metric data from log events ingested through PutLogEvents. The maximum number of metric filters that can be associated with a log group is 100. When you create a metric filter, you can also optionally assign a unit and dimensions to the metric that is created.  Metrics extracted from log events are charged as custom metrics. To prevent unexpected high charges, do not specify high-cardinality fields such as IPAddress or requestID as dimensions. Each different value found for a dimension is treated as a separate metric and accrues charges as a separate custom metric.  To help prevent accidental high charges, Amazon disables a metric filter if it generates 1000 different name/value pairs for the dimensions that you have specified within a certain amount of time. You can also set up a billing alarm to alert you if your charges are higher than expected. For more information, see  Creating a Billing Alarm to Monitor Your Estimated AWS Charges.  
    */
   putMetricFilter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -300,11 +300,11 @@ declare class CloudWatchLogs extends Service {
    */
   putRetentionPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through PutLogEvents and have them delivered to a specific destination. When log events are sent to the receiving service, they are Base64 encoded and compressed with the gzip format. The following destinations are supported for subscription filters:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination that belongs to a different account, for cross-account delivery.   An Amazon Kinesis Firehose delivery stream that belongs to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.   There can only be one subscription filter associated with a log group. If you are updating an existing filter, you must specify the correct name in filterName. Otherwise, the call fails because you cannot associate a second filter with a log group. To perform a PutSubscriptionFilter operation, you must also have the iam:PassRole permission.
+   * Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through PutLogEvents and have them delivered to a specific destination. When log events are sent to the receiving service, they are Base64 encoded and compressed with the gzip format. The following destinations are supported for subscription filters:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination that belongs to a different account, for cross-account delivery.   An Amazon Kinesis Firehose delivery stream that belongs to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.   Each log group can have up to two subscription filters associated with it. If you are updating an existing filter, you must specify the correct name in filterName.  To perform a PutSubscriptionFilter operation, you must also have the iam:PassRole permission.
    */
   putSubscriptionFilter(params: CloudWatchLogs.Types.PutSubscriptionFilterRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through PutLogEvents and have them delivered to a specific destination. When log events are sent to the receiving service, they are Base64 encoded and compressed with the gzip format. The following destinations are supported for subscription filters:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination that belongs to a different account, for cross-account delivery.   An Amazon Kinesis Firehose delivery stream that belongs to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.   There can only be one subscription filter associated with a log group. If you are updating an existing filter, you must specify the correct name in filterName. Otherwise, the call fails because you cannot associate a second filter with a log group. To perform a PutSubscriptionFilter operation, you must also have the iam:PassRole permission.
+   * Creates or updates a subscription filter and associates it with the specified log group. Subscription filters allow you to subscribe to a real-time stream of log events ingested through PutLogEvents and have them delivered to a specific destination. When log events are sent to the receiving service, they are Base64 encoded and compressed with the gzip format. The following destinations are supported for subscription filters:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination that belongs to a different account, for cross-account delivery.   An Amazon Kinesis Firehose delivery stream that belongs to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function that belongs to the same account as the subscription filter, for same-account delivery.   Each log group can have up to two subscription filters associated with it. If you are updating an existing filter, you must specify the correct name in filterName.  To perform a PutSubscriptionFilter operation, you must also have the iam:PassRole permission.
    */
   putSubscriptionFilter(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -385,7 +385,7 @@ declare namespace CloudWatchLogs {
      */
     from: Timestamp;
     /**
-     * The end time of the range for the request, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.
+     * The end time of the range for the request, expreswatchlogsdocused as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp later than this time are not exported.
      */
     to: Timestamp;
     /**
@@ -574,7 +574,7 @@ declare namespace CloudWatchLogs {
      */
     logStreamNamePrefix?: LogStreamName;
     /**
-     * If the value is LogStreamName, the results are ordered by log stream name. If the value is LastEventTime, the results are ordered by the event time. The default value is LogStreamName. If you order the results by event time, you cannot specify the logStreamNamePrefix parameter.  lastEventTimeStamp represents the time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. lastEventTimeStamp updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but in rare situations might take longer.
+     * If the value is LogStreamName, the results are ordered by log stream name. If the value is LastEventTime, the results are ordered by the event time. The default value is LogStreamName. If you order the results by event time, you cannot specify the logStreamNamePrefix parameter.  lastEventTimestamp represents the time of the most recent log event in the log stream in CloudWatch Logs. This number is expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. lastEventTimestamp updates on an eventual consistency basis. It typically updates in less than an hour from ingestion, but in rare situations might take longer.
      */
     orderBy?: OrderBy;
     /**
@@ -739,6 +739,9 @@ declare namespace CloudWatchLogs {
   export type DestinationArn = string;
   export type DestinationName = string;
   export type Destinations = Destination[];
+  export type Dimensions = {[key: string]: DimensionsValue};
+  export type DimensionsKey = string;
+  export type DimensionsValue = string;
   export interface DisassociateKmsKeyRequest {
     /**
      * The name of the log group.
@@ -832,7 +835,7 @@ declare namespace CloudWatchLogs {
      */
     logStreamNamePrefix?: LogStreamName;
     /**
-     * The start of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not returned. If you omit startTime and endTime the most recent log events are retrieved, to up 1 MB or 10,000 log events.
+     * The start of the time range, expressed as the number of milliseconds after Jan 1, 1970 00:00:00 UTC. Events with a timestamp before this time are not returned.
      */
     startTime?: Timestamp;
     /**
@@ -945,7 +948,7 @@ declare namespace CloudWatchLogs {
      */
     logGroupName: LogGroupName;
     /**
-     * The time to set as the center of the query. If you specify time, the 8 minutes before and 8 minutes after this time are searched. If you omit time, the past 15 minutes are queried. The time value is specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.
+     * The time to set as the center of the query. If you specify time, the 15 minutes before this time are queries. If you omit time the 8 minutes before and 8 minutes after this time are searched. The time value is specified as epoch time, the number of seconds since January 1, 1970, 00:00:00 UTC.
      */
     time?: Timestamp;
   }
@@ -1148,6 +1151,14 @@ declare namespace CloudWatchLogs {
      * (Optional) The value to emit when a filter pattern does not match a log event. This value can be null.
      */
     defaultValue?: DefaultValue;
+    /**
+     * The fields to use as dimensions for the metric. One metric filter can include as many as three dimensions.  Metrics extracted from log events are charged as custom metrics. To prevent unexpected high charges, do not specify high-cardinality fields such as IPAddress or requestID as dimensions. Each different value found for a dimension is treated as a separate metric and accrues charges as a separate custom metric.  To help prevent accidental high charges, Amazon disables a metric filter if it generates 1000 different name/value pairs for the dimensions that you have specified within a certain amount of time. You can also set up a billing alarm to alert you if your charges are higher than expected. For more information, see  Creating a Billing Alarm to Monitor Your Estimated AWS Charges.  
+     */
+    dimensions?: Dimensions;
+    /**
+     * The unit to assign to the metric. If you omit this, the unit is set as None.
+     */
+    unit?: StandardUnit;
   }
   export type MetricTransformations = MetricTransformation[];
   export type MetricValue = string;
@@ -1300,7 +1311,7 @@ declare namespace CloudWatchLogs {
      */
     logGroupName: LogGroupName;
     /**
-     * A name for the subscription filter. If you are updating an existing filter, you must specify the correct name in filterName. Otherwise, the call fails because you cannot associate a second filter with a log group. To find the name of the filter currently associated with a log group, use DescribeSubscriptionFilters.
+     * A name for the subscription filter. If you are updating an existing filter, you must specify the correct name in filterName. To find the name of the filter currently associated with a log group, use DescribeSubscriptionFilters.
      */
     filterName: FilterName;
     /**
@@ -1308,7 +1319,7 @@ declare namespace CloudWatchLogs {
      */
     filterPattern: FilterPattern;
     /**
-     * The ARN of the destination to deliver matching log events to. Currently, the supported destinations are:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination (specified using an ARN) belonging to a different account, for cross-account delivery.   An Amazon Kinesis Firehose delivery stream belonging to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function belonging to the same account as the subscription filter, for same-account delivery.  
+     * The ARN of the destination to deliver matching log events to. Currently, the supported destinations are:   An Amazon Kinesis stream belonging to the same account as the subscription filter, for same-account delivery.   A logical destination (specified using an ARN) belonging to a different account, for cross-account delivery. If you are setting up a cross-account subscription, the destination must have an IAM policy associated with it that allows the sender to send logs to the destination. For more information, see PutDestinationPolicy.   An Amazon Kinesis Firehose delivery stream belonging to the same account as the subscription filter, for same-account delivery.   An AWS Lambda function belonging to the same account as the subscription filter, for same-account delivery.  
      */
     destinationArn: DestinationArn;
     /**
@@ -1385,7 +1396,7 @@ declare namespace CloudWatchLogs {
      */
     bytesScanned?: StatsValue;
   }
-  export type QueryStatus = "Scheduled"|"Running"|"Complete"|"Failed"|"Cancelled"|string;
+  export type QueryStatus = "Scheduled"|"Running"|"Complete"|"Failed"|"Cancelled"|"Timeout"|"Unknown"|string;
   export type QueryString = string;
   export interface RejectedLogEventsInfo {
     /**
@@ -1440,6 +1451,7 @@ declare namespace CloudWatchLogs {
   }
   export type SearchedLogStreams = SearchedLogStream[];
   export type SequenceToken = string;
+  export type StandardUnit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None"|string;
   export type StartFromHead = boolean;
   export interface StartQueryRequest {
     /**
