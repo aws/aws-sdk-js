@@ -61,7 +61,7 @@ export class DocumentClient {
     transactGet(params: DocumentClient.TransactGetItemsInput, callback?: (err: AWSError, data: DocumentClient.TransactGetItemsOutput) => void): Request<DocumentClient.TransactGetItemsOutput, AWSError>;
 
     /**
-     * Synchronous write operation that groups up to 10 action requests
+     * Synchronous write operation that groups up to 25 action requests.
      */
     transactWrite(params: DocumentClient.TransactWriteItemsInput, callback?: (err: AWSError, data: DocumentClient.TransactWriteItemsOutput) => void): Request<DocumentClient.TransactWriteItemsOutput, AWSError>;
 }
