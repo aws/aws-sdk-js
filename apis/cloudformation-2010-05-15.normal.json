@@ -11,6 +11,53 @@
     "xmlNamespace": "http://cloudformation.amazonaws.com/doc/2010-05-15/"
   },
   "operations": {
+    "ActivateType": {
+      "name": "ActivateType",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ActivateTypeInput"
+      },
+      "output": {
+        "shape": "ActivateTypeOutput",
+        "resultWrapper": "ActivateTypeResult"
+      },
+      "errors": [
+        {
+          "shape": "CFNRegistryException"
+        },
+        {
+          "shape": "TypeNotFoundException"
+        }
+      ],
+      "documentation": "<p>Activates a public third-party extension, making it available for use in stack templates. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html\">Using public extensions</a> in the <i>CloudFormation User Guide</i>.</p> <p>Once you have activated a public third-party extension in your account and region, use <a href=\"AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a> to specify configuration properties for the extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>",
+      "idempotent": true
+    },
+    "BatchDescribeTypeConfigurations": {
+      "name": "BatchDescribeTypeConfigurations",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchDescribeTypeConfigurationsInput"
+      },
+      "output": {
+        "shape": "BatchDescribeTypeConfigurationsOutput",
+        "resultWrapper": "BatchDescribeTypeConfigurationsResult"
+      },
+      "errors": [
+        {
+          "shape": "TypeConfigurationNotFoundException"
+        },
+        {
+          "shape": "CFNRegistryException"
+        }
+      ],
+      "documentation": "<p>Returns configuration data for the specified CloudFormation extensions, from the CloudFormation registry for the account and region.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
+    },
     "CancelUpdateStack": {
       "name": "CancelUpdateStack",
       "http": {
@@ -163,6 +210,30 @@
       ],
       "documentation": "<p>Creates a stack set.</p>"
     },
+    "DeactivateType": {
+      "name": "DeactivateType",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeactivateTypeInput"
+      },
+      "output": {
+        "shape": "DeactivateTypeOutput",
+        "resultWrapper": "DeactivateTypeResult"
+      },
+      "errors": [
+        {
+          "shape": "CFNRegistryException"
+        },
+        {
+          "shape": "TypeNotFoundException"
+        }
+      ],
+      "documentation": "<p>Deactivates a public extension that was previously activated in this account and region.</p> <p>Once deactivated, an extension cannot be used in any CloudFormation operation. This includes stack update operations where the stack template includes the extension, even if no updates are being made to the extension. In addition, deactivated extensions are not automatically updated if a new version of the extension is released.</p>",
+      "idempotent": true
+    },
     "DeleteChangeSet": {
       "name": "DeleteChangeSet",
       "http": {
@@ -312,6 +383,27 @@
         }
       ],
       "documentation": "<p>Returns the inputs for the change set and a list of changes that AWS CloudFormation will make if you execute the change set. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-updating-stacks-changesets.html\">Updating Stacks Using Change Sets</a> in the AWS CloudFormation User Guide.</p>"
+    },
+    "DescribePublisher": {
+      "name": "DescribePublisher",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribePublisherInput"
+      },
+      "output": {
+        "shape": "DescribePublisherOutput",
+        "resultWrapper": "DescribePublisherResult"
+      },
+      "errors": [
+        {
+          "shape": "CFNRegistryException"
+        }
+      ],
+      "documentation": "<p>Returns information about a CloudFormation extension publisher.</p> <p>If you do not supply a <code>PublisherId</code>, and you have registered as an extension publisher, <code>DescribePublisher</code> returns information about your own publisher account. </p> <p>For more information on registering as a publisher, see:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html\">RegisterPublisher</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html\">Publishing extensions to make them available for public use</a> in the <i>CloudFormation CLI User Guide</i> </p> </li> </ul>",
+      "idempotent": true
     },
     "DescribeStackDriftDetectionStatus": {
       "name": "DescribeStackDriftDetectionStatus",
@@ -885,6 +977,30 @@
       "documentation": "<p>Returns summary information about extension that have been registered with CloudFormation.</p>",
       "idempotent": true
     },
+    "PublishType": {
+      "name": "PublishType",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PublishTypeInput"
+      },
+      "output": {
+        "shape": "PublishTypeOutput",
+        "resultWrapper": "PublishTypeResult"
+      },
+      "errors": [
+        {
+          "shape": "CFNRegistryException"
+        },
+        {
+          "shape": "TypeNotFoundException"
+        }
+      ],
+      "documentation": "<p>Publishes the specified extension to the CloudFormation registry as a public extension in this region. Public extensions are available for use by all CloudFormation users. For more information on publishing extensions, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html\">Publishing extensions to make them available for public use</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>To publish an extension, you must be registered as a publisher with CloudFormation. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html\">RegisterPublisher</a>.</p>",
+      "idempotent": true
+    },
     "RecordHandlerProgress": {
       "name": "RecordHandlerProgress",
       "http": {
@@ -909,6 +1025,27 @@
       "documentation": "<p>Reports progress of a resource handler to CloudFormation.</p> <p>Reserved for use by the <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/what-is-cloudformation-cli.html\">CloudFormation CLI</a>. Do not use this API in your code.</p>",
       "idempotent": true
     },
+    "RegisterPublisher": {
+      "name": "RegisterPublisher",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RegisterPublisherInput"
+      },
+      "output": {
+        "shape": "RegisterPublisherOutput",
+        "resultWrapper": "RegisterPublisherResult"
+      },
+      "errors": [
+        {
+          "shape": "CFNRegistryException"
+        }
+      ],
+      "documentation": "<p>Registers your account as a publisher of public extensions in the CloudFormation registry. Public extensions are available for use by all CloudFormation users. This publisher ID applies to your account in all AWS regions.</p> <p>For information on requirements for registering as a public extension publisher, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs\">Registering your account to publish CloudFormation extensions</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p/>",
+      "idempotent": true
+    },
     "RegisterType": {
       "name": "RegisterType",
       "http": {
@@ -927,7 +1064,7 @@
           "shape": "CFNRegistryException"
         }
       ],
-      "documentation": "<p>Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your AWS account, and includes:</p> <ul> <li> <p>Validating the extension schema</p> </li> <li> <p>Determining which handlers, if any, have been specified for the extension</p> </li> <li> <p>Making the extension available for use in your account</p> </li> </ul> <p>For more information on how to develop extensions and ready them for registeration, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html\">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use <a href=\"AWSCloudFormation/latest/APIReference/API_DeregisterType.html\">DeregisterType</a> to deregister specific extension versions if necessary.</p> <p>Once you have initiated a registration request using <code> <a>RegisterType</a> </code>, you can use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of the registration request.</p>",
+      "documentation": "<p>Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your AWS account, and includes:</p> <ul> <li> <p>Validating the extension schema</p> </li> <li> <p>Determining which handlers, if any, have been specified for the extension</p> </li> <li> <p>Making the extension available for use in your account</p> </li> </ul> <p>For more information on how to develop extensions and ready them for registeration, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html\">Creating Resource Providers</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use <a href=\"AWSCloudFormation/latest/APIReference/API_DeregisterType.html\">DeregisterType</a> to deregister specific extension versions if necessary.</p> <p>Once you have initiated a registration request using <code> <a>RegisterType</a> </code>, you can use <code> <a>DescribeTypeRegistration</a> </code> to monitor the progress of the registration request.</p> <p>Once you have registered a private extension in your account and region, use <a href=\"AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a> to specify configuration properties for the extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>",
       "idempotent": true
     },
     "SetStackPolicy": {
@@ -940,6 +1077,29 @@
         "shape": "SetStackPolicyInput"
       },
       "documentation": "<p>Sets a stack policy for a specified stack.</p>"
+    },
+    "SetTypeConfiguration": {
+      "name": "SetTypeConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "SetTypeConfigurationInput"
+      },
+      "output": {
+        "shape": "SetTypeConfigurationOutput",
+        "resultWrapper": "SetTypeConfigurationResult"
+      },
+      "errors": [
+        {
+          "shape": "CFNRegistryException"
+        },
+        {
+          "shape": "TypeNotFoundException"
+        }
+      ],
+      "documentation": "<p>Specifies the configuration data for a registered CloudFormation extension, in the given account and region.</p> <p>To view the current configuration data for an extension, refer to the <code>ConfigurationSchema</code> element of <a href=\"AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p> <important> <p>It is strongly recommended that you use dynamic references to restrict sensitive configuration definitions, such as third-party credentials. For more details on dynamic references, see <a href=\"https://docs.aws.amazon.com/\">Using dynamic references to specify template values</a> in the <i>AWS CloudFormation User Guide</i>.</p> </important>"
     },
     "SetTypeDefaultVersion": {
       "name": "SetTypeDefaultVersion",
@@ -1001,6 +1161,30 @@
         }
       ],
       "documentation": "<p>Stops an in-progress operation on a stack set and its associated stack instances. </p>"
+    },
+    "TestType": {
+      "name": "TestType",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TestTypeInput"
+      },
+      "output": {
+        "shape": "TestTypeOutput",
+        "resultWrapper": "TestTypeResult"
+      },
+      "errors": [
+        {
+          "shape": "CFNRegistryException"
+        },
+        {
+          "shape": "TypeNotFoundException"
+        }
+      ],
+      "documentation": "<p>Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.</p> <ul> <li> <p>For resource types, this includes passing all contracts tests defined for the type.</p> </li> <li> <p>For modules, this includes determining if the module's model meets all necessary requirements.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-testing\">Testing your public extension prior to publishing</a> in the <i>CloudFormation CLI User Guide</i>.</p> <p>If you do not specify a version, CloudFormation uses the default version of the extension in your account and region for testing.</p> <p>To perform testing, CloudFormation assumes the execution role specified when the test was registered. For more information, see <a href=\"AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p> <p>Once you've initiated testing on an extension using <code>TestType</code>, you can use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html\">DescribeType</a> to monitor the current test status and test status description for the extension.</p> <p>An extension must have a test status of <code>PASSED</code> before it can be published. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-publish.html\">Publishing extensions to make them available for public use</a> in the <i>CloudFormation CLI User Guide</i>.</p>",
+      "idempotent": true
     },
     "UpdateStack": {
       "name": "UpdateStack",
@@ -1127,6 +1311,9 @@
     }
   },
   "shapes": {
+    "AcceptTermsAndConditions": {
+      "type": "boolean"
+    },
     "Account": {
       "type": "string",
       "pattern": "^[0-9]{12}$"
@@ -1188,6 +1375,59 @@
       "min": 1,
       "pattern": "(s3://|http(s?)://).+"
     },
+    "ActivateTypeInput": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "ThirdPartyType",
+          "documentation": "<p>The extension type.</p> <p>Conditional: You must specify <code>PublicTypeArn</code>, or <code>TypeName</code>, <code>Type</code>, and <code>PublisherId</code>.</p>"
+        },
+        "PublicTypeArn": {
+          "shape": "ThirdPartyTypeArn",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the public extension.</p> <p>Conditional: You must specify <code>PublicTypeArn</code>, or <code>TypeName</code>, <code>Type</code>, and <code>PublisherId</code>.</p>"
+        },
+        "PublisherId": {
+          "shape": "PublisherId",
+          "documentation": "<p>The ID of the extension publisher.</p> <p>Conditional: You must specify <code>PublicTypeArn</code>, or <code>TypeName</code>, <code>Type</code>, and <code>PublisherId</code>.</p>"
+        },
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The name of the extension.</p> <p>Conditional: You must specify <code>PublicTypeArn</code>, or <code>TypeName</code>, <code>Type</code>, and <code>PublisherId</code>.</p>"
+        },
+        "TypeNameAlias": {
+          "shape": "TypeName",
+          "documentation": "<p>An alias to assign to the public extension, in this account and region. If you specify an alias for the extension, CloudFormation treats the alias as the extension type name within this account and region. You must use the alias to refer to the extension in your templates, API calls, and CloudFormation console.</p> <p>An extension alias must be unique within a given account and region. You can activate the same public resource multiple times in the same account and region, using different type name aliases.</p>"
+        },
+        "AutoUpdate": {
+          "shape": "AutoUpdate",
+          "documentation": "<p>Whether to automatically update the extension in this account and region when a new <i>minor</i> version is published by the extension publisher. Major versions released by the publisher must be manually updated.</p> <p>The default is <code>true</code>.</p>"
+        },
+        "LoggingConfig": {
+          "shape": "LoggingConfig"
+        },
+        "ExecutionRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The name of the IAM execution role to use to activate the extension.</p>"
+        },
+        "VersionBump": {
+          "shape": "VersionBump",
+          "documentation": "<p>Manually updates a previously-activated type to a new major or minor version, if available. You can also use this parameter to update the value of <code>AutoUpdate</code>.</p> <ul> <li> <p> <code>MAJOR</code>: CloudFormation updates the extension to the newest major version, if one is available.</p> </li> <li> <p> <code>MINOR</code>: CloudFormation updates the extension to the newest minor version, if one is available.</p> </li> </ul>"
+        },
+        "MajorVersion": {
+          "shape": "MajorVersion",
+          "documentation": "<p>The major version of this extension you want to activate, if multiple major versions are available. The default is the latest major version. CloudFormation uses the latest available <i>minor</i> version of the major version selected.</p> <p>You can specify <code>MajorVersion</code> or <code>VersionBump</code>, but not both.</p>"
+        }
+      }
+    },
+    "ActivateTypeOutput": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "PrivateTypeArn",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the activated extension, in this account and region.</p>"
+        }
+      }
+    },
     "AllowedValue": {
       "type": "string"
     },
@@ -1216,6 +1456,61 @@
     },
     "AutoDeploymentNullable": {
       "type": "boolean"
+    },
+    "AutoUpdate": {
+      "type": "boolean"
+    },
+    "BatchDescribeTypeConfigurationsError": {
+      "type": "structure",
+      "members": {
+        "ErrorCode": {
+          "shape": "ErrorCode",
+          "documentation": "<p>The error code.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "ErrorMessage",
+          "documentation": "<p>The error message.</p>"
+        },
+        "TypeConfigurationIdentifier": {
+          "shape": "TypeConfigurationIdentifier"
+        }
+      },
+      "documentation": "<p>Detailed information concerning an error generated during the setting of configuration data for a CloudFormation extension.</p>"
+    },
+    "BatchDescribeTypeConfigurationsErrors": {
+      "type": "list",
+      "member": {
+        "shape": "BatchDescribeTypeConfigurationsError"
+      }
+    },
+    "BatchDescribeTypeConfigurationsInput": {
+      "type": "structure",
+      "required": [
+        "TypeConfigurationIdentifiers"
+      ],
+      "members": {
+        "TypeConfigurationIdentifiers": {
+          "shape": "TypeConfigurationIdentifiers",
+          "documentation": "<p>The list of identifiers for the desired extension configurations.</p>"
+        }
+      }
+    },
+    "BatchDescribeTypeConfigurationsOutput": {
+      "type": "structure",
+      "members": {
+        "Errors": {
+          "shape": "BatchDescribeTypeConfigurationsErrors",
+          "documentation": "<p>A list of information concerning any errors generated during the setting of the specified configurations.</p>"
+        },
+        "UnprocessedTypeConfigurations": {
+          "shape": "UnprocessedTypeConfigurations",
+          "documentation": "<p>A list of any of the specified extension configurations that CloudFormation could not process for any reason.</p>"
+        },
+        "TypeConfigurations": {
+          "shape": "TypeConfigurationDetailsList",
+          "documentation": "<p>A list of any of the specified extension configurations from the CloudFormation registry.</p>"
+        }
+      }
     },
     "BoxedInteger": {
       "type": "integer",
@@ -1266,6 +1561,15 @@
         "CAPABILITY_IAM",
         "CAPABILITY_NAMED_IAM",
         "CAPABILITY_AUTO_EXPAND"
+      ]
+    },
+    "Category": {
+      "type": "string",
+      "enum": [
+        "REGISTERED",
+        "ACTIVATED",
+        "THIRD_PARTY",
+        "AWS_TYPES"
       ]
     },
     "CausingEntity": {
@@ -1428,6 +1732,18 @@
       "type": "string",
       "max": 128,
       "min": 1
+    },
+    "ConfigurationSchema": {
+      "type": "string",
+      "max": 60000,
+      "min": 1,
+      "pattern": "[\\s\\S]+"
+    },
+    "ConnectionArn": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "arn:aws(-[\\w]+)*:.+:.+:[0-9]{12}:.+"
     },
     "ContinueUpdateRollbackInput": {
       "type": "structure",
@@ -1762,6 +2078,27 @@
     "CreationTime": {
       "type": "timestamp"
     },
+    "DeactivateTypeInput": {
+      "type": "structure",
+      "members": {
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The type name of the extension, in this account and region. If you specified a type name alias when enabling the extension, use the type name alias.</p> <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+        },
+        "Type": {
+          "shape": "ThirdPartyType",
+          "documentation": "<p>The extension type.</p> <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+        },
+        "Arn": {
+          "shape": "PrivateTypeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and region.</p> <p>Conditional: You must specify either <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+        }
+      }
+    },
+    "DeactivateTypeOutput": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteChangeSetInput": {
       "type": "structure",
       "required": [
@@ -2060,6 +2397,36 @@
         }
       },
       "documentation": "<p>The output for the <a>DescribeChangeSet</a> action.</p>"
+    },
+    "DescribePublisherInput": {
+      "type": "structure",
+      "members": {
+        "PublisherId": {
+          "shape": "PublisherId",
+          "documentation": "<p>The ID of the extension publisher.</p> <p>If you do not supply a <code>PublisherId</code>, and you have registered as an extension publisher, <code>DescribePublisher</code> returns information about your own publisher account.</p>"
+        }
+      }
+    },
+    "DescribePublisherOutput": {
+      "type": "structure",
+      "members": {
+        "PublisherId": {
+          "shape": "PublisherId",
+          "documentation": "<p>The ID of the extension publisher.</p>"
+        },
+        "PublisherStatus": {
+          "shape": "PublisherStatus",
+          "documentation": "<p>Whether the publisher is verified. Currently, all registered publishers are verified.</p>"
+        },
+        "IdentityProvider": {
+          "shape": "IdentityProvider",
+          "documentation": "<p>The type of account used as the identity provider when registering this publisher with CloudFormation.</p>"
+        },
+        "PublisherProfile": {
+          "shape": "PublisherProfile",
+          "documentation": "<p>The URL to the publisher's profile with the identity provider.</p>"
+        }
+      }
     },
     "DescribeStackDriftDetectionStatusInput": {
       "type": "structure",
@@ -2372,6 +2739,14 @@
         "VersionId": {
           "shape": "TypeVersionId",
           "documentation": "<p>The ID of a specific version of the extension. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the extension version when it is registered.</p> <p>If you specify a <code>VersionId</code>, <code>DescribeType</code> returns information about that specific extension version. Otherwise, it returns information about the default extension version.</p>"
+        },
+        "PublisherId": {
+          "shape": "PublisherId",
+          "documentation": "<p>The publisher ID of the extension publisher.</p> <p>Extensions provided by Amazon are not assigned a publisher ID.</p>"
+        },
+        "PublicVersionNumber": {
+          "shape": "PublicVersionNumber",
+          "documentation": "<p>The version number of a public third-party extension.</p>"
         }
       }
     },
@@ -2388,19 +2763,27 @@
         },
         "TypeName": {
           "shape": "TypeName",
-          "documentation": "<p>The name of the registered extension.</p>"
+          "documentation": "<p>The name of the extension.</p> <p>If the extension is a public third-party type you have activated with a type name alias, CloudFormation returns the type name alias. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">ActivateType</a>.</p>"
         },
         "DefaultVersionId": {
           "shape": "TypeVersionId",
-          "documentation": "<p>The ID of the default version of the extension. The default version is used when the extension version is not specified.</p> <p>To set the default version of an extension, use <code> <a>SetTypeDefaultVersion</a> </code>. </p>"
+          "documentation": "<p>The ID of the default version of the extension. The default version is used when the extension version is not specified.</p> <p>This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon and published by third parties, CloudFormation returns <code>null</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p> <p>To set the default version of an extension, use <code> <a>SetTypeDefaultVersion</a> </code>. </p>"
         },
         "IsDefaultVersion": {
           "shape": "IsDefaultVersion",
-          "documentation": "<p>Whether the specified extension version is set as the default version.</p>"
+          "documentation": "<p>Whether the specified extension version is set as the default version.</p> <p>This applies only to private extensions you have registered in your account, and extensions published by Amazon. For public third-party extensions, whether or not they are activated in your account, CloudFormation returns <code>null</code>.</p>"
+        },
+        "TypeTestsStatus": {
+          "shape": "TypeTestsStatus",
+          "documentation": "<p>The contract test status of the registered extension version. To return the extension test status of a specifc extension version, you must specify <code>VersionId</code>. </p> <p>This applies only to registered private extension versions. CloudFormation does not return this information for public extensions, whether or not they are activated in your account.</p> <ul> <li> <p> <code>PASSED</code>: The extension has passed all its contract tests.</p> <p>An extension must have a test status of <code>PASSED</code> before it can be published. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-publish.html\">Publishing extensions to make them available for public use</a> in the <i>CloudFormation Command Line Interface User Guide</i>.</p> </li> <li> <p> <code>FAILED</code>: The extension has failed one or more contract tests.</p> </li> <li> <p> <code>IN_PROGRESS</code>: Contract tests are currently being performed on the extension.</p> </li> <li> <p> <code>NOT_TESTED</code>: Contract tests have not been performed on the extension.</p> </li> </ul>"
+        },
+        "TypeTestsStatusDescription": {
+          "shape": "TypeTestsStatusDescription",
+          "documentation": "<p>The description of the test status. To return the extension test status of a specifc extension version, you must specify <code>VersionId</code>. </p> <p>This applies only to registered private extension versions. CloudFormation does not return this information for public extensions, whether or not they are activated in your account.</p>"
         },
         "Description": {
           "shape": "Description",
-          "documentation": "<p>The description of the registered extension.</p>"
+          "documentation": "<p>The description of the extension.</p>"
         },
         "Schema": {
           "shape": "TypeSchema",
@@ -2408,23 +2791,27 @@
         },
         "ProvisioningType": {
           "shape": "ProvisioningType",
-          "documentation": "<p>The provisioning behavior of the extension. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The extension includes an update handler to process updates to the extension during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The extension does not include an update handler, so the extension cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The extension does not include all of the following handlers, and therefore cannot actually be provisioned.</p> <ul> <li> <p>create</p> </li> <li> <p>read</p> </li> <li> <p>delete</p> </li> </ul> </li> </ul>"
+          "documentation": "<p>For resource type extensions, the provisioning behavior of the resource type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The resource type includes an update handler to process updates to the type during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The resource type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The resource type does not include all of the following handlers, and therefore cannot actually be provisioned.</p> <ul> <li> <p>create</p> </li> <li> <p>read</p> </li> <li> <p>delete</p> </li> </ul> </li> </ul>"
         },
         "DeprecatedStatus": {
           "shape": "DeprecatedStatus",
-          "documentation": "<p>The deprecation status of the extension version.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The extension is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The extension has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul>"
+          "documentation": "<p>The deprecation status of the extension version.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The extension is activated or registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The extension has been deactivated or deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul> <p>For public third-party extensions, CloudFormation returns <code>null</code>.</p>"
         },
         "LoggingConfig": {
           "shape": "LoggingConfig",
-          "documentation": "<p>Contains logging configuration information for an extension.</p>"
+          "documentation": "<p>Contains logging configuration information for private extensions. This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon and published by third parties, CloudFormation returns <code>null</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p>"
+        },
+        "RequiredActivatedTypes": {
+          "shape": "RequiredActivatedTypes",
+          "documentation": "<p>For extensions that are modules, the public third-party extensions that must be activated in your account in order for the module itself to be activated.</p>"
         },
         "ExecutionRoleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM execution role used to register the extension. If your resource type calls AWS APIs in any of its handlers, you must create an <i> <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your extension with the appropriate credentials.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM execution role used to register the extension. This applies only to private extensions you have registered in your account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p> <p/> <p>If the registered extension calls any AWS APIs, you must create an <i> <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your extension with the appropriate credentials.</p>"
         },
         "Visibility": {
           "shape": "Visibility",
-          "documentation": "<p>The scope at which the extension is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The extension is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you register as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The extension is publically visible and usable within any Amazon account.</p> </li> </ul>"
+          "documentation": "<p>The scope at which the extension is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The extension is only visible and usable within the account in which it is registered. AWS CloudFormation marks any extensions you register as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The extension is publically visible and usable within any Amazon account.</p> </li> </ul>"
         },
         "SourceUrl": {
           "shape": "OptionalSecureUrl",
@@ -2436,11 +2823,43 @@
         },
         "LastUpdated": {
           "shape": "Timestamp",
-          "documentation": "<p>When the specified extension version was registered.</p>"
+          "documentation": "<p>When the specified extension version was registered. This applies only to:</p> <ul> <li> <p>Private extensions you have registered in your account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p> </li> <li> <p>Public extensions you have activated in your account with auto-update specified. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">ActivateType</a>.</p> </li> </ul>"
         },
         "TimeCreated": {
           "shape": "Timestamp",
-          "documentation": "<p>When the specified extension version was registered.</p>"
+          "documentation": "<p>When the specified private extension version was registered or activated in your account. </p>"
+        },
+        "ConfigurationSchema": {
+          "shape": "ConfigurationSchema",
+          "documentation": "<p>A JSON string that represent the current configuration data for the extension in this account and region.</p> <p>To set the configuration data for an extension, use <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_SetTypeConfiguration.html\">SetTypeConfiguration</a>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
+        },
+        "PublisherId": {
+          "shape": "PublisherId",
+          "documentation": "<p>The publisher ID of the extension publisher.</p> <p>This applies only to public third-party extensions. For private registered extensions, and extensions provided by Amazon, CloudFormation returns <code>null</code>.</p>"
+        },
+        "OriginalTypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>For public extensions that have been activated for this account and region, the type name of the public extension.</p> <p>If you specified a <code>TypeNameAlias</code> when enabling the extension in this account and region, CloudFormation treats that alias as the extension's type name within the account and region, not the type name of the public extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias\">Specifying aliases to refer to extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+        },
+        "OriginalTypeArn": {
+          "shape": "TypeArn",
+          "documentation": "<p>For public extensions that have been activated for this account and region, the Amazon Resource Name (ARN) of the public extension.</p>"
+        },
+        "PublicVersionNumber": {
+          "shape": "PublicVersionNumber",
+          "documentation": "<p>The version number of a public third-party extension.</p> <p>This applies only if you specify a public extension you have activated in your account, or specify a public extension without specifying a version. For all other extensions, CloudFormation returns <code>null</code>.</p>"
+        },
+        "LatestPublicVersion": {
+          "shape": "PublicVersionNumber",
+          "documentation": "<p>The latest version of a public extension <i>that is available</i> for use.</p> <p>This only applies if you specify a public extension, and you do not specify a version. For all other requests, CloudFormation returns <code>null</code>.</p>"
+        },
+        "IsActivated": {
+          "shape": "IsActivated",
+          "documentation": "<p>Whether or not the extension is activated in the account and region.</p> <p>This only applies to public third-party extensions. For all other extensions, CloudFormation returns <code>null</code>.</p>"
+        },
+        "AutoUpdate": {
+          "shape": "AutoUpdate",
+          "documentation": "<p>Whether CloudFormation automatically updates the extension in this account and region when a new <i>minor</i> version is published by the extension publisher. Major versions released by the publisher must be manually updated. For more information, see <a href=\"AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable\">Activating public extensions for use in your account</a> in the <i>AWS CloudFormation User Guide</i>.</p>"
         }
       }
     },
@@ -2589,6 +3008,16 @@
     },
     "EnableTerminationProtection": {
       "type": "boolean"
+    },
+    "ErrorCode": {
+      "type": "string",
+      "max": 3,
+      "min": 3
+    },
+    "ErrorMessage": {
+      "type": "string",
+      "max": 255,
+      "min": 1
     },
     "EstimateTemplateCostInput": {
       "type": "structure",
@@ -2750,7 +3179,7 @@
         },
         "TemplateStage": {
           "shape": "TemplateStage",
-          "documentation": "<p>For templates that include transforms, the stage of the template that AWS CloudFormation returns. To get the user-submitted template, specify <code>Original</code>. To get the template after AWS CloudFormation has processed all transforms, specify <code>Processed</code>. </p> <p>If the template doesn't include transforms, <code>Original</code> and <code>Processed</code> return the same template. By default, AWS CloudFormation specifies <code>Original</code>. </p>"
+          "documentation": "<p>For templates that include transforms, the stage of the template that AWS CloudFormation returns. To get the user-submitted template, specify <code>Original</code>. To get the template after AWS CloudFormation has processed all transforms, specify <code>Processed</code>. </p> <p>If the template doesn't include transforms, <code>Original</code> and <code>Processed</code> return the same template. By default, AWS CloudFormation specifies <code>Processed</code>.</p>"
         }
       },
       "documentation": "<p>The input for a <a>GetTemplate</a> action.</p>"
@@ -2853,7 +3282,16 @@
         "GeneralServiceException",
         "ServiceInternalError",
         "NetworkFailure",
-        "InternalFailure"
+        "InternalFailure",
+        "InvalidTypeConfiguration"
+      ]
+    },
+    "IdentityProvider": {
+      "type": "string",
+      "enum": [
+        "AWS_Marketplace",
+        "GitHub",
+        "Bitbucket"
       ]
     },
     "Imports": {
@@ -2871,6 +3309,12 @@
       "min": 0
     },
     "IncludeNestedStacks": {
+      "type": "boolean"
+    },
+    "IsActivated": {
+      "type": "boolean"
+    },
+    "IsDefaultConfiguration": {
       "type": "boolean"
     },
     "IsDefaultVersion": {
@@ -3245,7 +3689,7 @@
           "documentation": "<p>The name of the extension for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "Arn": {
-          "shape": "PrivateTypeArn",
+          "shape": "TypeArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the extension for which you want version summary information.</p> <p>Conditional: You must specify either <code>TypeName</code> and <code>Type</code>, or <code>Arn</code>.</p>"
         },
         "MaxResults": {
@@ -3259,6 +3703,10 @@
         "DeprecatedStatus": {
           "shape": "DeprecatedStatus",
           "documentation": "<p>The deprecation status of the extension versions that you want to get summary information about.</p> <p>Valid values include:</p> <ul> <li> <p> <code>LIVE</code>: The extension version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.</p> </li> <li> <p> <code>DEPRECATED</code>: The extension version has been deregistered and can no longer be used in CloudFormation operations. </p> </li> </ul> <p>The default is <code>LIVE</code>.</p>"
+        },
+        "PublisherId": {
+          "shape": "PublisherId",
+          "documentation": "<p>The publisher ID of the extension publisher.</p> <p>Extensions published by Amazon are not assigned a publisher ID.</p>"
         }
       }
     },
@@ -3280,11 +3728,11 @@
       "members": {
         "Visibility": {
           "shape": "Visibility",
-          "documentation": "<p>The scope at which the extension is visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: The extension is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any extension you create as <code>PRIVATE</code>.</p> </li> <li> <p> <code>PUBLIC</code>: The extension is publically visible and usable within any Amazon account.</p> </li> </ul> <p>The default is <code>PRIVATE</code>.</p>"
+          "documentation": "<p>The scope at which the extensions are visible and usable in CloudFormation operations.</p> <p>Valid values include:</p> <ul> <li> <p> <code>PRIVATE</code>: Extensions that are visible and usable within this account and region. This includes:</p> <ul> <li> <p>Private extensions you have registered in this account and region.</p> </li> <li> <p>Public extensions that you have activated in this account and region.</p> </li> </ul> </li> <li> <p> <code>PUBLIC</code>: Extensions that are publicly visible and available to be activated within any Amazon account. This includes extensions from Amazon, as well as third-party publishers.</p> </li> </ul> <p>The default is <code>PRIVATE</code>.</p>"
         },
         "ProvisioningType": {
           "shape": "ProvisioningType",
-          "documentation": "<p>The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The extension includes an update handler to process updates to the extension during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The extension does not include an update handler, so the extension cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The extension does not include create, read, and delete handlers, and therefore cannot actually be provisioned.</p> </li> </ul>"
+          "documentation": "<p>For resource types, the provisioning behavior of the resource type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted.</p> <p>Valid values include:</p> <ul> <li> <p> <code>FULLY_MUTABLE</code>: The resource type includes an update handler to process updates to the type during stack update operations.</p> </li> <li> <p> <code>IMMUTABLE</code>: The resource type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.</p> </li> <li> <p> <code>NON_PROVISIONABLE</code>: The resource type does not include create, read, and delete handlers, and therefore cannot actually be provisioned.</p> </li> </ul> <p>The default is <code>FULLY_MUTABLE</code>.</p>"
         },
         "DeprecatedStatus": {
           "shape": "DeprecatedStatus",
@@ -3293,6 +3741,10 @@
         "Type": {
           "shape": "RegistryType",
           "documentation": "<p>The type of extension.</p>"
+        },
+        "Filters": {
+          "shape": "TypeFilters",
+          "documentation": "<p>Filter criteria to use in determining which extensions to return.</p> <p>If you specify a filter, CloudFormation ignores any specified <code>Visibility</code> value when returning the list of types.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -3336,10 +3788,10 @@
         },
         "LogGroupName": {
           "shape": "LogGroupName",
-          "documentation": "<p>The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.</p>"
+          "documentation": "<p>The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the extension's handlers.</p>"
         }
       },
-      "documentation": "<p>Contains logging configuration information for a type.</p>"
+      "documentation": "<p>Contains logging configuration information for an extension.</p>"
     },
     "LogicalIdHierarchy": {
       "type": "string"
@@ -3353,6 +3805,11 @@
         "shape": "LogicalResourceId"
       },
       "max": 200,
+      "min": 1
+    },
+    "MajorVersion": {
+      "type": "long",
+      "max": 100000,
       "min": 1
     },
     "MaxConcurrentCount": {
@@ -3651,6 +4108,65 @@
         "FULLY_MUTABLE"
       ]
     },
+    "PublicVersionNumber": {
+      "type": "string",
+      "min": 5,
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(.*)$"
+    },
+    "PublishTypeInput": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "ThirdPartyType",
+          "documentation": "<p>The type of the extension.</p> <p>Conditional: You must specify <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+        },
+        "Arn": {
+          "shape": "PrivateTypeArn",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the extension.</p> <p>Conditional: You must specify <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+        },
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The name of the extension.</p> <p>Conditional: You must specify <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+        },
+        "PublicVersionNumber": {
+          "shape": "PublicVersionNumber",
+          "documentation": "<p>The version number to assign to this version of the extension.</p> <p>Use the following format, and adhere to semantic versioning when assigning a version number to your extension: </p> <p> <code>MAJOR.MINOR.PATCH</code> </p> <p>For more information, see <a href=\"https://semver.org/\">Semantic Versioning 2.0.0</a>.</p> <p>If you do not specify a version number, CloudFormation increments the version number by one minor version release.</p>"
+        }
+      }
+    },
+    "PublishTypeOutput": {
+      "type": "structure",
+      "members": {
+        "PublicTypeArn": {
+          "shape": "TypeArn",
+          "documentation": "<p>The Amazon Resource Number (ARN) assigned to the public extension upon publication.</p>"
+        }
+      }
+    },
+    "PublisherId": {
+      "type": "string",
+      "max": 40,
+      "min": 1,
+      "pattern": "[0-9a-zA-Z]{12,40}"
+    },
+    "PublisherName": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "[\\s\\S]+"
+    },
+    "PublisherProfile": {
+      "type": "string",
+      "max": 1024,
+      "pattern": "(http:|https:)+[^\\s]+[\\w]"
+    },
+    "PublisherStatus": {
+      "type": "string",
+      "enum": [
+        "VERIFIED",
+        "UNVERIFIED"
+      ]
+    },
     "Reason": {
       "type": "string"
     },
@@ -3712,6 +4228,28 @@
         "shape": "Region"
       }
     },
+    "RegisterPublisherInput": {
+      "type": "structure",
+      "members": {
+        "AcceptTermsAndConditions": {
+          "shape": "AcceptTermsAndConditions",
+          "documentation": "<p>Whether you accept the terms and conditions for publishing extensions in the CloudFormation registry. You must accept the terms and conditions in order to register to publish public extensions to the CloudFormation registry.</p> <p>The default is <code>false</code>.</p>"
+        },
+        "ConnectionArn": {
+          "shape": "ConnectionArn",
+          "documentation": "<p>If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs\">Registering your account to publish CloudFormation extensions</a> in the <i>CloudFormation CLI User Guide</i>.</p>"
+        }
+      }
+    },
+    "RegisterPublisherOutput": {
+      "type": "structure",
+      "members": {
+        "PublisherId": {
+          "shape": "PublisherId",
+          "documentation": "<p>The ID assigned this account by CloudFormation for publishing extensions.</p>"
+        }
+      }
+    },
     "RegisterTypeInput": {
       "type": "structure",
       "required": [
@@ -3725,7 +4263,7 @@
         },
         "TypeName": {
           "shape": "TypeName",
-          "documentation": "<p>The name of the extension being registered.</p> <p>We recommend that extension names adhere to the following pattern: <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p> <note> <p>The following organization namespaces are reserved and cannot be used in your extension names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p> <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p> <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul> </note>"
+          "documentation": "<p>The name of the extension being registered.</p> <p>We recommend that extension names adhere to the following patterns: </p> <ul> <li> <p>For resource types, <i>company_or_organization</i>::<i>service</i>::<i>type</i>.</p> </li> <li> <p>For modules, <i>company_or_organization</i>::<i>service</i>::<i>type</i>::MODULE.</p> </li> </ul> <note> <p>The following organization namespaces are reserved and cannot be used in your extension names:</p> <ul> <li> <p> <code>Alexa</code> </p> </li> <li> <p> <code>AMZN</code> </p> </li> <li> <p> <code>Amazon</code> </p> </li> <li> <p> <code>AWS</code> </p> </li> <li> <p> <code>Custom</code> </p> </li> <li> <p> <code>Dev</code> </p> </li> </ul> </note>"
         },
         "SchemaHandlerPackage": {
           "shape": "S3Url",
@@ -3737,7 +4275,7 @@
         },
         "ExecutionRoleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the extension. If your extension calls AWS APIs in any of its handlers, you must create an <i> <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. When CloudFormation needs to invoke the extension handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the extension handler, thereby supplying your extension with the appropriate credentials.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the extension.</p> <p>For CloudFormation to assume the specified execution role, the role must contain a trust relationship with the CloudFormation service principle (<code>resources.cloudformation.amazonaws.com</code>). For more information on adding trust relationships, see <a href=\"IAM/latest/UserGuide/roles-managingrole-editing-console.html#roles-managingrole_edit-trust-policy\">Modifying a role trust policy</a> in the <i>AWS Identity and Access Management User Guide</i>.</p> <p>If your extension calls AWS APIs in any of its handlers, you must create an <i> <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html\">IAM execution role</a> </i> that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. When CloudFormation needs to invoke the resource type handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the resource type handler, thereby supplying your resource type with the appropriate credentials.</p>"
         },
         "ClientRequestToken": {
           "shape": "RequestToken",
@@ -3794,6 +4332,34 @@
       "max": 128,
       "min": 1,
       "pattern": "[a-zA-Z0-9][-a-zA-Z0-9]*"
+    },
+    "RequiredActivatedType": {
+      "type": "structure",
+      "members": {
+        "TypeNameAlias": {
+          "shape": "TypeName",
+          "documentation": "<p>An alias assigned to the public extension, in this account and region. If you specify an alias for the extension, CloudFormation treats the alias as the extension type name within this account and region. You must use the alias to refer to the extension in your templates, API calls, and CloudFormation console.</p>"
+        },
+        "OriginalTypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The type name of the public extension.</p> <p>If you specified a <code>TypeNameAlias</code> when enabling the extension in this account and region, CloudFormation treats that alias as the extension's type name within the account and region, not the type name of the public extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias\">Specifying aliases to refer to extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+        },
+        "PublisherId": {
+          "shape": "PublisherId",
+          "documentation": "<p>The publisher ID of the extension publisher.</p>"
+        },
+        "SupportedMajorVersions": {
+          "shape": "SupportedMajorVersions",
+          "documentation": "<p>A list of the major versions of the extension type that the macro supports.</p>"
+        }
+      },
+      "documentation": "<p>For extensions that are modules, a public third-party extension that must be activated in your account in order for the module itself to be activated.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/modules.html#module-enabling\">Activating public modules for use in your account</a> in the <i>AWS CloudFormation User Guide</i>.</p>"
+    },
+    "RequiredActivatedTypes": {
+      "type": "list",
+      "member": {
+        "shape": "RequiredActivatedType"
+      }
     },
     "RequiresRecreation": {
       "type": "string",
@@ -4113,6 +4679,12 @@
       },
       "max": 5
     },
+    "S3Bucket": {
+      "type": "string",
+      "max": 63,
+      "min": 3,
+      "pattern": "[\\s\\S]+"
+    },
     "S3Url": {
       "type": "string",
       "max": 4096,
@@ -4144,6 +4716,43 @@
         }
       },
       "documentation": "<p>The input for the <a>SetStackPolicy</a> action.</p>"
+    },
+    "SetTypeConfigurationInput": {
+      "type": "structure",
+      "required": [
+        "Configuration"
+      ],
+      "members": {
+        "TypeArn": {
+          "shape": "TypeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and region.</p> <p>For public extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate the type</a> in this account and region. For private extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">register the type</a> in this account and region. </p> <p>Do not include the extension versions suffix at the end of the ARN. You can set the configuration for an extension, but not for a specific extension version.</p>"
+        },
+        "Configuration": {
+          "shape": "TypeConfiguration",
+          "documentation": "<p>The configuration data for the extension, in this account and region. </p> <p>The configuration data must be formatted as JSON, and validate against the schema returned in the <code>ConfigurationSchema</code> response element of <a href=\"AWSCloudFormation/latest/APIReference/API_DescribeType.html\">API_DescribeType</a>. For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration\">Defining account-level configuration data for an extension</a> in the <i>CloudFormation CLI User Guide</i>.</p>"
+        },
+        "ConfigurationAlias": {
+          "shape": "TypeConfigurationAlias",
+          "documentation": "<p>An alias by which to refer to this extension configuration data.</p> <p>Conditional: Specifying a configuration alias is required when setting a configuration for a resource type extension.</p>"
+        },
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The name of the extension.</p> <p>Conditional: You must specify <code>ConfigurationArn</code>, or <code>Type</code> and <code>TypeName</code>.</p>"
+        },
+        "Type": {
+          "shape": "ThirdPartyType",
+          "documentation": "<p>The type of extension.</p> <p>Conditional: You must specify <code>ConfigurationArn</code>, or <code>Type</code> and <code>TypeName</code>.</p>"
+        }
+      }
+    },
+    "SetTypeConfigurationOutput": {
+      "type": "structure",
+      "members": {
+        "ConfigurationArn": {
+          "shape": "TypeConfigurationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the configuration data, in this account and region.</p> <p>Conditional: You must specify <code>ConfigurationArn</code>, or <code>Type</code> and <code>TypeName</code>.</p>"
+        }
+      }
     },
     "SetTypeDefaultVersionInput": {
       "type": "structure",
@@ -5109,19 +5718,19 @@
         },
         "FailureToleranceCount": {
           "shape": "FailureToleranceCount",
-          "documentation": "<p>The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region. If the operation is stopped in a Region, AWS CloudFormation doesn't attempt the operation in any subsequent Regions.</p> <p>Conditional: You must specify either <code>FailureToleranceCount</code> or <code>FailureTolerancePercentage</code> (but not both).</p>"
+          "documentation": "<p>The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region. If the operation is stopped in a Region, AWS CloudFormation doesn't attempt the operation in any subsequent Regions.</p> <p>Conditional: You must specify either <code>FailureToleranceCount</code> or <code>FailureTolerancePercentage</code> (but not both).</p> <p>By default, <code>0</code> is specified.</p>"
         },
         "FailureTolerancePercentage": {
           "shape": "FailureTolerancePercentage",
-          "documentation": "<p>The percentage of accounts, per Region, for which this stack operation can fail before AWS CloudFormation stops the operation in that Region. If the operation is stopped in a Region, AWS CloudFormation doesn't attempt the operation in any subsequent Regions.</p> <p>When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds <i>down</i> to the next whole number.</p> <p>Conditional: You must specify either <code>FailureToleranceCount</code> or <code>FailureTolerancePercentage</code>, but not both.</p>"
+          "documentation": "<p>The percentage of accounts, per Region, for which this stack operation can fail before AWS CloudFormation stops the operation in that Region. If the operation is stopped in a Region, AWS CloudFormation doesn't attempt the operation in any subsequent Regions.</p> <p>When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds <i>down</i> to the next whole number.</p> <p>Conditional: You must specify either <code>FailureToleranceCount</code> or <code>FailureTolerancePercentage</code>, but not both.</p> <p>By default, <code>0</code> is specified.</p>"
         },
         "MaxConcurrentCount": {
           "shape": "MaxConcurrentCount",
-          "documentation": "<p>The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of <code>FailureToleranceCount</code>. <code>MaxConcurrentCount</code> is at most one more than the <code>FailureToleranceCount</code>.</p> <p>Note that this setting lets you specify the <i>maximum</i> for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p>"
+          "documentation": "<p>The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of <code>FailureToleranceCount</code>. <code>MaxConcurrentCount</code> is at most one more than the <code>FailureToleranceCount</code>.</p> <p>Note that this setting lets you specify the <i>maximum</i> for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p> <p>By default, <code>1</code> is specified.</p>"
         },
         "MaxConcurrentPercentage": {
           "shape": "MaxConcurrentPercentage",
-          "documentation": "<p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, CloudFormation sets the number as one instead.</p> <p>Note that this setting lets you specify the <i>maximum</i> for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p>"
+          "documentation": "<p>The maximum percentage of accounts in which to perform this operation at one time.</p> <p>When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, CloudFormation sets the number as one instead.</p> <p>Note that this setting lets you specify the <i>maximum</i> for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling.</p> <p>Conditional: You must specify either <code>MaxConcurrentCount</code> or <code>MaxConcurrentPercentage</code>, but not both.</p> <p>By default, <code>1</code> is specified.</p>"
         }
       },
       "documentation": "<p>The user-specified preferences for how AWS CloudFormation performs a stack set operation. </p> <p>For more information on maximum concurrent accounts and failure tolerance, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options\">Stack set operation options</a>.</p>"
@@ -5404,6 +6013,17 @@
       "type": "structure",
       "members": {}
     },
+    "SupportedMajorVersion": {
+      "type": "integer",
+      "max": 65535,
+      "min": 1
+    },
+    "SupportedMajorVersions": {
+      "type": "list",
+      "member": {
+        "shape": "SupportedMajorVersion"
+      }
+    },
     "Tag": {
       "type": "structure",
       "required": [
@@ -5486,6 +6106,52 @@
       "max": 1024,
       "min": 1
     },
+    "TestTypeInput": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "TypeArn",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the extension.</p> <p>Conditional: You must specify <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+        },
+        "Type": {
+          "shape": "ThirdPartyType",
+          "documentation": "<p>The type of the extension to test.</p> <p>Conditional: You must specify <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+        },
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The name of the extension to test.</p> <p>Conditional: You must specify <code>Arn</code>, or <code>TypeName</code> and <code>Type</code>.</p>"
+        },
+        "VersionId": {
+          "shape": "TypeVersionId",
+          "documentation": "<p>The version of the extension to test.</p> <p>You can specify the version id with either <code>Arn</code>, or with <code>TypeName</code> and <code>Type</code>.</p> <p>If you do not specify a version, CloudFormation uses the default version of the extension in this account and region for testing.</p>"
+        },
+        "LogDeliveryBucket": {
+          "shape": "S3Bucket",
+          "documentation": "<p>The S3 bucket to which CloudFormation delivers the contract test execution logs.</p> <p>CloudFormation delivers the logs by the time contract testing has completed and the extension has been assigned a test type status of <code>PASSED</code> or <code>FAILED</code>.</p> <p>The user calling <code>TestType</code> must be able to access items in the specified S3 bucket. Specifically, the user needs the following permissions:</p> <ul> <li> <p>GetObject</p> </li> <li> <p>PutObject</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html\">Actions, Resources, and Condition Keys for Amazon S3</a> in the <i>AWS Identity and Access Management User Guide</i>.</p>"
+        }
+      }
+    },
+    "TestTypeOutput": {
+      "type": "structure",
+      "members": {
+        "TypeVersionArn": {
+          "shape": "TypeArn",
+          "documentation": "<p>The Amazon Resource Number (ARN) of the extension.</p>"
+        }
+      }
+    },
+    "ThirdPartyType": {
+      "type": "string",
+      "enum": [
+        "RESOURCE",
+        "MODULE"
+      ]
+    },
+    "ThirdPartyTypeArn": {
+      "type": "string",
+      "max": 1024,
+      "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}::type/.+/[0-9a-zA-Z]{12,40}/.+"
+    },
     "TimeoutMinutes": {
       "type": "integer",
       "min": 1
@@ -5514,6 +6180,114 @@
       "max": 1024,
       "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+"
     },
+    "TypeConfiguration": {
+      "type": "string",
+      "max": 204800,
+      "min": 1,
+      "pattern": "[\\s\\S]+"
+    },
+    "TypeConfigurationAlias": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9]{1,256}$"
+    },
+    "TypeConfigurationArn": {
+      "type": "string",
+      "max": 1024,
+      "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type-configuration/.+"
+    },
+    "TypeConfigurationDetails": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "TypeConfigurationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the configuration data, in this account and region.</p>"
+        },
+        "Alias": {
+          "shape": "TypeConfigurationAlias",
+          "documentation": "<p>The alias specified for this configuration, if one was specified when the configuration was set.</p>"
+        },
+        "Configuration": {
+          "shape": "TypeConfiguration",
+          "documentation": "<p>A JSON string specifying the configuration data for the extension, in this account and region. </p> <p>If a configuration has not been set for a specified extension, CloudFormation returns <code>{}</code>.</p>"
+        },
+        "LastUpdated": {
+          "shape": "Timestamp",
+          "documentation": "<p>When the configuration data was last updated for this extension.</p> <p>If a configuration has not been set for a specified extension, CloudFormation returns <code>null</code>.</p>"
+        },
+        "TypeArn": {
+          "shape": "TypeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and region.</p> <p>For public extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate the type</a> in this account and region. For private extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">register the type</a> in this account and region. </p>"
+        },
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The name of the extension.</p>"
+        },
+        "IsDefaultConfiguration": {
+          "shape": "IsDefaultConfiguration",
+          "documentation": "<p>Whether or not this configuration data is the default configuration for the extension.</p>"
+        }
+      },
+      "documentation": "<p>Detailed information concerning the specification of a CloudFormation extension in a given account and region.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration\">Configuring extensions at the account level</a> in the <i>CloudFormation User Guide</i>.</p>"
+    },
+    "TypeConfigurationDetailsList": {
+      "type": "list",
+      "member": {
+        "shape": "TypeConfigurationDetails"
+      }
+    },
+    "TypeConfigurationIdentifier": {
+      "type": "structure",
+      "members": {
+        "TypeArn": {
+          "shape": "TypeArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the extension, in this account and region.</p> <p>For public extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate the type</a> in this account and region. For private extensions, this will be the ARN assigned when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">register the type</a> in this account and region. </p>"
+        },
+        "TypeConfigurationAlias": {
+          "shape": "TypeConfigurationAlias",
+          "documentation": "<p>The alias specified for this configuration, if one was specified when the configuration was set.</p>"
+        },
+        "TypeConfigurationArn": {
+          "shape": "TypeConfigurationArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the configuration, in this account and region.</p>"
+        },
+        "Type": {
+          "shape": "ThirdPartyType",
+          "documentation": "<p>The type of extension.</p>"
+        },
+        "TypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>The name of the extension type to which this configuration applies.</p>"
+        }
+      },
+      "documentation": "<p>Identifying information for the configuration of a CloudFormation extension.</p>"
+    },
+    "TypeConfigurationIdentifiers": {
+      "type": "list",
+      "member": {
+        "shape": "TypeConfigurationIdentifier"
+      },
+      "min": 1
+    },
+    "TypeFilters": {
+      "type": "structure",
+      "members": {
+        "Category": {
+          "shape": "Category",
+          "documentation": "<p>The category of extensions to return.</p> <ul> <li> <p> <code>REGISTERED</code>: Private extensions that have been registered for this account and region.</p> </li> <li> <p> <code>ACTIVATED</code>: Public extensions that have been activated for this account and region.</p> </li> <li> <p> <code>THIRD-PARTY</code>: Extensions available for use from publishers other than Amazon. This includes:</p> <ul> <li> <p>Private extensions registered in the account.</p> </li> <li> <p>Public extensions from publishers other than Amazon, whether activated or not.</p> </li> </ul> </li> <li> <p> <code>AWS-TYPES</code>: Extensions available for use from Amazon.</p> </li> </ul>"
+        },
+        "PublisherId": {
+          "shape": "PublisherId",
+          "documentation": "<p>The id of the publisher of the extension. </p> <p>Extensions published by Amazon are not assigned a publisher ID. Use the <code>AWS-TYPES</code> category to specify a list of types published by Amazon.</p>"
+        },
+        "TypeNamePrefix": {
+          "shape": "TypeNamePrefix",
+          "documentation": "<p>A prefix to use as a filter for results.</p>"
+        }
+      },
+      "documentation": "<p>Filter criteria to use in determining which extensions to return.</p>"
+    },
     "TypeHierarchy": {
       "type": "string"
     },
@@ -5522,6 +6296,12 @@
       "max": 204,
       "min": 10,
       "pattern": "[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}"
+    },
+    "TypeNamePrefix": {
+      "type": "string",
+      "max": 204,
+      "min": 1,
+      "pattern": "([A-Za-z0-9]{2,64}::){0,2}([A-Za-z0-9]{2,64}:?){0,1}"
     },
     "TypeSchema": {
       "type": "string",
@@ -5539,30 +6319,73 @@
       "members": {
         "Type": {
           "shape": "RegistryType",
-          "documentation": "<p>The kind of type.</p>"
+          "documentation": "<p>The kind of extension.</p>"
         },
         "TypeName": {
           "shape": "TypeName",
-          "documentation": "<p>The name of the type.</p>"
+          "documentation": "<p>The name of the extension.</p> <p>If you specified a <code>TypeNameAlias</code> when you <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">activate this extension</a> in your account and region, CloudFormation considers that alias as the type name.</p>"
         },
         "DefaultVersionId": {
           "shape": "TypeVersionId",
-          "documentation": "<p>The ID of the default version of the type. The default version is used when the type version is not specified.</p> <p>To set the default version of a type, use <code> <a>SetTypeDefaultVersion</a> </code>. </p>"
+          "documentation": "<p>The ID of the default version of the extension. The default version is used when the extension version is not specified.</p> <p>This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon and published by third parties, CloudFormation returns <code>null</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p> <p>To set the default version of an extension, use <code> <a>SetTypeDefaultVersion</a> </code>. </p>"
         },
         "TypeArn": {
           "shape": "TypeArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the type.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the extension.</p>"
         },
         "LastUpdated": {
           "shape": "Timestamp",
-          "documentation": "<p>When the current default version of the type was registered.</p>"
+          "documentation": "<p>When the specified extension version was registered. This applies only to:</p> <ul> <li> <p>Private extensions you have registered in your account. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html\">RegisterType</a>.</p> </li> <li> <p>Public extensions you have activated in your account with auto-update specified. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html\">ActivateType</a>.</p> </li> </ul> <p>For all other extension types, CloudFormation returns <code>null</code>.</p>"
         },
         "Description": {
           "shape": "Description",
-          "documentation": "<p>The description of the type.</p>"
+          "documentation": "<p>The description of the extension.</p>"
+        },
+        "PublisherId": {
+          "shape": "PublisherId",
+          "documentation": "<p>The ID of the extension publisher, if the extension is published by a third party. Extensions published by Amazon do not return a publisher ID.</p>"
+        },
+        "OriginalTypeName": {
+          "shape": "TypeName",
+          "documentation": "<p>For public extensions that have been activated for this account and region, the type name of the public extension.</p> <p>If you specified a <code>TypeNameAlias</code> when enabling the extension in this account and region, CloudFormation treats that alias as the extension's type name within the account and region, not the type name of the public extension. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-alias\">Specifying aliases to refer to extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+        },
+        "PublicVersionNumber": {
+          "shape": "PublicVersionNumber",
+          "documentation": "<p>For public extensions that have been activated for this account and region, the version of the public extension to be used for CloudFormation operations in this account and region.</p> <p>How you specified <code>AutoUpdate</code> when enabling the extension affects whether CloudFormation automatically updates the extention in this account and region when a new version is released. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto\">Setting CloudFormation to automatically use new versions of extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+        },
+        "LatestPublicVersion": {
+          "shape": "PublicVersionNumber",
+          "documentation": "<p>For public extensions that have been activated for this account and region, the latest version of the public extension <i>that is available</i>. For any extensions other than activated third-arty extensions, CloudFormation returns <code>null</code>.</p> <p>How you specified <code>AutoUpdate</code> when enabling the extension affects whether CloudFormation automatically updates the extention in this account and region when a new version is released. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto\">Setting CloudFormation to automatically use new versions of extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
+        },
+        "PublisherIdentity": {
+          "shape": "IdentityProvider",
+          "documentation": "<p>The service used to verify the publisher identity.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html\">Registering your account to publish CloudFormation extensions</a> in the <i> CFN-CLI User Guide for Extension Development</i>.</p>"
+        },
+        "PublisherName": {
+          "shape": "PublisherName",
+          "documentation": "<p>The publisher name, as defined in the public profile for that publisher in the service used to verify the publisher identity.</p>"
+        },
+        "IsActivated": {
+          "shape": "IsActivated",
+          "documentation": "<p>Whether or not the extension is activated for this account and region. </p> <p>This applies only to third-party public extensions. Extensions published by Amazon are activated by default.</p>"
         }
       },
-      "documentation": "<p>Contains summary information about the specified CloudFormation type.</p>"
+      "documentation": "<p>Contains summary information about the specified CloudFormation extension.</p>"
+    },
+    "TypeTestsStatus": {
+      "type": "string",
+      "enum": [
+        "PASSED",
+        "FAILED",
+        "IN_PROGRESS",
+        "NOT_TESTED"
+      ]
+    },
+    "TypeTestsStatusDescription": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "[\\s\\S]+"
     },
     "TypeVersionId": {
       "type": "string",
@@ -5581,23 +6404,23 @@
       "members": {
         "Type": {
           "shape": "RegistryType",
-          "documentation": "<p>The kind of type.</p>"
+          "documentation": "<p>The kind of extension.</p>"
         },
         "TypeName": {
           "shape": "TypeName",
-          "documentation": "<p>The name of the type.</p>"
+          "documentation": "<p>The name of the extension.</p>"
         },
         "VersionId": {
           "shape": "TypeVersionId",
-          "documentation": "<p>The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.</p>"
+          "documentation": "<p>The ID of a specific version of the extension. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the extension version when it is registered.</p>"
         },
         "IsDefaultVersion": {
           "shape": "IsDefaultVersion",
-          "documentation": "<p>Whether the specified type version is set as the default version.</p>"
+          "documentation": "<p>Whether the specified extension version is set as the default version.</p> <p>This applies only to private extensions you have registered in your account, and extensions published by Amazon. For public third-party extensions, whether or not they are activated in your account, CloudFormation returns <code>null</code>.</p>"
         },
         "Arn": {
           "shape": "TypeArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the type version.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the extension version.</p>"
         },
         "TimeCreated": {
           "shape": "Timestamp",
@@ -5605,10 +6428,20 @@
         },
         "Description": {
           "shape": "Description",
-          "documentation": "<p>The description of the type version.</p>"
+          "documentation": "<p>The description of the extension version.</p>"
+        },
+        "PublicVersionNumber": {
+          "shape": "PublicVersionNumber",
+          "documentation": "<p>For public extensions that have been activated for this account and region, the version of the public extension to be used for CloudFormation operations in this account and region. For any extensions other than activated third-arty extensions, CloudFormation returns <code>null</code>.</p> <p>How you specified <code>AutoUpdate</code> when enabling the extension affects whether CloudFormation automatically updates the extention in this account and region when a new version is released. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-public.html#registry-public-enable-auto\">Setting CloudFormation to automatically use new versions of extensions</a> in the <i>CloudFormation User Guide</i>.</p>"
         }
       },
-      "documentation": "<p>Contains summary information about a specific version of a CloudFormation type.</p>"
+      "documentation": "<p>Contains summary information about a specific version of a CloudFormation extension.</p>"
+    },
+    "UnprocessedTypeConfigurations": {
+      "type": "list",
+      "member": {
+        "shape": "TypeConfigurationIdentifier"
+      }
     },
     "UpdateStackInput": {
       "type": "structure",
@@ -5914,6 +6747,13 @@
     },
     "Version": {
       "type": "string"
+    },
+    "VersionBump": {
+      "type": "string",
+      "enum": [
+        "MAJOR",
+        "MINOR"
+      ]
     },
     "Visibility": {
       "type": "string",

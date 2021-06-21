@@ -13,6 +13,22 @@ declare class CloudFormation extends Service {
   constructor(options?: CloudFormation.Types.ClientConfiguration)
   config: Config & CloudFormation.Types.ClientConfiguration;
   /**
+   * Activates a public third-party extension, making it available for use in stack templates. For more information, see Using public extensions in the CloudFormation User Guide. Once you have activated a public third-party extension in your account and region, use SetTypeConfiguration to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
+   */
+  activateType(params: CloudFormation.Types.ActivateTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.ActivateTypeOutput) => void): Request<CloudFormation.Types.ActivateTypeOutput, AWSError>;
+  /**
+   * Activates a public third-party extension, making it available for use in stack templates. For more information, see Using public extensions in the CloudFormation User Guide. Once you have activated a public third-party extension in your account and region, use SetTypeConfiguration to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
+   */
+  activateType(callback?: (err: AWSError, data: CloudFormation.Types.ActivateTypeOutput) => void): Request<CloudFormation.Types.ActivateTypeOutput, AWSError>;
+  /**
+   * Returns configuration data for the specified CloudFormation extensions, from the CloudFormation registry for the account and region. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
+   */
+  batchDescribeTypeConfigurations(params: CloudFormation.Types.BatchDescribeTypeConfigurationsInput, callback?: (err: AWSError, data: CloudFormation.Types.BatchDescribeTypeConfigurationsOutput) => void): Request<CloudFormation.Types.BatchDescribeTypeConfigurationsOutput, AWSError>;
+  /**
+   * Returns configuration data for the specified CloudFormation extensions, from the CloudFormation registry for the account and region. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
+   */
+  batchDescribeTypeConfigurations(callback?: (err: AWSError, data: CloudFormation.Types.BatchDescribeTypeConfigurationsOutput) => void): Request<CloudFormation.Types.BatchDescribeTypeConfigurationsOutput, AWSError>;
+  /**
    * Cancels an update on the specified stack. If the call completes successfully, the stack rolls back the update and reverts to the previous stack configuration.  You can cancel only stacks that are in the UPDATE_IN_PROGRESS state. 
    */
   cancelUpdateStack(params: CloudFormation.Types.CancelUpdateStackInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -60,6 +76,14 @@ declare class CloudFormation extends Service {
    * Creates a stack set.
    */
   createStackSet(callback?: (err: AWSError, data: CloudFormation.Types.CreateStackSetOutput) => void): Request<CloudFormation.Types.CreateStackSetOutput, AWSError>;
+  /**
+   * Deactivates a public extension that was previously activated in this account and region. Once deactivated, an extension cannot be used in any CloudFormation operation. This includes stack update operations where the stack template includes the extension, even if no updates are being made to the extension. In addition, deactivated extensions are not automatically updated if a new version of the extension is released.
+   */
+  deactivateType(params: CloudFormation.Types.DeactivateTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.DeactivateTypeOutput) => void): Request<CloudFormation.Types.DeactivateTypeOutput, AWSError>;
+  /**
+   * Deactivates a public extension that was previously activated in this account and region. Once deactivated, an extension cannot be used in any CloudFormation operation. This includes stack update operations where the stack template includes the extension, even if no updates are being made to the extension. In addition, deactivated extensions are not automatically updated if a new version of the extension is released.
+   */
+  deactivateType(callback?: (err: AWSError, data: CloudFormation.Types.DeactivateTypeOutput) => void): Request<CloudFormation.Types.DeactivateTypeOutput, AWSError>;
   /**
    * Deletes the specified change set. Deleting change sets ensures that no one executes the wrong change set. If the call successfully completes, AWS CloudFormation successfully deleted the change set. If IncludeNestedStacks specifies True during the creation of the nested change set, then DeleteChangeSet will delete all change sets that belong to the stacks hierarchy and will also delete all change sets for nested stacks with the status of REVIEW_IN_PROGRESS.
    */
@@ -116,6 +140,14 @@ declare class CloudFormation extends Service {
    * Returns the inputs for the change set and a list of changes that AWS CloudFormation will make if you execute the change set. For more information, see Updating Stacks Using Change Sets in the AWS CloudFormation User Guide.
    */
   describeChangeSet(callback?: (err: AWSError, data: CloudFormation.Types.DescribeChangeSetOutput) => void): Request<CloudFormation.Types.DescribeChangeSetOutput, AWSError>;
+  /**
+   * Returns information about a CloudFormation extension publisher. If you do not supply a PublisherId, and you have registered as an extension publisher, DescribePublisher returns information about your own publisher account.  For more information on registering as a publisher, see:    RegisterPublisher     Publishing extensions to make them available for public use in the CloudFormation CLI User Guide   
+   */
+  describePublisher(params: CloudFormation.Types.DescribePublisherInput, callback?: (err: AWSError, data: CloudFormation.Types.DescribePublisherOutput) => void): Request<CloudFormation.Types.DescribePublisherOutput, AWSError>;
+  /**
+   * Returns information about a CloudFormation extension publisher. If you do not supply a PublisherId, and you have registered as an extension publisher, DescribePublisher returns information about your own publisher account.  For more information on registering as a publisher, see:    RegisterPublisher     Publishing extensions to make them available for public use in the CloudFormation CLI User Guide   
+   */
+  describePublisher(callback?: (err: AWSError, data: CloudFormation.Types.DescribePublisherOutput) => void): Request<CloudFormation.Types.DescribePublisherOutput, AWSError>;
   /**
    * Returns information about a stack drift detection operation. A stack drift detection operation detects whether a stack's actual configuration differs, or has drifted, from it's expected configuration, as defined in the stack template and any values specified as template parameters. A stack is considered to have drifted if one or more of its resources have drifted. For more information on stack and resource drift, see Detecting Unregulated Configuration Changes to Stacks and Resources. Use DetectStackDrift to initiate a stack drift detection operation. DetectStackDrift returns a StackDriftDetectionId you can use to monitor the progress of the operation using DescribeStackDriftDetectionStatus. Once the drift detection operation has completed, use DescribeStackResourceDrifts to return drift information about the stack and its resources.
    */
@@ -365,6 +397,14 @@ declare class CloudFormation extends Service {
    */
   listTypes(callback?: (err: AWSError, data: CloudFormation.Types.ListTypesOutput) => void): Request<CloudFormation.Types.ListTypesOutput, AWSError>;
   /**
+   * Publishes the specified extension to the CloudFormation registry as a public extension in this region. Public extensions are available for use by all CloudFormation users. For more information on publishing extensions, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide. To publish an extension, you must be registered as a publisher with CloudFormation. For more information, see RegisterPublisher.
+   */
+  publishType(params: CloudFormation.Types.PublishTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.PublishTypeOutput) => void): Request<CloudFormation.Types.PublishTypeOutput, AWSError>;
+  /**
+   * Publishes the specified extension to the CloudFormation registry as a public extension in this region. Public extensions are available for use by all CloudFormation users. For more information on publishing extensions, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide. To publish an extension, you must be registered as a publisher with CloudFormation. For more information, see RegisterPublisher.
+   */
+  publishType(callback?: (err: AWSError, data: CloudFormation.Types.PublishTypeOutput) => void): Request<CloudFormation.Types.PublishTypeOutput, AWSError>;
+  /**
    * Reports progress of a resource handler to CloudFormation. Reserved for use by the CloudFormation CLI. Do not use this API in your code.
    */
   recordHandlerProgress(params: CloudFormation.Types.RecordHandlerProgressInput, callback?: (err: AWSError, data: CloudFormation.Types.RecordHandlerProgressOutput) => void): Request<CloudFormation.Types.RecordHandlerProgressOutput, AWSError>;
@@ -373,11 +413,19 @@ declare class CloudFormation extends Service {
    */
   recordHandlerProgress(callback?: (err: AWSError, data: CloudFormation.Types.RecordHandlerProgressOutput) => void): Request<CloudFormation.Types.RecordHandlerProgressOutput, AWSError>;
   /**
-   * Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your AWS account, and includes:   Validating the extension schema   Determining which handlers, if any, have been specified for the extension   Making the extension available for use in your account   For more information on how to develop extensions and ready them for registeration, see Creating Resource Providers in the CloudFormation CLI User Guide. You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use DeregisterType to deregister specific extension versions if necessary. Once you have initiated a registration request using  RegisterType , you can use  DescribeTypeRegistration  to monitor the progress of the registration request.
+   * Registers your account as a publisher of public extensions in the CloudFormation registry. Public extensions are available for use by all CloudFormation users. This publisher ID applies to your account in all AWS regions. For information on requirements for registering as a public extension publisher, see Registering your account to publish CloudFormation extensions in the CloudFormation CLI User Guide. 
+   */
+  registerPublisher(params: CloudFormation.Types.RegisterPublisherInput, callback?: (err: AWSError, data: CloudFormation.Types.RegisterPublisherOutput) => void): Request<CloudFormation.Types.RegisterPublisherOutput, AWSError>;
+  /**
+   * Registers your account as a publisher of public extensions in the CloudFormation registry. Public extensions are available for use by all CloudFormation users. This publisher ID applies to your account in all AWS regions. For information on requirements for registering as a public extension publisher, see Registering your account to publish CloudFormation extensions in the CloudFormation CLI User Guide. 
+   */
+  registerPublisher(callback?: (err: AWSError, data: CloudFormation.Types.RegisterPublisherOutput) => void): Request<CloudFormation.Types.RegisterPublisherOutput, AWSError>;
+  /**
+   * Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your AWS account, and includes:   Validating the extension schema   Determining which handlers, if any, have been specified for the extension   Making the extension available for use in your account   For more information on how to develop extensions and ready them for registeration, see Creating Resource Providers in the CloudFormation CLI User Guide. You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use DeregisterType to deregister specific extension versions if necessary. Once you have initiated a registration request using  RegisterType , you can use  DescribeTypeRegistration  to monitor the progress of the registration request. Once you have registered a private extension in your account and region, use SetTypeConfiguration to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
    */
   registerType(params: CloudFormation.Types.RegisterTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.RegisterTypeOutput) => void): Request<CloudFormation.Types.RegisterTypeOutput, AWSError>;
   /**
-   * Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your AWS account, and includes:   Validating the extension schema   Determining which handlers, if any, have been specified for the extension   Making the extension available for use in your account   For more information on how to develop extensions and ready them for registeration, see Creating Resource Providers in the CloudFormation CLI User Guide. You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use DeregisterType to deregister specific extension versions if necessary. Once you have initiated a registration request using  RegisterType , you can use  DescribeTypeRegistration  to monitor the progress of the registration request.
+   * Registers an extension with the CloudFormation service. Registering an extension makes it available for use in CloudFormation templates in your AWS account, and includes:   Validating the extension schema   Determining which handlers, if any, have been specified for the extension   Making the extension available for use in your account   For more information on how to develop extensions and ready them for registeration, see Creating Resource Providers in the CloudFormation CLI User Guide. You can have a maximum of 50 resource extension versions registered at a time. This maximum is per account and per region. Use DeregisterType to deregister specific extension versions if necessary. Once you have initiated a registration request using  RegisterType , you can use  DescribeTypeRegistration  to monitor the progress of the registration request. Once you have registered a private extension in your account and region, use SetTypeConfiguration to specify configuration properties for the extension. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
    */
   registerType(callback?: (err: AWSError, data: CloudFormation.Types.RegisterTypeOutput) => void): Request<CloudFormation.Types.RegisterTypeOutput, AWSError>;
   /**
@@ -388,6 +436,14 @@ declare class CloudFormation extends Service {
    * Sets a stack policy for a specified stack.
    */
   setStackPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Specifies the configuration data for a registered CloudFormation extension, in the given account and region. To view the current configuration data for an extension, refer to the ConfigurationSchema element of DescribeType. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.  It is strongly recommended that you use dynamic references to restrict sensitive configuration definitions, such as third-party credentials. For more details on dynamic references, see Using dynamic references to specify template values in the AWS CloudFormation User Guide. 
+   */
+  setTypeConfiguration(params: CloudFormation.Types.SetTypeConfigurationInput, callback?: (err: AWSError, data: CloudFormation.Types.SetTypeConfigurationOutput) => void): Request<CloudFormation.Types.SetTypeConfigurationOutput, AWSError>;
+  /**
+   * Specifies the configuration data for a registered CloudFormation extension, in the given account and region. To view the current configuration data for an extension, refer to the ConfigurationSchema element of DescribeType. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.  It is strongly recommended that you use dynamic references to restrict sensitive configuration definitions, such as third-party credentials. For more details on dynamic references, see Using dynamic references to specify template values in the AWS CloudFormation User Guide. 
+   */
+  setTypeConfiguration(callback?: (err: AWSError, data: CloudFormation.Types.SetTypeConfigurationOutput) => void): Request<CloudFormation.Types.SetTypeConfigurationOutput, AWSError>;
   /**
    * Specify the default version of an extension. The default version of an extension will be used in CloudFormation operations.
    */
@@ -412,6 +468,14 @@ declare class CloudFormation extends Service {
    * Stops an in-progress operation on a stack set and its associated stack instances. 
    */
   stopStackSetOperation(callback?: (err: AWSError, data: CloudFormation.Types.StopStackSetOperationOutput) => void): Request<CloudFormation.Types.StopStackSetOperationOutput, AWSError>;
+  /**
+   * Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.   For resource types, this includes passing all contracts tests defined for the type.   For modules, this includes determining if the module's model meets all necessary requirements.   For more information, see Testing your public extension prior to publishing in the CloudFormation CLI User Guide. If you do not specify a version, CloudFormation uses the default version of the extension in your account and region for testing. To perform testing, CloudFormation assumes the execution role specified when the test was registered. For more information, see RegisterType. Once you've initiated testing on an extension using TestType, you can use DescribeType to monitor the current test status and test status description for the extension. An extension must have a test status of PASSED before it can be published. For more information, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide.
+   */
+  testType(params: CloudFormation.Types.TestTypeInput, callback?: (err: AWSError, data: CloudFormation.Types.TestTypeOutput) => void): Request<CloudFormation.Types.TestTypeOutput, AWSError>;
+  /**
+   * Tests a registered extension to make sure it meets all necessary requirements for being published in the CloudFormation registry.   For resource types, this includes passing all contracts tests defined for the type.   For modules, this includes determining if the module's model meets all necessary requirements.   For more information, see Testing your public extension prior to publishing in the CloudFormation CLI User Guide. If you do not specify a version, CloudFormation uses the default version of the extension in your account and region for testing. To perform testing, CloudFormation assumes the execution role specified when the test was registered. For more information, see RegisterType. Once you've initiated testing on an extension using TestType, you can use DescribeType to monitor the current test status and test status description for the extension. An extension must have a test status of PASSED before it can be published. For more information, see Publishing extensions to make them available for public use in the CloudFormation CLI User Guide.
+   */
+  testType(callback?: (err: AWSError, data: CloudFormation.Types.TestTypeOutput) => void): Request<CloudFormation.Types.TestTypeOutput, AWSError>;
   /**
    * Updates a stack as specified in the template. After the call completes successfully, the stack update starts. You can check the status of the stack via the DescribeStacks action. To get a copy of the template for an existing stack, you can use the GetTemplate action. For more information about creating an update template, updating a stack, and monitoring the progress of the update, see Updating a Stack.
    */
@@ -518,6 +582,7 @@ declare class CloudFormation extends Service {
   waitFor(state: "typeRegistrationComplete", callback?: (err: AWSError, data: CloudFormation.Types.DescribeTypeRegistrationOutput) => void): Request<CloudFormation.Types.DescribeTypeRegistrationOutput, AWSError>;
 }
 declare namespace CloudFormation {
+  export type AcceptTermsAndConditions = boolean;
   export type Account = string;
   export interface AccountGateResult {
     /**
@@ -544,6 +609,51 @@ declare namespace CloudFormation {
   export type AccountLimitList = AccountLimit[];
   export type AccountList = Account[];
   export type AccountsUrl = string;
+  export interface ActivateTypeInput {
+    /**
+     * The extension type. Conditional: You must specify PublicTypeArn, or TypeName, Type, and PublisherId.
+     */
+    Type?: ThirdPartyType;
+    /**
+     * The Amazon Resource Number (ARN) of the public extension. Conditional: You must specify PublicTypeArn, or TypeName, Type, and PublisherId.
+     */
+    PublicTypeArn?: ThirdPartyTypeArn;
+    /**
+     * The ID of the extension publisher. Conditional: You must specify PublicTypeArn, or TypeName, Type, and PublisherId.
+     */
+    PublisherId?: PublisherId;
+    /**
+     * The name of the extension. Conditional: You must specify PublicTypeArn, or TypeName, Type, and PublisherId.
+     */
+    TypeName?: TypeName;
+    /**
+     * An alias to assign to the public extension, in this account and region. If you specify an alias for the extension, CloudFormation treats the alias as the extension type name within this account and region. You must use the alias to refer to the extension in your templates, API calls, and CloudFormation console. An extension alias must be unique within a given account and region. You can activate the same public resource multiple times in the same account and region, using different type name aliases.
+     */
+    TypeNameAlias?: TypeName;
+    /**
+     * Whether to automatically update the extension in this account and region when a new minor version is published by the extension publisher. Major versions released by the publisher must be manually updated. The default is true.
+     */
+    AutoUpdate?: AutoUpdate;
+    LoggingConfig?: LoggingConfig;
+    /**
+     * The name of the IAM execution role to use to activate the extension.
+     */
+    ExecutionRoleArn?: RoleArn;
+    /**
+     * Manually updates a previously-activated type to a new major or minor version, if available. You can also use this parameter to update the value of AutoUpdate.    MAJOR: CloudFormation updates the extension to the newest major version, if one is available.    MINOR: CloudFormation updates the extension to the newest minor version, if one is available.  
+     */
+    VersionBump?: VersionBump;
+    /**
+     * The major version of this extension you want to activate, if multiple major versions are available. The default is the latest major version. CloudFormation uses the latest available minor version of the major version selected. You can specify MajorVersion or VersionBump, but not both.
+     */
+    MajorVersion?: MajorVersion;
+  }
+  export interface ActivateTypeOutput {
+    /**
+     * The Amazon Resource Number (ARN) of the activated extension, in this account and region.
+     */
+    Arn?: PrivateTypeArn;
+  }
   export type AllowedValue = string;
   export type AllowedValues = AllowedValue[];
   export type Arn = string;
@@ -558,6 +668,39 @@ declare namespace CloudFormation {
     RetainStacksOnAccountRemoval?: RetainStacksOnAccountRemovalNullable;
   }
   export type AutoDeploymentNullable = boolean;
+  export type AutoUpdate = boolean;
+  export interface BatchDescribeTypeConfigurationsError {
+    /**
+     * The error code.
+     */
+    ErrorCode?: ErrorCode;
+    /**
+     * The error message.
+     */
+    ErrorMessage?: ErrorMessage;
+    TypeConfigurationIdentifier?: TypeConfigurationIdentifier;
+  }
+  export type BatchDescribeTypeConfigurationsErrors = BatchDescribeTypeConfigurationsError[];
+  export interface BatchDescribeTypeConfigurationsInput {
+    /**
+     * The list of identifiers for the desired extension configurations.
+     */
+    TypeConfigurationIdentifiers: TypeConfigurationIdentifiers;
+  }
+  export interface BatchDescribeTypeConfigurationsOutput {
+    /**
+     * A list of information concerning any errors generated during the setting of the specified configurations.
+     */
+    Errors?: BatchDescribeTypeConfigurationsErrors;
+    /**
+     * A list of any of the specified extension configurations that CloudFormation could not process for any reason.
+     */
+    UnprocessedTypeConfigurations?: UnprocessedTypeConfigurations;
+    /**
+     * A list of any of the specified extension configurations from the CloudFormation registry.
+     */
+    TypeConfigurations?: TypeConfigurationDetailsList;
+  }
   export type BoxedInteger = number;
   export type BoxedMaxResults = number;
   export type CallAs = "SELF"|"DELEGATED_ADMIN"|string;
@@ -574,6 +717,7 @@ declare namespace CloudFormation {
   export type Capabilities = Capability[];
   export type CapabilitiesReason = string;
   export type Capability = "CAPABILITY_IAM"|"CAPABILITY_NAMED_IAM"|"CAPABILITY_AUTO_EXPAND"|string;
+  export type Category = "REGISTERED"|"ACTIVATED"|"THIRD_PARTY"|"AWS_TYPES"|string;
   export type CausingEntity = string;
   export interface Change {
     /**
@@ -648,6 +792,8 @@ declare namespace CloudFormation {
   export type Changes = Change[];
   export type ClientRequestToken = string;
   export type ClientToken = string;
+  export type ConfigurationSchema = string;
+  export type ConnectionArn = string;
   export interface ContinueUpdateRollbackInput {
     /**
      * The name or the unique ID of the stack that you want to continue rolling back.  Don't specify the name of a nested stack (a stack that was created by using the AWS::CloudFormation::Stack resource). Instead, use this operation on the parent stack (the stack that contains the AWS::CloudFormation::Stack resource). 
@@ -925,6 +1071,22 @@ declare namespace CloudFormation {
     StackSetId?: StackSetId;
   }
   export type CreationTime = Date;
+  export interface DeactivateTypeInput {
+    /**
+     * The type name of the extension, in this account and region. If you specified a type name alias when enabling the extension, use the type name alias. Conditional: You must specify either Arn, or TypeName and Type.
+     */
+    TypeName?: TypeName;
+    /**
+     * The extension type. Conditional: You must specify either Arn, or TypeName and Type.
+     */
+    Type?: ThirdPartyType;
+    /**
+     * The Amazon Resource Name (ARN) for the extension, in this account and region. Conditional: You must specify either Arn, or TypeName and Type.
+     */
+    Arn?: PrivateTypeArn;
+  }
+  export interface DeactivateTypeOutput {
+  }
   export interface DeleteChangeSetInput {
     /**
      * The name or Amazon Resource Name (ARN) of the change set that you want to delete.
@@ -1151,6 +1313,30 @@ declare namespace CloudFormation {
      */
     RootChangeSetId?: ChangeSetId;
   }
+  export interface DescribePublisherInput {
+    /**
+     * The ID of the extension publisher. If you do not supply a PublisherId, and you have registered as an extension publisher, DescribePublisher returns information about your own publisher account.
+     */
+    PublisherId?: PublisherId;
+  }
+  export interface DescribePublisherOutput {
+    /**
+     * The ID of the extension publisher.
+     */
+    PublisherId?: PublisherId;
+    /**
+     * Whether the publisher is verified. Currently, all registered publishers are verified.
+     */
+    PublisherStatus?: PublisherStatus;
+    /**
+     * The type of account used as the identity provider when registering this publisher with CloudFormation.
+     */
+    IdentityProvider?: IdentityProvider;
+    /**
+     * The URL to the publisher's profile with the identity provider.
+     */
+    PublisherProfile?: PublisherProfile;
+  }
   export interface DescribeStackDriftDetectionStatusInput {
     /**
      * The ID of the drift detection results of this operation.  AWS CloudFormation generates new results, with a new drift detection ID, each time this operation is run. However, the number of drift results AWS CloudFormation retains for any given stack, and for how long, may vary. 
@@ -1368,6 +1554,14 @@ declare namespace CloudFormation {
      * The ID of a specific version of the extension. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the extension version when it is registered. If you specify a VersionId, DescribeType returns information about that specific extension version. Otherwise, it returns information about the default extension version.
      */
     VersionId?: TypeVersionId;
+    /**
+     * The publisher ID of the extension publisher. Extensions provided by Amazon are not assigned a publisher ID.
+     */
+    PublisherId?: PublisherId;
+    /**
+     * The version number of a public third-party extension.
+     */
+    PublicVersionNumber?: PublicVersionNumber;
   }
   export interface DescribeTypeOutput {
     /**
@@ -1379,19 +1573,27 @@ declare namespace CloudFormation {
      */
     Type?: RegistryType;
     /**
-     * The name of the registered extension.
+     * The name of the extension. If the extension is a public third-party type you have activated with a type name alias, CloudFormation returns the type name alias. For more information, see ActivateType.
      */
     TypeName?: TypeName;
     /**
-     * The ID of the default version of the extension. The default version is used when the extension version is not specified. To set the default version of an extension, use  SetTypeDefaultVersion . 
+     * The ID of the default version of the extension. The default version is used when the extension version is not specified. This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon and published by third parties, CloudFormation returns null. For more information, see RegisterType. To set the default version of an extension, use  SetTypeDefaultVersion . 
      */
     DefaultVersionId?: TypeVersionId;
     /**
-     * Whether the specified extension version is set as the default version.
+     * Whether the specified extension version is set as the default version. This applies only to private extensions you have registered in your account, and extensions published by Amazon. For public third-party extensions, whether or not they are activated in your account, CloudFormation returns null.
      */
     IsDefaultVersion?: IsDefaultVersion;
     /**
-     * The description of the registered extension.
+     * The contract test status of the registered extension version. To return the extension test status of a specifc extension version, you must specify VersionId.  This applies only to registered private extension versions. CloudFormation does not return this information for public extensions, whether or not they are activated in your account.    PASSED: The extension has passed all its contract tests. An extension must have a test status of PASSED before it can be published. For more information, see Publishing extensions to make them available for public use in the CloudFormation Command Line Interface User Guide.    FAILED: The extension has failed one or more contract tests.    IN_PROGRESS: Contract tests are currently being performed on the extension.    NOT_TESTED: Contract tests have not been performed on the extension.  
+     */
+    TypeTestsStatus?: TypeTestsStatus;
+    /**
+     * The description of the test status. To return the extension test status of a specifc extension version, you must specify VersionId.  This applies only to registered private extension versions. CloudFormation does not return this information for public extensions, whether or not they are activated in your account.
+     */
+    TypeTestsStatusDescription?: TypeTestsStatusDescription;
+    /**
+     * The description of the extension.
      */
     Description?: Description;
     /**
@@ -1399,23 +1601,27 @@ declare namespace CloudFormation {
      */
     Schema?: TypeSchema;
     /**
-     * The provisioning behavior of the extension. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted. Valid values include:    FULLY_MUTABLE: The extension includes an update handler to process updates to the extension during stack update operations.    IMMUTABLE: The extension does not include an update handler, so the extension cannot be updated and must instead be replaced during stack update operations.    NON_PROVISIONABLE: The extension does not include all of the following handlers, and therefore cannot actually be provisioned.   create   read   delete    
+     * For resource type extensions, the provisioning behavior of the resource type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted. Valid values include:    FULLY_MUTABLE: The resource type includes an update handler to process updates to the type during stack update operations.    IMMUTABLE: The resource type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.    NON_PROVISIONABLE: The resource type does not include all of the following handlers, and therefore cannot actually be provisioned.   create   read   delete    
      */
     ProvisioningType?: ProvisioningType;
     /**
-     * The deprecation status of the extension version. Valid values include:    LIVE: The extension is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.    DEPRECATED: The extension has been deregistered and can no longer be used in CloudFormation operations.   
+     * The deprecation status of the extension version. Valid values include:    LIVE: The extension is activated or registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.    DEPRECATED: The extension has been deactivated or deregistered and can no longer be used in CloudFormation operations.    For public third-party extensions, CloudFormation returns null.
      */
     DeprecatedStatus?: DeprecatedStatus;
     /**
-     * Contains logging configuration information for an extension.
+     * Contains logging configuration information for private extensions. This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon and published by third parties, CloudFormation returns null. For more information, see RegisterType.
      */
     LoggingConfig?: LoggingConfig;
     /**
-     * The Amazon Resource Name (ARN) of the IAM execution role used to register the extension. If your resource type calls AWS APIs in any of its handlers, you must create an  IAM execution role  that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your extension with the appropriate credentials.
+     * For extensions that are modules, the public third-party extensions that must be activated in your account in order for the module itself to be activated.
+     */
+    RequiredActivatedTypes?: RequiredActivatedTypes;
+    /**
+     * The Amazon Resource Name (ARN) of the IAM execution role used to register the extension. This applies only to private extensions you have registered in your account. For more information, see RegisterType.  If the registered extension calls any AWS APIs, you must create an  IAM execution role  that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. CloudFormation then assumes that execution role to provide your extension with the appropriate credentials.
      */
     ExecutionRoleArn?: RoleArn;
     /**
-     * The scope at which the extension is visible and usable in CloudFormation operations. Valid values include:    PRIVATE: The extension is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you register as PRIVATE.    PUBLIC: The extension is publically visible and usable within any Amazon account.  
+     * The scope at which the extension is visible and usable in CloudFormation operations. Valid values include:    PRIVATE: The extension is only visible and usable within the account in which it is registered. AWS CloudFormation marks any extensions you register as PRIVATE.    PUBLIC: The extension is publically visible and usable within any Amazon account.  
      */
     Visibility?: Visibility;
     /**
@@ -1427,13 +1633,45 @@ declare namespace CloudFormation {
      */
     DocumentationUrl?: OptionalSecureUrl;
     /**
-     * When the specified extension version was registered.
+     * When the specified extension version was registered. This applies only to:   Private extensions you have registered in your account. For more information, see RegisterType.   Public extensions you have activated in your account with auto-update specified. For more information, see ActivateType.  
      */
     LastUpdated?: Timestamp;
     /**
-     * When the specified extension version was registered.
+     * When the specified private extension version was registered or activated in your account. 
      */
     TimeCreated?: Timestamp;
+    /**
+     * A JSON string that represent the current configuration data for the extension in this account and region. To set the configuration data for an extension, use SetTypeConfiguration. For more information, see Configuring extensions at the account level in the CloudFormation User Guide.
+     */
+    ConfigurationSchema?: ConfigurationSchema;
+    /**
+     * The publisher ID of the extension publisher. This applies only to public third-party extensions. For private registered extensions, and extensions provided by Amazon, CloudFormation returns null.
+     */
+    PublisherId?: PublisherId;
+    /**
+     * For public extensions that have been activated for this account and region, the type name of the public extension. If you specified a TypeNameAlias when enabling the extension in this account and region, CloudFormation treats that alias as the extension's type name within the account and region, not the type name of the public extension. For more information, see Specifying aliases to refer to extensions in the CloudFormation User Guide.
+     */
+    OriginalTypeName?: TypeName;
+    /**
+     * For public extensions that have been activated for this account and region, the Amazon Resource Name (ARN) of the public extension.
+     */
+    OriginalTypeArn?: TypeArn;
+    /**
+     * The version number of a public third-party extension. This applies only if you specify a public extension you have activated in your account, or specify a public extension without specifying a version. For all other extensions, CloudFormation returns null.
+     */
+    PublicVersionNumber?: PublicVersionNumber;
+    /**
+     * The latest version of a public extension that is available for use. This only applies if you specify a public extension, and you do not specify a version. For all other requests, CloudFormation returns null.
+     */
+    LatestPublicVersion?: PublicVersionNumber;
+    /**
+     * Whether or not the extension is activated in the account and region. This only applies to public third-party extensions. For all other extensions, CloudFormation returns null.
+     */
+    IsActivated?: IsActivated;
+    /**
+     * Whether CloudFormation automatically updates the extension in this account and region when a new minor version is published by the extension publisher. Major versions released by the publisher must be manually updated. For more information, see Activating public extensions for use in your account in the AWS CloudFormation User Guide.
+     */
+    AutoUpdate?: AutoUpdate;
   }
   export interface DescribeTypeRegistrationInput {
     /**
@@ -1517,6 +1755,8 @@ declare namespace CloudFormation {
   export type DisableRollback = boolean;
   export type DriftedStackInstancesCount = number;
   export type EnableTerminationProtection = boolean;
+  export type ErrorCode = string;
+  export type ErrorMessage = string;
   export interface EstimateTemplateCostInput {
     /**
      * Structure containing the template body with a minimum length of 1 byte and a maximum length of 51,200 bytes. (For more information, go to Template Anatomy in the AWS CloudFormation User Guide.) Conditional: You must pass TemplateBody or TemplateURL. If both are passed, only TemplateBody is used.
@@ -1599,7 +1839,7 @@ declare namespace CloudFormation {
      */
     ChangeSetName?: ChangeSetNameOrId;
     /**
-     * For templates that include transforms, the stage of the template that AWS CloudFormation returns. To get the user-submitted template, specify Original. To get the template after AWS CloudFormation has processed all transforms, specify Processed.  If the template doesn't include transforms, Original and Processed return the same template. By default, AWS CloudFormation specifies Original. 
+     * For templates that include transforms, the stage of the template that AWS CloudFormation returns. To get the user-submitted template, specify Original. To get the template after AWS CloudFormation has processed all transforms, specify Processed.  If the template doesn't include transforms, Original and Processed return the same template. By default, AWS CloudFormation specifies Processed.
      */
     TemplateStage?: TemplateStage;
   }
@@ -1673,11 +1913,14 @@ declare namespace CloudFormation {
      */
     ResourceIdentifierSummaries?: ResourceIdentifierSummaries;
   }
-  export type HandlerErrorCode = "NotUpdatable"|"InvalidRequest"|"AccessDenied"|"InvalidCredentials"|"AlreadyExists"|"NotFound"|"ResourceConflict"|"Throttling"|"ServiceLimitExceeded"|"NotStabilized"|"GeneralServiceException"|"ServiceInternalError"|"NetworkFailure"|"InternalFailure"|string;
+  export type HandlerErrorCode = "NotUpdatable"|"InvalidRequest"|"AccessDenied"|"InvalidCredentials"|"AlreadyExists"|"NotFound"|"ResourceConflict"|"Throttling"|"ServiceLimitExceeded"|"NotStabilized"|"GeneralServiceException"|"ServiceInternalError"|"NetworkFailure"|"InternalFailure"|"InvalidTypeConfiguration"|string;
+  export type IdentityProvider = "AWS_Marketplace"|"GitHub"|"Bitbucket"|string;
   export type Imports = StackName[];
   export type InProgressStackInstancesCount = number;
   export type InSyncStackInstancesCount = number;
   export type IncludeNestedStacks = boolean;
+  export type IsActivated = boolean;
+  export type IsDefaultConfiguration = boolean;
   export type IsDefaultVersion = boolean;
   export type Key = string;
   export type LastUpdatedTime = Date;
@@ -1955,7 +2198,7 @@ declare namespace CloudFormation {
     /**
      * The Amazon Resource Name (ARN) of the extension for which you want version summary information. Conditional: You must specify either TypeName and Type, or Arn.
      */
-    Arn?: PrivateTypeArn;
+    Arn?: TypeArn;
     /**
      * The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results.
      */
@@ -1968,6 +2211,10 @@ declare namespace CloudFormation {
      * The deprecation status of the extension versions that you want to get summary information about. Valid values include:    LIVE: The extension version is registered and can be used in CloudFormation operations, dependent on its provisioning behavior and visibility scope.    DEPRECATED: The extension version has been deregistered and can no longer be used in CloudFormation operations.    The default is LIVE.
      */
     DeprecatedStatus?: DeprecatedStatus;
+    /**
+     * The publisher ID of the extension publisher. Extensions published by Amazon are not assigned a publisher ID.
+     */
+    PublisherId?: PublisherId;
   }
   export interface ListTypeVersionsOutput {
     /**
@@ -1981,11 +2228,11 @@ declare namespace CloudFormation {
   }
   export interface ListTypesInput {
     /**
-     * The scope at which the extension is visible and usable in CloudFormation operations. Valid values include:    PRIVATE: The extension is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any extension you create as PRIVATE.    PUBLIC: The extension is publically visible and usable within any Amazon account.   The default is PRIVATE.
+     * The scope at which the extensions are visible and usable in CloudFormation operations. Valid values include:    PRIVATE: Extensions that are visible and usable within this account and region. This includes:   Private extensions you have registered in this account and region.   Public extensions that you have activated in this account and region.      PUBLIC: Extensions that are publicly visible and available to be activated within any Amazon account. This includes extensions from Amazon, as well as third-party publishers.   The default is PRIVATE.
      */
     Visibility?: Visibility;
     /**
-     * The provisioning behavior of the type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted. Valid values include:    FULLY_MUTABLE: The extension includes an update handler to process updates to the extension during stack update operations.    IMMUTABLE: The extension does not include an update handler, so the extension cannot be updated and must instead be replaced during stack update operations.    NON_PROVISIONABLE: The extension does not include create, read, and delete handlers, and therefore cannot actually be provisioned.  
+     * For resource types, the provisioning behavior of the resource type. AWS CloudFormation determines the provisioning type during registration, based on the types of handlers in the schema handler package submitted. Valid values include:    FULLY_MUTABLE: The resource type includes an update handler to process updates to the type during stack update operations.    IMMUTABLE: The resource type does not include an update handler, so the type cannot be updated and must instead be replaced during stack update operations.    NON_PROVISIONABLE: The resource type does not include create, read, and delete handlers, and therefore cannot actually be provisioned.   The default is FULLY_MUTABLE.
      */
     ProvisioningType?: ProvisioningType;
     /**
@@ -1996,6 +2243,10 @@ declare namespace CloudFormation {
      * The type of extension.
      */
     Type?: RegistryType;
+    /**
+     * Filter criteria to use in determining which extensions to return. If you specify a filter, CloudFormation ignores any specified Visibility value when returning the list of types.
+     */
+    Filters?: TypeFilters;
     /**
      * The maximum number of results to be returned with a single call. If the number of available results exceeds this maximum, the response includes a NextToken value that you can assign to the NextToken request parameter to get the next set of results.
      */
@@ -2022,13 +2273,14 @@ declare namespace CloudFormation {
      */
     LogRoleArn: RoleArn;
     /**
-     * The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the type's handlers.
+     * The Amazon CloudWatch log group to which CloudFormation sends error logging information when invoking the extension's handlers.
      */
     LogGroupName: LogGroupName;
   }
   export type LogicalIdHierarchy = string;
   export type LogicalResourceId = string;
   export type LogicalResourceIds = LogicalResourceId[];
+  export type MajorVersion = number;
   export type MaxConcurrentCount = number;
   export type MaxConcurrentPercentage = number;
   export type MaxResults = number;
@@ -2167,6 +2419,35 @@ declare namespace CloudFormation {
   export type PropertyPath = string;
   export type PropertyValue = string;
   export type ProvisioningType = "NON_PROVISIONABLE"|"IMMUTABLE"|"FULLY_MUTABLE"|string;
+  export type PublicVersionNumber = string;
+  export interface PublishTypeInput {
+    /**
+     * The type of the extension. Conditional: You must specify Arn, or TypeName and Type.
+     */
+    Type?: ThirdPartyType;
+    /**
+     * The Amazon Resource Number (ARN) of the extension. Conditional: You must specify Arn, or TypeName and Type.
+     */
+    Arn?: PrivateTypeArn;
+    /**
+     * The name of the extension. Conditional: You must specify Arn, or TypeName and Type.
+     */
+    TypeName?: TypeName;
+    /**
+     * The version number to assign to this version of the extension. Use the following format, and adhere to semantic versioning when assigning a version number to your extension:   MAJOR.MINOR.PATCH  For more information, see Semantic Versioning 2.0.0. If you do not specify a version number, CloudFormation increments the version number by one minor version release.
+     */
+    PublicVersionNumber?: PublicVersionNumber;
+  }
+  export interface PublishTypeOutput {
+    /**
+     * The Amazon Resource Number (ARN) assigned to the public extension upon publication.
+     */
+    PublicTypeArn?: TypeArn;
+  }
+  export type PublisherId = string;
+  export type PublisherName = string;
+  export type PublisherProfile = string;
+  export type PublisherStatus = "VERIFIED"|"UNVERIFIED"|string;
   export type Reason = string;
   export interface RecordHandlerProgressInput {
     /**
@@ -2203,13 +2484,29 @@ declare namespace CloudFormation {
   export type Region = string;
   export type RegionConcurrencyType = "SEQUENTIAL"|"PARALLEL"|string;
   export type RegionList = Region[];
+  export interface RegisterPublisherInput {
+    /**
+     * Whether you accept the terms and conditions for publishing extensions in the CloudFormation registry. You must accept the terms and conditions in order to register to publish public extensions to the CloudFormation registry. The default is false.
+     */
+    AcceptTermsAndConditions?: AcceptTermsAndConditions;
+    /**
+     * If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account. For more information, see Registering your account to publish CloudFormation extensions in the CloudFormation CLI User Guide.
+     */
+    ConnectionArn?: ConnectionArn;
+  }
+  export interface RegisterPublisherOutput {
+    /**
+     * The ID assigned this account by CloudFormation for publishing extensions.
+     */
+    PublisherId?: PublisherId;
+  }
   export interface RegisterTypeInput {
     /**
      * The kind of extension.
      */
     Type?: RegistryType;
     /**
-     * The name of the extension being registered. We recommend that extension names adhere to the following pattern: company_or_organization::service::type.  The following organization namespaces are reserved and cannot be used in your extension names:    Alexa     AMZN     Amazon     AWS     Custom     Dev    
+     * The name of the extension being registered. We recommend that extension names adhere to the following patterns:    For resource types, company_or_organization::service::type.   For modules, company_or_organization::service::type::MODULE.    The following organization namespaces are reserved and cannot be used in your extension names:    Alexa     AMZN     Amazon     AWS     Custom     Dev    
      */
     TypeName: TypeName;
     /**
@@ -2221,7 +2518,7 @@ declare namespace CloudFormation {
      */
     LoggingConfig?: LoggingConfig;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the extension. If your extension calls AWS APIs in any of its handlers, you must create an  IAM execution role  that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. When CloudFormation needs to invoke the extension handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the extension handler, thereby supplying your extension with the appropriate credentials.
+     * The Amazon Resource Name (ARN) of the IAM role for CloudFormation to assume when invoking the extension. For CloudFormation to assume the specified execution role, the role must contain a trust relationship with the CloudFormation service principle (resources.cloudformation.amazonaws.com). For more information on adding trust relationships, see Modifying a role trust policy in the AWS Identity and Access Management User Guide. If your extension calls AWS APIs in any of its handlers, you must create an  IAM execution role  that includes the necessary permissions to call those AWS APIs, and provision that execution role in your account. When CloudFormation needs to invoke the resource type handler, CloudFormation assumes this execution role to create a temporary session token, which it then passes to the resource type handler, thereby supplying your resource type with the appropriate credentials.
      */
     ExecutionRoleArn?: RoleArn;
     /**
@@ -2241,6 +2538,25 @@ declare namespace CloudFormation {
   export type RegistryType = "RESOURCE"|"MODULE"|string;
   export type Replacement = "True"|"False"|"Conditional"|string;
   export type RequestToken = string;
+  export interface RequiredActivatedType {
+    /**
+     * An alias assigned to the public extension, in this account and region. If you specify an alias for the extension, CloudFormation treats the alias as the extension type name within this account and region. You must use the alias to refer to the extension in your templates, API calls, and CloudFormation console.
+     */
+    TypeNameAlias?: TypeName;
+    /**
+     * The type name of the public extension. If you specified a TypeNameAlias when enabling the extension in this account and region, CloudFormation treats that alias as the extension's type name within the account and region, not the type name of the public extension. For more information, see Specifying aliases to refer to extensions in the CloudFormation User Guide.
+     */
+    OriginalTypeName?: TypeName;
+    /**
+     * The publisher ID of the extension publisher.
+     */
+    PublisherId?: PublisherId;
+    /**
+     * A list of the major versions of the extension type that the macro supports.
+     */
+    SupportedMajorVersions?: SupportedMajorVersions;
+  }
+  export type RequiredActivatedTypes = RequiredActivatedType[];
   export type RequiresRecreation = "Never"|"Conditionally"|"Always"|string;
   export type ResourceAttribute = "Properties"|"Metadata"|"CreationPolicy"|"UpdatePolicy"|"DeletionPolicy"|"Tags"|string;
   export interface ResourceChange {
@@ -2385,6 +2701,7 @@ declare namespace CloudFormation {
     Type: Type;
   }
   export type RollbackTriggers = RollbackTrigger[];
+  export type S3Bucket = string;
   export type S3Url = string;
   export type Scope = ResourceAttribute[];
   export interface SetStackPolicyInput {
@@ -2400,6 +2717,34 @@ declare namespace CloudFormation {
      * Location of a file containing the stack policy. The URL must point to a policy (maximum size: 16 KB) located in an S3 bucket in the same Region as the stack. You can specify either the StackPolicyBody or the StackPolicyURL parameter, but not both.
      */
     StackPolicyURL?: StackPolicyURL;
+  }
+  export interface SetTypeConfigurationInput {
+    /**
+     * The Amazon Resource Name (ARN) for the extension, in this account and region. For public extensions, this will be the ARN assigned when you activate the type in this account and region. For private extensions, this will be the ARN assigned when you register the type in this account and region.  Do not include the extension versions suffix at the end of the ARN. You can set the configuration for an extension, but not for a specific extension version.
+     */
+    TypeArn?: TypeArn;
+    /**
+     * The configuration data for the extension, in this account and region.  The configuration data must be formatted as JSON, and validate against the schema returned in the ConfigurationSchema response element of API_DescribeType. For more information, see Defining account-level configuration data for an extension in the CloudFormation CLI User Guide.
+     */
+    Configuration: TypeConfiguration;
+    /**
+     * An alias by which to refer to this extension configuration data. Conditional: Specifying a configuration alias is required when setting a configuration for a resource type extension.
+     */
+    ConfigurationAlias?: TypeConfigurationAlias;
+    /**
+     * The name of the extension. Conditional: You must specify ConfigurationArn, or Type and TypeName.
+     */
+    TypeName?: TypeName;
+    /**
+     * The type of extension. Conditional: You must specify ConfigurationArn, or Type and TypeName.
+     */
+    Type?: ThirdPartyType;
+  }
+  export interface SetTypeConfigurationOutput {
+    /**
+     * The Amazon Resource Name (ARN) for the configuration data, in this account and region. Conditional: You must specify ConfigurationArn, or Type and TypeName.
+     */
+    ConfigurationArn?: TypeConfigurationArn;
   }
   export interface SetTypeDefaultVersionInput {
     /**
@@ -3081,19 +3426,19 @@ declare namespace CloudFormation {
      */
     RegionOrder?: RegionList;
     /**
-     * The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region. If the operation is stopped in a Region, AWS CloudFormation doesn't attempt the operation in any subsequent Regions. Conditional: You must specify either FailureToleranceCount or FailureTolerancePercentage (but not both).
+     * The number of accounts, per Region, for which this operation can fail before AWS CloudFormation stops the operation in that Region. If the operation is stopped in a Region, AWS CloudFormation doesn't attempt the operation in any subsequent Regions. Conditional: You must specify either FailureToleranceCount or FailureTolerancePercentage (but not both). By default, 0 is specified.
      */
     FailureToleranceCount?: FailureToleranceCount;
     /**
-     * The percentage of accounts, per Region, for which this stack operation can fail before AWS CloudFormation stops the operation in that Region. If the operation is stopped in a Region, AWS CloudFormation doesn't attempt the operation in any subsequent Regions. When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. Conditional: You must specify either FailureToleranceCount or FailureTolerancePercentage, but not both.
+     * The percentage of accounts, per Region, for which this stack operation can fail before AWS CloudFormation stops the operation in that Region. If the operation is stopped in a Region, AWS CloudFormation doesn't attempt the operation in any subsequent Regions. When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. Conditional: You must specify either FailureToleranceCount or FailureTolerancePercentage, but not both. By default, 0 is specified.
      */
     FailureTolerancePercentage?: FailureTolerancePercentage;
     /**
-     * The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of FailureToleranceCount. MaxConcurrentCount is at most one more than the FailureToleranceCount. Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling. Conditional: You must specify either MaxConcurrentCount or MaxConcurrentPercentage, but not both.
+     * The maximum number of accounts in which to perform this operation at one time. This is dependent on the value of FailureToleranceCount. MaxConcurrentCount is at most one more than the FailureToleranceCount. Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling. Conditional: You must specify either MaxConcurrentCount or MaxConcurrentPercentage, but not both. By default, 1 is specified.
      */
     MaxConcurrentCount?: MaxConcurrentCount;
     /**
-     * The maximum percentage of accounts in which to perform this operation at one time. When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, CloudFormation sets the number as one instead. Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling. Conditional: You must specify either MaxConcurrentCount or MaxConcurrentPercentage, but not both.
+     * The maximum percentage of accounts in which to perform this operation at one time. When calculating the number of accounts based on the specified percentage, AWS CloudFormation rounds down to the next whole number. This is true except in cases where rounding down would result is zero. In this case, CloudFormation sets the number as one instead. Note that this setting lets you specify the maximum for operations. For large deployments, under certain circumstances the actual number of accounts acted upon concurrently may be lower due to service throttling. Conditional: You must specify either MaxConcurrentCount or MaxConcurrentPercentage, but not both. By default, 1 is specified.
      */
     MaxConcurrentPercentage?: MaxConcurrentPercentage;
   }
@@ -3254,6 +3599,8 @@ declare namespace CloudFormation {
   }
   export interface StopStackSetOperationOutput {
   }
+  export type SupportedMajorVersion = number;
+  export type SupportedMajorVersions = SupportedMajorVersion[];
   export interface Tag {
     /**
      *  Required. A string used to identify this tag. You can specify a maximum of 128 characters for a tag key. Tags owned by Amazon Web Services (AWS) have the reserved prefix: aws:.
@@ -3290,6 +3637,36 @@ declare namespace CloudFormation {
   export type TemplateParameters = TemplateParameter[];
   export type TemplateStage = "Original"|"Processed"|string;
   export type TemplateURL = string;
+  export interface TestTypeInput {
+    /**
+     * The Amazon Resource Number (ARN) of the extension. Conditional: You must specify Arn, or TypeName and Type.
+     */
+    Arn?: TypeArn;
+    /**
+     * The type of the extension to test. Conditional: You must specify Arn, or TypeName and Type.
+     */
+    Type?: ThirdPartyType;
+    /**
+     * The name of the extension to test. Conditional: You must specify Arn, or TypeName and Type.
+     */
+    TypeName?: TypeName;
+    /**
+     * The version of the extension to test. You can specify the version id with either Arn, or with TypeName and Type. If you do not specify a version, CloudFormation uses the default version of the extension in this account and region for testing.
+     */
+    VersionId?: TypeVersionId;
+    /**
+     * The S3 bucket to which CloudFormation delivers the contract test execution logs. CloudFormation delivers the logs by the time contract testing has completed and the extension has been assigned a test type status of PASSED or FAILED. The user calling TestType must be able to access items in the specified S3 bucket. Specifically, the user needs the following permissions:   GetObject   PutObject   For more information, see Actions, Resources, and Condition Keys for Amazon S3 in the AWS Identity and Access Management User Guide.
+     */
+    LogDeliveryBucket?: S3Bucket;
+  }
+  export interface TestTypeOutput {
+    /**
+     * The Amazon Resource Number (ARN) of the extension.
+     */
+    TypeVersionArn?: TypeArn;
+  }
+  export type ThirdPartyType = "RESOURCE"|"MODULE"|string;
+  export type ThirdPartyTypeArn = string;
   export type TimeoutMinutes = number;
   export type Timestamp = Date;
   export type TotalStackInstancesCount = number;
@@ -3297,57 +3674,159 @@ declare namespace CloudFormation {
   export type TransformsList = TransformName[];
   export type Type = string;
   export type TypeArn = string;
+  export type TypeConfiguration = string;
+  export type TypeConfigurationAlias = string;
+  export type TypeConfigurationArn = string;
+  export interface TypeConfigurationDetails {
+    /**
+     * The Amazon Resource Name (ARN) for the configuration data, in this account and region.
+     */
+    Arn?: TypeConfigurationArn;
+    /**
+     * The alias specified for this configuration, if one was specified when the configuration was set.
+     */
+    Alias?: TypeConfigurationAlias;
+    /**
+     * A JSON string specifying the configuration data for the extension, in this account and region.  If a configuration has not been set for a specified extension, CloudFormation returns {}.
+     */
+    Configuration?: TypeConfiguration;
+    /**
+     * When the configuration data was last updated for this extension. If a configuration has not been set for a specified extension, CloudFormation returns null.
+     */
+    LastUpdated?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) for the extension, in this account and region. For public extensions, this will be the ARN assigned when you activate the type in this account and region. For private extensions, this will be the ARN assigned when you register the type in this account and region. 
+     */
+    TypeArn?: TypeArn;
+    /**
+     * The name of the extension.
+     */
+    TypeName?: TypeName;
+    /**
+     * Whether or not this configuration data is the default configuration for the extension.
+     */
+    IsDefaultConfiguration?: IsDefaultConfiguration;
+  }
+  export type TypeConfigurationDetailsList = TypeConfigurationDetails[];
+  export interface TypeConfigurationIdentifier {
+    /**
+     * The Amazon Resource Name (ARN) for the extension, in this account and region. For public extensions, this will be the ARN assigned when you activate the type in this account and region. For private extensions, this will be the ARN assigned when you register the type in this account and region. 
+     */
+    TypeArn?: TypeArn;
+    /**
+     * The alias specified for this configuration, if one was specified when the configuration was set.
+     */
+    TypeConfigurationAlias?: TypeConfigurationAlias;
+    /**
+     * The Amazon Resource Name (ARN) for the configuration, in this account and region.
+     */
+    TypeConfigurationArn?: TypeConfigurationArn;
+    /**
+     * The type of extension.
+     */
+    Type?: ThirdPartyType;
+    /**
+     * The name of the extension type to which this configuration applies.
+     */
+    TypeName?: TypeName;
+  }
+  export type TypeConfigurationIdentifiers = TypeConfigurationIdentifier[];
+  export interface TypeFilters {
+    /**
+     * The category of extensions to return.    REGISTERED: Private extensions that have been registered for this account and region.    ACTIVATED: Public extensions that have been activated for this account and region.    THIRD-PARTY: Extensions available for use from publishers other than Amazon. This includes:   Private extensions registered in the account.   Public extensions from publishers other than Amazon, whether activated or not.      AWS-TYPES: Extensions available for use from Amazon.  
+     */
+    Category?: Category;
+    /**
+     * The id of the publisher of the extension.  Extensions published by Amazon are not assigned a publisher ID. Use the AWS-TYPES category to specify a list of types published by Amazon.
+     */
+    PublisherId?: PublisherId;
+    /**
+     * A prefix to use as a filter for results.
+     */
+    TypeNamePrefix?: TypeNamePrefix;
+  }
   export type TypeHierarchy = string;
   export type TypeName = string;
+  export type TypeNamePrefix = string;
   export type TypeSchema = string;
   export type TypeSummaries = TypeSummary[];
   export interface TypeSummary {
     /**
-     * The kind of type.
+     * The kind of extension.
      */
     Type?: RegistryType;
     /**
-     * The name of the type.
+     * The name of the extension. If you specified a TypeNameAlias when you activate this extension in your account and region, CloudFormation considers that alias as the type name.
      */
     TypeName?: TypeName;
     /**
-     * The ID of the default version of the type. The default version is used when the type version is not specified. To set the default version of a type, use  SetTypeDefaultVersion . 
+     * The ID of the default version of the extension. The default version is used when the extension version is not specified. This applies only to private extensions you have registered in your account. For public extensions, both those provided by Amazon and published by third parties, CloudFormation returns null. For more information, see RegisterType. To set the default version of an extension, use  SetTypeDefaultVersion . 
      */
     DefaultVersionId?: TypeVersionId;
     /**
-     * The Amazon Resource Name (ARN) of the type.
+     * The Amazon Resource Name (ARN) of the extension.
      */
     TypeArn?: TypeArn;
     /**
-     * When the current default version of the type was registered.
+     * When the specified extension version was registered. This applies only to:   Private extensions you have registered in your account. For more information, see RegisterType.   Public extensions you have activated in your account with auto-update specified. For more information, see ActivateType.   For all other extension types, CloudFormation returns null.
      */
     LastUpdated?: Timestamp;
     /**
-     * The description of the type.
+     * The description of the extension.
      */
     Description?: Description;
+    /**
+     * The ID of the extension publisher, if the extension is published by a third party. Extensions published by Amazon do not return a publisher ID.
+     */
+    PublisherId?: PublisherId;
+    /**
+     * For public extensions that have been activated for this account and region, the type name of the public extension. If you specified a TypeNameAlias when enabling the extension in this account and region, CloudFormation treats that alias as the extension's type name within the account and region, not the type name of the public extension. For more information, see Specifying aliases to refer to extensions in the CloudFormation User Guide.
+     */
+    OriginalTypeName?: TypeName;
+    /**
+     * For public extensions that have been activated for this account and region, the version of the public extension to be used for CloudFormation operations in this account and region. How you specified AutoUpdate when enabling the extension affects whether CloudFormation automatically updates the extention in this account and region when a new version is released. For more information, see Setting CloudFormation to automatically use new versions of extensions in the CloudFormation User Guide.
+     */
+    PublicVersionNumber?: PublicVersionNumber;
+    /**
+     * For public extensions that have been activated for this account and region, the latest version of the public extension that is available. For any extensions other than activated third-arty extensions, CloudFormation returns null. How you specified AutoUpdate when enabling the extension affects whether CloudFormation automatically updates the extention in this account and region when a new version is released. For more information, see Setting CloudFormation to automatically use new versions of extensions in the CloudFormation User Guide.
+     */
+    LatestPublicVersion?: PublicVersionNumber;
+    /**
+     * The service used to verify the publisher identity. For more information, see Registering your account to publish CloudFormation extensions in the  CFN-CLI User Guide for Extension Development.
+     */
+    PublisherIdentity?: IdentityProvider;
+    /**
+     * The publisher name, as defined in the public profile for that publisher in the service used to verify the publisher identity.
+     */
+    PublisherName?: PublisherName;
+    /**
+     * Whether or not the extension is activated for this account and region.  This applies only to third-party public extensions. Extensions published by Amazon are activated by default.
+     */
+    IsActivated?: IsActivated;
   }
+  export type TypeTestsStatus = "PASSED"|"FAILED"|"IN_PROGRESS"|"NOT_TESTED"|string;
+  export type TypeTestsStatusDescription = string;
   export type TypeVersionId = string;
   export type TypeVersionSummaries = TypeVersionSummary[];
   export interface TypeVersionSummary {
     /**
-     * The kind of type.
+     * The kind of extension.
      */
     Type?: RegistryType;
     /**
-     * The name of the type.
+     * The name of the extension.
      */
     TypeName?: TypeName;
     /**
-     * The ID of a specific version of the type. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the type version when it is registered.
+     * The ID of a specific version of the extension. The version ID is the value at the end of the Amazon Resource Name (ARN) assigned to the extension version when it is registered.
      */
     VersionId?: TypeVersionId;
     /**
-     * Whether the specified type version is set as the default version.
+     * Whether the specified extension version is set as the default version. This applies only to private extensions you have registered in your account, and extensions published by Amazon. For public third-party extensions, whether or not they are activated in your account, CloudFormation returns null.
      */
     IsDefaultVersion?: IsDefaultVersion;
     /**
-     * The Amazon Resource Name (ARN) of the type version.
+     * The Amazon Resource Name (ARN) of the extension version.
      */
     Arn?: TypeArn;
     /**
@@ -3355,10 +3834,15 @@ declare namespace CloudFormation {
      */
     TimeCreated?: Timestamp;
     /**
-     * The description of the type version.
+     * The description of the extension version.
      */
     Description?: Description;
+    /**
+     * For public extensions that have been activated for this account and region, the version of the public extension to be used for CloudFormation operations in this account and region. For any extensions other than activated third-arty extensions, CloudFormation returns null. How you specified AutoUpdate when enabling the extension affects whether CloudFormation automatically updates the extention in this account and region when a new version is released. For more information, see Setting CloudFormation to automatically use new versions of extensions in the CloudFormation User Guide.
+     */
+    PublicVersionNumber?: PublicVersionNumber;
   }
+  export type UnprocessedTypeConfigurations = TypeConfigurationIdentifier[];
   export interface UpdateStackInput {
     /**
      * The name or unique stack ID of the stack to update.
@@ -3604,6 +4088,7 @@ declare namespace CloudFormation {
   }
   export type Value = string;
   export type Version = string;
+  export type VersionBump = "MAJOR"|"MINOR"|string;
   export type Visibility = "PUBLIC"|"PRIVATE"|string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

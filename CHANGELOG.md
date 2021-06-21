@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.931.0-->
+<!--LATEST=2.932.0-->
 <!--ENTRYINSERT-->
+
+## 2.932.0
+* feature: ApiGateway: adds mention of default value for "enabled" field of CreateApiKeyRequest for better documentation
+* feature: CloudFormation: CloudFormation registry service now supports 3rd party public type sharing
 
 ## 2.931.0
 * feature: Chime: This release adds a new API UpdateSipMediaApplicationCall, to update an in-progress call for SipMediaApplication.

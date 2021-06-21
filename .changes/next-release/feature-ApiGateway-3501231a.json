@@ -1,5 +1,0 @@
-{
-  "type": "feature",
-  "category": "ApiGateway",
-  "description": "adds mention of default value for \"enabled\" field of CreateApiKeyRequest for better documentation"
-}

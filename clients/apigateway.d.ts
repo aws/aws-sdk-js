@@ -1218,7 +1218,7 @@ declare namespace APIGateway {
      */
     description?: String;
     /**
-     * Default: false. Specifies whether the ApiKey can be used by callers.
+     * Specifies whether the ApiKey can be used by callers.
      */
     enabled?: Boolean;
     /**
