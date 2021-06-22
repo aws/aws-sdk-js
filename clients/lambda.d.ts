@@ -254,11 +254,11 @@ declare class Lambda extends Service {
    */
   invoke(callback?: (err: AWSError, data: Lambda.Types.InvocationResponse) => void): Request<Lambda.Types.InvocationResponse, AWSError>;
   /**
-   *  For asynchronous function invocation, use Invoke.  Invokes a function asynchronously.
+   *  For synchronous function invocation, use invoke.  Invokes a function asynchronously.
    */
   invokeAsync(params: Lambda.Types.InvokeAsyncRequest, callback?: (err: AWSError, data: Lambda.Types.InvokeAsyncResponse) => void): Request<Lambda.Types.InvokeAsyncResponse, AWSError>;
   /**
-   *  For asynchronous function invocation, use Invoke.  Invokes a function asynchronously.
+   *  For synchronous function invocation, use invoke.  Invokes a function asynchronously.
    */
   invokeAsync(callback?: (err: AWSError, data: Lambda.Types.InvokeAsyncResponse) => void): Request<Lambda.Types.InvokeAsyncResponse, AWSError>;
   /**
