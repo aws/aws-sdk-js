@@ -59,6 +59,12 @@
         },
         {
           "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "ValidationException"
         }
       ],
       "documentation": "<p>Creates a new search domain. For more information, see <a href=\"http://docs.aws.amazon.com/cloudsearch/latest/developerguide/creating-domains.html\" target=\"_blank\">Creating a Search Domain</a> in the <i>Amazon CloudSearch Developer Guide</i>.</p>"
@@ -2189,7 +2195,11 @@
         "search.medium",
         "search.large",
         "search.xlarge",
-        "search.2xlarge"
+        "search.2xlarge",
+        "search.previousgeneration.small",
+        "search.previousgeneration.large",
+        "search.previousgeneration.xlarge",
+        "search.previousgeneration.2xlarge"
       ]
     },
     "PolicyDocument": {

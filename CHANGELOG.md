@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.932.0-->
+<!--LATEST=2.933.0-->
 <!--ENTRYINSERT-->
+
+## 2.933.0
+* feature: CloudFront: Amazon CloudFront adds support for a new security policy, TLSv1.2_2021.
+* feature: CloudSearch: This release replaces previous generation CloudSearch instances with equivalent new instances that provide better stability at the same price.
+* feature: CloudWatchEvents: Added the following parameters to ECS targets: CapacityProviderStrategy, EnableECSManagedTags, EnableExecuteCommand, PlacementConstraints, PlacementStrategy, PropagateTags, ReferenceId, and Tags
+* feature: CodeGuruReviewer: Adds support for S3 based full repository analysis and changed lines scan.
+* feature: EC2: This release adds support for provisioning your own IP (BYOIP) range in multiple regions. This feature is in limited Preview for this release. Contact your account manager if you are interested in this feature.
+* feature: EventBridge: Added the following parameters to ECS targets: CapacityProviderStrategy, EnableECSManagedTags, EnableExecuteCommand, PlacementConstraints, PlacementStrategy, PropagateTags, ReferenceId, and Tags
+* feature: LicenseManager: AWS License Manager now allows license administrators and end users to communicate to each other by setting custom status reasons when updating the status on a granted license.
+* feature: MediaTailor: Update GetChannelSchedule to return information on ad breaks.
+* feature: QuickSight: Releasing new APIs for AWS QuickSight Folders
 
 ## 2.932.0
 * feature: ApiGateway: adds mention of default value for "enabled" field of CreateApiKeyRequest for better documentation

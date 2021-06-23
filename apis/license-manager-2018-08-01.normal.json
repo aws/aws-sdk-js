@@ -66,6 +66,9 @@
           "shape": "ValidationException"
         },
         {
+          "shape": "InvalidParameterValueException"
+        },
+        {
           "shape": "ResourceNotFoundException"
         },
         {
@@ -101,6 +104,9 @@
       "errors": [
         {
           "shape": "ValidationException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
         },
         {
           "shape": "ResourceNotFoundException"
@@ -147,6 +153,9 @@
       "errors": [
         {
           "shape": "ValidationException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
         },
         {
           "shape": "ResourceNotFoundException"
@@ -1897,8 +1906,8 @@
     },
     "ClientToken": {
       "type": "string",
-      "max": 64,
-      "pattern": "[a-zA-Z0-9]*"
+      "max": 2048,
+      "pattern": "\\S+"
     },
     "ConsumedLicenseSummary": {
       "type": "structure",
@@ -1950,7 +1959,7 @@
       ],
       "members": {
         "ClientToken": {
-          "shape": "String",
+          "shape": "ClientToken",
           "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
         },
         "GrantName": {
@@ -2000,7 +2009,7 @@
       ],
       "members": {
         "ClientToken": {
-          "shape": "String",
+          "shape": "ClientToken",
           "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
         },
         "GrantArn": {
@@ -2018,6 +2027,9 @@
         "Status": {
           "shape": "GrantStatus",
           "documentation": "<p>Grant status.</p>"
+        },
+        "StatusReason": {
+          "shape": "StatusReasonMessage"
         },
         "SourceVersion": {
           "shape": "String",
@@ -2201,7 +2213,7 @@
           "documentation": "<p>Information about the license.</p>"
         },
         "ClientToken": {
-          "shape": "String",
+          "shape": "ClientToken",
           "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
         }
       }
@@ -2279,7 +2291,7 @@
           "documentation": "<p>License status.</p>"
         },
         "ClientToken": {
-          "shape": "String",
+          "shape": "ClientToken",
           "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
         },
         "SourceVersion": {
@@ -2329,7 +2341,7 @@
           "documentation": "<p>Data specified by the caller to be included in the JWT token. The data is mapped to the amr claim of the JWT token.</p>"
         },
         "ClientToken": {
-          "shape": "IdempotencyToken",
+          "shape": "ClientToken",
           "documentation": "<p>Idempotency token, valid for 10 minutes.</p>"
         }
       }
@@ -2381,6 +2393,9 @@
         "GrantArn": {
           "shape": "Arn",
           "documentation": "<p>Amazon Resource Name (ARN) of the grant.</p>"
+        },
+        "StatusReason": {
+          "shape": "StatusReasonMessage"
         },
         "Version": {
           "shape": "String",
@@ -2995,7 +3010,7 @@
           "documentation": "<p>Grant status.</p>"
         },
         "StatusReason": {
-          "shape": "String",
+          "shape": "StatusReasonMessage",
           "documentation": "<p>Grant status reason.</p>"
         },
         "Version": {
@@ -3025,7 +3040,8 @@
         "FAILED_WORKFLOW",
         "DELETED",
         "PENDING_DELETE",
-        "DISABLED"
+        "DISABLED",
+        "WORKFLOW_COMPLETED"
       ]
     },
     "GrantedLicense": {
@@ -3104,11 +3120,6 @@
       "type": "string",
       "max": 50,
       "pattern": "^(-?(?:[1-9][0-9]*)?[0-9]{4})-(1[0-2]|0[1-9])-(3[0-1]|0[1-9]|[1-2][0-9])T(2[0-3]|[0-1][0-9]):([0-5][0-9]):([0-5][0-9])(\\.[0-9]+)?(Z|[+-](?:2[ 0-3]|[0-1][0-9]):[0-5][0-9])+$"
-    },
-    "IdempotencyToken": {
-      "type": "string",
-      "max": 60,
-      "pattern": "\\S+"
     },
     "Integer": {
       "type": "integer"
@@ -4111,6 +4122,9 @@
           "shape": "ReceivedStatus",
           "documentation": "<p>Received status.</p>"
         },
+        "ReceivedStatusReason": {
+          "shape": "StatusReasonMessage"
+        },
         "AllowedOperations": {
           "shape": "AllowedOperationList",
           "documentation": "<p>Allowed operations.</p>"
@@ -4127,7 +4141,8 @@
         "ACTIVE",
         "FAILED_WORKFLOW",
         "DELETED",
-        "DISABLED"
+        "DISABLED",
+        "WORKFLOW_COMPLETED"
       ]
     },
     "RejectGrantRequest": {
@@ -4347,6 +4362,11 @@
     "SignedToken": {
       "type": "string",
       "min": 4096
+    },
+    "StatusReasonMessage": {
+      "type": "string",
+      "max": 400,
+      "pattern": "[\\s\\S]+"
     },
     "String": {
       "type": "string"

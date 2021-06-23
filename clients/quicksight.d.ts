@@ -60,6 +60,22 @@ declare class QuickSight extends Service {
    */
   createDataSource(callback?: (err: AWSError, data: QuickSight.Types.CreateDataSourceResponse) => void): Request<QuickSight.Types.CreateDataSourceResponse, AWSError>;
   /**
+   * Creates an empty shared folder.
+   */
+  createFolder(params: QuickSight.Types.CreateFolderRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateFolderResponse) => void): Request<QuickSight.Types.CreateFolderResponse, AWSError>;
+  /**
+   * Creates an empty shared folder.
+   */
+  createFolder(callback?: (err: AWSError, data: QuickSight.Types.CreateFolderResponse) => void): Request<QuickSight.Types.CreateFolderResponse, AWSError>;
+  /**
+   * Adds an asset, such as a dashboard, analysis, or dataset into a folder.
+   */
+  createFolderMembership(params: QuickSight.Types.CreateFolderMembershipRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateFolderMembershipResponse) => void): Request<QuickSight.Types.CreateFolderMembershipResponse, AWSError>;
+  /**
+   * Adds an asset, such as a dashboard, analysis, or dataset into a folder.
+   */
+  createFolderMembership(callback?: (err: AWSError, data: QuickSight.Types.CreateFolderMembershipResponse) => void): Request<QuickSight.Types.CreateFolderMembershipResponse, AWSError>;
+  /**
    * Creates an Amazon QuickSight group. The permissions resource is arn:aws:quicksight:us-east-1:&lt;relevant-aws-account-id&gt;:group/default/&lt;group-name&gt; . The response is a group object.
    */
   createGroup(params: QuickSight.Types.CreateGroupRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateGroupResponse) => void): Request<QuickSight.Types.CreateGroupResponse, AWSError>;
@@ -171,6 +187,22 @@ declare class QuickSight extends Service {
    * Deletes the data source permanently. This operation breaks all the datasets that reference the deleted data source.
    */
   deleteDataSource(callback?: (err: AWSError, data: QuickSight.Types.DeleteDataSourceResponse) => void): Request<QuickSight.Types.DeleteDataSourceResponse, AWSError>;
+  /**
+   * Deletes an empty folder.
+   */
+  deleteFolder(params: QuickSight.Types.DeleteFolderRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteFolderResponse) => void): Request<QuickSight.Types.DeleteFolderResponse, AWSError>;
+  /**
+   * Deletes an empty folder.
+   */
+  deleteFolder(callback?: (err: AWSError, data: QuickSight.Types.DeleteFolderResponse) => void): Request<QuickSight.Types.DeleteFolderResponse, AWSError>;
+  /**
+   * Removes an asset, such as a dashboard, analysis, or dataset, from a folder.
+   */
+  deleteFolderMembership(params: QuickSight.Types.DeleteFolderMembershipRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteFolderMembershipResponse) => void): Request<QuickSight.Types.DeleteFolderMembershipResponse, AWSError>;
+  /**
+   * Removes an asset, such as a dashboard, analysis, or dataset, from a folder.
+   */
+  deleteFolderMembership(callback?: (err: AWSError, data: QuickSight.Types.DeleteFolderMembershipResponse) => void): Request<QuickSight.Types.DeleteFolderMembershipResponse, AWSError>;
   /**
    * Removes a user group from Amazon QuickSight. 
    */
@@ -332,6 +364,30 @@ declare class QuickSight extends Service {
    */
   describeDataSourcePermissions(callback?: (err: AWSError, data: QuickSight.Types.DescribeDataSourcePermissionsResponse) => void): Request<QuickSight.Types.DescribeDataSourcePermissionsResponse, AWSError>;
   /**
+   * Describes a folder.
+   */
+  describeFolder(params: QuickSight.Types.DescribeFolderRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeFolderResponse) => void): Request<QuickSight.Types.DescribeFolderResponse, AWSError>;
+  /**
+   * Describes a folder.
+   */
+  describeFolder(callback?: (err: AWSError, data: QuickSight.Types.DescribeFolderResponse) => void): Request<QuickSight.Types.DescribeFolderResponse, AWSError>;
+  /**
+   * Describes permissions for a folder.
+   */
+  describeFolderPermissions(params: QuickSight.Types.DescribeFolderPermissionsRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeFolderPermissionsResponse) => void): Request<QuickSight.Types.DescribeFolderPermissionsResponse, AWSError>;
+  /**
+   * Describes permissions for a folder.
+   */
+  describeFolderPermissions(callback?: (err: AWSError, data: QuickSight.Types.DescribeFolderPermissionsResponse) => void): Request<QuickSight.Types.DescribeFolderPermissionsResponse, AWSError>;
+  /**
+   * Describes the folder resolved permissions. Permissions consists of both folder direct permissions and the inherited permissions from the ancestor folders.
+   */
+  describeFolderResolvedPermissions(params: QuickSight.Types.DescribeFolderResolvedPermissionsRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeFolderResolvedPermissionsResponse) => void): Request<QuickSight.Types.DescribeFolderResolvedPermissionsResponse, AWSError>;
+  /**
+   * Describes the folder resolved permissions. Permissions consists of both folder direct permissions and the inherited permissions from the ancestor folders.
+   */
+  describeFolderResolvedPermissions(callback?: (err: AWSError, data: QuickSight.Types.DescribeFolderResolvedPermissionsResponse) => void): Request<QuickSight.Types.DescribeFolderResolvedPermissionsResponse, AWSError>;
+  /**
    * Returns an Amazon QuickSight group's description and Amazon Resource Name (ARN). 
    */
   describeGroup(params: QuickSight.Types.DescribeGroupRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeGroupResponse) => void): Request<QuickSight.Types.DescribeGroupResponse, AWSError>;
@@ -475,6 +531,22 @@ declare class QuickSight extends Service {
    * Lists data sources in current AWS Region that belong to this AWS account.
    */
   listDataSources(callback?: (err: AWSError, data: QuickSight.Types.ListDataSourcesResponse) => void): Request<QuickSight.Types.ListDataSourcesResponse, AWSError>;
+  /**
+   * List all assets (DASHBOARD, ANALYSIS, and DATASET) in a folder. 
+   */
+  listFolderMembers(params: QuickSight.Types.ListFolderMembersRequest, callback?: (err: AWSError, data: QuickSight.Types.ListFolderMembersResponse) => void): Request<QuickSight.Types.ListFolderMembersResponse, AWSError>;
+  /**
+   * List all assets (DASHBOARD, ANALYSIS, and DATASET) in a folder. 
+   */
+  listFolderMembers(callback?: (err: AWSError, data: QuickSight.Types.ListFolderMembersResponse) => void): Request<QuickSight.Types.ListFolderMembersResponse, AWSError>;
+  /**
+   * Lists all folders in an account.
+   */
+  listFolders(params: QuickSight.Types.ListFoldersRequest, callback?: (err: AWSError, data: QuickSight.Types.ListFoldersResponse) => void): Request<QuickSight.Types.ListFoldersResponse, AWSError>;
+  /**
+   * Lists all folders in an account.
+   */
+  listFolders(callback?: (err: AWSError, data: QuickSight.Types.ListFoldersResponse) => void): Request<QuickSight.Types.ListFoldersResponse, AWSError>;
   /**
    * Lists member users in a group.
    */
@@ -628,6 +700,14 @@ declare class QuickSight extends Service {
    */
   searchDashboards(callback?: (err: AWSError, data: QuickSight.Types.SearchDashboardsResponse) => void): Request<QuickSight.Types.SearchDashboardsResponse, AWSError>;
   /**
+   * Searches the subfolders in a folder.
+   */
+  searchFolders(params: QuickSight.Types.SearchFoldersRequest, callback?: (err: AWSError, data: QuickSight.Types.SearchFoldersResponse) => void): Request<QuickSight.Types.SearchFoldersResponse, AWSError>;
+  /**
+   * Searches the subfolders in a folder.
+   */
+  searchFolders(callback?: (err: AWSError, data: QuickSight.Types.SearchFoldersResponse) => void): Request<QuickSight.Types.SearchFoldersResponse, AWSError>;
+  /**
    * Assigns one or more tags (key-value pairs) to the specified QuickSight resource.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource. QuickSight supports tagging on data set, data source, dashboard, and template.  Tagging for QuickSight works in a similar way to tagging for other AWS services, except for the following:   You can't use tags to track AWS costs for QuickSight. This restriction is because QuickSight costs are based on users and SPICE capacity, which aren't taggable resources.   QuickSight doesn't currently support the Tag Editor for AWS Resource Groups.  
    */
   tagResource(params: QuickSight.Types.TagResourceRequest, callback?: (err: AWSError, data: QuickSight.Types.TagResourceResponse) => void): Request<QuickSight.Types.TagResourceResponse, AWSError>;
@@ -731,6 +811,22 @@ declare class QuickSight extends Service {
    * Updates the permissions to a data source.
    */
   updateDataSourcePermissions(callback?: (err: AWSError, data: QuickSight.Types.UpdateDataSourcePermissionsResponse) => void): Request<QuickSight.Types.UpdateDataSourcePermissionsResponse, AWSError>;
+  /**
+   * Updates the name of a folder.
+   */
+  updateFolder(params: QuickSight.Types.UpdateFolderRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateFolderResponse) => void): Request<QuickSight.Types.UpdateFolderResponse, AWSError>;
+  /**
+   * Updates the name of a folder.
+   */
+  updateFolder(callback?: (err: AWSError, data: QuickSight.Types.UpdateFolderResponse) => void): Request<QuickSight.Types.UpdateFolderResponse, AWSError>;
+  /**
+   * Updates permissions of a folder.
+   */
+  updateFolderPermissions(params: QuickSight.Types.UpdateFolderPermissionsRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateFolderPermissionsResponse) => void): Request<QuickSight.Types.UpdateFolderPermissionsResponse, AWSError>;
+  /**
+   * Updates permissions of a folder.
+   */
+  updateFolderPermissions(callback?: (err: AWSError, data: QuickSight.Types.UpdateFolderPermissionsResponse) => void): Request<QuickSight.Types.UpdateFolderPermissionsResponse, AWSError>;
   /**
    * Changes a group description. 
    */
@@ -1473,6 +1569,86 @@ declare namespace QuickSight {
      * The HTTP status of the request.
      */
     Status?: StatusCode;
+  }
+  export interface CreateFolderMembershipRequest {
+    /**
+     * The AWS Account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The folder ID.
+     */
+    FolderId: RestrictiveResourceId;
+    /**
+     * The ID of the asset (the dashboard, analysis, or dataset).
+     */
+    MemberId: RestrictiveResourceId;
+    /**
+     * The type of the member, including DASHBOARD, ANALYSIS, and DATASET.
+     */
+    MemberType: MemberType;
+  }
+  export interface CreateFolderMembershipResponse {
+    /**
+     * The status of the folder membership. If succeeded, the status is SC_OK (200).
+     */
+    Status?: StatusCode;
+    /**
+     * Information about the member in the folder.
+     */
+    FolderMember?: FolderMember;
+    /**
+     * The request ID.
+     */
+    RequestId?: String;
+  }
+  export interface CreateFolderRequest {
+    /**
+     * The AWS Account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The folder ID.
+     */
+    FolderId: RestrictiveResourceId;
+    /**
+     * The name of the folder.
+     */
+    Name?: FolderName;
+    /**
+     * The type of folder. By default, folderType is SHARED.
+     */
+    FolderType?: FolderType;
+    /**
+     * The Amazon Resource Name (ARN) for the parent folder.  ParentFolderArn can be null. An empty parentFolderArn creates a root-level folder.
+     */
+    ParentFolderArn?: Arn;
+    /**
+     * A structure that describes the principals and the resource-level permissions of a folder. To specify no permissions, omit Permissions.
+     */
+    Permissions?: ResourcePermissionList;
+    /**
+     * Tags for the folder.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateFolderResponse {
+    /**
+     * The status of the newly created folder. If succeeded, the status is SC_OK (200).
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Resource Name (ARN) for the newly created folder.
+     */
+    Arn?: Arn;
+    /**
+     * The folder ID for the newly created folder.
+     */
+    FolderId?: RestrictiveResourceId;
+    /**
+     * The request ID for the newly created folder.
+     */
+    RequestId?: String;
   }
   export interface CreateGroupMembershipRequest {
     /**
@@ -2551,6 +2727,62 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface DeleteFolderMembershipRequest {
+    /**
+     * The AWS Account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The Folder ID.
+     */
+    FolderId: RestrictiveResourceId;
+    /**
+     * The ID of the asset (the dashboard, analysis, or dataset) that you want to delete.
+     */
+    MemberId: RestrictiveResourceId;
+    /**
+     * The type of the member, including DASHBOARD, ANALYSIS, and DATASET 
+     */
+    MemberType: MemberType;
+  }
+  export interface DeleteFolderMembershipResponse {
+    /**
+     * The status of deleting the asset. If succeeded, the status is SC_OK (200).
+     */
+    Status?: StatusCode;
+    /**
+     * The request ID.
+     */
+    RequestId?: String;
+  }
+  export interface DeleteFolderRequest {
+    /**
+     * The AWS Account ID for the folder.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The folder ID.
+     */
+    FolderId: RestrictiveResourceId;
+  }
+  export interface DeleteFolderResponse {
+    /**
+     * The status of deleting the folder. If succeeded, the status is SC_OK (200).
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Resource Name of the deleted folder.
+     */
+    Arn?: Arn;
+    /**
+     * The folder ID.
+     */
+    FolderId?: RestrictiveResourceId;
+    /**
+     * The request ID.
+     */
+    RequestId?: String;
+  }
   export interface DeleteGroupMembershipRequest {
     /**
      * The name of the user that you want to delete from the group membership.
@@ -3128,6 +3360,94 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
   }
+  export interface DescribeFolderPermissionsRequest {
+    /**
+     * The AWS Account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The folder ID.
+     */
+    FolderId: RestrictiveResourceId;
+  }
+  export interface DescribeFolderPermissionsResponse {
+    /**
+     * The status. If succeeded, the status is SC_OK.
+     */
+    Status?: StatusCode;
+    /**
+     * The folder ID.
+     */
+    FolderId?: RestrictiveResourceId;
+    /**
+     * The Amazon Resource Name (ARN) for the folder.
+     */
+    Arn?: Arn;
+    /**
+     * Information about the permissions on the folder.
+     */
+    Permissions?: ResourcePermissionList;
+    /**
+     * The request ID.
+     */
+    RequestId?: String;
+  }
+  export interface DescribeFolderRequest {
+    /**
+     * The AWS account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The folder ID.
+     */
+    FolderId: RestrictiveResourceId;
+  }
+  export interface DescribeFolderResolvedPermissionsRequest {
+    /**
+     * The AWS account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The folder ID.
+     */
+    FolderId: RestrictiveResourceId;
+  }
+  export interface DescribeFolderResolvedPermissionsResponse {
+    /**
+     * The status. If succeeded, the status is SC_OK 
+     */
+    Status?: StatusCode;
+    /**
+     * The folder ID.
+     */
+    FolderId?: RestrictiveResourceId;
+    /**
+     * The Amazon Resource Name (ARN).
+     */
+    Arn?: Arn;
+    /**
+     * Information about the permissions on the dashboard.
+     */
+    Permissions?: ResourcePermissionList;
+    /**
+     * The request ID.
+     */
+    RequestId?: String;
+  }
+  export interface DescribeFolderResponse {
+    /**
+     * The status. If succeeded, the status is SC_OK (200).
+     */
+    Status?: StatusCode;
+    /**
+     * Information about the folder.
+     */
+    Folder?: Folder;
+    /**
+     * The request ID.
+     */
+    RequestId?: String;
+  }
   export interface DescribeGroupRequest {
     /**
      * The name of the group that you want to describe.
@@ -3493,7 +3813,93 @@ declare namespace QuickSight {
     ConditionExpression: Expression;
   }
   export type FilterOperator = "StringEquals"|string;
+  export interface Folder {
+    /**
+     * The folder ID.
+     */
+    FolderId?: RestrictiveResourceId;
+    /**
+     * The folder Amazon Resource Name (ARN).
+     */
+    Arn?: Arn;
+    /**
+     * A display name for the folder.
+     */
+    Name?: FolderName;
+    /**
+     * The type of the folder.
+     */
+    FolderType?: FolderType;
+    /**
+     * An array of ancestor folder ARN strings.
+     */
+    FolderPath?: Path;
+    /**
+     * The time that the folder was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The time that the folder was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+  }
   export type FolderColumnList = String[];
+  export type FolderFilterAttribute = "PARENT_FOLDER_ARN"|string;
+  export interface FolderMember {
+    /**
+     * The ID of the asset.
+     */
+    MemberId?: RestrictiveResourceId;
+    /**
+     * The type of the asset.
+     */
+    MemberType?: MemberType;
+  }
+  export type FolderMemberList = MemberIdArnPair[];
+  export type FolderName = string;
+  export interface FolderSearchFilter {
+    /**
+     * The comparison operator that you want to use as a filter. For example, "Operator": "StringEquals".
+     */
+    Operator?: FilterOperator;
+    /**
+     * The name of the value that you want to use as a filter. For example, "Name": "PARENT_FOLDER_ARN".
+     */
+    Name?: FolderFilterAttribute;
+    /**
+     * The value of the named item (in this example, PARENT_FOLDER_ARN), that you want to use as a filter. For example, "Value": "arn:aws:quicksight:us-east-1:1:folder/folderId".
+     */
+    Value?: String;
+  }
+  export type FolderSearchFilterList = FolderSearchFilter[];
+  export interface FolderSummary {
+    /**
+     * The Amazon Resource Name (ARN).
+     */
+    Arn?: Arn;
+    /**
+     * The folder ID.
+     */
+    FolderId?: RestrictiveResourceId;
+    /**
+     * The display name of the folder.
+     */
+    Name?: FolderName;
+    /**
+     * The type of folder.
+     */
+    FolderType?: FolderType;
+    /**
+     * The time that the folder was created.
+     */
+    CreatedTime?: Timestamp;
+    /**
+     * The time that the folder was last updated.
+     */
+    LastUpdatedTime?: Timestamp;
+  }
+  export type FolderSummaryList = FolderSummary[];
+  export type FolderType = "SHARED"|string;
   export interface GeoSpatialColumnGroup {
     /**
      * A display name for the hierarchy.
@@ -3955,6 +4361,74 @@ declare namespace QuickSight {
      * The HTTP status of the request.
      */
     Status?: StatusCode;
+  }
+  export interface ListFolderMembersRequest {
+    /**
+     * The AWS account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The folder ID.
+     */
+    FolderId: RestrictiveResourceId;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListFolderMembersResponse {
+    /**
+     * The status. If succeeded, the status is SC_OK 
+     */
+    Status?: StatusCode;
+    /**
+     * A structure that contains all of the folder members (dashboards, analyses, and datasets) in the folder.
+     */
+    FolderMemberList?: FolderMemberList;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The request ID.
+     */
+    RequestId?: String;
+  }
+  export interface ListFoldersRequest {
+    /**
+     * The AWS account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListFoldersResponse {
+    /**
+     * The status. If succeeded, the status is SC_OK 
+     */
+    Status?: StatusCode;
+    /**
+     * A structure that contains all of the folders in your AWS account. This structure provides basic information about the folders.
+     */
+    FolderSummaryList?: FolderSummaryList;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The request ID.
+     */
+    RequestId?: String;
   }
   export interface ListGroupMembershipsRequest {
     /**
@@ -4548,6 +5022,17 @@ declare namespace QuickSight {
     Database: Database;
   }
   export type MaxResults = number;
+  export interface MemberIdArnPair {
+    /**
+     * The ID of the member.
+     */
+    MemberId?: RestrictiveResourceId;
+    /**
+     * The Amazon Resource Name (ARN) of the member.
+     */
+    MemberArn?: Arn;
+  }
+  export type MemberType = "DASHBOARD"|"ANALYSIS"|"DATASET"|string;
   export interface MySqlParameters {
     /**
      * Host.
@@ -4653,6 +5138,7 @@ declare namespace QuickSight {
     DateTimeParameters?: DateTimeParameterList;
   }
   export type Password = string;
+  export type Path = Arn[];
   export interface PhysicalTable {
     /**
      * A physical table type for relational data sources.
@@ -4944,7 +5430,7 @@ declare namespace QuickSight {
      */
     UploadSettings?: UploadSettings;
     /**
-     * A physical table type for as S3 data source.
+     * A physical table type for an S3 data source.  For non-JSON files, only STRING data types are supported in input columns. 
      */
     InputColumns: InputColumnList;
   }
@@ -5017,6 +5503,42 @@ declare namespace QuickSight {
     Status?: StatusCode;
     /**
      * The AWS request ID for this operation.
+     */
+    RequestId?: String;
+  }
+  export interface SearchFoldersRequest {
+    /**
+     * The AWS account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The filters to apply to the search. Currently, you can search only by the parent folder ARN. For example, "Filters": [ { "Name": "PARENT_FOLDER_ARN", "Operator": "StringEquals", "Value": "arn:aws:quicksight:us-east-1:1:folder/folderId" } ].
+     */
+    Filters: FolderSearchFilterList;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to be returned per request.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface SearchFoldersResponse {
+    /**
+     * The status. If succeeded, the status is SC_OK.
+     */
+    Status?: StatusCode;
+    /**
+     * A structure that contains all of the folders in your AWS account. This structure provides basic information about the folders.
+     */
+    FolderSummaryList?: FolderSummaryList;
+    /**
+     * The token for the next set of results, or null if there are no more results.
+     */
+    NextToken?: String;
+    /**
+     * The request ID.
      */
     RequestId?: String;
   }
@@ -6112,6 +6634,78 @@ declare namespace QuickSight {
      * The HTTP status of the request.
      */
     Status?: StatusCode;
+  }
+  export interface UpdateFolderPermissionsRequest {
+    /**
+     * The AWS account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The folder ID.
+     */
+    FolderId: RestrictiveResourceId;
+    /**
+     * The permissions that you want to grant on a resource.
+     */
+    GrantPermissions?: ResourcePermissionList;
+    /**
+     * The permissions that you want to revoke from a resource.
+     */
+    RevokePermissions?: ResourcePermissionList;
+  }
+  export interface UpdateFolderPermissionsResponse {
+    /**
+     * The status. If succeeded, the status is SC_OK.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Resource Name (ARN).
+     */
+    Arn?: Arn;
+    /**
+     * The folder ID.
+     */
+    FolderId?: RestrictiveResourceId;
+    /**
+     * Information about the permissions on the dashboard.
+     */
+    Permissions?: ResourcePermissionList;
+    /**
+     * The request ID.
+     */
+    RequestId?: String;
+  }
+  export interface UpdateFolderRequest {
+    /**
+     * The AWS account ID.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * The folder ID.
+     */
+    FolderId: RestrictiveResourceId;
+    /**
+     * The name of the folder.
+     */
+    Name: FolderName;
+  }
+  export interface UpdateFolderResponse {
+    /**
+     * The status. If succeeded, the status is SC_OK.
+     */
+    Status?: StatusCode;
+    /**
+     * The Amazon Resource Name (ARN).
+     */
+    Arn?: Arn;
+    /**
+     * The folder ID.
+     */
+    FolderId?: RestrictiveResourceId;
+    /**
+     * The request ID.
+     */
+    RequestId?: String;
   }
   export interface UpdateGroupRequest {
     /**

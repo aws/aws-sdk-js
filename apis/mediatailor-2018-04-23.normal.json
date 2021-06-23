@@ -2145,6 +2145,28 @@
       },
       "type": "list"
     },
+    "ScheduleAdBreak": {
+      "documentation": "<p>The schedule's ad break properties.</p>",
+      "members": {
+        "ApproximateDurationSeconds": {
+          "documentation": "<p>The approximate duration of the ad break, in seconds.</p>",
+          "shape": "__long"
+        },
+        "ApproximateStartTime": {
+          "documentation": "<p>The approximate time that the ad will start playing.</p>",
+          "shape": "__timestampUnix"
+        },
+        "SourceLocationName": {
+          "documentation": "<p>The name of the source location containing the VOD source used for the ad break.</p>",
+          "shape": "__string"
+        },
+        "VodSourceName": {
+          "documentation": "<p>The name of the VOD source used for the ad break.</p>",
+          "shape": "__string"
+        }
+      },
+      "type": "structure"
+    },
     "ScheduleConfiguration": {
       "documentation": "<p>Schedule configuration parameters. A channel must be stopped before changes can be made to the schedule.</p>",
       "members": {
@@ -2180,6 +2202,10 @@
         "ProgramName": {
           "documentation": "<p>The name of the program.</p>",
           "shape": "__string"
+        },
+        "ScheduleAdBreaks": {
+          "documentation": "<p>The schedule's ad break properties.</p>",
+          "shape": "__listOfScheduleAdBreak"
         },
         "SourceLocationName": {
           "documentation": "<p>The name of the source location.</p>",
@@ -2651,6 +2677,12 @@
     "__listOfPlaybackConfiguration": {
       "member": {
         "shape": "PlaybackConfiguration"
+      },
+      "type": "list"
+    },
+    "__listOfScheduleAdBreak": {
+      "member": {
+        "shape": "ScheduleAdBreak"
       },
       "type": "list"
     },

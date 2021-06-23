@@ -22133,6 +22133,10 @@ declare namespace EC2 {
      * The tags to apply to the address pool.
      */
     PoolTagSpecifications?: TagSpecificationList;
+    /**
+     * Reserved.
+     */
+    MultiRegion?: Boolean;
   }
   export interface ProvisionByoipCidrResult {
     /**

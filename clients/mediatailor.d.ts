@@ -1370,6 +1370,24 @@ declare namespace MediaTailor {
     SourceGroup: __string;
   }
   export type ResponseOutputs = ResponseOutputItem[];
+  export interface ScheduleAdBreak {
+    /**
+     * The approximate duration of the ad break, in seconds.
+     */
+    ApproximateDurationSeconds?: __long;
+    /**
+     * The approximate time that the ad will start playing.
+     */
+    ApproximateStartTime?: __timestampUnix;
+    /**
+     * The name of the source location containing the VOD source used for the ad break.
+     */
+    SourceLocationName?: __string;
+    /**
+     * The name of the VOD source used for the ad break.
+     */
+    VodSourceName?: __string;
+  }
   export interface ScheduleConfiguration {
     /**
      * Program transition configurations.
@@ -1397,6 +1415,10 @@ declare namespace MediaTailor {
      * The name of the program.
      */
     ProgramName: __string;
+    /**
+     * The schedule's ad break properties.
+     */
+    ScheduleAdBreaks?: __listOfScheduleAdBreak;
     /**
      * The name of the source location.
      */
@@ -1709,6 +1731,7 @@ declare namespace MediaTailor {
   export type __listOfAdBreak = AdBreak[];
   export type __listOfChannel = Channel[];
   export type __listOfPlaybackConfiguration = PlaybackConfiguration[];
+  export type __listOfScheduleAdBreak = ScheduleAdBreak[];
   export type __listOfScheduleEntry = ScheduleEntry[];
   export type __listOfSourceLocation = SourceLocation[];
   export type __listOfVodSource = VodSource[];

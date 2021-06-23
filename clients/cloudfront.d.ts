@@ -3124,7 +3124,7 @@ declare namespace CloudFront {
   }
   export type Method = "GET"|"HEAD"|"POST"|"PUT"|"PATCH"|"OPTIONS"|"DELETE"|string;
   export type MethodsList = Method[];
-  export type MinimumProtocolVersion = "SSLv3"|"TLSv1"|"TLSv1_2016"|"TLSv1.1_2016"|"TLSv1.2_2018"|"TLSv1.2_2019"|string;
+  export type MinimumProtocolVersion = "SSLv3"|"TLSv1"|"TLSv1_2016"|"TLSv1.1_2016"|"TLSv1.2_2018"|"TLSv1.2_2019"|"TLSv1.2_2021"|string;
   export interface MonitoringSubscription {
     /**
      * A subscription configuration for additional CloudWatch metrics.

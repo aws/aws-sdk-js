@@ -581,7 +581,7 @@ declare namespace LicenseManager {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
-    ClientToken: String;
+    ClientToken: ClientToken;
     /**
      * Grant name.
      */
@@ -621,7 +621,7 @@ declare namespace LicenseManager {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
-    ClientToken: String;
+    ClientToken: ClientToken;
     /**
      * Amazon Resource Name (ARN) of the grant.
      */
@@ -638,6 +638,7 @@ declare namespace LicenseManager {
      * Grant status.
      */
     Status?: GrantStatus;
+    StatusReason?: StatusReasonMessage;
     /**
      * Current version of the grant.
      */
@@ -781,7 +782,7 @@ declare namespace LicenseManager {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
-    ClientToken: String;
+    ClientToken: ClientToken;
   }
   export interface CreateLicenseResponse {
     /**
@@ -841,7 +842,7 @@ declare namespace LicenseManager {
     /**
      * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
      */
-    ClientToken: String;
+    ClientToken: ClientToken;
     /**
      * Current version of the license.
      */
@@ -881,7 +882,7 @@ declare namespace LicenseManager {
     /**
      * Idempotency token, valid for 10 minutes.
      */
-    ClientToken: IdempotencyToken;
+    ClientToken: ClientToken;
   }
   export interface CreateTokenResponse {
     /**
@@ -913,6 +914,7 @@ declare namespace LicenseManager {
      * Amazon Resource Name (ARN) of the grant.
      */
     GrantArn: Arn;
+    StatusReason?: StatusReasonMessage;
     /**
      * Current version of the grant.
      */
@@ -1279,7 +1281,7 @@ declare namespace LicenseManager {
     /**
      * Grant status reason.
      */
-    StatusReason?: String;
+    StatusReason?: StatusReasonMessage;
     /**
      * Grant version.
      */
@@ -1290,7 +1292,7 @@ declare namespace LicenseManager {
     GrantedOperations: AllowedOperationList;
   }
   export type GrantList = Grant[];
-  export type GrantStatus = "PENDING_WORKFLOW"|"PENDING_ACCEPT"|"REJECTED"|"ACTIVE"|"FAILED_WORKFLOW"|"DELETED"|"PENDING_DELETE"|"DISABLED"|string;
+  export type GrantStatus = "PENDING_WORKFLOW"|"PENDING_ACCEPT"|"REJECTED"|"ACTIVE"|"FAILED_WORKFLOW"|"DELETED"|"PENDING_DELETE"|"DISABLED"|"WORKFLOW_COMPLETED"|string;
   export interface GrantedLicense {
     /**
      * Amazon Resource Name (ARN) of the license.
@@ -1355,7 +1357,6 @@ declare namespace LicenseManager {
   }
   export type GrantedLicenseList = GrantedLicense[];
   export type ISO8601DateTime = string;
-  export type IdempotencyToken = string;
   export type Integer = number;
   export interface InventoryFilter {
     /**
@@ -2050,12 +2051,13 @@ declare namespace LicenseManager {
      * Received status.
      */
     ReceivedStatus?: ReceivedStatus;
+    ReceivedStatusReason?: StatusReasonMessage;
     /**
      * Allowed operations.
      */
     AllowedOperations?: AllowedOperationList;
   }
-  export type ReceivedStatus = "PENDING_WORKFLOW"|"PENDING_ACCEPT"|"REJECTED"|"ACTIVE"|"FAILED_WORKFLOW"|"DELETED"|"DISABLED"|string;
+  export type ReceivedStatus = "PENDING_WORKFLOW"|"PENDING_ACCEPT"|"REJECTED"|"ACTIVE"|"FAILED_WORKFLOW"|"DELETED"|"DISABLED"|"WORKFLOW_COMPLETED"|string;
   export interface RejectGrantRequest {
     /**
      * Amazon Resource Name (ARN) of the grant.
@@ -2191,6 +2193,7 @@ declare namespace LicenseManager {
     keyPrefix?: String;
   }
   export type SignedToken = string;
+  export type StatusReasonMessage = string;
   export type String = string;
   export type StringList = String[];
   export interface Tag {

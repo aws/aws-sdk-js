@@ -239,6 +239,89 @@
       ],
       "documentation": "<p>Creates a data source.</p>"
     },
+    "CreateFolder": {
+      "name": "CreateFolder",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{AwsAccountId}/folders/{FolderId}"
+      },
+      "input": {
+        "shape": "CreateFolderRequest"
+      },
+      "output": {
+        "shape": "CreateFolderResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ResourceExistsException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Creates an empty shared folder.</p>"
+    },
+    "CreateFolderMembership": {
+      "name": "CreateFolderMembership",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/accounts/{AwsAccountId}/folders/{FolderId}/members/{MemberType}/{MemberId}"
+      },
+      "input": {
+        "shape": "CreateFolderMembershipRequest"
+      },
+      "output": {
+        "shape": "CreateFolderMembershipResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceExistsException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Adds an asset, such as a dashboard, analysis, or dataset into a folder.</p>"
+    },
     "CreateGroup": {
       "name": "CreateGroup",
       "http": {
@@ -765,6 +848,80 @@
         }
       ],
       "documentation": "<p>Deletes the data source permanently. This operation breaks all the datasets that reference the deleted data source.</p>"
+    },
+    "DeleteFolder": {
+      "name": "DeleteFolder",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/accounts/{AwsAccountId}/folders/{FolderId}"
+      },
+      "input": {
+        "shape": "DeleteFolderRequest"
+      },
+      "output": {
+        "shape": "DeleteFolderResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "PreconditionNotMetException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Deletes an empty folder.</p>"
+    },
+    "DeleteFolderMembership": {
+      "name": "DeleteFolderMembership",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/accounts/{AwsAccountId}/folders/{FolderId}/members/{MemberType}/{MemberId}"
+      },
+      "input": {
+        "shape": "DeleteFolderMembershipRequest"
+      },
+      "output": {
+        "shape": "DeleteFolderMembershipResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Removes an asset, such as a dashboard, analysis, or dataset, from a folder.</p>"
     },
     "DeleteGroup": {
       "name": "DeleteGroup",
@@ -1449,6 +1606,108 @@
       ],
       "documentation": "<p>Describes the resource permissions for a data source.</p>"
     },
+    "DescribeFolder": {
+      "name": "DescribeFolder",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{AwsAccountId}/folders/{FolderId}"
+      },
+      "input": {
+        "shape": "DescribeFolderRequest"
+      },
+      "output": {
+        "shape": "DescribeFolderResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Describes a folder.</p>"
+    },
+    "DescribeFolderPermissions": {
+      "name": "DescribeFolderPermissions",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{AwsAccountId}/folders/{FolderId}/permissions"
+      },
+      "input": {
+        "shape": "DescribeFolderPermissionsRequest"
+      },
+      "output": {
+        "shape": "DescribeFolderPermissionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Describes permissions for a folder.</p>"
+    },
+    "DescribeFolderResolvedPermissions": {
+      "name": "DescribeFolderResolvedPermissions",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{AwsAccountId}/folders/{FolderId}/resolved-permissions"
+      },
+      "input": {
+        "shape": "DescribeFolderResolvedPermissionsRequest"
+      },
+      "output": {
+        "shape": "DescribeFolderResolvedPermissionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Describes the folder resolved permissions. Permissions consists of both folder direct permissions and the inherited permissions from the ancestor folders.</p>"
+    },
     "DescribeGroup": {
       "name": "DescribeGroup",
       "http": {
@@ -2078,6 +2337,80 @@
         }
       ],
       "documentation": "<p>Lists data sources in current AWS Region that belong to this AWS account.</p>"
+    },
+    "ListFolderMembers": {
+      "name": "ListFolderMembers",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{AwsAccountId}/folders/{FolderId}/members"
+      },
+      "input": {
+        "shape": "ListFolderMembersRequest"
+      },
+      "output": {
+        "shape": "ListFolderMembersResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>List all assets (<code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code>) in a folder. </p>"
+    },
+    "ListFolders": {
+      "name": "ListFolders",
+      "http": {
+        "method": "GET",
+        "requestUri": "/accounts/{AwsAccountId}/folders"
+      },
+      "input": {
+        "shape": "ListFoldersRequest"
+      },
+      "output": {
+        "shape": "ListFoldersResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Lists all folders in an account.</p>"
     },
     "ListGroupMemberships": {
       "name": "ListGroupMemberships",
@@ -2770,6 +3103,43 @@
       ],
       "documentation": "<p>Searches for dashboards that belong to a user. </p>"
     },
+    "SearchFolders": {
+      "name": "SearchFolders",
+      "http": {
+        "method": "POST",
+        "requestUri": "/accounts/{AwsAccountId}/search/folders"
+      },
+      "input": {
+        "shape": "SearchFoldersRequest"
+      },
+      "output": {
+        "shape": "SearchFoldersResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Searches the subfolders in a folder.</p>"
+    },
     "TagResource": {
       "name": "TagResource",
       "http": {
@@ -3220,6 +3590,83 @@
         }
       ],
       "documentation": "<p>Updates the permissions to a data source.</p>"
+    },
+    "UpdateFolder": {
+      "name": "UpdateFolder",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/accounts/{AwsAccountId}/folders/{FolderId}"
+      },
+      "input": {
+        "shape": "UpdateFolderRequest"
+      },
+      "output": {
+        "shape": "UpdateFolderResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceExistsException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Updates the name of a folder.</p>"
+    },
+    "UpdateFolderPermissions": {
+      "name": "UpdateFolderPermissions",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/accounts/{AwsAccountId}/folders/{FolderId}/permissions"
+      },
+      "input": {
+        "shape": "UpdateFolderPermissionsRequest"
+      },
+      "output": {
+        "shape": "UpdateFolderPermissionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "UnsupportedUserEditionException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Updates permissions of a folder.</p>"
     },
     "UpdateGroup": {
       "name": "UpdateGroup",
@@ -4637,6 +5084,121 @@
           "shape": "StatusCode",
           "documentation": "<p>The HTTP status of the request.</p>",
           "location": "statusCode"
+        }
+      }
+    },
+    "CreateFolderMembershipRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "FolderId",
+        "MemberId",
+        "MemberType"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The AWS Account ID.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>",
+          "location": "uri",
+          "locationName": "FolderId"
+        },
+        "MemberId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the asset (the dashboard, analysis, or dataset).</p>",
+          "location": "uri",
+          "locationName": "MemberId"
+        },
+        "MemberType": {
+          "shape": "MemberType",
+          "documentation": "<p>The type of the member, including <code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code>.</p>",
+          "location": "uri",
+          "locationName": "MemberType"
+        }
+      }
+    },
+    "CreateFolderMembershipResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The status of the folder membership. If succeeded, the status is <code>SC_OK (200)</code>.</p>"
+        },
+        "FolderMember": {
+          "shape": "FolderMember",
+          "documentation": "<p>Information about the member in the folder.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The request ID.</p>"
+        }
+      }
+    },
+    "CreateFolderRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "FolderId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The AWS Account ID.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>",
+          "location": "uri",
+          "locationName": "FolderId"
+        },
+        "Name": {
+          "shape": "FolderName",
+          "documentation": "<p>The name of the folder.</p>"
+        },
+        "FolderType": {
+          "shape": "FolderType",
+          "documentation": "<p>The type of folder. By default, <code>folderType</code> is <code>SHARED</code>.</p>"
+        },
+        "ParentFolderArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the parent folder.</p> <p> <code>ParentFolderArn</code> can be null. An empty <code>parentFolderArn</code> creates a root-level folder.</p>"
+        },
+        "Permissions": {
+          "shape": "ResourcePermissionList",
+          "documentation": "<p>A structure that describes the principals and the resource-level permissions of a folder.</p> <p>To specify no permissions, omit <code>Permissions</code>.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Tags for the folder.</p>"
+        }
+      }
+    },
+    "CreateFolderResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The status of the newly created folder. If succeeded, the status is <code>SC_OK (200)</code>.</p>",
+          "location": "statusCode"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the newly created folder.</p>"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID for the newly created folder.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The request ID for the newly created folder.</p>"
         }
       }
     },
@@ -6242,6 +6804,97 @@
         }
       }
     },
+    "DeleteFolderMembershipRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "FolderId",
+        "MemberId",
+        "MemberType"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The AWS Account ID.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The Folder ID.</p>",
+          "location": "uri",
+          "locationName": "FolderId"
+        },
+        "MemberId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the asset (the dashboard, analysis, or dataset) that you want to delete.</p>",
+          "location": "uri",
+          "locationName": "MemberId"
+        },
+        "MemberType": {
+          "shape": "MemberType",
+          "documentation": "<p>The type of the member, including <code>DASHBOARD</code>, <code>ANALYSIS</code>, and <code>DATASET</code> </p>",
+          "location": "uri",
+          "locationName": "MemberType"
+        }
+      }
+    },
+    "DeleteFolderMembershipResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The status of deleting the asset. If succeeded, the status is <code>SC_OK (200)</code>.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The request ID.</p>"
+        }
+      }
+    },
+    "DeleteFolderRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "FolderId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The AWS Account ID for the folder.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>",
+          "location": "uri",
+          "locationName": "FolderId"
+        }
+      }
+    },
+    "DeleteFolderResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The status of deleting the folder. If succeeded, the status is <code>SC_OK (200)</code>.</p>",
+          "location": "statusCode"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name of the deleted folder.</p>"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The request ID.</p>"
+        }
+      }
+    },
     "DeleteGroupMembershipRequest": {
       "type": "structure",
       "required": [
@@ -7154,6 +7807,139 @@
         }
       }
     },
+    "DescribeFolderPermissionsRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "FolderId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The AWS Account ID.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>",
+          "location": "uri",
+          "locationName": "FolderId"
+        }
+      }
+    },
+    "DescribeFolderPermissionsResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>.</p>",
+          "location": "statusCode"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the folder.</p>"
+        },
+        "Permissions": {
+          "shape": "ResourcePermissionList",
+          "documentation": "<p>Information about the permissions on the folder.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The request ID.</p>"
+        }
+      }
+    },
+    "DescribeFolderRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "FolderId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The AWS account ID.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>",
+          "location": "uri",
+          "locationName": "FolderId"
+        }
+      }
+    },
+    "DescribeFolderResolvedPermissionsRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "FolderId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The AWS account ID.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>",
+          "location": "uri",
+          "locationName": "FolderId"
+        }
+      }
+    },
+    "DescribeFolderResolvedPermissionsResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code> </p>",
+          "location": "statusCode"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN).</p>"
+        },
+        "Permissions": {
+          "shape": "ResourcePermissionList",
+          "documentation": "<p>Information about the permissions on the dashboard.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The request ID.</p>"
+        }
+      }
+    },
+    "DescribeFolderResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The status. If succeeded, the status is <code>SC_OK (200)</code>.</p>",
+          "location": "statusCode"
+        },
+        "Folder": {
+          "shape": "Folder",
+          "documentation": "<p>Information about the folder.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The request ID.</p>"
+        }
+      }
+    },
     "DescribeGroupRequest": {
       "type": "structure",
       "required": [
@@ -7794,12 +8580,146 @@
         "StringEquals"
       ]
     },
+    "Folder": {
+      "type": "structure",
+      "members": {
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The folder Amazon Resource Name (ARN).</p>"
+        },
+        "Name": {
+          "shape": "FolderName",
+          "documentation": "<p>A display name for the folder.</p>"
+        },
+        "FolderType": {
+          "shape": "FolderType",
+          "documentation": "<p>The type of the folder.</p>"
+        },
+        "FolderPath": {
+          "shape": "Path",
+          "documentation": "<p>An array of ancestor folder ARN strings.</p>"
+        },
+        "CreatedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the folder was created.</p>"
+        },
+        "LastUpdatedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the folder was last updated.</p>"
+        }
+      },
+      "documentation": "<p>A folder.</p>"
+    },
     "FolderColumnList": {
       "type": "list",
       "member": {
         "shape": "String"
       },
       "max": 5000
+    },
+    "FolderFilterAttribute": {
+      "type": "string",
+      "enum": [
+        "PARENT_FOLDER_ARN"
+      ]
+    },
+    "FolderMember": {
+      "type": "structure",
+      "members": {
+        "MemberId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the asset.</p>"
+        },
+        "MemberType": {
+          "shape": "MemberType",
+          "documentation": "<p>The type of the asset.</p>"
+        }
+      },
+      "documentation": "<p>An asset in a folder, such as a dashboard, analysis, or dataset.</p>"
+    },
+    "FolderMemberList": {
+      "type": "list",
+      "member": {
+        "shape": "MemberIdArnPair"
+      },
+      "max": 100
+    },
+    "FolderName": {
+      "type": "string",
+      "max": 200,
+      "min": 1
+    },
+    "FolderSearchFilter": {
+      "type": "structure",
+      "members": {
+        "Operator": {
+          "shape": "FilterOperator",
+          "documentation": "<p>The comparison operator that you want to use as a filter. For example, <code>\"Operator\": \"StringEquals\"</code>.</p>"
+        },
+        "Name": {
+          "shape": "FolderFilterAttribute",
+          "documentation": "<p>The name of the value that you want to use as a filter. For example, <code>\"Name\": \"PARENT_FOLDER_ARN\"</code>.</p>"
+        },
+        "Value": {
+          "shape": "String",
+          "documentation": "<p>The value of the named item (in this example, <code>PARENT_FOLDER_ARN</code>), that you want to use as a filter. For example, <code>\"Value\": \"arn:aws:quicksight:us-east-1:1:folder/folderId\"</code>.</p>"
+        }
+      },
+      "documentation": "<p>Searches a folder by a filter.</p>"
+    },
+    "FolderSearchFilterList": {
+      "type": "list",
+      "member": {
+        "shape": "FolderSearchFilter"
+      },
+      "max": 100
+    },
+    "FolderSummary": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN).</p>"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>"
+        },
+        "Name": {
+          "shape": "FolderName",
+          "documentation": "<p>The display name of the folder.</p>"
+        },
+        "FolderType": {
+          "shape": "FolderType",
+          "documentation": "<p>The type of folder.</p>"
+        },
+        "CreatedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the folder was created.</p>"
+        },
+        "LastUpdatedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the folder was last updated.</p>"
+        }
+      },
+      "documentation": "<p>A summary of the folder. </p>"
+    },
+    "FolderSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "FolderSummary"
+      },
+      "max": 100
+    },
+    "FolderType": {
+      "type": "string",
+      "enum": [
+        "SHARED"
+      ]
     },
     "GeoSpatialColumnGroup": {
       "type": "structure",
@@ -8683,6 +9603,111 @@
           "shape": "StatusCode",
           "documentation": "<p>The HTTP status of the request.</p>",
           "location": "statusCode"
+        }
+      }
+    },
+    "ListFolderMembersRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "FolderId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The AWS account ID.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>",
+          "location": "uri",
+          "locationName": "FolderId"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to be returned per request.</p>",
+          "box": true,
+          "location": "querystring",
+          "locationName": "max-results"
+        }
+      }
+    },
+    "ListFolderMembersResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code> </p>",
+          "location": "statusCode"
+        },
+        "FolderMemberList": {
+          "shape": "FolderMemberList",
+          "documentation": "<p>A structure that contains all of the folder members (dashboards, analyses, and datasets) in the folder.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The request ID.</p>"
+        }
+      }
+    },
+    "ListFoldersRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The AWS account ID.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next set of results, or null if there are no more results.</p>",
+          "location": "querystring",
+          "locationName": "next-token"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to be returned per request.</p>",
+          "box": true,
+          "location": "querystring",
+          "locationName": "max-results"
+        }
+      }
+    },
+    "ListFoldersResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code> </p>",
+          "location": "statusCode"
+        },
+        "FolderSummaryList": {
+          "shape": "FolderSummaryList",
+          "documentation": "<p>A structure that contains all of the folders in your AWS account. This structure provides basic information about the folders.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The request ID.</p>"
         }
       }
     },
@@ -9636,6 +10661,28 @@
       "max": 100,
       "min": 1
     },
+    "MemberIdArnPair": {
+      "type": "structure",
+      "members": {
+        "MemberId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The ID of the member.</p>"
+        },
+        "MemberArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the member.</p>"
+        }
+      },
+      "documentation": "<p>An object that consists of the member Amazon Resource Name (ARN) and member ID.</p>"
+    },
+    "MemberType": {
+      "type": "string",
+      "enum": [
+        "DASHBOARD",
+        "ANALYSIS",
+        "DATASET"
+      ]
+    },
     "MySqlParameters": {
       "type": "structure",
       "required": [
@@ -9817,6 +10864,14 @@
     "Password": {
       "type": "string",
       "max": 1024,
+      "min": 1
+    },
+    "Path": {
+      "type": "list",
+      "member": {
+        "shape": "Arn"
+      },
+      "max": 10,
       "min": 1
     },
     "PhysicalTable": {
@@ -10365,10 +11420,10 @@
         },
         "InputColumns": {
           "shape": "InputColumnList",
-          "documentation": "<p>A physical table type for as S3 data source.</p>"
+          "documentation": "<p>A physical table type for an S3 data source.</p> <note> <p>For non-JSON files, only <code>STRING</code> data types are supported in input columns.</p> </note>"
         }
       },
-      "documentation": "<p>A physical table type for as S3 data source.</p>"
+      "documentation": "<p>A physical table type for an S3 data source.</p>"
     },
     "SearchAnalysesRequest": {
       "type": "structure",
@@ -10467,6 +11522,56 @@
         "RequestId": {
           "shape": "String",
           "documentation": "<p>The AWS request ID for this operation.</p>"
+        }
+      }
+    },
+    "SearchFoldersRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "Filters"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The AWS account ID.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "Filters": {
+          "shape": "FolderSearchFilterList",
+          "documentation": "<p>The filters to apply to the search. Currently, you can search only by the parent folder ARN. For example, <code>\"Filters\": [ { \"Name\": \"PARENT_FOLDER_ARN\", \"Operator\": \"StringEquals\", \"Value\": \"arn:aws:quicksight:us-east-1:1:folder/folderId\" } ]</code>.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to be returned per request.</p>",
+          "box": true
+        }
+      }
+    },
+    "SearchFoldersResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>.</p>",
+          "location": "statusCode"
+        },
+        "FolderSummaryList": {
+          "shape": "FolderSummaryList",
+          "documentation": "<p>A structure that contains all of the folders in your AWS account. This structure provides basic information about the folders.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The request ID.</p>"
         }
       }
     },
@@ -12094,6 +13199,108 @@
           "shape": "StatusCode",
           "documentation": "<p>The HTTP status of the request.</p>",
           "location": "statusCode"
+        }
+      }
+    },
+    "UpdateFolderPermissionsRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "FolderId"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The AWS account ID.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>",
+          "location": "uri",
+          "locationName": "FolderId"
+        },
+        "GrantPermissions": {
+          "shape": "ResourcePermissionList",
+          "documentation": "<p>The permissions that you want to grant on a resource.</p>"
+        },
+        "RevokePermissions": {
+          "shape": "ResourcePermissionList",
+          "documentation": "<p>The permissions that you want to revoke from a resource.</p>"
+        }
+      }
+    },
+    "UpdateFolderPermissionsResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>.</p>"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN).</p>"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>"
+        },
+        "Permissions": {
+          "shape": "ResourcePermissionList",
+          "documentation": "<p>Information about the permissions on the dashboard.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The request ID.</p>"
+        }
+      }
+    },
+    "UpdateFolderRequest": {
+      "type": "structure",
+      "required": [
+        "AwsAccountId",
+        "FolderId",
+        "Name"
+      ],
+      "members": {
+        "AwsAccountId": {
+          "shape": "AwsAccountId",
+          "documentation": "<p>The AWS account ID.</p>",
+          "location": "uri",
+          "locationName": "AwsAccountId"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>",
+          "location": "uri",
+          "locationName": "FolderId"
+        },
+        "Name": {
+          "shape": "FolderName",
+          "documentation": "<p>The name of the folder.</p>"
+        }
+      }
+    },
+    "UpdateFolderResponse": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "StatusCode",
+          "documentation": "<p>The status. If succeeded, the status is <code>SC_OK</code>.</p>",
+          "location": "statusCode"
+        },
+        "Arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN).</p>"
+        },
+        "FolderId": {
+          "shape": "RestrictiveResourceId",
+          "documentation": "<p>The folder ID.</p>"
+        },
+        "RequestId": {
+          "shape": "String",
+          "documentation": "<p>The request ID.</p>"
         }
       }
     },
