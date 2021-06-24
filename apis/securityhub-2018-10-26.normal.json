@@ -2100,6 +2100,10 @@
     "AwsApiGatewayV2StageDetails": {
       "type": "structure",
       "members": {
+        "ClientCertificateId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of a client certificate for a stage. Supported only for WebSocket API calls.</p>"
+        },
         "CreatedDate": {
           "shape": "NonEmptyString",
           "documentation": "<p>Indicates when the stage was created.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
@@ -2680,7 +2684,7 @@
       "members": {
         "EncryptionKey": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the build output artifacts.</p> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK alias (using the format alias/alias-name). </p>"
+          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the build output artifacts.</p> <p>You can specify either the ARN of the CMK or, if available, the CMK alias (using the format alias/alias-name). </p>"
         },
         "Environment": {
           "shape": "AwsCodeBuildProjectEnvironment",
@@ -2732,7 +2736,7 @@
       "members": {
         "Credential": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The Amazon Resource Name (ARN) or name of credentials created using AWS Secrets Manager.</p> <note> <p>The credential can use the name of the credentials only if they exist in your current AWS Region. </p> </note>"
+          "documentation": "<p>The ARN or name of credentials created using AWS Secrets Manager.</p> <note> <p>The credential can use the name of the credentials only if they exist in your current AWS Region. </p> </note>"
         },
         "CredentialProvider": {
           "shape": "NonEmptyString",
@@ -3271,9 +3275,29 @@
         "LaunchedAt": {
           "shape": "NonEmptyString",
           "documentation": "<p>Indicates when the instance was launched.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "NetworkInterfaces": {
+          "shape": "AwsEc2InstanceNetworkInterfacesList",
+          "documentation": "<p>The identifiers of the network interfaces for the EC2 instance. The details for each network interface are in a corresponding <code>AwsEc2NetworkInterfacesDetails</code> object.</p>"
         }
       },
-      "documentation": "<p>The details of an Amazon EC2 instance.</p>"
+      "documentation": "<p>The details of an EC2 instance.</p>"
+    },
+    "AwsEc2InstanceNetworkInterfacesDetails": {
+      "type": "structure",
+      "members": {
+        "NetworkInterfaceId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the network interface. The details are in a corresponding <code>AwsEc2NetworkInterfacesDetails</code> object.</p>"
+        }
+      },
+      "documentation": "<p>Identifies a network interface for the EC2 instance.</p>"
+    },
+    "AwsEc2InstanceNetworkInterfacesList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEc2InstanceNetworkInterfacesDetails"
+      }
     },
     "AwsEc2NetworkAclAssociation": {
       "type": "structure",
@@ -3636,7 +3660,7 @@
         },
         "UserId": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The ID of an AWS account.</p> <p>For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned.</p> <p>[EC2-Classic] Required when adding or removing rules that reference a security group in another AWS. </p>"
+          "documentation": "<p>The ID of an AWS account.</p> <p>For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned.</p> <p>[EC2-Classic] Required when adding or removing rules that reference a security group in another VPC. </p>"
         },
         "VpcId": {
           "shape": "NonEmptyString",
@@ -3796,6 +3820,954 @@
         }
       },
       "documentation": "<p>Details about an EC2 VPC.</p>"
+    },
+    "AwsEcsClusterClusterSettingsDetails": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the setting.</p>"
+        },
+        "Value": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The value of the setting.</p>"
+        }
+      },
+      "documentation": "<p>Indicates whether to enable CloudWatch Container Insights for the ECS cluster.</p>"
+    },
+    "AwsEcsClusterClusterSettingsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsClusterClusterSettingsDetails"
+      }
+    },
+    "AwsEcsClusterConfigurationDetails": {
+      "type": "structure",
+      "members": {
+        "ExecuteCommandConfiguration": {
+          "shape": "AwsEcsClusterConfigurationExecuteCommandConfigurationDetails",
+          "documentation": "<p>Contains the run command configuration for the cluster.</p>"
+        }
+      },
+      "documentation": "<p>The run command configuration for the cluster.</p>"
+    },
+    "AwsEcsClusterConfigurationExecuteCommandConfigurationDetails": {
+      "type": "structure",
+      "members": {
+        "KmsKeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The identifier of the KMS key that is used to encrypt the data between the local client and the container.</p>"
+        },
+        "LogConfiguration": {
+          "shape": "AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails",
+          "documentation": "<p>The log configuration for the results of the run command actions. Required if <code>Logging</code> is <code>NONE</code>.</p>"
+        },
+        "Logging": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The log setting to use for redirecting logs for run command results.</p>"
+        }
+      },
+      "documentation": "<p>Contains the run command configuration for the cluster.</p>"
+    },
+    "AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails": {
+      "type": "structure",
+      "members": {
+        "CloudWatchEncryptionEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to enable encryption on the CloudWatch logs.</p>"
+        },
+        "CloudWatchLogGroupName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the CloudWatch log group to send the logs to.</p>"
+        },
+        "S3BucketName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the S3 bucket to send logs to.</p>"
+        },
+        "S3EncryptionEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to encrypt the logs that are sent to the S3 bucket.</p>"
+        },
+        "S3KeyPrefix": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Identifies the folder in the S3 bucket to send the logs to.</p>"
+        }
+      },
+      "documentation": "<p>The log configuration for the results of the run command actions.</p>"
+    },
+    "AwsEcsClusterDefaultCapacityProviderStrategyDetails": {
+      "type": "structure",
+      "members": {
+        "Base": {
+          "shape": "Integer",
+          "documentation": "<p>The minimum number of tasks to run on the specified capacity provider.</p>"
+        },
+        "CapacityProvider": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the capacity provider.</p>"
+        },
+        "Weight": {
+          "shape": "Integer",
+          "documentation": "<p>The relative percentage of the total number of tasks launched that should use the capacity provider.</p>"
+        }
+      },
+      "documentation": "<p>The default capacity provider strategy for the cluster. The default capacity provider strategy is used when services or tasks are run without a specified launch type or capacity provider strategy.</p>"
+    },
+    "AwsEcsClusterDefaultCapacityProviderStrategyList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsClusterDefaultCapacityProviderStrategyDetails"
+      }
+    },
+    "AwsEcsClusterDetails": {
+      "type": "structure",
+      "members": {
+        "CapacityProviders": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The short name of one or more capacity providers to associate with the cluster.</p>"
+        },
+        "ClusterSettings": {
+          "shape": "AwsEcsClusterClusterSettingsList",
+          "documentation": "<p>The setting to use to create the cluster. Specifically used to configure whether to enable CloudWatch Container Insights for the cluster.</p>"
+        },
+        "Configuration": {
+          "shape": "AwsEcsClusterConfigurationDetails",
+          "documentation": "<p>The run command configuration for the cluster.</p>"
+        },
+        "DefaultCapacityProviderStrategy": {
+          "shape": "AwsEcsClusterDefaultCapacityProviderStrategyList",
+          "documentation": "<p>The default capacity provider strategy for the cluster. The default capacity provider strategy is used when services or tasks are run without a specified launch type or capacity provider strategy.</p>"
+        }
+      },
+      "documentation": "<p>provides details about an ECS cluster.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails": {
+      "type": "structure",
+      "members": {
+        "Condition": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The dependency condition of the dependent container. Indicates the required status of the dependent container before the current container can start.</p>"
+        },
+        "ContainerName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the dependent container.</p>"
+        }
+      },
+      "documentation": "<p>A dependency that is defined for container startup and shutdown.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsDependsOnList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsDetails": {
+      "type": "structure",
+      "members": {
+        "Command": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The command that is passed to the container.</p>"
+        },
+        "Cpu": {
+          "shape": "Integer",
+          "documentation": "<p>The number of CPU units reserved for the container.</p>"
+        },
+        "DependsOn": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsDependsOnList",
+          "documentation": "<p>The dependencies that are defined for container startup and shutdown.</p>"
+        },
+        "DisableNetworking": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to disable networking within the container.</p>"
+        },
+        "DnsSearchDomains": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>A list of DNS search domains that are presented to the container.</p>"
+        },
+        "DnsServers": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>A list of DNS servers that are presented to the container.</p>"
+        },
+        "DockerLabels": {
+          "shape": "FieldMap",
+          "documentation": "<p>A key-value map of labels to add to the container.</p>"
+        },
+        "DockerSecurityOptions": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>A list of strings to provide custom labels for SELinux and AppArmor multi-level security systems.</p>"
+        },
+        "EntryPoint": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The entry point that is passed to the container.</p>"
+        },
+        "Environment": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsEnvironmentList",
+          "documentation": "<p>The environment variables to pass to a container.</p>"
+        },
+        "EnvironmentFiles": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesList",
+          "documentation": "<p>A list of files containing the environment variables to pass to a container.</p>"
+        },
+        "Essential": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the container is essential. All tasks must have at least one essential container.</p>"
+        },
+        "ExtraHosts": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsExtraHostsList",
+          "documentation": "<p>A list of hostnames and IP address mappings to append to the <b>/etc/hosts</b> file on the container.</p>"
+        },
+        "FirelensConfiguration": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails",
+          "documentation": "<p>The FireLens configuration for the container. Specifies and configures a log router for container logs.</p>"
+        },
+        "HealthCheck": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails",
+          "documentation": "<p>The container health check command and associated configuration parameters for the container.</p>"
+        },
+        "Hostname": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The hostname to use for the container.</p>"
+        },
+        "Image": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The image used to start the container.</p>"
+        },
+        "Interactive": {
+          "shape": "Boolean",
+          "documentation": "<p>If set to true, then containerized applications can be deployed that require <code>stdin</code> or a <code>tty</code> to be allocated.</p>"
+        },
+        "Links": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>A list of links for the container in the form <code> <i>container_name</i>:<i>alias</i> </code>. Allows containers to communicate with each other without the need for port mappings.</p>"
+        },
+        "LinuxParameters": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails",
+          "documentation": "<p>Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.</p>"
+        },
+        "LogConfiguration": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails",
+          "documentation": "<p>The log configuration specification for the container.</p>"
+        },
+        "Memory": {
+          "shape": "Integer",
+          "documentation": "<p>The amount (in MiB) of memory to present to the container. If the container attempts to exceed the memory specified here, the container is shut down. The total amount of memory reserved for all containers within a task must be lower than the task memory value, if one is specified.</p>"
+        },
+        "MemoryReservation": {
+          "shape": "Integer",
+          "documentation": "<p>The soft limit (in MiB) of memory to reserve for the container.</p>"
+        },
+        "MountPoints": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsMountPointsList",
+          "documentation": "<p>The mount points for the data volumes in the container.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the container.</p>"
+        },
+        "PortMappings": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsPortMappingsList",
+          "documentation": "<p>The list of port mappings for the container.</p>"
+        },
+        "Privileged": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the container is given elevated privileges on the host container instance. The elevated privileges are similar to the root user.</p>"
+        },
+        "PseudoTerminal": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to allocate a TTY to the container.</p>"
+        },
+        "ReadonlyRootFilesystem": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the container is given read-only access to its root file system.</p>"
+        },
+        "RepositoryCredentials": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails",
+          "documentation": "<p>The private repository authentication credentials to use.</p>"
+        },
+        "ResourceRequirements": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsList",
+          "documentation": "<p>The type and amount of a resource to assign to a container. The only supported resource is a GPU.</p>"
+        },
+        "Secrets": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsSecretsList",
+          "documentation": "<p>The secrets to pass to the container.</p>"
+        },
+        "StartTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>The number of seconds to wait before giving up on resolving dependencies for a container. </p>"
+        },
+        "StopTimeout": {
+          "shape": "Integer",
+          "documentation": "<p>The number of seconds to wait before the container is stopped if it doesn't shut down normally on its own.</p>"
+        },
+        "SystemControls": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsSystemControlsList",
+          "documentation": "<p>A list of namespaced kernel parameters to set in the container.</p>"
+        },
+        "Ulimits": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsUlimitsList",
+          "documentation": "<p>A list of ulimits to set in the container. </p>"
+        },
+        "User": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The user to use inside the container.</p> <p>The value can use one of the following formats.</p> <ul> <li> <p> <code> <i>user</i> </code> </p> </li> <li> <p> <code> <i>user</i> </code>:<code> <i>group</i> </code> </p> </li> <li> <p> <code> <i>uid</i> </code> </p> </li> <li> <p> <code> <i>uid</i> </code>:<code> <i>gid</i> </code> </p> </li> <li> <p> <code> <i>user</i> </code>:<code> <i>gid</i> </code> </p> </li> <li> <p> <code> <i>uid</i> </code>:<code> <i>group</i> </code> </p> </li> </ul>"
+        },
+        "VolumesFrom": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsVolumesFromList",
+          "documentation": "<p>Data volumes to mount from another container.</p>"
+        },
+        "WorkingDirectory": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The working directory in which to run commands inside the container.</p>"
+        }
+      },
+      "documentation": "<p>A container definition that describes a container in the task.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the environment variable.</p>"
+        },
+        "Value": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The value of the environment variable.</p>"
+        }
+      },
+      "documentation": "<p>An environment variable to pass to the container.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of environment file.</p>"
+        },
+        "Value": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the S3 object that contains the environment variable file.</p>"
+        }
+      },
+      "documentation": "<p>A file that contain environment variables to pass to a container.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsEnvironmentList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails": {
+      "type": "structure",
+      "members": {
+        "Hostname": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The hostname to use in the <b>/etc/hosts</b> entry.</p>"
+        },
+        "IpAddress": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The IP address to use in the <b>/etc/hosts</b> entry.</p>"
+        }
+      },
+      "documentation": "<p>A hostname and IP address mapping to append to the <b>/etc/hosts</b> file on the container.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsExtraHostsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails": {
+      "type": "structure",
+      "members": {
+        "Options": {
+          "shape": "FieldMap",
+          "documentation": "<p>The options to use to configure the log router.</p> <p>The valid option keys are as follows:</p> <ul> <li> <p> <code>enable-ecs-log-metadata</code>. The value can be <code>true</code> or <code>false</code>.</p> </li> <li> <p> <code>config-file-type</code>. The value can be <code>s3</code> or <code>file</code>.</p> </li> <li> <p> <code>config-file-value</code>. The value is either an S3 ARN or a file path.</p> </li> </ul>"
+        },
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The log router to use. </p>"
+        }
+      },
+      "documentation": "<p>The FireLens configuration for the container. The configuration specifies and configures a log router for container logs.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails": {
+      "type": "structure",
+      "members": {
+        "Command": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The command that the container runs to determine whether it is healthy.</p>"
+        },
+        "Interval": {
+          "shape": "Integer",
+          "documentation": "<p>The time period in seconds between each health check execution. The default value is 30 seconds.</p>"
+        },
+        "Retries": {
+          "shape": "Integer",
+          "documentation": "<p>The number of times to retry a failed health check before the container is considered unhealthy. The default value is 3.</p>"
+        },
+        "StartPeriod": {
+          "shape": "Integer",
+          "documentation": "<p>The optional grace period in seconds that allows containers time to bootstrap before failed health checks count towards the maximum number of retries.</p>"
+        },
+        "Timeout": {
+          "shape": "Integer",
+          "documentation": "<p>The time period in seconds to wait for a health check to succeed before it is considered a failure. The default value is 5.</p>"
+        }
+      },
+      "documentation": "<p>The container health check command and associated configuration parameters for the container.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails": {
+      "type": "structure",
+      "members": {
+        "Add": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The Linux capabilities for the container that are added to the default configuration provided by Docker.</p>"
+        },
+        "Drop": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The Linux capabilities for the container that are dropped from the default configuration provided by Docker.</p>"
+        }
+      },
+      "documentation": "<p>The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails": {
+      "type": "structure",
+      "members": {
+        "Capabilities": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails",
+          "documentation": "<p>The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.</p>"
+        },
+        "Devices": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesList",
+          "documentation": "<p>The host devices to expose to the container.</p>"
+        },
+        "InitProcessEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to run an <code>init</code> process inside the container that forwards signals and reaps processes. </p>"
+        },
+        "MaxSwap": {
+          "shape": "Integer",
+          "documentation": "<p>The total amount of swap memory (in MiB) that a container can use.</p>"
+        },
+        "SharedMemorySize": {
+          "shape": "Integer",
+          "documentation": "<p>The value for the size (in MiB) of the <b>/dev/shm</b> volume.</p>"
+        },
+        "Swappiness": {
+          "shape": "Integer",
+          "documentation": "<p>Configures the container's memory swappiness behavior. Determines how aggressively pages are swapped. The higher the value, the more aggressive the swappiness. The default is 60.</p>"
+        },
+        "Tmpfs": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsList",
+          "documentation": "<p>The container path, mount options, and size (in MiB) of the tmpfs mount.</p>"
+        }
+      },
+      "documentation": "<p>&gt;Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails": {
+      "type": "structure",
+      "members": {
+        "ContainerPath": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The path inside the container at which to expose the host device.</p>"
+        },
+        "HostPath": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The path for the device on the host container instance.</p>"
+        },
+        "Permissions": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The explicit permissions to provide to the container for the device. By default, the container has permissions for read, write, and <code>mknod</code> for the device.</p>"
+        }
+      },
+      "documentation": "<p>A host device to expose to the container.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails": {
+      "type": "structure",
+      "members": {
+        "ContainerPath": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The absolute file path where the tmpfs volume is to be mounted.</p>"
+        },
+        "MountOptions": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The list of tmpfs volume mount options.</p>"
+        },
+        "Size": {
+          "shape": "Integer",
+          "documentation": "<p>The maximum size (in MiB) of the tmpfs volume.</p>"
+        }
+      },
+      "documentation": "<p>The container path, mount options, and size (in MiB) of a tmpfs mount.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionContainerDefinitionsDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails": {
+      "type": "structure",
+      "members": {
+        "LogDriver": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The log driver to use for the container.</p>"
+        },
+        "Options": {
+          "shape": "FieldMap",
+          "documentation": "<p>The configuration options to send to the log driver. Requires version 1.19 of the Docker Remote API or greater on your container instance.</p>"
+        },
+        "SecretOptions": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsList",
+          "documentation": "<p>The secrets to pass to the log configuration.</p>"
+        }
+      },
+      "documentation": "<p>The log configuration specification for the container.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the secret.</p>"
+        },
+        "ValueFrom": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The secret to expose to the container.</p> <p>The value is either the full ARN of the Secrets Manager secret or the full ARN of the parameter in the Systems Manager Parameter Store.</p>"
+        }
+      },
+      "documentation": "<p>A secret to pass to the log configuration.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails": {
+      "type": "structure",
+      "members": {
+        "ContainerPath": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The path on the container to mount the host volume at.</p>"
+        },
+        "ReadOnly": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the container has read-only access to the volume.</p>"
+        },
+        "SourceVolume": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the volume to mount. Must match the name of a volume listed in <code>VolumeDetails</code> for the task definition.</p>"
+        }
+      },
+      "documentation": "<p>A mount point for the data volumes in the container.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsMountPointsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails": {
+      "type": "structure",
+      "members": {
+        "ContainerPort": {
+          "shape": "Integer",
+          "documentation": "<p>The port number on the container that is bound to the user-specified or automatically assigned host port.</p>"
+        },
+        "HostPort": {
+          "shape": "Integer",
+          "documentation": "<p>The port number on the container instance to reserve for the container.</p>"
+        },
+        "Protocol": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The protocol used for the port mapping. The default is <code>tcp</code>.</p>"
+        }
+      },
+      "documentation": "<p>A port mapping for the container.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsPortMappingsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails": {
+      "type": "structure",
+      "members": {
+        "CredentialsParameter": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the secret that contains the private repository credentials.</p>"
+        }
+      },
+      "documentation": "<p>The private repository authentication credentials to use.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of resource to assign to a container.</p>"
+        },
+        "Value": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The value for the specified resource type.</p> <p>For <code>GPU</code>, the value is the number of physical GPUs the Amazon ECS container agent reserves for the container.</p> <p>For <code>InferenceAccelerator</code>, the value should match the <code>DeviceName</code> attribute of an entry in <code>InferenceAccelerators</code>.</p>"
+        }
+      },
+      "documentation": "<p>A resource to assign to a container.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the secret.</p>"
+        },
+        "ValueFrom": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The secret to expose to the container. The value is either the full ARN of the Secrets Manager secret or the full ARN of the parameter in the Systems Manager Parameter Store.</p>"
+        }
+      },
+      "documentation": "<p>A secret to pass to the container.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsSecretsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails": {
+      "type": "structure",
+      "members": {
+        "Namespace": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The namespaced kernel parameter for which to set a value.</p>"
+        },
+        "Value": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The value of the parameter.</p>"
+        }
+      },
+      "documentation": "<p>A namespaced kernel parameter to set in the container.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsSystemControlsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails": {
+      "type": "structure",
+      "members": {
+        "HardLimit": {
+          "shape": "Integer",
+          "documentation": "<p>The hard limit for the ulimit type.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of the ulimit.</p>"
+        },
+        "SoftLimit": {
+          "shape": "Integer",
+          "documentation": "<p>The soft limit for the ulimit type.</p>"
+        }
+      },
+      "documentation": "<p>A ulimit to set in the container.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsUlimitsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails": {
+      "type": "structure",
+      "members": {
+        "ReadOnly": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the container has read-only access to the volume.</p>"
+        },
+        "SourceContainer": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of another container within the same task definition from which to mount volumes.</p>"
+        }
+      },
+      "documentation": "<p>A data volume to mount from another container.</p>"
+    },
+    "AwsEcsTaskDefinitionContainerDefinitionsVolumesFromList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionDetails": {
+      "type": "structure",
+      "members": {
+        "ContainerDefinitions": {
+          "shape": "AwsEcsTaskDefinitionContainerDefinitionsList",
+          "documentation": "<p>The container definitions that describe the containers that make up the task.</p>"
+        },
+        "Cpu": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The number of CPU units used by the task.</p>"
+        },
+        "ExecutionRoleArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the task execution role that grants the container agent permission to make API calls on behalf of the container user.</p>"
+        },
+        "Family": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of a family that this task definition is registered to.</p>"
+        },
+        "InferenceAccelerators": {
+          "shape": "AwsEcsTaskDefinitionInferenceAcceleratorsList",
+          "documentation": "<p>The Elastic Inference accelerators to use for the containers in the task.</p>"
+        },
+        "IpcMode": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The IPC resource namespace to use for the containers in the task.</p>"
+        },
+        "Memory": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The amount (in MiB) of memory used by the task.</p>"
+        },
+        "NetworkMode": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Docker networking mode to use for the containers in the task.</p>"
+        },
+        "PidMode": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The process namespace to use for the containers in the task.</p>"
+        },
+        "PlacementConstraints": {
+          "shape": "AwsEcsTaskDefinitionPlacementConstraintsList",
+          "documentation": "<p>The placement constraint objects to use for tasks.</p>"
+        },
+        "ProxyConfiguration": {
+          "shape": "AwsEcsTaskDefinitionProxyConfigurationDetails",
+          "documentation": "<p>The configuration details for the App Mesh proxy.</p>"
+        },
+        "RequiresCompatibilities": {
+          "shape": "NonEmptyStringList",
+          "documentation": "<p>The task launch types that the task definition was validated against.</p>"
+        },
+        "TaskRoleArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The short name or ARN of the IAM role that grants containers in the task permission to call AWS API operations on your behalf.</p>"
+        },
+        "Volumes": {
+          "shape": "AwsEcsTaskDefinitionVolumesList",
+          "documentation": "<p>The data volume definitions for the task.</p>"
+        }
+      },
+      "documentation": "<p>details about a task definition. A task definition describes the container and volume definitions of an Amazon Elastic Container Service task.</p>"
+    },
+    "AwsEcsTaskDefinitionInferenceAcceleratorsDetails": {
+      "type": "structure",
+      "members": {
+        "DeviceName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Elastic Inference accelerator device name.</p>"
+        },
+        "DeviceType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Elastic Inference accelerator type to use.</p>"
+        }
+      },
+      "documentation": "<p>An Elastic Inference accelerator to use for the containers in the task.</p>"
+    },
+    "AwsEcsTaskDefinitionInferenceAcceleratorsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionInferenceAcceleratorsDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionPlacementConstraintsDetails": {
+      "type": "structure",
+      "members": {
+        "Expression": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A cluster query language expression to apply to the constraint.</p>"
+        },
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of constraint.</p>"
+        }
+      },
+      "documentation": "<p>A placement constraint object to use for tasks.</p>"
+    },
+    "AwsEcsTaskDefinitionPlacementConstraintsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionPlacementConstraintsDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionProxyConfigurationDetails": {
+      "type": "structure",
+      "members": {
+        "ContainerName": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the container that will serve as the App Mesh proxy.</p>"
+        },
+        "ProxyConfigurationProperties": {
+          "shape": "AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesList",
+          "documentation": "<p>The set of network configuration parameters to provide to the Container Network Interface (CNI) plugin, specified as key-value pairs.</p>"
+        },
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The proxy type.</p>"
+        }
+      },
+      "documentation": "<p>The configuration details for the App Mesh proxy.</p>"
+    },
+    "AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the property.</p>"
+        },
+        "Value": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The value of the property.</p>"
+        }
+      },
+      "documentation": "<p>A network configuration parameter to provide to the Container Network Interface (CNI) plugin.</p>"
+    },
+    "AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails"
+      }
+    },
+    "AwsEcsTaskDefinitionVolumesDetails": {
+      "type": "structure",
+      "members": {
+        "DockerVolumeConfiguration": {
+          "shape": "AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails",
+          "documentation": "<p>Information about a Docker volume.</p>"
+        },
+        "EfsVolumeConfiguration": {
+          "shape": "AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails",
+          "documentation": "<p>Information about the Amazon Elastic File System file system that is used for task storage.</p>"
+        },
+        "Host": {
+          "shape": "AwsEcsTaskDefinitionVolumesHostDetails",
+          "documentation": "<p>Information about a bind mount host volume.</p>"
+        },
+        "Name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the data volume.</p>"
+        }
+      },
+      "documentation": "<p>A data volume to mount from another container.</p>"
+    },
+    "AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails": {
+      "type": "structure",
+      "members": {
+        "Autoprovision": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether to create the Docker volume automatically if it does not already exist.</p>"
+        },
+        "Driver": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Docker volume driver to use.</p>"
+        },
+        "DriverOpts": {
+          "shape": "FieldMap",
+          "documentation": "<p>A map of Docker driver-specific options that are passed through.</p>"
+        },
+        "Labels": {
+          "shape": "FieldMap",
+          "documentation": "<p>Custom metadata to add to the Docker volume.</p>"
+        },
+        "Scope": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The scope for the Docker volume that determines its lifecycle. Docker volumes that are scoped to a task are provisioned automatically when the task starts and destroyed when the task stops. Docker volumes that are shared persist after the task stops.</p>"
+        }
+      },
+      "documentation": "<p>Information about a Docker volume.</p>"
+    },
+    "AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails": {
+      "type": "structure",
+      "members": {
+        "AccessPointId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon EFS access point identifier to use.</p>"
+        },
+        "Iam": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Whether to use the Amazon ECS task IAM role defined in a task definition when mounting the Amazon EFS file system.</p>"
+        }
+      },
+      "documentation": "<p/>"
+    },
+    "AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails": {
+      "type": "structure",
+      "members": {
+        "AuthorizationConfig": {
+          "shape": "AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails",
+          "documentation": "<p>The authorization configuration details for the Amazon EFS file system.</p>"
+        },
+        "FilesystemId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon EFS file system identifier to use.</p>"
+        },
+        "RootDirectory": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The directory within the Amazon EFS file system to mount as the root directory inside the host.</p>"
+        },
+        "TransitEncryption": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Whether to enable encryption for Amazon EFS data in transit between the Amazon ECS host and the Amazon EFS server. </p>"
+        },
+        "TransitEncryptionPort": {
+          "shape": "Integer",
+          "documentation": "<p>The port to use when sending encrypted data between the Amazon ECS host and the Amazon EFS server.</p>"
+        }
+      },
+      "documentation": "<p>Information about the Amazon Elastic File System file system that is used for task storage.</p>"
+    },
+    "AwsEcsTaskDefinitionVolumesHostDetails": {
+      "type": "structure",
+      "members": {
+        "SourcePath": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The path on the host container instance that is presented to the container.</p>"
+        }
+      },
+      "documentation": "<p>Information about a bind mount host volume.</p>"
+    },
+    "AwsEcsTaskDefinitionVolumesList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsEcsTaskDefinitionVolumesDetails"
+      }
     },
     "AwsElasticBeanstalkEnvironmentDetails": {
       "type": "structure",
@@ -3968,9 +4940,17 @@
           "shape": "AwsElasticsearchDomainEncryptionAtRestOptions",
           "documentation": "<p>Details about the configuration for encryption at rest.</p>"
         },
+        "LogPublishingOptions": {
+          "shape": "AwsElasticsearchDomainLogPublishingOptions",
+          "documentation": "<p>Configures the CloudWatch Logs to publish for the Elasticsearch domain.</p>"
+        },
         "NodeToNodeEncryptionOptions": {
           "shape": "AwsElasticsearchDomainNodeToNodeEncryptionOptions",
           "documentation": "<p>Details about the configuration for node-to-node encryption.</p>"
+        },
+        "ServiceSoftwareOptions": {
+          "shape": "AwsElasticsearchDomainServiceSoftwareOptions",
+          "documentation": "<p>Information about the status of a domain relative to the latest service software.</p>"
         },
         "VPCOptions": {
           "shape": "AwsElasticsearchDomainVPCOptions",
@@ -4007,6 +4987,34 @@
       },
       "documentation": "<p>Details about the configuration for encryption at rest.</p>"
     },
+    "AwsElasticsearchDomainLogPublishingOptions": {
+      "type": "structure",
+      "members": {
+        "IndexSlowLogs": {
+          "shape": "AwsElasticsearchDomainLogPublishingOptionsLogConfig",
+          "documentation": "<p>Configures the Elasticsearch index logs publishing.</p>"
+        },
+        "SearchSlowLogs": {
+          "shape": "AwsElasticsearchDomainLogPublishingOptionsLogConfig",
+          "documentation": "<p>Configures the Elasticsearch search slow log publishing.</p>"
+        }
+      },
+      "documentation": "<p>configures the CloudWatch Logs to publish for the Elasticsearch domain.</p>"
+    },
+    "AwsElasticsearchDomainLogPublishingOptionsLogConfig": {
+      "type": "structure",
+      "members": {
+        "CloudWatchLogsLogGroupArn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ARN of the CloudWatch Logs group to publish the logs to.</p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether the log publishing is enabled.</p>"
+        }
+      },
+      "documentation": "<p>The log configuration.</p>"
+    },
     "AwsElasticsearchDomainNodeToNodeEncryptionOptions": {
       "type": "structure",
       "members": {
@@ -4016,6 +5024,40 @@
         }
       },
       "documentation": "<p>Details about the configuration for node-to-node encryption.</p>"
+    },
+    "AwsElasticsearchDomainServiceSoftwareOptions": {
+      "type": "structure",
+      "members": {
+        "AutomatedUpdateDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The epoch time when the deployment window closes for required updates. After this time, Amazon Elasticsearch Service schedules the software upgrade automatically.</p>"
+        },
+        "Cancellable": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether a request to update the domain can be canceled.</p>"
+        },
+        "CurrentVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The version of the service software that is currently installed on the domain.</p>"
+        },
+        "Description": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A more detailed description of the service software status.</p>"
+        },
+        "NewVersion": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The most recent version of the service software.</p>"
+        },
+        "UpdateAvailable": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether a service software update is available for the domain.</p>"
+        },
+        "UpdateStatus": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The status of the service software update.</p>"
+        }
+      },
+      "documentation": "<p>Information about the state of the domain relative to the latest service software.</p>"
     },
     "AwsElasticsearchDomainVPCOptions": {
       "type": "structure",
@@ -4424,7 +5466,7 @@
           "shape": "NonEmptyString",
           "documentation": "<p>The user associated with the IAM access key related to a finding.</p> <p>The <code>UserName</code> parameter has been replaced with the <code>PrincipalName</code> parameter because access keys can also be assigned to principals that are not IAM users.</p>",
           "deprecated": true,
-          "deprecatedMessage": "This field is deprecated, use PrincipalName instead."
+          "deprecatedMessage": "This filter is deprecated. Instead, use PrincipalName."
         },
         "Status": {
           "shape": "AwsIamAccessKeyStatus",
@@ -4930,7 +5972,7 @@
       "members": {
         "TargetArn": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.</p>"
+          "documentation": "<p>The ARN of an Amazon SQS queue or Amazon SNS topic.</p>"
         }
       },
       "documentation": "<p>The dead-letter queue for failed asynchronous invocations.</p>"
@@ -4980,7 +6022,7 @@
         },
         "MemorySize": {
           "shape": "Integer",
-          "documentation": "<p>The memory that's allocated to the function.</p>"
+          "documentation": "<p>The memory that is allocated to the function.</p>"
         },
         "RevisionId": {
           "shape": "NonEmptyString",
@@ -5039,14 +6081,14 @@
           "documentation": "<p>The error message.</p>"
         }
       },
-      "documentation": "<p>Error messages for environment variables that couldn't be applied.</p>"
+      "documentation": "<p>Error messages for environment variables that could not be applied.</p>"
     },
     "AwsLambdaFunctionLayer": {
       "type": "structure",
       "members": {
         "Arn": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the function layer.</p>"
+          "documentation": "<p>The ARN of the function layer.</p>"
         },
         "CodeSize": {
           "shape": "Integer",
@@ -5087,7 +6129,7 @@
           "documentation": "<p>The ID of the VPC.</p>"
         }
       },
-      "documentation": "<p>The VPC security groups and subnets that are attached to a Lambda function. For more information, see VPC Settings.</p>"
+      "documentation": "<p>The VPC security groups and subnets that are attached to a Lambda function.</p>"
     },
     "AwsLambdaLayerVersionDetails": {
       "type": "structure",
@@ -5443,7 +6485,7 @@
       "members": {
         "RoleArn": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that is associated with the DB instance.</p>"
+          "documentation": "<p>The ARN of the IAM role that is associated with the DB instance.</p>"
         },
         "FeatureName": {
           "shape": "NonEmptyString",
@@ -6597,6 +7639,210 @@
       },
       "documentation": "<p>provides information about the Amazon S3 Public Access Block configuration for accounts.</p>"
     },
+    "AwsS3BucketBucketLifecycleConfigurationDetails": {
+      "type": "structure",
+      "members": {
+        "Rules": {
+          "shape": "AwsS3BucketBucketLifecycleConfigurationRulesList",
+          "documentation": "<p>The lifecycle rules.</p>"
+        }
+      },
+      "documentation": "<p>The lifecycle configuration for the objects in the S3 bucket.</p>"
+    },
+    "AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails": {
+      "type": "structure",
+      "members": {
+        "DaysAfterInitiation": {
+          "shape": "Integer",
+          "documentation": "<p>The number of days after which Amazon S3 cancels an incomplete multipart upload.</p>"
+        }
+      },
+      "documentation": "<p>Information about what Amazon S3 does when a multipart upload is incomplete.</p>"
+    },
+    "AwsS3BucketBucketLifecycleConfigurationRulesDetails": {
+      "type": "structure",
+      "members": {
+        "AbortIncompleteMultipartUpload": {
+          "shape": "AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails",
+          "documentation": "<p>How Amazon S3 responds when a multipart upload is incomplete. Specifically, provides a number of days before Amazon S3 cancels the entire upload.</p>"
+        },
+        "ExpirationDate": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The date when objects are moved or deleted.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "ExpirationInDays": {
+          "shape": "Integer",
+          "documentation": "<p>The length in days of the lifetime for objects that are subject to the rule.</p>"
+        },
+        "ExpiredObjectDeleteMarker": {
+          "shape": "Boolean",
+          "documentation": "<p>Whether Amazon S3 removes a delete marker that has no noncurrent versions. If set to <code>true</code>, the delete marker is expired. If set to <code>false</code>, the policy takes no action.</p> <p>If you provide <code>ExpiredObjectDeleteMarker</code>, you cannot provide <code>ExpirationInDays</code> or <code>ExpirationDate</code>.</p>"
+        },
+        "Filter": {
+          "shape": "AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails",
+          "documentation": "<p>Identifies the objects that a rule applies to.</p>"
+        },
+        "ID": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The unique identifier of the rule.</p>"
+        },
+        "NoncurrentVersionExpirationInDays": {
+          "shape": "Integer",
+          "documentation": "<p>The number of days that an object is noncurrent before Amazon S3 can perform the associated action.</p>"
+        },
+        "NoncurrentVersionTransitions": {
+          "shape": "AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList",
+          "documentation": "<p>Transition rules that describe when noncurrent objects transition to a specified storage class.</p>"
+        },
+        "Prefix": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A prefix that identifies one or more objects that the rule applies to.</p>"
+        },
+        "Status": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The current status of the rule. Indicates whether the rule is currently being applied.</p>"
+        },
+        "Transitions": {
+          "shape": "AwsS3BucketBucketLifecycleConfigurationRulesTransitionsList",
+          "documentation": "<p>Transition rules that indicate when objects transition to a specified storage class.</p>"
+        }
+      },
+      "documentation": "<p>Configuration for a lifecycle rule.</p>"
+    },
+    "AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails": {
+      "type": "structure",
+      "members": {
+        "Predicate": {
+          "shape": "AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails",
+          "documentation": "<p>The configuration for the filter.</p>"
+        }
+      },
+      "documentation": "<p>Identifies the objects that a rule applies to.</p>"
+    },
+    "AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails": {
+      "type": "structure",
+      "members": {
+        "Operands": {
+          "shape": "AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsList",
+          "documentation": "<p>The values to use for the filter.</p>"
+        },
+        "Prefix": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A prefix filter.</p>"
+        },
+        "Tag": {
+          "shape": "AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails",
+          "documentation": "<p>A tag filter.</p>"
+        },
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Whether to use <code>AND</code> or <code>OR</code> to join the operands.</p>"
+        }
+      },
+      "documentation": "<p>The configuration for the filter.</p>"
+    },
+    "AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails": {
+      "type": "structure",
+      "members": {
+        "Prefix": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Prefix text for matching objects.</p>"
+        },
+        "Tag": {
+          "shape": "AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails",
+          "documentation": "<p>A tag that is assigned to matching objects.</p>"
+        },
+        "Type": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The type of filter value.</p>"
+        }
+      },
+      "documentation": "<p>A value to use for the filter.</p>"
+    },
+    "AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails"
+      }
+    },
+    "AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The tag key.</p>"
+        },
+        "Value": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The tag value.</p>"
+        }
+      },
+      "documentation": "<p>A tag that is assigned to matching objects.</p>"
+    },
+    "AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails": {
+      "type": "structure",
+      "members": {
+        "Key": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The tag key.</p>"
+        },
+        "Value": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The tag value</p>"
+        }
+      },
+      "documentation": "<p>A tag filter.</p>"
+    },
+    "AwsS3BucketBucketLifecycleConfigurationRulesList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsS3BucketBucketLifecycleConfigurationRulesDetails"
+      }
+    },
+    "AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails": {
+      "type": "structure",
+      "members": {
+        "Days": {
+          "shape": "Integer",
+          "documentation": "<p>The number of days that an object is noncurrent before Amazon S3 can perform the associated action.</p>"
+        },
+        "StorageClass": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The class of storage to change the object to after the object is noncurrent for the specified number of days.</p>"
+        }
+      },
+      "documentation": "<p>A transition rule that describes when noncurrent objects transition to a specified storage class.</p>"
+    },
+    "AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails"
+      }
+    },
+    "AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails": {
+      "type": "structure",
+      "members": {
+        "Date": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>A date on which to transition objects to the specified storage class. If you provide <code>Date</code>, you cannot provide <code>Days</code>.</p> <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet Date/Time Format</a>. The value cannot contain spaces. For example, <code>2020-03-22T13:22:13.933Z</code>.</p>"
+        },
+        "Days": {
+          "shape": "Integer",
+          "documentation": "<p>The number of days after which to transition the object to the specified storage class. If you provide <code>Days</code>, you cannot provide <code>Date</code>.</p>"
+        },
+        "StorageClass": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The storage class to transition the object to.</p>"
+        }
+      },
+      "documentation": "<p>A rule for when objects transition to specific storage classes.</p>"
+    },
+    "AwsS3BucketBucketLifecycleConfigurationRulesTransitionsList": {
+      "type": "list",
+      "member": {
+        "shape": "AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails"
+      }
+    },
     "AwsS3BucketDetails": {
       "type": "structure",
       "members": {
@@ -6615,6 +7861,10 @@
         "ServerSideEncryptionConfiguration": {
           "shape": "AwsS3BucketServerSideEncryptionConfiguration",
           "documentation": "<p>The encryption rules that are applied to the S3 bucket.</p>"
+        },
+        "BucketLifecycleConfiguration": {
+          "shape": "AwsS3BucketBucketLifecycleConfigurationDetails",
+          "documentation": "<p>The lifecycle configuration for objects in the S3 bucket.</p>"
         },
         "PublicAccessBlockConfiguration": {
           "shape": "AwsS3AccountPublicAccessBlockDetails",
@@ -7244,7 +8494,9 @@
         },
         "Keyword": {
           "shape": "KeywordFilterList",
-          "documentation": "<p>A keyword for a finding.</p>"
+          "documentation": "<p>A keyword for a finding.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "The Keyword property is deprecated."
         },
         "FindingProviderFieldsConfidence": {
           "shape": "NumberFilterList",
@@ -7327,7 +8579,7 @@
           "documentation": "<p>The subscription's owner.</p>"
         }
       },
-      "documentation": "<p>A wrapper type for the topic's Amazon Resource Name (ARN).</p>"
+      "documentation": "<p>A wrapper type for the topic's ARN.</p>"
     },
     "AwsSnsTopicSubscription": {
       "type": "structure",
@@ -7366,7 +8618,7 @@
         },
         "DeadLetterTargetArn": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the dead-letter queue to which Amazon SQS moves messages after the value of <code>maxReceiveCount</code> is exceeded. </p>"
+          "documentation": "<p>The ARN of the dead-letter queue to which Amazon SQS moves messages after the value of <code>maxReceiveCount</code> is exceeded. </p>"
         }
       },
       "documentation": "<p>Data about a queue.</p>"
@@ -7898,7 +9150,7 @@
       "members": {
         "Name": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The name of the custom action target.</p>"
+          "documentation": "<p>The name of the custom action target. Can contain up to 20 characters.</p>"
         },
         "Description": {
           "shape": "NonEmptyString",
@@ -7906,7 +9158,7 @@
         },
         "Id": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The ID for the custom action target.</p>"
+          "documentation": "<p>The ID for the custom action target. Can contain up to 20 alphanumeric characters.</p>"
         }
       }
     },
@@ -10051,7 +11303,7 @@
         },
         "AwsEc2Instance": {
           "shape": "AwsEc2InstanceDetails",
-          "documentation": "<p>Details about an Amazon EC2 instance related to a finding.</p>"
+          "documentation": "<p>Details about an EC2 instance related to a finding.</p>"
         },
         "AwsEc2NetworkInterface": {
           "shape": "AwsEc2NetworkInterfaceDetails",
@@ -10208,6 +11460,14 @@
         "AwsRdsDbCluster": {
           "shape": "AwsRdsDbClusterDetails",
           "documentation": "<p>Details about an Amazon RDS database cluster.</p>"
+        },
+        "AwsEcsCluster": {
+          "shape": "AwsEcsClusterDetails",
+          "documentation": "<p>Details about an ECS cluster.</p>"
+        },
+        "AwsEcsTaskDefinition": {
+          "shape": "AwsEcsTaskDefinitionDetails",
+          "documentation": "<p>Details about a task definition. A task definition describes the container and volume definitions of an Amazon Elastic Container Service task.</p>"
         },
         "Container": {
           "shape": "ContainerDetails",
@@ -11056,7 +12316,7 @@
     "WorkflowState": {
       "type": "string",
       "deprecated": true,
-      "deprecatedMessage": "This field is deprecated, use Workflow.Status instead.",
+      "deprecatedMessage": "This filter is deprecated. Instead, use SeverityLabel or FindingProviderFieldsSeverityLabel.",
       "enum": [
         "NEW",
         "ASSIGNED",

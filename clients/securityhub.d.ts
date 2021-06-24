@@ -863,6 +863,10 @@ declare namespace SecurityHub {
   }
   export interface AwsApiGatewayV2StageDetails {
     /**
+     * The identifier of a client certificate for a stage. Supported only for WebSocket API calls.
+     */
+    ClientCertificateId?: NonEmptyString;
+    /**
      * Indicates when the stage was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     CreatedDate?: NonEmptyString;
@@ -1318,7 +1322,7 @@ declare namespace SecurityHub {
   }
   export interface AwsCodeBuildProjectDetails {
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the build output artifacts. You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK alias (using the format alias/alias-name). 
+     * The AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the build output artifacts. You can specify either the ARN of the CMK or, if available, the CMK alias (using the format alias/alias-name). 
      */
     EncryptionKey?: NonEmptyString;
     /**
@@ -1362,7 +1366,7 @@ declare namespace SecurityHub {
   }
   export interface AwsCodeBuildProjectEnvironmentRegistryCredential {
     /**
-     * The Amazon Resource Name (ARN) or name of credentials created using AWS Secrets Manager.  The credential can use the name of the credentials only if they exist in your current AWS Region.  
+     * The ARN or name of credentials created using AWS Secrets Manager.  The credential can use the name of the credentials only if they exist in your current AWS Region.  
      */
     Credential?: NonEmptyString;
     /**
@@ -1797,7 +1801,18 @@ declare namespace SecurityHub {
      * Indicates when the instance was launched. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     LaunchedAt?: NonEmptyString;
+    /**
+     * The identifiers of the network interfaces for the EC2 instance. The details for each network interface are in a corresponding AwsEc2NetworkInterfacesDetails object.
+     */
+    NetworkInterfaces?: AwsEc2InstanceNetworkInterfacesList;
   }
+  export interface AwsEc2InstanceNetworkInterfacesDetails {
+    /**
+     * The identifier of the network interface. The details are in a corresponding AwsEc2NetworkInterfacesDetails object.
+     */
+    NetworkInterfaceId?: NonEmptyString;
+  }
+  export type AwsEc2InstanceNetworkInterfacesList = AwsEc2InstanceNetworkInterfacesDetails[];
   export interface AwsEc2NetworkAclAssociation {
     /**
      * The identifier of the association between the network ACL and the subnet.
@@ -2059,7 +2074,7 @@ declare namespace SecurityHub {
      */
     PeeringStatus?: NonEmptyString;
     /**
-     * The ID of an AWS account. For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned. [EC2-Classic] Required when adding or removing rules that reference a security group in another AWS. 
+     * The ID of an AWS account. For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned. [EC2-Classic] Required when adding or removing rules that reference a security group in another VPC. 
      */
     UserId?: NonEmptyString;
     /**
@@ -2193,6 +2208,701 @@ declare namespace SecurityHub {
      */
     State?: NonEmptyString;
   }
+  export interface AwsEcsClusterClusterSettingsDetails {
+    /**
+     * The name of the setting.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The value of the setting.
+     */
+    Value?: NonEmptyString;
+  }
+  export type AwsEcsClusterClusterSettingsList = AwsEcsClusterClusterSettingsDetails[];
+  export interface AwsEcsClusterConfigurationDetails {
+    /**
+     * Contains the run command configuration for the cluster.
+     */
+    ExecuteCommandConfiguration?: AwsEcsClusterConfigurationExecuteCommandConfigurationDetails;
+  }
+  export interface AwsEcsClusterConfigurationExecuteCommandConfigurationDetails {
+    /**
+     * The identifier of the KMS key that is used to encrypt the data between the local client and the container.
+     */
+    KmsKeyId?: NonEmptyString;
+    /**
+     * The log configuration for the results of the run command actions. Required if Logging is NONE.
+     */
+    LogConfiguration?: AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails;
+    /**
+     * The log setting to use for redirecting logs for run command results.
+     */
+    Logging?: NonEmptyString;
+  }
+  export interface AwsEcsClusterConfigurationExecuteCommandConfigurationLogConfigurationDetails {
+    /**
+     * Whether to enable encryption on the CloudWatch logs.
+     */
+    CloudWatchEncryptionEnabled?: Boolean;
+    /**
+     * The name of the CloudWatch log group to send the logs to.
+     */
+    CloudWatchLogGroupName?: NonEmptyString;
+    /**
+     * The name of the S3 bucket to send logs to.
+     */
+    S3BucketName?: NonEmptyString;
+    /**
+     * Whether to encrypt the logs that are sent to the S3 bucket.
+     */
+    S3EncryptionEnabled?: Boolean;
+    /**
+     * Identifies the folder in the S3 bucket to send the logs to.
+     */
+    S3KeyPrefix?: NonEmptyString;
+  }
+  export interface AwsEcsClusterDefaultCapacityProviderStrategyDetails {
+    /**
+     * The minimum number of tasks to run on the specified capacity provider.
+     */
+    Base?: Integer;
+    /**
+     * The name of the capacity provider.
+     */
+    CapacityProvider?: NonEmptyString;
+    /**
+     * The relative percentage of the total number of tasks launched that should use the capacity provider.
+     */
+    Weight?: Integer;
+  }
+  export type AwsEcsClusterDefaultCapacityProviderStrategyList = AwsEcsClusterDefaultCapacityProviderStrategyDetails[];
+  export interface AwsEcsClusterDetails {
+    /**
+     * The short name of one or more capacity providers to associate with the cluster.
+     */
+    CapacityProviders?: NonEmptyStringList;
+    /**
+     * The setting to use to create the cluster. Specifically used to configure whether to enable CloudWatch Container Insights for the cluster.
+     */
+    ClusterSettings?: AwsEcsClusterClusterSettingsList;
+    /**
+     * The run command configuration for the cluster.
+     */
+    Configuration?: AwsEcsClusterConfigurationDetails;
+    /**
+     * The default capacity provider strategy for the cluster. The default capacity provider strategy is used when services or tasks are run without a specified launch type or capacity provider strategy.
+     */
+    DefaultCapacityProviderStrategy?: AwsEcsClusterDefaultCapacityProviderStrategyList;
+  }
+  export interface AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails {
+    /**
+     * The dependency condition of the dependent container. Indicates the required status of the dependent container before the current container can start.
+     */
+    Condition?: NonEmptyString;
+    /**
+     * The name of the dependent container.
+     */
+    ContainerName?: NonEmptyString;
+  }
+  export type AwsEcsTaskDefinitionContainerDefinitionsDependsOnList = AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails[];
+  export interface AwsEcsTaskDefinitionContainerDefinitionsDetails {
+    /**
+     * The command that is passed to the container.
+     */
+    Command?: NonEmptyStringList;
+    /**
+     * The number of CPU units reserved for the container.
+     */
+    Cpu?: Integer;
+    /**
+     * The dependencies that are defined for container startup and shutdown.
+     */
+    DependsOn?: AwsEcsTaskDefinitionContainerDefinitionsDependsOnList;
+    /**
+     * Whether to disable networking within the container.
+     */
+    DisableNetworking?: Boolean;
+    /**
+     * A list of DNS search domains that are presented to the container.
+     */
+    DnsSearchDomains?: NonEmptyStringList;
+    /**
+     * A list of DNS servers that are presented to the container.
+     */
+    DnsServers?: NonEmptyStringList;
+    /**
+     * A key-value map of labels to add to the container.
+     */
+    DockerLabels?: FieldMap;
+    /**
+     * A list of strings to provide custom labels for SELinux and AppArmor multi-level security systems.
+     */
+    DockerSecurityOptions?: NonEmptyStringList;
+    /**
+     * The entry point that is passed to the container.
+     */
+    EntryPoint?: NonEmptyStringList;
+    /**
+     * The environment variables to pass to a container.
+     */
+    Environment?: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentList;
+    /**
+     * A list of files containing the environment variables to pass to a container.
+     */
+    EnvironmentFiles?: AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesList;
+    /**
+     * Whether the container is essential. All tasks must have at least one essential container.
+     */
+    Essential?: Boolean;
+    /**
+     * A list of hostnames and IP address mappings to append to the /etc/hosts file on the container.
+     */
+    ExtraHosts?: AwsEcsTaskDefinitionContainerDefinitionsExtraHostsList;
+    /**
+     * The FireLens configuration for the container. Specifies and configures a log router for container logs.
+     */
+    FirelensConfiguration?: AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails;
+    /**
+     * The container health check command and associated configuration parameters for the container.
+     */
+    HealthCheck?: AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails;
+    /**
+     * The hostname to use for the container.
+     */
+    Hostname?: NonEmptyString;
+    /**
+     * The image used to start the container.
+     */
+    Image?: NonEmptyString;
+    /**
+     * If set to true, then containerized applications can be deployed that require stdin or a tty to be allocated.
+     */
+    Interactive?: Boolean;
+    /**
+     * A list of links for the container in the form  container_name:alias . Allows containers to communicate with each other without the need for port mappings.
+     */
+    Links?: NonEmptyStringList;
+    /**
+     * Linux-specific modifications that are applied to the container, such as Linux kernel capabilities.
+     */
+    LinuxParameters?: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails;
+    /**
+     * The log configuration specification for the container.
+     */
+    LogConfiguration?: AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails;
+    /**
+     * The amount (in MiB) of memory to present to the container. If the container attempts to exceed the memory specified here, the container is shut down. The total amount of memory reserved for all containers within a task must be lower than the task memory value, if one is specified.
+     */
+    Memory?: Integer;
+    /**
+     * The soft limit (in MiB) of memory to reserve for the container.
+     */
+    MemoryReservation?: Integer;
+    /**
+     * The mount points for the data volumes in the container.
+     */
+    MountPoints?: AwsEcsTaskDefinitionContainerDefinitionsMountPointsList;
+    /**
+     * The name of the container.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The list of port mappings for the container.
+     */
+    PortMappings?: AwsEcsTaskDefinitionContainerDefinitionsPortMappingsList;
+    /**
+     * Whether the container is given elevated privileges on the host container instance. The elevated privileges are similar to the root user.
+     */
+    Privileged?: Boolean;
+    /**
+     * Whether to allocate a TTY to the container.
+     */
+    PseudoTerminal?: Boolean;
+    /**
+     * Whether the container is given read-only access to its root file system.
+     */
+    ReadonlyRootFilesystem?: Boolean;
+    /**
+     * The private repository authentication credentials to use.
+     */
+    RepositoryCredentials?: AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails;
+    /**
+     * The type and amount of a resource to assign to a container. The only supported resource is a GPU.
+     */
+    ResourceRequirements?: AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsList;
+    /**
+     * The secrets to pass to the container.
+     */
+    Secrets?: AwsEcsTaskDefinitionContainerDefinitionsSecretsList;
+    /**
+     * The number of seconds to wait before giving up on resolving dependencies for a container. 
+     */
+    StartTimeout?: Integer;
+    /**
+     * The number of seconds to wait before the container is stopped if it doesn't shut down normally on its own.
+     */
+    StopTimeout?: Integer;
+    /**
+     * A list of namespaced kernel parameters to set in the container.
+     */
+    SystemControls?: AwsEcsTaskDefinitionContainerDefinitionsSystemControlsList;
+    /**
+     * A list of ulimits to set in the container. 
+     */
+    Ulimits?: AwsEcsTaskDefinitionContainerDefinitionsUlimitsList;
+    /**
+     * The user to use inside the container. The value can use one of the following formats.     user       user : group       uid       uid : gid       user : gid       uid : group    
+     */
+    User?: NonEmptyString;
+    /**
+     * Data volumes to mount from another container.
+     */
+    VolumesFrom?: AwsEcsTaskDefinitionContainerDefinitionsVolumesFromList;
+    /**
+     * The working directory in which to run commands inside the container.
+     */
+    WorkingDirectory?: NonEmptyString;
+  }
+  export interface AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails {
+    /**
+     * The name of the environment variable.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The value of the environment variable.
+     */
+    Value?: NonEmptyString;
+  }
+  export interface AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails {
+    /**
+     * The type of environment file.
+     */
+    Type?: NonEmptyString;
+    /**
+     * The ARN of the S3 object that contains the environment variable file.
+     */
+    Value?: NonEmptyString;
+  }
+  export type AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesList = AwsEcsTaskDefinitionContainerDefinitionsEnvironmentFilesDetails[];
+  export type AwsEcsTaskDefinitionContainerDefinitionsEnvironmentList = AwsEcsTaskDefinitionContainerDefinitionsEnvironmentDetails[];
+  export interface AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails {
+    /**
+     * The hostname to use in the /etc/hosts entry.
+     */
+    Hostname?: NonEmptyString;
+    /**
+     * The IP address to use in the /etc/hosts entry.
+     */
+    IpAddress?: NonEmptyString;
+  }
+  export type AwsEcsTaskDefinitionContainerDefinitionsExtraHostsList = AwsEcsTaskDefinitionContainerDefinitionsExtraHostsDetails[];
+  export interface AwsEcsTaskDefinitionContainerDefinitionsFirelensConfigurationDetails {
+    /**
+     * The options to use to configure the log router. The valid option keys are as follows:    enable-ecs-log-metadata. The value can be true or false.    config-file-type. The value can be s3 or file.    config-file-value. The value is either an S3 ARN or a file path.  
+     */
+    Options?: FieldMap;
+    /**
+     * The log router to use. 
+     */
+    Type?: NonEmptyString;
+  }
+  export interface AwsEcsTaskDefinitionContainerDefinitionsHealthCheckDetails {
+    /**
+     * The command that the container runs to determine whether it is healthy.
+     */
+    Command?: NonEmptyStringList;
+    /**
+     * The time period in seconds between each health check execution. The default value is 30 seconds.
+     */
+    Interval?: Integer;
+    /**
+     * The number of times to retry a failed health check before the container is considered unhealthy. The default value is 3.
+     */
+    Retries?: Integer;
+    /**
+     * The optional grace period in seconds that allows containers time to bootstrap before failed health checks count towards the maximum number of retries.
+     */
+    StartPeriod?: Integer;
+    /**
+     * The time period in seconds to wait for a health check to succeed before it is considered a failure. The default value is 5.
+     */
+    Timeout?: Integer;
+  }
+  export interface AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails {
+    /**
+     * The Linux capabilities for the container that are added to the default configuration provided by Docker.
+     */
+    Add?: NonEmptyStringList;
+    /**
+     * The Linux capabilities for the container that are dropped from the default configuration provided by Docker.
+     */
+    Drop?: NonEmptyStringList;
+  }
+  export interface AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDetails {
+    /**
+     * The Linux capabilities for the container that are added to or dropped from the default configuration provided by Docker.
+     */
+    Capabilities?: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersCapabilitiesDetails;
+    /**
+     * The host devices to expose to the container.
+     */
+    Devices?: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesList;
+    /**
+     * Whether to run an init process inside the container that forwards signals and reaps processes. 
+     */
+    InitProcessEnabled?: Boolean;
+    /**
+     * The total amount of swap memory (in MiB) that a container can use.
+     */
+    MaxSwap?: Integer;
+    /**
+     * The value for the size (in MiB) of the /dev/shm volume.
+     */
+    SharedMemorySize?: Integer;
+    /**
+     * Configures the container's memory swappiness behavior. Determines how aggressively pages are swapped. The higher the value, the more aggressive the swappiness. The default is 60.
+     */
+    Swappiness?: Integer;
+    /**
+     * The container path, mount options, and size (in MiB) of the tmpfs mount.
+     */
+    Tmpfs?: AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsList;
+  }
+  export interface AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails {
+    /**
+     * The path inside the container at which to expose the host device.
+     */
+    ContainerPath?: NonEmptyString;
+    /**
+     * The path for the device on the host container instance.
+     */
+    HostPath?: NonEmptyString;
+    /**
+     * The explicit permissions to provide to the container for the device. By default, the container has permissions for read, write, and mknod for the device.
+     */
+    Permissions?: NonEmptyStringList;
+  }
+  export type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesList = AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersDevicesDetails[];
+  export interface AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails {
+    /**
+     * The absolute file path where the tmpfs volume is to be mounted.
+     */
+    ContainerPath?: NonEmptyString;
+    /**
+     * The list of tmpfs volume mount options.
+     */
+    MountOptions?: NonEmptyStringList;
+    /**
+     * The maximum size (in MiB) of the tmpfs volume.
+     */
+    Size?: Integer;
+  }
+  export type AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsList = AwsEcsTaskDefinitionContainerDefinitionsLinuxParametersTmpfsDetails[];
+  export type AwsEcsTaskDefinitionContainerDefinitionsList = AwsEcsTaskDefinitionContainerDefinitionsDetails[];
+  export interface AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationDetails {
+    /**
+     * The log driver to use for the container.
+     */
+    LogDriver?: NonEmptyString;
+    /**
+     * The configuration options to send to the log driver. Requires version 1.19 of the Docker Remote API or greater on your container instance.
+     */
+    Options?: FieldMap;
+    /**
+     * The secrets to pass to the log configuration.
+     */
+    SecretOptions?: AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsList;
+  }
+  export interface AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails {
+    /**
+     * The name of the secret.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The secret to expose to the container. The value is either the full ARN of the Secrets Manager secret or the full ARN of the parameter in the Systems Manager Parameter Store.
+     */
+    ValueFrom?: NonEmptyString;
+  }
+  export type AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsList = AwsEcsTaskDefinitionContainerDefinitionsLogConfigurationSecretOptionsDetails[];
+  export interface AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails {
+    /**
+     * The path on the container to mount the host volume at.
+     */
+    ContainerPath?: NonEmptyString;
+    /**
+     * Whether the container has read-only access to the volume.
+     */
+    ReadOnly?: Boolean;
+    /**
+     * The name of the volume to mount. Must match the name of a volume listed in VolumeDetails for the task definition.
+     */
+    SourceVolume?: NonEmptyString;
+  }
+  export type AwsEcsTaskDefinitionContainerDefinitionsMountPointsList = AwsEcsTaskDefinitionContainerDefinitionsMountPointsDetails[];
+  export interface AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails {
+    /**
+     * The port number on the container that is bound to the user-specified or automatically assigned host port.
+     */
+    ContainerPort?: Integer;
+    /**
+     * The port number on the container instance to reserve for the container.
+     */
+    HostPort?: Integer;
+    /**
+     * The protocol used for the port mapping. The default is tcp.
+     */
+    Protocol?: NonEmptyString;
+  }
+  export type AwsEcsTaskDefinitionContainerDefinitionsPortMappingsList = AwsEcsTaskDefinitionContainerDefinitionsPortMappingsDetails[];
+  export interface AwsEcsTaskDefinitionContainerDefinitionsRepositoryCredentialsDetails {
+    /**
+     * The ARN of the secret that contains the private repository credentials.
+     */
+    CredentialsParameter?: NonEmptyString;
+  }
+  export interface AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails {
+    /**
+     * The type of resource to assign to a container.
+     */
+    Type?: NonEmptyString;
+    /**
+     * The value for the specified resource type. For GPU, the value is the number of physical GPUs the Amazon ECS container agent reserves for the container. For InferenceAccelerator, the value should match the DeviceName attribute of an entry in InferenceAccelerators.
+     */
+    Value?: NonEmptyString;
+  }
+  export type AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsList = AwsEcsTaskDefinitionContainerDefinitionsResourceRequirementsDetails[];
+  export interface AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails {
+    /**
+     * The name of the secret.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The secret to expose to the container. The value is either the full ARN of the Secrets Manager secret or the full ARN of the parameter in the Systems Manager Parameter Store.
+     */
+    ValueFrom?: NonEmptyString;
+  }
+  export type AwsEcsTaskDefinitionContainerDefinitionsSecretsList = AwsEcsTaskDefinitionContainerDefinitionsSecretsDetails[];
+  export interface AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails {
+    /**
+     * The namespaced kernel parameter for which to set a value.
+     */
+    Namespace?: NonEmptyString;
+    /**
+     * The value of the parameter.
+     */
+    Value?: NonEmptyString;
+  }
+  export type AwsEcsTaskDefinitionContainerDefinitionsSystemControlsList = AwsEcsTaskDefinitionContainerDefinitionsSystemControlsDetails[];
+  export interface AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails {
+    /**
+     * The hard limit for the ulimit type.
+     */
+    HardLimit?: Integer;
+    /**
+     * The type of the ulimit.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The soft limit for the ulimit type.
+     */
+    SoftLimit?: Integer;
+  }
+  export type AwsEcsTaskDefinitionContainerDefinitionsUlimitsList = AwsEcsTaskDefinitionContainerDefinitionsUlimitsDetails[];
+  export interface AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails {
+    /**
+     * Whether the container has read-only access to the volume.
+     */
+    ReadOnly?: Boolean;
+    /**
+     * The name of another container within the same task definition from which to mount volumes.
+     */
+    SourceContainer?: NonEmptyString;
+  }
+  export type AwsEcsTaskDefinitionContainerDefinitionsVolumesFromList = AwsEcsTaskDefinitionContainerDefinitionsVolumesFromDetails[];
+  export interface AwsEcsTaskDefinitionDetails {
+    /**
+     * The container definitions that describe the containers that make up the task.
+     */
+    ContainerDefinitions?: AwsEcsTaskDefinitionContainerDefinitionsList;
+    /**
+     * The number of CPU units used by the task.
+     */
+    Cpu?: NonEmptyString;
+    /**
+     * The ARN of the task execution role that grants the container agent permission to make API calls on behalf of the container user.
+     */
+    ExecutionRoleArn?: NonEmptyString;
+    /**
+     * The name of a family that this task definition is registered to.
+     */
+    Family?: NonEmptyString;
+    /**
+     * The Elastic Inference accelerators to use for the containers in the task.
+     */
+    InferenceAccelerators?: AwsEcsTaskDefinitionInferenceAcceleratorsList;
+    /**
+     * The IPC resource namespace to use for the containers in the task.
+     */
+    IpcMode?: NonEmptyString;
+    /**
+     * The amount (in MiB) of memory used by the task.
+     */
+    Memory?: NonEmptyString;
+    /**
+     * The Docker networking mode to use for the containers in the task.
+     */
+    NetworkMode?: NonEmptyString;
+    /**
+     * The process namespace to use for the containers in the task.
+     */
+    PidMode?: NonEmptyString;
+    /**
+     * The placement constraint objects to use for tasks.
+     */
+    PlacementConstraints?: AwsEcsTaskDefinitionPlacementConstraintsList;
+    /**
+     * The configuration details for the App Mesh proxy.
+     */
+    ProxyConfiguration?: AwsEcsTaskDefinitionProxyConfigurationDetails;
+    /**
+     * The task launch types that the task definition was validated against.
+     */
+    RequiresCompatibilities?: NonEmptyStringList;
+    /**
+     * The short name or ARN of the IAM role that grants containers in the task permission to call AWS API operations on your behalf.
+     */
+    TaskRoleArn?: NonEmptyString;
+    /**
+     * The data volume definitions for the task.
+     */
+    Volumes?: AwsEcsTaskDefinitionVolumesList;
+  }
+  export interface AwsEcsTaskDefinitionInferenceAcceleratorsDetails {
+    /**
+     * The Elastic Inference accelerator device name.
+     */
+    DeviceName?: NonEmptyString;
+    /**
+     * The Elastic Inference accelerator type to use.
+     */
+    DeviceType?: NonEmptyString;
+  }
+  export type AwsEcsTaskDefinitionInferenceAcceleratorsList = AwsEcsTaskDefinitionInferenceAcceleratorsDetails[];
+  export interface AwsEcsTaskDefinitionPlacementConstraintsDetails {
+    /**
+     * A cluster query language expression to apply to the constraint.
+     */
+    Expression?: NonEmptyString;
+    /**
+     * The type of constraint.
+     */
+    Type?: NonEmptyString;
+  }
+  export type AwsEcsTaskDefinitionPlacementConstraintsList = AwsEcsTaskDefinitionPlacementConstraintsDetails[];
+  export interface AwsEcsTaskDefinitionProxyConfigurationDetails {
+    /**
+     * The name of the container that will serve as the App Mesh proxy.
+     */
+    ContainerName?: NonEmptyString;
+    /**
+     * The set of network configuration parameters to provide to the Container Network Interface (CNI) plugin, specified as key-value pairs.
+     */
+    ProxyConfigurationProperties?: AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesList;
+    /**
+     * The proxy type.
+     */
+    Type?: NonEmptyString;
+  }
+  export interface AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails {
+    /**
+     * The name of the property.
+     */
+    Name?: NonEmptyString;
+    /**
+     * The value of the property.
+     */
+    Value?: NonEmptyString;
+  }
+  export type AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesList = AwsEcsTaskDefinitionProxyConfigurationProxyConfigurationPropertiesDetails[];
+  export interface AwsEcsTaskDefinitionVolumesDetails {
+    /**
+     * Information about a Docker volume.
+     */
+    DockerVolumeConfiguration?: AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails;
+    /**
+     * Information about the Amazon Elastic File System file system that is used for task storage.
+     */
+    EfsVolumeConfiguration?: AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails;
+    /**
+     * Information about a bind mount host volume.
+     */
+    Host?: AwsEcsTaskDefinitionVolumesHostDetails;
+    /**
+     * The name of the data volume.
+     */
+    Name?: NonEmptyString;
+  }
+  export interface AwsEcsTaskDefinitionVolumesDockerVolumeConfigurationDetails {
+    /**
+     * Whether to create the Docker volume automatically if it does not already exist.
+     */
+    Autoprovision?: Boolean;
+    /**
+     * The Docker volume driver to use.
+     */
+    Driver?: NonEmptyString;
+    /**
+     * A map of Docker driver-specific options that are passed through.
+     */
+    DriverOpts?: FieldMap;
+    /**
+     * Custom metadata to add to the Docker volume.
+     */
+    Labels?: FieldMap;
+    /**
+     * The scope for the Docker volume that determines its lifecycle. Docker volumes that are scoped to a task are provisioned automatically when the task starts and destroyed when the task stops. Docker volumes that are shared persist after the task stops.
+     */
+    Scope?: NonEmptyString;
+  }
+  export interface AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails {
+    /**
+     * The Amazon EFS access point identifier to use.
+     */
+    AccessPointId?: NonEmptyString;
+    /**
+     * Whether to use the Amazon ECS task IAM role defined in a task definition when mounting the Amazon EFS file system.
+     */
+    Iam?: NonEmptyString;
+  }
+  export interface AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationDetails {
+    /**
+     * The authorization configuration details for the Amazon EFS file system.
+     */
+    AuthorizationConfig?: AwsEcsTaskDefinitionVolumesEfsVolumeConfigurationAuthorizationConfigDetails;
+    /**
+     * The Amazon EFS file system identifier to use.
+     */
+    FilesystemId?: NonEmptyString;
+    /**
+     * The directory within the Amazon EFS file system to mount as the root directory inside the host.
+     */
+    RootDirectory?: NonEmptyString;
+    /**
+     * Whether to enable encryption for Amazon EFS data in transit between the Amazon ECS host and the Amazon EFS server. 
+     */
+    TransitEncryption?: NonEmptyString;
+    /**
+     * The port to use when sending encrypted data between the Amazon ECS host and the Amazon EFS server.
+     */
+    TransitEncryptionPort?: Integer;
+  }
+  export interface AwsEcsTaskDefinitionVolumesHostDetails {
+    /**
+     * The path on the host container instance that is presented to the container.
+     */
+    SourcePath?: NonEmptyString;
+  }
+  export type AwsEcsTaskDefinitionVolumesList = AwsEcsTaskDefinitionVolumesDetails[];
   export interface AwsElasticBeanstalkEnvironmentDetails {
     /**
      * The name of the application that is associated with the environment.
@@ -2337,9 +3047,17 @@ declare namespace SecurityHub {
      */
     EncryptionAtRestOptions?: AwsElasticsearchDomainEncryptionAtRestOptions;
     /**
+     * Configures the CloudWatch Logs to publish for the Elasticsearch domain.
+     */
+    LogPublishingOptions?: AwsElasticsearchDomainLogPublishingOptions;
+    /**
      * Details about the configuration for node-to-node encryption.
      */
     NodeToNodeEncryptionOptions?: AwsElasticsearchDomainNodeToNodeEncryptionOptions;
+    /**
+     * Information about the status of a domain relative to the latest service software.
+     */
+    ServiceSoftwareOptions?: AwsElasticsearchDomainServiceSoftwareOptions;
     /**
      * Information that Amazon ES derives based on VPCOptions for the domain.
      */
@@ -2365,11 +3083,61 @@ declare namespace SecurityHub {
      */
     KmsKeyId?: NonEmptyString;
   }
+  export interface AwsElasticsearchDomainLogPublishingOptions {
+    /**
+     * Configures the Elasticsearch index logs publishing.
+     */
+    IndexSlowLogs?: AwsElasticsearchDomainLogPublishingOptionsLogConfig;
+    /**
+     * Configures the Elasticsearch search slow log publishing.
+     */
+    SearchSlowLogs?: AwsElasticsearchDomainLogPublishingOptionsLogConfig;
+  }
+  export interface AwsElasticsearchDomainLogPublishingOptionsLogConfig {
+    /**
+     * The ARN of the CloudWatch Logs group to publish the logs to.
+     */
+    CloudWatchLogsLogGroupArn?: NonEmptyString;
+    /**
+     * Whether the log publishing is enabled.
+     */
+    Enabled?: Boolean;
+  }
   export interface AwsElasticsearchDomainNodeToNodeEncryptionOptions {
     /**
      * Whether node-to-node encryption is enabled.
      */
     Enabled?: Boolean;
+  }
+  export interface AwsElasticsearchDomainServiceSoftwareOptions {
+    /**
+     * The epoch time when the deployment window closes for required updates. After this time, Amazon Elasticsearch Service schedules the software upgrade automatically.
+     */
+    AutomatedUpdateDate?: NonEmptyString;
+    /**
+     * Whether a request to update the domain can be canceled.
+     */
+    Cancellable?: Boolean;
+    /**
+     * The version of the service software that is currently installed on the domain.
+     */
+    CurrentVersion?: NonEmptyString;
+    /**
+     * A more detailed description of the service software status.
+     */
+    Description?: NonEmptyString;
+    /**
+     * The most recent version of the service software.
+     */
+    NewVersion?: NonEmptyString;
+    /**
+     * Whether a service software update is available for the domain.
+     */
+    UpdateAvailable?: Boolean;
+    /**
+     * The status of the service software update.
+     */
+    UpdateStatus?: NonEmptyString;
   }
   export interface AwsElasticsearchDomainVPCOptions {
     /**
@@ -3066,7 +3834,7 @@ declare namespace SecurityHub {
   }
   export interface AwsLambdaFunctionDeadLetterConfig {
     /**
-     * The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
+     * The ARN of an Amazon SQS queue or Amazon SNS topic.
      */
     TargetArn?: NonEmptyString;
   }
@@ -3112,7 +3880,7 @@ declare namespace SecurityHub {
      */
     MasterArn?: NonEmptyString;
     /**
-     * The memory that's allocated to the function.
+     * The memory that is allocated to the function.
      */
     MemorySize?: Integer;
     /**
@@ -3166,7 +3934,7 @@ declare namespace SecurityHub {
   }
   export interface AwsLambdaFunctionLayer {
     /**
-     * The Amazon Resource Name (ARN) of the function layer.
+     * The ARN of the function layer.
      */
     Arn?: NonEmptyString;
     /**
@@ -3496,7 +4264,7 @@ declare namespace SecurityHub {
   export type AwsRdsDbDomainMemberships = AwsRdsDbDomainMembership[];
   export interface AwsRdsDbInstanceAssociatedRole {
     /**
-     * The Amazon Resource Name (ARN) of the IAM role that is associated with the DB instance.
+     * The ARN of the IAM role that is associated with the DB instance.
      */
     RoleArn?: NonEmptyString;
     /**
@@ -4461,6 +5229,150 @@ declare namespace SecurityHub {
      */
     RestrictPublicBuckets?: Boolean;
   }
+  export interface AwsS3BucketBucketLifecycleConfigurationDetails {
+    /**
+     * The lifecycle rules.
+     */
+    Rules?: AwsS3BucketBucketLifecycleConfigurationRulesList;
+  }
+  export interface AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails {
+    /**
+     * The number of days after which Amazon S3 cancels an incomplete multipart upload.
+     */
+    DaysAfterInitiation?: Integer;
+  }
+  export interface AwsS3BucketBucketLifecycleConfigurationRulesDetails {
+    /**
+     * How Amazon S3 responds when a multipart upload is incomplete. Specifically, provides a number of days before Amazon S3 cancels the entire upload.
+     */
+    AbortIncompleteMultipartUpload?: AwsS3BucketBucketLifecycleConfigurationRulesAbortIncompleteMultipartUploadDetails;
+    /**
+     * The date when objects are moved or deleted. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    ExpirationDate?: NonEmptyString;
+    /**
+     * The length in days of the lifetime for objects that are subject to the rule.
+     */
+    ExpirationInDays?: Integer;
+    /**
+     * Whether Amazon S3 removes a delete marker that has no noncurrent versions. If set to true, the delete marker is expired. If set to false, the policy takes no action. If you provide ExpiredObjectDeleteMarker, you cannot provide ExpirationInDays or ExpirationDate.
+     */
+    ExpiredObjectDeleteMarker?: Boolean;
+    /**
+     * Identifies the objects that a rule applies to.
+     */
+    Filter?: AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails;
+    /**
+     * The unique identifier of the rule.
+     */
+    ID?: NonEmptyString;
+    /**
+     * The number of days that an object is noncurrent before Amazon S3 can perform the associated action.
+     */
+    NoncurrentVersionExpirationInDays?: Integer;
+    /**
+     * Transition rules that describe when noncurrent objects transition to a specified storage class.
+     */
+    NoncurrentVersionTransitions?: AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList;
+    /**
+     * A prefix that identifies one or more objects that the rule applies to.
+     */
+    Prefix?: NonEmptyString;
+    /**
+     * The current status of the rule. Indicates whether the rule is currently being applied.
+     */
+    Status?: NonEmptyString;
+    /**
+     * Transition rules that indicate when objects transition to a specified storage class.
+     */
+    Transitions?: AwsS3BucketBucketLifecycleConfigurationRulesTransitionsList;
+  }
+  export interface AwsS3BucketBucketLifecycleConfigurationRulesFilterDetails {
+    /**
+     * The configuration for the filter.
+     */
+    Predicate?: AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails;
+  }
+  export interface AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateDetails {
+    /**
+     * The values to use for the filter.
+     */
+    Operands?: AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsList;
+    /**
+     * A prefix filter.
+     */
+    Prefix?: NonEmptyString;
+    /**
+     * A tag filter.
+     */
+    Tag?: AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails;
+    /**
+     * Whether to use AND or OR to join the operands.
+     */
+    Type?: NonEmptyString;
+  }
+  export interface AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails {
+    /**
+     * Prefix text for matching objects.
+     */
+    Prefix?: NonEmptyString;
+    /**
+     * A tag that is assigned to matching objects.
+     */
+    Tag?: AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails;
+    /**
+     * The type of filter value.
+     */
+    Type?: NonEmptyString;
+  }
+  export type AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsList = AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsDetails[];
+  export interface AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateOperandsTagDetails {
+    /**
+     * The tag key.
+     */
+    Key?: NonEmptyString;
+    /**
+     * The tag value.
+     */
+    Value?: NonEmptyString;
+  }
+  export interface AwsS3BucketBucketLifecycleConfigurationRulesFilterPredicateTagDetails {
+    /**
+     * The tag key.
+     */
+    Key?: NonEmptyString;
+    /**
+     * The tag value
+     */
+    Value?: NonEmptyString;
+  }
+  export type AwsS3BucketBucketLifecycleConfigurationRulesList = AwsS3BucketBucketLifecycleConfigurationRulesDetails[];
+  export interface AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails {
+    /**
+     * The number of days that an object is noncurrent before Amazon S3 can perform the associated action.
+     */
+    Days?: Integer;
+    /**
+     * The class of storage to change the object to after the object is noncurrent for the specified number of days.
+     */
+    StorageClass?: NonEmptyString;
+  }
+  export type AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsList = AwsS3BucketBucketLifecycleConfigurationRulesNoncurrentVersionTransitionsDetails[];
+  export interface AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails {
+    /**
+     * A date on which to transition objects to the specified storage class. If you provide Date, you cannot provide Days. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    Date?: NonEmptyString;
+    /**
+     * The number of days after which to transition the object to the specified storage class. If you provide Days, you cannot provide Date.
+     */
+    Days?: Integer;
+    /**
+     * The storage class to transition the object to.
+     */
+    StorageClass?: NonEmptyString;
+  }
+  export type AwsS3BucketBucketLifecycleConfigurationRulesTransitionsList = AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails[];
   export interface AwsS3BucketDetails {
     /**
      * The canonical user ID of the owner of the S3 bucket.
@@ -4478,6 +5390,10 @@ declare namespace SecurityHub {
      * The encryption rules that are applied to the S3 bucket.
      */
     ServerSideEncryptionConfiguration?: AwsS3BucketServerSideEncryptionConfiguration;
+    /**
+     * The lifecycle configuration for objects in the S3 bucket.
+     */
+    BucketLifecycleConfiguration?: AwsS3BucketBucketLifecycleConfigurationDetails;
     /**
      * Provides information about the Amazon S3 Public Access Block configuration for the S3 bucket.
      */
@@ -5139,7 +6055,7 @@ declare namespace SecurityHub {
      */
     QueueName?: NonEmptyString;
     /**
-     * The Amazon Resource Name (ARN) of the dead-letter queue to which Amazon SQS moves messages after the value of maxReceiveCount is exceeded. 
+     * The ARN of the dead-letter queue to which Amazon SQS moves messages after the value of maxReceiveCount is exceeded. 
      */
     DeadLetterTargetArn?: NonEmptyString;
   }
@@ -5507,7 +6423,7 @@ declare namespace SecurityHub {
   }
   export interface CreateActionTargetRequest {
     /**
-     * The name of the custom action target.
+     * The name of the custom action target. Can contain up to 20 characters.
      */
     Name: NonEmptyString;
     /**
@@ -5515,7 +6431,7 @@ declare namespace SecurityHub {
      */
     Description: NonEmptyString;
     /**
-     * The ID for the custom action target.
+     * The ID for the custom action target. Can contain up to 20 alphanumeric characters.
      */
     Id: NonEmptyString;
   }
@@ -6862,7 +7778,7 @@ declare namespace SecurityHub {
      */
     AwsCloudFrontDistribution?: AwsCloudFrontDistributionDetails;
     /**
-     * Details about an Amazon EC2 instance related to a finding.
+     * Details about an EC2 instance related to a finding.
      */
     AwsEc2Instance?: AwsEc2InstanceDetails;
     /**
@@ -7021,6 +7937,14 @@ declare namespace SecurityHub {
      * Details about an Amazon RDS database cluster.
      */
     AwsRdsDbCluster?: AwsRdsDbClusterDetails;
+    /**
+     * Details about an ECS cluster.
+     */
+    AwsEcsCluster?: AwsEcsClusterDetails;
+    /**
+     * Details about a task definition. A task definition describes the container and volume definitions of an Amazon Elastic Container Service task.
+     */
+    AwsEcsTaskDefinition?: AwsEcsTaskDefinitionDetails;
     /**
      * Details about a container resource related to a finding.
      */

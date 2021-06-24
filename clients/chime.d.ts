@@ -84,11 +84,11 @@ declare class Chime extends Service {
    */
   batchSuspendUser(callback?: (err: AWSError, data: Chime.Types.BatchSuspendUserResponse) => void): Request<Chime.Types.BatchSuspendUserResponse, AWSError>;
   /**
-   * Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime EnterpriseLWA account. Only users on EnterpriseLWA accounts can be unsuspended using this action. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide.  Previously suspended users who are unsuspended using this action are returned to Registered status. Users who are not previously suspended are ignored. 
+   * Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime EnterpriseLWA account. Only users on EnterpriseLWA accounts can be unsuspended using this action. For more information about different account types, see  Managing Your Amazon Chime Accounts  in the account types, in the Amazon Chime Administration Guide.   Previously suspended users who are unsuspended using this action are returned to Registered status. Users who are not previously suspended are ignored. 
    */
   batchUnsuspendUser(params: Chime.Types.BatchUnsuspendUserRequest, callback?: (err: AWSError, data: Chime.Types.BatchUnsuspendUserResponse) => void): Request<Chime.Types.BatchUnsuspendUserResponse, AWSError>;
   /**
-   * Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime EnterpriseLWA account. Only users on EnterpriseLWA accounts can be unsuspended using this action. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide.  Previously suspended users who are unsuspended using this action are returned to Registered status. Users who are not previously suspended are ignored. 
+   * Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime EnterpriseLWA account. Only users on EnterpriseLWA accounts can be unsuspended using this action. For more information about different account types, see  Managing Your Amazon Chime Accounts  in the account types, in the Amazon Chime Administration Guide.   Previously suspended users who are unsuspended using this action are returned to Registered status. Users who are not previously suspended are ignored. 
    */
   batchUnsuspendUser(callback?: (err: AWSError, data: Chime.Types.BatchUnsuspendUserResponse) => void): Request<Chime.Types.BatchUnsuspendUserResponse, AWSError>;
   /**
@@ -620,11 +620,11 @@ declare class Chime extends Service {
    */
   getAccount(callback?: (err: AWSError, data: Chime.Types.GetAccountResponse) => void): Request<Chime.Types.GetAccountResponse, AWSError>;
   /**
-   * Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dialout settings. For more information about these settings, see Use the Policies Page in the Amazon Chime Administration Guide.
+   * Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dialout settings. For more information about these settings, see Use the Policies Page in the Amazon Chime Administration Guide. 
    */
   getAccountSettings(params: Chime.Types.GetAccountSettingsRequest, callback?: (err: AWSError, data: Chime.Types.GetAccountSettingsResponse) => void): Request<Chime.Types.GetAccountSettingsResponse, AWSError>;
   /**
-   * Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dialout settings. For more information about these settings, see Use the Policies Page in the Amazon Chime Administration Guide.
+   * Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dialout settings. For more information about these settings, see Use the Policies Page in the Amazon Chime Administration Guide. 
    */
   getAccountSettings(callback?: (err: AWSError, data: Chime.Types.GetAccountSettingsResponse) => void): Request<Chime.Types.GetAccountSettingsResponse, AWSError>;
   /**
@@ -724,11 +724,11 @@ declare class Chime extends Service {
    */
   getProxySession(callback?: (err: AWSError, data: Chime.Types.GetProxySessionResponse) => void): Request<Chime.Types.GetProxySessionResponse, AWSError>;
   /**
-   *  Gets the retention settings for the specified Amazon Chime Enterprise account. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide . 
+   *  Gets the retention settings for the specified Amazon Chime Enterprise account. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide. 
    */
   getRetentionSettings(params: Chime.Types.GetRetentionSettingsRequest, callback?: (err: AWSError, data: Chime.Types.GetRetentionSettingsResponse) => void): Request<Chime.Types.GetRetentionSettingsResponse, AWSError>;
   /**
-   *  Gets the retention settings for the specified Amazon Chime Enterprise account. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide . 
+   *  Gets the retention settings for the specified Amazon Chime Enterprise account. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide. 
    */
   getRetentionSettings(callback?: (err: AWSError, data: Chime.Types.GetRetentionSettingsResponse) => void): Request<Chime.Types.GetRetentionSettingsResponse, AWSError>;
   /**
@@ -900,11 +900,11 @@ declare class Chime extends Service {
    */
   listAttendeeTags(callback?: (err: AWSError, data: Chime.Types.ListAttendeeTagsResponse) => void): Request<Chime.Types.ListAttendeeTagsResponse, AWSError>;
   /**
-   *  Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide . 
+   *  Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide. 
    */
   listAttendees(params: Chime.Types.ListAttendeesRequest, callback?: (err: AWSError, data: Chime.Types.ListAttendeesResponse) => void): Request<Chime.Types.ListAttendeesResponse, AWSError>;
   /**
-   *  Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide . 
+   *  Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide. 
    */
   listAttendees(callback?: (err: AWSError, data: Chime.Types.ListAttendeesResponse) => void): Request<Chime.Types.ListAttendeesResponse, AWSError>;
   /**
@@ -1444,11 +1444,11 @@ declare class Chime extends Service {
    */
   updateSipRule(callback?: (err: AWSError, data: Chime.Types.UpdateSipRuleResponse) => void): Request<Chime.Types.UpdateSipRuleResponse, AWSError>;
   /**
-   *  Updates user details for a specified user ID. Currently, only LicenseType updates are supported for this action. 
+   * Updates user details for a specified user ID. Currently, only LicenseType updates are supported for this action.
    */
   updateUser(params: Chime.Types.UpdateUserRequest, callback?: (err: AWSError, data: Chime.Types.UpdateUserResponse) => void): Request<Chime.Types.UpdateUserResponse, AWSError>;
   /**
-   *  Updates user details for a specified user ID. Currently, only LicenseType updates are supported for this action. 
+   * Updates user details for a specified user ID. Currently, only LicenseType updates are supported for this action.
    */
   updateUser(callback?: (err: AWSError, data: Chime.Types.UpdateUserResponse) => void): Request<Chime.Types.UpdateUserResponse, AWSError>;
   /**
@@ -1810,7 +1810,7 @@ declare namespace Chime {
      */
     MemberArns: MemberArns;
     /**
-     * The AppInstanceUserArn of the user that makes the API call. 
+     * The AppInstanceUserArn of the user that makes the API call.
      */
     ChimeBearer?: ChimeArn;
   }
@@ -4572,6 +4572,10 @@ declare namespace Chime {
      * The turn control URL.
      */
     TurnControlUrl?: UriType;
+    /**
+     * The event ingestion URL.
+     */
+    EventIngestionUrl?: UriType;
   }
   export interface Meeting {
     /**

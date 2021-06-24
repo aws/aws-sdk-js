@@ -202,7 +202,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables AWS CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.</p> <important> <p>If you enable webhooks for an AWS CodeBuild project, and the project is used as a build step in AWS CodePipeline, then two identical builds are created for each commit. One build is triggered through webhooks, and one through AWS CodePipeline. Because billing is on a per-build basis, you are billed for both builds. Therefore, if you are using AWS CodePipeline, we recommend that you disable webhooks in AWS CodeBuild. In the AWS CodeBuild console, clear the Webhook box. For more information, see step 5 in <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console\">Change a Build Project's Settings</a>.</p> </important>"
+      "documentation": "<p>For an existing CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, enables CodeBuild to start rebuilding the source code every time a code change is pushed to the repository.</p> <important> <p>If you enable webhooks for an CodeBuild project, and the project is used as a build step in CodePipeline, then two identical builds are created for each commit. One build is triggered through webhooks, and one through CodePipeline. Because billing is on a per-build basis, you are billed for both builds. Therefore, if you are using CodePipeline, we recommend that you disable webhooks in CodeBuild. In the CodeBuild console, clear the Webhook box. For more information, see step 5 in <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console\">Change a Build Project's Settings</a>.</p> </important>"
     },
     "DeleteBuildBatch": {
       "name": "DeleteBuildBatch",
@@ -344,7 +344,7 @@
           "shape": "OAuthProviderException"
         }
       ],
-      "documentation": "<p>For an existing AWS CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source code every time a code change is pushed to the repository.</p>"
+      "documentation": "<p>For an existing CodeBuild build project that has its source code stored in a GitHub or Bitbucket repository, stops CodeBuild from rebuilding the source code every time a code change is pushed to the repository.</p>"
     },
     "DescribeCodeCoverages": {
       "name": "DescribeCodeCoverages",
@@ -454,7 +454,7 @@
           "shape": "ResourceAlreadyExistsException"
         }
       ],
-      "documentation": "<p> Imports the source repository credentials for an AWS CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. </p>"
+      "documentation": "<p> Imports the source repository credentials for an CodeBuild project that has its source code stored in a GitHub, GitHub Enterprise, or Bitbucket repository. </p>"
     },
     "InvalidateProjectCache": {
       "name": "InvalidateProjectCache",
@@ -572,7 +572,7 @@
       "output": {
         "shape": "ListCuratedEnvironmentImagesOutput"
       },
-      "documentation": "<p>Gets information about Docker images that are managed by AWS CodeBuild.</p>"
+      "documentation": "<p>Gets information about Docker images that are managed by CodeBuild.</p>"
     },
     "ListProjects": {
       "name": "ListProjects",
@@ -610,7 +610,7 @@
           "shape": "InvalidInputException"
         }
       ],
-      "documentation": "<p> Gets a list ARNs for the report groups in the current AWS account. </p>"
+      "documentation": "<p> Gets a list ARNs for the report groups in the current Amazon Web Services account. </p>"
     },
     "ListReports": {
       "name": "ListReports",
@@ -629,7 +629,7 @@
           "shape": "InvalidInputException"
         }
       ],
-      "documentation": "<p> Returns a list of ARNs for the reports in the current AWS account. </p>"
+      "documentation": "<p> Returns a list of ARNs for the reports in the current Amazon Web Services account. </p>"
     },
     "ListReportsForReportGroup": {
       "name": "ListReportsForReportGroup",
@@ -670,7 +670,7 @@
           "shape": "InvalidInputException"
         }
       ],
-      "documentation": "<p> Gets a list of projects that are shared with other AWS accounts or users. </p>"
+      "documentation": "<p> Gets a list of projects that are shared with other Amazon Web Services accounts or users. </p>"
     },
     "ListSharedReportGroups": {
       "name": "ListSharedReportGroups",
@@ -689,7 +689,7 @@
           "shape": "InvalidInputException"
         }
       ],
-      "documentation": "<p> Gets a list of report groups that are shared with other AWS accounts or users. </p>"
+      "documentation": "<p> Gets a list of report groups that are shared with other Amazon Web Services accounts or users. </p>"
     },
     "ListSourceCredentials": {
       "name": "ListSourceCredentials",
@@ -937,7 +937,7 @@
           "shape": "OAuthProviderException"
         }
       ],
-      "documentation": "<p> Updates the webhook associated with an AWS CodeBuild build project. </p> <note> <p> If you use Bitbucket for your repository, <code>rotateSecret</code> is ignored. </p> </note>"
+      "documentation": "<p> Updates the webhook associated with an CodeBuild build project. </p> <note> <p> If you use Bitbucket for your repository, <code>rotateSecret</code> is ignored. </p> </note>"
     }
   },
   "shapes": {
@@ -1054,7 +1054,7 @@
       "members": {
         "names": {
           "shape": "ProjectNames",
-          "documentation": "<p>The names or ARNs of the build projects. To get information about a project shared with your AWS account, its ARN must be specified. You cannot specify a shared project using its name.</p>"
+          "documentation": "<p>The names or ARNs of the build projects. To get information about a project shared with your Amazon Web Services account, its ARN must be specified. You cannot specify a shared project using its name.</p>"
         }
       }
     },
@@ -1130,22 +1130,13 @@
         },
         "computeTypesAllowed": {
           "shape": "ComputeTypesAllowed",
-          "documentation": "<p>An array of strings that specify the compute types that are allowed for the batch build. See <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build environment compute types</a> in the <i>AWS CodeBuild User Guide</i> for these values. </p>"
+          "documentation": "<p>An array of strings that specify the compute types that are allowed for the batch build. See <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build environment compute types</a> in the <i>CodeBuild User Guide</i> for these values. </p>"
         }
       },
       "documentation": "<p>Specifies restrictions for the batch build.</p>"
     },
     "Boolean": {
       "type": "boolean"
-    },
-    "BucketOwnerAccess": {
-      "type": "string",
-      "documentation": "<p>Specifies the access for objects that are uploaded to an Amazon S3 bucket that is owned by another account.</p> <p>By default, only the account that uploads the objects to the bucket has access to these objects. This property allows you to give the bucket owner access to these objects.</p> <dl> <dt>NONE</dt> <dd> <p>The bucket owner does not have access to the objects. This is the default.</p> </dd> <dt>READ_ONLY</dt> <dd> <p>The bucket owner has read only access to the objects. The uploading account retains ownership of the objects.</p> </dd> <dt>FULL</dt> <dd> <p>The bucket owner has full access to the objects. Object ownership is determined by the following criteria:</p> <ul> <li> <p>If the bucket is configured with the <b>Bucket owner preferred</b> setting, the bucket owner owns the objects. The uploading account will have object access as specified by the bucket's policy.</p> </li> <li> <p>Otherwise, the uploading account retains ownership of the objects.</p> </li> </ul> <p>For more information about Amazon S3 object ownership, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html\">Controlling ownership of uploaded objects using S3 Object Ownership</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p> </dd> </dl>",
-      "enum": [
-        "NONE",
-        "READ_ONLY",
-        "FULL"
-      ]
     },
     "Build": {
       "type": "structure",
@@ -1180,15 +1171,15 @@
         },
         "sourceVersion": {
           "shape": "NonEmptyString",
-          "documentation": "<p>Any version identifier for the version of the source code to be built. If <code>sourceVersion</code> is specified at the project level, then this <code>sourceVersion</code> (at the build level) takes precedence. </p> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+          "documentation": "<p>Any version identifier for the version of the source code to be built. If <code>sourceVersion</code> is specified at the project level, then this <code>sourceVersion</code> (at the build level) takes precedence. </p> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>"
         },
         "resolvedSourceVersion": {
           "shape": "NonEmptyString",
-          "documentation": "<p> An identifier for the version of this build's source code. </p> <ul> <li> <p> For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID. </p> </li> <li> <p> For AWS CodePipeline, the source revision provided by AWS CodePipeline. </p> </li> <li> <p> For Amazon S3, this does not apply. </p> </li> </ul>"
+          "documentation": "<p> An identifier for the version of this build's source code. </p> <ul> <li> <p> For CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID. </p> </li> <li> <p> For CodePipeline, the source revision provided by CodePipeline. </p> </li> <li> <p> For Amazon S3, this does not apply. </p> </li> </ul>"
         },
         "projectName": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The name of the AWS CodeBuild project.</p>"
+          "documentation": "<p>The name of the CodeBuild project.</p>"
         },
         "phases": {
           "shape": "BuildPhases",
@@ -1204,7 +1195,7 @@
         },
         "secondarySourceVersions": {
           "shape": "ProjectSecondarySourceVersions",
-          "documentation": "<p> An array of <code>ProjectSourceVersion</code> objects. Each <code>ProjectSourceVersion</code> must be one of: </p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon S3: the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul>"
+          "documentation": "<p> An array of <code>ProjectSourceVersion</code> objects. Each <code>ProjectSourceVersion</code> must be one of: </p> <ul> <li> <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon S3: the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul>"
         },
         "artifacts": {
           "shape": "BuildArtifacts",
@@ -1228,11 +1219,11 @@
         },
         "logs": {
           "shape": "LogsLocation",
-          "documentation": "<p>Information about the build's logs in Amazon CloudWatch Logs.</p>"
+          "documentation": "<p>Information about the build's logs in CloudWatch Logs.</p>"
         },
         "timeoutInMinutes": {
           "shape": "WrapperInt",
-          "documentation": "<p>How long, in minutes, for AWS CodeBuild to wait before timing out this build if it does not get marked as completed.</p>"
+          "documentation": "<p>How long, in minutes, for CodeBuild to wait before timing out this build if it does not get marked as completed.</p>"
         },
         "queuedTimeoutInMinutes": {
           "shape": "WrapperInt",
@@ -1244,11 +1235,11 @@
         },
         "initiator": {
           "shape": "String",
-          "documentation": "<p>The entity that started the build. Valid values include:</p> <ul> <li> <p>If AWS CodePipeline started the build, the pipeline's name (for example, <code>codepipeline/my-demo-pipeline</code>).</p> </li> <li> <p>If an AWS Identity and Access Management (IAM) user started the build, the user's name (for example, <code>MyUserName</code>).</p> </li> <li> <p>If the Jenkins plugin for AWS CodeBuild started the build, the string <code>CodeBuild-Jenkins-Plugin</code>.</p> </li> </ul>"
+          "documentation": "<p>The entity that started the build. Valid values include:</p> <ul> <li> <p>If CodePipeline started the build, the pipeline's name (for example, <code>codepipeline/my-demo-pipeline</code>).</p> </li> <li> <p>If an Identity and Access Management user started the build, the user's name (for example, <code>MyUserName</code>).</p> </li> <li> <p>If the Jenkins plugin for CodeBuild started the build, the string <code>CodeBuild-Jenkins-Plugin</code>.</p> </li> </ul>"
         },
         "vpcConfig": {
           "shape": "VpcConfig",
-          "documentation": "<p>If your AWS CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.</p>"
+          "documentation": "<p>If your CodeBuild project accesses resources in an Amazon VPC, you provide this parameter that identifies the VPC ID and the list of security group IDs and subnet IDs. The security groups and subnets must belong to the same VPC. You must provide at least one security group and one subnet ID.</p>"
         },
         "networkInterface": {
           "shape": "NetworkInterface",
@@ -1256,11 +1247,11 @@
         },
         "encryptionKey": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>).</p>"
+          "documentation": "<p>The Key Management Service customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>).</p>"
         },
         "exportedEnvironmentVariables": {
           "shape": "ExportedEnvironmentVariables",
-          "documentation": "<p>A list of exported environment variables for this build.</p> <p>Exported environment variables are used in conjunction with AWS CodePipeline to export environment variables from the current build stage to subsequent stages in the pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html\">Working with variables</a> in the <i>AWS CodePipeline User Guide</i>.</p>"
+          "documentation": "<p>A list of exported environment variables for this build.</p> <p>Exported environment variables are used in conjunction with CodePipeline to export environment variables from the current build stage to subsequent stages in the pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html\">Working with variables</a> in the <i>CodePipeline User Guide</i>.</p>"
         },
         "reportArns": {
           "shape": "BuildReportArns",
@@ -1307,9 +1298,6 @@
         "artifactIdentifier": {
           "shape": "String",
           "documentation": "<p> An identifier for this artifact definition. </p>"
-        },
-        "bucketOwnerAccess": {
-          "shape": "BucketOwnerAccess"
         }
       },
       "documentation": "<p>Information about build output artifacts.</p>"
@@ -1355,7 +1343,7 @@
         },
         "resolvedSourceVersion": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The identifier of the resolved version of this batch build's source code.</p> <ul> <li> <p>For AWS CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.</p> </li> <li> <p>For AWS CodePipeline, the source revision provided by AWS CodePipeline.</p> </li> <li> <p>For Amazon S3, this does not apply.</p> </li> </ul>"
+          "documentation": "<p>The identifier of the resolved version of this batch build's source code.</p> <ul> <li> <p>For CodeCommit, GitHub, GitHub Enterprise, and BitBucket, the commit ID.</p> </li> <li> <p>For CodePipeline, the source revision provided by CodePipeline.</p> </li> <li> <p>For Amazon S3, this does not apply.</p> </li> </ul>"
         },
         "projectName": {
           "shape": "NonEmptyString",
@@ -1374,7 +1362,7 @@
         },
         "secondarySourceVersions": {
           "shape": "ProjectSecondarySourceVersions",
-          "documentation": "<p>An array of <code>ProjectSourceVersion</code> objects. Each <code>ProjectSourceVersion</code> must be one of: </p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon S3: the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul>"
+          "documentation": "<p>An array of <code>ProjectSourceVersion</code> objects. Each <code>ProjectSourceVersion</code> must be one of: </p> <ul> <li> <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon S3: the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul>"
         },
         "artifacts": {
           "shape": "BuildArtifacts",
@@ -1411,14 +1399,14 @@
         },
         "initiator": {
           "shape": "String",
-          "documentation": "<p>The entity that started the batch build. Valid values include:</p> <ul> <li> <p>If AWS CodePipeline started the build, the pipeline's name (for example, <code>codepipeline/my-demo-pipeline</code>).</p> </li> <li> <p>If an AWS Identity and Access Management (IAM) user started the build, the user's name.</p> </li> <li> <p>If the Jenkins plugin for AWS CodeBuild started the build, the string <code>CodeBuild-Jenkins-Plugin</code>.</p> </li> </ul>"
+          "documentation": "<p>The entity that started the batch build. Valid values include:</p> <ul> <li> <p>If CodePipeline started the build, the pipeline's name (for example, <code>codepipeline/my-demo-pipeline</code>).</p> </li> <li> <p>If an Identity and Access Management user started the build, the user's name.</p> </li> <li> <p>If the Jenkins plugin for CodeBuild started the build, the string <code>CodeBuild-Jenkins-Plugin</code>.</p> </li> </ul>"
         },
         "vpcConfig": {
           "shape": "VpcConfig"
         },
         "encryptionKey": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the batch build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>).</p>"
+          "documentation": "<p>The Key Management Service customer master key (CMK) to be used for encrypting the batch build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>).</p>"
         },
         "buildBatchNumber": {
           "shape": "WrapperLong",
@@ -1640,7 +1628,7 @@
           "documentation": "<p>Specifies the target url of the build status CodeBuild sends to the source provider. The usage of this parameter depends on the source provider.</p> <dl> <dt>Bitbucket</dt> <dd> <p>This parameter is used for the <code>url</code> parameter in the Bitbucket commit status. For more information, see <a href=\"https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Bworkspace%7D/%7Brepo_slug%7D/commit/%7Bnode%7D/statuses/build\">build</a> in the Bitbucket API documentation.</p> </dd> <dt>GitHub/GitHub Enterprise Server</dt> <dd> <p>This parameter is used for the <code>target_url</code> parameter in the GitHub commit status. For more information, see <a href=\"https://developer.github.com/v3/repos/statuses/#create-a-commit-status\">Create a commit status</a> in the GitHub developer guide.</p> </dd> </dl>"
         }
       },
-      "documentation": "<p>Contains information that defines how the AWS CodeBuild build project reports the build status to the source provider. </p>"
+      "documentation": "<p>Contains information that defines how the CodeBuild build project reports the build status to the source provider. </p>"
     },
     "BuildSummaries": {
       "type": "list",
@@ -1710,18 +1698,18 @@
       "members": {
         "status": {
           "shape": "LogsConfigStatusType",
-          "documentation": "<p>The current status of the logs in Amazon CloudWatch Logs for a build project. Valid values are:</p> <ul> <li> <p> <code>ENABLED</code>: Amazon CloudWatch Logs are enabled for this build project.</p> </li> <li> <p> <code>DISABLED</code>: Amazon CloudWatch Logs are not enabled for this build project.</p> </li> </ul>"
+          "documentation": "<p>The current status of the logs in CloudWatch Logs for a build project. Valid values are:</p> <ul> <li> <p> <code>ENABLED</code>: CloudWatch Logs are enabled for this build project.</p> </li> <li> <p> <code>DISABLED</code>: CloudWatch Logs are not enabled for this build project.</p> </li> </ul>"
         },
         "groupName": {
           "shape": "String",
-          "documentation": "<p> The group name of the logs in Amazon CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html\">Working with Log Groups and Log Streams</a>. </p>"
+          "documentation": "<p> The group name of the logs in CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html\">Working with Log Groups and Log Streams</a>. </p>"
         },
         "streamName": {
           "shape": "String",
-          "documentation": "<p> The prefix of the stream name of the Amazon CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html\">Working with Log Groups and Log Streams</a>. </p>"
+          "documentation": "<p> The prefix of the stream name of the CloudWatch Logs. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html\">Working with Log Groups and Log Streams</a>. </p>"
         }
       },
-      "documentation": "<p> Information about Amazon CloudWatch Logs for a build project. </p>"
+      "documentation": "<p> Information about CloudWatch Logs for a build project. </p>"
     },
     "CodeCoverage": {
       "type": "structure",
@@ -1848,7 +1836,7 @@
         },
         "sourceVersion": {
           "shape": "String",
-          "documentation": "<p>A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of: </p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon S3: the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p>If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+          "documentation": "<p>A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of: </p> <ul> <li> <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon S3: the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p>If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>"
         },
         "secondarySourceVersions": {
           "shape": "ProjectSecondarySourceVersions",
@@ -1872,11 +1860,11 @@
         },
         "serviceRole": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.</p>"
+          "documentation": "<p>The ARN of the Identity and Access Management role that enables CodeBuild to interact with dependent Amazon Web Services services on behalf of the Amazon Web Services account.</p>"
         },
         "timeoutInMinutes": {
           "shape": "TimeOut",
-          "documentation": "<p>How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before it times out any build that has not been marked as completed. The default is 60 minutes.</p>"
+          "documentation": "<p>How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before it times out any build that has not been marked as completed. The default is 60 minutes.</p>"
         },
         "queuedTimeoutInMinutes": {
           "shape": "TimeOut",
@@ -1884,15 +1872,15 @@
         },
         "encryptionKey": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>). </p>"
+          "documentation": "<p>The Key Management Service customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>). </p>"
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>A list of tag key and value pairs associated with this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>"
+          "documentation": "<p>A list of tag key and value pairs associated with this build project.</p> <p>These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.</p>"
         },
         "vpcConfig": {
           "shape": "VpcConfig",
-          "documentation": "<p>VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.</p>"
+          "documentation": "<p>VpcConfig enables CodeBuild to access resources in an Amazon VPC.</p>"
         },
         "badgeEnabled": {
           "shape": "WrapperBoolean",
@@ -1900,7 +1888,7 @@
         },
         "logsConfig": {
           "shape": "LogsConfig",
-          "documentation": "<p>Information about logs for the build project. These can be logs in Amazon CloudWatch Logs, logs uploaded to a specified S3 bucket, or both. </p>"
+          "documentation": "<p>Information about logs for the build project. These can be logs in CloudWatch Logs, logs uploaded to a specified S3 bucket, or both. </p>"
         },
         "fileSystemLocations": {
           "shape": "ProjectFileSystemLocations",
@@ -1947,7 +1935,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p> A list of tag key and value pairs associated with this report group. </p> <p>These tags are available for use by AWS services that support AWS CodeBuild report group tags.</p>"
+          "documentation": "<p> A list of tag key and value pairs associated with this report group. </p> <p>These tags are available for use by Amazon Web Services services that support CodeBuild report group tags.</p>"
         }
       }
     },
@@ -1968,7 +1956,7 @@
       "members": {
         "projectName": {
           "shape": "ProjectName",
-          "documentation": "<p>The name of the AWS CodeBuild project.</p>"
+          "documentation": "<p>The name of the CodeBuild project.</p>"
         },
         "branchFilter": {
           "shape": "String",
@@ -1989,7 +1977,7 @@
       "members": {
         "webhook": {
           "shape": "Webhook",
-          "documentation": "<p>Information about a webhook that connects repository events to a build project in AWS CodeBuild.</p>"
+          "documentation": "<p>Information about a webhook that connects repository events to a build project in CodeBuild.</p>"
         }
       }
     },
@@ -2139,7 +2127,7 @@
       "members": {
         "projectName": {
           "shape": "ProjectName",
-          "documentation": "<p>The name of the AWS CodeBuild project.</p>"
+          "documentation": "<p>The name of the CodeBuild project.</p>"
         }
       }
     },
@@ -2249,7 +2237,7 @@
           "documentation": "<p>A list of environment image versions.</p>"
         }
       },
-      "documentation": "<p>Information about a Docker image that is managed by AWS CodeBuild.</p>"
+      "documentation": "<p>Information about a Docker image that is managed by CodeBuild.</p>"
     },
     "EnvironmentImages": {
       "type": "list",
@@ -2269,7 +2257,7 @@
           "documentation": "<p>The list of Docker images that are related by the specified programming language.</p>"
         }
       },
-      "documentation": "<p>A set of Docker images that are related by programming language and are managed by AWS CodeBuild.</p>"
+      "documentation": "<p>A set of Docker images that are related by programming language and are managed by CodeBuild.</p>"
     },
     "EnvironmentLanguages": {
       "type": "list",
@@ -2289,7 +2277,7 @@
           "documentation": "<p>The list of programming languages that are available for the specified platform.</p>"
         }
       },
-      "documentation": "<p>A set of Docker images that are related by platform and are managed by AWS CodeBuild.</p>"
+      "documentation": "<p>A set of Docker images that are related by platform and are managed by CodeBuild.</p>"
     },
     "EnvironmentPlatforms": {
       "type": "list",
@@ -2320,11 +2308,11 @@
         },
         "value": {
           "shape": "String",
-          "documentation": "<p>The value of the environment variable.</p> <important> <p>We strongly discourage the use of <code>PLAINTEXT</code> environment variables to store sensitive values, especially AWS secret key IDs and secret access keys. <code>PLAINTEXT</code> environment variables can be displayed in plain text using the AWS CodeBuild console and the AWS Command Line Interface (AWS CLI). For sensitive values, we recommend you use an environment variable of type <code>PARAMETER_STORE</code> or <code>SECRETS_MANAGER</code>. </p> </important>"
+          "documentation": "<p>The value of the environment variable.</p> <important> <p>We strongly discourage the use of <code>PLAINTEXT</code> environment variables to store sensitive values, especially Amazon Web Services secret key IDs and secret access keys. <code>PLAINTEXT</code> environment variables can be displayed in plain text using the CodeBuild console and the AWS Command Line Interface (AWS CLI). For sensitive values, we recommend you use an environment variable of type <code>PARAMETER_STORE</code> or <code>SECRETS_MANAGER</code>. </p> </important>"
         },
         "type": {
           "shape": "EnvironmentVariableType",
-          "documentation": "<p>The type of environment variable. Valid values include:</p> <ul> <li> <p> <code>PARAMETER_STORE</code>: An environment variable stored in Amazon EC2 Systems Manager Parameter Store. To learn how to specify a parameter store environment variable, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.parameter-store\">env/parameter-store</a> in the <i>AWS CodeBuild User Guide</i>.</p> </li> <li> <p> <code>PLAINTEXT</code>: An environment variable in plain text format. This is the default value.</p> </li> <li> <p> <code>SECRETS_MANAGER</code>: An environment variable stored in AWS Secrets Manager. To learn how to specify a secrets manager environment variable, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.secrets-manager\">env/secrets-manager</a> in the <i>AWS CodeBuild User Guide</i>.</p> </li> </ul>"
+          "documentation": "<p>The type of environment variable. Valid values include:</p> <ul> <li> <p> <code>PARAMETER_STORE</code>: An environment variable stored in Systems Manager Parameter Store. To learn how to specify a parameter store environment variable, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.parameter-store\">env/parameter-store</a> in the <i>CodeBuild User Guide</i>.</p> </li> <li> <p> <code>PLAINTEXT</code>: An environment variable in plain text format. This is the default value.</p> </li> <li> <p> <code>SECRETS_MANAGER</code>: An environment variable stored in Secrets Manager. To learn how to specify a secrets manager environment variable, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec.env.secrets-manager\">env/secrets-manager</a> in the <i>CodeBuild User Guide</i>.</p> </li> </ul>"
         }
       },
       "documentation": "<p>Information about an environment variable for a build project or a build.</p>"
@@ -2355,7 +2343,7 @@
           "documentation": "<p>The value assigned to the exported environment variable.</p>"
         }
       },
-      "documentation": "<p>Contains information about an exported environment variable. </p> <p>Exported environment variables are used in conjunction with AWS CodePipeline to export environment variables from the current build stage to subsequent stages in the pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html\">Working with variables</a> in the <i>AWS CodePipeline User Guide</i>.</p> <note> <p> During a build, the value of a variable is available starting with the <code>install</code> phase. It can be updated between the start of the <code>install</code> phase and the end of the <code>post_build</code> phase. After the <code>post_build</code> phase ends, the value of exported variables cannot change.</p> </note>"
+      "documentation": "<p>Contains information about an exported environment variable. </p> <p>Exported environment variables are used in conjunction with CodePipeline to export environment variables from the current build stage to subsequent stages in the pipeline. For more information, see <a href=\"https://docs.aws.amazon.com/codepipeline/latest/userguide/actions-variables.html\">Working with variables</a> in the <i>CodePipeline User Guide</i>.</p> <note> <p> During a build, the value of a variable is available starting with the <code>install</code> phase. It can be updated between the start of the <code>install</code> phase and the end of the <code>post_build</code> phase. After the <code>post_build</code> phase ends, the value of exported variables cannot change.</p> </note>"
     },
     "ExportedEnvironmentVariables": {
       "type": "list",
@@ -2448,10 +2436,10 @@
       "members": {
         "fetchSubmodules": {
           "shape": "WrapperBoolean",
-          "documentation": "<p> Set to true to fetch Git submodules for your AWS CodeBuild build project. </p>"
+          "documentation": "<p> Set to true to fetch Git submodules for your CodeBuild build project. </p>"
         }
       },
-      "documentation": "<p> Information about the Git submodules configuration for an AWS CodeBuild build project. </p>"
+      "documentation": "<p> Information about the Git submodules configuration for an CodeBuild build project. </p>"
     },
     "Identifiers": {
       "type": "list",
@@ -2494,7 +2482,7 @@
         },
         "authType": {
           "shape": "AuthType",
-          "documentation": "<p> The type of authentication used to connect to a GitHub, GitHub Enterprise, or Bitbucket repository. An OAUTH connection is not supported by the API and must be created using the AWS CodeBuild console. </p>"
+          "documentation": "<p> The type of authentication used to connect to a GitHub, GitHub Enterprise, or Bitbucket repository. An OAUTH connection is not supported by the API and must be created using the CodeBuild console. </p>"
         },
         "shouldOverwrite": {
           "shape": "WrapperBoolean",
@@ -2519,7 +2507,7 @@
       "members": {
         "projectName": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The name of the AWS CodeBuild build project that the cache is reset for.</p>"
+          "documentation": "<p>The name of the CodeBuild build project that the cache is reset for.</p>"
         }
       }
     },
@@ -2628,7 +2616,7 @@
       "members": {
         "projectName": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The name of the AWS CodeBuild project.</p>"
+          "documentation": "<p>The name of the CodeBuild project.</p>"
         },
         "sortOrder": {
           "shape": "SortOrderType",
@@ -2688,7 +2676,7 @@
       "members": {
         "platforms": {
           "shape": "EnvironmentPlatforms",
-          "documentation": "<p>Information about supported platforms for Docker images that are managed by AWS CodeBuild.</p>"
+          "documentation": "<p>Information about supported platforms for Docker images that are managed by CodeBuild.</p>"
         }
       }
     },
@@ -2752,7 +2740,7 @@
         },
         "reportGroups": {
           "shape": "ReportGroupArns",
-          "documentation": "<p> The list of ARNs for the report groups in the current AWS account. </p>"
+          "documentation": "<p> The list of ARNs for the report groups in the current Amazon Web Services account. </p>"
         }
       }
     },
@@ -2827,7 +2815,7 @@
         },
         "reports": {
           "shape": "ReportArns",
-          "documentation": "<p> The list of returned ARNs for the reports in the current AWS account. </p>"
+          "documentation": "<p> The list of returned ARNs for the reports in the current Amazon Web Services account. </p>"
         }
       }
     },
@@ -2836,7 +2824,7 @@
       "members": {
         "sortBy": {
           "shape": "SharedResourceSortByType",
-          "documentation": "<p> The criterion to be used to list build projects shared with the current AWS account or user. Valid values include: </p> <ul> <li> <p> <code>ARN</code>: List based on the ARN. </p> </li> <li> <p> <code>MODIFIED_TIME</code>: List based on when information about the shared project was last changed. </p> </li> </ul>"
+          "documentation": "<p> The criterion to be used to list build projects shared with the current Amazon Web Services account or user. Valid values include: </p> <ul> <li> <p> <code>ARN</code>: List based on the ARN. </p> </li> <li> <p> <code>MODIFIED_TIME</code>: List based on when information about the shared project was last changed. </p> </li> </ul>"
         },
         "sortOrder": {
           "shape": "SortOrderType",
@@ -2861,7 +2849,7 @@
         },
         "projects": {
           "shape": "ProjectArns",
-          "documentation": "<p> The list of ARNs for the build projects shared with the current AWS account or user. </p>"
+          "documentation": "<p> The list of ARNs for the build projects shared with the current Amazon Web Services account or user. </p>"
         }
       }
     },
@@ -2874,7 +2862,7 @@
         },
         "sortBy": {
           "shape": "SharedResourceSortByType",
-          "documentation": "<p> The criterion to be used to list report groups shared with the current AWS account or user. Valid values include: </p> <ul> <li> <p> <code>ARN</code>: List based on the ARN. </p> </li> <li> <p> <code>MODIFIED_TIME</code>: List based on when information about the shared report group was last changed. </p> </li> </ul>"
+          "documentation": "<p> The criterion to be used to list report groups shared with the current Amazon Web Services account or user. Valid values include: </p> <ul> <li> <p> <code>ARN</code>: List based on the ARN. </p> </li> <li> <p> <code>MODIFIED_TIME</code>: List based on when information about the shared report group was last changed. </p> </li> </ul>"
         },
         "nextToken": {
           "shape": "String",
@@ -2895,7 +2883,7 @@
         },
         "reportGroups": {
           "shape": "ReportGroupArns",
-          "documentation": "<p> The list of ARNs for the report groups shared with the current AWS account or user. </p>"
+          "documentation": "<p> The list of ARNs for the report groups shared with the current Amazon Web Services account or user. </p>"
         }
       }
     },
@@ -2917,14 +2905,14 @@
       "members": {
         "cloudWatchLogs": {
           "shape": "CloudWatchLogsConfig",
-          "documentation": "<p> Information about Amazon CloudWatch Logs for a build project. Amazon CloudWatch Logs are enabled by default. </p>"
+          "documentation": "<p> Information about CloudWatch Logs for a build project. CloudWatch Logs are enabled by default. </p>"
         },
         "s3Logs": {
           "shape": "S3LogsConfig",
           "documentation": "<p> Information about logs built to an S3 bucket for a build project. S3 logs are not enabled by default. </p>"
         }
       },
-      "documentation": "<p> Information about logs for a build project. These can be logs in Amazon CloudWatch Logs, built in a specified S3 bucket, or both. </p>"
+      "documentation": "<p> Information about logs for a build project. These can be logs in CloudWatch Logs, built in a specified S3 bucket, or both. </p>"
     },
     "LogsConfigStatusType": {
       "type": "string",
@@ -2938,15 +2926,15 @@
       "members": {
         "groupName": {
           "shape": "String",
-          "documentation": "<p>The name of the Amazon CloudWatch Logs group for the build logs.</p>"
+          "documentation": "<p>The name of the CloudWatch Logs group for the build logs.</p>"
         },
         "streamName": {
           "shape": "String",
-          "documentation": "<p>The name of the Amazon CloudWatch Logs stream for the build logs.</p>"
+          "documentation": "<p>The name of the CloudWatch Logs stream for the build logs.</p>"
         },
         "deepLink": {
           "shape": "String",
-          "documentation": "<p>The URL to an individual build log in Amazon CloudWatch Logs.</p>"
+          "documentation": "<p>The URL to an individual build log in CloudWatch Logs.</p>"
         },
         "s3DeepLink": {
           "shape": "String",
@@ -2954,7 +2942,7 @@
         },
         "cloudWatchLogsArn": {
           "shape": "String",
-          "documentation": "<p> The ARN of Amazon CloudWatch Logs for a build project. Its format is <code>arn:${Partition}:logs:${Region}:${Account}:log-group:${LogGroupName}:log-stream:${LogStreamName}</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatchlogs.html#amazoncloudwatchlogs-resources-for-iam-policies\">Resources Defined by Amazon CloudWatch Logs</a>. </p>"
+          "documentation": "<p> The ARN of CloudWatch Logs for a build project. Its format is <code>arn:${Partition}:logs:${Region}:${Account}:log-group:${LogGroupName}:log-stream:${LogStreamName}</code>. For more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazoncloudwatchlogs.html#amazoncloudwatchlogs-resources-for-iam-policies\">Resources Defined by CloudWatch Logs</a>. </p>"
         },
         "s3LogsArn": {
           "shape": "String",
@@ -2962,14 +2950,14 @@
         },
         "cloudWatchLogs": {
           "shape": "CloudWatchLogsConfig",
-          "documentation": "<p> Information about Amazon CloudWatch Logs for a build project. </p>"
+          "documentation": "<p> Information about CloudWatch Logs for a build project. </p>"
         },
         "s3Logs": {
           "shape": "S3LogsConfig",
           "documentation": "<p> Information about S3 logs for a build project. </p>"
         }
       },
-      "documentation": "<p>Information about build logs in Amazon CloudWatch Logs.</p>"
+      "documentation": "<p>Information about build logs in CloudWatch Logs.</p>"
     },
     "NetworkInterface": {
       "type": "structure",
@@ -3057,7 +3045,7 @@
         },
         "sourceVersion": {
           "shape": "String",
-          "documentation": "<p>A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:</p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon S3: the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p>If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+          "documentation": "<p>A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of:</p> <ul> <li> <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon S3: the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p>If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>"
         },
         "secondarySourceVersions": {
           "shape": "ProjectSecondarySourceVersions",
@@ -3081,11 +3069,11 @@
         },
         "serviceRole": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.</p>"
+          "documentation": "<p>The ARN of the Identity and Access Management role that enables CodeBuild to interact with dependent Amazon Web Services services on behalf of the Amazon Web Services account.</p>"
         },
         "timeoutInMinutes": {
           "shape": "TimeOut",
-          "documentation": "<p>How long, in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before timing out any related build that did not get marked as completed. The default is 60 minutes.</p>"
+          "documentation": "<p>How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before timing out any related build that did not get marked as completed. The default is 60 minutes.</p>"
         },
         "queuedTimeoutInMinutes": {
           "shape": "TimeOut",
@@ -3093,11 +3081,11 @@
         },
         "encryptionKey": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>). </p>"
+          "documentation": "<p>The Key Management Service customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>). If you don't specify a value, CodeBuild uses the managed CMK for Amazon Simple Storage Service (Amazon S3). </p>"
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>A list of tag key and value pairs associated with this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>"
+          "documentation": "<p>A list of tag key and value pairs associated with this build project.</p> <p>These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.</p>"
         },
         "created": {
           "shape": "Timestamp",
@@ -3109,11 +3097,11 @@
         },
         "webhook": {
           "shape": "Webhook",
-          "documentation": "<p>Information about a webhook that connects repository events to a build project in AWS CodeBuild.</p>"
+          "documentation": "<p>Information about a webhook that connects repository events to a build project in CodeBuild.</p>"
         },
         "vpcConfig": {
           "shape": "VpcConfig",
-          "documentation": "<p>Information about the VPC configuration that AWS CodeBuild accesses.</p>"
+          "documentation": "<p>Information about the VPC configuration that CodeBuild accesses.</p>"
         },
         "badge": {
           "shape": "ProjectBadge",
@@ -3121,7 +3109,7 @@
         },
         "logsConfig": {
           "shape": "LogsConfig",
-          "documentation": "<p>Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs, an S3 bucket, or both. </p>"
+          "documentation": "<p>Information about logs for the build project. A project can create logs in CloudWatch Logs, an S3 bucket, or both. </p>"
         },
         "fileSystemLocations": {
           "shape": "ProjectFileSystemLocations",
@@ -3154,27 +3142,27 @@
       "members": {
         "type": {
           "shape": "ArtifactsType",
-          "documentation": "<p>The type of build output artifact. Valid values include:</p> <ul> <li> <p> <code>CODEPIPELINE</code>: The build project has build output generated through AWS CodePipeline. </p> <note> <p>The <code>CODEPIPELINE</code> type is not supported for <code>secondaryArtifacts</code>.</p> </note> </li> <li> <p> <code>NO_ARTIFACTS</code>: The build project does not produce any build output.</p> </li> <li> <p> <code>S3</code>: The build project stores build output in Amazon S3.</p> </li> </ul>"
+          "documentation": "<p>The type of build output artifact. Valid values include:</p> <ul> <li> <p> <code>CODEPIPELINE</code>: The build project has build output generated through CodePipeline. </p> <note> <p>The <code>CODEPIPELINE</code> type is not supported for <code>secondaryArtifacts</code>.</p> </note> </li> <li> <p> <code>NO_ARTIFACTS</code>: The build project does not produce any build output.</p> </li> <li> <p> <code>S3</code>: The build project stores build output in Amazon S3.</p> </li> </ul>"
         },
         "location": {
           "shape": "String",
-          "documentation": "<p>Information about the build output artifact location:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output locations instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the name of the output bucket.</p> </li> </ul>"
+          "documentation": "<p>Information about the build output artifact location:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output locations instead of CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the name of the output bucket.</p> </li> </ul>"
         },
         "path": {
           "shape": "String",
-          "documentation": "<p>Along with <code>namespaceType</code> and <code>name</code>, the pattern that AWS CodeBuild uses to name and store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the path to the output artifact. If <code>path</code> is not specified, <code>path</code> is not used.</p> </li> </ul> <p>For example, if <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>NONE</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, the output artifact is stored in the output bucket at <code>MyArtifacts/MyArtifact.zip</code>.</p>"
+          "documentation": "<p>Along with <code>namespaceType</code> and <code>name</code>, the pattern that CodeBuild uses to name and store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output names instead of CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the path to the output artifact. If <code>path</code> is not specified, <code>path</code> is not used.</p> </li> </ul> <p>For example, if <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>NONE</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, the output artifact is stored in the output bucket at <code>MyArtifacts/MyArtifact.zip</code>.</p>"
         },
         "namespaceType": {
           "shape": "ArtifactNamespace",
-          "documentation": "<p>Along with <code>path</code> and <code>name</code>, the pattern that AWS CodeBuild uses to determine the name and location to store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>BUILD_ID</code>: Include the build ID in the location of the build output artifact.</p> </li> <li> <p> <code>NONE</code>: Do not include the build ID. This is the default if <code>namespaceType</code> is not specified.</p> </li> </ul> </li> </ul> <p>For example, if <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, the output artifact is stored in <code>MyArtifacts/&lt;build-ID&gt;/MyArtifact.zip</code>.</p>"
+          "documentation": "<p>Along with <code>path</code> and <code>name</code>, the pattern that CodeBuild uses to determine the name and location to store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output names instead of CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>BUILD_ID</code>: Include the build ID in the location of the build output artifact.</p> </li> <li> <p> <code>NONE</code>: Do not include the build ID. This is the default if <code>namespaceType</code> is not specified.</p> </li> </ul> </li> </ul> <p>For example, if <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, the output artifact is stored in <code>MyArtifacts/&lt;build-ID&gt;/MyArtifact.zip</code>.</p>"
         },
         "name": {
           "shape": "String",
-          "documentation": "<p>Along with <code>path</code> and <code>namespaceType</code>, the pattern that AWS CodeBuild uses to name and store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output names instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the name of the output artifact object. If you set the name to be a forward slash (\"/\"), the artifact is stored in the root of the output bucket.</p> </li> </ul> <p>For example:</p> <ul> <li> <p> If <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, then the output artifact is stored in <code>MyArtifacts/&lt;build-ID&gt;/MyArtifact.zip</code>. </p> </li> <li> <p> If <code>path</code> is empty, <code>namespaceType</code> is set to <code>NONE</code>, and <code>name</code> is set to \"<code>/</code>\", the output artifact is stored in the root of the output bucket. </p> </li> <li> <p> If <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to \"<code>/</code>\", the output artifact is stored in <code>MyArtifacts/&lt;build-ID&gt;</code>. </p> </li> </ul>"
+          "documentation": "<p>Along with <code>path</code> and <code>namespaceType</code>, the pattern that CodeBuild uses to name and store the output artifact:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output names instead of CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, this is the name of the output artifact object. If you set the name to be a forward slash (\"/\"), the artifact is stored in the root of the output bucket.</p> </li> </ul> <p>For example:</p> <ul> <li> <p> If <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to <code>MyArtifact.zip</code>, then the output artifact is stored in <code>MyArtifacts/&lt;build-ID&gt;/MyArtifact.zip</code>. </p> </li> <li> <p> If <code>path</code> is empty, <code>namespaceType</code> is set to <code>NONE</code>, and <code>name</code> is set to \"<code>/</code>\", the output artifact is stored in the root of the output bucket. </p> </li> <li> <p> If <code>path</code> is set to <code>MyArtifacts</code>, <code>namespaceType</code> is set to <code>BUILD_ID</code>, and <code>name</code> is set to \"<code>/</code>\", the output artifact is stored in <code>MyArtifacts/&lt;build-ID&gt;</code>. </p> </li> </ul>"
         },
         "packaging": {
           "shape": "ArtifactPackaging",
-          "documentation": "<p>The type of build output artifact to create:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, AWS CodePipeline ignores this value if specified. This is because AWS CodePipeline manages its build output artifacts instead of AWS CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>NONE</code>: AWS CodeBuild creates in the output bucket a folder that contains the build output. This is the default if <code>packaging</code> is not specified.</p> </li> <li> <p> <code>ZIP</code>: AWS CodeBuild creates in the output bucket a ZIP file that contains the build output.</p> </li> </ul> </li> </ul>"
+          "documentation": "<p>The type of build output artifact to create:</p> <ul> <li> <p>If <code>type</code> is set to <code>CODEPIPELINE</code>, CodePipeline ignores this value if specified. This is because CodePipeline manages its build output artifacts instead of CodeBuild.</p> </li> <li> <p>If <code>type</code> is set to <code>NO_ARTIFACTS</code>, this value is ignored if specified, because no build output is produced.</p> </li> <li> <p>If <code>type</code> is set to <code>S3</code>, valid values include:</p> <ul> <li> <p> <code>NONE</code>: CodeBuild creates in the output bucket a folder that contains the build output. This is the default if <code>packaging</code> is not specified.</p> </li> <li> <p> <code>ZIP</code>: CodeBuild creates in the output bucket a ZIP file that contains the build output.</p> </li> </ul> </li> </ul>"
         },
         "overrideArtifactName": {
           "shape": "WrapperBoolean",
@@ -3187,9 +3175,6 @@
         "artifactIdentifier": {
           "shape": "String",
           "documentation": "<p> An identifier for this artifact definition. </p>"
-        },
-        "bucketOwnerAccess": {
-          "shape": "BucketOwnerAccess"
         }
       },
       "documentation": "<p>Information about the build output artifacts for the build project.</p>"
@@ -3280,15 +3265,15 @@
       "members": {
         "type": {
           "shape": "EnvironmentType",
-          "documentation": "<p>The type of build environment to use for related builds.</p> <ul> <li> <p>The environment type <code>ARM_CONTAINER</code> is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and EU (Frankfurt).</p> </li> <li> <p>The environment type <code>LINUX_CONTAINER</code> with compute type <code>build.general1.2xlarge</code> is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia).</p> </li> <li> <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and China (Ningxia).</p> </li> </ul>"
+          "documentation": "<p>The type of build environment to use for related builds.</p> <ul> <li> <p>The environment type <code>ARM_CONTAINER</code> is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), EU (Ireland), Asia Pacific (Mumbai), Asia Pacific (Tokyo), Asia Pacific (Sydney), and EU (Frankfurt).</p> </li> <li> <p>The environment type <code>LINUX_CONTAINER</code> with compute type <code>build.general1.2xlarge</code> is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney), China (Beijing), and China (Ningxia).</p> </li> <li> <p>The environment type <code>LINUX_GPU_CONTAINER</code> is available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), Canada (Central), EU (Ireland), EU (London), EU (Frankfurt), Asia Pacific (Tokyo), Asia Pacific (Seoul), Asia Pacific (Singapore), Asia Pacific (Sydney) , China (Beijing), and China (Ningxia).</p> </li> </ul> <ul> <li> <p>The environment types <code>WINDOWS_CONTAINER</code> and <code>WINDOWS_SERVER_2019_CONTAINER</code> are available only in regions US East (N. Virginia), US East (Ohio), US West (Oregon), and EU (Ireland).</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build environment compute types</a> in the <i>CodeBuild user guide</i>.</p>"
         },
         "image": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The image tag or image digest that identifies the Docker image to use for this build project. Use the following formats:</p> <ul> <li> <p>For an image tag: <code>&lt;registry&gt;/&lt;repository&gt;:&lt;tag&gt;</code>. For example, in the Docker repository that CodeBuild uses to manage its Docker images, this would be <code>aws/codebuild/standard:4.0</code>. </p> </li> <li> <p>For an image digest: <code>&lt;registry&gt;/&lt;repository&gt;@&lt;digest&gt;</code>. For example, to specify an image with the digest \"sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf,\" use <code>&lt;registry&gt;/&lt;repository&gt;@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf</code>.</p> </li> </ul>"
+          "documentation": "<p>The image tag or image digest that identifies the Docker image to use for this build project. Use the following formats:</p> <ul> <li> <p>For an image tag: <code>&lt;registry&gt;/&lt;repository&gt;:&lt;tag&gt;</code>. For example, in the Docker repository that CodeBuild uses to manage its Docker images, this would be <code>aws/codebuild/standard:4.0</code>. </p> </li> <li> <p>For an image digest: <code>&lt;registry&gt;/&lt;repository&gt;@&lt;digest&gt;</code>. For example, to specify an image with the digest \"sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf,\" use <code>&lt;registry&gt;/&lt;repository&gt;@sha256:cbbf2f9a99b47fc460d422812b6a5adff7dfee951d8fa2e4a98caa0382cfbdbf</code>.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-available.html\">Docker images provided by CodeBuild</a> in the <i>CodeBuild user guide</i>.</p>"
         },
         "computeType": {
           "shape": "ComputeType",
-          "documentation": "<p>Information about the compute resources the build project uses. Available values include:</p> <ul> <li> <p> <code>BUILD_GENERAL1_SMALL</code>: Use up to 3 GB memory and 2 vCPUs for builds.</p> </li> <li> <p> <code>BUILD_GENERAL1_MEDIUM</code>: Use up to 7 GB memory and 4 vCPUs for builds.</p> </li> <li> <p> <code>BUILD_GENERAL1_LARGE</code>: Use up to 16 GB memory and 8 vCPUs for builds, depending on your environment type.</p> </li> <li> <p> <code>BUILD_GENERAL1_2XLARGE</code>: Use up to 145 GB memory, 72 vCPUs, and 824 GB of SSD storage for builds. This compute type supports Docker images up to 100 GB uncompressed.</p> </li> </ul> <p> If you use <code>BUILD_GENERAL1_LARGE</code>: </p> <ul> <li> <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 15 GB memory and 8 vCPUs for builds. </p> </li> <li> <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 255 GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.</p> </li> <li> <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 16 GB memory and 8 vCPUs on ARM-based processors for builds.</p> </li> </ul> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build Environment Compute Types</a> in the <i>AWS CodeBuild User Guide.</i> </p>"
+          "documentation": "<p>Information about the compute resources the build project uses. Available values include:</p> <ul> <li> <p> <code>BUILD_GENERAL1_SMALL</code>: Use up to 3 GB memory and 2 vCPUs for builds.</p> </li> <li> <p> <code>BUILD_GENERAL1_MEDIUM</code>: Use up to 7 GB memory and 4 vCPUs for builds.</p> </li> <li> <p> <code>BUILD_GENERAL1_LARGE</code>: Use up to 16 GB memory and 8 vCPUs for builds, depending on your environment type.</p> </li> <li> <p> <code>BUILD_GENERAL1_2XLARGE</code>: Use up to 145 GB memory, 72 vCPUs, and 824 GB of SSD storage for builds. This compute type supports Docker images up to 100 GB uncompressed.</p> </li> </ul> <p> If you use <code>BUILD_GENERAL1_LARGE</code>: </p> <ul> <li> <p> For environment type <code>LINUX_CONTAINER</code>, you can use up to 15 GB memory and 8 vCPUs for builds. </p> </li> <li> <p> For environment type <code>LINUX_GPU_CONTAINER</code>, you can use up to 255 GB memory, 32 vCPUs, and 4 NVIDIA Tesla V100 GPUs for builds.</p> </li> <li> <p> For environment type <code>ARM_CONTAINER</code>, you can use up to 16 GB memory and 8 vCPUs on ARM-based processors for builds.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-env-ref-compute-types.html\">Build Environment Compute Types</a> in the <i>CodeBuild User Guide.</i> </p>"
         },
         "environmentVariables": {
           "shape": "EnvironmentVariables",
@@ -3300,7 +3285,7 @@
         },
         "certificate": {
           "shape": "String",
-          "documentation": "<p>The ARN of the Amazon S3 bucket, path prefix, and object key that contains the PEM-encoded certificate for the build project. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-cli.html#cli.environment.certificate\">certificate</a> in the <i>AWS CodeBuild User Guide</i>.</p>"
+          "documentation": "<p>The ARN of the Amazon S3 bucket, path prefix, and object key that contains the PEM-encoded certificate for the build project. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/create-project-cli.html#cli.environment.certificate\">certificate</a> in the <i>CodeBuild User Guide</i>.</p>"
         },
         "registryCredential": {
           "shape": "RegistryCredential",
@@ -3308,7 +3293,7 @@
         },
         "imagePullCredentialsType": {
           "shape": "ImagePullCredentialsType",
-          "documentation": "<p> The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid values: </p> <ul> <li> <p> <code>CODEBUILD</code> specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild's service principal. </p> </li> <li> <p> <code>SERVICE_ROLE</code> specifies that AWS CodeBuild uses your build project's service role. </p> </li> </ul> <p> When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials. </p>"
+          "documentation": "<p> The type of credentials CodeBuild uses to pull images in your build. There are two valid values: </p> <ul> <li> <p> <code>CODEBUILD</code> specifies that CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust CodeBuild service principal. </p> </li> <li> <p> <code>SERVICE_ROLE</code> specifies that CodeBuild uses your build project's service role. </p> </li> </ul> <p> When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an CodeBuild curated image, you must use CODEBUILD credentials. </p>"
         }
       },
       "documentation": "<p>Information about the build environment of the build project.</p>"
@@ -3322,7 +3307,7 @@
         },
         "location": {
           "shape": "String",
-          "documentation": "<p>A string that specifies the location of the file system created by Amazon EFS. Its format is <code>efs-dns-name:/directory-path</code>. You can find the DNS name of file system when you view it in the AWS EFS console. The directory path is a path to a directory in the file system that CodeBuild mounts. For example, if the DNS name of a file system is <code>fs-abcd1234.efs.us-west-2.amazonaws.com</code>, and its mount directory is <code>my-efs-mount-directory</code>, then the <code>location</code> is <code>fs-abcd1234.efs.us-west-2.amazonaws.com:/my-efs-mount-directory</code>. </p> <p>The directory path in the format <code>efs-dns-name:/directory-path</code> is optional. If you do not specify a directory path, the location is only the DNS name and CodeBuild mounts the entire file system. </p>"
+          "documentation": "<p>A string that specifies the location of the file system created by Amazon EFS. Its format is <code>efs-dns-name:/directory-path</code>. You can find the DNS name of file system when you view it in the Amazon EFS console. The directory path is a path to a directory in the file system that CodeBuild mounts. For example, if the DNS name of a file system is <code>fs-abcd1234.efs.us-west-2.amazonaws.com</code>, and its mount directory is <code>my-efs-mount-directory</code>, then the <code>location</code> is <code>fs-abcd1234.efs.us-west-2.amazonaws.com:/my-efs-mount-directory</code>. </p> <p>The directory path in the format <code>efs-dns-name:/directory-path</code> is optional. If you do not specify a directory path, the location is only the DNS name and CodeBuild mounts the entire file system. </p>"
         },
         "mountPoint": {
           "shape": "String",
@@ -3334,7 +3319,7 @@
         },
         "mountOptions": {
           "shape": "String",
-          "documentation": "<p> The mount options for a file system created by AWS EFS. The default mount options used by CodeBuild are <code>nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2</code>. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/mounting-fs-nfs-mount-settings.html\">Recommended NFS Mount Options</a>. </p>"
+          "documentation": "<p> The mount options for a file system created by Amazon EFS. The default mount options used by CodeBuild are <code>nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2</code>. For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/mounting-fs-nfs-mount-settings.html\">Recommended NFS Mount Options</a>. </p>"
         }
       },
       "documentation": "<p> Information about a file system created by Amazon Elastic File System (EFS). For more information, see <a href=\"https://docs.aws.amazon.com/efs/latest/ug/whatisefs.html\">What Is Amazon Elastic File System?</a> </p>"
@@ -3383,11 +3368,11 @@
       "members": {
         "type": {
           "shape": "SourceType",
-          "documentation": "<p>The type of repository that contains the source code to be built. Valid values include:</p> <ul> <li> <p> <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p> </li> <li> <p> <code>CODECOMMIT</code>: The source code is in an AWS CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code>: The source code settings are specified in the source action of a pipeline in AWS CodePipeline.</p> </li> <li> <p> <code>GITHUB</code>: The source code is in a GitHub or GitHub Enterprise Cloud repository.</p> </li> <li> <p> <code>GITHUB_ENTERPRISE</code>: The source code is in a GitHub Enterprise Server repository.</p> </li> <li> <p> <code>NO_SOURCE</code>: The project does not have input source code.</p> </li> <li> <p> <code>S3</code>: The source code is in an Amazon S3 bucket.</p> </li> </ul>"
+          "documentation": "<p>The type of repository that contains the source code to be built. Valid values include:</p> <ul> <li> <p> <code>BITBUCKET</code>: The source code is in a Bitbucket repository.</p> </li> <li> <p> <code>CODECOMMIT</code>: The source code is in an CodeCommit repository.</p> </li> <li> <p> <code>CODEPIPELINE</code>: The source code settings are specified in the source action of a pipeline in CodePipeline.</p> </li> <li> <p> <code>GITHUB</code>: The source code is in a GitHub or GitHub Enterprise Cloud repository.</p> </li> <li> <p> <code>GITHUB_ENTERPRISE</code>: The source code is in a GitHub Enterprise Server repository.</p> </li> <li> <p> <code>NO_SOURCE</code>: The project does not have input source code.</p> </li> <li> <p> <code>S3</code>: The source code is in an Amazon S3 bucket.</p> </li> </ul>"
         },
         "location": {
           "shape": "String",
-          "documentation": "<p>Information about the location of the source code to be built. Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, <code>location</code> should not be specified. If it is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline's source action instead of this value.</p> </li> <li> <p>For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the buildspec file (for example, <code>https://git-codecommit.&lt;region-ID&gt;.amazonaws.com/v1/repos/&lt;repo-name&gt;</code>).</p> </li> <li> <p>For source code in an Amazon S3 input bucket, one of the following. </p> <ul> <li> <p>The path to the ZIP file that contains the source code (for example, <code>&lt;bucket-name&gt;/&lt;path&gt;/&lt;object-name&gt;.zip</code>). </p> </li> <li> <p>The path to the folder that contains the source code (for example, <code>&lt;bucket-name&gt;/&lt;path-to-source-code&gt;/&lt;folder&gt;/</code>). </p> </li> </ul> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your AWS account to your GitHub account. Use the AWS CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with GitHub, on the GitHub <b>Authorize application</b> page, for <b>Organization access</b>, choose <b>Request access</b> next to each repository you want to allow AWS CodeBuild to have access to, and then choose <b>Authorize application</b>. (After you have connected to your GitHub account, you do not need to finish creating the build project. You can leave the AWS CodeBuild console.) To instruct AWS CodeBuild to use this connection, in the <code>source</code> object, set the <code>auth</code> object's <code>type</code> value to <code>OAUTH</code>.</p> </li> <li> <p>For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your AWS account to your Bitbucket account. Use the AWS CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with Bitbucket, on the Bitbucket <b>Confirm access to your account</b> page, choose <b>Grant access</b>. (After you have connected to your Bitbucket account, you do not need to finish creating the build project. You can leave the AWS CodeBuild console.) To instruct AWS CodeBuild to use this connection, in the <code>source</code> object, set the <code>auth</code> object's <code>type</code> value to <code>OAUTH</code>.</p> </li> </ul>"
+          "documentation": "<p>Information about the location of the source code to be built. Valid values include:</p> <ul> <li> <p>For source code settings that are specified in the source action of a pipeline in CodePipeline, <code>location</code> should not be specified. If it is specified, CodePipeline ignores it. This is because CodePipeline uses the settings in a pipeline's source action instead of this value.</p> </li> <li> <p>For source code in an CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the buildspec file (for example, <code>https://git-codecommit.&lt;region-ID&gt;.amazonaws.com/v1/repos/&lt;repo-name&gt;</code>).</p> </li> <li> <p>For source code in an Amazon S3 input bucket, one of the following. </p> <ul> <li> <p>The path to the ZIP file that contains the source code (for example, <code>&lt;bucket-name&gt;/&lt;path&gt;/&lt;object-name&gt;.zip</code>). </p> </li> <li> <p>The path to the folder that contains the source code (for example, <code>&lt;bucket-name&gt;/&lt;path-to-source-code&gt;/&lt;folder&gt;/</code>). </p> </li> </ul> </li> <li> <p>For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your account to your GitHub account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with GitHub, on the GitHub <b>Authorize application</b> page, for <b>Organization access</b>, choose <b>Request access</b> next to each repository you want to allow CodeBuild to have access to, and then choose <b>Authorize application</b>. (After you have connected to your GitHub account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to use this connection, in the <code>source</code> object, set the <code>auth</code> object's <code>type</code> value to <code>OAUTH</code>.</p> </li> <li> <p>For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the buildspec file. You must connect your Amazon Web Services account to your Bitbucket account. Use the CodeBuild console to start creating a build project. When you use the console to connect (or reconnect) with Bitbucket, on the Bitbucket <b>Confirm access to your account</b> page, choose <b>Grant access</b>. (After you have connected to your Bitbucket account, you do not need to finish creating the build project. You can leave the CodeBuild console.) To instruct CodeBuild to use this connection, in the <code>source</code> object, set the <code>auth</code> object's <code>type</code> value to <code>OAUTH</code>.</p> </li> </ul> <p> If you specify <code>CODEPIPELINE</code> for the <code>Type</code> property, don't specify this property. For all of the other types, you must specify <code>Location</code>. </p>"
         },
         "gitCloneDepth": {
           "shape": "GitCloneDepth",
@@ -3399,15 +3384,15 @@
         },
         "buildspec": {
           "shape": "String",
-          "documentation": "<p>The buildspec file declaration to use for the builds in this build project.</p> <p> If this value is set, it can be either an inline buildspec definition, the path to an alternate buildspec file relative to the value of the built-in <code>CODEBUILD_SRC_DIR</code> environment variable, or the path to an S3 bucket. The bucket must be in the same AWS Region as the build project. Specify the buildspec file using its ARN (for example, <code>arn:aws:s3:::my-codebuild-sample2/buildspec.yml</code>). If this value is not provided or is set to an empty string, the source code must contain a buildspec file in its root directory. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage\">Buildspec File Name and Storage Location</a>. </p>"
+          "documentation": "<p>The buildspec file declaration to use for the builds in this build project.</p> <p> If this value is set, it can be either an inline buildspec definition, the path to an alternate buildspec file relative to the value of the built-in <code>CODEBUILD_SRC_DIR</code> environment variable, or the path to an S3 bucket. The bucket must be in the same Region as the build project. Specify the buildspec file using its ARN (for example, <code>arn:aws:s3:::my-codebuild-sample2/buildspec.yml</code>). If this value is not provided or is set to an empty string, the source code must contain a buildspec file in its root directory. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage\">Buildspec File Name and Storage Location</a>. </p>"
         },
         "auth": {
           "shape": "SourceAuth",
-          "documentation": "<p>Information about the authorization settings for AWS CodeBuild to access the source code to be built.</p> <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly.</p>"
+          "documentation": "<p>Information about the authorization settings for CodeBuild to access the source code to be built.</p> <p>This information is for the CodeBuild console's use only. Your code should not get or set this information directly.</p>"
         },
         "reportBuildStatus": {
           "shape": "WrapperBoolean",
-          "documentation": "<p> Set to true to report the status of a build's start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set and you use a different source provider, an <code>invalidInputException</code> is thrown. </p> <p>To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>AWS CodeBuild User Guide</i>.</p> <note> <p> The status of a build triggered by a webhook is always reported to your source provider. </p> </note>"
+          "documentation": "<p> Set to true to report the status of a build's start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set and you use a different source provider, an <code>invalidInputException</code> is thrown. </p> <p>To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>CodeBuild User Guide</i>.</p> <note> <p> The status of a build triggered by a webhook is always reported to your source provider. </p> </note>"
         },
         "buildStatusConfig": {
           "shape": "BuildStatusConfig",
@@ -3437,7 +3422,7 @@
         },
         "sourceVersion": {
           "shape": "String",
-          "documentation": "<p>The source version for the corresponding source identifier. If specified, must be one of:</p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon S3: the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+          "documentation": "<p>The source version for the corresponding source identifier. If specified, must be one of:</p> <ul> <li> <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example, <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon S3: the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>"
         }
       },
       "documentation": "<p> A source identifier and its corresponding version. </p>"
@@ -3465,7 +3450,7 @@
       "members": {
         "policy": {
           "shape": "NonEmptyString",
-          "documentation": "<p> A JSON-formatted resource policy. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/project-sharing.html#project-sharing-share\">Sharing a Project</a> and <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/report-groups-sharing.html#report-groups-sharing-share\">Sharing a Report Group</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+          "documentation": "<p> A JSON-formatted resource policy. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/project-sharing.html#project-sharing-share\">Sharing a Project</a> and <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/report-groups-sharing.html#report-groups-sharing-share\">Sharing a Report Group</a> in the <i>CodeBuild User Guide</i>. </p>"
         },
         "resourceArn": {
           "shape": "NonEmptyString",
@@ -3491,14 +3476,14 @@
       "members": {
         "credential": {
           "shape": "NonEmptyString",
-          "documentation": "<p> The Amazon Resource Name (ARN) or name of credentials created using AWS Secrets Manager. </p> <note> <p> The <code>credential</code> can use the name of the credentials only if they exist in your current AWS Region. </p> </note>"
+          "documentation": "<p> The Amazon Resource Name (ARN) or name of credentials created using Secrets Manager. </p> <note> <p> The <code>credential</code> can use the name of the credentials only if they exist in your current Region. </p> </note>"
         },
         "credentialProvider": {
           "shape": "CredentialProviderType",
-          "documentation": "<p> The service that created the credentials to access a private Docker registry. The valid value, SECRETS_MANAGER, is for AWS Secrets Manager. </p>"
+          "documentation": "<p> The service that created the credentials to access a private Docker registry. The valid value, SECRETS_MANAGER, is for Secrets Manager. </p>"
         }
       },
-      "documentation": "<p> Information about credentials that provide access to a private Docker registry. When this is set: </p> <ul> <li> <p> <code>imagePullCredentialsType</code> must be set to <code>SERVICE_ROLE</code>. </p> </li> <li> <p> images cannot be curated or an Amazon ECR image.</p> </li> </ul> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html\">Private Registry with AWS Secrets Manager Sample for AWS CodeBuild</a>. </p>"
+      "documentation": "<p> Information about credentials that provide access to a private Docker registry. When this is set: </p> <ul> <li> <p> <code>imagePullCredentialsType</code> must be set to <code>SERVICE_ROLE</code>. </p> </li> <li> <p> images cannot be curated or an Amazon ECR image.</p> </li> </ul> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-private-registry.html\">Private Registry with Secrets Manager Sample for CodeBuild</a>. </p>"
     },
     "Report": {
       "type": "structure",
@@ -3629,7 +3614,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>A list of tag key and value pairs associated with this report group. </p> <p>These tags are available for use by AWS services that support AWS CodeBuild report group tags.</p>"
+          "documentation": "<p>A list of tag key and value pairs associated with this report group. </p> <p>These tags are available for use by Amazon Web Services services that support CodeBuild report group tags.</p>"
         },
         "status": {
           "shape": "ReportGroupStatusType",
@@ -3800,7 +3785,7 @@
         },
         "idempotencyToken": {
           "shape": "String",
-          "documentation": "<p>A unique, case sensitive identifier you provide to ensure the idempotency of the <code>RetryBuildBatch</code> request. The token is included in the <code>RetryBuildBatch</code> request and is valid for five minutes. If you repeat the <code>RetryBuildBatch</code> request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error.</p>"
+          "documentation": "<p>A unique, case sensitive identifier you provide to ensure the idempotency of the <code>RetryBuildBatch</code> request. The token is included in the <code>RetryBuildBatch</code> request and is valid for five minutes. If you repeat the <code>RetryBuildBatch</code> request with the same token, but change a parameter, CodeBuild returns a parameter mismatch error.</p>"
         },
         "retryType": {
           "shape": "RetryBuildBatchType",
@@ -3832,7 +3817,7 @@
         },
         "idempotencyToken": {
           "shape": "String",
-          "documentation": "<p>A unique, case sensitive identifier you provide to ensure the idempotency of the <code>RetryBuild</code> request. The token is included in the <code>RetryBuild</code> request and is valid for five minutes. If you repeat the <code>RetryBuild</code> request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error.</p>"
+          "documentation": "<p>A unique, case sensitive identifier you provide to ensure the idempotency of the <code>RetryBuild</code> request. The token is included in the <code>RetryBuild</code> request and is valid for five minutes. If you repeat the <code>RetryBuild</code> request with the same token, but change a parameter, CodeBuild returns a parameter mismatch error.</p>"
         }
       }
     },
@@ -3861,9 +3846,6 @@
         "encryptionDisabled": {
           "shape": "WrapperBoolean",
           "documentation": "<p> Set to true if you do not want your S3 build log output encrypted. By default S3 build logs are encrypted. </p>"
-        },
-        "bucketOwnerAccess": {
-          "shape": "BucketOwnerAccess"
         }
       },
       "documentation": "<p> Information about S3 logs for a build project. </p>"
@@ -3877,7 +3859,7 @@
         },
         "bucketOwner": {
           "shape": "String",
-          "documentation": "<p>The AWS account identifier of the owner of the Amazon S3 bucket. This allows report data to be exported to an Amazon S3 bucket that is owned by an account other than the account running the build.</p>"
+          "documentation": "<p>The Amazon Web Services account identifier of the owner of the Amazon S3 bucket. This allows report data to be exported to an Amazon S3 bucket that is owned by an account other than the account running the build.</p>"
         },
         "path": {
           "shape": "String",
@@ -3885,7 +3867,7 @@
         },
         "packaging": {
           "shape": "ReportPackagingType",
-          "documentation": "<p> The type of build output artifact to create. Valid values include: </p> <ul> <li> <p> <code>NONE</code>: AWS CodeBuild creates the raw data in the output bucket. This is the default if packaging is not specified. </p> </li> <li> <p> <code>ZIP</code>: AWS CodeBuild creates a ZIP file with the raw data in the output bucket. </p> </li> </ul>"
+          "documentation": "<p> The type of build output artifact to create. Valid values include: </p> <ul> <li> <p> <code>NONE</code>: CodeBuild creates the raw data in the output bucket. This is the default if packaging is not specified. </p> </li> <li> <p> <code>ZIP</code>: CodeBuild creates a ZIP file with the raw data in the output bucket. </p> </li> </ul>"
         },
         "encryptionKey": {
           "shape": "NonEmptyString",
@@ -3947,7 +3929,7 @@
           "documentation": "<p>The resource value that applies to the specified authorization type.</p>"
         }
       },
-      "documentation": "<p>Information about the authorization settings for AWS CodeBuild to access the source code to be built.</p> <p>This information is for the AWS CodeBuild console's use only. Your code should not get or set this information directly.</p>"
+      "documentation": "<p>Information about the authorization settings for CodeBuild to access the source code to be built.</p> <p>This information is for the CodeBuild console's use only. Your code should not get or set this information directly.</p>"
     },
     "SourceAuthType": {
       "type": "string",
@@ -4011,7 +3993,7 @@
         },
         "sourceVersion": {
           "shape": "String",
-          "documentation": "<p>The version of the batch build input to be built, for this build only. If not specified, the latest version is used. If specified, the contents depends on the source provider:</p> <dl> <dt>AWS CodeCommit</dt> <dd> <p>The commit ID, branch, or Git tag to use.</p> </dd> <dt>GitHub</dt> <dd> <p>The commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </dd> <dt>Bitbucket</dt> <dd> <p>The commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </dd> <dt>Amazon S3</dt> <dd> <p>The version ID of the object that represents the build input ZIP file to use.</p> </dd> </dl> <p>If <code>sourceVersion</code> is specified at the project level, then this <code>sourceVersion</code> (at the build level) takes precedence. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+          "documentation": "<p>The version of the batch build input to be built, for this build only. If not specified, the latest version is used. If specified, the contents depends on the source provider:</p> <dl> <dt>CodeCommit</dt> <dd> <p>The commit ID, branch, or Git tag to use.</p> </dd> <dt>GitHub</dt> <dd> <p>The commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </dd> <dt>Bitbucket</dt> <dd> <p>The commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </dd> <dt>Amazon S3</dt> <dd> <p>The version ID of the object that represents the build input ZIP file to use.</p> </dd> </dl> <p>If <code>sourceVersion</code> is specified at the project level, then this <code>sourceVersion</code> (at the build level) takes precedence. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>"
         },
         "artifactsOverride": {
           "shape": "ProjectArtifacts",
@@ -4047,7 +4029,7 @@
         },
         "buildspecOverride": {
           "shape": "String",
-          "documentation": "<p>A buildspec file declaration that overrides, for this build only, the latest one already defined in the build project.</p> <p>If this value is set, it can be either an inline buildspec definition, the path to an alternate buildspec file relative to the value of the built-in <code>CODEBUILD_SRC_DIR</code> environment variable, or the path to an S3 bucket. The bucket must be in the same AWS Region as the build project. Specify the buildspec file using its ARN (for example, <code>arn:aws:s3:::my-codebuild-sample2/buildspec.yml</code>). If this value is not provided or is set to an empty string, the source code must contain a buildspec file in its root directory. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage\">Buildspec File Name and Storage Location</a>. </p>"
+          "documentation": "<p>A buildspec file declaration that overrides, for this build only, the latest one already defined in the build project.</p> <p>If this value is set, it can be either an inline buildspec definition, the path to an alternate buildspec file relative to the value of the built-in <code>CODEBUILD_SRC_DIR</code> environment variable, or the path to an S3 bucket. The bucket must be in the same Region as the build project. Specify the buildspec file using its ARN (for example, <code>arn:aws:s3:::my-codebuild-sample2/buildspec.yml</code>). If this value is not provided or is set to an empty string, the source code must contain a buildspec file in its root directory. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage\">Buildspec File Name and Storage Location</a>. </p>"
         },
         "insecureSslOverride": {
           "shape": "WrapperBoolean",
@@ -4095,11 +4077,11 @@
         },
         "encryptionKeyOverride": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) that overrides the one specified in the batch build project. The CMK key encrypts the build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>).</p>"
+          "documentation": "<p>The Key Management Service customer master key (CMK) that overrides the one specified in the batch build project. The CMK key encrypts the build output artifacts.</p> <note> <p>You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>).</p>"
         },
         "idempotencyToken": {
           "shape": "String",
-          "documentation": "<p>A unique, case sensitive identifier you provide to ensure the idempotency of the <code>StartBuildBatch</code> request. The token is included in the <code>StartBuildBatch</code> request and is valid for five minutes. If you repeat the <code>StartBuildBatch</code> request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error.</p>"
+          "documentation": "<p>A unique, case sensitive identifier you provide to ensure the idempotency of the <code>StartBuildBatch</code> request. The token is included in the <code>StartBuildBatch</code> request and is valid for five minutes. If you repeat the <code>StartBuildBatch</code> request with the same token, but change a parameter, CodeBuild returns a parameter mismatch error.</p>"
         },
         "logsConfigOverride": {
           "shape": "LogsConfig",
@@ -4111,7 +4093,7 @@
         },
         "imagePullCredentialsTypeOverride": {
           "shape": "ImagePullCredentialsType",
-          "documentation": "<p>The type of credentials AWS CodeBuild uses to pull images in your batch build. There are two valid values: </p> <dl> <dt>CODEBUILD</dt> <dd> <p>Specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild's service principal.</p> </dd> <dt>SERVICE_ROLE</dt> <dd> <p>Specifies that AWS CodeBuild uses your build project's service role. </p> </dd> </dl> <p>When using a cross-account or private registry image, you must use <code>SERVICE_ROLE</code> credentials. When using an AWS CodeBuild curated image, you must use <code>CODEBUILD</code> credentials. </p>"
+          "documentation": "<p>The type of credentials CodeBuild uses to pull images in your batch build. There are two valid values: </p> <dl> <dt>CODEBUILD</dt> <dd> <p>Specifies that CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust CodeBuild's service principal.</p> </dd> <dt>SERVICE_ROLE</dt> <dd> <p>Specifies that CodeBuild uses your build project's service role. </p> </dd> </dl> <p>When using a cross-account or private registry image, you must use <code>SERVICE_ROLE</code> credentials. When using an CodeBuild curated image, you must use <code>CODEBUILD</code> credentials. </p>"
         },
         "buildBatchConfigOverride": {
           "shape": "ProjectBuildBatchConfig",
@@ -4140,7 +4122,7 @@
       "members": {
         "projectName": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The name of the AWS CodeBuild build project to start running a build.</p>"
+          "documentation": "<p>The name of the CodeBuild build project to start running a build.</p>"
         },
         "secondarySourcesOverride": {
           "shape": "ProjectSources",
@@ -4152,7 +4134,7 @@
         },
         "sourceVersion": {
           "shape": "String",
-          "documentation": "<p>The version of the build input to be built, for this build only. If not specified, the latest version is used. If specified, the contents depends on the source provider:</p> <dl> <dt>AWS CodeCommit</dt> <dd> <p>The commit ID, branch, or Git tag to use.</p> </dd> <dt>GitHub</dt> <dd> <p>The commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </dd> <dt>Bitbucket</dt> <dd> <p>The commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </dd> <dt>Amazon S3</dt> <dd> <p>The version ID of the object that represents the build input ZIP file to use.</p> </dd> </dl> <p>If <code>sourceVersion</code> is specified at the project level, then this <code>sourceVersion</code> (at the build level) takes precedence. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+          "documentation": "<p>The version of the build input to be built, for this build only. If not specified, the latest version is used. If specified, the contents depends on the source provider:</p> <dl> <dt>CodeCommit</dt> <dd> <p>The commit ID, branch, or Git tag to use.</p> </dd> <dt>GitHub</dt> <dd> <p>The commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </dd> <dt>Bitbucket</dt> <dd> <p>The commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </dd> <dt>Amazon S3</dt> <dd> <p>The version ID of the object that represents the build input ZIP file to use.</p> </dd> </dl> <p>If <code>sourceVersion</code> is specified at the project level, then this <code>sourceVersion</code> (at the build level) takes precedence. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>"
         },
         "artifactsOverride": {
           "shape": "ProjectArtifacts",
@@ -4184,11 +4166,11 @@
         },
         "gitSubmodulesConfigOverride": {
           "shape": "GitSubmodulesConfig",
-          "documentation": "<p> Information about the Git submodules configuration for this build of an AWS CodeBuild build project. </p>"
+          "documentation": "<p> Information about the Git submodules configuration for this build of an CodeBuild build project. </p>"
         },
         "buildspecOverride": {
           "shape": "String",
-          "documentation": "<p>A buildspec file declaration that overrides, for this build only, the latest one already defined in the build project.</p> <p> If this value is set, it can be either an inline buildspec definition, the path to an alternate buildspec file relative to the value of the built-in <code>CODEBUILD_SRC_DIR</code> environment variable, or the path to an S3 bucket. The bucket must be in the same AWS Region as the build project. Specify the buildspec file using its ARN (for example, <code>arn:aws:s3:::my-codebuild-sample2/buildspec.yml</code>). If this value is not provided or is set to an empty string, the source code must contain a buildspec file in its root directory. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage\">Buildspec File Name and Storage Location</a>. </p>"
+          "documentation": "<p>A buildspec file declaration that overrides, for this build only, the latest one already defined in the build project.</p> <p> If this value is set, it can be either an inline buildspec definition, the path to an alternate buildspec file relative to the value of the built-in <code>CODEBUILD_SRC_DIR</code> environment variable, or the path to an S3 bucket. The bucket must be in the same Region as the build project. Specify the buildspec file using its ARN (for example, <code>arn:aws:s3:::my-codebuild-sample2/buildspec.yml</code>). If this value is not provided or is set to an empty string, the source code must contain a buildspec file in its root directory. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html#build-spec-ref-name-storage\">Buildspec File Name and Storage Location</a>. </p>"
         },
         "insecureSslOverride": {
           "shape": "WrapperBoolean",
@@ -4196,7 +4178,7 @@
         },
         "reportBuildStatusOverride": {
           "shape": "WrapperBoolean",
-          "documentation": "<p> Set to true to report to your source provider the status of a build's start and completion. If you use this option with a source provider other than GitHub, GitHub Enterprise, or Bitbucket, an <code>invalidInputException</code> is thrown. </p> <p>To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>AWS CodeBuild User Guide</i>.</p> <note> <p> The status of a build triggered by a webhook is always reported to your source provider. </p> </note>"
+          "documentation": "<p> Set to true to report to your source provider the status of a build's start and completion. If you use this option with a source provider other than GitHub, GitHub Enterprise, or Bitbucket, an <code>invalidInputException</code> is thrown. </p> <p>To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html\">Source provider access</a> in the <i>CodeBuild User Guide</i>.</p> <note> <p> The status of a build triggered by a webhook is always reported to your source provider. </p> </note>"
         },
         "buildStatusConfigOverride": {
           "shape": "BuildStatusConfig",
@@ -4240,11 +4222,11 @@
         },
         "encryptionKeyOverride": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) that overrides the one specified in the build project. The CMK key encrypts the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>).</p>"
+          "documentation": "<p>The Key Management Service customer master key (CMK) that overrides the one specified in the build project. The CMK key encrypts the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>).</p>"
         },
         "idempotencyToken": {
           "shape": "String",
-          "documentation": "<p>A unique, case sensitive identifier you provide to ensure the idempotency of the StartBuild request. The token is included in the StartBuild request and is valid for 5 minutes. If you repeat the StartBuild request with the same token, but change a parameter, AWS CodeBuild returns a parameter mismatch error. </p>"
+          "documentation": "<p>A unique, case sensitive identifier you provide to ensure the idempotency of the StartBuild request. The token is included in the StartBuild request and is valid for 5 minutes. If you repeat the StartBuild request with the same token, but change a parameter, CodeBuild returns a parameter mismatch error. </p>"
         },
         "logsConfigOverride": {
           "shape": "LogsConfig",
@@ -4256,7 +4238,7 @@
         },
         "imagePullCredentialsTypeOverride": {
           "shape": "ImagePullCredentialsType",
-          "documentation": "<p>The type of credentials AWS CodeBuild uses to pull images in your build. There are two valid values: </p> <dl> <dt>CODEBUILD</dt> <dd> <p>Specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust AWS CodeBuild's service principal.</p> </dd> <dt>SERVICE_ROLE</dt> <dd> <p>Specifies that AWS CodeBuild uses your build project's service role. </p> </dd> </dl> <p>When using a cross-account or private registry image, you must use <code>SERVICE_ROLE</code> credentials. When using an AWS CodeBuild curated image, you must use <code>CODEBUILD</code> credentials. </p>"
+          "documentation": "<p>The type of credentials CodeBuild uses to pull images in your build. There are two valid values: </p> <dl> <dt>CODEBUILD</dt> <dd> <p>Specifies that CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust CodeBuild's service principal.</p> </dd> <dt>SERVICE_ROLE</dt> <dd> <p>Specifies that CodeBuild uses your build project's service role. </p> </dd> </dl> <p>When using a cross-account or private registry image, you must use <code>SERVICE_ROLE</code> credentials. When using an CodeBuild curated image, you must use <code>CODEBUILD</code> credentials. </p>"
         },
         "debugSessionEnabled": {
           "shape": "WrapperBoolean",
@@ -4347,7 +4329,7 @@
           "documentation": "<p>The tag's value.</p>"
         }
       },
-      "documentation": "<p>A tag, consisting of a key and a value.</p> <p>This tag is available for use by AWS services that support tags in AWS CodeBuild.</p>"
+      "documentation": "<p>A tag, consisting of a key and a value.</p> <p>This tag is available for use by Amazon Web Services services that support tags in CodeBuild.</p>"
     },
     "TagList": {
       "type": "list",
@@ -4470,7 +4452,7 @@
         },
         "sourceVersion": {
           "shape": "String",
-          "documentation": "<p> A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of: </p> <ul> <li> <p>For AWS CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon S3: the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>AWS CodeBuild User Guide</i>. </p>"
+          "documentation": "<p> A version of the build input to be built for this project. If not specified, the latest version is used. If specified, it must be one of: </p> <ul> <li> <p>For CodeCommit: the commit ID, branch, or Git tag to use.</p> </li> <li> <p>For GitHub: the commit ID, pull request ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a pull request ID is specified, it must use the format <code>pr/pull-request-ID</code> (for example <code>pr/25</code>). If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Bitbucket: the commit ID, branch name, or tag name that corresponds to the version of the source code you want to build. If a branch name is specified, the branch's HEAD commit ID is used. If not specified, the default branch's HEAD commit ID is used.</p> </li> <li> <p>For Amazon S3: the version ID of the object that represents the build input ZIP file to use.</p> </li> </ul> <p> If <code>sourceVersion</code> is specified at the build level, then that version takes precedence over this <code>sourceVersion</code> (at the project level). </p> <p> For more information, see <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html\">Source Version Sample with CodeBuild</a> in the <i>CodeBuild User Guide</i>. </p>"
         },
         "secondarySourceVersions": {
           "shape": "ProjectSecondarySourceVersions",
@@ -4494,11 +4476,11 @@
         },
         "serviceRole": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The replacement ARN of the AWS Identity and Access Management (IAM) role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.</p>"
+          "documentation": "<p>The replacement ARN of the Identity and Access Management role that enables CodeBuild to interact with dependent Amazon Web Services services on behalf of the Amazon Web Services account.</p>"
         },
         "timeoutInMinutes": {
           "shape": "TimeOut",
-          "documentation": "<p>The replacement value in minutes, from 5 to 480 (8 hours), for AWS CodeBuild to wait before timing out any related build that did not get marked as completed.</p>"
+          "documentation": "<p>The replacement value in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before timing out any related build that did not get marked as completed.</p>"
         },
         "queuedTimeoutInMinutes": {
           "shape": "TimeOut",
@@ -4506,15 +4488,15 @@
         },
         "encryptionKey": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>). </p>"
+          "documentation": "<p>The Key Management Service customer master key (CMK) to be used for encrypting the build output artifacts.</p> <note> <p> You can use a cross-account KMS key to encrypt the build output artifacts if your service role has permission to that key. </p> </note> <p>You can specify either the Amazon Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the format <code>alias/&lt;alias-name&gt;</code>). </p>"
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>An updated list of tag key and value pairs associated with this build project.</p> <p>These tags are available for use by AWS services that support AWS CodeBuild build project tags.</p>"
+          "documentation": "<p>An updated list of tag key and value pairs associated with this build project.</p> <p>These tags are available for use by Amazon Web Services services that support CodeBuild build project tags.</p>"
         },
         "vpcConfig": {
           "shape": "VpcConfig",
-          "documentation": "<p>VpcConfig enables AWS CodeBuild to access resources in an Amazon VPC.</p>"
+          "documentation": "<p>VpcConfig enables CodeBuild to access resources in an Amazon VPC.</p>"
         },
         "badgeEnabled": {
           "shape": "WrapperBoolean",
@@ -4522,7 +4504,7 @@
         },
         "logsConfig": {
           "shape": "LogsConfig",
-          "documentation": "<p> Information about logs for the build project. A project can create logs in Amazon CloudWatch Logs, logs in an S3 bucket, or both. </p>"
+          "documentation": "<p> Information about logs for the build project. A project can create logs in CloudWatch Logs, logs in an S3 bucket, or both. </p>"
         },
         "fileSystemLocations": {
           "shape": "ProjectFileSystemLocations",
@@ -4562,7 +4544,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p> An updated list of tag key and value pairs associated with this report group. </p> <p>These tags are available for use by AWS services that support AWS CodeBuild report group tags.</p>"
+          "documentation": "<p> An updated list of tag key and value pairs associated with this report group. </p> <p>These tags are available for use by Amazon Web Services services that support CodeBuild report group tags.</p>"
         }
       }
     },
@@ -4583,7 +4565,7 @@
       "members": {
         "projectName": {
           "shape": "ProjectName",
-          "documentation": "<p>The name of the AWS CodeBuild project.</p>"
+          "documentation": "<p>The name of the CodeBuild project.</p>"
         },
         "branchFilter": {
           "shape": "String",
@@ -4608,7 +4590,7 @@
       "members": {
         "webhook": {
           "shape": "Webhook",
-          "documentation": "<p> Information about a repository's webhook that is associated with a project in AWS CodeBuild. </p>"
+          "documentation": "<p> Information about a repository's webhook that is associated with a project in CodeBuild. </p>"
         }
       }
     },
@@ -4634,7 +4616,7 @@
           "documentation": "<p>A list of one or more security groups IDs in your Amazon VPC.</p>"
         }
       },
-      "documentation": "<p>Information about the VPC configuration that AWS CodeBuild accesses.</p>"
+      "documentation": "<p>Information about the VPC configuration that CodeBuild accesses.</p>"
     },
     "Webhook": {
       "type": "structure",
@@ -4645,7 +4627,7 @@
         },
         "payloadUrl": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS CodeBuild endpoint where webhook events are sent.</p>"
+          "documentation": "<p>The CodeBuild endpoint where webhook events are sent.</p>"
         },
         "secret": {
           "shape": "NonEmptyString",
@@ -4668,7 +4650,7 @@
           "documentation": "<p>A timestamp that indicates the last time a repository's secret token was modified. </p>"
         }
       },
-      "documentation": "<p>Information about a webhook that connects repository events to a build project in AWS CodeBuild.</p>"
+      "documentation": "<p>Information about a webhook that connects repository events to a build project in CodeBuild.</p>"
     },
     "WebhookBuildType": {
       "type": "string",
@@ -4720,5 +4702,5 @@
       "type": "long"
     }
   },
-  "documentation": "<fullname>AWS CodeBuild</fullname> <p>AWS CodeBuild is a fully managed build service in the cloud. AWS CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy. AWS CodeBuild eliminates the need to provision, manage, and scale your own build servers. It provides prepackaged build environments for the most popular programming languages and build tools, such as Apache Maven, Gradle, and more. You can also fully customize build environments in AWS CodeBuild to use your own build tools. AWS CodeBuild scales automatically to meet peak build requests. You pay only for the build time you consume. For more information about AWS CodeBuild, see the <i> <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html\">AWS CodeBuild User Guide</a>.</i> </p>"
+  "documentation": "<p>CodeBuild is a fully managed build service in the cloud. CodeBuild compiles your source code, runs unit tests, and produces artifacts that are ready to deploy. CodeBuild eliminates the need to provision, manage, and scale your own build servers. It provides prepackaged build environments for the most popular programming languages and build tools, such as Apache Maven, Gradle, and more. You can also fully customize build environments in CodeBuild to use your own build tools. CodeBuild scales automatically to meet peak build requests. You pay only for the build time you consume. For more information about CodeBuild, see the <i> <a href=\"https://docs.aws.amazon.com/codebuild/latest/userguide/welcome.html\">CodeBuild User Guide</a>.</i> </p>"
 }

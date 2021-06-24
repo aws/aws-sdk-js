@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.933.0-->
+<!--LATEST=2.934.0-->
 <!--ENTRYINSERT-->
+
+## 2.934.0
+* feature: Chime: Adds EventIngestionUrl field to MediaPlacement
+* feature: CodeBuild: BucketOwnerAccess is currently not supported
+* feature: DAX: Add support for encryption in transit to DAX clusters.
+* feature: Kendra: Amazon Kendra now supports SharePoint 2013 and SharePoint 2016 when using a SharePoint data source.
+* feature: SecurityHub: Added new resource details for ECS clusters and ECS task definitions. Added additional information for S3 buckets, Elasticsearch domains, and API Gateway V2 stages.
+* feature: Transfer: Customers can successfully use legacy clients with Transfer Family endpoints enabled for FTPS and FTP behind routers, firewalls, and load balancers by providing a Custom IP address used for data channel communication.
+* feature: WAFV2: Added support for 15 new text transformation.
 
 ## 2.933.0
 * feature: CloudFront: Amazon CloudFront adds support for a new security policy, TLSv1.2_2021.

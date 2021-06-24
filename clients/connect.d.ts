@@ -108,11 +108,11 @@ declare class Connect extends Service {
    */
   createQueue(callback?: (err: AWSError, data: Connect.Types.CreateQueueResponse) => void): Request<Connect.Types.CreateQueueResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Creates a quick connect for the specified Amazon Connect instance.
+   * Creates a quick connect for the specified Amazon Connect instance.
    */
   createQuickConnect(params: Connect.Types.CreateQuickConnectRequest, callback?: (err: AWSError, data: Connect.Types.CreateQuickConnectResponse) => void): Request<Connect.Types.CreateQuickConnectResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Creates a quick connect for the specified Amazon Connect instance.
+   * Creates a quick connect for the specified Amazon Connect instance.
    */
   createQuickConnect(callback?: (err: AWSError, data: Connect.Types.CreateQuickConnectResponse) => void): Request<Connect.Types.CreateQuickConnectResponse, AWSError>;
   /**
@@ -164,11 +164,11 @@ declare class Connect extends Service {
    */
   deleteIntegrationAssociation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Deletes a quick connect.
+   * Deletes a quick connect.
    */
   deleteQuickConnect(params: Connect.Types.DeleteQuickConnectRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Deletes a quick connect.
+   * Deletes a quick connect.
    */
   deleteQuickConnect(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -244,11 +244,11 @@ declare class Connect extends Service {
    */
   describeQueue(callback?: (err: AWSError, data: Connect.Types.DescribeQueueResponse) => void): Request<Connect.Types.DescribeQueueResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Describes the quick connect.
+   * Describes the quick connect.
    */
   describeQuickConnect(params: Connect.Types.DescribeQuickConnectRequest, callback?: (err: AWSError, data: Connect.Types.DescribeQuickConnectResponse) => void): Request<Connect.Types.DescribeQuickConnectResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Describes the quick connect.
+   * Describes the quick connect.
    */
   describeQuickConnect(callback?: (err: AWSError, data: Connect.Types.DescribeQuickConnectResponse) => void): Request<Connect.Types.DescribeQuickConnectResponse, AWSError>;
   /**
@@ -492,11 +492,11 @@ declare class Connect extends Service {
    */
   listQueues(callback?: (err: AWSError, data: Connect.Types.ListQueuesResponse) => void): Request<Connect.Types.ListQueuesResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Provides information about the quick connects for the specified Amazon Connect instance. 
+   * Provides information about the quick connects for the specified Amazon Connect instance. 
    */
   listQuickConnects(params: Connect.Types.ListQuickConnectsRequest, callback?: (err: AWSError, data: Connect.Types.ListQuickConnectsResponse) => void): Request<Connect.Types.ListQuickConnectsResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Provides information about the quick connects for the specified Amazon Connect instance. 
+   * Provides information about the quick connects for the specified Amazon Connect instance. 
    */
   listQuickConnects(callback?: (err: AWSError, data: Connect.Types.ListQuickConnectsResponse) => void): Request<Connect.Types.ListQuickConnectsResponse, AWSError>;
   /**
@@ -724,19 +724,19 @@ declare class Connect extends Service {
    */
   updateQueueStatus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Updates the configuration settings for the specified quick connect.
+   * Updates the configuration settings for the specified quick connect.
    */
   updateQuickConnectConfig(params: Connect.Types.UpdateQuickConnectConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Updates the configuration settings for the specified quick connect.
+   * Updates the configuration settings for the specified quick connect.
    */
   updateQuickConnectConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Updates the name and description of a quick connect. The request accepts the following data in JSON format. At least Name or Description must be provided.
+   * Updates the name and description of a quick connect. The request accepts the following data in JSON format. At least Name or Description must be provided.
    */
   updateQuickConnectName(params: Connect.Types.UpdateQuickConnectNameRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and is subject to change. Updates the name and description of a quick connect. The request accepts the following data in JSON format. At least Name or Description must be provided.
+   * Updates the name and description of a quick connect. The request accepts the following data in JSON format. At least Name or Description must be provided.
    */
   updateQuickConnectName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1218,7 +1218,7 @@ declare namespace Connect {
      */
     QuickConnectARN?: ARN;
     /**
-     * The identifier for the quick connect.
+     * The identifier for the quick connect. 
      */
     QuickConnectId?: QuickConnectId;
   }
@@ -2946,7 +2946,7 @@ declare namespace Connect {
      */
     Channel: Channel;
     /**
-     * The number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 5. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
+     * The number of contacts an agent can have on a channel simultaneously. Valid Range for VOICE: Minimum value of 1. Maximum value of 1. Valid Range for CHAT: Minimum value of 1. Maximum value of 10. Valid Range for TASK: Minimum value of 1. Maximum value of 10.
      */
     Concurrency: Concurrency;
   }
@@ -3761,6 +3761,7 @@ declare namespace Connect {
      */
     QuickConnectConfig: QuickConnectConfig;
   }
+  export type UpdateQuickConnectDescription = string;
   export interface UpdateQuickConnectNameRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -3777,7 +3778,7 @@ declare namespace Connect {
     /**
      * The description of the quick connect.
      */
-    Description?: QuickConnectDescription;
+    Description?: UpdateQuickConnectDescription;
   }
   export interface UpdateRoutingProfileConcurrencyRequest {
     /**

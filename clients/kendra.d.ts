@@ -2653,7 +2653,7 @@ declare namespace Kendra {
      */
     Urls: SharePointUrlList;
     /**
-     * The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. For more information, see Using a Microsoft SharePoint Data Source. For more information about AWS Secrets Manager, see  What Is AWS Secrets Manager  in the AWS Secrets Manager user guide.
+     * The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. If you use SharePoint Sever, you also need to provide the sever domain name as part of the credentials. For more information, see Using a Microsoft SharePoint Data Source. For more information about AWS Secrets Manager, see  What Is AWS Secrets Manager  in the AWS Secrets Manager user guide.
      */
     SecretArn: SecretArn;
     /**
@@ -2685,9 +2685,10 @@ declare namespace Kendra {
      * A Boolean value that specifies whether local groups are disabled (True) or enabled (False). 
      */
     DisableLocalGroups?: Boolean;
+    SslCertificateS3Path?: S3Path;
   }
   export type SharePointUrlList = Url[];
-  export type SharePointVersion = "SHAREPOINT_ONLINE"|string;
+  export type SharePointVersion = "SHAREPOINT_2013"|"SHAREPOINT_2016"|"SHAREPOINT_ONLINE"|string;
   export type SharedDriveId = string;
   export type SiteMap = string;
   export interface SiteMapsConfiguration {
