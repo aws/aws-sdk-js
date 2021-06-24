@@ -308,6 +308,9 @@ TSGenerator.prototype.generateTypingsFromShape = function generateTypingsFromSha
         return code += tabs(tabCount) + 'export type ' + shapeKey + ' = EventStream<{' + events.join(',') + '}>;\n'; 
     }
     if (type === 'structure') {
+        if (shape.isDocument) {
+            return code += tabs(tabCount) + 'export type ' + shapeKey + ' = DocumentType;\n'
+        }
         code += tabs(tabCount) + 'export interface ' + shapeKey + ' {\n';
         var members = shape.members;
         // cycle through members
@@ -508,6 +511,16 @@ TSGenerator.prototype.containsEventStreams = function containsEventStreams(model
     return false;
 };
 
+TSGenerator.prototype.containsDocumentType = function containsDocumentType(model) {
+    var shapeNames = Object.keys(model.shapes);
+    for (var name of shapeNames) {
+        if (model.shapes[name].isDocument) {
+            return true;
+        }
+    }
+    return false;
+};
+
 /**
  * Generates the typings for a service based on the serviceIdentifier.
  */
@@ -551,6 +564,9 @@ TSGenerator.prototype.processServiceModel = function processServiceModel(service
     }
     if (this.containsEventStreams(model)) {
         code += 'import {EventStream} from \'../lib/event-stream/event-stream\';\n';
+    }
+    if (this.containsDocumentType(model)) {
+        code += 'import {DocumentType} from \'../lib/model\';\n';
     }
     // import custom namespaces
     if (customNamespaces) {
