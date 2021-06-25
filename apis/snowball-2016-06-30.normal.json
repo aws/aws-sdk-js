@@ -142,7 +142,7 @@
           "shape": "Ec2RequestFailedException"
         }
       ],
-      "documentation": "<p>Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the <code>clusterId</code> value; the other job attributes are inherited from the cluster. </p> <note> <p>Only the Snowball; Edge device type is supported when ordering clustered jobs.</p> <p>The device capacity is optional.</p> <p>Availability of device types differ by AWS Region. For more information about region availability, see <a href=\"https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&amp;loc=4\">AWS Regional Services</a>.</p> </note> <p/> <p class=\"title\"> <b>AWS Snow Family device types and their capacities.</b> </p> <ul> <li> <p>Snow Family device type: <b>SNC1_SSD</b> </p> <ul> <li> <p>Capacity: T14</p> </li> <li> <p>Description: Snowcone </p> </li> </ul> <p/> </li> <li> <p>Snow Family device type: <b>SNC1_HDD</b> </p> <ul> <li> <p>Capacity: T8</p> </li> <li> <p>Description: Snowcone </p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE_S</b> </p> <ul> <li> <p>Capacity: T98</p> </li> <li> <p>Description: Snowball Edge Storage Optimized for data transfer only </p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE_CG</b> </p> <ul> <li> <p>Capacity: T42</p> </li> <li> <p>Description: Snowball Edge Compute Optimized with GPU</p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE_C</b> </p> <ul> <li> <p>Capacity: T42</p> </li> <li> <p>Description: Snowball Edge Compute Optimized without GPU</p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE</b> </p> <ul> <li> <p>Capacity: T100</p> </li> <li> <p>Description: Snowball Edge Storage Optimized with EC2 Compute</p> </li> </ul> <p/> </li> <li> <p>Device type: <b>STANDARD</b> </p> <ul> <li> <p>Capacity: T50</p> </li> <li> <p>Description: Original Snowball device</p> <note> <p>This device is only available in the Ningxia, Beijing, and Singapore AWS Regions. </p> </note> </li> </ul> <p/> </li> <li> <p>Device type: <b>STANDARD</b> </p> <ul> <li> <p>Capacity: T80</p> </li> <li> <p>Description: Original Snowball device</p> <note> <p>This device is only available in the Ningxia, Beijing, and Singapore AWS Regions. </p> </note> </li> </ul> <p/> </li> </ul>"
+      "documentation": "<p>Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the <code>clusterId</code> value; the other job attributes are inherited from the cluster. </p> <note> <p>Only the Snowball; Edge device type is supported when ordering clustered jobs.</p> <p>The device capacity is optional.</p> <p>Availability of device types differ by AWS Region. For more information about Region availability, see <a href=\"https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services/?p=ngi&amp;loc=4\">AWS Regional Services</a>.</p> </note> <p/> <p class=\"title\"> <b>AWS Snow Family device types and their capacities.</b> </p> <ul> <li> <p>Snow Family device type: <b>SNC1_SSD</b> </p> <ul> <li> <p>Capacity: T14</p> </li> <li> <p>Description: Snowcone </p> </li> </ul> <p/> </li> <li> <p>Snow Family device type: <b>SNC1_HDD</b> </p> <ul> <li> <p>Capacity: T8</p> </li> <li> <p>Description: Snowcone </p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE_S</b> </p> <ul> <li> <p>Capacity: T98</p> </li> <li> <p>Description: Snowball Edge Storage Optimized for data transfer only </p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE_CG</b> </p> <ul> <li> <p>Capacity: T42</p> </li> <li> <p>Description: Snowball Edge Compute Optimized with GPU</p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE_C</b> </p> <ul> <li> <p>Capacity: T42</p> </li> <li> <p>Description: Snowball Edge Compute Optimized without GPU</p> </li> </ul> <p/> </li> <li> <p>Device type: <b>EDGE</b> </p> <ul> <li> <p>Capacity: T100</p> </li> <li> <p>Description: Snowball Edge Storage Optimized with EC2 Compute</p> </li> </ul> <p/> </li> <li> <p>Device type: <b>STANDARD</b> </p> <ul> <li> <p>Capacity: T50</p> </li> <li> <p>Description: Original Snowball device</p> <note> <p>This device is only available in the Ningxia, Beijing, and Singapore AWS Regions. </p> </note> </li> </ul> <p/> </li> <li> <p>Device type: <b>STANDARD</b> </p> <ul> <li> <p>Capacity: T80</p> </li> <li> <p>Description: Original Snowball device</p> <note> <p>This device is only available in the Ningxia, Beijing, and Singapore AWS Regions. </p> </note> </li> </ul> <p/> </li> </ul>"
     },
     "CreateLongTermPricing": {
       "name": "CreateLongTermPricing",
@@ -161,7 +161,7 @@
           "shape": "InvalidResourceException"
         }
       ],
-      "documentation": "<p>Creates a job with long term usage option for a device. The long term usage is a one year or three year long term pricing type for the device. You are billed upfront and AWS give discounts for long term pricing. For detailed information see XXXXXXXX</p>"
+      "documentation": "<p>Creates a job with the long-term usage option for a device. The long-term usage is a 1-year or 3-year long-term pricing type for the device. You are billed upfront, and AWS provides discounts for long-term pricing. </p>"
     },
     "CreateReturnShippingLabel": {
       "name": "CreateReturnShippingLabel",
@@ -480,7 +480,7 @@
           "shape": "InvalidNextTokenException"
         }
       ],
-      "documentation": "<p>Lists all long term pricing types.</p>"
+      "documentation": "<p>Lists all long-term pricing types.</p>"
     },
     "UpdateCluster": {
       "name": "UpdateCluster",
@@ -567,7 +567,7 @@
           "shape": "InvalidJobStateException"
         }
       ],
-      "documentation": "<p>Updates the state when a the shipment states changes to a different state.</p>"
+      "documentation": "<p>Updates the state when a shipment state changes to a different state.</p>"
     },
     "UpdateLongTermPricing": {
       "name": "UpdateLongTermPricing",
@@ -586,7 +586,7 @@
           "shape": "InvalidResourceException"
         }
       ],
-      "documentation": "<p>Updates the long term pricing type.</p>"
+      "documentation": "<p>Updates the long-term pricing type.</p>"
     }
   },
   "shapes": {
@@ -797,6 +797,10 @@
         "TaxDocuments": {
           "shape": "TaxDocuments",
           "documentation": "<p>The tax documents required in your AWS Region.</p>"
+        },
+        "OnDeviceServiceConfiguration": {
+          "shape": "OnDeviceServiceConfiguration",
+          "documentation": "<p>Represents metadata and configuration settings for services on an AWS Snow Family device.</p>"
         }
       },
       "documentation": "<p>Contains metadata about a specific cluster.</p>"
@@ -871,6 +875,10 @@
           "shape": "JobResource",
           "documentation": "<p>The resources associated with the cluster job. These resources include Amazon S3 buckets and optional AWS Lambda functions written in the Python language. </p>"
         },
+        "OnDeviceServiceConfiguration": {
+          "shape": "OnDeviceServiceConfiguration",
+          "documentation": "<p>Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).</p>"
+        },
         "Description": {
           "shape": "String",
           "documentation": "<p>An optional description of this specific cluster, for example <code>Environmental Data Cluster-01</code>.</p>"
@@ -893,7 +901,7 @@
         },
         "ShippingOption": {
           "shape": "ShippingOption",
-          "documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows: </p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snow device are delivered in one to seven days.</p> </li> <li> <p>In the United States of America (US), you have access to one-day shipping and two-day shipping.</p> </li> </ul> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snow device are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>"
+          "documentation": "<p>The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows: </p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snow devices are delivered in one to seven days.</p> </li> <li> <p>In the United States of America (US), you have access to one-day shipping and two-day shipping.</p> </li> </ul> <ul> <li> <p>In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snow devices are delivered in one to seven days.</p> </li> <li> <p>In the US, you have access to one-day shipping and two-day shipping.</p> </li> </ul>"
         },
         "Notification": {
           "shape": "Notification",
@@ -906,6 +914,10 @@
         "TaxDocuments": {
           "shape": "TaxDocuments",
           "documentation": "<p>The tax documents required in your AWS Region.</p>"
+        },
+        "RemoteManagement": {
+          "shape": "RemoteManagement",
+          "documentation": "<p>Allows you to securely operate and manage Snow devices in a cluster remotely from outside of your internal network. When set to <code>INSTALLED_AUTOSTART</code>, remote management will automatically be available when the device arrives at your location. Otherwise, you need to use the Snowball Client to manage the device.</p>"
         }
       }
     },
@@ -928,6 +940,10 @@
         "Resources": {
           "shape": "JobResource",
           "documentation": "<p>Defines the Amazon S3 buckets associated with this job.</p> <p>With <code>IMPORT</code> jobs, you specify the bucket or buckets that your transferred data will be imported into.</p> <p>With <code>EXPORT</code> jobs, you specify the bucket or buckets that your transferred data will be exported from. Optionally, you can also specify a <code>KeyRange</code> value. If you choose to export a range, you define the length of the range by providing either an inclusive <code>BeginMarker</code> value, an inclusive <code>EndMarker</code> value, or both. Ranges are UTF-8 binary sorted.</p>"
+        },
+        "OnDeviceServiceConfiguration": {
+          "shape": "OnDeviceServiceConfiguration",
+          "documentation": "<p>Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).</p>"
         },
         "Description": {
           "shape": "String",
@@ -967,7 +983,7 @@
         },
         "ForwardingAddressId": {
           "shape": "AddressId",
-          "documentation": "<p>The forwarding address ID for a job. This field is not supported in most regions.</p>"
+          "documentation": "<p>The forwarding address ID for a job. This field is not supported in most Regions.</p>"
         },
         "TaxDocuments": {
           "shape": "TaxDocuments",
@@ -977,9 +993,13 @@
           "shape": "DeviceConfiguration",
           "documentation": "<p>Defines the device configuration for an AWS Snowcone job.</p> <p>For more information, see \"https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html\" (Snow Family Devices and Capacity) in the <i>Snowcone User Guide</i> or \"https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html\" (Snow Family Devices and Capacity) in the <i>Snowcone User Guide</i>.</p>"
         },
+        "RemoteManagement": {
+          "shape": "RemoteManagement",
+          "documentation": "<p>Allows you to securely operate and manage Snowcone devices remotely from outside of your internal network. When set to <code>INSTALLED_AUTOSTART</code>, remote management will automatically be available when the device arrives at your location. Otherwise, you need to use the Snowball Client to manage the device.</p>"
+        },
         "LongTermPricingId": {
           "shape": "LongTermPricingId",
-          "documentation": "<p>The ID of the long term pricing type for the device.</p>"
+          "documentation": "<p>The ID of the long-term pricing type for the device.</p>"
         }
       }
     },
@@ -1000,15 +1020,15 @@
       "members": {
         "LongTermPricingType": {
           "shape": "LongTermPricingType",
-          "documentation": "<p>The type of long term pricing option you want for the device - one year or three year long term pricing.</p>"
+          "documentation": "<p>The type of long-term pricing option you want for the device, either 1-year or 3-year long-term pricing.</p>"
         },
         "IsLongTermPricingAutoRenew": {
           "shape": "JavaBoolean",
-          "documentation": "<p>Specifies whether the current long term pricing type for the device should be renewed.</p>"
+          "documentation": "<p>Specifies whether the current long-term pricing type for the device should be renewed.</p>"
         },
         "SnowballType": {
           "shape": "SnowballType",
-          "documentation": "<p>The type of AWS Snow Family device to use for the long term pricing job.</p>"
+          "documentation": "<p>The type of AWS Snow Family device to use for the long-term pricing job.</p>"
         }
       }
     },
@@ -1017,7 +1037,7 @@
       "members": {
         "LongTermPricingId": {
           "shape": "LongTermPricingId",
-          "documentation": "<p>The ID of the long term pricing type for the device.</p>"
+          "documentation": "<p>The ID of the long-term pricing type for the device.</p>"
         }
       }
     },
@@ -1029,7 +1049,7 @@
       "members": {
         "JobId": {
           "shape": "JobId",
-          "documentation": "<p>The ID for a job that you want to create the return shipping label for. For example <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>"
+          "documentation": "<p>The ID for a job that you want to create the return shipping label for; for example, <code>JID123e4567-e89b-12d3-a456-426655440000</code>.</p>"
         },
         "ShippingOption": {
           "shape": "ShippingOption",
@@ -1195,6 +1215,13 @@
         }
       },
       "documentation": "<p>The container for <code>SnowconeDeviceConfiguration</code>. </p>"
+    },
+    "DeviceServiceName": {
+      "type": "string",
+      "enum": [
+        "NFS_ON_DEVICE_SERVICE",
+        "S3_ON_DEVICE_SERVICE"
+      ]
     },
     "Ec2AmiResource": {
       "type": "structure",
@@ -1477,9 +1504,17 @@
         "DeviceConfiguration": {
           "shape": "DeviceConfiguration"
         },
+        "RemoteManagement": {
+          "shape": "RemoteManagement",
+          "documentation": "<p>Allows you to securely operate and manage Snowcone devices remotely from outside of your internal network. When set to <code>INSTALLED_AUTOSTART</code>, remote management will automatically be available when the device arrives at your location. Otherwise, you need to use the Snowball Client to manage the device.</p>"
+        },
         "LongTermPricingId": {
           "shape": "LongTermPricingId",
-          "documentation": "<p>The ID of the long term pricing type for the device.</p>"
+          "documentation": "<p>The ID of the long-term pricing type for the device.</p>"
+        },
+        "OnDeviceServiceConfiguration": {
+          "shape": "OnDeviceServiceConfiguration",
+          "documentation": "<p>Represents metadata and configuration settings for services on an AWS Snow Family device.</p>"
         }
       },
       "documentation": "<p>Contains information about a specific job including shipping information, job status, and other important metadata. This information is returned as a part of the response syntax of the <code>DescribeJob</code> action.</p>"
@@ -1747,46 +1782,46 @@
       "members": {
         "LongTermPricingId": {
           "shape": "LongTermPricingId",
-          "documentation": "<p>The ID of the long term pricing type for the device.</p>"
+          "documentation": "<p>The ID of the long-term pricing type for the device.</p>"
         },
         "LongTermPricingEndDate": {
           "shape": "Timestamp",
-          "documentation": "<p>The end date the long term pricing contract.</p>"
+          "documentation": "<p>The end date the long-term pricing contract.</p>"
         },
         "LongTermPricingStartDate": {
           "shape": "Timestamp",
-          "documentation": "<p>The start date of the long term pricing contract.</p>"
+          "documentation": "<p>The start date of the long-term pricing contract.</p>"
         },
         "LongTermPricingType": {
           "shape": "LongTermPricingType",
-          "documentation": "<p>The type of long term pricing that was selected for the device.</p>"
+          "documentation": "<p>The type of long-term pricing that was selected for the device.</p>"
         },
         "CurrentActiveJob": {
           "shape": "JobId",
-          "documentation": "<p>The current active jobs on the device the long term pricing type.</p>"
+          "documentation": "<p>The current active jobs on the device the long-term pricing type.</p>"
         },
         "ReplacementJob": {
           "shape": "JobId",
-          "documentation": "<p>A new device that replaces a device that is ordered with long term pricing.</p>"
+          "documentation": "<p>A new device that replaces a device that is ordered with long-term pricing.</p>"
         },
         "IsLongTermPricingAutoRenew": {
           "shape": "JavaBoolean",
-          "documentation": "<p>If set to <code>true</code>, specifies that the current long term pricing type for the device should be automatically renewed before the long term pricing contract expires.</p>"
+          "documentation": "<p>If set to <code>true</code>, specifies that the current long-term pricing type for the device should be automatically renewed before the long-term pricing contract expires.</p>"
         },
         "LongTermPricingStatus": {
           "shape": "String",
-          "documentation": "<p>The status of the long term pricing type.</p>"
+          "documentation": "<p>The status of the long-term pricing type.</p>"
         },
         "SnowballType": {
           "shape": "SnowballType",
-          "documentation": "<p>The type of AWS Snow Family device associated with this long term pricing job.</p>"
+          "documentation": "<p>The type of AWS Snow Family device associated with this long-term pricing job.</p>"
         },
         "JobIds": {
           "shape": "LongTermPricingAssociatedJobIdList",
-          "documentation": "<p>The IDs of the jobs that are associated with a long term pricing type.</p>"
+          "documentation": "<p>The IDs of the jobs that are associated with a long-term pricing type.</p>"
         }
       },
-      "documentation": "<p>Each <code>LongTermPricingListEntry</code> object contains information about a long term pricing type.</p>"
+      "documentation": "<p>Each <code>LongTermPricingListEntry</code> object contains information about a long-term pricing type.</p>"
     },
     "LongTermPricingType": {
       "type": "string",
@@ -1795,12 +1830,26 @@
         "ThreeYear"
       ]
     },
+    "NFSOnDeviceServiceConfiguration": {
+      "type": "structure",
+      "members": {
+        "StorageLimit": {
+          "shape": "StorageLimit",
+          "documentation": "<p>The maximum NFS storage for one Snowball Family device.</p>"
+        },
+        "StorageUnit": {
+          "shape": "StorageUnit",
+          "documentation": "<p>The scale unit of the NFS storage on the device.</p> <p>Valid values: TB.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents metadata and configuration settings for NFS service on an AWS Snow Family device.</p>"
+    },
     "Notification": {
       "type": "structure",
       "members": {
         "SnsTopicARN": {
           "shape": "SnsTopicARN",
-          "documentation": "<p>The new SNS <code>TopicArn</code> that you want to associate with this job. You can create Amazon Resource Names (ARNs) for topics by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html\">CreateTopic</a> Amazon SNS API action.</p> <p>You can subscribe email addresses to an Amazon SNS topic through the AWS Management Console, or by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html\">Subscribe</a> AWS Simple Notification Service (SNS) API action.</p>"
+          "documentation": "<p>The new SNS <code>TopicArn</code> that you want to associate with this job. You can create Amazon Resource Names (ARNs) for topics by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html\">CreateTopic</a> Amazon SNS API action.</p> <p>You can subscribe email addresses to an Amazon SNS topic through the AWS Management Console, or by using the <a href=\"https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html\">Subscribe</a> Amazon Simple Notification Service (Amazon SNS) API action.</p>"
         },
         "JobStatesToNotify": {
           "shape": "JobStateList",
@@ -1812,6 +1861,23 @@
         }
       },
       "documentation": "<p>The Amazon Simple Notification Service (Amazon SNS) notification settings associated with a specific job. The <code>Notification</code> object is returned as a part of the response syntax of the <code>DescribeJob</code> action in the <code>JobMetadata</code> data type.</p> <p>When the notification settings are defined during job creation, you can choose to notify based on a specific set of job states using the <code>JobStatesToNotify</code> array of strings, or you can specify that you want to have Amazon SNS notifications sent out for all job states with <code>NotifyAll</code> set to true.</p>"
+    },
+    "OnDeviceServiceConfiguration": {
+      "type": "structure",
+      "members": {
+        "NFSOnDeviceService": {
+          "shape": "NFSOnDeviceServiceConfiguration",
+          "documentation": "<p>Represents the NFS service on a Snow Family device.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents metadata and configuration settings for services on an AWS Snow Family device.</p>"
+    },
+    "RemoteManagement": {
+      "type": "string",
+      "enum": [
+        "INSTALLED_ONLY",
+        "INSTALLED_AUTOSTART"
+      ]
     },
     "ResourceARN": {
       "type": "string",
@@ -1833,6 +1899,10 @@
         "KeyRange": {
           "shape": "KeyRange",
           "documentation": "<p>For export jobs, you can provide an optional <code>KeyRange</code> within a specific Amazon S3 bucket. The length of the range is defined at job creation, and has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or both. Ranges are UTF-8 binary sorted.</p>"
+        },
+        "TargetOnDeviceServices": {
+          "shape": "TargetOnDeviceServiceList",
+          "documentation": "<p>Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).</p>"
         }
       },
       "documentation": "<p>Each <code>S3Resource</code> object represents an Amazon S3 bucket that your transferred data will be exported from or imported into. For export jobs, this object can have an optional <code>KeyRange</code> value. The length of the range is defined at job creation, and has either an inclusive <code>BeginMarker</code>, an inclusive <code>EndMarker</code>, or both. Ranges are UTF-8 binary sorted.</p>"
@@ -1869,7 +1939,7 @@
       "members": {
         "ShippingOption": {
           "shape": "ShippingOption",
-          "documentation": "<p>The shipping speed for a particular job. This speed doesn't dictate how soon you'll get the Snow device from the job's creation date. This speed represents how quickly it moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snow device are delivered in one to seven days.</p> </li> <li> <p>In the United States of America (US), you have access to one-day shipping and two-day shipping.</p> </li> </ul>"
+          "documentation": "<p>The shipping speed for a particular job. This speed doesn't dictate how soon you'll get the Snow device from the job's creation date. This speed represents how quickly it moves to its destination while in transit. Regional shipping speeds are as follows:</p> <ul> <li> <p>In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.</p> </li> <li> <p>In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.</p> </li> <li> <p>In India, Snow devices are delivered in one to seven days.</p> </li> <li> <p>In the United States of America (US), you have access to one-day shipping and two-day shipping.</p> </li> </ul>"
         },
         "InboundShipment": {
           "shape": "Shipment",
@@ -1940,10 +2010,40 @@
       "max": 255,
       "pattern": "arn:aws.*:sns:.*:[0-9]{12}:.*"
     },
+    "StorageLimit": {
+      "type": "integer",
+      "min": 0
+    },
+    "StorageUnit": {
+      "type": "string",
+      "enum": [
+        "TB"
+      ]
+    },
     "String": {
       "type": "string",
       "max": 1024,
       "min": 1
+    },
+    "TargetOnDeviceService": {
+      "type": "structure",
+      "members": {
+        "ServiceName": {
+          "shape": "DeviceServiceName",
+          "documentation": "<p>Specifies the name of the service on the Snow Family device that your transferred data will be exported from or imported into.</p>"
+        },
+        "TransferOption": {
+          "shape": "TransferOption",
+          "documentation": "<p>Specifies whether the data is being imported or exported. You can import or export the data, or use it locally on the device.</p>"
+        }
+      },
+      "documentation": "<p>An object that represents the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).</p>"
+    },
+    "TargetOnDeviceServiceList": {
+      "type": "list",
+      "member": {
+        "shape": "TargetOnDeviceService"
+      }
     },
     "TaxDocuments": {
       "type": "structure",
@@ -1956,6 +2056,14 @@
     },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "TransferOption": {
+      "type": "string",
+      "enum": [
+        "IMPORT",
+        "EXPORT",
+        "LOCAL_USE"
+      ]
     },
     "UpdateClusterRequest": {
       "type": "structure",
@@ -1978,6 +2086,10 @@
         "Resources": {
           "shape": "JobResource",
           "documentation": "<p>The updated arrays of <a>JobResource</a> objects that can include updated <a>S3Resource</a> objects or <a>LambdaResource</a> objects.</p>"
+        },
+        "OnDeviceServiceConfiguration": {
+          "shape": "OnDeviceServiceConfiguration",
+          "documentation": "<p>Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).</p>"
         },
         "AddressId": {
           "shape": "AddressId",
@@ -2022,6 +2134,10 @@
         "Resources": {
           "shape": "JobResource",
           "documentation": "<p>The updated <code>JobResource</code> object, or the updated <a>JobResource</a> object. </p>"
+        },
+        "OnDeviceServiceConfiguration": {
+          "shape": "OnDeviceServiceConfiguration",
+          "documentation": "<p>Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).</p>"
         },
         "AddressId": {
           "shape": "AddressId",
@@ -2078,15 +2194,15 @@
       "members": {
         "LongTermPricingId": {
           "shape": "LongTermPricingId",
-          "documentation": "<p>The ID of the long term pricing type for the device.</p>"
+          "documentation": "<p>The ID of the long-term pricing type for the device.</p>"
         },
         "ReplacementJob": {
           "shape": "JobId",
-          "documentation": "<p>Specifies that a device that is ordered with long term pricing should be replaced with a new device.</p>"
+          "documentation": "<p>Specifies that a device that is ordered with long-term pricing should be replaced with a new device.</p>"
         },
         "IsLongTermPricingAutoRenew": {
           "shape": "JavaBoolean",
-          "documentation": "<p>If set to <code>true</code>, specifies that the current long term pricing type for the device should be automatically renewed before the long term pricing contract expires.</p>"
+          "documentation": "<p>If set to <code>true</code>, specifies that the current long-term pricing type for the device should be automatically renewed before the long-term pricing contract expires.</p>"
         }
       }
     },

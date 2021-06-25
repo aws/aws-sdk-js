@@ -519,7 +519,7 @@
           "documentation": "<p>400 response</p>"
         }
       ],
-      "documentation": "<p>Gets backend auth details.</p>"
+      "documentation": "<p>Gets a backend auth details.</p>"
     },
     "GetBackendJob": {
       "name": "GetBackendJob",
@@ -588,6 +588,40 @@
         }
       ],
       "documentation": "<p>Gets the challenge token based on the given appId and sessionId.</p>"
+    },
+    "ImportBackendAuth": {
+      "name": "ImportBackendAuth",
+      "http": {
+        "method": "POST",
+        "requestUri": "/backend/{appId}/auth/{backendEnvironmentName}/import",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ImportBackendAuthRequest"
+      },
+      "output": {
+        "shape": "ImportBackendAuthResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "GatewayTimeoutException",
+          "documentation": "<p>504 response</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>429 response</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>400 response</p>"
+        }
+      ],
+      "documentation": "<p>Imports an existing backend authentication resource.</p>"
     },
     "ListBackendJobs": {
       "name": "ListBackendJobs",
@@ -689,7 +723,7 @@
           "documentation": "<p>400 response</p>"
         }
       ],
-      "documentation": "<p>Removes the AWS resources that are required to access the Amplify Admin UI.</p>"
+      "documentation": "<p>Removes the AWS resources required to access the Amplify Admin UI.</p>"
     },
     "UpdateBackendAPI": {
       "name": "UpdateBackendAPI",
@@ -791,7 +825,7 @@
           "documentation": "<p>400 response</p>"
         }
       ],
-      "documentation": "<p>Updates the AWS resources that are required to access the Amplify Admin UI.</p>"
+      "documentation": "<p>Updates the AWS resources required to access the Amplify Admin UI.</p>"
     },
     "UpdateBackendJob": {
       "name": "UpdateBackendJob",
@@ -842,17 +876,17 @@
         "CognitoUserPoolId": {
           "shape": "__string",
           "locationName": "cognitoUserPoolId",
-          "documentation": "<p>The Amazon Cognito user pool ID, if Amazon Cognito is used as an authentication setting to access your data models.</p>"
+          "documentation": "<p>The Amazon Cognito user pool ID, if Amazon Cognito was used as an authentication setting to access your data models.</p>"
         },
         "Description": {
           "shape": "__string",
           "locationName": "description",
-          "documentation": "<p>The API key description for API_KEY, if it is used as an authentication mechanism to access your data models.</p>"
+          "documentation": "<p>The API key description for API_KEY, if it was used as an authentication mechanism to access your data models.</p>"
         },
         "ExpirationTime": {
           "shape": "__double",
           "locationName": "expirationTime",
-          "documentation": "<p>The API key expiration time for API_KEY, if it is used as an authentication mechanism to access your data models.</p>"
+          "documentation": "<p>The API key expiration time for API_KEY, if it was used as an authentication mechanism to access your data models.</p>"
         },
         "OpenIDAuthTTL": {
           "shape": "__string",
@@ -862,7 +896,7 @@
         "OpenIDClientId": {
           "shape": "__string",
           "locationName": "openIDClientId",
-          "documentation": "<p>The clientID for openID, if openID is used as an authentication setting to access your data models.</p>"
+          "documentation": "<p>The clientID for openID, if openID was used as an authentication setting to access your data models.</p>"
         },
         "OpenIDIatTTL": {
           "shape": "__string",
@@ -872,12 +906,12 @@
         "OpenIDIssueURL": {
           "shape": "__string",
           "locationName": "openIDIssueURL",
-          "documentation": "<p>The openID issuer URL, if openID is used as an authentication setting to access your data models.</p>"
+          "documentation": "<p>The openID issuer URL, if openID was used as an authentication setting to access your data models.</p>"
         },
         "OpenIDProviderName": {
           "shape": "__string",
           "locationName": "openIDProviderName",
-          "documentation": "<p>The openID provider name, if openID is used as an authentication mechanism to access your data models.</p>"
+          "documentation": "<p>The OpenID provider name, if OpenID was used as an authentication mechanism to access your data models.</p>"
         }
       },
       "documentation": "<p>The authentication settings for accessing provisioned data models in your Amplify project.</p>"
@@ -907,7 +941,7 @@
           "documentation": "<p>The strategy for conflict resolution.</p>"
         }
       },
-      "documentation": "<p>Describes the conflict resolution configuration for the data model configured in your Amplify project.</p>"
+      "documentation": "<p>Describes the conflict resolution configuration for your data model configured in your Amplify project.</p>"
     },
     "BackendAPIResourceConfig": {
       "type": "structure",
@@ -920,7 +954,7 @@
         "ApiName": {
           "shape": "__string",
           "locationName": "apiName",
-          "documentation": "<p>The API name used to interact with the data model, configured as a part of the Amplify project.</p>"
+          "documentation": "<p>The API name used to interact with the data model, configured as a part of the amplify project.</p>"
         },
         "ConflictResolution": {
           "shape": "BackendAPIConflictResolution",
@@ -943,7 +977,7 @@
           "documentation": "<p>The definition of the data model in the annotated transform of the GraphQL schema.</p>"
         }
       },
-      "documentation": "<p>The resource configuration for the data model, configured as a part of the Amplify project.</p>"
+      "documentation": "<p>The resource config for the data model, configured as a part of the Amplify project.</p>"
     },
     "BackendAuthSocialProviderConfig": {
       "type": "structure",
@@ -951,12 +985,12 @@
         "ClientId": {
           "shape": "__string",
           "locationName": "client_id",
-          "documentation": "<p>Describes the client_id that can be obtained from the third-party social federation provider.</p>"
+          "documentation": "<p>Describes the client_id which can be obtained from the third-party social federation provider.</p>"
         },
         "ClientSecret": {
           "shape": "__string",
           "locationName": "client_secret",
-          "documentation": "<p>Describes the client_secret that can be obtained from third-party social federation providers.</p>"
+          "documentation": "<p>Describes the client_secret which can be obtained from third-party social federation providers.</p>"
         }
       },
       "documentation": "<p>Describes third-party social federation configurations for allowing your app users to sign in using OAuth.</p>"
@@ -982,7 +1016,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1055,7 +1089,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1123,7 +1157,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1148,7 +1182,7 @@
         "DeliveryMethod": {
           "shape": "DeliveryMethod",
           "locationName": "deliveryMethod",
-          "documentation": "<p>Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
+          "documentation": "<p>Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
         },
         "EmailSettings": {
           "shape": "EmailSettings",
@@ -1172,7 +1206,7 @@
         "IdentityPoolName": {
           "shape": "__string",
           "locationName": "identityPoolName",
-          "documentation": "<p>Name of the identity pool used for authorization.</p>"
+          "documentation": "<p>Name of the Amazon Cognito identity pool used for authorization.</p>"
         },
         "UnauthenticatedLogin": {
           "shape": "__boolean",
@@ -1191,7 +1225,7 @@
       "members": {
         "MFAMode": {
           "shape": "MFAMode",
-          "documentation": "<p>Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in your Amplify project.</p>"
+          "documentation": "<p>Describes whether MFA should be [ON, OFF, OPTIONAL] for authentication in your Amplify project.</p>"
         },
         "Settings": {
           "shape": "Settings",
@@ -1199,7 +1233,7 @@
           "documentation": "<p>Describes the configuration settings and methods for your Amplify app users to use MFA.</p>"
         }
       },
-      "documentation": "<p>Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>",
+      "documentation": "<p>Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.</p>",
       "required": [
         "MFAMode"
       ]
@@ -1220,7 +1254,7 @@
         "OAuthScopes": {
           "shape": "ListOfOAuthScopesElement",
           "locationName": "oAuthScopes",
-          "documentation": "<p>List of OAuth-related flows that allow your app users to authenticate from your Amplify app.</p>"
+          "documentation": "<p>List of OAuth-related flows used to allow your app users to authenticate from your Amplify app.</p>"
         },
         "RedirectSignInURIs": {
           "shape": "ListOf__string",
@@ -1230,12 +1264,12 @@
         "RedirectSignOutURIs": {
           "shape": "ListOf__string",
           "locationName": "redirectSignOutURIs",
-          "documentation": "<p>Redirect URLs that OAuth uses when a user signs out of an Amplify app.</p>"
+          "documentation": "<p>Redirect URLs used by OAuth when a user signs out of an Amplify app.</p>"
         },
         "SocialProviderSettings": {
           "shape": "SocialProviderSettings",
           "locationName": "socialProviderSettings",
-          "documentation": "<p>The settings for using social identity providers for access to your Amplify app.</p>"
+          "documentation": "<p>The settings for using social providers to access your Amplify app.</p>"
         }
       },
       "documentation": "<p>Creates the OAuth configuration for your Amplify project.</p>",
@@ -1260,7 +1294,7 @@
           "documentation": "<p>The minimum length of the password used to access the backend of your Amplify project.</p>"
         }
       },
-      "documentation": "<p>The password policy configuration for the backend of your Amplify project.</p>",
+      "documentation": "<p>The password policy configuration for the backend to your Amplify project.</p>",
       "required": [
         "MinimumLength"
       ]
@@ -1309,7 +1343,7 @@
         "IdentityPoolConfigs": {
           "shape": "CreateBackendAuthIdentityPoolConfig",
           "locationName": "identityPoolConfigs",
-          "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.</p>"
+          "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.</p>"
         },
         "Service": {
           "shape": "Service",
@@ -1319,7 +1353,7 @@
         "UserPoolConfigs": {
           "shape": "CreateBackendAuthUserPoolConfig",
           "locationName": "userPoolConfigs",
-          "documentation": "<p>Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.</p>"
+          "documentation": "<p>Describes authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.</p>"
         }
       },
       "documentation": "<p>Defines the resource configuration when creating an auth resource in your Amplify project.</p>",
@@ -1345,7 +1379,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1375,7 +1409,7 @@
         "Mfa": {
           "shape": "CreateBackendAuthMFAConfig",
           "locationName": "mfa",
-          "documentation": "<p>Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
+          "documentation": "<p>Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
         },
         "OAuth": {
           "shape": "CreateBackendAuthOAuthConfig",
@@ -1390,12 +1424,12 @@
         "RequiredSignUpAttributes": {
           "shape": "ListOfRequiredSignUpAttributesElement",
           "locationName": "requiredSignUpAttributes",
-          "documentation": "<p>The required attributes to sign up new users in the Amazon Cognito user pool.</p>"
+          "documentation": "<p>The required attributes to sign up new users in the user pool.</p>"
         },
         "SignInMethod": {
           "shape": "SignInMethod",
           "locationName": "signInMethod",
-          "documentation": "<p>Describes the sign-in methods that your Amplify app users to log in using the Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
+          "documentation": "<p>Describes the sign-in methods that your Amplify app users use to log in using the Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
         },
         "UserPoolName": {
           "shape": "__string",
@@ -1476,7 +1510,7 @@
         "ResourceConfig": {
           "shape": "ResourceConfig",
           "locationName": "resourceConfig",
-          "documentation": "<p>The resource configuration for the backend creation request.</p>"
+          "documentation": "<p>The resource configuration for the create backend request.</p>"
         },
         "ResourceName": {
           "shape": "__string",
@@ -1507,7 +1541,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1614,7 +1648,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1677,7 +1711,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1733,7 +1767,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1850,7 +1884,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -1903,7 +1937,7 @@
         "Models": {
           "shape": "__string",
           "locationName": "models",
-          "documentation": "<p>Stringified JSON of the DataStore model.</p>"
+          "documentation": "<p>Stringified JSON of the datastore model.</p>"
         },
         "Status": {
           "shape": "Status",
@@ -1961,7 +1995,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "ResourceConfig": {
           "shape": "BackendAPIResourceConfig",
@@ -2019,7 +2053,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "ResourceConfig": {
           "shape": "CreateBackendAuthResourceConfig",
@@ -2082,7 +2116,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -2132,7 +2166,7 @@
         "AmplifyMetaConfig": {
           "shape": "__string",
           "locationName": "amplifyMetaConfig",
-          "documentation": "<p>A stringified version of the current configurations for your Amplify project.</p>"
+          "documentation": "<p>A stringified version of the current configs for your Amplify project.</p>"
         },
         "AppId": {
           "shape": "__string",
@@ -2207,6 +2241,86 @@
         }
       }
     },
+    "ImportBackendAuthRequest": {
+      "type": "structure",
+      "members": {
+        "AppId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "appId",
+          "documentation": "<p>The app ID.</p>"
+        },
+        "BackendEnvironmentName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "backendEnvironmentName",
+          "documentation": "<p>The name of the backend environment.</p>"
+        },
+        "IdentityPoolId": {
+          "shape": "__string",
+          "locationName": "identityPoolId",
+          "documentation": "<p>The ID of the Amazon Cognito identity pool.</p>"
+        },
+        "NativeClientId": {
+          "shape": "__string",
+          "locationName": "nativeClientId",
+          "documentation": "<p>The ID of the Amazon Cognito native client.</p>"
+        },
+        "UserPoolId": {
+          "shape": "__string",
+          "locationName": "userPoolId",
+          "documentation": "<p>The ID of the Amazon Cognito user pool.</p>"
+        },
+        "WebClientId": {
+          "shape": "__string",
+          "locationName": "webClientId",
+          "documentation": "<p>The ID of the Amazon Cognito web client.</p>"
+        }
+      },
+      "documentation": "<p>The request body for ImportBackendAuth.</p>",
+      "required": [
+        "AppId",
+        "BackendEnvironmentName",
+        "UserPoolId",
+        "NativeClientId",
+        "WebClientId"
+      ]
+    },
+    "ImportBackendAuthResponse": {
+      "type": "structure",
+      "members": {
+        "AppId": {
+          "shape": "__string",
+          "locationName": "appId",
+          "documentation": "<p>The app ID.</p>"
+        },
+        "BackendEnvironmentName": {
+          "shape": "__string",
+          "locationName": "backendEnvironmentName",
+          "documentation": "<p>The name of the backend environment.</p>"
+        },
+        "Error": {
+          "shape": "__string",
+          "locationName": "error",
+          "documentation": "<p>If the request fails, this error is returned.</p>"
+        },
+        "JobId": {
+          "shape": "__string",
+          "locationName": "jobId",
+          "documentation": "<p>The ID for the job.</p>"
+        },
+        "Operation": {
+          "shape": "__string",
+          "locationName": "operation",
+          "documentation": "<p>The name of the operation.</p>"
+        },
+        "Status": {
+          "shape": "__string",
+          "locationName": "status",
+          "documentation": "<p>The current status of the request.</p>"
+        }
+      }
+    },
     "ListBackendJobsRequest": {
       "type": "structure",
       "members": {
@@ -2275,7 +2389,7 @@
         "AwsCognitoIdentityPoolId": {
           "shape": "__string",
           "locationName": "aws_cognito_identity_pool_id",
-          "documentation": "<p>The Amazon Cognito identity pool ID used for Amplify Admin UI login authorization.</p>"
+          "documentation": "<p>The Amazon Cognito identity pool ID used for the Amplify Admin UI login authorization.</p>"
         },
         "AwsCognitoRegion": {
           "shape": "__string",
@@ -2350,7 +2464,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -2389,7 +2503,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         }
       }
     },
@@ -2520,7 +2634,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -2545,7 +2659,7 @@
         "DeliveryMethod": {
           "shape": "DeliveryMethod",
           "locationName": "deliveryMethod",
-          "documentation": "<p>Describes which method to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
+          "documentation": "<p>Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
         },
         "EmailSettings": {
           "shape": "EmailSettings",
@@ -2566,7 +2680,7 @@
         "UnauthenticatedLogin": {
           "shape": "__boolean",
           "locationName": "unauthenticatedLogin",
-          "documentation": "<p>A Boolean value that you can set to allow or disallow guest-level authorization into your Amplify app.</p>"
+          "documentation": "<p>A boolean value which can be set to allow or disallow guest-level authorization into your Amplify app.</p>"
         }
       },
       "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.</p>"
@@ -2607,12 +2721,12 @@
         "RedirectSignInURIs": {
           "shape": "ListOf__string",
           "locationName": "redirectSignInURIs",
-          "documentation": "<p>Redirect URLs that OAuth uses when a user signs in to an Amplify app.</p>"
+          "documentation": "<p>Redirect URLs used by OAuth when a user signs in to an Amplify app.</p>"
         },
         "RedirectSignOutURIs": {
           "shape": "ListOf__string",
           "locationName": "redirectSignOutURIs",
-          "documentation": "<p>Redirect URLs that OAuth uses when a user signs out of an Amplify app.</p>"
+          "documentation": "<p>Redirect URLs used by OAuth when a user signs out of an Amplify app.</p>"
         },
         "SocialProviderSettings": {
           "shape": "SocialProviderSettings",
@@ -2628,7 +2742,7 @@
         "AdditionalConstraints": {
           "shape": "ListOfAdditionalConstraintsElement",
           "locationName": "additionalConstraints",
-          "documentation": "<p>Describes additional constrains on the password requirements to sign in to the auth resource, configured as a part of your Amplify project.</p>"
+          "documentation": "<p>Describes additional constraints on password requirements to sign in to the auth resource, configured as a part of your Amplify project.</p>"
         },
         "MinimumLength": {
           "shape": "__double",
@@ -2636,7 +2750,7 @@
           "documentation": "<p>Describes the minimum length of the password required to sign in to the auth resource, configured as a part of your Amplify project.</p>"
         }
       },
-      "documentation": "<p>Describes the password policy for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
+      "documentation": "<p>Describes the password policy for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
     },
     "UpdateBackendAuthRequest": {
       "type": "structure",
@@ -2683,7 +2797,7 @@
         "IdentityPoolConfigs": {
           "shape": "UpdateBackendAuthIdentityPoolConfig",
           "locationName": "identityPoolConfigs",
-          "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of the auth resource in your Amplify project.</p>"
+          "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.</p>"
         },
         "Service": {
           "shape": "Service",
@@ -2693,7 +2807,7 @@
         "UserPoolConfigs": {
           "shape": "UpdateBackendAuthUserPoolConfig",
           "locationName": "userPoolConfigs",
-          "documentation": "<p>Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of the auth resource in your Amplify project.</p>"
+          "documentation": "<p>Describes the authentication configuration for the Amazon Cognito user pool, provisioned as a part of your auth resource in the Amplify project.</p>"
         }
       },
       "documentation": "<p>Defines the resource configuration when updating an authentication resource in your Amplify project.</p>",
@@ -2719,7 +2833,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",
@@ -2749,7 +2863,7 @@
         "Mfa": {
           "shape": "UpdateBackendAuthMFAConfig",
           "locationName": "mfa",
-          "documentation": "<p>Describes whether to apply multi-factor authentication (MFA) policies for your Amazon Cognito user pool that's configured as a part of your Amplify project.</p>"
+          "documentation": "<p>Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
         },
         "OAuth": {
           "shape": "UpdateBackendAuthOAuthConfig",
@@ -2762,7 +2876,7 @@
           "documentation": "<p>Describes the password policy for your Amazon Cognito user pool, configured as a part of your Amplify project.</p>"
         }
       },
-      "documentation": "<p>Describes the Amazon Cognito user pool configuration to configure the authorization resource for your Amplify project on an update.</p>"
+      "documentation": "<p>Describes the Amazon Cognito user pool configuration for the authorization resource to be configured for your Amplify project on an update.</p>"
     },
     "UpdateBackendConfigRequest": {
       "type": "structure",
@@ -2800,7 +2914,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "LoginAuthConfig": {
           "shape": "LoginAuthConfigReqObj",
@@ -2833,7 +2947,7 @@
         "Operation": {
           "shape": "__string",
           "locationName": "operation",
-          "documentation": "<p>Filters the list of response objects to include only those with the specified operation name.</p>"
+          "documentation": "<p>Filters the list of response objects to only include those with the specified operation name.</p>"
         },
         "Status": {
           "shape": "__string",
@@ -2869,7 +2983,7 @@
         "Error": {
           "shape": "__string",
           "locationName": "error",
-          "documentation": "<p>If the request failed, this is the returned error.</p>"
+          "documentation": "<p>If the request fails, this error is returned.</p>"
         },
         "JobId": {
           "shape": "__string",

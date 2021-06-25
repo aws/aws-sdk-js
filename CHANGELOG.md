@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.934.0-->
+<!--LATEST=2.935.0-->
 <!--ENTRYINSERT-->
+
+## 2.935.0
+* feature: AmplifyBackend: Imports an existing backend authentication resource.
+* feature: Proton: Added waiters for template registration, service operations, and environment deployments.
+* feature: Snowball: AWS Snow Family customers can remotely monitor and operate their connected AWS Snowcone devices. AWS Snowball Edge Storage Optimized customers can now import and export their data using NFS.
 
 ## 2.934.0
 * feature: Chime: Adds EventIngestionUrl field to MediaPlacement

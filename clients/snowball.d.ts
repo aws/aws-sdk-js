@@ -44,19 +44,19 @@ declare class Snowball extends Service {
    */
   createCluster(callback?: (err: AWSError, data: Snowball.Types.CreateClusterResult) => void): Request<Snowball.Types.CreateClusterResult, AWSError>;
   /**
-   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.   Only the Snowball; Edge device type is supported when ordering clustered jobs. The device capacity is optional. Availability of device types differ by AWS Region. For more information about region availability, see AWS Regional Services.    AWS Snow Family device types and their capacities.    Snow Family device type: SNC1_SSD    Capacity: T14   Description: Snowcone       Snow Family device type: SNC1_HDD    Capacity: T8   Description: Snowcone       Device type: EDGE_S    Capacity: T98   Description: Snowball Edge Storage Optimized for data transfer only       Device type: EDGE_CG    Capacity: T42   Description: Snowball Edge Compute Optimized with GPU      Device type: EDGE_C    Capacity: T42   Description: Snowball Edge Compute Optimized without GPU      Device type: EDGE    Capacity: T100   Description: Snowball Edge Storage Optimized with EC2 Compute      Device type: STANDARD    Capacity: T50   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.        Device type: STANDARD    Capacity: T80   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.       
+   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.   Only the Snowball; Edge device type is supported when ordering clustered jobs. The device capacity is optional. Availability of device types differ by AWS Region. For more information about Region availability, see AWS Regional Services.    AWS Snow Family device types and their capacities.    Snow Family device type: SNC1_SSD    Capacity: T14   Description: Snowcone       Snow Family device type: SNC1_HDD    Capacity: T8   Description: Snowcone       Device type: EDGE_S    Capacity: T98   Description: Snowball Edge Storage Optimized for data transfer only       Device type: EDGE_CG    Capacity: T42   Description: Snowball Edge Compute Optimized with GPU      Device type: EDGE_C    Capacity: T42   Description: Snowball Edge Compute Optimized without GPU      Device type: EDGE    Capacity: T100   Description: Snowball Edge Storage Optimized with EC2 Compute      Device type: STANDARD    Capacity: T50   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.        Device type: STANDARD    Capacity: T80   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.       
    */
   createJob(params: Snowball.Types.CreateJobRequest, callback?: (err: AWSError, data: Snowball.Types.CreateJobResult) => void): Request<Snowball.Types.CreateJobResult, AWSError>;
   /**
-   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.   Only the Snowball; Edge device type is supported when ordering clustered jobs. The device capacity is optional. Availability of device types differ by AWS Region. For more information about region availability, see AWS Regional Services.    AWS Snow Family device types and their capacities.    Snow Family device type: SNC1_SSD    Capacity: T14   Description: Snowcone       Snow Family device type: SNC1_HDD    Capacity: T8   Description: Snowcone       Device type: EDGE_S    Capacity: T98   Description: Snowball Edge Storage Optimized for data transfer only       Device type: EDGE_CG    Capacity: T42   Description: Snowball Edge Compute Optimized with GPU      Device type: EDGE_C    Capacity: T42   Description: Snowball Edge Compute Optimized without GPU      Device type: EDGE    Capacity: T100   Description: Snowball Edge Storage Optimized with EC2 Compute      Device type: STANDARD    Capacity: T50   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.        Device type: STANDARD    Capacity: T80   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.       
+   * Creates a job to import or export data between Amazon S3 and your on-premises data center. Your AWS account must have the right trust policies and permissions in place to create a job for a Snow device. If you're creating a job for a node in a cluster, you only need to provide the clusterId value; the other job attributes are inherited from the cluster.   Only the Snowball; Edge device type is supported when ordering clustered jobs. The device capacity is optional. Availability of device types differ by AWS Region. For more information about Region availability, see AWS Regional Services.    AWS Snow Family device types and their capacities.    Snow Family device type: SNC1_SSD    Capacity: T14   Description: Snowcone       Snow Family device type: SNC1_HDD    Capacity: T8   Description: Snowcone       Device type: EDGE_S    Capacity: T98   Description: Snowball Edge Storage Optimized for data transfer only       Device type: EDGE_CG    Capacity: T42   Description: Snowball Edge Compute Optimized with GPU      Device type: EDGE_C    Capacity: T42   Description: Snowball Edge Compute Optimized without GPU      Device type: EDGE    Capacity: T100   Description: Snowball Edge Storage Optimized with EC2 Compute      Device type: STANDARD    Capacity: T50   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.        Device type: STANDARD    Capacity: T80   Description: Original Snowball device  This device is only available in the Ningxia, Beijing, and Singapore AWS Regions.       
    */
   createJob(callback?: (err: AWSError, data: Snowball.Types.CreateJobResult) => void): Request<Snowball.Types.CreateJobResult, AWSError>;
   /**
-   * Creates a job with long term usage option for a device. The long term usage is a one year or three year long term pricing type for the device. You are billed upfront and AWS give discounts for long term pricing. For detailed information see XXXXXXXX
+   * Creates a job with the long-term usage option for a device. The long-term usage is a 1-year or 3-year long-term pricing type for the device. You are billed upfront, and AWS provides discounts for long-term pricing. 
    */
   createLongTermPricing(params: Snowball.Types.CreateLongTermPricingRequest, callback?: (err: AWSError, data: Snowball.Types.CreateLongTermPricingResult) => void): Request<Snowball.Types.CreateLongTermPricingResult, AWSError>;
   /**
-   * Creates a job with long term usage option for a device. The long term usage is a one year or three year long term pricing type for the device. You are billed upfront and AWS give discounts for long term pricing. For detailed information see XXXXXXXX
+   * Creates a job with the long-term usage option for a device. The long-term usage is a 1-year or 3-year long-term pricing type for the device. You are billed upfront, and AWS provides discounts for long-term pricing. 
    */
   createLongTermPricing(callback?: (err: AWSError, data: Snowball.Types.CreateLongTermPricingResult) => void): Request<Snowball.Types.CreateLongTermPricingResult, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class Snowball extends Service {
    */
   listJobs(callback?: (err: AWSError, data: Snowball.Types.ListJobsResult) => void): Request<Snowball.Types.ListJobsResult, AWSError>;
   /**
-   * Lists all long term pricing types.
+   * Lists all long-term pricing types.
    */
   listLongTermPricing(params: Snowball.Types.ListLongTermPricingRequest, callback?: (err: AWSError, data: Snowball.Types.ListLongTermPricingResult) => void): Request<Snowball.Types.ListLongTermPricingResult, AWSError>;
   /**
-   * Lists all long term pricing types.
+   * Lists all long-term pricing types.
    */
   listLongTermPricing(callback?: (err: AWSError, data: Snowball.Types.ListLongTermPricingResult) => void): Request<Snowball.Types.ListLongTermPricingResult, AWSError>;
   /**
@@ -196,19 +196,19 @@ declare class Snowball extends Service {
    */
   updateJob(callback?: (err: AWSError, data: Snowball.Types.UpdateJobResult) => void): Request<Snowball.Types.UpdateJobResult, AWSError>;
   /**
-   * Updates the state when a the shipment states changes to a different state.
+   * Updates the state when a shipment state changes to a different state.
    */
   updateJobShipmentState(params: Snowball.Types.UpdateJobShipmentStateRequest, callback?: (err: AWSError, data: Snowball.Types.UpdateJobShipmentStateResult) => void): Request<Snowball.Types.UpdateJobShipmentStateResult, AWSError>;
   /**
-   * Updates the state when a the shipment states changes to a different state.
+   * Updates the state when a shipment state changes to a different state.
    */
   updateJobShipmentState(callback?: (err: AWSError, data: Snowball.Types.UpdateJobShipmentStateResult) => void): Request<Snowball.Types.UpdateJobShipmentStateResult, AWSError>;
   /**
-   * Updates the long term pricing type.
+   * Updates the long-term pricing type.
    */
   updateLongTermPricing(params: Snowball.Types.UpdateLongTermPricingRequest, callback?: (err: AWSError, data: Snowball.Types.UpdateLongTermPricingResult) => void): Request<Snowball.Types.UpdateLongTermPricingResult, AWSError>;
   /**
-   * Updates the long term pricing type.
+   * Updates the long-term pricing type.
    */
   updateLongTermPricing(callback?: (err: AWSError, data: Snowball.Types.UpdateLongTermPricingResult) => void): Request<Snowball.Types.UpdateLongTermPricingResult, AWSError>;
 }
@@ -368,6 +368,10 @@ declare namespace Snowball {
      * The tax documents required in your AWS Region.
      */
     TaxDocuments?: TaxDocuments;
+    /**
+     * Represents metadata and configuration settings for services on an AWS Snow Family device.
+     */
+    OnDeviceServiceConfiguration?: OnDeviceServiceConfiguration;
   }
   export type ClusterState = "AwaitingQuorum"|"Pending"|"InUse"|"Complete"|"Cancelled"|string;
   export interface CompatibleImage {
@@ -403,6 +407,10 @@ declare namespace Snowball {
      */
     Resources: JobResource;
     /**
+     * Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).
+     */
+    OnDeviceServiceConfiguration?: OnDeviceServiceConfiguration;
+    /**
      * An optional description of this specific cluster, for example Environmental Data Cluster-01.
      */
     Description?: String;
@@ -423,7 +431,7 @@ declare namespace Snowball {
      */
     SnowballType: SnowballType;
     /**
-     * The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:    In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snow device are delivered in one to seven days.   In the United States of America (US), you have access to one-day shipping and two-day shipping.     In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snow device are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
+     * The shipping speed for each node in this cluster. This speed doesn't dictate how soon you'll get each Snowball Edge device, rather it represents how quickly each device moves to its destination while in transit. Regional shipping speeds are as follows:    In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snow devices are delivered in one to seven days.   In the United States of America (US), you have access to one-day shipping and two-day shipping.     In Australia, you have access to express shipping. Typically, devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snow devices are delivered in one to seven days.   In the US, you have access to one-day shipping and two-day shipping.  
      */
     ShippingOption: ShippingOption;
     /**
@@ -438,6 +446,10 @@ declare namespace Snowball {
      * The tax documents required in your AWS Region.
      */
     TaxDocuments?: TaxDocuments;
+    /**
+     * Allows you to securely operate and manage Snow devices in a cluster remotely from outside of your internal network. When set to INSTALLED_AUTOSTART, remote management will automatically be available when the device arrives at your location. Otherwise, you need to use the Snowball Client to manage the device.
+     */
+    RemoteManagement?: RemoteManagement;
   }
   export interface CreateClusterResult {
     /**
@@ -454,6 +466,10 @@ declare namespace Snowball {
      * Defines the Amazon S3 buckets associated with this job. With IMPORT jobs, you specify the bucket or buckets that your transferred data will be imported into. With EXPORT jobs, you specify the bucket or buckets that your transferred data will be exported from. Optionally, you can also specify a KeyRange value. If you choose to export a range, you define the length of the range by providing either an inclusive BeginMarker value, an inclusive EndMarker value, or both. Ranges are UTF-8 binary sorted.
      */
     Resources?: JobResource;
+    /**
+     * Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).
+     */
+    OnDeviceServiceConfiguration?: OnDeviceServiceConfiguration;
     /**
      * Defines an optional description of this specific job, for example Important Photos 2016-08-11.
      */
@@ -491,7 +507,7 @@ declare namespace Snowball {
      */
     SnowballType?: SnowballType;
     /**
-     * The forwarding address ID for a job. This field is not supported in most regions.
+     * The forwarding address ID for a job. This field is not supported in most Regions.
      */
     ForwardingAddressId?: AddressId;
     /**
@@ -503,7 +519,11 @@ declare namespace Snowball {
      */
     DeviceConfiguration?: DeviceConfiguration;
     /**
-     * The ID of the long term pricing type for the device.
+     * Allows you to securely operate and manage Snowcone devices remotely from outside of your internal network. When set to INSTALLED_AUTOSTART, remote management will automatically be available when the device arrives at your location. Otherwise, you need to use the Snowball Client to manage the device.
+     */
+    RemoteManagement?: RemoteManagement;
+    /**
+     * The ID of the long-term pricing type for the device.
      */
     LongTermPricingId?: LongTermPricingId;
   }
@@ -515,27 +535,27 @@ declare namespace Snowball {
   }
   export interface CreateLongTermPricingRequest {
     /**
-     * The type of long term pricing option you want for the device - one year or three year long term pricing.
+     * The type of long-term pricing option you want for the device, either 1-year or 3-year long-term pricing.
      */
     LongTermPricingType: LongTermPricingType;
     /**
-     * Specifies whether the current long term pricing type for the device should be renewed.
+     * Specifies whether the current long-term pricing type for the device should be renewed.
      */
     IsLongTermPricingAutoRenew?: JavaBoolean;
     /**
-     * The type of AWS Snow Family device to use for the long term pricing job.
+     * The type of AWS Snow Family device to use for the long-term pricing job.
      */
     SnowballType?: SnowballType;
   }
   export interface CreateLongTermPricingResult {
     /**
-     * The ID of the long term pricing type for the device.
+     * The ID of the long-term pricing type for the device.
      */
     LongTermPricingId?: LongTermPricingId;
   }
   export interface CreateReturnShippingLabelRequest {
     /**
-     * The ID for a job that you want to create the return shipping label for. For example JID123e4567-e89b-12d3-a456-426655440000.
+     * The ID for a job that you want to create the return shipping label for; for example, JID123e4567-e89b-12d3-a456-426655440000.
      */
     JobId: JobId;
     /**
@@ -649,6 +669,7 @@ declare namespace Snowball {
      */
     SnowconeDeviceConfiguration?: SnowconeDeviceConfiguration;
   }
+  export type DeviceServiceName = "NFS_ON_DEVICE_SERVICE"|"S3_ON_DEVICE_SERVICE"|string;
   export interface Ec2AmiResource {
     /**
      * The ID of the AMI in Amazon EC2.
@@ -845,9 +866,17 @@ declare namespace Snowball {
     TaxDocuments?: TaxDocuments;
     DeviceConfiguration?: DeviceConfiguration;
     /**
-     * The ID of the long term pricing type for the device.
+     * Allows you to securely operate and manage Snowcone devices remotely from outside of your internal network. When set to INSTALLED_AUTOSTART, remote management will automatically be available when the device arrives at your location. Otherwise, you need to use the Snowball Client to manage the device.
+     */
+    RemoteManagement?: RemoteManagement;
+    /**
+     * The ID of the long-term pricing type for the device.
      */
     LongTermPricingId?: LongTermPricingId;
+    /**
+     * Represents metadata and configuration settings for services on an AWS Snow Family device.
+     */
+    OnDeviceServiceConfiguration?: OnDeviceServiceConfiguration;
   }
   export type JobMetadataList = JobMetadata[];
   export interface JobResource {
@@ -1000,50 +1029,60 @@ declare namespace Snowball {
   export type LongTermPricingId = string;
   export interface LongTermPricingListEntry {
     /**
-     * The ID of the long term pricing type for the device.
+     * The ID of the long-term pricing type for the device.
      */
     LongTermPricingId?: LongTermPricingId;
     /**
-     * The end date the long term pricing contract.
+     * The end date the long-term pricing contract.
      */
     LongTermPricingEndDate?: Timestamp;
     /**
-     * The start date of the long term pricing contract.
+     * The start date of the long-term pricing contract.
      */
     LongTermPricingStartDate?: Timestamp;
     /**
-     * The type of long term pricing that was selected for the device.
+     * The type of long-term pricing that was selected for the device.
      */
     LongTermPricingType?: LongTermPricingType;
     /**
-     * The current active jobs on the device the long term pricing type.
+     * The current active jobs on the device the long-term pricing type.
      */
     CurrentActiveJob?: JobId;
     /**
-     * A new device that replaces a device that is ordered with long term pricing.
+     * A new device that replaces a device that is ordered with long-term pricing.
      */
     ReplacementJob?: JobId;
     /**
-     * If set to true, specifies that the current long term pricing type for the device should be automatically renewed before the long term pricing contract expires.
+     * If set to true, specifies that the current long-term pricing type for the device should be automatically renewed before the long-term pricing contract expires.
      */
     IsLongTermPricingAutoRenew?: JavaBoolean;
     /**
-     * The status of the long term pricing type.
+     * The status of the long-term pricing type.
      */
     LongTermPricingStatus?: String;
     /**
-     * The type of AWS Snow Family device associated with this long term pricing job.
+     * The type of AWS Snow Family device associated with this long-term pricing job.
      */
     SnowballType?: SnowballType;
     /**
-     * The IDs of the jobs that are associated with a long term pricing type.
+     * The IDs of the jobs that are associated with a long-term pricing type.
      */
     JobIds?: LongTermPricingAssociatedJobIdList;
   }
   export type LongTermPricingType = "OneYear"|"ThreeYear"|string;
+  export interface NFSOnDeviceServiceConfiguration {
+    /**
+     * The maximum NFS storage for one Snowball Family device.
+     */
+    StorageLimit?: StorageLimit;
+    /**
+     * The scale unit of the NFS storage on the device. Valid values: TB.
+     */
+    StorageUnit?: StorageUnit;
+  }
   export interface Notification {
     /**
-     * The new SNS TopicArn that you want to associate with this job. You can create Amazon Resource Names (ARNs) for topics by using the CreateTopic Amazon SNS API action. You can subscribe email addresses to an Amazon SNS topic through the AWS Management Console, or by using the Subscribe AWS Simple Notification Service (SNS) API action.
+     * The new SNS TopicArn that you want to associate with this job. You can create Amazon Resource Names (ARNs) for topics by using the CreateTopic Amazon SNS API action. You can subscribe email addresses to an Amazon SNS topic through the AWS Management Console, or by using the Subscribe Amazon Simple Notification Service (Amazon SNS) API action.
      */
     SnsTopicARN?: SnsTopicARN;
     /**
@@ -1055,6 +1094,13 @@ declare namespace Snowball {
      */
     NotifyAll?: Boolean;
   }
+  export interface OnDeviceServiceConfiguration {
+    /**
+     * Represents the NFS service on a Snow Family device.
+     */
+    NFSOnDeviceService?: NFSOnDeviceServiceConfiguration;
+  }
+  export type RemoteManagement = "INSTALLED_ONLY"|"INSTALLED_AUTOSTART"|string;
   export type ResourceARN = string;
   export type RoleARN = string;
   export interface S3Resource {
@@ -1066,6 +1112,10 @@ declare namespace Snowball {
      * For export jobs, you can provide an optional KeyRange within a specific Amazon S3 bucket. The length of the range is defined at job creation, and has either an inclusive BeginMarker, an inclusive EndMarker, or both. Ranges are UTF-8 binary sorted.
      */
     KeyRange?: KeyRange;
+    /**
+     * Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).
+     */
+    TargetOnDeviceServices?: TargetOnDeviceServiceList;
   }
   export type S3ResourceList = S3Resource[];
   export interface Shipment {
@@ -1081,7 +1131,7 @@ declare namespace Snowball {
   export type ShipmentState = "RECEIVED"|"RETURNED"|string;
   export interface ShippingDetails {
     /**
-     * The shipping speed for a particular job. This speed doesn't dictate how soon you'll get the Snow device from the job's creation date. This speed represents how quickly it moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snow device are delivered in one to seven days.   In the United States of America (US), you have access to one-day shipping and two-day shipping.  
+     * The shipping speed for a particular job. This speed doesn't dictate how soon you'll get the Snow device from the job's creation date. This speed represents how quickly it moves to its destination while in transit. Regional shipping speeds are as follows:   In Australia, you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day.   In the European Union (EU), you have access to express shipping. Typically, Snow devices shipped express are delivered in about a day. In addition, most countries in the EU have access to standard shipping, which typically takes less than a week, one way.   In India, Snow devices are delivered in one to seven days.   In the United States of America (US), you have access to one-day shipping and two-day shipping.  
      */
     ShippingOption?: ShippingOption;
     /**
@@ -1104,11 +1154,25 @@ declare namespace Snowball {
     WirelessConnection?: WirelessConnection;
   }
   export type SnsTopicARN = string;
+  export type StorageLimit = number;
+  export type StorageUnit = "TB"|string;
   export type String = string;
+  export interface TargetOnDeviceService {
+    /**
+     * Specifies the name of the service on the Snow Family device that your transferred data will be exported from or imported into.
+     */
+    ServiceName?: DeviceServiceName;
+    /**
+     * Specifies whether the data is being imported or exported. You can import or export the data, or use it locally on the device.
+     */
+    TransferOption?: TransferOption;
+  }
+  export type TargetOnDeviceServiceList = TargetOnDeviceService[];
   export interface TaxDocuments {
     IND?: INDTaxDocuments;
   }
   export type Timestamp = Date;
+  export type TransferOption = "IMPORT"|"EXPORT"|"LOCAL_USE"|string;
   export interface UpdateClusterRequest {
     /**
      * The cluster ID of the cluster that you want to update, for example CID123e4567-e89b-12d3-a456-426655440000.
@@ -1126,6 +1190,10 @@ declare namespace Snowball {
      * The updated arrays of JobResource objects that can include updated S3Resource objects or LambdaResource objects.
      */
     Resources?: JobResource;
+    /**
+     * Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).
+     */
+    OnDeviceServiceConfiguration?: OnDeviceServiceConfiguration;
     /**
      * The ID of the updated Address object.
      */
@@ -1163,6 +1231,10 @@ declare namespace Snowball {
      */
     Resources?: JobResource;
     /**
+     * Specifies the service or services on the Snow Family device that your transferred data will be exported from or imported into. AWS Snow Family supports Amazon S3 and NFS (Network File System).
+     */
+    OnDeviceServiceConfiguration?: OnDeviceServiceConfiguration;
+    /**
      * The ID of the updated Address object.
      */
     AddressId?: AddressId;
@@ -1199,15 +1271,15 @@ declare namespace Snowball {
   }
   export interface UpdateLongTermPricingRequest {
     /**
-     * The ID of the long term pricing type for the device.
+     * The ID of the long-term pricing type for the device.
      */
     LongTermPricingId: LongTermPricingId;
     /**
-     * Specifies that a device that is ordered with long term pricing should be replaced with a new device.
+     * Specifies that a device that is ordered with long-term pricing should be replaced with a new device.
      */
     ReplacementJob?: JobId;
     /**
-     * If set to true, specifies that the current long term pricing type for the device should be automatically renewed before the long term pricing contract expires.
+     * If set to true, specifies that the current long-term pricing type for the device should be automatically renewed before the long-term pricing contract expires.
      */
     IsLongTermPricingAutoRenew?: JavaBoolean;
   }

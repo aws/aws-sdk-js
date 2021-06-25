@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
@@ -403,6 +404,70 @@ declare class Proton extends Service {
    * Update a major or minor version of a service template.
    */
   updateServiceTemplateVersion(callback?: (err: AWSError, data: Proton.Types.UpdateServiceTemplateVersionOutput) => void): Request<Proton.Types.UpdateServiceTemplateVersionOutput, AWSError>;
+  /**
+   * Waits for the environmentDeployed state by periodically calling the underlying Proton.getEnvironmentoperation every 5 seconds (at most 999 times). Wait until an Environment is deployed. Use this after invoking CreateEnvironment or UpdateEnvironment
+   */
+  waitFor(state: "environmentDeployed", params: Proton.Types.GetEnvironmentInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Proton.Types.GetEnvironmentOutput) => void): Request<Proton.Types.GetEnvironmentOutput, AWSError>;
+  /**
+   * Waits for the environmentDeployed state by periodically calling the underlying Proton.getEnvironmentoperation every 5 seconds (at most 999 times). Wait until an Environment is deployed. Use this after invoking CreateEnvironment or UpdateEnvironment
+   */
+  waitFor(state: "environmentDeployed", callback?: (err: AWSError, data: Proton.Types.GetEnvironmentOutput) => void): Request<Proton.Types.GetEnvironmentOutput, AWSError>;
+  /**
+   * Waits for the environmentTemplateVersionRegistered state by periodically calling the underlying Proton.getEnvironmentTemplateVersionoperation every 2 seconds (at most 150 times). Wait until an EnvironmentTemplateVersion is registered. Use this after invoking CreateEnvironmentTemplateVersion
+   */
+  waitFor(state: "environmentTemplateVersionRegistered", params: Proton.Types.GetEnvironmentTemplateVersionInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Proton.Types.GetEnvironmentTemplateVersionOutput) => void): Request<Proton.Types.GetEnvironmentTemplateVersionOutput, AWSError>;
+  /**
+   * Waits for the environmentTemplateVersionRegistered state by periodically calling the underlying Proton.getEnvironmentTemplateVersionoperation every 2 seconds (at most 150 times). Wait until an EnvironmentTemplateVersion is registered. Use this after invoking CreateEnvironmentTemplateVersion
+   */
+  waitFor(state: "environmentTemplateVersionRegistered", callback?: (err: AWSError, data: Proton.Types.GetEnvironmentTemplateVersionOutput) => void): Request<Proton.Types.GetEnvironmentTemplateVersionOutput, AWSError>;
+  /**
+   * Waits for the serviceCreated state by periodically calling the underlying Proton.getServiceoperation every 5 seconds (at most 999 times). Wait until an Service has deployed its instances and possibly pipeline. Use this after invoking CreateService
+   */
+  waitFor(state: "serviceCreated", params: Proton.Types.GetServiceInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Proton.Types.GetServiceOutput) => void): Request<Proton.Types.GetServiceOutput, AWSError>;
+  /**
+   * Waits for the serviceCreated state by periodically calling the underlying Proton.getServiceoperation every 5 seconds (at most 999 times). Wait until an Service has deployed its instances and possibly pipeline. Use this after invoking CreateService
+   */
+  waitFor(state: "serviceCreated", callback?: (err: AWSError, data: Proton.Types.GetServiceOutput) => void): Request<Proton.Types.GetServiceOutput, AWSError>;
+  /**
+   * Waits for the serviceDeleted state by periodically calling the underlying Proton.getServiceoperation every 5 seconds (at most 999 times). Wait until a Service, its instances, and possibly pipeline have been deleted after DeleteService is invoked
+   */
+  waitFor(state: "serviceDeleted", params: Proton.Types.GetServiceInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Proton.Types.GetServiceOutput) => void): Request<Proton.Types.GetServiceOutput, AWSError>;
+  /**
+   * Waits for the serviceDeleted state by periodically calling the underlying Proton.getServiceoperation every 5 seconds (at most 999 times). Wait until a Service, its instances, and possibly pipeline have been deleted after DeleteService is invoked
+   */
+  waitFor(state: "serviceDeleted", callback?: (err: AWSError, data: Proton.Types.GetServiceOutput) => void): Request<Proton.Types.GetServiceOutput, AWSError>;
+  /**
+   * Waits for the serviceInstanceDeployed state by periodically calling the underlying Proton.getServiceInstanceoperation every 5 seconds (at most 999 times). Wait until a ServiceInstance is deployed. Use this after invoking CreateService or UpdateServiceInstance
+   */
+  waitFor(state: "serviceInstanceDeployed", params: Proton.Types.GetServiceInstanceInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Proton.Types.GetServiceInstanceOutput) => void): Request<Proton.Types.GetServiceInstanceOutput, AWSError>;
+  /**
+   * Waits for the serviceInstanceDeployed state by periodically calling the underlying Proton.getServiceInstanceoperation every 5 seconds (at most 999 times). Wait until a ServiceInstance is deployed. Use this after invoking CreateService or UpdateServiceInstance
+   */
+  waitFor(state: "serviceInstanceDeployed", callback?: (err: AWSError, data: Proton.Types.GetServiceInstanceOutput) => void): Request<Proton.Types.GetServiceInstanceOutput, AWSError>;
+  /**
+   * Waits for the servicePipelineDeployed state by periodically calling the underlying Proton.getServiceoperation every 10 seconds (at most 360 times). Wait until an ServicePipeline is deployed. Use this after invoking CreateService or UpdateServicePipeline
+   */
+  waitFor(state: "servicePipelineDeployed", params: Proton.Types.GetServiceInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Proton.Types.GetServiceOutput) => void): Request<Proton.Types.GetServiceOutput, AWSError>;
+  /**
+   * Waits for the servicePipelineDeployed state by periodically calling the underlying Proton.getServiceoperation every 10 seconds (at most 360 times). Wait until an ServicePipeline is deployed. Use this after invoking CreateService or UpdateServicePipeline
+   */
+  waitFor(state: "servicePipelineDeployed", callback?: (err: AWSError, data: Proton.Types.GetServiceOutput) => void): Request<Proton.Types.GetServiceOutput, AWSError>;
+  /**
+   * Waits for the serviceTemplateVersionRegistered state by periodically calling the underlying Proton.getServiceTemplateVersionoperation every 2 seconds (at most 150 times). Wait until a ServiceTemplateVersion is registered. Use this after invoking CreateServiceTemplateVersion
+   */
+  waitFor(state: "serviceTemplateVersionRegistered", params: Proton.Types.GetServiceTemplateVersionInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Proton.Types.GetServiceTemplateVersionOutput) => void): Request<Proton.Types.GetServiceTemplateVersionOutput, AWSError>;
+  /**
+   * Waits for the serviceTemplateVersionRegistered state by periodically calling the underlying Proton.getServiceTemplateVersionoperation every 2 seconds (at most 150 times). Wait until a ServiceTemplateVersion is registered. Use this after invoking CreateServiceTemplateVersion
+   */
+  waitFor(state: "serviceTemplateVersionRegistered", callback?: (err: AWSError, data: Proton.Types.GetServiceTemplateVersionOutput) => void): Request<Proton.Types.GetServiceTemplateVersionOutput, AWSError>;
+  /**
+   * Waits for the serviceUpdated state by periodically calling the underlying Proton.getServiceoperation every 5 seconds (at most 999 times). Wait until a Service, its instances, and possibly pipeline have been deployed after UpdateService is invoked
+   */
+  waitFor(state: "serviceUpdated", params: Proton.Types.GetServiceInput & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: Proton.Types.GetServiceOutput) => void): Request<Proton.Types.GetServiceOutput, AWSError>;
+  /**
+   * Waits for the serviceUpdated state by periodically calling the underlying Proton.getServiceoperation every 5 seconds (at most 999 times). Wait until a Service, its instances, and possibly pipeline have been deployed after UpdateService is invoked
+   */
+  waitFor(state: "serviceUpdated", callback?: (err: AWSError, data: Proton.Types.GetServiceOutput) => void): Request<Proton.Types.GetServiceOutput, AWSError>;
 }
 declare namespace Proton {
   export interface AcceptEnvironmentAccountConnectionInput {
