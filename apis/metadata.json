@@ -462,7 +462,8 @@
     "name": "MigrationHub"
   },
   "cloudhsmv2": {
-    "name": "CloudHSMV2"
+    "name": "CloudHSMV2",
+    "cors": true
   },
   "glue": {
     "name": "Glue"
