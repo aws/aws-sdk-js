@@ -26,7 +26,6 @@ Amazon CloudFront | AWS.CloudFront | 2017-10-30 | :tada: |
 Amazon CloudFront | AWS.CloudFront | 2017-03-25 | :tada: |
 Amazon CloudFront | AWS.CloudFront | 2016-11-25 | :tada: |
 Amazon CloudHSM | AWS.CloudHSM | 2014-05-30 | :tada: |
-Amazon CloudHSMv2 | AWS.CloudHSMv2 | 2017-04-28 | :tada: |
 Amazon CloudSearch | AWS.CloudSearch | 2013-01-01 |  |
 Amazon CloudSearch | AWS.CloudSearch | 2011-02-01 |  |
 Amazon CloudSearch Domain | AWS.CloudSearchDomain | 2013-01-01 |  |
