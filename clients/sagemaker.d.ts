@@ -3296,6 +3296,10 @@ declare namespace SageMaker {
      */
     OutputConfig: OutputConfig;
     /**
+     * A VpcConfig object that specifies the VPC that you want your compilation job to connect to. Control access to your models by configuring the VPC. For more information, see Protect Compilation Jobs by Using an Amazon Virtual Private Cloud.
+     */
+    VpcConfig?: NeoVpcConfig;
+    /**
      * Specifies a limit to how long a model compilation job can run. When the job reaches the time limit, Amazon SageMaker ends the compilation job. Use this API to cap model training costs.
      */
     StoppingCondition: StoppingCondition;
@@ -5553,6 +5557,7 @@ declare namespace SageMaker {
      * Specifies a limit to how long a model compilation job can run. When the job reaches the time limit, Amazon SageMaker ends the compilation job. Use this API to cap model training costs.
      */
     StoppingCondition: StoppingCondition;
+    InferenceImage?: InferenceImage;
     /**
      * The time that the model compilation job was created.
      */
@@ -5585,6 +5590,10 @@ declare namespace SageMaker {
      * Information about the output location for the compiled model and the target device that the model runs on.
      */
     OutputConfig: OutputConfig;
+    /**
+     * A VpcConfig object that specifies the VPC that you want your compilation job to connect to. Control access to your models by configuring the VPC. For more information, see Protect Compilation Jobs by Using an Amazon Virtual Private Cloud.
+     */
+    VpcConfig?: NeoVpcConfig;
   }
   export interface DescribeContextRequest {
     /**
@@ -8888,6 +8897,7 @@ declare namespace SageMaker {
     Mode: InferenceExecutionMode;
   }
   export type InferenceExecutionMode = "Serial"|"Direct"|string;
+  export type InferenceImage = string;
   export interface InferenceSpecification {
     /**
      * The Amazon ECR registry path of the Docker image that contains the inference code.
@@ -12400,6 +12410,14 @@ declare namespace SageMaker {
     ModelCacheSetting?: ModelCacheSetting;
   }
   export type NameContains = string;
+  export interface NeoVpcConfig {
+    SecurityGroupIds: NeoVpcSecurityGroupIds;
+    Subnets: NeoVpcSubnets;
+  }
+  export type NeoVpcSecurityGroupId = string;
+  export type NeoVpcSecurityGroupIds = NeoVpcSecurityGroupId[];
+  export type NeoVpcSubnetId = string;
+  export type NeoVpcSubnets = NeoVpcSubnetId[];
   export interface NestedFilters {
     /**
      * The name of the property to use in the nested filters. The value must match a listed property name, such as InputDataConfig.
@@ -12669,7 +12687,7 @@ declare namespace SageMaker {
      */
     CompilerOptions?: CompilerOptions;
     /**
-     * The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account The KmsKeyId can be any of the following formats:    Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias   
+     * The Amazon Web Services Key Management Service key (Amazon Web Services KMS) that Amazon SageMaker uses to encrypt your output models with Amazon S3 server-side encryption after compilation job. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. For more information, see KMS-Managed Encryption Keys in the Amazon Simple Storage Service Developer Guide.  The KmsKeyId can be any of the following formats:    Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias   
      */
     KmsKeyId?: KmsKeyId;
   }
@@ -14119,7 +14137,7 @@ declare namespace SageMaker {
   export type TagList = Tag[];
   export type TagValue = string;
   export type TargetAttributeName = string;
-  export type TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"ml_g4dn"|"ml_inf1"|"ml_eia2"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"jetson_xavier"|"rasp3b"|"imx8qm"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|"sitara_am57x"|"amba_cv22"|"x86_win32"|"x86_win64"|"coreml"|"jacinto_tda4vm"|string;
+  export type TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"ml_g4dn"|"ml_inf1"|"ml_eia2"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"jetson_xavier"|"rasp3b"|"imx8qm"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|"sitara_am57x"|"amba_cv22"|"amba_cv25"|"x86_win32"|"x86_win64"|"coreml"|"jacinto_tda4vm"|string;
   export type TargetObjectiveMetricValue = number;
   export interface TargetPlatform {
     /**

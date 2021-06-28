@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.935.0-->
+<!--LATEST=2.936.0-->
 <!--ENTRYINSERT-->
+
+## 2.936.0
+* feature: Glue: Add JSON Support for Glue Schema Registry
+* feature: MediaConvert: MediaConvert adds support for HDR10+, ProRes 4444,  and XAVC outputs, ADM/DAMF support for Dolby Atmos ingest, and alternative audio and WebVTT caption ingest via HLS inputs. MediaConvert also now supports creating trickplay outputs for Roku devices for HLS, CMAF, and DASH output groups.
+* feature: Redshift: Added InvalidClusterStateFault to the DisableLogging API, thrown when calling the API on a non available cluster.
+* feature: SageMaker: Sagemaker Neo now supports running compilation jobs using customer's Amazon VPC
 
 ## 2.935.0
 * feature: AmplifyBackend: Imports an existing backend authentication resource.

@@ -6746,6 +6746,10 @@
           "shape": "OutputConfig",
           "documentation": "<p>Provides information about the output location for the compiled model and the target device the model runs on.</p>"
         },
+        "VpcConfig": {
+          "shape": "NeoVpcConfig",
+          "documentation": "<p>A <a>VpcConfig</a> object that specifies the VPC that you want your compilation job to connect to. Control access to your models by configuring the VPC. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html\">Protect Compilation Jobs by Using an Amazon Virtual Private Cloud</a>.</p>"
+        },
         "StoppingCondition": {
           "shape": "StoppingCondition",
           "documentation": "<p>Specifies a limit to how long a model compilation job can run. When the job reaches the time limit, Amazon SageMaker ends the compilation job. Use this API to cap model training costs.</p>"
@@ -10090,6 +10094,9 @@
           "shape": "StoppingCondition",
           "documentation": "<p>Specifies a limit to how long a model compilation job can run. When the job reaches the time limit, Amazon SageMaker ends the compilation job. Use this API to cap model training costs.</p>"
         },
+        "InferenceImage": {
+          "shape": "InferenceImage"
+        },
         "CreationTime": {
           "shape": "CreationTime",
           "documentation": "<p>The time that the model compilation job was created.</p>"
@@ -10121,6 +10128,10 @@
         "OutputConfig": {
           "shape": "OutputConfig",
           "documentation": "<p>Information about the output location for the compiled model and the target device that the model runs on.</p>"
+        },
+        "VpcConfig": {
+          "shape": "NeoVpcConfig",
+          "documentation": "<p>A <a>VpcConfig</a> object that specifies the VPC that you want your compilation job to connect to. Control access to your models by configuring the VPC. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html\">Protect Compilation Jobs by Using an Amazon Virtual Private Cloud</a>.</p>"
         }
       }
     },
@@ -15297,6 +15308,10 @@
         "Direct"
       ]
     },
+    "InferenceImage": {
+      "type": "string",
+      "max": 256
+    },
     "InferenceSpecification": {
       "type": "structure",
       "required": [
@@ -20342,6 +20357,47 @@
       "max": 63,
       "pattern": "[a-zA-Z0-9\\-]+"
     },
+    "NeoVpcConfig": {
+      "type": "structure",
+      "required": [
+        "SecurityGroupIds",
+        "Subnets"
+      ],
+      "members": {
+        "SecurityGroupIds": {
+          "shape": "NeoVpcSecurityGroupIds"
+        },
+        "Subnets": {
+          "shape": "NeoVpcSubnets"
+        }
+      }
+    },
+    "NeoVpcSecurityGroupId": {
+      "type": "string",
+      "max": 32,
+      "pattern": "[-0-9a-zA-Z]+"
+    },
+    "NeoVpcSecurityGroupIds": {
+      "type": "list",
+      "member": {
+        "shape": "NeoVpcSecurityGroupId"
+      },
+      "max": 5,
+      "min": 1
+    },
+    "NeoVpcSubnetId": {
+      "type": "string",
+      "max": 32,
+      "pattern": "[-0-9a-zA-Z]+"
+    },
+    "NeoVpcSubnets": {
+      "type": "list",
+      "member": {
+        "shape": "NeoVpcSubnetId"
+      },
+      "max": 16,
+      "min": 1
+    },
     "NestedFilters": {
       "type": "structure",
       "required": [
@@ -20881,7 +20937,7 @@
         },
         "KmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt data on the storage volume after compilation job. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account</p> <p>The KmsKeyId can be any of the following formats: </p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul>"
+          "documentation": "<p>The Amazon Web Services Key Management Service key (Amazon Web Services KMS) that Amazon SageMaker uses to encrypt your output models with Amazon S3 server-side encryption after compilation job. If you don't provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/UsingKMSEncryption.html\">KMS-Managed Encryption Keys</a> in the <i>Amazon Simple Storage Service Developer Guide.</i> </p> <p>The KmsKeyId can be any of the following formats: </p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul>"
         }
       },
       "documentation": "<p>Contains information about the output location for the compiled model and the target device that the model runs on. <code>TargetDevice</code> and <code>TargetPlatform</code> are mutually exclusive, so you need to choose one between the two to specify your target device or platform. If you cannot find your device you want to use from the <code>TargetDevice</code> list, use <code>TargetPlatform</code> to describe the platform of your edge device and <code>CompilerOptions</code> if there are specific settings that are required or recommended to use for particular TargetPlatform.</p>"
@@ -23926,6 +23982,7 @@
         "qcs603",
         "sitara_am57x",
         "amba_cv22",
+        "amba_cv25",
         "x86_win32",
         "x86_win64",
         "coreml",

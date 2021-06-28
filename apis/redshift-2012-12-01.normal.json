@@ -1840,6 +1840,9 @@
       "errors": [
         {
           "shape": "ClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidClusterStateFault"
         }
       ],
       "documentation": "<p>Stops logging information, such as queries and connection attempts, for the specified Amazon Redshift cluster.</p>"

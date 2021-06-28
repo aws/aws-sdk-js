@@ -36,11 +36,11 @@ declare class Glue extends Service {
    */
   batchDeletePartition(callback?: (err: AWSError, data: Glue.Types.BatchDeletePartitionResponse) => void): Request<Glue.Types.BatchDeletePartitionResponse, AWSError>;
   /**
-   * Deletes multiple tables at once.  After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling BatchDeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
+   * Deletes multiple tables at once.  After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling BatchDeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   batchDeleteTable(params: Glue.Types.BatchDeleteTableRequest, callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableResponse) => void): Request<Glue.Types.BatchDeleteTableResponse, AWSError>;
   /**
-   * Deletes multiple tables at once.  After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling BatchDeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
+   * Deletes multiple tables at once.  After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling BatchDeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   batchDeleteTable(callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableResponse) => void): Request<Glue.Types.BatchDeleteTableResponse, AWSError>;
   /**
@@ -116,11 +116,11 @@ declare class Glue extends Service {
    */
   batchUpdatePartition(callback?: (err: AWSError, data: Glue.Types.BatchUpdatePartitionResponse) => void): Request<Glue.Types.BatchUpdatePartitionResponse, AWSError>;
   /**
-   * Cancels (stops) a task run. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can cancel a machine learning task run at any time by calling CancelMLTaskRun with a task run's parent transform's TransformID and the task run's TaskRunId. 
+   * Cancels (stops) a task run. Machine learning task runs are asynchronous tasks that Glue runs on your behalf as part of various machine learning workflows. You can cancel a machine learning task run at any time by calling CancelMLTaskRun with a task run's parent transform's TransformID and the task run's TaskRunId. 
    */
   cancelMLTaskRun(params: Glue.Types.CancelMLTaskRunRequest, callback?: (err: AWSError, data: Glue.Types.CancelMLTaskRunResponse) => void): Request<Glue.Types.CancelMLTaskRunResponse, AWSError>;
   /**
-   * Cancels (stops) a task run. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can cancel a machine learning task run at any time by calling CancelMLTaskRun with a task run's parent transform's TransformID and the task run's TaskRunId. 
+   * Cancels (stops) a task run. Machine learning task runs are asynchronous tasks that Glue runs on your behalf as part of various machine learning workflows. You can cancel a machine learning task run at any time by calling CancelMLTaskRun with a task run's parent transform's TransformID and the task run's TaskRunId. 
    */
   cancelMLTaskRun(callback?: (err: AWSError, data: Glue.Types.CancelMLTaskRunResponse) => void): Request<Glue.Types.CancelMLTaskRunResponse, AWSError>;
   /**
@@ -180,11 +180,11 @@ declare class Glue extends Service {
    */
   createJob(callback?: (err: AWSError, data: Glue.Types.CreateJobResponse) => void): Request<Glue.Types.CreateJobResponse, AWSError>;
   /**
-   * Creates an AWS Glue machine learning transform. This operation creates the transform and all the necessary parameters to train it. Call this operation as the first step in the process of using a machine learning transform (such as the FindMatches transform) for deduplicating data. You can provide an optional Description, in addition to the parameters that you want to use for your algorithm. You must also specify certain parameters for the tasks that AWS Glue runs on your behalf as part of learning from your data and creating a high-quality machine learning transform. These parameters include Role, and optionally, AllocatedCapacity, Timeout, and MaxRetries. For more information, see Jobs.
+   * Creates an Glue machine learning transform. This operation creates the transform and all the necessary parameters to train it. Call this operation as the first step in the process of using a machine learning transform (such as the FindMatches transform) for deduplicating data. You can provide an optional Description, in addition to the parameters that you want to use for your algorithm. You must also specify certain parameters for the tasks that Glue runs on your behalf as part of learning from your data and creating a high-quality machine learning transform. These parameters include Role, and optionally, AllocatedCapacity, Timeout, and MaxRetries. For more information, see Jobs.
    */
   createMLTransform(params: Glue.Types.CreateMLTransformRequest, callback?: (err: AWSError, data: Glue.Types.CreateMLTransformResponse) => void): Request<Glue.Types.CreateMLTransformResponse, AWSError>;
   /**
-   * Creates an AWS Glue machine learning transform. This operation creates the transform and all the necessary parameters to train it. Call this operation as the first step in the process of using a machine learning transform (such as the FindMatches transform) for deduplicating data. You can provide an optional Description, in addition to the parameters that you want to use for your algorithm. You must also specify certain parameters for the tasks that AWS Glue runs on your behalf as part of learning from your data and creating a high-quality machine learning transform. These parameters include Role, and optionally, AllocatedCapacity, Timeout, and MaxRetries. For more information, see Jobs.
+   * Creates an Glue machine learning transform. This operation creates the transform and all the necessary parameters to train it. Call this operation as the first step in the process of using a machine learning transform (such as the FindMatches transform) for deduplicating data. You can provide an optional Description, in addition to the parameters that you want to use for your algorithm. You must also specify certain parameters for the tasks that Glue runs on your behalf as part of learning from your data and creating a high-quality machine learning transform. These parameters include Role, and optionally, AllocatedCapacity, Timeout, and MaxRetries. For more information, see Jobs.
    */
   createMLTransform(callback?: (err: AWSError, data: Glue.Types.CreateMLTransformResponse) => void): Request<Glue.Types.CreateMLTransformResponse, AWSError>;
   /**
@@ -228,11 +228,11 @@ declare class Glue extends Service {
    */
   createScript(callback?: (err: AWSError, data: Glue.Types.CreateScriptResponse) => void): Request<Glue.Types.CreateScriptResponse, AWSError>;
   /**
-   * Creates a new security configuration. A security configuration is a set of security properties that can be used by AWS Glue. You can use a security configuration to encrypt data at rest. For information about using security configurations in AWS Glue, see Encrypting Data Written by Crawlers, Jobs, and Development Endpoints.
+   * Creates a new security configuration. A security configuration is a set of security properties that can be used by Glue. You can use a security configuration to encrypt data at rest. For information about using security configurations in Glue, see Encrypting Data Written by Crawlers, Jobs, and Development Endpoints.
    */
   createSecurityConfiguration(params: Glue.Types.CreateSecurityConfigurationRequest, callback?: (err: AWSError, data: Glue.Types.CreateSecurityConfigurationResponse) => void): Request<Glue.Types.CreateSecurityConfigurationResponse, AWSError>;
   /**
-   * Creates a new security configuration. A security configuration is a set of security properties that can be used by AWS Glue. You can use a security configuration to encrypt data at rest. For information about using security configurations in AWS Glue, see Encrypting Data Written by Crawlers, Jobs, and Development Endpoints.
+   * Creates a new security configuration. A security configuration is a set of security properties that can be used by Glue. You can use a security configuration to encrypt data at rest. For information about using security configurations in Glue, see Encrypting Data Written by Crawlers, Jobs, and Development Endpoints.
    */
   createSecurityConfiguration(callback?: (err: AWSError, data: Glue.Types.CreateSecurityConfigurationResponse) => void): Request<Glue.Types.CreateSecurityConfigurationResponse, AWSError>;
   /**
@@ -300,19 +300,19 @@ declare class Glue extends Service {
    */
   deleteConnection(callback?: (err: AWSError, data: Glue.Types.DeleteConnectionResponse) => void): Request<Glue.Types.DeleteConnectionResponse, AWSError>;
   /**
-   * Removes a specified crawler from the AWS Glue Data Catalog, unless the crawler state is RUNNING.
+   * Removes a specified crawler from the Glue Data Catalog, unless the crawler state is RUNNING.
    */
   deleteCrawler(params: Glue.Types.DeleteCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.DeleteCrawlerResponse) => void): Request<Glue.Types.DeleteCrawlerResponse, AWSError>;
   /**
-   * Removes a specified crawler from the AWS Glue Data Catalog, unless the crawler state is RUNNING.
+   * Removes a specified crawler from the Glue Data Catalog, unless the crawler state is RUNNING.
    */
   deleteCrawler(callback?: (err: AWSError, data: Glue.Types.DeleteCrawlerResponse) => void): Request<Glue.Types.DeleteCrawlerResponse, AWSError>;
   /**
-   * Removes a specified database from a Data Catalog.  After completing this operation, you no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete any resources that belong to the database. 
+   * Removes a specified database from a Data Catalog.  After completing this operation, you no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete any resources that belong to the database. 
    */
   deleteDatabase(params: Glue.Types.DeleteDatabaseRequest, callback?: (err: AWSError, data: Glue.Types.DeleteDatabaseResponse) => void): Request<Glue.Types.DeleteDatabaseResponse, AWSError>;
   /**
-   * Removes a specified database from a Data Catalog.  After completing this operation, you no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete any resources that belong to the database. 
+   * Removes a specified database from a Data Catalog.  After completing this operation, you no longer have access to the tables (and all table versions and partitions that might belong to the tables) and the user-defined functions in the deleted database. Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteDatabase, use DeleteTableVersion or BatchDeleteTableVersion, DeletePartition or BatchDeletePartition, DeleteUserDefinedFunction, and DeleteTable or BatchDeleteTable, to delete any resources that belong to the database. 
    */
   deleteDatabase(callback?: (err: AWSError, data: Glue.Types.DeleteDatabaseResponse) => void): Request<Glue.Types.DeleteDatabaseResponse, AWSError>;
   /**
@@ -332,11 +332,11 @@ declare class Glue extends Service {
    */
   deleteJob(callback?: (err: AWSError, data: Glue.Types.DeleteJobResponse) => void): Request<Glue.Types.DeleteJobResponse, AWSError>;
   /**
-   * Deletes an AWS Glue machine learning transform. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue. If you no longer need a transform, you can delete it by calling DeleteMLTransforms. However, any AWS Glue jobs that still reference the deleted transform will no longer succeed.
+   * Deletes an Glue machine learning transform. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by Glue. If you no longer need a transform, you can delete it by calling DeleteMLTransforms. However, any Glue jobs that still reference the deleted transform will no longer succeed.
    */
   deleteMLTransform(params: Glue.Types.DeleteMLTransformRequest, callback?: (err: AWSError, data: Glue.Types.DeleteMLTransformResponse) => void): Request<Glue.Types.DeleteMLTransformResponse, AWSError>;
   /**
-   * Deletes an AWS Glue machine learning transform. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue. If you no longer need a transform, you can delete it by calling DeleteMLTransforms. However, any AWS Glue jobs that still reference the deleted transform will no longer succeed.
+   * Deletes an Glue machine learning transform. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by Glue. If you no longer need a transform, you can delete it by calling DeleteMLTransforms. However, any Glue jobs that still reference the deleted transform will no longer succeed.
    */
   deleteMLTransform(callback?: (err: AWSError, data: Glue.Types.DeleteMLTransformResponse) => void): Request<Glue.Types.DeleteMLTransformResponse, AWSError>;
   /**
@@ -356,11 +356,11 @@ declare class Glue extends Service {
    */
   deletePartitionIndex(callback?: (err: AWSError, data: Glue.Types.DeletePartitionIndexResponse) => void): Request<Glue.Types.DeletePartitionIndexResponse, AWSError>;
   /**
-   * Delete the entire registry including schema and all of its versions. To get the status of the delete operation, you can call the GetRegistry API after the asynchronous call. Deleting a registry will disable all online operations for the registry such as the UpdateRegistry, CreateSchema, UpdateSchema, and RegisterSchemaVersion APIs. 
+   * Delete the entire registry including schema and all of its versions. To get the status of the delete operation, you can call the GetRegistry API after the asynchronous call. Deleting a registry will deactivate all online operations for the registry such as the UpdateRegistry, CreateSchema, UpdateSchema, and RegisterSchemaVersion APIs. 
    */
   deleteRegistry(params: Glue.Types.DeleteRegistryInput, callback?: (err: AWSError, data: Glue.Types.DeleteRegistryResponse) => void): Request<Glue.Types.DeleteRegistryResponse, AWSError>;
   /**
-   * Delete the entire registry including schema and all of its versions. To get the status of the delete operation, you can call the GetRegistry API after the asynchronous call. Deleting a registry will disable all online operations for the registry such as the UpdateRegistry, CreateSchema, UpdateSchema, and RegisterSchemaVersion APIs. 
+   * Delete the entire registry including schema and all of its versions. To get the status of the delete operation, you can call the GetRegistry API after the asynchronous call. Deleting a registry will deactivate all online operations for the registry such as the UpdateRegistry, CreateSchema, UpdateSchema, and RegisterSchemaVersion APIs. 
    */
   deleteRegistry(callback?: (err: AWSError, data: Glue.Types.DeleteRegistryResponse) => void): Request<Glue.Types.DeleteRegistryResponse, AWSError>;
   /**
@@ -372,11 +372,11 @@ declare class Glue extends Service {
    */
   deleteResourcePolicy(callback?: (err: AWSError, data: Glue.Types.DeleteResourcePolicyResponse) => void): Request<Glue.Types.DeleteResourcePolicyResponse, AWSError>;
   /**
-   * Deletes the entire schema set, including the schema set and all of its versions. To get the status of the delete operation, you can call GetSchema API after the asynchronous call. Deleting a registry will disable all online operations for the schema, such as the GetSchemaByDefinition, and RegisterSchemaVersion APIs.
+   * Deletes the entire schema set, including the schema set and all of its versions. To get the status of the delete operation, you can call GetSchema API after the asynchronous call. Deleting a registry will deactivate all online operations for the schema, such as the GetSchemaByDefinition, and RegisterSchemaVersion APIs.
    */
   deleteSchema(params: Glue.Types.DeleteSchemaInput, callback?: (err: AWSError, data: Glue.Types.DeleteSchemaResponse) => void): Request<Glue.Types.DeleteSchemaResponse, AWSError>;
   /**
-   * Deletes the entire schema set, including the schema set and all of its versions. To get the status of the delete operation, you can call GetSchema API after the asynchronous call. Deleting a registry will disable all online operations for the schema, such as the GetSchemaByDefinition, and RegisterSchemaVersion APIs.
+   * Deletes the entire schema set, including the schema set and all of its versions. To get the status of the delete operation, you can call GetSchema API after the asynchronous call. Deleting a registry will deactivate all online operations for the schema, such as the GetSchemaByDefinition, and RegisterSchemaVersion APIs.
    */
   deleteSchema(callback?: (err: AWSError, data: Glue.Types.DeleteSchemaResponse) => void): Request<Glue.Types.DeleteSchemaResponse, AWSError>;
   /**
@@ -396,11 +396,11 @@ declare class Glue extends Service {
    */
   deleteSecurityConfiguration(callback?: (err: AWSError, data: Glue.Types.DeleteSecurityConfigurationResponse) => void): Request<Glue.Types.DeleteSecurityConfigurationResponse, AWSError>;
   /**
-   * Removes a table definition from the Data Catalog.  After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
+   * Removes a table definition from the Data Catalog.  After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   deleteTable(params: Glue.Types.DeleteTableRequest, callback?: (err: AWSError, data: Glue.Types.DeleteTableResponse) => void): Request<Glue.Types.DeleteTableResponse, AWSError>;
   /**
-   * Removes a table definition from the Data Catalog.  After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. AWS Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
+   * Removes a table definition from the Data Catalog.  After completing this operation, you no longer have access to the table versions and partitions that belong to the deleted table. Glue deletes these "orphaned" resources asynchronously in a timely manner, at the discretion of the service. To ensure the immediate deletion of all related resources, before calling DeleteTable, use DeleteTableVersion or BatchDeleteTableVersion, and DeletePartition or BatchDeletePartition, to delete any resources that belong to the table. 
    */
   deleteTable(callback?: (err: AWSError, data: Glue.Types.DeleteTableResponse) => void): Request<Glue.Types.DeleteTableResponse, AWSError>;
   /**
@@ -548,19 +548,19 @@ declare class Glue extends Service {
    */
   getDataflowGraph(callback?: (err: AWSError, data: Glue.Types.GetDataflowGraphResponse) => void): Request<Glue.Types.GetDataflowGraphResponse, AWSError>;
   /**
-   * Retrieves information about a specified development endpoint.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
+   * Retrieves information about a specified development endpoint.  When you create a development endpoint in a virtual private cloud (VPC), Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, Glue returns only a public IP address. 
    */
   getDevEndpoint(params: Glue.Types.GetDevEndpointRequest, callback?: (err: AWSError, data: Glue.Types.GetDevEndpointResponse) => void): Request<Glue.Types.GetDevEndpointResponse, AWSError>;
   /**
-   * Retrieves information about a specified development endpoint.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
+   * Retrieves information about a specified development endpoint.  When you create a development endpoint in a virtual private cloud (VPC), Glue returns only a private IP address, and the public IP address field is not populated. When you create a non-VPC development endpoint, Glue returns only a public IP address. 
    */
   getDevEndpoint(callback?: (err: AWSError, data: Glue.Types.GetDevEndpointResponse) => void): Request<Glue.Types.GetDevEndpointResponse, AWSError>;
   /**
-   * Retrieves all the development endpoints in this AWS account.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
+   * Retrieves all the development endpoints in this AWS account.  When you create a development endpoint in a virtual private cloud (VPC), Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, Glue returns only a public IP address. 
    */
   getDevEndpoints(params: Glue.Types.GetDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.GetDevEndpointsResponse) => void): Request<Glue.Types.GetDevEndpointsResponse, AWSError>;
   /**
-   * Retrieves all the development endpoints in this AWS account.  When you create a development endpoint in a virtual private cloud (VPC), AWS Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, AWS Glue returns only a public IP address. 
+   * Retrieves all the development endpoints in this AWS account.  When you create a development endpoint in a virtual private cloud (VPC), Glue returns only a private IP address and the public IP address field is not populated. When you create a non-VPC development endpoint, Glue returns only a public IP address. 
    */
   getDevEndpoints(callback?: (err: AWSError, data: Glue.Types.GetDevEndpointsResponse) => void): Request<Glue.Types.GetDevEndpointsResponse, AWSError>;
   /**
@@ -604,35 +604,35 @@ declare class Glue extends Service {
    */
   getJobs(callback?: (err: AWSError, data: Glue.Types.GetJobsResponse) => void): Request<Glue.Types.GetJobsResponse, AWSError>;
   /**
-   * Gets details for a specific task run on a machine learning transform. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can check the stats of any task run by calling GetMLTaskRun with the TaskRunID and its parent transform's TransformID.
+   * Gets details for a specific task run on a machine learning transform. Machine learning task runs are asynchronous tasks that Glue runs on your behalf as part of various machine learning workflows. You can check the stats of any task run by calling GetMLTaskRun with the TaskRunID and its parent transform's TransformID.
    */
   getMLTaskRun(params: Glue.Types.GetMLTaskRunRequest, callback?: (err: AWSError, data: Glue.Types.GetMLTaskRunResponse) => void): Request<Glue.Types.GetMLTaskRunResponse, AWSError>;
   /**
-   * Gets details for a specific task run on a machine learning transform. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can check the stats of any task run by calling GetMLTaskRun with the TaskRunID and its parent transform's TransformID.
+   * Gets details for a specific task run on a machine learning transform. Machine learning task runs are asynchronous tasks that Glue runs on your behalf as part of various machine learning workflows. You can check the stats of any task run by calling GetMLTaskRun with the TaskRunID and its parent transform's TransformID.
    */
   getMLTaskRun(callback?: (err: AWSError, data: Glue.Types.GetMLTaskRunResponse) => void): Request<Glue.Types.GetMLTaskRunResponse, AWSError>;
   /**
-   * Gets a list of runs for a machine learning transform. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can get a sortable, filterable list of machine learning task runs by calling GetMLTaskRuns with their parent transform's TransformID and other optional parameters as documented in this section. This operation returns a list of historic runs and must be paginated.
+   * Gets a list of runs for a machine learning transform. Machine learning task runs are asynchronous tasks that Glue runs on your behalf as part of various machine learning workflows. You can get a sortable, filterable list of machine learning task runs by calling GetMLTaskRuns with their parent transform's TransformID and other optional parameters as documented in this section. This operation returns a list of historic runs and must be paginated.
    */
   getMLTaskRuns(params: Glue.Types.GetMLTaskRunsRequest, callback?: (err: AWSError, data: Glue.Types.GetMLTaskRunsResponse) => void): Request<Glue.Types.GetMLTaskRunsResponse, AWSError>;
   /**
-   * Gets a list of runs for a machine learning transform. Machine learning task runs are asynchronous tasks that AWS Glue runs on your behalf as part of various machine learning workflows. You can get a sortable, filterable list of machine learning task runs by calling GetMLTaskRuns with their parent transform's TransformID and other optional parameters as documented in this section. This operation returns a list of historic runs and must be paginated.
+   * Gets a list of runs for a machine learning transform. Machine learning task runs are asynchronous tasks that Glue runs on your behalf as part of various machine learning workflows. You can get a sortable, filterable list of machine learning task runs by calling GetMLTaskRuns with their parent transform's TransformID and other optional parameters as documented in this section. This operation returns a list of historic runs and must be paginated.
    */
   getMLTaskRuns(callback?: (err: AWSError, data: Glue.Types.GetMLTaskRunsResponse) => void): Request<Glue.Types.GetMLTaskRunsResponse, AWSError>;
   /**
-   * Gets an AWS Glue machine learning transform artifact and all its corresponding metadata. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue. You can retrieve their metadata by calling GetMLTransform.
+   * Gets an Glue machine learning transform artifact and all its corresponding metadata. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by Glue. You can retrieve their metadata by calling GetMLTransform.
    */
   getMLTransform(params: Glue.Types.GetMLTransformRequest, callback?: (err: AWSError, data: Glue.Types.GetMLTransformResponse) => void): Request<Glue.Types.GetMLTransformResponse, AWSError>;
   /**
-   * Gets an AWS Glue machine learning transform artifact and all its corresponding metadata. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue. You can retrieve their metadata by calling GetMLTransform.
+   * Gets an Glue machine learning transform artifact and all its corresponding metadata. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by Glue. You can retrieve their metadata by calling GetMLTransform.
    */
   getMLTransform(callback?: (err: AWSError, data: Glue.Types.GetMLTransformResponse) => void): Request<Glue.Types.GetMLTransformResponse, AWSError>;
   /**
-   * Gets a sortable, filterable list of existing AWS Glue machine learning transforms. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue, and you can retrieve their metadata by calling GetMLTransforms.
+   * Gets a sortable, filterable list of existing Glue machine learning transforms. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by Glue, and you can retrieve their metadata by calling GetMLTransforms.
    */
   getMLTransforms(params: Glue.Types.GetMLTransformsRequest, callback?: (err: AWSError, data: Glue.Types.GetMLTransformsResponse) => void): Request<Glue.Types.GetMLTransformsResponse, AWSError>;
   /**
-   * Gets a sortable, filterable list of existing AWS Glue machine learning transforms. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by AWS Glue, and you can retrieve their metadata by calling GetMLTransforms.
+   * Gets a sortable, filterable list of existing Glue machine learning transforms. Machine learning transforms are a special type of transform that use machine learning to learn the details of the transformation to be performed by learning from examples provided by humans. These transformations are then saved by Glue, and you can retrieve their metadata by calling GetMLTransforms.
    */
   getMLTransforms(callback?: (err: AWSError, data: Glue.Types.GetMLTransformsResponse) => void): Request<Glue.Types.GetMLTransformsResponse, AWSError>;
   /**
@@ -684,11 +684,11 @@ declare class Glue extends Service {
    */
   getRegistry(callback?: (err: AWSError, data: Glue.Types.GetRegistryResponse) => void): Request<Glue.Types.GetRegistryResponse, AWSError>;
   /**
-   * Retrieves the resource policies set on individual resources by AWS Resource Access Manager during cross-account permission grants. Also retrieves the Data Catalog resource policy. If you enabled metadata encryption in Data Catalog settings, and you do not have permission on the AWS KMS key, the operation can't return the Data Catalog resource policy.
+   * Retrieves the resource policies set on individual resources by Resource Access Manager during cross-account permission grants. Also retrieves the Data Catalog resource policy. If you enabled metadata encryption in Data Catalog settings, and you do not have permission on the KMS key, the operation can't return the Data Catalog resource policy.
    */
   getResourcePolicies(params: Glue.Types.GetResourcePoliciesRequest, callback?: (err: AWSError, data: Glue.Types.GetResourcePoliciesResponse) => void): Request<Glue.Types.GetResourcePoliciesResponse, AWSError>;
   /**
-   * Retrieves the resource policies set on individual resources by AWS Resource Access Manager during cross-account permission grants. Also retrieves the Data Catalog resource policy. If you enabled metadata encryption in Data Catalog settings, and you do not have permission on the AWS KMS key, the operation can't return the Data Catalog resource policy.
+   * Retrieves the resource policies set on individual resources by Resource Access Manager during cross-account permission grants. Also retrieves the Data Catalog resource policy. If you enabled metadata encryption in Data Catalog settings, and you do not have permission on the KMS key, the operation can't return the Data Catalog resource policy.
    */
   getResourcePolicies(callback?: (err: AWSError, data: Glue.Types.GetResourcePoliciesResponse) => void): Request<Glue.Types.GetResourcePoliciesResponse, AWSError>;
   /**
@@ -852,43 +852,43 @@ declare class Glue extends Service {
    */
   getWorkflowRuns(callback?: (err: AWSError, data: Glue.Types.GetWorkflowRunsResponse) => void): Request<Glue.Types.GetWorkflowRunsResponse, AWSError>;
   /**
-   * Imports an existing Amazon Athena Data Catalog to AWS Glue
+   * Imports an existing Amazon Athena Data Catalog to Glue.
    */
   importCatalogToGlue(params: Glue.Types.ImportCatalogToGlueRequest, callback?: (err: AWSError, data: Glue.Types.ImportCatalogToGlueResponse) => void): Request<Glue.Types.ImportCatalogToGlueResponse, AWSError>;
   /**
-   * Imports an existing Amazon Athena Data Catalog to AWS Glue
+   * Imports an existing Amazon Athena Data Catalog to Glue.
    */
   importCatalogToGlue(callback?: (err: AWSError, data: Glue.Types.ImportCatalogToGlueResponse) => void): Request<Glue.Types.ImportCatalogToGlueResponse, AWSError>;
   /**
-   * Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   * Retrieves the names of all crawler resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listCrawlers(params: Glue.Types.ListCrawlersRequest, callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
   /**
-   * Retrieves the names of all crawler resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   * Retrieves the names of all crawler resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listCrawlers(callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
   /**
-   * Retrieves the names of all DevEndpoint resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   * Retrieves the names of all DevEndpoint resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listDevEndpoints(params: Glue.Types.ListDevEndpointsRequest, callback?: (err: AWSError, data: Glue.Types.ListDevEndpointsResponse) => void): Request<Glue.Types.ListDevEndpointsResponse, AWSError>;
   /**
-   * Retrieves the names of all DevEndpoint resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   * Retrieves the names of all DevEndpoint resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listDevEndpoints(callback?: (err: AWSError, data: Glue.Types.ListDevEndpointsResponse) => void): Request<Glue.Types.ListDevEndpointsResponse, AWSError>;
   /**
-   * Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   * Retrieves the names of all job resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listJobs(params: Glue.Types.ListJobsRequest, callback?: (err: AWSError, data: Glue.Types.ListJobsResponse) => void): Request<Glue.Types.ListJobsResponse, AWSError>;
   /**
-   * Retrieves the names of all job resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   * Retrieves the names of all job resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listJobs(callback?: (err: AWSError, data: Glue.Types.ListJobsResponse) => void): Request<Glue.Types.ListJobsResponse, AWSError>;
   /**
-   *  Retrieves a sortable, filterable list of existing AWS Glue machine learning transforms in this AWS account, or the resources with the specified tag. This operation takes the optional Tags field, which you can use as a filter of the responses so that tagged resources can be retrieved as a group. If you choose to use tag filtering, only resources with the tags are retrieved. 
+   *  Retrieves a sortable, filterable list of existing Glue machine learning transforms in this Amazon Web Services account, or the resources with the specified tag. This operation takes the optional Tags field, which you can use as a filter of the responses so that tagged resources can be retrieved as a group. If you choose to use tag filtering, only resources with the tags are retrieved. 
    */
   listMLTransforms(params: Glue.Types.ListMLTransformsRequest, callback?: (err: AWSError, data: Glue.Types.ListMLTransformsResponse) => void): Request<Glue.Types.ListMLTransformsResponse, AWSError>;
   /**
-   *  Retrieves a sortable, filterable list of existing AWS Glue machine learning transforms in this AWS account, or the resources with the specified tag. This operation takes the optional Tags field, which you can use as a filter of the responses so that tagged resources can be retrieved as a group. If you choose to use tag filtering, only resources with the tags are retrieved. 
+   *  Retrieves a sortable, filterable list of existing Glue machine learning transforms in this Amazon Web Services account, or the resources with the specified tag. This operation takes the optional Tags field, which you can use as a filter of the responses so that tagged resources can be retrieved as a group. If you choose to use tag filtering, only resources with the tags are retrieved. 
    */
   listMLTransforms(callback?: (err: AWSError, data: Glue.Types.ListMLTransformsResponse) => void): Request<Glue.Types.ListMLTransformsResponse, AWSError>;
   /**
@@ -916,11 +916,11 @@ declare class Glue extends Service {
    */
   listSchemas(callback?: (err: AWSError, data: Glue.Types.ListSchemasResponse) => void): Request<Glue.Types.ListSchemasResponse, AWSError>;
   /**
-   * Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   * Retrieves the names of all trigger resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listTriggers(params: Glue.Types.ListTriggersRequest, callback?: (err: AWSError, data: Glue.Types.ListTriggersResponse) => void): Request<Glue.Types.ListTriggersResponse, AWSError>;
   /**
-   * Retrieves the names of all trigger resources in this AWS account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
+   * Retrieves the names of all trigger resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listTriggers(callback?: (err: AWSError, data: Glue.Types.ListTriggersResponse) => void): Request<Glue.Types.ListTriggersResponse, AWSError>;
   /**
@@ -1036,11 +1036,11 @@ declare class Glue extends Service {
    */
   startExportLabelsTaskRun(callback?: (err: AWSError, data: Glue.Types.StartExportLabelsTaskRunResponse) => void): Request<Glue.Types.StartExportLabelsTaskRunResponse, AWSError>;
   /**
-   * Enables you to provide additional labels (examples of truth) to be used to teach the machine learning transform and improve its quality. This API operation is generally used as part of the active learning workflow that starts with the StartMLLabelingSetGenerationTaskRun call and that ultimately results in improving the quality of your machine learning transform.  After the StartMLLabelingSetGenerationTaskRun finishes, AWS Glue machine learning will have generated a series of questions for humans to answer. (Answering these questions is often called 'labeling' in the machine learning workflows). In the case of the FindMatches transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” After the labeling process is finished, users upload their answers/labels with a call to StartImportLabelsTaskRun. After StartImportLabelsTaskRun finishes, all future runs of the machine learning transform use the new and improved labels and perform a higher-quality transformation. By default, StartMLLabelingSetGenerationTaskRun continually learns from and combines all labels that you upload unless you set Replace to true. If you set Replace to true, StartImportLabelsTaskRun deletes and forgets all previously uploaded labels and learns only from the exact set that you upload. Replacing labels can be helpful if you realize that you previously uploaded incorrect labels, and you believe that they are having a negative effect on your transform quality. You can check on the status of your task run by calling the GetMLTaskRun operation. 
+   * Enables you to provide additional labels (examples of truth) to be used to teach the machine learning transform and improve its quality. This API operation is generally used as part of the active learning workflow that starts with the StartMLLabelingSetGenerationTaskRun call and that ultimately results in improving the quality of your machine learning transform.  After the StartMLLabelingSetGenerationTaskRun finishes, Glue machine learning will have generated a series of questions for humans to answer. (Answering these questions is often called 'labeling' in the machine learning workflows). In the case of the FindMatches transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” After the labeling process is finished, users upload their answers/labels with a call to StartImportLabelsTaskRun. After StartImportLabelsTaskRun finishes, all future runs of the machine learning transform use the new and improved labels and perform a higher-quality transformation. By default, StartMLLabelingSetGenerationTaskRun continually learns from and combines all labels that you upload unless you set Replace to true. If you set Replace to true, StartImportLabelsTaskRun deletes and forgets all previously uploaded labels and learns only from the exact set that you upload. Replacing labels can be helpful if you realize that you previously uploaded incorrect labels, and you believe that they are having a negative effect on your transform quality. You can check on the status of your task run by calling the GetMLTaskRun operation. 
    */
   startImportLabelsTaskRun(params: Glue.Types.StartImportLabelsTaskRunRequest, callback?: (err: AWSError, data: Glue.Types.StartImportLabelsTaskRunResponse) => void): Request<Glue.Types.StartImportLabelsTaskRunResponse, AWSError>;
   /**
-   * Enables you to provide additional labels (examples of truth) to be used to teach the machine learning transform and improve its quality. This API operation is generally used as part of the active learning workflow that starts with the StartMLLabelingSetGenerationTaskRun call and that ultimately results in improving the quality of your machine learning transform.  After the StartMLLabelingSetGenerationTaskRun finishes, AWS Glue machine learning will have generated a series of questions for humans to answer. (Answering these questions is often called 'labeling' in the machine learning workflows). In the case of the FindMatches transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” After the labeling process is finished, users upload their answers/labels with a call to StartImportLabelsTaskRun. After StartImportLabelsTaskRun finishes, all future runs of the machine learning transform use the new and improved labels and perform a higher-quality transformation. By default, StartMLLabelingSetGenerationTaskRun continually learns from and combines all labels that you upload unless you set Replace to true. If you set Replace to true, StartImportLabelsTaskRun deletes and forgets all previously uploaded labels and learns only from the exact set that you upload. Replacing labels can be helpful if you realize that you previously uploaded incorrect labels, and you believe that they are having a negative effect on your transform quality. You can check on the status of your task run by calling the GetMLTaskRun operation. 
+   * Enables you to provide additional labels (examples of truth) to be used to teach the machine learning transform and improve its quality. This API operation is generally used as part of the active learning workflow that starts with the StartMLLabelingSetGenerationTaskRun call and that ultimately results in improving the quality of your machine learning transform.  After the StartMLLabelingSetGenerationTaskRun finishes, Glue machine learning will have generated a series of questions for humans to answer. (Answering these questions is often called 'labeling' in the machine learning workflows). In the case of the FindMatches transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?” After the labeling process is finished, users upload their answers/labels with a call to StartImportLabelsTaskRun. After StartImportLabelsTaskRun finishes, all future runs of the machine learning transform use the new and improved labels and perform a higher-quality transformation. By default, StartMLLabelingSetGenerationTaskRun continually learns from and combines all labels that you upload unless you set Replace to true. If you set Replace to true, StartImportLabelsTaskRun deletes and forgets all previously uploaded labels and learns only from the exact set that you upload. Replacing labels can be helpful if you realize that you previously uploaded incorrect labels, and you believe that they are having a negative effect on your transform quality. You can check on the status of your task run by calling the GetMLTaskRun operation. 
    */
   startImportLabelsTaskRun(callback?: (err: AWSError, data: Glue.Types.StartImportLabelsTaskRunResponse) => void): Request<Glue.Types.StartImportLabelsTaskRunResponse, AWSError>;
   /**
@@ -1052,19 +1052,19 @@ declare class Glue extends Service {
    */
   startJobRun(callback?: (err: AWSError, data: Glue.Types.StartJobRunResponse) => void): Request<Glue.Types.StartJobRunResponse, AWSError>;
   /**
-   * Starts a task to estimate the quality of the transform.  When you provide label sets as examples of truth, AWS Glue machine learning uses some of those examples to learn from them. The rest of the labels are used as a test to estimate quality. Returns a unique identifier for the run. You can call GetMLTaskRun to get more information about the stats of the EvaluationTaskRun.
+   * Starts a task to estimate the quality of the transform.  When you provide label sets as examples of truth, Glue machine learning uses some of those examples to learn from them. The rest of the labels are used as a test to estimate quality. Returns a unique identifier for the run. You can call GetMLTaskRun to get more information about the stats of the EvaluationTaskRun.
    */
   startMLEvaluationTaskRun(params: Glue.Types.StartMLEvaluationTaskRunRequest, callback?: (err: AWSError, data: Glue.Types.StartMLEvaluationTaskRunResponse) => void): Request<Glue.Types.StartMLEvaluationTaskRunResponse, AWSError>;
   /**
-   * Starts a task to estimate the quality of the transform.  When you provide label sets as examples of truth, AWS Glue machine learning uses some of those examples to learn from them. The rest of the labels are used as a test to estimate quality. Returns a unique identifier for the run. You can call GetMLTaskRun to get more information about the stats of the EvaluationTaskRun.
+   * Starts a task to estimate the quality of the transform.  When you provide label sets as examples of truth, Glue machine learning uses some of those examples to learn from them. The rest of the labels are used as a test to estimate quality. Returns a unique identifier for the run. You can call GetMLTaskRun to get more information about the stats of the EvaluationTaskRun.
    */
   startMLEvaluationTaskRun(callback?: (err: AWSError, data: Glue.Types.StartMLEvaluationTaskRunResponse) => void): Request<Glue.Types.StartMLEvaluationTaskRunResponse, AWSError>;
   /**
-   * Starts the active learning workflow for your machine learning transform to improve the transform's quality by generating label sets and adding labels. When the StartMLLabelingSetGenerationTaskRun finishes, AWS Glue will have generated a "labeling set" or a set of questions for humans to answer. In the case of the FindMatches transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?”  After the labeling process is finished, you can upload your labels with a call to StartImportLabelsTaskRun. After StartImportLabelsTaskRun finishes, all future runs of the machine learning transform will use the new and improved labels and perform a higher-quality transformation.
+   * Starts the active learning workflow for your machine learning transform to improve the transform's quality by generating label sets and adding labels. When the StartMLLabelingSetGenerationTaskRun finishes, Glue will have generated a "labeling set" or a set of questions for humans to answer. In the case of the FindMatches transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?”  After the labeling process is finished, you can upload your labels with a call to StartImportLabelsTaskRun. After StartImportLabelsTaskRun finishes, all future runs of the machine learning transform will use the new and improved labels and perform a higher-quality transformation.
    */
   startMLLabelingSetGenerationTaskRun(params: Glue.Types.StartMLLabelingSetGenerationTaskRunRequest, callback?: (err: AWSError, data: Glue.Types.StartMLLabelingSetGenerationTaskRunResponse) => void): Request<Glue.Types.StartMLLabelingSetGenerationTaskRunResponse, AWSError>;
   /**
-   * Starts the active learning workflow for your machine learning transform to improve the transform's quality by generating label sets and adding labels. When the StartMLLabelingSetGenerationTaskRun finishes, AWS Glue will have generated a "labeling set" or a set of questions for humans to answer. In the case of the FindMatches transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?”  After the labeling process is finished, you can upload your labels with a call to StartImportLabelsTaskRun. After StartImportLabelsTaskRun finishes, all future runs of the machine learning transform will use the new and improved labels and perform a higher-quality transformation.
+   * Starts the active learning workflow for your machine learning transform to improve the transform's quality by generating label sets and adding labels. When the StartMLLabelingSetGenerationTaskRun finishes, Glue will have generated a "labeling set" or a set of questions for humans to answer. In the case of the FindMatches transform, these questions are of the form, “What is the correct way to group these rows together into groups composed entirely of matching records?”  After the labeling process is finished, you can upload your labels with a call to StartImportLabelsTaskRun. After StartImportLabelsTaskRun finishes, all future runs of the machine learning transform will use the new and improved labels and perform a higher-quality transformation.
    */
   startMLLabelingSetGenerationTaskRun(callback?: (err: AWSError, data: Glue.Types.StartMLLabelingSetGenerationTaskRunResponse) => void): Request<Glue.Types.StartMLLabelingSetGenerationTaskRunResponse, AWSError>;
   /**
@@ -1116,11 +1116,11 @@ declare class Glue extends Service {
    */
   stopWorkflowRun(callback?: (err: AWSError, data: Glue.Types.StopWorkflowRunResponse) => void): Request<Glue.Types.StopWorkflowRunResponse, AWSError>;
   /**
-   * Adds tags to a resource. A tag is a label you can assign to an AWS resource. In AWS Glue, you can tag only certain resources. For information about what resources you can tag, see AWS Tags in AWS Glue.
+   * Adds tags to a resource. A tag is a label you can assign to an Amazon Web Services resource. In Glue, you can tag only certain resources. For information about what resources you can tag, see Amazon Web Services Tags in Glue.
    */
   tagResource(params: Glue.Types.TagResourceRequest, callback?: (err: AWSError, data: Glue.Types.TagResourceResponse) => void): Request<Glue.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds tags to a resource. A tag is a label you can assign to an AWS resource. In AWS Glue, you can tag only certain resources. For information about what resources you can tag, see AWS Tags in AWS Glue.
+   * Adds tags to a resource. A tag is a label you can assign to an Amazon Web Services resource. In Glue, you can tag only certain resources. For information about what resources you can tag, see Amazon Web Services Tags in Glue.
    */
   tagResource(callback?: (err: AWSError, data: Glue.Types.TagResourceResponse) => void): Request<Glue.Types.TagResourceResponse, AWSError>;
   /**
@@ -1271,11 +1271,11 @@ declare class Glue extends Service {
 declare namespace Glue {
   export interface Action {
     /**
-     * The name of a job to be executed.
+     * The name of a job to be run.
      */
     JobName?: NameString;
     /**
-     * The job arguments used when this trigger fires. For this job run, they replace the default arguments set in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The job arguments used when this trigger fires. For this job run, they replace the default arguments set in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling Glue APIs in Python topic in the developer guide. For information about the key-value pairs that Glue consumes to set up your job, see the Special Parameters Used by Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
@@ -1313,7 +1313,7 @@ declare namespace Glue {
   export type BackfillErrors = BackfillError[];
   export interface BatchCreatePartitionRequest {
     /**
-     * The ID of the catalog in which the partition is to be created. Currently, this should be the AWS account ID.
+     * The ID of the catalog in which the partition is to be created. Currently, this should be the Amazon Web Services account ID.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1337,7 +1337,7 @@ declare namespace Glue {
   }
   export interface BatchDeleteConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connections reside. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connections reside. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1357,7 +1357,7 @@ declare namespace Glue {
   }
   export interface BatchDeletePartitionRequest {
     /**
-     * The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1383,7 +1383,7 @@ declare namespace Glue {
   export type BatchDeleteTableNameList = NameString[];
   export interface BatchDeleteTableRequest {
     /**
-     * The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1404,7 +1404,7 @@ declare namespace Glue {
   export type BatchDeleteTableVersionList = VersionString[];
   export interface BatchDeleteTableVersionRequest {
     /**
-     * The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the tables reside. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1476,7 +1476,7 @@ declare namespace Glue {
   }
   export interface BatchGetPartitionRequest {
     /**
-     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1599,7 +1599,7 @@ declare namespace Glue {
   export type BatchUpdatePartitionFailureList = BatchUpdatePartitionFailureEntry[];
   export interface BatchUpdatePartitionRequest {
     /**
-     * The ID of the catalog in which the partition is to be updated. Currently, this should be the AWS account ID.
+     * The ID of the catalog in which the partition is to be updated. Currently, this should be the Amazon Web Services account ID.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -1731,7 +1731,7 @@ declare namespace Glue {
   export type CatalogTargetList = CatalogTarget[];
   export interface CheckSchemaVersionValidityInput {
     /**
-     * The data format of the schema definition. Currently only AVRO is supported.
+     * The data format of the schema definition. Currently AVRO and JSON are supported.
      */
     DataFormat: DataFormat;
     /**
@@ -2004,7 +2004,7 @@ declare namespace Glue {
      */
     MatchCriteria?: MatchCriteria;
     /**
-     * These key-value pairs define parameters for the connection:    HOST - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.    PORT - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.    USER_NAME - The name under which to log in to the database. The value string for USER_NAME is "USERNAME".    PASSWORD - A password, if one is used, for the user name.    ENCRYPTED_PASSWORD - When you enable connection password protection by setting ConnectionPasswordEncryption in the Data Catalog encryption settings, this field stores the encrypted password.    JDBC_DRIVER_JAR_URI - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver to use.    JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.    JDBC_ENGINE - The name of the JDBC engine to use.    JDBC_ENGINE_VERSION - The version of the JDBC engine to use.    CONFIG_FILES - (Reserved for future use.)    INSTANCE_ID - The instance ID to use.    JDBC_CONNECTION_URL - The URL for connecting to a JDBC data source.    JDBC_ENFORCE_SSL - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.    CUSTOM_JDBC_CERT - An Amazon S3 location specifying the customer's root certificate. AWS Glue uses this root certificate to validate the customer’s certificate when connecting to the customer database. AWS Glue only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM format.    SKIP_CUSTOM_JDBC_CERT_VALIDATION - By default, this is false. AWS Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to true to skip AWS Glue’s validation of the customer certificate.    CUSTOM_JDBC_CERT_STRING - A custom JDBC certificate string which is used for domain match or distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the SSL_SERVER_CERT_DN; in Microsoft SQL Server, this is used as the hostNameInCertificate.    CONNECTION_URL - The URL for connecting to a general (non-JDBC) data source.    KAFKA_BOOTSTRAP_SERVERS - A comma-separated list of host and port pairs that are the addresses of the Apache Kafka brokers in a Kafka cluster to which a Kafka client will connect to and bootstrap itself.    KAFKA_SSL_ENABLED - Whether to enable or disable SSL on an Apache Kafka connection. Default value is "true".    KAFKA_CUSTOM_CERT - The Amazon S3 URL for the private CA cert file (.pem format). The default is an empty string.    KAFKA_SKIP_CUSTOM_CERT_VALIDATION - Whether to skip the validation of the CA cert file or not. AWS Glue validates for three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA. Default value is "false".    SECRET_ID - The secret ID used for the secret manager of credentials.    CONNECTOR_URL - The connector URL for a MARKETPLACE or CUSTOM connection.    CONNECTOR_TYPE - The connector type for a MARKETPLACE or CUSTOM connection.    CONNECTOR_CLASS_NAME - The connector class name for a MARKETPLACE or CUSTOM connection.    KAFKA_CLIENT_KEYSTORE - The Amazon S3 location of the client keystore file for Kafka client side authentication (Optional).    KAFKA_CLIENT_KEYSTORE_PASSWORD - The password to access the provided keystore (Optional).    KAFKA_CLIENT_KEY_PASSWORD - A keystore can consist of multiple keys, so this is the password to access the client key to be used with the Kafka server side key (Optional).    ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD - The encrypted version of the Kafka client keystore password (if the user has the AWS Glue encrypt passwords setting selected).    ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD - The encrypted version of the Kafka client key password (if the user has the AWS Glue encrypt passwords setting selected).  
+     * These key-value pairs define parameters for the connection:    HOST - The host URI: either the fully qualified domain name (FQDN) or the IPv4 address of the database host.    PORT - The port number, between 1024 and 65535, of the port on which the database host is listening for database connections.    USER_NAME - The name under which to log in to the database. The value string for USER_NAME is "USERNAME".    PASSWORD - A password, if one is used, for the user name.    ENCRYPTED_PASSWORD - When you enable connection password protection by setting ConnectionPasswordEncryption in the Data Catalog encryption settings, this field stores the encrypted password.    JDBC_DRIVER_JAR_URI - The Amazon Simple Storage Service (Amazon S3) path of the JAR file that contains the JDBC driver to use.    JDBC_DRIVER_CLASS_NAME - The class name of the JDBC driver to use.    JDBC_ENGINE - The name of the JDBC engine to use.    JDBC_ENGINE_VERSION - The version of the JDBC engine to use.    CONFIG_FILES - (Reserved for future use.)    INSTANCE_ID - The instance ID to use.    JDBC_CONNECTION_URL - The URL for connecting to a JDBC data source.    JDBC_ENFORCE_SSL - A Boolean string (true, false) specifying whether Secure Sockets Layer (SSL) with hostname matching is enforced for the JDBC connection on the client. The default is false.    CUSTOM_JDBC_CERT - An Amazon S3 location specifying the customer's root certificate. Glue uses this root certificate to validate the customer’s certificate when connecting to the customer database. Glue only handles X.509 certificates. The certificate provided must be DER-encoded and supplied in Base64 encoding PEM format.    SKIP_CUSTOM_JDBC_CERT_VALIDATION - By default, this is false. Glue validates the Signature algorithm and Subject Public Key Algorithm for the customer certificate. The only permitted algorithms for the Signature algorithm are SHA256withRSA, SHA384withRSA or SHA512withRSA. For the Subject Public Key Algorithm, the key length must be at least 2048. You can set the value of this property to true to skip Glue’s validation of the customer certificate.    CUSTOM_JDBC_CERT_STRING - A custom JDBC certificate string which is used for domain match or distinguished name match to prevent a man-in-the-middle attack. In Oracle database, this is used as the SSL_SERVER_CERT_DN; in Microsoft SQL Server, this is used as the hostNameInCertificate.    CONNECTION_URL - The URL for connecting to a general (non-JDBC) data source.    KAFKA_BOOTSTRAP_SERVERS - A comma-separated list of host and port pairs that are the addresses of the Apache Kafka brokers in a Kafka cluster to which a Kafka client will connect to and bootstrap itself.    KAFKA_SSL_ENABLED - Whether to enable or disable SSL on an Apache Kafka connection. Default value is "true".    KAFKA_CUSTOM_CERT - The Amazon S3 URL for the private CA cert file (.pem format). The default is an empty string.    KAFKA_SKIP_CUSTOM_CERT_VALIDATION - Whether to skip the validation of the CA cert file or not. Glue validates for three algorithms: SHA256withRSA, SHA384withRSA and SHA512withRSA. Default value is "false".    SECRET_ID - The secret ID used for the secret manager of credentials.    CONNECTOR_URL - The connector URL for a MARKETPLACE or CUSTOM connection.    CONNECTOR_TYPE - The connector type for a MARKETPLACE or CUSTOM connection.    CONNECTOR_CLASS_NAME - The connector class name for a MARKETPLACE or CUSTOM connection.    KAFKA_CLIENT_KEYSTORE - The Amazon S3 location of the client keystore file for Kafka client side authentication (Optional).    KAFKA_CLIENT_KEYSTORE_PASSWORD - The password to access the provided keystore (Optional).    KAFKA_CLIENT_KEY_PASSWORD - A keystore can consist of multiple keys, so this is the password to access the client key to be used with the Kafka server side key (Optional).    ENCRYPTED_KAFKA_CLIENT_KEYSTORE_PASSWORD - The encrypted version of the Kafka client keystore password (if the user has the Glue encrypt passwords setting selected).    ENCRYPTED_KAFKA_CLIENT_KEY_PASSWORD - The encrypted version of the Kafka client key password (if the user has the Glue encrypt passwords setting selected).  
      */
     ConnectionProperties?: ConnectionProperties;
     /**
@@ -2034,7 +2034,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * The type of the connection. Currently, these types are supported:    JDBC - Designates a connection to a database through Java Database Connectivity (JDBC).    KAFKA - Designates a connection to an Apache Kafka streaming platform.    MONGODB - Designates a connection to a MongoDB document database.    NETWORK - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).    MARKETPLACE - Uses configuration settings contained in a connector purchased from AWS Marketplace to read from and write to data stores that are not natively supported by AWS Glue.    CUSTOM - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by AWS Glue.   SFTP is not supported.
+     * The type of the connection. Currently, these types are supported:    JDBC - Designates a connection to a database through Java Database Connectivity (JDBC).    KAFKA - Designates a connection to an Apache Kafka streaming platform.    MONGODB - Designates a connection to a MongoDB document database.    NETWORK - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).    MARKETPLACE - Uses configuration settings contained in a connector purchased from Marketplace to read from and write to data stores that are not natively supported by Glue.    CUSTOM - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by Glue.   SFTP is not supported.
      */
     ConnectionType: ConnectionType;
     /**
@@ -2058,7 +2058,7 @@ declare namespace Glue {
      */
     ReturnConnectionPasswordEncrypted: Boolean;
     /**
-     * An AWS KMS key that is used to encrypt the connection password.  If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified AWS KMS key, to encrypt passwords before storing them in the Data Catalog.  You can set the decrypt permission to enable or restrict access on the password key according to your security requirements.
+     * An KMS key that is used to encrypt the connection password.  If connection password protection is enabled, the caller of CreateConnection and UpdateConnection needs at least kms:Encrypt permission on the specified KMS key, to encrypt passwords before storing them in the Data Catalog.  You can set the decrypt permission to enable or restrict access on the password key according to your security requirements.
      */
     AwsKmsKeyId?: NameString;
   }
@@ -2242,7 +2242,7 @@ declare namespace Glue {
      */
     DynamoDBTargets?: DynamoDBTargetList;
     /**
-     * Specifies AWS Glue Data Catalog targets.
+     * Specifies Glue Data Catalog targets.
      */
     CatalogTargets?: CatalogTargetList;
   }
@@ -2268,7 +2268,7 @@ declare namespace Glue {
   }
   export interface CreateConnectionRequest {
     /**
-     * The ID of the Data Catalog in which to create the connection. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which to create the connection. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2288,7 +2288,7 @@ declare namespace Glue {
      */
     Role: Role;
     /**
-     * The AWS Glue database where results are written, such as: arn:aws:daylight:us-east-1::database/sometable/*.
+     * The Glue database where results are written, such as: arn:aws:daylight:us-east-1::database/sometable/*.
      */
     DatabaseName?: DatabaseName;
     /**
@@ -2332,7 +2332,7 @@ declare namespace Glue {
      */
     CrawlerSecurityConfiguration?: CrawlerSecurityConfiguration;
     /**
-     * The tags to use with this crawler request. You may use tags to limit access to the crawler. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     * The tags to use with this crawler request. You may use tags to limit access to the crawler. For more information about tags in Glue, see Amazon Web Services Tags in Glue in the developer guide.
      */
     Tags?: TagsMap;
   }
@@ -2370,7 +2370,7 @@ declare namespace Glue {
   }
   export interface CreateDatabaseRequest {
     /**
-     * The ID of the Data Catalog in which to create the database. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which to create the database. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2406,7 +2406,7 @@ declare namespace Glue {
      */
     PublicKeys?: PublicKeysList;
     /**
-     * The number of AWS Glue Data Processing Units (DPUs) to allocate to this DevEndpoint.
+     * The number of Glue Data Processing Units (DPUs) to allocate to this DevEndpoint.
      */
     NumberOfNodes?: IntegerValue;
     /**
@@ -2414,7 +2414,7 @@ declare namespace Glue {
      */
     WorkerType?: WorkerType;
     /**
-     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Development endpoints that are created without specifying a Glue version default to Glue 0.9. You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
+     * Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints.  For more information about the available Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Development endpoints that are created without specifying a Glue version default to Glue 0.9. You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
      */
     GlueVersion?: GlueVersionString;
     /**
@@ -2434,7 +2434,7 @@ declare namespace Glue {
      */
     SecurityConfiguration?: NameString;
     /**
-     * The tags to use with this DevEndpoint. You may use tags to limit access to the DevEndpoint. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     * The tags to use with this DevEndpoint. You may use tags to limit access to the DevEndpoint. For more information about tags in Glue, see Amazon Web Services Tags in Glue in the developer guide.
      */
     Tags?: TagsMap;
     /**
@@ -2472,7 +2472,7 @@ declare namespace Glue {
      */
     ZeppelinRemoteSparkInterpreterPort?: IntegerValue;
     /**
-     * The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
+     * The number of Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
      */
     NumberOfNodes?: IntegerValue;
     /**
@@ -2480,7 +2480,7 @@ declare namespace Glue {
      */
     WorkerType?: WorkerType;
     /**
-     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints. 
+     * Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints.  For more information about the available Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide.
      */
     GlueVersion?: GlueVersionString;
     /**
@@ -2516,7 +2516,7 @@ declare namespace Glue {
      */
     CreatedTimestamp?: TimestampValue;
     /**
-     * The map of arguments used to configure this DevEndpoint. Valid arguments are:    "--enable-glue-datacatalog": ""     "GLUE_PYTHON_VERSION": "3"     "GLUE_PYTHON_VERSION": "2"    You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
+     * The map of arguments used to configure this DevEndpoint. Valid arguments are:    "--enable-glue-datacatalog": ""    You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
      */
     Arguments?: MapValue;
   }
@@ -2560,11 +2560,11 @@ declare namespace Glue {
      */
     ExecutionProperty?: ExecutionProperty;
     /**
-     * The JobCommand that executes this job.
+     * The JobCommand that runs this job.
      */
     Command: JobCommand;
     /**
-     * The default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling Glue APIs in Python topic in the developer guide. For information about the key-value pairs that Glue consumes to set up your job, see the Special Parameters Used by Glue topic in the developer guide.
      */
     DefaultArguments?: GenericMap;
     /**
@@ -2580,7 +2580,7 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * This parameter is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this Job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This parameter is deprecated. Use MaxCapacity instead. The number of Glue data processing units (DPUs) to allocate to this Job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
@@ -2588,7 +2588,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     * For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.   For Glue version 2.0 jobs, you cannot instead specify a Maximum capacity. Instead, you should specify a Worker type and the Number of workers.
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -2596,7 +2596,7 @@ declare namespace Glue {
      */
     SecurityConfiguration?: NameString;
     /**
-     * The tags to use with this job. You may use tags to limit access to the job. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     * The tags to use with this job. You may use tags to limit access to the job. For more information about tags in Glue, see Amazon Web Services Tags in Glue in the developer guide.
      */
     Tags?: TagsMap;
     /**
@@ -2604,7 +2604,7 @@ declare namespace Glue {
      */
     NotificationProperty?: NotificationProperty;
     /**
-     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Jobs that are created without specifying a Glue version default to Glue 0.9.
+     * Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Jobs that are created without specifying a Glue version default to Glue 0.9.
      */
     GlueVersion?: GlueVersionString;
     /**
@@ -2628,7 +2628,7 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * A JsonPath string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.
+     * A JsonPath string defining the JSON data for the classifier to classify. Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.
      */
     JsonPath: JsonPath;
   }
@@ -2642,7 +2642,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * A list of AWS Glue table definitions used by the transform.
+     * A list of Glue table definitions used by the transform.
      */
     InputRecordTables: GlueTables;
     /**
@@ -2650,15 +2650,15 @@ declare namespace Glue {
      */
     Parameters: TransformParameters;
     /**
-     * The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both AWS Glue service role permissions to AWS Glue resources, and Amazon S3 permissions required by the transform.    This role needs AWS Glue service role permissions to allow access to resources in AWS Glue. See Attach a Policy to IAM Users That Access AWS Glue.   This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.  
+     * The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both Glue service role permissions to Glue resources, and Amazon S3 permissions required by the transform.    This role needs Glue service role permissions to allow access to resources in Glue. See Attach a Policy to IAM Users That Access Glue.   This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.  
      */
     Role: RoleString;
     /**
-     * This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see AWS Glue Versions in the developer guide.
+     * This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see Glue Versions in the developer guide.
      */
     GlueVersion?: GlueVersionString;
     /**
-     * The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.   MaxCapacity is a mutually exclusive option with NumberOfWorkers and WorkerType.   If either NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be set.   If MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.   If WorkerType is set, then NumberOfWorkers is required (and vice versa).    MaxCapacity and NumberOfWorkers must both be at least 1.   When the WorkerType field is set to a value other than Standard, the MaxCapacity field is set automatically and becomes read-only. When the WorkerType field is set to a value other than Standard, the MaxCapacity field is set automatically and becomes read-only.
+     * The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page.   MaxCapacity is a mutually exclusive option with NumberOfWorkers and WorkerType.   If either NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be set.   If MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.   If WorkerType is set, then NumberOfWorkers is required (and vice versa).    MaxCapacity and NumberOfWorkers must both be at least 1.   When the WorkerType field is set to a value other than Standard, the MaxCapacity field is set automatically and becomes read-only. When the WorkerType field is set to a value other than Standard, the MaxCapacity field is set automatically and becomes read-only.
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -2678,7 +2678,7 @@ declare namespace Glue {
      */
     MaxRetries?: NullableInteger;
     /**
-     * The tags to use with this machine learning transform. You may use tags to limit access to the machine learning transform. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide.
+     * The tags to use with this machine learning transform. You may use tags to limit access to the machine learning transform. For more information about tags in Glue, see Amazon Web Services Tags in Glue in the developer guide.
      */
     Tags?: TagsMap;
     /**
@@ -2714,7 +2714,7 @@ declare namespace Glue {
   }
   export interface CreatePartitionRequest {
     /**
-     * The AWS account ID of the catalog in which the partition is to be created.
+     * The Amazon Web Services account ID of the catalog in which the partition is to be created.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2742,7 +2742,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * AWS tags that contain a key value pair and may be searched by console, command line, or API.
+     * Amazon Web Services tags that contain a key value pair and may be searched by console, command line, or API.
      */
     Tags?: TagsMap;
   }
@@ -2774,7 +2774,7 @@ declare namespace Glue {
      */
     SchemaName: SchemaRegistryNameString;
     /**
-     * The data format of the schema definition. Currently only AVRO is supported.
+     * The data format of the schema definition. Currently AVRO and JSON are supported.
      */
     DataFormat: DataFormat;
     /**
@@ -2786,7 +2786,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * AWS tags that contain a key value pair and may be searched by console, command line, or API. If specified, follows the AWS tags-on-create pattern.
+     * Amazon Web Services tags that contain a key value pair and may be searched by console, command line, or API. If specified, follows the Amazon Web Services tags-on-create pattern.
      */
     Tags?: TagsMap;
     /**
@@ -2816,7 +2816,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * The data format of the schema definition. Currently only AVRO is supported.
+     * The data format of the schema definition. Currently AVRO and JSON are supported.
      */
     DataFormat?: DataFormat;
     /**
@@ -2898,7 +2898,7 @@ declare namespace Glue {
   }
   export interface CreateTableRequest {
     /**
-     * The ID of the Data Catalog in which to create the Table. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which to create the Table. If none is supplied, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -2950,7 +2950,7 @@ declare namespace Glue {
      */
     StartOnCreation?: BooleanValue;
     /**
-     * The tags to use with this trigger. You may use tags to limit access to the trigger. For more information about tags in AWS Glue, see AWS Tags in AWS Glue in the developer guide. 
+     * The tags to use with this trigger. You may use tags to limit access to the trigger. For more information about tags in Glue, see Amazon Web Services Tags in Glue in the developer guide. 
      */
     Tags?: TagsMap;
   }
@@ -2962,7 +2962,7 @@ declare namespace Glue {
   }
   export interface CreateUserDefinedFunctionRequest {
     /**
-     * The ID of the Data Catalog in which to create the function. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which to create the function. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3079,10 +3079,10 @@ declare namespace Glue {
      */
     ConnectionPasswordEncryption?: ConnectionPasswordEncryption;
   }
-  export type DataFormat = "AVRO"|string;
+  export type DataFormat = "AVRO"|"JSON"|string;
   export interface DataLakePrincipal {
     /**
-     * An identifier for the AWS Lake Formation principal.
+     * An identifier for the Lake Formation principal.
      */
     DataLakePrincipalIdentifier?: DataLakePrincipalString;
   }
@@ -3216,7 +3216,7 @@ declare namespace Glue {
   }
   export interface DeleteColumnStatisticsForPartitionRequest {
     /**
-     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3240,7 +3240,7 @@ declare namespace Glue {
   }
   export interface DeleteColumnStatisticsForTableRequest {
     /**
-     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3261,7 +3261,7 @@ declare namespace Glue {
   export type DeleteConnectionNameList = NameString[];
   export interface DeleteConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connection resides. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3281,7 +3281,7 @@ declare namespace Glue {
   }
   export interface DeleteDatabaseRequest {
     /**
-     * The ID of the Data Catalog in which the database resides. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the database resides. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3345,7 +3345,7 @@ declare namespace Glue {
   }
   export interface DeletePartitionRequest {
     /**
-     * The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partition to be deleted resides. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3389,7 +3389,7 @@ declare namespace Glue {
      */
     PolicyHashCondition?: HashString;
     /**
-     * The ARN of the AWS Glue resource for the resource policy to be deleted.
+     * The ARN of the Glue resource for the resource policy to be deleted.
      */
     ResourceArn?: GlueResourceArn;
   }
@@ -3441,7 +3441,7 @@ declare namespace Glue {
   }
   export interface DeleteTableRequest {
     /**
-     * The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3457,7 +3457,7 @@ declare namespace Glue {
   }
   export interface DeleteTableVersionRequest {
     /**
-     * The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the tables reside. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3489,7 +3489,7 @@ declare namespace Glue {
   }
   export interface DeleteUserDefinedFunctionRequest {
     /**
-     * The ID of the Data Catalog where the function to be deleted is located. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the function to be deleted is located. If none is supplied, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3559,7 +3559,7 @@ declare namespace Glue {
      */
     WorkerType?: WorkerType;
     /**
-     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Development endpoints that are created without specifying a Glue version default to Glue 0.9. You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
+     * Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for running your ETL scripts on development endpoints.  For more information about the available Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Development endpoints that are created without specifying a Glue version default to Glue 0.9. You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
      */
     GlueVersion?: GlueVersionString;
     /**
@@ -3567,7 +3567,7 @@ declare namespace Glue {
      */
     NumberOfWorkers?: NullableInteger;
     /**
-     * The number of AWS Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
+     * The number of Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
      */
     NumberOfNodes?: IntegerValue;
     /**
@@ -3615,7 +3615,7 @@ declare namespace Glue {
      */
     SecurityConfiguration?: NameString;
     /**
-     * A map of arguments used to configure the DevEndpoint. Valid arguments are:    "--enable-glue-datacatalog": ""     "GLUE_PYTHON_VERSION": "3"     "GLUE_PYTHON_VERSION": "2"    You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
+     * A map of arguments used to configure the DevEndpoint. Valid arguments are:    "--enable-glue-datacatalog": ""    You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
      */
     Arguments?: MapValue;
   }
@@ -3661,7 +3661,7 @@ declare namespace Glue {
      */
     scanAll?: NullableBoolean;
     /**
-     * The percentage of the configured read capacity units to use by the AWS Glue crawler. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second. The valid values are null or a value between 0.1 to 1.5. A null value is used when user does not provide a value, and defaults to 0.5 of the configured Read Capacity Unit (for provisioned tables), or 0.25 of the max configured Read Capacity Unit (for tables using on-demand mode).
+     * The percentage of the configured read capacity units to use by the Glue crawler. Read capacity units is a term defined by DynamoDB, and is a numeric value that acts as rate limiter for the number of reads that can be performed on that table per second. The valid values are null or a value between 0.1 to 1.5. A null value is used when user does not provide a value, and defaults to 0.5 of the configured Read Capacity Unit (for provisioned tables), or 0.25 of the max configured Read Capacity Unit (for tables using on-demand mode).
      */
     scanRate?: NullableDouble;
   }
@@ -3684,7 +3684,7 @@ declare namespace Glue {
      */
     CatalogEncryptionMode: CatalogEncryptionMode;
     /**
-     * The ID of the AWS KMS key to use for encryption at rest.
+     * The ID of the KMS key to use for encryption at rest.
      */
     SseAwsKmsKeyId?: NameString;
   }
@@ -3816,7 +3816,7 @@ declare namespace Glue {
   export type GenericString = string;
   export interface GetCatalogImportStatusRequest {
     /**
-     * The ID of the catalog to migrate. Currently, this should be the AWS account ID.
+     * The ID of the catalog to migrate. Currently, this should be the Amazon Web Services account ID.
      */
     CatalogId?: CatalogIdString;
   }
@@ -3861,7 +3861,7 @@ declare namespace Glue {
   export type GetColumnNamesList = NameString[];
   export interface GetColumnStatisticsForPartitionRequest {
     /**
-     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3893,7 +3893,7 @@ declare namespace Glue {
   }
   export interface GetColumnStatisticsForTableRequest {
     /**
-     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3921,7 +3921,7 @@ declare namespace Glue {
   }
   export interface GetConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connection resides. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3929,7 +3929,7 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but it does have permission to access the rest of the connection properties.
+     * Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the KMS key to decrypt the password, but it does have permission to access the rest of the connection properties.
      */
     HidePassword?: Boolean;
   }
@@ -3951,7 +3951,7 @@ declare namespace Glue {
   }
   export interface GetConnectionsRequest {
     /**
-     * The ID of the Data Catalog in which the connections reside. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connections reside. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -3959,7 +3959,7 @@ declare namespace Glue {
      */
     Filter?: GetConnectionsFilter;
     /**
-     * Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the AWS KMS key to decrypt the password, but it does have permission to access the rest of the connection properties.
+     * Allows you to retrieve the connection metadata without returning the password. For instance, the AWS Glue console uses this flag to retrieve the connection, and does not display the password. Set this parameter when the caller might not have permission to use the KMS key to decrypt the password, but it does have permission to access the rest of the connection properties.
      */
     HidePassword?: Boolean;
     /**
@@ -4039,7 +4039,7 @@ declare namespace Glue {
   }
   export interface GetDataCatalogEncryptionSettingsRequest {
     /**
-     * The ID of the Data Catalog to retrieve the security configuration for. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog to retrieve the security configuration for. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
   }
@@ -4051,7 +4051,7 @@ declare namespace Glue {
   }
   export interface GetDatabaseRequest {
     /**
-     * The ID of the Data Catalog in which the database resides. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the database resides. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -4067,7 +4067,7 @@ declare namespace Glue {
   }
   export interface GetDatabasesRequest {
     /**
-     * The ID of the Data Catalog from which to retrieve Databases. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog from which to retrieve Databases. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -4349,7 +4349,7 @@ declare namespace Glue {
      */
     LastModifiedOn?: Timestamp;
     /**
-     * A list of AWS Glue table definitions used by the transform.
+     * A list of Glue table definitions used by the transform.
      */
     InputRecordTables?: GlueTables;
     /**
@@ -4373,11 +4373,11 @@ declare namespace Glue {
      */
     Role?: RoleString;
     /**
-     * This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see AWS Glue Versions in the developer guide.
+     * This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see Glue Versions in the developer guide.
      */
     GlueVersion?: GlueVersionString;
     /**
-     * The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.  When the WorkerType field is set to a value other than Standard, the MaxCapacity field is set automatically and becomes read-only.
+     * The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page.  When the WorkerType field is set to a value other than Standard, the MaxCapacity field is set automatically and becomes read-only.
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -4479,7 +4479,7 @@ declare namespace Glue {
   }
   export interface GetPartitionRequest {
     /**
-     * The ID of the Data Catalog where the partition in question resides. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partition in question resides. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -4503,7 +4503,7 @@ declare namespace Glue {
   }
   export interface GetPartitionsRequest {
     /**
-     * The ID of the Data Catalog where the partitions in question reside. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partitions in question reside. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -4515,7 +4515,7 @@ declare namespace Glue {
      */
     TableName: NameString;
     /**
-     * An expression that filters the partitions to be returned. The expression uses SQL syntax similar to the SQL WHERE filter clause. The SQL statement parser JSQLParser parses the expression.   Operators: The following are the operators that you can use in the Expression API call:  =  Checks whether the values of the two operands are equal; if yes, then the condition becomes true. Example: Assume 'variable a' holds 10 and 'variable b' holds 20.  (a = b) is not true.  &lt; &gt;  Checks whether the values of two operands are equal; if the values are not equal, then the condition becomes true. Example: (a &lt; &gt; b) is true.  &gt;  Checks whether the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true. Example: (a &gt; b) is not true.  &lt;  Checks whether the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true. Example: (a &lt; b) is true.  &gt;=  Checks whether the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true. Example: (a &gt;= b) is not true.  &lt;=  Checks whether the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true. Example: (a &lt;= b) is true.  AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL  Logical operators.    Supported Partition Key Types: The following are the supported partition keys.    string     date     timestamp     int     bigint     long     tinyint     smallint     decimal    If an invalid type is encountered, an exception is thrown.  The following list shows the valid operators on each type. When you define a crawler, the partitionKey type is created as a STRING, to be compatible with the catalog partitions.   Sample API Call: 
+     * An expression that filters the partitions to be returned. The expression uses SQL syntax similar to the SQL WHERE filter clause. The SQL statement parser JSQLParser parses the expression.   Operators: The following are the operators that you can use in the Expression API call:  =  Checks whether the values of the two operands are equal; if yes, then the condition becomes true. Example: Assume 'variable a' holds 10 and 'variable b' holds 20.  (a = b) is not true.  &lt; &gt;  Checks whether the values of two operands are equal; if the values are not equal, then the condition becomes true. Example: (a &lt; &gt; b) is true.  &gt;  Checks whether the value of the left operand is greater than the value of the right operand; if yes, then the condition becomes true. Example: (a &gt; b) is not true.  &lt;  Checks whether the value of the left operand is less than the value of the right operand; if yes, then the condition becomes true. Example: (a &lt; b) is true.  &gt;=  Checks whether the value of the left operand is greater than or equal to the value of the right operand; if yes, then the condition becomes true. Example: (a &gt;= b) is not true.  &lt;=  Checks whether the value of the left operand is less than or equal to the value of the right operand; if yes, then the condition becomes true. Example: (a &lt;= b) is true.  AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL  Logical operators.    Supported Partition Key Types: The following are the supported partition keys.    string     date     timestamp     int     bigint     long     tinyint     smallint     decimal    If an type is encountered that is not valid, an exception is thrown.  The following list shows the valid operators on each type. When you define a crawler, the partitionKey type is created as a STRING, to be compatible with the catalog partitions.   Sample API Call: 
      */
     Expression?: PredicateString;
     /**
@@ -4564,7 +4564,7 @@ declare namespace Glue {
      */
     Language?: Language;
     /**
-     * A map to hold additional optional key-value parameters. Currently, these key-value pairs are supported:    inferSchema  —  Specifies whether to set inferSchema to true or false for the default script generated by an AWS Glue job. For example, to set inferSchema to true, pass the following key value pair:  --additional-plan-options-map '{"inferSchema":"true"}'   
+     * A map to hold additional optional key-value parameters. Currently, these key-value pairs are supported:    inferSchema  —  Specifies whether to set inferSchema to true or false for the default script generated by an Glue job. For example, to set inferSchema to true, pass the following key value pair:  --additional-plan-options-map '{"inferSchema":"true"}'   
      */
     AdditionalPlanOptionsMap?: AdditionalPlanOptionsMap;
   }
@@ -4633,7 +4633,7 @@ declare namespace Glue {
   export type GetResourcePoliciesResponseList = GluePolicy[];
   export interface GetResourcePolicyRequest {
     /**
-     * The ARN of the AWS Glue resource for which to retrieve the resource policy. If not supplied, the Data Catalog resource policy is returned. Use GetResourcePolicies to view all existing resource policies. For more information see Specifying AWS Glue Resource ARNs. 
+     * The ARN of the Glue resource for which to retrieve the resource policy. If not supplied, the Data Catalog resource policy is returned. Use GetResourcePolicies to view all existing resource policies. For more information see Specifying Glue Resource ARNs. 
      */
     ResourceArn?: GlueResourceArn;
   }
@@ -4675,7 +4675,7 @@ declare namespace Glue {
      */
     SchemaArn?: GlueResourceArn;
     /**
-     * The data format of the schema definition. Currently only AVRO is supported.
+     * The data format of the schema definition. Currently only AVRO and JSON are supported.
      */
     DataFormat?: DataFormat;
     /**
@@ -4715,7 +4715,7 @@ declare namespace Glue {
      */
     Description?: DescriptionString;
     /**
-     * The data format of the schema definition. Currently only AVRO is supported.
+     * The data format of the schema definition. Currently AVRO and JSON are supported.
      */
     DataFormat?: DataFormat;
     /**
@@ -4771,7 +4771,7 @@ declare namespace Glue {
      */
     SchemaDefinition?: SchemaDefinitionString;
     /**
-     * The data format of the schema definition. Currently only AVRO is supported.
+     * The data format of the schema definition. Currently AVRO and JSON are supported.
      */
     DataFormat?: DataFormat;
     /**
@@ -4849,7 +4849,7 @@ declare namespace Glue {
   }
   export interface GetTableRequest {
     /**
-     * The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -4869,7 +4869,7 @@ declare namespace Glue {
   }
   export interface GetTableVersionRequest {
     /**
-     * The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the tables reside. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -4894,7 +4894,7 @@ declare namespace Glue {
   export type GetTableVersionsList = TableVersion[];
   export interface GetTableVersionsRequest {
     /**
-     * The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the tables reside. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -4926,7 +4926,7 @@ declare namespace Glue {
   }
   export interface GetTablesRequest {
     /**
-     * The ID of the Data Catalog where the tables reside. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the tables reside. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -5006,7 +5006,7 @@ declare namespace Glue {
   }
   export interface GetUserDefinedFunctionRequest {
     /**
-     * The ID of the Data Catalog where the function to be retrieved is located. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the function to be retrieved is located. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -5026,7 +5026,7 @@ declare namespace Glue {
   }
   export interface GetUserDefinedFunctionsRequest {
     /**
-     * The ID of the Data Catalog where the functions to be retrieved are located. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the functions to be retrieved are located. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -5157,19 +5157,19 @@ declare namespace Glue {
   export type GlueResourceArn = string;
   export interface GlueTable {
     /**
-     * A database name in the AWS Glue Data Catalog.
+     * A database name in the Glue Data Catalog.
      */
     DatabaseName: NameString;
     /**
-     * A table name in the AWS Glue Data Catalog.
+     * A table name in the Glue Data Catalog.
      */
     TableName: NameString;
     /**
-     * A unique identifier for the AWS Glue Data Catalog.
+     * A unique identifier for the Glue Data Catalog.
      */
     CatalogId?: NameString;
     /**
-     * The name of the connection to the AWS Glue Data Catalog.
+     * The name of the connection to the Glue Data Catalog.
      */
     ConnectionName?: NameString;
   }
@@ -5210,7 +5210,7 @@ declare namespace Glue {
   export type IdString = string;
   export interface ImportCatalogToGlueRequest {
     /**
-     * The ID of the catalog to import. Currently, this should be the AWS account ID.
+     * The ID of the catalog to import. Currently, this should be the Amazon Web Services account ID.
      */
     CatalogId?: CatalogIdString;
   }
@@ -5275,11 +5275,11 @@ declare namespace Glue {
      */
     ExecutionProperty?: ExecutionProperty;
     /**
-     * The JobCommand that executes this job.
+     * The JobCommand that runs this job.
      */
     Command?: JobCommand;
     /**
-     * The default arguments for this job, specified as name-value pairs. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The default arguments for this job, specified as name-value pairs. You can specify arguments here that your own job-execution script consumes, as well as arguments that Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling Glue APIs in Python topic in the developer guide. For information about the key-value pairs that Glue consumes to set up your job, see the Special Parameters Used by Glue topic in the developer guide.
      */
     DefaultArguments?: GenericMap;
     /**
@@ -5295,7 +5295,7 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) allocated to runs of this job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. 
+     * This field is deprecated. Use MaxCapacity instead. The number of Glue data processing units (DPUs) allocated to runs of this job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page. 
      */
     AllocatedCapacity?: IntegerValue;
     /**
@@ -5303,7 +5303,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     * For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job, an Apache Spark ETL job, or an Apache Spark streaming ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.   For Glue version 2.0 jobs, you cannot instead specify a Maximum capacity. Instead, you should specify a Worker type and the Number of workers.
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -5323,7 +5323,7 @@ declare namespace Glue {
      */
     NotificationProperty?: NotificationProperty;
     /**
-     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Jobs that are created without specifying a Glue version default to Glue 0.9.
+     * Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Jobs that are created without specifying a Glue version default to Glue 0.9.
      */
     GlueVersion?: GlueVersionString;
   }
@@ -5374,11 +5374,11 @@ declare namespace Glue {
      */
     Name?: GenericString;
     /**
-     * Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that executes a job.
+     * Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that runs a job.
      */
     ScriptLocation?: ScriptLocationString;
     /**
-     * The Python version being used to execute a Python shell job. Allowed values are 2 or 3.
+     * The Python version being used to run a Python shell job. Allowed values are 2 or 3.
      */
     PythonVersion?: PythonVersionString;
   }
@@ -5425,11 +5425,11 @@ declare namespace Glue {
      */
     CompletedOn?: TimestampValue;
     /**
-     * The current state of the job run. For more information about the statuses of jobs that have terminated abnormally, see AWS Glue Job Run Statuses.
+     * The current state of the job run. For more information about the statuses of jobs that have terminated abnormally, see Glue Job Run Statuses.
      */
     JobRunState?: JobRunState;
     /**
-     * The job arguments associated with this run. For this job run, they replace the default arguments set in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The job arguments associated with this run. For this job run, they replace the default arguments set in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that Glue itself consumes. For information about how to specify and consume your own job arguments, see the Calling Glue APIs in Python topic in the developer guide. For information about the key-value pairs that Glue consumes to set up your job, see the Special Parameters Used by Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
@@ -5441,7 +5441,7 @@ declare namespace Glue {
      */
     PredecessorRuns?: PredecessorList;
     /**
-     * This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated. Use MaxCapacity instead. The number of Glue data processing units (DPUs) allocated to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
@@ -5453,7 +5453,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     * The number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -5469,7 +5469,7 @@ declare namespace Glue {
      */
     SecurityConfiguration?: NameString;
     /**
-     * The name of the log group for secure logging that can be server-side encrypted in Amazon CloudWatch using AWS KMS. This name can be /aws-glue/jobs/, in which case the default encryption is NONE. If you add a role name and SecurityConfiguration name (in other words, /aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/), then that security configuration is used to encrypt the log group.
+     * The name of the log group for secure logging that can be server-side encrypted in Amazon CloudWatch using KMS. This name can be /aws-glue/jobs/, in which case the default encryption is NONE. If you add a role name and SecurityConfiguration name (in other words, /aws-glue/jobs-yourRoleName-yourSecurityConfigurationName/), then that security configuration is used to encrypt the log group.
      */
     LogGroupName?: GenericString;
     /**
@@ -5477,7 +5477,7 @@ declare namespace Glue {
      */
     NotificationProperty?: NotificationProperty;
     /**
-     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Jobs that are created without specifying a Glue version default to Glue 0.9.
+     * Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide. Jobs that are created without specifying a Glue version default to Glue 0.9.
      */
     GlueVersion?: GlueVersionString;
   }
@@ -5501,11 +5501,11 @@ declare namespace Glue {
      */
     ExecutionProperty?: ExecutionProperty;
     /**
-     * The JobCommand that executes this job (required).
+     * The JobCommand that runs this job (required).
      */
     Command?: JobCommand;
     /**
-     * The default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The default arguments for this job. You can specify arguments here that your own job-execution script consumes, as well as arguments that Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling Glue APIs in Python topic in the developer guide. For information about the key-value pairs that Glue consumes to set up your job, see the Special Parameters Used by Glue topic in the developer guide.
      */
     DefaultArguments?: GenericMap;
     /**
@@ -5521,7 +5521,7 @@ declare namespace Glue {
      */
     MaxRetries?: MaxRetries;
     /**
-     * This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated. Use MaxCapacity instead. The number of Glue data processing units (DPUs) to allocate to this job. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
@@ -5529,7 +5529,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     * For Glue version 1.0 or earlier jobs, using the standard worker type, the number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl") or Apache Spark streaming ETL job (JobCommand.Name="gluestreaming"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.   For Glue version 2.0 jobs, you cannot instead specify a Maximum capacity. Instead, you should specify a Worker type and the Number of workers.
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -5549,7 +5549,7 @@ declare namespace Glue {
      */
     NotificationProperty?: NotificationProperty;
     /**
-     * Glue version determines the versions of Apache Spark and Python that AWS Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available AWS Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide.
+     * Glue version determines the versions of Apache Spark and Python that Glue supports. The Python version indicates the version supported for jobs of type Spark.  For more information about the available Glue versions and corresponding Spark and Python versions, see Glue version in the developer guide.
      */
     GlueVersion?: GlueVersionString;
   }
@@ -5571,7 +5571,7 @@ declare namespace Glue {
      */
     Version?: VersionId;
     /**
-     * A JsonPath string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.
+     * A JsonPath string defining the JSON data for the classifier to classify. Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.
      */
     JsonPath: JsonPath;
   }
@@ -5918,7 +5918,7 @@ declare namespace Glue {
      */
     LastModifiedOn?: Timestamp;
     /**
-     * A list of AWS Glue table definitions used by the transform.
+     * A list of Glue table definitions used by the transform.
      */
     InputRecordTables?: GlueTables;
     /**
@@ -5930,7 +5930,7 @@ declare namespace Glue {
      */
     EvaluationMetrics?: EvaluationMetrics;
     /**
-     * A count identifier for the labeling files generated by AWS Glue for this transform. As you create a better transform, you can iteratively download, label, and upload the labeling file.
+     * A count identifier for the labeling files generated by Glue for this transform. As you create a better transform, you can iteratively download, label, and upload the labeling file.
      */
     LabelCount?: LabelCount;
     /**
@@ -5938,15 +5938,15 @@ declare namespace Glue {
      */
     Schema?: TransformSchema;
     /**
-     * The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both AWS Glue service role permissions to AWS Glue resources, and Amazon S3 permissions required by the transform.    This role needs AWS Glue service role permissions to allow access to resources in AWS Glue. See Attach a Policy to IAM Users That Access AWS Glue.   This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.  
+     * The name or Amazon Resource Name (ARN) of the IAM role with the required permissions. The required permissions include both Glue service role permissions to Glue resources, and Amazon S3 permissions required by the transform.    This role needs Glue service role permissions to allow access to resources in Glue. See Attach a Policy to IAM Users That Access Glue.   This role needs permission to your Amazon Simple Storage Service (Amazon S3) sources, targets, temporary directory, scripts, and any libraries used by the task run for this transform.  
      */
     Role?: RoleString;
     /**
-     * This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see AWS Glue Versions in the developer guide.
+     * This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see Glue Versions in the developer guide.
      */
     GlueVersion?: GlueVersionString;
     /**
-     * The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.   MaxCapacity is a mutually exclusive option with NumberOfWorkers and WorkerType.   If either NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be set.   If MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.   If WorkerType is set, then NumberOfWorkers is required (and vice versa).    MaxCapacity and NumberOfWorkers must both be at least 1.   When the WorkerType field is set to a value other than Standard, the MaxCapacity field is set automatically and becomes read-only.
+     * The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page.   MaxCapacity is a mutually exclusive option with NumberOfWorkers and WorkerType.   If either NumberOfWorkers or WorkerType is set, then MaxCapacity cannot be set.   If MaxCapacity is set then neither NumberOfWorkers or WorkerType can be set.   If WorkerType is set, then NumberOfWorkers is required (and vice versa).    MaxCapacity and NumberOfWorkers must both be at least 1.   When the WorkerType field is set to a value other than Standard, the MaxCapacity field is set automatically and becomes read-only.
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -5972,7 +5972,7 @@ declare namespace Glue {
   }
   export interface MLUserDataEncryption {
     /**
-     * The encryption mode applied to user data. Valid values are:   DISABLED: encryption is disabled   SSEKMS: use of server-side encryption with AWS Key Management Service (SSE-KMS) for user data stored in Amazon S3.  
+     * The encryption mode applied to user data. Valid values are:   DISABLED: encryption is disabled   SSEKMS: use of server-side encryption with Key Management Service (SSE-KMS) for user data stored in Amazon S3.  
      */
     MlUserDataEncryptionMode: MLUserDataEncryptionModeString;
     /**
@@ -6062,11 +6062,11 @@ declare namespace Glue {
   export type NameStringList = NameString[];
   export interface Node {
     /**
-     * The type of AWS Glue component represented by the node.
+     * The type of Glue component represented by the node.
      */
     Type?: NodeType;
     /**
-     * The name of the AWS Glue component represented by the node.
+     * The name of the Glue component represented by the node.
      */
     Name?: NameString;
     /**
@@ -6211,7 +6211,7 @@ declare namespace Glue {
   export type PartitionIndexStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|string;
   export interface PartitionInput {
     /**
-     * The values of the partition. Although this parameter is not required by the SDK, you must specify this parameter for a valid input. The values for the keys for the new partition must be passed as an array of String objects that must be ordered in the same order as the partition keys appearing in the Amazon S3 prefix. Otherwise AWS Glue will add the values to the wrong keys.
+     * The values of the partition. Although this parameter is not required by the SDK, you must specify this parameter for a valid input. The values for the keys for the new partition must be passed as an array of String objects that must be ordered in the same order as the partition keys appearing in the Amazon S3 prefix. Otherwise Glue will add the values to the wrong keys.
      */
     Values?: ValueStringList;
     /**
@@ -6309,7 +6309,7 @@ declare namespace Glue {
   export type PublicKeysList = GenericString[];
   export interface PutDataCatalogEncryptionSettingsRequest {
     /**
-     * The ID of the Data Catalog to set the security configuration for. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog to set the security configuration for. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -6337,7 +6337,7 @@ declare namespace Glue {
      */
     PolicyExistsCondition?: ExistCondition;
     /**
-     * If 'TRUE', indicates that you are using both methods to grant cross-account access to Data Catalog resources:   By directly updating the resource policy with PutResourePolicy    By using the Grant permissions command on the AWS Management Console.   Must be set to 'TRUE' if you have already used the Management Console to grant cross-account access, otherwise the call fails. Default is 'FALSE'.
+     * If 'TRUE', indicates that you are using both methods to grant cross-account access to Data Catalog resources:   By directly updating the resource policy with PutResourePolicy    By using the Grant permissions command on the Management Console.   Must be set to 'TRUE' if you have already used the Management Console to grant cross-account access, otherwise the call fails. Default is 'FALSE'.
      */
     EnableHybrid?: EnableHybridValues;
   }
@@ -6987,11 +6987,11 @@ declare namespace Glue {
      */
     JobRunId?: IdString;
     /**
-     * The job arguments specifically for this run. For this job run, they replace the default arguments set in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that AWS Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling AWS Glue APIs in Python topic in the developer guide. For information about the key-value pairs that AWS Glue consumes to set up your job, see the Special Parameters Used by AWS Glue topic in the developer guide.
+     * The job arguments specifically for this run. For this job run, they replace the default arguments set in the job definition itself. You can specify arguments here that your own job-execution script consumes, as well as arguments that Glue itself consumes. For information about how to specify and consume your own Job arguments, see the Calling Glue APIs in Python topic in the developer guide. For information about the key-value pairs that Glue consumes to set up your job, see the Special Parameters Used by Glue topic in the developer guide.
      */
     Arguments?: GenericMap;
     /**
-     * This field is deprecated. Use MaxCapacity instead. The number of AWS Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.
+     * This field is deprecated. Use MaxCapacity instead. The number of Glue data processing units (DPUs) to allocate to this JobRun. From 2 to 100 DPUs can be allocated; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page.
      */
     AllocatedCapacity?: IntegerValue;
     /**
@@ -6999,7 +6999,7 @@ declare namespace Glue {
      */
     Timeout?: Timeout;
     /**
-     * The number of AWS Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job, or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
+     * The number of Glue data processing units (DPUs) that can be allocated when this job runs. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page. Do not set Max Capacity if using WorkerType and NumberOfWorkers. The value that can be allocated for MaxCapacity depends on whether you are running a Python shell job, or an Apache Spark ETL job:   When you specify a Python shell job (JobCommand.Name="pythonshell"), you can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.   When you specify an Apache Spark ETL job (JobCommand.Name="glueetl"), you can allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a fractional DPU allocation.  
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -7167,7 +7167,7 @@ declare namespace Glue {
      */
     StoredAsSubDirectories?: Boolean;
     /**
-     * An object that references a schema stored in the AWS Glue Schema Registry. When creating a table, you can pass an empty list of columns for the schema, and instead use a schema reference.
+     * An object that references a schema stored in the Glue Schema Registry. When creating a table, you can pass an empty list of columns for the schema, and instead use a schema reference.
      */
     SchemaReference?: SchemaReference;
   }
@@ -7256,7 +7256,7 @@ declare namespace Glue {
      */
     CreatedBy?: NameString;
     /**
-     * Indicates whether the table has been registered with AWS Lake Formation.
+     * Indicates whether the table has been registered with Lake Formation.
      */
     IsRegisteredWithLakeFormation?: Boolean;
     /**
@@ -7380,7 +7380,7 @@ declare namespace Glue {
   export type TagKeysList = TagKey[];
   export interface TagResourceRequest {
     /**
-     * The ARN of the AWS Glue resource to which to add the tags. For more information about AWS Glue resource ARNs, see the AWS Glue ARN string pattern.
+     * The ARN of the Glue resource to which to add the tags. For more information about Glue resource ARNs, see the Glue ARN string pattern.
      */
     ResourceArn: GlueResourceArn;
     /**
@@ -7517,7 +7517,7 @@ declare namespace Glue {
      */
     Status?: TransformStatusType;
     /**
-     * This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see AWS Glue Versions in the developer guide.
+     * This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see Glue Versions in the developer guide.
      */
     GlueVersion?: GlueVersionString;
     /**
@@ -7674,7 +7674,7 @@ declare namespace Glue {
   }
   export interface UpdateColumnStatisticsForPartitionRequest {
     /**
-     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -7702,7 +7702,7 @@ declare namespace Glue {
   }
   export interface UpdateColumnStatisticsForTableRequest {
     /**
-     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partitions in question reside. If none is supplied, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -7727,7 +7727,7 @@ declare namespace Glue {
   export type UpdateColumnStatisticsList = ColumnStatistics[];
   export interface UpdateConnectionRequest {
     /**
-     * The ID of the Data Catalog in which the connection resides. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the connection resides. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -7751,7 +7751,7 @@ declare namespace Glue {
      */
     Role?: Role;
     /**
-     * The AWS Glue database where results are stored, such as: arn:aws:daylight:us-east-1::database/sometable/*.
+     * The Glue database where results are stored, such as: arn:aws:daylight:us-east-1::database/sometable/*.
      */
     DatabaseName?: DatabaseName;
     /**
@@ -7841,7 +7841,7 @@ declare namespace Glue {
   }
   export interface UpdateDatabaseRequest {
     /**
-     * The ID of the Data Catalog in which the metadata database resides. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog in which the metadata database resides. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -7885,7 +7885,7 @@ declare namespace Glue {
      */
     DeleteArguments?: StringList;
     /**
-     * The map of arguments to add the map of arguments used to configure the DevEndpoint. Valid arguments are:    "--enable-glue-datacatalog": ""     "GLUE_PYTHON_VERSION": "3"     "GLUE_PYTHON_VERSION": "2"    You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
+     * The map of arguments to add the map of arguments used to configure the DevEndpoint. Valid arguments are:    "--enable-glue-datacatalog": ""    You can specify a version of Python support for development endpoints by using the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided, the version defaults to Python 2.
      */
     AddArguments?: MapValue;
   }
@@ -7931,7 +7931,7 @@ declare namespace Glue {
      */
     Name: NameString;
     /**
-     * A JsonPath string defining the JSON data for the classifier to classify. AWS Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.
+     * A JsonPath string defining the JSON data for the classifier to classify. Glue supports a subset of JsonPath, as described in Writing JsonPath Custom Classifiers.
      */
     JsonPath?: JsonPath;
   }
@@ -7957,11 +7957,11 @@ declare namespace Glue {
      */
     Role?: RoleString;
     /**
-     * This value determines which version of AWS Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see AWS Glue Versions in the developer guide.
+     * This value determines which version of Glue this machine learning transform is compatible with. Glue 1.0 is recommended for most customers. If the value is not set, the Glue compatibility defaults to Glue 0.9. For more information, see Glue Versions in the developer guide.
      */
     GlueVersion?: GlueVersionString;
     /**
-     * The number of AWS Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the AWS Glue pricing page.  When the WorkerType field is set to a value other than Standard, the MaxCapacity field is set automatically and becomes read-only.
+     * The number of Glue data processing units (DPUs) that are allocated to task runs for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A DPU is a relative measure of processing power that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more information, see the Glue pricing page.  When the WorkerType field is set to a value other than Standard, the MaxCapacity field is set automatically and becomes read-only.
      */
     MaxCapacity?: NullableDouble;
     /**
@@ -7989,7 +7989,7 @@ declare namespace Glue {
   }
   export interface UpdatePartitionRequest {
     /**
-     * The ID of the Data Catalog where the partition to be updated resides. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the partition to be updated resides. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -8065,7 +8065,7 @@ declare namespace Glue {
   }
   export interface UpdateTableRequest {
     /**
-     * The ID of the Data Catalog where the table resides. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the table resides. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -8101,7 +8101,7 @@ declare namespace Glue {
   }
   export interface UpdateUserDefinedFunctionRequest {
     /**
-     * The ID of the Data Catalog where the function to be updated is located. If none is provided, the AWS account ID is used by default.
+     * The ID of the Data Catalog where the function to be updated is located. If none is provided, the Amazon Web Services account ID is used by default.
      */
     CatalogId?: CatalogIdString;
     /**
@@ -8250,7 +8250,7 @@ declare namespace Glue {
      */
     LastRun?: WorkflowRun;
     /**
-     * The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges.
+     * The graph representing all the Glue components that belong to the workflow as nodes and directed connections between them as edges.
      */
     Graph?: WorkflowGraph;
     /**
@@ -8260,7 +8260,7 @@ declare namespace Glue {
   }
   export interface WorkflowGraph {
     /**
-     * A list of the the AWS Glue components belong to the workflow represented as nodes.
+     * A list of the the Glue components belong to the workflow represented as nodes.
      */
     Nodes?: NodeList;
     /**
@@ -8271,7 +8271,7 @@ declare namespace Glue {
   export type WorkflowNames = NameString[];
   export interface WorkflowRun {
     /**
-     * Name of the workflow that was executed.
+     * Name of the workflow that was run.
      */
     Name?: NameString;
     /**
@@ -8307,7 +8307,7 @@ declare namespace Glue {
      */
     Statistics?: WorkflowRunStatistics;
     /**
-     * The graph representing all the AWS Glue components that belong to the workflow as nodes and directed connections between them as edges.
+     * The graph representing all the Glue components that belong to the workflow as nodes and directed connections between them as edges.
      */
     Graph?: WorkflowGraph;
   }
