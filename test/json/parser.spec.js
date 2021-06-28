@@ -62,8 +62,22 @@
             }
           });
         });
-        return it('ignores null', function() {
+        it('ignores null', function() {
           return expect(parse(rules, '{"Items": null}')).to.eql({});
+        });
+        it('translates document types', function() {
+          var docTypeRules = {
+            type: 'structure',
+            members: {
+              Items: {
+                type: 'structure',
+                document: true
+              }
+            }
+          };
+          expect(parse(docTypeRules, '{"Items":{"foo":"fooValue","bar":null}}')).to.eql({
+            Items: {foo: 'fooValue', bar: null }
+          });
         });
       });
       describe('lists', function() {

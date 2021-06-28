@@ -63,10 +63,24 @@
             Items: null
           })).to.equal('{}');
         });
-        return it('ignores undefined', function() {
+        it('ignores undefined', function() {
           return expect(build(rules, {
             Items: void 0
           })).to.equal('{}');
+        });
+        it('builds document types', function() {
+          var docTypeRules = {
+            type: 'structure',
+            members: {
+              Items: {
+                type: 'structure',
+                document: true
+              }
+            }
+          };
+          expect(build(docTypeRules, {
+            Items: {foo: 'fooValue', bar: null }
+          })).to.equal('{"Items":{"foo":"fooValue","bar":null}}');
         });
       });
       describe('lists', function() {
