@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.936.0-->
+<!--LATEST=2.937.0-->
 <!--ENTRYINSERT-->
+
+## 2.937.0
+* feature: AutoScaling: Amazon EC2 Auto Scaling infrastructure improvements and optimizations.
+* feature: DataBrew: Adds support for the output of job results to the AWS Glue Data Catalog.
+* feature: MediaPackageVod: Add support for Widevine DRM on CMAF packaging configurations. Both Widevine and FairPlay DRMs can now be used simultaneously, with CBCS encryption.
+* feature: SSMContacts: Fixes the tag key length range to 128 chars,  tag value length to 256 chars; Adds support for UTF-8 chars for contact and channel names, Allows users to unset name in UpdateContact API; Adds throttling exception to StopEngagement API, validation exception to APIs UntagResource, ListTagsForResource
+* feature: ServiceDiscovery: AWS Cloud Map now allows configuring the TTL of the SOA record for a hosted zone to control the negative caching for new services.
 
 ## 2.936.0
 * feature: Glue: Add JSON Support for Glue Schema Registry

@@ -52,11 +52,11 @@ declare class DataBrew extends Service {
    */
   createRecipe(callback?: (err: AWSError, data: DataBrew.Types.CreateRecipeResponse) => void): Request<DataBrew.Types.CreateRecipeResponse, AWSError>;
   /**
-   * Creates a new job to transform input data, using steps defined in an existing AWS Glue DataBrew recipe
+   * Creates a new job to transform input data, using steps defined in an existing Glue DataBrew recipe
    */
   createRecipeJob(params: DataBrew.Types.CreateRecipeJobRequest, callback?: (err: AWSError, data: DataBrew.Types.CreateRecipeJobResponse) => void): Request<DataBrew.Types.CreateRecipeJobResponse, AWSError>;
   /**
-   * Creates a new job to transform input data, using steps defined in an existing AWS Glue DataBrew recipe
+   * Creates a new job to transform input data, using steps defined in an existing Glue DataBrew recipe
    */
   createRecipeJob(callback?: (err: AWSError, data: DataBrew.Types.CreateRecipeJobResponse) => void): Request<DataBrew.Types.CreateRecipeJobResponse, AWSError>;
   /**
@@ -360,7 +360,7 @@ declare namespace DataBrew {
   export type Condition = string;
   export interface ConditionExpression {
     /**
-     * A specific condition to apply to a recipe action. For more information, see Recipe structure in the AWS Glue DataBrew Developer Guide.
+     * A specific condition to apply to a recipe action. For more information, see Recipe structure in the Glue DataBrew Developer Guide.
      */
     Condition: Condition;
     /**
@@ -381,13 +381,13 @@ declare namespace DataBrew {
      */
     Name: DatasetName;
     /**
-     * The file format of a dataset that is created from an S3 file or folder.
+     * The file format of a dataset that is created from an Amazon S3 file or folder.
      */
     Format?: InputFormat;
     FormatOptions?: FormatOptions;
     Input: Input;
     /**
-     * A set of options that defines how DataBrew interprets an S3 path of the dataset.
+     * A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.
      */
     PathOptions?: PathOptions;
     /**
@@ -411,7 +411,7 @@ declare namespace DataBrew {
      */
     EncryptionKeyArn?: EncryptionKeyArn;
     /**
-     * The encryption mode for the job, which can be one of the following:    SSE-KMS - SSE-KMS - Server-side encryption with AWS KMS-managed keys.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
+     * The encryption mode for the job, which can be one of the following:    SSE-KMS - SSE-KMS - Server-side encryption with KMS-managed keys.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
      */
     EncryptionMode?: EncryptionMode;
     /**
@@ -432,7 +432,7 @@ declare namespace DataBrew {
     MaxRetries?: MaxRetries;
     OutputLocation: S3Location;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
      */
     RoleArn: Arn;
     /**
@@ -469,7 +469,7 @@ declare namespace DataBrew {
     RecipeName: RecipeName;
     Sample?: Sample;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed for this request.
+     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed for this request.
      */
     RoleArn: Arn;
     /**
@@ -493,7 +493,7 @@ declare namespace DataBrew {
      */
     EncryptionKeyArn?: EncryptionKeyArn;
     /**
-     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with keys managed by AWS KMS.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
+     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with keys managed by KMS.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
      */
     EncryptionMode?: EncryptionMode;
     /**
@@ -515,14 +515,18 @@ declare namespace DataBrew {
     /**
      * One or more artifacts that represent the output from running the job.
      */
-    Outputs: OutputList;
+    Outputs?: OutputList;
+    /**
+     * One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+     */
+    DataCatalogOutputs?: DataCatalogOutputList;
     /**
      * Either the name of an existing project, or a combination of a recipe and a dataset to associate with the recipe.
      */
     ProjectName?: ProjectName;
     RecipeReference?: RecipeReference;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
      */
     RoleArn: Arn;
     /**
@@ -570,7 +574,7 @@ declare namespace DataBrew {
      */
     JobNames?: JobNameList;
     /**
-     * The date or dates and time or times when the jobs are to be run. For more information, see Cron expressions in the AWS Glue DataBrew Developer Guide.
+     * The date or dates and time or times when the jobs are to be run. For more information, see Cron expressions in the Glue DataBrew Developer Guide.
      */
     CronExpression: CronExpression;
     /**
@@ -608,7 +612,7 @@ declare namespace DataBrew {
   }
   export interface DataCatalogInputDefinition {
     /**
-     * The unique identifier of the AWS account that holds the Data Catalog that stores the data.
+     * The unique identifier of the Amazon Web Services account that holds the Data Catalog that stores the data.
      */
     CatalogId?: CatalogId;
     /**
@@ -620,13 +624,40 @@ declare namespace DataBrew {
      */
     TableName: TableName;
     /**
-     * An Amazon location that AWS Glue Data Catalog can use as a temporary directory.
+     * Represents an Amazon location where DataBrew can store intermediate results.
      */
     TempDirectory?: S3Location;
   }
+  export interface DataCatalogOutput {
+    /**
+     * The unique identifier of the AWS account that holds the Data Catalog that stores the data.
+     */
+    CatalogId?: CatalogId;
+    /**
+     * The name of a database in the Data Catalog.
+     */
+    DatabaseName: DatabaseName;
+    /**
+     * The name of a table in the Data Catalog.
+     */
+    TableName: TableName;
+    /**
+     * Represents options that specify how and where DataBrew writes the S3 output generated by recipe jobs.
+     */
+    S3Options?: S3TableOutputOptions;
+    /**
+     * Represents options that specify how and where DataBrew writes the database output generated by recipe jobs.
+     */
+    DatabaseOptions?: DatabaseTableOutputOptions;
+    /**
+     * A value that, if true, means that any data in the location specified for output is overwritten with new output. Not supported with DatabaseOptions.
+     */
+    Overwrite?: OverwriteOutput;
+  }
+  export type DataCatalogOutputList = DataCatalogOutput[];
   export interface DatabaseInputDefinition {
     /**
-     * The AWS Glue Connection that stores the connection information for the target database.
+     * The Glue Connection that stores the connection information for the target database.
      */
     GlueConnectionName: GlueConnectionName;
     /**
@@ -637,9 +668,19 @@ declare namespace DataBrew {
   }
   export type DatabaseName = string;
   export type DatabaseTableName = string;
+  export interface DatabaseTableOutputOptions {
+    /**
+     * Represents an Amazon S3 location (bucket name and object key) where DataBrew can store intermediate results.
+     */
+    TempDirectory?: S3Location;
+    /**
+     * A prefix for the name of a table DataBrew will create in the database.
+     */
+    TableName: DatabaseTableName;
+  }
   export interface Dataset {
     /**
-     * The ID of the AWS account that owns the dataset.
+     * The ID of the Amazon Web Services account that owns the dataset.
      */
     AccountId?: AccountId;
     /**
@@ -655,7 +696,7 @@ declare namespace DataBrew {
      */
     Name: DatasetName;
     /**
-     * The file format of a dataset that is created from an S3 file or folder.
+     * The file format of a dataset that is created from an Amazon S3 file or folder.
      */
     Format?: InputFormat;
     /**
@@ -663,7 +704,7 @@ declare namespace DataBrew {
      */
     FormatOptions?: FormatOptions;
     /**
-     * Information on how DataBrew can find the dataset, in either the AWS Glue Data Catalog or Amazon S3.
+     * Information on how DataBrew can find the dataset, in either the Glue Data Catalog or Amazon S3.
      */
     Input: Input;
     /**
@@ -675,11 +716,11 @@ declare namespace DataBrew {
      */
     LastModifiedBy?: LastModifiedBy;
     /**
-     * The location of the data for the dataset, either Amazon S3 or the AWS Glue Data Catalog.
+     * The location of the data for the dataset, either Amazon S3 or the Glue Data Catalog.
      */
     Source?: Source;
     /**
-     * A set of options that defines how DataBrew interprets an S3 path of the dataset.
+     * A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.
      */
     PathOptions?: PathOptions;
     /**
@@ -695,7 +736,7 @@ declare namespace DataBrew {
   export type DatasetName = string;
   export interface DatasetParameter {
     /**
-     * The name of the parameter that is used in the dataset's S3 path.
+     * The name of the parameter that is used in the dataset's Amazon S3 path.
      */
     Name: PathParameterName;
     /**
@@ -707,7 +748,7 @@ declare namespace DataBrew {
      */
     DatetimeOptions?: DatetimeOptions;
     /**
-     * Optional boolean value that defines whether the captured value of this parameter should be loaded as an additional column in the dataset.
+     * Optional boolean value that defines whether the captured value of this parameter should be used to create a new column in a dataset.
      */
     CreateColumn?: CreateColumn;
     /**
@@ -719,11 +760,11 @@ declare namespace DataBrew {
   export type DatetimeFormat = string;
   export interface DatetimeOptions {
     /**
-     * Required option, that defines the datetime format used for a date parameter in the S3 path. Should use only supported datetime specifiers and separation characters, all litera a-z or A-Z character should be escaped with single quotes. E.g. "MM.dd.yyyy-'at'-HH:mm".
+     * Required option, that defines the datetime format used for a date parameter in the Amazon S3 path. Should use only supported datetime specifiers and separation characters, all literal a-z or A-Z characters should be escaped with single quotes. E.g. "MM.dd.yyyy-'at'-HH:mm".
      */
     Format: DatetimeFormat;
     /**
-     * Optional value for a timezone offset of the datetime parameter value in the S3 path. Shouldn't be used if Format for this parameter includes timezone fields. If no offset specified, UTC is assumed.
+     * Optional value for a timezone offset of the datetime parameter value in the Amazon S3 path. Shouldn't be used if Format for this parameter includes timezone fields. If no offset specified, UTC is assumed.
      */
     TimezoneOffset?: TimezoneOffset;
     /**
@@ -820,7 +861,7 @@ declare namespace DataBrew {
      */
     Name: DatasetName;
     /**
-     * The file format of a dataset that is created from an S3 file or folder.
+     * The file format of a dataset that is created from an Amazon S3 file or folder.
      */
     Format?: InputFormat;
     FormatOptions?: FormatOptions;
@@ -834,11 +875,11 @@ declare namespace DataBrew {
      */
     LastModifiedBy?: LastModifiedBy;
     /**
-     * The location of the data for this dataset, Amazon S3 or the AWS Glue Data Catalog.
+     * The location of the data for this dataset, Amazon S3 or the Glue Data Catalog.
      */
     Source?: Source;
     /**
-     * A set of options that defines how DataBrew interprets an S3 path of the dataset.
+     * A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.
      */
     PathOptions?: PathOptions;
     /**
@@ -874,7 +915,7 @@ declare namespace DataBrew {
      */
     EncryptionKeyArn?: EncryptionKeyArn;
     /**
-     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with keys managed by AWS KMS.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
+     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with keys managed by KMS.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
      */
     EncryptionMode?: EncryptionMode;
     /**
@@ -910,6 +951,10 @@ declare namespace DataBrew {
      */
     Outputs?: OutputList;
     /**
+     * One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+     */
+    DataCatalogOutputs?: DataCatalogOutputList;
+    /**
      * The DataBrew project associated with this job.
      */
     ProjectName?: ProjectName;
@@ -919,7 +964,7 @@ declare namespace DataBrew {
      */
     ResourceArn?: Arn;
     /**
-     * The ARN of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+     * The ARN of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
      */
     RoleArn?: Arn;
     /**
@@ -990,6 +1035,10 @@ declare namespace DataBrew {
      * One or more output artifacts from a job run.
      */
     Outputs?: OutputList;
+    /**
+     * One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+     */
+    DataCatalogOutputs?: DataCatalogOutputList;
     RecipeReference?: RecipeReference;
     /**
      * The Amazon Resource Name (ARN) of the user who started the job run.
@@ -1045,7 +1094,7 @@ declare namespace DataBrew {
     ResourceArn?: Arn;
     Sample?: Sample;
     /**
-     * The ARN of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+     * The ARN of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
      */
     RoleArn?: Arn;
     /**
@@ -1161,7 +1210,7 @@ declare namespace DataBrew {
      */
     ResourceArn?: Arn;
     /**
-     * The date or dates and time or times when the jobs are to be run for the schedule. For more information, see Cron expressions in the AWS Glue DataBrew Developer Guide.
+     * The date or dates and time or times when the jobs are to be run for the schedule. For more information, see Cron expressions in the Glue DataBrew Developer Guide.
      */
     CronExpression?: CronExpression;
     /**
@@ -1194,15 +1243,15 @@ declare namespace DataBrew {
   export type Expression = string;
   export interface FilesLimit {
     /**
-     * The number of S3 files to select.
+     * The number of Amazon S3 files to select.
      */
     MaxFiles: MaxFiles;
     /**
-     * A criteria to use for S3 files sorting before their selection. By default uses LAST_MODIFIED_DATE as a sorting criteria. Currently it's the only allowed value.
+     * A criteria to use for Amazon S3 files sorting before their selection. By default uses LAST_MODIFIED_DATE as a sorting criteria. Currently it's the only allowed value.
      */
     OrderedBy?: OrderedBy;
     /**
-     * A criteria to use for S3 files sorting before their selection. By default uses DESCENDING order, i.e. most recent files are selected first. Anotherpossible value is ASCENDING.
+     * A criteria to use for Amazon S3 files sorting before their selection. By default uses DESCENDING order, i.e. most recent files are selected first. Anotherpossible value is ASCENDING.
      */
     Order?: Order;
   }
@@ -1239,7 +1288,7 @@ declare namespace DataBrew {
      */
     S3InputDefinition?: S3Location;
     /**
-     * The AWS Glue Data Catalog parameters for the data.
+     * The Glue Data Catalog parameters for the data.
      */
     DataCatalogInputDefinition?: DataCatalogInputDefinition;
     /**
@@ -1250,7 +1299,7 @@ declare namespace DataBrew {
   export type InputFormat = "CSV"|"JSON"|"PARQUET"|"EXCEL"|string;
   export interface Job {
     /**
-     * The ID of the AWS account that owns the job.
+     * The ID of the Amazon Web Services account that owns the job.
      */
     AccountId?: AccountId;
     /**
@@ -1270,7 +1319,7 @@ declare namespace DataBrew {
      */
     EncryptionKeyArn?: EncryptionKeyArn;
     /**
-     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with keys managed by AWS KMS.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
+     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with keys managed by KMS.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
      */
     EncryptionMode?: EncryptionMode;
     /**
@@ -1305,6 +1354,10 @@ declare namespace DataBrew {
      * One or more artifacts that represent output from running the job.
      */
     Outputs?: OutputList;
+    /**
+     * One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+     */
+    DataCatalogOutputs?: DataCatalogOutputList;
     /**
      * The name of the project that the job is associated with.
      */
@@ -1382,6 +1435,10 @@ declare namespace DataBrew {
      * One or more output artifacts from a job run.
      */
     Outputs?: OutputList;
+    /**
+     * One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+     */
+    DataCatalogOutputs?: DataCatalogOutputList;
     /**
      * The set of steps processed by the job.
      */
@@ -1653,7 +1710,7 @@ declare namespace DataBrew {
   export type ParameterValue = string;
   export interface PathOptions {
     /**
-     * If provided, this structure defines a date range for matching S3 objects based on their LastModifiedDate attribute in S3.
+     * If provided, this structure defines a date range for matching Amazon S3 objects based on their LastModifiedDate attribute in Amazon S3.
      */
     LastModifiedDateCondition?: FilterExpression;
     /**
@@ -1661,7 +1718,7 @@ declare namespace DataBrew {
      */
     FilesLimit?: FilesLimit;
     /**
-     * A structure that maps names of parameters used in the S3 path of a dataset to their definitions.
+     * A structure that maps names of parameters used in the Amazon S3 path of a dataset to their definitions.
      */
     Parameters?: PathParametersMap;
   }
@@ -1670,7 +1727,7 @@ declare namespace DataBrew {
   export type Preview = boolean;
   export interface Project {
     /**
-     * The ID of the AWS account that owns the project.
+     * The ID of the Amazon Web Services account that owns the project.
      */
     AccountId?: AccountId;
     /**
@@ -1854,13 +1911,19 @@ declare namespace DataBrew {
   export type Result = string;
   export interface S3Location {
     /**
-     * The S3 bucket name.
+     * The Amazon S3 bucket name.
      */
     Bucket: Bucket;
     /**
      * The unique name of the object in the bucket.
      */
     Key?: Key;
+  }
+  export interface S3TableOutputOptions {
+    /**
+     * Represents an Amazon S3 location (bucket name and object key) where DataBrew can write output from a job.
+     */
+    Location: S3Location;
   }
   export interface Sample {
     /**
@@ -1877,7 +1940,7 @@ declare namespace DataBrew {
   export type SampleType = "FIRST_N"|"LAST_N"|"RANDOM"|string;
   export interface Schedule {
     /**
-     * The ID of the AWS account that owns the schedule.
+     * The ID of the Amazon Web Services account that owns the schedule.
      */
     AccountId?: AccountId;
     /**
@@ -1905,7 +1968,7 @@ declare namespace DataBrew {
      */
     ResourceArn?: Arn;
     /**
-     * The dates and times when the job is to run. For more information, see Cron expressions in the AWS Glue DataBrew Developer Guide.
+     * The dates and times when the job is to run. For more information, see Cron expressions in the Glue DataBrew Developer Guide.
      */
     CronExpression?: CronExpression;
     /**
@@ -2048,13 +2111,13 @@ declare namespace DataBrew {
      */
     Name: DatasetName;
     /**
-     * The file format of a dataset that is created from an S3 file or folder.
+     * The file format of a dataset that is created from an Amazon S3 file or folder.
      */
     Format?: InputFormat;
     FormatOptions?: FormatOptions;
     Input: Input;
     /**
-     * A set of options that defines how DataBrew interprets an S3 path of the dataset.
+     * A set of options that defines how DataBrew interprets an Amazon S3 path of the dataset.
      */
     PathOptions?: PathOptions;
   }
@@ -2070,7 +2133,7 @@ declare namespace DataBrew {
      */
     EncryptionKeyArn?: EncryptionKeyArn;
     /**
-     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with keys managed by AWS KMS.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
+     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with keys managed by KMS.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
      */
     EncryptionMode?: EncryptionMode;
     /**
@@ -2091,7 +2154,7 @@ declare namespace DataBrew {
     MaxRetries?: MaxRetries;
     OutputLocation: S3Location;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
      */
     RoleArn: Arn;
     /**
@@ -2136,7 +2199,7 @@ declare namespace DataBrew {
      */
     EncryptionKeyArn?: EncryptionKeyArn;
     /**
-     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with keys managed by AWS KMS.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
+     * The encryption mode for the job, which can be one of the following:    SSE-KMS - Server-side encryption with keys managed by KMS.    SSE-S3 - Server-side encryption with keys managed by Amazon S3.  
      */
     EncryptionMode?: EncryptionMode;
     /**
@@ -2158,9 +2221,13 @@ declare namespace DataBrew {
     /**
      * One or more artifacts that represent the output from running the job. 
      */
-    Outputs: OutputList;
+    Outputs?: OutputList;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
+     * One or more artifacts that represent the AWS Glue Data Catalog output from running the job.
+     */
+    DataCatalogOutputs?: DataCatalogOutputList;
+    /**
+     * The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role to be assumed when DataBrew runs the job.
      */
     RoleArn: Arn;
     /**
@@ -2200,7 +2267,7 @@ declare namespace DataBrew {
      */
     JobNames?: JobNameList;
     /**
-     * The date or dates and time or times when the jobs are to be run. For more information, see Cron expressions in the AWS Glue DataBrew Developer Guide.
+     * The date or dates and time or times when the jobs are to be run. For more information, see Cron expressions in the Glue DataBrew Developer Guide.
      */
     CronExpression: CronExpression;
     /**

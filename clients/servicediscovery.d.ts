@@ -12,35 +12,35 @@ declare class ServiceDiscovery extends Service {
   constructor(options?: ServiceDiscovery.Types.ClientConfiguration)
   config: Config & ServiceDiscovery.Types.ClientConfiguration;
   /**
-   * Creates an HTTP namespace. Service instances registered using an HTTP namespace can be discovered using a DiscoverInstances request but can't be discovered using DNS. For the current quota on the number of namespaces that you can create using the same AWS account, see AWS Cloud Map quotas in the AWS Cloud Map Developer Guide.
+   * Creates an HTTP namespace. Service instances registered using an HTTP namespace can be discovered using a DiscoverInstances request but can't be discovered using DNS. For the current quota on the number of namespaces that you can create using the same account, see Cloud Map quotas in the Cloud Map Developer Guide.
    */
   createHttpNamespace(params: ServiceDiscovery.Types.CreateHttpNamespaceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.CreateHttpNamespaceResponse) => void): Request<ServiceDiscovery.Types.CreateHttpNamespaceResponse, AWSError>;
   /**
-   * Creates an HTTP namespace. Service instances registered using an HTTP namespace can be discovered using a DiscoverInstances request but can't be discovered using DNS. For the current quota on the number of namespaces that you can create using the same AWS account, see AWS Cloud Map quotas in the AWS Cloud Map Developer Guide.
+   * Creates an HTTP namespace. Service instances registered using an HTTP namespace can be discovered using a DiscoverInstances request but can't be discovered using DNS. For the current quota on the number of namespaces that you can create using the same account, see Cloud Map quotas in the Cloud Map Developer Guide.
    */
   createHttpNamespace(callback?: (err: AWSError, data: ServiceDiscovery.Types.CreateHttpNamespaceResponse) => void): Request<ServiceDiscovery.Types.CreateHttpNamespaceResponse, AWSError>;
   /**
-   * Creates a private namespace based on DNS, which is visible only inside a specified Amazon VPC. The namespace defines your service naming scheme. For example, if you name your namespace example.com and name your service backend, the resulting DNS name for the service is backend.example.com. Service instances that are registered using a private DNS namespace can be discovered using either a DiscoverInstances request or using DNS. For the current quota on the number of namespaces that you can create using the same AWS account, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
+   * Creates a private namespace based on DNS, which is visible only inside a specified Amazon VPC. The namespace defines your service naming scheme. For example, if you name your namespace example.com and name your service backend, the resulting DNS name for the service is backend.example.com. Service instances that are registered using a private DNS namespace can be discovered using either a DiscoverInstances request or using DNS. For the current quota on the number of namespaces that you can create using the same account, see Cloud Map quotas in the Cloud Map Developer Guide.
    */
   createPrivateDnsNamespace(params: ServiceDiscovery.Types.CreatePrivateDnsNamespaceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.CreatePrivateDnsNamespaceResponse) => void): Request<ServiceDiscovery.Types.CreatePrivateDnsNamespaceResponse, AWSError>;
   /**
-   * Creates a private namespace based on DNS, which is visible only inside a specified Amazon VPC. The namespace defines your service naming scheme. For example, if you name your namespace example.com and name your service backend, the resulting DNS name for the service is backend.example.com. Service instances that are registered using a private DNS namespace can be discovered using either a DiscoverInstances request or using DNS. For the current quota on the number of namespaces that you can create using the same AWS account, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
+   * Creates a private namespace based on DNS, which is visible only inside a specified Amazon VPC. The namespace defines your service naming scheme. For example, if you name your namespace example.com and name your service backend, the resulting DNS name for the service is backend.example.com. Service instances that are registered using a private DNS namespace can be discovered using either a DiscoverInstances request or using DNS. For the current quota on the number of namespaces that you can create using the same account, see Cloud Map quotas in the Cloud Map Developer Guide.
    */
   createPrivateDnsNamespace(callback?: (err: AWSError, data: ServiceDiscovery.Types.CreatePrivateDnsNamespaceResponse) => void): Request<ServiceDiscovery.Types.CreatePrivateDnsNamespaceResponse, AWSError>;
   /**
-   * Creates a public namespace based on DNS, which is visible on the internet. The namespace defines your service naming scheme. For example, if you name your namespace example.com and name your service backend, the resulting DNS name for the service is backend.example.com. You can discover instances that were registered with a public DNS namespace by using either a DiscoverInstances request or using DNS. For the current quota on the number of namespaces that you can create using the same AWS account, see AWS Cloud Map Quotasin the AWS Cloud Map Developer Guide.
+   * Creates a public namespace based on DNS, which is visible on the internet. The namespace defines your service naming scheme. For example, if you name your namespace example.com and name your service backend, the resulting DNS name for the service is backend.example.com. You can discover instances that were registered with a public DNS namespace by using either a DiscoverInstances request or using DNS. For the current quota on the number of namespaces that you can create using the same account, see Cloud Map quotas in the Cloud Map Developer Guide.
    */
   createPublicDnsNamespace(params: ServiceDiscovery.Types.CreatePublicDnsNamespaceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.CreatePublicDnsNamespaceResponse) => void): Request<ServiceDiscovery.Types.CreatePublicDnsNamespaceResponse, AWSError>;
   /**
-   * Creates a public namespace based on DNS, which is visible on the internet. The namespace defines your service naming scheme. For example, if you name your namespace example.com and name your service backend, the resulting DNS name for the service is backend.example.com. You can discover instances that were registered with a public DNS namespace by using either a DiscoverInstances request or using DNS. For the current quota on the number of namespaces that you can create using the same AWS account, see AWS Cloud Map Quotasin the AWS Cloud Map Developer Guide.
+   * Creates a public namespace based on DNS, which is visible on the internet. The namespace defines your service naming scheme. For example, if you name your namespace example.com and name your service backend, the resulting DNS name for the service is backend.example.com. You can discover instances that were registered with a public DNS namespace by using either a DiscoverInstances request or using DNS. For the current quota on the number of namespaces that you can create using the same account, see Cloud Map quotas in the Cloud Map Developer Guide.
    */
   createPublicDnsNamespace(callback?: (err: AWSError, data: ServiceDiscovery.Types.CreatePublicDnsNamespaceResponse) => void): Request<ServiceDiscovery.Types.CreatePublicDnsNamespaceResponse, AWSError>;
   /**
-   * Creates a service. This action defines the configuration for the following entities:   For public and private DNS namespaces, one of the following combinations of DNS records in Amazon Route 53:    A     AAAA     A and AAAA     SRV     CNAME      Optionally, a health check   After you create the service, you can submit a RegisterInstance request, and AWS Cloud Map uses the values in the configuration to create the specified entities. For the current quota on the number of instances that you can register using the same namespace and using the same service, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
+   * Creates a service. This action defines the configuration for the following entities:   For public and private DNS namespaces, one of the following combinations of DNS records in Amazon Route 53:    A     AAAA     A and AAAA     SRV     CNAME      Optionally, a health check   After you create the service, you can submit a RegisterInstance request, and Cloud Map uses the values in the configuration to create the specified entities. For the current quota on the number of instances that you can register using the same namespace and using the same service, see Cloud Map quotas in the Cloud Map Developer Guide.
    */
   createService(params: ServiceDiscovery.Types.CreateServiceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.CreateServiceResponse) => void): Request<ServiceDiscovery.Types.CreateServiceResponse, AWSError>;
   /**
-   * Creates a service. This action defines the configuration for the following entities:   For public and private DNS namespaces, one of the following combinations of DNS records in Amazon Route 53:    A     AAAA     A and AAAA     SRV     CNAME      Optionally, a health check   After you create the service, you can submit a RegisterInstance request, and AWS Cloud Map uses the values in the configuration to create the specified entities. For the current quota on the number of instances that you can register using the same namespace and using the same service, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
+   * Creates a service. This action defines the configuration for the following entities:   For public and private DNS namespaces, one of the following combinations of DNS records in Amazon Route 53:    A     AAAA     A and AAAA     SRV     CNAME      Optionally, a health check   After you create the service, you can submit a RegisterInstance request, and Cloud Map uses the values in the configuration to create the specified entities. For the current quota on the number of instances that you can register using the same namespace and using the same service, see Cloud Map quotas in the Cloud Map Developer Guide.
    */
   createService(callback?: (err: AWSError, data: ServiceDiscovery.Types.CreateServiceResponse) => void): Request<ServiceDiscovery.Types.CreateServiceResponse, AWSError>;
   /**
@@ -60,11 +60,11 @@ declare class ServiceDiscovery extends Service {
    */
   deleteService(callback?: (err: AWSError, data: ServiceDiscovery.Types.DeleteServiceResponse) => void): Request<ServiceDiscovery.Types.DeleteServiceResponse, AWSError>;
   /**
-   * Deletes the Amazon Route 53 DNS records and health check, if any, that AWS Cloud Map created for the specified instance.
+   * Deletes the Amazon Route 53 DNS records and health check, if any, that Cloud Map created for the specified instance.
    */
   deregisterInstance(params: ServiceDiscovery.Types.DeregisterInstanceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.DeregisterInstanceResponse) => void): Request<ServiceDiscovery.Types.DeregisterInstanceResponse, AWSError>;
   /**
-   * Deletes the Amazon Route 53 DNS records and health check, if any, that AWS Cloud Map created for the specified instance.
+   * Deletes the Amazon Route 53 DNS records and health check, if any, that Cloud Map created for the specified instance.
    */
   deregisterInstance(callback?: (err: AWSError, data: ServiceDiscovery.Types.DeregisterInstanceResponse) => void): Request<ServiceDiscovery.Types.DeregisterInstanceResponse, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class ServiceDiscovery extends Service {
    */
   listInstances(callback?: (err: AWSError, data: ServiceDiscovery.Types.ListInstancesResponse) => void): Request<ServiceDiscovery.Types.ListInstancesResponse, AWSError>;
   /**
-   * Lists summary information about the namespaces that were created by the current AWS account.
+   * Lists summary information about the namespaces that were created by the current account.
    */
   listNamespaces(params: ServiceDiscovery.Types.ListNamespacesRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.ListNamespacesResponse) => void): Request<ServiceDiscovery.Types.ListNamespacesResponse, AWSError>;
   /**
-   * Lists summary information about the namespaces that were created by the current AWS account.
+   * Lists summary information about the namespaces that were created by the current account.
    */
   listNamespaces(callback?: (err: AWSError, data: ServiceDiscovery.Types.ListNamespacesResponse) => void): Request<ServiceDiscovery.Types.ListNamespacesResponse, AWSError>;
   /**
@@ -156,11 +156,11 @@ declare class ServiceDiscovery extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: ServiceDiscovery.Types.ListTagsForResourceResponse) => void): Request<ServiceDiscovery.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Creates or updates one or more records and, optionally, creates a health check based on the settings in a specified service. When you submit a RegisterInstance request, the following occurs:   For each DNS record that you define in the service that's specified by ServiceId, a record is created or updated in the hosted zone that's associated with the corresponding namespace.   If the service includes HealthCheckConfig, a health check is created based on the settings in the health check configuration.   The health check, if any, is associated with each of the new or updated records.    One RegisterInstance request must complete before you can submit another request and specify the same service ID and instance ID.  For more information, see CreateService. When AWS Cloud Map receives a DNS query for the specified DNS name, it returns the applicable value:    If the health check is healthy: returns all the records    If the health check is unhealthy: returns the applicable value for the last healthy instance    If you didn't specify a health check configuration: returns all the records   For the current quota on the number of instances that you can register using the same namespace and using the same service, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
+   * Creates or updates one or more records and, optionally, creates a health check based on the settings in a specified service. When you submit a RegisterInstance request, the following occurs:   For each DNS record that you define in the service that's specified by ServiceId, a record is created or updated in the hosted zone that's associated with the corresponding namespace.   If the service includes HealthCheckConfig, a health check is created based on the settings in the health check configuration.   The health check, if any, is associated with each of the new or updated records.    One RegisterInstance request must complete before you can submit another request and specify the same service ID and instance ID.  For more information, see CreateService. When Cloud Map receives a DNS query for the specified DNS name, it returns the applicable value:    If the health check is healthy: returns all the records    If the health check is unhealthy: returns the applicable value for the last healthy instance    If you didn't specify a health check configuration: returns all the records   For the current quota on the number of instances that you can register using the same namespace and using the same service, see Cloud Map quotas in the Cloud Map Developer Guide.
    */
   registerInstance(params: ServiceDiscovery.Types.RegisterInstanceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.RegisterInstanceResponse) => void): Request<ServiceDiscovery.Types.RegisterInstanceResponse, AWSError>;
   /**
-   * Creates or updates one or more records and, optionally, creates a health check based on the settings in a specified service. When you submit a RegisterInstance request, the following occurs:   For each DNS record that you define in the service that's specified by ServiceId, a record is created or updated in the hosted zone that's associated with the corresponding namespace.   If the service includes HealthCheckConfig, a health check is created based on the settings in the health check configuration.   The health check, if any, is associated with each of the new or updated records.    One RegisterInstance request must complete before you can submit another request and specify the same service ID and instance ID.  For more information, see CreateService. When AWS Cloud Map receives a DNS query for the specified DNS name, it returns the applicable value:    If the health check is healthy: returns all the records    If the health check is unhealthy: returns the applicable value for the last healthy instance    If you didn't specify a health check configuration: returns all the records   For the current quota on the number of instances that you can register using the same namespace and using the same service, see AWS Cloud Map Limits in the AWS Cloud Map Developer Guide.
+   * Creates or updates one or more records and, optionally, creates a health check based on the settings in a specified service. When you submit a RegisterInstance request, the following occurs:   For each DNS record that you define in the service that's specified by ServiceId, a record is created or updated in the hosted zone that's associated with the corresponding namespace.   If the service includes HealthCheckConfig, a health check is created based on the settings in the health check configuration.   The health check, if any, is associated with each of the new or updated records.    One RegisterInstance request must complete before you can submit another request and specify the same service ID and instance ID.  For more information, see CreateService. When Cloud Map receives a DNS query for the specified DNS name, it returns the applicable value:    If the health check is healthy: returns all the records    If the health check is unhealthy: returns the applicable value for the last healthy instance    If you didn't specify a health check configuration: returns all the records   For the current quota on the number of instances that you can register using the same namespace and using the same service, see Cloud Map quotas in the Cloud Map Developer Guide.
    */
   registerInstance(callback?: (err: AWSError, data: ServiceDiscovery.Types.RegisterInstanceResponse) => void): Request<ServiceDiscovery.Types.RegisterInstanceResponse, AWSError>;
   /**
@@ -180,19 +180,43 @@ declare class ServiceDiscovery extends Service {
    */
   untagResource(callback?: (err: AWSError, data: ServiceDiscovery.Types.UntagResourceResponse) => void): Request<ServiceDiscovery.Types.UntagResourceResponse, AWSError>;
   /**
-   * Submits a request to change the health status of a custom health check to healthy or unhealthy. You can use UpdateInstanceCustomHealthStatus to change the status only for custom health checks, which you define using HealthCheckCustomConfig when you create a service. You can't use it to change the status for Route 53 health checks, which you define using HealthCheckConfig. For more information, see HealthCheckCustomConfig.
+   * Updates an HTTP namespace.
+   */
+  updateHttpNamespace(params: ServiceDiscovery.Types.UpdateHttpNamespaceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.UpdateHttpNamespaceResponse) => void): Request<ServiceDiscovery.Types.UpdateHttpNamespaceResponse, AWSError>;
+  /**
+   * Updates an HTTP namespace.
+   */
+  updateHttpNamespace(callback?: (err: AWSError, data: ServiceDiscovery.Types.UpdateHttpNamespaceResponse) => void): Request<ServiceDiscovery.Types.UpdateHttpNamespaceResponse, AWSError>;
+  /**
+   * Submits a request to change the health status of a custom health check to healthy or unhealthy. You can use UpdateInstanceCustomHealthStatus to change the status only for custom health checks, which you define using HealthCheckCustomConfig when you create a service. You can't use it to change the status for Route 53 health checks, which you define using HealthCheckConfig. For more information, see HealthCheckCustomConfig.
    */
   updateInstanceCustomHealthStatus(params: ServiceDiscovery.Types.UpdateInstanceCustomHealthStatusRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Submits a request to change the health status of a custom health check to healthy or unhealthy. You can use UpdateInstanceCustomHealthStatus to change the status only for custom health checks, which you define using HealthCheckCustomConfig when you create a service. You can't use it to change the status for Route 53 health checks, which you define using HealthCheckConfig. For more information, see HealthCheckCustomConfig.
+   * Submits a request to change the health status of a custom health check to healthy or unhealthy. You can use UpdateInstanceCustomHealthStatus to change the status only for custom health checks, which you define using HealthCheckCustomConfig when you create a service. You can't use it to change the status for Route 53 health checks, which you define using HealthCheckConfig. For more information, see HealthCheckCustomConfig.
    */
   updateInstanceCustomHealthStatus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Submits a request to perform the following operations:   Update the TTL setting for existing DnsRecords configurations   Add, update, or delete HealthCheckConfig for a specified service  You can't add, update, or delete a HealthCheckCustomConfig configuration.    For public and private DNS namespaces, note the following:   If you omit any existing DnsRecords or HealthCheckConfig configurations from an UpdateService request, the configurations are deleted from the service.   If you omit an existing HealthCheckCustomConfig configuration from an UpdateService request, the configuration isn't deleted from the service.   When you update settings for a service, AWS Cloud Map also updates the corresponding settings in all the records and health checks that were created by using the specified service.
+   * Updates a private DNS namespace.
+   */
+  updatePrivateDnsNamespace(params: ServiceDiscovery.Types.UpdatePrivateDnsNamespaceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.UpdatePrivateDnsNamespaceResponse) => void): Request<ServiceDiscovery.Types.UpdatePrivateDnsNamespaceResponse, AWSError>;
+  /**
+   * Updates a private DNS namespace.
+   */
+  updatePrivateDnsNamespace(callback?: (err: AWSError, data: ServiceDiscovery.Types.UpdatePrivateDnsNamespaceResponse) => void): Request<ServiceDiscovery.Types.UpdatePrivateDnsNamespaceResponse, AWSError>;
+  /**
+   * Updates a public DNS namespace.
+   */
+  updatePublicDnsNamespace(params: ServiceDiscovery.Types.UpdatePublicDnsNamespaceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.UpdatePublicDnsNamespaceResponse) => void): Request<ServiceDiscovery.Types.UpdatePublicDnsNamespaceResponse, AWSError>;
+  /**
+   * Updates a public DNS namespace.
+   */
+  updatePublicDnsNamespace(callback?: (err: AWSError, data: ServiceDiscovery.Types.UpdatePublicDnsNamespaceResponse) => void): Request<ServiceDiscovery.Types.UpdatePublicDnsNamespaceResponse, AWSError>;
+  /**
+   * Submits a request to perform the following operations:   Update the TTL setting for existing DnsRecords configurations   Add, update, or delete HealthCheckConfig for a specified service  You can't add, update, or delete a HealthCheckCustomConfig configuration.    For public and private DNS namespaces, note the following:   If you omit any existing DnsRecords or HealthCheckConfig configurations from an UpdateService request, the configurations are deleted from the service.   If you omit an existing HealthCheckCustomConfig configuration from an UpdateService request, the configuration isn't deleted from the service.   When you update settings for a service, Cloud Map also updates the corresponding settings in all the records and health checks that were created by using the specified service.
    */
   updateService(params: ServiceDiscovery.Types.UpdateServiceRequest, callback?: (err: AWSError, data: ServiceDiscovery.Types.UpdateServiceResponse) => void): Request<ServiceDiscovery.Types.UpdateServiceResponse, AWSError>;
   /**
-   * Submits a request to perform the following operations:   Update the TTL setting for existing DnsRecords configurations   Add, update, or delete HealthCheckConfig for a specified service  You can't add, update, or delete a HealthCheckCustomConfig configuration.    For public and private DNS namespaces, note the following:   If you omit any existing DnsRecords or HealthCheckConfig configurations from an UpdateService request, the configurations are deleted from the service.   If you omit an existing HealthCheckCustomConfig configuration from an UpdateService request, the configuration isn't deleted from the service.   When you update settings for a service, AWS Cloud Map also updates the corresponding settings in all the records and health checks that were created by using the specified service.
+   * Submits a request to perform the following operations:   Update the TTL setting for existing DnsRecords configurations   Add, update, or delete HealthCheckConfig for a specified service  You can't add, update, or delete a HealthCheckCustomConfig configuration.    For public and private DNS namespaces, note the following:   If you omit any existing DnsRecords or HealthCheckConfig configurations from an UpdateService request, the configurations are deleted from the service.   If you omit an existing HealthCheckCustomConfig configuration from an UpdateService request, the configuration isn't deleted from the service.   When you update settings for a service, Cloud Map also updates the corresponding settings in all the records and health checks that were created by using the specified service.
    */
   updateService(callback?: (err: AWSError, data: ServiceDiscovery.Types.UpdateServiceResponse) => void): Request<ServiceDiscovery.Types.UpdateServiceResponse, AWSError>;
 }
@@ -229,7 +253,7 @@ declare namespace ServiceDiscovery {
   }
   export interface CreatePrivateDnsNamespaceRequest {
     /**
-     * The name that you want to assign to this namespace. When you create a private DNS namespace, AWS Cloud Map automatically creates an Amazon Route 53 private hosted zone that has the same name as the namespace.
+     * The name that you want to assign to this namespace. When you create a private DNS namespace, Cloud Map automatically creates an Amazon Route 53 private hosted zone that has the same name as the namespace.
      */
     Name: NamespaceNamePrivate;
     /**
@@ -248,6 +272,10 @@ declare namespace ServiceDiscovery {
      * The tags to add to the namespace. Each tag consists of a key and an optional value that you define. Tags keys can be up to 128 characters in length, and tag values can be up to 256 characters in length.
      */
     Tags?: TagList;
+    /**
+     * Properties for the private DNS namespace.
+     */
+    Properties?: PrivateDnsNamespaceProperties;
   }
   export interface CreatePrivateDnsNamespaceResponse {
     /**
@@ -272,6 +300,10 @@ declare namespace ServiceDiscovery {
      * The tags to add to the namespace. Each tag consists of a key and an optional value that you define. Tags keys can be up to 128 characters in length, and tag values can be up to 256 characters in length.
      */
     Tags?: TagList;
+    /**
+     * Properties for the public DNS namespace.
+     */
+    Properties?: PublicDnsNamespaceProperties;
   }
   export interface CreatePublicDnsNamespaceResponse {
     /**
@@ -281,7 +313,7 @@ declare namespace ServiceDiscovery {
   }
   export interface CreateServiceRequest {
     /**
-     * The name that you want to assign to the service. If you want AWS Cloud Map to create an SRV record when you register an instance and you're using a system that requires a specific SRV format, such as HAProxy, specify the following for Name:   Start the name with an underscore (_), such as _exampleservice.   End the name with ._protocol, such as ._tcp.   When you register an instance, AWS Cloud Map creates an SRV record and assigns a name to the record by concatenating the service name and the namespace name (for example,  _exampleservice._tcp.example.com).  For services that are accessible by DNS queries, you can't create multiple services with names that differ only by case (such as EXAMPLE and example). Otherwise, these services have the same DNS name and can't be distinguished. However, if you use a namespace that's only accessible by API calls, then you can create services that with names that differ only by case. 
+     * The name that you want to assign to the service. If you want Cloud Map to create an SRV record when you register an instance and you're using a system that requires a specific SRV format, such as HAProxy, specify the following for Name:   Start the name with an underscore (_), such as _exampleservice.   End the name with ._protocol, such as ._tcp.   When you register an instance, Cloud Map creates an SRV record and assigns a name to the record by concatenating the service name and the namespace name (for example,  _exampleservice._tcp.example.com).  For services that are accessible by DNS queries, you can't create multiple services with names that differ only by case (such as EXAMPLE and example). Otherwise, these services have the same DNS name and can't be distinguished. However, if you use a namespace that's only accessible by API calls, then you can create services that with names that differ only by case. 
      */
     Name: ServiceName;
     /**
@@ -297,11 +329,11 @@ declare namespace ServiceDiscovery {
      */
     Description?: ResourceDescription;
     /**
-     * A complex type that contains information about the Amazon Route 53 records that you want AWS Cloud Map to create when you register an instance. 
+     * A complex type that contains information about the Amazon Route 53 records that you want Cloud Map to create when you register an instance. 
      */
     DnsConfig?: DnsConfig;
     /**
-     *  Public DNS and HTTP namespaces only. A complex type that contains settings for an optional Route 53 health check. If you specify settings for a health check, AWS Cloud Map associates the health check with all the Route 53 DNS records that you specify in DnsConfig.  If you specify a health check configuration, you can specify either HealthCheckCustomConfig or HealthCheckConfig but not both.  For information about the charges for health checks, see AWS Cloud Map Pricing.
+     *  Public DNS and HTTP namespaces only. A complex type that contains settings for an optional Route 53 health check. If you specify settings for a health check, Cloud Map associates the health check with all the Route 53 DNS records that you specify in DnsConfig.  If you specify a health check configuration, you can specify either HealthCheckCustomConfig or HealthCheckConfig but not both.  For information about the charges for health checks, see Cloud Map Pricing.
      */
     HealthCheckConfig?: HealthCheckConfig;
     /**
@@ -356,7 +388,7 @@ declare namespace ServiceDiscovery {
   }
   export interface DeregisterInstanceResponse {
     /**
-     * A value that you can use to determine whether the request completed successfully. For more information, see GetOperation.
+     * A value that you can use to determine whether the request completed successfully. To get the status of the operation, see GetOperation.
      */
     OperationId?: OperationId;
   }
@@ -370,7 +402,7 @@ declare namespace ServiceDiscovery {
      */
     ServiceName: ServiceName;
     /**
-     * The maximum number of instances that you want AWS Cloud Map to return in the response to a DiscoverInstances request. If you don't specify a value for MaxResults, AWS Cloud Map returns up to 100 instances.
+     * The maximum number of instances that you want Cloud Map to return in the response to a DiscoverInstances request. If you don't specify a value for MaxResults, Cloud Map returns up to 100 instances.
      */
     MaxResults?: DiscoverMaxResults;
     /**
@@ -399,33 +431,37 @@ declare namespace ServiceDiscovery {
      */
     NamespaceId?: ResourceId;
     /**
-     * The routing policy that you want to apply to all Route 53 DNS records that AWS Cloud Map creates when you register an instance and specify this service.  If you want to use this service to register instances that create alias records, specify WEIGHTED for the routing policy.  You can specify the following values:  MULTIVALUE  If you define a health check for the service and the health check is healthy, Route 53 returns the applicable value for up to eight instances. For example, suppose that the service includes configurations for one A record and a health check. You use the service to register 10 instances. Route 53 responds to DNS queries with IP addresses for up to eight healthy instances. If fewer than eight instances are healthy, Route 53 responds to every DNS query with the IP addresses for all of the healthy instances. If you don't define a health check for the service, Route 53 assumes that all instances are healthy and returns the values for up to eight instances. For more information about the multivalue routing policy, see Multivalue Answer Routing in the Route 53 Developer Guide.  WEIGHTED  Route 53 returns the applicable value from one randomly selected instance from among the instances that you registered using the same service. Currently, all records have the same weight, so you can't route more or less traffic to any instances. For example, suppose that the service includes configurations for one A record and a health check. You use the service to register 10 instances. Route 53 responds to DNS queries with the IP address for one randomly selected instance from among the healthy instances. If no instances are healthy, Route 53 responds to DNS queries as if all of the instances were healthy. If you don't define a health check for the service, Route 53 assumes that all instances are healthy and returns the applicable value for one randomly selected instance. For more information about the weighted routing policy, see Weighted Routing in the Route 53 Developer Guide.  
+     * The routing policy that you want to apply to all Route 53 DNS records that Cloud Map creates when you register an instance and specify this service.  If you want to use this service to register instances that create alias records, specify WEIGHTED for the routing policy.  You can specify the following values:  MULTIVALUE  If you define a health check for the service and the health check is healthy, Route 53 returns the applicable value for up to eight instances. For example, suppose that the service includes configurations for one A record and a health check. You use the service to register 10 instances. Route 53 responds to DNS queries with IP addresses for up to eight healthy instances. If fewer than eight instances are healthy, Route 53 responds to every DNS query with the IP addresses for all of the healthy instances. If you don't define a health check for the service, Route 53 assumes that all instances are healthy and returns the values for up to eight instances. For more information about the multivalue routing policy, see Multivalue Answer Routing in the Route 53 Developer Guide.  WEIGHTED  Route 53 returns the applicable value from one randomly selected instance from among the instances that you registered using the same service. Currently, all records have the same weight, so you can't route more or less traffic to any instances. For example, suppose that the service includes configurations for one A record and a health check. You use the service to register 10 instances. Route 53 responds to DNS queries with the IP address for one randomly selected instance from among the healthy instances. If no instances are healthy, Route 53 responds to DNS queries as if all of the instances were healthy. If you don't define a health check for the service, Route 53 assumes that all instances are healthy and returns the applicable value for one randomly selected instance. For more information about the weighted routing policy, see Weighted Routing in the Route 53 Developer Guide.  
      */
     RoutingPolicy?: RoutingPolicy;
     /**
-     * An array that contains one DnsRecord object for each Route 53 DNS record that you want AWS Cloud Map to create when you register an instance.
+     * An array that contains one DnsRecord object for each Route 53 DNS record that you want Cloud Map to create when you register an instance.
      */
     DnsRecords: DnsRecordList;
   }
   export interface DnsConfigChange {
     /**
-     * An array that contains one DnsRecord object for each Route 53 record that you want AWS Cloud Map to create when you register an instance.
+     * An array that contains one DnsRecord object for each Route 53 record that you want Cloud Map to create when you register an instance.
      */
     DnsRecords: DnsRecordList;
   }
   export interface DnsProperties {
     /**
-     * The ID for the Route 53 hosted zone that AWS Cloud Map creates when you create a namespace.
+     * The ID for the Route 53 hosted zone that Cloud Map creates when you create a namespace.
      */
     HostedZoneId?: ResourceId;
+    /**
+     * Start of Authority (SOA) record for the hosted zone.
+     */
+    SOA?: SOA;
   }
   export interface DnsRecord {
     /**
-     * The type of the resource, which indicates the type of value that Route 53 returns in response to DNS queries. You can specify values for Type in the following combinations:     A       AAAA       A  and  AAAA       SRV       CNAME     If you want AWS Cloud Map to create a Route 53 alias record when you register an instance, specify A or AAAA for Type. You specify other settings, such as the IP address for A and AAAA records, when you register an instance. For more information, see RegisterInstance. The following values are supported:  A  Route 53 returns the IP address of the resource in IPv4 format, such as 192.0.2.44.  AAAA  Route 53 returns the IP address of the resource in IPv6 format, such as 2001:0db8:85a3:0000:0000:abcd:0001:2345.  CNAME  Route 53 returns the domain name of the resource, such as www.example.com. Note the following:   You specify the domain name that you want to route traffic to when you register an instance. For more information, see Attributes in the topic RegisterInstance.   You must specify WEIGHTED for the value of RoutingPolicy.   You can't specify both CNAME for Type and settings for HealthCheckConfig. If you do, the request will fail with an InvalidInput error.    SRV  Route 53 returns the value for an SRV record. The value for an SRV record uses the following values:  priority weight port service-hostname  Note the following about the values:   The values of priority and weight are both set to 1 and can't be changed.    The value of port comes from the value that you specify for the AWS_INSTANCE_PORT attribute when you submit a RegisterInstance request.    The value of service-hostname is a concatenation of the following values:   The value that you specify for InstanceId when you register an instance.   The name of the service.   The name of the namespace.    For example, if the value of InstanceId is test, the name of the service is backend, and the name of the namespace is example.com, the value of service-hostname is the following:  test.backend.example.com    If you specify settings for an SRV record, note the following:   If you specify values for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both in the RegisterInstance request, AWS Cloud Map automatically creates A and/or AAAA records that have the same name as the value of service-hostname in the SRV record. You can ignore these records.   If you're using a system that requires a specific SRV format, such as HAProxy, see the Name element in the documentation about CreateService for information about how to specify the correct name format.    
+     * The type of the resource, which indicates the type of value that Route 53 returns in response to DNS queries. You can specify values for Type in the following combinations:     A       AAAA       A  and  AAAA       SRV       CNAME     If you want Cloud Map to create a Route 53 alias record when you register an instance, specify A or AAAA for Type. You specify other settings, such as the IP address for A and AAAA records, when you register an instance. For more information, see RegisterInstance. The following values are supported:  A  Route 53 returns the IP address of the resource in IPv4 format, such as 192.0.2.44.  AAAA  Route 53 returns the IP address of the resource in IPv6 format, such as 2001:0db8:85a3:0000:0000:abcd:0001:2345.  CNAME  Route 53 returns the domain name of the resource, such as www.example.com. Note the following:   You specify the domain name that you want to route traffic to when you register an instance. For more information, see Attributes in the topic RegisterInstance.   You must specify WEIGHTED for the value of RoutingPolicy.   You can't specify both CNAME for Type and settings for HealthCheckConfig. If you do, the request will fail with an InvalidInput error.    SRV  Route 53 returns the value for an SRV record. The value for an SRV record uses the following values:  priority weight port service-hostname  Note the following about the values:   The values of priority and weight are both set to 1 and can't be changed.    The value of port comes from the value that you specify for the AWS_INSTANCE_PORT attribute when you submit a RegisterInstance request.   The value of service-hostname is a concatenation of the following values:   The value that you specify for InstanceId when you register an instance.   The name of the service.   The name of the namespace.    For example, if the value of InstanceId is test, the name of the service is backend, and the name of the namespace is example.com, the value of service-hostname is the following:  test.backend.example.com    If you specify settings for an SRV record, note the following:   If you specify values for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both in the RegisterInstance request, Cloud Map automatically creates A and/or AAAA records that have the same name as the value of service-hostname in the SRV record. You can ignore these records.   If you're using a system that requires a specific SRV format, such as HAProxy, see the Name element in the documentation about CreateService for information about how to specify the correct name format.    
      */
     Type: RecordType;
     /**
-     * The amount of time, in seconds, that you want DNS resolvers to cache the settings for this record.  Alias records don't include a TTL because Route 53 uses the TTL for the AWS resource that an alias record routes traffic to. If you include the AWS_ALIAS_DNS_NAME attribute when you submit a RegisterInstance request, the TTL value is ignored. Always specify a TTL for the service; you can use a service to register instances that create either alias or non-alias records. 
+     * The amount of time, in seconds, that you want DNS resolvers to cache the settings for this record.  Alias records don't include a TTL because Route 53 uses the TTL for the Amazon Web Services resource that an alias record routes traffic to. If you include the AWS_ALIAS_DNS_NAME attribute when you submit a RegisterInstance request, the TTL value is ignored. Always specify a TTL for the service; you can use a service to register instances that create either alias or non-alias records. 
      */
     TTL: RecordTTL;
   }
@@ -456,11 +492,11 @@ declare namespace ServiceDiscovery {
      */
     ServiceId: ResourceId;
     /**
-     * An array that contains the IDs of all the instances that you want to get the health status for. If you omit Instances, AWS Cloud Map returns the health status for all the instances that are associated with the specified service.  To get the IDs for the instances that you've registered by using a specified service, submit a ListInstances request. 
+     * An array that contains the IDs of all the instances that you want to get the health status for. If you omit Instances, Cloud Map returns the health status for all the instances that are associated with the specified service.  To get the IDs for the instances that you've registered by using a specified service, submit a ListInstances request. 
      */
     Instances?: InstanceIdList;
     /**
-     * The maximum number of instances that you want AWS Cloud Map to return in the response to a GetInstancesHealthStatus request. If you don't specify a value for MaxResults, AWS Cloud Map returns up to 100 instances.
+     * The maximum number of instances that you want Cloud Map to return in the response to a GetInstancesHealthStatus request. If you don't specify a value for MaxResults, Cloud Map returns up to 100 instances.
      */
     MaxResults?: MaxResults;
     /**
@@ -516,21 +552,21 @@ declare namespace ServiceDiscovery {
   }
   export interface HealthCheckConfig {
     /**
-     * The type of health check that you want to create, which indicates how Route 53 determines whether an endpoint is healthy.  You can't change the value of Type after you create a health check.  You can create the following types of health checks:    HTTP: Route 53 tries to establish a TCP connection. If successful, Route 53 submits an HTTP request and waits for an HTTP status code of 200 or greater and less than 400.    HTTPS: Route 53 tries to establish a TCP connection. If successful, Route 53 submits an HTTPS request and waits for an HTTP status code of 200 or greater and less than 400.  If you specify HTTPS for the value of Type, the endpoint must support TLS v1.0 or later.     TCP: Route 53 tries to establish a TCP connection. If you specify TCP for Type, don't specify a value for ResourcePath.   For more information, see How Route 53 Determines Whether an Endpoint Is Healthy in the Route 53 Developer Guide.
+     * The type of health check that you want to create, which indicates how Route 53 determines whether an endpoint is healthy.  You can't change the value of Type after you create a health check.  You can create the following types of health checks:    HTTP: Route 53 tries to establish a TCP connection. If successful, Route 53 submits an HTTP request and waits for an HTTP status code of 200 or greater and less than 400.    HTTPS: Route 53 tries to establish a TCP connection. If successful, Route 53 submits an HTTPS request and waits for an HTTP status code of 200 or greater and less than 400.  If you specify HTTPS for the value of Type, the endpoint must support TLS v1.0 or later.     TCP: Route 53 tries to establish a TCP connection. If you specify TCP for Type, don't specify a value for ResourcePath.   For more information, see How Route 53 Determines Whether an Endpoint Is Healthy in the Route 53 Developer Guide.
      */
     Type: HealthCheckType;
     /**
-     * The path that you want Route 53 to request when performing health checks. The path can be any value that your endpoint returns an HTTP status code of a 2xx or 3xx format for when the endpoint is healthy. An example file is /docs/route53-health-check.html. Route 53 automatically adds the DNS name for the service. If you don't specify a value for ResourcePath, the default value is /. If you specify TCP for Type, you must not specify a value for ResourcePath.
+     * The path that you want Route 53 to request when performing health checks. The path can be any value that your endpoint returns an HTTP status code of a 2xx or 3xx format for when the endpoint is healthy. An example file is /docs/route53-health-check.html. Route 53 automatically adds the DNS name for the service. If you don't specify a value for ResourcePath, the default value is /. If you specify TCP for Type, you must not specify a value for ResourcePath.
      */
     ResourcePath?: ResourcePath;
     /**
-     * The number of consecutive health checks that an endpoint must pass or fail for Route 53 to change the current status of the endpoint from unhealthy to healthy or the other way around. For more information, see How Route 53 Determines Whether an Endpoint Is Healthy in the Route 53 Developer Guide.
+     * The number of consecutive health checks that an endpoint must pass or fail for Route 53 to change the current status of the endpoint from unhealthy to healthy or the other way around. For more information, see How Route 53 Determines Whether an Endpoint Is Healthy in the Route 53 Developer Guide.
      */
     FailureThreshold?: FailureThreshold;
   }
   export interface HealthCheckCustomConfig {
     /**
-     *  This parameter is no longer supported and is always set to 1. AWS Cloud Map waits for approximately 30 seconds after receiving an UpdateInstanceCustomHealthStatus request before changing the status of the service instance.  The number of 30-second intervals that you want AWS Cloud Map to wait after receiving an UpdateInstanceCustomHealthStatus request before it changes the health status of a service instance. Sending a second or subsequent UpdateInstanceCustomHealthStatus request with the same value before 30 seconds has passed doesn't accelerate the change. AWS Cloud Map still waits 30 seconds after the first request to make the change.
+     *  This parameter is no longer supported and is always set to 1. Cloud Map waits for approximately 30 seconds after receiving an UpdateInstanceCustomHealthStatus request before changing the status of the service instance.  The number of 30-second intervals that you want Cloud Map to wait after receiving an UpdateInstanceCustomHealthStatus request before it changes the health status of a service instance. Sending a second or subsequent UpdateInstanceCustomHealthStatus request with the same value before 30 seconds has passed doesn't accelerate the change. Cloud Map still waits 30 seconds after the first request to make the change.
      */
     FailureThreshold?: FailureThreshold;
   }
@@ -560,6 +596,12 @@ declare namespace ServiceDiscovery {
     Attributes?: Attributes;
   }
   export type HttpInstanceSummaryList = HttpInstanceSummary[];
+  export interface HttpNamespaceChange {
+    /**
+     * An updated description for the HTTP namespace.
+     */
+    Description: ResourceDescription;
+  }
   export interface HttpProperties {
     /**
      * The name of an HTTP namespace.
@@ -568,7 +610,7 @@ declare namespace ServiceDiscovery {
   }
   export interface Instance {
     /**
-     * An identifier that you want to associate with the instance. Note the following:   If the service that's specified by ServiceId includes settings for an SRV record, the value of InstanceId is automatically included as part of the value for the SRV record. For more information, see DnsRecord &gt; Type.   You can use this value to update an existing instance.   To register a new instance, you must specify a value that's unique among instances that you register by using the same service.    If you specify an existing InstanceId and ServiceId, AWS Cloud Map updates the existing DNS records. If there's also an existing health check, AWS Cloud Map deletes the old health check and creates a new one.   The health check isn't deleted immediately, so it will still appear for a while if you submit a ListHealthChecks request, for example.   
+     * An identifier that you want to associate with the instance. Note the following:   If the service that's specified by ServiceId includes settings for an SRV record, the value of InstanceId is automatically included as part of the value for the SRV record. For more information, see DnsRecord &gt; Type.   You can use this value to update an existing instance.   To register a new instance, you must specify a value that's unique among instances that you register by using the same service.    If you specify an existing InstanceId and ServiceId, Cloud Map updates the existing DNS records. If there's also an existing health check, Cloud Map deletes the old health check and creates a new one.   The health check isn't deleted immediately, so it will still appear for a while if you submit a ListHealthChecks request, for example.   
      */
     Id: ResourceId;
     /**
@@ -576,7 +618,7 @@ declare namespace ServiceDiscovery {
      */
     CreatorRequestId?: ResourceId;
     /**
-     * A string map that contains the following information for the service that you specify in ServiceId:   The attributes that apply to the records that are defined in the service.    For each attribute, the applicable value.   Supported attribute keys include the following:  AWS_ALIAS_DNS_NAME  If you want AWS Cloud Map to create a Route 53 alias record that routes traffic to an Elastic Load Balancing load balancer, specify the DNS name that's associated with the load balancer. For information about how to get the DNS name, see AliasTarget-&gt;DNSName in the Route 53 API Reference. Note the following:   The configuration for the service that's specified by ServiceId must include settings for an A record, an AAAA record, or both.   In the service that's specified by ServiceId, the value of RoutingPolicy must be WEIGHTED.   If the service that's specified by ServiceId includes HealthCheckConfig settings, AWS Cloud Map creates the health check, but it won't associate the health check with the alias record.   Auto naming currently doesn't support creating alias records that route traffic to AWS resources other than ELB load balancers.   If you specify a value for AWS_ALIAS_DNS_NAME, don't specify values for any of the AWS_INSTANCE attributes.    AWS_EC2_INSTANCE_ID   HTTP namespaces only. The Amazon EC2 instance ID for the instance. The AWS_INSTANCE_IPV4 attribute contains the primary private IPv4 address.  AWS_INIT_HEALTH_STATUS  If the service configuration includes HealthCheckCustomConfig, you can optionally use AWS_INIT_HEALTH_STATUS to specify the initial status of the custom health check, HEALTHY or UNHEALTHY. If you don't specify a value for AWS_INIT_HEALTH_STATUS, the initial status is HEALTHY.  AWS_INSTANCE_CNAME  If the service configuration includes a CNAME record, the domain name that you want Route 53 to return in response to DNS queries (for example, example.com). This value is required if the service specified by ServiceId includes settings for an CNAME record.  AWS_INSTANCE_IPV4  If the service configuration includes an A record, the IPv4 address that you want Route 53 to return in response to DNS queries (for example, 192.0.2.44). This value is required if the service specified by ServiceId includes settings for an A record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_IPV6  If the service configuration includes an AAAA record, the IPv6 address that you want Route 53 to return in response to DNS queries (for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345). This value is required if the service specified by ServiceId includes settings for an AAAA record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_PORT  If the service includes an SRV record, the value that you want Route 53 to return for the port. If the service includes HealthCheckConfig, the port on the endpoint that you want Route 53 to send requests to.  This value is required if you specified settings for an SRV record or a Route 53 health check when you created the service.  
+     * A string map that contains the following information for the service that you specify in ServiceId:   The attributes that apply to the records that are defined in the service.    For each attribute, the applicable value.   Supported attribute keys include the following:  AWS_ALIAS_DNS_NAME  If you want Cloud Map to create a Route 53 alias record that routes traffic to an Elastic Load Balancing load balancer, specify the DNS name that's associated with the load balancer. For information about how to get the DNS name, see AliasTarget-&gt;DNSName in the Route 53 API Reference. Note the following:   The configuration for the service that's specified by ServiceId must include settings for an A record, an AAAA record, or both.   In the service that's specified by ServiceId, the value of RoutingPolicy must be WEIGHTED.   If the service that's specified by ServiceId includes HealthCheckConfig settings, Cloud Map creates the health check, but it won't associate the health check with the alias record.   Auto naming currently doesn't support creating alias records that route traffic to Amazon Web Services resources other than ELB load balancers.   If you specify a value for AWS_ALIAS_DNS_NAME, don't specify values for any of the AWS_INSTANCE attributes.    AWS_EC2_INSTANCE_ID   HTTP namespaces only. The Amazon EC2 instance ID for the instance. The AWS_INSTANCE_IPV4 attribute contains the primary private IPv4 address.  AWS_INIT_HEALTH_STATUS  If the service configuration includes HealthCheckCustomConfig, you can optionally use AWS_INIT_HEALTH_STATUS to specify the initial status of the custom health check, HEALTHY or UNHEALTHY. If you don't specify a value for AWS_INIT_HEALTH_STATUS, the initial status is HEALTHY.  AWS_INSTANCE_CNAME  If the service configuration includes a CNAME record, the domain name that you want Route 53 to return in response to DNS queries (for example, example.com). This value is required if the service specified by ServiceId includes settings for an CNAME record.  AWS_INSTANCE_IPV4  If the service configuration includes an A record, the IPv4 address that you want Route 53 to return in response to DNS queries (for example, 192.0.2.44). This value is required if the service specified by ServiceId includes settings for an A record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_IPV6  If the service configuration includes an AAAA record, the IPv6 address that you want Route 53 to return in response to DNS queries (for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345). This value is required if the service specified by ServiceId includes settings for an AAAA record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_PORT  If the service includes an SRV record, the value that you want Route 53 to return for the port. If the service includes HealthCheckConfig, the port on the endpoint that you want Route 53 to send requests to.  This value is required if you specified settings for an SRV record or a Route 53 health check when you created the service.  
      */
     Attributes?: Attributes;
   }
@@ -589,7 +631,7 @@ declare namespace ServiceDiscovery {
      */
     Id?: ResourceId;
     /**
-     * A string map that contains the following information:   The attributes that are associated with the instance.    For each attribute, the applicable value.   Supported attribute keys include the following:  AWS_ALIAS_DNS_NAME  For an alias record that routes traffic to an Elastic Load Balancing load balancer, the DNS name that's associated with the load balancer.   AWS_EC2_INSTANCE_ID (HTTP namespaces only)  The Amazon EC2 instance ID for the instance. When the AWS_EC2_INSTANCE_ID attribute is specified, then the AWS_INSTANCE_IPV4 attribute contains the primary private IPv4 address.  AWS_INIT_HEALTH_STATUS  If the service configuration includes HealthCheckCustomConfig, you can optionally use AWS_INIT_HEALTH_STATUS to specify the initial status of the custom health check, HEALTHY or UNHEALTHY. If you don't specify a value for AWS_INIT_HEALTH_STATUS, the initial status is HEALTHY.  AWS_INSTANCE_CNAME  For a CNAME record, the domain name that Route 53 returns in response to DNS queries (for example, example.com).  AWS_INSTANCE_IPV4  For an A record, the IPv4 address that Route 53 returns in response to DNS queries (for example, 192.0.2.44).  AWS_INSTANCE_IPV6  For an AAAA record, the IPv6 address that Route 53 returns in response to DNS queries (for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345).  AWS_INSTANCE_PORT  For an SRV record, the value that Route 53 returns for the port. In addition, if the service includes HealthCheckConfig, the port on the endpoint that Route 53 sends requests to.  
+     * A string map that contains the following information:   The attributes that are associated with the instance.    For each attribute, the applicable value.   Supported attribute keys include the following:  AWS_ALIAS_DNS_NAME  For an alias record that routes traffic to an Elastic Load Balancing load balancer, the DNS name that's associated with the load balancer.   AWS_EC2_INSTANCE_ID (HTTP namespaces only)  The Amazon EC2 instance ID for the instance. When the AWS_EC2_INSTANCE_ID attribute is specified, then the AWS_INSTANCE_IPV4 attribute contains the primary private IPv4 address.  AWS_INIT_HEALTH_STATUS  If the service configuration includes HealthCheckCustomConfig, you can optionally use AWS_INIT_HEALTH_STATUS to specify the initial status of the custom health check, HEALTHY or UNHEALTHY. If you don't specify a value for AWS_INIT_HEALTH_STATUS, the initial status is HEALTHY.  AWS_INSTANCE_CNAME  For a CNAME record, the domain name that Route 53 returns in response to DNS queries (for example, example.com).  AWS_INSTANCE_IPV4  For an A record, the IPv4 address that Route 53 returns in response to DNS queries (for example, 192.0.2.44).  AWS_INSTANCE_IPV6  For an AAAA record, the IPv6 address that Route 53 returns in response to DNS queries (for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345).  AWS_INSTANCE_PORT  For an SRV record, the value that Route 53 returns for the port. In addition, if the service includes HealthCheckConfig, the port on the endpoint that Route 53 sends requests to.  
      */
     Attributes?: Attributes;
   }
@@ -604,7 +646,7 @@ declare namespace ServiceDiscovery {
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of instances that you want AWS Cloud Map to return in the response to a ListInstances request. If you don't specify a value for MaxResults, AWS Cloud Map returns up to 100 instances.
+     * The maximum number of instances that you want Cloud Map to return in the response to a ListInstances request. If you don't specify a value for MaxResults, Cloud Map returns up to 100 instances.
      */
     MaxResults?: MaxResults;
   }
@@ -620,11 +662,11 @@ declare namespace ServiceDiscovery {
   }
   export interface ListNamespacesRequest {
     /**
-     * For the first ListNamespaces request, omit this value. If the response contains NextToken, submit another ListNamespaces request to get the next group of results. Specify the value of NextToken from the previous response in the next request.  AWS Cloud Map gets MaxResults namespaces and then filters them based on the specified criteria. It's possible that no namespaces in the first MaxResults namespaces matched the specified criteria but that subsequent groups of MaxResults namespaces do contain namespaces that match the criteria. 
+     * For the first ListNamespaces request, omit this value. If the response contains NextToken, submit another ListNamespaces request to get the next group of results. Specify the value of NextToken from the previous response in the next request.  Cloud Map gets MaxResults namespaces and then filters them based on the specified criteria. It's possible that no namespaces in the first MaxResults namespaces matched the specified criteria but that subsequent groups of MaxResults namespaces do contain namespaces that match the criteria. 
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of namespaces that you want AWS Cloud Map to return in the response to a ListNamespaces request. If you don't specify a value for MaxResults, AWS Cloud Map returns up to 100 namespaces.
+     * The maximum number of namespaces that you want Cloud Map to return in the response to a ListNamespaces request. If you don't specify a value for MaxResults, Cloud Map returns up to 100 namespaces.
      */
     MaxResults?: MaxResults;
     /**
@@ -638,17 +680,17 @@ declare namespace ServiceDiscovery {
      */
     Namespaces?: NamespaceSummariesList;
     /**
-     * If the response contains NextToken, submit another ListNamespaces request to get the next group of results. Specify the value of NextToken from the previous response in the next request.  AWS Cloud Map gets MaxResults namespaces and then filters them based on the specified criteria. It's possible that no namespaces in the first MaxResults namespaces matched the specified criteria but that subsequent groups of MaxResults namespaces do contain namespaces that match the criteria. 
+     * If the response contains NextToken, submit another ListNamespaces request to get the next group of results. Specify the value of NextToken from the previous response in the next request.  Cloud Map gets MaxResults namespaces and then filters them based on the specified criteria. It's possible that no namespaces in the first MaxResults namespaces matched the specified criteria but that subsequent groups of MaxResults namespaces do contain namespaces that match the criteria. 
      */
     NextToken?: NextToken;
   }
   export interface ListOperationsRequest {
     /**
-     * For the first ListOperations request, omit this value. If the response contains NextToken, submit another ListOperations request to get the next group of results. Specify the value of NextToken from the previous response in the next request.  AWS Cloud Map gets MaxResults operations and then filters them based on the specified criteria. It's possible that no operations in the first MaxResults operations matched the specified criteria but that subsequent groups of MaxResults operations do contain operations that match the criteria. 
+     * For the first ListOperations request, omit this value. If the response contains NextToken, submit another ListOperations request to get the next group of results. Specify the value of NextToken from the previous response in the next request.  Cloud Map gets MaxResults operations and then filters them based on the specified criteria. It's possible that no operations in the first MaxResults operations matched the specified criteria but that subsequent groups of MaxResults operations do contain operations that match the criteria. 
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of items that you want AWS Cloud Map to return in the response to a ListOperations request. If you don't specify a value for MaxResults, AWS Cloud Map returns up to 100 operations.
+     * The maximum number of items that you want Cloud Map to return in the response to a ListOperations request. If you don't specify a value for MaxResults, Cloud Map returns up to 100 operations.
      */
     MaxResults?: MaxResults;
     /**
@@ -662,17 +704,17 @@ declare namespace ServiceDiscovery {
      */
     Operations?: OperationSummaryList;
     /**
-     * If the response contains NextToken, submit another ListOperations request to get the next group of results. Specify the value of NextToken from the previous response in the next request.  AWS Cloud Map gets MaxResults operations and then filters them based on the specified criteria. It's possible that no operations in the first MaxResults operations matched the specified criteria but that subsequent groups of MaxResults operations do contain operations that match the criteria. 
+     * If the response contains NextToken, submit another ListOperations request to get the next group of results. Specify the value of NextToken from the previous response in the next request.  Cloud Map gets MaxResults operations and then filters them based on the specified criteria. It's possible that no operations in the first MaxResults operations matched the specified criteria but that subsequent groups of MaxResults operations do contain operations that match the criteria. 
      */
     NextToken?: NextToken;
   }
   export interface ListServicesRequest {
     /**
-     * For the first ListServices request, omit this value. If the response contains NextToken, submit another ListServices request to get the next group of results. Specify the value of NextToken from the previous response in the next request.  AWS Cloud Map gets MaxResults services and then filters them based on the specified criteria. It's possible that no services in the first MaxResults services matched the specified criteria but that subsequent groups of MaxResults services do contain services that match the criteria. 
+     * For the first ListServices request, omit this value. If the response contains NextToken, submit another ListServices request to get the next group of results. Specify the value of NextToken from the previous response in the next request.  Cloud Map gets MaxResults services and then filters them based on the specified criteria. It's possible that no services in the first MaxResults services matched the specified criteria but that subsequent groups of MaxResults services do contain services that match the criteria. 
      */
     NextToken?: NextToken;
     /**
-     * The maximum number of services that you want AWS Cloud Map to return in the response to a ListServices request. If you don't specify a value for MaxResults, AWS Cloud Map returns up to 100 services.
+     * The maximum number of services that you want Cloud Map to return in the response to a ListServices request. If you don't specify a value for MaxResults, Cloud Map returns up to 100 services.
      */
     MaxResults?: MaxResults;
     /**
@@ -686,7 +728,7 @@ declare namespace ServiceDiscovery {
      */
     Services?: ServiceSummariesList;
     /**
-     * If the response contains NextToken, submit another ListServices request to get the next group of results. Specify the value of NextToken from the previous response in the next request.  AWS Cloud Map gets MaxResults services and then filters them based on the specified criteria. It's possible that no services in the first MaxResults services matched the specified criteria but that subsequent groups of MaxResults services do contain services that match the criteria. 
+     * If the response contains NextToken, submit another ListServices request to get the next group of results. Specify the value of NextToken from the previous response in the next request.  Cloud Map gets MaxResults services and then filters them based on the specified criteria. It's possible that no services in the first MaxResults services matched the specified criteria but that subsequent groups of MaxResults services do contain services that match the criteria. 
      */
     NextToken?: NextToken;
   }
@@ -710,7 +752,7 @@ declare namespace ServiceDiscovery {
      */
     Id?: ResourceId;
     /**
-     * The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the namespace when you create it.
+     * The Amazon Resource Name (ARN) that Cloud Map assigns to the namespace when you create it.
      */
     Arn?: Arn;
     /**
@@ -718,7 +760,7 @@ declare namespace ServiceDiscovery {
      */
     Name?: NamespaceName;
     /**
-     * The type of the namespace. The methods for discovering instances depends on the value that you specify:  HTTP  Instances can be discovered only programmatically, using the AWS Cloud Map DiscoverInstances API.  DNS_PUBLIC  Instances can be discovered using public DNS queries and using the DiscoverInstances API.  DNS_PRIVATE  Instances can be discovered using DNS queries in VPCs and using the DiscoverInstances API.  
+     * The type of the namespace. The methods for discovering instances depends on the value that you specify:  HTTP  Instances can be discovered only programmatically, using the Cloud Map DiscoverInstances API.  DNS_PUBLIC  Instances can be discovered using public DNS queries and using the DiscoverInstances API.  DNS_PRIVATE  Instances can be discovered using DNS queries in VPCs and using the DiscoverInstances API.  
      */
     Type?: NamespaceType;
     /**
@@ -764,7 +806,7 @@ declare namespace ServiceDiscovery {
   export type NamespaceNamePublic = string;
   export interface NamespaceProperties {
     /**
-     * A complex type that contains the ID for the Route 53 hosted zone that AWS Cloud Map creates when you create a namespace.
+     * A complex type that contains the ID for the Route 53 hosted zone that Cloud Map creates when you create a namespace.
      */
     DnsProperties?: DnsProperties;
     /**
@@ -779,11 +821,11 @@ declare namespace ServiceDiscovery {
      */
     Id?: ResourceId;
     /**
-     * The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the namespace when you create it.
+     * The Amazon Resource Name (ARN) that Cloud Map assigns to the namespace when you create it.
      */
     Arn?: Arn;
     /**
-     * The name of the namespace. When you create a namespace, AWS Cloud Map automatically creates a Route 53 hosted zone that has the same name as the namespace.
+     * The name of the namespace. When you create a namespace, Cloud Map automatically creates a Route 53 hosted zone that has the same name as the namespace.
      */
     Name?: NamespaceName;
     /**
@@ -819,7 +861,7 @@ declare namespace ServiceDiscovery {
      */
     Type?: OperationType;
     /**
-     * The status of the operation. Values include the following:  SUBMITTED  This is the initial state that occurs immediately after you submit a request.  PENDING  AWS Cloud Map is performing the operation.  SUCCESS  The operation succeeded.  FAIL  The operation failed. For the failure reason, see ErrorMessage.  
+     * The status of the operation. Values include the following:  SUBMITTED  This is the initial state that occurs immediately after you submit a request.  PENDING  Cloud Map is performing the operation.  SUCCESS  The operation succeeded.  FAIL  The operation failed. For the failure reason, see ErrorMessage.  
      */
     Status?: OperationStatus;
     /**
@@ -867,14 +909,82 @@ declare namespace ServiceDiscovery {
      */
     Id?: OperationId;
     /**
-     * The status of the operation. Values include the following:    SUBMITTED: This is the initial state immediately after you submit a request.    PENDING: AWS Cloud Map is performing the operation.    SUCCESS: The operation succeeded.    FAIL: The operation failed. For the failure reason, see ErrorMessage.  
+     * The status of the operation. Values include the following:    SUBMITTED: This is the initial state immediately after you submit a request.    PENDING: Cloud Map is performing the operation.    SUCCESS: The operation succeeded.    FAIL: The operation failed. For the failure reason, see ErrorMessage.  
      */
     Status?: OperationStatus;
   }
   export type OperationSummaryList = OperationSummary[];
   export type OperationTargetType = "NAMESPACE"|"SERVICE"|"INSTANCE"|string;
   export type OperationTargetsMap = {[key: string]: ResourceId};
-  export type OperationType = "CREATE_NAMESPACE"|"DELETE_NAMESPACE"|"UPDATE_SERVICE"|"REGISTER_INSTANCE"|"DEREGISTER_INSTANCE"|string;
+  export type OperationType = "CREATE_NAMESPACE"|"DELETE_NAMESPACE"|"UPDATE_NAMESPACE"|"UPDATE_SERVICE"|"REGISTER_INSTANCE"|"DEREGISTER_INSTANCE"|string;
+  export interface PrivateDnsNamespaceChange {
+    /**
+     * An updated description for the private DNS namespace.
+     */
+    Description?: ResourceDescription;
+    /**
+     * Properties to be updated in the private DNS namespace.
+     */
+    Properties?: PrivateDnsNamespacePropertiesChange;
+  }
+  export interface PrivateDnsNamespaceProperties {
+    /**
+     * DNS properties for the private DNS namespace.
+     */
+    DnsProperties: PrivateDnsPropertiesMutable;
+  }
+  export interface PrivateDnsNamespacePropertiesChange {
+    /**
+     * Updated DNS properties for the private DNS namespace.
+     */
+    DnsProperties: PrivateDnsPropertiesMutableChange;
+  }
+  export interface PrivateDnsPropertiesMutable {
+    /**
+     * Fields for the Start of Authority (SOA) record for the hosted zone for the private DNS namespace.
+     */
+    SOA: SOA;
+  }
+  export interface PrivateDnsPropertiesMutableChange {
+    /**
+     * Updated fields for the Start of Authority (SOA) record for the hosted zone for the private DNS namespace.
+     */
+    SOA: SOAChange;
+  }
+  export interface PublicDnsNamespaceChange {
+    /**
+     * An updated description for the public DNS namespace.
+     */
+    Description?: ResourceDescription;
+    /**
+     * Properties to be updated in the public DNS namespace.
+     */
+    Properties?: PublicDnsNamespacePropertiesChange;
+  }
+  export interface PublicDnsNamespaceProperties {
+    /**
+     * DNS properties for the public DNS namespace.
+     */
+    DnsProperties: PublicDnsPropertiesMutable;
+  }
+  export interface PublicDnsNamespacePropertiesChange {
+    /**
+     * Updated DNS properties for the hosted zone for the public DNS namespace.
+     */
+    DnsProperties: PublicDnsPropertiesMutableChange;
+  }
+  export interface PublicDnsPropertiesMutable {
+    /**
+     * Start of Authority (SOA) record for the hosted zone for the public DNS namespace.
+     */
+    SOA: SOA;
+  }
+  export interface PublicDnsPropertiesMutableChange {
+    /**
+     * Updated fields for the Start of Authority (SOA) record for the hosted zone for the public DNS namespace.
+     */
+    SOA: SOAChange;
+  }
   export type RecordTTL = number;
   export type RecordType = "SRV"|"A"|"AAAA"|"CNAME"|string;
   export interface RegisterInstanceRequest {
@@ -883,7 +993,7 @@ declare namespace ServiceDiscovery {
      */
     ServiceId: ResourceId;
     /**
-     * An identifier that you want to associate with the instance. Note the following:   If the service that's specified by ServiceId includes settings for an SRV record, the value of InstanceId is automatically included as part of the value for the SRV record. For more information, see DnsRecord &gt; Type.   You can use this value to update an existing instance.   To register a new instance, you must specify a value that's unique among instances that you register by using the same service.    If you specify an existing InstanceId and ServiceId, AWS Cloud Map updates the existing DNS records, if any. If there's also an existing health check, AWS Cloud Map deletes the old health check and creates a new one.   The health check isn't deleted immediately, so it will still appear for a while if you submit a ListHealthChecks request, for example.   
+     * An identifier that you want to associate with the instance. Note the following:   If the service that's specified by ServiceId includes settings for an SRV record, the value of InstanceId is automatically included as part of the value for the SRV record. For more information, see DnsRecord &gt; Type.   You can use this value to update an existing instance.   To register a new instance, you must specify a value that's unique among instances that you register by using the same service.    If you specify an existing InstanceId and ServiceId, Cloud Map updates the existing DNS records, if any. If there's also an existing health check, Cloud Map deletes the old health check and creates a new one.   The health check isn't deleted immediately, so it will still appear for a while if you submit a ListHealthChecks request, for example.   
      */
     InstanceId: InstanceId;
     /**
@@ -891,7 +1001,7 @@ declare namespace ServiceDiscovery {
      */
     CreatorRequestId?: ResourceId;
     /**
-     * A string map that contains the following information for the service that you specify in ServiceId:   The attributes that apply to the records that are defined in the service.    For each attribute, the applicable value.   Supported attribute keys include the following:  AWS_ALIAS_DNS_NAME  If you want AWS Cloud Map to create an Amazon Route 53 alias record that routes traffic to an Elastic Load Balancing load balancer, specify the DNS name that's associated with the load balancer. For information about how to get the DNS name, see "DNSName" in the topic AliasTarget in the Route 53 API Reference. Note the following:   The configuration for the service that's specified by ServiceId must include settings for an A record, an AAAA record, or both.   In the service that's specified by ServiceId, the value of RoutingPolicy must be WEIGHTED.   If the service that's specified by ServiceId includes HealthCheckConfig settings, AWS Cloud Map will create the Route 53 health check, but it doesn't associate the health check with the alias record.   Auto naming currently doesn't support creating alias records that route traffic to AWS resources other than Elastic Load Balancing load balancers.   If you specify a value for AWS_ALIAS_DNS_NAME, don't specify values for any of the AWS_INSTANCE attributes.    AWS_EC2_INSTANCE_ID   HTTP namespaces only. The Amazon EC2 instance ID for the instance. If the AWS_EC2_INSTANCE_ID attribute is specified, then the only other attribute that can be specified is AWS_INIT_HEALTH_STATUS. When the AWS_EC2_INSTANCE_ID attribute is specified, then the AWS_INSTANCE_IPV4 attribute will be filled out with the primary private IPv4 address.  AWS_INIT_HEALTH_STATUS  If the service configuration includes HealthCheckCustomConfig, you can optionally use AWS_INIT_HEALTH_STATUS to specify the initial status of the custom health check, HEALTHY or UNHEALTHY. If you don't specify a value for AWS_INIT_HEALTH_STATUS, the initial status is HEALTHY.  AWS_INSTANCE_CNAME  If the service configuration includes a CNAME record, the domain name that you want Route 53 to return in response to DNS queries (for example, example.com). This value is required if the service specified by ServiceId includes settings for an CNAME record.  AWS_INSTANCE_IPV4  If the service configuration includes an A record, the IPv4 address that you want Route 53 to return in response to DNS queries (for example, 192.0.2.44). This value is required if the service specified by ServiceId includes settings for an A record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_IPV6  If the service configuration includes an AAAA record, the IPv6 address that you want Route 53 to return in response to DNS queries (for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345). This value is required if the service specified by ServiceId includes settings for an AAAA record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_PORT  If the service includes an SRV record, the value that you want Route 53 to return for the port. If the service includes HealthCheckConfig, the port on the endpoint that you want Route 53 to send requests to.  This value is required if you specified settings for an SRV record or a Route 53 health check when you created the service.  Custom attributes  You can add up to 30 custom attributes. For each key-value pair, the maximum length of the attribute name is 255 characters, and the maximum length of the attribute value is 1,024 characters. The total size of all provided attributes (sum of all keys and values) must not exceed 5,000 characters.  
+     * A string map that contains the following information for the service that you specify in ServiceId:   The attributes that apply to the records that are defined in the service.    For each attribute, the applicable value.   Supported attribute keys include the following:  AWS_ALIAS_DNS_NAME  If you want Cloud Map to create an Amazon Route 53 alias record that routes traffic to an Elastic Load Balancing load balancer, specify the DNS name that's associated with the load balancer. For information about how to get the DNS name, see "DNSName" in the topic AliasTarget in the Route 53 API Reference. Note the following:   The configuration for the service that's specified by ServiceId must include settings for an A record, an AAAA record, or both.   In the service that's specified by ServiceId, the value of RoutingPolicy must be WEIGHTED.   If the service that's specified by ServiceId includes HealthCheckConfig settings, Cloud Map will create the Route 53 health check, but it doesn't associate the health check with the alias record.   Auto naming currently doesn't support creating alias records that route traffic to Amazon Web Services resources other than Elastic Load Balancing load balancers.   If you specify a value for AWS_ALIAS_DNS_NAME, don't specify values for any of the AWS_INSTANCE attributes.    AWS_EC2_INSTANCE_ID   HTTP namespaces only. The Amazon EC2 instance ID for the instance. If the AWS_EC2_INSTANCE_ID attribute is specified, then the only other attribute that can be specified is AWS_INIT_HEALTH_STATUS. When the AWS_EC2_INSTANCE_ID attribute is specified, then the AWS_INSTANCE_IPV4 attribute will be filled out with the primary private IPv4 address.  AWS_INIT_HEALTH_STATUS  If the service configuration includes HealthCheckCustomConfig, you can optionally use AWS_INIT_HEALTH_STATUS to specify the initial status of the custom health check, HEALTHY or UNHEALTHY. If you don't specify a value for AWS_INIT_HEALTH_STATUS, the initial status is HEALTHY.  AWS_INSTANCE_CNAME  If the service configuration includes a CNAME record, the domain name that you want Route 53 to return in response to DNS queries (for example, example.com). This value is required if the service specified by ServiceId includes settings for an CNAME record.  AWS_INSTANCE_IPV4  If the service configuration includes an A record, the IPv4 address that you want Route 53 to return in response to DNS queries (for example, 192.0.2.44). This value is required if the service specified by ServiceId includes settings for an A record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_IPV6  If the service configuration includes an AAAA record, the IPv6 address that you want Route 53 to return in response to DNS queries (for example, 2001:0db8:85a3:0000:0000:abcd:0001:2345). This value is required if the service specified by ServiceId includes settings for an AAAA record. If the service includes settings for an SRV record, you must specify a value for AWS_INSTANCE_IPV4, AWS_INSTANCE_IPV6, or both.  AWS_INSTANCE_PORT  If the service includes an SRV record, the value that you want Route 53 to return for the port. If the service includes HealthCheckConfig, the port on the endpoint that you want Route 53 to send requests to.  This value is required if you specified settings for an SRV record or a Route 53 health check when you created the service.  Custom attributes  You can add up to 30 custom attributes. For each key-value pair, the maximum length of the attribute name is 255 characters, and the maximum length of the attribute value is 1,024 characters. The total size of all provided attributes (sum of all keys and values) must not exceed 5,000 characters.  
      */
     Attributes: Attributes;
   }
@@ -906,13 +1016,25 @@ declare namespace ServiceDiscovery {
   export type ResourceId = string;
   export type ResourcePath = string;
   export type RoutingPolicy = "MULTIVALUE"|"WEIGHTED"|string;
+  export interface SOA {
+    /**
+     * The time to live (TTL) for purposes of negative caching.
+     */
+    TTL: RecordTTL;
+  }
+  export interface SOAChange {
+    /**
+     * The updated time to live (TTL) for purposes of negative caching.
+     */
+    TTL: RecordTTL;
+  }
   export interface Service {
     /**
-     * The ID that AWS Cloud Map assigned to the service when you created it.
+     * The ID that Cloud Map assigned to the service when you created it.
      */
     Id?: ResourceId;
     /**
-     * The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the service when you create it.
+     * The Amazon Resource Name (ARN) that Cloud Map assigns to the service when you create it.
      */
     Arn?: Arn;
     /**
@@ -932,7 +1054,7 @@ declare namespace ServiceDiscovery {
      */
     InstanceCount?: ResourceCount;
     /**
-     * A complex type that contains information about the Route 53 DNS records that you want AWS Cloud Map to create when you register an instance.
+     * A complex type that contains information about the Route 53 DNS records that you want Cloud Map to create when you register an instance.
      */
     DnsConfig?: DnsConfig;
     /**
@@ -940,7 +1062,7 @@ declare namespace ServiceDiscovery {
      */
     Type?: ServiceType;
     /**
-     *  Public DNS and HTTP namespaces only. A complex type that contains settings for an optional health check. If you specify settings for a health check, AWS Cloud Map associates the health check with the records that you specify in DnsConfig. For information about the charges for health checks, see Amazon Route 53 Pricing.
+     *  Public DNS and HTTP namespaces only. A complex type that contains settings for an optional health check. If you specify settings for a health check, Cloud Map associates the health check with the records that you specify in DnsConfig. For information about the charges for health checks, see Amazon Route 53 Pricing.
      */
     HealthCheckConfig?: HealthCheckConfig;
     /**
@@ -962,11 +1084,11 @@ declare namespace ServiceDiscovery {
      */
     Description?: ResourceDescription;
     /**
-     * Information about the Route 53 DNS records that you want AWS Cloud Map to create when you register an instance.
+     * Information about the Route 53 DNS records that you want Cloud Map to create when you register an instance.
      */
     DnsConfig?: DnsConfigChange;
     /**
-     *  Public DNS and HTTP namespaces only. Settings for an optional health check. If you specify settings for a health check, AWS Cloud Map associates the health check with the records that you specify in DnsConfig.
+     *  Public DNS and HTTP namespaces only. Settings for an optional health check. If you specify settings for a health check, Cloud Map associates the health check with the records that you specify in DnsConfig.
      */
     HealthCheckConfig?: HealthCheckConfig;
   }
@@ -990,11 +1112,11 @@ declare namespace ServiceDiscovery {
   export type ServiceSummariesList = ServiceSummary[];
   export interface ServiceSummary {
     /**
-     * The ID that AWS Cloud Map assigned to the service when you created it.
+     * The ID that Cloud Map assigned to the service when you created it.
      */
     Id?: ResourceId;
     /**
-     * The Amazon Resource Name (ARN) that AWS Cloud Map assigns to the service when you create it.
+     * The Amazon Resource Name (ARN) that Cloud Map assigns to the service when you create it.
      */
     Arn?: Arn;
     /**
@@ -1014,11 +1136,11 @@ declare namespace ServiceDiscovery {
      */
     InstanceCount?: ResourceCount;
     /**
-     * Information about the Route 53 DNS records that you want AWS Cloud Map to create when you register an instance.
+     * Information about the Route 53 DNS records that you want Cloud Map to create when you register an instance.
      */
     DnsConfig?: DnsConfig;
     /**
-     *  Public DNS and HTTP namespaces only. Settings for an optional health check. If you specify settings for a health check, AWS Cloud Map associates the health check with the records that you specify in DnsConfig.
+     *  Public DNS and HTTP namespaces only. Settings for an optional health check. If you specify settings for a health check, Cloud Map associates the health check with the records that you specify in DnsConfig.
      */
     HealthCheckConfig?: HealthCheckConfig;
     /**
@@ -1071,6 +1193,26 @@ declare namespace ServiceDiscovery {
   }
   export interface UntagResourceResponse {
   }
+  export interface UpdateHttpNamespaceRequest {
+    /**
+     * The ID of the namespace that you want to update.
+     */
+    Id: ResourceId;
+    /**
+     * A unique string that identifies the request and that allows failed UpdateHttpNamespace requests to be retried without the risk of running the operation twice. UpdaterRequestId can be any unique string (for example, a date/timestamp).
+     */
+    UpdaterRequestId?: ResourceId;
+    /**
+     * Updated properties for the the HTTP namespace.
+     */
+    Namespace: HttpNamespaceChange;
+  }
+  export interface UpdateHttpNamespaceResponse {
+    /**
+     * A value that you can use to determine whether the request completed successfully. To get the status of the operation, see GetOperation.
+     */
+    OperationId?: OperationId;
+  }
   export interface UpdateInstanceCustomHealthStatusRequest {
     /**
      * The ID of the service that includes the configuration for the custom health check that you want to change the status for.
@@ -1084,6 +1226,46 @@ declare namespace ServiceDiscovery {
      * The new status of the instance, HEALTHY or UNHEALTHY.
      */
     Status: CustomHealthStatus;
+  }
+  export interface UpdatePrivateDnsNamespaceRequest {
+    /**
+     * The ID of the namespace that you want to update.
+     */
+    Id: ResourceId;
+    /**
+     * A unique string that identifies the request and that allows failed UpdatePrivateDnsNamespace requests to be retried without the risk of running the operation twice. UpdaterRequestId can be any unique string (for example, a date/timestamp).
+     */
+    UpdaterRequestId?: ResourceId;
+    /**
+     * Updated properties for the private DNS namespace.
+     */
+    Namespace: PrivateDnsNamespaceChange;
+  }
+  export interface UpdatePrivateDnsNamespaceResponse {
+    /**
+     * A value that you can use to determine whether the request completed successfully. To get the status of the operation, see GetOperation.
+     */
+    OperationId?: OperationId;
+  }
+  export interface UpdatePublicDnsNamespaceRequest {
+    /**
+     * The ID of the namespace being updated.
+     */
+    Id: ResourceId;
+    /**
+     * A unique string that identifies the request and that allows failed UpdatePublicDnsNamespace requests to be retried without the risk of running the operation twice. UpdaterRequestId can be any unique string (for example, a date/timestamp).
+     */
+    UpdaterRequestId?: ResourceId;
+    /**
+     * Updated properties for the public DNS namespace.
+     */
+    Namespace: PublicDnsNamespaceChange;
+  }
+  export interface UpdatePublicDnsNamespaceResponse {
+    /**
+     * A value that you can use to determine whether the request completed successfully. To get the status of the operation, see GetOperation.
+     */
+    OperationId?: OperationId;
   }
   export interface UpdateServiceRequest {
     /**
