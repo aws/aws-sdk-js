@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.937.0-->
+<!--LATEST=2.938.0-->
 <!--ENTRYINSERT-->
+
+## 2.938.0
+* feature: EC2: Adding a new reserved field to support future infrastructure improvements for Amazon EC2 Fleet.
+* feature: SageMaker: SageMaker model registry now supports up to 5 containers and associated environment variables.
 
 ## 2.937.0
 * feature: AutoScaling: Amazon EC2 Auto Scaling infrastructure improvements and optimizations.
