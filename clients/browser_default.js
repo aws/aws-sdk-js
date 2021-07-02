@@ -68,6 +68,7 @@ module.exports = {
   WorkDocs: require('./workdocs'),
   LexModelBuildingService: require('./lexmodelbuildingservice'),
   Athena: require('./athena'),
+  CloudHSMV2: require('./cloudhsmv2'),
   Pricing: require('./pricing'),
   CostExplorer: require('./costexplorer'),
   MediaStoreData: require('./mediastoredata'),

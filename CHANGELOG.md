@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.938.0-->
+<!--LATEST=2.939.0-->
 <!--ENTRYINSERT-->
+
+## 2.939.0
+* feature: EC2: This release removes network-insights-boundary
+* feature: cloudhsmv2: Enable CORS
 
 ## 2.938.0
 * feature: EC2: Adding a new reserved field to support future infrastructure improvements for Amazon EC2 Fleet.
