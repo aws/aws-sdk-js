@@ -947,7 +947,7 @@ declare namespace Mgn {
   }
   export type ReplicationConfigurationDataPlaneRouting = "PRIVATE_IP"|"PUBLIC_IP"|string;
   export type ReplicationConfigurationDefaultLargeStagingDiskType = "GP2"|"ST1"|string;
-  export type ReplicationConfigurationEbsEncryption = "NONE"|"DEFAULT"|"CUSTOM"|string;
+  export type ReplicationConfigurationEbsEncryption = "DEFAULT"|"CUSTOM"|string;
   export interface ReplicationConfigurationReplicatedDisk {
     /**
      * Replication Configuration replicated disk device name.

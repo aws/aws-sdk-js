@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.939.0-->
+<!--LATEST=2.940.0-->
 <!--ENTRYINSERT-->
+
+## 2.940.0
+* feature: EKS: Adding new error code UnsupportedAddonModification for Addons in EKS
+* feature: Imagebuilder: Adds support for specifying parameters to customize components for recipes. Expands configuration of the Amazon EC2 instances that are used for building and testing images, including the ability to specify commands to run on launch, and more control over installation and removal of the SSM agent.
+* feature: Lambda: Added support for AmazonMQRabbitMQ as an event source. Added support for VIRTUAL_HOST as SourceAccessType for streams event source mappings.
+* feature: Mgn: Bug fix: Remove not supported EBS encryption type "NONE"
 
 ## 2.939.0
 * feature: EC2: This release removes network-insights-boundary

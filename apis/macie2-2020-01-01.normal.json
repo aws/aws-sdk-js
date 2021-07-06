@@ -376,7 +376,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": " <p>Creates sample findings.</p>"
+      "documentation": "<p>Creates sample findings.</p>"
     },
     "DeclineInvitations": {
       "name": "DeclineInvitations",
@@ -744,7 +744,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Retrieves the Amazon Macie configuration settings for an AWS organization.</p>"
+      "documentation": "<p>Retrieves the Amazon Macie configuration settings for an Amazon Web Services organization.</p>"
     },
     "DisableMacie": {
       "name": "DisableMacie",
@@ -836,7 +836,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Disables an account as the delegated Amazon Macie administrator account for an AWS organization.</p>"
+      "documentation": "<p>Disables an account as the delegated Amazon Macie administrator account for an Amazon Web Services organization.</p>"
     },
     "DisassociateFromAdministratorAccount": {
       "name": "DisassociateFromAdministratorAccount",
@@ -1065,7 +1065,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Designates an account as the delegated Amazon Macie administrator account for an AWS organization.</p>"
+      "documentation": "<p>Designates an account as the delegated Amazon Macie administrator account for an Amazon Web Services organization.</p>"
     },
     "GetAdministratorAccount": {
       "name": "GetAdministratorAccount",
@@ -1432,7 +1432,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Retrieves the configuration settings for publishing findings to AWS Security Hub.</p>"
+      "documentation": "<p>Retrieves the configuration settings for publishing findings to Security Hub.</p>"
     },
     "GetInvitationsCount": {
       "name": "GetInvitationsCount",
@@ -1846,7 +1846,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": " <p>Retrieves a subset of information about one or more findings.</p>"
+      "documentation": "<p>Retrieves a subset of information about one or more findings.</p>"
     },
     "ListFindingsFilters": {
       "name": "ListFindingsFilters",
@@ -2030,7 +2030,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Retrieves information about the delegated Amazon Macie administrator account for an AWS organization.</p>"
+      "documentation": "<p>Retrieves information about the delegated Amazon Macie administrator account for an Amazon Web Services organization.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -2139,7 +2139,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Updates the configuration settings for publishing findings to AWS Security Hub.</p>"
+      "documentation": "<p>Updates the configuration settings for publishing findings to Security Hub.</p>"
     },
     "SearchResources": {
       "name": "SearchResources",
@@ -2185,7 +2185,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Retrieves (queries) statistical data and other information about AWS resources that Amazon Macie monitors and analyzes.</p>"
+      "documentation": "<p>Retrieves (queries) statistical data and other information about Amazon Web Services resources that Amazon Macie monitors and analyzes.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -2495,7 +2495,7 @@
           "documentation": "<p>The request failed because it conflicts with the current state of the specified resource.</p>"
         }
       ],
-      "documentation": "<p>Updates the Amazon Macie configuration settings for an AWS organization.</p>"
+      "documentation": "<p>Updates the Amazon Macie configuration settings for an Amazon Web Services organization.</p>"
     }
   },
   "shapes": {
@@ -2505,7 +2505,7 @@
         "administratorAccountId": {
           "shape": "__string",
           "locationName": "administratorAccountId",
-          "documentation": "<p>The AWS account ID for the account that sent the invitation.</p>"
+          "documentation": "<p>The Amazon Web Services account ID for the account that sent the invitation.</p>"
         },
         "invitationId": {
           "shape": "__string",
@@ -2515,7 +2515,7 @@
         "masterAccount": {
           "shape": "__string",
           "locationName": "masterAccount",
-          "documentation": "<p>(Deprecated) The AWS account ID for the account that sent the invitation. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.</p>"
+          "documentation": "<p>(Deprecated) The Amazon Web Services account ID for the account that sent the invitation. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.</p>"
         }
       },
       "required": [
@@ -2548,7 +2548,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The AWS account ID for the account.</p>"
+          "documentation": "<p>The Amazon Web Services account ID for the account.</p>"
         },
         "email": {
           "shape": "__string",
@@ -2556,7 +2556,7 @@
           "documentation": "<p>The email address for the account.</p>"
         }
       },
-      "documentation": "<p>Specifies details for an account to associate with an Amazon Macie administrator account.</p>",
+      "documentation": "<p>Specifies the details of an account to associate with an Amazon Macie administrator account.</p>",
       "required": [
         "email",
         "accountId"
@@ -2568,7 +2568,7 @@
         "blockPublicAccess": {
           "shape": "BlockPublicAccess",
           "locationName": "blockPublicAccess",
-          "documentation": "<p>The block public access settings for the AWS account that owns the bucket.</p>"
+          "documentation": "<p>The block public access settings for the Amazon Web Services account that owns the bucket.</p>"
         }
       },
       "documentation": "<p>Provides information about the account-level permissions settings that apply to an S3 bucket.</p>"
@@ -2579,7 +2579,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The AWS account ID for the account.</p>"
+          "documentation": "<p>The Amazon Web Services account ID for the account.</p>"
         },
         "status": {
           "shape": "AdminStatus",
@@ -2587,11 +2587,11 @@
           "documentation": "<p>The current status of the account as the delegated administrator of Amazon Macie for the organization.</p>"
         }
       },
-      "documentation": "<p>Provides information about the delegated Amazon Macie administrator account for an AWS organization.</p>"
+      "documentation": "<p>Provides information about the delegated Amazon Macie administrator account for an Amazon Web Services organization.</p>"
     },
     "AdminStatus": {
       "type": "string",
-      "documentation": "<p>The current status of an account as the delegated Amazon Macie administrator account for an AWS organization. Possible values are:</p>",
+      "documentation": "<p>The current status of an account as the delegated Amazon Macie administrator account for an Amazon Web Services organization. Possible values are:</p>",
       "enum": [
         "ENABLED",
         "DISABLING_IN_PROGRESS"
@@ -2616,7 +2616,7 @@
         "apiServiceName": {
           "shape": "__string",
           "locationName": "apiServiceName",
-          "documentation": "<p>The URL of the AWS service that provides the operation, for example: s3.amazonaws.com.</p>"
+          "documentation": "<p>The URL of the Amazon Web Service that provides the operation, for example: s3.amazonaws.com.</p>"
         },
         "firstSeen": {
           "shape": "__timestampIso8601",
@@ -2637,12 +2637,12 @@
         "accessKeyId": {
           "shape": "__string",
           "locationName": "accessKeyId",
-          "documentation": "<p>The AWS access key ID that identifies the credentials.</p>"
+          "documentation": "<p>The Amazon Web Services access key ID that identifies the credentials.</p>"
         },
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The unique identifier for the AWS account that owns the entity that was used to get the credentials.</p>"
+          "documentation": "<p>The unique identifier for the Amazon Web Services account that owns the entity that was used to get the credentials.</p>"
         },
         "arn": {
           "shape": "__string",
@@ -2660,7 +2660,7 @@
           "documentation": "<p>The details of the session that was created for the credentials, including the entity that issued the session.</p>"
         }
       },
-      "documentation": "<p>Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the AssumeRole operation of the AWS Security Token Service (AWS STS) API.</p>"
+      "documentation": "<p>Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the AssumeRole operation of the Security Token Service (STS) API.</p>"
     },
     "AwsAccount": {
       "type": "structure",
@@ -2668,7 +2668,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The unique identifier for the AWS account.</p>"
+          "documentation": "<p>The unique identifier for the Amazon Web Services account.</p>"
         },
         "principalId": {
           "shape": "__string",
@@ -2676,7 +2676,7 @@
           "documentation": "<p>The unique identifier for the entity that performed the action.</p>"
         }
       },
-      "documentation": "<p>Provides information about an AWS account and entity that performed an action on an affected resource. The action was performed using the credentials for an AWS account other than your own account.</p>"
+      "documentation": "<p>Provides information about an Amazon Web Services account and entity that performed an action on an affected resource. The action was performed using the credentials for an Amazon Web Services account other than your own account.</p>"
     },
     "AwsService": {
       "type": "structure",
@@ -2684,10 +2684,10 @@
         "invokedBy": {
           "shape": "__string",
           "locationName": "invokedBy",
-          "documentation": "<p>The name of the AWS service that performed the action.</p>"
+          "documentation": "<p>The name of the Amazon Web Service that performed the action.</p>"
         }
       },
-      "documentation": "<p>Provides information about an AWS service that performed an action on an affected resource.</p>"
+      "documentation": "<p>Provides information about an Amazon Web Service that performed an action on an affected resource.</p>"
     },
     "BatchGetCustomDataIdentifierSummary": {
       "type": "structure",
@@ -2808,7 +2808,7 @@
         "kmsManaged": {
           "shape": "__long",
           "locationName": "kmsManaged",
-          "documentation": " <p>The total number of buckets that use an AWS Key Management Service (AWS KMS) customer master key (CMK) to encrypt new objects by default. These buckets use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS) by default.</p>"
+          "documentation": " <p>The total number of buckets that use an Key Management Service (KMS) customer master key (CMK) to encrypt new objects by default. These buckets use Amazon Web Services managed KMS encryption (AWS-KMS) or customer managed KMS encryption (SSE-KMS) by default.</p>"
         },
         "s3Managed": {
           "shape": "__long",
@@ -2834,25 +2834,25 @@
         "external": {
           "shape": "__long",
           "locationName": "external",
-          "documentation": "<p>The total number of buckets that are shared with an AWS account that isn't part of the same Amazon Macie organization.</p>"
+          "documentation": "<p>The total number of buckets that are shared with an Amazon Web Services account that isn't part of the same Amazon Macie organization.</p>"
         },
         "internal": {
           "shape": "__long",
           "locationName": "internal",
-          "documentation": "<p>The total number of buckets that are shared with an AWS account that's part of the same Amazon Macie organization.</p>"
+          "documentation": "<p>The total number of buckets that are shared with an Amazon Web Services account that's part of the same Amazon Macie organization.</p>"
         },
         "notShared": {
           "shape": "__long",
           "locationName": "notShared",
-          "documentation": "<p>The total number of buckets that aren't shared with other AWS accounts.</p>"
+          "documentation": "<p>The total number of buckets that aren't shared with other Amazon Web Services accounts.</p>"
         },
         "unknown": {
           "shape": "__long",
           "locationName": "unknown",
-          "documentation": "<p>The total number of buckets that Amazon Macie wasn't able to evaluate shared access settings for. Macie can't determine whether these buckets are shared with other AWS accounts.</p>"
+          "documentation": "<p>The total number of buckets that Amazon Macie wasn't able to evaluate shared access settings for. Macie can't determine whether these buckets are shared with other Amazon Web Services accounts.</p>"
         }
       },
-      "documentation": "<p>Provides information about the number of S3 buckets that are or aren't shared with other AWS accounts.</p>"
+      "documentation": "<p>Provides information about the number of S3 buckets that are or aren't shared with other Amazon Web Services accounts.</p>"
     },
     "BucketCountPolicyAllowsUnencryptedObjectUploads": {
       "type": "structure",
@@ -2953,7 +2953,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The unique identifier for the AWS account that owns the bucket.</p>"
+          "documentation": "<p>The unique identifier for the Amazon Web Services account that owns the bucket.</p>"
         },
         "allowsUnencryptedObjectUploads": {
           "shape": "AllowsUnencryptedObjectUploads",
@@ -3013,12 +3013,12 @@
         "region": {
           "shape": "__string",
           "locationName": "region",
-          "documentation": "<p>The AWS Region that hosts the bucket.</p>"
+          "documentation": "<p>The Amazon Web Services Region that hosts the bucket.</p>"
         },
         "replicationDetails": {
           "shape": "ReplicationDetails",
           "locationName": "replicationDetails",
-          "documentation": "<p>Specifies whether the bucket is configured to replicate one or more objects to buckets for other AWS accounts and, if so, which accounts.</p>"
+          "documentation": "<p>Specifies whether the bucket is configured to replicate one or more objects to buckets for other Amazon Web Services accounts and, if so, which accounts.</p>"
         },
         "serverSideEncryption": {
           "shape": "BucketServerSideEncryption",
@@ -3028,7 +3028,7 @@
         "sharedAccess": {
           "shape": "SharedAccess",
           "locationName": "sharedAccess",
-          "documentation": " <p>Specifies whether the bucket is shared with another AWS account. Possible values are:</p> <ul><li><p>EXTERNAL - The bucket is shared with an AWS account that isn't part of the same Amazon Macie organization.</p></li> <li><p>INTERNAL - The bucket is shared with an AWS account that's part of the same Amazon Macie organization.</p></li> <li><p>NOT_SHARED - The bucket isn't shared with other AWS accounts.</p></li> <li><p>UNKNOWN - Amazon Macie wasn't able to evaluate the shared access settings for the bucket.</p></li></ul>"
+          "documentation": " <p>Specifies whether the bucket is shared with another Amazon Web Services account. Possible values are:</p> <ul><li><p>EXTERNAL - The bucket is shared with an Amazon Web Services account that isn't part of the same Amazon Macie organization.</p></li> <li><p>INTERNAL - The bucket is shared with an Amazon Web Services account that's part of the same Amazon Macie organization.</p></li> <li><p>NOT_SHARED - The bucket isn't shared with other Amazon Web Services accounts.</p></li> <li><p>UNKNOWN - Amazon Macie wasn't able to evaluate the shared access settings for the bucket.</p></li></ul>"
         },
         "sizeInBytes": {
           "shape": "__long",
@@ -3117,12 +3117,12 @@
         "kmsMasterKeyId": {
           "shape": "__string",
           "locationName": "kmsMasterKeyId",
-          "documentation": "<p>The Amazon Resource Name (ARN) or unique identifier (key ID) for the AWS Key Management Service (AWS KMS) customer master key (CMK) that's used by default to encrypt objects that are added to the bucket. This value is null if the bucket uses an Amazon S3 managed key to encrypt new objects or the bucket doesn't encrypt new objects by default.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) or unique identifier (key ID) for the Key Management Service (KMS) customer master key (CMK) that's used by default to encrypt objects that are added to the bucket. This value is null if the bucket uses an Amazon S3 managed key to encrypt new objects or the bucket doesn't encrypt new objects by default.</p>"
         },
         "type": {
           "shape": "Type",
           "locationName": "type",
-          "documentation": "<p>The type of server-side encryption that's used by default when storing new objects in the bucket. Possible values are:</p> <ul><li><p>AES256 - New objects are encrypted with an Amazon S3 managed key and use Amazon S3 managed encryption (SSE-S3).</p></li> <li><p>aws:kms - New objects are encrypted with an AWS KMS CMK, specified by the kmsMasterKeyId property, and use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).</p></li> <li><p>NONE - New objects aren't encrypted by default. Default encryption is disabled for the bucket.</p></li></ul>"
+          "documentation": "<p>The type of server-side encryption that's used by default when storing new objects in the bucket. Possible values are:</p> <ul><li><p>AES256 - New objects are encrypted with an Amazon S3 managed key and use Amazon S3 managed encryption (SSE-S3).</p></li> <li><p>aws:kms - New objects are encrypted with an KMS CMK, specified by the kmsMasterKeyId property, and use Amazon Web Services managed KMS encryption (AWS-KMS) or customer managed KMS encryption (SSE-KMS).</p></li> <li><p>NONE - New objects aren't encrypted by default. Default encryption is disabled for the bucket.</p></li></ul>"
         }
       },
       "documentation": "<p>Provides information about the default server-side encryption settings for an S3 bucket. For detailed information about these settings, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucket-encryption.html\">Setting default server-side encryption behavior for Amazon S3 buckets</a> in the <i>Amazon Simple Storage Service User Guide</i>.</p>"
@@ -3149,22 +3149,22 @@
         "cellReference": {
           "shape": "__string",
           "locationName": "cellReference",
-          "documentation": "<p>The location of the cell, as an absolute cell reference, that contains the data. For example, Sheet2!C5 for cell C5 on Sheet2 in a Microsoft Excel workbook. This value is null for CSV and TSV files.</p>"
+          "documentation": "<p>The location of the cell, as an absolute cell reference, that contains the sensitive data, for example Sheet2!C5 for cell C5 on Sheet2 in a Microsoft Excel workbook. This value is null for CSV and TSV files.</p>"
         },
         "column": {
           "shape": "__long",
           "locationName": "column",
-          "documentation": "<p>The column number of the column that contains the data. For a Microsoft Excel workbook, this value correlates to the alphabetical character(s) for a column identifier. For example, 1 for column A, 2 for column B, and so on.</p>"
+          "documentation": "<p>The column number of the column that contains the sensitive data. For a Microsoft Excel workbook, this value correlates to the alphabetical character(s) for a column identifier, for example: 1 for column A, 2 for column B, and so on.</p>"
         },
         "columnName": {
           "shape": "__string",
           "locationName": "columnName",
-          "documentation": "<p>The name of the column that contains the data, if available. This value is also null if Amazon Macie detects sensitive data in the name of any column in the file.</p>"
+          "documentation": "<p>The name of the column that contains the sensitive data, if available.</p>"
         },
         "row": {
           "shape": "__long",
           "locationName": "row",
-          "documentation": "<p>The row number of the row that contains the data.</p>"
+          "documentation": "<p>The row number of the row that contains the sensitive data.</p>"
         }
       },
       "documentation": "<p>Specifies the location of an occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file.</p>"
@@ -3197,7 +3197,7 @@
         "result": {
           "shape": "ClassificationResult",
           "locationName": "result",
-          "documentation": "<p>The status and other details for the finding.</p>"
+          "documentation": "<p>The status and other details of the finding.</p>"
         }
       },
       "documentation": "<p>Provides information about a sensitive data finding, including the classification job that produced the finding.</p>"
@@ -3255,7 +3255,7 @@
         "code": {
           "shape": "__string",
           "locationName": "code",
-          "documentation": " <p>The status of the finding. Possible values are:</p> <ul><li><p>COMPLETE - Amazon Macie successfully completed its analysis of the object that the finding applies to.</p></li> <li><p>PARTIAL - Macie analyzed only a subset of the data in the object that the finding applies to. For example, the object is an archive file that contains files in an unsupported format.</p></li> <li><p>SKIPPED - Macie wasn't able to analyze the object that the finding applies to. For example, the object is a malformed file or a file that uses an unsupported format.</p></li></ul>"
+          "documentation": " <p>The status of the finding. Possible values are:</p> <ul><li><p>COMPLETE - Amazon Macie successfully completed its analysis of the S3 object that the finding applies to.</p></li> <li><p>PARTIAL - Macie analyzed only a subset of the data in the S3 object that the finding applies to. For example, the object is an archive file that contains files in an unsupported format.</p></li> <li><p>SKIPPED - Macie wasn't able to analyze the S3 object that the finding applies to. For example, the object is a file in an unsupported format.</p></li></ul>"
         },
         "reason": {
           "shape": "__string",
@@ -3359,17 +3359,17 @@
         "ignoreWords": {
           "shape": "__listOf__string",
           "locationName": "ignoreWords",
-          "documentation": "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.</p>"
+          "documentation": "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 characters. Ignore words are case sensitive.</p>"
         },
         "keywords": {
           "shape": "__listOf__string",
           "locationName": "keywords",
-          "documentation": "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3 - 90 characters. Keywords aren't case sensitive.</p>"
+          "documentation": "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 characters. Keywords aren't case sensitive.</p>"
         },
         "maximumMatchDistance": {
           "shape": "__integer",
           "locationName": "maximumMatchDistance",
-          "documentation": "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.</p>"
+          "documentation": "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.</p>"
         },
         "name": {
           "shape": "__string",
@@ -3465,12 +3465,12 @@
         "accountIds": {
           "shape": "__listOf__string",
           "locationName": "accountIds",
-          "documentation": "<p>An array that lists AWS account IDs, one for each account to send the invitation to.</p>"
+          "documentation": "<p>An array that lists Amazon Web Services account IDs, one for each account to send the invitation to.</p>"
         },
         "disableEmailNotification": {
           "shape": "__boolean",
           "locationName": "disableEmailNotification",
-          "documentation": "<p>Specifies whether to send an email notification to the root user of each account that the invitation will be sent to. This notification is in addition to an alert that the root user receives in AWS Personal Health Dashboard. To send an email notification to the root user of each account, set this value to true.</p>"
+          "documentation": "<p>Specifies whether to send an email notification to the root user of each account that the invitation will be sent to. This notification is in addition to an alert that the root user receives in Personal Health Dashboard. To send an email notification to the root user of each account, set this value to true.</p>"
         },
         "message": {
           "shape": "__string",
@@ -3498,7 +3498,7 @@
         "account": {
           "shape": "AccountDetail",
           "locationName": "account",
-          "documentation": "<p>The details for the account to associate with the administrator account.</p>"
+          "documentation": "<p>The details of the account to associate with the administrator account.</p>"
         },
         "tags": {
           "shape": "TagMap",
@@ -3722,7 +3722,7 @@
         "accountIds": {
           "shape": "__listOf__string",
           "locationName": "accountIds",
-          "documentation": "<p>An array that lists AWS account IDs, one for each account that sent an invitation to decline.</p>"
+          "documentation": "<p>An array that lists Amazon Web Services account IDs, one for each account that sent an invitation to decline.</p>"
         }
       },
       "required": [
@@ -3809,7 +3809,7 @@
         "accountIds": {
           "shape": "__listOf__string",
           "locationName": "accountIds",
-          "documentation": "<p>An array that lists AWS account IDs, one for each account that sent an invitation to delete.</p>"
+          "documentation": "<p>An array that lists Amazon Web Services account IDs, one for each account that sent an invitation to delete.</p>"
         }
       },
       "required": [
@@ -4004,12 +4004,12 @@
         "autoEnable": {
           "shape": "__boolean",
           "locationName": "autoEnable",
-          "documentation": "<p>Specifies whether Amazon Macie is enabled automatically for accounts that are added to the AWS organization.</p>"
+          "documentation": "<p>Specifies whether Amazon Macie is enabled automatically for accounts that are added to the Amazon Web Services organization.</p>"
         },
         "maxAccountLimitReached": {
           "shape": "__boolean",
           "locationName": "maxAccountLimitReached",
-          "documentation": "<p>Specifies whether the maximum number of Amazon Macie member accounts are part of the AWS organization.</p>"
+          "documentation": "<p>Specifies whether the maximum number of Amazon Macie member accounts are part of the Amazon Web Services organization.</p>"
         }
       }
     },
@@ -4028,7 +4028,7 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "adminAccountId",
-          "documentation": "<p>The AWS account ID of the delegated Amazon Macie administrator account.</p>"
+          "documentation": "<p>The Amazon Web Services account ID of the delegated Amazon Macie administrator account.</p>"
         }
       },
       "required": [
@@ -4104,7 +4104,7 @@
         "findingPublishingFrequency": {
           "shape": "FindingPublishingFrequency",
           "locationName": "findingPublishingFrequency",
-          "documentation": "Specifies how often to publish updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events)."
+          "documentation": "<p>Specifies how often to publish updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).</p>"
         },
         "status": {
           "shape": "MacieStatus",
@@ -4123,7 +4123,7 @@
         "adminAccountId": {
           "shape": "__string",
           "locationName": "adminAccountId",
-          "documentation": "<p>The AWS account ID for the account to designate as the delegated Amazon Macie administrator account for the organization.</p>"
+          "documentation": "<p>The Amazon Web Services account ID for the account to designate as the delegated Amazon Macie administrator account for the organization.</p>"
         },
         "clientToken": {
           "shape": "__string",
@@ -4164,12 +4164,12 @@
         "accessKeyId": {
           "shape": "__string",
           "locationName": "accessKeyId",
-          "documentation": "<p>The AWS access key ID that identifies the credentials.</p>"
+          "documentation": "<p>The Amazon Web Services access key ID that identifies the credentials.</p>"
         },
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The unique identifier for the AWS account that owns the entity that was used to get the credentials.</p>"
+          "documentation": "<p>The unique identifier for the Amazon Web Services account that owns the entity that was used to get the credentials.</p>"
         },
         "arn": {
           "shape": "__string",
@@ -4187,7 +4187,7 @@
           "documentation": "<p>The details of the session that was created for the credentials, including the entity that issued the session.</p>"
         }
       },
-      "documentation": "<p>Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the GetFederationToken operation of the AWS Security Token Service (AWS STS) API.</p>"
+      "documentation": "<p>Provides information about an identity that performed an action on an affected resource by using temporary security credentials. The credentials were obtained using the GetFederationToken operation of the Security Token Service (STS) API.</p>"
     },
     "Finding": {
       "type": "structure",
@@ -4195,12 +4195,12 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The unique identifier for the AWS account that the finding applies to. This is typically the account that owns the affected resource.</p>"
+          "documentation": "<p>The unique identifier for the Amazon Web Services account that the finding applies to. This is typically the account that owns the affected resource.</p>"
         },
         "archived": {
           "shape": "__boolean",
           "locationName": "archived",
-          "documentation": "<p>Specifies whether the finding is archived.</p>"
+          "documentation": "<p>Specifies whether the finding is archived (suppressed).</p>"
         },
         "category": {
           "shape": "FindingCategory",
@@ -4235,7 +4235,7 @@
         "partition": {
           "shape": "__string",
           "locationName": "partition",
-          "documentation": "<p>The AWS partition that Amazon Macie created the finding in.</p>"
+          "documentation": "<p>The Amazon Web Services partition that Amazon Macie created the finding in.</p>"
         },
         "policyDetails": {
           "shape": "PolicyDetails",
@@ -4245,7 +4245,7 @@
         "region": {
           "shape": "__string",
           "locationName": "region",
-          "documentation": "<p>The AWS Region that Amazon Macie created the finding in.</p>"
+          "documentation": "<p>The Amazon Web Services Region that Amazon Macie created the finding in.</p>"
         },
         "resourcesAffected": {
           "shape": "ResourcesAffected",
@@ -4350,7 +4350,7 @@
     },
     "FindingPublishingFrequency": {
       "type": "string",
-      "documentation": "<p>The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). For more information, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html\">Monitoring and processing findings</a> in the <i>Amazon Macie User Guide</i>. Valid values are:</p>",
+      "documentation": "<p>The frequency with which Amazon Macie publishes updates to policy findings for an account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events). For more information, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/findings-monitor.html\">Monitoring and processing findings</a> in the <i>Amazon Macie User Guide</i>. Valid values are:</p>",
       "enum": [
         "FIFTEEN_MINUTES",
         "ONE_HOUR",
@@ -4446,7 +4446,7 @@
         "administrator": {
           "shape": "Invitation",
           "locationName": "administrator",
-          "documentation": "<p>The AWS account ID for the administrator account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.</p>"
+          "documentation": "<p>The Amazon Web Services account ID for the administrator account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.</p>"
         }
       }
     },
@@ -4456,7 +4456,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The unique identifier for the AWS account.</p>"
+          "documentation": "<p>The unique identifier for the Amazon Web Services account.</p>"
         }
       }
     },
@@ -4486,7 +4486,7 @@
         "bucketCountBySharedAccessType": {
           "shape": "BucketCountBySharedAccessType",
           "locationName": "bucketCountBySharedAccessType",
-          "documentation": "<p>The total number of buckets that are or aren't shared with another AWS account.</p>"
+          "documentation": "<p>The total number of buckets that are or aren't shared with another Amazon Web Services account.</p>"
         },
         "classifiableObjectCount": {
           "shape": "__long",
@@ -4725,7 +4725,7 @@
         "securityHubConfiguration": {
           "shape": "SecurityHubConfiguration",
           "locationName": "securityHubConfiguration",
-          "documentation": "<p>The configuration settings that determine which findings are published to AWS Security Hub.</p>"
+          "documentation": "<p>The configuration settings that determine which findings are published to Security Hub.</p>"
         }
       }
     },
@@ -4786,12 +4786,12 @@
         "findingPublishingFrequency": {
           "shape": "FindingPublishingFrequency",
           "locationName": "findingPublishingFrequency",
-          "documentation": "<p>The frequency with which Macie publishes updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).</p>"
+          "documentation": "<p>The frequency with which Macie publishes updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).</p>"
         },
         "serviceRole": {
           "shape": "__string",
           "locationName": "serviceRole",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that allows Macie to monitor and analyze data in AWS resources for the account.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the service-linked role that allows Macie to monitor and analyze data in Amazon Web Services resources for the account.</p>"
         },
         "status": {
           "shape": "MacieStatus",
@@ -4815,7 +4815,7 @@
         "master": {
           "shape": "Invitation",
           "locationName": "master",
-          "documentation": "<p>(Deprecated) The AWS account ID for the administrator account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.</p>"
+          "documentation": "<p>(Deprecated) The Amazon Web Services account ID for the administrator account. If the accounts are associated by a Macie membership invitation, this object also provides details about the invitation that was sent to establish the relationship between the accounts.</p>"
         }
       }
     },
@@ -4839,12 +4839,12 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The AWS account ID for the account.</p>"
+          "documentation": "<p>The Amazon Web Services account ID for the account.</p>"
         },
         "administratorAccountId": {
           "shape": "__string",
           "locationName": "administratorAccountId",
-          "documentation": "<p>The AWS account ID for the administrator account.</p>"
+          "documentation": "<p>The Amazon Web Services account ID for the administrator account.</p>"
         },
         "arn": {
           "shape": "__string",
@@ -4864,7 +4864,7 @@
         "masterAccountId": {
           "shape": "__string",
           "locationName": "masterAccountId",
-          "documentation": "<p>(Deprecated) The AWS account ID for the administrator account. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.</p>"
+          "documentation": "<p>(Deprecated) The Amazon Web Services account ID for the administrator account. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.</p>"
         },
         "relationshipStatus": {
           "shape": "RelationshipStatus",
@@ -4990,7 +4990,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The unique identifier for the AWS account that's associated with the IAM user who performed the action.</p>"
+          "documentation": "<p>The unique identifier for the Amazon Web Services account that's associated with the IAM user who performed the action.</p>"
         },
         "arn": {
           "shape": "__string",
@@ -5008,7 +5008,7 @@
           "documentation": "<p>The user name of the IAM user who performed the action.</p>"
         }
       },
-      "documentation": "<p>Provides information about an AWS Identity and Access Management (IAM) user who performed an action on an affected resource.</p>"
+      "documentation": "<p>Provides information about an Identity and Access Management (IAM) user who performed an action on an affected resource.</p>"
     },
     "Invitation": {
       "type": "structure",
@@ -5016,7 +5016,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The AWS account ID for the account that sent the invitation.</p>"
+          "documentation": "<p>The Amazon Web Services account ID for the account that sent the invitation.</p>"
         },
         "invitationId": {
           "shape": "__string",
@@ -5258,7 +5258,7 @@
         "bucketDefinitions": {
           "shape": "__listOfS3BucketDefinitionForJob",
           "locationName": "bucketDefinitions",
-          "documentation": "<p>An array of objects, one for each AWS account that owns specific S3 buckets for the job to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.</p>"
+          "documentation": "<p>An array of objects, one for each Amazon Web Services account that owns specific S3 buckets for the job to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.</p>"
         },
         "createdAt": {
           "shape": "__timestampIso8601",
@@ -5708,7 +5708,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The unique identifier for the AWS account that owns the bucket.</p>"
+          "documentation": "<p>The unique identifier for the Amazon Web Services account that owns the bucket.</p>"
         },
         "bucketName": {
           "shape": "__string",
@@ -5772,7 +5772,7 @@
           "documentation": "<p>The details of an S3 bucket that Amazon Macie monitors and analyzes.</p>"
         }
       },
-      "documentation": "<p>Provides statistical data and other information about an AWS resource that Amazon Macie monitors and analyzes.</p>"
+      "documentation": "<p>Provides statistical data and other information about an Amazon Web Services resource that Amazon Macie monitors and analyzes.</p>"
     },
     "MaxResults": {
       "type": "integer",
@@ -5785,12 +5785,12 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The AWS account ID for the account.</p>"
+          "documentation": "<p>The Amazon Web Services account ID for the account.</p>"
         },
         "administratorAccountId": {
           "shape": "__string",
           "locationName": "administratorAccountId",
-          "documentation": "<p>The AWS account ID for the administrator account.</p>"
+          "documentation": "<p>The Amazon Web Services account ID for the administrator account.</p>"
         },
         "arn": {
           "shape": "__string",
@@ -5810,7 +5810,7 @@
         "masterAccountId": {
           "shape": "__string",
           "locationName": "masterAccountId",
-          "documentation": "<p>(Deprecated) The AWS account ID for the administrator account. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.</p>"
+          "documentation": "<p>(Deprecated) The Amazon Web Services account ID for the administrator account. This property has been replaced by the administratorAccountId property and is retained only for backward compatibility.</p>"
         },
         "relationshipStatus": {
           "shape": "RelationshipStatus",
@@ -5852,7 +5852,7 @@
         "kmsManaged": {
           "shape": "__long",
           "locationName": "kmsManaged",
-          "documentation": "<p>The total number of objects that are encrypted with an AWS Key Management Service (AWS KMS) customer master key (CMK). The objects use AWS managed AWS KMS encryption (AWS-KMS) or customer managed AWS KMS encryption (SSE-KMS).</p>"
+          "documentation": "<p>The total number of objects that are encrypted with an Key Management Service (KMS) customer master key (CMK). The objects use Amazon Web Services managed KMS encryption (AWS-KMS) or customer managed KMS encryption (SSE-KMS).</p>"
         },
         "s3Managed": {
           "shape": "__long",
@@ -5899,12 +5899,12 @@
         "cells": {
           "shape": "Cells",
           "locationName": "cells",
-          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. Each object specifies the cell or field that contains the data. This value is null for all other types of files.</p>"
+          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Excel workbook, CSV file, or TSV file. This value is null for all other types of files.</p><p>Each Cell object specifies a cell or field that contains the sensitive data.</p>"
         },
         "lineRanges": {
           "shape": "Ranges",
           "locationName": "lineRanges",
-          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in a Microsoft Word document or non-binary text file, such as an HTML, JSON, TXT, or XML file. Each object specifies the line that contains the data, and the position of the data on that line.</p> <p>This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the locations of data in: unstructured sections of an otherwise structured file, such as a comment in a file; a malformed file that Amazon Macie analyzes as plain text; and, a CSV or TSV file that has any column names that contain sensitive data.</p>"
+          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in a non-binary text file, such as an HTML, TXT, or XML file. Each Range object specifies a line or inclusive range of lines that contains the sensitive data, and the position of the data on the specified line or lines.</p> <p>This value is often null for file types that are supported by Cell, Page, or Record objects. Exceptions are the location of sensitive data in: unstructured sections of an otherwise structured file, such as a comment in a file; a malformed file that Amazon Macie analyzes as plain text; and, a CSV or TSV file that has any column names that contain sensitive data.</p>"
         },
         "offsetRanges": {
           "shape": "Ranges",
@@ -5914,12 +5914,12 @@
         "pages": {
           "shape": "Pages",
           "locationName": "pages",
-          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. Each object specifies the page that contains the data. This value is null for all other types of files.</p>"
+          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in an Adobe Portable Document Format file. This value is null for all other types of files.</p><p>Each Page object specifies a page that contains the sensitive data.</p>"
         },
         "records": {
           "shape": "Records",
           "locationName": "records",
-          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in an Apache Avro object container or Apache Parquet file. Each object specifies the record index and the path to the field in the record that contains the data. This value is null for all other types of files.</p>"
+          "documentation": "<p>An array of objects, one for each occurrence of sensitive data in an Apache Avro object container, Apache Parquet file, JSON file, or JSON Lines file. This value is null for all other types of files.</p> <p>For an Avro object container or Parquet file, each Record object specifies a record index and the path to a field in a record that contains the sensitive data. For a JSON or JSON Lines file, each Record object specifies the path to a field or array that contains the sensitive data. For a JSON Lines file, it also specifies the index of the line that contains the data.</p>"
         }
       },
       "documentation": "<p>Specifies the location of 1-15 occurrences of sensitive data that was detected by managed data identifiers or a custom data identifier and produced a sensitive data finding.</p>"
@@ -5947,7 +5947,7 @@
         "pageNumber": {
           "shape": "__long",
           "locationName": "pageNumber",
-          "documentation": "<p>The page number of the page that contains the data.</p>"
+          "documentation": "<p>The page number of the page that contains the sensitive data.</p>"
         }
       },
       "documentation": "<p>Specifies the location of an occurrence of sensitive data in an Adobe Portable Document Format file.</p>"
@@ -6010,7 +6010,7 @@
         "securityHubConfiguration": {
           "shape": "SecurityHubConfiguration",
           "locationName": "securityHubConfiguration",
-          "documentation": "<p>The configuration settings that determine which findings to publish to AWS Security Hub.</p>"
+          "documentation": "<p>The configuration settings that determine which findings to publish to Security Hub.</p>"
         }
       }
     },
@@ -6034,14 +6034,13 @@
         "startColumn": {
           "shape": "__long",
           "locationName": "startColumn",
-          "documentation": "<p>The column number for the column that contains the data, if the file contains structured data.</p>"
+          "documentation": "<p>The number of characters, with spaces and starting from 1, from the beginning of the first line that contains the sensitive data (start) to the beginning of the sensitive data.</p>"
         }
       },
-      "documentation": "<p>Provides details about the location of an occurrence of sensitive data in a Microsoft Word document or non-binary text file.</p>"
+      "documentation": "<p>Specifies the location of an occurrence of sensitive data in a non-binary text file, such as an HTML, TXT, or XML file.</p>"
     },
     "Ranges": {
       "type": "list",
-      "documentation": "<p>Provides details about the location of occurrences of sensitive data in an Adobe Portable Document Format file, Microsoft Word document, or non-binary text file.</p>",
       "member": {
         "shape": "Range"
       }
@@ -6052,19 +6051,18 @@
         "jsonPath": {
           "shape": "__string",
           "locationName": "jsonPath",
-          "documentation": "<p>The path, as a JSONPath expression, to the field in the record that contains the data. If Amazon Macie detects sensitive data in the name of any element in the path, Macie omits this field.</p> <p>If the name of an element exceeds 20 characters, Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.</p>"
+          "documentation": "<p>The path, as a JSONPath expression, to the sensitive data. For an Avro object container or Parquet file, this is the path to the field in the record (recordIndex) that contains the data. For a JSON or JSON Lines file, this is the path to the field or array that contains the data. If the data is a value in an array, the path also indicates which value contains the data.</p> <p>If Amazon Macie detects sensitive data in the name of any element in the path, Macie omits this field. If the name of an element exceeds 20 characters, Macie truncates the name by removing characters from the beginning of the name. If the resulting full path exceeds 250 characters, Macie also truncates the path, starting with the first element in the path, until the path contains 250 or fewer characters.</p>"
         },
         "recordIndex": {
           "shape": "__long",
           "locationName": "recordIndex",
-          "documentation": "<p>The record index, starting from 0, for the record that contains the data.</p>"
+          "documentation": "<p>For an Avro object container or Parquet file, the record index, starting from 0, for the record that contains the sensitive data. For a JSON Lines file, the line index, starting from 0, for the line that contains the sensitive data. This value is always 0 for JSON files.</p>"
         }
       },
-      "documentation": "<p>Specifies the location of an occurrence of sensitive data in an Apache Avro object container or Apache Parquet file.</p>"
+      "documentation": "<p>Specifies the location of an occurrence of sensitive data in an Apache Avro object container, Apache Parquet file, JSON file, or JSON Lines file.</p>"
     },
     "Records": {
       "type": "list",
-      "documentation": "<p>Specifies the location of occurrences of sensitive data in an Apache Parquet file.</p>",
       "member": {
         "shape": "Record"
       }
@@ -6096,15 +6094,15 @@
         "replicatedExternally": {
           "shape": "__boolean",
           "locationName": "replicatedExternally",
-          "documentation": "<p>Specifies whether the bucket is configured to replicate one or more objects to an AWS account that isn't part of the same Amazon Macie organization.</p>"
+          "documentation": "<p>Specifies whether the bucket is configured to replicate one or more objects to an Amazon Web Services account that isn't part of the same Amazon Macie organization.</p>"
         },
         "replicationAccounts": {
           "shape": "__listOf__string",
           "locationName": "replicationAccounts",
-          "documentation": "<p>An array of AWS account IDs, one for each AWS account that the bucket is configured to replicate one or more objects to.</p>"
+          "documentation": "<p>An array of Amazon Web Services account IDs, one for each Amazon Web Services account that the bucket is configured to replicate one or more objects to.</p>"
         }
       },
-      "documentation": "<p>Provides information about settings that define whether one or more objects in an S3 bucket are replicated to S3 buckets for other AWS accounts and, if so, which accounts.</p>"
+      "documentation": "<p>Provides information about settings that define whether one or more objects in an S3 bucket are replicated to S3 buckets for other Amazon Web Services accounts and, if so, which accounts.</p>"
     },
     "ResourcesAffected": {
       "type": "structure",
@@ -6112,12 +6110,12 @@
         "s3Bucket": {
           "shape": "S3Bucket",
           "locationName": "s3Bucket",
-          "documentation": "<p>An array of objects, one for each S3 bucket that the finding applies to. Each object provides a set of metadata about an affected S3 bucket.</p>"
+          "documentation": "<p>The details of the S3 bucket that the finding applies to.</p>"
         },
         "s3Object": {
           "shape": "S3Object",
           "locationName": "s3Object",
-          "documentation": "<p>An array of objects, one for each S3 object that the finding applies to. Each object provides a set of metadata about an affected S3 object.</p>"
+          "documentation": "<p>The details of the S3 object that the finding applies to.</p>"
         }
       },
       "documentation": "<p>Provides information about the resources that a finding applies to.</p>"
@@ -6153,7 +6151,7 @@
         "owner": {
           "shape": "S3BucketOwner",
           "locationName": "owner",
-          "documentation": "<p>The display name and AWS account ID for the user who owns the bucket.</p>"
+          "documentation": "<p>The display name and Amazon Web Services account ID for the user who owns the bucket.</p>"
         },
         "publicAccess": {
           "shape": "BucketPublicAccess",
@@ -6166,7 +6164,7 @@
           "documentation": "<p>The tags that are associated with the bucket.</p>"
         }
       },
-      "documentation": "<p>Provides information about an S3 bucket that a finding applies to.</p>"
+      "documentation": "<p>Provides information about the S3 bucket that a finding applies to.</p>"
     },
     "S3BucketCriteriaForJob": {
       "type": "structure",
@@ -6190,7 +6188,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The unique identifier for the AWS account that owns the buckets.</p>"
+          "documentation": "<p>The unique identifier for the Amazon Web Services account that owns the buckets.</p>"
         },
         "buckets": {
           "shape": "__listOf__string",
@@ -6198,7 +6196,7 @@
           "documentation": "<p>An array that lists the names of the buckets.</p>"
         }
       },
-      "documentation": "<p>Specifies an AWS account that owns S3 buckets for a classification job to analyze, and one or more specific buckets to analyze for that account.</p>",
+      "documentation": "<p>Specifies an Amazon Web Services account that owns S3 buckets for a classification job to analyze, and one or more specific buckets to analyze for that account.</p>",
       "required": [
         "accountId",
         "buckets"
@@ -6215,7 +6213,7 @@
         "id": {
           "shape": "__string",
           "locationName": "id",
-          "documentation": "<p>The AWS account ID for the user who owns the bucket.</p>"
+          "documentation": "<p>The Amazon Web Services account ID for the user who owns the bucket.</p>"
         }
       },
       "documentation": "<p>Provides information about the user who owns an S3 bucket.</p>"
@@ -6236,7 +6234,7 @@
         "kmsKeyArn": {
           "shape": "__string",
           "locationName": "kmsKeyArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for encryption of the results. This must be the ARN of an existing CMK that's in the same AWS Region as the bucket.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) customer master key (CMK) to use for encryption of the results. This must be the ARN of an existing CMK that's in the same Amazon Web Services Region as the bucket.</p>"
         }
       },
       "documentation": "<p>Specifies an S3 bucket to store data classification results in, and the encryption settings to use when storing results in that bucket.</p>",
@@ -6251,7 +6249,7 @@
         "bucketDefinitions": {
           "shape": "__listOfS3BucketDefinitionForJob",
           "locationName": "bucketDefinitions",
-          "documentation": "<p>An array of objects, one for each AWS account that owns specific S3 buckets to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.</p>"
+          "documentation": "<p>An array of objects, one for each Amazon Web Services account that owns specific S3 buckets to analyze. Each object specifies the account ID for an account and one or more buckets to analyze for that account. A job's definition can contain a bucketDefinitions array or a bucketCriteria object, not both.</p>"
         },
         "scoping": {
           "shape": "Scoping",
@@ -6330,7 +6328,7 @@
           "documentation": "<p>The identifier for the affected version of the object.</p>"
         }
       },
-      "documentation": "<p>Provides information about an S3 object that a finding applies to.</p>"
+      "documentation": "<p>Provides information about the S3 object that a finding applies to.</p>"
     },
     "ScopeFilterKey": {
       "type": "string",
@@ -6396,7 +6394,7 @@
           "documentation": "<p>A tag-based condition that defines an operator and tag keys, tag values, or tag key and value pairs for including or excluding resources from the results.</p>"
         }
       },
-      "documentation": "<p>Specifies a property- or tag-based filter condition for including or excluding AWS resources from the query results.</p>"
+      "documentation": "<p>Specifies a property- or tag-based filter condition for including or excluding Amazon Web Services resources from the query results.</p>"
     },
     "SearchResourcesCriteriaBlock": {
       "type": "structure",
@@ -6407,7 +6405,7 @@
           "documentation": "<p>An array of objects, one for each property- or tag-based condition that includes or excludes resources from the query results. If you specify more than one condition, Amazon Macie uses AND logic to join the conditions.</p>"
         }
       },
-      "documentation": "<p>Specifies property- and tag-based conditions that define filter criteria for including or excluding AWS resources from the query results.</p>"
+      "documentation": "<p>Specifies property- and tag-based conditions that define filter criteria for including or excluding Amazon Web Services resources from the query results.</p>"
     },
     "SearchResourcesRequest": {
       "type": "structure",
@@ -6465,10 +6463,10 @@
         "values": {
           "shape": "__listOf__string",
           "locationName": "values",
-          "documentation": "<p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the AWS account that owns the resource.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission\">BucketPublicAccess.effectivePermission</a> property of an S3 bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of an S3 bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess\">BucketMetadata.sharedAccess</a> property of an S3 bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in values.</p>"
+          "documentation": "<p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the Amazon Web Services account that owns the resource.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission\">BucketPublicAccess.effectivePermission</a> property of an S3 bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of an S3 bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess\">BucketMetadata.sharedAccess</a> property of an S3 bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in values.</p>"
         }
       },
-      "documentation": "<p>Specifies a property-based filter condition that determines which AWS resources are included or excluded from the query results.</p>"
+      "documentation": "<p>Specifies a property-based filter condition that determines which Amazon Web Services resources are included or excluded from the query results.</p>"
     },
     "SearchResourcesSimpleCriterionKey": {
       "type": "string",
@@ -6504,7 +6502,7 @@
           "documentation": "<p>The sort order to apply to the results, based on the value for the property specified by the attributeName property. Valid values are: ASC, sort the results in ascending order; and, DESC, sort the results in descending order.</p>"
         }
       },
-      "documentation": "<p>Specifies criteria for sorting the results of a query for information about AWS resources that Amazon Macie monitors and analyzes.</p>"
+      "documentation": "<p>Specifies criteria for sorting the results of a query for information about Amazon Web Services resources that Amazon Macie monitors and analyzes.</p>"
     },
     "SearchResourcesTagCriterion": {
       "type": "structure",
@@ -6520,7 +6518,7 @@
           "documentation": "<p>The tag keys, tag values, or tag key and value pairs to use in the condition.</p>"
         }
       },
-      "documentation": "<p>Specifies a tag-based filter condition that determines which AWS resources are included or excluded from the query results.</p>"
+      "documentation": "<p>Specifies a tag-based filter condition that determines which Amazon Web Services resources are included or excluded from the query results.</p>"
     },
     "SearchResourcesTagCriterionPair": {
       "type": "structure",
@@ -6544,15 +6542,15 @@
         "publishClassificationFindings": {
           "shape": "__boolean",
           "locationName": "publishClassificationFindings",
-          "documentation": "<p>Specifies whether to publish sensitive data findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all sensitive data findings that weren't suppressed by a findings filter. The default value is false.</p>"
+          "documentation": "<p>Specifies whether to publish sensitive data findings to Security Hub. If you set this value to true, Amazon Macie automatically publishes all sensitive data findings that weren't suppressed by a findings filter. The default value is false.</p>"
         },
         "publishPolicyFindings": {
           "shape": "__boolean",
           "locationName": "publishPolicyFindings",
-          "documentation": "<p>Specifies whether to publish policy findings to AWS Security Hub. If you set this value to true, Amazon Macie automatically publishes all new and updated policy findings that weren't suppressed by a findings filter. The default value is true.</p>"
+          "documentation": "<p>Specifies whether to publish policy findings to Security Hub. If you set this value to true, Amazon Macie automatically publishes all new and updated policy findings that weren't suppressed by a findings filter. The default value is true.</p>"
         }
       },
-      "documentation": "<p>Specifies configuration settings that determine which findings are published to AWS Security Hub automatically. For information about how Macie publishes findings to Security Hub, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html\">Amazon Macie integration with Security Hub</a> in the <i>Amazon Macie User Guide</i>.</p>",
+      "documentation": "<p>Specifies configuration settings that determine which findings are published to Security Hub automatically. For information about how Macie publishes findings to Security Hub, see <a href=\"https://docs.aws.amazon.com/macie/latest/user/securityhub-integration.html\">Amazon Macie integration with Security Hub</a> in the <i>Amazon Macie User Guide</i>.</p>",
       "required": [
         "publishPolicyFindings",
         "publishClassificationFindings"
@@ -6571,7 +6569,7 @@
         "category": {
           "shape": "SensitiveDataItemCategory",
           "locationName": "category",
-          "documentation": "<p>The category of sensitive data that was detected. For example: CREDENTIALS, for credentials data such as private keys or AWS secret keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as driver's license identification numbers.</p>"
+          "documentation": "<p>The category of sensitive data that was detected. For example: CREDENTIALS, for credentials data such as private keys or Amazon Web Services secret keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as driver's license identification numbers.</p>"
         },
         "detections": {
           "shape": "DefaultDetections",
@@ -6607,7 +6605,7 @@
         "kmsMasterKeyId": {
           "shape": "__string",
           "locationName": "kmsMasterKeyId",
-          "documentation": "<p>The Amazon Resource Name (ARN) or unique identifier (key ID) for the AWS Key Management Service (AWS KMS) customer master key (CMK) that's used to encrypt data in the bucket or the object. If an AWS KMS CMK isn't used, this value is null.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) or unique identifier (key ID) for the Key Management Service (KMS) customer master key (CMK) that's used to encrypt data in the bucket or the object. If an KMS CMK isn't used, this value is null.</p>"
         }
       },
       "documentation": "<p>Provides information about the server-side encryption settings for an S3 bucket or S3 object.</p>"
@@ -6671,7 +6669,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The unique identifier for the AWS account that owns the entity that was used to get the credentials.</p>"
+          "documentation": "<p>The unique identifier for the Amazon Web Services account that owns the entity that was used to get the credentials.</p>"
         },
         "arn": {
           "shape": "__string",
@@ -6746,7 +6744,7 @@
         "values": {
           "shape": "__listOf__string",
           "locationName": "values",
-          "documentation": "<p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the AWS account that owns the bucket.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission\">BucketPublicAccess.effectivePermission</a> property of a bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of a bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess\">BucketMetadata.sharedAccess</a> property of a bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in these values.</p>"
+          "documentation": "<p>An array that lists one or more values to use in the condition. If you specify multiple values, Amazon Macie uses OR logic to join the values. Valid values for each supported property (key) are:</p> <ul><li><p>ACCOUNT_ID - A string that represents the unique identifier for the Amazon Web Services account that owns the bucket.</p></li> <li><p>S3_BUCKET_EFFECTIVE_PERMISSION - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketpublicaccess-effectivepermission\">BucketPublicAccess.effectivePermission</a> property of a bucket.</p></li> <li><p>S3_BUCKET_NAME - A string that represents the name of a bucket.</p></li> <li><p>S3_BUCKET_SHARED_ACCESS - A string that represents an enumerated value that Macie defines for the <a href=\"https://docs.aws.amazon.com/macie/latest/APIReference/datasources-s3.html#datasources-s3-prop-bucketmetadata-sharedaccess\">BucketMetadata.sharedAccess</a> property of a bucket.</p></li></ul> <p>Values are case sensitive. Also, Macie doesn't support use of partial values or wildcard characters in these values.</p>"
         }
       },
       "documentation": "<p>Specifies a property-based condition that determines whether an S3 bucket is included or excluded from a classification job.</p>"
@@ -6948,17 +6946,17 @@
         "ignoreWords": {
           "shape": "__listOf__string",
           "locationName": "ignoreWords",
-          "documentation": "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4 - 90 characters. Ignore words are case sensitive.</p>"
+          "documentation": "<p>An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 characters. Ignore words are case sensitive.</p>"
         },
         "keywords": {
           "shape": "__listOf__string",
           "locationName": "keywords",
-          "documentation": "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3 - 90 characters. Keywords aren't case sensitive.</p>"
+          "documentation": "<p>An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 characters. Keywords aren't case sensitive.</p>"
         },
         "maximumMatchDistance": {
           "shape": "__integer",
           "locationName": "maximumMatchDistance",
-          "documentation": "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1 - 300 characters. The default value is 50.</p>"
+          "documentation": "<p>The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.</p>"
         },
         "regex": {
           "shape": "__string",
@@ -7014,7 +7012,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The AWS account ID for the account that the request applies to.</p>"
+          "documentation": "<p>The Amazon Web Services account ID for the account that the request applies to.</p>"
         },
         "errorCode": {
           "shape": "ErrorCode",
@@ -7144,7 +7142,7 @@
         "findingPublishingFrequency": {
           "shape": "FindingPublishingFrequency",
           "locationName": "findingPublishingFrequency",
-          "documentation": "Specifies how often to publish updates to policy findings for the account. This includes publishing updates to AWS Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events)."
+          "documentation": "<p>Specifies how often to publish updates to policy findings for the account. This includes publishing updates to Security Hub and Amazon EventBridge (formerly called Amazon CloudWatch Events).</p>"
         },
         "status": {
           "shape": "MacieStatus",
@@ -7187,7 +7185,7 @@
         "autoEnable": {
           "shape": "__boolean",
           "locationName": "autoEnable",
-          "documentation": "<p>Specifies whether to enable Amazon Macie automatically for each account, when the account is added to the AWS organization.</p>"
+          "documentation": "<p>Specifies whether to enable Amazon Macie automatically for each account, when the account is added to the Amazon Web Services organization.</p>"
         }
       },
       "required": [
@@ -7230,7 +7228,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The unique identifier for the AWS account that the data applies to.</p>"
+          "documentation": "<p>The unique identifier for the Amazon Web Services account that the data applies to.</p>"
         },
         "freeTrialStartDate": {
           "shape": "__timestampIso8601",
@@ -7261,7 +7259,7 @@
         "values": {
           "shape": "__listOf__string",
           "locationName": "values",
-          "documentation": "<p>An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported field are:</p> <ul><li><p>accountId - The unique identifier for an AWS account.</p></li></ul> <ul><li><p>freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the free trial started for an account.</p></li></ul> <ul><li><p>serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota.</p></li></ul> <ul><li><p>total - A string that represents the current estimated cost for an account.</p></li></ul>"
+          "documentation": "<p>An array that lists values to use in the condition, based on the value for the field specified by the key property. If the value for the key property is accountId, this array can specify multiple values. Otherwise, this array can specify only one value.</p> <p>Valid values for each supported field are:</p> <ul><li><p>accountId - The unique identifier for an Amazon Web Services account.</p></li> <li><p>freeTrialStartDate - The date and time, in UTC and extended ISO 8601 format, when the free trial started for an account.</p></li> <li><p>serviceLimit - A Boolean (true or false) value that indicates whether an account has reached its monthly quota.</p></li> <li><p>total - A string that represents the current estimated cost for an account.</p></li></ul>"
         }
       },
       "documentation": "<p>Specifies a condition for filtering the results of a query for quota and usage data for one or more Amazon Macie accounts.</p>"
@@ -7350,32 +7348,32 @@
         "assumedRole": {
           "shape": "AssumedRole",
           "locationName": "assumedRole",
-          "documentation": "<p>If the action was performed with temporary security credentials that were obtained using the AssumeRole operation of the AWS Security Token Service (AWS STS) API, the identifiers, session context, and other details about the identity.</p>"
+          "documentation": "<p>If the action was performed with temporary security credentials that were obtained using the AssumeRole operation of the Security Token Service (STS) API, the identifiers, session context, and other details about the identity.</p>"
         },
         "awsAccount": {
           "shape": "AwsAccount",
           "locationName": "awsAccount",
-          "documentation": "<p>If the action was performed using the credentials for another AWS account, the details of that account.</p>"
+          "documentation": "<p>If the action was performed using the credentials for another Amazon Web Services account, the details of that account.</p>"
         },
         "awsService": {
           "shape": "AwsService",
           "locationName": "awsService",
-          "documentation": "<p>If the action was performed by an AWS account that belongs to an AWS service, the name of the service.</p>"
+          "documentation": "<p>If the action was performed by an Amazon Web Services account that belongs to an Amazon Web Service, the name of the service.</p>"
         },
         "federatedUser": {
           "shape": "FederatedUser",
           "locationName": "federatedUser",
-          "documentation": "<p>If the action was performed with temporary security credentials that were obtained using the GetFederationToken operation of the AWS Security Token Service (AWS STS) API, the identifiers, session context, and other details about the identity.</p>"
+          "documentation": "<p>If the action was performed with temporary security credentials that were obtained using the GetFederationToken operation of the Security Token Service (STS) API, the identifiers, session context, and other details about the identity.</p>"
         },
         "iamUser": {
           "shape": "IamUser",
           "locationName": "iamUser",
-          "documentation": "<p>If the action was performed using the credentials for an AWS Identity and Access Management (IAM) user, the name and other details about the user.</p>"
+          "documentation": "<p>If the action was performed using the credentials for an Identity and Access Management (IAM) user, the name and other details about the user.</p>"
         },
         "root": {
           "shape": "UserIdentityRoot",
           "locationName": "root",
-          "documentation": "<p>If the action was performed using the credentials for your AWS account, the details of your account.</p>"
+          "documentation": "<p>If the action was performed using the credentials for your Amazon Web Services account, the details of your account.</p>"
         },
         "type": {
           "shape": "UserIdentityType",
@@ -7391,7 +7389,7 @@
         "accountId": {
           "shape": "__string",
           "locationName": "accountId",
-          "documentation": "<p>The unique identifier for the AWS account.</p>"
+          "documentation": "<p>The unique identifier for the Amazon Web Services account.</p>"
         },
         "arn": {
           "shape": "__string",
@@ -7404,7 +7402,7 @@
           "documentation": "<p>The unique identifier for the entity that performed the action.</p>"
         }
       },
-      "documentation": "<p>Provides information about an AWS account and entity that performed an action on an affected resource. The action was performed using the credentials for your AWS account.</p>"
+      "documentation": "<p>Provides information about an Amazon Web Services account and entity that performed an action on an affected resource. The action was performed using the credentials for your Amazon Web Services account.</p>"
     },
     "UserIdentityType": {
       "type": "string",
@@ -7429,7 +7427,7 @@
         "jobImminentExpirationHealthEventArn": {
           "shape": "__string",
           "locationName": "jobImminentExpirationHealthEventArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Health event that Amazon Macie sent to notify you of the job or job run's pending expiration and cancellation. This value is null if a job has been paused for less than 23 days.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Health event that Amazon Macie sent to notify you of the job or job run's pending expiration and cancellation. This value is null if a job has been paused for less than 23 days.</p>"
         },
         "jobPausedAt": {
           "shape": "__timestampIso8601",

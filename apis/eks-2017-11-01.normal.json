@@ -1107,7 +1107,8 @@
         "ClusterUnreachable",
         "InsufficientNumberOfReplicas",
         "ConfigurationConflict",
-        "AdmissionRequestDenied"
+        "AdmissionRequestDenied",
+        "UnsupportedAddonModification"
       ]
     },
     "AddonIssueList": {
@@ -2049,7 +2050,8 @@
         "ClusterUnreachable",
         "InsufficientNumberOfReplicas",
         "ConfigurationConflict",
-        "AdmissionRequestDenied"
+        "AdmissionRequestDenied",
+        "UnsupportedAddonModification"
       ]
     },
     "ErrorDetail": {

@@ -268,11 +268,11 @@ declare class Imagebuilder extends Service {
    */
   listImageBuildVersions(callback?: (err: AWSError, data: Imagebuilder.Types.ListImageBuildVersionsResponse) => void): Request<Imagebuilder.Types.ListImageBuildVersionsResponse, AWSError>;
   /**
-   * List the Packages that are associated with an Image Build Version, as determined by AWS Systems Manager Inventory at build time.
+   * List the Packages that are associated with an Image Build Version, as determined by Amazon EC2 Systems Manager Inventory at build time.
    */
   listImagePackages(params: Imagebuilder.Types.ListImagePackagesRequest, callback?: (err: AWSError, data: Imagebuilder.Types.ListImagePackagesResponse) => void): Request<Imagebuilder.Types.ListImagePackagesResponse, AWSError>;
   /**
-   * List the Packages that are associated with an Image Build Version, as determined by AWS Systems Manager Inventory at build time.
+   * List the Packages that are associated with an Image Build Version, as determined by Amazon EC2 Systems Manager Inventory at build time.
    */
   listImagePackages(callback?: (err: AWSError, data: Imagebuilder.Types.ListImagePackagesResponse) => void): Request<Imagebuilder.Types.ListImagePackagesResponse, AWSError>;
   /**
@@ -407,21 +407,31 @@ declare class Imagebuilder extends Service {
 declare namespace Imagebuilder {
   export type AccountId = string;
   export type AccountList = AccountId[];
+  export interface AdditionalInstanceConfiguration {
+    /**
+     * Contains settings for the SSM agent on your build instance.
+     */
+    systemsManagerAgent?: SystemsManagerAgent;
+    /**
+     * Use this property to provide commands or a command script to run when you launch your build instance.  The userDataOverride property replaces any commands that Image Builder might have added to ensure that SSM is installed on your Linux build instance. If you override the user data, make sure that you add commands to install SSM, if it is not pre-installed on your source image. 
+     */
+    userDataOverride?: UserDataOverride;
+  }
   export interface Ami {
     /**
-     * The AWS Region of the EC2 AMI.
+     * The Region of the Amazon EC2 AMI.
      */
     region?: NonEmptyString;
     /**
-     * The AMI ID of the EC2 AMI.
+     * The AMI ID of the Amazon EC2 AMI.
      */
     image?: NonEmptyString;
     /**
-     * The name of the EC2 AMI.
+     * The name of the Amazon EC2 AMI.
      */
     name?: NonEmptyString;
     /**
-     * The description of the EC2 AMI. Minimum and maximum length are in characters.
+     * The description of the Amazon EC2 AMI. Minimum and maximum length are in characters.
      */
     description?: NonEmptyString;
     state?: ImageState;
@@ -452,7 +462,7 @@ declare namespace Imagebuilder {
      */
     kmsKeyId?: NonEmptyString;
     /**
-     *  Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances.
+     *  Launch permissions can be used to configure which accounts can use the AMI to launch instances.
      */
     launchPermission?: LaunchPermissionConfiguration;
   }
@@ -519,6 +529,10 @@ declare namespace Imagebuilder {
      */
     supportedOsVersions?: OsVersionList;
     /**
+     * Contains parameter details for each of the parameters that are defined for the component.
+     */
+    parameters?: ComponentParameterDetailList;
+    /**
      * The owner of the component.
      */
     owner?: NonEmptyString;
@@ -549,10 +563,49 @@ declare namespace Imagebuilder {
      * The Amazon Resource Name (ARN) of the component.
      */
     componentArn: ComponentVersionArnOrBuildVersionArn;
+    /**
+     * A group of parameter settings that are used to configure the component for a specific recipe.
+     */
+    parameters?: ComponentParameterList;
   }
   export type ComponentConfigurationList = ComponentConfiguration[];
   export type ComponentData = string;
   export type ComponentFormat = "SHELL"|string;
+  export interface ComponentParameter {
+    /**
+     * The name of the component parameter to set.
+     */
+    name: ComponentParameterName;
+    /**
+     * Sets the value for the named component parameter.
+     */
+    value: ComponentParameterValueList;
+  }
+  export type ComponentParameterDescription = string;
+  export interface ComponentParameterDetail {
+    /**
+     * The name of this input parameter.
+     */
+    name: ComponentParameterName;
+    /**
+     * The type of input this parameter provides. The currently supported value is "string".
+     */
+    type: ComponentParameterType;
+    /**
+     * The default value of this parameter if no input is provided.
+     */
+    defaultValue?: ComponentParameterValueList;
+    /**
+     * Describes this parameter.
+     */
+    description?: ComponentParameterDescription;
+  }
+  export type ComponentParameterDetailList = ComponentParameterDetail[];
+  export type ComponentParameterList = ComponentParameter[];
+  export type ComponentParameterName = string;
+  export type ComponentParameterType = string;
+  export type ComponentParameterValue = string;
+  export type ComponentParameterValueList = ComponentParameterValue[];
   export interface ComponentSummary {
     /**
      * The Amazon Resource Name (ARN) of the component.
@@ -805,7 +858,7 @@ declare namespace Imagebuilder {
      */
     data?: InlineComponentData;
     /**
-     * The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either data or uri can be used to specify the data within the component.
+     * The uri of the component. Must be an Amazon S3 URL and the requester must have permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify component content up to your service quota. Either data or uri can be used to specify the data within the component.
      */
     uri?: Uri;
     /**
@@ -865,7 +918,7 @@ declare namespace Imagebuilder {
      */
     dockerfileTemplateData?: InlineDockerFileTemplate;
     /**
-     * The S3 URI for the Dockerfile that will be used to build your container image.
+     * The Amazon S3 URI for the Dockerfile that will be used to build your container image.
      */
     dockerfileTemplateUri?: Uri;
     /**
@@ -1045,9 +1098,13 @@ declare namespace Imagebuilder {
      */
     tags?: TagMap;
     /**
-     * The working directory to be used during build and test workflows.
+     * The working directory used during build and test workflows.
      */
     workingDirectory?: NonEmptyString;
+    /**
+     * Specify additional settings and launch scripts for your build instances.
+     */
+    additionalInstanceConfiguration?: AdditionalInstanceConfiguration;
     /**
      * The idempotency token used to make this request idempotent.
      */
@@ -1129,15 +1186,15 @@ declare namespace Imagebuilder {
      */
     instanceTypes?: InstanceTypeList;
     /**
-     * The instance profile to associate with the instance used to customize your EC2 AMI.
+     * The instance profile to associate with the instance used to customize your Amazon EC2 AMI.
      */
     instanceProfileName: InstanceProfileNameType;
     /**
-     * The security group IDs to associate with the instance used to customize your EC2 AMI.
+     * The security group IDs to associate with the instance used to customize your Amazon EC2 AMI.
      */
     securityGroupIds?: SecurityGroupIds;
     /**
-     * The subnet ID in which to place the instance used to customize your EC2 AMI.
+     * The subnet ID in which to place the instance used to customize your Amazon EC2 AMI.
      */
     subnetId?: NonEmptyString;
     /**
@@ -1823,6 +1880,10 @@ declare namespace Imagebuilder {
      * The working directory to be used during build and test workflows.
      */
     workingDirectory?: NonEmptyString;
+    /**
+     * Before you create a new AMI, Image Builder launches temporary Amazon EC2 instances to build and test your image configuration. Instance configuration adds a layer of control over those instances. You can define settings and add scripts to run when an instance is launched from your AMI.
+     */
+    additionalInstanceConfiguration?: AdditionalInstanceConfiguration;
   }
   export type ImageRecipeArn = string;
   export interface ImageRecipeSummary {
@@ -1997,7 +2058,7 @@ declare namespace Imagebuilder {
      */
     data?: NonEmptyString;
     /**
-     * The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either data or uri can be used to specify the data within the component.
+     * The uri of the component. Must be an Amazon S3 URL and the requester must have permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify component content up to your service quota. Either data or uri can be used to specify the data within the component.
      */
     uri?: Uri;
     /**
@@ -2061,7 +2122,7 @@ declare namespace Imagebuilder {
      */
     logging?: Logging;
     /**
-     * The EC2 key pair of the infrastructure configuration.
+     * The Amazon EC2 key pair of the infrastructure configuration.
      */
     keyPair?: NonEmptyString;
     /**
@@ -2165,7 +2226,7 @@ declare namespace Imagebuilder {
   export type InstanceTypeList = InstanceType[];
   export interface LaunchPermissionConfiguration {
     /**
-     * The AWS account ID.
+     * The account ID.
      */
     userIds?: AccountList;
     /**
@@ -2175,7 +2236,7 @@ declare namespace Imagebuilder {
   }
   export interface LaunchTemplateConfiguration {
     /**
-     * Identifies the EC2 launch template to use.
+     * Identifies the Amazon EC2 launch template to use.
      */
     launchTemplateId: LaunchTemplateId;
     /**
@@ -2183,7 +2244,7 @@ declare namespace Imagebuilder {
      */
     accountId?: AccountId;
     /**
-     * Set the specified EC2 launch template as the default launch template for the specified account.
+     * Set the specified Amazon EC2 launch template as the default launch template for the specified account.
      */
     setDefaultVersion?: Boolean;
   }
@@ -2559,7 +2620,7 @@ declare namespace Imagebuilder {
   export type OsVersionList = OsVersion[];
   export interface OutputResources {
     /**
-     * The EC2 AMIs created by this image.
+     * The Amazon EC2 AMIs created by this image.
      */
     amis?: AmiList;
     /**
@@ -2708,6 +2769,12 @@ declare namespace Imagebuilder {
     imageBuildVersionArn?: ImageBuildVersionArn;
   }
   export type StringList = NonEmptyString[];
+  export interface SystemsManagerAgent {
+    /**
+     * This property defaults to true. If Image Builder installs the SSM agent on a build instance, it removes the agent before creating a snapshot for the AMI. To ensure that the AMI you create includes the SSM agent, set this property to false.
+     */
+    uninstallAfterBuild?: NullableBoolean;
+  }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -2853,15 +2920,15 @@ declare namespace Imagebuilder {
      */
     instanceTypes?: InstanceTypeList;
     /**
-     * The instance profile to associate with the instance used to customize your EC2 AMI.
+     * The instance profile to associate with the instance used to customize your Amazon EC2 AMI.
      */
     instanceProfileName: InstanceProfileNameType;
     /**
-     * The security group IDs to associate with the instance used to customize your EC2 AMI.
+     * The security group IDs to associate with the instance used to customize your Amazon EC2 AMI.
      */
     securityGroupIds?: SecurityGroupIds;
     /**
-     * The subnet ID to place the instance used to customize your EC2 AMI in.
+     * The subnet ID to place the instance used to customize your Amazon EC2 AMI in.
      */
     subnetId?: NonEmptyString;
     /**
@@ -2904,6 +2971,7 @@ declare namespace Imagebuilder {
     infrastructureConfigurationArn?: InfrastructureConfigurationArn;
   }
   export type Uri = string;
+  export type UserDataOverride = string;
   export type VersionNumber = string;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

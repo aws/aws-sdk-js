@@ -61,6 +61,9 @@
         },
         {
           "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Creates a new ReplicationConfigurationTemplate.</p>"
@@ -641,6 +644,9 @@
           "shape": "ValidationException"
         },
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "ConflictException"
         }
       ],
@@ -669,6 +675,9 @@
         },
         {
           "shape": "ValidationException"
+        },
+        {
+          "shape": "AccessDeniedException"
         }
       ],
       "documentation": "<p>Updates multiple ReplicationConfigurationTemplates by ID.</p>"
@@ -1923,7 +1932,6 @@
     "ReplicationConfigurationEbsEncryption": {
       "type": "string",
       "enum": [
-        "NONE",
         "DEFAULT",
         "CUSTOM"
       ]

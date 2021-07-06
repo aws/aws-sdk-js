@@ -1286,7 +1286,7 @@
           "shape": "CallRateLimitExceededException"
         }
       ],
-      "documentation": "<p>List the Packages that are associated with an Image Build Version, as determined by AWS Systems Manager Inventory at build time.</p>"
+      "documentation": "<p>List the Packages that are associated with an Image Build Version, as determined by Amazon EC2 Systems Manager Inventory at build time.</p>"
     },
     "ListImagePipelineImages": {
       "name": "ListImagePipelineImages",
@@ -1891,24 +1891,38 @@
       "max": 1536,
       "min": 1
     },
+    "AdditionalInstanceConfiguration": {
+      "type": "structure",
+      "members": {
+        "systemsManagerAgent": {
+          "shape": "SystemsManagerAgent",
+          "documentation": "<p>Contains settings for the SSM agent on your build instance.</p>"
+        },
+        "userDataOverride": {
+          "shape": "UserDataOverride",
+          "documentation": "<p>Use this property to provide commands or a command script to run when you launch your build instance.</p> <note> <p>The userDataOverride property replaces any commands that Image Builder might have added to ensure that SSM is installed on your Linux build instance. If you override the user data, make sure that you add commands to install SSM, if it is not pre-installed on your source image.</p> </note>"
+        }
+      },
+      "documentation": "<p>In addition to your infrastruction configuration, these settings provide an extra layer of control over your build instances. For instances where Image Builder installs the SSM agent, you can choose whether to keep it for the AMI that you create. You can also specify commands to run on launch for all of your build instances.</p>"
+    },
     "Ami": {
       "type": "structure",
       "members": {
         "region": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AWS Region of the EC2 AMI.</p>"
+          "documentation": "<p>The Region of the Amazon EC2 AMI.</p>"
         },
         "image": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The AMI ID of the EC2 AMI.</p>"
+          "documentation": "<p>The AMI ID of the Amazon EC2 AMI.</p>"
         },
         "name": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The name of the EC2 AMI.</p>"
+          "documentation": "<p>The name of the Amazon EC2 AMI.</p>"
         },
         "description": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The description of the EC2 AMI. Minimum and maximum length are in characters.</p>"
+          "documentation": "<p>The description of the Amazon EC2 AMI. Minimum and maximum length are in characters.</p>"
         },
         "state": {
           "shape": "ImageState"
@@ -1918,7 +1932,7 @@
           "documentation": "<p>The account ID of the owner of the AMI.</p>"
         }
       },
-      "documentation": "<p> Details of an EC2 AMI.</p>"
+      "documentation": "<p> Details of an Amazon EC2 AMI.</p>"
     },
     "AmiDistributionConfiguration": {
       "type": "structure",
@@ -1945,7 +1959,7 @@
         },
         "launchPermission": {
           "shape": "LaunchPermissionConfiguration",
-          "documentation": "<p> Launch permissions can be used to configure which AWS accounts can use the AMI to launch instances.</p>"
+          "documentation": "<p> Launch permissions can be used to configure which accounts can use the AMI to launch instances.</p>"
         }
       },
       "documentation": "<p> Define and configure the output AMIs of the pipeline.</p>"
@@ -2043,6 +2057,10 @@
           "shape": "OsVersionList",
           "documentation": "<p>The operating system (OS) version supported by the component. If the OS information is available, a prefix match is performed against the parent image OS version during image recipe creation.</p>"
         },
+        "parameters": {
+          "shape": "ComponentParameterDetailList",
+          "documentation": "<p>Contains parameter details for each of the parameters that are defined for the component.</p>"
+        },
         "owner": {
           "shape": "NonEmptyString",
           "documentation": "<p>The owner of the component.</p>"
@@ -2083,6 +2101,10 @@
         "componentArn": {
           "shape": "ComponentVersionArnOrBuildVersionArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the component.</p>"
+        },
+        "parameters": {
+          "shape": "ComponentParameterList",
+          "documentation": "<p>A group of parameter settings that are used to configure the component for a specific recipe.</p>"
         }
       },
       "documentation": "<p> Configuration details of the component.</p>"
@@ -2102,6 +2124,92 @@
       "enum": [
         "SHELL"
       ]
+    },
+    "ComponentParameter": {
+      "type": "structure",
+      "required": [
+        "name",
+        "value"
+      ],
+      "members": {
+        "name": {
+          "shape": "ComponentParameterName",
+          "documentation": "<p>The name of the component parameter to set.</p>"
+        },
+        "value": {
+          "shape": "ComponentParameterValueList",
+          "documentation": "<p>Sets the value for the named component parameter.</p>"
+        }
+      },
+      "documentation": "<p>Contains a key/value pair that sets the named component parameter.</p>"
+    },
+    "ComponentParameterDescription": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "[^\\x00]+"
+    },
+    "ComponentParameterDetail": {
+      "type": "structure",
+      "required": [
+        "name",
+        "type"
+      ],
+      "members": {
+        "name": {
+          "shape": "ComponentParameterName",
+          "documentation": "<p>The name of this input parameter.</p>"
+        },
+        "type": {
+          "shape": "ComponentParameterType",
+          "documentation": "<p>The type of input this parameter provides. The currently supported value is \"string\".</p>"
+        },
+        "defaultValue": {
+          "shape": "ComponentParameterValueList",
+          "documentation": "<p>The default value of this parameter if no input is provided.</p>"
+        },
+        "description": {
+          "shape": "ComponentParameterDescription",
+          "documentation": "<p>Describes this parameter.</p>"
+        }
+      },
+      "documentation": "<p>Defines a parameter that is used to provide configuration details for the component.</p>"
+    },
+    "ComponentParameterDetailList": {
+      "type": "list",
+      "member": {
+        "shape": "ComponentParameterDetail"
+      }
+    },
+    "ComponentParameterList": {
+      "type": "list",
+      "member": {
+        "shape": "ComponentParameter"
+      },
+      "min": 1
+    },
+    "ComponentParameterName": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[^\\x00]+"
+    },
+    "ComponentParameterType": {
+      "type": "string",
+      "max": 20,
+      "min": 1,
+      "pattern": "^String|Integer|Boolean|StringList$"
+    },
+    "ComponentParameterValue": {
+      "type": "string",
+      "min": 1,
+      "pattern": "[^\\x00]+"
+    },
+    "ComponentParameterValueList": {
+      "type": "list",
+      "member": {
+        "shape": "ComponentParameterValue"
+      }
     },
     "ComponentSummary": {
       "type": "structure",
@@ -2436,7 +2544,7 @@
         },
         "uri": {
           "shape": "Uri",
-          "documentation": "<p>The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.</p>"
+          "documentation": "<p>The uri of the component. Must be an Amazon S3 URL and the requester must have permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.</p>"
         },
         "kmsKeyId": {
           "shape": "NonEmptyString",
@@ -2512,7 +2620,7 @@
         },
         "dockerfileTemplateUri": {
           "shape": "Uri",
-          "documentation": "<p>The S3 URI for the Dockerfile that will be used to build your container image.</p>"
+          "documentation": "<p>The Amazon S3 URI for the Dockerfile that will be used to build your container image.</p>"
         },
         "platformOverride": {
           "shape": "Platform",
@@ -2730,7 +2838,11 @@
         },
         "workingDirectory": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The working directory to be used during build and test workflows.</p>"
+          "documentation": "<p>The working directory used during build and test workflows.</p>"
+        },
+        "additionalInstanceConfiguration": {
+          "shape": "AdditionalInstanceConfiguration",
+          "documentation": "<p>Specify additional settings and launch scripts for your build instances.</p>"
         },
         "clientToken": {
           "shape": "ClientToken",
@@ -2837,15 +2949,15 @@
         },
         "instanceProfileName": {
           "shape": "InstanceProfileNameType",
-          "documentation": "<p>The instance profile to associate with the instance used to customize your EC2 AMI.</p>"
+          "documentation": "<p>The instance profile to associate with the instance used to customize your Amazon EC2 AMI.</p>"
         },
         "securityGroupIds": {
           "shape": "SecurityGroupIds",
-          "documentation": "<p>The security group IDs to associate with the instance used to customize your EC2 AMI.</p>"
+          "documentation": "<p>The security group IDs to associate with the instance used to customize your Amazon EC2 AMI.</p>"
         },
         "subnetId": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The subnet ID in which to place the instance used to customize your EC2 AMI.</p>"
+          "documentation": "<p>The subnet ID in which to place the instance used to customize your Amazon EC2 AMI.</p>"
         },
         "logging": {
           "shape": "Logging",
@@ -3857,6 +3969,10 @@
         "workingDirectory": {
           "shape": "NonEmptyString",
           "documentation": "<p>The working directory to be used during build and test workflows.</p>"
+        },
+        "additionalInstanceConfiguration": {
+          "shape": "AdditionalInstanceConfiguration",
+          "documentation": "<p>Before you create a new AMI, Image Builder launches temporary Amazon EC2 instances to build and test your image configuration. Instance configuration adds a layer of control over those instances. You can define settings and add scripts to run when an instance is launched from your AMI.</p>"
         }
       },
       "documentation": "<p>An image recipe.</p>"
@@ -4114,7 +4230,7 @@
         },
         "uri": {
           "shape": "Uri",
-          "documentation": "<p>The uri of the component. Must be an S3 URL and the requester must have permission to access the S3 bucket. If you use S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.</p>"
+          "documentation": "<p>The uri of the component. Must be an Amazon S3 URL and the requester must have permission to access the Amazon S3 bucket. If you use Amazon S3, you can specify component content up to your service quota. Either <code>data</code> or <code>uri</code> can be used to specify the data within the component.</p>"
         },
         "kmsKeyId": {
           "shape": "NonEmptyString",
@@ -4185,7 +4301,7 @@
         },
         "keyPair": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The EC2 key pair of the infrastructure configuration.</p>"
+          "documentation": "<p>The Amazon EC2 key pair of the infrastructure configuration.</p>"
         },
         "terminateInstanceOnFailure": {
           "shape": "NullableBoolean",
@@ -4258,7 +4374,7 @@
           "documentation": "<p>The instance profile of the infrastructure configuration.</p>"
         }
       },
-      "documentation": "<p>The infrastructure used when building EC2 AMIs.</p>"
+      "documentation": "<p>The infrastructure used when building Amazon EC2 AMIs.</p>"
     },
     "InfrastructureConfigurationSummaryList": {
       "type": "list",
@@ -4340,14 +4456,14 @@
       "members": {
         "userIds": {
           "shape": "AccountList",
-          "documentation": "<p>The AWS account ID.</p>"
+          "documentation": "<p>The account ID.</p>"
         },
         "userGroups": {
           "shape": "StringList",
           "documentation": "<p>The name of the group.</p>"
         }
       },
-      "documentation": "<p>Describes the configuration for a launch permission. The launch permission modification request is sent to the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html\">EC2 ModifyImageAttribute</a> API on behalf of the user for each Region they have selected to distribute the AMI. To make an AMI public, set the launch permission authorized accounts to <code>all</code>. See the examples for making an AMI public at <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html\">EC2 ModifyImageAttribute</a>.</p>"
+      "documentation": "<p>Describes the configuration for a launch permission. The launch permission modification request is sent to the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html\">Amazon EC2 ModifyImageAttribute</a> API on behalf of the user for each Region they have selected to distribute the AMI. To make an AMI public, set the launch permission authorized accounts to <code>all</code>. See the examples for making an AMI public at <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyImageAttribute.html\">Amazon EC2 ModifyImageAttribute</a>.</p>"
     },
     "LaunchTemplateConfiguration": {
       "type": "structure",
@@ -4357,7 +4473,7 @@
       "members": {
         "launchTemplateId": {
           "shape": "LaunchTemplateId",
-          "documentation": "<p>Identifies the EC2 launch template to use.</p>"
+          "documentation": "<p>Identifies the Amazon EC2 launch template to use.</p>"
         },
         "accountId": {
           "shape": "AccountId",
@@ -4365,10 +4481,10 @@
         },
         "setDefaultVersion": {
           "shape": "Boolean",
-          "documentation": "<p>Set the specified EC2 launch template as the default launch template for the specified account.</p>"
+          "documentation": "<p>Set the specified Amazon EC2 launch template as the default launch template for the specified account.</p>"
         }
       },
-      "documentation": "<p>Identifies an EC2 launch template to use for a specific account.</p>"
+      "documentation": "<p>Identifies an Amazon EC2 launch template to use for a specific account.</p>"
     },
     "LaunchTemplateConfigurationList": {
       "type": "list",
@@ -4885,7 +5001,7 @@
       "members": {
         "amis": {
           "shape": "AmiList",
-          "documentation": "<p>The EC2 AMIs created by this image.</p>"
+          "documentation": "<p>The Amazon EC2 AMIs created by this image.</p>"
         },
         "containers": {
           "shape": "ContainerList",
@@ -5162,6 +5278,16 @@
         "shape": "NonEmptyString"
       }
     },
+    "SystemsManagerAgent": {
+      "type": "structure",
+      "members": {
+        "uninstallAfterBuild": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>This property defaults to true. If Image Builder installs the SSM agent on a build instance, it removes the agent before creating a snapshot for the AMI. To ensure that the AMI you create includes the SSM agent, set this property to false.</p>"
+        }
+      },
+      "documentation": "<p>Contains settings for the SSM agent on your build instance.</p>"
+    },
     "TagKey": {
       "type": "string",
       "max": 128,
@@ -5401,15 +5527,15 @@
         },
         "instanceProfileName": {
           "shape": "InstanceProfileNameType",
-          "documentation": "<p>The instance profile to associate with the instance used to customize your EC2 AMI.</p>"
+          "documentation": "<p>The instance profile to associate with the instance used to customize your Amazon EC2 AMI.</p>"
         },
         "securityGroupIds": {
           "shape": "SecurityGroupIds",
-          "documentation": "<p>The security group IDs to associate with the instance used to customize your EC2 AMI.</p>"
+          "documentation": "<p>The security group IDs to associate with the instance used to customize your Amazon EC2 AMI.</p>"
         },
         "subnetId": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The subnet ID to place the instance used to customize your EC2 AMI in.</p>"
+          "documentation": "<p>The subnet ID to place the instance used to customize your Amazon EC2 AMI in.</p>"
         },
         "logging": {
           "shape": "Logging",
@@ -5458,10 +5584,16 @@
     "Uri": {
       "type": "string"
     },
+    "UserDataOverride": {
+      "type": "string",
+      "max": 21847,
+      "min": 1,
+      "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$"
+    },
     "VersionNumber": {
       "type": "string",
       "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
     }
   },
-  "documentation": "<p>EC2 Image Builder is a fully managed AWS service that makes it easier to automate the creation, management, and deployment of customized, secure, and up-to-date \"golden\" server images that are pre-installed and pre-configured with software and settings to meet specific IT standards.</p>"
+  "documentation": "<p>EC2 Image Builder is a fully managed Amazon Web Services service that makes it easier to automate the creation, management, and deployment of customized, secure, and up-to-date \"golden\" server images that are pre-installed and pre-configured with software and settings to meet specific IT standards.</p>"
 }
