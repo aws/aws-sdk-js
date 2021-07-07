@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.940.0-->
+<!--LATEST=2.941.0-->
 <!--ENTRYINSERT-->
+
+## 2.941.0
+* feature: Chime: Releasing new APIs for AWS Chime MediaCapturePipeline
+* feature: CloudFront: Amazon CloudFront now provides two new APIs, ListConflictingAliases and AssociateAlias, that help locate and move Alternate Domain Names (CNAMEs) if you encounter the CNAMEAlreadyExists error code.
+* feature: EC2: This release adds resource ids and tagging support for VPC security group rules.
+* feature: IoTSiteWise: This release add storage configuration APIs for AWS IoT SiteWise.
+* feature: MQ: adds support for modifying the maintenance window for brokers.
+* feature: StorageGateway: Adding support for oplocks for SMB file shares,  S3 Access Point and S3 Private Link for all file shares and IP address support for file system associations
 
 ## 2.940.0
 * feature: EKS: Adding new error code UnsupportedAddonModification for Addons in EKS

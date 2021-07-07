@@ -12,11 +12,11 @@ declare class MQ extends Service {
   constructor(options?: MQ.Types.ClientConfiguration)
   config: Config & MQ.Types.ClientConfiguration;
   /**
-   * Creates a broker. Note: This API is asynchronous.
+   * Creates a broker. Note: This API is asynchronous. To create a broker, you must either use the AmazonMQFullAccess IAM policy or include the following EC2 permissions in your IAM policy. ec2:CreateNetworkInterface This permission is required to allow Amazon MQ to create an elastic network interface (ENI) on behalf of your account. ec2:CreateNetworkInterfacePermission This permission is required to attach the ENI to the broker instance. ec2:DeleteNetworkInterface ec2:DeleteNetworkInterfacePermission ec2:DetachNetworkInterface ec2:DescribeInternetGateways ec2:DescribeNetworkInterfaces ec2:DescribeNetworkInterfacePermissions ec2:DescribeRouteTables ec2:DescribeSecurityGroups ec2:DescribeSubnets ec2:DescribeVpcs For more information, see Create an IAM User and Get Your AWS Credentials and Never Modify or Delete the Amazon MQ Elastic Network Interface in the Amazon MQ Developer Guide.
    */
   createBroker(params: MQ.Types.CreateBrokerRequest, callback?: (err: AWSError, data: MQ.Types.CreateBrokerResponse) => void): Request<MQ.Types.CreateBrokerResponse, AWSError>;
   /**
-   * Creates a broker. Note: This API is asynchronous.
+   * Creates a broker. Note: This API is asynchronous. To create a broker, you must either use the AmazonMQFullAccess IAM policy or include the following EC2 permissions in your IAM policy. ec2:CreateNetworkInterface This permission is required to allow Amazon MQ to create an elastic network interface (ENI) on behalf of your account. ec2:CreateNetworkInterfacePermission This permission is required to attach the ENI to the broker instance. ec2:DeleteNetworkInterface ec2:DeleteNetworkInterfacePermission ec2:DetachNetworkInterface ec2:DescribeInternetGateways ec2:DescribeNetworkInterfaces ec2:DescribeNetworkInterfacePermissions ec2:DescribeRouteTables ec2:DescribeSecurityGroups ec2:DescribeSubnets ec2:DescribeVpcs For more information, see Create an IAM User and Get Your AWS Credentials and Never Modify or Delete the Amazon MQ Elastic Network Interface in the Amazon MQ Developer Guide.
    */
   createBroker(callback?: (err: AWSError, data: MQ.Types.CreateBrokerResponse) => void): Request<MQ.Types.CreateBrokerResponse, AWSError>;
   /**
@@ -198,7 +198,7 @@ declare namespace MQ {
   }
   export interface BrokerEngineType {
     /**
-     * The type of broker engine.
+     * The broker's engine type.
      */
     EngineType?: EngineType;
     /**
@@ -208,7 +208,7 @@ declare namespace MQ {
   }
   export interface BrokerInstance {
     /**
-     * The URL of the broker's Web Console.
+     * The brokers web console URL.
      */
     ConsoleURL?: __string;
     /**
@@ -216,7 +216,7 @@ declare namespace MQ {
      */
     Endpoints?: __listOf__string;
     /**
-     * The IP address of the Elastic Network Interface (ENI) attached to the broker. Does not apply to RabbitMQ brokers
+     * The IP address of the Elastic Network Interface (ENI) attached to the broker. Does not apply to RabbitMQ brokers.
      */
     IpAddress?: __string;
   }
@@ -226,11 +226,11 @@ declare namespace MQ {
      */
     AvailabilityZones?: __listOfAvailabilityZone;
     /**
-     * The type of broker engine.
+     * The broker's engine type.
      */
     EngineType?: EngineType;
     /**
-     * The type of broker instance.
+     * The broker's instance type.
      */
     HostInstanceType?: __string;
     /**
@@ -250,7 +250,7 @@ declare namespace MQ {
   export type BrokerStorageType = "EBS"|"EFS"|string;
   export interface BrokerSummary {
     /**
-     * The Amazon Resource Name (ARN) of the broker.
+     * The broker's Amazon Resource Name (ARN).
      */
     BrokerArn?: __string;
     /**
@@ -258,11 +258,11 @@ declare namespace MQ {
      */
     BrokerId?: __string;
     /**
-     * The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
+     * The broker's name. This value is unique in your AWS account, 1-50 characters long, and containing only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.
      */
     BrokerName?: __string;
     /**
-     * The status of the broker.
+     * The broker's status.
      */
     BrokerState?: BrokerState;
     /**
@@ -270,13 +270,13 @@ declare namespace MQ {
      */
     Created?: __timestampIso8601;
     /**
-     * Required. The deployment mode of the broker.
+     * The broker's deployment mode.
      */
-    DeploymentMode?: DeploymentMode;
+    DeploymentMode: DeploymentMode;
     /**
-     * Required. The type of broker engine.
+     * The type of broker engine.
      */
-    EngineType?: EngineType;
+    EngineType: EngineType;
     /**
      * The broker's instance type.
      */
@@ -287,39 +287,39 @@ declare namespace MQ {
     /**
      * Required. The ARN of the configuration.
      */
-    Arn?: __string;
+    Arn: __string;
     /**
-     * The authentication strategy associated with the configuration.
+     * Optional. The authentication strategy associated with the configuration. The default is SIMPLE.
      */
-    AuthenticationStrategy?: AuthenticationStrategy;
+    AuthenticationStrategy: AuthenticationStrategy;
     /**
      * Required. The date and time of the configuration revision.
      */
-    Created?: __timestampIso8601;
+    Created: __timestampIso8601;
     /**
      * Required. The description of the configuration.
      */
-    Description?: __string;
+    Description: __string;
     /**
-     * Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
+     * Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
      */
-    EngineType?: EngineType;
+    EngineType: EngineType;
     /**
-     * Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+     * Required. The broker engine's version. For a list of supported engine versions, see, Supported engines.
      */
-    EngineVersion?: __string;
+    EngineVersion: __string;
     /**
      * Required. The unique ID that Amazon MQ generates for the configuration.
      */
-    Id?: __string;
+    Id: __string;
     /**
      * Required. The latest revision of the configuration.
      */
-    LatestRevision?: ConfigurationRevision;
+    LatestRevision: ConfigurationRevision;
     /**
      * Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
      */
-    Name?: __string;
+    Name: __string;
     /**
      * The list of all tags associated with this configuration.
      */
@@ -329,7 +329,7 @@ declare namespace MQ {
     /**
      * Required. The unique ID that Amazon MQ generates for the configuration.
      */
-    Id?: __string;
+    Id: __string;
     /**
      * The revision number of the configuration.
      */
@@ -339,7 +339,7 @@ declare namespace MQ {
     /**
      * Required. The date and time of the configuration revision.
      */
-    Created?: __timestampIso8601;
+    Created: __timestampIso8601;
     /**
      * The description of the configuration revision.
      */
@@ -347,11 +347,11 @@ declare namespace MQ {
     /**
      * Required. The revision number of the configuration.
      */
-    Revision?: __integer;
+    Revision: __integer;
   }
   export interface Configurations {
     /**
-     * The current configuration of the broker.
+     * The broker's current configuration.
      */
     Current?: ConfigurationId;
     /**
@@ -359,23 +359,23 @@ declare namespace MQ {
      */
     History?: __listOfConfigurationId;
     /**
-     * The pending configuration of the broker.
+     * The broker's pending configuration.
      */
     Pending?: ConfigurationId;
   }
   export interface CreateBrokerRequest {
     /**
-     * The authentication strategy used to secure the broker.
+     * Optional. The authentication strategy used to secure the broker. The default is SIMPLE.
      */
     AuthenticationStrategy?: AuthenticationStrategy;
     /**
-     * Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.
+     * Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot. Set to true by default, if no value is specified.
      */
-    AutoMinorVersionUpgrade?: __boolean;
+    AutoMinorVersionUpgrade: __boolean;
     /**
-     * Required. The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
+     * Required. The broker's name. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.
      */
-    BrokerName?: __string;
+    BrokerName: __string;
     /**
      * A list of information about the configuration.
      */
@@ -385,27 +385,27 @@ declare namespace MQ {
      */
     CreatorRequestId?: __string;
     /**
-     * Required. The deployment mode of the broker.
+     * Required. The broker's deployment mode.
      */
-    DeploymentMode?: DeploymentMode;
+    DeploymentMode: DeploymentMode;
     /**
-     * Encryption options for the broker.
+     * Encryption options for the broker. Does not apply to RabbitMQ brokers.
      */
     EncryptionOptions?: EncryptionOptions;
     /**
-     * Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
+     * Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
      */
-    EngineType?: EngineType;
+    EngineType: EngineType;
     /**
-     * Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+     * Required. The broker engine's version. For a list of supported engine versions, see Supported engines.
      */
-    EngineVersion?: __string;
+    EngineVersion: __string;
     /**
      * Required. The broker's instance type.
      */
-    HostInstanceType?: __string;
+    HostInstanceType: __string;
     /**
-     * The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+     * Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker. Does not apply to RabbitMQ brokers.
      */
     LdapServerMetadata?: LdapServerMetadataInput;
     /**
@@ -417,11 +417,11 @@ declare namespace MQ {
      */
     MaintenanceWindowStartTime?: WeeklyStartTime;
     /**
-     * Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
+     * Enables connections from applications outside of the VPC that hosts the broker's subnets. Set to false by default, if no value is provided.
      */
-    PubliclyAccessible?: __boolean;
+    PubliclyAccessible: __boolean;
     /**
-     * The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
+     * The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.
      */
     SecurityGroups?: __listOf__string;
     /**
@@ -429,7 +429,7 @@ declare namespace MQ {
      */
     StorageType?: BrokerStorageType;
     /**
-     * The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no subnet requirements when deployed with public accessibility, deployment without public accessibility requires at least one subnet.
+     * The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. If you specify more than one subnet, the subnets must be in different Availability Zones. Amazon MQ will not be able to create VPC endpoints for your broker with multiple subnets in the same Availability Zone. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ Amazon MQ for ActiveMQ deployment requires two subnets. A CLUSTER_MULTI_AZ Amazon MQ for RabbitMQ deployment has no subnet requirements when deployed with public accessibility. Deployment without public accessibility requires at least one subnet. If you specify subnets in a shared VPC for a RabbitMQ broker, the associated VPC to which the specified subnets belong must be owned by your AWS account. Amazon MQ will not be able to create VPC endpoints in VPCs that are not owned by your AWS account.
      */
     SubnetIds?: __listOf__string;
     /**
@@ -437,13 +437,13 @@ declare namespace MQ {
      */
     Tags?: __mapOf__string;
     /**
-     * Required. The list of broker users (persons or applications) who can access queues and topics. For RabbitMQ brokers, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ Web Console. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+     * Required. The list of broker users (persons or applications) who can access queues and topics. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long. Amazon MQ for RabbitMQ When you create an Amazon MQ for RabbitMQ broker, one and only one administrative user is accepted and created when a broker is first provisioned. All subsequent broker users are created by making RabbitMQ API calls directly to brokers or via the RabbitMQ web console.
      */
-    Users?: __listOfUser;
+    Users: __listOfUser;
   }
   export interface CreateBrokerResponse {
     /**
-     * The Amazon Resource Name (ARN) of the broker.
+     * The broker's Amazon Resource Name (ARN).
      */
     BrokerArn?: __string;
     /**
@@ -453,21 +453,21 @@ declare namespace MQ {
   }
   export interface CreateConfigurationRequest {
     /**
-     * The authentication strategy associated with the configuration.
+     * Optional. The authentication strategy associated with the configuration. The default is SIMPLE.
      */
     AuthenticationStrategy?: AuthenticationStrategy;
     /**
-     * Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
+     * Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
      */
-    EngineType?: EngineType;
+    EngineType: EngineType;
     /**
-     * Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+     * Required. The broker engine's version. For a list of supported engine versions, see Supported engines.
      */
-    EngineVersion?: __string;
+    EngineVersion: __string;
     /**
      * Required. The name of the configuration. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 1-150 characters long.
      */
-    Name?: __string;
+    Name: __string;
     /**
      * Create tags when creating the configuration.
      */
@@ -479,7 +479,7 @@ declare namespace MQ {
      */
     Arn?: __string;
     /**
-     * The authentication strategy associated with the configuration.
+     * Optional. The authentication strategy associated with the configuration. The default is SIMPLE.
      */
     AuthenticationStrategy?: AuthenticationStrategy;
     /**
@@ -515,7 +515,7 @@ declare namespace MQ {
      */
     BrokerId: __string;
     /**
-     * Enables access to the the ActiveMQ Web Console for the ActiveMQ user.
+     * Enables access to the ActiveMQ Web Console for the ActiveMQ user.
      */
     ConsoleAccess?: __boolean;
     /**
@@ -523,9 +523,9 @@ declare namespace MQ {
      */
     Groups?: __listOf__string;
     /**
-     * Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.
+     * Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas, colons, or equal signs (,:=).
      */
-    Password?: __string;
+    Password: __string;
     /**
      * The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
      */
@@ -575,7 +575,7 @@ declare namespace MQ {
      */
     EngineType?: __string;
     /**
-     * The maximum number of engine types that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+     * The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
      */
     MaxResults?: MaxResults;
     /**
@@ -607,7 +607,7 @@ declare namespace MQ {
      */
     HostInstanceType?: __string;
     /**
-     * The maximum number of instance options that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+     * The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
      */
     MaxResults?: MaxResults;
     /**
@@ -635,21 +635,21 @@ declare namespace MQ {
   }
   export interface DescribeBrokerRequest {
     /**
-     * The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
+     * The unique ID that Amazon MQ generates for the broker.
      */
     BrokerId: __string;
   }
   export interface DescribeBrokerResponse {
     /**
-     * The authentication strategy used to secure the broker.
+     * The authentication strategy used to secure the broker. The default is SIMPLE.
      */
     AuthenticationStrategy?: AuthenticationStrategy;
     /**
-     * Required. Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.
+     * Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot.
      */
     AutoMinorVersionUpgrade?: __boolean;
     /**
-     * The Amazon Resource Name (ARN) of the broker.
+     * The broker's Amazon Resource Name (ARN).
      */
     BrokerArn?: __string;
     /**
@@ -661,11 +661,11 @@ declare namespace MQ {
      */
     BrokerInstances?: __listOfBrokerInstance;
     /**
-     * The name of the broker. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain whitespaces, brackets, wildcard characters, or special characters.
+     * The broker's name. This value must be unique in your AWS account, 1-50 characters long, must contain only letters, numbers, dashes, and underscores, and must not contain white spaces, brackets, wildcard characters, or special characters.
      */
     BrokerName?: __string;
     /**
-     * The status of the broker.
+     * The broker's status.
      */
     BrokerState?: BrokerState;
     /**
@@ -677,19 +677,19 @@ declare namespace MQ {
      */
     Created?: __timestampIso8601;
     /**
-     * Required. The deployment mode of the broker.
+     * The broker's deployment mode.
      */
     DeploymentMode?: DeploymentMode;
     /**
-     * Encryption options for the broker.
+     * Encryption options for the broker. Does not apply to RabbitMQ brokers.
      */
     EncryptionOptions?: EncryptionOptions;
     /**
-     * Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
+     * The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
      */
     EngineType?: EngineType;
     /**
-     * The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+     * The broker engine's version. For a list of supported engine versions, see Supported engines.
      */
     EngineVersion?: __string;
     /**
@@ -709,19 +709,19 @@ declare namespace MQ {
      */
     MaintenanceWindowStartTime?: WeeklyStartTime;
     /**
-     * The authentication strategy that will be applied when the broker is rebooted.
+     * The authentication strategy that will be applied when the broker is rebooted. The default is SIMPLE.
      */
     PendingAuthenticationStrategy?: AuthenticationStrategy;
     /**
-     * The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+     * The broker engine version to upgrade to. For a list of supported engine versions, see Supported engines.
      */
     PendingEngineVersion?: __string;
     /**
-     * The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+     * The broker's host instance type to upgrade to. For a list of supported instance types, see Broker instance types.
      */
     PendingHostInstanceType?: __string;
     /**
-     * The metadata of the LDAP server that will be used to authenticate and authorize connections to the broker once it is rebooted.
+     * The metadata of the LDAP server that will be used to authenticate and authorize connections to the broker after it is rebooted.
      */
     PendingLdapServerMetadata?: LdapServerMetadataOutput;
     /**
@@ -729,11 +729,11 @@ declare namespace MQ {
      */
     PendingSecurityGroups?: __listOf__string;
     /**
-     * Required. Enables connections from applications outside of the VPC that hosts the broker's subnets.
+     * Enables connections from applications outside of the VPC that hosts the broker's subnets.
      */
     PubliclyAccessible?: __boolean;
     /**
-     * The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
+     * The list of rules (1 minimum, 125 maximum) that authorize connections to brokers.
      */
     SecurityGroups?: __listOf__string;
     /**
@@ -741,7 +741,7 @@ declare namespace MQ {
      */
     StorageType?: BrokerStorageType;
     /**
-     * The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones. A SINGLE_INSTANCE deployment requires one subnet (for example, the default subnet). An ACTIVE_STANDBY_MULTI_AZ deployment (ACTIVEMQ) requires two subnets. A CLUSTER_MULTI_AZ deployment (RABBITMQ) has no subnet requirements when deployed with public accessibility, deployment without public accessibility requires at least one subnet.
+     * The list of groups that define which subnets and IP ranges the broker can use from different Availability Zones.
      */
     SubnetIds?: __listOf__string;
     /**
@@ -765,7 +765,7 @@ declare namespace MQ {
      */
     Arn?: __string;
     /**
-     * The authentication strategy associated with the configuration.
+     * Optional. The authentication strategy associated with the configuration. The default is SIMPLE.
      */
     AuthenticationStrategy?: AuthenticationStrategy;
     /**
@@ -777,11 +777,11 @@ declare namespace MQ {
      */
     Description?: __string;
     /**
-     * Required. The type of broker engine. Note: Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
+     * Required. The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
      */
     EngineType?: EngineType;
     /**
-     * Required. The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+     * Required. The broker engine's version. For a list of supported engine versions, see, Supported engines.
      */
     EngineVersion?: __string;
     /**
@@ -863,11 +863,11 @@ declare namespace MQ {
   }
   export interface EncryptionOptions {
     /**
-     * The symmetric customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.
+     * The customer master key (CMK) to use for the AWS Key Management Service (KMS). This key is used to encrypt your data at rest. If not provided, Amazon MQ will use a default CMK to encrypt your data.
      */
     KmsKeyId?: __string;
     /**
-     * Enables the use of an AWS owned CMK using AWS Key Management Service (KMS).
+     * Enables the use of an AWS owned CMK using AWS Key Management Service (KMS). Set to true by default, if no value is provided, for example, for RabbitMQ brokers.
      */
     UseAwsOwnedKey: __boolean;
   }
@@ -880,89 +880,98 @@ declare namespace MQ {
   }
   export interface LdapServerMetadataInput {
     /**
-     * Fully qualified domain name of the LDAP server. Optional failover server.
+     * Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
      */
-    Hosts?: __listOf__string;
+    Hosts: __listOf__string;
     /**
-     * Fully qualified name of the directory to search for a user’s groups.
+     * The distinguished name of the node in the directory information tree (DIT) to search for roles or groups. For example, ou=group, ou=corp, dc=corp,
+                  dc=example, dc=com.
      */
-    RoleBase?: __string;
+    RoleBase: __string;
     /**
      * Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
      */
     RoleName?: __string;
     /**
-     * The search criteria for groups.
+     * The LDAP search filter used to find roles within the roleBase. The distinguished name of the user matched by userSearchMatching is substituted into the {0} placeholder in the search filter. The client's username is substituted into the {1} placeholder. For example, if you set this option to (member=uid={1})for the user janedoe, the search filter becomes (member=uid=janedoe) after string substitution. It matches all role entries that have a member attribute equal to uid=janedoe under the subtree selected by the roleBase.
      */
-    RoleSearchMatching?: __string;
+    RoleSearchMatching: __string;
     /**
-     * The directory search scope for the role. If set to true, scope is to search the entire sub-tree.
+     * The directory search scope for the role. If set to true, scope is to search the entire subtree.
      */
     RoleSearchSubtree?: __boolean;
     /**
-     * Service account password.
+     * Service account password. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example,
+                  dc=com.
      */
-    ServiceAccountPassword?: __string;
+    ServiceAccountPassword: __string;
     /**
-     * Service account username.
+     * Service account username. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example,
+                  dc=com.
      */
-    ServiceAccountUsername?: __string;
+    ServiceAccountUsername: __string;
     /**
-     * Fully qualified name of the directory where you want to search for users.
+     * Select a particular subtree of the directory information tree (DIT) to search for user entries. The subtree is specified by a DN, which specifies the base node of the subtree. For example, by setting this option to ou=Users,ou=corp, dc=corp,
+                  dc=example, dc=com, the search for user entries is restricted to the subtree beneath ou=Users, ou=corp, dc=corp, dc=example, dc=com.
      */
-    UserBase?: __string;
+    UserBase: __string;
     /**
      * Specifies the name of the LDAP attribute for the user group membership.
      */
     UserRoleName?: __string;
     /**
-     * The search criteria for users.
+     * The LDAP search filter used to find users within the userBase. The client's username is substituted into the {0} placeholder in the search filter. For example, if this option is set to (uid={0}) and the received username is janedoe, the search filter becomes (uid=janedoe) after string substitution. It will result in matching an entry like uid=janedoe, ou=Users,ou=corp, dc=corp, dc=example,
+                  dc=com.
      */
-    UserSearchMatching?: __string;
+    UserSearchMatching: __string;
     /**
-     * The directory search scope for the user. If set to true, scope is to search the entire sub-tree.
+     * The directory search scope for the user. If set to true, scope is to search the entire subtree.
      */
     UserSearchSubtree?: __boolean;
   }
   export interface LdapServerMetadataOutput {
     /**
-     * Fully qualified domain name of the LDAP server. Optional failover server.
+     * Specifies the location of the LDAP server such as AWS Directory Service for Microsoft Active Directory . Optional failover server.
      */
-    Hosts?: __listOf__string;
+    Hosts: __listOf__string;
     /**
-     * Fully qualified name of the directory to search for a user’s groups.
+     * The distinguished name of the node in the directory information tree (DIT) to search for roles or groups. For example, ou=group, ou=corp, dc=corp,
+                  dc=example, dc=com.
      */
-    RoleBase?: __string;
+    RoleBase: __string;
     /**
      * Specifies the LDAP attribute that identifies the group name attribute in the object returned from the group membership query.
      */
     RoleName?: __string;
     /**
-     * The search criteria for groups.
+     * The LDAP search filter used to find roles within the roleBase. The distinguished name of the user matched by userSearchMatching is substituted into the {0} placeholder in the search filter. The client's username is substituted into the {1} placeholder. For example, if you set this option to (member=uid={1})for the user janedoe, the search filter becomes (member=uid=janedoe) after string substitution. It matches all role entries that have a member attribute equal to uid=janedoe under the subtree selected by the roleBase.
      */
-    RoleSearchMatching?: __string;
+    RoleSearchMatching: __string;
     /**
-     * The directory search scope for the role. If set to true, scope is to search the entire sub-tree.
+     * The directory search scope for the role. If set to true, scope is to search the entire subtree.
      */
     RoleSearchSubtree?: __boolean;
     /**
-     * Service account username.
+     * Service account username. A service account is an account in your LDAP server that has access to initiate a connection. For example, cn=admin,dc=corp, dc=example,
+                  dc=com.
      */
-    ServiceAccountUsername?: __string;
+    ServiceAccountUsername: __string;
     /**
-     * Fully qualified name of the directory where you want to search for users.
+     * Select a particular subtree of the directory information tree (DIT) to search for user entries. The subtree is specified by a DN, which specifies the base node of the subtree. For example, by setting this option to ou=Users,ou=corp, dc=corp,
+                  dc=example, dc=com, the search for user entries is restricted to the subtree beneath ou=Users, ou=corp, dc=corp, dc=example, dc=com.
      */
-    UserBase?: __string;
+    UserBase: __string;
     /**
      * Specifies the name of the LDAP attribute for the user group membership.
      */
     UserRoleName?: __string;
     /**
-     * The search criteria for users.
+     * The LDAP search filter used to find users within the userBase. The client's username is substituted into the {0} placeholder in the search filter. For example, if this option is set to (uid={0}) and the received username is janedoe, the search filter becomes (uid=janedoe) after string substitution. It will result in matching an entry like uid=janedoe, ou=Users,ou=corp, dc=corp, dc=example,
+               dc=com.
      */
-    UserSearchMatching?: __string;
+    UserSearchMatching: __string;
     /**
-     * The directory search scope for the user. If set to true, scope is to search the entire sub-tree.
+     * The directory search scope for the user. If set to true, scope is to search the entire subtree.
      */
     UserSearchSubtree?: __boolean;
   }
@@ -992,7 +1001,7 @@ declare namespace MQ {
      */
     ConfigurationId: __string;
     /**
-     * The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+     * The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
      */
     MaxResults?: MaxResults;
     /**
@@ -1020,7 +1029,7 @@ declare namespace MQ {
   }
   export interface ListConfigurationsRequest {
     /**
-     * The maximum number of configurations that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
+     * The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
      */
     MaxResults?: MaxResults;
     /**
@@ -1060,7 +1069,7 @@ declare namespace MQ {
      */
     BrokerId: __string;
     /**
-     * The maximum number of ActiveMQ users that can be returned per page (20 by default). This value must be an integer from 5 to 100.
+     * The maximum number of brokers that Amazon MQ can return per page (20 by default). This value must be an integer from 5 to 100.
      */
     MaxResults?: MaxResults;
     /**
@@ -1082,7 +1091,7 @@ declare namespace MQ {
      */
     NextToken?: __string;
     /**
-     * Required. The list of all ActiveMQ usernames for the specified broker.
+     * Required. The list of all ActiveMQ usernames for the specified broker. Does not apply to RabbitMQ brokers.
      */
     Users?: __listOfUserSummary;
   }
@@ -1108,11 +1117,11 @@ declare namespace MQ {
     /**
      * Enables general logging.
      */
-    General?: __boolean;
+    General: __boolean;
     /**
      * The location of the CloudWatch Logs log group where general logs are sent.
      */
-    GeneralLogGroup?: __string;
+    GeneralLogGroup: __string;
     /**
      * The list of information about logs pending to be deployed for the specified broker.
      */
@@ -1149,16 +1158,16 @@ declare namespace MQ {
     /**
      * Required. The reason for which the XML elements or attributes were sanitized.
      */
-    Reason?: SanitizationWarningReason;
+    Reason: SanitizationWarningReason;
   }
   export type SanitizationWarningReason = "DISALLOWED_ELEMENT_REMOVED"|"DISALLOWED_ATTRIBUTE_REMOVED"|"INVALID_ATTRIBUTE_VALUE_REMOVED"|string;
   export interface UpdateBrokerRequest {
     /**
-     * The authentication strategy used to secure the broker.
+     * Optional. The authentication strategy used to secure the broker. The default is SIMPLE.
      */
     AuthenticationStrategy?: AuthenticationStrategy;
     /**
-     * Enables automatic upgrades to new minor versions for brokers, as Apache releases the versions. The automatic upgrades occur during the maintenance window of the broker or after a manual broker reboot.
+     * Enables automatic upgrades to new minor versions for brokers, as new versions are released and supported by Amazon MQ. Automatic upgrades occur during the scheduled maintenance window of the broker or after a manual broker reboot.
      */
     AutoMinorVersionUpgrade?: __boolean;
     /**
@@ -1170,15 +1179,15 @@ declare namespace MQ {
      */
     Configuration?: ConfigurationId;
     /**
-     * The version of the broker engine. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+     * The broker engine version. For a list of supported engine versions, see Supported engines.
      */
     EngineVersion?: __string;
     /**
-     * The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+     * The broker's host instance type to upgrade to. For a list of supported instance types, see Broker instance types.
      */
     HostInstanceType?: __string;
     /**
-     * The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+     * Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker. Does not apply to RabbitMQ brokers.
      */
     LdapServerMetadata?: LdapServerMetadataInput;
     /**
@@ -1186,17 +1195,21 @@ declare namespace MQ {
      */
     Logs?: Logs;
     /**
+     * The parameters that determine the WeeklyStartTime.
+     */
+    MaintenanceWindowStartTime?: WeeklyStartTime;
+    /**
      * The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
      */
     SecurityGroups?: __listOf__string;
   }
   export interface UpdateBrokerResponse {
     /**
-     * The authentication strategy used to secure the broker.
+     * Optional. The authentication strategy used to secure the broker. The default is SIMPLE.
      */
     AuthenticationStrategy?: AuthenticationStrategy;
     /**
-     * The new value of automatic upgrades to new minor version for brokers.
+     * The new boolean value that specifies whether broker engines automatically upgrade to new minor versions as new versions are released and supported by Amazon MQ.
      */
     AutoMinorVersionUpgrade?: __boolean;
     /**
@@ -1208,21 +1221,25 @@ declare namespace MQ {
      */
     Configuration?: ConfigurationId;
     /**
-     * The version of the broker engine to upgrade to. For a list of supported engine versions, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide/broker-engine.html
+     * The broker engine version to upgrade to. For a list of supported engine versions, see Supported engines.
      */
     EngineVersion?: __string;
     /**
-     * The host instance type of the broker to upgrade to. For a list of supported instance types, see https://docs.aws.amazon.com/amazon-mq/latest/developer-guide//broker.html#broker-instance-types
+     * The broker's host instance type to upgrade to. For a list of supported instance types, see Broker instance types.
      */
     HostInstanceType?: __string;
     /**
-     * The metadata of the LDAP server used to authenticate and authorize connections to the broker.
+     * Optional. The metadata of the LDAP server used to authenticate and authorize connections to the broker. Does not apply to RabbitMQ brokers.
      */
     LdapServerMetadata?: LdapServerMetadataOutput;
     /**
      * The list of information about logs to be enabled for the specified broker.
      */
     Logs?: Logs;
+    /**
+     * The parameters that determine the WeeklyStartTime.
+     */
+    MaintenanceWindowStartTime?: WeeklyStartTime;
     /**
      * The list of security groups (1 minimum, 5 maximum) that authorizes connections to brokers.
      */
@@ -1236,7 +1253,7 @@ declare namespace MQ {
     /**
      * Required. The base64-encoded XML configuration.
      */
-    Data?: __string;
+    Data: __string;
     /**
      * The description of the configuration.
      */
@@ -1282,11 +1299,11 @@ declare namespace MQ {
      */
     Groups?: __listOf__string;
     /**
-     * The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.
+     * The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas, colons, or equal signs (,:=).
      */
     Password?: __string;
     /**
-     * Required. The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+     * The username of the ActiveMQ user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
      */
     Username: __string;
   }
@@ -1294,21 +1311,21 @@ declare namespace MQ {
   }
   export interface User {
     /**
-     * Enables access to the ActiveMQ Web Console for the ActiveMQ user (Does not apply to RabbitMQ brokers).
+     * Enables access to the ActiveMQ Web Console for the ActiveMQ user. Does not apply to RabbitMQ brokers.
      */
     ConsoleAccess?: __boolean;
     /**
-     * The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+     * The list of groups (20 maximum) to which the ActiveMQ user belongs. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long. Does not apply to RabbitMQ brokers.
      */
     Groups?: __listOf__string;
     /**
-     * Required. The password of the broker user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas.
+     * Required. The password of the user. This value must be at least 12 characters long, must contain at least 4 unique characters, and must not contain commas, colons, or equal signs (,:=).
      */
-    Password?: __string;
+    Password: __string;
     /**
-     * Required. The username of the broker user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
+     * important>Amazon MQ for ActiveMQ For ActiveMQ brokers, this value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long./important> Amazon MQ for RabbitMQ For RabbitMQ brokers, this value can contain only alphanumeric characters, dashes, periods, underscores (- . _). This value must not contain a tilde (~) character. Amazon MQ prohibts using guest as a valid usename. This value must be 2-100 characters long.
      */
-    Username?: __string;
+    Username: __string;
   }
   export interface UserPendingChanges {
     /**
@@ -1322,7 +1339,7 @@ declare namespace MQ {
     /**
      * Required. The type of change pending for the ActiveMQ user.
      */
-    PendingChange?: ChangeType;
+    PendingChange: ChangeType;
   }
   export interface UserSummary {
     /**
@@ -1332,17 +1349,17 @@ declare namespace MQ {
     /**
      * Required. The username of the broker user. This value can contain only alphanumeric characters, dashes, periods, underscores, and tildes (- . _ ~). This value must be 2-100 characters long.
      */
-    Username?: __string;
+    Username: __string;
   }
   export interface WeeklyStartTime {
     /**
      * Required. The day of the week.
      */
-    DayOfWeek?: DayOfWeek;
+    DayOfWeek: DayOfWeek;
     /**
      * Required. The time, in 24-hour format.
      */
-    TimeOfDay?: __string;
+    TimeOfDay: __string;
     /**
      * The time zone, UTC by default, in either the Country/City format, or the UTC offset format.
      */

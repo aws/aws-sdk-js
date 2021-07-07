@@ -188,6 +188,14 @@ declare class Chime extends Service {
    */
   createChannelModerator(callback?: (err: AWSError, data: Chime.Types.CreateChannelModeratorResponse) => void): Request<Chime.Types.CreateChannelModeratorResponse, AWSError>;
   /**
+   * Creates a media capture pipeline.
+   */
+  createMediaCapturePipeline(params: Chime.Types.CreateMediaCapturePipelineRequest, callback?: (err: AWSError, data: Chime.Types.CreateMediaCapturePipelineResponse) => void): Request<Chime.Types.CreateMediaCapturePipelineResponse, AWSError>;
+  /**
+   * Creates a media capture pipeline.
+   */
+  createMediaCapturePipeline(callback?: (err: AWSError, data: Chime.Types.CreateMediaCapturePipelineResponse) => void): Request<Chime.Types.CreateMediaCapturePipelineResponse, AWSError>;
+  /**
    *  Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime Developer Guide . For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide . 
    */
   createMeeting(params: Chime.Types.CreateMeetingRequest, callback?: (err: AWSError, data: Chime.Types.CreateMeetingResponse) => void): Request<Chime.Types.CreateMeetingResponse, AWSError>;
@@ -387,6 +395,14 @@ declare class Chime extends Service {
    * Deletes the events configuration that allows a bot to receive outgoing events.
    */
   deleteEventsConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the media capture pipeline.
+   */
+  deleteMediaCapturePipeline(params: Chime.Types.DeleteMediaCapturePipelineRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the media capture pipeline.
+   */
+  deleteMediaCapturePipeline(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
    */
@@ -680,6 +696,14 @@ declare class Chime extends Service {
    */
   getGlobalSettings(callback?: (err: AWSError, data: Chime.Types.GetGlobalSettingsResponse) => void): Request<Chime.Types.GetGlobalSettingsResponse, AWSError>;
   /**
+   * Gets an existing media capture pipeline.
+   */
+  getMediaCapturePipeline(params: Chime.Types.GetMediaCapturePipelineRequest, callback?: (err: AWSError, data: Chime.Types.GetMediaCapturePipelineResponse) => void): Request<Chime.Types.GetMediaCapturePipelineResponse, AWSError>;
+  /**
+   * Gets an existing media capture pipeline.
+   */
+  getMediaCapturePipeline(callback?: (err: AWSError, data: Chime.Types.GetMediaCapturePipelineResponse) => void): Request<Chime.Types.GetMediaCapturePipelineResponse, AWSError>;
+  /**
    *  Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide . 
    */
   getMeeting(params: Chime.Types.GetMeetingRequest, callback?: (err: AWSError, data: Chime.Types.GetMeetingResponse) => void): Request<Chime.Types.GetMeetingResponse, AWSError>;
@@ -971,6 +995,14 @@ declare class Chime extends Service {
    * A list of the channels moderated by an AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
    */
   listChannelsModeratedByAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.ListChannelsModeratedByAppInstanceUserResponse) => void): Request<Chime.Types.ListChannelsModeratedByAppInstanceUserResponse, AWSError>;
+  /**
+   * Returns a list of media capture pipelines.
+   */
+  listMediaCapturePipelines(params: Chime.Types.ListMediaCapturePipelinesRequest, callback?: (err: AWSError, data: Chime.Types.ListMediaCapturePipelinesResponse) => void): Request<Chime.Types.ListMediaCapturePipelinesResponse, AWSError>;
+  /**
+   * Returns a list of media capture pipelines.
+   */
+  listMediaCapturePipelines(callback?: (err: AWSError, data: Chime.Types.ListMediaCapturePipelinesResponse) => void): Request<Chime.Types.ListMediaCapturePipelinesResponse, AWSError>;
   /**
    * Lists the tags applied to an Amazon Chime SDK meeting resource.
    */
@@ -2506,6 +2538,34 @@ declare namespace Chime {
      */
     ChannelArn?: ChimeArn;
   }
+  export interface CreateMediaCapturePipelineRequest {
+    /**
+     * Source type from which the media artifacts will be captured. A Chime SDK Meeting is the only supported source.
+     */
+    SourceType: MediaPipelineSourceType;
+    /**
+     * ARN of the source from which the media artifacts are captured.
+     */
+    SourceArn: Arn;
+    /**
+     * Destination type to which the media artifacts are saved. You must use an S3 bucket. 
+     */
+    SinkType: MediaPipelineSinkType;
+    /**
+     * The ARN of the sink type.
+     */
+    SinkArn: Arn;
+    /**
+     * The token assigned to the client making the pipeline request.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface CreateMediaCapturePipelineResponse {
+    /**
+     * A media capture pipeline object, the ID, source type, source ARN, sink type, and sink ARN of a media capture pipeline object.
+     */
+    MediaCapturePipeline?: MediaCapturePipeline;
+  }
   export interface CreateMeetingDialOutRequest {
     /**
      * The Amazon Chime SDK meeting ID.
@@ -2974,6 +3034,12 @@ declare namespace Chime {
      * The bot ID.
      */
     BotId: NonEmptyString;
+  }
+  export interface DeleteMediaCapturePipelineRequest {
+    /**
+     * The ID of the media capture pipeline being deleted. 
+     */
+    MediaPipelineId: GuidString;
   }
   export interface DeleteMeetingRequest {
     /**
@@ -3465,6 +3531,18 @@ declare namespace Chime {
      * The Amazon Chime Voice Connector settings.
      */
     VoiceConnector?: VoiceConnectorSettings;
+  }
+  export interface GetMediaCapturePipelineRequest {
+    /**
+     * The ID of the pipeline that you want to get.
+     */
+    MediaPipelineId: GuidString;
+  }
+  export interface GetMediaCapturePipelineResponse {
+    /**
+     * The media capture pipeline object.
+     */
+    MediaCapturePipeline?: MediaCapturePipeline;
   }
   export interface GetMeetingRequest {
     /**
@@ -4200,6 +4278,26 @@ declare namespace Chime {
      */
     NextToken?: NextToken;
   }
+  export interface ListMediaCapturePipelinesRequest {
+    /**
+     * The token used to retrieve the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in a single call. Valid Range: 1 - 99.
+     */
+    MaxResults?: ResultMax;
+  }
+  export interface ListMediaCapturePipelinesResponse {
+    /**
+     * The media capture pipeline objects in the list.
+     */
+    MediaCapturePipelines?: MediaCapturePipelineList;
+    /**
+     * The token used to retrieve the next page of results. 
+     */
+    NextToken?: String;
+  }
   export interface ListMeetingTagsRequest {
     /**
      * The Amazon Chime SDK meeting ID.
@@ -4543,6 +4641,44 @@ declare namespace Chime {
   export interface LogoutUserResponse {
   }
   export type MaxResults = number;
+  export interface MediaCapturePipeline {
+    /**
+     * The ID of a media capture pipeline.
+     */
+    MediaPipelineId?: GuidString;
+    /**
+     * Source type from which media artifacts are saved. You must use ChimeMeeting.
+     */
+    SourceType?: MediaPipelineSourceType;
+    /**
+     * ARN of the source from which the media artifacts will be saved.
+     */
+    SourceArn?: Arn;
+    /**
+     * The status of the media capture pipeline.
+     */
+    Status?: MediaPipelineStatus;
+    /**
+     * Destination type to which the media artifacts are saved. You must use an S3 Bucket.
+     */
+    SinkType?: MediaPipelineSinkType;
+    /**
+     * ARN of the destination to which the media artifacts are saved.
+     */
+    SinkArn?: Arn;
+    /**
+     * The time at which the capture pipeline was created, in ISO 8601 format.
+     */
+    CreatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The time at which the capture pipeline was updated, in ISO 8601 format.
+     */
+    UpdatedTimestamp?: Iso8601Timestamp;
+  }
+  export type MediaCapturePipelineList = MediaCapturePipeline[];
+  export type MediaPipelineSinkType = "S3Bucket"|string;
+  export type MediaPipelineSourceType = "ChimeSdkMeeting"|string;
+  export type MediaPipelineStatus = "Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped"|string;
   export interface MediaPlacement {
     /**
      * The audio host URL.
