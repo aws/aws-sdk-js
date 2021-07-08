@@ -192,12 +192,6 @@
         expect(response.error).to.be.instanceOf(Error);
         return expect(response.error.code).to.equal('InvalidParameter');
       });
-      it('returns all API response error fields', function() {
-        extractError('{"message":"Error Message", "p1": 123, "p2": "abc"}');
-        expect(response.error.message).to.equal('Error Message');
-        expect(response.error.p1).to.equal(123);
-        expect(response.error.p2).to.equal('abc');
-      });
     });
     return describe('extractData', function() {
       var extractData;
