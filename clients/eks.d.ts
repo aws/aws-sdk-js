@@ -316,6 +316,22 @@ declare class EKS extends Service {
    * Waits for the addonDeleted state by periodically calling the underlying EKS.describeAddonoperation every 10 seconds (at most 60 times).
    */
   waitFor(state: "addonDeleted", callback?: (err: AWSError, data: EKS.Types.DescribeAddonResponse) => void): Request<EKS.Types.DescribeAddonResponse, AWSError>;
+  /**
+   * Waits for the fargateProfileActive state by periodically calling the underlying EKS.describeFargateProfileoperation every 10 seconds (at most 60 times).
+   */
+  waitFor(state: "fargateProfileActive", params: EKS.Types.DescribeFargateProfileRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EKS.Types.DescribeFargateProfileResponse) => void): Request<EKS.Types.DescribeFargateProfileResponse, AWSError>;
+  /**
+   * Waits for the fargateProfileActive state by periodically calling the underlying EKS.describeFargateProfileoperation every 10 seconds (at most 60 times).
+   */
+  waitFor(state: "fargateProfileActive", callback?: (err: AWSError, data: EKS.Types.DescribeFargateProfileResponse) => void): Request<EKS.Types.DescribeFargateProfileResponse, AWSError>;
+  /**
+   * Waits for the fargateProfileDeleted state by periodically calling the underlying EKS.describeFargateProfileoperation every 30 seconds (at most 60 times).
+   */
+  waitFor(state: "fargateProfileDeleted", params: EKS.Types.DescribeFargateProfileRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: EKS.Types.DescribeFargateProfileResponse) => void): Request<EKS.Types.DescribeFargateProfileResponse, AWSError>;
+  /**
+   * Waits for the fargateProfileDeleted state by periodically calling the underlying EKS.describeFargateProfileoperation every 30 seconds (at most 60 times).
+   */
+  waitFor(state: "fargateProfileDeleted", callback?: (err: AWSError, data: EKS.Types.DescribeFargateProfileResponse) => void): Request<EKS.Types.DescribeFargateProfileResponse, AWSError>;
 }
 declare namespace EKS {
   export type AMITypes = "AL2_x86_64"|"AL2_x86_64_GPU"|"AL2_ARM_64"|"CUSTOM"|string;

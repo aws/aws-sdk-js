@@ -195,6 +195,16 @@ declare namespace DevOpsGuru {
   }
   export type AnomalyId = string;
   export type AnomalyLimit = number;
+  export interface AnomalyReportedTimeRange {
+    /**
+     *  The time when an anomaly is opened. 
+     */
+    OpenTime: Timestamp;
+    /**
+     *  The time when an anomaly is closed. 
+     */
+    CloseTime?: Timestamp;
+  }
   export type AnomalySeverity = "LOW"|"MEDIUM"|"HIGH"|string;
   export interface AnomalySourceDetails {
     /**
@@ -849,6 +859,10 @@ declare namespace DevOpsGuru {
      */
     UpdateTime?: Timestamp;
     AnomalyTimeRange?: AnomalyTimeRange;
+    /**
+     *  A AnomalyReportedTimeRange object that specifies the time range between when the anomaly is opened and the time when it is closed. 
+     */
+    AnomalyReportedTimeRange?: AnomalyReportedTimeRange;
     PredictionTimeRange?: PredictionTimeRange;
     /**
      *  Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. 
@@ -882,6 +896,10 @@ declare namespace DevOpsGuru {
      */
     UpdateTime?: Timestamp;
     AnomalyTimeRange?: AnomalyTimeRange;
+    /**
+     *  A AnomalyReportedTimeRange object that specifies the time range between when the anomaly is opened and the time when it is closed. 
+     */
+    AnomalyReportedTimeRange?: AnomalyReportedTimeRange;
     PredictionTimeRange?: PredictionTimeRange;
     /**
      *  Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. 
@@ -972,6 +990,10 @@ declare namespace DevOpsGuru {
     Status?: AnomalyStatus;
     AnomalyTimeRange?: AnomalyTimeRange;
     /**
+     *  A AnomalyReportedTimeRange object that specifies the time range between when the anomaly is opened and the time when it is closed. 
+     */
+    AnomalyReportedTimeRange?: AnomalyReportedTimeRange;
+    /**
      *  Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. 
      */
     SourceDetails?: AnomalySourceDetails;
@@ -995,6 +1017,10 @@ declare namespace DevOpsGuru {
      */
     Status?: AnomalyStatus;
     AnomalyTimeRange?: AnomalyTimeRange;
+    /**
+     *  A AnomalyReportedTimeRange object that specifies the time range between when the anomaly is opened and the time when it is closed. 
+     */
+    AnomalyReportedTimeRange?: AnomalyReportedTimeRange;
     /**
      *  Details about the source of the analyzed operational data that triggered the anomaly. The one supported source is Amazon CloudWatch metrics. 
      */

@@ -302,6 +302,23 @@
         "shape": "GetPlaybackConfigurationResponse"
       }
     },
+    "ListAlerts": {
+      "documentation": "<p>Returns a list of alerts for the given resource.</p>",
+      "errors": [],
+      "http": {
+        "method": "GET",
+        "requestUri": "/alerts",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListAlertsRequest"
+      },
+      "name": "ListAlerts",
+      "output": {
+        "documentation": "<p>Success.</p>",
+        "shape": "ListAlertsResponse"
+      }
+    },
     "ListChannels": {
       "documentation": "<p>Retrieves a list of channels that are associated with this account.</p>",
       "errors": [],
@@ -600,6 +617,39 @@
           "shape": "__boolean"
         }
       },
+      "type": "structure"
+    },
+    "Alert": {
+      "documentation": "<p>Alert configuration parameters.</p>",
+      "members": {
+        "AlertCode": {
+          "documentation": "<p>The code for the alert. For example, NOT_PROCESSED.</p>",
+          "shape": "__string"
+        },
+        "AlertMessage": {
+          "documentation": "<p>If an alert is generated for a resource, an explanation of the reason for the alert.</p>",
+          "shape": "__string"
+        },
+        "LastModifiedTime": {
+          "documentation": "<p>The timestamp when the alert was last modified.</p>",
+          "shape": "__timestampUnix"
+        },
+        "RelatedResourceArns": {
+          "documentation": "<p>The Amazon Resource Names (ARNs) related to this alert.</p>",
+          "shape": "__listOf__string"
+        },
+        "ResourceArn": {
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+          "shape": "__string"
+        }
+      },
+      "required": [
+        "ResourceArn",
+        "AlertCode",
+        "LastModifiedTime",
+        "RelatedResourceArns",
+        "AlertMessage"
+      ],
       "type": "structure"
     },
     "AvailSuppression": {
@@ -1617,6 +1667,45 @@
         "shape": "HttpPackageConfiguration"
       },
       "type": "list"
+    },
+    "ListAlertsRequest": {
+      "members": {
+        "MaxResults": {
+          "documentation": "<p>Upper bound on number of records to return. The maximum number of results is 100.</p>",
+          "location": "querystring",
+          "locationName": "maxResults",
+          "shape": "MaxResults"
+        },
+        "NextToken": {
+          "documentation": "<p>Pagination token from the GET list request. Use the token to fetch the next page of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken",
+          "shape": "__string"
+        },
+        "ResourceArn": {
+          "documentation": "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+          "location": "querystring",
+          "locationName": "resourceArn",
+          "shape": "__string"
+        }
+      },
+      "required": [
+        "ResourceArn"
+      ],
+      "type": "structure"
+    },
+    "ListAlertsResponse": {
+      "members": {
+        "Items": {
+          "documentation": "<p>An array of alerts that are associated with this resource.</p>",
+          "shape": "__listOfAlert"
+        },
+        "NextToken": {
+          "documentation": "<p>Pagination token from the list request. Use the token to fetch the next page of results.</p>",
+          "shape": "__string"
+        }
+      },
+      "type": "structure"
     },
     "ListChannelsRequest": {
       "members": {
@@ -2665,6 +2754,12 @@
     "__listOfAdBreak": {
       "member": {
         "shape": "AdBreak"
+      },
+      "type": "list"
+    },
+    "__listOfAlert": {
+      "member": {
+        "shape": "Alert"
       },
       "type": "list"
     },

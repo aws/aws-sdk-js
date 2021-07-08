@@ -45,7 +45,7 @@
           "shape": "ServiceQuotaExceededException"
         }
       ],
-      "documentation": "<p>Creates an Outpost.</p>"
+      "documentation": "<p>Creates an Outpost.</p> <p>You can specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>"
     },
     "DeleteOutpost": {
       "name": "DeleteOutpost",
@@ -188,7 +188,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>List the Outposts for your AWS account.</p>"
+      "documentation": "<p>Create a list of the Outposts for your AWS account. Add filters to your request to return a more specific list of results. Use filters to match an Outpost lifecycle status, Availibility Zone (<code>us-east-1a</code>), and AZ ID (<code>use1-az1</code>). </p> <p>If you specify multiple filters, the filters are joined with an <code>AND</code>, and the request returns only results that match all of the specified filters.</p>"
     },
     "ListSites": {
       "name": "ListSites",
@@ -306,17 +306,33 @@
     },
     "AvailabilityZone": {
       "type": "string",
-      "documentation": "<p>The Availability Zone.</p> <p>You must specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>",
+      "documentation": "<p>The Availability Zone.</p>",
       "max": 1000,
       "min": 1,
       "pattern": "^([a-zA-Z]+-){1,3}([a-zA-Z]+)?(\\d+[a-zA-Z]?)?$"
     },
     "AvailabilityZoneId": {
       "type": "string",
-      "documentation": "<p>The ID of the Availability Zone.</p> <p>You must specify <code>AvailabilityZone</code> or <code>AvailabilityZoneId</code>.</p>",
+      "documentation": "<p>The ID of the Availability Zone.</p>",
       "max": 255,
       "min": 1,
       "pattern": "^[a-zA-Z]+\\d-[a-zA-Z]+\\d$"
+    },
+    "AvailabilityZoneIdList": {
+      "type": "list",
+      "member": {
+        "shape": "AvailabilityZoneId"
+      },
+      "max": 5,
+      "min": 1
+    },
+    "AvailabilityZoneList": {
+      "type": "list",
+      "member": {
+        "shape": "AvailabilityZone"
+      },
+      "max": 5,
+      "min": 1
     },
     "CreateOutpostInput": {
       "type": "structure",
@@ -471,7 +487,18 @@
     },
     "LifeCycleStatus": {
       "type": "string",
-      "documentation": "<p>The life cycle status.</p>"
+      "documentation": "<p>The life cycle status.</p>",
+      "max": 20,
+      "min": 1,
+      "pattern": "^[ A-Za-z]+$"
+    },
+    "LifeCycleStatusList": {
+      "type": "list",
+      "member": {
+        "shape": "LifeCycleStatus"
+      },
+      "max": 5,
+      "min": 1
     },
     "ListOutpostsInput": {
       "type": "structure",
@@ -485,6 +512,24 @@
           "shape": "MaxResults1000",
           "location": "querystring",
           "locationName": "MaxResults"
+        },
+        "LifeCycleStatusFilter": {
+          "shape": "LifeCycleStatusList",
+          "documentation": "<p> A filter for the lifecycle status of the Outpost. </p> <p> Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values. </p>",
+          "location": "querystring",
+          "locationName": "LifeCycleStatusFilter"
+        },
+        "AvailabilityZoneFilter": {
+          "shape": "AvailabilityZoneList",
+          "documentation": "<p> A filter for the Availibility Zone (<code>us-east-1a</code>) of the Outpost. </p> <p> Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values. </p>",
+          "location": "querystring",
+          "locationName": "AvailabilityZoneFilter"
+        },
+        "AvailabilityZoneIdFilter": {
+          "shape": "AvailabilityZoneIdList",
+          "documentation": "<p> A filter for the AZ IDs (<code>use1-az1</code>) of the Outpost. </p> <p> Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an <code>OR</code>, and the request returns all results that match any of the specified values. </p>",
+          "location": "querystring",
+          "locationName": "AvailabilityZoneIdFilter"
         }
       }
     },

@@ -148,6 +148,14 @@ declare class MediaTailor extends Service {
    */
   getPlaybackConfiguration(callback?: (err: AWSError, data: MediaTailor.Types.GetPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.GetPlaybackConfigurationResponse, AWSError>;
   /**
+   * Returns a list of alerts for the given resource.
+   */
+  listAlerts(params: MediaTailor.Types.ListAlertsRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListAlertsResponse) => void): Request<MediaTailor.Types.ListAlertsResponse, AWSError>;
+  /**
+   * Returns a list of alerts for the given resource.
+   */
+  listAlerts(callback?: (err: AWSError, data: MediaTailor.Types.ListAlertsResponse) => void): Request<MediaTailor.Types.ListAlertsResponse, AWSError>;
+  /**
    * Retrieves a list of channels that are associated with this account.
    */
   listChannels(params: MediaTailor.Types.ListChannelsRequest, callback?: (err: AWSError, data: MediaTailor.Types.ListChannelsResponse) => void): Request<MediaTailor.Types.ListChannelsResponse, AWSError>;
@@ -295,6 +303,28 @@ declare namespace MediaTailor {
      * Enables ad marker passthrough for your configuration.
      */
     Enabled?: __boolean;
+  }
+  export interface Alert {
+    /**
+     * The code for the alert. For example, NOT_PROCESSED.
+     */
+    AlertCode: __string;
+    /**
+     * If an alert is generated for a resource, an explanation of the reason for the alert.
+     */
+    AlertMessage: __string;
+    /**
+     * The timestamp when the alert was last modified.
+     */
+    LastModifiedTime: __timestampUnix;
+    /**
+     * The Amazon Resource Names (ARNs) related to this alert.
+     */
+    RelatedResourceArns: __listOf__string;
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: __string;
   }
   export interface AvailSuppression {
     /**
@@ -992,6 +1022,30 @@ declare namespace MediaTailor {
     Type: Type;
   }
   export type HttpPackageConfigurations = HttpPackageConfiguration[];
+  export interface ListAlertsRequest {
+    /**
+     * Upper bound on number of records to return. The maximum number of results is 100.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * Pagination token from the GET list request. Use the token to fetch the next page of results.
+     */
+    NextToken?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: __string;
+  }
+  export interface ListAlertsResponse {
+    /**
+     * An array of alerts that are associated with this resource.
+     */
+    Items?: __listOfAlert;
+    /**
+     * Pagination token from the list request. Use the token to fetch the next page of results.
+     */
+    NextToken?: __string;
+  }
   export interface ListChannelsRequest {
     /**
      * Upper bound on number of records to return. The maximum number of results is 100.
@@ -1729,6 +1783,7 @@ declare namespace MediaTailor {
   export type __integer = number;
   export type __integerMin1 = number;
   export type __listOfAdBreak = AdBreak[];
+  export type __listOfAlert = Alert[];
   export type __listOfChannel = Channel[];
   export type __listOfPlaybackConfiguration = PlaybackConfiguration[];
   export type __listOfScheduleAdBreak = ScheduleAdBreak[];

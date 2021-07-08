@@ -350,7 +350,7 @@ declare namespace SSMContacts {
   export type Content = string;
   export interface CreateContactChannelRequest {
     /**
-     * The Amazon Resource Name (ARN) of the contact channel.
+     * The Amazon Resource Name (ARN) of the contact you are adding the contact channel to.
      */
     ContactId: SsmContactsArn;
     /**

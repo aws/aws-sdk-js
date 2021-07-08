@@ -1154,7 +1154,7 @@
       "members": {
         "ContactId": {
           "shape": "SsmContactsArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the contact channel.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the contact you are adding the contact channel to.</p>"
         },
         "Name": {
           "shape": "ChannelName",

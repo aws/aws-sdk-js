@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.941.0-->
+<!--LATEST=2.942.0-->
 <!--ENTRYINSERT-->
+
+## 2.942.0
+* feature: DevOpsGuru: Add AnomalyReportedTimeRange field to include open and close time of anomalies.
+* feature: EKS: Added waiters for EKS FargateProfiles.
+* feature: FMS: AWS Firewall Manager now supports route table monitoring, and provides remediation action recommendations to security administrators for AWS Network Firewall policies with misconfigured routes.
+* feature: MediaTailor: Add ListAlerts for Channel, Program, Source Location, and VOD Source to return alerts for resources.
+* feature: Outposts: Added property filters for listOutposts
 
 ## 2.941.0
 * feature: Chime: Releasing new APIs for AWS Chime MediaCapturePipeline
