@@ -567,7 +567,7 @@ declare namespace MediaConvert {
   export type Av1FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER"|string;
   export interface Av1QvbrSettings {
     /**
-     * Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within av1Settings. Specify the general target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+     * Use this setting only when you set Rate control mode (RateControlMode) to QVBR. Specify the target quality level for this output. MediaConvert determines the right number of bits to use for each part of the video to maintain the video quality that you specify. When you keep the default value, AUTO, MediaConvert picks a quality level for you, based on characteristics of your input video. If you prefer to specify a quality level, specify a number from 1 through 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
      */
     QvbrQualityLevel?: __integerMin1Max10;
     /**
@@ -610,7 +610,7 @@ declare namespace MediaConvert {
      */
     NumberBFramesBetweenReferenceFrames?: __integerMin0Max15;
     /**
-     * Settings for quality-defined variable bitrate encoding with the AV1 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode.
+     * Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode (RateControlMode).
      */
     QvbrSettings?: Av1QvbrSettings;
     /**
@@ -844,6 +844,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     SccDestinationSettings?: SccDestinationSettings;
     /**
+     * SRT Destination Settings
+     */
+    SrtDestinationSettings?: SrtDestinationSettings;
+    /**
      * Settings related to teletext captions. Set up teletext captions in the same output as your video. For more information, see https://docs.aws.amazon.com/mediaconvert/latest/ug/teletext-output-captions.html. When you work directly in your JSON job specification, include this object and any required children when you set destinationType to TELETEXT.
      */
     TeletextDestinationSettings?: TeletextDestinationSettings;
@@ -1035,6 +1039,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     StreamInfResolution?: CmafStreamInfResolution;
     /**
+     * When set to LEGACY, the segment target duration is always rounded up to the nearest integer value above its current value in seconds. When set to SPEC\\_COMPLIANT, the segment target duration is rounded up to the nearest integer value if fraction seconds are greater than or equal to 0.5 (>= 0.5) and rounded down if less than 0.5 (< 0.5). You may need to use LEGACY if your client needs to ensure that the target duration is always longer than the actual duration of the segment. Some older players may experience interrupted playback when the actual duration of a track in a segment is longer than the target duration.
+     */
+    TargetDurationCompatibilityMode?: CmafTargetDurationCompatibilityMode;
+    /**
      * When set to ENABLED, a DASH MPD manifest will be generated for this output.
      */
     WriteDashManifest?: CmafWriteDASHManifest;
@@ -1056,6 +1064,7 @@ All burn-in and DVB-Sub font settings must match.
   export type CmafPtsOffsetHandlingForBFrames = "ZERO_BASED"|"MATCH_INITIAL_PTS"|string;
   export type CmafSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES"|string;
   export type CmafStreamInfResolution = "INCLUDE"|"EXCLUDE"|string;
+  export type CmafTargetDurationCompatibilityMode = "LEGACY"|"SPEC_COMPLIANT"|string;
   export type CmafWriteDASHManifest = "DISABLED"|"ENABLED"|string;
   export type CmafWriteHLSManifest = "DISABLED"|"ENABLED"|string;
   export type CmafWriteSegmentTimelineInRepresentation = "ENABLED"|"DISABLED"|string;
@@ -1602,7 +1611,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     DdsYCoordinate?: __integerMin0Max2147483647;
     /**
-     * Specifies the color of the burned-in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
+     * Specifies the color of the DVB-SUB captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
      */
     FontColor?: DvbSubtitleFontColor;
     /**
@@ -2058,7 +2067,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     MaxAverageBitrate?: __integerMin1000Max1152000000;
     /**
-     * Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h264Settings. Specify the general target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+     * Use this setting only when you set Rate control mode (RateControlMode) to QVBR. Specify the target quality level for this output. MediaConvert determines the right number of bits to use for each part of the video to maintain the video quality that you specify. When you keep the default value, AUTO, MediaConvert picks a quality level for you, based on characteristics of your input video. If you prefer to specify a quality level, specify a number from 1 through 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
      */
     QvbrQualityLevel?: __integerMin1Max10;
     /**
@@ -2180,7 +2189,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     QualityTuningLevel?: H264QualityTuningLevel;
     /**
-     * Settings for quality-defined variable bitrate encoding with the H.264 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode.
+     * Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode (RateControlMode).
      */
     QvbrSettings?: H264QvbrSettings;
     /**
@@ -2257,7 +2266,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     MaxAverageBitrate?: __integerMin1000Max1466400000;
     /**
-     * Required when you use QVBR rate control mode. That is, when you specify qvbrSettings within h265Settings. Specify the general target quality level for this output, from 1 to 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
+     * Use this setting only when you set Rate control mode (RateControlMode) to QVBR. Specify the target quality level for this output. MediaConvert determines the right number of bits to use for each part of the video to maintain the video quality that you specify. When you keep the default value, AUTO, MediaConvert picks a quality level for you, based on characteristics of your input video. If you prefer to specify a quality level, specify a number from 1 through 10. Use higher numbers for greater quality. Level 10 results in nearly lossless compression. The quality level for most broadcast-quality transcodes is between 6 and 9. Optionally, to specify a value between whole numbers, also provide a value for the setting qvbrQualityLevelFineTune. For example, if you want your QVBR quality level to be 7.33, set qvbrQualityLevel to 7 and set qvbrQualityLevelFineTune to .33.
      */
     QvbrQualityLevel?: __integerMin1Max10;
     /**
@@ -2375,7 +2384,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     QualityTuningLevel?: H265QualityTuningLevel;
     /**
-     * Settings for quality-defined variable bitrate encoding with the H.265 codec. Required when you set Rate control mode to QVBR. Not valid when you set Rate control mode to a value other than QVBR, or when you don't define Rate control mode.
+     * Settings for quality-defined variable bitrate encoding with the H.265 codec. Use these settings only when you set QVBR for Rate control mode (RateControlMode).
      */
     QvbrSettings?: H265QvbrSettings;
     /**
@@ -2665,6 +2674,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     StreamInfResolution?: HlsStreamInfResolution;
     /**
+     * When set to LEGACY, the segment target duration is always rounded up to the nearest integer value above its current value in seconds. When set to SPEC\\_COMPLIANT, the segment target duration is rounded up to the nearest integer value if fraction seconds are greater than or equal to 0.5 (>= 0.5) and rounded down if less than 0.5 (< 0.5). You may need to use LEGACY if your client needs to ensure that the target duration is always longer than the actual duration of the segment. Some older players may experience interrupted playback when the actual duration of a track in a segment is longer than the target duration.
+     */
+    TargetDurationCompatibilityMode?: HlsTargetDurationCompatibilityMode;
+    /**
      * Indicates ID3 frame that has the timecode.
      */
     TimedMetadataId3Frame?: HlsTimedMetadataId3Frame;
@@ -2732,6 +2745,7 @@ All burn-in and DVB-Sub font settings must match.
     SegmentModifier?: __string;
   }
   export type HlsStreamInfResolution = "INCLUDE"|"EXCLUDE"|string;
+  export type HlsTargetDurationCompatibilityMode = "LEGACY"|"SPEC_COMPLIANT"|string;
   export type HlsTimedMetadataId3Frame = "NONE"|"PRIV"|"TDRL"|string;
   export interface HopDestination {
     /**
@@ -4710,6 +4724,13 @@ All burn-in and DVB-Sub font settings must match.
      */
     Url?: __stringPatternHttps;
   }
+  export interface SrtDestinationSettings {
+    /**
+     * Choose Enabled (ENABLED) to have MediaConvert use the font style, color, and position information from the captions source in the input. Keep the default value, Disabled (DISABLED), for simplified output captions.
+     */
+    StylePassthrough?: SrtStylePassthrough;
+  }
+  export type SrtStylePassthrough = "ENABLED"|"DISABLED"|string;
   export interface StaticKeyProvider {
     /**
      * Relates to DRM implementation. Sets the value of the KEYFORMAT attribute. Must be 'identity' or a reverse DNS string. May be omitted to indicate an implicit value of 'identity'.

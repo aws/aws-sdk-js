@@ -117,6 +117,9 @@
         },
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
         }
       ],
       "documentation": "<p>Creates a batch prediction job.</p>"
@@ -2971,7 +2974,7 @@
         },
         "eventVariables": {
           "shape": "EventVariableMap",
-          "documentation": "<p>Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.</p>"
+          "documentation": "<p>Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.</p> <important> <ul> <li> <p>You must provide at least one eventVariable</p> </li> <li> <p>If detectorVersion is associated with a modelVersion, you must provide at least one associated eventVariable</p> </li> </ul> </important> <p>To ensure highest possible fraud prediction and to simplify your data preparation, Amazon Fraud Detector will replace all missing variables or values as follows:</p> <p> <b>For Amazon Fraud Detector trained models:</b> </p> <p>If a null value is provided explicitly for a variable or if a variable is missing, model will replace the null value or the missing variable (no variable name in the eventVariables map) with calculated default mean/medians for numeric variables and with special values for categorical variables.</p> <p> <b>For External models ( for example, imported SageMaker):</b> </p> <p>If a null value is provided explicitly for a variable, the model and rules will use “null” as the value. If a variable is not provided (no variable name in the eventVariables map), model and rules will use the default value that is provided for the variable. </p>"
         },
         "externalModelEndpointDataBlobs": {
           "shape": "ExternalModelEndpointDataBlobMap",
@@ -3358,6 +3361,12 @@
         "DETECTORPL"
       ]
     },
+    "ListOfLogitMetrics": {
+      "type": "list",
+      "member": {
+        "shape": "LogitMetric"
+      }
+    },
     "ListOfModelScores": {
       "type": "list",
       "member": {
@@ -3414,6 +3423,29 @@
           "documentation": "<p>The next token for subsequent requests. </p>"
         }
       }
+    },
+    "LogitMetric": {
+      "type": "structure",
+      "required": [
+        "variableName",
+        "variableType",
+        "variableImportance"
+      ],
+      "members": {
+        "variableName": {
+          "shape": "string",
+          "documentation": "<p>The name of the variable.</p>"
+        },
+        "variableType": {
+          "shape": "string",
+          "documentation": "<p>The type of variable.</p>"
+        },
+        "variableImportance": {
+          "shape": "float",
+          "documentation": "<p>The relative importance of the variable.</p>"
+        }
+      },
+      "documentation": "<p>The logit metric details.</p>"
     },
     "MetricDataPoint": {
       "type": "structure",
@@ -4129,6 +4161,10 @@
         "trainingMetrics": {
           "shape": "TrainingMetrics",
           "documentation": "<p>The training metric details.</p>"
+        },
+        "variableImportanceMetrics": {
+          "shape": "VariableImportanceMetrics",
+          "documentation": "<p>The variable importance metrics.</p>"
         }
       },
       "documentation": "<p>The training result details.</p>"
@@ -4531,6 +4567,16 @@
       },
       "max": 25,
       "min": 1
+    },
+    "VariableImportanceMetrics": {
+      "type": "structure",
+      "members": {
+        "LogitMetrics": {
+          "shape": "ListOfLogitMetrics",
+          "documentation": "<p>List of variable metrics.</p>"
+        }
+      },
+      "documentation": "<p>The variable importance metrics details.</p>"
     },
     "VariableList": {
       "type": "list",

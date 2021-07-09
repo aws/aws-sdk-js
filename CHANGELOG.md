@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.942.0-->
+<!--LATEST=2.943.0-->
 <!--ENTRYINSERT-->
+
+## 2.943.0
+* feature: FraudDetector: This release adds support for ML Explainability to display model variable importance value in Amazon Fraud Detector.
+* feature: MediaConvert: MediaConvert now supports color, style and position information passthrough from 608 and Teletext to SRT and WebVTT subtitles. MediaConvert now also supports Automatic QVBR quality levels for QVBR RateControlMode.
+* feature: SageMaker: Releasing new APIs related to Tuning steps in model building pipelines.
 
 ## 2.942.0
 * feature: DevOpsGuru: Add AnomalyReportedTimeRange field to include open and close time of anomalies.

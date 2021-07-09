@@ -21349,6 +21349,10 @@
           "shape": "TransformJobStepMetadata",
           "documentation": "<p>The Amazon Resource Name (ARN) of the transform job that was run by this step execution.</p>"
         },
+        "TuningJob": {
+          "shape": "TuningJobStepMetaData",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the tuning job that was run by this step execution.</p>"
+        },
         "Model": {
           "shape": "ModelStepMetadata",
           "documentation": "<p>Metadata for the Model step.</p>"
@@ -22769,7 +22773,7 @@
           "documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Web Services Lambda function that provides credentials to authenticate to the private Docker registry where your model image is hosted. For information about how to create an Amazon Web Services Lambda function, see <a href=\"https://docs.aws.amazon.com/lambda/latest/dg/getting-started-create-function.html\">Create a Lambda function with the console</a> in the <i>Amazon Web Services Lambda Developer Guide</i>.</p>"
         }
       },
-      "documentation": "<p>Specifies an authentication configuration for the private docker registry where your model image is hosted. Specify a value for this property only if you specified <code>Vpc</code> as the value for the <code>RepositoryAccessMode</code> field of the <code>ImageConfig</code> object that you passed to a call to <a>CreateModel</a> and the private Docker registry where the model image is hosted requires authentication.</p>"
+      "documentation": "<p>Specifies an authentication configuration for the private docker registry where your model image is hosted. Specify a value for this property only if you specified <code>Vpc</code> as the value for the <code>RepositoryAccessMode</code> field of the <code>ImageConfig</code> object that you passed to a call to <code>CreateModel</code> and the private Docker registry where the model image is hosted requires authentication.</p>"
     },
     "RepositoryCredentialsProviderArn": {
       "type": "string",
@@ -25475,6 +25479,16 @@
         }
       },
       "documentation": "<p>The job completion criteria.</p>"
+    },
+    "TuningJobStepMetaData": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "HyperParameterTuningJobArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the tuning job that was run by this step execution.</p>"
+        }
+      },
+      "documentation": "<p>Metadata for a tuning step.</p>"
     },
     "USD": {
       "type": "structure",

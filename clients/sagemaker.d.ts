@@ -12926,6 +12926,10 @@ declare namespace SageMaker {
      */
     TransformJob?: TransformJobStepMetadata;
     /**
+     * The Amazon Resource Name (ARN) of the tuning job that was run by this step execution.
+     */
+    TuningJob?: TuningJobStepMetaData;
+    /**
      * Metadata for the Model step.
      */
     Model?: ModelStepMetadata;
@@ -15004,6 +15008,12 @@ declare namespace SageMaker {
      * The value of the objective metric.
      */
     TargetObjectiveMetricValue: TargetObjectiveMetricValue;
+  }
+  export interface TuningJobStepMetaData {
+    /**
+     * The Amazon Resource Name (ARN) of the tuning job that was run by this step execution.
+     */
+    Arn?: HyperParameterTuningJobArn;
   }
   export interface USD {
     /**

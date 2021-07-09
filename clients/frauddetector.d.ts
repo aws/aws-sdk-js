@@ -1370,7 +1370,7 @@ declare namespace FraudDetector {
      */
     eventTimestamp: string;
     /**
-     * Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.
+     * Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.    You must provide at least one eventVariable   If detectorVersion is associated with a modelVersion, you must provide at least one associated eventVariable    To ensure highest possible fraud prediction and to simplify your data preparation, Amazon Fraud Detector will replace all missing variables or values as follows:  For Amazon Fraud Detector trained models:  If a null value is provided explicitly for a variable or if a variable is missing, model will replace the null value or the missing variable (no variable name in the eventVariables map) with calculated default mean/medians for numeric variables and with special values for categorical variables.  For External models ( for example, imported SageMaker):  If a null value is provided explicitly for a variable, the model and rules will use “null” as the value. If a variable is not provided (no variable name in the eventVariables map), model and rules will use the default value that is provided for the variable. 
      */
     eventVariables: EventVariableMap;
     /**
@@ -1660,6 +1660,7 @@ declare namespace FraudDetector {
     labelMapper: labelMapper;
   }
   export type Language = "DETECTORPL"|string;
+  export type ListOfLogitMetrics = LogitMetric[];
   export type ListOfModelScores = ModelScores[];
   export type ListOfModelVersions = ModelVersion[];
   export type ListOfRuleResults = RuleResult[];
@@ -1687,6 +1688,20 @@ declare namespace FraudDetector {
      * The next token for subsequent requests. 
      */
     nextToken?: string;
+  }
+  export interface LogitMetric {
+    /**
+     * The name of the variable.
+     */
+    variableName: string;
+    /**
+     * The type of variable.
+     */
+    variableType: string;
+    /**
+     * The relative importance of the variable.
+     */
+    variableImportance: float;
   }
   export interface MetricDataPoint {
     /**
@@ -2145,6 +2160,10 @@ declare namespace FraudDetector {
      * The training metric details.
      */
     trainingMetrics?: TrainingMetrics;
+    /**
+     * The variable importance metrics.
+     */
+    variableImportanceMetrics?: VariableImportanceMetrics;
   }
   export interface UntagResourceRequest {
     /**
@@ -2428,6 +2447,12 @@ declare namespace FraudDetector {
     variableType?: string;
   }
   export type VariableEntryList = VariableEntry[];
+  export interface VariableImportanceMetrics {
+    /**
+     * List of variable metrics.
+     */
+    LogitMetrics?: ListOfLogitMetrics;
+  }
   export type VariableList = Variable[];
   export type VariablesMaxResults = number;
   export type batchPredictionsMaxPageSize = number;
