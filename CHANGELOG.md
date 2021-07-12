@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.943.0-->
+<!--LATEST=2.944.0-->
 <!--ENTRYINSERT-->
+
+## 2.944.0
+* feature: Kendra: Amazon Kendra now supports Principal Store
 
 ## 2.943.0
 * feature: FraudDetector: This release adds support for ML Explainability to display model variable importance value in Amazon Fraud Detector.

@@ -46,7 +46,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Removes one or more documents from an index. The documents must have been added with the <code>BatchPutDocument</code> operation.</p> <p>The documents are deleted asynchronously. You can see the progress of the deletion by using AWS CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.</p>"
+      "documentation": "<p>Removes one or more documents from an index. The documents must have been added with the <code>BatchPutDocument</code> operation.</p> <p>The documents are deleted asynchronously. You can see the progress of the deletion by using Amazon Web Services CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.</p>"
     },
     "BatchGetDocumentStatus": {
       "name": "BatchGetDocumentStatus",
@@ -117,7 +117,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Adds one or more documents to an index.</p> <p>The <code>BatchPutDocument</code> operation enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this operation to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index.</p> <p>The documents are indexed asynchronously. You can see the progress of the batch using AWS CloudWatch. Any error messages related to processing the batch are sent to your AWS CloudWatch log.</p>"
+      "documentation": "<p>Adds one or more documents to an index.</p> <p>The <code>BatchPutDocument</code> operation enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this operation to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index.</p> <p>The documents are indexed asynchronously. You can see the progress of the batch using Amazon Web Services CloudWatch. Any error messages related to processing the batch are sent to your Amazon Web Services CloudWatch log.</p>"
     },
     "ClearQuerySuggestions": {
       "name": "ClearQuerySuggestions",
@@ -431,6 +431,37 @@
       ],
       "documentation": "<p>Deletes an existing Amazon Kendra index. An exception is not thrown if the index is already being deleted. While the index is being deleted, the <code>Status</code> field returned by a call to the <code>DescribeIndex</code> operation is set to <code>DELETING</code>.</p>"
     },
+    "DeletePrincipalMapping": {
+      "name": "DeletePrincipalMapping",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeletePrincipalMappingRequest"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Deletes a group so that all users and sub groups that belong to the group can no longer access documents only available to that group.</p> <p>For example, after deleting the group \"Summer Interns\", all interns who belonged to that group no longer see intern-only documents in their search results.</p> <p>If you want to delete or replace users or sub groups of a group, you need to use the <code>PutPrincipalMapping</code> operation. For example, if a user in the group \"Engineering\" leaves the engineering team and another user takes their place, you provide an updated list of users or sub groups that belong to the \"Engineering\" group when calling <code>PutPrincipalMapping</code>. You can update your internal list of users or sub groups and input this list when calling <code>PutPrincipalMapping</code>.</p>"
+    },
     "DeleteQuerySuggestionsBlockList": {
       "name": "DeleteQuerySuggestionsBlockList",
       "http": {
@@ -585,6 +616,37 @@
         }
       ],
       "documentation": "<p>Describes an existing Amazon Kendra index</p>"
+    },
+    "DescribePrincipalMapping": {
+      "name": "DescribePrincipalMapping",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribePrincipalMappingRequest"
+      },
+      "output": {
+        "shape": "DescribePrincipalMappingResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Describes the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups. This includes information on the status of actions currently processing or yet to be processed, when actions were last updated, when actions were received by Amazon Kendra, the latest action that should process and apply after other actions, and useful error messages if an action could not be processed.</p>"
     },
     "DescribeQuerySuggestionsBlockList": {
       "name": "DescribeQuerySuggestionsBlockList",
@@ -812,6 +874,40 @@
       ],
       "documentation": "<p>Gets a list of FAQ lists associated with an index.</p>"
     },
+    "ListGroupsOlderThanOrderingId": {
+      "name": "ListGroupsOlderThanOrderingId",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListGroupsOlderThanOrderingIdRequest"
+      },
+      "output": {
+        "shape": "ListGroupsOlderThanOrderingIdResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Provides a list of groups that are mapped to users before a given ordering or timestamp identifier.</p>"
+    },
     "ListIndices": {
       "name": "ListIndices",
       "http": {
@@ -932,6 +1028,40 @@
         }
       ],
       "documentation": "<p>Lists the Amazon Kendra thesauri associated with an index.</p>"
+    },
+    "PutPrincipalMapping": {
+      "name": "PutPrincipalMapping",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutPrincipalMappingRequest"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Maps users to their groups. You can also map sub groups to groups. For example, the group \"Company Intellectual Property Teams\" includes sub groups \"Research\" and \"Engineering\". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results. </p> <p>You map users to their groups when you want to filter search results for different users based on their group’s access to documents. For more information on filtering search results for different users, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/user-context-filter.html\">Filtering on user context</a>.</p> <p>If more than five <code>PUT</code> actions for a group are currently processing, a validation exception is thrown.</p>"
     },
     "Query": {
       "name": "Query",
@@ -1293,7 +1423,7 @@
       "members": {
         "KeyPath": {
           "shape": "S3ObjectKey",
-          "documentation": "<p>Path to the AWS S3 bucket that contains the ACL files.</p>"
+          "documentation": "<p>Path to the Amazon Web Services S3 bucket that contains the ACL files.</p>"
         }
       },
       "documentation": "<p>Access Control List files for the documents in a data source. For the format of the file, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/s3-acl.html\">Access control for S3 data sources</a>.</p>"
@@ -1587,7 +1717,7 @@
       "members": {
         "FailedDocuments": {
           "shape": "BatchPutDocumentResponseFailedDocuments",
-          "documentation": "<p>A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn't be added to the index.</p> <p>If there was an error adding a document to an index the error is reported in your AWS CloudWatch log. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html\">Monitoring Amazon Kendra with Amazon CloudWatch Logs</a> </p>"
+          "documentation": "<p>A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn't be added to the index.</p> <p>If there was an error adding a document to an index the error is reported in your Amazon Web Services CloudWatch log. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/cloudwatch-logs.html\">Monitoring Amazon Kendra with Amazon CloudWatch Logs</a> </p>"
         }
       }
     },
@@ -1630,11 +1760,11 @@
       "members": {
         "StorageCapacityUnits": {
           "shape": "StorageCapacityUnit",
-          "documentation": "<p>The amount of extra storage capacity for an index. A single capacity unit provides 30 GB of storage space or 100,000 documents, whichever is reached first.</p>"
+          "documentation": "<p>The amount of extra storage capacity for an index. A single capacity unit for an index provides 150 GB of storage space or 500,000 documents, whichever is reached first.</p>"
         },
         "QueryCapacityUnits": {
           "shape": "QueryCapacityUnit",
-          "documentation": "<p>The amount of extra query capacity for an index and <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html\">GetQuerySuggestions</a> capacity.</p> <p>A single extra capacity unit for an index provides 0.1 queries per second or approximately 8,000 queries per day.</p> <p> <code>GetQuerySuggestions</code> capacity is five times the provisioned query capacity for an index, or the base capacity of 2.5 calls per second, whichever is higher. For example, the base capacity for an index is 0.1 queries per second, and <code>GetQuerySuggestions</code> capacity has a base of 2.5 calls per second. If you add another 0.1 queries per second to total 0.2 queries per second for an index, the <code>GetQuerySuggestions</code> capacity is 2.5 calls per second (higher than five times 0.2 queries per second).</p>"
+          "documentation": "<p>The amount of extra query capacity for an index and <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html\">GetQuerySuggestions</a> capacity.</p> <p>A single extra capacity unit for an index provides 0.5 queries per second or approximately 40,000 queries per day.</p> <p> <code>GetQuerySuggestions</code> capacity is 5 times the provisioned query capacity for an index. For example, the base capacity for an index is 0.5 queries per second, so GetQuerySuggestions capacity is 2.5 calls per second. If adding another 0.5 queries per second to total 1 queries per second for an index, the <code>GetQuerySuggestions</code> capacity is 5 calls per second.</p>"
         }
       },
       "documentation": "<p>Specifies capacity units configured for your enterprise edition index. You can add and remove capacity units to tune an index to your requirements.</p>"
@@ -1851,7 +1981,7 @@
         },
         "SecretArn": {
           "shape": "SecretArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Confluence server. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>username - The user name or email address of a user with administrative privileges for the Confluence server.</p> </li> <li> <p>password - The password associated with the user logging in to the Confluence server.</p> </li> </ul>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the key/value pairs required to connect to your Confluence server. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>username - The user name or email address of a user with administrative privileges for the Confluence server.</p> </li> <li> <p>password - The password associated with the user logging in to the Confluence server.</p> </li> </ul>"
         },
         "Version": {
           "shape": "ConfluenceVersion",
@@ -2050,7 +2180,7 @@
         },
         "SecretArn": {
           "shape": "SecretArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html\">Using a Database Data Source</a>. For more information about AWS Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is AWS Secrets Manager </a> in the <i>AWS Secrets Manager</i> user guide.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html\">Using a Database Data Source</a>. For more information about AWS Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is AWS Secrets Manager </a> in the <i> Secrets Manager </i> user guide.</p>"
         }
       },
       "documentation": "<p>Provides the information necessary to connect to a database.</p>"
@@ -2195,15 +2325,15 @@
         },
         "Edition": {
           "shape": "IndexEdition",
-          "documentation": "<p>The Amazon Kendra edition to use for the index. Choose <code>DEVELOPER_EDITION</code> for indexes intended for development, testing, or proof of concept. Use <code>ENTERPRISE_EDITION</code> for your production databases. Once you set the edition for an index, it can't be changed. </p> <p>The <code>Edition</code> parameter is optional. If you don't supply a value, the default is <code>ENTERPRISE_EDITION</code>.</p> <p>For more information on quota limits for enterprise and developer editions, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas</a>.</p>"
+          "documentation": "<p>The Amazon Kendra edition to use for the index. Choose <code>DEVELOPER_EDITION</code> for indexes intended for development, testing, or proof of concept. Use <code>ENTERPRISE_EDITION</code> for your production databases. Once you set the edition for an index, it can't be changed. </p> <p>The <code>Edition</code> parameter is optional. If you don't supply a value, the default is <code>ENTERPRISE_EDITION</code>.</p>"
         },
         "RoleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>An AWS Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the <code>BatchPutDocument</code> operation to index documents from an Amazon S3 bucket.</p>"
+          "documentation": "<p>An Identity and Access Management(IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the <code>BatchPutDocument</code> operation to index documents from an Amazon S3 bucket.</p>"
         },
         "ServerSideEncryptionConfiguration": {
           "shape": "ServerSideEncryptionConfiguration",
-          "documentation": "<p>The identifier of the AWS KMS customer managed key (CMK) to use to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.</p>"
+          "documentation": "<p>The identifier of the KMScustomer managed key (CMK) to use to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.</p>"
         },
         "Description": {
           "shape": "Description",
@@ -2387,6 +2517,32 @@
       "max": 100,
       "min": 1,
       "pattern": "^[a-zA-Z][a-zA-Z0-9_.]*$"
+    },
+    "DataSourceGroup": {
+      "type": "structure",
+      "required": [
+        "GroupId",
+        "DataSourceId"
+      ],
+      "members": {
+        "GroupId": {
+          "shape": "PrincipalName",
+          "documentation": "<p>The identifier of the group you want to add to your list of groups. This is for filtering search results based on the groups' access to documents.</p>"
+        },
+        "DataSourceId": {
+          "shape": "DataSourceId",
+          "documentation": "<p>The identifier of the data source group you want to add to your list of data source groups. This is for filtering search results based on the groups' access to documents in that data source.</p>"
+        }
+      },
+      "documentation": "<p> Data source information for user context filtering. </p>"
+    },
+    "DataSourceGroups": {
+      "type": "list",
+      "member": {
+        "shape": "DataSourceGroup"
+      },
+      "max": 2048,
+      "min": 1
     },
     "DataSourceId": {
       "type": "string",
@@ -2732,6 +2888,31 @@
         }
       }
     },
+    "DeletePrincipalMappingRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId",
+        "GroupId"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index you want to delete a group from.</p>"
+        },
+        "DataSourceId": {
+          "shape": "DataSourceId",
+          "documentation": "<p>The identifier of the data source you want to delete a group from.</p> <p>This is useful if a group is tied to multiple data sources and you want to delete a group from accessing documents in a certain data source. For example, the groups \"Research\", \"Engineering\", and \"Sales and Marketing\" are all tied to the company's documents stored in the data sources Confluence and Salesforce. You want to delete \"Research\" and \"Engineering\" groups from Salesforce, so that these groups cannot access customer-related documents stored in Salesforce. Only \"Sales and Marketing\" should access documents in the Salesforce data source.</p>"
+        },
+        "GroupId": {
+          "shape": "GroupId",
+          "documentation": "<p>The identifier of the group you want to delete.</p>"
+        },
+        "OrderingId": {
+          "shape": "PrincipalOrderingId",
+          "documentation": "<p>The timestamp identifier you specify to ensure Amazon Kendra does not override the latest <code>DELETE</code> action with previous actions. The highest number ID, which is the ordering ID, is the latest action you want to process and apply on top of other actions with lower number IDs. This prevents previous actions with lower number IDs from possibly overriding the latest action.</p> <p>The ordering ID can be the UNIX time of the last update you made to a group members list. You would then provide this list when calling <code>PutPrincipalMapping</code>. This ensures your <code>DELETE</code> action for that updated group with the latest members list doesn't get overwritten by earlier <code>DELETE</code> actions for the same group which are yet to be processed.</p> <p>The default ordering ID is the current UNIX time in milliseconds that the action was received by Amazon Kendra. </p>"
+        }
+      }
+    },
     "DeleteQuerySuggestionsBlockListRequest": {
       "type": "structure",
       "required": [
@@ -2934,7 +3115,7 @@
         },
         "ServerSideEncryptionConfiguration": {
           "shape": "ServerSideEncryptionConfiguration",
-          "documentation": "<p>The identifier of the AWS KMS customer master key (CMK) used to encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.</p>"
+          "documentation": "<p>The identifier of the KMScustomer master key (CMK) used to encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.</p>"
         },
         "Status": {
           "shape": "IndexStatus",
@@ -2975,6 +3156,48 @@
         "UserContextPolicy": {
           "shape": "UserContextPolicy",
           "documentation": "<p>The user context policy for the Amazon Kendra index.</p>"
+        }
+      }
+    },
+    "DescribePrincipalMappingRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId",
+        "GroupId"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index required to check the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups.</p>"
+        },
+        "DataSourceId": {
+          "shape": "DataSourceId",
+          "documentation": "<p>The identifier of the data source to check the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups.</p>"
+        },
+        "GroupId": {
+          "shape": "GroupId",
+          "documentation": "<p>The identifier of the group required to check the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups.</p>"
+        }
+      }
+    },
+    "DescribePrincipalMappingResponse": {
+      "type": "structure",
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>Shows the identifier of the index to see information on the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups.</p>"
+        },
+        "DataSourceId": {
+          "shape": "DataSourceId",
+          "documentation": "<p>Shows the identifier of the data source to see information on the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups.</p>"
+        },
+        "GroupId": {
+          "shape": "GroupId",
+          "documentation": "<p>Shows the identifier of the group to see information on the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups.</p>"
+        },
+        "GroupOrderingIdSummaries": {
+          "shape": "GroupOrderingIdSummaries",
+          "documentation": "<p>Shows the following information on the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups:</p> <ul> <li> <p>Status – the status can be either <code>PROCESSING</code>, <code>SUCCEEDED</code>, <code>DELETING</code>, <code>DELETED</code>, or <code>FAILED</code>.</p> </li> <li> <p>Last updated – the last date-time an action was updated.</p> </li> <li> <p>Received – the last date-time an action was received or submitted.</p> </li> <li> <p>Ordering ID – the latest action that should process and apply after other actions.</p> </li> <li> <p>Failure reason – the reason an action could not be processed.</p> </li> </ul>"
         }
       }
     },
@@ -3196,7 +3419,7 @@
         },
         "Blob": {
           "shape": "Blob",
-          "documentation": "<p>The contents of the document. </p> <p>Documents passed to the <code>Blob</code> parameter must be base64 encoded. Your code might not need to encode the document file bytes if you're using an AWS SDK to call Amazon Kendra operations. If you are calling the Amazon Kendra endpoint directly using REST, you must base64 encode the contents before sending.</p>"
+          "documentation": "<p>The contents of the document. </p> <p>Documents passed to the <code>Blob</code> parameter must be base64 encoded. Your code might not need to encode the document file bytes if you're using an Amazon Web Services SDK to call Amazon Kendra operations. If you are calling the Amazon Kendra endpoint directly using REST, you must base64 encode the contents before sending.</p>"
         },
         "S3Path": {
           "shape": "S3Path"
@@ -3207,7 +3430,11 @@
         },
         "AccessControlList": {
           "shape": "PrincipalList",
-          "documentation": "<p>Information to use for user context filtering.</p>"
+          "documentation": "<p>Information on user and group access rights, which is used for user context filtering.</p>"
+        },
+        "HierarchicalAccessControlList": {
+          "shape": "HierarchicalPrincipalList",
+          "documentation": "<p>The list of <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html\">principal</a> lists that define the hierarchy for which documents users should have access to.</p>"
         },
         "ContentType": {
           "shape": "ContentType",
@@ -3451,7 +3678,7 @@
       "members": {
         "S3Prefix": {
           "shape": "S3ObjectKey",
-          "documentation": "<p>A prefix used to filter metadata configuration files in the AWS S3 bucket. The S3 bucket might contain multiple metadata files. Use <code>S3Prefix</code> to include only the desired metadata files.</p>"
+          "documentation": "<p>A prefix used to filter metadata configuration files in the Amazon Web Services S3 bucket. The S3 bucket might contain multiple metadata files. Use <code>S3Prefix</code> to include only the desired metadata files.</p>"
         }
       },
       "documentation": "<p>Document metadata files that contain information such as the document access control information, source URI, document author, and custom attributes. Each metadata file contains metadata about a single document.</p>"
@@ -3538,6 +3765,12 @@
       "member": {
         "shape": "FacetResult"
       }
+    },
+    "FailureReason": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "^\\P{C}*$"
     },
     "FaqFileFormat": {
       "type": "string",
@@ -3666,7 +3899,7 @@
       "members": {
         "SecretArn": {
           "shape": "SecretArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of a AWS Secrets Manager secret that contains the credentials required to connect to Google Drive. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html\">Using a Google Workspace Drive data source</a>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of a Secrets Managersecret that contains the credentials required to connect to Google Drive. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-google-drive.html\">Using a Google Workspace Drive data source</a>.</p>"
         },
         "InclusionPatterns": {
           "shape": "DataSourceInclusionsExclusionsStrings",
@@ -3700,6 +3933,107 @@
       "max": 100,
       "min": 1,
       "pattern": "^\\P{C}*$"
+    },
+    "GroupId": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "^\\P{C}*$"
+    },
+    "GroupMembers": {
+      "type": "structure",
+      "members": {
+        "MemberGroups": {
+          "shape": "MemberGroups",
+          "documentation": "<p>A list of sub groups that belong to a group. For example, the sub groups \"Research\", \"Engineering\", and \"Sales and Marketing\" all belong to the group \"Company\".</p>"
+        },
+        "MemberUsers": {
+          "shape": "MemberUsers",
+          "documentation": "<p>A list of users that belong to a group. For example, a list of interns all belong to the \"Interns\" group.</p>"
+        },
+        "S3PathforGroupMembers": {
+          "shape": "S3Path",
+          "documentation": "<p>If you have more than 1000 users and/or sub groups for a single group, you need to provide the path to the S3 file that lists your users and sub groups for a group. Your sub groups can contain more than 1000 users, but the list of sub groups that belong to a group (and/or users) must be no more than 1000.</p>"
+        }
+      },
+      "documentation": "<p>A list of users or sub groups that belong to a group. Users and groups are useful for filtering search results to different users based on their group's access to documents.</p>"
+    },
+    "GroupOrderingIdSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "GroupOrderingIdSummary"
+      },
+      "max": 10
+    },
+    "GroupOrderingIdSummary": {
+      "type": "structure",
+      "members": {
+        "Status": {
+          "shape": "PrincipalMappingStatus",
+          "documentation": "<p>The current processing status of actions for mapping users to their groups. The status can be either <code>PROCESSING</code>, <code>SUCCEEDED</code>, <code>DELETING</code>, <code>DELETED</code>, or <code>FAILED</code>.</p>"
+        },
+        "LastUpdatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The last date-time an action was updated. An action can be a <code>PUT</code> or <code>DELETE</code> action for mapping users to their groups.</p>"
+        },
+        "ReceivedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date-time an action was received by Amazon Kendra. An action can be a <code>PUT</code> or <code>DELETE</code> action for mapping users to their groups.</p>"
+        },
+        "OrderingId": {
+          "shape": "PrincipalOrderingId",
+          "documentation": "<p>The order in which actions should complete processing. An action can be a <code>PUT</code> or <code>DELETE</code> action for mapping users to their groups.</p>"
+        },
+        "FailureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>The reason an action could not be processed. An action can be a <code>PUT</code> or <code>DELETE</code> action for mapping users to their groups.</p>"
+        }
+      },
+      "documentation": "<p>Information on the processing of <code>PUT</code> and <code>DELETE</code> actions for mapping users to their groups.</p>"
+    },
+    "GroupSummary": {
+      "type": "structure",
+      "members": {
+        "GroupId": {
+          "shape": "GroupId",
+          "documentation": "<p> The identifier of the group you want group summary information on. </p>"
+        },
+        "OrderingId": {
+          "shape": "PrincipalOrderingId",
+          "documentation": "<p> The timestamp identifier used for the latest <code>PUT</code> or <code>DELETE</code> action. </p>"
+        }
+      },
+      "documentation": "<p> Group summary information. </p>"
+    },
+    "Groups": {
+      "type": "list",
+      "member": {
+        "shape": "PrincipalName"
+      },
+      "max": 2048,
+      "min": 1
+    },
+    "HierarchicalPrincipal": {
+      "type": "structure",
+      "required": [
+        "PrincipalList"
+      ],
+      "members": {
+        "PrincipalList": {
+          "shape": "PrincipalList",
+          "documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html\">principal</a> lists that define the hierarchy for which documents users should have access to. Each hierarchical list specifies which user or group has allow or deny access for each document.</p>"
+        }
+      },
+      "documentation": "<p> Information to define the hierarchy for which documents users should have access to. </p>"
+    },
+    "HierarchicalPrincipalList": {
+      "type": "list",
+      "member": {
+        "shape": "HierarchicalPrincipal"
+      },
+      "documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html\">principal</a> lists that define the hierarchy for which documents users should have access to. Each hierarchical list specifies which user or group has allow or deny access for each document.</p>",
+      "max": 30,
+      "min": 1
     },
     "Highlight": {
       "type": "structure",
@@ -4047,6 +4381,48 @@
         }
       }
     },
+    "ListGroupsOlderThanOrderingIdRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId",
+        "OrderingId"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index for getting a list of groups mapped to users before a given ordering or timestamp identifier.</p>"
+        },
+        "DataSourceId": {
+          "shape": "DataSourceId",
+          "documentation": "<p>The identifier of the data source for getting a list of groups mapped to users before a given ordering timestamp identifier.</p>"
+        },
+        "OrderingId": {
+          "shape": "PrincipalOrderingId",
+          "documentation": "<p>The timestamp identifier used for the latest <code>PUT</code> or <code>DELETE</code> action for mapping users to their groups.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p> The next items in the list of groups that go beyond the maximum. </p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResultsIntegerForListPrincipalsRequest",
+          "documentation": "<p> The maximum results shown for a list of groups that are mapped to users before a given ordering or timestamp identifier. </p>"
+        }
+      }
+    },
+    "ListGroupsOlderThanOrderingIdResponse": {
+      "type": "structure",
+      "members": {
+        "GroupsSummaries": {
+          "shape": "ListOfGroupSummaries",
+          "documentation": "<p> Summary information for list of groups that are mapped to users before a given ordering or timestamp identifier. </p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p> The next items in the list of groups that go beyond the maximum. </p>"
+        }
+      }
+    },
     "ListIndicesRequest": {
       "type": "structure",
       "members": {
@@ -4071,6 +4447,12 @@
           "shape": "NextToken",
           "documentation": "<p>If the response is truncated, Amazon Kendra returns this token that you can use in the subsequent request to retrieve the next set of indexes.</p>"
         }
+      }
+    },
+    "ListOfGroupSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "GroupSummary"
       }
     },
     "ListQuerySuggestionsBlockListsRequest": {
@@ -4193,6 +4575,11 @@
       "max": 100,
       "min": 1
     },
+    "MaxResultsIntegerForListPrincipalsRequest": {
+      "type": "integer",
+      "max": 10,
+      "min": 1
+    },
     "MaxResultsIntegerForListQuerySuggestionsBlockLists": {
       "type": "integer",
       "max": 100,
@@ -4206,6 +4593,52 @@
     "MaxUrlsPerMinuteCrawlRate": {
       "type": "integer",
       "max": 300,
+      "min": 1
+    },
+    "MemberGroup": {
+      "type": "structure",
+      "required": [
+        "GroupId"
+      ],
+      "members": {
+        "GroupId": {
+          "shape": "GroupId",
+          "documentation": "<p>The identifier of the sub group you want to map to a group.</p>"
+        },
+        "DataSourceId": {
+          "shape": "DataSourceId",
+          "documentation": "<p>The identifier of the data source for the sub group you want to map to a group.</p>"
+        }
+      },
+      "documentation": "<p>The sub groups that belong to a group.</p>"
+    },
+    "MemberGroups": {
+      "type": "list",
+      "member": {
+        "shape": "MemberGroup"
+      },
+      "max": 1000,
+      "min": 1
+    },
+    "MemberUser": {
+      "type": "structure",
+      "required": [
+        "UserId"
+      ],
+      "members": {
+        "UserId": {
+          "shape": "UserId",
+          "documentation": "<p>The identifier of the user you want to map to a group.</p>"
+        }
+      },
+      "documentation": "<p>The users that belong to a group.</p>"
+    },
+    "MemberUsers": {
+      "type": "list",
+      "member": {
+        "shape": "MemberUser"
+      },
+      "max": 1000,
       "min": 1
     },
     "MetricValue": {
@@ -4257,7 +4690,7 @@
         },
         "SecretArn": {
           "shape": "SecretArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the user name and password to connect to OneDrive. The user namd should be the application ID for the OneDrive application, and the password is the application key for the OneDrive application.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the user name and password to connect to OneDrive. The user namd should be the application ID for the OneDrive application, and the password is the application key for the OneDrive application.</p>"
         },
         "OneDriveUsers": {
           "shape": "OneDriveUsers",
@@ -4341,6 +4774,10 @@
         "Access": {
           "shape": "ReadAccessType",
           "documentation": "<p>Whether to allow or deny access to the principal.</p>"
+        },
+        "DataSourceId": {
+          "shape": "DataSourceId",
+          "documentation": "<p>The identifier of the data source the principal should access documents from.</p>"
         }
       },
       "documentation": "<p>Provides user and group information for document access filtering.</p>"
@@ -4351,11 +4788,26 @@
         "shape": "Principal"
       }
     },
+    "PrincipalMappingStatus": {
+      "type": "string",
+      "enum": [
+        "FAILED",
+        "SUCCEEDED",
+        "PROCESSING",
+        "DELETING",
+        "DELETED"
+      ]
+    },
     "PrincipalName": {
       "type": "string",
       "max": 200,
       "min": 1,
       "pattern": "^\\P{C}*$"
+    },
+    "PrincipalOrderingId": {
+      "type": "long",
+      "max": 32535158400000,
+      "min": 0
     },
     "PrincipalType": {
       "type": "string",
@@ -4385,6 +4837,40 @@
         }
       },
       "documentation": "<p>Provides the configuration information for a web proxy to connect to website hosts.</p>"
+    },
+    "PutPrincipalMappingRequest": {
+      "type": "structure",
+      "required": [
+        "IndexId",
+        "GroupId",
+        "GroupMembers"
+      ],
+      "members": {
+        "IndexId": {
+          "shape": "IndexId",
+          "documentation": "<p>The identifier of the index you want to map users to their groups.</p>"
+        },
+        "DataSourceId": {
+          "shape": "DataSourceId",
+          "documentation": "<p>The identifier of the data source you want to map users to their groups.</p> <p>This is useful if a group is tied to multiple data sources, but you only want the group to access documents of a certain data source. For example, the groups \"Research\", \"Engineering\", and \"Sales and Marketing\" are all tied to the company's documents stored in the data sources Confluence and Salesforce. However, \"Sales and Marketing\" team only needs access to customer-related documents stored in Salesforce.</p>"
+        },
+        "GroupId": {
+          "shape": "GroupId",
+          "documentation": "<p>The identifier of the group you want to map its users to.</p>"
+        },
+        "GroupMembers": {
+          "shape": "GroupMembers",
+          "documentation": "<p>The list that contains your users or sub groups that belong the same group.</p> <p>For example, the group \"Company\" includes the user \"CEO\" and the sub groups \"Research\", \"Engineering\", and \"Sales and Marketing\".</p> <p>If you have more than 1000 users and/or sub groups for a single group, you need to provide the path to the S3 file that lists your users and sub groups for a group. Your sub groups can contain more than 1000 users, but the list of sub groups that belong to a group (and/or users) must be no more than 1000.</p>"
+        },
+        "OrderingId": {
+          "shape": "PrincipalOrderingId",
+          "documentation": "<p>The timestamp identifier you specify to ensure Amazon Kendra does not override the latest <code>PUT</code> action with previous actions. The highest number ID, which is the ordering ID, is the latest action you want to process and apply on top of other actions with lower number IDs. This prevents previous actions with lower number IDs from possibly overriding the latest action.</p> <p>The ordering ID can be the UNIX time of the last update you made to a group members list. You would then provide this list when calling <code>PutPrincipalMapping</code>. This ensures your <code>PUT</code> action for that updated group with the latest members list doesn't get overwritten by earlier <code>PUT</code> actions for the same group which are yet to be processed.</p> <p>The default ordering ID is the current UNIX time in milliseconds that the action was received by Amazon Kendra.</p>"
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of a role that has access to the S3 file that contains your list of users or sub groups that belong to a group.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-ds\">IAM roles for Amazon Kendra</a>.</p>"
+        }
+      }
     },
     "QueryCapacityUnit": {
       "type": "integer",
@@ -4807,7 +5293,7 @@
         },
         "SecretArn": {
           "shape": "SecretArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Salesforce instance. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>authenticationUrl - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token. </p> </li> <li> <p>consumerKey - The application public key generated when you created your Salesforce application.</p> </li> <li> <p>consumerSecret - The application private key generated when you created your Salesforce application.</p> </li> <li> <p>password - The password associated with the user logging in to the Salesforce instance.</p> </li> <li> <p>securityToken - The token associated with the user account logging in to the Salesforce instance.</p> </li> <li> <p>username - The user name of the user logging in to the Salesforce instance.</p> </li> </ul>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the key/value pairs required to connect to your Salesforce instance. The secret must contain a JSON structure with the following keys:</p> <ul> <li> <p>authenticationUrl - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token. </p> </li> <li> <p>consumerKey - The application public key generated when you created your Salesforce application.</p> </li> <li> <p>consumerSecret - The application private key generated when you created your Salesforce application.</p> </li> <li> <p>password - The password associated with the user logging in to the Salesforce instance.</p> </li> <li> <p>securityToken - The token associated with the user account logging in to the Salesforce instance.</p> </li> <li> <p>username - The user name of the user logging in to the Salesforce instance.</p> </li> </ul>"
         },
         "StandardObjectConfigurations": {
           "shape": "SalesforceStandardObjectConfigurationList",
@@ -5103,10 +5589,10 @@
       "members": {
         "KmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The identifier of the AWS KMS customer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.</p>"
+          "documentation": "<p>The identifier of the KMScustomer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.</p>"
         }
       },
-      "documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.</p>"
+      "documentation": "<p>Provides the identifier of the KMScustomer master key (CMK) used to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.</p>"
     },
     "ServiceNowAuthenticationType": {
       "type": "string",
@@ -5136,7 +5622,7 @@
         },
         "SecretArn": {
           "shape": "SecretArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secret Manager secret that contains the user name and password required to connect to the ServiceNow instance.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Secrets Manager secret that contains the user name and password required to connect to the ServiceNow instance.</p>"
         },
         "ServiceNowBuildVersion": {
           "shape": "ServiceNowBuildVersionType",
@@ -5257,7 +5743,7 @@
         },
         "SecretArn": {
           "shape": "SecretArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a Microsoft SharePoint Data Source</a>. For more information about AWS Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is AWS Secrets Manager </a> in the <i>AWS Secrets Manager</i> user guide.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. If you use SharePoint Sever, you also need to provide the sever domain name as part of the credentials. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a Microsoft SharePoint Data Source</a>. For more information about AWS Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is AWS Secrets Manager </a> in the <i>Secrets Manager </i> user guide.</p>"
         },
         "CrawlAttachments": {
           "shape": "Boolean",
@@ -5976,10 +6462,22 @@
       "members": {
         "Token": {
           "shape": "Token",
-          "documentation": "<p>The user context token. It must be a JWT or a JSON token.</p>"
+          "documentation": "<p>The user context token for filtering search results for a user. It must be a JWT or a JSON token.</p>"
+        },
+        "UserId": {
+          "shape": "PrincipalName",
+          "documentation": "<p>The identifier of the user you want to filter search results based on their access to documents.</p>"
+        },
+        "Groups": {
+          "shape": "Groups",
+          "documentation": "<p>The list of groups you want to filter search results based on the groups' access to documents.</p>"
+        },
+        "DataSourceGroups": {
+          "shape": "DataSourceGroups",
+          "documentation": "<p>The list of data source groups you want to filter search results based on groups' access to documents in that data source.</p>"
         }
       },
-      "documentation": "<p>Provides information about the user context for a Amazon Kendra index.</p>"
+      "documentation": "<p>Provides information about the user context for a Amazon Kendra index.</p> <p>This is used for filtering search results for different users based on their access to documents.</p> <p>You provide one of the following:</p> <ul> <li> <p>User token</p> </li> <li> <p>User ID, the groups the user belongs to, and the data sources the groups can access</p> </li> </ul> <p>If you provide both, an exception is thrown.</p>"
     },
     "UserContextPolicy": {
       "type": "string",
@@ -5987,6 +6485,12 @@
         "ATTRIBUTE_FILTER",
         "USER_TOKEN"
       ]
+    },
+    "UserId": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "^\\P{C}*$"
     },
     "UserNameAttributeField": {
       "type": "string",

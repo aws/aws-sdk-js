@@ -12,11 +12,11 @@ declare class Kendra extends Service {
   constructor(options?: Kendra.Types.ClientConfiguration)
   config: Config & Kendra.Types.ClientConfiguration;
   /**
-   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument operation. The documents are deleted asynchronously. You can see the progress of the deletion by using AWS CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.
+   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument operation. The documents are deleted asynchronously. You can see the progress of the deletion by using Amazon Web Services CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.
    */
   batchDeleteDocument(params: Kendra.Types.BatchDeleteDocumentRequest, callback?: (err: AWSError, data: Kendra.Types.BatchDeleteDocumentResponse) => void): Request<Kendra.Types.BatchDeleteDocumentResponse, AWSError>;
   /**
-   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument operation. The documents are deleted asynchronously. You can see the progress of the deletion by using AWS CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.
+   * Removes one or more documents from an index. The documents must have been added with the BatchPutDocument operation. The documents are deleted asynchronously. You can see the progress of the deletion by using Amazon Web Services CloudWatch. Any error messages related to the processing of the batch are sent to you CloudWatch log.
    */
   batchDeleteDocument(callback?: (err: AWSError, data: Kendra.Types.BatchDeleteDocumentResponse) => void): Request<Kendra.Types.BatchDeleteDocumentResponse, AWSError>;
   /**
@@ -28,11 +28,11 @@ declare class Kendra extends Service {
    */
   batchGetDocumentStatus(callback?: (err: AWSError, data: Kendra.Types.BatchGetDocumentStatusResponse) => void): Request<Kendra.Types.BatchGetDocumentStatusResponse, AWSError>;
   /**
-   * Adds one or more documents to an index. The BatchPutDocument operation enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this operation to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index. The documents are indexed asynchronously. You can see the progress of the batch using AWS CloudWatch. Any error messages related to processing the batch are sent to your AWS CloudWatch log.
+   * Adds one or more documents to an index. The BatchPutDocument operation enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this operation to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index. The documents are indexed asynchronously. You can see the progress of the batch using Amazon Web Services CloudWatch. Any error messages related to processing the batch are sent to your Amazon Web Services CloudWatch log.
    */
   batchPutDocument(params: Kendra.Types.BatchPutDocumentRequest, callback?: (err: AWSError, data: Kendra.Types.BatchPutDocumentResponse) => void): Request<Kendra.Types.BatchPutDocumentResponse, AWSError>;
   /**
-   * Adds one or more documents to an index. The BatchPutDocument operation enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this operation to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index. The documents are indexed asynchronously. You can see the progress of the batch using AWS CloudWatch. Any error messages related to processing the batch are sent to your AWS CloudWatch log.
+   * Adds one or more documents to an index. The BatchPutDocument operation enables you to ingest inline documents or a set of documents stored in an Amazon S3 bucket. Use this operation to ingest your text and unstructured text into an index, add custom attributes to the documents, and to attach an access control list to the documents added to the index. The documents are indexed asynchronously. You can see the progress of the batch using Amazon Web Services CloudWatch. Any error messages related to processing the batch are sent to your Amazon Web Services CloudWatch log.
    */
   batchPutDocument(callback?: (err: AWSError, data: Kendra.Types.BatchPutDocumentResponse) => void): Request<Kendra.Types.BatchPutDocumentResponse, AWSError>;
   /**
@@ -108,6 +108,14 @@ declare class Kendra extends Service {
    */
   deleteIndex(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a group so that all users and sub groups that belong to the group can no longer access documents only available to that group. For example, after deleting the group "Summer Interns", all interns who belonged to that group no longer see intern-only documents in their search results. If you want to delete or replace users or sub groups of a group, you need to use the PutPrincipalMapping operation. For example, if a user in the group "Engineering" leaves the engineering team and another user takes their place, you provide an updated list of users or sub groups that belong to the "Engineering" group when calling PutPrincipalMapping. You can update your internal list of users or sub groups and input this list when calling PutPrincipalMapping.
+   */
+  deletePrincipalMapping(params: Kendra.Types.DeletePrincipalMappingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a group so that all users and sub groups that belong to the group can no longer access documents only available to that group. For example, after deleting the group "Summer Interns", all interns who belonged to that group no longer see intern-only documents in their search results. If you want to delete or replace users or sub groups of a group, you need to use the PutPrincipalMapping operation. For example, if a user in the group "Engineering" leaves the engineering team and another user takes their place, you provide an updated list of users or sub groups that belong to the "Engineering" group when calling PutPrincipalMapping. You can update your internal list of users or sub groups and input this list when calling PutPrincipalMapping.
+   */
+  deletePrincipalMapping(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes a block list used for query suggestions for an index. A deleted block list might not take effect right away. Amazon Kendra needs to refresh the entire suggestions list to add back the queries that were previously blocked.
    */
   deleteQuerySuggestionsBlockList(params: Kendra.Types.DeleteQuerySuggestionsBlockListRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -147,6 +155,14 @@ declare class Kendra extends Service {
    * Describes an existing Amazon Kendra index
    */
   describeIndex(callback?: (err: AWSError, data: Kendra.Types.DescribeIndexResponse) => void): Request<Kendra.Types.DescribeIndexResponse, AWSError>;
+  /**
+   * Describes the processing of PUT and DELETE actions for mapping users to their groups. This includes information on the status of actions currently processing or yet to be processed, when actions were last updated, when actions were received by Amazon Kendra, the latest action that should process and apply after other actions, and useful error messages if an action could not be processed.
+   */
+  describePrincipalMapping(params: Kendra.Types.DescribePrincipalMappingRequest, callback?: (err: AWSError, data: Kendra.Types.DescribePrincipalMappingResponse) => void): Request<Kendra.Types.DescribePrincipalMappingResponse, AWSError>;
+  /**
+   * Describes the processing of PUT and DELETE actions for mapping users to their groups. This includes information on the status of actions currently processing or yet to be processed, when actions were last updated, when actions were received by Amazon Kendra, the latest action that should process and apply after other actions, and useful error messages if an action could not be processed.
+   */
+  describePrincipalMapping(callback?: (err: AWSError, data: Kendra.Types.DescribePrincipalMappingResponse) => void): Request<Kendra.Types.DescribePrincipalMappingResponse, AWSError>;
   /**
    * Describes a block list used for query suggestions for an index. This is used to check the current settings that are applied to a block list.
    */
@@ -204,6 +220,14 @@ declare class Kendra extends Service {
    */
   listFaqs(callback?: (err: AWSError, data: Kendra.Types.ListFaqsResponse) => void): Request<Kendra.Types.ListFaqsResponse, AWSError>;
   /**
+   * Provides a list of groups that are mapped to users before a given ordering or timestamp identifier.
+   */
+  listGroupsOlderThanOrderingId(params: Kendra.Types.ListGroupsOlderThanOrderingIdRequest, callback?: (err: AWSError, data: Kendra.Types.ListGroupsOlderThanOrderingIdResponse) => void): Request<Kendra.Types.ListGroupsOlderThanOrderingIdResponse, AWSError>;
+  /**
+   * Provides a list of groups that are mapped to users before a given ordering or timestamp identifier.
+   */
+  listGroupsOlderThanOrderingId(callback?: (err: AWSError, data: Kendra.Types.ListGroupsOlderThanOrderingIdResponse) => void): Request<Kendra.Types.ListGroupsOlderThanOrderingIdResponse, AWSError>;
+  /**
    * Lists the Amazon Kendra indexes that you have created.
    */
   listIndices(params: Kendra.Types.ListIndicesRequest, callback?: (err: AWSError, data: Kendra.Types.ListIndicesResponse) => void): Request<Kendra.Types.ListIndicesResponse, AWSError>;
@@ -235,6 +259,14 @@ declare class Kendra extends Service {
    * Lists the Amazon Kendra thesauri associated with an index.
    */
   listThesauri(callback?: (err: AWSError, data: Kendra.Types.ListThesauriResponse) => void): Request<Kendra.Types.ListThesauriResponse, AWSError>;
+  /**
+   * Maps users to their groups. You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results.  You map users to their groups when you want to filter search results for different users based on their group’s access to documents. For more information on filtering search results for different users, see Filtering on user context. If more than five PUT actions for a group are currently processing, a validation exception is thrown.
+   */
+  putPrincipalMapping(params: Kendra.Types.PutPrincipalMappingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Maps users to their groups. You can also map sub groups to groups. For example, the group "Company Intellectual Property Teams" includes sub groups "Research" and "Engineering". These sub groups include their own list of users or people who work in these teams. Only users who work in research and engineering, and therefore belong in the intellectual property group, can see top-secret company documents in their search results.  You map users to their groups when you want to filter search results for different users based on their group’s access to documents. For more information on filtering search results for different users, see Filtering on user context. If more than five PUT actions for a group are currently processing, a validation exception is thrown.
+   */
+  putPrincipalMapping(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Searches an active index. Use this API to search your documents using query. The Query operation enables to do faceted search and to filter results based on document attributes. It also enables you to provide user context that Amazon Kendra uses to enforce document access control in the search results.  Amazon Kendra searches your index for text content and question and answer (FAQ) content. By default the response contains three types of results.   Relevant passages   Matching FAQs   Relevant documents   You can specify that the query return only one type of result using the QueryResultTypeConfig parameter. Each query returns the 100 most relevant results. 
    */
@@ -327,7 +359,7 @@ declare class Kendra extends Service {
 declare namespace Kendra {
   export interface AccessControlListConfiguration {
     /**
-     * Path to the AWS S3 bucket that contains the ACL files.
+     * Path to the Amazon Web Services S3 bucket that contains the ACL files.
      */
     KeyPath?: S3ObjectKey;
   }
@@ -507,7 +539,7 @@ declare namespace Kendra {
   }
   export interface BatchPutDocumentResponse {
     /**
-     * A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn't be added to the index. If there was an error adding a document to an index the error is reported in your AWS CloudWatch log. For more information, see Monitoring Amazon Kendra with Amazon CloudWatch Logs 
+     * A list of documents that were not added to the index because the document failed a validation check. Each document contains an error message that indicates why the document couldn't be added to the index. If there was an error adding a document to an index the error is reported in your Amazon Web Services CloudWatch log. For more information, see Monitoring Amazon Kendra with Amazon CloudWatch Logs 
      */
     FailedDocuments?: BatchPutDocumentResponseFailedDocuments;
   }
@@ -530,11 +562,11 @@ declare namespace Kendra {
   export type Boolean = boolean;
   export interface CapacityUnitsConfiguration {
     /**
-     * The amount of extra storage capacity for an index. A single capacity unit provides 30 GB of storage space or 100,000 documents, whichever is reached first.
+     * The amount of extra storage capacity for an index. A single capacity unit for an index provides 150 GB of storage space or 500,000 documents, whichever is reached first.
      */
     StorageCapacityUnits: StorageCapacityUnit;
     /**
-     * The amount of extra query capacity for an index and GetQuerySuggestions capacity. A single extra capacity unit for an index provides 0.1 queries per second or approximately 8,000 queries per day.  GetQuerySuggestions capacity is five times the provisioned query capacity for an index, or the base capacity of 2.5 calls per second, whichever is higher. For example, the base capacity for an index is 0.1 queries per second, and GetQuerySuggestions capacity has a base of 2.5 calls per second. If you add another 0.1 queries per second to total 0.2 queries per second for an index, the GetQuerySuggestions capacity is 2.5 calls per second (higher than five times 0.2 queries per second).
+     * The amount of extra query capacity for an index and GetQuerySuggestions capacity. A single extra capacity unit for an index provides 0.5 queries per second or approximately 40,000 queries per day.  GetQuerySuggestions capacity is 5 times the provisioned query capacity for an index. For example, the base capacity for an index is 0.5 queries per second, so GetQuerySuggestions capacity is 2.5 calls per second. If adding another 0.5 queries per second to total 1 queries per second for an index, the GetQuerySuggestions capacity is 5 calls per second.
      */
     QueryCapacityUnits: QueryCapacityUnit;
   }
@@ -635,7 +667,7 @@ declare namespace Kendra {
      */
     ServerUrl: Url;
     /**
-     * The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Confluence server. The secret must contain a JSON structure with the following keys:   username - The user name or email address of a user with administrative privileges for the Confluence server.   password - The password associated with the user logging in to the Confluence server.  
+     * The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the key/value pairs required to connect to your Confluence server. The secret must contain a JSON structure with the following keys:   username - The user name or email address of a user with administrative privileges for the Confluence server.   password - The password associated with the user logging in to the Confluence server.  
      */
     SecretArn: SecretArn;
     /**
@@ -752,7 +784,7 @@ declare namespace Kendra {
      */
     TableName: TableName;
     /**
-     * The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. For more information, see Using a Database Data Source. For more information about AWS Secrets Manager, see  What Is AWS Secrets Manager  in the AWS Secrets Manager user guide.
+     * The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. For more information, see Using a Database Data Source. For more information about AWS Secrets Manager, see  What Is AWS Secrets Manager  in the  Secrets Manager  user guide.
      */
     SecretArn: SecretArn;
   }
@@ -848,15 +880,15 @@ declare namespace Kendra {
      */
     Name: IndexName;
     /**
-     * The Amazon Kendra edition to use for the index. Choose DEVELOPER_EDITION for indexes intended for development, testing, or proof of concept. Use ENTERPRISE_EDITION for your production databases. Once you set the edition for an index, it can't be changed.  The Edition parameter is optional. If you don't supply a value, the default is ENTERPRISE_EDITION. For more information on quota limits for enterprise and developer editions, see Quotas.
+     * The Amazon Kendra edition to use for the index. Choose DEVELOPER_EDITION for indexes intended for development, testing, or proof of concept. Use ENTERPRISE_EDITION for your production databases. Once you set the edition for an index, it can't be changed.  The Edition parameter is optional. If you don't supply a value, the default is ENTERPRISE_EDITION.
      */
     Edition?: IndexEdition;
     /**
-     * An AWS Identity and Access Management (IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the BatchPutDocument operation to index documents from an Amazon S3 bucket.
+     * An Identity and Access Management(IAM) role that gives Amazon Kendra permissions to access your Amazon CloudWatch logs and metrics. This is also the role used when you use the BatchPutDocument operation to index documents from an Amazon S3 bucket.
      */
     RoleArn: RoleArn;
     /**
-     * The identifier of the AWS KMS customer managed key (CMK) to use to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
+     * The identifier of the KMScustomer managed key (CMK) to use to encrypt data indexed by Amazon Kendra. Amazon Kendra doesn't support asymmetric CMKs.
      */
     ServerSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -995,6 +1027,17 @@ declare namespace Kendra {
   }
   export type DataSourceDateFieldFormat = string;
   export type DataSourceFieldName = string;
+  export interface DataSourceGroup {
+    /**
+     * The identifier of the group you want to add to your list of groups. This is for filtering search results based on the groups' access to documents.
+     */
+    GroupId: PrincipalName;
+    /**
+     * The identifier of the data source group you want to add to your list of data source groups. This is for filtering search results based on the groups' access to documents in that data source.
+     */
+    DataSourceId: DataSourceId;
+  }
+  export type DataSourceGroups = DataSourceGroup[];
   export type DataSourceId = string;
   export type DataSourceInclusionsExclusionsStrings = DataSourceInclusionsExclusionsStringsMember[];
   export type DataSourceInclusionsExclusionsStringsMember = string;
@@ -1175,6 +1218,24 @@ declare namespace Kendra {
      */
     Id: IndexId;
   }
+  export interface DeletePrincipalMappingRequest {
+    /**
+     * The identifier of the index you want to delete a group from.
+     */
+    IndexId: IndexId;
+    /**
+     * The identifier of the data source you want to delete a group from. This is useful if a group is tied to multiple data sources and you want to delete a group from accessing documents in a certain data source. For example, the groups "Research", "Engineering", and "Sales and Marketing" are all tied to the company's documents stored in the data sources Confluence and Salesforce. You want to delete "Research" and "Engineering" groups from Salesforce, so that these groups cannot access customer-related documents stored in Salesforce. Only "Sales and Marketing" should access documents in the Salesforce data source.
+     */
+    DataSourceId?: DataSourceId;
+    /**
+     * The identifier of the group you want to delete.
+     */
+    GroupId: GroupId;
+    /**
+     * The timestamp identifier you specify to ensure Amazon Kendra does not override the latest DELETE action with previous actions. The highest number ID, which is the ordering ID, is the latest action you want to process and apply on top of other actions with lower number IDs. This prevents previous actions with lower number IDs from possibly overriding the latest action. The ordering ID can be the UNIX time of the last update you made to a group members list. You would then provide this list when calling PutPrincipalMapping. This ensures your DELETE action for that updated group with the latest members list doesn't get overwritten by earlier DELETE actions for the same group which are yet to be processed. The default ordering ID is the current UNIX time in milliseconds that the action was received by Amazon Kendra. 
+     */
+    OrderingId?: PrincipalOrderingId;
+  }
   export interface DeleteQuerySuggestionsBlockListRequest {
     /**
      * The identifier of the you want to delete a block list from.
@@ -1332,7 +1393,7 @@ declare namespace Kendra {
      */
     RoleArn?: RoleArn;
     /**
-     * The identifier of the AWS KMS customer master key (CMK) used to encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
+     * The identifier of the KMScustomer master key (CMK) used to encrypt your data. Amazon Kendra doesn't support asymmetric CMKs.
      */
     ServerSideEncryptionConfiguration?: ServerSideEncryptionConfiguration;
     /**
@@ -1375,6 +1436,38 @@ declare namespace Kendra {
      * The user context policy for the Amazon Kendra index.
      */
     UserContextPolicy?: UserContextPolicy;
+  }
+  export interface DescribePrincipalMappingRequest {
+    /**
+     * The identifier of the index required to check the processing of PUT and DELETE actions for mapping users to their groups.
+     */
+    IndexId: IndexId;
+    /**
+     * The identifier of the data source to check the processing of PUT and DELETE actions for mapping users to their groups.
+     */
+    DataSourceId?: DataSourceId;
+    /**
+     * The identifier of the group required to check the processing of PUT and DELETE actions for mapping users to their groups.
+     */
+    GroupId: GroupId;
+  }
+  export interface DescribePrincipalMappingResponse {
+    /**
+     * Shows the identifier of the index to see information on the processing of PUT and DELETE actions for mapping users to their groups.
+     */
+    IndexId?: IndexId;
+    /**
+     * Shows the identifier of the data source to see information on the processing of PUT and DELETE actions for mapping users to their groups.
+     */
+    DataSourceId?: DataSourceId;
+    /**
+     * Shows the identifier of the group to see information on the processing of PUT and DELETE actions for mapping users to their groups.
+     */
+    GroupId?: GroupId;
+    /**
+     * Shows the following information on the processing of PUT and DELETE actions for mapping users to their groups:   Status – the status can be either PROCESSING, SUCCEEDED, DELETING, DELETED, or FAILED.   Last updated – the last date-time an action was updated.   Received – the last date-time an action was received or submitted.   Ordering ID – the latest action that should process and apply after other actions.   Failure reason – the reason an action could not be processed.  
+     */
+    GroupOrderingIdSummaries?: GroupOrderingIdSummaries;
   }
   export interface DescribeQuerySuggestionsBlockListRequest {
     /**
@@ -1552,7 +1645,7 @@ declare namespace Kendra {
      */
     Title?: Title;
     /**
-     * The contents of the document.  Documents passed to the Blob parameter must be base64 encoded. Your code might not need to encode the document file bytes if you're using an AWS SDK to call Amazon Kendra operations. If you are calling the Amazon Kendra endpoint directly using REST, you must base64 encode the contents before sending.
+     * The contents of the document.  Documents passed to the Blob parameter must be base64 encoded. Your code might not need to encode the document file bytes if you're using an Amazon Web Services SDK to call Amazon Kendra operations. If you are calling the Amazon Kendra endpoint directly using REST, you must base64 encode the contents before sending.
      */
     Blob?: _Blob;
     S3Path?: S3Path;
@@ -1561,9 +1654,13 @@ declare namespace Kendra {
      */
     Attributes?: DocumentAttributeList;
     /**
-     * Information to use for user context filtering.
+     * Information on user and group access rights, which is used for user context filtering.
      */
     AccessControlList?: PrincipalList;
+    /**
+     * The list of principal lists that define the hierarchy for which documents users should have access to.
+     */
+    HierarchicalAccessControlList?: HierarchicalPrincipalList;
     /**
      * The file type of the document in the Blob field.
      */
@@ -1661,7 +1758,7 @@ declare namespace Kendra {
   export type DocumentStatusList = Status[];
   export interface DocumentsMetadataConfiguration {
     /**
-     * A prefix used to filter metadata configuration files in the AWS S3 bucket. The S3 bucket might contain multiple metadata files. Use S3Prefix to include only the desired metadata files.
+     * A prefix used to filter metadata configuration files in the Amazon Web Services S3 bucket. The S3 bucket might contain multiple metadata files. Use S3Prefix to include only the desired metadata files.
      */
     S3Prefix?: S3ObjectKey;
   }
@@ -1693,6 +1790,7 @@ declare namespace Kendra {
     DocumentAttributeValueCountPairs?: DocumentAttributeValueCountPairList;
   }
   export type FacetResultList = FacetResult[];
+  export type FailureReason = string;
   export type FaqFileFormat = "CSV"|"CSV_WITH_HEADER"|"JSON"|string;
   export type FaqId = string;
   export type FaqName = string;
@@ -1757,7 +1855,7 @@ declare namespace Kendra {
   }
   export interface GoogleDriveConfiguration {
     /**
-     * The Amazon Resource Name (ARN) of a AWS Secrets Manager secret that contains the credentials required to connect to Google Drive. For more information, see Using a Google Workspace Drive data source.
+     * The Amazon Resource Name (ARN) of a Secrets Managersecret that contains the credentials required to connect to Google Drive. For more information, see Using a Google Workspace Drive data source.
      */
     SecretArn: SecretArn;
     /**
@@ -1786,6 +1884,62 @@ declare namespace Kendra {
     ExcludeSharedDrives?: ExcludeSharedDrivesList;
   }
   export type GroupAttributeField = string;
+  export type GroupId = string;
+  export interface GroupMembers {
+    /**
+     * A list of sub groups that belong to a group. For example, the sub groups "Research", "Engineering", and "Sales and Marketing" all belong to the group "Company".
+     */
+    MemberGroups?: MemberGroups;
+    /**
+     * A list of users that belong to a group. For example, a list of interns all belong to the "Interns" group.
+     */
+    MemberUsers?: MemberUsers;
+    /**
+     * If you have more than 1000 users and/or sub groups for a single group, you need to provide the path to the S3 file that lists your users and sub groups for a group. Your sub groups can contain more than 1000 users, but the list of sub groups that belong to a group (and/or users) must be no more than 1000.
+     */
+    S3PathforGroupMembers?: S3Path;
+  }
+  export type GroupOrderingIdSummaries = GroupOrderingIdSummary[];
+  export interface GroupOrderingIdSummary {
+    /**
+     * The current processing status of actions for mapping users to their groups. The status can be either PROCESSING, SUCCEEDED, DELETING, DELETED, or FAILED.
+     */
+    Status?: PrincipalMappingStatus;
+    /**
+     * The last date-time an action was updated. An action can be a PUT or DELETE action for mapping users to their groups.
+     */
+    LastUpdatedAt?: Timestamp;
+    /**
+     * The date-time an action was received by Amazon Kendra. An action can be a PUT or DELETE action for mapping users to their groups.
+     */
+    ReceivedAt?: Timestamp;
+    /**
+     * The order in which actions should complete processing. An action can be a PUT or DELETE action for mapping users to their groups.
+     */
+    OrderingId?: PrincipalOrderingId;
+    /**
+     * The reason an action could not be processed. An action can be a PUT or DELETE action for mapping users to their groups.
+     */
+    FailureReason?: FailureReason;
+  }
+  export interface GroupSummary {
+    /**
+     *  The identifier of the group you want group summary information on. 
+     */
+    GroupId?: GroupId;
+    /**
+     *  The timestamp identifier used for the latest PUT or DELETE action. 
+     */
+    OrderingId?: PrincipalOrderingId;
+  }
+  export type Groups = PrincipalName[];
+  export interface HierarchicalPrincipal {
+    /**
+     * A list of principal lists that define the hierarchy for which documents users should have access to. Each hierarchical list specifies which user or group has allow or deny access for each document.
+     */
+    PrincipalList: PrincipalList;
+  }
+  export type HierarchicalPrincipalList = HierarchicalPrincipal[];
   export interface Highlight {
     /**
      * The zero-based location in the response string where the highlight starts.
@@ -1981,6 +2135,38 @@ declare namespace Kendra {
      */
     FaqSummaryItems?: FaqSummaryItems;
   }
+  export interface ListGroupsOlderThanOrderingIdRequest {
+    /**
+     * The identifier of the index for getting a list of groups mapped to users before a given ordering or timestamp identifier.
+     */
+    IndexId: IndexId;
+    /**
+     * The identifier of the data source for getting a list of groups mapped to users before a given ordering timestamp identifier.
+     */
+    DataSourceId?: DataSourceId;
+    /**
+     * The timestamp identifier used for the latest PUT or DELETE action for mapping users to their groups.
+     */
+    OrderingId: PrincipalOrderingId;
+    /**
+     *  The next items in the list of groups that go beyond the maximum. 
+     */
+    NextToken?: NextToken;
+    /**
+     *  The maximum results shown for a list of groups that are mapped to users before a given ordering or timestamp identifier. 
+     */
+    MaxResults?: MaxResultsIntegerForListPrincipalsRequest;
+  }
+  export interface ListGroupsOlderThanOrderingIdResponse {
+    /**
+     *  Summary information for list of groups that are mapped to users before a given ordering or timestamp identifier. 
+     */
+    GroupsSummaries?: ListOfGroupSummaries;
+    /**
+     *  The next items in the list of groups that go beyond the maximum. 
+     */
+    NextToken?: NextToken;
+  }
   export interface ListIndicesRequest {
     /**
      * If the previous response was incomplete (because there is more data to retrieve), Amazon Kendra returns a pagination token in the response. You can use this pagination token to retrieve the next set of indexes (DataSourceSummaryItems). 
@@ -2001,6 +2187,7 @@ declare namespace Kendra {
      */
     NextToken?: NextToken;
   }
+  export type ListOfGroupSummaries = GroupSummary[];
   export interface ListQuerySuggestionsBlockListsRequest {
     /**
      * The identifier of the index for a list of all block lists that exist for that index. For information on the current quota limits for block lists, see Quotas for Amazon Kendra.
@@ -2068,9 +2255,28 @@ declare namespace Kendra {
   export type MaxResultsIntegerForListDataSourcesRequest = number;
   export type MaxResultsIntegerForListFaqsRequest = number;
   export type MaxResultsIntegerForListIndicesRequest = number;
+  export type MaxResultsIntegerForListPrincipalsRequest = number;
   export type MaxResultsIntegerForListQuerySuggestionsBlockLists = number;
   export type MaxResultsIntegerForListThesauriRequest = number;
   export type MaxUrlsPerMinuteCrawlRate = number;
+  export interface MemberGroup {
+    /**
+     * The identifier of the sub group you want to map to a group.
+     */
+    GroupId: GroupId;
+    /**
+     * The identifier of the data source for the sub group you want to map to a group.
+     */
+    DataSourceId?: DataSourceId;
+  }
+  export type MemberGroups = MemberGroup[];
+  export interface MemberUser {
+    /**
+     * The identifier of the user you want to map to a group.
+     */
+    UserId: UserId;
+  }
+  export type MemberUsers = MemberUser[];
   export type MetricValue = string;
   export type MimeType = string;
   export type MinimumNumberOfQueryingUsers = number;
@@ -2084,7 +2290,7 @@ declare namespace Kendra {
      */
     TenantDomain: TenantDomain;
     /**
-     * The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the user name and password to connect to OneDrive. The user namd should be the application ID for the OneDrive application, and the password is the application key for the OneDrive application.
+     * The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the user name and password to connect to OneDrive. The user namd should be the application ID for the OneDrive application, and the password is the application key for the OneDrive application.
      */
     SecretArn: SecretArn;
     /**
@@ -2135,9 +2341,15 @@ declare namespace Kendra {
      * Whether to allow or deny access to the principal.
      */
     Access: ReadAccessType;
+    /**
+     * The identifier of the data source the principal should access documents from.
+     */
+    DataSourceId?: DataSourceId;
   }
   export type PrincipalList = Principal[];
+  export type PrincipalMappingStatus = "FAILED"|"SUCCEEDED"|"PROCESSING"|"DELETING"|"DELETED"|string;
   export type PrincipalName = string;
+  export type PrincipalOrderingId = number;
   export type PrincipalType = "USER"|"GROUP"|string;
   export interface ProxyConfiguration {
     /**
@@ -2152,6 +2364,32 @@ declare namespace Kendra {
      * Your secret ARN, which you can create in AWS Secrets Manager  The credentials are optional. You use a secret if web proxy credentials are required to connect to a website host. Amazon Kendra currently support basic authentication to connect to a web proxy server. The secret stores your credentials.
      */
     Credentials?: SecretArn;
+  }
+  export interface PutPrincipalMappingRequest {
+    /**
+     * The identifier of the index you want to map users to their groups.
+     */
+    IndexId: IndexId;
+    /**
+     * The identifier of the data source you want to map users to their groups. This is useful if a group is tied to multiple data sources, but you only want the group to access documents of a certain data source. For example, the groups "Research", "Engineering", and "Sales and Marketing" are all tied to the company's documents stored in the data sources Confluence and Salesforce. However, "Sales and Marketing" team only needs access to customer-related documents stored in Salesforce.
+     */
+    DataSourceId?: DataSourceId;
+    /**
+     * The identifier of the group you want to map its users to.
+     */
+    GroupId: GroupId;
+    /**
+     * The list that contains your users or sub groups that belong the same group. For example, the group "Company" includes the user "CEO" and the sub groups "Research", "Engineering", and "Sales and Marketing". If you have more than 1000 users and/or sub groups for a single group, you need to provide the path to the S3 file that lists your users and sub groups for a group. Your sub groups can contain more than 1000 users, but the list of sub groups that belong to a group (and/or users) must be no more than 1000.
+     */
+    GroupMembers: GroupMembers;
+    /**
+     * The timestamp identifier you specify to ensure Amazon Kendra does not override the latest PUT action with previous actions. The highest number ID, which is the ordering ID, is the latest action you want to process and apply on top of other actions with lower number IDs. This prevents previous actions with lower number IDs from possibly overriding the latest action. The ordering ID can be the UNIX time of the last update you made to a group members list. You would then provide this list when calling PutPrincipalMapping. This ensures your PUT action for that updated group with the latest members list doesn't get overwritten by earlier PUT actions for the same group which are yet to be processed. The default ordering ID is the current UNIX time in milliseconds that the action was received by Amazon Kendra.
+     */
+    OrderingId?: PrincipalOrderingId;
+    /**
+     * The Amazon Resource Name (ARN) of a role that has access to the S3 file that contains your list of users or sub groups that belong to a group. For more information, see IAM roles for Amazon Kendra.
+     */
+    RoleArn?: RoleArn;
   }
   export type QueryCapacityUnit = number;
   export type QueryId = string;
@@ -2399,7 +2637,7 @@ declare namespace Kendra {
      */
     ServerUrl: Url;
     /**
-     * The Amazon Resource Name (ARN) of an AWS Secrets Manager secret that contains the key/value pairs required to connect to your Salesforce instance. The secret must contain a JSON structure with the following keys:   authenticationUrl - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token.    consumerKey - The application public key generated when you created your Salesforce application.   consumerSecret - The application private key generated when you created your Salesforce application.   password - The password associated with the user logging in to the Salesforce instance.   securityToken - The token associated with the user account logging in to the Salesforce instance.   username - The user name of the user logging in to the Salesforce instance.  
+     * The Amazon Resource Name (ARN) of an Secrets Managersecret that contains the key/value pairs required to connect to your Salesforce instance. The secret must contain a JSON structure with the following keys:   authenticationUrl - The OAUTH endpoint that Amazon Kendra connects to get an OAUTH token.    consumerKey - The application public key generated when you created your Salesforce application.   consumerSecret - The application private key generated when you created your Salesforce application.   password - The password associated with the user logging in to the Salesforce instance.   securityToken - The token associated with the user account logging in to the Salesforce instance.   username - The user name of the user logging in to the Salesforce instance.  
      */
     SecretArn: SecretArn;
     /**
@@ -2553,7 +2791,7 @@ declare namespace Kendra {
   export type SeedUrlList = SeedUrl[];
   export interface ServerSideEncryptionConfiguration {
     /**
-     * The identifier of the AWS KMS customer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
+     * The identifier of the KMScustomer master key (CMK). Amazon Kendra doesn't support asymmetric CMKs.
      */
     KmsKeyId?: KmsKeyId;
   }
@@ -2565,7 +2803,7 @@ declare namespace Kendra {
      */
     HostUrl: ServiceNowHostUrl;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Secret Manager secret that contains the user name and password required to connect to the ServiceNow instance.
+     * The Amazon Resource Name (ARN) of the Secrets Manager secret that contains the user name and password required to connect to the ServiceNow instance.
      */
     SecretArn: SecretArn;
     /**
@@ -2653,7 +2891,7 @@ declare namespace Kendra {
      */
     Urls: SharePointUrlList;
     /**
-     * The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. For more information, see Using a Microsoft SharePoint Data Source. For more information about AWS Secrets Manager, see  What Is AWS Secrets Manager  in the AWS Secrets Manager user guide.
+     * The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The credentials should be a user/password pair. If you use SharePoint Sever, you also need to provide the sever domain name as part of the credentials. For more information, see Using a Microsoft SharePoint Data Source. For more information about AWS Secrets Manager, see  What Is AWS Secrets Manager  in the Secrets Manager  user guide.
      */
     SecretArn: SecretArn;
     /**
@@ -3069,11 +3307,24 @@ declare namespace Kendra {
   export type UserAccount = string;
   export interface UserContext {
     /**
-     * The user context token. It must be a JWT or a JSON token.
+     * The user context token for filtering search results for a user. It must be a JWT or a JSON token.
      */
     Token?: Token;
+    /**
+     * The identifier of the user you want to filter search results based on their access to documents.
+     */
+    UserId?: PrincipalName;
+    /**
+     * The list of groups you want to filter search results based on the groups' access to documents.
+     */
+    Groups?: Groups;
+    /**
+     * The list of data source groups you want to filter search results based on groups' access to documents in that data source.
+     */
+    DataSourceGroups?: DataSourceGroups;
   }
   export type UserContextPolicy = "ATTRIBUTE_FILTER"|"USER_TOKEN"|string;
+  export type UserId = string;
   export type UserNameAttributeField = string;
   export interface UserTokenConfiguration {
     /**
