@@ -270,7 +270,7 @@ declare namespace AmplifyBackend {
      */
     AdditionalAuthTypes?: ListOfBackendAPIAuthType;
     /**
-     * The API name used to interact with the data model, configured as a part of the amplify project.
+     * The API name used to interact with the data model, configured as a part of your Amplify project.
      */
     ApiName?: __string;
     /**
@@ -290,13 +290,31 @@ declare namespace AmplifyBackend {
      */
     TransformSchema?: __string;
   }
-  export interface BackendAuthSocialProviderConfig {
+  export interface BackendAuthAppleProviderConfig {
     /**
-     * Describes the client_id which can be obtained from the third-party social federation provider.
+     * Describes the client_id (also called Services ID) that comes from Apple.
      */
     ClientId?: __string;
     /**
-     * Describes the client_secret which can be obtained from third-party social federation providers.
+     * Describes the key_id that comes from Apple.
+     */
+    KeyId?: __string;
+    /**
+     * Describes the private_key that comes from Apple.
+     */
+    PrivateKey?: __string;
+    /**
+     * Describes the team_id that comes from Apple.
+     */
+    TeamId?: __string;
+  }
+  export interface BackendAuthSocialProviderConfig {
+    /**
+     * Describes the client_id, which can be obtained from the third-party social federation provider.
+     */
+    ClientId?: __string;
+    /**
+     * Describes the client_secret, which can be obtained from third-party social federation providers.
      */
     ClientSecret?: __string;
   }
@@ -420,7 +438,7 @@ declare namespace AmplifyBackend {
   }
   export interface CreateBackendAuthForgotPasswordConfig {
     /**
-     * Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.
+     * Describes which mode to use (either SMS or email) to deliver messages to app users who want to recover their password.
      */
     DeliveryMethod: DeliveryMethod;
     /**
@@ -444,7 +462,7 @@ declare namespace AmplifyBackend {
   }
   export interface CreateBackendAuthMFAConfig {
     /**
-     * Describes whether MFA should be [ON, OFF, OPTIONAL] for authentication in your Amplify project.
+     * Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in your Amplify project.
      */
     MFAMode: MFAMode;
     /**
@@ -470,7 +488,7 @@ declare namespace AmplifyBackend {
      */
     RedirectSignInURIs: ListOf__string;
     /**
-     * Redirect URLs used by OAuth when a user signs out of an Amplify app.
+     * Redirect URLs that OAuth uses when a user signs out of an Amplify app.
      */
     RedirectSignOutURIs: ListOf__string;
     /**
@@ -556,7 +574,7 @@ declare namespace AmplifyBackend {
      */
     ForgotPassword?: CreateBackendAuthForgotPasswordConfig;
     /**
-     * Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.
+     * Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.
      */
     Mfa?: CreateBackendAuthMFAConfig;
     /**
@@ -1261,6 +1279,7 @@ declare namespace AmplifyBackend {
     Facebook?: BackendAuthSocialProviderConfig;
     Google?: BackendAuthSocialProviderConfig;
     LoginWithAmazon?: BackendAuthSocialProviderConfig;
+    SignInWithApple?: BackendAuthAppleProviderConfig;
   }
   export type Status = "LATEST"|"STALE"|string;
   export interface UpdateBackendAPIRequest {
@@ -1323,7 +1342,7 @@ declare namespace AmplifyBackend {
   }
   export interface UpdateBackendAuthIdentityPoolConfig {
     /**
-     * A boolean value which can be set to allow or disallow guest-level authorization into your Amplify app.
+     * A boolean value that can be set to allow or disallow guest-level authorization into your Amplify app.
      */
     UnauthenticatedLogin?: __boolean;
   }
@@ -1351,11 +1370,11 @@ declare namespace AmplifyBackend {
      */
     OAuthScopes?: ListOfOAuthScopesElement;
     /**
-     * Redirect URLs used by OAuth when a user signs in to an Amplify app.
+     * Redirect URLs that OAuth uses when a user signs in to an Amplify app.
      */
     RedirectSignInURIs?: ListOf__string;
     /**
-     * Redirect URLs used by OAuth when a user signs out of an Amplify app.
+     * Redirect URLs that OAuth uses when a user signs out of an Amplify app.
      */
     RedirectSignOutURIs?: ListOf__string;
     /**
@@ -1441,7 +1460,7 @@ declare namespace AmplifyBackend {
      */
     ForgotPassword?: UpdateBackendAuthForgotPasswordConfig;
     /**
-     * Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.
+     * Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.
      */
     Mfa?: UpdateBackendAuthMFAConfig;
     /**
@@ -1495,7 +1514,7 @@ declare namespace AmplifyBackend {
      */
     JobId: __string;
     /**
-     * Filters the list of response objects to only include those with the specified operation name.
+     * Filters the list of response objects to include only those with the specified operation name.
      */
     Operation?: __string;
     /**

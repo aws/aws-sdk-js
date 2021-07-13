@@ -954,7 +954,7 @@
         "ApiName": {
           "shape": "__string",
           "locationName": "apiName",
-          "documentation": "<p>The API name used to interact with the data model, configured as a part of the amplify project.</p>"
+          "documentation": "<p>The API name used to interact with the data model, configured as a part of your Amplify project.</p>"
         },
         "ConflictResolution": {
           "shape": "BackendAPIConflictResolution",
@@ -979,18 +979,44 @@
       },
       "documentation": "<p>The resource config for the data model, configured as a part of the Amplify project.</p>"
     },
+    "BackendAuthAppleProviderConfig": {
+      "type": "structure",
+      "members": {
+        "ClientId": {
+          "shape": "__string",
+          "locationName": "client_id",
+          "documentation": "<p>Describes the client_id (also called Services ID) that comes from Apple.</p>"
+        },
+        "KeyId": {
+          "shape": "__string",
+          "locationName": "key_id",
+          "documentation": "<p>Describes the key_id that comes from Apple.</p>"
+        },
+        "PrivateKey": {
+          "shape": "__string",
+          "locationName": "private_key",
+          "documentation": "<p>Describes the private_key that comes from Apple.</p>"
+        },
+        "TeamId": {
+          "shape": "__string",
+          "locationName": "team_id",
+          "documentation": "<p>Describes the team_id that comes from Apple.</p>"
+        }
+      },
+      "documentation": "<p>Describes Apple social federation configurations for allowing your app users to sign in using OAuth.</p>"
+    },
     "BackendAuthSocialProviderConfig": {
       "type": "structure",
       "members": {
         "ClientId": {
           "shape": "__string",
           "locationName": "client_id",
-          "documentation": "<p>Describes the client_id which can be obtained from the third-party social federation provider.</p>"
+          "documentation": "<p>Describes the client_id, which can be obtained from the third-party social federation provider.</p>"
         },
         "ClientSecret": {
           "shape": "__string",
           "locationName": "client_secret",
-          "documentation": "<p>Describes the client_secret which can be obtained from third-party social federation providers.</p>"
+          "documentation": "<p>Describes the client_secret, which can be obtained from third-party social federation providers.</p>"
         }
       },
       "documentation": "<p>Describes third-party social federation configurations for allowing your app users to sign in using OAuth.</p>"
@@ -1182,7 +1208,7 @@
         "DeliveryMethod": {
           "shape": "DeliveryMethod",
           "locationName": "deliveryMethod",
-          "documentation": "<p>Describes which mode to use (either SMS or email) to deliver messages to app users that want to recover their password.</p>"
+          "documentation": "<p>Describes which mode to use (either SMS or email) to deliver messages to app users who want to recover their password.</p>"
         },
         "EmailSettings": {
           "shape": "EmailSettings",
@@ -1225,7 +1251,7 @@
       "members": {
         "MFAMode": {
           "shape": "MFAMode",
-          "documentation": "<p>Describes whether MFA should be [ON, OFF, OPTIONAL] for authentication in your Amplify project.</p>"
+          "documentation": "<p>Describes whether MFA should be [ON, OFF, or OPTIONAL] for authentication in your Amplify project.</p>"
         },
         "Settings": {
           "shape": "Settings",
@@ -1233,7 +1259,7 @@
           "documentation": "<p>Describes the configuration settings and methods for your Amplify app users to use MFA.</p>"
         }
       },
-      "documentation": "<p>Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.</p>",
+      "documentation": "<p>Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.</p>",
       "required": [
         "MFAMode"
       ]
@@ -1264,7 +1290,7 @@
         "RedirectSignOutURIs": {
           "shape": "ListOf__string",
           "locationName": "redirectSignOutURIs",
-          "documentation": "<p>Redirect URLs used by OAuth when a user signs out of an Amplify app.</p>"
+          "documentation": "<p>Redirect URLs that OAuth uses when a user signs out of an Amplify app.</p>"
         },
         "SocialProviderSettings": {
           "shape": "SocialProviderSettings",
@@ -1409,7 +1435,7 @@
         "Mfa": {
           "shape": "CreateBackendAuthMFAConfig",
           "locationName": "mfa",
-          "documentation": "<p>Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
+          "documentation": "<p>Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
         },
         "OAuth": {
           "shape": "CreateBackendAuthOAuthConfig",
@@ -2574,6 +2600,9 @@
         },
         "LoginWithAmazon": {
           "shape": "BackendAuthSocialProviderConfig"
+        },
+        "SignInWithApple": {
+          "shape": "BackendAuthAppleProviderConfig"
         }
       },
       "documentation": "<p>The settings for using the social identity providers for access to your Amplify app.</p>"
@@ -2680,7 +2709,7 @@
         "UnauthenticatedLogin": {
           "shape": "__boolean",
           "locationName": "unauthenticatedLogin",
-          "documentation": "<p>A boolean value which can be set to allow or disallow guest-level authorization into your Amplify app.</p>"
+          "documentation": "<p>A boolean value that can be set to allow or disallow guest-level authorization into your Amplify app.</p>"
         }
       },
       "documentation": "<p>Describes the authorization configuration for the Amazon Cognito identity pool, provisioned as a part of your auth resource in the Amplify project.</p>"
@@ -2721,12 +2750,12 @@
         "RedirectSignInURIs": {
           "shape": "ListOf__string",
           "locationName": "redirectSignInURIs",
-          "documentation": "<p>Redirect URLs used by OAuth when a user signs in to an Amplify app.</p>"
+          "documentation": "<p>Redirect URLs that OAuth uses when a user signs in to an Amplify app.</p>"
         },
         "RedirectSignOutURIs": {
           "shape": "ListOf__string",
           "locationName": "redirectSignOutURIs",
-          "documentation": "<p>Redirect URLs used by OAuth when a user signs out of an Amplify app.</p>"
+          "documentation": "<p>Redirect URLs that OAuth uses when a user signs out of an Amplify app.</p>"
         },
         "SocialProviderSettings": {
           "shape": "SocialProviderSettings",
@@ -2863,7 +2892,7 @@
         "Mfa": {
           "shape": "UpdateBackendAuthMFAConfig",
           "locationName": "mfa",
-          "documentation": "<p>Describes whether multi-factor authentication policies should be applied for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
+          "documentation": "<p>Describes whether to apply multi-factor authentication policies for your Amazon Cognito user pool configured as a part of your Amplify project.</p>"
         },
         "OAuth": {
           "shape": "UpdateBackendAuthOAuthConfig",
@@ -2947,7 +2976,7 @@
         "Operation": {
           "shape": "__string",
           "locationName": "operation",
-          "documentation": "<p>Filters the list of response objects to only include those with the specified operation name.</p>"
+          "documentation": "<p>Filters the list of response objects to include only those with the specified operation name.</p>"
         },
         "Status": {
           "shape": "__string",

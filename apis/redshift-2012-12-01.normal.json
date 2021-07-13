@@ -102,7 +102,7 @@
           "shape": "AuthorizationQuotaExceededFault"
         }
       ],
-      "documentation": "<p>Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group.</p> <p>If you authorize access to an Amazon EC2 security group, specify <i>EC2SecurityGroupName</i> and <i>EC2SecurityGroupOwnerId</i>. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS Region. </p> <p>If you authorize access to a CIDR/IP address range, specify <i>CIDRIP</i>. For an overview of CIDR blocks, see the Wikipedia article on <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>. </p> <p>You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Working with Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+      "documentation": "<p>Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group.</p> <p>If you authorize access to an Amazon EC2 security group, specify <i>EC2SecurityGroupName</i> and <i>EC2SecurityGroupOwnerId</i>. The Amazon EC2 security group and Amazon Redshift cluster must be in the same Region. </p> <p>If you authorize access to a CIDR/IP address range, specify <i>CIDRIP</i>. For an overview of CIDR blocks, see the Wikipedia article on <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>. </p> <p>You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Working with Security Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
     },
     "AuthorizeEndpointAccess": {
       "name": "AuthorizeEndpointAccess",
@@ -172,7 +172,7 @@
           "shape": "LimitExceededFault"
         }
       ],
-      "documentation": "<p>Authorizes the specified AWS customer account to restore the specified snapshot.</p> <p> For more information about working with snapshots, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+      "documentation": "<p>Authorizes the specified account to restore the specified snapshot.</p> <p> For more information about working with snapshots, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
     },
     "BatchDeleteClusterSnapshots": {
       "name": "BatchDeleteClusterSnapshots",
@@ -277,6 +277,32 @@
         }
       ],
       "documentation": "<p>Copies the specified automated cluster snapshot to a new manual cluster snapshot. The source must be an automated snapshot and it must be in the available state.</p> <p>When you delete a cluster, Amazon Redshift deletes any automated snapshots of the cluster. Also, when the retention period of the snapshot expires, Amazon Redshift automatically deletes it. If you want to keep an automated snapshot for a longer period, you can make a manual copy of the snapshot. Manual snapshots are retained until you delete them.</p> <p> For more information about working with snapshots, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+    },
+    "CreateAuthenticationProfile": {
+      "name": "CreateAuthenticationProfile",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateAuthenticationProfileMessage"
+      },
+      "output": {
+        "shape": "CreateAuthenticationProfileResult",
+        "resultWrapper": "CreateAuthenticationProfileResult"
+      },
+      "errors": [
+        {
+          "shape": "AuthenticationProfileAlreadyExistsFault"
+        },
+        {
+          "shape": "AuthenticationProfileQuotaExceededFault"
+        },
+        {
+          "shape": "InvalidAuthenticationProfileRequestFault"
+        }
+      ],
+      "documentation": "<p>Creates an authentication profile with the specified parameters.</p>"
     },
     "CreateCluster": {
       "name": "CreateCluster",
@@ -593,7 +619,7 @@
           "shape": "InvalidTagFault"
         }
       ],
-      "documentation": "<p>Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console.</p> <p>You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities. Notifications will be sent for all events you want that match those criteria. For example, you can specify source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and Backup categories for the specified clusters.</p> <p>If you specify both the source type and source IDs, such as source type = cluster and source identifier = my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type but do not specify a source identifier, you will receive notice of the events for the objects of that type in your AWS account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all Amazon Redshift sources belonging to your AWS account. You must specify a source type if you specify a source ID.</p>"
+      "documentation": "<p>Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console.</p> <p>You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities. Notifications will be sent for all events you want that match those criteria. For example, you can specify source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and Backup categories for the specified clusters.</p> <p>If you specify both the source type and source IDs, such as source type = cluster and source identifier = my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type but do not specify a source identifier, you will receive notice of the events for the objects of that type in your account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all Amazon Redshift sources belonging to your account. You must specify a source type if you specify a source ID.</p>"
     },
     "CreateHsmClientCertificate": {
       "name": "CreateHsmClientCertificate",
@@ -721,7 +747,7 @@
           "shape": "DependentServiceRequestThrottlingFault"
         }
       ],
-      "documentation": "<p>Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from AWS Key Management Service (AWS KMS) to encrypt copied snapshots in a destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html\">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>"
+      "documentation": "<p>Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from Key Management Service (KMS) to encrypt copied snapshots in a destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html\">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>"
     },
     "CreateSnapshotSchedule": {
       "name": "CreateSnapshotSchedule",
@@ -820,6 +846,29 @@
         }
       ],
       "documentation": "<p>Creates a usage limit for a specified Amazon Redshift feature on a cluster. The usage limit is identified by the returned usage limit identifier.</p>"
+    },
+    "DeleteAuthenticationProfile": {
+      "name": "DeleteAuthenticationProfile",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteAuthenticationProfileMessage"
+      },
+      "output": {
+        "shape": "DeleteAuthenticationProfileResult",
+        "resultWrapper": "DeleteAuthenticationProfileResult"
+      },
+      "errors": [
+        {
+          "shape": "AuthenticationProfileNotFoundFault"
+        },
+        {
+          "shape": "InvalidAuthenticationProfileRequestFault"
+        }
+      ],
+      "documentation": "<p>Deletes an authentication profile.</p>"
     },
     "DeleteCluster": {
       "name": "DeleteCluster",
@@ -1161,6 +1210,29 @@
       },
       "documentation": "<p>Returns a list of attributes attached to an account</p>"
     },
+    "DescribeAuthenticationProfiles": {
+      "name": "DescribeAuthenticationProfiles",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeAuthenticationProfilesMessage"
+      },
+      "output": {
+        "shape": "DescribeAuthenticationProfilesResult",
+        "resultWrapper": "DescribeAuthenticationProfilesResult"
+      },
+      "errors": [
+        {
+          "shape": "AuthenticationProfileNotFoundFault"
+        },
+        {
+          "shape": "InvalidAuthenticationProfileRequestFault"
+        }
+      ],
+      "documentation": "<p>Describes an authentication profile.</p>"
+    },
     "DescribeClusterDbRevisions": {
       "name": "DescribeClusterDbRevisions",
       "http": {
@@ -1274,7 +1346,7 @@
           "shape": "InvalidTagFault"
         }
       ],
-      "documentation": "<p>Returns one or more snapshot objects, which contain metadata about your cluster snapshots. By default, this operation returns information about all snapshots of all clusters that are owned by you AWS customer account. No information is returned for snapshots owned by inactive AWS customer accounts.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all snapshots that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all snapshots that have any combination of those values are returned. Only snapshots that you own are returned in the response; shared snapshots are not returned with the tag key and tag value request parameters.</p> <p>If both tag keys and values are omitted from the request, snapshots are returned regardless of whether they have tag keys or values associated with them.</p>"
+      "documentation": "<p>Returns one or more snapshot objects, which contain metadata about your cluster snapshots. By default, this operation returns information about all snapshots of all clusters that are owned by your account. No information is returned for snapshots owned by inactive accounts.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all snapshots that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all snapshots that have any combination of those values are returned. Only snapshots that you own are returned in the response; shared snapshots are not returned with the tag key and tag value request parameters.</p> <p>If both tag keys and values are omitted from the request, snapshots are returned regardless of whether they have tag keys or values associated with them.</p>"
     },
     "DescribeClusterSubnetGroups": {
       "name": "DescribeClusterSubnetGroups",
@@ -1297,7 +1369,7 @@
           "shape": "InvalidTagFault"
         }
       ],
-      "documentation": "<p>Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in you AWS account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all subnet groups that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all subnet groups that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, subnet groups are returned regardless of whether they have tag keys or values associated with them.</p>"
+      "documentation": "<p>Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in your account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all subnet groups that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all subnet groups that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, subnet groups are returned regardless of whether they have tag keys or values associated with them.</p>"
     },
     "DescribeClusterTracks": {
       "name": "DescribeClusterTracks",
@@ -1498,7 +1570,7 @@
           "shape": "InvalidTagFault"
         }
       ],
-      "documentation": "<p>Returns information about the specified HSM client certificate. If no certificate ID is specified, returns information about all the HSM certificates owned by your AWS customer account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM client certificates that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM client certificates that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM client certificates are returned regardless of whether they have tag keys or values associated with them.</p>"
+      "documentation": "<p>Returns information about the specified HSM client certificate. If no certificate ID is specified, returns information about all the HSM certificates owned by your account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM client certificates that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM client certificates that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM client certificates are returned regardless of whether they have tag keys or values associated with them.</p>"
     },
     "DescribeHsmConfigurations": {
       "name": "DescribeHsmConfigurations",
@@ -1521,7 +1593,7 @@
           "shape": "InvalidTagFault"
         }
       ],
-      "documentation": "<p>Returns information about the specified Amazon Redshift HSM configuration. If no configuration ID is specified, returns information about all the HSM configurations owned by your AWS customer account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM connections that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM connections that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM connections are returned regardless of whether they have tag keys or values associated with them.</p>"
+      "documentation": "<p>Returns information about the specified Amazon Redshift HSM configuration. If no configuration ID is specified, returns information about all the HSM configurations owned by your account.</p> <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM connections that match any combination of the specified keys and values. For example, if you have <code>owner</code> and <code>environment</code> for tag keys, and <code>admin</code> and <code>test</code> for tag values, all HSM connections that have any combination of those values are returned.</p> <p>If both tag keys and values are omitted from the request, HSM connections are returned regardless of whether they have tag keys or values associated with them.</p>"
     },
     "DescribeLoggingStatus": {
       "name": "DescribeLoggingStatus",
@@ -1585,7 +1657,7 @@
         "shape": "OrderableClusterOptionsMessage",
         "resultWrapper": "DescribeOrderableClusterOptionsResult"
       },
-      "documentation": "<p>Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+      "documentation": "<p>Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
     },
     "DescribePartners": {
       "name": "DescribePartners",
@@ -1726,7 +1798,7 @@
           "shape": "InvalidTagFault"
         }
       ],
-      "documentation": "<p>Returns a list of snapshot copy grants owned by the AWS account in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html\">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>"
+      "documentation": "<p>Returns a list of snapshot copy grants owned by the account in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html\">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>"
     },
     "DescribeSnapshotSchedules": {
       "name": "DescribeSnapshotSchedules",
@@ -1874,7 +1946,7 @@
           "shape": "UnauthorizedOperation"
         }
       ],
-      "documentation": "<p>Disables the automatic copying of snapshots from one region to another region for a specified cluster.</p> <p>If your cluster and its snapshots are encrypted using a customer master key (CMK) from AWS KMS, use <a>DeleteSnapshotCopyGrant</a> to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. </p>"
+      "documentation": "<p>Disables the automatic copying of snapshots from one region to another region for a specified cluster.</p> <p>If your cluster and its snapshots are encrypted using a customer master key (CMK) from Key Management Service, use <a>DeleteSnapshotCopyGrant</a> to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. </p>"
     },
     "EnableLogging": {
       "name": "EnableLogging",
@@ -1982,7 +2054,7 @@
           "shape": "UnsupportedOperationFault"
         }
       ],
-      "documentation": "<p>Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with <code>IAM:</code> if <code>AutoCreate</code> is <code>False</code> or <code>IAMA:</code> if <code>AutoCreate</code> is <code>True</code>. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html\">Using IAM Authentication to Generate Database User Credentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>The AWS Identity and Access Management (IAM)user or role that executes GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources\">Resource Policies for GetClusterCredentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the <code>redshift:JoinGroup</code> action with access to the listed <code>dbgroups</code>. </p> <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>, then the policy must include the <code>redshift:CreateClusterUser</code> privilege.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name. </p>"
+      "documentation": "<p>Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with <code>IAM:</code> if <code>AutoCreate</code> is <code>False</code> or <code>IAMA:</code> if <code>AutoCreate</code> is <code>True</code>. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/generating-user-credentials.html\">Using IAM Authentication to Generate Database User Credentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html#redshift-policy-resources.getclustercredentials-resources\">Resource Policies for GetClusterCredentials</a> in the Amazon Redshift Cluster Management Guide.</p> <p>If the <code>DbGroups</code> parameter is specified, the IAM policy must allow the <code>redshift:JoinGroup</code> action with access to the listed <code>dbgroups</code>. </p> <p>In addition, if the <code>AutoCreate</code> parameter is set to <code>True</code>, then the policy must include the <code>redshift:CreateClusterUser</code> privilege.</p> <p>If the <code>DbName</code> parameter is specified, the IAM policy must allow access to the resource <code>dbname</code> for the specified database name. </p>"
     },
     "GetReservedNodeExchangeOfferings": {
       "name": "GetReservedNodeExchangeOfferings",
@@ -2044,6 +2116,32 @@
         }
       ],
       "documentation": "<p>Modifies whether a cluster can use AQUA (Advanced Query Accelerator). </p>"
+    },
+    "ModifyAuthenticationProfile": {
+      "name": "ModifyAuthenticationProfile",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyAuthenticationProfileMessage"
+      },
+      "output": {
+        "shape": "ModifyAuthenticationProfileResult",
+        "resultWrapper": "ModifyAuthenticationProfileResult"
+      },
+      "errors": [
+        {
+          "shape": "AuthenticationProfileNotFoundFault"
+        },
+        {
+          "shape": "AuthenticationProfileQuotaExceededFault"
+        },
+        {
+          "shape": "InvalidAuthenticationProfileRequestFault"
+        }
+      ],
+      "documentation": "<p>Modifies an authentication profile.</p>"
     },
     "ModifyCluster": {
       "name": "ModifyCluster",
@@ -2117,7 +2215,7 @@
           "shape": "InvalidRetentionPeriodFault"
         }
       ],
-      "documentation": "<p>Modifies the settings for a cluster.</p> <p>You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.</p> <p>You can add another security or parameter group, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+      "documentation": "<p>Modifies the settings for a cluster.</p> <p>You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change.</p> <p>You can add another security or parameter group, or change the admin user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
     },
     "ModifyClusterDbRevision": {
       "name": "ModifyClusterDbRevision",
@@ -2166,7 +2264,7 @@
           "shape": "ClusterNotFoundFault"
         }
       ],
-      "documentation": "<p>Modifies the list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services.</p> <p>A cluster can have up to 10 IAM roles associated at any time.</p>"
+      "documentation": "<p>Modifies the list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services.</p> <p>A cluster can have up to 10 IAM roles associated at any time.</p>"
     },
     "ModifyClusterMaintenance": {
       "name": "ModifyClusterMaintenance",
@@ -2438,7 +2536,7 @@
           "shape": "InvalidRetentionPeriodFault"
         }
       ],
-      "documentation": "<p>Modifies the number of days to retain snapshots in the destination AWS Region after they are copied from the source AWS Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. </p>"
+      "documentation": "<p>Modifies the number of days to retain snapshots in the destination Region after they are copied from the source Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. </p>"
     },
     "ModifySnapshotSchedule": {
       "name": "ModifySnapshotSchedule",
@@ -2878,7 +2976,7 @@
           "shape": "ClusterSnapshotNotFoundFault"
         }
       ],
-      "documentation": "<p>Removes the ability of the specified AWS customer account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.</p> <p> For more information about working with snapshots, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+      "documentation": "<p>Removes the ability of the specified account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.</p> <p> For more information about working with snapshots, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
     },
     "RotateEncryptionKey": {
       "name": "RotateEncryptionKey",
@@ -2988,14 +3086,14 @@
       "members": {
         "AccountId": {
           "shape": "String",
-          "documentation": "<p>The identifier of an AWS customer account authorized to restore a snapshot.</p>"
+          "documentation": "<p>The identifier of an account authorized to restore a snapshot.</p>"
         },
         "AccountAlias": {
           "shape": "String",
-          "documentation": "<p>The identifier of an AWS support account authorized to restore a snapshot. For AWS support, the identifier is <code>amazon-redshift-support</code>. </p>"
+          "documentation": "<p>The identifier of an Amazon Web Services support account authorized to restore a snapshot. For Amazon Web Services Support, the identifier is <code>amazon-redshift-support</code>. </p>"
         }
       },
-      "documentation": "<p>Describes an AWS customer account authorized to restore a snapshot.</p>"
+      "documentation": "<p>Describes an account authorized to restore a snapshot.</p>"
     },
     "AccountsWithRestoreAccessList": {
       "type": "list",
@@ -3021,7 +3119,7 @@
         },
         "AquaConfigurationStatus": {
           "shape": "AquaConfigurationStatus",
-          "documentation": "<p>The value represents how the cluster is configured to use AQUA. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
+          "documentation": "<p>The value represents how the cluster is configured to use AQUA. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
         }
       },
       "documentation": "<p>The AQUA (Advanced Query Accelerator) configuration of the cluster.</p>"
@@ -3080,6 +3178,31 @@
       },
       "documentation": "<p>Describes an attribute value.</p>"
     },
+    "AuthenticationProfile": {
+      "type": "structure",
+      "members": {
+        "AuthenticationProfileName": {
+          "shape": "AuthenticationProfileNameString",
+          "documentation": "<p>The name of the authentication profile.</p>"
+        },
+        "AuthenticationProfileContent": {
+          "shape": "String",
+          "documentation": "<p>The content of the authentication profile in JSON format. The maximum length of the JSON string is determined by a quota for your account.</p>"
+        }
+      },
+      "documentation": "<p>Describes an authentication profile.</p>"
+    },
+    "AuthenticationProfileList": {
+      "type": "list",
+      "member": {
+        "shape": "AuthenticationProfile"
+      }
+    },
+    "AuthenticationProfileNameString": {
+      "type": "string",
+      "max": 63,
+      "pattern": "^[a-zA-Z0-9\\-]+$"
+    },
     "AuthorizationStatus": {
       "type": "string",
       "enum": [
@@ -3107,7 +3230,7 @@
         },
         "EC2SecurityGroupOwnerId": {
           "shape": "String",
-          "documentation": "<p>The AWS account number of the owner of the security group specified by the <i>EC2SecurityGroupName</i> parameter. The AWS Access Key ID is not an acceptable value. </p> <p>Example: <code>111122223333</code> </p>"
+          "documentation": "<p>The account number of the owner of the security group specified by the <i>EC2SecurityGroupName</i> parameter. The Amazon Web Services Access Key ID is not an acceptable value. </p> <p>Example: <code>111122223333</code> </p>"
         }
       },
       "documentation": "<p/>"
@@ -3132,7 +3255,7 @@
         },
         "Account": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID to grant access to.</p>"
+          "documentation": "<p>The account ID to grant access to.</p>"
         },
         "VpcIds": {
           "shape": "VpcIdentifierList",
@@ -3157,7 +3280,7 @@
         },
         "AccountWithRestoreAccess": {
           "shape": "String",
-          "documentation": "<p>The identifier of the AWS customer account authorized to restore the specified snapshot.</p> <p>To share a snapshot with AWS support, specify amazon-redshift-support.</p>"
+          "documentation": "<p>The identifier of the account authorized to restore the specified snapshot.</p> <p>To share a snapshot with Amazon Web Services Support, specify amazon-redshift-support.</p>"
         }
       },
       "documentation": "<p/>"
@@ -3307,7 +3430,7 @@
         },
         "MasterUsername": {
           "shape": "String",
-          "documentation": "<p>The master user name for the cluster. This name is used to connect to the database that is specified in the <b>DBName</b> parameter. </p>"
+          "documentation": "<p>The admin user name for the cluster. This name is used to connect to the database that is specified in the <b>DBName</b> parameter. </p>"
         },
         "DBName": {
           "shape": "String",
@@ -3419,7 +3542,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The AWS Key Management Service (AWS KMS) key ID of the encryption key used to encrypt data in the cluster.</p>"
+          "documentation": "<p>The Key Management Service (KMS) key ID of the encryption key used to encrypt data in the cluster.</p>"
         },
         "EnhancedVpcRouting": {
           "shape": "Boolean",
@@ -3427,7 +3550,7 @@
         },
         "IamRoles": {
           "shape": "ClusterIamRoleList",
-          "documentation": "<p>A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services.</p>"
+          "documentation": "<p>A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services.</p>"
         },
         "PendingActions": {
           "shape": "PendingActionsList",
@@ -3575,7 +3698,7 @@
           "documentation": "<p>A value that describes the status of the IAM role's association with an Amazon Redshift cluster.</p> <p>The following are possible statuses and descriptions.</p> <ul> <li> <p> <code>in-sync</code>: The role is available for use by the cluster.</p> </li> <li> <p> <code>adding</code>: The role is in the process of being associated with the cluster.</p> </li> <li> <p> <code>removing</code>: The role is in the process of being disassociated with the cluster.</p> </li> </ul>"
         }
       },
-      "documentation": "<p>An AWS Identity and Access Management (IAM) role that can be used by the associated Amazon Redshift cluster to access other AWS services.</p>"
+      "documentation": "<p>An Identity and Access Management (IAM) role that can be used by the associated Amazon Redshift cluster to access other Amazon Web Services services.</p>"
     },
     "ClusterIamRoleList": {
       "type": "list",
@@ -3949,7 +4072,7 @@
         },
         "TargetSnapshotIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier given to the new manual snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank.</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for the AWS account that is making the request.</p> </li> </ul>"
+          "documentation": "<p>The identifier given to the new manual snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank.</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for the account that is making the request.</p> </li> </ul>"
         },
         "ManualSnapshotRetentionPeriod": {
           "shape": "IntegerOptional",
@@ -3963,6 +4086,36 @@
       "members": {
         "Snapshot": {
           "shape": "Snapshot"
+        }
+      }
+    },
+    "CreateAuthenticationProfileMessage": {
+      "type": "structure",
+      "required": [
+        "AuthenticationProfileName",
+        "AuthenticationProfileContent"
+      ],
+      "members": {
+        "AuthenticationProfileName": {
+          "shape": "AuthenticationProfileNameString",
+          "documentation": "<p>The name of the authentication profile to be created.</p>"
+        },
+        "AuthenticationProfileContent": {
+          "shape": "String",
+          "documentation": "<p>The content of the authentication profile in JSON format. The maximum length of the JSON string is determined by a quota for your account.</p>"
+        }
+      }
+    },
+    "CreateAuthenticationProfileResult": {
+      "type": "structure",
+      "members": {
+        "AuthenticationProfileName": {
+          "shape": "AuthenticationProfileNameString",
+          "documentation": "<p>The name of the authentication profile that was created.</p>"
+        },
+        "AuthenticationProfileContent": {
+          "shape": "String",
+          "documentation": "<p>The content of the authentication profile in JSON format.</p>"
         }
       }
     },
@@ -3981,7 +4134,7 @@
         },
         "ClusterIdentifier": {
           "shape": "String",
-          "documentation": "<p>A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. The identifier also appears in the Amazon Redshift console.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an AWS account.</p> </li> </ul> <p>Example: <code>myexamplecluster</code> </p>"
+          "documentation": "<p>A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. The identifier also appears in the Amazon Redshift console.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an account.</p> </li> </ul> <p>Example: <code>myexamplecluster</code> </p>"
         },
         "ClusterType": {
           "shape": "String",
@@ -3993,11 +4146,11 @@
         },
         "MasterUsername": {
           "shape": "String",
-          "documentation": "<p>The user name associated with the master user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 - 128 alphanumeric characters. The user name can't be <code>PUBLIC</code>.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words</a> in the Amazon Redshift Database Developer Guide. </p> </li> </ul>"
+          "documentation": "<p>The user name associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 - 128 alphanumeric characters. The user name can't be <code>PUBLIC</code>.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot be a reserved word. A list of reserved words can be found in <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/r_pg_keywords.html\">Reserved Words</a> in the Amazon Redshift Database Developer Guide. </p> </li> </ul>"
         },
         "MasterUserPassword": {
           "shape": "String",
-          "documentation": "<p>The password associated with the master user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), \" (double quote), \\, /, @, or space.</p> </li> </ul>"
+          "documentation": "<p>The password associated with the admin user account for the cluster that is being created.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), \" (double quote), \\, /, @, or space.</p> </li> </ul>"
         },
         "ClusterSecurityGroups": {
           "shape": "ClusterSecurityGroupNameList",
@@ -4073,7 +4226,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.</p>"
+          "documentation": "<p>The Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.</p>"
         },
         "EnhancedVpcRouting": {
           "shape": "BooleanOptional",
@@ -4085,7 +4238,7 @@
         },
         "IamRoles": {
           "shape": "IamRoleArnList",
-          "documentation": "<p>A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated with it at any time.</p>"
+          "documentation": "<p>A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated with it at any time.</p>"
         },
         "MaintenanceTrackName": {
           "shape": "String",
@@ -4101,7 +4254,7 @@
         },
         "AquaConfigurationStatus": {
           "shape": "AquaConfigurationStatus",
-          "documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
+          "documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
         }
       },
       "documentation": "<p/>"
@@ -4116,11 +4269,11 @@
       "members": {
         "ParameterGroupName": {
           "shape": "String",
-          "documentation": "<p>The name of the cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 alphanumeric characters or hyphens</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique withing your AWS account.</p> </li> </ul> <note> <p>This value is stored as a lower-case string.</p> </note>"
+          "documentation": "<p>The name of the cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must be 1 to 255 alphanumeric characters or hyphens</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique withing your account.</p> </li> </ul> <note> <p>This value is stored as a lower-case string.</p> </note>"
         },
         "ParameterGroupFamily": {
           "shape": "String",
-          "documentation": "<p>The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters.</p> <p>To get a list of valid parameter group family names, you can call <a>DescribeClusterParameterGroups</a>. By default, Amazon Redshift returns a list of all the parameter groups that are owned by your AWS account, including the default parameter groups for each Amazon Redshift engine version. The parameter group family names associated with the default parameter groups provide you the valid values. For example, a valid family name is \"redshift-1.0\". </p>"
+          "documentation": "<p>The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters.</p> <p>To get a list of valid parameter group family names, you can call <a>DescribeClusterParameterGroups</a>. By default, Amazon Redshift returns a list of all the parameter groups that are owned by your account, including the default parameter groups for each Amazon Redshift engine version. The parameter group family names associated with the default parameter groups provide you the valid values. For example, a valid family name is \"redshift-1.0\". </p>"
         },
         "Description": {
           "shape": "String",
@@ -4158,7 +4311,7 @@
       "members": {
         "ClusterSecurityGroupName": {
           "shape": "String",
-          "documentation": "<p>The name for the security group. Amazon Redshift stores the value as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain no more than 255 alphanumeric characters or hyphens.</p> </li> <li> <p>Must not be \"Default\".</p> </li> <li> <p>Must be unique for all security groups that are created by your AWS account.</p> </li> </ul> <p>Example: <code>examplesecuritygroup</code> </p>"
+          "documentation": "<p>The name for the security group. Amazon Redshift stores the value as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain no more than 255 alphanumeric characters or hyphens.</p> </li> <li> <p>Must not be \"Default\".</p> </li> <li> <p>Must be unique for all security groups that are created by your account.</p> </li> </ul> <p>Example: <code>examplesecuritygroup</code> </p>"
         },
         "Description": {
           "shape": "String",
@@ -4188,7 +4341,7 @@
       "members": {
         "SnapshotIdentifier": {
           "shape": "String",
-          "documentation": "<p>A unique identifier for the snapshot that you are requesting. This identifier must be unique for all snapshots within the AWS account.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <p>Example: <code>my-snapshot-id</code> </p>"
+          "documentation": "<p>A unique identifier for the snapshot that you are requesting. This identifier must be unique for all snapshots within the account.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank</p> </li> <li> <p>Must contain from 1 to 255 alphanumeric characters or hyphens</p> </li> <li> <p>First character must be a letter</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <p>Example: <code>my-snapshot-id</code> </p>"
         },
         "ClusterIdentifier": {
           "shape": "String",
@@ -4223,7 +4376,7 @@
       "members": {
         "ClusterSubnetGroupName": {
           "shape": "String",
-          "documentation": "<p>The name for the subnet group. Amazon Redshift stores the value as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain no more than 255 alphanumeric characters or hyphens.</p> </li> <li> <p>Must not be \"Default\".</p> </li> <li> <p>Must be unique for all subnet groups that are created by your AWS account.</p> </li> </ul> <p>Example: <code>examplesubnetgroup</code> </p>"
+          "documentation": "<p>The name for the subnet group. Amazon Redshift stores the value as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain no more than 255 alphanumeric characters or hyphens.</p> </li> <li> <p>Must not be \"Default\".</p> </li> <li> <p>Must be unique for all subnet groups that are created by your account.</p> </li> </ul> <p>Example: <code>examplesubnetgroup</code> </p>"
         },
         "Description": {
           "shape": "String",
@@ -4261,7 +4414,7 @@
         },
         "ResourceOwner": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID of the owner of the cluster. This is only required if the cluster is in another AWS account.</p>"
+          "documentation": "<p>The account ID of the owner of the cluster. This is only required if the cluster is in another account.</p>"
         },
         "EndpointName": {
           "shape": "String",
@@ -4294,7 +4447,7 @@
         },
         "SourceType": {
           "shape": "String",
-          "documentation": "<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>"
+          "documentation": "<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>"
         },
         "SourceIds": {
           "shape": "SourceIdsList",
@@ -4453,7 +4606,7 @@
       "members": {
         "SnapshotCopyGrantName": {
           "shape": "String",
-          "documentation": "<p>The name of the snapshot copy grant. This name must be unique in the region for the AWS account.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an AWS account.</p> </li> </ul>"
+          "documentation": "<p>The name of the snapshot copy grant. This name must be unique in the region for the account.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an account.</p> </li> </ul>"
         },
         "KmsKeyId": {
           "shape": "String",
@@ -4652,6 +4805,27 @@
       "member": {
         "shape": "DeferredMaintenanceWindow",
         "locationName": "DeferredMaintenanceWindow"
+      }
+    },
+    "DeleteAuthenticationProfileMessage": {
+      "type": "structure",
+      "required": [
+        "AuthenticationProfileName"
+      ],
+      "members": {
+        "AuthenticationProfileName": {
+          "shape": "AuthenticationProfileNameString",
+          "documentation": "<p>The name of the authentication profile to delete.</p>"
+        }
+      }
+    },
+    "DeleteAuthenticationProfileResult": {
+      "type": "structure",
+      "members": {
+        "AuthenticationProfileName": {
+          "shape": "AuthenticationProfileNameString",
+          "documentation": "<p>The name of the authentication profile that was deleted.</p>"
+        }
       }
     },
     "DeleteClusterMessage": {
@@ -4885,6 +5059,24 @@
         }
       }
     },
+    "DescribeAuthenticationProfilesMessage": {
+      "type": "structure",
+      "members": {
+        "AuthenticationProfileName": {
+          "shape": "AuthenticationProfileNameString",
+          "documentation": "<p>The name of the authentication profile to describe. If not specified then all authentication profiles owned by the account are listed.</p>"
+        }
+      }
+    },
+    "DescribeAuthenticationProfilesResult": {
+      "type": "structure",
+      "members": {
+        "AuthenticationProfiles": {
+          "shape": "AuthenticationProfileList",
+          "documentation": "<p>The list of authentication profiles.</p>"
+        }
+      }
+    },
     "DescribeClusterDbRevisionsMessage": {
       "type": "structure",
       "members": {
@@ -4915,7 +5107,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterParameterGroups</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterParameterGroups</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         },
         "TagKeys": {
           "shape": "TagKeyList",
@@ -4948,7 +5140,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterParameters</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterParameters</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       },
       "documentation": "<p/>"
@@ -4966,7 +5158,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterSecurityGroups</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <b>ClusterSecurityGroupName</b> parameter or the <b>Marker</b> parameter, but not both. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterSecurityGroups</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <b>ClusterSecurityGroupName</b> parameter or the <b>Marker</b> parameter, but not both. </p>"
         },
         "TagKeys": {
           "shape": "TagKeyList",
@@ -5008,11 +5200,11 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterSnapshots</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterSnapshots</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         },
         "OwnerAccount": {
           "shape": "String",
-          "documentation": "<p>The AWS customer account used to create or copy the snapshot. Use this field to filter the results to snapshots owned by a particular account. To describe snapshots you own, either specify your AWS customer account, or do not specify the parameter.</p>"
+          "documentation": "<p>The account used to create or copy the snapshot. Use this field to filter the results to snapshots owned by a particular account. To describe snapshots you own, either specify your account, or do not specify the parameter.</p>"
         },
         "TagKeys": {
           "shape": "TagKeyList",
@@ -5046,7 +5238,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterSubnetGroups</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterSubnetGroups</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         },
         "TagKeys": {
           "shape": "TagKeyList",
@@ -5093,7 +5285,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterVersions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusterVersions</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       },
       "documentation": "<p/>"
@@ -5111,7 +5303,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusters</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <b>ClusterIdentifier</b> parameter or the <b>Marker</b> parameter, but not both. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeClusters</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <b>ClusterIdentifier</b> parameter or the <b>Marker</b> parameter, but not both. </p>"
         },
         "TagKeys": {
           "shape": "TagKeyList",
@@ -5140,7 +5332,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDefaultClusterParameters</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDefaultClusterParameters</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       },
       "documentation": "<p/>"
@@ -5162,7 +5354,7 @@
         },
         "ResourceOwner": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID of the owner of the cluster.</p>"
+          "documentation": "<p>The account ID of the owner of the cluster.</p>"
         },
         "EndpointName": {
           "shape": "String",
@@ -5191,7 +5383,7 @@
         },
         "Account": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID of either the cluster owner (grantor) or grantee. If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.</p>"
+          "documentation": "<p>The Aaccount ID of either the cluster owner (grantor) or grantee. If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.</p>"
         },
         "Grantee": {
           "shape": "BooleanOptional",
@@ -5230,7 +5422,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeEventSubscriptions request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeEventSubscriptions request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         },
         "TagKeys": {
           "shape": "TagKeyList",
@@ -5272,7 +5464,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeEvents</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeEvents</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       },
       "documentation": "<p/>"
@@ -5282,7 +5474,7 @@
       "members": {
         "HsmClientCertificateIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier of a specific HSM client certificate for which you want information. If no identifier is specified, information is returned for all HSM client certificates owned by your AWS customer account.</p>"
+          "documentation": "<p>The identifier of a specific HSM client certificate for which you want information. If no identifier is specified, information is returned for all HSM client certificates owned by your account.</p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -5290,7 +5482,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeHsmClientCertificates</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeHsmClientCertificates</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         },
         "TagKeys": {
           "shape": "TagKeyList",
@@ -5308,7 +5500,7 @@
       "members": {
         "HsmConfigurationIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier of a specific Amazon Redshift HSM configuration to be described. If no identifier is specified, information is returned for all HSM configurations owned by your AWS customer account.</p>"
+          "documentation": "<p>The identifier of a specific Amazon Redshift HSM configuration to be described. If no identifier is specified, information is returned for all HSM configurations owned by your account.</p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -5316,7 +5508,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeHsmConfigurations</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeHsmConfigurations</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         },
         "TagKeys": {
           "shape": "TagKeyList",
@@ -5362,7 +5554,7 @@
         },
         "OwnerAccount": {
           "shape": "String",
-          "documentation": "<p>The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.</p>"
+          "documentation": "<p>The account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.</p>"
         },
         "Filters": {
           "shape": "NodeConfigurationOptionsFilterList",
@@ -5371,7 +5563,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeNodeConfigurationOptions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeNodeConfigurationOptions</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -5396,7 +5588,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeOrderableClusterOptions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeOrderableClusterOptions</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       },
       "documentation": "<p/>"
@@ -5410,7 +5602,7 @@
       "members": {
         "AccountId": {
           "shape": "PartnerIntegrationAccountId",
-          "documentation": "<p>The AWS account ID that owns the cluster.</p>"
+          "documentation": "<p>The Region ID that owns the cluster.</p>"
         },
         "ClusterIdentifier": {
           "shape": "PartnerIntegrationClusterIdentifier",
@@ -5448,7 +5640,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeReservedNodeOfferings</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeReservedNodeOfferings</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       },
       "documentation": "<p/>"
@@ -5466,7 +5658,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeReservedNodes</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeReservedNodes</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         }
       },
       "documentation": "<p/>"
@@ -5479,7 +5671,7 @@
       "members": {
         "ClusterIdentifier": {
           "shape": "String",
-          "documentation": "<p>The unique identifier of a cluster whose resize progress you are requesting. This parameter is case-sensitive.</p> <p>By default, resize operations for all clusters defined for an AWS account are returned.</p>"
+          "documentation": "<p>The unique identifier of a cluster whose resize progress you are requesting. This parameter is case-sensitive.</p> <p>By default, resize operations for all clusters defined for an account are returned.</p>"
         }
       },
       "documentation": "<p/>"
@@ -5513,7 +5705,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeScheduledActions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeScheduledActions</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -5534,7 +5726,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <code>DescribeSnapshotCopyGrant</code> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <b>SnapshotCopyGrantName</b> parameter or the <b>Marker</b> parameter, but not both. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <code>DescribeSnapshotCopyGrant</code> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <b>SnapshotCopyGrantName</b> parameter or the <b>Marker</b> parameter, but not both. </p>"
         },
         "TagKeys": {
           "shape": "TagKeyList",
@@ -5662,7 +5854,7 @@
         },
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeUsageLimits</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeUsageLimits</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         },
         "TagKeys": {
           "shape": "TagKeyList",
@@ -5727,7 +5919,7 @@
         },
         "EC2SecurityGroupOwnerId": {
           "shape": "String",
-          "documentation": "<p>The AWS ID of the owner of the EC2 security group specified in the <code>EC2SecurityGroupName</code> field. </p>"
+          "documentation": "<p>The account ID of the owner of the EC2 security group specified in the <code>EC2SecurityGroupName</code> field. </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -5799,7 +5991,7 @@
         },
         "DestinationRegion": {
           "shape": "String",
-          "documentation": "<p>The destination AWS Region that you want to copy snapshots to.</p> <p>Constraints: Must be the name of a valid AWS Region. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region\">Regions and Endpoints</a> in the Amazon Web Services General Reference. </p>"
+          "documentation": "<p>The destination Region that you want to copy snapshots to.</p> <p>Constraints: Must be the name of a valid Region. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region\">Regions and Endpoints</a> in the Amazon Web Services General Reference. </p>"
         },
         "RetentionPeriod": {
           "shape": "IntegerOptional",
@@ -5807,11 +5999,11 @@
         },
         "SnapshotCopyGrantName": {
           "shape": "String",
-          "documentation": "<p>The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.</p>"
+          "documentation": "<p>The name of the snapshot copy grant to use when snapshots of an Amazon Web Services KMS-encrypted cluster are copied to the destination region.</p>"
         },
         "ManualSnapshotRetentionPeriod": {
           "shape": "IntegerOptional",
-          "documentation": "<p>The number of days to retain newly copied snapshots in the destination AWS Region after they are copied from the source AWS Region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>"
+          "documentation": "<p>The number of days to retain newly copied snapshots in the destination Region after they are copied from the source Region. If the value is -1, the manual snapshot is retained indefinitely. </p> <p>The value must be either -1 or an integer between 1 and 3,653.</p>"
         }
       },
       "documentation": "<p/>"
@@ -5851,7 +6043,7 @@
         },
         "ResourceOwner": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID of the owner of the cluster.</p>"
+          "documentation": "<p>The account ID of the owner of the cluster.</p>"
         },
         "SubnetGroupName": {
           "shape": "String",
@@ -5911,11 +6103,11 @@
       "members": {
         "Grantor": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID of the cluster owner.</p>"
+          "documentation": "<p>The account ID of the cluster owner.</p>"
         },
         "Grantee": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID of the grantee of the cluster.</p>"
+          "documentation": "<p>The account ID of the grantee of the cluster.</p>"
         },
         "ClusterIdentifier": {
           "shape": "String",
@@ -5946,7 +6138,7 @@
           "documentation": "<p>The number of Redshift-managed VPC endpoints created for the authorization.</p>"
         }
       },
-      "documentation": "<p>Describes an endpoint authorization for authorizing Redshift-managed VPC endpoint access to a cluster across AWS accounts.</p>"
+      "documentation": "<p>Describes an endpoint authorization for authorizing Redshift-managed VPC endpoint access to a cluster across accounts.</p>"
     },
     "EndpointAuthorizationList": {
       "type": "structure",
@@ -6082,7 +6274,7 @@
       "members": {
         "CustomerAwsId": {
           "shape": "String",
-          "documentation": "<p>The AWS customer account associated with the Amazon Redshift event notification subscription.</p>"
+          "documentation": "<p>The account associated with the Amazon Redshift event notification subscription.</p>"
         },
         "CustSubscriptionId": {
           "shape": "String",
@@ -6466,7 +6658,7 @@
         },
         "AquaConfigurationStatus": {
           "shape": "AquaConfigurationStatus",
-          "documentation": "<p>The new value of AQUA configuration status. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
+          "documentation": "<p>The new value of AQUA configuration status. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
         }
       }
     },
@@ -6476,6 +6668,36 @@
         "AquaConfiguration": {
           "shape": "AquaConfiguration",
           "documentation": "<p>The updated AQUA configuration of the cluster. </p>"
+        }
+      }
+    },
+    "ModifyAuthenticationProfileMessage": {
+      "type": "structure",
+      "required": [
+        "AuthenticationProfileName",
+        "AuthenticationProfileContent"
+      ],
+      "members": {
+        "AuthenticationProfileName": {
+          "shape": "AuthenticationProfileNameString",
+          "documentation": "<p>The name of the authentication profile to replace.</p>"
+        },
+        "AuthenticationProfileContent": {
+          "shape": "String",
+          "documentation": "<p>The new content of the authentication profile in JSON format. The maximum length of the JSON string is determined by a quota for your account.</p>"
+        }
+      }
+    },
+    "ModifyAuthenticationProfileResult": {
+      "type": "structure",
+      "members": {
+        "AuthenticationProfileName": {
+          "shape": "AuthenticationProfileNameString",
+          "documentation": "<p>The name of the authentication profile that was replaced.</p>"
+        },
+        "AuthenticationProfileContent": {
+          "shape": "String",
+          "documentation": "<p>The updated content of the authentication profile in JSON format.</p>"
         }
       }
     },
@@ -6605,7 +6827,7 @@
         },
         "MasterUserPassword": {
           "shape": "String",
-          "documentation": "<p>The new password for the cluster master user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <note> <p>Operations never return the password, so this operation provides a way to regain access to the master user account for a cluster if the password is lost.</p> </note> <p>Default: Uses existing setting.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), \" (double quote), \\, /, @, or space.</p> </li> </ul>"
+          "documentation": "<p>The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the <code>MasterUserPassword</code> element exists in the <code>PendingModifiedValues</code> element of the operation response. </p> <note> <p>Operations never return the password, so this operation provides a way to regain access to the admin user account for a cluster if the password is lost.</p> </note> <p>Default: Uses existing setting.</p> <p>Constraints:</p> <ul> <li> <p>Must be between 8 and 64 characters in length.</p> </li> <li> <p>Must contain at least one uppercase letter.</p> </li> <li> <p>Must contain at least one lowercase letter.</p> </li> <li> <p>Must contain one number.</p> </li> <li> <p>Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), \" (double quote), \\, /, @, or space.</p> </li> </ul>"
         },
         "ClusterParameterGroupName": {
           "shape": "String",
@@ -6641,7 +6863,7 @@
         },
         "NewClusterIdentifier": {
           "shape": "String",
-          "documentation": "<p>The new identifier for the cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an AWS account.</p> </li> </ul> <p>Example: <code>examplecluster</code> </p>"
+          "documentation": "<p>The new identifier for the cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an account.</p> </li> </ul> <p>Example: <code>examplecluster</code> </p>"
         },
         "PubliclyAccessible": {
           "shape": "BooleanOptional",
@@ -6665,7 +6887,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.</p>"
+          "documentation": "<p>The Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.</p>"
         },
         "AvailabilityZoneRelocation": {
           "shape": "BooleanOptional",
@@ -6818,7 +7040,7 @@
         },
         "SourceType": {
           "shape": "String",
-          "documentation": "<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>"
+          "documentation": "<p>The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your account. You must specify a source type in order to specify source IDs.</p> <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>"
         },
         "SourceIds": {
           "shape": "SourceIdsList",
@@ -6896,11 +7118,11 @@
       "members": {
         "ClusterIdentifier": {
           "shape": "String",
-          "documentation": "<p>The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination AWS Region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>"
+          "documentation": "<p>The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination Region.</p> <p>Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.</p>"
         },
         "RetentionPeriod": {
           "shape": "Integer",
-          "documentation": "<p>The number of days to retain automated snapshots in the destination AWS Region after they are copied from the source AWS Region.</p> <p>By default, this only changes the retention period of copied automated snapshots. </p> <p>If you decrease the retention period for automated snapshots that are copied to a destination AWS Region, Amazon Redshift deletes any existing automated snapshots that were copied to the destination AWS Region and that fall outside of the new retention period.</p> <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p> <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will have the new retention period. </p> <p>If you specify the value of -1 newly copied manual snapshots are retained indefinitely.</p> <p>Constraints: The number of days must be either -1 or an integer between 1 and 3,653 for manual snapshots.</p>"
+          "documentation": "<p>The number of days to retain automated snapshots in the destination Region after they are copied from the source Region.</p> <p>By default, this only changes the retention period of copied automated snapshots. </p> <p>If you decrease the retention period for automated snapshots that are copied to a destination Region, Amazon Redshift deletes any existing automated snapshots that were copied to the destination Region and that fall outside of the new retention period.</p> <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p> <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will have the new retention period. </p> <p>If you specify the value of -1 newly copied manual snapshots are retained indefinitely.</p> <p>Constraints: The number of days must be either -1 or an integer between 1 and 3,653 for manual snapshots.</p>"
         },
         "Manual": {
           "shape": "Boolean",
@@ -7243,7 +7465,7 @@
       "members": {
         "AccountId": {
           "shape": "PartnerIntegrationAccountId",
-          "documentation": "<p>The AWS account ID that owns the cluster.</p>"
+          "documentation": "<p>The Region ID that owns the cluster.</p>"
         },
         "ClusterIdentifier": {
           "shape": "PartnerIntegrationClusterIdentifier",
@@ -7323,7 +7545,7 @@
       "members": {
         "MasterUserPassword": {
           "shape": "String",
-          "documentation": "<p>The pending or in-progress change of the master user password for the cluster.</p>"
+          "documentation": "<p>The pending or in-progress change of the admin user password for the cluster.</p>"
         },
         "NodeType": {
           "shape": "String",
@@ -7745,7 +7967,7 @@
       "members": {
         "ClusterIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier of the cluster that will be created from restoring the snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an AWS account.</p> </li> </ul>"
+          "documentation": "<p>The identifier of the cluster that will be created from restoring the snapshot.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p> </li> <li> <p>Alphabetic characters must be lowercase.</p> </li> <li> <p>First character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> <li> <p>Must be unique for all clusters within an account.</p> </li> </ul>"
         },
         "SnapshotIdentifier": {
           "shape": "String",
@@ -7777,7 +7999,7 @@
         },
         "OwnerAccount": {
           "shape": "String",
-          "documentation": "<p>The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.</p>"
+          "documentation": "<p>The account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.</p>"
         },
         "HsmClientCertificateIdentifier": {
           "shape": "String",
@@ -7817,7 +8039,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster that you restore from a shared snapshot.</p>"
+          "documentation": "<p>The Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster that you restore from a shared snapshot.</p>"
         },
         "NodeType": {
           "shape": "String",
@@ -7833,7 +8055,7 @@
         },
         "IamRoles": {
           "shape": "IamRoleArnList",
-          "documentation": "<p>A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated at any time.</p>"
+          "documentation": "<p>A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request.</p> <p>A cluster can have up to 10 IAM roles associated at any time.</p>"
         },
         "MaintenanceTrackName": {
           "shape": "String",
@@ -7853,7 +8075,7 @@
         },
         "AquaConfigurationStatus": {
           "shape": "AquaConfigurationStatus",
-          "documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current AWS Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
+          "documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p> <ul> <li> <p>enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.</p> </li> <li> <p>disabled - Don't use AQUA. </p> </li> <li> <p>auto - Amazon Redshift determines whether to use AQUA.</p> </li> </ul>"
         }
       },
       "documentation": "<p/>"
@@ -8019,7 +8241,7 @@
         },
         "EC2SecurityGroupOwnerId": {
           "shape": "String",
-          "documentation": "<p>The AWS account number of the owner of the security group specified in the <code>EC2SecurityGroupName</code> parameter. The AWS access key ID is not an acceptable value. If <code>EC2SecurityGroupOwnerId</code> is specified, <code>EC2SecurityGroupName</code> must also be provided. and <code>CIDRIP</code> cannot be provided. </p> <p>Example: <code>111122223333</code> </p>"
+          "documentation": "<p>The account number of the owner of the security group specified in the <code>EC2SecurityGroupName</code> parameter. The Amazon Web Services access key ID is not an acceptable value. If <code>EC2SecurityGroupOwnerId</code> is specified, <code>EC2SecurityGroupName</code> must also be provided. and <code>CIDRIP</code> cannot be provided. </p> <p>Example: <code>111122223333</code> </p>"
         }
       },
       "documentation": "<p/>"
@@ -8041,7 +8263,7 @@
         },
         "Account": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID whose access is to be revoked.</p>"
+          "documentation": "<p>The account ID whose access is to be revoked.</p>"
         },
         "VpcIds": {
           "shape": "VpcIdentifierList",
@@ -8070,7 +8292,7 @@
         },
         "AccountWithRestoreAccess": {
           "shape": "String",
-          "documentation": "<p>The identifier of the AWS customer account that can no longer restore the specified snapshot.</p>"
+          "documentation": "<p>The identifier of the account that can no longer restore the specified snapshot.</p>"
         }
       },
       "documentation": "<p/>"
@@ -8245,7 +8467,7 @@
       "members": {
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeScheduledActions</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeScheduledActions</a> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
         },
         "ScheduledActions": {
           "shape": "ScheduledActionList",
@@ -8297,7 +8519,7 @@
         },
         "MasterUsername": {
           "shape": "String",
-          "documentation": "<p>The master user name for the cluster.</p>"
+          "documentation": "<p>The admin user name for the cluster.</p>"
         },
         "ClusterVersion": {
           "shape": "String",
@@ -8333,7 +8555,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The AWS Key Management Service (KMS) key ID of the encryption key that was used to encrypt data in the cluster from which the snapshot was taken.</p>"
+          "documentation": "<p>The Key Management Service (KMS) key ID of the encryption key that was used to encrypt data in the cluster from which the snapshot was taken.</p>"
         },
         "EncryptedWithHSM": {
           "shape": "Boolean",
@@ -8341,11 +8563,11 @@
         },
         "AccountsWithRestoreAccess": {
           "shape": "AccountsWithRestoreAccessList",
-          "documentation": "<p>A list of the AWS customer accounts authorized to restore the snapshot. Returns <code>null</code> if no accounts are authorized. Visible only to the snapshot owner. </p>"
+          "documentation": "<p>A list of the accounts authorized to restore the snapshot. Returns <code>null</code> if no accounts are authorized. Visible only to the snapshot owner. </p>"
         },
         "OwnerAccount": {
           "shape": "String",
-          "documentation": "<p>For manual snapshots, the AWS customer account used to create or copy the snapshot. For automatic snapshots, the owner of the cluster. The owner can perform all snapshot actions, such as sharing a manual snapshot.</p>"
+          "documentation": "<p>For manual snapshots, the account used to create or copy the snapshot. For automatic snapshots, the owner of the cluster. The owner can perform all snapshot actions, such as sharing a manual snapshot.</p>"
         },
         "TotalBackupSizeInMegaBytes": {
           "shape": "Double",
@@ -8424,14 +8646,14 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The unique identifier of the customer master key (CMK) in AWS KMS to which Amazon Redshift is granted permission.</p>"
+          "documentation": "<p>The unique identifier of the customer master key (CMK) in Amazon Web Services KMS to which Amazon Redshift is granted permission.</p>"
         },
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>A list of tag instances.</p>"
         }
       },
-      "documentation": "<p>The snapshot copy grant that grants Amazon Redshift permission to encrypt copied snapshots with the specified customer master key (CMK) from AWS KMS in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html\">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>",
+      "documentation": "<p>The snapshot copy grant that grants Amazon Redshift permission to encrypt copied snapshots with the specified customer master key (CMK) from Amazon Web Services KMS in the destination region.</p> <p> For more information about managing snapshot copy grants, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html\">Amazon Redshift Database Encryption</a> in the <i>Amazon Redshift Cluster Management Guide</i>. </p>",
       "wrapper": true
     },
     "SnapshotCopyGrantList": {
@@ -8446,7 +8668,7 @@
       "members": {
         "Marker": {
           "shape": "String",
-          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <code>DescribeSnapshotCopyGrant</code> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <b>SnapshotCopyGrantName</b> parameter or the <b>Marker</b> parameter, but not both. </p>"
+          "documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <code>DescribeSnapshotCopyGrant</code> request exceed the value specified in <code>MaxRecords</code>, Amazon Web Services returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p> <p>Constraints: You can specify either the <b>SnapshotCopyGrantName</b> parameter or the <b>Marker</b> parameter, but not both. </p>"
         },
         "SnapshotCopyGrants": {
           "shape": "SnapshotCopyGrantList",
@@ -8868,7 +9090,7 @@
       "members": {
         "AccountId": {
           "shape": "PartnerIntegrationAccountId",
-          "documentation": "<p>The AWS account ID that owns the cluster.</p>"
+          "documentation": "<p>The Region ID that owns the cluster.</p>"
         },
         "ClusterIdentifier": {
           "shape": "PartnerIntegrationClusterIdentifier",

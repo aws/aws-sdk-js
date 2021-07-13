@@ -20,11 +20,11 @@ declare class Pricing extends Service {
    */
   describeServices(callback?: (err: AWSError, data: Pricing.Types.DescribeServicesResponse) => void): Request<Pricing.Types.DescribeServicesResponse, AWSError>;
   /**
-   * Returns a list of attribute values. Attibutes are similar to the details in a Price List API offer file. For a list of available attributes, see Offer File Definitions in the AWS Billing and Cost Management User Guide.
+   * Returns a list of attribute values. Attibutes are similar to the details in a Price List API offer file. For a list of available attributes, see Offer File Definitions in the Amazon Web Services Billing and Cost Management User Guide.
    */
   getAttributeValues(params: Pricing.Types.GetAttributeValuesRequest, callback?: (err: AWSError, data: Pricing.Types.GetAttributeValuesResponse) => void): Request<Pricing.Types.GetAttributeValuesResponse, AWSError>;
   /**
-   * Returns a list of attribute values. Attibutes are similar to the details in a Price List API offer file. For a list of available attributes, see Offer File Definitions in the AWS Billing and Cost Management User Guide.
+   * Returns a list of attribute values. Attibutes are similar to the details in a Price List API offer file. For a list of available attributes, see Offer File Definitions in the Amazon Web Services Billing and Cost Management User Guide.
    */
   getAttributeValues(callback?: (err: AWSError, data: Pricing.Types.GetAttributeValuesResponse) => void): Request<Pricing.Types.GetAttributeValuesResponse, AWSError>;
   /**
@@ -162,7 +162,7 @@ declare namespace Pricing {
   export type PriceListItemJSON = string;
   export interface Service {
     /**
-     * The code for the AWS service.
+     * The code for the Amazon Web Services service.
      */
     ServiceCode?: String;
     /**

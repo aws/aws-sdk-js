@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.944.0-->
+<!--LATEST=2.945.0-->
 <!--ENTRYINSERT-->
+
+## 2.945.0
+* feature: AmplifyBackend: Added Sign in with Apple OAuth provider.
+* feature: DevOpsGuru: Add paginator for GetCostEstimation
+* feature: DirectConnect: This release adds a new filed named awsLogicalDeviceId that it displays the AWS Direct Connect endpoint which terminates a physical connection's BGP Sessions.
+* feature: LexModelBuildingService: Customers can now migrate bots built with Lex V1 APIs to V2 APIs. This release adds APIs to initiate and manage the migration of a bot.
+* feature: Redshift: Release new APIs to support new Redshift feature - Authentication Profile
+* feature: SSM: Changes to OpsCenter APIs to support a new feature, operational insights.
 
 ## 2.944.0
 * feature: Kendra: Amazon Kendra now supports Principal Store
