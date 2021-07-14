@@ -68,11 +68,11 @@ declare class WellArchitected extends Service {
    */
   disassociateLenses(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Get lens review.
+   * Get the answer to a specific question in a workload review.
    */
   getAnswer(params: WellArchitected.Types.GetAnswerInput, callback?: (err: AWSError, data: WellArchitected.Types.GetAnswerOutput) => void): Request<WellArchitected.Types.GetAnswerOutput, AWSError>;
   /**
-   * Get lens review.
+   * Get the answer to a specific question in a workload review.
    */
   getAnswer(callback?: (err: AWSError, data: WellArchitected.Types.GetAnswerOutput) => void): Request<WellArchitected.Types.GetAnswerOutput, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class WellArchitected extends Service {
    */
   tagResource(callback?: (err: AWSError, data: WellArchitected.Types.TagResourceOutput) => void): Request<WellArchitected.Types.TagResourceOutput, AWSError>;
   /**
-   * Deletes specified tags from a resource.
+   * Deletes specified tags from a resource. To specify multiple tags, use separate tagKeys parameters, for example:  DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2 
    */
   untagResource(params: WellArchitected.Types.UntagResourceInput, callback?: (err: AWSError, data: WellArchitected.Types.UntagResourceOutput) => void): Request<WellArchitected.Types.UntagResourceOutput, AWSError>;
   /**
-   * Deletes specified tags from a resource.
+   * Deletes specified tags from a resource. To specify multiple tags, use separate tagKeys parameters, for example:  DELETE /tags/WorkloadArn?tagKeys=key1&amp;tagKeys=key2 
    */
   untagResource(callback?: (err: AWSError, data: WellArchitected.Types.UntagResourceOutput) => void): Request<WellArchitected.Types.UntagResourceOutput, AWSError>;
   /**
@@ -270,10 +270,19 @@ declare namespace WellArchitected {
     HelpfulResourceUrl?: HelpfulResourceUrl;
     Choices?: Choices;
     SelectedChoices?: SelectedChoices;
+    /**
+     * A list of selected choices to a question in your workload.
+     */
+    ChoiceAnswers?: ChoiceAnswers;
     IsApplicable?: IsApplicable;
     Risk?: Risk;
     Notes?: Notes;
+    /**
+     * The reason why the question is not applicable to your workload.
+     */
+    Reason?: AnswerReason;
   }
+  export type AnswerReason = "OUT_OF_SCOPE"|"BUSINESS_PRIORITIES"|"ARCHITECTURE_CONSTRAINTS"|"OTHER"|"NONE"|string;
   export type AnswerSummaries = AnswerSummary[];
   export interface AnswerSummary {
     QuestionId?: QuestionId;
@@ -281,8 +290,16 @@ declare namespace WellArchitected {
     QuestionTitle?: QuestionTitle;
     Choices?: Choices;
     SelectedChoices?: SelectedChoices;
+    /**
+     * A list of selected choices to a question in your workload.
+     */
+    ChoiceAnswerSummaries?: ChoiceAnswerSummaries;
     IsApplicable?: IsApplicable;
     Risk?: Risk;
+    /**
+     * The reason why a choice is non-applicable to a question in your workload.
+     */
+    Reason?: AnswerReason;
   }
   export interface AssociateLensesInput {
     WorkloadId: WorkloadId;
@@ -296,9 +313,55 @@ declare namespace WellArchitected {
     Title?: ChoiceTitle;
     Description?: ChoiceDescription;
   }
+  export interface ChoiceAnswer {
+    ChoiceId?: ChoiceId;
+    /**
+     * The status of a choice.
+     */
+    Status?: ChoiceStatus;
+    /**
+     * The reason why a choice is non-applicable to a question in your workload.
+     */
+    Reason?: ChoiceReason;
+    /**
+     * The notes associated with a choice.
+     */
+    Notes?: ChoiceNotes;
+  }
+  export type ChoiceAnswerSummaries = ChoiceAnswerSummary[];
+  export interface ChoiceAnswerSummary {
+    ChoiceId?: ChoiceId;
+    /**
+     * The status of a choice.
+     */
+    Status?: ChoiceStatus;
+    /**
+     * The reason why a choice is non-applicable to a question in your workload.
+     */
+    Reason?: ChoiceReason;
+  }
+  export type ChoiceAnswers = ChoiceAnswer[];
   export type ChoiceDescription = string;
   export type ChoiceId = string;
+  export type ChoiceNotes = string;
+  export type ChoiceReason = "OUT_OF_SCOPE"|"BUSINESS_PRIORITIES"|"ARCHITECTURE_CONSTRAINTS"|"OTHER"|"NONE"|string;
+  export type ChoiceStatus = "SELECTED"|"NOT_APPLICABLE"|"UNSELECTED"|string;
   export type ChoiceTitle = string;
+  export interface ChoiceUpdate {
+    /**
+     * The status of a choice.
+     */
+    Status: ChoiceStatus;
+    /**
+     * The reason why a choice is non-applicable to a question in your workload.
+     */
+    Reason?: ChoiceReason;
+    /**
+     * The notes associated with a choice.
+     */
+    Notes?: ChoiceNotes;
+  }
+  export type ChoiceUpdates = {[key: string]: ChoiceUpdate};
   export type Choices = Choice[];
   export type ClientRequestToken = string;
   export type Count = number;
@@ -751,7 +814,7 @@ declare namespace WellArchitected {
   export interface UntagResourceInput {
     WorkloadArn: WorkloadArn;
     /**
-     * The keys of the tags to be removed.
+     * A list of tag keys. Existing tags of the resource whose keys are members of this list are removed from the resource.
      */
     TagKeys: TagKeyList;
   }
@@ -762,8 +825,16 @@ declare namespace WellArchitected {
     LensAlias: LensAlias;
     QuestionId: QuestionId;
     SelectedChoices?: SelectedChoices;
+    /**
+     * A list of choices to update on a question in your workload. The String key corresponds to the choice ID to be updated.
+     */
+    ChoiceUpdates?: ChoiceUpdates;
     Notes?: Notes;
     IsApplicable?: IsApplicable;
+    /**
+     * The reason why a question is not applicable to your workload.
+     */
+    Reason?: AnswerReason;
   }
   export interface UpdateAnswerOutput {
     WorkloadId?: WorkloadId;

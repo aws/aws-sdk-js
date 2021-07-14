@@ -1539,6 +1539,7 @@ declare namespace Glue {
      */
     MissingWorkflows?: WorkflowNames;
   }
+  export type BatchSize = number;
   export interface BatchStopJobRunError {
     /**
      * The name of the job definition that is used in the job run in question.
@@ -1632,6 +1633,7 @@ declare namespace Glue {
      */
     Errors?: BatchUpdatePartitionFailureList;
   }
+  export type BatchWindow = number;
   export interface BinaryColumnStatisticsData {
     /**
      * The size of the longest bit sequence in the column.
@@ -2953,6 +2955,7 @@ declare namespace Glue {
      * The tags to use with this trigger. You may use tags to limit access to the trigger. For more information about tags in Glue, see Amazon Web Services Tags in Glue in the developer guide. 
      */
     Tags?: TagsMap;
+    EventBatchingCondition?: EventBatchingCondition;
   }
   export interface CreateTriggerResponse {
     /**
@@ -3735,6 +3738,16 @@ declare namespace Glue {
      * The evaluation metrics for the find matches algorithm.
      */
     FindMatchesMetrics?: FindMatchesMetrics;
+  }
+  export interface EventBatchingCondition {
+    /**
+     * Number of events that must be received from Amazon EventBridge before EventBridge event trigger fires.
+     */
+    BatchSize: BatchSize;
+    /**
+     * Window of time in seconds after which EventBridge event trigger fires. Window starts when first event is received.
+     */
+    BatchWindow?: BatchWindow;
   }
   export interface ExecutionProperty {
     /**
@@ -7077,6 +7090,16 @@ declare namespace Glue {
      */
     RunId?: IdString;
   }
+  export interface StartingEventBatchCondition {
+    /**
+     * Number of events in the batch.
+     */
+    BatchSize?: NullableInteger;
+    /**
+     * Duration of the batch window in seconds.
+     */
+    BatchWindow?: NullableInteger;
+  }
   export interface StopCrawlerRequest {
     /**
      * Name of the crawler to stop.
@@ -7604,6 +7627,10 @@ declare namespace Glue {
      * The predicate of this trigger, which defines when it will fire.
      */
     Predicate?: Predicate;
+    /**
+     * Batch condition that must be met (specified number of events received or batch time window expired) before EventBridge event trigger fires.
+     */
+    EventBatchingCondition?: EventBatchingCondition;
   }
   export type TriggerList = Trigger[];
   export type TriggerNameList = NameString[];
@@ -7614,7 +7641,7 @@ declare namespace Glue {
     Trigger?: Trigger;
   }
   export type TriggerState = "CREATING"|"CREATED"|"ACTIVATING"|"ACTIVATED"|"DEACTIVATING"|"DEACTIVATED"|"DELETING"|"UPDATING"|string;
-  export type TriggerType = "SCHEDULED"|"CONDITIONAL"|"ON_DEMAND"|string;
+  export type TriggerType = "SCHEDULED"|"CONDITIONAL"|"ON_DEMAND"|"EVENT"|string;
   export interface TriggerUpdate {
     /**
      * Reserved for future use.
@@ -7636,6 +7663,10 @@ declare namespace Glue {
      * The predicate of this trigger, which defines when it will fire.
      */
     Predicate?: Predicate;
+    /**
+     * Batch condition that must be met (specified number of events received or batch time window expired) before EventBridge event trigger fires.
+     */
+    EventBatchingCondition?: EventBatchingCondition;
   }
   export type TypeString = string;
   export type URI = string;
@@ -8226,7 +8257,7 @@ declare namespace Glue {
   export type WorkerType = "Standard"|"G.1X"|"G.2X"|string;
   export interface Workflow {
     /**
-     * The name of the workflow representing the flow.
+     * The name of the workflow.
      */
     Name?: NameString;
     /**
@@ -8234,7 +8265,7 @@ declare namespace Glue {
      */
     Description?: GenericString;
     /**
-     * A collection of properties to be used as part of each execution of the workflow.
+     * A collection of properties to be used as part of each execution of the workflow. The run properties are made available to each job in the workflow. A job can modify the properties for the next jobs in the flow.
      */
     DefaultRunProperties?: WorkflowRunProperties;
     /**
@@ -8310,6 +8341,10 @@ declare namespace Glue {
      * The graph representing all the Glue components that belong to the workflow as nodes and directed connections between them as edges.
      */
     Graph?: WorkflowGraph;
+    /**
+     * The batch condition that started the workflow run.
+     */
+    StartingEventBatchCondition?: StartingEventBatchCondition;
   }
   export type WorkflowRunProperties = {[key: string]: GenericString};
   export interface WorkflowRunStatistics {

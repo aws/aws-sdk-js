@@ -118,7 +118,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.</p> <p>The <code>attach disk</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Attaches a block storage disk to a running or stopped Lightsail instance and exposes it to the instance with the specified disk name.</p> <p>The <code>attach disk</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "AttachInstancesToLoadBalancer": {
       "name": "AttachInstancesToLoadBalancer",
@@ -155,7 +155,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Attaches one or more Lightsail instances to a load balancer.</p> <p>After some time, the instances are attached to the load balancer and the health check status is available.</p> <p>The <code>attach instances to load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Attaches one or more Lightsail instances to a load balancer.</p> <p>After some time, the instances are attached to the load balancer and the health check status is available.</p> <p>The <code>attach instances to load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Developer Guide</a>.</p>"
     },
     "AttachLoadBalancerTlsCertificate": {
       "name": "AttachLoadBalancerTlsCertificate",
@@ -192,7 +192,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the <code>AttachLoadBalancerTlsCertificate</code> action with the non-attached certificate, and it will replace the existing one and become the attached certificate.</p> <p>The <code>AttachLoadBalancerTlsCertificate</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Attaches a Transport Layer Security (TLS) certificate to your load balancer. TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>Once you create and validate your certificate, you can attach it to your load balancer. You can also use this API to rotate the certificates on your account. Use the <code>AttachLoadBalancerTlsCertificate</code> action with the non-attached certificate, and it will replace the existing one and become the attached certificate.</p> <p>The <code>AttachLoadBalancerTlsCertificate</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "AttachStaticIp": {
       "name": "AttachStaticIp",
@@ -266,7 +266,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Closes ports for a specific Amazon Lightsail instance.</p> <p>The <code>CloseInstancePublicPorts</code> action supports tag-based access control via resource tags applied to the resource identified by <code>instanceName</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Closes ports for a specific Amazon Lightsail instance.</p> <p>The <code>CloseInstancePublicPorts</code> action supports tag-based access control via resource tags applied to the resource identified by <code>instanceName</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "CopySnapshot": {
       "name": "CopySnapshot",
@@ -304,6 +304,65 @@
         }
       ],
       "documentation": "<p>Copies a manual snapshot of an instance or disk as another manual snapshot, or copies an automatic snapshot of an instance or disk as a manual snapshot. This operation can also be used to copy a manual or automatic snapshot of an instance or a disk from one AWS Region to another in Amazon Lightsail.</p> <p>When copying a <i>manual snapshot</i>, be sure to define the <code>source region</code>, <code>source snapshot name</code>, and <code>target snapshot name</code> parameters.</p> <p>When copying an <i>automatic snapshot</i>, be sure to define the <code>source region</code>, <code>source resource name</code>, <code>target snapshot name</code>, and either the <code>restore date</code> or the <code>use latest restorable auto snapshot</code> parameters.</p>"
+    },
+    "CreateBucket": {
+      "name": "CreateBucket",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateBucketRequest"
+      },
+      "output": {
+        "shape": "CreateBucketResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Creates an Amazon Lightsail bucket.</p> <p>A bucket is a cloud storage resource available in the Lightsail object storage service. Use buckets to store objects such as data and its descriptive metadata. For more information about buckets, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/buckets-in-amazon-lightsail\">Buckets in Amazon Lightsail</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
+    },
+    "CreateBucketAccessKey": {
+      "name": "CreateBucketAccessKey",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateBucketAccessKeyRequest"
+      },
+      "output": {
+        "shape": "CreateBucketAccessKeyResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Creates a new access key for the specified Amazon Lightsail bucket. Access keys consist of an access key ID and corresponding secret access key.</p> <p>Access keys grant full programmatic access to the specified bucket and its objects. You can have a maximum of two access keys per bucket. Use the <a>GetBucketAccessKeys</a> action to get a list of current access keys for a specific bucket. For more information about access keys, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys\">Creating access keys for a bucket in Amazon Lightsail</a> in the <i>Amazon Lightsail Developer Guide</i>.</p> <important> <p>The <code>secretAccessKey</code> value is returned only in response to the <code>CreateBucketAccessKey</code> action. You can get a secret access key only when you first create an access key; you cannot get the secret access key later. If you lose the secret access key, you must create a new access key.</p> </important>"
     },
     "CreateCertificate": {
       "name": "CreateCertificate",
@@ -467,7 +526,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates a deployment for your Amazon Lightsail container service.</p> <p>A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration.</p> <p>You can deploy containers to your container service using container images from a public registry like Docker Hub, or from your local machine. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-container-images\">Creating container images for your Amazon Lightsail container services</a> in the <i>Lightsail Dev Guide</i>.</p>"
+      "documentation": "<p>Creates a deployment for your Amazon Lightsail container service.</p> <p>A deployment specifies the containers that will be launched on the container service and their settings, such as the ports to open, the environment variables to apply, and the launch command to run. It also specifies the container that will serve as the public endpoint of the deployment and its settings, such as the HTTP or HTTPS port to use, and the health check configuration.</p> <p>You can deploy containers to your container service using container images from a public registry like Docker Hub, or from your local machine. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-container-images\">Creating container images for your Amazon Lightsail container services</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
     },
     "CreateContainerServiceRegistryLogin": {
       "name": "CreateContainerServiceRegistryLogin",
@@ -498,7 +557,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates a temporary set of log in credentials that you can use to log in to the Docker process on your local machine. After you're logged in, you can use the native Docker commands to push your local container images to the container image registry of your Amazon Lightsail account so that you can use them with your Lightsail container service. The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials.</p> <note> <p>You can only push container images to the container service registry of your Lightsail account. You cannot pull container images or perform any other container image management actions on the container service registry.</p> </note> <p>After you push your container images to the container image registry of your Lightsail account, use the <code>RegisterContainerImage</code> action to register the pushed images to a specific Lightsail container service.</p> <note> <p>This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images\">Pushing and managing container images on your Amazon Lightsail container services</a> in the <i>Lightsail Dev Guide</i>.</p> </note>"
+      "documentation": "<p>Creates a temporary set of log in credentials that you can use to log in to the Docker process on your local machine. After you're logged in, you can use the native Docker commands to push your local container images to the container image registry of your Amazon Lightsail account so that you can use them with your Lightsail container service. The log in credentials expire 12 hours after they are created, at which point you will need to create a new set of log in credentials.</p> <note> <p>You can only push container images to the container service registry of your Lightsail account. You cannot pull container images or perform any other container image management actions on the container service registry.</p> </note> <p>After you push your container images to the container image registry of your Lightsail account, use the <code>RegisterContainerImage</code> action to register the pushed images to a specific Lightsail container service.</p> <note> <p>This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images\">Pushing and managing container images on your Amazon Lightsail container services</a> in the <i>Amazon Lightsail Developer Guide</i>.</p> </note>"
     },
     "CreateDisk": {
       "name": "CreateDisk",
@@ -535,7 +594,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>).</p> <p>The <code>create disk</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates a block storage disk that can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>).</p> <p>The <code>create disk</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "CreateDiskFromSnapshot": {
       "name": "CreateDiskFromSnapshot",
@@ -572,7 +631,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting disk can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>).</p> <p>The <code>create disk from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>disk snapshot name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates a block storage disk from a manual or automatic snapshot of a disk. The resulting disk can be attached to an Amazon Lightsail instance in the same Availability Zone (e.g., <code>us-east-2a</code>).</p> <p>The <code>create disk from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>disk snapshot name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "CreateDiskSnapshot": {
       "name": "CreateDiskSnapshot",
@@ -609,7 +668,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance.</p> <p>You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending.</p> <p>You can also use this operation to create a snapshot of an instance's system volume. You might want to do this, for example, to recover data from the system volume of a botched instance or to create a backup of the system volume like you would for a block storage disk. To create a snapshot of a system volume, just define the <code>instance name</code> parameter when issuing the snapshot command, and a snapshot of the defined instance's system volume will be created. After the snapshot is available, you can create a block storage disk from the snapshot and attach it to a running instance to access the data on the disk.</p> <p>The <code>create disk snapshot</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates a snapshot of a block storage disk. You can use snapshots for backups, to make copies of disks, and to save data before shutting down a Lightsail instance.</p> <p>You can take a snapshot of an attached disk that is in use; however, snapshots only capture data that has been written to your disk at the time the snapshot command is issued. This may exclude any data that has been cached by any applications or the operating system. If you can pause any file systems on the disk long enough to take a snapshot, your snapshot should be complete. Nevertheless, if you cannot pause all file writes to the disk, you should unmount the disk from within the Lightsail instance, issue the create disk snapshot command, and then remount the disk to ensure a consistent and complete snapshot. You may remount and use your disk while the snapshot status is pending.</p> <p>You can also use this operation to create a snapshot of an instance's system volume. You might want to do this, for example, to recover data from the system volume of a botched instance or to create a backup of the system volume like you would for a block storage disk. To create a snapshot of a system volume, just define the <code>instance name</code> parameter when issuing the snapshot command, and a snapshot of the defined instance's system volume will be created. After the snapshot is available, you can create a block storage disk from the snapshot and attach it to a running instance to access the data on the disk.</p> <p>The <code>create disk snapshot</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "CreateDistribution": {
       "name": "CreateDistribution",
@@ -680,7 +739,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates a domain resource for the specified domain (e.g., example.com).</p> <p>The <code>create domain</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates a domain resource for the specified domain (e.g., example.com).</p> <p>The <code>create domain</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "CreateDomainEntry": {
       "name": "CreateDomainEntry",
@@ -717,7 +776,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates one of the following domain name system (DNS) records in a domain DNS zone: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT).</p> <p>The <code>create domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates one of the following domain name system (DNS) records in a domain DNS zone: Address (A), canonical name (CNAME), mail exchanger (MX), name server (NS), start of authority (SOA), service locator (SRV), or text (TXT).</p> <p>The <code>create domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "CreateInstanceSnapshot": {
       "name": "CreateInstanceSnapshot",
@@ -754,7 +813,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates a snapshot of a specific virtual private server, or <i>instance</i>. You can use a snapshot to create a new instance that is based on that snapshot.</p> <p>The <code>create instance snapshot</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates a snapshot of a specific virtual private server, or <i>instance</i>. You can use a snapshot to create a new instance that is based on that snapshot.</p> <p>The <code>create instance snapshot</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "CreateInstances": {
       "name": "CreateInstances",
@@ -791,7 +850,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates one or more Amazon Lightsail instances.</p> <p>The <code>create instances</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates one or more Amazon Lightsail instances.</p> <p>The <code>create instances</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Developer Guide</a>.</p>"
     },
     "CreateInstancesFromSnapshot": {
       "name": "CreateInstancesFromSnapshot",
@@ -828,7 +887,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates one or more new instances from a manual or automatic snapshot of an instance.</p> <p>The <code>create instances from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>instance snapshot name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates one or more new instances from a manual or automatic snapshot of an instance.</p> <p>The <code>create instances from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>instance snapshot name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "CreateKeyPair": {
       "name": "CreateKeyPair",
@@ -865,7 +924,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates an SSH key pair.</p> <p>The <code>create key pair</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates an SSH key pair.</p> <p>The <code>create key pair</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "CreateLoadBalancer": {
       "name": "CreateLoadBalancer",
@@ -902,7 +961,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates a Lightsail load balancer. To learn more about deciding whether to load balance your application, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/how-to/article/configure-lightsail-instances-for-load-balancing\">Configure your Lightsail instances for load balancing</a>. You can create up to 5 load balancers per AWS Region in your account.</p> <p>When you create a load balancer, you can specify a unique name and port settings. To change additional load balancer settings, use the <code>UpdateLoadBalancerAttribute</code> operation.</p> <p>The <code>create load balancer</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates a Lightsail load balancer. To learn more about deciding whether to load balance your application, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/configure-lightsail-instances-for-load-balancing\">Configure your Lightsail instances for load balancing</a>. You can create up to 5 load balancers per AWS Region in your account.</p> <p>When you create a load balancer, you can specify a unique name and port settings. To change additional load balancer settings, use the <code>UpdateLoadBalancerAttribute</code> operation.</p> <p>The <code>create load balancer</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "CreateLoadBalancerTlsCertificate": {
       "name": "CreateLoadBalancerTlsCertificate",
@@ -939,7 +998,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates an SSL/TLS certificate for an Amazon Lightsail load balancer.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>The <code>CreateLoadBalancerTlsCertificate</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates an SSL/TLS certificate for an Amazon Lightsail load balancer.</p> <p>TLS is just an updated, more secure version of Secure Socket Layer (SSL).</p> <p>The <code>CreateLoadBalancerTlsCertificate</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "CreateRelationalDatabase": {
       "name": "CreateRelationalDatabase",
@@ -976,7 +1035,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates a new database in Amazon Lightsail.</p> <p>The <code>create relational database</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates a new database in Amazon Lightsail.</p> <p>The <code>create relational database</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "CreateRelationalDatabaseFromSnapshot": {
       "name": "CreateRelationalDatabaseFromSnapshot",
@@ -1013,7 +1072,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates a new database from an existing database snapshot in Amazon Lightsail.</p> <p>You can create a new database from a snapshot in if something goes wrong with your original database, or to change it to a different plan, such as a high availability or standard plan.</p> <p>The <code>create relational database from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by relationalDatabaseSnapshotName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates a new database from an existing database snapshot in Amazon Lightsail.</p> <p>You can create a new database from a snapshot in if something goes wrong with your original database, or to change it to a different plan, such as a high availability or standard plan.</p> <p>The <code>create relational database from snapshot</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by relationalDatabaseSnapshotName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "CreateRelationalDatabaseSnapshot": {
       "name": "CreateRelationalDatabaseSnapshot",
@@ -1050,7 +1109,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Creates a snapshot of your database in Amazon Lightsail. You can use snapshots for backups, to make copies of a database, and to save data before deleting a database.</p> <p>The <code>create relational database snapshot</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Creates a snapshot of your database in Amazon Lightsail. You can use snapshots for backups, to make copies of a database, and to save data before deleting a database.</p> <p>The <code>create relational database snapshot</code> operation supports tag-based access control via request tags. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "DeleteAlarm": {
       "name": "DeleteAlarm",
@@ -1118,7 +1177,69 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Deletes an automatic snapshot of an instance or disk. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Deletes an automatic snapshot of an instance or disk. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p>"
+    },
+    "DeleteBucket": {
+      "name": "DeleteBucket",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteBucketRequest"
+      },
+      "output": {
+        "shape": "DeleteBucketResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Deletes a Amazon Lightsail bucket.</p> <note> <p>When you delete your bucket, the bucket name is released and can be reused for a new bucket in your account or another AWS account.</p> </note>"
+    },
+    "DeleteBucketAccessKey": {
+      "name": "DeleteBucketAccessKey",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteBucketAccessKeyRequest"
+      },
+      "output": {
+        "shape": "DeleteBucketAccessKeyResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Deletes an access key for the specified Amazon Lightsail bucket.</p> <p>We recommend that you delete an access key if the secret access key is compromised.</p> <p>For more information about access keys, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys\">Creating access keys for a bucket in Amazon Lightsail</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
     },
     "DeleteCertificate": {
       "name": "DeleteCertificate",
@@ -1282,7 +1403,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Deletes the specified block storage disk. The disk must be in the <code>available</code> state (not attached to a Lightsail instance).</p> <note> <p>The disk may remain in the <code>deleting</code> state for several minutes.</p> </note> <p>The <code>delete disk</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Deletes the specified block storage disk. The disk must be in the <code>available</code> state (not attached to a Lightsail instance).</p> <note> <p>The disk may remain in the <code>deleting</code> state for several minutes.</p> </note> <p>The <code>delete disk</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "DeleteDiskSnapshot": {
       "name": "DeleteDiskSnapshot",
@@ -1319,7 +1440,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Deletes the specified disk snapshot.</p> <p>When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk.</p> <p>The <code>delete disk snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk snapshot name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Deletes the specified disk snapshot.</p> <p>When you make periodic snapshots of a disk, the snapshots are incremental, and only the blocks on the device that have changed since your last snapshot are saved in the new snapshot. When you delete a snapshot, only the data not needed for any other snapshot is removed. So regardless of which prior snapshots have been deleted, all active snapshots will have access to all the information needed to restore the disk.</p> <p>The <code>delete disk snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk snapshot name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "DeleteDistribution": {
       "name": "DeleteDistribution",
@@ -1390,7 +1511,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Deletes the specified domain recordset and all of its domain records.</p> <p>The <code>delete domain</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Deletes the specified domain recordset and all of its domain records.</p> <p>The <code>delete domain</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "DeleteDomainEntry": {
       "name": "DeleteDomainEntry",
@@ -1427,7 +1548,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Deletes a specific domain entry.</p> <p>The <code>delete domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Deletes a specific domain entry.</p> <p>The <code>delete domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "DeleteInstance": {
       "name": "DeleteInstance",
@@ -1464,7 +1585,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Deletes an Amazon Lightsail instance.</p> <p>The <code>delete instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Deletes an Amazon Lightsail instance.</p> <p>The <code>delete instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "DeleteInstanceSnapshot": {
       "name": "DeleteInstanceSnapshot",
@@ -1501,7 +1622,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Deletes a specific snapshot of a virtual private server (or <i>instance</i>).</p> <p>The <code>delete instance snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance snapshot name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Deletes a specific snapshot of a virtual private server (or <i>instance</i>).</p> <p>The <code>delete instance snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance snapshot name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "DeleteKeyPair": {
       "name": "DeleteKeyPair",
@@ -1538,7 +1659,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Deletes a specific SSH key pair.</p> <p>The <code>delete key pair</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>key pair name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Deletes a specific SSH key pair.</p> <p>The <code>delete key pair</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>key pair name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "DeleteKnownHostKeys": {
       "name": "DeleteKnownHostKeys",
@@ -1575,7 +1696,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Deletes the known host key or certificate used by the Amazon Lightsail browser-based SSH or RDP clients to authenticate an instance. This operation enables the Lightsail browser-based SSH or RDP clients to connect to the instance after a host key mismatch.</p> <important> <p>Perform this operation only if you were expecting the host key or certificate mismatch or if you are familiar with the new host key or certificate on the instance. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-troubleshooting-browser-based-ssh-rdp-client-connection\">Troubleshooting connection issues when using the Amazon Lightsail browser-based SSH or RDP client</a>.</p> </important>"
+      "documentation": "<p>Deletes the known host key or certificate used by the Amazon Lightsail browser-based SSH or RDP clients to authenticate an instance. This operation enables the Lightsail browser-based SSH or RDP clients to connect to the instance after a host key mismatch.</p> <important> <p>Perform this operation only if you were expecting the host key or certificate mismatch or if you are familiar with the new host key or certificate on the instance. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-troubleshooting-browser-based-ssh-rdp-client-connection\">Troubleshooting connection issues when using the Amazon Lightsail browser-based SSH or RDP client</a>.</p> </important>"
     },
     "DeleteLoadBalancer": {
       "name": "DeleteLoadBalancer",
@@ -1612,7 +1733,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again.</p> <p>The <code>delete load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Deletes a Lightsail load balancer and all its associated SSL/TLS certificates. Once the load balancer is deleted, you will need to create a new load balancer, create a new certificate, and verify domain ownership again.</p> <p>The <code>delete load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "DeleteLoadBalancerTlsCertificate": {
       "name": "DeleteLoadBalancerTlsCertificate",
@@ -1649,7 +1770,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Deletes an SSL/TLS certificate associated with a Lightsail load balancer.</p> <p>The <code>DeleteLoadBalancerTlsCertificate</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Deletes an SSL/TLS certificate associated with a Lightsail load balancer.</p> <p>The <code>DeleteLoadBalancerTlsCertificate</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "DeleteRelationalDatabase": {
       "name": "DeleteRelationalDatabase",
@@ -1686,7 +1807,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Deletes a database in Amazon Lightsail.</p> <p>The <code>delete relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Deletes a database in Amazon Lightsail.</p> <p>The <code>delete relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "DeleteRelationalDatabaseSnapshot": {
       "name": "DeleteRelationalDatabaseSnapshot",
@@ -1723,7 +1844,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Deletes a database snapshot in Amazon Lightsail.</p> <p>The <code>delete relational database snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Deletes a database snapshot in Amazon Lightsail.</p> <p>The <code>delete relational database snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "DetachCertificateFromDistribution": {
       "name": "DetachCertificateFromDistribution",
@@ -1794,7 +1915,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk.</p> <p>The <code>detach disk</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Detaches a stopped block storage disk from a Lightsail instance. Make sure to unmount any file systems on the device within your operating system before stopping the instance and detaching the disk.</p> <p>The <code>detach disk</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>disk name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "DetachInstancesFromLoadBalancer": {
       "name": "DetachInstancesFromLoadBalancer",
@@ -1831,7 +1952,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Detaches the specified instances from a Lightsail load balancer.</p> <p>This operation waits until the instances are no longer needed before they are detached from the load balancer.</p> <p>The <code>detach instances from load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Detaches the specified instances from a Lightsail load balancer.</p> <p>This operation waits until the instances are no longer needed before they are detached from the load balancer.</p> <p>The <code>detach instances from load balancer</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "DetachStaticIp": {
       "name": "DetachStaticIp",
@@ -1902,7 +2023,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Disables an add-on for an Amazon Lightsail resource. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Disables an add-on for an Amazon Lightsail resource. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "DownloadDefaultKeyPair": {
       "name": "DownloadDefaultKeyPair",
@@ -1973,7 +2094,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Enables or modifies an add-on for an Amazon Lightsail resource. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Enables or modifies an add-on for an Amazon Lightsail resource. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "ExportSnapshot": {
       "name": "ExportSnapshot",
@@ -2010,7 +2131,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Exports an Amazon Lightsail instance or block storage disk snapshot to Amazon Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot record that can be used with the <code>create cloud formation stack</code> operation to create new Amazon EC2 instances.</p> <p>Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images (AMIs), and the instance system disk appears as an Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon Web Services Region in Amazon EC2 as the source Lightsail snapshot.</p> <p/> <p>The <code>export snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>source snapshot name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p> <note> <p>Use the <code>get instance snapshots</code> or <code>get disk snapshots</code> operations to get a list of snapshots that you can export to Amazon EC2.</p> </note>"
+      "documentation": "<p>Exports an Amazon Lightsail instance or block storage disk snapshot to Amazon Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot record that can be used with the <code>create cloud formation stack</code> operation to create new Amazon EC2 instances.</p> <p>Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images (AMIs), and the instance system disk appears as an Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon Web Services Region in Amazon EC2 as the source Lightsail snapshot.</p> <p/> <p>The <code>export snapshot</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>source snapshot name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p> <note> <p>Use the <code>get instance snapshots</code> or <code>get disk snapshots</code> operations to get a list of snapshots that you can export to Amazon EC2.</p> </note>"
     },
     "GetActiveNames": {
       "name": "GetActiveNames",
@@ -2115,7 +2236,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Returns the available automatic snapshots for an instance or disk. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Returns the available automatic snapshots for an instance or disk. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "GetBlueprints": {
       "name": "GetBlueprints",
@@ -2153,6 +2274,127 @@
         }
       ],
       "documentation": "<p>Returns the list of available instance images, or <i>blueprints</i>. You can use a blueprint to create a new instance already running a specific operating system, as well as a preinstalled app or development stack. The software each instance is running depends on the blueprint image you choose.</p> <note> <p>Use active blueprints when creating new instances. Inactive blueprints are listed to support customers with existing instances and are not necessarily available to create new instances. Blueprints are marked inactive when they become outdated due to operating system updates or new application releases.</p> </note>"
+    },
+    "GetBucketAccessKeys": {
+      "name": "GetBucketAccessKeys",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetBucketAccessKeysRequest"
+      },
+      "output": {
+        "shape": "GetBucketAccessKeysResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns the existing access key IDs for the specified Amazon Lightsail bucket.</p> <important> <p>This action does not return the secret access key value of an access key. You can get a secret access key only when you create it from the response of the <a>CreateBucketAccessKey</a> action. If you lose the secret access key, you must create a new access key.</p> </important>"
+    },
+    "GetBucketBundles": {
+      "name": "GetBucketBundles",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetBucketBundlesRequest"
+      },
+      "output": {
+        "shape": "GetBucketBundlesResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns the bundles that you can apply to a Amazon Lightsail bucket.</p> <p>The bucket bundle specifies the monthly cost, storage quota, and data transfer quota for a bucket.</p> <p>Use the <a>UpdateBucketBundle</a> action to update the bundle for a bucket.</p>"
+    },
+    "GetBucketMetricData": {
+      "name": "GetBucketMetricData",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetBucketMetricDataRequest"
+      },
+      "output": {
+        "shape": "GetBucketMetricDataResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns the data points of a specific metric for an Amazon Lightsail bucket.</p> <p>Metrics report the utilization of a bucket. View and collect metric data regularly to monitor the number of objects stored in a bucket (including object versions) and the storage space used by those objects.</p>"
+    },
+    "GetBuckets": {
+      "name": "GetBuckets",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetBucketsRequest"
+      },
+      "output": {
+        "shape": "GetBucketsResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Returns information about one or more Amazon Lightsail buckets.</p> <p>For more information about buckets, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/buckets-in-amazon-lightsail\">Buckets in Amazon Lightsail</a> in the <i>Amazon Lightsail Developer Guide</i>..</p>"
     },
     "GetBundles": {
       "name": "GetBundles",
@@ -2684,7 +2926,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Returns the list bundles that can be applied to you Amazon Lightsail content delivery network (CDN) distributions.</p> <p>A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution.</p>"
+      "documentation": "<p>Returns the bundles that can be applied to your Amazon Lightsail content delivery network (CDN) distributions.</p> <p>A distribution bundle specifies the monthly network transfer quota and monthly cost of your dsitribution.</p>"
     },
     "GetDistributionLatestCacheReset": {
       "name": "GetDistributionLatestCacheReset",
@@ -2897,7 +3139,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Returns the export snapshot record created as a result of the <code>export snapshot</code> operation.</p> <p>An export snapshot record can be used to create a new Amazon EC2 instance and its related resources with the <code>create cloud formation stack</code> operation.</p>"
+      "documentation": "<p>Returns all export snapshot records created as a result of the <code>export snapshot</code> operation.</p> <p>An export snapshot record can be used to create a new Amazon EC2 instance and its related resources with the <a>CreateCloudFormationStack</a> action.</p>"
     },
     "GetInstance": {
       "name": "GetInstance",
@@ -2971,7 +3213,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Returns temporary SSH keys you can use to connect to a specific virtual private server, or <i>instance</i>.</p> <p>The <code>get instance access details</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Returns temporary SSH keys you can use to connect to a specific virtual private server, or <i>instance</i>.</p> <p>The <code>get instance access details</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "GetInstanceMetricData": {
       "name": "GetInstanceMetricData",
@@ -4192,7 +4434,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol.</p> <p>The <code>OpenInstancePublicPorts</code> action supports tag-based access control via resource tags applied to the resource identified by <code>instanceName</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol.</p> <p>The <code>OpenInstancePublicPorts</code> action supports tag-based access control via resource tags applied to the resource identified by <code>instanceName</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "PeerVpc": {
       "name": "PeerVpc",
@@ -4229,7 +4471,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Tries to peer the Lightsail VPC with the user's default VPC.</p>"
+      "documentation": "<p>Peers the Lightsail VPC with the user's default VPC.</p>"
     },
     "PutAlarm": {
       "name": "PutAlarm",
@@ -4300,7 +4542,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. This action also closes all currently open ports that are not included in the request. Include all of the ports and the protocols you want to open in your <code>PutInstancePublicPorts</code>request. Or use the <code>OpenInstancePublicPorts</code> action to open ports without closing currently open ports.</p> <p>The <code>PutInstancePublicPorts</code> action supports tag-based access control via resource tags applied to the resource identified by <code>instanceName</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Opens ports for a specific Amazon Lightsail instance, and specifies the IP addresses allowed to connect to the instance through the ports, and the protocol. This action also closes all currently open ports that are not included in the request. Include all of the ports and the protocols you want to open in your <code>PutInstancePublicPorts</code>request. Or use the <code>OpenInstancePublicPorts</code> action to open ports without closing currently open ports.</p> <p>The <code>PutInstancePublicPorts</code> action supports tag-based access control via resource tags applied to the resource identified by <code>instanceName</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "RebootInstance": {
       "name": "RebootInstance",
@@ -4337,7 +4579,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Restarts a specific instance.</p> <p>The <code>reboot instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Restarts a specific instance.</p> <p>The <code>reboot instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "RebootRelationalDatabase": {
       "name": "RebootRelationalDatabase",
@@ -4374,7 +4616,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Restarts a specific database in Amazon Lightsail.</p> <p>The <code>reboot relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Restarts a specific database in Amazon Lightsail.</p> <p>The <code>reboot relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "RegisterContainerImage": {
       "name": "RegisterContainerImage",
@@ -4405,7 +4647,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Registers a container image to your Amazon Lightsail container service.</p> <note> <p>This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images\">Pushing and managing container images on your Amazon Lightsail container services</a> in the <i>Lightsail Dev Guide</i>.</p> </note>"
+      "documentation": "<p>Registers a container image to your Amazon Lightsail container service.</p> <note> <p>This action is not required if you install and use the Lightsail Control (lightsailctl) plugin to push container images to your Lightsail container service. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-pushing-container-images\">Pushing and managing container images on your Amazon Lightsail container services</a> in the <i>Amazon Lightsail Developer Guide</i>.</p> </note>"
     },
     "ReleaseStaticIp": {
       "name": "ReleaseStaticIp",
@@ -4549,6 +4791,37 @@
       ],
       "documentation": "<p>Sets the IP address type for an Amazon Lightsail resource.</p> <p>Use this action to enable dual-stack for a resource, which enables IPv4 and IPv6 for the specified resource. Alternately, you can use this action to disable dual-stack, and enable IPv4 only.</p>"
     },
+    "SetResourceAccessForBucket": {
+      "name": "SetResourceAccessForBucket",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "SetResourceAccessForBucketRequest"
+      },
+      "output": {
+        "shape": "SetResourceAccessForBucketResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Sets the Amazon Lightsail resources that can access the specified Lightsail bucket.</p> <p>Lightsail buckets currently support setting access for Lightsail instances in the same AWS Region.</p>"
+    },
     "StartInstance": {
       "name": "StartInstance",
       "http": {
@@ -4584,7 +4857,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the <code>reboot instance</code> operation.</p> <note> <p>When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/lightsail-create-static-ip\">Lightsail Dev Guide</a>.</p> </note> <p>The <code>start instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Starts a specific Amazon Lightsail instance from a stopped state. To restart an instance, use the <code>reboot instance</code> operation.</p> <note> <p>When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-create-static-ip\">Amazon Lightsail Developer Guide</a>.</p> </note> <p>The <code>start instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "StartRelationalDatabase": {
       "name": "StartRelationalDatabase",
@@ -4621,7 +4894,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Starts a specific database from a stopped state in Amazon Lightsail. To restart a database, use the <code>reboot relational database</code> operation.</p> <p>The <code>start relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Starts a specific database from a stopped state in Amazon Lightsail. To restart a database, use the <code>reboot relational database</code> operation.</p> <p>The <code>start relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "StopInstance": {
       "name": "StopInstance",
@@ -4658,7 +4931,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Stops a specific Amazon Lightsail instance that is currently running.</p> <note> <p>When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/lightsail-create-static-ip\">Lightsail Dev Guide</a>.</p> </note> <p>The <code>stop instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Stops a specific Amazon Lightsail instance that is currently running.</p> <note> <p>When you start a stopped instance, Lightsail assigns a new public IP address to the instance. To use the same IP address after stopping and starting an instance, create a static IP address and attach it to the instance. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-create-static-ip\">Amazon Lightsail Developer Guide</a>.</p> </note> <p>The <code>stop instance</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>instance name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "StopRelationalDatabase": {
       "name": "StopRelationalDatabase",
@@ -4695,7 +4968,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Stops a specific database that is currently running in Amazon Lightsail.</p> <p>The <code>stop relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Stops a specific database that is currently running in Amazon Lightsail.</p> <p>The <code>stop relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -4732,7 +5005,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p> <p>The <code>tag resource</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>resource name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Adds one or more tags to the specified Amazon Lightsail resource. Each resource can have a maximum of 50 tags. Each tag consists of a key and an optional value. Tag keys must be unique per resource. For more information about tags, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p> <p>The <code>tag resource</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>resource name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "TestAlarm": {
       "name": "TestAlarm",
@@ -4803,7 +5076,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Attempts to unpeer the Lightsail VPC from the user's default VPC.</p>"
+      "documentation": "<p>Unpeers the Lightsail VPC from the user's default VPC.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -4840,7 +5113,69 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource.</p> <p>The <code>untag resource</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>resource name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Deletes the specified set of tag keys and their values from the specified Amazon Lightsail resource.</p> <p>The <code>untag resource</code> operation supports tag-based access control via request tags and resource tags applied to the resource identified by <code>resource name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
+    },
+    "UpdateBucket": {
+      "name": "UpdateBucket",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateBucketRequest"
+      },
+      "output": {
+        "shape": "UpdateBucketResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Updates an existing Amazon Lightsail bucket.</p> <p>Use this action to update the configuration of an existing bucket, such as versioning, public accessibility, and the AWS accounts that can access the bucket.</p>"
+    },
+    "UpdateBucketBundle": {
+      "name": "UpdateBucketBundle",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateBucketBundleRequest"
+      },
+      "output": {
+        "shape": "UpdateBucketBundleResult"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ServiceException"
+        },
+        {
+          "shape": "UnauthenticatedException"
+        }
+      ],
+      "documentation": "<p>Updates the bundle, or storage plan, of an existing Amazon Lightsail bucket.</p> <p>A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket. You can update a bucket's bundle only one time within a monthly AWS billing cycle. To determine if you can update a bucket's bundle, use the <a>GetBuckets</a> action. The <code>ableToUpdateBundle</code> parameter in the response will indicate whether you can currently update a bucket's bundle.</p> <p>Update a bucket's bundle if it's consistently going over its storage space or data transfer quota, or if a bucket's usage is consistently in the lower range of its storage space or data transfer quota. Due to the unpredictable usage fluctuations that a bucket might experience, we strongly recommend that you update a bucket's bundle only as a long-term strategy, instead of as a short-term, monthly cost-cutting measure. Choose a bucket bundle that will provide the bucket with ample storage space and data transfer for a long time to come.</p>"
     },
     "UpdateContainerService": {
       "name": "UpdateContainerService",
@@ -4905,7 +5240,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Updates an existing Amazon Lightsail content delivery network (CDN) distribution.</p> <p>Use this action to update the configuration of your existing distribution</p>"
+      "documentation": "<p>Updates an existing Amazon Lightsail content delivery network (CDN) distribution.</p> <p>Use this action to update the configuration of your existing distribution.</p>"
     },
     "UpdateDistributionBundle": {
       "name": "UpdateDistributionBundle",
@@ -4976,7 +5311,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Updates a domain recordset after it is created.</p> <p>The <code>update domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Updates a domain recordset after it is created.</p> <p>The <code>update domain entry</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>domain name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "UpdateLoadBalancerAttribute": {
       "name": "UpdateLoadBalancerAttribute",
@@ -5013,7 +5348,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Updates the specified attribute for a load balancer. You can only update one attribute at a time.</p> <p>The <code>update load balancer attribute</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Updates the specified attribute for a load balancer. You can only update one attribute at a time.</p> <p>The <code>update load balancer attribute</code> operation supports tag-based access control via resource tags applied to the resource identified by <code>load balancer name</code>. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "UpdateRelationalDatabase": {
       "name": "UpdateRelationalDatabase",
@@ -5050,7 +5385,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Allows the update of one or more attributes of a database in Amazon Lightsail.</p> <p>Updates are applied immediately, or in cases where the updates could result in an outage, are applied during the database's predefined maintenance window.</p> <p>The <code>update relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Allows the update of one or more attributes of a database in Amazon Lightsail.</p> <p>Updates are applied immediately, or in cases where the updates could result in an outage, are applied during the database's predefined maintenance window.</p> <p>The <code>update relational database</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "UpdateRelationalDatabaseParameters": {
       "name": "UpdateRelationalDatabaseParameters",
@@ -5087,7 +5422,7 @@
           "shape": "UnauthenticatedException"
         }
       ],
-      "documentation": "<p>Allows the update of one or more parameters of a database in Amazon Lightsail.</p> <p>Parameter updates don't cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which parameter updates are applied: <code>dynamic</code> or <code>pending-reboot</code>. Parameters marked with a <code>dynamic</code> apply type are applied immediately. Parameters marked with a <code>pending-reboot</code> apply type are applied only after the database is rebooted using the <code>reboot relational database</code> operation.</p> <p>The <code>update relational database parameters</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-controlling-access-using-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Allows the update of one or more parameters of a database in Amazon Lightsail.</p> <p>Parameter updates don't cause outages; therefore, their application is not subject to the preferred maintenance window. However, there are two ways in which parameter updates are applied: <code>dynamic</code> or <code>pending-reboot</code>. Parameters marked with a <code>dynamic</code> apply type are applied immediately. Parameters marked with a <code>pending-reboot</code> apply type are applied only after the database is rebooted using the <code>reboot relational database</code> operation.</p> <p>The <code>update relational database parameters</code> operation supports tag-based access control via resource tags applied to the resource identified by relationalDatabaseName. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     }
   },
   "shapes": {
@@ -5096,6 +5431,61 @@
       "enum": [
         "inbound",
         "outbound"
+      ]
+    },
+    "AccessKey": {
+      "type": "structure",
+      "members": {
+        "accessKeyId": {
+          "shape": "IAMAccessKeyId",
+          "documentation": "<p>The ID of the access key.</p>"
+        },
+        "secretAccessKey": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The secret access key used to sign requests.</p> <p>You should store the secret access key in a safe location. We recommend that you delete the access key if the secret access key is compromised.</p>"
+        },
+        "status": {
+          "shape": "StatusType",
+          "documentation": "<p>The status of the access key.</p> <p>A status of <code>Active</code> means that the key is valid, while <code>Inactive</code> means it is not.</p>"
+        },
+        "createdAt": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp when the access key was created.</p>"
+        }
+      },
+      "documentation": "<p>Describes an access key for an Amazon Lightsail bucket.</p> <p>Access keys grant full programmatic access to the specified bucket and its objects. You can have a maximum of two access keys per bucket. Use the <a>CreateBucketAccessKey</a> action to create an access key for a specific bucket. For more information about access keys, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys\">Creating access keys for a bucket in Amazon Lightsail</a> in the <i>Amazon Lightsail Developer Guide</i>.</p> <important> <p>The <code>secretAccessKey</code> value is returned only in response to the <code>CreateBucketAccessKey</code> action. You can get a secret access key only when you first create an access key; you cannot get the secret access key later. If you lose the secret access key, you must create a new access key.</p> </important>"
+    },
+    "AccessKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "AccessKey"
+      }
+    },
+    "AccessReceiverList": {
+      "type": "list",
+      "member": {
+        "shape": "ResourceReceivingAccess"
+      }
+    },
+    "AccessRules": {
+      "type": "structure",
+      "members": {
+        "getObject": {
+          "shape": "AccessType",
+          "documentation": "<p>Specifies the anonymous access to all objects in a bucket.</p> <p>The following options can be specified:</p> <ul> <li> <p> <code>public</code> - Sets all objects in the bucket to public (read-only), making them readable by anyone in the world.</p> <p>If the <code>getObject</code> value is set to <code>public</code>, then all objects in the bucket default to public regardless of the <code>allowPublicOverrides</code> value.</p> </li> <li> <p> <code>private</code> - Sets all objects in the bucket to private, making them readable only by you or anyone you give access to.</p> <p>If the <code>getObject</code> value is set to <code>private</code>, and the <code>allowPublicOverrides</code> value is set to <code>true</code>, then all objects in the bucket default to private unless they are configured with a <code>public-read</code> ACL. Individual objects with a <code>public-read</code> ACL are readable by anyone in the world.</p> </li> </ul>"
+        },
+        "allowPublicOverrides": {
+          "shape": "boolean",
+          "documentation": "<p>A Boolean value that indicates whether the access control list (ACL) permissions that are applied to individual objects override the <code>getObject</code> option that is currently specified.</p> <p>When this is true, you can use the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObjectAcl.html\">PutObjectAcl</a> Amazon S3 API action to set individual objects to public (read-only) using the <code>public-read</code> ACL, or to private using the <code>private</code> ACL.</p>"
+        }
+      },
+      "documentation": "<p>Describes the anonymous access permissions for an Amazon Lightsail bucket and its objects.</p> <p>For more information about bucket access permissions, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-understanding-bucket-permissions\">Understanding bucket permissions in Amazon Lightsail</a> in the </p> <p> <i>Amazon Lightsail Developer Guide</i>.</p>"
+    },
+    "AccessType": {
+      "type": "string",
+      "enum": [
+        "public",
+        "private"
       ]
     },
     "AddOn": {
@@ -5239,7 +5629,7 @@
           "documentation": "<p>Indicates whether the alarm is enabled.</p>"
         }
       },
-      "documentation": "<p>Describes an alarm.</p> <p>An alarm is a way to monitor your Amazon Lightsail resource metrics. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms\">Alarms in Amazon Lightsail</a>.</p>"
+      "documentation": "<p>Describes an alarm.</p> <p>An alarm is a way to monitor your Lightsail resource metrics. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-alarms\">Alarms in Amazon Lightsail</a>.</p>"
     },
     "AlarmState": {
       "type": "string",
@@ -5588,6 +5978,140 @@
         "app"
       ]
     },
+    "Bucket": {
+      "type": "structure",
+      "members": {
+        "resourceType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Lightsail resource type of the bucket (for example, <code>Bucket</code>).</p>"
+        },
+        "accessRules": {
+          "shape": "AccessRules",
+          "documentation": "<p>An object that describes the access rules of the bucket.</p>"
+        },
+        "arn": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the bucket.</p>"
+        },
+        "bundleId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the bundle currently applied to the bucket.</p> <p>A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket.</p> <p>Use the <a>UpdateBucketBundle</a> action to change the bundle of a bucket.</p>"
+        },
+        "createdAt": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp when the distribution was created.</p>"
+        },
+        "url": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The URL of the bucket.</p>"
+        },
+        "location": {
+          "shape": "ResourceLocation"
+        },
+        "name": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket.</p>"
+        },
+        "supportCode": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The support code for a bucket. Include this code in your email to support when you have questions about a Lightsail bucket. This code enables our support team to look up your Lightsail information more easily.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tag keys and optional values for the bucket. For more information, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Tags in Amazon Lightsail</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
+        },
+        "objectVersioning": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Indicates whether object versioning is enabled for the bucket.</p> <p>The following options can be configured:</p> <ul> <li> <p> <code>Enabled</code> - Object versioning is enabled.</p> </li> <li> <p> <code>Suspended</code> - Object versioning was previously enabled but is currently suspended. Existing object versions are retained.</p> </li> <li> <p> <code>NeverEnabled</code> - Object versioning has never been enabled.</p> </li> </ul>"
+        },
+        "ableToUpdateBundle": {
+          "shape": "boolean",
+          "documentation": "<p>Indicates whether the bundle that is currently applied to a bucket can be changed to another bundle.</p> <p>You can update a bucket's bundle only one time within a monthly AWS billing cycle.</p> <p>Use the <a>UpdateBucketBundle</a> action to change a bucket's bundle.</p>"
+        },
+        "readonlyAccessAccounts": {
+          "shape": "PartnerIdList",
+          "documentation": "<p>An array of strings that specify the AWS account IDs that have read-only access to the bucket.</p>"
+        },
+        "resourcesReceivingAccess": {
+          "shape": "AccessReceiverList",
+          "documentation": "<p>An array of objects that describe Lightsail instances that have access to the bucket.</p> <p>Use the <a>SetResourceAccessForBucket</a> action to update the instances that have access to a bucket.</p>"
+        },
+        "state": {
+          "shape": "BucketState",
+          "documentation": "<p>An object that describes the state of the bucket.</p>"
+        }
+      },
+      "documentation": "<p>Describes an Amazon Lightsail bucket.</p>"
+    },
+    "BucketBundle": {
+      "type": "structure",
+      "members": {
+        "bundleId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the bundle.</p>"
+        },
+        "name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the bundle.</p>"
+        },
+        "price": {
+          "shape": "float",
+          "documentation": "<p>The monthly price of the bundle, in US dollars.</p>"
+        },
+        "storagePerMonthInGb": {
+          "shape": "integer",
+          "documentation": "<p>The storage size of the bundle, in GB.</p>"
+        },
+        "transferPerMonthInGb": {
+          "shape": "integer",
+          "documentation": "<p>The monthly network transfer quota of the bundle.</p>"
+        },
+        "isActive": {
+          "shape": "boolean",
+          "documentation": "<p>Indicates whether the bundle is active. Use for a new or existing bucket.</p>"
+        }
+      },
+      "documentation": "<p>Describes the specifications of a bundle that can be applied to an Amazon Lightsail bucket.</p> <p>A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket.</p>"
+    },
+    "BucketBundleList": {
+      "type": "list",
+      "member": {
+        "shape": "BucketBundle"
+      }
+    },
+    "BucketList": {
+      "type": "list",
+      "member": {
+        "shape": "Bucket"
+      }
+    },
+    "BucketMetricName": {
+      "type": "string",
+      "enum": [
+        "BucketSizeBytes",
+        "NumberOfObjects"
+      ]
+    },
+    "BucketName": {
+      "type": "string",
+      "max": 54,
+      "min": 3,
+      "pattern": "^[a-z0-9][a-z0-9-]{1,52}[a-z0-9]$"
+    },
+    "BucketState": {
+      "type": "structure",
+      "members": {
+        "code": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The state code of the bucket.</p> <p>The following codes are possible:</p> <ul> <li> <p> <code>OK</code> - The bucket is in a running state.</p> </li> <li> <p> <code>Unknown</code> - Creation of the bucket might have timed-out. You might want to delete the bucket and create a new one.</p> </li> </ul>"
+        },
+        "message": {
+          "shape": "string",
+          "documentation": "<p>A message that describes the state of the bucket.</p>"
+        }
+      },
+      "documentation": "<p>Describes the state of an Amazon Lightsail bucket.</p>"
+    },
     "Bundle": {
       "type": "structure",
       "members": {
@@ -5793,7 +6317,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
         },
         "supportCode": {
           "shape": "string",
@@ -5844,7 +6368,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
         }
       },
       "documentation": "<p>Describes an Amazon Lightsail SSL/TLS certificate.</p>"
@@ -5917,7 +6441,7 @@
           "documentation": "<p>A list of objects describing the destination service, which is AWS CloudFormation, and the Amazon Resource Name (ARN) of the AWS CloudFormation stack.</p>"
         }
       },
-      "documentation": "<p>Describes a CloudFormation stack record created as a result of the <code>create cloud formation stack</code> operation.</p> <p>A CloudFormation stack record provides information about the AWS CloudFormation stack used to create a new Amazon Elastic Compute Cloud instance from an exported Lightsail instance snapshot.</p>"
+      "documentation": "<p>Describes a CloudFormation stack record created as a result of the <code>create cloud formation stack</code> action.</p> <p>A CloudFormation stack record provides information about the AWS CloudFormation stack used to create a new Amazon Elastic Compute Cloud instance from an exported Lightsail instance snapshot.</p>"
     },
     "CloudFormationStackRecordList": {
       "type": "list",
@@ -6130,7 +6654,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
         },
         "power": {
           "shape": "ContainerServicePowerName",
@@ -6281,7 +6805,7 @@
         },
         "successCodes": {
           "shape": "string",
-          "documentation": "<p>The HTTP codes to use when checking for a successful response from a container. You can specify values between 200 and 499.</p>"
+          "documentation": "<p>The HTTP codes to use when checking for a successful response from a container. You can specify values between <code>200</code> and <code>499</code>. You can specify multiple values (for example, <code>200,202</code>) or a range of values (for example, <code>200-299</code>).</p>"
         }
       },
       "documentation": "<p>Describes the health check configuration of an Amazon Lightsail container service.</p>"
@@ -6514,15 +7038,15 @@
         },
         "sourceResourceName": {
           "shape": "string",
-          "documentation": "<p>The name of the source instance or disk from which the source automatic snapshot was created.</p> <p>Constraint:</p> <ul> <li> <p>Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots\">Lightsail Dev Guide</a>.</p> </li> </ul>"
+          "documentation": "<p>The name of the source instance or disk from which the source automatic snapshot was created.</p> <p>Constraint:</p> <ul> <li> <p>Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p> </li> </ul>"
         },
         "restoreDate": {
           "shape": "string",
-          "documentation": "<p>The date of the source automatic snapshot to copy. Use the <code>get auto snapshots</code> operation to identify the dates of the available automatic snapshots.</p> <p>Constraints:</p> <ul> <li> <p>Must be specified in <code>YYYY-MM-DD</code> format.</p> </li> <li> <p>This parameter cannot be defined together with the <code>use latest restorable auto snapshot</code> parameter. The <code>restore date</code> and <code>use latest restorable auto snapshot</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots\">Lightsail Dev Guide</a>.</p> </li> </ul>"
+          "documentation": "<p>The date of the source automatic snapshot to copy. Use the <code>get auto snapshots</code> operation to identify the dates of the available automatic snapshots.</p> <p>Constraints:</p> <ul> <li> <p>Must be specified in <code>YYYY-MM-DD</code> format.</p> </li> <li> <p>This parameter cannot be defined together with the <code>use latest restorable auto snapshot</code> parameter. The <code>restore date</code> and <code>use latest restorable auto snapshot</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p> </li> </ul>"
         },
         "useLatestRestorableAutoSnapshot": {
           "shape": "boolean",
-          "documentation": "<p>A Boolean value to indicate whether to use the latest available automatic snapshot of the specified source instance or disk.</p> <p>Constraints:</p> <ul> <li> <p>This parameter cannot be defined together with the <code>restore date</code> parameter. The <code>use latest restorable auto snapshot</code> and <code>restore date</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots\">Lightsail Dev Guide</a>.</p> </li> </ul>"
+          "documentation": "<p>A Boolean value to indicate whether to use the latest available automatic snapshot of the specified source instance or disk.</p> <p>Constraints:</p> <ul> <li> <p>This parameter cannot be defined together with the <code>restore date</code> parameter. The <code>use latest restorable auto snapshot</code> and <code>restore date</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when copying an automatic snapshot as a manual snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-keeping-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p> </li> </ul>"
         },
         "targetSnapshotName": {
           "shape": "ResourceName",
@@ -6537,6 +7061,69 @@
     "CopySnapshotResult": {
       "type": "structure",
       "members": {
+        "operations": {
+          "shape": "OperationList",
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
+    },
+    "CreateBucketAccessKeyRequest": {
+      "type": "structure",
+      "required": [
+        "bucketName"
+      ],
+      "members": {
+        "bucketName": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket that the new access key will belong to, and grant access to.</p>"
+        }
+      }
+    },
+    "CreateBucketAccessKeyResult": {
+      "type": "structure",
+      "members": {
+        "accessKey": {
+          "shape": "AccessKey",
+          "documentation": "<p>An object that describes the access key that is created.</p>"
+        },
+        "operations": {
+          "shape": "OperationList",
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
+    },
+    "CreateBucketRequest": {
+      "type": "structure",
+      "required": [
+        "bucketName",
+        "bundleId"
+      ],
+      "members": {
+        "bucketName": {
+          "shape": "BucketName",
+          "documentation": "<p>The name for the bucket.</p> <p>For more information about bucket names, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/bucket-naming-rules-in-amazon-lightsail\">Bucket naming rules in Amazon Lightsail</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
+        },
+        "bundleId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the bundle to use for the bucket.</p> <p>A bucket bundle specifies the monthly cost, storage space, and data transfer quota for a bucket.</p> <p>Use the <a>GetBucketBundles</a> action to get a list of bundle IDs that you can specify.</p> <p>Use the <a>UpdateBucketBundle</a> action to change the bundle after the bucket is created.</p>"
+        },
+        "tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tag keys and optional values to add to the bucket during creation.</p> <p>Use the <a>TagResource</a> action to tag the bucket after it's created.</p>"
+        },
+        "enableObjectVersioning": {
+          "shape": "boolean",
+          "documentation": "<p>A Boolean value that indicates whether to enable versioning of objects in the bucket.</p> <p>For more information about versioning, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-managing-bucket-object-versioning\">Enabling and suspending bucket object versioning in Amazon Lightsail</a> in the <i>Amazon Lightsail Developer Guide</i>.</p>"
+        }
+      }
+    },
+    "CreateBucketResult": {
+      "type": "structure",
+      "members": {
+        "bucket": {
+          "shape": "Bucket",
+          "documentation": "<p>An object that describes the bucket that is created.</p>"
+        },
         "operations": {
           "shape": "OperationList",
           "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
@@ -6692,7 +7279,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values for the container service.</p> <p>For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+          "documentation": "<p>The tag keys and optional values to add to the certificate during create.</p> <p>Use the <code>TagResource</code> action to tag a resource after it's created.</p> <p>For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
         },
         "publicDomainNames": {
           "shape": "ContainerServicePublicDomains",
@@ -6747,15 +7334,15 @@
         },
         "sourceDiskName": {
           "shape": "string",
-          "documentation": "<p>The name of the source disk from which the source automatic snapshot was created.</p> <p>Constraints:</p> <ul> <li> <p>This parameter cannot be defined together with the <code>disk snapshot name</code> parameter. The <code>source disk name</code> and <code>disk snapshot name</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p> </li> </ul>"
+          "documentation": "<p>The name of the source disk from which the source automatic snapshot was created.</p> <p>Constraints:</p> <ul> <li> <p>This parameter cannot be defined together with the <code>disk snapshot name</code> parameter. The <code>source disk name</code> and <code>disk snapshot name</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p> </li> </ul>"
         },
         "restoreDate": {
           "shape": "string",
-          "documentation": "<p>The date of the automatic snapshot to use for the new disk. Use the <code>get auto snapshots</code> operation to identify the dates of the available automatic snapshots.</p> <p>Constraints:</p> <ul> <li> <p>Must be specified in <code>YYYY-MM-DD</code> format.</p> </li> <li> <p>This parameter cannot be defined together with the <code>use latest restorable auto snapshot</code> parameter. The <code>restore date</code> and <code>use latest restorable auto snapshot</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p> </li> </ul>"
+          "documentation": "<p>The date of the automatic snapshot to use for the new disk. Use the <code>get auto snapshots</code> operation to identify the dates of the available automatic snapshots.</p> <p>Constraints:</p> <ul> <li> <p>Must be specified in <code>YYYY-MM-DD</code> format.</p> </li> <li> <p>This parameter cannot be defined together with the <code>use latest restorable auto snapshot</code> parameter. The <code>restore date</code> and <code>use latest restorable auto snapshot</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p> </li> </ul>"
         },
         "useLatestRestorableAutoSnapshot": {
           "shape": "boolean",
-          "documentation": "<p>A Boolean value to indicate whether to use the latest available automatic snapshot.</p> <p>Constraints:</p> <ul> <li> <p>This parameter cannot be defined together with the <code>restore date</code> parameter. The <code>use latest restorable auto snapshot</code> and <code>restore date</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p> </li> </ul>"
+          "documentation": "<p>A Boolean value to indicate whether to use the latest available automatic snapshot.</p> <p>Constraints:</p> <ul> <li> <p>This parameter cannot be defined together with the <code>restore date</code> parameter. The <code>use latest restorable auto snapshot</code> and <code>restore date</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when creating a new disk from an automatic snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p> </li> </ul>"
         }
       }
     },
@@ -7007,7 +7594,7 @@
         },
         "userData": {
           "shape": "string",
-          "documentation": "<p>You can create a launch script that configures a server with additional user data. For example, <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image\">Dev Guide</a>.</p> </note>"
+          "documentation": "<p>You can create a launch script that configures a server with additional user data. For example, <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/compare-options-choose-lightsail-instance-image\">Amazon Lightsail Developer Guide</a>.</p> </note>"
         },
         "keyPairName": {
           "shape": "ResourceName",
@@ -7027,15 +7614,15 @@
         },
         "sourceInstanceName": {
           "shape": "string",
-          "documentation": "<p>The name of the source instance from which the source automatic snapshot was created.</p> <p>Constraints:</p> <ul> <li> <p>This parameter cannot be defined together with the <code>instance snapshot name</code> parameter. The <code>source instance name</code> and <code>instance snapshot name</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p> </li> </ul>"
+          "documentation": "<p>The name of the source instance from which the source automatic snapshot was created.</p> <p>Constraints:</p> <ul> <li> <p>This parameter cannot be defined together with the <code>instance snapshot name</code> parameter. The <code>source instance name</code> and <code>instance snapshot name</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p> </li> </ul>"
         },
         "restoreDate": {
           "shape": "string",
-          "documentation": "<p>The date of the automatic snapshot to use for the new instance. Use the <code>get auto snapshots</code> operation to identify the dates of the available automatic snapshots.</p> <p>Constraints:</p> <ul> <li> <p>Must be specified in <code>YYYY-MM-DD</code> format.</p> </li> <li> <p>This parameter cannot be defined together with the <code>use latest restorable auto snapshot</code> parameter. The <code>restore date</code> and <code>use latest restorable auto snapshot</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p> </li> </ul>"
+          "documentation": "<p>The date of the automatic snapshot to use for the new instance. Use the <code>get auto snapshots</code> operation to identify the dates of the available automatic snapshots.</p> <p>Constraints:</p> <ul> <li> <p>Must be specified in <code>YYYY-MM-DD</code> format.</p> </li> <li> <p>This parameter cannot be defined together with the <code>use latest restorable auto snapshot</code> parameter. The <code>restore date</code> and <code>use latest restorable auto snapshot</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p> </li> </ul>"
         },
         "useLatestRestorableAutoSnapshot": {
           "shape": "boolean",
-          "documentation": "<p>A Boolean value to indicate whether to use the latest available automatic snapshot.</p> <p>Constraints:</p> <ul> <li> <p>This parameter cannot be defined together with the <code>restore date</code> parameter. The <code>use latest restorable auto snapshot</code> and <code>restore date</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Lightsail Dev Guide</a>.</p> </li> </ul>"
+          "documentation": "<p>A Boolean value to indicate whether to use the latest available automatic snapshot.</p> <p>Constraints:</p> <ul> <li> <p>This parameter cannot be defined together with the <code>restore date</code> parameter. The <code>use latest restorable auto snapshot</code> and <code>restore date</code> parameters are mutually exclusive.</p> </li> <li> <p>Define this parameter only when creating a new instance from an automatic snapshot. For more information, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configuring-automatic-snapshots\">Amazon Lightsail Developer Guide</a>.</p> </li> </ul>"
         }
       }
     },
@@ -7080,7 +7667,7 @@
         },
         "userData": {
           "shape": "string",
-          "documentation": "<p>A launch script you can create that configures a server with additional user data. For example, you might want to run <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/getting-started/article/compare-options-choose-lightsail-instance-image\">Dev Guide</a>.</p> </note>"
+          "documentation": "<p>A launch script you can create that configures a server with additional user data. For example, you might want to run <code>apt-get -y update</code>.</p> <note> <p>Depending on the machine image you choose, the command to get software on your instance varies. Amazon Linux and CentOS use <code>yum</code>, Debian and Ubuntu use <code>apt-get</code>, and FreeBSD uses <code>pkg</code>. For a complete list, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/compare-options-choose-lightsail-instance-image\">Amazon Lightsail Developer Guide</a>.</p> </note>"
         },
         "keyPairName": {
           "shape": "ResourceName",
@@ -7422,6 +8009,57 @@
       }
     },
     "DeleteAutoSnapshotResult": {
+      "type": "structure",
+      "members": {
+        "operations": {
+          "shape": "OperationList",
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
+    },
+    "DeleteBucketAccessKeyRequest": {
+      "type": "structure",
+      "required": [
+        "bucketName",
+        "accessKeyId"
+      ],
+      "members": {
+        "bucketName": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket that the access key belongs to.</p>"
+        },
+        "accessKeyId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the access key to delete.</p> <p>Use the <a>GetBucketAccessKeys</a> action to get a list of access key IDs that you can specify.</p>"
+        }
+      }
+    },
+    "DeleteBucketAccessKeyResult": {
+      "type": "structure",
+      "members": {
+        "operations": {
+          "shape": "OperationList",
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
+    },
+    "DeleteBucketRequest": {
+      "type": "structure",
+      "required": [
+        "bucketName"
+      ],
+      "members": {
+        "bucketName": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket to delete.</p> <p>Use the <a>GetBuckets</a> action to get a list of bucket names that you can specify.</p>"
+        },
+        "forceDelete": {
+          "shape": "boolean",
+          "documentation": "<p>A Boolean value that indicates whether to force delete the bucket.</p> <p>You must force delete the bucket if it has one of the following conditions:</p> <ul> <li> <p>The bucket is the origin of a distribution.</p> </li> <li> <p>The bucket has instances that were granted access to it using the <a>SetResourceAccessForBucket</a> action.</p> </li> <li> <p>The bucket has objects.</p> </li> <li> <p>The bucket has access keys.</p> </li> </ul> <important> <p>Force deleting a bucket might impact other resources that rely on the bucket, such as instances, distributions, or software that use the issued access keys.</p> </important>"
+        }
+      }
+    },
+    "DeleteBucketResult": {
       "type": "structure",
       "members": {
         "operations": {
@@ -7967,7 +8605,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
         },
         "addOns": {
           "shape": "AddOnList",
@@ -8012,7 +8650,7 @@
           "deprecated": true
         }
       },
-      "documentation": "<p>Describes a system disk or a block storage disk.</p>"
+      "documentation": "<p>Describes a block storage disk.</p>"
     },
     "DiskInfo": {
       "type": "structure",
@@ -8097,7 +8735,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
         },
         "sizeInGb": {
           "shape": "integer",
@@ -8190,7 +8828,7 @@
         },
         "isActive": {
           "shape": "boolean",
-          "documentation": "<p>Indicates whether the bundle is active, and can be specified for a new distribution.</p>"
+          "documentation": "<p>Indicates whether the bundle is active, and can be specified for a new or existing distribution.</p>"
         }
       },
       "documentation": "<p>Describes the specifications of a distribution bundle.</p>"
@@ -8247,14 +8885,14 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
         },
         "domainEntries": {
           "shape": "DomainEntryList",
           "documentation": "<p>An array of key-value pairs containing information about the domain entries.</p>"
         }
       },
-      "documentation": "<p>Describes a domain where you are storing recordsets in Lightsail.</p>"
+      "documentation": "<p>Describes a domain where you are storing recordsets.</p>"
     },
     "DomainEntry": {
       "type": "structure",
@@ -8642,6 +9280,130 @@
         "nextPageToken": {
           "shape": "string",
           "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetBlueprints</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
+        }
+      }
+    },
+    "GetBucketAccessKeysRequest": {
+      "type": "structure",
+      "required": [
+        "bucketName"
+      ],
+      "members": {
+        "bucketName": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket for which to return access keys.</p>"
+        }
+      }
+    },
+    "GetBucketAccessKeysResult": {
+      "type": "structure",
+      "members": {
+        "accessKeys": {
+          "shape": "AccessKeyList",
+          "documentation": "<p>An object that describes the access keys for the specified bucket.</p>"
+        }
+      }
+    },
+    "GetBucketBundlesRequest": {
+      "type": "structure",
+      "members": {
+        "includeInactive": {
+          "shape": "boolean",
+          "documentation": "<p>A Boolean value that indicates whether to include inactive (unavailable) bundles in the response.</p>"
+        }
+      }
+    },
+    "GetBucketBundlesResult": {
+      "type": "structure",
+      "members": {
+        "bundles": {
+          "shape": "BucketBundleList",
+          "documentation": "<p>An object that describes bucket bundles.</p>"
+        }
+      }
+    },
+    "GetBucketMetricDataRequest": {
+      "type": "structure",
+      "required": [
+        "bucketName",
+        "metricName",
+        "startTime",
+        "endTime",
+        "period",
+        "statistics",
+        "unit"
+      ],
+      "members": {
+        "bucketName": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket for which to get metric data.</p>"
+        },
+        "metricName": {
+          "shape": "BucketMetricName",
+          "documentation": "<p>The metric for which you want to return information.</p> <p>Valid bucket metric names are listed below, along with the most useful statistics to include in your request, and the published unit value.</p> <note> <p>These bucket metrics are reported once per day.</p> </note> <ul> <li> <p> <b> <code>BucketSizeBytes</code> </b> - The amount of data in bytes stored in a bucket. This value is calculated by summing the size of all objects in the bucket (including object versions), including the size of all parts for all incomplete multipart uploads to the bucket.</p> <p>Statistics: The most useful statistic is <code>Maximum</code>.</p> <p>Unit: The published unit is <code>Bytes</code>.</p> </li> <li> <p> <b> <code>NumberOfObjects</code> </b> - The total number of objects stored in a bucket. This value is calculated by counting all objects in the bucket (including object versions) and the total number of parts for all incomplete multipart uploads to the bucket.</p> <p>Statistics: The most useful statistic is <code>Average</code>.</p> <p>Unit: The published unit is <code>Count</code>.</p> </li> </ul>"
+        },
+        "startTime": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp indicating the earliest data to be returned.</p>"
+        },
+        "endTime": {
+          "shape": "IsoDate",
+          "documentation": "<p>The timestamp indicating the latest data to be returned.</p>"
+        },
+        "period": {
+          "shape": "MetricPeriod",
+          "documentation": "<p>The granularity, in seconds, of the returned data points.</p> <note> <p>Bucket storage metrics are reported once per day. Therefore, you should specify a period of 86400 seconds, which is the number of seconds in a day.</p> </note>"
+        },
+        "statistics": {
+          "shape": "MetricStatisticList",
+          "documentation": "<p>The statistic for the metric.</p> <p>The following statistics are available:</p> <ul> <li> <p> <code>Minimum</code> - The lowest value observed during the specified period. Use this value to determine low volumes of activity for your application.</p> </li> <li> <p> <code>Maximum</code> - The highest value observed during the specified period. Use this value to determine high volumes of activity for your application.</p> </li> <li> <p> <code>Sum</code> - The sum of all values submitted for the matching metric. You can use this statistic to determine the total volume of a metric.</p> </li> <li> <p> <code>Average</code> - The value of <code>Sum</code> / <code>SampleCount</code> during the specified period. By comparing this statistic with the <code>Minimum</code> and <code>Maximum</code> values, you can determine the full scope of a metric and how close the average use is to the <code>Minimum</code> and <code>Maximum</code> values. This comparison helps you to know when to increase or decrease your resources.</p> </li> <li> <p> <code>SampleCount</code> - The count, or number, of data points used for the statistical calculation.</p> </li> </ul>"
+        },
+        "unit": {
+          "shape": "MetricUnit",
+          "documentation": "<p>The unit for the metric data request.</p> <p>Valid units depend on the metric data being requested. For the valid units with each available metric, see the <code>metricName</code> parameter.</p>"
+        }
+      }
+    },
+    "GetBucketMetricDataResult": {
+      "type": "structure",
+      "members": {
+        "metricName": {
+          "shape": "BucketMetricName",
+          "documentation": "<p>The name of the metric returned.</p>"
+        },
+        "metricData": {
+          "shape": "MetricDatapointList",
+          "documentation": "<p>An array of objects that describe the metric data returned.</p>"
+        }
+      }
+    },
+    "GetBucketsRequest": {
+      "type": "structure",
+      "members": {
+        "bucketName": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket for which to return information.</p> <p>When omitted, the response includes all of your buckets in the AWS Region where the request is made.</p>"
+        },
+        "pageToken": {
+          "shape": "string",
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>To get a page token, perform an initial <code>GetBuckets</code> request. If your results are paginated, the response will return a next page token that you can specify as the page token in a subsequent request.</p>"
+        },
+        "includeConnectedResources": {
+          "shape": "boolean",
+          "documentation": "<p>A Boolean value that indicates whether to include Lightsail instances that were given access to the bucket using the <a>SetResourceAccessForBucket</a> action.</p>"
+        }
+      }
+    },
+    "GetBucketsResult": {
+      "type": "structure",
+      "members": {
+        "buckets": {
+          "shape": "BucketList",
+          "documentation": "<p>An array of objects that describe buckets.</p>"
+        },
+        "nextPageToken": {
+          "shape": "string",
+          "documentation": "<p>The token to advance to the next page of results from your request.</p> <p>A next page token is not returned if there are no more results to display.</p> <p>To get the next page of results, perform another <code>GetBuckets</code> request and specify the next page token using the <code>pageToken</code> parameter.</p>"
         }
       }
     },
@@ -9091,7 +9853,7 @@
       "members": {
         "distributionName": {
           "shape": "ResourceName",
-          "documentation": "<p>The name of the distribution for which to return information.</p> <p>Use the <code>GetDistributions</code> action to get a list of distribution names that you can specify.</p> <p>When omitted, the response includes all of your distributions in the AWS Region where the request is made.</p>"
+          "documentation": "<p>The name of the distribution for which to return information.</p> <p>When omitted, the response includes all of your distributions in the AWS Region where the request is made.</p>"
         },
         "pageToken": {
           "shape": "string",
@@ -10116,6 +10878,13 @@
         "shape": "HostKeyAttributes"
       }
     },
+    "IAMAccessKeyId": {
+      "type": "string",
+      "max": 20,
+      "min": 20,
+      "pattern": "^[A-Z0-9]{20}$",
+      "sensitive": true
+    },
     "ImportKeyPairRequest": {
       "type": "structure",
       "required": [
@@ -10195,7 +10964,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
         },
         "blueprintId": {
           "shape": "NonEmptyString",
@@ -10583,7 +11352,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
         },
         "state": {
           "shape": "InstanceSnapshotState",
@@ -10742,14 +11511,14 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
         },
         "fingerprint": {
           "shape": "Base64",
           "documentation": "<p>The RSA fingerprint of the key pair.</p>"
         }
       },
-      "documentation": "<p>Describes the SSH key pair.</p>"
+      "documentation": "<p>Describes an SSH key pair.</p>"
     },
     "KeyPairList": {
       "type": "list",
@@ -10838,7 +11607,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
         }
       },
       "documentation": "<p>Describes an Amazon Lightsail content delivery network (CDN) distribution.</p>"
@@ -10872,7 +11641,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
         },
         "dnsName": {
           "shape": "NonEmptyString",
@@ -10915,7 +11684,7 @@
           "documentation": "<p>The IP address type of the load balancer.</p> <p>The possible values are <code>ipv4</code> for IPv4 only, and <code>dualstack</code> for IPv4 and IPv6.</p>"
         }
       },
-      "documentation": "<p>Describes the Lightsail load balancer.</p>"
+      "documentation": "<p>Describes a load balancer.</p>"
     },
     "LoadBalancerAttributeName": {
       "type": "string",
@@ -11003,7 +11772,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
         },
         "loadBalancerName": {
           "shape": "ResourceName",
@@ -11587,7 +12356,14 @@
         "CreateContainerServiceDeployment",
         "CreateContainerServiceRegistryLogin",
         "RegisterContainerImage",
-        "DeleteContainerImage"
+        "DeleteContainerImage",
+        "CreateBucket",
+        "DeleteBucket",
+        "CreateBucketAccessKey",
+        "DeleteBucketAccessKey",
+        "UpdateBucketBundle",
+        "UpdateBucket",
+        "SetResourceAccessForBucket"
       ]
     },
     "Origin": {
@@ -11618,6 +12394,13 @@
         "http-only",
         "https-only"
       ]
+    },
+    "PartnerIdList": {
+      "type": "list",
+      "member": {
+        "shape": "NonEmptyString"
+      },
+      "max": 10
     },
     "PasswordData": {
       "type": "structure",
@@ -11975,7 +12758,8 @@
         "ap-southeast-1",
         "ap-southeast-2",
         "ap-northeast-1",
-        "ap-northeast-2"
+        "ap-northeast-2",
+        "eu-north-1"
       ]
     },
     "RegisterContainerImageRequest": {
@@ -12037,7 +12821,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
         },
         "relationalDatabaseBlueprintId": {
           "shape": "NonEmptyString",
@@ -12366,7 +13150,7 @@
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+          "documentation": "<p>The tag keys and optional values for the resource. For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
         },
         "engine": {
           "shape": "NonEmptyString",
@@ -12497,6 +13281,13 @@
       "type": "string",
       "pattern": "^arn:(aws[^:]*):([a-zA-Z0-9-]+):([a-z0-9-]+):([0-9]+):([a-zA-Z]+)/([a-zA-Z0-9-]+)$"
     },
+    "ResourceBucketAccess": {
+      "type": "string",
+      "enum": [
+        "allow",
+        "deny"
+      ]
+    },
     "ResourceLocation": {
       "type": "structure",
       "members": {
@@ -12520,6 +13311,20 @@
       "member": {
         "shape": "ResourceName"
       }
+    },
+    "ResourceReceivingAccess": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The name of the Lightsail instance.</p>"
+        },
+        "resourceType": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The Lightsail resource type (for example, <code>Instance</code>).</p>"
+        }
+      },
+      "documentation": "<p>Describes an Amazon Lightsail instance that has access to a Lightsail bucket.</p>"
     },
     "ResourceRecord": {
       "type": "structure",
@@ -12560,7 +13365,8 @@
         "Alarm",
         "ContactMethod",
         "Distribution",
-        "Certificate"
+        "Certificate",
+        "Bucket"
       ]
     },
     "RevocationReason": {
@@ -12617,6 +13423,37 @@
       }
     },
     "SetIpAddressTypeResult": {
+      "type": "structure",
+      "members": {
+        "operations": {
+          "shape": "OperationList",
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
+    },
+    "SetResourceAccessForBucketRequest": {
+      "type": "structure",
+      "required": [
+        "resourceName",
+        "bucketName",
+        "access"
+      ],
+      "members": {
+        "resourceName": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the Lightsail instance for which to set bucket access. The instance must be in a running or stopped state.</p>"
+        },
+        "bucketName": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket for which to set access to another Lightsail resource.</p>"
+        },
+        "access": {
+          "shape": "ResourceBucketAccess",
+          "documentation": "<p>The access setting.</p> <p>The following access settings are available:</p> <ul> <li> <p> <code>allow</code> - Allows access to the bucket and its objects.</p> </li> <li> <p> <code>deny</code> - Denies access to the bucket and its objects. Use this setting to remove access for a resource previously set to <code>allow</code>.</p> </li> </ul>"
+        }
+      }
+    },
+    "SetResourceAccessForBucketResult": {
       "type": "structure",
       "members": {
         "operations": {
@@ -12707,13 +13544,20 @@
           "documentation": "<p>A Boolean value indicating whether the static IP is attached.</p>"
         }
       },
-      "documentation": "<p>Describes the static IP.</p>"
+      "documentation": "<p>Describes a static IP.</p>"
     },
     "StaticIpList": {
       "type": "list",
       "member": {
         "shape": "StaticIp"
       }
+    },
+    "StatusType": {
+      "type": "string",
+      "enum": [
+        "Active",
+        "Inactive"
+      ]
     },
     "StopInstanceRequest": {
       "type": "structure",
@@ -12794,7 +13638,7 @@
           "documentation": "<p>The value of the tag.</p> <p>Constraints: Tag values accept a maximum of 256 letters, numbers, spaces in UTF-8, or the following characters: + - = . _ : / @</p>"
         }
       },
-      "documentation": "<p>Describes a tag key and optional value assigned to an Amazon Lightsail resource.</p> <p>For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en/articles/amazon-lightsail-tags\">Lightsail Dev Guide</a>.</p>"
+      "documentation": "<p>Describes a tag key and optional value assigned to an Amazon Lightsail resource.</p> <p>For more information about tags in Lightsail, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags\">Amazon Lightsail Developer Guide</a>.</p>"
     },
     "TagKey": {
       "type": "string"
@@ -12920,6 +13764,69 @@
     "UntagResourceResult": {
       "type": "structure",
       "members": {
+        "operations": {
+          "shape": "OperationList",
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
+    },
+    "UpdateBucketBundleRequest": {
+      "type": "structure",
+      "required": [
+        "bucketName",
+        "bundleId"
+      ],
+      "members": {
+        "bucketName": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket for which to update the bundle.</p>"
+        },
+        "bundleId": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>The ID of the new bundle to apply to the bucket.</p> <p>Use the <a>GetBucketBundles</a> action to get a list of bundle IDs that you can specify.</p>"
+        }
+      }
+    },
+    "UpdateBucketBundleResult": {
+      "type": "structure",
+      "members": {
+        "operations": {
+          "shape": "OperationList",
+          "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
+        }
+      }
+    },
+    "UpdateBucketRequest": {
+      "type": "structure",
+      "required": [
+        "bucketName"
+      ],
+      "members": {
+        "bucketName": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket to update.</p>"
+        },
+        "accessRules": {
+          "shape": "AccessRules",
+          "documentation": "<p>An object that sets the public accessibility of objects in the specified bucket.</p>"
+        },
+        "versioning": {
+          "shape": "NonEmptyString",
+          "documentation": "<p>Specifies whether to enable or suspend versioning of objects in the bucket.</p> <p>The following options can be specified:</p> <ul> <li> <p> <code>Enabled</code> - Enables versioning of objects in the specified bucket.</p> </li> <li> <p> <code>Suspended</code> - Suspends versioning of objects in the specified bucket. Existing object versions are retained.</p> </li> </ul>"
+        },
+        "readonlyAccessAccounts": {
+          "shape": "PartnerIdList",
+          "documentation": "<p>An array of strings to specify the AWS account IDs that can access the bucket.</p> <p>You can give a maximum of 10 AWS accounts access to a bucket.</p>"
+        }
+      }
+    },
+    "UpdateBucketResult": {
+      "type": "structure",
+      "members": {
+        "bucket": {
+          "shape": "Bucket",
+          "documentation": "<p>An object that describes the bucket that is updated.</p>"
+        },
         "operations": {
           "shape": "OperationList",
           "documentation": "<p>An array of objects that describe the result of the action, such as the status of the request, the timestamp of the request, and the resources affected by the request.</p>"
@@ -13187,5 +14094,5 @@
       "type": "timestamp"
     }
   },
-  "documentation": "<p>Amazon Lightsail is the easiest way to get started with Amazon Web Services (AWS) for developers who need to build websites or web applications. It includes everything you need to launch your project quickly - instances (virtual private servers), container services, managed databases, SSD-based block storage, static IP addresses, load balancers, content delivery network (CDN) distributions, DNS management of registered domains, and resource snapshots (backups) - for a low, predictable monthly price.</p> <p>You can manage your Lightsail resources using the Lightsail console, Lightsail API, AWS Command Line Interface (AWS CLI), or SDKs. For more information about Lightsail concepts and tasks, see the <a href=\"http://lightsail.aws.amazon.com/ls/docs/how-to/article/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli\">Lightsail Dev Guide</a>.</p> <p>This API Reference provides detailed information about the actions, data types, parameters, and errors of the Lightsail service. For more information about the supported AWS Regions, endpoints, and service quotas of the Lightsail service, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/lightsail.html\">Amazon Lightsail Endpoints and Quotas</a> in the <i>AWS General Reference</i>.</p>"
+  "documentation": "<p>Amazon Lightsail is the easiest way to get started with Amazon Web Services (AWS) for developers who need to build websites or web applications. It includes everything you need to launch your project quickly - instances (virtual private servers), container services, storage buckets, managed databases, SSD-based block storage, static IP addresses, load balancers, content delivery network (CDN) distributions, DNS management of registered domains, and resource snapshots (backups) - for a low, predictable monthly price.</p> <p>You can manage your Lightsail resources using the Lightsail console, Lightsail API, AWS Command Line Interface (AWS CLI), or SDKs. For more information about Lightsail concepts and tasks, see the <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-how-to-set-up-access-keys-to-use-sdk-api-cli\">Amazon Lightsail Developer Guide</a>.</p> <p>This API Reference provides detailed information about the actions, data types, parameters, and errors of the Lightsail service. For more information about the supported AWS Regions, endpoints, and service quotas of the Lightsail service, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/lightsail.html\">Amazon Lightsail Endpoints and Quotas</a> in the <i>AWS General Reference</i>.</p>"
 }

@@ -44,11 +44,11 @@ declare class HealthLake extends Service {
    */
   describeFHIRExportJob(callback?: (err: AWSError, data: HealthLake.Types.DescribeFHIRExportJobResponse) => void): Request<HealthLake.Types.DescribeFHIRExportJobResponse, AWSError>;
   /**
-   * Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the job.
+   * Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the job. 
    */
   describeFHIRImportJob(params: HealthLake.Types.DescribeFHIRImportJobRequest, callback?: (err: AWSError, data: HealthLake.Types.DescribeFHIRImportJobResponse) => void): Request<HealthLake.Types.DescribeFHIRImportJobResponse, AWSError>;
   /**
-   * Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the job.
+   * Displays the properties of a FHIR import job, including the ID, ARN, name, and the status of the job. 
    */
   describeFHIRImportJob(callback?: (err: AWSError, data: HealthLake.Types.DescribeFHIRImportJobResponse) => void): Request<HealthLake.Types.DescribeFHIRImportJobResponse, AWSError>;
   /**
@@ -59,6 +59,30 @@ declare class HealthLake extends Service {
    * Lists all FHIR Data Stores that are in the user’s account, regardless of Data Store status.
    */
   listFHIRDatastores(callback?: (err: AWSError, data: HealthLake.Types.ListFHIRDatastoresResponse) => void): Request<HealthLake.Types.ListFHIRDatastoresResponse, AWSError>;
+  /**
+   *  Lists all FHIR export jobs associated with an account and their statuses. 
+   */
+  listFHIRExportJobs(params: HealthLake.Types.ListFHIRExportJobsRequest, callback?: (err: AWSError, data: HealthLake.Types.ListFHIRExportJobsResponse) => void): Request<HealthLake.Types.ListFHIRExportJobsResponse, AWSError>;
+  /**
+   *  Lists all FHIR export jobs associated with an account and their statuses. 
+   */
+  listFHIRExportJobs(callback?: (err: AWSError, data: HealthLake.Types.ListFHIRExportJobsResponse) => void): Request<HealthLake.Types.ListFHIRExportJobsResponse, AWSError>;
+  /**
+   *  Lists all FHIR import jobs associated with an account and their statuses. 
+   */
+  listFHIRImportJobs(params: HealthLake.Types.ListFHIRImportJobsRequest, callback?: (err: AWSError, data: HealthLake.Types.ListFHIRImportJobsResponse) => void): Request<HealthLake.Types.ListFHIRImportJobsResponse, AWSError>;
+  /**
+   *  Lists all FHIR import jobs associated with an account and their statuses. 
+   */
+  listFHIRImportJobs(callback?: (err: AWSError, data: HealthLake.Types.ListFHIRImportJobsResponse) => void): Request<HealthLake.Types.ListFHIRImportJobsResponse, AWSError>;
+  /**
+   *  Returns a list of all existing tags associated with a Data Store. 
+   */
+  listTagsForResource(params: HealthLake.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: HealthLake.Types.ListTagsForResourceResponse) => void): Request<HealthLake.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   *  Returns a list of all existing tags associated with a Data Store. 
+   */
+  listTagsForResource(callback?: (err: AWSError, data: HealthLake.Types.ListTagsForResourceResponse) => void): Request<HealthLake.Types.ListTagsForResourceResponse, AWSError>;
   /**
    * Begins a FHIR export job.
    */
@@ -75,10 +99,28 @@ declare class HealthLake extends Service {
    * Begins a FHIR Import job.
    */
   startFHIRImportJob(callback?: (err: AWSError, data: HealthLake.Types.StartFHIRImportJobResponse) => void): Request<HealthLake.Types.StartFHIRImportJobResponse, AWSError>;
+  /**
+   *  Adds a user specifed key and value tag to a Data Store. 
+   */
+  tagResource(params: HealthLake.Types.TagResourceRequest, callback?: (err: AWSError, data: HealthLake.Types.TagResourceResponse) => void): Request<HealthLake.Types.TagResourceResponse, AWSError>;
+  /**
+   *  Adds a user specifed key and value tag to a Data Store. 
+   */
+  tagResource(callback?: (err: AWSError, data: HealthLake.Types.TagResourceResponse) => void): Request<HealthLake.Types.TagResourceResponse, AWSError>;
+  /**
+   *  Removes tags from a Data Store. 
+   */
+  untagResource(params: HealthLake.Types.UntagResourceRequest, callback?: (err: AWSError, data: HealthLake.Types.UntagResourceResponse) => void): Request<HealthLake.Types.UntagResourceResponse, AWSError>;
+  /**
+   *  Removes tags from a Data Store. 
+   */
+  untagResource(callback?: (err: AWSError, data: HealthLake.Types.UntagResourceResponse) => void): Request<HealthLake.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace HealthLake {
+  export type AmazonResourceName = string;
   export type BoundedLengthString = string;
   export type ClientTokenString = string;
+  export type CmkType = "CUSTOMER_MANAGED_KMS_KEY"|"AWS_OWNED_KMS_KEY"|string;
   export interface CreateFHIRDatastoreRequest {
     /**
      * The user generated name for the Data Store.
@@ -89,6 +131,10 @@ declare namespace HealthLake {
      */
     DatastoreTypeVersion: FHIRVersion;
     /**
+     *  The server-side encryption key configuration for a customer provided encryption key specified for creating a Data Store. 
+     */
+    SseConfiguration?: SseConfiguration;
+    /**
      * Optional parameter to preload data upon creation of the Data Store. Currently, the only supported preloaded data is synthetic data generated from Synthea.
      */
     PreloadDataConfig?: PreloadDataConfig;
@@ -96,6 +142,10 @@ declare namespace HealthLake {
      * Optional user provided token used for ensuring idempotency.
      */
     ClientToken?: ClientTokenString;
+    /**
+     *  Resource tags that are applied to a Data Store when it is created. 
+     */
+    Tags?: TagList;
   }
   export interface CreateFHIRDatastoreResponse {
     /**
@@ -165,6 +215,10 @@ declare namespace HealthLake {
      * The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint with Data Store ID in the endpoint URL.
      */
     DatastoreEndpoint: String;
+    /**
+     *  The server-side encryption key configuration for a customer provided encryption key (CMK). 
+     */
+    SseConfiguration?: SseConfiguration;
     /**
      * The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.
      */
@@ -240,6 +294,7 @@ declare namespace HealthLake {
      */
     ImportJobProperties: ImportJobProperties;
   }
+  export type EncryptionKeyID = string;
   export interface ExportJobProperties {
     /**
      * The AWS generated ID for an export job.
@@ -278,6 +333,7 @@ declare namespace HealthLake {
      */
     Message?: Message;
   }
+  export type ExportJobPropertiesList = ExportJobProperties[];
   export type FHIRVersion = "R4"|string;
   export type IamRoleArn = string;
   export interface ImportJobProperties {
@@ -309,6 +365,7 @@ declare namespace HealthLake {
      * The input data configuration that was supplied when the Import job was created.
      */
     InputDataConfig: InputDataConfig;
+    JobOutputDataConfig?: OutputDataConfig;
     /**
      * The Amazon Resource Name (ARN) that gives Amazon HealthLake access to your input data.
      */
@@ -318,6 +375,7 @@ declare namespace HealthLake {
      */
     Message?: Message;
   }
+  export type ImportJobPropertiesList = ImportJobProperties[];
   export interface InputDataConfig {
     /**
      * The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. 
@@ -326,7 +384,17 @@ declare namespace HealthLake {
   }
   export type JobId = string;
   export type JobName = string;
-  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type JobStatus = "SUBMITTED"|"IN_PROGRESS"|"COMPLETED_WITH_ERRORS"|"COMPLETED"|"FAILED"|string;
+  export interface KmsEncryptionConfig {
+    /**
+     *  The type of customer-managed-key(CMK) used for encyrption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs. 
+     */
+    CmkType: CmkType;
+    /**
+     *  The KMS encryption key id/alias used to encrypt the Data Store contents at rest. 
+     */
+    KmsKeyId?: EncryptionKeyID;
+  }
   export interface ListFHIRDatastoresRequest {
     /**
      * Lists all filters associated with a FHIR Data Store request.
@@ -351,14 +419,106 @@ declare namespace HealthLake {
      */
     NextToken?: NextToken;
   }
+  export interface ListFHIRExportJobsRequest {
+    /**
+     *  This parameter limits the response to the export job with the specified Data Store ID. 
+     */
+    DatastoreId: DatastoreId;
+    /**
+     *  A pagination token used to identify the next page of results to return for a ListFHIRExportJobs query. 
+     */
+    NextToken?: NextToken;
+    /**
+     *  This parameter limits the number of results returned for a ListFHIRExportJobs to a maximum quantity specified by the user. 
+     */
+    MaxResults?: MaxResultsInteger;
+    /**
+     *  This parameter limits the response to the export job with the specified job name. 
+     */
+    JobName?: JobName;
+    /**
+     *  This parameter limits the response to the export jobs with the specified job status. 
+     */
+    JobStatus?: JobStatus;
+    /**
+     *  This parameter limits the response to FHIR export jobs submitted before a user specified date. 
+     */
+    SubmittedBefore?: Timestamp;
+    /**
+     *  This parameter limits the response to FHIR export jobs submitted after a user specified date. 
+     */
+    SubmittedAfter?: Timestamp;
+  }
+  export interface ListFHIRExportJobsResponse {
+    /**
+     *  The properties of listed FHIR export jobs, including the ID, ARN, name, and the status of the job. 
+     */
+    ExportJobPropertiesList: ExportJobPropertiesList;
+    /**
+     *  A pagination token used to identify the next page of results to return for a ListFHIRExportJobs query. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListFHIRImportJobsRequest {
+    /**
+     *  This parameter limits the response to the import job with the specified Data Store ID. 
+     */
+    DatastoreId: DatastoreId;
+    /**
+     *  A pagination token used to identify the next page of results to return for a ListFHIRImportJobs query. 
+     */
+    NextToken?: NextToken;
+    /**
+     *  This parameter limits the number of results returned for a ListFHIRImportJobs to a maximum quantity specified by the user. 
+     */
+    MaxResults?: MaxResultsInteger;
+    /**
+     *  This parameter limits the response to the import job with the specified job name. 
+     */
+    JobName?: JobName;
+    /**
+     *  This parameter limits the response to the import job with the specified job status. 
+     */
+    JobStatus?: JobStatus;
+    /**
+     *  This parameter limits the response to FHIR import jobs submitted before a user specified date. 
+     */
+    SubmittedBefore?: Timestamp;
+    /**
+     *  This parameter limits the response to FHIR import jobs submitted after a user specified date. 
+     */
+    SubmittedAfter?: Timestamp;
+  }
+  export interface ListFHIRImportJobsResponse {
+    /**
+     *  The properties of a listed FHIR import jobs, including the ID, ARN, name, and the status of the job. 
+     */
+    ImportJobPropertiesList: ImportJobPropertiesList;
+    /**
+     *  A pagination token used to identify the next page of results to return for a ListFHIRImportJobs query. 
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListTagsForResourceRequest {
+    /**
+     *  The Amazon Resource Name(ARN) of the Data Store for which tags are being added. 
+     */
+    ResourceARN: AmazonResourceName;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     *  Returns a list of tags associated with a Data Store. 
+     */
+    Tags?: TagList;
+  }
   export type MaxResultsInteger = number;
   export type Message = string;
   export type NextToken = string;
   export interface OutputDataConfig {
     /**
-     * The S3Uri is the user specified S3 location to which data will be exported from a FHIR Data Store.
+     *  The output data configuration that was supplied when the export job was created. 
      */
-    S3Uri?: S3Uri;
+    S3Configuration?: S3Configuration;
   }
   export interface PreloadDataConfig {
     /**
@@ -367,7 +527,23 @@ declare namespace HealthLake {
     PreloadDataType: PreloadDataType;
   }
   export type PreloadDataType = "SYNTHEA"|string;
+  export interface S3Configuration {
+    /**
+     *  The S3Uri is the user specified S3 location of the FHIR data to be imported into Amazon HealthLake. 
+     */
+    S3Uri: S3Uri;
+    /**
+     *  The KMS key ID used to access the S3 bucket. 
+     */
+    KmsKeyId: EncryptionKeyID;
+  }
   export type S3Uri = string;
+  export interface SseConfiguration {
+    /**
+     *  The KMS encryption configuration used to provide details for data encryption. 
+     */
+    KmsEncryptionConfig: KmsEncryptionConfig;
+  }
   export interface StartFHIRExportJobRequest {
     /**
      * The user generated name for an export job.
@@ -413,6 +589,7 @@ declare namespace HealthLake {
      * The input properties of the FHIR Import job in the StartFHIRImport job request.
      */
     InputDataConfig: InputDataConfig;
+    JobOutputDataConfig: OutputDataConfig;
     /**
      * The AWS-generated Data Store ID.
      */
@@ -441,7 +618,45 @@ declare namespace HealthLake {
     DatastoreId?: DatastoreId;
   }
   export type String = string;
+  export interface Tag {
+    /**
+     *  The key portion of a tag. Tag keys are case sensitive. 
+     */
+    Key: TagKey;
+    /**
+     *  The value portion of tag. Tag values are case sensitive. 
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagList = Tag[];
+  export interface TagResourceRequest {
+    /**
+     *  The Amazon Resource Name(ARN)that gives Amazon HealthLake access to the Data Store which tags are being added to. 
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     *  The user specified key and value pair tags being added to a Data Store. 
+     */
+    Tags: TagList;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     *  "The Amazon Resource Name(ARN) of the Data Store for which tags are being removed 
+     */
+    ResourceARN: AmazonResourceName;
+    /**
+     *  The keys for the tags to be removed from the Healthlake Data Store. 
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

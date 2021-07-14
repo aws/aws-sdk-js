@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.945.0-->
+<!--LATEST=2.946.0-->
 <!--ENTRYINSERT-->
+
+## 2.946.0
+* feature: ACM: Added support for RSA 3072 SSL certificate import
+* feature: DMS: Release of feature needed for ECA-Endpoint settings. This allows customer to delete a field in endpoint settings by using --exact-settings flag in modify-endpoint api. This also displays default values for certain required fields of endpoint settings in describe-endpoint-settings api.
+* feature: Glue: Add support for Event Driven Workflows
+* feature: HealthLake: General availability for Amazon HealthLake. StartFHIRImportJob and StartFHIRExportJob APIs now require AWS KMS parameter. For more information, see the Amazon HealthLake Documentation https://docs.aws.amazon.com/healthlake/index.html.
+* feature: Lightsail: This release adds support for the Amazon Lightsail object storage service, which allows you to create buckets and store objects.
+* feature: WellArchitected: This update provides support for Well-Architected API users to mark answer choices as not applicable.
 
 ## 2.945.0
 * feature: AmplifyBackend: Added Sign in with Apple OAuth provider.
