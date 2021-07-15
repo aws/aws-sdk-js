@@ -1729,7 +1729,7 @@ declare namespace LexModelBuildingService {
     tags?: TagList;
   }
   export type ListsOfUtterances = UtteranceList[];
-  export type Locale = "de-DE"|"en-AU"|"en-GB"|"en-US"|"es-419"|"es-ES"|"es-US"|"fr-FR"|"fr-CA"|"it-IT"|"ja-JP"|string;
+  export type Locale = "de-DE"|"en-AU"|"en-GB"|"en-IN"|"en-US"|"es-419"|"es-ES"|"es-US"|"fr-FR"|"fr-CA"|"it-IT"|"ja-JP"|string;
   export type LocaleList = Locale[];
   export interface LogSettingsRequest {
     /**

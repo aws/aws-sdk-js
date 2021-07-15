@@ -43,7 +43,7 @@
       ],
       "documentation": "<p>Associates a child asset with the given parent asset through a hierarchy defined in the parent asset's model. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/add-associated-assets.html\">Associating assets</a> in the <i>IoT SiteWise User Guide</i>.</p>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "BatchAssociateProjectAssets": {
@@ -226,7 +226,7 @@
       ],
       "documentation": "<p>Creates an asset from an existing asset model. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-assets.html\">Creating assets</a> in the <i>IoT SiteWise User Guide</i>.</p>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "CreateAssetModel": {
@@ -267,7 +267,7 @@
       ],
       "documentation": "<p>Creates an asset model from specified property and hierarchy definitions. You create assets from asset models. With asset models, you can easily create assets of the same type that have standardized definitions. Each asset created from a model inherits the asset model's property and hierarchy definitions. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/define-models.html\">Defining asset models</a> in the <i>IoT SiteWise User Guide</i>.</p>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "CreateDashboard": {
@@ -337,7 +337,7 @@
       ],
       "documentation": "<p>Creates a gateway, which is a virtual or edge device that delivers industrial data streams from local servers to IoT SiteWise. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html\">Ingesting data using a gateway</a> in the <i>IoT SiteWise User Guide</i>.</p>",
       "endpoint": {
-        "hostPrefix": "edge."
+        "hostPrefix": "api."
       }
     },
     "CreatePortal": {
@@ -474,7 +474,7 @@
       ],
       "documentation": "<p>Deletes an asset. This action can't be undone. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html\">Deleting assets and models</a> in the <i>IoT SiteWise User Guide</i>. </p> <note> <p>You can't delete an asset that's associated to another asset. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DisassociateAssets.html\">DisassociateAssets</a>.</p> </note>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "DeleteAssetModel": {
@@ -509,7 +509,7 @@
       ],
       "documentation": "<p>Deletes an asset model. This action can't be undone. You must delete all assets created from an asset model before you can delete the model. Also, you can't delete an asset model if a parent asset model exists that contains a property formula expression that depends on the asset model that you want to delete. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html\">Deleting assets and models</a> in the <i>IoT SiteWise User Guide</i>.</p>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "DeleteDashboard": {
@@ -569,7 +569,7 @@
       ],
       "documentation": "<p>Deletes a gateway from IoT SiteWise. When you delete a gateway, some of the gateway's files remain in your gateway's file system.</p>",
       "endpoint": {
-        "hostPrefix": "edge."
+        "hostPrefix": "api."
       }
     },
     "DeletePortal": {
@@ -699,7 +699,7 @@
       ],
       "documentation": "<p>Retrieves information about an asset.</p>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "DescribeAssetModel": {
@@ -730,7 +730,7 @@
       ],
       "documentation": "<p>Retrieves information about an asset model.</p>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "DescribeAssetProperty": {
@@ -761,7 +761,7 @@
       ],
       "documentation": "<p>Retrieves information about an asset property.</p> <note> <p>When you call this operation for an attribute property, this response includes the default attribute value that you define in the asset model. If you update the default value in the model, this operation's response includes the new default value.</p> </note> <p>This operation doesn't return the value of the asset property. To get the value of an asset property, use <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_GetAssetPropertyValue.html\">GetAssetPropertyValue</a>.</p>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "DescribeDashboard": {
@@ -819,7 +819,10 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Retrieves information about the default encryption configuration for the Amazon Web Services account in the default or specified Region. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html\">Key management</a> in the <i>IoT SiteWise User Guide</i>.</p>"
+      "documentation": "<p>Retrieves information about the default encryption configuration for the Amazon Web Services account in the default or specified Region. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html\">Key management</a> in the <i>IoT SiteWise User Guide</i>.</p>",
+      "endpoint": {
+        "hostPrefix": "api."
+      }
     },
     "DescribeGateway": {
       "name": "DescribeGateway",
@@ -849,7 +852,7 @@
       ],
       "documentation": "<p>Retrieves information about a gateway.</p>",
       "endpoint": {
-        "hostPrefix": "edge."
+        "hostPrefix": "api."
       }
     },
     "DescribeGatewayCapabilityConfiguration": {
@@ -880,7 +883,7 @@
       ],
       "documentation": "<p>Retrieves information about a gateway capability configuration. Each gateway capability defines data sources for a gateway. A capability configuration can contain multiple data source configurations. If you define OPC-UA sources for a gateway in the IoT SiteWise console, all of your OPC-UA sources are stored in one capability configuration. To list all capability configurations for a gateway, use <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGateway.html\">DescribeGateway</a>.</p>",
       "endpoint": {
-        "hostPrefix": "edge."
+        "hostPrefix": "api."
       }
     },
     "DescribeLoggingOptions": {
@@ -911,7 +914,7 @@
       ],
       "documentation": "<p>Retrieves the current IoT SiteWise logging options.</p>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "DescribePortal": {
@@ -1010,7 +1013,10 @@
           "shape": "ConflictingOperationException"
         }
       ],
-      "documentation": "<p>Retrieves information about the storage configuration for IoT SiteWise.</p>"
+      "documentation": "<p>Retrieves information about the storage configuration for IoT SiteWise.</p>",
+      "endpoint": {
+        "hostPrefix": "api."
+      }
     },
     "DisassociateAssets": {
       "name": "DisassociateAssets",
@@ -1040,7 +1046,7 @@
       ],
       "documentation": "<p>Disassociates a child asset from the given parent asset through a hierarchy defined in the parent asset's model.</p>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "GetAssetPropertyAggregates": {
@@ -1233,7 +1239,7 @@
       ],
       "documentation": "<p>Retrieves a paginated list of summaries of all asset models.</p>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "ListAssetRelationships": {
@@ -1264,7 +1270,7 @@
       ],
       "documentation": "<p>Retrieves a paginated list of asset relationships for an asset. You can use this operation to identify an asset's root asset and all associated assets between that asset and its root.</p>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "ListAssets": {
@@ -1295,7 +1301,7 @@
       ],
       "documentation": "<p>Retrieves a paginated list of asset summaries.</p> <p>You can use this operation to do the following:</p> <ul> <li> <p>List assets based on a specific asset model.</p> </li> <li> <p>List top-level assets.</p> </li> </ul> <p>You can't use this operation to list all assets. To retrieve summaries for all of your assets, use <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_ListAssetModels.html\">ListAssetModels</a> to get all of your asset model IDs. Then, use ListAssets to get all assets for each asset model.</p>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "ListAssociatedAssets": {
@@ -1326,7 +1332,7 @@
       ],
       "documentation": "<p>Retrieves a paginated list of associated assets.</p> <p>You can use this operation to do the following:</p> <ul> <li> <p>List child assets associated to a parent asset by a hierarchy that you specify.</p> </li> <li> <p>List an asset's parent asset.</p> </li> </ul>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "ListDashboards": {
@@ -1383,7 +1389,7 @@
       ],
       "documentation": "<p>Retrieves a paginated list of gateways.</p>",
       "endpoint": {
-        "hostPrefix": "edge."
+        "hostPrefix": "api."
       }
     },
     "ListPortals": {
@@ -1508,7 +1514,10 @@
           "shape": "UnauthorizedException"
         }
       ],
-      "documentation": "<p>Retrieves the list of tags for an IoT SiteWise resource.</p>"
+      "documentation": "<p>Retrieves the list of tags for an IoT SiteWise resource.</p>",
+      "endpoint": {
+        "hostPrefix": "api."
+      }
     },
     "PutDefaultEncryptionConfiguration": {
       "name": "PutDefaultEncryptionConfiguration",
@@ -1539,7 +1548,10 @@
           "shape": "ConflictingOperationException"
         }
       ],
-      "documentation": "<p>Sets the default encryption configuration for the Amazon Web Services account. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html\">Key management</a> in the <i>IoT SiteWise User Guide</i>.</p>"
+      "documentation": "<p>Sets the default encryption configuration for the Amazon Web Services account. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/key-management.html\">Key management</a> in the <i>IoT SiteWise User Guide</i>.</p>",
+      "endpoint": {
+        "hostPrefix": "api."
+      }
     },
     "PutLoggingOptions": {
       "name": "PutLoggingOptions",
@@ -1572,7 +1584,7 @@
       ],
       "documentation": "<p>Sets logging options for IoT SiteWise.</p>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "PutStorageConfiguration": {
@@ -1610,7 +1622,10 @@
           "shape": "ConflictingOperationException"
         }
       ],
-      "documentation": "<p>Configures storage settings for IoT SiteWise.</p>"
+      "documentation": "<p>Configures storage settings for IoT SiteWise.</p>",
+      "endpoint": {
+        "hostPrefix": "api."
+      }
     },
     "TagResource": {
       "name": "TagResource",
@@ -1650,7 +1665,10 @@
           "shape": "TooManyTagsException"
         }
       ],
-      "documentation": "<p>Adds tags to an IoT SiteWise resource. If a tag already exists for the resource, this operation updates the tag's value.</p>"
+      "documentation": "<p>Adds tags to an IoT SiteWise resource. If a tag already exists for the resource, this operation updates the tag's value.</p>",
+      "endpoint": {
+        "hostPrefix": "api."
+      }
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -1687,7 +1705,10 @@
           "shape": "UnauthorizedException"
         }
       ],
-      "documentation": "<p>Removes a tag from an IoT SiteWise resource.</p>"
+      "documentation": "<p>Removes a tag from an IoT SiteWise resource.</p>",
+      "endpoint": {
+        "hostPrefix": "api."
+      }
     },
     "UpdateAccessPolicy": {
       "name": "UpdateAccessPolicy",
@@ -1756,7 +1777,7 @@
       ],
       "documentation": "<p>Updates an asset's name. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html\">Updating assets and models</a> in the <i>IoT SiteWise User Guide</i>.</p>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "UpdateAssetModel": {
@@ -1797,7 +1818,7 @@
       ],
       "documentation": "<p>Updates an asset model and all of the assets that were created from the model. Each asset created from the model inherits the updated asset model's property and hierarchy definitions. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html\">Updating assets and models</a> in the <i>IoT SiteWise User Guide</i>.</p> <important> <p>This operation overwrites the existing model with the provided model. To avoid deleting your asset model's properties or hierarchies, you must include their IDs and definitions in the updated asset model payload. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetModel.html\">DescribeAssetModel</a>.</p> <p>If you remove a property from an asset model, IoT SiteWise deletes all previous data for that property. If you remove a hierarchy definition from an asset model, IoT SiteWise disassociates every asset associated with that hierarchy. You can't change the type or data type of an existing property.</p> </important>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "UpdateAssetProperty": {
@@ -1828,7 +1849,7 @@
       ],
       "documentation": "<p>Updates an asset property's alias and notification state.</p> <important> <p>This operation overwrites the property's existing alias and notification state. To keep your existing property's alias or notification state, you must include the existing values in the UpdateAssetProperty request. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeAssetProperty.html\">DescribeAssetProperty</a>.</p> </important>",
       "endpoint": {
-        "hostPrefix": "model."
+        "hostPrefix": "api."
       }
     },
     "UpdateDashboard": {
@@ -1891,7 +1912,7 @@
       ],
       "documentation": "<p>Updates a gateway's name.</p>",
       "endpoint": {
-        "hostPrefix": "edge."
+        "hostPrefix": "api."
       }
     },
     "UpdateGatewayCapabilityConfiguration": {
@@ -1929,7 +1950,7 @@
       ],
       "documentation": "<p>Updates a gateway capability configuration or defines a new capability configuration. Each gateway capability defines data sources for a gateway. A capability configuration can contain multiple data source configurations. If you define OPC-UA sources for a gateway in the IoT SiteWise console, all of your OPC-UA sources are stored in one capability configuration. To list all capability configurations for a gateway, use <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGateway.html\">DescribeGateway</a>.</p>",
       "endpoint": {
-        "hostPrefix": "edge."
+        "hostPrefix": "api."
       }
     },
     "UpdatePortal": {

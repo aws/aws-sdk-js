@@ -247,6 +247,20 @@
       },
       "documentation": "<p>Associates an IAM instance profile with a running or stopped instance. You cannot associate more than one IAM instance profile with an instance.</p>"
     },
+    "AssociateInstanceEventWindow": {
+      "name": "AssociateInstanceEventWindow",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssociateInstanceEventWindowRequest"
+      },
+      "output": {
+        "shape": "AssociateInstanceEventWindowResult"
+      },
+      "documentation": "<p>Associates one or more targets with an event window. Only one type of target (instance IDs, Dedicated Host IDs, or tags) can be specified with an event window.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/monitoring-instances-status-check_sched.html#event-windows\">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+    },
     "AssociateRouteTable": {
       "name": "AssociateRouteTable",
       "http": {
@@ -797,6 +811,20 @@
         "shape": "CreateImageResult"
       },
       "documentation": "<p>Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped.</p> <p>If you customized your instance with instance store volumes or EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html\">Creating Amazon EBS-Backed Linux AMIs</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+    },
+    "CreateInstanceEventWindow": {
+      "name": "CreateInstanceEventWindow",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateInstanceEventWindowRequest"
+      },
+      "output": {
+        "shape": "CreateInstanceEventWindowResult"
+      },
+      "documentation": "<p>Creates an event window in which scheduled events for the associated Amazon EC2 instances can run.</p> <p>You can define either a set of time ranges or a cron expression when creating the event window, but not both. All event window times are in UTC.</p> <p>You can create up to 200 event windows per Amazon Web Services Region.</p> <p>When you create the event window, targets (instance IDs, Dedicated Host IDs, or tags) are not yet associated with it. To ensure that the event window can be used, you must associate one or more targets with it by using the <a>AssociateInstanceEventWindow</a> API.</p> <important> <p>Event windows are applicable only for scheduled events that stop, reboot, or terminate instances.</p> <p>Event windows are <i>not</i> applicable for:</p> <ul> <li> <p>Expedited scheduled events and network maintenance events. </p> </li> <li> <p>Unscheduled maintenance such as AutoRecovery and unplanned reboots.</p> </li> </ul> </important> <p>For more information, see <a href=\"https://docs.aws.amazon.com/monitoring-instances-status-check_sched.html#event-windows\">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>"
     },
     "CreateInstanceExportTask": {
       "name": "CreateInstanceExportTask",
@@ -1595,6 +1623,20 @@
       },
       "documentation": "<p>Deletes the specified Amazon FPGA Image (AFI).</p>"
     },
+    "DeleteInstanceEventWindow": {
+      "name": "DeleteInstanceEventWindow",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteInstanceEventWindowRequest"
+      },
+      "output": {
+        "shape": "DeleteInstanceEventWindowResult"
+      },
+      "documentation": "<p>Deletes the specified event window.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/monitoring-instances-status-check_sched.html#event-windows\">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+    },
     "DeleteInternetGateway": {
       "name": "DeleteInternetGateway",
       "http": {
@@ -2208,7 +2250,7 @@
       "output": {
         "shape": "DeregisterInstanceEventNotificationAttributesResult"
       },
-      "documentation": "<p>Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.</p>"
+      "documentation": "<p>c</p> <p>Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.</p>"
     },
     "DeregisterTransitGatewayMulticastGroupMembers": {
       "name": "DeregisterTransitGatewayMulticastGroupMembers",
@@ -2839,6 +2881,20 @@
         "shape": "DescribeInstanceEventNotificationAttributesResult"
       },
       "documentation": "<p>Describes the tag keys that are registered to appear in scheduled event notifications for resources in the current Region.</p>"
+    },
+    "DescribeInstanceEventWindows": {
+      "name": "DescribeInstanceEventWindows",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeInstanceEventWindowsRequest"
+      },
+      "output": {
+        "shape": "DescribeInstanceEventWindowsResult"
+      },
+      "documentation": "<p>Describes the specified event windows or all event windows.</p> <p>If you specify event window IDs, the output includes information for only the specified event windows. If you specify filters, the output includes information for only those event windows that meet the filter criteria. If you do not specify event windows IDs or filters, the output includes information for all event windows, which can affect performance. We recommend that you use pagination to ensure that the operation returns quickly and successfully. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/monitoring-instances-status-check_sched.html#event-windows\">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>"
     },
     "DescribeInstanceStatus": {
       "name": "DescribeInstanceStatus",
@@ -4197,6 +4253,20 @@
       },
       "documentation": "<p>Disassociates an IAM instance profile from a running or stopped instance.</p> <p>Use <a>DescribeIamInstanceProfileAssociations</a> to get the association ID.</p>"
     },
+    "DisassociateInstanceEventWindow": {
+      "name": "DisassociateInstanceEventWindow",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisassociateInstanceEventWindowRequest"
+      },
+      "output": {
+        "shape": "DisassociateInstanceEventWindowResult"
+      },
+      "documentation": "<p>Disassociates one or more targets from an event window.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/monitoring-instances-status-check_sched.html#event-windows\">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>"
+    },
     "DisassociateRouteTable": {
       "name": "DisassociateRouteTable",
       "http": {
@@ -5071,6 +5141,20 @@
         "shape": "ModifyInstanceEventStartTimeResult"
       },
       "documentation": "<p>Modifies the start time for a scheduled Amazon EC2 instance event.</p>"
+    },
+    "ModifyInstanceEventWindow": {
+      "name": "ModifyInstanceEventWindow",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyInstanceEventWindowRequest"
+      },
+      "output": {
+        "shape": "ModifyInstanceEventWindowResult"
+      },
+      "documentation": "<p>Modifies the specified event window.</p> <p>You can define either a set of time ranges or a cron expression when modifying the event window, but not both.</p> <p>To modify the targets associated with the event window, use the <a>AssociateInstanceEventWindow</a> and <a>DisassociateInstanceEventWindow</a> API.</p> <p>If Amazon Web Services has already scheduled an event, modifying an event window won't change the time of the scheduled event.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/monitoring-instances-status-check_sched.html#event-windows\">Define event windows for scheduled events</a> in the <i>Amazon EC2 User Guide</i>.</p>"
     },
     "ModifyInstanceMetadataOptions": {
       "name": "ModifyInstanceMetadataOptions",
@@ -7490,6 +7574,37 @@
           "shape": "IamInstanceProfileAssociation",
           "documentation": "<p>Information about the IAM instance profile association.</p>",
           "locationName": "iamInstanceProfileAssociation"
+        }
+      }
+    },
+    "AssociateInstanceEventWindowRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceEventWindowId",
+        "AssociationTarget"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "InstanceEventWindowId": {
+          "shape": "InstanceEventWindowId",
+          "documentation": "<p>The ID of the event window.</p>"
+        },
+        "AssociationTarget": {
+          "shape": "InstanceEventWindowAssociationRequest",
+          "documentation": "<p>One or more targets associated with the specified event window.</p>"
+        }
+      }
+    },
+    "AssociateInstanceEventWindowResult": {
+      "type": "structure",
+      "members": {
+        "InstanceEventWindow": {
+          "shape": "InstanceEventWindow",
+          "documentation": "<p>Information about the event window.</p>",
+          "locationName": "instanceEventWindow"
         }
       }
     },
@@ -11383,6 +11498,43 @@
         }
       }
     },
+    "CreateInstanceEventWindowRequest": {
+      "type": "structure",
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name of the event window.</p>"
+        },
+        "TimeRanges": {
+          "shape": "InstanceEventWindowTimeRangeRequestSet",
+          "documentation": "<p>The time range for the event window. If you specify a time range, you can't specify a cron expression.</p>",
+          "locationName": "TimeRange"
+        },
+        "CronExpression": {
+          "shape": "InstanceEventWindowCronExpression",
+          "documentation": "<p>The cron expression for the event window, for example, <code>* 0-4,20-23 * * 1,5</code>. If you specify a cron expression, you can't specify a time range.</p> <p>Constraints:</p> <ul> <li> <p>Only hour and day of the week values are supported.</p> </li> <li> <p>For day of the week values, you can specify either integers <code>0</code> through <code>6</code>, or alternative single values <code>SUN</code> through <code>SAT</code>.</p> </li> <li> <p>The minute, month, and year must be specified by <code>*</code>.</p> </li> <li> <p>The hour value must be one or a multiple range, for example, <code>0-4</code> or <code>0-4,20-23</code>.</p> </li> <li> <p>Each hour range must be &gt;= 2 hours, for example, <code>0-2</code> or <code>20-23</code>.</p> </li> <li> <p>The event window must be &gt;= 4 hours. The combined total time ranges in the event window must be &gt;= 4 hours.</p> </li> </ul> <p>For more information about cron expressions, see <a href=\"https://en.wikipedia.org/wiki/Cron\">cron</a> on the <i>Wikipedia website</i>.</p>"
+        },
+        "TagSpecifications": {
+          "shape": "TagSpecificationList",
+          "documentation": "<p>The tags to apply to the event window.</p>",
+          "locationName": "TagSpecification"
+        }
+      }
+    },
+    "CreateInstanceEventWindowResult": {
+      "type": "structure",
+      "members": {
+        "InstanceEventWindow": {
+          "shape": "InstanceEventWindow",
+          "documentation": "<p>Information about the event window.</p>",
+          "locationName": "instanceEventWindow"
+        }
+      }
+    },
     "CreateInstanceExportTaskRequest": {
       "type": "structure",
       "required": [
@@ -13805,6 +13957,13 @@
     "DedicatedHostId": {
       "type": "string"
     },
+    "DedicatedHostIdList": {
+      "type": "list",
+      "member": {
+        "shape": "DedicatedHostId",
+        "locationName": "item"
+      }
+    },
     "DefaultNetworkCardIndex": {
       "type": "integer"
     },
@@ -14143,6 +14302,36 @@
           "shape": "Boolean",
           "documentation": "<p>Is <code>true</code> if the request succeeds, and an error otherwise.</p>",
           "locationName": "return"
+        }
+      }
+    },
+    "DeleteInstanceEventWindowRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceEventWindowId"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "ForceDelete": {
+          "shape": "Boolean",
+          "documentation": "<p>Specify <code>true</code> to force delete the event window. Use the force delete parameter if the event window is currently associated with targets.</p>"
+        },
+        "InstanceEventWindowId": {
+          "shape": "InstanceEventWindowId",
+          "documentation": "<p>The ID of the event window.</p>"
+        }
+      }
+    },
+    "DeleteInstanceEventWindowResult": {
+      "type": "structure",
+      "members": {
+        "InstanceEventWindowState": {
+          "shape": "InstanceEventWindowStateChange",
+          "documentation": "<p>The state of the event window.</p>",
+          "locationName": "instanceEventWindowState"
         }
       }
     },
@@ -14784,7 +14973,7 @@
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>The tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string.</p> <p>If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete AWS-generated tags (tags that have the <code>aws:</code> prefix).</p>",
+          "documentation": "<p>The tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string.</p> <p>If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete Amazon Web Services-generated tags (tags that have the <code>aws:</code> prefix).</p>",
           "locationName": "tag"
         }
       }
@@ -17335,6 +17524,49 @@
           "shape": "InstanceTagNotificationAttribute",
           "documentation": "<p>Information about the registered tag keys.</p>",
           "locationName": "instanceTagAttribute"
+        }
+      }
+    },
+    "DescribeInstanceEventWindowsRequest": {
+      "type": "structure",
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "InstanceEventWindowIds": {
+          "shape": "InstanceEventWindowIdSet",
+          "documentation": "<p>The IDs of the event windows.</p>",
+          "locationName": "InstanceEventWindowId"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters.</p> <ul> <li> <p> <code>dedicated-host-id</code> - The event windows associated with the specified Dedicated Host ID.</p> </li> <li> <p> <code>event-window-name</code> - The event windows associated with the specified names. </p> </li> <li> <p> <code>instance-id</code> - The event windows associated with the specified instance ID.</p> </li> <li> <p> <code>instance-tag</code> - The event windows associated with the specified tag and value.</p> </li> <li> <p> <code>instance-tag-key</code> - The event windows associated with the specified tag key, regardless of the value.</p> </li> <li> <p> <code>instance-tag-value</code> - The event windows associated with the specified tag value, regardless of the key.</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the event window. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>CMX</code>, specify <code>tag:Owner</code> for the filter name and <code>CMX</code> for the filter value. </p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the event window. Use this filter to find all event windows that have a tag with a specific key, regardless of the tag value. </p> </li> <li> <p> <code>tag-value</code> - The value of a tag assigned to the event window. Use this filter to find all event windows that have a tag with a specific value, regardless of the tag key. </p> </li> </ul>",
+          "locationName": "Filter"
+        },
+        "MaxResults": {
+          "shape": "ResultRange",
+          "documentation": "<p>The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned <code>NextToken</code> value. This value can be between 20 and 500. You cannot specify this parameter and the event window IDs parameter in the same call.</p>"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to request the next page of results.</p>"
+        }
+      },
+      "documentation": "<para>Describe instance event windows by InstanceEventWindow.</para>"
+    },
+    "DescribeInstanceEventWindowsResult": {
+      "type": "structure",
+      "members": {
+        "InstanceEventWindows": {
+          "shape": "InstanceEventWindowSet",
+          "documentation": "<p>Information about the event windows.</p>",
+          "locationName": "instanceEventWindowSet"
+        },
+        "NextToken": {
+          "shape": "String",
+          "documentation": "<p>The token to use to retrieve the next page of results. This value is <code>null</code> when there are no more results to return. </p>",
+          "locationName": "nextToken"
         }
       }
     },
@@ -21619,6 +21851,37 @@
         }
       }
     },
+    "DisassociateInstanceEventWindowRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceEventWindowId",
+        "AssociationTarget"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "InstanceEventWindowId": {
+          "shape": "InstanceEventWindowId",
+          "documentation": "<p>The ID of the event window.</p>"
+        },
+        "AssociationTarget": {
+          "shape": "InstanceEventWindowDisassociationRequest",
+          "documentation": "<p>One or more targets to disassociate from the specified event window.</p>"
+        }
+      }
+    },
+    "DisassociateInstanceEventWindowResult": {
+      "type": "structure",
+      "members": {
+        "InstanceEventWindow": {
+          "shape": "InstanceEventWindow",
+          "documentation": "<p>Information about the event window.</p>",
+          "locationName": "instanceEventWindow"
+        }
+      }
+    },
     "DisassociateRouteTableRequest": {
       "type": "structure",
       "required": [
@@ -25839,6 +26102,11 @@
         "host"
       ]
     },
+    "Hour": {
+      "type": "integer",
+      "max": 23,
+      "min": 0
+    },
     "HttpTokensState": {
       "type": "string",
       "enum": [
@@ -27598,6 +27866,216 @@
     "InstanceEventId": {
       "type": "string"
     },
+    "InstanceEventWindow": {
+      "type": "structure",
+      "members": {
+        "InstanceEventWindowId": {
+          "shape": "InstanceEventWindowId",
+          "documentation": "<p>The ID of the event window.</p>",
+          "locationName": "instanceEventWindowId"
+        },
+        "TimeRanges": {
+          "shape": "InstanceEventWindowTimeRangeList",
+          "documentation": "<p>One or more time ranges defined for the event window.</p>",
+          "locationName": "timeRangeSet"
+        },
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name of the event window.</p>",
+          "locationName": "name"
+        },
+        "CronExpression": {
+          "shape": "InstanceEventWindowCronExpression",
+          "documentation": "<p>The cron expression defined for the event window.</p>",
+          "locationName": "cronExpression"
+        },
+        "AssociationTarget": {
+          "shape": "InstanceEventWindowAssociationTarget",
+          "documentation": "<p>One or more targets associated with the event window.</p>",
+          "locationName": "associationTarget"
+        },
+        "State": {
+          "shape": "InstanceEventWindowState",
+          "documentation": "<p>The current state of the event window.</p>",
+          "locationName": "state"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The instance tags associated with the event window.</p>",
+          "locationName": "tagSet"
+        }
+      },
+      "documentation": "<p>The event window.</p>"
+    },
+    "InstanceEventWindowAssociationRequest": {
+      "type": "structure",
+      "members": {
+        "InstanceIds": {
+          "shape": "InstanceIdList",
+          "documentation": "<p>The IDs of the instances to associate with the event window. If the instance is on a Dedicated Host, you can't specify the Instance ID parameter; you must use the Dedicated Host ID parameter.</p>",
+          "locationName": "InstanceId"
+        },
+        "InstanceTags": {
+          "shape": "TagList",
+          "documentation": "<p>The instance tags to associate with the event window. Any instances associated with the tags will be associated with the event window.</p>",
+          "locationName": "InstanceTag"
+        },
+        "DedicatedHostIds": {
+          "shape": "DedicatedHostIdList",
+          "documentation": "<p>The IDs of the Dedicated Hosts to associate with the event window.</p>",
+          "locationName": "DedicatedHostId"
+        }
+      },
+      "documentation": "<p>One or more targets associated with the specified event window. Only one <i>type</i> of target (instance ID, instance tag, or Dedicated Host ID) can be associated with an event window.</p>"
+    },
+    "InstanceEventWindowAssociationTarget": {
+      "type": "structure",
+      "members": {
+        "InstanceIds": {
+          "shape": "InstanceIdList",
+          "documentation": "<p>The IDs of the instances associated with the event window.</p>",
+          "locationName": "instanceIdSet"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The instance tags associated with the event window. Any instances associated with the tags will be associated with the event window.</p>",
+          "locationName": "tagSet"
+        },
+        "DedicatedHostIds": {
+          "shape": "DedicatedHostIdList",
+          "documentation": "<p>The IDs of the Dedicated Hosts associated with the event window.</p>",
+          "locationName": "dedicatedHostIdSet"
+        }
+      },
+      "documentation": "<p>One or more targets associated with the event window.</p>"
+    },
+    "InstanceEventWindowCronExpression": {
+      "type": "string"
+    },
+    "InstanceEventWindowDisassociationRequest": {
+      "type": "structure",
+      "members": {
+        "InstanceIds": {
+          "shape": "InstanceIdList",
+          "documentation": "<p>The IDs of the instances to disassociate from the event window.</p>",
+          "locationName": "InstanceId"
+        },
+        "InstanceTags": {
+          "shape": "TagList",
+          "documentation": "<p>The instance tags to disassociate from the event window. Any instances associated with the tags will be disassociated from the event window.</p>",
+          "locationName": "InstanceTag"
+        },
+        "DedicatedHostIds": {
+          "shape": "DedicatedHostIdList",
+          "documentation": "<p>The IDs of the Dedicated Hosts to disassociate from the event window.</p>",
+          "locationName": "DedicatedHostId"
+        }
+      },
+      "documentation": "<p>The targets to disassociate from the specified event window.</p>"
+    },
+    "InstanceEventWindowId": {
+      "type": "string"
+    },
+    "InstanceEventWindowIdSet": {
+      "type": "list",
+      "member": {
+        "shape": "InstanceEventWindowId",
+        "locationName": "InstanceEventWindowId"
+      }
+    },
+    "InstanceEventWindowSet": {
+      "type": "list",
+      "member": {
+        "shape": "InstanceEventWindow",
+        "locationName": "item"
+      }
+    },
+    "InstanceEventWindowState": {
+      "type": "string",
+      "enum": [
+        "creating",
+        "deleting",
+        "active",
+        "deleted"
+      ]
+    },
+    "InstanceEventWindowStateChange": {
+      "type": "structure",
+      "members": {
+        "InstanceEventWindowId": {
+          "shape": "InstanceEventWindowId",
+          "documentation": "<p>The ID of the event window.</p>",
+          "locationName": "instanceEventWindowId"
+        },
+        "State": {
+          "shape": "InstanceEventWindowState",
+          "documentation": "<p>The current state of the event window.</p>",
+          "locationName": "state"
+        }
+      },
+      "documentation": "<p>The state of the event window.</p>"
+    },
+    "InstanceEventWindowTimeRange": {
+      "type": "structure",
+      "members": {
+        "StartWeekDay": {
+          "shape": "WeekDay",
+          "documentation": "<p>The day on which the time range begins.</p>",
+          "locationName": "startWeekDay"
+        },
+        "StartHour": {
+          "shape": "Hour",
+          "documentation": "<p>The hour when the time range begins.</p>",
+          "locationName": "startHour"
+        },
+        "EndWeekDay": {
+          "shape": "WeekDay",
+          "documentation": "<p>The day on which the time range ends.</p>",
+          "locationName": "endWeekDay"
+        },
+        "EndHour": {
+          "shape": "Hour",
+          "documentation": "<p>The hour when the time range ends.</p>",
+          "locationName": "endHour"
+        }
+      },
+      "documentation": "<p>The start day and time and the end day and time of the time range, in UTC.</p>"
+    },
+    "InstanceEventWindowTimeRangeList": {
+      "type": "list",
+      "member": {
+        "shape": "InstanceEventWindowTimeRange",
+        "locationName": "item"
+      }
+    },
+    "InstanceEventWindowTimeRangeRequest": {
+      "type": "structure",
+      "members": {
+        "StartWeekDay": {
+          "shape": "WeekDay",
+          "documentation": "<p>The day on which the time range begins.</p>"
+        },
+        "StartHour": {
+          "shape": "Hour",
+          "documentation": "<p>The hour when the time range begins.</p>"
+        },
+        "EndWeekDay": {
+          "shape": "WeekDay",
+          "documentation": "<p>The day on which the time range ends.</p>"
+        },
+        "EndHour": {
+          "shape": "Hour",
+          "documentation": "<p>The hour when the time range ends.</p>"
+        }
+      },
+      "documentation": "<p>The start day and time and the end day and time of the time range, in UTC.</p>"
+    },
+    "InstanceEventWindowTimeRangeRequestSet": {
+      "type": "list",
+      "member": {
+        "shape": "InstanceEventWindowTimeRangeRequest"
+      }
+    },
     "InstanceExportDetails": {
       "type": "structure",
       "members": {
@@ -27639,6 +28117,13 @@
     },
     "InstanceId": {
       "type": "string"
+    },
+    "InstanceIdList": {
+      "type": "list",
+      "member": {
+        "shape": "InstanceId",
+        "locationName": "item"
+      }
     },
     "InstanceIdSet": {
       "type": "list",
@@ -31924,6 +32409,45 @@
         "Event": {
           "shape": "InstanceStatusEvent",
           "locationName": "event"
+        }
+      }
+    },
+    "ModifyInstanceEventWindowRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceEventWindowId"
+      ],
+      "members": {
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "Name": {
+          "shape": "String",
+          "documentation": "<p>The name of the event window.</p>"
+        },
+        "InstanceEventWindowId": {
+          "shape": "InstanceEventWindowId",
+          "documentation": "<p>The ID of the event window.</p>"
+        },
+        "TimeRanges": {
+          "shape": "InstanceEventWindowTimeRangeRequestSet",
+          "documentation": "<p>The time ranges of the event window.</p>",
+          "locationName": "TimeRange"
+        },
+        "CronExpression": {
+          "shape": "InstanceEventWindowCronExpression",
+          "documentation": "<p>The cron expression of the event window, for example, <code>* 0-4,20-23 * * 1,5</code>.</p> <p>Constraints:</p> <ul> <li> <p>Only hour and day of the week values are supported.</p> </li> <li> <p>For day of the week values, you can specify either integers <code>0</code> through <code>6</code>, or alternative single values <code>SUN</code> through <code>SAT</code>.</p> </li> <li> <p>The minute, month, and year must be specified by <code>*</code>.</p> </li> <li> <p>The hour value must be one or a multiple range, for example, <code>0-4</code> or <code>0-4,20-23</code>.</p> </li> <li> <p>Each hour range must be &gt;= 2 hours, for example, <code>0-2</code> or <code>20-23</code>.</p> </li> <li> <p>The event window must be &gt;= 4 hours. The combined total time ranges in the event window must be &gt;= 4 hours.</p> </li> </ul> <p>For more information about cron expressions, see <a href=\"https://en.wikipedia.org/wiki/Cron\">cron</a> on the <i>Wikipedia website</i>.</p>"
+        }
+      }
+    },
+    "ModifyInstanceEventWindowResult": {
+      "type": "structure",
+      "members": {
+        "InstanceEventWindow": {
+          "shape": "InstanceEventWindow",
+          "documentation": "<p>Information about the event window.</p>",
+          "locationName": "instanceEventWindow"
         }
       }
     },
@@ -37973,6 +38497,7 @@
         "import-image-task",
         "import-snapshot-task",
         "instance",
+        "instance-event-window",
         "internet-gateway",
         "key-pair",
         "launch-template",
@@ -38252,6 +38777,11 @@
           "locationName": "prefixList"
         }
       }
+    },
+    "ResultRange": {
+      "type": "integer",
+      "max": 500,
+      "min": 20
     },
     "RevokeClientVpnIngressRequest": {
       "type": "structure",
@@ -41040,7 +41570,7 @@
         },
         "BlockDurationMinutes": {
           "shape": "Integer",
-          "documentation": "<p>The required duration for the Spot Instances (also known as Spot blocks), in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).</p> <p>The duration period starts as soon as your Spot Instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot Instance for termination and provides a Spot Instance termination notice, which gives the instance a two-minute warning before it terminates.</p> <p>You can't specify an Availability Zone group or a launch group if you specify a duration.</p> <p>New accounts or accounts with no previous billing history with Amazon Web Services are not eligible for Spot Instances with a defined duration (also known as Spot blocks).</p>"
+          "documentation": "<p>Deprecated.</p>"
         },
         "ValidUntil": {
           "shape": "DateTime",
@@ -41864,7 +42394,7 @@
       "members": {
         "ResourceType": {
           "shape": "ResourceType",
-          "documentation": "<p>The type of resource to tag. Currently, the resource types that support tagging on creation are: <code>capacity-reservation</code> | <code>carrier-gateway</code> | <code>client-vpn-endpoint</code> | <code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>egress-only-internet-gateway</code> | <code>elastic-ip</code> | <code>elastic-gpu</code> | <code>export-image-task</code> | <code>export-instance-task</code> | <code>fleet</code> | <code>fpga-image</code> | <code>host-reservation</code> | <code>image</code>| <code>import-image-task</code> | <code>import-snapshot-task</code> | <code>instance</code> | <code>internet-gateway</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> | <code>key-pair</code> | <code>launch-template</code> | <code>local-gateway-route-table-vpc-association</code> | <code>placement-group</code> | <code>prefix-list</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-interface</code> | <code>reserved-instances</code> |<code>route-table</code> | <code>security-group</code>| <code>snapshot</code> | <code>spot-fleet-request</code> | <code>spot-instances-request</code> | <code>snapshot</code> | <code>subnet</code> | <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | <code>transit-gateway-multicast-domain</code> | <code>transit-gateway-route-table</code> | <code>volume</code> |<code>vpc</code> | <code> vpc-peering-connection</code> | <code>vpc-endpoint</code> (for interface and gateway endpoints) | <code>vpc-endpoint-service</code> (for AWS PrivateLink) | <code>vpc-flow-log</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>To tag a resource after it has been created, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html\">CreateTags</a>.</p>",
+          "documentation": "<p>The type of resource to tag. Currently, the resource types that support tagging on creation are: <code>capacity-reservation</code> | <code>carrier-gateway</code> | <code>client-vpn-endpoint</code> | <code>customer-gateway</code> | <code>dedicated-host</code> | <code>dhcp-options</code> | <code>egress-only-internet-gateway</code> | <code>elastic-ip</code> | <code>elastic-gpu</code> | <code>export-image-task</code> | <code>export-instance-task</code> | <code>fleet</code> | <code>fpga-image</code> | <code>host-reservation</code> | <code>image</code>| <code>import-image-task</code> | <code>import-snapshot-task</code> | <code>instance</code> | <code>instance-event-window</code> | <code>internet-gateway</code> | <code>ipv4pool-ec2</code> | <code>ipv6pool-ec2</code> | <code>key-pair</code> | <code>launch-template</code> | <code>local-gateway-route-table-vpc-association</code> | <code>placement-group</code> | <code>prefix-list</code> | <code>natgateway</code> | <code>network-acl</code> | <code>network-interface</code> | <code>reserved-instances</code> |<code>route-table</code> | <code>security-group</code>| <code>snapshot</code> | <code>spot-fleet-request</code> | <code>spot-instances-request</code> | <code>snapshot</code> | <code>subnet</code> | <code>traffic-mirror-filter</code> | <code>traffic-mirror-session</code> | <code>traffic-mirror-target</code> | <code>transit-gateway</code> | <code>transit-gateway-attachment</code> | <code>transit-gateway-multicast-domain</code> | <code>transit-gateway-route-table</code> | <code>volume</code> |<code>vpc</code> | <code> vpc-peering-connection</code> | <code>vpc-endpoint</code> (for interface and gateway endpoints) | <code>vpc-endpoint-service</code> (for PrivateLink) | <code>vpc-flow-log</code> | <code>vpn-connection</code> | <code>vpn-gateway</code>.</p> <p>To tag a resource after it has been created, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html\">CreateTags</a>.</p>",
           "locationName": "resourceType"
         },
         "Tags": {
@@ -46091,6 +46621,18 @@
       "member": {
         "shape": "VpnTunnelOptionsSpecification"
       }
+    },
+    "WeekDay": {
+      "type": "string",
+      "enum": [
+        "sunday",
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday"
+      ]
     },
     "WithdrawByoipCidrRequest": {
       "type": "structure",

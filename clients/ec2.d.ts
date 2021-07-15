@@ -149,6 +149,14 @@ declare class EC2 extends Service {
    */
   associateIamInstanceProfile(callback?: (err: AWSError, data: EC2.Types.AssociateIamInstanceProfileResult) => void): Request<EC2.Types.AssociateIamInstanceProfileResult, AWSError>;
   /**
+   * Associates one or more targets with an event window. Only one type of target (instance IDs, Dedicated Host IDs, or tags) can be specified with an event window. For more information, see Define event windows for scheduled events in the Amazon EC2 User Guide.
+   */
+  associateInstanceEventWindow(params: EC2.Types.AssociateInstanceEventWindowRequest, callback?: (err: AWSError, data: EC2.Types.AssociateInstanceEventWindowResult) => void): Request<EC2.Types.AssociateInstanceEventWindowResult, AWSError>;
+  /**
+   * Associates one or more targets with an event window. Only one type of target (instance IDs, Dedicated Host IDs, or tags) can be specified with an event window. For more information, see Define event windows for scheduled events in the Amazon EC2 User Guide.
+   */
+  associateInstanceEventWindow(callback?: (err: AWSError, data: EC2.Types.AssociateInstanceEventWindowResult) => void): Request<EC2.Types.AssociateInstanceEventWindowResult, AWSError>;
+  /**
    * Associates a subnet in your VPC or an internet gateway or virtual private gateway attached to your VPC with a route table in your VPC. This association causes traffic from the subnet or gateway to be routed according to the routes in the route table. The action returns an association ID, which you need in order to disassociate the route table later. A route table can be associated with multiple subnets. For more information, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   associateRouteTable(params: EC2.Types.AssociateRouteTableRequest, callback?: (err: AWSError, data: EC2.Types.AssociateRouteTableResult) => void): Request<EC2.Types.AssociateRouteTableResult, AWSError>;
@@ -468,6 +476,14 @@ declare class EC2 extends Service {
    * Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped. If you customized your instance with instance store volumes or EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes. For more information, see Creating Amazon EBS-Backed Linux AMIs in the Amazon Elastic Compute Cloud User Guide.
    */
   createImage(callback?: (err: AWSError, data: EC2.Types.CreateImageResult) => void): Request<EC2.Types.CreateImageResult, AWSError>;
+  /**
+   * Creates an event window in which scheduled events for the associated Amazon EC2 instances can run. You can define either a set of time ranges or a cron expression when creating the event window, but not both. All event window times are in UTC. You can create up to 200 event windows per Amazon Web Services Region. When you create the event window, targets (instance IDs, Dedicated Host IDs, or tags) are not yet associated with it. To ensure that the event window can be used, you must associate one or more targets with it by using the AssociateInstanceEventWindow API.  Event windows are applicable only for scheduled events that stop, reboot, or terminate instances. Event windows are not applicable for:   Expedited scheduled events and network maintenance events.    Unscheduled maintenance such as AutoRecovery and unplanned reboots.    For more information, see Define event windows for scheduled events in the Amazon EC2 User Guide.
+   */
+  createInstanceEventWindow(params: EC2.Types.CreateInstanceEventWindowRequest, callback?: (err: AWSError, data: EC2.Types.CreateInstanceEventWindowResult) => void): Request<EC2.Types.CreateInstanceEventWindowResult, AWSError>;
+  /**
+   * Creates an event window in which scheduled events for the associated Amazon EC2 instances can run. You can define either a set of time ranges or a cron expression when creating the event window, but not both. All event window times are in UTC. You can create up to 200 event windows per Amazon Web Services Region. When you create the event window, targets (instance IDs, Dedicated Host IDs, or tags) are not yet associated with it. To ensure that the event window can be used, you must associate one or more targets with it by using the AssociateInstanceEventWindow API.  Event windows are applicable only for scheduled events that stop, reboot, or terminate instances. Event windows are not applicable for:   Expedited scheduled events and network maintenance events.    Unscheduled maintenance such as AutoRecovery and unplanned reboots.    For more information, see Define event windows for scheduled events in the Amazon EC2 User Guide.
+   */
+  createInstanceEventWindow(callback?: (err: AWSError, data: EC2.Types.CreateInstanceEventWindowResult) => void): Request<EC2.Types.CreateInstanceEventWindowResult, AWSError>;
   /**
    * Exports a running or stopped instance to an Amazon S3 bucket. For information about the supported operating systems, image formats, and known limitations for the types of instances you can export, see Exporting an instance as a VM Using VM Import/Export in the VM Import/Export User Guide.
    */
@@ -933,6 +949,14 @@ declare class EC2 extends Service {
    */
   deleteFpgaImage(callback?: (err: AWSError, data: EC2.Types.DeleteFpgaImageResult) => void): Request<EC2.Types.DeleteFpgaImageResult, AWSError>;
   /**
+   * Deletes the specified event window. For more information, see Define event windows for scheduled events in the Amazon EC2 User Guide.
+   */
+  deleteInstanceEventWindow(params: EC2.Types.DeleteInstanceEventWindowRequest, callback?: (err: AWSError, data: EC2.Types.DeleteInstanceEventWindowResult) => void): Request<EC2.Types.DeleteInstanceEventWindowResult, AWSError>;
+  /**
+   * Deletes the specified event window. For more information, see Define event windows for scheduled events in the Amazon EC2 User Guide.
+   */
+  deleteInstanceEventWindow(callback?: (err: AWSError, data: EC2.Types.DeleteInstanceEventWindowResult) => void): Request<EC2.Types.DeleteInstanceEventWindowResult, AWSError>;
+  /**
    * Deletes the specified internet gateway. You must detach the internet gateway from the VPC before you can delete it.
    */
   deleteInternetGateway(params: EC2.Types.DeleteInternetGatewayRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1309,11 +1333,11 @@ declare class EC2 extends Service {
    */
   deregisterImage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.
+   * c Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.
    */
   deregisterInstanceEventNotificationAttributes(params: EC2.Types.DeregisterInstanceEventNotificationAttributesRequest, callback?: (err: AWSError, data: EC2.Types.DeregisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.DeregisterInstanceEventNotificationAttributesResult, AWSError>;
   /**
-   * Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.
+   * c Deregisters tag keys to prevent tags that have the specified tag keys from being included in scheduled event notifications for resources in the Region.
    */
   deregisterInstanceEventNotificationAttributes(callback?: (err: AWSError, data: EC2.Types.DeregisterInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.DeregisterInstanceEventNotificationAttributesResult, AWSError>;
   /**
@@ -1676,6 +1700,14 @@ declare class EC2 extends Service {
    * Describes the tag keys that are registered to appear in scheduled event notifications for resources in the current Region.
    */
   describeInstanceEventNotificationAttributes(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceEventNotificationAttributesResult) => void): Request<EC2.Types.DescribeInstanceEventNotificationAttributesResult, AWSError>;
+  /**
+   * Describes the specified event windows or all event windows. If you specify event window IDs, the output includes information for only the specified event windows. If you specify filters, the output includes information for only those event windows that meet the filter criteria. If you do not specify event windows IDs or filters, the output includes information for all event windows, which can affect performance. We recommend that you use pagination to ensure that the operation returns quickly and successfully.  For more information, see Define event windows for scheduled events in the Amazon EC2 User Guide.
+   */
+  describeInstanceEventWindows(params: EC2.Types.DescribeInstanceEventWindowsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeInstanceEventWindowsResult) => void): Request<EC2.Types.DescribeInstanceEventWindowsResult, AWSError>;
+  /**
+   * Describes the specified event windows or all event windows. If you specify event window IDs, the output includes information for only the specified event windows. If you specify filters, the output includes information for only those event windows that meet the filter criteria. If you do not specify event windows IDs or filters, the output includes information for all event windows, which can affect performance. We recommend that you use pagination to ensure that the operation returns quickly and successfully.  For more information, see Define event windows for scheduled events in the Amazon EC2 User Guide.
+   */
+  describeInstanceEventWindows(callback?: (err: AWSError, data: EC2.Types.DescribeInstanceEventWindowsResult) => void): Request<EC2.Types.DescribeInstanceEventWindowsResult, AWSError>;
   /**
    * Describes the status of the specified instances or all of your instances. By default, only running instances are described, unless you specifically indicate to return the status of all instances. Instance status includes the following components:    Status checks - Amazon EC2 performs status checks on running EC2 instances to identify hardware and software issues. For more information, see Status checks for your instances and Troubleshooting instances with failed status checks in the Amazon EC2 User Guide.    Scheduled events - Amazon EC2 can schedule events (such as reboot, stop, or terminate) for your instances related to hardware issues, software updates, or system maintenance. For more information, see Scheduled events for your instances in the Amazon EC2 User Guide.    Instance state - You can manage your instances from the moment you launch them through their termination. For more information, see Instance lifecycle in the Amazon EC2 User Guide.  
    */
@@ -2461,6 +2493,14 @@ declare class EC2 extends Service {
    */
   disassociateIamInstanceProfile(callback?: (err: AWSError, data: EC2.Types.DisassociateIamInstanceProfileResult) => void): Request<EC2.Types.DisassociateIamInstanceProfileResult, AWSError>;
   /**
+   * Disassociates one or more targets from an event window. For more information, see Define event windows for scheduled events in the Amazon EC2 User Guide.
+   */
+  disassociateInstanceEventWindow(params: EC2.Types.DisassociateInstanceEventWindowRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateInstanceEventWindowResult) => void): Request<EC2.Types.DisassociateInstanceEventWindowResult, AWSError>;
+  /**
+   * Disassociates one or more targets from an event window. For more information, see Define event windows for scheduled events in the Amazon EC2 User Guide.
+   */
+  disassociateInstanceEventWindow(callback?: (err: AWSError, data: EC2.Types.DisassociateInstanceEventWindowResult) => void): Request<EC2.Types.DisassociateInstanceEventWindowResult, AWSError>;
+  /**
    * Disassociates a subnet or gateway from a route table. After you perform this action, the subnet no longer uses the routes in the route table. Instead, it uses the routes in the VPC's main route table. For more information about route tables, see Route Tables in the Amazon Virtual Private Cloud User Guide.
    */
   disassociateRouteTable(params: EC2.Types.DisassociateRouteTableRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -2972,6 +3012,14 @@ declare class EC2 extends Service {
    * Modifies the start time for a scheduled Amazon EC2 instance event.
    */
   modifyInstanceEventStartTime(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceEventStartTimeResult) => void): Request<EC2.Types.ModifyInstanceEventStartTimeResult, AWSError>;
+  /**
+   * Modifies the specified event window. You can define either a set of time ranges or a cron expression when modifying the event window, but not both. To modify the targets associated with the event window, use the AssociateInstanceEventWindow and DisassociateInstanceEventWindow API. If Amazon Web Services has already scheduled an event, modifying an event window won't change the time of the scheduled event. For more information, see Define event windows for scheduled events in the Amazon EC2 User Guide.
+   */
+  modifyInstanceEventWindow(params: EC2.Types.ModifyInstanceEventWindowRequest, callback?: (err: AWSError, data: EC2.Types.ModifyInstanceEventWindowResult) => void): Request<EC2.Types.ModifyInstanceEventWindowResult, AWSError>;
+  /**
+   * Modifies the specified event window. You can define either a set of time ranges or a cron expression when modifying the event window, but not both. To modify the targets associated with the event window, use the AssociateInstanceEventWindow and DisassociateInstanceEventWindow API. If Amazon Web Services has already scheduled an event, modifying an event window won't change the time of the scheduled event. For more information, see Define event windows for scheduled events in the Amazon EC2 User Guide.
+   */
+  modifyInstanceEventWindow(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceEventWindowResult) => void): Request<EC2.Types.ModifyInstanceEventWindowResult, AWSError>;
   /**
    * Modify the instance metadata parameters on a running or stopped instance. When you modify the parameters on a stopped instance, they are applied when the instance is started. When you modify the parameters on a running instance, the API responds with a state of “pending”. After the parameter modifications are successfully applied to the instance, the state of the modifications changes from “pending” to “applied” in subsequent describe-instances API calls. For more information, see Instance metadata and user data in the Amazon EC2 User Guide.
    */
@@ -4672,6 +4720,26 @@ declare namespace EC2 {
      * Information about the IAM instance profile association.
      */
     IamInstanceProfileAssociation?: IamInstanceProfileAssociation;
+  }
+  export interface AssociateInstanceEventWindowRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the event window.
+     */
+    InstanceEventWindowId: InstanceEventWindowId;
+    /**
+     * One or more targets associated with the specified event window.
+     */
+    AssociationTarget: InstanceEventWindowAssociationRequest;
+  }
+  export interface AssociateInstanceEventWindowResult {
+    /**
+     * Information about the event window.
+     */
+    InstanceEventWindow?: InstanceEventWindow;
   }
   export interface AssociateRouteTableRequest {
     /**
@@ -7038,6 +7106,34 @@ declare namespace EC2 {
      */
     ImageId?: String;
   }
+  export interface CreateInstanceEventWindowRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The name of the event window.
+     */
+    Name?: String;
+    /**
+     * The time range for the event window. If you specify a time range, you can't specify a cron expression.
+     */
+    TimeRanges?: InstanceEventWindowTimeRangeRequestSet;
+    /**
+     * The cron expression for the event window, for example, * 0-4,20-23 * * 1,5. If you specify a cron expression, you can't specify a time range. Constraints:   Only hour and day of the week values are supported.   For day of the week values, you can specify either integers 0 through 6, or alternative single values SUN through SAT.   The minute, month, and year must be specified by *.   The hour value must be one or a multiple range, for example, 0-4 or 0-4,20-23.   Each hour range must be &gt;= 2 hours, for example, 0-2 or 20-23.   The event window must be &gt;= 4 hours. The combined total time ranges in the event window must be &gt;= 4 hours.   For more information about cron expressions, see cron on the Wikipedia website.
+     */
+    CronExpression?: InstanceEventWindowCronExpression;
+    /**
+     * The tags to apply to the event window.
+     */
+    TagSpecifications?: TagSpecificationList;
+  }
+  export interface CreateInstanceEventWindowResult {
+    /**
+     * Information about the event window.
+     */
+    InstanceEventWindow?: InstanceEventWindow;
+  }
   export interface CreateInstanceExportTaskRequest {
     /**
      * A description for the conversion task or the resource being exported. The maximum length is 255 characters.
@@ -8727,6 +8823,7 @@ declare namespace EC2 {
   export type DateTime = Date;
   export type DedicatedHostFlag = boolean;
   export type DedicatedHostId = string;
+  export type DedicatedHostIdList = DedicatedHostId[];
   export type DefaultNetworkCardIndex = number;
   export type DefaultRouteTableAssociationValue = "enable"|"disable"|string;
   export type DefaultRouteTablePropagationValue = "enable"|"disable"|string;
@@ -8916,6 +9013,26 @@ declare namespace EC2 {
      * Is true if the request succeeds, and an error otherwise.
      */
     Return?: Boolean;
+  }
+  export interface DeleteInstanceEventWindowRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * Specify true to force delete the event window. Use the force delete parameter if the event window is currently associated with targets.
+     */
+    ForceDelete?: Boolean;
+    /**
+     * The ID of the event window.
+     */
+    InstanceEventWindowId: InstanceEventWindowId;
+  }
+  export interface DeleteInstanceEventWindowResult {
+    /**
+     * The state of the event window.
+     */
+    InstanceEventWindowState?: InstanceEventWindowStateChange;
   }
   export interface DeleteInternetGatewayRequest {
     /**
@@ -9305,7 +9422,7 @@ declare namespace EC2 {
      */
     Resources: ResourceIdList;
     /**
-     * The tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string. If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete AWS-generated tags (tags that have the aws: prefix).
+     * The tags to delete. Specify a tag key and an optional tag value to delete specific tags. If you specify a tag key without a tag value, we delete any tag with this key regardless of its value. If you specify a tag key with an empty string as the tag value, we delete the tag only if its value is an empty string. If you omit this parameter, we delete all user-defined tags for the specified resources. We do not delete Amazon Web Services-generated tags (tags that have the aws: prefix).
      */
     Tags?: TagList;
   }
@@ -11029,6 +11146,38 @@ declare namespace EC2 {
      * Information about the registered tag keys.
      */
     InstanceTagAttribute?: InstanceTagNotificationAttribute;
+  }
+  export interface DescribeInstanceEventWindowsRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The IDs of the event windows.
+     */
+    InstanceEventWindowIds?: InstanceEventWindowIdSet;
+    /**
+     * One or more filters.    dedicated-host-id - The event windows associated with the specified Dedicated Host ID.    event-window-name - The event windows associated with the specified names.     instance-id - The event windows associated with the specified instance ID.    instance-tag - The event windows associated with the specified tag and value.    instance-tag-key - The event windows associated with the specified tag key, regardless of the value.    instance-tag-value - The event windows associated with the specified tag value, regardless of the key.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the event window. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value CMX, specify tag:Owner for the filter name and CMX for the filter value.     tag-key - The key of a tag assigned to the event window. Use this filter to find all event windows that have a tag with a specific key, regardless of the tag value.     tag-value - The value of a tag assigned to the event window. Use this filter to find all event windows that have a tag with a specific value, regardless of the tag key.   
+     */
+    Filters?: FilterList;
+    /**
+     * The maximum number of results to return in a single call. To retrieve the remaining results, make another call with the returned NextToken value. This value can be between 20 and 500. You cannot specify this parameter and the event window IDs parameter in the same call.
+     */
+    MaxResults?: ResultRange;
+    /**
+     * The token to request the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface DescribeInstanceEventWindowsResult {
+    /**
+     * Information about the event windows.
+     */
+    InstanceEventWindows?: InstanceEventWindowSet;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
+     */
+    NextToken?: String;
   }
   export interface DescribeInstanceStatusRequest {
     /**
@@ -14027,6 +14176,26 @@ declare namespace EC2 {
      */
     IamInstanceProfileAssociation?: IamInstanceProfileAssociation;
   }
+  export interface DisassociateInstanceEventWindowRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The ID of the event window.
+     */
+    InstanceEventWindowId: InstanceEventWindowId;
+    /**
+     * One or more targets to disassociate from the specified event window.
+     */
+    AssociationTarget: InstanceEventWindowDisassociationRequest;
+  }
+  export interface DisassociateInstanceEventWindowResult {
+    /**
+     * Information about the event window.
+     */
+    InstanceEventWindow?: InstanceEventWindow;
+  }
   export interface DisassociateRouteTableRequest {
     /**
      * The association ID representing the current association between the route table and subnet or gateway.
@@ -16594,6 +16763,7 @@ declare namespace EC2 {
   export type HostReservationIdSet = HostReservationId[];
   export type HostReservationSet = HostReservation[];
   export type HostTenancy = "dedicated"|"host"|string;
+  export type Hour = number;
   export type HttpTokensState = "optional"|"required"|string;
   export type HypervisorType = "ovm"|"xen"|string;
   export type IKEVersionsList = IKEVersionsListValue[];
@@ -17738,6 +17908,131 @@ declare namespace EC2 {
     CpuCredits?: String;
   }
   export type InstanceEventId = string;
+  export interface InstanceEventWindow {
+    /**
+     * The ID of the event window.
+     */
+    InstanceEventWindowId?: InstanceEventWindowId;
+    /**
+     * One or more time ranges defined for the event window.
+     */
+    TimeRanges?: InstanceEventWindowTimeRangeList;
+    /**
+     * The name of the event window.
+     */
+    Name?: String;
+    /**
+     * The cron expression defined for the event window.
+     */
+    CronExpression?: InstanceEventWindowCronExpression;
+    /**
+     * One or more targets associated with the event window.
+     */
+    AssociationTarget?: InstanceEventWindowAssociationTarget;
+    /**
+     * The current state of the event window.
+     */
+    State?: InstanceEventWindowState;
+    /**
+     * The instance tags associated with the event window.
+     */
+    Tags?: TagList;
+  }
+  export interface InstanceEventWindowAssociationRequest {
+    /**
+     * The IDs of the instances to associate with the event window. If the instance is on a Dedicated Host, you can't specify the Instance ID parameter; you must use the Dedicated Host ID parameter.
+     */
+    InstanceIds?: InstanceIdList;
+    /**
+     * The instance tags to associate with the event window. Any instances associated with the tags will be associated with the event window.
+     */
+    InstanceTags?: TagList;
+    /**
+     * The IDs of the Dedicated Hosts to associate with the event window.
+     */
+    DedicatedHostIds?: DedicatedHostIdList;
+  }
+  export interface InstanceEventWindowAssociationTarget {
+    /**
+     * The IDs of the instances associated with the event window.
+     */
+    InstanceIds?: InstanceIdList;
+    /**
+     * The instance tags associated with the event window. Any instances associated with the tags will be associated with the event window.
+     */
+    Tags?: TagList;
+    /**
+     * The IDs of the Dedicated Hosts associated with the event window.
+     */
+    DedicatedHostIds?: DedicatedHostIdList;
+  }
+  export type InstanceEventWindowCronExpression = string;
+  export interface InstanceEventWindowDisassociationRequest {
+    /**
+     * The IDs of the instances to disassociate from the event window.
+     */
+    InstanceIds?: InstanceIdList;
+    /**
+     * The instance tags to disassociate from the event window. Any instances associated with the tags will be disassociated from the event window.
+     */
+    InstanceTags?: TagList;
+    /**
+     * The IDs of the Dedicated Hosts to disassociate from the event window.
+     */
+    DedicatedHostIds?: DedicatedHostIdList;
+  }
+  export type InstanceEventWindowId = string;
+  export type InstanceEventWindowIdSet = InstanceEventWindowId[];
+  export type InstanceEventWindowSet = InstanceEventWindow[];
+  export type InstanceEventWindowState = "creating"|"deleting"|"active"|"deleted"|string;
+  export interface InstanceEventWindowStateChange {
+    /**
+     * The ID of the event window.
+     */
+    InstanceEventWindowId?: InstanceEventWindowId;
+    /**
+     * The current state of the event window.
+     */
+    State?: InstanceEventWindowState;
+  }
+  export interface InstanceEventWindowTimeRange {
+    /**
+     * The day on which the time range begins.
+     */
+    StartWeekDay?: WeekDay;
+    /**
+     * The hour when the time range begins.
+     */
+    StartHour?: Hour;
+    /**
+     * The day on which the time range ends.
+     */
+    EndWeekDay?: WeekDay;
+    /**
+     * The hour when the time range ends.
+     */
+    EndHour?: Hour;
+  }
+  export type InstanceEventWindowTimeRangeList = InstanceEventWindowTimeRange[];
+  export interface InstanceEventWindowTimeRangeRequest {
+    /**
+     * The day on which the time range begins.
+     */
+    StartWeekDay?: WeekDay;
+    /**
+     * The hour when the time range begins.
+     */
+    StartHour?: Hour;
+    /**
+     * The day on which the time range ends.
+     */
+    EndWeekDay?: WeekDay;
+    /**
+     * The hour when the time range ends.
+     */
+    EndHour?: Hour;
+  }
+  export type InstanceEventWindowTimeRangeRequestSet = InstanceEventWindowTimeRangeRequest[];
   export interface InstanceExportDetails {
     /**
      * The ID of the resource being exported.
@@ -17760,6 +18055,7 @@ declare namespace EC2 {
   }
   export type InstanceHealthStatus = "healthy"|"unhealthy"|string;
   export type InstanceId = string;
+  export type InstanceIdList = InstanceId[];
   export type InstanceIdSet = InstanceId[];
   export type InstanceIdStringList = InstanceId[];
   export type InstanceIdsSet = InstanceId[];
@@ -20099,6 +20395,34 @@ declare namespace EC2 {
   }
   export interface ModifyInstanceEventStartTimeResult {
     Event?: InstanceStatusEvent;
+  }
+  export interface ModifyInstanceEventWindowRequest {
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+    /**
+     * The name of the event window.
+     */
+    Name?: String;
+    /**
+     * The ID of the event window.
+     */
+    InstanceEventWindowId: InstanceEventWindowId;
+    /**
+     * The time ranges of the event window.
+     */
+    TimeRanges?: InstanceEventWindowTimeRangeRequestSet;
+    /**
+     * The cron expression of the event window, for example, * 0-4,20-23 * * 1,5. Constraints:   Only hour and day of the week values are supported.   For day of the week values, you can specify either integers 0 through 6, or alternative single values SUN through SAT.   The minute, month, and year must be specified by *.   The hour value must be one or a multiple range, for example, 0-4 or 0-4,20-23.   Each hour range must be &gt;= 2 hours, for example, 0-2 or 20-23.   The event window must be &gt;= 4 hours. The combined total time ranges in the event window must be &gt;= 4 hours.   For more information about cron expressions, see cron on the Wikipedia website.
+     */
+    CronExpression?: InstanceEventWindowCronExpression;
+  }
+  export interface ModifyInstanceEventWindowResult {
+    /**
+     * Information about the event window.
+     */
+    InstanceEventWindow?: InstanceEventWindow;
   }
   export interface ModifyInstanceMetadataOptionsRequest {
     /**
@@ -23778,7 +24102,7 @@ declare namespace EC2 {
   export type ResourceArn = string;
   export type ResourceIdList = TaggableResourceId[];
   export type ResourceList = String[];
-  export type ResourceType = "client-vpn-endpoint"|"customer-gateway"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"internet-gateway"|"key-pair"|"launch-template"|"local-gateway-route-table-vpc-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"placement-group"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
+  export type ResourceType = "client-vpn-endpoint"|"customer-gateway"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"key-pair"|"launch-template"|"local-gateway-route-table-vpc-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"placement-group"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -23946,6 +24270,7 @@ declare namespace EC2 {
      */
     PrefixList?: ManagedPrefixList;
   }
+  export type ResultRange = number;
   export interface RevokeClientVpnIngressRequest {
     /**
      * The ID of the Client VPN endpoint with which the authorization rule is associated.
@@ -25819,7 +26144,7 @@ declare namespace EC2 {
      */
     SpotInstanceType?: SpotInstanceType;
     /**
-     * The required duration for the Spot Instances (also known as Spot blocks), in minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360). The duration period starts as soon as your Spot Instance receives its instance ID. At the end of the duration period, Amazon EC2 marks the Spot Instance for termination and provides a Spot Instance termination notice, which gives the instance a two-minute warning before it terminates. You can't specify an Availability Zone group or a launch group if you specify a duration. New accounts or accounts with no previous billing history with Amazon Web Services are not eligible for Spot Instances with a defined duration (also known as Spot blocks).
+     * Deprecated.
      */
     BlockDurationMinutes?: Integer;
     /**
@@ -26301,7 +26626,7 @@ declare namespace EC2 {
   export type TagList = Tag[];
   export interface TagSpecification {
     /**
-     * The type of resource to tag. Currently, the resource types that support tagging on creation are: capacity-reservation | carrier-gateway | client-vpn-endpoint | customer-gateway | dedicated-host | dhcp-options | egress-only-internet-gateway | elastic-ip | elastic-gpu | export-image-task | export-instance-task | fleet | fpga-image | host-reservation | image| import-image-task | import-snapshot-task | instance | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 | key-pair | launch-template | local-gateway-route-table-vpc-association | placement-group | prefix-list | natgateway | network-acl | network-interface | reserved-instances |route-table | security-group| snapshot | spot-fleet-request | spot-instances-request | snapshot | subnet | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-multicast-domain | transit-gateway-route-table | volume |vpc |  vpc-peering-connection | vpc-endpoint (for interface and gateway endpoints) | vpc-endpoint-service (for AWS PrivateLink) | vpc-flow-log | vpn-connection | vpn-gateway. To tag a resource after it has been created, see CreateTags.
+     * The type of resource to tag. Currently, the resource types that support tagging on creation are: capacity-reservation | carrier-gateway | client-vpn-endpoint | customer-gateway | dedicated-host | dhcp-options | egress-only-internet-gateway | elastic-ip | elastic-gpu | export-image-task | export-instance-task | fleet | fpga-image | host-reservation | image| import-image-task | import-snapshot-task | instance | instance-event-window | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 | key-pair | launch-template | local-gateway-route-table-vpc-association | placement-group | prefix-list | natgateway | network-acl | network-interface | reserved-instances |route-table | security-group| snapshot | spot-fleet-request | spot-instances-request | snapshot | subnet | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-multicast-domain | transit-gateway-route-table | volume |vpc |  vpc-peering-connection | vpc-endpoint (for interface and gateway endpoints) | vpc-endpoint-service (for PrivateLink) | vpc-flow-log | vpn-connection | vpn-gateway. To tag a resource after it has been created, see CreateTags.
      */
     ResourceType?: ResourceType;
     /**
@@ -28717,6 +29042,7 @@ declare namespace EC2 {
     StartupAction?: String;
   }
   export type VpnTunnelOptionsSpecificationsList = VpnTunnelOptionsSpecification[];
+  export type WeekDay = "sunday"|"monday"|"tuesday"|"wednesday"|"thursday"|"friday"|"saturday"|string;
   export interface WithdrawByoipCidrRequest {
     /**
      * The address range, in CIDR notation.
