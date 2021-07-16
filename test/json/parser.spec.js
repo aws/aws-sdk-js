@@ -75,8 +75,13 @@
               }
             }
           };
-          expect(parse(docTypeRules, '{"Items":{"foo":"fooValue","bar":null}}')).to.eql({
-            Items: {foo: 'fooValue', bar: null }
+          expect(
+            parse(
+              docTypeRules,
+              '{"Items":{"strKey":"str","numKey":1,"boolKey":true,"nullKey":null}}'
+            )
+          ).to.eql({
+            Items: {strKey: 'str', numKey: 1, boolKey: true, nullKey: null }
           });
         });
       });

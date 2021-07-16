@@ -79,8 +79,8 @@
             }
           };
           expect(build(docTypeRules, {
-            Items: {foo: 'fooValue', bar: null }
-          })).to.equal('{"Items":{"foo":"fooValue","bar":null}}');
+            Items: {strKey: 'str', numKey: 1, boolKey: true, nullKey: null}
+          })).to.equal('{"Items":{"strKey":"str","numKey":1,"boolKey":true,"nullKey":null}}');
         });
       });
       describe('lists', function() {
