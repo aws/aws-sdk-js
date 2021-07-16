@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Model",
+  "description": "support document types trait that allows serializing and parsing unmodeled json value"
+}
