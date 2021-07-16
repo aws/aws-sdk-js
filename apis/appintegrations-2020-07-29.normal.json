@@ -44,7 +44,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Creates an EventIntegration, given a specified name, description, and a reference to an Amazon Eventbridge bus in your account and a partner event source that will push events to that bus. No objects are created in the your account, only metadata that is persisted on the EventIntegration control plane.</p>"
+      "documentation": "<p>Creates an EventIntegration, given a specified name, description, and a reference to an Amazon EventBridge bus in your account and a partner event source that pushes events to that bus. No objects are created in the your account, only metadata that is persisted on the EventIntegration control plane.</p>"
     },
     "DeleteEventIntegration": {
       "name": "DeleteEventIntegration",
@@ -75,7 +75,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Deletes the specified existing event integration. If the event integration is associated with clients, the request is rejected.</p>"
+      "documentation": "<p>Deletes the specified existing event integration. If the event integration is associated with clients, the request is rejected.</p>"
     },
     "GetEventIntegration": {
       "name": "GetEventIntegration",
@@ -106,7 +106,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Return information about the event integration.</p>"
+      "documentation": "<p>Return information about the event integration.</p>"
     },
     "ListEventIntegrationAssociations": {
       "name": "ListEventIntegrationAssociations",
@@ -137,7 +137,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Returns a paginated list of event integration associations in the account. </p>"
+      "documentation": "<p>Returns a paginated list of event integration associations in the account. </p>"
     },
     "ListEventIntegrations": {
       "name": "ListEventIntegrations",
@@ -165,7 +165,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Returns a paginated list of event integrations in the account.</p>"
+      "documentation": "<p>Returns a paginated list of event integrations in the account.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -193,7 +193,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Lists the tags for the specified resource.</p>"
+      "documentation": "<p>Lists the tags for the specified resource.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -221,7 +221,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Adds the specified tags to the specified resource.</p>"
+      "documentation": "<p>Adds the specified tags to the specified resource.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -249,7 +249,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Removes the specified tags from the specified resource.</p>"
+      "documentation": "<p>Removes the specified tags from the specified resource.</p>"
     },
     "UpdateEventIntegration": {
       "name": "UpdateEventIntegration",
@@ -280,7 +280,7 @@
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>Updates the description of an event integration.</p>"
+      "documentation": "<p>Updates the description of an event integration.</p>"
     }
   },
   "shapes": {
@@ -327,7 +327,7 @@
         },
         "EventBridgeBus": {
           "shape": "EventBridgeBus",
-          "documentation": "<p>The Eventbridge bus.</p>"
+          "documentation": "<p>The EventBridge bus.</p>"
         },
         "ClientToken": {
           "shape": "IdempotencyToken",
@@ -396,7 +396,7 @@
           "documentation": "<p>The source of the events.</p>"
         }
       },
-      "documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>The event filter.</p>"
+      "documentation": "<p>The event filter.</p>"
     },
     "EventIntegration": {
       "type": "structure",
@@ -419,14 +419,14 @@
         },
         "EventBridgeBus": {
           "shape": "EventBridgeBus",
-          "documentation": "<p>The Amazon Eventbridge bus for the event integration.</p>"
+          "documentation": "<p>The Amazon EventBridge bus for the event integration.</p>"
         },
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The tags.</p>"
         }
       },
-      "documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>The event integration.</p>"
+      "documentation": "<p>The event integration.</p>"
     },
     "EventIntegrationAssociation": {
       "type": "structure",
@@ -449,14 +449,14 @@
         },
         "EventBridgeRuleName": {
           "shape": "EventBridgeRuleName",
-          "documentation": "<p>The name of the Eventbridge rule.</p>"
+          "documentation": "<p>The name of the EventBridge rule.</p>"
         },
         "ClientAssociationMetadata": {
           "shape": "ClientAssociationMetadata",
           "documentation": "<p>The metadata associated with the client.</p>"
         }
       },
-      "documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>The event integration association.</p>"
+      "documentation": "<p>The event integration association.</p>"
     },
     "EventIntegrationAssociationsList": {
       "type": "list",
@@ -505,7 +505,7 @@
         },
         "EventBridgeBus": {
           "shape": "EventBridgeBus",
-          "documentation": "<p>The Eventbridge bus.</p>"
+          "documentation": "<p>The EventBridge bus.</p>"
         },
         "EventFilter": {
           "shape": "EventFilter",
@@ -748,5 +748,5 @@
       "members": {}
     }
   },
-  "documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> <p>The Amazon AppIntegrations service enables you to configure and reuse connections to external applications.</p> <p>For information about how you can use external applications with Amazon Connect, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/crm.html\">Set up pre-built integrations</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+  "documentation": "<p>The Amazon AppIntegrations service enables you to configure and reuse connections to external applications.</p> <p>For information about how you can use external applications with Amazon Connect, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/crm.html\">Set up pre-built integrations</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
 }

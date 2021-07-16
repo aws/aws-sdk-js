@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.947.0-->
+<!--LATEST=2.948.0-->
 <!--ENTRYINSERT-->
+
+## 2.948.0
+* feature: AuditManager: This release relaxes the S3 URL character restrictions in AWS Audit Manager. Regex patterns have been updated for the following attributes: s3RelativePath, destination, and s3ResourcePath. 'AWS' terms have also been replaced with entities to align with China Rebrand documentation efforts.
+* feature: Chime: This SDK release adds Account Status as one of the attributes in Account API response
 
 ## 2.947.0
 * feature: EC2: This feature enables customers  to specify weekly recurring time window(s) for scheduled events that reboot, stop or terminate EC2 instances.

@@ -38,7 +38,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Associates an evidence folder to the specified assessment report in AWS Audit Manager. </p>"
+      "documentation": "<p> Associates an evidence folder to the specified assessment report in Audit Manager. </p>"
     },
     "BatchAssociateAssessmentReportEvidence": {
       "name": "BatchAssociateAssessmentReportEvidence",
@@ -66,7 +66,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Associates a list of evidence to an assessment report in an AWS Audit Manager assessment. </p>"
+      "documentation": "<p> Associates a list of evidence to an assessment report in an Audit Manager assessment. </p>"
     },
     "BatchCreateDelegationByAssessment": {
       "name": "BatchCreateDelegationByAssessment",
@@ -94,7 +94,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Create a batch of delegations for a specified assessment in AWS Audit Manager. </p>"
+      "documentation": "<p> Create a batch of delegations for a specified assessment in Audit Manager. </p>"
     },
     "BatchDeleteDelegationByAssessment": {
       "name": "BatchDeleteDelegationByAssessment",
@@ -122,7 +122,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Deletes the delegations in the specified AWS Audit Manager assessment. </p>"
+      "documentation": "<p> Deletes the delegations in the specified Audit Manager assessment. </p>"
     },
     "BatchDisassociateAssessmentReportEvidence": {
       "name": "BatchDisassociateAssessmentReportEvidence",
@@ -150,7 +150,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Disassociates a list of evidence from the specified assessment report in AWS Audit Manager. </p>"
+      "documentation": "<p> Disassociates a list of evidence from the specified assessment report in Audit Manager. </p>"
     },
     "BatchImportEvidenceToAssessmentControl": {
       "name": "BatchImportEvidenceToAssessmentControl",
@@ -178,7 +178,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Uploads one or more pieces of evidence to the specified control in the assessment in AWS Audit Manager. </p>"
+      "documentation": "<p> Uploads one or more pieces of evidence to the specified control in the assessment in Audit Manager. </p>"
     },
     "CreateAssessment": {
       "name": "CreateAssessment",
@@ -206,7 +206,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Creates an assessment in AWS Audit Manager. </p>"
+      "documentation": "<p> Creates an assessment in Audit Manager. </p>"
     },
     "CreateAssessmentFramework": {
       "name": "CreateAssessmentFramework",
@@ -234,7 +234,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Creates a custom framework in AWS Audit Manager. </p>"
+      "documentation": "<p> Creates a custom framework in Audit Manager. </p>"
     },
     "CreateAssessmentReport": {
       "name": "CreateAssessmentReport",
@@ -290,7 +290,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Creates a new custom control in AWS Audit Manager. </p>"
+      "documentation": "<p> Creates a new custom control in Audit Manager. </p>"
     },
     "DeleteAssessment": {
       "name": "DeleteAssessment",
@@ -318,7 +318,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Deletes an assessment in AWS Audit Manager. </p>"
+      "documentation": "<p> Deletes an assessment in Audit Manager. </p>"
     },
     "DeleteAssessmentFramework": {
       "name": "DeleteAssessmentFramework",
@@ -346,7 +346,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Deletes a custom framework in AWS Audit Manager. </p>"
+      "documentation": "<p> Deletes a custom framework in Audit Manager. </p>"
     },
     "DeleteAssessmentReport": {
       "name": "DeleteAssessmentReport",
@@ -374,7 +374,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Deletes an assessment report from an assessment in AWS Audit Manager. </p>"
+      "documentation": "<p> Deletes an assessment report from an assessment in Audit Manager. </p>"
     },
     "DeleteControl": {
       "name": "DeleteControl",
@@ -402,7 +402,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Deletes a custom control in AWS Audit Manager. </p>"
+      "documentation": "<p> Deletes a custom control in Audit Manager. </p>"
     },
     "DeregisterAccount": {
       "name": "DeregisterAccount",
@@ -430,7 +430,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Deregisters an account in AWS Audit Manager. </p>"
+      "documentation": "<p> Deregisters an account in Audit Manager. </p>"
     },
     "DeregisterOrganizationAdminAccount": {
       "name": "DeregisterOrganizationAdminAccount",
@@ -458,7 +458,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Deregisters the delegated AWS administrator account from the AWS organization. </p>"
+      "documentation": "<p>Removes the specified member account as a delegated administrator for Audit Manager. </p> <important> <p>When you remove a delegated administrator from your Audit Manager settings, or when you deregister a delegated administrator from Organizations, you continue to have access to the evidence that you previously collected under that account. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward.</p> </important>"
     },
     "DisassociateAssessmentReportEvidenceFolder": {
       "name": "DisassociateAssessmentReportEvidenceFolder",
@@ -486,7 +486,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Disassociates an evidence folder from the specified assessment report in AWS Audit Manager. </p>"
+      "documentation": "<p> Disassociates an evidence folder from the specified assessment report in Audit Manager. </p>"
     },
     "GetAccountStatus": {
       "name": "GetAccountStatus",
@@ -505,7 +505,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns the registration status of an account in AWS Audit Manager. </p>"
+      "documentation": "<p> Returns the registration status of an account in Audit Manager. </p>"
     },
     "GetAssessment": {
       "name": "GetAssessment",
@@ -533,7 +533,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns an assessment from AWS Audit Manager. </p>"
+      "documentation": "<p> Returns an assessment from Audit Manager. </p>"
     },
     "GetAssessmentFramework": {
       "name": "GetAssessmentFramework",
@@ -561,7 +561,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns a framework from AWS Audit Manager. </p>"
+      "documentation": "<p> Returns a framework from Audit Manager. </p>"
     },
     "GetAssessmentReportUrl": {
       "name": "GetAssessmentReportUrl",
@@ -589,7 +589,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Returns the URL of a specified assessment report in AWS Audit Manager. </p>"
+      "documentation": "<p> Returns the URL of a specified assessment report in Audit Manager. </p>"
     },
     "GetChangeLogs": {
       "name": "GetChangeLogs",
@@ -617,7 +617,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns a list of changelogs from AWS Audit Manager. </p>"
+      "documentation": "<p> Returns a list of changelogs from Audit Manager. </p>"
     },
     "GetControl": {
       "name": "GetControl",
@@ -645,7 +645,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns a control from AWS Audit Manager. </p>"
+      "documentation": "<p> Returns a control from Audit Manager. </p>"
     },
     "GetDelegations": {
       "name": "GetDelegations",
@@ -698,7 +698,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns evidence from AWS Audit Manager. </p>"
+      "documentation": "<p> Returns evidence from Audit Manager. </p>"
     },
     "GetEvidenceByEvidenceFolder": {
       "name": "GetEvidenceByEvidenceFolder",
@@ -726,7 +726,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns all evidence from a specified evidence folder in AWS Audit Manager. </p>"
+      "documentation": "<p> Returns all evidence from a specified evidence folder in Audit Manager. </p>"
     },
     "GetEvidenceFolder": {
       "name": "GetEvidenceFolder",
@@ -754,7 +754,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns an evidence folder from the specified assessment in AWS Audit Manager. </p>"
+      "documentation": "<p> Returns an evidence folder from the specified assessment in Audit Manager. </p>"
     },
     "GetEvidenceFoldersByAssessment": {
       "name": "GetEvidenceFoldersByAssessment",
@@ -782,7 +782,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns the evidence folders from a specified assessment in AWS Audit Manager. </p>"
+      "documentation": "<p> Returns the evidence folders from a specified assessment in Audit Manager. </p>"
     },
     "GetEvidenceFoldersByAssessmentControl": {
       "name": "GetEvidenceFoldersByAssessmentControl",
@@ -810,7 +810,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns a list of evidence folders associated with a specified control of an assessment in AWS Audit Manager. </p>"
+      "documentation": "<p> Returns a list of evidence folders associated with a specified control of an assessment in Audit Manager. </p>"
     },
     "GetOrganizationAdminAccount": {
       "name": "GetOrganizationAdminAccount",
@@ -838,7 +838,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Returns the name of the delegated AWS administrator account for the AWS organization. </p>"
+      "documentation": "<p> Returns the name of the delegated Amazon Web Services administrator account for the organization. </p>"
     },
     "GetServicesInScope": {
       "name": "GetServicesInScope",
@@ -863,7 +863,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns a list of the in-scope AWS services for the specified assessment. </p>"
+      "documentation": "<p> Returns a list of the in-scope Amazon Web Services services for the specified assessment. </p>"
     },
     "GetSettings": {
       "name": "GetSettings",
@@ -885,7 +885,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns the settings for the specified AWS account. </p>"
+      "documentation": "<p> Returns the settings for the specified account. </p>"
     },
     "ListAssessmentFrameworks": {
       "name": "ListAssessmentFrameworks",
@@ -910,7 +910,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns a list of the frameworks available in the AWS Audit Manager framework library. </p>"
+      "documentation": "<p> Returns a list of the frameworks available in the Audit Manager framework library. </p>"
     },
     "ListAssessmentReports": {
       "name": "ListAssessmentReports",
@@ -935,7 +935,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns a list of assessment reports created in AWS Audit Manager. </p>"
+      "documentation": "<p> Returns a list of assessment reports created in Audit Manager. </p>"
     },
     "ListAssessments": {
       "name": "ListAssessments",
@@ -960,7 +960,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns a list of current and past assessments from AWS Audit Manager. </p>"
+      "documentation": "<p> Returns a list of current and past assessments from Audit Manager. </p>"
     },
     "ListControls": {
       "name": "ListControls",
@@ -985,7 +985,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns a list of controls from AWS Audit Manager. </p>"
+      "documentation": "<p> Returns a list of controls from Audit Manager. </p>"
     },
     "ListKeywordsForDataSource": {
       "name": "ListKeywordsForDataSource",
@@ -1035,7 +1035,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Returns a list of all AWS Audit Manager notifications. </p>"
+      "documentation": "<p> Returns a list of all Audit Manager notifications. </p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -1060,7 +1060,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Returns a list of tags for the specified resource in AWS Audit Manager. </p>"
+      "documentation": "<p> Returns a list of tags for the specified resource in Audit Manager. </p>"
     },
     "RegisterAccount": {
       "name": "RegisterAccount",
@@ -1088,7 +1088,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Enables AWS Audit Manager for the specified AWS account. </p>"
+      "documentation": "<p> Enables Audit Manager for the specified account. </p>"
     },
     "RegisterOrganizationAdminAccount": {
       "name": "RegisterOrganizationAdminAccount",
@@ -1116,7 +1116,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Enables an AWS account within the organization as the delegated administrator for AWS Audit Manager. </p>"
+      "documentation": "<p> Enables an account within the organization as the delegated administrator for Audit Manager. </p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -1141,7 +1141,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Tags the specified resource in AWS Audit Manager. </p>"
+      "documentation": "<p> Tags the specified resource in Audit Manager. </p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -1166,7 +1166,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Removes a tag from a resource in AWS Audit Manager. </p>"
+      "documentation": "<p> Removes a tag from a resource in Audit Manager. </p>"
     },
     "UpdateAssessment": {
       "name": "UpdateAssessment",
@@ -1194,7 +1194,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Edits an AWS Audit Manager assessment. </p>"
+      "documentation": "<p> Edits an Audit Manager assessment. </p>"
     },
     "UpdateAssessmentControl": {
       "name": "UpdateAssessmentControl",
@@ -1222,7 +1222,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Updates a control within an assessment in AWS Audit Manager. </p>"
+      "documentation": "<p> Updates a control within an assessment in Audit Manager. </p>"
     },
     "UpdateAssessmentControlSetStatus": {
       "name": "UpdateAssessmentControlSetStatus",
@@ -1250,7 +1250,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Updates the status of a control set in an AWS Audit Manager assessment. </p>"
+      "documentation": "<p> Updates the status of a control set in an Audit Manager assessment. </p>"
     },
     "UpdateAssessmentFramework": {
       "name": "UpdateAssessmentFramework",
@@ -1278,7 +1278,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Updates a custom framework in AWS Audit Manager. </p>"
+      "documentation": "<p> Updates a custom framework in Audit Manager. </p>"
     },
     "UpdateAssessmentStatus": {
       "name": "UpdateAssessmentStatus",
@@ -1306,7 +1306,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Updates the status of an assessment in AWS Audit Manager. </p>"
+      "documentation": "<p> Updates the status of an assessment in Audit Manager. </p>"
     },
     "UpdateControl": {
       "name": "UpdateControl",
@@ -1334,7 +1334,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Updates a custom control in AWS Audit Manager. </p>"
+      "documentation": "<p> Updates a custom control in Audit Manager. </p>"
     },
     "UpdateSettings": {
       "name": "UpdateSettings",
@@ -1359,7 +1359,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Updates AWS Audit Manager settings for the current user account. </p>"
+      "documentation": "<p> Updates Audit Manager settings for the current user account. </p>"
     },
     "ValidateAssessmentReportIntegrity": {
       "name": "ValidateAssessmentReportIntegrity",
@@ -1387,7 +1387,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p> Validates the integrity of an assessment report in AWS Audit Manager. </p>"
+      "documentation": "<p> Validates the integrity of an assessment report in Audit Manager. </p>"
     }
   },
   "shapes": {
@@ -1396,18 +1396,18 @@
       "members": {
         "id": {
           "shape": "AccountId",
-          "documentation": "<p> The identifier for the specified AWS account. </p>"
+          "documentation": "<p> The identifier for the specified account. </p>"
         },
         "emailAddress": {
           "shape": "EmailAddress",
-          "documentation": "<p> The email address associated with the specified AWS account. </p>"
+          "documentation": "<p> The email address associated with the specified account. </p>"
         },
         "name": {
           "shape": "AccountName",
-          "documentation": "<p> The name of the specified AWS account. </p>"
+          "documentation": "<p> The name of the specified account. </p>"
         }
       },
-      "documentation": "<p> The wrapper of AWS account details, such as account ID, email address, and so on. </p>"
+      "documentation": "<p> The wrapper of account details, such as account ID, email address, and so on. </p>"
     },
     "AWSAccounts": {
       "type": "list",
@@ -1420,10 +1420,10 @@
       "members": {
         "serviceName": {
           "shape": "AWSServiceName",
-          "documentation": "<p> The name of the AWS service. </p>"
+          "documentation": "<p> The name of the Amazon Web Service. </p>"
         }
       },
-      "documentation": "<p> An AWS service such as Amazon S3, AWS CloudTrail, and so on. </p>"
+      "documentation": "<p> An Amazon Web Service such as Amazon S3, CloudTrail, and so on. </p>"
     },
     "AWSServiceName": {
       "type": "string",
@@ -1489,7 +1489,7 @@
         },
         "awsAccount": {
           "shape": "AWSAccount",
-          "documentation": "<p> The AWS account associated with the assessment. </p>"
+          "documentation": "<p> The account associated with the assessment. </p>"
         },
         "metadata": {
           "shape": "AssessmentMetadata",
@@ -1504,7 +1504,7 @@
           "documentation": "<p> The tags associated with the assessment. </p>"
         }
       },
-      "documentation": "<p> An entity that defines the scope of audit evidence collected by AWS Audit Manager. An AWS Audit Manager assessment is an implementation of an AWS Audit Manager framework. </p>"
+      "documentation": "<p> An entity that defines the scope of audit evidence collected by Audit Manager. An Audit Manager assessment is an implementation of an Audit Manager framework. </p>"
     },
     "AssessmentControl": {
       "type": "structure",
@@ -1546,7 +1546,7 @@
           "documentation": "<p> The amount of evidence in the assessment report. </p>"
         }
       },
-      "documentation": "<p> The control entity that represents a standard or custom control used in an AWS Audit Manager assessment. </p>"
+      "documentation": "<p> The control entity that represents a standard or custom control used in an Audit Manager assessment. </p>"
     },
     "AssessmentControlSet": {
       "type": "structure",
@@ -1584,7 +1584,7 @@
           "documentation": "<p> The total number of evidence objects uploaded manually to the control set. </p>"
         }
       },
-      "documentation": "<p> Represents a set of controls in an AWS Audit Manager assessment. </p>"
+      "documentation": "<p> Represents a set of controls in an Audit Manager assessment. </p>"
     },
     "AssessmentControlSets": {
       "type": "list",
@@ -1632,7 +1632,7 @@
         },
         "dataSource": {
           "shape": "String",
-          "documentation": "<p> The AWS service from which the evidence was collected. </p>"
+          "documentation": "<p> The Amazon Web Service from which the evidence was collected. </p>"
         },
         "author": {
           "shape": "String",
@@ -1656,7 +1656,7 @@
         },
         "evidenceByTypeConfigurationDataCount": {
           "shape": "Integer",
-          "documentation": "<p> The number of evidence that falls under the configuration data category. This evidence is collected from configuration snapshots of other AWS services such as Amazon EC2, Amazon S3, or IAM. </p>"
+          "documentation": "<p> The number of evidence that falls under the configuration data category. This evidence is collected from configuration snapshots of other Amazon Web Services services such as Amazon EC2, Amazon S3, or IAM. </p>"
         },
         "evidenceByTypeManualCount": {
           "shape": "Integer",
@@ -1664,22 +1664,22 @@
         },
         "evidenceByTypeComplianceCheckCount": {
           "shape": "Integer",
-          "documentation": "<p> The number of evidence that falls under the compliance check category. This evidence is collected from AWS Config or AWS Security Hub. </p>"
+          "documentation": "<p> The number of evidence that falls under the compliance check category. This evidence is collected from Config or Security Hub. </p>"
         },
         "evidenceByTypeComplianceCheckIssuesCount": {
           "shape": "Integer",
-          "documentation": "<p> The total number of issues that were reported directly from AWS Security Hub, AWS Config, or both. </p>"
+          "documentation": "<p> The total number of issues that were reported directly from Security Hub, Config, or both. </p>"
         },
         "evidenceByTypeUserActivityCount": {
           "shape": "Integer",
-          "documentation": "<p> The number of evidence that falls under the user activity category. This evidence is collected from AWS CloudTrail logs. </p>"
+          "documentation": "<p> The number of evidence that falls under the user activity category. This evidence is collected from CloudTrail logs. </p>"
         },
         "evidenceAwsServiceSourceCount": {
           "shape": "Integer",
-          "documentation": "<p> The total number of AWS resources assessed to generate the evidence. </p>"
+          "documentation": "<p> The total number of Amazon Web Services resources assessed to generate the evidence. </p>"
         }
       },
-      "documentation": "<p> The folder in which AWS Audit Manager stores evidence for an assessment. </p>"
+      "documentation": "<p> The folder in which Audit Manager stores evidence for an assessment. </p>"
     },
     "AssessmentEvidenceFolderName": {
       "type": "string",
@@ -1712,7 +1712,7 @@
           "documentation": "<p> The control sets associated with the framework. </p>"
         }
       },
-      "documentation": "<p> The file used to structure and automate AWS Audit Manager assessments for a given compliance standard. </p>"
+      "documentation": "<p> The file used to structure and automate Audit Manager assessments for a given compliance standard. </p>"
     },
     "AssessmentFrameworkDescription": {
       "type": "string",
@@ -1799,7 +1799,7 @@
         },
         "scope": {
           "shape": "Scope",
-          "documentation": "<p> The wrapper of AWS accounts and services in scope for the assessment. </p>"
+          "documentation": "<p> The wrapper of accounts and services in scope for the assessment. </p>"
         },
         "roles": {
           "shape": "Roles",
@@ -1856,7 +1856,7 @@
           "documentation": "<p> The time of the most recent update. </p>"
         }
       },
-      "documentation": "<p> A metadata object associated with an assessment in AWS Audit Manager. </p>"
+      "documentation": "<p> A metadata object associated with an assessment in Audit Manager. </p>"
     },
     "AssessmentName": {
       "type": "string",
@@ -1881,7 +1881,7 @@
         },
         "awsAccountId": {
           "shape": "AccountId",
-          "documentation": "<p> The identifier for the specified AWS account. </p>"
+          "documentation": "<p> The identifier for the specified account. </p>"
         },
         "assessmentId": {
           "shape": "UUID",
@@ -1904,7 +1904,7 @@
           "documentation": "<p> Specifies when the assessment report was created. </p>"
         }
       },
-      "documentation": "<p> A finalized document generated from an AWS Audit Manager assessment. These reports summarize the relevant evidence collected for your audit, and link to the relevant evidence folders which are named and organized according to the controls specified in your assessment. </p>"
+      "documentation": "<p> A finalized document generated from an Audit Manager assessment. These reports summarize the relevant evidence collected for your audit, and link to the relevant evidence folders which are named and organized according to the controls specified in your assessment. </p>"
     },
     "AssessmentReportDescription": {
       "type": "string",
@@ -2005,7 +2005,7 @@
           "documentation": "<p> The destination of the assessment report. </p>"
         }
       },
-      "documentation": "<p> The location in which AWS Audit Manager saves assessment reports for the given assessment. </p>"
+      "documentation": "<p> The location in which Audit Manager saves assessment reports for the given assessment. </p>"
     },
     "AssessmentReportsMetadata": {
       "type": "list",
@@ -2091,7 +2091,7 @@
       "members": {
         "createDelegationRequest": {
           "shape": "CreateDelegationRequest",
-          "documentation": "<p> The API request to batch create delegations in AWS Audit Manager. </p>"
+          "documentation": "<p> The API request to batch create delegations in Audit Manager. </p>"
         },
         "errorCode": {
           "shape": "ErrorCode",
@@ -2119,7 +2119,7 @@
       "members": {
         "createDelegationRequests": {
           "shape": "CreateDelegationRequests",
-          "documentation": "<p> The API request to batch create delegations in AWS Audit Manager. </p>"
+          "documentation": "<p> The API request to batch create delegations in Audit Manager. </p>"
         },
         "assessmentId": {
           "shape": "UUID",
@@ -2236,7 +2236,7 @@
       "members": {
         "manualEvidence": {
           "shape": "ManualEvidence",
-          "documentation": "<p> Manual evidence that cannot be collected automatically by AWS Audit Manager. </p>"
+          "documentation": "<p> Manual evidence that cannot be collected automatically by Audit Manager. </p>"
         },
         "errorCode": {
           "shape": "ErrorCode",
@@ -2324,7 +2324,7 @@
           "documentation": "<p> The IAM user or role that performed the action. </p>"
         }
       },
-      "documentation": "<p> The record of a change within AWS Audit Manager, such as a modified assessment, a delegated control set, and so on. </p>"
+      "documentation": "<p> The record of a change within Audit Manager, such as a modified assessment, a delegated control set, and so on. </p>"
     },
     "ChangeLogs": {
       "type": "list",
@@ -2374,7 +2374,7 @@
         },
         "controlSources": {
           "shape": "ControlSources",
-          "documentation": "<p> The data source that determines from where AWS Audit Manager collects evidence for the control. </p>"
+          "documentation": "<p> The data source that determines from where Audit Manager collects evidence for the control. </p>"
         },
         "controlMappingSources": {
           "shape": "ControlMappingSources",
@@ -2401,7 +2401,7 @@
           "documentation": "<p> The tags associated with the control. </p>"
         }
       },
-      "documentation": "<p> A control in AWS Audit Manager. </p>"
+      "documentation": "<p> A control in Audit Manager. </p>"
     },
     "ControlComment": {
       "type": "structure",
@@ -2472,7 +2472,7 @@
           "documentation": "<p> The instructions for troubleshooting the specified control. </p>"
         }
       },
-      "documentation": "<p> The data source that determines from where AWS Audit Manager collects evidence for the control. </p>"
+      "documentation": "<p> The data source that determines from where Audit Manager collects evidence for the control. </p>"
     },
     "ControlMappingSources": {
       "type": "list",
@@ -2498,7 +2498,7 @@
         },
         "controlSources": {
           "shape": "ControlSources",
-          "documentation": "<p> The data source that determines from where AWS Audit Manager collects evidence for the control. </p>"
+          "documentation": "<p> The data source that determines from where Audit Manager collects evidence for the control. </p>"
         },
         "createdAt": {
           "shape": "Timestamp",
@@ -2548,7 +2548,7 @@
           "documentation": "<p> The list of controls within the control set. </p>"
         }
       },
-      "documentation": "<p> A set of controls in AWS Audit Manager. </p>"
+      "documentation": "<p> A set of controls in Audit Manager. </p>"
     },
     "ControlSetId": {
       "type": "string",
@@ -2619,7 +2619,7 @@
           "documentation": "<p> The unique identifier of the control. </p>"
         }
       },
-      "documentation": "<p> Control entity attributes that uniquely identify an existing control to be added to a framework in AWS Audit Manager. </p>"
+      "documentation": "<p> Control entity attributes that uniquely identify an existing control to be added to a framework in Audit Manager. </p>"
     },
     "CreateAssessmentFrameworkControlSet": {
       "type": "structure",
@@ -2636,7 +2636,7 @@
           "documentation": "<p> The list of controls within the control set. This does not contain the control set ID. </p>"
         }
       },
-      "documentation": "<p> A <code>controlSet</code> entity that represents a collection of controls in AWS Audit Manager. This does not contain the control set ID. </p>"
+      "documentation": "<p> A <code>controlSet</code> entity that represents a collection of controls in Audit Manager. This does not contain the control set ID. </p>"
     },
     "CreateAssessmentFrameworkControlSets": {
       "type": "list",
@@ -2778,7 +2778,7 @@
         },
         "sourceDescription": {
           "shape": "SourceDescription",
-          "documentation": "<p> The description of the data source that determines from where AWS Audit Manager collects evidence for the control. </p>"
+          "documentation": "<p> The description of the data source that determines from where Audit Manager collects evidence for the control. </p>"
         },
         "sourceSetUpOption": {
           "shape": "SourceSetUpOption",
@@ -2875,7 +2875,7 @@
           "documentation": "<p> The type of customer persona. </p> <note> <p>In <code>CreateAssessment</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>. </p> <p>In <code>UpdateSettings</code>, <code>roleType</code> can only be <code>PROCESS_OWNER</code>.</p> <p>In <code>BatchCreateDelegationByAssessment</code>, <code>roleType</code> can only be <code>RESOURCE_OWNER</code>.</p> </note>"
         }
       },
-      "documentation": "<p> A collection of attributes used to create a delegation for an assessment in AWS Audit Manager. </p>"
+      "documentation": "<p> A collection of attributes used to create a delegation for an assessment in Audit Manager. </p>"
     },
     "CreateDelegationRequests": {
       "type": "list",
@@ -3167,7 +3167,7 @@
         },
         "evidenceAwsAccountId": {
           "shape": "AccountId",
-          "documentation": "<p> The identifier for the specified AWS account. </p>"
+          "documentation": "<p> The identifier for the specified account. </p>"
         },
         "time": {
           "shape": "Timestamp",
@@ -3175,7 +3175,7 @@
         },
         "eventSource": {
           "shape": "AWSServiceName",
-          "documentation": "<p> The AWS service from which the evidence is collected. </p>"
+          "documentation": "<p> The Amazon Web Service from which the evidence is collected. </p>"
         },
         "eventName": {
           "shape": "EventName",
@@ -3199,15 +3199,15 @@
         },
         "complianceCheck": {
           "shape": "String",
-          "documentation": "<p> The evaluation status for evidence that falls under the compliance check category. For evidence collected from AWS Security Hub, a <i>Pass</i> or <i>Fail</i> result is shown. For evidence collected from AWS Config, a <i>Compliant</i> or <i>Noncompliant</i> result is shown. </p>"
+          "documentation": "<p> The evaluation status for evidence that falls under the compliance check category. For evidence collected from Security Hub, a <i>Pass</i> or <i>Fail</i> result is shown. For evidence collected from Config, a <i>Compliant</i> or <i>Noncompliant</i> result is shown. </p>"
         },
         "awsOrganization": {
           "shape": "String",
-          "documentation": "<p> The AWS account from which the evidence is collected, and its AWS organization path. </p>"
+          "documentation": "<p> The account from which the evidence is collected, and its organization path. </p>"
         },
         "awsAccountId": {
           "shape": "AccountId",
-          "documentation": "<p> The identifier for the specified AWS account. </p>"
+          "documentation": "<p> The identifier for the specified account. </p>"
         },
         "evidenceFolderId": {
           "shape": "UUID",
@@ -3302,7 +3302,7 @@
         },
         "controlSources": {
           "shape": "ControlSources",
-          "documentation": "<p> The sources from which AWS Audit Manager collects evidence for the control. </p>"
+          "documentation": "<p> The sources from which Audit Manager collects evidence for the control. </p>"
         },
         "controlSets": {
           "shape": "ControlSets",
@@ -3329,7 +3329,7 @@
           "documentation": "<p> The tags associated with the framework. </p>"
         }
       },
-      "documentation": "<p> The file used to structure and automate AWS Audit Manager assessments for a given compliance standard. </p>"
+      "documentation": "<p> The file used to structure and automate Audit Manager assessments for a given compliance standard. </p>"
     },
     "FrameworkDescription": {
       "type": "string",
@@ -3393,7 +3393,7 @@
       "members": {
         "status": {
           "shape": "AccountStatus",
-          "documentation": "<p> The status of the specified AWS account. </p>"
+          "documentation": "<p> The status of the specified account. </p>"
         }
       }
     },
@@ -3830,7 +3830,7 @@
       "members": {
         "serviceMetadata": {
           "shape": "ServiceMetadataList",
-          "documentation": "<p> The metadata associated with the aAWS service. </p>"
+          "documentation": "<p> The metadata associated with the Amazon Web Service. </p>"
         }
       }
     },
@@ -3853,7 +3853,7 @@
       "members": {
         "settings": {
           "shape": "Settings",
-          "documentation": "<p> The settings object that holds all supported AWS Audit Manager settings. </p>"
+          "documentation": "<p> The settings object that holds all supported Audit Manager settings. </p>"
         }
       }
     },
@@ -4146,7 +4146,7 @@
           "documentation": "<p> The Amazon S3 URL that points to a manual evidence object. </p>"
         }
       },
-      "documentation": "<p> Evidence that is uploaded to AWS Audit Manager manually. </p>"
+      "documentation": "<p> Evidence that is uploaded to Audit Manager manually. </p>"
     },
     "ManualEvidenceList": {
       "type": "list",
@@ -4204,7 +4204,7 @@
           "documentation": "<p> The sender of the notification. </p>"
         }
       },
-      "documentation": "<p> The notification used to inform a user of an update in AWS Audit Manager. For example, this includes the notification that is sent when a control set is delegated for review. </p>"
+      "documentation": "<p> The notification used to inform a user of an update in Audit Manager. For example, this includes the notification that is sent when a control set is delegated for review. </p>"
     },
     "Notifications": {
       "type": "list",
@@ -4227,11 +4227,11 @@
       "members": {
         "kmsKey": {
           "shape": "KmsKey",
-          "documentation": "<p> The AWS KMS key details. </p>"
+          "documentation": "<p> The KMS key details. </p>"
         },
         "delegatedAdminAccount": {
           "shape": "AccountId",
-          "documentation": "<p> The delegated administrator account for AWS Audit Manager. </p>"
+          "documentation": "<p> The delegated administrator account for Audit Manager. </p>"
         }
       }
     },
@@ -4265,7 +4265,7 @@
         },
         "organizationId": {
           "shape": "organizationId",
-          "documentation": "<p> The identifier for the specified AWS organization. </p>"
+          "documentation": "<p> The identifier for the specified organization. </p>"
         }
       }
     },
@@ -4281,7 +4281,7 @@
           "documentation": "<p> The value of the specified resource. </p>"
         }
       },
-      "documentation": "<p> A system asset that is evaluated in an AWS Audit Manager assessment. </p>"
+      "documentation": "<p> A system asset that is evaluated in an Audit Manager assessment. </p>"
     },
     "Resources": {
       "type": "list",
@@ -4301,7 +4301,7 @@
           "documentation": "<p> The Amazon Resource Name (ARN) of the IAM role. </p>"
         }
       },
-      "documentation": "<p> The wrapper that contains the AWS Audit Manager role information of the current user, such as the role type and IAM Amazon Resource Name (ARN). </p>"
+      "documentation": "<p> The wrapper that contains the Audit Manager role information of the current user, such as the role type and IAM Amazon Resource Name (ARN). </p>"
     },
     "RoleType": {
       "type": "string",
@@ -4320,7 +4320,7 @@
       "type": "string",
       "max": 1024,
       "min": 1,
-      "pattern": "^(S|s)3:\\/\\/[a-zA-Z0-9-_\\/.]+$"
+      "pattern": "^(S|s)3:\\/\\/[a-zA-Z0-9\\-\\.\\(\\)\\'\\*\\_\\!\\/]+$"
     },
     "SNSTopic": {
       "type": "string",
@@ -4333,36 +4333,36 @@
       "members": {
         "awsAccounts": {
           "shape": "AWSAccounts",
-          "documentation": "<p> The AWS accounts included in the scope of the assessment. </p>"
+          "documentation": "<p> The accounts included in the scope of the assessment. </p>"
         },
         "awsServices": {
           "shape": "AWSServices",
-          "documentation": "<p> The AWS services included in the scope of the assessment. </p>"
+          "documentation": "<p> The Amazon Web Services services included in the scope of the assessment. </p>"
         }
       },
-      "documentation": "<p> The wrapper that contains the AWS accounts and AWS services in scope for the assessment. </p>"
+      "documentation": "<p> The wrapper that contains the accounts and services in scope for the assessment. </p>"
     },
     "ServiceMetadata": {
       "type": "structure",
       "members": {
         "name": {
           "shape": "AWSServiceName",
-          "documentation": "<p> The name of the AWS service. </p>"
+          "documentation": "<p> The name of the Amazon Web Service. </p>"
         },
         "displayName": {
           "shape": "NonEmptyString",
-          "documentation": "<p> The display name of the AWS service. </p>"
+          "documentation": "<p> The display name of the Amazon Web Service. </p>"
         },
         "description": {
           "shape": "NonEmptyString",
-          "documentation": "<p> The description of the specified AWS service. </p>"
+          "documentation": "<p> The description of the specified Amazon Web Service. </p>"
         },
         "category": {
           "shape": "NonEmptyString",
-          "documentation": "<p> The category in which the AWS service belongs, such as compute, storage, database, and so on. </p>"
+          "documentation": "<p> The category in which the Amazon Web Service belongs, such as compute, storage, database, and so on. </p>"
         }
       },
-      "documentation": "<p> The metadata associated with the specified AWS service. </p>"
+      "documentation": "<p> The metadata associated with the specified Amazon Web Service. </p>"
     },
     "ServiceMetadataList": {
       "type": "list",
@@ -4385,7 +4385,7 @@
       "members": {
         "isAwsOrgEnabled": {
           "shape": "Boolean",
-          "documentation": "<p> Specifies whether AWS Organizations is enabled. </p>"
+          "documentation": "<p> Specifies whether Organizations is enabled. </p>"
         },
         "snsTopic": {
           "shape": "SNSTopic",
@@ -4401,10 +4401,10 @@
         },
         "kmsKey": {
           "shape": "KmsKey",
-          "documentation": "<p> The AWS KMS key details. </p>"
+          "documentation": "<p> The KMS key details. </p>"
         }
       },
-      "documentation": "<p> The settings object that holds all supported AWS Audit Manager settings. </p>"
+      "documentation": "<p> The settings object that holds all supported Audit Manager settings. </p>"
     },
     "SnsArn": {
       "type": "string",
@@ -4434,10 +4434,10 @@
         },
         "keywordValue": {
           "shape": "KeywordValue",
-          "documentation": "<p> The value of the keyword used to search AWS CloudTrail logs, AWS Config rules, AWS Security Hub checks, and AWS API names when mapping a control data source. </p>"
+          "documentation": "<p> The value of the keyword used to search CloudTrail logs, Config rules, Security Hub checks, and Amazon Web Services API names when mapping a control data source. </p>"
         }
       },
-      "documentation": "<p> The keyword to search for in AWS CloudTrail logs, AWS Config rules, AWS Security Hub checks, and AWS API names. </p>"
+      "documentation": "<p> The keyword to search for in CloudTrail logs, Config rules, Security Hub checks, and Amazon Web Services API names. </p>"
     },
     "SourceName": {
       "type": "string",
@@ -4695,7 +4695,7 @@
           "documentation": "<p> The list of controls contained within the control set. </p>"
         }
       },
-      "documentation": "<p> A <code>controlSet</code> entity that represents a collection of controls in AWS Audit Manager. This does not contain the control set ID. </p>"
+      "documentation": "<p> A <code>controlSet</code> entity that represents a collection of controls in Audit Manager. This does not contain the control set ID. </p>"
     },
     "UpdateAssessmentFrameworkControlSets": {
       "type": "list",
@@ -4870,7 +4870,7 @@
       "members": {
         "snsTopic": {
           "shape": "SnsArn",
-          "documentation": "<p> The Amazon Simple Notification Service (Amazon SNS) topic to which AWS Audit Manager sends notifications. </p>"
+          "documentation": "<p> The Amazon Simple Notification Service (Amazon SNS) topic to which Audit Manager sends notifications. </p>"
         },
         "defaultAssessmentReportsDestination": {
           "shape": "AssessmentReportsDestination",
@@ -4882,7 +4882,7 @@
         },
         "kmsKey": {
           "shape": "KmsKey",
-          "documentation": "<p> The AWS KMS key details. </p>"
+          "documentation": "<p> The KMS key details. </p>"
         }
       }
     },
@@ -4957,5 +4957,5 @@
       "pattern": "o-[a-z0-9]{10,32}"
     }
   },
-  "documentation": "<p>Welcome to the AWS Audit Manager API reference. This guide is for developers who need detailed information about the AWS Audit Manager API operations, data types, and errors. </p> <p>AWS Audit Manager is a service that provides automated evidence collection so that you can continuously audit your AWS usage, and assess the effectiveness of your controls to better manage risk and simplify compliance.</p> <p>AWS Audit Manager provides pre-built frameworks that structure and automate assessments for a given compliance standard. Frameworks include a pre-built collection of controls with descriptions and testing procedures, which are grouped according to the requirements of the specified compliance standard or regulation. You can also customize frameworks and controls to support internal audits with unique requirements. </p> <p>Use the following links to get started with the AWS Audit Manager API:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all AWS Audit Manager API operations.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Types.html\">Data types</a>: An alphabetical list of all AWS Audit Manager data types.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonParameters.html\">Common parameters</a>: Parameters that all Query operations can use.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonErrors.html\">Common errors</a>: Client and server errors that all operations can return.</p> </li> </ul> <p>If you're new to AWS Audit Manager, we recommend that you review the <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html\"> AWS Audit Manager User Guide</a>.</p>"
+  "documentation": "<p>Welcome to the Audit Manager API reference. This guide is for developers who need detailed information about the Audit Manager API operations, data types, and errors. </p> <p>Audit Manager is a service that provides automated evidence collection so that you can continuously audit your Amazon Web Services usage, and assess the effectiveness of your controls to better manage risk and simplify compliance.</p> <p>Audit Manager provides pre-built frameworks that structure and automate assessments for a given compliance standard. Frameworks include a pre-built collection of controls with descriptions and testing procedures, which are grouped according to the requirements of the specified compliance standard or regulation. You can also customize frameworks and controls to support internal audits with unique requirements. </p> <p>Use the following links to get started with the Audit Manager API:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all Audit Manager API operations.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Types.html\">Data types</a>: An alphabetical list of all Audit Manager data types.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonParameters.html\">Common parameters</a>: Parameters that all Query operations can use.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonErrors.html\">Common errors</a>: Client and server errors that all operations can return.</p> </li> </ul> <p>If you're new to Audit Manager, we recommend that you review the <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html\"> Audit Manager User Guide</a>.</p>"
 }

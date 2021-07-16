@@ -1539,6 +1539,10 @@ declare namespace Chime {
      */
     SupportedLicenses?: LicenseList;
     /**
+     * The status of the account, Suspended or Active.
+     */
+    AccountStatus?: AccountStatus;
+    /**
      * The sign-in delegate groups associated with the account.
      */
     SigninDelegateGroups?: SigninDelegateGroupList;
@@ -1555,6 +1559,7 @@ declare namespace Chime {
      */
     EnableDialOut?: Boolean;
   }
+  export type AccountStatus = "Suspended"|"Active"|string;
   export type AccountType = "Team"|"EnterpriseDirectory"|"EnterpriseLWA"|"EnterpriseOIDC"|string;
   export interface AlexaForBusinessMetadata {
     /**

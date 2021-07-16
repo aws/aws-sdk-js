@@ -7207,6 +7207,10 @@
           "shape": "LicenseList",
           "documentation": "<p>Supported licenses for the Amazon Chime account.</p>"
         },
+        "AccountStatus": {
+          "shape": "AccountStatus",
+          "documentation": "<p>The status of the account, <code>Suspended</code> or <code>Active</code>.</p>"
+        },
         "SigninDelegateGroups": {
           "shape": "SigninDelegateGroupList",
           "documentation": "<p>The sign-in delegate groups associated with the account.</p>"
@@ -7239,6 +7243,13 @@
         }
       },
       "documentation": "<p>Settings related to the Amazon Chime account. This includes settings that start or stop remote control of shared screens, or start or stop the dial-out option in the Amazon Chime web application. For more information about these settings, see <a href=\"https://docs.aws.amazon.com/chime/latest/ag/policies.html\">Use the Policies Page</a> in the <i>Amazon Chime Administration Guide</i>.</p>"
+    },
+    "AccountStatus": {
+      "type": "string",
+      "enum": [
+        "Suspended",
+        "Active"
+      ]
     },
     "AccountType": {
       "type": "string",

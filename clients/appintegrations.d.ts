@@ -12,75 +12,75 @@ declare class AppIntegrations extends Service {
   constructor(options?: AppIntegrations.Types.ClientConfiguration)
   config: Config & AppIntegrations.Types.ClientConfiguration;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Creates an EventIntegration, given a specified name, description, and a reference to an Amazon Eventbridge bus in your account and a partner event source that will push events to that bus. No objects are created in the your account, only metadata that is persisted on the EventIntegration control plane.
+   * Creates an EventIntegration, given a specified name, description, and a reference to an Amazon EventBridge bus in your account and a partner event source that pushes events to that bus. No objects are created in the your account, only metadata that is persisted on the EventIntegration control plane.
    */
   createEventIntegration(params: AppIntegrations.Types.CreateEventIntegrationRequest, callback?: (err: AWSError, data: AppIntegrations.Types.CreateEventIntegrationResponse) => void): Request<AppIntegrations.Types.CreateEventIntegrationResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Creates an EventIntegration, given a specified name, description, and a reference to an Amazon Eventbridge bus in your account and a partner event source that will push events to that bus. No objects are created in the your account, only metadata that is persisted on the EventIntegration control plane.
+   * Creates an EventIntegration, given a specified name, description, and a reference to an Amazon EventBridge bus in your account and a partner event source that pushes events to that bus. No objects are created in the your account, only metadata that is persisted on the EventIntegration control plane.
    */
   createEventIntegration(callback?: (err: AWSError, data: AppIntegrations.Types.CreateEventIntegrationResponse) => void): Request<AppIntegrations.Types.CreateEventIntegrationResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Deletes the specified existing event integration. If the event integration is associated with clients, the request is rejected.
+   * Deletes the specified existing event integration. If the event integration is associated with clients, the request is rejected.
    */
   deleteEventIntegration(params: AppIntegrations.Types.DeleteEventIntegrationRequest, callback?: (err: AWSError, data: AppIntegrations.Types.DeleteEventIntegrationResponse) => void): Request<AppIntegrations.Types.DeleteEventIntegrationResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Deletes the specified existing event integration. If the event integration is associated with clients, the request is rejected.
+   * Deletes the specified existing event integration. If the event integration is associated with clients, the request is rejected.
    */
   deleteEventIntegration(callback?: (err: AWSError, data: AppIntegrations.Types.DeleteEventIntegrationResponse) => void): Request<AppIntegrations.Types.DeleteEventIntegrationResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Return information about the event integration.
+   * Return information about the event integration.
    */
   getEventIntegration(params: AppIntegrations.Types.GetEventIntegrationRequest, callback?: (err: AWSError, data: AppIntegrations.Types.GetEventIntegrationResponse) => void): Request<AppIntegrations.Types.GetEventIntegrationResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Return information about the event integration.
+   * Return information about the event integration.
    */
   getEventIntegration(callback?: (err: AWSError, data: AppIntegrations.Types.GetEventIntegrationResponse) => void): Request<AppIntegrations.Types.GetEventIntegrationResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Returns a paginated list of event integration associations in the account. 
+   * Returns a paginated list of event integration associations in the account. 
    */
   listEventIntegrationAssociations(params: AppIntegrations.Types.ListEventIntegrationAssociationsRequest, callback?: (err: AWSError, data: AppIntegrations.Types.ListEventIntegrationAssociationsResponse) => void): Request<AppIntegrations.Types.ListEventIntegrationAssociationsResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Returns a paginated list of event integration associations in the account. 
+   * Returns a paginated list of event integration associations in the account. 
    */
   listEventIntegrationAssociations(callback?: (err: AWSError, data: AppIntegrations.Types.ListEventIntegrationAssociationsResponse) => void): Request<AppIntegrations.Types.ListEventIntegrationAssociationsResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Returns a paginated list of event integrations in the account.
+   * Returns a paginated list of event integrations in the account.
    */
   listEventIntegrations(params: AppIntegrations.Types.ListEventIntegrationsRequest, callback?: (err: AWSError, data: AppIntegrations.Types.ListEventIntegrationsResponse) => void): Request<AppIntegrations.Types.ListEventIntegrationsResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Returns a paginated list of event integrations in the account.
+   * Returns a paginated list of event integrations in the account.
    */
   listEventIntegrations(callback?: (err: AWSError, data: AppIntegrations.Types.ListEventIntegrationsResponse) => void): Request<AppIntegrations.Types.ListEventIntegrationsResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Lists the tags for the specified resource.
+   * Lists the tags for the specified resource.
    */
   listTagsForResource(params: AppIntegrations.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: AppIntegrations.Types.ListTagsForResourceResponse) => void): Request<AppIntegrations.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Lists the tags for the specified resource.
+   * Lists the tags for the specified resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: AppIntegrations.Types.ListTagsForResourceResponse) => void): Request<AppIntegrations.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Adds the specified tags to the specified resource.
+   * Adds the specified tags to the specified resource.
    */
   tagResource(params: AppIntegrations.Types.TagResourceRequest, callback?: (err: AWSError, data: AppIntegrations.Types.TagResourceResponse) => void): Request<AppIntegrations.Types.TagResourceResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Adds the specified tags to the specified resource.
+   * Adds the specified tags to the specified resource.
    */
   tagResource(callback?: (err: AWSError, data: AppIntegrations.Types.TagResourceResponse) => void): Request<AppIntegrations.Types.TagResourceResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Removes the specified tags from the specified resource.
+   * Removes the specified tags from the specified resource.
    */
   untagResource(params: AppIntegrations.Types.UntagResourceRequest, callback?: (err: AWSError, data: AppIntegrations.Types.UntagResourceResponse) => void): Request<AppIntegrations.Types.UntagResourceResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Removes the specified tags from the specified resource.
+   * Removes the specified tags from the specified resource.
    */
   untagResource(callback?: (err: AWSError, data: AppIntegrations.Types.UntagResourceResponse) => void): Request<AppIntegrations.Types.UntagResourceResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Updates the description of an event integration.
+   * Updates the description of an event integration.
    */
   updateEventIntegration(params: AppIntegrations.Types.UpdateEventIntegrationRequest, callback?: (err: AWSError, data: AppIntegrations.Types.UpdateEventIntegrationResponse) => void): Request<AppIntegrations.Types.UpdateEventIntegrationResponse, AWSError>;
   /**
-   * The Amazon AppIntegrations APIs are in preview release and are subject to change. Updates the description of an event integration.
+   * Updates the description of an event integration.
    */
   updateEventIntegration(callback?: (err: AWSError, data: AppIntegrations.Types.UpdateEventIntegrationResponse) => void): Request<AppIntegrations.Types.UpdateEventIntegrationResponse, AWSError>;
 }
@@ -102,7 +102,7 @@ declare namespace AppIntegrations {
      */
     EventFilter: EventFilter;
     /**
-     * The Eventbridge bus.
+     * The EventBridge bus.
      */
     EventBridgeBus: EventBridgeBus;
     /**
@@ -155,7 +155,7 @@ declare namespace AppIntegrations {
      */
     EventFilter?: EventFilter;
     /**
-     * The Amazon Eventbridge bus for the event integration.
+     * The Amazon EventBridge bus for the event integration.
      */
     EventBridgeBus?: EventBridgeBus;
     /**
@@ -181,7 +181,7 @@ declare namespace AppIntegrations {
      */
     ClientId?: ClientId;
     /**
-     * The name of the Eventbridge rule.
+     * The name of the EventBridge rule.
      */
     EventBridgeRuleName?: EventBridgeRuleName;
     /**
@@ -211,7 +211,7 @@ declare namespace AppIntegrations {
      */
     EventIntegrationArn?: Arn;
     /**
-     * The Eventbridge bus.
+     * The EventBridge bus.
      */
     EventBridgeBus?: EventBridgeBus;
     /**

@@ -12,67 +12,67 @@ declare class AuditManager extends Service {
   constructor(options?: AuditManager.Types.ClientConfiguration)
   config: Config & AuditManager.Types.ClientConfiguration;
   /**
-   *  Associates an evidence folder to the specified assessment report in AWS Audit Manager. 
+   *  Associates an evidence folder to the specified assessment report in Audit Manager. 
    */
   associateAssessmentReportEvidenceFolder(params: AuditManager.Types.AssociateAssessmentReportEvidenceFolderRequest, callback?: (err: AWSError, data: AuditManager.Types.AssociateAssessmentReportEvidenceFolderResponse) => void): Request<AuditManager.Types.AssociateAssessmentReportEvidenceFolderResponse, AWSError>;
   /**
-   *  Associates an evidence folder to the specified assessment report in AWS Audit Manager. 
+   *  Associates an evidence folder to the specified assessment report in Audit Manager. 
    */
   associateAssessmentReportEvidenceFolder(callback?: (err: AWSError, data: AuditManager.Types.AssociateAssessmentReportEvidenceFolderResponse) => void): Request<AuditManager.Types.AssociateAssessmentReportEvidenceFolderResponse, AWSError>;
   /**
-   *  Associates a list of evidence to an assessment report in an AWS Audit Manager assessment. 
+   *  Associates a list of evidence to an assessment report in an Audit Manager assessment. 
    */
   batchAssociateAssessmentReportEvidence(params: AuditManager.Types.BatchAssociateAssessmentReportEvidenceRequest, callback?: (err: AWSError, data: AuditManager.Types.BatchAssociateAssessmentReportEvidenceResponse) => void): Request<AuditManager.Types.BatchAssociateAssessmentReportEvidenceResponse, AWSError>;
   /**
-   *  Associates a list of evidence to an assessment report in an AWS Audit Manager assessment. 
+   *  Associates a list of evidence to an assessment report in an Audit Manager assessment. 
    */
   batchAssociateAssessmentReportEvidence(callback?: (err: AWSError, data: AuditManager.Types.BatchAssociateAssessmentReportEvidenceResponse) => void): Request<AuditManager.Types.BatchAssociateAssessmentReportEvidenceResponse, AWSError>;
   /**
-   *  Create a batch of delegations for a specified assessment in AWS Audit Manager. 
+   *  Create a batch of delegations for a specified assessment in Audit Manager. 
    */
   batchCreateDelegationByAssessment(params: AuditManager.Types.BatchCreateDelegationByAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.BatchCreateDelegationByAssessmentResponse) => void): Request<AuditManager.Types.BatchCreateDelegationByAssessmentResponse, AWSError>;
   /**
-   *  Create a batch of delegations for a specified assessment in AWS Audit Manager. 
+   *  Create a batch of delegations for a specified assessment in Audit Manager. 
    */
   batchCreateDelegationByAssessment(callback?: (err: AWSError, data: AuditManager.Types.BatchCreateDelegationByAssessmentResponse) => void): Request<AuditManager.Types.BatchCreateDelegationByAssessmentResponse, AWSError>;
   /**
-   *  Deletes the delegations in the specified AWS Audit Manager assessment. 
+   *  Deletes the delegations in the specified Audit Manager assessment. 
    */
   batchDeleteDelegationByAssessment(params: AuditManager.Types.BatchDeleteDelegationByAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.BatchDeleteDelegationByAssessmentResponse) => void): Request<AuditManager.Types.BatchDeleteDelegationByAssessmentResponse, AWSError>;
   /**
-   *  Deletes the delegations in the specified AWS Audit Manager assessment. 
+   *  Deletes the delegations in the specified Audit Manager assessment. 
    */
   batchDeleteDelegationByAssessment(callback?: (err: AWSError, data: AuditManager.Types.BatchDeleteDelegationByAssessmentResponse) => void): Request<AuditManager.Types.BatchDeleteDelegationByAssessmentResponse, AWSError>;
   /**
-   *  Disassociates a list of evidence from the specified assessment report in AWS Audit Manager. 
+   *  Disassociates a list of evidence from the specified assessment report in Audit Manager. 
    */
   batchDisassociateAssessmentReportEvidence(params: AuditManager.Types.BatchDisassociateAssessmentReportEvidenceRequest, callback?: (err: AWSError, data: AuditManager.Types.BatchDisassociateAssessmentReportEvidenceResponse) => void): Request<AuditManager.Types.BatchDisassociateAssessmentReportEvidenceResponse, AWSError>;
   /**
-   *  Disassociates a list of evidence from the specified assessment report in AWS Audit Manager. 
+   *  Disassociates a list of evidence from the specified assessment report in Audit Manager. 
    */
   batchDisassociateAssessmentReportEvidence(callback?: (err: AWSError, data: AuditManager.Types.BatchDisassociateAssessmentReportEvidenceResponse) => void): Request<AuditManager.Types.BatchDisassociateAssessmentReportEvidenceResponse, AWSError>;
   /**
-   *  Uploads one or more pieces of evidence to the specified control in the assessment in AWS Audit Manager. 
+   *  Uploads one or more pieces of evidence to the specified control in the assessment in Audit Manager. 
    */
   batchImportEvidenceToAssessmentControl(params: AuditManager.Types.BatchImportEvidenceToAssessmentControlRequest, callback?: (err: AWSError, data: AuditManager.Types.BatchImportEvidenceToAssessmentControlResponse) => void): Request<AuditManager.Types.BatchImportEvidenceToAssessmentControlResponse, AWSError>;
   /**
-   *  Uploads one or more pieces of evidence to the specified control in the assessment in AWS Audit Manager. 
+   *  Uploads one or more pieces of evidence to the specified control in the assessment in Audit Manager. 
    */
   batchImportEvidenceToAssessmentControl(callback?: (err: AWSError, data: AuditManager.Types.BatchImportEvidenceToAssessmentControlResponse) => void): Request<AuditManager.Types.BatchImportEvidenceToAssessmentControlResponse, AWSError>;
   /**
-   *  Creates an assessment in AWS Audit Manager. 
+   *  Creates an assessment in Audit Manager. 
    */
   createAssessment(params: AuditManager.Types.CreateAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.CreateAssessmentResponse) => void): Request<AuditManager.Types.CreateAssessmentResponse, AWSError>;
   /**
-   *  Creates an assessment in AWS Audit Manager. 
+   *  Creates an assessment in Audit Manager. 
    */
   createAssessment(callback?: (err: AWSError, data: AuditManager.Types.CreateAssessmentResponse) => void): Request<AuditManager.Types.CreateAssessmentResponse, AWSError>;
   /**
-   *  Creates a custom framework in AWS Audit Manager. 
+   *  Creates a custom framework in Audit Manager. 
    */
   createAssessmentFramework(params: AuditManager.Types.CreateAssessmentFrameworkRequest, callback?: (err: AWSError, data: AuditManager.Types.CreateAssessmentFrameworkResponse) => void): Request<AuditManager.Types.CreateAssessmentFrameworkResponse, AWSError>;
   /**
-   *  Creates a custom framework in AWS Audit Manager. 
+   *  Creates a custom framework in Audit Manager. 
    */
   createAssessmentFramework(callback?: (err: AWSError, data: AuditManager.Types.CreateAssessmentFrameworkResponse) => void): Request<AuditManager.Types.CreateAssessmentFrameworkResponse, AWSError>;
   /**
@@ -84,115 +84,115 @@ declare class AuditManager extends Service {
    */
   createAssessmentReport(callback?: (err: AWSError, data: AuditManager.Types.CreateAssessmentReportResponse) => void): Request<AuditManager.Types.CreateAssessmentReportResponse, AWSError>;
   /**
-   *  Creates a new custom control in AWS Audit Manager. 
+   *  Creates a new custom control in Audit Manager. 
    */
   createControl(params: AuditManager.Types.CreateControlRequest, callback?: (err: AWSError, data: AuditManager.Types.CreateControlResponse) => void): Request<AuditManager.Types.CreateControlResponse, AWSError>;
   /**
-   *  Creates a new custom control in AWS Audit Manager. 
+   *  Creates a new custom control in Audit Manager. 
    */
   createControl(callback?: (err: AWSError, data: AuditManager.Types.CreateControlResponse) => void): Request<AuditManager.Types.CreateControlResponse, AWSError>;
   /**
-   *  Deletes an assessment in AWS Audit Manager. 
+   *  Deletes an assessment in Audit Manager. 
    */
   deleteAssessment(params: AuditManager.Types.DeleteAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.DeleteAssessmentResponse) => void): Request<AuditManager.Types.DeleteAssessmentResponse, AWSError>;
   /**
-   *  Deletes an assessment in AWS Audit Manager. 
+   *  Deletes an assessment in Audit Manager. 
    */
   deleteAssessment(callback?: (err: AWSError, data: AuditManager.Types.DeleteAssessmentResponse) => void): Request<AuditManager.Types.DeleteAssessmentResponse, AWSError>;
   /**
-   *  Deletes a custom framework in AWS Audit Manager. 
+   *  Deletes a custom framework in Audit Manager. 
    */
   deleteAssessmentFramework(params: AuditManager.Types.DeleteAssessmentFrameworkRequest, callback?: (err: AWSError, data: AuditManager.Types.DeleteAssessmentFrameworkResponse) => void): Request<AuditManager.Types.DeleteAssessmentFrameworkResponse, AWSError>;
   /**
-   *  Deletes a custom framework in AWS Audit Manager. 
+   *  Deletes a custom framework in Audit Manager. 
    */
   deleteAssessmentFramework(callback?: (err: AWSError, data: AuditManager.Types.DeleteAssessmentFrameworkResponse) => void): Request<AuditManager.Types.DeleteAssessmentFrameworkResponse, AWSError>;
   /**
-   *  Deletes an assessment report from an assessment in AWS Audit Manager. 
+   *  Deletes an assessment report from an assessment in Audit Manager. 
    */
   deleteAssessmentReport(params: AuditManager.Types.DeleteAssessmentReportRequest, callback?: (err: AWSError, data: AuditManager.Types.DeleteAssessmentReportResponse) => void): Request<AuditManager.Types.DeleteAssessmentReportResponse, AWSError>;
   /**
-   *  Deletes an assessment report from an assessment in AWS Audit Manager. 
+   *  Deletes an assessment report from an assessment in Audit Manager. 
    */
   deleteAssessmentReport(callback?: (err: AWSError, data: AuditManager.Types.DeleteAssessmentReportResponse) => void): Request<AuditManager.Types.DeleteAssessmentReportResponse, AWSError>;
   /**
-   *  Deletes a custom control in AWS Audit Manager. 
+   *  Deletes a custom control in Audit Manager. 
    */
   deleteControl(params: AuditManager.Types.DeleteControlRequest, callback?: (err: AWSError, data: AuditManager.Types.DeleteControlResponse) => void): Request<AuditManager.Types.DeleteControlResponse, AWSError>;
   /**
-   *  Deletes a custom control in AWS Audit Manager. 
+   *  Deletes a custom control in Audit Manager. 
    */
   deleteControl(callback?: (err: AWSError, data: AuditManager.Types.DeleteControlResponse) => void): Request<AuditManager.Types.DeleteControlResponse, AWSError>;
   /**
-   *  Deregisters an account in AWS Audit Manager. 
+   *  Deregisters an account in Audit Manager. 
    */
   deregisterAccount(params: AuditManager.Types.DeregisterAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.DeregisterAccountResponse) => void): Request<AuditManager.Types.DeregisterAccountResponse, AWSError>;
   /**
-   *  Deregisters an account in AWS Audit Manager. 
+   *  Deregisters an account in Audit Manager. 
    */
   deregisterAccount(callback?: (err: AWSError, data: AuditManager.Types.DeregisterAccountResponse) => void): Request<AuditManager.Types.DeregisterAccountResponse, AWSError>;
   /**
-   *  Deregisters the delegated AWS administrator account from the AWS organization. 
+   * Removes the specified member account as a delegated administrator for Audit Manager.   When you remove a delegated administrator from your Audit Manager settings, or when you deregister a delegated administrator from Organizations, you continue to have access to the evidence that you previously collected under that account. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward. 
    */
   deregisterOrganizationAdminAccount(params: AuditManager.Types.DeregisterOrganizationAdminAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.DeregisterOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.DeregisterOrganizationAdminAccountResponse, AWSError>;
   /**
-   *  Deregisters the delegated AWS administrator account from the AWS organization. 
+   * Removes the specified member account as a delegated administrator for Audit Manager.   When you remove a delegated administrator from your Audit Manager settings, or when you deregister a delegated administrator from Organizations, you continue to have access to the evidence that you previously collected under that account. However, Audit Manager will stop collecting and attaching evidence to that delegated administrator account moving forward. 
    */
   deregisterOrganizationAdminAccount(callback?: (err: AWSError, data: AuditManager.Types.DeregisterOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.DeregisterOrganizationAdminAccountResponse, AWSError>;
   /**
-   *  Disassociates an evidence folder from the specified assessment report in AWS Audit Manager. 
+   *  Disassociates an evidence folder from the specified assessment report in Audit Manager. 
    */
   disassociateAssessmentReportEvidenceFolder(params: AuditManager.Types.DisassociateAssessmentReportEvidenceFolderRequest, callback?: (err: AWSError, data: AuditManager.Types.DisassociateAssessmentReportEvidenceFolderResponse) => void): Request<AuditManager.Types.DisassociateAssessmentReportEvidenceFolderResponse, AWSError>;
   /**
-   *  Disassociates an evidence folder from the specified assessment report in AWS Audit Manager. 
+   *  Disassociates an evidence folder from the specified assessment report in Audit Manager. 
    */
   disassociateAssessmentReportEvidenceFolder(callback?: (err: AWSError, data: AuditManager.Types.DisassociateAssessmentReportEvidenceFolderResponse) => void): Request<AuditManager.Types.DisassociateAssessmentReportEvidenceFolderResponse, AWSError>;
   /**
-   *  Returns the registration status of an account in AWS Audit Manager. 
+   *  Returns the registration status of an account in Audit Manager. 
    */
   getAccountStatus(params: AuditManager.Types.GetAccountStatusRequest, callback?: (err: AWSError, data: AuditManager.Types.GetAccountStatusResponse) => void): Request<AuditManager.Types.GetAccountStatusResponse, AWSError>;
   /**
-   *  Returns the registration status of an account in AWS Audit Manager. 
+   *  Returns the registration status of an account in Audit Manager. 
    */
   getAccountStatus(callback?: (err: AWSError, data: AuditManager.Types.GetAccountStatusResponse) => void): Request<AuditManager.Types.GetAccountStatusResponse, AWSError>;
   /**
-   *  Returns an assessment from AWS Audit Manager. 
+   *  Returns an assessment from Audit Manager. 
    */
   getAssessment(params: AuditManager.Types.GetAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentResponse) => void): Request<AuditManager.Types.GetAssessmentResponse, AWSError>;
   /**
-   *  Returns an assessment from AWS Audit Manager. 
+   *  Returns an assessment from Audit Manager. 
    */
   getAssessment(callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentResponse) => void): Request<AuditManager.Types.GetAssessmentResponse, AWSError>;
   /**
-   *  Returns a framework from AWS Audit Manager. 
+   *  Returns a framework from Audit Manager. 
    */
   getAssessmentFramework(params: AuditManager.Types.GetAssessmentFrameworkRequest, callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentFrameworkResponse) => void): Request<AuditManager.Types.GetAssessmentFrameworkResponse, AWSError>;
   /**
-   *  Returns a framework from AWS Audit Manager. 
+   *  Returns a framework from Audit Manager. 
    */
   getAssessmentFramework(callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentFrameworkResponse) => void): Request<AuditManager.Types.GetAssessmentFrameworkResponse, AWSError>;
   /**
-   *  Returns the URL of a specified assessment report in AWS Audit Manager. 
+   *  Returns the URL of a specified assessment report in Audit Manager. 
    */
   getAssessmentReportUrl(params: AuditManager.Types.GetAssessmentReportUrlRequest, callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentReportUrlResponse) => void): Request<AuditManager.Types.GetAssessmentReportUrlResponse, AWSError>;
   /**
-   *  Returns the URL of a specified assessment report in AWS Audit Manager. 
+   *  Returns the URL of a specified assessment report in Audit Manager. 
    */
   getAssessmentReportUrl(callback?: (err: AWSError, data: AuditManager.Types.GetAssessmentReportUrlResponse) => void): Request<AuditManager.Types.GetAssessmentReportUrlResponse, AWSError>;
   /**
-   *  Returns a list of changelogs from AWS Audit Manager. 
+   *  Returns a list of changelogs from Audit Manager. 
    */
   getChangeLogs(params: AuditManager.Types.GetChangeLogsRequest, callback?: (err: AWSError, data: AuditManager.Types.GetChangeLogsResponse) => void): Request<AuditManager.Types.GetChangeLogsResponse, AWSError>;
   /**
-   *  Returns a list of changelogs from AWS Audit Manager. 
+   *  Returns a list of changelogs from Audit Manager. 
    */
   getChangeLogs(callback?: (err: AWSError, data: AuditManager.Types.GetChangeLogsResponse) => void): Request<AuditManager.Types.GetChangeLogsResponse, AWSError>;
   /**
-   *  Returns a control from AWS Audit Manager. 
+   *  Returns a control from Audit Manager. 
    */
   getControl(params: AuditManager.Types.GetControlRequest, callback?: (err: AWSError, data: AuditManager.Types.GetControlResponse) => void): Request<AuditManager.Types.GetControlResponse, AWSError>;
   /**
-   *  Returns a control from AWS Audit Manager. 
+   *  Returns a control from Audit Manager. 
    */
   getControl(callback?: (err: AWSError, data: AuditManager.Types.GetControlResponse) => void): Request<AuditManager.Types.GetControlResponse, AWSError>;
   /**
@@ -204,99 +204,99 @@ declare class AuditManager extends Service {
    */
   getDelegations(callback?: (err: AWSError, data: AuditManager.Types.GetDelegationsResponse) => void): Request<AuditManager.Types.GetDelegationsResponse, AWSError>;
   /**
-   *  Returns evidence from AWS Audit Manager. 
+   *  Returns evidence from Audit Manager. 
    */
   getEvidence(params: AuditManager.Types.GetEvidenceRequest, callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceResponse) => void): Request<AuditManager.Types.GetEvidenceResponse, AWSError>;
   /**
-   *  Returns evidence from AWS Audit Manager. 
+   *  Returns evidence from Audit Manager. 
    */
   getEvidence(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceResponse) => void): Request<AuditManager.Types.GetEvidenceResponse, AWSError>;
   /**
-   *  Returns all evidence from a specified evidence folder in AWS Audit Manager. 
+   *  Returns all evidence from a specified evidence folder in Audit Manager. 
    */
   getEvidenceByEvidenceFolder(params: AuditManager.Types.GetEvidenceByEvidenceFolderRequest, callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceByEvidenceFolderResponse) => void): Request<AuditManager.Types.GetEvidenceByEvidenceFolderResponse, AWSError>;
   /**
-   *  Returns all evidence from a specified evidence folder in AWS Audit Manager. 
+   *  Returns all evidence from a specified evidence folder in Audit Manager. 
    */
   getEvidenceByEvidenceFolder(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceByEvidenceFolderResponse) => void): Request<AuditManager.Types.GetEvidenceByEvidenceFolderResponse, AWSError>;
   /**
-   *  Returns an evidence folder from the specified assessment in AWS Audit Manager. 
+   *  Returns an evidence folder from the specified assessment in Audit Manager. 
    */
   getEvidenceFolder(params: AuditManager.Types.GetEvidenceFolderRequest, callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFolderResponse) => void): Request<AuditManager.Types.GetEvidenceFolderResponse, AWSError>;
   /**
-   *  Returns an evidence folder from the specified assessment in AWS Audit Manager. 
+   *  Returns an evidence folder from the specified assessment in Audit Manager. 
    */
   getEvidenceFolder(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFolderResponse) => void): Request<AuditManager.Types.GetEvidenceFolderResponse, AWSError>;
   /**
-   *  Returns the evidence folders from a specified assessment in AWS Audit Manager. 
+   *  Returns the evidence folders from a specified assessment in Audit Manager. 
    */
   getEvidenceFoldersByAssessment(params: AuditManager.Types.GetEvidenceFoldersByAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFoldersByAssessmentResponse) => void): Request<AuditManager.Types.GetEvidenceFoldersByAssessmentResponse, AWSError>;
   /**
-   *  Returns the evidence folders from a specified assessment in AWS Audit Manager. 
+   *  Returns the evidence folders from a specified assessment in Audit Manager. 
    */
   getEvidenceFoldersByAssessment(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFoldersByAssessmentResponse) => void): Request<AuditManager.Types.GetEvidenceFoldersByAssessmentResponse, AWSError>;
   /**
-   *  Returns a list of evidence folders associated with a specified control of an assessment in AWS Audit Manager. 
+   *  Returns a list of evidence folders associated with a specified control of an assessment in Audit Manager. 
    */
   getEvidenceFoldersByAssessmentControl(params: AuditManager.Types.GetEvidenceFoldersByAssessmentControlRequest, callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse) => void): Request<AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse, AWSError>;
   /**
-   *  Returns a list of evidence folders associated with a specified control of an assessment in AWS Audit Manager. 
+   *  Returns a list of evidence folders associated with a specified control of an assessment in Audit Manager. 
    */
   getEvidenceFoldersByAssessmentControl(callback?: (err: AWSError, data: AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse) => void): Request<AuditManager.Types.GetEvidenceFoldersByAssessmentControlResponse, AWSError>;
   /**
-   *  Returns the name of the delegated AWS administrator account for the AWS organization. 
+   *  Returns the name of the delegated Amazon Web Services administrator account for the organization. 
    */
   getOrganizationAdminAccount(params: AuditManager.Types.GetOrganizationAdminAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.GetOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.GetOrganizationAdminAccountResponse, AWSError>;
   /**
-   *  Returns the name of the delegated AWS administrator account for the AWS organization. 
+   *  Returns the name of the delegated Amazon Web Services administrator account for the organization. 
    */
   getOrganizationAdminAccount(callback?: (err: AWSError, data: AuditManager.Types.GetOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.GetOrganizationAdminAccountResponse, AWSError>;
   /**
-   *  Returns a list of the in-scope AWS services for the specified assessment. 
+   *  Returns a list of the in-scope Amazon Web Services services for the specified assessment. 
    */
   getServicesInScope(params: AuditManager.Types.GetServicesInScopeRequest, callback?: (err: AWSError, data: AuditManager.Types.GetServicesInScopeResponse) => void): Request<AuditManager.Types.GetServicesInScopeResponse, AWSError>;
   /**
-   *  Returns a list of the in-scope AWS services for the specified assessment. 
+   *  Returns a list of the in-scope Amazon Web Services services for the specified assessment. 
    */
   getServicesInScope(callback?: (err: AWSError, data: AuditManager.Types.GetServicesInScopeResponse) => void): Request<AuditManager.Types.GetServicesInScopeResponse, AWSError>;
   /**
-   *  Returns the settings for the specified AWS account. 
+   *  Returns the settings for the specified account. 
    */
   getSettings(params: AuditManager.Types.GetSettingsRequest, callback?: (err: AWSError, data: AuditManager.Types.GetSettingsResponse) => void): Request<AuditManager.Types.GetSettingsResponse, AWSError>;
   /**
-   *  Returns the settings for the specified AWS account. 
+   *  Returns the settings for the specified account. 
    */
   getSettings(callback?: (err: AWSError, data: AuditManager.Types.GetSettingsResponse) => void): Request<AuditManager.Types.GetSettingsResponse, AWSError>;
   /**
-   *  Returns a list of the frameworks available in the AWS Audit Manager framework library. 
+   *  Returns a list of the frameworks available in the Audit Manager framework library. 
    */
   listAssessmentFrameworks(params: AuditManager.Types.ListAssessmentFrameworksRequest, callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentFrameworksResponse) => void): Request<AuditManager.Types.ListAssessmentFrameworksResponse, AWSError>;
   /**
-   *  Returns a list of the frameworks available in the AWS Audit Manager framework library. 
+   *  Returns a list of the frameworks available in the Audit Manager framework library. 
    */
   listAssessmentFrameworks(callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentFrameworksResponse) => void): Request<AuditManager.Types.ListAssessmentFrameworksResponse, AWSError>;
   /**
-   *  Returns a list of assessment reports created in AWS Audit Manager. 
+   *  Returns a list of assessment reports created in Audit Manager. 
    */
   listAssessmentReports(params: AuditManager.Types.ListAssessmentReportsRequest, callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentReportsResponse) => void): Request<AuditManager.Types.ListAssessmentReportsResponse, AWSError>;
   /**
-   *  Returns a list of assessment reports created in AWS Audit Manager. 
+   *  Returns a list of assessment reports created in Audit Manager. 
    */
   listAssessmentReports(callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentReportsResponse) => void): Request<AuditManager.Types.ListAssessmentReportsResponse, AWSError>;
   /**
-   *  Returns a list of current and past assessments from AWS Audit Manager. 
+   *  Returns a list of current and past assessments from Audit Manager. 
    */
   listAssessments(params: AuditManager.Types.ListAssessmentsRequest, callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentsResponse) => void): Request<AuditManager.Types.ListAssessmentsResponse, AWSError>;
   /**
-   *  Returns a list of current and past assessments from AWS Audit Manager. 
+   *  Returns a list of current and past assessments from Audit Manager. 
    */
   listAssessments(callback?: (err: AWSError, data: AuditManager.Types.ListAssessmentsResponse) => void): Request<AuditManager.Types.ListAssessmentsResponse, AWSError>;
   /**
-   *  Returns a list of controls from AWS Audit Manager. 
+   *  Returns a list of controls from Audit Manager. 
    */
   listControls(params: AuditManager.Types.ListControlsRequest, callback?: (err: AWSError, data: AuditManager.Types.ListControlsResponse) => void): Request<AuditManager.Types.ListControlsResponse, AWSError>;
   /**
-   *  Returns a list of controls from AWS Audit Manager. 
+   *  Returns a list of controls from Audit Manager. 
    */
   listControls(callback?: (err: AWSError, data: AuditManager.Types.ListControlsResponse) => void): Request<AuditManager.Types.ListControlsResponse, AWSError>;
   /**
@@ -308,137 +308,137 @@ declare class AuditManager extends Service {
    */
   listKeywordsForDataSource(callback?: (err: AWSError, data: AuditManager.Types.ListKeywordsForDataSourceResponse) => void): Request<AuditManager.Types.ListKeywordsForDataSourceResponse, AWSError>;
   /**
-   *  Returns a list of all AWS Audit Manager notifications. 
+   *  Returns a list of all Audit Manager notifications. 
    */
   listNotifications(params: AuditManager.Types.ListNotificationsRequest, callback?: (err: AWSError, data: AuditManager.Types.ListNotificationsResponse) => void): Request<AuditManager.Types.ListNotificationsResponse, AWSError>;
   /**
-   *  Returns a list of all AWS Audit Manager notifications. 
+   *  Returns a list of all Audit Manager notifications. 
    */
   listNotifications(callback?: (err: AWSError, data: AuditManager.Types.ListNotificationsResponse) => void): Request<AuditManager.Types.ListNotificationsResponse, AWSError>;
   /**
-   *  Returns a list of tags for the specified resource in AWS Audit Manager. 
+   *  Returns a list of tags for the specified resource in Audit Manager. 
    */
   listTagsForResource(params: AuditManager.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: AuditManager.Types.ListTagsForResourceResponse) => void): Request<AuditManager.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   *  Returns a list of tags for the specified resource in AWS Audit Manager. 
+   *  Returns a list of tags for the specified resource in Audit Manager. 
    */
   listTagsForResource(callback?: (err: AWSError, data: AuditManager.Types.ListTagsForResourceResponse) => void): Request<AuditManager.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   *  Enables AWS Audit Manager for the specified AWS account. 
+   *  Enables Audit Manager for the specified account. 
    */
   registerAccount(params: AuditManager.Types.RegisterAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.RegisterAccountResponse) => void): Request<AuditManager.Types.RegisterAccountResponse, AWSError>;
   /**
-   *  Enables AWS Audit Manager for the specified AWS account. 
+   *  Enables Audit Manager for the specified account. 
    */
   registerAccount(callback?: (err: AWSError, data: AuditManager.Types.RegisterAccountResponse) => void): Request<AuditManager.Types.RegisterAccountResponse, AWSError>;
   /**
-   *  Enables an AWS account within the organization as the delegated administrator for AWS Audit Manager. 
+   *  Enables an account within the organization as the delegated administrator for Audit Manager. 
    */
   registerOrganizationAdminAccount(params: AuditManager.Types.RegisterOrganizationAdminAccountRequest, callback?: (err: AWSError, data: AuditManager.Types.RegisterOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.RegisterOrganizationAdminAccountResponse, AWSError>;
   /**
-   *  Enables an AWS account within the organization as the delegated administrator for AWS Audit Manager. 
+   *  Enables an account within the organization as the delegated administrator for Audit Manager. 
    */
   registerOrganizationAdminAccount(callback?: (err: AWSError, data: AuditManager.Types.RegisterOrganizationAdminAccountResponse) => void): Request<AuditManager.Types.RegisterOrganizationAdminAccountResponse, AWSError>;
   /**
-   *  Tags the specified resource in AWS Audit Manager. 
+   *  Tags the specified resource in Audit Manager. 
    */
   tagResource(params: AuditManager.Types.TagResourceRequest, callback?: (err: AWSError, data: AuditManager.Types.TagResourceResponse) => void): Request<AuditManager.Types.TagResourceResponse, AWSError>;
   /**
-   *  Tags the specified resource in AWS Audit Manager. 
+   *  Tags the specified resource in Audit Manager. 
    */
   tagResource(callback?: (err: AWSError, data: AuditManager.Types.TagResourceResponse) => void): Request<AuditManager.Types.TagResourceResponse, AWSError>;
   /**
-   *  Removes a tag from a resource in AWS Audit Manager. 
+   *  Removes a tag from a resource in Audit Manager. 
    */
   untagResource(params: AuditManager.Types.UntagResourceRequest, callback?: (err: AWSError, data: AuditManager.Types.UntagResourceResponse) => void): Request<AuditManager.Types.UntagResourceResponse, AWSError>;
   /**
-   *  Removes a tag from a resource in AWS Audit Manager. 
+   *  Removes a tag from a resource in Audit Manager. 
    */
   untagResource(callback?: (err: AWSError, data: AuditManager.Types.UntagResourceResponse) => void): Request<AuditManager.Types.UntagResourceResponse, AWSError>;
   /**
-   *  Edits an AWS Audit Manager assessment. 
+   *  Edits an Audit Manager assessment. 
    */
   updateAssessment(params: AuditManager.Types.UpdateAssessmentRequest, callback?: (err: AWSError, data: AuditManager.Types.UpdateAssessmentResponse) => void): Request<AuditManager.Types.UpdateAssessmentResponse, AWSError>;
   /**
-   *  Edits an AWS Audit Manager assessment. 
+   *  Edits an Audit Manager assessment. 
    */
   updateAssessment(callback?: (err: AWSError, data: AuditManager.Types.UpdateAssessmentResponse) => void): Request<AuditManager.Types.UpdateAssessmentResponse, AWSError>;
   /**
-   *  Updates a control within an assessment in AWS Audit Manager. 
+   *  Updates a control within an assessment in Audit Manager. 
    */
   updateAssessmentControl(params: AuditManager.Types.UpdateAssessmentControlRequest, callback?: (err: AWSError, data: AuditManager.Types.UpdateAssessmentControlResponse) => void): Request<AuditManager.Types.UpdateAssessmentControlResponse, AWSError>;
   /**
-   *  Updates a control within an assessment in AWS Audit Manager. 
+   *  Updates a control within an assessment in Audit Manager. 
    */
   updateAssessmentControl(callback?: (err: AWSError, data: AuditManager.Types.UpdateAssessmentControlResponse) => void): Request<AuditManager.Types.UpdateAssessmentControlResponse, AWSError>;
   /**
-   *  Updates the status of a control set in an AWS Audit Manager assessment. 
+   *  Updates the status of a control set in an Audit Manager assessment. 
    */
   updateAssessmentControlSetStatus(params: AuditManager.Types.UpdateAssessmentControlSetStatusRequest, callback?: (err: AWSError, data: AuditManager.Types.UpdateAssessmentControlSetStatusResponse) => void): Request<AuditManager.Types.UpdateAssessmentControlSetStatusResponse, AWSError>;
   /**
-   *  Updates the status of a control set in an AWS Audit Manager assessment. 
+   *  Updates the status of a control set in an Audit Manager assessment. 
    */
   updateAssessmentControlSetStatus(callback?: (err: AWSError, data: AuditManager.Types.UpdateAssessmentControlSetStatusResponse) => void): Request<AuditManager.Types.UpdateAssessmentControlSetStatusResponse, AWSError>;
   /**
-   *  Updates a custom framework in AWS Audit Manager. 
+   *  Updates a custom framework in Audit Manager. 
    */
   updateAssessmentFramework(params: AuditManager.Types.UpdateAssessmentFrameworkRequest, callback?: (err: AWSError, data: AuditManager.Types.UpdateAssessmentFrameworkResponse) => void): Request<AuditManager.Types.UpdateAssessmentFrameworkResponse, AWSError>;
   /**
-   *  Updates a custom framework in AWS Audit Manager. 
+   *  Updates a custom framework in Audit Manager. 
    */
   updateAssessmentFramework(callback?: (err: AWSError, data: AuditManager.Types.UpdateAssessmentFrameworkResponse) => void): Request<AuditManager.Types.UpdateAssessmentFrameworkResponse, AWSError>;
   /**
-   *  Updates the status of an assessment in AWS Audit Manager. 
+   *  Updates the status of an assessment in Audit Manager. 
    */
   updateAssessmentStatus(params: AuditManager.Types.UpdateAssessmentStatusRequest, callback?: (err: AWSError, data: AuditManager.Types.UpdateAssessmentStatusResponse) => void): Request<AuditManager.Types.UpdateAssessmentStatusResponse, AWSError>;
   /**
-   *  Updates the status of an assessment in AWS Audit Manager. 
+   *  Updates the status of an assessment in Audit Manager. 
    */
   updateAssessmentStatus(callback?: (err: AWSError, data: AuditManager.Types.UpdateAssessmentStatusResponse) => void): Request<AuditManager.Types.UpdateAssessmentStatusResponse, AWSError>;
   /**
-   *  Updates a custom control in AWS Audit Manager. 
+   *  Updates a custom control in Audit Manager. 
    */
   updateControl(params: AuditManager.Types.UpdateControlRequest, callback?: (err: AWSError, data: AuditManager.Types.UpdateControlResponse) => void): Request<AuditManager.Types.UpdateControlResponse, AWSError>;
   /**
-   *  Updates a custom control in AWS Audit Manager. 
+   *  Updates a custom control in Audit Manager. 
    */
   updateControl(callback?: (err: AWSError, data: AuditManager.Types.UpdateControlResponse) => void): Request<AuditManager.Types.UpdateControlResponse, AWSError>;
   /**
-   *  Updates AWS Audit Manager settings for the current user account. 
+   *  Updates Audit Manager settings for the current user account. 
    */
   updateSettings(params: AuditManager.Types.UpdateSettingsRequest, callback?: (err: AWSError, data: AuditManager.Types.UpdateSettingsResponse) => void): Request<AuditManager.Types.UpdateSettingsResponse, AWSError>;
   /**
-   *  Updates AWS Audit Manager settings for the current user account. 
+   *  Updates Audit Manager settings for the current user account. 
    */
   updateSettings(callback?: (err: AWSError, data: AuditManager.Types.UpdateSettingsResponse) => void): Request<AuditManager.Types.UpdateSettingsResponse, AWSError>;
   /**
-   *  Validates the integrity of an assessment report in AWS Audit Manager. 
+   *  Validates the integrity of an assessment report in Audit Manager. 
    */
   validateAssessmentReportIntegrity(params: AuditManager.Types.ValidateAssessmentReportIntegrityRequest, callback?: (err: AWSError, data: AuditManager.Types.ValidateAssessmentReportIntegrityResponse) => void): Request<AuditManager.Types.ValidateAssessmentReportIntegrityResponse, AWSError>;
   /**
-   *  Validates the integrity of an assessment report in AWS Audit Manager. 
+   *  Validates the integrity of an assessment report in Audit Manager. 
    */
   validateAssessmentReportIntegrity(callback?: (err: AWSError, data: AuditManager.Types.ValidateAssessmentReportIntegrityResponse) => void): Request<AuditManager.Types.ValidateAssessmentReportIntegrityResponse, AWSError>;
 }
 declare namespace AuditManager {
   export interface AWSAccount {
     /**
-     *  The identifier for the specified AWS account. 
+     *  The identifier for the specified account. 
      */
     id?: AccountId;
     /**
-     *  The email address associated with the specified AWS account. 
+     *  The email address associated with the specified account. 
      */
     emailAddress?: EmailAddress;
     /**
-     *  The name of the specified AWS account. 
+     *  The name of the specified account. 
      */
     name?: AccountName;
   }
   export type AWSAccounts = AWSAccount[];
   export interface AWSService {
     /**
-     *  The name of the AWS service. 
+     *  The name of the Amazon Web Service. 
      */
     serviceName?: AWSServiceName;
   }
@@ -456,7 +456,7 @@ declare namespace AuditManager {
      */
     arn?: AuditManagerArn;
     /**
-     *  The AWS account associated with the assessment. 
+     *  The account associated with the assessment. 
      */
     awsAccount?: AWSAccount;
     /**
@@ -573,7 +573,7 @@ declare namespace AuditManager {
      */
     id?: UUID;
     /**
-     *  The AWS service from which the evidence was collected. 
+     *  The Amazon Web Service from which the evidence was collected. 
      */
     dataSource?: String;
     /**
@@ -597,7 +597,7 @@ declare namespace AuditManager {
      */
     evidenceResourcesIncludedCount?: Integer;
     /**
-     *  The number of evidence that falls under the configuration data category. This evidence is collected from configuration snapshots of other AWS services such as Amazon EC2, Amazon S3, or IAM. 
+     *  The number of evidence that falls under the configuration data category. This evidence is collected from configuration snapshots of other Amazon Web Services services such as Amazon EC2, Amazon S3, or IAM. 
      */
     evidenceByTypeConfigurationDataCount?: Integer;
     /**
@@ -605,19 +605,19 @@ declare namespace AuditManager {
      */
     evidenceByTypeManualCount?: Integer;
     /**
-     *  The number of evidence that falls under the compliance check category. This evidence is collected from AWS Config or AWS Security Hub. 
+     *  The number of evidence that falls under the compliance check category. This evidence is collected from Config or Security Hub. 
      */
     evidenceByTypeComplianceCheckCount?: Integer;
     /**
-     *  The total number of issues that were reported directly from AWS Security Hub, AWS Config, or both. 
+     *  The total number of issues that were reported directly from Security Hub, Config, or both. 
      */
     evidenceByTypeComplianceCheckIssuesCount?: Integer;
     /**
-     *  The number of evidence that falls under the user activity category. This evidence is collected from AWS CloudTrail logs. 
+     *  The number of evidence that falls under the user activity category. This evidence is collected from CloudTrail logs. 
      */
     evidenceByTypeUserActivityCount?: Integer;
     /**
-     *  The total number of AWS resources assessed to generate the evidence. 
+     *  The total number of Amazon Web Services resources assessed to generate the evidence. 
      */
     evidenceAwsServiceSourceCount?: Integer;
   }
@@ -711,7 +711,7 @@ declare namespace AuditManager {
      */
     assessmentReportsDestination?: AssessmentReportsDestination;
     /**
-     *  The wrapper of AWS accounts and services in scope for the assessment. 
+     *  The wrapper of accounts and services in scope for the assessment. 
      */
     scope?: Scope;
     /**
@@ -780,7 +780,7 @@ declare namespace AuditManager {
      */
     description?: AssessmentReportDescription;
     /**
-     *  The identifier for the specified AWS account. 
+     *  The identifier for the specified account. 
      */
     awsAccountId?: AccountId;
     /**
@@ -908,7 +908,7 @@ declare namespace AuditManager {
   }
   export interface BatchCreateDelegationByAssessmentError {
     /**
-     *  The API request to batch create delegations in AWS Audit Manager. 
+     *  The API request to batch create delegations in Audit Manager. 
      */
     createDelegationRequest?: CreateDelegationRequest;
     /**
@@ -923,7 +923,7 @@ declare namespace AuditManager {
   export type BatchCreateDelegationByAssessmentErrors = BatchCreateDelegationByAssessmentError[];
   export interface BatchCreateDelegationByAssessmentRequest {
     /**
-     *  The API request to batch create delegations in AWS Audit Manager. 
+     *  The API request to batch create delegations in Audit Manager. 
      */
     createDelegationRequests: CreateDelegationRequests;
     /**
@@ -998,7 +998,7 @@ declare namespace AuditManager {
   }
   export interface BatchImportEvidenceToAssessmentControlError {
     /**
-     *  Manual evidence that cannot be collected automatically by AWS Audit Manager. 
+     *  Manual evidence that cannot be collected automatically by Audit Manager. 
      */
     manualEvidence?: ManualEvidence;
     /**
@@ -1094,7 +1094,7 @@ declare namespace AuditManager {
      */
     actionPlanInstructions?: ActionPlanInstructions;
     /**
-     *  The data source that determines from where AWS Audit Manager collects evidence for the control. 
+     *  The data source that determines from where Audit Manager collects evidence for the control. 
      */
     controlSources?: ControlSources;
     /**
@@ -1185,7 +1185,7 @@ declare namespace AuditManager {
      */
     name?: ControlName;
     /**
-     *  The data source that determines from where AWS Audit Manager collects evidence for the control. 
+     *  The data source that determines from where Audit Manager collects evidence for the control. 
      */
     controlSources?: ControlSources;
     /**
@@ -1326,7 +1326,7 @@ declare namespace AuditManager {
      */
     sourceName?: SourceName;
     /**
-     *  The description of the data source that determines from where AWS Audit Manager collects evidence for the control. 
+     *  The description of the data source that determines from where Audit Manager collects evidence for the control. 
      */
     sourceDescription?: SourceDescription;
     /**
@@ -1559,7 +1559,7 @@ declare namespace AuditManager {
      */
     dataSource?: String;
     /**
-     *  The identifier for the specified AWS account. 
+     *  The identifier for the specified account. 
      */
     evidenceAwsAccountId?: AccountId;
     /**
@@ -1567,7 +1567,7 @@ declare namespace AuditManager {
      */
     time?: Timestamp;
     /**
-     *  The AWS service from which the evidence is collected. 
+     *  The Amazon Web Service from which the evidence is collected. 
      */
     eventSource?: AWSServiceName;
     /**
@@ -1591,15 +1591,15 @@ declare namespace AuditManager {
      */
     iamId?: IamArn;
     /**
-     *  The evaluation status for evidence that falls under the compliance check category. For evidence collected from AWS Security Hub, a Pass or Fail result is shown. For evidence collected from AWS Config, a Compliant or Noncompliant result is shown. 
+     *  The evaluation status for evidence that falls under the compliance check category. For evidence collected from Security Hub, a Pass or Fail result is shown. For evidence collected from Config, a Compliant or Noncompliant result is shown. 
      */
     complianceCheck?: String;
     /**
-     *  The AWS account from which the evidence is collected, and its AWS organization path. 
+     *  The account from which the evidence is collected, and its organization path. 
      */
     awsOrganization?: String;
     /**
-     *  The identifier for the specified AWS account. 
+     *  The identifier for the specified account. 
      */
     awsAccountId?: AccountId;
     /**
@@ -1652,7 +1652,7 @@ declare namespace AuditManager {
      */
     logo?: Filename;
     /**
-     *  The sources from which AWS Audit Manager collects evidence for the control. 
+     *  The sources from which Audit Manager collects evidence for the control. 
      */
     controlSources?: ControlSources;
     /**
@@ -1707,7 +1707,7 @@ declare namespace AuditManager {
   }
   export interface GetAccountStatusResponse {
     /**
-     *  The status of the specified AWS account. 
+     *  The status of the specified account. 
      */
     status?: AccountStatus;
   }
@@ -1958,7 +1958,7 @@ declare namespace AuditManager {
   }
   export interface GetServicesInScopeResponse {
     /**
-     *  The metadata associated with the aAWS service. 
+     *  The metadata associated with the Amazon Web Service. 
      */
     serviceMetadata?: ServiceMetadataList;
   }
@@ -1970,7 +1970,7 @@ declare namespace AuditManager {
   }
   export interface GetSettingsResponse {
     /**
-     *  The settings object that holds all supported AWS Audit Manager settings. 
+     *  The settings object that holds all supported Audit Manager settings. 
      */
     settings?: Settings;
   }
@@ -2174,11 +2174,11 @@ declare namespace AuditManager {
   export type ObjectTypeEnum = "ASSESSMENT"|"CONTROL_SET"|"CONTROL"|"DELEGATION"|"ASSESSMENT_REPORT"|string;
   export interface RegisterAccountRequest {
     /**
-     *  The AWS KMS key details. 
+     *  The KMS key details. 
      */
     kmsKey?: KmsKey;
     /**
-     *  The delegated administrator account for AWS Audit Manager. 
+     *  The delegated administrator account for Audit Manager. 
      */
     delegatedAdminAccount?: AccountId;
   }
@@ -2200,7 +2200,7 @@ declare namespace AuditManager {
      */
     adminAccountId?: AccountId;
     /**
-     *  The identifier for the specified AWS organization. 
+     *  The identifier for the specified organization. 
      */
     organizationId?: organizationId;
   }
@@ -2231,29 +2231,29 @@ declare namespace AuditManager {
   export type SNSTopic = string;
   export interface Scope {
     /**
-     *  The AWS accounts included in the scope of the assessment. 
+     *  The accounts included in the scope of the assessment. 
      */
     awsAccounts?: AWSAccounts;
     /**
-     *  The AWS services included in the scope of the assessment. 
+     *  The Amazon Web Services services included in the scope of the assessment. 
      */
     awsServices?: AWSServices;
   }
   export interface ServiceMetadata {
     /**
-     *  The name of the AWS service. 
+     *  The name of the Amazon Web Service. 
      */
     name?: AWSServiceName;
     /**
-     *  The display name of the AWS service. 
+     *  The display name of the Amazon Web Service. 
      */
     displayName?: NonEmptyString;
     /**
-     *  The description of the specified AWS service. 
+     *  The description of the specified Amazon Web Service. 
      */
     description?: NonEmptyString;
     /**
-     *  The category in which the AWS service belongs, such as compute, storage, database, and so on. 
+     *  The category in which the Amazon Web Service belongs, such as compute, storage, database, and so on. 
      */
     category?: NonEmptyString;
   }
@@ -2261,7 +2261,7 @@ declare namespace AuditManager {
   export type SettingAttribute = "ALL"|"IS_AWS_ORG_ENABLED"|"SNS_TOPIC"|"DEFAULT_ASSESSMENT_REPORTS_DESTINATION"|"DEFAULT_PROCESS_OWNERS"|string;
   export interface Settings {
     /**
-     *  Specifies whether AWS Organizations is enabled. 
+     *  Specifies whether Organizations is enabled. 
      */
     isAwsOrgEnabled?: Boolean;
     /**
@@ -2277,7 +2277,7 @@ declare namespace AuditManager {
      */
     defaultProcessOwners?: Roles;
     /**
-     *  The AWS KMS key details. 
+     *  The KMS key details. 
      */
     kmsKey?: KmsKey;
   }
@@ -2290,7 +2290,7 @@ declare namespace AuditManager {
      */
     keywordInputType?: KeywordInputType;
     /**
-     *  The value of the keyword used to search AWS CloudTrail logs, AWS Config rules, AWS Security Hub checks, and AWS API names when mapping a control data source. 
+     *  The value of the keyword used to search CloudTrail logs, Config rules, Security Hub checks, and Amazon Web Services API names when mapping a control data source. 
      */
     keywordValue?: KeywordValue;
   }
@@ -2523,7 +2523,7 @@ declare namespace AuditManager {
   }
   export interface UpdateSettingsRequest {
     /**
-     *  The Amazon Simple Notification Service (Amazon SNS) topic to which AWS Audit Manager sends notifications. 
+     *  The Amazon Simple Notification Service (Amazon SNS) topic to which Audit Manager sends notifications. 
      */
     snsTopic?: SnsArn;
     /**
@@ -2535,7 +2535,7 @@ declare namespace AuditManager {
      */
     defaultProcessOwners?: Roles;
     /**
-     *  The AWS KMS key details. 
+     *  The KMS key details. 
      */
     kmsKey?: KmsKey;
   }
