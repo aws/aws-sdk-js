@@ -194,7 +194,7 @@ declare namespace Health {
     /**
      * The maximum number of items to return in one batch, between 10 and 100, inclusive.
      */
-    maxResults?: maxResults;
+    maxResults?: maxResultsLowerRange;
   }
   export interface DescribeAffectedEntitiesForOrganizationResponse {
     /**
@@ -362,7 +362,7 @@ declare namespace Health {
     /**
      * The maximum number of items to return in one batch, between 10 and 100, inclusive.
      */
-    maxResults?: maxResults;
+    maxResults?: maxResultsLowerRange;
     /**
      * The locale (language) to return information in. English (en) is the default and the only supported value at this time.
      */
@@ -799,6 +799,7 @@ declare namespace Health {
   export type healthServiceAccessStatusForOrganization = string;
   export type locale = string;
   export type maxResults = number;
+  export type maxResultsLowerRange = number;
   export type metadataKey = string;
   export type metadataValue = string;
   export type nextToken = string;

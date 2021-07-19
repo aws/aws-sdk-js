@@ -434,6 +434,12 @@
       },
       "documentation": "<p>A configuration for CloudWatch monitoring. You can configure your jobs to send log information to CloudWatch Logs.</p>"
     },
+    "ClusterId": {
+      "type": "string",
+      "max": 100,
+      "min": 1,
+      "pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*"
+    },
     "Configuration": {
       "type": "structure",
       "required": [
@@ -499,7 +505,7 @@
           "documentation": "<p>The type of the container provider. EKS is the only supported type as of now.</p>"
         },
         "id": {
-          "shape": "String256",
+          "shape": "ClusterId",
           "documentation": "<p>The ID of the container cluster.</p>"
         },
         "info": {
@@ -781,7 +787,7 @@
       "type": "structure",
       "members": {
         "namespace": {
-          "shape": "String256",
+          "shape": "KubernetesNamespace",
           "documentation": "<p>The namespaces of the EKS cluster.</p>"
         }
       },
@@ -845,6 +851,14 @@
         "subnetIds": {
           "shape": "SubnetIds",
           "documentation": "<p>The subnet IDs of the endpoint. </p>"
+        },
+        "stateDetails": {
+          "shape": "String256",
+          "documentation": "<p> Additional details of the endpoint state. </p>"
+        },
+        "failureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p> The reasons why the endpoint has failed. </p>"
         },
         "tags": {
           "shape": "TagMap",
@@ -1043,6 +1057,12 @@
       "member": {
         "shape": "JobRun"
       }
+    },
+    "KubernetesNamespace": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?"
     },
     "ListJobRunsRequest": {
       "type": "structure",
@@ -1367,7 +1387,7 @@
     },
     "SparkSubmitParameters": {
       "type": "string",
-      "max": 1024,
+      "max": 102400,
       "min": 1,
       "pattern": "(?!\\s*$)(^[^';|\\u0026\\u003C\\u003E*?`$(){}\\[\\]!#\\\\]*$)",
       "sensitive": true

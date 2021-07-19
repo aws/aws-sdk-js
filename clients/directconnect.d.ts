@@ -711,9 +711,12 @@ declare namespace DirectConnect {
      */
     bgpStatus?: BGPStatus;
     /**
-     * The Direct Connect endpoint on which the BGP peer terminates.
+     * The Direct Connect endpoint that terminates the BGP peer.
      */
     awsDeviceV2?: AwsDeviceV2;
+    /**
+     * The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.
+     */
     awsLogicalDeviceId?: AwsLogicalDeviceId;
   }
   export type BGPPeerId = string;
@@ -840,11 +843,11 @@ declare namespace DirectConnect {
      */
     jumboFrameCapable?: JumboFrameCapable;
     /**
-     * The Direct Connect endpoint on which the physical connection terminates.
+     * The Direct Connect endpoint that terminates the physical connection.
      */
     awsDeviceV2?: AwsDeviceV2;
     /**
-     * The Direct Connect endpoint that terminates a physical connection's BGP sessions.
+     * The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.
      */
     awsLogicalDeviceId?: AwsLogicalDeviceId;
     /**
@@ -1649,11 +1652,11 @@ declare namespace DirectConnect {
      */
     jumboFrameCapable?: JumboFrameCapable;
     /**
-     * The Direct Connect endpoint on which the physical connection terminates.
+     * The Direct Connect endpoint that terminates the physical connection.
      */
     awsDeviceV2?: AwsDeviceV2;
     /**
-     * The Direct Connect endpoint that terminates a physical connection's BGP sessions.
+     * The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.
      */
     awsLogicalDeviceId?: AwsLogicalDeviceId;
     /**
@@ -1726,7 +1729,7 @@ declare namespace DirectConnect {
      */
     awsDeviceV2?: AwsDeviceV2;
     /**
-     * The Direct Connect endpoint that terminates a physical connection's BGP sessions.
+     * The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.
      */
     awsLogicalDeviceId?: AwsLogicalDeviceId;
     /**
@@ -2422,11 +2425,11 @@ declare namespace DirectConnect {
      */
     region?: Region;
     /**
-     * The Direct Connect endpoint on which the virtual interface terminates.
+     * The Direct Connect endpoint that terminates the physical connection.
      */
     awsDeviceV2?: AwsDeviceV2;
     /**
-     * The Direct Connect endpoint that terminates a physical connection's BGP sessions.
+     * The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.
      */
     awsLogicalDeviceId?: AwsLogicalDeviceId;
     /**

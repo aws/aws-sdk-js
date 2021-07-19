@@ -3550,6 +3550,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the world.</p>"
+        },
+        "worldDescriptionBody": {
+          "shape": "Json",
+          "documentation": "<p>Returns the JSON formatted string that describes the contents of your world.</p>"
         }
       }
     },
@@ -3591,6 +3595,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the world template.</p>"
+        },
+        "version": {
+          "shape": "GenericString",
+          "documentation": "<p>The version of the world template that you're using.</p>"
         }
       }
     },
@@ -5484,6 +5492,10 @@
         "name": {
           "shape": "TemplateName",
           "documentation": "<p>The name of the template.</p>"
+        },
+        "version": {
+          "shape": "GenericString",
+          "documentation": "<p>The version of the template that you're using.</p>"
         }
       },
       "documentation": "<p>Summary information for a template.</p>"

@@ -165,6 +165,7 @@ declare namespace EMRcontainers {
      */
     logStreamNamePrefix?: String256;
   }
+  export type ClusterId = string;
   export interface Configuration {
     /**
      * The classification within a configuration.
@@ -204,7 +205,7 @@ declare namespace EMRcontainers {
     /**
      * The ID of the container cluster.
      */
-    id: String256;
+    id: ClusterId;
     /**
      * The information about the container cluster.
      */
@@ -380,7 +381,7 @@ declare namespace EMRcontainers {
     /**
      * The namespaces of the EKS cluster.
      */
-    namespace?: String256;
+    namespace?: KubernetesNamespace;
   }
   export interface Endpoint {
     /**
@@ -439,6 +440,14 @@ declare namespace EMRcontainers {
      * The subnet IDs of the endpoint. 
      */
     subnetIds?: SubnetIds;
+    /**
+     *  Additional details of the endpoint state. 
+     */
+    stateDetails?: String256;
+    /**
+     *  The reasons why the endpoint has failed. 
+     */
+    failureReason?: FailureReason;
     /**
      * The tags of the endpoint. 
      */
@@ -532,6 +541,7 @@ declare namespace EMRcontainers {
   export type JobRunState = "PENDING"|"SUBMITTED"|"RUNNING"|"FAILED"|"CANCELLED"|"CANCEL_PENDING"|"COMPLETED"|string;
   export type JobRunStates = JobRunState[];
   export type JobRuns = JobRun[];
+  export type KubernetesNamespace = string;
   export interface ListJobRunsRequest {
     /**
      * The ID of the virtual cluster for which to list the job run. 

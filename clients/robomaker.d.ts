@@ -1884,6 +1884,10 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the world.
      */
     tags?: TagMap;
+    /**
+     * Returns the JSON formatted string that describes the contents of your world.
+     */
+    worldDescriptionBody?: Json;
   }
   export interface DescribeWorldTemplateRequest {
     /**
@@ -1916,6 +1920,10 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the world template.
      */
     tags?: TagMap;
+    /**
+     * The version of the world template that you're using.
+     */
+    version?: GenericString;
   }
   export type EnvironmentVariableKey = string;
   export type EnvironmentVariableMap = {[key: string]: EnvironmentVariableValue};
@@ -3082,6 +3090,10 @@ declare namespace RoboMaker {
      * The name of the template.
      */
     name?: TemplateName;
+    /**
+     * The version of the template that you're using.
+     */
+    version?: GenericString;
   }
   export interface Tool {
     /**

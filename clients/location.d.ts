@@ -12,11 +12,11 @@ declare class Location extends Service {
   constructor(options?: Location.Types.ClientConfiguration)
   config: Config & Location.Types.ClientConfiguration;
   /**
-   * Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection.  Currently not supported — Cross-account configurations, such as creating associations between a tracker resource in one account and a geofence collection in another account. 
+   * Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection.  You can associate up to five geofence collections to each tracker resource.  Currently not supported — Cross-account configurations, such as creating associations between a tracker resource in one account and a geofence collection in another account. 
    */
   associateTrackerConsumer(params: Location.Types.AssociateTrackerConsumerRequest, callback?: (err: AWSError, data: Location.Types.AssociateTrackerConsumerResponse) => void): Request<Location.Types.AssociateTrackerConsumerResponse, AWSError>;
   /**
-   * Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection.  Currently not supported — Cross-account configurations, such as creating associations between a tracker resource in one account and a geofence collection in another account. 
+   * Creates an association between a geofence collection and a tracker resource. This allows the tracker resource to communicate location data to the linked geofence collection.  You can associate up to five geofence collections to each tracker resource.  Currently not supported — Cross-account configurations, such as creating associations between a tracker resource in one account and a geofence collection in another account. 
    */
   associateTrackerConsumer(callback?: (err: AWSError, data: Location.Types.AssociateTrackerConsumerResponse) => void): Request<Location.Types.AssociateTrackerConsumerResponse, AWSError>;
   /**
@@ -36,19 +36,19 @@ declare class Location extends Service {
    */
   batchDeleteGeofence(callback?: (err: AWSError, data: Location.Types.BatchDeleteGeofenceResponse) => void): Request<Location.Types.BatchDeleteGeofenceResponse, AWSError>;
   /**
-   * Evaluates device positions against the geofence geometries from a given geofence collection. The evaluation determines if the device has entered or exited a geofenced area, which publishes ENTER or EXIT geofence events to Amazon EventBridge.  The last geofence that a device was observed within, if any, is tracked for 30 days after the most recent device position update 
+   * Evaluates device positions against the geofence geometries from a given geofence collection. This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:    ENTER if Amazon Location determines that the tracked device has entered a geofenced area.    EXIT if Amazon Location determines that the tracked device has exited a geofenced area.    The last geofence that a device was observed within is tracked for 30 days after the most recent device position update. 
    */
   batchEvaluateGeofences(params: Location.Types.BatchEvaluateGeofencesRequest, callback?: (err: AWSError, data: Location.Types.BatchEvaluateGeofencesResponse) => void): Request<Location.Types.BatchEvaluateGeofencesResponse, AWSError>;
   /**
-   * Evaluates device positions against the geofence geometries from a given geofence collection. The evaluation determines if the device has entered or exited a geofenced area, which publishes ENTER or EXIT geofence events to Amazon EventBridge.  The last geofence that a device was observed within, if any, is tracked for 30 days after the most recent device position update 
+   * Evaluates device positions against the geofence geometries from a given geofence collection. This operation always returns an empty response because geofences are asynchronously evaluated. The evaluation determines if the device has entered or exited a geofenced area, and then publishes one of the following events to Amazon EventBridge:    ENTER if Amazon Location determines that the tracked device has entered a geofenced area.    EXIT if Amazon Location determines that the tracked device has exited a geofenced area.    The last geofence that a device was observed within is tracked for 30 days after the most recent device position update. 
    */
   batchEvaluateGeofences(callback?: (err: AWSError, data: Location.Types.BatchEvaluateGeofencesResponse) => void): Request<Location.Types.BatchEvaluateGeofencesResponse, AWSError>;
   /**
-   * A batch request to retrieve all device positions.
+   * Lists the latest device positions for requested devices.
    */
   batchGetDevicePosition(params: Location.Types.BatchGetDevicePositionRequest, callback?: (err: AWSError, data: Location.Types.BatchGetDevicePositionResponse) => void): Request<Location.Types.BatchGetDevicePositionResponse, AWSError>;
   /**
-   * A batch request to retrieve all device positions.
+   * Lists the latest device positions for requested devices.
    */
   batchGetDevicePosition(callback?: (err: AWSError, data: Location.Types.BatchGetDevicePositionResponse) => void): Request<Location.Types.BatchGetDevicePositionResponse, AWSError>;
   /**
@@ -68,11 +68,11 @@ declare class Location extends Service {
    */
   batchUpdateDevicePosition(callback?: (err: AWSError, data: Location.Types.BatchUpdateDevicePositionResponse) => void): Request<Location.Types.BatchUpdateDevicePositionResponse, AWSError>;
   /**
-   *  Calculates a route given the following required parameters: DeparturePostiton and DestinationPosition. Requires that you first create aroute calculator resource  By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartureNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartureNow in a single request. Specifying both parameters returns an error message.     Specifying a travel mode using TravelMode. This lets you specify additional route preference such as CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.    
+   *  Calculates a route given the following required parameters: DeparturePostiton and DestinationPosition. Requires that you first create a route calculator resource  By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartureNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartureNow in a single request. Specifying both parameters returns an error message.     Specifying a travel mode using TravelMode. This lets you specify an additional route preference such as CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.    
    */
   calculateRoute(params: Location.Types.CalculateRouteRequest, callback?: (err: AWSError, data: Location.Types.CalculateRouteResponse) => void): Request<Location.Types.CalculateRouteResponse, AWSError>;
   /**
-   *  Calculates a route given the following required parameters: DeparturePostiton and DestinationPosition. Requires that you first create aroute calculator resource  By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartureNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartureNow in a single request. Specifying both parameters returns an error message.     Specifying a travel mode using TravelMode. This lets you specify additional route preference such as CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.    
+   *  Calculates a route given the following required parameters: DeparturePostiton and DestinationPosition. Requires that you first create a route calculator resource  By default, a request that doesn't specify a departure time uses the best time of day to travel with the best traffic conditions when calculating the route. Additional options include:    Specifying a departure time using either DepartureTime or DepartureNow. This calculates a route based on predictive traffic data at the given time.   You can't specify both DepartureTime and DepartureNow in a single request. Specifying both parameters returns an error message.     Specifying a travel mode using TravelMode. This lets you specify an additional route preference such as CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.    
    */
   calculateRoute(callback?: (err: AWSError, data: Location.Types.CalculateRouteResponse) => void): Request<Location.Types.CalculateRouteResponse, AWSError>;
   /**
@@ -260,11 +260,11 @@ declare class Location extends Service {
    */
   getMapTile(callback?: (err: AWSError, data: Location.Types.GetMapTileResponse) => void): Request<Location.Types.GetMapTileResponse, AWSError>;
   /**
-   * Lists the latest device positions for requested devices.
+   * A batch request to retrieve all device positions.
    */
   listDevicePositions(params: Location.Types.ListDevicePositionsRequest, callback?: (err: AWSError, data: Location.Types.ListDevicePositionsResponse) => void): Request<Location.Types.ListDevicePositionsResponse, AWSError>;
   /**
-   * Lists the latest device positions for requested devices.
+   * A batch request to retrieve all device positions.
    */
   listDevicePositions(callback?: (err: AWSError, data: Location.Types.ListDevicePositionsResponse) => void): Request<Location.Types.ListDevicePositionsResponse, AWSError>;
   /**
@@ -308,11 +308,11 @@ declare class Location extends Service {
    */
   listRouteCalculators(callback?: (err: AWSError, data: Location.Types.ListRouteCalculatorsResponse) => void): Request<Location.Types.ListRouteCalculatorsResponse, AWSError>;
   /**
-   * Returns the tags for the specified Amazon Location Service resource.
+   * Returns a list of tags that are applied to the specified Amazon Location resource.
    */
   listTagsForResource(params: Location.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Location.Types.ListTagsForResourceResponse) => void): Request<Location.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Returns the tags for the specified Amazon Location Service resource.
+   * Returns a list of tags that are applied to the specified Amazon Location resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: Location.Types.ListTagsForResourceResponse) => void): Request<Location.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -356,21 +356,61 @@ declare class Location extends Service {
    */
   searchPlaceIndexForText(callback?: (err: AWSError, data: Location.Types.SearchPlaceIndexForTextResponse) => void): Request<Location.Types.SearchPlaceIndexForTextResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified Amazon Location Service resource.  &lt;p&gt;Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.&lt;/p&gt; &lt;p&gt;Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters.&lt;/p&gt; &lt;p&gt;You can use the &lt;code&gt;TagResource&lt;/code&gt; action with an Amazon Location Service resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the tags already associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. &lt;/p&gt; &lt;p&gt;You can associate as many as 50 tags with a resource.&lt;/p&gt; 
+   * Assigns one or more tags (key-value pairs) to the specified Amazon Location Service resource.  &lt;p&gt;Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.&lt;/p&gt; &lt;p&gt;You can use the &lt;code&gt;TagResource&lt;/code&gt; operation with an Amazon Location Service resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the tags already associated with the resource. If you specify a tag key that's already associated with the resource, the new tag value that you specify replaces the previous value for that tag. &lt;/p&gt; &lt;p&gt;You can associate up to 50 tags with a resource.&lt;/p&gt; 
    */
   tagResource(params: Location.Types.TagResourceRequest, callback?: (err: AWSError, data: Location.Types.TagResourceResponse) => void): Request<Location.Types.TagResourceResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified Amazon Location Service resource.  &lt;p&gt;Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.&lt;/p&gt; &lt;p&gt;Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters.&lt;/p&gt; &lt;p&gt;You can use the &lt;code&gt;TagResource&lt;/code&gt; action with an Amazon Location Service resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the tags already associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. &lt;/p&gt; &lt;p&gt;You can associate as many as 50 tags with a resource.&lt;/p&gt; 
+   * Assigns one or more tags (key-value pairs) to the specified Amazon Location Service resource.  &lt;p&gt;Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.&lt;/p&gt; &lt;p&gt;You can use the &lt;code&gt;TagResource&lt;/code&gt; operation with an Amazon Location Service resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the tags already associated with the resource. If you specify a tag key that's already associated with the resource, the new tag value that you specify replaces the previous value for that tag. &lt;/p&gt; &lt;p&gt;You can associate up to 50 tags with a resource.&lt;/p&gt; 
    */
   tagResource(callback?: (err: AWSError, data: Location.Types.TagResourceResponse) => void): Request<Location.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes one or more tags from the specified Amazon Location Service resource.
+   * Removes one or more tags from the specified Amazon Location resource.
    */
   untagResource(params: Location.Types.UntagResourceRequest, callback?: (err: AWSError, data: Location.Types.UntagResourceResponse) => void): Request<Location.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes one or more tags from the specified Amazon Location Service resource.
+   * Removes one or more tags from the specified Amazon Location resource.
    */
   untagResource(callback?: (err: AWSError, data: Location.Types.UntagResourceResponse) => void): Request<Location.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates the specified properties of a given geofence collection.
+   */
+  updateGeofenceCollection(params: Location.Types.UpdateGeofenceCollectionRequest, callback?: (err: AWSError, data: Location.Types.UpdateGeofenceCollectionResponse) => void): Request<Location.Types.UpdateGeofenceCollectionResponse, AWSError>;
+  /**
+   * Updates the specified properties of a given geofence collection.
+   */
+  updateGeofenceCollection(callback?: (err: AWSError, data: Location.Types.UpdateGeofenceCollectionResponse) => void): Request<Location.Types.UpdateGeofenceCollectionResponse, AWSError>;
+  /**
+   * Updates the specified properties of a given map resource.
+   */
+  updateMap(params: Location.Types.UpdateMapRequest, callback?: (err: AWSError, data: Location.Types.UpdateMapResponse) => void): Request<Location.Types.UpdateMapResponse, AWSError>;
+  /**
+   * Updates the specified properties of a given map resource.
+   */
+  updateMap(callback?: (err: AWSError, data: Location.Types.UpdateMapResponse) => void): Request<Location.Types.UpdateMapResponse, AWSError>;
+  /**
+   * Updates the specified properties of a given place index resource.
+   */
+  updatePlaceIndex(params: Location.Types.UpdatePlaceIndexRequest, callback?: (err: AWSError, data: Location.Types.UpdatePlaceIndexResponse) => void): Request<Location.Types.UpdatePlaceIndexResponse, AWSError>;
+  /**
+   * Updates the specified properties of a given place index resource.
+   */
+  updatePlaceIndex(callback?: (err: AWSError, data: Location.Types.UpdatePlaceIndexResponse) => void): Request<Location.Types.UpdatePlaceIndexResponse, AWSError>;
+  /**
+   * Updates the specified properties for a given route calculator resource.
+   */
+  updateRouteCalculator(params: Location.Types.UpdateRouteCalculatorRequest, callback?: (err: AWSError, data: Location.Types.UpdateRouteCalculatorResponse) => void): Request<Location.Types.UpdateRouteCalculatorResponse, AWSError>;
+  /**
+   * Updates the specified properties for a given route calculator resource.
+   */
+  updateRouteCalculator(callback?: (err: AWSError, data: Location.Types.UpdateRouteCalculatorResponse) => void): Request<Location.Types.UpdateRouteCalculatorResponse, AWSError>;
+  /**
+   * Updates the specified properties of a given tracker resource.
+   */
+  updateTracker(params: Location.Types.UpdateTrackerRequest, callback?: (err: AWSError, data: Location.Types.UpdateTrackerResponse) => void): Request<Location.Types.UpdateTrackerResponse, AWSError>;
+  /**
+   * Updates the specified properties of a given tracker resource.
+   */
+  updateTracker(callback?: (err: AWSError, data: Location.Types.UpdateTrackerResponse) => void): Request<Location.Types.UpdateTrackerResponse, AWSError>;
 }
 declare namespace Location {
   export type Arn = string;
@@ -667,11 +707,11 @@ declare namespace Location {
   export type CalculateRouteRequestWaypointPositionsList = Position[];
   export interface CalculateRouteResponse {
     /**
-     * Contains details about each path between a pair of positions included along a route such as: StartPosition, EndPosition, Distance, DurationSeconds, Geometry, and Steps. The number of legs returned corresponds to one less than the total number of positions in the request.  For example, a route with a departure position and destination position returns one leg with the positions snapped to a nearby road:   The StartPosition is the departure position.   The EndPosition is the destination position.   A route with a waypoint between the departure and destination position returns two legs with the positions snapped to a nearby road.:   Leg 1: The StartPosition is the departure position . The EndPosition is the waypoint positon.   Leg 2: The StartPosition is the waypoint position. The EndPosition is the destination position.  
+     * Contains details about each path between a pair of positions included along a route such as: StartPosition, EndPosition, Distance, DurationSeconds, Geometry, and Steps. The number of legs returned corresponds to one fewer than the total number of positions in the request.  For example, a route with a departure position and destination position returns one leg with the positions snapped to a nearby road:   The StartPosition is the departure position.   The EndPosition is the destination position.   A route with a waypoint between the departure and destination position returns two legs with the positions snapped to a nearby road:   Leg 1: The StartPosition is the departure position . The EndPosition is the waypoint positon.   Leg 2: The StartPosition is the waypoint position. The EndPosition is the destination position.  
      */
     Legs: LegList;
     /**
-     * Contains information about the whole route, such as: RouteBBox, DataSource, Distance, DistanceUnit, and DurationSeconds 
+     * Contains information about the whole route, such as: RouteBBox, DataSource, Distance, DistanceUnit, and DurationSeconds.
      */
     Summary: CalculateRouteSummary;
   }
@@ -693,7 +733,7 @@ declare namespace Location {
      */
     DurationSeconds: CalculateRouteSummaryDurationSecondsDouble;
     /**
-     * Specifies a geographical box surrounding a route. Used to zoom into a route when displaying it in a map. For example, [min x, min y, max x, max y]  The first 2 bbox parameters describe the lower southwest corner:    The first bbox position is the X coordinate or longitude of the lower southwest corner.    The second bbox position is the Y coordinate or latitude of the lower southwest corner.    The next 2 bbox parameters describe the upper northeast corner:    The third bbox position is the X coordinate, or longitude of the upper northeast corner.    The fourth bbox position is the Y coordinate, or longitude of the upper northeast corner.   
+     * Specifies a geographical box surrounding a route. Used to zoom into a route when displaying it in a map. For example, [min x, min y, max x, max y]. The first 2 bbox parameters describe the lower southwest corner:    The first bbox position is the X coordinate or longitude of the lower southwest corner.    The second bbox position is the Y coordinate or latitude of the lower southwest corner.    The next 2 bbox parameters describe the upper northeast corner:    The third bbox position is the X coordinate, or longitude of the upper northeast corner.    The fourth bbox position is the Y coordinate, or longitude of the upper northeast corner.   
      */
     RouteBBox: BoundingBox;
   }
@@ -787,7 +827,7 @@ declare namespace Location {
      */
     CreateTime: Timestamp;
     /**
-     * The Amazon Resource Name (ARN) for the map resource. Used when you need to specify a resource across all AWS.   Format example: arn:aws:geo:region:account-id:maps/ExampleMap   
+     * The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across all AWS.   Format example: arn:aws:geo:region:account-id:maps/ExampleMap   
      */
     MapArn: Arn;
     /**
@@ -797,11 +837,11 @@ declare namespace Location {
   }
   export interface CreatePlaceIndexRequest {
     /**
-     * Specifies the data provider of geospatial data.  This field is case-sensitive. Enter the valid values as shown. For example, entering HERE will return an error.  Valid values include:    Esri     Here   Place index resources using HERE as a data provider can't be used to store results for locations in Japan. For more information, see the AWS Service Terms for Amazon Location Service.    For additional details on data providers, see the Amazon Location Service data providers page.
+     * Specifies the data provider of geospatial data.  This field is case-sensitive. Enter the valid values as shown. For example, entering HERE returns an error.  Valid values include:    Esri – For additional information about Esri's coverage in your region of interest, see Esri details on geocoding coverage.    Here – For additional information about HERE Technologies's coverage in your region of interest, see HERE details on goecoding coverage.  Place index resources using HERE Technologies as a data provider can't store results for locations in Japan. For more information, see the AWS Service Terms for Amazon Location Service.    For additional information , see Data providers on the Amazon Location Service Developer Guide.
      */
     DataSource: String;
     /**
-     * Specifies the data storage option for requesting Places.
+     * Specifies the data storage option requesting Places.
      */
     DataSourceConfiguration?: DataSourceConfiguration;
     /**
@@ -827,7 +867,7 @@ declare namespace Location {
      */
     CreateTime: Timestamp;
     /**
-     * The Amazon Resource Name (ARN) for the place index resource. Used to specify a resource across all AWS.    Format example: arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex   
+     * The Amazon Resource Name (ARN) for the place index resource. Used to specify a resource across AWS.    Format example: arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex   
      */
     IndexArn: Arn;
     /**
@@ -841,7 +881,7 @@ declare namespace Location {
      */
     CalculatorName: ResourceName;
     /**
-     * Specifies the data provider of traffic and road network data.  This field is case-sensitive. Enter the valid values as shown. For example, entering HERE returns an error.  Valid Values: Esri | Here  For more information about data providers, see Amazon Location Service data providers.
+     * Specifies the data provider of traffic and road network data.  This field is case-sensitive. Enter the valid values as shown. For example, entering HERE returns an error.  Valid values include:    Esri – For additional information about Esri's coverage in your region of interest, see Esri details on street networks and traffic coverage.    Here – For additional information about HERE Technologies's coverage in your region of interest, see HERE car routing coverage and HERE truck routing coverage.   For additional information , see Data providers on the Amazon Location Service Developer Guide.
      */
     DataSource: String;
     /**
@@ -913,7 +953,7 @@ declare namespace Location {
   }
   export interface DataSourceConfiguration {
     /**
-     * Specifies how the results of an operation will be stored by the caller.  Valid values include:    SingleUse specifies that the results won't be stored.     Storage specifies that the result can be cached or stored in a database.  Place index resources using HERE as a data provider can't be configured to store results for locations in Japan when choosing Storage for the IntendedUse parameter.    Default value: SingleUse 
+     * Specifies how the results of an operation will be stored by the caller.  Valid values include:    SingleUse specifies that the results won't be stored.     Storage specifies that the result can be cached or stored in a database.   Default value: SingleUse 
      */
     IntendedUse?: IntendedUse;
   }
@@ -1025,7 +1065,7 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
-     * The Amazon Resource Name (ARN) for the map resource. Used when you need to specify a resource across all AWS.   Format example: arn:aws:geo:region:account-id:maps/ExampleMap   
+     * The Amazon Resource Name (ARN) for the map resource. Used to specify a resource across all AWS.   Format example: arn:aws:geo:region:account-id:maps/ExampleMap   
      */
     MapArn: Arn;
     /**
@@ -1069,7 +1109,7 @@ declare namespace Location {
      */
     Description: ResourceDescription;
     /**
-     * The Amazon Resource Name (ARN) for the place index resource. Used to specify a resource across all AWS.    Format example: arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex   
+     * The Amazon Resource Name (ARN) for the place index resource. Used to specify a resource across AWS.    Format example: arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex   
      */
     IndexArn: Arn;
     /**
@@ -1321,7 +1361,7 @@ declare namespace Location {
   }
   export interface GetMapGlyphsRequest {
     /**
-     * A comma-separated list of fonts to load glyphs from in order of preference.. For example, Noto Sans, Arial Unicode.
+     * A comma-separated list of fonts to load glyphs from in order of preference. For example, Noto Sans Regular, Arial Unicode. Valid fonts for Esri styles:    VectorEsriDarkGrayCanvas – Ubuntu Medium Italic | Ubuntu Medium | Ubuntu Italic | Ubuntu Regular | Ubuntu Bold    VectorEsriLightGrayCanvas – Ubuntu Italic | Ubuntu Regular | Ubuntu Light | Ubuntu Bold    VectorEsriTopographic – Noto Sans Italic | Noto Sans Regular | Noto Sans Bold | Noto Serif Regular | Roboto Condensed Light Italic    VectorEsriStreets – Arial Regular | Arial Italic | Arial Bold    VectorEsriNavigation – Arial Regular | Arial Italic | Arial Bold    Valid fonts for HERE Technologies styles:     VectorHereBerlin – Fira GO Regular | Fira GO Bold   
      */
     FontStack: String;
     /**
@@ -1730,13 +1770,13 @@ declare namespace Location {
   export type ListRouteCalculatorsResponseEntryList = ListRouteCalculatorsResponseEntry[];
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
+     * The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.   Format example: arn:aws:geo:region:account-id:resourcetype/ExampleResource   
      */
     ResourceArn: Arn;
   }
   export interface ListTagsForResourceResponse {
     /**
-     * The mapping from tag key to tag value for each tag associated with the specified resource.
+     * Tags that have been applied to the specified resource. Tags are mapped from the tag key to the tag value: "TagKey" : "TagValue".   Format example: {"tag1" : "value1", "tag2" : "value2"}    
      */
     Tags?: TagMap;
   }
@@ -1815,7 +1855,7 @@ declare namespace Location {
   export type ListTrackersResponseEntryList = ListTrackersResponseEntry[];
   export interface MapConfiguration {
     /**
-     * Specifies the map style selected from an available data provider. Valid styles: RasterEsriImagery, VectorEsriStreets, VectorEsriTopographic, VectorEsriNavigation, VectorEsriDarkGrayCanvas, VectorEsriLightGrayCanvas, VectorHereBerlin.  When using HERE as your data provider, and selecting the Style VectorHereBerlin, you may not use HERE Maps for Asset Management. See the AWS Service Terms for Amazon Location Service. 
+     * Specifies the map style selected from an available data provider. For additional information on each map style and to preview each map style, see Esri map styles and HERE map styles. Valid Esri styles:     VectorEsriDarkGrayCanvas – The Esri Dark Gray Canvas map style. A vector basemap with a dark gray, neutral background with minimal colors, labels, and features that's designed to draw attention to your thematic content.     RasterEsriImagery – The Esri Imagery map style. A raster basemap that provides one meter or better satellite and aerial imagery in many parts of the world and lower resolution satellite imagery worldwide.     VectorEsriLightGrayCanvas – The Esri Light Gray Canvas map style, which provides a detailed vector basemap with a light gray, neutral background style with minimal colors, labels, and features that's designed to draw attention to your thematic content.     VectorEsriTopographic – The Esri Light map style, which provides a detailed vector basemap with a classic Esri map style.    VectorEsriStreets – The Esri World Streets map style, which provides a detailed vector basemap for the world symbolized with a classic Esri street map style. The vector tile layer is similar in content and style to the World Street Map raster map.    VectorEsriNavigation – The Esri World Navigation map style, which provides a detailed basemap for the world symbolized with a custom navigation map style that's designed for use during the day in mobile devices.   Valid HERE Technologies styles:     VectorHereBerlin – The HERE Berlin map style is a high contrast detailed base map of the world that blends 3D and 2D rendering.  When using HERE as your data provider, and selecting the Style VectorHereBerlin, you may not use HERE Technologies maps for Asset Management. See the AWS Service Terms for Amazon Location Service.   
      */
     Style: MapStyle;
   }
@@ -2050,11 +2090,11 @@ declare namespace Location {
   export type TagMap = {[key: string]: TagValue};
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource whose tags you want to update.
+     * The Amazon Resource Name (ARN) of the resource whose tags you want to update.   Format example: arn:aws:geo:region:account-id:resourcetype/ExampleResource   
      */
     ResourceArn: Arn;
     /**
-     * The mapping from tag key to tag value for each tag associated with the specified resource.
+     * Tags that have been applied to the specified resource. Tags are mapped from the tag key to the tag value: "TagKey" : "TagValue".   Format example: {"tag1" : "value1", "tag2" : "value2"}    
      */
     Tags: TagMap;
   }
@@ -2098,15 +2138,167 @@ declare namespace Location {
   export type TruckWeightTotalDouble = number;
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the resource from which you want to remove tags.
+     * The Amazon Resource Name (ARN) of the resource from which you want to remove tags.   Format example: arn:aws:geo:region:account-id:resourcetype/ExampleResource   
      */
     ResourceArn: Arn;
     /**
-     * The list of tag keys to remove from the resource.
+     * The list of tag keys to remove from the specified resource.
      */
     TagKeys: TagKeys;
   }
   export interface UntagResourceResponse {
+  }
+  export interface UpdateGeofenceCollectionRequest {
+    /**
+     * The name of the geofence collection to update.
+     */
+    CollectionName: ResourceName;
+    /**
+     * Updates the description for the geofence collection.
+     */
+    Description?: ResourceDescription;
+    /**
+     * Updates the pricing plan for the geofence collection. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
+     */
+    PricingPlan?: PricingPlan;
+    /**
+     * Updates the data provider for the geofence collection.  A required value for the following pricing plans: MobileAssetTracking| MobileAssetManagement  For more information about data providers and pricing plans, see the Amazon Location Service product page.  This can only be updated when updating the PricingPlan in the same request. Amazon Location Service uses PricingPlanDataSource to calculate billing for your geofence collection. Your data won't be shared with the data provider, and will remain in your AWS account and Region unless you move it. 
+     */
+    PricingPlanDataSource?: String;
+  }
+  export interface UpdateGeofenceCollectionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the updated geofence collection. Used to specify a resource across AWS.   Format example: arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection   
+     */
+    CollectionArn: Arn;
+    /**
+     * The name of the updated geofence collection.
+     */
+    CollectionName: ResourceName;
+    /**
+     * The time when the geofence collection was last updated in ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ 
+     */
+    UpdateTime: Timestamp;
+  }
+  export interface UpdateMapRequest {
+    /**
+     * Updates the description for the map resource.
+     */
+    Description?: ResourceDescription;
+    /**
+     * The name of the map resource to update.
+     */
+    MapName: ResourceName;
+    /**
+     * Updates the pricing plan for the map resource. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
+     */
+    PricingPlan?: PricingPlan;
+  }
+  export interface UpdateMapResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the updated map resource. Used to specify a resource across AWS.   Format example: arn:aws:geo:region:account-id:maps/ExampleMap   
+     */
+    MapArn: Arn;
+    /**
+     * The name of the updated map resource.
+     */
+    MapName: ResourceName;
+    /**
+     * The timestamp for when the map resource was last updated in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
+     */
+    UpdateTime: Timestamp;
+  }
+  export interface UpdatePlaceIndexRequest {
+    /**
+     * Updates the data storage option for the place index resource.
+     */
+    DataSourceConfiguration?: DataSourceConfiguration;
+    /**
+     * Updates the description for the place index resource.
+     */
+    Description?: ResourceDescription;
+    /**
+     * The name of the place index resource to update.
+     */
+    IndexName: ResourceName;
+    /**
+     * Updates the pricing plan for the place index resource. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
+     */
+    PricingPlan?: PricingPlan;
+  }
+  export interface UpdatePlaceIndexResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the upated place index resource. Used to specify a resource across AWS.   Format example: arn:aws:geo:region:account-id:place- index/ExamplePlaceIndex   
+     */
+    IndexArn: Arn;
+    /**
+     * The name of the updated place index resource.
+     */
+    IndexName: ResourceName;
+    /**
+     * The timestamp for when the place index resource was last updated in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
+     */
+    UpdateTime: Timestamp;
+  }
+  export interface UpdateRouteCalculatorRequest {
+    /**
+     * The name of the route calculator resource to update.
+     */
+    CalculatorName: ResourceName;
+    /**
+     * Updates the description for the route calculator resource.
+     */
+    Description?: ResourceDescription;
+    /**
+     * Updates the pricing plan for the route calculator resource. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
+     */
+    PricingPlan?: PricingPlan;
+  }
+  export interface UpdateRouteCalculatorResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the updated route calculator resource. Used to specify a resource across AWS.   Format example: arn:aws:geo:region:account-id:route- calculator/ExampleCalculator   
+     */
+    CalculatorArn: Arn;
+    /**
+     * The name of the updated route calculator resource.
+     */
+    CalculatorName: ResourceName;
+    /**
+     * The timestamp for when the route calculator was last updated in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
+     */
+    UpdateTime: Timestamp;
+  }
+  export interface UpdateTrackerRequest {
+    /**
+     * Updates the description for the tracker resource.
+     */
+    Description?: ResourceDescription;
+    /**
+     * Updates the pricing plan for the tracker resource. For more information about each pricing plan option restrictions, see Amazon Location Service pricing.
+     */
+    PricingPlan?: PricingPlan;
+    /**
+     * Updates the data provider for the tracker resource.  A required value for the following pricing plans: MobileAssetTracking| MobileAssetManagement  For more information about data providers and pricing plans, see the Amazon Location Service product page  This can only be updated when updating the PricingPlan in the same request. Amazon Location Service uses PricingPlanDataSource to calculate billing for your tracker resource. Your data won't be shared with the data provider, and will remain in your AWS account and Region unless you move it. 
+     */
+    PricingPlanDataSource?: String;
+    /**
+     * The name of the tracker resource to update.
+     */
+    TrackerName: ResourceName;
+  }
+  export interface UpdateTrackerResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the updated tracker resource. Used to specify a resource across AWS.   Format example: arn:aws:geo:region:account-id:tracker/ExampleTracker   
+     */
+    TrackerArn: Arn;
+    /**
+     * The name of the updated tracker resource.
+     */
+    TrackerName: ResourceName;
+    /**
+     * The timestamp for when the tracker resource was last updated in  ISO 8601 format: YYYY-MM-DDThh:mm:ss.sssZ. 
+     */
+    UpdateTime: Timestamp;
   }
   export type VehicleWeightUnit = "Kilograms"|"Pounds"|string;
   /**

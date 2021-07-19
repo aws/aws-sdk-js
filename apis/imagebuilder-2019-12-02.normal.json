@@ -1098,7 +1098,7 @@
           "shape": "CallRateLimitExceededException"
         }
       ],
-      "documentation": "<p> Returns the list of component build versions for the specified semantic version.</p>"
+      "documentation": "<p> Returns the list of component build versions for the specified semantic version.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying \"1.2.x\", or \"1.x.x\" works to filter list results, but neither \"1.x.2\", nor \"x.2.x\" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>"
     },
     "ListComponents": {
       "name": "ListComponents",
@@ -1135,7 +1135,7 @@
           "shape": "CallRateLimitExceededException"
         }
       ],
-      "documentation": "<p>Returns the list of component build versions for the specified semantic version.</p>"
+      "documentation": "<p>Returns the list of component build versions for the specified semantic version.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying \"1.2.x\", or \"1.x.x\" works to filter list results, but neither \"1.x.2\", nor \"x.2.x\" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>"
     },
     "ListContainerRecipes": {
       "name": "ListContainerRecipes",
@@ -2279,7 +2279,7 @@
       "members": {
         "arn": {
           "shape": "ImageBuilderArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the component.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the component.</p> <note> <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), at the level that applies to that object as follows:</p> <ol> <li> <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are either left off entirely, or they are specified as wildcards, for example: x.x.x.</p> </li> <li> <p>Version ARNs have only the first three nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</p> </li> <li> <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p> </li> </ol> </note>"
         },
         "name": {
           "shape": "ResourceName",
@@ -2287,7 +2287,7 @@
         },
         "version": {
           "shape": "VersionNumber",
-          "documentation": "<p>The semantic version of the component.</p>"
+          "documentation": "<p>The semantic version of the component.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying \"1.2.x\", or \"1.x.x\" works to filter list results, but neither \"1.x.2\", nor \"x.2.x\" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>"
         },
         "description": {
           "shape": "NonEmptyString",
@@ -2314,7 +2314,7 @@
           "documentation": "<p>The date that the component was created.</p>"
         }
       },
-      "documentation": "<p>A high-level overview of a component semantic version.</p>"
+      "documentation": "<p>The defining characteristics of a specific version of an TOE component.</p>"
     },
     "ComponentVersionArn": {
       "type": "string",
@@ -2376,7 +2376,7 @@
       "members": {
         "arn": {
           "shape": "ImageBuilderArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the container recipe.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the container recipe.</p> <note> <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), at the level that applies to that object as follows:</p> <ol> <li> <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are either left off entirely, or they are specified as wildcards, for example: x.x.x.</p> </li> <li> <p>Version ARNs have only the first three nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</p> </li> <li> <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p> </li> </ol> </note>"
         },
         "containerType": {
           "shape": "ContainerType",
@@ -2400,7 +2400,7 @@
         },
         "version": {
           "shape": "VersionNumber",
-          "documentation": "<p>The semantic version of the container recipe (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).</p>"
+          "documentation": "<p>The semantic version of the container recipe.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying \"1.2.x\", or \"1.x.x\" works to filter list results, but neither \"1.x.2\", nor \"x.2.x\" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>"
         },
         "components": {
           "shape": "ComponentConfigurationList",
@@ -2520,7 +2520,7 @@
         },
         "semanticVersion": {
           "shape": "VersionNumber",
-          "documentation": "<p>The semantic version of the component. This version follows the semantic version syntax. For example, major.minor.patch. This could be versioned like software (2.0.1) or like a date (2019.12.01).</p>"
+          "documentation": "<p>The semantic version of the component. This version follows the semantic version syntax.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> </note>"
         },
         "description": {
           "shape": "NonEmptyString",
@@ -2604,7 +2604,7 @@
         },
         "semanticVersion": {
           "shape": "VersionNumber",
-          "documentation": "<p>The semantic version of the container recipe (&lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;).</p>"
+          "documentation": "<p>The semantic version of the container recipe. This version follows the semantic version syntax.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> </note>"
         },
         "components": {
           "shape": "ComponentConfigurationList",
@@ -2818,7 +2818,7 @@
         },
         "semanticVersion": {
           "shape": "VersionNumber",
-          "documentation": "<p>The semantic version of the image recipe.</p>"
+          "documentation": "<p>The semantic version of the image recipe. This version follows the semantic version syntax.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> </note>"
         },
         "components": {
           "shape": "ComponentConfigurationList",
@@ -3730,7 +3730,7 @@
       "members": {
         "arn": {
           "shape": "ImageBuilderArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the image.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the image.</p> <note> <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), at the level that applies to that object as follows:</p> <ol> <li> <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are either left off entirely, or they are specified as wildcards, for example: x.x.x.</p> </li> <li> <p>Version ARNs have only the first three nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</p> </li> <li> <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p> </li> </ol> </note>"
         },
         "type": {
           "shape": "ImageType",
@@ -3742,7 +3742,7 @@
         },
         "version": {
           "shape": "VersionNumber",
-          "documentation": "<p>The semantic version of the image.</p>"
+          "documentation": "<p>The semantic version of the image.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying \"1.2.x\", or \"1.x.x\" works to filter list results, but neither \"1.x.2\", nor \"x.2.x\" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>"
         },
         "platform": {
           "shape": "Platform",
@@ -3766,7 +3766,7 @@
         },
         "containerRecipe": {
           "shape": "ContainerRecipe",
-          "documentation": "<p>The container recipe used to create the container image type.</p>"
+          "documentation": "<p>The recipe that is used to create an Image Builder container image.</p>"
         },
         "sourcePipelineName": {
           "shape": "ResourceName",
@@ -3801,7 +3801,7 @@
           "documentation": "<p>The tags of the image.</p>"
         }
       },
-      "documentation": "<p>An image build version.</p>"
+      "documentation": "<p>An Image Builder image. You must specify exactly one recipe for the image – either a container recipe (<code>containerRecipe</code>), which creates a container image, or an image recipe (<code>imageRecipe</code>), which creates an AMI.</p>"
     },
     "ImageBuildVersionArn": {
       "type": "string",
@@ -4138,38 +4138,38 @@
       "members": {
         "arn": {
           "shape": "ImageBuilderArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the image semantic version.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of a specific version of an Image Builder image.</p> <note> <p>Semantic versioning is included in each object's Amazon Resource Name (ARN), at the level that applies to that object as follows:</p> <ol> <li> <p>Versionless ARNs and Name ARNs do not include specific values in any of the nodes. The nodes are either left off entirely, or they are specified as wildcards, for example: x.x.x.</p> </li> <li> <p>Version ARNs have only the first three nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;</p> </li> <li> <p>Build version ARNs have all four nodes, and point to a specific build for a specific version of an object.</p> </li> </ol> </note>"
         },
         "name": {
           "shape": "ResourceName",
-          "documentation": "<p>The name of the image semantic version.</p>"
+          "documentation": "<p>The name of this specific version of an Image Builder image.</p>"
         },
         "type": {
           "shape": "ImageType",
-          "documentation": "<p>Specifies whether this is an AMI or container image.</p>"
+          "documentation": "<p>Specifies whether this image is an AMI or a container image.</p>"
         },
         "version": {
           "shape": "VersionNumber",
-          "documentation": "<p>The semantic version of the image semantic version.</p>"
+          "documentation": "<p>Details for a specific version of an Image Builder image. This version follows the semantic version syntax.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Assignment:</b> For the first three nodes you can assign any positive integer value, including zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder automatically assigns the build number, and that is not open for updates.</p> <p> <b>Patterns:</b> You can use any numeric pattern that adheres to the assignment requirements for the nodes that you can assign. For example, you might choose a software version pattern, such as 1.0.0, or a date, such as 2021.01.01.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying \"1.2.x\", or \"1.x.x\" works to filter list results, but neither \"1.x.2\", nor \"x.2.x\" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>"
         },
         "platform": {
           "shape": "Platform",
-          "documentation": "<p>The platform of the image semantic version.</p>"
+          "documentation": "<p>The platform of the image version, for example \"Windows\" or \"Linux\".</p>"
         },
         "osVersion": {
           "shape": "OsVersion",
-          "documentation": "<p>The operating system version of the instance. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.</p>"
+          "documentation": "<p>The operating system version of the Amazon EC2 build instance. For example, Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.</p>"
         },
         "owner": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The owner of the image semantic version.</p>"
+          "documentation": "<p>The owner of the image version.</p>"
         },
         "dateCreated": {
           "shape": "DateTime",
-          "documentation": "<p>The date at which this image semantic version was created.</p>"
+          "documentation": "<p>The date on which this specific version of the Image Builder image was created.</p>"
         }
       },
-      "documentation": "<p>An image semantic version.</p>"
+      "documentation": "<p>The defining characteristics of a specific version of an Image Builder image.</p>"
     },
     "ImageVersionArn": {
       "type": "string",
@@ -4202,7 +4202,7 @@
         },
         "semanticVersion": {
           "shape": "VersionNumber",
-          "documentation": "<p>The semantic version of the component. This version follows the semantic version syntax. For example, major.minor.patch. This could be versioned like software (2.0.1) or like a date (2019.12.01).</p>"
+          "documentation": "<p>The semantic version of the component. This version follows the semantic version syntax.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying \"1.2.x\", or \"1.x.x\" works to filter list results, but neither \"1.x.2\", nor \"x.2.x\" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>"
         },
         "description": {
           "shape": "NonEmptyString",
@@ -4214,7 +4214,7 @@
         },
         "type": {
           "shape": "ComponentType",
-          "documentation": "<p>The type of the component denotes whether the component is used to build the image or only to test it.</p>"
+          "documentation": "<p>The type of the component denotes whether the component is used to build the image, or only to test it.</p>"
         },
         "format": {
           "shape": "ComponentFormat",
@@ -4561,7 +4561,7 @@
         },
         "byName": {
           "shape": "Boolean",
-          "documentation": "<p>Returns the list of component build versions for the specified semantic version.</p>"
+          "documentation": "<p>Returns the list of component build versions for the specified name.</p>"
         },
         "maxResults": {
           "shape": "RestrictedInteger",
@@ -4583,7 +4583,7 @@
         },
         "componentVersionList": {
           "shape": "ComponentVersionList",
-          "documentation": "<p>The list of component semantic versions.</p>"
+          "documentation": "<p>The list of component semantic versions.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> </note>"
         },
         "nextToken": {
           "shape": "PaginationToken",
@@ -4900,7 +4900,7 @@
         },
         "imageVersionList": {
           "shape": "ImageVersionList",
-          "documentation": "<p>The list of image semantic versions.</p>"
+          "documentation": "<p>The list of image semantic versions.</p> <note> <p>The semantic version has four nodes: &lt;major&gt;.&lt;minor&gt;.&lt;patch&gt;/&lt;build&gt;. You can assign values for the first three, and can filter on all of them.</p> <p> <b>Filtering:</b> When you retrieve or reference a resource with a semantic version, you can use wildcards (x) to filter your results. When you use a wildcard in any node, all nodes to the right of the first wildcard must also be wildcards. For example, specifying \"1.2.x\", or \"1.x.x\" works to filter list results, but neither \"1.x.2\", nor \"x.2.x\" will work. You do not have to specify the build - Image Builder automatically uses a wildcard for that, if applicable.</p> </note>"
         },
         "nextToken": {
           "shape": "PaginationToken",

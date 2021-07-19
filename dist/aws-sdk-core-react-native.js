@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.948.0',
+	  VERSION: '2.949.0',
 
 	  /**
 	   * @api private
@@ -2043,6 +2043,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	function translateStructure(structure, shape) {
+	  if (shape.isDocument) {
+	    return structure;
+	  }
 	  var struct = {};
 	  util.each(structure, function(name, value) {
 	    var memberShape = shape.members[name];
@@ -2109,6 +2112,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	function translateStructure(structure, shape) {
 	  if (structure == null) return undefined;
+	  if (shape.isDocument) return structure;
 
 	  var struct = {};
 	  var shapeMembers = shape.members;
@@ -2630,6 +2634,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    property(this, 'memberNames', []);
 	    property(this, 'required', []);
 	    property(this, 'isRequired', function() { return false; });
+	    property(this, 'isDocument', Boolean(shape.document));
 	  }
 
 	  if (shape.members) {

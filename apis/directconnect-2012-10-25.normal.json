@@ -1740,10 +1740,11 @@
         },
         "awsDeviceV2": {
           "shape": "AwsDeviceV2",
-          "documentation": "<p>The Direct Connect endpoint on which the BGP peer terminates.</p>"
+          "documentation": "<p>The Direct Connect endpoint that terminates the BGP peer.</p>"
         },
         "awsLogicalDeviceId": {
-          "shape": "AwsLogicalDeviceId"
+          "shape": "AwsLogicalDeviceId",
+          "documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.</p>"
         }
       },
       "documentation": "<p>Information about a BGP peer.</p>"
@@ -1950,11 +1951,11 @@
         },
         "awsDeviceV2": {
           "shape": "AwsDeviceV2",
-          "documentation": "<p>The Direct Connect endpoint on which the physical connection terminates.</p>"
+          "documentation": "<p>The Direct Connect endpoint that terminates the physical connection.</p>"
         },
         "awsLogicalDeviceId": {
           "shape": "AwsLogicalDeviceId",
-          "documentation": "<p>The Direct Connect endpoint that terminates a physical connection's BGP sessions.</p>"
+          "documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.</p>"
         },
         "hasLogicalRedundancy": {
           "shape": "HasLogicalRedundancy",
@@ -3141,11 +3142,11 @@
         },
         "awsDeviceV2": {
           "shape": "AwsDeviceV2",
-          "documentation": "<p>The Direct Connect endpoint on which the physical connection terminates.</p>"
+          "documentation": "<p>The Direct Connect endpoint that terminates the physical connection.</p>"
         },
         "awsLogicalDeviceId": {
           "shape": "AwsLogicalDeviceId",
-          "documentation": "<p>The Direct Connect endpoint that terminates a physical connection's BGP sessions.</p>"
+          "documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.</p>"
         },
         "hasLogicalRedundancy": {
           "shape": "HasLogicalRedundancy",
@@ -3247,7 +3248,7 @@
         },
         "awsLogicalDeviceId": {
           "shape": "AwsLogicalDeviceId",
-          "documentation": "<p>The Direct Connect endpoint that terminates a physical connection's BGP sessions.</p>"
+          "documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.</p>"
         },
         "connections": {
           "shape": "ConnectionList",
@@ -4245,11 +4246,11 @@
         },
         "awsDeviceV2": {
           "shape": "AwsDeviceV2",
-          "documentation": "<p>The Direct Connect endpoint on which the virtual interface terminates.</p>"
+          "documentation": "<p>The Direct Connect endpoint that terminates the physical connection.</p>"
         },
         "awsLogicalDeviceId": {
           "shape": "AwsLogicalDeviceId",
-          "documentation": "<p>The Direct Connect endpoint that terminates a physical connection's BGP sessions.</p>"
+          "documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be different than the device that terminates the physical connection.</p>"
         },
         "tags": {
           "shape": "TagList",
