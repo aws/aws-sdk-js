@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.949.0-->
+<!--LATEST=2.950.0-->
 <!--ENTRYINSERT-->
+
+## 2.950.0
+* feature: EC2: Added idempotency to the CreateVolume API using the ClientToken request parameter
 
 ## 2.949.0
 * feature: EMRcontainers: Updated DescribeManagedEndpoint and ListManagedEndpoints to return failureReason and stateDetails in API response.
