@@ -2,7 +2,7 @@ name: git-sync-with-mirror
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -18,8 +18,8 @@ jobs:
         uses: wei/git-sync@v3
         with:
           source_repo: ${{ secrets.GIT_SYNC_SOURCE_REPO }}
-          source_branch: "master"
+          source_branch: "main"
           destination_repo: ${{ secrets.GIT_SYNC_DESTINATION_REPO }} 
-          destination_branch: "master"
+          destination_branch: "main"
           source_ssh_private_key: ${{ secrets.GIT_SYNC_SOURCE_SSH_PRIVATE_KEY }}
           destination_ssh_private_key:  ${{ secrets.GIT_SYNC_DESTINATION_SSH_PRIVATE_KEY }}
