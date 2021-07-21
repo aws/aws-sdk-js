@@ -740,7 +740,8 @@
           "LastModified": "Thu, 09 Oct 2014 22:57:28 GMT",
           "Metadata": {
           },
-          "VersionId": "null"
+          "VersionId": "null",
+	  "Body": "<Buffer containing the first 10 bytes of the file>"
         },
         "comments": {
           "input": {
