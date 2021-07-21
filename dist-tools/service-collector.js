@@ -72,7 +72,11 @@ function getService(service, version) {
   var serviceFileName = metadata[service].prefix || service;
   var lines = [];
   var line = util.format(
-    'AWS.apiLoader.services[\'%s\'][\'%s\'] = %s;\n',
+    'Object.defineProperty(AWS.apiLoader.services[\'%s\'], \'%s\' , {\n' +
+    '  value: %s,\n' +
+    '  enumerable: false,\n' +
+    '  configurable: true\n' +
+    '});\n' ,
     service, svc.api.apiVersion, 'require(\'../apis/' + serviceFileName + '-' + svc.api.apiVersion + '.min\')');
   lines.push(line);
   if (Object.prototype.hasOwnProperty.call(api, 'paginators') && Object.keys(api.paginators).length) {
