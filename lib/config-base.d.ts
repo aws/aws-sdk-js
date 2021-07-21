@@ -62,6 +62,11 @@ export interface HTTPOptions {
      */
     connectTimeout?: number;
     /**
+     * Custom DNS lookup function.
+     * Defaults to dns.lookup.
+     */
+    lookup?: (hostname: string, options: any, callback: (err: NodeJS.ErrnoException | null, address: string, family: number) => void) => void;
+    /**
      * The number of milliseconds a request can take before automatically being terminated.
      * Defaults to two minutes (120000).
      */

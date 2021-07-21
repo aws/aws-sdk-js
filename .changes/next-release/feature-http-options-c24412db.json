@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "http-options",
+  "description": "Added a lookup attribute to HTTPOptions which specifies a custom DNS lookup function."
+}

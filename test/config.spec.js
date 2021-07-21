@@ -264,10 +264,19 @@ describe('AWS.Config', function() {
   });
 
   describe('httpOptions', function() {
+    const config = configure({
+      httpOptions: {
+        timeout: 120000,
+        lookup: (function() {return;})
+      }
+    });
+
     it('defaults to {timeout:120000}', function() {
-      expect(configure().httpOptions).to.eql({
-        timeout: 120000
-      });
+      expect(config.httpOptions.timeout).to.eql(120000);
+    });
+
+    it('lookup can be set to a custom function', function() {
+      expect((config.httpOptions.lookup) instanceof Function).toBeTruthy;
     });
   });
 

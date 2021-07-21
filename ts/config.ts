@@ -1,5 +1,6 @@
 import AWS = require('../index');
 import {Agent} from 'https';
+import {lookup as lookupFunction} from 'dns';
 
 // Create Config
 AWS.config = new AWS.Config({
@@ -51,6 +52,7 @@ AWS.config.update({
     httpOptions: {
         agent: new Agent(),
         proxy: 'http://localhost:8080',
+        lookup: lookupFunction,
         timeout: 1000 * 60,
         xhrAsync: true,
         xhrWithCredentials: true
