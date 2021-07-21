@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Protocol",
+  "description": "Modify JSON protocol extractError() to copy all API error response fields into error object (#3821)."
+}
