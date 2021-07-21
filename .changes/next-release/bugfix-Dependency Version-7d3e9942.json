@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Dependency Version",
+  "description": "Buffer dependency version upgrade to 6.0.3"
+}
