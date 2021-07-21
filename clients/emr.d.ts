@@ -45,11 +45,11 @@ declare class EMR extends Service {
    */
   addTags(callback?: (err: AWSError, data: EMR.Types.AddTagsOutput) => void): Request<EMR.Types.AddTagsOutput, AWSError>;
   /**
-   * Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee that a step will be canceled, even if the request is successfully submitted. You can only cancel steps that are in a PENDING state.
+   * Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee that a step will be canceled, even if the request is successfully submitted. When you use Amazon EMR versions 5.28.0 and later, you can cancel steps that are in a PENDING or RUNNING state. In earlier versions of Amazon EMR, you can only cancel steps that are in a PENDING state. 
    */
   cancelSteps(params: EMR.Types.CancelStepsInput, callback?: (err: AWSError, data: EMR.Types.CancelStepsOutput) => void): Request<EMR.Types.CancelStepsOutput, AWSError>;
   /**
-   * Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee that a step will be canceled, even if the request is successfully submitted. You can only cancel steps that are in a PENDING state.
+   * Cancels a pending step or steps in a running cluster. Available only in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee that a step will be canceled, even if the request is successfully submitted. When you use Amazon EMR versions 5.28.0 and later, you can cancel steps that are in a PENDING or RUNNING state. In earlier versions of Amazon EMR, you can only cancel steps that are in a PENDING state. 
    */
   cancelSteps(callback?: (err: AWSError, data: EMR.Types.CancelStepsOutput) => void): Request<EMR.Types.CancelStepsOutput, AWSError>;
   /**
@@ -125,6 +125,14 @@ declare class EMR extends Service {
    */
   describeNotebookExecution(callback?: (err: AWSError, data: EMR.Types.DescribeNotebookExecutionOutput) => void): Request<EMR.Types.DescribeNotebookExecutionOutput, AWSError>;
   /**
+   * Provides EMR release label details, such as releases available the region where the API request is run, and the available applications for a specific EMR release label. Can also list EMR release versions that support a specified version of Spark.
+   */
+  describeReleaseLabel(params: EMR.Types.DescribeReleaseLabelInput, callback?: (err: AWSError, data: EMR.Types.DescribeReleaseLabelOutput) => void): Request<EMR.Types.DescribeReleaseLabelOutput, AWSError>;
+  /**
+   * Provides EMR release label details, such as releases available the region where the API request is run, and the available applications for a specific EMR release label. Can also list EMR release versions that support a specified version of Spark.
+   */
+  describeReleaseLabel(callback?: (err: AWSError, data: EMR.Types.DescribeReleaseLabelOutput) => void): Request<EMR.Types.DescribeReleaseLabelOutput, AWSError>;
+  /**
    * Provides the details of a security configuration by returning the configuration JSON.
    */
   describeSecurityConfiguration(params: EMR.Types.DescribeSecurityConfigurationInput, callback?: (err: AWSError, data: EMR.Types.DescribeSecurityConfigurationOutput) => void): Request<EMR.Types.DescribeSecurityConfigurationOutput, AWSError>;
@@ -149,11 +157,11 @@ declare class EMR extends Service {
    */
   describeStudio(callback?: (err: AWSError, data: EMR.Types.DescribeStudioOutput) => void): Request<EMR.Types.DescribeStudioOutput, AWSError>;
   /**
-   * Returns the Amazon EMR block public access configuration for your AWS account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
+   * Returns the Amazon EMR block public access configuration for your account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
    */
   getBlockPublicAccessConfiguration(params: EMR.Types.GetBlockPublicAccessConfigurationInput, callback?: (err: AWSError, data: EMR.Types.GetBlockPublicAccessConfigurationOutput) => void): Request<EMR.Types.GetBlockPublicAccessConfigurationOutput, AWSError>;
   /**
-   * Returns the Amazon EMR block public access configuration for your AWS account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
+   * Returns the Amazon EMR block public access configuration for your account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
    */
   getBlockPublicAccessConfiguration(callback?: (err: AWSError, data: EMR.Types.GetBlockPublicAccessConfigurationOutput) => void): Request<EMR.Types.GetBlockPublicAccessConfigurationOutput, AWSError>;
   /**
@@ -181,11 +189,11 @@ declare class EMR extends Service {
    */
   listBootstrapActions(callback?: (err: AWSError, data: EMR.Types.ListBootstrapActionsOutput) => void): Request<EMR.Types.ListBootstrapActionsOutput, AWSError>;
   /**
-   * Provides the status of all clusters visible to this AWS account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.
+   * Provides the status of all clusters visible to this account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters in unsorted order per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.
    */
   listClusters(params: EMR.Types.ListClustersInput, callback?: (err: AWSError, data: EMR.Types.ListClustersOutput) => void): Request<EMR.Types.ListClustersOutput, AWSError>;
   /**
-   * Provides the status of all clusters visible to this AWS account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.
+   * Provides the status of all clusters visible to this account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters in unsorted order per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.
    */
   listClusters(callback?: (err: AWSError, data: EMR.Types.ListClustersOutput) => void): Request<EMR.Types.ListClustersOutput, AWSError>;
   /**
@@ -221,6 +229,14 @@ declare class EMR extends Service {
    */
   listNotebookExecutions(callback?: (err: AWSError, data: EMR.Types.ListNotebookExecutionsOutput) => void): Request<EMR.Types.ListNotebookExecutionsOutput, AWSError>;
   /**
+   * Retrieves release labels of EMR services in the region where the API is called.
+   */
+  listReleaseLabels(params: EMR.Types.ListReleaseLabelsInput, callback?: (err: AWSError, data: EMR.Types.ListReleaseLabelsOutput) => void): Request<EMR.Types.ListReleaseLabelsOutput, AWSError>;
+  /**
+   * Retrieves release labels of EMR services in the region where the API is called.
+   */
+  listReleaseLabels(callback?: (err: AWSError, data: EMR.Types.ListReleaseLabelsOutput) => void): Request<EMR.Types.ListReleaseLabelsOutput, AWSError>;
+  /**
    * Lists all the security configurations visible to this account, providing their creation dates and times, and their names. This call returns a maximum of 50 clusters per call, but returns a marker to track the paging of the cluster list across multiple ListSecurityConfigurations calls.
    */
   listSecurityConfigurations(params: EMR.Types.ListSecurityConfigurationsInput, callback?: (err: AWSError, data: EMR.Types.ListSecurityConfigurationsOutput) => void): Request<EMR.Types.ListSecurityConfigurationsOutput, AWSError>;
@@ -229,11 +245,11 @@ declare class EMR extends Service {
    */
   listSecurityConfigurations(callback?: (err: AWSError, data: EMR.Types.ListSecurityConfigurationsOutput) => void): Request<EMR.Types.ListSecurityConfigurationsOutput, AWSError>;
   /**
-   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request of filter by StepStates. You can specify a maximum of 10 stepIDs.
+   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request or filter by StepStates. You can specify a maximum of 10 stepIDs. The CLI automatically paginates results to return a list greater than 50 steps. To return more than 50 steps using the CLI, specify a Marker, which is a pagination token that indicates the next set of steps to retrieve.
    */
   listSteps(params: EMR.Types.ListStepsInput, callback?: (err: AWSError, data: EMR.Types.ListStepsOutput) => void): Request<EMR.Types.ListStepsOutput, AWSError>;
   /**
-   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request of filter by StepStates. You can specify a maximum of 10 stepIDs.
+   * Provides a list of steps for the cluster in reverse order unless you specify stepIds with the request or filter by StepStates. You can specify a maximum of 10 stepIDs. The CLI automatically paginates results to return a list greater than 50 steps. To return more than 50 steps using the CLI, specify a Marker, which is a pagination token that indicates the next set of steps to retrieve.
    */
   listSteps(callback?: (err: AWSError, data: EMR.Types.ListStepsOutput) => void): Request<EMR.Types.ListStepsOutput, AWSError>;
   /**
@@ -245,11 +261,11 @@ declare class EMR extends Service {
    */
   listStudioSessionMappings(callback?: (err: AWSError, data: EMR.Types.ListStudioSessionMappingsOutput) => void): Request<EMR.Types.ListStudioSessionMappingsOutput, AWSError>;
   /**
-   * Returns a list of all Amazon EMR Studios associated with the AWS account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.
+   * Returns a list of all Amazon EMR Studios associated with the account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.
    */
   listStudios(params: EMR.Types.ListStudiosInput, callback?: (err: AWSError, data: EMR.Types.ListStudiosOutput) => void): Request<EMR.Types.ListStudiosOutput, AWSError>;
   /**
-   * Returns a list of all Amazon EMR Studios associated with the AWS account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.
+   * Returns a list of all Amazon EMR Studios associated with the account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.
    */
   listStudios(callback?: (err: AWSError, data: EMR.Types.ListStudiosOutput) => void): Request<EMR.Types.ListStudiosOutput, AWSError>;
   /**
@@ -285,11 +301,11 @@ declare class EMR extends Service {
    */
   putAutoScalingPolicy(callback?: (err: AWSError, data: EMR.Types.PutAutoScalingPolicyOutput) => void): Request<EMR.Types.PutAutoScalingPolicyOutput, AWSError>;
   /**
-   * Creates or updates an Amazon EMR block public access configuration for your AWS account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
+   * Creates or updates an Amazon EMR block public access configuration for your account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
    */
   putBlockPublicAccessConfiguration(params: EMR.Types.PutBlockPublicAccessConfigurationInput, callback?: (err: AWSError, data: EMR.Types.PutBlockPublicAccessConfigurationOutput) => void): Request<EMR.Types.PutBlockPublicAccessConfigurationOutput, AWSError>;
   /**
-   * Creates or updates an Amazon EMR block public access configuration for your AWS account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
+   * Creates or updates an Amazon EMR block public access configuration for your account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
    */
   putBlockPublicAccessConfiguration(callback?: (err: AWSError, data: EMR.Types.PutBlockPublicAccessConfigurationOutput) => void): Request<EMR.Types.PutBlockPublicAccessConfigurationOutput, AWSError>;
   /**
@@ -341,11 +357,11 @@ declare class EMR extends Service {
    */
   setTerminationProtection(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the Cluster$VisibleToAllUsers value, which determines whether the cluster is visible to all IAM users of the AWS account associated with the cluster. Only the IAM user who created the cluster or the AWS account root user can call this action. The default value, true, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If set to false, only the IAM user that created the cluster can perform actions. This action works on running clusters. You can override the default true setting when you create a cluster by using the VisibleToAllUsers parameter with RunJobFlow.
+   * Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals. This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMR Management Guide.
    */
   setVisibleToAllUsers(params: EMR.Types.SetVisibleToAllUsersInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the Cluster$VisibleToAllUsers value, which determines whether the cluster is visible to all IAM users of the AWS account associated with the cluster. Only the IAM user who created the cluster or the AWS account root user can call this action. The default value, true, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If set to false, only the IAM user that created the cluster can perform actions. This action works on running clusters. You can override the default true setting when you create a cluster by using the VisibleToAllUsers parameter with RunJobFlow.
+   * Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals. This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMR Management Guide.
    */
   setVisibleToAllUsers(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -699,7 +715,7 @@ declare namespace EMR {
      */
     LogUri?: String;
     /**
-     *  The AWS KMS customer master key (CMK) used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0. 
+     *  The KMS key used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0. 
      */
     LogEncryptionKmsKeyId?: String;
     /**
@@ -723,7 +739,7 @@ declare namespace EMR {
      */
     TerminationProtected?: Boolean;
     /**
-     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The default value, true, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If this value is false, only the IAM user that created the cluster can perform actions. This value can be changed on a running cluster by using the SetVisibleToAllUsers action. You can override the default value of true when you create a cluster by using the VisibleToAllUsers parameter of the RunJobFlow action.
+     * Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When true, IAM principals in the account can perform EMR cluster actions on the cluster that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals. The default value is false if a value is not provided when creating a cluster using the EMR API RunJobFlow command or the CLI create-cluster command. The default value is true when a cluster is created using the Management Console. IAM principals that are allowed to perform actions on the cluster can use the SetVisibleToAllUsers action to change the value on a running cluster. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMR Management Guide.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -735,7 +751,7 @@ declare namespace EMR {
      */
     Tags?: TagList;
     /**
-     * The IAM role that will be assumed by the Amazon EMR service to access AWS resources on your behalf.
+     * The IAM role that will be assumed by the Amazon EMR service to access Amazon Web Services resources on your behalf.
      */
     ServiceRole?: String;
     /**
@@ -960,7 +976,7 @@ declare namespace EMR {
      */
     SubnetIds: SubnetIdList;
     /**
-     * The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other AWS services.
+     * The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other Amazon Web Services services.
      */
     ServiceRole: XmlString;
     /**
@@ -1000,11 +1016,11 @@ declare namespace EMR {
      */
     StudioId: XmlStringMaxLen256;
     /**
-     * The globally unique identifier (GUID) of the user or group from the AWS SSO Identity Store. For more information, see UserId and GroupId in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
+     * The globally unique identifier (GUID) of the user or group from the Amazon Web Services SSO Identity Store. For more information, see UserId and GroupId in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
      */
     IdentityId?: XmlStringMaxLen256;
     /**
-     * The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
+     * The name of the user or group. For more information, see UserName and DisplayName in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
      */
     IdentityName?: XmlStringMaxLen256;
     /**
@@ -1012,7 +1028,7 @@ declare namespace EMR {
      */
     IdentityType: IdentityType;
     /**
-     * The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.
+     * The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. You should specify the ARN for the session policy that you want to apply, not the ARN of your user role. For more information, see Create an EMR Studio User Role with Session Policies.
      */
     SessionPolicyArn: XmlStringMaxLen256;
   }
@@ -1037,11 +1053,11 @@ declare namespace EMR {
      */
     StudioId: XmlStringMaxLen256;
     /**
-     * The globally unique identifier (GUID) of the user or group to remove from the Amazon EMR Studio. For more information, see UserId and GroupId in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
+     * The globally unique identifier (GUID) of the user or group to remove from the Amazon EMR Studio. For more information, see UserId and GroupId in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
      */
     IdentityId?: XmlStringMaxLen256;
     /**
-     * The name of the user name or group to remove from the Amazon EMR Studio. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
+     * The name of the user name or group to remove from the Amazon EMR Studio. For more information, see UserName and DisplayName in the Amazon Web Services SSO Store API Reference. Either IdentityName or IdentityId must be specified.
      */
     IdentityName?: XmlStringMaxLen256;
     /**
@@ -1096,6 +1112,34 @@ declare namespace EMR {
      * Properties of the notebook execution.
      */
     NotebookExecution?: NotebookExecution;
+  }
+  export interface DescribeReleaseLabelInput {
+    /**
+     * The target release label to be described.
+     */
+    ReleaseLabel?: String;
+    /**
+     * The pagination token. Reserved for future use. Currently set to null.
+     */
+    NextToken?: String;
+    /**
+     * Reserved for future use. Currently set to null.
+     */
+    MaxResults?: MaxResultsNumber;
+  }
+  export interface DescribeReleaseLabelOutput {
+    /**
+     * The target release label described in the response.
+     */
+    ReleaseLabel?: String;
+    /**
+     * The list of applications available for the target release label. Name is the name of the application. Version is the concise version of the application.
+     */
+    Applications?: SimplifiedApplicationList;
+    /**
+     * The pagination token. Reserved for future use. Currently set to null.
+     */
+    NextToken?: String;
   }
   export interface DescribeSecurityConfigurationInput {
     /**
@@ -1273,7 +1317,7 @@ declare namespace EMR {
      */
     BlockPublicAccessConfiguration: BlockPublicAccessConfiguration;
     /**
-     * Properties that describe the AWS principal that created the BlockPublicAccessConfiguration using the PutBlockPublicAccessConfiguration action as well as the date and time that the configuration was created. Each time a configuration for block public access is updated, Amazon EMR updates this metadata.
+     * Properties that describe the Amazon Web Services principal that created the BlockPublicAccessConfiguration using the PutBlockPublicAccessConfiguration action as well as the date and time that the configuration was created. Each time a configuration for block public access is updated, Amazon EMR updates this metadata.
      */
     BlockPublicAccessConfigurationMetadata: BlockPublicAccessConfigurationMetadata;
   }
@@ -1295,11 +1339,11 @@ declare namespace EMR {
      */
     StudioId: XmlStringMaxLen256;
     /**
-     * The globally unique identifier (GUID) of the user or group. For more information, see UserId and GroupId in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
+     * The globally unique identifier (GUID) of the user or group. For more information, see UserId and GroupId in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
      */
     IdentityId?: XmlStringMaxLen256;
     /**
-     * The name of the user or group to fetch. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
+     * The name of the user or group to fetch. For more information, see UserName and DisplayName in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
      */
     IdentityName?: XmlStringMaxLen256;
     /**
@@ -1396,7 +1440,7 @@ declare namespace EMR {
      */
     InstanceType?: InstanceType;
     /**
-     * The list of EBS volumes that are attached to this instance.
+     * The list of Amazon EBS volumes that are attached to this instance.
      */
     EbsVolumes?: EbsVolumeList;
   }
@@ -1435,7 +1479,7 @@ declare namespace EMR {
      */
     ProvisionedSpotCapacity?: WholeNumber;
     /**
-     * The specification for the instance types that comprise an instance fleet. Up to five unique instance specifications may be defined for each instance fleet. 
+     * An array of specifications for the instance types that comprise an instance fleet.
      */
     InstanceTypeSpecifications?: InstanceTypeSpecificationList;
     /**
@@ -1575,7 +1619,7 @@ declare namespace EMR {
      */
     Status?: InstanceGroupStatus;
     /**
-     *  Amazon EMR releases 4.x or later.  The list of configurations supplied for an EMR cluster instance group. You can specify a separate configuration for each instance group (master, core, and task).
+     *  Amazon EMR releases 4.x or later.  The list of configurations supplied for an Amazon EMR cluster instance group. You can specify a separate configuration for each instance group (master, core, and task).
      */
     Configurations?: ConfigurationList;
     /**
@@ -1850,7 +1894,7 @@ declare namespace EMR {
      */
     BidPriceAsPercentageOfOnDemandPrice?: NonNegativeDouble;
     /**
-     * The configuration of Amazon Elastic Block Storage (Amazon EBS) attached to each instance as defined by InstanceType. 
+     * The configuration of Amazon Elastic Block Store (Amazon EBS) attached to each instance as defined by InstanceType. 
      */
     EbsConfiguration?: EbsConfiguration;
     /**
@@ -1881,7 +1925,7 @@ declare namespace EMR {
      */
     Configurations?: ConfigurationList;
     /**
-     * The configuration of Amazon Elastic Block Storage (Amazon EBS) attached to each instance as defined by InstanceType.
+     * The configuration of Amazon Elastic Block Store (Amazon EBS) attached to each instance as defined by InstanceType.
      */
     EbsBlockDevices?: EbsBlockDeviceList;
     /**
@@ -1905,7 +1949,7 @@ declare namespace EMR {
      */
     LogUri?: XmlString;
     /**
-     * The AWS KMS customer master key (CMK) used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.
+     * The KMS key used for encrypting log files. This attribute is only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.
      */
     LogEncryptionKmsKeyId?: XmlString;
     /**
@@ -1933,7 +1977,7 @@ declare namespace EMR {
      */
     SupportedProducts?: SupportedProductsList;
     /**
-     * Indicates whether the cluster is visible to all IAM users of the AWS account associated with the cluster. The default value, true, indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. If this value is false, only the IAM user that created the cluster can perform actions. This value can be changed on a running cluster by using the SetVisibleToAllUsers action. You can override the default value of true when you create a cluster by using the VisibleToAllUsers parameter of the RunJobFlow action.
+     * Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When true, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals. The default value is false if a value is not provided when creating a cluster using the EMR API RunJobFlow command or the CLI create-cluster command. The default value is true when a cluster is created using the Management Console. IAM principals that are authorized to perform actions on the cluster can use the SetVisibleToAllUsers action to change the value on a running cluster. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMR Management Guide.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -1941,7 +1985,7 @@ declare namespace EMR {
      */
     JobFlowRole?: XmlString;
     /**
-     * The IAM role that is assumed by the Amazon EMR service to access AWS resources on your behalf.
+     * The IAM role that is assumed by the Amazon EMR service to access Amazon Web Services resources on your behalf.
      */
     ServiceRole?: XmlString;
     /**
@@ -2012,7 +2056,7 @@ declare namespace EMR {
      */
     Placement?: PlacementType;
     /**
-     * Specifies whether the cluster should remain available after completing all steps.
+     * Specifies whether the cluster should remain available after completing all steps. Defaults to true. For more information about configuring cluster termination, see Control Cluster Termination in the EMR Management Guide.
      */
     KeepJobFlowAliveWhenNoSteps?: Boolean;
     /**
@@ -2032,11 +2076,11 @@ declare namespace EMR {
      */
     Ec2SubnetIds?: XmlStringMaxLen256List;
     /**
-     * The identifier of the Amazon EC2 security group for the master node.
+     * The identifier of the Amazon EC2 security group for the master node. If you specify EmrManagedMasterSecurityGroup, you must also specify EmrManagedSlaveSecurityGroup.
      */
     EmrManagedMasterSecurityGroup?: XmlStringMaxLen256;
     /**
-     * The identifier of the Amazon EC2 security group for the core and task nodes.
+     * The identifier of the Amazon EC2 security group for the core and task nodes. If you specify EmrManagedSlaveSecurityGroup, you must also specify EmrManagedMasterSecurityGroup.
      */
     EmrManagedSlaveSecurityGroup?: XmlStringMaxLen256;
     /**
@@ -2169,7 +2213,7 @@ declare namespace EMR {
      */
     CreatedBefore?: _Date;
     /**
-     * The cluster state filters to apply when listing clusters.
+     * The cluster state filters to apply when listing clusters. Clusters that change state while this action runs may be not be returned as expected in the list of clusters.
      */
     ClusterStates?: ClusterStateList;
     /**
@@ -2299,6 +2343,30 @@ declare namespace EMR {
      */
     Marker?: Marker;
   }
+  export interface ListReleaseLabelsInput {
+    /**
+     * Filters the results of the request. Prefix specifies the prefix of release labels to return. Application specifies the application (with/without version) of release labels to return.
+     */
+    Filters?: ReleaseLabelFilter;
+    /**
+     * Specifies the next page of results. If NextToken is not specified, which is usually the case for the first request of ListReleaseLabels, the first page of results are determined by other filtering parameters or by the latest version. The ListReleaseLabels request fails if the identity (AWS AccountID) and all filtering parameters are different from the original request, or if the NextToken is expired or tampered with.
+     */
+    NextToken?: String;
+    /**
+     * Defines the maximum number of release labels to return in a single response. The default is 100.
+     */
+    MaxResults?: MaxResultsNumber;
+  }
+  export interface ListReleaseLabelsOutput {
+    /**
+     * The returned release labels.
+     */
+    ReleaseLabels?: StringList;
+    /**
+     * Used to paginate the next page of results if specified in the next ListReleaseLabels request.
+     */
+    NextToken?: String;
+  }
   export interface ListSecurityConfigurationsInput {
     /**
      * The pagination token that indicates the set of results to retrieve.
@@ -2329,7 +2397,7 @@ declare namespace EMR {
      */
     StepIds?: XmlStringList;
     /**
-     * The pagination token that indicates the next set of results to retrieve.
+     * The maximum number of steps that a single ListSteps action returns is 50. To return a longer list of steps, use multiple ListSteps actions along with the Marker parameter, which is a pagination token that indicates the next set of results to retrieve.
      */
     Marker?: Marker;
   }
@@ -2339,7 +2407,7 @@ declare namespace EMR {
      */
     Steps?: StepSummaryList;
     /**
-     * The pagination token that indicates the next set of results to retrieve.
+     * The maximum number of steps that a single ListSteps action returns is 50. To return a longer list of steps, use multiple ListSteps actions along with the Marker parameter, which is a pagination token that indicates the next set of results to retrieve.
      */
     Marker?: Marker;
   }
@@ -2392,6 +2460,7 @@ declare namespace EMR {
   }
   export type Marker = string;
   export type MarketType = "ON_DEMAND"|"SPOT"|string;
+  export type MaxResultsNumber = number;
   export interface MetricDimension {
     /**
      * The dimension name.
@@ -2409,7 +2478,7 @@ declare namespace EMR {
      */
     ClusterId: String;
     /**
-     * The number of steps that can be executed concurrently. You can specify a minimum of 1 step and a maximum of 256 steps. 
+     * The number of steps that can be executed concurrently. You can specify a minimum of 1 step and a maximum of 256 steps. We recommend that you do not change this parameter while steps are running or the ActionOnFailure setting may not behave as expected. For more information see Step$ActionOnFailure.
      */
     StepConcurrencyLevel?: Integer;
   }
@@ -2425,7 +2494,7 @@ declare namespace EMR {
      */
     ClusterId: ClusterId;
     /**
-     * The unique identifier of the instance fleet.
+     * The configuration parameters of the instance fleet.
      */
     InstanceFleet: InstanceFleetModifyConfig;
   }
@@ -2525,7 +2594,7 @@ declare namespace EMR {
   export type NotebookExecutionSummaryList = NotebookExecutionSummary[];
   export interface OnDemandCapacityReservationOptions {
     /**
-     * Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity. If you specify use-capacity-reservations-first, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (lowest-price) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (lowest-price). If you do not specify a value, the fleet fulfils the On-Demand capacity according to the chosen On-Demand allocation strategy.
+     * Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity. If you specify use-capacity-reservations-first, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (lowest-price) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (lowest-price). If you do not specify a value, the fleet fulfills the On-Demand capacity according to the chosen On-Demand allocation strategy.
      */
     UsageStrategy?: OnDemandCapacityReservationUsageStrategy;
     /**
@@ -2637,6 +2706,16 @@ declare namespace EMR {
   }
   export interface PutManagedScalingPolicyOutput {
   }
+  export interface ReleaseLabelFilter {
+    /**
+     * Optional release label version prefix filter. For example, emr-5.
+     */
+    Prefix?: String;
+    /**
+     * Optional release label application filter. For example, spark@2.1.0.
+     */
+    Application?: String;
+  }
   export interface RemoveAutoScalingPolicyInput {
     /**
      * Specifies the ID of a cluster. The instance group to which the automatic scaling policy is applied is within this cluster.
@@ -2681,7 +2760,7 @@ declare namespace EMR {
      */
     LogUri?: XmlString;
     /**
-     * The AWS KMS customer master key (CMK) used for encrypting log files. If a value is not provided, the logs remain encrypted by AES-256. This attribute is only available with Amazon EMR version 5.30.0 and later, excluding Amazon EMR 6.0.0.
+     * The KMS key used for encrypting log files. If a value is not provided, the logs remain encrypted by AES-256. This attribute is only available with Amazon EMR version 5.30.0 and later, excluding Amazon EMR 6.0.0.
      */
     LogEncryptionKmsKeyId?: XmlString;
     /**
@@ -2725,7 +2804,7 @@ declare namespace EMR {
      */
     Configurations?: ConfigurationList;
     /**
-     * A value of true indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. This is the default. A value of false indicates that only the IAM user who created the cluster can perform actions.
+     * Set this value to true so that IAM principals in the account associated with the cluster can perform EMR actions on the cluster that their IAM policies allow. This value defaults to false for clusters created using the EMR API or the CLI create-cluster command. When set to false, only the IAM principal that created the cluster and the account root user can perform EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMR Management Guide.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -2733,7 +2812,7 @@ declare namespace EMR {
      */
     JobFlowRole?: XmlString;
     /**
-     * The IAM role that will be assumed by the Amazon EMR service to access AWS resources on your behalf.
+     * The IAM role that will be assumed by the Amazon EMR service to access Amazon Web Services resources on your behalf.
      */
     ServiceRole?: XmlString;
     /**
@@ -2839,7 +2918,7 @@ declare namespace EMR {
   }
   export interface ScriptBootstrapActionConfig {
     /**
-     * Location of the script to run during a bootstrap action. Can be either a location in Amazon S3 or on a local file system.
+     * Location in Amazon S3 of the script to run during a bootstrap action.
      */
     Path: XmlString;
     /**
@@ -2869,7 +2948,7 @@ declare namespace EMR {
      */
     IdentityId?: XmlStringMaxLen256;
     /**
-     * The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference.
+     * The name of the user or group. For more information, see UserName and DisplayName in the Amazon Web Services SSO Identity Store API Reference.
      */
     IdentityName?: XmlStringMaxLen256;
     /**
@@ -2895,11 +2974,11 @@ declare namespace EMR {
      */
     StudioId?: XmlStringMaxLen256;
     /**
-     * The globally unique identifier (GUID) of the user or group from the AWS SSO Identity Store.
+     * The globally unique identifier (GUID) of the user or group from the Amazon Web Services SSO Identity Store.
      */
     IdentityId?: XmlStringMaxLen256;
     /**
-     * The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference.
+     * The name of the user or group. For more information, see UserName and DisplayName in the Amazon Web Services SSO Identity Store API Reference.
      */
     IdentityName?: XmlStringMaxLen256;
     /**
@@ -2932,7 +3011,7 @@ declare namespace EMR {
      */
     JobFlowIds: XmlStringList;
     /**
-     * A value of true indicates that all IAM users in the AWS account can perform cluster actions if they have the proper IAM policy permissions. This is the default. A value of false indicates that only the IAM user who created the cluster can perform actions.
+     * A value of true indicates that an IAM principal in the account can perform EMR actions on the cluster that the IAM policies attached to the principal allow. A value of false indicates that only the IAM principal that created the cluster and the Amazon Web Services root user can perform EMR actions on the cluster.
      */
     VisibleToAllUsers: Boolean;
   }
@@ -2960,6 +3039,17 @@ declare namespace EMR {
      */
     CoolDown?: Integer;
   }
+  export interface SimplifiedApplication {
+    /**
+     * The returned release label application name. For example, hadoop.
+     */
+    Name?: String;
+    /**
+     * The returned release label application version. For example, 3.2.1.
+     */
+    Version?: String;
+  }
+  export type SimplifiedApplicationList = SimplifiedApplication[];
   export type SpotProvisioningAllocationStrategy = "capacity-optimized"|string;
   export interface SpotProvisioningSpecification {
     /**
@@ -3035,7 +3125,7 @@ declare namespace EMR {
      */
     Config?: HadoopStepConfig;
     /**
-     * The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
+     * The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead. If a cluster's StepConcurrencyLevel is greater than 1, do not use AddJobFlowSteps to submit a step with this parameter set to CANCEL_AND_WAIT or TERMINATE_CLUSTER. The step is not submitted and the action fails with a message that the ActionOnFailure setting is not valid. If you change a cluster's StepConcurrencyLevel to be greater than 1 while a step is running, the ActionOnFailure parameter may not behave as you expect. In this case, for a step that fails with this parameter set to CANCEL_AND_WAIT, pending steps and the running step are not canceled; for a step that fails with this parameter set to TERMINATE_CLUSTER, the cluster does not terminate.
      */
     ActionOnFailure?: ActionOnFailure;
     /**
@@ -3050,7 +3140,7 @@ declare namespace EMR {
      */
     Name: XmlStringMaxLen256;
     /**
-     * The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
+     * The action to take when the step fails. Use one of the following values:    TERMINATE_CLUSTER - Shuts down the cluster.    CANCEL_AND_WAIT - Cancels any pending steps and returns the cluster to the WAITING state.    CONTINUE - Continues to the next step in the queue.    TERMINATE_JOB_FLOW - Shuts down the cluster. TERMINATE_JOB_FLOW is provided for backward compatibility. We recommend using TERMINATE_CLUSTER instead.   If a cluster's StepConcurrencyLevel is greater than 1, do not use AddJobFlowSteps to submit a step with this parameter set to CANCEL_AND_WAIT or TERMINATE_CLUSTER. The step is not submitted and the action fails with a message that the ActionOnFailure setting is not valid. If you change a cluster's StepConcurrencyLevel to be greater than 1 while a step is running, the ActionOnFailure parameter may not behave as you expect. In this case, for a step that fails with this parameter set to CANCEL_AND_WAIT, pending steps and the running step are not canceled; for a step that fails with this parameter set to TERMINATE_CLUSTER, the cluster does not terminate.
      */
     ActionOnFailure?: ActionOnFailure;
     /**
@@ -3140,7 +3230,7 @@ declare namespace EMR {
      */
     Config?: HadoopStepConfig;
     /**
-     * The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is available for backward compatibility. We recommend using TERMINATE_CLUSTER instead.
+     * The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER, CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is available for backward compatibility.
      */
     ActionOnFailure?: ActionOnFailure;
     /**
@@ -3319,11 +3409,11 @@ declare namespace EMR {
      */
     StudioId: XmlStringMaxLen256;
     /**
-     * The globally unique identifier (GUID) of the user or group. For more information, see UserId and GroupId in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
+     * The globally unique identifier (GUID) of the user or group. For more information, see UserId and GroupId in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
      */
     IdentityId?: XmlStringMaxLen256;
     /**
-     * The name of the user or group to update. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
+     * The name of the user or group to update. For more information, see UserName and DisplayName in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
      */
     IdentityName?: XmlStringMaxLen256;
     /**

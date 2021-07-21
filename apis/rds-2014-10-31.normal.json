@@ -7355,7 +7355,7 @@
         },
         "SnapshotCreateTime": {
           "shape": "TStamp",
-          "documentation": "<p>Specifies when the snapshot was taken in Coordinated Universal Time (UTC).</p>"
+          "documentation": "<p>Specifies when the snapshot was taken in Coordinated Universal Time (UTC). Changes for the copy when the snapshot is copied.</p>"
         },
         "Engine": {
           "shape": "String",
@@ -7419,7 +7419,7 @@
         },
         "SourceDBSnapshotIdentifier": {
           "shape": "String",
-          "documentation": "<p>The DB snapshot Amazon Resource Name (ARN) that the DB snapshot was copied from. It only has value in case of cross-customer or cross-region copy.</p>"
+          "documentation": "<p>The DB snapshot Amazon Resource Name (ARN) that the DB snapshot was copied from. It only has a value in the case of a cross-account or cross-Region copy.</p>"
         },
         "StorageType": {
           "shape": "String",
@@ -7459,6 +7459,10 @@
         },
         "TagList": {
           "shape": "TagList"
+        },
+        "OriginalSnapshotCreateTime": {
+          "shape": "TStamp",
+          "documentation": "<p>Specifies the time of the CreateDBSnapshot operation in Coordinated Universal Time (UTC). Doesn't change when the snapshot is copied.</p>"
         }
       },
       "documentation": "<p>Contains the details of an Amazon RDS DB snapshot. </p> <p>This data type is used as a response element in the <code>DescribeDBSnapshots</code> action. </p>",
@@ -8141,7 +8145,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>A filter that specifies one or more DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.</p> </li> </ul>"
+          "documentation": "<p>A filter that specifies one or more DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>clone-group-id</code> - Accepts clone group identifiers. The results list will only include information about the DB clusters associated with these clone groups.</p> </li> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.</p> </li> <li> <p> <code>domain</code> - Accepts Active Directory directory IDs. The results list will only include information about the DB clusters associated with these domains.</p> </li> <li> <p> <code>engine</code> - Accepts engine names. The results list will only include information about the DB clusters for these engines.</p> </li> </ul>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",
@@ -8820,7 +8824,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>A filter that specifies one or more global DB clusters to describe.</p> <p>Supported filters:</p> <ul> <li> <p> <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.</p> </li> </ul>"
+          "documentation": "<p>This parameter isn't currently supported.</p>"
         },
         "MaxRecords": {
           "shape": "IntegerOptional",

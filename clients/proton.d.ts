@@ -13,59 +13,59 @@ declare class Proton extends Service {
   constructor(options?: Proton.Types.ClientConfiguration)
   config: Config & Proton.Types.ClientConfiguration;
   /**
-   * In a management account, an environment account connection request is accepted. When the environment account connection request is accepted, AWS Proton can use the associated IAM role to provision environment infrastructure resources in the associated environment account. For more information, see Environment account connections in the AWS Proton Administration guide.
+   * In a management account, an environment account connection request is accepted. When the environment account connection request is accepted, AWS Proton can use the associated IAM role to provision environment infrastructure resources in the associated environment account. For more information, see Environment account connections in the AWS Proton Administrator guide.
    */
   acceptEnvironmentAccountConnection(params: Proton.Types.AcceptEnvironmentAccountConnectionInput, callback?: (err: AWSError, data: Proton.Types.AcceptEnvironmentAccountConnectionOutput) => void): Request<Proton.Types.AcceptEnvironmentAccountConnectionOutput, AWSError>;
   /**
-   * In a management account, an environment account connection request is accepted. When the environment account connection request is accepted, AWS Proton can use the associated IAM role to provision environment infrastructure resources in the associated environment account. For more information, see Environment account connections in the AWS Proton Administration guide.
+   * In a management account, an environment account connection request is accepted. When the environment account connection request is accepted, AWS Proton can use the associated IAM role to provision environment infrastructure resources in the associated environment account. For more information, see Environment account connections in the AWS Proton Administrator guide.
    */
   acceptEnvironmentAccountConnection(callback?: (err: AWSError, data: Proton.Types.AcceptEnvironmentAccountConnectionOutput) => void): Request<Proton.Types.AcceptEnvironmentAccountConnectionOutput, AWSError>;
   /**
-   * Attempts to cancel an environment deployment on an UpdateEnvironment action, if the deployment is IN_PROGRESS. For more information, see Update an environment in the AWS Proton Administration guide. The following list includes potential cancellation scenarios.   If the cancellation attempt succeeds, the resulting deployment state is CANCELLED.   If the cancellation attempt fails, the resulting deployment state is FAILED.   If the current UpdateEnvironment action succeeds before the cancellation attempt starts, the resulting deployment state is SUCCEEDED and the cancellation attempt has no effect.  
+   * Attempts to cancel an environment deployment on an UpdateEnvironment action, if the deployment is IN_PROGRESS. For more information, see Update an environment in the AWS Proton Administrator guide. The following list includes potential cancellation scenarios.   If the cancellation attempt succeeds, the resulting deployment state is CANCELLED.   If the cancellation attempt fails, the resulting deployment state is FAILED.   If the current UpdateEnvironment action succeeds before the cancellation attempt starts, the resulting deployment state is SUCCEEDED and the cancellation attempt has no effect.  
    */
   cancelEnvironmentDeployment(params: Proton.Types.CancelEnvironmentDeploymentInput, callback?: (err: AWSError, data: Proton.Types.CancelEnvironmentDeploymentOutput) => void): Request<Proton.Types.CancelEnvironmentDeploymentOutput, AWSError>;
   /**
-   * Attempts to cancel an environment deployment on an UpdateEnvironment action, if the deployment is IN_PROGRESS. For more information, see Update an environment in the AWS Proton Administration guide. The following list includes potential cancellation scenarios.   If the cancellation attempt succeeds, the resulting deployment state is CANCELLED.   If the cancellation attempt fails, the resulting deployment state is FAILED.   If the current UpdateEnvironment action succeeds before the cancellation attempt starts, the resulting deployment state is SUCCEEDED and the cancellation attempt has no effect.  
+   * Attempts to cancel an environment deployment on an UpdateEnvironment action, if the deployment is IN_PROGRESS. For more information, see Update an environment in the AWS Proton Administrator guide. The following list includes potential cancellation scenarios.   If the cancellation attempt succeeds, the resulting deployment state is CANCELLED.   If the cancellation attempt fails, the resulting deployment state is FAILED.   If the current UpdateEnvironment action succeeds before the cancellation attempt starts, the resulting deployment state is SUCCEEDED and the cancellation attempt has no effect.  
    */
   cancelEnvironmentDeployment(callback?: (err: AWSError, data: Proton.Types.CancelEnvironmentDeploymentOutput) => void): Request<Proton.Types.CancelEnvironmentDeploymentOutput, AWSError>;
   /**
-   * Attempts to cancel a service instance deployment on an UpdateServiceInstance action, if the deployment is IN_PROGRESS. For more information, see Update a service instance in the AWS Proton Administration guide or the AWS Proton User guide. The following list includes potential cancellation scenarios.   If the cancellation attempt succeeds, the resulting deployment state is CANCELLED.   If the cancellation attempt fails, the resulting deployment state is FAILED.   If the current UpdateServiceInstance action succeeds before the cancellation attempt starts, the resulting deployment state is SUCCEEDED and the cancellation attempt has no effect.  
+   * Attempts to cancel a service instance deployment on an UpdateServiceInstance action, if the deployment is IN_PROGRESS. For more information, see Update a service instance in the AWS Proton Administrator guide or the AWS Proton User guide. The following list includes potential cancellation scenarios.   If the cancellation attempt succeeds, the resulting deployment state is CANCELLED.   If the cancellation attempt fails, the resulting deployment state is FAILED.   If the current UpdateServiceInstance action succeeds before the cancellation attempt starts, the resulting deployment state is SUCCEEDED and the cancellation attempt has no effect.  
    */
   cancelServiceInstanceDeployment(params: Proton.Types.CancelServiceInstanceDeploymentInput, callback?: (err: AWSError, data: Proton.Types.CancelServiceInstanceDeploymentOutput) => void): Request<Proton.Types.CancelServiceInstanceDeploymentOutput, AWSError>;
   /**
-   * Attempts to cancel a service instance deployment on an UpdateServiceInstance action, if the deployment is IN_PROGRESS. For more information, see Update a service instance in the AWS Proton Administration guide or the AWS Proton User guide. The following list includes potential cancellation scenarios.   If the cancellation attempt succeeds, the resulting deployment state is CANCELLED.   If the cancellation attempt fails, the resulting deployment state is FAILED.   If the current UpdateServiceInstance action succeeds before the cancellation attempt starts, the resulting deployment state is SUCCEEDED and the cancellation attempt has no effect.  
+   * Attempts to cancel a service instance deployment on an UpdateServiceInstance action, if the deployment is IN_PROGRESS. For more information, see Update a service instance in the AWS Proton Administrator guide or the AWS Proton User guide. The following list includes potential cancellation scenarios.   If the cancellation attempt succeeds, the resulting deployment state is CANCELLED.   If the cancellation attempt fails, the resulting deployment state is FAILED.   If the current UpdateServiceInstance action succeeds before the cancellation attempt starts, the resulting deployment state is SUCCEEDED and the cancellation attempt has no effect.  
    */
   cancelServiceInstanceDeployment(callback?: (err: AWSError, data: Proton.Types.CancelServiceInstanceDeploymentOutput) => void): Request<Proton.Types.CancelServiceInstanceDeploymentOutput, AWSError>;
   /**
-   * Attempts to cancel a service pipeline deployment on an UpdateServicePipeline action, if the deployment is IN_PROGRESS. For more information, see Update a service pipeline in the AWS Proton Administration guide or the AWS Proton User guide. The following list includes potential cancellation scenarios.   If the cancellation attempt succeeds, the resulting deployment state is CANCELLED.   If the cancellation attempt fails, the resulting deployment state is FAILED.   If the current UpdateServicePipeline action succeeds before the cancellation attempt starts, the resulting deployment state is SUCCEEDED and the cancellation attempt has no effect.  
+   * Attempts to cancel a service pipeline deployment on an UpdateServicePipeline action, if the deployment is IN_PROGRESS. For more information, see Update a service pipeline in the AWS Proton Administrator guide or the AWS Proton User guide. The following list includes potential cancellation scenarios.   If the cancellation attempt succeeds, the resulting deployment state is CANCELLED.   If the cancellation attempt fails, the resulting deployment state is FAILED.   If the current UpdateServicePipeline action succeeds before the cancellation attempt starts, the resulting deployment state is SUCCEEDED and the cancellation attempt has no effect.  
    */
   cancelServicePipelineDeployment(params: Proton.Types.CancelServicePipelineDeploymentInput, callback?: (err: AWSError, data: Proton.Types.CancelServicePipelineDeploymentOutput) => void): Request<Proton.Types.CancelServicePipelineDeploymentOutput, AWSError>;
   /**
-   * Attempts to cancel a service pipeline deployment on an UpdateServicePipeline action, if the deployment is IN_PROGRESS. For more information, see Update a service pipeline in the AWS Proton Administration guide or the AWS Proton User guide. The following list includes potential cancellation scenarios.   If the cancellation attempt succeeds, the resulting deployment state is CANCELLED.   If the cancellation attempt fails, the resulting deployment state is FAILED.   If the current UpdateServicePipeline action succeeds before the cancellation attempt starts, the resulting deployment state is SUCCEEDED and the cancellation attempt has no effect.  
+   * Attempts to cancel a service pipeline deployment on an UpdateServicePipeline action, if the deployment is IN_PROGRESS. For more information, see Update a service pipeline in the AWS Proton Administrator guide or the AWS Proton User guide. The following list includes potential cancellation scenarios.   If the cancellation attempt succeeds, the resulting deployment state is CANCELLED.   If the cancellation attempt fails, the resulting deployment state is FAILED.   If the current UpdateServicePipeline action succeeds before the cancellation attempt starts, the resulting deployment state is SUCCEEDED and the cancellation attempt has no effect.  
    */
   cancelServicePipelineDeployment(callback?: (err: AWSError, data: Proton.Types.CancelServicePipelineDeploymentOutput) => void): Request<Proton.Types.CancelServicePipelineDeploymentOutput, AWSError>;
   /**
-   * Deploy a new environment. An AWS Proton environment is created from an environment template that defines infrastructure and resources that can be shared across services. For more information, see the Environments in the AWS Proton Administration Guide. 
+   * Deploy a new environment. An AWS Proton environment is created from an environment template that defines infrastructure and resources that can be shared across services. For more information, see the Environments in the AWS Proton Administrator Guide. 
    */
   createEnvironment(params: Proton.Types.CreateEnvironmentInput, callback?: (err: AWSError, data: Proton.Types.CreateEnvironmentOutput) => void): Request<Proton.Types.CreateEnvironmentOutput, AWSError>;
   /**
-   * Deploy a new environment. An AWS Proton environment is created from an environment template that defines infrastructure and resources that can be shared across services. For more information, see the Environments in the AWS Proton Administration Guide. 
+   * Deploy a new environment. An AWS Proton environment is created from an environment template that defines infrastructure and resources that can be shared across services. For more information, see the Environments in the AWS Proton Administrator Guide. 
    */
   createEnvironment(callback?: (err: AWSError, data: Proton.Types.CreateEnvironmentOutput) => void): Request<Proton.Types.CreateEnvironmentOutput, AWSError>;
   /**
-   * Create an environment account connection in an environment account so that environment infrastructure resources can be provisioned in the environment account from the management account. An environment account connection is a secure bi-directional connection between a management account and an environment account that maintains authorization and permissions. For more information, see Environment account connections in the AWS Proton Administration guide.
+   * Create an environment account connection in an environment account so that environment infrastructure resources can be provisioned in the environment account from a management account. An environment account connection is a secure bi-directional connection between a management account and an environment account that maintains authorization and permissions. For more information, see Environment account connections in the AWS Proton Administrator guide.
    */
   createEnvironmentAccountConnection(params: Proton.Types.CreateEnvironmentAccountConnectionInput, callback?: (err: AWSError, data: Proton.Types.CreateEnvironmentAccountConnectionOutput) => void): Request<Proton.Types.CreateEnvironmentAccountConnectionOutput, AWSError>;
   /**
-   * Create an environment account connection in an environment account so that environment infrastructure resources can be provisioned in the environment account from the management account. An environment account connection is a secure bi-directional connection between a management account and an environment account that maintains authorization and permissions. For more information, see Environment account connections in the AWS Proton Administration guide.
+   * Create an environment account connection in an environment account so that environment infrastructure resources can be provisioned in the environment account from a management account. An environment account connection is a secure bi-directional connection between a management account and an environment account that maintains authorization and permissions. For more information, see Environment account connections in the AWS Proton Administrator guide.
    */
   createEnvironmentAccountConnection(callback?: (err: AWSError, data: Proton.Types.CreateEnvironmentAccountConnectionOutput) => void): Request<Proton.Types.CreateEnvironmentAccountConnectionOutput, AWSError>;
   /**
-   * Create an environment template for AWS Proton. For more information, see Environment Templates in the AWS Proton Administration Guide. You can create an environment template in one of the two following ways:   Register and publish a standard environment template that instructs AWS Proton to deploy and manage environment infrastructure.   Register and publish a customer managed environment template that connects AWS Proton to your existing provisioned infrastructure that you manage. AWS Proton doesn't manage your existing provisioned infrastructure. To create an environment template for customer provisioned and managed infrastructure, include the provisioning parameter and set the value to CUSTOMER_MANAGED. For more information, see Register and publish an environment template in the AWS Proton Administration Guide.  
+   * Create an environment template for AWS Proton. For more information, see Environment Templates in the AWS Proton Administrator Guide. You can create an environment template in one of the two following ways:   Register and publish a standard environment template that instructs AWS Proton to deploy and manage environment infrastructure.   Register and publish a customer managed environment template that connects AWS Proton to your existing provisioned infrastructure that you manage. AWS Proton doesn't manage your existing provisioned infrastructure. To create an environment template for customer provisioned and managed infrastructure, include the provisioning parameter and set the value to CUSTOMER_MANAGED. For more information, see Register and publish an environment template in the AWS Proton Administrator Guide.  
    */
   createEnvironmentTemplate(params: Proton.Types.CreateEnvironmentTemplateInput, callback?: (err: AWSError, data: Proton.Types.CreateEnvironmentTemplateOutput) => void): Request<Proton.Types.CreateEnvironmentTemplateOutput, AWSError>;
   /**
-   * Create an environment template for AWS Proton. For more information, see Environment Templates in the AWS Proton Administration Guide. You can create an environment template in one of the two following ways:   Register and publish a standard environment template that instructs AWS Proton to deploy and manage environment infrastructure.   Register and publish a customer managed environment template that connects AWS Proton to your existing provisioned infrastructure that you manage. AWS Proton doesn't manage your existing provisioned infrastructure. To create an environment template for customer provisioned and managed infrastructure, include the provisioning parameter and set the value to CUSTOMER_MANAGED. For more information, see Register and publish an environment template in the AWS Proton Administration Guide.  
+   * Create an environment template for AWS Proton. For more information, see Environment Templates in the AWS Proton Administrator Guide. You can create an environment template in one of the two following ways:   Register and publish a standard environment template that instructs AWS Proton to deploy and manage environment infrastructure.   Register and publish a customer managed environment template that connects AWS Proton to your existing provisioned infrastructure that you manage. AWS Proton doesn't manage your existing provisioned infrastructure. To create an environment template for customer provisioned and managed infrastructure, include the provisioning parameter and set the value to CUSTOMER_MANAGED. For more information, see Register and publish an environment template in the AWS Proton Administrator Guide.  
    */
   createEnvironmentTemplate(callback?: (err: AWSError, data: Proton.Types.CreateEnvironmentTemplateOutput) => void): Request<Proton.Types.CreateEnvironmentTemplateOutput, AWSError>;
   /**
@@ -77,19 +77,19 @@ declare class Proton extends Service {
    */
   createEnvironmentTemplateVersion(callback?: (err: AWSError, data: Proton.Types.CreateEnvironmentTemplateVersionOutput) => void): Request<Proton.Types.CreateEnvironmentTemplateVersionOutput, AWSError>;
   /**
-   * Create an AWS Proton service. An AWS Proton service is an instantiation of a service template and often includes several service instances and pipeline. For more information, see Services in the AWS Proton Administration Guide and Services in the AWS Proton User Guide.
+   * Create an AWS Proton service. An AWS Proton service is an instantiation of a service template and often includes several service instances and pipeline. For more information, see Services in the AWS Proton Administrator Guide and Services in the AWS Proton User Guide.
    */
   createService(params: Proton.Types.CreateServiceInput, callback?: (err: AWSError, data: Proton.Types.CreateServiceOutput) => void): Request<Proton.Types.CreateServiceOutput, AWSError>;
   /**
-   * Create an AWS Proton service. An AWS Proton service is an instantiation of a service template and often includes several service instances and pipeline. For more information, see Services in the AWS Proton Administration Guide and Services in the AWS Proton User Guide.
+   * Create an AWS Proton service. An AWS Proton service is an instantiation of a service template and often includes several service instances and pipeline. For more information, see Services in the AWS Proton Administrator Guide and Services in the AWS Proton User Guide.
    */
   createService(callback?: (err: AWSError, data: Proton.Types.CreateServiceOutput) => void): Request<Proton.Types.CreateServiceOutput, AWSError>;
   /**
-   * Create a service template. The administrator creates a service template to define standardized infrastructure and an optional CICD service pipeline. Developers, in turn, select the service template from AWS Proton. If the selected service template includes a service pipeline definition, they provide a link to their source code repository. AWS Proton then deploys and manages the infrastructure defined by the selected service template. For more information, see Service Templates in the AWS Proton Administration Guide.
+   * Create a service template. The administrator creates a service template to define standardized infrastructure and an optional CICD service pipeline. Developers, in turn, select the service template from AWS Proton. If the selected service template includes a service pipeline definition, they provide a link to their source code repository. AWS Proton then deploys and manages the infrastructure defined by the selected service template. For more information, see Service Templates in the AWS Proton Administrator Guide.
    */
   createServiceTemplate(params: Proton.Types.CreateServiceTemplateInput, callback?: (err: AWSError, data: Proton.Types.CreateServiceTemplateOutput) => void): Request<Proton.Types.CreateServiceTemplateOutput, AWSError>;
   /**
-   * Create a service template. The administrator creates a service template to define standardized infrastructure and an optional CICD service pipeline. Developers, in turn, select the service template from AWS Proton. If the selected service template includes a service pipeline definition, they provide a link to their source code repository. AWS Proton then deploys and manages the infrastructure defined by the selected service template. For more information, see Service Templates in the AWS Proton Administration Guide.
+   * Create a service template. The administrator creates a service template to define standardized infrastructure and an optional CICD service pipeline. Developers, in turn, select the service template from AWS Proton. If the selected service template includes a service pipeline definition, they provide a link to their source code repository. AWS Proton then deploys and manages the infrastructure defined by the selected service template. For more information, see Service Templates in the AWS Proton Administrator Guide.
    */
   createServiceTemplate(callback?: (err: AWSError, data: Proton.Types.CreateServiceTemplateOutput) => void): Request<Proton.Types.CreateServiceTemplateOutput, AWSError>;
   /**
@@ -109,11 +109,11 @@ declare class Proton extends Service {
    */
   deleteEnvironment(callback?: (err: AWSError, data: Proton.Types.DeleteEnvironmentOutput) => void): Request<Proton.Types.DeleteEnvironmentOutput, AWSError>;
   /**
-   * In an environment account, delete an environment account connection. After you delete an environment account connection that’s in use by an AWS Proton environment, AWS Proton can’t manage the environment infrastructure resources until a new environment account connection is accepted for the environment account and associated environment. You're responsible for cleaning up provisioned resources that remain without an environment connection. For more information, see Environment account connections in the AWS Proton Administration guide.
+   * In an environment account, delete an environment account connection. After you delete an environment account connection that’s in use by an AWS Proton environment, AWS Proton can’t manage the environment infrastructure resources until a new environment account connection is accepted for the environment account and associated environment. You're responsible for cleaning up provisioned resources that remain without an environment connection. For more information, see Environment account connections in the AWS Proton Administrator guide.
    */
   deleteEnvironmentAccountConnection(params: Proton.Types.DeleteEnvironmentAccountConnectionInput, callback?: (err: AWSError, data: Proton.Types.DeleteEnvironmentAccountConnectionOutput) => void): Request<Proton.Types.DeleteEnvironmentAccountConnectionOutput, AWSError>;
   /**
-   * In an environment account, delete an environment account connection. After you delete an environment account connection that’s in use by an AWS Proton environment, AWS Proton can’t manage the environment infrastructure resources until a new environment account connection is accepted for the environment account and associated environment. You're responsible for cleaning up provisioned resources that remain without an environment connection. For more information, see Environment account connections in the AWS Proton Administration guide.
+   * In an environment account, delete an environment account connection. After you delete an environment account connection that’s in use by an AWS Proton environment, AWS Proton can’t manage the environment infrastructure resources until a new environment account connection is accepted for the environment account and associated environment. You're responsible for cleaning up provisioned resources that remain without an environment connection. For more information, see Environment account connections in the AWS Proton Administrator guide.
    */
   deleteEnvironmentAccountConnection(callback?: (err: AWSError, data: Proton.Types.DeleteEnvironmentAccountConnectionOutput) => void): Request<Proton.Types.DeleteEnvironmentAccountConnectionOutput, AWSError>;
   /**
@@ -173,11 +173,11 @@ declare class Proton extends Service {
    */
   getEnvironment(callback?: (err: AWSError, data: Proton.Types.GetEnvironmentOutput) => void): Request<Proton.Types.GetEnvironmentOutput, AWSError>;
   /**
-   * In an environment account, view the detail data for an environment account connection. For more information, see Environment account connections in the AWS Proton Administration guide.
+   * In an environment account, view the detail data for an environment account connection. For more information, see Environment account connections in the AWS Proton Administrator guide.
    */
   getEnvironmentAccountConnection(params: Proton.Types.GetEnvironmentAccountConnectionInput, callback?: (err: AWSError, data: Proton.Types.GetEnvironmentAccountConnectionOutput) => void): Request<Proton.Types.GetEnvironmentAccountConnectionOutput, AWSError>;
   /**
-   * In an environment account, view the detail data for an environment account connection. For more information, see Environment account connections in the AWS Proton Administration guide.
+   * In an environment account, view the detail data for an environment account connection. For more information, see Environment account connections in the AWS Proton Administrator guide.
    */
   getEnvironmentAccountConnection(callback?: (err: AWSError, data: Proton.Types.GetEnvironmentAccountConnectionOutput) => void): Request<Proton.Types.GetEnvironmentAccountConnectionOutput, AWSError>;
   /**
@@ -229,11 +229,11 @@ declare class Proton extends Service {
    */
   getServiceTemplateVersion(callback?: (err: AWSError, data: Proton.Types.GetServiceTemplateVersionOutput) => void): Request<Proton.Types.GetServiceTemplateVersionOutput, AWSError>;
   /**
-   * View a list of environment account connections. For more information, see Environment account connections in the AWS Proton Administration guide.
+   * View a list of environment account connections. For more information, see Environment account connections in the AWS Proton Administrator guide.
    */
   listEnvironmentAccountConnections(params: Proton.Types.ListEnvironmentAccountConnectionsInput, callback?: (err: AWSError, data: Proton.Types.ListEnvironmentAccountConnectionsOutput) => void): Request<Proton.Types.ListEnvironmentAccountConnectionsOutput, AWSError>;
   /**
-   * View a list of environment account connections. For more information, see Environment account connections in the AWS Proton Administration guide.
+   * View a list of environment account connections. For more information, see Environment account connections in the AWS Proton Administrator guide.
    */
   listEnvironmentAccountConnections(callback?: (err: AWSError, data: Proton.Types.ListEnvironmentAccountConnectionsOutput) => void): Request<Proton.Types.ListEnvironmentAccountConnectionsOutput, AWSError>;
   /**
@@ -293,35 +293,35 @@ declare class Proton extends Service {
    */
   listServices(callback?: (err: AWSError, data: Proton.Types.ListServicesOutput) => void): Request<Proton.Types.ListServicesOutput, AWSError>;
   /**
-   * List tags for a resource. For more information, see AWS Proton resources and tagging in the AWS Proton Administration Guide or AWS Proton User Guide.
+   * List tags for a resource. For more information, see AWS Proton resources and tagging in the AWS Proton Administrator Guide or AWS Proton User Guide.
    */
   listTagsForResource(params: Proton.Types.ListTagsForResourceInput, callback?: (err: AWSError, data: Proton.Types.ListTagsForResourceOutput) => void): Request<Proton.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * List tags for a resource. For more information, see AWS Proton resources and tagging in the AWS Proton Administration Guide or AWS Proton User Guide.
+   * List tags for a resource. For more information, see AWS Proton resources and tagging in the AWS Proton Administrator Guide or AWS Proton User Guide.
    */
   listTagsForResource(callback?: (err: AWSError, data: Proton.Types.ListTagsForResourceOutput) => void): Request<Proton.Types.ListTagsForResourceOutput, AWSError>;
   /**
-   * In a management account, reject an environment account connection from another environment account. After you reject an environment account connection request, you won’t be able to accept or use the rejected environment account connection. You can’t reject an environment account connection that is connected to an environment. For more information, see Environment account connections in the AWS Proton Administration guide.
+   * In a management account, reject an environment account connection from another environment account. After you reject an environment account connection request, you won’t be able to accept or use the rejected environment account connection. You can’t reject an environment account connection that is connected to an environment. For more information, see Environment account connections in the AWS Proton Administrator guide.
    */
   rejectEnvironmentAccountConnection(params: Proton.Types.RejectEnvironmentAccountConnectionInput, callback?: (err: AWSError, data: Proton.Types.RejectEnvironmentAccountConnectionOutput) => void): Request<Proton.Types.RejectEnvironmentAccountConnectionOutput, AWSError>;
   /**
-   * In a management account, reject an environment account connection from another environment account. After you reject an environment account connection request, you won’t be able to accept or use the rejected environment account connection. You can’t reject an environment account connection that is connected to an environment. For more information, see Environment account connections in the AWS Proton Administration guide.
+   * In a management account, reject an environment account connection from another environment account. After you reject an environment account connection request, you won’t be able to accept or use the rejected environment account connection. You can’t reject an environment account connection that is connected to an environment. For more information, see Environment account connections in the AWS Proton Administrator guide.
    */
   rejectEnvironmentAccountConnection(callback?: (err: AWSError, data: Proton.Types.RejectEnvironmentAccountConnectionOutput) => void): Request<Proton.Types.RejectEnvironmentAccountConnectionOutput, AWSError>;
   /**
-   * Tag a resource. For more information, see AWS Proton resources and tagging in the AWS Proton Administration Guide or AWS Proton User Guide.
+   * Tag a resource. For more information, see AWS Proton resources and tagging in the AWS Proton Administrator Guide or AWS Proton User Guide.
    */
   tagResource(params: Proton.Types.TagResourceInput, callback?: (err: AWSError, data: Proton.Types.TagResourceOutput) => void): Request<Proton.Types.TagResourceOutput, AWSError>;
   /**
-   * Tag a resource. For more information, see AWS Proton resources and tagging in the AWS Proton Administration Guide or AWS Proton User Guide.
+   * Tag a resource. For more information, see AWS Proton resources and tagging in the AWS Proton Administrator Guide or AWS Proton User Guide.
    */
   tagResource(callback?: (err: AWSError, data: Proton.Types.TagResourceOutput) => void): Request<Proton.Types.TagResourceOutput, AWSError>;
   /**
-   * Remove a tag from a resource. For more information, see AWS Proton resources and tagging in the AWS Proton Administration Guide or AWS Proton User Guide.
+   * Remove a tag from a resource. For more information, see AWS Proton resources and tagging in the AWS Proton Administrator Guide or AWS Proton User Guide.
    */
   untagResource(params: Proton.Types.UntagResourceInput, callback?: (err: AWSError, data: Proton.Types.UntagResourceOutput) => void): Request<Proton.Types.UntagResourceOutput, AWSError>;
   /**
-   * Remove a tag from a resource. For more information, see AWS Proton resources and tagging in the AWS Proton Administration Guide or AWS Proton User Guide.
+   * Remove a tag from a resource. For more information, see AWS Proton resources and tagging in the AWS Proton Administrator Guide or AWS Proton User Guide.
    */
   untagResource(callback?: (err: AWSError, data: Proton.Types.UntagResourceOutput) => void): Request<Proton.Types.UntagResourceOutput, AWSError>;
   /**
@@ -333,19 +333,19 @@ declare class Proton extends Service {
    */
   updateAccountSettings(callback?: (err: AWSError, data: Proton.Types.UpdateAccountSettingsOutput) => void): Request<Proton.Types.UpdateAccountSettingsOutput, AWSError>;
   /**
-   * Update an environment. If the environment is associated with an environment account connection, don't update or include the protonServiceRoleArn parameter to update or connect to an environment account connection.  You can only update to a new environment account connection if it was created in the same environment account that the current environment account connection was created in and associated with the current environment. If the environment isn't associated with an environment account connection, don't update or include the environmentAccountConnectionId parameter to update or connect to an environment account connection. You can update either the environmentAccountConnectionId or protonServiceRoleArn parameter and value. You can’t update both. There are four modes for updating an environment as described in the following. The deploymentType field defines the mode.     NONE  In this mode, a deployment doesn't occur. Only the requested metadata parameters are updated.     CURRENT_VERSION  In this mode, the environment is deployed and updated with the new spec that you provide. Only requested parameters are updated. Don’t include minor or major version parameters when you use this deployment-type.     MINOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.     MAJOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that's higher than the major version in use and a minor version (optional).  
+   * Update an environment. If the environment is associated with an environment account connection, don't update or include the protonServiceRoleArn parameter to update or connect to an environment account connection.  You can only update to a new environment account connection if it was created in the same environment account that the current environment account connection was created in and is associated with the current environment. If the environment isn't associated with an environment account connection, don't update or include the environmentAccountConnectionId parameter to update or connect to an environment account connection. You can update either the environmentAccountConnectionId or protonServiceRoleArn parameter and value. You can’t update both. There are four modes for updating an environment as described in the following. The deploymentType field defines the mode.     NONE  In this mode, a deployment doesn't occur. Only the requested metadata parameters are updated.     CURRENT_VERSION  In this mode, the environment is deployed and updated with the new spec that you provide. Only requested parameters are updated. Don’t include minor or major version parameters when you use this deployment-type.     MINOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.     MAJOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that's higher than the major version in use and a minor version (optional).  
    */
   updateEnvironment(params: Proton.Types.UpdateEnvironmentInput, callback?: (err: AWSError, data: Proton.Types.UpdateEnvironmentOutput) => void): Request<Proton.Types.UpdateEnvironmentOutput, AWSError>;
   /**
-   * Update an environment. If the environment is associated with an environment account connection, don't update or include the protonServiceRoleArn parameter to update or connect to an environment account connection.  You can only update to a new environment account connection if it was created in the same environment account that the current environment account connection was created in and associated with the current environment. If the environment isn't associated with an environment account connection, don't update or include the environmentAccountConnectionId parameter to update or connect to an environment account connection. You can update either the environmentAccountConnectionId or protonServiceRoleArn parameter and value. You can’t update both. There are four modes for updating an environment as described in the following. The deploymentType field defines the mode.     NONE  In this mode, a deployment doesn't occur. Only the requested metadata parameters are updated.     CURRENT_VERSION  In this mode, the environment is deployed and updated with the new spec that you provide. Only requested parameters are updated. Don’t include minor or major version parameters when you use this deployment-type.     MINOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.     MAJOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that's higher than the major version in use and a minor version (optional).  
+   * Update an environment. If the environment is associated with an environment account connection, don't update or include the protonServiceRoleArn parameter to update or connect to an environment account connection.  You can only update to a new environment account connection if it was created in the same environment account that the current environment account connection was created in and is associated with the current environment. If the environment isn't associated with an environment account connection, don't update or include the environmentAccountConnectionId parameter to update or connect to an environment account connection. You can update either the environmentAccountConnectionId or protonServiceRoleArn parameter and value. You can’t update both. There are four modes for updating an environment as described in the following. The deploymentType field defines the mode.     NONE  In this mode, a deployment doesn't occur. Only the requested metadata parameters are updated.     CURRENT_VERSION  In this mode, the environment is deployed and updated with the new spec that you provide. Only requested parameters are updated. Don’t include minor or major version parameters when you use this deployment-type.     MINOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) minor version of the current major version in use, by default. You can also specify a different minor version of the current major version in use.     MAJOR_VERSION  In this mode, the environment is deployed and updated with the published, recommended (latest) major and minor version of the current template, by default. You can also specify a different major version that's higher than the major version in use and a minor version (optional).  
    */
   updateEnvironment(callback?: (err: AWSError, data: Proton.Types.UpdateEnvironmentOutput) => void): Request<Proton.Types.UpdateEnvironmentOutput, AWSError>;
   /**
-   * In an environment account, update an environment account connection to use a new IAM role. For more information, see Environment account connections in the AWS Proton Administration guide.
+   * In an environment account, update an environment account connection to use a new IAM role. For more information, see Environment account connections in the AWS Proton Administrator guide.
    */
   updateEnvironmentAccountConnection(params: Proton.Types.UpdateEnvironmentAccountConnectionInput, callback?: (err: AWSError, data: Proton.Types.UpdateEnvironmentAccountConnectionOutput) => void): Request<Proton.Types.UpdateEnvironmentAccountConnectionOutput, AWSError>;
   /**
-   * In an environment account, update an environment account connection to use a new IAM role. For more information, see Environment account connections in the AWS Proton Administration guide.
+   * In an environment account, update an environment account connection to use a new IAM role. For more information, see Environment account connections in the AWS Proton Administrator guide.
    */
   updateEnvironmentAccountConnection(callback?: (err: AWSError, data: Proton.Types.UpdateEnvironmentAccountConnectionOutput) => void): Request<Proton.Types.UpdateEnvironmentAccountConnectionOutput, AWSError>;
   /**
@@ -583,7 +583,7 @@ declare namespace Proton {
      */
     description?: Description;
     /**
-     * The ID of the environment account connection that you provide if you're provisioning your environment infrastructure resources to an environment account. You must include either the environmentAccountConnectionId or protonServiceRoleArn parameter and value. For more information, see Environment account connections in the AWS Proton Administration guide.
+     * The ID of the environment account connection that you provide if you're provisioning your environment infrastructure resources to an environment account. You must include either the environmentAccountConnectionId or protonServiceRoleArn parameter and value. For more information, see Environment account connections in the AWS Proton Administrator guide.
      */
     environmentAccountConnectionId?: EnvironmentAccountConnectionId;
     /**
@@ -595,11 +595,11 @@ declare namespace Proton {
      */
     protonServiceRoleArn?: Arn;
     /**
-     * A link to a YAML formatted spec file that provides inputs as defined in the environment template bundle schema file. For more information, see Environments in the AWS Proton Administration Guide.
+     * A link to a YAML formatted spec file that provides inputs as defined in the environment template bundle schema file. For more information, see Environments in the AWS Proton Administrator Guide.
      */
     spec: SpecContents;
     /**
-     * Create tags for your environment. For more information, see AWS Proton resources and tagging in the AWS Proton Administration Guide or AWS Proton User Guide.
+     * Create tags for your environment. For more information, see AWS Proton resources and tagging in the AWS Proton Administrator Guide or AWS Proton User Guide.
      */
     tags?: TagList;
     /**
@@ -611,7 +611,7 @@ declare namespace Proton {
      */
     templateMinorVersion?: TemplateVersionPart;
     /**
-     * The name of the environment template. For more information, see Environment Templates in the AWS Proton Administration Guide.
+     * The name of the environment template. For more information, see Environment Templates in the AWS Proton Administrator Guide.
      */
     templateName: ResourceName;
   }
@@ -643,7 +643,7 @@ declare namespace Proton {
      */
     provisioning?: Provisioning;
     /**
-     * Create tags for your environment template. For more information, see AWS Proton resources and tagging in the AWS Proton Administration Guide or AWS Proton User Guide.
+     * Create tags for your environment template. For more information, see AWS Proton resources and tagging in the AWS Proton Administrator Guide or AWS Proton User Guide.
      */
     tags?: TagList;
   }
@@ -699,7 +699,7 @@ declare namespace Proton {
      */
     name: ResourceName;
     /**
-     * The ARN of the repository connection. For more information, see Set up repository connection in the AWS Proton Administration Guide and Getting started in the AWS Proton User Guide. Don't include this parameter if your service template doesn't include a service pipeline.
+     * The Amazon Resource Name (ARN) of the repository connection. For more information, see Set up repository connection in the AWS Proton Administrator Guide and Setting up with AWS Proton in the AWS Proton User Guide. Don't include this parameter if your service template doesn't include a service pipeline.
      */
     repositoryConnectionArn?: Arn;
     /**
@@ -707,11 +707,11 @@ declare namespace Proton {
      */
     repositoryId?: RepositoryId;
     /**
-     * A link to a spec file that provides inputs as defined in the service template bundle schema file. The spec file is in YAML format. Don’t include pipeline inputs in the spec if your service template doesn’t include a service pipeline. For more information, see Create a service in the AWS Proton Administration Guide and Create a service in the AWS Proton User Guide.
+     * A link to a spec file that provides inputs as defined in the service template bundle schema file. The spec file is in YAML format. Don’t include pipeline inputs in the spec if your service template doesn’t include a service pipeline. For more information, see Create a service in the AWS Proton Administrator Guide and Create a service in the AWS Proton User Guide.
      */
     spec: SpecContents;
     /**
-     * Create tags for your service. For more information, see AWS Proton resources and tagging in the AWS Proton Administration Guide or AWS Proton User Guide.
+     * Create tags for your service. For more information, see AWS Proton resources and tagging in the AWS Proton Administrator Guide or AWS Proton User Guide.
      */
     tags?: TagList;
     /**
@@ -751,11 +751,11 @@ declare namespace Proton {
      */
     name: ResourceName;
     /**
-     * AWS Proton includes a service pipeline for your service by default. When included, this parameter indicates that an AWS Proton service pipeline won't be included for your service. Once specified, this parameter can't be changed. For more information, see Service template bundles in the AWS Proton Administration Guide.
+     * AWS Proton includes a service pipeline for your service by default. When included, this parameter indicates that an AWS Proton service pipeline won't be included for your service. Once specified, this parameter can't be changed. For more information, see Service template bundles in the AWS Proton Administrator Guide.
      */
     pipelineProvisioning?: Provisioning;
     /**
-     * Create tags for your service template. For more information, see AWS Proton resources and tagging in the AWS Proton Administration Guide or AWS Proton User Guide.
+     * Create tags for your service template. For more information, see AWS Proton resources and tagging in the AWS Proton Administrator Guide or AWS Proton User Guide.
      */
     tags?: TagList;
   }
@@ -947,7 +947,7 @@ declare namespace Proton {
      */
     name: ResourceName;
     /**
-     * The ARN of the AWS Proton service role that allows AWS Proton to make calls to other services on your behalf.
+     * The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make calls to other services on your behalf.
      */
     protonServiceRoleArn?: Arn;
     /**
@@ -967,7 +967,7 @@ declare namespace Proton {
      */
     templateMinorVersion: TemplateVersionPart;
     /**
-     * The ARN of the environment template.
+     * The Amazon Resource Name (ARN) of the environment template.
      */
     templateName: ResourceName;
   }
@@ -1096,7 +1096,7 @@ declare namespace Proton {
      */
     name: ResourceName;
     /**
-     * The ARN of the AWS Proton service role that allows AWS Proton to make calls to other services on your behalf.
+     * The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make calls to other services on your behalf.
      */
     protonServiceRoleArn?: Arn;
     /**
@@ -1624,7 +1624,7 @@ declare namespace Proton {
      */
     nextToken?: String;
     /**
-     * The ARN of the resource for the listed tags.
+     * The Amazon Resource Name (ARN) of the resource for the listed tags.
      */
     resourceArn: Arn;
   }
@@ -1697,7 +1697,7 @@ declare namespace Proton {
      */
     pipeline?: ServicePipeline;
     /**
-     * The ARN of the repository connection. For more information, see Set up a repository connection in the AWS Proton Administration Guide and Getting started in the AWS Proton User Guide.
+     * The Amazon Resource Name (ARN) of the repository connection. For more information, see Set up a repository connection in the AWS Proton Administrator Guide and Setting up with AWS Proton in the AWS Proton User Guide.
      */
     repositoryConnectionArn?: Arn;
     /**
@@ -2163,7 +2163,7 @@ declare namespace Proton {
      */
     description?: Description;
     /**
-     * The ID of the environment account connection. You can only update to a new environment account connection if it was created in the same environment account that the current environment account connection was created in and associated with the current environment.
+     * The ID of the environment account connection. You can only update to a new environment account connection if it was created in the same environment account that the current environment account connection was created in and is associated with the current environment.
      */
     environmentAccountConnectionId?: EnvironmentAccountConnectionId;
     /**
@@ -2171,7 +2171,7 @@ declare namespace Proton {
      */
     name: ResourceName;
     /**
-     * The ARN of the AWS Proton service role that allows AWS Proton to make API calls to other services your behalf.
+     * The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS Proton to make API calls to other services your behalf.
      */
     protonServiceRoleArn?: Arn;
     /**
@@ -2251,7 +2251,7 @@ declare namespace Proton {
      */
     name: ResourceName;
     /**
-     * Lists the service instances to add and the existing service instances to remain. Omit the existing service instances to delete from the list. Don't include edits to the existing service instances or pipeline. For more information, see Edit a service in the AWS Proton Administration Guide or the AWS Proton User Guide.
+     * Lists the service instances to add and the existing service instances to remain. Omit the existing service instances to delete from the list. Don't include edits to the existing service instances or pipeline. For more information, see Edit a service in the AWS Proton Administrator Guide or the AWS Proton User Guide.
      */
     spec?: SpecContents;
   }

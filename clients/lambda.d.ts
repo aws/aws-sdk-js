@@ -815,7 +815,7 @@ declare namespace Lambda {
      */
     Queues?: Queues;
     /**
-     * An array of the authentication protocol, or the VPC components to secure your event source.
+     * An array of authentication protocols or VPC components required to secure your event source.
      */
     SourceAccessConfigurations?: SourceAccessConfigurations;
     /**
@@ -1044,7 +1044,7 @@ declare namespace Lambda {
      */
     UUID?: String;
     /**
-     * The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources. AT_TIMESTAMP is only supported for Amazon Kinesis streams.
+     * The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. AT_TIMESTAMP is supported only for Amazon Kinesis streams.
      */
     StartingPosition?: EventSourcePosition;
     /**
@@ -1056,11 +1056,11 @@ declare namespace Lambda {
      */
     BatchSize?: BatchSize;
     /**
-     * (Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.
+     * (Streams and Amazon SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.
      */
     MaximumBatchingWindowInSeconds?: MaximumBatchingWindowInSeconds;
     /**
-     * (Streams only) The number of batches to process from each shard concurrently. The default value is 1.
+     * (Streams only) The number of batches to process concurrently from each shard. The default value is 1.
      */
     ParallelizationFactor?: ParallelizationFactor;
     /**
@@ -1072,11 +1072,11 @@ declare namespace Lambda {
      */
     FunctionArn?: FunctionArn;
     /**
-     * The date that the event source mapping was last updated, or its state changed.
+     * The date that the event source mapping was last updated or that its state changed.
      */
     LastModified?: _Date;
     /**
-     * The result of the last Lambda invocation of your Lambda function.
+     * The result of the last Lambda invocation of your function.
      */
     LastProcessingResult?: String;
     /**
@@ -1084,7 +1084,7 @@ declare namespace Lambda {
      */
     State?: String;
     /**
-     * Indicates whether the last change to the event source mapping was made by a user, or by the Lambda service.
+     * Indicates whether a user or Lambda made the last change to the event source mapping.
      */
     StateTransitionReason?: String;
     /**
@@ -1096,15 +1096,15 @@ declare namespace Lambda {
      */
     Topics?: Topics;
     /**
-     *  (MQ) The name of the Amazon MQ broker destination queue to consume. 
+     *  (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.
      */
     Queues?: Queues;
     /**
-     * An array of the authentication protocol, or the VPC components to secure your event source.
+     * An array of the authentication protocol, VPC components, or virtual host to secure and define your event source.
      */
     SourceAccessConfigurations?: SourceAccessConfigurations;
     /**
-     * The Self-Managed Apache Kafka cluster for your event source.
+     * The self-managed Apache Kafka cluster for your event source.
      */
     SelfManagedEventSource?: SelfManagedEventSource;
     /**
@@ -1120,7 +1120,7 @@ declare namespace Lambda {
      */
     MaximumRetryAttempts?: MaximumRetryAttemptsEventSourceMapping;
     /**
-     * (Streams only) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.
+     * (Streams only) The duration in seconds of a processing window. The range is 1–900 seconds.
      */
     TumblingWindowInSeconds?: TumblingWindowInSeconds;
     /**
@@ -1858,7 +1858,7 @@ declare namespace Lambda {
      */
     Marker?: String;
     /**
-     * The maximum number of event source mappings to return.
+     * The maximum number of event source mappings to return. Note that ListEventSourceMappings returns a maximum of 100 items in each response, even if you set the number higher.
      */
     MaxItems?: MaxListItems;
   }
@@ -2351,7 +2351,7 @@ declare namespace Lambda {
   export type SigningProfileVersionArns = Arn[];
   export interface SourceAccessConfiguration {
     /**
-     * The type of authentication protocol or the VPC components for your event source. For example: "Type":"SASL_SCRAM_512_AUTH".    BASIC_AUTH - (MQ) The Secrets Manager secret that stores your broker credentials.    VPC_SUBNET - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your Self-Managed Apache Kafka cluster.    VPC_SECURITY_GROUP - The VPC security group used to manage access to your Self-Managed Apache Kafka brokers.    SASL_SCRAM_256_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your Self-Managed Apache Kafka brokers.    SASL_SCRAM_512_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your Self-Managed Apache Kafka brokers.    VIRTUAL_HOST - The name of the virtual host in your RabbitMQ broker. Lambda will use this host as the event source.  
+     * The type of authentication protocol, VPC components, or virtual host for your event source. For example: "Type":"SASL_SCRAM_512_AUTH".    BASIC_AUTH - (Amazon MQ) The Secrets Manager secret that stores your broker credentials.    BASIC_AUTH - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.    VPC_SUBNET - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.    VPC_SECURITY_GROUP - The VPC security group used to manage access to your self-managed Apache Kafka brokers.    SASL_SCRAM_256_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.    SASL_SCRAM_512_AUTH - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.    VIRTUAL_HOST - (Amazon MQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source.  
      */
     Type?: SourceAccessType;
     /**
@@ -2506,7 +2506,7 @@ declare namespace Lambda {
      */
     ParallelizationFactor?: ParallelizationFactor;
     /**
-     * An array of the authentication protocol, or the VPC components to secure your event source.
+     * An array of authentication protocols or VPC components required to secure your event source.
      */
     SourceAccessConfigurations?: SourceAccessConfigurations;
     /**

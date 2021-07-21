@@ -3790,7 +3790,7 @@ declare namespace RDS {
      */
     DBInstanceIdentifier?: String;
     /**
-     * Specifies when the snapshot was taken in Coordinated Universal Time (UTC).
+     * Specifies when the snapshot was taken in Coordinated Universal Time (UTC). Changes for the copy when the snapshot is copied.
      */
     SnapshotCreateTime?: TStamp;
     /**
@@ -3854,7 +3854,7 @@ declare namespace RDS {
      */
     SourceRegion?: String;
     /**
-     * The DB snapshot Amazon Resource Name (ARN) that the DB snapshot was copied from. It only has value in case of cross-customer or cross-region copy.
+     * The DB snapshot Amazon Resource Name (ARN) that the DB snapshot was copied from. It only has a value in the case of a cross-account or cross-Region copy.
      */
     SourceDBSnapshotIdentifier?: String;
     /**
@@ -3894,6 +3894,10 @@ declare namespace RDS {
      */
     DbiResourceId?: String;
     TagList?: TagList;
+    /**
+     * Specifies the time of the CreateDBSnapshot operation in Coordinated Universal Time (UTC). Doesn't change when the snapshot is copied.
+     */
+    OriginalSnapshotCreateTime?: TStamp;
   }
   export interface DBSnapshotAttribute {
     /**
@@ -4317,7 +4321,7 @@ declare namespace RDS {
      */
     DBClusterIdentifier?: String;
     /**
-     * A filter that specifies one or more DB clusters to describe. Supported filters:    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.  
+     * A filter that specifies one or more DB clusters to describe. Supported filters:    clone-group-id - Accepts clone group identifiers. The results list will only include information about the DB clusters associated with these clone groups.    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.    domain - Accepts Active Directory directory IDs. The results list will only include information about the DB clusters associated with these domains.    engine - Accepts engine names. The results list will only include information about the DB clusters for these engines.  
      */
     Filters?: FilterList;
     /**
@@ -4857,7 +4861,7 @@ declare namespace RDS {
      */
     GlobalClusterIdentifier?: String;
     /**
-     * A filter that specifies one or more global DB clusters to describe. Supported filters:    db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon Resource Names (ARNs). The results list will only include information about the DB clusters identified by these ARNs.  
+     * This parameter isn't currently supported.
      */
     Filters?: FilterList;
     /**
