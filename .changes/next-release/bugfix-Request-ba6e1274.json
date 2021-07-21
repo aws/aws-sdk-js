@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "Request",
+  "description": "Fixes Request onAsync() listener types by adding doneCallback()"
+}

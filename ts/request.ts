@@ -18,6 +18,10 @@ request.send(function(err, data) {
 request.on('error', function(err, response) {
 
 });
+request.onAsync('validate', function(request, done) {
+  console.log(request.httpRequest.body);
+  if (done) done()
+})
 request.on('build', function(request) {
     console.log(request.httpRequest.method);
 });
