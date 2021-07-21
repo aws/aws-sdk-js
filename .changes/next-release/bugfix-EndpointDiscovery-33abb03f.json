@@ -1,0 +1,5 @@
+{
+  "type": "bugfix",
+  "category": "EndpointDiscovery",
+  "description": "Remove redundant check for required from endpoint discovery logic"
+}
