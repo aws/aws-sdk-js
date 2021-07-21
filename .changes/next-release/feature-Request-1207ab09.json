@@ -1,0 +1,5 @@
+{
+  "type": "feature",
+  "category": "Request",
+  "description": "propagate original stack trace on request failures"
+}
