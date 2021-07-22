@@ -3091,6 +3091,26 @@
         "USE_CONFIGURED"
       ]
     },
+    "AudioHlsRenditionSelection": {
+      "type": "structure",
+      "members": {
+        "GroupId": {
+          "shape": "__stringMin1",
+          "locationName": "groupId",
+          "documentation": "Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition."
+        },
+        "Name": {
+          "shape": "__stringMin1",
+          "locationName": "name",
+          "documentation": "Specifies the NAME in the #EXT-X-MEDIA tag of the target HLS audio rendition."
+        }
+      },
+      "documentation": "Audio Hls Rendition Selection",
+      "required": [
+        "Name",
+        "GroupId"
+      ]
+    },
     "AudioLanguageSelection": {
       "type": "structure",
       "members": {
@@ -3234,6 +3254,10 @@
     "AudioSelectorSettings": {
       "type": "structure",
       "members": {
+        "AudioHlsRenditionSelection": {
+          "shape": "AudioHlsRenditionSelection",
+          "locationName": "audioHlsRenditionSelection"
+        },
         "AudioLanguageSelection": {
           "shape": "AudioLanguageSelection",
           "locationName": "audioLanguageSelection"
@@ -13892,8 +13916,22 @@
     },
     "WebvttDestinationSettings": {
       "type": "structure",
-      "members": {},
+      "members": {
+        "StyleControl": {
+          "shape": "WebvttDestinationStyleControl",
+          "locationName": "styleControl",
+          "documentation": "Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED or TELETEXT.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information."
+        }
+      },
       "documentation": "Webvtt Destination Settings"
+    },
+    "WebvttDestinationStyleControl": {
+      "type": "string",
+      "documentation": "Webvtt Destination Style Control",
+      "enum": [
+        "NO_STYLE_DATA",
+        "PASSTHROUGH"
+      ]
     },
     "__double": {
       "type": "double",

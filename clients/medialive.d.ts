@@ -758,6 +758,16 @@ Note that this field and audioType are both ignored if inputType is broadcasterM
   }
   export type AudioDescriptionAudioTypeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
   export type AudioDescriptionLanguageCodeControl = "FOLLOW_INPUT"|"USE_CONFIGURED"|string;
+  export interface AudioHlsRenditionSelection {
+    /**
+     * Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.
+     */
+    GroupId: __stringMin1;
+    /**
+     * Specifies the NAME in the #EXT-X-MEDIA tag of the target HLS audio rendition.
+     */
+    Name: __stringMin1;
+  }
   export interface AudioLanguageSelection {
     /**
      * Selects a specific three-letter language code from within an audio source.
@@ -836,6 +846,7 @@ Alternate rendition that the client will not try to play back by default. Repres
     SelectorSettings?: AudioSelectorSettings;
   }
   export interface AudioSelectorSettings {
+    AudioHlsRenditionSelection?: AudioHlsRenditionSelection;
     AudioLanguageSelection?: AudioLanguageSelection;
     AudioPidSelection?: AudioPidSelection;
     AudioTrackSelection?: AudioTrackSelection;
@@ -6707,7 +6718,12 @@ If STANDARD channel, subnet IDs must be mapped to two unique availability zones 
     SampleRate?: __double;
   }
   export interface WebvttDestinationSettings {
+    /**
+     * Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED or TELETEXT.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information.
+     */
+    StyleControl?: WebvttDestinationStyleControl;
   }
+  export type WebvttDestinationStyleControl = "NO_STYLE_DATA"|"PASSTHROUGH"|string;
   export type __double = number;
   export type __doubleMin0 = number;
   export type __doubleMin0Max1 = number;
