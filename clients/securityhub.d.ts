@@ -28,19 +28,19 @@ declare class SecurityHub extends Service {
    */
   acceptInvitation(callback?: (err: AWSError, data: SecurityHub.Types.AcceptInvitationResponse) => void): Request<SecurityHub.Types.AcceptInvitationResponse, AWSError>;
   /**
-   * Disables the standards specified by the provided StandardsSubscriptionArns. For more information, see Security Standards section of the AWS Security Hub User Guide.
+   * Disables the standards specified by the provided StandardsSubscriptionArns. For more information, see Security Standards section of the Security Hub User Guide.
    */
   batchDisableStandards(params: SecurityHub.Types.BatchDisableStandardsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchDisableStandardsResponse) => void): Request<SecurityHub.Types.BatchDisableStandardsResponse, AWSError>;
   /**
-   * Disables the standards specified by the provided StandardsSubscriptionArns. For more information, see Security Standards section of the AWS Security Hub User Guide.
+   * Disables the standards specified by the provided StandardsSubscriptionArns. For more information, see Security Standards section of the Security Hub User Guide.
    */
   batchDisableStandards(callback?: (err: AWSError, data: SecurityHub.Types.BatchDisableStandardsResponse) => void): Request<SecurityHub.Types.BatchDisableStandardsResponse, AWSError>;
   /**
-   * Enables the standards specified by the provided StandardsArn. To obtain the ARN for a standard, use the  DescribeStandards  operation. For more information, see the Security Standards section of the AWS Security Hub User Guide.
+   * Enables the standards specified by the provided StandardsArn. To obtain the ARN for a standard, use the DescribeStandards operation. For more information, see the Security Standards section of the Security Hub User Guide.
    */
   batchEnableStandards(params: SecurityHub.Types.BatchEnableStandardsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchEnableStandardsResponse) => void): Request<SecurityHub.Types.BatchEnableStandardsResponse, AWSError>;
   /**
-   * Enables the standards specified by the provided StandardsArn. To obtain the ARN for a standard, use the  DescribeStandards  operation. For more information, see the Security Standards section of the AWS Security Hub User Guide.
+   * Enables the standards specified by the provided StandardsArn. To obtain the ARN for a standard, use the DescribeStandards operation. For more information, see the Security Standards section of the Security Hub User Guide.
    */
   batchEnableStandards(callback?: (err: AWSError, data: SecurityHub.Types.BatchEnableStandardsResponse) => void): Request<SecurityHub.Types.BatchEnableStandardsResponse, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class SecurityHub extends Service {
    */
   batchImportFindings(callback?: (err: AWSError, data: SecurityHub.Types.BatchImportFindingsResponse) => void): Request<SecurityHub.Types.BatchImportFindingsResponse, AWSError>;
   /**
-   * Used by Security Hub customers to update information about their investigation into a finding. Requested by administrator accounts or member accounts. Administrator accounts can update findings for their account and their member accounts. Member accounts can update findings for their account. Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a finding. Administrator and member accounts can use BatchUpdateFindings to update the following finding fields and objects.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow    You can configure IAM policies to restrict access to fields and field values. For example, you might not want member accounts to be able to suppress findings or change the finding severity. See Configuring access to BatchUpdateFindings in the AWS Security Hub User Guide.
+   * Used by Security Hub customers to update information about their investigation into a finding. Requested by administrator accounts or member accounts. Administrator accounts can update findings for their account and their member accounts. Member accounts can update findings for their account. Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a finding. Administrator and member accounts can use BatchUpdateFindings to update the following finding fields and objects.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow    You can configure IAM policies to restrict access to fields and field values. For example, you might not want member accounts to be able to suppress findings or change the finding severity. See Configuring access to BatchUpdateFindings in the Security Hub User Guide.
    */
   batchUpdateFindings(params: SecurityHub.Types.BatchUpdateFindingsRequest, callback?: (err: AWSError, data: SecurityHub.Types.BatchUpdateFindingsResponse) => void): Request<SecurityHub.Types.BatchUpdateFindingsResponse, AWSError>;
   /**
-   * Used by Security Hub customers to update information about their investigation into a finding. Requested by administrator accounts or member accounts. Administrator accounts can update findings for their account and their member accounts. Member accounts can update findings for their account. Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a finding. Administrator and member accounts can use BatchUpdateFindings to update the following finding fields and objects.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow    You can configure IAM policies to restrict access to fields and field values. For example, you might not want member accounts to be able to suppress findings or change the finding severity. See Configuring access to BatchUpdateFindings in the AWS Security Hub User Guide.
+   * Used by Security Hub customers to update information about their investigation into a finding. Requested by administrator accounts or member accounts. Administrator accounts can update findings for their account and their member accounts. Member accounts can update findings for their account. Updates from BatchUpdateFindings do not affect the value of UpdatedAt for a finding. Administrator and member accounts can use BatchUpdateFindings to update the following finding fields and objects.    Confidence     Criticality     Note     RelatedFindings     Severity     Types     UserDefinedFields     VerificationState     Workflow    You can configure IAM policies to restrict access to fields and field values. For example, you might not want member accounts to be able to suppress findings or change the finding severity. See Configuring access to BatchUpdateFindings in the Security Hub User Guide.
    */
   batchUpdateFindings(callback?: (err: AWSError, data: SecurityHub.Types.BatchUpdateFindingsResponse) => void): Request<SecurityHub.Types.BatchUpdateFindingsResponse, AWSError>;
   /**
@@ -76,11 +76,11 @@ declare class SecurityHub extends Service {
    */
   createInsight(callback?: (err: AWSError, data: SecurityHub.Types.CreateInsightResponse) => void): Request<SecurityHub.Types.CreateInsightResponse, AWSError>;
   /**
-   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the administrator account. If you are integrated with Organizations, then the administrator account is designated by the organization management account.  CreateMembers is always used to add accounts that are not organization members. For accounts that are part of an organization, CreateMembers is only used in the following cases:   Security Hub is not configured to automatically add new accounts in an organization.   The account was disassociated or deleted in Security Hub.   This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the  EnableSecurityHub  operation. For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the  InviteMembers  operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub. Accounts that are part of an organization do not receive an invitation. They automatically become a member account in Security Hub. A permissions policy is added that permits the administrator account to view the findings generated in the member account. When Security Hub is enabled in a member account, the member account findings are also visible to the administrator account.  To remove the association between the administrator and member accounts, use the  DisassociateFromMasterAccount  or  DisassociateMembers  operation.
+   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the administrator account. If you are integrated with Organizations, then the administrator account is designated by the organization management account.  CreateMembers is always used to add accounts that are not organization members. For accounts that are managed using Organizations, CreateMembers is only used in the following cases:   Security Hub is not configured to automatically add new organization accounts.   The account was disassociated or deleted in Security Hub.   This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the EnableSecurityHub operation. For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the InviteMembers operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub. Accounts that are managed using Organizations do not receive an invitation. They automatically become a member account in Security Hub, and Security Hub is automatically enabled for those accounts. Note that Security Hub cannot be enabled automatically for the organization management account. The organization management account must enable Security Hub before the administrator account enables it as a member account. A permissions policy is added that permits the administrator account to view the findings generated in the member account. When Security Hub is enabled in a member account, the member account findings are also visible to the administrator account.  To remove the association between the administrator and member accounts, use the DisassociateFromMasterAccount or DisassociateMembers operation.
    */
   createMembers(params: SecurityHub.Types.CreateMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.CreateMembersResponse) => void): Request<SecurityHub.Types.CreateMembersResponse, AWSError>;
   /**
-   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the administrator account. If you are integrated with Organizations, then the administrator account is designated by the organization management account.  CreateMembers is always used to add accounts that are not organization members. For accounts that are part of an organization, CreateMembers is only used in the following cases:   Security Hub is not configured to automatically add new accounts in an organization.   The account was disassociated or deleted in Security Hub.   This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the  EnableSecurityHub  operation. For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the  InviteMembers  operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub. Accounts that are part of an organization do not receive an invitation. They automatically become a member account in Security Hub. A permissions policy is added that permits the administrator account to view the findings generated in the member account. When Security Hub is enabled in a member account, the member account findings are also visible to the administrator account.  To remove the association between the administrator and member accounts, use the  DisassociateFromMasterAccount  or  DisassociateMembers  operation.
+   * Creates a member association in Security Hub between the specified accounts and the account used to make the request, which is the administrator account. If you are integrated with Organizations, then the administrator account is designated by the organization management account.  CreateMembers is always used to add accounts that are not organization members. For accounts that are managed using Organizations, CreateMembers is only used in the following cases:   Security Hub is not configured to automatically add new organization accounts.   The account was disassociated or deleted in Security Hub.   This action can only be used by an account that has Security Hub enabled. To enable Security Hub, you can use the EnableSecurityHub operation. For accounts that are not organization members, you create the account association and then send an invitation to the member account. To send the invitation, you use the InviteMembers operation. If the account owner accepts the invitation, the account becomes a member account in Security Hub. Accounts that are managed using Organizations do not receive an invitation. They automatically become a member account in Security Hub, and Security Hub is automatically enabled for those accounts. Note that Security Hub cannot be enabled automatically for the organization management account. The organization management account must enable Security Hub before the administrator account enables it as a member account. A permissions policy is added that permits the administrator account to view the findings generated in the member account. When Security Hub is enabled in a member account, the member account findings are also visible to the administrator account.  To remove the association between the administrator and member accounts, use the DisassociateFromMasterAccount or DisassociateMembers operation.
    */
   createMembers(callback?: (err: AWSError, data: SecurityHub.Types.CreateMembersResponse) => void): Request<SecurityHub.Types.CreateMembersResponse, AWSError>;
   /**
@@ -108,11 +108,11 @@ declare class SecurityHub extends Service {
    */
   deleteInsight(callback?: (err: AWSError, data: SecurityHub.Types.DeleteInsightResponse) => void): Request<SecurityHub.Types.DeleteInsightResponse, AWSError>;
   /**
-   * Deletes invitations received by the AWS account to become a member account. This operation is only used by accounts that are not part of an organization. Organization accounts do not receive invitations.
+   * Deletes invitations received by the Amazon Web Services account to become a member account. This operation is only used by accounts that are not part of an organization. Organization accounts do not receive invitations.
    */
   deleteInvitations(params: SecurityHub.Types.DeleteInvitationsRequest, callback?: (err: AWSError, data: SecurityHub.Types.DeleteInvitationsResponse) => void): Request<SecurityHub.Types.DeleteInvitationsResponse, AWSError>;
   /**
-   * Deletes invitations received by the AWS account to become a member account. This operation is only used by accounts that are not part of an organization. Organization accounts do not receive invitations.
+   * Deletes invitations received by the Amazon Web Services account to become a member account. This operation is only used by accounts that are not part of an organization. Organization accounts do not receive invitations.
    */
   deleteInvitations(callback?: (err: AWSError, data: SecurityHub.Types.DeleteInvitationsResponse) => void): Request<SecurityHub.Types.DeleteInvitationsResponse, AWSError>;
   /**
@@ -236,11 +236,11 @@ declare class SecurityHub extends Service {
    */
   enableOrganizationAdminAccount(callback?: (err: AWSError, data: SecurityHub.Types.EnableOrganizationAdminAccountResponse) => void): Request<SecurityHub.Types.EnableOrganizationAdminAccountResponse, AWSError>;
   /**
-   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the following standards.   CIS AWS Foundations   AWS Foundational Security Best Practices   You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard.  To not enable the automatically enabled standards, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the following standards.   CIS Amazon Web Services Foundations   Amazon Web Services Foundational Security Best Practices   You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard.  To not enable the automatically enabled standards, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the BatchEnableStandards operation. To disable a standard, use the BatchDisableStandards operation. To learn more, see the setup information in the Security Hub User Guide.
    */
   enableSecurityHub(params: SecurityHub.Types.EnableSecurityHubRequest, callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
-   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the following standards.   CIS AWS Foundations   AWS Foundational Security Best Practices   You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard.  To not enable the automatically enabled standards, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the  BatchEnableStandards  operation. To disable a standard, use the  BatchDisableStandards  operation. To learn more, see Setting Up AWS Security Hub in the AWS Security Hub User Guide.
+   * Enables Security Hub for your account in the current Region or the Region you specify in the request. When you enable Security Hub, you grant to Security Hub the permissions necessary to gather findings from other services that are integrated with Security Hub. When you use the EnableSecurityHub operation to enable Security Hub, you also automatically enable the following standards.   CIS Amazon Web Services Foundations   Amazon Web Services Foundational Security Best Practices   You do not enable the Payment Card Industry Data Security Standard (PCI DSS) standard.  To not enable the automatically enabled standards, set EnableDefaultStandards to false. After you enable Security Hub, to enable a standard, use the BatchEnableStandards operation. To disable a standard, use the BatchDisableStandards operation. To learn more, see the setup information in the Security Hub User Guide.
    */
   enableSecurityHub(callback?: (err: AWSError, data: SecurityHub.Types.EnableSecurityHubResponse) => void): Request<SecurityHub.Types.EnableSecurityHubResponse, AWSError>;
   /**
@@ -308,11 +308,11 @@ declare class SecurityHub extends Service {
    */
   getMembers(callback?: (err: AWSError, data: SecurityHub.Types.GetMembersResponse) => void): Request<SecurityHub.Types.GetMembersResponse, AWSError>;
   /**
-   * Invites other AWS accounts to become member accounts for the Security Hub administrator account that the invitation is sent from. This operation is only used to invite accounts that do not belong to an organization. Organization accounts do not receive invitations. Before you can use this action to invite a member, you must first use the  CreateMembers  action to create the member account in Security Hub. When the account owner enables Security Hub and accepts the invitation to become a member account, the administrator account can view the findings generated from the member account.
+   * Invites other Amazon Web Services accounts to become member accounts for the Security Hub administrator account that the invitation is sent from. This operation is only used to invite accounts that do not belong to an organization. Organization accounts do not receive invitations. Before you can use this action to invite a member, you must first use the CreateMembers action to create the member account in Security Hub. When the account owner enables Security Hub and accepts the invitation to become a member account, the administrator account can view the findings generated from the member account.
    */
   inviteMembers(params: SecurityHub.Types.InviteMembersRequest, callback?: (err: AWSError, data: SecurityHub.Types.InviteMembersResponse) => void): Request<SecurityHub.Types.InviteMembersResponse, AWSError>;
   /**
-   * Invites other AWS accounts to become member accounts for the Security Hub administrator account that the invitation is sent from. This operation is only used to invite accounts that do not belong to an organization. Organization accounts do not receive invitations. Before you can use this action to invite a member, you must first use the  CreateMembers  action to create the member account in Security Hub. When the account owner enables Security Hub and accepts the invitation to become a member account, the administrator account can view the findings generated from the member account.
+   * Invites other Amazon Web Services accounts to become member accounts for the Security Hub administrator account that the invitation is sent from. This operation is only used to invite accounts that do not belong to an organization. Organization accounts do not receive invitations. Before you can use this action to invite a member, you must first use the CreateMembers action to create the member account in Security Hub. When the account owner enables Security Hub and accepts the invitation to become a member account, the administrator account can view the findings generated from the member account.
    */
   inviteMembers(callback?: (err: AWSError, data: SecurityHub.Types.InviteMembersResponse) => void): Request<SecurityHub.Types.InviteMembersResponse, AWSError>;
   /**
@@ -324,11 +324,11 @@ declare class SecurityHub extends Service {
    */
   listEnabledProductsForImport(callback?: (err: AWSError, data: SecurityHub.Types.ListEnabledProductsForImportResponse) => void): Request<SecurityHub.Types.ListEnabledProductsForImportResponse, AWSError>;
   /**
-   * Lists all Security Hub membership invitations that were sent to the current AWS account. This operation is only used by accounts that are managed by invitation. Accounts that are managed using the integration with AWS Organizations do not receive invitations.
+   * Lists all Security Hub membership invitations that were sent to the current Amazon Web Services account. This operation is only used by accounts that are managed by invitation. Accounts that are managed using the integration with Organizations do not receive invitations.
    */
   listInvitations(params: SecurityHub.Types.ListInvitationsRequest, callback?: (err: AWSError, data: SecurityHub.Types.ListInvitationsResponse) => void): Request<SecurityHub.Types.ListInvitationsResponse, AWSError>;
   /**
-   * Lists all Security Hub membership invitations that were sent to the current AWS account. This operation is only used by accounts that are managed by invitation. Accounts that are managed using the integration with AWS Organizations do not receive invitations.
+   * Lists all Security Hub membership invitations that were sent to the current Amazon Web Services account. This operation is only used by accounts that are managed by invitation. Accounts that are managed using the integration with Organizations do not receive invitations.
    */
   listInvitations(callback?: (err: AWSError, data: SecurityHub.Types.ListInvitationsResponse) => void): Request<SecurityHub.Types.ListInvitationsResponse, AWSError>;
   /**
@@ -447,11 +447,11 @@ declare namespace SecurityHub {
   }
   export interface AccountDetails {
     /**
-     * The ID of an AWS account.
+     * The ID of an Amazon Web Services account.
      */
     AccountId: AccountId;
     /**
-     * The email of an AWS account.
+     * The email of an Amazon Web Services account.
      */
     Email?: NonEmptyString;
   }
@@ -545,7 +545,7 @@ declare namespace SecurityHub {
   export type ActionTargetList = ActionTarget[];
   export interface AdminAccount {
     /**
-     * The AWS account identifier of the Security Hub administrator account.
+     * The Amazon Web Services account identifier of the Security Hub administrator account.
      */
     AccountId?: NonEmptyString;
     /**
@@ -574,7 +574,7 @@ declare namespace SecurityHub {
      */
     Api?: NonEmptyString;
     /**
-     * The name of the AWS service that the API method belongs to.
+     * The name of the Amazon Web Services service that the API method belongs to.
      */
     ServiceName?: NonEmptyString;
     /**
@@ -781,7 +781,7 @@ declare namespace SecurityHub {
      */
     CanarySettings?: AwsApiGatewayCanarySettings;
     /**
-     * Indicates whether active tracing with AWS X-Ray is enabled for the stage.
+     * Indicates whether active tracing with X-Ray is enabled for the stage.
      */
     TracingEnabled?: Boolean;
     /**
@@ -967,7 +967,7 @@ declare namespace SecurityHub {
      */
     ImportedAt?: NonEmptyString;
     /**
-     * The list of ARNs for the AWS resources that use the certificate.
+     * The list of ARNs for the Amazon Web Services resources that use the certificate.
      */
     InUseBy?: StringList;
     /**
@@ -1003,7 +1003,7 @@ declare namespace SecurityHub {
      */
     RenewalEligibility?: NonEmptyString;
     /**
-     * Information about the status of the AWS Certificate Manager managed renewal for the certificate. Provided only when the certificate type is AMAZON_ISSUED.
+     * Information about the status of the Certificate Manager managed renewal for the certificate. Provided only when the certificate type is AMAZON_ISSUED.
      */
     RenewalSummary?: AwsCertificateManagerCertificateRenewalSummary;
     /**
@@ -1027,7 +1027,7 @@ declare namespace SecurityHub {
      */
     SubjectAlternativeNames?: StringList;
     /**
-     * The source of the certificate. For certificates that AWS Certificate Manager provides, Type is AMAZON_ISSUED. For certificates that are imported with ImportCertificate, Type is IMPORTED. Valid values: IMPORTED | AMAZON_ISSUED | PRIVATE 
+     * The source of the certificate. For certificates that Certificate Manager provides, Type is AMAZON_ISSUED. For certificates that are imported with ImportCertificate, Type is IMPORTED. Valid values: IMPORTED | AMAZON_ISSUED | PRIVATE 
      */
     Type?: NonEmptyString;
   }
@@ -1041,11 +1041,11 @@ declare namespace SecurityHub {
      */
     ResourceRecord?: AwsCertificateManagerCertificateResourceRecord;
     /**
-     * The domain name that AWS Certificate Manager uses to send domain validation emails.
+     * The domain name that Certificate Manager uses to send domain validation emails.
      */
     ValidationDomain?: NonEmptyString;
     /**
-     * A list of email addresses that AWS Certificate Manager uses to send domain validation emails.
+     * A list of email addresses that Certificate Manager uses to send domain validation emails.
      */
     ValidationEmails?: StringList;
     /**
@@ -1084,11 +1084,11 @@ declare namespace SecurityHub {
   }
   export interface AwsCertificateManagerCertificateRenewalSummary {
     /**
-     * Information about the validation of each domain name in the certificate, as it pertains to AWS Certificate Manager managed renewal. Provided only when the certificate type is AMAZON_ISSUED.
+     * Information about the validation of each domain name in the certificate, as it pertains to Certificate Manager managed renewal. Provided only when the certificate type is AMAZON_ISSUED.
      */
     DomainValidationOptions?: AwsCertificateManagerCertificateDomainValidationOptions;
     /**
-     * The status of the AWS Certificate Manager managed renewal of the certificate. Valid values: PENDING_AUTO_RENEWAL | PENDING_VALIDATION | SUCCESS | FAILED 
+     * The status of the Certificate Manager managed renewal of the certificate. Valid values: PENDING_AUTO_RENEWAL | PENDING_VALIDATION | SUCCESS | FAILED 
      */
     RenewalStatus?: NonEmptyString;
     /**
@@ -1175,13 +1175,13 @@ declare namespace SecurityHub {
      */
     Status?: NonEmptyString;
     /**
-     * A unique identifier that specifies the AWS WAF web ACL, if any, to associate with this distribution.
+     * A unique identifier that specifies the WAF web ACL, if any, to associate with this distribution.
      */
     WebAclId?: NonEmptyString;
   }
   export interface AwsCloudFrontDistributionLogging {
     /**
-     * The Amazon S3 bucket to store the access logs in.
+     * The S3 bucket to store the access logs in.
      */
     Bucket?: NonEmptyString;
     /**
@@ -1229,7 +1229,7 @@ declare namespace SecurityHub {
   export type AwsCloudFrontDistributionOriginGroupsItemList = AwsCloudFrontDistributionOriginGroup[];
   export interface AwsCloudFrontDistributionOriginItem {
     /**
-     * Amazon S3 origins: The DNS name of the Amazon S3 bucket from which you want CloudFront to get objects for this origin.
+     * Amazon S3 origins: The DNS name of the S3 bucket from which you want CloudFront to get objects for this origin.
      */
     DomainName?: NonEmptyString;
     /**
@@ -1264,7 +1264,7 @@ declare namespace SecurityHub {
      */
     CloudWatchLogsLogGroupArn?: NonEmptyString;
     /**
-     * The ARN of the role that the CloudWatch Logs endpoint assumes when it writes to the log group.
+     * The ARN of the role that the CloudWatch Events endpoint assumes when it writes to the log group.
      */
     CloudWatchLogsRoleArn?: NonEmptyString;
     /**
@@ -1284,11 +1284,11 @@ declare namespace SecurityHub {
      */
     IsMultiRegionTrail?: Boolean;
     /**
-     * Whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account.
+     * Whether the trail is created for all accounts in an organization in Organizations, or only for the current Amazon Web Services account.
      */
     IsOrganizationTrail?: Boolean;
     /**
-     * The AWS KMS key ID to use to encrypt the logs.
+     * The KMS key ID to use to encrypt the logs.
      */
     KmsKeyId?: NonEmptyString;
     /**
@@ -1322,7 +1322,7 @@ declare namespace SecurityHub {
   }
   export interface AwsCodeBuildProjectDetails {
     /**
-     * The AWS Key Management Service (AWS KMS) customer master key (CMK) used to encrypt the build output artifacts. You can specify either the ARN of the CMK or, if available, the CMK alias (using the format alias/alias-name). 
+     * The KMS customer master key (CMK) used to encrypt the build output artifacts. You can specify either the ARN of the CMK or, if available, the CMK alias (using the format alias/alias-name). 
      */
     EncryptionKey?: NonEmptyString;
     /**
@@ -1338,11 +1338,11 @@ declare namespace SecurityHub {
      */
     Source?: AwsCodeBuildProjectSource;
     /**
-     * The ARN of the IAM role that enables AWS CodeBuild to interact with dependent AWS services on behalf of the AWS account.
+     * The ARN of the IAM role that enables CodeBuild to interact with dependent Amazon Web Services services on behalf of the Amazon Web Services account.
      */
     ServiceRole?: NonEmptyString;
     /**
-     * Information about the VPC configuration that AWS CodeBuild accesses.
+     * Information about the VPC configuration that CodeBuild accesses.
      */
     VpcConfig?: AwsCodeBuildProjectVpcConfig;
   }
@@ -1352,7 +1352,7 @@ declare namespace SecurityHub {
      */
     Certificate?: NonEmptyString;
     /**
-     * The type of credentials AWS CodeBuild uses to pull images in your build. Valid values:    CODEBUILD specifies that AWS CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust the AWS CodeBuild service principal.    SERVICE_ROLE specifies that AWS CodeBuild uses your build project's service role.   When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an AWS CodeBuild curated image, you must use CODEBUILD credentials.
+     * The type of credentials CodeBuild uses to pull images in your build. Valid values:    CODEBUILD specifies that CodeBuild uses its own credentials. This requires that you modify your ECR repository policy to trust the CodeBuild service principal.    SERVICE_ROLE specifies that CodeBuild uses your build project's service role.   When you use a cross-account or private registry image, you must use SERVICE_ROLE credentials. When you use an CodeBuild curated image, you must use CODEBUILD credentials.
      */
     ImagePullCredentialsType?: NonEmptyString;
     /**
@@ -1366,21 +1366,21 @@ declare namespace SecurityHub {
   }
   export interface AwsCodeBuildProjectEnvironmentRegistryCredential {
     /**
-     * The ARN or name of credentials created using AWS Secrets Manager.  The credential can use the name of the credentials only if they exist in your current AWS Region.  
+     * The ARN or name of credentials created using Secrets Manager.  The credential can use the name of the credentials only if they exist in your current Amazon Web Services Region.  
      */
     Credential?: NonEmptyString;
     /**
-     * The service that created the credentials to access a private Docker registry. The valid value, SECRETS_MANAGER, is for AWS Secrets Manager.
+     * The service that created the credentials to access a private Docker registry. The valid value, SECRETS_MANAGER, is for Secrets Manager.
      */
     CredentialProvider?: NonEmptyString;
   }
   export interface AwsCodeBuildProjectSource {
     /**
-     * The type of repository that contains the source code to be built. Valid values are:    BITBUCKET - The source code is in a Bitbucket repository.    CODECOMMIT - The source code is in an AWS CodeCommit repository.    CODEPIPELINE - The source code settings are specified in the source action of a pipeline in AWS CodePipeline.    GITHUB - The source code is in a GitHub repository.    GITHUB_ENTERPRISE - The source code is in a GitHub Enterprise repository.    NO_SOURCE - The project does not have input source code.    S3 - The source code is in an S3 input bucket.   
+     * The type of repository that contains the source code to be built. Valid values are:    BITBUCKET - The source code is in a Bitbucket repository.    CODECOMMIT - The source code is in an CodeCommit repository.    CODEPIPELINE - The source code settings are specified in the source action of a pipeline in CodePipeline.    GITHUB - The source code is in a GitHub repository.    GITHUB_ENTERPRISE - The source code is in a GitHub Enterprise repository.    NO_SOURCE - The project does not have input source code.    S3 - The source code is in an S3 input bucket.   
      */
     Type?: NonEmptyString;
     /**
-     * Information about the location of the source code to be built. Valid values include:   For source code settings that are specified in the source action of a pipeline in AWS CodePipeline, location should not be specified. If it is specified, AWS CodePipeline ignores it. This is because AWS CodePipeline uses the settings in a pipeline's source action instead of this value.   For source code in an AWS CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the build spec file (for example, https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name ).   For source code in an S3 input bucket, one of the following.   The path to the ZIP file that contains the source code (for example, bucket-name/path/to/object-name.zip).    The path to the folder that contains the source code (for example, bucket-name/path/to/source-code/folder/).     For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the build spec file.   For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the build spec file.   
+     * Information about the location of the source code to be built. Valid values include:   For source code settings that are specified in the source action of a pipeline in CodePipeline, location should not be specified. If it is specified, CodePipeline ignores it. This is because CodePipeline uses the settings in a pipeline's source action instead of this value.   For source code in an CodeCommit repository, the HTTPS clone URL to the repository that contains the source code and the build spec file (for example, https://git-codecommit.region-ID.amazonaws.com/v1/repos/repo-name ).   For source code in an S3 input bucket, one of the following.   The path to the ZIP file that contains the source code (for example, bucket-name/path/to/object-name.zip).    The path to the folder that contains the source code (for example, bucket-name/path/to/source-code/folder/).     For source code in a GitHub repository, the HTTPS clone URL to the repository that contains the source and the build spec file.   For source code in a Bitbucket repository, the HTTPS clone URL to the repository that contains the source and the build spec file.   
      */
     Location?: NonEmptyString;
     /**
@@ -1398,11 +1398,11 @@ declare namespace SecurityHub {
      */
     VpcId?: NonEmptyString;
     /**
-     * A list of one or more subnet IDs in your Amazon VPC.
+     * A list of one or more subnet IDs in your VPC.
      */
     Subnets?: NonEmptyStringList;
     /**
-     * A list of one or more security group IDs in your Amazon VPC.
+     * A list of one or more security group IDs in your VPC.
      */
     SecurityGroupIds?: NonEmptyStringList;
   }
@@ -1644,7 +1644,7 @@ declare namespace SecurityHub {
      */
     GlobalSecondaryIndexes?: AwsDynamoDbTableReplicaGlobalSecondaryIndexList;
     /**
-     * The identifier of the AWS KMS customer master key (CMK) that will be used for AWS KMS encryption for the replica.
+     * The identifier of the KMS customer master key (CMK) that will be used for KMS encryption for the replica.
      */
     KmsMasterKeyId?: NonEmptyString;
     /**
@@ -1708,7 +1708,7 @@ declare namespace SecurityHub {
      */
     SseType?: NonEmptyString;
     /**
-     * The ARN of the AWS KMS customer master key (CMK) that is used for the AWS KMS encryption.
+     * The ARN of the KMS customer master key (CMK) that is used for the KMS encryption.
      */
     KmsMasterKeyArn?: NonEmptyString;
   }
@@ -1732,7 +1732,7 @@ declare namespace SecurityHub {
      */
     PublicIp?: NonEmptyString;
     /**
-     * The identifier that AWS assigns to represent the allocation of the Elastic IP address for use with Amazon VPC.
+     * The identifier that Amazon Web Services assigns to represent the allocation of the Elastic IP address for use with Amazon VPC.
      */
     AllocationId?: NonEmptyString;
     /**
@@ -1756,7 +1756,7 @@ declare namespace SecurityHub {
      */
     NetworkInterfaceId?: NonEmptyString;
     /**
-     * The AWS account ID of the owner of the network interface.
+     * The Amazon Web Services account ID of the owner of the network interface.
      */
     NetworkInterfaceOwnerId?: NonEmptyString;
     /**
@@ -1838,7 +1838,7 @@ declare namespace SecurityHub {
      */
     NetworkAclId?: NonEmptyString;
     /**
-     * The identifier of the AWS account that owns the network ACL.
+     * The identifier of the Amazon Web Services account that owns the network ACL.
      */
     OwnerId?: NonEmptyString;
     /**
@@ -1911,7 +1911,7 @@ declare namespace SecurityHub {
      */
     InstanceId?: NonEmptyString;
     /**
-     * The AWS account ID of the owner of the instance.
+     * The Amazon Web Services account ID of the owner of the instance.
      */
     InstanceOwnerId?: NonEmptyString;
     /**
@@ -1992,7 +1992,7 @@ declare namespace SecurityHub {
      */
     GroupId?: NonEmptyString;
     /**
-     * The AWS account ID of the owner of the security group.
+     * The Amazon Web Services account ID of the owner of the security group.
      */
     OwnerId?: NonEmptyString;
     /**
@@ -2022,7 +2022,7 @@ declare namespace SecurityHub {
      */
     ToPort?: Integer;
     /**
-     * The security group and AWS account ID pairs.
+     * The security group and Amazon Web Services account ID pairs.
      */
     UserIdGroupPairs?: AwsEc2SecurityGroupUserIdGroupPairList;
     /**
@@ -2034,7 +2034,7 @@ declare namespace SecurityHub {
      */
     Ipv6Ranges?: AwsEc2SecurityGroupIpv6RangeList;
     /**
-     * [VPC only] The prefix list IDs for an AWS service. With outbound rules, this is the AWS service to access through a VPC endpoint from instances associated with the security group.
+     * [VPC only] The prefix list IDs for an Amazon Web Services service. With outbound rules, this is the Amazon Web Services service to access through a VPC endpoint from instances associated with the security group.
      */
     PrefixListIds?: AwsEc2SecurityGroupPrefixListIdList;
   }
@@ -2074,7 +2074,7 @@ declare namespace SecurityHub {
      */
     PeeringStatus?: NonEmptyString;
     /**
-     * The ID of an AWS account. For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned. [EC2-Classic] Required when adding or removing rules that reference a security group in another VPC. 
+     * The ID of an Amazon Web Services account. For a referenced security group in another VPC, the account ID of the referenced security group is returned in the response. If the referenced security group is deleted, this value is not returned. [EC2-Classic] Required when adding or removing rules that reference a security group in another VPC. 
      */
     UserId?: NonEmptyString;
     /**
@@ -2117,7 +2117,7 @@ declare namespace SecurityHub {
      */
     MapPublicIpOnLaunch?: Boolean;
     /**
-     * The identifier of the AWS account that owns the subnet.
+     * The identifier of the Amazon Web Services account that owns the subnet.
      */
     OwnerId?: NonEmptyString;
     /**
@@ -2182,7 +2182,7 @@ declare namespace SecurityHub {
      */
     Status?: NonEmptyString;
     /**
-     * The ARN of the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to protect the volume encryption key for the volume.
+     * The ARN of the KMS customer master key (CMK) that was used to protect the volume encryption key for the volume.
      */
     KmsKeyId?: NonEmptyString;
     /**
@@ -2294,6 +2294,221 @@ declare namespace SecurityHub {
      */
     DefaultCapacityProviderStrategy?: AwsEcsClusterDefaultCapacityProviderStrategyList;
   }
+  export interface AwsEcsServiceCapacityProviderStrategyDetails {
+    /**
+     * The minimum number of tasks to run on the capacity provider. Only one strategy item can specify a value for Base. The value must be between 0 and 100000.
+     */
+    Base?: Integer;
+    /**
+     * The short name of the capacity provider.
+     */
+    CapacityProvider?: NonEmptyString;
+    /**
+     * The relative percentage of the total number of tasks that should use the capacity provider. If no weight is specified, the default value is 0. At least one capacity provider must have a weight greater than 0. The value can be between 0 and 1000.
+     */
+    Weight?: Integer;
+  }
+  export type AwsEcsServiceCapacityProviderStrategyList = AwsEcsServiceCapacityProviderStrategyDetails[];
+  export interface AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails {
+    /**
+     * Whether to enable the deployment circuit breaker logic for the service.
+     */
+    Enable?: Boolean;
+    /**
+     * Whether to roll back the service if a service deployment fails. If rollback is enabled, when a service deployment fails, the service is rolled back to the last deployment that completed successfully.
+     */
+    Rollback?: Boolean;
+  }
+  export interface AwsEcsServiceDeploymentConfigurationDetails {
+    /**
+     * Determines whether a service deployment fails if a service cannot reach a steady state.
+     */
+    DeploymentCircuitBreaker?: AwsEcsServiceDeploymentConfigurationDeploymentCircuitBreakerDetails;
+    /**
+     * For a service that uses the rolling update (ECS) deployment type, the maximum number of tasks in a service that are allowed in the RUNNING or PENDING state during a deployment, and for tasks that use the EC2 launch type, when any container instances are in the DRAINING state. Provided as a percentage of the desired number of tasks. The default value is 200%. For a service that uses the blue/green (CODE_DEPLOY) or EXTERNAL deployment types, and tasks that use the EC2 launch type, the maximum number of tasks in the service that remain in the RUNNING state while the container instances are in the DRAINING state. For the Fargate launch type, the maximum percent value is not used.
+     */
+    MaximumPercent?: Integer;
+    /**
+     * For a service that uses the rolling update (ECS) deployment type, the minimum number of tasks in a service that must remain in the RUNNING state during a deployment, and while any container instances are in the DRAINING state if the service contains tasks using the EC2 launch type. Expressed as a percentage of the desired number of tasks. The default value is 100%. For a service that uses the blue/green (CODE_DEPLOY) or EXTERNAL deployment types and tasks that use the EC2 launch type, the minimum number of the tasks in the service that remain in the RUNNING state while the container instances are in the DRAINING state. For the Fargate launch type, the minimum healthy percent value is not used.
+     */
+    MinimumHealthyPercent?: Integer;
+  }
+  export interface AwsEcsServiceDeploymentControllerDetails {
+    /**
+     * The rolling update (ECS) deployment type replaces the current running version of the container with the latest version. The blue/green (CODE_DEPLOY) deployment type uses the blue/green deployment model that is powered by CodeDeploy. This deployment model a new deployment of a service can be verified before production traffic is sent to it. The external (EXTERNAL) deployment type allows the use of any third-party deployment controller for full control over the deployment process for an Amazon ECS service. Valid values: ECS | CODE_DEPLOY | EXTERNAL 
+     */
+    Type?: NonEmptyString;
+  }
+  export interface AwsEcsServiceDetails {
+    /**
+     * The capacity provider strategy that the service uses.
+     */
+    CapacityProviderStrategy?: AwsEcsServiceCapacityProviderStrategyList;
+    /**
+     * The ARN of the cluster that hosts the service.
+     */
+    Cluster?: NonEmptyString;
+    /**
+     * Deployment parameters for the service. Includes the number of tasks that run and the order in which to start and stop tasks.
+     */
+    DeploymentConfiguration?: AwsEcsServiceDeploymentConfigurationDetails;
+    /**
+     * Contains the deployment controller type that the service uses.
+     */
+    DeploymentController?: AwsEcsServiceDeploymentControllerDetails;
+    /**
+     * The number of instantiations of the task definition to run on the service.
+     */
+    DesiredCount?: Integer;
+    /**
+     * Whether to enable Amazon ECS managed tags for the tasks in the service.
+     */
+    EnableEcsManagedTags?: Boolean;
+    /**
+     * Whether the execute command functionality is enabled for the service.
+     */
+    EnableExecuteCommand?: Boolean;
+    /**
+     * After a task starts, the amount of time in seconds that the Amazon ECS service scheduler ignores unhealthy Elastic Load Balancing target health checks.
+     */
+    HealthCheckGracePeriodSeconds?: Integer;
+    /**
+     * The launch type that the service uses. Valid values: EC2 | FARGATE | EXTERNAL 
+     */
+    LaunchType?: NonEmptyString;
+    /**
+     * Information about the load balancers that the service uses.
+     */
+    LoadBalancers?: AwsEcsServiceLoadBalancersList;
+    /**
+     * The name of the service.
+     */
+    Name?: NonEmptyString;
+    /**
+     * For tasks that use the awsvpc networking mode, the VPC subnet and security group configuration.
+     */
+    NetworkConfiguration?: AwsEcsServiceNetworkConfigurationDetails;
+    /**
+     * The placement constraints for the tasks in the service.
+     */
+    PlacementConstraints?: AwsEcsServicePlacementConstraintsList;
+    /**
+     * Information about how tasks for the service are placed.
+     */
+    PlacementStrategies?: AwsEcsServicePlacementStrategiesList;
+    /**
+     * The platform version on which to run the service. Only specified for tasks that are hosted on Fargate. If a platform version is not specified, the LATEST platform version is used by default.
+     */
+    PlatformVersion?: NonEmptyString;
+    /**
+     * Indicates whether to propagate the tags from the task definition to the task or from the service to the task. If no value is provided, then tags are not propagated. Valid values: TASK_DEFINITION | SERVICE 
+     */
+    PropagateTags?: NonEmptyString;
+    /**
+     * The ARN of the IAM role that is associated with the service. The role allows the Amazon ECS container agent to register container instances with an Elastic Load Balancing load balancer.
+     */
+    Role?: NonEmptyString;
+    /**
+     * The scheduling strategy to use for the service. The REPLICA scheduling strategy places and maintains the desired number of tasks across the cluster. By default, the service scheduler spreads tasks across Availability Zones. Task placement strategies and constraints are used to customize task placement decisions. The DAEMON scheduling strategy deploys exactly one task on each active container instance that meets all of the task placement constraints that are specified in the cluster. The service scheduler also evaluates the task placement constraints for running tasks and stops tasks that do not meet the placement constraints. Valid values: REPLICA | DAEMON 
+     */
+    SchedulingStrategy?: NonEmptyString;
+    /**
+     * The ARN of the service.
+     */
+    ServiceArn?: NonEmptyString;
+    /**
+     * The name of the service. The name can contain up to 255 characters. It can use letters, numbers, underscores, and hyphens.
+     */
+    ServiceName?: NonEmptyString;
+    /**
+     * Information about the service discovery registries to assign to the service.
+     */
+    ServiceRegistries?: AwsEcsServiceServiceRegistriesList;
+    /**
+     * The task definition to use for tasks in the service.
+     */
+    TaskDefinition?: NonEmptyString;
+  }
+  export interface AwsEcsServiceLoadBalancersDetails {
+    /**
+     * The name of the container to associate with the load balancer.
+     */
+    ContainerName?: NonEmptyString;
+    /**
+     * The port on the container to associate with the load balancer. This port must correspond to a containerPort in the task definition the tasks in the service are using. For tasks that use the EC2 launch type, the container instance they are launched on must allow ingress traffic on the hostPort of the port mapping.
+     */
+    ContainerPort?: Integer;
+    /**
+     * The name of the load balancer to associate with the Amazon ECS service or task set. Only specified when using a Classic Load Balancer. For an Application Load Balancer or a Network Load Balancer, the load balancer name is omitted.
+     */
+    LoadBalancerName?: NonEmptyString;
+    /**
+     * The ARN of the Elastic Load Balancing target group or groups associated with a service or task set. Only specified when using an Application Load Balancer or a Network Load Balancer. For a Classic Load Balancer, the target group ARN is omitted.
+     */
+    TargetGroupArn?: NonEmptyString;
+  }
+  export type AwsEcsServiceLoadBalancersList = AwsEcsServiceLoadBalancersDetails[];
+  export interface AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails {
+    /**
+     * Whether the task's elastic network interface receives a public IP address. The default value is DISABLED. Valid values: ENABLED | DISABLED 
+     */
+    AssignPublicIp?: NonEmptyString;
+    /**
+     * The IDs of the security groups associated with the task or service. You can provide up to five security groups.
+     */
+    SecurityGroups?: NonEmptyStringList;
+    /**
+     * The IDs of the subnets associated with the task or service. You can provide up to 16 subnets.
+     */
+    Subnets?: NonEmptyStringList;
+  }
+  export interface AwsEcsServiceNetworkConfigurationDetails {
+    /**
+     * The VPC subnet and security group configuration.
+     */
+    AwsVpcConfiguration?: AwsEcsServiceNetworkConfigurationAwsVpcConfigurationDetails;
+  }
+  export interface AwsEcsServicePlacementConstraintsDetails {
+    /**
+     * A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is distinctInstance.
+     */
+    Expression?: NonEmptyString;
+    /**
+     * The type of constraint. Use distinctInstance to run each task in a particular group on a different container instance. Use memberOf to restrict the selection to a group of valid candidates. Valid values: distinctInstance | memberOf 
+     */
+    Type?: NonEmptyString;
+  }
+  export type AwsEcsServicePlacementConstraintsList = AwsEcsServicePlacementConstraintsDetails[];
+  export interface AwsEcsServicePlacementStrategiesDetails {
+    /**
+     * The field to apply the placement strategy against. For the spread placement strategy, valid values are instanceId (or host, which has the same effect), or any platform or custom attribute that is applied to a container instance, such as attribute:ecs.availability-zone. For the binpack placement strategy, valid values are cpu and memory. For the random placement strategy, this attribute is not used.
+     */
+    Field?: NonEmptyString;
+    /**
+     * The type of placement strategy. The random placement strategy randomly places tasks on available candidates. The spread placement strategy spreads placement across available candidates evenly based on the value of Field. The binpack strategy places tasks on available candidates that have the least available amount of the resource that is specified in Field. Valid values: random | spread | binpack 
+     */
+    Type?: NonEmptyString;
+  }
+  export type AwsEcsServicePlacementStrategiesList = AwsEcsServicePlacementStrategiesDetails[];
+  export interface AwsEcsServiceServiceRegistriesDetails {
+    /**
+     * The container name value to use for the service discovery service. If the task definition uses the bridge or host network mode, you must specify ContainerName and ContainerPort. If the task definition uses the awsvpc network mode and a type SRV DNS record, you must specify either ContainerName and ContainerPort, or Port , but not both.
+     */
+    ContainerName?: NonEmptyString;
+    /**
+     * The port value to use for the service discovery service. If the task definition uses the bridge or host network mode, you must specify ContainerName and ContainerPort. If the task definition uses the awsvpc network mode and a type SRV DNS record, you must specify either ContainerName and ContainerPort, or Port , but not both.
+     */
+    ContainerPort?: Integer;
+    /**
+     * The port value to use for a service discovery service that specifies an SRV record. This field can be used if both the awsvpcawsvpc network mode and SRV records are used.
+     */
+    Port?: Integer;
+    /**
+     * The ARN of the service registry.
+     */
+    RegistryArn?: NonEmptyString;
+  }
+  export type AwsEcsServiceServiceRegistriesList = AwsEcsServiceServiceRegistriesDetails[];
   export interface AwsEcsTaskDefinitionContainerDefinitionsDependsOnDetails {
     /**
      * The dependency condition of the dependent container. Indicates the required status of the dependent container before the current container can start.
@@ -2769,7 +2984,7 @@ declare namespace SecurityHub {
      */
     RequiresCompatibilities?: NonEmptyStringList;
     /**
-     * The short name or ARN of the IAM role that grants containers in the task permission to call AWS API operations on your behalf.
+     * The short name or ARN of the IAM role that grants containers in the task permission to call Amazon Web Services API operations on your behalf.
      */
     TaskRoleArn?: NonEmptyString;
     /**
@@ -3015,7 +3230,7 @@ declare namespace SecurityHub {
   }
   export interface AwsElasticsearchDomainDetails {
     /**
-     * IAM policy document specifying the access policies for the new Amazon ES domain.
+     * IAM policy document specifying the access policies for the new Elasticsearch domain.
      */
     AccessPolicies?: NonEmptyString;
     /**
@@ -3023,25 +3238,29 @@ declare namespace SecurityHub {
      */
     DomainEndpointOptions?: AwsElasticsearchDomainDomainEndpointOptions;
     /**
-     * Unique identifier for an Amazon ES domain.
+     * Unique identifier for an Elasticsearch domain.
      */
     DomainId?: NonEmptyString;
     /**
-     * Name of an Amazon ES domain. Domain names are unique across all domains owned by the same account within an AWS Region. Domain names must start with a lowercase letter and must be between 3 and 28 characters. Valid characters are a-z (lowercase only), 0-9, and – (hyphen). 
+     * Name of an Elasticsearch domain. Domain names are unique across all domains owned by the same account within an Amazon Web Services Region. Domain names must start with a lowercase letter and must be between 3 and 28 characters. Valid characters are a-z (lowercase only), 0-9, and – (hyphen). 
      */
     DomainName?: NonEmptyString;
     /**
-     * Domain-specific endpoint used to submit index, search, and data upload requests to an Amazon ES domain. The endpoint is a service URL. 
+     * Domain-specific endpoint used to submit index, search, and data upload requests to an Elasticsearch domain. The endpoint is a service URL. 
      */
     Endpoint?: NonEmptyString;
     /**
-     * The key-value pair that exists if the Amazon ES domain uses VPC endpoints.
+     * The key-value pair that exists if the Elasticsearch domain uses VPC endpoints.
      */
     Endpoints?: FieldMap;
     /**
      * Elasticsearch version.
      */
     ElasticsearchVersion?: NonEmptyString;
+    /**
+     * Information about an Elasticsearch cluster configuration.
+     */
+    ElasticsearchClusterConfig?: AwsElasticsearchDomainElasticsearchClusterConfigDetails;
     /**
      * Details about the configuration for encryption at rest.
      */
@@ -3059,7 +3278,7 @@ declare namespace SecurityHub {
      */
     ServiceSoftwareOptions?: AwsElasticsearchDomainServiceSoftwareOptions;
     /**
-     * Information that Amazon ES derives based on VPCOptions for the domain.
+     * Information that Elasticsearch derives based on VPCOptions for the domain.
      */
     VPCOptions?: AwsElasticsearchDomainVPCOptions;
   }
@@ -3072,6 +3291,42 @@ declare namespace SecurityHub {
      * The TLS security policy to apply to the HTTPS endpoint of the Elasticsearch domain. Valid values:    Policy-Min-TLS-1-0-2019-07, which supports TLSv1.0 and higher    Policy-Min-TLS-1-2-2019-07, which only supports TLSv1.2  
      */
     TLSSecurityPolicy?: NonEmptyString;
+  }
+  export interface AwsElasticsearchDomainElasticsearchClusterConfigDetails {
+    /**
+     * The number of instances to use for the master node. If this attribute is specified, then DedicatedMasterEnabled must be true.
+     */
+    DedicatedMasterCount?: Integer;
+    /**
+     * Whether to use a dedicated master node for the Elasticsearch domain. A dedicated master node performs cluster management tasks, but doesn't hold data or respond to data upload requests.
+     */
+    DedicatedMasterEnabled?: Boolean;
+    /**
+     * The hardware configuration of the computer that hosts the dedicated master node. For example, m3.medium.elasticsearch. If this attribute is specified, then DedicatedMasterEnabled must be true.
+     */
+    DedicatedMasterType?: NonEmptyString;
+    /**
+     * The number of data nodes to use in the Elasticsearch domain.
+     */
+    InstanceCount?: Integer;
+    /**
+     * The instance type for your data nodes. For example, m3.medium.elasticsearch.
+     */
+    InstanceType?: NonEmptyString;
+    /**
+     * Configuration options for zone awareness. Provided if ZoneAwarenessEnabled is true.
+     */
+    ZoneAwarenessConfig?: AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails;
+    /**
+     * Whether to enable zone awareness for the Elasticsearch domain. When zone awareness is enabled, Elasticsearch allocates the cluster's nodes and replica index shards across Availability Zones in the same Region. This prevents data loss and minimizes downtime if a node or data center fails.
+     */
+    ZoneAwarenessEnabled?: Boolean;
+  }
+  export interface AwsElasticsearchDomainElasticsearchClusterConfigZoneAwarenessConfigDetails {
+    /**
+     * he number of Availability Zones that the domain uses. Valid values are 2 and 3. The default is 2.
+     */
+    AvailabilityZoneCount?: Integer;
   }
   export interface AwsElasticsearchDomainEncryptionAtRestOptions {
     /**
@@ -3092,6 +3347,7 @@ declare namespace SecurityHub {
      * Configures the Elasticsearch search slow log publishing.
      */
     SearchSlowLogs?: AwsElasticsearchDomainLogPublishingOptionsLogConfig;
+    AuditLogs?: AwsElasticsearchDomainLogPublishingOptionsLogConfig;
   }
   export interface AwsElasticsearchDomainLogPublishingOptionsLogConfig {
     /**
@@ -3472,7 +3728,7 @@ declare namespace SecurityHub {
      */
     PrincipalName?: NonEmptyString;
     /**
-     * The AWS account ID of the account for the key.
+     * The Amazon Web Services account ID of the account for the key.
      */
     AccountId?: NonEmptyString;
     /**
@@ -3518,7 +3774,7 @@ declare namespace SecurityHub {
      */
     Arn?: NonEmptyString;
     /**
-     * The identifier of the AWS account that created the session.
+     * The identifier of the Amazon Web Services account that created the session.
      */
     AccountId?: NonEmptyString;
     /**
@@ -3786,7 +4042,7 @@ declare namespace SecurityHub {
   export type AwsIamUserPolicyList = AwsIamUserPolicy[];
   export interface AwsKmsKeyDetails {
     /**
-     * The twelve-digit account ID of the AWS account that owns the CMK.
+     * The twelve-digit account ID of the Amazon Web Services account that owns the CMK.
      */
     AWSAccountId?: NonEmptyString;
     /**
@@ -3798,7 +4054,7 @@ declare namespace SecurityHub {
      */
     KeyId?: NonEmptyString;
     /**
-     * The manager of the CMK. CMKs in your AWS account are either customer managed or AWS managed.
+     * The manager of the CMK. CMKs in your Amazon Web Services account are either customer managed or Amazon Web Services managed.
      */
     KeyManager?: NonEmptyString;
     /**
@@ -3806,7 +4062,7 @@ declare namespace SecurityHub {
      */
     KeyState?: NonEmptyString;
     /**
-     * The source of the CMK's key material. When this value is AWS_KMS, AWS KMS created the key material. When this value is EXTERNAL, the key material was imported from your existing key management infrastructure or the CMK lacks key material. When this value is AWS_CLOUDHSM, the key material was created in the AWS CloudHSM cluster associated with a custom key store.
+     * The source of the CMK's key material. When this value is AWS_KMS, KMS created the key material. When this value is EXTERNAL, the key material was imported from your existing key management infrastructure or the CMK lacks key material. When this value is AWS_CLOUDHSM, the key material was created in the CloudHSM cluster associated with a custom key store.
      */
     Origin?: NonEmptyString;
     /**
@@ -3816,7 +4072,7 @@ declare namespace SecurityHub {
   }
   export interface AwsLambdaFunctionCode {
     /**
-     * An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.
+     * An Amazon S3 bucket in the same Amazon Web Services Region as your function. The bucket can be in a different Amazon Web Services account.
      */
     S3Bucket?: NonEmptyString;
     /**
@@ -3828,13 +4084,13 @@ declare namespace SecurityHub {
      */
     S3ObjectVersion?: NonEmptyString;
     /**
-     * The base64-encoded contents of the deployment package. AWS SDK and AWS CLI clients handle the encoding for you.
+     * The base64-encoded contents of the deployment package. Amazon Web Services SDK and Amazon Web Services CLI clients handle the encoding for you.
      */
     ZipFile?: NonEmptyString;
   }
   export interface AwsLambdaFunctionDeadLetterConfig {
     /**
-     * The ARN of an Amazon SQS queue or Amazon SNS topic.
+     * The ARN of an SQS queue or SNS topic.
      */
     TargetArn?: NonEmptyString;
   }
@@ -3864,7 +4120,7 @@ declare namespace SecurityHub {
      */
     Handler?: NonEmptyString;
     /**
-     * The KMS key that's used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed CMK.
+     * The KMS key that is used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed CMK.
      */
     KmsKeyArn?: NonEmptyString;
     /**
@@ -3900,7 +4156,7 @@ declare namespace SecurityHub {
      */
     Timeout?: Integer;
     /**
-     * The function's AWS X-Ray tracing configuration.
+     * The function's X-Ray tracing configuration.
      */
     TracingConfig?: AwsLambdaFunctionTracingConfig;
     /**
@@ -4067,11 +4323,11 @@ declare namespace SecurityHub {
      */
     StorageEncrypted?: Boolean;
     /**
-     * The ARN of the AWS KMS master key that is used to encrypt the database instances in the DB cluster.
+     * The ARN of the KMS master key that is used to encrypt the database instances in the DB cluster.
      */
     KmsKeyId?: NonEmptyString;
     /**
-     * The identifier of the DB cluster. The identifier must be unique within each AWS Region and is immutable.
+     * The identifier of the DB cluster. The identifier must be unique within each Amazon Web Services Region and is immutable.
      */
     DbClusterResourceId?: NonEmptyString;
     /**
@@ -4107,7 +4363,7 @@ declare namespace SecurityHub {
      */
     CopyTagsToSnapshot?: Boolean;
     /**
-     * Whether the DB cluster is a clone of a DB cluster owned by a different AWS account.
+     * Whether the DB cluster is a clone of a DB cluster owned by a different Amazon Web Services account.
      */
     CrossAccountClone?: Boolean;
     /**
@@ -4227,7 +4483,7 @@ declare namespace SecurityHub {
      */
     StorageEncrypted?: Boolean;
     /**
-     * The ARN of the AWS KMS master key that is used to encrypt the database instances in the DB cluster.
+     * The ARN of the KMS master key that is used to encrypt the database instances in the DB cluster.
      */
     KmsKeyId?: NonEmptyString;
     /**
@@ -4268,18 +4524,18 @@ declare namespace SecurityHub {
      */
     RoleArn?: NonEmptyString;
     /**
-     * The name of the feature associated with the IAM)role.
+     * The name of the feature associated with the IAM role.
      */
     FeatureName?: NonEmptyString;
     /**
-     * Describes the state of the association between the IAM role and the DB instance. The Status property returns one of the following values:    ACTIVE - The IAM role ARN is associated with the DB instance and can be used to access other AWS services on your behalf.    PENDING - The IAM role ARN is being associated with the DB instance.    INVALID - The IAM role ARN is associated with the DB instance. But the DB instance is unable to assume the IAM role in order to access other AWS services on your behalf.   
+     * Describes the state of the association between the IAM role and the DB instance. The Status property returns one of the following values:    ACTIVE - The IAM role ARN is associated with the DB instance and can be used to access other Amazon Web Services services on your behalf.    PENDING - The IAM role ARN is being associated with the DB instance.    INVALID - The IAM role ARN is associated with the DB instance. But the DB instance is unable to assume the IAM role in order to access other Amazon Web Services services on your behalf.   
      */
     Status?: NonEmptyString;
   }
   export type AwsRdsDbInstanceAssociatedRoles = AwsRdsDbInstanceAssociatedRole[];
   export interface AwsRdsDbInstanceDetails {
     /**
-     * The AWS Identity and Access Management (IAM) roles associated with the DB instance.
+     * The IAM roles associated with the DB instance.
      */
     AssociatedRoles?: AwsRdsDbInstanceAssociatedRoles;
     /**
@@ -4303,7 +4559,7 @@ declare namespace SecurityHub {
      */
     DbInstancePort?: Integer;
     /**
-     * The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed. 
+     * The Amazon Web Services Region-unique, immutable identifier for the DB instance. This identifier is found in CloudTrail log entries whenever the KMS key for the DB instance is accessed. 
      */
     DbiResourceId?: NonEmptyString;
     /**
@@ -4327,7 +4583,7 @@ declare namespace SecurityHub {
      */
     EngineVersion?: NonEmptyString;
     /**
-     * True if mapping of AWS Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false. IAM database authentication can be enabled for the following database engines.   For MySQL 5.6, minor version 5.6.34 or higher   For MySQL 5.7, minor version 5.7.16 or higher   Aurora 5.6 or higher  
+     * True if mapping of IAM accounts to database accounts is enabled, and otherwise false. IAM database authentication can be enabled for the following database engines.   For MySQL 5.6, minor version 5.6.34 or higher   For MySQL 5.7, minor version 5.7.16 or higher   Aurora 5.6 or higher  
      */
     IAMDatabaseAuthenticationEnabled?: Boolean;
     /**
@@ -4335,7 +4591,7 @@ declare namespace SecurityHub {
      */
     InstanceCreateTime?: NonEmptyString;
     /**
-     * If StorageEncrypted is true, the AWS KMS key identifier for the encrypted DB instance.
+     * If StorageEncrypted is true, the KMS key identifier for the encrypted DB instance.
      */
     KmsKeyId?: NonEmptyString;
     /**
@@ -4483,7 +4739,7 @@ declare namespace SecurityHub {
      */
     PerformanceInsightsEnabled?: Boolean;
     /**
-     * The identifier of the AWS KMS key used to encrypt the Performance Insights data.
+     * The identifier of the KMS key used to encrypt the Performance Insights data.
      */
     PerformanceInsightsKmsKeyId?: NonEmptyString;
     /**
@@ -4694,7 +4950,7 @@ declare namespace SecurityHub {
      */
     PercentProgress?: Integer;
     /**
-     * The AWS Region that the DB snapshot was created in or copied from.
+     * The Amazon Web Services Region that the DB snapshot was created in or copied from.
      */
     SourceRegion?: NonEmptyString;
     /**
@@ -4714,7 +4970,7 @@ declare namespace SecurityHub {
      */
     Encrypted?: Boolean;
     /**
-     * If Encrypted is true, the AWS KMS key identifier for the encrypted DB snapshot.
+     * If Encrypted is true, the KMS key identifier for the encrypted DB snapshot.
      */
     KmsKeyId?: NonEmptyString;
     /**
@@ -4800,6 +5056,48 @@ declare namespace SecurityHub {
     Name?: NonEmptyString;
   }
   export type AwsRdsDbSubnetGroupSubnets = AwsRdsDbSubnetGroupSubnet[];
+  export interface AwsRdsEventSubscriptionDetails {
+    /**
+     * The identifier of the account that is associated with the event notification subscription.
+     */
+    CustSubscriptionId?: NonEmptyString;
+    /**
+     * The identifier of the event notification subscription.
+     */
+    CustomerAwsId?: NonEmptyString;
+    /**
+     * Whether the event notification subscription is enabled.
+     */
+    Enabled?: Boolean;
+    /**
+     * The list of event categories for the event notification subscription.
+     */
+    EventCategoriesList?: NonEmptyStringList;
+    /**
+     * The ARN of the event notification subscription.
+     */
+    EventSubscriptionArn?: NonEmptyString;
+    /**
+     * The ARN of the SNS topic to post the event notifications to.
+     */
+    SnsTopicArn?: NonEmptyString;
+    /**
+     * A list of source identifiers for the event notification subscription.
+     */
+    SourceIdsList?: NonEmptyStringList;
+    /**
+     * The source type for the event notification subscription.
+     */
+    SourceType?: NonEmptyString;
+    /**
+     * The status of the event notification subscription. Valid values: creating | modifying | deleting | active | no-permission | topic-not-exist 
+     */
+    Status?: NonEmptyString;
+    /**
+     * The datetime when the event notification subscription was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    SubscriptionCreationTime?: NonEmptyString;
+  }
   export interface AwsRdsPendingCloudWatchLogsExports {
     /**
      * A list of log types that are being enabled.
@@ -5001,11 +5299,11 @@ declare namespace SecurityHub {
      */
     HsmStatus?: AwsRedshiftClusterHsmStatus;
     /**
-     * A list of IAM roles that the cluster can use to access other AWS services.
+     * A list of IAM roles that the cluster can use to access other Amazon Web Services services.
      */
     IamRoles?: AwsRedshiftClusterIamRoles;
     /**
-     * The identifier of the AWS KMS encryption key that is used to encrypt data in the cluster.
+     * The identifier of the KMS encryption key that is used to encrypt data in the cluster.
      */
     KmsKeyId?: NonEmptyString;
     /**
@@ -5225,7 +5523,7 @@ declare namespace SecurityHub {
      */
     IgnorePublicAcls?: Boolean;
     /**
-     * Indicates whether to restrict access to an access point or S3 bucket that has a public policy to only AWS service principals and authorized users within the S3 bucket owner's account.
+     * Indicates whether to restrict access to an access point or S3 bucket that has a public policy to only Amazon Web Services service principals and authorized users within the S3 bucket owner's account.
      */
     RestrictPublicBuckets?: Boolean;
   }
@@ -5405,7 +5703,7 @@ declare namespace SecurityHub {
      */
     SSEAlgorithm?: NonEmptyString;
     /**
-     * AWS KMS customer master key (CMK) ID to use for the default encryption.
+     * KMS customer master key (CMK) ID to use for the default encryption.
      */
     KMSMasterKeyID?: NonEmptyString;
   }
@@ -5444,7 +5742,7 @@ declare namespace SecurityHub {
      */
     ServerSideEncryption?: NonEmptyString;
     /**
-     * The identifier of the AWS Key Management Service (AWS KMS) symmetric customer managed customer master key (CMK) that was used for the object.
+     * The identifier of the KMS symmetric customer managed customer master key (CMK) that was used for the object.
      */
     SSEKMSKeyId?: NonEmptyString;
   }
@@ -5458,7 +5756,7 @@ declare namespace SecurityHub {
      */
     RotationOccurredWithinFrequency?: Boolean;
     /**
-     * The ARN, Key ID, or alias of the AWS KMS customer master key (CMK) used to encrypt the SecretString or SecretBinary values for versions of this secret.
+     * The ARN, Key ID, or alias of the KMS customer master key (CMK) used to encrypt the SecretString or SecretBinary values for versions of this secret.
      */
     KmsKeyId?: NonEmptyString;
     /**
@@ -5502,11 +5800,23 @@ declare namespace SecurityHub {
      */
     ProductArn: NonEmptyString;
     /**
+     * The name of the product that generated the finding. Security Hub populates this attribute automatically for each finding. You cannot update it using BatchImportFindings or BatchUpdateFindings. The exception to this is when you use a custom integration. When you use the Security Hub console to filter findings by product name, you use this attribute. When you use the Security Hub API to filter findings by product name, you use the aws/securityhub/ProductyName attribute under ProductFields. Security Hub does not synchronize those two attributes.
+     */
+    ProductName?: NonEmptyString;
+    /**
+     * The name of the company for the product that generated the finding. Security Hub populates this attribute automatically for each finding. You cannot be updated using BatchImportFindings or BatchUpdateFindings. The exception to this is when you use a custom integration. When you use the Security Hub console to filter findings by company name, you use this attribute. When you use the Security Hub API to filter findings by company name, you use the aws/securityhub/CompanyName attribute under ProductFields. Security Hub does not synchronize those two attributes.
+     */
+    CompanyName?: NonEmptyString;
+    /**
+     * The Region from which the finding was generated. Security Hub populates this attribute automatically for each finding. You cannot update it using BatchImportFindings or BatchUpdateFindings.
+     */
+    Region?: NonEmptyString;
+    /**
      * The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers' solutions, this generator can be called a rule, a check, a detector, a plugin, etc. 
      */
     GeneratorId: NonEmptyString;
     /**
-     * The AWS account ID that a finding is generated in.
+     * The Amazon Web Services account ID that a finding is generated in.
      */
     AwsAccountId: NonEmptyString;
     /**
@@ -5558,7 +5868,7 @@ declare namespace SecurityHub {
      */
     SourceUrl?: NonEmptyString;
     /**
-     * A data type where security-findings providers can include additional solution-specific details that aren't part of the defined AwsSecurityFinding format.
+     * A data type where security-findings providers can include additional solution-specific details that aren't part of the defined AwsSecurityFinding format. Can contain up to 50 key-value pairs. For each key-value pair, the key can contain up to 128 characters, and the value can contain up to 2048 characters.
      */
     ProductFields?: FieldMap;
     /**
@@ -5590,7 +5900,7 @@ declare namespace SecurityHub {
      */
     Resources: ResourceList;
     /**
-     * This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported security standard, such as CIS AWS Foundations. Contains security standard-related finding details.
+     * This data type is exclusive to findings that are generated as the result of a check run against a specific rule in a supported security standard, such as CIS Amazon Web Services Foundations. Contains security standard-related finding details.
      */
     Compliance?: Compliance;
     /**
@@ -5640,7 +5950,7 @@ declare namespace SecurityHub {
      */
     ProductArn?: StringFilterList;
     /**
-     * The AWS account ID that a finding is generated in.
+     * The Amazon Web Services account ID that a finding is generated in.
      */
     AwsAccountId?: StringFilterList;
     /**
@@ -5651,6 +5961,10 @@ declare namespace SecurityHub {
      * The identifier for the solution-specific component (a discrete unit of logic) that generated a finding. In various security-findings providers' solutions, this generator can be called a rule, a check, a detector, a plugin, etc.
      */
     GeneratorId?: StringFilterList;
+    /**
+     * The Region from which the finding was generated.
+     */
+    Region?: StringFilterList;
     /**
      * A finding type in the format of namespace/category/classifier that classifies a finding.
      */
@@ -5712,11 +6026,11 @@ declare namespace SecurityHub {
      */
     ProductFields?: MapFilterList;
     /**
-     * The name of the solution (product) that generates findings.
+     * The name of the solution (product) that generates findings. Note that this is a filter against the aws/securityhub/ProductName field in ProductFields. It is not a filter for the top-level ProductName field.
      */
     ProductName?: StringFilterList;
     /**
-     * The name of the findings provider (company) that owns the solution (product) that generates findings.
+     * The name of the findings provider (company) that owns the solution (product) that generates findings. Note that this is a filter against the aws/securityhub/CompanyName field in ProductFields. It is not a filter for the top-level CompanyName field.
      */
     CompanyName?: StringFilterList;
     /**
@@ -5840,15 +6154,15 @@ declare namespace SecurityHub {
      */
     ResourceId?: StringFilterList;
     /**
-     * The canonical AWS partition name that the Region is assigned to.
+     * The canonical Amazon Web Services partition name that the Region is assigned to.
      */
     ResourcePartition?: StringFilterList;
     /**
-     * The canonical AWS external Region name where this resource is located.
+     * The canonical Amazon Web Services external Region name where this resource is located.
      */
     ResourceRegion?: StringFilterList;
     /**
-     * A list of AWS tags associated with a resource at the time the finding was processed.
+     * A list of Amazon Web Services tags associated with a resource at the time the finding was processed.
      */
     ResourceTags?: MapFilterList;
     /**
@@ -5900,6 +6214,10 @@ declare namespace SecurityHub {
      */
     ResourceAwsIamAccessKeyUserName?: StringFilterList;
     /**
+     * The name of the principal that is associated with an IAM access key.
+     */
+    ResourceAwsIamAccessKeyPrincipalName?: StringFilterList;
+    /**
      * The status of the IAM access key related to a finding.
      */
     ResourceAwsIamAccessKeyStatus?: StringFilterList;
@@ -5907,6 +6225,10 @@ declare namespace SecurityHub {
      * The creation date/time of the IAM access key related to a finding.
      */
     ResourceAwsIamAccessKeyCreatedAt?: DateFilterList;
+    /**
+     * The name of an IAM user.
+     */
+    ResourceAwsIamUserUserName?: StringFilterList;
     /**
      * The name of the container related to a finding.
      */
@@ -5928,7 +6250,7 @@ declare namespace SecurityHub {
      */
     ResourceDetailsOther?: MapFilterList;
     /**
-     * Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS AWS Foundations. Contains security standard-related finding details.
+     * Exclusive to findings that are generated as the result of a check run against a specific rule in a supported standard, such as CIS Amazon Web Services Foundations. Contains security standard-related finding details.
      */
     ComplianceStatus?: StringFilterList;
     /**
@@ -6014,11 +6336,11 @@ declare namespace SecurityHub {
   export type AwsSecurityFindingList = AwsSecurityFinding[];
   export interface AwsSnsTopicDetails {
     /**
-     * The ID of an AWS managed customer master key (CMK) for Amazon SNS or a custom CMK.
+     * The ID of an Amazon Web Services managed customer master key (CMK) for Amazon SNS or a custom CMK.
      */
     KmsMasterKeyId?: NonEmptyString;
     /**
-     * Subscription is an embedded property that describes the subscription endpoints of an Amazon SNS topic.
+     * Subscription is an embedded property that describes the subscription endpoints of an SNS topic.
      */
     Subscription?: AwsSnsTopicSubscriptionList;
     /**
@@ -6043,11 +6365,11 @@ declare namespace SecurityHub {
   export type AwsSnsTopicSubscriptionList = AwsSnsTopicSubscription[];
   export interface AwsSqsQueueDetails {
     /**
-     * The length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling AWS KMS again.
+     * The length of time, in seconds, for which Amazon SQS can reuse a data key to encrypt or decrypt messages before calling KMS again.
      */
     KmsDataKeyReusePeriodSeconds?: Integer;
     /**
-     * The ID of an AWS managed customer master key (CMK) for Amazon SQS or a custom CMK.
+     * The ID of an Amazon Web Services managed customer master key (CMK) for Amazon SQS or a custom CMK.
      */
     KmsMasterKeyId?: NonEmptyString;
     /**
@@ -6165,7 +6487,7 @@ declare namespace SecurityHub {
   }
   export interface AwsWafWebAclRule {
     /**
-     * Specifies the action that CloudFront or AWS WAF takes when a web request matches the conditions in the rule. 
+     * Specifies the action that CloudFront or WAF takes when a web request matches the conditions in the rule. 
      */
     Action?: WafAction;
     /**
@@ -6216,7 +6538,7 @@ declare namespace SecurityHub {
   }
   export interface BatchImportFindingsRequest {
     /**
-     * A list of findings to import. To successfully import a finding, it must follow the AWS Security Finding Format. Maximum of 100 findings per request.
+     * A list of findings to import. To successfully import a finding, it must follow the Amazon Web Services Security Finding Format. Maximum of 100 findings per request.
      */
     Findings: BatchImportFindingsRequestFindingList;
   }
@@ -6379,7 +6701,7 @@ declare namespace SecurityHub {
   }
   export interface Compliance {
     /**
-     * The result of a standards check. The valid values for Status are as follows.      PASSED - Standards check passed for all evaluated resources.    WARNING - Some information is missing or this check is not supported for your configuration.    FAILED - Standards check failed for at least one evaluated resource.    NOT_AVAILABLE - Check could not be performed due to a service outage, API error, or because the result of the AWS Config evaluation was NOT_APPLICABLE. If the AWS Config evaluation result was NOT_APPLICABLE, then after 3 days, Security Hub automatically archives the finding.    
+     * The result of a standards check. The valid values for Status are as follows.      PASSED - Standards check passed for all evaluated resources.    WARNING - Some information is missing or this check is not supported for your configuration.    FAILED - Standards check failed for at least one evaluated resource.    NOT_AVAILABLE - Check could not be performed due to a service outage, API error, or because the result of the Config evaluation was NOT_APPLICABLE. If the Config evaluation result was NOT_APPLICABLE, then after 3 days, Security Hub automatically archives the finding.    
      */
     Status?: ComplianceStatus;
     /**
@@ -6387,7 +6709,7 @@ declare namespace SecurityHub {
      */
     RelatedRequirements?: RelatedRequirementsList;
     /**
-     * For findings generated from controls, a list of reasons behind the value of Status. For the list of status reason codes and their meanings, see Standards-related information in the ASFF in the AWS Security Hub User Guide. 
+     * For findings generated from controls, a list of reasons behind the value of Status. For the list of status reason codes and their meanings, see Standards-related information in the ASFF in the Security Hub User Guide. 
      */
     StatusReasons?: StatusReasonsList;
   }
@@ -6469,7 +6791,7 @@ declare namespace SecurityHub {
   }
   export interface CreateMembersResponse {
     /**
-     * The list of AWS accounts that were not processed. For each account, the list includes the account ID and the email address.
+     * The list of Amazon Web Services accounts that were not processed. For each account, the list includes the account ID and the email address.
      */
     UnprocessedAccounts?: ResultList;
   }
@@ -6562,7 +6884,7 @@ declare namespace SecurityHub {
   }
   export interface DeclineInvitationsResponse {
     /**
-     * The list of AWS accounts that were not processed. For each account, the list includes the account ID and the email address.
+     * The list of Amazon Web Services accounts that were not processed. For each account, the list includes the account ID and the email address.
      */
     UnprocessedAccounts?: ResultList;
   }
@@ -6598,7 +6920,7 @@ declare namespace SecurityHub {
   }
   export interface DeleteInvitationsResponse {
     /**
-     * The list of AWS accounts for which the invitations were not deleted. For each account, the list includes the account ID and the email address.
+     * The list of Amazon Web Services accounts for which the invitations were not deleted. For each account, the list includes the account ID and the email address.
      */
     UnprocessedAccounts?: ResultList;
   }
@@ -6610,7 +6932,7 @@ declare namespace SecurityHub {
   }
   export interface DeleteMembersResponse {
     /**
-     * The list of AWS accounts that were not deleted. For each account, the list includes the account ID and the email address.
+     * The list of Amazon Web Services accounts that were not deleted. For each account, the list includes the account ID and the email address.
      */
     UnprocessedAccounts?: ResultList;
   }
@@ -6696,7 +7018,7 @@ declare namespace SecurityHub {
   }
   export interface DescribeStandardsControlsRequest {
     /**
-     * The ARN of a resource that represents your subscription to a supported standard. To get the subscription ARNs of the standards you have enabled, use the  GetEnabledStandards  operation.
+     * The ARN of a resource that represents your subscription to a supported standard. To get the subscription ARNs of the standards you have enabled, use the GetEnabledStandards operation.
      */
     StandardsSubscriptionArn: NonEmptyString;
     /**
@@ -6748,7 +7070,7 @@ declare namespace SecurityHub {
   }
   export interface DisableOrganizationAdminAccountRequest {
     /**
-     * The AWS account identifier of the Security Hub administrator account.
+     * The Amazon Web Services account identifier of the Security Hub administrator account.
      */
     AdminAccountId: NonEmptyString;
   }
@@ -6803,7 +7125,7 @@ declare namespace SecurityHub {
   }
   export interface EnableOrganizationAdminAccountRequest {
     /**
-     * The AWS account identifier of the account to designate as the Security Hub administrator account.
+     * The Amazon Web Services account identifier of the account to designate as the Security Hub administrator account.
      */
     AdminAccountId: NonEmptyString;
   }
@@ -6985,7 +7307,7 @@ declare namespace SecurityHub {
      */
     Members?: MemberList;
     /**
-     * The list of AWS accounts that could not be processed. For each account, the list includes the account ID and the email address.
+     * The list of Amazon Web Services accounts that could not be processed. For each account, the list includes the account ID and the email address.
      */
     UnprocessedAccounts?: ResultList;
   }
@@ -7082,13 +7404,13 @@ declare namespace SecurityHub {
   export type InvitationList = Invitation[];
   export interface InviteMembersRequest {
     /**
-     * The list of account IDs of the AWS accounts to invite to Security Hub as members. 
+     * The list of account IDs of the Amazon Web Services accounts to invite to Security Hub as members. 
      */
     AccountIds: AccountIdList;
   }
   export interface InviteMembersResponse {
     /**
-     * The list of AWS accounts that could not be processed. For each account, the list includes the account ID and the email address.
+     * The list of Amazon Web Services accounts that could not be processed. For each account, the list includes the account ID and the email address.
      */
     UnprocessedAccounts?: ResultList;
   }
@@ -7286,7 +7608,7 @@ declare namespace SecurityHub {
   export type MaxResults = number;
   export interface Member {
     /**
-     * The AWS account ID of the member account.
+     * The Amazon Web Services account ID of the member account.
      */
     AccountId?: AccountId;
     /**
@@ -7294,15 +7616,15 @@ declare namespace SecurityHub {
      */
     Email?: NonEmptyString;
     /**
-     * This is replaced by AdministratorID. The AWS account ID of the Security Hub administrator account associated with this member account.
+     * This is replaced by AdministratorID. The Amazon Web Services account ID of the Security Hub administrator account associated with this member account.
      */
     MasterId?: NonEmptyString;
     /**
-     * The AWS account ID of the Security Hub administrator account associated with this member account.
+     * The Amazon Web Services account ID of the Security Hub administrator account associated with this member account.
      */
     AdministratorId?: NonEmptyString;
     /**
-     * The status of the relationship between the member account and its administrator account.  The status can have one of the following values:    CREATED - Indicates that the administrator account added the member account, but has not yet invited the member account.    INVITED - Indicates that the administrator account invited the member account. The member account has not yet responded to the invitation.    ENABLED - Indicates that the member account is currently active. For manually invited member accounts, indicates that the member account accepted the invitation.    REMOVED - Indicates that the administrator account disassociated the member account.    RESIGNED - Indicates that the member account disassociated themselves from the administrator account.    DELETED - Indicates that the administrator account deleted the member account.  
+     * The status of the relationship between the member account and its administrator account.  The status can have one of the following values:    CREATED - Indicates that the administrator account added the member account, but has not yet invited the member account.    INVITED - Indicates that the administrator account invited the member account. The member account has not yet responded to the invitation.    ENABLED - Indicates that the member account is currently active. For manually invited member accounts, indicates that the member account accepted the invitation.    REMOVED - Indicates that the administrator account disassociated the member account.    RESIGNED - Indicates that the member account disassociated themselves from the administrator account.    DELETED - Indicates that the administrator account deleted the member account.    ACCOUNT_SUSPENDED - Indicates that an organization account was suspended from Amazon Web Services at the same time that the administrator account tried to enable the organization account as a member account.  
      */
     MemberStatus?: NonEmptyString;
     /**
@@ -7659,7 +7981,7 @@ declare namespace SecurityHub {
      */
     IntegrationTypes?: IntegrationTypeList;
     /**
-     * For integrations with AWS services, the AWS Console URL from which to activate the service. For integrations with third-party products, the AWS Marketplace URL from which to subscribe to or purchase the product.
+     * For integrations with Amazon Web Services services, the Amazon Web Services Console URL from which to activate the service. For integrations with third-party products, the Marketplace URL from which to subscribe to or purchase the product.
      */
     MarketplaceUrl?: NonEmptyString;
     /**
@@ -7739,11 +8061,11 @@ declare namespace SecurityHub {
      */
     Id: NonEmptyString;
     /**
-     * The canonical AWS partition name that the Region is assigned to.
+     * The canonical Amazon Web Services partition name that the Region is assigned to.
      */
     Partition?: Partition;
     /**
-     * The canonical AWS external Region name where this resource is located.
+     * The canonical Amazon Web Services external Region name where this resource is located.
      */
     Region?: NonEmptyString;
     /**
@@ -7751,7 +8073,7 @@ declare namespace SecurityHub {
      */
     ResourceRole?: NonEmptyString;
     /**
-     * A list of AWS tags associated with a resource at the time the finding was processed.
+     * A list of Amazon Web Services tags associated with a resource at the time the finding was processed.
      */
     Tags?: FieldMap;
     /**
@@ -7770,7 +8092,7 @@ declare namespace SecurityHub {
      */
     AwsAutoScalingAutoScalingGroup?: AwsAutoScalingAutoScalingGroupDetails;
     /**
-     * Details for an AWS CodeBuild project.
+     * Details for an CodeBuild project.
      */
     AwsCodeBuildProject?: AwsCodeBuildProjectDetails;
     /**
@@ -7782,7 +8104,7 @@ declare namespace SecurityHub {
      */
     AwsEc2Instance?: AwsEc2InstanceDetails;
     /**
-     * Details for an Amazon EC2 network interface.
+     * Details for an EC2 network interface.
      */
     AwsEc2NetworkInterface?: AwsEc2NetworkInterfaceDetails;
     /**
@@ -7802,7 +8124,7 @@ declare namespace SecurityHub {
      */
     AwsEc2Eip?: AwsEc2EipDetails;
     /**
-     * Details about a subnet in EC2.
+     * Details about a subnet in Amazon EC2.
      */
     AwsEc2Subnet?: AwsEc2SubnetDetails;
     /**
@@ -7822,7 +8144,7 @@ declare namespace SecurityHub {
      */
     AwsElasticsearchDomain?: AwsElasticsearchDomainDetails;
     /**
-     * Details about an Amazon S3 bucket related to a finding.
+     * Details about an S3 bucket related to a finding.
      */
     AwsS3Bucket?: AwsS3BucketDetails;
     /**
@@ -7830,7 +8152,7 @@ declare namespace SecurityHub {
      */
     AwsS3AccountPublicAccessBlock?: AwsS3AccountPublicAccessBlockDetails;
     /**
-     * Details about an Amazon S3 object related to a finding.
+     * Details about an S3 object related to a finding.
      */
     AwsS3Object?: AwsS3ObjectDetails;
     /**
@@ -7878,7 +8200,7 @@ declare namespace SecurityHub {
      */
     AwsSsmPatchCompliance?: AwsSsmPatchComplianceDetails;
     /**
-     * Provides details about an AWS Certificate Manager (ACM) certificate.
+     * Provides details about an Certificate Manager certificate.
      */
     AwsCertificateManagerCertificate?: AwsCertificateManagerCertificateDetails;
     /**
@@ -7898,7 +8220,7 @@ declare namespace SecurityHub {
      */
     AwsIamRole?: AwsIamRoleDetails;
     /**
-     * Details about a KMS key.
+     * Details about an KMS key.
      */
     AwsKmsKey?: AwsKmsKeyDetails;
     /**
@@ -7922,7 +8244,7 @@ declare namespace SecurityHub {
      */
     AwsSqsQueue?: AwsSqsQueueDetails;
     /**
-     * Details for a WAF WebACL.
+     * Details for an WAF WebACL.
      */
     AwsWafWebAcl?: AwsWafWebAclDetails;
     /**
@@ -7953,11 +8275,19 @@ declare namespace SecurityHub {
      * Details about a resource that are not available in a type-specific details object. Use the Other object in the following cases.   The type-specific object does not contain all of the fields that you want to populate. In this case, first use the type-specific object to populate those fields. Use the Other object to populate the fields that are missing from the type-specific object.   The resource type does not have a corresponding object. This includes resources for which the type is Other.   
      */
     Other?: FieldMap;
+    /**
+     * Details about an RDS event notification subscription.
+     */
+    AwsRdsEventSubscription?: AwsRdsEventSubscriptionDetails;
+    /**
+     * Details about a service within an ECS cluster.
+     */
+    AwsEcsService?: AwsEcsServiceDetails;
   }
   export type ResourceList = Resource[];
   export interface Result {
     /**
-     * An AWS account ID of the account that was not processed.
+     * An Amazon Web Services account ID of the account that was not processed.
      */
     AccountId?: AccountId;
     /**
@@ -7999,7 +8329,7 @@ declare namespace SecurityHub {
   export type SensitiveDataResultList = SensitiveDataResult[];
   export interface Severity {
     /**
-     * Deprecated. This attribute is being deprecated. Instead of providing Product, provide Original. The native severity as defined by the AWS service or integrated partner product that generated the finding.
+     * Deprecated. This attribute is being deprecated. Instead of providing Product, provide Original. The native severity as defined by the Amazon Web Services service or integrated partner product that generated the finding.
      */
     Product?: Double;
     /**
@@ -8023,7 +8353,7 @@ declare namespace SecurityHub {
      */
     Normalized?: RatioScale;
     /**
-     * The native severity as defined by the AWS service or integrated partner product that generated the finding.
+     * The native severity as defined by the Amazon Web Services service or integrated partner product that generated the finding.
      */
     Product?: Double;
     /**
@@ -8120,7 +8450,7 @@ declare namespace SecurityHub {
      */
     RemediationUrl?: NonEmptyString;
     /**
-     * The severity of findings generated from this security standard control. The finding severity is based on an assessment of how easy it would be to compromise AWS resources if the issue is detected.
+     * The severity of findings generated from this security standard control. The finding severity is based on an assessment of how easy it would be to compromise Amazon Web Services resources if the issue is detected.
      */
     SeverityRating?: SeverityRating;
     /**
@@ -8152,7 +8482,7 @@ declare namespace SecurityHub {
   export type StandardsSubscriptionArns = NonEmptyString[];
   export interface StandardsSubscriptionRequest {
     /**
-     * The ARN of the standard that you want to enable. To view the list of available standards and their ARNs, use the  DescribeStandards  operation.
+     * The ARN of the standard that you want to enable. To view the list of available standards and their ARNs, use the DescribeStandards operation.
      */
     StandardsArn: NonEmptyString;
     /**
@@ -8164,7 +8494,7 @@ declare namespace SecurityHub {
   export type StandardsSubscriptions = StandardsSubscription[];
   export interface StatusReason {
     /**
-     * A code that represents a reason for the control status. For the list of status reason codes and their meanings, see Standards-related information in the ASFF in the AWS Security Hub User Guide. 
+     * A code that represents a reason for the control status. For the list of status reason codes and their meanings, see Standards-related information in the ASFF in the Security Hub User Guide. 
      */
     ReasonCode: NonEmptyString;
     /**
@@ -8381,7 +8711,7 @@ declare namespace SecurityHub {
   }
   export interface WafAction {
     /**
-     * Specifies how you want AWS WAF to respond to requests that match the settings in a rule. Valid settings include the following:    ALLOW - AWS WAF allows requests    BLOCK - AWS WAF blocks requests    COUNT - AWS WAF increments a counter of the requests that match all of the conditions in the rule. AWS WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can't specify COUNT for the default action for a WebACL.  
+     * Specifies how you want WAF to respond to requests that match the settings in a rule. Valid settings include the following:    ALLOW - WAF allows requests    BLOCK - WAF blocks requests    COUNT - WAF increments a counter of the requests that match all of the conditions in the rule. WAF then continues to inspect the web request based on the remaining rules in the web ACL. You can't specify COUNT for the default action for a WebACL.  
      */
     Type?: NonEmptyString;
   }

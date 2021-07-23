@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.952.0-->
+<!--LATEST=2.953.0-->
 <!--ENTRYINSERT-->
+
+## 2.953.0
+* feature: S3Outposts: Add on-premise access type support for endpoints
+* feature: SecurityHub: Added product name, company name, and Region fields for security findings. Added details objects for RDS event subscriptions and AWS ECS services. Added fields to the details for AWS Elasticsearch domains.
 
 ## 2.952.0
 * feature: DataBrew: This SDK release adds two new features: 1) Output to Native JDBC destinations and 2) Adding configurations to profile jobs
