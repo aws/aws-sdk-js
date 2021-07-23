@@ -124,6 +124,7 @@
         'RemoteCredentials',
         'SAMLCredentials',
         'SharedIniFileCredentials',
+        'SingleSignOnCredentials',
         'ProcessCredentials',
         'WebIdentityCredentials'
       ],
@@ -479,6 +480,180 @@
           process.env.HOME = '/home/user';
           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
           new AWS.SharedIniFileCredentials().refresh(function(err) {
+            expect(err.message).to.match(/^Profile default not found/);
+            done();
+          });
+        });
+      });
+    });
+    describe('AWS.SingleSignOnCredentials', function() {
+      var creds, mockSSO;
+      creds = null;
+      beforeEach(function() {
+        creds = new AWS.SingleSignOnCredentials({
+          ssoClient: new AWS.SSO({ region: 'us-east-1' })
+        });
+        mockSSO = function(expireTime) {
+          return helpers.spyOn(creds.service, 'getRoleCredentials').andCallFake(function(_, cb) {
+            return cb(null, {
+              roleCredentials: {
+                accessKeyId: 'akid',
+                secretAccessKey: 'secret',
+                sessionToken: 'session',
+                expiration: expireTime
+              }
+            });
+          });
+        };
+        mockSSO('32503680000');
+      });
+      afterEach(function() {
+        iniLoader.clearCachedFiles();
+      });
+      describe('constructor', function() {
+        return it('can override filename as a constructor argument', function() {
+          var creds;
+          creds = new AWS.SingleSignOnCredentials({
+            filename: '/etc/config'
+          });
+          creds.get(function(err) {
+            expect(creds.filename).to.equal('/etc/config');
+            done();
+          });
+        });
+      });
+      describe('loading', function() {
+        beforeEach(function() {
+          process.env.HOME = '/home/user';
+          var mockConfig, mockToken;
+          mockConfig = {
+            'default': {
+              'sso_start_url': 'https://d-abc123.awsapps.com/start',
+              'sso_account_id': '012345678901',
+              'sso_region': 'us-east-1',
+              'sso_role_name': 'some-role'
+            }
+          };
+          helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn(mockConfig);
+          mockToken = JSON.stringify({
+            startUrl: 'https://d-abc123.awsapps.com/start',
+            region: 'us-east-1',
+            accessToken: 'base64 encoded string',
+            expiresAt: '32503680000'
+          });
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockToken);
+        });
+        afterEach(function() {
+          iniLoader.clearCachedFiles();
+        });
+        it('loads successfully using default profile', function(done) {
+          creds.refresh(function(err) {
+            validateCredentials(creds);
+            expect(creds.expireTime).to.not.be.null;
+            done();
+          });
+        });
+        it('loads successfully using named profile', function(done) {
+          mockConfig = {
+            'foo': {
+              'sso_start_url': 'https://d-abc123.awsapps.com/start',
+              'sso_account_id': '012345678902',
+              'sso_region': 'us-east-1',
+              'sso_role_name': 'some-other-role'
+            }
+          };
+          helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn(mockConfig);
+          creds.profile = 'foo';
+          creds.refresh(function(err) {
+            validateCredentials(creds);
+            expect(creds.expireTime).to.not.be.null;
+            done();
+          });
+        });
+        it('loads successfully while changing region and endpoint', function(done) {
+          expect(creds.service.config.region).to.equal('us-east-1');
+          expect(creds.service.config.endpoint).to.equal('portal.sso.us-east-1.amazonaws.com');
+          mockConfig = {
+            'default': {
+              'sso_start_url': 'https://d-abc123.awsapps.com/start',
+              'sso_account_id': '012345678902',
+              'sso_region': 'cn-north-1',
+              'sso_role_name': 'some-role'
+            }
+          };
+          helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn(mockConfig);
+          mockToken = JSON.stringify({
+            startUrl: 'https://d-abc123.awsapps.com/start',
+            region: 'cn-north-1',
+            accessToken: 'base64 encoded string',
+            expiresAt: '32503680000'
+          });
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockToken);
+          creds.refresh(function(err) {
+            expect(creds.service.config.region).to.equal('cn-north-1');
+            expect(creds.service.config.endpoint).to.equal('portal.sso.cn-north-1.amazonaws.com.cn');
+            done();
+          });
+        });
+        it('throws error if sso config is invalid', function(done) {
+          mockConfig = {
+            'default': {
+              'output': 'json',
+              'region': 'us-east-1'
+            }
+          };
+          helpers.spyOn(AWS.util, 'getProfilesFromSharedConfig').andReturn(mockConfig);
+          creds.refresh(function(err) {
+            expect(err.message).to.match(/^Profile default does not have valid SSO credentials/);
+            expect(creds.accessKeyId).to.be.undefined;
+            done();
+          });
+        });
+        it('throws error if no cached credentials found', function(done) {
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn('');
+          creds.refresh(function(err) {
+            expect(err.message).to.match(/^Cached credentials not found under default profile/);
+            expect(creds.accessKeyId).to.be.undefined;
+            done();
+          });
+        });
+        it('throws error if sso client returns no data', function(done) {
+          helpers.spyOn(creds.service, 'getRoleCredentials').andCallFake(function(_, cb) {
+            return cb(null, {});
+          });
+          creds.refresh(function(err) {
+            expect(err.message).to.eql('Please log in using "aws sso login"');
+            expect(creds.accessKeyId).to.be.undefined;
+            done();
+          });
+        });
+        return it('throws error if sso client returns an error', function(done) {
+          var mockErr;
+          mockErr = 'foo Error';
+          helpers.spyOn(creds.service, 'getRoleCredentials').andCallFake(function(_, cb) {
+            return cb(new Error(mockErr), null);
+          });
+          creds.refresh(function(err) {
+            expect(err.message).to.eql(mockErr);
+            expect(creds.accessKeyId).to.be.undefined;
+            done();
+          });
+        });
+      });
+      describe('refresh', function() {
+        var origEnv = process.env;
+        beforeEach(function() {
+          process.env = {};
+        });
+        afterEach(function() {
+          process.env = origEnv;
+          iniLoader.clearCachedFiles();
+        });
+        return it('fails if config are not in the file', function(done) {
+          var mock = '';
+          process.env.HOME = '/home/user';
+          helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+          new AWS.SingleSignOnCredentials().refresh(function(err) {
             expect(err.message).to.match(/^Profile default not found/);
             done();
           });
