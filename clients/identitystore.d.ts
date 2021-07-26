@@ -48,7 +48,7 @@ declare namespace IdentityStore {
   export type AttributePath = string;
   export interface DescribeGroupRequest {
     /**
-     * The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string which contains number and lower case letters. This value is generated at the time that a new identity store is created.
+     * The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string that contains number and lower case letters. This value is generated at the time that a new identity store is created.
      */
     IdentityStoreId: IdentityStoreId;
     /**
@@ -62,13 +62,13 @@ declare namespace IdentityStore {
      */
     GroupId: ResourceId;
     /**
-     * Contains the group’s display name value. The length limit is 1024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space and non breaking space in this attribute. The characters “&lt;&gt;;:%” are excluded. This value is specified at the time the group is created and stored as an attribute of the group object in the identity store.
+     * Contains the group’s display name value. The length limit is 1,024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space, and nonbreaking space in this attribute. The characters &lt;&gt;;:% are excluded. This value is specified at the time that the group is created and stored as an attribute of the group object in the identity store.
      */
     DisplayName: GroupDisplayName;
   }
   export interface DescribeUserRequest {
     /**
-     * The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string which contains number and lower case letters. This value is generated at the time that a new identity store is created.
+     * The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string that contains number and lower case letters. This value is generated at the time that a new identity store is created.
      */
     IdentityStoreId: IdentityStoreId;
     /**
@@ -78,7 +78,7 @@ declare namespace IdentityStore {
   }
   export interface DescribeUserResponse {
     /**
-     * Contains the user’s username value. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers and punctuation. The characters “&lt;&gt;;:%” are excluded. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.
+     * Contains the user’s user name value. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. The characters &lt;&gt;;:% are excluded. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.
      */
     UserName: UserName;
     /**
@@ -88,7 +88,7 @@ declare namespace IdentityStore {
   }
   export interface Filter {
     /**
-     * The attribute path used to specify which attribute name to search. Length limit is 255 characters. For example, UserName is a valid attribute path for the ListUsers API, and DisplayName is a valid attribute path for the ListGroups API.
+     * The attribute path that is used to specify which attribute name to search. Length limit is 255 characters. For example, UserName is a valid attribute path for the ListUsers API, and DisplayName is a valid attribute path for the ListGroups API.
      */
     AttributePath: AttributePath;
     /**
@@ -103,7 +103,7 @@ declare namespace IdentityStore {
      */
     GroupId: ResourceId;
     /**
-     * Contains the group’s display name value. The length limit is 1024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space and non breaking space in this attribute. The characters “&lt;&gt;;:%” are excluded. This value is specified at the time the group is created and stored as an attribute of the group object in the identity store.
+     * Contains the group’s display name value. The length limit is 1,024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space, and nonbreaking space in this attribute. The characters &lt;&gt;;:% are excluded. This value is specified at the time the group is created and stored as an attribute of the group object in the identity store.
      */
     DisplayName: GroupDisplayName;
   }
@@ -112,15 +112,15 @@ declare namespace IdentityStore {
   export type IdentityStoreId = string;
   export interface ListGroupsRequest {
     /**
-     * The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string which contains number and lower case letters. This value is generated at the time that a new identity store is created.
+     * The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string that contains number and lower case letters. This value is generated at the time that a new identity store is created.
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * The maximum number of results to be returned per request, which is used in the ListUsers and ListGroups request to specify how many results to return in one page. The length limit is 50 characters.
+     * The maximum number of results to be returned per request. This parameter is used in the ListUsers and ListGroups request to specify how many results to return in one page. The length limit is 50 characters.
      */
     MaxResults?: MaxResults;
     /**
-     * The pagination token used for the ListUsers and ListGroups APIs. This value is generated by the identity store service and is returned in the API response if the total results are more than the size of one page, and when this token is used in the API request to search for the next page.
+     * The pagination token used for the ListUsers and ListGroups API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.
      */
     NextToken?: NextToken;
     /**
@@ -134,21 +134,21 @@ declare namespace IdentityStore {
      */
     Groups: Groups;
     /**
-     * The pagination token used for the ListUsers and ListGroups APIs. This value is generated by the identity store service and is returned in the API response if the total results are more than the size of one page, and when this token is used in the API request to search for the next page.
+     * The pagination token used for the ListUsers and ListGroups API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it1 is used in the API request to search for the next page.
      */
     NextToken?: NextToken;
   }
   export interface ListUsersRequest {
     /**
-     * The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string which contains number and lower case letters. This value is generated at the time that a new identity store is created.
+     * The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string that contains number and lower case letters. This value is generated at the time that a new identity store is created.
      */
     IdentityStoreId: IdentityStoreId;
     /**
-     * The maximum number of results to be returned per request, which is used in the ListUsers and ListGroups request to specify how many results to return in one page. The length limit is 50 characters.
+     * The maximum number of results to be returned per request. This parameter is used in the ListUsers and ListGroups request to specify how many results to return in one page. The length limit is 50 characters.
      */
     MaxResults?: MaxResults;
     /**
-     * The pagination token used for the ListUsers and ListGroups APIs. This value is generated by the identity store service and is returned in the API response if the total results are more than the size of one page, and when this token is used in the API request to search for the next page.
+     * The pagination token used for the ListUsers and ListGroups API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.
      */
     NextToken?: NextToken;
     /**
@@ -162,7 +162,7 @@ declare namespace IdentityStore {
      */
     Users: Users;
     /**
-     * The pagination token used for the ListUsers and ListGroups APIs. This value is generated by the identity store service and is returned in the API response if the total results are more than the size of one page, and when this token is used in the API request to search for the next page.
+     * The pagination token used for the ListUsers and ListGroups API operations. This value is generated by the identity store service. It is returned in the API response if the total results are more than the size of one page. This token is also returned when it is used in the API request to search for the next page.
      */
     NextToken?: NextToken;
   }
@@ -172,7 +172,7 @@ declare namespace IdentityStore {
   export type SensitiveStringType = string;
   export interface User {
     /**
-     * Contains the user’s username value. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers and punctuation. The characters “&lt;&gt;;:%” are excluded. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.
+     * Contains the user’s user name value. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers, and punctuation. The characters &lt;&gt;;:% are excluded. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.
      */
     UserName: UserName;
     /**

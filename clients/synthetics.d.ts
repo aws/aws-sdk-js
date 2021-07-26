@@ -92,11 +92,11 @@ declare class Synthetics extends Service {
    */
   stopCanary(callback?: (err: AWSError, data: Synthetics.Types.StopCanaryResponse) => void): Request<Synthetics.Types.StopCanaryResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified canary.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary.
+   * Assigns one or more tags (key-value pairs) to the specified canary.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary.
    */
   tagResource(params: Synthetics.Types.TagResourceRequest, callback?: (err: AWSError, data: Synthetics.Types.TagResourceResponse) => void): Request<Synthetics.Types.TagResourceResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified canary.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary.
+   * Assigns one or more tags (key-value pairs) to the specified canary.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary.
    */
   tagResource(callback?: (err: AWSError, data: Synthetics.Types.TagResourceResponse) => void): Request<Synthetics.Types.TagResourceResponse, AWSError>;
   /**
@@ -117,6 +117,13 @@ declare class Synthetics extends Service {
   updateCanary(callback?: (err: AWSError, data: Synthetics.Types.UpdateCanaryResponse) => void): Request<Synthetics.Types.UpdateCanaryResponse, AWSError>;
 }
 declare namespace Synthetics {
+  export interface BaseScreenshot {
+    ScreenshotName: String;
+    IgnoreCoordinates?: BaseScreenshotIgnoreCoordinates;
+  }
+  export type BaseScreenshotConfigIgnoreCoordinate = string;
+  export type BaseScreenshotIgnoreCoordinates = BaseScreenshotConfigIgnoreCoordinate[];
+  export type BaseScreenshots = BaseScreenshot[];
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Canaries = Canary[];
   export type CanariesLastRun = CanaryLastRun[];
@@ -168,6 +175,7 @@ declare namespace Synthetics {
      */
     RuntimeVersion?: String;
     VpcConfig?: VpcConfigOutput;
+    VisualReference?: VisualReferenceOutput;
     /**
      * The list of key-value pairs that are associated with the canary.
      */
@@ -176,7 +184,7 @@ declare namespace Synthetics {
   export type CanaryArn = string;
   export interface CanaryCodeInput {
     /**
-     * If your canary script is located in S3, specify the full bucket name here. The bucket must already exist. Specify the full bucket name, including s3:// as the start of the bucket name.
+     * If your canary script is located in S3, specify the bucket name here. Do not include s3:// as the start of the bucket name.
      */
     S3Bucket?: String;
     /**
@@ -188,11 +196,11 @@ declare namespace Synthetics {
      */
     S3Version?: String;
     /**
-     * If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the .zip file that contains the script. It can be up to 5 MB.
+     * If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It can be up to 5 MB.
      */
     ZipFile?: _Blob;
     /**
-     * The entry point to use for the source code when running the canary. This value must end with the string .handler.
+     * The entry point to use for the source code when running the canary. This value must end with the string .handler. The string is limited to 29 characters or fewer.
      */
     Handler: String;
   }
@@ -249,7 +257,7 @@ declare namespace Synthetics {
      */
     MemoryInMB?: MaxSize3008;
     /**
-     * Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see  Canaries and X-Ray tracing. You can enable active tracing only for canaries that use version syn-nodejs-2.0 or later for their canary runtime.
+     * Specifies whether this canary is to use active X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-Ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see  Canaries and X-Ray tracing. You can enable active tracing only for canaries that use version syn-nodejs-2.0 or later for their canary runtime.
      */
     ActiveTracing?: NullableBoolean;
     /**
@@ -267,7 +275,7 @@ declare namespace Synthetics {
      */
     MemoryInMB?: MaxSize3008;
     /**
-     * Displays whether this canary run used active AWS X-Ray tracing. 
+     * Displays whether this canary run used active X-Ray tracing. 
      */
     ActiveTracing?: NullableBoolean;
   }
@@ -300,7 +308,7 @@ declare namespace Synthetics {
   export type CanaryRuns = CanaryRun[];
   export interface CanaryScheduleInput {
     /**
-     * A rate expression that defines how often the canary is to run. The syntax is rate(number unit). unit can be minute, minutes, or hour.  For example, rate(1 minute) runs the canary once a minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs it once every hour. You can specify a frequency between rate(1 minute) and rate(1 hour). Specifying rate(0 minute) or rate(0 hour) is a special value that causes the canary to run only once when it is started.
+     * A rate expression or a cron expression that defines how often the canary is to run. For a rate expression, The syntax is rate(number unit). unit can be minute, minutes, or hour.  For example, rate(1 minute) runs the canary once a minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs it once every hour. You can specify a frequency between rate(1 minute) and rate(1 hour). Specifying rate(0 minute) or rate(0 hour) is a special value that causes the canary to run only once when it is started. Use cron(expression) to specify a cron expression. You can't schedule a canary to wait for more than a year before running. For information about the syntax for cron expressions, see  Scheduling canary runs using cron.
      */
     Expression: String;
     /**
@@ -310,7 +318,7 @@ declare namespace Synthetics {
   }
   export interface CanaryScheduleOutput {
     /**
-     * A rate expression that defines how often the canary is to run. The syntax is rate(number unit). unit can be minute, minutes, or hour.  For example, rate(1 minute) runs the canary once a minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs it once every hour. Specifying rate(0 minute) or rate(0 hour) is a special value that causes the canary to run only once when it is started.
+     * A rate expression or a cron expression that defines how often the canary is to run. For a rate expression, The syntax is rate(number unit). unit can be minute, minutes, or hour.  For example, rate(1 minute) runs the canary once a minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs it once every hour. You can specify a frequency between rate(1 minute) and rate(1 hour). Specifying rate(0 minute) or rate(0 hour) is a special value that causes the canary to run only once when it is started. Use cron(expression) to specify a cron expression. For information about the syntax for cron expressions, see  Scheduling canary runs using cron.
      */
     Expression?: String;
     /**
@@ -362,7 +370,7 @@ declare namespace Synthetics {
      */
     Code: CanaryCodeInput;
     /**
-     * The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files.
+     * The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files. The name of the S3 bucket can't include a period (.).
      */
     ArtifactS3Location: String;
     /**
@@ -640,8 +648,17 @@ declare namespace Synthetics {
      * If this canary is to test an endpoint in a VPC, this structure contains information about the subnet and security groups of the VPC endpoint. For more information, see  Running a Canary in a VPC.
      */
     VpcConfig?: VpcConfigInput;
+    VisualReference?: VisualReferenceInput;
   }
   export interface UpdateCanaryResponse {
+  }
+  export interface VisualReferenceInput {
+    BaseScreenshots?: BaseScreenshots;
+    BaseCanaryRunId: String;
+  }
+  export interface VisualReferenceOutput {
+    BaseScreenshots?: BaseScreenshots;
+    BaseCanaryRunId?: String;
   }
   export interface VpcConfigInput {
     /**

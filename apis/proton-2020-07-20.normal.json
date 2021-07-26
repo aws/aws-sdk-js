@@ -45,7 +45,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>In a management account, an environment account connection request is accepted. When the environment account connection request is accepted, AWS Proton can use the associated IAM role to provision environment infrastructure resources in the associated environment account.</p> <p>For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>",
+      "documentation": "<p>In a management account, an environment account connection request is accepted. When the environment account connection request is accepted, AWS Proton can use the associated IAM role to provision environment infrastructure resources in the associated environment account.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>",
       "idempotent": true
     },
     "CancelEnvironmentDeployment": {
@@ -220,7 +220,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Create an environment account connection in an environment account so that environment infrastructure resources can be provisioned in the environment account from a management account.</p> <p>An environment account connection is a secure bi-directional connection between a <i>management account</i> and an <i>environment account</i> that maintains authorization and permissions. For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>",
+      "documentation": "<p>Create an environment account connection in an environment account so that environment infrastructure resources can be provisioned in the environment account from a management account.</p> <p>An environment account connection is a secure bi-directional connection between a <i>management account</i> and an <i>environment account</i> that maintains authorization and permissions. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>",
       "idempotent": true
     },
     "CreateEnvironmentTemplate": {
@@ -474,7 +474,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>In an environment account, delete an environment account connection.</p> <p>After you delete an environment account connection that’s in use by an AWS Proton environment, AWS Proton <i>can’t</i> manage the environment infrastructure resources until a new environment account connection is accepted for the environment account and associated environment. You're responsible for cleaning up provisioned resources that remain without an environment connection.</p> <p>For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>",
+      "documentation": "<p>In an environment account, delete an environment account connection.</p> <p>After you delete an environment account connection that’s in use by an AWS Proton environment, AWS Proton <i>can’t</i> manage the environment infrastructure resources until a new environment account connection is accepted for the environment account and associated environment. You're responsible for cleaning up provisioned resources that remain without an environment connection.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>",
       "idempotent": true
     },
     "DeleteEnvironmentTemplate": {
@@ -743,7 +743,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>In an environment account, view the detail data for an environment account connection.</p> <p>For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>"
+      "documentation": "<p>In an environment account, view the detail data for an environment account connection.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>"
     },
     "GetEnvironmentTemplate": {
       "name": "GetEnvironmentTemplate",
@@ -957,7 +957,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>View a list of environment account connections.</p> <p>For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>"
+      "documentation": "<p>View a list of environment account connections.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>"
     },
     "ListEnvironmentTemplateVersions": {
       "name": "ListEnvironmentTemplateVersions",
@@ -1230,7 +1230,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>In a management account, reject an environment account connection from another environment account.</p> <p>After you reject an environment account connection request, you <i>won’t</i> be able to accept or use the rejected environment account connection.</p> <p>You <i>can’t</i> reject an environment account connection that is connected to an environment.</p> <p>For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>",
+      "documentation": "<p>In a management account, reject an environment account connection from another environment account.</p> <p>After you reject an environment account connection request, you <i>won’t</i> be able to accept or use the rejected environment account connection.</p> <p>You <i>can’t</i> reject an environment account connection that is connected to an environment.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>",
       "idempotent": true
     },
     "TagResource": {
@@ -1400,7 +1400,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>In an environment account, update an environment account connection to use a new IAM role.</p> <p>For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>",
+      "documentation": "<p>In an environment account, update an environment account connection to use a new IAM role.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>",
       "idempotent": true
     },
     "UpdateEnvironmentTemplate": {
@@ -1876,7 +1876,7 @@
         },
         "environmentAccountConnectionId": {
           "shape": "EnvironmentAccountConnectionId",
-          "documentation": "<p>The ID of the environment account connection that you provide if you're provisioning your environment infrastructure resources to an environment account. You must include either the <code>environmentAccountConnectionId</code> or <code>protonServiceRoleArn</code> parameter and value. For more information, see <a href=\"proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>"
+          "documentation": "<p>The ID of the environment account connection that you provide if you're provisioning your environment infrastructure resources to an environment account. You must include either the <code>environmentAccountConnectionId</code> or <code>protonServiceRoleArn</code> parameter and value. For more information, see <a href=\"https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html\">Environment account connections</a> in the <i>AWS Proton Administrator guide</i>.</p>"
         },
         "name": {
           "shape": "ResourceName",

@@ -20,6 +20,14 @@ declare class Textract extends Service {
    */
   analyzeDocument(callback?: (err: AWSError, data: Textract.Types.AnalyzeDocumentResponse) => void): Request<Textract.Types.AnalyzeDocumentResponse, AWSError>;
   /**
+   * Analyzes an input document for financially related relationships between text. Information is returned as ExpenseDocuments and seperated as follows.    LineItemGroups- A data set containing LineItems which store information about the lines of text, such as an item purchased and its price on a receipt.    SummaryFields- Contains all other information a receipt, such as header information or the vendors name.  
+   */
+  analyzeExpense(params: Textract.Types.AnalyzeExpenseRequest, callback?: (err: AWSError, data: Textract.Types.AnalyzeExpenseResponse) => void): Request<Textract.Types.AnalyzeExpenseResponse, AWSError>;
+  /**
+   * Analyzes an input document for financially related relationships between text. Information is returned as ExpenseDocuments and seperated as follows.    LineItemGroups- A data set containing LineItems which store information about the lines of text, such as an item purchased and its price on a receipt.    SummaryFields- Contains all other information a receipt, such as header information or the vendors name.  
+   */
+  analyzeExpense(callback?: (err: AWSError, data: Textract.Types.AnalyzeExpenseResponse) => void): Request<Textract.Types.AnalyzeExpenseResponse, AWSError>;
+  /**
    * Detects text in the input document. Amazon Textract can detect lines of text and the words that make up a line of text. The input document must be an image in JPEG or PNG format. DetectDocumentText returns the detected text in an array of Block objects.  Each document page has as an associated Block of type PAGE. Each PAGE Block object is the parent of LINE Block objects that represent the lines of detected text on a page. A LINE Block object is a parent for each word that makes up the line. Words are represented by Block objects of type WORD.  DetectDocumentText is a synchronous operation. To analyze documents asynchronously, use StartDocumentTextDetection. For more information, see Document Text Detection.
    */
   detectDocumentText(params: Textract.Types.DetectDocumentTextRequest, callback?: (err: AWSError, data: Textract.Types.DetectDocumentTextResponse) => void): Request<Textract.Types.DetectDocumentTextResponse, AWSError>;
@@ -92,6 +100,16 @@ declare namespace Textract {
      * The version of the model used to analyze the document.
      */
     AnalyzeDocumentModelVersion?: String;
+  }
+  export interface AnalyzeExpenseRequest {
+    Document: Document;
+  }
+  export interface AnalyzeExpenseResponse {
+    DocumentMetadata?: DocumentMetadata;
+    /**
+     * The expenses detected by Amazon Textract.
+     */
+    ExpenseDocuments?: ExpenseDocumentList;
   }
   export interface Block {
     /**
@@ -219,6 +237,61 @@ declare namespace Textract {
   export type EntityType = "KEY"|"VALUE"|string;
   export type EntityTypes = EntityType[];
   export type ErrorCode = string;
+  export interface ExpenseDetection {
+    /**
+     * The word or line of text recognized by Amazon Textract
+     */
+    Text?: String;
+    Geometry?: Geometry;
+    /**
+     * The confidence in detection, as a percentage
+     */
+    Confidence?: Percent;
+  }
+  export interface ExpenseDocument {
+    /**
+     * Denotes which invoice or receipt in the document the information is coming from. First document will be 1, the second 2, and so on.
+     */
+    ExpenseIndex?: UInteger;
+    /**
+     * Any information found outside of a table by Amazon Textract.
+     */
+    SummaryFields?: ExpenseFieldList;
+    /**
+     * Information detected on each table of a document, seperated into LineItems.
+     */
+    LineItemGroups?: LineItemGroupList;
+  }
+  export type ExpenseDocumentList = ExpenseDocument[];
+  export interface ExpenseField {
+    /**
+     * The implied label of a detected element. Present alongside LabelDetection for explicit elements.
+     */
+    Type?: ExpenseType;
+    /**
+     * The explicitly stated label of a detected element.
+     */
+    LabelDetection?: ExpenseDetection;
+    /**
+     * The value of a detected element. Present in explicit and implicit elements.
+     */
+    ValueDetection?: ExpenseDetection;
+    /**
+     * The page number the value was detected on.
+     */
+    PageNumber?: UInteger;
+  }
+  export type ExpenseFieldList = ExpenseField[];
+  export interface ExpenseType {
+    /**
+     * The word or line of text detected by Amazon Textract.
+     */
+    Text?: String;
+    /**
+     * The confidence of accuracy, as a percentage.
+     */
+    Confidence?: Percent;
+  }
   export type FeatureType = "TABLES"|"FORMS"|string;
   export type FeatureTypes = FeatureType[];
   export type Float = number;
@@ -366,6 +439,24 @@ declare namespace Textract {
   export type JobStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"PARTIAL_SUCCESS"|string;
   export type JobTag = string;
   export type KMSKeyId = string;
+  export interface LineItemFields {
+    /**
+     * ExpenseFields used to show information from detected lines on a table.
+     */
+    LineItemExpenseFields?: ExpenseFieldList;
+  }
+  export interface LineItemGroup {
+    /**
+     * The number used to identify a specific table in a document. The first table encountered will have a LineItemGroupIndex of 1, the second 2, etc.
+     */
+    LineItemGroupIndex?: UInteger;
+    /**
+     * The breakdown of information on a particular line of a table. 
+     */
+    LineItems?: LineItemList;
+  }
+  export type LineItemGroupList = LineItemGroup[];
+  export type LineItemList = LineItemFields[];
   export type MaxResults = number;
   export type NonEmptyString = string;
   export interface NotificationChannel {
@@ -418,7 +509,7 @@ declare namespace Textract {
   export type S3Bucket = string;
   export interface S3Object {
     /**
-     * The name of the S3 bucket.
+     * The name of the S3 bucket. Note that the # character is not valid in the file name.
      */
     Bucket?: S3Bucket;
     /**

@@ -433,6 +433,10 @@ declare namespace S3Control {
      * The ARN for the access point.
      */
     AccessPointArn?: S3AccessPointArn;
+    /**
+     * The name or alias of the access point.
+     */
+    Alias?: Alias;
   }
   export type AccessPointList = AccessPoint[];
   export type AccessPointName = string;
@@ -453,6 +457,7 @@ declare namespace S3Control {
      */
     IsEnabled?: IsEnabled;
   }
+  export type Alias = string;
   export interface AwsLambdaTransformation {
     /**
      * The Amazon Resource Name (ARN) of the Lambda function.
@@ -531,6 +536,10 @@ declare namespace S3Control {
      * The ARN of the access point.  This is only supported by Amazon S3 on Outposts. 
      */
     AccessPointArn?: S3AccessPointArn;
+    /**
+     * The name or alias of the access point.
+     */
+    Alias?: Alias;
   }
   export interface CreateBucketConfiguration {
     /**
@@ -778,6 +787,7 @@ declare namespace S3Control {
      */
     Job?: JobDescriptor;
   }
+  export type Endpoints = {[key: string]: NonEmptyMaxLength1024String};
   export interface Exclude {
     /**
      * A container for the S3 Storage Lens bucket excludes.
@@ -925,6 +935,18 @@ declare namespace S3Control {
      * The date and time when the specified access point was created.
      */
     CreationDate?: CreationDate;
+    /**
+     * The name or alias of the access point.
+     */
+    Alias?: Alias;
+    /**
+     * The ARN of the access point.
+     */
+    AccessPointArn?: S3AccessPointArn;
+    /**
+     * The VPC endpoint for the access point.
+     */
+    Endpoints?: Endpoints;
   }
   export interface GetBucketLifecycleConfigurationRequest {
     /**

@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "CloudWatch",
+        "description": "SDK update to support creation of Cross-Account Metric Alarms and update API documentation."
+    },
+    {
+        "type": "feature",
+        "category": "S3Control",
+        "description": "S3 Access Point aliases can be used anywhere you use S3 bucket names to access data in S3"
+    },
+    {
+        "type": "feature",
+        "category": "Synthetics",
+        "description": "CloudWatch Synthetics now supports visual testing in its canaries."
+    },
+    {
+        "type": "feature",
+        "category": "Textract",
+        "description": "Adds support for AnalyzeExpense, a new API to extract relevant data such as contact information, items purchased, and vendor name, from almost any invoice or receipt without the need for any templates or configuration."
+    }
+]

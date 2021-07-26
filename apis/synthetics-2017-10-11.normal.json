@@ -280,7 +280,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Assigns one or more tags (key-value pairs) to the specified canary. </p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a canary.</p>"
+      "documentation": "<p>Assigns one or more tags (key-value pairs) to the specified canary. </p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values.</p> <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p> <p>You can use the <code>TagResource</code> action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag.</p> <p>You can associate as many as 50 tags with a canary.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -337,6 +337,38 @@
     }
   },
   "shapes": {
+    "BaseScreenshot": {
+      "type": "structure",
+      "required": [
+        "ScreenshotName"
+      ],
+      "members": {
+        "ScreenshotName": {
+          "shape": "String"
+        },
+        "IgnoreCoordinates": {
+          "shape": "BaseScreenshotIgnoreCoordinates"
+        }
+      }
+    },
+    "BaseScreenshotConfigIgnoreCoordinate": {
+      "type": "string",
+      "pattern": "^(-?\\d{1,5}\\.?\\d{0,2},){3}(-?\\d{1,5}\\.?\\d{0,2}){1}$"
+    },
+    "BaseScreenshotIgnoreCoordinates": {
+      "type": "list",
+      "member": {
+        "shape": "BaseScreenshotConfigIgnoreCoordinate"
+      },
+      "max": 20,
+      "min": 0
+    },
+    "BaseScreenshots": {
+      "type": "list",
+      "member": {
+        "shape": "BaseScreenshot"
+      }
+    },
     "Blob": {
       "type": "blob",
       "max": 10000000,
@@ -410,6 +442,9 @@
         "VpcConfig": {
           "shape": "VpcConfigOutput"
         },
+        "VisualReference": {
+          "shape": "VisualReferenceOutput"
+        },
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The list of key-value pairs that are associated with the canary.</p>"
@@ -431,7 +466,7 @@
       "members": {
         "S3Bucket": {
           "shape": "String",
-          "documentation": "<p>If your canary script is located in S3, specify the full bucket name here. The bucket must already exist. Specify the full bucket name, including <code>s3://</code> as the start of the bucket name.</p>"
+          "documentation": "<p>If your canary script is located in S3, specify the bucket name here. Do not include <code>s3://</code> as the start of the bucket name.</p>"
         },
         "S3Key": {
           "shape": "String",
@@ -443,11 +478,11 @@
         },
         "ZipFile": {
           "shape": "Blob",
-          "documentation": "<p>If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the .zip file that contains the script. It can be up to 5 MB.</p>"
+          "documentation": "<p>If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It can be up to 5 MB.</p>"
         },
         "Handler": {
           "shape": "String",
-          "documentation": "<p>The entry point to use for the source code when running the canary. This value must end with the string <code>.handler</code>.</p>"
+          "documentation": "<p>The entry point to use for the source code when running the canary. This value must end with the string <code>.handler</code>. The string is limited to 29 characters or fewer.</p>"
         }
       },
       "documentation": "<p>Use this structure to input your script code for the canary. This structure contains the Lambda handler with the location where the canary should start running the script. If the script is stored in an S3 bucket, the bucket name, key, and version are also included. If the script was passed into the canary directly, the script code is contained in the value of <code>Zipfile</code>. </p>"
@@ -525,7 +560,7 @@
         },
         "ActiveTracing": {
           "shape": "NullableBoolean",
-          "documentation": "<p>Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html\"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>"
+          "documentation": "<p>Specifies whether this canary is to use active X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-Ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html\"> Canaries and X-Ray tracing</a>.</p> <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> or later for their canary runtime.</p>"
         },
         "EnvironmentVariables": {
           "shape": "EnvironmentVariablesMap",
@@ -547,7 +582,7 @@
         },
         "ActiveTracing": {
           "shape": "NullableBoolean",
-          "documentation": "<p>Displays whether this canary run used active AWS X-Ray tracing. </p>"
+          "documentation": "<p>Displays whether this canary run used active X-Ray tracing. </p>"
         }
       },
       "documentation": "<p>A structure that contains information about a canary run.</p>"
@@ -613,7 +648,7 @@
       "members": {
         "Expression": {
           "shape": "String",
-          "documentation": "<p>A rate expression that defines how often the canary is to run. The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p>"
+          "documentation": "<p>A <code>rate</code> expression or a <code>cron</code> expression that defines how often the canary is to run.</p> <p>For a rate expression, The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p> <p>Use <code>cron(<i>expression</i>)</code> to specify a cron expression. You can't schedule a canary to wait for more than a year before running. For information about the syntax for cron expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html\"> Scheduling canary runs using cron</a>.</p>"
         },
         "DurationInSeconds": {
           "shape": "MaxOneYearInSeconds",
@@ -627,7 +662,7 @@
       "members": {
         "Expression": {
           "shape": "String",
-          "documentation": "<p>A rate expression that defines how often the canary is to run. The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p>"
+          "documentation": "<p>A <code>rate</code> expression or a <code>cron</code> expression that defines how often the canary is to run.</p> <p>For a rate expression, The syntax is <code>rate(<i>number unit</i>)</code>. <i>unit</i> can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p> <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every 10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p> <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value that causes the canary to run only once when it is started.</p> <p>Use <code>cron(<i>expression</i>)</code> to specify a cron expression. For information about the syntax for cron expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html\"> Scheduling canary runs using cron</a>.</p>"
         },
         "DurationInSeconds": {
           "shape": "MaxOneYearInSeconds",
@@ -717,7 +752,7 @@
         },
         "ArtifactS3Location": {
           "shape": "String",
-          "documentation": "<p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files.</p>"
+          "documentation": "<p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files. The name of the S3 bucket can't include a period (.).</p>"
         },
         "ExecutionRoleArn": {
           "shape": "RoleArn",
@@ -1223,12 +1258,40 @@
         "VpcConfig": {
           "shape": "VpcConfigInput",
           "documentation": "<p>If this canary is to test an endpoint in a VPC, this structure contains information about the subnet and security groups of the VPC endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html\"> Running a Canary in a VPC</a>.</p>"
+        },
+        "VisualReference": {
+          "shape": "VisualReferenceInput"
         }
       }
     },
     "UpdateCanaryResponse": {
       "type": "structure",
       "members": {}
+    },
+    "VisualReferenceInput": {
+      "type": "structure",
+      "required": [
+        "BaseCanaryRunId"
+      ],
+      "members": {
+        "BaseScreenshots": {
+          "shape": "BaseScreenshots"
+        },
+        "BaseCanaryRunId": {
+          "shape": "String"
+        }
+      }
+    },
+    "VisualReferenceOutput": {
+      "type": "structure",
+      "members": {
+        "BaseScreenshots": {
+          "shape": "BaseScreenshots"
+        },
+        "BaseCanaryRunId": {
+          "shape": "String"
+        }
+      }
     },
     "VpcConfigInput": {
       "type": "structure",

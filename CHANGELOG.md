@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.953.0-->
+<!--LATEST=2.954.0-->
 <!--ENTRYINSERT-->
+
+## 2.954.0
+* feature: CloudWatch: SDK update to support creation of Cross-Account Metric Alarms and update API documentation.
+* feature: S3Control: S3 Access Point aliases can be used anywhere you use S3 bucket names to access data in S3
+* feature: Synthetics: CloudWatch Synthetics now supports visual testing in its canaries.
+* feature: Textract: Adds support for AnalyzeExpense, a new API to extract relevant data such as contact information, items purchased, and vendor name, from almost any invoice or receipt without the need for any templates or configuration.
 
 ## 2.953.0
 * feature: S3Outposts: Add on-premise access type support for endpoints

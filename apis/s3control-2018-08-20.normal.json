@@ -990,6 +990,10 @@
         "AccessPointArn": {
           "shape": "S3AccessPointArn",
           "documentation": "<p>The ARN for the access point.</p>"
+        },
+        "Alias": {
+          "shape": "Alias",
+          "documentation": "<p>The name or alias of the access point.</p>"
         }
       },
       "documentation": "<p>An access point used to access a bucket.</p>"
@@ -1003,7 +1007,7 @@
     },
     "AccessPointName": {
       "type": "string",
-      "max": 50,
+      "max": 63,
       "min": 3
     },
     "AccountId": {
@@ -1037,6 +1041,11 @@
         }
       },
       "documentation": "<p>A container for the activity metrics.</p>"
+    },
+    "Alias": {
+      "type": "string",
+      "max": 63,
+      "pattern": "^[0-9a-z\\\\-]{63}"
     },
     "AwsLambdaTransformation": {
       "type": "structure",
@@ -1210,6 +1219,10 @@
         "AccessPointArn": {
           "shape": "S3AccessPointArn",
           "documentation": "<p>The ARN of the access point.</p> <note> <p>This is only supported by Amazon S3 on Outposts.</p> </note>"
+        },
+        "Alias": {
+          "shape": "Alias",
+          "documentation": "<p>The name or alias of the access point.</p>"
         }
       }
     },
@@ -1686,6 +1699,15 @@
         }
       }
     },
+    "Endpoints": {
+      "type": "map",
+      "key": {
+        "shape": "NonEmptyMaxLength64String"
+      },
+      "value": {
+        "shape": "NonEmptyMaxLength1024String"
+      }
+    },
     "Exclude": {
       "type": "structure",
       "members": {
@@ -1963,6 +1985,18 @@
         "CreationDate": {
           "shape": "CreationDate",
           "documentation": "<p>The date and time when the specified access point was created.</p>"
+        },
+        "Alias": {
+          "shape": "Alias",
+          "documentation": "<p>The name or alias of the access point.</p>"
+        },
+        "AccessPointArn": {
+          "shape": "S3AccessPointArn",
+          "documentation": "<p>The ARN of the access point.</p>"
+        },
+        "Endpoints": {
+          "shape": "Endpoints",
+          "documentation": "<p>The VPC endpoint for the access point.</p>"
         }
       }
     },
