@@ -269,3 +269,6 @@ export import SSMIncidents = require('./ssmincidents');
 export import ApplicationCostProfiler = require('./applicationcostprofiler');
 export import AppRunner = require('./apprunner');
 export import Proton = require('./proton');
+export import Route53RecoveryCluster = require('./route53recoverycluster');
+export import Route53RecoveryControlConfig = require('./route53recoverycontrolconfig');
+export import Route53RecoveryReadiness = require('./route53recoveryreadiness');

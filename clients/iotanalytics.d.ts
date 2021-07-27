@@ -28,35 +28,35 @@ declare class IoTAnalytics extends Service {
    */
   cancelPipelineReprocessing(callback?: (err: AWSError, data: IoTAnalytics.Types.CancelPipelineReprocessingResponse) => void): Request<IoTAnalytics.Types.CancelPipelineReprocessingResponse, AWSError>;
   /**
-   * Creates a channel. A channel collects data from an MQTT topic and archives the raw, unprocessed messages before publishing the data to a pipeline.
+   * Used to create a channel. A channel collects data from an MQTT topic and archives the raw, unprocessed messages before publishing the data to a pipeline.
    */
   createChannel(params: IoTAnalytics.Types.CreateChannelRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateChannelResponse) => void): Request<IoTAnalytics.Types.CreateChannelResponse, AWSError>;
   /**
-   * Creates a channel. A channel collects data from an MQTT topic and archives the raw, unprocessed messages before publishing the data to a pipeline.
+   * Used to create a channel. A channel collects data from an MQTT topic and archives the raw, unprocessed messages before publishing the data to a pipeline.
    */
   createChannel(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateChannelResponse) => void): Request<IoTAnalytics.Types.CreateChannelResponse, AWSError>;
   /**
-   * Creates a dataset. A dataset stores data retrieved from a data store by applying a queryAction (a SQL query) or a containerAction (executing a containerized application). This operation creates the skeleton of a dataset. The dataset can be populated manually by calling CreateDatasetContent or automatically according to a trigger you specify.
+   * Used to create a dataset. A dataset stores data retrieved from a data store by applying a queryAction (a SQL query) or a containerAction (executing a containerized application). This operation creates the skeleton of a dataset. The dataset can be populated manually by calling CreateDatasetContent or automatically according to a trigger you specify.
    */
   createDataset(params: IoTAnalytics.Types.CreateDatasetRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetResponse) => void): Request<IoTAnalytics.Types.CreateDatasetResponse, AWSError>;
   /**
-   * Creates a dataset. A dataset stores data retrieved from a data store by applying a queryAction (a SQL query) or a containerAction (executing a containerized application). This operation creates the skeleton of a dataset. The dataset can be populated manually by calling CreateDatasetContent or automatically according to a trigger you specify.
+   * Used to create a dataset. A dataset stores data retrieved from a data store by applying a queryAction (a SQL query) or a containerAction (executing a containerized application). This operation creates the skeleton of a dataset. The dataset can be populated manually by calling CreateDatasetContent or automatically according to a trigger you specify.
    */
   createDataset(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetResponse) => void): Request<IoTAnalytics.Types.CreateDatasetResponse, AWSError>;
   /**
-   * Creates the content of a data set by applying a queryAction (a SQL query) or a containerAction (executing a containerized application).
+   * Creates the content of a dataset by applying a queryAction (a SQL query) or a containerAction (executing a containerized application).
    */
   createDatasetContent(params: IoTAnalytics.Types.CreateDatasetContentRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetContentResponse) => void): Request<IoTAnalytics.Types.CreateDatasetContentResponse, AWSError>;
   /**
-   * Creates the content of a data set by applying a queryAction (a SQL query) or a containerAction (executing a containerized application).
+   * Creates the content of a dataset by applying a queryAction (a SQL query) or a containerAction (executing a containerized application).
    */
   createDatasetContent(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatasetContentResponse) => void): Request<IoTAnalytics.Types.CreateDatasetContentResponse, AWSError>;
   /**
-   * Creates a data store, which is a repository for messages. Only data stores that are used to save pipeline data can be configured with ParquetConfiguration.
+   * Creates a data store, which is a repository for messages.
    */
   createDatastore(params: IoTAnalytics.Types.CreateDatastoreRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatastoreResponse) => void): Request<IoTAnalytics.Types.CreateDatastoreResponse, AWSError>;
   /**
-   * Creates a data store, which is a repository for messages. Only data stores that are used to save pipeline data can be configured with ParquetConfiguration.
+   * Creates a data store, which is a repository for messages.
    */
   createDatastore(callback?: (err: AWSError, data: IoTAnalytics.Types.CreateDatastoreResponse) => void): Request<IoTAnalytics.Types.CreateDatastoreResponse, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class IoTAnalytics extends Service {
    */
   describeDatastore(callback?: (err: AWSError, data: IoTAnalytics.Types.DescribeDatastoreResponse) => void): Request<IoTAnalytics.Types.DescribeDatastoreResponse, AWSError>;
   /**
-   * Retrieves the current settings of the AWS IoT Analytics logging options.
+   * Retrieves the current settings of the IoT Analytics logging options.
    */
   describeLoggingOptions(params: IoTAnalytics.Types.DescribeLoggingOptionsRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.DescribeLoggingOptionsResponse) => void): Request<IoTAnalytics.Types.DescribeLoggingOptionsResponse, AWSError>;
   /**
-   * Retrieves the current settings of the AWS IoT Analytics logging options.
+   * Retrieves the current settings of the IoT Analytics logging options.
    */
   describeLoggingOptions(callback?: (err: AWSError, data: IoTAnalytics.Types.DescribeLoggingOptionsResponse) => void): Request<IoTAnalytics.Types.DescribeLoggingOptionsResponse, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class IoTAnalytics extends Service {
    */
   describePipeline(callback?: (err: AWSError, data: IoTAnalytics.Types.DescribePipelineResponse) => void): Request<IoTAnalytics.Types.DescribePipelineResponse, AWSError>;
   /**
-   * Retrieves the contents of a data set as presigned URIs.
+   * Retrieves the contents of a dataset as presigned URIs.
    */
   getDatasetContent(params: IoTAnalytics.Types.GetDatasetContentRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.GetDatasetContentResponse) => void): Request<IoTAnalytics.Types.GetDatasetContentResponse, AWSError>;
   /**
-   * Retrieves the contents of a data set as presigned URIs.
+   * Retrieves the contents of a dataset as presigned URIs.
    */
   getDatasetContent(callback?: (err: AWSError, data: IoTAnalytics.Types.GetDatasetContentResponse) => void): Request<IoTAnalytics.Types.GetDatasetContentResponse, AWSError>;
   /**
@@ -164,19 +164,19 @@ declare class IoTAnalytics extends Service {
    */
   listChannels(callback?: (err: AWSError, data: IoTAnalytics.Types.ListChannelsResponse) => void): Request<IoTAnalytics.Types.ListChannelsResponse, AWSError>;
   /**
-   * Lists information about data set contents that have been created.
+   * Lists information about dataset contents that have been created.
    */
   listDatasetContents(params: IoTAnalytics.Types.ListDatasetContentsRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatasetContentsResponse) => void): Request<IoTAnalytics.Types.ListDatasetContentsResponse, AWSError>;
   /**
-   * Lists information about data set contents that have been created.
+   * Lists information about dataset contents that have been created.
    */
   listDatasetContents(callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatasetContentsResponse) => void): Request<IoTAnalytics.Types.ListDatasetContentsResponse, AWSError>;
   /**
-   * Retrieves information about data sets.
+   * Retrieves information about datasets.
    */
   listDatasets(params: IoTAnalytics.Types.ListDatasetsRequest, callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatasetsResponse) => void): Request<IoTAnalytics.Types.ListDatasetsResponse, AWSError>;
   /**
-   * Retrieves information about data sets.
+   * Retrieves information about datasets.
    */
   listDatasets(callback?: (err: AWSError, data: IoTAnalytics.Types.ListDatasetsResponse) => void): Request<IoTAnalytics.Types.ListDatasetsResponse, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class IoTAnalytics extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: IoTAnalytics.Types.ListTagsForResourceResponse) => void): Request<IoTAnalytics.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Sets or updates the AWS IoT Analytics logging options. If you update the value of any loggingOptions field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect. 
+   * Sets or updates the IoT Analytics logging options. If you update the value of any loggingOptions field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect. 
    */
   putLoggingOptions(params: IoTAnalytics.Types.PutLoggingOptionsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets or updates the AWS IoT Analytics logging options. If you update the value of any loggingOptions field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect. 
+   * Sets or updates the IoT Analytics logging options. If you update the value of any loggingOptions field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the roleArn field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect. 
    */
   putLoggingOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -252,27 +252,27 @@ declare class IoTAnalytics extends Service {
    */
   untagResource(callback?: (err: AWSError, data: IoTAnalytics.Types.UntagResourceResponse) => void): Request<IoTAnalytics.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the settings of a channel.
+   * Used to update the settings of a channel.
    */
   updateChannel(params: IoTAnalytics.Types.UpdateChannelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the settings of a channel.
+   * Used to update the settings of a channel.
    */
   updateChannel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the settings of a data set.
+   * Updates the settings of a dataset.
    */
   updateDataset(params: IoTAnalytics.Types.UpdateDatasetRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the settings of a data set.
+   * Updates the settings of a dataset.
    */
   updateDataset(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the settings of a data store.
+   * Used to update the settings of a data store.
    */
   updateDatastore(params: IoTAnalytics.Types.UpdateDatastoreRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the settings of a data store.
+   * Used to update the settings of a data store.
    */
   updateDatastore(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -325,7 +325,7 @@ declare namespace IoTAnalytics {
      */
     channelName: ChannelName;
     /**
-     * The list of messages to be sent. Each message has the format: { "messageId": "string", "payload": "string"}. The field names of message payloads (data) that you send to AWS IoT Analytics:   Must contain only alphanumeric characters and undescores (_). No other special characters are allowed.   Must begin with an alphabetic character or single underscore (_).   Cannot contain hyphens (-).   In regular expression terms: "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$".    Cannot be more than 255 characters.   Are case insensitive. (Fields named foo and FOO in the same payload are considered duplicates.)   For example, {"temp_01": 29} or {"_temp_01": 29} are valid, but {"temp-01": 29}, {"01_temp": 29} or {"__temp_01": 29} are invalid in message payloads. 
+     * The list of messages to be sent. Each message has the format: { "messageId": "string", "payload": "string"}. The field names of message payloads (data) that you send to IoT Analytics:   Must contain only alphanumeric characters and undescores (_). No other special characters are allowed.   Must begin with an alphabetic character or single underscore (_).   Cannot contain hyphens (-).   In regular expression terms: "^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$".    Cannot be more than 255 characters.   Are case insensitive. (Fields named foo and FOO in the same payload are considered duplicates.)   For example, {"temp_01": 29} or {"_temp_01": 29} are valid, but {"temp-01": 29}, {"01_temp": 29} or {"__temp_01": 29} are invalid in message payloads. 
      */
     messages: Messages;
   }
@@ -355,7 +355,7 @@ declare namespace IoTAnalytics {
      */
     name?: ChannelName;
     /**
-     * Where channel data is stored. You can choose one of serviceManagedS3 or customerManagedS3 storage. If not specified, the default is serviceManagedS3. You cannot change this storage option after the channel is created.
+     * Where channel data is stored. You can choose one of serviceManagedS3 or customerManagedS3 storage. If not specified, the default is serviceManagedS3. You can't change this storage option after the channel is created.
      */
     storage?: ChannelStorage;
     /**
@@ -379,7 +379,7 @@ declare namespace IoTAnalytics {
      */
     lastUpdateTime?: Timestamp;
     /**
-     * The last time when a new message arrived in the channel. AWS IoT Analytics updates this value at most once per minute for one channel. Hence, the lastMessageArrivalTime value is an approximation. This feature only applies to messages that arrived in the data store after October 23, 2020. 
+     * The last time when a new message arrived in the channel. IoT Analytics updates this value at most once per minute for one channel. Hence, the lastMessageArrivalTime value is an approximation. This feature only applies to messages that arrived in the data store after October 23, 2020. 
      */
     lastMessageArrivalTime?: Timestamp;
   }
@@ -414,17 +414,17 @@ declare namespace IoTAnalytics {
   export type ChannelStatus = "CREATING"|"ACTIVE"|"DELETING"|string;
   export interface ChannelStorage {
     /**
-     * Use this to store channel data in an S3 bucket managed by AWS IoT Analytics. You cannot change the choice of service-managed or customer-managed S3 storage after the channel is created.
+     * Used to store channel data in an S3 bucket managed by IoT Analytics. You can't change the choice of S3 storage after the data store is created.
      */
     serviceManagedS3?: ServiceManagedChannelS3Storage;
     /**
-     * Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the retentionPeriod parameter is ignored. You cannot change the choice of service-managed or customer-managed S3 storage after the channel is created.
+     * Used to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the retentionPeriod parameter is ignored. You can't change the choice of S3 storage after the data store is created.
      */
     customerManagedS3?: CustomerManagedChannelS3Storage;
   }
   export interface ChannelStorageSummary {
     /**
-     * Used to store channel data in an S3 bucket managed by AWS IoT Analytics.
+     * Used to store channel data in an S3 bucket managed by IoT Analytics.
      */
     serviceManagedS3?: ServiceManagedChannelS3StorageSummary;
     /**
@@ -455,7 +455,7 @@ declare namespace IoTAnalytics {
      */
     lastUpdateTime?: Timestamp;
     /**
-     * The last time when a new message arrived in the channel. AWS IoT Analytics updates this value at most once per minute for one channel. Hence, the lastMessageArrivalTime value is an approximation. This feature only applies to messages that arrived in the data store after October 23, 2020. 
+     * The last time when a new message arrived in the channel. IoT Analytics updates this value at most once per minute for one channel. Hence, the lastMessageArrivalTime value is an approximation. This feature only applies to messages that arrived in the data store after October 23, 2020. 
      */
     lastMessageArrivalTime?: Timestamp;
   }
@@ -465,7 +465,7 @@ declare namespace IoTAnalytics {
      */
     name: ColumnName;
     /**
-     * The type of data. For more information about the supported data types, see Common data types in the AWS Glue Developer Guide.
+     * The type of data. For more information about the supported data types, see Common data types in the Glue Developer Guide.
      */
     type: ColumnDataType;
   }
@@ -497,7 +497,7 @@ declare namespace IoTAnalytics {
      */
     channelName: ChannelName;
     /**
-     * Where channel data is stored. You can choose one of serviceManagedS3 or customerManagedS3 storage. If not specified, the default is serviceManagedS3. You cannot change this storage option after the channel is created.
+     * Where channel data is stored. You can choose one of serviceManagedS3 or customerManagedS3 storage. If not specified, the default is serviceManagedS3. You can't change this storage option after the channel is created.
      */
     channelStorage?: ChannelStorage;
     /**
@@ -541,15 +541,15 @@ declare namespace IoTAnalytics {
   }
   export interface CreateDatasetRequest {
     /**
-     * The name of the data set.
+     * The name of the dataset.
      */
     datasetName: DatasetName;
     /**
-     * A list of actions that create the data set contents.
+     * A list of actions that create the dataset contents.
      */
     actions: DatasetActions;
     /**
-     * A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five DataSetTrigger objects.
+     * A list of triggers. A trigger causes dataset contents to be populated at a specified time interval or when another dataset's contents are created. The list of triggers can be empty or contain up to five DataSetTrigger objects.
      */
     triggers?: DatasetTriggers;
     /**
@@ -557,19 +557,19 @@ declare namespace IoTAnalytics {
      */
     contentDeliveryRules?: DatasetContentDeliveryRules;
     /**
-     * Optional. How long, in days, versions of dataset contents are kept for the dataset. If not specified or set to null, versions of dataset contents are retained for at most 90 days. The number of versions of dataset contents retained is determined by the versioningConfiguration parameter. For more information, see Keeping Multiple Versions of AWS IoT Analytics Data Sets in the AWS IoT Analytics User Guide.
+     * Optional. How long, in days, versions of dataset contents are kept for the dataset. If not specified or set to null, versions of dataset contents are retained for at most 90 days. The number of versions of dataset contents retained is determined by the versioningConfiguration parameter. For more information, see  Keeping Multiple Versions of IoT Analytics datasets in the IoT Analytics User Guide.
      */
     retentionPeriod?: RetentionPeriod;
     /**
-     * Optional. How many versions of dataset contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the retentionPeriod parameter. For more information, see Keeping Multiple Versions of AWS IoT Analytics Data Sets in the AWS IoT Analytics User Guide.
+     * Optional. How many versions of dataset contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the retentionPeriod parameter. For more information, see Keeping Multiple Versions of IoT Analytics datasets in the IoT Analytics User Guide.
      */
     versioningConfiguration?: VersioningConfiguration;
     /**
-     * Metadata which can be used to manage the data set.
+     * Metadata which can be used to manage the dataset.
      */
     tags?: TagList;
     /**
-     * A list of data rules that send notifications to Amazon CloudWatch, when data arrives late. To specify lateDataRules, the dataset must use a DeltaTimer filter.
+     * A list of data rules that send notifications to CloudWatch, when data arrives late. To specify lateDataRules, the dataset must use a DeltaTimer filter.
      */
     lateDataRules?: LateDataRules;
   }
@@ -593,7 +593,7 @@ declare namespace IoTAnalytics {
      */
     datastoreName: DatastoreName;
     /**
-     * Where data store data is stored. You can choose one of serviceManagedS3 or customerManagedS3 storage. If not specified, the default is serviceManagedS3. You cannot change this storage option after the data store is created.
+     * Where data in a data store is stored.. You can choose serviceManagedS3 storage, customerManagedS3 storage, or iotSiteWiseMultiLayerStorage storage. The default is serviceManagedS3. You can't change the choice of Amazon S3 storage after your data store is created. 
      */
     datastoreStorage?: DatastoreStorage;
     /**
@@ -605,11 +605,11 @@ declare namespace IoTAnalytics {
      */
     tags?: TagList;
     /**
-     * Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and Parquet. The default file format is JSON. You can specify only one format. You can't change the file format after you create the data store.
+     * Contains the configuration information of file formats. IoT Analytics data stores support JSON and Parquet. The default file format is JSON. You can specify only one format. You can't change the file format after you create the data store.
      */
     fileFormatConfiguration?: FileFormatConfiguration;
     /**
-     *  Contains information about the partitions in a data store. 
+     *  Contains information about the partition dimensions in a data store. 
      */
     datastorePartitions?: DatastorePartitions;
   }
@@ -633,7 +633,7 @@ declare namespace IoTAnalytics {
      */
     pipelineName: PipelineName;
     /**
-     * A list of PipelineActivity objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data. The list can be 2-25 PipelineActivity objects and must contain both a channel and a datastore activity. Each entry in the list must contain only one activity. For example:  pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ] 
+     * A list of PipelineActivity objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda unctions on messages for advanced processing; or performing mathematical transformations to normalize device data. The list can be 2-25 PipelineActivity objects and must contain both a channel and a datastore activity. Each entry in the list must contain only one activity. For example:  pipelineActivities = [ { "channel": { ... } }, { "lambda": { ... } }, ... ] 
      */
     pipelineActivities: PipelineActivities;
     /**
@@ -657,11 +657,11 @@ declare namespace IoTAnalytics {
      */
     bucket: BucketName;
     /**
-     * Optional. The prefix used to create the keys of the channel data objects. Each object in an S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/).
+     * (Optional) The prefix used to create the keys of the channel data objects. Each object in an S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/).
      */
     keyPrefix?: S3KeyPrefix;
     /**
-     * The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+     * The ARN of the role that grants IoT Analytics permission to interact with your Amazon S3 resources.
      */
     roleArn: RoleArn;
   }
@@ -671,57 +671,57 @@ declare namespace IoTAnalytics {
      */
     bucket?: BucketName;
     /**
-     * Optional. The prefix used to create the keys of the channel data objects. Each object in an S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a forward slash (/).
+     * (Optional) The prefix used to create the keys of the channel data objects. Each object in an S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a forward slash (/).
      */
     keyPrefix?: S3KeyPrefix;
     /**
-     * The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+     * The ARN of the role that grants IoT Analytics permission to interact with your Amazon S3 resources.
      */
     roleArn?: RoleArn;
   }
   export interface CustomerManagedDatastoreS3Storage {
     /**
-     * The name of the S3 bucket in which data store data is stored.
+     * The name of the Amazon S3 bucket where your data is stored.
      */
     bucket: BucketName;
     /**
-     * Optional. The prefix used to create the keys of the data store data objects. Each object in an S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/).
+     * (Optional) The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/).
      */
     keyPrefix?: S3KeyPrefix;
     /**
-     * The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+     * The ARN of the role that grants IoT Analytics permission to interact with your Amazon S3 resources.
      */
     roleArn: RoleArn;
   }
   export interface CustomerManagedDatastoreS3StorageSummary {
     /**
-     * The name of the S3 bucket in which data store data is stored.
+     * The name of the Amazon S3 bucket where your data is stored.
      */
     bucket?: BucketName;
     /**
-     * Optional. The prefix used to create the keys of the data store data objects. Each object in an S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/).
+     * (Optional) The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/).
      */
     keyPrefix?: S3KeyPrefix;
     /**
-     * The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon S3 resources.
+     * The ARN of the role that grants IoT Analytics permission to interact with your Amazon S3 resources.
      */
     roleArn?: RoleArn;
   }
   export interface Dataset {
     /**
-     * The name of the data set.
+     * The name of the dataset.
      */
     name?: DatasetName;
     /**
-     * The ARN of the data set.
+     * The ARN of the dataset.
      */
     arn?: DatasetArn;
     /**
-     * The DatasetAction objects that automatically create the data set contents.
+     * The DatasetAction objects that automatically create the dataset contents.
      */
     actions?: DatasetActions;
     /**
-     * The DatasetTrigger objects that specify when the data set is automatically updated.
+     * The DatasetTrigger objects that specify when the dataset is automatically updated.
      */
     triggers?: DatasetTriggers;
     /**
@@ -729,37 +729,37 @@ declare namespace IoTAnalytics {
      */
     contentDeliveryRules?: DatasetContentDeliveryRules;
     /**
-     * The status of the data set.
+     * The status of the dataset.
      */
     status?: DatasetStatus;
     /**
-     * When the data set was created.
+     * When the dataset was created.
      */
     creationTime?: Timestamp;
     /**
-     * The last time the data set was updated.
+     * The last time the dataset was updated.
      */
     lastUpdateTime?: Timestamp;
     /**
-     * Optional. How long, in days, message data is kept for the data set.
+     * Optional. How long, in days, message data is kept for the dataset.
      */
     retentionPeriod?: RetentionPeriod;
     /**
-     * Optional. How many versions of dataset contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the retentionPeriod parameter. For more information, see Keeping Multiple Versions of AWS IoT Analytics Data Sets in the AWS IoT Analytics User Guide.
+     * Optional. How many versions of dataset contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the retentionPeriod parameter. For more information, see  Keeping Multiple Versions of IoT Analytics datasets in the IoT Analytics User Guide.
      */
     versioningConfiguration?: VersioningConfiguration;
     /**
-     * A list of data rules that send notifications to Amazon CloudWatch, when data arrives late. To specify lateDataRules, the dataset must use a DeltaTimer filter.
+     * A list of data rules that send notifications to CloudWatch, when data arrives late. To specify lateDataRules, the dataset must use a DeltaTimer filter.
      */
     lateDataRules?: LateDataRules;
   }
   export interface DatasetAction {
     /**
-     * The name of the data set action by which data set contents are automatically created.
+     * The name of the dataset action by which dataset contents are automatically created.
      */
     actionName?: DatasetActionName;
     /**
-     * An SqlQueryDatasetAction object that uses an SQL query to automatically create data set contents.
+     * An SqlQueryDatasetAction object that uses an SQL query to automatically create dataset contents.
      */
     queryAction?: SqlQueryDatasetAction;
     /**
@@ -784,7 +784,7 @@ declare namespace IoTAnalytics {
   export type DatasetArn = string;
   export interface DatasetContentDeliveryDestination {
     /**
-     * Configuration information for delivery of dataset contents to AWS IoT Events.
+     * Configuration information for delivery of dataset contents to IoT Events.
      */
     iotEventsDestinationConfiguration?: IotEventsDestinationConfiguration;
     /**
@@ -806,11 +806,11 @@ declare namespace IoTAnalytics {
   export type DatasetContentState = "CREATING"|"SUCCEEDED"|"FAILED"|string;
   export interface DatasetContentStatus {
     /**
-     * The state of the data set contents. Can be one of READY, CREATING, SUCCEEDED, or FAILED.
+     * The state of the dataset contents. Can be one of READY, CREATING, SUCCEEDED, or FAILED.
      */
     state?: DatasetContentState;
     /**
-     * The reason the data set contents are in this state.
+     * The reason the dataset contents are in this state.
      */
     reason?: Reason;
   }
@@ -821,7 +821,7 @@ declare namespace IoTAnalytics {
      */
     version?: DatasetContentVersion;
     /**
-     * The status of the data set contents.
+     * The status of the dataset contents.
      */
     status?: DatasetContentStatus;
     /**
@@ -847,11 +847,11 @@ declare namespace IoTAnalytics {
   export type DatasetEntries = DatasetEntry[];
   export interface DatasetEntry {
     /**
-     * The name of the data set item.
+     * The name of the dataset item.
      */
     entryName?: EntryName;
     /**
-     * The presigned URI of the data set item.
+     * The presigned URI of the dataset item.
      */
     dataURI?: PresignedURI;
   }
@@ -860,23 +860,23 @@ declare namespace IoTAnalytics {
   export type DatasetSummaries = DatasetSummary[];
   export interface DatasetSummary {
     /**
-     * The name of the data set.
+     * The name of the dataset.
      */
     datasetName?: DatasetName;
     /**
-     * The status of the data set.
+     * The status of the dataset.
      */
     status?: DatasetStatus;
     /**
-     * The time the data set was created.
+     * The time the dataset was created.
      */
     creationTime?: Timestamp;
     /**
-     * The last time the data set was updated.
+     * The last time the dataset was updated.
      */
     lastUpdateTime?: Timestamp;
     /**
-     * A list of triggers. A trigger causes data set content to be populated at a specified time interval or when another data set is populated. The list of triggers can be empty or contain up to five DataSetTrigger objects
+     * A list of triggers. A trigger causes dataset content to be populated at a specified time interval or when another dataset is populated. The list of triggers can be empty or contain up to five DataSetTrigger objects
      */
     triggers?: DatasetTriggers;
     /**
@@ -890,7 +890,7 @@ declare namespace IoTAnalytics {
      */
     schedule?: Schedule;
     /**
-     * The data set whose content creation triggers the creation of this data set's contents.
+     * The dataset whose content creation triggers the creation of this dataset's contents.
      */
     dataset?: TriggeringDataset;
   }
@@ -901,7 +901,7 @@ declare namespace IoTAnalytics {
      */
     name?: DatastoreName;
     /**
-     * Where data store data is stored. You can choose one of serviceManagedS3 or customerManagedS3 storage. If not specified, the default is serviceManagedS3. You cannot change this storage option after the data store is created.
+     * Where data in a data store is stored.. You can choose serviceManagedS3 storage, customerManagedS3 storage, or iotSiteWiseMultiLayerStorage storage. The default is serviceManagedS3. You can't change the choice of Amazon S3 storage after your data store is created. 
      */
     storage?: DatastoreStorage;
     /**
@@ -925,15 +925,15 @@ declare namespace IoTAnalytics {
      */
     lastUpdateTime?: Timestamp;
     /**
-     * The last time when a new message arrived in the data store. AWS IoT Analytics updates this value at most once per minute for one data store. Hence, the lastMessageArrivalTime value is an approximation. This feature only applies to messages that arrived in the data store after October 23, 2020. 
+     * The last time when a new message arrived in the data store. IoT Analytics updates this value at most once per minute for Amazon Simple Storage Service one data store. Hence, the lastMessageArrivalTime value is an approximation. This feature only applies to messages that arrived in the data store after October 23, 2020. 
      */
     lastMessageArrivalTime?: Timestamp;
     /**
-     * Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and Parquet. The default file format is JSON. You can specify only one format. You can't change the file format after you create the data store.
+     * Contains the configuration information of file formats. IoT Analytics data stores support JSON and Parquet. The default file format is JSON. You can specify only one format. You can't change the file format after you create the data store.
      */
     fileFormatConfiguration?: FileFormatConfiguration;
     /**
-     *  Contains information about the partitions in a data store. 
+     *  Contains information about the partition dimensions in a data store. 
      */
     datastorePartitions?: DatastorePartitions;
   }
@@ -948,20 +948,32 @@ declare namespace IoTAnalytics {
     datastoreName: DatastoreName;
   }
   export type DatastoreArn = string;
+  export interface DatastoreIotSiteWiseMultiLayerStorage {
+    /**
+     *  Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage. 
+     */
+    customerManagedS3Storage: IotSiteWiseCustomerManagedDatastoreS3Storage;
+  }
+  export interface DatastoreIotSiteWiseMultiLayerStorageSummary {
+    /**
+     * Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage.
+     */
+    customerManagedS3Storage?: IotSiteWiseCustomerManagedDatastoreS3StorageSummary;
+  }
   export type DatastoreName = string;
   export interface DatastorePartition {
     /**
-     *  A partition defined by an attributeName. 
+     *  A partition dimension defined by an attributeName. 
      */
     attributePartition?: Partition;
     /**
-     *  A partition defined by an attributeName and a timestamp format. 
+     *  A partition dimension defined by a timestamp attribute. 
      */
     timestampPartition?: TimestampPartition;
   }
   export interface DatastorePartitions {
     /**
-     *  A list of partitions in a data store. 
+     *  A list of partition dimensions in a data store. 
      */
     partitions?: Partitions;
   }
@@ -974,23 +986,31 @@ declare namespace IoTAnalytics {
   export type DatastoreStatus = "CREATING"|"ACTIVE"|"DELETING"|string;
   export interface DatastoreStorage {
     /**
-     * Use this to store data store data in an S3 bucket managed by AWS IoT Analytics. You cannot change the choice of service-managed or customer-managed S3 storage after the data store is created.
+     * Used to store data in an Amazon S3 bucket managed by IoT Analytics. You can't change the choice of Amazon S3 storage after your data store is created. 
      */
     serviceManagedS3?: ServiceManagedDatastoreS3Storage;
     /**
-     * Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the retentionPeriod parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.
+     * S3-customer-managed; When you choose customer-managed storage, the retentionPeriod parameter is ignored. You can't change the choice of Amazon S3 storage after your data store is created. 
      */
     customerManagedS3?: CustomerManagedDatastoreS3Storage;
+    /**
+     *  Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage. You can't change the choice of Amazon S3 storage after your data store is created. 
+     */
+    iotSiteWiseMultiLayerStorage?: DatastoreIotSiteWiseMultiLayerStorage;
   }
   export interface DatastoreStorageSummary {
     /**
-     * Used to store data store data in an S3 bucket managed by AWS IoT Analytics.
+     * Used to store data in an Amazon S3 bucket managed by IoT Analytics.
      */
     serviceManagedS3?: ServiceManagedDatastoreS3StorageSummary;
     /**
-     * Used to store data store data in an S3 bucket that you manage.
+     * Used to store data in an Amazon S3 bucket managed by IoT Analytics.
      */
     customerManagedS3?: CustomerManagedDatastoreS3StorageSummary;
+    /**
+     *  Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage. 
+     */
+    iotSiteWiseMultiLayerStorage?: DatastoreIotSiteWiseMultiLayerStorageSummary;
   }
   export type DatastoreSummaries = DatastoreSummary[];
   export interface DatastoreSummary {
@@ -999,7 +1019,7 @@ declare namespace IoTAnalytics {
      */
     datastoreName?: DatastoreName;
     /**
-     * Where data store data is stored.
+     * Where data in a data store is stored.
      */
     datastoreStorage?: DatastoreStorageSummary;
     /**
@@ -1015,7 +1035,7 @@ declare namespace IoTAnalytics {
      */
     lastUpdateTime?: Timestamp;
     /**
-     * The last time when a new message arrived in the data store. AWS IoT Analytics updates this value at most once per minute for one data store. Hence, the lastMessageArrivalTime value is an approximation. This feature only applies to messages that arrived in the data store after October 23, 2020. 
+     * The last time when a new message arrived in the data store. IoT Analytics updates this value at most once per minute for Amazon Simple Storage Service one data store. Hence, the lastMessageArrivalTime value is an approximation. This feature only applies to messages that arrived in the data store after October 23, 2020. 
      */
     lastMessageArrivalTime?: Timestamp;
     /**
@@ -1023,7 +1043,7 @@ declare namespace IoTAnalytics {
      */
     fileFormatType?: FileFormatType;
     /**
-     *  Contains information about the partitions in a data store. 
+     *  Contains information about the partition dimensions in a data store. 
      */
     datastorePartitions?: DatastorePartitions;
   }
@@ -1045,7 +1065,7 @@ declare namespace IoTAnalytics {
   }
   export interface DeleteDatasetRequest {
     /**
-     * The name of the data set to delete.
+     * The name of the dataset to delete.
      */
     datasetName: DatasetName;
   }
@@ -1073,7 +1093,7 @@ declare namespace IoTAnalytics {
   }
   export interface DeltaTimeSessionWindowConfiguration {
     /**
-     * A time interval. You can use timeoutInMinutes so that AWS IoT Analytics can batch up late data notifications that have been generated since the last execution. AWS IoT Analytics sends one batch of notifications to Amazon CloudWatch Events at one time. For more information about how to write a timestamp expression, see Date and Time Functions and Operators, in the Presto 0.172 Documentation.
+     * A time interval. You can use timeoutInMinutes so that IoT Analytics can batch up late data notifications that have been generated since the last execution. IoT Analytics sends one batch of notifications to Amazon CloudWatch Events at one time. For more information about how to write a timestamp expression, see Date and Time Functions and Operators, in the Presto 0.172 Documentation.
      */
     timeoutInMinutes: SessionTimeoutInMinutes;
   }
@@ -1083,7 +1103,7 @@ declare namespace IoTAnalytics {
      */
     channelName: ChannelName;
     /**
-     * If true, additional statistical information about the channel is included in the response. This feature cannot be used with a channel whose S3 storage is customer-managed.
+     * If true, additional statistical information about the channel is included in the response. This feature can't be used with a channel whose S3 storage is customer-managed.
      */
     includeStatistics?: IncludeStatisticsFlag;
   }
@@ -1099,13 +1119,13 @@ declare namespace IoTAnalytics {
   }
   export interface DescribeDatasetRequest {
     /**
-     * The name of the data set whose information is retrieved.
+     * The name of the dataset whose information is retrieved.
      */
     datasetName: DatasetName;
   }
   export interface DescribeDatasetResponse {
     /**
-     * An object that contains information about the data set.
+     * An object that contains information about the dataset.
      */
     dataset?: Dataset;
   }
@@ -1115,7 +1135,7 @@ declare namespace IoTAnalytics {
      */
     datastoreName: DatastoreName;
     /**
-     * If true, additional statistical information about the data store is included in the response. This feature cannot be used with a data store whose S3 storage is customer-managed.
+     * If true, additional statistical information about the data store is included in the response. This feature can't be used with a data store whose S3 storage is customer-managed.
      */
     includeStatistics?: IncludeStatisticsFlag;
   }
@@ -1133,7 +1153,7 @@ declare namespace IoTAnalytics {
   }
   export interface DescribeLoggingOptionsResponse {
     /**
-     * The current settings of the AWS IoT Analytics logging options.
+     * The current settings of the IoT Analytics logging options.
      */
     loggingOptions?: LoggingOptions;
   }
@@ -1236,11 +1256,11 @@ declare namespace IoTAnalytics {
   export type FilterExpression = string;
   export interface GetDatasetContentRequest {
     /**
-     * The name of the data set whose contents are retrieved.
+     * The name of the dataset whose contents are retrieved.
      */
     datasetName: DatasetName;
     /**
-     * The version of the data set whose contents are retrieved. You can also use the strings "$LATEST" or "$LATEST_SUCCEEDED" to retrieve the contents of the latest or latest successfully completed data set. If not specified, "$LATEST_SUCCEEDED" is the default.
+     * The version of the dataset whose contents are retrieved. You can also use the strings "$LATEST" or "$LATEST_SUCCEEDED" to retrieve the contents of the latest or latest successfully completed dataset. If not specified, "$LATEST_SUCCEEDED" is the default.
      */
     versionId?: DatasetContentVersion;
   }
@@ -1254,17 +1274,17 @@ declare namespace IoTAnalytics {
      */
     timestamp?: Timestamp;
     /**
-     * The status of the data set content.
+     * The status of the dataset content.
      */
     status?: DatasetContentStatus;
   }
   export interface GlueConfiguration {
     /**
-     * The name of the table in your AWS Glue Data Catalog that is used to perform the ETL operations. An AWS Glue Data Catalog table contains partitioned data and descriptions of data sources and targets.
+     * The name of the table in your Glue Data Catalog that is used to perform the ETL operations. An Glue Data Catalog table contains partitioned data and descriptions of data sources and targets.
      */
     tableName: GlueTableName;
     /**
-     * The name of the database in your AWS Glue Data Catalog in which the table is located. An AWS Glue Data Catalog database contains metadata tables.
+     * The name of the database in your Glue Data Catalog in which the table is located. An Glue Data Catalog database contains metadata tables.
      */
     databaseName: GlueDatabaseName;
   }
@@ -1274,15 +1294,35 @@ declare namespace IoTAnalytics {
   export type IncludeStatisticsFlag = boolean;
   export interface IotEventsDestinationConfiguration {
     /**
-     * The name of the AWS IoT Events input to which dataset contents are delivered.
+     * The name of the IoT Events input to which dataset contents are delivered.
      */
     inputName: IotEventsInputName;
     /**
-     * The ARN of the role that grants AWS IoT Analytics permission to deliver dataset contents to an AWS IoT Events input.
+     * The ARN of the role that grants IoT Analytics permission to deliver dataset contents to an IoT Events input.
      */
     roleArn: RoleArn;
   }
   export type IotEventsInputName = string;
+  export interface IotSiteWiseCustomerManagedDatastoreS3Storage {
+    /**
+     *  The name of the Amazon S3 bucket where your data is stored. 
+     */
+    bucket: BucketName;
+    /**
+     *  (Optional) The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/). 
+     */
+    keyPrefix?: S3KeyPrefix;
+  }
+  export interface IotSiteWiseCustomerManagedDatastoreS3StorageSummary {
+    /**
+     *  The name of the Amazon S3 bucket where your data is stored. 
+     */
+    bucket?: BucketName;
+    /**
+     *  (Optional) The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/). 
+     */
+    keyPrefix?: S3KeyPrefix;
+  }
   export interface JsonConfiguration {
   }
   export interface LambdaActivity {
@@ -1344,7 +1384,7 @@ declare namespace IoTAnalytics {
   }
   export interface ListDatasetContentsRequest {
     /**
-     * The name of the data set whose contents information you want to list.
+     * The name of the dataset whose contents information you want to list.
      */
     datasetName: DatasetName;
     /**
@@ -1356,17 +1396,17 @@ declare namespace IoTAnalytics {
      */
     maxResults?: MaxResults;
     /**
-     * A filter to limit results to those data set contents whose creation is scheduled on or after the given time. See the field triggers.schedule in the CreateDataset request. (timestamp)
+     * A filter to limit results to those dataset contents whose creation is scheduled on or after the given time. See the field triggers.schedule in the CreateDataset request. (timestamp)
      */
     scheduledOnOrAfter?: Timestamp;
     /**
-     * A filter to limit results to those data set contents whose creation is scheduled before the given time. See the field triggers.schedule in the CreateDataset request. (timestamp)
+     * A filter to limit results to those dataset contents whose creation is scheduled before the given time. See the field triggers.schedule in the CreateDataset request. (timestamp)
      */
     scheduledBefore?: Timestamp;
   }
   export interface ListDatasetContentsResponse {
     /**
-     * Summary information about data set contents that have been created.
+     * Summary information about dataset contents that have been created.
      */
     datasetContentSummaries?: DatasetContentSummaries;
     /**
@@ -1451,7 +1491,7 @@ declare namespace IoTAnalytics {
   export type LoggingLevel = "ERROR"|string;
   export interface LoggingOptions {
     /**
-     * The ARN of the role that grants permission to AWS IoT Analytics to perform logging.
+     * The ARN of the role that grants permission to IoT Analytics to perform logging.
      */
     roleArn: RoleArn;
     /**
@@ -1459,7 +1499,7 @@ declare namespace IoTAnalytics {
      */
     level: LoggingLevel;
     /**
-     * If true, logging is enabled for AWS IoT Analytics.
+     * If true, logging is enabled for IoT Analytics.
      */
     enabled: LoggingEnabled;
   }
@@ -1516,7 +1556,7 @@ declare namespace IoTAnalytics {
   }
   export interface Partition {
     /**
-     *  The attribute name of the partition. 
+     *  The name of the attribute that defines a partition dimension. 
      */
     attributeName: PartitionAttributeName;
   }
@@ -1571,7 +1611,7 @@ declare namespace IoTAnalytics {
      */
     removeAttributes?: RemoveAttributesActivity;
     /**
-     * Creates a new message using only the specified attributes from the original message. 
+     * Used to create a new message using only the specified attributes from the original message. 
      */
     selectAttributes?: SelectAttributesActivity;
     /**
@@ -1583,11 +1623,11 @@ declare namespace IoTAnalytics {
      */
     math?: MathActivity;
     /**
-     * Adds data from the AWS IoT device registry to your message.
+     * Adds data from the IoT device registry to your message.
      */
     deviceRegistryEnrich?: DeviceRegistryEnrichActivity;
     /**
-     * Adds information from the AWS IoT Device Shadow service to a message.
+     * Adds information from the IoT Device Shadow service to a message.
      */
     deviceShadowEnrich?: DeviceShadowEnrichActivity;
   }
@@ -1615,7 +1655,7 @@ declare namespace IoTAnalytics {
   export type PresignedURI = string;
   export interface PutLoggingOptionsRequest {
     /**
-     * The new values of the AWS IoT Analytics logging options.
+     * The new values of the IoT Analytics logging options.
      */
     loggingOptions: LoggingOptions;
   }
@@ -1683,7 +1723,7 @@ declare namespace IoTAnalytics {
   export type RoleArn = string;
   export interface RunPipelineActivityRequest {
     /**
-     * The pipeline activity that is run. This must not be a channel activity or a datastore activity because these activities are used in a pipeline only to load the original message and to store the (possibly) transformed message. If a lambda activity is specified, only short-running Lambda functions (those with a timeout of less than 30 seconds or less) can be used.
+     * The pipeline activity that is run. This must not be a channel activity or a data store activity because these activities are used in a pipeline only to load the original message and to store the (possibly) transformed message. If a Lambda activity is specified, only short-running Lambda functions (those with a timeout of less than 30 seconds or less) can be used.
      */
     pipelineActivity: PipelineActivity;
     /**
@@ -1711,11 +1751,11 @@ declare namespace IoTAnalytics {
      */
     key: BucketKeyExpression;
     /**
-     * Configuration information for coordination with AWS Glue, a fully managed extract, transform and load (ETL) service.
+     * Configuration information for coordination with Glue, a fully managed extract, transform and load (ETL) service.
      */
     glueConfiguration?: GlueConfiguration;
     /**
-     * The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon S3 and AWS Glue resources.
+     * The ARN of the role that grants IoT Analytics permission to interact with your Amazon S3 and Glue resources.
      */
     roleArn: RoleArn;
   }
@@ -1855,7 +1895,7 @@ declare namespace IoTAnalytics {
      */
     attributeName: PartitionAttributeName;
     /**
-     *  The timestamp format of a partition defined by a timestamp. 
+     *  The timestamp format of a partition defined by a timestamp. The default format is seconds since epoch (January 1, 1970 at midnight UTC time). 
      */
     timestampFormat?: TimestampFormat;
   }
@@ -1885,17 +1925,17 @@ declare namespace IoTAnalytics {
      */
     channelName: ChannelName;
     /**
-     * Where channel data is stored. You can choose one of serviceManagedS3 or customerManagedS3 storage. If not specified, the default is serviceManagedS3. You cannot change this storage option after the channel is created.
+     * Where channel data is stored. You can choose one of serviceManagedS3 or customerManagedS3 storage. If not specified, the default is serviceManagedS3. You can't change this storage option after the channel is created.
      */
     channelStorage?: ChannelStorage;
     /**
-     * How long, in days, message data is kept for the channel. The retention period cannot be updated if the channel's S3 storage is customer-managed.
+     * How long, in days, message data is kept for the channel. The retention period can't be updated if the channel's Amazon S3 storage is customer-managed.
      */
     retentionPeriod?: RetentionPeriod;
   }
   export interface UpdateDatasetRequest {
     /**
-     * The name of the data set to update.
+     * The name of the dataset to update.
      */
     datasetName: DatasetName;
     /**
@@ -1915,11 +1955,11 @@ declare namespace IoTAnalytics {
      */
     retentionPeriod?: RetentionPeriod;
     /**
-     * Optional. How many versions of dataset contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the retentionPeriod parameter. For more information, see Keeping Multiple Versions of AWS IoT Analytics Data Sets in the AWS IoT Analytics User Guide.
+     * Optional. How many versions of dataset contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the retentionPeriod parameter. For more information, see Keeping Multiple Versions of IoT Analytics datasets in the IoT Analytics User Guide.
      */
     versioningConfiguration?: VersioningConfiguration;
     /**
-     * A list of data rules that send notifications to Amazon CloudWatch, when data arrives late. To specify lateDataRules, the dataset must use a DeltaTimer filter.
+     * A list of data rules that send notifications to CloudWatch, when data arrives late. To specify lateDataRules, the dataset must use a DeltaTimer filter.
      */
     lateDataRules?: LateDataRules;
   }
@@ -1929,15 +1969,15 @@ declare namespace IoTAnalytics {
      */
     datastoreName: DatastoreName;
     /**
-     * How long, in days, message data is kept for the data store. The retention period cannot be updated if the data store's S3 storage is customer-managed.
+     * How long, in days, message data is kept for the data store. The retention period can't be updated if the data store's Amazon S3 storage is customer-managed.
      */
     retentionPeriod?: RetentionPeriod;
     /**
-     * Where data store data is stored. You can choose one of serviceManagedS3 or customerManagedS3 storage. If not specified, the default isserviceManagedS3. You cannot change this storage option after the data store is created.
+     * Where data in a data store is stored.. You can choose serviceManagedS3 storage, customerManagedS3 storage, or iotSiteWiseMultiLayerStorage storage. The default is serviceManagedS3. You can't change the choice of Amazon S3 storage after your data store is created. 
      */
     datastoreStorage?: DatastoreStorage;
     /**
-     * Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and Parquet. The default file format is JSON. You can specify only one format. You can't change the file format after you create the data store.
+     * Contains the configuration information of file formats. IoT Analytics data stores support JSON and Parquet. The default file format is JSON. You can specify only one format. You can't change the file format after you create the data store.
      */
     fileFormatConfiguration?: FileFormatConfiguration;
   }

@@ -204,11 +204,11 @@ declare class IoTWireless extends Service {
    */
   getDeviceProfile(callback?: (err: AWSError, data: IoTWireless.Types.GetDeviceProfileResponse) => void): Request<IoTWireless.Types.GetDeviceProfileResponse, AWSError>;
   /**
-   * Returns current default log-levels, or log levels by resource types, could be for wireless device log options or wireless gateway log options.
+   * Returns current default log levels or log levels by resource types. Based on resource types, log levels can be for wireless device log options or wireless gateway log options.
    */
   getLogLevelsByResourceTypes(params: IoTWireless.Types.GetLogLevelsByResourceTypesRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.GetLogLevelsByResourceTypesResponse, AWSError>;
   /**
-   * Returns current default log-levels, or log levels by resource types, could be for wireless device log options or wireless gateway log options.
+   * Returns current default log levels or log levels by resource types. Based on resource types, log levels can be for wireless device log options or wireless gateway log options.
    */
   getLogLevelsByResourceTypes(callback?: (err: AWSError, data: IoTWireless.Types.GetLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.GetLogLevelsByResourceTypesResponse, AWSError>;
   /**
@@ -220,11 +220,11 @@ declare class IoTWireless extends Service {
    */
   getPartnerAccount(callback?: (err: AWSError, data: IoTWireless.Types.GetPartnerAccountResponse) => void): Request<IoTWireless.Types.GetPartnerAccountResponse, AWSError>;
   /**
-   * Fetches the log-level override if any for a given resource-ID and resource-type, coulde be a wireless device or a wireless gateway.
+   * Fetches the log-level override, if any, for a given resource-ID and resource-type. It can be used for a wireless device or a wireless gateway.
    */
   getResourceLogLevel(params: IoTWireless.Types.GetResourceLogLevelRequest, callback?: (err: AWSError, data: IoTWireless.Types.GetResourceLogLevelResponse) => void): Request<IoTWireless.Types.GetResourceLogLevelResponse, AWSError>;
   /**
-   * Fetches the log-level override if any for a given resource-ID and resource-type, coulde be a wireless device or a wireless gateway.
+   * Fetches the log-level override, if any, for a given resource-ID and resource-type. It can be used for a wireless device or a wireless gateway.
    */
   getResourceLogLevel(callback?: (err: AWSError, data: IoTWireless.Types.GetResourceLogLevelResponse) => void): Request<IoTWireless.Types.GetResourceLogLevelResponse, AWSError>;
   /**
@@ -372,27 +372,27 @@ declare class IoTWireless extends Service {
    */
   listWirelessGateways(callback?: (err: AWSError, data: IoTWireless.Types.ListWirelessGatewaysResponse) => void): Request<IoTWireless.Types.ListWirelessGatewaysResponse, AWSError>;
   /**
-   * Sets the log-level override for a resource-ID and resource-type, could be a wireless gateway or a wireless device.
+   * Sets the log-level override for a resource-ID and resource-type. This option can be specified for a wireless gateway or a wireless device. A limit of 200 log level override can be set per account.
    */
   putResourceLogLevel(params: IoTWireless.Types.PutResourceLogLevelRequest, callback?: (err: AWSError, data: IoTWireless.Types.PutResourceLogLevelResponse) => void): Request<IoTWireless.Types.PutResourceLogLevelResponse, AWSError>;
   /**
-   * Sets the log-level override for a resource-ID and resource-type, could be a wireless gateway or a wireless device.
+   * Sets the log-level override for a resource-ID and resource-type. This option can be specified for a wireless gateway or a wireless device. A limit of 200 log level override can be set per account.
    */
   putResourceLogLevel(callback?: (err: AWSError, data: IoTWireless.Types.PutResourceLogLevelResponse) => void): Request<IoTWireless.Types.PutResourceLogLevelResponse, AWSError>;
   /**
-   * Remove log-level overrides if any for all resources (both wireless devices and wireless gateways).
+   * Removes the log-level overrides for all resources; both wireless devices and wireless gateways.
    */
   resetAllResourceLogLevels(params: IoTWireless.Types.ResetAllResourceLogLevelsRequest, callback?: (err: AWSError, data: IoTWireless.Types.ResetAllResourceLogLevelsResponse) => void): Request<IoTWireless.Types.ResetAllResourceLogLevelsResponse, AWSError>;
   /**
-   * Remove log-level overrides if any for all resources (both wireless devices and wireless gateways).
+   * Removes the log-level overrides for all resources; both wireless devices and wireless gateways.
    */
   resetAllResourceLogLevels(callback?: (err: AWSError, data: IoTWireless.Types.ResetAllResourceLogLevelsResponse) => void): Request<IoTWireless.Types.ResetAllResourceLogLevelsResponse, AWSError>;
   /**
-   * Remove log-level override if any for a specific resource-ID and resource-type, could be a wireless device or a wireless gateway.
+   * Removes the log-level override, if any, for a specific resource-ID and resource-type. It can be used for a wireless device or a wireless gateway.
    */
   resetResourceLogLevel(params: IoTWireless.Types.ResetResourceLogLevelRequest, callback?: (err: AWSError, data: IoTWireless.Types.ResetResourceLogLevelResponse) => void): Request<IoTWireless.Types.ResetResourceLogLevelResponse, AWSError>;
   /**
-   * Remove log-level override if any for a specific resource-ID and resource-type, could be a wireless device or a wireless gateway.
+   * Removes the log-level override, if any, for a specific resource-ID and resource-type. It can be used for a wireless device or a wireless gateway.
    */
   resetResourceLogLevel(callback?: (err: AWSError, data: IoTWireless.Types.ResetResourceLogLevelResponse) => void): Request<IoTWireless.Types.ResetResourceLogLevelResponse, AWSError>;
   /**
@@ -436,11 +436,11 @@ declare class IoTWireless extends Service {
    */
   updateDestination(callback?: (err: AWSError, data: IoTWireless.Types.UpdateDestinationResponse) => void): Request<IoTWireless.Types.UpdateDestinationResponse, AWSError>;
   /**
-   * Set default log level, or log levels by resource types, could be for wireless device log options or wireless gateways log options. This is to control the log messages that will be displayed in CloudWatch.
+   * Set default log level, or log levels by resource types. This can be for wireless device log options or wireless gateways log options and is used to control the log messages that'll be displayed in CloudWatch.
    */
   updateLogLevelsByResourceTypes(params: IoTWireless.Types.UpdateLogLevelsByResourceTypesRequest, callback?: (err: AWSError, data: IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse, AWSError>;
   /**
-   * Set default log level, or log levels by resource types, could be for wireless device log options or wireless gateways log options. This is to control the log messages that will be displayed in CloudWatch.
+   * Set default log level, or log levels by resource types. This can be for wireless device log options or wireless gateways log options and is used to control the log messages that'll be displayed in CloudWatch.
    */
   updateLogLevelsByResourceTypes(callback?: (err: AWSError, data: IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse) => void): Request<IoTWireless.Types.UpdateLogLevelsByResourceTypesResponse, AWSError>;
   /**
@@ -1047,7 +1047,7 @@ declare namespace IoTWireless {
   export interface GetResourceLogLevelRequest {
     ResourceIdentifier: ResourceIdentifier;
     /**
-     * The type of the resource, currently support WirelessDevice and WirelessGateway.
+     * The type of the resource, which can be WirelessDevice or WirelessGateway.
      */
     ResourceType: ResourceType;
   }
@@ -1863,7 +1863,7 @@ declare namespace IoTWireless {
   export interface PutResourceLogLevelRequest {
     ResourceIdentifier: ResourceIdentifier;
     /**
-     * The type of the resource, currently support WirelessDevice and WirelessGateway.
+     * The type of the resource, which can be WirelessDevice or WirelessGateway.
      */
     ResourceType: ResourceType;
     LogLevel: LogLevel;
@@ -1881,7 +1881,7 @@ declare namespace IoTWireless {
   export interface ResetResourceLogLevelRequest {
     ResourceIdentifier: ResourceIdentifier;
     /**
-     * The type of the resource, currently support WirelessDevice and WirelessGateway.
+     * The type of the resource, which can be WirelessDevice or WirelessGateway.
      */
     ResourceType: ResourceType;
   }
@@ -1907,7 +1907,7 @@ declare namespace IoTWireless {
      */
     TransmitMode: TransmitMode;
     /**
-     * The message payload to send.
+     * The binary to be sent to the end device, encoded in base64.
      */
     PayloadData: PayloadData;
     /**
@@ -1994,6 +1994,7 @@ declare namespace IoTWireless {
   }
   export type SidewalkAccountList = SidewalkAccountInfoWithFingerprint[];
   export interface SidewalkDevice {
+    AmazonId?: AmazonId;
     /**
      * The sidewalk device identification.
      */
@@ -2250,7 +2251,7 @@ declare namespace IoTWireless {
   }
   export type WirelessDeviceEventLogOptionList = WirelessDeviceEventLogOption[];
   export type WirelessDeviceId = string;
-  export type WirelessDeviceIdType = "WirelessDeviceId"|"DevEui"|"ThingName"|string;
+  export type WirelessDeviceIdType = "WirelessDeviceId"|"DevEui"|"ThingName"|"SidewalkManufacturingSn"|string;
   export interface WirelessDeviceLogOption {
     /**
      * The wireless device type.

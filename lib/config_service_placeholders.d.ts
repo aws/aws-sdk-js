@@ -271,6 +271,9 @@ export abstract class ConfigurationServicePlaceholders {
   applicationcostprofiler?: AWS.ApplicationCostProfiler.Types.ClientConfiguration;
   apprunner?: AWS.AppRunner.Types.ClientConfiguration;
   proton?: AWS.Proton.Types.ClientConfiguration;
+  route53recoverycluster?: AWS.Route53RecoveryCluster.Types.ClientConfiguration;
+  route53recoverycontrolconfig?: AWS.Route53RecoveryControlConfig.Types.ClientConfiguration;
+  route53recoveryreadiness?: AWS.Route53RecoveryReadiness.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -544,4 +547,7 @@ export interface ConfigurationServiceApiVersions {
   applicationcostprofiler?: AWS.ApplicationCostProfiler.Types.apiVersion;
   apprunner?: AWS.AppRunner.Types.apiVersion;
   proton?: AWS.Proton.Types.apiVersion;
+  route53recoverycluster?: AWS.Route53RecoveryCluster.Types.apiVersion;
+  route53recoverycontrolconfig?: AWS.Route53RecoveryControlConfig.Types.apiVersion;
+  route53recoveryreadiness?: AWS.Route53RecoveryReadiness.Types.apiVersion;
 }

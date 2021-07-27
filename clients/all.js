@@ -270,5 +270,8 @@ module.exports = {
   SSMIncidents: require('./ssmincidents'),
   ApplicationCostProfiler: require('./applicationcostprofiler'),
   AppRunner: require('./apprunner'),
-  Proton: require('./proton')
+  Proton: require('./proton'),
+  Route53RecoveryCluster: require('./route53recoverycluster'),
+  Route53RecoveryControlConfig: require('./route53recoverycontrolconfig'),
+  Route53RecoveryReadiness: require('./route53recoveryreadiness')
 };

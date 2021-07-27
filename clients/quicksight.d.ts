@@ -20,11 +20,11 @@ declare class QuickSight extends Service {
    */
   cancelIngestion(callback?: (err: AWSError, data: QuickSight.Types.CancelIngestionResponse) => void): Request<QuickSight.Types.CancelIngestionResponse, AWSError>;
   /**
-   * Creates Amazon QuickSight customizations the current AWS Region. Currently, you can add a custom default theme by using the CreateAccountCustomization or UpdateAccountCustomization API operation. To further customize QuickSight by removing QuickSight sample assets and videos for all new users, see Customizing QuickSight in the Amazon QuickSight User Guide.  You can create customizations for your AWS account or, if you specify a namespace, for a QuickSight namespace instead. Customizations that apply to a namespace always override customizations that apply to an AWS account. To find out which customizations apply, use the DescribeAccountCustomization API operation. Before you use the CreateAccountCustomization API operation to add a theme as the namespace default, make sure that you first share the theme with the namespace. If you don't share it with the namespace, the theme isn't visible to your users even if you make it the default theme. To check if the theme is shared, view the current permissions by using the  DescribeThemePermissions  API operation. To share the theme, grant permissions by using the  UpdateThemePermissions  API operation. 
+   * Creates Amazon QuickSight customizations the current Region;. Currently, you can add a custom default theme by using the CreateAccountCustomization or UpdateAccountCustomization API operation. To further customize QuickSight by removing QuickSight sample assets and videos for all new users, see Customizing QuickSight in the Amazon QuickSight User Guide.  You can create customizations for your Amazon Web Services account; or, if you specify a namespace, for a QuickSight namespace instead. Customizations that apply to a namespace always override customizations that apply to an Amazon Web Services account;. To find out which customizations apply, use the DescribeAccountCustomization API operation. Before you use the CreateAccountCustomization API operation to add a theme as the namespace default, make sure that you first share the theme with the namespace. If you don't share it with the namespace, the theme isn't visible to your users even if you make it the default theme. To check if the theme is shared, view the current permissions by using the  DescribeThemePermissions  API operation. To share the theme, grant permissions by using the  UpdateThemePermissions  API operation. 
    */
   createAccountCustomization(params: QuickSight.Types.CreateAccountCustomizationRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateAccountCustomizationResponse) => void): Request<QuickSight.Types.CreateAccountCustomizationResponse, AWSError>;
   /**
-   * Creates Amazon QuickSight customizations the current AWS Region. Currently, you can add a custom default theme by using the CreateAccountCustomization or UpdateAccountCustomization API operation. To further customize QuickSight by removing QuickSight sample assets and videos for all new users, see Customizing QuickSight in the Amazon QuickSight User Guide.  You can create customizations for your AWS account or, if you specify a namespace, for a QuickSight namespace instead. Customizations that apply to a namespace always override customizations that apply to an AWS account. To find out which customizations apply, use the DescribeAccountCustomization API operation. Before you use the CreateAccountCustomization API operation to add a theme as the namespace default, make sure that you first share the theme with the namespace. If you don't share it with the namespace, the theme isn't visible to your users even if you make it the default theme. To check if the theme is shared, view the current permissions by using the  DescribeThemePermissions  API operation. To share the theme, grant permissions by using the  UpdateThemePermissions  API operation. 
+   * Creates Amazon QuickSight customizations the current Region;. Currently, you can add a custom default theme by using the CreateAccountCustomization or UpdateAccountCustomization API operation. To further customize QuickSight by removing QuickSight sample assets and videos for all new users, see Customizing QuickSight in the Amazon QuickSight User Guide.  You can create customizations for your Amazon Web Services account; or, if you specify a namespace, for a QuickSight namespace instead. Customizations that apply to a namespace always override customizations that apply to an Amazon Web Services account;. To find out which customizations apply, use the DescribeAccountCustomization API operation. Before you use the CreateAccountCustomization API operation to add a theme as the namespace default, make sure that you first share the theme with the namespace. If you don't share it with the namespace, the theme isn't visible to your users even if you make it the default theme. To check if the theme is shared, view the current permissions by using the  DescribeThemePermissions  API operation. To share the theme, grant permissions by using the  UpdateThemePermissions  API operation. 
    */
   createAccountCustomization(callback?: (err: AWSError, data: QuickSight.Types.CreateAccountCustomizationResponse) => void): Request<QuickSight.Types.CreateAccountCustomizationResponse, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class QuickSight extends Service {
    */
   createAnalysis(callback?: (err: AWSError, data: QuickSight.Types.CreateAnalysisResponse) => void): Request<QuickSight.Types.CreateAnalysisResponse, AWSError>;
   /**
-   * Creates a dashboard from a template. To first create a template, see the  CreateTemplate  API operation. A dashboard is an entity in QuickSight that identifies QuickSight reports, created from analyses. You can share QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.
+   * Creates a dashboard from a template. To first create a template, see the  CreateTemplate  API operation. A dashboard is an entity in QuickSight that identifies QuickSight reports, created from analyses. You can share QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. If you have the correct permissions, you can create a dashboard from a template that exists in a different Amazon Web Services account;.
    */
   createDashboard(params: QuickSight.Types.CreateDashboardRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateDashboardResponse) => void): Request<QuickSight.Types.CreateDashboardResponse, AWSError>;
   /**
-   * Creates a dashboard from a template. To first create a template, see the  CreateTemplate  API operation. A dashboard is an entity in QuickSight that identifies QuickSight reports, created from analyses. You can share QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. If you have the correct permissions, you can create a dashboard from a template that exists in a different AWS account.
+   * Creates a dashboard from a template. To first create a template, see the  CreateTemplate  API operation. A dashboard is an entity in QuickSight that identifies QuickSight reports, created from analyses. You can share QuickSight dashboards. With the right permissions, you can create scheduled email reports from them. If you have the correct permissions, you can create a dashboard from a template that exists in a different Amazon Web Services account;.
    */
   createDashboard(callback?: (err: AWSError, data: QuickSight.Types.CreateDashboardResponse) => void): Request<QuickSight.Types.CreateDashboardResponse, AWSError>;
   /**
@@ -92,35 +92,35 @@ declare class QuickSight extends Service {
    */
   createGroupMembership(callback?: (err: AWSError, data: QuickSight.Types.CreateGroupMembershipResponse) => void): Request<QuickSight.Types.CreateGroupMembershipResponse, AWSError>;
   /**
-   * Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name (ARN). This policy assignment is attached to the specified groups or users of Amazon QuickSight. Assignment names are unique per AWS account. To avoid overwriting rules in other namespaces, use assignment names that are unique.
+   * Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name (ARN). This policy assignment is attached to the specified groups or users of Amazon QuickSight. Assignment names are unique per Amazon Web Services account;. To avoid overwriting rules in other namespaces, use assignment names that are unique.
    */
   createIAMPolicyAssignment(params: QuickSight.Types.CreateIAMPolicyAssignmentRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.CreateIAMPolicyAssignmentResponse, AWSError>;
   /**
-   * Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name (ARN). This policy assignment is attached to the specified groups or users of Amazon QuickSight. Assignment names are unique per AWS account. To avoid overwriting rules in other namespaces, use assignment names that are unique.
+   * Creates an assignment with one specified IAM policy, identified by its Amazon Resource Name (ARN). This policy assignment is attached to the specified groups or users of Amazon QuickSight. Assignment names are unique per Amazon Web Services account;. To avoid overwriting rules in other namespaces, use assignment names that are unique.
    */
   createIAMPolicyAssignment(callback?: (err: AWSError, data: QuickSight.Types.CreateIAMPolicyAssignmentResponse) => void): Request<QuickSight.Types.CreateIAMPolicyAssignmentResponse, AWSError>;
   /**
-   * Creates and starts a new SPICE ingestion on a dataset Any ingestions operating on tagged datasets inherit the same tags automatically for use in access control. For an example, see How do I create an IAM policy to control access to Amazon EC2 resources using tags? in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.
+   * Creates and starts a new SPICE ingestion on a dataset Any ingestions operating on tagged datasets inherit the same tags automatically for use in access control. For an example, see How do I create an IAM policy to control access to Amazon EC2 resources using tags? in the Amazon Web Services Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.
    */
   createIngestion(params: QuickSight.Types.CreateIngestionRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateIngestionResponse) => void): Request<QuickSight.Types.CreateIngestionResponse, AWSError>;
   /**
-   * Creates and starts a new SPICE ingestion on a dataset Any ingestions operating on tagged datasets inherit the same tags automatically for use in access control. For an example, see How do I create an IAM policy to control access to Amazon EC2 resources using tags? in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.
+   * Creates and starts a new SPICE ingestion on a dataset Any ingestions operating on tagged datasets inherit the same tags automatically for use in access control. For an example, see How do I create an IAM policy to control access to Amazon EC2 resources using tags? in the Amazon Web Services Knowledge Center. Tags are visible on the tagged dataset, but not on the ingestion resource.
    */
   createIngestion(callback?: (err: AWSError, data: QuickSight.Types.CreateIngestionResponse) => void): Request<QuickSight.Types.CreateIngestionResponse, AWSError>;
   /**
-   * (Enterprise edition only) Creates a new namespace for you to use with Amazon QuickSight. A namespace allows you to isolate the QuickSight users and groups that are registered for that namespace. Users that access the namespace can share assets only with other users or groups in the same namespace. They can't see users and groups in other namespaces. You can create a namespace after your AWS account is subscribed to QuickSight. The namespace must be unique within the AWS account. By default, there is a limit of 100 namespaces per AWS account. To increase your limit, create a ticket with AWS Support. 
+   * (Enterprise edition only) Creates a new namespace for you to use with Amazon QuickSight. A namespace allows you to isolate the QuickSight users and groups that are registered for that namespace. Users that access the namespace can share assets only with other users or groups in the same namespace. They can't see users and groups in other namespaces. You can create a namespace after your Amazon Web Services account; is subscribed to QuickSight. The namespace must be unique within the Amazon Web Services account;. By default, there is a limit of 100 namespaces per Amazon Web Services account;. To increase your limit, create a ticket with Amazon Web Services Support. 
    */
   createNamespace(params: QuickSight.Types.CreateNamespaceRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateNamespaceResponse) => void): Request<QuickSight.Types.CreateNamespaceResponse, AWSError>;
   /**
-   * (Enterprise edition only) Creates a new namespace for you to use with Amazon QuickSight. A namespace allows you to isolate the QuickSight users and groups that are registered for that namespace. Users that access the namespace can share assets only with other users or groups in the same namespace. They can't see users and groups in other namespaces. You can create a namespace after your AWS account is subscribed to QuickSight. The namespace must be unique within the AWS account. By default, there is a limit of 100 namespaces per AWS account. To increase your limit, create a ticket with AWS Support. 
+   * (Enterprise edition only) Creates a new namespace for you to use with Amazon QuickSight. A namespace allows you to isolate the QuickSight users and groups that are registered for that namespace. Users that access the namespace can share assets only with other users or groups in the same namespace. They can't see users and groups in other namespaces. You can create a namespace after your Amazon Web Services account; is subscribed to QuickSight. The namespace must be unique within the Amazon Web Services account;. By default, there is a limit of 100 namespaces per Amazon Web Services account;. To increase your limit, create a ticket with Amazon Web Services Support. 
    */
   createNamespace(callback?: (err: AWSError, data: QuickSight.Types.CreateNamespaceResponse) => void): Request<QuickSight.Types.CreateNamespaceResponse, AWSError>;
   /**
-   * Creates a template from an existing QuickSight analysis or template. You can use the resulting template to create a dashboard. A template is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.
+   * Creates a template from an existing Amazon QuickSight analysis or template. You can use the resulting template to create a dashboard. A template is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.
    */
   createTemplate(params: QuickSight.Types.CreateTemplateRequest, callback?: (err: AWSError, data: QuickSight.Types.CreateTemplateResponse) => void): Request<QuickSight.Types.CreateTemplateResponse, AWSError>;
   /**
-   * Creates a template from an existing QuickSight analysis or template. You can use the resulting template to create a dashboard. A template is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.
+   * Creates a template from an existing Amazon QuickSight analysis or template. You can use the resulting template to create a dashboard. A template is an entity in QuickSight that encapsulates the metadata required to create an analysis and that you can use to create s dashboard. A template adds a layer of abstraction by using placeholders to replace the dataset associated with the analysis. You can use templates to create dashboards by replacing dataset placeholders with datasets that follow the same schema that was used to create the source analysis and template.
    */
   createTemplate(callback?: (err: AWSError, data: QuickSight.Types.CreateTemplateResponse) => void): Request<QuickSight.Types.CreateTemplateResponse, AWSError>;
   /**
@@ -148,11 +148,11 @@ declare class QuickSight extends Service {
    */
   createThemeAlias(callback?: (err: AWSError, data: QuickSight.Types.CreateThemeAliasResponse) => void): Request<QuickSight.Types.CreateThemeAliasResponse, AWSError>;
   /**
-   * Deletes all Amazon QuickSight customizations in this AWS Region for the specified AWS account and QuickSight namespace.
+   * Deletes all Amazon QuickSight customizations in this Region; for the specified Amazon Web Services account; and QuickSight namespace.
    */
   deleteAccountCustomization(params: QuickSight.Types.DeleteAccountCustomizationRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteAccountCustomizationResponse) => void): Request<QuickSight.Types.DeleteAccountCustomizationResponse, AWSError>;
   /**
-   * Deletes all Amazon QuickSight customizations in this AWS Region for the specified AWS account and QuickSight namespace.
+   * Deletes all Amazon QuickSight customizations in this Region; for the specified Amazon Web Services account; and QuickSight namespace.
    */
   deleteAccountCustomization(callback?: (err: AWSError, data: QuickSight.Types.DeleteAccountCustomizationResponse) => void): Request<QuickSight.Types.DeleteAccountCustomizationResponse, AWSError>;
   /**
@@ -268,11 +268,11 @@ declare class QuickSight extends Service {
    */
   deleteThemeAlias(callback?: (err: AWSError, data: QuickSight.Types.DeleteThemeAliasResponse) => void): Request<QuickSight.Types.DeleteThemeAliasResponse, AWSError>;
   /**
-   * Deletes the Amazon QuickSight user that is associated with the identity of the AWS Identity and Access Management (IAM) user or role that's making the call. The IAM user isn't deleted as a result of this call. 
+   * Deletes the Amazon QuickSight user that is associated with the identity of the Identity and Access Management (IAM) user or role that's making the call. The IAM user isn't deleted as a result of this call. 
    */
   deleteUser(params: QuickSight.Types.DeleteUserRequest, callback?: (err: AWSError, data: QuickSight.Types.DeleteUserResponse) => void): Request<QuickSight.Types.DeleteUserResponse, AWSError>;
   /**
-   * Deletes the Amazon QuickSight user that is associated with the identity of the AWS Identity and Access Management (IAM) user or role that's making the call. The IAM user isn't deleted as a result of this call. 
+   * Deletes the Amazon QuickSight user that is associated with the identity of the Identity and Access Management (IAM) user or role that's making the call. The IAM user isn't deleted as a result of this call. 
    */
   deleteUser(callback?: (err: AWSError, data: QuickSight.Types.DeleteUserResponse) => void): Request<QuickSight.Types.DeleteUserResponse, AWSError>;
   /**
@@ -284,19 +284,19 @@ declare class QuickSight extends Service {
    */
   deleteUserByPrincipalId(callback?: (err: AWSError, data: QuickSight.Types.DeleteUserByPrincipalIdResponse) => void): Request<QuickSight.Types.DeleteUserByPrincipalIdResponse, AWSError>;
   /**
-   * Describes the customizations associated with the provided AWS account and Amazon QuickSight namespace in an AWS Region. The QuickSight console evaluates which customizations to apply by running this API operation with the Resolved flag included.  To determine what customizations display when you run this command, it can help to visualize the relationship of the entities involved.     AWS Account - The AWS account exists at the top of the hierarchy. It has the potential to use all of the AWS Regions and AWS Services. When you subscribe to QuickSight, you choose one AWS Region to use as your home Region. That's where your free SPICE capacity is located. You can use QuickSight in any supported AWS Region.     AWS Region - In each AWS Region where you sign in to QuickSight at least once, QuickSight acts as a separate instance of the same service. If you have a user directory, it resides in us-east-1, which is the US East (N. Virginia). Generally speaking, these users have access to QuickSight in any AWS Region, unless they are constrained to a namespace.  To run the command in a different AWS Region, you change your Region settings. If you're using the AWS CLI, you can use one of the following options:   Use command line options.    Use named profiles.    Run aws configure to change your default AWS Region. Use Enter to key the same settings for your keys. For more information, see Configuring the AWS CLI.      Namespace - A QuickSight namespace is a partition that contains users and assets (data sources, datasets, dashboards, and so on). To access assets that are in a specific namespace, users and groups must also be part of the same namespace. People who share a namespace are completely isolated from users and assets in other namespaces, even if they are in the same AWS account and AWS Region.    Applied customizations - Within an AWS Region, a set of QuickSight customizations can apply to an AWS account or to a namespace. Settings that you apply to a namespace override settings that you apply to an AWS account. All settings are isolated to a single AWS Region. To apply them in other AWS Regions, run the CreateAccountCustomization command in each AWS Region where you want to apply the same customizations.   
+   * Describes the customizations associated with the provided Amazon Web Services account; and Amazon QuickSight namespace in an Region;. The QuickSight console evaluates which customizations to apply by running this API operation with the Resolved flag included.  To determine what customizations display when you run this command, it can help to visualize the relationship of the entities involved.     Amazon Web Services account; - The Amazon Web Services account; exists at the top of the hierarchy. It has the potential to use all of the Regions; and AWS Services. When you subscribe to QuickSight, you choose one Region; to use as your home Region. That's where your free SPICE capacity is located. You can use QuickSight in any supported Region;.     Region; - In each Region; where you sign in to QuickSight at least once, QuickSight acts as a separate instance of the same service. If you have a user directory, it resides in us-east-1, which is the US East (N. Virginia). Generally speaking, these users have access to QuickSight in any Region;, unless they are constrained to a namespace.  To run the command in a different Region;, you change your Region settings. If you're using the AWS CLI, you can use one of the following options:   Use command line options.    Use named profiles.    Run aws configure to change your default Region;. Use Enter to key the same settings for your keys. For more information, see Configuring the AWS CLI.      Namespace - A QuickSight namespace is a partition that contains users and assets (data sources, datasets, dashboards, and so on). To access assets that are in a specific namespace, users and groups must also be part of the same namespace. People who share a namespace are completely isolated from users and assets in other namespaces, even if they are in the same Amazon Web Services account; and Region;.    Applied customizations - Within an Region;, a set of QuickSight customizations can apply to an Amazon Web Services account; or to a namespace. Settings that you apply to a namespace override settings that you apply to an Amazon Web Services account;. All settings are isolated to a single Region;. To apply them in other Regions;, run the CreateAccountCustomization command in each Region; where you want to apply the same customizations.   
    */
   describeAccountCustomization(params: QuickSight.Types.DescribeAccountCustomizationRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeAccountCustomizationResponse) => void): Request<QuickSight.Types.DescribeAccountCustomizationResponse, AWSError>;
   /**
-   * Describes the customizations associated with the provided AWS account and Amazon QuickSight namespace in an AWS Region. The QuickSight console evaluates which customizations to apply by running this API operation with the Resolved flag included.  To determine what customizations display when you run this command, it can help to visualize the relationship of the entities involved.     AWS Account - The AWS account exists at the top of the hierarchy. It has the potential to use all of the AWS Regions and AWS Services. When you subscribe to QuickSight, you choose one AWS Region to use as your home Region. That's where your free SPICE capacity is located. You can use QuickSight in any supported AWS Region.     AWS Region - In each AWS Region where you sign in to QuickSight at least once, QuickSight acts as a separate instance of the same service. If you have a user directory, it resides in us-east-1, which is the US East (N. Virginia). Generally speaking, these users have access to QuickSight in any AWS Region, unless they are constrained to a namespace.  To run the command in a different AWS Region, you change your Region settings. If you're using the AWS CLI, you can use one of the following options:   Use command line options.    Use named profiles.    Run aws configure to change your default AWS Region. Use Enter to key the same settings for your keys. For more information, see Configuring the AWS CLI.      Namespace - A QuickSight namespace is a partition that contains users and assets (data sources, datasets, dashboards, and so on). To access assets that are in a specific namespace, users and groups must also be part of the same namespace. People who share a namespace are completely isolated from users and assets in other namespaces, even if they are in the same AWS account and AWS Region.    Applied customizations - Within an AWS Region, a set of QuickSight customizations can apply to an AWS account or to a namespace. Settings that you apply to a namespace override settings that you apply to an AWS account. All settings are isolated to a single AWS Region. To apply them in other AWS Regions, run the CreateAccountCustomization command in each AWS Region where you want to apply the same customizations.   
+   * Describes the customizations associated with the provided Amazon Web Services account; and Amazon QuickSight namespace in an Region;. The QuickSight console evaluates which customizations to apply by running this API operation with the Resolved flag included.  To determine what customizations display when you run this command, it can help to visualize the relationship of the entities involved.     Amazon Web Services account; - The Amazon Web Services account; exists at the top of the hierarchy. It has the potential to use all of the Regions; and AWS Services. When you subscribe to QuickSight, you choose one Region; to use as your home Region. That's where your free SPICE capacity is located. You can use QuickSight in any supported Region;.     Region; - In each Region; where you sign in to QuickSight at least once, QuickSight acts as a separate instance of the same service. If you have a user directory, it resides in us-east-1, which is the US East (N. Virginia). Generally speaking, these users have access to QuickSight in any Region;, unless they are constrained to a namespace.  To run the command in a different Region;, you change your Region settings. If you're using the AWS CLI, you can use one of the following options:   Use command line options.    Use named profiles.    Run aws configure to change your default Region;. Use Enter to key the same settings for your keys. For more information, see Configuring the AWS CLI.      Namespace - A QuickSight namespace is a partition that contains users and assets (data sources, datasets, dashboards, and so on). To access assets that are in a specific namespace, users and groups must also be part of the same namespace. People who share a namespace are completely isolated from users and assets in other namespaces, even if they are in the same Amazon Web Services account; and Region;.    Applied customizations - Within an Region;, a set of QuickSight customizations can apply to an Amazon Web Services account; or to a namespace. Settings that you apply to a namespace override settings that you apply to an Amazon Web Services account;. All settings are isolated to a single Region;. To apply them in other Regions;, run the CreateAccountCustomization command in each Region; where you want to apply the same customizations.   
    */
   describeAccountCustomization(callback?: (err: AWSError, data: QuickSight.Types.DescribeAccountCustomizationResponse) => void): Request<QuickSight.Types.DescribeAccountCustomizationResponse, AWSError>;
   /**
-   * Describes the settings that were used when your QuickSight subscription was first created in this AWS account.
+   * Describes the settings that were used when your QuickSight subscription was first created in this Amazon Web Services account;.
    */
   describeAccountSettings(params: QuickSight.Types.DescribeAccountSettingsRequest, callback?: (err: AWSError, data: QuickSight.Types.DescribeAccountSettingsResponse) => void): Request<QuickSight.Types.DescribeAccountSettingsResponse, AWSError>;
   /**
-   * Describes the settings that were used when your QuickSight subscription was first created in this AWS account.
+   * Describes the settings that were used when your QuickSight subscription was first created in this Amazon Web Services account;.
    */
   describeAccountSettings(callback?: (err: AWSError, data: QuickSight.Types.DescribeAccountSettingsResponse) => void): Request<QuickSight.Types.DescribeAccountSettingsResponse, AWSError>;
   /**
@@ -476,11 +476,27 @@ declare class QuickSight extends Service {
    */
   describeUser(callback?: (err: AWSError, data: QuickSight.Types.DescribeUserResponse) => void): Request<QuickSight.Types.DescribeUserResponse, AWSError>;
   /**
-   * Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions.  Currently, you can use GetDashboardEmbedURL only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:   They must be used together.   They can be used one time only.   They are valid for 5 minutes after you run this command.   The resulting user session is valid for 10 hours.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide.
+   * Generates an embed URL that you can use to embed an Amazon QuickSight dashboard in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (default) to 10 hours (maximum).   You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
+   */
+  generateEmbedUrlForAnonymousUser(params: QuickSight.Types.GenerateEmbedUrlForAnonymousUserRequest, callback?: (err: AWSError, data: QuickSight.Types.GenerateEmbedUrlForAnonymousUserResponse) => void): Request<QuickSight.Types.GenerateEmbedUrlForAnonymousUserResponse, AWSError>;
+  /**
+   * Generates an embed URL that you can use to embed an Amazon QuickSight dashboard in your website, without having to register any reader users. Before you use this action, make sure that you have configured the dashboards and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (default) to 10 hours (maximum).   You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
+   */
+  generateEmbedUrlForAnonymousUser(callback?: (err: AWSError, data: QuickSight.Types.GenerateEmbedUrlForAnonymousUserResponse) => void): Request<QuickSight.Types.GenerateEmbedUrlForAnonymousUserResponse, AWSError>;
+  /**
+   * Generates an embed URL that you can use to embed an Amazon QuickSight experience in your website. This action can be used for any type of user registered in an Amazon QuickSight account. Before you use this action, make sure that you have configured the relevant Amazon QuickSight resource and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (default) to 10 hours (maximum).   You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
+   */
+  generateEmbedUrlForRegisteredUser(params: QuickSight.Types.GenerateEmbedUrlForRegisteredUserRequest, callback?: (err: AWSError, data: QuickSight.Types.GenerateEmbedUrlForRegisteredUserResponse) => void): Request<QuickSight.Types.GenerateEmbedUrlForRegisteredUserResponse, AWSError>;
+  /**
+   * Generates an embed URL that you can use to embed an Amazon QuickSight experience in your website. This action can be used for any type of user registered in an Amazon QuickSight account. Before you use this action, make sure that you have configured the relevant Amazon QuickSight resource and permissions. The following rules apply to the generated URL:   It contains a temporary bearer token. It is valid for 5 minutes after it is generated. Once redeemed within this period, it cannot be re-used again.   The URL validity period should not be confused with the actual session lifetime that can be customized using the  SessionLifetimeInMinutes  parameter. The resulting user session is valid for 15 minutes (default) to 10 hours (maximum).   You are charged only when the URL is used or there is interaction with Amazon QuickSight.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
+   */
+  generateEmbedUrlForRegisteredUser(callback?: (err: AWSError, data: QuickSight.Types.GenerateEmbedUrlForRegisteredUserResponse) => void): Request<QuickSight.Types.GenerateEmbedUrlForRegisteredUserResponse, AWSError>;
+  /**
+   * Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions.  Currently, you can use GetDashboardEmbedURL only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:   They must be used together.   They can be used one time only.   They are valid for 5 minutes after you run this command.   The resulting user session is valid for 10 hours.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
    */
   getDashboardEmbedUrl(params: QuickSight.Types.GetDashboardEmbedUrlRequest, callback?: (err: AWSError, data: QuickSight.Types.GetDashboardEmbedUrlResponse) => void): Request<QuickSight.Types.GetDashboardEmbedUrlResponse, AWSError>;
   /**
-   * Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions.  Currently, you can use GetDashboardEmbedURL only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:   They must be used together.   They can be used one time only.   They are valid for 5 minutes after you run this command.   The resulting user session is valid for 10 hours.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide.
+   * Generates a session URL and authorization code that you can use to embed an Amazon QuickSight read-only dashboard in your web server code. Before you use this command, make sure that you have configured the dashboards and permissions.  Currently, you can use GetDashboardEmbedURL only from the server, not from the user's browser. The following rules apply to the combination of URL and authorization code:   They must be used together.   They can be used one time only.   They are valid for 5 minutes after you run this command.   The resulting user session is valid for 10 hours.   For more information, see Embedded Analytics in the Amazon QuickSight User Guide. For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
    */
   getDashboardEmbedUrl(callback?: (err: AWSError, data: QuickSight.Types.GetDashboardEmbedUrlResponse) => void): Request<QuickSight.Types.GetDashboardEmbedUrlResponse, AWSError>;
   /**
@@ -492,11 +508,11 @@ declare class QuickSight extends Service {
    */
   getSessionEmbedUrl(callback?: (err: AWSError, data: QuickSight.Types.GetSessionEmbedUrlResponse) => void): Request<QuickSight.Types.GetSessionEmbedUrlResponse, AWSError>;
   /**
-   * Lists Amazon QuickSight analyses that exist in the specified AWS account.
+   * Lists Amazon QuickSight analyses that exist in the specified Amazon Web Services account;.
    */
   listAnalyses(params: QuickSight.Types.ListAnalysesRequest, callback?: (err: AWSError, data: QuickSight.Types.ListAnalysesResponse) => void): Request<QuickSight.Types.ListAnalysesResponse, AWSError>;
   /**
-   * Lists Amazon QuickSight analyses that exist in the specified AWS account.
+   * Lists Amazon QuickSight analyses that exist in the specified Amazon Web Services account;.
    */
   listAnalyses(callback?: (err: AWSError, data: QuickSight.Types.ListAnalysesResponse) => void): Request<QuickSight.Types.ListAnalysesResponse, AWSError>;
   /**
@@ -508,27 +524,27 @@ declare class QuickSight extends Service {
    */
   listDashboardVersions(callback?: (err: AWSError, data: QuickSight.Types.ListDashboardVersionsResponse) => void): Request<QuickSight.Types.ListDashboardVersionsResponse, AWSError>;
   /**
-   * Lists dashboards in an AWS account.
+   * Lists dashboards in an Amazon Web Services account;.
    */
   listDashboards(params: QuickSight.Types.ListDashboardsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListDashboardsResponse) => void): Request<QuickSight.Types.ListDashboardsResponse, AWSError>;
   /**
-   * Lists dashboards in an AWS account.
+   * Lists dashboards in an Amazon Web Services account;.
    */
   listDashboards(callback?: (err: AWSError, data: QuickSight.Types.ListDashboardsResponse) => void): Request<QuickSight.Types.ListDashboardsResponse, AWSError>;
   /**
-   * Lists all of the datasets belonging to the current AWS account in an AWS Region. The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/*.
+   * Lists all of the datasets belonging to the current Amazon Web Services account; in an Region;. The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/*.
    */
   listDataSets(params: QuickSight.Types.ListDataSetsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListDataSetsResponse) => void): Request<QuickSight.Types.ListDataSetsResponse, AWSError>;
   /**
-   * Lists all of the datasets belonging to the current AWS account in an AWS Region. The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/*.
+   * Lists all of the datasets belonging to the current Amazon Web Services account; in an Region;. The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/*.
    */
   listDataSets(callback?: (err: AWSError, data: QuickSight.Types.ListDataSetsResponse) => void): Request<QuickSight.Types.ListDataSetsResponse, AWSError>;
   /**
-   * Lists data sources in current AWS Region that belong to this AWS account.
+   * Lists data sources in current Region; that belong to this Amazon Web Services account;.
    */
   listDataSources(params: QuickSight.Types.ListDataSourcesRequest, callback?: (err: AWSError, data: QuickSight.Types.ListDataSourcesResponse) => void): Request<QuickSight.Types.ListDataSourcesResponse, AWSError>;
   /**
-   * Lists data sources in current AWS Region that belong to this AWS account.
+   * Lists data sources in current Region; that belong to this Amazon Web Services account;.
    */
   listDataSources(callback?: (err: AWSError, data: QuickSight.Types.ListDataSourcesResponse) => void): Request<QuickSight.Types.ListDataSourcesResponse, AWSError>;
   /**
@@ -588,11 +604,11 @@ declare class QuickSight extends Service {
    */
   listIngestions(callback?: (err: AWSError, data: QuickSight.Types.ListIngestionsResponse) => void): Request<QuickSight.Types.ListIngestionsResponse, AWSError>;
   /**
-   * Lists the namespaces for the specified AWS account.
+   * Lists the namespaces for the specified Amazon Web Services account;.
    */
   listNamespaces(params: QuickSight.Types.ListNamespacesRequest, callback?: (err: AWSError, data: QuickSight.Types.ListNamespacesResponse) => void): Request<QuickSight.Types.ListNamespacesResponse, AWSError>;
   /**
-   * Lists the namespaces for the specified AWS account.
+   * Lists the namespaces for the specified Amazon Web Services account;.
    */
   listNamespaces(callback?: (err: AWSError, data: QuickSight.Types.ListNamespacesResponse) => void): Request<QuickSight.Types.ListNamespacesResponse, AWSError>;
   /**
@@ -636,19 +652,19 @@ declare class QuickSight extends Service {
    */
   listThemeAliases(callback?: (err: AWSError, data: QuickSight.Types.ListThemeAliasesResponse) => void): Request<QuickSight.Types.ListThemeAliasesResponse, AWSError>;
   /**
-   * Lists all the versions of the themes in the current AWS account.
+   * Lists all the versions of the themes in the current Amazon Web Services account;.
    */
   listThemeVersions(params: QuickSight.Types.ListThemeVersionsRequest, callback?: (err: AWSError, data: QuickSight.Types.ListThemeVersionsResponse) => void): Request<QuickSight.Types.ListThemeVersionsResponse, AWSError>;
   /**
-   * Lists all the versions of the themes in the current AWS account.
+   * Lists all the versions of the themes in the current Amazon Web Services account;.
    */
   listThemeVersions(callback?: (err: AWSError, data: QuickSight.Types.ListThemeVersionsResponse) => void): Request<QuickSight.Types.ListThemeVersionsResponse, AWSError>;
   /**
-   * Lists all the themes in the current AWS account.
+   * Lists all the themes in the current Amazon Web Services account;.
    */
   listThemes(params: QuickSight.Types.ListThemesRequest, callback?: (err: AWSError, data: QuickSight.Types.ListThemesResponse) => void): Request<QuickSight.Types.ListThemesResponse, AWSError>;
   /**
-   * Lists all the themes in the current AWS account.
+   * Lists all the themes in the current Amazon Web Services account;.
    */
   listThemes(callback?: (err: AWSError, data: QuickSight.Types.ListThemesResponse) => void): Request<QuickSight.Types.ListThemesResponse, AWSError>;
   /**
@@ -684,19 +700,19 @@ declare class QuickSight extends Service {
    */
   restoreAnalysis(callback?: (err: AWSError, data: QuickSight.Types.RestoreAnalysisResponse) => void): Request<QuickSight.Types.RestoreAnalysisResponse, AWSError>;
   /**
-   * Searches for analyses that belong to the user specified in the filter.
+   * Searches for analyses that belong to the user specified in the filter.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   searchAnalyses(params: QuickSight.Types.SearchAnalysesRequest, callback?: (err: AWSError, data: QuickSight.Types.SearchAnalysesResponse) => void): Request<QuickSight.Types.SearchAnalysesResponse, AWSError>;
   /**
-   * Searches for analyses that belong to the user specified in the filter.
+   * Searches for analyses that belong to the user specified in the filter.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   searchAnalyses(callback?: (err: AWSError, data: QuickSight.Types.SearchAnalysesResponse) => void): Request<QuickSight.Types.SearchAnalysesResponse, AWSError>;
   /**
-   * Searches for dashboards that belong to a user. 
+   * Searches for dashboards that belong to a user.   This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   searchDashboards(params: QuickSight.Types.SearchDashboardsRequest, callback?: (err: AWSError, data: QuickSight.Types.SearchDashboardsResponse) => void): Request<QuickSight.Types.SearchDashboardsResponse, AWSError>;
   /**
-   * Searches for dashboards that belong to a user. 
+   * Searches for dashboards that belong to a user.   This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes. 
    */
   searchDashboards(callback?: (err: AWSError, data: QuickSight.Types.SearchDashboardsResponse) => void): Request<QuickSight.Types.SearchDashboardsResponse, AWSError>;
   /**
@@ -708,11 +724,11 @@ declare class QuickSight extends Service {
    */
   searchFolders(callback?: (err: AWSError, data: QuickSight.Types.SearchFoldersResponse) => void): Request<QuickSight.Types.SearchFoldersResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified QuickSight resource.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource. QuickSight supports tagging on data set, data source, dashboard, and template.  Tagging for QuickSight works in a similar way to tagging for other AWS services, except for the following:   You can't use tags to track AWS costs for QuickSight. This restriction is because QuickSight costs are based on users and SPICE capacity, which aren't taggable resources.   QuickSight doesn't currently support the Tag Editor for AWS Resource Groups.  
+   * Assigns one or more tags (key-value pairs) to the specified QuickSight resource.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource. QuickSight supports tagging on data set, data source, dashboard, and template.  Tagging for QuickSight works in a similar way to tagging for other AWS services, except for the following:   You can't use tags to track AWS costs for QuickSight. This restriction is because QuickSight costs are based on users and SPICE capacity, which aren't taggable resources.   QuickSight doesn't currently support the Tag Editor for Resource Groups.  
    */
   tagResource(params: QuickSight.Types.TagResourceRequest, callback?: (err: AWSError, data: QuickSight.Types.TagResourceResponse) => void): Request<QuickSight.Types.TagResourceResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified QuickSight resource.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource. QuickSight supports tagging on data set, data source, dashboard, and template.  Tagging for QuickSight works in a similar way to tagging for other AWS services, except for the following:   You can't use tags to track AWS costs for QuickSight. This restriction is because QuickSight costs are based on users and SPICE capacity, which aren't taggable resources.   QuickSight doesn't currently support the Tag Editor for AWS Resource Groups.  
+   * Assigns one or more tags (key-value pairs) to the specified QuickSight resource.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. You can use the TagResource operation with a resource that already has tags. If you specify a new tag key for the resource, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource. QuickSight supports tagging on data set, data source, dashboard, and template.  Tagging for QuickSight works in a similar way to tagging for other AWS services, except for the following:   You can't use tags to track AWS costs for QuickSight. This restriction is because QuickSight costs are based on users and SPICE capacity, which aren't taggable resources.   QuickSight doesn't currently support the Tag Editor for Resource Groups.  
    */
   tagResource(callback?: (err: AWSError, data: QuickSight.Types.TagResourceResponse) => void): Request<QuickSight.Types.TagResourceResponse, AWSError>;
   /**
@@ -724,19 +740,19 @@ declare class QuickSight extends Service {
    */
   untagResource(callback?: (err: AWSError, data: QuickSight.Types.UntagResourceResponse) => void): Request<QuickSight.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates Amazon QuickSight customizations the current AWS Region. Currently, the only customization you can use is a theme. You can use customizations for your AWS account or, if you specify a namespace, for a QuickSight namespace instead. Customizations that apply to a namespace override customizations that apply to an AWS account. To find out which customizations apply, use the DescribeAccountCustomization API operation. 
+   * Updates Amazon QuickSight customizations the current Region;. Currently, the only customization you can use is a theme. You can use customizations for your Amazon Web Services account; or, if you specify a namespace, for a QuickSight namespace instead. Customizations that apply to a namespace override customizations that apply to an Amazon Web Services account;. To find out which customizations apply, use the DescribeAccountCustomization API operation. 
    */
   updateAccountCustomization(params: QuickSight.Types.UpdateAccountCustomizationRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateAccountCustomizationResponse) => void): Request<QuickSight.Types.UpdateAccountCustomizationResponse, AWSError>;
   /**
-   * Updates Amazon QuickSight customizations the current AWS Region. Currently, the only customization you can use is a theme. You can use customizations for your AWS account or, if you specify a namespace, for a QuickSight namespace instead. Customizations that apply to a namespace override customizations that apply to an AWS account. To find out which customizations apply, use the DescribeAccountCustomization API operation. 
+   * Updates Amazon QuickSight customizations the current Region;. Currently, the only customization you can use is a theme. You can use customizations for your Amazon Web Services account; or, if you specify a namespace, for a QuickSight namespace instead. Customizations that apply to a namespace override customizations that apply to an Amazon Web Services account;. To find out which customizations apply, use the DescribeAccountCustomization API operation. 
    */
   updateAccountCustomization(callback?: (err: AWSError, data: QuickSight.Types.UpdateAccountCustomizationResponse) => void): Request<QuickSight.Types.UpdateAccountCustomizationResponse, AWSError>;
   /**
-   * Updates the Amazon QuickSight settings in your AWS account.
+   * Updates the Amazon QuickSight settings in your Amazon Web Services account;.
    */
   updateAccountSettings(params: QuickSight.Types.UpdateAccountSettingsRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateAccountSettingsResponse) => void): Request<QuickSight.Types.UpdateAccountSettingsResponse, AWSError>;
   /**
-   * Updates the Amazon QuickSight settings in your AWS account.
+   * Updates the Amazon QuickSight settings in your Amazon Web Services account;.
    */
   updateAccountSettings(callback?: (err: AWSError, data: QuickSight.Types.UpdateAccountSettingsResponse) => void): Request<QuickSight.Types.UpdateAccountSettingsResponse, AWSError>;
   /**
@@ -756,11 +772,11 @@ declare class QuickSight extends Service {
    */
   updateAnalysisPermissions(callback?: (err: AWSError, data: QuickSight.Types.UpdateAnalysisPermissionsResponse) => void): Request<QuickSight.Types.UpdateAnalysisPermissionsResponse, AWSError>;
   /**
-   * Updates a dashboard in an AWS account.
+   * Updates a dashboard in an Amazon Web Services account;.  Updating a Dashboard creates a new dashboard version but does not immediately publish the new version. You can update the published version of a dashboard by using the UpdateDashboardPublishedVersion API operation. 
    */
   updateDashboard(params: QuickSight.Types.UpdateDashboardRequest, callback?: (err: AWSError, data: QuickSight.Types.UpdateDashboardResponse) => void): Request<QuickSight.Types.UpdateDashboardResponse, AWSError>;
   /**
-   * Updates a dashboard in an AWS account.
+   * Updates a dashboard in an Amazon Web Services account;.  Updating a Dashboard creates a new dashboard version but does not immediately publish the new version. You can update the published version of a dashboard by using the UpdateDashboardPublishedVersion API operation. 
    */
   updateDashboard(callback?: (err: AWSError, data: QuickSight.Types.UpdateDashboardResponse) => void): Request<QuickSight.Types.UpdateDashboardResponse, AWSError>;
   /**
@@ -909,7 +925,7 @@ declare namespace QuickSight {
   }
   export interface AccountSettings {
     /**
-     * The "account name" you provided for the QuickSight subscription in your AWS account. You create this name when you sign up for QuickSight. It is unique in all of AWS and it appears only in the console when users sign in.
+     * The "account name" you provided for the QuickSight subscription in your Amazon Web Services account;. You create this name when you sign up for QuickSight. It is unique in all of Amazon Web Services and it appears only when users sign in.
      */
     AccountName?: String;
     /**
@@ -917,7 +933,7 @@ declare namespace QuickSight {
      */
     Edition?: Edition;
     /**
-     * The default QuickSight namespace for your AWS account. 
+     * The default QuickSight namespace for your Amazon Web Services account;. 
      */
     DefaultNamespace?: Namespace;
     /**
@@ -1048,7 +1064,7 @@ declare namespace QuickSight {
      */
     AnalysisId?: RestrictiveResourceId;
     /**
-     * The name of the analysis. This name is displayed in the QuickSight console. 
+     * The name of the analysis. This name is displayed in the QuickSight console.
      */
     Name?: AnalysisName;
     /**
@@ -1065,7 +1081,20 @@ declare namespace QuickSight {
     LastUpdatedTime?: Timestamp;
   }
   export type AnalysisSummaryList = AnalysisSummary[];
+  export interface AnonymousUserDashboardEmbeddingConfiguration {
+    /**
+     * The dashboard ID for the dashboard that you want the user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this dashboard. The Amazon Resource Name (ARN) of this dashboard must be included in the AuthorizedResourceArns parameter. Otherwise, the request will fail with InvalidParameterValueException.
+     */
+    InitialDashboardId: RestrictiveResourceId;
+  }
+  export interface AnonymousUserEmbeddingExperienceConfiguration {
+    /**
+     * The type of embedding experience. In this case, an Amazon QuickSight dashboard.
+     */
+    Dashboard?: AnonymousUserDashboardEmbeddingConfiguration;
+  }
   export type Arn = string;
+  export type ArnList = Arn[];
   export type AssignmentStatus = "ENABLED"|"DRAFT"|"DISABLED"|string;
   export interface AthenaParameters {
     /**
@@ -1133,7 +1162,7 @@ declare namespace QuickSight {
   export type CalculatedColumnList = CalculatedColumn[];
   export interface CancelIngestionRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -1155,7 +1184,7 @@ declare namespace QuickSight {
      */
     IngestionId?: IngestionId;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: string;
     /**
@@ -1258,7 +1287,7 @@ declare namespace QuickSight {
   export type CopySourceArn = string;
   export interface CreateAccountCustomizationRequest {
     /**
-     * The ID for the AWS account that you want to customize QuickSight for.
+     * The ID for the Amazon Web Services account; that you want to customize QuickSight for.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -1266,7 +1295,7 @@ declare namespace QuickSight {
      */
     Namespace?: Namespace;
     /**
-     * The QuickSight customizations you're adding in the current AWS Region. You can add these to an AWS account and a QuickSight namespace.  For example, you can add a default theme by setting AccountCustomization to the midnight theme: "AccountCustomization": { "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" }. Or, you can add a custom theme by specifying "AccountCustomization": { "DefaultTheme": "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639" }. 
+     * The QuickSight customizations you're adding in the current Region;. You can add these to an Amazon Web Services account; and a QuickSight namespace.  For example, you can add a default theme by setting AccountCustomization to the midnight theme: "AccountCustomization": { "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" }. Or, you can add a custom theme by specifying "AccountCustomization": { "DefaultTheme": "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639" }. 
      */
     AccountCustomization: AccountCustomization;
     /**
@@ -1276,11 +1305,11 @@ declare namespace QuickSight {
   }
   export interface CreateAccountCustomizationResponse {
     /**
-     * The Amazon Resource Name (ARN) for the customization that you created for this AWS account.
+     * The Amazon Resource Name (ARN) for the customization that you created for this Amazon Web Services account;.
      */
     Arn?: Arn;
     /**
-     * The ID for the AWS account that you want to customize QuickSight for.
+     * The ID for the Amazon Web Services account; that you want to customize QuickSight for.
      */
     AwsAccountId?: AwsAccountId;
     /**
@@ -1288,11 +1317,11 @@ declare namespace QuickSight {
      */
     Namespace?: Namespace;
     /**
-     * The QuickSight customizations you're adding in the current AWS Region. 
+     * The QuickSight customizations you're adding in the current Region;. 
      */
     AccountCustomization?: AccountCustomization;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -1302,7 +1331,7 @@ declare namespace QuickSight {
   }
   export interface CreateAnalysisRequest {
     /**
-     * The ID of the AWS account where you are creating an analysis.
+     * The ID of the Amazon Web Services account; where you are creating an analysis.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -1318,7 +1347,7 @@ declare namespace QuickSight {
      */
     Parameters?: Parameters;
     /**
-     * A structure that describes the principals and the resource-level permissions on an analysis. You can use the Permissions structure to grant permissions by providing a list of AWS Identity and Access Management (IAM) action information for each principal listed by Amazon Resource Name (ARN).  To specify no permissions, omit Permissions.
+     * A structure that describes the principals and the resource-level permissions on an analysis. You can use the Permissions structure to grant permissions by providing a list of Identity and Access Management (IAM) action information for each principal listed by Amazon Resource Name (ARN).  To specify no permissions, omit Permissions.
      */
     Permissions?: ResourcePermissionList;
     /**
@@ -1352,7 +1381,7 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
@@ -1364,7 +1393,7 @@ declare namespace QuickSight {
   }
   export interface CreateDashboardRequest {
     /**
-     * The ID of the AWS account where you want to create the dashboard.
+     * The ID of the Amazon Web Services account; where you want to create the dashboard.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -1384,7 +1413,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * The entity that you are using as a source when you create the dashboard. In SourceEntity, you specify the type of object you're using as source. You can only create a dashboard from a template, so you use a SourceTemplate entity. If you need to create a dashboard from an analysis, first convert the analysis to a template by using the CreateTemplate API operation. For SourceTemplate, specify the Amazon Resource Name (ARN) of the source template. The SourceTemplateARN can contain any AWS Account and any QuickSight-supported AWS Region.  Use the DataSetReferences entity within SourceTemplate to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
+     * The entity that you are using as a source when you create the dashboard. In SourceEntity, you specify the type of object you're using as source. You can only create a dashboard from a template, so you use a SourceTemplate entity. If you need to create a dashboard from an analysis, first convert the analysis to a template by using the CreateTemplate API operation. For SourceTemplate, specify the Amazon Resource Name (ARN) of the source template. The SourceTemplateARN can contain any Amazon Web Services account; and any QuickSight-supported Region;.  Use the DataSetReferences entity within SourceTemplate to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
      */
     SourceEntity: DashboardSourceEntity;
     /**
@@ -1400,7 +1429,7 @@ declare namespace QuickSight {
      */
     DashboardPublishOptions?: DashboardPublishOptions;
     /**
-     * The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If you add a value for this field, it overrides the value that is used in the source entity. The theme ARN must exist in the same AWS account where you create the dashboard.
+     * The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If you add a value for this field, it overrides the value that is used in the source entity. The theme ARN must exist in the same Amazon Web Services account; where you create the dashboard.
      */
     ThemeArn?: Arn;
   }
@@ -1426,17 +1455,17 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface CreateDataSetRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * An ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
+     * An ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSetId: ResourceId;
     /**
@@ -1472,6 +1501,10 @@ declare namespace QuickSight {
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
     /**
+     * The configuration of tags on a dataset to set row-level security. Row-level security tags are currently supported for anonymous embedding only.
+     */
+    RowLevelPermissionTagConfiguration?: RowLevelPermissionTagConfiguration;
+    /**
      * A set of one or more definitions of a  ColumnLevelPermissionRule .
      */
     ColumnLevelPermissionRules?: ColumnLevelPermissionRuleList;
@@ -1486,7 +1519,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
+     * The ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSetId?: ResourceId;
     /**
@@ -1498,7 +1531,7 @@ declare namespace QuickSight {
      */
     IngestionId?: ResourceId;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -1508,11 +1541,11 @@ declare namespace QuickSight {
   }
   export interface CreateDataSourceRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * An ID for the data source. This ID is unique per AWS Region for each AWS account. 
+     * An ID for the data source. This ID is unique per Region; for each Amazon Web Services account;. 
      */
     DataSourceId: ResourceId;
     /**
@@ -1554,7 +1587,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID of the data source. This ID is unique per AWS Region for each AWS account.
+     * The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSourceId?: ResourceId;
     /**
@@ -1562,7 +1595,7 @@ declare namespace QuickSight {
      */
     CreationStatus?: ResourceStatus;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -1660,7 +1693,7 @@ declare namespace QuickSight {
      */
     GroupName: GroupName;
     /**
-     * The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The ID for the Amazon Web Services account; that the group is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -1674,7 +1707,7 @@ declare namespace QuickSight {
      */
     GroupMember?: GroupMember;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -1692,7 +1725,7 @@ declare namespace QuickSight {
      */
     Description?: GroupDescription;
     /**
-     * The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The ID for the Amazon Web Services account; that the group is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -1706,7 +1739,7 @@ declare namespace QuickSight {
      */
     Group?: Group;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -1716,11 +1749,11 @@ declare namespace QuickSight {
   }
   export interface CreateIAMPolicyAssignmentRequest {
     /**
-     * The ID of the AWS account where you want to assign an IAM policy to QuickSight users or groups.
+     * The ID of the Amazon Web Services account; where you want to assign an IAM policy to QuickSight users or groups.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The name of the assignment, also called a rule. It must be unique within an AWS account.
+     * The name of the assignment, also called a rule. It must be unique within an Amazon Web Services account;.
      */
     AssignmentName: IAMPolicyAssignmentName;
     /**
@@ -1742,7 +1775,7 @@ declare namespace QuickSight {
   }
   export interface CreateIAMPolicyAssignmentResponse {
     /**
-     * The name of the assignment. This name must be unique within the AWS account.
+     * The name of the assignment. This name must be unique within the Amazon Web Services account;.
      */
     AssignmentName?: IAMPolicyAssignmentName;
     /**
@@ -1762,7 +1795,7 @@ declare namespace QuickSight {
      */
     Identities?: IdentityMap;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -1780,7 +1813,7 @@ declare namespace QuickSight {
      */
     IngestionId: IngestionId;
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
   }
@@ -1798,7 +1831,7 @@ declare namespace QuickSight {
      */
     IngestionStatus?: IngestionStatus;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: string;
     /**
@@ -1808,7 +1841,7 @@ declare namespace QuickSight {
   }
   export interface CreateNamespaceRequest {
     /**
-     * The ID for the AWS account that you want to create the QuickSight namespace in.
+     * The ID for the Amazon Web Services account; that you want to create the QuickSight namespace in.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -1834,7 +1867,7 @@ declare namespace QuickSight {
      */
     Name?: Namespace;
     /**
-     * The AWS Region that you want to use for the free SPICE capacity for the new namespace. This is set to the region that you run CreateNamespace in. 
+     * The Region; that you want to use for the free SPICE capacity for the new namespace. This is set to the region that you run CreateNamespace in. 
      */
     CapacityRegion?: String;
     /**
@@ -1846,7 +1879,7 @@ declare namespace QuickSight {
      */
     IdentityStore?: IdentityStore;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -1856,7 +1889,7 @@ declare namespace QuickSight {
   }
   export interface CreateTemplateAliasRequest {
     /**
-     * The ID of the AWS account that contains the template that you creating an alias for.
+     * The ID of the Amazon Web Services account; that contains the template that you creating an alias for.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -1864,7 +1897,7 @@ declare namespace QuickSight {
      */
     TemplateId: RestrictiveResourceId;
     /**
-     * The name that you want to give to the template alias that you're creating. Don't start the alias name with the $ character. Alias names that start with $ are reserved by QuickSight. 
+     * The name that you want to give to the template alias that you're creating. Don't start the alias name with the $ character. Alias names that start with $ are reserved by Amazon QuickSight. 
      */
     AliasName: AliasName;
     /**
@@ -1882,17 +1915,17 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface CreateTemplateRequest {
     /**
-     * The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The ID for the Amazon Web Services account; that the group is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * An ID for the template that you want to create. This template is unique per AWS Region in each AWS account.
+     * An ID for the template that you want to create. This template is unique per Region; in each Amazon Web Services account;.
      */
     TemplateId: RestrictiveResourceId;
     /**
@@ -1904,7 +1937,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * The entity that you are using as a source when you create the template. In SourceEntity, you specify the type of object you're using as source: SourceTemplate for a template or SourceAnalysis for an analysis. Both of these require an Amazon Resource Name (ARN). For SourceTemplate, specify the ARN of the source template. For SourceAnalysis, specify the ARN of the source analysis. The SourceTemplate ARN can contain any AWS Account and any QuickSight-supported AWS Region.  Use the DataSetReferences entity within SourceTemplate or SourceAnalysis to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
+     * The entity that you are using as a source when you create the template. In SourceEntity, you specify the type of object you're using as source: SourceTemplate for a template or SourceAnalysis for an analysis. Both of these require an Amazon Resource Name (ARN). For SourceTemplate, specify the ARN of the source template. For SourceAnalysis, specify the ARN of the source analysis. The SourceTemplate ARN can contain any Amazon Web Services account; and any QuickSight-supported Region;.  Use the DataSetReferences entity within SourceTemplate or SourceAnalysis to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
      */
     SourceEntity: TemplateSourceEntity;
     /**
@@ -1938,13 +1971,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface CreateThemeAliasRequest {
     /**
-     * The ID of the AWS account that contains the theme for the new theme alias.
+     * The ID of the Amazon Web Services account; that contains the theme for the new theme alias.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -1970,17 +2003,17 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface CreateThemeRequest {
     /**
-     * The ID of the AWS account where you want to store the new theme. 
+     * The ID of the Amazon Web Services account; where you want to store the new theme. 
      */
     AwsAccountId: AwsAccountId;
     /**
-     * An ID for the theme that you want to create. The theme ID is unique per AWS Region in each AWS account.
+     * An ID for the theme that you want to create. The theme ID is unique per Region; in each Amazon Web Services account;.
      */
     ThemeId: RestrictiveResourceId;
     /**
@@ -2030,7 +2063,7 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
@@ -2326,6 +2359,10 @@ declare namespace QuickSight {
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
     /**
+     * The element you can use to define tags for row-level security.
+     */
+    RowLevelPermissionTagConfiguration?: RowLevelPermissionTagConfiguration;
+    /**
      * A set of one or more definitions of a  ColumnLevelPermissionRule .
      */
     ColumnLevelPermissionRules?: ColumnLevelPermissionRuleList;
@@ -2395,6 +2432,10 @@ declare namespace QuickSight {
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
     /**
+     * Whether or not the row level permission tags are applied.
+     */
+    RowLevelPermissionTagConfigurationApplied?: Boolean;
+    /**
      * A value that indicates if the dataset has column level permission configured.
      */
     ColumnLevelPermissionRulesApplied?: Boolean;
@@ -2406,7 +2447,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID of the data source. This ID is unique per AWS Region for each AWS account.
+     * The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSourceId?: ResourceId;
     /**
@@ -2490,7 +2531,7 @@ declare namespace QuickSight {
      */
     AuroraPostgreSqlParameters?: AuroraPostgreSqlParameters;
     /**
-     * AWS IoT Analytics parameters.
+     * Amazon Web Services IoT Analytics parameters.
      */
     AwsIotAnalyticsParameters?: AwsIotAnalyticsParameters;
     /**
@@ -2581,7 +2622,7 @@ declare namespace QuickSight {
   export type DecimalParameterList = DecimalParameter[];
   export interface DeleteAccountCustomizationRequest {
     /**
-     * The ID for the AWS account that you want to delete QuickSight customizations from in this AWS Region.
+     * The ID for the Amazon Web Services account; that you want to delete QuickSight customizations from in this Region;.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2591,7 +2632,7 @@ declare namespace QuickSight {
   }
   export interface DeleteAccountCustomizationResponse {
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -2601,7 +2642,7 @@ declare namespace QuickSight {
   }
   export interface DeleteAnalysisRequest {
     /**
-     * The ID of the AWS account where you want to delete an analysis.
+     * The ID of the Amazon Web Services account; where you want to delete an analysis.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2635,13 +2676,13 @@ declare namespace QuickSight {
      */
     DeletionTime?: Timestamp;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface DeleteDashboardRequest {
     /**
-     * The ID of the AWS account that contains the dashboard that you're deleting.
+     * The ID of the Amazon Web Services account; that contains the dashboard that you're deleting.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2667,17 +2708,17 @@ declare namespace QuickSight {
      */
     DashboardId?: RestrictiveResourceId;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface DeleteDataSetRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
+     * The ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSetId: ResourceId;
   }
@@ -2687,11 +2728,11 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
+     * The ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSetId?: ResourceId;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -2701,11 +2742,11 @@ declare namespace QuickSight {
   }
   export interface DeleteDataSourceRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID of the data source. This ID is unique per AWS Region for each AWS account.
+     * The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSourceId: ResourceId;
   }
@@ -2715,11 +2756,11 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID of the data source. This ID is unique per AWS Region for each AWS account.
+     * The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSourceId?: ResourceId;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -2793,7 +2834,7 @@ declare namespace QuickSight {
      */
     GroupName: GroupName;
     /**
-     * The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The ID for the Amazon Web Services account; that the group is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2803,7 +2844,7 @@ declare namespace QuickSight {
   }
   export interface DeleteGroupMembershipResponse {
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -2817,7 +2858,7 @@ declare namespace QuickSight {
      */
     GroupName: GroupName;
     /**
-     * The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The ID for the Amazon Web Services account; that the group is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2827,7 +2868,7 @@ declare namespace QuickSight {
   }
   export interface DeleteGroupResponse {
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -2837,7 +2878,7 @@ declare namespace QuickSight {
   }
   export interface DeleteIAMPolicyAssignmentRequest {
     /**
-     * The AWS account ID where you want to delete the IAM policy assignment.
+     * The Amazon Web Services account; ID where you want to delete the IAM policy assignment.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2855,7 +2896,7 @@ declare namespace QuickSight {
      */
     AssignmentName?: IAMPolicyAssignmentName;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -2865,7 +2906,7 @@ declare namespace QuickSight {
   }
   export interface DeleteNamespaceRequest {
     /**
-     * The ID for the AWS account that you want to delete the QuickSight namespace from.
+     * The ID for the Amazon Web Services account; that you want to delete the QuickSight namespace from.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2875,7 +2916,7 @@ declare namespace QuickSight {
   }
   export interface DeleteNamespaceResponse {
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -2885,7 +2926,7 @@ declare namespace QuickSight {
   }
   export interface DeleteTemplateAliasRequest {
     /**
-     * The ID of the AWS account that contains the item to delete.
+     * The ID of the Amazon Web Services account; that contains the item to delete.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2915,13 +2956,13 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface DeleteTemplateRequest {
     /**
-     * The ID of the AWS account that contains the template that you're deleting.
+     * The ID of the Amazon Web Services account; that contains the template that you're deleting.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2935,7 +2976,7 @@ declare namespace QuickSight {
   }
   export interface DeleteTemplateResponse {
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -2953,7 +2994,7 @@ declare namespace QuickSight {
   }
   export interface DeleteThemeAliasRequest {
     /**
-     * The ID of the AWS account that contains the theme alias to delete.
+     * The ID of the Amazon Web Services account; that contains the theme alias to delete.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -2975,7 +3016,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -2989,7 +3030,7 @@ declare namespace QuickSight {
   }
   export interface DeleteThemeRequest {
     /**
-     * The ID of the AWS account that contains the theme that you're deleting.
+     * The ID of the Amazon Web Services account; that contains the theme that you're deleting.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3007,7 +3048,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -3025,7 +3066,7 @@ declare namespace QuickSight {
      */
     PrincipalId: String;
     /**
-     * The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The ID for the Amazon Web Services account; that the user is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3035,7 +3076,7 @@ declare namespace QuickSight {
   }
   export interface DeleteUserByPrincipalIdResponse {
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -3049,7 +3090,7 @@ declare namespace QuickSight {
      */
     UserName: UserName;
     /**
-     * The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The ID for the Amazon Web Services account; that the user is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3059,7 +3100,7 @@ declare namespace QuickSight {
   }
   export interface DeleteUserResponse {
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -3070,7 +3111,7 @@ declare namespace QuickSight {
   export type Delimiter = string;
   export interface DescribeAccountCustomizationRequest {
     /**
-     * The ID for the AWS account that you want to describe QuickSight customizations for.
+     * The ID for the Amazon Web Services account; that you want to describe QuickSight customizations for.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3084,11 +3125,11 @@ declare namespace QuickSight {
   }
   export interface DescribeAccountCustomizationResponse {
     /**
-     * The Amazon Resource Name (ARN) of the customization that's associated with this AWS account.
+     * The Amazon Resource Name (ARN) of the customization that's associated with this Amazon Web Services account;.
      */
     Arn?: Arn;
     /**
-     * The ID for the AWS account that you're describing.
+     * The ID for the Amazon Web Services account; that you're describing.
      */
     AwsAccountId?: AwsAccountId;
     /**
@@ -3096,11 +3137,11 @@ declare namespace QuickSight {
      */
     Namespace?: Namespace;
     /**
-     * The QuickSight customizations that exist in the current AWS Region. 
+     * The QuickSight customizations that exist in the current Region;. 
      */
     AccountCustomization?: AccountCustomization;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -3110,17 +3151,17 @@ declare namespace QuickSight {
   }
   export interface DescribeAccountSettingsRequest {
     /**
-     * The ID for the AWS account that contains the settings that you want to list.
+     * The ID for the Amazon Web Services account; that contains the settings that you want to list.
      */
     AwsAccountId: AwsAccountId;
   }
   export interface DescribeAccountSettingsResponse {
     /**
-     * The QuickSight settings for this AWS account. This information includes the edition of Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the QuickSight subscription. In the QuickSight console, the QuickSight subscription is sometimes referred to as a QuickSight "account" even though it's technically not an account by itself. Instead, it's a subscription to the QuickSight service for your AWS account. The edition that you subscribe to applies to QuickSight in every AWS Region where you use it.
+     * The QuickSight settings for this Amazon Web Services account;. This information includes the edition of Amazon QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the QuickSight subscription. In the QuickSight console, the QuickSight subscription is sometimes referred to as a QuickSight "account" even though it's technically not an account by itself. Instead, it's a subscription to the QuickSight service for your Amazon Web Services account;. The edition that you subscribe to applies to QuickSight in every Region; where you use it.
      */
     AccountSettings?: AccountSettings;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -3130,7 +3171,7 @@ declare namespace QuickSight {
   }
   export interface DescribeAnalysisPermissionsRequest {
     /**
-     * The ID of the AWS account that contains the analysis whose permissions you're describing. You must be using the AWS account that the analysis is in.
+     * The ID of the Amazon Web Services account; that contains the analysis whose permissions you're describing. You must be using the Amazon Web Services account; that the analysis is in.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3156,13 +3197,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface DescribeAnalysisRequest {
     /**
-     * The ID of the AWS account that contains the analysis. You must be using the AWS account that the analysis is in.
+     * The ID of the Amazon Web Services account; that contains the analysis. You must be using the Amazon Web Services account; that the analysis is in.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3180,13 +3221,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface DescribeDashboardPermissionsRequest {
     /**
-     * The ID of the AWS account that contains the dashboard that you're describing permissions for.
+     * The ID of the Amazon Web Services account; that contains the dashboard that you're describing permissions for.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3212,13 +3253,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface DescribeDashboardRequest {
     /**
-     * The ID of the AWS account that contains the dashboard that you're describing.
+     * The ID of the Amazon Web Services account; that contains the dashboard that you're describing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3244,17 +3285,17 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface DescribeDataSetPermissionsRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
+     * The ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSetId: ResourceId;
   }
@@ -3264,7 +3305,7 @@ declare namespace QuickSight {
      */
     DataSetArn?: Arn;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
+     * The ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSetId?: ResourceId;
     /**
@@ -3272,7 +3313,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -3282,11 +3323,11 @@ declare namespace QuickSight {
   }
   export interface DescribeDataSetRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
+     * The ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSetId: ResourceId;
   }
@@ -3296,7 +3337,7 @@ declare namespace QuickSight {
      */
     DataSet?: DataSet;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -3306,11 +3347,11 @@ declare namespace QuickSight {
   }
   export interface DescribeDataSourcePermissionsRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID of the data source. This ID is unique per AWS Region for each AWS account.
+     * The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSourceId: ResourceId;
   }
@@ -3320,7 +3361,7 @@ declare namespace QuickSight {
      */
     DataSourceArn?: Arn;
     /**
-     * The ID of the data source. This ID is unique per AWS Region for each AWS account.
+     * The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSourceId?: ResourceId;
     /**
@@ -3328,7 +3369,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -3338,11 +3379,11 @@ declare namespace QuickSight {
   }
   export interface DescribeDataSourceRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID of the data source. This ID is unique per AWS Region for each AWS account.
+     * The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSourceId: ResourceId;
   }
@@ -3352,7 +3393,7 @@ declare namespace QuickSight {
      */
     DataSource?: DataSource;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -3454,7 +3495,7 @@ declare namespace QuickSight {
      */
     GroupName: GroupName;
     /**
-     * The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The ID for the Amazon Web Services account; that the group is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3468,7 +3509,7 @@ declare namespace QuickSight {
      */
     Group?: Group;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -3478,7 +3519,7 @@ declare namespace QuickSight {
   }
   export interface DescribeIAMPolicyAssignmentRequest {
     /**
-     * The ID of the AWS account that contains the assignment that you want to describe.
+     * The ID of the Amazon Web Services account; that contains the assignment that you want to describe.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3496,7 +3537,7 @@ declare namespace QuickSight {
      */
     IAMPolicyAssignment?: IAMPolicyAssignment;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -3506,7 +3547,7 @@ declare namespace QuickSight {
   }
   export interface DescribeIngestionRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3524,7 +3565,7 @@ declare namespace QuickSight {
      */
     Ingestion?: Ingestion;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: string;
     /**
@@ -3534,7 +3575,7 @@ declare namespace QuickSight {
   }
   export interface DescribeNamespaceRequest {
     /**
-     * The ID for the AWS account that contains the QuickSight namespace that you want to describe.
+     * The ID for the Amazon Web Services account; that contains the QuickSight namespace that you want to describe.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3544,11 +3585,11 @@ declare namespace QuickSight {
   }
   export interface DescribeNamespaceResponse {
     /**
-     * The information about the namespace that you're describing. The response includes the namespace ARN, name, AWS Region, creation status, and identity store. DescribeNamespace also works for namespaces that are in the process of being created. For incomplete namespaces, this API operation lists the namespace error types and messages associated with the creation process.
+     * The information about the namespace that you're describing. The response includes the namespace ARN, name, Region;, creation status, and identity store. DescribeNamespace also works for namespaces that are in the process of being created. For incomplete namespaces, this API operation lists the namespace error types and messages associated with the creation process.
      */
     Namespace?: NamespaceInfoV2;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -3558,7 +3599,7 @@ declare namespace QuickSight {
   }
   export interface DescribeTemplateAliasRequest {
     /**
-     * The ID of the AWS account that contains the template alias that you're describing.
+     * The ID of the Amazon Web Services account; that contains the template alias that you're describing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3580,13 +3621,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface DescribeTemplatePermissionsRequest {
     /**
-     * The ID of the AWS account that contains the template that you're describing.
+     * The ID of the Amazon Web Services account; that contains the template that you're describing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3608,7 +3649,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -3618,7 +3659,7 @@ declare namespace QuickSight {
   }
   export interface DescribeTemplateRequest {
     /**
-     * The ID of the AWS account that contains the template that you're describing.
+     * The ID of the Amazon Web Services account; that contains the template that you're describing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3644,13 +3685,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface DescribeThemeAliasRequest {
     /**
-     * The ID of the AWS account that contains the theme alias that you're describing.
+     * The ID of the Amazon Web Services account; that contains the theme alias that you're describing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3672,13 +3713,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface DescribeThemePermissionsRequest {
     /**
-     * The ID of the AWS account that contains the theme that you're describing.
+     * The ID of the Amazon Web Services account; that contains the theme that you're describing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3700,7 +3741,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -3710,7 +3751,7 @@ declare namespace QuickSight {
   }
   export interface DescribeThemeRequest {
     /**
-     * The ID of the AWS account that contains the theme that you're describing.
+     * The ID of the Amazon Web Services account; that contains the theme that you're describing.
      */
     AwsAccountId: AwsAndAccountId;
     /**
@@ -3736,7 +3777,7 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
@@ -3746,7 +3787,7 @@ declare namespace QuickSight {
      */
     UserName: UserName;
     /**
-     * The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The ID for the Amazon Web Services account; that the user is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3760,7 +3801,7 @@ declare namespace QuickSight {
      */
     User?: User;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -3774,6 +3815,7 @@ declare namespace QuickSight {
   export type Edition = "STANDARD"|"ENTERPRISE"|string;
   export type EmbeddingIdentityType = "IAM"|"QUICKSIGHT"|"ANONYMOUS"|string;
   export type EmbeddingUrl = string;
+  export type EntryPath = string;
   export type EntryPoint = string;
   export interface ErrorInfo {
     /**
@@ -3900,6 +3942,78 @@ declare namespace QuickSight {
   }
   export type FolderSummaryList = FolderSummary[];
   export type FolderType = "SHARED"|string;
+  export interface GenerateEmbedUrlForAnonymousUserRequest {
+    /**
+     * The ID for the Amazon Web Services account that contains the dashboard that you're embedding.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * How many minutes the session is valid. The session lifetime must be in [15-600] minutes range.
+     */
+    SessionLifetimeInMinutes?: SessionLifetimeInMinutes;
+    /**
+     * The Amazon QuickSight namespace that the anonymous user virtually belongs to. If you are not using an Amazon QuickSight custom namespace, set this to default.
+     */
+    Namespace: Namespace;
+    /**
+     * The session tags used for row-level security. Before you use this parameter, make sure that you have configured the relevant datasets using the DataSet$RowLevelPermissionTagConfiguration parameter so that session tags can be used to provide row-level security. These are not the tags used for the Amazon Web Services resource tagging feature. For more information, see Using Row-Level Security (RLS) with Tags.
+     */
+    SessionTags?: SessionTagList;
+    /**
+     * The Amazon Resource Names for the Amazon QuickSight resources that the user is authorized to access during the lifetime of the session. If you choose Dashboard embedding experience, pass the list of dashboard ARNs in the account that you want the user to be able to view.
+     */
+    AuthorizedResourceArns: ArnList;
+    /**
+     * The configuration of the experience you are embedding.
+     */
+    ExperienceConfiguration: AnonymousUserEmbeddingExperienceConfiguration;
+  }
+  export interface GenerateEmbedUrlForAnonymousUserResponse {
+    /**
+     * The embed URL for the dashboard.
+     */
+    EmbedUrl: EmbeddingUrl;
+    /**
+     * The HTTP status of the request.
+     */
+    Status: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId: String;
+  }
+  export interface GenerateEmbedUrlForRegisteredUserRequest {
+    /**
+     * The ID for the Amazon Web Services account that contains the dashboard that you're embedding.
+     */
+    AwsAccountId: AwsAccountId;
+    /**
+     * How many minutes the session is valid. The session lifetime must be in [15-600] minutes range.
+     */
+    SessionLifetimeInMinutes?: SessionLifetimeInMinutes;
+    /**
+     * The Amazon Resource Name for the registered user.
+     */
+    UserArn: Arn;
+    /**
+     * The experience you are embedding. For registered users, you can embed Amazon QuickSight dashboards or the entire Amazon QuickSight console.
+     */
+    ExperienceConfiguration: RegisteredUserEmbeddingExperienceConfiguration;
+  }
+  export interface GenerateEmbedUrlForRegisteredUserResponse {
+    /**
+     * The embed URL for the Amazon QuickSight dashboard or console.
+     */
+    EmbedUrl: EmbeddingUrl;
+    /**
+     * The HTTP status of the request.
+     */
+    Status: StatusCode;
+    /**
+     * The Amazon Web Services request ID for this operation.
+     */
+    RequestId: String;
+  }
   export interface GeoSpatialColumnGroup {
     /**
      * A display name for the hierarchy.
@@ -3918,11 +4032,11 @@ declare namespace QuickSight {
   export type GeoSpatialDataRole = "COUNTRY"|"STATE"|"COUNTY"|"CITY"|"POSTCODE"|"LONGITUDE"|"LATITUDE"|string;
   export interface GetDashboardEmbedUrlRequest {
     /**
-     * The ID for the AWS account that contains the dashboard that you're embedding.
+     * The ID for the Amazon Web Services account; that contains the dashboard that you're embedding.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dashboard, also added to the AWS Identity and Access Management (IAM) policy.
+     * The ID for the dashboard, also added to the Identity and Access Management (IAM) policy.
      */
     DashboardId: RestrictiveResourceId;
     /**
@@ -3950,7 +4064,7 @@ declare namespace QuickSight {
      */
     UserArn?: Arn;
     /**
-     * The QuickSight namespace that contains the dashboard IDs in this request. If you're not using a custom namespace, set this to "default".
+     * The Amazon QuickSight namespace that the user virtually belongs to. If you are not using an Amazon QuickSight custom namespace, set this to default.
      */
     Namespace?: Namespace;
     /**
@@ -3968,13 +4082,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface GetSessionEmbedUrlRequest {
     /**
-     * The ID for the AWS account associated with your QuickSight subscription.
+     * The ID for the Amazon Web Services account; associated with your QuickSight subscription.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -3986,7 +4100,7 @@ declare namespace QuickSight {
      */
     SessionLifetimeInMinutes?: SessionLifetimeInMinutes;
     /**
-     * The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT identity type. You can use this for any type of Amazon QuickSight users in your account (readers, authors, or admins). They need to be authenticated as one of the following:   Active Directory (AD) users or group members   Invited nonfederated users   AWS Identity and Access Management (IAM) users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation   Omit this parameter for users in the third group, IAM users and IAM role-based sessions.
+     * The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT identity type. You can use this for any type of Amazon QuickSight users in your account (readers, authors, or admins). They need to be authenticated as one of the following:   Active Directory (AD) users or group members   Invited nonfederated users   Identity and Access Management (IAM) users and IAM role-based sessions authenticated through Federated Single Sign-On using SAML, OpenID Connect, or IAM federation   Omit this parameter for users in the third group, IAM users and IAM role-based sessions.
      */
     UserArn?: Arn;
   }
@@ -4000,7 +4114,7 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
@@ -4047,7 +4161,7 @@ declare namespace QuickSight {
   export type Host = string;
   export interface IAMPolicyAssignment {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId?: AwsAccountId;
     /**
@@ -4200,7 +4314,7 @@ declare namespace QuickSight {
   export type JoinType = "INNER"|"OUTER"|"LEFT"|"RIGHT"|string;
   export interface ListAnalysesRequest {
     /**
-     * The ID of the AWS account that contains the analyses.
+     * The ID of the Amazon Web Services account; that contains the analyses.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4226,13 +4340,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface ListDashboardVersionsRequest {
     /**
-     * The ID of the AWS account that contains the dashboard that you're listing versions for.
+     * The ID of the Amazon Web Services account; that contains the dashboard that you're listing versions for.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4262,13 +4376,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface ListDashboardsRequest {
     /**
-     * The ID of the AWS account that contains the dashboards that you're listing.
+     * The ID of the Amazon Web Services account; that contains the dashboards that you're listing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4282,7 +4396,7 @@ declare namespace QuickSight {
   }
   export interface ListDashboardsResponse {
     /**
-     * A structure that contains all of the dashboards in your AWS account. This structure provides basic information about the dashboards.
+     * A structure that contains all of the dashboards in your Amazon Web Services account;. This structure provides basic information about the dashboards.
      */
     DashboardSummaryList?: DashboardSummaryList;
     /**
@@ -4294,13 +4408,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface ListDataSetsRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4322,7 +4436,7 @@ declare namespace QuickSight {
      */
     NextToken?: String;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -4332,7 +4446,7 @@ declare namespace QuickSight {
   }
   export interface ListDataSourcesRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4354,7 +4468,7 @@ declare namespace QuickSight {
      */
     NextToken?: String;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -4444,7 +4558,7 @@ declare namespace QuickSight {
      */
     MaxResults?: MaxResults;
     /**
-     * The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The ID for the Amazon Web Services account; that the group is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4462,7 +4576,7 @@ declare namespace QuickSight {
      */
     NextToken?: String;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -4472,7 +4586,7 @@ declare namespace QuickSight {
   }
   export interface ListGroupsRequest {
     /**
-     * The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The ID for the Amazon Web Services account; that the group is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4498,7 +4612,7 @@ declare namespace QuickSight {
      */
     NextToken?: String;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -4508,7 +4622,7 @@ declare namespace QuickSight {
   }
   export interface ListIAMPolicyAssignmentsForUserRequest {
     /**
-     * The ID of the AWS account that contains the assignments.
+     * The ID of the Amazon Web Services account; that contains the assignments.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4534,7 +4648,7 @@ declare namespace QuickSight {
      */
     ActiveAssignments?: ActiveIAMPolicyAssignmentList;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -4548,7 +4662,7 @@ declare namespace QuickSight {
   }
   export interface ListIAMPolicyAssignmentsRequest {
     /**
-     * The ID of the AWS account that contains these IAM policy assignments.
+     * The ID of the Amazon Web Services account; that contains these IAM policy assignments.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4578,7 +4692,7 @@ declare namespace QuickSight {
      */
     NextToken?: String;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -4596,7 +4710,7 @@ declare namespace QuickSight {
      */
     NextToken?: string;
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4614,7 +4728,7 @@ declare namespace QuickSight {
      */
     NextToken?: string;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: string;
     /**
@@ -4624,7 +4738,7 @@ declare namespace QuickSight {
   }
   export interface ListNamespacesRequest {
     /**
-     * The ID for the AWS account that contains the QuickSight namespaces that you want to list.
+     * The ID for the Amazon Web Services account; that contains the QuickSight namespaces that you want to list.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4638,7 +4752,7 @@ declare namespace QuickSight {
   }
   export interface ListNamespacesResponse {
     /**
-     * The information about the namespaces in this AWS account. The response includes the namespace ARN, name, AWS Region, notification email address, creation status, and identity store.
+     * The information about the namespaces in this Amazon Web Services account;. The response includes the namespace ARN, name, Region;, notification email address, creation status, and identity store.
      */
     Namespaces?: Namespaces;
     /**
@@ -4646,7 +4760,7 @@ declare namespace QuickSight {
      */
     NextToken?: String;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -4666,7 +4780,7 @@ declare namespace QuickSight {
      */
     Tags?: TagList;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -4676,7 +4790,7 @@ declare namespace QuickSight {
   }
   export interface ListTemplateAliasesRequest {
     /**
-     * The ID of the AWS account that contains the template aliases that you're listing.
+     * The ID of the Amazon Web Services account; that contains the template aliases that you're listing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4702,7 +4816,7 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -4712,7 +4826,7 @@ declare namespace QuickSight {
   }
   export interface ListTemplateVersionsRequest {
     /**
-     * The ID of the AWS account that contains the templates that you're listing.
+     * The ID of the Amazon Web Services account; that contains the templates that you're listing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4742,13 +4856,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface ListTemplatesRequest {
     /**
-     * The ID of the AWS account that contains the templates that you're listing.
+     * The ID of the Amazon Web Services account; that contains the templates that you're listing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4774,13 +4888,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface ListThemeAliasesRequest {
     /**
-     * The ID of the AWS account that contains the theme aliases that you're listing.
+     * The ID of the Amazon Web Services account; that contains the theme aliases that you're listing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4806,7 +4920,7 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -4816,7 +4930,7 @@ declare namespace QuickSight {
   }
   export interface ListThemeVersionsRequest {
     /**
-     * The ID of the AWS account that contains the themes that you're listing.
+     * The ID of the Amazon Web Services account; that contains the themes that you're listing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4846,13 +4960,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface ListThemesRequest {
     /**
-     * The ID of the AWS account that contains the themes that you're listing.
+     * The ID of the Amazon Web Services account; that contains the themes that you're listing.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4864,7 +4978,7 @@ declare namespace QuickSight {
      */
     MaxResults?: MaxResults;
     /**
-     * The type of themes that you want to list. Valid options include the following:    ALL (default)- Display all existing themes.    CUSTOM - Display only the themes created by people using Amazon QuickSight.    QUICKSIGHT - Display only the starting themes defined by QuickSight.  
+     * The type of themes that you want to list. Valid options include the following:    ALL (default)- Display all existing themes.    CUSTOM - Display only the themes created by people using Amazon QuickSight.    QUICKSIGHT - Display only the starting themes defined by Amazon QuickSight.  
      */
     Type?: ThemeType;
   }
@@ -4882,7 +4996,7 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
@@ -4892,7 +5006,7 @@ declare namespace QuickSight {
      */
     UserName: UserName;
     /**
-     * The AWS account ID that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The Amazon Web Services account; ID that the user is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4918,7 +5032,7 @@ declare namespace QuickSight {
      */
     NextToken?: String;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -4928,7 +5042,7 @@ declare namespace QuickSight {
   }
   export interface ListUsersRequest {
     /**
-     * The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The ID for the Amazon Web Services account; that the user is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -4954,7 +5068,7 @@ declare namespace QuickSight {
      */
     NextToken?: String;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -5069,7 +5183,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The namespace AWS Region.
+     * The namespace Region;.
      */
     CapacityRegion?: String;
     /**
@@ -5256,7 +5370,7 @@ declare namespace QuickSight {
      */
     SessionName?: RoleSessionName;
     /**
-     * The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The ID for the Amazon Web Services account; that the user is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -5268,7 +5382,7 @@ declare namespace QuickSight {
      */
     UserName?: UserName;
     /**
-     * (Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user's access by restricting access the following operations:   Create and update data sources   Create and update datasets   Create and update email reports   Subscribe to email reports   To add custom permissions to an existing user, use  UpdateUser  instead. A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the QuickSight console. Then, you use the RegisterUser API operation to assign the named set of permissions to a QuickSight user.  QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts in QuickSight (admin, author, reader). This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).
+     * (Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user's access by restricting access the following operations:   Create and update data sources   Create and update datasets   Create and update email reports   Subscribe to email reports   To add custom permissions to an existing user, use  UpdateUser  instead. A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the QuickSight console. Then, you use the RegisterUser API operation to assign the named set of permissions to a QuickSight user.  QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts in QuickSight (admin, author, reader). This feature is available only to QuickSight Enterprise edition subscriptions.
      */
     CustomPermissionsName?: RoleName;
     /**
@@ -5294,13 +5408,35 @@ declare namespace QuickSight {
      */
     UserInvitationUrl?: String;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
      * The HTTP status of the request.
      */
     Status?: StatusCode;
+  }
+  export interface RegisteredUserDashboardEmbeddingConfiguration {
+    /**
+     * The dashboard ID for the dashboard that you want the user to see first. This ID is included in the output URL. When the URL in response is accessed, Amazon QuickSight renders this dashboard if the user has permissions to view it. If the user does not have permission to view this dashboard, they see a permissions error message.
+     */
+    InitialDashboardId: RestrictiveResourceId;
+  }
+  export interface RegisteredUserEmbeddingExperienceConfiguration {
+    /**
+     * The configuration details for providing a dashboard embedding experience.
+     */
+    Dashboard?: RegisteredUserDashboardEmbeddingConfiguration;
+    /**
+     * The configuration details for providing an Amazon QuickSight console embedding experience. This can be used along with custom permissions to restrict access to certain features. For more information, see Customizing Access to the Amazon QuickSight Console in the Amazon QuickSight User Guide. Use GenerateEmbedUrlForRegisteredUser where you want to provide an authoring portal that allows users to create data sources, datasets, analyses, and dashboards. The users who accesses an embedded Amazon QuickSight console needs to belong to the author or admin security cohort. If you want to restrict permissions to some of these features, add a custom permissions profile to the user with the  UpdateUser  API operation. Use  RegisterUser  API operation to add a new user with a custom permission profile attached. For more information, see the following sections in the Amazon QuickSight User Guide:    Embedding the Full Functionality of the Amazon QuickSight Console for Authenticated Users     Customizing Access to the Amazon QuickSight Console    For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the Amazon QuickSight Developer Portal.
+     */
+    QuickSightConsole?: RegisteredUserQuickSightConsoleEmbeddingConfiguration;
+  }
+  export interface RegisteredUserQuickSightConsoleEmbeddingConfiguration {
+    /**
+     * The initial URL path for the Amazon QuickSight console. InitialPath is required. The entry point URL is constrained to the following paths:    /start     /start/analyses     /start/dashboards     /start/favorites     /dashboards/DashboardId. DashboardId is the actual ID key from the Amazon QuickSight console URL of the dashboard.    /analyses/AnalysisId. AnalysisId is the actual ID key from the Amazon QuickSight console URL of the analysis.  
+     */
+    InitialPath?: EntryPath;
   }
   export interface RelationalTable {
     /**
@@ -5341,7 +5477,7 @@ declare namespace QuickSight {
   export type ResourceName = string;
   export interface ResourcePermission {
     /**
-     * The Amazon Resource Name (ARN) of the principal. This can be one of the following:   The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)   The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)   The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight ARN. Use this option only to share resources (templates) across AWS accounts. (This is less common.)   
+     * The Amazon Resource Name (ARN) of the principal. This can be one of the following:   The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)   The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)   The ARN of an Amazon Web Services account; root: This is an IAM ARN rather than a QuickSight ARN. Use this option only to share resources (templates) across Amazon Web Services accounts. (This is less common.)   
      */
     Principal: Principal;
     /**
@@ -5353,7 +5489,7 @@ declare namespace QuickSight {
   export type ResourceStatus = "CREATION_IN_PROGRESS"|"CREATION_SUCCESSFUL"|"CREATION_FAILED"|"UPDATE_IN_PROGRESS"|"UPDATE_SUCCESSFUL"|"UPDATE_FAILED"|"DELETED"|string;
   export interface RestoreAnalysisRequest {
     /**
-     * The ID of the AWS account that contains the analysis.
+     * The ID of the Amazon Web Services account; that contains the analysis.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -5375,7 +5511,7 @@ declare namespace QuickSight {
      */
     AnalysisId?: RestrictiveResourceId;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
@@ -5409,14 +5545,48 @@ declare namespace QuickSight {
      * The user or group rules associated with the dataset that contains permissions for RLS. By default, FormatVersion is VERSION_1. When FormatVersion is VERSION_1, UserName and GroupName are required. When FormatVersion is VERSION_2, UserARN and GroupARN are required, and Namespace must not exist.
      */
     FormatVersion?: RowLevelPermissionFormatVersion;
+    /**
+     * The status of the row-level security permission dataset. If enabled, the status is ENABLED. If disabled, the status is DISABLED.
+     */
+    Status?: Status;
   }
   export type RowLevelPermissionFormatVersion = "VERSION_1"|"VERSION_2"|string;
   export type RowLevelPermissionPolicy = "GRANT_ACCESS"|"DENY_ACCESS"|string;
+  export interface RowLevelPermissionTagConfiguration {
+    /**
+     * The status of row-level security tags. If enabled, the status is ENABLED. If disabled, the status is DISABLED.
+     */
+    Status?: Status;
+    /**
+     * A set of rules associated with row-level security, such as the tag names and columns that they are assigned to.
+     */
+    TagRules: RowLevelPermissionTagRuleList;
+  }
+  export type RowLevelPermissionTagDelimiter = string;
+  export interface RowLevelPermissionTagRule {
+    /**
+     * The unique key for a tag.
+     */
+    TagKey: SessionTagKey;
+    /**
+     * The column name that a tag key is assigned to.
+     */
+    ColumnName: String;
+    /**
+     * A string that you want to use to delimit the values when you pass the values at run time. For example, you can delimit the values with a comma.
+     */
+    TagMultiValueDelimiter?: RowLevelPermissionTagDelimiter;
+    /**
+     * A string that you want to use to filter by all the values in a column in the dataset and don’t want to list the values one by one. For example, you can use an asterisk as your match all value.
+     */
+    MatchAllValue?: SessionTagValue;
+  }
+  export type RowLevelPermissionTagRuleList = RowLevelPermissionTagRule[];
   export type S3Bucket = string;
   export type S3Key = string;
   export interface S3Parameters {
     /**
-     * Location of the Amazon S3 manifest file. This is NULL if the manifest file was uploaded in the console.
+     * Location of the Amazon S3 manifest file. This is NULL if the manifest file was uploaded into QuickSight.
      */
     ManifestFileLocation: ManifestFileLocation;
   }
@@ -5436,7 +5606,7 @@ declare namespace QuickSight {
   }
   export interface SearchAnalysesRequest {
     /**
-     * The ID of the AWS account that contains the analyses that you're searching for.
+     * The ID of the Amazon Web Services account; that contains the analyses that you're searching for.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -5466,13 +5636,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface SearchDashboardsRequest {
     /**
-     * The ID of the AWS account that contains the user whose dashboards you're searching for. 
+     * The ID of the Amazon Web Services account; that contains the user whose dashboards you're searching for. 
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -5502,7 +5672,7 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
@@ -5549,6 +5719,19 @@ declare namespace QuickSight {
     SiteBaseUrl: SiteBaseUrl;
   }
   export type SessionLifetimeInMinutes = number;
+  export interface SessionTag {
+    /**
+     * The key for the tag.
+     */
+    Key: SessionTagKey;
+    /**
+     * The value that you want to assign the tag.
+     */
+    Value: SessionTagValue;
+  }
+  export type SessionTagKey = string;
+  export type SessionTagList = SessionTag[];
+  export type SessionTagValue = string;
   export interface Sheet {
     /**
      * The unique identifier associated with a sheet.
@@ -5622,6 +5805,7 @@ declare namespace QuickSight {
      */
     DisableSsl?: Boolean;
   }
+  export type Status = "ENABLED"|"DISABLED"|string;
   export type StatusCode = number;
   export type String = string;
   export type StringList = String[];
@@ -5652,7 +5836,7 @@ declare namespace QuickSight {
      */
     ColumnName: ColumnName;
     /**
-     * The dataset column tag, currently only used for geospatial type tagging. .  This is not tags for the AWS tagging feature. . 
+     * The dataset column tag, currently only used for geospatial type tagging.  This is not tags for the Amazon Web Services tagging feature. 
      */
     Tags: ColumnTagList;
   }
@@ -5671,7 +5855,7 @@ declare namespace QuickSight {
   }
   export interface TagResourceResponse {
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -5694,7 +5878,7 @@ declare namespace QuickSight {
      */
     Version?: TemplateVersion;
     /**
-     * The ID for the template. This is unique per AWS Region for each AWS account.
+     * The ID for the template. This is unique per Region; for each Amazon Web Services account;.
      */
     TemplateId?: RestrictiveResourceId;
     /**
@@ -5766,7 +5950,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID of the template. This ID is unique per AWS Region for each AWS account.
+     * The ID of the template. This ID is unique per Region; for each Amazon Web Services account;.
      */
     TemplateId?: RestrictiveResourceId;
     /**
@@ -5942,7 +6126,7 @@ declare namespace QuickSight {
      */
     Name?: ThemeName;
     /**
-     * The ID of the theme. This ID is unique per AWS Region for each AWS account.
+     * The ID of the theme. This ID is unique per Region; for each Amazon Web Services account;.
      */
     ThemeId?: RestrictiveResourceId;
     /**
@@ -6151,7 +6335,7 @@ declare namespace QuickSight {
   }
   export interface UntagResourceResponse {
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -6161,7 +6345,7 @@ declare namespace QuickSight {
   }
   export interface UpdateAccountCustomizationRequest {
     /**
-     * The ID for the AWS account that you want to update QuickSight customizations for.
+     * The ID for the Amazon Web Services account; that you want to update QuickSight customizations for.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -6169,17 +6353,17 @@ declare namespace QuickSight {
      */
     Namespace?: Namespace;
     /**
-     * The QuickSight customizations you're updating in the current AWS Region. 
+     * The QuickSight customizations you're updating in the current Region;. 
      */
     AccountCustomization: AccountCustomization;
   }
   export interface UpdateAccountCustomizationResponse {
     /**
-     * The Amazon Resource Name (ARN) for the updated customization for this AWS account.
+     * The Amazon Resource Name (ARN) for the updated customization for this Amazon Web Services account;.
      */
     Arn?: Arn;
     /**
-     * The ID for the AWS account that you want to update QuickSight customizations for.
+     * The ID for the Amazon Web Services account; that you want to update QuickSight customizations for.
      */
     AwsAccountId?: AwsAccountId;
     /**
@@ -6187,11 +6371,11 @@ declare namespace QuickSight {
      */
     Namespace?: Namespace;
     /**
-     * The QuickSight customizations you're updating in the current AWS Region. 
+     * The QuickSight customizations you're updating in the current Region;. 
      */
     AccountCustomization?: AccountCustomization;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -6201,21 +6385,21 @@ declare namespace QuickSight {
   }
   export interface UpdateAccountSettingsRequest {
     /**
-     * The ID for the AWS account that contains the QuickSight settings that you want to list.
+     * The ID for the Amazon Web Services account; that contains the QuickSight settings that you want to list.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The default namespace for this AWS account. Currently, the default is default. AWS Identity and Access Management (IAM) users that register for the first time with QuickSight provide an email that becomes associated with the default namespace.
+     * The default namespace for this Amazon Web Services account;. Currently, the default is default. Identity and Access Management (IAM) users that register for the first time with QuickSight provide an email that becomes associated with the default namespace.
      */
     DefaultNamespace: Namespace;
     /**
-     * The email address that you want QuickSight to send notifications to regarding your AWS account or QuickSight subscription.
+     * The email address that you want QuickSight to send notifications to regarding your Amazon Web Services account; or QuickSight subscription.
      */
     NotificationEmail?: String;
   }
   export interface UpdateAccountSettingsResponse {
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -6225,7 +6409,7 @@ declare namespace QuickSight {
   }
   export interface UpdateAnalysisPermissionsRequest {
     /**
-     * The ID of the AWS account that contains the analysis whose permissions you're updating. You must be using the AWS account that the analysis is in.
+     * The ID of the Amazon Web Services account; that contains the analysis whose permissions you're updating. You must be using the Amazon Web Services account; that the analysis is in.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -6255,7 +6439,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -6265,7 +6449,7 @@ declare namespace QuickSight {
   }
   export interface UpdateAnalysisRequest {
     /**
-     * The ID of the AWS account that contains the analysis that you're updating.
+     * The ID of the Amazon Web Services account; that contains the analysis that you're updating.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -6307,13 +6491,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface UpdateDashboardPermissionsRequest {
     /**
-     * The ID of the AWS account that contains the dashboard whose permissions you're updating.
+     * The ID of the Amazon Web Services account; that contains the dashboard whose permissions you're updating.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -6343,7 +6527,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -6353,7 +6537,7 @@ declare namespace QuickSight {
   }
   export interface UpdateDashboardPublishedVersionRequest {
     /**
-     * The ID of the AWS account that contains the dashboard that you're updating.
+     * The ID of the Amazon Web Services account; that contains the dashboard that you're updating.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -6379,13 +6563,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface UpdateDashboardRequest {
     /**
-     * The ID of the AWS account that contains the dashboard that you're updating.
+     * The ID of the Amazon Web Services account; that contains the dashboard that you're updating.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -6397,7 +6581,7 @@ declare namespace QuickSight {
      */
     Name: DashboardName;
     /**
-     * The entity that you are using as a source when you update the dashboard. In SourceEntity, you specify the type of object you're using as source. You can only update a dashboard from a template, so you use a SourceTemplate entity. If you need to update a dashboard from an analysis, first convert the analysis to a template by using the CreateTemplate API operation. For SourceTemplate, specify the Amazon Resource Name (ARN) of the source template. The SourceTemplate ARN can contain any AWS Account and any QuickSight-supported AWS Region.  Use the DataSetReferences entity within SourceTemplate to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
+     * The entity that you are using as a source when you update the dashboard. In SourceEntity, you specify the type of object you're using as source. You can only update a dashboard from a template, so you use a SourceTemplate entity. If you need to update a dashboard from an analysis, first convert the analysis to a template by using the CreateTemplate API operation. For SourceTemplate, specify the Amazon Resource Name (ARN) of the source template. The SourceTemplate ARN can contain any Amazon Web Services account; and any QuickSight-supported Region;.  Use the DataSetReferences entity within SourceTemplate to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
      */
     SourceEntity: DashboardSourceEntity;
     /**
@@ -6413,7 +6597,7 @@ declare namespace QuickSight {
      */
     DashboardPublishOptions?: DashboardPublishOptions;
     /**
-     * The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If you add a value for this field, it overrides the value that was originally associated with the entity. The theme ARN must exist in the same AWS account where you create the dashboard.
+     * The Amazon Resource Name (ARN) of the theme that is being used for this dashboard. If you add a value for this field, it overrides the value that was originally associated with the entity. The theme ARN must exist in the same Amazon Web Services account; where you create the dashboard.
      */
     ThemeArn?: Arn;
   }
@@ -6439,17 +6623,17 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface UpdateDataSetPermissionsRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dataset whose permissions you want to update. This ID is unique per AWS Region for each AWS account.
+     * The ID for the dataset whose permissions you want to update. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSetId: ResourceId;
     /**
@@ -6467,11 +6651,11 @@ declare namespace QuickSight {
      */
     DataSetArn?: Arn;
     /**
-     * The ID for the dataset whose permissions you want to update. This ID is unique per AWS Region for each AWS account.
+     * The ID for the dataset whose permissions you want to update. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSetId?: ResourceId;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -6481,11 +6665,11 @@ declare namespace QuickSight {
   }
   export interface UpdateDataSetRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID for the dataset that you want to update. This ID is unique per AWS Region for each AWS account.
+     * The ID for the dataset that you want to update. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSetId: ResourceId;
     /**
@@ -6517,6 +6701,10 @@ declare namespace QuickSight {
      */
     RowLevelPermissionDataSet?: RowLevelPermissionDataSet;
     /**
+     * The configuration of tags on a dataset to set row-level security. Row-level security tags are currently supported for anonymous embedding only.
+     */
+    RowLevelPermissionTagConfiguration?: RowLevelPermissionTagConfiguration;
+    /**
      * A set of one or more definitions of a  ColumnLevelPermissionRule .
      */
     ColumnLevelPermissionRules?: ColumnLevelPermissionRuleList;
@@ -6527,7 +6715,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID for the dataset that you want to create. This ID is unique per AWS Region for each AWS account.
+     * The ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSetId?: ResourceId;
     /**
@@ -6539,7 +6727,7 @@ declare namespace QuickSight {
      */
     IngestionId?: ResourceId;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -6549,11 +6737,11 @@ declare namespace QuickSight {
   }
   export interface UpdateDataSourcePermissionsRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID of the data source. This ID is unique per AWS Region for each AWS account. 
+     * The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;. 
      */
     DataSourceId: ResourceId;
     /**
@@ -6571,11 +6759,11 @@ declare namespace QuickSight {
      */
     DataSourceArn?: Arn;
     /**
-     * The ID of the data source. This ID is unique per AWS Region for each AWS account.
+     * The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSourceId?: ResourceId;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -6585,11 +6773,11 @@ declare namespace QuickSight {
   }
   export interface UpdateDataSourceRequest {
     /**
-     * The AWS account ID.
+     * The Amazon Web Services account; ID.
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The ID of the data source. This ID is unique per AWS Region for each AWS account. 
+     * The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;. 
      */
     DataSourceId: ResourceId;
     /**
@@ -6619,7 +6807,7 @@ declare namespace QuickSight {
      */
     Arn?: Arn;
     /**
-     * The ID of the data source. This ID is unique per AWS Region for each AWS account.
+     * The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.
      */
     DataSourceId?: ResourceId;
     /**
@@ -6627,7 +6815,7 @@ declare namespace QuickSight {
      */
     UpdateStatus?: ResourceStatus;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -6717,7 +6905,7 @@ declare namespace QuickSight {
      */
     Description?: GroupDescription;
     /**
-     * The ID for the AWS account that the group is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The ID for the Amazon Web Services account; that the group is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -6731,7 +6919,7 @@ declare namespace QuickSight {
      */
     Group?: Group;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -6741,11 +6929,11 @@ declare namespace QuickSight {
   }
   export interface UpdateIAMPolicyAssignmentRequest {
     /**
-     * The ID of the AWS account that contains the IAM policy assignment. 
+     * The ID of the Amazon Web Services account; that contains the IAM policy assignment. 
      */
     AwsAccountId: AwsAccountId;
     /**
-     * The name of the assignment, also called a rule. This name must be unique within an AWS account.
+     * The name of the assignment, also called a rule. This name must be unique within an Amazon Web Services account;.
      */
     AssignmentName: IAMPolicyAssignmentName;
     /**
@@ -6787,7 +6975,7 @@ declare namespace QuickSight {
      */
     AssignmentStatus?: AssignmentStatus;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -6798,7 +6986,7 @@ declare namespace QuickSight {
   export type UpdateResourcePermissionList = ResourcePermission[];
   export interface UpdateTemplateAliasRequest {
     /**
-     * The ID of the AWS account that contains the template alias that you're updating.
+     * The ID of the Amazon Web Services account; that contains the template alias that you're updating.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -6824,13 +7012,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface UpdateTemplatePermissionsRequest {
     /**
-     * The ID of the AWS account that contains the template.
+     * The ID of the Amazon Web Services account; that contains the template.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -6860,7 +7048,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -6870,7 +7058,7 @@ declare namespace QuickSight {
   }
   export interface UpdateTemplateRequest {
     /**
-     * The ID of the AWS account that contains the template that you're updating.
+     * The ID of the Amazon Web Services account; that contains the template that you're updating.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -6878,7 +7066,7 @@ declare namespace QuickSight {
      */
     TemplateId: RestrictiveResourceId;
     /**
-     * The entity that you are using as a source when you update the template. In SourceEntity, you specify the type of object you're using as source: SourceTemplate for a template or SourceAnalysis for an analysis. Both of these require an Amazon Resource Name (ARN). For SourceTemplate, specify the ARN of the source template. For SourceAnalysis, specify the ARN of the source analysis. The SourceTemplate ARN can contain any AWS Account and any QuickSight-supported AWS Region.  Use the DataSetReferences entity within SourceTemplate or SourceAnalysis to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
+     * The entity that you are using as a source when you update the template. In SourceEntity, you specify the type of object you're using as source: SourceTemplate for a template or SourceAnalysis for an analysis. Both of these require an Amazon Resource Name (ARN). For SourceTemplate, specify the ARN of the source template. For SourceAnalysis, specify the ARN of the source analysis. The SourceTemplate ARN can contain any Amazon Web Services account; and any QuickSight-supported Region;.  Use the DataSetReferences entity within SourceTemplate or SourceAnalysis to list the replacement datasets for the placeholders listed in the original. The schema in each dataset must match its placeholder. 
      */
     SourceEntity: TemplateSourceEntity;
     /**
@@ -6912,13 +7100,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface UpdateThemeAliasRequest {
     /**
-     * The ID of the AWS account that contains the theme alias that you're updating.
+     * The ID of the Amazon Web Services account; that contains the theme alias that you're updating.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -6944,13 +7132,13 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
   export interface UpdateThemePermissionsRequest {
     /**
-     * The ID of the AWS account that contains the theme.
+     * The ID of the Amazon Web Services account; that contains the theme.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -6980,7 +7168,7 @@ declare namespace QuickSight {
      */
     Permissions?: ResourcePermissionList;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**
@@ -6990,7 +7178,7 @@ declare namespace QuickSight {
   }
   export interface UpdateThemeRequest {
     /**
-     * The ID of the AWS account that contains the theme that you're updating.
+     * The ID of the Amazon Web Services account; that contains the theme that you're updating.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -7002,7 +7190,7 @@ declare namespace QuickSight {
      */
     Name?: ThemeName;
     /**
-     * The theme ID, defined by Amazon QuickSight, that a custom theme inherits from. All themes initially inherit from a default QuickSight theme.
+     * The theme ID, defined by Amazon QuickSight, that a custom theme inherits from. All themes initially inherit from a default Amazon QuickSight theme.
      */
     BaseThemeId: RestrictiveResourceId;
     /**
@@ -7036,7 +7224,7 @@ declare namespace QuickSight {
      */
     Status?: StatusCode;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
   }
@@ -7046,7 +7234,7 @@ declare namespace QuickSight {
      */
     UserName: UserName;
     /**
-     * The ID for the AWS account that the user is in. Currently, you use the ID for the AWS account that contains your Amazon QuickSight account.
+     * The ID for the Amazon Web Services account; that the user is in. Currently, you use the ID for the Amazon Web Services account; that contains your Amazon QuickSight account.
      */
     AwsAccountId: AwsAccountId;
     /**
@@ -7062,7 +7250,7 @@ declare namespace QuickSight {
      */
     Role: UserRole;
     /**
-     * (Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user's access by restricting access the following operations:   Create and update data sources   Create and update datasets   Create and update email reports   Subscribe to email reports   A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the QuickSight console. Then, you use the RegisterUser API operation to assign the named set of permissions to a QuickSight user.  QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts in QuickSight (admin, author, reader). This feature is available only to QuickSight Enterprise edition subscriptions that use SAML 2.0-Based Federation for Single Sign-On (SSO).
+     * (Enterprise edition only) The name of the custom permissions profile that you want to assign to this user. Customized permissions allows you to control a user's access by restricting access the following operations:   Create and update data sources   Create and update datasets   Create and update email reports   Subscribe to email reports   A set of custom permissions includes any combination of these restrictions. Currently, you need to create the profile names for custom permission sets by using the QuickSight console. Then, you use the RegisterUser API operation to assign the named set of permissions to a QuickSight user.  QuickSight custom permissions are applied through IAM policies. Therefore, they override the permissions typically granted by assigning QuickSight users to one of the default security cohorts in QuickSight (admin, author, reader). This feature is available only to QuickSight Enterprise edition subscriptions.
      */
     CustomPermissionsName?: RoleName;
     /**
@@ -7088,7 +7276,7 @@ declare namespace QuickSight {
      */
     User?: User;
     /**
-     * The AWS request ID for this operation.
+     * The Amazon Web Services request ID for this operation.
      */
     RequestId?: String;
     /**

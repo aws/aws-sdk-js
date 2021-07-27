@@ -12,43 +12,43 @@ declare class Shield extends Service {
   constructor(options?: Shield.Types.ClientConfiguration)
   config: Config & Shield.Types.ClientConfiguration;
   /**
-   * Authorizes the DDoS Response Team (DRT) to access the specified Amazon S3 bucket containing your AWS WAF logs. You can associate up to 10 Amazon S3 buckets with your subscription. To use the services of the DRT and make an AssociateDRTLogBucket request, you must be subscribed to the Business Support plan or the Enterprise Support plan.
+   * Authorizes the Shield Response Team (SRT) to access the specified Amazon S3 bucket containing log data such as Application Load Balancer access logs, CloudFront logs, or logs from third party sources. You can associate up to 10 Amazon S3 buckets with your subscription. To use the services of the SRT and make an AssociateDRTLogBucket request, you must be subscribed to the Business Support plan or the Enterprise Support plan.
    */
   associateDRTLogBucket(params: Shield.Types.AssociateDRTLogBucketRequest, callback?: (err: AWSError, data: Shield.Types.AssociateDRTLogBucketResponse) => void): Request<Shield.Types.AssociateDRTLogBucketResponse, AWSError>;
   /**
-   * Authorizes the DDoS Response Team (DRT) to access the specified Amazon S3 bucket containing your AWS WAF logs. You can associate up to 10 Amazon S3 buckets with your subscription. To use the services of the DRT and make an AssociateDRTLogBucket request, you must be subscribed to the Business Support plan or the Enterprise Support plan.
+   * Authorizes the Shield Response Team (SRT) to access the specified Amazon S3 bucket containing log data such as Application Load Balancer access logs, CloudFront logs, or logs from third party sources. You can associate up to 10 Amazon S3 buckets with your subscription. To use the services of the SRT and make an AssociateDRTLogBucket request, you must be subscribed to the Business Support plan or the Enterprise Support plan.
    */
   associateDRTLogBucket(callback?: (err: AWSError, data: Shield.Types.AssociateDRTLogBucketResponse) => void): Request<Shield.Types.AssociateDRTLogBucketResponse, AWSError>;
   /**
-   * Authorizes the DDoS Response Team (DRT), using the specified role, to access your AWS account to assist with DDoS attack mitigation during potential attacks. This enables the DRT to inspect your AWS WAF configuration and create or update AWS WAF rules and web ACLs. You can associate only one RoleArn with your subscription. If you submit an AssociateDRTRole request for an account that already has an associated role, the new RoleArn will replace the existing RoleArn.  Prior to making the AssociateDRTRole request, you must attach the AWSShieldDRTAccessPolicy managed policy to the role you will specify in the request. For more information see Attaching and Detaching IAM Policies. The role must also trust the service principal  drt.shield.amazonaws.com. For more information, see IAM JSON Policy Elements: Principal. The DRT will have access only to your AWS WAF and Shield resources. By submitting this request, you authorize the DRT to inspect your AWS WAF and Shield configuration and create and update AWS WAF rules and web ACLs on your behalf. The DRT takes these actions only if explicitly authorized by you. You must have the iam:PassRole permission to make an AssociateDRTRole request. For more information, see Granting a User Permissions to Pass a Role to an AWS Service.  To use the services of the DRT and make an AssociateDRTRole request, you must be subscribed to the Business Support plan or the Enterprise Support plan.
+   * Authorizes the Shield Response Team (SRT) using the specified role, to access your Amazon Web Services account to assist with DDoS attack mitigation during potential attacks. This enables the SRT to inspect your WAF configuration and create or update WAF rules and web ACLs. You can associate only one RoleArn with your subscription. If you submit an AssociateDRTRole request for an account that already has an associated role, the new RoleArn will replace the existing RoleArn.  Prior to making the AssociateDRTRole request, you must attach the AWSShieldDRTAccessPolicy managed policy to the role you will specify in the request. For more information see Attaching and Detaching IAM Policies. The role must also trust the service principal  drt.shield.amazonaws.com. For more information, see IAM JSON Policy Elements: Principal. The SRT will have access only to your WAF and Shield resources. By submitting this request, you authorize the SRT to inspect your WAF and Shield configuration and create and update WAF rules and web ACLs on your behalf. The SRT takes these actions only if explicitly authorized by you. You must have the iam:PassRole permission to make an AssociateDRTRole request. For more information, see Granting a User Permissions to Pass a Role to an Amazon Web Services Service.  To use the services of the SRT and make an AssociateDRTRole request, you must be subscribed to the Business Support plan or the Enterprise Support plan.
    */
   associateDRTRole(params: Shield.Types.AssociateDRTRoleRequest, callback?: (err: AWSError, data: Shield.Types.AssociateDRTRoleResponse) => void): Request<Shield.Types.AssociateDRTRoleResponse, AWSError>;
   /**
-   * Authorizes the DDoS Response Team (DRT), using the specified role, to access your AWS account to assist with DDoS attack mitigation during potential attacks. This enables the DRT to inspect your AWS WAF configuration and create or update AWS WAF rules and web ACLs. You can associate only one RoleArn with your subscription. If you submit an AssociateDRTRole request for an account that already has an associated role, the new RoleArn will replace the existing RoleArn.  Prior to making the AssociateDRTRole request, you must attach the AWSShieldDRTAccessPolicy managed policy to the role you will specify in the request. For more information see Attaching and Detaching IAM Policies. The role must also trust the service principal  drt.shield.amazonaws.com. For more information, see IAM JSON Policy Elements: Principal. The DRT will have access only to your AWS WAF and Shield resources. By submitting this request, you authorize the DRT to inspect your AWS WAF and Shield configuration and create and update AWS WAF rules and web ACLs on your behalf. The DRT takes these actions only if explicitly authorized by you. You must have the iam:PassRole permission to make an AssociateDRTRole request. For more information, see Granting a User Permissions to Pass a Role to an AWS Service.  To use the services of the DRT and make an AssociateDRTRole request, you must be subscribed to the Business Support plan or the Enterprise Support plan.
+   * Authorizes the Shield Response Team (SRT) using the specified role, to access your Amazon Web Services account to assist with DDoS attack mitigation during potential attacks. This enables the SRT to inspect your WAF configuration and create or update WAF rules and web ACLs. You can associate only one RoleArn with your subscription. If you submit an AssociateDRTRole request for an account that already has an associated role, the new RoleArn will replace the existing RoleArn.  Prior to making the AssociateDRTRole request, you must attach the AWSShieldDRTAccessPolicy managed policy to the role you will specify in the request. For more information see Attaching and Detaching IAM Policies. The role must also trust the service principal  drt.shield.amazonaws.com. For more information, see IAM JSON Policy Elements: Principal. The SRT will have access only to your WAF and Shield resources. By submitting this request, you authorize the SRT to inspect your WAF and Shield configuration and create and update WAF rules and web ACLs on your behalf. The SRT takes these actions only if explicitly authorized by you. You must have the iam:PassRole permission to make an AssociateDRTRole request. For more information, see Granting a User Permissions to Pass a Role to an Amazon Web Services Service.  To use the services of the SRT and make an AssociateDRTRole request, you must be subscribed to the Business Support plan or the Enterprise Support plan.
    */
   associateDRTRole(callback?: (err: AWSError, data: Shield.Types.AssociateDRTRoleResponse) => void): Request<Shield.Types.AssociateDRTRoleResponse, AWSError>;
   /**
-   * Adds health-based detection to the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your AWS resource to improve responsiveness and accuracy in attack detection and mitigation.  You define the health check in Route 53 and then associate it with your Shield Advanced protection. For more information, see Shield Advanced Health-Based Detection in the AWS WAF and AWS Shield Developer Guide. 
+   * Adds health-based detection to the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your Amazon Web Services resource to improve responsiveness and accuracy in attack detection and mitigation.  You define the health check in Route 53 and then associate it with your Shield Advanced protection. For more information, see Shield Advanced Health-Based Detection in the WAF Developer Guide. 
    */
   associateHealthCheck(params: Shield.Types.AssociateHealthCheckRequest, callback?: (err: AWSError, data: Shield.Types.AssociateHealthCheckResponse) => void): Request<Shield.Types.AssociateHealthCheckResponse, AWSError>;
   /**
-   * Adds health-based detection to the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your AWS resource to improve responsiveness and accuracy in attack detection and mitigation.  You define the health check in Route 53 and then associate it with your Shield Advanced protection. For more information, see Shield Advanced Health-Based Detection in the AWS WAF and AWS Shield Developer Guide. 
+   * Adds health-based detection to the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your Amazon Web Services resource to improve responsiveness and accuracy in attack detection and mitigation.  You define the health check in Route 53 and then associate it with your Shield Advanced protection. For more information, see Shield Advanced Health-Based Detection in the WAF Developer Guide. 
    */
   associateHealthCheck(callback?: (err: AWSError, data: Shield.Types.AssociateHealthCheckResponse) => void): Request<Shield.Types.AssociateHealthCheckResponse, AWSError>;
   /**
-   * Initializes proactive engagement and sets the list of contacts for the DDoS Response Team (DRT) to use. You must provide at least one phone number in the emergency contact list.  After you have initialized proactive engagement using this call, to disable or enable proactive engagement, use the calls DisableProactiveEngagement and EnableProactiveEngagement.   This call defines the list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you for escalations to the DRT and to initiate proactive customer support. The contacts that you provide in the request replace any contacts that were already defined. If you already have contacts defined and want to use them, retrieve the list using DescribeEmergencyContactSettings and then provide it to this call.  
+   * Initializes proactive engagement and sets the list of contacts for the Shield Response Team (SRT) to use. You must provide at least one phone number in the emergency contact list.  After you have initialized proactive engagement using this call, to disable or enable proactive engagement, use the calls DisableProactiveEngagement and EnableProactiveEngagement.   This call defines the list of email addresses and phone numbers that the SRT can use to contact you for escalations to the SRT and to initiate proactive customer support. The contacts that you provide in the request replace any contacts that were already defined. If you already have contacts defined and want to use them, retrieve the list using DescribeEmergencyContactSettings and then provide it to this call.  
    */
   associateProactiveEngagementDetails(params: Shield.Types.AssociateProactiveEngagementDetailsRequest, callback?: (err: AWSError, data: Shield.Types.AssociateProactiveEngagementDetailsResponse) => void): Request<Shield.Types.AssociateProactiveEngagementDetailsResponse, AWSError>;
   /**
-   * Initializes proactive engagement and sets the list of contacts for the DDoS Response Team (DRT) to use. You must provide at least one phone number in the emergency contact list.  After you have initialized proactive engagement using this call, to disable or enable proactive engagement, use the calls DisableProactiveEngagement and EnableProactiveEngagement.   This call defines the list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you for escalations to the DRT and to initiate proactive customer support. The contacts that you provide in the request replace any contacts that were already defined. If you already have contacts defined and want to use them, retrieve the list using DescribeEmergencyContactSettings and then provide it to this call.  
+   * Initializes proactive engagement and sets the list of contacts for the Shield Response Team (SRT) to use. You must provide at least one phone number in the emergency contact list.  After you have initialized proactive engagement using this call, to disable or enable proactive engagement, use the calls DisableProactiveEngagement and EnableProactiveEngagement.   This call defines the list of email addresses and phone numbers that the SRT can use to contact you for escalations to the SRT and to initiate proactive customer support. The contacts that you provide in the request replace any contacts that were already defined. If you already have contacts defined and want to use them, retrieve the list using DescribeEmergencyContactSettings and then provide it to this call.  
    */
   associateProactiveEngagementDetails(callback?: (err: AWSError, data: Shield.Types.AssociateProactiveEngagementDetailsResponse) => void): Request<Shield.Types.AssociateProactiveEngagementDetailsResponse, AWSError>;
   /**
-   * Enables AWS Shield Advanced for a specific AWS resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, AWS Global Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone. You can add protection to only a single resource with each CreateProtection request. If you want to add protection to multiple resources at once, use the AWS WAF console. For more information see Getting Started with AWS Shield Advanced and Add AWS Shield Advanced Protection to more AWS Resources.
+   * Enables Shield Advanced for a specific Amazon Web Services resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, Global Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone. You can add protection to only a single resource with each CreateProtection request. If you want to add protection to multiple resources at once, use the WAF console. For more information see Getting Started with Shield Advanced and Add Shield Advanced Protection to more Amazon Web Services Resources.
    */
   createProtection(params: Shield.Types.CreateProtectionRequest, callback?: (err: AWSError, data: Shield.Types.CreateProtectionResponse) => void): Request<Shield.Types.CreateProtectionResponse, AWSError>;
   /**
-   * Enables AWS Shield Advanced for a specific AWS resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, AWS Global Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone. You can add protection to only a single resource with each CreateProtection request. If you want to add protection to multiple resources at once, use the AWS WAF console. For more information see Getting Started with AWS Shield Advanced and Add AWS Shield Advanced Protection to more AWS Resources.
+   * Enables Shield Advanced for a specific Amazon Web Services resource. The resource can be an Amazon CloudFront distribution, Elastic Load Balancing load balancer, Global Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone. You can add protection to only a single resource with each CreateProtection request. If you want to add protection to multiple resources at once, use the WAF console. For more information see Getting Started with Shield Advanced and Add Shield Advanced Protection to more Amazon Web Services Resources.
    */
   createProtection(callback?: (err: AWSError, data: Shield.Types.CreateProtectionResponse) => void): Request<Shield.Types.CreateProtectionResponse, AWSError>;
   /**
@@ -60,19 +60,19 @@ declare class Shield extends Service {
    */
   createProtectionGroup(callback?: (err: AWSError, data: Shield.Types.CreateProtectionGroupResponse) => void): Request<Shield.Types.CreateProtectionGroupResponse, AWSError>;
   /**
-   * Activates AWS Shield Advanced for an account. When you initally create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period. You can change this by submitting an UpdateSubscription request. 
+   * Activates Shield Advanced for an account. When you initally create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period. You can change this by submitting an UpdateSubscription request. 
    */
   createSubscription(params: Shield.Types.CreateSubscriptionRequest, callback?: (err: AWSError, data: Shield.Types.CreateSubscriptionResponse) => void): Request<Shield.Types.CreateSubscriptionResponse, AWSError>;
   /**
-   * Activates AWS Shield Advanced for an account. When you initally create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period. You can change this by submitting an UpdateSubscription request. 
+   * Activates Shield Advanced for an account. When you initally create a subscription, your subscription is set to be automatically renewed at the end of the existing subscription period. You can change this by submitting an UpdateSubscription request. 
    */
   createSubscription(callback?: (err: AWSError, data: Shield.Types.CreateSubscriptionResponse) => void): Request<Shield.Types.CreateSubscriptionResponse, AWSError>;
   /**
-   * Deletes an AWS Shield Advanced Protection.
+   * Deletes an Shield Advanced Protection.
    */
   deleteProtection(params: Shield.Types.DeleteProtectionRequest, callback?: (err: AWSError, data: Shield.Types.DeleteProtectionResponse) => void): Request<Shield.Types.DeleteProtectionResponse, AWSError>;
   /**
-   * Deletes an AWS Shield Advanced Protection.
+   * Deletes an Shield Advanced Protection.
    */
   deleteProtection(callback?: (err: AWSError, data: Shield.Types.DeleteProtectionResponse) => void): Request<Shield.Types.DeleteProtectionResponse, AWSError>;
   /**
@@ -84,11 +84,11 @@ declare class Shield extends Service {
    */
   deleteProtectionGroup(callback?: (err: AWSError, data: Shield.Types.DeleteProtectionGroupResponse) => void): Request<Shield.Types.DeleteProtectionGroupResponse, AWSError>;
   /**
-   * Removes AWS Shield Advanced from an account. AWS Shield Advanced requires a 1-year subscription commitment. You cannot delete a subscription prior to the completion of that commitment. 
+   * Removes Shield Advanced from an account. Shield Advanced requires a 1-year subscription commitment. You cannot delete a subscription prior to the completion of that commitment. 
    */
   deleteSubscription(params: Shield.Types.DeleteSubscriptionRequest, callback?: (err: AWSError, data: Shield.Types.DeleteSubscriptionResponse) => void): Request<Shield.Types.DeleteSubscriptionResponse, AWSError>;
   /**
-   * Removes AWS Shield Advanced from an account. AWS Shield Advanced requires a 1-year subscription commitment. You cannot delete a subscription prior to the completion of that commitment. 
+   * Removes Shield Advanced from an account. Shield Advanced requires a 1-year subscription commitment. You cannot delete a subscription prior to the completion of that commitment. 
    */
   deleteSubscription(callback?: (err: AWSError, data: Shield.Types.DeleteSubscriptionResponse) => void): Request<Shield.Types.DeleteSubscriptionResponse, AWSError>;
   /**
@@ -100,27 +100,27 @@ declare class Shield extends Service {
    */
   describeAttack(callback?: (err: AWSError, data: Shield.Types.DescribeAttackResponse) => void): Request<Shield.Types.DescribeAttackResponse, AWSError>;
   /**
-   * Provides information about the number and type of attacks AWS Shield has detected in the last year for all resources that belong to your account, regardless of whether you've defined Shield protections for them. This operation is available to Shield customers as well as to Shield Advanced customers. The operation returns data for the time range of midnight UTC, one year ago, to midnight UTC, today. For example, if the current time is 2020-10-26 15:39:32 PDT, equal to 2020-10-26 22:39:32 UTC, then the time range for the attack data returned is from 2019-10-26 00:00:00 UTC to 2020-10-26 00:00:00 UTC.  The time range indicates the period covered by the attack statistics data items.
+   * Provides information about the number and type of attacks Shield has detected in the last year for all resources that belong to your account, regardless of whether you've defined Shield protections for them. This operation is available to Shield customers as well as to Shield Advanced customers. The operation returns data for the time range of midnight UTC, one year ago, to midnight UTC, today. For example, if the current time is 2020-10-26 15:39:32 PDT, equal to 2020-10-26 22:39:32 UTC, then the time range for the attack data returned is from 2019-10-26 00:00:00 UTC to 2020-10-26 00:00:00 UTC.  The time range indicates the period covered by the attack statistics data items.
    */
   describeAttackStatistics(params: Shield.Types.DescribeAttackStatisticsRequest, callback?: (err: AWSError, data: Shield.Types.DescribeAttackStatisticsResponse) => void): Request<Shield.Types.DescribeAttackStatisticsResponse, AWSError>;
   /**
-   * Provides information about the number and type of attacks AWS Shield has detected in the last year for all resources that belong to your account, regardless of whether you've defined Shield protections for them. This operation is available to Shield customers as well as to Shield Advanced customers. The operation returns data for the time range of midnight UTC, one year ago, to midnight UTC, today. For example, if the current time is 2020-10-26 15:39:32 PDT, equal to 2020-10-26 22:39:32 UTC, then the time range for the attack data returned is from 2019-10-26 00:00:00 UTC to 2020-10-26 00:00:00 UTC.  The time range indicates the period covered by the attack statistics data items.
+   * Provides information about the number and type of attacks Shield has detected in the last year for all resources that belong to your account, regardless of whether you've defined Shield protections for them. This operation is available to Shield customers as well as to Shield Advanced customers. The operation returns data for the time range of midnight UTC, one year ago, to midnight UTC, today. For example, if the current time is 2020-10-26 15:39:32 PDT, equal to 2020-10-26 22:39:32 UTC, then the time range for the attack data returned is from 2019-10-26 00:00:00 UTC to 2020-10-26 00:00:00 UTC.  The time range indicates the period covered by the attack statistics data items.
    */
   describeAttackStatistics(callback?: (err: AWSError, data: Shield.Types.DescribeAttackStatisticsResponse) => void): Request<Shield.Types.DescribeAttackStatisticsResponse, AWSError>;
   /**
-   * Returns the current role and list of Amazon S3 log buckets used by the DDoS Response Team (DRT) to access your AWS account while assisting with attack mitigation.
+   * Returns the current role and list of Amazon S3 log buckets used by the Shield Response Team (SRT) to access your Amazon Web Services account while assisting with attack mitigation.
    */
   describeDRTAccess(params: Shield.Types.DescribeDRTAccessRequest, callback?: (err: AWSError, data: Shield.Types.DescribeDRTAccessResponse) => void): Request<Shield.Types.DescribeDRTAccessResponse, AWSError>;
   /**
-   * Returns the current role and list of Amazon S3 log buckets used by the DDoS Response Team (DRT) to access your AWS account while assisting with attack mitigation.
+   * Returns the current role and list of Amazon S3 log buckets used by the Shield Response Team (SRT) to access your Amazon Web Services account while assisting with attack mitigation.
    */
   describeDRTAccess(callback?: (err: AWSError, data: Shield.Types.DescribeDRTAccessResponse) => void): Request<Shield.Types.DescribeDRTAccessResponse, AWSError>;
   /**
-   * A list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.
+   * A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.
    */
   describeEmergencyContactSettings(params: Shield.Types.DescribeEmergencyContactSettingsRequest, callback?: (err: AWSError, data: Shield.Types.DescribeEmergencyContactSettingsResponse) => void): Request<Shield.Types.DescribeEmergencyContactSettingsResponse, AWSError>;
   /**
-   * A list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.
+   * A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.
    */
   describeEmergencyContactSettings(callback?: (err: AWSError, data: Shield.Types.DescribeEmergencyContactSettingsResponse) => void): Request<Shield.Types.DescribeEmergencyContactSettingsResponse, AWSError>;
   /**
@@ -140,51 +140,51 @@ declare class Shield extends Service {
    */
   describeProtectionGroup(callback?: (err: AWSError, data: Shield.Types.DescribeProtectionGroupResponse) => void): Request<Shield.Types.DescribeProtectionGroupResponse, AWSError>;
   /**
-   * Provides details about the AWS Shield Advanced subscription for an account.
+   * Provides details about the Shield Advanced subscription for an account.
    */
   describeSubscription(params: Shield.Types.DescribeSubscriptionRequest, callback?: (err: AWSError, data: Shield.Types.DescribeSubscriptionResponse) => void): Request<Shield.Types.DescribeSubscriptionResponse, AWSError>;
   /**
-   * Provides details about the AWS Shield Advanced subscription for an account.
+   * Provides details about the Shield Advanced subscription for an account.
    */
   describeSubscription(callback?: (err: AWSError, data: Shield.Types.DescribeSubscriptionResponse) => void): Request<Shield.Types.DescribeSubscriptionResponse, AWSError>;
   /**
-   * Removes authorization from the DDoS Response Team (DRT) to notify contacts about escalations to the DRT and to initiate proactive customer support.
+   * Removes authorization from the Shield Response Team (SRT) to notify contacts about escalations to the SRT and to initiate proactive customer support.
    */
   disableProactiveEngagement(params: Shield.Types.DisableProactiveEngagementRequest, callback?: (err: AWSError, data: Shield.Types.DisableProactiveEngagementResponse) => void): Request<Shield.Types.DisableProactiveEngagementResponse, AWSError>;
   /**
-   * Removes authorization from the DDoS Response Team (DRT) to notify contacts about escalations to the DRT and to initiate proactive customer support.
+   * Removes authorization from the Shield Response Team (SRT) to notify contacts about escalations to the SRT and to initiate proactive customer support.
    */
   disableProactiveEngagement(callback?: (err: AWSError, data: Shield.Types.DisableProactiveEngagementResponse) => void): Request<Shield.Types.DisableProactiveEngagementResponse, AWSError>;
   /**
-   * Removes the DDoS Response Team's (DRT) access to the specified Amazon S3 bucket containing your AWS WAF logs. To make a DisassociateDRTLogBucket request, you must be subscribed to the Business Support plan or the Enterprise Support plan. However, if you are not subscribed to one of these support plans, but had been previously and had granted the DRT access to your account, you can submit a DisassociateDRTLogBucket request to remove this access.
+   * Removes the Shield Response Team's (SRT) access to the specified Amazon S3 bucket containing the logs that you shared previously. To make a DisassociateDRTLogBucket request, you must be subscribed to the Business Support plan or the Enterprise Support plan. However, if you are not subscribed to one of these support plans, but had been previously and had granted the SRT access to your account, you can submit a DisassociateDRTLogBucket request to remove this access.
    */
   disassociateDRTLogBucket(params: Shield.Types.DisassociateDRTLogBucketRequest, callback?: (err: AWSError, data: Shield.Types.DisassociateDRTLogBucketResponse) => void): Request<Shield.Types.DisassociateDRTLogBucketResponse, AWSError>;
   /**
-   * Removes the DDoS Response Team's (DRT) access to the specified Amazon S3 bucket containing your AWS WAF logs. To make a DisassociateDRTLogBucket request, you must be subscribed to the Business Support plan or the Enterprise Support plan. However, if you are not subscribed to one of these support plans, but had been previously and had granted the DRT access to your account, you can submit a DisassociateDRTLogBucket request to remove this access.
+   * Removes the Shield Response Team's (SRT) access to the specified Amazon S3 bucket containing the logs that you shared previously. To make a DisassociateDRTLogBucket request, you must be subscribed to the Business Support plan or the Enterprise Support plan. However, if you are not subscribed to one of these support plans, but had been previously and had granted the SRT access to your account, you can submit a DisassociateDRTLogBucket request to remove this access.
    */
   disassociateDRTLogBucket(callback?: (err: AWSError, data: Shield.Types.DisassociateDRTLogBucketResponse) => void): Request<Shield.Types.DisassociateDRTLogBucketResponse, AWSError>;
   /**
-   * Removes the DDoS Response Team's (DRT) access to your AWS account. To make a DisassociateDRTRole request, you must be subscribed to the Business Support plan or the Enterprise Support plan. However, if you are not subscribed to one of these support plans, but had been previously and had granted the DRT access to your account, you can submit a DisassociateDRTRole request to remove this access.
+   * Removes the Shield Response Team's (SRT) access to your Amazon Web Services account. To make a DisassociateDRTRole request, you must be subscribed to the Business Support plan or the Enterprise Support plan. However, if you are not subscribed to one of these support plans, but had been previously and had granted the SRT access to your account, you can submit a DisassociateDRTRole request to remove this access.
    */
   disassociateDRTRole(params: Shield.Types.DisassociateDRTRoleRequest, callback?: (err: AWSError, data: Shield.Types.DisassociateDRTRoleResponse) => void): Request<Shield.Types.DisassociateDRTRoleResponse, AWSError>;
   /**
-   * Removes the DDoS Response Team's (DRT) access to your AWS account. To make a DisassociateDRTRole request, you must be subscribed to the Business Support plan or the Enterprise Support plan. However, if you are not subscribed to one of these support plans, but had been previously and had granted the DRT access to your account, you can submit a DisassociateDRTRole request to remove this access.
+   * Removes the Shield Response Team's (SRT) access to your Amazon Web Services account. To make a DisassociateDRTRole request, you must be subscribed to the Business Support plan or the Enterprise Support plan. However, if you are not subscribed to one of these support plans, but had been previously and had granted the SRT access to your account, you can submit a DisassociateDRTRole request to remove this access.
    */
   disassociateDRTRole(callback?: (err: AWSError, data: Shield.Types.DisassociateDRTRoleResponse) => void): Request<Shield.Types.DisassociateDRTRoleResponse, AWSError>;
   /**
-   * Removes health-based detection from the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your AWS resource to improve responsiveness and accuracy in attack detection and mitigation.  You define the health check in Route 53 and then associate or disassociate it with your Shield Advanced protection. For more information, see Shield Advanced Health-Based Detection in the AWS WAF and AWS Shield Developer Guide. 
+   * Removes health-based detection from the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your Amazon Web Services resource to improve responsiveness and accuracy in attack detection and mitigation.  You define the health check in Route 53 and then associate or disassociate it with your Shield Advanced protection. For more information, see Shield Advanced Health-Based Detection in the WAF Developer Guide. 
    */
   disassociateHealthCheck(params: Shield.Types.DisassociateHealthCheckRequest, callback?: (err: AWSError, data: Shield.Types.DisassociateHealthCheckResponse) => void): Request<Shield.Types.DisassociateHealthCheckResponse, AWSError>;
   /**
-   * Removes health-based detection from the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your AWS resource to improve responsiveness and accuracy in attack detection and mitigation.  You define the health check in Route 53 and then associate or disassociate it with your Shield Advanced protection. For more information, see Shield Advanced Health-Based Detection in the AWS WAF and AWS Shield Developer Guide. 
+   * Removes health-based detection from the Shield Advanced protection for a resource. Shield Advanced health-based detection uses the health of your Amazon Web Services resource to improve responsiveness and accuracy in attack detection and mitigation.  You define the health check in Route 53 and then associate or disassociate it with your Shield Advanced protection. For more information, see Shield Advanced Health-Based Detection in the WAF Developer Guide. 
    */
   disassociateHealthCheck(callback?: (err: AWSError, data: Shield.Types.DisassociateHealthCheckResponse) => void): Request<Shield.Types.DisassociateHealthCheckResponse, AWSError>;
   /**
-   * Authorizes the DDoS Response Team (DRT) to use email and phone to notify contacts about escalations to the DRT and to initiate proactive customer support.
+   * Authorizes the Shield Response Team (SRT) to use email and phone to notify contacts about escalations to the SRT and to initiate proactive customer support.
    */
   enableProactiveEngagement(params: Shield.Types.EnableProactiveEngagementRequest, callback?: (err: AWSError, data: Shield.Types.EnableProactiveEngagementResponse) => void): Request<Shield.Types.EnableProactiveEngagementResponse, AWSError>;
   /**
-   * Authorizes the DDoS Response Team (DRT) to use email and phone to notify contacts about escalations to the DRT and to initiate proactive customer support.
+   * Authorizes the Shield Response Team (SRT) to use email and phone to notify contacts about escalations to the SRT and to initiate proactive customer support.
    */
   enableProactiveEngagement(callback?: (err: AWSError, data: Shield.Types.EnableProactiveEngagementResponse) => void): Request<Shield.Types.EnableProactiveEngagementResponse, AWSError>;
   /**
@@ -228,35 +228,35 @@ declare class Shield extends Service {
    */
   listResourcesInProtectionGroup(callback?: (err: AWSError, data: Shield.Types.ListResourcesInProtectionGroupResponse) => void): Request<Shield.Types.ListResourcesInProtectionGroupResponse, AWSError>;
   /**
-   * Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS Shield.
+   * Gets information about Amazon Web Services tags for a specified Amazon Resource Name (ARN) in Shield.
    */
   listTagsForResource(params: Shield.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Shield.Types.ListTagsForResourceResponse) => void): Request<Shield.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Gets information about AWS tags for a specified Amazon Resource Name (ARN) in AWS Shield.
+   * Gets information about Amazon Web Services tags for a specified Amazon Resource Name (ARN) in Shield.
    */
   listTagsForResource(callback?: (err: AWSError, data: Shield.Types.ListTagsForResourceResponse) => void): Request<Shield.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Adds or updates tags for a resource in AWS Shield.
+   * Adds or updates tags for a resource in Shield.
    */
   tagResource(params: Shield.Types.TagResourceRequest, callback?: (err: AWSError, data: Shield.Types.TagResourceResponse) => void): Request<Shield.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds or updates tags for a resource in AWS Shield.
+   * Adds or updates tags for a resource in Shield.
    */
   tagResource(callback?: (err: AWSError, data: Shield.Types.TagResourceResponse) => void): Request<Shield.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes tags from a resource in AWS Shield.
+   * Removes tags from a resource in Shield.
    */
   untagResource(params: Shield.Types.UntagResourceRequest, callback?: (err: AWSError, data: Shield.Types.UntagResourceResponse) => void): Request<Shield.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes tags from a resource in AWS Shield.
+   * Removes tags from a resource in Shield.
    */
   untagResource(callback?: (err: AWSError, data: Shield.Types.UntagResourceResponse) => void): Request<Shield.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the details of the list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.
+   * Updates the details of the list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.
    */
   updateEmergencyContactSettings(params: Shield.Types.UpdateEmergencyContactSettingsRequest, callback?: (err: AWSError, data: Shield.Types.UpdateEmergencyContactSettingsResponse) => void): Request<Shield.Types.UpdateEmergencyContactSettingsResponse, AWSError>;
   /**
-   * Updates the details of the list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.
+   * Updates the details of the list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.
    */
   updateEmergencyContactSettings(callback?: (err: AWSError, data: Shield.Types.UpdateEmergencyContactSettingsResponse) => void): Request<Shield.Types.UpdateEmergencyContactSettingsResponse, AWSError>;
   /**
@@ -279,7 +279,7 @@ declare class Shield extends Service {
 declare namespace Shield {
   export interface AssociateDRTLogBucketRequest {
     /**
-     * The Amazon S3 bucket that contains your AWS WAF logs.
+     * The Amazon S3 bucket that contains the logs that you want to share.
      */
     LogBucket: LogBucket;
   }
@@ -287,7 +287,7 @@ declare namespace Shield {
   }
   export interface AssociateDRTRoleRequest {
     /**
-     * The Amazon Resource Name (ARN) of the role the DRT will use to access your AWS account. Prior to making the AssociateDRTRole request, you must attach the AWSShieldDRTAccessPolicy managed policy to this role. For more information see Attaching and Detaching IAM Policies.
+     * The Amazon Resource Name (ARN) of the role the SRT will use to access your Amazon Web Services account. Prior to making the AssociateDRTRole request, you must attach the AWSShieldDRTAccessPolicy managed policy to this role. For more information see Attaching and Detaching IAM Policies.
      */
     RoleArn: RoleArn;
   }
@@ -307,7 +307,7 @@ declare namespace Shield {
   }
   export interface AssociateProactiveEngagementDetailsRequest {
     /**
-     * A list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you for escalations to the DRT and to initiate proactive customer support.  To enable proactive engagement, the contact list must include at least one phone number.  The contacts that you provide here replace any contacts that were already defined. If you already have contacts defined and want to use them, retrieve the list using DescribeEmergencyContactSettings and then provide it here.  
+     * A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you for escalations to the SRT and to initiate proactive customer support.  To enable proactive engagement, the contact list must include at least one phone number.  The contacts that you provide here replace any contacts that were already defined. If you already have contacts defined and want to use them, retrieve the list using DescribeEmergencyContactSettings and then provide it here.  
      */
     EmergencyContactList: EmergencyContactList;
   }
@@ -339,7 +339,7 @@ declare namespace Shield {
      */
     AttackCounters?: SummarizedCounterList;
     /**
-     * The array of AttackProperty objects.
+     * The array of objects that provide details of the Shield event.  For infrastructure layer events (L3 and L4 events) after January 25, 2021, you can view metrics for top contributors in Amazon CloudWatch metrics. For more information, see Shield metrics and alarms in the WAF Developer Guide. 
      */
     AttackProperties?: AttackProperties;
     /**
@@ -352,23 +352,23 @@ declare namespace Shield {
   export type AttackProperties = AttackProperty[];
   export interface AttackProperty {
     /**
-     * The type of distributed denial of service (DDoS) event that was observed. NETWORK indicates layer 3 and layer 4 events and APPLICATION indicates layer 7 events.
+     * The type of Shield event that was observed. NETWORK indicates layer 3 and layer 4 events and APPLICATION indicates layer 7 events. For infrastructure layer events (L3 and L4 events) after January 25, 2021, you can view metrics for top contributors in Amazon CloudWatch metrics. For more information, see Shield metrics and alarms in the WAF Developer Guide. 
      */
     AttackLayer?: AttackLayer;
     /**
-     * Defines the DDoS attack property information that is provided. The WORDPRESS_PINGBACK_REFLECTOR and WORDPRESS_PINGBACK_SOURCE values are valid only for WordPress reflective pingback DDoS attacks.
+     * Defines the Shield event property information that is provided. The WORDPRESS_PINGBACK_REFLECTOR and WORDPRESS_PINGBACK_SOURCE values are valid only for WordPress reflective pingback events.
      */
     AttackPropertyIdentifier?: AttackPropertyIdentifier;
     /**
-     * The array of contributor objects that includes the top five contributors to an attack. 
+     * Contributor objects for the top five contributors to a Shield event. 
      */
     TopContributors?: TopContributors;
     /**
-     * The unit of the Value of the contributions.
+     * The unit used for the Contributor Value property. 
      */
     Unit?: Unit;
     /**
-     * The total contributions made to this attack by all contributors, not just the five listed in the TopContributors list.
+     * The total contributions made to this Shield event by all contributors.
      */
     Total?: Long;
   }
@@ -453,7 +453,7 @@ declare namespace Shield {
      */
     ProtectionGroupId: ProtectionGroupId;
     /**
-     * Defines how AWS Shield combines resource data for the group in order to detect, mitigate, and report events.   Sum - Use the total traffic across the group. This is a good choice for most cases. Examples include Elastic IP addresses for EC2 instances that scale manually or automatically.   Mean - Use the average of the traffic across the group. This is a good choice for resources that share traffic uniformly. Examples include accelerators and load balancers.   Max - Use the highest traffic from each resource. This is useful for resources that don't share traffic and for resources that share that traffic in a non-uniform way. Examples include CloudFront distributions and origin resources for CloudFront distributions.  
+     * Defines how Shield combines resource data for the group in order to detect, mitigate, and report events.   Sum - Use the total traffic across the group. This is a good choice for most cases. Examples include Elastic IP addresses for EC2 instances that scale manually or automatically.   Mean - Use the average of the traffic across the group. This is a good choice for resources that share traffic uniformly. Examples include accelerators and load balancers.   Max - Use the highest traffic from each resource. This is useful for resources that don't share traffic and for resources that share that traffic in a non-uniform way. Examples include Amazon CloudFront and origin resources for CloudFront distributions.  
      */
     Aggregation: ProtectionGroupAggregation;
     /**
@@ -481,7 +481,7 @@ declare namespace Shield {
      */
     Name: ProtectionName;
     /**
-     * The ARN (Amazon Resource Name) of the resource to be protected. The ARN should be in one of the following formats:   For an Application Load Balancer: arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id     For an Elastic Load Balancer (Classic Load Balancer): arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name     For an AWS CloudFront distribution: arn:aws:cloudfront::account-id:distribution/distribution-id     For an AWS Global Accelerator accelerator: arn:aws:globalaccelerator::account-id:accelerator/accelerator-id     For Amazon Route 53: arn:aws:route53:::hostedzone/hosted-zone-id     For an Elastic IP address: arn:aws:ec2:region:account-id:eip-allocation/allocation-id    
+     * The ARN (Amazon Resource Name) of the resource to be protected. The ARN should be in one of the following formats:   For an Application Load Balancer: arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id     For an Elastic Load Balancer (Classic Load Balancer): arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name     For an Amazon CloudFront distribution: arn:aws:cloudfront::account-id:distribution/distribution-id     For an Global Accelerator accelerator: arn:aws:globalaccelerator::account-id:accelerator/accelerator-id     For Amazon Route 53: arn:aws:route53:::hostedzone/hosted-zone-id     For an Elastic IP address: arn:aws:ec2:region:account-id:eip-allocation/allocation-id    
      */
     ResourceArn: ResourceArn;
     /**
@@ -544,11 +544,11 @@ declare namespace Shield {
   }
   export interface DescribeDRTAccessResponse {
     /**
-     * The Amazon Resource Name (ARN) of the role the DRT used to access your AWS account.
+     * The Amazon Resource Name (ARN) of the role the SRT used to access your Amazon Web Services account.
      */
     RoleArn?: RoleArn;
     /**
-     * The list of Amazon S3 buckets accessed by the DRT.
+     * The list of Amazon S3 buckets accessed by the SRT.
      */
     LogBucketList?: LogBucketList;
   }
@@ -556,7 +556,7 @@ declare namespace Shield {
   }
   export interface DescribeEmergencyContactSettingsResponse {
     /**
-     * A list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support.
+     * A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support.
      */
     EmergencyContactList?: EmergencyContactList;
   }
@@ -568,7 +568,7 @@ declare namespace Shield {
   }
   export interface DescribeProtectionGroupResponse {
     /**
-     * A grouping of protected resources that you and AWS Shield Advanced can monitor as a collective. This resource grouping improves the accuracy of detection and reduces false positives. 
+     * A grouping of protected resources that you and Shield Advanced can monitor as a collective. This resource grouping improves the accuracy of detection and reduces false positives. 
      */
     ProtectionGroup: ProtectionGroup;
   }
@@ -578,7 +578,7 @@ declare namespace Shield {
      */
     ProtectionId?: ProtectionId;
     /**
-     * The ARN (Amazon Resource Name) of the AWS resource for the Protection object that is described. When submitting the DescribeProtection request you must provide either the ResourceArn or the ProtectionID, but not both.
+     * The ARN (Amazon Resource Name) of the Amazon Web Services resource for the Protection object that is described. When submitting the DescribeProtection request you must provide either the ResourceArn or the ProtectionID, but not both.
      */
     ResourceArn?: ResourceArn;
   }
@@ -592,7 +592,7 @@ declare namespace Shield {
   }
   export interface DescribeSubscriptionResponse {
     /**
-     * The AWS Shield Advanced subscription details for an account.
+     * The Shield Advanced subscription details for an account.
      */
     Subscription?: Subscription;
   }
@@ -602,7 +602,7 @@ declare namespace Shield {
   }
   export interface DisassociateDRTLogBucketRequest {
     /**
-     * The Amazon S3 bucket that contains your AWS WAF logs.
+     * The Amazon S3 bucket that contains the logs that you want to share.
      */
     LogBucket: LogBucket;
   }
@@ -717,7 +717,7 @@ declare namespace Shield {
      */
     ProtectionGroups: ProtectionGroups;
     /**
-     * If you specify a value for MaxResults and you have more protection groups than the value of MaxResults, AWS Shield Advanced returns this token that you can use in your next request, to get the next batch of objects. 
+     * If you specify a value for MaxResults and you have more protection groups than the value of MaxResults, Shield Advanced returns this token that you can use in your next request, to get the next batch of objects. 
      */
     NextToken?: Token;
   }
@@ -737,7 +737,7 @@ declare namespace Shield {
      */
     Protections?: Protections;
     /**
-     * If you specify a value for MaxResults and you have more Protections than the value of MaxResults, AWS Shield Advanced returns a NextToken value in the response that allows you to list another group of Protections. For the second and subsequent ListProtections requests, specify the value of NextToken from the previous response to get information about another batch of Protections. Shield Advanced might return the list of Protection objects in batches smaller than the number specified by MaxResults. If there are more Protection objects to return, Shield Advanced will always also return a NextToken.
+     * If you specify a value for MaxResults and you have more Protections than the value of MaxResults, Shield Advanced returns a NextToken value in the response that allows you to list another group of Protections. For the second and subsequent ListProtections requests, specify the value of NextToken from the previous response to get information about another batch of Protections. Shield Advanced might return the list of Protection objects in batches smaller than the number specified by MaxResults. If there are more Protection objects to return, Shield Advanced will always also return a NextToken.
      */
     NextToken?: Token;
   }
@@ -761,7 +761,7 @@ declare namespace Shield {
      */
     ResourceArns: ResourceArnList;
     /**
-     * If you specify a value for MaxResults and you have more resources in the protection group than the value of MaxResults, AWS Shield Advanced returns this token that you can use in your next request, to get the next batch of objects. 
+     * If you specify a value for MaxResults and you have more resources in the protection group than the value of MaxResults, Shield Advanced returns this token that you can use in your next request, to get the next batch of objects. 
      */
     NextToken?: Token;
   }
@@ -801,7 +801,7 @@ declare namespace Shield {
      */
     Name?: ProtectionName;
     /**
-     * The ARN (Amazon Resource Name) of the AWS resource that is protected.
+     * The ARN (Amazon Resource Name) of the Amazon Web Services resource that is protected.
      */
     ResourceArn?: ResourceArn;
     /**
@@ -819,7 +819,7 @@ declare namespace Shield {
      */
     ProtectionGroupId: ProtectionGroupId;
     /**
-     * Defines how AWS Shield combines resource data for the group in order to detect, mitigate, and report events.   Sum - Use the total traffic across the group. This is a good choice for most cases. Examples include Elastic IP addresses for EC2 instances that scale manually or automatically.   Mean - Use the average of the traffic across the group. This is a good choice for resources that share traffic uniformly. Examples include accelerators and load balancers.   Max - Use the highest traffic from each resource. This is useful for resources that don't share traffic and for resources that share that traffic in a non-uniform way. Examples include CloudFront distributions and origin resources for CloudFront distributions.  
+     * Defines how Shield combines resource data for the group in order to detect, mitigate, and report events.   Sum - Use the total traffic across the group. This is a good choice for most cases. Examples include Elastic IP addresses for EC2 instances that scale manually or automatically.   Mean - Use the average of the traffic across the group. This is a good choice for resources that share traffic uniformly. Examples include accelerators and load balancers.   Max - Use the highest traffic from each resource. This is useful for resources that don't share traffic and for resources that share that traffic in a non-uniform way. Examples include Amazon CloudFront distributions and origin resources for CloudFront distributions.  
      */
     Aggregation: ProtectionGroupAggregation;
     /**
@@ -910,7 +910,7 @@ declare namespace Shield {
      */
     EndTime?: Timestamp;
     /**
-     * The length, in seconds, of the AWS Shield Advanced subscription for the account.
+     * The length, in seconds, of the Shield Advanced subscription for the account.
      */
     TimeCommitmentInSeconds?: DurationInSeconds;
     /**
@@ -922,7 +922,7 @@ declare namespace Shield {
      */
     Limits?: Limits;
     /**
-     * If ENABLED, the DDoS Response Team (DRT) will use email and phone to notify contacts about escalations to the DRT and to initiate proactive customer support. If PENDING, you have requested proactive engagement and the request is pending. The status changes to ENABLED when your request is fully processed. If DISABLED, the DRT will not proactively notify contacts about escalations or to initiate proactive customer support. 
+     * If ENABLED, the Shield Response Team (SRT) will use email and phone to notify contacts about escalations to the SRT and to initiate proactive customer support. If PENDING, you have requested proactive engagement and the request is pending. The status changes to ENABLED when your request is fully processed. If DISABLED, the SRT will not proactively notify contacts about escalations or to initiate proactive customer support. 
      */
     ProactiveEngagementStatus?: ProactiveEngagementStatus;
     /**
@@ -1037,7 +1037,7 @@ declare namespace Shield {
   }
   export interface UpdateEmergencyContactSettingsRequest {
     /**
-     * A list of email addresses and phone numbers that the DDoS Response Team (DRT) can use to contact you if you have proactive engagement enabled, for escalations to the DRT and to initiate proactive customer support. If you have proactive engagement enabled, the contact list must include at least one phone number.
+     * A list of email addresses and phone numbers that the Shield Response Team (SRT) can use to contact you if you have proactive engagement enabled, for escalations to the SRT and to initiate proactive customer support. If you have proactive engagement enabled, the contact list must include at least one phone number.
      */
     EmergencyContactList?: EmergencyContactList;
   }
@@ -1049,7 +1049,7 @@ declare namespace Shield {
      */
     ProtectionGroupId: ProtectionGroupId;
     /**
-     * Defines how AWS Shield combines resource data for the group in order to detect, mitigate, and report events.   Sum - Use the total traffic across the group. This is a good choice for most cases. Examples include Elastic IP addresses for EC2 instances that scale manually or automatically.   Mean - Use the average of the traffic across the group. This is a good choice for resources that share traffic uniformly. Examples include accelerators and load balancers.   Max - Use the highest traffic from each resource. This is useful for resources that don't share traffic and for resources that share that traffic in a non-uniform way. Examples include CloudFront distributions and origin resources for CloudFront distributions.  
+     * Defines how Shield combines resource data for the group in order to detect, mitigate, and report events.   Sum - Use the total traffic across the group. This is a good choice for most cases. Examples include Elastic IP addresses for EC2 instances that scale manually or automatically.   Mean - Use the average of the traffic across the group. This is a good choice for resources that share traffic uniformly. Examples include accelerators and load balancers.   Max - Use the highest traffic from each resource. This is useful for resources that don't share traffic and for resources that share that traffic in a non-uniform way. Examples include Amazon CloudFront distributions and origin resources for CloudFront distributions.  
      */
     Aggregation: ProtectionGroupAggregation;
     /**

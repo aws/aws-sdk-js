@@ -1041,5 +1041,17 @@
   },
   "proton": {
     "name": "Proton"
+  },
+  "route53recoverycluster": {
+    "prefix": "route53-recovery-cluster",
+    "name": "Route53RecoveryCluster"
+  },
+  "route53recoverycontrolconfig": {
+    "prefix": "route53-recovery-control-config",
+    "name": "Route53RecoveryControlConfig"
+  },
+  "route53recoveryreadiness": {
+    "prefix": "route53-recovery-readiness",
+    "name": "Route53RecoveryReadiness"
   }
 }

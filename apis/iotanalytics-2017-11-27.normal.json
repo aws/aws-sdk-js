@@ -107,7 +107,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a channel. A channel collects data from an MQTT topic and archives the raw, unprocessed messages before publishing the data to a pipeline.</p>"
+      "documentation": "<p>Used to create a channel. A channel collects data from an MQTT topic and archives the raw, unprocessed messages before publishing the data to a pipeline.</p>"
     },
     "CreateDataset": {
       "name": "CreateDataset",
@@ -142,7 +142,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a dataset. A dataset stores data retrieved from a data store by applying a <code>queryAction</code> (a SQL query) or a <code>containerAction</code> (executing a containerized application). This operation creates the skeleton of a dataset. The dataset can be populated manually by calling <code>CreateDatasetContent</code> or automatically according to a trigger you specify.</p>"
+      "documentation": "<p>Used to create a dataset. A dataset stores data retrieved from a data store by applying a <code>queryAction</code> (a SQL query) or a <code>containerAction</code> (executing a containerized application). This operation creates the skeleton of a dataset. The dataset can be populated manually by calling <code>CreateDatasetContent</code> or automatically according to a trigger you specify.</p>"
     },
     "CreateDatasetContent": {
       "name": "CreateDatasetContent",
@@ -173,7 +173,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Creates the content of a data set by applying a <code>queryAction</code> (a SQL query) or a <code>containerAction</code> (executing a containerized application).</p>"
+      "documentation": "<p>Creates the content of a dataset by applying a <code>queryAction</code> (a SQL query) or a <code>containerAction</code> (executing a containerized application).</p>"
     },
     "CreateDatastore": {
       "name": "CreateDatastore",
@@ -208,7 +208,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a data store, which is a repository for messages. Only data stores that are used to save pipeline data can be configured with <code>ParquetConfiguration</code>.</p>"
+      "documentation": "<p>Creates a data store, which is a repository for messages.</p>"
     },
     "CreatePipeline": {
       "name": "CreatePipeline",
@@ -512,7 +512,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Retrieves the current settings of the AWS IoT Analytics logging options.</p>"
+      "documentation": "<p>Retrieves the current settings of the IoT Analytics logging options.</p>"
     },
     "DescribePipeline": {
       "name": "DescribePipeline",
@@ -574,7 +574,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Retrieves the contents of a data set as presigned URIs.</p>"
+      "documentation": "<p>Retrieves the contents of a dataset as presigned URIs.</p>"
     },
     "ListChannels": {
       "name": "ListChannels",
@@ -633,7 +633,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Lists information about data set contents that have been created.</p>"
+      "documentation": "<p>Lists information about dataset contents that have been created.</p>"
     },
     "ListDatasets": {
       "name": "ListDatasets",
@@ -661,7 +661,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Retrieves information about data sets.</p>"
+      "documentation": "<p>Retrieves information about datasets.</p>"
     },
     "ListDatastores": {
       "name": "ListDatastores",
@@ -776,7 +776,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Sets or updates the AWS IoT Analytics logging options.</p> <p>If you update the value of any <code>loggingOptions</code> field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the <code>roleArn</code> field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect. </p>"
+      "documentation": "<p>Sets or updates the IoT Analytics logging options.</p> <p>If you update the value of any <code>loggingOptions</code> field, it takes up to one minute for the change to take effect. Also, if you change the policy attached to the role you specified in the <code>roleArn</code> field (for example, to correct an invalid policy), it takes up to five minutes for that change to take effect. </p>"
     },
     "RunPipelineActivity": {
       "name": "RunPipelineActivity",
@@ -967,7 +967,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Updates the settings of a channel.</p>"
+      "documentation": "<p>Used to update the settings of a channel.</p>"
     },
     "UpdateDataset": {
       "name": "UpdateDataset",
@@ -995,7 +995,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Updates the settings of a data set.</p>"
+      "documentation": "<p>Updates the settings of a dataset.</p>"
     },
     "UpdateDatastore": {
       "name": "UpdateDatastore",
@@ -1023,7 +1023,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Updates the settings of a data store.</p>"
+      "documentation": "<p>Used to update the settings of a data store.</p>"
     },
     "UpdatePipeline": {
       "name": "UpdatePipeline",
@@ -1151,7 +1151,7 @@
         },
         "messages": {
           "shape": "Messages",
-          "documentation": "<p>The list of messages to be sent. Each message has the format: { \"messageId\": \"string\", \"payload\": \"string\"}.</p> <p>The field names of message payloads (data) that you send to AWS IoT Analytics:</p> <ul> <li> <p>Must contain only alphanumeric characters and undescores (_). No other special characters are allowed.</p> </li> <li> <p>Must begin with an alphabetic character or single underscore (_).</p> </li> <li> <p>Cannot contain hyphens (-).</p> </li> <li> <p>In regular expression terms: \"^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$\". </p> </li> <li> <p>Cannot be more than 255 characters.</p> </li> <li> <p>Are case insensitive. (Fields named foo and FOO in the same payload are considered duplicates.)</p> </li> </ul> <p>For example, {\"temp_01\": 29} or {\"_temp_01\": 29} are valid, but {\"temp-01\": 29}, {\"01_temp\": 29} or {\"__temp_01\": 29} are invalid in message payloads. </p>"
+          "documentation": "<p>The list of messages to be sent. Each message has the format: { \"messageId\": \"string\", \"payload\": \"string\"}.</p> <p>The field names of message payloads (data) that you send to IoT Analytics:</p> <ul> <li> <p>Must contain only alphanumeric characters and undescores (_). No other special characters are allowed.</p> </li> <li> <p>Must begin with an alphabetic character or single underscore (_).</p> </li> <li> <p>Cannot contain hyphens (-).</p> </li> <li> <p>In regular expression terms: \"^[A-Za-z_]([A-Za-z0-9]*|[A-Za-z0-9][A-Za-z0-9_]*)$\". </p> </li> <li> <p>Cannot be more than 255 characters.</p> </li> <li> <p>Are case insensitive. (Fields named foo and FOO in the same payload are considered duplicates.)</p> </li> </ul> <p>For example, {\"temp_01\": 29} or {\"_temp_01\": 29} are valid, but {\"temp-01\": 29}, {\"01_temp\": 29} or {\"__temp_01\": 29} are invalid in message payloads. </p>"
         }
       }
     },
@@ -1210,7 +1210,7 @@
         },
         "storage": {
           "shape": "ChannelStorage",
-          "documentation": "<p>Where channel data is stored. You can choose one of <code>serviceManagedS3</code> or <code>customerManagedS3</code> storage. If not specified, the default is <code>serviceManagedS3</code>. You cannot change this storage option after the channel is created.</p>"
+          "documentation": "<p>Where channel data is stored. You can choose one of <code>serviceManagedS3</code> or <code>customerManagedS3</code> storage. If not specified, the default is <code>serviceManagedS3</code>. You can't change this storage option after the channel is created.</p>"
         },
         "arn": {
           "shape": "ChannelArn",
@@ -1234,7 +1234,7 @@
         },
         "lastMessageArrivalTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time when a new message arrived in the channel.</p> <p>AWS IoT Analytics updates this value at most once per minute for one channel. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+          "documentation": "<p>The last time when a new message arrived in the channel.</p> <p>IoT Analytics updates this value at most once per minute for one channel. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
         }
       },
       "documentation": "<p>A collection of data from an MQTT topic. Channels archive the raw, unprocessed messages before publishing the data to a pipeline.</p>"
@@ -1278,7 +1278,7 @@
       "type": "string",
       "max": 128,
       "min": 1,
-      "pattern": "^[a-zA-Z0-9_]+$"
+      "pattern": "(^(?!_{2}))(^[a-zA-Z0-9_]+$)"
     },
     "ChannelStatistics": {
       "type": "structure",
@@ -1303,21 +1303,21 @@
       "members": {
         "serviceManagedS3": {
           "shape": "ServiceManagedChannelS3Storage",
-          "documentation": "<p>Use this to store channel data in an S3 bucket managed by AWS IoT Analytics. You cannot change the choice of service-managed or customer-managed S3 storage after the channel is created.</p>"
+          "documentation": "<p>Used to store channel data in an S3 bucket managed by IoT Analytics. You can't change the choice of S3 storage after the data store is created.</p>"
         },
         "customerManagedS3": {
           "shape": "CustomerManagedChannelS3Storage",
-          "documentation": "<p>Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the <code>retentionPeriod</code> parameter is ignored. You cannot change the choice of service-managed or customer-managed S3 storage after the channel is created.</p>"
+          "documentation": "<p>Used to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the <code>retentionPeriod</code> parameter is ignored. You can't change the choice of S3 storage after the data store is created.</p>"
         }
       },
-      "documentation": "<p>Where channel data is stored. You may choose one of <code>serviceManagedS3</code> or <code>customerManagedS3</code> storage. If not specified, the default is <code>serviceManagedS3</code>. This cannot be changed after creation of the channel.</p>"
+      "documentation": "<p>Where channel data is stored. You may choose one of <code>serviceManagedS3</code>, <code>customerManagedS3</code> storage. If not specified, the default is <code>serviceManagedS3</code>. This can't be changed after creation of the channel.</p>"
     },
     "ChannelStorageSummary": {
       "type": "structure",
       "members": {
         "serviceManagedS3": {
           "shape": "ServiceManagedChannelS3StorageSummary",
-          "documentation": "<p>Used to store channel data in an S3 bucket managed by AWS IoT Analytics.</p>"
+          "documentation": "<p>Used to store channel data in an S3 bucket managed by IoT Analytics.</p>"
         },
         "customerManagedS3": {
           "shape": "CustomerManagedChannelS3StorageSummary",
@@ -1357,7 +1357,7 @@
         },
         "lastMessageArrivalTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time when a new message arrived in the channel.</p> <p>AWS IoT Analytics updates this value at most once per minute for one channel. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+          "documentation": "<p>The last time when a new message arrived in the channel.</p> <p>IoT Analytics updates this value at most once per minute for one channel. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
         }
       },
       "documentation": "<p>A summary of information about a channel.</p>"
@@ -1375,7 +1375,7 @@
         },
         "type": {
           "shape": "ColumnDataType",
-          "documentation": "<p>The type of data. For more information about the supported data types, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html\">Common data types</a> in the <i>AWS Glue Developer Guide</i>.</p>"
+          "documentation": "<p>The type of data. For more information about the supported data types, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/aws-glue-api-common.html\">Common data types</a> in the <i>Glue Developer Guide</i>.</p>"
         }
       },
       "documentation": "<p>Contains information about a column that stores your data.</p>"
@@ -1444,7 +1444,7 @@
         },
         "channelStorage": {
           "shape": "ChannelStorage",
-          "documentation": "<p>Where channel data is stored. You can choose one of <code>serviceManagedS3</code> or <code>customerManagedS3</code> storage. If not specified, the default is <code>serviceManagedS3</code>. You cannot change this storage option after the channel is created.</p>"
+          "documentation": "<p>Where channel data is stored. You can choose one of <code>serviceManagedS3</code> or <code>customerManagedS3</code> storage. If not specified, the default is <code>serviceManagedS3</code>. You can't change this storage option after the channel is created.</p>"
         },
         "retentionPeriod": {
           "shape": "RetentionPeriod",
@@ -1509,15 +1509,15 @@
       "members": {
         "datasetName": {
           "shape": "DatasetName",
-          "documentation": "<p>The name of the data set.</p>"
+          "documentation": "<p>The name of the dataset.</p>"
         },
         "actions": {
           "shape": "DatasetActions",
-          "documentation": "<p>A list of actions that create the data set contents.</p>"
+          "documentation": "<p>A list of actions that create the dataset contents.</p>"
         },
         "triggers": {
           "shape": "DatasetTriggers",
-          "documentation": "<p>A list of triggers. A trigger causes data set contents to be populated at a specified time interval or when another data set's contents are created. The list of triggers can be empty or contain up to five <code>DataSetTrigger</code> objects.</p>"
+          "documentation": "<p>A list of triggers. A trigger causes dataset contents to be populated at a specified time interval or when another dataset's contents are created. The list of triggers can be empty or contain up to five <code>DataSetTrigger</code> objects.</p>"
         },
         "contentDeliveryRules": {
           "shape": "DatasetContentDeliveryRules",
@@ -1525,19 +1525,19 @@
         },
         "retentionPeriod": {
           "shape": "RetentionPeriod",
-          "documentation": "<p>Optional. How long, in days, versions of dataset contents are kept for the dataset. If not specified or set to <code>null</code>, versions of dataset contents are retained for at most 90 days. The number of versions of dataset contents retained is determined by the <code>versioningConfiguration</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\">Keeping Multiple Versions of AWS IoT Analytics Data Sets</a> in the <i>AWS IoT Analytics User Guide</i>.</p>"
+          "documentation": "<p>Optional. How long, in days, versions of dataset contents are kept for the dataset. If not specified or set to <code>null</code>, versions of dataset contents are retained for at most 90 days. The number of versions of dataset contents retained is determined by the <code>versioningConfiguration</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\"> Keeping Multiple Versions of IoT Analytics datasets</a> in the <i>IoT Analytics User Guide</i>.</p>"
         },
         "versioningConfiguration": {
           "shape": "VersioningConfiguration",
-          "documentation": "<p>Optional. How many versions of dataset contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the <code>retentionPeriod</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\">Keeping Multiple Versions of AWS IoT Analytics Data Sets</a> in the <i>AWS IoT Analytics User Guide</i>.</p>"
+          "documentation": "<p>Optional. How many versions of dataset contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the <code>retentionPeriod</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\">Keeping Multiple Versions of IoT Analytics datasets</a> in the <i>IoT Analytics User Guide</i>.</p>"
         },
         "tags": {
           "shape": "TagList",
-          "documentation": "<p>Metadata which can be used to manage the data set.</p>"
+          "documentation": "<p>Metadata which can be used to manage the dataset.</p>"
         },
         "lateDataRules": {
           "shape": "LateDataRules",
-          "documentation": "<p>A list of data rules that send notifications to Amazon CloudWatch, when data arrives late. To specify <code>lateDataRules</code>, the dataset must use a <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">DeltaTimer</a> filter.</p>"
+          "documentation": "<p>A list of data rules that send notifications to CloudWatch, when data arrives late. To specify <code>lateDataRules</code>, the dataset must use a <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">DeltaTimer</a> filter.</p>"
         }
       }
     },
@@ -1570,7 +1570,7 @@
         },
         "datastoreStorage": {
           "shape": "DatastoreStorage",
-          "documentation": "<p>Where data store data is stored. You can choose one of <code>serviceManagedS3</code> or <code>customerManagedS3</code> storage. If not specified, the default is <code>serviceManagedS3</code>. You cannot change this storage option after the data store is created.</p>"
+          "documentation": "<p>Where data in a data store is stored.. You can choose <code>serviceManagedS3</code> storage, <code>customerManagedS3</code> storage, or <code>iotSiteWiseMultiLayerStorage</code> storage. The default is <code>serviceManagedS3</code>. You can't change the choice of Amazon S3 storage after your data store is created. </p>"
         },
         "retentionPeriod": {
           "shape": "RetentionPeriod",
@@ -1582,11 +1582,11 @@
         },
         "fileFormatConfiguration": {
           "shape": "FileFormatConfiguration",
-          "documentation": "<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can't change the file format after you create the data store.</p>"
+          "documentation": "<p>Contains the configuration information of file formats. IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can't change the file format after you create the data store.</p>"
         },
         "datastorePartitions": {
           "shape": "DatastorePartitions",
-          "documentation": "<p> Contains information about the partitions in a data store. </p>"
+          "documentation": "<p> Contains information about the partition dimensions in a data store. </p>"
         }
       }
     },
@@ -1620,7 +1620,7 @@
         },
         "pipelineActivities": {
           "shape": "PipelineActivities",
-          "documentation": "<p>A list of <code>PipelineActivity</code> objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda functions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p> <p>The list can be 2-25 <code>PipelineActivity</code> objects and must contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must contain only one activity. For example:</p> <p> <code>pipelineActivities = [ { \"channel\": { ... } }, { \"lambda\": { ... } }, ... ]</code> </p>"
+          "documentation": "<p>A list of <code>PipelineActivity</code> objects. Activities perform transformations on your messages, such as removing, renaming or adding message attributes; filtering messages based on attribute values; invoking your Lambda unctions on messages for advanced processing; or performing mathematical transformations to normalize device data.</p> <p>The list can be 2-25 <code>PipelineActivity</code> objects and must contain both a <code>channel</code> and a <code>datastore</code> activity. Each entry in the list must contain only one activity. For example:</p> <p> <code>pipelineActivities = [ { \"channel\": { ... } }, { \"lambda\": { ... } }, ... ]</code> </p>"
         },
         "tags": {
           "shape": "TagList",
@@ -1654,14 +1654,14 @@
         },
         "keyPrefix": {
           "shape": "S3KeyPrefix",
-          "documentation": "<p>Optional. The prefix used to create the keys of the channel data objects. Each object in an S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/).</p>"
+          "documentation": "<p>(Optional) The prefix used to create the keys of the channel data objects. Each object in an S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/).</p>"
         },
         "roleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon S3 resources.</p>"
+          "documentation": "<p>The ARN of the role that grants IoT Analytics permission to interact with your Amazon S3 resources.</p>"
         }
       },
-      "documentation": "<p>Use this to store channel data in an S3 bucket that you manage. If customer managed storage is selected, the <code>retentionPeriod</code> parameter is ignored. You cannot change the choice of service-managed or customer-managed S3 storage after the channel is created.</p>"
+      "documentation": "<p>Used to store channel data in an S3 bucket that you manage. If customer-managed storage is selected, the <code>retentionPeriod</code> parameter is ignored. You can't change the choice of S3 storage after the data store is created.</p>"
     },
     "CustomerManagedChannelS3StorageSummary": {
       "type": "structure",
@@ -1672,11 +1672,11 @@
         },
         "keyPrefix": {
           "shape": "S3KeyPrefix",
-          "documentation": "<p>Optional. The prefix used to create the keys of the channel data objects. Each object in an S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a forward slash (/).</p>"
+          "documentation": "<p>(Optional) The prefix used to create the keys of the channel data objects. Each object in an S3 bucket has a key that is its unique identifier within the bucket (each object in a bucket has exactly one key). The prefix must end with a forward slash (/).</p>"
         },
         "roleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon S3 resources.</p>"
+          "documentation": "<p>The ARN of the role that grants IoT Analytics permission to interact with your Amazon S3 resources.</p>"
         }
       },
       "documentation": "<p>Used to store channel data in an S3 bucket that you manage.</p>"
@@ -1690,55 +1690,55 @@
       "members": {
         "bucket": {
           "shape": "BucketName",
-          "documentation": "<p>The name of the S3 bucket in which data store data is stored.</p>"
+          "documentation": "<p>The name of the Amazon S3 bucket where your data is stored.</p>"
         },
         "keyPrefix": {
           "shape": "S3KeyPrefix",
-          "documentation": "<p>Optional. The prefix used to create the keys of the data store data objects. Each object in an S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/).</p>"
+          "documentation": "<p>(Optional) The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/).</p>"
         },
         "roleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon S3 resources.</p>"
+          "documentation": "<p>The ARN of the role that grants IoT Analytics permission to interact with your Amazon S3 resources.</p>"
         }
       },
-      "documentation": "<p>Use this to store data store data in an S3 bucket that you manage. When customer-managed storage is selected, the <code>retentionPeriod</code> parameter is ignored. You cannot change the choice of service-managed or customer-managed S3 storage after the data store is created.</p>"
+      "documentation": "<p>S3-customer-managed; When you choose customer-managed storage, the <code>retentionPeriod</code> parameter is ignored. You can't change the choice of Amazon S3 storage after your data store is created. </p>"
     },
     "CustomerManagedDatastoreS3StorageSummary": {
       "type": "structure",
       "members": {
         "bucket": {
           "shape": "BucketName",
-          "documentation": "<p>The name of the S3 bucket in which data store data is stored.</p>"
+          "documentation": "<p>The name of the Amazon S3 bucket where your data is stored.</p>"
         },
         "keyPrefix": {
           "shape": "S3KeyPrefix",
-          "documentation": "<p>Optional. The prefix used to create the keys of the data store data objects. Each object in an S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/).</p>"
+          "documentation": "<p>(Optional) The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/).</p>"
         },
         "roleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon S3 resources.</p>"
+          "documentation": "<p>The ARN of the role that grants IoT Analytics permission to interact with your Amazon S3 resources.</p>"
         }
       },
-      "documentation": "<p>Used to store data store data in an S3 bucket that you manage.</p>"
+      "documentation": "<p>Contains information about the data store that you manage.</p>"
     },
     "Dataset": {
       "type": "structure",
       "members": {
         "name": {
           "shape": "DatasetName",
-          "documentation": "<p>The name of the data set.</p>"
+          "documentation": "<p>The name of the dataset.</p>"
         },
         "arn": {
           "shape": "DatasetArn",
-          "documentation": "<p>The ARN of the data set.</p>"
+          "documentation": "<p>The ARN of the dataset.</p>"
         },
         "actions": {
           "shape": "DatasetActions",
-          "documentation": "<p>The <code>DatasetAction</code> objects that automatically create the data set contents.</p>"
+          "documentation": "<p>The <code>DatasetAction</code> objects that automatically create the dataset contents.</p>"
         },
         "triggers": {
           "shape": "DatasetTriggers",
-          "documentation": "<p>The <code>DatasetTrigger</code> objects that specify when the data set is automatically updated.</p>"
+          "documentation": "<p>The <code>DatasetTrigger</code> objects that specify when the dataset is automatically updated.</p>"
         },
         "contentDeliveryRules": {
           "shape": "DatasetContentDeliveryRules",
@@ -1746,48 +1746,48 @@
         },
         "status": {
           "shape": "DatasetStatus",
-          "documentation": "<p>The status of the data set.</p>"
+          "documentation": "<p>The status of the dataset.</p>"
         },
         "creationTime": {
           "shape": "Timestamp",
-          "documentation": "<p>When the data set was created.</p>"
+          "documentation": "<p>When the dataset was created.</p>"
         },
         "lastUpdateTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time the data set was updated.</p>"
+          "documentation": "<p>The last time the dataset was updated.</p>"
         },
         "retentionPeriod": {
           "shape": "RetentionPeriod",
-          "documentation": "<p>Optional. How long, in days, message data is kept for the data set.</p>"
+          "documentation": "<p>Optional. How long, in days, message data is kept for the dataset.</p>"
         },
         "versioningConfiguration": {
           "shape": "VersioningConfiguration",
-          "documentation": "<p>Optional. How many versions of dataset contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the <code>retentionPeriod</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\">Keeping Multiple Versions of AWS IoT Analytics Data Sets</a> in the <i>AWS IoT Analytics User Guide</i>.</p>"
+          "documentation": "<p>Optional. How many versions of dataset contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the <code>retentionPeriod</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\"> Keeping Multiple Versions of IoT Analytics datasets</a> in the <i>IoT Analytics User Guide</i>.</p>"
         },
         "lateDataRules": {
           "shape": "LateDataRules",
-          "documentation": "<p>A list of data rules that send notifications to Amazon CloudWatch, when data arrives late. To specify <code>lateDataRules</code>, the dataset must use a <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">DeltaTimer</a> filter.</p>"
+          "documentation": "<p>A list of data rules that send notifications to CloudWatch, when data arrives late. To specify <code>lateDataRules</code>, the dataset must use a <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">DeltaTimer</a> filter.</p>"
         }
       },
-      "documentation": "<p>Information about a data set.</p>"
+      "documentation": "<p>Information about a dataset.</p>"
     },
     "DatasetAction": {
       "type": "structure",
       "members": {
         "actionName": {
           "shape": "DatasetActionName",
-          "documentation": "<p>The name of the data set action by which data set contents are automatically created.</p>"
+          "documentation": "<p>The name of the dataset action by which dataset contents are automatically created.</p>"
         },
         "queryAction": {
           "shape": "SqlQueryDatasetAction",
-          "documentation": "<p>An <code>SqlQueryDatasetAction</code> object that uses an SQL query to automatically create data set contents.</p>"
+          "documentation": "<p>An <code>SqlQueryDatasetAction</code> object that uses an SQL query to automatically create dataset contents.</p>"
         },
         "containerAction": {
           "shape": "ContainerDatasetAction",
           "documentation": "<p>Information that allows the system to run a containerized application to create the dataset contents. The application must be in a Docker container along with any required support libraries.</p>"
         }
       },
-      "documentation": "<p>A <code>DatasetAction</code> object that specifies how data set contents are automatically created.</p>"
+      "documentation": "<p>A <code>DatasetAction</code> object that specifies how dataset contents are automatically created.</p>"
     },
     "DatasetActionName": {
       "type": "string",
@@ -1840,7 +1840,7 @@
       "members": {
         "iotEventsDestinationConfiguration": {
           "shape": "IotEventsDestinationConfiguration",
-          "documentation": "<p>Configuration information for delivery of dataset contents to AWS IoT Events.</p>"
+          "documentation": "<p>Configuration information for delivery of dataset contents to IoT Events.</p>"
         },
         "s3DestinationConfiguration": {
           "shape": "S3DestinationConfiguration",
@@ -1887,14 +1887,14 @@
       "members": {
         "state": {
           "shape": "DatasetContentState",
-          "documentation": "<p>The state of the data set contents. Can be one of READY, CREATING, SUCCEEDED, or FAILED.</p>"
+          "documentation": "<p>The state of the dataset contents. Can be one of READY, CREATING, SUCCEEDED, or FAILED.</p>"
         },
         "reason": {
           "shape": "Reason",
-          "documentation": "<p>The reason the data set contents are in this state.</p>"
+          "documentation": "<p>The reason the dataset contents are in this state.</p>"
         }
       },
-      "documentation": "<p>The state of the data set contents and the reason they are in this state.</p>"
+      "documentation": "<p>The state of the dataset contents and the reason they are in this state.</p>"
     },
     "DatasetContentSummaries": {
       "type": "list",
@@ -1911,7 +1911,7 @@
         },
         "status": {
           "shape": "DatasetContentStatus",
-          "documentation": "<p>The status of the data set contents.</p>"
+          "documentation": "<p>The status of the dataset contents.</p>"
         },
         "creationTime": {
           "shape": "Timestamp",
@@ -1957,20 +1957,20 @@
       "members": {
         "entryName": {
           "shape": "EntryName",
-          "documentation": "<p>The name of the data set item.</p>"
+          "documentation": "<p>The name of the dataset item.</p>"
         },
         "dataURI": {
           "shape": "PresignedURI",
-          "documentation": "<p>The presigned URI of the data set item.</p>"
+          "documentation": "<p>The presigned URI of the dataset item.</p>"
         }
       },
-      "documentation": "<p>The reference to a data set entry.</p>"
+      "documentation": "<p>The reference to a dataset entry.</p>"
     },
     "DatasetName": {
       "type": "string",
       "max": 128,
       "min": 1,
-      "pattern": "^[a-zA-Z0-9_]+$"
+      "pattern": "(^(?!_{2}))(^[a-zA-Z0-9_]+$)"
     },
     "DatasetStatus": {
       "type": "string",
@@ -1991,30 +1991,30 @@
       "members": {
         "datasetName": {
           "shape": "DatasetName",
-          "documentation": "<p>The name of the data set.</p>"
+          "documentation": "<p>The name of the dataset.</p>"
         },
         "status": {
           "shape": "DatasetStatus",
-          "documentation": "<p>The status of the data set.</p>"
+          "documentation": "<p>The status of the dataset.</p>"
         },
         "creationTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The time the data set was created.</p>"
+          "documentation": "<p>The time the dataset was created.</p>"
         },
         "lastUpdateTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time the data set was updated.</p>"
+          "documentation": "<p>The last time the dataset was updated.</p>"
         },
         "triggers": {
           "shape": "DatasetTriggers",
-          "documentation": "<p>A list of triggers. A trigger causes data set content to be populated at a specified time interval or when another data set is populated. The list of triggers can be empty or contain up to five <code>DataSetTrigger</code> objects</p>"
+          "documentation": "<p>A list of triggers. A trigger causes dataset content to be populated at a specified time interval or when another dataset is populated. The list of triggers can be empty or contain up to five <code>DataSetTrigger</code> objects</p>"
         },
         "actions": {
           "shape": "DatasetActionSummaries",
           "documentation": "<p>A list of <code>DataActionSummary</code> objects.</p>"
         }
       },
-      "documentation": "<p>A summary of information about a data set.</p>"
+      "documentation": "<p>A summary of information about a dataset.</p>"
     },
     "DatasetTrigger": {
       "type": "structure",
@@ -2025,10 +2025,10 @@
         },
         "dataset": {
           "shape": "TriggeringDataset",
-          "documentation": "<p>The data set whose content creation triggers the creation of this data set's contents.</p>"
+          "documentation": "<p>The dataset whose content creation triggers the creation of this dataset's contents.</p>"
         }
       },
-      "documentation": "<p>The <code>DatasetTrigger</code> that specifies when the data set is automatically updated.</p>"
+      "documentation": "<p>The <code>DatasetTrigger</code> that specifies when the dataset is automatically updated.</p>"
     },
     "DatasetTriggers": {
       "type": "list",
@@ -2047,7 +2047,7 @@
         },
         "storage": {
           "shape": "DatastoreStorage",
-          "documentation": "<p>Where data store data is stored. You can choose one of <code>serviceManagedS3</code> or <code>customerManagedS3</code> storage. If not specified, the default is <code>serviceManagedS3</code>. You cannot change this storage option after the data store is created.</p>"
+          "documentation": "<p>Where data in a data store is stored.. You can choose <code>serviceManagedS3</code> storage, <code>customerManagedS3</code> storage, or <code>iotSiteWiseMultiLayerStorage</code> storage. The default is <code>serviceManagedS3</code>. You can't change the choice of Amazon S3 storage after your data store is created. </p>"
         },
         "arn": {
           "shape": "DatastoreArn",
@@ -2071,15 +2071,15 @@
         },
         "lastMessageArrivalTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time when a new message arrived in the data store.</p> <p>AWS IoT Analytics updates this value at most once per minute for one data store. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+          "documentation": "<p>The last time when a new message arrived in the data store.</p> <p>IoT Analytics updates this value at most once per minute for Amazon Simple Storage Service one data store. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
         },
         "fileFormatConfiguration": {
           "shape": "FileFormatConfiguration",
-          "documentation": "<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can't change the file format after you create the data store.</p>"
+          "documentation": "<p>Contains the configuration information of file formats. IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can't change the file format after you create the data store.</p>"
         },
         "datastorePartitions": {
           "shape": "DatastorePartitions",
-          "documentation": "<p> Contains information about the partitions in a data store. </p>"
+          "documentation": "<p> Contains information about the partition dimensions in a data store. </p>"
         }
       },
       "documentation": "<p>Information about a data store.</p>"
@@ -2105,35 +2105,58 @@
     "DatastoreArn": {
       "type": "string"
     },
+    "DatastoreIotSiteWiseMultiLayerStorage": {
+      "type": "structure",
+      "required": [
+        "customerManagedS3Storage"
+      ],
+      "members": {
+        "customerManagedS3Storage": {
+          "shape": "IotSiteWiseCustomerManagedDatastoreS3Storage",
+          "documentation": "<p> Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage. </p>"
+        }
+      },
+      "documentation": "<p> Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage. You can't change the choice of Amazon S3 storage after your data store is created. </p>"
+    },
+    "DatastoreIotSiteWiseMultiLayerStorageSummary": {
+      "type": "structure",
+      "members": {
+        "customerManagedS3Storage": {
+          "shape": "IotSiteWiseCustomerManagedDatastoreS3StorageSummary",
+          "documentation": "<p>Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage.</p>"
+        }
+      },
+      "documentation": "<p> Contains information about the data store that you manage, which stores data used by IoT SiteWise. </p>"
+    },
     "DatastoreName": {
       "type": "string",
       "max": 128,
       "min": 1,
-      "pattern": "^[a-zA-Z0-9_]+$"
+      "pattern": "(^(?!_{2}))(^[a-zA-Z0-9_]+$)"
     },
     "DatastorePartition": {
       "type": "structure",
       "members": {
         "attributePartition": {
           "shape": "Partition",
-          "documentation": "<p> A partition defined by an <code>attributeName</code>. </p>"
+          "documentation": "<p> A partition dimension defined by an <code>attributeName</code>. </p>"
         },
         "timestampPartition": {
           "shape": "TimestampPartition",
-          "documentation": "<p> A partition defined by an <code>attributeName</code> and a timestamp format. </p>"
+          "documentation": "<p> A partition dimension defined by a timestamp attribute. </p>"
         }
       },
-      "documentation": "<p> A single partition in a data store. </p>"
+      "documentation": "<p> A single dimension to partition a data store. The dimension must be an <code>AttributePartition</code> or a <code>TimestampPartition</code>. </p>"
     },
     "DatastorePartitions": {
       "type": "structure",
       "members": {
         "partitions": {
           "shape": "Partitions",
-          "documentation": "<p> A list of partitions in a data store. </p>"
+          "documentation": "<p> A list of partition dimensions in a data store. </p>"
         }
       },
-      "documentation": "<p> Contains information about partitions in a data store. </p>"
+      "documentation": "<p> Contains information about the partition dimensions in a data store. </p>"
     },
     "DatastoreStatistics": {
       "type": "structure",
@@ -2158,28 +2181,36 @@
       "members": {
         "serviceManagedS3": {
           "shape": "ServiceManagedDatastoreS3Storage",
-          "documentation": "<p>Use this to store data store data in an S3 bucket managed by AWS IoT Analytics. You cannot change the choice of service-managed or customer-managed S3 storage after the data store is created.</p>"
+          "documentation": "<p>Used to store data in an Amazon S3 bucket managed by IoT Analytics. You can't change the choice of Amazon S3 storage after your data store is created. </p>"
         },
         "customerManagedS3": {
           "shape": "CustomerManagedDatastoreS3Storage",
-          "documentation": "<p>Use this to store data store data in an S3 bucket that you manage. When customer managed storage is selected, the <code>retentionPeriod</code> parameter is ignored. The choice of service-managed or customer-managed S3 storage cannot be changed after creation of the data store.</p>"
+          "documentation": "<p>S3-customer-managed; When you choose customer-managed storage, the <code>retentionPeriod</code> parameter is ignored. You can't change the choice of Amazon S3 storage after your data store is created. </p>"
+        },
+        "iotSiteWiseMultiLayerStorage": {
+          "shape": "DatastoreIotSiteWiseMultiLayerStorage",
+          "documentation": "<p> Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage. You can't change the choice of Amazon S3 storage after your data store is created. </p>"
         }
       },
-      "documentation": "<p>Where data store data is stored. You can choose one of <code>serviceManagedS3</code> or <code>customerManagedS3</code> storage. If not specified, the default is <code>serviceManagedS3</code>. You cannot change this storage option after the data store is created.</p>"
+      "documentation": "<p>Where data in a data store is stored.. You can choose <code>serviceManagedS3</code> storage, <code>customerManagedS3</code> storage, or <code>iotSiteWiseMultiLayerStorage</code> storage. The default is <code>serviceManagedS3</code>. You can't change the choice of Amazon S3 storage after your data store is created. </p>"
     },
     "DatastoreStorageSummary": {
       "type": "structure",
       "members": {
         "serviceManagedS3": {
           "shape": "ServiceManagedDatastoreS3StorageSummary",
-          "documentation": "<p>Used to store data store data in an S3 bucket managed by AWS IoT Analytics.</p>"
+          "documentation": "<p>Used to store data in an Amazon S3 bucket managed by IoT Analytics.</p>"
         },
         "customerManagedS3": {
           "shape": "CustomerManagedDatastoreS3StorageSummary",
-          "documentation": "<p>Used to store data store data in an S3 bucket that you manage.</p>"
+          "documentation": "<p>Used to store data in an Amazon S3 bucket managed by IoT Analytics.</p>"
+        },
+        "iotSiteWiseMultiLayerStorage": {
+          "shape": "DatastoreIotSiteWiseMultiLayerStorageSummary",
+          "documentation": "<p> Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage. </p>"
         }
       },
-      "documentation": "<p>Where data store data is stored.</p>"
+      "documentation": "<p>Contains information about your data store.</p>"
     },
     "DatastoreSummaries": {
       "type": "list",
@@ -2196,7 +2227,7 @@
         },
         "datastoreStorage": {
           "shape": "DatastoreStorageSummary",
-          "documentation": "<p>Where data store data is stored.</p>"
+          "documentation": "<p>Where data in a data store is stored.</p>"
         },
         "status": {
           "shape": "DatastoreStatus",
@@ -2212,7 +2243,7 @@
         },
         "lastMessageArrivalTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The last time when a new message arrived in the data store.</p> <p>AWS IoT Analytics updates this value at most once per minute for one data store. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
+          "documentation": "<p>The last time when a new message arrived in the data store.</p> <p>IoT Analytics updates this value at most once per minute for Amazon Simple Storage Service one data store. Hence, the <code>lastMessageArrivalTime</code> value is an approximation.</p> <p>This feature only applies to messages that arrived in the data store after October 23, 2020. </p>"
         },
         "fileFormatType": {
           "shape": "FileFormatType",
@@ -2220,7 +2251,7 @@
         },
         "datastorePartitions": {
           "shape": "DatastorePartitions",
-          "documentation": "<p> Contains information about the partitions in a data store. </p>"
+          "documentation": "<p> Contains information about the partition dimensions in a data store. </p>"
         }
       },
       "documentation": "<p>A summary of information about a data store.</p>"
@@ -2267,7 +2298,7 @@
       "members": {
         "datasetName": {
           "shape": "DatasetName",
-          "documentation": "<p>The name of the data set to delete.</p>",
+          "documentation": "<p>The name of the dataset to delete.</p>",
           "location": "uri",
           "locationName": "datasetName"
         }
@@ -2327,10 +2358,10 @@
       "members": {
         "timeoutInMinutes": {
           "shape": "SessionTimeoutInMinutes",
-          "documentation": "<p>A time interval. You can use <code>timeoutInMinutes</code> so that AWS IoT Analytics can batch up late data notifications that have been generated since the last execution. AWS IoT Analytics sends one batch of notifications to Amazon CloudWatch Events at one time.</p> <p>For more information about how to write a timestamp expression, see <a href=\"https://prestodb.io/docs/0.172/functions/datetime.html\">Date and Time Functions and Operators</a>, in the <i>Presto 0.172 Documentation</i>.</p>"
+          "documentation": "<p>A time interval. You can use <code>timeoutInMinutes</code> so that IoT Analytics can batch up late data notifications that have been generated since the last execution. IoT Analytics sends one batch of notifications to Amazon CloudWatch Events at one time.</p> <p>For more information about how to write a timestamp expression, see <a href=\"https://prestodb.io/docs/0.172/functions/datetime.html\">Date and Time Functions and Operators</a>, in the <i>Presto 0.172 Documentation</i>.</p>"
         }
       },
-      "documentation": "<p>A structure that contains the configuration information of a delta time session window.</p> <p> <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\"> <code>DeltaTime</code> </a> specifies a time interval. You can use <code>DeltaTime</code> to create dataset contents with data that has arrived in the data store since the last execution. For an example of <code>DeltaTime</code>, see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/automate-create-dataset.html#automate-example6\"> Creating a SQL dataset with a delta window (CLI)</a> in the <i>AWS IoT Analytics User Guide</i>.</p>"
+      "documentation": "<p>A structure that contains the configuration information of a delta time session window.</p> <p> <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\"> <code>DeltaTime</code> </a> specifies a time interval. You can use <code>DeltaTime</code> to create dataset contents with data that has arrived in the data store since the last execution. For an example of <code>DeltaTime</code>, see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/automate-create-dataset.html#automate-example6\"> Creating a SQL dataset with a delta window (CLI)</a> in the <i>IoT Analytics User Guide</i>.</p>"
     },
     "DescribeChannelRequest": {
       "type": "structure",
@@ -2346,7 +2377,7 @@
         },
         "includeStatistics": {
           "shape": "IncludeStatisticsFlag",
-          "documentation": "<p>If true, additional statistical information about the channel is included in the response. This feature cannot be used with a channel whose S3 storage is customer-managed.</p>",
+          "documentation": "<p>If true, additional statistical information about the channel is included in the response. This feature can't be used with a channel whose S3 storage is customer-managed.</p>",
           "location": "querystring",
           "locationName": "includeStatistics"
         }
@@ -2373,7 +2404,7 @@
       "members": {
         "datasetName": {
           "shape": "DatasetName",
-          "documentation": "<p>The name of the data set whose information is retrieved.</p>",
+          "documentation": "<p>The name of the dataset whose information is retrieved.</p>",
           "location": "uri",
           "locationName": "datasetName"
         }
@@ -2384,7 +2415,7 @@
       "members": {
         "dataset": {
           "shape": "Dataset",
-          "documentation": "<p>An object that contains information about the data set.</p>"
+          "documentation": "<p>An object that contains information about the dataset.</p>"
         }
       }
     },
@@ -2402,7 +2433,7 @@
         },
         "includeStatistics": {
           "shape": "IncludeStatisticsFlag",
-          "documentation": "<p>If true, additional statistical information about the data store is included in the response. This feature cannot be used with a data store whose S3 storage is customer-managed.</p>",
+          "documentation": "<p>If true, additional statistical information about the data store is included in the response. This feature can't be used with a data store whose S3 storage is customer-managed.</p>",
           "location": "querystring",
           "locationName": "includeStatistics"
         }
@@ -2430,7 +2461,7 @@
       "members": {
         "loggingOptions": {
           "shape": "LoggingOptions",
-          "documentation": "<p>The current settings of the AWS IoT Analytics logging options.</p>"
+          "documentation": "<p>The current settings of the IoT Analytics logging options.</p>"
         }
       }
     },
@@ -2487,7 +2518,7 @@
           "documentation": "<p>The next activity in the pipeline.</p>"
         }
       },
-      "documentation": "<p>An activity that adds data from the AWS IoT device registry to your message.</p>"
+      "documentation": "<p>An activity that adds data from the IoT device registry to your message.</p>"
     },
     "DeviceShadowEnrichActivity": {
       "type": "structure",
@@ -2519,7 +2550,7 @@
           "documentation": "<p>The next activity in the pipeline.</p>"
         }
       },
-      "documentation": "<p>An activity that adds information from the AWS IoT Device Shadow service to a message.</p>"
+      "documentation": "<p>An activity that adds information from the IoT Device Shadow service to a message.</p>"
     },
     "DoubleValue": {
       "type": "double"
@@ -2562,7 +2593,7 @@
           "documentation": "<p>Contains the configuration information of the Parquet format.</p>"
         }
       },
-      "documentation": "<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can't change the file format after you create the data store.</p>"
+      "documentation": "<p>Contains the configuration information of file formats. IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can't change the file format after you create the data store.</p>"
     },
     "FileFormatType": {
       "type": "string",
@@ -2606,13 +2637,13 @@
       "members": {
         "datasetName": {
           "shape": "DatasetName",
-          "documentation": "<p>The name of the data set whose contents are retrieved.</p>",
+          "documentation": "<p>The name of the dataset whose contents are retrieved.</p>",
           "location": "uri",
           "locationName": "datasetName"
         },
         "versionId": {
           "shape": "DatasetContentVersion",
-          "documentation": "<p>The version of the data set whose contents are retrieved. You can also use the strings \"$LATEST\" or \"$LATEST_SUCCEEDED\" to retrieve the contents of the latest or latest successfully completed data set. If not specified, \"$LATEST_SUCCEEDED\" is the default.</p>",
+          "documentation": "<p>The version of the dataset whose contents are retrieved. You can also use the strings \"$LATEST\" or \"$LATEST_SUCCEEDED\" to retrieve the contents of the latest or latest successfully completed dataset. If not specified, \"$LATEST_SUCCEEDED\" is the default.</p>",
           "location": "querystring",
           "locationName": "versionId"
         }
@@ -2631,7 +2662,7 @@
         },
         "status": {
           "shape": "DatasetContentStatus",
-          "documentation": "<p>The status of the data set content.</p>"
+          "documentation": "<p>The status of the dataset content.</p>"
         }
       }
     },
@@ -2644,14 +2675,14 @@
       "members": {
         "tableName": {
           "shape": "GlueTableName",
-          "documentation": "<p>The name of the table in your AWS Glue Data Catalog that is used to perform the ETL operations. An AWS Glue Data Catalog table contains partitioned data and descriptions of data sources and targets.</p>"
+          "documentation": "<p>The name of the table in your Glue Data Catalog that is used to perform the ETL operations. An Glue Data Catalog table contains partitioned data and descriptions of data sources and targets.</p>"
         },
         "databaseName": {
           "shape": "GlueDatabaseName",
-          "documentation": "<p>The name of the database in your AWS Glue Data Catalog in which the table is located. An AWS Glue Data Catalog database contains metadata tables.</p>"
+          "documentation": "<p>The name of the database in your Glue Data Catalog in which the table is located. An Glue Data Catalog database contains metadata tables.</p>"
         }
       },
-      "documentation": "<p>Configuration information for coordination with AWS Glue, a fully managed extract, transform and load (ETL) service.</p>"
+      "documentation": "<p>Configuration information for coordination with Glue, a fully managed extract, transform and load (ETL) service.</p>"
     },
     "GlueDatabaseName": {
       "type": "string",
@@ -2681,20 +2712,51 @@
       "members": {
         "inputName": {
           "shape": "IotEventsInputName",
-          "documentation": "<p>The name of the AWS IoT Events input to which dataset contents are delivered.</p>"
+          "documentation": "<p>The name of the IoT Events input to which dataset contents are delivered.</p>"
         },
         "roleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to deliver dataset contents to an AWS IoT Events input.</p>"
+          "documentation": "<p>The ARN of the role that grants IoT Analytics permission to deliver dataset contents to an IoT Events input.</p>"
         }
       },
-      "documentation": "<p>Configuration information for delivery of dataset contents to AWS IoT Events.</p>"
+      "documentation": "<p>Configuration information for delivery of dataset contents to IoT Events.</p>"
     },
     "IotEventsInputName": {
       "type": "string",
       "max": 128,
       "min": 1,
       "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+    },
+    "IotSiteWiseCustomerManagedDatastoreS3Storage": {
+      "type": "structure",
+      "required": [
+        "bucket"
+      ],
+      "members": {
+        "bucket": {
+          "shape": "BucketName",
+          "documentation": "<p> The name of the Amazon S3 bucket where your data is stored. </p>"
+        },
+        "keyPrefix": {
+          "shape": "S3KeyPrefix",
+          "documentation": "<p> (Optional) The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/). </p>"
+        }
+      },
+      "documentation": "<p> Used to store data used by IoT SiteWise in an Amazon S3 bucket that you manage. You can't change the choice of Amazon S3 storage after your data store is created. </p>"
+    },
+    "IotSiteWiseCustomerManagedDatastoreS3StorageSummary": {
+      "type": "structure",
+      "members": {
+        "bucket": {
+          "shape": "BucketName",
+          "documentation": "<p> The name of the Amazon S3 bucket where your data is stored. </p>"
+        },
+        "keyPrefix": {
+          "shape": "S3KeyPrefix",
+          "documentation": "<p> (Optional) The prefix used to create the keys of the data store data objects. Each object in an Amazon S3 bucket has a key that is its unique identifier in the bucket. Each object in a bucket has exactly one key. The prefix must end with a forward slash (/). </p>"
+        }
+      },
+      "documentation": "<p> Contains information about the data store that you manage, which stores data used by IoT SiteWise. </p>"
     },
     "JsonConfiguration": {
       "type": "structure",
@@ -2813,7 +2875,7 @@
       "members": {
         "datasetName": {
           "shape": "DatasetName",
-          "documentation": "<p>The name of the data set whose contents information you want to list.</p>",
+          "documentation": "<p>The name of the dataset whose contents information you want to list.</p>",
           "location": "uri",
           "locationName": "datasetName"
         },
@@ -2831,13 +2893,13 @@
         },
         "scheduledOnOrAfter": {
           "shape": "Timestamp",
-          "documentation": "<p>A filter to limit results to those data set contents whose creation is scheduled on or after the given time. See the field <code>triggers.schedule</code> in the <code>CreateDataset</code> request. (timestamp)</p>",
+          "documentation": "<p>A filter to limit results to those dataset contents whose creation is scheduled on or after the given time. See the field <code>triggers.schedule</code> in the <code>CreateDataset</code> request. (timestamp)</p>",
           "location": "querystring",
           "locationName": "scheduledOnOrAfter"
         },
         "scheduledBefore": {
           "shape": "Timestamp",
-          "documentation": "<p>A filter to limit results to those data set contents whose creation is scheduled before the given time. See the field <code>triggers.schedule</code> in the <code>CreateDataset</code> request. (timestamp)</p>",
+          "documentation": "<p>A filter to limit results to those dataset contents whose creation is scheduled before the given time. See the field <code>triggers.schedule</code> in the <code>CreateDataset</code> request. (timestamp)</p>",
           "location": "querystring",
           "locationName": "scheduledBefore"
         }
@@ -2848,7 +2910,7 @@
       "members": {
         "datasetContentSummaries": {
           "shape": "DatasetContentSummaries",
-          "documentation": "<p>Summary information about data set contents that have been created.</p>"
+          "documentation": "<p>Summary information about dataset contents that have been created.</p>"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -2991,7 +3053,7 @@
       "members": {
         "roleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The ARN of the role that grants permission to AWS IoT Analytics to perform logging.</p>"
+          "documentation": "<p>The ARN of the role that grants permission to IoT Analytics to perform logging.</p>"
         },
         "level": {
           "shape": "LoggingLevel",
@@ -2999,7 +3061,7 @@
         },
         "enabled": {
           "shape": "LoggingEnabled",
-          "documentation": "<p>If true, logging is enabled for AWS IoT Analytics.</p>"
+          "documentation": "<p>If true, logging is enabled for IoT Analytics.</p>"
         }
       },
       "documentation": "<p>Information about logging options.</p>"
@@ -3133,10 +3195,10 @@
       "members": {
         "attributeName": {
           "shape": "PartitionAttributeName",
-          "documentation": "<p> The attribute name of the partition. </p>"
+          "documentation": "<p> The name of the attribute that defines a partition dimension. </p>"
         }
       },
-      "documentation": "<p> A single partition. </p>"
+      "documentation": "<p> A partition dimension defined by an attribute. </p>"
     },
     "PartitionAttributeName": {
       "type": "string",
@@ -3215,7 +3277,7 @@
         },
         "selectAttributes": {
           "shape": "SelectAttributesActivity",
-          "documentation": "<p>Creates a new message using only the specified attributes from the original message. </p>"
+          "documentation": "<p>Used to create a new message using only the specified attributes from the original message. </p>"
         },
         "filter": {
           "shape": "FilterActivity",
@@ -3227,11 +3289,11 @@
         },
         "deviceRegistryEnrich": {
           "shape": "DeviceRegistryEnrichActivity",
-          "documentation": "<p>Adds data from the AWS IoT device registry to your message.</p>"
+          "documentation": "<p>Adds data from the IoT device registry to your message.</p>"
         },
         "deviceShadowEnrich": {
           "shape": "DeviceShadowEnrichActivity",
-          "documentation": "<p>Adds information from the AWS IoT Device Shadow service to a message.</p>"
+          "documentation": "<p>Adds information from the IoT Device Shadow service to a message.</p>"
         }
       },
       "documentation": "<p>An activity that performs a transformation on a message.</p>"
@@ -3243,7 +3305,7 @@
       "type": "string",
       "max": 128,
       "min": 1,
-      "pattern": "^[a-zA-Z0-9_]+$"
+      "pattern": "(^(?!_{2}))(^[a-zA-Z0-9_]+$)"
     },
     "PipelineSummaries": {
       "type": "list",
@@ -3284,7 +3346,7 @@
       "members": {
         "loggingOptions": {
           "shape": "LoggingOptions",
-          "documentation": "<p>The new values of the AWS IoT Analytics logging options.</p>"
+          "documentation": "<p>The new values of the IoT Analytics logging options.</p>"
         }
       }
     },
@@ -3422,7 +3484,7 @@
       "members": {
         "pipelineActivity": {
           "shape": "PipelineActivity",
-          "documentation": "<p>The pipeline activity that is run. This must not be a channel activity or a datastore activity because these activities are used in a pipeline only to load the original message and to store the (possibly) transformed message. If a lambda activity is specified, only short-running Lambda functions (those with a timeout of less than 30 seconds or less) can be used.</p>"
+          "documentation": "<p>The pipeline activity that is run. This must not be a channel activity or a data store activity because these activities are used in a pipeline only to load the original message and to store the (possibly) transformed message. If a Lambda activity is specified, only short-running Lambda functions (those with a timeout of less than 30 seconds or less) can be used.</p>"
         },
         "payloads": {
           "shape": "MessagePayloads",
@@ -3461,11 +3523,11 @@
         },
         "glueConfiguration": {
           "shape": "GlueConfiguration",
-          "documentation": "<p>Configuration information for coordination with AWS Glue, a fully managed extract, transform and load (ETL) service.</p>"
+          "documentation": "<p>Configuration information for coordination with Glue, a fully managed extract, transform and load (ETL) service.</p>"
         },
         "roleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The ARN of the role that grants AWS IoT Analytics permission to interact with your Amazon S3 and AWS Glue resources.</p>"
+          "documentation": "<p>The ARN of the role that grants IoT Analytics permission to interact with your Amazon S3 and Glue resources.</p>"
         }
       },
       "documentation": "<p>Configuration information for delivery of dataset contents to Amazon Simple Storage Service (Amazon S3).</p>"
@@ -3574,27 +3636,27 @@
           "documentation": "<p>The next activity in the pipeline.</p>"
         }
       },
-      "documentation": "<p>Creates a new message using only the specified attributes from the original message.</p>"
+      "documentation": "<p>Used to create a new message using only the specified attributes from the original message.</p>"
     },
     "ServiceManagedChannelS3Storage": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Use this to store channel data in an S3 bucket managed by AWS IoT Analytics. You cannot change the choice of service-managed or customer-managed S3 storage after the channel is created.</p>"
+      "documentation": "<p>Used to store channel data in an S3 bucket managed by IoT Analytics. You can't change the choice of S3 storage after the data store is created.</p>"
     },
     "ServiceManagedChannelS3StorageSummary": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Used to store channel data in an S3 bucket managed by AWS IoT Analytics.</p>"
+      "documentation": "<p>Used to store channel data in an S3 bucket managed by IoT Analytics.</p>"
     },
     "ServiceManagedDatastoreS3Storage": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Use this to store data store data in an S3 bucket managed by AWS IoT Analytics. You cannot change the choice of service-managed or customer-managed S3 storage after the data store is created.</p>"
+      "documentation": "<p>Used to store data in an Amazon S3 bucket managed by IoT Analytics. You can't change the choice of Amazon S3 storage after your data store is created. </p>"
     },
     "ServiceManagedDatastoreS3StorageSummary": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>Used to store data store data in an S3 bucket managed by AWS IoT Analytics.</p>"
+      "documentation": "<p>Contains information about the data store that is managed by IoT Analytics.</p>"
     },
     "SessionTimeoutInMinutes": {
       "type": "integer",
@@ -3758,10 +3820,10 @@
         },
         "timestampFormat": {
           "shape": "TimestampFormat",
-          "documentation": "<p> The timestamp format of a partition defined by a timestamp. </p>"
+          "documentation": "<p> The timestamp format of a partition defined by a timestamp. The default format is seconds since epoch (January 1, 1970 at midnight UTC time). </p>"
         }
       },
-      "documentation": "<p> A partition defined by a timestamp. </p>"
+      "documentation": "<p> A partition dimension defined by a timestamp attribute. </p>"
     },
     "TriggeringDataset": {
       "type": "structure",
@@ -3821,11 +3883,11 @@
         },
         "channelStorage": {
           "shape": "ChannelStorage",
-          "documentation": "<p>Where channel data is stored. You can choose one of <code>serviceManagedS3</code> or <code>customerManagedS3</code> storage. If not specified, the default is <code>serviceManagedS3</code>. You cannot change this storage option after the channel is created.</p>"
+          "documentation": "<p>Where channel data is stored. You can choose one of <code>serviceManagedS3</code> or <code>customerManagedS3</code> storage. If not specified, the default is <code>serviceManagedS3</code>. You can't change this storage option after the channel is created.</p>"
         },
         "retentionPeriod": {
           "shape": "RetentionPeriod",
-          "documentation": "<p>How long, in days, message data is kept for the channel. The retention period cannot be updated if the channel's S3 storage is customer-managed.</p>"
+          "documentation": "<p>How long, in days, message data is kept for the channel. The retention period can't be updated if the channel's Amazon S3 storage is customer-managed.</p>"
         }
       }
     },
@@ -3838,7 +3900,7 @@
       "members": {
         "datasetName": {
           "shape": "DatasetName",
-          "documentation": "<p>The name of the data set to update.</p>",
+          "documentation": "<p>The name of the dataset to update.</p>",
           "location": "uri",
           "locationName": "datasetName"
         },
@@ -3860,11 +3922,11 @@
         },
         "versioningConfiguration": {
           "shape": "VersioningConfiguration",
-          "documentation": "<p>Optional. How many versions of dataset contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the <code>retentionPeriod</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\">Keeping Multiple Versions of AWS IoT Analytics Data Sets</a> in the <i>AWS IoT Analytics User Guide</i>.</p>"
+          "documentation": "<p>Optional. How many versions of dataset contents are kept. If not specified or set to null, only the latest version plus the latest succeeded version (if they are different) are kept for the time period specified by the <code>retentionPeriod</code> parameter. For more information, see <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions\">Keeping Multiple Versions of IoT Analytics datasets</a> in the <i>IoT Analytics User Guide</i>.</p>"
         },
         "lateDataRules": {
           "shape": "LateDataRules",
-          "documentation": "<p>A list of data rules that send notifications to Amazon CloudWatch, when data arrives late. To specify <code>lateDataRules</code>, the dataset must use a <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">DeltaTimer</a> filter.</p>"
+          "documentation": "<p>A list of data rules that send notifications to CloudWatch, when data arrives late. To specify <code>lateDataRules</code>, the dataset must use a <a href=\"https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html\">DeltaTimer</a> filter.</p>"
         }
       }
     },
@@ -3882,15 +3944,15 @@
         },
         "retentionPeriod": {
           "shape": "RetentionPeriod",
-          "documentation": "<p>How long, in days, message data is kept for the data store. The retention period cannot be updated if the data store's S3 storage is customer-managed.</p>"
+          "documentation": "<p>How long, in days, message data is kept for the data store. The retention period can't be updated if the data store's Amazon S3 storage is customer-managed.</p>"
         },
         "datastoreStorage": {
           "shape": "DatastoreStorage",
-          "documentation": "<p>Where data store data is stored. You can choose one of <code>serviceManagedS3</code> or <code>customerManagedS3</code> storage. If not specified, the default is<code>serviceManagedS3</code>. You cannot change this storage option after the data store is created.</p>"
+          "documentation": "<p>Where data in a data store is stored.. You can choose <code>serviceManagedS3</code> storage, <code>customerManagedS3</code> storage, or <code>iotSiteWiseMultiLayerStorage</code> storage. The default is <code>serviceManagedS3</code>. You can't change the choice of Amazon S3 storage after your data store is created. </p>"
         },
         "fileFormatConfiguration": {
           "shape": "FileFormatConfiguration",
-          "documentation": "<p>Contains the configuration information of file formats. AWS IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can't change the file format after you create the data store.</p>"
+          "documentation": "<p>Contains the configuration information of file formats. IoT Analytics data stores support JSON and <a href=\"https://parquet.apache.org/\">Parquet</a>.</p> <p>The default file format is JSON. You can specify only one format.</p> <p>You can't change the file format after you create the data store.</p>"
         }
       }
     },
@@ -3976,5 +4038,5 @@
       "min": 1
     }
   },
-  "documentation": "<p>AWS IoT Analytics allows you to collect large amounts of device data, process messages, and store them. You can then query the data and run sophisticated analytics on it. AWS IoT Analytics enables advanced data exploration through integration with Jupyter Notebooks and data visualization through integration with Amazon QuickSight.</p> <p>Traditional analytics and business intelligence tools are designed to process structured data. IoT data often comes from devices that record noisy processes (such as temperature, motion, or sound). As a result the data from these devices can have significant gaps, corrupted messages, and false readings that must be cleaned up before analysis can occur. Also, IoT data is often only meaningful in the context of other data from external sources. </p> <p>AWS IoT Analytics automates the steps required to analyze data from IoT devices. AWS IoT Analytics filters, transforms, and enriches IoT data before storing it in a time-series data store for analysis. You can set up the service to collect only the data you need from your devices, apply mathematical transforms to process the data, and enrich the data with device-specific metadata such as device type and location before storing it. Then, you can analyze your data by running queries using the built-in SQL query engine, or perform more complex analytics and machine learning inference. AWS IoT Analytics includes pre-built models for common IoT use cases so you can answer questions like which devices are about to fail or which customers are at risk of abandoning their wearable devices.</p>"
+  "documentation": "<p>IoT Analytics allows you to collect large amounts of device data, process messages, and store them. You can then query the data and run sophisticated analytics on it. IoT Analytics enables advanced data exploration through integration with Jupyter Notebooks and data visualization through integration with Amazon QuickSight.</p> <p>Traditional analytics and business intelligence tools are designed to process structured data. IoT data often comes from devices that record noisy processes (such as temperature, motion, or sound). As a result the data from these devices can have significant gaps, corrupted messages, and false readings that must be cleaned up before analysis can occur. Also, IoT data is often only meaningful in the context of other data from external sources. </p> <p>IoT Analytics automates the steps required to analyze data from IoT devices. IoT Analytics filters, transforms, and enriches IoT data before storing it in a time-series data store for analysis. You can set up the service to collect only the data you need from your devices, apply mathematical transforms to process the data, and enrich the data with device-specific metadata such as device type and location before storing it. Then, you can analyze your data by running queries using the built-in SQL query engine, or perform more complex analytics and machine learning inference. IoT Analytics includes pre-built models for common IoT use cases so you can answer questions like which devices are about to fail or which customers are at risk of abandoning their wearable devices.</p>"
 }
