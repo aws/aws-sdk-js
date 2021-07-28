@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.955.0-->
+<!--LATEST=2.956.0-->
 <!--ENTRYINSERT-->
+
+## 2.956.0
+* feature: CloudFormation: SDK update to support Importing existing Stacks to new/existing Self Managed StackSet - Stack Import feature.
 
 ## 2.955.0
 * feature: Batch: Add support for ListJob filters
