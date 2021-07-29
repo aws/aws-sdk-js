@@ -245,11 +245,11 @@ declare class IoTSiteWise extends Service {
    */
   describeProject(callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeProjectResponse) => void): Request<IoTSiteWise.Types.DescribeProjectResponse, AWSError>;
   /**
-   * Retrieves information about the storage configuration for IoT SiteWise.
+   * Retrieves information about the storage configuration for IoT SiteWise.  Exporting data to Amazon S3 is currently in preview release and is subject to change. We recommend that you use this feature only with test data, and not in production environments. 
    */
   describeStorageConfiguration(params: IoTSiteWise.Types.DescribeStorageConfigurationRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeStorageConfigurationResponse) => void): Request<IoTSiteWise.Types.DescribeStorageConfigurationResponse, AWSError>;
   /**
-   * Retrieves information about the storage configuration for IoT SiteWise.
+   * Retrieves information about the storage configuration for IoT SiteWise.  Exporting data to Amazon S3 is currently in preview release and is subject to change. We recommend that you use this feature only with test data, and not in production environments. 
    */
   describeStorageConfiguration(callback?: (err: AWSError, data: IoTSiteWise.Types.DescribeStorageConfigurationResponse) => void): Request<IoTSiteWise.Types.DescribeStorageConfigurationResponse, AWSError>;
   /**
@@ -397,11 +397,11 @@ declare class IoTSiteWise extends Service {
    */
   putLoggingOptions(callback?: (err: AWSError, data: IoTSiteWise.Types.PutLoggingOptionsResponse) => void): Request<IoTSiteWise.Types.PutLoggingOptionsResponse, AWSError>;
   /**
-   * Configures storage settings for IoT SiteWise.
+   * Configures storage settings for IoT SiteWise.  Exporting data to Amazon S3 is currently in preview release and is subject to change. We recommend that you use this feature only with test data, and not in production environments. 
    */
   putStorageConfiguration(params: IoTSiteWise.Types.PutStorageConfigurationRequest, callback?: (err: AWSError, data: IoTSiteWise.Types.PutStorageConfigurationResponse) => void): Request<IoTSiteWise.Types.PutStorageConfigurationResponse, AWSError>;
   /**
-   * Configures storage settings for IoT SiteWise.
+   * Configures storage settings for IoT SiteWise.  Exporting data to Amazon S3 is currently in preview release and is subject to change. We recommend that you use this feature only with test data, and not in production environments. 
    */
   putStorageConfiguration(callback?: (err: AWSError, data: IoTSiteWise.Types.PutStorageConfigurationResponse) => void): Request<IoTSiteWise.Types.PutStorageConfigurationResponse, AWSError>;
   /**
@@ -1087,7 +1087,7 @@ declare namespace IoTSiteWise {
   }
   export type CapabilityConfiguration = string;
   export type CapabilityNamespace = string;
-  export type CapabilitySyncStatus = "IN_SYNC"|"OUT_OF_SYNC"|"SYNC_FAILED"|string;
+  export type CapabilitySyncStatus = "IN_SYNC"|"OUT_OF_SYNC"|"SYNC_FAILED"|"UNKNOWN"|string;
   export type ClientToken = string;
   export interface CompositeModelProperty {
     /**
@@ -1100,6 +1100,7 @@ declare namespace IoTSiteWise {
     type: Name;
     assetProperty: Property;
   }
+  export type ComputeLocation = "EDGE"|"CLOUD"|string;
   export interface ConfigurationErrorDetails {
     /**
      * The error code.
@@ -1121,6 +1122,7 @@ declare namespace IoTSiteWise {
      */
     error?: ConfigurationErrorDetails;
   }
+  export type CoreDeviceThingName = string;
   export interface CreateAccessPolicyRequest {
     /**
      * The identity for this access policy. Choose an Amazon Web Services SSO user, an Amazon Web Services SSO group, or an IAM user.
@@ -1924,6 +1926,19 @@ declare namespace IoTSiteWise {
     lastUpdateDate?: Timestamp;
   }
   export type Description = string;
+  export interface DetailedError {
+    /**
+     * The error code. 
+     */
+    code: DetailedErrorCode;
+    /**
+     * The error message. 
+     */
+    message: DetailedErrorMessage;
+  }
+  export type DetailedErrorCode = "INCOMPATIBLE_COMPUTE_LOCATION"|"INCOMPATIBLE_FORWARDING_CONFIGURATION"|string;
+  export type DetailedErrorMessage = string;
+  export type DetailedErrors = DetailedError[];
   export interface DisassociateAssetsRequest {
     /**
      * The ID of the parent asset from which to disassociate the child asset.
@@ -1955,6 +1970,10 @@ declare namespace IoTSiteWise {
      * The error message.
      */
     message: ErrorMessage;
+    /**
+     *  A list of detailed errors. 
+     */
+    details?: DetailedErrors;
   }
   export type ErrorMessage = string;
   export type Expression = string;
@@ -1969,6 +1988,13 @@ declare namespace IoTSiteWise {
     value: VariableValue;
   }
   export type ExpressionVariables = ExpressionVariable[];
+  export interface ForwardingConfig {
+    /**
+     * The forwarding state for the given property. 
+     */
+    state: ForwardingConfigState;
+  }
+  export type ForwardingConfigState = "DISABLED"|"ENABLED"|string;
   export type GatewayCapabilitySummaries = GatewayCapabilitySummary[];
   export interface GatewayCapabilitySummary {
     /**
@@ -1984,7 +2010,11 @@ declare namespace IoTSiteWise {
     /**
      * A gateway that runs on IoT Greengrass.
      */
-    greengrass: Greengrass;
+    greengrass?: Greengrass;
+    /**
+     * A gateway that runs on IoT Greengrass V2.
+     */
+    greengrassV2?: GreengrassV2;
   }
   export type GatewaySummaries = GatewaySummary[];
   export interface GatewaySummary {
@@ -1996,6 +2026,7 @@ declare namespace IoTSiteWise {
      * The name of the asset.
      */
     gatewayName: Name;
+    gatewayPlatform?: GatewayPlatform;
     /**
      * A list of gateway capability summaries that each contain a namespace and status. Each gateway capability defines data sources for the gateway. To retrieve a capability configuration's definition, use DescribeGatewayCapabilityConfiguration.
      */
@@ -2198,6 +2229,12 @@ declare namespace IoTSiteWise {
      * The ARN of the Greengrass group. For more information about how to find a group's ARN, see ListGroups and GetGroup in the IoT Greengrass API Reference.
      */
     groupArn: ARN;
+  }
+  export interface GreengrassV2 {
+    /**
+     * The name of the IoT thing for your IoT Greengrass V2 core device.
+     */
+    coreDeviceThingName: CoreDeviceThingName;
   }
   export interface GroupIdentity {
     /**
@@ -2561,6 +2598,16 @@ declare namespace IoTSiteWise {
   export type MaxInterpolatedResults = number;
   export type MaxResults = number;
   export interface Measurement {
+    /**
+     * The processing configuration for the given measurement property. You can configure measurements to be kept at the edge or forwarded to the Amazon Web Services Cloud. By default, measurements are forwarded to the cloud.
+     */
+    processingConfig?: MeasurementProcessingConfig;
+  }
+  export interface MeasurementProcessingConfig {
+    /**
+     * The forwarding configuration for the given measurement property. 
+     */
+    forwardingConfig: ForwardingConfig;
   }
   export interface Metric {
     /**
@@ -2575,6 +2622,16 @@ declare namespace IoTSiteWise {
      * The window (time interval) over which IoT SiteWise computes the metric's aggregation expression. IoT SiteWise computes one data point per window.
      */
     window: MetricWindow;
+    /**
+     * The processing configuration for the given metric property. You can configure metrics to be computed at the edge or in the Amazon Web Services Cloud. By default, metrics are forwarded to the cloud.
+     */
+    processingConfig?: MetricProcessingConfig;
+  }
+  export interface MetricProcessingConfig {
+    /**
+     * The compute location for the given metric property. 
+     */
+    computeLocation: ComputeLocation;
   }
   export interface MetricWindow {
     /**
@@ -2881,6 +2938,17 @@ declare namespace IoTSiteWise {
      * The list of variables used in the expression.
      */
     variables: ExpressionVariables;
+    /**
+     * The processing configuration for the given transform property. You can configure transforms to be kept at the edge or forwarded to the Amazon Web Services Cloud. You can also configure transforms to be computed at the edge or in the cloud.
+     */
+    processingConfig?: TransformProcessingConfig;
+  }
+  export interface TransformProcessingConfig {
+    /**
+     * The compute location for the given transform property. 
+     */
+    computeLocation: ComputeLocation;
+    forwardingConfig?: ForwardingConfig;
   }
   export type TraversalDirection = "PARENT"|"CHILD"|string;
   export type TraversalType = "PATH_TO_ROOT"|string;

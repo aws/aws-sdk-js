@@ -1292,6 +1292,22 @@ declare class Chime extends Service {
    */
   sendChannelMessage(callback?: (err: AWSError, data: Chime.Types.SendChannelMessageResponse) => void): Request<Chime.Types.SendChannelMessageResponse, AWSError>;
   /**
+   * Start transcription for the specified meetingId. 
+   */
+  startMeetingTranscription(params: Chime.Types.StartMeetingTranscriptionRequest, callback?: (err: AWSError, data: Chime.Types.StartMeetingTranscriptionResponse) => void): Request<Chime.Types.StartMeetingTranscriptionResponse, AWSError>;
+  /**
+   * Start transcription for the specified meetingId. 
+   */
+  startMeetingTranscription(callback?: (err: AWSError, data: Chime.Types.StartMeetingTranscriptionResponse) => void): Request<Chime.Types.StartMeetingTranscriptionResponse, AWSError>;
+  /**
+   * Stops transcription for the specified meetingId.
+   */
+  stopMeetingTranscription(params: Chime.Types.StopMeetingTranscriptionRequest, callback?: (err: AWSError, data: Chime.Types.StopMeetingTranscriptionResponse) => void): Request<Chime.Types.StopMeetingTranscriptionResponse, AWSError>;
+  /**
+   * Stops transcription for the specified meetingId.
+   */
+  stopMeetingTranscription(callback?: (err: AWSError, data: Chime.Types.StopMeetingTranscriptionResponse) => void): Request<Chime.Types.StopMeetingTranscriptionResponse, AWSError>;
+  /**
    * Applies the specified tags to the specified Amazon Chime SDK attendee.
    */
   tagAttendee(params: Chime.Types.TagAttendeeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -1539,7 +1555,7 @@ declare namespace Chime {
      */
     SupportedLicenses?: LicenseList;
     /**
-     * The status of the account, Suspended or Active.
+     * The status of the account.
      */
     AccountStatus?: AccountStatus;
     /**
@@ -3378,6 +3394,50 @@ declare namespace Chime {
      */
     DNIS?: DNISEmergencyCallingConfigurationList;
   }
+  export interface EngineTranscribeMedicalSettings {
+    /**
+     * The language code specified for the Amazon Transcribe Medical engine.
+     */
+    LanguageCode: TranscribeMedicalLanguageCode;
+    /**
+     * The specialty specified for the Amazon Transcribe Medical engine.
+     */
+    Specialty: TranscribeMedicalSpecialty;
+    /**
+     * The type of transcription.
+     */
+    Type: TranscribeMedicalType;
+    /**
+     * The name of the vocabulary passed to Amazon Transcribe Medical.
+     */
+    VocabularyName?: String;
+    /**
+     * The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the Region closest to the meeting's Region.
+     */
+    Region?: TranscribeMedicalRegion;
+  }
+  export interface EngineTranscribeSettings {
+    /**
+     * The language code specified for the Amazon Transcribe engine.
+     */
+    LanguageCode: TranscribeLanguageCode;
+    /**
+     * The filtering method passed to Amazon Transcribe.
+     */
+    VocabularyFilterMethod?: TranscribeVocabularyFilterMethod;
+    /**
+     * The name of the vocabulary filter passed to Amazon Transcribe.
+     */
+    VocabularyFilterName?: String;
+    /**
+     * The name of the vocabulary passed to Amazon Transcribe.
+     */
+    VocabularyName?: String;
+    /**
+     * The AWS Region passed to Amazon Transcribe. If you don't specify a Region, Amazon Chime uses the Region closest to the meeting's Region.
+     */
+    Region?: TranscribeRegion;
+  }
   export type ErrorCode = "BadRequest"|"Conflict"|"Forbidden"|"NotFound"|"PreconditionFailed"|"ResourceLimitExceeded"|"ServiceFailure"|"AccessDenied"|"ServiceUnavailable"|"Throttled"|"Throttling"|"Unauthorized"|"Unprocessable"|"VoiceConnectorGroupAssociationsExist"|"PhoneNumberAssociationsExist"|string;
   export interface EventsConfiguration {
     /**
@@ -4714,7 +4774,7 @@ declare namespace Chime {
      */
     TurnControlUrl?: UriType;
     /**
-     * The event ingestion URL.
+     * The URL of the S3 bucket used to store the captured media.
      */
     EventIngestionUrl?: UriType;
   }
@@ -5681,6 +5741,26 @@ declare namespace Chime {
   export type SipRuleTargetApplicationList = SipRuleTargetApplication[];
   export type SipRuleTriggerType = "ToPhoneNumber"|"RequestUriHostname"|string;
   export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export interface StartMeetingTranscriptionRequest {
+    /**
+     * The unique ID of the meeting being transcribed.
+     */
+    MeetingId: GuidString;
+    /**
+     * The configuration for the current transcription operation. Must contain EngineTranscribeSettings or EngineTranscribeMedicalSettings.
+     */
+    TranscriptionConfiguration: TranscriptionConfiguration;
+  }
+  export interface StartMeetingTranscriptionResponse {
+  }
+  export interface StopMeetingTranscriptionRequest {
+    /**
+     * The unique ID of the meeting for which you stop transcription.
+     */
+    MeetingId: GuidString;
+  }
+  export interface StopMeetingTranscriptionResponse {
+  }
   export interface StreamingConfiguration {
     /**
      * The retention period, in hours, for the Amazon Kinesis data.
@@ -5801,6 +5881,23 @@ declare namespace Chime {
   }
   export type Timestamp = Date;
   export type TollFreePrefix = string;
+  export type TranscribeLanguageCode = "en-US"|"en-GB"|"es-US"|"fr-CA"|"fr-FR"|"en-AU"|"it-IT"|"de-DE"|"pt-BR"|"ja-JP"|"ko-KR"|"zh-CN"|string;
+  export type TranscribeMedicalLanguageCode = "en-US"|string;
+  export type TranscribeMedicalRegion = "us-east-1"|"us-east-2"|"us-west-2"|"ap-southeast-2"|"ca-central-1"|"eu-west-1"|string;
+  export type TranscribeMedicalSpecialty = "PRIMARYCARE"|"CARDIOLOGY"|"NEUROLOGY"|"ONCOLOGY"|"RADIOLOGY"|"UROLOGY"|string;
+  export type TranscribeMedicalType = "CONVERSATION"|"DICTATION"|string;
+  export type TranscribeRegion = "us-east-2"|"us-east-1"|"us-west-2"|"ap-northeast-2"|"ap-southeast-2"|"ap-northeast-1"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"sa-east-1"|string;
+  export type TranscribeVocabularyFilterMethod = "remove"|"mask"|"tag"|string;
+  export interface TranscriptionConfiguration {
+    /**
+     * The transcription configuration settings passed to Amazon Transcribe.
+     */
+    EngineTranscribeSettings?: EngineTranscribeSettings;
+    /**
+     * The transcription configuration settings passed to Amazon Transcribe.
+     */
+    EngineTranscribeMedicalSettings?: EngineTranscribeMedicalSettings;
+  }
   export interface UntagAttendeeRequest {
     /**
      * The Amazon Chime SDK meeting ID.

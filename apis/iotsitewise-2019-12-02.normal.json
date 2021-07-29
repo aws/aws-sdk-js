@@ -1013,7 +1013,7 @@
           "shape": "ConflictingOperationException"
         }
       ],
-      "documentation": "<p>Retrieves information about the storage configuration for IoT SiteWise.</p>",
+      "documentation": "<p>Retrieves information about the storage configuration for IoT SiteWise.</p> <note> <p>Exporting data to Amazon S3 is currently in preview release and is subject to change. We recommend that you use this feature only with test data, and not in production environments.</p> </note>",
       "endpoint": {
         "hostPrefix": "api."
       }
@@ -1622,7 +1622,7 @@
           "shape": "ConflictingOperationException"
         }
       ],
-      "documentation": "<p>Configures storage settings for IoT SiteWise.</p>",
+      "documentation": "<p>Configures storage settings for IoT SiteWise.</p> <note> <p>Exporting data to Amazon S3 is currently in preview release and is subject to change. We recommend that you use this feature only with test data, and not in production environments.</p> </note>",
       "endpoint": {
         "hostPrefix": "api."
       }
@@ -3030,7 +3030,8 @@
       "enum": [
         "IN_SYNC",
         "OUT_OF_SYNC",
-        "SYNC_FAILED"
+        "SYNC_FAILED",
+        "UNKNOWN"
       ]
     },
     "ClientToken": {
@@ -3060,6 +3061,13 @@
         }
       },
       "documentation": "<p>Contains information about a composite model property on an asset.</p>"
+    },
+    "ComputeLocation": {
+      "type": "string",
+      "enum": [
+        "EDGE",
+        "CLOUD"
+      ]
     },
     "ConfigurationErrorDetails": {
       "type": "structure",
@@ -3103,6 +3111,11 @@
         }
       },
       "documentation": "<p>Contains current status information for the configuration.</p>"
+    },
+    "CoreDeviceThingName": {
+      "type": "string",
+      "max": 128,
+      "min": 1
     },
     "CreateAccessPolicyRequest": {
       "type": "structure",
@@ -4363,6 +4376,40 @@
       "min": 1,
       "pattern": "[^\\u0000-\\u001F\\u007F]+"
     },
+    "DetailedError": {
+      "type": "structure",
+      "required": [
+        "code",
+        "message"
+      ],
+      "members": {
+        "code": {
+          "shape": "DetailedErrorCode",
+          "documentation": "<p>The error code. </p>"
+        },
+        "message": {
+          "shape": "DetailedErrorMessage",
+          "documentation": "<p>The error message. </p>"
+        }
+      },
+      "documentation": "<p>Contains detailed error information. </p>"
+    },
+    "DetailedErrorCode": {
+      "type": "string",
+      "enum": [
+        "INCOMPATIBLE_COMPUTE_LOCATION",
+        "INCOMPATIBLE_FORWARDING_CONFIGURATION"
+      ]
+    },
+    "DetailedErrorMessage": {
+      "type": "string"
+    },
+    "DetailedErrors": {
+      "type": "list",
+      "member": {
+        "shape": "DetailedError"
+      }
+    },
     "DisassociateAssetsRequest": {
       "type": "structure",
       "required": [
@@ -4432,6 +4479,10 @@
         "message": {
           "shape": "ErrorMessage",
           "documentation": "<p>The error message.</p>"
+        },
+        "details": {
+          "shape": "DetailedErrors",
+          "documentation": "<p> A list of detailed errors. </p>"
         }
       },
       "documentation": "<p>Contains the details of an IoT SiteWise error.</p>"
@@ -4468,6 +4519,26 @@
         "shape": "ExpressionVariable"
       }
     },
+    "ForwardingConfig": {
+      "type": "structure",
+      "required": [
+        "state"
+      ],
+      "members": {
+        "state": {
+          "shape": "ForwardingConfigState",
+          "documentation": "<p>The forwarding state for the given property. </p>"
+        }
+      },
+      "documentation": "<p>The forwarding configuration for a given property.</p>"
+    },
+    "ForwardingConfigState": {
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "ENABLED"
+      ]
+    },
     "GatewayCapabilitySummaries": {
       "type": "list",
       "member": {
@@ -4494,13 +4565,14 @@
     },
     "GatewayPlatform": {
       "type": "structure",
-      "required": [
-        "greengrass"
-      ],
       "members": {
         "greengrass": {
           "shape": "Greengrass",
           "documentation": "<p>A gateway that runs on IoT Greengrass.</p>"
+        },
+        "greengrassV2": {
+          "shape": "GreengrassV2",
+          "documentation": "<p>A gateway that runs on IoT Greengrass V2.</p>"
         }
       },
       "documentation": "<p>Contains a gateway's platform information.</p>"
@@ -4527,6 +4599,9 @@
         "gatewayName": {
           "shape": "Name",
           "documentation": "<p>The name of the asset.</p>"
+        },
+        "gatewayPlatform": {
+          "shape": "GatewayPlatform"
         },
         "gatewayCapabilitySummaries": {
           "shape": "GatewayCapabilitySummaries",
@@ -4855,6 +4930,19 @@
         }
       },
       "documentation": "<p>Contains details for a gateway that runs on IoT Greengrass. To create a gateway that runs on IoT Greengrass, you must add the IoT SiteWise connector to a Greengrass group and deploy it. Your Greengrass group must also have permissions to upload data to IoT SiteWise. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html\">Ingesting data using a gateway</a> in the <i>IoT SiteWise User Guide</i>.</p>"
+    },
+    "GreengrassV2": {
+      "type": "structure",
+      "required": [
+        "coreDeviceThingName"
+      ],
+      "members": {
+        "coreDeviceThingName": {
+          "shape": "CoreDeviceThingName",
+          "documentation": "<p>The name of the IoT thing for your IoT Greengrass V2 core device.</p>"
+        }
+      },
+      "documentation": "<p>Contains details for a gateway that runs on IoT Greengrass V2. To create a gateway that runs on IoT Greengrass V2, you must deploy the IoT SiteWise Edge component to your gateway device. Your <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/device-service-role.html\">Greengrass device role</a> must use the <code>AWSIoTSiteWiseEdgeAccess</code> policy. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/sw-gateways.html\">Using IoT SiteWise at the edge</a> in the <i>IoT SiteWise User Guide</i>.</p>"
     },
     "GroupIdentity": {
       "type": "structure",
@@ -5549,8 +5637,26 @@
     },
     "Measurement": {
       "type": "structure",
-      "members": {},
+      "members": {
+        "processingConfig": {
+          "shape": "MeasurementProcessingConfig",
+          "documentation": "<p>The processing configuration for the given measurement property. You can configure measurements to be kept at the edge or forwarded to the Amazon Web Services Cloud. By default, measurements are forwarded to the cloud.</p>"
+        }
+      },
       "documentation": "<p>Contains an asset measurement property. For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements\">Measurements</a> in the <i>IoT SiteWise User Guide</i>.</p>"
+    },
+    "MeasurementProcessingConfig": {
+      "type": "structure",
+      "required": [
+        "forwardingConfig"
+      ],
+      "members": {
+        "forwardingConfig": {
+          "shape": "ForwardingConfig",
+          "documentation": "<p>The forwarding configuration for the given measurement property. </p>"
+        }
+      },
+      "documentation": "<p>The processing configuration for the given measurement property. You can configure measurements to be kept at the edge or forwarded to the Amazon Web Services Cloud. By default, measurements are forwarded to the cloud.</p>"
     },
     "Metric": {
       "type": "structure",
@@ -5571,9 +5677,26 @@
         "window": {
           "shape": "MetricWindow",
           "documentation": "<p>The window (time interval) over which IoT SiteWise computes the metric's aggregation expression. IoT SiteWise computes one data point per <code>window</code>.</p>"
+        },
+        "processingConfig": {
+          "shape": "MetricProcessingConfig",
+          "documentation": "<p>The processing configuration for the given metric property. You can configure metrics to be computed at the edge or in the Amazon Web Services Cloud. By default, metrics are forwarded to the cloud.</p>"
         }
       },
       "documentation": "<p>Contains an asset metric property. With metrics, you can calculate aggregate functions, such as an average, maximum, or minimum, as specified through an expression. A metric maps several values to a single value (such as a sum).</p> <p>The maximum number of dependent/cascading variables used in any one metric calculation is 10. Therefore, a <i>root</i> metric can have up to 10 cascading metrics in its computational dependency tree. Additionally, a metric can only have a data type of <code>DOUBLE</code> and consume properties with data types of <code>INTEGER</code> or <code>DOUBLE</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#metrics\">Metrics</a> in the <i>IoT SiteWise User Guide</i>.</p>"
+    },
+    "MetricProcessingConfig": {
+      "type": "structure",
+      "required": [
+        "computeLocation"
+      ],
+      "members": {
+        "computeLocation": {
+          "shape": "ComputeLocation",
+          "documentation": "<p>The compute location for the given metric property. </p>"
+        }
+      },
+      "documentation": "<p>The processing configuration for the given metric property. You can configure metrics to be computed at the edge or in the Amazon Web Services Cloud. By default, metrics are forwarded to the cloud.</p>"
     },
     "MetricWindow": {
       "type": "structure",
@@ -6199,9 +6322,29 @@
         "variables": {
           "shape": "ExpressionVariables",
           "documentation": "<p>The list of variables used in the expression.</p>"
+        },
+        "processingConfig": {
+          "shape": "TransformProcessingConfig",
+          "documentation": "<p>The processing configuration for the given transform property. You can configure transforms to be kept at the edge or forwarded to the Amazon Web Services Cloud. You can also configure transforms to be computed at the edge or in the cloud.</p>"
         }
       },
       "documentation": "<p>Contains an asset transform property. A transform is a one-to-one mapping of a property's data points from one form to another. For example, you can use a transform to convert a Celsius data stream to Fahrenheit by applying the transformation expression to each data point of the Celsius stream. A transform can only have a data type of <code>DOUBLE</code> and consume properties with data types of <code>INTEGER</code> or <code>DOUBLE</code>.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#transforms\">Transforms</a> in the <i>IoT SiteWise User Guide</i>.</p>"
+    },
+    "TransformProcessingConfig": {
+      "type": "structure",
+      "required": [
+        "computeLocation"
+      ],
+      "members": {
+        "computeLocation": {
+          "shape": "ComputeLocation",
+          "documentation": "<p>The compute location for the given transform property. </p>"
+        },
+        "forwardingConfig": {
+          "shape": "ForwardingConfig"
+        }
+      },
+      "documentation": "<p>The processing configuration for the given transform property. You can configure transforms to be kept at the edge or forwarded to the Amazon Web Services Cloud. You can also configure transforms to be computed at the edge or in the cloud.</p>"
     },
     "TraversalDirection": {
       "type": "string",

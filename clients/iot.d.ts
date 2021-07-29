@@ -44,11 +44,11 @@ declare class Iot extends Service {
    */
   associateTargetsWithJob(callback?: (err: AWSError, data: Iot.Types.AssociateTargetsWithJobResponse) => void): Request<Iot.Types.AssociateTargetsWithJobResponse, AWSError>;
   /**
-   * Attaches a policy to the specified target.
+   * Attaches the specified policy to the specified principal (certificate or other credential).
    */
   attachPolicy(params: Iot.Types.AttachPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attaches a policy to the specified target.
+   * Attaches the specified policy to the specified principal (certificate or other credential).
    */
   attachPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**

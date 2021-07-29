@@ -6143,6 +6143,91 @@
         "hostPrefix": "messaging-"
       }
     },
+    "StartMeetingTranscription": {
+      "name": "StartMeetingTranscription",
+      "http": {
+        "method": "POST",
+        "requestUri": "/meetings/{meetingId}/transcription?operation=start",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "StartMeetingTranscriptionRequest"
+      },
+      "output": {
+        "shape": "StartMeetingTranscriptionResponse"
+      },
+      "errors": [
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "UnprocessableEntityException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Start transcription for the specified <code>meetingId</code>. </p>"
+    },
+    "StopMeetingTranscription": {
+      "name": "StopMeetingTranscription",
+      "http": {
+        "method": "POST",
+        "requestUri": "/meetings/{meetingId}/transcription?operation=stop",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "StopMeetingTranscriptionRequest"
+      },
+      "output": {
+        "shape": "StopMeetingTranscriptionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ForbiddenException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "BadRequestException"
+        },
+        {
+          "shape": "ThrottledClientException"
+        },
+        {
+          "shape": "UnauthorizedClientException"
+        },
+        {
+          "shape": "UnprocessableEntityException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ServiceFailureException"
+        }
+      ],
+      "documentation": "<p>Stops transcription for the specified <code>meetingId</code>.</p>"
+    },
     "TagAttendee": {
       "name": "TagAttendee",
       "http": {
@@ -7209,7 +7294,7 @@
         },
         "AccountStatus": {
           "shape": "AccountStatus",
-          "documentation": "<p>The status of the account, <code>Suspended</code> or <code>Active</code>.</p>"
+          "documentation": "<p>The status of the account.</p>"
         },
         "SigninDelegateGroups": {
           "shape": "SigninDelegateGroupList",
@@ -10369,6 +10454,66 @@
       },
       "documentation": "<p>The emergency calling configuration details associated with an Amazon Chime Voice Connector.</p>"
     },
+    "EngineTranscribeMedicalSettings": {
+      "type": "structure",
+      "required": [
+        "LanguageCode",
+        "Specialty",
+        "Type"
+      ],
+      "members": {
+        "LanguageCode": {
+          "shape": "TranscribeMedicalLanguageCode",
+          "documentation": "<p>The language code specified for the Amazon Transcribe Medical engine.</p>"
+        },
+        "Specialty": {
+          "shape": "TranscribeMedicalSpecialty",
+          "documentation": "<p>The specialty specified for the Amazon Transcribe Medical engine.</p>"
+        },
+        "Type": {
+          "shape": "TranscribeMedicalType",
+          "documentation": "<p>The type of transcription.</p>"
+        },
+        "VocabularyName": {
+          "shape": "String",
+          "documentation": "<p>The name of the vocabulary passed to Amazon Transcribe Medical.</p>"
+        },
+        "Region": {
+          "shape": "TranscribeMedicalRegion",
+          "documentation": "<p>The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the Region closest to the meeting's Region.</p>"
+        }
+      },
+      "documentation": "<p>Settings specific to the Amazon Transcribe Medical engine.</p>"
+    },
+    "EngineTranscribeSettings": {
+      "type": "structure",
+      "required": [
+        "LanguageCode"
+      ],
+      "members": {
+        "LanguageCode": {
+          "shape": "TranscribeLanguageCode",
+          "documentation": "<p>The language code specified for the Amazon Transcribe engine.</p>"
+        },
+        "VocabularyFilterMethod": {
+          "shape": "TranscribeVocabularyFilterMethod",
+          "documentation": "<p>The filtering method passed to Amazon Transcribe.</p>"
+        },
+        "VocabularyFilterName": {
+          "shape": "String",
+          "documentation": "<p>The name of the vocabulary filter passed to Amazon Transcribe.</p>"
+        },
+        "VocabularyName": {
+          "shape": "String",
+          "documentation": "<p>The name of the vocabulary passed to Amazon Transcribe.</p>"
+        },
+        "Region": {
+          "shape": "TranscribeRegion",
+          "documentation": "<p>The AWS Region passed to Amazon Transcribe. If you don't specify a Region, Amazon Chime uses the Region closest to the meeting's Region.</p>"
+        }
+      },
+      "documentation": "<p>Settings specific to the Amazon Transcribe engine.</p>"
+    },
     "ErrorCode": {
       "type": "string",
       "enum": [
@@ -12650,10 +12795,10 @@
         },
         "EventIngestionUrl": {
           "shape": "UriType",
-          "documentation": "<p>The event ingestion URL.</p>"
+          "documentation": "<p>The URL of the S3 bucket used to store the captured media.</p>"
         }
       },
-      "documentation": "<p>A set of endpoints used by clients to connect to the media service group for a Amazon Chime SDK meeting.</p>"
+      "documentation": "<p>A set of endpoints used by clients to connect to the media service group for an Amazon Chime SDK meeting.</p>"
     },
     "Meeting": {
       "type": "structure",
@@ -14375,6 +14520,47 @@
         "DESCENDING"
       ]
     },
+    "StartMeetingTranscriptionRequest": {
+      "type": "structure",
+      "required": [
+        "MeetingId",
+        "TranscriptionConfiguration"
+      ],
+      "members": {
+        "MeetingId": {
+          "shape": "GuidString",
+          "documentation": "<p>The unique ID of the meeting being transcribed.</p>",
+          "location": "uri",
+          "locationName": "meetingId"
+        },
+        "TranscriptionConfiguration": {
+          "shape": "TranscriptionConfiguration",
+          "documentation": "<p>The configuration for the current transcription operation. Must contain <code>EngineTranscribeSettings</code> or <code>EngineTranscribeMedicalSettings</code>.</p>"
+        }
+      }
+    },
+    "StartMeetingTranscriptionResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "StopMeetingTranscriptionRequest": {
+      "type": "structure",
+      "required": [
+        "MeetingId"
+      ],
+      "members": {
+        "MeetingId": {
+          "shape": "GuidString",
+          "documentation": "<p>The unique ID of the meeting for which you stop transcription.</p>",
+          "location": "uri",
+          "locationName": "meetingId"
+        }
+      }
+    },
+    "StopMeetingTranscriptionResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "StreamingConfiguration": {
       "type": "structure",
       "required": [
@@ -14609,6 +14795,96 @@
       "max": 3,
       "min": 3,
       "pattern": "^8(00|33|44|55|66|77|88)$"
+    },
+    "TranscribeLanguageCode": {
+      "type": "string",
+      "enum": [
+        "en-US",
+        "en-GB",
+        "es-US",
+        "fr-CA",
+        "fr-FR",
+        "en-AU",
+        "it-IT",
+        "de-DE",
+        "pt-BR",
+        "ja-JP",
+        "ko-KR",
+        "zh-CN"
+      ]
+    },
+    "TranscribeMedicalLanguageCode": {
+      "type": "string",
+      "enum": [
+        "en-US"
+      ]
+    },
+    "TranscribeMedicalRegion": {
+      "type": "string",
+      "enum": [
+        "us-east-1",
+        "us-east-2",
+        "us-west-2",
+        "ap-southeast-2",
+        "ca-central-1",
+        "eu-west-1"
+      ]
+    },
+    "TranscribeMedicalSpecialty": {
+      "type": "string",
+      "enum": [
+        "PRIMARYCARE",
+        "CARDIOLOGY",
+        "NEUROLOGY",
+        "ONCOLOGY",
+        "RADIOLOGY",
+        "UROLOGY"
+      ]
+    },
+    "TranscribeMedicalType": {
+      "type": "string",
+      "enum": [
+        "CONVERSATION",
+        "DICTATION"
+      ]
+    },
+    "TranscribeRegion": {
+      "type": "string",
+      "enum": [
+        "us-east-2",
+        "us-east-1",
+        "us-west-2",
+        "ap-northeast-2",
+        "ap-southeast-2",
+        "ap-northeast-1",
+        "ca-central-1",
+        "eu-central-1",
+        "eu-west-1",
+        "eu-west-2",
+        "sa-east-1"
+      ]
+    },
+    "TranscribeVocabularyFilterMethod": {
+      "type": "string",
+      "enum": [
+        "remove",
+        "mask",
+        "tag"
+      ]
+    },
+    "TranscriptionConfiguration": {
+      "type": "structure",
+      "members": {
+        "EngineTranscribeSettings": {
+          "shape": "EngineTranscribeSettings",
+          "documentation": "<p>The transcription configuration settings passed to Amazon Transcribe.</p>"
+        },
+        "EngineTranscribeMedicalSettings": {
+          "shape": "EngineTranscribeMedicalSettings",
+          "documentation": "<p>The transcription configuration settings passed to Amazon Transcribe.</p>"
+        }
+      },
+      "documentation": "<p>The configuration for the current transcription operation. Must contain <code>EngineTranscribeSettings</code> or <code>EngineTranscribeMedicalSettings</code>.</p>"
     },
     "UntagAttendeeRequest": {
       "type": "structure",
