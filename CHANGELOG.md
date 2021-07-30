@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.957.0-->
+<!--LATEST=2.958.0-->
 <!--ENTRYINSERT-->
+
+## 2.958.0
+* feature: AppSync: AWS AppSync now supports a new authorization mode allowing you to define your own authorization logic using an AWS Lambda function.
+* feature: SageMaker: API changes with respect to Lambda steps in model building pipelines. Adds several waiters to async Sagemaker Image APIs. Add more instance types to AppInstanceType field
+* feature: SecretsManager: Add support for KmsKeyIds in the ListSecretVersionIds API response
 
 ## 2.957.0
 * feature: Chime: Adds support for live transcription of meetings with Amazon Transcribe and Amazon Transcribe Medical.  The new APIs, StartMeetingTranscription and StopMeetingTranscription, control the generation of user-attributed transcriptions sent to meeting clients via Amazon Chime SDK data messages.

@@ -343,7 +343,7 @@ declare class AppSync extends Service {
 declare namespace AppSync {
   export interface AdditionalAuthenticationProvider {
     /**
-     * The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.
+     * The authentication type: API key, Identity and Access Management, OIDC, or Amazon Cognito user pools.
      */
     authenticationType?: AuthenticationType;
     /**
@@ -354,6 +354,10 @@ declare namespace AppSync {
      * The Amazon Cognito user pool configuration.
      */
     userPoolConfig?: CognitoUserPoolConfig;
+    /**
+     * Configuration for AWS Lambda function authorization.
+     */
+    lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
   }
   export type AdditionalAuthenticationProviders = AdditionalAuthenticationProvider[];
   export interface ApiCache {
@@ -404,25 +408,25 @@ declare namespace AppSync {
     deletes?: Long;
   }
   export type ApiKeys = ApiKey[];
-  export type AuthenticationType = "API_KEY"|"AWS_IAM"|"AMAZON_COGNITO_USER_POOLS"|"OPENID_CONNECT"|string;
+  export type AuthenticationType = "API_KEY"|"AWS_IAM"|"AMAZON_COGNITO_USER_POOLS"|"OPENID_CONNECT"|"AWS_LAMBDA"|string;
   export interface AuthorizationConfig {
     /**
      * The authorization type required by the HTTP endpoint.    AWS_IAM: The authorization type is Sigv4.  
      */
     authorizationType: AuthorizationType;
     /**
-     * The AWS IAM settings.
+     * The Identity and Access Management settings.
      */
     awsIamConfig?: AwsIamConfig;
   }
   export type AuthorizationType = "AWS_IAM"|string;
   export interface AwsIamConfig {
     /**
-     * The signing region for AWS IAM authorization.
+     * The signing region for Identity and Access Management authorization.
      */
     signingRegion?: String;
     /**
-     * The signing service name for AWS IAM authorization.
+     * The signing service name for Identity and Access Management authorization.
      */
     signingServiceName?: String;
   }
@@ -446,7 +450,7 @@ declare namespace AppSync {
      */
     userPoolId: String;
     /**
-     * The AWS Region in which the user pool was created.
+     * The Amazon Web Services Region in which the user pool was created.
      */
     awsRegion: String;
     /**
@@ -526,7 +530,7 @@ declare namespace AppSync {
      */
     type: DataSourceType;
     /**
-     * The AWS IAM service role ARN for the data source. The system assumes this role when accessing the data source.
+     * The Identity and Access Management service role ARN for the data source. The system assumes this role when accessing the data source.
      */
     serviceRoleArn?: String;
     /**
@@ -534,7 +538,7 @@ declare namespace AppSync {
      */
     dynamodbConfig?: DynamodbDataSourceConfig;
     /**
-     * AWS Lambda settings.
+     * Amazon Web Services Lambda settings.
      */
     lambdaConfig?: LambdaDataSourceConfig;
     /**
@@ -603,7 +607,7 @@ declare namespace AppSync {
      */
     logConfig?: LogConfig;
     /**
-     * The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.
+     * The authentication type: API key, Identity and Access Management, OIDC, or Amazon Cognito user pools.
      */
     authenticationType: AuthenticationType;
     /**
@@ -626,6 +630,10 @@ declare namespace AppSync {
      * A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
      */
     xrayEnabled?: Boolean;
+    /**
+     * Configuration for AWS Lambda function authorization.
+     */
+    lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
   }
   export interface CreateGraphqlApiResponse {
     /**
@@ -715,11 +723,11 @@ declare namespace AppSync {
      */
     description?: String;
     /**
-     * The type of the data source.    AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.    AMAZON_ELASTICSEARCH: The data source is an Amazon Elasticsearch Service domain.    AWS_LAMBDA: The data source is an AWS Lambda function.    NONE: There is no data source. This type is used when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.    HTTP: The data source is an HTTP endpoint.    RELATIONAL_DATABASE: The data source is a relational database.  
+     * The type of the data source.    AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.    AMAZON_ELASTICSEARCH: The data source is an Amazon Elasticsearch Service domain.    AWS_LAMBDA: The data source is an Amazon Web Services Lambda function.    NONE: There is no data source. This type is used when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.    HTTP: The data source is an HTTP endpoint.    RELATIONAL_DATABASE: The data source is a relational database.  
      */
     type?: DataSourceType;
     /**
-     * The AWS IAM service role ARN for the data source. The system assumes this role when accessing the data source.
+     * The Identity and Access Management service role ARN for the data source. The system assumes this role when accessing the data source.
      */
     serviceRoleArn?: String;
     /**
@@ -727,7 +735,7 @@ declare namespace AppSync {
      */
     dynamodbConfig?: DynamodbDataSourceConfig;
     /**
-     * AWS Lambda settings.
+     * Amazon Web Services Lambda settings.
      */
     lambdaConfig?: LambdaDataSourceConfig;
     /**
@@ -846,7 +854,7 @@ declare namespace AppSync {
      */
     tableName: String;
     /**
-     * The AWS Region.
+     * The Amazon Web Services Region.
      */
     awsRegion: String;
     /**
@@ -868,7 +876,7 @@ declare namespace AppSync {
      */
     endpoint: String;
     /**
-     * The AWS Region.
+     * The Amazon Web Services Region.
      */
     awsRegion: String;
   }
@@ -1096,20 +1104,38 @@ declare namespace AppSync {
      */
     xrayEnabled?: Boolean;
     /**
-     * The ARN of the AWS Web Application Firewall (WAF) ACL associated with this GraphqlApi, if one exists.
+     * The ARN of the WAF ACL associated with this GraphqlApi, if one exists.
      */
     wafWebAclArn?: String;
+    /**
+     *  Configuration for AWS Lambda function authorization.
+     */
+    lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
   }
   export type GraphqlApis = GraphqlApi[];
   export interface HttpDataSourceConfig {
     /**
-     * The HTTP URL endpoint. You can either specify the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AWS AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.
+     * The HTTP URL endpoint. You can either specify the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.
      */
     endpoint?: String;
     /**
      * The authorization config in case the HTTP endpoint requires authorization.
      */
     authorizationConfig?: AuthorizationConfig;
+  }
+  export interface LambdaAuthorizerConfig {
+    /**
+     * The number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a ttlOverride key in its response. A value of 0 disables caching of responses.
+     */
+    authorizerResultTtlInSeconds?: TTL;
+    /**
+     * The ARN of the lambda function to be called for authorization. This may be a standard Lambda ARN, a version ARN (.../v3) or alias ARN.   Note: This Lambda function must have the following resource-based policy assigned to it. When configuring Lambda authorizers in the Console, this is done for you. To do so with the AWS CLI, run the following:  aws lambda add-permission --function-name "arn:aws:lambda:us-east-2:111122223333:function:my-function" --statement-id "appsync" --principal appsync.amazonaws.com --action lambda:InvokeFunction 
+     */
+    authorizerUri: String;
+    /**
+     * A regular expression for validation of tokens before the Lambda Function is called.
+     */
+    identityValidationExpression?: String;
   }
   export interface LambdaConflictHandlerConfig {
     /**
@@ -1317,7 +1343,7 @@ declare namespace AppSync {
      */
     fieldLogLevel: FieldLogLevel;
     /**
-     * The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. 
+     * The service role that AppSync will assume to publish to Amazon CloudWatch logs in your account. 
      */
     cloudWatchLogsRoleArn: String;
     /**
@@ -1335,7 +1361,7 @@ declare namespace AppSync {
      */
     issuer: String;
     /**
-     * The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
+     * The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AppSync can validate against multiple client identifiers at a time.
      */
     clientId?: String;
     /**
@@ -1357,7 +1383,7 @@ declare namespace AppSync {
   }
   export interface RdsHttpEndpointConfig {
     /**
-     * AWS Region for RDS HTTP endpoint.
+     * Amazon Web Services Region for RDS HTTP endpoint.
      */
     awsRegion?: String;
     /**
@@ -1373,7 +1399,7 @@ declare namespace AppSync {
      */
     schema?: String;
     /**
-     * AWS secret store ARN for database credentials.
+     * Amazon Web Services secret store ARN for database credentials.
      */
     awsSecretStoreArn?: String;
   }
@@ -1466,6 +1492,7 @@ declare namespace AppSync {
      */
     lambdaConflictHandlerConfig?: LambdaConflictHandlerConfig;
   }
+  export type TTL = number;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -1592,7 +1619,7 @@ declare namespace AppSync {
      */
     dynamodbConfig?: DynamodbDataSourceConfig;
     /**
-     * The new AWS Lambda configuration.
+     * The new Amazon Web Services Lambda configuration.
      */
     lambdaConfig?: LambdaDataSourceConfig;
     /**
@@ -1688,6 +1715,10 @@ declare namespace AppSync {
      * A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
      */
     xrayEnabled?: Boolean;
+    /**
+     * Configuration for AWS Lambda function authorization.
+     */
+    lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
   }
   export interface UpdateGraphqlApiResponse {
     /**
@@ -1773,7 +1804,7 @@ declare namespace AppSync {
      */
     userPoolId: String;
     /**
-     * The AWS Region in which the user pool was created.
+     * The Amazon Web Services Region in which the user pool was created.
      */
     awsRegion: String;
     /**
