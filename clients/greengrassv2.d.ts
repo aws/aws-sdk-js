@@ -12,11 +12,11 @@ declare class GreengrassV2 extends Service {
   constructor(options?: GreengrassV2.Types.ClientConfiguration)
   config: Config & GreengrassV2.Types.ClientConfiguration;
   /**
-   * Associate a list of client devices with a core device. Use this API operation to specify which client devices can discover a core device through cloud discovery. With cloud discovery, client devices connect to AWS IoT Greengrass to retrieve associated core devices' connectivity information and certificates. For more information, see Configure cloud discovery in the AWS IoT Greengrass V2 Developer Guide.  Client devices are local IoT devices that connect to and communicate with an AWS IoT Greengrass core device over MQTT. You can connect client devices to a core device to sync MQTT messages and data to AWS IoT Core and interact with client devices in AWS IoT Greengrass components. For more information, see Interact with local IoT devices in the AWS IoT Greengrass V2 Developer Guide. 
+   * Associate a list of client devices with a core device. Use this API operation to specify which client devices can discover a core device through cloud discovery. With cloud discovery, client devices connect to IoT Greengrass to retrieve associated core devices' connectivity information and certificates. For more information, see Configure cloud discovery in the IoT Greengrass V2 Developer Guide.  Client devices are local IoT devices that connect to and communicate with an IoT Greengrass core device over MQTT. You can connect client devices to a core device to sync MQTT messages and data to Amazon Web Services IoT Core and interact with client devices in Greengrass components. For more information, see Interact with local IoT devices in the IoT Greengrass V2 Developer Guide. 
    */
   batchAssociateClientDeviceWithCoreDevice(params: GreengrassV2.Types.BatchAssociateClientDeviceWithCoreDeviceRequest, callback?: (err: AWSError, data: GreengrassV2.Types.BatchAssociateClientDeviceWithCoreDeviceResponse) => void): Request<GreengrassV2.Types.BatchAssociateClientDeviceWithCoreDeviceResponse, AWSError>;
   /**
-   * Associate a list of client devices with a core device. Use this API operation to specify which client devices can discover a core device through cloud discovery. With cloud discovery, client devices connect to AWS IoT Greengrass to retrieve associated core devices' connectivity information and certificates. For more information, see Configure cloud discovery in the AWS IoT Greengrass V2 Developer Guide.  Client devices are local IoT devices that connect to and communicate with an AWS IoT Greengrass core device over MQTT. You can connect client devices to a core device to sync MQTT messages and data to AWS IoT Core and interact with client devices in AWS IoT Greengrass components. For more information, see Interact with local IoT devices in the AWS IoT Greengrass V2 Developer Guide. 
+   * Associate a list of client devices with a core device. Use this API operation to specify which client devices can discover a core device through cloud discovery. With cloud discovery, client devices connect to IoT Greengrass to retrieve associated core devices' connectivity information and certificates. For more information, see Configure cloud discovery in the IoT Greengrass V2 Developer Guide.  Client devices are local IoT devices that connect to and communicate with an IoT Greengrass core device over MQTT. You can connect client devices to a core device to sync MQTT messages and data to Amazon Web Services IoT Core and interact with client devices in Greengrass components. For more information, see Interact with local IoT devices in the IoT Greengrass V2 Developer Guide. 
    */
   batchAssociateClientDeviceWithCoreDevice(callback?: (err: AWSError, data: GreengrassV2.Types.BatchAssociateClientDeviceWithCoreDeviceResponse) => void): Request<GreengrassV2.Types.BatchAssociateClientDeviceWithCoreDeviceResponse, AWSError>;
   /**
@@ -36,35 +36,35 @@ declare class GreengrassV2 extends Service {
    */
   cancelDeployment(callback?: (err: AWSError, data: GreengrassV2.Types.CancelDeploymentResponse) => void): Request<GreengrassV2.Types.CancelDeploymentResponse, AWSError>;
   /**
-   * Creates a component. Components are software that run on AWS IoT Greengrass core devices. After you develop and test a component on your core device, you can use this operation to upload your component to AWS IoT Greengrass. Then, you can deploy the component to other core devices. You can use this operation to do the following:    Create components from recipes  Create a component from a recipe, which is a file that defines the component's metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For more information, see AWS IoT Greengrass component recipe reference in the AWS IoT Greengrass V2 Developer Guide. To create a component from a recipe, specify inlineRecipe when you call this operation.    Create components from Lambda functions  Create a component from an AWS Lambda function that runs on AWS IoT Greengrass. This creates a recipe and artifacts from the Lambda function's deployment package. You can use this operation to migrate Lambda functions from AWS IoT Greengrass V1 to AWS IoT Greengrass V2. This function only accepts Lambda functions that use the following runtimes:   Python 2.7 – python2.7    Python 3.7 – python3.7    Python 3.8 – python3.8    Java 8 – java8    Node.js 10 – nodejs10.x    Node.js 12 – nodejs12.x    To create a component from a Lambda function, specify lambdaFunction when you call this operation.  
+   * Creates a component. Components are software that run on Greengrass core devices. After you develop and test a component on your core device, you can use this operation to upload your component to IoT Greengrass. Then, you can deploy the component to other core devices. You can use this operation to do the following:    Create components from recipes  Create a component from a recipe, which is a file that defines the component's metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For more information, see IoT Greengrass component recipe reference in the IoT Greengrass V2 Developer Guide. To create a component from a recipe, specify inlineRecipe when you call this operation.    Create components from Lambda functions  Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe and artifacts from the Lambda function's deployment package. You can use this operation to migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2. This function only accepts Lambda functions that use the following runtimes:   Python 2.7 – python2.7    Python 3.7 – python3.7    Python 3.8 – python3.8    Java 8 – java8    Node.js 10 – nodejs10.x    Node.js 12 – nodejs12.x    To create a component from a Lambda function, specify lambdaFunction when you call this operation.  
    */
   createComponentVersion(params: GreengrassV2.Types.CreateComponentVersionRequest, callback?: (err: AWSError, data: GreengrassV2.Types.CreateComponentVersionResponse) => void): Request<GreengrassV2.Types.CreateComponentVersionResponse, AWSError>;
   /**
-   * Creates a component. Components are software that run on AWS IoT Greengrass core devices. After you develop and test a component on your core device, you can use this operation to upload your component to AWS IoT Greengrass. Then, you can deploy the component to other core devices. You can use this operation to do the following:    Create components from recipes  Create a component from a recipe, which is a file that defines the component's metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For more information, see AWS IoT Greengrass component recipe reference in the AWS IoT Greengrass V2 Developer Guide. To create a component from a recipe, specify inlineRecipe when you call this operation.    Create components from Lambda functions  Create a component from an AWS Lambda function that runs on AWS IoT Greengrass. This creates a recipe and artifacts from the Lambda function's deployment package. You can use this operation to migrate Lambda functions from AWS IoT Greengrass V1 to AWS IoT Greengrass V2. This function only accepts Lambda functions that use the following runtimes:   Python 2.7 – python2.7    Python 3.7 – python3.7    Python 3.8 – python3.8    Java 8 – java8    Node.js 10 – nodejs10.x    Node.js 12 – nodejs12.x    To create a component from a Lambda function, specify lambdaFunction when you call this operation.  
+   * Creates a component. Components are software that run on Greengrass core devices. After you develop and test a component on your core device, you can use this operation to upload your component to IoT Greengrass. Then, you can deploy the component to other core devices. You can use this operation to do the following:    Create components from recipes  Create a component from a recipe, which is a file that defines the component's metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For more information, see IoT Greengrass component recipe reference in the IoT Greengrass V2 Developer Guide. To create a component from a recipe, specify inlineRecipe when you call this operation.    Create components from Lambda functions  Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe and artifacts from the Lambda function's deployment package. You can use this operation to migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2. This function only accepts Lambda functions that use the following runtimes:   Python 2.7 – python2.7    Python 3.7 – python3.7    Python 3.8 – python3.8    Java 8 – java8    Node.js 10 – nodejs10.x    Node.js 12 – nodejs12.x    To create a component from a Lambda function, specify lambdaFunction when you call this operation.  
    */
   createComponentVersion(callback?: (err: AWSError, data: GreengrassV2.Types.CreateComponentVersionResponse) => void): Request<GreengrassV2.Types.CreateComponentVersionResponse, AWSError>;
   /**
-   * Creates a continuous deployment for a target, which is a AWS IoT Greengrass core device or group of core devices. When you add a new core device to a group of core devices that has a deployment, AWS IoT Greengrass deploys that group's deployment to the new device. You can define one deployment for each target. When you create a new deployment for a target that has an existing deployment, you replace the previous deployment. AWS IoT Greengrass applies the new deployment to the target devices. Every deployment has a revision number that indicates how many deployment revisions you define for a target. Use this operation to create a new revision of an existing deployment. This operation returns the revision number of the new deployment when you create it. For more information, see the Create deployments in the AWS IoT Greengrass V2 Developer Guide.
+   * Creates a continuous deployment for a target, which is a Greengrass core device or group of core devices. When you add a new core device to a group of core devices that has a deployment, IoT Greengrass deploys that group's deployment to the new device. You can define one deployment for each target. When you create a new deployment for a target that has an existing deployment, you replace the previous deployment. IoT Greengrass applies the new deployment to the target devices. Every deployment has a revision number that indicates how many deployment revisions you define for a target. Use this operation to create a new revision of an existing deployment. This operation returns the revision number of the new deployment when you create it. For more information, see the Create deployments in the IoT Greengrass V2 Developer Guide.
    */
   createDeployment(params: GreengrassV2.Types.CreateDeploymentRequest, callback?: (err: AWSError, data: GreengrassV2.Types.CreateDeploymentResponse) => void): Request<GreengrassV2.Types.CreateDeploymentResponse, AWSError>;
   /**
-   * Creates a continuous deployment for a target, which is a AWS IoT Greengrass core device or group of core devices. When you add a new core device to a group of core devices that has a deployment, AWS IoT Greengrass deploys that group's deployment to the new device. You can define one deployment for each target. When you create a new deployment for a target that has an existing deployment, you replace the previous deployment. AWS IoT Greengrass applies the new deployment to the target devices. Every deployment has a revision number that indicates how many deployment revisions you define for a target. Use this operation to create a new revision of an existing deployment. This operation returns the revision number of the new deployment when you create it. For more information, see the Create deployments in the AWS IoT Greengrass V2 Developer Guide.
+   * Creates a continuous deployment for a target, which is a Greengrass core device or group of core devices. When you add a new core device to a group of core devices that has a deployment, IoT Greengrass deploys that group's deployment to the new device. You can define one deployment for each target. When you create a new deployment for a target that has an existing deployment, you replace the previous deployment. IoT Greengrass applies the new deployment to the target devices. Every deployment has a revision number that indicates how many deployment revisions you define for a target. Use this operation to create a new revision of an existing deployment. This operation returns the revision number of the new deployment when you create it. For more information, see the Create deployments in the IoT Greengrass V2 Developer Guide.
    */
   createDeployment(callback?: (err: AWSError, data: GreengrassV2.Types.CreateDeploymentResponse) => void): Request<GreengrassV2.Types.CreateDeploymentResponse, AWSError>;
   /**
-   * Deletes a version of a component from AWS IoT Greengrass.  This operation deletes the component's recipe and artifacts. As a result, deployments that refer to this component version will fail. If you have deployments that use this component version, you can remove the component from the deployment or update the deployment to use a valid version. 
+   * Deletes a version of a component from IoT Greengrass.  This operation deletes the component's recipe and artifacts. As a result, deployments that refer to this component version will fail. If you have deployments that use this component version, you can remove the component from the deployment or update the deployment to use a valid version. 
    */
   deleteComponent(params: GreengrassV2.Types.DeleteComponentRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a version of a component from AWS IoT Greengrass.  This operation deletes the component's recipe and artifacts. As a result, deployments that refer to this component version will fail. If you have deployments that use this component version, you can remove the component from the deployment or update the deployment to use a valid version. 
+   * Deletes a version of a component from IoT Greengrass.  This operation deletes the component's recipe and artifacts. As a result, deployments that refer to this component version will fail. If you have deployments that use this component version, you can remove the component from the deployment or update the deployment to use a valid version. 
    */
   deleteComponent(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a AWS IoT Greengrass core device, which is an AWS IoT thing. This operation removes the core device from the list of core devices. This operation doesn't delete the AWS IoT thing. For more information about how to delete the AWS IoT thing, see DeleteThing in the AWS IoT API Reference.
+   * Deletes a Greengrass core device, which is an IoT thing. This operation removes the core device from the list of core devices. This operation doesn't delete the IoT thing. For more information about how to delete the IoT thing, see DeleteThing in the IoT API Reference.
    */
   deleteCoreDevice(params: GreengrassV2.Types.DeleteCoreDeviceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a AWS IoT Greengrass core device, which is an AWS IoT thing. This operation removes the core device from the list of core devices. This operation doesn't delete the AWS IoT thing. For more information about how to delete the AWS IoT thing, see DeleteThing in the AWS IoT API Reference.
+   * Deletes a Greengrass core device, which is an IoT thing. This operation removes the core device from the list of core devices. This operation doesn't delete the IoT thing. For more information about how to delete the IoT thing, see DeleteThing in the IoT API Reference.
    */
   deleteCoreDevice(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -92,19 +92,19 @@ declare class GreengrassV2 extends Service {
    */
   getComponentVersionArtifact(callback?: (err: AWSError, data: GreengrassV2.Types.GetComponentVersionArtifactResponse) => void): Request<GreengrassV2.Types.GetComponentVersionArtifactResponse, AWSError>;
   /**
-   * Retrieves metadata for a AWS IoT Greengrass core device.
+   * Retrieves metadata for a Greengrass core device.
    */
   getCoreDevice(params: GreengrassV2.Types.GetCoreDeviceRequest, callback?: (err: AWSError, data: GreengrassV2.Types.GetCoreDeviceResponse) => void): Request<GreengrassV2.Types.GetCoreDeviceResponse, AWSError>;
   /**
-   * Retrieves metadata for a AWS IoT Greengrass core device.
+   * Retrieves metadata for a Greengrass core device.
    */
   getCoreDevice(callback?: (err: AWSError, data: GreengrassV2.Types.GetCoreDeviceResponse) => void): Request<GreengrassV2.Types.GetCoreDeviceResponse, AWSError>;
   /**
-   * Gets a deployment. Deployments define the components that run on AWS IoT Greengrass core devices.
+   * Gets a deployment. Deployments define the components that run on Greengrass core devices.
    */
   getDeployment(params: GreengrassV2.Types.GetDeploymentRequest, callback?: (err: AWSError, data: GreengrassV2.Types.GetDeploymentResponse) => void): Request<GreengrassV2.Types.GetDeploymentResponse, AWSError>;
   /**
-   * Gets a deployment. Deployments define the components that run on AWS IoT Greengrass core devices.
+   * Gets a deployment. Deployments define the components that run on Greengrass core devices.
    */
   getDeployment(callback?: (err: AWSError, data: GreengrassV2.Types.GetDeploymentResponse) => void): Request<GreengrassV2.Types.GetDeploymentResponse, AWSError>;
   /**
@@ -132,11 +132,11 @@ declare class GreengrassV2 extends Service {
    */
   listComponents(callback?: (err: AWSError, data: GreengrassV2.Types.ListComponentsResponse) => void): Request<GreengrassV2.Types.ListComponentsResponse, AWSError>;
   /**
-   * Retrieves a paginated list of AWS IoT Greengrass core devices.
+   * Retrieves a paginated list of Greengrass core devices.
    */
   listCoreDevices(params: GreengrassV2.Types.ListCoreDevicesRequest, callback?: (err: AWSError, data: GreengrassV2.Types.ListCoreDevicesResponse) => void): Request<GreengrassV2.Types.ListCoreDevicesResponse, AWSError>;
   /**
-   * Retrieves a paginated list of AWS IoT Greengrass core devices.
+   * Retrieves a paginated list of Greengrass core devices.
    */
   listCoreDevices(callback?: (err: AWSError, data: GreengrassV2.Types.ListCoreDevicesResponse) => void): Request<GreengrassV2.Types.ListCoreDevicesResponse, AWSError>;
   /**
@@ -148,65 +148,65 @@ declare class GreengrassV2 extends Service {
    */
   listDeployments(callback?: (err: AWSError, data: GreengrassV2.Types.ListDeploymentsResponse) => void): Request<GreengrassV2.Types.ListDeploymentsResponse, AWSError>;
   /**
-   * Retrieves a paginated list of deployment jobs that AWS IoT Greengrass sends to AWS IoT Greengrass core devices.
+   * Retrieves a paginated list of deployment jobs that IoT Greengrass sends to Greengrass core devices.
    */
   listEffectiveDeployments(params: GreengrassV2.Types.ListEffectiveDeploymentsRequest, callback?: (err: AWSError, data: GreengrassV2.Types.ListEffectiveDeploymentsResponse) => void): Request<GreengrassV2.Types.ListEffectiveDeploymentsResponse, AWSError>;
   /**
-   * Retrieves a paginated list of deployment jobs that AWS IoT Greengrass sends to AWS IoT Greengrass core devices.
+   * Retrieves a paginated list of deployment jobs that IoT Greengrass sends to Greengrass core devices.
    */
   listEffectiveDeployments(callback?: (err: AWSError, data: GreengrassV2.Types.ListEffectiveDeploymentsResponse) => void): Request<GreengrassV2.Types.ListEffectiveDeploymentsResponse, AWSError>;
   /**
-   * Retrieves a paginated list of the components that a AWS IoT Greengrass core device runs.
+   * Retrieves a paginated list of the components that a Greengrass core device runs.
    */
   listInstalledComponents(params: GreengrassV2.Types.ListInstalledComponentsRequest, callback?: (err: AWSError, data: GreengrassV2.Types.ListInstalledComponentsResponse) => void): Request<GreengrassV2.Types.ListInstalledComponentsResponse, AWSError>;
   /**
-   * Retrieves a paginated list of the components that a AWS IoT Greengrass core device runs.
+   * Retrieves a paginated list of the components that a Greengrass core device runs.
    */
   listInstalledComponents(callback?: (err: AWSError, data: GreengrassV2.Types.ListInstalledComponentsResponse) => void): Request<GreengrassV2.Types.ListInstalledComponentsResponse, AWSError>;
   /**
-   * Retrieves the list of tags for an AWS IoT Greengrass resource.
+   * Retrieves the list of tags for an IoT Greengrass resource.
    */
   listTagsForResource(params: GreengrassV2.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: GreengrassV2.Types.ListTagsForResourceResponse) => void): Request<GreengrassV2.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Retrieves the list of tags for an AWS IoT Greengrass resource.
+   * Retrieves the list of tags for an IoT Greengrass resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: GreengrassV2.Types.ListTagsForResourceResponse) => void): Request<GreengrassV2.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Retrieves a list of components that meet the component, version, and platform requirements of a deployment. AWS IoT Greengrass core devices call this operation when they receive a deployment to identify the components to install. This operation identifies components that meet all dependency requirements for a deployment. If the requirements conflict, then this operation returns an error and the deployment fails. For example, this occurs if component A requires version &gt;2.0.0 and component B requires version &lt;2.0.0 of a component dependency. When you specify the component candidates to resolve, AWS IoT Greengrass compares each component's digest from the core device with the component's digest in the AWS Cloud. If the digests don't match, then AWS IoT Greengrass specifies to use the version from the AWS Cloud.  To use this operation, you must use the data plane API endpoint and authenticate with an AWS IoT device certificate. For more information, see AWS IoT Greengrass endpoints and quotas. 
+   * Retrieves a list of components that meet the component, version, and platform requirements of a deployment. Greengrass core devices call this operation when they receive a deployment to identify the components to install. This operation identifies components that meet all dependency requirements for a deployment. If the requirements conflict, then this operation returns an error and the deployment fails. For example, this occurs if component A requires version &gt;2.0.0 and component B requires version &lt;2.0.0 of a component dependency. When you specify the component candidates to resolve, IoT Greengrass compares each component's digest from the core device with the component's digest in the Amazon Web Services Cloud. If the digests don't match, then IoT Greengrass specifies to use the version from the Amazon Web Services Cloud.  To use this operation, you must use the data plane API endpoint and authenticate with an IoT device certificate. For more information, see IoT Greengrass endpoints and quotas. 
    */
   resolveComponentCandidates(params: GreengrassV2.Types.ResolveComponentCandidatesRequest, callback?: (err: AWSError, data: GreengrassV2.Types.ResolveComponentCandidatesResponse) => void): Request<GreengrassV2.Types.ResolveComponentCandidatesResponse, AWSError>;
   /**
-   * Retrieves a list of components that meet the component, version, and platform requirements of a deployment. AWS IoT Greengrass core devices call this operation when they receive a deployment to identify the components to install. This operation identifies components that meet all dependency requirements for a deployment. If the requirements conflict, then this operation returns an error and the deployment fails. For example, this occurs if component A requires version &gt;2.0.0 and component B requires version &lt;2.0.0 of a component dependency. When you specify the component candidates to resolve, AWS IoT Greengrass compares each component's digest from the core device with the component's digest in the AWS Cloud. If the digests don't match, then AWS IoT Greengrass specifies to use the version from the AWS Cloud.  To use this operation, you must use the data plane API endpoint and authenticate with an AWS IoT device certificate. For more information, see AWS IoT Greengrass endpoints and quotas. 
+   * Retrieves a list of components that meet the component, version, and platform requirements of a deployment. Greengrass core devices call this operation when they receive a deployment to identify the components to install. This operation identifies components that meet all dependency requirements for a deployment. If the requirements conflict, then this operation returns an error and the deployment fails. For example, this occurs if component A requires version &gt;2.0.0 and component B requires version &lt;2.0.0 of a component dependency. When you specify the component candidates to resolve, IoT Greengrass compares each component's digest from the core device with the component's digest in the Amazon Web Services Cloud. If the digests don't match, then IoT Greengrass specifies to use the version from the Amazon Web Services Cloud.  To use this operation, you must use the data plane API endpoint and authenticate with an IoT device certificate. For more information, see IoT Greengrass endpoints and quotas. 
    */
   resolveComponentCandidates(callback?: (err: AWSError, data: GreengrassV2.Types.ResolveComponentCandidatesResponse) => void): Request<GreengrassV2.Types.ResolveComponentCandidatesResponse, AWSError>;
   /**
-   * Adds tags to an AWS IoT Greengrass resource. If a tag already exists for the resource, this operation updates the tag's value.
+   * Adds tags to an IoT Greengrass resource. If a tag already exists for the resource, this operation updates the tag's value.
    */
   tagResource(params: GreengrassV2.Types.TagResourceRequest, callback?: (err: AWSError, data: GreengrassV2.Types.TagResourceResponse) => void): Request<GreengrassV2.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds tags to an AWS IoT Greengrass resource. If a tag already exists for the resource, this operation updates the tag's value.
+   * Adds tags to an IoT Greengrass resource. If a tag already exists for the resource, this operation updates the tag's value.
    */
   tagResource(callback?: (err: AWSError, data: GreengrassV2.Types.TagResourceResponse) => void): Request<GreengrassV2.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes a tag from an AWS IoT Greengrass resource.
+   * Removes a tag from an IoT Greengrass resource.
    */
   untagResource(params: GreengrassV2.Types.UntagResourceRequest, callback?: (err: AWSError, data: GreengrassV2.Types.UntagResourceResponse) => void): Request<GreengrassV2.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes a tag from an AWS IoT Greengrass resource.
+   * Removes a tag from an IoT Greengrass resource.
    */
   untagResource(callback?: (err: AWSError, data: GreengrassV2.Types.UntagResourceResponse) => void): Request<GreengrassV2.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace GreengrassV2 {
   export interface AssociateClientDeviceWithCoreDeviceEntry {
     /**
-     * The name of the AWS IoT thing that represents the client device to associate.
+     * The name of the IoT thing that represents the client device to associate.
      */
     thingName: IoTThingName;
   }
   export type AssociateClientDeviceWithCoreDeviceEntryList = AssociateClientDeviceWithCoreDeviceEntry[];
   export interface AssociateClientDeviceWithCoreDeviceErrorEntry {
     /**
-     * The name of the AWS IoT thing whose associate request failed.
+     * The name of the IoT thing whose associate request failed.
      */
     thingName?: IoTThingName;
     /**
@@ -221,7 +221,7 @@ declare namespace GreengrassV2 {
   export type AssociateClientDeviceWithCoreDeviceErrorList = AssociateClientDeviceWithCoreDeviceErrorEntry[];
   export interface AssociatedClientDevice {
     /**
-     * The name of the AWS IoT thing that represents the associated client device.
+     * The name of the IoT thing that represents the associated client device.
      */
     thingName?: IoTThingName;
     /**
@@ -236,13 +236,13 @@ declare namespace GreengrassV2 {
      */
     entries?: AssociateClientDeviceWithCoreDeviceEntryList;
     /**
-     * The name of the core device. This is also the name of the AWS IoT thing.
+     * The name of the core device. This is also the name of the IoT thing.
      */
     coreDeviceThingName: IoTThingName;
   }
   export interface BatchAssociateClientDeviceWithCoreDeviceResponse {
     /**
-     * The list of any errors for the entries in the request. Each error entry contains the name of the AWS IoT thing that failed to associate.
+     * The list of any errors for the entries in the request. Each error entry contains the name of the IoT thing that failed to associate.
      */
     errorEntries?: AssociateClientDeviceWithCoreDeviceErrorList;
   }
@@ -252,16 +252,17 @@ declare namespace GreengrassV2 {
      */
     entries?: DisassociateClientDeviceFromCoreDeviceEntryList;
     /**
-     * The name of the core device. This is also the name of the AWS IoT thing.
+     * The name of the core device. This is also the name of the IoT thing.
      */
     coreDeviceThingName: IoTThingName;
   }
   export interface BatchDisassociateClientDeviceFromCoreDeviceResponse {
     /**
-     * The list of errors (if any) for the entries in the request. Each error entry contains the name of the AWS IoT thing that failed to disassociate.
+     * The list of errors (if any) for the entries in the request. Each error entry contains the name of the IoT thing that failed to disassociate.
      */
     errorEntries?: DisassociateClientDeviceFromCoreDeviceErrorList;
   }
+  export type CPU = number;
   export interface CancelDeploymentRequest {
     /**
      * The ID of the deployment.
@@ -274,6 +275,7 @@ declare namespace GreengrassV2 {
      */
     message?: NonEmptyString;
   }
+  export type ClientTokenString = string;
   export type CloudComponentState = "REQUESTED"|"INITIATED"|"DEPLOYABLE"|"FAILED"|"DEPRECATED"|string;
   export interface CloudComponentStatus {
     /**
@@ -285,7 +287,7 @@ declare namespace GreengrassV2 {
      */
     message?: NonEmptyString;
     /**
-     * A dictionary of errors that communicate why the component is in an error state. For example, if AWS IoT Greengrass can't access an artifact for the component, then errors contains the artifact's URI as a key, and the error message as the value for that key.
+     * A dictionary of errors that communicate why the component is in an error state. For example, if IoT Greengrass can't access an artifact for the component, then errors contains the artifact's URI as a key, and the error message as the value for that key.
      */
     errors?: StringMap;
   }
@@ -314,7 +316,7 @@ declare namespace GreengrassV2 {
      */
     componentVersion?: ComponentVersionString;
     /**
-     * The version requirements for the component's dependencies. AWS IoT Greengrass core devices get the version requirements from component recipes. AWS IoT Greengrass V2 uses semantic version constraints. For more information, see Semantic Versioning.
+     * The version requirements for the component's dependencies. Greengrass core devices get the version requirements from component recipes. IoT Greengrass V2 uses semantic version constraints. For more information, see Semantic Versioning.
      */
     versionRequirements?: ComponentVersionRequirementMap;
   }
@@ -324,18 +326,18 @@ declare namespace GreengrassV2 {
   export type ComponentConfigurationString = string;
   export interface ComponentConfigurationUpdate {
     /**
-     * A serialized JSON string that contains the configuration object to merge to target devices. The core device merges this configuration with the component's existing configuration. If this is the first time a component deploys on a device, the core device merges this configuration with the component's default configuration. This means that the core device keeps it's existing configuration for keys and values that you don't specify in this object. For more information, see Merge configuration updates in the AWS IoT Greengrass V2 Developer Guide.
+     * A serialized JSON string that contains the configuration object to merge to target devices. The core device merges this configuration with the component's existing configuration. If this is the first time a component deploys on a device, the core device merges this configuration with the component's default configuration. This means that the core device keeps it's existing configuration for keys and values that you don't specify in this object. For more information, see Merge configuration updates in the IoT Greengrass V2 Developer Guide.
      */
     merge?: ComponentConfigurationString;
     /**
-     * The list of configuration nodes to reset to default values on target devices. Use JSON pointers to specify each node to reset. JSON pointers start with a forward slash (/) and use forward slashes to separate the key for each level in the object. For more information, see the JSON pointer specification and Reset configuration updates in the AWS IoT Greengrass V2 Developer Guide.
+     * The list of configuration nodes to reset to default values on target devices. Use JSON pointers to specify each node to reset. JSON pointers start with a forward slash (/) and use forward slashes to separate the key for each level in the object. For more information, see the JSON pointer specification and Reset configuration updates in the IoT Greengrass V2 Developer Guide.
      */
     reset?: ComponentConfigurationPathList;
   }
   export type ComponentDependencyMap = {[key: string]: ComponentDependencyRequirement};
   export interface ComponentDependencyRequirement {
     /**
-     * The component version requirement for the component dependency. AWS IoT Greengrass V2 uses semantic version constraints. For more information, see Semantic Versioning.
+     * The component version requirement for the component dependency. IoT Greengrass V2 uses semantic version constraints. For more information, see Semantic Versioning.
      */
     versionRequirement?: NonEmptyString;
     /**
@@ -350,11 +352,11 @@ declare namespace GreengrassV2 {
      */
     componentVersion?: ComponentVersionString;
     /**
-     * The configuration updates to deploy for the component. You can define reset updates and merge updates. A reset updates the keys that you specify to the default configuration for the component. A merge updates the core device's component configuration with the keys and values that you specify. The AWS IoT Greengrass Core software applies reset updates before it applies merge updates. For more information, see Update component configurations in the AWS IoT Greengrass V2 Developer Guide.
+     * The configuration updates to deploy for the component. You can define reset updates and merge updates. A reset updates the keys that you specify to the default configuration for the component. A merge updates the core device's component configuration with the keys and values that you specify. The IoT Greengrass Core software applies reset updates before it applies merge updates. For more information, see Update component configurations in the IoT Greengrass V2 Developer Guide.
      */
     configurationUpdate?: ComponentConfigurationUpdate;
     /**
-     * The system user and group that the AWS IoT Greengrass Core software uses to run component processes on the core device. If you omit this parameter, the AWS IoT Greengrass Core software uses the system user and group that you configure for the core device. For more information, see Configure the user and group that run components in the AWS IoT Greengrass V2 Developer Guide.
+     * The system user and group that the IoT Greengrass Core software uses to run component processes on the core device. If you omit this parameter, the IoT Greengrass Core software uses the system user and group that you configure for the core device. For more information, see Configure the user and group that run components in the IoT Greengrass V2 Developer Guide.
      */
     runWith?: ComponentRunWith;
   }
@@ -389,20 +391,24 @@ declare namespace GreengrassV2 {
   export type ComponentNameString = string;
   export interface ComponentPlatform {
     /**
-     * The friendly name of the platform. This name helps you identify the platform. If you omit this parameter, AWS IoT Greengrass creates a friendly name from the os and architecture of the platform.
+     * The friendly name of the platform. This name helps you identify the platform. If you omit this parameter, IoT Greengrass creates a friendly name from the os and architecture of the platform.
      */
     name?: NonEmptyString;
     /**
-     * A dictionary of attributes for the platform. The AWS IoT Greengrass Core software defines the os and platform by default. You can specify additional platform attributes for a core device when you deploy the AWS IoT Greengrass nucleus component. For more information, see the AWS IoT Greengrass nucleus component in the AWS IoT Greengrass V2 Developer Guide.
+     * A dictionary of attributes for the platform. The IoT Greengrass Core software defines the os and platform by default. You can specify additional platform attributes for a core device when you deploy the Greengrass nucleus component. For more information, see the Greengrass nucleus component in the IoT Greengrass V2 Developer Guide.
      */
     attributes?: PlatformAttributesMap;
   }
   export type ComponentPlatformList = ComponentPlatform[];
   export interface ComponentRunWith {
     /**
-     * The POSIX system user and (optional) group to use to run this component. Specify the user and group separated by a colon (:) in the following format: user:group. The group is optional. If you don't specify a group, the AWS IoT Greengrass Core software uses the primary user for the group.
+     * The POSIX system user and (optional) group to use to run this component. Specify the user and group separated by a colon (:) in the following format: user:group. The group is optional. If you don't specify a group, the IoT Greengrass Core software uses the primary user for the group. If you omit this parameter, the IoT Greengrass Core software uses the default system user and group that you configure on the Greengrass nucleus component. For more information, see Configure the user and group that run components.
      */
     posixUser?: NonEmptyString;
+    /**
+     * The system resource limits to apply to this component's process on the core device. If you omit this parameter, the IoT Greengrass Core software uses the default system resource limits that you configure on the Greengrass nucleus component. For more information, see Configure system resource limits for components.
+     */
+    systemResourceLimits?: SystemResourceLimits;
   }
   export type ComponentVersionARN = string;
   export type ComponentVersionList = ComponentVersionListItem[];
@@ -425,11 +431,11 @@ declare namespace GreengrassV2 {
   export type ComponentVisibilityScope = "PRIVATE"|"PUBLIC"|string;
   export interface CoreDevice {
     /**
-     * The name of the core device. This is also the name of the AWS IoT thing.
+     * The name of the core device. This is also the name of the IoT thing.
      */
     coreDeviceThingName?: CoreDeviceThingName;
     /**
-     * The status of the core device. Core devices can have the following statuses:    HEALTHY – The AWS IoT Greengrass Core software and all components run on the core device without issue.    UNHEALTHY – The AWS IoT Greengrass Core software or a component is in a failed state on the core device.  
+     * The status of the core device. Core devices can have the following statuses:    HEALTHY – The IoT Greengrass Core software and all components run on the core device without issue.    UNHEALTHY – The IoT Greengrass Core software or a component is in a failed state on the core device.  
      */
     status?: CoreDeviceStatus;
     /**
@@ -452,9 +458,13 @@ declare namespace GreengrassV2 {
      */
     lambdaFunction?: LambdaFunctionRecipeSource;
     /**
-     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the AWS IoT Greengrass V2 Developer Guide.
+     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the IoT Greengrass V2 Developer Guide.
      */
     tags?: TagMap;
+    /**
+     * A unique, case-sensitive identifier that you can provide to ensure that the request is idempotent. Idempotency means that the request is successfully processed only once, even if you send the request multiple times. When a request succeeds, and you specify the same client token for subsequent successful requests, the IoT Greengrass V2 service returns the successful response that it caches from the previous request. IoT Greengrass V2 caches successful responses for idempotent requests for up to 8 hours.
+     */
+    clientToken?: ClientTokenString;
   }
   export interface CreateComponentVersionResponse {
     /**
@@ -474,17 +484,17 @@ declare namespace GreengrassV2 {
      */
     creationTimestamp: Timestamp;
     /**
-     * The status of the component version in AWS IoT Greengrass V2. This status is different from the status of the component on a core device.
+     * The status of the component version in IoT Greengrass V2. This status is different from the status of the component on a core device.
      */
     status: CloudComponentStatus;
   }
   export interface CreateDeploymentRequest {
     /**
-     * The ARN of the target AWS IoT thing or thing group.
+     * The ARN of the target IoT thing or thing group.
      */
     targetArn: TargetARN;
     /**
-     * The name of the deployment. You can create deployments without names. If you create a deployment without a name, the AWS IoT Greengrass V2 console shows the deployment name as &lt;targetType&gt;:&lt;targetName&gt;, where targetType and targetName are the type and name of the deployment target.
+     * The name of the deployment.
      */
     deploymentName?: NonEmptyString;
     /**
@@ -500,9 +510,13 @@ declare namespace GreengrassV2 {
      */
     deploymentPolicies?: DeploymentPolicies;
     /**
-     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the AWS IoT Greengrass V2 Developer Guide.
+     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the IoT Greengrass V2 Developer Guide.
      */
     tags?: TagMap;
+    /**
+     * A unique, case-sensitive identifier that you can provide to ensure that the request is idempotent. Idempotency means that the request is successfully processed only once, even if you send the request multiple times. When a request succeeds, and you specify the same client token for subsequent successful requests, the IoT Greengrass V2 service returns the successful response that it caches from the previous request. IoT Greengrass V2 caches successful responses for idempotent requests for up to 8 hours.
+     */
+    clientToken?: ClientTokenString;
   }
   export interface CreateDeploymentResponse {
     /**
@@ -510,11 +524,11 @@ declare namespace GreengrassV2 {
      */
     deploymentId?: NonEmptyString;
     /**
-     * The ID of the AWS IoT job that applies the deployment to target devices.
+     * The ID of the IoT job that applies the deployment to target devices.
      */
     iotJobId?: NonEmptyString;
     /**
-     * The ARN of the AWS IoT job that applies the deployment to target devices.
+     * The ARN of the IoT job that applies the deployment to target devices.
      */
     iotJobArn?: IoTJobARN;
   }
@@ -527,13 +541,13 @@ declare namespace GreengrassV2 {
   }
   export interface DeleteCoreDeviceRequest {
     /**
-     * The name of the core device. This is also the name of the AWS IoT thing.
+     * The name of the core device. This is also the name of the IoT thing.
      */
     coreDeviceThingName: CoreDeviceThingName;
   }
   export interface Deployment {
     /**
-     * The ARN of the target AWS IoT thing or thing group.
+     * The ARN of the target IoT thing or thing group.
      */
     targetArn?: TargetARN;
     /**
@@ -545,7 +559,7 @@ declare namespace GreengrassV2 {
      */
     deploymentId?: NonEmptyString;
     /**
-     * The name of the deployment. You can create deployments without names. If you create a deployment without a name, the AWS IoT Greengrass V2 console shows the deployment name as &lt;targetType&gt;:&lt;targetName&gt;, where targetType and targetName are the type and name of the deployment target.
+     * The name of the deployment.
      */
     deploymentName?: NonEmptyString;
     /**
@@ -567,7 +581,7 @@ declare namespace GreengrassV2 {
      */
     timeoutInSeconds?: OptionalInteger;
     /**
-     * Whether or not to notify components and wait for components to become safe to update. Choose from the following options:    NOTIFY_COMPONENTS – The deployment notifies each component before it stops and updates that component. Components can use the SubscribeToComponentUpdates IPC operation to receive these notifications. Then, components can respond with the DeferComponentUpdate IPC operation. For more information, see Create deployments in the AWS IoT Greengrass V2 Developer Guide.    SKIP_NOTIFY_COMPONENTS – The deployment doesn't notify components or wait for them to be safe to update.   Default: NOTIFY_COMPONENTS 
+     * Whether or not to notify components and wait for components to become safe to update. Choose from the following options:    NOTIFY_COMPONENTS – The deployment notifies each component before it stops and updates that component. Components can use the SubscribeToComponentUpdates IPC operation to receive these notifications. Then, components can respond with the DeferComponentUpdate IPC operation. For more information, see Create deployments in the IoT Greengrass V2 Developer Guide.    SKIP_NOTIFY_COMPONENTS – The deployment doesn't notify components or wait for them to be safe to update.   Default: NOTIFY_COMPONENTS 
      */
     action?: DeploymentComponentUpdatePolicyAction;
   }
@@ -644,7 +658,7 @@ declare namespace GreengrassV2 {
      */
     description?: DescriptionString;
     /**
-     * The status of the component version in AWS IoT Greengrass V2. This status is different from the status of the component on a core device.
+     * The status of the component version in IoT Greengrass V2. This status is different from the status of the component on a core device.
      */
     status?: CloudComponentStatus;
     /**
@@ -652,7 +666,7 @@ declare namespace GreengrassV2 {
      */
     platforms?: ComponentPlatformList;
     /**
-     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the AWS IoT Greengrass V2 Developer Guide.
+     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the IoT Greengrass V2 Developer Guide.
      */
     tags?: TagMap;
   }
@@ -660,14 +674,14 @@ declare namespace GreengrassV2 {
   export type DescriptionString = string;
   export interface DisassociateClientDeviceFromCoreDeviceEntry {
     /**
-     * The name of the AWS IoT thing that represents the client device to disassociate.
+     * The name of the IoT thing that represents the client device to disassociate.
      */
     thingName: IoTThingName;
   }
   export type DisassociateClientDeviceFromCoreDeviceEntryList = DisassociateClientDeviceFromCoreDeviceEntry[];
   export interface DisassociateClientDeviceFromCoreDeviceErrorEntry {
     /**
-     * The name of the AWS IoT thing whose disassociate request failed.
+     * The name of the IoT thing whose disassociate request failed.
      */
     thingName?: IoTThingName;
     /**
@@ -686,15 +700,15 @@ declare namespace GreengrassV2 {
      */
     deploymentId: DeploymentID;
     /**
-     * The name of the deployment. You can create deployments without names. If you create a deployment without a name, the AWS IoT Greengrass V2 console shows the deployment name as &lt;targetType&gt;:&lt;targetName&gt;, where targetType and targetName are the type and name of the deployment target.
+     * The name of the deployment.
      */
     deploymentName: DeploymentName;
     /**
-     * The ID of the AWS IoT job that applies the deployment to target devices.
+     * The ID of the IoT job that applies the deployment to target devices.
      */
     iotJobId?: IoTJobId;
     /**
-     * The ARN of the AWS IoT job that applies the deployment to target devices.
+     * The ARN of the IoT job that applies the deployment to target devices.
      */
     iotJobArn?: IoTJobARN;
     /**
@@ -702,11 +716,11 @@ declare namespace GreengrassV2 {
      */
     description?: Description;
     /**
-     * The ARN of the target AWS IoT thing or thing group.
+     * The ARN of the target IoT thing or thing group.
      */
     targetArn: TargetARN;
     /**
-     * The status of the deployment job on the AWS IoT Greengrass core device.
+     * The status of the deployment job on the Greengrass core device.
      */
     coreDeviceExecutionStatus: EffectiveDeploymentExecutionStatus;
     /**
@@ -747,7 +761,7 @@ declare namespace GreengrassV2 {
      */
     recipe: RecipeBlob;
     /**
-     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the AWS IoT Greengrass V2 Developer Guide.
+     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the IoT Greengrass V2 Developer Guide.
      */
     tags?: TagMap;
   }
@@ -769,17 +783,17 @@ declare namespace GreengrassV2 {
   }
   export interface GetCoreDeviceRequest {
     /**
-     * The name of the core device. This is also the name of the AWS IoT thing.
+     * The name of the core device. This is also the name of the IoT thing.
      */
     coreDeviceThingName: CoreDeviceThingName;
   }
   export interface GetCoreDeviceResponse {
     /**
-     * The name of the core device. This is also the name of the AWS IoT thing.
+     * The name of the core device. This is also the name of the IoT thing.
      */
     coreDeviceThingName?: CoreDeviceThingName;
     /**
-     * The version of the AWS IoT Greengrass Core software that the core device runs. This version is equivalent to the version of the AWS IoT Greengrass nucleus component that runs on the core device. For more information, see the AWS IoT Greengrass nucleus component in the AWS IoT Greengrass V2 Developer Guide.
+     * The version of the IoT Greengrass Core software that the core device runs. This version is equivalent to the version of the Greengrass nucleus component that runs on the core device. For more information, see the Greengrass nucleus component in the IoT Greengrass V2 Developer Guide.
      */
     coreVersion?: GGCVersion;
     /**
@@ -791,7 +805,7 @@ declare namespace GreengrassV2 {
      */
     architecture?: CoreDeviceArchitectureString;
     /**
-     * The status of the core device. The core device status can be:    HEALTHY – The AWS IoT Greengrass Core software and all components run on the core device without issue.    UNHEALTHY – The AWS IoT Greengrass Core software or a component is in a failed state on the core device.  
+     * The status of the core device. The core device status can be:    HEALTHY – The IoT Greengrass Core software and all components run on the core device without issue.    UNHEALTHY – The IoT Greengrass Core software or a component is in a failed state on the core device.  
      */
     status?: CoreDeviceStatus;
     /**
@@ -799,7 +813,7 @@ declare namespace GreengrassV2 {
      */
     lastStatusUpdateTimestamp?: Timestamp;
     /**
-     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the AWS IoT Greengrass V2 Developer Guide.
+     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the IoT Greengrass V2 Developer Guide.
      */
     tags?: TagMap;
   }
@@ -811,7 +825,7 @@ declare namespace GreengrassV2 {
   }
   export interface GetDeploymentResponse {
     /**
-     * The ARN of the target AWS IoT thing or thing group.
+     * The ARN of the target IoT thing or thing group.
      */
     targetArn?: TargetARN;
     /**
@@ -823,7 +837,7 @@ declare namespace GreengrassV2 {
      */
     deploymentId?: NonEmptyString;
     /**
-     * The name of the deployment. You can create deployments without names. If you create a deployment without a name, the AWS IoT Greengrass V2 console shows the deployment name as &lt;targetType&gt;:&lt;targetName&gt;, where targetType and targetName are the type and name of the deployment target.
+     * The name of the deployment.
      */
     deploymentName?: NullableString;
     /**
@@ -831,11 +845,11 @@ declare namespace GreengrassV2 {
      */
     deploymentStatus?: DeploymentStatus;
     /**
-     * The ID of the AWS IoT job that applies the deployment to target devices.
+     * The ID of the IoT job that applies the deployment to target devices.
      */
     iotJobId?: NullableString;
     /**
-     * The ARN of the AWS IoT job that applies the deployment to target devices.
+     * The ARN of the IoT job that applies the deployment to target devices.
      */
     iotJobArn?: IoTJobARN;
     /**
@@ -859,7 +873,7 @@ declare namespace GreengrassV2 {
      */
     isLatestForTarget?: IsLatestForTarget;
     /**
-     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the AWS IoT Greengrass V2 Developer Guide.
+     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the IoT Greengrass V2 Developer Guide.
      */
     tags?: TagMap;
   }
@@ -1006,7 +1020,7 @@ declare namespace GreengrassV2 {
      */
     topic: TopicString;
     /**
-     * The type of event source. Choose from the following options:    PUB_SUB – Subscribe to local publish/subscribe messages. This event source type doesn't support MQTT wildcards (+ and #) in the event source topic.    IOT_CORE – Subscribe to AWS IoT Core MQTT messages. This event source type supports MQTT wildcards (+ and #) in the event source topic.  
+     * The type of event source. Choose from the following options:    PUB_SUB – Subscribe to local publish/subscribe messages. This event source type doesn't support MQTT wildcards (+ and #) in the event source topic.    IOT_CORE – Subscribe to Amazon Web Services IoT Core MQTT messages. This event source type supports MQTT wildcards (+ and #) in the event source topic.  
      */
     type: LambdaEventSourceType;
   }
@@ -1016,11 +1030,11 @@ declare namespace GreengrassV2 {
   export type LambdaExecArgsList = LambdaExecArg[];
   export interface LambdaExecutionParameters {
     /**
-     * The list of event sources to which to subscribe to receive work messages. The Lambda function runs when it receives a message from an event source. You can subscribe this function to local publish/subscribe messages and AWS IoT Core MQTT messages.
+     * The list of event sources to which to subscribe to receive work messages. The Lambda function runs when it receives a message from an event source. You can subscribe this function to local publish/subscribe messages and Amazon Web Services IoT Core MQTT messages.
      */
     eventSources?: LambdaEventSourceList;
     /**
-     * The maximum size of the message queue for the Lambda function component. The AWS IoT Greengrass core stores messages in a FIFO (first-in-first-out) queue until it can run the Lambda function to consume each message.
+     * The maximum size of the message queue for the Lambda function component. The IoT Greengrass core stores messages in a FIFO (first-in-first-out) queue until it can run the Lambda function to consume each message.
      */
     maxQueueSize?: OptionalInteger;
     /**
@@ -1028,7 +1042,7 @@ declare namespace GreengrassV2 {
      */
     maxInstancesCount?: OptionalInteger;
     /**
-     * The maximum amount of time in seconds that a non-pinned Lambda function can idle before the AWS IoT Greengrass Core software stops its process.
+     * The maximum amount of time in seconds that a non-pinned Lambda function can idle before the IoT Greengrass Core software stops its process.
      */
     maxIdleTimeInSeconds?: OptionalInteger;
     /**
@@ -1040,7 +1054,7 @@ declare namespace GreengrassV2 {
      */
     statusTimeoutInSeconds?: OptionalInteger;
     /**
-     * Whether or not the Lambda function is pinned, or long-lived.   A pinned Lambda function starts when AWS IoT Greengrass starts and keeps running in its own container.   A non-pinned Lambda function starts only when it receives a work item and exists after it idles for maxIdleTimeInSeconds. If the function has multiple work items, the AWS IoT Greengrass Core software creates multiple instances of the function.   Default: true 
+     * Whether or not the Lambda function is pinned, or long-lived.   A pinned Lambda function starts when IoT Greengrass starts and keeps running in its own container.   A non-pinned Lambda function starts only when it receives a work item and exists after it idles for maxIdleTimeInSeconds. If the function has multiple work items, the IoT Greengrass Core software creates multiple instances of the function.   Default: true 
      */
     pinned?: OptionalBoolean;
     /**
@@ -1084,7 +1098,7 @@ declare namespace GreengrassV2 {
      */
     componentDependencies?: ComponentDependencyMap;
     /**
-     * The system and runtime parameters for the Lambda function as it runs on the AWS IoT Greengrass core device.
+     * The system and runtime parameters for the Lambda function as it runs on the Greengrass core device.
      */
     componentLambdaParameters?: LambdaExecutionParameters;
   }
@@ -1092,7 +1106,7 @@ declare namespace GreengrassV2 {
   export type LambdaIsolationMode = "GreengrassContainer"|"NoContainer"|string;
   export interface LambdaLinuxProcessParams {
     /**
-     * The isolation mode for the process that contains the Lambda function. The process can run in an isolated runtime environment inside the AWS IoT Greengrass container, or as a regular process outside any container. Default: GreengrassContainer 
+     * The isolation mode for the process that contains the Lambda function. The process can run in an isolated runtime environment inside the IoT Greengrass container, or as a regular process outside any container. Default: GreengrassContainer 
      */
     isolationMode?: LambdaIsolationMode;
     /**
@@ -1115,14 +1129,14 @@ declare namespace GreengrassV2 {
      */
     permission?: LambdaFilesystemPermission;
     /**
-     * Whether or not to add the AWS IoT Greengrass user group as an owner of the volume. Default: false 
+     * Whether or not to add the IoT Greengrass user group as an owner of the volume. Default: false 
      */
     addGroupOwner?: OptionalBoolean;
   }
   export type LifecycleStateDetails = string;
   export interface ListClientDevicesAssociatedWithCoreDeviceRequest {
     /**
-     * The name of the core device. This is also the name of the AWS IoT thing.
+     * The name of the core device. This is also the name of the IoT thing.
      */
     coreDeviceThingName: IoTThingName;
     /**
@@ -1194,11 +1208,11 @@ declare namespace GreengrassV2 {
   }
   export interface ListCoreDevicesRequest {
     /**
-     * The ARN of the AWS IoT thing group by which to filter. If you specify this parameter, the list includes only core devices that are members of this thing group.
+     * The ARN of the IoT thing group by which to filter. If you specify this parameter, the list includes only core devices that are members of this thing group.
      */
     thingGroupArn?: ThingGroupARN;
     /**
-     * The core device status by which to filter. If you specify this parameter, the list includes only core devices that have this status. Choose one of the following options:    HEALTHY – The AWS IoT Greengrass Core software and all components run on the core device without issue.    UNHEALTHY – The AWS IoT Greengrass Core software or a component is in a failed state on the core device.  
+     * The core device status by which to filter. If you specify this parameter, the list includes only core devices that have this status. Choose one of the following options:    HEALTHY – The IoT Greengrass Core software and all components run on the core device without issue.    UNHEALTHY – The IoT Greengrass Core software or a component is in a failed state on the core device.  
      */
     status?: CoreDeviceStatus;
     /**
@@ -1222,7 +1236,7 @@ declare namespace GreengrassV2 {
   }
   export interface ListDeploymentsRequest {
     /**
-     * The ARN of the target AWS IoT thing or thing group.
+     * The ARN of the target IoT thing or thing group.
      */
     targetArn?: TargetARN;
     /**
@@ -1250,7 +1264,7 @@ declare namespace GreengrassV2 {
   }
   export interface ListEffectiveDeploymentsRequest {
     /**
-     * The name of the core device. This is also the name of the AWS IoT thing.
+     * The name of the core device. This is also the name of the IoT thing.
      */
     coreDeviceThingName: CoreDeviceThingName;
     /**
@@ -1274,7 +1288,7 @@ declare namespace GreengrassV2 {
   }
   export interface ListInstalledComponentsRequest {
     /**
-     * The name of the core device. This is also the name of the AWS IoT thing.
+     * The name of the core device. This is also the name of the IoT thing.
      */
     coreDeviceThingName: CoreDeviceThingName;
     /**
@@ -1304,10 +1318,11 @@ declare namespace GreengrassV2 {
   }
   export interface ListTagsForResourceResponse {
     /**
-     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the AWS IoT Greengrass V2 Developer Guide.
+     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the IoT Greengrass V2 Developer Guide.
      */
     tags?: TagMap;
   }
+  export type Memory = number;
   export type NextTokenString = string;
   export type NonEmptyString = string;
   export type NullableString = string;
@@ -1355,6 +1370,16 @@ declare namespace GreengrassV2 {
   export type ResolvedComponentVersionsList = ResolvedComponentVersion[];
   export type String = string;
   export type StringMap = {[key: string]: NonEmptyString};
+  export interface SystemResourceLimits {
+    /**
+     * The maximum amount of RAM, expressed in kilobytes, that a component's processes can use on the core device.
+     */
+    memory?: Memory;
+    /**
+     * The maximum amount of CPU time that a component's processes can use on the core device. A core device's total CPU time is equivalent to the device's number of CPU cores. For example, on a core device with 4 CPU cores, you can set this value to 2 to limit the component's processes to 50 percent usage of each CPU core. On a device with 1 CPU core, you can set this value to 0.25 to limit the component's processes to 25 percent usage of the CPU. If you set this value to a number greater than the number of CPU cores, the IoT Greengrass Core software doesn't limit the component's CPU usage.
+     */
+    cpus?: CPU;
+  }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -1364,7 +1389,7 @@ declare namespace GreengrassV2 {
      */
     resourceArn: GenericV2ARN;
     /**
-     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the AWS IoT Greengrass V2 Developer Guide.
+     * A list of key-value pairs that contain metadata for the resource. For more information, see Tag your resources in the IoT Greengrass V2 Developer Guide.
      */
     tags: TagMap;
   }

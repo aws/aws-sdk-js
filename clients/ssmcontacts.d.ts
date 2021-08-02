@@ -230,6 +230,7 @@ declare class SSMContacts extends Service {
 }
 declare namespace SSMContacts {
   export type AcceptCode = string;
+  export type AcceptCodeValidation = "IGNORE"|"ENFORCE"|string;
   export interface AcceptPageRequest {
     /**
      * The Amazon Resource Name (ARN) of the engagement to a contact channel.
@@ -251,6 +252,10 @@ declare namespace SSMContacts {
      * The accept code is a 6-digit code used to acknowledge the page.
      */
     AcceptCode: AcceptCode;
+    /**
+     * An optional field that Incident Manager uses to ENFORCE AcceptCode validation when acknowledging an page. Acknowledgement can occur by replying to a page, or when entering the AcceptCode in the console. Enforcing AcceptCode validation causes Incident Manager to verify that the code entered by the user matches the code sent by Incident Manager with the page. Incident Manager can also IGNORE AcceptCode validation. Ignoring AcceptCode validation causes Incident Manager to accept any value entered for the AcceptCode.
+     */
+    AcceptCodeValidation?: AcceptCodeValidation;
   }
   export interface AcceptPageResult {
   }
@@ -905,7 +910,7 @@ declare namespace SSMContacts {
   export type SsmContactsArn = string;
   export interface Stage {
     /**
-     * The time to wait until beginning the next stage.
+     * The time to wait until beginning the next stage. The duration can only be set to 0 if a target is specified.
      */
     DurationInMinutes: StageDurationInMins;
     /**
