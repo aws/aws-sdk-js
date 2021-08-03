@@ -1182,6 +1182,7 @@ All burn-in and DVB-Sub font settings must match.
     MxfSettings?: MxfSettings;
   }
   export type ContainerType = "F4V"|"ISMV"|"M2TS"|"M3U8"|"CMFC"|"MOV"|"MP4"|"MPD"|"MXF"|"WEBM"|"RAW"|string;
+  export type CopyProtectionAction = "PASSTHROUGH"|"STRIP"|string;
   export interface CreateJobRequest {
     /**
      * Optional. Accelerated transcoding can significantly speed up jobs with long, visually complex content. Outputs that use this feature incur pro-tier pricing. For information about feature limitations, see the AWS Elemental MediaConvert User Guide.
@@ -1943,6 +1944,16 @@ All burn-in and DVB-Sub font settings must match.
      * Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. Form the XML document as per OC-SP-ESAM-API-I03-131025. The transcoder will use the signal processing instructions in the message that you supply. Provide your ESAM SignalProcessingNotification XML document inside your JSON job settings. For your MPEG2-TS file outputs, if you want the service to place SCTE-35 markers at the insertion points you specify in the XML document, you must also enable SCTE-35 ESAM (scte35Esam). Note that you can either specify an ESAM XML document or enable SCTE-35 passthrough. You can't do both.
      */
     SccXml?: __stringPatternSNSignalProcessingNotificationNS;
+  }
+  export interface ExtendedDataServices {
+    /**
+     * The action to take on copy and redistribution control XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions.
+     */
+    CopyProtectionAction?: CopyProtectionAction;
+    /**
+     * The action to take on content advisory XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions.
+     */
+    VchipAction?: VchipAction;
   }
   export type F4vMoovPlacement = "PROGRESSIVE_DOWNLOAD"|"NORMAL"|string;
   export interface F4vSettings {
@@ -3145,6 +3156,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     Esam?: EsamSettings;
     /**
+     * Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory.
+     */
+    ExtendedDataServices?: ExtendedDataServices;
+    /**
      * Use Inputs (inputs) to define source file used in the transcode job. There can be multiple inputs add in a job. These inputs will be concantenated together to create the output.
      */
     Inputs?: __listOfInput;
@@ -3246,6 +3261,10 @@ All burn-in and DVB-Sub font settings must match.
      * Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion, you can ignore these settings.
      */
     Esam?: EsamSettings;
+    /**
+     * Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory.
+     */
+    ExtendedDataServices?: ExtendedDataServices;
     /**
      * Use Inputs (inputs) to define the source file used in the transcode job. There can only be one input in a job template.  Using the API, you can include multiple inputs when referencing a job template.
      */
@@ -4997,6 +5016,7 @@ All burn-in and DVB-Sub font settings must match.
   }
   export type Vc3SlowPal = "DISABLED"|"ENABLED"|string;
   export type Vc3Telecine = "NONE"|"HARD"|string;
+  export type VchipAction = "PASSTHROUGH"|"STRIP"|string;
   export type VideoCodec = "AV1"|"AVC_INTRA"|"FRAME_CAPTURE"|"H_264"|"H_265"|"MPEG2"|"PRORES"|"VC3"|"VP8"|"VP9"|"XAVC"|string;
   export interface VideoCodecSettings {
     /**

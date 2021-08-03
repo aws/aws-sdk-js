@@ -3034,6 +3034,14 @@
         "RAW"
       ]
     },
+    "CopyProtectionAction": {
+      "type": "string",
+      "documentation": "The action to take on copy and redistribution control XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions.",
+      "enum": [
+        "PASSTHROUGH",
+        "STRIP"
+      ]
+    },
     "CreateJobRequest": {
       "type": "structure",
       "members": {
@@ -4509,6 +4517,22 @@
         }
       },
       "documentation": "ESAM SignalProcessingNotification data defined by OC-SP-ESAM-API-I03-131025."
+    },
+    "ExtendedDataServices": {
+      "type": "structure",
+      "members": {
+        "CopyProtectionAction": {
+          "shape": "CopyProtectionAction",
+          "locationName": "copyProtectionAction",
+          "documentation": "The action to take on copy and redistribution control XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions."
+        },
+        "VchipAction": {
+          "shape": "VchipAction",
+          "locationName": "vchipAction",
+          "documentation": "The action to take on content advisory XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions."
+        }
+      },
+      "documentation": "Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory."
     },
     "F4vMoovPlacement": {
       "type": "string",
@@ -6795,6 +6819,11 @@
           "locationName": "esam",
           "documentation": "Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion, you can ignore these settings."
         },
+        "ExtendedDataServices": {
+          "shape": "ExtendedDataServices",
+          "locationName": "extendedDataServices",
+          "documentation": "Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory."
+        },
         "Inputs": {
           "shape": "__listOfInput",
           "locationName": "inputs",
@@ -6950,6 +6979,11 @@
           "shape": "EsamSettings",
           "locationName": "esam",
           "documentation": "Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion, you can ignore these settings."
+        },
+        "ExtendedDataServices": {
+          "shape": "ExtendedDataServices",
+          "locationName": "extendedDataServices",
+          "documentation": "Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory."
         },
         "Inputs": {
           "shape": "__listOfInputTemplate",
@@ -10411,6 +10445,14 @@
       "enum": [
         "NONE",
         "HARD"
+      ]
+    },
+    "VchipAction": {
+      "type": "string",
+      "documentation": "The action to take on content advisory XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions.",
+      "enum": [
+        "PASSTHROUGH",
+        "STRIP"
       ]
     },
     "VideoCodec": {

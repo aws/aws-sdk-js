@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.959.0-->
+<!--LATEST=2.960.0-->
 <!--ENTRYINSERT-->
+
+## 2.960.0
+* feature: Glue: Add ConcurrentModificationException to create-table, delete-table, create-database, update-database, delete-database
+* feature: IoTSiteWise: My AWS Service (placeholder) - This release introduces custom Intervals and offset for tumbling window in metric for AWS IoT SiteWise.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added control over the passthrough of XDS captions metadata to outputs.
+* feature: Redshift: API support for Redshift Data Sharing feature.
 
 ## 2.959.0
 * feature: GreengrassV2: This release adds support for component system resource limits and idempotent Create operations. You can now specify the maximum amount of CPU and memory resources that each component can use.

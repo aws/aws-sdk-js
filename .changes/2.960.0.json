@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Add ConcurrentModificationException to create-table, delete-table, create-database, update-database, delete-database"
+    },
+    {
+        "type": "feature",
+        "category": "IoTSiteWise",
+        "description": "My AWS Service (placeholder) - This release introduces custom Intervals and offset for tumbling window in metric for AWS IoT SiteWise."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConvert",
+        "description": "AWS Elemental MediaConvert SDK has added control over the passthrough of XDS captions metadata to outputs."
+    },
+    {
+        "type": "feature",
+        "category": "Redshift",
+        "description": "API support for Redshift Data Sharing feature."
+    }
+]
