@@ -1176,7 +1176,6 @@
     "CreateTimelineEventInput": {
       "type": "structure",
       "required": [
-        "clientToken",
         "eventData",
         "eventTime",
         "eventType",
@@ -1190,7 +1189,7 @@
         },
         "eventData": {
           "shape": "EventData",
-          "documentation": "<p>A short description of the event.</p>"
+          "documentation": "<p>A valid JSON string. There is no other schema imposed. A short description of the event.</p>"
         },
         "eventTime": {
           "shape": "Timestamp",
@@ -1656,7 +1655,7 @@
         },
         "notificationTargets": {
           "shape": "NotificationTargetSet",
-          "documentation": "<p>The SNS targets that AWS Chatbot uses to notify the chat channels and perform actions on the incident record.</p>"
+          "documentation": "<p>The SNS targets that are notified when updates are made to an incident.</p>"
         },
         "resolvedTime": {
           "shape": "Timestamp",
@@ -1787,7 +1786,7 @@
         },
         "notificationTargets": {
           "shape": "NotificationTargetSet",
-          "documentation": "<p>The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel using the SNS topics. </p>"
+          "documentation": "<p>The SNS targets that are notified when updates are made to an incident.</p>"
         },
         "summary": {
           "shape": "IncidentSummary",
@@ -2090,7 +2089,7 @@
           "documentation": "<p>The Amazon Resource Name (ARN) of the SNS topic.</p>"
         }
       },
-      "documentation": "<p>The SNS topic that's used by AWS Chatbot to notify the incidents chat channel.</p>",
+      "documentation": "<p>The SNS targets that are notified when updates are made to an incident.</p>",
       "union": true
     },
     "NotificationTargetSet": {
@@ -2272,6 +2271,10 @@
         "status"
       ],
       "members": {
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the replication set.</p>"
+        },
         "createdBy": {
           "shape": "Arn",
           "documentation": "<p>Details about who created the replication set.</p>"
@@ -2769,7 +2772,7 @@
         },
         "notificationTargets": {
           "shape": "NotificationTargetSet",
-          "documentation": "<p>The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel using the SNS topics. </p> <p>Using multiple SNS topics creates redundancy in the case that a Region is down during the incident.</p>"
+          "documentation": "<p>The SNS targets that are notified when updates are made to an incident.</p> <p>Using multiple SNS topics creates redundancy in the case that a Region is down during the incident.</p>"
         },
         "status": {
           "shape": "IncidentRecordStatus",
@@ -2880,7 +2883,7 @@
         },
         "chatChannel": {
           "shape": "ChatChannel",
-          "documentation": "<p>The AWS Chatbot chat channel used for collaboration during an incident.</p>"
+          "documentation": "<p>The AWS Chatbot chat channel used for collaboration during an incident.</p> <p>Use the empty structure to remove the chat channel from the response plan.</p>"
         },
         "clientToken": {
           "shape": "ClientToken",
@@ -2905,7 +2908,7 @@
         },
         "incidentTemplateNotificationTargets": {
           "shape": "NotificationTargetSet",
-          "documentation": "<p>The SNS targets that AWS Chatbot uses to notify the chat channels and perform actions on the incident record.</p>"
+          "documentation": "<p>The SNS targets that are notified when updates are made to an incident.</p>"
         },
         "incidentTemplateSummary": {
           "shape": "IncidentSummary",
@@ -2924,7 +2927,6 @@
     "UpdateTimelineEventInput": {
       "type": "structure",
       "required": [
-        "clientToken",
         "eventId",
         "incidentRecordArn"
       ],

@@ -419,7 +419,7 @@ declare namespace Imagebuilder {
   }
   export interface Ami {
     /**
-     * The Region of the Amazon EC2 AMI.
+     * The Amazon Web Services Region of the Amazon EC2 AMI.
      */
     region?: NonEmptyString;
     /**
@@ -462,7 +462,7 @@ declare namespace Imagebuilder {
      */
     kmsKeyId?: NonEmptyString;
     /**
-     *  Launch permissions can be used to configure which accounts can use the AMI to launch instances.
+     *  Launch permissions can be used to configure which Amazon Web Services accounts can use the AMI to launch instances.
      */
     launchPermission?: LaunchPermissionConfiguration;
   }
@@ -2226,7 +2226,7 @@ declare namespace Imagebuilder {
   export type InstanceTypeList = InstanceType[];
   export interface LaunchPermissionConfiguration {
     /**
-     * The account ID.
+     * The Amazon Web Services account ID.
      */
     userIds?: AccountList;
     /**
@@ -2286,7 +2286,7 @@ declare namespace Imagebuilder {
      */
     owner?: Ownership;
     /**
-     * The filters.
+     * Use the following filters to streamline results:    description     name     platform     supportedOsVersion     type     version   
      */
     filters?: FilterList;
     /**
@@ -2322,7 +2322,7 @@ declare namespace Imagebuilder {
      */
     owner?: Ownership;
     /**
-     * Request filters that are used to narrow the list of container images that are returned.
+     * Use the following filters to streamline results:    containerType     name     parentImage     platform   
      */
     filters?: FilterList;
     /**
@@ -2350,7 +2350,7 @@ declare namespace Imagebuilder {
   }
   export interface ListDistributionConfigurationsRequest {
     /**
-     * The filters.    name - The name of this distribution configuration.  
+     * You can filter on name to streamline results.
      */
     filters?: FilterList;
     /**
@@ -2382,7 +2382,7 @@ declare namespace Imagebuilder {
      */
     imageVersionArn: ImageVersionArn;
     /**
-     * The filters.
+     * Use the following filters to streamline results:    name     osVersion     platform     type     version   
      */
     filters?: FilterList;
     /**
@@ -2442,7 +2442,7 @@ declare namespace Imagebuilder {
      */
     imagePipelineArn: ImagePipelineArn;
     /**
-     * The filters.
+     * Use the following filters to streamline results:    name     version   
      */
     filters?: FilterList;
     /**
@@ -2470,7 +2470,7 @@ declare namespace Imagebuilder {
   }
   export interface ListImagePipelinesRequest {
     /**
-     * The filters.
+     * Use the following filters to streamline results:    description     distributionConfigurationArn     imageRecipeArn     infrastructureConfigurationArn     name     status   
      */
     filters?: FilterList;
     /**
@@ -2502,7 +2502,7 @@ declare namespace Imagebuilder {
      */
     owner?: Ownership;
     /**
-     * The filters.
+     * Use the following filters to streamline results:    name     parentImage     platform   
      */
     filters?: FilterList;
     /**
@@ -2534,7 +2534,7 @@ declare namespace Imagebuilder {
      */
     owner?: Ownership;
     /**
-     * The filters.
+     * Use the following filters to streamline results:    name     osVersion     platform     type     version   
      */
     filters?: FilterList;
     /**
@@ -2570,7 +2570,7 @@ declare namespace Imagebuilder {
   }
   export interface ListInfrastructureConfigurationsRequest {
     /**
-     * The filters.
+     * You can filter on name to streamline results.
      */
     filters?: FilterList;
     /**

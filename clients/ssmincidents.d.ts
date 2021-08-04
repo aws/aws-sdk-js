@@ -384,9 +384,9 @@ declare namespace SSMIncidents {
     /**
      * A token ensuring that the action is called only once with the specified details.
      */
-    clientToken: ClientToken;
+    clientToken?: ClientToken;
     /**
-     * A short description of the event.
+     * A valid JSON string. There is no other schema imposed. A short description of the event.
      */
     eventData: EventData;
     /**
@@ -645,7 +645,7 @@ declare namespace SSMIncidents {
      */
     lastModifiedTime: Timestamp;
     /**
-     * The SNS targets that AWS Chatbot uses to notify the chat channels and perform actions on the incident record.
+     * The SNS targets that are notified when updates are made to an incident.
      */
     notificationTargets?: NotificationTargetSet;
     /**
@@ -727,7 +727,7 @@ declare namespace SSMIncidents {
      */
     impact: Impact;
     /**
-     * The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel using the SNS topics. 
+     * The SNS targets that are notified when updates are made to an incident.
      */
     notificationTargets?: NotificationTargetSet;
     /**
@@ -984,6 +984,10 @@ declare namespace SSMIncidents {
   }
   export interface ReplicationSet {
     /**
+     * The Amazon Resource Name (ARN) of the replication set.
+     */
+    arn?: Arn;
+    /**
      * Details about who created the replication set.
      */
     createdBy: Arn;
@@ -1225,7 +1229,7 @@ declare namespace SSMIncidents {
      */
     impact?: Impact;
     /**
-     * The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an incident. You can also make updates to the incident through the chat channel using the SNS topics.  Using multiple SNS topics creates redundancy in the case that a Region is down during the incident.
+     * The SNS targets that are notified when updates are made to an incident. Using multiple SNS topics creates redundancy in the case that a Region is down during the incident.
      */
     notificationTargets?: NotificationTargetSet;
     /**
@@ -1296,7 +1300,7 @@ declare namespace SSMIncidents {
      */
     arn: Arn;
     /**
-     * The AWS Chatbot chat channel used for collaboration during an incident.
+     * The AWS Chatbot chat channel used for collaboration during an incident. Use the empty structure to remove the chat channel from the response plan.
      */
     chatChannel?: ChatChannel;
     /**
@@ -1320,7 +1324,7 @@ declare namespace SSMIncidents {
      */
     incidentTemplateImpact?: Impact;
     /**
-     * The SNS targets that AWS Chatbot uses to notify the chat channels and perform actions on the incident record.
+     * The SNS targets that are notified when updates are made to an incident.
      */
     incidentTemplateNotificationTargets?: NotificationTargetSet;
     /**
@@ -1338,7 +1342,7 @@ declare namespace SSMIncidents {
     /**
      * A token ensuring that the action is called only once with the specified details.
      */
-    clientToken: ClientToken;
+    clientToken?: ClientToken;
     /**
      * A short description of the event.
      */

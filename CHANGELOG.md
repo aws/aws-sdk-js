@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.960.0-->
+<!--LATEST=2.961.0-->
 <!--ENTRYINSERT-->
+
+## 2.961.0
+* feature: RDS: This release adds AutomaticRestartTime to the DescribeDBInstances and DescribeDBClusters operations. AutomaticRestartTime indicates the time when a stopped DB instance or DB cluster is restarted automatically.
+* feature: SSMIncidents: Documentation updates for Incident Manager.
+* feature: TranscribeService: This release adds support for call analytics (batch) within Amazon Transcribe.
 
 ## 2.960.0
 * feature: Glue: Add ConcurrentModificationException to create-table, delete-table, create-database, update-database, delete-database

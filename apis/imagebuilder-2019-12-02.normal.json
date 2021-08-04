@@ -1910,7 +1910,7 @@
       "members": {
         "region": {
           "shape": "NonEmptyString",
-          "documentation": "<p>The Region of the Amazon EC2 AMI.</p>"
+          "documentation": "<p>The Amazon Web Services Region of the Amazon EC2 AMI.</p>"
         },
         "image": {
           "shape": "NonEmptyString",
@@ -1959,7 +1959,7 @@
         },
         "launchPermission": {
           "shape": "LaunchPermissionConfiguration",
-          "documentation": "<p> Launch permissions can be used to configure which accounts can use the AMI to launch instances.</p>"
+          "documentation": "<p> Launch permissions can be used to configure which Amazon Web Services accounts can use the AMI to launch instances.</p>"
         }
       },
       "documentation": "<p> Define and configure the output AMIs of the pipeline.</p>"
@@ -2314,7 +2314,7 @@
           "documentation": "<p>The date that the component was created.</p>"
         }
       },
-      "documentation": "<p>The defining characteristics of a specific version of an TOE component.</p>"
+      "documentation": "<p>The defining characteristics of a specific version of an Amazon Web Services TOE component.</p>"
     },
     "ComponentVersionArn": {
       "type": "string",
@@ -4456,7 +4456,7 @@
       "members": {
         "userIds": {
           "shape": "AccountList",
-          "documentation": "<p>The account ID.</p>"
+          "documentation": "<p>The Amazon Web Services account ID.</p>"
         },
         "userGroups": {
           "shape": "StringList",
@@ -4557,7 +4557,7 @@
         },
         "filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p>"
+          "documentation": "<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>description</code> </p> </li> <li> <p> <code>name</code> </p> </li> <li> <p> <code>platform</code> </p> </li> <li> <p> <code>supportedOsVersion</code> </p> </li> <li> <p> <code>type</code> </p> </li> <li> <p> <code>version</code> </p> </li> </ul>"
         },
         "byName": {
           "shape": "Boolean",
@@ -4600,7 +4600,7 @@
         },
         "filters": {
           "shape": "FilterList",
-          "documentation": "<p>Request filters that are used to narrow the list of container images that are returned.</p>"
+          "documentation": "<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>containerType</code> </p> </li> <li> <p> <code>name</code> </p> </li> <li> <p> <code>parentImage</code> </p> </li> <li> <p> <code>platform</code> </p> </li> </ul>"
         },
         "maxResults": {
           "shape": "RestrictedInteger",
@@ -4635,7 +4635,7 @@
       "members": {
         "filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p> <ul> <li> <p> <code>name</code> - The name of this distribution configuration.</p> </li> </ul>"
+          "documentation": "<p>You can filter on <code>name</code> to streamline results.</p>"
         },
         "maxResults": {
           "shape": "RestrictedInteger",
@@ -4677,7 +4677,7 @@
         },
         "filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p>"
+          "documentation": "<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>name</code> </p> </li> <li> <p> <code>osVersion</code> </p> </li> <li> <p> <code>platform</code> </p> </li> <li> <p> <code>type</code> </p> </li> <li> <p> <code>version</code> </p> </li> </ul>"
         },
         "maxResults": {
           "shape": "RestrictedInteger",
@@ -4757,7 +4757,7 @@
         },
         "filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p>"
+          "documentation": "<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>name</code> </p> </li> <li> <p> <code>version</code> </p> </li> </ul>"
         },
         "maxResults": {
           "shape": "RestrictedInteger",
@@ -4792,7 +4792,7 @@
       "members": {
         "filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p>"
+          "documentation": "<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>description</code> </p> </li> <li> <p> <code>distributionConfigurationArn</code> </p> </li> <li> <p> <code>imageRecipeArn</code> </p> </li> <li> <p> <code>infrastructureConfigurationArn</code> </p> </li> <li> <p> <code>name</code> </p> </li> <li> <p> <code>status</code> </p> </li> </ul>"
         },
         "maxResults": {
           "shape": "RestrictedInteger",
@@ -4831,7 +4831,7 @@
         },
         "filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p>"
+          "documentation": "<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>name</code> </p> </li> <li> <p> <code>parentImage</code> </p> </li> <li> <p> <code>platform</code> </p> </li> </ul>"
         },
         "maxResults": {
           "shape": "RestrictedInteger",
@@ -4870,7 +4870,7 @@
         },
         "filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p>"
+          "documentation": "<p>Use the following filters to streamline results:</p> <ul> <li> <p> <code>name</code> </p> </li> <li> <p> <code>osVersion</code> </p> </li> <li> <p> <code>platform</code> </p> </li> <li> <p> <code>type</code> </p> </li> <li> <p> <code>version</code> </p> </li> </ul>"
         },
         "byName": {
           "shape": "Boolean",
@@ -4913,7 +4913,7 @@
       "members": {
         "filters": {
           "shape": "FilterList",
-          "documentation": "<p>The filters.</p>"
+          "documentation": "<p>You can filter on <code>name</code> to streamline results.</p>"
         },
         "maxResults": {
           "shape": "RestrictedInteger",
