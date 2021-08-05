@@ -56,6 +56,22 @@ describe('region_config.js', function() {
     expect(service.endpoint.host).to.equal('route53.amazonaws.com.cn');
   });
 
+  it('uses "global" endpoint for SavingsPlans in us-east-1', function() {
+    var service = new AWS.SavingsPlans({
+      region: 'us-east-1'
+    });
+    expect(service.isGlobalEndpoint).to.equal(true);
+    expect(service.endpoint.host).to.equal('savingsplans.amazonaws.com');
+  });
+
+  it('uses "global" endpoint for SavingsPlans in ap-southeast-1', function() {
+    var service = new AWS.SavingsPlans({
+      region: 'ap-southeast-1'
+    });
+    expect(service.isGlobalEndpoint).to.equal(true);
+    expect(service.endpoint.host).to.equal('savingsplans.amazonaws.com');
+  });
+
   it('enables signature version 4 signing in cn-*', function() {
     var service = new AWS.IAM({
       region: 'cn-north-1'
