@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.961.0-->
+<!--LATEST=2.962.0-->
 <!--ENTRYINSERT-->
+
+## 2.962.0
+* feature: AutoScaling: EC2 Auto Scaling adds configuration checks and Launch Template validation to Instance Refresh.
+* feature: LexModelsV2: Customers can now toggle the active field on prompts and responses.
 
 ## 2.961.0
 * feature: RDS: This release adds AutomaticRestartTime to the DescribeDBInstances and DescribeDBClusters operations. AutomaticRestartTime indicates the time when a stopped DB instance or DB cluster is restarted automatically.

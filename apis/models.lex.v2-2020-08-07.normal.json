@@ -1994,7 +1994,7 @@
           "documentation": "<p>The version of the bot that was exported. This will be either <code>DRAFT</code> or the version number.</p>"
         }
       },
-      "documentation": "<p>Provided the identity of a the bot that was exported.</p>"
+      "documentation": "<p>Provides the identity of a the bot that was exported.</p>"
     },
     "BotFilter": {
       "type": "structure",
@@ -5109,6 +5109,10 @@
         "closingResponse": {
           "shape": "ResponseSpecification",
           "documentation": "<p>The response that Amazon Lex sends to the user when the intent is complete.</p>"
+        },
+        "active": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Specifies whether an intent's closing response is used. When this field is false, the closing response isn't sent to the user and no closing input from the user is used. If the <code>active</code> field isn't specified, the default is true.</p>"
         }
       },
       "documentation": "<p>Provides a statement the Amazon Lex conveys to the user when the intent is successfully fulfilled.</p>"
@@ -5127,6 +5131,10 @@
         "declinationResponse": {
           "shape": "ResponseSpecification",
           "documentation": "<p>When the user answers \"no\" to the question defined in <code>promptSpecification</code>, Amazon Lex responds with this response to acknowledge that the intent was canceled. </p>"
+        },
+        "active": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Specifies whether the intent's confirmation is sent to the user. When this field is false, confirmation and declination responses aren't sent and processing continues as if the responses aren't present. If the <code>active</code> field isn't specified, the default is true.</p>"
         }
       },
       "documentation": "<p>Provides a prompt for making sure that the user is ready for the intent to be fulfilled.</p>"
@@ -6122,7 +6130,7 @@
     },
     "PriorityValue": {
       "type": "integer",
-      "max": 25,
+      "max": 100,
       "min": 0
     },
     "PromptMaxRetries": {
@@ -7672,6 +7680,10 @@
         "stillWaitingResponse": {
           "shape": "StillWaitingResponseSpecification",
           "documentation": "<p>A response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user.</p>"
+        },
+        "active": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Specifies whether the bot will wait for a user to respond. When this field is false, wait and continue responses for a slot aren't used and the bot expects an appropriate response within the configured timeout. If the <code>active</code> field isn't specified, the default is true.</p>"
         }
       },
       "documentation": "<p>Specifies the prompts that Amazon Lex uses while a bot is waiting for customer input. </p>"

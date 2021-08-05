@@ -2563,6 +2563,10 @@ declare namespace LexModelsV2 {
      * The response that Amazon Lex sends to the user when the intent is complete.
      */
     closingResponse: ResponseSpecification;
+    /**
+     * Specifies whether an intent's closing response is used. When this field is false, the closing response isn't sent to the user and no closing input from the user is used. If the active field isn't specified, the default is true.
+     */
+    active?: BoxedBoolean;
   }
   export interface IntentConfirmationSetting {
     /**
@@ -2573,6 +2577,10 @@ declare namespace LexModelsV2 {
      * When the user answers "no" to the question defined in promptSpecification, Amazon Lex responds with this response to acknowledge that the intent was canceled. 
      */
     declinationResponse: ResponseSpecification;
+    /**
+     * Specifies whether the intent's confirmation is sent to the user. When this field is false, confirmation and declination responses aren't sent and processing continues as if the responses aren't present. If the active field isn't specified, the default is true.
+     */
+    active?: BoxedBoolean;
   }
   export interface IntentFilter {
     /**
@@ -4190,6 +4198,10 @@ declare namespace LexModelsV2 {
      * A response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user.
      */
     stillWaitingResponse?: StillWaitingResponseSpecification;
+    /**
+     * Specifies whether the bot will wait for a user to respond. When this field is false, wait and continue responses for a slot aren't used and the bot expects an appropriate response within the configured timeout. If the active field isn't specified, the default is true.
+     */
+    active?: BoxedBoolean;
   }
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
