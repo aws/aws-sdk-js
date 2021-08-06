@@ -1053,5 +1053,13 @@
   "route53recoveryreadiness": {
     "prefix": "route53-recovery-readiness",
     "name": "Route53RecoveryReadiness"
+  },
+  "chimesdkidentity": {
+    "prefix": "chime-sdk-identity",
+    "name": "ChimeSDKIdentity"
+  },
+  "chimesdkmessaging": {
+    "prefix": "chime-sdk-messaging",
+    "name": "ChimeSDKMessaging"
   }
 }

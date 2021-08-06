@@ -76,6 +76,14 @@ declare class Connect extends Service {
    */
   associateSecurityKey(callback?: (err: AWSError, data: Connect.Types.AssociateSecurityKeyResponse) => void): Request<Connect.Types.AssociateSecurityKeyResponse, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and is subject to change. Creates an agent status for the specified Amazon Connect instance.
+   */
+  createAgentStatus(params: Connect.Types.CreateAgentStatusRequest, callback?: (err: AWSError, data: Connect.Types.CreateAgentStatusResponse) => void): Request<Connect.Types.CreateAgentStatusResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Creates an agent status for the specified Amazon Connect instance.
+   */
+  createAgentStatus(callback?: (err: AWSError, data: Connect.Types.CreateAgentStatusResponse) => void): Request<Connect.Types.CreateAgentStatusResponse, AWSError>;
+  /**
    * Creates a contact flow for the specified Amazon Connect instance. You can also create and update contact flows using the Amazon Connect Flow language.
    */
   createContactFlow(params: Connect.Types.CreateContactFlowRequest, callback?: (err: AWSError, data: Connect.Types.CreateContactFlowResponse) => void): Request<Connect.Types.CreateContactFlowResponse, AWSError>;
@@ -83,6 +91,14 @@ declare class Connect extends Service {
    * Creates a contact flow for the specified Amazon Connect instance. You can also create and update contact flows using the Amazon Connect Flow language.
    */
   createContactFlow(callback?: (err: AWSError, data: Connect.Types.CreateContactFlowResponse) => void): Request<Connect.Types.CreateContactFlowResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Creates hours of operation. 
+   */
+  createHoursOfOperation(params: Connect.Types.CreateHoursOfOperationRequest, callback?: (err: AWSError, data: Connect.Types.CreateHoursOfOperationResponse) => void): Request<Connect.Types.CreateHoursOfOperationResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Creates hours of operation. 
+   */
+  createHoursOfOperation(callback?: (err: AWSError, data: Connect.Types.CreateHoursOfOperationResponse) => void): Request<Connect.Types.CreateHoursOfOperationResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Initiates an Amazon Connect instance with all the supported channels enabled. It does not attach any storage, such as Amazon Simple Storage Service (Amazon S3) or Amazon Kinesis. It also does not allow for any configurations on features, such as Contact Lens for Amazon Connect.  Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. You must wait 30 days before you can restart creating and deleting instances in your account.
    */
@@ -148,6 +164,14 @@ declare class Connect extends Service {
    */
   createUserHierarchyGroup(callback?: (err: AWSError, data: Connect.Types.CreateUserHierarchyGroupResponse) => void): Request<Connect.Types.CreateUserHierarchyGroupResponse, AWSError>;
   /**
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes an hours of operation.
+   */
+  deleteHoursOfOperation(params: Connect.Types.DeleteHoursOfOperationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Deletes an hours of operation.
+   */
+  deleteHoursOfOperation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * This API is in preview release for Amazon Connect and is subject to change. Deletes the Amazon Connect instance. Amazon Connect enforces a limit on the total number of instances that you can create or delete in 30 days. If you exceed this limit, you will get an error message indicating there has been an excessive number of attempts at creating or deleting instances. You must wait 30 days before you can restart creating and deleting instances in your account.
    */
   deleteInstance(params: Connect.Types.DeleteInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -195,6 +219,14 @@ declare class Connect extends Service {
    * Deletes an existing user hierarchy group. It must not be associated with any agents or have any active child groups.
    */
   deleteUserHierarchyGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Describes an agent status.
+   */
+  describeAgentStatus(params: Connect.Types.DescribeAgentStatusRequest, callback?: (err: AWSError, data: Connect.Types.DescribeAgentStatusResponse) => void): Request<Connect.Types.DescribeAgentStatusResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Describes an agent status.
+   */
+  describeAgentStatus(callback?: (err: AWSError, data: Connect.Types.DescribeAgentStatusResponse) => void): Request<Connect.Types.DescribeAgentStatusResponse, AWSError>;
   /**
    * Describes the specified contact flow. You can also create and update contact flows using the Amazon Connect Flow language.
    */
@@ -379,6 +411,14 @@ declare class Connect extends Service {
    * Gets historical metric data from the specified Amazon Connect instance. For a description of each historical metric, see Historical Metrics Definitions in the Amazon Connect Administrator Guide.
    */
   getMetricData(callback?: (err: AWSError, data: Connect.Types.GetMetricDataResponse) => void): Request<Connect.Types.GetMetricDataResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Lists agent statuses.
+   */
+  listAgentStatuses(params: Connect.Types.ListAgentStatusRequest, callback?: (err: AWSError, data: Connect.Types.ListAgentStatusResponse) => void): Request<Connect.Types.ListAgentStatusResponse, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Lists agent statuses.
+   */
+  listAgentStatuses(callback?: (err: AWSError, data: Connect.Types.ListAgentStatusResponse) => void): Request<Connect.Types.ListAgentStatusResponse, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Returns a paginated list of all approved origins associated with the instance.
    */
@@ -628,11 +668,11 @@ declare class Connect extends Service {
    */
   suspendContactRecording(callback?: (err: AWSError, data: Connect.Types.SuspendContactRecordingResponse) => void): Request<Connect.Types.SuspendContactRecordingResponse, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, and contact flows. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
+   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, contact flows, agent status, and hours of operation. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   tagResource(params: Connect.Types.TagResourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, and contact flows. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
+   * Adds the specified tags to the specified resource. The supported resource types are users, routing profiles, queues, quick connects, contact flows, agent status, and hours of operation. For sample policies that use tags, see Amazon Connect Identity-Based Policy Examples in the Amazon Connect Administrator Guide.
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -643,6 +683,14 @@ declare class Connect extends Service {
    * Removes the specified tags from the specified resource.
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates agent status.
+   */
+  updateAgentStatus(params: Connect.Types.UpdateAgentStatusRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates agent status.
+   */
+  updateAgentStatus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Creates or updates user-defined contact attributes associated with the specified contact. You can create or update user-defined attributes for both ongoing and completed contacts. For example, while the call is active, you can update the customer's name or the reason the customer called. You can add notes about steps that the agent took during the call that display to the next agent that takes the call. You can also update attributes for a contact using data from your CRM application and save the data with the contact in Amazon Connect. You could also flag calls for additional analysis, such as legal review or to identify abusive callers. Contact attributes are available in Amazon Connect for 24 months, and are then deleted. For information about CTR retention and the maximum size of the CTR attributes section, see Feature specifications in the Amazon Connect Administrator Guide.   Important: You cannot use the operation to update attributes for contacts that occurred prior to the release of the API, which was September 12, 2018. You can update attributes only for contacts that started after the release of the API. If you attempt to update attributes for a contact that occurred prior to the release of the API, a 400 error is returned. This applies also to queued callbacks that were initiated prior to the release of the API but are still active in your instance.
    */
@@ -667,6 +715,14 @@ declare class Connect extends Service {
    * The name of the contact flow. You can also create and update contact flows using the Amazon Connect Flow language.
    */
   updateContactFlowName(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the hours of operation.
+   */
+  updateHoursOfOperation(params: Connect.Types.UpdateHoursOfOperationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This API is in preview release for Amazon Connect and is subject to change. Updates the hours of operation.
+   */
+  updateHoursOfOperation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * This API is in preview release for Amazon Connect and is subject to change. Updates the value for the specified attribute type.
    */
@@ -833,6 +889,66 @@ declare namespace Connect {
   export type AfterContactWorkTimeLimit = number;
   export type AgentFirstName = string;
   export type AgentLastName = string;
+  export interface AgentStatus {
+    /**
+     * The Amazon Resource Name (ARN) of the agent status.
+     */
+    AgentStatusARN?: ARN;
+    /**
+     * The identifier of the agent status.
+     */
+    AgentStatusId?: AgentStatusId;
+    /**
+     * The name of the agent status.
+     */
+    Name?: AgentStatusName;
+    /**
+     * The description of the agent status.
+     */
+    Description?: AgentStatusDescription;
+    /**
+     * The type of agent status.
+     */
+    Type?: AgentStatusType;
+    /**
+     * The display order of the agent status.
+     */
+    DisplayOrder?: AgentStatusOrderNumber;
+    /**
+     * The state of the agent status.
+     */
+    State?: AgentStatusState;
+    /**
+     * One or more tags.
+     */
+    Tags?: TagMap;
+  }
+  export type AgentStatusDescription = string;
+  export type AgentStatusId = string;
+  export type AgentStatusName = string;
+  export type AgentStatusOrderNumber = number;
+  export type AgentStatusState = "ENABLED"|"DISABLED"|string;
+  export interface AgentStatusSummary {
+    /**
+     * The identifier for an agent status.
+     */
+    Id?: AgentStatusId;
+    /**
+     * The Amazon Resource Name (ARN) for the agent status.
+     */
+    Arn?: ARN;
+    /**
+     * The name of the agent status.
+     */
+    Name?: AgentStatusName;
+    /**
+     * The type of the agent status.
+     */
+    Type?: AgentStatusType;
+  }
+  export type AgentStatusSummaryList = AgentStatusSummary[];
+  export type AgentStatusType = "ROUTABLE"|"CUSTOM"|"OFFLINE"|string;
+  export type AgentStatusTypes = AgentStatusType[];
   export type AgentUsername = string;
   export type AliasArn = string;
   export interface AssociateApprovedOriginRequest {
@@ -956,6 +1072,7 @@ declare namespace Connect {
   export type Attributes = {[key: string]: AttributeValue};
   export type AttributesList = Attribute[];
   export type AutoAccept = boolean;
+  export type Boolean = boolean;
   export type BotName = string;
   export type BucketName = string;
   export type Channel = "VOICE"|"CHAT"|"TASK"|string;
@@ -973,7 +1090,6 @@ declare namespace Connect {
     Content: ChatContent;
   }
   export type ClientToken = string;
-  export type CommonDescriptionLength250 = string;
   export type CommonNameLength127 = string;
   export type Comparison = "LT"|string;
   export type Concurrency = number;
@@ -1034,6 +1150,42 @@ declare namespace Connect {
   export type ContactFlowTypes = ContactFlowType[];
   export type ContactId = string;
   export type ContactReferences = {[key: string]: Reference};
+  export interface CreateAgentStatusRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The name of the status.
+     */
+    Name: AgentStatusName;
+    /**
+     * The description of the status.
+     */
+    Description?: AgentStatusDescription;
+    /**
+     * The state of the status.
+     */
+    State: AgentStatusState;
+    /**
+     * The display order of the status.
+     */
+    DisplayOrder?: AgentStatusOrderNumber;
+    /**
+     * One or more tags.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateAgentStatusResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the agent status.
+     */
+    AgentStatusARN?: ARN;
+    /**
+     * The identifier of the agent status.
+     */
+    AgentStatusId?: AgentStatusId;
+  }
   export interface CreateContactFlowRequest {
     /**
      * The identifier of the Amazon Connect instance.
@@ -1069,6 +1221,42 @@ declare namespace Connect {
      * The Amazon Resource Name (ARN) of the contact flow.
      */
     ContactFlowArn?: ARN;
+  }
+  export interface CreateHoursOfOperationRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The name of the hours of operation.
+     */
+    Name: CommonNameLength127;
+    /**
+     * The description of the hours of operation.
+     */
+    Description?: HoursOfOperationDescription;
+    /**
+     * The time zone of the hours of operation.
+     */
+    TimeZone: TimeZone;
+    /**
+     * Configuration information for the hours of operation: day, start time, and end time.
+     */
+    Config: HoursOfOperationConfigList;
+    /**
+     * One or more tags.
+     */
+    Tags?: TagMap;
+  }
+  export interface CreateHoursOfOperationResponse {
+    /**
+     * The identifier for the hours of operation.
+     */
+    HoursOfOperationId?: HoursOfOperationId;
+    /**
+     * The Amazon Resource Name (ARN) for the hours of operation.
+     */
+    HoursOfOperationArn?: ARN;
   }
   export interface CreateInstanceRequest {
     /**
@@ -1419,6 +1607,16 @@ declare namespace Connect {
   export type CurrentMetricResults = CurrentMetricResult[];
   export type CurrentMetrics = CurrentMetric[];
   export type Delay = number;
+  export interface DeleteHoursOfOperationRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the hours of operation.
+     */
+    HoursOfOperationId: HoursOfOperationId;
+  }
   export interface DeleteInstanceRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -1478,6 +1676,22 @@ declare namespace Connect {
      * The identifier of the user.
      */
     UserId: UserId;
+  }
+  export interface DescribeAgentStatusRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier for the agent status.
+     */
+    AgentStatusId: AgentStatusId;
+  }
+  export interface DescribeAgentStatusResponse {
+    /**
+     * The agent status.
+     */
+    AgentStatus?: AgentStatus;
   }
   export interface DescribeContactFlowRequest {
     /**
@@ -2089,7 +2303,7 @@ declare namespace Connect {
     /**
      * The description for the hours of operation.
      */
-    Description?: CommonDescriptionLength250;
+    Description?: HoursOfOperationDescription;
     /**
      * The time zone for the hours of operation.
      */
@@ -2107,18 +2321,19 @@ declare namespace Connect {
     /**
      * The day that the hours of operation applies to.
      */
-    Day?: HoursOfOperationDays;
+    Day: HoursOfOperationDays;
     /**
      * The start time that your contact center is open.
      */
-    StartTime?: HoursOfOperationTimeSlice;
+    StartTime: HoursOfOperationTimeSlice;
     /**
      * The end time that your contact center is closes.
      */
-    EndTime?: HoursOfOperationTimeSlice;
+    EndTime: HoursOfOperationTimeSlice;
   }
   export type HoursOfOperationConfigList = HoursOfOperationConfig[];
   export type HoursOfOperationDays = "SUNDAY"|"MONDAY"|"TUESDAY"|"WEDNESDAY"|"THURSDAY"|"FRIDAY"|"SATURDAY"|string;
+  export type HoursOfOperationDescription = string;
   export type HoursOfOperationId = string;
   export type HoursOfOperationName = string;
   export interface HoursOfOperationSummary {
@@ -2140,11 +2355,11 @@ declare namespace Connect {
     /**
      * The hours.
      */
-    Hours?: Hours24Format;
+    Hours: Hours24Format;
     /**
      * The minutes.
      */
-    Minutes?: MinutesLimit60;
+    Minutes: MinutesLimit60;
   }
   export type InboundCallsEnabled = boolean;
   export interface Instance {
@@ -2357,6 +2572,34 @@ declare namespace Connect {
     AliasArn?: AliasArn;
   }
   export type LexVersion = "V1"|"V2"|string;
+  export interface ListAgentStatusRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return per page.
+     */
+    MaxResults?: MaxResult1000;
+    /**
+     * Available agent status types.
+     */
+    AgentStatusTypes?: AgentStatusTypes;
+  }
+  export interface ListAgentStatusResponse {
+    /**
+     * If there are additional results, this is the token for the next set of results.
+     */
+    NextToken?: NextToken;
+    /**
+     * A summary of agent statuses.
+     */
+    AgentStatusSummaryList?: AgentStatusSummaryList;
+  }
   export interface ListApprovedOriginsRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -3596,6 +3839,37 @@ declare namespace Connect {
      */
     tagKeys: TagKeyList;
   }
+  export type UpdateAgentStatusDescription = string;
+  export interface UpdateAgentStatusRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the agent status.
+     */
+    AgentStatusId: AgentStatusId;
+    /**
+     * The name of the agent status.
+     */
+    Name?: AgentStatusName;
+    /**
+     * The description of the agent status.
+     */
+    Description?: UpdateAgentStatusDescription;
+    /**
+     * The state of the agent status.
+     */
+    State?: AgentStatusState;
+    /**
+     * The display order of the agent status.
+     */
+    DisplayOrder?: AgentStatusOrderNumber;
+    /**
+     * A number indicating the reset order of the agent status.
+     */
+    ResetOrderNumber?: Boolean;
+  }
   export interface UpdateContactAttributesRequest {
     /**
      * The identifier of the contact. This is the identifier of the contact associated with the first interaction with the contact center.
@@ -3643,6 +3917,33 @@ declare namespace Connect {
      * The description of the contact flow.
      */
     Description?: ContactFlowDescription;
+  }
+  export type UpdateHoursOfOperationDescription = string;
+  export interface UpdateHoursOfOperationRequest {
+    /**
+     * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
+     */
+    InstanceId: InstanceId;
+    /**
+     * The identifier of the hours of operation.
+     */
+    HoursOfOperationId: HoursOfOperationId;
+    /**
+     * The name of the hours of operation.
+     */
+    Name?: CommonNameLength127;
+    /**
+     * The description of the hours of operation.
+     */
+    Description?: UpdateHoursOfOperationDescription;
+    /**
+     * The time zone of the hours of operation.
+     */
+    TimeZone?: TimeZone;
+    /**
+     * Configuration information of the hours of operation.
+     */
+    Config?: HoursOfOperationConfigList;
   }
   export interface UpdateInstanceAttributeRequest {
     /**

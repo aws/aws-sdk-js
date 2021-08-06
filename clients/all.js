@@ -273,5 +273,7 @@ module.exports = {
   Proton: require('./proton'),
   Route53RecoveryCluster: require('./route53recoverycluster'),
   Route53RecoveryControlConfig: require('./route53recoverycontrolconfig'),
-  Route53RecoveryReadiness: require('./route53recoveryreadiness')
+  Route53RecoveryReadiness: require('./route53recoveryreadiness'),
+  ChimeSDKIdentity: require('./chimesdkidentity'),
+  ChimeSDKMessaging: require('./chimesdkmessaging')
 };

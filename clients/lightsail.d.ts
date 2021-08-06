@@ -1255,6 +1255,24 @@ declare namespace Lightsail {
      * The timestamp when the access key was created.
      */
     createdAt?: IsoDate;
+    /**
+     * An object that describes the last time the access key was used.  This object does not include data in the response of a CreateBucketAccessKey action. If the access key has not been used, the region and serviceName values are N/A, and the lastUsedDate value is null. 
+     */
+    lastUsed?: AccessKeyLastUsed;
+  }
+  export interface AccessKeyLastUsed {
+    /**
+     * The date and time when the access key was most recently used. This value is null if the access key has not been used.
+     */
+    lastUsedDate?: IsoDate;
+    /**
+     * The AWS Region where this access key was most recently used. This value is N/A if the access key has not been used.
+     */
+    region?: string;
+    /**
+     * The name of the AWS service with which this access key was most recently used. This value is N/A if the access key has not been used.
+     */
+    serviceName?: string;
   }
   export type AccessKeyList = AccessKey[];
   export type AccessReceiverList = ResourceReceivingAccess[];
@@ -2341,7 +2359,7 @@ declare namespace Lightsail {
      */
     tags?: TagList;
     /**
-     * A Boolean value that indicates whether to enable versioning of objects in the bucket. For more information about versioning, see Enabling and suspending bucket object versioning in Amazon Lightsail in the Amazon Lightsail Developer Guide.
+     * A Boolean value that indicates whether to enable versioning of objects in the bucket. For more information about versioning, see Enabling and suspending object versioning in a bucket in Amazon Lightsail in the Amazon Lightsail Developer Guide.
      */
     enableObjectVersioning?: boolean;
   }

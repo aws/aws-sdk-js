@@ -118,7 +118,13 @@ declare class Synthetics extends Service {
 }
 declare namespace Synthetics {
   export interface BaseScreenshot {
+    /**
+     * The name of the screenshot. This is generated the first time the canary is run after the UpdateCanary operation that specified for this canary to perform visual monitoring.
+     */
     ScreenshotName: String;
+    /**
+     * Coordinates that define the part of a screen to ignore during screenshot comparisons. To obtain the coordinates to use here, use the CloudWatch Logs console to draw the boundaries on the screen. For more information, see {LINK}
+     */
     IgnoreCoordinates?: BaseScreenshotIgnoreCoordinates;
   }
   export type BaseScreenshotConfigIgnoreCoordinate = string;
@@ -175,6 +181,9 @@ declare namespace Synthetics {
      */
     RuntimeVersion?: String;
     VpcConfig?: VpcConfigOutput;
+    /**
+     * If this canary performs visual monitoring by comparing screenshots, this structure contains the ID of the canary run to use as the baseline for screenshots, and the coordinates of any parts of the screen to ignore during the visual monitoring comparison.
+     */
     VisualReference?: VisualReferenceOutput;
     /**
      * The list of key-value pairs that are associated with the canary.
@@ -196,7 +205,7 @@ declare namespace Synthetics {
      */
     S3Version?: String;
     /**
-     * If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It can be up to 5 MB.
+     * If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It must be smaller than 256 Kb.
      */
     ZipFile?: _Blob;
     /**
@@ -648,16 +657,31 @@ declare namespace Synthetics {
      * If this canary is to test an endpoint in a VPC, this structure contains information about the subnet and security groups of the VPC endpoint. For more information, see  Running a Canary in a VPC.
      */
     VpcConfig?: VpcConfigInput;
+    /**
+     * Defines the screenshots to use as the baseline for comparisons during visual monitoring comparisons during future runs of this canary. If you omit this parameter, no changes are made to any baseline screenshots that the canary might be using already. Visual monitoring is supported only on canaries running the syn-puppeteer-node-3.2 runtime or later. For more information, see  Visual monitoring and  Visual monitoring blueprint 
+     */
     VisualReference?: VisualReferenceInput;
   }
   export interface UpdateCanaryResponse {
   }
   export interface VisualReferenceInput {
+    /**
+     * An array of screenshots that will be used as the baseline for visual monitoring in future runs of this canary. If there is a screenshot that you don't want to be used for visual monitoring, remove it from this array.
+     */
     BaseScreenshots?: BaseScreenshots;
+    /**
+     * Specifies which canary run to use the screenshots from as the baseline for future visual monitoring with this canary. Valid values are nextrun to use the screenshots from the next run after this update is made, lastrun to use the screenshots from the most recent run before this update was made, or the value of Id in the  CanaryRun from any past run of this canary.
+     */
     BaseCanaryRunId: String;
   }
   export interface VisualReferenceOutput {
+    /**
+     * An array of screenshots that are used as the baseline for comparisons during visual monitoring.
+     */
     BaseScreenshots?: BaseScreenshots;
+    /**
+     * The ID of the canary run that produced the screenshots that are used as the baseline for visual monitoring comparisons during future runs of this canary.
+     */
     BaseCanaryRunId?: String;
   }
   export interface VpcConfigInput {

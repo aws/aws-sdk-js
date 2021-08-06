@@ -272,3 +272,5 @@ export import Proton = require('./proton');
 export import Route53RecoveryCluster = require('./route53recoverycluster');
 export import Route53RecoveryControlConfig = require('./route53recoverycontrolconfig');
 export import Route53RecoveryReadiness = require('./route53recoveryreadiness');
+export import ChimeSDKIdentity = require('./chimesdkidentity');
+export import ChimeSDKMessaging = require('./chimesdkmessaging');

@@ -279,6 +279,43 @@
       ],
       "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Associates a security key to the instance.</p>"
     },
+    "CreateAgentStatus": {
+      "name": "CreateAgentStatus",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/agent-status/{InstanceId}"
+      },
+      "input": {
+        "shape": "CreateAgentStatusRequest"
+      },
+      "output": {
+        "shape": "CreateAgentStatusResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "DuplicateResourceException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Creates an agent status for the specified Amazon Connect instance.</p>"
+    },
     "CreateContactFlow": {
       "name": "CreateContactFlow",
       "http": {
@@ -318,6 +355,43 @@
         }
       ],
       "documentation": "<p>Creates a contact flow for the specified Amazon Connect instance.</p> <p>You can also create and update contact flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect Flow language</a>.</p>"
+    },
+    "CreateHoursOfOperation": {
+      "name": "CreateHoursOfOperation",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/hours-of-operations/{InstanceId}"
+      },
+      "input": {
+        "shape": "CreateHoursOfOperationRequest"
+      },
+      "output": {
+        "shape": "CreateHoursOfOperationResponse"
+      },
+      "errors": [
+        {
+          "shape": "DuplicateResourceException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Creates hours of operation. </p>"
     },
     "CreateInstance": {
       "name": "CreateInstance",
@@ -597,6 +671,34 @@
       ],
       "documentation": "<p>Creates a new user hierarchy group.</p>"
     },
+    "DeleteHoursOfOperation": {
+      "name": "DeleteHoursOfOperation",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/hours-of-operations/{InstanceId}/{HoursOfOperationId}"
+      },
+      "input": {
+        "shape": "DeleteHoursOfOperationRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Deletes an hours of operation.</p>"
+    },
     "DeleteInstance": {
       "name": "DeleteInstance",
       "http": {
@@ -755,6 +857,37 @@
         }
       ],
       "documentation": "<p>Deletes an existing user hierarchy group. It must not be associated with any agents or have any active child groups.</p>"
+    },
+    "DescribeAgentStatus": {
+      "name": "DescribeAgentStatus",
+      "http": {
+        "method": "GET",
+        "requestUri": "/agent-status/{InstanceId}/{AgentStatusId}"
+      },
+      "input": {
+        "shape": "DescribeAgentStatusRequest"
+      },
+      "output": {
+        "shape": "DescribeAgentStatusResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Describes an agent status.</p>"
     },
     "DescribeContactFlow": {
       "name": "DescribeContactFlow",
@@ -1435,6 +1568,37 @@
         }
       ],
       "documentation": "<p>Gets historical metric data from the specified Amazon Connect instance.</p> <p>For a description of each historical metric, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html\">Historical Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+    },
+    "ListAgentStatuses": {
+      "name": "ListAgentStatuses",
+      "http": {
+        "method": "GET",
+        "requestUri": "/agent-status/{InstanceId}"
+      },
+      "input": {
+        "shape": "ListAgentStatusRequest"
+      },
+      "output": {
+        "shape": "ListAgentStatusResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Lists agent statuses.</p>"
     },
     "ListApprovedOrigins": {
       "name": "ListApprovedOrigins",
@@ -2393,7 +2557,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Adds the specified tags to the specified resource.</p> <p>The supported resource types are users, routing profiles, queues, quick connects, and contact flows.</p> <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+      "documentation": "<p>Adds the specified tags to the specified resource.</p> <p>The supported resource types are users, routing profiles, queues, quick connects, contact flows, agent status, and hours of operation.</p> <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -2422,6 +2586,40 @@
         }
       ],
       "documentation": "<p>Removes the specified tags from the specified resource.</p>"
+    },
+    "UpdateAgentStatus": {
+      "name": "UpdateAgentStatus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/agent-status/{InstanceId}/{AgentStatusId}"
+      },
+      "input": {
+        "shape": "UpdateAgentStatusRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "DuplicateResourceException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates agent status.</p>"
     },
     "UpdateContactAttributes": {
       "name": "UpdateContactAttributes",
@@ -2512,6 +2710,37 @@
         }
       ],
       "documentation": "<p>The name of the contact flow.</p> <p>You can also create and update contact flows using the <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/flow-language.html\">Amazon Connect Flow language</a>.</p>"
+    },
+    "UpdateHoursOfOperation": {
+      "name": "UpdateHoursOfOperation",
+      "http": {
+        "method": "POST",
+        "requestUri": "/hours-of-operations/{InstanceId}/{HoursOfOperationId}"
+      },
+      "input": {
+        "shape": "UpdateHoursOfOperationRequest"
+      },
+      "errors": [
+        {
+          "shape": "DuplicateResourceException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p> <p>Updates the hours of operation.</p>"
     },
     "UpdateInstanceAttribute": {
       "name": "UpdateInstanceAttribute",
@@ -3104,6 +3333,112 @@
       "max": 100,
       "min": 1
     },
+    "AgentStatus": {
+      "type": "structure",
+      "members": {
+        "AgentStatusARN": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the agent status.</p>"
+        },
+        "AgentStatusId": {
+          "shape": "AgentStatusId",
+          "documentation": "<p>The identifier of the agent status.</p>"
+        },
+        "Name": {
+          "shape": "AgentStatusName",
+          "documentation": "<p>The name of the agent status.</p>"
+        },
+        "Description": {
+          "shape": "AgentStatusDescription",
+          "documentation": "<p>The description of the agent status.</p>"
+        },
+        "Type": {
+          "shape": "AgentStatusType",
+          "documentation": "<p>The type of agent status.</p>"
+        },
+        "DisplayOrder": {
+          "shape": "AgentStatusOrderNumber",
+          "documentation": "<p>The display order of the agent status.</p>"
+        },
+        "State": {
+          "shape": "AgentStatusState",
+          "documentation": "<p>The state of the agent status.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>One or more tags.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about an agent status.</p>"
+    },
+    "AgentStatusDescription": {
+      "type": "string",
+      "max": 250,
+      "min": 1
+    },
+    "AgentStatusId": {
+      "type": "string"
+    },
+    "AgentStatusName": {
+      "type": "string",
+      "max": 127,
+      "min": 1
+    },
+    "AgentStatusOrderNumber": {
+      "type": "integer",
+      "max": 50,
+      "min": 1
+    },
+    "AgentStatusState": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "AgentStatusSummary": {
+      "type": "structure",
+      "members": {
+        "Id": {
+          "shape": "AgentStatusId",
+          "documentation": "<p>The identifier for an agent status.</p>"
+        },
+        "Arn": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the agent status.</p>"
+        },
+        "Name": {
+          "shape": "AgentStatusName",
+          "documentation": "<p>The name of the agent status.</p>"
+        },
+        "Type": {
+          "shape": "AgentStatusType",
+          "documentation": "<p>The type of the agent status.</p>"
+        }
+      },
+      "documentation": "<p>Summary information for an agent status.</p>"
+    },
+    "AgentStatusSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "AgentStatusSummary"
+      }
+    },
+    "AgentStatusType": {
+      "type": "string",
+      "enum": [
+        "ROUTABLE",
+        "CUSTOM",
+        "OFFLINE"
+      ]
+    },
+    "AgentStatusTypes": {
+      "type": "list",
+      "member": {
+        "shape": "AgentStatusType"
+      },
+      "max": 3
+    },
     "AgentUsername": {
       "type": "string",
       "max": 100,
@@ -3352,6 +3687,9 @@
     "AutoAccept": {
       "type": "boolean"
     },
+    "Boolean": {
+      "type": "boolean"
+    },
     "BotName": {
       "type": "string",
       "max": 50
@@ -3407,11 +3745,6 @@
     "ClientToken": {
       "type": "string",
       "max": 500
-    },
-    "CommonDescriptionLength250": {
-      "type": "string",
-      "max": 250,
-      "min": 0
     },
     "CommonNameLength127": {
       "type": "string",
@@ -3540,6 +3873,56 @@
         "shape": "Reference"
       }
     },
+    "CreateAgentStatusRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "Name",
+        "State"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "Name": {
+          "shape": "AgentStatusName",
+          "documentation": "<p>The name of the status.</p>"
+        },
+        "Description": {
+          "shape": "AgentStatusDescription",
+          "documentation": "<p>The description of the status.</p>"
+        },
+        "State": {
+          "shape": "AgentStatusState",
+          "documentation": "<p>The state of the status.</p>"
+        },
+        "DisplayOrder": {
+          "shape": "AgentStatusOrderNumber",
+          "documentation": "<p>The display order of the status.</p>",
+          "box": true
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>One or more tags.</p>"
+        }
+      }
+    },
+    "CreateAgentStatusResponse": {
+      "type": "structure",
+      "members": {
+        "AgentStatusARN": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the agent status.</p>"
+        },
+        "AgentStatusId": {
+          "shape": "AgentStatusId",
+          "documentation": "<p>The identifier of the agent status.</p>"
+        }
+      }
+    },
     "CreateContactFlowRequest": {
       "type": "structure",
       "required": [
@@ -3587,6 +3970,56 @@
         "ContactFlowArn": {
           "shape": "ARN",
           "documentation": "<p>The Amazon Resource Name (ARN) of the contact flow.</p>"
+        }
+      }
+    },
+    "CreateHoursOfOperationRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "Name",
+        "TimeZone",
+        "Config"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "Name": {
+          "shape": "CommonNameLength127",
+          "documentation": "<p>The name of the hours of operation.</p>"
+        },
+        "Description": {
+          "shape": "HoursOfOperationDescription",
+          "documentation": "<p>The description of the hours of operation.</p>"
+        },
+        "TimeZone": {
+          "shape": "TimeZone",
+          "documentation": "<p>The time zone of the hours of operation.</p>"
+        },
+        "Config": {
+          "shape": "HoursOfOperationConfigList",
+          "documentation": "<p>Configuration information for the hours of operation: day, start time, and end time.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>One or more tags.</p>"
+        }
+      }
+    },
+    "CreateHoursOfOperationResponse": {
+      "type": "structure",
+      "members": {
+        "HoursOfOperationId": {
+          "shape": "HoursOfOperationId",
+          "documentation": "<p>The identifier for the hours of operation.</p>"
+        },
+        "HoursOfOperationArn": {
+          "shape": "ARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the hours of operation.</p>"
         }
       }
     },
@@ -4104,6 +4537,27 @@
       "max": 9999,
       "min": 0
     },
+    "DeleteHoursOfOperationRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "HoursOfOperationId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "HoursOfOperationId": {
+          "shape": "HoursOfOperationId",
+          "documentation": "<p>The identifier for the hours of operation.</p>",
+          "location": "uri",
+          "locationName": "HoursOfOperationId"
+        }
+      }
+    },
     "DeleteInstanceRequest": {
       "type": "structure",
       "required": [
@@ -4227,6 +4681,36 @@
           "documentation": "<p>The identifier of the user.</p>",
           "location": "uri",
           "locationName": "UserId"
+        }
+      }
+    },
+    "DescribeAgentStatusRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "AgentStatusId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "AgentStatusId": {
+          "shape": "AgentStatusId",
+          "documentation": "<p>The identifier for the agent status.</p>",
+          "location": "uri",
+          "locationName": "AgentStatusId"
+        }
+      }
+    },
+    "DescribeAgentStatusResponse": {
+      "type": "structure",
+      "members": {
+        "AgentStatus": {
+          "shape": "AgentStatus",
+          "documentation": "<p>The agent status.</p>"
         }
       }
     },
@@ -5324,7 +5808,7 @@
           "documentation": "<p>The name for the hours of operation.</p>"
         },
         "Description": {
-          "shape": "CommonDescriptionLength250",
+          "shape": "HoursOfOperationDescription",
           "documentation": "<p>The description for the hours of operation.</p>"
         },
         "TimeZone": {
@@ -5344,6 +5828,11 @@
     },
     "HoursOfOperationConfig": {
       "type": "structure",
+      "required": [
+        "Day",
+        "StartTime",
+        "EndTime"
+      ],
       "members": {
         "Day": {
           "shape": "HoursOfOperationDays",
@@ -5364,7 +5853,9 @@
       "type": "list",
       "member": {
         "shape": "HoursOfOperationConfig"
-      }
+      },
+      "max": 100,
+      "min": 0
     },
     "HoursOfOperationDays": {
       "type": "string",
@@ -5377,6 +5868,11 @@
         "FRIDAY",
         "SATURDAY"
       ]
+    },
+    "HoursOfOperationDescription": {
+      "type": "string",
+      "max": 250,
+      "min": 1
     },
     "HoursOfOperationId": {
       "type": "string"
@@ -5410,14 +5906,20 @@
     },
     "HoursOfOperationTimeSlice": {
       "type": "structure",
+      "required": [
+        "Hours",
+        "Minutes"
+      ],
       "members": {
         "Hours": {
           "shape": "Hours24Format",
-          "documentation": "<p>The hours.</p>"
+          "documentation": "<p>The hours.</p>",
+          "box": true
         },
         "Minutes": {
           "shape": "MinutesLimit60",
-          "documentation": "<p>The minutes.</p>"
+          "documentation": "<p>The minutes.</p>",
+          "box": true
         }
       },
       "documentation": "<p>The start time or end time for an hours of operation.</p>"
@@ -5777,6 +6279,52 @@
         "V1",
         "V2"
       ]
+    },
+    "ListAgentStatusRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResult1000",
+          "documentation": "<p>The maximum number of results to return per page.</p>",
+          "box": true,
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "AgentStatusTypes": {
+          "shape": "AgentStatusTypes",
+          "documentation": "<p>Available agent status types.</p>",
+          "location": "querystring",
+          "locationName": "AgentStatusTypes"
+        }
+      }
+    },
+    "ListAgentStatusResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+        },
+        "AgentStatusSummaryList": {
+          "shape": "AgentStatusSummaryList",
+          "documentation": "<p>A summary of agent statuses.</p>"
+        }
+      }
     },
     "ListApprovedOriginsRequest": {
       "type": "structure",
@@ -8221,6 +8769,53 @@
         }
       }
     },
+    "UpdateAgentStatusDescription": {
+      "type": "string",
+      "max": 250,
+      "min": 0
+    },
+    "UpdateAgentStatusRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "AgentStatusId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "AgentStatusId": {
+          "shape": "AgentStatusId",
+          "documentation": "<p>The identifier of the agent status.</p>",
+          "location": "uri",
+          "locationName": "AgentStatusId"
+        },
+        "Name": {
+          "shape": "AgentStatusName",
+          "documentation": "<p>The name of the agent status.</p>"
+        },
+        "Description": {
+          "shape": "UpdateAgentStatusDescription",
+          "documentation": "<p>The description of the agent status.</p>"
+        },
+        "State": {
+          "shape": "AgentStatusState",
+          "documentation": "<p>The state of the agent status.</p>"
+        },
+        "DisplayOrder": {
+          "shape": "AgentStatusOrderNumber",
+          "documentation": "<p>The display order of the agent status.</p>",
+          "box": true
+        },
+        "ResetOrderNumber": {
+          "shape": "Boolean",
+          "documentation": "<p>A number indicating the reset order of the agent status.</p>"
+        }
+      }
+    },
     "UpdateContactAttributesRequest": {
       "type": "structure",
       "required": [
@@ -8299,6 +8894,48 @@
         "Description": {
           "shape": "ContactFlowDescription",
           "documentation": "<p>The description of the contact flow.</p>"
+        }
+      }
+    },
+    "UpdateHoursOfOperationDescription": {
+      "type": "string",
+      "max": 250,
+      "min": 0
+    },
+    "UpdateHoursOfOperationRequest": {
+      "type": "structure",
+      "required": [
+        "InstanceId",
+        "HoursOfOperationId"
+      ],
+      "members": {
+        "InstanceId": {
+          "shape": "InstanceId",
+          "documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+          "location": "uri",
+          "locationName": "InstanceId"
+        },
+        "HoursOfOperationId": {
+          "shape": "HoursOfOperationId",
+          "documentation": "<p>The identifier of the hours of operation.</p>",
+          "location": "uri",
+          "locationName": "HoursOfOperationId"
+        },
+        "Name": {
+          "shape": "CommonNameLength127",
+          "documentation": "<p>The name of the hours of operation.</p>"
+        },
+        "Description": {
+          "shape": "UpdateHoursOfOperationDescription",
+          "documentation": "<p>The description of the hours of operation.</p>"
+        },
+        "TimeZone": {
+          "shape": "TimeZone",
+          "documentation": "<p>The time zone of the hours of operation.</p>"
+        },
+        "Config": {
+          "shape": "HoursOfOperationConfigList",
+          "documentation": "<p>Configuration information of the hours of operation.</p>"
         }
       }
     },

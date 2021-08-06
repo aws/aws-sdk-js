@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.962.0-->
+<!--LATEST=2.963.0-->
 <!--ENTRYINSERT-->
+
+## 2.963.0
+* feature: ChimeSDKIdentity: The Amazon Chime SDK Identity APIs allow software developers to create and manage unique instances of their messaging applications.
+* feature: ChimeSDKMessaging: The Amazon Chime SDK Messaging APIs allow software developers to send and receive messages in custom messaging applications.
+* feature: Connect: This release adds support for agent status and hours of operation. For details, see the Release Notes in the Amazon Connect Administrator Guide.
+* feature: Lightsail: This release adds support to track when a bucket access key was last used.
 
 ## 2.962.0
 * feature: AutoScaling: EC2 Auto Scaling adds configuration checks and Launch Template validation to Instance Refresh.
