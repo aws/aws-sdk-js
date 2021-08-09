@@ -109,11 +109,11 @@ declare class SSM extends Service {
    */
   createPatchBaseline(callback?: (err: AWSError, data: SSM.Types.CreatePatchBaselineResult) => void): Request<SSM.Types.CreatePatchBaselineResult, AWSError>;
   /**
-   * A resource data sync helps you view data from multiple sources in a single location. Amazon Web Services Systems Manager offers two types of resource data sync: SyncToDestination and SyncFromSource. You can configure Systems Manager Inventory to use the SyncToDestination type to synchronize Inventory data from multiple Regions to a single Amazon Simple Storage Service (Amazon S3) bucket. For more information, see Configuring resource data sync for Inventory in the Amazon Web Services Systems Manager User Guide. You can configure Systems Manager Explorer to use the SyncFromSource type to synchronize operational work items (OpsItems) and operational data (OpsData) from multiple Regions to a single Amazon S3 bucket. This type can synchronize OpsItems and OpsData from multiple accounts and Regions or EntireOrganization by using Organizations. For more information, see Setting up Systems Manager Explorer to display data from multiple accounts and Regions in the Amazon Web Services Systems Manager User Guide. A resource data sync is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data. To check the status of a sync, use the ListResourceDataSync.  By default, data isn't encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy.  
+   * A resource data sync helps you view data from multiple sources in a single location. Amazon Web Services Systems Manager offers two types of resource data sync: SyncToDestination and SyncFromSource. You can configure Systems Manager Inventory to use the SyncToDestination type to synchronize Inventory data from multiple Amazon Web Services Regions to a single Amazon Simple Storage Service (Amazon S3) bucket. For more information, see Configuring resource data sync for Inventory in the Amazon Web Services Systems Manager User Guide. You can configure Systems Manager Explorer to use the SyncFromSource type to synchronize operational work items (OpsItems) and operational data (OpsData) from multiple Amazon Web Services Regions to a single Amazon S3 bucket. This type can synchronize OpsItems and OpsData from multiple Amazon Web Services accounts and Amazon Web Services Regions or EntireOrganization by using Organizations. For more information, see Setting up Systems Manager Explorer to display data from multiple accounts and Regions in the Amazon Web Services Systems Manager User Guide. A resource data sync is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data. To check the status of a sync, use the ListResourceDataSync.  By default, data isn't encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy.  
    */
   createResourceDataSync(params: SSM.Types.CreateResourceDataSyncRequest, callback?: (err: AWSError, data: SSM.Types.CreateResourceDataSyncResult) => void): Request<SSM.Types.CreateResourceDataSyncResult, AWSError>;
   /**
-   * A resource data sync helps you view data from multiple sources in a single location. Amazon Web Services Systems Manager offers two types of resource data sync: SyncToDestination and SyncFromSource. You can configure Systems Manager Inventory to use the SyncToDestination type to synchronize Inventory data from multiple Regions to a single Amazon Simple Storage Service (Amazon S3) bucket. For more information, see Configuring resource data sync for Inventory in the Amazon Web Services Systems Manager User Guide. You can configure Systems Manager Explorer to use the SyncFromSource type to synchronize operational work items (OpsItems) and operational data (OpsData) from multiple Regions to a single Amazon S3 bucket. This type can synchronize OpsItems and OpsData from multiple accounts and Regions or EntireOrganization by using Organizations. For more information, see Setting up Systems Manager Explorer to display data from multiple accounts and Regions in the Amazon Web Services Systems Manager User Guide. A resource data sync is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data. To check the status of a sync, use the ListResourceDataSync.  By default, data isn't encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy.  
+   * A resource data sync helps you view data from multiple sources in a single location. Amazon Web Services Systems Manager offers two types of resource data sync: SyncToDestination and SyncFromSource. You can configure Systems Manager Inventory to use the SyncToDestination type to synchronize Inventory data from multiple Amazon Web Services Regions to a single Amazon Simple Storage Service (Amazon S3) bucket. For more information, see Configuring resource data sync for Inventory in the Amazon Web Services Systems Manager User Guide. You can configure Systems Manager Explorer to use the SyncFromSource type to synchronize operational work items (OpsItems) and operational data (OpsData) from multiple Amazon Web Services Regions to a single Amazon S3 bucket. This type can synchronize OpsItems and OpsData from multiple Amazon Web Services accounts and Amazon Web Services Regions or EntireOrganization by using Organizations. For more information, see Setting up Systems Manager Explorer to display data from multiple accounts and Regions in the Amazon Web Services Systems Manager User Guide. A resource data sync is an asynchronous operation that returns immediately. After a successful initial sync is completed, the system continuously syncs data. To check the status of a sync, use the ListResourceDataSync.  By default, data isn't encrypted in Amazon S3. We strongly recommend that you enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you secure access to the Amazon S3 bucket by creating a restrictive bucket policy.  
    */
   createResourceDataSync(callback?: (err: AWSError, data: SSM.Types.CreateResourceDataSyncResult) => void): Request<SSM.Types.CreateResourceDataSyncResult, AWSError>;
   /**
@@ -125,11 +125,11 @@ declare class SSM extends Service {
    */
   deleteActivation(callback?: (err: AWSError, data: SSM.Types.DeleteActivationResult) => void): Request<SSM.Types.DeleteActivationResult, AWSError>;
   /**
-   * Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified instance. When you disassociate a document from an instance, it doesn't change the configuration of the instance. To change the configuration state of an instance after you disassociate a document, you must create a new document with the desired configuration and associate it with the instance.
+   * Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified instance. If you created the association by using the Targets parameter, then you must delete the association by using the association ID. When you disassociate a document from an instance, it doesn't change the configuration of the instance. To change the configuration state of an instance after you disassociate a document, you must create a new document with the desired configuration and associate it with the instance.
    */
   deleteAssociation(params: SSM.Types.DeleteAssociationRequest, callback?: (err: AWSError, data: SSM.Types.DeleteAssociationResult) => void): Request<SSM.Types.DeleteAssociationResult, AWSError>;
   /**
-   * Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified instance. When you disassociate a document from an instance, it doesn't change the configuration of the instance. To change the configuration state of an instance after you disassociate a document, you must create a new document with the desired configuration and associate it with the instance.
+   * Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified instance. If you created the association by using the Targets parameter, then you must delete the association by using the association ID. When you disassociate a document from an instance, it doesn't change the configuration of the instance. To change the configuration state of an instance after you disassociate a document, you must create a new document with the desired configuration and associate it with the instance.
    */
   deleteAssociation(callback?: (err: AWSError, data: SSM.Types.DeleteAssociationResult) => void): Request<SSM.Types.DeleteAssociationResult, AWSError>;
   /**
@@ -165,19 +165,19 @@ declare class SSM extends Service {
    */
   deleteOpsMetadata(callback?: (err: AWSError, data: SSM.Types.DeleteOpsMetadataResult) => void): Request<SSM.Types.DeleteOpsMetadataResult, AWSError>;
   /**
-   * Delete a parameter from the system.
+   * Delete a parameter from the system. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.
    */
   deleteParameter(params: SSM.Types.DeleteParameterRequest, callback?: (err: AWSError, data: SSM.Types.DeleteParameterResult) => void): Request<SSM.Types.DeleteParameterResult, AWSError>;
   /**
-   * Delete a parameter from the system.
+   * Delete a parameter from the system. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.
    */
   deleteParameter(callback?: (err: AWSError, data: SSM.Types.DeleteParameterResult) => void): Request<SSM.Types.DeleteParameterResult, AWSError>;
   /**
-   * Delete a list of parameters.
+   * Delete a list of parameters. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.
    */
   deleteParameters(params: SSM.Types.DeleteParametersRequest, callback?: (err: AWSError, data: SSM.Types.DeleteParametersResult) => void): Request<SSM.Types.DeleteParametersResult, AWSError>;
   /**
-   * Delete a list of parameters.
+   * Delete a list of parameters. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.
    */
   deleteParameters(callback?: (err: AWSError, data: SSM.Types.DeleteParametersResult) => void): Request<SSM.Types.DeleteParametersResult, AWSError>;
   /**
@@ -237,11 +237,11 @@ declare class SSM extends Service {
    */
   describeActivations(callback?: (err: AWSError, data: SSM.Types.DescribeActivationsResult) => void): Request<SSM.Types.DescribeActivationsResult, AWSError>;
   /**
-   * Describes the association for the specified target or instance. If you created the association by using the Targets parameter, then you must retrieve the association by using the association ID. If you created the association by specifying an instance ID and an Amazon Web Services Systems Manager document (SSM document), then you retrieve the association by specifying the document name and the instance ID. 
+   * Describes the association for the specified target or instance. If you created the association by using the Targets parameter, then you must retrieve the association by using the association ID.
    */
   describeAssociation(params: SSM.Types.DescribeAssociationRequest, callback?: (err: AWSError, data: SSM.Types.DescribeAssociationResult) => void): Request<SSM.Types.DescribeAssociationResult, AWSError>;
   /**
-   * Describes the association for the specified target or instance. If you created the association by using the Targets parameter, then you must retrieve the association by using the association ID. If you created the association by specifying an instance ID and an Amazon Web Services Systems Manager document (SSM document), then you retrieve the association by specifying the document name and the instance ID. 
+   * Describes the association for the specified target or instance. If you created the association by using the Targets parameter, then you must retrieve the association by using the association ID.
    */
   describeAssociation(callback?: (err: AWSError, data: SSM.Types.DescribeAssociationResult) => void): Request<SSM.Types.DescribeAssociationResult, AWSError>;
   /**
@@ -293,11 +293,11 @@ declare class SSM extends Service {
    */
   describeDocument(callback?: (err: AWSError, data: SSM.Types.DescribeDocumentResult) => void): Request<SSM.Types.DescribeDocumentResult, AWSError>;
   /**
-   * Describes the permissions for a Amazon Web Services Systems Manager document (SSM document). If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user's account ID) or publicly (All). 
+   * Describes the permissions for a Amazon Web Services Systems Manager document (SSM document). If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user's Amazon Web Services account ID) or publicly (All). 
    */
   describeDocumentPermission(params: SSM.Types.DescribeDocumentPermissionRequest, callback?: (err: AWSError, data: SSM.Types.DescribeDocumentPermissionResponse) => void): Request<SSM.Types.DescribeDocumentPermissionResponse, AWSError>;
   /**
-   * Describes the permissions for a Amazon Web Services Systems Manager document (SSM document). If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user's account ID) or publicly (All). 
+   * Describes the permissions for a Amazon Web Services Systems Manager document (SSM document). If you created the document, you are the owner. If a document is shared, it can either be shared privately (by specifying a user's Amazon Web Services account ID) or publicly (All). 
    */
   describeDocumentPermission(callback?: (err: AWSError, data: SSM.Types.DescribeDocumentPermissionResponse) => void): Request<SSM.Types.DescribeDocumentPermissionResponse, AWSError>;
   /**
@@ -413,11 +413,11 @@ declare class SSM extends Service {
    */
   describeMaintenanceWindowTasks(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowTasksResult) => void): Request<SSM.Types.DescribeMaintenanceWindowTasksResult, AWSError>;
   /**
-   * Retrieves the maintenance windows in an account.
+   * Retrieves the maintenance windows in an Amazon Web Services account.
    */
   describeMaintenanceWindows(params: SSM.Types.DescribeMaintenanceWindowsRequest, callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowsResult) => void): Request<SSM.Types.DescribeMaintenanceWindowsResult, AWSError>;
   /**
-   * Retrieves the maintenance windows in an account.
+   * Retrieves the maintenance windows in an Amazon Web Services account.
    */
   describeMaintenanceWindows(callback?: (err: AWSError, data: SSM.Types.DescribeMaintenanceWindowsResult) => void): Request<SSM.Types.DescribeMaintenanceWindowsResult, AWSError>;
   /**
@@ -445,11 +445,11 @@ declare class SSM extends Service {
    */
   describeParameters(callback?: (err: AWSError, data: SSM.Types.DescribeParametersResult) => void): Request<SSM.Types.DescribeParametersResult, AWSError>;
   /**
-   * Lists the patch baselines in your account.
+   * Lists the patch baselines in your Amazon Web Services account.
    */
   describePatchBaselines(params: SSM.Types.DescribePatchBaselinesRequest, callback?: (err: AWSError, data: SSM.Types.DescribePatchBaselinesResult) => void): Request<SSM.Types.DescribePatchBaselinesResult, AWSError>;
   /**
-   * Lists the patch baselines in your account.
+   * Lists the patch baselines in your Amazon Web Services account.
    */
   describePatchBaselines(callback?: (err: AWSError, data: SSM.Types.DescribePatchBaselinesResult) => void): Request<SSM.Types.DescribePatchBaselinesResult, AWSError>;
   /**
@@ -533,11 +533,11 @@ declare class SSM extends Service {
    */
   getDefaultPatchBaseline(callback?: (err: AWSError, data: SSM.Types.GetDefaultPatchBaselineResult) => void): Request<SSM.Types.GetDefaultPatchBaselineResult, AWSError>;
   /**
-   * Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document (SSM document).  If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local AWS credentials and the operation fails. To avoid this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of Amazon Web Services Systems Manager, with an SSM document that enables you to target an instance with a script or command. For example, run the command using the AWS-RunShellScript document or the AWS-RunPowerShellScript document. 
+   * Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document (SSM document).  If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local Amazon Web Services credentials and the operation fails. To avoid this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of Amazon Web Services Systems Manager, with an SSM document that enables you to target an instance with a script or command. For example, run the command using the AWS-RunShellScript document or the AWS-RunPowerShellScript document. 
    */
   getDeployablePatchSnapshotForInstance(params: SSM.Types.GetDeployablePatchSnapshotForInstanceRequest, callback?: (err: AWSError, data: SSM.Types.GetDeployablePatchSnapshotForInstanceResult) => void): Request<SSM.Types.GetDeployablePatchSnapshotForInstanceResult, AWSError>;
   /**
-   * Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document (SSM document).  If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local AWS credentials and the operation fails. To avoid this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of Amazon Web Services Systems Manager, with an SSM document that enables you to target an instance with a script or command. For example, run the command using the AWS-RunShellScript document or the AWS-RunPowerShellScript document. 
+   * Retrieves the current snapshot for the patch baseline the instance uses. This API is primarily used by the AWS-RunPatchBaseline Systems Manager document (SSM document).  If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local Amazon Web Services credentials and the operation fails. To avoid this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of Amazon Web Services Systems Manager, with an SSM document that enables you to target an instance with a script or command. For example, run the command using the AWS-RunShellScript document or the AWS-RunPowerShellScript document. 
    */
   getDeployablePatchSnapshotForInstance(callback?: (err: AWSError, data: SSM.Types.GetDeployablePatchSnapshotForInstanceResult) => void): Request<SSM.Types.GetDeployablePatchSnapshotForInstanceResult, AWSError>;
   /**
@@ -549,11 +549,11 @@ declare class SSM extends Service {
    */
   getDocument(callback?: (err: AWSError, data: SSM.Types.GetDocumentResult) => void): Request<SSM.Types.GetDocumentResult, AWSError>;
   /**
-   * Query inventory information.
+   * Query inventory information. This includes instance status, such as Stopped or Terminated.
    */
   getInventory(params: SSM.Types.GetInventoryRequest, callback?: (err: AWSError, data: SSM.Types.GetInventoryResult) => void): Request<SSM.Types.GetInventoryResult, AWSError>;
   /**
-   * Query inventory information.
+   * Query inventory information. This includes instance status, such as Stopped or Terminated.
    */
   getInventory(callback?: (err: AWSError, data: SSM.Types.GetInventoryResult) => void): Request<SSM.Types.GetInventoryResult, AWSError>;
   /**
@@ -629,11 +629,11 @@ declare class SSM extends Service {
    */
   getOpsSummary(callback?: (err: AWSError, data: SSM.Types.GetOpsSummaryResult) => void): Request<SSM.Types.GetOpsSummaryResult, AWSError>;
   /**
-   * Get information about a parameter by using the parameter name. Don't confuse this API operation with the GetParameters API operation.
+   * Get information about a single parameter by specifying the parameter name.  To get information about more than one parameter at a time, use the GetParameters operation. 
    */
   getParameter(params: SSM.Types.GetParameterRequest, callback?: (err: AWSError, data: SSM.Types.GetParameterResult) => void): Request<SSM.Types.GetParameterResult, AWSError>;
   /**
-   * Get information about a parameter by using the parameter name. Don't confuse this API operation with the GetParameters API operation.
+   * Get information about a single parameter by specifying the parameter name.  To get information about more than one parameter at a time, use the GetParameters operation. 
    */
   getParameter(callback?: (err: AWSError, data: SSM.Types.GetParameterResult) => void): Request<SSM.Types.GetParameterResult, AWSError>;
   /**
@@ -645,11 +645,11 @@ declare class SSM extends Service {
    */
   getParameterHistory(callback?: (err: AWSError, data: SSM.Types.GetParameterHistoryResult) => void): Request<SSM.Types.GetParameterHistoryResult, AWSError>;
   /**
-   * Get details of a parameter. Don't confuse this API operation with the GetParameter API operation.
+   * Get information about one or more parameters by specifying multiple parameter names.  To get information about a single parameter, you can use the GetParameter operation instead. 
    */
   getParameters(params: SSM.Types.GetParametersRequest, callback?: (err: AWSError, data: SSM.Types.GetParametersResult) => void): Request<SSM.Types.GetParametersResult, AWSError>;
   /**
-   * Get details of a parameter. Don't confuse this API operation with the GetParameter API operation.
+   * Get information about one or more parameters by specifying multiple parameter names.  To get information about a single parameter, you can use the GetParameter operation instead. 
    */
   getParameters(callback?: (err: AWSError, data: SSM.Types.GetParametersResult) => void): Request<SSM.Types.GetParametersResult, AWSError>;
   /**
@@ -677,11 +677,11 @@ declare class SSM extends Service {
    */
   getPatchBaselineForPatchGroup(callback?: (err: AWSError, data: SSM.Types.GetPatchBaselineForPatchGroupResult) => void): Request<SSM.Types.GetPatchBaselineForPatchGroupResult, AWSError>;
   /**
-   *  ServiceSetting is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of false. This means the user can't use this feature unless they change the setting to true and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. Amazon Web Services services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the UpdateServiceSetting API operation to change the default setting. Or use the ResetServiceSetting to change the value back to the original value defined by the Amazon Web Services service team. Query the current service setting for the account. 
+   *  ServiceSetting is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of false. This means the user can't use this feature unless they change the setting to true and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. Amazon Web Services services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the UpdateServiceSetting API operation to change the default setting. Or use the ResetServiceSetting to change the value back to the original value defined by the Amazon Web Services service team. Query the current service setting for the Amazon Web Services account. 
    */
   getServiceSetting(params: SSM.Types.GetServiceSettingRequest, callback?: (err: AWSError, data: SSM.Types.GetServiceSettingResult) => void): Request<SSM.Types.GetServiceSettingResult, AWSError>;
   /**
-   *  ServiceSetting is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of false. This means the user can't use this feature unless they change the setting to true and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. Amazon Web Services services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the UpdateServiceSetting API operation to change the default setting. Or use the ResetServiceSetting to change the value back to the original value defined by the Amazon Web Services service team. Query the current service setting for the account. 
+   *  ServiceSetting is an account-level setting for an Amazon Web Services service. This setting defines how a user interacts with or uses a service or a feature of a service. For example, if an Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services service team might create a default setting of false. This means the user can't use this feature unless they change the setting to true and intentionally opt in for a paid feature. Services map a SettingId object to a setting value. Amazon Web Services services teams define the default value for a SettingId. You can't create a new SettingId, but you can overwrite the default value if you have the ssm:UpdateServiceSetting permission for the setting. Use the UpdateServiceSetting API operation to change the default setting. Or use the ResetServiceSetting to change the value back to the original value defined by the Amazon Web Services service team. Query the current service setting for the Amazon Web Services account. 
    */
   getServiceSetting(callback?: (err: AWSError, data: SSM.Types.GetServiceSettingResult) => void): Request<SSM.Types.GetServiceSettingResult, AWSError>;
   /**
@@ -701,11 +701,11 @@ declare class SSM extends Service {
    */
   listAssociationVersions(callback?: (err: AWSError, data: SSM.Types.ListAssociationVersionsResult) => void): Request<SSM.Types.ListAssociationVersionsResult, AWSError>;
   /**
-   * Returns all State Manager associations in the current account and Region. You can limit the results to a specific State Manager association document or instance by specifying a filter. State Manager is a capability of Amazon Web Services Systems Manager.
+   * Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results to a specific State Manager association document or instance by specifying a filter. State Manager is a capability of Amazon Web Services Systems Manager.
    */
   listAssociations(params: SSM.Types.ListAssociationsRequest, callback?: (err: AWSError, data: SSM.Types.ListAssociationsResult) => void): Request<SSM.Types.ListAssociationsResult, AWSError>;
   /**
-   * Returns all State Manager associations in the current account and Region. You can limit the results to a specific State Manager association document or instance by specifying a filter. State Manager is a capability of Amazon Web Services Systems Manager.
+   * Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results to a specific State Manager association document or instance by specifying a filter. State Manager is a capability of Amazon Web Services Systems Manager.
    */
   listAssociations(callback?: (err: AWSError, data: SSM.Types.ListAssociationsResult) => void): Request<SSM.Types.ListAssociationsResult, AWSError>;
   /**
@@ -717,11 +717,11 @@ declare class SSM extends Service {
    */
   listCommandInvocations(callback?: (err: AWSError, data: SSM.Types.ListCommandInvocationsResult) => void): Request<SSM.Types.ListCommandInvocationsResult, AWSError>;
   /**
-   * Lists the commands requested by users of the account.
+   * Lists the commands requested by users of the Amazon Web Services account.
    */
   listCommands(params: SSM.Types.ListCommandsRequest, callback?: (err: AWSError, data: SSM.Types.ListCommandsResult) => void): Request<SSM.Types.ListCommandsResult, AWSError>;
   /**
-   * Lists the commands requested by users of the account.
+   * Lists the commands requested by users of the Amazon Web Services account.
    */
   listCommands(callback?: (err: AWSError, data: SSM.Types.ListCommandsResult) => void): Request<SSM.Types.ListCommandsResult, AWSError>;
   /**
@@ -741,11 +741,11 @@ declare class SSM extends Service {
    */
   listComplianceSummaries(callback?: (err: AWSError, data: SSM.Types.ListComplianceSummariesResult) => void): Request<SSM.Types.ListComplianceSummariesResult, AWSError>;
   /**
-   * Information about approval reviews for a version of an SSM document.
+   * Information about approval reviews for a version of a change template in Change Manager.
    */
   listDocumentMetadataHistory(params: SSM.Types.ListDocumentMetadataHistoryRequest, callback?: (err: AWSError, data: SSM.Types.ListDocumentMetadataHistoryResponse) => void): Request<SSM.Types.ListDocumentMetadataHistoryResponse, AWSError>;
   /**
-   * Information about approval reviews for a version of an SSM document.
+   * Information about approval reviews for a version of a change template in Change Manager.
    */
   listDocumentMetadataHistory(callback?: (err: AWSError, data: SSM.Types.ListDocumentMetadataHistoryResponse) => void): Request<SSM.Types.ListDocumentMetadataHistoryResponse, AWSError>;
   /**
@@ -757,11 +757,11 @@ declare class SSM extends Service {
    */
   listDocumentVersions(callback?: (err: AWSError, data: SSM.Types.ListDocumentVersionsResult) => void): Request<SSM.Types.ListDocumentVersionsResult, AWSError>;
   /**
-   * Returns all Systems Manager (SSM) documents in the current account and Region. You can limit the results of this request by using a filter.
+   * Returns all Systems Manager (SSM) documents in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results of this request by using a filter.
    */
   listDocuments(params: SSM.Types.ListDocumentsRequest, callback?: (err: AWSError, data: SSM.Types.ListDocumentsResult) => void): Request<SSM.Types.ListDocumentsResult, AWSError>;
   /**
-   * Returns all Systems Manager (SSM) documents in the current account and Region. You can limit the results of this request by using a filter.
+   * Returns all Systems Manager (SSM) documents in the current Amazon Web Services account and Amazon Web Services Region. You can limit the results of this request by using a filter.
    */
   listDocuments(callback?: (err: AWSError, data: SSM.Types.ListDocumentsResult) => void): Request<SSM.Types.ListDocumentsResult, AWSError>;
   /**
@@ -773,11 +773,11 @@ declare class SSM extends Service {
    */
   listInventoryEntries(callback?: (err: AWSError, data: SSM.Types.ListInventoryEntriesResult) => void): Request<SSM.Types.ListInventoryEntriesResult, AWSError>;
   /**
-   * Returns a list of all OpsItem events in the current Region and account. You can limit the results to events associated with specific OpsItems by specifying a filter.
+   * Returns a list of all OpsItem events in the current Amazon Web Services Region and Amazon Web Services account. You can limit the results to events associated with specific OpsItems by specifying a filter.
    */
   listOpsItemEvents(params: SSM.Types.ListOpsItemEventsRequest, callback?: (err: AWSError, data: SSM.Types.ListOpsItemEventsResponse) => void): Request<SSM.Types.ListOpsItemEventsResponse, AWSError>;
   /**
-   * Returns a list of all OpsItem events in the current Region and account. You can limit the results to events associated with specific OpsItems by specifying a filter.
+   * Returns a list of all OpsItem events in the current Amazon Web Services Region and Amazon Web Services account. You can limit the results to events associated with specific OpsItems by specifying a filter.
    */
   listOpsItemEvents(callback?: (err: AWSError, data: SSM.Types.ListOpsItemEventsResponse) => void): Request<SSM.Types.ListOpsItemEventsResponse, AWSError>;
   /**
@@ -989,11 +989,11 @@ declare class SSM extends Service {
    */
   updateAssociation(callback?: (err: AWSError, data: SSM.Types.UpdateAssociationResult) => void): Request<SSM.Types.UpdateAssociationResult, AWSError>;
   /**
-   * Updates the status of the Amazon Web Services Systems Manager document (SSM document) associated with the specified instance.
+   * Updates the status of the Amazon Web Services Systems Manager document (SSM document) associated with the specified instance.  UpdateAssociationStatus is primarily used by the Amazon Web Services Systems Manager Agent (SSM Agent) to report status updates about your associations and is only used for associations created with the InstanceId legacy parameter.
    */
   updateAssociationStatus(params: SSM.Types.UpdateAssociationStatusRequest, callback?: (err: AWSError, data: SSM.Types.UpdateAssociationStatusResult) => void): Request<SSM.Types.UpdateAssociationStatusResult, AWSError>;
   /**
-   * Updates the status of the Amazon Web Services Systems Manager document (SSM document) associated with the specified instance.
+   * Updates the status of the Amazon Web Services Systems Manager document (SSM document) associated with the specified instance.  UpdateAssociationStatus is primarily used by the Amazon Web Services Systems Manager Agent (SSM Agent) to report status updates about your associations and is only used for associations created with the InstanceId legacy parameter.
    */
   updateAssociationStatus(callback?: (err: AWSError, data: SSM.Types.UpdateAssociationStatusResult) => void): Request<SSM.Types.UpdateAssociationStatusResult, AWSError>;
   /**
@@ -1013,11 +1013,11 @@ declare class SSM extends Service {
    */
   updateDocumentDefaultVersion(callback?: (err: AWSError, data: SSM.Types.UpdateDocumentDefaultVersionResult) => void): Request<SSM.Types.UpdateDocumentDefaultVersionResult, AWSError>;
   /**
-   * Updates information related to approval reviews for a specific version of a document.
+   * Updates information related to approval reviews for a specific version of a change template in Change Manager.
    */
   updateDocumentMetadata(params: SSM.Types.UpdateDocumentMetadataRequest, callback?: (err: AWSError, data: SSM.Types.UpdateDocumentMetadataResponse) => void): Request<SSM.Types.UpdateDocumentMetadataResponse, AWSError>;
   /**
-   * Updates information related to approval reviews for a specific version of a document.
+   * Updates information related to approval reviews for a specific version of a change template in Change Manager.
    */
   updateDocumentMetadata(callback?: (err: AWSError, data: SSM.Types.UpdateDocumentMetadataResponse) => void): Request<SSM.Types.UpdateDocumentMetadataResponse, AWSError>;
   /**
@@ -1107,7 +1107,7 @@ declare namespace SSM {
   export type AccountIdList = AccountId[];
   export interface AccountSharingInfo {
     /**
-     * The account ID where the current document is shared.
+     * The Amazon Web Services account ID where the current document is shared.
      */
     AccountId?: AccountId;
     /**
@@ -1214,7 +1214,7 @@ declare namespace SSM {
      */
     Name?: DocumentARN;
     /**
-     * The ID of the instance.
+     * The instance ID.
      */
     InstanceId?: InstanceId;
     /**
@@ -1257,7 +1257,7 @@ declare namespace SSM {
      */
     Name?: DocumentARN;
     /**
-     * The ID of the instance.
+     * The instance ID.
      */
     InstanceId?: InstanceId;
     /**
@@ -1345,7 +1345,7 @@ declare namespace SSM {
      */
     CalendarNames?: CalendarNameOrARNList;
     /**
-     * The combination of Regions and accounts where you want to run the association.
+     * The combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the association.
      */
     TargetLocations?: TargetLocations;
   }
@@ -1577,7 +1577,7 @@ declare namespace SSM {
      */
     CalendarNames?: CalendarNameOrARNList;
     /**
-     * The combination of Regions and accounts where you wanted to run the association when this association version was created.
+     * The combination of Amazon Web Services Regions and Amazon Web Services accounts where you wanted to run the association when this association version was created.
      */
     TargetLocations?: TargetLocations;
   }
@@ -1732,7 +1732,7 @@ declare namespace SSM {
      */
     Target?: String;
     /**
-     * The combination of Regions and/or accounts where you want to run the Automation.
+     * The combination of Amazon Web Services Regions and/or Amazon Web Services accounts where you want to run the Automation.
      */
     TargetLocations?: TargetLocations;
     /**
@@ -1865,7 +1865,7 @@ declare namespace SSM {
      */
     Target?: String;
     /**
-     * Use this filter with DescribeAutomationExecutions. Specify either Local or CrossAccount. CrossAccount is an Automation that runs in multiple Regions and accounts. For more information, see Running Automation workflows in multiple Regions and accounts in the Amazon Web Services Systems Manager User Guide. 
+     * Use this filter with DescribeAutomationExecutions. Specify either Local or CrossAccount. CrossAccount is an Automation that runs in multiple Amazon Web Services Regions and Amazon Web Services accounts. For more information, see Running Automation workflows in multiple Amazon Web Services Regions and accounts in the Amazon Web Services Systems Manager User Guide. 
      */
     AutomationType?: AutomationType;
     /**
@@ -2027,7 +2027,7 @@ declare namespace SSM {
      */
     StatusDetails?: StatusDetails;
     /**
-     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Region of the S3 bucket.
+     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon Web Services Region of the S3 bucket.
      */
     OutputS3Region?: S3Region;
     /**
@@ -2368,7 +2368,7 @@ declare namespace SSM {
      */
     DefaultInstanceName?: DefaultInstanceName;
     /**
-     * The Identity and Access Management (IAM) role that you want to assign to the managed instance. This IAMrole must provide AssumeRole permissions for the Amazon Web Services Systems Manager service principal ssm.amazonaws.com. For more information, see Create an IAM service role for a hybrid environment in the Amazon Web Services Systems Manager User Guide.
+     * The name of the Identity and Access Management (IAM) role that you want to assign to the managed instance. This IAM role must provide AssumeRole permissions for the Amazon Web Services Systems Manager service principal ssm.amazonaws.com. For more information, see Create an IAM service role for a hybrid environment in the Amazon Web Services Systems Manager User Guide.
      */
     IamRole: IamRole;
     /**
@@ -2403,11 +2403,11 @@ declare namespace SSM {
   export type CreateAssociationBatchRequestEntries = CreateAssociationBatchRequestEntry[];
   export interface CreateAssociationBatchRequestEntry {
     /**
-     * The name of the SSM document that contains the configuration information for the instance. You can specify Command or Automation runbooks. You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account. For SSM documents that are shared with you from other accounts, you must specify the complete SSM document ARN, in the following format:  arn:aws:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
+     * The name of the SSM document that contains the configuration information for the instance. You can specify Command or Automation runbooks. You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account. For SSM documents that are shared with you from other Amazon Web Services accounts, you must specify the complete SSM document ARN, in the following format:  arn:aws:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
      */
     Name: DocumentARN;
     /**
-     * The ID of the instance. 
+     * The instance ID.   InstanceId has been deprecated. To specify an instance ID for an association, use the Targets parameter. Requests that include the parameter InstanceID with Systems Manager documents (SSM documents) that use schema version 2.0 or later will fail. In addition, if you use the parameter InstanceId, you can't use the parameters AssociationName, DocumentVersion, MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression. To use these parameters, you must use the Targets parameter. 
      */
     InstanceId?: InstanceId;
     /**
@@ -2479,7 +2479,7 @@ declare namespace SSM {
   }
   export interface CreateAssociationRequest {
     /**
-     * The name of the SSM Command document or Automation runbook that contains the configuration information for the instance. You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account. For Systems Manager documents (SSM documents) that are shared with you from other accounts, you must specify the complete SSM document ARN, in the following format:  arn:partition:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
+     * The name of the SSM Command document or Automation runbook that contains the configuration information for the instance. You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account. For Systems Manager documents (SSM documents) that are shared with you from other Amazon Web Services accounts, you must specify the complete SSM document ARN, in the following format:  arn:partition:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
      */
     Name: DocumentARN;
     /**
@@ -2495,7 +2495,7 @@ declare namespace SSM {
      */
     Parameters?: Parameters;
     /**
-     * The targets for the association. You can target instances by using tags, Amazon Web Services resource groups, all instances in an account, or individual instance IDs. For more information about choosing targets for an association, see Using targets and rate controls with State Manager associations in the Amazon Web Services Systems Manager User Guide.
+     * The targets for the association. You can target instances by using tags, Amazon Web Services resource groups, all instances in an Amazon Web Services account, or individual instance IDs. For more information about choosing targets for an association, see Using targets and rate controls with State Manager associations in the Amazon Web Services Systems Manager User Guide.
      */
     Targets?: Targets;
     /**
@@ -2539,7 +2539,7 @@ declare namespace SSM {
      */
     CalendarNames?: CalendarNameOrARNList;
     /**
-     * A location is a combination of Regions and accounts where you want to run the association. Use this action to create an association in multiple Regions and multiple accounts.
+     * A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the association. Use this action to create an association in multiple Regions and multiple accounts.
      */
     TargetLocations?: TargetLocations;
   }
@@ -2731,7 +2731,7 @@ declare namespace SSM {
      */
     Metadata?: MetadataMap;
     /**
-     * Optional metadata that you assign to a resource. You can specify a maximum of five tags for an OpsMetadata object. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an OpsMetadata object to identify an environment or target Region. In this case, you could specify the following key-value pairs:    Key=Environment,Value=Production     Key=Region,Value=us-east-2   
+     * Optional metadata that you assign to a resource. You can specify a maximum of five tags for an OpsMetadata object. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag an OpsMetadata object to identify an environment or target Amazon Web Services Region. In this case, you could specify the following key-value pairs:    Key=Environment,Value=Production     Key=Region,Value=us-east-2   
      */
     Tags?: TagList;
   }
@@ -2811,7 +2811,7 @@ declare namespace SSM {
      */
     S3Destination?: ResourceDataSyncS3Destination;
     /**
-     * Specify SyncToDestination to create a resource data sync that synchronizes data to an S3 bucket for Inventory. If you specify SyncToDestination, you must provide a value for S3Destination. Specify SyncFromSource to synchronize data from a single account and multiple Regions, or multiple accounts and Regions, as listed in Organizations for Explorer. If you specify SyncFromSource, you must provide a value for SyncSource. The default value is SyncToDestination.
+     * Specify SyncToDestination to create a resource data sync that synchronizes data to an S3 bucket for Inventory. If you specify SyncToDestination, you must provide a value for S3Destination. Specify SyncFromSource to synchronize data from a single account and multiple Regions, or multiple Amazon Web Services accounts and Amazon Web Services Regions, as listed in Organizations for Explorer. If you specify SyncFromSource, you must provide a value for SyncSource. The default value is SyncToDestination.
      */
     SyncType?: ResourceDataSyncType;
     /**
@@ -2839,7 +2839,7 @@ declare namespace SSM {
      */
     Name?: DocumentARN;
     /**
-     * The ID of the instance.
+     * The instance ID.   InstanceId has been deprecated. To specify an instance ID for an association, use the Targets parameter. Requests that include the parameter InstanceID with Systems Manager documents (SSM documents) that use schema version 2.0 or later will fail. In addition, if you use the parameter InstanceId, you can't use the parameters AssociationName, DocumentVersion, MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression. To use these parameters, you must use the Targets parameter. 
      */
     InstanceId?: InstanceId;
     /**
@@ -2931,7 +2931,7 @@ declare namespace SSM {
   }
   export interface DeleteParametersRequest {
     /**
-     * The names of the parameters to delete.
+     * The names of the parameters to delete. After deleting a parameter, wait for at least 30 seconds to create a parameter with the same name.
      */
     Names: ParameterNameList;
   }
@@ -3070,7 +3070,7 @@ declare namespace SSM {
   }
   export interface DescribeActivationsResult {
     /**
-     * A list of activations for your account.
+     * A list of activations for your Amazon Web Services account.
      */
     ActivationList?: ActivationList;
     /**
@@ -3262,11 +3262,11 @@ declare namespace SSM {
   }
   export interface DescribeDocumentPermissionResponse {
     /**
-     * The account IDs that have permission to use this document. The ID can be either an account or All.
+     * The account IDs that have permission to use this document. The ID can be either an Amazon Web Services account or All.
      */
     AccountIds?: AccountIdList;
     /**
-     * A list of accounts where the current document is shared and the version shared with each account.
+     * A list of Amazon Web Services accounts where the current document is shared and the version shared with each account.
      */
     AccountSharingInfoList?: AccountSharingInfoList;
     /**
@@ -4496,7 +4496,7 @@ declare namespace SSM {
   }
   export interface GetConnectionStatusRequest {
     /**
-     * The ID of the instance.
+     * The instance ID.
      */
     Target: SessionTarget;
   }
@@ -4542,7 +4542,7 @@ declare namespace SSM {
   }
   export interface GetDeployablePatchSnapshotForInstanceResult {
     /**
-     * The ID of the instance.
+     * The instance ID.
      */
     InstanceId?: InstanceId;
     /**
@@ -5060,7 +5060,7 @@ declare namespace SSM {
   }
   export interface GetOpsSummaryResult {
     /**
-     * The list of aggregated and filtered OpsData.
+     * The list of aggregated details and filtered OpsData.
      */
     Entities?: OpsEntityList;
     /**
@@ -5098,7 +5098,7 @@ declare namespace SSM {
   }
   export interface GetParameterRequest {
     /**
-     * The name of the parameter you want to query.
+     * The name of the parameter you want to query. To query by parameter label, use "Name": "name:label". To query by parameter version, use "Name": "name:version".
      */
     Name: PSParameterName;
     /**
@@ -5151,7 +5151,7 @@ declare namespace SSM {
   }
   export interface GetParametersRequest {
     /**
-     * Names of the parameters for which you want to query information.
+     * Names of the parameters for which you want to query information. To query by parameter label, use "Name": "name:label". To query by parameter version, use "Name": "name:version".
      */
     Names: ParameterNameList;
     /**
@@ -5195,7 +5195,7 @@ declare namespace SSM {
   }
   export interface GetPatchBaselineRequest {
     /**
-     * The ID of the patch baseline to retrieve.
+     * The ID of the patch baseline to retrieve.  To retrieve information about an Amazon Web Services managed patch baseline, specify the full Amazon Resource Name (ARN) of the baseline. For example, for the baseline AWS-AmazonLinuxDefaultPatchBaseline, specify arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0e392de35e7c563b7 instead of pb-0e392de35e7c563b7. 
      */
     BaselineId: BaselineId;
   }
@@ -6015,11 +6015,11 @@ declare namespace SSM {
   }
   export interface ListDocumentMetadataHistoryRequest {
     /**
-     * The name of the document.
+     * The name of the change template.
      */
     Name: DocumentName;
     /**
-     * The version of the document.
+     * The version of the change template.
      */
     DocumentVersion?: DocumentVersion;
     /**
@@ -6037,19 +6037,19 @@ declare namespace SSM {
   }
   export interface ListDocumentMetadataHistoryResponse {
     /**
-     * The name of the document.
+     * The name of the change template.
      */
     Name?: DocumentName;
     /**
-     * The version of the document.
+     * The version of the change template.
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The user ID of the person in the organization who requested the document review.
+     * The user ID of the person in the organization who requested the review of the change template.
      */
     Author?: DocumentAuthor;
     /**
-     * Information about the response to the document approval request.
+     * Information about the response to the change template approval request.
      */
     Metadata?: DocumentMetadataResponseInfo;
     /**
@@ -6260,7 +6260,7 @@ declare namespace SSM {
   }
   export interface ListResourceDataSyncRequest {
     /**
-     * View a list of resource data syncs according to the sync type. Specify SyncToDestination to view resource data syncs that synchronize data to an Amazon S3 bucket. Specify SyncFromSource to view resource data syncs from Organizations or from multiple Regions.
+     * View a list of resource data syncs according to the sync type. Specify SyncToDestination to view resource data syncs that synchronize data to an Amazon S3 bucket. Specify SyncFromSource to view resource data syncs from Organizations or from multiple Amazon Web Services Regions.
      */
     SyncType?: ResourceDataSyncType;
     /**
@@ -6308,7 +6308,7 @@ declare namespace SSM {
      */
     S3KeyPrefix?: S3KeyPrefix;
     /**
-     * The Region where the S3 bucket is located.
+     * The Amazon Web Services Region where the S3 bucket is located.
      */
     S3Region: S3Region;
   }
@@ -6878,7 +6878,7 @@ declare namespace SSM {
   export type OpsFilterValueList = OpsFilterValue[];
   export interface OpsItem {
     /**
-     * The ARN of the account that created the OpsItem.
+     * The ARN of the Amazon Web Services account that created the OpsItem.
      */
     CreatedBy?: String;
     /**
@@ -6894,7 +6894,7 @@ declare namespace SSM {
      */
     Description?: OpsItemDescription;
     /**
-     * The ARN of the account that last updated the OpsItem.
+     * The ARN of the Amazon Web Services account that last updated the OpsItem.
      */
     LastModifiedBy?: String;
     /**
@@ -7777,23 +7777,23 @@ declare namespace SSM {
   export type Product = string;
   export interface ProgressCounters {
     /**
-     * The total number of steps run in all specified Regions and accounts for the current Automation execution.
+     * The total number of steps run in all specified Amazon Web Services Regions and Amazon Web Services accounts for the current Automation execution.
      */
     TotalSteps?: Integer;
     /**
-     * The total number of steps that successfully completed in all specified Regions and accounts for the current Automation execution.
+     * The total number of steps that successfully completed in all specified Amazon Web Services Regions and Amazon Web Services accounts for the current Automation execution.
      */
     SuccessSteps?: Integer;
     /**
-     * The total number of steps that failed to run in all specified Regions and accounts for the current Automation execution.
+     * The total number of steps that failed to run in all specified Amazon Web Services Regions and Amazon Web Services accounts for the current Automation execution.
      */
     FailedSteps?: Integer;
     /**
-     * The total number of steps that the system cancelled in all specified Regions and accounts for the current Automation execution.
+     * The total number of steps that the system cancelled in all specified Amazon Web Services Regions and Amazon Web Services accounts for the current Automation execution.
      */
     CancelledSteps?: Integer;
     /**
-     * The total number of steps that timed out in all specified Regions and accounts for the current Automation execution.
+     * The total number of steps that timed out in all specified Amazon Web Services Regions and Amazon Web Services accounts for the current Automation execution.
      */
     TimedOutSteps?: Integer;
   }
@@ -7848,7 +7848,7 @@ declare namespace SSM {
   }
   export interface PutParameterRequest {
     /**
-     * The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For parameters in a hierarchy, you must include a leading forward slash character (/) when you create or reference a parameter. For example: /Dev/DBServer/MySQL/db-string13  Naming Constraints:   Parameter names are case sensitive.   A parameter name must be unique within an Region   A parameter name can't be prefixed with "aws" or "ssm" (case-insensitive).   Parameter names can include only the following symbols and letters: a-zA-Z0-9_.-  In addition, the slash character ( / ) is used to delineate hierarchies in parameter names. For example: /Dev/Production/East/Project-ABC/MyParameter    A parameter name can't include spaces.   Parameter hierarchies are limited to a maximum depth of fifteen levels.   For additional information about valid values for parameter names, see Creating Systems Manager parameters in the Amazon Web Services Systems Manager User Guide.  The maximum length constraint listed below includes capacity for additional system attributes that aren't part of the name. The maximum length for a parameter name, including the full length of the parameter ARN, is 1011 characters. For example, the length of the following parameter name is 65 characters, not 20 characters:  arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName  
+     * The fully qualified name of the parameter that you want to add to the system. The fully qualified name includes the complete hierarchy of the parameter path and name. For parameters in a hierarchy, you must include a leading forward slash character (/) when you create or reference a parameter. For example: /Dev/DBServer/MySQL/db-string13  Naming Constraints:   Parameter names are case sensitive.   A parameter name must be unique within an Amazon Web Services Region   A parameter name can't be prefixed with "aws" or "ssm" (case-insensitive).   Parameter names can include only the following symbols and letters: a-zA-Z0-9_.-  In addition, the slash character ( / ) is used to delineate hierarchies in parameter names. For example: /Dev/Production/East/Project-ABC/MyParameter    A parameter name can't include spaces.   Parameter hierarchies are limited to a maximum depth of fifteen levels.   For additional information about valid values for parameter names, see Creating Systems Manager parameters in the Amazon Web Services Systems Manager User Guide.  The maximum length constraint listed below includes capacity for additional system attributes that aren't part of the name. The maximum length for a parameter name, including the full length of the parameter ARN, is 1011 characters. For example, the length of the following parameter name is 65 characters, not 20 characters:  arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName  
      */
     Name: PSParameterName;
     /**
@@ -7864,7 +7864,7 @@ declare namespace SSM {
      */
     Type?: ParameterType;
     /**
-     * The Key Management Service (KMS) ID that you want to use to encrypt a parameter. Either the default KMS key automatically assigned to your account or a custom key. Required for parameters that use the SecureString data type. If you don't specify a key ID, the system uses the default key associated with your account.   To use your default KMS key, choose the SecureString data type, and do not specify the Key ID when you create the parameter. The system automatically populates Key ID with your default KMS key.   To use a custom KMS key, choose the SecureString data type with the Key ID parameter.  
+     * The Key Management Service (KMS) ID that you want to use to encrypt a parameter. Either the default KMS key automatically assigned to your Amazon Web Services account or a custom key. Required for parameters that use the SecureString data type. If you don't specify a key ID, the system uses the default key associated with your Amazon Web Services account.   To use your default KMS key, choose the SecureString data type, and do not specify the Key ID when you create the parameter. The system automatically populates Key ID with your default KMS key.   To use a custom KMS key, choose the SecureString data type with the Key ID parameter.  
      */
     KeyId?: ParameterKeyId;
     /**
@@ -7880,7 +7880,7 @@ declare namespace SSM {
      */
     Tags?: TagList;
     /**
-     * The parameter tier to assign to a parameter. Parameter Store offers a standard tier and an advanced tier for parameters. Standard parameters have a content size limit of 4 KB and can't be configured to use parameter policies. You can create a maximum of 10,000 standard parameters for each Region in an account. Standard parameters are offered at no additional cost.  Advanced parameters have a content size limit of 8 KB and can be configured to use parameter policies. You can create a maximum of 100,000 advanced parameters for each Region in an account. Advanced parameters incur a charge. For more information, see Standard and advanced parameter tiers in the Amazon Web Services Systems Manager User Guide. You can change a standard parameter to an advanced parameter any time. But you can't revert an advanced parameter to a standard parameter. Reverting an advanced parameter to a standard parameter would result in data loss because the system would truncate the size of the parameter from 8 KB to 4 KB. Reverting would also remove any policies attached to the parameter. Lastly, advanced parameters use a different form of encryption than standard parameters.  If you no longer need an advanced parameter, or if you no longer want to incur charges for an advanced parameter, you must delete it and recreate it as a new standard parameter.   Using the Default Tier Configuration  In PutParameter requests, you can specify the tier to create the parameter in. Whenever you specify a tier in the request, Parameter Store creates or updates the parameter according to that request. However, if you don't specify a tier in a request, Parameter Store assigns the tier based on the current Parameter Store default tier configuration. The default tier when you begin using Parameter Store is the standard-parameter tier. If you use the advanced-parameter tier, you can specify one of the following as the default:    Advanced: With this option, Parameter Store evaluates all requests as advanced parameters.     Intelligent-Tiering: With this option, Parameter Store evaluates each request to determine if the parameter is standard or advanced.  If the request doesn't include any options that require an advanced parameter, the parameter is created in the standard-parameter tier. If one or more options requiring an advanced parameter are included in the request, Parameter Store create a parameter in the advanced-parameter tier. This approach helps control your parameter-related costs by always creating standard parameters unless an advanced parameter is necessary.    Options that require an advanced parameter include the following:   The content size of the parameter is more than 4 KB.   The parameter uses a parameter policy.   More than 10,000 parameters already exist in your account in the current Region.   For more information about configuring the default tier option, see Specifying a default parameter tier in the Amazon Web Services Systems Manager User Guide.
+     * The parameter tier to assign to a parameter. Parameter Store offers a standard tier and an advanced tier for parameters. Standard parameters have a content size limit of 4 KB and can't be configured to use parameter policies. You can create a maximum of 10,000 standard parameters for each Region in an Amazon Web Services account. Standard parameters are offered at no additional cost.  Advanced parameters have a content size limit of 8 KB and can be configured to use parameter policies. You can create a maximum of 100,000 advanced parameters for each Region in an Amazon Web Services account. Advanced parameters incur a charge. For more information, see Standard and advanced parameter tiers in the Amazon Web Services Systems Manager User Guide. You can change a standard parameter to an advanced parameter any time. But you can't revert an advanced parameter to a standard parameter. Reverting an advanced parameter to a standard parameter would result in data loss because the system would truncate the size of the parameter from 8 KB to 4 KB. Reverting would also remove any policies attached to the parameter. Lastly, advanced parameters use a different form of encryption than standard parameters.  If you no longer need an advanced parameter, or if you no longer want to incur charges for an advanced parameter, you must delete it and recreate it as a new standard parameter.   Using the Default Tier Configuration  In PutParameter requests, you can specify the tier to create the parameter in. Whenever you specify a tier in the request, Parameter Store creates or updates the parameter according to that request. However, if you don't specify a tier in a request, Parameter Store assigns the tier based on the current Parameter Store default tier configuration. The default tier when you begin using Parameter Store is the standard-parameter tier. If you use the advanced-parameter tier, you can specify one of the following as the default:    Advanced: With this option, Parameter Store evaluates all requests as advanced parameters.     Intelligent-Tiering: With this option, Parameter Store evaluates each request to determine if the parameter is standard or advanced.  If the request doesn't include any options that require an advanced parameter, the parameter is created in the standard-parameter tier. If one or more options requiring an advanced parameter are included in the request, Parameter Store create a parameter in the advanced-parameter tier. This approach helps control your parameter-related costs by always creating standard parameters unless an advanced parameter is necessary.    Options that require an advanced parameter include the following:   The content size of the parameter is more than 4 KB.   The parameter uses a parameter policy.   More than 10,000 parameters already exist in your Amazon Web Services account in the current Amazon Web Services Region.   For more information about configuring the default tier option, see Specifying a default parameter tier in the Amazon Web Services Systems Manager User Guide.
      */
     Tier?: ParameterTier;
     /**
@@ -7888,7 +7888,7 @@ declare namespace SSM {
      */
     Policies?: ParameterPolicies;
     /**
-     * The data type for a String parameter. Supported data types include plain text and Amazon Machine Image (AMI) IDs.  The following data type values are supported.     text     aws:ec2:image    When you create a String parameter and specify aws:ec2:image, Amazon Web Services Systems Manager validates the parameter value is in the required format, such as ami-12345abcdeEXAMPLE, and that the specified AMI is available in your account. For more information, see Native parameter support for Amazon Machine Image (AMI) IDs in the Amazon Web Services Systems Manager User Guide.
+     * The data type for a String parameter. Supported data types include plain text and Amazon Machine Image (AMI) IDs.  The following data type values are supported.     text     aws:ec2:image    When you create a String parameter and specify aws:ec2:image, Amazon Web Services Systems Manager validates the parameter value is in the required format, such as ami-12345abcdeEXAMPLE, and that the specified AMI is available in your Amazon Web Services account. For more information, see Native parameter support for Amazon Machine Image (AMI) IDs in the Amazon Web Services Systems Manager User Guide.
      */
     DataType?: ParameterDataType;
   }
@@ -8149,7 +8149,7 @@ declare namespace SSM {
      */
     SyncName?: ResourceDataSyncName;
     /**
-     * The type of resource data sync. If SyncType is SyncToDestination, then the resource data sync synchronizes data to an S3 bucket. If the SyncType is SyncFromSource then the resource data sync synchronizes data from Organizations or from multiple Regions.
+     * The type of resource data sync. If SyncType is SyncToDestination, then the resource data sync synchronizes data to an S3 bucket. If the SyncType is SyncFromSource then the resource data sync synchronizes data from Organizations or from multiple Amazon Web Services Regions.
      */
     SyncType?: ResourceDataSyncType;
     /**
@@ -8212,7 +8212,7 @@ declare namespace SSM {
      */
     SyncFormat: ResourceDataSyncS3Format;
     /**
-     * The Region with the S3 bucket targeted by the resource data sync.
+     * The Amazon Web Services Region with the S3 bucket targeted by the resource data sync.
      */
     Region: ResourceDataSyncS3Region;
     /**
@@ -8237,15 +8237,15 @@ declare namespace SSM {
      */
     AwsOrganizationsSource?: ResourceDataSyncAwsOrganizationsSource;
     /**
-     * The SyncSource Regions included in the resource data sync.
+     * The SyncSource Amazon Web Services Regions included in the resource data sync.
      */
     SourceRegions: ResourceDataSyncSourceRegionList;
     /**
-     * Whether to automatically synchronize and aggregate data from new Regions when those Regions come online.
+     * Whether to automatically synchronize and aggregate data from new Amazon Web Services Regions when those Regions come online.
      */
     IncludeFutureRegions?: ResourceDataSyncIncludeFutureRegions;
     /**
-     * When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager automatically enables all OpsData sources in the selected Regions for all accounts in your organization (or in the selected organization units). For more information, see About multiple account and Region resource data syncs in the Amazon Web Services Systems Manager User Guide.
+     * When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager automatically enables all OpsData sources in the selected Amazon Web Services Regions for all Amazon Web Services accounts in your organization (or in the selected organization units). For more information, see About multiple account and Region resource data syncs in the Amazon Web Services Systems Manager User Guide.
      */
     EnableAllOpsDataSources?: ResourceDataSyncEnableAllOpsDataSources;
   }
@@ -8262,11 +8262,11 @@ declare namespace SSM {
      */
     AwsOrganizationsSource?: ResourceDataSyncAwsOrganizationsSource;
     /**
-     * The SyncSource Regions included in the resource data sync.
+     * The SyncSource Amazon Web Services Regions included in the resource data sync.
      */
     SourceRegions?: ResourceDataSyncSourceRegionList;
     /**
-     * Whether to automatically synchronize and aggregate data from new Regions when those Regions come online.
+     * Whether to automatically synchronize and aggregate data from new Amazon Web Services Regions when those Regions come online.
      */
     IncludeFutureRegions?: ResourceDataSyncIncludeFutureRegions;
     /**
@@ -8274,7 +8274,7 @@ declare namespace SSM {
      */
     State?: ResourceDataSyncState;
     /**
-     * When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager automatically enables all OpsData sources in the selected Regions for all accounts in your organization (or in the selected organization units). For more information, see About multiple account and Region resource data syncs in the Amazon Web Services Systems Manager User Guide.
+     * When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager automatically enables all OpsData sources in the selected Amazon Web Services Regions for all Amazon Web Services accounts in your organization (or in the selected organization units). For more information, see About multiple account and Region resource data syncs in the Amazon Web Services Systems Manager User Guide.
      */
     EnableAllOpsDataSources?: ResourceDataSyncEnableAllOpsDataSources;
   }
@@ -8307,7 +8307,7 @@ declare namespace SSM {
      */
     TokenValue?: TokenValue;
     /**
-     * A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output).  region represents the Region identifier for an Region supported by Amazon Web Services Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of supported region values, see the Region column in Systems Manager service endpoints in the Amazon Web Services General Reference.  session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
+     * A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output).  region represents the Region identifier for an Amazon Web Services Region supported by Amazon Web Services Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of supported region values, see the Region column in Systems Manager service endpoints in the Amazon Web Services General Reference.  session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
      */
     StreamUrl?: StreamUrl;
   }
@@ -8358,7 +8358,7 @@ declare namespace SSM {
      */
     MaxErrors?: MaxErrors;
     /**
-     * Information about the Regions and accounts targeted by the current Runbook operation.
+     * Information about the Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Runbook operation.
      */
     TargetLocations?: TargetLocations;
   }
@@ -8456,7 +8456,7 @@ declare namespace SSM {
      */
     Parameters?: Parameters;
     /**
-     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Region of the S3 bucket.
+     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager automatically determines the Amazon Web Services Region of the S3 bucket.
      */
     OutputS3Region?: S3Region;
     /**
@@ -8680,7 +8680,7 @@ declare namespace SSM {
      */
     MaxErrors?: MaxErrors;
     /**
-     * A location is a combination of Regions and/or accounts where you want to run the automation. Use this operation to start an automation in multiple Regions and multiple accounts. For more information, see Running Automation workflows in multiple Regions and accounts in the Amazon Web Services Systems Manager User Guide. 
+     * A location is a combination of Amazon Web Services Regions and/or Amazon Web Services accounts where you want to run the automation. Use this operation to start an automation in multiple Amazon Web Services Regions and multiple Amazon Web Services accounts. For more information, see Running Automation workflows in multiple Amazon Web Services Regions and Amazon Web Services accounts in the Amazon Web Services Systems Manager User Guide. 
      */
     TargetLocations?: TargetLocations;
     /**
@@ -8724,7 +8724,7 @@ declare namespace SSM {
      */
     Runbooks: Runbooks;
     /**
-     * Optional metadata that you assign to a resource. You can specify a maximum of five tags for a change request. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a change request to identify an environment or target Region. In this case, you could specify the following key-value pairs:    Key=Environment,Value=Production     Key=Region,Value=us-east-2   
+     * Optional metadata that you assign to a resource. You can specify a maximum of five tags for a change request. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment. For example, you might want to tag a change request to identify an environment or target Amazon Web Services Region. In this case, you could specify the following key-value pairs:    Key=Environment,Value=Production     Key=Region,Value=us-east-2   
      */
     Tags?: TagList;
     /**
@@ -8766,7 +8766,7 @@ declare namespace SSM {
      */
     TokenValue?: TokenValue;
     /**
-     * A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)   region represents the Region identifier for an Region supported by Amazon Web Services Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of supported region values, see the Region column in Systems Manager service endpoints in the Amazon Web Services General Reference.  session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
+     * A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and receive output from the instance. Format: wss://ssmmessages.region.amazonaws.com/v1/data-channel/session-id?stream=(input|output)   region represents the Region identifier for an Amazon Web Services Region supported by Amazon Web Services Systems Manager, such as us-east-2 for the US East (Ohio) Region. For a list of supported region values, see the Region column in Systems Manager service endpoints in the Amazon Web Services General Reference.  session-id represents the ID of a Session Manager session, such as 1a2b3c4dEXAMPLE.
      */
     StreamUrl?: StreamUrl;
   }
@@ -8860,7 +8860,7 @@ declare namespace SSM {
      */
     Targets?: Targets;
     /**
-     * The combination of Regions and accounts targeted by the current Automation execution.
+     * The combination of Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Automation execution.
      */
     TargetLocation?: TargetLocation;
   }
@@ -8923,15 +8923,15 @@ declare namespace SSM {
   export type TargetKey = string;
   export interface TargetLocation {
     /**
-     * The accounts targeted by the current Automation execution.
+     * The Amazon Web Services accounts targeted by the current Automation execution.
      */
     Accounts?: Accounts;
     /**
-     * The Regions targeted by the current Automation execution.
+     * The Amazon Web Services Regions targeted by the current Automation execution.
      */
     Regions?: Regions;
     /**
-     * The maximum number of Regions and accounts allowed to run the Automation concurrently.
+     * The maximum number of Amazon Web Services Regions and Amazon Web Services accounts allowed to run the Automation concurrently.
      */
     TargetLocationMaxConcurrency?: MaxConcurrency;
     /**
@@ -9016,7 +9016,7 @@ declare namespace SSM {
      */
     OutputLocation?: InstanceAssociationOutputLocation;
     /**
-     * The name of the SSM Command document or Automation runbook that contains the configuration information for the instance. You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account. For Systems Manager document (SSM document) that are shared with you from other accounts, you must specify the complete SSM document ARN, in the following format:  arn:aws:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
+     * The name of the SSM Command document or Automation runbook that contains the configuration information for the instance. You can specify Amazon Web Services-predefined documents, documents you created, or a document that is shared with you from another account. For Systems Manager document (SSM document) that are shared with you from other Amazon Web Services accounts, you must specify the complete SSM document ARN, in the following format:  arn:aws:ssm:region:account-id:document/document-name   For example:  arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document  For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need to specify the document name. For example, AWS-ApplyPatchBaseline or My-Document.
      */
     Name?: DocumentARN;
     /**
@@ -9060,7 +9060,7 @@ declare namespace SSM {
      */
     CalendarNames?: CalendarNameOrARNList;
     /**
-     * A location is a combination of Regions and accounts where you want to run the association. Use this action to update an association in multiple Regions and multiple accounts.
+     * A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the association. Use this action to update an association in multiple Regions and multiple accounts.
      */
     TargetLocations?: TargetLocations;
   }
@@ -9076,7 +9076,7 @@ declare namespace SSM {
      */
     Name: DocumentARN;
     /**
-     * The ID of the instance.
+     * The instance ID.
      */
     InstanceId: InstanceId;
     /**
@@ -9108,15 +9108,15 @@ declare namespace SSM {
   }
   export interface UpdateDocumentMetadataRequest {
     /**
-     * The name of the document for which a version is to be updated.
+     * The name of the change template for which a version's metadata is to be updated.
      */
     Name: DocumentName;
     /**
-     * The version of a document to update.
+     * The version of a change template in which to update approval metadata.
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The document review details to update.
+     * The change template review details to update.
      */
     DocumentReviews: DocumentReviews;
   }

@@ -165,11 +165,11 @@ declare class Rekognition extends Service {
    */
   detectProtectiveEquipment(callback?: (err: AWSError, data: Rekognition.Types.DetectProtectiveEquipmentResponse) => void): Request<Rekognition.Types.DetectProtectiveEquipmentResponse, AWSError>;
   /**
-   * Detects text in the input image and converts it into machine-readable text. Pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not supported. The image must be either a .png or .jpeg formatted file.  The DetectText operation returns text in an array of TextDetection elements, TextDetections. Each TextDetection element provides information about a single word or line of text that was detected in the image.  A word is one or more ISO basic latin script characters that are not separated by spaces. DetectText can detect up to 50 words in an image. A line is a string of equally spaced words. A line isn't necessarily a complete sentence. For example, a driver's license number is detected as a line. A line ends when there is no aligned text after it. Also, a line ends when there is a large gap between words, relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition may detect multiple lines in text aligned in the same direction. Periods don't represent the end of a line. If a sentence spans multiple lines, the DetectText operation returns multiple lines. To determine whether a TextDetection element is a line of text or a word, use the TextDetection object Type field.  To be detected, text must be within +/- 90 degrees orientation of the horizontal axis. For more information, see DetectText in the Amazon Rekognition Developer Guide.
+   * Detects text in the input image and converts it into machine-readable text. Pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not supported. The image must be either a .png or .jpeg formatted file.  The DetectText operation returns text in an array of TextDetection elements, TextDetections. Each TextDetection element provides information about a single word or line of text that was detected in the image.  A word is one or more ISO basic latin script characters that are not separated by spaces. DetectText can detect up to 100 words in an image. A line is a string of equally spaced words. A line isn't necessarily a complete sentence. For example, a driver's license number is detected as a line. A line ends when there is no aligned text after it. Also, a line ends when there is a large gap between words, relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition may detect multiple lines in text aligned in the same direction. Periods don't represent the end of a line. If a sentence spans multiple lines, the DetectText operation returns multiple lines. To determine whether a TextDetection element is a line of text or a word, use the TextDetection object Type field.  To be detected, text must be within +/- 90 degrees orientation of the horizontal axis. For more information, see DetectText in the Amazon Rekognition Developer Guide.
    */
   detectText(params: Rekognition.Types.DetectTextRequest, callback?: (err: AWSError, data: Rekognition.Types.DetectTextResponse) => void): Request<Rekognition.Types.DetectTextResponse, AWSError>;
   /**
-   * Detects text in the input image and converts it into machine-readable text. Pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not supported. The image must be either a .png or .jpeg formatted file.  The DetectText operation returns text in an array of TextDetection elements, TextDetections. Each TextDetection element provides information about a single word or line of text that was detected in the image.  A word is one or more ISO basic latin script characters that are not separated by spaces. DetectText can detect up to 50 words in an image. A line is a string of equally spaced words. A line isn't necessarily a complete sentence. For example, a driver's license number is detected as a line. A line ends when there is no aligned text after it. Also, a line ends when there is a large gap between words, relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition may detect multiple lines in text aligned in the same direction. Periods don't represent the end of a line. If a sentence spans multiple lines, the DetectText operation returns multiple lines. To determine whether a TextDetection element is a line of text or a word, use the TextDetection object Type field.  To be detected, text must be within +/- 90 degrees orientation of the horizontal axis. For more information, see DetectText in the Amazon Rekognition Developer Guide.
+   * Detects text in the input image and converts it into machine-readable text. Pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not supported. The image must be either a .png or .jpeg formatted file.  The DetectText operation returns text in an array of TextDetection elements, TextDetections. Each TextDetection element provides information about a single word or line of text that was detected in the image.  A word is one or more ISO basic latin script characters that are not separated by spaces. DetectText can detect up to 100 words in an image. A line is a string of equally spaced words. A line isn't necessarily a complete sentence. For example, a driver's license number is detected as a line. A line ends when there is no aligned text after it. Also, a line ends when there is a large gap between words, relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition may detect multiple lines in text aligned in the same direction. Periods don't represent the end of a line. If a sentence spans multiple lines, the DetectText operation returns multiple lines. To determine whether a TextDetection element is a line of text or a word, use the TextDetection object Type field.  To be detected, text must be within +/- 90 degrees orientation of the horizontal axis. For more information, see DetectText in the Amazon Rekognition Developer Guide.
    */
   detectText(callback?: (err: AWSError, data: Rekognition.Types.DetectTextResponse) => void): Request<Rekognition.Types.DetectTextResponse, AWSError>;
   /**
@@ -189,11 +189,11 @@ declare class Rekognition extends Service {
    */
   getCelebrityRecognition(callback?: (err: AWSError, data: Rekognition.Types.GetCelebrityRecognitionResponse) => void): Request<Rekognition.Types.GetCelebrityRecognitionResponse, AWSError>;
   /**
-   * Gets the unsafe content analysis results for a Amazon Rekognition Video analysis started by StartContentModeration. Unsafe content analysis of a video is an asynchronous operation. You start analysis by calling StartContentModeration which returns a job identifier (JobId). When analysis finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartContentModeration. To get the results of the unsafe content analysis, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetContentModeration and pass the job identifier (JobId) from the initial call to StartContentModeration.  For more information, see Working with Stored Videos in the Amazon Rekognition Devlopers Guide.  GetContentModeration returns detected unsafe content labels, and the time they are detected, in an array, ModerationLabels, of ContentModerationDetection objects.  By default, the moderated labels are returned sorted by time, in milliseconds from the start of the video. You can also sort them by moderated label by specifying NAME for the SortBy input parameter.  Since video analysis can return a large number of results, use the MaxResults parameter to limit the number of labels returned in a single call to GetContentModeration. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetContentModeration and populate the NextToken request parameter with the value of NextToken returned from the previous call to GetContentModeration. For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.
+   * Gets the inappropriate, unwanted, or offensive content analysis results for a Amazon Rekognition Video analysis started by StartContentModeration. For a list of moderation labels in Amazon Rekognition, see Using the image and video moderation APIs. Amazon Rekognition Video inappropriate or offensive content detection in a stored video is an asynchronous operation. You start analysis by calling StartContentModeration which returns a job identifier (JobId). When analysis finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartContentModeration. To get the results of the content analysis, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetContentModeration and pass the job identifier (JobId) from the initial call to StartContentModeration.  For more information, see Working with Stored Videos in the Amazon Rekognition Devlopers Guide.  GetContentModeration returns detected inappropriate, unwanted, or offensive content moderation labels, and the time they are detected, in an array, ModerationLabels, of ContentModerationDetection objects.  By default, the moderated labels are returned sorted by time, in milliseconds from the start of the video. You can also sort them by moderated label by specifying NAME for the SortBy input parameter.  Since video analysis can return a large number of results, use the MaxResults parameter to limit the number of labels returned in a single call to GetContentModeration. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetContentModeration and populate the NextToken request parameter with the value of NextToken returned from the previous call to GetContentModeration. For more information, see Content moderation in the Amazon Rekognition Developer Guide.
    */
   getContentModeration(params: Rekognition.Types.GetContentModerationRequest, callback?: (err: AWSError, data: Rekognition.Types.GetContentModerationResponse) => void): Request<Rekognition.Types.GetContentModerationResponse, AWSError>;
   /**
-   * Gets the unsafe content analysis results for a Amazon Rekognition Video analysis started by StartContentModeration. Unsafe content analysis of a video is an asynchronous operation. You start analysis by calling StartContentModeration which returns a job identifier (JobId). When analysis finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartContentModeration. To get the results of the unsafe content analysis, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetContentModeration and pass the job identifier (JobId) from the initial call to StartContentModeration.  For more information, see Working with Stored Videos in the Amazon Rekognition Devlopers Guide.  GetContentModeration returns detected unsafe content labels, and the time they are detected, in an array, ModerationLabels, of ContentModerationDetection objects.  By default, the moderated labels are returned sorted by time, in milliseconds from the start of the video. You can also sort them by moderated label by specifying NAME for the SortBy input parameter.  Since video analysis can return a large number of results, use the MaxResults parameter to limit the number of labels returned in a single call to GetContentModeration. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetContentModeration and populate the NextToken request parameter with the value of NextToken returned from the previous call to GetContentModeration. For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.
+   * Gets the inappropriate, unwanted, or offensive content analysis results for a Amazon Rekognition Video analysis started by StartContentModeration. For a list of moderation labels in Amazon Rekognition, see Using the image and video moderation APIs. Amazon Rekognition Video inappropriate or offensive content detection in a stored video is an asynchronous operation. You start analysis by calling StartContentModeration which returns a job identifier (JobId). When analysis finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to StartContentModeration. To get the results of the content analysis, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetContentModeration and pass the job identifier (JobId) from the initial call to StartContentModeration.  For more information, see Working with Stored Videos in the Amazon Rekognition Devlopers Guide.  GetContentModeration returns detected inappropriate, unwanted, or offensive content moderation labels, and the time they are detected, in an array, ModerationLabels, of ContentModerationDetection objects.  By default, the moderated labels are returned sorted by time, in milliseconds from the start of the video. You can also sort them by moderated label by specifying NAME for the SortBy input parameter.  Since video analysis can return a large number of results, use the MaxResults parameter to limit the number of labels returned in a single call to GetContentModeration. If there are more results than specified in MaxResults, the value of NextToken in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call GetContentModeration and populate the NextToken request parameter with the value of NextToken returned from the previous call to GetContentModeration. For more information, see Content moderation in the Amazon Rekognition Developer Guide.
    */
   getContentModeration(callback?: (err: AWSError, data: Rekognition.Types.GetContentModerationResponse) => void): Request<Rekognition.Types.GetContentModerationResponse, AWSError>;
   /**
@@ -317,11 +317,11 @@ declare class Rekognition extends Service {
    */
   startCelebrityRecognition(callback?: (err: AWSError, data: Rekognition.Types.StartCelebrityRecognitionResponse) => void): Request<Rekognition.Types.StartCelebrityRecognitionResponse, AWSError>;
   /**
-   *  Starts asynchronous detection of unsafe content in a stored video. Amazon Rekognition Video can moderate content in a video stored in an Amazon S3 bucket. Use Video to specify the bucket name and the filename of the video. StartContentModeration returns a job identifier (JobId) which you use to get the results of the analysis. When unsafe content analysis is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in NotificationChannel. To get the results of the unsafe content analysis, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetContentModeration and pass the job identifier (JobId) from the initial call to StartContentModeration.  For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.
+   *  Starts asynchronous detection of inappropriate, unwanted, or offensive content in a stored video. For a list of moderation labels in Amazon Rekognition, see Using the image and video moderation APIs. Amazon Rekognition Video can moderate content in a video stored in an Amazon S3 bucket. Use Video to specify the bucket name and the filename of the video. StartContentModeration returns a job identifier (JobId) which you use to get the results of the analysis. When content analysis is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in NotificationChannel. To get the results of the content analysis, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetContentModeration and pass the job identifier (JobId) from the initial call to StartContentModeration.  For more information, see Content moderation in the Amazon Rekognition Developer Guide.
    */
   startContentModeration(params: Rekognition.Types.StartContentModerationRequest, callback?: (err: AWSError, data: Rekognition.Types.StartContentModerationResponse) => void): Request<Rekognition.Types.StartContentModerationResponse, AWSError>;
   /**
-   *  Starts asynchronous detection of unsafe content in a stored video. Amazon Rekognition Video can moderate content in a video stored in an Amazon S3 bucket. Use Video to specify the bucket name and the filename of the video. StartContentModeration returns a job identifier (JobId) which you use to get the results of the analysis. When unsafe content analysis is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in NotificationChannel. To get the results of the unsafe content analysis, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetContentModeration and pass the job identifier (JobId) from the initial call to StartContentModeration.  For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.
+   *  Starts asynchronous detection of inappropriate, unwanted, or offensive content in a stored video. For a list of moderation labels in Amazon Rekognition, see Using the image and video moderation APIs. Amazon Rekognition Video can moderate content in a video stored in an Amazon S3 bucket. Use Video to specify the bucket name and the filename of the video. StartContentModeration returns a job identifier (JobId) which you use to get the results of the analysis. When content analysis is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in NotificationChannel. To get the results of the content analysis, first check that the status value published to the Amazon SNS topic is SUCCEEDED. If so, call GetContentModeration and pass the job identifier (JobId) from the initial call to StartContentModeration.  For more information, see Content moderation in the Amazon Rekognition Developer Guide.
    */
   startContentModeration(callback?: (err: AWSError, data: Rekognition.Types.StartContentModerationResponse) => void): Request<Rekognition.Types.StartContentModerationResponse, AWSError>;
   /**
@@ -482,6 +482,16 @@ declare namespace Rekognition {
      * Level of confidence in the determination.
      */
     Confidence?: Percent;
+  }
+  export interface BlackFrame {
+    /**
+     *  A threshold used to determine the maximum luminance value for a pixel to be considered black. In a full color range video, luminance values range from 0-255. A pixel value of 0 is pure black, and the most strict filter. The maximum black pixel value is computed as follows: max_black_pixel_value = minimum_luminance + MaxPixelThreshold *luminance_range.  For example, for a full range video with BlackPixelThreshold = 0.1, max_black_pixel_value is 0 + 0.1 * (255-0) = 25.5. The default value of MaxPixelThreshold is 0.2, which maps to a max_black_pixel_value of 51 for a full range video. You can lower this threshold to be more strict on black levels.
+     */
+    MaxPixelThreshold?: MaxPixelThreshold;
+    /**
+     *  The minimum percentage of pixels in a frame that need to have a luminance below the max_black_pixel_value for a frame to be considered a black frame. Luminance is calculated using the BT.709 matrix.  The default value is 99, which means at least 99% of all pixels in the frame are black pixels as per the MaxPixelThreshold set. You can reduce this value to allow more noise on the black frame.
+     */
+    MinCoveragePercentage?: MinCoveragePercentage;
   }
   export type BodyPart = "FACE"|"HEAD"|"LEFT_HAND"|"RIGHT_HAND"|string;
   export type BodyParts = ProtectiveEquipmentBodyPart[];
@@ -659,11 +669,11 @@ declare namespace Rekognition {
   export type ContentClassifiers = ContentClassifier[];
   export interface ContentModerationDetection {
     /**
-     * Time, in milliseconds from the beginning of the video, that the unsafe content label was detected.
+     * Time, in milliseconds from the beginning of the video, that the content moderation label was detected.
      */
     Timestamp?: Timestamp;
     /**
-     * The unsafe content label detected by in the stored video.
+     * The content moderation label detected by in the stored video.
      */
     ModerationLabel?: ModerationLabel;
   }
@@ -725,7 +735,7 @@ declare namespace Rekognition {
      */
     VersionName: VersionName;
     /**
-     * The Amazon S3 location to store the results of training.
+     * The Amazon S3 bucket location to store the results of training. The S3 bucket can be in any AWS account as long as the caller has s3:PutObject permissions on the S3 bucket.
      */
     OutputConfig: OutputConfig;
     /**
@@ -741,7 +751,7 @@ declare namespace Rekognition {
      */
     Tags?: TagMap;
     /**
-     * The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK). You can supply the Amazon Resource Name (ARN) of your CMK, the ID of your CMK, or an alias for your CMK. The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. The key is also used to encrypt training results and manifest files written to the output Amazon S3 bucket (OutputConfig). If you don't specify a value for KmsKeyId, images copied into the service are encrypted using a key that AWS owns and manages.
+     * The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK). You can supply the Amazon Resource Name (ARN) of your CMK, the ID of your CMK, an alias for your CMK, or an alias ARN. The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. The key is also used to encrypt training results and manifest files written to the output Amazon S3 bucket (OutputConfig). If you choose to use your own CMK, you need the following permissions on the CMK.   kms:CreateGrant   kms:DescribeKey   kms:GenerateDataKey   kms:Decrypt   If you don't specify a value for KmsKeyId, images copied into the service are encrypted using a key that AWS owns and manages.
      */
     KmsKeyId?: KmsKeyId;
   }
@@ -1420,7 +1430,7 @@ declare namespace Rekognition {
   }
   export interface GetContentModerationRequest {
     /**
-     * The identifier for the unsafe content job. Use JobId to identify the job in a subsequent call to GetContentModeration.
+     * The identifier for the inappropriate, unwanted, or offensive content moderation job. Use JobId to identify the job in a subsequent call to GetContentModeration.
      */
     JobId: JobId;
     /**
@@ -1428,7 +1438,7 @@ declare namespace Rekognition {
      */
     MaxResults?: MaxResults;
     /**
-     * If the previous response was incomplete (because there is more data to retrieve), Amazon Rekognition returns a pagination token in the response. You can use this pagination token to retrieve the next set of unsafe content labels.
+     * If the previous response was incomplete (because there is more data to retrieve), Amazon Rekognition returns a pagination token in the response. You can use this pagination token to retrieve the next set of content moderation labels.
      */
     NextToken?: PaginationToken;
     /**
@@ -1438,7 +1448,7 @@ declare namespace Rekognition {
   }
   export interface GetContentModerationResponse {
     /**
-     * The current status of the unsafe content analysis job.
+     * The current status of the content moderation analysis job.
      */
     JobStatus?: VideoJobStatus;
     /**
@@ -1450,15 +1460,15 @@ declare namespace Rekognition {
      */
     VideoMetadata?: VideoMetadata;
     /**
-     * The detected unsafe content labels and the time(s) they were detected.
+     * The detected inappropriate, unwanted, or offensive content moderation labels and the time(s) they were detected.
      */
     ModerationLabels?: ContentModerationDetections;
     /**
-     * If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent request to retrieve the next set of unsafe content labels. 
+     * If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent request to retrieve the next set of content moderation labels. 
      */
     NextToken?: PaginationToken;
     /**
-     * Version number of the moderation detection model that was used to detect unsafe content.
+     * Version number of the moderation detection model that was used to detect inappropriate, unwanted, or offensive content.
      */
     ModerationModelVersion?: String;
   }
@@ -1973,7 +1983,9 @@ declare namespace Rekognition {
   }
   export type MaxFaces = number;
   export type MaxFacesToIndex = number;
+  export type MaxPixelThreshold = number;
   export type MaxResults = number;
+  export type MinCoveragePercentage = number;
   export interface ModerationLabel {
     /**
      * Specifies the confidence that Amazon Rekognition has that the label has been correctly identified. If you don't specify the MinConfidence parameter in the call to DetectModerationLabels, the operation returns labels with a confidence value greater than or equal to 50 percent.
@@ -2406,6 +2418,18 @@ declare namespace Rekognition {
      * If the segment is a shot detection, contains information about the shot detection.
      */
     ShotSegment?: ShotSegment;
+    /**
+     *  The frame number of the start of a video segment, using a frame index that starts with 0. 
+     */
+    StartFrameNumber?: ULong;
+    /**
+     *  The frame number at the end of a video segment, using a frame index that starts with 0. 
+     */
+    EndFrameNumber?: ULong;
+    /**
+     *  The duration of a video segment, expressed in frames. 
+     */
+    DurationFrames?: ULong;
   }
   export type SegmentDetections = SegmentDetection[];
   export type SegmentType = "TECHNICAL_CUE"|"SHOT"|string;
@@ -2451,7 +2475,7 @@ declare namespace Rekognition {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the celebrity recognition analysis to.
+     * The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the celebrity recognition analysis to. The Amazon SNS topic must have a topic name that begins with AmazonRekognition if you are using the AmazonRekognitionServiceRole permissions policy.
      */
     NotificationChannel?: NotificationChannel;
     /**
@@ -2467,7 +2491,7 @@ declare namespace Rekognition {
   }
   export interface StartContentModerationRequest {
     /**
-     * The video in which you want to detect unsafe content. The video must be stored in an Amazon S3 bucket.
+     * The video in which you want to detect inappropriate, unwanted, or offensive content. The video must be stored in an Amazon S3 bucket.
      */
     Video: Video;
     /**
@@ -2479,7 +2503,7 @@ declare namespace Rekognition {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the unsafe content analysis to.
+     * The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the content analysis to. The Amazon SNS topic must have a topic name that begins with AmazonRekognition if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.
      */
     NotificationChannel?: NotificationChannel;
     /**
@@ -2489,7 +2513,7 @@ declare namespace Rekognition {
   }
   export interface StartContentModerationResponse {
     /**
-     * The identifier for the unsafe content analysis job. Use JobId to identify the job in a subsequent call to GetContentModeration.
+     * The identifier for the content analysis job. Use JobId to identify the job in a subsequent call to GetContentModeration.
      */
     JobId?: JobId;
   }
@@ -2503,7 +2527,7 @@ declare namespace Rekognition {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the face detection operation.
+     * The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the face detection operation. The Amazon SNS topic must have a topic name that begins with AmazonRekognition if you are using the AmazonRekognitionServiceRole permissions policy.
      */
     NotificationChannel?: NotificationChannel;
     /**
@@ -2539,7 +2563,7 @@ declare namespace Rekognition {
      */
     CollectionId: CollectionId;
     /**
-     * The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the search. 
+     * The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the search. The Amazon SNS topic must have a topic name that begins with AmazonRekognition if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.
      */
     NotificationChannel?: NotificationChannel;
     /**
@@ -2567,7 +2591,7 @@ declare namespace Rekognition {
      */
     MinConfidence?: Percent;
     /**
-     * The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the label detection operation to. 
+     * The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the label detection operation to. The Amazon SNS topic must have a topic name that begins with AmazonRekognition if you are using the AmazonRekognitionServiceRole permissions policy.
      */
     NotificationChannel?: NotificationChannel;
     /**
@@ -2591,7 +2615,7 @@ declare namespace Rekognition {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the people detection operation to.
+     * The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the people detection operation to. The Amazon SNS topic must have a topic name that begins with AmazonRekognition if you are using the AmazonRekognitionServiceRole permissions policy.
      */
     NotificationChannel?: NotificationChannel;
     /**
@@ -2638,7 +2662,7 @@ declare namespace Rekognition {
      */
     ClientRequestToken?: ClientRequestToken;
     /**
-     * The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the segment detection operation.
+     * The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the segment detection operation. Note that the Amazon SNS topic must have a topic name that begins with AmazonRekognition if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.
      */
     NotificationChannel?: NotificationChannel;
     /**
@@ -2679,6 +2703,10 @@ declare namespace Rekognition {
      * Specifies the minimum confidence that Amazon Rekognition Video must have in order to return a detected segment. Confidence represents how certain Amazon Rekognition is that a segment is correctly identified. 0 is the lowest confidence. 100 is the highest confidence. Amazon Rekognition Video doesn't return any segments with a confidence level lower than this specified value. If you don't specify MinSegmentConfidence, GetSegmentDetection returns segments with confidence values greater than or equal to 50 percent.
      */
     MinSegmentConfidence?: SegmentConfidence;
+    /**
+     *  A filter that allows you to control the black frame detection by specifying the black levels and pixel coverage of black pixels in a frame. Videos can come from multiple sources, formats, and time periods, with different standards and varying noise levels for black frames that need to be accounted for. 
+     */
+    BlackFrame?: BlackFrame;
   }
   export interface StartTextDetectionFilters {
     /**
@@ -2805,7 +2833,7 @@ declare namespace Rekognition {
      */
     Confidence?: SegmentConfidence;
   }
-  export type TechnicalCueType = "ColorBars"|"EndCredits"|"BlackFrames"|string;
+  export type TechnicalCueType = "ColorBars"|"EndCredits"|"BlackFrames"|"OpeningCredits"|"StudioLogo"|"Slate"|"Content"|string;
   export interface TestingData {
     /**
      * The assets used for testing.
@@ -2932,6 +2960,7 @@ declare namespace Rekognition {
      */
     S3Object?: S3Object;
   }
+  export type VideoColorRange = "FULL"|"LIMITED"|string;
   export type VideoJobStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|string;
   export interface VideoMetadata {
     /**
@@ -2958,6 +2987,10 @@ declare namespace Rekognition {
      * Horizontal pixel dimension of the video.
      */
     FrameWidth?: ULong;
+    /**
+     *  A description of the range of luminance values in a video, either LIMITED (16 to 235) or FULL (0 to 255). 
+     */
+    ColorRange?: VideoColorRange;
   }
   export type VideoMetadataList = VideoMetadata[];
   /**

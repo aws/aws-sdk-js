@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.963.0-->
+<!--LATEST=2.964.0-->
 <!--ENTRYINSERT-->
+
+## 2.964.0
+* feature: Rekognition: This release adds support for four new types of segments (opening credits, content segments, slates, and studio logos), improved accuracy for credits and shot detection and new filters to control black frame detection.
+* feature: WAFV2: This release adds APIs to support versioning feature of AWS WAF Managed rule groups
 
 ## 2.963.0
 * feature: ChimeSDKIdentity: The Amazon Chime SDK Identity APIs allow software developers to create and manage unique instances of their messaging applications.

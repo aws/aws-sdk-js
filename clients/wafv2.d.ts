@@ -148,6 +148,14 @@ declare class WAFV2 extends Service {
    */
   getLoggingConfiguration(callback?: (err: AWSError, data: WAFV2.Types.GetLoggingConfigurationResponse) => void): Request<WAFV2.Types.GetLoggingConfigurationResponse, AWSError>;
   /**
+   * Retrieves the specified managed rule set.   This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers.  Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are ListManagedRuleSets, GetManagedRuleSet, PutManagedRuleSetVersions, and UpdateManagedRuleSetVersionExpiryDate. 
+   */
+  getManagedRuleSet(params: WAFV2.Types.GetManagedRuleSetRequest, callback?: (err: AWSError, data: WAFV2.Types.GetManagedRuleSetResponse) => void): Request<WAFV2.Types.GetManagedRuleSetResponse, AWSError>;
+  /**
+   * Retrieves the specified managed rule set.   This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers.  Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are ListManagedRuleSets, GetManagedRuleSet, PutManagedRuleSetVersions, and UpdateManagedRuleSetVersionExpiryDate. 
+   */
+  getManagedRuleSet(callback?: (err: AWSError, data: WAFV2.Types.GetManagedRuleSetResponse) => void): Request<WAFV2.Types.GetManagedRuleSetResponse, AWSError>;
+  /**
    * Returns the IAM policy that is attached to the specified rule group. You must be the owner of the rule group to perform this operation.
    */
   getPermissionPolicy(params: WAFV2.Types.GetPermissionPolicyRequest, callback?: (err: AWSError, data: WAFV2.Types.GetPermissionPolicyResponse) => void): Request<WAFV2.Types.GetPermissionPolicyResponse, AWSError>;
@@ -204,11 +212,19 @@ declare class WAFV2 extends Service {
    */
   getWebACLForResource(callback?: (err: AWSError, data: WAFV2.Types.GetWebACLForResourceResponse) => void): Request<WAFV2.Types.GetWebACLForResourceResponse, AWSError>;
   /**
-   * Retrieves an array of managed rule groups that are available for you to use. This list includes all Amazon Web Services Managed Rules rule groups and the Marketplace managed rule groups that you're subscribed to.
+   * Returns a list of the available versions for the specified managed rule group. 
+   */
+  listAvailableManagedRuleGroupVersions(params: WAFV2.Types.ListAvailableManagedRuleGroupVersionsRequest, callback?: (err: AWSError, data: WAFV2.Types.ListAvailableManagedRuleGroupVersionsResponse) => void): Request<WAFV2.Types.ListAvailableManagedRuleGroupVersionsResponse, AWSError>;
+  /**
+   * Returns a list of the available versions for the specified managed rule group. 
+   */
+  listAvailableManagedRuleGroupVersions(callback?: (err: AWSError, data: WAFV2.Types.ListAvailableManagedRuleGroupVersionsResponse) => void): Request<WAFV2.Types.ListAvailableManagedRuleGroupVersionsResponse, AWSError>;
+  /**
+   * Retrieves an array of managed rule groups that are available for you to use. This list includes all Amazon Web Services Managed Rules rule groups and all of the Marketplace managed rule groups that you're subscribed to.
    */
   listAvailableManagedRuleGroups(params: WAFV2.Types.ListAvailableManagedRuleGroupsRequest, callback?: (err: AWSError, data: WAFV2.Types.ListAvailableManagedRuleGroupsResponse) => void): Request<WAFV2.Types.ListAvailableManagedRuleGroupsResponse, AWSError>;
   /**
-   * Retrieves an array of managed rule groups that are available for you to use. This list includes all Amazon Web Services Managed Rules rule groups and the Marketplace managed rule groups that you're subscribed to.
+   * Retrieves an array of managed rule groups that are available for you to use. This list includes all Amazon Web Services Managed Rules rule groups and all of the Marketplace managed rule groups that you're subscribed to.
    */
   listAvailableManagedRuleGroups(callback?: (err: AWSError, data: WAFV2.Types.ListAvailableManagedRuleGroupsResponse) => void): Request<WAFV2.Types.ListAvailableManagedRuleGroupsResponse, AWSError>;
   /**
@@ -227,6 +243,14 @@ declare class WAFV2 extends Service {
    * Retrieves an array of your LoggingConfiguration objects.
    */
   listLoggingConfigurations(callback?: (err: AWSError, data: WAFV2.Types.ListLoggingConfigurationsResponse) => void): Request<WAFV2.Types.ListLoggingConfigurationsResponse, AWSError>;
+  /**
+   * Retrieves the managed rule sets that you own.   This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers.  Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are ListManagedRuleSets, GetManagedRuleSet, PutManagedRuleSetVersions, and UpdateManagedRuleSetVersionExpiryDate. 
+   */
+  listManagedRuleSets(params: WAFV2.Types.ListManagedRuleSetsRequest, callback?: (err: AWSError, data: WAFV2.Types.ListManagedRuleSetsResponse) => void): Request<WAFV2.Types.ListManagedRuleSetsResponse, AWSError>;
+  /**
+   * Retrieves the managed rule sets that you own.   This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers.  Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are ListManagedRuleSets, GetManagedRuleSet, PutManagedRuleSetVersions, and UpdateManagedRuleSetVersionExpiryDate. 
+   */
+  listManagedRuleSets(callback?: (err: AWSError, data: WAFV2.Types.ListManagedRuleSetsResponse) => void): Request<WAFV2.Types.ListManagedRuleSetsResponse, AWSError>;
   /**
    * Retrieves an array of RegexPatternSetSummary objects for the regex pattern sets that you manage.
    */
@@ -276,6 +300,14 @@ declare class WAFV2 extends Service {
    */
   putLoggingConfiguration(callback?: (err: AWSError, data: WAFV2.Types.PutLoggingConfigurationResponse) => void): Request<WAFV2.Types.PutLoggingConfigurationResponse, AWSError>;
   /**
+   * Defines the versions of your managed rule set that you are offering to the customers. Customers see your offerings as managed rule groups with versioning.  This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers.  Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are ListManagedRuleSets, GetManagedRuleSet, PutManagedRuleSetVersions, and UpdateManagedRuleSetVersionExpiryDate.  Customers retrieve their managed rule group list by calling ListAvailableManagedRuleGroups. The name that you provide here for your managed rule set is the name the customer sees for the corresponding managed rule group. Customers can retrieve the available versions for a managed rule group by calling ListAvailableManagedRuleGroupVersions. You provide a rule group specification for each version. For each managed rule set, you must specify a version that you recommend using.  To initiate the expiration of a managed rule group version, use UpdateManagedRuleSetVersionExpiryDate.
+   */
+  putManagedRuleSetVersions(params: WAFV2.Types.PutManagedRuleSetVersionsRequest, callback?: (err: AWSError, data: WAFV2.Types.PutManagedRuleSetVersionsResponse) => void): Request<WAFV2.Types.PutManagedRuleSetVersionsResponse, AWSError>;
+  /**
+   * Defines the versions of your managed rule set that you are offering to the customers. Customers see your offerings as managed rule groups with versioning.  This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers.  Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are ListManagedRuleSets, GetManagedRuleSet, PutManagedRuleSetVersions, and UpdateManagedRuleSetVersionExpiryDate.  Customers retrieve their managed rule group list by calling ListAvailableManagedRuleGroups. The name that you provide here for your managed rule set is the name the customer sees for the corresponding managed rule group. Customers can retrieve the available versions for a managed rule group by calling ListAvailableManagedRuleGroupVersions. You provide a rule group specification for each version. For each managed rule set, you must specify a version that you recommend using.  To initiate the expiration of a managed rule group version, use UpdateManagedRuleSetVersionExpiryDate.
+   */
+  putManagedRuleSetVersions(callback?: (err: AWSError, data: WAFV2.Types.PutManagedRuleSetVersionsResponse) => void): Request<WAFV2.Types.PutManagedRuleSetVersionsResponse, AWSError>;
+  /**
    * Attaches an IAM policy to the specified resource. Use this to share a rule group across accounts. You must be the owner of the rule group to perform this operation. This action is subject to the following restrictions:   You can attach only one policy with each PutPermissionPolicy request.   The ARN in the request must be a valid WAF RuleGroup ARN and the rule group must exist in the same Region.   The user making the request must be the owner of the rule group.  
    */
   putPermissionPolicy(params: WAFV2.Types.PutPermissionPolicyRequest, callback?: (err: AWSError, data: WAFV2.Types.PutPermissionPolicyResponse) => void): Request<WAFV2.Types.PutPermissionPolicyResponse, AWSError>;
@@ -307,6 +339,14 @@ declare class WAFV2 extends Service {
    * Updates the specified IPSet.   This operation completely replaces the mutable specifications that you already have for the IP set with the ones that you provide to this call. To modify the IP set, retrieve it by calling GetIPSet, update the settings as needed, and then provide the complete IP set specification to this call. 
    */
   updateIPSet(callback?: (err: AWSError, data: WAFV2.Types.UpdateIPSetResponse) => void): Request<WAFV2.Types.UpdateIPSetResponse, AWSError>;
+  /**
+   * Updates the expiration information for your managed rule set. Use this to initiate the expiration of a managed rule group version. After you initiate expiration for a version, WAF excludes it from the reponse to ListAvailableManagedRuleGroupVersions for the managed rule group.   This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers.  Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are ListManagedRuleSets, GetManagedRuleSet, PutManagedRuleSetVersions, and UpdateManagedRuleSetVersionExpiryDate. 
+   */
+  updateManagedRuleSetVersionExpiryDate(params: WAFV2.Types.UpdateManagedRuleSetVersionExpiryDateRequest, callback?: (err: AWSError, data: WAFV2.Types.UpdateManagedRuleSetVersionExpiryDateResponse) => void): Request<WAFV2.Types.UpdateManagedRuleSetVersionExpiryDateResponse, AWSError>;
+  /**
+   * Updates the expiration information for your managed rule set. Use this to initiate the expiration of a managed rule group version. After you initiate expiration for a version, WAF excludes it from the reponse to ListAvailableManagedRuleGroupVersions for the managed rule group.   This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers.  Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are ListManagedRuleSets, GetManagedRuleSet, PutManagedRuleSetVersions, and UpdateManagedRuleSetVersionExpiryDate. 
+   */
+  updateManagedRuleSetVersionExpiryDate(callback?: (err: AWSError, data: WAFV2.Types.UpdateManagedRuleSetVersionExpiryDateResponse) => void): Request<WAFV2.Types.UpdateManagedRuleSetVersionExpiryDateResponse, AWSError>;
   /**
    * Updates the specified RegexPatternSet.  This operation completely replaces the mutable specifications that you already have for the regex pattern set with the ones that you provide to this call. To modify the regex pattern set, retrieve it by calling GetRegexPatternSet, update the settings as needed, and then provide the complete regex pattern set specification to this call. 
    */
@@ -450,7 +490,7 @@ declare namespace WAFV2 {
      */
     Description?: EntityDescription;
     /**
-     * Specify IPV4 or IPV6. 
+     * The version of the IP addresses, either IPV4 or IPV6. 
      */
     IPAddressVersion: IPAddressVersion;
     /**
@@ -755,8 +795,20 @@ declare namespace WAFV2 {
      * Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
      */
     Scope: Scope;
+    /**
+     * The version of the rule group. You can only use a version that is not scheduled for expiration. If you don't provide this, WAF uses the vendor's default version. 
+     */
+    VersionName?: VersionKeyString;
   }
   export interface DescribeManagedRuleGroupResponse {
+    /**
+     * The managed rule group's version. 
+     */
+    VersionName?: VersionKeyString;
+    /**
+     * The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS topic that's used to record changes to the managed rule group. You can subscribe to the SNS topic to receive notifications when the managed rule group is modified, such as for new versions and for version expiration. For more information, see the Amazon Simple Notification Service Developer Guide.
+     */
+    SnsTopicArn?: ResourceArn;
     /**
      * The web ACL capacity units (WCUs) required for this rule group. WAF uses web ACL capacity units (WCU) to calculate and control the operating resources that are used to run your rules, rule groups, and web ACLs. WAF calculates capacity differently for each rule type, to reflect each rule's relative cost. Rule group capacity is fixed at creation, so users can plan their web ACL WCU usage when they use a rule group. The WCU limit for web ACLs is 1,500. 
      */
@@ -939,6 +991,30 @@ declare namespace WAFV2 {
      * The LoggingConfiguration for the specified web ACL.
      */
     LoggingConfiguration?: LoggingConfiguration;
+  }
+  export interface GetManagedRuleSetRequest {
+    /**
+     * The name of the managed rule set. You use this, along with the rule set ID, to identify the rule set. This name is assigned to the corresponding managed rule group, which your customers can access and use. 
+     */
+    Name: EntityName;
+    /**
+     * Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     */
+    Scope: Scope;
+    /**
+     * A unique identifier for the managed rule set. The ID is returned in the responses to commands like list. You provide it to operations like get and update.
+     */
+    Id: EntityId;
+  }
+  export interface GetManagedRuleSetResponse {
+    /**
+     * The managed rule set that you requested. 
+     */
+    ManagedRuleSet?: ManagedRuleSet;
+    /**
+     * A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a WAFOptimisticLockException. If this happens, perform another get, and use the new token returned by that operation. 
+     */
+    LockToken?: LockToken;
   }
   export interface GetPermissionPolicyRequest {
     /**
@@ -1166,7 +1242,7 @@ declare namespace WAFV2 {
      */
     Description?: EntityDescription;
     /**
-     * Specify IPV4 or IPV6. 
+     * The version of the IP addresses, either IPV4 or IPV6. 
      */
     IPAddressVersion: IPAddressVersion;
     /**
@@ -1232,7 +1308,7 @@ declare namespace WAFV2 {
      */
     MatchScope: JsonMatchScope;
     /**
-     * What WAF should do if it fails to completely parse the JSON body. The options are the following:    EVALUATE_AS_STRING - Inspect the body as plain text. WAF applies the text transformations and inspection criteria that you defined for the JSON inspection to the body text string.    MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.   If you don't provide this setting, WAF parses and evaluates the content only up to the first parsing failure that it encounters.  WAF does its best to parse the entire JSON body, but might be forced to stop for reasons such as characters that aren't valid, duplicate keys, truncation, and any content whose root node isn't an object or an array.  WAF parses the JSON in the following examples as two valid key, value pairs:    Missing comma: {"key1":"value1""key2":"value2"}    Missing colon: {"key1":"value1","key2""value2"}    Extra colons: {"key1"::"value1","key2""value2"}   
+     * What WAF should do if it fails to completely parse the JSON body. The options are the following:    EVALUATE_AS_STRING - Inspect the body as plain text. WAF applies the text transformations and inspection criteria that you defined for the JSON inspection to the body text string.    MATCH - Treat the web request as matching the rule statement. WAF applies the rule action to the request.    NO_MATCH - Treat the web request as not matching the rule statement.   If you don't provide this setting, WAF parses and evaluates the content only up to the first parsing failure that it encounters.  WAF does its best to parse the entire JSON body, but might be forced to stop for reasons such as invalid characters, duplicate keys, truncation, and any content whose root node isn't an object or an array.  WAF parses the JSON in the following examples as two valid key, value pairs:    Missing comma: {"key1":"value1""key2":"value2"}    Missing colon: {"key1":"value1","key2""value2"}    Extra colons: {"key1"::"value1","key2""value2"}   
      */
     InvalidFallbackBehavior?: BodyParsingFallbackBehavior;
   }
@@ -1282,6 +1358,38 @@ declare namespace WAFV2 {
     Name?: LabelName;
   }
   export type Labels = Label[];
+  export interface ListAvailableManagedRuleGroupVersionsRequest {
+    /**
+     * The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.
+     */
+    VendorName: VendorName;
+    /**
+     * The name of the managed rule group. You use this, along with the vendor name, to identify the rule group.
+     */
+    Name: EntityName;
+    /**
+     * Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     */
+    Scope: Scope;
+    /**
+     * When you request a list of objects with a Limit setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a NextMarker value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * The maximum number of objects that you want WAF to return for this request. If more objects are available, in the response, WAF provides a NextMarker value that you can use in a subsequent call to get the next batch of objects.
+     */
+    Limit?: PaginationLimit;
+  }
+  export interface ListAvailableManagedRuleGroupVersionsResponse {
+    /**
+     * When you request a list of objects with a Limit setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a NextMarker value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * The versions that are currently available for the specified managed rule group. 
+     */
+    Versions?: ManagedRuleGroupVersions;
+  }
   export interface ListAvailableManagedRuleGroupsRequest {
     /**
      * Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
@@ -1353,6 +1461,30 @@ declare namespace WAFV2 {
      * When you request a list of objects with a Limit setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a NextMarker value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.
      */
     NextMarker?: NextMarker;
+  }
+  export interface ListManagedRuleSetsRequest {
+    /**
+     * Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     */
+    Scope: Scope;
+    /**
+     * When you request a list of objects with a Limit setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a NextMarker value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * The maximum number of objects that you want WAF to return for this request. If more objects are available, in the response, WAF provides a NextMarker value that you can use in a subsequent call to get the next batch of objects.
+     */
+    Limit?: PaginationLimit;
+  }
+  export interface ListManagedRuleSetsResponse {
+    /**
+     * When you request a list of objects with a Limit setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a NextMarker value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.
+     */
+    NextMarker?: NextMarker;
+    /**
+     * Your managed rule sets. 
+     */
+    ManagedRuleSets?: ManagedRuleSetSummaries;
   }
   export type ListMaxItems = number;
   export interface ListRegexPatternSetsRequest {
@@ -1512,6 +1644,10 @@ declare namespace WAFV2 {
      */
     Name: EntityName;
     /**
+     * The version of the managed rule group to use. If you specify this, the version setting is fixed until you change it. If you don't specify this, WAF uses the vendor's default version, and then keeps the version at the vendor's default when the vendor updates the managed rule group settings. 
+     */
+    Version?: VersionKeyString;
+    /**
      * The rules whose actions are set to COUNT by the web ACL, regardless of the action that is set on the rule. This effectively excludes the rule from acting on web requests. 
      */
     ExcludedRules?: ExcludedRules;
@@ -1534,6 +1670,100 @@ declare namespace WAFV2 {
      * The description of the managed rule group, provided by Amazon Web Services Managed Rules or the Marketplace seller who manages it.
      */
     Description?: EntityDescription;
+  }
+  export interface ManagedRuleGroupVersion {
+    /**
+     * The version name. 
+     */
+    Name?: VersionKeyString;
+    /**
+     * The date and time that the managed rule group owner updated the rule group version information. 
+     */
+    LastUpdateTimestamp?: Timestamp;
+  }
+  export type ManagedRuleGroupVersions = ManagedRuleGroupVersion[];
+  export interface ManagedRuleSet {
+    /**
+     * The name of the managed rule set. You use this, along with the rule set ID, to identify the rule set. This name is assigned to the corresponding managed rule group, which your customers can access and use. 
+     */
+    Name: EntityName;
+    /**
+     * A unique identifier for the managed rule set. The ID is returned in the responses to commands like list. You provide it to operations like get and update.
+     */
+    Id: EntityId;
+    /**
+     * The Amazon Resource Name (ARN) of the entity.
+     */
+    ARN: ResourceArn;
+    /**
+     * A description of the set that helps with identification. 
+     */
+    Description?: EntityDescription;
+    /**
+     * The versions of this managed rule set that are available for use by customers. 
+     */
+    PublishedVersions?: PublishedVersions;
+    /**
+     * The version that you would like your customers to use.
+     */
+    RecommendedVersion?: VersionKeyString;
+    /**
+     * The label namespace prefix for the managed rule groups that are offered to customers from this managed rule set. All labels that are added by rules in the managed rule group have this prefix.    The syntax for the label namespace prefix for a managed rule group is the following:   awswaf:managed:&lt;vendor&gt;:&lt;rule group name&gt;:   When a rule with a label matches a web request, WAF adds the fully qualified label to the request. A fully qualified label is made up of the label namespace from the rule group or web ACL where the rule is defined and the label from the rule, separated by a colon:   &lt;label namespace&gt;:&lt;label from rule&gt;   
+     */
+    LabelNamespace?: LabelName;
+  }
+  export type ManagedRuleSetSummaries = ManagedRuleSetSummary[];
+  export interface ManagedRuleSetSummary {
+    /**
+     * The name of the managed rule set. You use this, along with the rule set ID, to identify the rule set. This name is assigned to the corresponding managed rule group, which your customers can access and use. 
+     */
+    Name?: EntityName;
+    /**
+     * A unique identifier for the managed rule set. The ID is returned in the responses to commands like list. You provide it to operations like get and update.
+     */
+    Id?: EntityId;
+    /**
+     * A description of the set that helps with identification. 
+     */
+    Description?: EntityDescription;
+    /**
+     * A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a WAFOptimisticLockException. If this happens, perform another get, and use the new token returned by that operation. 
+     */
+    LockToken?: LockToken;
+    /**
+     * The Amazon Resource Name (ARN) of the entity.
+     */
+    ARN?: ResourceArn;
+    /**
+     * The label namespace prefix for the managed rule groups that are offered to customers from this managed rule set. All labels that are added by rules in the managed rule group have this prefix.    The syntax for the label namespace prefix for a managed rule group is the following:   awswaf:managed:&lt;vendor&gt;:&lt;rule group name&gt;:   When a rule with a label matches a web request, WAF adds the fully qualified label to the request. A fully qualified label is made up of the label namespace from the rule group or web ACL where the rule is defined and the label from the rule, separated by a colon:   &lt;label namespace&gt;:&lt;label from rule&gt;   
+     */
+    LabelNamespace?: LabelName;
+  }
+  export interface ManagedRuleSetVersion {
+    /**
+     * The Amazon Resource Name (ARN) of the vendor rule group that's used to define the published version of your managed rule group. 
+     */
+    AssociatedRuleGroupArn?: ResourceArn;
+    /**
+     * The web ACL capacity units (WCUs) required for this rule group. WAF uses WCUs to calculate and control the operating resources that are used to run your rules, rule groups, and web ACLs. WAF calculates capacity differently for each rule type, to reflect the relative cost of each rule. Simple rules that cost little to run use fewer WCUs than more complex rules that use more processing power. Rule group capacity is fixed at creation, which helps users plan their web ACL WCU usage when they use a rule group. The WCU limit for web ACLs is 1,500. 
+     */
+    Capacity?: CapacityUnit;
+    /**
+     * The amount of time you expect this version of your managed rule group to last, in days. 
+     */
+    ForecastedLifetime?: TimeWindowDay;
+    /**
+     * The time that you first published this version.  Times are in Coordinated Universal Time (UTC) format. UTC format includes the special designator, Z. For example, "2016-09-27T14:50Z". 
+     */
+    PublishTimestamp?: Timestamp;
+    /**
+     * The last time that you updated this version.  Times are in Coordinated Universal Time (UTC) format. UTC format includes the special designator, Z. For example, "2016-09-27T14:50Z". 
+     */
+    LastUpdateTimestamp?: Timestamp;
+    /**
+     * The time that this version is set to expire. Times are in Coordinated Universal Time (UTC) format. UTC format includes the special designator, Z. For example, "2016-09-27T14:50Z". 
+     */
+    ExpiryTimestamp?: Timestamp;
   }
   export interface Method {
   }
@@ -1567,6 +1797,7 @@ declare namespace WAFV2 {
   export type PolicyString = string;
   export type PopulationSize = number;
   export type PositionalConstraint = "EXACTLY"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CONTAINS_WORD"|string;
+  export type PublishedVersions = {[key: string]: ManagedRuleSetVersion};
   export interface PutLoggingConfigurationRequest {
     /**
      * 
@@ -1578,6 +1809,38 @@ declare namespace WAFV2 {
      * 
      */
     LoggingConfiguration?: LoggingConfiguration;
+  }
+  export interface PutManagedRuleSetVersionsRequest {
+    /**
+     * The name of the managed rule set. You use this, along with the rule set ID, to identify the rule set. This name is assigned to the corresponding managed rule group, which your customers can access and use. 
+     */
+    Name: EntityName;
+    /**
+     * Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     */
+    Scope: Scope;
+    /**
+     * A unique identifier for the managed rule set. The ID is returned in the responses to commands like list. You provide it to operations like get and update.
+     */
+    Id: EntityId;
+    /**
+     * A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a WAFOptimisticLockException. If this happens, perform another get, and use the new token returned by that operation. 
+     */
+    LockToken: LockToken;
+    /**
+     * The version of the named managed rule group that you'd like your customers to choose, from among your version offerings. 
+     */
+    RecommendedVersion?: VersionKeyString;
+    /**
+     * The versions of the named managed rule group that you want to offer to your customers. 
+     */
+    VersionsToPublish?: VersionsToPublish;
+  }
+  export interface PutManagedRuleSetVersionsResponse {
+    /**
+     * A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a WAFOptimisticLockException. If this happens, perform another get, and use the new token returned by that operation. 
+     */
+    NextLockToken?: LockToken;
   }
   export interface PutPermissionPolicyRequest {
     /**
@@ -1613,6 +1876,9 @@ declare namespace WAFV2 {
   }
   export type RateBasedStatementAggregateKeyType = "IP"|"FORWARDED_IP"|string;
   export interface RateBasedStatementManagedKeysIPSet {
+    /**
+     * The version of the IP addresses, either IPV4 or IPV6. 
+     */
     IPAddressVersion?: IPAddressVersion;
     /**
      * The IP addresses that are currently blocked.
@@ -2010,7 +2276,7 @@ declare namespace WAFV2 {
      */
     Priority: TextTransformationPriority;
     /**
-     * You can specify the following transformation types:  BASE64_DECODE - Decode a Base64-encoded string.  BASE64_DECODE_EXT - Decode a Base64-encoded string, but use a forgiving implementation that ignores characters that aren't valid.  CMD_LINE - Command-line transformations. These are helpful in reducing effectiveness of attackers who inject an operating system command-line command and use unusual formatting to disguise some or all of the command.    Delete the following characters: \ " ' ^    Delete spaces before the following characters: / (    Replace the following characters with a space: , ;    Replace multiple spaces with one space   Convert uppercase letters (A-Z) to lowercase (a-z)    COMPRESS_WHITE_SPACE - Replace these characters with a space character (decimal 32):     \f, formfeed, decimal 12    \t, tab, decimal 9    \n, newline, decimal 10    \r, carriage return, decimal 13    \v, vertical tab, decimal 11   Non-breaking space, decimal 160    COMPRESS_WHITE_SPACE also replaces multiple spaces with one space.  CSS_DECODE - Decode characters that were encoded using CSS 2.x escape rules syndata.html#characters. This function uses up to two bytes in the decoding process, so it can help to uncover ASCII characters that were encoded using CSS encoding that wouldn’t typically be encoded. It's also useful in countering evasion, which is a combination of a backslash and non-hexadecimal characters. For example, ja\vascript for javascript.   ESCAPE_SEQ_DECODE - Decode the following ANSI C escape sequences: \a, \b, \f, \n, \r, \t, \v, \\, \?, \', \", \xHH (hexadecimal), \0OOO (octal). Encodings that aren't valid remain in the output.   HEX_DECODE - Decode a string of hexadecimal characters into a binary.  HTML_ENTITY_DECODE - Replace HTML-encoded characters with unencoded characters. HTML_ENTITY_DECODE performs these operations:    Replaces (ampersand)quot; with "    Replaces (ampersand)nbsp; with a non-breaking space, decimal 160   Replaces (ampersand)lt; with a "less than" symbol   Replaces (ampersand)gt; with &gt;    Replaces characters that are represented in hexadecimal format, (ampersand)#xhhhh;, with the corresponding characters   Replaces characters that are represented in decimal format, (ampersand)#nnnn;, with the corresponding characters    JS_DECODE - Decode JavaScript escape sequences. If a \ u HHHH code is in the full-width ASCII code range of FF01-FF5E, then the higher byte is used to detect and adjust the lower byte. If not, only the lower byte is used and the higher byte is zeroed, causing a possible loss of information.   LOWERCASE - Convert uppercase letters (A-Z) to lowercase (a-z).   MD5 - Calculate an MD5 hash from the data in the input. The computed hash is in a raw binary form.   NONE - Specify NONE if you don't want any text transformations.   NORMALIZE_PATH - Remove multiple slashes, directory self-references, and directory back-references that are not at the beginning of the input from an input string.   NORMALIZE_PATH_WIN - This is the same as NORMALIZE_PATH, but first converts backslash characters to forward slashes.   REMOVE_NULLS - Remove all NULL bytes from the input.   REPLACE_COMMENTS - Replace each occurrence of a C-style comment (/* ... *) with a single space. Multiple consecutive occurrences are not compressed. Unterminated comments are also replaced with a space (ASCII 0x20). However, a standalone termination of a comment (*) is not acted upon.   REPLACE_NULLS - Replace NULL bytes in the input with space characters (ASCII 0x20).   SQL_HEX_DECODE - Decode the following ANSI C escape sequences: \a, \b, \f, \n, \r, \t, \v, \\, \?, \', \", \xHH (hexadecimal), \0OOO (octal). Encodings that aren't valid remain in the output.  URL_DECODE - Decode a URL-encoded value.   URL_DECODE_UNI - Like URL_DECODE, but with support for Microsoft-specific %u encoding. If the code is in the full-width ASCII code range of FF01-FF5E, the higher byte is used to detect and adjust the lower byte. Otherwise, only the lower byte is used and the higher byte is zeroed.   UTF8_TO_UNICODE - Convert all UTF-8 character sequences to Unicode. This helps input normalization, and minimizing false-positives and false-negatives for non-English languages.
+     * You can specify the following transformation types:  BASE64_DECODE - Decode a Base64-encoded string.  BASE64_DECODE_EXT - Decode a Base64-encoded string, but use a forgiving implementation that ignores characters that aren't valid.  CMD_LINE - Command-line transformations. These are helpful in reducing effectiveness of attackers who inject an operating system command-line command and use unusual formatting to disguise some or all of the command.    Delete the following characters: \ " ' ^    Delete spaces before the following characters: / (    Replace the following characters with a space: , ;    Replace multiple spaces with one space   Convert uppercase letters (A-Z) to lowercase (a-z)    COMPRESS_WHITE_SPACE - Replace these characters with a space character (decimal 32):     \f, formfeed, decimal 12    \t, tab, decimal 9    \n, newline, decimal 10    \r, carriage return, decimal 13    \v, vertical tab, decimal 11   Non-breaking space, decimal 160    COMPRESS_WHITE_SPACE also replaces multiple spaces with one space.  CSS_DECODE - Decode characters that were encoded using CSS 2.x escape rules syndata.html#characters. This function uses up to two bytes in the decoding process, so it can help to uncover ASCII characters that were encoded using CSS encoding that wouldn’t typically be encoded. It's also useful in countering evasion, which is a combination of a backslash and non-hexadecimal characters. For example, ja\vascript for javascript.   ESCAPE_SEQ_DECODE - Decode the following ANSI C escape sequences: \a, \b, \f, \n, \r, \t, \v, \\, \?, \', \", \xHH (hexadecimal), \0OOO (octal). Encodings that aren't valid remain in the output.   HEX_DECODE - Decode a string of hexadecimal characters into a binary.  HTML_ENTITY_DECODE - Replace HTML-encoded characters with unencoded characters. HTML_ENTITY_DECODE performs these operations:    Replaces (ampersand)quot; with "    Replaces (ampersand)nbsp; with a non-breaking space, decimal 160   Replaces (ampersand)lt; with a "less than" symbol   Replaces (ampersand)gt; with &gt;    Replaces characters that are represented in hexadecimal format, (ampersand)#xhhhh;, with the corresponding characters   Replaces characters that are represented in decimal format, (ampersand)#nnnn;, with the corresponding characters    JS_DECODE - Decode JavaScript escape sequences. If a \ u HHHH code is in the full-width ASCII code range of FF01-FF5E, then the higher byte is used to detect and adjust the lower byte. If not, only the lower byte is used and the higher byte is zeroed, causing a possible loss of information.   LOWERCASE - Convert uppercase letters (A-Z) to lowercase (a-z).   MD5 - Calculate an MD5 hash from the data in the input. The computed hash is in a raw binary form.   NONE - Specify NONE if you don't want any text transformations.   NORMALIZE_PATH - Remove multiple slashes, directory self-references, and directory back-references that are not at the beginning of the input from an input string.   NORMALIZE_PATH_WIN - This is the same as NORMALIZE_PATH, but first converts backslash characters to forward slashes.   REMOVE_NULLS - Remove all NULL bytes from the input.   REPLACE_COMMENTS - Replace each occurrence of a C-style comment (/* ... *) with a single space. Multiple consecutive occurrences are not compressed. Unterminated comments are also replaced with a space (ASCII 0x20). However, a standalone termination of a comment (*) is not acted upon.   REPLACE_NULLS - Replace NULL bytes in the input with space characters (ASCII 0x20).   SQL_HEX_DECODE - Decode SQL hex data. Example (0x414243) will be decoded to (ABC).  URL_DECODE - Decode a URL-encoded value.   URL_DECODE_UNI - Like URL_DECODE, but with support for Microsoft-specific %u encoding. If the code is in the full-width ASCII code range of FF01-FF5E, the higher byte is used to detect and adjust the lower byte. Otherwise, only the lower byte is used and the higher byte is zeroed.   UTF8_TO_UNICODE - Convert all UTF-8 character sequences to Unicode. This helps input normalization, and minimizing false-positives and false-negatives for non-English languages.
      */
     Type: TextTransformationType;
   }
@@ -2027,6 +2293,7 @@ declare namespace WAFV2 {
      */
     EndTime: Timestamp;
   }
+  export type TimeWindowDay = number;
   export type Timestamp = Date;
   export type URIString = string;
   export interface UntagResourceRequest {
@@ -2070,6 +2337,46 @@ declare namespace WAFV2 {
   export interface UpdateIPSetResponse {
     /**
      * A token used for optimistic locking. WAF returns this token to your update requests. You use NextLockToken in the same manner as you use LockToken. 
+     */
+    NextLockToken?: LockToken;
+  }
+  export interface UpdateManagedRuleSetVersionExpiryDateRequest {
+    /**
+     * The name of the managed rule set. You use this, along with the rule set ID, to identify the rule set. This name is assigned to the corresponding managed rule group, which your customers can access and use. 
+     */
+    Name: EntityName;
+    /**
+     * Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API.  To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows:    CLI - Specify the Region when you use the CloudFront scope: --scope=CLOUDFRONT --region=us-east-1.    API and SDKs - For all calls, use the Region endpoint us-east-1.   
+     */
+    Scope: Scope;
+    /**
+     * A unique identifier for the managed rule set. The ID is returned in the responses to commands like list. You provide it to operations like get and update.
+     */
+    Id: EntityId;
+    /**
+     * A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a WAFOptimisticLockException. If this happens, perform another get, and use the new token returned by that operation. 
+     */
+    LockToken: LockToken;
+    /**
+     * The version that you want to remove from your list of offerings for the named managed rule group. 
+     */
+    VersionToExpire: VersionKeyString;
+    /**
+     * The time that you want the version to expire. Times are in Coordinated Universal Time (UTC) format. UTC format includes the special designator, Z. For example, "2016-09-27T14:50Z". 
+     */
+    ExpiryTimestamp: Timestamp;
+  }
+  export interface UpdateManagedRuleSetVersionExpiryDateResponse {
+    /**
+     * The version that is set to expire. 
+     */
+    ExpiringVersion?: VersionKeyString;
+    /**
+     * The time that the version will expire.  Times are in Coordinated Universal Time (UTC) format. UTC format includes the special designator, Z. For example, "2016-09-27T14:50Z". 
+     */
+    ExpiryTimestamp?: Timestamp;
+    /**
+     * A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a WAFOptimisticLockException. If this happens, perform another get, and use the new token returned by that operation. 
      */
     NextLockToken?: LockToken;
   }
@@ -2192,6 +2499,18 @@ declare namespace WAFV2 {
   export interface UriPath {
   }
   export type VendorName = string;
+  export type VersionKeyString = string;
+  export interface VersionToPublish {
+    /**
+     * The Amazon Resource Name (ARN) of the vendor's rule group that's used in the published managed rule group version. 
+     */
+    AssociatedRuleGroupArn?: ResourceArn;
+    /**
+     * The amount of time the vendor expects this version of the managed rule group to last, in days. 
+     */
+    ForecastedLifetime?: TimeWindowDay;
+  }
+  export type VersionsToPublish = {[key: string]: VersionToPublish};
   export interface VisibilityConfig {
     /**
      * A boolean indicating whether WAF should store a sampling of the web requests that match the rules. You can view the sampled requests through the WAF console. 

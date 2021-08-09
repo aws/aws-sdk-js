@@ -77,6 +77,9 @@
         },
         {
           "shape": "WAFSubscriptionNotFoundException"
+        },
+        {
+          "shape": "WAFExpiredManagedRuleGroupVersionException"
         }
       ],
       "documentation": "<p>Returns the web ACL capacity unit (WCU) requirements for a specified scope and set of rules. You can use this to check the capacity requirements for the rules you want to use in a <a>RuleGroup</a> or <a>WebACL</a>. </p> <p>WAF uses WCUs to calculate and control the operating resources that are used to run your rules, rule groups, and web ACLs. WAF calculates capacity differently for each rule type, to reflect the relative cost of each rule. Simple rules that cost little to run use fewer WCUs than more complex rules that use more processing power. Rule group capacity is fixed at creation, which helps users plan their web ACL WCU usage when they use a rule group. The WCU limit for web ACLs is 1,500. </p>"
@@ -536,6 +539,9 @@
         },
         {
           "shape": "WAFInvalidOperationException"
+        },
+        {
+          "shape": "WAFExpiredManagedRuleGroupVersionException"
         }
       ],
       "documentation": "<p>Provides high-level information for a managed rule group, including descriptions of the rules. </p>"
@@ -623,6 +629,34 @@
         }
       ],
       "documentation": "<p>Returns the <a>LoggingConfiguration</a> for the specified web ACL.</p>"
+    },
+    "GetManagedRuleSet": {
+      "name": "GetManagedRuleSet",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetManagedRuleSetRequest"
+      },
+      "output": {
+        "shape": "GetManagedRuleSetResponse"
+      },
+      "errors": [
+        {
+          "shape": "WAFInternalErrorException"
+        },
+        {
+          "shape": "WAFInvalidParameterException"
+        },
+        {
+          "shape": "WAFNonexistentItemException"
+        },
+        {
+          "shape": "WAFInvalidOperationException"
+        }
+      ],
+      "documentation": "<p>Retrieves the specified managed rule set. </p> <note> <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p> <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p> </note>"
     },
     "GetPermissionPolicy": {
       "name": "GetPermissionPolicy",
@@ -817,6 +851,31 @@
       ],
       "documentation": "<p>Retrieves the <a>WebACL</a> for the specified resource. </p>"
     },
+    "ListAvailableManagedRuleGroupVersions": {
+      "name": "ListAvailableManagedRuleGroupVersions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListAvailableManagedRuleGroupVersionsRequest"
+      },
+      "output": {
+        "shape": "ListAvailableManagedRuleGroupVersionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "WAFInternalErrorException"
+        },
+        {
+          "shape": "WAFInvalidParameterException"
+        },
+        {
+          "shape": "WAFInvalidOperationException"
+        }
+      ],
+      "documentation": "<p>Returns a list of the available versions for the specified managed rule group. </p>"
+    },
     "ListAvailableManagedRuleGroups": {
       "name": "ListAvailableManagedRuleGroups",
       "http": {
@@ -840,7 +899,7 @@
           "shape": "WAFInvalidOperationException"
         }
       ],
-      "documentation": "<p>Retrieves an array of managed rule groups that are available for you to use. This list includes all Amazon Web Services Managed Rules rule groups and the Marketplace managed rule groups that you're subscribed to.</p>"
+      "documentation": "<p>Retrieves an array of managed rule groups that are available for you to use. This list includes all Amazon Web Services Managed Rules rule groups and all of the Marketplace managed rule groups that you're subscribed to.</p>"
     },
     "ListIPSets": {
       "name": "ListIPSets",
@@ -891,6 +950,31 @@
         }
       ],
       "documentation": "<p>Retrieves an array of your <a>LoggingConfiguration</a> objects.</p>"
+    },
+    "ListManagedRuleSets": {
+      "name": "ListManagedRuleSets",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListManagedRuleSetsRequest"
+      },
+      "output": {
+        "shape": "ListManagedRuleSetsResponse"
+      },
+      "errors": [
+        {
+          "shape": "WAFInternalErrorException"
+        },
+        {
+          "shape": "WAFInvalidParameterException"
+        },
+        {
+          "shape": "WAFInvalidOperationException"
+        }
+      ],
+      "documentation": "<p>Retrieves the managed rule sets that you own. </p> <note> <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p> <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p> </note>"
     },
     "ListRegexPatternSets": {
       "name": "ListRegexPatternSets",
@@ -1066,6 +1150,37 @@
       ],
       "documentation": "<p>Enables the specified <a>LoggingConfiguration</a>, to start logging from a web ACL, according to the configuration provided.</p> <p>You can access information about all traffic that WAF inspects using the following steps:</p> <ol> <li> <p>Create an Amazon Kinesis Data Firehose. </p> <p>Create the data firehose with a PUT source and in the Region that you are operating. If you are capturing logs for Amazon CloudFront, always create the firehose in US East (N. Virginia). </p> <p>Give the data firehose a name that starts with the prefix <code>aws-waf-logs-</code>. For example, <code>aws-waf-logs-us-east-2-analytics</code>.</p> <note> <p>Do not create the data firehose using a <code>Kinesis stream</code> as your source.</p> </note> </li> <li> <p>Associate that firehose to your web ACL using a <code>PutLoggingConfiguration</code> request.</p> </li> </ol> <p>When you successfully enable logging using a <code>PutLoggingConfiguration</code> request, WAF will create a service linked role with the necessary permissions to write logs to the Amazon Kinesis Data Firehose. For more information, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging.html\">Logging Web ACL Traffic Information</a> in the <i>WAF Developer Guide</i>.</p> <note> <p>This operation completely replaces the mutable specifications that you already have for the logging configuration with the ones that you provide to this call. To modify the logging configuration, retrieve it by calling <a>GetLoggingConfiguration</a>, update the settings as needed, and then provide the complete logging configuration specification to this call.</p> </note>"
     },
+    "PutManagedRuleSetVersions": {
+      "name": "PutManagedRuleSetVersions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutManagedRuleSetVersionsRequest"
+      },
+      "output": {
+        "shape": "PutManagedRuleSetVersionsResponse"
+      },
+      "errors": [
+        {
+          "shape": "WAFInternalErrorException"
+        },
+        {
+          "shape": "WAFInvalidParameterException"
+        },
+        {
+          "shape": "WAFNonexistentItemException"
+        },
+        {
+          "shape": "WAFOptimisticLockException"
+        },
+        {
+          "shape": "WAFInvalidOperationException"
+        }
+      ],
+      "documentation": "<p>Defines the versions of your managed rule set that you are offering to the customers. Customers see your offerings as managed rule groups with versioning.</p> <note> <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p> <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p> </note> <p>Customers retrieve their managed rule group list by calling <a>ListAvailableManagedRuleGroups</a>. The name that you provide here for your managed rule set is the name the customer sees for the corresponding managed rule group. Customers can retrieve the available versions for a managed rule group by calling <a>ListAvailableManagedRuleGroupVersions</a>. You provide a rule group specification for each version. For each managed rule set, you must specify a version that you recommend using. </p> <p>To initiate the expiration of a managed rule group version, use <a>UpdateManagedRuleSetVersionExpiryDate</a>.</p>"
+    },
     "PutPermissionPolicy": {
       "name": "PutPermissionPolicy",
       "http": {
@@ -1202,6 +1317,37 @@
       ],
       "documentation": "<p>Updates the specified <a>IPSet</a>. </p> <note> <p>This operation completely replaces the mutable specifications that you already have for the IP set with the ones that you provide to this call. To modify the IP set, retrieve it by calling <a>GetIPSet</a>, update the settings as needed, and then provide the complete IP set specification to this call.</p> </note>"
     },
+    "UpdateManagedRuleSetVersionExpiryDate": {
+      "name": "UpdateManagedRuleSetVersionExpiryDate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateManagedRuleSetVersionExpiryDateRequest"
+      },
+      "output": {
+        "shape": "UpdateManagedRuleSetVersionExpiryDateResponse"
+      },
+      "errors": [
+        {
+          "shape": "WAFInternalErrorException"
+        },
+        {
+          "shape": "WAFInvalidParameterException"
+        },
+        {
+          "shape": "WAFNonexistentItemException"
+        },
+        {
+          "shape": "WAFOptimisticLockException"
+        },
+        {
+          "shape": "WAFInvalidOperationException"
+        }
+      ],
+      "documentation": "<p>Updates the expiration information for your managed rule set. Use this to initiate the expiration of a managed rule group version. After you initiate expiration for a version, WAF excludes it from the reponse to <a>ListAvailableManagedRuleGroupVersions</a> for the managed rule group. </p> <note> <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p> <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p> </note>"
+    },
     "UpdateRegexPatternSet": {
       "name": "UpdateRegexPatternSet",
       "http": {
@@ -1324,6 +1470,9 @@
         },
         {
           "shape": "WAFInvalidOperationException"
+        },
+        {
+          "shape": "WAFExpiredManagedRuleGroupVersionException"
         }
       ],
       "documentation": "<p>Updates the specified <a>WebACL</a>.</p> <note> <p>This operation completely replaces the mutable specifications that you already have for the web ACL with the ones that you provide to this call. To modify the web ACL, retrieve it by calling <a>GetWebACL</a>, update the settings as needed, and then provide the complete web ACL specification to this call.</p> </note> <p> A web ACL defines a collection of rules to use to inspect and control web requests. Each rule has an action defined (allow, block, or count) for requests that match the statement of the rule. In the web ACL, you assign a default action to take (allow, block) for any request that does not match any of the rules. The rules in a web ACL can be a combination of the types <a>Rule</a>, <a>RuleGroup</a>, and managed rule group. You can associate a web ACL with one or more Amazon Web Services resources to protect. The resources can be an Amazon CloudFront distribution, an Amazon API Gateway REST API, an Application Load Balancer, or an AppSync GraphQL API. </p>"
@@ -1825,7 +1974,7 @@
         },
         "IPAddressVersion": {
           "shape": "IPAddressVersion",
-          "documentation": "<p>Specify IPV4 or IPV6. </p>"
+          "documentation": "<p>The version of the IP addresses, either <code>IPV4</code> or <code>IPV6</code>. </p>"
         },
         "Addresses": {
           "shape": "IPAddresses",
@@ -2115,7 +2264,7 @@
         },
         "WebACLLockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         }
       }
     },
@@ -2124,7 +2273,7 @@
       "members": {
         "NextWebACLLockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         }
       }
     },
@@ -2151,7 +2300,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         }
       }
     },
@@ -2214,7 +2363,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         }
       }
     },
@@ -2245,7 +2394,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         }
       }
     },
@@ -2276,7 +2425,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         }
       }
     },
@@ -2303,12 +2452,24 @@
         "Scope": {
           "shape": "Scope",
           "documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>"
+        },
+        "VersionName": {
+          "shape": "VersionKeyString",
+          "documentation": "<p>The version of the rule group. You can only use a version that is not scheduled for expiration. If you don't provide this, WAF uses the vendor's default version. </p>"
         }
       }
     },
     "DescribeManagedRuleGroupResponse": {
       "type": "structure",
       "members": {
+        "VersionName": {
+          "shape": "VersionKeyString",
+          "documentation": "<p>The managed rule group's version. </p>"
+        },
+        "SnsTopicArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS topic that's used to record changes to the managed rule group. You can subscribe to the SNS topic to receive notifications when the managed rule group is modified, such as for new versions and for version expiration. For more information, see the <a href=\"https://docs.aws.amazon.com/sns/latest/dg/welcome.html\">Amazon Simple Notification Service Developer Guide</a>.</p>"
+        },
         "Capacity": {
           "shape": "CapacityUnit",
           "documentation": "<p>The web ACL capacity units (WCUs) required for this rule group. WAF uses web ACL capacity units (WCU) to calculate and control the operating resources that are used to run your rules, rule groups, and web ACLs. WAF calculates capacity differently for each rule type, to reflect each rule's relative cost. Rule group capacity is fixed at creation, so users can plan their web ACL WCU usage when they use a rule group. The WCU limit for web ACLs is 1,500. </p>"
@@ -2609,7 +2770,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         }
       }
     },
@@ -2631,6 +2792,41 @@
         "LoggingConfiguration": {
           "shape": "LoggingConfiguration",
           "documentation": "<p>The <a>LoggingConfiguration</a> for the specified web ACL.</p>"
+        }
+      }
+    },
+    "GetManagedRuleSetRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Scope",
+        "Id"
+      ],
+      "members": {
+        "Name": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the managed rule set. You use this, along with the rule set ID, to identify the rule set.</p> <p>This name is assigned to the corresponding managed rule group, which your customers can access and use. </p>"
+        },
+        "Scope": {
+          "shape": "Scope",
+          "documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>"
+        },
+        "Id": {
+          "shape": "EntityId",
+          "documentation": "<p>A unique identifier for the managed rule set. The ID is returned in the responses to commands like <code>list</code>. You provide it to operations like <code>get</code> and <code>update</code>.</p>"
+        }
+      }
+    },
+    "GetManagedRuleSetResponse": {
+      "type": "structure",
+      "members": {
+        "ManagedRuleSet": {
+          "shape": "ManagedRuleSet",
+          "documentation": "<p>The managed rule set that you requested. </p>"
+        },
+        "LockToken": {
+          "shape": "LockToken",
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         }
       }
     },
@@ -2726,7 +2922,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         }
       }
     },
@@ -2760,7 +2956,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         }
       }
     },
@@ -2865,7 +3061,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         }
       }
     },
@@ -2978,7 +3174,7 @@
         },
         "IPAddressVersion": {
           "shape": "IPAddressVersion",
-          "documentation": "<p>Specify IPV4 or IPV6. </p>"
+          "documentation": "<p>The version of the IP addresses, either <code>IPV4</code> or <code>IPV6</code>. </p>"
         },
         "Addresses": {
           "shape": "IPAddresses",
@@ -3050,7 +3246,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         },
         "ARN": {
           "shape": "ResourceArn",
@@ -3079,7 +3275,7 @@
         },
         "InvalidFallbackBehavior": {
           "shape": "BodyParsingFallbackBehavior",
-          "documentation": "<p>What WAF should do if it fails to completely parse the JSON body. The options are the following:</p> <ul> <li> <p> <code>EVALUATE_AS_STRING</code> - Inspect the body as plain text. WAF applies the text transformations and inspection criteria that you defined for the JSON inspection to the body text string.</p> </li> <li> <p> <code>MATCH</code> - Treat the web request as matching the rule statement. WAF applies the rule action to the request.</p> </li> <li> <p> <code>NO_MATCH</code> - Treat the web request as not matching the rule statement.</p> </li> </ul> <p>If you don't provide this setting, WAF parses and evaluates the content only up to the first parsing failure that it encounters. </p> <p>WAF does its best to parse the entire JSON body, but might be forced to stop for reasons such as characters that aren't valid, duplicate keys, truncation, and any content whose root node isn't an object or an array. </p> <p>WAF parses the JSON in the following examples as two valid key, value pairs: </p> <ul> <li> <p>Missing comma: <code>{\"key1\":\"value1\"\"key2\":\"value2\"}</code> </p> </li> <li> <p>Missing colon: <code>{\"key1\":\"value1\",\"key2\"\"value2\"}</code> </p> </li> <li> <p>Extra colons: <code>{\"key1\"::\"value1\",\"key2\"\"value2\"}</code> </p> </li> </ul>"
+          "documentation": "<p>What WAF should do if it fails to completely parse the JSON body. The options are the following:</p> <ul> <li> <p> <code>EVALUATE_AS_STRING</code> - Inspect the body as plain text. WAF applies the text transformations and inspection criteria that you defined for the JSON inspection to the body text string.</p> </li> <li> <p> <code>MATCH</code> - Treat the web request as matching the rule statement. WAF applies the rule action to the request.</p> </li> <li> <p> <code>NO_MATCH</code> - Treat the web request as not matching the rule statement.</p> </li> </ul> <p>If you don't provide this setting, WAF parses and evaluates the content only up to the first parsing failure that it encounters. </p> <p>WAF does its best to parse the entire JSON body, but might be forced to stop for reasons such as invalid characters, duplicate keys, truncation, and any content whose root node isn't an object or an array. </p> <p>WAF parses the JSON in the following examples as two valid key, value pairs: </p> <ul> <li> <p>Missing comma: <code>{\"key1\":\"value1\"\"key2\":\"value2\"}</code> </p> </li> <li> <p>Missing colon: <code>{\"key1\":\"value1\",\"key2\"\"value2\"}</code> </p> </li> <li> <p>Extra colons: <code>{\"key1\"::\"value1\",\"key2\"\"value2\"}</code> </p> </li> </ul>"
         }
       },
       "documentation": "<p>The body of a web request, inspected as JSON. The body immediately follows the request headers. This is used in the <a>FieldToMatch</a> specification.</p> <p>Use the specifications in this object to indicate which parts of the JSON body to inspect using the rule's inspection criteria. WAF inspects only the parts of the JSON that result from the matches that you indicate. </p>"
@@ -3204,6 +3400,49 @@
         "shape": "Label"
       }
     },
+    "ListAvailableManagedRuleGroupVersionsRequest": {
+      "type": "structure",
+      "required": [
+        "VendorName",
+        "Name",
+        "Scope"
+      ],
+      "members": {
+        "VendorName": {
+          "shape": "VendorName",
+          "documentation": "<p>The name of the managed rule group vendor. You use this, along with the rule group name, to identify the rule group.</p>"
+        },
+        "Name": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the managed rule group. You use this, along with the vendor name, to identify the rule group.</p>"
+        },
+        "Scope": {
+          "shape": "Scope",
+          "documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>"
+        },
+        "NextMarker": {
+          "shape": "NextMarker",
+          "documentation": "<p>When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a <code>NextMarker</code> value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>"
+        },
+        "Limit": {
+          "shape": "PaginationLimit",
+          "documentation": "<p>The maximum number of objects that you want WAF to return for this request. If more objects are available, in the response, WAF provides a <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
+        }
+      }
+    },
+    "ListAvailableManagedRuleGroupVersionsResponse": {
+      "type": "structure",
+      "members": {
+        "NextMarker": {
+          "shape": "NextMarker",
+          "documentation": "<p>When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a <code>NextMarker</code> value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>"
+        },
+        "Versions": {
+          "shape": "ManagedRuleGroupVersions",
+          "documentation": "<p>The versions that are currently available for the specified managed rule group. </p>"
+        }
+      }
+    },
     "ListAvailableManagedRuleGroupsRequest": {
       "type": "structure",
       "required": [
@@ -3297,6 +3536,39 @@
         "NextMarker": {
           "shape": "NextMarker",
           "documentation": "<p>When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a <code>NextMarker</code> value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>"
+        }
+      }
+    },
+    "ListManagedRuleSetsRequest": {
+      "type": "structure",
+      "required": [
+        "Scope"
+      ],
+      "members": {
+        "Scope": {
+          "shape": "Scope",
+          "documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>"
+        },
+        "NextMarker": {
+          "shape": "NextMarker",
+          "documentation": "<p>When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a <code>NextMarker</code> value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>"
+        },
+        "Limit": {
+          "shape": "PaginationLimit",
+          "documentation": "<p>The maximum number of objects that you want WAF to return for this request. If more objects are available, in the response, WAF provides a <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
+        }
+      }
+    },
+    "ListManagedRuleSetsResponse": {
+      "type": "structure",
+      "members": {
+        "NextMarker": {
+          "shape": "NextMarker",
+          "documentation": "<p>When you request a list of objects with a <code>Limit</code> setting, if the number of objects that are still available for retrieval exceeds the limit, WAF returns a <code>NextMarker</code> value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.</p>"
+        },
+        "ManagedRuleSets": {
+          "shape": "ManagedRuleSetSummaries",
+          "documentation": "<p>Your managed rule sets. </p>"
         }
       }
     },
@@ -3545,6 +3817,10 @@
           "shape": "EntityName",
           "documentation": "<p>The name of the managed rule group. You use this, along with the vendor name, to identify the rule group.</p>"
         },
+        "Version": {
+          "shape": "VersionKeyString",
+          "documentation": "<p>The version of the managed rule group to use. If you specify this, the version setting is fixed until you change it. If you don't specify this, WAF uses the vendor's default version, and then keeps the version at the vendor's default when the vendor updates the managed rule group settings. </p>"
+        },
         "ExcludedRules": {
           "shape": "ExcludedRules",
           "documentation": "<p>The rules whose actions are set to <code>COUNT</code> by the web ACL, regardless of the action that is set on the rule. This effectively excludes the rule from acting on web requests. </p>"
@@ -3579,6 +3855,131 @@
         }
       },
       "documentation": "<p>High-level information about a managed rule group, returned by <a>ListAvailableManagedRuleGroups</a>. This provides information like the name and vendor name, that you provide when you add a <a>ManagedRuleGroupStatement</a> to a web ACL. Managed rule groups include Amazon Web Services Managed Rules rule groups, which are free of charge to WAF customers, and Marketplace managed rule groups, which you can subscribe to through Marketplace. </p>"
+    },
+    "ManagedRuleGroupVersion": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "VersionKeyString",
+          "documentation": "<p>The version name. </p>"
+        },
+        "LastUpdateTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the managed rule group owner updated the rule group version information. </p>"
+        }
+      },
+      "documentation": "<p>Describes a single version of a managed rule group. </p>"
+    },
+    "ManagedRuleGroupVersions": {
+      "type": "list",
+      "member": {
+        "shape": "ManagedRuleGroupVersion"
+      }
+    },
+    "ManagedRuleSet": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Id",
+        "ARN"
+      ],
+      "members": {
+        "Name": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the managed rule set. You use this, along with the rule set ID, to identify the rule set.</p> <p>This name is assigned to the corresponding managed rule group, which your customers can access and use. </p>"
+        },
+        "Id": {
+          "shape": "EntityId",
+          "documentation": "<p>A unique identifier for the managed rule set. The ID is returned in the responses to commands like <code>list</code>. You provide it to operations like <code>get</code> and <code>update</code>.</p>"
+        },
+        "ARN": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the entity.</p>"
+        },
+        "Description": {
+          "shape": "EntityDescription",
+          "documentation": "<p>A description of the set that helps with identification. </p>"
+        },
+        "PublishedVersions": {
+          "shape": "PublishedVersions",
+          "documentation": "<p>The versions of this managed rule set that are available for use by customers. </p>"
+        },
+        "RecommendedVersion": {
+          "shape": "VersionKeyString",
+          "documentation": "<p>The version that you would like your customers to use.</p>"
+        },
+        "LabelNamespace": {
+          "shape": "LabelName",
+          "documentation": "<p>The label namespace prefix for the managed rule groups that are offered to customers from this managed rule set. All labels that are added by rules in the managed rule group have this prefix. </p> <ul> <li> <p>The syntax for the label namespace prefix for a managed rule group is the following: </p> <p> <code>awswaf:managed:&lt;vendor&gt;:&lt;rule group name&gt;</code>:</p> </li> <li> <p>When a rule with a label matches a web request, WAF adds the fully qualified label to the request. A fully qualified label is made up of the label namespace from the rule group or web ACL where the rule is defined and the label from the rule, separated by a colon: </p> <p> <code>&lt;label namespace&gt;:&lt;label from rule&gt;</code> </p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>A set of rules that is managed by Amazon Web Services and Marketplace sellers to provide versioned managed rule groups for customers of WAF.</p> <note> <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p> <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p> </note>"
+    },
+    "ManagedRuleSetSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "ManagedRuleSetSummary"
+      }
+    },
+    "ManagedRuleSetSummary": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the managed rule set. You use this, along with the rule set ID, to identify the rule set.</p> <p>This name is assigned to the corresponding managed rule group, which your customers can access and use. </p>"
+        },
+        "Id": {
+          "shape": "EntityId",
+          "documentation": "<p>A unique identifier for the managed rule set. The ID is returned in the responses to commands like <code>list</code>. You provide it to operations like <code>get</code> and <code>update</code>.</p>"
+        },
+        "Description": {
+          "shape": "EntityDescription",
+          "documentation": "<p>A description of the set that helps with identification. </p>"
+        },
+        "LockToken": {
+          "shape": "LockToken",
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
+        },
+        "ARN": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the entity.</p>"
+        },
+        "LabelNamespace": {
+          "shape": "LabelName",
+          "documentation": "<p>The label namespace prefix for the managed rule groups that are offered to customers from this managed rule set. All labels that are added by rules in the managed rule group have this prefix. </p> <ul> <li> <p>The syntax for the label namespace prefix for a managed rule group is the following: </p> <p> <code>awswaf:managed:&lt;vendor&gt;:&lt;rule group name&gt;</code>:</p> </li> <li> <p>When a rule with a label matches a web request, WAF adds the fully qualified label to the request. A fully qualified label is made up of the label namespace from the rule group or web ACL where the rule is defined and the label from the rule, separated by a colon: </p> <p> <code>&lt;label namespace&gt;:&lt;label from rule&gt;</code> </p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>High-level information for a managed rule set. </p> <note> <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p> <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p> </note>"
+    },
+    "ManagedRuleSetVersion": {
+      "type": "structure",
+      "members": {
+        "AssociatedRuleGroupArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the vendor rule group that's used to define the published version of your managed rule group. </p>"
+        },
+        "Capacity": {
+          "shape": "CapacityUnit",
+          "documentation": "<p>The web ACL capacity units (WCUs) required for this rule group.</p> <p>WAF uses WCUs to calculate and control the operating resources that are used to run your rules, rule groups, and web ACLs. WAF calculates capacity differently for each rule type, to reflect the relative cost of each rule. Simple rules that cost little to run use fewer WCUs than more complex rules that use more processing power. Rule group capacity is fixed at creation, which helps users plan their web ACL WCU usage when they use a rule group. The WCU limit for web ACLs is 1,500. </p>"
+        },
+        "ForecastedLifetime": {
+          "shape": "TimeWindowDay",
+          "documentation": "<p>The amount of time you expect this version of your managed rule group to last, in days. </p>"
+        },
+        "PublishTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that you first published this version. </p> <p>Times are in Coordinated Universal Time (UTC) format. UTC format includes the special designator, Z. For example, \"2016-09-27T14:50Z\". </p>"
+        },
+        "LastUpdateTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The last time that you updated this version. </p> <p>Times are in Coordinated Universal Time (UTC) format. UTC format includes the special designator, Z. For example, \"2016-09-27T14:50Z\". </p>"
+        },
+        "ExpiryTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that this version is set to expire.</p> <p>Times are in Coordinated Universal Time (UTC) format. UTC format includes the special designator, Z. For example, \"2016-09-27T14:50Z\". </p>"
+        }
+      },
+      "documentation": "<p>Information for a single version of a managed rule set. </p> <note> <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p> <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p> </note>"
     },
     "Method": {
       "type": "structure",
@@ -3666,6 +4067,15 @@
         "CONTAINS_WORD"
       ]
     },
+    "PublishedVersions": {
+      "type": "map",
+      "key": {
+        "shape": "VersionKeyString"
+      },
+      "value": {
+        "shape": "ManagedRuleSetVersion"
+      }
+    },
     "PutLoggingConfigurationRequest": {
       "type": "structure",
       "required": [
@@ -3684,6 +4094,50 @@
         "LoggingConfiguration": {
           "shape": "LoggingConfiguration",
           "documentation": "<p/>"
+        }
+      }
+    },
+    "PutManagedRuleSetVersionsRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Scope",
+        "Id",
+        "LockToken"
+      ],
+      "members": {
+        "Name": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the managed rule set. You use this, along with the rule set ID, to identify the rule set.</p> <p>This name is assigned to the corresponding managed rule group, which your customers can access and use. </p>"
+        },
+        "Scope": {
+          "shape": "Scope",
+          "documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>"
+        },
+        "Id": {
+          "shape": "EntityId",
+          "documentation": "<p>A unique identifier for the managed rule set. The ID is returned in the responses to commands like <code>list</code>. You provide it to operations like <code>get</code> and <code>update</code>.</p>"
+        },
+        "LockToken": {
+          "shape": "LockToken",
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
+        },
+        "RecommendedVersion": {
+          "shape": "VersionKeyString",
+          "documentation": "<p>The version of the named managed rule group that you'd like your customers to choose, from among your version offerings. </p>"
+        },
+        "VersionsToPublish": {
+          "shape": "VersionsToPublish",
+          "documentation": "<p>The versions of the named managed rule group that you want to offer to your customers. </p>"
+        }
+      }
+    },
+    "PutManagedRuleSetVersionsResponse": {
+      "type": "structure",
+      "members": {
+        "NextLockToken": {
+          "shape": "LockToken",
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         }
       }
     },
@@ -3750,7 +4204,8 @@
       "type": "structure",
       "members": {
         "IPAddressVersion": {
-          "shape": "IPAddressVersion"
+          "shape": "IPAddressVersion",
+          "documentation": "<p>The version of the IP addresses, either <code>IPV4</code> or <code>IPV6</code>. </p>"
         },
         "Addresses": {
           "shape": "IPAddresses",
@@ -3853,7 +4308,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         },
         "ARN": {
           "shape": "ResourceArn",
@@ -4068,7 +4523,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         },
         "ARN": {
           "shape": "ResourceArn",
@@ -4406,7 +4861,7 @@
         },
         "Type": {
           "shape": "TextTransformationType",
-          "documentation": "<p>You can specify the following transformation types:</p> <p> <b>BASE64_DECODE</b> - Decode a <code>Base64</code>-encoded string.</p> <p> <b>BASE64_DECODE_EXT</b> - Decode a <code>Base64</code>-encoded string, but use a forgiving implementation that ignores characters that aren't valid.</p> <p> <b>CMD_LINE</b> - Command-line transformations. These are helpful in reducing effectiveness of attackers who inject an operating system command-line command and use unusual formatting to disguise some or all of the command. </p> <ul> <li> <p>Delete the following characters: <code>\\ \" ' ^</code> </p> </li> <li> <p>Delete spaces before the following characters: <code>/ (</code> </p> </li> <li> <p>Replace the following characters with a space: <code>, ;</code> </p> </li> <li> <p>Replace multiple spaces with one space</p> </li> <li> <p>Convert uppercase letters (A-Z) to lowercase (a-z)</p> </li> </ul> <p> <b>COMPRESS_WHITE_SPACE</b> - Replace these characters with a space character (decimal 32): </p> <ul> <li> <p> <code>\\f</code>, formfeed, decimal 12</p> </li> <li> <p> <code>\\t</code>, tab, decimal 9</p> </li> <li> <p> <code>\\n</code>, newline, decimal 10</p> </li> <li> <p> <code>\\r</code>, carriage return, decimal 13</p> </li> <li> <p> <code>\\v</code>, vertical tab, decimal 11</p> </li> <li> <p>Non-breaking space, decimal 160</p> </li> </ul> <p> <code>COMPRESS_WHITE_SPACE</code> also replaces multiple spaces with one space.</p> <p> <b>CSS_DECODE</b> - Decode characters that were encoded using CSS 2.x escape rules <code>syndata.html#characters</code>. This function uses up to two bytes in the decoding process, so it can help to uncover ASCII characters that were encoded using CSS encoding that wouldn’t typically be encoded. It's also useful in countering evasion, which is a combination of a backslash and non-hexadecimal characters. For example, <code>ja\\vascript</code> for javascript. </p> <p> <b>ESCAPE_SEQ_DECODE</b> - Decode the following ANSI C escape sequences: <code>\\a</code>, <code>\\b</code>, <code>\\f</code>, <code>\\n</code>, <code>\\r</code>, <code>\\t</code>, <code>\\v</code>, <code>\\\\</code>, <code>\\?</code>, <code>\\'</code>, <code>\\\"</code>, <code>\\xHH</code> (hexadecimal), <code>\\0OOO</code> (octal). Encodings that aren't valid remain in the output. </p> <p> <b>HEX_DECODE</b> - Decode a string of hexadecimal characters into a binary.</p> <p> <b>HTML_ENTITY_DECODE</b> - Replace HTML-encoded characters with unencoded characters. <code>HTML_ENTITY_DECODE</code> performs these operations: </p> <ul> <li> <p>Replaces <code>(ampersand)quot;</code> with <code>\"</code> </p> </li> <li> <p>Replaces <code>(ampersand)nbsp;</code> with a non-breaking space, decimal 160</p> </li> <li> <p>Replaces <code>(ampersand)lt;</code> with a \"less than\" symbol</p> </li> <li> <p>Replaces <code>(ampersand)gt;</code> with <code>&gt;</code> </p> </li> <li> <p>Replaces characters that are represented in hexadecimal format, <code>(ampersand)#xhhhh;</code>, with the corresponding characters</p> </li> <li> <p>Replaces characters that are represented in decimal format, <code>(ampersand)#nnnn;</code>, with the corresponding characters</p> </li> </ul> <p> <b>JS_DECODE</b> - Decode JavaScript escape sequences. If a <code>\\</code> <code>u</code> <code>HHHH</code> code is in the full-width ASCII code range of <code>FF01-FF5E</code>, then the higher byte is used to detect and adjust the lower byte. If not, only the lower byte is used and the higher byte is zeroed, causing a possible loss of information. </p> <p> <b>LOWERCASE</b> - Convert uppercase letters (A-Z) to lowercase (a-z). </p> <p> <b>MD5</b> - Calculate an MD5 hash from the data in the input. The computed hash is in a raw binary form. </p> <p> <b>NONE</b> - Specify <code>NONE</code> if you don't want any text transformations. </p> <p> <b>NORMALIZE_PATH</b> - Remove multiple slashes, directory self-references, and directory back-references that are not at the beginning of the input from an input string. </p> <p> <b>NORMALIZE_PATH_WIN</b> - This is the same as <code>NORMALIZE_PATH</code>, but first converts backslash characters to forward slashes. </p> <p> <b>REMOVE_NULLS</b> - Remove all <code>NULL</code> bytes from the input. </p> <p> <b>REPLACE_COMMENTS</b> - Replace each occurrence of a C-style comment (<code>/* ... */</code>) with a single space. Multiple consecutive occurrences are not compressed. Unterminated comments are also replaced with a space (ASCII 0x20). However, a standalone termination of a comment (<code>*/</code>) is not acted upon. </p> <p> <b>REPLACE_NULLS</b> - Replace NULL bytes in the input with space characters (ASCII <code>0x20</code>). </p> <p> <b>SQL_HEX_DECODE</b> - Decode the following ANSI C escape sequences: <code>\\a</code>, <code>\\b</code>, <code>\\f</code>, <code>\\n</code>, <code>\\r</code>, <code>\\t</code>, <code>\\v</code>, <code>\\\\</code>, <code>\\?</code>, <code>\\'</code>, <code>\\\"</code>, <code>\\xHH</code> (hexadecimal), <code>\\0OOO</code> (octal). Encodings that aren't valid remain in the output.</p> <p> <b>URL_DECODE</b> - Decode a URL-encoded value. </p> <p> <b>URL_DECODE_UNI</b> - Like <code>URL_DECODE</code>, but with support for Microsoft-specific <code>%u</code> encoding. If the code is in the full-width ASCII code range of <code>FF01-FF5E</code>, the higher byte is used to detect and adjust the lower byte. Otherwise, only the lower byte is used and the higher byte is zeroed. </p> <p> <b>UTF8_TO_UNICODE</b> - Convert all UTF-8 character sequences to Unicode. This helps input normalization, and minimizing false-positives and false-negatives for non-English languages.</p>"
+          "documentation": "<p>You can specify the following transformation types:</p> <p> <b>BASE64_DECODE</b> - Decode a <code>Base64</code>-encoded string.</p> <p> <b>BASE64_DECODE_EXT</b> - Decode a <code>Base64</code>-encoded string, but use a forgiving implementation that ignores characters that aren't valid.</p> <p> <b>CMD_LINE</b> - Command-line transformations. These are helpful in reducing effectiveness of attackers who inject an operating system command-line command and use unusual formatting to disguise some or all of the command. </p> <ul> <li> <p>Delete the following characters: <code>\\ \" ' ^</code> </p> </li> <li> <p>Delete spaces before the following characters: <code>/ (</code> </p> </li> <li> <p>Replace the following characters with a space: <code>, ;</code> </p> </li> <li> <p>Replace multiple spaces with one space</p> </li> <li> <p>Convert uppercase letters (A-Z) to lowercase (a-z)</p> </li> </ul> <p> <b>COMPRESS_WHITE_SPACE</b> - Replace these characters with a space character (decimal 32): </p> <ul> <li> <p> <code>\\f</code>, formfeed, decimal 12</p> </li> <li> <p> <code>\\t</code>, tab, decimal 9</p> </li> <li> <p> <code>\\n</code>, newline, decimal 10</p> </li> <li> <p> <code>\\r</code>, carriage return, decimal 13</p> </li> <li> <p> <code>\\v</code>, vertical tab, decimal 11</p> </li> <li> <p>Non-breaking space, decimal 160</p> </li> </ul> <p> <code>COMPRESS_WHITE_SPACE</code> also replaces multiple spaces with one space.</p> <p> <b>CSS_DECODE</b> - Decode characters that were encoded using CSS 2.x escape rules <code>syndata.html#characters</code>. This function uses up to two bytes in the decoding process, so it can help to uncover ASCII characters that were encoded using CSS encoding that wouldn’t typically be encoded. It's also useful in countering evasion, which is a combination of a backslash and non-hexadecimal characters. For example, <code>ja\\vascript</code> for javascript. </p> <p> <b>ESCAPE_SEQ_DECODE</b> - Decode the following ANSI C escape sequences: <code>\\a</code>, <code>\\b</code>, <code>\\f</code>, <code>\\n</code>, <code>\\r</code>, <code>\\t</code>, <code>\\v</code>, <code>\\\\</code>, <code>\\?</code>, <code>\\'</code>, <code>\\\"</code>, <code>\\xHH</code> (hexadecimal), <code>\\0OOO</code> (octal). Encodings that aren't valid remain in the output. </p> <p> <b>HEX_DECODE</b> - Decode a string of hexadecimal characters into a binary.</p> <p> <b>HTML_ENTITY_DECODE</b> - Replace HTML-encoded characters with unencoded characters. <code>HTML_ENTITY_DECODE</code> performs these operations: </p> <ul> <li> <p>Replaces <code>(ampersand)quot;</code> with <code>\"</code> </p> </li> <li> <p>Replaces <code>(ampersand)nbsp;</code> with a non-breaking space, decimal 160</p> </li> <li> <p>Replaces <code>(ampersand)lt;</code> with a \"less than\" symbol</p> </li> <li> <p>Replaces <code>(ampersand)gt;</code> with <code>&gt;</code> </p> </li> <li> <p>Replaces characters that are represented in hexadecimal format, <code>(ampersand)#xhhhh;</code>, with the corresponding characters</p> </li> <li> <p>Replaces characters that are represented in decimal format, <code>(ampersand)#nnnn;</code>, with the corresponding characters</p> </li> </ul> <p> <b>JS_DECODE</b> - Decode JavaScript escape sequences. If a <code>\\</code> <code>u</code> <code>HHHH</code> code is in the full-width ASCII code range of <code>FF01-FF5E</code>, then the higher byte is used to detect and adjust the lower byte. If not, only the lower byte is used and the higher byte is zeroed, causing a possible loss of information. </p> <p> <b>LOWERCASE</b> - Convert uppercase letters (A-Z) to lowercase (a-z). </p> <p> <b>MD5</b> - Calculate an MD5 hash from the data in the input. The computed hash is in a raw binary form. </p> <p> <b>NONE</b> - Specify <code>NONE</code> if you don't want any text transformations. </p> <p> <b>NORMALIZE_PATH</b> - Remove multiple slashes, directory self-references, and directory back-references that are not at the beginning of the input from an input string. </p> <p> <b>NORMALIZE_PATH_WIN</b> - This is the same as <code>NORMALIZE_PATH</code>, but first converts backslash characters to forward slashes. </p> <p> <b>REMOVE_NULLS</b> - Remove all <code>NULL</code> bytes from the input. </p> <p> <b>REPLACE_COMMENTS</b> - Replace each occurrence of a C-style comment (<code>/* ... */</code>) with a single space. Multiple consecutive occurrences are not compressed. Unterminated comments are also replaced with a space (ASCII 0x20). However, a standalone termination of a comment (<code>*/</code>) is not acted upon. </p> <p> <b>REPLACE_NULLS</b> - Replace NULL bytes in the input with space characters (ASCII <code>0x20</code>). </p> <p> <b>SQL_HEX_DECODE</b> - Decode SQL hex data. Example (<code>0x414243</code>) will be decoded to (<code>ABC</code>).</p> <p> <b>URL_DECODE</b> - Decode a URL-encoded value. </p> <p> <b>URL_DECODE_UNI</b> - Like <code>URL_DECODE</code>, but with support for Microsoft-specific <code>%u</code> encoding. If the code is in the full-width ASCII code range of <code>FF01-FF5E</code>, the higher byte is used to detect and adjust the lower byte. Otherwise, only the lower byte is used and the higher byte is zeroed. </p> <p> <b>UTF8_TO_UNICODE</b> - Convert all UTF-8 character sequences to Unicode. This helps input normalization, and minimizing false-positives and false-negatives for non-English languages.</p>"
         }
       },
       "documentation": "<p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. </p>"
@@ -4465,6 +4920,10 @@
         }
       },
       "documentation": "<p>In a <a>GetSampledRequests</a> request, the <code>StartTime</code> and <code>EndTime</code> objects specify the time range for which you want WAF to return a sample of web requests.</p> <p>You must specify the times in Coordinated Universal Time (UTC) format. UTC format includes the special designator, <code>Z</code>. For example, <code>\"2016-09-27T14:50Z\"</code>. You can specify any time range in the previous three hours.</p> <p>In a <a>GetSampledRequests</a> response, the <code>StartTime</code> and <code>EndTime</code> objects specify the time range for which WAF actually returned a sample of web requests. WAF gets the specified number of requests from among the first 5,000 requests that your Amazon Web Services resource receives during the specified time period. If your resource receives more than 5,000 requests during that period, WAF stops sampling after the 5,000th request. In that case, <code>EndTime</code> is the time that WAF received the 5,000th request.</p>"
+    },
+    "TimeWindowDay": {
+      "type": "integer",
+      "min": 1
     },
     "Timestamp": {
       "type": "timestamp"
@@ -4525,7 +4984,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         }
       }
     },
@@ -4534,7 +4993,61 @@
       "members": {
         "NextLockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns this token to your update requests. You use <code>NextLockToken</code> in the same manner as you use <code>LockToken</code>. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns this token to your <code>update</code> requests. You use <code>NextLockToken</code> in the same manner as you use <code>LockToken</code>. </p>"
+        }
+      }
+    },
+    "UpdateManagedRuleSetVersionExpiryDateRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Scope",
+        "Id",
+        "LockToken",
+        "VersionToExpire",
+        "ExpiryTimestamp"
+      ],
+      "members": {
+        "Name": {
+          "shape": "EntityName",
+          "documentation": "<p>The name of the managed rule set. You use this, along with the rule set ID, to identify the rule set.</p> <p>This name is assigned to the corresponding managed rule group, which your customers can access and use. </p>"
+        },
+        "Scope": {
+          "shape": "Scope",
+          "documentation": "<p>Specifies whether this is for an Amazon CloudFront distribution or for a regional application. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. </p> <p>To work with CloudFront, you must also specify the Region US East (N. Virginia) as follows: </p> <ul> <li> <p>CLI - Specify the Region when you use the CloudFront scope: <code>--scope=CLOUDFRONT --region=us-east-1</code>. </p> </li> <li> <p>API and SDKs - For all calls, use the Region endpoint us-east-1. </p> </li> </ul>"
+        },
+        "Id": {
+          "shape": "EntityId",
+          "documentation": "<p>A unique identifier for the managed rule set. The ID is returned in the responses to commands like <code>list</code>. You provide it to operations like <code>get</code> and <code>update</code>.</p>"
+        },
+        "LockToken": {
+          "shape": "LockToken",
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
+        },
+        "VersionToExpire": {
+          "shape": "VersionKeyString",
+          "documentation": "<p>The version that you want to remove from your list of offerings for the named managed rule group. </p>"
+        },
+        "ExpiryTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that you want the version to expire.</p> <p>Times are in Coordinated Universal Time (UTC) format. UTC format includes the special designator, Z. For example, \"2016-09-27T14:50Z\". </p>"
+        }
+      }
+    },
+    "UpdateManagedRuleSetVersionExpiryDateResponse": {
+      "type": "structure",
+      "members": {
+        "ExpiringVersion": {
+          "shape": "VersionKeyString",
+          "documentation": "<p>The version that is set to expire. </p>"
+        },
+        "ExpiryTimestamp": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the version will expire. </p> <p>Times are in Coordinated Universal Time (UTC) format. UTC format includes the special designator, Z. For example, \"2016-09-27T14:50Z\". </p>"
+        },
+        "NextLockToken": {
+          "shape": "LockToken",
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         }
       }
     },
@@ -4570,7 +5083,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         }
       }
     },
@@ -4579,7 +5092,7 @@
       "members": {
         "NextLockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns this token to your update requests. You use <code>NextLockToken</code> in the same manner as you use <code>LockToken</code>. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns this token to your <code>update</code> requests. You use <code>NextLockToken</code> in the same manner as you use <code>LockToken</code>. </p>"
         }
       }
     },
@@ -4619,7 +5132,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         },
         "CustomResponseBodies": {
           "shape": "CustomResponseBodies",
@@ -4632,7 +5145,7 @@
       "members": {
         "NextLockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns this token to your update requests. You use <code>NextLockToken</code> in the same manner as you use <code>LockToken</code>. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns this token to your <code>update</code> requests. You use <code>NextLockToken</code> in the same manner as you use <code>LockToken</code>. </p>"
         }
       }
     },
@@ -4677,7 +5190,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         },
         "CustomResponseBodies": {
           "shape": "CustomResponseBodies",
@@ -4690,7 +5203,7 @@
       "members": {
         "NextLockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns this token to your update requests. You use <code>NextLockToken</code> in the same manner as you use <code>LockToken</code>. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns this token to your <code>update</code> requests. You use <code>NextLockToken</code> in the same manner as you use <code>LockToken</code>. </p>"
         }
       }
     },
@@ -4704,6 +5217,35 @@
       "max": 128,
       "min": 1,
       "pattern": ".*\\S.*"
+    },
+    "VersionKeyString": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "^[\\w#:\\.\\-/]+$"
+    },
+    "VersionToPublish": {
+      "type": "structure",
+      "members": {
+        "AssociatedRuleGroupArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the vendor's rule group that's used in the published managed rule group version. </p>"
+        },
+        "ForecastedLifetime": {
+          "shape": "TimeWindowDay",
+          "documentation": "<p>The amount of time the vendor expects this version of the managed rule group to last, in days. </p>"
+        }
+      },
+      "documentation": "<p>A version of the named managed rule group, that the rule group's vendor publishes for use by customers. </p> <note> <p>This is intended for use only by vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace sellers. </p> <p>Vendors, you can use the managed rule set APIs to provide controlled rollout of your versioned managed rule group offerings for your customers. The APIs are <code>ListManagedRuleSets</code>, <code>GetManagedRuleSet</code>, <code>PutManagedRuleSetVersions</code>, and <code>UpdateManagedRuleSetVersionExpiryDate</code>.</p> </note>"
+    },
+    "VersionsToPublish": {
+      "type": "map",
+      "key": {
+        "shape": "VersionKeyString"
+      },
+      "value": {
+        "shape": "VersionToPublish"
+      }
     },
     "VisibilityConfig": {
       "type": "structure",
@@ -4816,7 +5358,7 @@
         },
         "LockToken": {
           "shape": "LockToken",
-          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your get and list requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like update and delete. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another get, and use the new token returned by that operation. </p>"
+          "documentation": "<p>A token used for optimistic locking. WAF returns a token to your <code>get</code> and <code>list</code> requests, to mark the state of the entity at the time of the request. To make changes to the entity associated with the token, you provide the token to operations like <code>update</code> and <code>delete</code>. WAF uses the token to ensure that no changes have been made to the entity since you last retrieved it. If a change has been made, the update fails with a <code>WAFOptimisticLockException</code>. If this happens, perform another <code>get</code>, and use the new token returned by that operation. </p>"
         },
         "ARN": {
           "shape": "ResourceArn",
@@ -4844,5 +5386,5 @@
       "documentation": "<p>A rule statement that defines a cross-site scripting (XSS) match search for WAF to apply to web requests. XSS attacks are those where the attacker uses vulnerabilities in a benign website as a vehicle to inject malicious client-site scripts into other legitimate web browsers. The XSS match statement provides the location in requests that you want WAF to search and text transformations to use on the search area before WAF searches for character sequences that are likely to be malicious strings. </p>"
     }
   },
-  "documentation": "<fullname>WAF</fullname> <note> <p>This is the latest version of the <b>WAF</b> API, released in November, 2019. The names of the entities that you use to access this API, like endpoints and namespaces, all have the versioning information added, like \"V2\" or \"v2\", to distinguish from the prior version. We recommend migrating your resources to this version, because it has a number of significant improvements.</p> <p>If you used WAF prior to this release, you can't use this WAFV2 API to access any WAF resources that you created before. You can access your old rules, web ACLs, and other WAF resources only through the WAF Classic APIs. The WAF Classic APIs have retained the prior names, endpoints, and namespaces. </p> <p>For information, including how to migrate your WAF resources to this version, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">WAF Developer Guide</a>. </p> </note> <p>WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to Amazon CloudFront, an Amazon API Gateway REST API, an Application Load Balancer, or an AppSync GraphQL API. WAF also lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, the Amazon API Gateway REST API, CloudFront distribution, the Application Load Balancer, or the AppSync GraphQL API responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You also can configure CloudFront to return a custom error page when a request is blocked.</p> <p>This API guide is for developers who need detailed information about WAF API actions, data types, and errors. For detailed information about WAF features and an overview of how to use WAF, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/\">WAF Developer Guide</a>.</p> <p>You can make calls using the endpoints listed in <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#waf_region\">Amazon Web Services Service Endpoints for WAF</a>. </p> <ul> <li> <p>For regional applications, you can use any of the endpoints in the list. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. </p> </li> <li> <p>For Amazon CloudFront applications, you must use the API endpoint listed for US East (N. Virginia): us-east-1.</p> </li> </ul> <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to the programming language or platform that you're using. For more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p> <p>We currently provide two versions of the WAF API: this API and the prior versions, the classic WAF APIs. This new API provides the same functionality as the older versions, with the following major improvements:</p> <ul> <li> <p>You use one API for both global and regional applications. Where you need to distinguish the scope, you specify a <code>Scope</code> parameter and set it to <code>CLOUDFRONT</code> or <code>REGIONAL</code>. </p> </li> <li> <p>You can define a web ACL or rule group with a single call, and update it with a single call. You define all rule specifications in JSON format, and pass them to your rule group or web ACL calls.</p> </li> <li> <p>The limits WAF places on the use of rules more closely reflects the cost of running each type of rule. Rule groups include capacity settings, so you know the maximum cost of a rule group when you use it.</p> </li> </ul>"
+  "documentation": "<fullname>WAF</fullname> <note> <p>This is the latest version of the <b>WAF</b> API, released in November, 2019. The names of the entities that you use to access this API, like endpoints and namespaces, all have the versioning information added, like \"V2\" or \"v2\", to distinguish from the prior version. We recommend migrating your resources to this version, because it has a number of significant improvements.</p> <p>If you used WAF prior to this release, you can't use this WAFV2 API to access any WAF resources that you created before. You can access your old rules, web ACLs, and other WAF resources only through the WAF Classic APIs. The WAF Classic APIs have retained the prior names, endpoints, and namespaces. </p> <p>For information, including how to migrate your WAF resources to this version, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html\">WAF Developer Guide</a>. </p> </note> <p>WAF is a web application firewall that lets you monitor the HTTP and HTTPS requests that are forwarded to Amazon CloudFront, an Amazon API Gateway REST API, an Application Load Balancer, or an AppSync GraphQL API. WAF also lets you control access to your content. Based on conditions that you specify, such as the IP addresses that requests originate from or the values of query strings, the Amazon API Gateway REST API, CloudFront distribution, the Application Load Balancer, or the AppSync GraphQL API responds to requests either with the requested content or with an HTTP 403 status code (Forbidden). You also can configure CloudFront to return a custom error page when a request is blocked.</p> <p>This API guide is for developers who need detailed information about WAF API actions, data types, and errors. For detailed information about WAF features and an overview of how to use WAF, see the <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html\">WAF Developer Guide</a>.</p> <p>You can make calls using the endpoints listed in <a href=\"https://docs.aws.amazon.com/general/latest/gr/waf.html\">WAF endpoints and quotas</a>. </p> <ul> <li> <p>For regional applications, you can use any of the endpoints in the list. A regional application can be an Application Load Balancer (ALB), an Amazon API Gateway REST API, or an AppSync GraphQL API. </p> </li> <li> <p>For Amazon CloudFront applications, you must use the API endpoint listed for US East (N. Virginia): us-east-1.</p> </li> </ul> <p>Alternatively, you can use one of the Amazon Web Services SDKs to access an API that's tailored to the programming language or platform that you're using. For more information, see <a href=\"http://aws.amazon.com/tools/#SDKs\">Amazon Web Services SDKs</a>.</p> <p>We currently provide two versions of the WAF API: this API and the prior versions, the classic WAF APIs. This new API provides the same functionality as the older versions, with the following major improvements:</p> <ul> <li> <p>You use one API for both global and regional applications. Where you need to distinguish the scope, you specify a <code>Scope</code> parameter and set it to <code>CLOUDFRONT</code> or <code>REGIONAL</code>. </p> </li> <li> <p>You can define a web ACL or rule group with a single call, and update it with a single call. You define all rule specifications in JSON format, and pass them to your rule group or web ACL calls.</p> </li> <li> <p>The limits WAF places on the use of rules more closely reflects the cost of running each type of rule. Rule groups include capacity settings, so you know the maximum cost of a rule group when you use it.</p> </li> </ul>"
 }
