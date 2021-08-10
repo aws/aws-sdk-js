@@ -52,11 +52,11 @@ declare class Chime extends Service {
    */
   batchCreateAttendee(callback?: (err: AWSError, data: Chime.Types.BatchCreateAttendeeResponse) => void): Request<Chime.Types.BatchCreateAttendeeResponse, AWSError>;
   /**
-   * Adds a specified number of users to a channel. 
+   * Adds a specified number of users to a channel.
    */
   batchCreateChannelMembership(params: Chime.Types.BatchCreateChannelMembershipRequest, callback?: (err: AWSError, data: Chime.Types.BatchCreateChannelMembershipResponse) => void): Request<Chime.Types.BatchCreateChannelMembershipResponse, AWSError>;
   /**
-   * Adds a specified number of users to a channel. 
+   * Adds a specified number of users to a channel.
    */
   batchCreateChannelMembership(callback?: (err: AWSError, data: Chime.Types.BatchCreateChannelMembershipResponse) => void): Request<Chime.Types.BatchCreateChannelMembershipResponse, AWSError>;
   /**
@@ -540,11 +540,11 @@ declare class Chime extends Service {
    */
   describeAppInstanceAdmin(callback?: (err: AWSError, data: Chime.Types.DescribeAppInstanceAdminResponse) => void): Request<Chime.Types.DescribeAppInstanceAdminResponse, AWSError>;
   /**
-   *  Returns the full details of an AppInstanceUser . 
+   * Returns the full details of an AppInstanceUser.
    */
   describeAppInstanceUser(params: Chime.Types.DescribeAppInstanceUserRequest, callback?: (err: AWSError, data: Chime.Types.DescribeAppInstanceUserResponse) => void): Request<Chime.Types.DescribeAppInstanceUserResponse, AWSError>;
   /**
-   *  Returns the full details of an AppInstanceUser . 
+   * Returns the full details of an AppInstanceUser.
    */
   describeAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.DescribeAppInstanceUserResponse) => void): Request<Chime.Types.DescribeAppInstanceUserResponse, AWSError>;
   /**
@@ -900,11 +900,11 @@ declare class Chime extends Service {
    */
   listAppInstanceAdmins(callback?: (err: AWSError, data: Chime.Types.ListAppInstanceAdminsResponse) => void): Request<Chime.Types.ListAppInstanceAdminsResponse, AWSError>;
   /**
-   *  List all AppInstanceUsers created under a single AppInstance. 
+   * List all AppInstanceUsers created under a single AppInstance. 
    */
   listAppInstanceUsers(params: Chime.Types.ListAppInstanceUsersRequest, callback?: (err: AWSError, data: Chime.Types.ListAppInstanceUsersResponse) => void): Request<Chime.Types.ListAppInstanceUsersResponse, AWSError>;
   /**
-   *  List all AppInstanceUsers created under a single AppInstance. 
+   * List all AppInstanceUsers created under a single AppInstance. 
    */
   listAppInstanceUsers(callback?: (err: AWSError, data: Chime.Types.ListAppInstanceUsersResponse) => void): Request<Chime.Types.ListAppInstanceUsersResponse, AWSError>;
   /**
@@ -1799,6 +1799,9 @@ declare namespace Chime {
   export type AttendeeTagKeyList = TagKey[];
   export type AttendeeTagList = Tag[];
   export interface BatchChannelMemberships {
+    /**
+     * The identifier of the member who invited another member.
+     */
     InvitedBy?: Identity;
     /**
      * The membership types set for the channel users.
@@ -2113,9 +2116,6 @@ declare namespace Chime {
   }
   export interface ChannelMembershipForAppInstanceUserSummary {
     ChannelSummary?: ChannelSummary;
-    /**
-     * Returns the channel membership data for an AppInstance.
-     */
     AppInstanceUserMembershipSummary?: AppInstanceUserMembershipSummary;
   }
   export type ChannelMembershipForAppInstanceUserSummaryList = ChannelMembershipForAppInstanceUserSummary[];
@@ -2216,6 +2216,9 @@ declare namespace Chime {
   export type ChannelMessageType = "STANDARD"|"CONTROL"|string;
   export type ChannelMode = "UNRESTRICTED"|"RESTRICTED"|string;
   export interface ChannelModeratedByAppInstanceUserSummary {
+    /**
+     * Summary of the details of a Channel.
+     */
     ChannelSummary?: ChannelSummary;
   }
   export type ChannelModeratedByAppInstanceUserSummaryList = ChannelModeratedByAppInstanceUserSummary[];
@@ -3412,7 +3415,7 @@ declare namespace Chime {
      */
     VocabularyName?: String;
     /**
-     * The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the Region closest to the meeting's Region.
+     * The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the meeting's Region.
      */
     Region?: TranscribeMedicalRegion;
   }
@@ -3434,7 +3437,7 @@ declare namespace Chime {
      */
     VocabularyName?: String;
     /**
-     * The AWS Region passed to Amazon Transcribe. If you don't specify a Region, Amazon Chime uses the Region closest to the meeting's Region.
+     * The AWS Region passed to Amazon Transcribe. If you don't specify a Region, Amazon Chime uses the meeting's Region.
      */
     Region?: TranscribeRegion;
   }
@@ -5883,10 +5886,10 @@ declare namespace Chime {
   export type TollFreePrefix = string;
   export type TranscribeLanguageCode = "en-US"|"en-GB"|"es-US"|"fr-CA"|"fr-FR"|"en-AU"|"it-IT"|"de-DE"|"pt-BR"|"ja-JP"|"ko-KR"|"zh-CN"|string;
   export type TranscribeMedicalLanguageCode = "en-US"|string;
-  export type TranscribeMedicalRegion = "us-east-1"|"us-east-2"|"us-west-2"|"ap-southeast-2"|"ca-central-1"|"eu-west-1"|string;
+  export type TranscribeMedicalRegion = "us-east-1"|"us-east-2"|"us-west-2"|"ap-southeast-2"|"ca-central-1"|"eu-west-1"|"auto"|string;
   export type TranscribeMedicalSpecialty = "PRIMARYCARE"|"CARDIOLOGY"|"NEUROLOGY"|"ONCOLOGY"|"RADIOLOGY"|"UROLOGY"|string;
   export type TranscribeMedicalType = "CONVERSATION"|"DICTATION"|string;
-  export type TranscribeRegion = "us-east-2"|"us-east-1"|"us-west-2"|"ap-northeast-2"|"ap-southeast-2"|"ap-northeast-1"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"sa-east-1"|string;
+  export type TranscribeRegion = "us-east-2"|"us-east-1"|"us-west-2"|"ap-northeast-2"|"ap-southeast-2"|"ap-northeast-1"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"sa-east-1"|"auto"|string;
   export type TranscribeVocabularyFilterMethod = "remove"|"mask"|"tag"|string;
   export interface TranscriptionConfiguration {
     /**
@@ -5980,7 +5983,7 @@ declare namespace Chime {
   }
   export interface UpdateAppInstanceResponse {
     /**
-     * The ARN of the AppInstance.
+     * The ARN of the AppInstance. 
      */
     AppInstanceArn?: ChimeArn;
   }

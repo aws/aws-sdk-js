@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.964.0-->
+<!--LATEST=2.965.0-->
 <!--ENTRYINSERT-->
+
+## 2.965.0
+* feature: Chime: Add support for "auto" in Region field of StartMeetingTranscription API request.
 
 ## 2.964.0
 * feature: Rekognition: This release adds support for four new types of segments (opening credits, content segments, slates, and studio logos), improved accuracy for credits and shot detection and new filters to control black frame detection.

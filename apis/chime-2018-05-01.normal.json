@@ -245,7 +245,7 @@
           "shape": "ThrottledClientException"
         }
       ],
-      "documentation": "<p>Adds a specified number of users to a channel. </p>",
+      "documentation": "<p>Adds a specified number of users to a channel.</p>",
       "endpoint": {
         "hostPrefix": "messaging-"
       }
@@ -2581,7 +2581,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p> Returns the full details of an <code>AppInstanceUser</code> . </p>",
+      "documentation": "<p>Returns the full details of an <code>AppInstanceUser</code>.</p>",
       "endpoint": {
         "hostPrefix": "identity-"
       }
@@ -4324,7 +4324,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p> List all <code>AppInstanceUsers</code> created under a single <code>AppInstance</code>. </p>",
+      "documentation": "<p>List all <code>AppInstanceUsers</code> created under a single <code>AppInstance</code>. </p>",
       "endpoint": {
         "hostPrefix": "identity-"
       }
@@ -7726,7 +7726,8 @@
       "type": "structure",
       "members": {
         "InvitedBy": {
-          "shape": "Identity"
+          "shape": "Identity",
+          "documentation": "<p>The identifier of the member who invited another member.</p>"
         },
         "Type": {
           "shape": "ChannelMembershipType",
@@ -8229,8 +8230,7 @@
           "shape": "ChannelSummary"
         },
         "AppInstanceUserMembershipSummary": {
-          "shape": "AppInstanceUserMembershipSummary",
-          "documentation": "<p>Returns the channel membership data for an <code>AppInstance</code>.</p>"
+          "shape": "AppInstanceUserMembershipSummary"
         }
       },
       "documentation": "<p>Summary of the channel membership details of an <code>AppInstanceUser</code>.</p>"
@@ -8387,7 +8387,8 @@
       "type": "structure",
       "members": {
         "ChannelSummary": {
-          "shape": "ChannelSummary"
+          "shape": "ChannelSummary",
+          "documentation": "<p>Summary of the details of a <code>Channel</code>.</p>"
         }
       },
       "documentation": "<p>Summary of the details of a moderated channel.</p>"
@@ -10480,7 +10481,7 @@
         },
         "Region": {
           "shape": "TranscribeMedicalRegion",
-          "documentation": "<p>The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the Region closest to the meeting's Region.</p>"
+          "documentation": "<p>The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the meeting's Region.</p>"
         }
       },
       "documentation": "<p>Settings specific to the Amazon Transcribe Medical engine.</p>"
@@ -10509,7 +10510,7 @@
         },
         "Region": {
           "shape": "TranscribeRegion",
-          "documentation": "<p>The AWS Region passed to Amazon Transcribe. If you don't specify a Region, Amazon Chime uses the Region closest to the meeting's Region.</p>"
+          "documentation": "<p>The AWS Region passed to Amazon Transcribe. If you don't specify a Region, Amazon Chime uses the meeting's Region.</p>"
         }
       },
       "documentation": "<p>Settings specific to the Amazon Transcribe engine.</p>"
@@ -14827,7 +14828,8 @@
         "us-west-2",
         "ap-southeast-2",
         "ca-central-1",
-        "eu-west-1"
+        "eu-west-1",
+        "auto"
       ]
     },
     "TranscribeMedicalSpecialty": {
@@ -14861,7 +14863,8 @@
         "eu-central-1",
         "eu-west-1",
         "eu-west-2",
-        "sa-east-1"
+        "sa-east-1",
+        "auto"
       ]
     },
     "TranscribeVocabularyFilterMethod": {
@@ -15030,7 +15033,7 @@
       "members": {
         "AppInstanceArn": {
           "shape": "ChimeArn",
-          "documentation": "<p>The ARN of the <code>AppInstance</code>.</p>"
+          "documentation": "<p>The ARN of the <code>AppInstance</code>. </p>"
         }
       }
     },
