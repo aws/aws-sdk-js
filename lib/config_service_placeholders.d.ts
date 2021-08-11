@@ -276,6 +276,7 @@ export abstract class ConfigurationServicePlaceholders {
   route53recoveryreadiness?: AWS.Route53RecoveryReadiness.Types.ClientConfiguration;
   chimesdkidentity?: AWS.ChimeSDKIdentity.Types.ClientConfiguration;
   chimesdkmessaging?: AWS.ChimeSDKMessaging.Types.ClientConfiguration;
+  snowdevicemanagement?: AWS.SnowDeviceManagement.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -554,4 +555,5 @@ export interface ConfigurationServiceApiVersions {
   route53recoveryreadiness?: AWS.Route53RecoveryReadiness.Types.apiVersion;
   chimesdkidentity?: AWS.ChimeSDKIdentity.Types.apiVersion;
   chimesdkmessaging?: AWS.ChimeSDKMessaging.Types.apiVersion;
+  snowdevicemanagement?: AWS.SnowDeviceManagement.Types.apiVersion;
 }

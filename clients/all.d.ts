@@ -274,3 +274,4 @@ export import Route53RecoveryControlConfig = require('./route53recoverycontrolco
 export import Route53RecoveryReadiness = require('./route53recoveryreadiness');
 export import ChimeSDKIdentity = require('./chimesdkidentity');
 export import ChimeSDKMessaging = require('./chimesdkmessaging');
+export import SnowDeviceManagement = require('./snowdevicemanagement');

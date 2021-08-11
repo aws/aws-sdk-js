@@ -32,11 +32,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -78,11 +78,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -124,11 +124,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -170,11 +170,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -216,11 +216,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -262,11 +262,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -285,7 +285,7 @@
           "documentation": "<p>This request conflicts with another concurrent request. Please retry your request.</p>"
         }
       ],
-      "documentation": "<p>Create a new Studio.</p> <p>When creating a Studio, two IAM roles must be provided: the admin role and the user Role. These roles are assumed by your users when they log in to the Nimble Studio portal.</p> <p>The user role must have the AmazonNimbleStudio-StudioUser managed policy attached for the portal to function properly.</p> <p>The Admin Role must have the AmazonNimbleStudio-StudioAdmin managed policy attached for the portal to function properly.</p> <p>You may optionally specify a KMS key in the StudioEncryptionConfiguration.</p> <p>In Nimble Studio, resource names, descriptions, initialization scripts, and other data you provide are always encrypted at rest using an AWS KMS key. By default, this key is owned by AWS and managed on your behalf. You may provide your own AWS KMS key when calling CreateStudio to encrypt this data using a key you own and manage.</p> <p>When providing an AWS KMS key during studio creation, Nimble Studio creates KMS grants in your account to provide your studio user and admin roles access to these KMS keys.</p> <p>If you delete this grant, the studio will no longer be accessible to your portal users.</p> <p>If you delete the studio KMS key, your studio will no longer be accessible.</p>"
+      "documentation": "<p>Create a new Studio.</p> <p>When creating a Studio, two IAM roles must be provided: the admin role and the user Role. These roles are assumed by your users when they log in to the Nimble Studio portal.</p> <p>The user role must have the AmazonNimbleStudio-StudioUser managed policy attached for the portal to function properly.</p> <p>The Admin Role must have the AmazonNimbleStudio-StudioAdmin managed policy attached for the portal to function properly.</p> <p>You may optionally specify a KMS key in the StudioEncryptionConfiguration.</p> <p>In Nimble Studio, resource names, descriptions, initialization scripts, and other data you provide are always encrypted at rest using an KMS key. By default, this key is owned by Amazon Web Services and managed on your behalf. You may provide your own KMS key when calling CreateStudio to encrypt this data using a key you own and manage.</p> <p>When providing an KMS key during studio creation, Nimble Studio creates KMS grants in your account to provide your studio user and admin roles access to these KMS keys.</p> <p>If you delete this grant, the studio will no longer be accessible to your portal users.</p> <p>If you delete the studio KMS key, your studio will no longer be accessible.</p>"
     },
     "CreateStudioComponent": {
       "name": "CreateStudioComponent",
@@ -308,11 +308,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -354,11 +354,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -400,11 +400,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -446,11 +446,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -492,11 +492,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -538,11 +538,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -584,11 +584,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -630,11 +630,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -676,11 +676,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -722,11 +722,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -768,11 +768,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -814,11 +814,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -860,11 +860,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -906,11 +906,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -952,11 +952,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -998,11 +998,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1044,11 +1044,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1090,11 +1090,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1136,11 +1136,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1182,11 +1182,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1228,11 +1228,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1274,11 +1274,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1320,11 +1320,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1366,11 +1366,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1389,7 +1389,7 @@
           "documentation": "<p>This request conflicts with another concurrent request. Please retry your request.</p>"
         }
       ],
-      "documentation": "<p>List the streaming image resources available to this studio.</p> <p>This list will contain both images provided by AWS, as well as streaming images that you have created in your studio.</p>"
+      "documentation": "<p>List the streaming image resources available to this studio.</p> <p>This list will contain both images provided by Amazon Web Services, as well as streaming images that you have created in your studio.</p>"
     },
     "ListStreamingSessions": {
       "name": "ListStreamingSessions",
@@ -1412,11 +1412,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1458,11 +1458,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1504,11 +1504,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1550,11 +1550,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1573,7 +1573,7 @@
           "documentation": "<p>This request conflicts with another concurrent request. Please retry your request.</p>"
         }
       ],
-      "documentation": "<p>List studios in your AWS account in the requested AWS Region.</p>"
+      "documentation": "<p>List studios in your Amazon Web Services account in the requested Amazon Web Services Region.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -1596,11 +1596,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1642,11 +1642,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1688,11 +1688,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1734,11 +1734,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1757,7 +1757,7 @@
           "documentation": "<p>This request conflicts with another concurrent request. Please retry your request.</p>"
         }
       ],
-      "documentation": "<p>Repairs the SSO configuration for a given studio.</p> <p>If the studio has a valid AWS SSO configuration currently associated with it, this operation will fail with a validation error.</p> <p>If the studio does not have a valid AWS SSO configuration currently associated with it, then a new AWS SSO application is created for the studio and the studio is changed to the READY state.</p> <p>After the AWS SSO application is repaired, you must use the Amazon Nimble Studio console to add administrators and users to your studio.</p>"
+      "documentation": "<p>Repairs the SSO configuration for a given studio.</p> <p>If the studio has a valid Amazon Web Services SSO configuration currently associated with it, this operation will fail with a validation error.</p> <p>If the studio does not have a valid Amazon Web Services SSO configuration currently associated with it, then a new Amazon Web Services SSO application is created for the studio and the studio is changed to the READY state.</p> <p>After the Amazon Web Services SSO application is repaired, you must use the Amazon Nimble Studio console to add administrators and users to your studio.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -1780,11 +1780,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1826,11 +1826,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1872,11 +1872,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1918,11 +1918,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -1964,11 +1964,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -2010,11 +2010,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -2056,11 +2056,11 @@
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "<p>A service fault has occurred. Please retry your request and contact AWS support if this error continues.</p>"
+          "documentation": "<p>A service fault has occurred. Please retry your request and contact Amazon Web Services Support if this error continues.</p>"
         },
         {
           "shape": "ServiceQuotaExceededException",
-          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the AWS Service Quotas console to request an increase.</p>"
+          "documentation": "<p>This request would cause a service quota to be exceeded. Please use the Amazon Web Services Service Quotas console to request an increase.</p>"
         },
         {
           "shape": "AccessDeniedException",
@@ -2167,7 +2167,7 @@
         "directoryId": {
           "shape": "DirectoryId",
           "locationName": "directoryId",
-          "documentation": "<p>The directory ID of the AWS Directory Service for Microsoft AD to access using this studio component.</p>"
+          "documentation": "<p>The directory ID of the Directory Service for Microsoft Active Directory to access using this studio component.</p>"
         },
         "organizationalUnitDistinguishedName": {
           "shape": "ActiveDirectoryOrganizationalUnitDistinguishedName",
@@ -2355,6 +2355,11 @@
           "shape": "__string",
           "locationName": "launchProfileId",
           "documentation": "<p>The launch profile ID.</p>"
+        },
+        "ownedBy": {
+          "shape": "__string",
+          "locationName": "ownedBy",
+          "documentation": "<p>The user ID of the user that owns the streaming session.</p>"
         },
         "streamingImageId": {
           "shape": "StreamingImageId",
@@ -3471,7 +3476,7 @@
         "directoryId": {
           "shape": "DirectoryId",
           "locationName": "directoryId",
-          "documentation": "<p>The directory ID of the AWS Directory Service for Microsoft AD to access using this launch profile.</p>"
+          "documentation": "<p>The directory ID of the Directory Service for Microsoft Active Directory to access using this launch profile.</p>"
         },
         "directoryName": {
           "shape": "__string",
@@ -3892,13 +3897,19 @@
           "shape": "__string",
           "location": "querystring",
           "locationName": "createdBy",
-          "documentation": "<p>The user ID.</p>"
+          "documentation": "<p>The user ID of the user that created the streaming session.</p>"
         },
         "nextToken": {
           "shape": "__string",
           "location": "querystring",
           "locationName": "nextToken",
           "documentation": "<p>The token for the next set of results, or null if there are no more results.</p>"
+        },
+        "ownedBy": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "ownedBy",
+          "documentation": "<p>The user ID of the user that owns the streaming session.</p>"
         },
         "sessionIds": {
           "shape": "__string",
@@ -4104,6 +4115,7 @@
     "NewLaunchProfileMemberList": {
       "type": "list",
       "documentation": "",
+      "min": 1,
       "max": 20,
       "member": {
         "shape": "NewLaunchProfileMember"
@@ -4132,6 +4144,7 @@
     "NewStudioMemberList": {
       "type": "list",
       "documentation": "",
+      "min": 1,
       "max": 20,
       "member": {
         "shape": "NewStudioMember"
@@ -4535,11 +4548,6 @@
       "documentation": "<p>The platform of this Streaming Image, either WINDOWS or LINUX.</p>",
       "pattern": "^[a-zA-Z]*$"
     },
-    "StreamingImageSessionId": {
-      "type": "string",
-      "documentation": "<p>The streaming image session ID.</p>",
-      "pattern": "^[A-z0-9-_:]*\\.{1}[A-z0-9-_]*$"
-    },
     "StreamingImageState": {
       "type": "string",
       "documentation": "",
@@ -4615,8 +4623,13 @@
           "locationName": "launchProfileId",
           "documentation": "<p>The ID of the launch profile used to control access from the streaming session.</p>"
         },
+        "ownedBy": {
+          "shape": "__string",
+          "locationName": "ownedBy",
+          "documentation": "<p>The user ID of the user that owns the streaming session.</p>"
+        },
         "sessionId": {
-          "shape": "StreamingImageSessionId",
+          "shape": "StreamingSessionId",
           "locationName": "sessionId",
           "documentation": "<p>The session ID.</p>"
         },
@@ -4662,6 +4675,9 @@
         }
       },
       "documentation": ""
+    },
+    "StreamingSessionId": {
+      "type": "string"
     },
     "StreamingSessionList": {
       "type": "list",
@@ -4716,6 +4732,11 @@
           "shape": "Timestamp",
           "locationName": "expiresAt",
           "documentation": "<p>The Unix epoch timestamp in seconds for when the resource expires.</p>"
+        },
+        "ownedBy": {
+          "shape": "__string",
+          "locationName": "ownedBy",
+          "documentation": "<p>The user ID of the user that owns the streaming session.</p>"
         },
         "state": {
           "shape": "StreamingSessionStreamState",
@@ -4795,12 +4816,12 @@
         "homeRegion": {
           "shape": "Region",
           "locationName": "homeRegion",
-          "documentation": "<p>The AWS region where the studio resource is located.</p>"
+          "documentation": "<p>The Amazon Web Services Region where the studio resource is located.</p>"
         },
         "ssoClientId": {
           "shape": "__string",
           "locationName": "ssoClientId",
-          "documentation": "<p>The AWS SSO application client ID used to integrate with AWS SSO to enable AWS SSO users to log in to Nimble portal.</p>"
+          "documentation": "<p>The Amazon Web Services SSO application client ID used to integrate with Amazon Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble portal.</p>"
         },
         "state": {
           "shape": "StudioState",

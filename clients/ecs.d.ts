@@ -609,7 +609,7 @@ declare namespace ECS {
   export type CapacityProviders = CapacityProvider[];
   export interface Cluster {
     /**
-     * The Amazon Resource Name (ARN) that identifies the cluster. The ARN contains the arn:aws:ecs namespace, followed by the Region of the cluster, the account ID of the cluster owner, the cluster namespace, and then the cluster name. For example, arn:aws:ecs:region:012345678910:cluster/test.
+     * The Amazon Resource Name (ARN) that identifies the cluster. The ARN contains the arn:aws:ecs namespace, followed by the Region of the cluster, the Amazon Web Services account ID of the cluster owner, the cluster namespace, and then the cluster name. For example, arn:aws:ecs:region:012345678910:cluster/test.
      */
     clusterArn?: String;
     /**
@@ -936,7 +936,7 @@ declare namespace ECS {
   }
   export interface ContainerInstance {
     /**
-     * The Amazon Resource Name (ARN) of the container instance. The ARN contains the arn:aws:ecs namespace, followed by the Region of the container instance, the account ID of the container instance owner, the container-instance namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
+     * The Amazon Resource Name (ARN) of the container instance. The ARN contains the arn:aws:ecs namespace, followed by the Region of the container instance, the Amazon Web Services account ID of the container instance owner, the container-instance namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
      */
     containerInstanceArn?: String;
     /**
@@ -1117,7 +1117,7 @@ declare namespace ECS {
      */
     capacityProviders?: StringList;
     /**
-     * The capacity provider strategy to set as the default for the cluster. When a default capacity provider strategy is set for a cluster, when calling the RunTask or CreateService APIs wtih no capacity provider strategy or launch type specified, the default capacity provider strategy for the cluster is used. If a default capacity provider strategy is not defined for a cluster during creation, it can be defined later with the PutClusterCapacityProviders API operation.
+     * The capacity provider strategy to set as the default for the cluster. When a default capacity provider strategy is set for a cluster, when calling the RunTask or CreateService APIs with no capacity provider strategy or launch type specified, the default capacity provider strategy for the cluster is used. If a default capacity provider strategy is not defined for a cluster during creation, it can be defined later with the PutClusterCapacityProviders API operation.
      */
     defaultCapacityProviderStrategy?: CapacityProviderStrategy;
   }
@@ -1161,7 +1161,7 @@ declare namespace ECS {
      */
     launchType?: LaunchType;
     /**
-     * The capacity provider strategy to use for the service. If a capacityProviderStrategy is specified, the launchType parameter must be omitted. If no capacityProviderStrategy or launchType is specified, the defaultCapacityProviderStrategy for the cluster is used.
+     * The capacity provider strategy to use for the service. If a capacityProviderStrategy is specified, the launchType parameter must be omitted. If no capacityProviderStrategy or launchType is specified, the defaultCapacityProviderStrategy for the cluster is used. A capacity provider strategy may contain a maximum of 6 capacity providers.
      */
     capacityProviderStrategy?: CapacityProviderStrategy;
     /**
@@ -1177,11 +1177,11 @@ declare namespace ECS {
      */
     deploymentConfiguration?: DeploymentConfiguration;
     /**
-     * An array of placement constraint objects to use for tasks in your service. You can specify a maximum of 10 constraints per task (this limit includes constraints in the task definition and those specified at runtime). 
+     * An array of placement constraint objects to use for tasks in your service. You can specify a maximum of 10 constraints per task (this limit includes constraints in the task definition and those specified at runtime).
      */
     placementConstraints?: PlacementConstraints;
     /**
-     * The placement strategy objects to use for tasks in your service. You can specify a maximum of five strategy rules per service.
+     * The placement strategy objects to use for tasks in your service. You can specify a maximum of 5 strategy rules per service.
      */
     placementStrategy?: PlacementStrategies;
     /**
@@ -1484,7 +1484,7 @@ declare namespace ECS {
      */
     cluster?: String;
     /**
-     * The container instance ID or full ARN of the container instance to deregister. The ARN contains the arn:aws:ecs namespace, followed by the Region of the container instance, the account ID of the container instance owner, the container-instance namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
+     * The container instance ID or full ARN of the container instance to deregister. The ARN contains the arn:aws:ecs namespace, followed by the Region of the container instance, the Amazon Web Services account ID of the container instance owner, the container-instance namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
      */
     containerInstance: String;
     /**
@@ -1548,7 +1548,7 @@ declare namespace ECS {
      */
     clusters?: StringList;
     /**
-     * Whether to include additional information about the clusters in the response. If this field is omitted, this information isn't included. If ATTACHMENTS is specified, the attachments for the container instances or tasks within the cluster are included. If SETTINGS is specified, the settings for the cluster are included. If STATISTICS is specified, the task and service count is included, separated by launch type. If TAGS is specified, the metadata tags associated with the cluster are included.
+     * Whether to include additional information about the clusters in the response. If this field is omitted, this information isn't included. If ATTACHMENTS is specified, the attachments for the container instances or tasks within the cluster are included. If SETTINGS is specified, the settings for the cluster are included. If CONFIGURATIONS is specified, the configuration for the cluster is included. If STATISTICS is specified, the task and service count is included, separated by launch type. If TAGS is specified, the metadata tags associated with the cluster are included.
      */
     include?: ClusterFieldList;
   }
@@ -1702,7 +1702,7 @@ declare namespace ECS {
   export type DevicesList = Device[];
   export interface DiscoverPollEndpointRequest {
     /**
-     * The container instance ID or full ARN of the container instance. The ARN contains the arn:aws:ecs namespace, followed by the Region of the container instance, the account ID of the container instance owner, the container-instance namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
+     * The container instance ID or full ARN of the container instance. The ARN contains the arn:aws:ecs namespace, followed by the Region of the container instance, the Amazon Web Services account ID of the container instance owner, the container-instance namespace, and then the container instance ID. For example, arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
      */
     containerInstance?: String;
     /**
@@ -1936,7 +1936,7 @@ declare namespace ECS {
   export type GpuIds = String[];
   export interface HealthCheck {
     /**
-     * A string array representing the command that the container runs to determine if it is healthy. The string array must start with CMD to execute the command arguments directly, or CMD-SHELL to run the command with the container's default shell. For example:  [ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ]  An exit code of 0 indicates success, and non-zero exit code indicates failure. For more information, see HealthCheck in the Create a container section of the Docker Remote API.
+     * A string array representing the command that the container runs to determine if it is healthy. The string array must start with CMD to execute the command arguments directly, or CMD-SHELL to run the command with the container's default shell.   When you use the Amazon Web Services Management Console JSON panel, the Command Line Interface, or the APIs, you should enclose the list of commands in brackets, as shown below.  [ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ]  You do not need to include the brackets when you use the Amazon Web Services Management Consoleas shown below.   "CMD-SHELL", "curl -f http://localhost/ || exit 1"   An exit code of 0 indicates success, and non-zero exit code indicates failure. For more information, see HealthCheck in the Create a container section of the Docker Remote API.
      */
     command: StringList;
     /**
@@ -2490,7 +2490,7 @@ declare namespace ECS {
      */
     type?: PlacementConstraintType;
     /**
-     * A cluster query language expression to apply to the constraint. You cannot specify an expression if the constraint type is distinctInstance. For more information, see Cluster Query Language in the Amazon Elastic Container Service Developer Guide.
+     * A cluster query language expression to apply to the constraint. The expression can have a maximum length of 2000 characters. You can't specify an expression if the constraint type is distinctInstance. For more information, see Cluster query language in the Amazon Elastic Container Service Developer Guide.
      */
     expression?: String;
   }
@@ -2792,7 +2792,7 @@ declare namespace ECS {
   export type Resources = Resource[];
   export interface RunTaskRequest {
     /**
-     * The capacity provider strategy to use for the task. If a capacityProviderStrategy is specified, the launchType parameter must be omitted. If no capacityProviderStrategy or launchType is specified, the defaultCapacityProviderStrategy for the cluster is used. When you use cluster auto scaling, you must specify capacityProviderStrategy and not launchType. 
+     * The capacity provider strategy to use for the task. If a capacityProviderStrategy is specified, the launchType parameter must be omitted. If no capacityProviderStrategy or launchType is specified, the defaultCapacityProviderStrategy for the cluster is used. When you use cluster auto scaling, you must specify capacityProviderStrategy and not launchType.  A capacity provider strategy may contain a maximum of 6 capacity providers.
      */
     capacityProviderStrategy?: CapacityProviderStrategy;
     /**
@@ -2820,11 +2820,11 @@ declare namespace ECS {
      */
     launchType?: LaunchType;
     /**
-     * The network configuration for the task. This parameter is required for task definitions that use the awsvpc network mode to receive their own elastic network interface, and it is not supported for other network modes. For more information, see Task Networking in the Amazon Elastic Container Service Developer Guide.
+     * The network configuration for the task. This parameter is required for task definitions that use the awsvpc network mode to receive their own elastic network interface, and it is not supported for other network modes. For more information, see Task networking in the Amazon Elastic Container Service Developer Guide.
      */
     networkConfiguration?: NetworkConfiguration;
     /**
-     * A list of container overrides in JSON format that specify the name of a container in the specified task definition and the overrides it should receive. You can override the default command for a container (that is specified in the task definition or Docker image) with a command override. You can also override existing environment variables (that are specified in the task definition or Docker image) on a container or add new environment variables to it with an environment override.  A total of 8192 characters are allowed for overrides. This limit includes the JSON formatting characters of the override structure. 
+     * A list of container overrides in JSON format that specify the name of a container in the specified task definition and the overrides it should receive. You can override the default command for a container (that is specified in the task definition or Docker image) with a command override. You can also override existing environment variables (that are specified in the task definition or Docker image) on a container or add new environment variables to it with an environment override. A total of 8192 characters are allowed for overrides. This limit includes the JSON formatting characters of the override structure.
      */
     overrides?: TaskOverride;
     /**
@@ -2832,11 +2832,11 @@ declare namespace ECS {
      */
     placementConstraints?: PlacementConstraints;
     /**
-     * The placement strategy objects to use for the task. You can specify a maximum of five strategy rules per task.
+     * The placement strategy objects to use for the task. You can specify a maximum of 5 strategy rules per task.
      */
     placementStrategy?: PlacementStrategies;
     /**
-     * The platform version the task should run. A platform version is only specified for tasks using the Fargate launch type. If one is not specified, the LATEST platform version is used by default. For more information, see Fargate Platform Versions in the Amazon Elastic Container Service Developer Guide.
+     * The platform version the task should use. A platform version is only specified for tasks hosted on Fargate. If one is not specified, the LATEST platform version is used by default. For more information, see Fargate platform versions in the Amazon Elastic Container Service Developer Guide.
      */
     platformVersion?: String;
     /**
@@ -2844,7 +2844,7 @@ declare namespace ECS {
      */
     propagateTags?: PropagateTags;
     /**
-     * The reference ID to use for the task.
+     * The reference ID to use for the task. The reference ID can have a maximum length of 1024 characters.
      */
     referenceId?: String;
     /**
@@ -2897,7 +2897,7 @@ declare namespace ECS {
   export type SensitiveString = string;
   export interface Service {
     /**
-     * The ARN that identifies the service. The ARN contains the arn:aws:ecs namespace, followed by the Region of the service, the account ID of the service owner, the service namespace, and then the service name. For example, arn:aws:ecs:region:012345678910:service/my-service.
+     * The ARN that identifies the service. The ARN contains the arn:aws:ecs namespace, followed by the Region of the service, the Amazon Web Services account ID of the service owner, the service namespace, and then the service name. For example, arn:aws:ecs:region:012345678910:service/my-service.
      */
     serviceArn?: String;
     /**

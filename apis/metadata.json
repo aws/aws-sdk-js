@@ -1061,5 +1061,9 @@
   "chimesdkmessaging": {
     "prefix": "chime-sdk-messaging",
     "name": "ChimeSDKMessaging"
+  },
+  "snowdevicemanagement": {
+    "prefix": "snow-device-management",
+    "name": "SnowDeviceManagement"
   }
 }

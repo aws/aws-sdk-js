@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.965.0-->
+<!--LATEST=2.966.0-->
 <!--ENTRYINSERT-->
+
+## 2.966.0
+* feature: CodeBuild: CodeBuild now allows you to make the build results for your build projects available to the public without requiring access to an AWS account.
+* feature: Nimble: Add new attribute 'ownedBy' in Streaming Session APIs. 'ownedBy' represents the AWS SSO Identity Store User ID of the owner of the Streaming Session resource.
+* feature: SnowDeviceManagement: AWS Snow Family customers can remotely monitor and operate their connected AWS Snowcone devices.
 
 ## 2.965.0
 * feature: Chime: Add support for "auto" in Region field of StartMeetingTranscription API request.

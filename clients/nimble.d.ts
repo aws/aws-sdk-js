@@ -52,11 +52,11 @@ declare class Nimble extends Service {
    */
   createStreamingSessionStream(callback?: (err: AWSError, data: Nimble.Types.CreateStreamingSessionStreamResponse) => void): Request<Nimble.Types.CreateStreamingSessionStreamResponse, AWSError>;
   /**
-   * Create a new Studio. When creating a Studio, two IAM roles must be provided: the admin role and the user Role. These roles are assumed by your users when they log in to the Nimble Studio portal. The user role must have the AmazonNimbleStudio-StudioUser managed policy attached for the portal to function properly. The Admin Role must have the AmazonNimbleStudio-StudioAdmin managed policy attached for the portal to function properly. You may optionally specify a KMS key in the StudioEncryptionConfiguration. In Nimble Studio, resource names, descriptions, initialization scripts, and other data you provide are always encrypted at rest using an AWS KMS key. By default, this key is owned by AWS and managed on your behalf. You may provide your own AWS KMS key when calling CreateStudio to encrypt this data using a key you own and manage. When providing an AWS KMS key during studio creation, Nimble Studio creates KMS grants in your account to provide your studio user and admin roles access to these KMS keys. If you delete this grant, the studio will no longer be accessible to your portal users. If you delete the studio KMS key, your studio will no longer be accessible.
+   * Create a new Studio. When creating a Studio, two IAM roles must be provided: the admin role and the user Role. These roles are assumed by your users when they log in to the Nimble Studio portal. The user role must have the AmazonNimbleStudio-StudioUser managed policy attached for the portal to function properly. The Admin Role must have the AmazonNimbleStudio-StudioAdmin managed policy attached for the portal to function properly. You may optionally specify a KMS key in the StudioEncryptionConfiguration. In Nimble Studio, resource names, descriptions, initialization scripts, and other data you provide are always encrypted at rest using an KMS key. By default, this key is owned by Amazon Web Services and managed on your behalf. You may provide your own KMS key when calling CreateStudio to encrypt this data using a key you own and manage. When providing an KMS key during studio creation, Nimble Studio creates KMS grants in your account to provide your studio user and admin roles access to these KMS keys. If you delete this grant, the studio will no longer be accessible to your portal users. If you delete the studio KMS key, your studio will no longer be accessible.
    */
   createStudio(params: Nimble.Types.CreateStudioRequest, callback?: (err: AWSError, data: Nimble.Types.CreateStudioResponse) => void): Request<Nimble.Types.CreateStudioResponse, AWSError>;
   /**
-   * Create a new Studio. When creating a Studio, two IAM roles must be provided: the admin role and the user Role. These roles are assumed by your users when they log in to the Nimble Studio portal. The user role must have the AmazonNimbleStudio-StudioUser managed policy attached for the portal to function properly. The Admin Role must have the AmazonNimbleStudio-StudioAdmin managed policy attached for the portal to function properly. You may optionally specify a KMS key in the StudioEncryptionConfiguration. In Nimble Studio, resource names, descriptions, initialization scripts, and other data you provide are always encrypted at rest using an AWS KMS key. By default, this key is owned by AWS and managed on your behalf. You may provide your own AWS KMS key when calling CreateStudio to encrypt this data using a key you own and manage. When providing an AWS KMS key during studio creation, Nimble Studio creates KMS grants in your account to provide your studio user and admin roles access to these KMS keys. If you delete this grant, the studio will no longer be accessible to your portal users. If you delete the studio KMS key, your studio will no longer be accessible.
+   * Create a new Studio. When creating a Studio, two IAM roles must be provided: the admin role and the user Role. These roles are assumed by your users when they log in to the Nimble Studio portal. The user role must have the AmazonNimbleStudio-StudioUser managed policy attached for the portal to function properly. The Admin Role must have the AmazonNimbleStudio-StudioAdmin managed policy attached for the portal to function properly. You may optionally specify a KMS key in the StudioEncryptionConfiguration. In Nimble Studio, resource names, descriptions, initialization scripts, and other data you provide are always encrypted at rest using an KMS key. By default, this key is owned by Amazon Web Services and managed on your behalf. You may provide your own KMS key when calling CreateStudio to encrypt this data using a key you own and manage. When providing an KMS key during studio creation, Nimble Studio creates KMS grants in your account to provide your studio user and admin roles access to these KMS keys. If you delete this grant, the studio will no longer be accessible to your portal users. If you delete the studio KMS key, your studio will no longer be accessible.
    */
   createStudio(callback?: (err: AWSError, data: Nimble.Types.CreateStudioResponse) => void): Request<Nimble.Types.CreateStudioResponse, AWSError>;
   /**
@@ -244,11 +244,11 @@ declare class Nimble extends Service {
    */
   listLaunchProfiles(callback?: (err: AWSError, data: Nimble.Types.ListLaunchProfilesResponse) => void): Request<Nimble.Types.ListLaunchProfilesResponse, AWSError>;
   /**
-   * List the streaming image resources available to this studio. This list will contain both images provided by AWS, as well as streaming images that you have created in your studio.
+   * List the streaming image resources available to this studio. This list will contain both images provided by Amazon Web Services, as well as streaming images that you have created in your studio.
    */
   listStreamingImages(params: Nimble.Types.ListStreamingImagesRequest, callback?: (err: AWSError, data: Nimble.Types.ListStreamingImagesResponse) => void): Request<Nimble.Types.ListStreamingImagesResponse, AWSError>;
   /**
-   * List the streaming image resources available to this studio. This list will contain both images provided by AWS, as well as streaming images that you have created in your studio.
+   * List the streaming image resources available to this studio. This list will contain both images provided by Amazon Web Services, as well as streaming images that you have created in your studio.
    */
   listStreamingImages(callback?: (err: AWSError, data: Nimble.Types.ListStreamingImagesResponse) => void): Request<Nimble.Types.ListStreamingImagesResponse, AWSError>;
   /**
@@ -276,11 +276,11 @@ declare class Nimble extends Service {
    */
   listStudioMembers(callback?: (err: AWSError, data: Nimble.Types.ListStudioMembersResponse) => void): Request<Nimble.Types.ListStudioMembersResponse, AWSError>;
   /**
-   * List studios in your AWS account in the requested AWS Region.
+   * List studios in your Amazon Web Services account in the requested Amazon Web Services Region.
    */
   listStudios(params: Nimble.Types.ListStudiosRequest, callback?: (err: AWSError, data: Nimble.Types.ListStudiosResponse) => void): Request<Nimble.Types.ListStudiosResponse, AWSError>;
   /**
-   * List studios in your AWS account in the requested AWS Region.
+   * List studios in your Amazon Web Services account in the requested Amazon Web Services Region.
    */
   listStudios(callback?: (err: AWSError, data: Nimble.Types.ListStudiosResponse) => void): Request<Nimble.Types.ListStudiosResponse, AWSError>;
   /**
@@ -308,11 +308,11 @@ declare class Nimble extends Service {
    */
   putStudioMembers(callback?: (err: AWSError, data: Nimble.Types.PutStudioMembersResponse) => void): Request<Nimble.Types.PutStudioMembersResponse, AWSError>;
   /**
-   * Repairs the SSO configuration for a given studio. If the studio has a valid AWS SSO configuration currently associated with it, this operation will fail with a validation error. If the studio does not have a valid AWS SSO configuration currently associated with it, then a new AWS SSO application is created for the studio and the studio is changed to the READY state. After the AWS SSO application is repaired, you must use the Amazon Nimble Studio console to add administrators and users to your studio.
+   * Repairs the SSO configuration for a given studio. If the studio has a valid Amazon Web Services SSO configuration currently associated with it, this operation will fail with a validation error. If the studio does not have a valid Amazon Web Services SSO configuration currently associated with it, then a new Amazon Web Services SSO application is created for the studio and the studio is changed to the READY state. After the Amazon Web Services SSO application is repaired, you must use the Amazon Nimble Studio console to add administrators and users to your studio.
    */
   startStudioSSOConfigurationRepair(params: Nimble.Types.StartStudioSSOConfigurationRepairRequest, callback?: (err: AWSError, data: Nimble.Types.StartStudioSSOConfigurationRepairResponse) => void): Request<Nimble.Types.StartStudioSSOConfigurationRepairResponse, AWSError>;
   /**
-   * Repairs the SSO configuration for a given studio. If the studio has a valid AWS SSO configuration currently associated with it, this operation will fail with a validation error. If the studio does not have a valid AWS SSO configuration currently associated with it, then a new AWS SSO application is created for the studio and the studio is changed to the READY state. After the AWS SSO application is repaired, you must use the Amazon Nimble Studio console to add administrators and users to your studio.
+   * Repairs the SSO configuration for a given studio. If the studio has a valid Amazon Web Services SSO configuration currently associated with it, this operation will fail with a validation error. If the studio does not have a valid Amazon Web Services SSO configuration currently associated with it, then a new Amazon Web Services SSO application is created for the studio and the studio is changed to the READY state. After the Amazon Web Services SSO application is repaired, you must use the Amazon Nimble Studio console to add administrators and users to your studio.
    */
   startStudioSSOConfigurationRepair(callback?: (err: AWSError, data: Nimble.Types.StartStudioSSOConfigurationRepairResponse) => void): Request<Nimble.Types.StartStudioSSOConfigurationRepairResponse, AWSError>;
   /**
@@ -412,7 +412,7 @@ declare namespace Nimble {
      */
     computerAttributes?: ActiveDirectoryComputerAttributeList;
     /**
-     * The directory ID of the AWS Directory Service for Microsoft AD to access using this studio component.
+     * The directory ID of the Directory Service for Microsoft Active Directory to access using this studio component.
      */
     directoryId?: DirectoryId;
     /**
@@ -516,6 +516,10 @@ declare namespace Nimble {
      * The launch profile ID.
      */
     launchProfileId?: __string;
+    /**
+     * The user ID of the user that owns the streaming session.
+     */
+    ownedBy?: __string;
     /**
      * The ID of the streaming image.
      */
@@ -1141,7 +1145,7 @@ declare namespace Nimble {
      */
     computerAttributes?: ActiveDirectoryComputerAttributeList;
     /**
-     * The directory ID of the AWS Directory Service for Microsoft AD to access using this launch profile.
+     * The directory ID of the Directory Service for Microsoft Active Directory to access using this launch profile.
      */
     directoryId?: DirectoryId;
     /**
@@ -1343,13 +1347,17 @@ declare namespace Nimble {
   }
   export interface ListStreamingSessionsRequest {
     /**
-     * The user ID.
+     * The user ID of the user that created the streaming session.
      */
     createdBy?: __string;
     /**
      * The token for the next set of results, or null if there are no more results.
      */
     nextToken?: __string;
+    /**
+     * The user ID of the user that owns the streaming session.
+     */
+    ownedBy?: __string;
     /**
      * A collection of session IDs.
      */
@@ -1683,7 +1691,6 @@ declare namespace Nimble {
   export type StreamingImageName = string;
   export type StreamingImageOwner = string;
   export type StreamingImagePlatform = string;
-  export type StreamingImageSessionId = string;
   export type StreamingImageState = "CREATE_IN_PROGRESS"|"READY"|"DELETE_IN_PROGRESS"|"DELETED"|"UPDATE_IN_PROGRESS"|"UPDATE_FAILED"|"CREATE_FAILED"|"DELETE_FAILED"|string;
   export type StreamingImageStatusCode = "STREAMING_IMAGE_CREATE_IN_PROGRESS"|"STREAMING_IMAGE_READY"|"STREAMING_IMAGE_DELETE_IN_PROGRESS"|"STREAMING_IMAGE_DELETED"|"STREAMING_IMAGE_UPDATE_IN_PROGRESS"|"INTERNAL_ERROR"|string;
   export type StreamingInstanceType = "g4dn.xlarge"|"g4dn.2xlarge"|"g4dn.4xlarge"|"g4dn.8xlarge"|"g4dn.12xlarge"|"g4dn.16xlarge"|string;
@@ -1710,9 +1717,13 @@ declare namespace Nimble {
      */
     launchProfileId?: __string;
     /**
+     * The user ID of the user that owns the streaming session.
+     */
+    ownedBy?: __string;
+    /**
      * The session ID.
      */
-    sessionId?: StreamingImageSessionId;
+    sessionId?: StreamingSessionId;
     /**
      * The current state.
      */
@@ -1746,6 +1757,7 @@ declare namespace Nimble {
      */
     updatedBy?: __string;
   }
+  export type StreamingSessionId = string;
   export type StreamingSessionList = StreamingSession[];
   export type StreamingSessionState = "CREATE_IN_PROGRESS"|"DELETE_IN_PROGRESS"|"READY"|"DELETED"|"CREATE_FAILED"|"DELETE_FAILED"|string;
   export type StreamingSessionStatusCode = "STREAMING_SESSION_READY"|"STREAMING_SESSION_DELETED"|"STREAMING_SESSION_CREATE_IN_PROGRESS"|"STREAMING_SESSION_DELETE_IN_PROGRESS"|"INTERNAL_ERROR"|"INSUFFICIENT_CAPACITY"|"ACTIVE_DIRECTORY_DOMAIN_JOIN_ERROR"|"NETWORK_CONNECTION_ERROR"|"INITIALIZATION_SCRIPT_ERROR"|"DECRYPT_STREAMING_IMAGE_ERROR"|"NETWORK_INTERFACE_ERROR"|string;
@@ -1762,6 +1774,10 @@ declare namespace Nimble {
      * The Unix epoch timestamp in seconds for when the resource expires.
      */
     expiresAt?: Timestamp;
+    /**
+     * The user ID of the user that owns the streaming session.
+     */
+    ownedBy?: __string;
     /**
      * The current state.
      */
@@ -1800,11 +1816,11 @@ declare namespace Nimble {
      */
     displayName?: StudioDisplayName;
     /**
-     * The AWS region where the studio resource is located.
+     * The Amazon Web Services Region where the studio resource is located.
      */
     homeRegion?: Region;
     /**
-     * The AWS SSO application client ID used to integrate with AWS SSO to enable AWS SSO users to log in to Nimble portal.
+     * The Amazon Web Services SSO application client ID used to integrate with Amazon Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble portal.
      */
     ssoClientId?: __string;
     /**
