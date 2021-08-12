@@ -1765,7 +1765,7 @@ declare namespace DataBrew {
      */
     FormatOptions?: OutputFormatOptions;
   }
-  export type OutputFormat = "CSV"|"JSON"|"PARQUET"|"GLUEPARQUET"|"AVRO"|"ORC"|"XML"|string;
+  export type OutputFormat = "CSV"|"JSON"|"PARQUET"|"GLUEPARQUET"|"AVRO"|"ORC"|"XML"|"TABLEAUHYPER"|string;
   export interface OutputFormatOptions {
     /**
      * Represents a set of options that define the structure of comma-separated value (CSV) job output.

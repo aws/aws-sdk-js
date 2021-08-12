@@ -4094,7 +4094,7 @@
       "members": {
         "MasterRegion": {
           "shape": "MasterRegion",
-          "documentation": "<p>For Lambda@Edge functions, the Region of the master function. For example, <code>us-east-1</code> filters the list of functions to only include Lambda@Edge functions replicated from a master function in US East (N. Virginia). If specified, you must set <code>FunctionVersion</code> to <code>ALL</code>.</p>",
+          "documentation": "<p>For Lambda@Edge functions, the Amazon Web Services Region of the master function. For example, <code>us-east-1</code> filters the list of functions to only include Lambda@Edge functions replicated from a master function in US East (N. Virginia). If specified, you must set <code>FunctionVersion</code> to <code>ALL</code>.</p>",
           "location": "querystring",
           "locationName": "MasterRegion"
         },
@@ -4848,6 +4848,7 @@
         "python3.6",
         "python3.7",
         "python3.8",
+        "python3.9",
         "dotnetcore1.0",
         "dotnetcore2.0",
         "dotnetcore2.1",

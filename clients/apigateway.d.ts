@@ -1418,6 +1418,10 @@ declare namespace APIGateway {
      */
     securityPolicy?: SecurityPolicy;
     mutualTlsAuthentication?: MutualTlsAuthenticationInput;
+    /**
+     * The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn.
+     */
+    ownershipVerificationCertificateArn?: String;
   }
   export interface CreateModelRequest {
     /**
@@ -1994,7 +1998,7 @@ declare namespace APIGateway {
      */
     endpointConfiguration?: EndpointConfiguration;
     /**
-     * The status of the DomainName migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.
+     * The status of the DomainName migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.
      */
     domainNameStatus?: DomainNameStatus;
     /**
@@ -2013,8 +2017,12 @@ declare namespace APIGateway {
      * The mutual TLS authentication configuration for a custom domain name. If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your API.
      */
     mutualTlsAuthentication?: MutualTlsAuthentication;
+    /**
+     * The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn.
+     */
+    ownershipVerificationCertificateArn?: String;
   }
-  export type DomainNameStatus = "AVAILABLE"|"UPDATING"|"PENDING"|string;
+  export type DomainNameStatus = "AVAILABLE"|"UPDATING"|"PENDING"|"PENDING_CERTIFICATE_REIMPORT"|"PENDING_OWNERSHIP_VERIFICATION"|string;
   export interface DomainNames {
     position?: String;
     /**

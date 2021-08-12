@@ -1902,7 +1902,7 @@ declare namespace ApiGatewayV2 {
      */
     CertificateUploadDate?: __timestampIso8601;
     /**
-     * The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.
+     * The status of the domain name migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.
      */
     DomainNameStatus?: DomainNameStatus;
     /**
@@ -1921,9 +1921,13 @@ declare namespace ApiGatewayV2 {
      * The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.
      */
     SecurityPolicy?: SecurityPolicy;
+    /**
+     * The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn
+     */
+    OwnershipVerificationCertificateArn?: Arn;
   }
   export type DomainNameConfigurations = DomainNameConfiguration[];
-  export type DomainNameStatus = "AVAILABLE"|"UPDATING"|string;
+  export type DomainNameStatus = "AVAILABLE"|"UPDATING"|"PENDING_CERTIFICATE_REIMPORT"|"PENDING_OWNERSHIP_VERIFICATION"|string;
   export type EndpointType = "REGIONAL"|"EDGE"|string;
   export interface ExportApiRequest {
     /**

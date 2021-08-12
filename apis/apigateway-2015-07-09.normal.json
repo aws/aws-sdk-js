@@ -4087,6 +4087,10 @@
         },
         "mutualTlsAuthentication": {
           "shape": "MutualTlsAuthenticationInput"
+        },
+        "ownershipVerificationCertificateArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn.</p>"
         }
       },
       "documentation": "<p>A request to create a new domain name.</p>"
@@ -5065,7 +5069,7 @@
         },
         "domainNameStatus": {
           "shape": "DomainNameStatus",
-          "documentation": "<p>The status of the <a>DomainName</a> migration. The valid values are <code>AVAILABLE</code> and <code>UPDATING</code>. If the status is <code>UPDATING</code>, the domain cannot be modified further until the existing operation is complete. If it is <code>AVAILABLE</code>, the domain can be updated.</p>"
+          "documentation": "<p>The status of the <a>DomainName</a> migration. The valid values are <code>AVAILABLE</code>, <code>UPDATING</code>, <code>PENDING_CERTIFICATE_REIMPORT</code>, and <code>PENDING_OWNERSHIP_VERIFICATION</code>. If the status is <code>UPDATING</code>, the domain cannot be modified further until the existing operation is complete. If it is <code>AVAILABLE</code>, the domain can be updated.</p>"
         },
         "domainNameStatusMessage": {
           "shape": "String",
@@ -5082,6 +5086,10 @@
         "mutualTlsAuthentication": {
           "shape": "MutualTlsAuthentication",
           "documentation": "<p>The mutual TLS authentication configuration for a custom domain name. If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your API.</p>"
+        },
+        "ownershipVerificationCertificateArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn.</p>"
         }
       },
       "documentation": "<p>Represents a custom domain name as a user-friendly host name of an API (<a>RestApi</a>).</p> <div class=\"Remarks\"> <p>When you deploy an API, API Gateway creates a default host name for the API. This default API host name is of the <code>{restapi-id}.execute-api.{region}.amazonaws.com</code> format. With the default host name, you can access the API's root resource with the URL of <code>https://{restapi-id}.execute-api.{region}.amazonaws.com/{stage}/</code>. When you set up a custom domain name of <code>apis.example.com</code> for this API, you can then access the same resource using the URL of the <code>https://apis.examples.com/myApi</code>, where <code>myApi</code> is the base path mapping (<a>BasePathMapping</a>) of your API under the custom domain name. </p> </div> <div class=\"seeAlso\"> <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-custom-domains.html\">Set a Custom Host Name for an API</a> </div>"
@@ -5091,7 +5099,9 @@
       "enum": [
         "AVAILABLE",
         "UPDATING",
-        "PENDING"
+        "PENDING",
+        "PENDING_CERTIFICATE_REIMPORT",
+        "PENDING_OWNERSHIP_VERIFICATION"
       ]
     },
     "DomainNames": {
