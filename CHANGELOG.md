@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.967.0-->
+<!--LATEST=2.968.0-->
 <!--ENTRYINSERT-->
+
+## 2.968.0
+* feature: CustomerProfiles: This release introduces Standard Profile Objects, namely Asset and Case which contain values populated by data from third party systems and belong to a specific profile. This release adds an optional parameter, ObjectFilter to the ListProfileObjects API in order to search for these Standard Objects.
+* feature: EMR: Amazon EMR customers can now specify custom AMIs at the instance level in their clusters. This allows using custom AMIs in clusters that have instances with different instruction set architectures, e.g. m5.xlarge (x86) and m6g.xlarge (ARM).
+* feature: ElastiCache: This release adds ReplicationGroupCreateTime field to ReplicationGroup which indicates the UTC time when ElastiCache ReplicationGroup is created
 
 ## 2.967.0
 * feature: APIGateway: Adding support for ACM imported or private CA certificates for mTLS enabled domain names

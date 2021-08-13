@@ -20,11 +20,11 @@ declare class CustomerProfiles extends Service {
    */
   addProfileKey(callback?: (err: AWSError, data: CustomerProfiles.Types.AddProfileKeyResponse) => void): Request<CustomerProfiles.Types.AddProfileKeyResponse, AWSError>;
   /**
-   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain.
+   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. Use this API or UpdateDomain to enable identity resolution: set Matching to true. 
    */
   createDomain(params: CustomerProfiles.Types.CreateDomainRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.CreateDomainResponse) => void): Request<CustomerProfiles.Types.CreateDomainResponse, AWSError>;
   /**
-   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain.
+   * Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations. Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain. Use this API or UpdateDomain to enable identity resolution: set Matching to true. 
    */
   createDomain(callback?: (err: AWSError, data: CustomerProfiles.Types.CreateDomainResponse) => void): Request<CustomerProfiles.Types.CreateDomainResponse, AWSError>;
   /**
@@ -100,11 +100,11 @@ declare class CustomerProfiles extends Service {
    */
   getIntegration(callback?: (err: AWSError, data: CustomerProfiles.Types.GetIntegrationResponse) => void): Request<CustomerProfiles.Types.GetIntegrationResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and subject to change. Before calling this API, use CreateDomain or UpdateDomain to enable identity resolution: set Matching to true. GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process.   Amazon Connect runs a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.  Amazon Connect uses the following profile attributes to identify matches:   PhoneNumber   HomePhoneNumber   BusinessPhoneNumber   MobilePhoneNumber   EmailAddress   PersonalEmailAddress   BusinessEmailAddress   FullName   BusinessName  
+   * This API is in preview release for Amazon Connect and subject to change. Before calling this API, use CreateDomain or UpdateDomain to enable identity resolution: set Matching to true. GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process.   Amazon Connect starts a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.  Amazon Connect uses the following profile attributes to identify matches:   PhoneNumber   HomePhoneNumber   BusinessPhoneNumber   MobilePhoneNumber   EmailAddress   PersonalEmailAddress   BusinessEmailAddress   FullName   BusinessName   For example, two or more profiles—with spelling mistakes such as John Doe and Jhn Doe, or different casing email addresses such as JOHN_DOE@ANYCOMPANY.COM and johndoe@anycompany.com, or different phone number formats such as 555-010-0000 and +1-555-010-0000—can be detected as belonging to the same customer John Doe and merged into a unified profile.
    */
   getMatches(params: CustomerProfiles.Types.GetMatchesRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.GetMatchesResponse) => void): Request<CustomerProfiles.Types.GetMatchesResponse, AWSError>;
   /**
-   * This API is in preview release for Amazon Connect and subject to change. Before calling this API, use CreateDomain or UpdateDomain to enable identity resolution: set Matching to true. GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process.   Amazon Connect runs a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.  Amazon Connect uses the following profile attributes to identify matches:   PhoneNumber   HomePhoneNumber   BusinessPhoneNumber   MobilePhoneNumber   EmailAddress   PersonalEmailAddress   BusinessEmailAddress   FullName   BusinessName  
+   * This API is in preview release for Amazon Connect and subject to change. Before calling this API, use CreateDomain or UpdateDomain to enable identity resolution: set Matching to true. GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process.   Amazon Connect starts a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.  Amazon Connect uses the following profile attributes to identify matches:   PhoneNumber   HomePhoneNumber   BusinessPhoneNumber   MobilePhoneNumber   EmailAddress   PersonalEmailAddress   BusinessEmailAddress   FullName   BusinessName   For example, two or more profiles—with spelling mistakes such as John Doe and Jhn Doe, or different casing email addresses such as JOHN_DOE@ANYCOMPANY.COM and johndoe@anycompany.com, or different phone number formats such as 555-010-0000 and +1-555-010-0000—can be detected as belonging to the same customer John Doe and merged into a unified profile.
    */
   getMatches(callback?: (err: AWSError, data: CustomerProfiles.Types.GetMatchesResponse) => void): Request<CustomerProfiles.Types.GetMatchesResponse, AWSError>;
   /**
@@ -236,11 +236,11 @@ declare class CustomerProfiles extends Service {
    */
   untagResource(callback?: (err: AWSError, data: CustomerProfiles.Types.UntagResourceResponse) => void): Request<CustomerProfiles.Types.UntagResourceResponse, AWSError>;
   /**
-   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed.
+   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed. Use this API or CreateDomain to enable identity resolution: set Matching to true. 
    */
   updateDomain(params: CustomerProfiles.Types.UpdateDomainRequest, callback?: (err: AWSError, data: CustomerProfiles.Types.UpdateDomainResponse) => void): Request<CustomerProfiles.Types.UpdateDomainResponse, AWSError>;
   /**
-   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed.
+   * Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key. After a domain is created, the name can’t be changed. Use this API or CreateDomain to enable identity resolution: set Matching to true. 
    */
   updateDomain(callback?: (err: AWSError, data: CustomerProfiles.Types.UpdateDomainResponse) => void): Request<CustomerProfiles.Types.UpdateDomainResponse, AWSError>;
   /**
@@ -369,7 +369,7 @@ declare namespace CustomerProfiles {
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
     /**
-     * The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+     * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the GetMatches API to return and review the results. 
      */
     Matching?: MatchingRequest;
     /**
@@ -395,7 +395,7 @@ declare namespace CustomerProfiles {
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
     /**
-     * The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+     * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the GetMatches API to return and review the results. 
      */
     Matching?: MatchingResponse;
     /**
@@ -784,7 +784,7 @@ declare namespace CustomerProfiles {
      */
     Stats?: DomainStats;
     /**
-     * The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+     * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the GetMatches API to return and review the results. 
      */
     Matching?: MatchingResponse;
     /**
@@ -1192,6 +1192,10 @@ declare namespace CustomerProfiles {
      * The unique identifier of a customer profile.
      */
     ProfileId: uuid;
+    /**
+     * Applies a filter to the response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset and _case.
+     */
+    ObjectFilter?: ObjectFilter;
   }
   export interface ListProfileObjectsResponse {
     /**
@@ -1270,6 +1274,16 @@ declare namespace CustomerProfiles {
     Message?: message;
   }
   export type Object = string;
+  export interface ObjectFilter {
+    /**
+     * A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId.
+     */
+    KeyName: name;
+    /**
+     * A list of key values.
+     */
+    Values: requestValueList;
+  }
   export interface ObjectTypeField {
     /**
      * A field of a ProfileObject. For example: _source.FirstName, where “_source” is a ProfileObjectType of a Zendesk user and “FirstName” is a field in that ObjectType.
@@ -1286,7 +1300,7 @@ declare namespace CustomerProfiles {
   }
   export interface ObjectTypeKey {
     /**
-     * The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE means that this key can be used to tie an object to a PROFILE. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.
+     * The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE, ASSET or CASE means that this key can be used to tie an object to a PROFILE, ASSET or CASE respectively. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.
      */
     StandardIdentifiers?: StandardIdentifierList;
     /**
@@ -1689,7 +1703,7 @@ declare namespace CustomerProfiles {
      */
     SourceConnectorProperties: SourceConnectorProperties;
   }
-  export type StandardIdentifier = "PROFILE"|"UNIQUE"|"SECONDARY"|"LOOKUP_ONLY"|"NEW_ONLY"|string;
+  export type StandardIdentifier = "PROFILE"|"ASSET"|"CASE"|"UNIQUE"|"SECONDARY"|"LOOKUP_ONLY"|"NEW_ONLY"|string;
   export type StandardIdentifierList = StandardIdentifier[];
   export type TagArn = string;
   export type TagKey = string;
@@ -1824,7 +1838,7 @@ declare namespace CustomerProfiles {
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
     /**
-     * The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+     * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the GetMatches API to return and review the results. 
      */
     Matching?: MatchingRequest;
     /**
@@ -1850,7 +1864,7 @@ declare namespace CustomerProfiles {
      */
     DeadLetterQueueUrl?: sqsQueueUrl;
     /**
-     * The process of matching duplicate profiles. This process runs every Saturday at 12AM.
+     * The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the GetMatches API to return and review the results. 
      */
     Matching?: MatchingResponse;
     /**

@@ -101,11 +101,11 @@ declare class EMR extends Service {
    */
   deleteStudioSessionMapping(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. 
+   * Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on.
    */
   describeCluster(params: EMR.Types.DescribeClusterInput, callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
   /**
-   * Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on. 
+   * Provides cluster-level details including status, hardware and software configuration, VPC settings, and so on.
    */
   describeCluster(callback?: (err: AWSError, data: EMR.Types.DescribeClusterOutput) => void): Request<EMR.Types.DescribeClusterOutput, AWSError>;
   /**
@@ -357,11 +357,11 @@ declare class EMR extends Service {
    */
   setTerminationProtection(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals. This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMR Management Guide.
+   * Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals. This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
    */
   setVisibleToAllUsers(params: EMR.Types.SetVisibleToAllUsersInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals. This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMR Management Guide.
+   * Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals. This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
    */
   setVisibleToAllUsers(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -739,7 +739,7 @@ declare namespace EMR {
      */
     TerminationProtected?: Boolean;
     /**
-     * Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When true, IAM principals in the account can perform EMR cluster actions on the cluster that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals. The default value is false if a value is not provided when creating a cluster using the EMR API RunJobFlow command or the CLI create-cluster command. The default value is true when a cluster is created using the Management Console. IAM principals that are allowed to perform actions on the cluster can use the SetVisibleToAllUsers action to change the value on a running cluster. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMR Management Guide.
+     * Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When true, IAM principals in the account can perform EMR cluster actions on the cluster that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals. The default value is true if a value is not provided when creating a cluster using the EMR API RunJobFlow command, the CLI create-cluster command, or the Management Console. IAM principals that are allowed to perform actions on the cluster can use the SetVisibleToAllUsers action to change the value on a running cluster. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -1016,11 +1016,11 @@ declare namespace EMR {
      */
     StudioId: XmlStringMaxLen256;
     /**
-     * The globally unique identifier (GUID) of the user or group from the Amazon Web Services SSO Identity Store. For more information, see UserId and GroupId in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
+     * The globally unique identifier (GUID) of the user or group from the Amazon Web Services SSO Identity Store. For more information, see UserId and GroupId in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified, but not both.
      */
     IdentityId?: XmlStringMaxLen256;
     /**
-     * The name of the user or group. For more information, see UserName and DisplayName in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.
+     * The name of the user or group. For more information, see UserName and DisplayName in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified, but not both.
      */
     IdentityName?: XmlStringMaxLen256;
     /**
@@ -1650,6 +1650,10 @@ declare namespace EMR {
      * An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See PutAutoScalingPolicy.
      */
     AutoScalingPolicy?: AutoScalingPolicyDescription;
+    /**
+     * The custom AMI ID to use for the provisioned instance group.
+     */
+    CustomAmiId?: XmlStringMaxLen256;
   }
   export interface InstanceGroupConfig {
     /**
@@ -1688,6 +1692,10 @@ declare namespace EMR {
      * An automatic scaling policy for a core instance group or task instance group in an Amazon EMR cluster. The automatic scaling policy defines how an instance group dynamically adds and terminates EC2 instances in response to the value of a CloudWatch metric. See PutAutoScalingPolicy.
      */
     AutoScalingPolicy?: AutoScalingPolicy;
+    /**
+     * The custom AMI ID to use for the provisioned instance group.
+     */
+    CustomAmiId?: XmlStringMaxLen256;
   }
   export type InstanceGroupConfigList = InstanceGroupConfig[];
   export interface InstanceGroupDetail {
@@ -1747,6 +1755,10 @@ declare namespace EMR {
      * The date/time the instance group was terminated.
      */
     EndDateTime?: _Date;
+    /**
+     * The custom AMI ID to use for the provisioned instance group.
+     */
+    CustomAmiId?: XmlStringMaxLen256;
   }
   export type InstanceGroupDetailList = InstanceGroupDetail[];
   export type InstanceGroupId = string;
@@ -1901,6 +1913,10 @@ declare namespace EMR {
      * A configuration classification that applies when provisioning cluster instances, which can include configurations for applications and software that run on the cluster.
      */
     Configurations?: ConfigurationList;
+    /**
+     * The custom AMI ID to use for the instance type.
+     */
+    CustomAmiId?: XmlStringMaxLen256;
   }
   export type InstanceTypeConfigList = InstanceTypeConfig[];
   export interface InstanceTypeSpecification {
@@ -1932,6 +1948,10 @@ declare namespace EMR {
      * Evaluates to TRUE when the specified InstanceType is EBS-optimized.
      */
     EbsOptimized?: BooleanObject;
+    /**
+     * The custom AMI ID to use for the instance type.
+     */
+    CustomAmiId?: XmlStringMaxLen256;
   }
   export type InstanceTypeSpecificationList = InstanceTypeSpecification[];
   export type Integer = number;
@@ -1977,7 +1997,7 @@ declare namespace EMR {
      */
     SupportedProducts?: SupportedProductsList;
     /**
-     * Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When true, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals. The default value is false if a value is not provided when creating a cluster using the EMR API RunJobFlow command or the CLI create-cluster command. The default value is true when a cluster is created using the Management Console. IAM principals that are authorized to perform actions on the cluster can use the SetVisibleToAllUsers action to change the value on a running cluster. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMR Management Guide.
+     * Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When true, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals. The default value is true if a value is not provided when creating a cluster using the EMR API RunJobFlow command, the CLI create-cluster command, or the Management Console. IAM principals that are authorized to perform actions on the cluster can use the SetVisibleToAllUsers action to change the value on a running cluster. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -2349,7 +2369,7 @@ declare namespace EMR {
      */
     Filters?: ReleaseLabelFilter;
     /**
-     * Specifies the next page of results. If NextToken is not specified, which is usually the case for the first request of ListReleaseLabels, the first page of results are determined by other filtering parameters or by the latest version. The ListReleaseLabels request fails if the identity (AWS AccountID) and all filtering parameters are different from the original request, or if the NextToken is expired or tampered with.
+     * Specifies the next page of results. If NextToken is not specified, which is usually the case for the first request of ListReleaseLabels, the first page of results are determined by other filtering parameters or by the latest version. The ListReleaseLabels request fails if the identity (account ID) and all filtering parameters are different from the original request, or if the NextToken is expired or tampered with.
      */
     NextToken?: String;
     /**
@@ -2804,7 +2824,7 @@ declare namespace EMR {
      */
     Configurations?: ConfigurationList;
     /**
-     * Set this value to true so that IAM principals in the account associated with the cluster can perform EMR actions on the cluster that their IAM policies allow. This value defaults to false for clusters created using the EMR API or the CLI create-cluster command. When set to false, only the IAM principal that created the cluster and the account root user can perform EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMR Management Guide.
+     * Set this value to true so that IAM principals in the account associated with the cluster can perform EMR actions on the cluster that their IAM policies allow. This value defaults to true for clusters created using the EMR API or the CLI create-cluster command. When set to false, only the IAM principal that created the cluster and the account root user can perform EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
      */
     VisibleToAllUsers?: Boolean;
     /**

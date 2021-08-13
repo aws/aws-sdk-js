@@ -73,7 +73,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations.</p> <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain.</p>"
+      "documentation": "<p>Creates a domain, which is a container for all customer data, such as customer profile attributes, object types, profile keys, and encryption keys. You can create multiple domains, and each domain can have multiple third-party integrations.</p> <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can be associated with one domain.</p> <p>Use this API or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to enable <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">identity resolution</a>: set <code>Matching</code> to true. </p>"
     },
     "CreateProfile": {
       "name": "CreateProfile",
@@ -383,7 +383,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>This API is in preview release for Amazon Connect and subject to change.</p> <p>Before calling this API, use <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to enable identity resolution: set <code>Matching</code> to true.</p> <p>GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process. </p> <important> <p>Amazon Connect runs a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.</p> </important> <p>Amazon Connect uses the following profile attributes to identify matches:</p> <ul> <li> <p>PhoneNumber</p> </li> <li> <p>HomePhoneNumber</p> </li> <li> <p>BusinessPhoneNumber</p> </li> <li> <p>MobilePhoneNumber</p> </li> <li> <p>EmailAddress</p> </li> <li> <p>PersonalEmailAddress</p> </li> <li> <p>BusinessEmailAddress</p> </li> <li> <p>FullName</p> </li> <li> <p>BusinessName</p> </li> </ul>"
+      "documentation": "<p>This API is in preview release for Amazon Connect and subject to change.</p> <p>Before calling this API, use <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to enable identity resolution: set <code>Matching</code> to true.</p> <p>GetMatches returns potentially matching profiles, based on the results of the latest run of a machine learning process. </p> <important> <p>Amazon Connect starts a batch process every Saturday at 12AM UTC to identify matching profiles. The results are returned up to seven days after the Saturday run.</p> </important> <p>Amazon Connect uses the following profile attributes to identify matches:</p> <ul> <li> <p>PhoneNumber</p> </li> <li> <p>HomePhoneNumber</p> </li> <li> <p>BusinessPhoneNumber</p> </li> <li> <p>MobilePhoneNumber</p> </li> <li> <p>EmailAddress</p> </li> <li> <p>PersonalEmailAddress</p> </li> <li> <p>BusinessEmailAddress</p> </li> <li> <p>FullName</p> </li> <li> <p>BusinessName</p> </li> </ul> <p>For example, two or more profiles—with spelling mistakes such as <b>John Doe</b> and <b>Jhn Doe</b>, or different casing email addresses such as <b>JOHN_DOE@ANYCOMPANY.COM</b> and <b>johndoe@anycompany.com</b>, or different phone number formats such as <b>555-010-0000</b> and <b>+1-555-010-0000</b>—can be detected as belonging to the same customer <b>John Doe</b> and merged into a unified profile.</p>"
     },
     "GetProfileObjectType": {
       "name": "GetProfileObjectType",
@@ -889,7 +889,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p>Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key.</p> <p>After a domain is created, the name can’t be changed.</p>"
+      "documentation": "<p>Updates the properties of a domain, including creating or selecting a dead letter queue or an encryption key.</p> <p>After a domain is created, the name can’t be changed.</p> <p>Use this API or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> to enable <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">identity resolution</a>: set <code>Matching</code> to true. </p>"
     },
     "UpdateProfile": {
       "name": "UpdateProfile",
@@ -1105,7 +1105,7 @@
         },
         "Matching": {
           "shape": "MatchingRequest",
-          "documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
+          "documentation": "<p>The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a> API to return and review the results. </p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -1140,7 +1140,7 @@
         },
         "Matching": {
           "shape": "MatchingResponse",
-          "documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
+          "documentation": "<p>The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a> API to return and review the results. </p>"
         },
         "CreatedAt": {
           "shape": "timestamp",
@@ -1722,7 +1722,7 @@
         },
         "Matching": {
           "shape": "MatchingResponse",
-          "documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
+          "documentation": "<p>The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a> API to return and review the results. </p>"
         },
         "CreatedAt": {
           "shape": "timestamp",
@@ -2326,6 +2326,10 @@
         "ProfileId": {
           "shape": "uuid",
           "documentation": "<p>The unique identifier of a customer profile.</p>"
+        },
+        "ObjectFilter": {
+          "shape": "ObjectFilter",
+          "documentation": "<p>Applies a filter to the response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset and _case.</p>"
         }
       }
     },
@@ -2484,6 +2488,24 @@
       "max": 512,
       "pattern": "\\S+"
     },
+    "ObjectFilter": {
+      "type": "structure",
+      "required": [
+        "KeyName",
+        "Values"
+      ],
+      "members": {
+        "KeyName": {
+          "shape": "name",
+          "documentation": "<p>A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber. The predefined keys you can use to search for _case include: _caseId.</p>"
+        },
+        "Values": {
+          "shape": "requestValueList",
+          "documentation": "<p>A list of key values.</p>"
+        }
+      },
+      "documentation": "<p>The filter applied to ListProfileObjects response to include profile objects with the specified index values. This filter is only supported for ObjectTypeName _asset and _case.</p>"
+    },
     "ObjectTypeField": {
       "type": "structure",
       "members": {
@@ -2507,7 +2529,7 @@
       "members": {
         "StandardIdentifiers": {
           "shape": "StandardIdentifierList",
-          "documentation": "<p>The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE means that this key can be used to tie an object to a PROFILE. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.</p>"
+          "documentation": "<p>The types of keys that a ProfileObject can have. Each ProfileObject can have only 1 UNIQUE key but multiple PROFILE keys. PROFILE, ASSET or CASE means that this key can be used to tie an object to a PROFILE, ASSET or CASE respectively. UNIQUE means that it can be used to uniquely identify an object. If a key a is marked as SECONDARY, it will be used to search for profiles after all other PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the profile does not already exist before the object is ingested, otherwise it is only used for matching objects to profiles.</p>"
         },
         "FieldNames": {
           "shape": "FieldNameList",
@@ -3190,6 +3212,8 @@
       "type": "string",
       "enum": [
         "PROFILE",
+        "ASSET",
+        "CASE",
         "UNIQUE",
         "SECONDARY",
         "LOOKUP_ONLY",
@@ -3462,7 +3486,7 @@
         },
         "Matching": {
           "shape": "MatchingRequest",
-          "documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
+          "documentation": "<p>The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a> API to return and review the results. </p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -3496,7 +3520,7 @@
         },
         "Matching": {
           "shape": "MatchingResponse",
-          "documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
+          "documentation": "<p>The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. After that batch process completes, use the <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a> API to return and review the results. </p>"
         },
         "CreatedAt": {
           "shape": "timestamp",
