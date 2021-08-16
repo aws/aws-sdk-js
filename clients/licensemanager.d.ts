@@ -549,7 +549,7 @@ declare namespace LicenseManager {
      */
     Expiration?: ISO8601DateTime;
   }
-  export type CheckoutType = "PROVISIONAL"|string;
+  export type CheckoutType = "PROVISIONAL"|"PERPETUAL"|string;
   export type ClientRequestToken = string;
   export type ClientToken = string;
   export interface ConsumedLicenseSummary {

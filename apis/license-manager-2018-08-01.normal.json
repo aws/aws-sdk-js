@@ -1896,7 +1896,8 @@
     "CheckoutType": {
       "type": "string",
       "enum": [
-        "PROVISIONAL"
+        "PROVISIONAL",
+        "PERPETUAL"
       ]
     },
     "ClientRequestToken": {

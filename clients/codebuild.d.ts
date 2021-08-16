@@ -473,6 +473,7 @@ declare namespace CodeBuild {
      */
     reportsNotFound?: ReportArns;
   }
+  export type BatchReportModeType = "REPORT_INDIVIDUAL_BUILDS"|"REPORT_AGGREGATED_BATCH"|string;
   export interface BatchRestrictions {
     /**
      * Specifies the maximum number of builds allowed.
@@ -1953,6 +1954,10 @@ declare namespace CodeBuild {
      * Specifies the maximum amount of time, in minutes, that the batch build must be completed in.
      */
     timeoutInMins?: WrapperInt;
+    /**
+     * Specifies how build status reports are sent to the source provider for the batch build. This property is only used when the source provider for your project is Bitbucket, GitHub, or GitHub Enterprise, and your project is configured to report build statuses to the source provider.  REPORT_AGGREGATED_BATCH  (Default) Aggregate all of the build statuses into a single status report.  REPORT_INDIVIDUAL_BUILDS  Send a separate status report for each individual build.  
+     */
+    batchReportMode?: BatchReportModeType;
   }
   export interface ProjectCache {
     /**
