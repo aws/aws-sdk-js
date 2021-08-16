@@ -1,4 +1,4 @@
-var AWS, helpers, getMetadataServiceEndpoint, Endpoint, EndpointMode, endpointConfigOptions, endpointModeConfigOptions;
+var AWS, helpers, getMetadataServiceEndpoint, Endpoint, EndpointMode, ENDPOINT_CONFIG_OPTIONS, ENDPOINT_MODE_CONFIG_OPTIONS;
 
 helpers = require('./../helpers');
 
@@ -9,8 +9,8 @@ getMetadataServiceEndpoint = require('../../lib/metadata_service/get_metadata_se
 Endpoint = require('../../lib/metadata_service/endpoint');
 EndpointMode = require('../../lib/metadata_service/endpoint_mode');
 
-endpointConfigOptions = require('../../lib/metadata_service/endpoint_config_options');
-endpointModeConfigOptions = require('../../lib/metadata_service/endpoint_mode_config_options');
+ENDPOINT_CONFIG_OPTIONS = require('../../lib/metadata_service/endpoint_config_options').ENDPOINT_CONFIG_OPTIONS;
+ENDPOINT_MODE_CONFIG_OPTIONS = require('../../lib/metadata_service/endpoint_mode_config_options').ENDPOINT_MODE_CONFIG_OPTIONS;
 
 if (AWS.util.isNode()) {
   describe('getMetadataServiceEndpoint', function() {
@@ -29,7 +29,7 @@ if (AWS.util.isNode()) {
       ].forEach(function([endpoint, endpointMode]) {
         it('returns endpoint:'+ endpoint + ' for endpointMode:' + endpointMode, function() {
           helpers.spyOn(AWS.util, 'loadConfig').andCallFake(function(options) {
-            if (options === endpointConfigOptions) {
+            if (options === ENDPOINT_CONFIG_OPTIONS) {
               return undefined;
             } else {
               return endpointMode;
@@ -42,7 +42,7 @@ if (AWS.util.isNode()) {
       it('throws error for invalid endpointMode:invalid', function() {
         const invalidEndpointMode = 'invalid';
         helpers.spyOn(AWS.util, 'loadConfig').andCallFake(function(options) {
-          if (options === endpointConfigOptions) {
+          if (options === ENDPOINT_CONFIG_OPTIONS) {
             return undefined;
           } else {
             return invalidEndpointMode;
