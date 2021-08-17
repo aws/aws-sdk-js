@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.969.0-->
+<!--LATEST=2.970.0-->
 <!--ENTRYINSERT-->
+
+## 2.970.0
+* feature: Cloud9: Added DryRun parameter to CreateEnvironmentEC2 API. Added ManagedCredentialsActions parameter to UpdateEnvironment API
+* feature: CostExplorer: This release is a new feature for Cost Categories: Split charge rules. Split charge rules enable you to allocate shared costs between your cost category values.
+* feature: EC2: This release adds support for EC2 ED25519 key pairs for authentication
 
 ## 2.969.0
 * feature: CodeBuild: CodeBuild now allows you to select how batch build statuses are sent to the source provider for a project.

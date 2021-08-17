@@ -541,6 +541,10 @@
         "connectionType": {
           "shape": "ConnectionType",
           "documentation": "<p>The connection type used for connecting to an Amazon EC2 environment. Valid values are <code>CONNECT_SSH</code> (default) and <code>CONNECT_SSM</code> (connected through Amazon EC2 Systems Manager).</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/cloud9/latest/user-guide/ec2-ssm.html\">Accessing no-ingress EC2 instances with Amazon EC2 Systems Manager</a> in the <i>Cloud9 User Guide</i>.</p>"
+        },
+        "dryRun": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
         }
       }
     },
@@ -931,6 +935,13 @@
         }
       }
     },
+    "ManagedCredentialsAction": {
+      "type": "string",
+      "enum": [
+        "ENABLE",
+        "DISABLE"
+      ]
+    },
     "ManagedCredentialsStatus": {
       "type": "string",
       "enum": [
@@ -959,6 +970,9 @@
         "read-write",
         "read-only"
       ]
+    },
+    "NullableBoolean": {
+      "type": "boolean"
     },
     "Permissions": {
       "type": "string",
@@ -1125,6 +1139,10 @@
         "description": {
           "shape": "EnvironmentDescription",
           "documentation": "<p>Any new or replacement description for the environment.</p>"
+        },
+        "managedCredentialsAction": {
+          "shape": "ManagedCredentialsAction",
+          "documentation": "<p>Allows the environment owner to turn on or turn off the Amazon Web Services managed temporary credentials for an Cloud9 environment by using one of the following values:</p> <ul> <li> <p> <code>ENABLE</code> </p> </li> <li> <p> <code>DISABLE</code> </p> </li> </ul> <note> <p>Only the environment owner can change the status of managed temporary credentials. An <code>AccessDeniedException</code> is thrown if an attempt to turn on or turn off managed temporary credentials is made by an account that's not the environment owner.</p> </note>"
         }
       }
     },

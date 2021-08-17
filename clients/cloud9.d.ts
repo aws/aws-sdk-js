@@ -162,6 +162,10 @@ declare namespace Cloud9 {
      * The connection type used for connecting to an Amazon EC2 environment. Valid values are CONNECT_SSH (default) and CONNECT_SSM (connected through Amazon EC2 Systems Manager). For more information, see Accessing no-ingress EC2 instances with Amazon EC2 Systems Manager in the Cloud9 User Guide.
      */
     connectionType?: ConnectionType;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    dryRun?: NullableBoolean;
   }
   export interface CreateEnvironmentEC2Result {
     /**
@@ -387,9 +391,11 @@ declare namespace Cloud9 {
      */
     Tags?: TagList;
   }
+  export type ManagedCredentialsAction = "ENABLE"|"DISABLE"|string;
   export type ManagedCredentialsStatus = "ENABLED_ON_CREATE"|"ENABLED_BY_OWNER"|"DISABLED_BY_DEFAULT"|"DISABLED_BY_OWNER"|"DISABLED_BY_COLLABORATOR"|"PENDING_REMOVAL_BY_COLLABORATOR"|"PENDING_START_REMOVAL_BY_COLLABORATOR"|"PENDING_REMOVAL_BY_OWNER"|"PENDING_START_REMOVAL_BY_OWNER"|"FAILED_REMOVAL_BY_COLLABORATOR"|"FAILED_REMOVAL_BY_OWNER"|string;
   export type MaxResults = number;
   export type MemberPermissions = "read-write"|"read-only"|string;
+  export type NullableBoolean = boolean;
   export type Permissions = "owner"|"read-write"|"read-only"|string;
   export type PermissionsList = Permissions[];
   export type String = string;
@@ -466,6 +472,10 @@ declare namespace Cloud9 {
      * Any new or replacement description for the environment.
      */
     description?: EnvironmentDescription;
+    /**
+     * Allows the environment owner to turn on or turn off the Amazon Web Services managed temporary credentials for an Cloud9 environment by using one of the following values:    ENABLE     DISABLE     Only the environment owner can change the status of managed temporary credentials. An AccessDeniedException is thrown if an attempt to turn on or turn off managed temporary credentials is made by an account that's not the environment owner. 
+     */
+    managedCredentialsAction?: ManagedCredentialsAction;
   }
   export interface UpdateEnvironmentResult {
   }
