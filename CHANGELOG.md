@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.970.0-->
+<!--LATEST=2.971.0-->
 <!--ENTRYINSERT-->
+
+## 2.971.0
+* feature: CodeBuild: CodeBuild now allows you to make the build results for your build projects available to the public without requiring access to an AWS account.
+* feature: SageMaker: Amazon SageMaker now supports Asynchronous Inference endpoints. Adds PlatformIdentifier field that allows Notebook Instance creation with different platform selections. Increases the maximum number of containers in multi-container endpoints to 15. Adds more instance types to InstanceType field.
+* feature: SageMakerRuntime: Amazon SageMaker Runtime now supports InvokeEndpointAsync to asynchronously invoke endpoints that were created with the AsyncInferenceConfig object in the EndpointConfig. Asynchronous invocations support larger payload sizes in Amazon S3 and longer processing times.
 
 ## 2.970.0
 * feature: Cloud9: Added DryRun parameter to CreateEnvironmentEC2 API. Added ManagedCredentialsActions parameter to UpdateEnvironment API

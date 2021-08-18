@@ -4910,6 +4910,68 @@
       },
       "documentation": "<p>Lists a summary of the properties of an association. An association is an entity that links other lineage or experiment entities. An example would be an association between a training job and a model.</p>"
     },
+    "AsyncInferenceClientConfig": {
+      "type": "structure",
+      "members": {
+        "MaxConcurrentInvocationsPerInstance": {
+          "shape": "MaxConcurrentInvocationsPerInstance",
+          "documentation": "<p>The maximum number of concurrent requests sent by the SageMaker client to the model container. If no value is provided, Amazon SageMaker will choose an optimal value for you.</p>"
+        }
+      },
+      "documentation": "<p>Configures the behavior of the client used by Amazon SageMaker to interact with the model container during asynchronous inference.</p>"
+    },
+    "AsyncInferenceConfig": {
+      "type": "structure",
+      "required": [
+        "OutputConfig"
+      ],
+      "members": {
+        "ClientConfig": {
+          "shape": "AsyncInferenceClientConfig",
+          "documentation": "<p>Configures the behavior of the client used by Amazon SageMaker to interact with the model container during asynchronous inference.</p>"
+        },
+        "OutputConfig": {
+          "shape": "AsyncInferenceOutputConfig",
+          "documentation": "<p>Specifies the configuration for asynchronous inference invocation outputs.</p>"
+        }
+      },
+      "documentation": "<p>Specifies configuration for how an endpoint performs asynchronous inference.</p>"
+    },
+    "AsyncInferenceNotificationConfig": {
+      "type": "structure",
+      "members": {
+        "SuccessTopic": {
+          "shape": "SnsTopicArn",
+          "documentation": "<p>Amazon SNS topic to post a notification to when inference completes successfully. If no topic is provided, no notification is sent on success.</p>"
+        },
+        "ErrorTopic": {
+          "shape": "SnsTopicArn",
+          "documentation": "<p>Amazon SNS topic to post a notification to when inference fails. If no topic is provided, no notification is sent on failure.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the configuration for notifications of inference results for asynchronous inference.</p>"
+    },
+    "AsyncInferenceOutputConfig": {
+      "type": "structure",
+      "required": [
+        "S3OutputPath"
+      ],
+      "members": {
+        "KmsKeyId": {
+          "shape": "KmsKeyId",
+          "documentation": "<p>The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the asynchronous inference output in Amazon S3.</p> <p/>"
+        },
+        "S3OutputPath": {
+          "shape": "DestinationS3Uri",
+          "documentation": "<p>The Amazon S3 location to upload inference responses to.</p>"
+        },
+        "NotificationConfig": {
+          "shape": "AsyncInferenceNotificationConfig",
+          "documentation": "<p>Specifies the configuration for notifications of inference results for asynchronous inference.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the configuration for asynchronous inference invocation outputs.</p>"
+    },
     "AthenaCatalog": {
       "type": "string",
       "documentation": "<p>The name of the data catalog used in Athena query execution.</p>",
@@ -6265,7 +6327,7 @@
       "member": {
         "shape": "ContainerDefinition"
       },
-      "max": 5
+      "max": 15
     },
     "ContainerEntrypoint": {
       "type": "list",
@@ -7074,6 +7136,10 @@
         "KmsKeyId": {
           "shape": "KmsKeyId",
           "documentation": "<p>The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint.</p> <p>The KmsKeyId can be any of the following formats: </p> <ul> <li> <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Key ARN: <code>arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code> </p> </li> <li> <p>Alias name: <code>alias/ExampleAlias</code> </p> </li> <li> <p>Alias name ARN: <code>arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias</code> </p> </li> </ul> <p>The KMS key policy must grant permission to the IAM role that you specify in your <code>CreateEndpoint</code>, <code>UpdateEndpoint</code> requests. For more information, refer to the Amazon Web Services Key Management Service section<a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html\"> Using Key Policies in Amazon Web Services KMS </a> </p> <note> <p>Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can't request a <code>KmsKeyId</code> when using an instance type with local storage. If any of the models that you specify in the <code>ProductionVariants</code> parameter use nitro-based instances with local storage, do not specify a value for the <code>KmsKeyId</code> parameter. If you specify a value for <code>KmsKeyId</code> when using any nitro-based instances with local storage, the call to <code>CreateEndpointConfig</code> fails.</p> <p>For a list of instance types that support local instance storage, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html#instance-store-volumes\">Instance Store Volumes</a>.</p> <p>For more information about local instance storage encryption, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ssd-instance-store.html\">SSD Instance Store Volumes</a>.</p> </note>"
+        },
+        "AsyncInferenceConfig": {
+          "shape": "AsyncInferenceConfig",
+          "documentation": "<p>Specifies configuration for how an endpoint performs asynchronous inference. This is a required field in order for your Endpoint to be invoked using <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html\"> <code>InvokeEndpointAsync</code> </a>.</p>"
         }
       }
     },
@@ -7909,6 +7975,10 @@
         "RootAccess": {
           "shape": "RootAccess",
           "documentation": "<p>Whether root access is enabled or disabled for users of the notebook instance. The default value is <code>Enabled</code>.</p> <note> <p>Lifecycle configurations need root access to be able to set up a notebook instance. Because of this, lifecycle configurations associated with a notebook instance always run with root access even if you disable root access for users.</p> </note>"
+        },
+        "PlatformIdentifier": {
+          "shape": "PlatformIdentifier",
+          "documentation": "<p>The platform identifier of the notebook instance runtime environment.</p>"
         }
       }
     },
@@ -10629,6 +10699,10 @@
         "CreationTime": {
           "shape": "Timestamp",
           "documentation": "<p>A timestamp that shows when the endpoint configuration was created.</p>"
+        },
+        "AsyncInferenceConfig": {
+          "shape": "AsyncInferenceConfig",
+          "documentation": "<p>Returns the description of an endpoint configuration created using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html\"> <code>CreateEndpointConfig</code> </a> API.</p>"
         }
       }
     },
@@ -10693,6 +10767,10 @@
         "LastDeploymentConfig": {
           "shape": "DeploymentConfig",
           "documentation": "<p>The most recent deployment configuration for the endpoint.</p>"
+        },
+        "AsyncInferenceConfig": {
+          "shape": "AsyncInferenceConfig",
+          "documentation": "<p>Returns the description of an endpoint configuration created using the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpointConfig.html\"> <code>CreateEndpointConfig</code> </a> API.</p>"
         }
       }
     },
@@ -11848,6 +11926,10 @@
         "RootAccess": {
           "shape": "RootAccess",
           "documentation": "<p>Whether root access is enabled or disabled for users of the notebook instance.</p> <note> <p>Lifecycle configurations need root access to be able to set up a notebook instance. Because of this, lifecycle configurations associated with a notebook instance always run with root access even if you disable root access for users.</p> </note>"
+        },
+        "PlatformIdentifier": {
+          "shape": "PlatformIdentifier",
+          "documentation": "<p>The platform identifier of the notebook instance runtime environment.</p>"
         }
       }
     },
@@ -15375,6 +15457,10 @@
       },
       "documentation": "<p>Defines how to perform inference generation after a training job is run.</p>"
     },
+    "InitialTaskCount": {
+      "type": "integer",
+      "min": 1
+    },
     "InputConfig": {
       "type": "structure",
       "required": [
@@ -15445,6 +15531,14 @@
         "ml.m5.4xlarge",
         "ml.m5.12xlarge",
         "ml.m5.24xlarge",
+        "ml.m5d.large",
+        "ml.m5d.xlarge",
+        "ml.m5d.2xlarge",
+        "ml.m5d.4xlarge",
+        "ml.m5d.8xlarge",
+        "ml.m5d.12xlarge",
+        "ml.m5d.16xlarge",
+        "ml.m5d.24xlarge",
         "ml.c4.xlarge",
         "ml.c4.2xlarge",
         "ml.c4.4xlarge",
@@ -15464,7 +15558,22 @@
         "ml.p2.16xlarge",
         "ml.p3.2xlarge",
         "ml.p3.8xlarge",
-        "ml.p3.16xlarge"
+        "ml.p3.16xlarge",
+        "ml.p3dn.24xlarge",
+        "ml.g4dn.xlarge",
+        "ml.g4dn.2xlarge",
+        "ml.g4dn.4xlarge",
+        "ml.g4dn.8xlarge",
+        "ml.g4dn.12xlarge",
+        "ml.g4dn.16xlarge",
+        "ml.r5.large",
+        "ml.r5.xlarge",
+        "ml.r5.2xlarge",
+        "ml.r5.4xlarge",
+        "ml.r5.8xlarge",
+        "ml.r5.12xlarge",
+        "ml.r5.16xlarge",
+        "ml.r5.24xlarge"
       ]
     },
     "Integer": {
@@ -18859,6 +18968,11 @@
       "type": "integer",
       "min": 1
     },
+    "MaxConcurrentInvocationsPerInstance": {
+      "type": "integer",
+      "max": 1000,
+      "min": 1
+    },
     "MaxConcurrentTaskCount": {
       "type": "integer",
       "max": 1000,
@@ -19435,7 +19549,7 @@
       "member": {
         "shape": "ModelPackageContainerDefinition"
       },
-      "max": 5,
+      "max": 15,
       "min": 1
     },
     "ModelPackageGroup": {
@@ -20754,10 +20868,10 @@
       "members": {
         "NotificationTopicArn": {
           "shape": "NotificationTopicArn",
-          "documentation": "<p>The ARN for the SNS topic to which notifications should be published.</p>"
+          "documentation": "<p>The ARN for the Amazon SNS topic to which notifications should be published.</p>"
         }
       },
-      "documentation": "<p>Configures SNS notifications of available or expiring work items for work teams.</p>"
+      "documentation": "<p>Configures Amazon SNS notifications of available or expiring work items for work teams.</p>"
     },
     "NotificationTopicArn": {
       "type": "string",
@@ -21557,6 +21671,11 @@
       "max": 100,
       "min": 0
     },
+    "PlatformIdentifier": {
+      "type": "string",
+      "max": 15,
+      "pattern": "^(notebook-al1-v1|notebook-al2-v1)$"
+    },
     "PolicyString": {
       "type": "string",
       "max": 20480,
@@ -22105,7 +22224,7 @@
           "documentation": "<p>The name of the model that you want to host. This is the name that you specified when creating the model.</p>"
         },
         "InitialInstanceCount": {
-          "shape": "TaskCount",
+          "shape": "InitialTaskCount",
           "documentation": "<p>Number of instances to launch initially.</p>"
         },
         "InstanceType": {
@@ -24141,7 +24260,7 @@
     },
     "TaskCount": {
       "type": "integer",
-      "min": 1
+      "min": 0
     },
     "TaskDescription": {
       "type": "string",

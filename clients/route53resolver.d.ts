@@ -76,11 +76,11 @@ declare class Route53Resolver extends Service {
    */
   createResolverEndpoint(callback?: (err: AWSError, data: Route53Resolver.Types.CreateResolverEndpointResponse) => void): Request<Route53Resolver.Types.CreateResolverEndpointResponse, AWSError>;
   /**
-   * Creates a Resolver query logging configuration, which defines where you want Resolver to save DNS query logs that originate in your VPCs. Resolver can log queries only for VPCs that are in the same Region as the query logging configuration. To specify which VPCs you want to log queries for, you use AssociateResolverQueryLogConfig. For more information, see AssociateResolverQueryLogConfig.  You can optionally use AWS Resource Access Manager (AWS RAM) to share a query logging configuration with other AWS accounts. The other accounts can then associate VPCs with the configuration. The query logs that Resolver creates for a configuration include all DNS queries that originate in all VPCs that are associated with the configuration.
+   * Creates a Resolver query logging configuration, which defines where you want Resolver to save DNS query logs that originate in your VPCs. Resolver can log queries only for VPCs that are in the same Region as the query logging configuration. To specify which VPCs you want to log queries for, you use AssociateResolverQueryLogConfig. For more information, see AssociateResolverQueryLogConfig.  You can optionally use Resource Access Manager (RAM) to share a query logging configuration with other Amazon Web Services accounts. The other accounts can then associate VPCs with the configuration. The query logs that Resolver creates for a configuration include all DNS queries that originate in all VPCs that are associated with the configuration.
    */
   createResolverQueryLogConfig(params: Route53Resolver.Types.CreateResolverQueryLogConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.CreateResolverQueryLogConfigResponse) => void): Request<Route53Resolver.Types.CreateResolverQueryLogConfigResponse, AWSError>;
   /**
-   * Creates a Resolver query logging configuration, which defines where you want Resolver to save DNS query logs that originate in your VPCs. Resolver can log queries only for VPCs that are in the same Region as the query logging configuration. To specify which VPCs you want to log queries for, you use AssociateResolverQueryLogConfig. For more information, see AssociateResolverQueryLogConfig.  You can optionally use AWS Resource Access Manager (AWS RAM) to share a query logging configuration with other AWS accounts. The other accounts can then associate VPCs with the configuration. The query logs that Resolver creates for a configuration include all DNS queries that originate in all VPCs that are associated with the configuration.
+   * Creates a Resolver query logging configuration, which defines where you want Resolver to save DNS query logs that originate in your VPCs. Resolver can log queries only for VPCs that are in the same Region as the query logging configuration. To specify which VPCs you want to log queries for, you use AssociateResolverQueryLogConfig. For more information, see AssociateResolverQueryLogConfig.  You can optionally use Resource Access Manager (RAM) to share a query logging configuration with other Amazon Web Services accounts. The other accounts can then associate VPCs with the configuration. The query logs that Resolver creates for a configuration include all DNS queries that originate in all VPCs that are associated with the configuration.
    */
   createResolverQueryLogConfig(callback?: (err: AWSError, data: Route53Resolver.Types.CreateResolverQueryLogConfigResponse) => void): Request<Route53Resolver.Types.CreateResolverQueryLogConfigResponse, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class Route53Resolver extends Service {
    */
   deleteResolverEndpoint(callback?: (err: AWSError, data: Route53Resolver.Types.DeleteResolverEndpointResponse) => void): Request<Route53Resolver.Types.DeleteResolverEndpointResponse, AWSError>;
   /**
-   * Deletes a query logging configuration. When you delete a configuration, Resolver stops logging DNS queries for all of the Amazon VPCs that are associated with the configuration. This also applies if the query logging configuration is shared with other AWS accounts, and the other accounts have associated VPCs with the shared configuration. Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. See DisassociateResolverQueryLogConfig. If you used Resource Access Manager (RAM) to share a query logging configuration with other accounts, you must stop sharing the configuration before you can delete a configuration. The accounts that you shared the configuration with can first disassociate VPCs that they associated with the configuration, but that's not necessary. If you stop sharing the configuration, those VPCs are automatically disassociated from the configuration.
+   * Deletes a query logging configuration. When you delete a configuration, Resolver stops logging DNS queries for all of the Amazon VPCs that are associated with the configuration. This also applies if the query logging configuration is shared with other Amazon Web Services accounts, and the other accounts have associated VPCs with the shared configuration. Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. See DisassociateResolverQueryLogConfig. If you used Resource Access Manager (RAM) to share a query logging configuration with other accounts, you must stop sharing the configuration before you can delete a configuration. The accounts that you shared the configuration with can first disassociate VPCs that they associated with the configuration, but that's not necessary. If you stop sharing the configuration, those VPCs are automatically disassociated from the configuration.
    */
   deleteResolverQueryLogConfig(params: Route53Resolver.Types.DeleteResolverQueryLogConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.DeleteResolverQueryLogConfigResponse) => void): Request<Route53Resolver.Types.DeleteResolverQueryLogConfigResponse, AWSError>;
   /**
-   * Deletes a query logging configuration. When you delete a configuration, Resolver stops logging DNS queries for all of the Amazon VPCs that are associated with the configuration. This also applies if the query logging configuration is shared with other AWS accounts, and the other accounts have associated VPCs with the shared configuration. Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. See DisassociateResolverQueryLogConfig. If you used Resource Access Manager (RAM) to share a query logging configuration with other accounts, you must stop sharing the configuration before you can delete a configuration. The accounts that you shared the configuration with can first disassociate VPCs that they associated with the configuration, but that's not necessary. If you stop sharing the configuration, those VPCs are automatically disassociated from the configuration.
+   * Deletes a query logging configuration. When you delete a configuration, Resolver stops logging DNS queries for all of the Amazon VPCs that are associated with the configuration. This also applies if the query logging configuration is shared with other Amazon Web Services accounts, and the other accounts have associated VPCs with the shared configuration. Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. See DisassociateResolverQueryLogConfig. If you used Resource Access Manager (RAM) to share a query logging configuration with other accounts, you must stop sharing the configuration before you can delete a configuration. The accounts that you shared the configuration with can first disassociate VPCs that they associated with the configuration, but that's not necessary. If you stop sharing the configuration, those VPCs are automatically disassociated from the configuration.
    */
   deleteResolverQueryLogConfig(callback?: (err: AWSError, data: Route53Resolver.Types.DeleteResolverQueryLogConfigResponse) => void): Request<Route53Resolver.Types.DeleteResolverQueryLogConfigResponse, AWSError>;
   /**
@@ -156,11 +156,11 @@ declare class Route53Resolver extends Service {
    */
   disassociateResolverEndpointIpAddress(callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateResolverEndpointIpAddressResponse) => void): Request<Route53Resolver.Types.DisassociateResolverEndpointIpAddressResponse, AWSError>;
   /**
-   * Disassociates a VPC from a query logging configuration.  Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. If you used AWS Resource Access Manager (AWS RAM) to share a query logging configuration with other accounts, VPCs can be disassociated from the configuration in the following ways:   The accounts that you shared the configuration with can disassociate VPCs from the configuration.   You can stop sharing the configuration.   
+   * Disassociates a VPC from a query logging configuration.  Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. If you used Resource Access Manager (RAM) to share a query logging configuration with other accounts, VPCs can be disassociated from the configuration in the following ways:   The accounts that you shared the configuration with can disassociate VPCs from the configuration.   You can stop sharing the configuration.   
    */
   disassociateResolverQueryLogConfig(params: Route53Resolver.Types.DisassociateResolverQueryLogConfigRequest, callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateResolverQueryLogConfigResponse) => void): Request<Route53Resolver.Types.DisassociateResolverQueryLogConfigResponse, AWSError>;
   /**
-   * Disassociates a VPC from a query logging configuration.  Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. If you used AWS Resource Access Manager (AWS RAM) to share a query logging configuration with other accounts, VPCs can be disassociated from the configuration in the following ways:   The accounts that you shared the configuration with can disassociate VPCs from the configuration.   You can stop sharing the configuration.   
+   * Disassociates a VPC from a query logging configuration.  Before you can delete a query logging configuration, you must first disassociate all VPCs from the configuration. If you used Resource Access Manager (RAM) to share a query logging configuration with other accounts, VPCs can be disassociated from the configuration in the following ways:   The accounts that you shared the configuration with can disassociate VPCs from the configuration.   You can stop sharing the configuration.   
    */
   disassociateResolverQueryLogConfig(callback?: (err: AWSError, data: Route53Resolver.Types.DisassociateResolverQueryLogConfigResponse) => void): Request<Route53Resolver.Types.DisassociateResolverQueryLogConfigResponse, AWSError>;
   /**
@@ -204,11 +204,11 @@ declare class Route53Resolver extends Service {
    */
   getFirewallRuleGroupAssociation(callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallRuleGroupAssociationResponse) => void): Request<Route53Resolver.Types.GetFirewallRuleGroupAssociationResponse, AWSError>;
   /**
-   * Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). 
+   * Returns the Identity and Access Management (Amazon Web Services IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using Resource Access Manager (RAM). 
    */
   getFirewallRuleGroupPolicy(params: Route53Resolver.Types.GetFirewallRuleGroupPolicyRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse) => void): Request<Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse, AWSError>;
   /**
-   * Returns the AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). 
+   * Returns the Identity and Access Management (Amazon Web Services IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using Resource Access Manager (RAM). 
    */
   getFirewallRuleGroupPolicy(callback?: (err: AWSError, data: Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse) => void): Request<Route53Resolver.Types.GetFirewallRuleGroupPolicyResponse, AWSError>;
   /**
@@ -244,11 +244,11 @@ declare class Route53Resolver extends Service {
    */
   getResolverQueryLogConfigAssociation(callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverQueryLogConfigAssociationResponse) => void): Request<Route53Resolver.Types.GetResolverQueryLogConfigAssociationResponse, AWSError>;
   /**
-   * Gets information about a query logging policy. A query logging policy specifies the Resolver query logging operations and resources that you want to allow another AWS account to be able to use.
+   * Gets information about a query logging policy. A query logging policy specifies the Resolver query logging operations and resources that you want to allow another Amazon Web Services account to be able to use.
    */
   getResolverQueryLogConfigPolicy(params: Route53Resolver.Types.GetResolverQueryLogConfigPolicyRequest, callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverQueryLogConfigPolicyResponse) => void): Request<Route53Resolver.Types.GetResolverQueryLogConfigPolicyResponse, AWSError>;
   /**
-   * Gets information about a query logging policy. A query logging policy specifies the Resolver query logging operations and resources that you want to allow another AWS account to be able to use.
+   * Gets information about a query logging policy. A query logging policy specifies the Resolver query logging operations and resources that you want to allow another Amazon Web Services account to be able to use.
    */
   getResolverQueryLogConfigPolicy(callback?: (err: AWSError, data: Route53Resolver.Types.GetResolverQueryLogConfigPolicyResponse) => void): Request<Route53Resolver.Types.GetResolverQueryLogConfigPolicyResponse, AWSError>;
   /**
@@ -332,11 +332,11 @@ declare class Route53Resolver extends Service {
    */
   listFirewallRules(callback?: (err: AWSError, data: Route53Resolver.Types.ListFirewallRulesResponse) => void): Request<Route53Resolver.Types.ListFirewallRulesResponse, AWSError>;
   /**
-   * Lists the configurations for DNSSEC validation that are associated with the current AWS account.
+   * Lists the configurations for DNSSEC validation that are associated with the current Amazon Web Services account.
    */
   listResolverDnssecConfigs(params: Route53Resolver.Types.ListResolverDnssecConfigsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverDnssecConfigsResponse) => void): Request<Route53Resolver.Types.ListResolverDnssecConfigsResponse, AWSError>;
   /**
-   * Lists the configurations for DNSSEC validation that are associated with the current AWS account.
+   * Lists the configurations for DNSSEC validation that are associated with the current Amazon Web Services account.
    */
   listResolverDnssecConfigs(callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverDnssecConfigsResponse) => void): Request<Route53Resolver.Types.ListResolverDnssecConfigsResponse, AWSError>;
   /**
@@ -348,11 +348,11 @@ declare class Route53Resolver extends Service {
    */
   listResolverEndpointIpAddresses(callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverEndpointIpAddressesResponse) => void): Request<Route53Resolver.Types.ListResolverEndpointIpAddressesResponse, AWSError>;
   /**
-   * Lists all the Resolver endpoints that were created using the current AWS account.
+   * Lists all the Resolver endpoints that were created using the current Amazon Web Services account.
    */
   listResolverEndpoints(params: Route53Resolver.Types.ListResolverEndpointsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverEndpointsResponse) => void): Request<Route53Resolver.Types.ListResolverEndpointsResponse, AWSError>;
   /**
-   * Lists all the Resolver endpoints that were created using the current AWS account.
+   * Lists all the Resolver endpoints that were created using the current Amazon Web Services account.
    */
   listResolverEndpoints(callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverEndpointsResponse) => void): Request<Route53Resolver.Types.ListResolverEndpointsResponse, AWSError>;
   /**
@@ -372,19 +372,19 @@ declare class Route53Resolver extends Service {
    */
   listResolverQueryLogConfigs(callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverQueryLogConfigsResponse) => void): Request<Route53Resolver.Types.ListResolverQueryLogConfigsResponse, AWSError>;
   /**
-   * Lists the associations that were created between Resolver rules and VPCs using the current AWS account.
+   * Lists the associations that were created between Resolver rules and VPCs using the current Amazon Web Services account.
    */
   listResolverRuleAssociations(params: Route53Resolver.Types.ListResolverRuleAssociationsRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverRuleAssociationsResponse) => void): Request<Route53Resolver.Types.ListResolverRuleAssociationsResponse, AWSError>;
   /**
-   * Lists the associations that were created between Resolver rules and VPCs using the current AWS account.
+   * Lists the associations that were created between Resolver rules and VPCs using the current Amazon Web Services account.
    */
   listResolverRuleAssociations(callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverRuleAssociationsResponse) => void): Request<Route53Resolver.Types.ListResolverRuleAssociationsResponse, AWSError>;
   /**
-   * Lists the Resolver rules that were created using the current AWS account.
+   * Lists the Resolver rules that were created using the current Amazon Web Services account.
    */
   listResolverRules(params: Route53Resolver.Types.ListResolverRulesRequest, callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverRulesResponse) => void): Request<Route53Resolver.Types.ListResolverRulesResponse, AWSError>;
   /**
-   * Lists the Resolver rules that were created using the current AWS account.
+   * Lists the Resolver rules that were created using the current Amazon Web Services account.
    */
   listResolverRules(callback?: (err: AWSError, data: Route53Resolver.Types.ListResolverRulesResponse) => void): Request<Route53Resolver.Types.ListResolverRulesResponse, AWSError>;
   /**
@@ -396,27 +396,27 @@ declare class Route53Resolver extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Route53Resolver.Types.ListTagsForResourceResponse) => void): Request<Route53Resolver.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). 
+   * Attaches an Identity and Access Management (Amazon Web Services IAM) policy for sharing the rule group. You can use the policy to share the rule group using Resource Access Manager (RAM). 
    */
   putFirewallRuleGroupPolicy(params: Route53Resolver.Types.PutFirewallRuleGroupPolicyRequest, callback?: (err: AWSError, data: Route53Resolver.Types.PutFirewallRuleGroupPolicyResponse) => void): Request<Route53Resolver.Types.PutFirewallRuleGroupPolicyResponse, AWSError>;
   /**
-   * Attaches an AWS Identity and Access Management (AWS IAM) policy for sharing the rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). 
+   * Attaches an Identity and Access Management (Amazon Web Services IAM) policy for sharing the rule group. You can use the policy to share the rule group using Resource Access Manager (RAM). 
    */
   putFirewallRuleGroupPolicy(callback?: (err: AWSError, data: Route53Resolver.Types.PutFirewallRuleGroupPolicyResponse) => void): Request<Route53Resolver.Types.PutFirewallRuleGroupPolicyResponse, AWSError>;
   /**
-   * Specifies an AWS account that you want to share a query logging configuration with, the query logging configuration that you want to share, and the operations that you want the account to be able to perform on the configuration.
+   * Specifies an Amazon Web Services account that you want to share a query logging configuration with, the query logging configuration that you want to share, and the operations that you want the account to be able to perform on the configuration.
    */
   putResolverQueryLogConfigPolicy(params: Route53Resolver.Types.PutResolverQueryLogConfigPolicyRequest, callback?: (err: AWSError, data: Route53Resolver.Types.PutResolverQueryLogConfigPolicyResponse) => void): Request<Route53Resolver.Types.PutResolverQueryLogConfigPolicyResponse, AWSError>;
   /**
-   * Specifies an AWS account that you want to share a query logging configuration with, the query logging configuration that you want to share, and the operations that you want the account to be able to perform on the configuration.
+   * Specifies an Amazon Web Services account that you want to share a query logging configuration with, the query logging configuration that you want to share, and the operations that you want the account to be able to perform on the configuration.
    */
   putResolverQueryLogConfigPolicy(callback?: (err: AWSError, data: Route53Resolver.Types.PutResolverQueryLogConfigPolicyResponse) => void): Request<Route53Resolver.Types.PutResolverQueryLogConfigPolicyResponse, AWSError>;
   /**
-   * Specifies an AWS rule that you want to share with another account, the account that you want to share the rule with, and the operations that you want the account to be able to perform on the rule.
+   * Specifies an Amazon Web Services rule that you want to share with another account, the account that you want to share the rule with, and the operations that you want the account to be able to perform on the rule.
    */
   putResolverRulePolicy(params: Route53Resolver.Types.PutResolverRulePolicyRequest, callback?: (err: AWSError, data: Route53Resolver.Types.PutResolverRulePolicyResponse) => void): Request<Route53Resolver.Types.PutResolverRulePolicyResponse, AWSError>;
   /**
-   * Specifies an AWS rule that you want to share with another account, the account that you want to share the rule with, and the operations that you want the account to be able to perform on the rule.
+   * Specifies an Amazon Web Services rule that you want to share with another account, the account that you want to share the rule with, and the operations that you want the account to be able to perform on the rule.
    */
   putResolverRulePolicy(callback?: (err: AWSError, data: Route53Resolver.Types.PutResolverRulePolicyResponse) => void): Request<Route53Resolver.Types.PutResolverRulePolicyResponse, AWSError>;
   /**
@@ -912,7 +912,7 @@ declare namespace Route53Resolver {
   export type DomainName = string;
   export interface Filter {
     /**
-     * The name of the parameter that you want to use to filter objects. The valid values for Name depend on the action that you're including the filter in, ListResolverEndpoints, ListResolverRules, ListResolverRuleAssociations, ListResolverQueryLogConfigs, or ListResolverQueryLogConfigAssociations.  In early versions of Resolver, values for Name were listed as uppercase, with underscore (_) delimiters. For example, CreatorRequestId was originally listed as CREATOR_REQUEST_ID. Uppercase values for Name are still supported.   ListResolverEndpoints  Valid values for Name include the following:    CreatorRequestId: The value that you specified when you created the Resolver endpoint.    Direction: Whether you want to return inbound or outbound Resolver endpoints. If you specify DIRECTION for Name, specify INBOUND or OUTBOUND for Values.    HostVpcId: The ID of the VPC that inbound DNS queries pass through on the way from your network to your VPCs in a region, or the VPC that outbound queries pass through on the way from your VPCs to your network. In a CreateResolverEndpoint request, SubnetId indirectly identifies the VPC. In a GetResolverEndpoint request, the VPC ID for a Resolver endpoint is returned in the HostVPCId element.     IpAddressCount: The number of IP addresses that you have associated with the Resolver endpoint.    Name: The name of the Resolver endpoint.    SecurityGroupIds: The IDs of the VPC security groups that you specified when you created the Resolver endpoint.    Status: The status of the Resolver endpoint. If you specify Status for Name, specify one of the following status codes for Values: CREATING, OPERATIONAL, UPDATING, AUTO_RECOVERING, ACTION_NEEDED, or DELETING. For more information, see Status in ResolverEndpoint.    ListResolverRules  Valid values for Name include the following:    CreatorRequestId: The value that you specified when you created the Resolver rule.    DomainName: The domain name for which Resolver is forwarding DNS queries to your network. In the value that you specify for Values, include a trailing dot (.) after the domain name. For example, if the domain name is example.com, specify the following value. Note the "." after com:  example.com.     Name: The name of the Resolver rule.    ResolverEndpointId: The ID of the Resolver endpoint that the Resolver rule is associated with.  You can filter on the Resolver endpoint only for rules that have a value of FORWARD for RuleType.     Status: The status of the Resolver rule. If you specify Status for Name, specify one of the following status codes for Values: COMPLETE, DELETING, UPDATING, or FAILED.    Type: The type of the Resolver rule. If you specify TYPE for Name, specify FORWARD or SYSTEM for Values.    ListResolverRuleAssociations  Valid values for Name include the following:    Name: The name of the Resolver rule association.    ResolverRuleId: The ID of the Resolver rule that is associated with one or more VPCs.    Status: The status of the Resolver rule association. If you specify Status for Name, specify one of the following status codes for Values: CREATING, COMPLETE, DELETING, or FAILED.    VPCId: The ID of the VPC that the Resolver rule is associated with.    ListResolverQueryLogConfigs  Valid values for Name include the following:    Arn: The ARN for the query logging configuration.    AssociationCount: The number of VPCs that are associated with the query logging configuration.    CreationTime: The date and time that the query logging configuration was created, in Unix time format and Coordinated Universal Time (UTC).     CreatorRequestId: A unique string that identifies the request that created the query logging configuration.    Destination: The AWS service that you want to forward query logs to. Valid values include the following:    S3     CloudWatchLogs     KinesisFirehose       DestinationArn: The ARN of the location that Resolver is sending query logs to. This value can be the ARN for an S3 bucket, a CloudWatch Logs log group, or a Kinesis Data Firehose delivery stream.    Id: The ID of the query logging configuration    Name: The name of the query logging configuration    OwnerId: The AWS account ID for the account that created the query logging configuration.    ShareStatus: An indication of whether the query logging configuration is shared with other AWS accounts, or was shared with the current account by another AWS account. Valid values include: NOT_SHARED, SHARED_WITH_ME, or SHARED_BY_ME.    Status: The status of the query logging configuration. If you specify Status for Name, specify the applicable status code for Values: CREATING, CREATED, DELETING, or FAILED. For more information, see Status.     ListResolverQueryLogConfigAssociations  Valid values for Name include the following:    CreationTime: The date and time that the VPC was associated with the query logging configuration, in Unix time format and Coordinated Universal Time (UTC).    Error: If the value of Status is FAILED, specify the cause: DESTINATION_NOT_FOUND or ACCESS_DENIED.    Id: The ID of the query logging association.    ResolverQueryLogConfigId: The ID of the query logging configuration that a VPC is associated with.    ResourceId: The ID of the Amazon VPC that is associated with the query logging configuration.    Status: The status of the query logging association. If you specify Status for Name, specify the applicable status code for Values: CREATING, CREATED, DELETING, or FAILED. For more information, see Status.   
+     * The name of the parameter that you want to use to filter objects. The valid values for Name depend on the action that you're including the filter in, ListResolverEndpoints, ListResolverRules, ListResolverRuleAssociations, ListResolverQueryLogConfigs, or ListResolverQueryLogConfigAssociations.  In early versions of Resolver, values for Name were listed as uppercase, with underscore (_) delimiters. For example, CreatorRequestId was originally listed as CREATOR_REQUEST_ID. Uppercase values for Name are still supported.   ListResolverEndpoints  Valid values for Name include the following:    CreatorRequestId: The value that you specified when you created the Resolver endpoint.    Direction: Whether you want to return inbound or outbound Resolver endpoints. If you specify DIRECTION for Name, specify INBOUND or OUTBOUND for Values.    HostVPCId: The ID of the VPC that inbound DNS queries pass through on the way from your network to your VPCs in a region, or the VPC that outbound queries pass through on the way from your VPCs to your network. In a CreateResolverEndpoint request, SubnetId indirectly identifies the VPC. In a GetResolverEndpoint request, the VPC ID for a Resolver endpoint is returned in the HostVPCId element.     IpAddressCount: The number of IP addresses that you have associated with the Resolver endpoint.    Name: The name of the Resolver endpoint.    SecurityGroupIds: The IDs of the VPC security groups that you specified when you created the Resolver endpoint.    Status: The status of the Resolver endpoint. If you specify Status for Name, specify one of the following status codes for Values: CREATING, OPERATIONAL, UPDATING, AUTO_RECOVERING, ACTION_NEEDED, or DELETING. For more information, see Status in ResolverEndpoint.    ListResolverRules  Valid values for Name include the following:    CreatorRequestId: The value that you specified when you created the Resolver rule.    DomainName: The domain name for which Resolver is forwarding DNS queries to your network. In the value that you specify for Values, include a trailing dot (.) after the domain name. For example, if the domain name is example.com, specify the following value. Note the "." after com:  example.com.     Name: The name of the Resolver rule.    ResolverEndpointId: The ID of the Resolver endpoint that the Resolver rule is associated with.  You can filter on the Resolver endpoint only for rules that have a value of FORWARD for RuleType.     Status: The status of the Resolver rule. If you specify Status for Name, specify one of the following status codes for Values: COMPLETE, DELETING, UPDATING, or FAILED.    Type: The type of the Resolver rule. If you specify TYPE for Name, specify FORWARD or SYSTEM for Values.    ListResolverRuleAssociations  Valid values for Name include the following:    Name: The name of the Resolver rule association.    ResolverRuleId: The ID of the Resolver rule that is associated with one or more VPCs.    Status: The status of the Resolver rule association. If you specify Status for Name, specify one of the following status codes for Values: CREATING, COMPLETE, DELETING, or FAILED.    VPCId: The ID of the VPC that the Resolver rule is associated with.    ListResolverQueryLogConfigs  Valid values for Name include the following:    Arn: The ARN for the query logging configuration.    AssociationCount: The number of VPCs that are associated with the query logging configuration.    CreationTime: The date and time that the query logging configuration was created, in Unix time format and Coordinated Universal Time (UTC).     CreatorRequestId: A unique string that identifies the request that created the query logging configuration.    Destination: The Amazon Web Services service that you want to forward query logs to. Valid values include the following:    S3     CloudWatchLogs     KinesisFirehose       DestinationArn: The ARN of the location that Resolver is sending query logs to. This value can be the ARN for an S3 bucket, a CloudWatch Logs log group, or a Kinesis Data Firehose delivery stream.    Id: The ID of the query logging configuration    Name: The name of the query logging configuration    OwnerId: The Amazon Web Services account ID for the account that created the query logging configuration.    ShareStatus: An indication of whether the query logging configuration is shared with other Amazon Web Services accounts, or was shared with the current account by another Amazon Web Services account. Valid values include: NOT_SHARED, SHARED_WITH_ME, or SHARED_BY_ME.    Status: The status of the query logging configuration. If you specify Status for Name, specify the applicable status code for Values: CREATING, CREATED, DELETING, or FAILED. For more information, see Status.     ListResolverQueryLogConfigAssociations  Valid values for Name include the following:    CreationTime: The date and time that the VPC was associated with the query logging configuration, in Unix time format and Coordinated Universal Time (UTC).    Error: If the value of Status is FAILED, specify the cause: DESTINATION_NOT_FOUND or ACCESS_DENIED.    Id: The ID of the query logging association.    ResolverQueryLogConfigId: The ID of the query logging configuration that a VPC is associated with.    ResourceId: The ID of the Amazon VPC that is associated with the query logging configuration.    Status: The status of the query logging association. If you specify Status for Name, specify the applicable status code for Values: CREATING, CREATED, DELETING, or FAILED. For more information, see Status.   
      */
     Name?: FilterName;
     /**
@@ -934,7 +934,7 @@ declare namespace Route53Resolver {
      */
     ResourceId?: ResourceId;
     /**
-     * The AWS account ID of the owner of the VPC that this firewall configuration applies to.
+     * The Amazon Web Services account ID of the owner of the VPC that this firewall configuration applies to.
      */
     OwnerId?: AccountId;
     /**
@@ -1090,7 +1090,7 @@ declare namespace Route53Resolver {
      */
     StatusMessage?: StatusMessage;
     /**
-     * The AWS account ID for the account that created the rule group. When a rule group is shared with your account, this is the account that has shared the rule group with you. 
+     * The Amazon Web Services account ID for the account that created the rule group. When a rule group is shared with your account, this is the account that has shared the rule group with you. 
      */
     OwnerId?: AccountId;
     /**
@@ -1098,7 +1098,7 @@ declare namespace Route53Resolver {
      */
     CreatorRequestId?: CreatorRequestId;
     /**
-     * Whether the rule group is shared with other AWS accounts, or was shared with the current account by another AWS account. Sharing is configured through AWS Resource Access Manager (AWS RAM).
+     * Whether the rule group is shared with other Amazon Web Services accounts, or was shared with the current account by another Amazon Web Services account. Sharing is configured through Resource Access Manager (RAM).
      */
     ShareStatus?: ShareStatus;
     /**
@@ -1140,7 +1140,7 @@ declare namespace Route53Resolver {
      */
     MutationProtection?: MutationProtectionStatus;
     /**
-     * The owner of the association, used only for associations that are not managed by you. If you use AWS Firewall Manager to manage your DNS Firewalls, then this reports Firewall Manager as the managed owner.
+     * The owner of the association, used only for associations that are not managed by you. If you use Firewall Manager to manage your DNS Firewalls, then this reports Firewall Manager as the managed owner.
      */
     ManagedOwnerName?: ServicePrinciple;
     /**
@@ -1180,7 +1180,7 @@ declare namespace Route53Resolver {
      */
     Name?: Name;
     /**
-     * The AWS account ID for the account that created the rule group. When a rule group is shared with your account, this is the account that has shared the rule group with you. 
+     * The Amazon Web Services account ID for the account that created the rule group. When a rule group is shared with your account, this is the account that has shared the rule group with you. 
      */
     OwnerId?: AccountId;
     /**
@@ -1188,7 +1188,7 @@ declare namespace Route53Resolver {
      */
     CreatorRequestId?: CreatorRequestId;
     /**
-     * Whether the rule group is shared with other AWS accounts, or was shared with the current account by another AWS account. Sharing is configured through AWS Resource Access Manager (AWS RAM).
+     * Whether the rule group is shared with other Amazon Web Services accounts, or was shared with the current account by another Amazon Web Services account. Sharing is configured through Resource Access Manager (RAM).
      */
     ShareStatus?: ShareStatus;
   }
@@ -1240,7 +1240,7 @@ declare namespace Route53Resolver {
   }
   export interface GetFirewallRuleGroupPolicyResponse {
     /**
-     * The AWS Identity and Access Management (AWS IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using AWS Resource Access Manager (AWS RAM). 
+     * The Identity and Access Management (Amazon Web Services IAM) policy for sharing the specified rule group. You can use the policy to share the rule group using Resource Access Manager (RAM). 
      */
     FirewallRuleGroupPolicy?: FirewallRuleGroupPolicy;
   }
@@ -1603,7 +1603,7 @@ declare namespace Route53Resolver {
      */
     MaxResults?: MaxResults;
     /**
-     * (Optional) If the current AWS account has more than MaxResults DNSSEC configurations, use NextToken to get the second and subsequent pages of results. For the first ListResolverDnssecConfigs request, omit this value. For the second and subsequent requests, get the value of NextToken from the previous response and specify that value for NextToken in the request.
+     * (Optional) If the current Amazon Web Services account has more than MaxResults DNSSEC configurations, use NextToken to get the second and subsequent pages of results. For the first ListResolverDnssecConfigs request, omit this value. For the second and subsequent requests, get the value of NextToken from the previous response and specify that value for NextToken in the request.
      */
     NextToken?: NextToken;
     /**
@@ -1613,11 +1613,11 @@ declare namespace Route53Resolver {
   }
   export interface ListResolverDnssecConfigsResponse {
     /**
-     * If a response includes the last of the DNSSEC configurations that are associated with the current AWS account, NextToken doesn't appear in the response. If a response doesn't include the last of the configurations, you can get more configurations by submitting another ListResolverDnssecConfigs request. Get the value of NextToken that Amazon Route 53 returned in the previous response and include it in NextToken in the next request.
+     * If a response includes the last of the DNSSEC configurations that are associated with the current Amazon Web Services account, NextToken doesn't appear in the response. If a response doesn't include the last of the configurations, you can get more configurations by submitting another ListResolverDnssecConfigs request. Get the value of NextToken that Amazon Route 53 returned in the previous response and include it in NextToken in the next request.
      */
     NextToken?: NextToken;
     /**
-     * An array that contains one ResolverDnssecConfig element for each configuration for DNSSEC validation that is associated with the current AWS account.
+     * An array that contains one ResolverDnssecConfig element for each configuration for DNSSEC validation that is associated with the current Amazon Web Services account.
      */
     ResolverDnssecConfigs?: ResolverDnssecConfigList;
   }
@@ -1673,7 +1673,7 @@ declare namespace Route53Resolver {
      */
     MaxResults?: MaxResults;
     /**
-     * The Resolver endpoints that were created by using the current AWS account, and that match the specified filters, if any.
+     * The Resolver endpoints that were created by using the current Amazon Web Services account, and that match the specified filters, if any.
      */
     ResolverEndpoints?: ResolverEndpoints;
   }
@@ -1731,7 +1731,7 @@ declare namespace Route53Resolver {
      */
     Filters?: Filters;
     /**
-     * The element that you want Resolver to sort query logging configurations by.   If you submit a second or subsequent ListResolverQueryLogConfigs request and specify the NextToken parameter, you must use the same value for SortBy, if any, as in the previous request.  Valid values include the following elements:    Arn: The ARN of the query logging configuration    AssociationCount: The number of VPCs that are associated with the specified configuration     CreationTime: The date and time that Resolver returned when the configuration was created    CreatorRequestId: The value that was specified for CreatorRequestId when the configuration was created    DestinationArn: The location that logs are sent to    Id: The ID of the configuration    Name: The name of the configuration    OwnerId: The AWS account number of the account that created the configuration    ShareStatus: Whether the configuration is shared with other AWS accounts or shared with the current account by another AWS account. Sharing is configured through AWS Resource Access Manager (AWS RAM).    Status: The current status of the configuration. Valid values include the following:    CREATING: Resolver is creating the query logging configuration.    CREATED: The query logging configuration was successfully created. Resolver is logging queries that originate in the specified VPC.    DELETING: Resolver is deleting this query logging configuration.    FAILED: Resolver either couldn't create or couldn't delete the query logging configuration. Here are two common causes:   The specified destination (for example, an Amazon S3 bucket) was deleted.   Permissions don't allow sending logs to the destination.      
+     * The element that you want Resolver to sort query logging configurations by.   If you submit a second or subsequent ListResolverQueryLogConfigs request and specify the NextToken parameter, you must use the same value for SortBy, if any, as in the previous request.  Valid values include the following elements:    Arn: The ARN of the query logging configuration    AssociationCount: The number of VPCs that are associated with the specified configuration     CreationTime: The date and time that Resolver returned when the configuration was created    CreatorRequestId: The value that was specified for CreatorRequestId when the configuration was created    DestinationArn: The location that logs are sent to    Id: The ID of the configuration    Name: The name of the configuration    OwnerId: The Amazon Web Services account number of the account that created the configuration    ShareStatus: Whether the configuration is shared with other Amazon Web Services accounts or shared with the current account by another Amazon Web Services account. Sharing is configured through Resource Access Manager (RAM).    Status: The current status of the configuration. Valid values include the following:    CREATING: Resolver is creating the query logging configuration.    CREATED: The query logging configuration was successfully created. Resolver is logging queries that originate in the specified VPC.    DELETING: Resolver is deleting this query logging configuration.    FAILED: Resolver either couldn't create or couldn't delete the query logging configuration. Here are two common causes:   The specified destination (for example, an Amazon S3 bucket) was deleted.   Permissions don't allow sending logs to the destination.      
      */
     SortBy?: SortByKey;
     /**
@@ -1781,7 +1781,7 @@ declare namespace Route53Resolver {
      */
     MaxResults?: MaxResults;
     /**
-     * The associations that were created between Resolver rules and VPCs using the current AWS account, and that match the specified filters, if any.
+     * The associations that were created between Resolver rules and VPCs using the current Amazon Web Services account, and that match the specified filters, if any.
      */
     ResolverRuleAssociations?: ResolverRuleAssociations;
   }
@@ -1809,7 +1809,7 @@ declare namespace Route53Resolver {
      */
     MaxResults?: MaxResults;
     /**
-     * The Resolver rules that were created using the current AWS account and that match the specified filters, if any.
+     * The Resolver rules that were created using the current Amazon Web Services account and that match the specified filters, if any.
      */
     ResolverRules?: ResolverRules;
   }
@@ -1849,7 +1849,7 @@ declare namespace Route53Resolver {
      */
     Arn: Arn;
     /**
-     * The AWS Identity and Access Management (AWS IAM) policy to attach to the rule group.
+     * The Identity and Access Management (Amazon Web Services IAM) policy to attach to the rule group.
      */
     FirewallRuleGroupPolicy: FirewallRuleGroupPolicy;
   }
@@ -1865,7 +1865,7 @@ declare namespace Route53Resolver {
      */
     Arn: Arn;
     /**
-     * An AWS Identity and Access Management policy statement that lists the query logging configurations that you want to share with another AWS account and the operations that you want the account to be able to perform. You can specify the following operations in the Actions section of the statement:    route53resolver:AssociateResolverQueryLogConfig     route53resolver:DisassociateResolverQueryLogConfig     route53resolver:ListResolverQueryLogConfigAssociations     route53resolver:ListResolverQueryLogConfigs    In the Resource section of the statement, you specify the ARNs for the query logging configurations that you want to share with the account that you specified in Arn. 
+     * An Identity and Access Management policy statement that lists the query logging configurations that you want to share with another Amazon Web Services account and the operations that you want the account to be able to perform. You can specify the following operations in the Actions section of the statement:    route53resolver:AssociateResolverQueryLogConfig     route53resolver:DisassociateResolverQueryLogConfig     route53resolver:ListResolverQueryLogConfigAssociations     route53resolver:ListResolverQueryLogConfigs    In the Resource section of the statement, you specify the ARNs for the query logging configurations that you want to share with the account that you specified in Arn. 
      */
     ResolverQueryLogConfigPolicy: ResolverQueryLogConfigPolicy;
   }
@@ -1881,7 +1881,7 @@ declare namespace Route53Resolver {
      */
     Arn: Arn;
     /**
-     * An AWS Identity and Access Management policy statement that lists the rules that you want to share with another AWS account and the operations that you want the account to be able to perform. You can specify the following operations in the Action section of the statement:    route53resolver:GetResolverRule     route53resolver:AssociateResolverRule     route53resolver:DisassociateResolverRule     route53resolver:ListResolverRules     route53resolver:ListResolverRuleAssociations    In the Resource section of the statement, specify the ARN for the rule that you want to share with another account. Specify the same ARN that you specified in Arn.
+     * An Identity and Access Management policy statement that lists the rules that you want to share with another Amazon Web Services account and the operations that you want the account to be able to perform. You can specify the following operations in the Action section of the statement:    route53resolver:GetResolverRule     route53resolver:AssociateResolverRule     route53resolver:DisassociateResolverRule     route53resolver:ListResolverRules     route53resolver:ListResolverRuleAssociations    In the Resource section of the statement, specify the ARN for the rule that you want to share with another account. Specify the same ARN that you specified in Arn.
      */
     ResolverRulePolicy: ResolverRulePolicy;
   }
@@ -1970,7 +1970,7 @@ declare namespace Route53Resolver {
      */
     Id?: ResourceId;
     /**
-     * The AWS account ID for the account that created the query logging configuration. 
+     * The Amazon Web Services account ID for the account that created the query logging configuration. 
      */
     OwnerId?: AccountId;
     /**
@@ -1978,7 +1978,7 @@ declare namespace Route53Resolver {
      */
     Status?: ResolverQueryLogConfigStatus;
     /**
-     * An indication of whether the query logging configuration is shared with other AWS accounts, or was shared with the current account by another AWS account. Sharing is configured through AWS Resource Access Manager (AWS RAM).
+     * An indication of whether the query logging configuration is shared with other Amazon Web Services accounts, or was shared with the current account by another Amazon Web Services account. Sharing is configured through Resource Access Manager (RAM).
      */
     ShareStatus?: ShareStatus;
     /**
@@ -2086,7 +2086,7 @@ declare namespace Route53Resolver {
      */
     ResolverEndpointId?: ResourceId;
     /**
-     * When a rule is shared with another AWS account, the account ID of the account that the rule is shared with.
+     * When a rule is shared with another Amazon Web Services account, the account ID of the account that the rule is shared with.
      */
     OwnerId?: AccountId;
     /**

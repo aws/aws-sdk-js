@@ -19,6 +19,14 @@ declare class SageMakerRuntime extends Service {
    * After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint.  For an overview of Amazon SageMaker, see How It Works.  Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax.  Calls to InvokeEndpoint are authenticated by using AWS Signature Version 4. For information, see Authenticating Requests (AWS Signature Version 4) in the Amazon S3 API Reference. A customer's model containers must respond to requests within 60 seconds. The model itself can have a maximum processing time of 60 seconds before responding to invocations. If your model is going to take 50-60 seconds of processing time, the SDK socket timeout should be set to be 70 seconds.  Endpoints are scoped to an individual account, and are not public. The URL does not contain the account ID, but Amazon SageMaker determines the account ID from the authentication token that is supplied by the caller. 
    */
   invokeEndpoint(callback?: (err: AWSError, data: SageMakerRuntime.Types.InvokeEndpointOutput) => void): Request<SageMakerRuntime.Types.InvokeEndpointOutput, AWSError>;
+  /**
+   * After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint in an asynchronous manner. Inference requests sent to this API are enqueued for asynchronous processing. The processing of the inference request may or may not complete before the you receive a response from this API. The response from this API will not contain the result of the inference request but contain information about where you can locate it. Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax. Calls to InvokeEndpointAsync are authenticated by using AWS Signature Version 4. For information, see Authenticating Requests (AWS Signature Version 4) in the Amazon S3 API Reference.
+   */
+  invokeEndpointAsync(params: SageMakerRuntime.Types.InvokeEndpointAsyncInput, callback?: (err: AWSError, data: SageMakerRuntime.Types.InvokeEndpointAsyncOutput) => void): Request<SageMakerRuntime.Types.InvokeEndpointAsyncOutput, AWSError>;
+  /**
+   * After you deploy a model into production using Amazon SageMaker hosting services, your client applications use this API to get inferences from the model hosted at the specified endpoint in an asynchronous manner. Inference requests sent to this API are enqueued for asynchronous processing. The processing of the inference request may or may not complete before the you receive a response from this API. The response from this API will not contain the result of the inference request but contain information about where you can locate it. Amazon SageMaker strips all POST headers except those supported by the API. Amazon SageMaker might add additional headers. You should not rely on the behavior of headers outside those enumerated in the request syntax. Calls to InvokeEndpointAsync are authenticated by using AWS Signature Version 4. For information, see Authenticating Requests (AWS Signature Version 4) in the Amazon S3 API Reference.
+   */
+  invokeEndpointAsync(callback?: (err: AWSError, data: SageMakerRuntime.Types.InvokeEndpointAsyncOutput) => void): Request<SageMakerRuntime.Types.InvokeEndpointAsyncOutput, AWSError>;
 }
 declare namespace SageMakerRuntime {
   export type BodyBlob = Buffer|Uint8Array|Blob|string;
@@ -26,6 +34,47 @@ declare namespace SageMakerRuntime {
   export type EndpointName = string;
   export type Header = string;
   export type InferenceId = string;
+  export type InputLocationHeader = string;
+  export interface InvokeEndpointAsyncInput {
+    /**
+     * The name of the endpoint that you specified when you created the endpoint using the  CreateEndpoint  API.
+     */
+    EndpointName: EndpointName;
+    /**
+     * The MIME type of the input data in the request body.
+     */
+    ContentType?: Header;
+    /**
+     * The desired MIME type of the inference in the response.
+     */
+    Accept?: Header;
+    /**
+     * Provides additional information about a request for an inference submitted to a model hosted at an Amazon SageMaker endpoint. The information is an opaque value that is forwarded verbatim. You could use this value, for example, to provide an ID that you can use to track a request or to provide other metadata that a service endpoint was programmed to process. The value must consist of no more than 1024 visible US-ASCII characters as specified in Section 3.3.6. Field Value Components of the Hypertext Transfer Protocol (HTTP/1.1).  The code in your model is responsible for setting or updating any custom attributes in the response. If your code does not set this value in the response, an empty value is returned. For example, if a custom attribute represents the trace ID, your model can prepend the custom attribute with Trace ID: in your post-processing function.  This feature is currently supported in the AWS SDKs but not in the Amazon SageMaker Python SDK. 
+     */
+    CustomAttributes?: CustomAttributesHeader;
+    /**
+     * The identifier for the inference request. Amazon SageMaker will generate an identifier for you if none is specified. 
+     */
+    InferenceId?: InferenceId;
+    /**
+     * The Amazon S3 URI where the inference request payload is stored.
+     */
+    InputLocation: InputLocationHeader;
+    /**
+     * Maximum age in seconds a request can be in the queue before it is marked as expired.
+     */
+    RequestTTLSeconds?: RequestTTLSecondsHeader;
+  }
+  export interface InvokeEndpointAsyncOutput {
+    /**
+     * Identifier for an inference request. This will be the same as the InferenceId specified in the input. Amazon SageMaker will generate an identifier for you if you do not specify one.
+     */
+    InferenceId?: Header;
+    /**
+     * The Amazon S3 URI where the inference response payload is stored.
+     */
+    OutputLocation?: Header;
+  }
   export interface InvokeEndpointInput {
     /**
      * The name of the endpoint that you specified when you created the endpoint using the CreateEndpoint API. 
@@ -82,6 +131,7 @@ declare namespace SageMakerRuntime {
      */
     CustomAttributes?: CustomAttributesHeader;
   }
+  export type RequestTTLSecondsHeader = number;
   export type TargetContainerHostnameHeader = string;
   export type TargetModelHeader = string;
   export type TargetVariantHeader = string;

@@ -2399,6 +2399,46 @@ declare namespace SageMaker {
     CreationTime?: Timestamp;
     CreatedBy?: UserContext;
   }
+  export interface AsyncInferenceClientConfig {
+    /**
+     * The maximum number of concurrent requests sent by the SageMaker client to the model container. If no value is provided, Amazon SageMaker will choose an optimal value for you.
+     */
+    MaxConcurrentInvocationsPerInstance?: MaxConcurrentInvocationsPerInstance;
+  }
+  export interface AsyncInferenceConfig {
+    /**
+     * Configures the behavior of the client used by Amazon SageMaker to interact with the model container during asynchronous inference.
+     */
+    ClientConfig?: AsyncInferenceClientConfig;
+    /**
+     * Specifies the configuration for asynchronous inference invocation outputs.
+     */
+    OutputConfig: AsyncInferenceOutputConfig;
+  }
+  export interface AsyncInferenceNotificationConfig {
+    /**
+     * Amazon SNS topic to post a notification to when inference completes successfully. If no topic is provided, no notification is sent on success.
+     */
+    SuccessTopic?: SnsTopicArn;
+    /**
+     * Amazon SNS topic to post a notification to when inference fails. If no topic is provided, no notification is sent on failure.
+     */
+    ErrorTopic?: SnsTopicArn;
+  }
+  export interface AsyncInferenceOutputConfig {
+    /**
+     * The Amazon Web Services Key Management Service (Amazon Web Services KMS) key that Amazon SageMaker uses to encrypt the asynchronous inference output in Amazon S3. 
+     */
+    KmsKeyId?: KmsKeyId;
+    /**
+     * The Amazon S3 location to upload inference responses to.
+     */
+    S3OutputPath: DestinationS3Uri;
+    /**
+     * Specifies the configuration for notifications of inference results for asynchronous inference.
+     */
+    NotificationConfig?: AsyncInferenceNotificationConfig;
+  }
   export type AthenaCatalog = string;
   export type AthenaDatabase = string;
   export interface AthenaDatasetDefinition {
@@ -3555,6 +3595,10 @@ declare namespace SageMaker {
      * The Amazon Resource Name (ARN) of a Amazon Web Services Key Management Service key that Amazon SageMaker uses to encrypt data on the storage volume attached to the ML compute instance that hosts the endpoint. The KmsKeyId can be any of the following formats:    Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab    Key ARN: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab    Alias name: alias/ExampleAlias    Alias name ARN: arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias    The KMS key policy must grant permission to the IAM role that you specify in your CreateEndpoint, UpdateEndpoint requests. For more information, refer to the Amazon Web Services Key Management Service section Using Key Policies in Amazon Web Services KMS    Certain Nitro-based instances include local storage, dependent on the instance type. Local storage volumes are encrypted using a hardware module on the instance. You can't request a KmsKeyId when using an instance type with local storage. If any of the models that you specify in the ProductionVariants parameter use nitro-based instances with local storage, do not specify a value for the KmsKeyId parameter. If you specify a value for KmsKeyId when using any nitro-based instances with local storage, the call to CreateEndpointConfig fails. For a list of instance types that support local instance storage, see Instance Store Volumes. For more information about local instance storage encryption, see SSD Instance Store Volumes. 
      */
     KmsKeyId?: KmsKeyId;
+    /**
+     * Specifies configuration for how an endpoint performs asynchronous inference. This is a required field in order for your Endpoint to be invoked using  InvokeEndpointAsync .
+     */
+    AsyncInferenceConfig?: AsyncInferenceConfig;
   }
   export interface CreateEndpointConfigOutput {
     /**
@@ -4138,6 +4182,10 @@ declare namespace SageMaker {
      * Whether root access is enabled or disabled for users of the notebook instance. The default value is Enabled.  Lifecycle configurations need root access to be able to set up a notebook instance. Because of this, lifecycle configurations associated with a notebook instance always run with root access even if you disable root access for users. 
      */
     RootAccess?: RootAccess;
+    /**
+     * The platform identifier of the notebook instance runtime environment.
+     */
+    PlatformIdentifier?: PlatformIdentifier;
   }
   export interface CreateNotebookInstanceLifecycleConfigInput {
     /**
@@ -5995,6 +6043,10 @@ declare namespace SageMaker {
      * A timestamp that shows when the endpoint configuration was created.
      */
     CreationTime: Timestamp;
+    /**
+     * Returns the description of an endpoint configuration created using the  CreateEndpointConfig  API.
+     */
+    AsyncInferenceConfig?: AsyncInferenceConfig;
   }
   export interface DescribeEndpointInput {
     /**
@@ -6040,6 +6092,10 @@ declare namespace SageMaker {
      * The most recent deployment configuration for the endpoint.
      */
     LastDeploymentConfig?: DeploymentConfig;
+    /**
+     * Returns the description of an endpoint configuration created using the  CreateEndpointConfig  API.
+     */
+    AsyncInferenceConfig?: AsyncInferenceConfig;
   }
   export interface DescribeExperimentRequest {
     /**
@@ -6910,6 +6966,10 @@ declare namespace SageMaker {
      * Whether root access is enabled or disabled for users of the notebook instance.  Lifecycle configurations need root access to be able to set up a notebook instance. Because of this, lifecycle configurations associated with a notebook instance always run with root access even if you disable root access for users. 
      */
     RootAccess?: RootAccess;
+    /**
+     * The platform identifier of the notebook instance runtime environment.
+     */
+    PlatformIdentifier?: PlatformIdentifier;
   }
   export interface DescribePipelineDefinitionForExecutionRequest {
     /**
@@ -8967,6 +9027,7 @@ declare namespace SageMaker {
      */
     SupportedResponseMIMETypes: ResponseMIMETypes;
   }
+  export type InitialTaskCount = number;
   export interface InputConfig {
     /**
      * The S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).
@@ -8988,7 +9049,7 @@ declare namespace SageMaker {
   export type InputDataConfig = Channel[];
   export type InputMode = "Pipe"|"File"|string;
   export type InputModes = TrainingInputMode[];
-  export type InstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|string;
+  export type InstanceType = "ml.t2.medium"|"ml.t2.large"|"ml.t2.xlarge"|"ml.t2.2xlarge"|"ml.t3.medium"|"ml.t3.large"|"ml.t3.xlarge"|"ml.t3.2xlarge"|"ml.m4.xlarge"|"ml.m4.2xlarge"|"ml.m4.4xlarge"|"ml.m4.10xlarge"|"ml.m4.16xlarge"|"ml.m5.xlarge"|"ml.m5.2xlarge"|"ml.m5.4xlarge"|"ml.m5.12xlarge"|"ml.m5.24xlarge"|"ml.m5d.large"|"ml.m5d.xlarge"|"ml.m5d.2xlarge"|"ml.m5d.4xlarge"|"ml.m5d.8xlarge"|"ml.m5d.12xlarge"|"ml.m5d.16xlarge"|"ml.m5d.24xlarge"|"ml.c4.xlarge"|"ml.c4.2xlarge"|"ml.c4.4xlarge"|"ml.c4.8xlarge"|"ml.c5.xlarge"|"ml.c5.2xlarge"|"ml.c5.4xlarge"|"ml.c5.9xlarge"|"ml.c5.18xlarge"|"ml.c5d.xlarge"|"ml.c5d.2xlarge"|"ml.c5d.4xlarge"|"ml.c5d.9xlarge"|"ml.c5d.18xlarge"|"ml.p2.xlarge"|"ml.p2.8xlarge"|"ml.p2.16xlarge"|"ml.p3.2xlarge"|"ml.p3.8xlarge"|"ml.p3.16xlarge"|"ml.p3dn.24xlarge"|"ml.g4dn.xlarge"|"ml.g4dn.2xlarge"|"ml.g4dn.4xlarge"|"ml.g4dn.8xlarge"|"ml.g4dn.12xlarge"|"ml.g4dn.16xlarge"|"ml.r5.large"|"ml.r5.xlarge"|"ml.r5.2xlarge"|"ml.r5.4xlarge"|"ml.r5.8xlarge"|"ml.r5.12xlarge"|"ml.r5.16xlarge"|"ml.r5.24xlarge"|string;
   export type Integer = number;
   export interface IntegerParameterRange {
     /**
@@ -11610,6 +11671,7 @@ declare namespace SageMaker {
   export type Long = number;
   export type MaxAutoMLJobRuntimeInSeconds = number;
   export type MaxCandidates = number;
+  export type MaxConcurrentInvocationsPerInstance = number;
   export type MaxConcurrentTaskCount = number;
   export type MaxConcurrentTransforms = number;
   export type MaxHumanLabeledObjectCount = number;
@@ -12613,7 +12675,7 @@ declare namespace SageMaker {
   export type NotebookOutputOption = "Allowed"|"Disabled"|string;
   export interface NotificationConfiguration {
     /**
-     * The ARN for the SNS topic to which notifications should be published.
+     * The ARN for the Amazon SNS topic to which notifications should be published.
      */
     NotificationTopicArn?: NotificationTopicArn;
   }
@@ -13091,6 +13153,7 @@ declare namespace SageMaker {
     LastExecutionTime?: Timestamp;
   }
   export type PipelineSummaryList = PipelineSummary[];
+  export type PlatformIdentifier = string;
   export type PolicyString = string;
   export type PresignedDomainUrl = string;
   export type ProbabilityThresholdAttribute = number;
@@ -13362,7 +13425,7 @@ declare namespace SageMaker {
     /**
      * Number of instances to launch initially.
      */
-    InitialInstanceCount: TaskCount;
+    InitialInstanceCount: InitialTaskCount;
     /**
      * The ML compute instance type.
      */

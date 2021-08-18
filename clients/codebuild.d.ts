@@ -473,7 +473,6 @@ declare namespace CodeBuild {
      */
     reportsNotFound?: ReportArns;
   }
-  export type BatchReportModeType = "REPORT_INDIVIDUAL_BUILDS"|"REPORT_AGGREGATED_BATCH"|string;
   export interface BatchRestrictions {
     /**
      * Specifies the maximum number of builds allowed.
@@ -1954,10 +1953,6 @@ declare namespace CodeBuild {
      * Specifies the maximum amount of time, in minutes, that the batch build must be completed in.
      */
     timeoutInMins?: WrapperInt;
-    /**
-     * Specifies how build status reports are sent to the source provider for the batch build. This property is only used when the source provider for your project is Bitbucket, GitHub, or GitHub Enterprise, and your project is configured to report build statuses to the source provider.  REPORT_AGGREGATED_BATCH  (Default) Aggregate all of the build statuses into a single status report.  REPORT_INDIVIDUAL_BUILDS  Send a separate status report for each individual build.  
-     */
-    batchReportMode?: BatchReportModeType;
   }
   export interface ProjectCache {
     /**
@@ -2062,7 +2057,7 @@ declare namespace CodeBuild {
      */
     auth?: SourceAuth;
     /**
-     *  Set to true to report the status of a build's start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set and you use a different source provider, an invalidInputException is thrown.  To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see Source provider access in the CodeBuild User Guide.   The status of a build triggered by a webhook is always reported to your source provider.  
+     *  Set to true to report the status of a build's start and finish to your source provider. This option is valid only when your source provider is GitHub, GitHub Enterprise, or Bitbucket. If this is set and you use a different source provider, an invalidInputException is thrown.  To be able to report the build status to the source provider, the user associated with the source provider must have write access to the repo. If the user does not have write access, the build status cannot be updated. For more information, see Source provider access in the CodeBuild User Guide. The status of a build triggered by a webhook is always reported to your source provider.  If your project's builds are triggered by a webhook, you must push a new commit to the repo for a change to this property to take effect.
      */
     reportBuildStatus?: WrapperBoolean;
     /**
