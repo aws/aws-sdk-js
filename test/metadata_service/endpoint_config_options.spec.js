@@ -1,7 +1,7 @@
 var helpers = require('./../helpers');
-var AWS = helpers.AWS;
-
 var options = require('../../lib/metadata_service/endpoint_config_options');
+
+var AWS = helpers.AWS;
 var ENDPOINT_CONFIG_OPTIONS = options.ENDPOINT_CONFIG_OPTIONS;
 var ENV_ENDPOINT_NAME = options.ENV_ENDPOINT_NAME;
 var CONFIG_ENDPOINT_NAME = options.CONFIG_ENDPOINT_NAME;

@@ -1,12 +1,11 @@
 var helpers = require('./../helpers');
-var AWS = helpers.AWS;
-
 var options = require('../../lib/metadata_service/endpoint_mode_config_options');
+var EndpointMode = require('../../lib/metadata_service/endpoint_mode');
+
+var AWS = helpers.AWS;
 var ENDPOINT_MODE_CONFIG_OPTIONS = options.ENDPOINT_MODE_CONFIG_OPTIONS;
 var ENV_ENDPOINT_MODE_NAME = options.ENV_ENDPOINT_MODE_NAME;
 var CONFIG_ENDPOINT_MODE_NAME = options.CONFIG_ENDPOINT_MODE_NAME;
-
-var EndpointMode = require('../../lib/metadata_service/endpoint_mode');
 
 if (AWS.util.isNode()) {
   describe('endpointModeConfigOptions', function() {
