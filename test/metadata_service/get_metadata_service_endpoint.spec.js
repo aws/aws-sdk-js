@@ -1,16 +1,11 @@
-var AWS, helpers, getMetadataServiceEndpoint, Endpoint, EndpointMode, ENDPOINT_CONFIG_OPTIONS, ENDPOINT_MODE_CONFIG_OPTIONS;
+var helpers = require('./../helpers');
+var getMetadataServiceEndpoint = require('../../lib/metadata_service/get_metadata_service_endpoint');
 
-helpers = require('./../helpers');
+var Endpoint = require('../../lib/metadata_service/endpoint');
+var EndpointMode = require('../../lib/metadata_service/endpoint_mode');
+var ENDPOINT_CONFIG_OPTIONS = require('../../lib/metadata_service/endpoint_config_options').ENDPOINT_CONFIG_OPTIONS;
 
-AWS = helpers.AWS;
-
-getMetadataServiceEndpoint = require('../../lib/metadata_service/get_metadata_service_endpoint');
-
-Endpoint = require('../../lib/metadata_service/endpoint');
-EndpointMode = require('../../lib/metadata_service/endpoint_mode');
-
-ENDPOINT_CONFIG_OPTIONS = require('../../lib/metadata_service/endpoint_config_options').ENDPOINT_CONFIG_OPTIONS;
-ENDPOINT_MODE_CONFIG_OPTIONS = require('../../lib/metadata_service/endpoint_mode_config_options').ENDPOINT_MODE_CONFIG_OPTIONS;
+var AWS = helpers.AWS;
 
 if (AWS.util.isNode()) {
   describe('getMetadataServiceEndpoint', function() {
