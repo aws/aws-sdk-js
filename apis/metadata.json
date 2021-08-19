@@ -1065,5 +1065,8 @@
   "snowdevicemanagement": {
     "prefix": "snow-device-management",
     "name": "SnowDeviceManagement"
+  },
+  "memorydb": {
+    "name": "MemoryDB"
   }
 }

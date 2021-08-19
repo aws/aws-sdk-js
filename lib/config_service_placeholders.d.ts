@@ -277,6 +277,7 @@ export abstract class ConfigurationServicePlaceholders {
   chimesdkidentity?: AWS.ChimeSDKIdentity.Types.ClientConfiguration;
   chimesdkmessaging?: AWS.ChimeSDKMessaging.Types.ClientConfiguration;
   snowdevicemanagement?: AWS.SnowDeviceManagement.Types.ClientConfiguration;
+  memorydb?: AWS.MemoryDB.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -556,4 +557,5 @@ export interface ConfigurationServiceApiVersions {
   chimesdkidentity?: AWS.ChimeSDKIdentity.Types.apiVersion;
   chimesdkmessaging?: AWS.ChimeSDKMessaging.Types.apiVersion;
   snowdevicemanagement?: AWS.SnowDeviceManagement.Types.apiVersion;
+  memorydb?: AWS.MemoryDB.Types.apiVersion;
 }

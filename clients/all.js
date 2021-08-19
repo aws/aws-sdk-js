@@ -276,5 +276,6 @@ module.exports = {
   Route53RecoveryReadiness: require('./route53recoveryreadiness'),
   ChimeSDKIdentity: require('./chimesdkidentity'),
   ChimeSDKMessaging: require('./chimesdkmessaging'),
-  SnowDeviceManagement: require('./snowdevicemanagement')
+  SnowDeviceManagement: require('./snowdevicemanagement'),
+  MemoryDB: require('./memorydb')
 };

@@ -12,11 +12,11 @@ declare class Appflow extends Service {
   constructor(options?: Appflow.Types.ClientConfiguration)
   config: Config & Appflow.Types.ClientConfiguration;
   /**
-   *  Creates a new connector profile associated with your AWS account. There is a soft quota of 100 connector profiles per AWS account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. 
+   *  Creates a new connector profile associated with your Amazon Web Services account. There is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. 
    */
   createConnectorProfile(params: Appflow.Types.CreateConnectorProfileRequest, callback?: (err: AWSError, data: Appflow.Types.CreateConnectorProfileResponse) => void): Request<Appflow.Types.CreateConnectorProfileResponse, AWSError>;
   /**
-   *  Creates a new connector profile associated with your AWS account. There is a soft quota of 100 connector profiles per AWS account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. 
+   *  Creates a new connector profile associated with your Amazon Web Services account. There is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. 
    */
   createConnectorProfile(callback?: (err: AWSError, data: Appflow.Types.CreateConnectorProfileResponse) => void): Request<Appflow.Types.CreateConnectorProfileResponse, AWSError>;
   /**
@@ -192,13 +192,27 @@ declare namespace Appflow {
   export type ApiKey = string;
   export type ApiSecretKey = string;
   export type ApiToken = string;
+  export type ApplicationHostUrl = string;
   export type ApplicationKey = string;
+  export type ApplicationServicePath = string;
   export type AuthCode = string;
+  export type AuthCodeUrl = string;
+  export interface BasicAuthCredentials {
+    /**
+     *  The username to use to connect to a resource. 
+     */
+    username: Username;
+    /**
+     *  The password to use to connect to a resource.
+     */
+    password: Password;
+  }
   export type Boolean = boolean;
   export type BucketName = string;
   export type BucketPrefix = string;
   export type ClientCredentialsArn = string;
   export type ClientId = string;
+  export type ClientNumber = string;
   export type ClientSecret = string;
   export type ConnectionMode = "Public"|"Private"|string;
   export interface ConnectorConfiguration {
@@ -360,6 +374,7 @@ declare namespace Appflow {
      *  The connector metadata specific to Amazon Honeycode. 
      */
     Honeycode?: HoneycodeMetadata;
+    SAPOData?: SAPODataMetadata;
   }
   export interface ConnectorOAuthRequest {
     /**
@@ -428,6 +443,10 @@ declare namespace Appflow {
      *  The operation to be performed on the provided Zendesk source fields. 
      */
     Zendesk?: ZendeskConnectorOperator;
+    /**
+     *  The operation to be performed on the provided SAPOData source fields. 
+     */
+    SAPOData?: SAPODataConnectorOperator;
   }
   export interface ConnectorProfile {
     /**
@@ -435,7 +454,7 @@ declare namespace Appflow {
      */
     connectorProfileArn?: ConnectorProfileArn;
     /**
-     *  The name of the connector profile. The name is unique for each ConnectorProfile in the AWS account. 
+     *  The name of the connector profile. The name is unique for each ConnectorProfile in the Amazon Web Services account. 
      */
     connectorProfileName?: ConnectorProfileName;
     /**
@@ -462,6 +481,10 @@ declare namespace Appflow {
      *  Specifies when the connector profile was last updated. 
      */
     lastUpdatedAt?: _Date;
+    /**
+     *  Specifies the private connection provisioning state. 
+     */
+    privateConnectionProvisioningState?: PrivateConnectionProvisioningState;
   }
   export type ConnectorProfileArn = string;
   export interface ConnectorProfileConfig {
@@ -539,6 +562,7 @@ declare namespace Appflow {
      *  The connector-specific credentials required when using Zendesk. 
      */
     Zendesk?: ZendeskConnectorProfileCredentials;
+    SAPOData?: SAPODataConnectorProfileCredentials;
   }
   export type ConnectorProfileDetailList = ConnectorProfile[];
   export type ConnectorProfileName = string;
@@ -608,12 +632,13 @@ declare namespace Appflow {
      *  The connector-specific properties required by Zendesk. 
      */
     Zendesk?: ZendeskConnectorProfileProperties;
+    SAPOData?: SAPODataConnectorProfileProperties;
   }
-  export type ConnectorType = "Salesforce"|"Singular"|"Slack"|"Redshift"|"S3"|"Marketo"|"Googleanalytics"|"Zendesk"|"Servicenow"|"Datadog"|"Trendmicro"|"Snowflake"|"Dynatrace"|"Infornexus"|"Amplitude"|"Veeva"|"EventBridge"|"LookoutMetrics"|"Upsolver"|"Honeycode"|"CustomerProfiles"|string;
+  export type ConnectorType = "Salesforce"|"Singular"|"Slack"|"Redshift"|"S3"|"Marketo"|"Googleanalytics"|"Zendesk"|"Servicenow"|"Datadog"|"Trendmicro"|"Snowflake"|"Dynatrace"|"Infornexus"|"Amplitude"|"Veeva"|"EventBridge"|"LookoutMetrics"|"Upsolver"|"Honeycode"|"CustomerProfiles"|"SAPOData"|string;
   export type ConnectorTypeList = ConnectorType[];
   export interface CreateConnectorProfileRequest {
     /**
-     *  The name of the connector profile. The name is unique for each ConnectorProfile in your AWS account. 
+     *  The name of the connector profile. The name is unique for each ConnectorProfile in your Amazon Web Services account. 
      */
     connectorProfileName: ConnectorProfileName;
     /**
@@ -625,7 +650,7 @@ declare namespace Appflow {
      */
     connectorType: ConnectorType;
     /**
-     *  Indicates the connection mode and specifies whether it is public or private. Private flows use AWS PrivateLink to route data over AWS infrastructure without exposing it to the public internet. 
+     *  Indicates the connection mode and specifies whether it is public or private. Private flows use Amazon Web Services PrivateLink to route data over Amazon Web Services infrastructure without exposing it to the public internet. 
      */
     connectionMode: ConnectionMode;
     /**
@@ -759,7 +784,7 @@ declare namespace Appflow {
      */
     connectorType?: ConnectorType;
     /**
-     *  The name of the connector profile. The name is unique for each ConnectorProfile in the AWS account. 
+     *  The name of the connector profile. The name is unique for each ConnectorProfile in the Amazon Web Services account. 
      */
     connectorProfileName?: ConnectorProfileName;
   }
@@ -771,7 +796,7 @@ declare namespace Appflow {
   }
   export interface DescribeConnectorProfilesRequest {
     /**
-     *  The name of the connector profile. The name is unique for each ConnectorProfile in the AWS account. 
+     *  The name of the connector profile. The name is unique for each ConnectorProfile in the Amazon Web Services account. 
      */
     connectorProfileNames?: ConnectorProfileNameList;
     /**
@@ -985,7 +1010,7 @@ declare namespace Appflow {
      */
     connectorType: ConnectorType;
     /**
-     *  The name of the connector profile. This name must be unique for each connector profile in the AWS account. 
+     *  The name of the connector profile. This name must be unique for each connector profile in the Amazon Web Services account. 
      */
     connectorProfileName?: ConnectorProfileName;
     /**
@@ -994,6 +1019,7 @@ declare namespace Appflow {
     destinationConnectorProperties: DestinationConnectorProperties;
   }
   export type DestinationFlowConfigList = DestinationFlowConfig[];
+  export type DocumentType = string;
   export type DomainName = string;
   export type DynatraceConnectorOperator = "PROJECTION"|"BETWEEN"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface DynatraceConnectorProfileCredentials {
@@ -1304,7 +1330,7 @@ declare namespace Appflow {
   export type Label = string;
   export interface ListConnectorEntitiesRequest {
     /**
-     *  The name of the connector profile. The name is unique for each ConnectorProfile in the AWS account, and is used to query the downstream connector. 
+     *  The name of the connector profile. The name is unique for each ConnectorProfile in the Amazon Web Services account, and is used to query the downstream connector. 
      */
     connectorProfileName?: ConnectorProfileName;
     /**
@@ -1354,6 +1380,7 @@ declare namespace Appflow {
      */
     tags?: TagMap;
   }
+  export type LogonLanguage = string;
   export type Long = number;
   export interface LookoutMetricsDestinationProperties {
   }
@@ -1394,6 +1421,42 @@ declare namespace Appflow {
   export type MostRecentExecutionMessage = string;
   export type Name = string;
   export type NextToken = string;
+  export interface OAuthCredentials {
+    /**
+     *  The identifier for the desired client. 
+     */
+    clientId: ClientId;
+    /**
+     *  The client secret used by the OAuth client to authenticate to the authorization server. 
+     */
+    clientSecret: ClientSecret;
+    /**
+     *  The access token used to access protected SAPOData resources. 
+     */
+    accessToken?: AccessToken;
+    /**
+     *  The refresh token used to refresh expired access token. 
+     */
+    refreshToken?: RefreshToken;
+    /**
+     *  The OAuth requirement needed to request security tokens from the connector endpoint. 
+     */
+    oAuthRequest?: ConnectorOAuthRequest;
+  }
+  export interface OAuthProperties {
+    /**
+     *  The token url required to fetch access/refresh tokens using authorization code and also to refresh expired access token using refresh token.
+     */
+    tokenUrl: TokenUrl;
+    /**
+     *  The authorization code url required to redirect to SAP Login Page to fetch authorization code for OAuth type authentication. 
+     */
+    authCodeUrl: AuthCodeUrl;
+    /**
+     *  The OAuth scopes required for OAuth type authentication. 
+     */
+    oAuthScopes: OAuthScopeList;
+  }
   export type OAuthScope = string;
   export type OAuthScopeList = OAuthScope[];
   export type Object = string;
@@ -1401,6 +1464,7 @@ declare namespace Appflow {
   export type Operator = "PROJECTION"|"LESS_THAN"|"GREATER_THAN"|"CONTAINS"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export type OperatorPropertiesKeys = "VALUE"|"VALUES"|"DATA_TYPE"|"UPPER_BOUND"|"LOWER_BOUND"|"SOURCE_DATA_TYPE"|"DESTINATION_DATA_TYPE"|"VALIDATION_ACTION"|"MASK_VALUE"|"MASK_LENGTH"|"TRUNCATE_LENGTH"|"MATH_OPERATION_FIELDS_ORDER"|"CONCAT_FORMAT"|"SUBFIELD_CATEGORY_MAP"|"EXCLUDE_SOURCE_FIELDS_LIST"|string;
   export type Password = string;
+  export type PortNumber = number;
   export interface PrefixConfig {
     /**
      *  Determines the format of the prefix, and whether it applies to the file name, file path, or both. 
@@ -1413,6 +1477,23 @@ declare namespace Appflow {
   }
   export type PrefixFormat = "YEAR"|"MONTH"|"DAY"|"HOUR"|"MINUTE"|string;
   export type PrefixType = "FILENAME"|"PATH"|"PATH_AND_FILENAME"|string;
+  export type PrivateConnectionProvisioningFailureCause = "CONNECTOR_AUTHENTICATION"|"CONNECTOR_SERVER"|"INTERNAL_SERVER"|"ACCESS_DENIED"|"VALIDATION"|string;
+  export type PrivateConnectionProvisioningFailureMessage = string;
+  export interface PrivateConnectionProvisioningState {
+    /**
+     *  Specifies the private connection provisioning status. 
+     */
+    status?: PrivateConnectionProvisioningStatus;
+    /**
+     *  Specifies the private connection provisioning failure reason. 
+     */
+    failureMessage?: PrivateConnectionProvisioningFailureMessage;
+    /**
+     *  Specifies the private connection provisioning failure cause. 
+     */
+    failureCause?: PrivateConnectionProvisioningFailureCause;
+  }
+  export type PrivateConnectionProvisioningStatus = "FAILED"|"PENDING"|"CREATED"|string;
   export type PrivateLinkServiceName = string;
   export type Property = string;
   export type RedirectUri = string;
@@ -1502,6 +1583,55 @@ declare namespace Appflow {
      *  The object key for the Amazon S3 bucket in which the source files are stored. 
      */
     bucketPrefix?: BucketPrefix;
+  }
+  export type SAPODataConnectorOperator = "PROJECTION"|"LESS_THAN"|"CONTAINS"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
+  export interface SAPODataConnectorProfileCredentials {
+    /**
+     *  The SAPOData basic authentication credentials. 
+     */
+    basicAuthCredentials?: BasicAuthCredentials;
+    /**
+     *  The SAPOData OAuth type authentication credentials. 
+     */
+    oAuthCredentials?: OAuthCredentials;
+  }
+  export interface SAPODataConnectorProfileProperties {
+    /**
+     *  The location of the SAPOData resource. 
+     */
+    applicationHostUrl: ApplicationHostUrl;
+    /**
+     *  The application path to catalog service. 
+     */
+    applicationServicePath: ApplicationServicePath;
+    /**
+     *  The port number of the SAPOData instance. 
+     */
+    portNumber: PortNumber;
+    /**
+     *  The client number for the client creating the connection. 
+     */
+    clientNumber: ClientNumber;
+    /**
+     *  The logon language of SAPOData instance. 
+     */
+    logonLanguage?: LogonLanguage;
+    /**
+     *  The SAPOData Private Link service name to be used for private data transfers. 
+     */
+    privateLinkServiceName?: PrivateLinkServiceName;
+    /**
+     *  The SAPOData OAuth properties required for OAuth type authentication. 
+     */
+    oAuthProperties?: OAuthProperties;
+  }
+  export interface SAPODataMetadata {
+  }
+  export interface SAPODataSourceProperties {
+    /**
+     *  The object path specified in the SAPOData flow source. 
+     */
+    objectPath?: Object;
   }
   export type SalesforceConnectorOperator = "PROJECTION"|"LESS_THAN"|"CONTAINS"|"GREATER_THAN"|"BETWEEN"|"LESS_THAN_OR_EQUAL_TO"|"GREATER_THAN_OR_EQUAL_TO"|"EQUAL_TO"|"NOT_EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface SalesforceConnectorProfileCredentials {
@@ -1720,7 +1850,7 @@ declare namespace Appflow {
      */
     accountName?: AccountName;
     /**
-     *  The AWS Region of the Snowflake account. 
+     *  The Amazon Web Services Region of the Snowflake account. 
      */
     region?: Region;
   }
@@ -1744,7 +1874,7 @@ declare namespace Appflow {
   }
   export interface SnowflakeMetadata {
     /**
-     *  Specifies the supported AWS Regions when using Snowflake. 
+     *  Specifies the supported Amazon Web Services Regions when using Snowflake. 
      */
     supportedRegions?: RegionList;
   }
@@ -1805,6 +1935,7 @@ declare namespace Appflow {
      *  Specifies the information that is required for querying Zendesk. 
      */
     Zendesk?: ZendeskSourceProperties;
+    SAPOData?: SAPODataSourceProperties;
   }
   export interface SourceFieldProperties {
     /**
@@ -1823,7 +1954,7 @@ declare namespace Appflow {
      */
     connectorType: ConnectorType;
     /**
-     *  The name of the connector profile. This name must be unique for each connector profile in the AWS account. 
+     *  The name of the connector profile. This name must be unique for each connector profile in the Amazon Web Services account. 
      */
     connectorProfileName?: ConnectorProfileName;
     /**
@@ -1923,6 +2054,7 @@ declare namespace Appflow {
   export type TaskType = "Arithmetic"|"Filter"|"Map"|"Map_all"|"Mask"|"Merge"|"Truncate"|"Validate"|string;
   export type Tasks = Task[];
   export type Timezone = string;
+  export type TokenUrl = string;
   export type TrendmicroConnectorOperator = "PROJECTION"|"EQUAL_TO"|"ADDITION"|"MULTIPLICATION"|"DIVISION"|"SUBTRACTION"|"MASK_ALL"|"MASK_FIRST_N"|"MASK_LAST_N"|"VALIDATE_NON_NULL"|"VALIDATE_NON_ZERO"|"VALIDATE_NON_NEGATIVE"|"VALIDATE_NUMERIC"|"NO_OP"|string;
   export interface TrendmicroConnectorProfileCredentials {
     /**
@@ -1972,7 +2104,7 @@ declare namespace Appflow {
   }
   export interface UpdateConnectorProfileRequest {
     /**
-     *  The name of the connector profile and is unique for each ConnectorProfile in the AWS Account. 
+     *  The name of the connector profile and is unique for each ConnectorProfile in the Amazon Web Services account. 
      */
     connectorProfileName: ConnectorProfileName;
     /**
@@ -2003,7 +2135,7 @@ declare namespace Appflow {
      *  The trigger settings that determine how and when the flow runs. 
      */
     triggerConfig: TriggerConfig;
-    sourceFlowConfig?: SourceFlowConfig;
+    sourceFlowConfig: SourceFlowConfig;
     /**
      *  The configuration that controls how Amazon AppFlow transfers data to the destination connector. 
      */
@@ -2071,6 +2203,22 @@ declare namespace Appflow {
      *  The object specified in the Veeva flow source. 
      */
     object: Object;
+    /**
+     * The document type specified in the Veeva document extract flow.
+     */
+    documentType?: DocumentType;
+    /**
+     * Boolean value to include source files in Veeva document extract flow.
+     */
+    includeSourceFiles?: Boolean;
+    /**
+     * Boolean value to include file renditions in Veeva document extract flow.
+     */
+    includeRenditions?: Boolean;
+    /**
+     * Boolean value to include All Versions of files in Veeva document extract flow.
+     */
+    includeAllVersions?: Boolean;
   }
   export type Warehouse = string;
   export type WriteOperationType = "INSERT"|"UPSERT"|"UPDATE"|string;

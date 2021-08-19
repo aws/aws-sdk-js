@@ -2877,11 +2877,11 @@ declare class EC2 extends Service {
    */
   importImage(callback?: (err: AWSError, data: EC2.Types.ImportImageResult) => void): Request<EC2.Types.ImportImageResult, AWSError>;
   /**
-   * Creates an import instance task using metadata from the specified disk image. This API action supports only single-volume VMs. To import multi-volume VMs, use ImportImage instead. This API action is not supported by the AWS Command Line Interface (AWS CLI). For information about using the Amazon EC2 CLI, which is deprecated, see Importing a VM to Amazon EC2 in the Amazon EC2 CLI Reference PDF file. For information about the import manifest referenced by this API action, see VM Import Manifest.
+   * Creates an import instance task using metadata from the specified disk image. This API action supports only single-volume VMs. To import multi-volume VMs, use ImportImage instead. This API action is not supported by the Command Line Interface (CLI). For information about using the Amazon EC2 CLI, which is deprecated, see Importing a VM to Amazon EC2 in the Amazon EC2 CLI Reference PDF file. For information about the import manifest referenced by this API action, see VM Import Manifest.
    */
   importInstance(params: EC2.Types.ImportInstanceRequest, callback?: (err: AWSError, data: EC2.Types.ImportInstanceResult) => void): Request<EC2.Types.ImportInstanceResult, AWSError>;
   /**
-   * Creates an import instance task using metadata from the specified disk image. This API action supports only single-volume VMs. To import multi-volume VMs, use ImportImage instead. This API action is not supported by the AWS Command Line Interface (AWS CLI). For information about using the Amazon EC2 CLI, which is deprecated, see Importing a VM to Amazon EC2 in the Amazon EC2 CLI Reference PDF file. For information about the import manifest referenced by this API action, see VM Import Manifest.
+   * Creates an import instance task using metadata from the specified disk image. This API action supports only single-volume VMs. To import multi-volume VMs, use ImportImage instead. This API action is not supported by the Command Line Interface (CLI). For information about using the Amazon EC2 CLI, which is deprecated, see Importing a VM to Amazon EC2 in the Amazon EC2 CLI Reference PDF file. For information about the import manifest referenced by this API action, see VM Import Manifest.
    */
   importInstance(callback?: (err: AWSError, data: EC2.Types.ImportInstanceResult) => void): Request<EC2.Types.ImportInstanceResult, AWSError>;
   /**
@@ -2901,11 +2901,11 @@ declare class EC2 extends Service {
    */
   importSnapshot(callback?: (err: AWSError, data: EC2.Types.ImportSnapshotResult) => void): Request<EC2.Types.ImportSnapshotResult, AWSError>;
   /**
-   * Creates an import volume task using metadata from the specified disk image. This API action supports only single-volume VMs. To import multi-volume VMs, use ImportImage instead. To import a disk to a snapshot, use ImportSnapshot instead. This API action is not supported by the AWS Command Line Interface (AWS CLI). For information about using the Amazon EC2 CLI, which is deprecated, see Importing Disks to Amazon EBS in the Amazon EC2 CLI Reference PDF file. For information about the import manifest referenced by this API action, see VM Import Manifest.
+   * Creates an import volume task using metadata from the specified disk image. This API action supports only single-volume VMs. To import multi-volume VMs, use ImportImage instead. To import a disk to a snapshot, use ImportSnapshot instead. This API action is not supported by the Command Line Interface (CLI). For information about using the Amazon EC2 CLI, which is deprecated, see Importing Disks to Amazon EBS in the Amazon EC2 CLI Reference PDF file. For information about the import manifest referenced by this API action, see VM Import Manifest.
    */
   importVolume(params: EC2.Types.ImportVolumeRequest, callback?: (err: AWSError, data: EC2.Types.ImportVolumeResult) => void): Request<EC2.Types.ImportVolumeResult, AWSError>;
   /**
-   * Creates an import volume task using metadata from the specified disk image. This API action supports only single-volume VMs. To import multi-volume VMs, use ImportImage instead. To import a disk to a snapshot, use ImportSnapshot instead. This API action is not supported by the AWS Command Line Interface (AWS CLI). For information about using the Amazon EC2 CLI, which is deprecated, see Importing Disks to Amazon EBS in the Amazon EC2 CLI Reference PDF file. For information about the import manifest referenced by this API action, see VM Import Manifest.
+   * Creates an import volume task using metadata from the specified disk image. This API action supports only single-volume VMs. To import multi-volume VMs, use ImportImage instead. To import a disk to a snapshot, use ImportSnapshot instead. This API action is not supported by the Command Line Interface (CLI). For information about using the Amazon EC2 CLI, which is deprecated, see Importing Disks to Amazon EBS in the Amazon EC2 CLI Reference PDF file. For information about the import manifest referenced by this API action, see VM Import Manifest.
    */
   importVolume(callback?: (err: AWSError, data: EC2.Types.ImportVolumeResult) => void): Request<EC2.Types.ImportVolumeResult, AWSError>;
   /**
@@ -15271,7 +15271,7 @@ declare namespace EC2 {
      */
     ImageId: ImageId;
     /**
-     * Information about the destination Amazon S3 bucket. The bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
+     * Information about the destination Amazon S3 bucket. The bucket must exist and grant WRITE and READ_ACP permissions to the Amazon Web Services account vm-import-export@amazon.com.
      */
     S3ExportLocation: ExportTaskS3LocationRequest;
     /**
@@ -15426,7 +15426,7 @@ declare namespace EC2 {
      */
     DiskImageFormat?: DiskImageFormat;
     /**
-     * The Amazon S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
+     * The Amazon S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the Amazon Web Services account vm-import-export@amazon.com.
      */
     S3Bucket?: String;
     /**
@@ -15444,7 +15444,7 @@ declare namespace EC2 {
      */
     DiskImageFormat?: DiskImageFormat;
     /**
-     * The Amazon S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the AWS account vm-import-export@amazon.com.
+     * The Amazon S3 bucket for the destination image. The destination bucket must exist and grant WRITE and READ_ACP permissions to the Amazon Web Services account vm-import-export@amazon.com.
      */
     S3Bucket?: String;
     /**
@@ -17251,7 +17251,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Specifies whether the destination AMI of the imported image should be encrypted. The default CMK for EBS is used unless you specify a non-default AWS Key Management Service (AWS KMS) CMK using KmsKeyId. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
+     * Specifies whether the destination AMI of the imported image should be encrypted. The default KMS key for EBS is used unless you specify a non-default KMS key using KmsKeyId. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
      */
     Encrypted?: Boolean;
     /**
@@ -17259,11 +17259,11 @@ declare namespace EC2 {
      */
     Hypervisor?: String;
     /**
-     * An identifier for the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted AMI. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the AMI is being copied to. Amazon EBS does not support asymmetric CMKs.
+     * An identifier for the symmetric KMS key to use when creating the encrypted AMI. This parameter is only required if you want to use a non-default KMS key; if this parameter is not specified, the default KMS key for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The KMS key identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the key, the Amazon Web Services account ID of the key owner, the alias namespace, and then the key alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the key, the Amazon Web Services account ID of the key owner, the key namespace, and then the key ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the key, the Amazon Web Services account ID of the key owner, the alias namespace, and then the key alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    Amazon Web Services parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified KMS key must exist in the Region that the AMI is being copied to. Amazon EBS does not support asymmetric KMS keys.
      */
     KmsKeyId?: KmsKeyId;
     /**
-     * The license type to be used for the Amazon Machine Image (AMI) after importing. By default, we detect the source-system operating system (OS) and apply the appropriate license. Specify AWS to replace the source-system license with an AWS license, if appropriate. Specify BYOL to retain the source-system license, if appropriate. To use BYOL, you must have existing licenses with rights to use these licenses in a third party cloud, such as AWS. For more information, see Prerequisites in the VM Import/Export User Guide.
+     * The license type to be used for the Amazon Machine Image (AMI) after importing. By default, we detect the source-system operating system (OS) and apply the appropriate license. Specify AWS to replace the source-system license with an Amazon Web Services license, if appropriate. Specify BYOL to retain the source-system license, if appropriate. To use BYOL, you must have existing licenses with rights to use these licenses in a third party cloud, such as Amazon Web Services. For more information, see Prerequisites in the VM Import/Export User Guide.
      */
     LicenseType?: String;
     /**
@@ -17282,6 +17282,10 @@ declare namespace EC2 {
      * The tags to apply to the import image task during creation.
      */
     TagSpecifications?: TagSpecificationList;
+    /**
+     * The usage operation value. For more information, see AMI billing information fields in the Amazon Elastic Compute Cloud User Guide.
+     */
+    UsageOperation?: String;
   }
   export interface ImportImageResult {
     /**
@@ -17309,7 +17313,7 @@ declare namespace EC2 {
      */
     ImportTaskId?: ImportImageTaskId;
     /**
-     * The identifier for the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to create the encrypted AMI.
+     * The identifier for the symmetric KMS key that was used to create the encrypted AMI.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -17344,6 +17348,10 @@ declare namespace EC2 {
      * Any tags assigned to the import image task.
      */
     Tags?: TagList;
+    /**
+     * The usage operation value.
+     */
+    UsageOperation?: String;
   }
   export interface ImportImageTask {
     /**
@@ -17371,7 +17379,7 @@ declare namespace EC2 {
      */
     ImportTaskId?: String;
     /**
-     * The identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to create the encrypted image.
+     * The identifier for the KMS key that was used to create the encrypted image.
      */
     KmsKeyId?: String;
     /**
@@ -17406,6 +17414,10 @@ declare namespace EC2 {
      * The ARNs of the license configurations that are associated with the import image task.
      */
     LicenseSpecifications?: ImportImageLicenseSpecificationListResponse;
+    /**
+     * The usage operation value.
+     */
+    UsageOperation?: String;
   }
   export type ImportImageTaskId = string;
   export type ImportImageTaskList = ImportImageTask[];
@@ -17590,11 +17602,11 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Specifies whether the destination snapshot of the imported image should be encrypted. The default CMK for EBS is used unless you specify a non-default AWS Key Management Service (AWS KMS) CMK using KmsKeyId. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
+     * Specifies whether the destination snapshot of the imported image should be encrypted. The default KMS key for EBS is used unless you specify a non-default KMS key using KmsKeyId. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
      */
     Encrypted?: Boolean;
     /**
-     * An identifier for the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the encrypted snapshot. This parameter is only required if you want to use a non-default CMK; if this parameter is not specified, the default CMK for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The CMK identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the key namespace, and then the CMK ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the alias namespace, and then the CMK alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    AWS parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified CMK must exist in the Region that the snapshot is being copied to. Amazon EBS does not support asymmetric CMKs.
+     * An identifier for the symmetric KMS key to use when creating the encrypted snapshot. This parameter is only required if you want to use a non-default KMS key; if this parameter is not specified, the default KMS key for EBS is used. If a KmsKeyId is specified, the Encrypted flag must also be set.  The KMS key identifier may be provided in any of the following formats:    Key ID   Key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the key, the Amazon Web Services account ID of the key owner, the alias namespace, and then the key alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   ARN using key ID. The ID ARN contains the arn:aws:kms namespace, followed by the Region of the key, the Amazon Web Services account ID of the key owner, the key namespace, and then the key ID. For example, arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef.   ARN using key alias. The alias ARN contains the arn:aws:kms namespace, followed by the Region of the key, the Amazon Web Services account ID of the key owner, the alias namespace, and then the key alias. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.    Amazon Web Services parses KmsKeyId asynchronously, meaning that the action you call may appear to complete even though you provided an invalid identifier. This action will eventually report failure.  The specified KMS key must exist in the Region that the snapshot is being copied to. Amazon EBS does not support asymmetric KMS keys.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -26024,7 +26036,7 @@ declare namespace EC2 {
      */
     Format?: String;
     /**
-     * The identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to create the encrypted snapshot.
+     * The identifier for the KMS key that was used to create the encrypted snapshot.
      */
     KmsKeyId?: String;
     /**
@@ -28404,7 +28416,7 @@ declare namespace EC2 {
   }
   export interface UserData {
     /**
-     * The user data. If you are using an AWS SDK or command line tool, Base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide Base64-encoded text.
+     * The user data. If you are using an Amazon Web Services SDK or command line tool, Base64-encoding is performed for you, and you can load the text from a file. Otherwise, you must provide Base64-encoded text.
      */
     Data?: String;
   }
