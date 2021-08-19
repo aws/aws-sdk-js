@@ -265,8 +265,8 @@ if (AWS.util.isNode()) {
       it('should load credentials when host is not passed', function(done) {
         tokenToReturn = 'TOKEN';
         service = new AWS.MetadataService();
-        // Simulate host is received from call to getMetadataServiceEndpoint
-        service.host = '127.0.0.1:' + port;
+        // Simulate endpoint is received from call to getMetadataServiceEndpoint
+        service.endpoint = 'http://127.0.0.1:' + port;
         service.loadCredentials(function(err, data) {
           expect(err).to.equal(null);
           expect(data.Code).to.equal('Success');
