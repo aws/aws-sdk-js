@@ -1141,7 +1141,7 @@
       };
       describe('constructor', function() {
         it('allows passing of AWS.MetadataService options', function() {
-          return expect(creds.metadataService.host).to.equal('host');
+          return expect(creds.metadataService.endpoint).to.equal('http://host');
         });
         it('does not modify options object', function() {
           var opts;
