@@ -424,7 +424,7 @@
       "members":{
         "downloadUrl":{
           "shape":"DownloadUrl",
-          "documentation":"<p> URL which can be used to download the exported project configuation file(s). </p>"
+          "documentation":"<p> URL which can be used to download the exported project configuration file(s). </p>"
         },
         "shareUrl":{
           "shape":"ShareUrl",

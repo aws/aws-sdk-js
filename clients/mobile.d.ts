@@ -199,7 +199,7 @@ declare namespace Mobile {
   }
   export interface ExportProjectResult {
     /**
-     *  URL which can be used to download the exported project configuation file(s). 
+     *  URL which can be used to download the exported project configuration file(s). 
      */
     downloadUrl?: DownloadUrl;
     /**
