@@ -2296,7 +2296,7 @@
         },
         "failureBehavior": {
           "shape": "FailureBehavior",
-          "documentation": "<p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>"
+          "documentation": "<p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Leaves the instance running for its maximum timeout duration after a <code>4XX</code> error code.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>"
         },
         "robotApplications": {
           "shape": "RobotApplicationConfigs",
@@ -4890,7 +4890,7 @@
         },
         "failureBehavior": {
           "shape": "FailureBehavior",
-          "documentation": "<p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>"
+          "documentation": "<p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Leaves the host running for its maximum timeout duration after a <code>4XX</code> error code.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>"
         },
         "failureCode": {
           "shape": "SimulationJobErrorCode",
@@ -5073,7 +5073,7 @@
         },
         "failureBehavior": {
           "shape": "FailureBehavior",
-          "documentation": "<p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>"
+          "documentation": "<p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Leaves the host running for its maximum timeout duration after a <code>4XX</code> error code.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>"
         },
         "useDefaultApplications": {
           "shape": "BoxedBoolean",

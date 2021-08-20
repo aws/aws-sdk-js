@@ -1108,7 +1108,8 @@
         "InsufficientNumberOfReplicas",
         "ConfigurationConflict",
         "AdmissionRequestDenied",
-        "UnsupportedAddonModification"
+        "UnsupportedAddonModification",
+        "K8sResourceNotFound"
       ]
     },
     "AddonIssueList": {
@@ -1657,6 +1658,12 @@
           "documentation": "<p>The name of the add-on. The name must match one of the names returned by <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html\"> <code>ListAddons</code> </a>.</p>",
           "location": "uri",
           "locationName": "addonName"
+        },
+        "preserve": {
+          "shape": "Boolean",
+          "documentation": "<p>Specifying this option preserves the add-on software on your cluster but Amazon EKS stops managing any settings for the add-on. If an IAM account is associated with the add-on, it is not removed.</p>",
+          "location": "querystring",
+          "locationName": "preserve"
         }
       }
     },
@@ -2052,7 +2059,8 @@
         "InsufficientNumberOfReplicas",
         "ConfigurationConflict",
         "AdmissionRequestDenied",
-        "UnsupportedAddonModification"
+        "UnsupportedAddonModification",
+        "K8sResourceNotFound"
       ]
     },
     "ErrorDetail": {

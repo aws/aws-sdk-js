@@ -1190,6 +1190,10 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
+     * The Amazon Resource Name (ARN) of the document classification job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:document-classification-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
      * The name that you assigned to the document classification job.
      */
     JobName?: JobName;
@@ -1393,6 +1397,10 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
+     * The Amazon Resource Name (ARN) of the dominant language detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:dominant-language-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:dominant-language-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
      * The name that you assigned to the dominant language detection job.
      */
     JobName?: JobName;
@@ -1516,6 +1524,10 @@ declare namespace Comprehend {
      * The identifier assigned to the entities detection job.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the entities detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:entities-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:entities-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The name that you assigned the entities detection job.
      */
@@ -1814,6 +1826,10 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
+     * The Amazon Resource Name (ARN) of the events detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:events-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
      * The name you assigned the events detection job.
      */
     JobName?: JobName;
@@ -1914,6 +1930,10 @@ declare namespace Comprehend {
      * The identifier assigned to the key phrases detection job.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the key phrases detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:key-phrases-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The name that you assigned the key phrases detection job.
      */
@@ -2306,6 +2326,10 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
+     * The Amazon Resource Name (ARN) of the PII entities detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:pii-entities-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
      * The name that you assigned the PII entities detection job.
      */
     JobName?: JobName;
@@ -2423,6 +2447,10 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
+     * The Amazon Resource Name (ARN) of the sentiment detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:sentiment-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
      * The name that you assigned to the sentiment detection job
      */
     JobName?: JobName;
@@ -2520,12 +2548,20 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your document classification job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the document classification job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartDocumentClassificationJobResponse {
     /**
      * The identifier generated for the job. To get the status of the job, use this identifier with the operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the document classification job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:document-classification-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job:   SUBMITTED - The job has been received and queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. For details, use the operation.   STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.   STOPPED - The job was successfully stopped without completing.  
      */
@@ -2560,12 +2596,20 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your dominant language detection job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the dominant language detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartDominantLanguageDetectionJobResponse {
     /**
      * The identifier generated for the job. To get the status of a job, use this identifier with the operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the dominant language detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:dominant-language-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:dominant-language-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
      */
@@ -2608,12 +2652,20 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your entity detection job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartEntitiesDetectionJobResponse {
     /**
      * The identifier generated for the job. To get the status of job, use this identifier with the operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the entities detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:entities-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:entities-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.   STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.   STOPPED - The job was successfully stopped without completing.  
      */
@@ -2648,12 +2700,20 @@ declare namespace Comprehend {
      * The types of events to detect in the input documents.
      */
     TargetEventTypes: TargetEventTypes;
+    /**
+     * Tags to be associated with the events detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartEventsDetectionJobResponse {
     /**
      * An unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the events detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:events-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the events detection job.
      */
@@ -2692,12 +2752,20 @@ declare namespace Comprehend {
      *  Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your key phrases detection job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the key phrases detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartKeyPhrasesDetectionJobResponse {
     /**
      * The identifier generated for the job. To get the status of a job, use this identifier with the operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the key phrase detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:key-phrases-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
      */
@@ -2736,12 +2804,20 @@ declare namespace Comprehend {
      * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
      */
     ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * Tags to be associated with the PII entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartPiiEntitiesDetectionJobResponse {
     /**
      * The identifier generated for the job.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the PII entity detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:pii-entities-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job.
      */
@@ -2780,12 +2856,20 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your sentiment detection job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the sentiment detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartSentimentDetectionJobResponse {
     /**
      * The identifier generated for the job. To get the status of a job, use this identifier with the operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the sentiment detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:sentiment-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
      */
@@ -2824,12 +2908,20 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your topic detection job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the topics detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartTopicsDetectionJobResponse {
     /**
      * The identifier generated for the job. To get the status of the job, use this identifier with the DescribeTopicDetectionJob operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the topics detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:topics-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job:    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the DescribeTopicDetectionJob operation.  
      */
@@ -3024,6 +3116,10 @@ declare namespace Comprehend {
      * The identifier assigned to the topic detection job.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the topics detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:topics-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:topics-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The name of the topic detection job.
      */

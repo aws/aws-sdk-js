@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.972.0-->
+<!--LATEST=2.973.0-->
 <!--ENTRYINSERT-->
+
+## 2.973.0
+* feature: Comprehend: Add tagging support for Comprehend async inference job.
+* feature: EC2: encryptionInTransitSupported added to DescribeInstanceTypes API
+* feature: EKS: Adds support for EKS add-ons "preserve" flag, which allows customers to maintain software on their EKS clusters after removing it from EKS add-ons management.
+* feature: IMDS: Support IPv6 endpoints in IMDS
 
 ## 2.972.0
 * feature: Appflow: This release adds support for SAPOData connector and extends Veeva connector for document extraction.
