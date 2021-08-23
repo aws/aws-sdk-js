@@ -269,11 +269,11 @@ declare class DMS extends Service {
    */
   describeReplicationSubnetGroups(callback?: (err: AWSError, data: DMS.Types.DescribeReplicationSubnetGroupsResponse) => void): Request<DMS.Types.DescribeReplicationSubnetGroupsResponse, AWSError>;
   /**
-   * Returns the task assessment results from the Amazon S3 bucket that DMS creates in your account. This action always returns the latest results. For more information about DMS task assessments, see Creating a task assessment report in the  Database Migration Service User Guide.
+   * Returns the task assessment results from the Amazon S3 bucket that DMS creates in your Amazon Web Services account. This action always returns the latest results. For more information about DMS task assessments, see Creating a task assessment report in the  Database Migration Service User Guide.
    */
   describeReplicationTaskAssessmentResults(params: DMS.Types.DescribeReplicationTaskAssessmentResultsMessage, callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTaskAssessmentResultsResponse) => void): Request<DMS.Types.DescribeReplicationTaskAssessmentResultsResponse, AWSError>;
   /**
-   * Returns the task assessment results from the Amazon S3 bucket that DMS creates in your account. This action always returns the latest results. For more information about DMS task assessments, see Creating a task assessment report in the  Database Migration Service User Guide.
+   * Returns the task assessment results from the Amazon S3 bucket that DMS creates in your Amazon Web Services account. This action always returns the latest results. For more information about DMS task assessments, see Creating a task assessment report in the  Database Migration Service User Guide.
    */
   describeReplicationTaskAssessmentResults(callback?: (err: AWSError, data: DMS.Types.DescribeReplicationTaskAssessmentResultsResponse) => void): Request<DMS.Types.DescribeReplicationTaskAssessmentResultsResponse, AWSError>;
   /**
@@ -520,7 +520,7 @@ declare class DMS extends Service {
 declare namespace DMS {
   export interface AccountQuota {
     /**
-     * The name of the DMS quota for this account.
+     * The name of the DMS quota for this Amazon Web Services account.
      */
     AccountQuotaName?: String;
     /**
@@ -565,6 +565,7 @@ declare namespace DMS {
      */
     ResourcePendingMaintenanceActions?: ResourcePendingMaintenanceActions;
   }
+  export type ArnList = String[];
   export type AuthMechanismValue = "default"|"mongodb_cr"|"scram_sha_1"|string;
   export type AuthTypeValue = "no"|"password"|string;
   export interface AvailabilityZone {
@@ -588,6 +589,7 @@ declare namespace DMS {
      */
     ReplicationTaskAssessmentRun?: ReplicationTaskAssessmentRun;
   }
+  export type CannedAclForObjectsValue = "none"|"private"|"public-read"|"public-read-write"|"authenticated-read"|"aws-exec-read"|"bucket-owner-read"|"bucket-owner-full-control"|string;
   export interface Certificate {
     /**
      * A customer-assigned name for the certificate. Identifiers must begin with a letter and must contain only ASCII letters, digits, and hyphens. They can't end with a hyphen or contain two consecutive hyphens.
@@ -699,7 +701,7 @@ declare namespace DMS {
      */
     ExtraConnectionAttributes?: String;
     /**
-     * An KMS key identifier that is used to encrypt the connection parameters for the endpoint. If you don't specify a value for the KmsKeyId parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your account. Your account has a different default encryption key for each Region.
+     * An KMS key identifier that is used to encrypt the connection parameters for the endpoint. If you don't specify a value for the KmsKeyId parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.
      */
     KmsKeyId?: String;
     /**
@@ -784,6 +786,10 @@ declare namespace DMS {
      */
     ResourceIdentifier?: String;
     DocDbSettings?: DocDbSettings;
+    /**
+     * Settings in JSON format for the target Redis endpoint.
+     */
+    RedisSettings?: RedisSettings;
   }
   export interface CreateEndpointResponse {
     /**
@@ -845,7 +851,7 @@ declare namespace DMS {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     * The Availability Zone where the replication instance will be created. The default value is a random, system-chosen Availability Zone in the endpoint's Region, for example: us-east-1d 
+     * The Availability Zone where the replication instance will be created. The default value is a random, system-chosen Availability Zone in the endpoint's Amazon Web Services Region, for example: us-east-1d 
      */
     AvailabilityZone?: String;
     /**
@@ -853,7 +859,7 @@ declare namespace DMS {
      */
     ReplicationSubnetGroupIdentifier?: String;
     /**
-     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).  Format: ddd:hh24:mi-ddd:hh24:mi  Default: A 30-minute window selected at random from an 8-hour block of time per Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
+     * The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).  Format: ddd:hh24:mi-ddd:hh24:mi  Default: A 30-minute window selected at random from an 8-hour block of time per Amazon Web Services Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
      */
     PreferredMaintenanceWindow?: String;
     /**
@@ -873,7 +879,7 @@ declare namespace DMS {
      */
     Tags?: TagList;
     /**
-     * An KMS key identifier that is used to encrypt the data on the replication instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your account. Your account has a different default encryption key for each Region.
+     * An KMS key identifier that is used to encrypt the data on the replication instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.
      */
     KmsKeyId?: String;
     /**
@@ -1086,7 +1092,7 @@ declare namespace DMS {
      */
     AccountQuotas?: AccountQuotaList;
     /**
-     * A unique DMS identifier for an account in a particular Region. The value of this identifier has the following format: c99999999999. DMS uses this identifier to name artifacts. For example, DMS uses this identifier to name the default Amazon S3 bucket for storing task assessment reports in a given Region. The format of this S3 bucket name is the following: dms-AccountNumber-UniqueAccountIdentifier. Here is an example name for this default S3 bucket: dms-111122223333-c44445555666.  DMS supports the UniqueAccountIdentifier parameter in versions 3.1.4 and later. 
+     * A unique DMS identifier for an account in a particular Amazon Web Services Region. The value of this identifier has the following format: c99999999999. DMS uses this identifier to name artifacts. For example, DMS uses this identifier to name the default Amazon S3 bucket for storing task assessment reports in a given Amazon Web Services Region. The format of this S3 bucket name is the following: dms-AccountNumber-UniqueAccountIdentifier. Here is an example name for this default S3 bucket: dms-111122223333-c44445555666.  DMS supports the UniqueAccountIdentifier parameter in versions 3.1.4 and later. 
      */
     UniqueAccountIdentifier?: String;
   }
@@ -1683,7 +1689,7 @@ declare namespace DMS {
      */
     DocsToInvestigate?: IntegerOptional;
     /**
-     * The KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your account. Your account has a different default encryption key for each Region.
+     * The KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.
      */
     KmsKeyId?: String;
     /**
@@ -1763,7 +1769,7 @@ declare namespace DMS {
      */
     Status?: String;
     /**
-     * An KMS key identifier that is used to encrypt the connection parameters for the endpoint. If you don't specify a value for the KmsKeyId parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your account. Your account has a different default encryption key for each Region.
+     * An KMS key identifier that is used to encrypt the connection parameters for the endpoint. If you don't specify a value for the KmsKeyId parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.
      */
     KmsKeyId?: String;
     /**
@@ -1851,6 +1857,10 @@ declare namespace DMS {
      */
     IBMDb2Settings?: IBMDb2Settings;
     DocDbSettings?: DocDbSettings;
+    /**
+     * The settings for the Redis target endpoint. For more information, see the RedisSettings structure.
+     */
+    RedisSettings?: RedisSettings;
   }
   export type EndpointList = Endpoint[];
   export interface EndpointSetting {
@@ -2050,6 +2060,7 @@ declare namespace DMS {
   export type IncludeTestList = String[];
   export type IndividualAssessmentNameList = String[];
   export type Integer = number;
+  export type IntegerList = Integer[];
   export type IntegerOptional = number;
   export type KafkaSecurityProtocol = "plaintext"|"ssl-authentication"|"ssl-encryption"|"sasl-ssl"|string;
   export interface KafkaSettings {
@@ -2110,7 +2121,7 @@ declare namespace DMS {
      */
     SslClientKeyPassword?: SecretString;
     /**
-     *  The Amazon Resource Name (ARN) for the private Certification Authority (CA) cert that DMS uses to securely connect to your Kafka target endpoint.
+     *  The Amazon Resource Name (ARN) for the private certificate authority (CA) cert that DMS uses to securely connect to your Kafka target endpoint.
      */
     SslCaCertificateArn?: String;
     /**
@@ -2122,7 +2133,7 @@ declare namespace DMS {
      */
     SaslPassword?: SecretString;
     /**
-     * If this attribute is Y, it allows hexadecimal values that don't have the 0x prefix when migrated to a Kafka target. If this attribute is N, all hexadecimal values include this prefix when migrated to Kafka.
+     * Set this optional parameter to true to avoid adding a '0x' prefix to raw data in hexadecimal format. For example, by default, DMS adds a '0x' prefix to the LOB column type in hexadecimal format moving from an Oracle source to a Kafka target. Use the NoHexPrefix endpoint setting to enable migration of RAW data type columns without adding the '0x' prefix.
      */
     NoHexPrefix?: BooleanOptional;
   }
@@ -2165,15 +2176,19 @@ declare namespace DMS {
      */
     IncludeNullAndEmpty?: BooleanOptional;
     /**
-     * If this attribute is Y, it allows hexadecimal values that don't have the 0x prefix when migrated to a Kinesis target. If this attribute is N, all hexadecimal values include this prefix when migrated to Kinesis.
+     * Set this optional parameter to true to avoid adding a '0x' prefix to raw data in hexadecimal format. For example, by default, DMS adds a '0x' prefix to the LOB column type in hexadecimal format moving from an Oracle source to an Amazon Kinesis target. Use the NoHexPrefix endpoint setting to enable migration of RAW data type columns without adding the '0x' prefix.
      */
     NoHexPrefix?: BooleanOptional;
   }
   export interface ListTagsForResourceMessage {
     /**
-     * The Amazon Resource Name (ARN) string that uniquely identifies the DMS resource.
+     * The Amazon Resource Name (ARN) string that uniquely identifies the DMS resource to list tags for. This returns a list of keys (names of tags) created for the resource and their associated tag values.
      */
-    ResourceArn: String;
+    ResourceArn?: String;
+    /**
+     * List of ARNs that identify multiple DMS resources that you want to list tags for. This returns a list of keys (tag names) and their associated tag values. It also returns each tag's associated ResourceArn value, which is the ARN of the resource for which each listed tag is created. 
+     */
+    ResourceArnList?: ArnList;
   }
   export interface ListTagsForResourceResponse {
     /**
@@ -2360,6 +2375,10 @@ declare namespace DMS {
      * Settings in JSON format for the source DocumentDB endpoint. For more information about the available settings, see the configuration properties section in  Using DocumentDB as a Target for Database Migration Service  in the Database Migration Service User Guide. 
      */
     DocDbSettings?: DocDbSettings;
+    /**
+     * Settings in JSON format for the Redis target endpoint.
+     */
+    RedisSettings?: RedisSettings;
     /**
      * If this attribute is Y, the current call to ModifyEndpoint replaces all existing endpoint settings with the exact settings that you specify in this call. If this attribute is N, the current call to ModifyEndpoint does two things:    It replaces any endpoint settings that already exist with new values, for settings with the same names.   It creates new endpoint settings that you specify in the call, for settings with different names.    For example, if you call create-endpoint ... --endpoint-settings '{"a":1}' ..., the endpoint has the following endpoint settings: '{"a":1}'. If you then call modify-endpoint ... --endpoint-settings '{"b":2}' ... for the same endpoint, the endpoint has the following settings: '{"a":1,"b":2}'.  However, suppose that you follow this with a call to modify-endpoint ... --endpoint-settings '{"b":2}' --exact-settings ... for that same endpoint again. Then the endpoint has the following settings: '{"b":2}'. All existing settings are replaced with the exact settings that you specify. 
      */
@@ -2561,7 +2580,7 @@ declare namespace DMS {
      */
     AuthSource?: String;
     /**
-     * The KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your account. Your account has a different default encryption key for each Region.
+     * The KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.
      */
     KmsKeyId?: String;
     /**
@@ -2691,6 +2710,10 @@ declare namespace DMS {
      * Set this attribute with ArchivedLogDestId in a primary/ standby setup. This attribute is useful in the case of a switchover. In this case, DMS needs to know which destination to get archive redo logs from to read changes. This need arises because the previous primary instance is now a standby instance after switchover. Although DMS supports the use of the Oracle RESETLOGS option to open the database, never use RESETLOGS unless necessary. For additional information about RESETLOGS, see RMAN Data Repair Concepts in the Oracle Database Backup and Recovery User's Guide.
      */
     AdditionalArchivedLogDestId?: IntegerOptional;
+    /**
+     * Specifies the IDs of one more destinations for one or more archived redo logs. These IDs are the values of the dest_id column in the v$archived_log view. Use this setting with the archivedLogDestId extra connection attribute in a primary-to-single setup or a primary-to-multiple-standby setup.  This setting is useful in a switchover when you use an Oracle Data Guard database as a source. In this case, DMS needs information about what destination to get archive redo logs from to read changes. DMS needs this because after the switchover the previous primary is a standby instance. For example, in a primary-to-single standby setup you might apply the following settings.   archivedLogDestId=1; ExtraArchivedLogDestIds=[2]  In a primary-to-multiple-standby setup, you might apply the following settings.  archivedLogDestId=1; ExtraArchivedLogDestIds=[2,3,4]  Although DMS supports the use of the Oracle RESETLOGS option to open the database, never use RESETLOGS unless it's necessary. For more information about RESETLOGS, see  RMAN Data Repair Concepts in the Oracle Database Backup and Recovery User's Guide.
+     */
+    ExtraArchivedLogDestIds?: IntegerList;
     /**
      * Set this attribute to true to enable replication of Oracle tables containing columns that are nested tables or defined types.
      */
@@ -2935,7 +2958,7 @@ declare namespace DMS {
      */
     FailTasksOnLobTruncation?: BooleanOptional;
     /**
-     * If this attribute is set to true, the write-ahead log (WAL) heartbeat keeps restart_lsn moving and prevents storage full scenarios. The WAL heartbeat mimics a dummy transaction, so that idle logical replication slots don't hold onto old WAL logs that result in storage full situations on the source. 
+     * The write-ahead log (WAL) heartbeat feature mimics a dummy transaction. By doing this, it prevents idle logical replication slots from holding onto old WAL logs, which can result in storage full situations on the source. This heartbeat keeps restart_lsn moving and prevents storage full scenarios.
      */
     HeartbeatEnable?: BooleanOptional;
     /**
@@ -2963,7 +2986,7 @@ declare namespace DMS {
      */
     Username?: String;
     /**
-     * Sets the name of a previously created logical replication slot for a CDC load of the PostgreSQL source instance. When used with the DMS API CdcStartPosition request parameter, this attribute also enables using native CDC start points.
+     * Sets the name of a previously created logical replication slot for a change data capture (CDC) load of the PostgreSQL source instance.  When used with the CdcStartPosition request parameter for the DMS API , this attribute also makes it possible to use native CDC start points. DMS verifies that the specified logical replication slot exists before starting the CDC load task. It also verifies that the task was created with a valid setting of CdcStartPosition. If the specified slot doesn't exist or the task doesn't have a valid CdcStartPosition setting, DMS raises an error. For more information about setting the CdcStartPosition request parameter, see Determining a CDC native start point in the Database Migration Service User Guide. For more information about using CdcStartPosition, see CreateReplicationTask, StartReplicationTask, and ModifyReplicationTask.
      */
     SlotName?: String;
     /**
@@ -2994,6 +3017,37 @@ declare namespace DMS {
      * The replication instance that is being rebooted. 
      */
     ReplicationInstance?: ReplicationInstance;
+  }
+  export type RedisAuthTypeValue = "none"|"auth-role"|"auth-token"|string;
+  export interface RedisSettings {
+    /**
+     * Fully qualified domain name of the endpoint.
+     */
+    ServerName: String;
+    /**
+     * Transmission Control Protocol (TCP) port for the endpoint.
+     */
+    Port: Integer;
+    /**
+     * The connection to a Redis target endpoint using Transport Layer Security (TLS). Valid values include plaintext and ssl-encryption. The default is ssl-encryption. The ssl-encryption option makes an encrypted connection. Optionally, you can identify an Amazon Resource Name (ARN) for an SSL certificate authority (CA) using the SslCaCertificateArn setting. If an ARN isn't given for a CA, DMS uses the Amazon root CA. The plaintext option doesn't provide Transport Layer Security (TLS) encryption for traffic between endpoint and database.
+     */
+    SslSecurityProtocol?: SslSecurityProtocolValue;
+    /**
+     * The type of authentication to perform when connecting to a Redis target. Options include none, auth-token, and auth-role. The auth-token option requires an AuthPassword value to be provided. The auth-role option requires AuthUserName and AuthPassword values to be provided.
+     */
+    AuthType?: RedisAuthTypeValue;
+    /**
+     * The user name provided with the auth-role option of the AuthType setting for a Redis target endpoint.
+     */
+    AuthUserName?: String;
+    /**
+     * The password provided with the auth-role and auth-token options of the AuthType setting for a Redis target endpoint.
+     */
+    AuthPassword?: SecretString;
+    /**
+     * The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.
+     */
+    SslCaCertificateArn?: String;
   }
   export interface RedshiftSettings {
     /**
@@ -3245,7 +3299,7 @@ declare namespace DMS {
      */
     AutoMinorVersionUpgrade?: Boolean;
     /**
-     * An KMS key identifier that is used to encrypt the data on the replication instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your account. Your account has a different default encryption key for each Region.
+     * An KMS key identifier that is used to encrypt the data on the replication instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.
      */
     KmsKeyId?: String;
     /**
@@ -3707,12 +3761,45 @@ declare namespace DMS {
      * Specifies the folder path of CDC files. For an S3 source, this setting is required if a task captures change data; otherwise, it's optional. If CdcPath is set, DMS reads CDC files from this path and replicates the data changes to the target endpoint. For an S3 target if you set  PreserveTransactions  to true, DMS verifies that you have set this parameter to a folder path on your S3 target where DMS can save the transaction order for the CDC load. DMS creates this CDC folder path in either your S3 target working directory or the S3 target location specified by  BucketFolder  and  BucketName . For example, if you specify CdcPath as MyChangedData, and you specify BucketName as MyTargetBucket but do not specify BucketFolder, DMS creates the CDC folder path following: MyTargetBucket/MyChangedData. If you specify the same CdcPath, and you specify BucketName as MyTargetBucket and BucketFolder as MyTargetData, DMS creates the CDC folder path following: MyTargetBucket/MyTargetData/MyChangedData. For more information on CDC including transaction order on an S3 target, see Capturing data changes (CDC) including transaction order on the S3 target.  This setting is supported in DMS versions 3.4.2 and later. 
      */
     CdcPath?: String;
+    /**
+     * A value that enables DMS to specify a predefined (canned) access control list for objects created in an Amazon S3 bucket as .csv or .parquet files. For more information about Amazon S3 canned ACLs, see Canned ACL in the Amazon S3 Developer Guide.  The default value is NONE. Valid values include NONE, PRIVATE, PUBLIC_READ, PUBLIC_READ_WRITE, AUTHENTICATED_READ, AWS_EXEC_READ, BUCKET_OWNER_READ, and BUCKET_OWNER_FULL_CONTROL.
+     */
+    CannedAclForObjects?: CannedAclForObjectsValue;
+    /**
+     * An optional parameter that, when set to true or y, you can use to add column name information to the .csv output file. The default value is false. Valid values are true, false, y, and n.
+     */
+    AddColumnName?: BooleanOptional;
+    /**
+     * Maximum length of the interval, defined in seconds, after which to output a file to Amazon S3. When CdcMaxBatchInterval and CdcMinFileSize are both specified, the file write is triggered by whichever parameter condition is met first within an DMS CloudFormation template. The default value is 60 seconds.
+     */
+    CdcMaxBatchInterval?: IntegerOptional;
+    /**
+     * Minimum file size, defined in megabytes, to reach for a file output to Amazon S3. When CdcMinFileSize and CdcMaxBatchInterval are both specified, the file write is triggered by whichever parameter condition is met first within an DMS CloudFormation template. The default value is 32 MB.
+     */
+    CdcMinFileSize?: IntegerOptional;
+    /**
+     * An optional parameter that specifies how DMS treats null values. While handling the null value, you can use this parameter to pass a user-defined string as null when writing to the target. For example, when target columns are not nullable, you can use this option to differentiate between the empty string value and the null value. So, if you set this parameter value to the empty string ("" or ''), DMS treats the empty string as the null value instead of NULL. The default value is NULL. Valid values include any valid string.
+     */
+    CsvNullValue?: String;
+    /**
+     * When this value is set to 1, DMS ignores the first row header in a .csv file. A value of 1 turns on the feature; a value of 0 turns off the feature. The default is 0.
+     */
+    IgnoreHeaderRows?: IntegerOptional;
+    /**
+     * A value that specifies the maximum size (in KB) of any .csv file to be created while migrating to an S3 target during full load. The default value is 1,048,576 KB (1 GB). Valid values include 1 to 1,048,576.
+     */
+    MaxFileSize?: IntegerOptional;
+    /**
+     * For an S3 source, when this value is set to true or y, each leading double quotation mark has to be followed by an ending double quotation mark. This formatting complies with RFC 4180. When this value is set to false or n, string literals are copied to the target as is. In this case, a delimiter (row or column) signals the end of the field. Thus, you can't use a delimiter as part of the string, because it signals the end of the value. For an S3 target, an optional parameter used to set behavior to comply with RFC 4180 for data migrated to Amazon S3 using .csv file format only. When this value is set to true or y using Amazon S3 as a target, if the data has quotation marks or newline characters in it, DMS encloses the entire column with an additional pair of double quotation marks ("). Every quotation mark within the data is repeated twice. The default value is true. Valid values include true, false, y, and n.
+     */
+    Rfc4180?: BooleanOptional;
   }
   export type SafeguardPolicy = "rely-on-sql-server-replication-agent"|"exclusive-automatic-truncation"|"shared-automatic-truncation"|string;
   export type SchemaList = String[];
   export type SecretString = string;
   export type SourceIdsList = String[];
   export type SourceType = "replication-instance"|string;
+  export type SslSecurityProtocolValue = "plaintext"|"ssl-encryption"|string;
   export interface StartReplicationTaskAssessmentMessage {
     /**
      *  The Amazon Resource Name (ARN) of the replication task. 
@@ -3980,6 +4067,10 @@ declare namespace DMS {
      * A value is the optional value of the tag. The string value can be 1-256 Unicode characters in length and can't be prefixed with "aws:" or "dms:". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regular expressions: "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
      */
     Value?: String;
+    /**
+     * The Amazon Resource Name (ARN) string that uniquely identifies the resource for which the tag is created.
+     */
+    ResourceArn?: String;
   }
   export type TagList = Tag[];
   export type TargetDbType = "specific-database"|"multiple-databases"|string;

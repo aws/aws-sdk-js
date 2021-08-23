@@ -12,11 +12,11 @@ declare class DLM extends Service {
   constructor(options?: DLM.Types.ClientConfiguration)
   config: Config & DLM.Types.ClientConfiguration;
   /**
-   * Creates a policy to manage the lifecycle of the specified AWS resources. You can create up to 100 lifecycle policies.
+   * Creates a policy to manage the lifecycle of the specified Amazon Web Services resources. You can create up to 100 lifecycle policies.
    */
   createLifecyclePolicy(params: DLM.Types.CreateLifecyclePolicyRequest, callback?: (err: AWSError, data: DLM.Types.CreateLifecyclePolicyResponse) => void): Request<DLM.Types.CreateLifecyclePolicyResponse, AWSError>;
   /**
-   * Creates a policy to manage the lifecycle of the specified AWS resources. You can create up to 100 lifecycle policies.
+   * Creates a policy to manage the lifecycle of the specified Amazon Web Services resources. You can create up to 100 lifecycle policies.
    */
   createLifecyclePolicy(callback?: (err: AWSError, data: DLM.Types.CreateLifecyclePolicyResponse) => void): Request<DLM.Types.CreateLifecyclePolicyResponse, AWSError>;
   /**
@@ -126,7 +126,7 @@ declare namespace DLM {
   }
   export interface CreateRule {
     /**
-     * Specifies the destination for snapshots created by the policy. To create snapshots in the same Region as the source resource, specify CLOUD. To create snapshots on the same Outpost as the source resource, specify OUTPOST_LOCAL. If you omit this parameter, CLOUD is used by default. If the policy targets resources in an AWS Region, then you must create snapshots in the same Region as the source resource.  If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost as the source resource, or in the Region of that Outpost.
+     * Specifies the destination for snapshots created by the policy. To create snapshots in the same Region as the source resource, specify CLOUD. To create snapshots on the same Outpost as the source resource, specify OUTPOST_LOCAL. If you omit this parameter, CLOUD is used by default. If the policy targets resources in an Amazon Web Services Region, then you must create snapshots in the same Region as the source resource. If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost as the source resource, or in the Region of that Outpost.
      */
     Location?: LocationValues;
     /**
@@ -159,6 +159,16 @@ declare namespace DLM {
     RetainRule?: CrossRegionCopyRetainRule;
   }
   export type CrossRegionCopyActionList = CrossRegionCopyAction[];
+  export interface CrossRegionCopyDeprecateRule {
+    /**
+     * The period after which to deprecate the cross-Region AMI copies. The period must be less than or equal to the cross-Region AMI copy retention period, and it can't be greater than 10 years. This is equivalent to 120 months, 520 weeks, or 3650 days.
+     */
+    Interval?: Interval;
+    /**
+     * The unit of time in which to measure the Interval.
+     */
+    IntervalUnit?: RetentionIntervalUnitValues;
+  }
   export interface CrossRegionCopyRetainRule {
     /**
      * The amount of time to retain each snapshot. The maximum is 100 years. This is equivalent to 1200 months, 5200 weeks, or 36500 days.
@@ -171,11 +181,11 @@ declare namespace DLM {
   }
   export interface CrossRegionCopyRule {
     /**
-     * The target Region for the snapshot copies. If you specify a target Region, you must omit Target. You cannot specify a target Region and a target Outpost in the same rule.
+     * Avoid using this parameter when creating new policies. Instead, use Target to specify a target Region or a target Outpost for snapshot copies. For policies created before the Target parameter was introduced, this parameter indicates the target Region for snapshot copies.
      */
     TargetRegion?: TargetRegion;
     /**
-     * The Amazon Resource Name (ARN) of the target AWS Outpost for the snapshot copies. If you specify an ARN, you must omit TargetRegion. You cannot specify a target Region and a target Outpost in the same rule.
+     * The target Region or the Amazon Resource Name (ARN) of the target Outpost for the snapshot copies. Use this parameter instead of TargetRegion. Do not specify both.
      */
     Target?: Target;
     /**
@@ -183,17 +193,21 @@ declare namespace DLM {
      */
     Encrypted: Encrypted;
     /**
-     * The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used.
+     * The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
      */
     CmkArn?: CmkArn;
     /**
-     * Copy all user-defined tags from the source snapshot to the copied snapshot.
+     * Indicates whether to copy all user-defined tags from the source snapshot to the cross-Region snapshot copy.
      */
     CopyTags?: CopyTagsNullable;
     /**
-     * The retention rule.
+     * The retention rule that indicates how long snapshot copies are to be retained in the destination Region.
      */
     RetainRule?: CrossRegionCopyRetainRule;
+    /**
+     * The AMI deprecation rule for cross-Region AMI copies created by the rule.
+     */
+    DeprecateRule?: CrossRegionCopyDeprecateRule;
   }
   export type CrossRegionCopyRules = CrossRegionCopyRule[];
   export interface DeleteLifecyclePolicyRequest {
@@ -204,6 +218,20 @@ declare namespace DLM {
   }
   export interface DeleteLifecyclePolicyResponse {
   }
+  export interface DeprecateRule {
+    /**
+     * If the schedule has a count-based retention rule, this parameter specifies the number of oldest AMIs to deprecate. The count must be less than or equal to the schedule's retention count, and it can't be greater than 1000.
+     */
+    Count?: Count;
+    /**
+     * If the schedule has an age-based retention rule, this parameter specifies the period after which to deprecate AMIs created by the schedule. The period must be less than or equal to the schedule's retention period, and it can't be greater than 10 years. This is equivalent to 120 months, 520 weeks, or 3650 days.
+     */
+    Interval?: Interval;
+    /**
+     * The unit of time in which to measure the Interval.
+     */
+    IntervalUnit?: RetentionIntervalUnitValues;
+  }
   export type DescriptionRegex = string;
   export type Encrypted = boolean;
   export interface EncryptionConfiguration {
@@ -212,7 +240,7 @@ declare namespace DLM {
      */
     Encrypted: Encrypted;
     /**
-     * The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for EBS encryption. If this parameter is not specified, your AWS managed CMK for EBS is used.
+     * The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If this parameter is not specified, the default KMS key for the account is used.
      */
     CmkArn?: CmkArn;
   }
@@ -222,7 +250,7 @@ declare namespace DLM {
      */
     EventType: EventTypeValues;
     /**
-     * The IDs of the AWS accounts that can trigger policy by sharing snapshots with your account. The policy only runs if one of the specified AWS accounts shares a snapshot with your account.
+     * The IDs of the Amazon Web Services accounts that can trigger policy by sharing snapshots with your account. The policy only runs if one of the specified Amazon Web Services accounts shares a snapshot with your account.
      */
     SnapshotOwner: SnapshotOwnerList;
     /**
@@ -232,7 +260,7 @@ declare namespace DLM {
   }
   export interface EventSource {
     /**
-     * The source of the event. Currently only managed AWS CloudWatch Events rules are supported.
+     * The source of the event. Currently only managed CloudWatch Events rules are supported.
      */
     Type: EventSourceValues;
     /**
@@ -280,7 +308,7 @@ declare namespace DLM {
      */
     TargetTags?: TargetTagsFilterList;
     /**
-     * The tags to add to objects created by the policy. Tags are strings in the format key=value. These user-defined tags are added in addition to the AWS-added lifecycle tags.
+     * The tags to add to objects created by the policy. Tags are strings in the format key=value. These user-defined tags are added in addition to the Amazon Web Services-added lifecycle tags.
      */
     TagsToAdd?: TagsToAddFilterList;
   }
@@ -398,7 +426,7 @@ declare namespace DLM {
   export type PolicyDescription = string;
   export interface PolicyDetails {
     /**
-     * The valid target resource types and actions a policy can manage. Specify EBS_SNAPSHOT_MANAGEMENT to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify IMAGE_MANAGEMENT to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify EVENT_BASED_POLICY  to create an event-based policy that performs specific actions when a defined event occurs in your AWS account. The default is EBS_SNAPSHOT_MANAGEMENT.
+     * The valid target resource types and actions a policy can manage. Specify EBS_SNAPSHOT_MANAGEMENT to create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify IMAGE_MANAGEMENT to create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify EVENT_BASED_POLICY  to create an event-based policy that performs specific actions when a defined event occurs in your Amazon Web Services account. The default is EBS_SNAPSHOT_MANAGEMENT.
      */
     PolicyType?: PolicyTypeValues;
     /**
@@ -406,7 +434,7 @@ declare namespace DLM {
      */
     ResourceTypes?: ResourceTypeValuesList;
     /**
-     * The location of the resources to backup. If the source resources are located in an AWS Region, specify CLOUD. If the source resources are located on an AWS Outpost in your account, specify OUTPOST.  If you specify OUTPOST, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account.
+     * The location of the resources to backup. If the source resources are located in an Amazon Web Services Region, specify CLOUD. If the source resources are located on an Outpost in your account, specify OUTPOST.  If you specify OUTPOST, Amazon Data Lifecycle Manager backs up all resources of the specified type with matching target tags across all of the Outposts in your account.
      */
     ResourceLocations?: ResourceLocationList;
     /**
@@ -462,7 +490,7 @@ declare namespace DLM {
      */
     CopyTags?: CopyTags;
     /**
-     * The tags to apply to policy-created resources. These user-defined tags are in addition to the AWS-added lifecycle tags.
+     * The tags to apply to policy-created resources. These user-defined tags are in addition to the Amazon Web Services-added lifecycle tags.
      */
     TagsToAdd?: TagsToAddList;
     /**
@@ -486,20 +514,24 @@ declare namespace DLM {
      */
     CrossRegionCopyRules?: CrossRegionCopyRules;
     /**
-     * The rule for sharing snapshots with other AWS accounts.
+     * The rule for sharing snapshots with other Amazon Web Services accounts.
      */
     ShareRules?: ShareRules;
+    /**
+     * The AMI deprecation rule for the schedule.
+     */
+    DeprecateRule?: DeprecateRule;
   }
   export type ScheduleList = Schedule[];
   export type ScheduleName = string;
   export type SettablePolicyStateValues = "ENABLED"|"DISABLED"|string;
   export interface ShareRule {
     /**
-     * The IDs of the AWS accounts with which to share the snapshots.
+     * The IDs of the Amazon Web Services accounts with which to share the snapshots.
      */
     TargetAccounts: ShareTargetAccountList;
     /**
-     * The period after which snapshots that are shared with other AWS accounts are automatically unshared.
+     * The period after which snapshots that are shared with other Amazon Web Services accounts are automatically unshared.
      */
     UnshareInterval?: Interval;
     /**

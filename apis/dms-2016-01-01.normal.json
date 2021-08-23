@@ -757,7 +757,7 @@
           "shape": "ResourceNotFoundFault"
         }
       ],
-      "documentation": "<p>Returns the task assessment results from the Amazon S3 bucket that DMS creates in your account. This action always returns the latest results.</p> <p>For more information about DMS task assessments, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html\">Creating a task assessment report</a> in the <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/Welcome.html\"> Database Migration Service User Guide</a>.</p>"
+      "documentation": "<p>Returns the task assessment results from the Amazon S3 bucket that DMS creates in your Amazon Web Services account. This action always returns the latest results.</p> <p>For more information about DMS task assessments, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html\">Creating a task assessment report</a> in the <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/Welcome.html\"> Database Migration Service User Guide</a>.</p>"
     },
     "DescribeReplicationTaskAssessmentRuns": {
       "name": "DescribeReplicationTaskAssessmentRuns",
@@ -1101,6 +1101,9 @@
         },
         {
           "shape": "KMSKeyNotAccessibleFault"
+        },
+        {
+          "shape": "ResourceQuotaExceededFault"
         }
       ],
       "documentation": "<p>Moves a replication task from its current replication instance to a different target replication instance using the specified parameters. The target replication instance must be created with the same or later DMS version as the current replication instance.</p>"
@@ -1355,7 +1358,7 @@
       "members": {
         "AccountQuotaName": {
           "shape": "String",
-          "documentation": "<p>The name of the DMS quota for this account.</p>"
+          "documentation": "<p>The name of the DMS quota for this Amazon Web Services account.</p>"
         },
         "Used": {
           "shape": "Long",
@@ -1366,7 +1369,7 @@
           "documentation": "<p>The maximum allowed value for the quota.</p>"
         }
       },
-      "documentation": "<p>Describes a quota for an account, for example the number of replication instances allowed.</p>"
+      "documentation": "<p>Describes a quota for an Amazon Web Services account, for example the number of replication instances allowed.</p>"
     },
     "AccountQuotaList": {
       "type": "list",
@@ -1430,6 +1433,12 @@
       },
       "documentation": "<p/>"
     },
+    "ArnList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
     "AuthMechanismValue": {
       "type": "string",
       "enum": [
@@ -1453,7 +1462,7 @@
           "documentation": "<p>The name of the Availability Zone.</p>"
         }
       },
-      "documentation": "<p>The name of an Availability Zone for use during database migration. <code>AvailabilityZone</code> is an optional parameter to the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationInstance.html\"> <code>CreateReplicationInstance</code> </a> operation, and it’s value relates to the Region of an endpoint. For example, the availability zone of an endpoint in the us-east-1 region might be us-east-1a, us-east-1b, us-east-1c, or us-east-1d.</p>"
+      "documentation": "<p>The name of an Availability Zone for use during database migration. <code>AvailabilityZone</code> is an optional parameter to the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationInstance.html\"> <code>CreateReplicationInstance</code> </a> operation, and it’s value relates to the Amazon Web Services Region of an endpoint. For example, the availability zone of an endpoint in the us-east-1 region might be us-east-1a, us-east-1b, us-east-1c, or us-east-1d.</p>"
     },
     "AvailabilityZonesList": {
       "type": "list",
@@ -1489,6 +1498,19 @@
         }
       },
       "documentation": "<p/>"
+    },
+    "CannedAclForObjectsValue": {
+      "type": "string",
+      "enum": [
+        "none",
+        "private",
+        "public-read",
+        "public-read-write",
+        "authenticated-read",
+        "aws-exec-read",
+        "bucket-owner-read",
+        "bucket-owner-full-control"
+      ]
     },
     "Certificate": {
       "type": "structure",
@@ -1642,7 +1664,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>An KMS key identifier that is used to encrypt the connection parameters for the endpoint.</p> <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses your default encryption key.</p> <p>KMS creates the default encryption key for your account. Your account has a different default encryption key for each Region.</p>"
+          "documentation": "<p>An KMS key identifier that is used to encrypt the connection parameters for the endpoint.</p> <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses your default encryption key.</p> <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -1729,6 +1751,10 @@
         },
         "DocDbSettings": {
           "shape": "DocDbSettings"
+        },
+        "RedisSettings": {
+          "shape": "RedisSettings",
+          "documentation": "<p>Settings in JSON format for the target Redis endpoint.</p>"
         }
       },
       "documentation": "<p/>"
@@ -1816,7 +1842,7 @@
         },
         "AvailabilityZone": {
           "shape": "String",
-          "documentation": "<p>The Availability Zone where the replication instance will be created. The default value is a random, system-chosen Availability Zone in the endpoint's Region, for example: <code>us-east-1d</code> </p>"
+          "documentation": "<p>The Availability Zone where the replication instance will be created. The default value is a random, system-chosen Availability Zone in the endpoint's Amazon Web Services Region, for example: <code>us-east-1d</code> </p>"
         },
         "ReplicationSubnetGroupIdentifier": {
           "shape": "String",
@@ -1824,7 +1850,7 @@
         },
         "PreferredMaintenanceWindow": {
           "shape": "String",
-          "documentation": "<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p>Default: A 30-minute window selected at random from an 8-hour block of time per Region, occurring on a random day of the week.</p> <p>Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>"
+          "documentation": "<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p>Default: A 30-minute window selected at random from an 8-hour block of time per Amazon Web Services Region, occurring on a random day of the week.</p> <p>Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>"
         },
         "MultiAZ": {
           "shape": "BooleanOptional",
@@ -1844,7 +1870,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>An KMS key identifier that is used to encrypt the data on the replication instance.</p> <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses your default encryption key.</p> <p>KMS creates the default encryption key for your account. Your account has a different default encryption key for each Region.</p>"
+          "documentation": "<p>An KMS key identifier that is used to encrypt the data on the replication instance.</p> <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses your default encryption key.</p> <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>"
         },
         "PubliclyAccessible": {
           "shape": "BooleanOptional",
@@ -2206,7 +2232,7 @@
         },
         "UniqueAccountIdentifier": {
           "shape": "String",
-          "documentation": "<p>A unique DMS identifier for an account in a particular Region. The value of this identifier has the following format: <code>c99999999999</code>. DMS uses this identifier to name artifacts. For example, DMS uses this identifier to name the default Amazon S3 bucket for storing task assessment reports in a given Region. The format of this S3 bucket name is the following: <code>dms-<i>AccountNumber</i>-<i>UniqueAccountIdentifier</i>.</code> Here is an example name for this default S3 bucket: <code>dms-111122223333-c44445555666</code>.</p> <note> <p>DMS supports the <code>UniqueAccountIdentifier</code> parameter in versions 3.1.4 and later.</p> </note>"
+          "documentation": "<p>A unique DMS identifier for an account in a particular Amazon Web Services Region. The value of this identifier has the following format: <code>c99999999999</code>. DMS uses this identifier to name artifacts. For example, DMS uses this identifier to name the default Amazon S3 bucket for storing task assessment reports in a given Amazon Web Services Region. The format of this S3 bucket name is the following: <code>dms-<i>AccountNumber</i>-<i>UniqueAccountIdentifier</i>.</code> Here is an example name for this default S3 bucket: <code>dms-111122223333-c44445555666</code>.</p> <note> <p>DMS supports the <code>UniqueAccountIdentifier</code> parameter in versions 3.1.4 and later.</p> </note>"
         }
       },
       "documentation": "<p/>"
@@ -2996,7 +3022,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your account. Your account has a different default encryption key for each Region.</p>"
+          "documentation": "<p>The KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>"
         },
         "SecretsManagerAccessRoleArn": {
           "shape": "String",
@@ -3108,7 +3134,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>An KMS key identifier that is used to encrypt the connection parameters for the endpoint.</p> <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses your default encryption key.</p> <p>KMS creates the default encryption key for your account. Your account has a different default encryption key for each Region.</p>"
+          "documentation": "<p>An KMS key identifier that is used to encrypt the connection parameters for the endpoint.</p> <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses your default encryption key.</p> <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>"
         },
         "EndpointArn": {
           "shape": "String",
@@ -3196,6 +3222,10 @@
         },
         "DocDbSettings": {
           "shape": "DocDbSettings"
+        },
+        "RedisSettings": {
+          "shape": "RedisSettings",
+          "documentation": "<p>The settings for the Redis target endpoint. For more information, see the <code>RedisSettings</code> structure.</p>"
         }
       },
       "documentation": "<p>Describes an endpoint of a database instance in response to operations such as the following:</p> <ul> <li> <p> <code>CreateEndpoint</code> </p> </li> <li> <p> <code>DescribeEndpoint</code> </p> </li> <li> <p> <code>ModifyEndpoint</code> </p> </li> </ul>"
@@ -3505,6 +3535,12 @@
     "Integer": {
       "type": "integer"
     },
+    "IntegerList": {
+      "type": "list",
+      "member": {
+        "shape": "Integer"
+      }
+    },
     "IntegerOptional": {
       "type": "integer"
     },
@@ -3578,7 +3614,7 @@
         },
         "SslCaCertificateArn": {
           "shape": "String",
-          "documentation": "<p> The Amazon Resource Name (ARN) for the private Certification Authority (CA) cert that DMS uses to securely connect to your Kafka target endpoint.</p>"
+          "documentation": "<p> The Amazon Resource Name (ARN) for the private certificate authority (CA) cert that DMS uses to securely connect to your Kafka target endpoint.</p>"
         },
         "SaslUsername": {
           "shape": "String",
@@ -3590,7 +3626,7 @@
         },
         "NoHexPrefix": {
           "shape": "BooleanOptional",
-          "documentation": "<p>If this attribute is Y, it allows hexadecimal values that don't have the <code>0x</code> prefix when migrated to a Kafka target. If this attribute is N, all hexadecimal values include this prefix when migrated to Kafka.</p>"
+          "documentation": "<p>Set this optional parameter to <code>true</code> to avoid adding a '0x' prefix to raw data in hexadecimal format. For example, by default, DMS adds a '0x' prefix to the LOB column type in hexadecimal format moving from an Oracle source to a Kafka target. Use the <code>NoHexPrefix</code> endpoint setting to enable migration of RAW data type columns without adding the '0x' prefix.</p>"
         }
       },
       "documentation": "<p>Provides information that describes an Apache Kafka endpoint. This information includes the output format of records applied to the endpoint and details of transaction and control table data information.</p>"
@@ -3642,20 +3678,21 @@
         },
         "NoHexPrefix": {
           "shape": "BooleanOptional",
-          "documentation": "<p>If this attribute is Y, it allows hexadecimal values that don't have the <code>0x</code> prefix when migrated to a Kinesis target. If this attribute is N, all hexadecimal values include this prefix when migrated to Kinesis.</p>"
+          "documentation": "<p>Set this optional parameter to <code>true</code> to avoid adding a '0x' prefix to raw data in hexadecimal format. For example, by default, DMS adds a '0x' prefix to the LOB column type in hexadecimal format moving from an Oracle source to an Amazon Kinesis target. Use the <code>NoHexPrefix</code> endpoint setting to enable migration of RAW data type columns without adding the '0x' prefix.</p>"
         }
       },
       "documentation": "<p>Provides information that describes an Amazon Kinesis Data Stream endpoint. This information includes the output format of records applied to the endpoint and details of transaction and control table data information.</p>"
     },
     "ListTagsForResourceMessage": {
       "type": "structure",
-      "required": [
-        "ResourceArn"
-      ],
       "members": {
         "ResourceArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) string that uniquely identifies the DMS resource.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) string that uniquely identifies the DMS resource to list tags for. This returns a list of keys (names of tags) created for the resource and their associated tag values.</p>"
+        },
+        "ResourceArnList": {
+          "shape": "ArnList",
+          "documentation": "<p>List of ARNs that identify multiple DMS resources that you want to list tags for. This returns a list of keys (tag names) and their associated tag values. It also returns each tag's associated <code>ResourceArn</code> value, which is the ARN of the resource for which each listed tag is created. </p>"
         }
       },
       "documentation": "<p/>"
@@ -3874,6 +3911,10 @@
         "DocDbSettings": {
           "shape": "DocDbSettings",
           "documentation": "<p>Settings in JSON format for the source DocumentDB endpoint. For more information about the available settings, see the configuration properties section in <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DocumentDB.html\"> Using DocumentDB as a Target for Database Migration Service </a> in the <i>Database Migration Service User Guide.</i> </p>"
+        },
+        "RedisSettings": {
+          "shape": "RedisSettings",
+          "documentation": "<p>Settings in JSON format for the Redis target endpoint.</p>"
         },
         "ExactSettings": {
           "shape": "BooleanOptional",
@@ -4130,7 +4171,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your account. Your account has a different default encryption key for each Region.</p>"
+          "documentation": "<p>The KMS key identifier that is used to encrypt the content on the replication instance. If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses your default encryption key. KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>"
         },
         "SecretsManagerAccessRoleArn": {
           "shape": "String",
@@ -4292,6 +4333,10 @@
         "AdditionalArchivedLogDestId": {
           "shape": "IntegerOptional",
           "documentation": "<p>Set this attribute with <code>ArchivedLogDestId</code> in a primary/ standby setup. This attribute is useful in the case of a switchover. In this case, DMS needs to know which destination to get archive redo logs from to read changes. This need arises because the previous primary instance is now a standby instance after switchover.</p> <p>Although DMS supports the use of the Oracle <code>RESETLOGS</code> option to open the database, never use <code>RESETLOGS</code> unless necessary. For additional information about <code>RESETLOGS</code>, see <a href=\"https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/rman-data-repair-concepts.html#GUID-1805CCF7-4AF2-482D-B65A-998192F89C2B\">RMAN Data Repair Concepts</a> in the <i>Oracle Database Backup and Recovery User's Guide</i>.</p>"
+        },
+        "ExtraArchivedLogDestIds": {
+          "shape": "IntegerList",
+          "documentation": "<p>Specifies the IDs of one more destinations for one or more archived redo logs. These IDs are the values of the <code>dest_id</code> column in the <code>v$archived_log</code> view. Use this setting with the <code>archivedLogDestId</code> extra connection attribute in a primary-to-single setup or a primary-to-multiple-standby setup. </p> <p>This setting is useful in a switchover when you use an Oracle Data Guard database as a source. In this case, DMS needs information about what destination to get archive redo logs from to read changes. DMS needs this because after the switchover the previous primary is a standby instance. For example, in a primary-to-single standby setup you might apply the following settings. </p> <p> <code>archivedLogDestId=1; ExtraArchivedLogDestIds=[2]</code> </p> <p>In a primary-to-multiple-standby setup, you might apply the following settings.</p> <p> <code>archivedLogDestId=1; ExtraArchivedLogDestIds=[2,3,4]</code> </p> <p>Although DMS supports the use of the Oracle <code>RESETLOGS</code> option to open the database, never use <code>RESETLOGS</code> unless it's necessary. For more information about <code>RESETLOGS</code>, see <a href=\"https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/rman-data-repair-concepts.html#GUID-1805CCF7-4AF2-482D-B65A-998192F89C2B\"> RMAN Data Repair Concepts</a> in the <i>Oracle Database Backup and Recovery User's Guide</i>.</p>"
         },
         "AllowSelectNestedTables": {
           "shape": "BooleanOptional",
@@ -4578,7 +4623,7 @@
         },
         "HeartbeatEnable": {
           "shape": "BooleanOptional",
-          "documentation": "<p>If this attribute is set to true, the write-ahead log (WAL) heartbeat keeps <code>restart_lsn</code> moving and prevents storage full scenarios. The WAL heartbeat mimics a dummy transaction, so that idle logical replication slots don't hold onto old WAL logs that result in storage full situations on the source. </p>"
+          "documentation": "<p>The write-ahead log (WAL) heartbeat feature mimics a dummy transaction. By doing this, it prevents idle logical replication slots from holding onto old WAL logs, which can result in storage full situations on the source. This heartbeat keeps <code>restart_lsn</code> moving and prevents storage full scenarios.</p>"
         },
         "HeartbeatSchema": {
           "shape": "String",
@@ -4606,7 +4651,7 @@
         },
         "SlotName": {
           "shape": "String",
-          "documentation": "<p>Sets the name of a previously created logical replication slot for a CDC load of the PostgreSQL source instance.</p> <p>When used with the DMS API <code>CdcStartPosition</code> request parameter, this attribute also enables using native CDC start points.</p>"
+          "documentation": "<p>Sets the name of a previously created logical replication slot for a change data capture (CDC) load of the PostgreSQL source instance. </p> <p>When used with the <code>CdcStartPosition</code> request parameter for the DMS API , this attribute also makes it possible to use native CDC start points. DMS verifies that the specified logical replication slot exists before starting the CDC load task. It also verifies that the task was created with a valid setting of <code>CdcStartPosition</code>. If the specified slot doesn't exist or the task doesn't have a valid <code>CdcStartPosition</code> setting, DMS raises an error.</p> <p>For more information about setting the <code>CdcStartPosition</code> request parameter, see <a href=\"dms/latest/userguide/CHAP_Task.CDC.html#CHAP_Task.CDC.StartPoint.Native\">Determining a CDC native start point</a> in the <i>Database Migration Service User Guide</i>. For more information about using <code>CdcStartPosition</code>, see <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html\">CreateReplicationTask</a>, <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html\">StartReplicationTask</a>, and <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html\">ModifyReplicationTask</a>.</p>"
         },
         "PluginName": {
           "shape": "PluginNameValue",
@@ -4647,6 +4692,52 @@
           "documentation": "<p>The replication instance that is being rebooted. </p>"
         }
       }
+    },
+    "RedisAuthTypeValue": {
+      "type": "string",
+      "enum": [
+        "none",
+        "auth-role",
+        "auth-token"
+      ]
+    },
+    "RedisSettings": {
+      "type": "structure",
+      "required": [
+        "ServerName",
+        "Port"
+      ],
+      "members": {
+        "ServerName": {
+          "shape": "String",
+          "documentation": "<p>Fully qualified domain name of the endpoint.</p>"
+        },
+        "Port": {
+          "shape": "Integer",
+          "documentation": "<p>Transmission Control Protocol (TCP) port for the endpoint.</p>"
+        },
+        "SslSecurityProtocol": {
+          "shape": "SslSecurityProtocolValue",
+          "documentation": "<p>The connection to a Redis target endpoint using Transport Layer Security (TLS). Valid values include <code>plaintext</code> and <code>ssl-encryption</code>. The default is <code>ssl-encryption</code>. The <code>ssl-encryption</code> option makes an encrypted connection. Optionally, you can identify an Amazon Resource Name (ARN) for an SSL certificate authority (CA) using the <code>SslCaCertificateArn </code>setting. If an ARN isn't given for a CA, DMS uses the Amazon root CA.</p> <p>The <code>plaintext</code> option doesn't provide Transport Layer Security (TLS) encryption for traffic between endpoint and database.</p>"
+        },
+        "AuthType": {
+          "shape": "RedisAuthTypeValue",
+          "documentation": "<p>The type of authentication to perform when connecting to a Redis target. Options include <code>none</code>, <code>auth-token</code>, and <code>auth-role</code>. The <code>auth-token</code> option requires an <code>AuthPassword</code> value to be provided. The <code>auth-role</code> option requires <code>AuthUserName</code> and <code>AuthPassword</code> values to be provided.</p>"
+        },
+        "AuthUserName": {
+          "shape": "String",
+          "documentation": "<p>The user name provided with the <code>auth-role</code> option of the <code>AuthType</code> setting for a Redis target endpoint.</p>"
+        },
+        "AuthPassword": {
+          "shape": "SecretString",
+          "documentation": "<p>The password provided with the <code>auth-role</code> and <code>auth-token</code> options of the <code>AuthType</code> setting for a Redis target endpoint.</p>"
+        },
+        "SslCaCertificateArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to connect to your Redis target endpoint.</p>"
+        }
+      },
+      "documentation": "<p>Provides information that defines a Redis target endpoint.</p>"
     },
     "RedshiftSettings": {
       "type": "structure",
@@ -4966,7 +5057,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>An KMS key identifier that is used to encrypt the data on the replication instance.</p> <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses your default encryption key.</p> <p>KMS creates the default encryption key for your account. Your account has a different default encryption key for each Region.</p>"
+          "documentation": "<p>An KMS key identifier that is used to encrypt the data on the replication instance.</p> <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then DMS uses your default encryption key.</p> <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>"
         },
         "ReplicationInstanceArn": {
           "shape": "String",
@@ -5517,6 +5608,38 @@
         "CdcPath": {
           "shape": "String",
           "documentation": "<p>Specifies the folder path of CDC files. For an S3 source, this setting is required if a task captures change data; otherwise, it's optional. If <code>CdcPath</code> is set, DMS reads CDC files from this path and replicates the data changes to the target endpoint. For an S3 target if you set <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-PreserveTransactions\"> <code>PreserveTransactions</code> </a> to <code>true</code>, DMS verifies that you have set this parameter to a folder path on your S3 target where DMS can save the transaction order for the CDC load. DMS creates this CDC folder path in either your S3 target working directory or the S3 target location specified by <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketFolder\"> <code>BucketFolder</code> </a> and <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketName\"> <code>BucketName</code> </a>.</p> <p>For example, if you specify <code>CdcPath</code> as <code>MyChangedData</code>, and you specify <code>BucketName</code> as <code>MyTargetBucket</code> but do not specify <code>BucketFolder</code>, DMS creates the CDC folder path following: <code>MyTargetBucket/MyChangedData</code>.</p> <p>If you specify the same <code>CdcPath</code>, and you specify <code>BucketName</code> as <code>MyTargetBucket</code> and <code>BucketFolder</code> as <code>MyTargetData</code>, DMS creates the CDC folder path following: <code>MyTargetBucket/MyTargetData/MyChangedData</code>.</p> <p>For more information on CDC including transaction order on an S3 target, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath\">Capturing data changes (CDC) including transaction order on the S3 target</a>.</p> <note> <p>This setting is supported in DMS versions 3.4.2 and later.</p> </note>"
+        },
+        "CannedAclForObjects": {
+          "shape": "CannedAclForObjectsValue",
+          "documentation": "<p>A value that enables DMS to specify a predefined (canned) access control list for objects created in an Amazon S3 bucket as .csv or .parquet files. For more information about Amazon S3 canned ACLs, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl\">Canned ACL</a> in the <i>Amazon S3 Developer Guide.</i> </p> <p>The default value is NONE. Valid values include NONE, PRIVATE, PUBLIC_READ, PUBLIC_READ_WRITE, AUTHENTICATED_READ, AWS_EXEC_READ, BUCKET_OWNER_READ, and BUCKET_OWNER_FULL_CONTROL.</p>"
+        },
+        "AddColumnName": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>An optional parameter that, when set to <code>true</code> or <code>y</code>, you can use to add column name information to the .csv output file.</p> <p>The default value is <code>false</code>. Valid values are <code>true</code>, <code>false</code>, <code>y</code>, and <code>n</code>.</p>"
+        },
+        "CdcMaxBatchInterval": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Maximum length of the interval, defined in seconds, after which to output a file to Amazon S3.</p> <p>When <code>CdcMaxBatchInterval</code> and <code>CdcMinFileSize</code> are both specified, the file write is triggered by whichever parameter condition is met first within an DMS CloudFormation template.</p> <p>The default value is 60 seconds.</p>"
+        },
+        "CdcMinFileSize": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>Minimum file size, defined in megabytes, to reach for a file output to Amazon S3.</p> <p>When <code>CdcMinFileSize</code> and <code>CdcMaxBatchInterval</code> are both specified, the file write is triggered by whichever parameter condition is met first within an DMS CloudFormation template.</p> <p>The default value is 32 MB.</p>"
+        },
+        "CsvNullValue": {
+          "shape": "String",
+          "documentation": "<p>An optional parameter that specifies how DMS treats null values. While handling the null value, you can use this parameter to pass a user-defined string as null when writing to the target. For example, when target columns are not nullable, you can use this option to differentiate between the empty string value and the null value. So, if you set this parameter value to the empty string (\"\" or ''), DMS treats the empty string as the null value instead of <code>NULL</code>.</p> <p>The default value is <code>NULL</code>. Valid values include any valid string.</p>"
+        },
+        "IgnoreHeaderRows": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>When this value is set to 1, DMS ignores the first row header in a .csv file. A value of 1 turns on the feature; a value of 0 turns off the feature.</p> <p>The default is 0.</p>"
+        },
+        "MaxFileSize": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>A value that specifies the maximum size (in KB) of any .csv file to be created while migrating to an S3 target during full load.</p> <p>The default value is 1,048,576 KB (1 GB). Valid values include 1 to 1,048,576.</p>"
+        },
+        "Rfc4180": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>For an S3 source, when this value is set to <code>true</code> or <code>y</code>, each leading double quotation mark has to be followed by an ending double quotation mark. This formatting complies with RFC 4180. When this value is set to <code>false</code> or <code>n</code>, string literals are copied to the target as is. In this case, a delimiter (row or column) signals the end of the field. Thus, you can't use a delimiter as part of the string, because it signals the end of the value.</p> <p>For an S3 target, an optional parameter used to set behavior to comply with RFC 4180 for data migrated to Amazon S3 using .csv file format only. When this value is set to <code>true</code> or <code>y</code> using Amazon S3 as a target, if the data has quotation marks or newline characters in it, DMS encloses the entire column with an additional pair of double quotation marks (\"). Every quotation mark within the data is repeated twice.</p> <p>The default value is <code>true</code>. Valid values include <code>true</code>, <code>false</code>, <code>y</code>, and <code>n</code>.</p>"
         }
       },
       "documentation": "<p>Settings for exporting data to Amazon S3. </p>"
@@ -5549,6 +5672,13 @@
       "type": "string",
       "enum": [
         "replication-instance"
+      ]
+    },
+    "SslSecurityProtocolValue": {
+      "type": "string",
+      "enum": [
+        "plaintext",
+        "ssl-encryption"
       ]
     },
     "StartReplicationTaskAssessmentMessage": {
@@ -5927,6 +6057,10 @@
         "Value": {
           "shape": "String",
           "documentation": "<p>A value is the optional value of the tag. The string value can be 1-256 Unicode characters in length and can't be prefixed with \"aws:\" or \"dms:\". The string can only contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-' (Java regular expressions: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
+        },
+        "ResourceArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) string that uniquely identifies the resource for which the tag is created.</p>"
         }
       },
       "documentation": "<p>A user-defined key-value pair that describes metadata added to an DMS resource and that is used by operations such as the following:</p> <ul> <li> <p> <code>AddTagsToResource</code> </p> </li> <li> <p> <code>ListTagsForResource</code> </p> </li> <li> <p> <code>RemoveTagsFromResource</code> </p> </li> </ul>"

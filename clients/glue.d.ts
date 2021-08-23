@@ -52,6 +52,14 @@ declare class Glue extends Service {
    */
   batchDeleteTableVersion(callback?: (err: AWSError, data: Glue.Types.BatchDeleteTableVersionResponse) => void): Request<Glue.Types.BatchDeleteTableVersionResponse, AWSError>;
   /**
+   * Retrieves information about a list of blueprints.
+   */
+  batchGetBlueprints(params: Glue.Types.BatchGetBlueprintsRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetBlueprintsResponse) => void): Request<Glue.Types.BatchGetBlueprintsResponse, AWSError>;
+  /**
+   * Retrieves information about a list of blueprints.
+   */
+  batchGetBlueprints(callback?: (err: AWSError, data: Glue.Types.BatchGetBlueprintsResponse) => void): Request<Glue.Types.BatchGetBlueprintsResponse, AWSError>;
+  /**
    * Returns a list of resource metadata for a given list of crawler names. After calling the ListCrawlers operation, you can call this operation to access the data to which you have been granted permissions. This operation supports all IAM permissions, including permission conditions that uses tags.
    */
   batchGetCrawlers(params: Glue.Types.BatchGetCrawlersRequest, callback?: (err: AWSError, data: Glue.Types.BatchGetCrawlersResponse) => void): Request<Glue.Types.BatchGetCrawlersResponse, AWSError>;
@@ -131,6 +139,14 @@ declare class Glue extends Service {
    * Validates the supplied schema. This call has no side effects, it simply validates using the supplied schema using DataFormat as the format. Since it does not take a schema set name, no compatibility checks are performed.
    */
   checkSchemaVersionValidity(callback?: (err: AWSError, data: Glue.Types.CheckSchemaVersionValidityResponse) => void): Request<Glue.Types.CheckSchemaVersionValidityResponse, AWSError>;
+  /**
+   * Registers a blueprint with Glue.
+   */
+  createBlueprint(params: Glue.Types.CreateBlueprintRequest, callback?: (err: AWSError, data: Glue.Types.CreateBlueprintResponse) => void): Request<Glue.Types.CreateBlueprintResponse, AWSError>;
+  /**
+   * Registers a blueprint with Glue.
+   */
+  createBlueprint(callback?: (err: AWSError, data: Glue.Types.CreateBlueprintResponse) => void): Request<Glue.Types.CreateBlueprintResponse, AWSError>;
   /**
    * Creates a classifier in the user's account. This can be a GrokClassifier, an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field of the request is present.
    */
@@ -267,6 +283,14 @@ declare class Glue extends Service {
    * Creates a new workflow.
    */
   createWorkflow(callback?: (err: AWSError, data: Glue.Types.CreateWorkflowResponse) => void): Request<Glue.Types.CreateWorkflowResponse, AWSError>;
+  /**
+   * Deletes an existing blueprint.
+   */
+  deleteBlueprint(params: Glue.Types.DeleteBlueprintRequest, callback?: (err: AWSError, data: Glue.Types.DeleteBlueprintResponse) => void): Request<Glue.Types.DeleteBlueprintResponse, AWSError>;
+  /**
+   * Deletes an existing blueprint.
+   */
+  deleteBlueprint(callback?: (err: AWSError, data: Glue.Types.DeleteBlueprintResponse) => void): Request<Glue.Types.DeleteBlueprintResponse, AWSError>;
   /**
    * Removes a classifier from the Data Catalog.
    */
@@ -435,6 +459,30 @@ declare class Glue extends Service {
    * Deletes a workflow.
    */
   deleteWorkflow(callback?: (err: AWSError, data: Glue.Types.DeleteWorkflowResponse) => void): Request<Glue.Types.DeleteWorkflowResponse, AWSError>;
+  /**
+   * Retrieves the details of a blueprint.
+   */
+  getBlueprint(params: Glue.Types.GetBlueprintRequest, callback?: (err: AWSError, data: Glue.Types.GetBlueprintResponse) => void): Request<Glue.Types.GetBlueprintResponse, AWSError>;
+  /**
+   * Retrieves the details of a blueprint.
+   */
+  getBlueprint(callback?: (err: AWSError, data: Glue.Types.GetBlueprintResponse) => void): Request<Glue.Types.GetBlueprintResponse, AWSError>;
+  /**
+   * Retrieves the details of a blueprint run.
+   */
+  getBlueprintRun(params: Glue.Types.GetBlueprintRunRequest, callback?: (err: AWSError, data: Glue.Types.GetBlueprintRunResponse) => void): Request<Glue.Types.GetBlueprintRunResponse, AWSError>;
+  /**
+   * Retrieves the details of a blueprint run.
+   */
+  getBlueprintRun(callback?: (err: AWSError, data: Glue.Types.GetBlueprintRunResponse) => void): Request<Glue.Types.GetBlueprintRunResponse, AWSError>;
+  /**
+   * Retrieves the details of blueprint runs for a specified blueprint.
+   */
+  getBlueprintRuns(params: Glue.Types.GetBlueprintRunsRequest, callback?: (err: AWSError, data: Glue.Types.GetBlueprintRunsResponse) => void): Request<Glue.Types.GetBlueprintRunsResponse, AWSError>;
+  /**
+   * Retrieves the details of blueprint runs for a specified blueprint.
+   */
+  getBlueprintRuns(callback?: (err: AWSError, data: Glue.Types.GetBlueprintRunsResponse) => void): Request<Glue.Types.GetBlueprintRunsResponse, AWSError>;
   /**
    * Retrieves the status of a migration operation.
    */
@@ -860,6 +908,14 @@ declare class Glue extends Service {
    */
   importCatalogToGlue(callback?: (err: AWSError, data: Glue.Types.ImportCatalogToGlueResponse) => void): Request<Glue.Types.ImportCatalogToGlueResponse, AWSError>;
   /**
+   * Lists all the blueprint names in an account.
+   */
+  listBlueprints(params: Glue.Types.ListBlueprintsRequest, callback?: (err: AWSError, data: Glue.Types.ListBlueprintsResponse) => void): Request<Glue.Types.ListBlueprintsResponse, AWSError>;
+  /**
+   * Lists all the blueprint names in an account.
+   */
+  listBlueprints(callback?: (err: AWSError, data: Glue.Types.ListBlueprintsResponse) => void): Request<Glue.Types.ListBlueprintsResponse, AWSError>;
+  /**
    * Retrieves the names of all crawler resources in this Amazon Web Services account, or the resources with the specified tag. This operation allows you to see which resources are available in your account, and their names. This operation takes the optional Tags field, which you can use as a filter on the response so that tagged resources can be retrieved as a group. If you choose to use tags filtering, only resources with the tag are retrieved.
    */
   listCrawlers(params: Glue.Types.ListCrawlersRequest, callback?: (err: AWSError, data: Glue.Types.ListCrawlersResponse) => void): Request<Glue.Types.ListCrawlersResponse, AWSError>;
@@ -1012,6 +1068,14 @@ declare class Glue extends Service {
    */
   searchTables(callback?: (err: AWSError, data: Glue.Types.SearchTablesResponse) => void): Request<Glue.Types.SearchTablesResponse, AWSError>;
   /**
+   * Starts a new run of the specified blueprint.
+   */
+  startBlueprintRun(params: Glue.Types.StartBlueprintRunRequest, callback?: (err: AWSError, data: Glue.Types.StartBlueprintRunResponse) => void): Request<Glue.Types.StartBlueprintRunResponse, AWSError>;
+  /**
+   * Starts a new run of the specified blueprint.
+   */
+  startBlueprintRun(callback?: (err: AWSError, data: Glue.Types.StartBlueprintRunResponse) => void): Request<Glue.Types.StartBlueprintRunResponse, AWSError>;
+  /**
    * Starts a crawl using the specified crawler, regardless of what is scheduled. If the crawler is already running, returns a CrawlerRunningException.
    */
   startCrawler(params: Glue.Types.StartCrawlerRequest, callback?: (err: AWSError, data: Glue.Types.StartCrawlerResponse) => void): Request<Glue.Types.StartCrawlerResponse, AWSError>;
@@ -1131,6 +1195,14 @@ declare class Glue extends Service {
    * Removes tags from a resource.
    */
   untagResource(callback?: (err: AWSError, data: Glue.Types.UntagResourceResponse) => void): Request<Glue.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Updates a registered blueprint.
+   */
+  updateBlueprint(params: Glue.Types.UpdateBlueprintRequest, callback?: (err: AWSError, data: Glue.Types.UpdateBlueprintResponse) => void): Request<Glue.Types.UpdateBlueprintResponse, AWSError>;
+  /**
+   * Updates a registered blueprint.
+   */
+  updateBlueprint(callback?: (err: AWSError, data: Glue.Types.UpdateBlueprintResponse) => void): Request<Glue.Types.UpdateBlueprintResponse, AWSError>;
   /**
    * Modifies an existing classifier (a GrokClassifier, an XMLClassifier, a JsonClassifier, or a CsvClassifier, depending on which field is present).
    */
@@ -1426,6 +1498,31 @@ declare namespace Glue {
      */
     Errors?: TableVersionErrors;
   }
+  export type BatchGetBlueprintNames = OrchestrationNameString[];
+  export interface BatchGetBlueprintsRequest {
+    /**
+     * A list of blueprint names.
+     */
+    Names: BatchGetBlueprintNames;
+    /**
+     * Specifies whether or not to include the blueprint in the response.
+     */
+    IncludeBlueprint?: NullableBoolean;
+    /**
+     * Specifies whether or not to include the parameters, as a JSON string, for the blueprint in the response.
+     */
+    IncludeParameterSpec?: NullableBoolean;
+  }
+  export interface BatchGetBlueprintsResponse {
+    /**
+     * Returns a list of blueprint as a Blueprints object.
+     */
+    Blueprints?: Blueprints;
+    /**
+     * Returns a list of BlueprintNames that were not found.
+     */
+    MissingBlueprints?: BlueprintNames;
+  }
   export interface BatchGetCrawlersRequest {
     /**
      * A list of crawler names, which might be the names returned from the ListCrawlers operation.
@@ -1649,6 +1746,107 @@ declare namespace Glue {
     NumberOfNulls: NonNegativeLong;
   }
   export type _Blob = Buffer|Uint8Array|Blob|string;
+  export interface Blueprint {
+    /**
+     * The name of the blueprint.
+     */
+    Name?: OrchestrationNameString;
+    /**
+     * The description of the blueprint.
+     */
+    Description?: Generic512CharString;
+    /**
+     * The date and time the blueprint was registered.
+     */
+    CreatedOn?: TimestampValue;
+    /**
+     * The date and time the blueprint was last modified.
+     */
+    LastModifiedOn?: TimestampValue;
+    /**
+     * A JSON string that indicates the list of parameter specifications for the blueprint.
+     */
+    ParameterSpec?: BlueprintParameterSpec;
+    /**
+     * Specifies the path in Amazon S3 where the blueprint is published.
+     */
+    BlueprintLocation?: GenericString;
+    /**
+     * Specifies a path in Amazon S3 where the blueprint is copied when you call CreateBlueprint/UpdateBlueprint to register the blueprint in Glue.
+     */
+    BlueprintServiceLocation?: GenericString;
+    /**
+     * The status of the blueprint registration.   Creating — The blueprint registration is in progress.   Active — The blueprint has been successfully registered.   Updating — An update to the blueprint registration is in progress.   Failed — The blueprint registration failed.  
+     */
+    Status?: BlueprintStatus;
+    /**
+     * An error message.
+     */
+    ErrorMessage?: ErrorString;
+    /**
+     * When there are multiple versions of a blueprint and the latest version has some errors, this attribute indicates the last successful blueprint definition that is available with the service.
+     */
+    LastActiveDefinition?: LastActiveDefinition;
+  }
+  export interface BlueprintDetails {
+    /**
+     * The name of the blueprint.
+     */
+    BlueprintName?: OrchestrationNameString;
+    /**
+     * The run ID for this blueprint.
+     */
+    RunId?: IdString;
+  }
+  export type BlueprintNames = OrchestrationNameString[];
+  export type BlueprintParameterSpec = string;
+  export type BlueprintParameters = string;
+  export interface BlueprintRun {
+    /**
+     * The name of the blueprint.
+     */
+    BlueprintName?: OrchestrationNameString;
+    /**
+     * The run ID for this blueprint run.
+     */
+    RunId?: IdString;
+    /**
+     * The name of a workflow that is created as a result of a successful blueprint run. If a blueprint run has an error, there will not be a workflow created.
+     */
+    WorkflowName?: NameString;
+    /**
+     * The state of the blueprint run. Possible values are:   Running — The blueprint run is in progress.   Succeeded — The blueprint run completed successfully.   Failed — The blueprint run failed and rollback is complete.   Rolling Back — The blueprint run failed and rollback is in progress.  
+     */
+    State?: BlueprintRunState;
+    /**
+     * The date and time that the blueprint run started.
+     */
+    StartedOn?: TimestampValue;
+    /**
+     * The date and time that the blueprint run completed.
+     */
+    CompletedOn?: TimestampValue;
+    /**
+     * Indicates any errors that are seen while running the blueprint.
+     */
+    ErrorMessage?: MessageString;
+    /**
+     * If there are any errors while creating the entities of a workflow, we try to roll back the created entities until that point and delete them. This attribute indicates the errors seen while trying to delete the entities that are created.
+     */
+    RollbackErrorMessage?: MessageString;
+    /**
+     * The blueprint parameters as a string. You will have to provide a value for each key that is required from the parameter spec that is defined in the Blueprint$ParameterSpec.
+     */
+    Parameters?: BlueprintParameters;
+    /**
+     * The role ARN. This role will be assumed by the Glue service and will be used to create the workflow and other entities of a workflow.
+     */
+    RoleArn?: OrchestrationIAMRoleArn;
+  }
+  export type BlueprintRunState = "RUNNING"|"SUCCEEDED"|"FAILED"|"ROLLING_BACK"|string;
+  export type BlueprintRuns = BlueprintRun[];
+  export type BlueprintStatus = "CREATING"|"ACTIVE"|"UPDATING"|"FAILED"|string;
+  export type Blueprints = Blueprint[];
   export type Boolean = boolean;
   export interface BooleanColumnStatisticsData {
     /**
@@ -2247,6 +2445,30 @@ declare namespace Glue {
      * Specifies Glue Data Catalog targets.
      */
     CatalogTargets?: CatalogTargetList;
+  }
+  export interface CreateBlueprintRequest {
+    /**
+     * The name of the blueprint.
+     */
+    Name: OrchestrationNameString;
+    /**
+     * A description of the blueprint.
+     */
+    Description?: Generic512CharString;
+    /**
+     * Specifies a path in Amazon S3 where the blueprint is published.
+     */
+    BlueprintLocation: OrchestrationS3Location;
+    /**
+     * The tags to be applied to this blueprint.
+     */
+    Tags?: TagsMap;
+  }
+  export interface CreateBlueprintResponse {
+    /**
+     * Returns the name of the blueprint that was registered.
+     */
+    Name?: NameString;
   }
   export interface CreateClassifierRequest {
     /**
@@ -2955,6 +3177,9 @@ declare namespace Glue {
      * The tags to use with this trigger. You may use tags to limit access to the trigger. For more information about tags in Glue, see Amazon Web Services Tags in Glue in the developer guide. 
      */
     Tags?: TagsMap;
+    /**
+     * Batch condition that must be met (specified number of events received or batch time window expired) before EventBridge event trigger fires.
+     */
     EventBatchingCondition?: EventBatchingCondition;
   }
   export interface CreateTriggerResponse {
@@ -3209,6 +3434,18 @@ declare namespace Glue {
     Scale: Integer;
   }
   export type DeleteBehavior = "LOG"|"DELETE_FROM_DATABASE"|"DEPRECATE_IN_DATABASE"|string;
+  export interface DeleteBlueprintRequest {
+    /**
+     * The name of the blueprint to delete.
+     */
+    Name: NameString;
+  }
+  export interface DeleteBlueprintResponse {
+    /**
+     * Returns the name of the blueprint that was deleted.
+     */
+    Name?: NameString;
+  }
   export interface DeleteClassifierRequest {
     /**
      * Name of the classifier to remove.
@@ -3824,9 +4061,70 @@ declare namespace Glue {
     JobRunId?: HashString;
   }
   export type FormatString = string;
+  export type Generic512CharString = string;
   export type GenericBoundedDouble = number;
   export type GenericMap = {[key: string]: GenericString};
   export type GenericString = string;
+  export interface GetBlueprintRequest {
+    /**
+     * The name of the blueprint.
+     */
+    Name: NameString;
+    /**
+     * Specifies whether or not to include the blueprint in the response.
+     */
+    IncludeBlueprint?: NullableBoolean;
+    /**
+     * Specifies whether or not to include the parameter specification.
+     */
+    IncludeParameterSpec?: NullableBoolean;
+  }
+  export interface GetBlueprintResponse {
+    /**
+     * Returns a Blueprint object.
+     */
+    Blueprint?: Blueprint;
+  }
+  export interface GetBlueprintRunRequest {
+    /**
+     * The name of the blueprint.
+     */
+    BlueprintName: OrchestrationNameString;
+    /**
+     * The run ID for the blueprint run you want to retrieve.
+     */
+    RunId: IdString;
+  }
+  export interface GetBlueprintRunResponse {
+    /**
+     * Returns a BlueprintRun object.
+     */
+    BlueprintRun?: BlueprintRun;
+  }
+  export interface GetBlueprintRunsRequest {
+    /**
+     * The name of the blueprint.
+     */
+    BlueprintName: NameString;
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: GenericString;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+  }
+  export interface GetBlueprintRunsResponse {
+    /**
+     * Returns a list of BlueprintRun objects.
+     */
+    BlueprintRuns?: BlueprintRuns;
+    /**
+     * A continuation token, if not all blueprint runs have been returned.
+     */
+    NextToken?: GenericString;
+  }
   export interface GetCatalogImportStatusRequest {
     /**
      * The ID of the catalog to migrate. Currently, this should be the Amazon Web Services account ID.
@@ -5612,6 +5910,28 @@ declare namespace Glue {
     OutputS3Path?: UriString;
   }
   export type Language = "PYTHON"|"SCALA"|string;
+  export interface LastActiveDefinition {
+    /**
+     * The description of the blueprint.
+     */
+    Description?: Generic512CharString;
+    /**
+     * The date and time the blueprint was last modified.
+     */
+    LastModifiedOn?: TimestampValue;
+    /**
+     * A JSON string specifying the parameters for the blueprint.
+     */
+    ParameterSpec?: BlueprintParameterSpec;
+    /**
+     * Specifies a path in Amazon S3 where the blueprint is published by the Glue developer.
+     */
+    BlueprintLocation?: GenericString;
+    /**
+     * Specifies a path in Amazon S3 where the blueprint is copied when you create or update the blueprint.
+     */
+    BlueprintServiceLocation?: GenericString;
+  }
   export interface LastCrawlInfo {
     /**
      * Status of the last crawl.
@@ -5645,6 +5965,30 @@ declare namespace Glue {
      * Specifies whether data lineage is enabled for the crawler. Valid values are:   ENABLE: enables data lineage for the crawler   DISABLE: disables data lineage for the crawler  
      */
     CrawlerLineageSettings?: CrawlerLineageSettings;
+  }
+  export interface ListBlueprintsRequest {
+    /**
+     * A continuation token, if this is a continuation request.
+     */
+    NextToken?: GenericString;
+    /**
+     * The maximum size of a list to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * Filters the list by an Amazon Web Services resource tag.
+     */
+    Tags?: TagsMap;
+  }
+  export interface ListBlueprintsResponse {
+    /**
+     * List of names of blueprints in the account.
+     */
+    Blueprints?: BlueprintNames;
+    /**
+     * A continuation token, if not all blueprint names have been returned.
+     */
+    NextToken?: GenericString;
   }
   export interface ListCrawlersRequest {
     /**
@@ -6027,6 +6371,7 @@ declare namespace Glue {
   export type MaxResultsNumber = number;
   export type MaxRetries = number;
   export type MessagePrefix = string;
+  export type MessageString = string;
   export interface MetadataInfo {
     /**
      * The metadata key’s corresponding value.
@@ -6115,6 +6460,9 @@ declare namespace Glue {
   export type NullableBoolean = boolean;
   export type NullableDouble = number;
   export type NullableInteger = number;
+  export type OrchestrationIAMRoleArn = string;
+  export type OrchestrationNameString = string;
+  export type OrchestrationS3Location = string;
   export type OrchestrationStringList = GenericString[];
   export interface Order {
     /**
@@ -6938,6 +7286,26 @@ declare namespace Glue {
     Sort?: Sort;
   }
   export type SortDirectionType = "DESCENDING"|"ASCENDING"|string;
+  export interface StartBlueprintRunRequest {
+    /**
+     * The name of the blueprint.
+     */
+    BlueprintName: OrchestrationNameString;
+    /**
+     * Specifies the parameters as a BlueprintParameters object.
+     */
+    Parameters?: BlueprintParameters;
+    /**
+     * Specifies the IAM role used to create the workflow.
+     */
+    RoleArn: OrchestrationIAMRoleArn;
+  }
+  export interface StartBlueprintRunResponse {
+    /**
+     * The run ID for this blueprint run.
+     */
+    RunId?: IdString;
+  }
   export interface StartCrawlerRequest {
     /**
      * Name of the crawler to start.
@@ -7683,6 +8051,26 @@ declare namespace Glue {
   export interface UntagResourceResponse {
   }
   export type UpdateBehavior = "LOG"|"UPDATE_IN_DATABASE"|string;
+  export interface UpdateBlueprintRequest {
+    /**
+     * The name of the blueprint.
+     */
+    Name: OrchestrationNameString;
+    /**
+     * A description of the blueprint.
+     */
+    Description?: Generic512CharString;
+    /**
+     * Specifies a path in Amazon S3 where the blueprint is published.
+     */
+    BlueprintLocation: OrchestrationS3Location;
+  }
+  export interface UpdateBlueprintResponse {
+    /**
+     * Returns the name of the blueprint that was updated.
+     */
+    Name?: NameString;
+  }
   export interface UpdateClassifierRequest {
     /**
      * A GrokClassifier object with updated fields.
@@ -8288,6 +8676,10 @@ declare namespace Glue {
      * You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.
      */
     MaxConcurrentRuns?: NullableInteger;
+    /**
+     * This structure indicates the details of the blueprint that this particular workflow is created from.
+     */
+    BlueprintDetails?: BlueprintDetails;
   }
   export interface WorkflowGraph {
     /**

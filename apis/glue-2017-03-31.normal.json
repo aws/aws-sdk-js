@@ -155,6 +155,31 @@
       ],
       "documentation": "<p>Deletes a specified batch of versions of a table.</p>"
     },
+    "BatchGetBlueprints": {
+      "name": "BatchGetBlueprints",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "BatchGetBlueprintsRequest"
+      },
+      "output": {
+        "shape": "BatchGetBlueprintsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InvalidInputException"
+        }
+      ],
+      "documentation": "<p>Retrieves information about a list of blueprints.</p>"
+    },
     "BatchGetCrawlers": {
       "name": "BatchGetCrawlers",
       "http": {
@@ -419,6 +444,37 @@
         }
       ],
       "documentation": "<p>Validates the supplied schema. This call has no side effects, it simply validates using the supplied schema using <code>DataFormat</code> as the format. Since it does not take a schema set name, no compatibility checks are performed.</p>"
+    },
+    "CreateBlueprint": {
+      "name": "CreateBlueprint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateBlueprintRequest"
+      },
+      "output": {
+        "shape": "CreateBlueprintResponse"
+      },
+      "errors": [
+        {
+          "shape": "AlreadyExistsException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "ResourceNumberLimitExceededException"
+        }
+      ],
+      "documentation": "<p>Registers a blueprint with Glue.</p>"
     },
     "CreateClassifier": {
       "name": "CreateClassifier",
@@ -1000,6 +1056,31 @@
         }
       ],
       "documentation": "<p>Creates a new workflow.</p>"
+    },
+    "DeleteBlueprint": {
+      "name": "DeleteBlueprint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteBlueprintRequest"
+      },
+      "output": {
+        "shape": "DeleteBlueprintResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Deletes an existing blueprint.</p>"
     },
     "DeleteClassifier": {
       "name": "DeleteClassifier",
@@ -1594,6 +1675,87 @@
         }
       ],
       "documentation": "<p>Deletes a workflow.</p>"
+    },
+    "GetBlueprint": {
+      "name": "GetBlueprint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetBlueprintRequest"
+      },
+      "output": {
+        "shape": "GetBlueprintResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        }
+      ],
+      "documentation": "<p>Retrieves the details of a blueprint.</p>"
+    },
+    "GetBlueprintRun": {
+      "name": "GetBlueprintRun",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetBlueprintRunRequest"
+      },
+      "output": {
+        "shape": "GetBlueprintRunResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Retrieves the details of a blueprint run.</p>"
+    },
+    "GetBlueprintRuns": {
+      "name": "GetBlueprintRuns",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetBlueprintRunsRequest"
+      },
+      "output": {
+        "shape": "GetBlueprintRunsResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InvalidInputException"
+        }
+      ],
+      "documentation": "<p>Retrieves the details of blueprint runs for a specified blueprint.</p>"
     },
     "GetCatalogImportStatus": {
       "name": "GetCatalogImportStatus",
@@ -3058,6 +3220,31 @@
       ],
       "documentation": "<p>Imports an existing Amazon Athena Data Catalog to Glue.</p>"
     },
+    "ListBlueprints": {
+      "name": "ListBlueprints",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListBlueprintsRequest"
+      },
+      "output": {
+        "shape": "ListBlueprintsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Lists all the blueprint names in an account.</p>"
+    },
     "ListCrawlers": {
       "name": "ListCrawlers",
       "http": {
@@ -3590,6 +3777,40 @@
       ],
       "documentation": "<p>Searches a set of tables based on properties in the table metadata as well as on the parent database. You can search against text or filter conditions. </p> <p>You can only get tables that you have access to based on the security policies defined in Lake Formation. You need at least a read-only access to the table for it to be returned. If you do not have access to all the columns in the table, these columns will not be searched against when returning the list of tables back to you. If you have access to the columns but not the data in the columns, those columns and the associated metadata for those columns will be included in the search. </p>"
     },
+    "StartBlueprintRun": {
+      "name": "StartBlueprintRun",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartBlueprintRunRequest"
+      },
+      "output": {
+        "shape": "StartBlueprintRunResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "ResourceNumberLimitExceededException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "IllegalBlueprintStateException"
+        }
+      ],
+      "documentation": "<p>Starts a new run of the specified blueprint.</p>"
+    },
     "StartCrawler": {
       "name": "StartCrawler",
       "http": {
@@ -4045,6 +4266,40 @@
         }
       ],
       "documentation": "<p>Removes tags from a resource.</p>"
+    },
+    "UpdateBlueprint": {
+      "name": "UpdateBlueprint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateBlueprintRequest"
+      },
+      "output": {
+        "shape": "UpdateBlueprintResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "IllegalBlueprintStateException"
+        }
+      ],
+      "documentation": "<p>Updates a registered blueprint.</p>"
     },
     "UpdateClassifier": {
       "name": "UpdateClassifier",
@@ -4853,6 +5108,47 @@
         }
       }
     },
+    "BatchGetBlueprintNames": {
+      "type": "list",
+      "member": {
+        "shape": "OrchestrationNameString"
+      },
+      "max": 25,
+      "min": 1
+    },
+    "BatchGetBlueprintsRequest": {
+      "type": "structure",
+      "required": [
+        "Names"
+      ],
+      "members": {
+        "Names": {
+          "shape": "BatchGetBlueprintNames",
+          "documentation": "<p>A list of blueprint names.</p>"
+        },
+        "IncludeBlueprint": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Specifies whether or not to include the blueprint in the response.</p>"
+        },
+        "IncludeParameterSpec": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Specifies whether or not to include the parameters, as a JSON string, for the blueprint in the response.</p>"
+        }
+      }
+    },
+    "BatchGetBlueprintsResponse": {
+      "type": "structure",
+      "members": {
+        "Blueprints": {
+          "shape": "Blueprints",
+          "documentation": "<p>Returns a list of blueprint as a <code>Blueprints</code> object.</p>"
+        },
+        "MissingBlueprints": {
+          "shape": "BlueprintNames",
+          "documentation": "<p>Returns a list of <code>BlueprintNames</code> that were not found.</p>"
+        }
+      }
+    },
     "BatchGetCrawlersRequest": {
       "type": "structure",
       "required": [
@@ -5228,6 +5524,158 @@
     },
     "Blob": {
       "type": "blob"
+    },
+    "Blueprint": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "OrchestrationNameString",
+          "documentation": "<p>The name of the blueprint.</p>"
+        },
+        "Description": {
+          "shape": "Generic512CharString",
+          "documentation": "<p>The description of the blueprint.</p>"
+        },
+        "CreatedOn": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The date and time the blueprint was registered.</p>"
+        },
+        "LastModifiedOn": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The date and time the blueprint was last modified.</p>"
+        },
+        "ParameterSpec": {
+          "shape": "BlueprintParameterSpec",
+          "documentation": "<p>A JSON string that indicates the list of parameter specifications for the blueprint.</p>"
+        },
+        "BlueprintLocation": {
+          "shape": "GenericString",
+          "documentation": "<p>Specifies the path in Amazon S3 where the blueprint is published.</p>"
+        },
+        "BlueprintServiceLocation": {
+          "shape": "GenericString",
+          "documentation": "<p>Specifies a path in Amazon S3 where the blueprint is copied when you call <code>CreateBlueprint/UpdateBlueprint</code> to register the blueprint in Glue.</p>"
+        },
+        "Status": {
+          "shape": "BlueprintStatus",
+          "documentation": "<p>The status of the blueprint registration.</p> <ul> <li> <p>Creating — The blueprint registration is in progress.</p> </li> <li> <p>Active — The blueprint has been successfully registered.</p> </li> <li> <p>Updating — An update to the blueprint registration is in progress.</p> </li> <li> <p>Failed — The blueprint registration failed.</p> </li> </ul>"
+        },
+        "ErrorMessage": {
+          "shape": "ErrorString",
+          "documentation": "<p>An error message.</p>"
+        },
+        "LastActiveDefinition": {
+          "shape": "LastActiveDefinition",
+          "documentation": "<p>When there are multiple versions of a blueprint and the latest version has some errors, this attribute indicates the last successful blueprint definition that is available with the service.</p>"
+        }
+      },
+      "documentation": "<p>The details of a blueprint.</p>"
+    },
+    "BlueprintDetails": {
+      "type": "structure",
+      "members": {
+        "BlueprintName": {
+          "shape": "OrchestrationNameString",
+          "documentation": "<p>The name of the blueprint.</p>"
+        },
+        "RunId": {
+          "shape": "IdString",
+          "documentation": "<p>The run ID for this blueprint.</p>"
+        }
+      },
+      "documentation": "<p>The details of a blueprint.</p>"
+    },
+    "BlueprintNames": {
+      "type": "list",
+      "member": {
+        "shape": "OrchestrationNameString"
+      }
+    },
+    "BlueprintParameterSpec": {
+      "type": "string",
+      "max": 131072,
+      "min": 1
+    },
+    "BlueprintParameters": {
+      "type": "string",
+      "max": 131072,
+      "min": 1
+    },
+    "BlueprintRun": {
+      "type": "structure",
+      "members": {
+        "BlueprintName": {
+          "shape": "OrchestrationNameString",
+          "documentation": "<p>The name of the blueprint.</p>"
+        },
+        "RunId": {
+          "shape": "IdString",
+          "documentation": "<p>The run ID for this blueprint run.</p>"
+        },
+        "WorkflowName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of a workflow that is created as a result of a successful blueprint run. If a blueprint run has an error, there will not be a workflow created.</p>"
+        },
+        "State": {
+          "shape": "BlueprintRunState",
+          "documentation": "<p>The state of the blueprint run. Possible values are:</p> <ul> <li> <p>Running — The blueprint run is in progress.</p> </li> <li> <p>Succeeded — The blueprint run completed successfully.</p> </li> <li> <p>Failed — The blueprint run failed and rollback is complete.</p> </li> <li> <p>Rolling Back — The blueprint run failed and rollback is in progress.</p> </li> </ul>"
+        },
+        "StartedOn": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The date and time that the blueprint run started.</p>"
+        },
+        "CompletedOn": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The date and time that the blueprint run completed.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "MessageString",
+          "documentation": "<p>Indicates any errors that are seen while running the blueprint.</p>"
+        },
+        "RollbackErrorMessage": {
+          "shape": "MessageString",
+          "documentation": "<p>If there are any errors while creating the entities of a workflow, we try to roll back the created entities until that point and delete them. This attribute indicates the errors seen while trying to delete the entities that are created.</p>"
+        },
+        "Parameters": {
+          "shape": "BlueprintParameters",
+          "documentation": "<p>The blueprint parameters as a string. You will have to provide a value for each key that is required from the parameter spec that is defined in the <code>Blueprint$ParameterSpec</code>.</p>"
+        },
+        "RoleArn": {
+          "shape": "OrchestrationIAMRoleArn",
+          "documentation": "<p>The role ARN. This role will be assumed by the Glue service and will be used to create the workflow and other entities of a workflow.</p>"
+        }
+      },
+      "documentation": "<p>The details of a blueprint run.</p>"
+    },
+    "BlueprintRunState": {
+      "type": "string",
+      "enum": [
+        "RUNNING",
+        "SUCCEEDED",
+        "FAILED",
+        "ROLLING_BACK"
+      ]
+    },
+    "BlueprintRuns": {
+      "type": "list",
+      "member": {
+        "shape": "BlueprintRun"
+      }
+    },
+    "BlueprintStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "ACTIVE",
+        "UPDATING",
+        "FAILED"
+      ]
+    },
+    "Blueprints": {
+      "type": "list",
+      "member": {
+        "shape": "Blueprint"
+      }
     },
     "Boolean": {
       "type": "boolean"
@@ -6277,6 +6725,40 @@
       },
       "documentation": "<p>Specifies data stores to crawl.</p>"
     },
+    "CreateBlueprintRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "BlueprintLocation"
+      ],
+      "members": {
+        "Name": {
+          "shape": "OrchestrationNameString",
+          "documentation": "<p>The name of the blueprint.</p>"
+        },
+        "Description": {
+          "shape": "Generic512CharString",
+          "documentation": "<p>A description of the blueprint.</p>"
+        },
+        "BlueprintLocation": {
+          "shape": "OrchestrationS3Location",
+          "documentation": "<p>Specifies a path in Amazon S3 where the blueprint is published.</p>"
+        },
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>The tags to be applied to this blueprint.</p>"
+        }
+      }
+    },
+    "CreateBlueprintResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>Returns the name of the blueprint that was registered.</p>"
+        }
+      }
+    },
     "CreateClassifierRequest": {
       "type": "structure",
       "members": {
@@ -7146,7 +7628,8 @@
           "documentation": "<p>The tags to use with this trigger. You may use tags to limit access to the trigger. For more information about tags in Glue, see <a href=\"https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html\">Amazon Web Services Tags in Glue</a> in the developer guide. </p>"
         },
         "EventBatchingCondition": {
-          "shape": "EventBatchingCondition"
+          "shape": "EventBatchingCondition",
+          "documentation": "<p>Batch condition that must be met (specified number of events received or batch time window expired) before EventBridge event trigger fires.</p>"
         }
       }
     },
@@ -7552,6 +8035,27 @@
         "DELETE_FROM_DATABASE",
         "DEPRECATE_IN_DATABASE"
       ]
+    },
+    "DeleteBlueprintRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the blueprint to delete.</p>"
+        }
+      }
+    },
+    "DeleteBlueprintResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>Returns the name of the blueprint that was deleted.</p>"
+        }
+      }
     },
     "DeleteClassifierRequest": {
       "type": "structure",
@@ -8517,6 +9021,11 @@
       "max": 128,
       "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
     },
+    "Generic512CharString": {
+      "type": "string",
+      "max": 512,
+      "min": 1
+    },
     "GenericBoundedDouble": {
       "type": "double",
       "box": true,
@@ -8534,6 +9043,94 @@
     },
     "GenericString": {
       "type": "string"
+    },
+    "GetBlueprintRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the blueprint.</p>"
+        },
+        "IncludeBlueprint": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Specifies whether or not to include the blueprint in the response.</p>"
+        },
+        "IncludeParameterSpec": {
+          "shape": "NullableBoolean",
+          "documentation": "<p>Specifies whether or not to include the parameter specification.</p>"
+        }
+      }
+    },
+    "GetBlueprintResponse": {
+      "type": "structure",
+      "members": {
+        "Blueprint": {
+          "shape": "Blueprint",
+          "documentation": "<p>Returns a <code>Blueprint</code> object.</p>"
+        }
+      }
+    },
+    "GetBlueprintRunRequest": {
+      "type": "structure",
+      "required": [
+        "BlueprintName",
+        "RunId"
+      ],
+      "members": {
+        "BlueprintName": {
+          "shape": "OrchestrationNameString",
+          "documentation": "<p>The name of the blueprint.</p>"
+        },
+        "RunId": {
+          "shape": "IdString",
+          "documentation": "<p>The run ID for the blueprint run you want to retrieve.</p>"
+        }
+      }
+    },
+    "GetBlueprintRunResponse": {
+      "type": "structure",
+      "members": {
+        "BlueprintRun": {
+          "shape": "BlueprintRun",
+          "documentation": "<p>Returns a <code>BlueprintRun</code> object.</p>"
+        }
+      }
+    },
+    "GetBlueprintRunsRequest": {
+      "type": "structure",
+      "required": [
+        "BlueprintName"
+      ],
+      "members": {
+        "BlueprintName": {
+          "shape": "NameString",
+          "documentation": "<p>The name of the blueprint.</p>"
+        },
+        "NextToken": {
+          "shape": "GenericString",
+          "documentation": "<p>A continuation token, if this is a continuation request.</p>"
+        },
+        "MaxResults": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum size of a list to return.</p>"
+        }
+      }
+    },
+    "GetBlueprintRunsResponse": {
+      "type": "structure",
+      "members": {
+        "BlueprintRuns": {
+          "shape": "BlueprintRuns",
+          "documentation": "<p>Returns a list of <code>BlueprintRun</code> objects.</p>"
+        },
+        "NextToken": {
+          "shape": "GenericString",
+          "documentation": "<p>A continuation token, if not all blueprint runs have been returned.</p>"
+        }
+      }
     },
     "GetCatalogImportStatusRequest": {
       "type": "structure",
@@ -10995,6 +11592,32 @@
         "SCALA"
       ]
     },
+    "LastActiveDefinition": {
+      "type": "structure",
+      "members": {
+        "Description": {
+          "shape": "Generic512CharString",
+          "documentation": "<p>The description of the blueprint.</p>"
+        },
+        "LastModifiedOn": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The date and time the blueprint was last modified.</p>"
+        },
+        "ParameterSpec": {
+          "shape": "BlueprintParameterSpec",
+          "documentation": "<p>A JSON string specifying the parameters for the blueprint.</p>"
+        },
+        "BlueprintLocation": {
+          "shape": "GenericString",
+          "documentation": "<p>Specifies a path in Amazon S3 where the blueprint is published by the Glue developer.</p>"
+        },
+        "BlueprintServiceLocation": {
+          "shape": "GenericString",
+          "documentation": "<p>Specifies a path in Amazon S3 where the blueprint is copied when you create or update the blueprint.</p>"
+        }
+      },
+      "documentation": "<p>When there are multiple versions of a blueprint and the latest version has some errors, this attribute indicates the last successful blueprint definition that is available with the service.</p>"
+    },
     "LastCrawlInfo": {
       "type": "structure",
       "members": {
@@ -11045,6 +11668,36 @@
         }
       },
       "documentation": "<p>Specifies data lineage configuration settings for the crawler.</p>"
+    },
+    "ListBlueprintsRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "GenericString",
+          "documentation": "<p>A continuation token, if this is a continuation request.</p>"
+        },
+        "MaxResults": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum size of a list to return.</p>"
+        },
+        "Tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>Filters the list by an Amazon Web Services resource tag.</p>"
+        }
+      }
+    },
+    "ListBlueprintsResponse": {
+      "type": "structure",
+      "members": {
+        "Blueprints": {
+          "shape": "BlueprintNames",
+          "documentation": "<p>List of names of blueprints in the account.</p>"
+        },
+        "NextToken": {
+          "shape": "GenericString",
+          "documentation": "<p>A continuation token, if not all blueprint names have been returned.</p>"
+        }
+      }
     },
     "ListCrawlersRequest": {
       "type": "structure",
@@ -11591,6 +12244,9 @@
       "min": 1,
       "pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*"
     },
+    "MessageString": {
+      "type": "string"
+    },
     "MetadataInfo": {
       "type": "structure",
       "members": {
@@ -11777,6 +12433,24 @@
     "NullableInteger": {
       "type": "integer",
       "box": true
+    },
+    "OrchestrationIAMRoleArn": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "arn:aws[^:]*:iam::[0-9]*:role/.+"
+    },
+    "OrchestrationNameString": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[\\.\\-_A-Za-z0-9]+"
+    },
+    "OrchestrationS3Location": {
+      "type": "string",
+      "max": 8192,
+      "min": 1,
+      "pattern": "^s3://([^/]+)/([^/]+/)*([^/]+)$"
     },
     "OrchestrationStringList": {
       "type": "list",
@@ -13160,6 +13834,36 @@
         "ASCENDING"
       ]
     },
+    "StartBlueprintRunRequest": {
+      "type": "structure",
+      "required": [
+        "BlueprintName",
+        "RoleArn"
+      ],
+      "members": {
+        "BlueprintName": {
+          "shape": "OrchestrationNameString",
+          "documentation": "<p>The name of the blueprint.</p>"
+        },
+        "Parameters": {
+          "shape": "BlueprintParameters",
+          "documentation": "<p>Specifies the parameters as a <code>BlueprintParameters</code> object.</p>"
+        },
+        "RoleArn": {
+          "shape": "OrchestrationIAMRoleArn",
+          "documentation": "<p>Specifies the IAM role used to create the workflow.</p>"
+        }
+      }
+    },
+    "StartBlueprintRunResponse": {
+      "type": "structure",
+      "members": {
+        "RunId": {
+          "shape": "IdString",
+          "documentation": "<p>The run ID for this blueprint run.</p>"
+        }
+      }
+    },
     "StartCrawlerRequest": {
       "type": "structure",
       "required": [
@@ -14327,6 +15031,36 @@
         "UPDATE_IN_DATABASE"
       ]
     },
+    "UpdateBlueprintRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "BlueprintLocation"
+      ],
+      "members": {
+        "Name": {
+          "shape": "OrchestrationNameString",
+          "documentation": "<p>The name of the blueprint.</p>"
+        },
+        "Description": {
+          "shape": "Generic512CharString",
+          "documentation": "<p>A description of the blueprint.</p>"
+        },
+        "BlueprintLocation": {
+          "shape": "OrchestrationS3Location",
+          "documentation": "<p>Specifies a path in Amazon S3 where the blueprint is published.</p>"
+        }
+      }
+    },
+    "UpdateBlueprintResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>Returns the name of the blueprint that was updated.</p>"
+        }
+      }
+    },
     "UpdateClassifierRequest": {
       "type": "structure",
       "members": {
@@ -15176,6 +15910,10 @@
         "MaxConcurrentRuns": {
           "shape": "NullableInteger",
           "documentation": "<p>You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.</p>"
+        },
+        "BlueprintDetails": {
+          "shape": "BlueprintDetails",
+          "documentation": "<p>This structure indicates the details of the blueprint that this particular workflow is created from.</p>"
         }
       },
       "documentation": "<p>A workflow is a collection of multiple dependent Glue jobs and crawlers that are run to complete a complex ETL task. A workflow manages the execution and monitoring of all its jobs and crawlers.</p>"

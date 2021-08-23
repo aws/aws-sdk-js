@@ -12,11 +12,11 @@ declare class Backup extends Service {
   constructor(options?: Backup.Types.ClientConfiguration)
   config: Config & Backup.Types.ClientConfiguration;
   /**
-   * Creates a backup plan using a backup plan name and backup rules. A backup plan is a document that contains information that AWS Backup uses to schedule tasks that create recovery points for resources. If you call CreateBackupPlan with a plan that already exists, an AlreadyExistsException is returned.
+   * Creates a backup plan using a backup plan name and backup rules. A backup plan is a document that contains information that Backup uses to schedule tasks that create recovery points for resources. If you call CreateBackupPlan with a plan that already exists, you receive an AlreadyExistsException exception.
    */
   createBackupPlan(params: Backup.Types.CreateBackupPlanInput, callback?: (err: AWSError, data: Backup.Types.CreateBackupPlanOutput) => void): Request<Backup.Types.CreateBackupPlanOutput, AWSError>;
   /**
-   * Creates a backup plan using a backup plan name and backup rules. A backup plan is a document that contains information that AWS Backup uses to schedule tasks that create recovery points for resources. If you call CreateBackupPlan with a plan that already exists, an AlreadyExistsException is returned.
+   * Creates a backup plan using a backup plan name and backup rules. A backup plan is a document that contains information that Backup uses to schedule tasks that create recovery points for resources. If you call CreateBackupPlan with a plan that already exists, you receive an AlreadyExistsException exception.
    */
   createBackupPlan(callback?: (err: AWSError, data: Backup.Types.CreateBackupPlanOutput) => void): Request<Backup.Types.CreateBackupPlanOutput, AWSError>;
   /**
@@ -28,13 +28,29 @@ declare class Backup extends Service {
    */
   createBackupSelection(callback?: (err: AWSError, data: Backup.Types.CreateBackupSelectionOutput) => void): Request<Backup.Types.CreateBackupSelectionOutput, AWSError>;
   /**
-   * Creates a logical container where backups are stored. A CreateBackupVault request includes a name, optionally one or more resource tags, an encryption key, and a request ID.  Sensitive data, such as passport numbers, should not be included the name of a backup vault. 
+   * Creates a logical container where backups are stored. A CreateBackupVault request includes a name, optionally one or more resource tags, an encryption key, and a request ID.  Do not include sensitive data, such as passport numbers, in the name of a backup vault. 
    */
   createBackupVault(params: Backup.Types.CreateBackupVaultInput, callback?: (err: AWSError, data: Backup.Types.CreateBackupVaultOutput) => void): Request<Backup.Types.CreateBackupVaultOutput, AWSError>;
   /**
-   * Creates a logical container where backups are stored. A CreateBackupVault request includes a name, optionally one or more resource tags, an encryption key, and a request ID.  Sensitive data, such as passport numbers, should not be included the name of a backup vault. 
+   * Creates a logical container where backups are stored. A CreateBackupVault request includes a name, optionally one or more resource tags, an encryption key, and a request ID.  Do not include sensitive data, such as passport numbers, in the name of a backup vault. 
    */
   createBackupVault(callback?: (err: AWSError, data: Backup.Types.CreateBackupVaultOutput) => void): Request<Backup.Types.CreateBackupVaultOutput, AWSError>;
+  /**
+   * Creates a framework with one or more controls. A framework is a collection of controls that you can use to evaluate your backup practices. By using pre-built customizable controls to define your policies, you can evaluate whether your backup practices comply with your policies. To get insights into the compliance status of your frameworks, you can set up automatic daily reports.
+   */
+  createFramework(params: Backup.Types.CreateFrameworkInput, callback?: (err: AWSError, data: Backup.Types.CreateFrameworkOutput) => void): Request<Backup.Types.CreateFrameworkOutput, AWSError>;
+  /**
+   * Creates a framework with one or more controls. A framework is a collection of controls that you can use to evaluate your backup practices. By using pre-built customizable controls to define your policies, you can evaluate whether your backup practices comply with your policies. To get insights into the compliance status of your frameworks, you can set up automatic daily reports.
+   */
+  createFramework(callback?: (err: AWSError, data: Backup.Types.CreateFrameworkOutput) => void): Request<Backup.Types.CreateFrameworkOutput, AWSError>;
+  /**
+   * Creates a report plan. A report plan is a document that contains information about the contents of the report and where Backup will deliver it. If you call CreateReportPlan with a plan that already exists, you receive an AlreadyExistsException exception.
+   */
+  createReportPlan(params: Backup.Types.CreateReportPlanInput, callback?: (err: AWSError, data: Backup.Types.CreateReportPlanOutput) => void): Request<Backup.Types.CreateReportPlanOutput, AWSError>;
+  /**
+   * Creates a report plan. A report plan is a document that contains information about the contents of the report and where Backup will deliver it. If you call CreateReportPlan with a plan that already exists, you receive an AlreadyExistsException exception.
+   */
+  createReportPlan(callback?: (err: AWSError, data: Backup.Types.CreateReportPlanOutput) => void): Request<Backup.Types.CreateReportPlanOutput, AWSError>;
   /**
    * Deletes a backup plan. A backup plan can only be deleted after all associated selections of resources have been deleted. Deleting a backup plan deletes the current version of a backup plan. Previous versions, if any, will still exist.
    */
@@ -76,6 +92,14 @@ declare class Backup extends Service {
    */
   deleteBackupVaultNotifications(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the framework specified by a framework name.
+   */
+  deleteFramework(params: Backup.Types.DeleteFrameworkInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the framework specified by a framework name.
+   */
+  deleteFramework(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the recovery point specified by a recovery point ID. If the recovery point ID belongs to a continuous backup, calling this endpoint deletes the existing continuous backup and stops future continuous backup.
    */
   deleteRecoveryPoint(params: Backup.Types.DeleteRecoveryPointInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -83,6 +107,14 @@ declare class Backup extends Service {
    * Deletes the recovery point specified by a recovery point ID. If the recovery point ID belongs to a continuous backup, calling this endpoint deletes the existing continuous backup and stops future continuous backup.
    */
   deleteRecoveryPoint(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the report plan specified by a report plan name.
+   */
+  deleteReportPlan(params: Backup.Types.DeleteReportPlanInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the report plan specified by a report plan name.
+   */
+  deleteReportPlan(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Returns backup job details for the specified BackupJobId.
    */
@@ -108,19 +140,27 @@ declare class Backup extends Service {
    */
   describeCopyJob(callback?: (err: AWSError, data: Backup.Types.DescribeCopyJobOutput) => void): Request<Backup.Types.DescribeCopyJobOutput, AWSError>;
   /**
-   * Describes the global settings of the AWS account, including whether it is opted in to cross-account backup.
+   * Returns the framework details for the specified FrameworkName.
+   */
+  describeFramework(params: Backup.Types.DescribeFrameworkInput, callback?: (err: AWSError, data: Backup.Types.DescribeFrameworkOutput) => void): Request<Backup.Types.DescribeFrameworkOutput, AWSError>;
+  /**
+   * Returns the framework details for the specified FrameworkName.
+   */
+  describeFramework(callback?: (err: AWSError, data: Backup.Types.DescribeFrameworkOutput) => void): Request<Backup.Types.DescribeFrameworkOutput, AWSError>;
+  /**
+   * Describes whether the Amazon Web Services account is opted in to cross-account backup. Returns an error if the account is not a member of an Organizations organization. Example: describe-global-settings --region us-west-2 
    */
   describeGlobalSettings(params: Backup.Types.DescribeGlobalSettingsInput, callback?: (err: AWSError, data: Backup.Types.DescribeGlobalSettingsOutput) => void): Request<Backup.Types.DescribeGlobalSettingsOutput, AWSError>;
   /**
-   * Describes the global settings of the AWS account, including whether it is opted in to cross-account backup.
+   * Describes whether the Amazon Web Services account is opted in to cross-account backup. Returns an error if the account is not a member of an Organizations organization. Example: describe-global-settings --region us-west-2 
    */
   describeGlobalSettings(callback?: (err: AWSError, data: Backup.Types.DescribeGlobalSettingsOutput) => void): Request<Backup.Types.DescribeGlobalSettingsOutput, AWSError>;
   /**
-   * Returns information about a saved resource, including the last time it was backed up, its Amazon Resource Name (ARN), and the AWS service type of the saved resource.
+   * Returns information about a saved resource, including the last time it was backed up, its Amazon Resource Name (ARN), and the Amazon Web Services service type of the saved resource.
    */
   describeProtectedResource(params: Backup.Types.DescribeProtectedResourceInput, callback?: (err: AWSError, data: Backup.Types.DescribeProtectedResourceOutput) => void): Request<Backup.Types.DescribeProtectedResourceOutput, AWSError>;
   /**
-   * Returns information about a saved resource, including the last time it was backed up, its Amazon Resource Name (ARN), and the AWS service type of the saved resource.
+   * Returns information about a saved resource, including the last time it was backed up, its Amazon Resource Name (ARN), and the Amazon Web Services service type of the saved resource.
    */
   describeProtectedResource(callback?: (err: AWSError, data: Backup.Types.DescribeProtectedResourceOutput) => void): Request<Backup.Types.DescribeProtectedResourceOutput, AWSError>;
   /**
@@ -132,13 +172,29 @@ declare class Backup extends Service {
    */
   describeRecoveryPoint(callback?: (err: AWSError, data: Backup.Types.DescribeRecoveryPointOutput) => void): Request<Backup.Types.DescribeRecoveryPointOutput, AWSError>;
   /**
-   * Returns the current service opt-in settings for the Region. If service-opt-in is enabled for a service, AWS Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS Backup does not try to protect that service's resources in this Region, AWS Backup does not try to protect that service's resources in this Region.
+   * Returns the current service opt-in settings for the Region. If service opt-in is enabled for a service, Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, Backup does not try to protect that service's resources in this Region.
    */
   describeRegionSettings(params: Backup.Types.DescribeRegionSettingsInput, callback?: (err: AWSError, data: Backup.Types.DescribeRegionSettingsOutput) => void): Request<Backup.Types.DescribeRegionSettingsOutput, AWSError>;
   /**
-   * Returns the current service opt-in settings for the Region. If service-opt-in is enabled for a service, AWS Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS Backup does not try to protect that service's resources in this Region, AWS Backup does not try to protect that service's resources in this Region.
+   * Returns the current service opt-in settings for the Region. If service opt-in is enabled for a service, Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, Backup does not try to protect that service's resources in this Region.
    */
   describeRegionSettings(callback?: (err: AWSError, data: Backup.Types.DescribeRegionSettingsOutput) => void): Request<Backup.Types.DescribeRegionSettingsOutput, AWSError>;
+  /**
+   * Returns the details associated with creating a report as specified by its ReportJobId.
+   */
+  describeReportJob(params: Backup.Types.DescribeReportJobInput, callback?: (err: AWSError, data: Backup.Types.DescribeReportJobOutput) => void): Request<Backup.Types.DescribeReportJobOutput, AWSError>;
+  /**
+   * Returns the details associated with creating a report as specified by its ReportJobId.
+   */
+  describeReportJob(callback?: (err: AWSError, data: Backup.Types.DescribeReportJobOutput) => void): Request<Backup.Types.DescribeReportJobOutput, AWSError>;
+  /**
+   * Returns a list of all report plans for an Amazon Web Services account and Amazon Web Services Region.
+   */
+  describeReportPlan(params: Backup.Types.DescribeReportPlanInput, callback?: (err: AWSError, data: Backup.Types.DescribeReportPlanOutput) => void): Request<Backup.Types.DescribeReportPlanOutput, AWSError>;
+  /**
+   * Returns a list of all report plans for an Amazon Web Services account and Amazon Web Services Region.
+   */
+  describeReportPlan(callback?: (err: AWSError, data: Backup.Types.DescribeReportPlanOutput) => void): Request<Backup.Types.DescribeReportPlanOutput, AWSError>;
   /**
    * Returns metadata associated with a restore job that is specified by a job ID.
    */
@@ -148,11 +204,11 @@ declare class Backup extends Service {
    */
   describeRestoreJob(callback?: (err: AWSError, data: Backup.Types.DescribeRestoreJobOutput) => void): Request<Backup.Types.DescribeRestoreJobOutput, AWSError>;
   /**
-   * Deletes the specified continuous backup recovery point from AWS Backup and releases control of that continuous backup to the source service, such as Amazon RDS. The source service will continue to create and retain continuous backups using the lifecycle that you specified in your original backup plan. Does not support snapshot backup recovery points.
+   * Deletes the specified continuous backup recovery point from Backup and releases control of that continuous backup to the source service, such as Amazon RDS. The source service will continue to create and retain continuous backups using the lifecycle that you specified in your original backup plan. Does not support snapshot backup recovery points.
    */
   disassociateRecoveryPoint(params: Backup.Types.DisassociateRecoveryPointInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified continuous backup recovery point from AWS Backup and releases control of that continuous backup to the source service, such as Amazon RDS. The source service will continue to create and retain continuous backups using the lifecycle that you specified in your original backup plan. Does not support snapshot backup recovery points.
+   * Deletes the specified continuous backup recovery point from Backup and releases control of that continuous backup to the source service, such as Amazon RDS. The source service will continue to create and retain continuous backups using the lifecycle that you specified in your original backup plan. Does not support snapshot backup recovery points.
    */
   disassociateRecoveryPoint(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -220,7 +276,7 @@ declare class Backup extends Service {
    */
   getRecoveryPointRestoreMetadata(callback?: (err: AWSError, data: Backup.Types.GetRecoveryPointRestoreMetadataOutput) => void): Request<Backup.Types.GetRecoveryPointRestoreMetadataOutput, AWSError>;
   /**
-   * Returns the AWS resource types supported by AWS Backup.
+   * Returns the Amazon Web Services resource types supported by Backup.
    */
   getSupportedResourceTypes(callback?: (err: AWSError, data: Backup.Types.GetSupportedResourceTypesOutput) => void): Request<Backup.Types.GetSupportedResourceTypesOutput, AWSError>;
   /**
@@ -248,11 +304,11 @@ declare class Backup extends Service {
    */
   listBackupPlanVersions(callback?: (err: AWSError, data: Backup.Types.ListBackupPlanVersionsOutput) => void): Request<Backup.Types.ListBackupPlanVersionsOutput, AWSError>;
   /**
-   * Returns a list of existing backup plans for an authenticated account. The list is populated only if the advanced option is set for the backup plan. The list contains information such as Amazon Resource Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan names, and creator request IDs.
+   * Returns a list of all active backup plans for an authenticated account. The list contains information such as Amazon Resource Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan names, and creator request IDs.
    */
   listBackupPlans(params: Backup.Types.ListBackupPlansInput, callback?: (err: AWSError, data: Backup.Types.ListBackupPlansOutput) => void): Request<Backup.Types.ListBackupPlansOutput, AWSError>;
   /**
-   * Returns a list of existing backup plans for an authenticated account. The list is populated only if the advanced option is set for the backup plan. The list contains information such as Amazon Resource Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan names, and creator request IDs.
+   * Returns a list of all active backup plans for an authenticated account. The list contains information such as Amazon Resource Names (ARNs), plan IDs, creation and deletion dates, version IDs, plan names, and creator request IDs.
    */
   listBackupPlans(callback?: (err: AWSError, data: Backup.Types.ListBackupPlansOutput) => void): Request<Backup.Types.ListBackupPlansOutput, AWSError>;
   /**
@@ -280,11 +336,19 @@ declare class Backup extends Service {
    */
   listCopyJobs(callback?: (err: AWSError, data: Backup.Types.ListCopyJobsOutput) => void): Request<Backup.Types.ListCopyJobsOutput, AWSError>;
   /**
-   * Returns an array of resources successfully backed up by AWS Backup, including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
+   * Returns a list of all frameworks for an Amazon Web Services account and Amazon Web Services Region.
+   */
+  listFrameworks(params: Backup.Types.ListFrameworksInput, callback?: (err: AWSError, data: Backup.Types.ListFrameworksOutput) => void): Request<Backup.Types.ListFrameworksOutput, AWSError>;
+  /**
+   * Returns a list of all frameworks for an Amazon Web Services account and Amazon Web Services Region.
+   */
+  listFrameworks(callback?: (err: AWSError, data: Backup.Types.ListFrameworksOutput) => void): Request<Backup.Types.ListFrameworksOutput, AWSError>;
+  /**
+   * Returns an array of resources successfully backed up by Backup, including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
    */
   listProtectedResources(params: Backup.Types.ListProtectedResourcesInput, callback?: (err: AWSError, data: Backup.Types.ListProtectedResourcesOutput) => void): Request<Backup.Types.ListProtectedResourcesOutput, AWSError>;
   /**
-   * Returns an array of resources successfully backed up by AWS Backup, including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
+   * Returns an array of resources successfully backed up by Backup, including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
    */
   listProtectedResources(callback?: (err: AWSError, data: Backup.Types.ListProtectedResourcesOutput) => void): Request<Backup.Types.ListProtectedResourcesOutput, AWSError>;
   /**
@@ -296,19 +360,35 @@ declare class Backup extends Service {
    */
   listRecoveryPointsByBackupVault(callback?: (err: AWSError, data: Backup.Types.ListRecoveryPointsByBackupVaultOutput) => void): Request<Backup.Types.ListRecoveryPointsByBackupVaultOutput, AWSError>;
   /**
-   * Returns detailed information about recovery points of the type specified by a resource Amazon Resource Name (ARN).
+   * Returns detailed information about all the recovery points of the type specified by a resource Amazon Resource Name (ARN).  For Amazon EFS and Amazon EC2, this action only lists recovery points created by Backup. 
    */
   listRecoveryPointsByResource(params: Backup.Types.ListRecoveryPointsByResourceInput, callback?: (err: AWSError, data: Backup.Types.ListRecoveryPointsByResourceOutput) => void): Request<Backup.Types.ListRecoveryPointsByResourceOutput, AWSError>;
   /**
-   * Returns detailed information about recovery points of the type specified by a resource Amazon Resource Name (ARN).
+   * Returns detailed information about all the recovery points of the type specified by a resource Amazon Resource Name (ARN).  For Amazon EFS and Amazon EC2, this action only lists recovery points created by Backup. 
    */
   listRecoveryPointsByResource(callback?: (err: AWSError, data: Backup.Types.ListRecoveryPointsByResourceOutput) => void): Request<Backup.Types.ListRecoveryPointsByResourceOutput, AWSError>;
   /**
-   * Returns a list of jobs that AWS Backup initiated to restore a saved resource, including metadata about the recovery process.
+   * Returns details about your report jobs.
+   */
+  listReportJobs(params: Backup.Types.ListReportJobsInput, callback?: (err: AWSError, data: Backup.Types.ListReportJobsOutput) => void): Request<Backup.Types.ListReportJobsOutput, AWSError>;
+  /**
+   * Returns details about your report jobs.
+   */
+  listReportJobs(callback?: (err: AWSError, data: Backup.Types.ListReportJobsOutput) => void): Request<Backup.Types.ListReportJobsOutput, AWSError>;
+  /**
+   * Returns a list of your report plans. For detailed information about a single report plan, use DescribeReportPlan.
+   */
+  listReportPlans(params: Backup.Types.ListReportPlansInput, callback?: (err: AWSError, data: Backup.Types.ListReportPlansOutput) => void): Request<Backup.Types.ListReportPlansOutput, AWSError>;
+  /**
+   * Returns a list of your report plans. For detailed information about a single report plan, use DescribeReportPlan.
+   */
+  listReportPlans(callback?: (err: AWSError, data: Backup.Types.ListReportPlansOutput) => void): Request<Backup.Types.ListReportPlansOutput, AWSError>;
+  /**
+   * Returns a list of jobs that Backup initiated to restore a saved resource, including details about the recovery process.
    */
   listRestoreJobs(params: Backup.Types.ListRestoreJobsInput, callback?: (err: AWSError, data: Backup.Types.ListRestoreJobsOutput) => void): Request<Backup.Types.ListRestoreJobsOutput, AWSError>;
   /**
-   * Returns a list of jobs that AWS Backup initiated to restore a saved resource, including metadata about the recovery process.
+   * Returns a list of jobs that Backup initiated to restore a saved resource, including details about the recovery process.
    */
   listRestoreJobs(callback?: (err: AWSError, data: Backup.Types.ListRestoreJobsOutput) => void): Request<Backup.Types.ListRestoreJobsOutput, AWSError>;
   /**
@@ -352,6 +432,14 @@ declare class Backup extends Service {
    */
   startCopyJob(callback?: (err: AWSError, data: Backup.Types.StartCopyJobOutput) => void): Request<Backup.Types.StartCopyJobOutput, AWSError>;
   /**
+   * Starts an on-demand report job for the specified report plan.
+   */
+  startReportJob(params: Backup.Types.StartReportJobInput, callback?: (err: AWSError, data: Backup.Types.StartReportJobOutput) => void): Request<Backup.Types.StartReportJobOutput, AWSError>;
+  /**
+   * Starts an on-demand report job for the specified report plan.
+   */
+  startReportJob(callback?: (err: AWSError, data: Backup.Types.StartReportJobOutput) => void): Request<Backup.Types.StartReportJobOutput, AWSError>;
+  /**
    * Recovers the saved resource identified by an Amazon Resource Name (ARN).
    */
   startRestoreJob(params: Backup.Types.StartRestoreJobInput, callback?: (err: AWSError, data: Backup.Types.StartRestoreJobOutput) => void): Request<Backup.Types.StartRestoreJobOutput, AWSError>;
@@ -392,40 +480,56 @@ declare class Backup extends Service {
    */
   updateBackupPlan(callback?: (err: AWSError, data: Backup.Types.UpdateBackupPlanOutput) => void): Request<Backup.Types.UpdateBackupPlanOutput, AWSError>;
   /**
-   * Updates the current global settings for the AWS account. Use the DescribeGlobalSettings API to determine the current settings.
+   * Updates an existing framework identified by its FrameworkName with the input document in JSON format.
+   */
+  updateFramework(params: Backup.Types.UpdateFrameworkInput, callback?: (err: AWSError, data: Backup.Types.UpdateFrameworkOutput) => void): Request<Backup.Types.UpdateFrameworkOutput, AWSError>;
+  /**
+   * Updates an existing framework identified by its FrameworkName with the input document in JSON format.
+   */
+  updateFramework(callback?: (err: AWSError, data: Backup.Types.UpdateFrameworkOutput) => void): Request<Backup.Types.UpdateFrameworkOutput, AWSError>;
+  /**
+   * Updates whether the Amazon Web Services account is opted in to cross-account backup. Returns an error if the account is not an Organizations management account. Use the DescribeGlobalSettings API to determine the current settings.
    */
   updateGlobalSettings(params: Backup.Types.UpdateGlobalSettingsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the current global settings for the AWS account. Use the DescribeGlobalSettings API to determine the current settings.
+   * Updates whether the Amazon Web Services account is opted in to cross-account backup. Returns an error if the account is not an Organizations management account. Use the DescribeGlobalSettings API to determine the current settings.
    */
   updateGlobalSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the transition lifecycle of a recovery point. The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. Only Amazon EFS file system backups can be transitioned to cold storage. Does not support continuous backups.
+   * Sets the transition lifecycle of a recovery point. The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define. Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. Only Amazon EFS file system backups can be transitioned to cold storage. Does not support continuous backups.
    */
   updateRecoveryPointLifecycle(params: Backup.Types.UpdateRecoveryPointLifecycleInput, callback?: (err: AWSError, data: Backup.Types.UpdateRecoveryPointLifecycleOutput) => void): Request<Backup.Types.UpdateRecoveryPointLifecycleOutput, AWSError>;
   /**
-   * Sets the transition lifecycle of a recovery point. The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define. Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. Only Amazon EFS file system backups can be transitioned to cold storage. Does not support continuous backups.
+   * Sets the transition lifecycle of a recovery point. The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define. Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. Only Amazon EFS file system backups can be transitioned to cold storage. Does not support continuous backups.
    */
   updateRecoveryPointLifecycle(callback?: (err: AWSError, data: Backup.Types.UpdateRecoveryPointLifecycleOutput) => void): Request<Backup.Types.UpdateRecoveryPointLifecycleOutput, AWSError>;
   /**
-   * Updates the current service opt-in settings for the Region. If service-opt-in is enabled for a service, AWS Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS Backup does not try to protect that service's resources in this Region. Use the DescribeRegionSettings API to determine the resource types that are supported.
+   * Updates the current service opt-in settings for the Region. If service-opt-in is enabled for a service, Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, Backup does not try to protect that service's resources in this Region. Use the DescribeRegionSettings API to determine the resource types that are supported.
    */
   updateRegionSettings(params: Backup.Types.UpdateRegionSettingsInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the current service opt-in settings for the Region. If service-opt-in is enabled for a service, AWS Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS Backup does not try to protect that service's resources in this Region. Use the DescribeRegionSettings API to determine the resource types that are supported.
+   * Updates the current service opt-in settings for the Region. If service-opt-in is enabled for a service, Backup tries to protect that service's resources in this Region, when the resource is included in an on-demand backup or scheduled backup plan. Otherwise, Backup does not try to protect that service's resources in this Region. Use the DescribeRegionSettings API to determine the resource types that are supported.
    */
   updateRegionSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates an existing report plan identified by its ReportPlanName with the input document in JSON format.
+   */
+  updateReportPlan(params: Backup.Types.UpdateReportPlanInput, callback?: (err: AWSError, data: Backup.Types.UpdateReportPlanOutput) => void): Request<Backup.Types.UpdateReportPlanOutput, AWSError>;
+  /**
+   * Updates an existing report plan identified by its ReportPlanName with the input document in JSON format.
+   */
+  updateReportPlan(callback?: (err: AWSError, data: Backup.Types.UpdateReportPlanOutput) => void): Request<Backup.Types.UpdateReportPlanOutput, AWSError>;
 }
 declare namespace Backup {
   export type ARN = string;
   export type AccountId = string;
   export interface AdvancedBackupSetting {
     /**
-     * Specifies an object containing resource type and backup options. The only supported resource type is Amazon EC2 instances with Windows VSS. For an CloudFormation example, see the sample CloudFormation template to enable Windows VSS in the AWS Backup User Guide. Valid values: EC2.
+     * Specifies an object containing resource type and backup options. The only supported resource type is Amazon EC2 instances with Windows Volume Shadow Copy Service (VSS). For a CloudFormation example, see the sample CloudFormation template to enable Windows VSS in the Backup User Guide. Valid values: EC2.
      */
     ResourceType?: ResourceType;
     /**
-     * Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Valid values:  Set to "WindowsVSS":"enabled" to enable the WindowsVSS backup option and create a VSS Windows backup.  Set to "WindowsVSS":"disabled" to create a regular backup. The WindowsVSS option is not enabled by default. If you specify an invalid option, you get an InvalidParameterValueException exception. For more information about Windows VSS backups, see Creating a VSS-Enabled Windows Backup.
+     * Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Valid values:  Set to "WindowsVSS":"enabled" to enable the WindowsVSS backup option and create a Windows VSS backup.  Set to "WindowsVSS":"disabled" to create a regular backup. The WindowsVSS option is not enabled by default. If you specify an invalid option, you get an InvalidParameterValueException exception. For more information about Windows VSS backups, see Creating a VSS-Enabled Windows Backup.
      */
     BackupOptions?: BackupOptions;
   }
@@ -436,11 +540,11 @@ declare namespace Backup {
      */
     AccountId?: AccountId;
     /**
-     * Uniquely identifies a request to AWS Backup to back up a resource.
+     * Uniquely identifies a request to Backup to back up a resource.
      */
     BackupJobId?: string;
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName?: BackupVaultName;
     /**
@@ -496,7 +600,7 @@ declare namespace Backup {
      */
     StartBy?: timestamp;
     /**
-     * The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.
+     * The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the only supported resource type is Amazon EC2.
      */
     ResourceType?: ResourceType;
     /**
@@ -504,7 +608,7 @@ declare namespace Backup {
      */
     BytesTransferred?: Long;
     /**
-     * Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Valid values: Set to "WindowsVSS”:“enabled" to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. If you specify an invalid option, you get an InvalidParameterValueException exception.
+     * Specifies the backup option for a selected resource. This option is only available for Windows Volume Shadow Copy Service (VSS) backup jobs. Valid values: Set to "WindowsVSS":"enabled" to enable the WindowsVSS backup option and create a Windows VSS backup. Set to "WindowsVSS":"disabled" to create a regular backup. If you specify an invalid option, you get an InvalidParameterValueException exception.
      */
     BackupOptions?: BackupOptions;
     /**
@@ -541,7 +645,7 @@ declare namespace Backup {
      */
     Rules: BackupRulesInput;
     /**
-     * Specifies a list of BackupOptions for each resource type. These settings are only available for Windows VSS backup jobs.
+     * Specifies a list of BackupOptions for each resource type. These settings are only available for Windows Volume Shadow Copy Service (VSS) backup jobs.
      */
     AdvancedBackupSettings?: AdvancedBackupSettings;
   }
@@ -603,11 +707,11 @@ declare namespace Backup {
      */
     RuleName: BackupRuleName;
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     TargetBackupVaultName: BackupVaultName;
     /**
-     * A CRON expression specifying when AWS Backup initiates a backup job. For more information about cron expressions, see Schedule Expressions for Rules in the Amazon CloudWatch Events User Guide.. Prior to specifying a value for this parameter, we recommend testing your cron expression using one of the many available cron generator and testing tools.
+     * A cron expression in UTC specifying when Backup initiates a backup job. For more information about cron expressions, see Schedule Expressions for Rules in the Amazon CloudWatch Events User Guide.. Prior to specifying a value for this parameter, we recommend testing your cron expression using one of the many available cron generator and testing tools.
      */
     ScheduleExpression?: CronExpression;
     /**
@@ -615,11 +719,11 @@ declare namespace Backup {
      */
     StartWindowMinutes?: WindowMinutes;
     /**
-     * A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by AWS Backup. This value is optional.
+     * A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by Backup. This value is optional.
      */
     CompletionWindowMinutes?: WindowMinutes;
     /**
-     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Only Amazon EFS file system backups can be transitioned to cold storage.
+     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Only Amazon EFS file system backups can be transitioned to cold storage.
      */
     Lifecycle?: Lifecycle;
     /**
@@ -635,7 +739,7 @@ declare namespace Backup {
      */
     CopyActions?: CopyActions;
     /**
-     * Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes AWS Backup to create snapshot backups.
+     * Specifies whether Backup creates continuous backups. True causes Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes Backup to create snapshot backups.
      */
     EnableContinuousBackup?: Boolean;
   }
@@ -645,11 +749,11 @@ declare namespace Backup {
      */
     RuleName: BackupRuleName;
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     TargetBackupVaultName: BackupVaultName;
     /**
-     * A CRON expression specifying when AWS Backup initiates a backup job.
+     * A CRON expression in UTC specifying when Backup initiates a backup job.
      */
     ScheduleExpression?: CronExpression;
     /**
@@ -657,11 +761,11 @@ declare namespace Backup {
      */
     StartWindowMinutes?: WindowMinutes;
     /**
-     * A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by AWS Backup. This value is optional.
+     * A value in minutes after a backup job is successfully started before it must be completed or it will be canceled by Backup. This value is optional.
      */
     CompletionWindowMinutes?: WindowMinutes;
     /**
-     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Only Amazon EFS file system backups can be transitioned to cold storage.
+     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup will transition and expire backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Only Amazon EFS file system backups can be transitioned to cold storage.
      */
     Lifecycle?: Lifecycle;
     /**
@@ -673,7 +777,7 @@ declare namespace Backup {
      */
     CopyActions?: CopyActions;
     /**
-     * Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes AWS Backup to create snapshot backups.
+     * Specifies whether Backup creates continuous backups. True causes Backup to create continuous backups capable of point-in-time restore (PITR). False (or not specified) causes Backup to create snapshot backups.
      */
     EnableContinuousBackup?: Boolean;
   }
@@ -686,7 +790,7 @@ declare namespace Backup {
      */
     SelectionName: BackupSelectionName;
     /**
-     * The ARN of the IAM role that AWS Backup uses to authenticate when backing up the target resource; for example, arn:aws:iam::123456789012:role/S3Access.
+     * The ARN of the IAM role that Backup uses to authenticate when backing up the target resource; for example, arn:aws:iam::123456789012:role/S3Access.
      */
     IamRoleArn: IAMRoleArn;
     /**
@@ -731,7 +835,7 @@ declare namespace Backup {
   export type BackupVaultList = BackupVaultListMember[];
   export interface BackupVaultListMember {
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName?: BackupVaultName;
     /**
@@ -767,6 +871,7 @@ declare namespace Backup {
      */
     DeleteAt?: timestamp;
   }
+  export type ComplianceResourceIdList = string[];
   export interface Condition {
     /**
      * An operation, such as StringEquals, that is applied to a key-value pair used to filter resources in a selection.
@@ -784,6 +889,32 @@ declare namespace Backup {
   export type ConditionKey = string;
   export type ConditionType = "STRINGEQUALS"|string;
   export type ConditionValue = string;
+  export interface ControlInputParameter {
+    /**
+     * The name of a parameter, for example, BackupPlanFrequency.
+     */
+    ParameterName?: ParameterName;
+    /**
+     * The value of parameter, for example, hourly.
+     */
+    ParameterValue?: ParameterValue;
+  }
+  export type ControlInputParameters = ControlInputParameter[];
+  export type ControlName = string;
+  export interface ControlScope {
+    /**
+     * Describes whether the control scope includes a specific resource identified by its unique Amazon Resource Name (ARN).
+     */
+    ComplianceResourceIds?: ComplianceResourceIdList;
+    /**
+     * Describes whether the control scope includes one or more types of resources, such as EFS or RDS.
+     */
+    ComplianceResourceTypes?: ResourceTypeList;
+    /**
+     * Describes whether the control scope includes resources with one or more tags. Each tag is a key-value pair.
+     */
+    Tags?: stringMap;
+  }
   export interface CopyAction {
     Lifecycle?: Lifecycle;
     /**
@@ -818,7 +949,7 @@ declare namespace Backup {
      */
     DestinationRecoveryPointArn?: ARN;
     /**
-     * The AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+     * The Amazon Web Services resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
      */
     ResourceArn?: ARN;
     /**
@@ -847,7 +978,7 @@ declare namespace Backup {
     IamRoleArn?: IAMRoleArn;
     CreatedBy?: RecoveryPointCreator;
     /**
-     * The type of AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+     * The type of Amazon Web Services resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
      */
     ResourceType?: ResourceType;
   }
@@ -885,7 +1016,7 @@ declare namespace Backup {
      */
     VersionId?: string;
     /**
-     * A list of BackupOptions settings for a resource type. This option is only available for Windows VSS backup jobs.
+     * A list of BackupOptions settings for a resource type. This option is only available for Windows Volume Shadow Copy Service (VSS) backup jobs.
      */
     AdvancedBackupSettings?: AdvancedBackupSettings;
   }
@@ -919,7 +1050,7 @@ declare namespace Backup {
   }
   export interface CreateBackupVaultInput {
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of letters, numbers, and hyphens.
      */
     BackupVaultName: BackupVaultName;
     /**
@@ -948,6 +1079,74 @@ declare namespace Backup {
      * The date and time a backup vault is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     CreationDate?: timestamp;
+  }
+  export interface CreateFrameworkInput {
+    /**
+     * The unique name of the framework. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).
+     */
+    FrameworkName: FrameworkName;
+    /**
+     * An optional description of the framework with a maximum of 1,024 characters.
+     */
+    FrameworkDescription?: FrameworkDescription;
+    /**
+     * A list of the controls that make up the framework. Each control in the list has a name, input parameters, and scope.
+     */
+    FrameworkControls: FrameworkControls;
+    /**
+     * A customer-chosen string that you can use to distinguish between otherwise identical calls to CreateFrameworkInput. Retrying a successful request with the same idempotency token results in a success message with no action taken.
+     */
+    IdempotencyToken?: string;
+    /**
+     * Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.
+     */
+    FrameworkTags?: stringMap;
+  }
+  export interface CreateFrameworkOutput {
+    /**
+     * The unique name of the framework. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).
+     */
+    FrameworkName?: FrameworkName;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+     */
+    FrameworkArn?: ARN;
+  }
+  export interface CreateReportPlanInput {
+    /**
+     * The unique name of the report plan. The name must be between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).
+     */
+    ReportPlanName: ReportPlanName;
+    /**
+     * An optional description of the report plan with a maximum of 1,024 characters.
+     */
+    ReportPlanDescription?: ReportPlanDescription;
+    /**
+     * A structure that contains information about where and how to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.
+     */
+    ReportDeliveryChannel: ReportDeliveryChannel;
+    /**
+     * Identifies the report template for the report. Reports are built using a report template. The report templates are:  BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT 
+     */
+    ReportSetting: ReportSetting;
+    /**
+     * Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair.
+     */
+    ReportPlanTags?: stringMap;
+    /**
+     * A customer-chosen string that you can use to distinguish between otherwise identical calls to CreateReportPlanInput. Retrying a successful request with the same idempotency token results in a success message with no action taken.
+     */
+    IdempotencyToken?: string;
+  }
+  export interface CreateReportPlanOutput {
+    /**
+     * The unique name of the report plan.
+     */
+    ReportPlanName?: ReportPlanName;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+     */
+    ReportPlanArn?: ARN;
   }
   export type CronExpression = string;
   export interface DeleteBackupPlanInput {
@@ -986,13 +1185,13 @@ declare namespace Backup {
   }
   export interface DeleteBackupVaultAccessPolicyInput {
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName: BackupVaultName;
   }
   export interface DeleteBackupVaultInput {
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName: string;
   }
@@ -1002,9 +1201,15 @@ declare namespace Backup {
      */
     BackupVaultName: BackupVaultName;
   }
+  export interface DeleteFrameworkInput {
+    /**
+     * The unique name of a framework.
+     */
+    FrameworkName: FrameworkName;
+  }
   export interface DeleteRecoveryPointInput {
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName: BackupVaultName;
     /**
@@ -1012,9 +1217,15 @@ declare namespace Backup {
      */
     RecoveryPointArn: ARN;
   }
+  export interface DeleteReportPlanInput {
+    /**
+     * The unique name of a report plan.
+     */
+    ReportPlanName: ReportPlanName;
+  }
   export interface DescribeBackupJobInput {
     /**
-     * Uniquely identifies a request to AWS Backup to back up a resource.
+     * Uniquely identifies a request to Backup to back up a resource.
      */
     BackupJobId: string;
   }
@@ -1024,11 +1235,11 @@ declare namespace Backup {
      */
     AccountId?: AccountId;
     /**
-     * Uniquely identifies a request to AWS Backup to back up a resource.
+     * Uniquely identifies a request to Backup to back up a resource.
      */
     BackupJobId?: string;
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName?: BackupVaultName;
     /**
@@ -1076,7 +1287,7 @@ declare namespace Backup {
      */
     CreatedBy?: RecoveryPointCreator;
     /**
-     * The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+     * The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
      */
     ResourceType?: ResourceType;
     /**
@@ -1096,13 +1307,13 @@ declare namespace Backup {
      */
     BackupOptions?: BackupOptions;
     /**
-     * Represents the actual backup type selected for a backup job. For example, if a successful WindowsVSS backup was taken, BackupType returns "WindowsVSS". If BackupType is empty, then the backup type that was is a regular backup.
+     * Represents the actual backup type selected for a backup job. For example, if a successful Windows Volume Shadow Copy Service (VSS) backup was taken, BackupType returns "WindowsVSS". If BackupType is empty, then the backup type was a regular backup.
      */
     BackupType?: string;
   }
   export interface DescribeBackupVaultInput {
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName: string;
   }
@@ -1144,15 +1355,55 @@ declare namespace Backup {
      */
     CopyJob?: CopyJob;
   }
+  export interface DescribeFrameworkInput {
+    /**
+     * The unique name of a framework.
+     */
+    FrameworkName: FrameworkName;
+  }
+  export interface DescribeFrameworkOutput {
+    /**
+     * The unique name of a framework.
+     */
+    FrameworkName?: FrameworkName;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+     */
+    FrameworkArn?: ARN;
+    /**
+     * An optional description of the framework.
+     */
+    FrameworkDescription?: FrameworkDescription;
+    /**
+     * A list of the controls that make up the framework. Each control in the list has a name, input parameters, and scope.
+     */
+    FrameworkControls?: FrameworkControls;
+    /**
+     * The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    CreationTime?: timestamp;
+    /**
+     * The deployment status of a framework. The statuses are:  CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED 
+     */
+    DeploymentStatus?: string;
+    /**
+     * A framework consists of one or more controls. Each control governs a resource, such as backup plans, backup selections, backup vaults, or recovery points. You can also turn Config recording on or off for each resource. The statuses are:    ACTIVE when recording is turned on for all resources governed by the framework.    PARTIALLY_ACTIVE when recording is turned off for at least one resource governed by the framework.    INACTIVE when recording is turned off for all resources governed by the framework.    UNAVAILABLE when Backup is unable to validate recording status at this time.  
+     */
+    FrameworkStatus?: string;
+    /**
+     * A customer-chosen string that you can use to distinguish between otherwise identical calls to DescribeFrameworkOutput. Retrying a successful request with the same idempotency token results in a success message with no action taken.
+     */
+    IdempotencyToken?: string;
+  }
   export interface DescribeGlobalSettingsInput {
   }
   export interface DescribeGlobalSettingsOutput {
     /**
-     * A list of resources along with the opt-in preferences for the account.
+     * The status of the flag isCrossAccountBackupEnabled.
      */
     GlobalSettings?: GlobalSettings;
     /**
-     * The date and time that the global settings were last updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of LastUpdateTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     * The date and time that the flag isCrossAccountBackupEnabled was last updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of LastUpdateTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     LastUpdateTime?: timestamp;
   }
@@ -1168,7 +1419,7 @@ declare namespace Backup {
      */
     ResourceArn?: ARN;
     /**
-     * The type of AWS resource saved as a recovery point; for example, an EBS volume or an Amazon RDS database.
+     * The type of Amazon Web Services resource saved as a recovery point; for example, an Amazon EBS volume or an Amazon RDS database.
      */
     ResourceType?: ResourceType;
     /**
@@ -1178,7 +1429,7 @@ declare namespace Backup {
   }
   export interface DescribeRecoveryPointInput {
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName: BackupVaultName;
     /**
@@ -1200,7 +1451,7 @@ declare namespace Backup {
      */
     BackupVaultArn?: ARN;
     /**
-     * An Amazon Resource Name (ARN) that uniquely identifies the source vault where the resource was originally backed up in; for example, arn:aws:backup:us-east-1:123456789012:vault:BackupVault. If the recovery is restored to the same AWS account or Region, this value will be null.
+     * An Amazon Resource Name (ARN) that uniquely identifies the source vault where the resource was originally backed up in; for example, arn:aws:backup:us-east-1:123456789012:vault:BackupVault. If the recovery is restored to the same Amazon Web Services account or Region, this value will be null.
      */
     SourceBackupVaultArn?: ARN;
     /**
@@ -1208,7 +1459,7 @@ declare namespace Backup {
      */
     ResourceArn?: ARN;
     /**
-     * The type of AWS resource to save as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
+     * The type of Amazon Web Services resource to save as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.
      */
     ResourceType?: ResourceType;
     /**
@@ -1220,9 +1471,13 @@ declare namespace Backup {
      */
     IamRoleArn?: IAMRoleArn;
     /**
-     * A status code specifying the state of the recovery point.  A partial status indicates that the recovery point was not successfully re-created and must be retried. 
+     * A status code specifying the state of the recovery point.  PARTIAL status indicates Backup could not create the recovery point before the backup window closed. To increase your backup plan window using the API, see UpdateBackupPlan. You can also increase your backup plan window using the Console by choosing and editing your backup plan.  EXPIRED status indicates that the recovery point has exceeded its retention period, but Backup lacks permission or is otherwise unable to delete it. To manually delete these recovery points, see  Step 3: Delete the recovery points in the Clean up resources section of Getting started.
      */
     Status?: RecoveryPointStatus;
+    /**
+     * A status message explaining the reason for the recovery point deletion failure.
+     */
+    StatusMessage?: string;
     /**
      * The date and time that a recovery point is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
@@ -1240,7 +1495,7 @@ declare namespace Backup {
      */
     CalculatedLifecycle?: CalculatedLifecycle;
     /**
-     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups that are transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Only Amazon EFS file system backups can be transitioned to cold storage.
+     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups that are transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Only Amazon EFS file system backups can be transitioned to cold storage.
      */
     Lifecycle?: Lifecycle;
     /**
@@ -1267,6 +1522,30 @@ declare namespace Backup {
      * Returns a list of all services along with the opt-in preferences in the Region.
      */
     ResourceTypeOptInPreference?: ResourceTypeOptInPreference;
+  }
+  export interface DescribeReportJobInput {
+    /**
+     * The identifier of the report job. A unique, randomly generated, Unicode, UTF-8 encoded string that is at most 1,024 bytes long. The report job ID cannot be edited.
+     */
+    ReportJobId: ReportJobId;
+  }
+  export interface DescribeReportJobOutput {
+    /**
+     * A list of information about a report job, including its completion and creation times, report destination, unique report job ID, Amazon Resource Name (ARN), report template, status, and status message.
+     */
+    ReportJob?: ReportJob;
+  }
+  export interface DescribeReportPlanInput {
+    /**
+     * The unique name of a report plan.
+     */
+    ReportPlanName: ReportPlanName;
+  }
+  export interface DescribeReportPlanOutput {
+    /**
+     * Returns details about the report plan that is specified by its name. These details include the report plan's Amazon Resource Name (ARN), description, settings, delivery channel, deployment status, creation time, and last attempted and successful run times.
+     */
+    ReportPlan?: ReportPlan;
   }
   export interface DescribeRestoreJobInput {
     /**
@@ -1296,7 +1575,7 @@ declare namespace Backup {
      */
     CompletionDate?: timestamp;
     /**
-     * Status code specifying the state of the job that is initiated by AWS Backup to restore a recovery point.
+     * Status code specifying the state of the job that is initiated by Backup to restore a recovery point.
      */
     Status?: RestoreJobStatus;
     /**
@@ -1330,11 +1609,11 @@ declare namespace Backup {
   }
   export interface DisassociateRecoveryPointInput {
     /**
-     * The unique name of an AWS Backup vault. Required.
+     * The unique name of an Backup vault.
      */
     BackupVaultName: BackupVaultName;
     /**
-     * An Amazon Resource Name (ARN) that uniquely identifies an AWS Backup recovery point. Required.
+     * An Amazon Resource Name (ARN) that uniquely identifies an Backup recovery point.
      */
     RecoveryPointArn: ARN;
   }
@@ -1350,6 +1629,51 @@ declare namespace Backup {
      */
     BackupPlanTemplateJson?: string;
   }
+  export type FormatList = string[];
+  export interface Framework {
+    /**
+     * The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).
+     */
+    FrameworkName?: FrameworkName;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+     */
+    FrameworkArn?: ARN;
+    /**
+     * An optional description of the framework with a maximum 1,024 characters.
+     */
+    FrameworkDescription?: FrameworkDescription;
+    /**
+     * The number of controls contained by the framework.
+     */
+    NumberOfControls?: integer;
+    /**
+     * The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    CreationTime?: timestamp;
+    /**
+     * The deployment status of a framework. The statuses are:  CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED 
+     */
+    DeploymentStatus?: string;
+  }
+  export interface FrameworkControl {
+    /**
+     * The name of a control. This name is between 1 and 256 characters.
+     */
+    ControlName: ControlName;
+    /**
+     * A list of ParameterName and ParameterValue pairs.
+     */
+    ControlInputParameters?: ControlInputParameters;
+    /**
+     * The scope of a control. The control scope defines what the control will evaluate. Three examples of control scopes are: a specific backup plan, all backup plans with a specific tag, or all backup plans. For more information, see ControlScope.
+     */
+    ControlScope?: ControlScope;
+  }
+  export type FrameworkControls = FrameworkControl[];
+  export type FrameworkDescription = string;
+  export type FrameworkList = Framework[];
+  export type FrameworkName = string;
   export interface GetBackupPlanFromJSONInput {
     /**
      * A customer-supplied backup plan document in JSON format.
@@ -1456,7 +1780,7 @@ declare namespace Backup {
   }
   export interface GetBackupVaultAccessPolicyInput {
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName: BackupVaultName;
   }
@@ -1476,7 +1800,7 @@ declare namespace Backup {
   }
   export interface GetBackupVaultNotificationsInput {
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName: BackupVaultName;
   }
@@ -1500,7 +1824,7 @@ declare namespace Backup {
   }
   export interface GetRecoveryPointRestoreMetadataInput {
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName: BackupVaultName;
     /**
@@ -1524,7 +1848,7 @@ declare namespace Backup {
   }
   export interface GetSupportedResourceTypesOutput {
     /**
-     * Contains a string with the supported AWS resource types:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Aurora for Amazon Aurora    Storage Gateway for AWS Storage Gateway  
+     * Contains a string with the supported Amazon Web Services resource types:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Aurora for Amazon Aurora    Storage Gateway for Storage Gateway  
      */
     ResourceTypes?: ResourceTypes;
   }
@@ -1562,7 +1886,7 @@ declare namespace Backup {
      */
     ByState?: BackupJobState;
     /**
-     * Returns only backup jobs that will be stored in the specified backup vault. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * Returns only backup jobs that will be stored in the specified backup vault. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     ByBackupVaultName?: BackupVaultName;
     /**
@@ -1574,11 +1898,11 @@ declare namespace Backup {
      */
     ByCreatedAfter?: timestamp;
     /**
-     * Returns only backup jobs for the specified resources:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Aurora for Amazon Aurora    Storage Gateway for AWS Storage Gateway  
+     * Returns only backup jobs for the specified resources:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Aurora for Amazon Aurora    Storage Gateway for Storage Gateway  
      */
     ByResourceType?: ResourceType;
     /**
-     * The account ID to list the jobs from. Returns only backup jobs associated with the specified account ID. If used from an AWS Organizations management account, passing * returns all jobs across the organization.
+     * The account ID to list the jobs from. Returns only backup jobs associated with the specified account ID. If used from an Organizations management account, passing * returns all jobs across the organization.
      */
     ByAccountId?: AccountId;
   }
@@ -1730,7 +2054,7 @@ declare namespace Backup {
      */
     ByCreatedAfter?: timestamp;
     /**
-     * Returns only backup jobs for the specified resources:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Aurora for Amazon Aurora    Storage Gateway for AWS Storage Gateway  
+     * Returns only backup jobs for the specified resources:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Aurora for Amazon Aurora    Storage Gateway for Storage Gateway  
      */
     ByResourceType?: ResourceType;
     /**
@@ -1752,6 +2076,26 @@ declare namespace Backup {
      */
     NextToken?: string;
   }
+  export interface ListFrameworksInput {
+    /**
+     * The number of desired results from 1 to 1000. Optional. If unspecified, the query will return 1 MB of data.
+     */
+    MaxResults?: MaxFrameworkInputs;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    NextToken?: string;
+  }
+  export interface ListFrameworksOutput {
+    /**
+     * A list of frameworks with details for each framework, including the framework name, Amazon Resource Name (ARN), description, number of controls, creation time, and deployment status.
+     */
+    Frameworks?: FrameworkList;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    NextToken?: string;
+  }
   export type ListOfTags = Condition[];
   export interface ListProtectedResourcesInput {
     /**
@@ -1765,7 +2109,7 @@ declare namespace Backup {
   }
   export interface ListProtectedResourcesOutput {
     /**
-     * An array of resources successfully backed up by AWS Backup including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
+     * An array of resources successfully backed up by Backup including the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource type.
      */
     Results?: ProtectedResourcesList;
     /**
@@ -1775,7 +2119,7 @@ declare namespace Backup {
   }
   export interface ListRecoveryPointsByBackupVaultInput {
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.  Backup vault name might not be available when a supported service creates the backup. 
      */
     BackupVaultName: BackupVaultName;
     /**
@@ -1827,7 +2171,7 @@ declare namespace Backup {
      */
     NextToken?: string;
     /**
-     * The maximum number of items to be returned.
+     * The maximum number of items to be returned.  Amazon RDS requires a value of at least 20. 
      */
     MaxResults?: MaxResults;
   }
@@ -1837,9 +2181,65 @@ declare namespace Backup {
      */
     NextToken?: string;
     /**
-     * An array of objects that contain detailed information about recovery points of the specified resource type.
+     * An array of objects that contain detailed information about recovery points of the specified resource type.  Only Amazon EFS and Amazon EC2 recovery points return BackupVaultName. 
      */
     RecoveryPoints?: RecoveryPointByResourceList;
+  }
+  export interface ListReportJobsInput {
+    /**
+     * Returns only report jobs with the specified report plan name.
+     */
+    ByReportPlanName?: ReportPlanName;
+    /**
+     * Returns only report jobs that were created before the date and time specified in Unix format and Coordinated Universal Time (UTC). For example, the value 1516925490 represents Friday, January 26, 2018 12:11:30 AM.
+     */
+    ByCreationBefore?: timestamp;
+    /**
+     * Returns only report jobs that were created after the date and time specified in Unix format and Coordinated Universal Time (UTC). For example, the value 1516925490 represents Friday, January 26, 2018 12:11:30 AM.
+     */
+    ByCreationAfter?: timestamp;
+    /**
+     * Returns only report jobs that are in the specified status. The statuses are:  CREATED | RUNNING | COMPLETED | FAILED 
+     */
+    ByStatus?: string;
+    /**
+     * The number of desired results from 1 to 1000. Optional. If unspecified, the query will return 1 MB of data.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    NextToken?: string;
+  }
+  export interface ListReportJobsOutput {
+    /**
+     * Details about your report jobs in JSON format.
+     */
+    ReportJobs?: ReportJobList;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    NextToken?: string;
+  }
+  export interface ListReportPlansInput {
+    /**
+     * The number of desired results from 1 to 1000. Optional. If unspecified, the query will return 1 MB of data.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    NextToken?: string;
+  }
+  export interface ListReportPlansOutput {
+    /**
+     * A list of your report plans with detailed information for each plan. This information includes the Amazon Resource Name (ARN), report plan name, description, settings, delivery channel, deployment status, creation time, and last times the report plan attempted to and successfully ran.
+     */
+    ReportPlans?: ReportPlanList;
+    /**
+     * An identifier that was returned from the previous call to this operation, which can be used to return the next set of items in the list.
+     */
+    NextToken?: string;
   }
   export interface ListRestoreJobsInput {
     /**
@@ -1902,17 +2302,20 @@ declare namespace Backup {
     Tags?: Tags;
   }
   export type Long = number;
+  export type MaxFrameworkInputs = number;
   export type MaxResults = number;
   export type Metadata = {[key: string]: MetadataValue};
   export type MetadataKey = string;
   export type MetadataValue = string;
+  export type ParameterName = string;
+  export type ParameterValue = string;
   export interface ProtectedResource {
     /**
      * An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
      */
     ResourceArn?: ARN;
     /**
-     * The type of AWS resource; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.
+     * The type of Amazon Web Services resource; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the only supported resource type is Amazon EC2.
      */
     ResourceType?: ResourceType;
     /**
@@ -1923,7 +2326,7 @@ declare namespace Backup {
   export type ProtectedResourcesList = ProtectedResource[];
   export interface PutBackupVaultAccessPolicyInput {
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName: BackupVaultName;
     /**
@@ -1933,7 +2336,7 @@ declare namespace Backup {
   }
   export interface PutBackupVaultNotificationsInput {
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName: BackupVaultName;
     /**
@@ -1941,7 +2344,7 @@ declare namespace Backup {
      */
     SNSTopicArn: ARN;
     /**
-     * An array of events that indicate the status of jobs to back up resources to the backup vault.
+     * An array of events that indicate the status of jobs to back up resources to the backup vault.  The following events are supported:  BACKUP_JOB_STARTED, BACKUP_JOB_COMPLETED,  COPY_JOB_STARTED, COPY_JOB_SUCCESSFUL, COPY_JOB_FAILED,  RESTORE_JOB_STARTED, RESTORE_JOB_COMPLETED, and RECOVERY_POINT_MODIFIED. To find failed backup jobs, use BACKUP_JOB_COMPLETED and filter using event metadata. Other events in the following list are deprecated. 
      */
     BackupVaultEvents: BackupVaultEvents;
   }
@@ -1951,7 +2354,7 @@ declare namespace Backup {
      */
     RecoveryPointArn?: ARN;
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName?: BackupVaultName;
     /**
@@ -1967,7 +2370,7 @@ declare namespace Backup {
      */
     ResourceArn?: ARN;
     /**
-     * The type of AWS resource saved as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.
+     * The type of Amazon Web Services resource saved as a recovery point; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the only supported resource type is Amazon EC2.
      */
     ResourceType?: ResourceType;
     /**
@@ -1982,6 +2385,10 @@ declare namespace Backup {
      * A status code specifying the state of the recovery point.
      */
     Status?: RecoveryPointStatus;
+    /**
+     * A message explaining the reason of the recovery point deletion failure.
+     */
+    StatusMessage?: string;
     /**
      * The date and time a recovery point is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
@@ -1999,7 +2406,7 @@ declare namespace Backup {
      */
     CalculatedLifecycle?: CalculatedLifecycle;
     /**
-     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Only Amazon EFS file system backups can be transitioned to cold storage.
+     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Only Amazon EFS file system backups can be transitioned to cold storage.
      */
     Lifecycle?: Lifecycle;
     /**
@@ -2030,6 +2437,10 @@ declare namespace Backup {
      */
     Status?: RecoveryPointStatus;
     /**
+     * A message explaining the reason of the recovery point deletion failure.
+     */
+    StatusMessage?: string;
+    /**
      * The server-side encryption key that is used to protect your backups; for example, arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab.
      */
     EncryptionKeyArn?: ARN;
@@ -2038,7 +2449,7 @@ declare namespace Backup {
      */
     BackupSizeBytes?: Long;
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName?: BackupVaultName;
   }
@@ -2062,8 +2473,116 @@ declare namespace Backup {
     BackupRuleId?: string;
   }
   export type RecoveryPointStatus = "COMPLETED"|"PARTIAL"|"DELETING"|"EXPIRED"|string;
+  export interface ReportDeliveryChannel {
+    /**
+     * The unique name of the S3 bucket that receives your reports.
+     */
+    S3BucketName: string;
+    /**
+     * The prefix for where Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path: s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name. If not specified, there is no prefix.
+     */
+    S3KeyPrefix?: string;
+    /**
+     * A list of the format of your reports: CSV, JSON, or both. If not specified, the default format is CSV.
+     */
+    Formats?: FormatList;
+  }
+  export interface ReportDestination {
+    /**
+     * The unique name of the Amazon S3 bucket that receives your reports.
+     */
+    S3BucketName?: string;
+    /**
+     * The object key that uniquely identifies your reports in your S3 bucket.
+     */
+    S3Keys?: stringList;
+  }
+  export interface ReportJob {
+    /**
+     * The identifier for a report job. A unique, randomly generated, Unicode, UTF-8 encoded string that is at most 1,024 bytes long. Report job IDs cannot be edited.
+     */
+    ReportJobId?: ReportJobId;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+     */
+    ReportPlanArn?: ARN;
+    /**
+     * Identifies the report template for the report. Reports are built using a report template. The report templates are:   BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT 
+     */
+    ReportTemplate?: string;
+    /**
+     * The date and time that a report job is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    CreationTime?: timestamp;
+    /**
+     * The date and time that a report job is completed, in Unix format and Coordinated Universal Time (UTC). The value of CompletionTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    CompletionTime?: timestamp;
+    /**
+     * The status of a report job. The statuses are:  CREATED | RUNNING | COMPLETED | FAILED   COMPLETED means that the report is available for your review at your designated destination. If the status is FAILED, review the StatusMessage for the reason.
+     */
+    Status?: string;
+    /**
+     * A message explaining the status of the report job.
+     */
+    StatusMessage?: string;
+    /**
+     * The S3 bucket name and S3 keys for the destination where the report job publishes the report.
+     */
+    ReportDestination?: ReportDestination;
+  }
+  export type ReportJobId = string;
+  export type ReportJobList = ReportJob[];
+  export interface ReportPlan {
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+     */
+    ReportPlanArn?: ARN;
+    /**
+     * The unique name of the report plan. This name is between 1 and 256 characters starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).
+     */
+    ReportPlanName?: ReportPlanName;
+    /**
+     * An optional description of the report plan with a maximum 1,024 characters.
+     */
+    ReportPlanDescription?: ReportPlanDescription;
+    /**
+     * Identifies the report template for the report. Reports are built using a report template. The report templates are:  BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT 
+     */
+    ReportSetting?: ReportSetting;
+    /**
+     * Contains information about where and how to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.
+     */
+    ReportDeliveryChannel?: ReportDeliveryChannel;
+    /**
+     * The deployment status of a report plan. The statuses are:  CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED 
+     */
+    DeploymentStatus?: string;
+    /**
+     * The date and time that a report plan is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    CreationTime?: timestamp;
+    /**
+     * The date and time that a report job associated with this report plan last attempted to run, in Unix format and Coordinated Universal Time (UTC). The value of LastAttemptedExecutionTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    LastAttemptedExecutionTime?: timestamp;
+    /**
+     * The date and time that a report job associated with this report plan last successfully ran, in Unix format and Coordinated Universal Time (UTC). The value of LastSuccessfulExecutionTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    LastSuccessfulExecutionTime?: timestamp;
+  }
+  export type ReportPlanDescription = string;
+  export type ReportPlanList = ReportPlan[];
+  export type ReportPlanName = string;
+  export interface ReportSetting {
+    /**
+     * Identifies the report template for the report. Reports are built using a report template. The report templates are:  BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT 
+     */
+    ReportTemplate: string;
+  }
   export type ResourceArns = ARN[];
   export type ResourceType = string;
+  export type ResourceTypeList = ARN[];
   export type ResourceTypeOptInPreference = {[key: string]: IsEnabled};
   export type ResourceTypes = ResourceType[];
   export type RestoreJobId = string;
@@ -2091,7 +2610,7 @@ declare namespace Backup {
      */
     CompletionDate?: timestamp;
     /**
-     * A status code specifying the state of the job initiated by AWS Backup to restore a recovery point.
+     * A status code specifying the state of the job initiated by Backup to restore a recovery point.
      */
     Status?: RestoreJobStatus;
     /**
@@ -2119,13 +2638,13 @@ declare namespace Backup {
      */
     CreatedResourceArn?: ARN;
     /**
-     * The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups, the only supported resource type is Amazon EC2.
+     * The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the only supported resource type is Amazon EC2.
      */
     ResourceType?: ResourceType;
   }
   export interface StartBackupJobInput {
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName: BackupVaultName;
     /**
@@ -2137,7 +2656,7 @@ declare namespace Backup {
      */
     IamRoleArn: IAMRoleArn;
     /**
-     * A customer chosen string that can be used to distinguish between calls to StartBackupJob.
+     * A customer-chosen string that you can use to distinguish between otherwise identical calls to StartBackupJob. Retrying a successful request with the same idempotency token results in a success message with no action taken.
      */
     IdempotencyToken?: string;
     /**
@@ -2149,7 +2668,7 @@ declare namespace Backup {
      */
     CompleteWindowMinutes?: WindowMinutes;
     /**
-     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup will transition and expire backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Only Amazon EFS file system backups can be transitioned to cold storage.
+     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup will transition and expire backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Only Amazon EFS file system backups can be transitioned to cold storage.
      */
     Lifecycle?: Lifecycle;
     /**
@@ -2157,13 +2676,13 @@ declare namespace Backup {
      */
     RecoveryPointTags?: Tags;
     /**
-     * Specifies the backup option for a selected resource. This option is only available for Windows VSS backup jobs. Valid values: Set to "WindowsVSS”:“enabled" to enable WindowsVSS backup option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The WindowsVSS option is not enabled by default.
+     * Specifies the backup option for a selected resource. This option is only available for Windows Volume Shadow Copy Service (VSS) backup jobs. Valid values: Set to "WindowsVSS":"enabled" to enable the WindowsVSS backup option and create a Windows VSS backup. Set to "WindowsVSS""disabled" to create a regular backup. The WindowsVSS option is not enabled by default.
      */
     BackupOptions?: BackupOptions;
   }
   export interface StartBackupJobOutput {
     /**
-     * Uniquely identifies a request to AWS Backup to back up a resource.
+     * Uniquely identifies a request to Backup to back up a resource.
      */
     BackupJobId?: string;
     /**
@@ -2181,7 +2700,7 @@ declare namespace Backup {
      */
     RecoveryPointArn: ARN;
     /**
-     * The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical source container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     SourceBackupVaultName: BackupVaultName;
     /**
@@ -2193,7 +2712,7 @@ declare namespace Backup {
      */
     IamRoleArn: IAMRoleArn;
     /**
-     * A customer chosen string that can be used to distinguish between calls to StartCopyJob.
+     * A customer-chosen string that you can use to distinguish between otherwise identical calls to StartCopyJob. Retrying a successful request with the same idempotency token results in a success message with no action taken.
      */
     IdempotencyToken?: string;
     Lifecycle?: Lifecycle;
@@ -2208,25 +2727,41 @@ declare namespace Backup {
      */
     CreationDate?: timestamp;
   }
+  export interface StartReportJobInput {
+    /**
+     * The unique name of a report plan.
+     */
+    ReportPlanName: ReportPlanName;
+    /**
+     * A customer-chosen string that you can use to distinguish between otherwise identical calls to StartReportJobInput. Retrying a successful request with the same idempotency token results in a success message with no action taken.
+     */
+    IdempotencyToken?: string;
+  }
+  export interface StartReportJobOutput {
+    /**
+     * The identifier of the report job. A unique, randomly generated, Unicode, UTF-8 encoded string that is at most 1,024 bytes long. The report job ID cannot be edited.
+     */
+    ReportJobId?: ReportJobId;
+  }
   export interface StartRestoreJobInput {
     /**
      * An ARN that uniquely identifies a recovery point; for example, arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45.
      */
     RecoveryPointArn: ARN;
     /**
-     * A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.  You can get configuration metadata about a resource at the time it was backed up by calling GetRecoveryPointRestoreMetadata. However, values in addition to those provided by GetRecoveryPointRestoreMetadata might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists. You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:    file-system-id: The ID of the Amazon EFS file system that is backed up by AWS Backup. Returned in GetRecoveryPointRestoreMetadata.    Encrypted: A Boolean value that, if true, specifies that the file system is encrypted. If KmsKeyId is specified, Encrypted must be set to true.    KmsKeyId: Specifies the AWS KMS key that is used to encrypt the restored file system. You can specify a key from another AWS account provided that key it is properly shared with your account via AWS KMS.    PerformanceMode: Specifies the throughput mode of the file system.    CreationToken: A user-supplied value that ensures the uniqueness (idempotency) of the request.    newFileSystem: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.    ItemsToRestore : An array of one to five strings where each string is a file path. Use ItemsToRestore to restore specific files or directories rather than the entire file system. This parameter is optional. For example, "itemsToRestore":"[\"/my.test\"]".  
+     * A set of metadata key-value pairs. Contains information, such as a resource name, required to restore a recovery point.  You can get configuration metadata about a resource at the time it was backed up by calling GetRecoveryPointRestoreMetadata. However, values in addition to those provided by GetRecoveryPointRestoreMetadata might be required to restore a resource. For example, you might need to provide a new resource name if the original already exists. You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:    file-system-id: The ID of the Amazon EFS file system that is backed up by Backup. Returned in GetRecoveryPointRestoreMetadata.    Encrypted: A Boolean value that, if true, specifies that the file system is encrypted. If KmsKeyId is specified, Encrypted must be set to true.    KmsKeyId: Specifies the Amazon Web Services KMS key that is used to encrypt the restored file system. You can specify a key from another Amazon Web Services account provided that key it is properly shared with your account via Amazon Web Services KMS.    PerformanceMode: Specifies the throughput mode of the file system.    CreationToken: A user-supplied value that ensures the uniqueness (idempotency) of the request.    newFileSystem: A Boolean value that, if true, specifies that the recovery point is restored to a new Amazon EFS file system.    ItemsToRestore: An array of one to five strings where each string is a file path. Use ItemsToRestore to restore specific files or directories rather than the entire file system. This parameter is optional. For example, "itemsToRestore":"[\"/my.test\"]".  
      */
     Metadata: Metadata;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to create the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.
+     * The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.
      */
     IamRoleArn: IAMRoleArn;
     /**
-     * A customer chosen string that can be used to distinguish between calls to StartRestoreJob.
+     * A customer-chosen string that you can use to distinguish between otherwise identical calls to StartRestoreJob. Retrying a successful request with the same idempotency token results in a success message with no action taken.
      */
     IdempotencyToken?: string;
     /**
-     * Starts a job to restore a recovery point for one of the following resources:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Aurora for Amazon Aurora    Storage Gateway for AWS Storage Gateway  
+     * Starts a job to restore a recovery point for one of the following resources:    DynamoDB for Amazon DynamoDB    EBS for Amazon Elastic Block Store    EC2 for Amazon Elastic Compute Cloud    EFS for Amazon Elastic File System    RDS for Amazon Relational Database Service    Aurora for Amazon Aurora    Storage Gateway for Storage Gateway  
      */
     ResourceType?: ResourceType;
   }
@@ -2238,7 +2773,7 @@ declare namespace Backup {
   }
   export interface StopBackupJobInput {
     /**
-     * Uniquely identifies a request to AWS Backup to back up a resource.
+     * Uniquely identifies a request to Backup to back up a resource.
      */
     BackupJobId: string;
   }
@@ -2287,7 +2822,7 @@ declare namespace Backup {
      */
     BackupPlanArn?: ARN;
     /**
-     * The date and time a backup plan is updated, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     * The date and time a backup plan is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationDate is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
      */
     CreationDate?: timestamp;
     /**
@@ -2299,15 +2834,47 @@ declare namespace Backup {
      */
     AdvancedBackupSettings?: AdvancedBackupSettings;
   }
+  export interface UpdateFrameworkInput {
+    /**
+     * The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).
+     */
+    FrameworkName: FrameworkName;
+    /**
+     * An optional description of the framework with a maximum 1,024 characters.
+     */
+    FrameworkDescription?: FrameworkDescription;
+    /**
+     * A list of the controls that make up the framework. Each control in the list has a name, input parameters, and scope.
+     */
+    FrameworkControls?: FrameworkControls;
+    /**
+     * A customer-chosen string that you can use to distinguish between otherwise identical calls to UpdateFrameworkInput. Retrying a successful request with the same idempotency token results in a success message with no action taken.
+     */
+    IdempotencyToken?: string;
+  }
+  export interface UpdateFrameworkOutput {
+    /**
+     * The unique name of a framework. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).
+     */
+    FrameworkName?: FrameworkName;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+     */
+    FrameworkArn?: ARN;
+    /**
+     * The date and time that a framework is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    CreationTime?: timestamp;
+  }
   export interface UpdateGlobalSettingsInput {
     /**
-     * A list of resources along with the opt-in preferences for the account.
+     * A value for isCrossAccountBackupEnabled and a Region. Example: update-global-settings --global-settings isCrossAccountBackupEnabled=false --region us-west-2.
      */
     GlobalSettings?: GlobalSettings;
   }
   export interface UpdateRecoveryPointLifecycleInput {
     /**
-     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the AWS Region where they are created. They consist of lowercase letters, numbers, and hyphens.
+     * The name of a logical container where backups are stored. Backup vaults are identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers, and hyphens.
      */
     BackupVaultName: BackupVaultName;
     /**
@@ -2315,7 +2882,7 @@ declare namespace Backup {
      */
     RecoveryPointArn: ARN;
     /**
-     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. 
+     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold. 
      */
     Lifecycle?: Lifecycle;
   }
@@ -2329,7 +2896,7 @@ declare namespace Backup {
      */
     RecoveryPointArn?: ARN;
     /**
-     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. AWS Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Only Amazon EFS file system backups can be transitioned to cold storage.
+     * The lifecycle defines when a protected resource is transitioned to cold storage and when it expires. Backup transitions and expires backups automatically according to the lifecycle that you define.  Backups transitioned to cold storage must be stored in cold storage for a minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than the “transition to cold after days” setting. The “transition to cold after days” setting cannot be changed after a backup has been transitioned to cold.  Only Amazon EFS file system backups can be transitioned to cold storage.
      */
     Lifecycle?: Lifecycle;
     /**
@@ -2343,8 +2910,47 @@ declare namespace Backup {
      */
     ResourceTypeOptInPreference?: ResourceTypeOptInPreference;
   }
+  export interface UpdateReportPlanInput {
+    /**
+     * The unique name of the report plan. This name is between 1 and 256 characters, starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).
+     */
+    ReportPlanName: ReportPlanName;
+    /**
+     * An optional description of the report plan with a maximum 1,024 characters.
+     */
+    ReportPlanDescription?: ReportPlanDescription;
+    /**
+     * A structure that contains information about where to deliver your reports, specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.
+     */
+    ReportDeliveryChannel?: ReportDeliveryChannel;
+    /**
+     * Identifies the report template for the report. Reports are built using a report template. The report templates are:  BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT 
+     */
+    ReportSetting?: ReportSetting;
+    /**
+     * A customer-chosen string that you can use to distinguish between otherwise identical calls to UpdateReportPlanInput. Retrying a successful request with the same idempotency token results in a success message with no action taken.
+     */
+    IdempotencyToken?: string;
+  }
+  export interface UpdateReportPlanOutput {
+    /**
+     * The unique name of the report plan.
+     */
+    ReportPlanName?: ReportPlanName;
+    /**
+     * An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN depends on the resource type.
+     */
+    ReportPlanArn?: ARN;
+    /**
+     * The date and time that a report plan is created, in Unix format and Coordinated Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+     */
+    CreationTime?: timestamp;
+  }
   export type WindowMinutes = number;
+  export type integer = number;
   export type long = number;
+  export type stringList = string[];
+  export type stringMap = {[key: string]: string};
   export type timestamp = Date;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.

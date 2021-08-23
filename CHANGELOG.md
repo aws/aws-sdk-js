@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.973.0-->
+<!--LATEST=2.974.0-->
 <!--ENTRYINSERT-->
+
+## 2.974.0
+* feature: APIGateway: Adding some of the pending releases (1) Adding WAF Filter to GatewayResponseType enum (2) Ensuring consistent error model for all operations (3) Add missing BRE to GetVpcLink operation
+* feature: Backup: AWS Backup - Features: Evaluate your backup activity and generate audit reports.
+* feature: DLM: Added AMI deprecation support for Amazon Data Lifecycle Manager EBS-backed AMI policies.
+* feature: DMS: Amazon AWS DMS service now support Redis target endpoint migration. Now S3 endpoint setting is capable to setup features which are used to be configurable only in extract connection attributes.
+* feature: FraudDetector: Updated an element of the DescribeModelVersion API response (LogitMetrics -> logOddsMetrics) for clarity. Added new exceptions to several APIs to protect against unlikely scenarios.
+* feature: Glue: Add support for Custom Blueprints
 
 ## 2.973.0
 * feature: Comprehend: Add tagging support for Comprehend async inference job.

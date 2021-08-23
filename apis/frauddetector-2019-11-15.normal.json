@@ -91,6 +91,9 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
         }
       ],
@@ -114,6 +117,9 @@
         },
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "AccessDeniedException"
@@ -175,6 +181,9 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
         }
       ],
@@ -201,6 +210,9 @@
         },
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "InternalServerException"
@@ -285,6 +297,9 @@
         },
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "AccessDeniedException"
@@ -380,6 +395,9 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
         }
       ],
@@ -434,6 +452,9 @@
         },
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "AccessDeniedException"
@@ -492,6 +513,9 @@
           "shape": "ConflictException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "InternalServerException"
         }
       ],
@@ -520,6 +544,9 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
         }
       ],
@@ -546,6 +573,9 @@
         },
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "ConflictException"
@@ -700,6 +730,9 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
         }
       ],
@@ -726,6 +759,9 @@
         },
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "AccessDeniedException"
@@ -818,6 +854,9 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
         }
       ],
@@ -853,6 +892,9 @@
         },
         {
           "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceUnavailableException"
         }
       ],
       "documentation": "<p>Evaluates an event against a detector version. If a version ID is not provided, the detector’s (<code>ACTIVE</code>) version is used.</p>"
@@ -878,6 +920,9 @@
         },
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "AccessDeniedException"
@@ -933,6 +978,9 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
         }
       ],
@@ -959,6 +1007,9 @@
         },
         {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "AccessDeniedException"
@@ -989,6 +1040,9 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
         }
       ],
@@ -1017,10 +1071,13 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
         }
       ],
-      "documentation": "<p>Gets one or more models. Gets all models for the AWS account if no model type and no model id provided. Gets all models for the AWS account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified. </p> <p>This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.</p>"
+      "documentation": "<p>Gets one or more models. Gets all models for the Amazon Web Services account if no model type and no model id provided. Gets all models for the Amazon Web Services account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified. </p> <p>This is a paginated API. If you provide a null <code>maxResults</code>, this action retrieves a maximum of 10 records per page. If you provide a <code>maxResults</code>, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.</p>"
     },
     "GetOutcomes": {
       "name": "GetOutcomes",
@@ -1135,6 +1192,9 @@
           "shape": "ResourceNotFoundException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
         }
       ],
@@ -1164,6 +1224,9 @@
         },
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Creates or updates a detector. </p>"
@@ -1188,7 +1251,13 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Creates or updates an entity type. An entity represents who is performing the event. As part of a fraud prediction, you pass the entity ID to indicate the specific entity who performed the event. An entity type classifies the entity. Example classifications include customer, merchant, or account.</p>"
@@ -1213,7 +1282,13 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Creates or updates an event type. An event is a business activity that is evaluated for fraud risk. With Amazon Fraud Detector, you generate fraud predictions for events. An event type defines the structure for an event sent to Amazon Fraud Detector. This includes the variables sent as part of the event, the entity performing the event (such as a customer), and the labels that classify the event. Example event types include online payment transactions, account registrations, and authentications.</p>"
@@ -1242,6 +1317,9 @@
         },
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Creates or updates an Amazon SageMaker model endpoint. You can also use this action to update the configuration of the model endpoint, including the IAM role and/or the mapped variables. </p>"
@@ -1269,7 +1347,13 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Specifies the Key Management Service (KMS) customer master key (CMK) to be used to encrypt content in Amazon Fraud Detector.</p>"
@@ -1294,7 +1378,13 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Creates or updates label. A label classifies an event as fraudulent or legitimate. Labels are associated with event types and used to train supervised machine learning models in Amazon Fraud Detector. </p>"
@@ -1323,6 +1413,9 @@
         },
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Creates or updates an outcome. </p>"
@@ -1345,6 +1438,9 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "AccessDeniedException"
@@ -1370,6 +1466,9 @@
         },
         {
           "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
         },
         {
           "shape": "AccessDeniedException"
@@ -1404,6 +1503,9 @@
         },
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p> Updates a detector version. The detector version attributes that you can update include models, external model endpoints, rules, rule execution mode, and description. You can only update a <code>DRAFT</code> detector version.</p>"
@@ -1432,6 +1534,9 @@
         },
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Updates the detector version's description. You can update the metadata for any detector version (<code>DRAFT, ACTIVE,</code> or <code>INACTIVE</code>). </p>"
@@ -1463,6 +1568,9 @@
         },
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Updates the detector version’s status. You can perform the following promotions or demotions using <code>UpdateDetectorVersionStatus</code>: <code>DRAFT</code> to <code>ACTIVE</code>, <code>ACTIVE</code> to <code>INACTIVE</code>, and <code>INACTIVE</code> to <code>ACTIVE</code>.</p>"
@@ -1490,7 +1598,13 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Updates a model. You can update the description attribute using this action.</p>"
@@ -1518,7 +1632,13 @@
           "shape": "AccessDeniedException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "InternalServerException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Updates a model version. Updating a model version retrains an existing model version using updated training data and produces a new minor version of the model. You can update the training data set location and data access role attributes using this action. This action creates and trains a new minor version of the model, for example version 1.01, 1.02, 1.03.</p>"
@@ -1546,7 +1666,13 @@
           "shape": "InternalServerException"
         },
         {
+          "shape": "ThrottlingException"
+        },
+        {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Updates the status of a model version.</p> <p>You can perform the following status updates:</p> <ol> <li> <p>Change the <code>TRAINING_COMPLETE</code> status to <code>ACTIVE</code>.</p> </li> <li> <p>Change <code>ACTIVE</code>to <code>INACTIVE</code>.</p> </li> </ol>"
@@ -1578,6 +1704,9 @@
         },
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Updates a rule's metadata. The description attribute can be updated.</p>"
@@ -1609,6 +1738,9 @@
         },
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Updates a rule version resulting in a new rule version. Updates a rule version resulting in a new rule version (version 1, 2, 3 ...). </p>"
@@ -1640,6 +1772,9 @@
         },
         {
           "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConflictException"
         }
       ],
       "documentation": "<p>Updates a variable.</p>"
@@ -2579,7 +2714,8 @@
           "documentation": "<p>The entity ID. If you do not know the <code>entityId</code>, you can pass <code>unknown</code>, which is areserved string literal.</p>"
         }
       },
-      "documentation": "<p>The entity details. </p>"
+      "documentation": "<p>The entity details. </p>",
+      "sensitive": true
     },
     "EntityType": {
       "type": "structure",
@@ -2643,7 +2779,8 @@
           "documentation": "<p>The entity type ARN.</p>"
         }
       },
-      "documentation": "<p>The event type details.</p>"
+      "documentation": "<p>The event type details.</p>",
+      "sensitive": true
     },
     "EventVariableMap": {
       "type": "map",
@@ -2969,7 +3106,7 @@
           "documentation": "<p>The entity type (associated with the detector's event type) and specific entity ID representing who performed the event. If an entity id is not available, use \"UNKNOWN.\"</p>"
         },
         "eventTimestamp": {
-          "shape": "string",
+          "shape": "utcTimestampISO8601",
           "documentation": "<p>Timestamp that defines when the event under evaluation occurred.</p>"
         },
         "eventVariables": {
@@ -2991,7 +3128,7 @@
         },
         "ruleResults": {
           "shape": "ListOfRuleResults",
-          "documentation": "<p>The results.</p>"
+          "documentation": "<p>The results from the rules.</p>"
         }
       }
     },
@@ -3361,10 +3498,10 @@
         "DETECTORPL"
       ]
     },
-    "ListOfLogitMetrics": {
+    "ListOfLogOddsMetrics": {
       "type": "list",
       "member": {
-        "shape": "LogitMetric"
+        "shape": "LogOddsMetric"
       }
     },
     "ListOfModelScores": {
@@ -3424,7 +3561,7 @@
         }
       }
     },
-    "LogitMetric": {
+    "LogOddsMetric": {
       "type": "structure",
       "required": [
         "variableName",
@@ -3442,10 +3579,10 @@
         },
         "variableImportance": {
           "shape": "float",
-          "documentation": "<p>The relative importance of the variable.</p>"
+          "documentation": "<p>The relative importance of the variable. For more information, see <a href=\"https://docs.aws.amazon.com/frauddetector/latest/ug/model-variable-importance.html\">Model variable importance</a>.</p>"
         }
       },
-      "documentation": "<p>The logit metric details.</p>"
+      "documentation": "<p>The log odds metric details.</p>"
     },
     "MetricDataPoint": {
       "type": "structure",
@@ -4571,8 +4708,8 @@
     "VariableImportanceMetrics": {
       "type": "structure",
       "members": {
-        "LogitMetrics": {
-          "shape": "ListOfLogitMetrics",
+        "logOddsMetrics": {
+          "shape": "ListOfLogOddsMetrics",
           "documentation": "<p>List of variable metrics.</p>"
         }
       },
@@ -4687,7 +4824,7 @@
         "shape": "string"
       },
       "value": {
-        "shape": "ListOfStrings"
+        "shape": "NonEmptyListOfStrings"
       }
     },
     "labelsMaxResults": {
@@ -4788,6 +4925,11 @@
       "type": "string",
       "max": 30,
       "min": 11
+    },
+    "utcTimestampISO8601": {
+      "type": "string",
+      "max": 30,
+      "min": 10
     },
     "variableName": {
       "type": "string",

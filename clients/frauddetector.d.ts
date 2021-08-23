@@ -280,11 +280,11 @@ declare class FraudDetector extends Service {
    */
   getModelVersion(callback?: (err: AWSError, data: FraudDetector.Types.GetModelVersionResult) => void): Request<FraudDetector.Types.GetModelVersionResult, AWSError>;
   /**
-   * Gets one or more models. Gets all models for the AWS account if no model type and no model id provided. Gets all models for the AWS account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified.  This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 10 records per page. If you provide a maxResults, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.
+   * Gets one or more models. Gets all models for the Amazon Web Services account if no model type and no model id provided. Gets all models for the Amazon Web Services account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified.  This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 10 records per page. If you provide a maxResults, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.
    */
   getModels(params: FraudDetector.Types.GetModelsRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetModelsResult) => void): Request<FraudDetector.Types.GetModelsResult, AWSError>;
   /**
-   * Gets one or more models. Gets all models for the AWS account if no model type and no model id provided. Gets all models for the AWS account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified.  This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 10 records per page. If you provide a maxResults, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.
+   * Gets one or more models. Gets all models for the Amazon Web Services account if no model type and no model id provided. Gets all models for the Amazon Web Services account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified.  This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 10 records per page. If you provide a maxResults, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.
    */
   getModels(callback?: (err: AWSError, data: FraudDetector.Types.GetModelsResult) => void): Request<FraudDetector.Types.GetModelsResult, AWSError>;
   /**
@@ -1368,7 +1368,7 @@ declare namespace FraudDetector {
     /**
      * Timestamp that defines when the event under evaluation occurred.
      */
-    eventTimestamp: string;
+    eventTimestamp: utcTimestampISO8601;
     /**
      * Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.    You must provide at least one eventVariable   If detectorVersion is associated with a modelVersion, you must provide at least one associated eventVariable    To ensure highest possible fraud prediction and to simplify your data preparation, Amazon Fraud Detector will replace all missing variables or values as follows:  For Amazon Fraud Detector trained models:  If a null value is provided explicitly for a variable or if a variable is missing, model will replace the null value or the missing variable (no variable name in the eventVariables map) with calculated default mean/medians for numeric variables and with special values for categorical variables.  For External models ( for example, imported SageMaker):  If a null value is provided explicitly for a variable, the model and rules will use “null” as the value. If a variable is not provided (no variable name in the eventVariables map), model and rules will use the default value that is provided for the variable. 
      */
@@ -1384,7 +1384,7 @@ declare namespace FraudDetector {
      */
     modelScores?: ListOfModelScores;
     /**
-     * The results.
+     * The results from the rules.
      */
     ruleResults?: ListOfRuleResults;
   }
@@ -1660,7 +1660,7 @@ declare namespace FraudDetector {
     labelMapper: labelMapper;
   }
   export type Language = "DETECTORPL"|string;
-  export type ListOfLogitMetrics = LogitMetric[];
+  export type ListOfLogOddsMetrics = LogOddsMetric[];
   export type ListOfModelScores = ModelScores[];
   export type ListOfModelVersions = ModelVersion[];
   export type ListOfRuleResults = RuleResult[];
@@ -1689,7 +1689,7 @@ declare namespace FraudDetector {
      */
     nextToken?: string;
   }
-  export interface LogitMetric {
+  export interface LogOddsMetric {
     /**
      * The name of the variable.
      */
@@ -1699,7 +1699,7 @@ declare namespace FraudDetector {
      */
     variableType: string;
     /**
-     * The relative importance of the variable.
+     * The relative importance of the variable. For more information, see Model variable importance.
      */
     variableImportance: float;
   }
@@ -2451,7 +2451,7 @@ declare namespace FraudDetector {
     /**
      * List of variable metrics.
      */
-    LogitMetrics?: ListOfLogitMetrics;
+    logOddsMetrics?: ListOfLogOddsMetrics;
   }
   export type VariableList = Variable[];
   export type VariablesMaxResults = number;
@@ -2472,7 +2472,7 @@ declare namespace FraudDetector {
   export type identifier = string;
   export type integer = number;
   export type labelList = Label[];
-  export type labelMapper = {[key: string]: ListOfStrings};
+  export type labelMapper = {[key: string]: NonEmptyListOfStrings};
   export type labelsMaxResults = number;
   export type listOfEntities = Entity[];
   export type metricDataPointsList = MetricDataPoint[];
@@ -2489,6 +2489,7 @@ declare namespace FraudDetector {
   export type tagList = Tag[];
   export type tagValue = string;
   export type time = string;
+  export type utcTimestampISO8601 = string;
   export type variableName = string;
   export type variableValue = string;
   export type wholeNumberVersionString = string;
