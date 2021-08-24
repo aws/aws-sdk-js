@@ -995,7 +995,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     Encryption?: CmafEncryptionSettings;
     /**
-     * Length of fragments to generate (in seconds). Fragment length must be compatible with GOP size and Framerate. Note that fragments will end on the next keyframe after this number of seconds, so actual fragment length may be longer. When Emit Single File is checked, the fragmentation is internal to a single output file and it does not cause the creation of many output files as in other output types.
+     * Specify the length, in whole seconds, of the mp4 fragments. When you don't specify a value, MediaConvert defaults to 2. Related setting: Use Fragment length control (FragmentLengthControl) to specify whether the encoder enforces this value strictly.
      */
     FragmentLength?: __integerMin1Max2147483647;
     /**
@@ -1031,9 +1031,13 @@ All burn-in and DVB-Sub font settings must match.
      */
     SegmentControl?: CmafSegmentControl;
     /**
-     * Use this setting to specify the length, in seconds, of each individual CMAF segment. This value applies to the whole package; that is, to every output in the output group. Note that segments end on the first keyframe after this number of seconds, so the actual segment length might be slightly longer. If you set Segment control (CmafSegmentControl) to single file, the service puts the content of each output in a single file that has metadata that marks these segments. If you set it to segmented files, the service creates multiple files for each output, each with the content of one segment.
+     * Specify the length, in whole seconds, of each segment. When you don't specify a value, MediaConvert defaults to 10. Related settings: Use Segment length control (SegmentLengthControl) to specify whether the encoder enforces this value strictly. Use Segment control (CmafSegmentControl) to specify whether MediaConvert creates separate segment files or one content file that has metadata to mark the segment boundaries.
      */
     SegmentLength?: __integerMin1Max2147483647;
+    /**
+     * Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.
+     */
+    SegmentLengthControl?: CmafSegmentLengthControl;
     /**
      * Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of variant manifest.
      */
@@ -1063,6 +1067,7 @@ All burn-in and DVB-Sub font settings must match.
   export type CmafMpdProfile = "MAIN_PROFILE"|"ON_DEMAND_PROFILE"|string;
   export type CmafPtsOffsetHandlingForBFrames = "ZERO_BASED"|"MATCH_INITIAL_PTS"|string;
   export type CmafSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES"|string;
+  export type CmafSegmentLengthControl = "EXACT"|"GOP_MULTIPLE"|string;
   export type CmafStreamInfResolution = "INCLUDE"|"EXCLUDE"|string;
   export type CmafTargetDurationCompatibilityMode = "LEGACY"|"SPEC_COMPLIANT"|string;
   export type CmafWriteDASHManifest = "DISABLED"|"ENABLED"|string;
@@ -1430,9 +1435,13 @@ All burn-in and DVB-Sub font settings must match.
      */
     SegmentControl?: DashIsoSegmentControl;
     /**
-     * Length of mpd segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer. When Emit Single File is checked, the segmentation is internal to a single output file and it does not cause the creation of many output files as in other output types.
+     * Specify the length, in whole seconds, of each segment. When you don't specify a value, MediaConvert defaults to 30. Related settings: Use Segment length control (SegmentLengthControl) to specify whether the encoder enforces this value strictly. Use Segment control (DashIsoSegmentControl) to specify whether MediaConvert creates separate segment files or one content file that has metadata to mark the segment boundaries.
      */
     SegmentLength?: __integerMin1Max2147483647;
+    /**
+     * Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.
+     */
+    SegmentLengthControl?: DashIsoSegmentLengthControl;
     /**
      * If you get an HTTP error in the 400 range when you play back your DASH output, enable this setting and run your transcoding job again. When you enable this setting, the service writes precise segment durations in the DASH manifest. The segment duration information appears inside the SegmentTimeline element, inside SegmentTemplate at the Representation level. When you don't enable this setting, the service writes approximate segment durations in your DASH manifest.
      */
@@ -1444,6 +1453,7 @@ All burn-in and DVB-Sub font settings must match.
   export type DashIsoPlaybackDeviceCompatibility = "CENC_V1"|"UNENCRYPTED_SEI"|string;
   export type DashIsoPtsOffsetHandlingForBFrames = "ZERO_BASED"|"MATCH_INITIAL_PTS"|string;
   export type DashIsoSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES"|string;
+  export type DashIsoSegmentLengthControl = "EXACT"|"GOP_MULTIPLE"|string;
   export type DashIsoWriteSegmentTimelineInRepresentation = "ENABLED"|"DISABLED"|string;
   export type DecryptionMode = "AES_CTR"|"AES_CBC"|"AES_GCM"|string;
   export type DeinterlaceAlgorithm = "INTERPOLATE"|"INTERPOLATE_TICKER"|"BLEND"|"BLEND_TICKER"|string;
@@ -2063,7 +2073,7 @@ All burn-in and DVB-Sub font settings must match.
   export type H264CodecProfile = "BASELINE"|"HIGH"|"HIGH_10BIT"|"HIGH_422"|"HIGH_422_10BIT"|"MAIN"|string;
   export type H264DynamicSubGop = "ADAPTIVE"|"STATIC"|string;
   export type H264EntropyEncoding = "CABAC"|"CAVLC"|string;
-  export type H264FieldEncoding = "PAFF"|"FORCE_FIELD"|string;
+  export type H264FieldEncoding = "PAFF"|"FORCE_FIELD"|"MBAFF"|string;
   export type H264FlickerAdaptiveQuantization = "DISABLED"|"ENABLED"|string;
   export type H264FramerateControl = "INITIALIZE_FROM_SOURCE"|"SPECIFIED"|string;
   export type H264FramerateConversionAlgorithm = "DUPLICATE_DROP"|"INTERPOLATE"|"FRAMEFORMER"|string;
@@ -2116,7 +2126,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     EntropyEncoding?: H264EntropyEncoding;
     /**
-     * Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields.
+     * The video encoding method for your MPEG-4 AVC output. Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields. Choose MBAFF to disable PAFF and have MediaConvert use MBAFF encoding for interlaced outputs.
      */
     FieldEncoding?: H264FieldEncoding;
     /**
@@ -2176,7 +2186,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     MinIInterval?: __integerMin0Max30;
     /**
-     * Number of B-frames between reference frames.
+     * Specify the number of B-frames that MediaConvert puts between reference frames in this output. Valid values are whole numbers from 0 through 7. When you don't specify a value, MediaConvert defaults to 2.
      */
     NumberBFramesBetweenReferenceFrames?: __integerMin0Max7;
     /**
@@ -2371,7 +2381,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     MinIInterval?: __integerMin0Max30;
     /**
-     * Number of B-frames between reference frames.
+     * Specify the number of B-frames that MediaConvert puts between reference frames in this output. Valid values are whole numbers from 0 through 7. When you don't specify a value, MediaConvert defaults to 2.
      */
     NumberBFramesBetweenReferenceFrames?: __integerMin0Max7;
     /**
@@ -2673,9 +2683,13 @@ All burn-in and DVB-Sub font settings must match.
      */
     SegmentControl?: HlsSegmentControl;
     /**
-     * Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer.
+     * Specify the length, in whole seconds, of each segment. When you don't specify a value, MediaConvert defaults to 10. Related settings: Use Segment length control (SegmentLengthControl) to specify whether the encoder enforces this value strictly. Use Segment control (HlsSegmentControl) to specify whether MediaConvert creates separate segment files or one content file that has metadata to mark the segment boundaries.
      */
     SegmentLength?: __integerMin1Max2147483647;
+    /**
+     * Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.
+     */
+    SegmentLengthControl?: HlsSegmentLengthControl;
     /**
      * Number of segments to write to a subdirectory before starting a new one. directoryStructure must be SINGLE_DIRECTORY for this setting to have an effect.
      */
@@ -2725,6 +2739,7 @@ All burn-in and DVB-Sub font settings must match.
     RenditionName?: __string;
   }
   export type HlsSegmentControl = "SINGLE_FILE"|"SEGMENTED_FILES"|string;
+  export type HlsSegmentLengthControl = "EXACT"|"GOP_MULTIPLE"|string;
   export interface HlsSettings {
     /**
      * Specifies the group to which the audio rendition belongs.
@@ -3492,6 +3507,7 @@ All burn-in and DVB-Sub font settings must match.
   export type M2tsAudioBufferModel = "DVB"|"ATSC"|string;
   export type M2tsAudioDuration = "DEFAULT_CODEC_DURATION"|"MATCH_VIDEO_DURATION"|string;
   export type M2tsBufferModel = "MULTIPLEX"|"NONE"|string;
+  export type M2tsDataPtsControl = "AUTO"|"ALIGN_TO_VIDEO"|string;
   export type M2tsEbpAudioInterval = "VIDEO_AND_FIXED_INTERVALS"|"VIDEO_INTERVAL"|string;
   export type M2tsEbpPlacement = "VIDEO_AND_AUDIO_PIDS"|"VIDEO_PID"|string;
   export type M2tsEsRateInPes = "INCLUDE"|"EXCLUDE"|string;
@@ -3533,6 +3549,10 @@ All burn-in and DVB-Sub font settings must match.
      * Controls what buffer model to use for accurate interleaving. If set to MULTIPLEX, use multiplex  buffer model. If set to NONE, this can lead to lower latency, but low-memory devices may not be able to play back the stream without interruptions.
      */
     BufferModel?: M2tsBufferModel;
+    /**
+     * If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with Presentation Timestamp (PTS) values greater than or equal to the first video packet PTS (MediaConvert drops captions and data packets with lesser PTS values). Keep the default value (AUTO) to allow all PTS values.
+     */
+    DataPTSControl?: M2tsDataPtsControl;
     /**
      * Use these settings to insert a DVB Network Information Table (NIT) in the transport stream of this output. When you work directly in your JSON job specification, include this object only when your job has a transport stream output and the container settings contain the object M2tsSettings.
      */
@@ -3659,6 +3679,7 @@ All burn-in and DVB-Sub font settings must match.
     VideoPid?: __integerMin32Max8182;
   }
   export type M3u8AudioDuration = "DEFAULT_CODEC_DURATION"|"MATCH_VIDEO_DURATION"|string;
+  export type M3u8DataPtsControl = "AUTO"|"ALIGN_TO_VIDEO"|string;
   export type M3u8NielsenId3 = "INSERT"|"NONE"|string;
   export type M3u8PcrControl = "PCR_EVERY_PES_PACKET"|"CONFIGURED_PCR_PERIOD"|string;
   export type M3u8Scte35Source = "PASSTHROUGH"|"NONE"|string;
@@ -3675,6 +3696,10 @@ All burn-in and DVB-Sub font settings must match.
      * Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation.
      */
     AudioPids?: __listOf__integerMin32Max8182;
+    /**
+     * If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with Presentation Timestamp (PTS) values greater than or equal to the first video packet PTS (MediaConvert drops captions and data packets with lesser PTS values). Keep the default value (AUTO) to allow all PTS values.
+     */
+    DataPTSControl?: M3u8DataPtsControl;
     /**
      * Specify the maximum time, in milliseconds, between Program Clock References (PCRs) inserted into the transport stream.
      */
@@ -3960,11 +3985,11 @@ All burn-in and DVB-Sub font settings must match.
      */
     GopClosedCadence?: __integerMin0Max2147483647;
     /**
-     * GOP Length (keyframe interval) in frames or seconds. Must be greater than zero.
+     * Specify the interval between keyframes, in seconds or frames, for this output. Default: 12 Related settings: When you specify the GOP size in seconds, set GOP mode control (GopSizeUnits) to Specified, seconds (SECONDS). The default value for GOP mode control (GopSizeUnits) is Frames (FRAMES).
      */
     GopSize?: __doubleMin0;
     /**
-     * Indicates if the GOP Size in MPEG2 is specified in frames or seconds. If seconds the system will convert the GOP Size into a frame count at run time.
+     * Specify the units for GOP size (GopSize). If you don't specify a value here, by default the encoder measures GOP size in frames.
      */
     GopSizeUnits?: Mpeg2GopSizeUnits;
     /**
@@ -3992,7 +4017,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     MinIInterval?: __integerMin0Max30;
     /**
-     * Number of B-frames between reference frames.
+     * Specify the number of B-frames that MediaConvert puts between reference frames in this output. Valid values are whole numbers from 0 through 7. When you don't specify a value, MediaConvert defaults to 2.
      */
     NumberBFramesBetweenReferenceFrames?: __integerMin0Max7;
     /**
@@ -4070,6 +4095,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     SpekeKeyProvider?: SpekeKeyProvider;
   }
+  export type MsSmoothFragmentLengthControl = "EXACT"|"GOP_MULTIPLE"|string;
   export interface MsSmoothGroupSettings {
     /**
      * By default, the service creates one .ism Microsoft Smooth Streaming manifest for each Microsoft Smooth Streaming output group in your job. This default manifest references every output in the output group. To create additional manifests that reference a subset of the outputs in the output group, specify a list of them here.
@@ -4092,9 +4118,13 @@ All burn-in and DVB-Sub font settings must match.
      */
     Encryption?: MsSmoothEncryptionSettings;
     /**
-     * Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in seconds. Fragment length must be compatible with GOP size and frame rate.
+     * Specify how you want MediaConvert to determine the fragment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Fragment length (FragmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.
      */
     FragmentLength?: __integerMin1Max2147483647;
+    /**
+     * Specify how you want MediaConvert to determine the fragment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Fragment length (FragmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.
+     */
+    FragmentLengthControl?: MsSmoothFragmentLengthControl;
     /**
      * Use Manifest encoding (MsSmoothManifestEncoding) to specify the encoding format for the server and client manifest. Valid options are utf8 and utf16.
      */
@@ -4685,6 +4715,10 @@ All burn-in and DVB-Sub font settings must match.
      * Specify how you want your data keys managed. AWS uses data keys to encrypt your content. AWS also encrypts the data keys themselves, using a customer master key (CMK), and then stores the encrypted data keys alongside your encrypted content. Use this setting to specify which AWS service manages the CMK. For simplest set up, choose Amazon S3 (SERVER_SIDE_ENCRYPTION_S3). If you want your master key to be managed by AWS Key Management Service (KMS), choose AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). By default, when you choose AWS KMS, KMS uses the AWS managed customer master key (CMK) associated with Amazon S3 to encrypt your data keys. You can optionally choose to specify a different, customer managed CMK. Do so by specifying the Amazon Resource Name (ARN) of the key for the setting  KMS ARN (kmsKeyArn).
      */
     EncryptionType?: S3ServerSideEncryptionType;
+    /**
+     * Optionally, specify the encryption context that you want to use alongside your KMS key. AWS KMS uses this encryption context as additional authenticated data (AAD) to support authenticated encryption. This value must be a base64-encoded UTF-8 string holding JSON which represents a string-string map. To use this setting, you must also set Server-side encryption (S3ServerSideEncryptionType) to AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). For more information about encryption context, see: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context.
+     */
+    KmsEncryptionContext?: __stringPatternAZaZ0902;
     /**
      * Optionally, specify the customer master key (CMK) that you want to use to encrypt the data key that AWS uses to encrypt your output content. Enter the Amazon Resource Name (ARN) of the CMK. To use this setting, you must also set Server-side encryption (S3ServerSideEncryptionType) to AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). If you set Server-side encryption to AWS KMS but don't specify a CMK here, AWS uses the AWS managed CMK associated with Amazon S3.
      */

@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.974.0-->
+<!--LATEST=2.975.0-->
 <!--ENTRYINSERT-->
+
+## 2.975.0
+* feature: IotData: Updated Publish with support for new Retain flag and added two new API operations: GetRetainedMessage, ListRetainedMessages.
+* feature: MediaConvert: AWS Elemental MediaConvert SDK has added MBAFF encoding support for AVC video and the ability to pass encryption context from the job settings to S3.
+* feature: Polly: Amazon Polly adds new New Zealand English voice - Aria. Aria is available as Neural voice only.
+* feature: SSM: Updated Parameter Store property for logging improvements.
+* feature: TranscribeService: This release adds support for feature tagging with Amazon Transcribe batch jobs.
 
 ## 2.974.0
 * feature: APIGateway: Adding some of the pending releases (1) Adding WAF Filter to GatewayResponseType enum (2) Ensuring consistent error model for all operations (3) Add missing BRE to GetVpcLink operation

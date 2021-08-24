@@ -13274,7 +13274,8 @@
       "min": 0
     },
     "PSParameterValue": {
-      "type": "string"
+      "type": "string",
+      "sensitive": true
     },
     "PSParameterVersion": {
       "type": "long"
