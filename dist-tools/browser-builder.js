@@ -13,7 +13,7 @@ var license = [
 function minify(code) {
   var uglify = require('uglify-js');
   var minified = uglify.minify(code, {fromString: true});
-  return minified.code;
+  return minified.code;ddd
 }
 
 function build(options, callback) {

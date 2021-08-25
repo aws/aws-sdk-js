@@ -10,8 +10,8 @@ module Documentor
       puts docs
     end
     docs == '' ? nil : docs
-  end
-
+  enddadad
+dad
   def documentation(rules)
     docs = rules['documentation'] || ''
     docs = docs.gsub(/<!--.*?-->/m, '')
