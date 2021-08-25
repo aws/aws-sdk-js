@@ -164,7 +164,7 @@
       "output": {
         "shape": "AssignIpv6AddressesResult"
       },
-      "documentation": "<p>Assigns one or more IPv6 addresses to the specified network interface. You can specify one or more specific IPv6 addresses, or you can specify the number of IPv6 addresses to be automatically assigned from within the subnet's IPv6 CIDR block range. You can assign as many IPv6 addresses to a network interface as you can assign private IPv4 addresses, and the limit varies per instance type. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI\">IP Addresses Per Network Interface Per Instance Type</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You must specify either the IPv6 addresses or the IPv6 address count in the request. </p> <p>You can optionally use Prefix Delegation on the network interface. You must specify either the IPV6 Prefix Delegation prefixes, or the IPv6 Prefix Delegation count. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation\">Prefix Delegation</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Assigns one or more IPv6 addresses to the specified network interface. You can specify one or more specific IPv6 addresses, or you can specify the number of IPv6 addresses to be automatically assigned from within the subnet's IPv6 CIDR block range. You can assign as many IPv6 addresses to a network interface as you can assign private IPv4 addresses, and the limit varies per instance type. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI\">IP Addresses Per Network Interface Per Instance Type</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>You must specify either the IPv6 addresses or the IPv6 address count in the request. </p> <p>You can optionally use Prefix Delegation on the network interface. You must specify either the IPV6 Prefix Delegation prefixes, or the IPv6 Prefix Delegation count. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html\"> Assigning prefixes to Amazon EC2 network interfaces</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "AssignPrivateIpAddresses": {
       "name": "AssignPrivateIpAddresses",
@@ -178,7 +178,7 @@
       "output": {
         "shape": "AssignPrivateIpAddressesResult"
       },
-      "documentation": "<p>Assigns one or more secondary private IP addresses to the specified network interface.</p> <p>You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about Elastic IP addresses, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When you move a secondary private IP address to another network interface, any Elastic IP address that is associated with the IP address is also moved.</p> <p>Remapping an IP address is an asynchronous operation. When you move an IP address from one network interface to another, check <code>network/interfaces/macs/mac/local-ipv4s</code> in the instance metadata to confirm that the remapping is complete.</p> <p>You must specify either the IP addresses or the IP address count in the request.</p> <p>You can optionally use Prefix Delegation on the network interface. You must specify either the IPv4 Prefix Delegation prefixes, or the IPv4 Prefix Delegation count. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation\">Prefix Delegation</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<p>Assigns one or more secondary private IP addresses to the specified network interface.</p> <p>You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about Elastic IP addresses, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p> <p>When you move a secondary private IP address to another network interface, any Elastic IP address that is associated with the IP address is also moved.</p> <p>Remapping an IP address is an asynchronous operation. When you move an IP address from one network interface to another, check <code>network/interfaces/macs/mac/local-ipv4s</code> in the instance metadata to confirm that the remapping is complete.</p> <p>You must specify either the IP addresses or the IP address count in the request.</p> <p>You can optionally use Prefix Delegation on the network interface. You must specify either the IPv4 Prefix Delegation prefixes, or the IPv4 Prefix Delegation count. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html\"> Assigning prefixes to Amazon EC2 network interfaces</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
     },
     "AssociateAddress": {
       "name": "AssociateAddress",
@@ -329,7 +329,7 @@
       "output": {
         "shape": "AssociateTrunkInterfaceResult"
       },
-      "documentation": "<p>Associates a branch network interface with a trunk network interface.</p> <p>Before you create the association, run the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">create-network-interface</a> command and set <code>--interface-type</code> to <code>trunk</code>. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/eni-trunking.html\"> Network interface trunking</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+      "documentation": "<note> <p>This API action is currently in <b>limited preview only</b>. If you are interested in using this feature, contact your account manager.</p> </note> <p>Associates a branch network interface with a trunk network interface.</p> <p>Before you create the association, run the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">create-network-interface</a> command and set <code>--interface-type</code> to <code>trunk</code>. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.</p>"
     },
     "AssociateVpcCidrBlock": {
       "name": "AssociateVpcCidrBlock",
@@ -3818,7 +3818,7 @@
       "output": {
         "shape": "DescribeTrunkInterfaceAssociationsResult"
       },
-      "documentation": "<p>Describes one or more network interface trunk associations.</p>"
+      "documentation": "<note> <p>This API action is currently in <b>limited preview only</b>. If you are interested in using this feature, contact your account manager.</p> </note> <p>Describes one or more network interface trunk associations.</p>"
     },
     "DescribeVolumeAttribute": {
       "name": "DescribeVolumeAttribute",
@@ -4360,7 +4360,7 @@
       "output": {
         "shape": "DisassociateTrunkInterfaceResult"
       },
-      "documentation": "<p>Removes an association between a branch network interface with a trunk network interface.</p>"
+      "documentation": "<note> <p>This API action is currently in <b>limited preview only</b>. If you are interested in using this feature, contact your account manager.</p> </note> <p>Removes an association between a branch network interface with a trunk network interface.</p>"
     },
     "DisassociateVpcCidrBlock": {
       "name": "DisassociateVpcCidrBlock",
@@ -7363,11 +7363,11 @@
         },
         "Ipv6PrefixCount": {
           "shape": "Integer",
-          "documentation": "<p>The number of IPv6 Prefix Delegation prefixes that AWS automatically assigns to the network interface. You cannot use this option if you use the <code>Ipv6Prefixes</code> option.</p>"
+          "documentation": "<p>The number of IPv6 prefixes that Amazon Web Services automatically assigns to the network interface. You cannot use this option if you use the <code>Ipv6Prefixes</code> option.</p>"
         },
         "Ipv6Prefixes": {
           "shape": "IpPrefixList",
-          "documentation": "<p>One or more IPv6 Prefix Delegation prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv6PrefixCount</code> option.</p>",
+          "documentation": "<p>One or more IPv6 prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv6PrefixCount</code> option.</p>",
           "locationName": "Ipv6Prefix"
         },
         "NetworkInterfaceId": {
@@ -7387,7 +7387,7 @@
         },
         "AssignedIpv6Prefixes": {
           "shape": "IpPrefixList",
-          "documentation": "<p>The IPv6 Prefix Delegation prefixes that are assigned to the network interface.</p>",
+          "documentation": "<p>The IPv6 prefixes that are assigned to the network interface.</p>",
           "locationName": "assignedIpv6PrefixSet"
         },
         "NetworkInterfaceId": {
@@ -7425,12 +7425,12 @@
         },
         "Ipv4Prefixes": {
           "shape": "IpPrefixList",
-          "documentation": "<p>One or more IPv4 Prefix Delegation prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv4PrefixCount</code> option.</p>",
+          "documentation": "<p>One or more IPv4 prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv4PrefixCount</code> option.</p>",
           "locationName": "Ipv4Prefix"
         },
         "Ipv4PrefixCount": {
           "shape": "Integer",
-          "documentation": "<p>The number of IPv4 Prefix Delegation prefixes that AWS automatically assigns to the network interface. You cannot use this option if you use the <code>Ipv4 Prefixes</code> option.</p>"
+          "documentation": "<p>The number of IPv4 prefixes that Amazon Web Services automatically assigns to the network interface. You cannot use this option if you use the <code>Ipv4 Prefixes</code> option.</p>"
         }
       },
       "documentation": "<p>Contains the parameters for AssignPrivateIpAddresses.</p>"
@@ -7450,7 +7450,7 @@
         },
         "AssignedIpv4Prefixes": {
           "shape": "Ipv4PrefixesList",
-          "documentation": "<p>The IPv4 Prefix Delegation prefixes that are assigned to the network interface.</p>",
+          "documentation": "<p>The IPv4 prefixes that are assigned to the network interface.</p>",
           "locationName": "assignedIpv4PrefixSet"
         }
       }
@@ -12216,21 +12216,21 @@
         },
         "Ipv4Prefixes": {
           "shape": "Ipv4PrefixList",
-          "documentation": "<p>One or moreIPv4 Prefix Delegation prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv4PrefixCount</code> option.</p>",
+          "documentation": "<p>One or more IPv4 prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv4PrefixCount</code> option.</p>",
           "locationName": "Ipv4Prefix"
         },
         "Ipv4PrefixCount": {
           "shape": "Integer",
-          "documentation": "<p>The number of IPv4 Prefix Delegation prefixes that AWS automatically assigns to the network interface. You cannot use this option if you use the <code>Ipv4 Prefixes</code> option.</p>"
+          "documentation": "<p>The number of IPv4 prefixes that Amazon Web Services automatically assigns to the network interface. You cannot use this option if you use the <code>Ipv4 Prefixes</code> option.</p>"
         },
         "Ipv6Prefixes": {
           "shape": "Ipv6PrefixList",
-          "documentation": "<p>One or moreIPv6 Prefix Delegation prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv6PrefixCount</code> option.</p>",
+          "documentation": "<p>One or more IPv6 prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv6PrefixCount</code> option.</p>",
           "locationName": "Ipv6Prefix"
         },
         "Ipv6PrefixCount": {
           "shape": "Integer",
-          "documentation": "<p>The number of IPv6 Prefix Delegation prefixes that AWS automatically assigns to the network interface. You cannot use this option if you use the <code>Ipv6Prefixes</code> option.</p>"
+          "documentation": "<p>The number of IPv6 prefixes that Amazon Web Services automatically assigns to the network interface. You cannot use this option if you use the <code>Ipv6Prefixes</code> option.</p>"
         },
         "InterfaceType": {
           "shape": "NetworkInterfaceCreationType",
@@ -28527,6 +28527,10 @@
         "HttpEndpoint": {
           "shape": "InstanceMetadataEndpointState",
           "documentation": "<p>This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is <code>enabled</code>.</p> <note> <p>If you specify a value of <code>disabled</code>, you will not be able to access your instance metadata.</p> </note>"
+        },
+        "HttpProtocolIpv6": {
+          "shape": "InstanceMetadataProtocolState",
+          "documentation": "<p>Enables or disables the IPv6 endpoint for the instance metadata service.</p>"
         }
       },
       "documentation": "<p>The metadata options for the instance.</p>"
@@ -28553,6 +28557,11 @@
           "shape": "InstanceMetadataEndpointState",
           "documentation": "<p>This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is <code>enabled</code>.</p> <note> <p>If you specify a value of <code>disabled</code>, you will not be able to access your instance metadata.</p> </note>",
           "locationName": "httpEndpoint"
+        },
+        "HttpProtocolIpv6": {
+          "shape": "InstanceMetadataProtocolState",
+          "documentation": "<p>Whether or not the IPv6 endpoint for the instance metadata service is enabled or disabled.</p>",
+          "locationName": "httpProtocolIpv6"
         }
       },
       "documentation": "<p>The metadata options for the instance.</p>"
@@ -28562,6 +28571,13 @@
       "enum": [
         "pending",
         "applied"
+      ]
+    },
+    "InstanceMetadataProtocolState": {
+      "type": "string",
+      "enum": [
+        "disabled",
+        "enabled"
       ]
     },
     "InstanceMonitoring": {
@@ -28827,7 +28843,7 @@
         },
         "NetworkCardIndex": {
           "shape": "Integer",
-          "documentation": "<p>The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.</p>"
+          "documentation": "<p>The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.</p> <p>If you are using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html\">RequestSpotInstances</a> to create Spot Instances, omit this parameter because you can’t specify the network card index when using this API. To specify the network card index, use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html\">RunInstances</a>.</p>"
         },
         "Ipv4Prefixes": {
           "shape": "Ipv4PrefixList",
@@ -29974,21 +29990,21 @@
       "members": {
         "Ipv4Prefix": {
           "shape": "String",
-          "documentation": "<p>The IPv4 Prefix Delegation prefix. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation\">Prefix Delegation</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+          "documentation": "<p>The IPv4 prefix. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html\"> Assigning prefixes to Amazon EC2 network interfaces</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
           "locationName": "ipv4Prefix"
         }
       },
-      "documentation": "<p>Describes an IPv4 Prefix Delegation.</p>"
+      "documentation": "<p>Describes an IPv4 prefix.</p>"
     },
     "Ipv4PrefixSpecificationRequest": {
       "type": "structure",
       "members": {
         "Ipv4Prefix": {
           "shape": "String",
-          "documentation": "<p>The IPv4 Prefix Delegation prefix. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation\">Prefix Delegation</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+          "documentation": "<p>The IPv4 prefix. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html\"> Assigning prefixes to Amazon EC2 network interfaces</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
         }
       },
-      "documentation": "<p>Describes the IPv4 Prefix Delegation option for a network interface.</p>"
+      "documentation": "<p>Describes the IPv4 prefix option for a network interface.</p>"
     },
     "Ipv4PrefixSpecificationResponse": {
       "type": "structure",
@@ -30129,21 +30145,21 @@
       "members": {
         "Ipv6Prefix": {
           "shape": "String",
-          "documentation": "<p>The IPv6 Prefix Delegation prefix.</p>",
+          "documentation": "<p>The IPv6 prefix.</p>",
           "locationName": "ipv6Prefix"
         }
       },
-      "documentation": "<p>Describes the IPv6 Prefix Delegation.</p>"
+      "documentation": "<p>Describes the IPv6 prefix.</p>"
     },
     "Ipv6PrefixSpecificationRequest": {
       "type": "structure",
       "members": {
         "Ipv6Prefix": {
           "shape": "String",
-          "documentation": "<p>The IPv6 Prefix Delegation prefix.</p>"
+          "documentation": "<p>The IPv6 prefix.</p>"
         }
       },
-      "documentation": "<p>Describes the IPv4 Prefix Delegation option for a network interface.</p>"
+      "documentation": "<p>Describes the IPv4 prefix option for a network interface.</p>"
     },
     "Ipv6PrefixSpecificationResponse": {
       "type": "structure",
@@ -32953,6 +32969,10 @@
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "HttpProtocolIpv6": {
+          "shape": "InstanceMetadataProtocolState",
+          "documentation": "<p>Enables or disables the IPv6 endpoint for the instance metadata service.</p>"
         }
       }
     },
@@ -34957,12 +34977,12 @@
         },
         "Ipv4Prefixes": {
           "shape": "Ipv4PrefixesList",
-          "documentation": "<p>The IPv4 Prefix Delegation prefixes that are assigned to the network interface.</p>",
+          "documentation": "<p>The IPv4 prefixes that are assigned to the network interface.</p>",
           "locationName": "ipv4PrefixSet"
         },
         "Ipv6Prefixes": {
           "shape": "Ipv6PrefixesList",
-          "documentation": "<p>The IPv6 Prefix Delegation prefixes that are assigned to the network interface.</p>",
+          "documentation": "<p>The IPv6 prefixes that are assigned to the network interface.</p>",
           "locationName": "ipv6PrefixSet"
         },
         "RequesterId": {
@@ -45044,11 +45064,11 @@
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p> The tags.</p>",
+          "documentation": "<p>The tags for the trunk interface associaton.</p>",
           "locationName": "tagSet"
         }
       },
-      "documentation": "<p>Information about an association between a branch network interface with a trunk network interface.</p>"
+      "documentation": "<note> <p>Currently available in <b>limited preview only</b>. If you are interested in using this feature, contact your account manager.</p> </note> <p>Information about an association between a branch network interface with a trunk network interface.</p>"
     },
     "TrunkInterfaceAssociationId": {
       "type": "string"
@@ -45195,7 +45215,7 @@
         },
         "Ipv6Prefixes": {
           "shape": "IpPrefixList",
-          "documentation": "<p>One or moreIPv6 Prefix Delegation prefixes to unassign from the network interface.</p>",
+          "documentation": "<p>One or more IPv6 prefixes to unassign from the network interface.</p>",
           "locationName": "Ipv6Prefix"
         },
         "NetworkInterfaceId": {
@@ -45220,7 +45240,7 @@
         },
         "UnassignedIpv6Prefixes": {
           "shape": "IpPrefixList",
-          "documentation": "<p>The IPv4 Prefix Delegation prefixes that have been unassigned from the network interface.</p>",
+          "documentation": "<p>The IPv4 prefixes that have been unassigned from the network interface.</p>",
           "locationName": "unassignedIpv6PrefixSet"
         }
       }
@@ -45243,7 +45263,7 @@
         },
         "Ipv4Prefixes": {
           "shape": "IpPrefixList",
-          "documentation": "<p>The IPv4 Prefix Delegation prefixes to unassign from the network interface.</p>",
+          "documentation": "<p>The IPv4 prefixes to unassign from the network interface.</p>",
           "locationName": "Ipv4Prefix"
         }
       },

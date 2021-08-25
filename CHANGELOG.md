@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.975.0-->
+<!--LATEST=2.976.0-->
 <!--ENTRYINSERT-->
+
+## 2.976.0
+* feature: CloudWatchEvents: AWS CWEvents adds an enum of EXTERNAL for EcsParameters LaunchType for PutTargets API
+* feature: DataSync: Added include filters to CreateTask and UpdateTask, and added exclude filters to StartTaskExecution, giving customers more granular control over how DataSync transfers files, folders, and objects.
+* feature: EC2: Support added for IMDS IPv6 endpoint
+* feature: EventBridge: AWS EventBridge adds an enum of EXTERNAL for EcsParameters LaunchType for PutTargets API
+* feature: FMS: AWS Firewall Manager now supports triggering resource cleanup workflow when account or resource goes out of policy scope for AWS WAF, Security group, AWS Network Firewall, and Amazon Route 53 Resolver DNS Firewall policies.
 
 ## 2.975.0
 * feature: IotData: Updated Publish with support for new Retain flag and added two new API operations: GetRetainedMessage, ListRetainedMessages.

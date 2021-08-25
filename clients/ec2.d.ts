@@ -93,19 +93,19 @@ declare class EC2 extends Service {
    */
   applySecurityGroupsToClientVpnTargetNetwork(callback?: (err: AWSError, data: EC2.Types.ApplySecurityGroupsToClientVpnTargetNetworkResult) => void): Request<EC2.Types.ApplySecurityGroupsToClientVpnTargetNetworkResult, AWSError>;
   /**
-   * Assigns one or more IPv6 addresses to the specified network interface. You can specify one or more specific IPv6 addresses, or you can specify the number of IPv6 addresses to be automatically assigned from within the subnet's IPv6 CIDR block range. You can assign as many IPv6 addresses to a network interface as you can assign private IPv4 addresses, and the limit varies per instance type. For information, see IP Addresses Per Network Interface Per Instance Type in the Amazon Elastic Compute Cloud User Guide. You must specify either the IPv6 addresses or the IPv6 address count in the request.  You can optionally use Prefix Delegation on the network interface. You must specify either the IPV6 Prefix Delegation prefixes, or the IPv6 Prefix Delegation count. For information, see Prefix Delegation in the Amazon Elastic Compute Cloud User Guide.
+   * Assigns one or more IPv6 addresses to the specified network interface. You can specify one or more specific IPv6 addresses, or you can specify the number of IPv6 addresses to be automatically assigned from within the subnet's IPv6 CIDR block range. You can assign as many IPv6 addresses to a network interface as you can assign private IPv4 addresses, and the limit varies per instance type. For information, see IP Addresses Per Network Interface Per Instance Type in the Amazon Elastic Compute Cloud User Guide. You must specify either the IPv6 addresses or the IPv6 address count in the request.  You can optionally use Prefix Delegation on the network interface. You must specify either the IPV6 Prefix Delegation prefixes, or the IPv6 Prefix Delegation count. For information, see  Assigning prefixes to Amazon EC2 network interfaces in the Amazon Elastic Compute Cloud User Guide.
    */
   assignIpv6Addresses(params: EC2.Types.AssignIpv6AddressesRequest, callback?: (err: AWSError, data: EC2.Types.AssignIpv6AddressesResult) => void): Request<EC2.Types.AssignIpv6AddressesResult, AWSError>;
   /**
-   * Assigns one or more IPv6 addresses to the specified network interface. You can specify one or more specific IPv6 addresses, or you can specify the number of IPv6 addresses to be automatically assigned from within the subnet's IPv6 CIDR block range. You can assign as many IPv6 addresses to a network interface as you can assign private IPv4 addresses, and the limit varies per instance type. For information, see IP Addresses Per Network Interface Per Instance Type in the Amazon Elastic Compute Cloud User Guide. You must specify either the IPv6 addresses or the IPv6 address count in the request.  You can optionally use Prefix Delegation on the network interface. You must specify either the IPV6 Prefix Delegation prefixes, or the IPv6 Prefix Delegation count. For information, see Prefix Delegation in the Amazon Elastic Compute Cloud User Guide.
+   * Assigns one or more IPv6 addresses to the specified network interface. You can specify one or more specific IPv6 addresses, or you can specify the number of IPv6 addresses to be automatically assigned from within the subnet's IPv6 CIDR block range. You can assign as many IPv6 addresses to a network interface as you can assign private IPv4 addresses, and the limit varies per instance type. For information, see IP Addresses Per Network Interface Per Instance Type in the Amazon Elastic Compute Cloud User Guide. You must specify either the IPv6 addresses or the IPv6 address count in the request.  You can optionally use Prefix Delegation on the network interface. You must specify either the IPV6 Prefix Delegation prefixes, or the IPv6 Prefix Delegation count. For information, see  Assigning prefixes to Amazon EC2 network interfaces in the Amazon Elastic Compute Cloud User Guide.
    */
   assignIpv6Addresses(callback?: (err: AWSError, data: EC2.Types.AssignIpv6AddressesResult) => void): Request<EC2.Types.AssignIpv6AddressesResult, AWSError>;
   /**
-   * Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see Instance Types in the Amazon Elastic Compute Cloud User Guide. For more information about Elastic IP addresses, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. When you move a secondary private IP address to another network interface, any Elastic IP address that is associated with the IP address is also moved. Remapping an IP address is an asynchronous operation. When you move an IP address from one network interface to another, check network/interfaces/macs/mac/local-ipv4s in the instance metadata to confirm that the remapping is complete. You must specify either the IP addresses or the IP address count in the request. You can optionally use Prefix Delegation on the network interface. You must specify either the IPv4 Prefix Delegation prefixes, or the IPv4 Prefix Delegation count. For information, see Prefix Delegation in the Amazon Elastic Compute Cloud User Guide.
+   * Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see Instance Types in the Amazon Elastic Compute Cloud User Guide. For more information about Elastic IP addresses, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. When you move a secondary private IP address to another network interface, any Elastic IP address that is associated with the IP address is also moved. Remapping an IP address is an asynchronous operation. When you move an IP address from one network interface to another, check network/interfaces/macs/mac/local-ipv4s in the instance metadata to confirm that the remapping is complete. You must specify either the IP addresses or the IP address count in the request. You can optionally use Prefix Delegation on the network interface. You must specify either the IPv4 Prefix Delegation prefixes, or the IPv4 Prefix Delegation count. For information, see  Assigning prefixes to Amazon EC2 network interfaces in the Amazon Elastic Compute Cloud User Guide.
    */
   assignPrivateIpAddresses(params: EC2.Types.AssignPrivateIpAddressesRequest, callback?: (err: AWSError, data: EC2.Types.AssignPrivateIpAddressesResult) => void): Request<EC2.Types.AssignPrivateIpAddressesResult, AWSError>;
   /**
-   * Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see Instance Types in the Amazon Elastic Compute Cloud User Guide. For more information about Elastic IP addresses, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. When you move a secondary private IP address to another network interface, any Elastic IP address that is associated with the IP address is also moved. Remapping an IP address is an asynchronous operation. When you move an IP address from one network interface to another, check network/interfaces/macs/mac/local-ipv4s in the instance metadata to confirm that the remapping is complete. You must specify either the IP addresses or the IP address count in the request. You can optionally use Prefix Delegation on the network interface. You must specify either the IPv4 Prefix Delegation prefixes, or the IPv4 Prefix Delegation count. For information, see Prefix Delegation in the Amazon Elastic Compute Cloud User Guide.
+   * Assigns one or more secondary private IP addresses to the specified network interface. You can specify one or more specific secondary IP addresses, or you can specify the number of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. The number of secondary IP addresses that you can assign to an instance varies by instance type. For information about instance types, see Instance Types in the Amazon Elastic Compute Cloud User Guide. For more information about Elastic IP addresses, see Elastic IP Addresses in the Amazon Elastic Compute Cloud User Guide. When you move a secondary private IP address to another network interface, any Elastic IP address that is associated with the IP address is also moved. Remapping an IP address is an asynchronous operation. When you move an IP address from one network interface to another, check network/interfaces/macs/mac/local-ipv4s in the instance metadata to confirm that the remapping is complete. You must specify either the IP addresses or the IP address count in the request. You can optionally use Prefix Delegation on the network interface. You must specify either the IPv4 Prefix Delegation prefixes, or the IPv4 Prefix Delegation count. For information, see  Assigning prefixes to Amazon EC2 network interfaces in the Amazon Elastic Compute Cloud User Guide.
    */
   assignPrivateIpAddresses(callback?: (err: AWSError, data: EC2.Types.AssignPrivateIpAddressesResult) => void): Request<EC2.Types.AssignPrivateIpAddressesResult, AWSError>;
   /**
@@ -189,11 +189,11 @@ declare class EC2 extends Service {
    */
   associateTransitGatewayRouteTable(callback?: (err: AWSError, data: EC2.Types.AssociateTransitGatewayRouteTableResult) => void): Request<EC2.Types.AssociateTransitGatewayRouteTableResult, AWSError>;
   /**
-   * Associates a branch network interface with a trunk network interface. Before you create the association, run the create-network-interface command and set --interface-type to trunk. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface. For more information, see  Network interface trunking in the Amazon Elastic Compute Cloud User Guide.
+   *  This API action is currently in limited preview only. If you are interested in using this feature, contact your account manager.  Associates a branch network interface with a trunk network interface. Before you create the association, run the create-network-interface command and set --interface-type to trunk. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.
    */
   associateTrunkInterface(params: EC2.Types.AssociateTrunkInterfaceRequest, callback?: (err: AWSError, data: EC2.Types.AssociateTrunkInterfaceResult) => void): Request<EC2.Types.AssociateTrunkInterfaceResult, AWSError>;
   /**
-   * Associates a branch network interface with a trunk network interface. Before you create the association, run the create-network-interface command and set --interface-type to trunk. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface. For more information, see  Network interface trunking in the Amazon Elastic Compute Cloud User Guide.
+   *  This API action is currently in limited preview only. If you are interested in using this feature, contact your account manager.  Associates a branch network interface with a trunk network interface. Before you create the association, run the create-network-interface command and set --interface-type to trunk. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.
    */
   associateTrunkInterface(callback?: (err: AWSError, data: EC2.Types.AssociateTrunkInterfaceResult) => void): Request<EC2.Types.AssociateTrunkInterfaceResult, AWSError>;
   /**
@@ -2229,11 +2229,11 @@ declare class EC2 extends Service {
    */
   describeTransitGateways(callback?: (err: AWSError, data: EC2.Types.DescribeTransitGatewaysResult) => void): Request<EC2.Types.DescribeTransitGatewaysResult, AWSError>;
   /**
-   * Describes one or more network interface trunk associations.
+   *  This API action is currently in limited preview only. If you are interested in using this feature, contact your account manager.  Describes one or more network interface trunk associations.
    */
   describeTrunkInterfaceAssociations(params: EC2.Types.DescribeTrunkInterfaceAssociationsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeTrunkInterfaceAssociationsResult) => void): Request<EC2.Types.DescribeTrunkInterfaceAssociationsResult, AWSError>;
   /**
-   * Describes one or more network interface trunk associations.
+   *  This API action is currently in limited preview only. If you are interested in using this feature, contact your account manager.  Describes one or more network interface trunk associations.
    */
   describeTrunkInterfaceAssociations(callback?: (err: AWSError, data: EC2.Types.DescribeTrunkInterfaceAssociationsResult) => void): Request<EC2.Types.DescribeTrunkInterfaceAssociationsResult, AWSError>;
   /**
@@ -2549,11 +2549,11 @@ declare class EC2 extends Service {
    */
   disassociateTransitGatewayRouteTable(callback?: (err: AWSError, data: EC2.Types.DisassociateTransitGatewayRouteTableResult) => void): Request<EC2.Types.DisassociateTransitGatewayRouteTableResult, AWSError>;
   /**
-   * Removes an association between a branch network interface with a trunk network interface.
+   *  This API action is currently in limited preview only. If you are interested in using this feature, contact your account manager.  Removes an association between a branch network interface with a trunk network interface.
    */
   disassociateTrunkInterface(params: EC2.Types.DisassociateTrunkInterfaceRequest, callback?: (err: AWSError, data: EC2.Types.DisassociateTrunkInterfaceResult) => void): Request<EC2.Types.DisassociateTrunkInterfaceResult, AWSError>;
   /**
-   * Removes an association between a branch network interface with a trunk network interface.
+   *  This API action is currently in limited preview only. If you are interested in using this feature, contact your account manager.  Removes an association between a branch network interface with a trunk network interface.
    */
   disassociateTrunkInterface(callback?: (err: AWSError, data: EC2.Types.DisassociateTrunkInterfaceResult) => void): Request<EC2.Types.DisassociateTrunkInterfaceResult, AWSError>;
   /**
@@ -4574,11 +4574,11 @@ declare namespace EC2 {
      */
     Ipv6Addresses?: Ipv6AddressList;
     /**
-     * The number of IPv6 Prefix Delegation prefixes that AWS automatically assigns to the network interface. You cannot use this option if you use the Ipv6Prefixes option.
+     * The number of IPv6 prefixes that Amazon Web Services automatically assigns to the network interface. You cannot use this option if you use the Ipv6Prefixes option.
      */
     Ipv6PrefixCount?: Integer;
     /**
-     * One or more IPv6 Prefix Delegation prefixes assigned to the network interface. You cannot use this option if you use the Ipv6PrefixCount option.
+     * One or more IPv6 prefixes assigned to the network interface. You cannot use this option if you use the Ipv6PrefixCount option.
      */
     Ipv6Prefixes?: IpPrefixList;
     /**
@@ -4592,7 +4592,7 @@ declare namespace EC2 {
      */
     AssignedIpv6Addresses?: Ipv6AddressList;
     /**
-     * The IPv6 Prefix Delegation prefixes that are assigned to the network interface.
+     * The IPv6 prefixes that are assigned to the network interface.
      */
     AssignedIpv6Prefixes?: IpPrefixList;
     /**
@@ -4618,11 +4618,11 @@ declare namespace EC2 {
      */
     SecondaryPrivateIpAddressCount?: Integer;
     /**
-     * One or more IPv4 Prefix Delegation prefixes assigned to the network interface. You cannot use this option if you use the Ipv4PrefixCount option.
+     * One or more IPv4 prefixes assigned to the network interface. You cannot use this option if you use the Ipv4PrefixCount option.
      */
     Ipv4Prefixes?: IpPrefixList;
     /**
-     * The number of IPv4 Prefix Delegation prefixes that AWS automatically assigns to the network interface. You cannot use this option if you use the Ipv4 Prefixes option.
+     * The number of IPv4 prefixes that Amazon Web Services automatically assigns to the network interface. You cannot use this option if you use the Ipv4 Prefixes option.
      */
     Ipv4PrefixCount?: Integer;
   }
@@ -4636,7 +4636,7 @@ declare namespace EC2 {
      */
     AssignedPrivateIpAddresses?: AssignedPrivateIpAddressList;
     /**
-     * The IPv4 Prefix Delegation prefixes that are assigned to the network interface.
+     * The IPv4 prefixes that are assigned to the network interface.
      */
     AssignedIpv4Prefixes?: Ipv4PrefixesList;
   }
@@ -7608,19 +7608,19 @@ declare namespace EC2 {
      */
     SecondaryPrivateIpAddressCount?: Integer;
     /**
-     * One or moreIPv4 Prefix Delegation prefixes assigned to the network interface. You cannot use this option if you use the Ipv4PrefixCount option.
+     * One or more IPv4 prefixes assigned to the network interface. You cannot use this option if you use the Ipv4PrefixCount option.
      */
     Ipv4Prefixes?: Ipv4PrefixList;
     /**
-     * The number of IPv4 Prefix Delegation prefixes that AWS automatically assigns to the network interface. You cannot use this option if you use the Ipv4 Prefixes option.
+     * The number of IPv4 prefixes that Amazon Web Services automatically assigns to the network interface. You cannot use this option if you use the Ipv4 Prefixes option.
      */
     Ipv4PrefixCount?: Integer;
     /**
-     * One or moreIPv6 Prefix Delegation prefixes assigned to the network interface. You cannot use this option if you use the Ipv6PrefixCount option.
+     * One or more IPv6 prefixes assigned to the network interface. You cannot use this option if you use the Ipv6PrefixCount option.
      */
     Ipv6Prefixes?: Ipv6PrefixList;
     /**
-     * The number of IPv6 Prefix Delegation prefixes that AWS automatically assigns to the network interface. You cannot use this option if you use the Ipv6Prefixes option.
+     * The number of IPv6 prefixes that Amazon Web Services automatically assigns to the network interface. You cannot use this option if you use the Ipv6Prefixes option.
      */
     Ipv6PrefixCount?: Integer;
     /**
@@ -18286,6 +18286,10 @@ declare namespace EC2 {
      * This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled.  If you specify a value of disabled, you will not be able to access your instance metadata. 
      */
     HttpEndpoint?: InstanceMetadataEndpointState;
+    /**
+     * Enables or disables the IPv6 endpoint for the instance metadata service.
+     */
+    HttpProtocolIpv6?: InstanceMetadataProtocolState;
   }
   export interface InstanceMetadataOptionsResponse {
     /**
@@ -18304,8 +18308,13 @@ declare namespace EC2 {
      * This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled.  If you specify a value of disabled, you will not be able to access your instance metadata. 
      */
     HttpEndpoint?: InstanceMetadataEndpointState;
+    /**
+     * Whether or not the IPv6 endpoint for the instance metadata service is enabled or disabled.
+     */
+    HttpProtocolIpv6?: InstanceMetadataProtocolState;
   }
   export type InstanceMetadataOptionsState = "pending"|"applied"|string;
+  export type InstanceMetadataProtocolState = "disabled"|"enabled"|string;
   export interface InstanceMonitoring {
     /**
      * The ID of the instance.
@@ -18494,7 +18503,7 @@ declare namespace EC2 {
      */
     InterfaceType?: String;
     /**
-     * The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0.
+     * The index of the network card. Some instance types support multiple network cards. The primary network interface must be assigned to network card index 0. The default is network card index 0. If you are using RequestSpotInstances to create Spot Instances, omit this parameter because you can’t specify the network card index when using this API. To specify the network card index, use RunInstances.
      */
     NetworkCardIndex?: Integer;
     /**
@@ -18899,13 +18908,13 @@ declare namespace EC2 {
   export type Ipv4PrefixListResponse = Ipv4PrefixSpecificationResponse[];
   export interface Ipv4PrefixSpecification {
     /**
-     * The IPv4 Prefix Delegation prefix. For information, see Prefix Delegation in the Amazon Elastic Compute Cloud User Guide.
+     * The IPv4 prefix. For information, see  Assigning prefixes to Amazon EC2 network interfaces in the Amazon Elastic Compute Cloud User Guide.
      */
     Ipv4Prefix?: String;
   }
   export interface Ipv4PrefixSpecificationRequest {
     /**
-     * The IPv4 Prefix Delegation prefix. For information, see Prefix Delegation in the Amazon Elastic Compute Cloud User Guide.
+     * The IPv4 prefix. For information, see  Assigning prefixes to Amazon EC2 network interfaces in the Amazon Elastic Compute Cloud User Guide.
      */
     Ipv4Prefix?: String;
   }
@@ -18963,13 +18972,13 @@ declare namespace EC2 {
   export type Ipv6PrefixListResponse = Ipv6PrefixSpecificationResponse[];
   export interface Ipv6PrefixSpecification {
     /**
-     * The IPv6 Prefix Delegation prefix.
+     * The IPv6 prefix.
      */
     Ipv6Prefix?: String;
   }
   export interface Ipv6PrefixSpecificationRequest {
     /**
-     * The IPv6 Prefix Delegation prefix.
+     * The IPv6 prefix.
      */
     Ipv6Prefix?: String;
   }
@@ -20733,6 +20742,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * Enables or disables the IPv6 endpoint for the instance metadata service.
+     */
+    HttpProtocolIpv6?: InstanceMetadataProtocolState;
   }
   export interface ModifyInstanceMetadataOptionsResult {
     /**
@@ -22105,11 +22118,11 @@ declare namespace EC2 {
      */
     PrivateIpAddresses?: NetworkInterfacePrivateIpAddressList;
     /**
-     * The IPv4 Prefix Delegation prefixes that are assigned to the network interface.
+     * The IPv4 prefixes that are assigned to the network interface.
      */
     Ipv4Prefixes?: Ipv4PrefixesList;
     /**
-     * The IPv6 Prefix Delegation prefixes that are assigned to the network interface.
+     * The IPv6 prefixes that are assigned to the network interface.
      */
     Ipv6Prefixes?: Ipv6PrefixesList;
     /**
@@ -28151,7 +28164,7 @@ declare namespace EC2 {
      */
     GreKey?: Integer;
     /**
-     *  The tags.
+     * The tags for the trunk interface associaton.
      */
     Tags?: TagList;
   }
@@ -28244,7 +28257,7 @@ declare namespace EC2 {
      */
     Ipv6Addresses?: Ipv6AddressList;
     /**
-     * One or moreIPv6 Prefix Delegation prefixes to unassign from the network interface.
+     * One or more IPv6 prefixes to unassign from the network interface.
      */
     Ipv6Prefixes?: IpPrefixList;
     /**
@@ -28262,7 +28275,7 @@ declare namespace EC2 {
      */
     UnassignedIpv6Addresses?: Ipv6AddressList;
     /**
-     * The IPv4 Prefix Delegation prefixes that have been unassigned from the network interface.
+     * The IPv4 prefixes that have been unassigned from the network interface.
      */
     UnassignedIpv6Prefixes?: IpPrefixList;
   }
@@ -28276,7 +28289,7 @@ declare namespace EC2 {
      */
     PrivateIpAddresses?: PrivateIpAddressStringList;
     /**
-     * The IPv4 Prefix Delegation prefixes to unassign from the network interface.
+     * The IPv4 prefixes to unassign from the network interface.
      */
     Ipv4Prefixes?: IpPrefixList;
   }

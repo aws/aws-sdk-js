@@ -60,11 +60,11 @@ declare class CloudWatchEvents extends Service {
    */
   createEventBus(callback?: (err: AWSError, data: CloudWatchEvents.Types.CreateEventBusResponse) => void): Request<CloudWatchEvents.Types.CreateEventBusResponse, AWSError>;
   /**
-   * Called by an SaaS partner to create a partner event source. This operation is not used by AWS customers. Each partner event source can be used by one AWS account to create a matching partner event bus in that AWS account. A SaaS partner must create one partner event source for each AWS account that wants to receive those event types.  A partner event source creates events based on resources within the SaaS partner's service or application. An AWS account that creates a partner event bus that matches the partner event source can use that event bus to receive events from the partner, and then process them using AWS Events rules and targets. Partner event source names follow this format:   partner_name/event_namespace/event_name    partner_name is determined during partner registration and identifies the partner to AWS customers. event_namespace is determined by the partner and is a way for the partner to categorize their events. event_name is determined by the partner, and should uniquely identify an event-generating resource within the partner system. The combination of event_namespace and event_name should help AWS customers decide whether to create an event bus to receive these events.
+   * Called by an SaaS partner to create a partner event source. This operation is not used by Amazon Web Services customers. Each partner event source can be used by one Amazon Web Services account to create a matching partner event bus in that Amazon Web Services account. A SaaS partner must create one partner event source for each Amazon Web Services account that wants to receive those event types.  A partner event source creates events based on resources within the SaaS partner's service or application. An Amazon Web Services account that creates a partner event bus that matches the partner event source can use that event bus to receive events from the partner, and then process them using Amazon Web Services Events rules and targets. Partner event source names follow this format:   partner_name/event_namespace/event_name    partner_name is determined during partner registration and identifies the partner to Amazon Web Services customers. event_namespace is determined by the partner and is a way for the partner to categorize their events. event_name is determined by the partner, and should uniquely identify an event-generating resource within the partner system. The combination of event_namespace and event_name should help Amazon Web Services customers decide whether to create an event bus to receive these events.
    */
   createPartnerEventSource(params: CloudWatchEvents.Types.CreatePartnerEventSourceRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.CreatePartnerEventSourceResponse) => void): Request<CloudWatchEvents.Types.CreatePartnerEventSourceResponse, AWSError>;
   /**
-   * Called by an SaaS partner to create a partner event source. This operation is not used by AWS customers. Each partner event source can be used by one AWS account to create a matching partner event bus in that AWS account. A SaaS partner must create one partner event source for each AWS account that wants to receive those event types.  A partner event source creates events based on resources within the SaaS partner's service or application. An AWS account that creates a partner event bus that matches the partner event source can use that event bus to receive events from the partner, and then process them using AWS Events rules and targets. Partner event source names follow this format:   partner_name/event_namespace/event_name    partner_name is determined during partner registration and identifies the partner to AWS customers. event_namespace is determined by the partner and is a way for the partner to categorize their events. event_name is determined by the partner, and should uniquely identify an event-generating resource within the partner system. The combination of event_namespace and event_name should help AWS customers decide whether to create an event bus to receive these events.
+   * Called by an SaaS partner to create a partner event source. This operation is not used by Amazon Web Services customers. Each partner event source can be used by one Amazon Web Services account to create a matching partner event bus in that Amazon Web Services account. A SaaS partner must create one partner event source for each Amazon Web Services account that wants to receive those event types.  A partner event source creates events based on resources within the SaaS partner's service or application. An Amazon Web Services account that creates a partner event bus that matches the partner event source can use that event bus to receive events from the partner, and then process them using Amazon Web Services Events rules and targets. Partner event source names follow this format:   partner_name/event_namespace/event_name    partner_name is determined during partner registration and identifies the partner to Amazon Web Services customers. event_namespace is determined by the partner and is a way for the partner to categorize their events. event_name is determined by the partner, and should uniquely identify an event-generating resource within the partner system. The combination of event_namespace and event_name should help Amazon Web Services customers decide whether to create an event bus to receive these events.
    */
   createPartnerEventSource(callback?: (err: AWSError, data: CloudWatchEvents.Types.CreatePartnerEventSourceResponse) => void): Request<CloudWatchEvents.Types.CreatePartnerEventSourceResponse, AWSError>;
   /**
@@ -116,19 +116,19 @@ declare class CloudWatchEvents extends Service {
    */
   deleteEventBus(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This operation is used by SaaS partners to delete a partner event source. This operation is not used by AWS customers. When you delete an event source, the status of the corresponding partner event bus in the AWS customer account becomes DELETED. 
+   * This operation is used by SaaS partners to delete a partner event source. This operation is not used by Amazon Web Services customers. When you delete an event source, the status of the corresponding partner event bus in the Amazon Web Services customer account becomes DELETED. 
    */
   deletePartnerEventSource(params: CloudWatchEvents.Types.DeletePartnerEventSourceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * This operation is used by SaaS partners to delete a partner event source. This operation is not used by AWS customers. When you delete an event source, the status of the corresponding partner event bus in the AWS customer account becomes DELETED. 
+   * This operation is used by SaaS partners to delete a partner event source. This operation is not used by Amazon Web Services customers. When you delete an event source, the status of the corresponding partner event bus in the Amazon Web Services customer account becomes DELETED. 
    */
   deletePartnerEventSource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified rule. Before you can delete the rule, you must remove all targets, using RemoveTargets. When you delete a rule, incoming events might continue to match to the deleted rule. Allow a short period of time for changes to take effect. If you call delete rule multiple times for the same rule, all calls will succeed. When you call delete rule for a non-existent custom eventbus, ResourceNotFoundException is returned. Managed rules are rules created and managed by another AWS service on your behalf. These rules are created by those other AWS services to support functionality in those services. You can delete these rules using the Force option, but you should do so only if you are sure the other service is not still using that rule.
+   * Deletes the specified rule. Before you can delete the rule, you must remove all targets, using RemoveTargets. When you delete a rule, incoming events might continue to match to the deleted rule. Allow a short period of time for changes to take effect. If you call delete rule multiple times for the same rule, all calls will succeed. When you call delete rule for a non-existent custom eventbus, ResourceNotFoundException is returned. Managed rules are rules created and managed by another Amazon Web Services service on your behalf. These rules are created by those other Amazon Web Services services to support functionality in those services. You can delete these rules using the Force option, but you should do so only if you are sure the other service is not still using that rule.
    */
   deleteRule(params: CloudWatchEvents.Types.DeleteRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified rule. Before you can delete the rule, you must remove all targets, using RemoveTargets. When you delete a rule, incoming events might continue to match to the deleted rule. Allow a short period of time for changes to take effect. If you call delete rule multiple times for the same rule, all calls will succeed. When you call delete rule for a non-existent custom eventbus, ResourceNotFoundException is returned. Managed rules are rules created and managed by another AWS service on your behalf. These rules are created by those other AWS services to support functionality in those services. You can delete these rules using the Force option, but you should do so only if you are sure the other service is not still using that rule.
+   * Deletes the specified rule. Before you can delete the rule, you must remove all targets, using RemoveTargets. When you delete a rule, incoming events might continue to match to the deleted rule. Allow a short period of time for changes to take effect. If you call delete rule multiple times for the same rule, all calls will succeed. When you call delete rule for a non-existent custom eventbus, ResourceNotFoundException is returned. Managed rules are rules created and managed by another Amazon Web Services service on your behalf. These rules are created by those other Amazon Web Services services to support functionality in those services. You can delete these rules using the Force option, but you should do so only if you are sure the other service is not still using that rule.
    */
   deleteRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -156,11 +156,11 @@ declare class CloudWatchEvents extends Service {
    */
   describeConnection(callback?: (err: AWSError, data: CloudWatchEvents.Types.DescribeConnectionResponse) => void): Request<CloudWatchEvents.Types.DescribeConnectionResponse, AWSError>;
   /**
-   * Displays details about an event bus in your account. This can include the external AWS accounts that are permitted to write events to your default event bus, and the associated policy. For custom event buses and partner event buses, it displays the name, ARN, policy, state, and creation time.  To enable your account to receive events from other accounts on its default event bus, use PutPermission. For more information about partner event buses, see CreateEventBus.
+   * Displays details about an event bus in your account. This can include the external Amazon Web Services accounts that are permitted to write events to your default event bus, and the associated policy. For custom event buses and partner event buses, it displays the name, ARN, policy, state, and creation time.  To enable your account to receive events from other accounts on its default event bus, use PutPermission. For more information about partner event buses, see CreateEventBus.
    */
   describeEventBus(params: CloudWatchEvents.Types.DescribeEventBusRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.DescribeEventBusResponse) => void): Request<CloudWatchEvents.Types.DescribeEventBusResponse, AWSError>;
   /**
-   * Displays details about an event bus in your account. This can include the external AWS accounts that are permitted to write events to your default event bus, and the associated policy. For custom event buses and partner event buses, it displays the name, ARN, policy, state, and creation time.  To enable your account to receive events from other accounts on its default event bus, use PutPermission. For more information about partner event buses, see CreateEventBus.
+   * Displays details about an event bus in your account. This can include the external Amazon Web Services accounts that are permitted to write events to your default event bus, and the associated policy. For custom event buses and partner event buses, it displays the name, ARN, policy, state, and creation time.  To enable your account to receive events from other accounts on its default event bus, use PutPermission. For more information about partner event buses, see CreateEventBus.
    */
   describeEventBus(callback?: (err: AWSError, data: CloudWatchEvents.Types.DescribeEventBusResponse) => void): Request<CloudWatchEvents.Types.DescribeEventBusResponse, AWSError>;
   /**
@@ -172,11 +172,11 @@ declare class CloudWatchEvents extends Service {
    */
   describeEventSource(callback?: (err: AWSError, data: CloudWatchEvents.Types.DescribeEventSourceResponse) => void): Request<CloudWatchEvents.Types.DescribeEventSourceResponse, AWSError>;
   /**
-   * An SaaS partner can use this operation to list details about a partner event source that they have created. AWS customers do not use this operation. Instead, AWS customers can use DescribeEventSource to see details about a partner event source that is shared with them.
+   * An SaaS partner can use this operation to list details about a partner event source that they have created. Amazon Web Services customers do not use this operation. Instead, Amazon Web Services customers can use DescribeEventSource to see details about a partner event source that is shared with them.
    */
   describePartnerEventSource(params: CloudWatchEvents.Types.DescribePartnerEventSourceRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.DescribePartnerEventSourceResponse) => void): Request<CloudWatchEvents.Types.DescribePartnerEventSourceResponse, AWSError>;
   /**
-   * An SaaS partner can use this operation to list details about a partner event source that they have created. AWS customers do not use this operation. Instead, AWS customers can use DescribeEventSource to see details about a partner event source that is shared with them.
+   * An SaaS partner can use this operation to list details about a partner event source that they have created. Amazon Web Services customers do not use this operation. Instead, Amazon Web Services customers can use DescribeEventSource to see details about a partner event source that is shared with them.
    */
   describePartnerEventSource(callback?: (err: AWSError, data: CloudWatchEvents.Types.DescribePartnerEventSourceResponse) => void): Request<CloudWatchEvents.Types.DescribePartnerEventSourceResponse, AWSError>;
   /**
@@ -244,27 +244,27 @@ declare class CloudWatchEvents extends Service {
    */
   listEventBuses(callback?: (err: AWSError, data: CloudWatchEvents.Types.ListEventBusesResponse) => void): Request<CloudWatchEvents.Types.ListEventBusesResponse, AWSError>;
   /**
-   * You can use this to see all the partner event sources that have been shared with your AWS account. For more information about partner event sources, see CreateEventBus.
+   * You can use this to see all the partner event sources that have been shared with your Amazon Web Services account. For more information about partner event sources, see CreateEventBus.
    */
   listEventSources(params: CloudWatchEvents.Types.ListEventSourcesRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.ListEventSourcesResponse) => void): Request<CloudWatchEvents.Types.ListEventSourcesResponse, AWSError>;
   /**
-   * You can use this to see all the partner event sources that have been shared with your AWS account. For more information about partner event sources, see CreateEventBus.
+   * You can use this to see all the partner event sources that have been shared with your Amazon Web Services account. For more information about partner event sources, see CreateEventBus.
    */
   listEventSources(callback?: (err: AWSError, data: CloudWatchEvents.Types.ListEventSourcesResponse) => void): Request<CloudWatchEvents.Types.ListEventSourcesResponse, AWSError>;
   /**
-   * An SaaS partner can use this operation to display the AWS account ID that a particular partner event source name is associated with. This operation is not used by AWS customers.
+   * An SaaS partner can use this operation to display the Amazon Web Services account ID that a particular partner event source name is associated with. This operation is not used by Amazon Web Services customers.
    */
   listPartnerEventSourceAccounts(params: CloudWatchEvents.Types.ListPartnerEventSourceAccountsRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.ListPartnerEventSourceAccountsResponse) => void): Request<CloudWatchEvents.Types.ListPartnerEventSourceAccountsResponse, AWSError>;
   /**
-   * An SaaS partner can use this operation to display the AWS account ID that a particular partner event source name is associated with. This operation is not used by AWS customers.
+   * An SaaS partner can use this operation to display the Amazon Web Services account ID that a particular partner event source name is associated with. This operation is not used by Amazon Web Services customers.
    */
   listPartnerEventSourceAccounts(callback?: (err: AWSError, data: CloudWatchEvents.Types.ListPartnerEventSourceAccountsResponse) => void): Request<CloudWatchEvents.Types.ListPartnerEventSourceAccountsResponse, AWSError>;
   /**
-   * An SaaS partner can use this operation to list all the partner event source names that they have created. This operation is not used by AWS customers.
+   * An SaaS partner can use this operation to list all the partner event source names that they have created. This operation is not used by Amazon Web Services customers.
    */
   listPartnerEventSources(params: CloudWatchEvents.Types.ListPartnerEventSourcesRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.ListPartnerEventSourcesResponse) => void): Request<CloudWatchEvents.Types.ListPartnerEventSourcesResponse, AWSError>;
   /**
-   * An SaaS partner can use this operation to list all the partner event source names that they have created. This operation is not used by AWS customers.
+   * An SaaS partner can use this operation to list all the partner event source names that they have created. This operation is not used by Amazon Web Services customers.
    */
   listPartnerEventSources(callback?: (err: AWSError, data: CloudWatchEvents.Types.ListPartnerEventSourcesResponse) => void): Request<CloudWatchEvents.Types.ListPartnerEventSourcesResponse, AWSError>;
   /**
@@ -316,43 +316,43 @@ declare class CloudWatchEvents extends Service {
    */
   putEvents(callback?: (err: AWSError, data: CloudWatchEvents.Types.PutEventsResponse) => void): Request<CloudWatchEvents.Types.PutEventsResponse, AWSError>;
   /**
-   * This is used by SaaS partners to write events to a customer's partner event bus. AWS customers do not use this operation.
+   * This is used by SaaS partners to write events to a customer's partner event bus. Amazon Web Services customers do not use this operation.
    */
   putPartnerEvents(params: CloudWatchEvents.Types.PutPartnerEventsRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.PutPartnerEventsResponse) => void): Request<CloudWatchEvents.Types.PutPartnerEventsResponse, AWSError>;
   /**
-   * This is used by SaaS partners to write events to a customer's partner event bus. AWS customers do not use this operation.
+   * This is used by SaaS partners to write events to a customer's partner event bus. Amazon Web Services customers do not use this operation.
    */
   putPartnerEvents(callback?: (err: AWSError, data: CloudWatchEvents.Types.PutPartnerEventsResponse) => void): Request<CloudWatchEvents.Types.PutPartnerEventsResponse, AWSError>;
   /**
-   * Running PutPermission permits the specified AWS account or AWS organization to put events to the specified event bus. Amazon EventBridge (CloudWatch Events) rules in your account are triggered by these events arriving to an event bus in your account.  For another account to send events to your account, that external account must have an EventBridge rule with your account's event bus as a target. To enable multiple AWS accounts to put events to your event bus, run PutPermission once for each of these accounts. Or, if all the accounts are members of the same AWS organization, you can run PutPermission once specifying Principal as "*" and specifying the AWS organization ID in Condition, to grant permissions to all accounts in that organization. If you grant permissions using an organization, then accounts in that organization must specify a RoleArn with proper permissions when they use PutTarget to add your account's event bus as a target. For more information, see Sending and Receiving Events Between AWS Accounts in the Amazon EventBridge User Guide. The permission policy on the default event bus cannot exceed 10 KB in size.
+   * Running PutPermission permits the specified Amazon Web Services account or Amazon Web Services organization to put events to the specified event bus. Amazon EventBridge (CloudWatch Events) rules in your account are triggered by these events arriving to an event bus in your account.  For another account to send events to your account, that external account must have an EventBridge rule with your account's event bus as a target. To enable multiple Amazon Web Services accounts to put events to your event bus, run PutPermission once for each of these accounts. Or, if all the accounts are members of the same Amazon Web Services organization, you can run PutPermission once specifying Principal as "*" and specifying the Amazon Web Services organization ID in Condition, to grant permissions to all accounts in that organization. If you grant permissions using an organization, then accounts in that organization must specify a RoleArn with proper permissions when they use PutTarget to add your account's event bus as a target. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide. The permission policy on the event bus cannot exceed 10 KB in size.
    */
   putPermission(params: CloudWatchEvents.Types.PutPermissionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Running PutPermission permits the specified AWS account or AWS organization to put events to the specified event bus. Amazon EventBridge (CloudWatch Events) rules in your account are triggered by these events arriving to an event bus in your account.  For another account to send events to your account, that external account must have an EventBridge rule with your account's event bus as a target. To enable multiple AWS accounts to put events to your event bus, run PutPermission once for each of these accounts. Or, if all the accounts are members of the same AWS organization, you can run PutPermission once specifying Principal as "*" and specifying the AWS organization ID in Condition, to grant permissions to all accounts in that organization. If you grant permissions using an organization, then accounts in that organization must specify a RoleArn with proper permissions when they use PutTarget to add your account's event bus as a target. For more information, see Sending and Receiving Events Between AWS Accounts in the Amazon EventBridge User Guide. The permission policy on the default event bus cannot exceed 10 KB in size.
+   * Running PutPermission permits the specified Amazon Web Services account or Amazon Web Services organization to put events to the specified event bus. Amazon EventBridge (CloudWatch Events) rules in your account are triggered by these events arriving to an event bus in your account.  For another account to send events to your account, that external account must have an EventBridge rule with your account's event bus as a target. To enable multiple Amazon Web Services accounts to put events to your event bus, run PutPermission once for each of these accounts. Or, if all the accounts are members of the same Amazon Web Services organization, you can run PutPermission once specifying Principal as "*" and specifying the Amazon Web Services organization ID in Condition, to grant permissions to all accounts in that organization. If you grant permissions using an organization, then accounts in that organization must specify a RoleArn with proper permissions when they use PutTarget to add your account's event bus as a target. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide. The permission policy on the event bus cannot exceed 10 KB in size.
    */
   putPermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates the specified rule. Rules are enabled by default, or based on value of the state. You can disable a rule using DisableRule. A single rule watches for events from a single event bus. Events generated by AWS services go to your account's default event bus. Events generated by SaaS partner services or applications go to the matching partner event bus. If you have custom applications or services, you can specify whether their events go to your default event bus or a custom event bus that you have created. For more information, see CreateEventBus. If you are updating an existing rule, the rule is replaced with what you specify in this PutRule command. If you omit arguments in PutRule, the old values for those arguments are not kept. Instead, they are replaced with null values. When you create or update a rule, incoming events might not immediately start matching to new or updated rules. Allow a short period of time for changes to take effect. A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule triggers on matching events as well as on a schedule. When you initially create a rule, you can optionally assign one or more tags to the rule. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only rules with certain tag values. To use the PutRule operation and assign tags, you must have both the events:PutRule and events:TagResource permissions. If you are updating an existing rule, any tags you specify in the PutRule operation are ignored. To update the tags of an existing rule, use TagResource and UntagResource. Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, EventBridge uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match. In EventBridge, it is possible to create rules that lead to infinite loops, where a rule is fired repeatedly. For example, a rule might detect that ACLs have changed on an S3 bucket, and trigger software to change them to the desired state. If the rule is not written carefully, the subsequent change to the ACLs fires the rule again, creating an infinite loop. To prevent this, write the rules so that the triggered actions do not re-fire the same rule. For example, your rule could fire only if ACLs are found to be in a bad state, instead of after any change.  An infinite loop can quickly cause higher than expected charges. We recommend that you use budgeting, which alerts you when charges exceed your specified limit. For more information, see Managing Your Costs with Budgets.
+   * Creates or updates the specified rule. Rules are enabled by default, or based on value of the state. You can disable a rule using DisableRule. A single rule watches for events from a single event bus. Events generated by Amazon Web Services services go to your account's default event bus. Events generated by SaaS partner services or applications go to the matching partner event bus. If you have custom applications or services, you can specify whether their events go to your default event bus or a custom event bus that you have created. For more information, see CreateEventBus. If you are updating an existing rule, the rule is replaced with what you specify in this PutRule command. If you omit arguments in PutRule, the old values for those arguments are not kept. Instead, they are replaced with null values. When you create or update a rule, incoming events might not immediately start matching to new or updated rules. Allow a short period of time for changes to take effect. A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule triggers on matching events as well as on a schedule. When you initially create a rule, you can optionally assign one or more tags to the rule. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only rules with certain tag values. To use the PutRule operation and assign tags, you must have both the events:PutRule and events:TagResource permissions. If you are updating an existing rule, any tags you specify in the PutRule operation are ignored. To update the tags of an existing rule, use TagResource and UntagResource. Most services in Amazon Web Services treat : or / as the same character in Amazon Resource Names (ARNs). However, EventBridge uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match. In EventBridge, it is possible to create rules that lead to infinite loops, where a rule is fired repeatedly. For example, a rule might detect that ACLs have changed on an S3 bucket, and trigger software to change them to the desired state. If the rule is not written carefully, the subsequent change to the ACLs fires the rule again, creating an infinite loop. To prevent this, write the rules so that the triggered actions do not re-fire the same rule. For example, your rule could fire only if ACLs are found to be in a bad state, instead of after any change.  An infinite loop can quickly cause higher than expected charges. We recommend that you use budgeting, which alerts you when charges exceed your specified limit. For more information, see Managing Your Costs with Budgets.
    */
   putRule(params: CloudWatchEvents.Types.PutRuleRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.PutRuleResponse) => void): Request<CloudWatchEvents.Types.PutRuleResponse, AWSError>;
   /**
-   * Creates or updates the specified rule. Rules are enabled by default, or based on value of the state. You can disable a rule using DisableRule. A single rule watches for events from a single event bus. Events generated by AWS services go to your account's default event bus. Events generated by SaaS partner services or applications go to the matching partner event bus. If you have custom applications or services, you can specify whether their events go to your default event bus or a custom event bus that you have created. For more information, see CreateEventBus. If you are updating an existing rule, the rule is replaced with what you specify in this PutRule command. If you omit arguments in PutRule, the old values for those arguments are not kept. Instead, they are replaced with null values. When you create or update a rule, incoming events might not immediately start matching to new or updated rules. Allow a short period of time for changes to take effect. A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule triggers on matching events as well as on a schedule. When you initially create a rule, you can optionally assign one or more tags to the rule. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only rules with certain tag values. To use the PutRule operation and assign tags, you must have both the events:PutRule and events:TagResource permissions. If you are updating an existing rule, any tags you specify in the PutRule operation are ignored. To update the tags of an existing rule, use TagResource and UntagResource. Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, EventBridge uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match. In EventBridge, it is possible to create rules that lead to infinite loops, where a rule is fired repeatedly. For example, a rule might detect that ACLs have changed on an S3 bucket, and trigger software to change them to the desired state. If the rule is not written carefully, the subsequent change to the ACLs fires the rule again, creating an infinite loop. To prevent this, write the rules so that the triggered actions do not re-fire the same rule. For example, your rule could fire only if ACLs are found to be in a bad state, instead of after any change.  An infinite loop can quickly cause higher than expected charges. We recommend that you use budgeting, which alerts you when charges exceed your specified limit. For more information, see Managing Your Costs with Budgets.
+   * Creates or updates the specified rule. Rules are enabled by default, or based on value of the state. You can disable a rule using DisableRule. A single rule watches for events from a single event bus. Events generated by Amazon Web Services services go to your account's default event bus. Events generated by SaaS partner services or applications go to the matching partner event bus. If you have custom applications or services, you can specify whether their events go to your default event bus or a custom event bus that you have created. For more information, see CreateEventBus. If you are updating an existing rule, the rule is replaced with what you specify in this PutRule command. If you omit arguments in PutRule, the old values for those arguments are not kept. Instead, they are replaced with null values. When you create or update a rule, incoming events might not immediately start matching to new or updated rules. Allow a short period of time for changes to take effect. A rule must contain at least an EventPattern or ScheduleExpression. Rules with EventPatterns are triggered when a matching event is observed. Rules with ScheduleExpressions self-trigger based on the given schedule. A rule can have both an EventPattern and a ScheduleExpression, in which case the rule triggers on matching events as well as on a schedule. When you initially create a rule, you can optionally assign one or more tags to the rule. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only rules with certain tag values. To use the PutRule operation and assign tags, you must have both the events:PutRule and events:TagResource permissions. If you are updating an existing rule, any tags you specify in the PutRule operation are ignored. To update the tags of an existing rule, use TagResource and UntagResource. Most services in Amazon Web Services treat : or / as the same character in Amazon Resource Names (ARNs). However, EventBridge uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match. In EventBridge, it is possible to create rules that lead to infinite loops, where a rule is fired repeatedly. For example, a rule might detect that ACLs have changed on an S3 bucket, and trigger software to change them to the desired state. If the rule is not written carefully, the subsequent change to the ACLs fires the rule again, creating an infinite loop. To prevent this, write the rules so that the triggered actions do not re-fire the same rule. For example, your rule could fire only if ACLs are found to be in a bad state, instead of after any change.  An infinite loop can quickly cause higher than expected charges. We recommend that you use budgeting, which alerts you when charges exceed your specified limit. For more information, see Managing Your Costs with Budgets.
    */
   putRule(callback?: (err: AWSError, data: CloudWatchEvents.Types.PutRuleResponse) => void): Request<CloudWatchEvents.Types.PutRuleResponse, AWSError>;
   /**
-   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered. You can configure the following as targets for Events:    API destination    Amazon API Gateway REST API endpoints   API Gateway   AWS Batch job queue   CloudWatch Logs group   CodeBuild project   CodePineline   Amazon EC2 CreateSnapshot API call   Amazon EC2 RebootInstances API call   Amazon EC2 StopInstances API call   Amazon EC2 TerminateInstances API call   Amazon ECS tasks   Event bus in a different AWS account or Region. You can use an event bus in the US East (N. Virginia) us-east-1, US West (Oregon) us-west-2, or Europe (Ireland) eu-west-1 Regions as a target for a rule.   Firehose delivery stream (Kinesis Data Firehose)   Inspector assessment template (Amazon Inspector)   Kinesis stream (Kinesis Data Stream)   AWS Lambda function   Redshift clusters (Data API statement execution)   Amazon SNS topic   Amazon SQS queues (includes FIFO queues   SSM Automation   SSM OpsItem   SSM Run Command   Step Functions state machines   Creating rules with built-in targets is supported only in the AWS Management Console. The built-in targets are EC2 CreateSnapshot API call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances API call.  For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge (CloudWatch Events) needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis data streams, AWS Step Functions state machines and API Gateway REST APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another AWS account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge (CloudWatch Events) Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different AWS account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between AWS Accounts in the Amazon EventBridge User Guide. For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
+   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered. You can configure the following as targets for Events:    API destination    Amazon API Gateway REST API endpoints   API Gateway   Batch job queue   CloudWatch Logs group   CodeBuild project   CodePipeline   Amazon EC2 CreateSnapshot API call   Amazon EC2 RebootInstances API call   Amazon EC2 StopInstances API call   Amazon EC2 TerminateInstances API call   Amazon ECS tasks   Event bus in a different Amazon Web Services account or Region. You can use an event bus in the US East (N. Virginia) us-east-1, US West (Oregon) us-west-2, or Europe (Ireland) eu-west-1 Regions as a target for a rule.   Firehose delivery stream (Kinesis Data Firehose)   Inspector assessment template (Amazon Inspector)   Kinesis stream (Kinesis Data Stream)   Lambda function   Redshift clusters (Data API statement execution)   Amazon SNS topic   Amazon SQS queues (includes FIFO queues   SSM Automation   SSM OpsItem   SSM Run Command   Step Functions state machines   Creating rules with built-in targets is supported only in the Management Console. The built-in targets are EC2 CreateSnapshot API call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances API call.  For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions. For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway REST APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another Amazon Web Services account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different Amazon Web Services account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide. For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
    */
   putTargets(params: CloudWatchEvents.Types.PutTargetsRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.PutTargetsResponse) => void): Request<CloudWatchEvents.Types.PutTargetsResponse, AWSError>;
   /**
-   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered. You can configure the following as targets for Events:    API destination    Amazon API Gateway REST API endpoints   API Gateway   AWS Batch job queue   CloudWatch Logs group   CodeBuild project   CodePineline   Amazon EC2 CreateSnapshot API call   Amazon EC2 RebootInstances API call   Amazon EC2 StopInstances API call   Amazon EC2 TerminateInstances API call   Amazon ECS tasks   Event bus in a different AWS account or Region. You can use an event bus in the US East (N. Virginia) us-east-1, US West (Oregon) us-west-2, or Europe (Ireland) eu-west-1 Regions as a target for a rule.   Firehose delivery stream (Kinesis Data Firehose)   Inspector assessment template (Amazon Inspector)   Kinesis stream (Kinesis Data Stream)   AWS Lambda function   Redshift clusters (Data API statement execution)   Amazon SNS topic   Amazon SQS queues (includes FIFO queues   SSM Automation   SSM OpsItem   SSM Run Command   Step Functions state machines   Creating rules with built-in targets is supported only in the AWS Management Console. The built-in targets are EC2 CreateSnapshot API call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances API call.  For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge (CloudWatch Events) needs the appropriate permissions. For AWS Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis data streams, AWS Step Functions state machines and API Gateway REST APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another AWS account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge (CloudWatch Events) Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different AWS account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between AWS Accounts in the Amazon EventBridge User Guide. For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
+   * Adds the specified targets to the specified rule, or updates the targets if they are already associated with the rule. Targets are the resources that are invoked when a rule is triggered. You can configure the following as targets for Events:    API destination    Amazon API Gateway REST API endpoints   API Gateway   Batch job queue   CloudWatch Logs group   CodeBuild project   CodePipeline   Amazon EC2 CreateSnapshot API call   Amazon EC2 RebootInstances API call   Amazon EC2 StopInstances API call   Amazon EC2 TerminateInstances API call   Amazon ECS tasks   Event bus in a different Amazon Web Services account or Region. You can use an event bus in the US East (N. Virginia) us-east-1, US West (Oregon) us-west-2, or Europe (Ireland) eu-west-1 Regions as a target for a rule.   Firehose delivery stream (Kinesis Data Firehose)   Inspector assessment template (Amazon Inspector)   Kinesis stream (Kinesis Data Stream)   Lambda function   Redshift clusters (Data API statement execution)   Amazon SNS topic   Amazon SQS queues (includes FIFO queues   SSM Automation   SSM OpsItem   SSM Run Command   Step Functions state machines   Creating rules with built-in targets is supported only in the Management Console. The built-in targets are EC2 CreateSnapshot API call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances API call.  For some target types, PutTargets provides target-specific parameters. If the target is a Kinesis data stream, you can optionally specify which shard the event goes to by using the KinesisParameters argument. To invoke a command on multiple EC2 instances with one rule, you can use the RunCommandParameters field. To be able to make API calls against the resources that you own, Amazon EventBridge needs the appropriate permissions. For Lambda and Amazon SNS resources, EventBridge relies on resource-based policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines and API Gateway REST APIs, EventBridge relies on IAM roles that you specify in the RoleARN argument in PutTargets. For more information, see Authentication and Access Control in the Amazon EventBridge User Guide. If another Amazon Web Services account is in the same region and has granted you permission (using PutPermission), you can send events to that account. Set that account's event bus as a target of the rules in your account. To send the matched events to the other account, specify that account's event bus as the Arn value when you run PutTargets. If your account sends events to another account, your account is charged for each sent event. Each event sent to another account is charged as a custom event. The account receiving the event is not charged. For more information, see Amazon EventBridge Pricing.   Input, InputPath, and InputTransformer are not available with PutTarget if the target is an event bus of a different Amazon Web Services account.  If you are setting the event bus of another account as the target, and that account granted permission to your account through an organization instead of directly by the account ID, then you must specify a RoleArn with proper permissions in the Target structure. For more information, see Sending and Receiving Events Between Amazon Web Services Accounts in the Amazon EventBridge User Guide. For more information about enabling cross-account events, see PutPermission.  Input, InputPath, and InputTransformer are mutually exclusive and optional parameters of a target. When a rule is triggered due to a matched event:   If none of the following arguments are specified for a target, then the entire event is passed to the target in JSON format (unless the target is Amazon EC2 Run Command or Amazon ECS task, in which case nothing from the event is passed to the target).   If Input is specified in the form of valid JSON, then the matched event is overridden with this constant.   If InputPath is specified in the form of JSONPath (for example, $.detail), then only the part of the event specified in the path is passed to the target (for example, only the detail part of the event is passed).   If InputTransformer is specified, then one or more specified JSONPaths are extracted from the event and used as values in a template that you specify as the input to the target.   When you specify InputPath or InputTransformer, you must use JSON dot notation, not bracket notation. When you add targets to a rule and the associated rule triggers soon after, new or updated targets might not be immediately invoked. Allow a short period of time for changes to take effect. This action can partially fail if too many requests are made at the same time. If that happens, FailedEntryCount is non-zero in the response and each entry in FailedEntries provides the ID of the failed target and the error code.
    */
   putTargets(callback?: (err: AWSError, data: CloudWatchEvents.Types.PutTargetsResponse) => void): Request<CloudWatchEvents.Types.PutTargetsResponse, AWSError>;
   /**
-   * Revokes the permission of another AWS account to be able to put events to the specified event bus. Specify the account to revoke by the StatementId value that you associated with the account when you granted it permission with PutPermission. You can find the StatementId by using DescribeEventBus.
+   * Revokes the permission of another Amazon Web Services account to be able to put events to the specified event bus. Specify the account to revoke by the StatementId value that you associated with the account when you granted it permission with PutPermission. You can find the StatementId by using DescribeEventBus.
    */
   removePermission(params: CloudWatchEvents.Types.RemovePermissionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Revokes the permission of another AWS account to be able to put events to the specified event bus. Specify the account to revoke by the StatementId value that you associated with the account when you granted it permission with PutPermission. You can find the StatementId by using DescribeEventBus.
+   * Revokes the permission of another Amazon Web Services account to be able to put events to the specified event bus. Specify the account to revoke by the StatementId value that you associated with the account when you granted it permission with PutPermission. You can find the StatementId by using DescribeEventBus.
    */
   removePermission(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -372,19 +372,19 @@ declare class CloudWatchEvents extends Service {
    */
   startReplay(callback?: (err: AWSError, data: CloudWatchEvents.Types.StartReplayResponse) => void): Request<CloudWatchEvents.Types.StartReplayResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified EventBridge resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. In EventBridge, rules and event buses can be tagged. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with a resource that already has tags. If you specify a new tag key, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource.
+   * Assigns one or more tags (key-value pairs) to the specified EventBridge resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. In EventBridge, rules and event buses can be tagged. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a resource that already has tags. If you specify a new tag key, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource.
    */
   tagResource(params: CloudWatchEvents.Types.TagResourceRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.TagResourceResponse) => void): Request<CloudWatchEvents.Types.TagResourceResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified EventBridge resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. In EventBridge, rules and event buses can be tagged. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with a resource that already has tags. If you specify a new tag key, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource.
+   * Assigns one or more tags (key-value pairs) to the specified EventBridge resource. Tags can help you organize and categorize your resources. You can also use them to scope user permissions by granting a user permission to access or change only resources with certain tag values. In EventBridge, rules and event buses can be tagged. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a resource that already has tags. If you specify a new tag key, this tag is appended to the list of tags associated with the resource. If you specify a tag key that is already associated with the resource, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a resource.
    */
   tagResource(callback?: (err: AWSError, data: CloudWatchEvents.Types.TagResourceResponse) => void): Request<CloudWatchEvents.Types.TagResourceResponse, AWSError>;
   /**
-   * Tests whether the specified event pattern matches the provided event. Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, EventBridge uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match.
+   * Tests whether the specified event pattern matches the provided event. Most services in Amazon Web Services treat : or / as the same character in Amazon Resource Names (ARNs). However, EventBridge uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match.
    */
   testEventPattern(params: CloudWatchEvents.Types.TestEventPatternRequest, callback?: (err: AWSError, data: CloudWatchEvents.Types.TestEventPatternResponse) => void): Request<CloudWatchEvents.Types.TestEventPatternResponse, AWSError>;
   /**
-   * Tests whether the specified event pattern matches the provided event. Most services in AWS treat : or / as the same character in Amazon Resource Names (ARNs). However, EventBridge uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match.
+   * Tests whether the specified event pattern matches the provided event. Most services in Amazon Web Services treat : or / as the same character in Amazon Resource Names (ARNs). However, EventBridge uses an exact match in event patterns and rules. Be sure to use the correct ARN characters when creating event patterns so that they match the ARN syntax in the event you want to match.
    */
   testEventPattern(callback?: (err: AWSError, data: CloudWatchEvents.Types.TestEventPatternResponse) => void): Request<CloudWatchEvents.Types.TestEventPatternResponse, AWSError>;
   /**
@@ -539,19 +539,19 @@ declare namespace CloudWatchEvents {
   }
   export interface BatchParameters {
     /**
-     * The ARN or name of the job definition to use if the event target is an AWS Batch job. This job definition must already exist.
+     * The ARN or name of the job definition to use if the event target is an Batch job. This job definition must already exist.
      */
     JobDefinition: String;
     /**
-     * The name to use for this execution of the job, if the target is an AWS Batch job.
+     * The name to use for this execution of the job, if the target is an Batch job.
      */
     JobName: String;
     /**
-     * The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. This parameter is used only if the target is an AWS Batch job.
+     * The array properties for the submitted job, such as the size of the array. The array size can be between 2 and 10,000. If you specify array properties for a job, it becomes an array job. This parameter is used only if the target is an Batch job.
      */
     ArrayProperties?: BatchArrayProperties;
     /**
-     * The retry strategy to use for failed jobs, if the target is an AWS Batch job. The retry strategy is the number of times to retry the failed job execution. Valid values are 1–10. When you specify a retry strategy here, it overrides the retry strategy defined in the job definition.
+     * The retry strategy to use for failed jobs, if the target is an Batch job. The retry strategy is the number of times to retry the failed job execution. Valid values are 1–10. When you specify a retry strategy here, it overrides the retry strategy defined in the job definition.
      */
     RetryStrategy?: BatchRetryStrategy;
   }
@@ -819,7 +819,7 @@ declare namespace CloudWatchEvents {
      */
     ArchiveName: ArchiveName;
     /**
-     * The ARN of the event source associated with the archive.
+     * The ARN of the event bus that sends events to the archive.
      */
     EventSourceArn: Arn;
     /**
@@ -977,11 +977,11 @@ declare namespace CloudWatchEvents {
   }
   export interface CreatePartnerEventSourceRequest {
     /**
-     * The name of the partner event source. This name must be unique and must be in the format  partner_name/event_namespace/event_name . The AWS account that wants to use this partner event source must create a partner event bus with a name that matches the name of the partner event source.
+     * The name of the partner event source. This name must be unique and must be in the format  partner_name/event_namespace/event_name . The Amazon Web Services account that wants to use this partner event source must create a partner event bus with a name that matches the name of the partner event source.
      */
     Name: EventSourceName;
     /**
-     * The AWS account ID that is permitted to create a matching partner event bus for this partner event source.
+     * The Amazon Web Services account ID that is permitted to create a matching partner event bus for this partner event source.
      */
     Account: AccountId;
   }
@@ -1090,7 +1090,7 @@ declare namespace CloudWatchEvents {
      */
     Name: EventSourceName;
     /**
-     * The AWS account ID of the AWS customer that the event source was created for.
+     * The Amazon Web Services account ID of the Amazon Web Services customer that the event source was created for.
      */
     Account: AccountId;
   }
@@ -1104,7 +1104,7 @@ declare namespace CloudWatchEvents {
      */
     EventBusName?: EventBusNameOrArn;
     /**
-     * If this is a managed rule, created by an AWS service on your behalf, you must specify Force as True to delete the rule. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using DescribeRule or ListRules and checking the ManagedBy field of the response.
+     * If this is a managed rule, created by an Amazon Web Services service on your behalf, you must specify Force as True to delete the rule. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using DescribeRule or ListRules and checking the ManagedBy field of the response.
      */
     Force?: Boolean;
   }
@@ -1424,7 +1424,7 @@ declare namespace CloudWatchEvents {
      */
     RoleArn?: RoleArn;
     /**
-     * If this is a managed rule, created by an AWS service on your behalf, this field displays the principal name of the AWS service that created the rule.
+     * If this is a managed rule, created by an Amazon Web Services service on your behalf, this field displays the principal name of the Amazon Web Services service that created the rule.
      */
     ManagedBy?: ManagedBy;
     /**
@@ -1456,15 +1456,15 @@ declare namespace CloudWatchEvents {
      */
     TaskCount?: LimitMin1;
     /**
-     * Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The FARGATE value is supported only in the Regions where AWS Fargate with Amazon ECS is supported. For more information, see AWS Fargate on Amazon ECS in the Amazon Elastic Container Service Developer Guide.
+     * Specifies the launch type on which your task is running. The launch type that you specify here must match one of the launch type (compatibilities) of the target task. The FARGATE value is supported only in the Regions where Fargate witt Amazon ECS is supported. For more information, see Fargate on Amazon ECS in the Amazon Elastic Container Service Developer Guide.
      */
     LaunchType?: LaunchType;
     /**
-     * Use this structure if the ECS task uses the awsvpc network mode. This structure specifies the VPC subnets and security groups associated with the task, and whether a public IP address is to be used. This structure is required if LaunchType is FARGATE because the awsvpc mode is required for Fargate tasks. If you specify NetworkConfiguration when the target ECS task does not use the awsvpc network mode, the task fails.
+     * Use this structure if the Amazon ECS task uses the awsvpc network mode. This structure specifies the VPC subnets and security groups associated with the task, and whether a public IP address is to be used. This structure is required if LaunchType is FARGATE because the awsvpc mode is required for Fargate tasks. If you specify NetworkConfiguration when the target ECS task does not use the awsvpc network mode, the task fails.
      */
     NetworkConfiguration?: NetworkConfiguration;
     /**
-     * Specifies the platform version for the task. Specify only the numeric portion of the platform version, such as 1.1.0. This structure is used only if LaunchType is FARGATE. For more information about valid platform versions, see AWS Fargate Platform Versions in the Amazon Elastic Container Service Developer Guide.
+     * Specifies the platform version for the task. Specify only the numeric portion of the platform version, such as 1.1.0. This structure is used only if LaunchType is FARGATE. For more information about valid platform versions, see Fargate Platform Versions in the Amazon Elastic Container Service Developer Guide.
      */
     PlatformVersion?: String;
     /**
@@ -1526,7 +1526,7 @@ declare namespace CloudWatchEvents {
      */
     Arn?: String;
     /**
-     * The permissions policy of the event bus, describing which other AWS accounts can write events to this event bus.
+     * The permissions policy of the event bus, describing which other Amazon Web Services accounts can write events to this event bus.
      */
     Policy?: String;
   }
@@ -1551,7 +1551,7 @@ declare namespace CloudWatchEvents {
      */
     CreationTime?: Timestamp;
     /**
-     * The date and time that the event source will expire, if the AWS account doesn't create a matching event bus for it.
+     * The date and time that the event source will expire, if the Amazon Web Services account doesn't create a matching event bus for it.
      */
     ExpirationTime?: Timestamp;
     /**
@@ -1588,7 +1588,7 @@ declare namespace CloudWatchEvents {
   export type HttpsEndpoint = string;
   export interface InputTransformer {
     /**
-     * Map of JSON paths to be extracted from the event. You can then insert these in the template in InputTemplate to produce the output you want to be sent to the target.  InputPathsMap is an array key-value pairs, where each value is a valid JSON path. You can have as many as 100 key-value pairs. You must use JSON dot notation, not bracket notation. The keys cannot start with "AWS." 
+     * Map of JSON paths to be extracted from the event. You can then insert these in the template in InputTemplate to produce the output you want to be sent to the target.  InputPathsMap is an array key-value pairs, where each value is a valid JSON path. You can have as many as 100 key-value pairs. You must use JSON dot notation, not bracket notation. The keys cannot start with "Amazon Web Services." 
      */
     InputPathsMap?: TransformerPaths;
     /**
@@ -1604,7 +1604,7 @@ declare namespace CloudWatchEvents {
      */
     PartitionKeyPath: TargetPartitionKeyPath;
   }
-  export type LaunchType = "EC2"|"FARGATE"|string;
+  export type LaunchType = "EC2"|"FARGATE"|"EXTERNAL"|string;
   export type LimitMax100 = number;
   export type LimitMin1 = number;
   export interface ListApiDestinationsRequest {
@@ -1801,7 +1801,7 @@ declare namespace CloudWatchEvents {
      */
     State?: ReplayState;
     /**
-     * The ARN of the event source associated with the replay.
+     * The ARN of the archive from which the events are replayed.
      */
     EventSourceArn?: Arn;
     /**
@@ -1945,7 +1945,7 @@ declare namespace CloudWatchEvents {
   }
   export interface PartnerEventSourceAccount {
     /**
-     * The AWS account ID that the partner event source was offered to.
+     * The Amazon Web Services account ID that the partner event source was offered to.
      */
     Account?: AccountId;
     /**
@@ -1953,7 +1953,7 @@ declare namespace CloudWatchEvents {
      */
     CreationTime?: Timestamp;
     /**
-     * The date and time that the event source will expire, if the AWS account doesn't create a matching event bus for it.
+     * The date and time that the event source will expire, if the Amazon Web Services account doesn't create a matching event bus for it.
      */
     ExpirationTime?: Timestamp;
     /**
@@ -2010,7 +2010,7 @@ declare namespace CloudWatchEvents {
      */
     Source?: String;
     /**
-     * AWS resources, identified by Amazon Resource Name (ARN), which the event primarily concerns. Any number, including zero, may be present.
+     * Amazon Web Services resources, identified by Amazon Resource Name (ARN), which the event primarily concerns. Any number, including zero, may be present.
      */
     Resources?: EventResourceList;
     /**
@@ -2026,7 +2026,7 @@ declare namespace CloudWatchEvents {
      */
     EventBusName?: NonPartnerEventBusNameOrArn;
     /**
-     * An AWS X-Ray trade header, which is an http header (X-Amzn-Trace-Id) that contains the trace-id associated with the event. To learn more about X-Ray trace headers, see Tracing header in the AWS X-Ray Developer Guide.
+     * An X-Ray trade header, which is an http header (X-Amzn-Trace-Id) that contains the trace-id associated with the event. To learn more about X-Ray trace headers, see Tracing header in the X-Ray Developer Guide.
      */
     TraceHeader?: TraceHeader;
   }
@@ -2068,11 +2068,11 @@ declare namespace CloudWatchEvents {
      */
     Time?: EventTime;
     /**
-     * The event source that is generating the evntry.
+     * The event source that is generating the entry.
      */
     Source?: EventSourceName;
     /**
-     * AWS resources, identified by Amazon Resource Name (ARN), which the event primarily concerns. Any number, including zero, may be present.
+     * Amazon Web Services resources, identified by Amazon Resource Name (ARN), which the event primarily concerns. Any number, including zero, may be present.
      */
     Resources?: EventResourceList;
     /**
@@ -2116,11 +2116,11 @@ declare namespace CloudWatchEvents {
      */
     EventBusName?: NonPartnerEventBusName;
     /**
-     * The action that you are enabling the other account to perform. Currently, this must be events:PutEvents.
+     * The action that you are enabling the other account to perform.
      */
     Action?: Action;
     /**
-     * The 12-digit AWS account ID that you are permitting to put events to your default event bus. Specify "*" to permit any account to put events to your default event bus. If you specify "*" without specifying Condition, avoid creating rules that may match undesirable events. To create more secure rules, make sure that the event pattern for each rule contains an account field with a specific account ID from which to receive events. Rules with an account field do not match any events sent from other accounts.
+     * The 12-digit Amazon Web Services account ID that you are permitting to put events to your default event bus. Specify "*" to permit any account to put events to your default event bus. If you specify "*" without specifying Condition, avoid creating rules that may match undesirable events. To create more secure rules, make sure that the event pattern for each rule contains an account field with a specific account ID from which to receive events. Rules with an account field do not match any events sent from other accounts.
      */
     Principal?: Principal;
     /**
@@ -2128,7 +2128,7 @@ declare namespace CloudWatchEvents {
      */
     StatementId?: StatementId;
     /**
-     * This parameter enables you to limit the permission to accounts that fulfill a certain condition, such as being a member of a certain AWS organization. For more information about AWS Organizations, see What Is AWS Organizations in the AWS Organizations User Guide. If you specify Condition with an AWS organization ID, and specify "*" as the value for Principal, you grant permission to all the accounts in the named organization. The Condition is a JSON string which must contain Type, Key, and Value fields.
+     * This parameter enables you to limit the permission to accounts that fulfill a certain condition, such as being a member of a certain Amazon Web Services organization. For more information about Amazon Web Services Organizations, see What Is Amazon Web Services Organizations in the Amazon Web Services Organizations User Guide. If you specify Condition with an Amazon Web Services organization ID, and specify "*" as the value for Principal, you grant permission to all the accounts in the named organization. The Condition is a JSON string which must contain Type, Key, and Value fields.
      */
     Condition?: Condition;
     /**
@@ -2158,7 +2158,7 @@ declare namespace CloudWatchEvents {
      */
     Description?: RuleDescription;
     /**
-     * The Amazon Resource Name (ARN) of the IAM role associated with the rule.
+     * The Amazon Resource Name (ARN) of the IAM role associated with the rule. If you're setting an event bus in another account as the target and that account granted permission to your account through an organization instead of directly by the account ID, you must specify a RoleArn with proper permissions in the Target structure, instead of here in this parameter.
      */
     RoleArn?: RoleArn;
     /**
@@ -2220,7 +2220,7 @@ declare namespace CloudWatchEvents {
   export type QueryStringValue = string;
   export interface RedshiftDataParameters {
     /**
-     * The name or ARN of the secret that enables access to the database. Required when authenticating using AWS Secrets Manager.
+     * The name or ARN of the secret that enables access to the database. Required when authenticating using Amazon Web Services Secrets Manager.
      */
     SecretManagerArn?: RedshiftSecretManagerArn;
     /**
@@ -2274,7 +2274,7 @@ declare namespace CloudWatchEvents {
      */
     Ids: TargetIdList;
     /**
-     * If this is a managed rule, created by an AWS service on your behalf, you must specify Force as True to remove targets. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using DescribeRule or ListRules and checking the ManagedBy field of the response.
+     * If this is a managed rule, created by an Amazon Web Services service on your behalf, you must specify Force as True to remove targets. This parameter is ignored for rules that are not managed rules. You can check whether a rule is a managed rule by using DescribeRule or ListRules and checking the ManagedBy field of the response.
      */
     Force?: Boolean;
   }
@@ -2393,15 +2393,15 @@ declare namespace CloudWatchEvents {
      */
     Description?: RuleDescription;
     /**
-     * The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)".
+     * The scheduling expression. For example, "cron(0 20 * * ? *)", "rate(5 minutes)". For more information, see Creating an Amazon EventBridge rule that runs on a schedule.
      */
     ScheduleExpression?: ScheduleExpression;
     /**
-     * The Amazon Resource Name (ARN) of the role that is used for target invocation.
+     * The Amazon Resource Name (ARN) of the role that is used for target invocation. If you're setting an event bus in another account as the target and that account granted permission to your account through an organization instead of directly by the account ID, you must specify a RoleArn with proper permissions in the Target structure, instead of here in this parameter.
      */
     RoleArn?: RoleArn;
     /**
-     * If the rule was created on behalf of your account by an AWS service, this field displays the principal name of the service that created the rule.
+     * If the rule was created on behalf of your account by an Amazon Web Services service, this field displays the principal name of the service that created the rule.
      */
     ManagedBy?: ManagedBy;
     /**
@@ -2539,7 +2539,7 @@ declare namespace CloudWatchEvents {
   export type TagValue = string;
   export interface Target {
     /**
-     * The ID of the target.
+     * The ID of the target. We recommend using a memorable and unique string.
      */
     Id: TargetId;
     /**
@@ -2575,7 +2575,7 @@ declare namespace CloudWatchEvents {
      */
     EcsParameters?: EcsParameters;
     /**
-     * If the event target is an AWS Batch job, this contains the job definition, job name, and other parameters. For more information, see Jobs in the AWS Batch User Guide.
+     * If the event target is an Batch job, this contains the job definition, job name, and other parameters. For more information, see Jobs in the Batch User Guide.
      */
     BatchParameters?: BatchParameters;
     /**
@@ -2587,7 +2587,7 @@ declare namespace CloudWatchEvents {
      */
     HttpParameters?: HttpParameters;
     /**
-     * Contains the Redshift Data API parameters to use when the target is a Redshift cluster. If you specify a Redshift Cluster as a Target, you can use this to specify parameters to invoke the Redshift Data API ExecuteStatement based on EventBridge events.
+     * Contains the Amazon Redshift Data API parameters to use when the target is a Amazon Redshift cluster. If you specify a Amazon Redshift Cluster as a Target, you can use this to specify parameters to invoke the Amazon Redshift Data API ExecuteStatement based on EventBridge events.
      */
     RedshiftDataParameters?: RedshiftDataParameters;
     /**
@@ -2616,7 +2616,7 @@ declare namespace CloudWatchEvents {
      */
     EventPattern: EventPattern;
     /**
-     * The event, in JSON format, to test against the event pattern. The JSON must follow the format specified in AWS Events, and the following fields are mandatory:    id     account     source     time     region     resources     detail-type   
+     * The event, in JSON format, to test against the event pattern. The JSON must follow the format specified in Amazon Web Services Events, and the following fields are mandatory:    id     account     source     time     region     resources     detail-type   
      */
     Event: String;
   }

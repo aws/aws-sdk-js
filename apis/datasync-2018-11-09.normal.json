@@ -34,7 +34,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Cancels execution of a task. </p> <p>When you cancel a task execution, the transfer of some files is abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, AWS DataSync successfully complete the transfer when you start the next task execution.</p>"
+      "documentation": "<p>Cancels execution of a task. </p> <p>When you cancel a task execution, the transfer of some files is abruptly interrupted. The contents of files that are transferred to the destination might be incomplete or inconsistent with the source files. However, if you start a new task execution on the same task and you allow the task execution to complete, file content on the destination is complete and consistent. This applies to other unexpected failures that interrupt a task execution. In all of these cases, DataSync successfully complete the transfer when you start the next task execution.</p>"
     },
     "CreateAgent": {
       "name": "CreateAgent",
@@ -56,7 +56,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Activates an AWS DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the AWS Region that you want to activate the agent in. You activate the agent in the AWS Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this AWS Region.</p> <p>You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public internet.</p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. </p> <p>Agents are automatically updated by AWS on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/>"
+      "documentation": "<p>Activates an DataSync agent that you have deployed on your host. The activation process associates your agent with your account. In the activation process, you specify information such as the Amazon Web Services Region that you want to activate the agent in. You activate the agent in the Amazon Web Services Region where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in this Amazon Web Services Region.</p> <p>You can activate the agent in a VPC (virtual private cloud) or provide the agent access to a VPC endpoint so you can run tasks without going over the public internet.</p> <p>You can use an agent for more than one location. If a task uses multiple agents, all of them need to have status AVAILABLE for the task to run. If you use multiple agents for a source location, the status of all the agents must be AVAILABLE for the task to run. </p> <p>Agents are automatically updated by Amazon Web Services on a regular basis, using a mechanism that ensures minimal interruption to your tasks.</p> <p/>"
     },
     "CreateLocationEfs": {
       "name": "CreateLocationEfs",
@@ -166,7 +166,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For more information, see https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli in the <i>AWS DataSync User Guide</i>.</p>"
+      "documentation": "<p>Creates an endpoint for an Amazon S3 bucket.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli\">Create an Amazon S3 location</a> in the <i>DataSync User Guide</i>.</p>"
     },
     "CreateLocationSmb": {
       "name": "CreateLocationSmb",
@@ -210,7 +210,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Creates a task.</p> <p>A task includes a source location and a destination location, and a configuration that specifies how data is transferred. A task always transfers data from the source location to the destination location. The configuration specifies options such as task scheduling, bandwidth limits, etc. A task is the complete definition of a data transfer.</p> <p>When you create a task that transfers data between AWS services in different AWS Regions, one of the two locations that you specify must reside in the Region where DataSync is being used. The other location must be specified in a different Region.</p> <p>You can transfer data between commercial AWS Regions except for China, or between AWS GovCloud (US-East and US-West) Regions.</p> <important> <p>When you use DataSync to copy files or objects between AWS Regions, you pay for data transfer between Regions. This is billed as data transfer OUT from your source Region to your destination Region. For more information, see <a href=\"http://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer\">Data Transfer pricing</a>. </p> </important>"
+      "documentation": "<p>Creates a task.</p> <p>A task includes a source location and a destination location, and a configuration that specifies how data is transferred. A task always transfers data from the source location to the destination location. The configuration specifies options such as task scheduling, bandwidth limits, etc. A task is the complete definition of a data transfer.</p> <p>When you create a task that transfers data between Amazon Web Services services in different Amazon Web Services Regions, one of the two locations that you specify must reside in the Region where DataSync is being used. The other location must be specified in a different Region.</p> <p>You can transfer data between commercial Amazon Web Services Regions except for China, or between Amazon Web Services GovCloud (US) Regions.</p> <important> <p>When you use DataSync to copy files or objects between Amazon Web Services Regions, you pay for data transfer between Regions. This is billed as data transfer OUT from your source Region to your destination Region. For more information, see <a href=\"http://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer\">Data Transfer pricing</a>. </p> </important>"
     },
     "DeleteAgent": {
       "name": "DeleteAgent",
@@ -232,7 +232,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your AWS account. However, it doesn't delete the agent virtual machine (VM) from your on-premises environment.</p>"
+      "documentation": "<p>Deletes an agent. To specify which agent to delete, use the Amazon Resource Name (ARN) of the agent in your request. The operation disassociates the agent from your Amazon Web Services account. However, it doesn't delete the agent virtual machine (VM) from your on-premises environment.</p>"
     },
     "DeleteLocation": {
       "name": "DeleteLocation",
@@ -254,7 +254,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Deletes the configuration of a location used by AWS DataSync. </p>"
+      "documentation": "<p>Deletes the configuration of a location used by DataSync. </p>"
     },
     "DeleteTask": {
       "name": "DeleteTask",
@@ -496,7 +496,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Returns a list of agents owned by an AWS account in the AWS Region specified in the request. The returned list is ordered by agent Amazon Resource Name (ARN).</p> <p>By default, this operation returns a maximum of 100 agents. This operation supports pagination that enables you to optionally reduce the number of agents returned in a response.</p> <p>If you have more agents than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a marker that you can specify in your next request to fetch the next page of agents.</p>"
+      "documentation": "<p>Returns a list of agents owned by an Amazon Web Services account in the Amazon Web Services Region specified in the request. The returned list is ordered by agent Amazon Resource Name (ARN).</p> <p>By default, this operation returns a maximum of 100 agents. This operation supports pagination that enables you to optionally reduce the number of agents returned in a response.</p> <p>If you have more agents than are returned in a response (that is, the response returns only a truncated list of your agents), the response contains a marker that you can specify in your next request to fetch the next page of agents.</p>"
     },
     "ListLocations": {
       "name": "ListLocations",
@@ -606,7 +606,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Starts a specific invocation of a task. A <code>TaskExecution</code> value represents an individual run of a task. Each task can have at most one <code>TaskExecution</code> at a time.</p> <p> <code>TaskExecution</code> has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. </p> <p>For detailed information, see the Task Execution section in the Components and Terminology topic in the <i>AWS DataSync User Guide</i>.</p>"
+      "documentation": "<p>Starts a specific invocation of a task. A <code>TaskExecution</code> value represents an individual run of a task. Each task can have at most one <code>TaskExecution</code> at a time.</p> <p> <code>TaskExecution</code> has the following transition phases: INITIALIZING | PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. </p> <p>For detailed information, see the Task Execution section in the Components and Terminology topic in the <i>DataSync User Guide</i>.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -628,7 +628,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Applies a key-value pair to an AWS resource.</p>"
+      "documentation": "<p>Applies a key-value pair to an Amazon Web Services resource.</p>"
     },
     "UntagResource": {
       "name": "UntagResource",
@@ -650,7 +650,7 @@
           "shape": "InternalException"
         }
       ],
-      "documentation": "<p>Removes a tag from an AWS resource.</p>"
+      "documentation": "<p>Removes a tag from an Amazon Web Services resource.</p>"
     },
     "UpdateAgent": {
       "name": "UpdateAgent",
@@ -871,7 +871,7 @@
       "members": {
         "ActivationKey": {
           "shape": "ActivationKey",
-          "documentation": "<p>Your agent activation key. You can get the activation key either by sending an HTTP GET request with redirects that enable you to get the agent IP address (port 80). Alternatively, you can get it from the AWS DataSync console.</p> <p>The redirect URL returned in the response provides you the activation key for your agent in the query string parameter <code>activationKey</code>. It might also include other activation-related parameters; however, these are merely defaults. The arguments you pass to this API call determine the actual configuration of your agent.</p> <p>For more information, see Activating an Agent in the <i>AWS DataSync User Guide.</i> </p>"
+          "documentation": "<p>Your agent activation key. You can get the activation key either by sending an HTTP GET request with redirects that enable you to get the agent IP address (port 80). Alternatively, you can get it from the DataSync console.</p> <p>The redirect URL returned in the response provides you the activation key for your agent in the query string parameter <code>activationKey</code>. It might also include other activation-related parameters; however, these are merely defaults. The arguments you pass to this API call determine the actual configuration of your agent.</p> <p>For more information, see Activating an Agent in the <i>DataSync User Guide.</i> </p>"
         },
         "AgentName": {
           "shape": "TagValue",
@@ -901,7 +901,7 @@
       "members": {
         "AgentArn": {
           "shape": "AgentArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the agent. Use the <code>ListAgents</code> operation to return a list of agents for your account and AWS Region.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the agent. Use the <code>ListAgents</code> operation to return a list of agents for your account and Amazon Web Services Region.</p>"
         }
       },
       "documentation": "<p>CreateAgentResponse</p>"
@@ -915,7 +915,7 @@
       "members": {
         "Subdirectory": {
           "shape": "EfsSubdirectory",
-          "documentation": "<p>A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, AWS DataSync uses the root directory.</p> <note> <p> <code>Subdirectory</code> must be specified with forward slashes. For example, <code>/path/to/folder</code>.</p> </note>"
+          "documentation": "<p>A subdirectory in the location’s path. This subdirectory in the EFS file system is used to read data from the EFS source location or write data to the EFS destination. By default, DataSync uses the root directory.</p> <note> <p> <code>Subdirectory</code> must be specified with forward slashes. For example, <code>/path/to/folder</code>.</p> </note>"
         },
         "EfsFilesystemArn": {
           "shape": "EfsFilesystemArn",
@@ -1000,15 +1000,15 @@
       "members": {
         "Subdirectory": {
           "shape": "NfsSubdirectory",
-          "documentation": "<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. </p> <p>To see all the paths exported by your NFS server, run \"<code>showmount -e nfs-server-name</code>\" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash,</code> or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>If you are copying data to or from your AWS Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on AWS Snowcone</a> for more information.</p> <p>For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.</p>"
+          "documentation": "<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network. </p> <p>To see all the paths exported by your NFS server, run \"<code>showmount -e nfs-server-name</code>\" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder you specified, DataSync needs to have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash,</code> or ensure that the permissions for all of the files that you want DataSync allow read access for all users. Doing either enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p> <p>For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.</p>"
         },
         "ServerHostname": {
           "shape": "ServerHostname",
-          "documentation": "<p>The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this host name to mount the NFS server in a network. </p> <p>If you are copying data to or from your AWS Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on AWS Snowcone</a> for more information.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>"
+          "documentation": "<p>The name of the NFS server. This value is the IP address or Domain Name Service (DNS) name of the NFS server. An agent that is installed on-premises uses this host name to mount the NFS server in a network. </p> <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p> <note> <p>This name must either be DNS-compliant or must be an IP version 4 (IPv4) address.</p> </note>"
         },
         "OnPremConfig": {
           "shape": "OnPremConfig",
-          "documentation": "<p>Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect to an NFS server. </p> <p>If you are copying data to or from your AWS Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on AWS Snowcone</a> for more information.</p>"
+          "documentation": "<p>Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect to an NFS server. </p> <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p>"
         },
         "MountOptions": {
           "shape": "NfsMountOptions",
@@ -1101,18 +1101,18 @@
         },
         "S3BucketArn": {
           "shape": "S3BucketArn",
-          "documentation": "<p>The ARN of the Amazon S3 bucket. If the bucket is on an AWS Outpost, this must be an access point ARN.</p>"
+          "documentation": "<p>The ARN of the Amazon S3 bucket. If the bucket is on an Amazon Web Services Outpost, this must be an access point ARN.</p>"
         },
         "S3StorageClass": {
           "shape": "S3StorageClass",
-          "documentation": "<p>The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. For buckets in AWS Regions, the storage class defaults to Standard. For buckets on AWS Outposts, the storage class defaults to AWS S3 Outposts.</p> <p>For more information about S3 storage classes, see <a href=\"http://aws.amazon.com/s3/storage-classes/\">Amazon S3 Storage Classes</a>. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with S3 storage classes in DataSync</a>.</p>"
+          "documentation": "<p>The Amazon S3 storage class that you want to store your files in when this location is used as a task destination. For buckets in Amazon Web Services Regions, the storage class defaults to Standard. For buckets on Outposts, the storage class defaults to Amazon Web Services S3 Outposts.</p> <p>For more information about S3 storage classes, see <a href=\"http://aws.amazon.com/s3/storage-classes/\">Amazon S3 Storage Classes</a>. Some storage classes have behaviors that can affect your S3 storage cost. For detailed information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with S3 storage classes in DataSync</a>.</p>"
         },
         "S3Config": {
           "shape": "S3Config"
         },
         "AgentArns": {
           "shape": "AgentArnList",
-          "documentation": "<p>If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names (ARNs) of the DataSync agents deployed on your Outpost. For more information about launching a DataSync agent on an AWS Outpost, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent\">Deploy your DataSync agent on AWS Outposts</a>.</p>"
+          "documentation": "<p>If you are using DataSync on an Amazon Web Services Outpost, specify the Amazon Resource Names (ARNs) of the DataSync agents deployed on your Outpost. For more information about launching a DataSync agent on an Amazon Web Services Outpost, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent\">Deploy your DataSync agent on Outposts</a>.</p>"
         },
         "Tags": {
           "shape": "InputTagList",
@@ -1199,7 +1199,7 @@
         },
         "DestinationLocationArn": {
           "shape": "LocationArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of an AWS storage resource's location. </p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Web Services storage resource's location. </p>"
         },
         "CloudWatchLogGroupArn": {
           "shape": "LogGroupArn",
@@ -1224,6 +1224,10 @@
         "Tags": {
           "shape": "InputTagList",
           "documentation": "<p>The key-value pair that represents the tag that you want to add to the resource. The value can be an empty string. </p>"
+        },
+        "Includes": {
+          "shape": "FilterList",
+          "documentation": "<p>A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by \"|\" (that is, a pipe). For example: <code>\"/folder1|/folder2</code>\"</p>"
         }
       },
       "documentation": "<p>CreateTaskRequest</p>"
@@ -1246,7 +1250,7 @@
       "members": {
         "AgentArn": {
           "shape": "AgentArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the agent to delete. Use the <code>ListAgents</code> operation to return a list of agents for your account and AWS Region.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the agent to delete. Use the <code>ListAgents</code> operation to return a list of agents for your account and Amazon Web Services Region.</p>"
         }
       },
       "documentation": "<p>DeleteAgentRequest</p>"
@@ -1529,7 +1533,7 @@
         },
         "AgentArns": {
           "shape": "AgentArnList",
-          "documentation": "<p>If you are using DataSync on an AWS Outpost, the Amazon Resource Name (ARNs) of the EC2 agents deployed on your Outpost. For more information about launching a DataSync agent on an AWS Outpost, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent\">Deploy your DataSync agent on AWS Outposts</a>.</p>"
+          "documentation": "<p>If you are using DataSync on an Amazon Web Services Outpost, the Amazon Resource Name (ARNs) of the EC2 agents deployed on your Outpost. For more information about launching a DataSync agent on an Amazon Web Services Outpost, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent\">Deploy your DataSync agent on Outposts</a>.</p>"
         },
         "CreationTime": {
           "shape": "Time",
@@ -1607,7 +1611,7 @@
         },
         "Status": {
           "shape": "TaskExecutionStatus",
-          "documentation": "<p>The status of the task execution. </p> <p>For detailed information about task execution statuses, see Understanding Task Statuses in the <i>AWS DataSync User Guide.</i> </p>"
+          "documentation": "<p>The status of the task execution. </p> <p>For detailed information about task execution statuses, see Understanding Task Statuses in the <i>DataSync User Guide.</i> </p>"
         },
         "Options": {
           "shape": "Options"
@@ -1638,7 +1642,7 @@
         },
         "BytesWritten": {
           "shape": "long",
-          "documentation": "<p>The number of logical bytes written to the destination AWS storage resource.</p>"
+          "documentation": "<p>The number of logical bytes written to the destination Amazon Web Services storage resource.</p>"
         },
         "BytesTransferred": {
           "shape": "long",
@@ -1673,7 +1677,7 @@
         },
         "Status": {
           "shape": "TaskStatus",
-          "documentation": "<p>The status of the task that was described.</p> <p>For detailed information about task execution statuses, see Understanding Task Statuses in the <i>AWS DataSync User Guide</i>.</p>"
+          "documentation": "<p>The status of the task that was described.</p> <p>For detailed information about task execution statuses, see Understanding Task Statuses in the <i>DataSync User Guide</i>.</p>"
         },
         "Name": {
           "shape": "TagValue",
@@ -1689,7 +1693,7 @@
         },
         "DestinationLocationArn": {
           "shape": "LocationArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS storage resource's location.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services storage resource's location.</p>"
         },
         "CloudWatchLogGroupArn": {
           "shape": "LogGroupArn",
@@ -1717,7 +1721,7 @@
         },
         "ErrorCode": {
           "shape": "string",
-          "documentation": "<p>Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.</p>"
+          "documentation": "<p>Errors that DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.</p>"
         },
         "ErrorDetail": {
           "shape": "string",
@@ -1726,6 +1730,10 @@
         "CreationTime": {
           "shape": "Time",
           "documentation": "<p>The time that the task was created.</p>"
+        },
+        "Includes": {
+          "shape": "FilterList",
+          "documentation": "<p>A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by \"|\" (that is, a pipe). For example: <code>\"/folder1|/folder2</code>\"</p>"
         }
       },
       "documentation": "<p>DescribeTaskResponse</p>"
@@ -1819,7 +1827,7 @@
       "members": {
         "FilterType": {
           "shape": "FilterType",
-          "documentation": "<p>The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.</p>"
+          "documentation": "<p>The type of filter rule to apply. DataSync only supports the SIMPLE_PATTERN rule type.</p>"
         },
         "Value": {
           "shape": "FilterValue",
@@ -2233,11 +2241,11 @@
         },
         "OverwriteMode": {
           "shape": "OverwriteMode",
-          "documentation": "<p>A value that determines whether files at the destination should be overwritten or preserved when copying files. If set to <code>NEVER</code> a destination file will not be replaced by a source file, even if the destination file differs from the source file. If you modify files in the destination and you sync the files, you can use this value to protect against overwriting those changes. </p> <p>Some storage classes have specific behaviors that can affect your S3 storage cost. For detailed information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with Amazon S3 storage classes in DataSync </a> in the <i>AWS DataSync User Guide</i>.</p>"
+          "documentation": "<p>A value that determines whether files at the destination should be overwritten or preserved when copying files. If set to <code>NEVER</code> a destination file will not be replaced by a source file, even if the destination file differs from the source file. If you modify files in the destination and you sync the files, you can use this value to protect against overwriting those changes. </p> <p>Some storage classes have specific behaviors that can affect your S3 storage cost. For detailed information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with Amazon S3 storage classes in DataSync </a> in the <i>DataSync User Guide</i>.</p>"
         },
         "Atime": {
           "shape": "Atime",
-          "documentation": "<p>A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to). If you set <code>Atime</code> to BEST_EFFORT, DataSync attempts to preserve the original <code>Atime</code> attribute on all source files (that is, the version before the PREPARING phase). However, <code>Atime</code>'s behavior is not fully standard across platforms, so AWS DataSync can only do this on a best-effort basis. </p> <p>Default value: BEST_EFFORT.</p> <p>BEST_EFFORT: Attempt to preserve the per-file <code>Atime</code> value (recommended).</p> <p>NONE: Ignore <code>Atime</code>.</p> <note> <p>If <code>Atime</code> is set to BEST_EFFORT, <code>Mtime</code> must be set to PRESERVE. </p> <p>If <code>Atime</code> is set to NONE, <code>Mtime</code> must also be NONE. </p> </note>"
+          "documentation": "<p>A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to). If you set <code>Atime</code> to BEST_EFFORT, DataSync attempts to preserve the original <code>Atime</code> attribute on all source files (that is, the version before the PREPARING phase). However, <code>Atime</code>'s behavior is not fully standard across platforms, so DataSync can only do this on a best-effort basis. </p> <p>Default value: BEST_EFFORT.</p> <p>BEST_EFFORT: Attempt to preserve the per-file <code>Atime</code> value (recommended).</p> <p>NONE: Ignore <code>Atime</code>.</p> <note> <p>If <code>Atime</code> is set to BEST_EFFORT, <code>Mtime</code> must be set to PRESERVE. </p> <p>If <code>Atime</code> is set to NONE, <code>Mtime</code> must also be NONE. </p> </note>"
         },
         "Mtime": {
           "shape": "Mtime",
@@ -2253,19 +2261,19 @@
         },
         "PreserveDeletedFiles": {
           "shape": "PreserveDeletedFiles",
-          "documentation": "<p>A value that specifies whether files in the destination that don't exist in the source file system should be preserved. This option can affect your storage cost. If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with Amazon S3 storage classes in DataSync </a> in the <i>AWS DataSync User Guide</i>.</p> <p>Default value: PRESERVE.</p> <p>PRESERVE: Ignore such destination files (recommended). </p> <p>REMOVE: Delete destination files that aren’t present in the source.</p>"
+          "documentation": "<p>A value that specifies whether files in the destination that don't exist in the source file system should be preserved. This option can affect your storage cost. If your task deletes objects, you might incur minimum storage duration charges for certain storage classes. For detailed information, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes\">Considerations when working with Amazon S3 storage classes in DataSync </a> in the <i>DataSync User Guide</i>.</p> <p>Default value: PRESERVE.</p> <p>PRESERVE: Ignore such destination files (recommended). </p> <p>REMOVE: Delete destination files that aren’t present in the source.</p>"
         },
         "PreserveDevices": {
           "shape": "PreserveDevices",
-          "documentation": "<p>A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and re-create the files with that device name and metadata on the destination. DataSync does not copy the contents of such devices, only the name and metadata. </p> <note> <p>AWS DataSync can't sync the actual contents of such devices, because they are nonterminal and don't return an end-of-file (EOF) marker.</p> </note> <p>Default value: NONE.</p> <p>NONE: Ignore special devices (recommended). </p> <p>PRESERVE: Preserve character and block device metadata. This option isn't currently supported for Amazon EFS. </p>"
+          "documentation": "<p>A value that determines whether DataSync should preserve the metadata of block and character devices in the source file system, and re-create the files with that device name and metadata on the destination. DataSync does not copy the contents of such devices, only the name and metadata. </p> <note> <p>DataSync can't sync the actual contents of such devices, because they are nonterminal and don't return an end-of-file (EOF) marker.</p> </note> <p>Default value: NONE.</p> <p>NONE: Ignore special devices (recommended). </p> <p>PRESERVE: Preserve character and block device metadata. This option isn't currently supported for Amazon EFS. </p>"
         },
         "PosixPermissions": {
           "shape": "PosixPermissions",
-          "documentation": "<p>A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file. This option should only be set for NFS, EFS, and S3 locations. For more information about what metadata is copied by DataSync, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied\">Metadata Copied by DataSync</a>. </p> <p>Default value: PRESERVE.</p> <p>PRESERVE: Preserve POSIX-style permissions (recommended).</p> <p>NONE: Ignore permissions. </p> <note> <p>AWS DataSync can preserve extant permissions of a source location.</p> </note>"
+          "documentation": "<p>A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file. This option should only be set for NFS, EFS, and S3 locations. For more information about what metadata is copied by DataSync, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied\">Metadata Copied by DataSync</a>. </p> <p>Default value: PRESERVE.</p> <p>PRESERVE: Preserve POSIX-style permissions (recommended).</p> <p>NONE: Ignore permissions. </p> <note> <p>DataSync can preserve extant permissions of a source location.</p> </note>"
         },
         "BytesPerSecond": {
           "shape": "BytesPerSecond",
-          "documentation": "<p>A value that limits the bandwidth used by AWS DataSync. For example, if you want AWS DataSync to use a maximum of 1 MB, set this value to <code>1048576</code> (<code>=1024*1024</code>).</p>"
+          "documentation": "<p>A value that limits the bandwidth used by DataSync. For example, if you want DataSync to use a maximum of 1 MB, set this value to <code>1048576</code> (<code>=1024*1024</code>).</p>"
         },
         "TaskQueueing": {
           "shape": "TaskQueueing",
@@ -2384,7 +2392,7 @@
           "documentation": "<p>The Amazon S3 bucket to access. This bucket is used as a parameter in the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateLocationS3.html\">CreateLocationS3</a> operation. </p>"
         }
       },
-      "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that is used to access an Amazon S3 bucket.</p> <p>For detailed information about using such a role, see Creating a Location for Amazon S3 in the <i>AWS DataSync User Guide</i>.</p>"
+      "documentation": "<p>The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role that is used to access an Amazon S3 bucket.</p> <p>For detailed information about using such a role, see Creating a Location for Amazon S3 in the <i>DataSync User Guide</i>.</p>"
     },
     "S3StorageClass": {
       "type": "string",
@@ -2482,6 +2490,10 @@
         "Includes": {
           "shape": "FilterList",
           "documentation": "<p>A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by \"|\" (that is, a pipe). For example: <code>\"/folder1|/folder2\"</code> </p> <p> </p>"
+        },
+        "Excludes": {
+          "shape": "FilterList",
+          "documentation": "<p>A list of filter rules that determines which files to exclude from a task. The list should contain a single filter string that consists of the patterns to exclude. The patterns are delimited by \"|\" (that is, a pipe), for example, <code>\"/folder1|/folder2\"</code>. </p>"
         }
       },
       "documentation": "<p>StartTaskExecutionRequest</p>"
@@ -2518,11 +2530,11 @@
       "members": {
         "Key": {
           "shape": "TagKey",
-          "documentation": "<p>The key for an AWS resource tag.</p>"
+          "documentation": "<p>The key for an Amazon Web Services resource tag.</p>"
         },
         "Value": {
           "shape": "TagValue",
-          "documentation": "<p>The value for an AWS resource tag.</p>"
+          "documentation": "<p>The value for an Amazon Web Services resource tag.</p>"
         }
       },
       "documentation": "<p>Represents a single entry in a list of AWS resource tags. <code>TagListEntry</code> returns an array that contains a list of tasks when the <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/API_ListTagsForResource.html\">ListTagsForResource</a> operation is called.</p>"
@@ -2595,7 +2607,7 @@
       "members": {
         "PrepareDuration": {
           "shape": "Duration",
-          "documentation": "<p>The total time in milliseconds that AWS DataSync spent in the PREPARING phase. </p>"
+          "documentation": "<p>The total time in milliseconds that DataSync spent in the PREPARING phase. </p>"
         },
         "PrepareStatus": {
           "shape": "PhaseStatus",
@@ -2603,11 +2615,11 @@
         },
         "TotalDuration": {
           "shape": "Duration",
-          "documentation": "<p>The total time in milliseconds that AWS DataSync took to transfer the file from the source to the destination location.</p>"
+          "documentation": "<p>The total time in milliseconds that DataSync took to transfer the file from the source to the destination location.</p>"
         },
         "TransferDuration": {
           "shape": "Duration",
-          "documentation": "<p>The total time in milliseconds that AWS DataSync spent in the TRANSFERRING phase.</p>"
+          "documentation": "<p>The total time in milliseconds that DataSync spent in the TRANSFERRING phase.</p>"
         },
         "TransferStatus": {
           "shape": "PhaseStatus",
@@ -2615,7 +2627,7 @@
         },
         "VerifyDuration": {
           "shape": "Duration",
-          "documentation": "<p>The total time in milliseconds that AWS DataSync spent in the VERIFYING phase.</p>"
+          "documentation": "<p>The total time in milliseconds that DataSync spent in the VERIFYING phase.</p>"
         },
         "VerifyStatus": {
           "shape": "PhaseStatus",
@@ -2623,7 +2635,7 @@
         },
         "ErrorCode": {
           "shape": "string",
-          "documentation": "<p>Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.</p>"
+          "documentation": "<p>Errors that DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.</p>"
         },
         "ErrorDetail": {
           "shape": "string",
@@ -2719,7 +2731,7 @@
       "members": {
         "ScheduleExpression": {
           "shape": "ScheduleExpressionCron",
-          "documentation": "<p>A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location. </p>"
+          "documentation": "<p>A cron expression that specifies when DataSync initiates a scheduled transfer from a source to a destination location. </p>"
         }
       },
       "documentation": "<p>Specifies the schedule you want your task to use for repeated executions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">Schedule Expressions for Rules</a>.</p>"
@@ -2808,7 +2820,7 @@
         },
         "Subdirectory": {
           "shape": "NfsSubdirectory",
-          "documentation": "<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network.</p> <p>To see all the paths exported by your NFS server, run \"<code>showmount -e nfs-server-name</code>\" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder that you specified, DataSync must have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash</code>, or ensure that the files you want DataSync to access have permissions that allow read access for all users. Doing either option enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>If you are copying data to or from your AWS Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on AWS Snowcone</a> for more information.</p> <p>For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.</p>"
+          "documentation": "<p>The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination. The NFS path should be a path that's exported by the NFS server, or a subdirectory of that path. The path should be such that it can be mounted by other NFS clients in your network.</p> <p>To see all the paths exported by your NFS server, run \"<code>showmount -e nfs-server-name</code>\" from an NFS client that has access to your server. You can specify any directory that appears in the results, and any subdirectory of that directory. Ensure that the NFS export is accessible without Kerberos authentication. </p> <p>To transfer all the data in the folder that you specified, DataSync must have permissions to read all the data. To ensure this, either configure the NFS export with <code>no_root_squash</code>, or ensure that the files you want DataSync to access have permissions that allow read access for all users. Doing either option enables the agent to read the files. For the agent to access directories, you must additionally enable all execute access.</p> <p>If you are copying data to or from your Snowcone device, see <a href=\"https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone\">NFS Server on Snowcone</a> for more information.</p> <p>For information about NFS export configuration, see 18.7. The /etc/exports Configuration File in the Red Hat Enterprise Linux documentation.</p>"
         },
         "OnPremConfig": {
           "shape": "OnPremConfig"
@@ -2949,6 +2961,10 @@
         "CloudWatchLogGroupArn": {
           "shape": "LogGroupArn",
           "documentation": "<p>The Amazon Resource Name (ARN) of the resource name of the CloudWatch LogGroup.</p>"
+        },
+        "Includes": {
+          "shape": "FilterList",
+          "documentation": "<p>A list of filter rules that determines which files to include when running a task. The pattern should contain a single filter string that consists of the patterns to include. The patterns are delimited by \"|\" (that is, a pipe). For example: <code>\"/folder1|/folder2</code>\"</p>"
         }
       },
       "documentation": "<p>UpdateTaskResponse</p>"
@@ -2976,5 +2992,5 @@
       "type": "string"
     }
   },
-  "documentation": "<fullname>AWS DataSync</fullname> <p>AWS DataSync is a managed data transfer service that makes it simpler for you to automate moving data between on-premises storage and Amazon Simple Storage Service (Amazon S3) or Amazon Elastic File System (Amazon EFS). </p> <p>This API interface reference for AWS DataSync contains documentation for a programming interface that you can use to manage AWS DataSync.</p>"
+  "documentation": "<fullname>DataSync</fullname> <p>DataSync is a managed data transfer service that makes it simpler for you to automate moving data between on-premises storage and Amazon Simple Storage Service (Amazon S3) or Amazon Elastic File System (Amazon EFS). </p> <p>This API interface reference for DataSync contains documentation for a programming interface that you can use to manage DataSync.</p>"
 }
