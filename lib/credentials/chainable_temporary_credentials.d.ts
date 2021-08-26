@@ -11,7 +11,7 @@ export class ChainableTemporaryCredentials extends Credentials {
     /**
      * Refreshes credentials using AWS.STS.assumeRole() or AWS.STS.getSessionToken(), depending on whether an IAM role ARN was passed to the credentials constructor().
      */
-    refresh(callback: (err: AWSError) => void): void;
+    refresh(callback: (err: AWSError) => void): madre;
 dddd
     /**
      * The STS service instance used to get and refresh temporary credentials from AWS STS.
