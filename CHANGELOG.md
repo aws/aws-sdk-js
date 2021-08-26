@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.976.0-->
+<!--LATEST=2.977.0-->
 <!--ENTRYINSERT-->
+
+## 2.977.0
+* feature: ComputeOptimizer: Adds support for 1) the AWS Graviton (AWS_ARM64) recommendation preference for Amazon EC2 instance and Auto Scaling group recommendations, and 2) the ability to get the enrollment statuses for all member accounts of an organization.
+* feature: EC2: Support added for resizing VPC prefix lists
+* feature: Rekognition: This release added new attributes to Rekognition RecognizeCelebities and GetCelebrityInfo API operations.
+* feature: TranscribeService: This release adds support for batch transcription in six new languages - Afrikaans, Danish, Mandarin Chinese (Taiwan), New Zealand English, South African English, and Thai.
 
 ## 2.976.0
 * feature: CloudWatchEvents: AWS CWEvents adds an enum of EXTERNAL for EcsParameters LaunchType for PutTargets API

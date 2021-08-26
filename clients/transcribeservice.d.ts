@@ -931,7 +931,7 @@ declare namespace TranscribeService {
     DataAccessRoleArn?: DataAccessRoleArn;
   }
   export type KMSKeyId = string;
-  export type LanguageCode = "af-ZA"|"ar-AE"|"ar-SA"|"cy-GB"|"da-DK"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fa-IR"|"fr-CA"|"fr-FR"|"ga-IE"|"gd-GB"|"he-IL"|"hi-IN"|"id-ID"|"it-IT"|"ja-JP"|"ko-KR"|"ms-MY"|"nl-NL"|"pt-BR"|"pt-PT"|"ru-RU"|"ta-IN"|"te-IN"|"tr-TR"|"zh-CN"|string;
+  export type LanguageCode = "af-ZA"|"ar-AE"|"ar-SA"|"cy-GB"|"da-DK"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fa-IR"|"fr-CA"|"fr-FR"|"ga-IE"|"gd-GB"|"he-IL"|"hi-IN"|"id-ID"|"it-IT"|"ja-JP"|"ko-KR"|"ms-MY"|"nl-NL"|"pt-BR"|"pt-PT"|"ru-RU"|"ta-IN"|"te-IN"|"tr-TR"|"zh-CN"|"zh-TW"|"th-TH"|"en-ZA"|"en-NZ"|string;
   export interface LanguageModel {
     /**
      * The name of the custom language model.
@@ -1141,7 +1141,7 @@ declare namespace TranscribeService {
      */
     JobNameContains?: TranscriptionJobName;
     /**
-     * If the result of the previous request to ListTranscriptionJobs was truncated, include the NextToken to fetch the next set of jobs.
+     * If the result of the previous request to ListTranscriptionJobs is truncated, include the NextToken to fetch the next set of jobs.
      */
     NextToken?: NextToken;
     /**
@@ -1773,7 +1773,7 @@ declare namespace TranscribeService {
      */
     CreationTime?: DateTime;
     /**
-     * A timestamp that shows when the job was completed.
+     * A timestamp that shows when the job completed.
      */
     CompletionTime?: DateTime;
     /**

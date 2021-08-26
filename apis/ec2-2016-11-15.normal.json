@@ -1294,7 +1294,7 @@
       "output": {
         "shape": "CreateTransitGatewayConnectResult"
       },
-      "documentation": "<p>Creates a Connect attachment from a specified transit gateway attachment. A Connect attachment is a GRE-based tunnel attachment that you can use to establish a connection between a transit gateway and an appliance.</p> <p>A Connect attachment uses an existing VPC or AWS Direct Connect attachment as the underlying transport mechanism. </p>"
+      "documentation": "<p>Creates a Connect attachment from a specified transit gateway attachment. A Connect attachment is a GRE-based tunnel attachment that you can use to establish a connection between a transit gateway and an appliance.</p> <p>A Connect attachment uses an existing VPC or Amazon Web Services Direct Connect attachment as the underlying transport mechanism.</p>"
     },
     "CreateTransitGatewayConnectPeer": {
       "name": "CreateTransitGatewayConnectPeer",
@@ -1336,7 +1336,7 @@
       "output": {
         "shape": "CreateTransitGatewayPeeringAttachmentResult"
       },
-      "documentation": "<p>Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter). The transit gateways must be in different Regions. The peer transit gateway can be in your account or a different AWS account. </p> <p>After you create the peering attachment, the owner of the accepter transit gateway must accept the attachment request.</p>"
+      "documentation": "<p>Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter). The transit gateways must be in different Regions. The peer transit gateway can be in your account or a different Amazon Web Services account.</p> <p>After you create the peering attachment, the owner of the accepter transit gateway must accept the attachment request.</p>"
     },
     "CreateTransitGatewayPrefixListReference": {
       "name": "CreateTransitGatewayPrefixListReference",
@@ -13152,7 +13152,7 @@
       "members": {
         "TransportTransitGatewayAttachmentId": {
           "shape": "TransitGatewayAttachmentId",
-          "documentation": "<p>The ID of the transit gateway attachment. You can specify a VPC attachment or a AWS Direct Connect attachment.</p>"
+          "documentation": "<p>The ID of the transit gateway attachment. You can specify a VPC attachment or Amazon Web Services Direct Connect attachment.</p>"
         },
         "Options": {
           "shape": "CreateTransitGatewayConnectRequestOptions",
@@ -13264,7 +13264,7 @@
         },
         "PeerAccountId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID of the owner of the peer transit gateway.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the peer transit gateway.</p>"
         },
         "PeerRegion": {
           "shape": "String",
@@ -20278,7 +20278,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>association.state</code> - The state of the association (<code>associating</code> | <code>associated</code> | <code>disassociating</code>).</p> </li> <li> <p> <code>association.transit-gateway-route-table-id</code> - The ID of the route table for the transit gateway.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-owner-id</code> - The ID of the AWS account that owns the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code> | <code>connect</code>.</p> </li> <li> <p> <code>state</code> - The state of the attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>failing</code> | <code>initiatingRequest</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-owner-id</code> - The ID of the AWS account that owns the transit gateway.</p> </li> </ul>",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>association.state</code> - The state of the association (<code>associating</code> | <code>associated</code> | <code>disassociating</code>).</p> </li> <li> <p> <code>association.transit-gateway-route-table-id</code> - The ID of the route table for the transit gateway.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-owner-id</code> - The ID of the Amazon Web Services account that owns the resource.</p> </li> <li> <p> <code>resource-type</code> - The resource type. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code> | <code>connect</code>.</p> </li> <li> <p> <code>state</code> - The state of the attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>failing</code> | <code>initiatingRequest</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> <li> <p> <code>transit-gateway-owner-id</code> - The ID of the Amazon Web Services account that owns the transit gateway.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -20442,7 +20442,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the transit gateway attachment.</p> </li> <li> <p> <code>local-owner-id</code> - The ID of your AWS account.</p> </li> <li> <p> <code>remote-owner-id</code> - The ID of the AWS account in the remote Region that owns the transit gateway.</p> </li> <li> <p> <code>state</code> - The state of the peering attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>failing</code> | <code>initiatingRequest</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> </ul>",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>transit-gateway-attachment-id</code> - The ID of the transit gateway attachment.</p> </li> <li> <p> <code>local-owner-id</code> - The ID of your Amazon Web Services account.</p> </li> <li> <p> <code>remote-owner-id</code> - The ID of the Amazon Web Services account in the remote Region that owns the transit gateway.</p> </li> <li> <p> <code>state</code> - The state of the peering attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> | <code>failing</code> | <code>initiatingRequest</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>).</p> </li> <li> <p> <code>tag</code>:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p> </li> <li> <p> <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -20565,7 +20565,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>options.propagation-default-route-table-id</code> - The ID of the default propagation route table.</p> </li> <li> <p> <code>options.amazon-side-asn</code> - The private ASN for the Amazon side of a BGP session.</p> </li> <li> <p> <code>options.association-default-route-table-id</code> - The ID of the default association route table.</p> </li> <li> <p> <code>options.auto-accept-shared-attachments</code> - Indicates whether there is automatic acceptance of attachment requests (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.default-route-table-association</code> - Indicates whether resource attachments are automatically associated with the default association route table (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.default-route-table-propagation</code> - Indicates whether resource attachments automatically propagate routes to the default propagation route table (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.dns-support</code> - Indicates whether DNS support is enabled (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.vpn-ecmp-support</code> - Indicates whether Equal Cost Multipath Protocol support is enabled (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>owner-id</code> - The ID of the AWS account that owns the transit gateway.</p> </li> <li> <p> <code>state</code> - The state of the transit gateway (<code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>modifying</code> | <code>pending</code>).</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> </ul>",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>options.propagation-default-route-table-id</code> - The ID of the default propagation route table.</p> </li> <li> <p> <code>options.amazon-side-asn</code> - The private ASN for the Amazon side of a BGP session.</p> </li> <li> <p> <code>options.association-default-route-table-id</code> - The ID of the default association route table.</p> </li> <li> <p> <code>options.auto-accept-shared-attachments</code> - Indicates whether there is automatic acceptance of attachment requests (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.default-route-table-association</code> - Indicates whether resource attachments are automatically associated with the default association route table (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.default-route-table-propagation</code> - Indicates whether resource attachments automatically propagate routes to the default propagation route table (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.dns-support</code> - Indicates whether DNS support is enabled (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>options.vpn-ecmp-support</code> - Indicates whether Equal Cost Multipath Protocol support is enabled (<code>enable</code> | <code>disable</code>).</p> </li> <li> <p> <code>owner-id</code> - The ID of the Amazon Web Services account that owns the transit gateway.</p> </li> <li> <p> <code>state</code> - The state of the transit gateway (<code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>modifying</code> | <code>pending</code>).</p> </li> <li> <p> <code>transit-gateway-id</code> - The ID of the transit gateway.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -22166,7 +22166,7 @@
       "members": {
         "AssociationId": {
           "shape": "TrunkInterfaceAssociationId",
-          "documentation": "<p>The ID ofthe association</p>"
+          "documentation": "<p>The ID of the association</p>"
         },
         "ClientToken": {
           "shape": "String",
@@ -33108,6 +33108,10 @@
           "shape": "RemovePrefixListEntries",
           "documentation": "<p>One or more entries to remove from the prefix list.</p>",
           "locationName": "RemoveEntry"
+        },
+        "MaxEntries": {
+          "shape": "Integer",
+          "documentation": "<p>The maximum number of entries for the prefix list. You cannot modify the entries of a prefix list and modify the size of a prefix list at the same time.</p>"
         }
       }
     },
@@ -33636,7 +33640,7 @@
         },
         "Options": {
           "shape": "ModifyTransitGatewayVpcAttachmentRequestOptions",
-          "documentation": "<p>The new VPC attachment options.</p> <note> <p>You cannot modify the IPv6 options.</p> </note>"
+          "documentation": "<p>The new VPC attachment options.</p>"
         },
         "DryRun": {
           "shape": "Boolean",
@@ -35634,7 +35638,7 @@
         },
         "OwnerId": {
           "shape": "String",
-          "documentation": "<p>The AWS account ID of the owner of the transit gateway.</p>",
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the transit gateway.</p>",
           "locationName": "ownerId"
         },
         "Region": {
@@ -40566,7 +40570,7 @@
         },
         "Filters": {
           "shape": "FilterList",
-          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>group-ip-address</code> - The IP address of the transit gateway multicast group.</p> </li> <li> <p> <code>is-group-member</code> - The resource is a group member. Valid values are <code>true</code> | <code>false</code>.</p> </li> <li> <p> <code>is-group-source</code> - The resource is a group source. Valid values are <code>true</code> | <code>false</code>.</p> </li> <li> <p> <code>member-type</code> - The member type. Valid values are <code>igmp</code> | <code>static</code>.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The type of resource. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>tgw-peering</code>.</p> </li> <li> <p> <code>source-type</code> - The source type. Valid values are <code>igmp</code> | <code>static</code>.</p> </li> <li> <p> <code>state</code> - The state of the subnet association. Valid values are <code>associated</code> | <code>associated</code> | <code>disassociated</code> | <code>disassociating</code>.</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The id of the transit gateway attachment.</p> </li> </ul>",
+          "documentation": "<p>One or more filters. The possible values are:</p> <ul> <li> <p> <code>group-ip-address</code> - The IP address of the transit gateway multicast group.</p> </li> <li> <p> <code>is-group-member</code> - The resource is a group member. Valid values are <code>true</code> | <code>false</code>.</p> </li> <li> <p> <code>is-group-source</code> - The resource is a group source. Valid values are <code>true</code> | <code>false</code>.</p> </li> <li> <p> <code>member-type</code> - The member type. Valid values are <code>igmp</code> | <code>static</code>.</p> </li> <li> <p> <code>resource-id</code> - The ID of the resource.</p> </li> <li> <p> <code>resource-type</code> - The type of resource. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>tgw-peering</code>.</p> </li> <li> <p> <code>source-type</code> - The source type. Valid values are <code>igmp</code> | <code>static</code>.</p> </li> <li> <p> <code>subnet-id</code> - The ID of the subnet.</p> </li> <li> <p> <code>transit-gateway-attachment-id</code> - The id of the transit gateway attachment.</p> </li> </ul>",
           "locationName": "Filter"
         },
         "MaxResults": {
@@ -43682,7 +43686,7 @@
         },
         "OwnerId": {
           "shape": "String",
-          "documentation": "<p>The ID of the AWS account ID that owns the transit gateway.</p>",
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the transit gateway.</p>",
           "locationName": "ownerId"
         },
         "Description": {
@@ -43763,12 +43767,12 @@
         },
         "TransitGatewayOwnerId": {
           "shape": "String",
-          "documentation": "<p>The ID of the AWS account that owns the transit gateway.</p>",
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the transit gateway.</p>",
           "locationName": "transitGatewayOwnerId"
         },
         "ResourceOwnerId": {
           "shape": "String",
-          "documentation": "<p>The ID of the AWS account that owns the resource.</p>",
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the resource.</p>",
           "locationName": "resourceOwnerId"
         },
         "ResourceType": {
@@ -44191,7 +44195,7 @@
         },
         "OwnerId": {
           "shape": "String",
-          "documentation": "<p> The ID of the AWS account that owns the transit gateway multiicast domain.</p>",
+          "documentation": "<p> The ID of the Amazon Web Services account that owns the transit gateway multicast domain.</p>",
           "locationName": "ownerId"
         },
         "Options": {
@@ -44237,7 +44241,7 @@
         },
         "ResourceOwnerId": {
           "shape": "String",
-          "documentation": "<p> The ID of the AWS account that owns the transit gateway multicast domain association resource.</p>",
+          "documentation": "<p> The ID of the Amazon Web Services account that owns the transit gateway multicast domain association resource.</p>",
           "locationName": "resourceOwnerId"
         },
         "Subnet": {
@@ -44280,7 +44284,7 @@
         },
         "ResourceOwnerId": {
           "shape": "String",
-          "documentation": "<p> The ID of the AWS account that owns the resource.</p>",
+          "documentation": "<p> The ID of the Amazon Web Services account that owns the resource.</p>",
           "locationName": "resourceOwnerId"
         },
         "Subnets": {
@@ -44368,7 +44372,7 @@
         },
         "ResourceOwnerId": {
           "shape": "String",
-          "documentation": "<p> The ID of the AWS account that owns the transit gateway multicast domain group resource.</p>",
+          "documentation": "<p> The ID of the Amazon Web Services account that owns the transit gateway multicast domain group resource.</p>",
           "locationName": "resourceOwnerId"
         },
         "NetworkInterfaceId": {
@@ -44963,7 +44967,7 @@
         },
         "VpcOwnerId": {
           "shape": "String",
-          "documentation": "<p>The ID of the AWS account that owns the VPC.</p>",
+          "documentation": "<p>The ID of the Amazon Web Services account that owns the VPC.</p>",
           "locationName": "vpcOwnerId"
         },
         "State": {
@@ -45064,7 +45068,7 @@
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>The tags for the trunk interface associaton.</p>",
+          "documentation": "<p>The tags for the trunk interface association.</p>",
           "locationName": "tagSet"
         }
       },

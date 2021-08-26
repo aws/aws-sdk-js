@@ -749,11 +749,11 @@ declare class EC2 extends Service {
    */
   createTransitGateway(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayResult) => void): Request<EC2.Types.CreateTransitGatewayResult, AWSError>;
   /**
-   * Creates a Connect attachment from a specified transit gateway attachment. A Connect attachment is a GRE-based tunnel attachment that you can use to establish a connection between a transit gateway and an appliance. A Connect attachment uses an existing VPC or AWS Direct Connect attachment as the underlying transport mechanism. 
+   * Creates a Connect attachment from a specified transit gateway attachment. A Connect attachment is a GRE-based tunnel attachment that you can use to establish a connection between a transit gateway and an appliance. A Connect attachment uses an existing VPC or Amazon Web Services Direct Connect attachment as the underlying transport mechanism.
    */
   createTransitGatewayConnect(params: EC2.Types.CreateTransitGatewayConnectRequest, callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayConnectResult) => void): Request<EC2.Types.CreateTransitGatewayConnectResult, AWSError>;
   /**
-   * Creates a Connect attachment from a specified transit gateway attachment. A Connect attachment is a GRE-based tunnel attachment that you can use to establish a connection between a transit gateway and an appliance. A Connect attachment uses an existing VPC or AWS Direct Connect attachment as the underlying transport mechanism. 
+   * Creates a Connect attachment from a specified transit gateway attachment. A Connect attachment is a GRE-based tunnel attachment that you can use to establish a connection between a transit gateway and an appliance. A Connect attachment uses an existing VPC or Amazon Web Services Direct Connect attachment as the underlying transport mechanism.
    */
   createTransitGatewayConnect(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayConnectResult) => void): Request<EC2.Types.CreateTransitGatewayConnectResult, AWSError>;
   /**
@@ -773,11 +773,11 @@ declare class EC2 extends Service {
    */
   createTransitGatewayMulticastDomain(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayMulticastDomainResult) => void): Request<EC2.Types.CreateTransitGatewayMulticastDomainResult, AWSError>;
   /**
-   * Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter). The transit gateways must be in different Regions. The peer transit gateway can be in your account or a different AWS account.  After you create the peering attachment, the owner of the accepter transit gateway must accept the attachment request.
+   * Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter). The transit gateways must be in different Regions. The peer transit gateway can be in your account or a different Amazon Web Services account. After you create the peering attachment, the owner of the accepter transit gateway must accept the attachment request.
    */
   createTransitGatewayPeeringAttachment(params: EC2.Types.CreateTransitGatewayPeeringAttachmentRequest, callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayPeeringAttachmentResult) => void): Request<EC2.Types.CreateTransitGatewayPeeringAttachmentResult, AWSError>;
   /**
-   * Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter). The transit gateways must be in different Regions. The peer transit gateway can be in your account or a different AWS account.  After you create the peering attachment, the owner of the accepter transit gateway must accept the attachment request.
+   * Requests a transit gateway peering attachment between the specified transit gateway (requester) and a peer transit gateway (accepter). The transit gateways must be in different Regions. The peer transit gateway can be in your account or a different Amazon Web Services account. After you create the peering attachment, the owner of the accepter transit gateway must accept the attachment request.
    */
   createTransitGatewayPeeringAttachment(callback?: (err: AWSError, data: EC2.Types.CreateTransitGatewayPeeringAttachmentResult) => void): Request<EC2.Types.CreateTransitGatewayPeeringAttachmentResult, AWSError>;
   /**
@@ -8273,7 +8273,7 @@ declare namespace EC2 {
   }
   export interface CreateTransitGatewayConnectRequest {
     /**
-     * The ID of the transit gateway attachment. You can specify a VPC attachment or a AWS Direct Connect attachment.
+     * The ID of the transit gateway attachment. You can specify a VPC attachment or Amazon Web Services Direct Connect attachment.
      */
     TransportTransitGatewayAttachmentId: TransitGatewayAttachmentId;
     /**
@@ -8349,7 +8349,7 @@ declare namespace EC2 {
      */
     PeerTransitGatewayId: TransitAssociationGatewayId;
     /**
-     * The AWS account ID of the owner of the peer transit gateway.
+     * The ID of the Amazon Web Services account that owns the peer transit gateway.
      */
     PeerAccountId: String;
     /**
@@ -13112,7 +13112,7 @@ declare namespace EC2 {
      */
     TransitGatewayAttachmentIds?: TransitGatewayAttachmentIdStringList;
     /**
-     * One or more filters. The possible values are:    association.state - The state of the association (associating | associated | disassociating).    association.transit-gateway-route-table-id - The ID of the route table for the transit gateway.    resource-id - The ID of the resource.    resource-owner-id - The ID of the AWS account that owns the resource.    resource-type - The resource type. Valid values are vpc | vpn | direct-connect-gateway | peering | connect.    state - The state of the attachment. Valid values are available | deleted | deleting | failed | failing | initiatingRequest | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting.    transit-gateway-attachment-id - The ID of the attachment.    transit-gateway-id - The ID of the transit gateway.    transit-gateway-owner-id - The ID of the AWS account that owns the transit gateway.  
+     * One or more filters. The possible values are:    association.state - The state of the association (associating | associated | disassociating).    association.transit-gateway-route-table-id - The ID of the route table for the transit gateway.    resource-id - The ID of the resource.    resource-owner-id - The ID of the Amazon Web Services account that owns the resource.    resource-type - The resource type. Valid values are vpc | vpn | direct-connect-gateway | peering | connect.    state - The state of the attachment. Valid values are available | deleted | deleting | failed | failing | initiatingRequest | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting.    transit-gateway-attachment-id - The ID of the attachment.    transit-gateway-id - The ID of the transit gateway.    transit-gateway-owner-id - The ID of the Amazon Web Services account that owns the transit gateway.  
      */
     Filters?: FilterList;
     /**
@@ -13240,7 +13240,7 @@ declare namespace EC2 {
      */
     TransitGatewayAttachmentIds?: TransitGatewayAttachmentIdStringList;
     /**
-     * One or more filters. The possible values are:    transit-gateway-attachment-id - The ID of the transit gateway attachment.    local-owner-id - The ID of your AWS account.    remote-owner-id - The ID of the AWS account in the remote Region that owns the transit gateway.    state - The state of the peering attachment. Valid values are available | deleted | deleting | failed | failing | initiatingRequest | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.    transit-gateway-id - The ID of the transit gateway.  
+     * One or more filters. The possible values are:    transit-gateway-attachment-id - The ID of the transit gateway attachment.    local-owner-id - The ID of your Amazon Web Services account.    remote-owner-id - The ID of the Amazon Web Services account in the remote Region that owns the transit gateway.    state - The state of the peering attachment. Valid values are available | deleted | deleting | failed | failing | initiatingRequest | modifying | pendingAcceptance | pending | rollingBack | rejected | rejecting).    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.    transit-gateway-id - The ID of the transit gateway.  
      */
     Filters?: FilterList;
     /**
@@ -13336,7 +13336,7 @@ declare namespace EC2 {
      */
     TransitGatewayIds?: TransitGatewayIdStringList;
     /**
-     * One or more filters. The possible values are:    options.propagation-default-route-table-id - The ID of the default propagation route table.    options.amazon-side-asn - The private ASN for the Amazon side of a BGP session.    options.association-default-route-table-id - The ID of the default association route table.    options.auto-accept-shared-attachments - Indicates whether there is automatic acceptance of attachment requests (enable | disable).    options.default-route-table-association - Indicates whether resource attachments are automatically associated with the default association route table (enable | disable).    options.default-route-table-propagation - Indicates whether resource attachments automatically propagate routes to the default propagation route table (enable | disable).    options.dns-support - Indicates whether DNS support is enabled (enable | disable).    options.vpn-ecmp-support - Indicates whether Equal Cost Multipath Protocol support is enabled (enable | disable).    owner-id - The ID of the AWS account that owns the transit gateway.    state - The state of the transit gateway (available | deleted | deleting | modifying | pending).    transit-gateway-id - The ID of the transit gateway.  
+     * One or more filters. The possible values are:    options.propagation-default-route-table-id - The ID of the default propagation route table.    options.amazon-side-asn - The private ASN for the Amazon side of a BGP session.    options.association-default-route-table-id - The ID of the default association route table.    options.auto-accept-shared-attachments - Indicates whether there is automatic acceptance of attachment requests (enable | disable).    options.default-route-table-association - Indicates whether resource attachments are automatically associated with the default association route table (enable | disable).    options.default-route-table-propagation - Indicates whether resource attachments automatically propagate routes to the default propagation route table (enable | disable).    options.dns-support - Indicates whether DNS support is enabled (enable | disable).    options.vpn-ecmp-support - Indicates whether Equal Cost Multipath Protocol support is enabled (enable | disable).    owner-id - The ID of the Amazon Web Services account that owns the transit gateway.    state - The state of the transit gateway (available | deleted | deleting | modifying | pending).    transit-gateway-id - The ID of the transit gateway.  
      */
     Filters?: FilterList;
     /**
@@ -14388,7 +14388,7 @@ declare namespace EC2 {
   }
   export interface DisassociateTrunkInterfaceRequest {
     /**
-     * The ID ofthe association
+     * The ID of the association
      */
     AssociationId: TrunkInterfaceAssociationId;
     /**
@@ -20846,6 +20846,10 @@ declare namespace EC2 {
      * One or more entries to remove from the prefix list.
      */
     RemoveEntries?: RemovePrefixListEntries;
+    /**
+     * The maximum number of entries for the prefix list. You cannot modify the entries of a prefix list and modify the size of a prefix list at the same time.
+     */
+    MaxEntries?: Integer;
   }
   export interface ModifyManagedPrefixListResult {
     /**
@@ -21228,7 +21232,7 @@ declare namespace EC2 {
      */
     RemoveSubnetIds?: TransitGatewaySubnetIdList;
     /**
-     * The new VPC attachment options.  You cannot modify the IPv6 options. 
+     * The new VPC attachment options.
      */
     Options?: ModifyTransitGatewayVpcAttachmentRequestOptions;
     /**
@@ -22481,7 +22485,7 @@ declare namespace EC2 {
      */
     TransitGatewayId?: String;
     /**
-     * The AWS account ID of the owner of the transit gateway.
+     * The ID of the Amazon Web Services account that owns the transit gateway.
      */
     OwnerId?: String;
     /**
@@ -25478,7 +25482,7 @@ declare namespace EC2 {
      */
     TransitGatewayMulticastDomainId?: TransitGatewayMulticastDomainId;
     /**
-     * One or more filters. The possible values are:    group-ip-address - The IP address of the transit gateway multicast group.    is-group-member - The resource is a group member. Valid values are true | false.    is-group-source - The resource is a group source. Valid values are true | false.    member-type - The member type. Valid values are igmp | static.    resource-id - The ID of the resource.    resource-type - The type of resource. Valid values are vpc | vpn | direct-connect-gateway | tgw-peering.    source-type - The source type. Valid values are igmp | static.    state - The state of the subnet association. Valid values are associated | associated | disassociated | disassociating.    subnet-id - The ID of the subnet.    transit-gateway-attachment-id - The id of the transit gateway attachment.  
+     * One or more filters. The possible values are:    group-ip-address - The IP address of the transit gateway multicast group.    is-group-member - The resource is a group member. Valid values are true | false.    is-group-source - The resource is a group source. Valid values are true | false.    member-type - The member type. Valid values are igmp | static.    resource-id - The ID of the resource.    resource-type - The type of resource. Valid values are vpc | vpn | direct-connect-gateway | tgw-peering.    source-type - The source type. Valid values are igmp | static.    subnet-id - The ID of the subnet.    transit-gateway-attachment-id - The id of the transit gateway attachment.  
      */
     Filters?: FilterList;
     /**
@@ -27358,7 +27362,7 @@ declare namespace EC2 {
      */
     State?: TransitGatewayState;
     /**
-     * The ID of the AWS account ID that owns the transit gateway.
+     * The ID of the Amazon Web Services account that owns the transit gateway.
      */
     OwnerId?: String;
     /**
@@ -27411,11 +27415,11 @@ declare namespace EC2 {
      */
     TransitGatewayId?: String;
     /**
-     * The ID of the AWS account that owns the transit gateway.
+     * The ID of the Amazon Web Services account that owns the transit gateway.
      */
     TransitGatewayOwnerId?: String;
     /**
-     * The ID of the AWS account that owns the resource.
+     * The ID of the Amazon Web Services account that owns the resource.
      */
     ResourceOwnerId?: String;
     /**
@@ -27635,7 +27639,7 @@ declare namespace EC2 {
      */
     TransitGatewayMulticastDomainArn?: String;
     /**
-     *  The ID of the AWS account that owns the transit gateway multiicast domain.
+     *  The ID of the Amazon Web Services account that owns the transit gateway multicast domain.
      */
     OwnerId?: String;
     /**
@@ -27669,7 +27673,7 @@ declare namespace EC2 {
      */
     ResourceType?: TransitGatewayAttachmentResourceType;
     /**
-     *  The ID of the AWS account that owns the transit gateway multicast domain association resource.
+     *  The ID of the Amazon Web Services account that owns the transit gateway multicast domain association resource.
      */
     ResourceOwnerId?: String;
     /**
@@ -27696,7 +27700,7 @@ declare namespace EC2 {
      */
     ResourceType?: TransitGatewayAttachmentResourceType;
     /**
-     *  The ID of the AWS account that owns the resource.
+     *  The ID of the Amazon Web Services account that owns the resource.
      */
     ResourceOwnerId?: String;
     /**
@@ -27744,7 +27748,7 @@ declare namespace EC2 {
      */
     ResourceType?: TransitGatewayAttachmentResourceType;
     /**
-     *  The ID of the AWS account that owns the transit gateway multicast domain group resource.
+     *  The ID of the Amazon Web Services account that owns the transit gateway multicast domain group resource.
      */
     ResourceOwnerId?: String;
     /**
@@ -28098,7 +28102,7 @@ declare namespace EC2 {
      */
     VpcId?: String;
     /**
-     * The ID of the AWS account that owns the VPC.
+     * The ID of the Amazon Web Services account that owns the VPC.
      */
     VpcOwnerId?: String;
     /**
@@ -28164,7 +28168,7 @@ declare namespace EC2 {
      */
     GreKey?: Integer;
     /**
-     * The tags for the trunk interface associaton.
+     * The tags for the trunk interface association.
      */
     Tags?: TagList;
   }
