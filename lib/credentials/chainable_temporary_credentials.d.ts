@@ -7,6 +7,8 @@ export class ChainableTemporaryCredentials extends Credentials {
     /**
      * Creates a new temporary credentials object.
      */
+
+    /**hay mas cosas en este contructor  */
     constructor(options?: ChainableTemporaryCredentials.ChainableTemporaryCredentialsOptions);
     /**
      * Refreshes credentials using AWS.STS.assumeRole() or AWS.STS.getSessionToken(), depending on whether an IAM role ARN was passed to the credentials constructor().
