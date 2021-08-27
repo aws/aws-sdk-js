@@ -17287,6 +17287,10 @@ declare namespace EC2 {
      * The usage operation value. For more information, see AMI billing information fields in the Amazon Elastic Compute Cloud User Guide.
      */
     UsageOperation?: String;
+    /**
+     * The boot mode of the virtual machine.
+     */
+    BootMode?: BootModeValues;
   }
   export interface ImportImageResult {
     /**
@@ -17419,6 +17423,10 @@ declare namespace EC2 {
      * The usage operation value.
      */
     UsageOperation?: String;
+    /**
+     * The boot mode of the virtual machine.
+     */
+    BootMode?: BootModeValues;
   }
   export type ImportImageTaskId = string;
   export type ImportImageTaskList = ImportImageTask[];

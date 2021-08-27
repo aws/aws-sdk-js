@@ -157,11 +157,19 @@ declare class EMR extends Service {
    */
   describeStudio(callback?: (err: AWSError, data: EMR.Types.DescribeStudioOutput) => void): Request<EMR.Types.DescribeStudioOutput, AWSError>;
   /**
-   * Returns the Amazon EMR block public access configuration for your account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
+   * Returns the auto-termination policy for an Amazon EMR cluster.
+   */
+  getAutoTerminationPolicy(params: EMR.Types.GetAutoTerminationPolicyInput, callback?: (err: AWSError, data: EMR.Types.GetAutoTerminationPolicyOutput) => void): Request<EMR.Types.GetAutoTerminationPolicyOutput, AWSError>;
+  /**
+   * Returns the auto-termination policy for an Amazon EMR cluster.
+   */
+  getAutoTerminationPolicy(callback?: (err: AWSError, data: EMR.Types.GetAutoTerminationPolicyOutput) => void): Request<EMR.Types.GetAutoTerminationPolicyOutput, AWSError>;
+  /**
+   * Returns the Amazon EMR block public access configuration for your Amazon Web Services account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
    */
   getBlockPublicAccessConfiguration(params: EMR.Types.GetBlockPublicAccessConfigurationInput, callback?: (err: AWSError, data: EMR.Types.GetBlockPublicAccessConfigurationOutput) => void): Request<EMR.Types.GetBlockPublicAccessConfigurationOutput, AWSError>;
   /**
-   * Returns the Amazon EMR block public access configuration for your account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
+   * Returns the Amazon EMR block public access configuration for your Amazon Web Services account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
    */
   getBlockPublicAccessConfiguration(callback?: (err: AWSError, data: EMR.Types.GetBlockPublicAccessConfigurationOutput) => void): Request<EMR.Types.GetBlockPublicAccessConfigurationOutput, AWSError>;
   /**
@@ -189,11 +197,11 @@ declare class EMR extends Service {
    */
   listBootstrapActions(callback?: (err: AWSError, data: EMR.Types.ListBootstrapActionsOutput) => void): Request<EMR.Types.ListBootstrapActionsOutput, AWSError>;
   /**
-   * Provides the status of all clusters visible to this account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters in unsorted order per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.
+   * Provides the status of all clusters visible to this Amazon Web Services account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters in unsorted order per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.
    */
   listClusters(params: EMR.Types.ListClustersInput, callback?: (err: AWSError, data: EMR.Types.ListClustersOutput) => void): Request<EMR.Types.ListClustersOutput, AWSError>;
   /**
-   * Provides the status of all clusters visible to this account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters in unsorted order per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.
+   * Provides the status of all clusters visible to this Amazon Web Services account. Allows you to filter the list of clusters based on certain criteria; for example, filtering by cluster creation date and time or by status. This call returns a maximum of 50 clusters in unsorted order per call, but returns a marker to track the paging of the cluster list across multiple ListClusters calls.
    */
   listClusters(callback?: (err: AWSError, data: EMR.Types.ListClustersOutput) => void): Request<EMR.Types.ListClustersOutput, AWSError>;
   /**
@@ -261,11 +269,11 @@ declare class EMR extends Service {
    */
   listStudioSessionMappings(callback?: (err: AWSError, data: EMR.Types.ListStudioSessionMappingsOutput) => void): Request<EMR.Types.ListStudioSessionMappingsOutput, AWSError>;
   /**
-   * Returns a list of all Amazon EMR Studios associated with the account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.
+   * Returns a list of all Amazon EMR Studios associated with the Amazon Web Services account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.
    */
   listStudios(params: EMR.Types.ListStudiosInput, callback?: (err: AWSError, data: EMR.Types.ListStudiosOutput) => void): Request<EMR.Types.ListStudiosOutput, AWSError>;
   /**
-   * Returns a list of all Amazon EMR Studios associated with the account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.
+   * Returns a list of all Amazon EMR Studios associated with the Amazon Web Services account. The list includes details such as ID, Studio Access URL, and creation time for each Studio.
    */
   listStudios(callback?: (err: AWSError, data: EMR.Types.ListStudiosOutput) => void): Request<EMR.Types.ListStudiosOutput, AWSError>;
   /**
@@ -301,11 +309,19 @@ declare class EMR extends Service {
    */
   putAutoScalingPolicy(callback?: (err: AWSError, data: EMR.Types.PutAutoScalingPolicyOutput) => void): Request<EMR.Types.PutAutoScalingPolicyOutput, AWSError>;
   /**
-   * Creates or updates an Amazon EMR block public access configuration for your account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
+   * Creates or updates an auto-termination policy for an Amazon EMR cluster. An auto-termination policy defines the amount of idle time in seconds after which a cluster automatically terminates. For alternative cluster termination options, see Control cluster termination.
+   */
+  putAutoTerminationPolicy(params: EMR.Types.PutAutoTerminationPolicyInput, callback?: (err: AWSError, data: EMR.Types.PutAutoTerminationPolicyOutput) => void): Request<EMR.Types.PutAutoTerminationPolicyOutput, AWSError>;
+  /**
+   * Creates or updates an auto-termination policy for an Amazon EMR cluster. An auto-termination policy defines the amount of idle time in seconds after which a cluster automatically terminates. For alternative cluster termination options, see Control cluster termination.
+   */
+  putAutoTerminationPolicy(callback?: (err: AWSError, data: EMR.Types.PutAutoTerminationPolicyOutput) => void): Request<EMR.Types.PutAutoTerminationPolicyOutput, AWSError>;
+  /**
+   * Creates or updates an Amazon EMR block public access configuration for your Amazon Web Services account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
    */
   putBlockPublicAccessConfiguration(params: EMR.Types.PutBlockPublicAccessConfigurationInput, callback?: (err: AWSError, data: EMR.Types.PutBlockPublicAccessConfigurationOutput) => void): Request<EMR.Types.PutBlockPublicAccessConfigurationOutput, AWSError>;
   /**
-   * Creates or updates an Amazon EMR block public access configuration for your account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
+   * Creates or updates an Amazon EMR block public access configuration for your Amazon Web Services account in the current Region. For more information see Configure Block Public Access for Amazon EMR in the Amazon EMR Management Guide.
    */
   putBlockPublicAccessConfiguration(callback?: (err: AWSError, data: EMR.Types.PutBlockPublicAccessConfigurationOutput) => void): Request<EMR.Types.PutBlockPublicAccessConfigurationOutput, AWSError>;
   /**
@@ -324,6 +340,14 @@ declare class EMR extends Service {
    * Removes an automatic scaling policy from a specified instance group within an EMR cluster.
    */
   removeAutoScalingPolicy(callback?: (err: AWSError, data: EMR.Types.RemoveAutoScalingPolicyOutput) => void): Request<EMR.Types.RemoveAutoScalingPolicyOutput, AWSError>;
+  /**
+   * Removes an auto-termination policy from an Amazon EMR cluster.
+   */
+  removeAutoTerminationPolicy(params: EMR.Types.RemoveAutoTerminationPolicyInput, callback?: (err: AWSError, data: EMR.Types.RemoveAutoTerminationPolicyOutput) => void): Request<EMR.Types.RemoveAutoTerminationPolicyOutput, AWSError>;
+  /**
+   * Removes an auto-termination policy from an Amazon EMR cluster.
+   */
+  removeAutoTerminationPolicy(callback?: (err: AWSError, data: EMR.Types.RemoveAutoTerminationPolicyOutput) => void): Request<EMR.Types.RemoveAutoTerminationPolicyOutput, AWSError>;
   /**
    *  Removes a managed scaling policy from a specified EMR cluster. 
    */
@@ -357,11 +381,11 @@ declare class EMR extends Service {
    */
   setTerminationProtection(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals. This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
+   * Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM principals in the Amazon Web Services account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals. This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
    */
   setVisibleToAllUsers(params: EMR.Types.SetVisibleToAllUsersInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals. This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
+   * Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM principals in the Amazon Web Services account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals. This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
    */
   setVisibleToAllUsers(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -575,6 +599,12 @@ declare namespace EMR {
      */
     StateChangeReason?: AutoScalingPolicyStateChangeReason;
   }
+  export interface AutoTerminationPolicy {
+    /**
+     * Specifies the amount of idle time in seconds after which the cluster automatically terminates. You can specify a minimum of 60 seconds and a maximum of 604800 seconds (seven days).
+     */
+    IdleTimeout?: Long;
+  }
   export interface BlockPublicAccessConfiguration {
     /**
      * Indicates whether Amazon EMR block public access is enabled (true) or disabled (false). By default, the value is false for accounts that have created EMR clusters before July 2019. For accounts created after this, the default is true.
@@ -739,7 +769,7 @@ declare namespace EMR {
      */
     TerminationProtected?: Boolean;
     /**
-     * Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When true, IAM principals in the account can perform EMR cluster actions on the cluster that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals. The default value is true if a value is not provided when creating a cluster using the EMR API RunJobFlow command, the CLI create-cluster command, or the Management Console. IAM principals that are allowed to perform actions on the cluster can use the SetVisibleToAllUsers action to change the value on a running cluster. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
+     * Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When true, IAM principals in the Amazon Web Services account can perform EMR cluster actions on the cluster that their IAM policies allow. When false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals. The default value is true if a value is not provided when creating a cluster using the EMR API RunJobFlow command, the CLI create-cluster command, or the Amazon Web Services Management Console. IAM principals that are allowed to perform actions on the cluster can use the SetVisibleToAllUsers action to change the value on a running cluster. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -1308,6 +1338,18 @@ declare namespace EMR {
      * The path to the log file where the step failure root cause was originally recorded.
      */
     LogFile?: String;
+  }
+  export interface GetAutoTerminationPolicyInput {
+    /**
+     * Specifies the ID of the Amazon EMR cluster for which the auto-termination policy will be fetched.
+     */
+    ClusterId: ClusterId;
+  }
+  export interface GetAutoTerminationPolicyOutput {
+    /**
+     * Specifies the auto-termination policy that is attached to an Amazon EMR cluster. 
+     */
+    AutoTerminationPolicy?: AutoTerminationPolicy;
   }
   export interface GetBlockPublicAccessConfigurationInput {
   }
@@ -1997,7 +2039,7 @@ declare namespace EMR {
      */
     SupportedProducts?: SupportedProductsList;
     /**
-     * Indicates whether the cluster is visible to IAM principals in the account associated with the cluster. When true, IAM principals in the account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals. The default value is true if a value is not provided when creating a cluster using the EMR API RunJobFlow command, the CLI create-cluster command, or the Management Console. IAM principals that are authorized to perform actions on the cluster can use the SetVisibleToAllUsers action to change the value on a running cluster. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
+     * Indicates whether the cluster is visible to IAM principals in the Amazon Web Services account associated with the cluster. When true, IAM principals in the Amazon Web Services account can perform EMR cluster actions that their IAM policies allow. When false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals. The default value is true if a value is not provided when creating a cluster using the EMR API RunJobFlow command, the CLI create-cluster command, or the Amazon Web Services Management Console. IAM principals that are authorized to perform actions on the cluster can use the SetVisibleToAllUsers action to change the value on a running cluster. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -2369,7 +2411,7 @@ declare namespace EMR {
      */
     Filters?: ReleaseLabelFilter;
     /**
-     * Specifies the next page of results. If NextToken is not specified, which is usually the case for the first request of ListReleaseLabels, the first page of results are determined by other filtering parameters or by the latest version. The ListReleaseLabels request fails if the identity (account ID) and all filtering parameters are different from the original request, or if the NextToken is expired or tampered with.
+     * Specifies the next page of results. If NextToken is not specified, which is usually the case for the first request of ListReleaseLabels, the first page of results are determined by other filtering parameters or by the latest version. The ListReleaseLabels request fails if the identity (Amazon Web Services account ID) and all filtering parameters are different from the original request, or if the NextToken is expired or tampered with.
      */
     NextToken?: String;
     /**
@@ -2706,6 +2748,18 @@ declare namespace EMR {
      */
     ClusterArn?: ArnType;
   }
+  export interface PutAutoTerminationPolicyInput {
+    /**
+     * Specifies the ID of the Amazon EMR cluster to which the auto-termination policy will be attached.
+     */
+    ClusterId: ClusterId;
+    /**
+     * Specifies the auto-termination policy to attach to the cluster.
+     */
+    AutoTerminationPolicy?: AutoTerminationPolicy;
+  }
+  export interface PutAutoTerminationPolicyOutput {
+  }
   export interface PutBlockPublicAccessConfigurationInput {
     /**
      * A configuration for Amazon EMR block public access. The configuration applies to all clusters created in your account for the current Region. The configuration specifies whether block public access is enabled. If block public access is enabled, security groups associated with the cluster cannot have rules that allow inbound traffic from 0.0.0.0/0 or ::/0 on a port, unless the port is specified as an exception using PermittedPublicSecurityGroupRuleRanges in the BlockPublicAccessConfiguration. By default, Port 22 (SSH) is an exception, and public access is allowed on this port. You can change this by updating BlockPublicSecurityGroupRules to remove the exception.  For accounts that created clusters in a Region before November 25, 2019, block public access is disabled by default in that Region. To use this feature, you must manually enable and configure it. For accounts that did not create an EMR cluster in a Region before this date, block public access is enabled by default in that Region. 
@@ -2747,6 +2801,14 @@ declare namespace EMR {
     InstanceGroupId: InstanceGroupId;
   }
   export interface RemoveAutoScalingPolicyOutput {
+  }
+  export interface RemoveAutoTerminationPolicyInput {
+    /**
+     * Specifies the ID of the Amazon EMR cluster from which the auto-termination policy will be removed.
+     */
+    ClusterId: ClusterId;
+  }
+  export interface RemoveAutoTerminationPolicyOutput {
   }
   export interface RemoveManagedScalingPolicyInput {
     /**
@@ -2824,7 +2886,7 @@ declare namespace EMR {
      */
     Configurations?: ConfigurationList;
     /**
-     * Set this value to true so that IAM principals in the account associated with the cluster can perform EMR actions on the cluster that their IAM policies allow. This value defaults to true for clusters created using the EMR API or the CLI create-cluster command. When set to false, only the IAM principal that created the cluster and the account root user can perform EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
+     * Set this value to true so that IAM principals in the Amazon Web Services account associated with the cluster can perform EMR actions on the cluster that their IAM policies allow. This value defaults to true for clusters created using the EMR API or the CLI create-cluster command. When set to false, only the IAM principal that created the cluster and the Amazon Web Services account root user can perform EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see Understanding the EMR Cluster VisibleToAllUsers Setting in the Amazon EMRManagement Guide.
      */
     VisibleToAllUsers?: Boolean;
     /**
@@ -2879,6 +2941,7 @@ declare namespace EMR {
      * The specified placement group configuration for an Amazon EMR cluster.
      */
     PlacementGroupConfigs?: PlacementGroupConfigList;
+    AutoTerminationPolicy?: AutoTerminationPolicy;
   }
   export interface RunJobFlowOutput {
     /**
@@ -3031,7 +3094,7 @@ declare namespace EMR {
      */
     JobFlowIds: XmlStringList;
     /**
-     * A value of true indicates that an IAM principal in the account can perform EMR actions on the cluster that the IAM policies attached to the principal allow. A value of false indicates that only the IAM principal that created the cluster and the Amazon Web Services root user can perform EMR actions on the cluster.
+     * A value of true indicates that an IAM principal in the Amazon Web Services account can perform EMR actions on the cluster that the IAM policies attached to the principal allow. A value of false indicates that only the IAM principal that created the cluster and the Amazon Web Services root user can perform EMR actions on the cluster.
      */
     VisibleToAllUsers: Boolean;
   }

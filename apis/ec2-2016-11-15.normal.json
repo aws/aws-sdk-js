@@ -26934,6 +26934,10 @@
         "UsageOperation": {
           "shape": "String",
           "documentation": "<p>The usage operation value. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html\">AMI billing information fields</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+        },
+        "BootMode": {
+          "shape": "BootModeValues",
+          "documentation": "<p>The boot mode of the virtual machine.</p>"
         }
       }
     },
@@ -27104,6 +27108,11 @@
           "shape": "String",
           "documentation": "<p>The usage operation value.</p>",
           "locationName": "usageOperation"
+        },
+        "BootMode": {
+          "shape": "BootModeValues",
+          "documentation": "<p>The boot mode of the virtual machine.</p>",
+          "locationName": "bootMode"
         }
       },
       "documentation": "<p>Describes an import image task.</p>"

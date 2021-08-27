@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.977.0-->
+<!--LATEST=2.978.0-->
 <!--ENTRYINSERT-->
+
+## 2.978.0
+* feature: EC2: This release adds the BootMode flag to the ImportImage API and showing the detected BootMode of an ImportImage task.
+* feature: EMR: Amazon EMR now supports auto-terminating idle EMR clusters. You can specify the idle timeout value when enabling auto-termination for both running and new clusters and Amazon EMR automatically terminates the cluster when idle timeout kicks in.
 
 ## 2.977.0
 * feature: ComputeOptimizer: Adds support for 1) the AWS Graviton (AWS_ARM64) recommendation preference for Amazon EC2 instance and Auto Scaling group recommendations, and 2) the ability to get the enrollment statuses for all member accounts of an organization.
