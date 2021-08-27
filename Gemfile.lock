@@ -6,9 +6,10 @@ GIT
 
 GIT
   remote: git://github.com/lsegal/yard.git
-  revision: 106c5d0987d4414247d246dae3d4c588235c5dde
+  revision: cfa62ae6ca51c198a4b5051cee650b2ae6f627ed
+  branch: main
   specs:
-    yard (0.8.7.6)
+    yard (0.9.26)
 
 PATH
   remote: doc-src/parsejs
@@ -21,10 +22,10 @@ GEM
   remote: https://rubygems.org/
   specs:
     kpeg (1.1.0)
-    rake (13.0.1)
-    rdiscount (2.1.7)
+    rake (13.0.6)
+    rdiscount (2.2.0.2)
     redcarpet (3.5.1)
-    samus (1.4.1)
+    samus (3.0.9)
     yard-sitemap (1.0.1)
 
 PLATFORMS
@@ -41,4 +42,4 @@ DEPENDENCIES
   yard-sitemap (~> 1.0)
 
 BUNDLED WITH
-   1.14.6
+   1.17.3
