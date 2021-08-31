@@ -1,0 +1,10 @@
+{{{__super__}}}
+
+.tags .callback .callback_item { list-style: none; margin-bottom: 25px; }
+.tags .callback .callback_item .signature {
+  padding: 6px 12px;
+  margin-bottom: 7px;
+  background: #fcfcfc; border: 1px solid #eee; border-radius: 3px;
+  margin-left: -15px; font-family: monospace; display: block; font-size: 1em;
+}
+.summary .note.title.event { font-size: 1.1em; font-family: monospace; }
