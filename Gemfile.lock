@@ -1,15 +1,16 @@
 GIT
-  remote: git://github.com/lsegal/yard-js.git
-  revision: c76decbd26c9fe82889d72e10ce50c12cdbe51ff
-  specs:
-    yard-js (0.1.3)
-
-GIT
   remote: git://github.com/lsegal/yard.git
   revision: cfa62ae6ca51c198a4b5051cee650b2ae6f627ed
   branch: main
   specs:
     yard (0.9.26)
+
+GIT
+  remote: git://github.com/trivikr/yard-js.git
+  revision: 96ee9ea9a369b90f28ffeb64143cfe06f5907ba4
+  branch: frozen-string-error-fix
+  specs:
+    yard-js (0.1.3)
 
 PATH
   remote: doc-src/parsejs

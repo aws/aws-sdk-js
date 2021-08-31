@@ -6,7 +6,7 @@ group :documentation do
   gem 'rdiscount'
   gem 'yard', github: 'lsegal/yard', branch: :main
   gem 'yard-sitemap', '~> 1.0'
-  gem 'yard-js', github: 'lsegal/yard-js'
+  gem 'yard-js', github: 'trivikr/yard-js', branch: 'frozen-string-error-fix'
 	gem 'parsejs', path: './doc-src/parsejs'
 end
 
