@@ -6,16 +6,16 @@ GIT
     yard (0.9.26)
 
 PATH
-  remote: doc-src/yard-js
-  specs:
-    yard-js (0.1.3)
-
-PATH
   remote: doc-src/parsejs
   specs:
     parsejs (0.0.1)
       kpeg
       yard
+
+PATH
+  remote: doc-src/yard-js
+  specs:
+    yard-js (0.1.3)
 
 GEM
   remote: https://rubygems.org/

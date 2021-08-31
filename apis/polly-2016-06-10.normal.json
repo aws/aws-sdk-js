@@ -466,7 +466,8 @@
         "ru-RU",
         "sv-SE",
         "tr-TR",
-        "en-NZ"
+        "en-NZ",
+        "en-ZA"
       ]
     },
     "LanguageCodeList": {
@@ -1042,7 +1043,8 @@
         "Vitoria",
         "Zeina",
         "Zhiyu",
-        "Aria"
+        "Aria",
+        "Ayanda"
       ]
     },
     "VoiceList": {
