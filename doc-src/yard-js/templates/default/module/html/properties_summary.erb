@@ -1,0 +1,11 @@
+<% groups(property_listing, "Property") do |list, title| %>
+  <h2><%= title %>
+    <small><a href="#" class="summary_toggle">collapse</a></small>
+  </h2>
+
+  <ul class="summary">
+    <% list.each do |prop| %>
+      <%= yieldall :item => prop %>
+    <% end %>
+  </ul>
+<% end %>

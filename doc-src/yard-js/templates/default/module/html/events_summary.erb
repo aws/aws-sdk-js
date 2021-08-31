@@ -1,0 +1,20 @@
+<% groups(event_listing, "Event") do |list, title| %>
+  <h2><%= title %>
+    <small><a href="#" class="summary_toggle">collapse</a></small>
+  </h2>
+
+  <ul class="summary">
+    <% list.each do |event| %>
+    <li class="<%= event.visibility %> <%= event.has_tag?(:deprecated) ? 'deprecated' : '' %>">
+      <span class="summary_signature"><strong><%= link_object event, "'#{event.name}'" %></strong></span>
+      <span class="note title event"><strong>function</strong> (<%= event.parameters.map(&:first).join(", ") %>)</span>
+
+      <% if event.has_tag?(:deprecated) %>
+        <span class="summary_desc"><strong>Deprecated.</strong> <%= htmlify_line event.tag(:deprecated).text %></span>
+      <% else %>
+        <span class="summary_desc"><%= htmlify_line docstring_summary(event) %></span>
+      <% end %>
+    </li>
+    <% end %>
+  </ul>
+<% end %>
