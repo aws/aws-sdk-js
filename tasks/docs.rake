@@ -10,6 +10,7 @@ namespace :docs do
     rm_rf "doc/latest"
     args = ENV['ARGS'] ? ENV['ARGS'] : []
     sh "bundle exec yard #{args.join(' ')}"
+    cp "tasks/fixtures/jquery.js", "doc/latest/js/jquery.js"
   end
 
   desc "Build guide documentation"

@@ -1,7 +1,5 @@
-GIT
-  remote: git://github.com/lsegal/yard.git
-  revision: cfa62ae6ca51c198a4b5051cee650b2ae6f627ed
-  branch: main
+PATH
+  remote: doc-src/yard
   specs:
     yard (0.9.26)
 

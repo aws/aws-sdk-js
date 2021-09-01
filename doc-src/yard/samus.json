@@ -1,0 +1,49 @@
+{
+  "actions": [
+    {
+      "action": "fs-sedfiles",
+      "files": [
+        "lib/*/version.rb"
+      ],
+      "arguments": {
+        "search": "VERSION = ['\"](.+?)['\"]",
+        "replace": "VERSION = '$version'"
+      }
+    },
+    {
+      "action": "chmod-files",
+      "files": [
+        "**/*,644",
+        "bin/*,755"
+      ]
+    },
+    {
+      "action": "changelog-rotate",
+      "files": [
+        "CHANGELOG.md"
+      ],
+      "arguments": {
+        "title_format": "$version - %B %-d$day_nth, %Y"
+      }
+    },
+    {
+      "action": "git-commit",
+      "files": [
+        "CHANGELOG.md",
+        "lib/*/version.rb"
+      ]
+    },
+    {
+      "action": "git-merge",
+      "arguments": {
+        "branch": "main"
+      }
+    },
+    {
+      "action": "ruby-bundle"
+    },
+    {
+      "action": "rake-task"
+    }
+  ]
+}

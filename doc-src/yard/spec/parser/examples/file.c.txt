@@ -1,0 +1,28 @@
+VALUE rb_cFile;
+
+/*
+ * call-seq:
+ *    File.exist?(file_name)    ->  true or false
+ *
+ * Return <code>true</code> if the named file exists.
+ *
+ * _file_name_ can be an IO object.
+ *
+ * "file exists" means that stat() or fstat() system call is successful.
+ */
+
+static VALUE
+rb_file_exist_p(VALUE obj, VALUE fname)
+{
+    struct stat st;
+
+    if (rb_stat(fname, &st) < 0) return Qfalse;
+    return Qtrue;
+}
+
+void
+Init_File(void)
+{
+	rb_cFile = rb_define_class("File", rb_cIO);
+    define_filetest_function("exist?", rb_file_exist_p, 1);
+}
