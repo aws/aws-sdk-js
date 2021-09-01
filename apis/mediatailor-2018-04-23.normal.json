@@ -713,6 +713,10 @@
           "documentation": "<p>The timestamp of when the channel was created.</p>",
           "shape": "__timestampUnix"
         },
+        "FillerSlate": {
+          "documentation": "<p>Contains information about the slate used to fill gaps between programs in the schedule. You must configure FillerSlate if your channel uses an LINEAR PlaybackMode.</p>",
+          "shape": "SlateSource"
+        },
         "LastModifiedTime": {
           "documentation": "<p>The timestamp of when the channel was last modified.</p>",
           "shape": "__timestampUnix"
@@ -722,7 +726,7 @@
           "shape": "ResponseOutputs"
         },
         "PlaybackMode": {
-          "documentation": "<p>The type of playback mode for this channel. Possible values: ONCE or LOOP.</p>",
+          "documentation": "<p>The type of playback mode for this channel.</p> <p>LINEAR - Programs play back-to-back only once.</p> <p>LOOP - Programs play back-to-back in an endless loop. When the last program in the schedule plays, playback loops back to the first program in the schedule.</p>",
           "shape": "__string"
         },
         "Tags": {
@@ -779,12 +783,16 @@
           "locationName": "channelName",
           "shape": "__string"
         },
+        "FillerSlate": {
+          "documentation": "<p>The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses an LINEAR PlaybackMode.</p>",
+          "shape": "SlateSource"
+        },
         "Outputs": {
           "documentation": "<p>The channel's output properties.</p>",
           "shape": "RequestOutputs"
         },
         "PlaybackMode": {
-          "documentation": "<p>The type of playback mode for this channel. The only supported value is LOOP.</p>",
+          "documentation": "<p>The type of playback mode to use for this channel.</p> <p>LINEAR - The programs in the schedule play once back-to-back in the schedule.</p> <p>LOOP - The programs in the schedule play back-to-back in an endless loop. When the last program in the schedule stops playing, playback loops back to the first program in the schedule.</p>",
           "shape": "PlaybackMode"
         },
         "Tags": {
@@ -818,6 +826,10 @@
           "documentation": "<p>The timestamp of when the channel was created.</p>",
           "shape": "__timestampUnix"
         },
+        "FillerSlate": {
+          "documentation": "<p>Contains information about the slate used to fill gaps between programs in the schedule.</p>",
+          "shape": "SlateSource"
+        },
         "LastModifiedTime": {
           "documentation": "<p>The timestamp of when the channel was last modified.</p>",
           "shape": "__timestampUnix"
@@ -827,7 +839,7 @@
           "shape": "ResponseOutputs"
         },
         "PlaybackMode": {
-          "documentation": "<p>The type of playback for this channel. The only supported value is LOOP.</p>",
+          "documentation": "<p>The channel's playback mode.</p>",
           "shape": "__string"
         },
         "Tags": {
@@ -899,6 +911,10 @@
         "ProgramName": {
           "documentation": "<p>The name of the program.</p>",
           "shape": "__string"
+        },
+        "ScheduledStartTime": {
+          "documentation": "<p>The date and time that the program is scheduled to start in ISO 8601 format and Coordinated Universal Time (UTC). For example, the value 2021-03-27T17:48:16.751Z represents March 27, 2021 at 17:48:16.751 UTC.</p>",
+          "shape": "__timestampUnix"
         },
         "SourceLocationName": {
           "documentation": "<p>The source location name.</p>",
@@ -1264,6 +1280,10 @@
           "documentation": "<p>The timestamp of when the channel was created.</p>",
           "shape": "__timestampUnix"
         },
+        "FillerSlate": {
+          "documentation": "<p>Contains information about the slate used to fill gaps between programs in the schedule.</p>",
+          "shape": "SlateSource"
+        },
         "LastModifiedTime": {
           "documentation": "<p>The timestamp of when the channel was last modified.</p>",
           "shape": "__timestampUnix"
@@ -1273,7 +1293,7 @@
           "shape": "ResponseOutputs"
         },
         "PlaybackMode": {
-          "documentation": "<p>The type of playback for this channel. The only supported value is LOOP.</p>",
+          "documentation": "<p>The channel's playback mode.</p>",
           "shape": "__string"
         },
         "Tags": {
@@ -1326,6 +1346,10 @@
         "ProgramName": {
           "documentation": "<p>The name of the program.</p>",
           "shape": "__string"
+        },
+        "ScheduledStartTime": {
+          "documentation": "<p>The date and time that the program is scheduled to start in ISO 8601 format and Coordinated Universal Time (UTC). For example, the value 2021-03-27T17:48:16.751Z represents March 27, 2021 at 17:48:16.751 UTC.</p>",
+          "shape": "__timestampUnix"
         },
         "SourceLocationName": {
           "documentation": "<p>The source location name.</p>",
@@ -1990,7 +2014,8 @@
     },
     "PlaybackMode": {
       "enum": [
-        "LOOP"
+        "LOOP",
+        "LINEAR"
       ],
       "type": "string"
     },
@@ -2165,7 +2190,7 @@
       "type": "string"
     },
     "RequestOutputItem": {
-      "documentation": "<p>The ouput configuration for this channel.</p>",
+      "documentation": "<p>The output configuration for this channel.</p>",
       "members": {
         "DashPlaylistSettings": {
           "documentation": "<p>DASH manifest configuration parameters.</p>",
@@ -2296,6 +2321,10 @@
           "documentation": "<p>The schedule's ad break properties.</p>",
           "shape": "__listOfScheduleAdBreak"
         },
+        "ScheduleEntryType": {
+          "documentation": "<p>The type of schedule entry.</p> <p>Valid values: PROGRAM or FILLER_SLATE.</p>",
+          "shape": "ScheduleEntryType"
+        },
         "SourceLocationName": {
           "documentation": "<p>The name of the source location.</p>",
           "shape": "__string"
@@ -2313,6 +2342,13 @@
         "ProgramName"
       ],
       "type": "structure"
+    },
+    "ScheduleEntryType": {
+      "enum": [
+        "PROGRAM",
+        "FILLER_SLATE"
+      ],
+      "type": "string"
     },
     "SecretsManagerAccessTokenConfiguration": {
       "documentation": "<p>AWS Secrets Manager access token configuration parameters. For information about Secrets Manager access token authentication, see <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-access-configuration-access-token.html\">Working with AWS Secrets Manager access token authentication</a>.</p>",
@@ -2472,15 +2508,19 @@
       "documentation": "<p>Program transition configuration.</p>",
       "members": {
         "RelativePosition": {
-          "documentation": "<p>The position where this program will be inserted relative to the RelativeProgram. Possible values are: AFTER_PROGRAM, and BEFORE_PROGRAM.</p>",
+          "documentation": "<p>The position where this program will be inserted relative to the RelativePosition.</p>",
           "shape": "RelativePosition"
         },
         "RelativeProgram": {
           "documentation": "<p>The name of the program that this program will be inserted next to, as defined by RelativePosition.</p>",
           "shape": "__string"
         },
+        "ScheduledStartTimeMillis": {
+          "documentation": "<p>The date and time that the program is scheduled to start, in epoch milliseconds.</p>",
+          "shape": "__long"
+        },
         "Type": {
-          "documentation": "<p>When the program should be played. RELATIVE means that programs will be played back-to-back.</p>",
+          "documentation": "<p>Defines when the program plays in the schedule. You can set the value to ABSOLUTE or RELATIVE.</p> <p>ABSOLUTE - The program plays at a specific wall clock time. This setting can only be used for channels using the LINEAR PlaybackMode.</p> <p>Note the following considerations when using ABSOLUTE transitions:</p> <p>If the preceding program in the schedule has a duration that extends past the wall clock time, MediaTailor truncates the preceding program on a common segment boundary.</p> <p>If there are gaps in playback, MediaTailor plays the FillerSlate you configured for your linear channel.</p> <p>RELATIVE - The program is inserted into the schedule either before or after a program that you specify via RelativePosition.</p>",
           "shape": "__string"
         }
       },
@@ -2555,6 +2595,10 @@
           "documentation": "<p>The timestamp of when the channel was created.</p>",
           "shape": "__timestampUnix"
         },
+        "FillerSlate": {
+          "documentation": "<p>Contains information about the slate used to fill gaps between programs in the schedule.</p>",
+          "shape": "SlateSource"
+        },
         "LastModifiedTime": {
           "documentation": "<p>The timestamp of when the channel was last modified.</p>",
           "shape": "__timestampUnix"
@@ -2564,7 +2608,7 @@
           "shape": "ResponseOutputs"
         },
         "PlaybackMode": {
-          "documentation": "<p>The type of playback for this channel. The only supported value is LOOP.</p>",
+          "documentation": "<p>The channel's playback mode.</p>",
           "shape": "__string"
         },
         "Tags": {

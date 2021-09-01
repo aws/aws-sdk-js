@@ -246,6 +246,32 @@
       ],
       "documentation": "<p>Retrieves metadata information about one of your applications. The application can be specified either by its unique ID or by its name (which is unique within one account in one region at a given point in time). Specify by ID in automated workflows if you want to make sure that the exact same application is returned or a <code>ResourceNotFoundException</code> is thrown, avoiding the ABA addressing problem.</p>"
     },
+    "GetAssociatedResource": {
+      "name": "GetAssociatedResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/applications/{application}/resources/{resourceType}/{resource}"
+      },
+      "input": {
+        "shape": "GetAssociatedResourceRequest"
+      },
+      "output": {
+        "shape": "GetAssociatedResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Gets the resource associated with the application.</p>",
+      "idempotent": true
+    },
     "GetAttributeGroup": {
       "name": "GetAttributeGroup",
       "http": {
@@ -417,7 +443,7 @@
           "shape": "ConflictException"
         }
       ],
-      "documentation": "<p>Syncs the resource with what is currently recorded in App registry. Specifically, the resource’s App registry system tags are synced with its associated application. The resource is removed if it is not associated with the application. The caller must have permissions to read and update the resource.</p>"
+      "documentation": "<p>Syncs the resource with current AppRegistry records.</p> <p>Specifically, the resource’s AppRegistry system tags sync with its associated application. We remove the resource's AppRegistry system tags if it does not associate with the application. The caller must have permissions to read and update the resource.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -556,7 +582,7 @@
           "documentation": "<p>Key-value pairs you can use to associate with the application.</p>"
         }
       },
-      "documentation": "<p>Represents a Service Catalog AppRegistry application that is the top-level node in a hierarchy of related cloud resource abstractions.</p>"
+      "documentation": "<p>Represents a Amazon Web Services Service Catalog AppRegistry application that is the top-level node in a hierarchy of related cloud resource abstractions.</p>"
     },
     "ApplicationArn": {
       "type": "string",
@@ -564,13 +590,15 @@
     },
     "ApplicationId": {
       "type": "string",
-      "pattern": "[a-z0-9]{12}"
+      "max": 26,
+      "min": 26,
+      "pattern": "[a-z0-9]+"
     },
     "ApplicationSpecifier": {
       "type": "string",
       "max": 256,
       "min": 1,
-      "pattern": "\\w+"
+      "pattern": "[-.\\w]+"
     },
     "ApplicationSummaries": {
       "type": "list",
@@ -606,7 +634,7 @@
           "documentation": "<p> The ISO-8601 formatted timestamp of the moment when the application was last updated.</p>"
         }
       },
-      "documentation": "<p>Summary of a Service Catalog AppRegistry application.</p>"
+      "documentation": "<p>Summary of a Amazon Web Services Service Catalog AppRegistry application.</p>"
     },
     "Arn": {
       "type": "string",
@@ -725,7 +753,7 @@
           "documentation": "<p>Key-value pairs you can use to associate with the attribute group.</p>"
         }
       },
-      "documentation": "<p>Represents a Service Catalog AppRegistry attribute group that is rich metadata which describes an application and its components.</p>"
+      "documentation": "<p>Represents a Amazon Web Services Service Catalog AppRegistry attribute group that is rich metadata which describes an application and its components.</p>"
     },
     "AttributeGroupArn": {
       "type": "string",
@@ -733,9 +761,9 @@
     },
     "AttributeGroupId": {
       "type": "string",
-      "max": 100,
-      "min": 1,
-      "pattern": "[a-z0-9]{12}"
+      "max": 26,
+      "min": 26,
+      "pattern": "[a-z0-9]+"
     },
     "AttributeGroupIds": {
       "type": "list",
@@ -747,7 +775,7 @@
       "type": "string",
       "max": 256,
       "min": 1,
-      "pattern": "\\w+"
+      "pattern": "[-.\\w]+"
     },
     "AttributeGroupSummaries": {
       "type": "list",
@@ -783,7 +811,7 @@
           "documentation": "<p>The ISO-8601 formatted timestamp of the moment the attribute group was last updated. This time is the same as the creationTime for a newly created attribute group.</p>"
         }
       },
-      "documentation": "<p>Summary of a Service Catalog AppRegistry attribute group.</p>"
+      "documentation": "<p>Summary of a Amazon Web Services Service Catalog AppRegistry attribute group.</p>"
     },
     "Attributes": {
       "type": "string",
@@ -1045,6 +1073,47 @@
         "tags": {
           "shape": "Tags",
           "documentation": "<p>Key-value pairs associated with the application.</p>"
+        },
+        "integrations": {
+          "shape": "Integrations",
+          "documentation": "<p>The information about the integration of the application with other services, such as Resource Groups.</p>"
+        }
+      }
+    },
+    "GetAssociatedResourceRequest": {
+      "type": "structure",
+      "required": [
+        "application",
+        "resourceType",
+        "resource"
+      ],
+      "members": {
+        "application": {
+          "shape": "ApplicationSpecifier",
+          "documentation": "<p>The name or ID of the application.</p>",
+          "location": "uri",
+          "locationName": "application"
+        },
+        "resourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>The type of resource associated with the application.</p>",
+          "location": "uri",
+          "locationName": "resourceType"
+        },
+        "resource": {
+          "shape": "ResourceSpecifier",
+          "documentation": "<p>The name or ID of the resource associated with the application.</p>",
+          "location": "uri",
+          "locationName": "resource"
+        }
+      }
+    },
+    "GetAssociatedResourceResponse": {
+      "type": "structure",
+      "members": {
+        "resource": {
+          "shape": "Resource",
+          "documentation": "<p>The resource associated with the application.</p>"
         }
       }
     },
@@ -1098,6 +1167,16 @@
           "documentation": "<p>Key-value pairs associated with the attribute group.</p>"
         }
       }
+    },
+    "Integrations": {
+      "type": "structure",
+      "members": {
+        "resourceGroup": {
+          "shape": "ResourceGroup",
+          "documentation": "<p> The information about the resource group integration.</p>"
+        }
+      },
+      "documentation": "<p> The information about the service integration.</p>"
     },
     "ListApplicationsRequest": {
       "type": "structure",
@@ -1273,13 +1352,64 @@
       "type": "string",
       "max": 256,
       "min": 1,
-      "pattern": "\\w+"
+      "pattern": "[-.\\w]+"
     },
     "NextToken": {
       "type": "string",
       "max": 2024,
       "min": 1,
       "pattern": "[A-Za-z0-9+/=]+"
+    },
+    "Resource": {
+      "type": "structure",
+      "members": {
+        "name": {
+          "shape": "ResourceSpecifier",
+          "documentation": "<p>The name of the resource.</p>"
+        },
+        "arn": {
+          "shape": "StackArn",
+          "documentation": "<p>The Amazon resource name (ARN) of the resource.</p>"
+        },
+        "associationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the resource was associated with the application.</p>"
+        },
+        "integrations": {
+          "shape": "ResourceIntegrations",
+          "documentation": "<p>The service integration information about the resource. </p>"
+        }
+      },
+      "documentation": "<p> The information about the resource.</p>"
+    },
+    "ResourceGroup": {
+      "type": "structure",
+      "members": {
+        "state": {
+          "shape": "ResourceGroupState",
+          "documentation": "<p>The state of the propagation process for the resource group. The states includes:</p> <p> <code>CREATING </code>if the resource group is in the process of being created.</p> <p> <code>CREATE_COMPLETE</code> if the resource group was created successfully.</p> <p> <code>CREATE_FAILED</code> if the resource group failed to be created.</p> <p> <code>UPDATING</code> if the resource group is in the process of being updated.</p> <p> <code>UPDATE_COMPLETE</code> if the resource group updated successfully.</p> <p> <code>UPDATE_FAILED</code> if the resource group could not update successfully.</p>"
+        },
+        "arn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon resource name (ARN) of the resource group.</p>"
+        },
+        "errorMessage": {
+          "shape": "String",
+          "documentation": "<p>The error message that generates when the propagation process for the resource group fails.</p>"
+        }
+      },
+      "documentation": "<p>The information about the resource group integration.</p>"
+    },
+    "ResourceGroupState": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "CREATE_COMPLETE",
+        "CREATE_FAILED",
+        "UPDATING",
+        "UPDATE_COMPLETE",
+        "UPDATE_FAILED"
+      ]
     },
     "ResourceInfo": {
       "type": "structure",
@@ -1293,7 +1423,17 @@
           "documentation": "<p>The Amazon resource name (ARN) that specifies the resource across services.</p>"
         }
       },
-      "documentation": "<p>Information about the resource.</p>"
+      "documentation": "<p>The information about the resource.</p>"
+    },
+    "ResourceIntegrations": {
+      "type": "structure",
+      "members": {
+        "resourceGroup": {
+          "shape": "ResourceGroup",
+          "documentation": "<p>The information about the integration of Resource Groups.</p>"
+        }
+      },
+      "documentation": "<p>The service integration information about the resource.</p>"
     },
     "ResourceSpecifier": {
       "type": "string",
@@ -1317,6 +1457,9 @@
       "type": "string",
       "pattern": "arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}"
     },
+    "String": {
+      "type": "string"
+    },
     "SyncAction": {
       "type": "string",
       "enum": [
@@ -1339,7 +1482,7 @@
         },
         "resource": {
           "shape": "ResourceSpecifier",
-          "documentation": "<p>An entity you can work with and specify with a name or ID. Examples include an Amazon EC2 instance, an AWS CloudFormation stack, or an Amazon S3 bucket.</p>",
+          "documentation": "<p>An entity you can work with and specify with a name or ID. Examples include an Amazon EC2 instance, an Amazon Web Services CloudFormation stack, or an Amazon S3 bucket.</p>",
           "location": "uri",
           "locationName": "resource"
         }
@@ -1511,5 +1654,5 @@
       }
     }
   },
-  "documentation": "<p> AWS Service Catalog AppRegistry enables organizations to understand the application context of their AWS resources. AppRegistry provides a repository of your applications, their resources, and the application metadata that you use within your enterprise.</p>"
+  "documentation": "<p> Amazon Web Services Service Catalog AppRegistry enables organizations to understand the application context of their Amazon Web Services resources. AppRegistry provides a repository of your applications, their resources, and the application metadata that you use within your enterprise.</p>"
 }

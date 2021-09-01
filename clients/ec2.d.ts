@@ -8758,10 +8758,6 @@ declare namespace EC2 {
   }
   export interface CreateVpcRequest {
     /**
-     * The IPv4 network range for the VPC, in CIDR notation. For example, 10.0.0.0/16. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
-     */
-    CidrBlock: String;
-    /**
      * Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block.
      */
     AmazonProvidedIpv6CidrBlock?: Boolean;
@@ -8789,6 +8785,10 @@ declare namespace EC2 {
      * The tags to assign to the VPC.
      */
     TagSpecifications?: TagSpecificationList;
+    /**
+     * The IPv4 network range for the VPC, in CIDR notation. For example, 10.0.0.0/16. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
+     */
+    CidrBlock: String;
   }
   export interface CreateVpcResult {
     /**
@@ -19458,6 +19458,10 @@ declare namespace EC2 {
      * This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled.  If you specify a value of disabled, you will not be able to access your instance metadata.  
      */
     HttpEndpoint?: LaunchTemplateInstanceMetadataEndpointState;
+    /**
+     * Enables or disables the IPv6 endpoint for the instance metadata service. Default: disabled 
+     */
+    HttpProtocolIpv6?: LaunchTemplateInstanceMetadataProtocolIpv6;
   }
   export interface LaunchTemplateInstanceMetadataOptionsRequest {
     /**
@@ -19472,8 +19476,13 @@ declare namespace EC2 {
      * This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is enabled.  If you specify a value of disabled, you will not be able to access your instance metadata.  
      */
     HttpEndpoint?: LaunchTemplateInstanceMetadataEndpointState;
+    /**
+     * Enables or disables the IPv6 endpoint for the instance metadata service. Default: disabled 
+     */
+    HttpProtocolIpv6?: LaunchTemplateInstanceMetadataProtocolIpv6;
   }
   export type LaunchTemplateInstanceMetadataOptionsState = "pending"|"applied"|string;
+  export type LaunchTemplateInstanceMetadataProtocolIpv6 = "disabled"|"enabled"|string;
   export interface LaunchTemplateInstanceNetworkInterfaceSpecification {
     /**
      * Indicates whether to associate a Carrier IP address with eth0 for a new network interface. Use this option when you launch an instance in a Wavelength Zone and want to associate a Carrier IP address with the network interface. For more information about Carrier IP addresses, see Carrier IP addresses in the Wavelength Developer Guide.
@@ -19536,19 +19545,19 @@ declare namespace EC2 {
      */
     NetworkCardIndex?: Integer;
     /**
-     * One or more IPv4 delegated prefixes assigned to the network interface.
+     * One or more IPv4 prefixes assigned to the network interface.
      */
     Ipv4Prefixes?: Ipv4PrefixListResponse;
     /**
-     * The number of IPv4 delegated prefixes that AWS automatically assigned to the network interface.
+     * The number of IPv4 prefixes that Amazon Web Services automatically assigned to the network interface.
      */
     Ipv4PrefixCount?: Integer;
     /**
-     * One or more IPv6 delegated prefixes assigned to the network interface.
+     * One or more IPv6 prefixes assigned to the network interface.
      */
     Ipv6Prefixes?: Ipv6PrefixListResponse;
     /**
-     * The number of IPv6 delegated prefixes that AWS automatically assigned to the network interface.
+     * The number of IPv6 prefixes that Amazon Web Services automatically assigned to the network interface.
      */
     Ipv6PrefixCount?: Integer;
   }
@@ -19615,19 +19624,19 @@ declare namespace EC2 {
      */
     NetworkCardIndex?: Integer;
     /**
-     * One or more IPv4 delegated prefixes to be assigned to the network interface. You cannot use this option if you use the Ipv4PrefixCount option.
+     * One or more IPv4 prefixes to be assigned to the network interface. You cannot use this option if you use the Ipv4PrefixCount option.
      */
     Ipv4Prefixes?: Ipv4PrefixList;
     /**
-     * The number of IPv4 delegated prefixes to be automatically assigned to the network interface. You cannot use this option if you use the Ipv4Prefix option.
+     * The number of IPv4 prefixes to be automatically assigned to the network interface. You cannot use this option if you use the Ipv4Prefix option.
      */
     Ipv4PrefixCount?: Integer;
     /**
-     * One or more IPv6 delegated prefixes to be assigned to the network interface. You cannot use this option if you use the Ipv6PrefixCount option.
+     * One or more IPv6 prefixes to be assigned to the network interface. You cannot use this option if you use the Ipv6PrefixCount option.
      */
     Ipv6Prefixes?: Ipv6PrefixList;
     /**
-     * The number of IPv6 delegated prefixes to be automatically assigned to the network interface. You cannot use this option if you use the Ipv6Prefix option.
+     * The number of IPv6 prefixes to be automatically assigned to the network interface. You cannot use this option if you use the Ipv6Prefix option.
      */
     Ipv6PrefixCount?: Integer;
   }
@@ -23785,7 +23794,7 @@ declare namespace EC2 {
      */
     InstanceInitiatedShutdownBehavior?: ShutdownBehavior;
     /**
-     * The Base64-encoded user data to make available to the instance. For more information, see Running Commands on Your Linux Instance at Launch (Linux) and Adding User Data (Windows).
+     * The user data to make available to the instance. You must provide base64-encoded text. User data is limited to 16 KB. For more information, see Running Commands on Your Linux Instance at Launch (Linux) or Adding User Data (Windows). If you are creating the launch template for use with Batch, the user data must be provided in the  MIME multi-part archive format. For more information, see Amazon EC2 user data in launch templates in the Batch User Guide.
      */
     UserData?: String;
     /**

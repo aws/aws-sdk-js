@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.980.0-->
+<!--LATEST=2.981.0-->
 <!--ENTRYINSERT-->
+
+## 2.981.0
+* feature: EC2: Added LaunchTemplate support for the IMDS IPv6 endpoint
+* feature: MediaTailor: This release adds support for wall clock programs in LINEAR channels.
+* feature: ServiceCatalogAppRegistry: Introduction of GetAssociatedResource API and GetApplication response extension for Resource Groups support.
 
 ## 2.980.0
 * feature: Iot: Added Create/Update/Delete/Describe/List APIs for a new IoT resource named FleetMetric. Added a new Fleet Indexing query API named GetBucketsAggregation. Added a new field named DisconnectedReason in Fleet Indexing query response. Updated their related documentations.

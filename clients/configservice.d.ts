@@ -12,19 +12,19 @@ declare class ConfigService extends Service {
   constructor(options?: ConfigService.Types.ClientConfiguration)
   config: Config & ConfigService.Types.ClientConfiguration;
   /**
-   * Returns the current configuration items for resources that are present in your AWS Config aggregator. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceIdentifiers list.     The API does not return results for deleted resources.    The API does not return tags and relationships.   
+   * Returns the current configuration items for resources that are present in your Config aggregator. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceIdentifiers list.     The API does not return results for deleted resources.    The API does not return tags and relationships.   
    */
   batchGetAggregateResourceConfig(params: ConfigService.Types.BatchGetAggregateResourceConfigRequest, callback?: (err: AWSError, data: ConfigService.Types.BatchGetAggregateResourceConfigResponse) => void): Request<ConfigService.Types.BatchGetAggregateResourceConfigResponse, AWSError>;
   /**
-   * Returns the current configuration items for resources that are present in your AWS Config aggregator. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceIdentifiers list.     The API does not return results for deleted resources.    The API does not return tags and relationships.   
+   * Returns the current configuration items for resources that are present in your Config aggregator. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceIdentifiers list.     The API does not return results for deleted resources.    The API does not return tags and relationships.   
    */
   batchGetAggregateResourceConfig(callback?: (err: AWSError, data: ConfigService.Types.BatchGetAggregateResourceConfigResponse) => void): Request<ConfigService.Types.BatchGetAggregateResourceConfigResponse, AWSError>;
   /**
-   * Returns the current configuration for one or more requested resources. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceKeys list.     The API does not return results for deleted resources.    The API does not return any tags for the requested resources. This information is filtered out of the supplementaryConfiguration section of the API response.   
+   * Returns the BaseConfigurationItem for one or more requested resources. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceKeys list.     The API does not return results for deleted resources.    The API does not return any tags for the requested resources. This information is filtered out of the supplementaryConfiguration section of the API response.   
    */
   batchGetResourceConfig(params: ConfigService.Types.BatchGetResourceConfigRequest, callback?: (err: AWSError, data: ConfigService.Types.BatchGetResourceConfigResponse) => void): Request<ConfigService.Types.BatchGetResourceConfigResponse, AWSError>;
   /**
-   * Returns the current configuration for one or more requested resources. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceKeys list.     The API does not return results for deleted resources.    The API does not return any tags for the requested resources. This information is filtered out of the supplementaryConfiguration section of the API response.   
+   * Returns the BaseConfigurationItem for one or more requested resources. The operation also returns a list of resources that are not processed in the current request. If there are no unprocessed resources, the operation returns an empty unprocessedResourceKeys list.     The API does not return results for deleted resources.    The API does not return any tags for the requested resources. This information is filtered out of the supplementaryConfiguration section of the API response.   
    */
   batchGetResourceConfig(callback?: (err: AWSError, data: ConfigService.Types.BatchGetResourceConfigResponse) => void): Request<ConfigService.Types.BatchGetResourceConfigResponse, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class ConfigService extends Service {
    */
   deleteAggregationAuthorization(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified AWS Config rule and all of its evaluation results. AWS Config sets the state of a rule to DELETING until the deletion is complete. You cannot update a rule while it is in this state. If you make a PutConfigRule or DeleteConfigRule request for the rule, you will receive a ResourceInUseException. You can check the state of a rule by using the DescribeConfigRules request.
+   * Deletes the specified Config rule and all of its evaluation results. Config sets the state of a rule to DELETING until the deletion is complete. You cannot update a rule while it is in this state. If you make a PutConfigRule or DeleteConfigRule request for the rule, you will receive a ResourceInUseException. You can check the state of a rule by using the DescribeConfigRules request.
    */
   deleteConfigRule(params: ConfigService.Types.DeleteConfigRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified AWS Config rule and all of its evaluation results. AWS Config sets the state of a rule to DELETING until the deletion is complete. You cannot update a rule while it is in this state. If you make a PutConfigRule or DeleteConfigRule request for the rule, you will receive a ResourceInUseException. You can check the state of a rule by using the DescribeConfigRules request.
+   * Deletes the specified Config rule and all of its evaluation results. Config sets the state of a rule to DELETING until the deletion is complete. You cannot update a rule while it is in this state. If you make a PutConfigRule or DeleteConfigRule request for the rule, you will receive a ResourceInUseException. You can check the state of a rule by using the DescribeConfigRules request.
    */
   deleteConfigRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -52,19 +52,19 @@ declare class ConfigService extends Service {
    */
   deleteConfigurationAggregator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the configuration recorder. After the configuration recorder is deleted, AWS Config will not record resource configuration changes until you create a new configuration recorder. This action does not delete the configuration information that was previously recorded. You will be able to access the previously recorded information by using the GetResourceConfigHistory action, but you will not be able to access this information in the AWS Config console until you create a new configuration recorder.
+   * Deletes the configuration recorder. After the configuration recorder is deleted, Config will not record resource configuration changes until you create a new configuration recorder. This action does not delete the configuration information that was previously recorded. You will be able to access the previously recorded information by using the GetResourceConfigHistory action, but you will not be able to access this information in the Config console until you create a new configuration recorder.
    */
   deleteConfigurationRecorder(params: ConfigService.Types.DeleteConfigurationRecorderRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the configuration recorder. After the configuration recorder is deleted, AWS Config will not record resource configuration changes until you create a new configuration recorder. This action does not delete the configuration information that was previously recorded. You will be able to access the previously recorded information by using the GetResourceConfigHistory action, but you will not be able to access this information in the AWS Config console until you create a new configuration recorder.
+   * Deletes the configuration recorder. After the configuration recorder is deleted, Config will not record resource configuration changes until you create a new configuration recorder. This action does not delete the configuration information that was previously recorded. You will be able to access the previously recorded information by using the GetResourceConfigHistory action, but you will not be able to access this information in the Config console until you create a new configuration recorder.
    */
   deleteConfigurationRecorder(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified conformance pack and all the AWS Config rules, remediation actions, and all evaluation results within that conformance pack. AWS Config sets the conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state.
+   * Deletes the specified conformance pack and all the Config rules, remediation actions, and all evaluation results within that conformance pack. Config sets the conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state.
    */
   deleteConformancePack(params: ConfigService.Types.DeleteConformancePackRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified conformance pack and all the AWS Config rules, remediation actions, and all evaluation results within that conformance pack. AWS Config sets the conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state.
+   * Deletes the specified conformance pack and all the Config rules, remediation actions, and all evaluation results within that conformance pack. Config sets the conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state.
    */
   deleteConformancePack(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -76,27 +76,27 @@ declare class ConfigService extends Service {
    */
   deleteDeliveryChannel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the evaluation results for the specified AWS Config rule. You can specify one AWS Config rule per request. After you delete the evaluation results, you can call the StartConfigRulesEvaluation API to start evaluating your AWS resources against the rule.
+   * Deletes the evaluation results for the specified Config rule. You can specify one Config rule per request. After you delete the evaluation results, you can call the StartConfigRulesEvaluation API to start evaluating your Amazon Web Services resources against the rule.
    */
   deleteEvaluationResults(params: ConfigService.Types.DeleteEvaluationResultsRequest, callback?: (err: AWSError, data: ConfigService.Types.DeleteEvaluationResultsResponse) => void): Request<ConfigService.Types.DeleteEvaluationResultsResponse, AWSError>;
   /**
-   * Deletes the evaluation results for the specified AWS Config rule. You can specify one AWS Config rule per request. After you delete the evaluation results, you can call the StartConfigRulesEvaluation API to start evaluating your AWS resources against the rule.
+   * Deletes the evaluation results for the specified Config rule. You can specify one Config rule per request. After you delete the evaluation results, you can call the StartConfigRulesEvaluation API to start evaluating your Amazon Web Services resources against the rule.
    */
   deleteEvaluationResults(callback?: (err: AWSError, data: ConfigService.Types.DeleteEvaluationResultsResponse) => void): Request<ConfigService.Types.DeleteEvaluationResultsResponse, AWSError>;
   /**
-   * Deletes the specified organization config rule and all of its evaluation results from all member accounts in that organization.  Only a master account and a delegated administrator account can delete an organization config rule. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added. AWS Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a rule while it is in this state.
+   * Deletes the specified organization config rule and all of its evaluation results from all member accounts in that organization.  Only a master account and a delegated administrator account can delete an organization config rule. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added. Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a rule while it is in this state.
    */
   deleteOrganizationConfigRule(params: ConfigService.Types.DeleteOrganizationConfigRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified organization config rule and all of its evaluation results from all member accounts in that organization.  Only a master account and a delegated administrator account can delete an organization config rule. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added. AWS Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a rule while it is in this state.
+   * Deletes the specified organization config rule and all of its evaluation results from all member accounts in that organization.  Only a master account and a delegated administrator account can delete an organization config rule. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added. Config sets the state of a rule to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a rule while it is in this state.
    */
   deleteOrganizationConfigRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified organization conformance pack and all of the config rules and remediation actions from all member accounts in that organization.   Only a master account or a delegated administrator account can delete an organization conformance pack. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added. AWS Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state. 
+   * Deletes the specified organization conformance pack and all of the config rules and remediation actions from all member accounts in that organization.   Only a master account or a delegated administrator account can delete an organization conformance pack. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added. Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state. 
    */
   deleteOrganizationConformancePack(params: ConfigService.Types.DeleteOrganizationConformancePackRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified organization conformance pack and all of the config rules and remediation actions from all member accounts in that organization.   Only a master account or a delegated administrator account can delete an organization conformance pack. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added. AWS Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state. 
+   * Deletes the specified organization conformance pack and all of the config rules and remediation actions from all member accounts in that organization.   Only a master account or a delegated administrator account can delete an organization conformance pack. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added. Config sets the state of a conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You cannot update a conformance pack while it is in this state. 
    */
   deleteOrganizationConformancePack(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -116,19 +116,19 @@ declare class ConfigService extends Service {
    */
   deleteRemediationConfiguration(callback?: (err: AWSError, data: ConfigService.Types.DeleteRemediationConfigurationResponse) => void): Request<ConfigService.Types.DeleteRemediationConfigurationResponse, AWSError>;
   /**
-   * Deletes one or more remediation exceptions mentioned in the resource keys.  AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
+   * Deletes one or more remediation exceptions mentioned in the resource keys.  Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
    */
   deleteRemediationExceptions(params: ConfigService.Types.DeleteRemediationExceptionsRequest, callback?: (err: AWSError, data: ConfigService.Types.DeleteRemediationExceptionsResponse) => void): Request<ConfigService.Types.DeleteRemediationExceptionsResponse, AWSError>;
   /**
-   * Deletes one or more remediation exceptions mentioned in the resource keys.  AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
+   * Deletes one or more remediation exceptions mentioned in the resource keys.  Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
    */
   deleteRemediationExceptions(callback?: (err: AWSError, data: ConfigService.Types.DeleteRemediationExceptionsResponse) => void): Request<ConfigService.Types.DeleteRemediationExceptionsResponse, AWSError>;
   /**
-   * Records the configuration state for a custom resource that has been deleted. This API records a new ConfigurationItem with a ResourceDeleted status. You can retrieve the ConfigurationItems recorded for this resource in your AWS Config History. 
+   * Records the configuration state for a custom resource that has been deleted. This API records a new ConfigurationItem with a ResourceDeleted status. You can retrieve the ConfigurationItems recorded for this resource in your Config History. 
    */
   deleteResourceConfig(params: ConfigService.Types.DeleteResourceConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Records the configuration state for a custom resource that has been deleted. This API records a new ConfigurationItem with a ResourceDeleted status. You can retrieve the ConfigurationItems recorded for this resource in your AWS Config History. 
+   * Records the configuration state for a custom resource that has been deleted. This API records a new ConfigurationItem with a ResourceDeleted status. You can retrieve the ConfigurationItems recorded for this resource in your Config History. 
    */
   deleteResourceConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -140,35 +140,35 @@ declare class ConfigService extends Service {
    */
   deleteRetentionConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the stored query for a single AWS account and a single AWS Region.
+   * Deletes the stored query for a single Amazon Web Services account and a single Amazon Web Services Region.
    */
   deleteStoredQuery(params: ConfigService.Types.DeleteStoredQueryRequest, callback?: (err: AWSError, data: ConfigService.Types.DeleteStoredQueryResponse) => void): Request<ConfigService.Types.DeleteStoredQueryResponse, AWSError>;
   /**
-   * Deletes the stored query for a single AWS account and a single AWS Region.
+   * Deletes the stored query for a single Amazon Web Services account and a single Amazon Web Services Region.
    */
   deleteStoredQuery(callback?: (err: AWSError, data: ConfigService.Types.DeleteStoredQueryResponse) => void): Request<ConfigService.Types.DeleteStoredQueryResponse, AWSError>;
   /**
-   * Schedules delivery of a configuration snapshot to the Amazon S3 bucket in the specified delivery channel. After the delivery has started, AWS Config sends the following notifications using an Amazon SNS topic that you have specified.   Notification of the start of the delivery.   Notification of the completion of the delivery, if the delivery was successfully completed.   Notification of delivery failure, if the delivery failed.  
+   * Schedules delivery of a configuration snapshot to the Amazon S3 bucket in the specified delivery channel. After the delivery has started, Config sends the following notifications using an Amazon SNS topic that you have specified.   Notification of the start of the delivery.   Notification of the completion of the delivery, if the delivery was successfully completed.   Notification of delivery failure, if the delivery failed.  
    */
   deliverConfigSnapshot(params: ConfigService.Types.DeliverConfigSnapshotRequest, callback?: (err: AWSError, data: ConfigService.Types.DeliverConfigSnapshotResponse) => void): Request<ConfigService.Types.DeliverConfigSnapshotResponse, AWSError>;
   /**
-   * Schedules delivery of a configuration snapshot to the Amazon S3 bucket in the specified delivery channel. After the delivery has started, AWS Config sends the following notifications using an Amazon SNS topic that you have specified.   Notification of the start of the delivery.   Notification of the completion of the delivery, if the delivery was successfully completed.   Notification of delivery failure, if the delivery failed.  
+   * Schedules delivery of a configuration snapshot to the Amazon S3 bucket in the specified delivery channel. After the delivery has started, Config sends the following notifications using an Amazon SNS topic that you have specified.   Notification of the start of the delivery.   Notification of the completion of the delivery, if the delivery was successfully completed.   Notification of delivery failure, if the delivery failed.  
    */
   deliverConfigSnapshot(callback?: (err: AWSError, data: ConfigService.Types.DeliverConfigSnapshotResponse) => void): Request<ConfigService.Types.DeliverConfigSnapshotResponse, AWSError>;
   /**
-   * Returns a list of compliant and noncompliant rules with the number of resources for compliant and noncompliant rules.   The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
+   * Returns a list of compliant and noncompliant rules with the number of resources for compliant and noncompliant rules. Does not display rules that do not have compliance results.   The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
    */
   describeAggregateComplianceByConfigRules(params: ConfigService.Types.DescribeAggregateComplianceByConfigRulesRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeAggregateComplianceByConfigRulesResponse) => void): Request<ConfigService.Types.DescribeAggregateComplianceByConfigRulesResponse, AWSError>;
   /**
-   * Returns a list of compliant and noncompliant rules with the number of resources for compliant and noncompliant rules.   The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
+   * Returns a list of compliant and noncompliant rules with the number of resources for compliant and noncompliant rules. Does not display rules that do not have compliance results.   The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
    */
   describeAggregateComplianceByConfigRules(callback?: (err: AWSError, data: ConfigService.Types.DescribeAggregateComplianceByConfigRulesResponse) => void): Request<ConfigService.Types.DescribeAggregateComplianceByConfigRulesResponse, AWSError>;
   /**
-   * Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack. Also returns the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
+   * Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant Config rules within each conformance pack. Also returns the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
    */
   describeAggregateComplianceByConformancePacks(params: ConfigService.Types.DescribeAggregateComplianceByConformancePacksRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeAggregateComplianceByConformancePacksResponse) => void): Request<ConfigService.Types.DescribeAggregateComplianceByConformancePacksResponse, AWSError>;
   /**
-   * Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant AWS Config rules within each conformance pack. Also returns the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
+   * Returns a list of the conformance packs and their associated compliance status with the count of compliant and noncompliant Config rules within each conformance pack. Also returns the total rule count which includes compliant rules, noncompliant rules, and rules that cannot be evaluated due to insufficient data.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
    */
   describeAggregateComplianceByConformancePacks(callback?: (err: AWSError, data: ConfigService.Types.DescribeAggregateComplianceByConformancePacksResponse) => void): Request<ConfigService.Types.DescribeAggregateComplianceByConformancePacksResponse, AWSError>;
   /**
@@ -180,43 +180,43 @@ declare class ConfigService extends Service {
    */
   describeAggregationAuthorizations(callback?: (err: AWSError, data: ConfigService.Types.DescribeAggregationAuthorizationsResponse) => void): Request<ConfigService.Types.DescribeAggregationAuthorizationsResponse, AWSError>;
   /**
-   * Indicates whether the specified AWS Config rules are compliant. If a rule is noncompliant, this action returns the number of AWS resources that do not comply with the rule. A rule is compliant if all of the evaluated resources comply with it. It is noncompliant if any of these resources do not comply. If AWS Config has no current evaluation results for the rule, it returns INSUFFICIENT_DATA. This result might indicate one of the following conditions:   AWS Config has never invoked an evaluation for the rule. To check whether it has, use the DescribeConfigRuleEvaluationStatus action to get the LastSuccessfulInvocationTime and LastFailedInvocationTime.   The rule's AWS Lambda function is failing to send evaluation results to AWS Config. Verify that the role you assigned to your configuration recorder includes the config:PutEvaluations permission. If the rule is a custom rule, verify that the AWS Lambda execution role includes the config:PutEvaluations permission.   The rule's AWS Lambda function has returned NOT_APPLICABLE for all evaluation results. This can occur if the resources were deleted or removed from the rule's scope.  
+   * Indicates whether the specified Config rules are compliant. If a rule is noncompliant, this action returns the number of Amazon Web Services resources that do not comply with the rule. A rule is compliant if all of the evaluated resources comply with it. It is noncompliant if any of these resources do not comply. If Config has no current evaluation results for the rule, it returns INSUFFICIENT_DATA. This result might indicate one of the following conditions:   Config has never invoked an evaluation for the rule. To check whether it has, use the DescribeConfigRuleEvaluationStatus action to get the LastSuccessfulInvocationTime and LastFailedInvocationTime.   The rule's Lambda function is failing to send evaluation results to Config. Verify that the role you assigned to your configuration recorder includes the config:PutEvaluations permission. If the rule is a custom rule, verify that the Lambda execution role includes the config:PutEvaluations permission.   The rule's Lambda function has returned NOT_APPLICABLE for all evaluation results. This can occur if the resources were deleted or removed from the rule's scope.  
    */
   describeComplianceByConfigRule(params: ConfigService.Types.DescribeComplianceByConfigRuleRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeComplianceByConfigRuleResponse) => void): Request<ConfigService.Types.DescribeComplianceByConfigRuleResponse, AWSError>;
   /**
-   * Indicates whether the specified AWS Config rules are compliant. If a rule is noncompliant, this action returns the number of AWS resources that do not comply with the rule. A rule is compliant if all of the evaluated resources comply with it. It is noncompliant if any of these resources do not comply. If AWS Config has no current evaluation results for the rule, it returns INSUFFICIENT_DATA. This result might indicate one of the following conditions:   AWS Config has never invoked an evaluation for the rule. To check whether it has, use the DescribeConfigRuleEvaluationStatus action to get the LastSuccessfulInvocationTime and LastFailedInvocationTime.   The rule's AWS Lambda function is failing to send evaluation results to AWS Config. Verify that the role you assigned to your configuration recorder includes the config:PutEvaluations permission. If the rule is a custom rule, verify that the AWS Lambda execution role includes the config:PutEvaluations permission.   The rule's AWS Lambda function has returned NOT_APPLICABLE for all evaluation results. This can occur if the resources were deleted or removed from the rule's scope.  
+   * Indicates whether the specified Config rules are compliant. If a rule is noncompliant, this action returns the number of Amazon Web Services resources that do not comply with the rule. A rule is compliant if all of the evaluated resources comply with it. It is noncompliant if any of these resources do not comply. If Config has no current evaluation results for the rule, it returns INSUFFICIENT_DATA. This result might indicate one of the following conditions:   Config has never invoked an evaluation for the rule. To check whether it has, use the DescribeConfigRuleEvaluationStatus action to get the LastSuccessfulInvocationTime and LastFailedInvocationTime.   The rule's Lambda function is failing to send evaluation results to Config. Verify that the role you assigned to your configuration recorder includes the config:PutEvaluations permission. If the rule is a custom rule, verify that the Lambda execution role includes the config:PutEvaluations permission.   The rule's Lambda function has returned NOT_APPLICABLE for all evaluation results. This can occur if the resources were deleted or removed from the rule's scope.  
    */
   describeComplianceByConfigRule(callback?: (err: AWSError, data: ConfigService.Types.DescribeComplianceByConfigRuleResponse) => void): Request<ConfigService.Types.DescribeComplianceByConfigRuleResponse, AWSError>;
   /**
-   * Indicates whether the specified AWS resources are compliant. If a resource is noncompliant, this action returns the number of AWS Config rules that the resource does not comply with. A resource is compliant if it complies with all the AWS Config rules that evaluate it. It is noncompliant if it does not comply with one or more of these rules. If AWS Config has no current evaluation results for the resource, it returns INSUFFICIENT_DATA. This result might indicate one of the following conditions about the rules that evaluate the resource:   AWS Config has never invoked an evaluation for the rule. To check whether it has, use the DescribeConfigRuleEvaluationStatus action to get the LastSuccessfulInvocationTime and LastFailedInvocationTime.   The rule's AWS Lambda function is failing to send evaluation results to AWS Config. Verify that the role that you assigned to your configuration recorder includes the config:PutEvaluations permission. If the rule is a custom rule, verify that the AWS Lambda execution role includes the config:PutEvaluations permission.   The rule's AWS Lambda function has returned NOT_APPLICABLE for all evaluation results. This can occur if the resources were deleted or removed from the rule's scope.  
+   * Indicates whether the specified Amazon Web Services resources are compliant. If a resource is noncompliant, this action returns the number of Config rules that the resource does not comply with. A resource is compliant if it complies with all the Config rules that evaluate it. It is noncompliant if it does not comply with one or more of these rules. If Config has no current evaluation results for the resource, it returns INSUFFICIENT_DATA. This result might indicate one of the following conditions about the rules that evaluate the resource:   Config has never invoked an evaluation for the rule. To check whether it has, use the DescribeConfigRuleEvaluationStatus action to get the LastSuccessfulInvocationTime and LastFailedInvocationTime.   The rule's Lambda function is failing to send evaluation results to Config. Verify that the role that you assigned to your configuration recorder includes the config:PutEvaluations permission. If the rule is a custom rule, verify that the Lambda execution role includes the config:PutEvaluations permission.   The rule's Lambda function has returned NOT_APPLICABLE for all evaluation results. This can occur if the resources were deleted or removed from the rule's scope.  
    */
   describeComplianceByResource(params: ConfigService.Types.DescribeComplianceByResourceRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeComplianceByResourceResponse) => void): Request<ConfigService.Types.DescribeComplianceByResourceResponse, AWSError>;
   /**
-   * Indicates whether the specified AWS resources are compliant. If a resource is noncompliant, this action returns the number of AWS Config rules that the resource does not comply with. A resource is compliant if it complies with all the AWS Config rules that evaluate it. It is noncompliant if it does not comply with one or more of these rules. If AWS Config has no current evaluation results for the resource, it returns INSUFFICIENT_DATA. This result might indicate one of the following conditions about the rules that evaluate the resource:   AWS Config has never invoked an evaluation for the rule. To check whether it has, use the DescribeConfigRuleEvaluationStatus action to get the LastSuccessfulInvocationTime and LastFailedInvocationTime.   The rule's AWS Lambda function is failing to send evaluation results to AWS Config. Verify that the role that you assigned to your configuration recorder includes the config:PutEvaluations permission. If the rule is a custom rule, verify that the AWS Lambda execution role includes the config:PutEvaluations permission.   The rule's AWS Lambda function has returned NOT_APPLICABLE for all evaluation results. This can occur if the resources were deleted or removed from the rule's scope.  
+   * Indicates whether the specified Amazon Web Services resources are compliant. If a resource is noncompliant, this action returns the number of Config rules that the resource does not comply with. A resource is compliant if it complies with all the Config rules that evaluate it. It is noncompliant if it does not comply with one or more of these rules. If Config has no current evaluation results for the resource, it returns INSUFFICIENT_DATA. This result might indicate one of the following conditions about the rules that evaluate the resource:   Config has never invoked an evaluation for the rule. To check whether it has, use the DescribeConfigRuleEvaluationStatus action to get the LastSuccessfulInvocationTime and LastFailedInvocationTime.   The rule's Lambda function is failing to send evaluation results to Config. Verify that the role that you assigned to your configuration recorder includes the config:PutEvaluations permission. If the rule is a custom rule, verify that the Lambda execution role includes the config:PutEvaluations permission.   The rule's Lambda function has returned NOT_APPLICABLE for all evaluation results. This can occur if the resources were deleted or removed from the rule's scope.  
    */
   describeComplianceByResource(callback?: (err: AWSError, data: ConfigService.Types.DescribeComplianceByResourceResponse) => void): Request<ConfigService.Types.DescribeComplianceByResourceResponse, AWSError>;
   /**
-   * Returns status information for each of your AWS managed Config rules. The status includes information such as the last time AWS Config invoked the rule, the last time AWS Config failed to invoke the rule, and the related error for the last failure.
+   * Returns status information for each of your Config managed rules. The status includes information such as the last time Config invoked the rule, the last time Config failed to invoke the rule, and the related error for the last failure.
    */
   describeConfigRuleEvaluationStatus(params: ConfigService.Types.DescribeConfigRuleEvaluationStatusRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigRuleEvaluationStatusResponse) => void): Request<ConfigService.Types.DescribeConfigRuleEvaluationStatusResponse, AWSError>;
   /**
-   * Returns status information for each of your AWS managed Config rules. The status includes information such as the last time AWS Config invoked the rule, the last time AWS Config failed to invoke the rule, and the related error for the last failure.
+   * Returns status information for each of your Config managed rules. The status includes information such as the last time Config invoked the rule, the last time Config failed to invoke the rule, and the related error for the last failure.
    */
   describeConfigRuleEvaluationStatus(callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigRuleEvaluationStatusResponse) => void): Request<ConfigService.Types.DescribeConfigRuleEvaluationStatusResponse, AWSError>;
   /**
-   * Returns details about your AWS Config rules.
+   * Returns details about your Config rules.
    */
   describeConfigRules(params: ConfigService.Types.DescribeConfigRulesRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigRulesResponse) => void): Request<ConfigService.Types.DescribeConfigRulesResponse, AWSError>;
   /**
-   * Returns details about your AWS Config rules.
+   * Returns details about your Config rules.
    */
   describeConfigRules(callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigRulesResponse) => void): Request<ConfigService.Types.DescribeConfigRulesResponse, AWSError>;
   /**
-   * Returns status information for sources within an aggregator. The status includes information about the last time AWS Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. 
+   * Returns status information for sources within an aggregator. The status includes information about the last time Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. 
    */
   describeConfigurationAggregatorSourcesStatus(params: ConfigService.Types.DescribeConfigurationAggregatorSourcesStatusRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigurationAggregatorSourcesStatusResponse) => void): Request<ConfigService.Types.DescribeConfigurationAggregatorSourcesStatusResponse, AWSError>;
   /**
-   * Returns status information for sources within an aggregator. The status includes information about the last time AWS Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. 
+   * Returns status information for sources within an aggregator. The status includes information about the last time Config verified authorization between the source account and an aggregator account. In case of a failure, the status contains the related error code or message. 
    */
   describeConfigurationAggregatorSourcesStatus(callback?: (err: AWSError, data: ConfigService.Types.DescribeConfigurationAggregatorSourcesStatusResponse) => void): Request<ConfigService.Types.DescribeConfigurationAggregatorSourcesStatusResponse, AWSError>;
   /**
@@ -332,11 +332,11 @@ declare class ConfigService extends Service {
    */
   describeRemediationConfigurations(callback?: (err: AWSError, data: ConfigService.Types.DescribeRemediationConfigurationsResponse) => void): Request<ConfigService.Types.DescribeRemediationConfigurationsResponse, AWSError>;
   /**
-   * Returns the details of one or more remediation exceptions. A detailed view of a remediation exception for a set of resources that includes an explanation of an exception and the time when the exception will be deleted. When you specify the limit and the next token, you receive a paginated response.   AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. When you specify the limit and the next token, you receive a paginated response.  Limit and next token are not applicable if you request resources in batch. It is only applicable, when you request all resources. 
+   * Returns the details of one or more remediation exceptions. A detailed view of a remediation exception for a set of resources that includes an explanation of an exception and the time when the exception will be deleted. When you specify the limit and the next token, you receive a paginated response.   Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. When you specify the limit and the next token, you receive a paginated response.  Limit and next token are not applicable if you request resources in batch. It is only applicable, when you request all resources. 
    */
   describeRemediationExceptions(params: ConfigService.Types.DescribeRemediationExceptionsRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeRemediationExceptionsResponse) => void): Request<ConfigService.Types.DescribeRemediationExceptionsResponse, AWSError>;
   /**
-   * Returns the details of one or more remediation exceptions. A detailed view of a remediation exception for a set of resources that includes an explanation of an exception and the time when the exception will be deleted. When you specify the limit and the next token, you receive a paginated response.   AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. When you specify the limit and the next token, you receive a paginated response.  Limit and next token are not applicable if you request resources in batch. It is only applicable, when you request all resources. 
+   * Returns the details of one or more remediation exceptions. A detailed view of a remediation exception for a set of resources that includes an explanation of an exception and the time when the exception will be deleted. When you specify the limit and the next token, you receive a paginated response.   Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. When you specify the limit and the next token, you receive a paginated response.  Limit and next token are not applicable if you request resources in batch. It is only applicable, when you request all resources. 
    */
   describeRemediationExceptions(callback?: (err: AWSError, data: ConfigService.Types.DescribeRemediationExceptionsResponse) => void): Request<ConfigService.Types.DescribeRemediationExceptionsResponse, AWSError>;
   /**
@@ -348,19 +348,19 @@ declare class ConfigService extends Service {
    */
   describeRemediationExecutionStatus(callback?: (err: AWSError, data: ConfigService.Types.DescribeRemediationExecutionStatusResponse) => void): Request<ConfigService.Types.DescribeRemediationExecutionStatusResponse, AWSError>;
   /**
-   * Returns the details of one or more retention configurations. If the retention configuration name is not specified, this action returns the details for all the retention configurations for that account.  Currently, AWS Config supports only one retention configuration per region in your account. 
+   * Returns the details of one or more retention configurations. If the retention configuration name is not specified, this action returns the details for all the retention configurations for that account.  Currently, Config supports only one retention configuration per region in your account. 
    */
   describeRetentionConfigurations(params: ConfigService.Types.DescribeRetentionConfigurationsRequest, callback?: (err: AWSError, data: ConfigService.Types.DescribeRetentionConfigurationsResponse) => void): Request<ConfigService.Types.DescribeRetentionConfigurationsResponse, AWSError>;
   /**
-   * Returns the details of one or more retention configurations. If the retention configuration name is not specified, this action returns the details for all the retention configurations for that account.  Currently, AWS Config supports only one retention configuration per region in your account. 
+   * Returns the details of one or more retention configurations. If the retention configuration name is not specified, this action returns the details for all the retention configurations for that account.  Currently, Config supports only one retention configuration per region in your account. 
    */
   describeRetentionConfigurations(callback?: (err: AWSError, data: ConfigService.Types.DescribeRetentionConfigurationsResponse) => void): Request<ConfigService.Types.DescribeRetentionConfigurationsResponse, AWSError>;
   /**
-   * Returns the evaluation results for the specified AWS Config rule for a specific resource in a rule. The results indicate which AWS resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule.   The results can return an empty result page. But if you have a nextToken, the results are displayed on the next page. 
+   * Returns the evaluation results for the specified Config rule for a specific resource in a rule. The results indicate which Amazon Web Services resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule.   The results can return an empty result page. But if you have a nextToken, the results are displayed on the next page. 
    */
   getAggregateComplianceDetailsByConfigRule(params: ConfigService.Types.GetAggregateComplianceDetailsByConfigRuleRequest, callback?: (err: AWSError, data: ConfigService.Types.GetAggregateComplianceDetailsByConfigRuleResponse) => void): Request<ConfigService.Types.GetAggregateComplianceDetailsByConfigRuleResponse, AWSError>;
   /**
-   * Returns the evaluation results for the specified AWS Config rule for a specific resource in a rule. The results indicate which AWS resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule.   The results can return an empty result page. But if you have a nextToken, the results are displayed on the next page. 
+   * Returns the evaluation results for the specified Config rule for a specific resource in a rule. The results indicate which Amazon Web Services resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule.   The results can return an empty result page. But if you have a nextToken, the results are displayed on the next page. 
    */
   getAggregateComplianceDetailsByConfigRule(callback?: (err: AWSError, data: ConfigService.Types.GetAggregateComplianceDetailsByConfigRuleResponse) => void): Request<ConfigService.Types.GetAggregateComplianceDetailsByConfigRuleResponse, AWSError>;
   /**
@@ -372,19 +372,19 @@ declare class ConfigService extends Service {
    */
   getAggregateConfigRuleComplianceSummary(callback?: (err: AWSError, data: ConfigService.Types.GetAggregateConfigRuleComplianceSummaryResponse) => void): Request<ConfigService.Types.GetAggregateConfigRuleComplianceSummaryResponse, AWSError>;
   /**
-   * Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions in an aggregator. You can filter based on AWS Account ID or AWS Region.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
+   * Returns the count of compliant and noncompliant conformance packs across all Amazon Web Services accounts and Amazon Web Services Regions in an aggregator. You can filter based on Amazon Web Services account ID or Amazon Web Services Region.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
    */
   getAggregateConformancePackComplianceSummary(params: ConfigService.Types.GetAggregateConformancePackComplianceSummaryRequest, callback?: (err: AWSError, data: ConfigService.Types.GetAggregateConformancePackComplianceSummaryResponse) => void): Request<ConfigService.Types.GetAggregateConformancePackComplianceSummaryResponse, AWSError>;
   /**
-   * Returns the count of compliant and noncompliant conformance packs across all AWS Accounts and AWS Regions in an aggregator. You can filter based on AWS Account ID or AWS Region.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
+   * Returns the count of compliant and noncompliant conformance packs across all Amazon Web Services accounts and Amazon Web Services Regions in an aggregator. You can filter based on Amazon Web Services account ID or Amazon Web Services Region.  The results can return an empty result page, but if you have a nextToken, the results are displayed on the next page. 
    */
   getAggregateConformancePackComplianceSummary(callback?: (err: AWSError, data: ConfigService.Types.GetAggregateConformancePackComplianceSummaryResponse) => void): Request<ConfigService.Types.GetAggregateConformancePackComplianceSummaryResponse, AWSError>;
   /**
-   * Returns the resource counts across accounts and regions that are present in your AWS Config aggregator. You can request the resource counts by providing filters and GroupByKey. For example, if the input contains accountID 12345678910 and region us-east-1 in filters, the API returns the count of resources in account ID 12345678910 and region us-east-1. If the input contains ACCOUNT_ID as a GroupByKey, the API returns resource counts for all source accounts that are present in your aggregator.
+   * Returns the resource counts across accounts and regions that are present in your Config aggregator. You can request the resource counts by providing filters and GroupByKey. For example, if the input contains accountID 12345678910 and region us-east-1 in filters, the API returns the count of resources in account ID 12345678910 and region us-east-1. If the input contains ACCOUNT_ID as a GroupByKey, the API returns resource counts for all source accounts that are present in your aggregator.
    */
   getAggregateDiscoveredResourceCounts(params: ConfigService.Types.GetAggregateDiscoveredResourceCountsRequest, callback?: (err: AWSError, data: ConfigService.Types.GetAggregateDiscoveredResourceCountsResponse) => void): Request<ConfigService.Types.GetAggregateDiscoveredResourceCountsResponse, AWSError>;
   /**
-   * Returns the resource counts across accounts and regions that are present in your AWS Config aggregator. You can request the resource counts by providing filters and GroupByKey. For example, if the input contains accountID 12345678910 and region us-east-1 in filters, the API returns the count of resources in account ID 12345678910 and region us-east-1. If the input contains ACCOUNT_ID as a GroupByKey, the API returns resource counts for all source accounts that are present in your aggregator.
+   * Returns the resource counts across accounts and regions that are present in your Config aggregator. You can request the resource counts by providing filters and GroupByKey. For example, if the input contains accountID 12345678910 and region us-east-1 in filters, the API returns the count of resources in account ID 12345678910 and region us-east-1. If the input contains ACCOUNT_ID as a GroupByKey, the API returns resource counts for all source accounts that are present in your aggregator.
    */
   getAggregateDiscoveredResourceCounts(callback?: (err: AWSError, data: ConfigService.Types.GetAggregateDiscoveredResourceCountsResponse) => void): Request<ConfigService.Types.GetAggregateDiscoveredResourceCountsResponse, AWSError>;
   /**
@@ -396,23 +396,23 @@ declare class ConfigService extends Service {
    */
   getAggregateResourceConfig(callback?: (err: AWSError, data: ConfigService.Types.GetAggregateResourceConfigResponse) => void): Request<ConfigService.Types.GetAggregateResourceConfigResponse, AWSError>;
   /**
-   * Returns the evaluation results for the specified AWS Config rule. The results indicate which AWS resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule.
+   * Returns the evaluation results for the specified Config rule. The results indicate which Amazon Web Services resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule.
    */
   getComplianceDetailsByConfigRule(params: ConfigService.Types.GetComplianceDetailsByConfigRuleRequest, callback?: (err: AWSError, data: ConfigService.Types.GetComplianceDetailsByConfigRuleResponse) => void): Request<ConfigService.Types.GetComplianceDetailsByConfigRuleResponse, AWSError>;
   /**
-   * Returns the evaluation results for the specified AWS Config rule. The results indicate which AWS resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule.
+   * Returns the evaluation results for the specified Config rule. The results indicate which Amazon Web Services resources were evaluated by the rule, when each resource was last evaluated, and whether each resource complies with the rule.
    */
   getComplianceDetailsByConfigRule(callback?: (err: AWSError, data: ConfigService.Types.GetComplianceDetailsByConfigRuleResponse) => void): Request<ConfigService.Types.GetComplianceDetailsByConfigRuleResponse, AWSError>;
   /**
-   * Returns the evaluation results for the specified AWS resource. The results indicate which AWS Config rules were used to evaluate the resource, when each rule was last used, and whether the resource complies with each rule.
+   * Returns the evaluation results for the specified Amazon Web Services resource. The results indicate which Config rules were used to evaluate the resource, when each rule was last used, and whether the resource complies with each rule.
    */
   getComplianceDetailsByResource(params: ConfigService.Types.GetComplianceDetailsByResourceRequest, callback?: (err: AWSError, data: ConfigService.Types.GetComplianceDetailsByResourceResponse) => void): Request<ConfigService.Types.GetComplianceDetailsByResourceResponse, AWSError>;
   /**
-   * Returns the evaluation results for the specified AWS resource. The results indicate which AWS Config rules were used to evaluate the resource, when each rule was last used, and whether the resource complies with each rule.
+   * Returns the evaluation results for the specified Amazon Web Services resource. The results indicate which Config rules were used to evaluate the resource, when each rule was last used, and whether the resource complies with each rule.
    */
   getComplianceDetailsByResource(callback?: (err: AWSError, data: ConfigService.Types.GetComplianceDetailsByResourceResponse) => void): Request<ConfigService.Types.GetComplianceDetailsByResourceResponse, AWSError>;
   /**
-   * Returns the number of AWS Config rules that are compliant and noncompliant, up to a maximum of 25 for each.
+   * Returns the number of Config rules that are compliant and noncompliant, up to a maximum of 25 for each.
    */
   getComplianceSummaryByConfigRule(callback?: (err: AWSError, data: ConfigService.Types.GetComplianceSummaryByConfigRuleResponse) => void): Request<ConfigService.Types.GetComplianceSummaryByConfigRuleResponse, AWSError>;
   /**
@@ -424,11 +424,11 @@ declare class ConfigService extends Service {
    */
   getComplianceSummaryByResourceType(callback?: (err: AWSError, data: ConfigService.Types.GetComplianceSummaryByResourceTypeResponse) => void): Request<ConfigService.Types.GetComplianceSummaryByResourceTypeResponse, AWSError>;
   /**
-   * Returns compliance details of a conformance pack for all AWS resources that are monitered by conformance pack.
+   * Returns compliance details of a conformance pack for all Amazon Web Services resources that are monitered by conformance pack.
    */
   getConformancePackComplianceDetails(params: ConfigService.Types.GetConformancePackComplianceDetailsRequest, callback?: (err: AWSError, data: ConfigService.Types.GetConformancePackComplianceDetailsResponse) => void): Request<ConfigService.Types.GetConformancePackComplianceDetailsResponse, AWSError>;
   /**
-   * Returns compliance details of a conformance pack for all AWS resources that are monitered by conformance pack.
+   * Returns compliance details of a conformance pack for all Amazon Web Services resources that are monitered by conformance pack.
    */
   getConformancePackComplianceDetails(callback?: (err: AWSError, data: ConfigService.Types.GetConformancePackComplianceDetailsResponse) => void): Request<ConfigService.Types.GetConformancePackComplianceDetailsResponse, AWSError>;
   /**
@@ -440,11 +440,11 @@ declare class ConfigService extends Service {
    */
   getConformancePackComplianceSummary(callback?: (err: AWSError, data: ConfigService.Types.GetConformancePackComplianceSummaryResponse) => void): Request<ConfigService.Types.GetConformancePackComplianceSummaryResponse, AWSError>;
   /**
-   * Returns the resource types, the number of each resource type, and the total number of resources that AWS Config is recording in this region for your AWS account.   Example    AWS Config is recording three resource types in the US East (Ohio) Region for your account: 25 EC2 instances, 20 IAM users, and 15 S3 buckets.   You make a call to the GetDiscoveredResourceCounts action and specify that you want all resource types.    AWS Config returns the following:   The resource types (EC2 instances, IAM users, and S3 buckets).   The number of each resource type (25, 20, and 15).   The total number of all resources (60).     The response is paginated. By default, AWS Config lists 100 ResourceCount objects on each page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  If you make a call to the GetDiscoveredResourceCounts action, you might not immediately receive resource counts in the following situations:   You are a new AWS Config customer.   You just enabled resource recording.   It might take a few minutes for AWS Config to record and count your resources. Wait a few minutes and then retry the GetDiscoveredResourceCounts action.  
+   * Returns the resource types, the number of each resource type, and the total number of resources that Config is recording in this region for your Amazon Web Services account.   Example    Config is recording three resource types in the US East (Ohio) Region for your account: 25 EC2 instances, 20 IAM users, and 15 S3 buckets.   You make a call to the GetDiscoveredResourceCounts action and specify that you want all resource types.    Config returns the following:   The resource types (EC2 instances, IAM users, and S3 buckets).   The number of each resource type (25, 20, and 15).   The total number of all resources (60).     The response is paginated. By default, Config lists 100 ResourceCount objects on each page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  If you make a call to the GetDiscoveredResourceCounts action, you might not immediately receive resource counts in the following situations:   You are a new Config customer.   You just enabled resource recording.   It might take a few minutes for Config to record and count your resources. Wait a few minutes and then retry the GetDiscoveredResourceCounts action.  
    */
   getDiscoveredResourceCounts(params: ConfigService.Types.GetDiscoveredResourceCountsRequest, callback?: (err: AWSError, data: ConfigService.Types.GetDiscoveredResourceCountsResponse) => void): Request<ConfigService.Types.GetDiscoveredResourceCountsResponse, AWSError>;
   /**
-   * Returns the resource types, the number of each resource type, and the total number of resources that AWS Config is recording in this region for your AWS account.   Example    AWS Config is recording three resource types in the US East (Ohio) Region for your account: 25 EC2 instances, 20 IAM users, and 15 S3 buckets.   You make a call to the GetDiscoveredResourceCounts action and specify that you want all resource types.    AWS Config returns the following:   The resource types (EC2 instances, IAM users, and S3 buckets).   The number of each resource type (25, 20, and 15).   The total number of all resources (60).     The response is paginated. By default, AWS Config lists 100 ResourceCount objects on each page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  If you make a call to the GetDiscoveredResourceCounts action, you might not immediately receive resource counts in the following situations:   You are a new AWS Config customer.   You just enabled resource recording.   It might take a few minutes for AWS Config to record and count your resources. Wait a few minutes and then retry the GetDiscoveredResourceCounts action.  
+   * Returns the resource types, the number of each resource type, and the total number of resources that Config is recording in this region for your Amazon Web Services account.   Example    Config is recording three resource types in the US East (Ohio) Region for your account: 25 EC2 instances, 20 IAM users, and 15 S3 buckets.   You make a call to the GetDiscoveredResourceCounts action and specify that you want all resource types.    Config returns the following:   The resource types (EC2 instances, IAM users, and S3 buckets).   The number of each resource type (25, 20, and 15).   The total number of all resources (60).     The response is paginated. By default, Config lists 100 ResourceCount objects on each page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  If you make a call to the GetDiscoveredResourceCounts action, you might not immediately receive resource counts in the following situations:   You are a new Config customer.   You just enabled resource recording.   It might take a few minutes for Config to record and count your resources. Wait a few minutes and then retry the GetDiscoveredResourceCounts action.  
    */
   getDiscoveredResourceCounts(callback?: (err: AWSError, data: ConfigService.Types.GetDiscoveredResourceCountsResponse) => void): Request<ConfigService.Types.GetDiscoveredResourceCountsResponse, AWSError>;
   /**
@@ -464,11 +464,11 @@ declare class ConfigService extends Service {
    */
   getOrganizationConformancePackDetailedStatus(callback?: (err: AWSError, data: ConfigService.Types.GetOrganizationConformancePackDetailedStatusResponse) => void): Request<ConfigService.Types.GetOrganizationConformancePackDetailedStatusResponse, AWSError>;
   /**
-   * Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval. If you specified a retention period to retain your ConfigurationItems between a minimum of 30 days and a maximum of 7 years (2557 days), AWS Config returns the ConfigurationItems for the specified retention period.  The response is paginated. By default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified limit. In such cases, you can make another call, using the nextToken. 
+   * Returns a list of ConfigurationItems for the specified resource. The list contains details about each state of the resource during the specified time interval. If you specified a retention period to retain your ConfigurationItems between a minimum of 30 days and a maximum of 7 years (2557 days), Config returns the ConfigurationItems for the specified retention period.  The response is paginated. By default, Config returns a limit of 10 configuration items per page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified limit. In such cases, you can make another call, using the nextToken. 
    */
   getResourceConfigHistory(params: ConfigService.Types.GetResourceConfigHistoryRequest, callback?: (err: AWSError, data: ConfigService.Types.GetResourceConfigHistoryResponse) => void): Request<ConfigService.Types.GetResourceConfigHistoryResponse, AWSError>;
   /**
-   * Returns a list of configuration items for the specified resource. The list contains details about each state of the resource during the specified time interval. If you specified a retention period to retain your ConfigurationItems between a minimum of 30 days and a maximum of 7 years (2557 days), AWS Config returns the ConfigurationItems for the specified retention period.  The response is paginated. By default, AWS Config returns a limit of 10 configuration items per page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified limit. In such cases, you can make another call, using the nextToken. 
+   * Returns a list of ConfigurationItems for the specified resource. The list contains details about each state of the resource during the specified time interval. If you specified a retention period to retain your ConfigurationItems between a minimum of 30 days and a maximum of 7 years (2557 days), Config returns the ConfigurationItems for the specified retention period.  The response is paginated. By default, Config returns a limit of 10 configuration items per page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.  Each call to the API is limited to span a duration of seven days. It is likely that the number of records returned is smaller than the specified limit. In such cases, you can make another call, using the nextToken. 
    */
   getResourceConfigHistory(callback?: (err: AWSError, data: ConfigService.Types.GetResourceConfigHistoryResponse) => void): Request<ConfigService.Types.GetResourceConfigHistoryResponse, AWSError>;
   /**
@@ -488,27 +488,27 @@ declare class ConfigService extends Service {
    */
   listAggregateDiscoveredResources(callback?: (err: AWSError, data: ConfigService.Types.ListAggregateDiscoveredResourcesResponse) => void): Request<ConfigService.Types.ListAggregateDiscoveredResourcesResponse, AWSError>;
   /**
-   * Accepts a resource type and returns a list of resource identifiers for the resources of that type. A resource identifier includes the resource type, ID, and (if available) the custom resource name. The results consist of resources that AWS Config has discovered, including those that AWS Config is not currently recording. You can narrow the results to include only resources that have specific resource IDs or a resource name.  You can specify either resource IDs or a resource name, but not both, in the same request.  The response is paginated. By default, AWS Config lists 100 resource identifiers on each page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.
+   * Accepts a resource type and returns a list of resource identifiers for the resources of that type. A resource identifier includes the resource type, ID, and (if available) the custom resource name. The results consist of resources that Config has discovered, including those that Config is not currently recording. You can narrow the results to include only resources that have specific resource IDs or a resource name.  You can specify either resource IDs or a resource name, but not both, in the same request.  The response is paginated. By default, Config lists 100 resource identifiers on each page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.
    */
   listDiscoveredResources(params: ConfigService.Types.ListDiscoveredResourcesRequest, callback?: (err: AWSError, data: ConfigService.Types.ListDiscoveredResourcesResponse) => void): Request<ConfigService.Types.ListDiscoveredResourcesResponse, AWSError>;
   /**
-   * Accepts a resource type and returns a list of resource identifiers for the resources of that type. A resource identifier includes the resource type, ID, and (if available) the custom resource name. The results consist of resources that AWS Config has discovered, including those that AWS Config is not currently recording. You can narrow the results to include only resources that have specific resource IDs or a resource name.  You can specify either resource IDs or a resource name, but not both, in the same request.  The response is paginated. By default, AWS Config lists 100 resource identifiers on each page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.
+   * Accepts a resource type and returns a list of resource identifiers for the resources of that type. A resource identifier includes the resource type, ID, and (if available) the custom resource name. The results consist of resources that Config has discovered, including those that Config is not currently recording. You can narrow the results to include only resources that have specific resource IDs or a resource name.  You can specify either resource IDs or a resource name, but not both, in the same request.  The response is paginated. By default, Config lists 100 resource identifiers on each page. You can customize this number with the limit parameter. The response includes a nextToken string. To get the next page of results, run the request again and specify the string for the nextToken parameter.
    */
   listDiscoveredResources(callback?: (err: AWSError, data: ConfigService.Types.ListDiscoveredResourcesResponse) => void): Request<ConfigService.Types.ListDiscoveredResourcesResponse, AWSError>;
   /**
-   * Lists the stored queries for a single AWS account and a single AWS Region. The default is 100. 
+   * Lists the stored queries for a single Amazon Web Services account and a single Amazon Web Services Region. The default is 100. 
    */
   listStoredQueries(params: ConfigService.Types.ListStoredQueriesRequest, callback?: (err: AWSError, data: ConfigService.Types.ListStoredQueriesResponse) => void): Request<ConfigService.Types.ListStoredQueriesResponse, AWSError>;
   /**
-   * Lists the stored queries for a single AWS account and a single AWS Region. The default is 100. 
+   * Lists the stored queries for a single Amazon Web Services account and a single Amazon Web Services Region. The default is 100. 
    */
   listStoredQueries(callback?: (err: AWSError, data: ConfigService.Types.ListStoredQueriesResponse) => void): Request<ConfigService.Types.ListStoredQueriesResponse, AWSError>;
   /**
-   * List the tags for AWS Config resource.
+   * List the tags for Config resource.
    */
   listTagsForResource(params: ConfigService.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: ConfigService.Types.ListTagsForResourceResponse) => void): Request<ConfigService.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * List the tags for AWS Config resource.
+   * List the tags for Config resource.
    */
   listTagsForResource(callback?: (err: AWSError, data: ConfigService.Types.ListTagsForResourceResponse) => void): Request<ConfigService.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -520,19 +520,19 @@ declare class ConfigService extends Service {
    */
   putAggregationAuthorization(callback?: (err: AWSError, data: ConfigService.Types.PutAggregationAuthorizationResponse) => void): Request<ConfigService.Types.PutAggregationAuthorizationResponse, AWSError>;
   /**
-   * Adds or updates an AWS Config rule for evaluating whether your AWS resources comply with your desired configurations. You can use this action for custom AWS Config rules and AWS managed Config rules. A custom AWS Config rule is a rule that you develop and maintain. An AWS managed Config rule is a customizable, predefined rule that AWS Config provides. If you are adding a new custom AWS Config rule, you must first create the AWS Lambda function that the rule invokes to evaluate your resources. When you use the PutConfigRule action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. Specify the ARN for the SourceIdentifier key. This key is part of the Source object, which is part of the ConfigRule object.  If you are adding an AWS managed Config rule, specify the rule's identifier for the SourceIdentifier key. To reference AWS managed Config rule identifiers, see About AWS Managed Config Rules. For any new rule that you add, specify the ConfigRuleName in the ConfigRule object. Do not specify the ConfigRuleArn or the ConfigRuleId. These values are generated by AWS Config for new rules. If you are updating a rule that you added previously, you can specify the rule by ConfigRuleName, ConfigRuleId, or ConfigRuleArn in the ConfigRule data type that you use in this request. The maximum number of rules that AWS Config supports is 150. For information about requesting a rule limit increase, see AWS Config Limits in the AWS General Reference Guide. For more information about developing and using AWS Config rules, see Evaluating AWS Resource Configurations with AWS Config in the AWS Config Developer Guide.
+   * Adds or updates an Config rule for evaluating whether your Amazon Web Services resources comply with your desired configurations. You can use this action for custom Config rules and Config managed rules. A custom Config rule is a rule that you develop and maintain. An Config managed rule is a customizable, predefined rule that Config provides. If you are adding a new custom Config rule, you must first create the Lambda function that the rule invokes to evaluate your resources. When you use the PutConfigRule action to add the rule to Config, you must specify the Amazon Resource Name (ARN) that Lambda assigns to the function. Specify the ARN for the SourceIdentifier key. This key is part of the Source object, which is part of the ConfigRule object.  If you are adding an Config managed rule, specify the rule's identifier for the SourceIdentifier key. To reference Config managed rule identifiers, see About Config managed rules. For any new rule that you add, specify the ConfigRuleName in the ConfigRule object. Do not specify the ConfigRuleArn or the ConfigRuleId. These values are generated by Config for new rules. If you are updating a rule that you added previously, you can specify the rule by ConfigRuleName, ConfigRuleId, or ConfigRuleArn in the ConfigRule data type that you use in this request. The maximum number of rules that Config supports is 150. For information about requesting a rule limit increase, see Config Limits in the Amazon Web Services General Reference Guide. For more information about developing and using Config rules, see Evaluating Amazon Web Services resource Configurations with Config in the Config Developer Guide.
    */
   putConfigRule(params: ConfigService.Types.PutConfigRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds or updates an AWS Config rule for evaluating whether your AWS resources comply with your desired configurations. You can use this action for custom AWS Config rules and AWS managed Config rules. A custom AWS Config rule is a rule that you develop and maintain. An AWS managed Config rule is a customizable, predefined rule that AWS Config provides. If you are adding a new custom AWS Config rule, you must first create the AWS Lambda function that the rule invokes to evaluate your resources. When you use the PutConfigRule action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. Specify the ARN for the SourceIdentifier key. This key is part of the Source object, which is part of the ConfigRule object.  If you are adding an AWS managed Config rule, specify the rule's identifier for the SourceIdentifier key. To reference AWS managed Config rule identifiers, see About AWS Managed Config Rules. For any new rule that you add, specify the ConfigRuleName in the ConfigRule object. Do not specify the ConfigRuleArn or the ConfigRuleId. These values are generated by AWS Config for new rules. If you are updating a rule that you added previously, you can specify the rule by ConfigRuleName, ConfigRuleId, or ConfigRuleArn in the ConfigRule data type that you use in this request. The maximum number of rules that AWS Config supports is 150. For information about requesting a rule limit increase, see AWS Config Limits in the AWS General Reference Guide. For more information about developing and using AWS Config rules, see Evaluating AWS Resource Configurations with AWS Config in the AWS Config Developer Guide.
+   * Adds or updates an Config rule for evaluating whether your Amazon Web Services resources comply with your desired configurations. You can use this action for custom Config rules and Config managed rules. A custom Config rule is a rule that you develop and maintain. An Config managed rule is a customizable, predefined rule that Config provides. If you are adding a new custom Config rule, you must first create the Lambda function that the rule invokes to evaluate your resources. When you use the PutConfigRule action to add the rule to Config, you must specify the Amazon Resource Name (ARN) that Lambda assigns to the function. Specify the ARN for the SourceIdentifier key. This key is part of the Source object, which is part of the ConfigRule object.  If you are adding an Config managed rule, specify the rule's identifier for the SourceIdentifier key. To reference Config managed rule identifiers, see About Config managed rules. For any new rule that you add, specify the ConfigRuleName in the ConfigRule object. Do not specify the ConfigRuleArn or the ConfigRuleId. These values are generated by Config for new rules. If you are updating a rule that you added previously, you can specify the rule by ConfigRuleName, ConfigRuleId, or ConfigRuleArn in the ConfigRule data type that you use in this request. The maximum number of rules that Config supports is 150. For information about requesting a rule limit increase, see Config Limits in the Amazon Web Services General Reference Guide. For more information about developing and using Config rules, see Evaluating Amazon Web Services resource Configurations with Config in the Config Developer Guide.
    */
   putConfigRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates and updates the configuration aggregator with the selected source accounts and regions. The source account can be individual account(s) or an organization.  accountIds that are passed will be replaced with existing accounts. If you want to add additional accounts into the aggregator, call DescribeAggregator to get the previous accounts and then append new ones.  AWS Config should be enabled in source accounts and regions you want to aggregate. If your source type is an organization, you must be signed in to the management account or a registered delegated administrator and all the features must be enabled in your organization. If the caller is a management account, AWS Config calls EnableAwsServiceAccess API to enable integration between AWS Config and AWS Organizations. If the caller is a registered delegated administrator, AWS Config calls ListDelegatedAdministrators API to verify whether the caller is a valid delegated administrator. To register a delegated administrator, see Register a Delegated Administrator in the AWS Config developer guide.  
+   * Creates and updates the configuration aggregator with the selected source accounts and regions. The source account can be individual account(s) or an organization.  accountIds that are passed will be replaced with existing accounts. If you want to add additional accounts into the aggregator, call DescribeAggregator to get the previous accounts and then append new ones.  Config should be enabled in source accounts and regions you want to aggregate. If your source type is an organization, you must be signed in to the management account or a registered delegated administrator and all the features must be enabled in your organization. If the caller is a management account, Config calls EnableAwsServiceAccess API to enable integration between Config and Organizations. If the caller is a registered delegated administrator, Config calls ListDelegatedAdministrators API to verify whether the caller is a valid delegated administrator. To register a delegated administrator, see Register a Delegated Administrator in the Config developer guide.  
    */
   putConfigurationAggregator(params: ConfigService.Types.PutConfigurationAggregatorRequest, callback?: (err: AWSError, data: ConfigService.Types.PutConfigurationAggregatorResponse) => void): Request<ConfigService.Types.PutConfigurationAggregatorResponse, AWSError>;
   /**
-   * Creates and updates the configuration aggregator with the selected source accounts and regions. The source account can be individual account(s) or an organization.  accountIds that are passed will be replaced with existing accounts. If you want to add additional accounts into the aggregator, call DescribeAggregator to get the previous accounts and then append new ones.  AWS Config should be enabled in source accounts and regions you want to aggregate. If your source type is an organization, you must be signed in to the management account or a registered delegated administrator and all the features must be enabled in your organization. If the caller is a management account, AWS Config calls EnableAwsServiceAccess API to enable integration between AWS Config and AWS Organizations. If the caller is a registered delegated administrator, AWS Config calls ListDelegatedAdministrators API to verify whether the caller is a valid delegated administrator. To register a delegated administrator, see Register a Delegated Administrator in the AWS Config developer guide.  
+   * Creates and updates the configuration aggregator with the selected source accounts and regions. The source account can be individual account(s) or an organization.  accountIds that are passed will be replaced with existing accounts. If you want to add additional accounts into the aggregator, call DescribeAggregator to get the previous accounts and then append new ones.  Config should be enabled in source accounts and regions you want to aggregate. If your source type is an organization, you must be signed in to the management account or a registered delegated administrator and all the features must be enabled in your organization. If the caller is a management account, Config calls EnableAwsServiceAccess API to enable integration between Config and Organizations. If the caller is a registered delegated administrator, Config calls ListDelegatedAdministrators API to verify whether the caller is a valid delegated administrator. To register a delegated administrator, see Register a Delegated Administrator in the Config developer guide.  
    */
   putConfigurationAggregator(callback?: (err: AWSError, data: ConfigService.Types.PutConfigurationAggregatorResponse) => void): Request<ConfigService.Types.PutConfigurationAggregatorResponse, AWSError>;
   /**
@@ -544,11 +544,11 @@ declare class ConfigService extends Service {
    */
   putConfigurationRecorder(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or updates a conformance pack. A conformance pack is a collection of AWS Config rules that can be easily deployed in an account and a region and across AWS Organization. This API creates a service linked role AWSServiceRoleForConfigConforms in your account. The service linked role is created only when the role does not exist in your account.   You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both AWS Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. 
+   * Creates or updates a conformance pack. A conformance pack is a collection of Config rules that can be easily deployed in an account and a region and across Amazon Web Services Organization. This API creates a service linked role AWSServiceRoleForConfigConforms in your account. The service linked role is created only when the role does not exist in your account.   You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. 
    */
   putConformancePack(params: ConfigService.Types.PutConformancePackRequest, callback?: (err: AWSError, data: ConfigService.Types.PutConformancePackResponse) => void): Request<ConfigService.Types.PutConformancePackResponse, AWSError>;
   /**
-   * Creates or updates a conformance pack. A conformance pack is a collection of AWS Config rules that can be easily deployed in an account and a region and across AWS Organization. This API creates a service linked role AWSServiceRoleForConfigConforms in your account. The service linked role is created only when the role does not exist in your account.   You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both AWS Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. 
+   * Creates or updates a conformance pack. A conformance pack is a collection of Config rules that can be easily deployed in an account and a region and across Amazon Web Services Organization. This API creates a service linked role AWSServiceRoleForConfigConforms in your account. The service linked role is created only when the role does not exist in your account.   You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. 
    */
   putConformancePack(callback?: (err: AWSError, data: ConfigService.Types.PutConformancePackResponse) => void): Request<ConfigService.Types.PutConformancePackResponse, AWSError>;
   /**
@@ -560,123 +560,123 @@ declare class ConfigService extends Service {
    */
   putDeliveryChannel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Used by an AWS Lambda function to deliver evaluation results to AWS Config. This action is required in every AWS Lambda function that is invoked by an AWS Config rule.
+   * Used by an Lambda function to deliver evaluation results to Config. This action is required in every Lambda function that is invoked by an Config rule.
    */
   putEvaluations(params: ConfigService.Types.PutEvaluationsRequest, callback?: (err: AWSError, data: ConfigService.Types.PutEvaluationsResponse) => void): Request<ConfigService.Types.PutEvaluationsResponse, AWSError>;
   /**
-   * Used by an AWS Lambda function to deliver evaluation results to AWS Config. This action is required in every AWS Lambda function that is invoked by an AWS Config rule.
+   * Used by an Lambda function to deliver evaluation results to Config. This action is required in every Lambda function that is invoked by an Config rule.
    */
   putEvaluations(callback?: (err: AWSError, data: ConfigService.Types.PutEvaluationsResponse) => void): Request<ConfigService.Types.PutEvaluationsResponse, AWSError>;
   /**
-   * Add or updates the evaluations for process checks. This API checks if the rule is a process check when the name of the AWS Config rule is provided.
+   * Add or updates the evaluations for process checks. This API checks if the rule is a process check when the name of the Config rule is provided.
    */
   putExternalEvaluation(params: ConfigService.Types.PutExternalEvaluationRequest, callback?: (err: AWSError, data: ConfigService.Types.PutExternalEvaluationResponse) => void): Request<ConfigService.Types.PutExternalEvaluationResponse, AWSError>;
   /**
-   * Add or updates the evaluations for process checks. This API checks if the rule is a process check when the name of the AWS Config rule is provided.
+   * Add or updates the evaluations for process checks. This API checks if the rule is a process check when the name of the Config rule is provided.
    */
   putExternalEvaluation(callback?: (err: AWSError, data: ConfigService.Types.PutExternalEvaluationResponse) => void): Request<ConfigService.Types.PutExternalEvaluationResponse, AWSError>;
   /**
-   * Adds or updates organization config rule for your entire organization evaluating whether your AWS resources comply with your desired configurations.  Only a master account and a delegated administrator can create or update an organization config rule. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added.  This API enables organization service access through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. AWS Config verifies the existence of role with GetRole action. To use this API with delegated administrator, register a delegated administrator by calling AWS Organization register-delegated-administrator for config-multiaccountsetup.amazonaws.com.  You can use this action to create both custom AWS Config rules and AWS managed Config rules. If you are adding a new custom AWS Config rule, you must first create AWS Lambda function in the master account or a delegated administrator that the rule invokes to evaluate your resources. When you use the PutOrganizationConfigRule action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. If you are adding an AWS managed Config rule, specify the rule's identifier for the RuleIdentifier key. The maximum number of organization config rules that AWS Config supports is 150 and 3 delegated administrator per organization.   Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. Specify either OrganizationCustomRuleMetadata or OrganizationManagedRuleMetadata. 
+   * Adds or updates organization config rule for your entire organization evaluating whether your Amazon Web Services resources comply with your desired configurations.  Only a master account and a delegated administrator can create or update an organization config rule. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added.  This API enables organization service access through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. Config verifies the existence of role with GetRole action. To use this API with delegated administrator, register a delegated administrator by calling Amazon Web Services Organization register-delegated-administrator for config-multiaccountsetup.amazonaws.com.  You can use this action to create both custom Config rules and Config managed rules. If you are adding a new custom Config rule, you must first create Lambda function in the master account or a delegated administrator that the rule invokes to evaluate your resources. You also need to create an IAM role in the managed-account that can be assumed by the Lambda function. When you use the PutOrganizationConfigRule action to add the rule to Config, you must specify the Amazon Resource Name (ARN) that Lambda assigns to the function. If you are adding an Config managed rule, specify the rule's identifier for the RuleIdentifier key. The maximum number of organization config rules that Config supports is 150 and 3 delegated administrator per organization.   Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. Specify either OrganizationCustomRuleMetadata or OrganizationManagedRuleMetadata. 
    */
   putOrganizationConfigRule(params: ConfigService.Types.PutOrganizationConfigRuleRequest, callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConfigRuleResponse) => void): Request<ConfigService.Types.PutOrganizationConfigRuleResponse, AWSError>;
   /**
-   * Adds or updates organization config rule for your entire organization evaluating whether your AWS resources comply with your desired configurations.  Only a master account and a delegated administrator can create or update an organization config rule. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added.  This API enables organization service access through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. AWS Config verifies the existence of role with GetRole action. To use this API with delegated administrator, register a delegated administrator by calling AWS Organization register-delegated-administrator for config-multiaccountsetup.amazonaws.com.  You can use this action to create both custom AWS Config rules and AWS managed Config rules. If you are adding a new custom AWS Config rule, you must first create AWS Lambda function in the master account or a delegated administrator that the rule invokes to evaluate your resources. When you use the PutOrganizationConfigRule action to add the rule to AWS Config, you must specify the Amazon Resource Name (ARN) that AWS Lambda assigns to the function. If you are adding an AWS managed Config rule, specify the rule's identifier for the RuleIdentifier key. The maximum number of organization config rules that AWS Config supports is 150 and 3 delegated administrator per organization.   Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. Specify either OrganizationCustomRuleMetadata or OrganizationManagedRuleMetadata. 
+   * Adds or updates organization config rule for your entire organization evaluating whether your Amazon Web Services resources comply with your desired configurations.  Only a master account and a delegated administrator can create or update an organization config rule. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added.  This API enables organization service access through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. Config verifies the existence of role with GetRole action. To use this API with delegated administrator, register a delegated administrator by calling Amazon Web Services Organization register-delegated-administrator for config-multiaccountsetup.amazonaws.com.  You can use this action to create both custom Config rules and Config managed rules. If you are adding a new custom Config rule, you must first create Lambda function in the master account or a delegated administrator that the rule invokes to evaluate your resources. You also need to create an IAM role in the managed-account that can be assumed by the Lambda function. When you use the PutOrganizationConfigRule action to add the rule to Config, you must specify the Amazon Resource Name (ARN) that Lambda assigns to the function. If you are adding an Config managed rule, specify the rule's identifier for the RuleIdentifier key. The maximum number of organization config rules that Config supports is 150 and 3 delegated administrator per organization.   Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. Specify either OrganizationCustomRuleMetadata or OrganizationManagedRuleMetadata. 
    */
   putOrganizationConfigRule(callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConfigRuleResponse) => void): Request<ConfigService.Types.PutOrganizationConfigRuleResponse, AWSError>;
   /**
-   * Deploys conformance packs across member accounts in an AWS Organization. Only a master account and a delegated administrator can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added. This API enables organization service access for config-multiaccountsetup.amazonaws.com through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. To use this API with delegated administrator, register a delegated administrator by calling AWS Organization register-delegate-admin for config-multiaccountsetup.amazonaws.com.  Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both AWS Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated. You cannot update a conformance pack while it is in this state. You can create 50 conformance packs with 25 AWS Config rules in each pack and 3 delegated administrator per organization.  
+   * Deploys conformance packs across member accounts in an Amazon Web Services Organization. Only a master account and a delegated administrator can call this API. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added. This API enables organization service access for config-multiaccountsetup.amazonaws.com through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. To use this API with delegated administrator, register a delegated administrator by calling Amazon Web Services Organization register-delegate-admin for config-multiaccountsetup.amazonaws.com.  Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated. You cannot update a conformance pack while it is in this state. You can create 50 conformance packs with 25 Config rules in each pack and 3 delegated administrator per organization.  
    */
   putOrganizationConformancePack(params: ConfigService.Types.PutOrganizationConformancePackRequest, callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConformancePackResponse) => void): Request<ConfigService.Types.PutOrganizationConformancePackResponse, AWSError>;
   /**
-   * Deploys conformance packs across member accounts in an AWS Organization. Only a master account and a delegated administrator can call this API. When calling this API with a delegated administrator, you must ensure AWS Organizations ListDelegatedAdministrator permissions are added. This API enables organization service access for config-multiaccountsetup.amazonaws.com through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. To use this API with delegated administrator, register a delegated administrator by calling AWS Organization register-delegate-admin for config-multiaccountsetup.amazonaws.com.  Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both AWS Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. AWS Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated. You cannot update a conformance pack while it is in this state. You can create 50 conformance packs with 25 AWS Config rules in each pack and 3 delegated administrator per organization.  
+   * Deploys conformance packs across member accounts in an Amazon Web Services Organization. Only a master account and a delegated administrator can call this API. When calling this API with a delegated administrator, you must ensure Organizations ListDelegatedAdministrator permissions are added. This API enables organization service access for config-multiaccountsetup.amazonaws.com through the EnableAWSServiceAccess action and creates a service linked role AWSServiceRoleForConfigMultiAccountSetup in the master or delegated administrator account of your organization. The service linked role is created only when the role does not exist in the caller account. To use this API with delegated administrator, register a delegated administrator by calling Amazon Web Services Organization register-delegate-admin for config-multiaccountsetup.amazonaws.com.  Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an organization. You must specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If you provide both Config uses the TemplateS3Uri parameter and ignores the TemplateBody parameter. Config sets the state of a conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created or updated. You cannot update a conformance pack while it is in this state. You can create 50 conformance packs with 25 Config rules in each pack and 3 delegated administrator per organization.  
    */
   putOrganizationConformancePack(callback?: (err: AWSError, data: ConfigService.Types.PutOrganizationConformancePackResponse) => void): Request<ConfigService.Types.PutOrganizationConformancePackResponse, AWSError>;
   /**
-   * Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the RemediationConfiguration object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target.   If you make backward incompatible changes to the SSM document, you must call this again to ensure the remediations can run. This API does not support adding remediation configurations for service-linked AWS Config Rules such as Organization Config rules, the rules deployed by conformance packs, and rules deployed by AWS Security Hub. 
+   * Adds or updates the remediation configuration with a specific Config rule with the selected target or action. The API creates the RemediationConfiguration object for the Config rule. The Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target.   If you make backward incompatible changes to the SSM document, you must call this again to ensure the remediations can run. This API does not support adding remediation configurations for service-linked Config Rules such as Organization Config rules, the rules deployed by conformance packs, and rules deployed by Amazon Web Services Security Hub. 
    */
   putRemediationConfigurations(params: ConfigService.Types.PutRemediationConfigurationsRequest, callback?: (err: AWSError, data: ConfigService.Types.PutRemediationConfigurationsResponse) => void): Request<ConfigService.Types.PutRemediationConfigurationsResponse, AWSError>;
   /**
-   * Adds or updates the remediation configuration with a specific AWS Config rule with the selected target or action. The API creates the RemediationConfiguration object for the AWS Config rule. The AWS Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target.   If you make backward incompatible changes to the SSM document, you must call this again to ensure the remediations can run. This API does not support adding remediation configurations for service-linked AWS Config Rules such as Organization Config rules, the rules deployed by conformance packs, and rules deployed by AWS Security Hub. 
+   * Adds or updates the remediation configuration with a specific Config rule with the selected target or action. The API creates the RemediationConfiguration object for the Config rule. The Config rule must already exist for you to add a remediation configuration. The target (SSM document) must exist and have permissions to use the target.   If you make backward incompatible changes to the SSM document, you must call this again to ensure the remediations can run. This API does not support adding remediation configurations for service-linked Config Rules such as Organization Config rules, the rules deployed by conformance packs, and rules deployed by Amazon Web Services Security Hub. 
    */
   putRemediationConfigurations(callback?: (err: AWSError, data: ConfigService.Types.PutRemediationConfigurationsResponse) => void): Request<ConfigService.Types.PutRemediationConfigurationsResponse, AWSError>;
   /**
-   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an existing exception for a specific resource with a specific AWS Config rule.   AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
+   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an existing exception for a specific resource with a specific Config rule.   Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
    */
   putRemediationExceptions(params: ConfigService.Types.PutRemediationExceptionsRequest, callback?: (err: AWSError, data: ConfigService.Types.PutRemediationExceptionsResponse) => void): Request<ConfigService.Types.PutRemediationExceptionsResponse, AWSError>;
   /**
-   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an existing exception for a specific resource with a specific AWS Config rule.   AWS Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
+   * A remediation exception is when a specific resource is no longer considered for auto-remediation. This API adds a new exception or updates an existing exception for a specific resource with a specific Config rule.   Config generates a remediation exception when a problem occurs executing a remediation action to a specific resource. Remediation exceptions blocks auto-remediation until the exception is cleared. 
    */
   putRemediationExceptions(callback?: (err: AWSError, data: ConfigService.Types.PutRemediationExceptionsResponse) => void): Request<ConfigService.Types.PutRemediationExceptionsResponse, AWSError>;
   /**
-   * Records the configuration state for the resource provided in the request. The configuration state of a resource is represented in AWS Config as Configuration Items. Once this API records the configuration item, you can retrieve the list of configuration items for the custom resource type using existing AWS Config APIs.   The custom resource type must be registered with AWS CloudFormation. This API accepts the configuration item registered with AWS CloudFormation. When you call this API, AWS Config only stores configuration state of the resource provided in the request. This API does not change or remediate the configuration of the resource.  Write-only schema properites are not recorded as part of the published configuration item. 
+   * Records the configuration state for the resource provided in the request. The configuration state of a resource is represented in Config as Configuration Items. Once this API records the configuration item, you can retrieve the list of configuration items for the custom resource type using existing Config APIs.   The custom resource type must be registered with CloudFormation. This API accepts the configuration item registered with CloudFormation. When you call this API, Config only stores configuration state of the resource provided in the request. This API does not change or remediate the configuration of the resource.  Write-only schema properites are not recorded as part of the published configuration item. 
    */
   putResourceConfig(params: ConfigService.Types.PutResourceConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Records the configuration state for the resource provided in the request. The configuration state of a resource is represented in AWS Config as Configuration Items. Once this API records the configuration item, you can retrieve the list of configuration items for the custom resource type using existing AWS Config APIs.   The custom resource type must be registered with AWS CloudFormation. This API accepts the configuration item registered with AWS CloudFormation. When you call this API, AWS Config only stores configuration state of the resource provided in the request. This API does not change or remediate the configuration of the resource.  Write-only schema properites are not recorded as part of the published configuration item. 
+   * Records the configuration state for the resource provided in the request. The configuration state of a resource is represented in Config as Configuration Items. Once this API records the configuration item, you can retrieve the list of configuration items for the custom resource type using existing Config APIs.   The custom resource type must be registered with CloudFormation. This API accepts the configuration item registered with CloudFormation. When you call this API, Config only stores configuration state of the resource provided in the request. This API does not change or remediate the configuration of the resource.  Write-only schema properites are not recorded as part of the published configuration item. 
    */
   putResourceConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates and updates the retention configuration with details about retention period (number of days) that AWS Config stores your historical information. The API creates the RetentionConfiguration object and names the object as default. When you have a RetentionConfiguration object named default, calling the API modifies the default object.   Currently, AWS Config supports only one retention configuration per region in your account. 
+   * Creates and updates the retention configuration with details about retention period (number of days) that Config stores your historical information. The API creates the RetentionConfiguration object and names the object as default. When you have a RetentionConfiguration object named default, calling the API modifies the default object.   Currently, Config supports only one retention configuration per region in your account. 
    */
   putRetentionConfiguration(params: ConfigService.Types.PutRetentionConfigurationRequest, callback?: (err: AWSError, data: ConfigService.Types.PutRetentionConfigurationResponse) => void): Request<ConfigService.Types.PutRetentionConfigurationResponse, AWSError>;
   /**
-   * Creates and updates the retention configuration with details about retention period (number of days) that AWS Config stores your historical information. The API creates the RetentionConfiguration object and names the object as default. When you have a RetentionConfiguration object named default, calling the API modifies the default object.   Currently, AWS Config supports only one retention configuration per region in your account. 
+   * Creates and updates the retention configuration with details about retention period (number of days) that Config stores your historical information. The API creates the RetentionConfiguration object and names the object as default. When you have a RetentionConfiguration object named default, calling the API modifies the default object.   Currently, Config supports only one retention configuration per region in your account. 
    */
   putRetentionConfiguration(callback?: (err: AWSError, data: ConfigService.Types.PutRetentionConfigurationResponse) => void): Request<ConfigService.Types.PutRetentionConfigurationResponse, AWSError>;
   /**
-   * Saves a new query or updates an existing saved query. The QueryName must be unique for a single AWS account and a single AWS Region. You can create upto 300 queries in a single AWS account and a single AWS Region.
+   * Saves a new query or updates an existing saved query. The QueryName must be unique for a single Amazon Web Services account and a single Amazon Web Services Region. You can create upto 300 queries in a single Amazon Web Services account and a single Amazon Web Services Region.
    */
   putStoredQuery(params: ConfigService.Types.PutStoredQueryRequest, callback?: (err: AWSError, data: ConfigService.Types.PutStoredQueryResponse) => void): Request<ConfigService.Types.PutStoredQueryResponse, AWSError>;
   /**
-   * Saves a new query or updates an existing saved query. The QueryName must be unique for a single AWS account and a single AWS Region. You can create upto 300 queries in a single AWS account and a single AWS Region.
+   * Saves a new query or updates an existing saved query. The QueryName must be unique for a single Amazon Web Services account and a single Amazon Web Services Region. You can create upto 300 queries in a single Amazon Web Services account and a single Amazon Web Services Region.
    */
   putStoredQuery(callback?: (err: AWSError, data: ConfigService.Types.PutStoredQueryResponse) => void): Request<ConfigService.Types.PutStoredQueryResponse, AWSError>;
   /**
-   * Accepts a structured query language (SQL) SELECT command and an aggregator to query configuration state of AWS resources across multiple accounts and regions, performs the corresponding search, and returns resource configurations matching the properties. For more information about query components, see the  Query Components  section in the AWS Config Developer Guide.
+   * Accepts a structured query language (SQL) SELECT command and an aggregator to query configuration state of Amazon Web Services resources across multiple accounts and regions, performs the corresponding search, and returns resource configurations matching the properties. For more information about query components, see the  Query Components  section in the Config Developer Guide.  If you run an aggregation query (i.e., using GROUP BY or using aggregate functions such as COUNT; e.g., SELECT resourceId, COUNT(*) WHERE resourceType = 'AWS::IAM::Role' GROUP BY resourceId) and do not specify the MaxResults or the Limit query parameters, the default page size is set to 500. If you run a non-aggregation query (i.e., not using GROUP BY or aggregate function; e.g., SELECT * WHERE resourceType = 'AWS::IAM::Role') and do not specify the MaxResults or the Limit query parameters, the default page size is set to 25. 
    */
   selectAggregateResourceConfig(params: ConfigService.Types.SelectAggregateResourceConfigRequest, callback?: (err: AWSError, data: ConfigService.Types.SelectAggregateResourceConfigResponse) => void): Request<ConfigService.Types.SelectAggregateResourceConfigResponse, AWSError>;
   /**
-   * Accepts a structured query language (SQL) SELECT command and an aggregator to query configuration state of AWS resources across multiple accounts and regions, performs the corresponding search, and returns resource configurations matching the properties. For more information about query components, see the  Query Components  section in the AWS Config Developer Guide.
+   * Accepts a structured query language (SQL) SELECT command and an aggregator to query configuration state of Amazon Web Services resources across multiple accounts and regions, performs the corresponding search, and returns resource configurations matching the properties. For more information about query components, see the  Query Components  section in the Config Developer Guide.  If you run an aggregation query (i.e., using GROUP BY or using aggregate functions such as COUNT; e.g., SELECT resourceId, COUNT(*) WHERE resourceType = 'AWS::IAM::Role' GROUP BY resourceId) and do not specify the MaxResults or the Limit query parameters, the default page size is set to 500. If you run a non-aggregation query (i.e., not using GROUP BY or aggregate function; e.g., SELECT * WHERE resourceType = 'AWS::IAM::Role') and do not specify the MaxResults or the Limit query parameters, the default page size is set to 25. 
    */
   selectAggregateResourceConfig(callback?: (err: AWSError, data: ConfigService.Types.SelectAggregateResourceConfigResponse) => void): Request<ConfigService.Types.SelectAggregateResourceConfigResponse, AWSError>;
   /**
-   * Accepts a structured query language (SQL) SELECT command, performs the corresponding search, and returns resource configurations matching the properties. For more information about query components, see the  Query Components  section in the AWS Config Developer Guide.
+   * Accepts a structured query language (SQL) SELECT command, performs the corresponding search, and returns resource configurations matching the properties. For more information about query components, see the  Query Components  section in the Config Developer Guide.
    */
   selectResourceConfig(params: ConfigService.Types.SelectResourceConfigRequest, callback?: (err: AWSError, data: ConfigService.Types.SelectResourceConfigResponse) => void): Request<ConfigService.Types.SelectResourceConfigResponse, AWSError>;
   /**
-   * Accepts a structured query language (SQL) SELECT command, performs the corresponding search, and returns resource configurations matching the properties. For more information about query components, see the  Query Components  section in the AWS Config Developer Guide.
+   * Accepts a structured query language (SQL) SELECT command, performs the corresponding search, and returns resource configurations matching the properties. For more information about query components, see the  Query Components  section in the Config Developer Guide.
    */
   selectResourceConfig(callback?: (err: AWSError, data: ConfigService.Types.SelectResourceConfigResponse) => void): Request<ConfigService.Types.SelectResourceConfigResponse, AWSError>;
   /**
-   * Runs an on-demand evaluation for the specified AWS Config rules against the last known configuration state of the resources. Use StartConfigRulesEvaluation when you want to test that a rule you updated is working as expected. StartConfigRulesEvaluation does not re-record the latest configuration state for your resources. It re-runs an evaluation against the last known state of your resources.  You can specify up to 25 AWS Config rules per request.  An existing StartConfigRulesEvaluation call for the specified rules must complete before you can call the API again. If you chose to have AWS Config stream to an Amazon SNS topic, you will receive a ConfigRuleEvaluationStarted notification when the evaluation starts.  You don't need to call the StartConfigRulesEvaluation API to run an evaluation for a new rule. When you create a rule, AWS Config evaluates your resources against the rule automatically.   The StartConfigRulesEvaluation API is useful if you want to run on-demand evaluations, such as the following example:   You have a custom rule that evaluates your IAM resources every 24 hours.   You update your Lambda function to add additional conditions to your rule.   Instead of waiting for the next periodic evaluation, you call the StartConfigRulesEvaluation API.   AWS Config invokes your Lambda function and evaluates your IAM resources.   Your custom rule will still run periodic evaluations every 24 hours.  
+   * Runs an on-demand evaluation for the specified Config rules against the last known configuration state of the resources. Use StartConfigRulesEvaluation when you want to test that a rule you updated is working as expected. StartConfigRulesEvaluation does not re-record the latest configuration state for your resources. It re-runs an evaluation against the last known state of your resources.  You can specify up to 25 Config rules per request.  An existing StartConfigRulesEvaluation call for the specified rules must complete before you can call the API again. If you chose to have Config stream to an Amazon SNS topic, you will receive a ConfigRuleEvaluationStarted notification when the evaluation starts.  You don't need to call the StartConfigRulesEvaluation API to run an evaluation for a new rule. When you create a rule, Config evaluates your resources against the rule automatically.   The StartConfigRulesEvaluation API is useful if you want to run on-demand evaluations, such as the following example:   You have a custom rule that evaluates your IAM resources every 24 hours.   You update your Lambda function to add additional conditions to your rule.   Instead of waiting for the next periodic evaluation, you call the StartConfigRulesEvaluation API.   Config invokes your Lambda function and evaluates your IAM resources.   Your custom rule will still run periodic evaluations every 24 hours.  
    */
   startConfigRulesEvaluation(params: ConfigService.Types.StartConfigRulesEvaluationRequest, callback?: (err: AWSError, data: ConfigService.Types.StartConfigRulesEvaluationResponse) => void): Request<ConfigService.Types.StartConfigRulesEvaluationResponse, AWSError>;
   /**
-   * Runs an on-demand evaluation for the specified AWS Config rules against the last known configuration state of the resources. Use StartConfigRulesEvaluation when you want to test that a rule you updated is working as expected. StartConfigRulesEvaluation does not re-record the latest configuration state for your resources. It re-runs an evaluation against the last known state of your resources.  You can specify up to 25 AWS Config rules per request.  An existing StartConfigRulesEvaluation call for the specified rules must complete before you can call the API again. If you chose to have AWS Config stream to an Amazon SNS topic, you will receive a ConfigRuleEvaluationStarted notification when the evaluation starts.  You don't need to call the StartConfigRulesEvaluation API to run an evaluation for a new rule. When you create a rule, AWS Config evaluates your resources against the rule automatically.   The StartConfigRulesEvaluation API is useful if you want to run on-demand evaluations, such as the following example:   You have a custom rule that evaluates your IAM resources every 24 hours.   You update your Lambda function to add additional conditions to your rule.   Instead of waiting for the next periodic evaluation, you call the StartConfigRulesEvaluation API.   AWS Config invokes your Lambda function and evaluates your IAM resources.   Your custom rule will still run periodic evaluations every 24 hours.  
+   * Runs an on-demand evaluation for the specified Config rules against the last known configuration state of the resources. Use StartConfigRulesEvaluation when you want to test that a rule you updated is working as expected. StartConfigRulesEvaluation does not re-record the latest configuration state for your resources. It re-runs an evaluation against the last known state of your resources.  You can specify up to 25 Config rules per request.  An existing StartConfigRulesEvaluation call for the specified rules must complete before you can call the API again. If you chose to have Config stream to an Amazon SNS topic, you will receive a ConfigRuleEvaluationStarted notification when the evaluation starts.  You don't need to call the StartConfigRulesEvaluation API to run an evaluation for a new rule. When you create a rule, Config evaluates your resources against the rule automatically.   The StartConfigRulesEvaluation API is useful if you want to run on-demand evaluations, such as the following example:   You have a custom rule that evaluates your IAM resources every 24 hours.   You update your Lambda function to add additional conditions to your rule.   Instead of waiting for the next periodic evaluation, you call the StartConfigRulesEvaluation API.   Config invokes your Lambda function and evaluates your IAM resources.   Your custom rule will still run periodic evaluations every 24 hours.  
    */
   startConfigRulesEvaluation(callback?: (err: AWSError, data: ConfigService.Types.StartConfigRulesEvaluationResponse) => void): Request<ConfigService.Types.StartConfigRulesEvaluationResponse, AWSError>;
   /**
-   * Starts recording configurations of the AWS resources you have selected to record in your AWS account. You must have created at least one delivery channel to successfully start the configuration recorder.
+   * Starts recording configurations of the Amazon Web Services resources you have selected to record in your Amazon Web Services account. You must have created at least one delivery channel to successfully start the configuration recorder.
    */
   startConfigurationRecorder(params: ConfigService.Types.StartConfigurationRecorderRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Starts recording configurations of the AWS resources you have selected to record in your AWS account. You must have created at least one delivery channel to successfully start the configuration recorder.
+   * Starts recording configurations of the Amazon Web Services resources you have selected to record in your Amazon Web Services account. You must have created at least one delivery channel to successfully start the configuration recorder.
    */
   startConfigurationRecorder(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Runs an on-demand remediation for the specified AWS Config rules against the last known remediation configuration. It runs an execution against the current state of your resources. Remediation execution is asynchronous. You can specify up to 100 resource keys per request. An existing StartRemediationExecution call for the specified resource keys must complete before you can call the API again.
+   * Runs an on-demand remediation for the specified Config rules against the last known remediation configuration. It runs an execution against the current state of your resources. Remediation execution is asynchronous. You can specify up to 100 resource keys per request. An existing StartRemediationExecution call for the specified resource keys must complete before you can call the API again.
    */
   startRemediationExecution(params: ConfigService.Types.StartRemediationExecutionRequest, callback?: (err: AWSError, data: ConfigService.Types.StartRemediationExecutionResponse) => void): Request<ConfigService.Types.StartRemediationExecutionResponse, AWSError>;
   /**
-   * Runs an on-demand remediation for the specified AWS Config rules against the last known remediation configuration. It runs an execution against the current state of your resources. Remediation execution is asynchronous. You can specify up to 100 resource keys per request. An existing StartRemediationExecution call for the specified resource keys must complete before you can call the API again.
+   * Runs an on-demand remediation for the specified Config rules against the last known remediation configuration. It runs an execution against the current state of your resources. Remediation execution is asynchronous. You can specify up to 100 resource keys per request. An existing StartRemediationExecution call for the specified resource keys must complete before you can call the API again.
    */
   startRemediationExecution(callback?: (err: AWSError, data: ConfigService.Types.StartRemediationExecutionResponse) => void): Request<ConfigService.Types.StartRemediationExecutionResponse, AWSError>;
   /**
-   * Stops recording configurations of the AWS resources you have selected to record in your AWS account.
+   * Stops recording configurations of the Amazon Web Services resources you have selected to record in your Amazon Web Services account.
    */
   stopConfigurationRecorder(params: ConfigService.Types.StopConfigurationRecorderRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Stops recording configurations of the AWS resources you have selected to record in your AWS account.
+   * Stops recording configurations of the Amazon Web Services resources you have selected to record in your Amazon Web Services account.
    */
   stopConfigurationRecorder(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -704,7 +704,7 @@ declare namespace ConfigService {
      */
     AccountIds: AccountAggregationSourceAccountList;
     /**
-     * If true, aggregate existing AWS Config regions and future regions.
+     * If true, aggregate existing Config regions and future regions.
      */
     AllAwsRegions?: Boolean;
     /**
@@ -717,11 +717,11 @@ declare namespace ConfigService {
   export type AccountId = string;
   export interface AggregateComplianceByConfigRule {
     /**
-     * The name of the AWS Config rule.
+     * The name of the Config rule.
      */
     ConfigRuleName?: ConfigRuleName;
     /**
-     * Indicates whether an AWS resource or AWS Config rule is compliant and provides the number of contributors that affect the compliance.
+     * Indicates whether an Amazon Web Services resource or Config rule is compliant and provides the number of contributors that affect the compliance.
      */
     Compliance?: Compliance;
     /**
@@ -744,11 +744,11 @@ declare namespace ConfigService {
      */
     Compliance?: AggregateConformancePackCompliance;
     /**
-     * The 12-digit AWS account ID of the source account.
+     * The 12-digit Amazon Web Services account ID of the source account.
      */
     AccountId?: AccountId;
     /**
-     * The source AWS Region from where the data is aggregated.
+     * The source Amazon Web Services Region from where the data is aggregated.
      */
     AwsRegion?: AwsRegion;
   }
@@ -759,7 +759,7 @@ declare namespace ConfigService {
      */
     GroupName?: StringWithCharLimit256;
     /**
-     * The number of compliant and noncompliant AWS Config rules.
+     * The number of compliant and noncompliant Config rules.
      */
     ComplianceSummary?: ComplianceSummary;
   }
@@ -770,11 +770,11 @@ declare namespace ConfigService {
      */
     ComplianceType?: ConformancePackComplianceType;
     /**
-     * The number of compliant AWS Config Rules.
+     * The number of compliant Config Rules.
      */
     CompliantRuleCount?: Integer;
     /**
-     * The number of noncompliant AWS Config Rules.
+     * The number of noncompliant Config Rules.
      */
     NonCompliantRuleCount?: Integer;
     /**
@@ -802,11 +802,11 @@ declare namespace ConfigService {
      */
     ComplianceType?: ConformancePackComplianceType;
     /**
-     * The 12-digit AWS account ID of the source account.
+     * The 12-digit Amazon Web Services account ID of the source account.
      */
     AccountId?: AccountId;
     /**
-     * The source AWS Region from where the data is aggregated.
+     * The source Amazon Web Services Region from where the data is aggregated.
      */
     AwsRegion?: AwsRegion;
   }
@@ -816,17 +816,17 @@ declare namespace ConfigService {
      */
     ComplianceSummary?: AggregateConformancePackComplianceCount;
     /**
-     * Groups the result based on AWS Account ID or AWS Region.
+     * Groups the result based on Amazon Web Services account ID or Amazon Web Services Region.
      */
     GroupName?: StringWithCharLimit256;
   }
   export interface AggregateConformancePackComplianceSummaryFilters {
     /**
-     * The 12-digit AWS account ID of the source account.
+     * The 12-digit Amazon Web Services account ID of the source account.
      */
     AccountId?: AccountId;
     /**
-     * The source AWS Region from where the data is aggregated.
+     * The source Amazon Web Services Region from where the data is aggregated.
      */
     AwsRegion?: AwsRegion;
   }
@@ -838,15 +838,15 @@ declare namespace ConfigService {
      */
     EvaluationResultIdentifier?: EvaluationResultIdentifier;
     /**
-     * The resource compliance status. For the AggregationEvaluationResult data type, AWS Config supports only the COMPLIANT and NON_COMPLIANT. AWS Config does not support the NOT_APPLICABLE and INSUFFICIENT_DATA value.
+     * The resource compliance status. For the AggregationEvaluationResult data type, Config supports only the COMPLIANT and NON_COMPLIANT. Config does not support the NOT_APPLICABLE and INSUFFICIENT_DATA value.
      */
     ComplianceType?: ComplianceType;
     /**
-     * The time when AWS Config recorded the aggregate evaluation result.
+     * The time when Config recorded the aggregate evaluation result.
      */
     ResultRecordedTime?: _Date;
     /**
-     * The time when the AWS Config rule evaluated the AWS resource.
+     * The time when the Config rule evaluated the Amazon Web Services resource.
      */
     ConfigRuleInvokedTime?: _Date;
     /**
@@ -873,15 +873,15 @@ declare namespace ConfigService {
      */
     SourceRegion: AwsRegion;
     /**
-     * The ID of the AWS resource.
+     * The ID of the Amazon Web Services resource.
      */
     ResourceId: ResourceId;
     /**
-     * The type of the AWS resource.
+     * The type of the Amazon Web Services resource.
      */
     ResourceType: ResourceType;
     /**
-     * The name of the AWS resource.
+     * The name of the Amazon Web Services resource.
      */
     ResourceName?: ResourceName;
   }
@@ -907,7 +907,7 @@ declare namespace ConfigService {
      */
     LastUpdateTime?: _Date;
     /**
-     * The error code that AWS Config returned when the source account aggregation last failed.
+     * The error code that Config returned when the source account aggregation last failed.
      */
     LastErrorCode?: String;
     /**
@@ -952,7 +952,7 @@ declare namespace ConfigService {
      */
     version?: Version;
     /**
-     * The 12-digit AWS account ID associated with the resource.
+     * The 12-digit Amazon Web Services account ID associated with the resource.
      */
     accountId?: AccountId;
     /**
@@ -972,7 +972,7 @@ declare namespace ConfigService {
      */
     arn?: ARN;
     /**
-     * The type of AWS resource.
+     * The type of Amazon Web Services resource.
      */
     resourceType?: ResourceType;
     /**
@@ -1000,7 +1000,7 @@ declare namespace ConfigService {
      */
     configuration?: Configuration;
     /**
-     * Configuration attributes that AWS Config returns for certain resource types to supplement the information returned for the configuration parameter.
+     * Configuration attributes that Config returns for certain resource types to supplement the information returned for the configuration parameter.
      */
     supplementaryConfiguration?: SupplementaryConfiguration;
   }
@@ -1047,43 +1047,43 @@ declare namespace ConfigService {
   export type ChronologicalOrder = "Reverse"|"Forward"|string;
   export interface Compliance {
     /**
-     * Indicates whether an AWS resource or AWS Config rule is compliant. A resource is compliant if it complies with all of the AWS Config rules that evaluate it. A resource is noncompliant if it does not comply with one or more of these rules. A rule is compliant if all of the resources that the rule evaluates comply with it. A rule is noncompliant if any of these resources do not comply. AWS Config returns the INSUFFICIENT_DATA value when no evaluation results are available for the AWS resource or AWS Config rule. For the Compliance data type, AWS Config supports only COMPLIANT, NON_COMPLIANT, and INSUFFICIENT_DATA values. AWS Config does not support the NOT_APPLICABLE value for the Compliance data type.
+     * Indicates whether an Amazon Web Services resource or Config rule is compliant. A resource is compliant if it complies with all of the Config rules that evaluate it. A resource is noncompliant if it does not comply with one or more of these rules. A rule is compliant if all of the resources that the rule evaluates comply with it. A rule is noncompliant if any of these resources do not comply. Config returns the INSUFFICIENT_DATA value when no evaluation results are available for the Amazon Web Services resource or Config rule. For the Compliance data type, Config supports only COMPLIANT, NON_COMPLIANT, and INSUFFICIENT_DATA values. Config does not support the NOT_APPLICABLE value for the Compliance data type.
      */
     ComplianceType?: ComplianceType;
     /**
-     * The number of AWS resources or AWS Config rules that cause a result of NON_COMPLIANT, up to a maximum number.
+     * The number of Amazon Web Services resources or Config rules that cause a result of NON_COMPLIANT, up to a maximum number.
      */
     ComplianceContributorCount?: ComplianceContributorCount;
   }
   export interface ComplianceByConfigRule {
     /**
-     * The name of the AWS Config rule.
+     * The name of the Config rule.
      */
     ConfigRuleName?: StringWithCharLimit64;
     /**
-     * Indicates whether the AWS Config rule is compliant.
+     * Indicates whether the Config rule is compliant.
      */
     Compliance?: Compliance;
   }
   export type ComplianceByConfigRules = ComplianceByConfigRule[];
   export interface ComplianceByResource {
     /**
-     * The type of the AWS resource that was evaluated.
+     * The type of the Amazon Web Services resource that was evaluated.
      */
     ResourceType?: StringWithCharLimit256;
     /**
-     * The ID of the AWS resource that was evaluated.
+     * The ID of the Amazon Web Services resource that was evaluated.
      */
     ResourceId?: BaseResourceId;
     /**
-     * Indicates whether the AWS resource complies with all of the AWS Config rules that evaluated it.
+     * Indicates whether the Amazon Web Services resource complies with all of the Config rules that evaluated it.
      */
     Compliance?: Compliance;
   }
   export type ComplianceByResources = ComplianceByResource[];
   export interface ComplianceContributorCount {
     /**
-     * The number of AWS resources or AWS Config rules responsible for the current compliance of the item.
+     * The number of Amazon Web Services resources or Config rules responsible for the current compliance of the item.
      */
     CappedCount?: Integer;
     /**
@@ -1095,25 +1095,25 @@ declare namespace ConfigService {
   export type ComplianceSummariesByResourceType = ComplianceSummaryByResourceType[];
   export interface ComplianceSummary {
     /**
-     * The number of AWS Config rules or AWS resources that are compliant, up to a maximum of 25 for rules and 100 for resources.
+     * The number of Config rules or Amazon Web Services resources that are compliant, up to a maximum of 25 for rules and 100 for resources.
      */
     CompliantResourceCount?: ComplianceContributorCount;
     /**
-     * The number of AWS Config rules or AWS resources that are noncompliant, up to a maximum of 25 for rules and 100 for resources.
+     * The number of Config rules or Amazon Web Services resources that are noncompliant, up to a maximum of 25 for rules and 100 for resources.
      */
     NonCompliantResourceCount?: ComplianceContributorCount;
     /**
-     * The time that AWS Config created the compliance summary.
+     * The time that Config created the compliance summary.
      */
     ComplianceSummaryTimestamp?: _Date;
   }
   export interface ComplianceSummaryByResourceType {
     /**
-     * The type of AWS resource.
+     * The type of Amazon Web Services resource.
      */
     ResourceType?: StringWithCharLimit256;
     /**
-     * The number of AWS resources that are compliant or noncompliant, up to a maximum of 100 for each.
+     * The number of Amazon Web Services resources that are compliant or noncompliant, up to a maximum of 100 for each.
      */
     ComplianceSummary?: ComplianceSummary;
   }
@@ -1147,19 +1147,19 @@ declare namespace ConfigService {
   }
   export interface ConfigRule {
     /**
-     * The name that you assign to the AWS Config rule. The name is required if you are adding a new rule.
+     * The name that you assign to the Config rule. The name is required if you are adding a new rule.
      */
     ConfigRuleName?: ConfigRuleName;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Config rule.
+     * The Amazon Resource Name (ARN) of the Config rule.
      */
     ConfigRuleArn?: StringWithCharLimit256;
     /**
-     * The ID of the AWS Config rule.
+     * The ID of the Config rule.
      */
     ConfigRuleId?: StringWithCharLimit64;
     /**
-     * The description that you provide for the AWS Config rule.
+     * The description that you provide for the Config rule.
      */
     Description?: EmptiableStringWithCharLimit256;
     /**
@@ -1167,19 +1167,19 @@ declare namespace ConfigService {
      */
     Scope?: Scope;
     /**
-     * Provides the rule owner (AWS or customer), the rule identifier, and the notifications that cause the function to evaluate your AWS resources.
+     * Provides the rule owner (Amazon Web Services or customer), the rule identifier, and the notifications that cause the function to evaluate your Amazon Web Services resources.
      */
     Source: Source;
     /**
-     * A string, in JSON format, that is passed to the AWS Config rule Lambda function.
+     * A string, in JSON format, that is passed to the Config rule Lambda function.
      */
     InputParameters?: StringWithCharLimit1024;
     /**
-     * The maximum frequency with which AWS Config runs evaluations for a rule. You can specify a value for MaximumExecutionFrequency when:   You are using an AWS managed rule that is triggered at a periodic frequency.   Your custom rule is triggered when AWS Config delivers the configuration snapshot. For more information, see ConfigSnapshotDeliveryProperties.    By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the MaximumExecutionFrequency parameter. 
+     * The maximum frequency with which Config runs evaluations for a rule. You can specify a value for MaximumExecutionFrequency when:   You are using an Config managed rule that is triggered at a periodic frequency.   Your custom rule is triggered when Config delivers the configuration snapshot. For more information, see ConfigSnapshotDeliveryProperties.    By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the MaximumExecutionFrequency parameter. 
      */
     MaximumExecutionFrequency?: MaximumExecutionFrequency;
     /**
-     * Indicates whether the AWS Config rule is active or is currently being deleted by AWS Config. It can also indicate the evaluation status for the AWS Config rule. AWS Config sets the state of the rule to EVALUATING temporarily after you use the StartConfigRulesEvaluation request to evaluate your resources against the AWS Config rule. AWS Config sets the state of the rule to DELETING_RESULTS temporarily after you use the DeleteEvaluationResults request to delete the current evaluation results for the AWS Config rule. AWS Config temporarily sets the state of a rule to DELETING after you use the DeleteConfigRule request to delete the rule. After AWS Config deletes the rule, the rule and all of its evaluations are erased and are no longer available.
+     * Indicates whether the Config rule is active or is currently being deleted by Config. It can also indicate the evaluation status for the Config rule. Config sets the state of the rule to EVALUATING temporarily after you use the StartConfigRulesEvaluation request to evaluate your resources against the Config rule. Config sets the state of the rule to DELETING_RESULTS temporarily after you use the DeleteEvaluationResults request to delete the current evaluation results for the Config rule. Config temporarily sets the state of a rule to DELETING after you use the DeleteConfigRule request to delete the rule. After Config deletes the rule, the rule and all of its evaluations are erased and are no longer available.
      */
     ConfigRuleState?: ConfigRuleState;
     /**
@@ -1189,11 +1189,11 @@ declare namespace ConfigService {
   }
   export interface ConfigRuleComplianceFilters {
     /**
-     * The name of the AWS Config rule.
+     * The name of the Config rule.
      */
     ConfigRuleName?: ConfigRuleName;
     /**
-     * The rule compliance status. For the ConfigRuleComplianceFilters data type, AWS Config supports only COMPLIANT and NON_COMPLIANT. AWS Config does not support the NOT_APPLICABLE and the INSUFFICIENT_DATA values.
+     * The rule compliance status. For the ConfigRuleComplianceFilters data type, Config supports only COMPLIANT and NON_COMPLIANT. Config does not support the NOT_APPLICABLE and the INSUFFICIENT_DATA values.
      */
     ComplianceType?: ComplianceType;
     /**
@@ -1218,51 +1218,51 @@ declare namespace ConfigService {
   export type ConfigRuleComplianceSummaryGroupKey = "ACCOUNT_ID"|"AWS_REGION"|string;
   export interface ConfigRuleEvaluationStatus {
     /**
-     * The name of the AWS Config rule.
+     * The name of the Config rule.
      */
     ConfigRuleName?: ConfigRuleName;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Config rule.
+     * The Amazon Resource Name (ARN) of the Config rule.
      */
     ConfigRuleArn?: String;
     /**
-     * The ID of the AWS Config rule.
+     * The ID of the Config rule.
      */
     ConfigRuleId?: String;
     /**
-     * The time that AWS Config last successfully invoked the AWS Config rule to evaluate your AWS resources.
+     * The time that Config last successfully invoked the Config rule to evaluate your Amazon Web Services resources.
      */
     LastSuccessfulInvocationTime?: _Date;
     /**
-     * The time that AWS Config last failed to invoke the AWS Config rule to evaluate your AWS resources.
+     * The time that Config last failed to invoke the Config rule to evaluate your Amazon Web Services resources.
      */
     LastFailedInvocationTime?: _Date;
     /**
-     * The time that AWS Config last successfully evaluated your AWS resources against the rule.
+     * The time that Config last successfully evaluated your Amazon Web Services resources against the rule.
      */
     LastSuccessfulEvaluationTime?: _Date;
     /**
-     * The time that AWS Config last failed to evaluate your AWS resources against the rule.
+     * The time that Config last failed to evaluate your Amazon Web Services resources against the rule.
      */
     LastFailedEvaluationTime?: _Date;
     /**
-     * The time that you first activated the AWS Config rule.
+     * The time that you first activated the Config rule.
      */
     FirstActivatedTime?: _Date;
     /**
-     * The time that you last turned off the AWS Config rule.
+     * The time that you last turned off the Config rule.
      */
     LastDeactivatedTime?: _Date;
     /**
-     * The error code that AWS Config returned when the rule last failed.
+     * The error code that Config returned when the rule last failed.
      */
     LastErrorCode?: String;
     /**
-     * The error message that AWS Config returned when the rule last failed.
+     * The error message that Config returned when the rule last failed.
      */
     LastErrorMessage?: String;
     /**
-     * Indicates whether AWS Config has evaluated your resources against the rule at least once.    true - AWS Config has evaluated your AWS resources against the rule at least once.    false - AWS Config has not once finished evaluating your AWS resources against the rule.  
+     * Indicates whether Config has evaluated your resources against the rule at least once.    true - Config has evaluated your Amazon Web Services resources against the rule at least once.    false - Config has not once finished evaluating your Amazon Web Services resources against the rule.  
      */
     FirstEvaluationStarted?: Boolean;
   }
@@ -1273,13 +1273,13 @@ declare namespace ConfigService {
   export type ConfigRules = ConfigRule[];
   export interface ConfigSnapshotDeliveryProperties {
     /**
-     * The frequency with which AWS Config delivers configuration snapshots.
+     * The frequency with which Config delivers configuration snapshots.
      */
     deliveryFrequency?: MaximumExecutionFrequency;
   }
   export interface ConfigStreamDeliveryInfo {
     /**
-     * Status of the last attempted delivery.  Note Providing an SNS topic on a DeliveryChannel for AWS Config is optional. If the SNS delivery is turned off, the last status will be Not_Applicable.
+     * Status of the last attempted delivery.  Note Providing an SNS topic on a DeliveryChannel for Config is optional. If the SNS delivery is turned off, the last status will be Not_Applicable.
      */
     lastStatus?: DeliveryStatus;
     /**
@@ -1322,7 +1322,7 @@ declare namespace ConfigService {
      */
     LastUpdatedTime?: _Date;
     /**
-     * AWS service that created the configuration aggregator.
+     * Amazon Web Services service that created the configuration aggregator.
      */
     CreatedBy?: StringWithCharLimit256;
   }
@@ -1336,7 +1336,7 @@ declare namespace ConfigService {
      */
     version?: Version;
     /**
-     * The 12-digit AWS account ID associated with the resource.
+     * The 12-digit Amazon Web Services account ID associated with the resource.
      */
     accountId?: AccountId;
     /**
@@ -1360,7 +1360,7 @@ declare namespace ConfigService {
      */
     arn?: ARN;
     /**
-     * The type of AWS resource.
+     * The type of Amazon Web Services resource.
      */
     resourceType?: ResourceType;
     /**
@@ -1388,11 +1388,11 @@ declare namespace ConfigService {
      */
     tags?: Tags;
     /**
-     * A list of CloudTrail event IDs. A populated field indicates that the current configuration was initiated by the events recorded in the CloudTrail log. For more information about CloudTrail, see What Is AWS CloudTrail. An empty field indicates that the current configuration was not initiated by any event. As of Version 1.3, the relatedEvents field is empty. You can access the LookupEvents API in the AWS CloudTrail API Reference to retrieve the events for the resource.
+     * A list of CloudTrail event IDs. A populated field indicates that the current configuration was initiated by the events recorded in the CloudTrail log. For more information about CloudTrail, see What Is CloudTrail. An empty field indicates that the current configuration was not initiated by any event. As of Version 1.3, the relatedEvents field is empty. You can access the LookupEvents API in the CloudTrail API Reference to retrieve the events for the resource.
      */
     relatedEvents?: RelatedEventList;
     /**
-     * A list of related AWS resources.
+     * A list of related Amazon Web Services resources.
      */
     relationships?: RelationshipList;
     /**
@@ -1400,7 +1400,7 @@ declare namespace ConfigService {
      */
     configuration?: Configuration;
     /**
-     * Configuration attributes that AWS Config returns for certain resource types to supplement the information returned for the configuration parameter.
+     * Configuration attributes that Config returns for certain resource types to supplement the information returned for the configuration parameter.
      */
     supplementaryConfiguration?: SupplementaryConfiguration;
   }
@@ -1410,15 +1410,15 @@ declare namespace ConfigService {
   export type ConfigurationItemStatus = "OK"|"ResourceDiscovered"|"ResourceNotRecorded"|"ResourceDeleted"|"ResourceDeletedNotRecorded"|string;
   export interface ConfigurationRecorder {
     /**
-     * The name of the recorder. By default, AWS Config automatically assigns the name "default" when creating the configuration recorder. You cannot change the assigned name.
+     * The name of the recorder. By default, Config automatically assigns the name "default" when creating the configuration recorder. You cannot change the assigned name.
      */
     name?: RecorderName;
     /**
-     * Amazon Resource Name (ARN) of the IAM role used to describe the AWS resources associated with the account.
+     * Amazon Resource Name (ARN) of the IAM role used to describe the Amazon Web Services resources associated with the account.
      */
     roleARN?: String;
     /**
-     * Specifies the types of AWS resources for which AWS Config records configuration changes.
+     * Specifies the types of Amazon Web Services resources for which Config records configuration changes.
      */
     recordingGroup?: RecordingGroup;
   }
@@ -1463,7 +1463,7 @@ declare namespace ConfigService {
   export type ConformancePackArn = string;
   export interface ConformancePackComplianceFilters {
     /**
-     * Filters the results by AWS Config rule names.
+     * Filters the results by Config rule names.
      */
     ConfigRuleNames?: ConformancePackConfigRuleNames;
     /**
@@ -1499,7 +1499,7 @@ declare namespace ConfigService {
      */
     ConformancePackId: ConformancePackId;
     /**
-     * Amazon S3 bucket where AWS Config stores conformance pack templates.   This field is optional. 
+     * The name of the Amazon S3 bucket where Config stores conformance pack templates.   This field is optional. 
      */
     DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
@@ -1515,14 +1515,14 @@ declare namespace ConfigService {
      */
     LastUpdateRequestedTime?: _Date;
     /**
-     * AWS service that created the conformance pack.
+     * Amazon Web Services service that created the conformance pack.
      */
     CreatedBy?: StringWithCharLimit256;
   }
   export type ConformancePackDetailList = ConformancePackDetail[];
   export interface ConformancePackEvaluationFilters {
     /**
-     * Filters the results by AWS Config rule names.
+     * Filters the results by Config rule names.
      */
     ConfigRuleNames?: ConformancePackConfigRuleNames;
     /**
@@ -1545,11 +1545,11 @@ declare namespace ConfigService {
     ComplianceType: ConformancePackComplianceType;
     EvaluationResultIdentifier: EvaluationResultIdentifier;
     /**
-     * The time when AWS Config rule evaluated AWS resource.
+     * The time when Config rule evaluated Amazon Web Services resource.
      */
     ConfigRuleInvokedTime: _Date;
     /**
-     * The time when AWS Config recorded the evaluation result. 
+     * The time when Config recorded the evaluation result. 
      */
     ResultRecordedTime: _Date;
     /**
@@ -1578,7 +1578,7 @@ declare namespace ConfigService {
      */
     ConfigRuleName?: ConfigRuleName;
     /**
-     * Compliance of the AWS Config rule. The allowed values are COMPLIANT, NON_COMPLIANT, and INSUFFICIENT_DATA.
+     * Compliance of the Config rule. The allowed values are COMPLIANT, NON_COMPLIANT, and INSUFFICIENT_DATA.
      */
     ComplianceType?: ConformancePackComplianceType;
     /**
@@ -1603,11 +1603,11 @@ declare namespace ConfigService {
      */
     ConformancePackArn: ConformancePackArn;
     /**
-     * Indicates deployment status of conformance pack. AWS Config sets the state of the conformance pack to:   CREATE_IN_PROGRESS when a conformance pack creation is in progress for an account.   CREATE_COMPLETE when a conformance pack has been successfully created in your account.   CREATE_FAILED when a conformance pack creation failed in your account.   DELETE_IN_PROGRESS when a conformance pack deletion is in progress.    DELETE_FAILED when a conformance pack deletion failed in your account.  
+     * Indicates deployment status of conformance pack. Config sets the state of the conformance pack to:   CREATE_IN_PROGRESS when a conformance pack creation is in progress for an account.   CREATE_COMPLETE when a conformance pack has been successfully created in your account.   CREATE_FAILED when a conformance pack creation failed in your account.   DELETE_IN_PROGRESS when a conformance pack deletion is in progress.    DELETE_FAILED when a conformance pack deletion failed in your account.  
      */
     ConformancePackState: ConformancePackState;
     /**
-     * Amazon Resource Name (ARN) of AWS CloudFormation stack. 
+     * Amazon Resource Name (ARN) of CloudFormation stack. 
      */
     StackArn: StackArn;
     /**
@@ -1640,7 +1640,7 @@ declare namespace ConfigService {
   }
   export interface DeleteConfigRuleRequest {
     /**
-     * The name of the AWS Config rule that you want to delete.
+     * The name of the Config rule that you want to delete.
      */
     ConfigRuleName: ConfigRuleName;
   }
@@ -1670,7 +1670,7 @@ declare namespace ConfigService {
   }
   export interface DeleteEvaluationResultsRequest {
     /**
-     * The name of the AWS Config rule for which you want to delete the evaluation results.
+     * The name of the Config rule for which you want to delete the evaluation results.
      */
     ConfigRuleName: StringWithCharLimit64;
   }
@@ -1700,7 +1700,7 @@ declare namespace ConfigService {
   }
   export interface DeleteRemediationConfigurationRequest {
     /**
-     * The name of the AWS Config rule for which you want to delete remediation configuration.
+     * The name of the Config rule for which you want to delete remediation configuration.
      */
     ConfigRuleName: ConfigRuleName;
     /**
@@ -1712,11 +1712,11 @@ declare namespace ConfigService {
   }
   export interface DeleteRemediationExceptionsRequest {
     /**
-     * The name of the AWS Config rule for which you want to delete remediation exception configuration.
+     * The name of the Config rule for which you want to delete remediation exception configuration.
      */
     ConfigRuleName: ConfigRuleName;
     /**
-     * An exception list of resource exception keys to be processed with the current request. AWS Config adds exception for each resource key. For example, AWS Config adds 3 exceptions for 3 resource keys. 
+     * An exception list of resource exception keys to be processed with the current request. Config adds exception for each resource key. For example, Config adds 3 exceptions for 3 resource keys. 
      */
     ResourceKeys: RemediationExceptionResourceKeys;
   }
@@ -1764,11 +1764,11 @@ declare namespace ConfigService {
   }
   export interface DeliveryChannel {
     /**
-     * The name of the delivery channel. By default, AWS Config assigns the name "default" when creating the delivery channel. To change the delivery channel name, you must use the DeleteDeliveryChannel action to delete your current delivery channel, and then you must use the PutDeliveryChannel command to create a delivery channel that has the desired name.
+     * The name of the delivery channel. By default, Config assigns the name "default" when creating the delivery channel. To change the delivery channel name, you must use the DeleteDeliveryChannel action to delete your current delivery channel, and then you must use the PutDeliveryChannel command to create a delivery channel that has the desired name.
      */
     name?: ChannelName;
     /**
-     * The name of the Amazon S3 bucket to which AWS Config delivers configuration snapshots and configuration history files. If you specify a bucket that belongs to another AWS account, that bucket must have policies that grant access permissions to AWS Config. For more information, see Permissions for the Amazon S3 Bucket in the AWS Config Developer Guide.
+     * The name of the Amazon S3 bucket to which Config delivers configuration snapshots and configuration history files. If you specify a bucket that belongs to another Amazon Web Services account, that bucket must have policies that grant access permissions to Config. For more information, see Permissions for the Amazon S3 Bucket in the Config Developer Guide.
      */
     s3BucketName?: String;
     /**
@@ -1776,15 +1776,15 @@ declare namespace ConfigService {
      */
     s3KeyPrefix?: String;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) customer managed key (CMK) used to encrypt objects delivered by AWS Config. Must belong to the same Region as the destination S3 bucket.
+     * The Amazon Resource Name (ARN) of the Key Management Service (KMS ) KMS key (KMS key) used to encrypt objects delivered by Config. Must belong to the same Region as the destination S3 bucket.
      */
     s3KmsKeyArn?: String;
     /**
-     * The Amazon Resource Name (ARN) of the Amazon SNS topic to which AWS Config sends notifications about configuration changes. If you choose a topic from another account, the topic must have policies that grant access permissions to AWS Config. For more information, see Permissions for the Amazon SNS Topic in the AWS Config Developer Guide.
+     * The Amazon Resource Name (ARN) of the Amazon SNS topic to which Config sends notifications about configuration changes. If you choose a topic from another account, the topic must have policies that grant access permissions to Config. For more information, see Permissions for the Amazon SNS Topic in the Config Developer Guide.
      */
     snsTopicARN?: String;
     /**
-     * The options for how often AWS Config delivers configuration snapshots to the Amazon S3 bucket.
+     * The options for how often Config delivers configuration snapshots to the Amazon S3 bucket.
      */
     configSnapshotDeliveryProperties?: ConfigSnapshotDeliveryProperties;
   }
@@ -1822,7 +1822,7 @@ declare namespace ConfigService {
      */
     Filters?: ConfigRuleComplianceFilters;
     /**
-     * The maximum number of evaluation results returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.
+     * The maximum number of evaluation results returned on each page. The default is maximum. If you specify 0, Config uses the default.
      */
     Limit?: GroupByAPILimit;
     /**
@@ -1850,7 +1850,7 @@ declare namespace ConfigService {
      */
     Filters?: AggregateConformancePackComplianceFilters;
     /**
-     * The maximum number of conformance packs compliance details returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. 
+     * The maximum number of conformance packs compliance details returned on each page. The default is maximum. If you specify 0, Config uses the default. 
      */
     Limit?: Limit;
     /**
@@ -1870,7 +1870,7 @@ declare namespace ConfigService {
   }
   export interface DescribeAggregationAuthorizationsRequest {
     /**
-     * The maximum number of AggregationAuthorizations returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.
+     * The maximum number of AggregationAuthorizations returned on each page. The default is maximum. If you specify 0, Config uses the default.
      */
     Limit?: Limit;
     /**
@@ -1890,7 +1890,7 @@ declare namespace ConfigService {
   }
   export interface DescribeComplianceByConfigRuleRequest {
     /**
-     * Specify one or more AWS Config rule names to filter the results by rule.
+     * Specify one or more Config rule names to filter the results by rule.
      */
     ConfigRuleNames?: ConfigRuleNames;
     /**
@@ -1904,7 +1904,7 @@ declare namespace ConfigService {
   }
   export interface DescribeComplianceByConfigRuleResponse {
     /**
-     * Indicates whether each of the specified AWS Config rules is compliant.
+     * Indicates whether each of the specified Config rules is compliant.
      */
     ComplianceByConfigRules?: ComplianceByConfigRules;
     /**
@@ -1914,11 +1914,11 @@ declare namespace ConfigService {
   }
   export interface DescribeComplianceByResourceRequest {
     /**
-     * The types of AWS resources for which you want compliance information (for example, AWS::EC2::Instance). For this action, you can specify that the resource type is an AWS account by specifying AWS::::Account.
+     * The types of Amazon Web Services resources for which you want compliance information (for example, AWS::EC2::Instance). For this action, you can specify that the resource type is an Amazon Web Services account by specifying AWS::::Account.
      */
     ResourceType?: StringWithCharLimit256;
     /**
-     * The ID of the AWS resource for which you want compliance information. You can specify only one resource ID. If you specify a resource ID, you must also specify a type for ResourceType.
+     * The ID of the Amazon Web Services resource for which you want compliance information. You can specify only one resource ID. If you specify a resource ID, you must also specify a type for ResourceType.
      */
     ResourceId?: BaseResourceId;
     /**
@@ -1926,7 +1926,7 @@ declare namespace ConfigService {
      */
     ComplianceTypes?: ComplianceTypes;
     /**
-     * The maximum number of evaluation results returned on each page. The default is 10. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.
+     * The maximum number of evaluation results returned on each page. The default is 10. You cannot specify a number greater than 100. If you specify 0, Config uses the default.
      */
     Limit?: Limit;
     /**
@@ -1936,7 +1936,7 @@ declare namespace ConfigService {
   }
   export interface DescribeComplianceByResourceResponse {
     /**
-     * Indicates whether the specified AWS resource complies with all of the AWS Config rules that evaluate it.
+     * Indicates whether the specified Amazon Web Services resource complies with all of the Config rules that evaluate it.
      */
     ComplianceByResources?: ComplianceByResources;
     /**
@@ -1946,7 +1946,7 @@ declare namespace ConfigService {
   }
   export interface DescribeConfigRuleEvaluationStatusRequest {
     /**
-     * The name of the AWS managed Config rules for which you want status information. If you do not specify any names, AWS Config returns status information for all AWS managed Config rules that you use.
+     * The name of the Config managed rules for which you want status information. If you do not specify any names, Config returns status information for all Config managed rules that you use.
      */
     ConfigRuleNames?: ConfigRuleNames;
     /**
@@ -1954,13 +1954,13 @@ declare namespace ConfigService {
      */
     NextToken?: String;
     /**
-     * The number of rule evaluation results that you want returned. This parameter is required if the rule limit for your account is more than the default of 150 rules. For information about requesting a rule limit increase, see AWS Config Limits in the AWS General Reference Guide.
+     * The number of rule evaluation results that you want returned. This parameter is required if the rule limit for your account is more than the default of 150 rules. For information about requesting a rule limit increase, see Config Limits in the Amazon Web Services General Reference Guide.
      */
     Limit?: RuleLimit;
   }
   export interface DescribeConfigRuleEvaluationStatusResponse {
     /**
-     * Status information about your AWS managed Config rules.
+     * Status information about your Config managed rules.
      */
     ConfigRulesEvaluationStatus?: ConfigRuleEvaluationStatusList;
     /**
@@ -1970,7 +1970,7 @@ declare namespace ConfigService {
   }
   export interface DescribeConfigRulesRequest {
     /**
-     * The names of the AWS Config rules for which you want details. If you do not specify any names, AWS Config returns details for all your rules.
+     * The names of the Config rules for which you want details. If you do not specify any names, Config returns details for all your rules.
      */
     ConfigRuleNames?: ConfigRuleNames;
     /**
@@ -1980,7 +1980,7 @@ declare namespace ConfigService {
   }
   export interface DescribeConfigRulesResponse {
     /**
-     * The details about your AWS Config rules.
+     * The details about your Config rules.
      */
     ConfigRules?: ConfigRules;
     /**
@@ -2002,7 +2002,7 @@ declare namespace ConfigService {
      */
     NextToken?: String;
     /**
-     * The maximum number of AggregatorSourceStatus returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.
+     * The maximum number of AggregatorSourceStatus returned on each page. The default is maximum. If you specify 0, Config uses the default.
      */
     Limit?: Limit;
   }
@@ -2026,7 +2026,7 @@ declare namespace ConfigService {
      */
     NextToken?: String;
     /**
-     * The maximum number of configuration aggregators returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.
+     * The maximum number of configuration aggregators returned on each page. The default is maximum. If you specify 0, Config uses the default.
      */
     Limit?: Limit;
   }
@@ -2075,7 +2075,7 @@ declare namespace ConfigService {
      */
     Filters?: ConformancePackComplianceFilters;
     /**
-     * The maximum number of AWS Config rules within a conformance pack are returned on each page.
+     * The maximum number of Config rules within a conformance pack are returned on each page.
      */
     Limit?: DescribeConformancePackComplianceLimit;
     /**
@@ -2123,7 +2123,7 @@ declare namespace ConfigService {
   }
   export interface DescribeConformancePacksRequest {
     /**
-     * Comma-separated list of conformance pack names for which you want details. If you do not specify any names, AWS Config returns details for all your conformance packs. 
+     * Comma-separated list of conformance pack names for which you want details. If you do not specify any names, Config returns details for all your conformance packs. 
      */
     ConformancePackNames?: ConformancePackNamesList;
     /**
@@ -2171,11 +2171,11 @@ declare namespace ConfigService {
   }
   export interface DescribeOrganizationConfigRuleStatusesRequest {
     /**
-     * The names of organization config rules for which you want status details. If you do not specify any names, AWS Config returns details for all your organization AWS Confg rules.
+     * The names of organization config rules for which you want status details. If you do not specify any names, Config returns details for all your organization Config rules.
      */
     OrganizationConfigRuleNames?: OrganizationConfigRuleNames;
     /**
-     * The maximum number of OrganizationConfigRuleStatuses returned on each page. If you do no specify a number, AWS Config uses the default. The default is 100.
+     * The maximum number of OrganizationConfigRuleStatuses returned on each page. If you do no specify a number, Config uses the default. The default is 100.
      */
     Limit?: CosmosPageLimit;
     /**
@@ -2195,11 +2195,11 @@ declare namespace ConfigService {
   }
   export interface DescribeOrganizationConfigRulesRequest {
     /**
-     * The names of organization config rules for which you want details. If you do not specify any names, AWS Config returns details for all your organization config rules.
+     * The names of organization config rules for which you want details. If you do not specify any names, Config returns details for all your organization config rules.
      */
     OrganizationConfigRuleNames?: OrganizationConfigRuleNames;
     /**
-     * The maximum number of organization config rules returned on each page. If you do no specify a number, AWS Config uses the default. The default is 100.
+     * The maximum number of organization config rules returned on each page. If you do no specify a number, Config uses the default. The default is 100.
      */
     Limit?: CosmosPageLimit;
     /**
@@ -2219,11 +2219,11 @@ declare namespace ConfigService {
   }
   export interface DescribeOrganizationConformancePackStatusesRequest {
     /**
-     * The names of organization conformance packs for which you want status details. If you do not specify any names, AWS Config returns details for all your organization conformance packs. 
+     * The names of organization conformance packs for which you want status details. If you do not specify any names, Config returns details for all your organization conformance packs. 
      */
     OrganizationConformancePackNames?: OrganizationConformancePackNames;
     /**
-     * The maximum number of OrganizationConformancePackStatuses returned on each page. If you do no specify a number, AWS Config uses the default. The default is 100. 
+     * The maximum number of OrganizationConformancePackStatuses returned on each page. If you do no specify a number, Config uses the default. The default is 100. 
      */
     Limit?: CosmosPageLimit;
     /**
@@ -2247,7 +2247,7 @@ declare namespace ConfigService {
      */
     OrganizationConformancePackNames?: OrganizationConformancePackNames;
     /**
-     * The maximum number of organization config packs returned on each page. If you do no specify a number, AWS Config uses the default. The default is 100.
+     * The maximum number of organization config packs returned on each page. If you do no specify a number, Config uses the default. The default is 100.
      */
     Limit?: CosmosPageLimit;
     /**
@@ -2268,7 +2268,7 @@ declare namespace ConfigService {
   export type DescribePendingAggregationRequestsLimit = number;
   export interface DescribePendingAggregationRequestsRequest {
     /**
-     * The maximum number of evaluation results returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.
+     * The maximum number of evaluation results returned on each page. The default is maximum. If you specify 0, Config uses the default.
      */
     Limit?: DescribePendingAggregationRequestsLimit;
     /**
@@ -2288,7 +2288,7 @@ declare namespace ConfigService {
   }
   export interface DescribeRemediationConfigurationsRequest {
     /**
-     * A list of AWS Config rule names of remediation configurations for which you want details. 
+     * A list of Config rule names of remediation configurations for which you want details. 
      */
     ConfigRuleNames: ConfigRuleNames;
   }
@@ -2300,15 +2300,15 @@ declare namespace ConfigService {
   }
   export interface DescribeRemediationExceptionsRequest {
     /**
-     * The name of the AWS Config rule.
+     * The name of the Config rule.
      */
     ConfigRuleName: ConfigRuleName;
     /**
-     * An exception list of resource exception keys to be processed with the current request. AWS Config adds exception for each resource key. For example, AWS Config adds 3 exceptions for 3 resource keys. 
+     * An exception list of resource exception keys to be processed with the current request. Config adds exception for each resource key. For example, Config adds 3 exceptions for 3 resource keys. 
      */
     ResourceKeys?: RemediationExceptionResourceKeys;
     /**
-     * The maximum number of RemediationExceptionResourceKey returned on each page. The default is 25. If you specify 0, AWS Config uses the default.
+     * The maximum number of RemediationExceptionResourceKey returned on each page. The default is 25. If you specify 0, Config uses the default.
      */
     Limit?: Limit;
     /**
@@ -2328,7 +2328,7 @@ declare namespace ConfigService {
   }
   export interface DescribeRemediationExecutionStatusRequest {
     /**
-     * A list of AWS Config rule names.
+     * A list of Config rule names.
      */
     ConfigRuleName: ConfigRuleName;
     /**
@@ -2336,7 +2336,7 @@ declare namespace ConfigService {
      */
     ResourceKeys?: ResourceKeys;
     /**
-     * The maximum number of RemediationExecutionStatuses returned on each page. The default is maximum. If you specify 0, AWS Config uses the default. 
+     * The maximum number of RemediationExecutionStatuses returned on each page. The default is maximum. If you specify 0, Config uses the default. 
      */
     Limit?: Limit;
     /**
@@ -2356,7 +2356,7 @@ declare namespace ConfigService {
   }
   export interface DescribeRetentionConfigurationsRequest {
     /**
-     * A list of names of retention configurations for which you want details. If you do not specify a name, AWS Config returns details for all the retention configurations for that account.  Currently, AWS Config supports only one retention configuration per region in your account. 
+     * A list of names of retention configurations for which you want details. If you do not specify a name, Config returns details for all the retention configurations for that account.  Currently, Config supports only one retention configuration per region in your account. 
      */
     RetentionConfigurationNames?: RetentionConfigurationNameList;
     /**
@@ -2379,15 +2379,15 @@ declare namespace ConfigService {
   export type EmptiableStringWithCharLimit256 = string;
   export interface Evaluation {
     /**
-     * The type of AWS resource that was evaluated.
+     * The type of Amazon Web Services resource that was evaluated.
      */
     ComplianceResourceType: StringWithCharLimit256;
     /**
-     * The ID of the AWS resource that was evaluated.
+     * The ID of the Amazon Web Services resource that was evaluated.
      */
     ComplianceResourceId: BaseResourceId;
     /**
-     * Indicates whether the AWS resource complies with the AWS Config rule that it was evaluated against. For the Evaluation data type, AWS Config supports only the COMPLIANT, NON_COMPLIANT, and NOT_APPLICABLE values. AWS Config does not support the INSUFFICIENT_DATA value for this data type. Similarly, AWS Config does not accept INSUFFICIENT_DATA as the value for ComplianceType from a PutEvaluations request. For example, an AWS Lambda function for a custom AWS Config rule cannot pass an INSUFFICIENT_DATA value to AWS Config.
+     * Indicates whether the Amazon Web Services resource complies with the Config rule that it was evaluated against. For the Evaluation data type, Config supports only the COMPLIANT, NON_COMPLIANT, and NOT_APPLICABLE values. Config does not support the INSUFFICIENT_DATA value for this data type. Similarly, Config does not accept INSUFFICIENT_DATA as the value for ComplianceType from a PutEvaluations request. For example, an Lambda function for a custom Config rule cannot pass an INSUFFICIENT_DATA value to Config.
      */
     ComplianceType: ComplianceType;
     /**
@@ -2395,7 +2395,7 @@ declare namespace ConfigService {
      */
     Annotation?: StringWithCharLimit256;
     /**
-     * The time of the event in AWS Config that triggered the evaluation. For event-based evaluations, the time indicates when AWS Config created the configuration item that triggered the evaluation. For periodic evaluations, the time indicates when AWS Config triggered the evaluation at the frequency that you specified (for example, every 24 hours).
+     * The time of the event in Config that triggered the evaluation. For event-based evaluations, the time indicates when Config created the configuration item that triggered the evaluation. For periodic evaluations, the time indicates when Config triggered the evaluation at the frequency that you specified (for example, every 24 hours).
      */
     OrderingTimestamp: OrderingTimestamp;
   }
@@ -2405,15 +2405,15 @@ declare namespace ConfigService {
      */
     EvaluationResultIdentifier?: EvaluationResultIdentifier;
     /**
-     * Indicates whether the AWS resource complies with the AWS Config rule that evaluated it. For the EvaluationResult data type, AWS Config supports only the COMPLIANT, NON_COMPLIANT, and NOT_APPLICABLE values. AWS Config does not support the INSUFFICIENT_DATA value for the EvaluationResult data type.
+     * Indicates whether the Amazon Web Services resource complies with the Config rule that evaluated it. For the EvaluationResult data type, Config supports only the COMPLIANT, NON_COMPLIANT, and NOT_APPLICABLE values. Config does not support the INSUFFICIENT_DATA value for the EvaluationResult data type.
      */
     ComplianceType?: ComplianceType;
     /**
-     * The time when AWS Config recorded the evaluation result.
+     * The time when Config recorded the evaluation result.
      */
     ResultRecordedTime?: _Date;
     /**
-     * The time when the AWS Config rule evaluated the AWS resource.
+     * The time when the Config rule evaluated the Amazon Web Services resource.
      */
     ConfigRuleInvokedTime?: _Date;
     /**
@@ -2421,31 +2421,31 @@ declare namespace ConfigService {
      */
     Annotation?: StringWithCharLimit256;
     /**
-     * An encrypted token that associates an evaluation with an AWS Config rule. The token identifies the rule, the AWS resource being evaluated, and the event that triggered the evaluation.
+     * An encrypted token that associates an evaluation with an Config rule. The token identifies the rule, the Amazon Web Services resource being evaluated, and the event that triggered the evaluation.
      */
     ResultToken?: String;
   }
   export interface EvaluationResultIdentifier {
     /**
-     * Identifies an AWS Config rule used to evaluate an AWS resource, and provides the type and ID of the evaluated resource.
+     * Identifies an Config rule used to evaluate an Amazon Web Services resource, and provides the type and ID of the evaluated resource.
      */
     EvaluationResultQualifier?: EvaluationResultQualifier;
     /**
-     * The time of the event that triggered the evaluation of your AWS resources. The time can indicate when AWS Config delivered a configuration item change notification, or it can indicate when AWS Config delivered the configuration snapshot, depending on which event triggered the evaluation.
+     * The time of the event that triggered the evaluation of your Amazon Web Services resources. The time can indicate when Config delivered a configuration item change notification, or it can indicate when Config delivered the configuration snapshot, depending on which event triggered the evaluation.
      */
     OrderingTimestamp?: _Date;
   }
   export interface EvaluationResultQualifier {
     /**
-     * The name of the AWS Config rule that was used in the evaluation.
+     * The name of the Config rule that was used in the evaluation.
      */
     ConfigRuleName?: ConfigRuleName;
     /**
-     * The type of AWS resource that was evaluated.
+     * The type of Amazon Web Services resource that was evaluated.
      */
     ResourceType?: StringWithCharLimit256;
     /**
-     * The ID of the evaluated AWS resource.
+     * The ID of the evaluated Amazon Web Services resource.
      */
     ResourceId?: BaseResourceId;
   }
@@ -2462,15 +2462,15 @@ declare namespace ConfigService {
   export type Expression = string;
   export interface ExternalEvaluation {
     /**
-     * The evaluated compliance resource type. AWS Config accepts AWS::::Account resource type.
+     * The evaluated compliance resource type. Config accepts AWS::::Account resource type.
      */
     ComplianceResourceType: StringWithCharLimit256;
     /**
-     * The evaluated compliance resource ID. AWS Config accepts only AWS account ID.
+     * The evaluated compliance resource ID. Config accepts only Amazon Web Services account ID.
      */
     ComplianceResourceId: BaseResourceId;
     /**
-     * The compliance of the AWS resource. The valid values are COMPLIANT, NON_COMPLIANT,  and NOT_APPLICABLE.
+     * The compliance of the Amazon Web Services resource. The valid values are COMPLIANT, NON_COMPLIANT,  and NOT_APPLICABLE.
      */
     ComplianceType: ComplianceType;
     /**
@@ -2484,7 +2484,7 @@ declare namespace ConfigService {
   }
   export interface FailedDeleteRemediationExceptionsBatch {
     /**
-     * Returns a failure message for delete remediation exception. For example, AWS Config creates an exception due to an internal error.
+     * Returns a failure message for delete remediation exception. For example, Config creates an exception due to an internal error.
      */
     FailureMessage?: String;
     /**
@@ -2529,7 +2529,7 @@ declare namespace ConfigService {
      */
     ConfigurationAggregatorName: ConfigurationAggregatorName;
     /**
-     * The name of the AWS Config rule for which you want compliance information.
+     * The name of the Config rule for which you want compliance information.
      */
     ConfigRuleName: ConfigRuleName;
     /**
@@ -2541,11 +2541,11 @@ declare namespace ConfigService {
      */
     AwsRegion: AwsRegion;
     /**
-     * The resource compliance status.  For the GetAggregateComplianceDetailsByConfigRuleRequest data type, AWS Config supports only the COMPLIANT and NON_COMPLIANT. AWS Config does not support the NOT_APPLICABLE and INSUFFICIENT_DATA values. 
+     * The resource compliance status.  For the GetAggregateComplianceDetailsByConfigRuleRequest data type, Config supports only the COMPLIANT and NON_COMPLIANT. Config does not support the NOT_APPLICABLE and INSUFFICIENT_DATA values. 
      */
     ComplianceType?: ComplianceType;
     /**
-     * The maximum number of evaluation results returned on each page. The default is 50. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.
+     * The maximum number of evaluation results returned on each page. The default is 50. You cannot specify a number greater than 100. If you specify 0, Config uses the default.
      */
     Limit?: Limit;
     /**
@@ -2577,7 +2577,7 @@ declare namespace ConfigService {
      */
     GroupByKey?: ConfigRuleComplianceSummaryGroupKey;
     /**
-     * The maximum number of evaluation results returned on each page. The default is 1000. You cannot specify a number greater than 1000. If you specify 0, AWS Config uses the default.
+     * The maximum number of evaluation results returned on each page. The default is 1000. You cannot specify a number greater than 1000. If you specify 0, Config uses the default.
      */
     Limit?: GroupByAPILimit;
     /**
@@ -2609,11 +2609,11 @@ declare namespace ConfigService {
      */
     Filters?: AggregateConformancePackComplianceSummaryFilters;
     /**
-     * Groups the result based on AWS Account ID or AWS Region.
+     * Groups the result based on Amazon Web Services account ID or Amazon Web Services Region.
      */
     GroupByKey?: AggregateConformancePackComplianceSummaryGroupKey;
     /**
-     * The maximum number of results returned on each page. The default is maximum. If you specify 0, AWS Config uses the default.
+     * The maximum number of results returned on each page. The default is maximum. If you specify 0, Config uses the default.
      */
     Limit?: Limit;
     /**
@@ -2627,7 +2627,7 @@ declare namespace ConfigService {
      */
     AggregateConformancePackComplianceSummaries?: AggregateConformancePackComplianceSummaryList;
     /**
-     * Groups the result based on AWS Account ID or AWS Region.
+     * Groups the result based on Amazon Web Services account ID or Amazon Web Services Region.
      */
     GroupByKey?: StringWithCharLimit256;
     /**
@@ -2649,7 +2649,7 @@ declare namespace ConfigService {
      */
     GroupByKey?: ResourceCountGroupKey;
     /**
-     * The maximum number of GroupedResourceCount objects returned on each page. The default is 1000. You cannot specify a number greater than 1000. If you specify 0, AWS Config uses the default.
+     * The maximum number of GroupedResourceCount objects returned on each page. The default is 1000. You cannot specify a number greater than 1000. If you specify 0, Config uses the default.
      */
     Limit?: GroupByAPILimit;
     /**
@@ -2693,7 +2693,7 @@ declare namespace ConfigService {
   }
   export interface GetComplianceDetailsByConfigRuleRequest {
     /**
-     * The name of the AWS Config rule for which you want compliance information.
+     * The name of the Config rule for which you want compliance information.
      */
     ConfigRuleName: StringWithCharLimit64;
     /**
@@ -2701,7 +2701,7 @@ declare namespace ConfigService {
      */
     ComplianceTypes?: ComplianceTypes;
     /**
-     * The maximum number of evaluation results returned on each page. The default is 10. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.
+     * The maximum number of evaluation results returned on each page. The default is 10. You cannot specify a number greater than 100. If you specify 0, Config uses the default.
      */
     Limit?: Limit;
     /**
@@ -2711,7 +2711,7 @@ declare namespace ConfigService {
   }
   export interface GetComplianceDetailsByConfigRuleResponse {
     /**
-     * Indicates whether the AWS resource complies with the specified AWS Config rule.
+     * Indicates whether the Amazon Web Services resource complies with the specified Config rule.
      */
     EvaluationResults?: EvaluationResults;
     /**
@@ -2721,11 +2721,11 @@ declare namespace ConfigService {
   }
   export interface GetComplianceDetailsByResourceRequest {
     /**
-     * The type of the AWS resource for which you want compliance information.
+     * The type of the Amazon Web Services resource for which you want compliance information.
      */
     ResourceType: StringWithCharLimit256;
     /**
-     * The ID of the AWS resource for which you want compliance information.
+     * The ID of the Amazon Web Services resource for which you want compliance information.
      */
     ResourceId: BaseResourceId;
     /**
@@ -2739,7 +2739,7 @@ declare namespace ConfigService {
   }
   export interface GetComplianceDetailsByResourceResponse {
     /**
-     * Indicates whether the specified AWS resource complies each AWS Config rule.
+     * Indicates whether the specified Amazon Web Services resource complies each Config rule.
      */
     EvaluationResults?: EvaluationResults;
     /**
@@ -2749,13 +2749,13 @@ declare namespace ConfigService {
   }
   export interface GetComplianceSummaryByConfigRuleResponse {
     /**
-     * The number of AWS Config rules that are compliant and the number that are noncompliant, up to a maximum of 25 for each.
+     * The number of Config rules that are compliant and the number that are noncompliant, up to a maximum of 25 for each.
      */
     ComplianceSummary?: ComplianceSummary;
   }
   export interface GetComplianceSummaryByResourceTypeRequest {
     /**
-     * Specify one or more resource types to get the number of resources that are compliant and the number that are noncompliant for each resource type. For this request, you can specify an AWS resource type such as AWS::EC2::Instance. You can specify that the resource type is an AWS account by specifying AWS::::Account.
+     * Specify one or more resource types to get the number of resources that are compliant and the number that are noncompliant for each resource type. For this request, you can specify an Amazon Web Services resource type such as AWS::EC2::Instance. You can specify that the resource type is an Amazon Web Services account by specifying AWS::::Account.
      */
     ResourceTypes?: ResourceTypes;
   }
@@ -2776,7 +2776,7 @@ declare namespace ConfigService {
      */
     Filters?: ConformancePackEvaluationFilters;
     /**
-     * The maximum number of evaluation results returned on each page. If you do no specify a number, AWS Config uses the default. The default is 100.
+     * The maximum number of evaluation results returned on each page. If you do no specify a number, Config uses the default. The default is 100.
      */
     Limit?: GetConformancePackComplianceDetailsLimit;
     /**
@@ -2824,11 +2824,11 @@ declare namespace ConfigService {
   }
   export interface GetDiscoveredResourceCountsRequest {
     /**
-     * The comma-separated list that specifies the resource types that you want AWS Config to return (for example, "AWS::EC2::Instance", "AWS::IAM::User"). If a value for resourceTypes is not specified, AWS Config returns all resource types that AWS Config is recording in the region for your account.  If the configuration recorder is turned off, AWS Config returns an empty list of ResourceCount objects. If the configuration recorder is not recording a specific resource type (for example, S3 buckets), that resource type is not returned in the list of ResourceCount objects. 
+     * The comma-separated list that specifies the resource types that you want Config to return (for example, "AWS::EC2::Instance", "AWS::IAM::User"). If a value for resourceTypes is not specified, Config returns all resource types that Config is recording in the region for your account.  If the configuration recorder is turned off, Config returns an empty list of ResourceCount objects. If the configuration recorder is not recording a specific resource type (for example, S3 buckets), that resource type is not returned in the list of ResourceCount objects. 
      */
     resourceTypes?: ResourceTypes;
     /**
-     * The maximum number of ResourceCount objects returned on each page. The default is 100. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.
+     * The maximum number of ResourceCount objects returned on each page. The default is 100. You cannot specify a number greater than 100. If you specify 0, Config uses the default.
      */
     limit?: Limit;
     /**
@@ -2838,7 +2838,7 @@ declare namespace ConfigService {
   }
   export interface GetDiscoveredResourceCountsResponse {
     /**
-     * The total number of resources that AWS Config is recording in the region for your account. If you specify resource types in the request, AWS Config returns only the total number of resources for those resource types.  Example    AWS Config is recording three resource types in the US East (Ohio) Region for your account: 25 EC2 instances, 20 IAM users, and 15 S3 buckets, for a total of 60 resources.   You make a call to the GetDiscoveredResourceCounts action and specify the resource type, "AWS::EC2::Instances", in the request.   AWS Config returns 25 for totalDiscoveredResources.  
+     * The total number of resources that Config is recording in the region for your account. If you specify resource types in the request, Config returns only the total number of resources for those resource types.  Example    Config is recording three resource types in the US East (Ohio) Region for your account: 25 EC2 instances, 20 IAM users, and 15 S3 buckets, for a total of 60 resources.   You make a call to the GetDiscoveredResourceCounts action and specify the resource type, "AWS::EC2::Instances", in the request.   Config returns 25 for totalDiscoveredResources.  
      */
     totalDiscoveredResources?: Long;
     /**
@@ -2860,7 +2860,7 @@ declare namespace ConfigService {
      */
     Filters?: StatusDetailFilters;
     /**
-     * The maximum number of OrganizationConfigRuleDetailedStatus returned on each page. If you do not specify a number, AWS Config uses the default. The default is 100.
+     * The maximum number of OrganizationConfigRuleDetailedStatus returned on each page. If you do not specify a number, Config uses the default. The default is 100.
      */
     Limit?: CosmosPageLimit;
     /**
@@ -2888,7 +2888,7 @@ declare namespace ConfigService {
      */
     Filters?: OrganizationResourceDetailedStatusFilters;
     /**
-     * The maximum number of OrganizationConformancePackDetailedStatuses returned on each page. If you do not specify a number, AWS Config uses the default. The default is 100. 
+     * The maximum number of OrganizationConformancePackDetailedStatuses returned on each page. If you do not specify a number, Config uses the default. The default is 100. 
      */
     Limit?: CosmosPageLimit;
     /**
@@ -2928,7 +2928,7 @@ declare namespace ConfigService {
      */
     chronologicalOrder?: ChronologicalOrder;
     /**
-     * The maximum number of configuration items returned on each page. The default is 10. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.
+     * The maximum number of configuration items returned on each page. The default is 10. You cannot specify a number greater than 100. If you specify 0, Config uses the default.
      */
     limit?: Limit;
     /**
@@ -2980,7 +2980,7 @@ declare namespace ConfigService {
      */
     ConfigurationAggregatorName: ConfigurationAggregatorName;
     /**
-     * The type of resources that you want AWS Config to list in the response.
+     * The type of resources that you want Config to list in the response.
      */
     ResourceType: ResourceType;
     /**
@@ -2988,7 +2988,7 @@ declare namespace ConfigService {
      */
     Filters?: ResourceFilters;
     /**
-     * The maximum number of resource identifiers returned on each page. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.
+     * The maximum number of resource identifiers returned on each page. You cannot specify a number greater than 100. If you specify 0, Config uses the default.
      */
     Limit?: Limit;
     /**
@@ -3008,23 +3008,23 @@ declare namespace ConfigService {
   }
   export interface ListDiscoveredResourcesRequest {
     /**
-     * The type of resources that you want AWS Config to list in the response.
+     * The type of resources that you want Config to list in the response.
      */
     resourceType: ResourceType;
     /**
-     * The IDs of only those resources that you want AWS Config to list in the response. If you do not specify this parameter, AWS Config lists all resources of the specified type that it has discovered.
+     * The IDs of only those resources that you want Config to list in the response. If you do not specify this parameter, Config lists all resources of the specified type that it has discovered.
      */
     resourceIds?: ResourceIdList;
     /**
-     * The custom name of only those resources that you want AWS Config to list in the response. If you do not specify this parameter, AWS Config lists all resources of the specified type that it has discovered.
+     * The custom name of only those resources that you want Config to list in the response. If you do not specify this parameter, Config lists all resources of the specified type that it has discovered.
      */
     resourceName?: ResourceName;
     /**
-     * The maximum number of resource identifiers returned on each page. The default is 100. You cannot specify a number greater than 100. If you specify 0, AWS Config uses the default.
+     * The maximum number of resource identifiers returned on each page. The default is 100. You cannot specify a number greater than 100. If you specify 0, Config uses the default.
      */
     limit?: Limit;
     /**
-     * Specifies whether AWS Config includes deleted resources in the results. By default, deleted resources are not included.
+     * Specifies whether Config includes deleted resources in the results. By default, deleted resources are not included.
      */
     includeDeletedResources?: Boolean;
     /**
@@ -3034,7 +3034,7 @@ declare namespace ConfigService {
   }
   export interface ListDiscoveredResourcesResponse {
     /**
-     * The details that identify a resource that is discovered by AWS Config, including the resource type, ID, and (if available) the custom resource name.
+     * The details that identify a resource that is discovered by Config, including the resource type, ID, and (if available) the custom resource name.
      */
     resourceIdentifiers?: ResourceIdentifierList;
     /**
@@ -3068,7 +3068,7 @@ declare namespace ConfigService {
      */
     ResourceArn: AmazonResourceName;
     /**
-     * The maximum number of tags returned on each page. The limit maximum is 50. You cannot specify a number greater than 50. If you specify 0, AWS Config uses the default. 
+     * The maximum number of tags returned on each page. The limit maximum is 50. You cannot specify a number greater than 50. If you specify 0, Config uses the default. 
      */
     Limit?: Limit;
     /**
@@ -3099,7 +3099,7 @@ declare namespace ConfigService {
      */
     ConfigRuleName: StringWithCharLimit64;
     /**
-     * Indicates deployment status for config rule in the member account. When master account calls PutOrganizationConfigRule action for the first time, config rule status is created in the member account. When master account calls PutOrganizationConfigRule action for the second time, config rule status is updated in the member account. Config rule status is deleted when the master account deletes OrganizationConfigRule and disables service access for config-multiaccountsetup.amazonaws.com.   AWS Config sets the state of the rule to:    CREATE_SUCCESSFUL when config rule has been created in the member account.     CREATE_IN_PROGRESS when config rule is being created in the member account.    CREATE_FAILED when config rule creation has failed in the member account.    DELETE_FAILED when config rule deletion has failed in the member account.    DELETE_IN_PROGRESS when config rule is being deleted in the member account.    DELETE_SUCCESSFUL when config rule has been deleted in the member account.     UPDATE_SUCCESSFUL when config rule has been updated in the member account.    UPDATE_IN_PROGRESS when config rule is being updated in the member account.    UPDATE_FAILED when config rule deletion has failed in the member account.  
+     * Indicates deployment status for config rule in the member account. When master account calls PutOrganizationConfigRule action for the first time, config rule status is created in the member account. When master account calls PutOrganizationConfigRule action for the second time, config rule status is updated in the member account. Config rule status is deleted when the master account deletes OrganizationConfigRule and disables service access for config-multiaccountsetup.amazonaws.com.   Config sets the state of the rule to:    CREATE_SUCCESSFUL when config rule has been created in the member account.     CREATE_IN_PROGRESS when config rule is being created in the member account.    CREATE_FAILED when config rule creation has failed in the member account.    DELETE_FAILED when config rule deletion has failed in the member account.    DELETE_IN_PROGRESS when config rule is being deleted in the member account.    DELETE_SUCCESSFUL when config rule has been deleted in the member account.     UPDATE_SUCCESSFUL when config rule has been updated in the member account.    UPDATE_IN_PROGRESS when config rule is being updated in the member account.    UPDATE_FAILED when config rule deletion has failed in the member account.  
      */
     MemberAccountRuleStatus: MemberAccountRuleStatus;
     /**
@@ -3121,7 +3121,7 @@ declare namespace ConfigService {
   export type OrderingTimestamp = Date;
   export interface OrganizationAggregationSource {
     /**
-     * ARN of the IAM role used to retrieve AWS Organization details associated with the aggregator account.
+     * ARN of the IAM role used to retrieve Amazon Web Services Organization details associated with the aggregator account.
      */
     RoleArn: String;
     /**
@@ -3129,7 +3129,7 @@ declare namespace ConfigService {
      */
     AwsRegions?: AggregatorRegionList;
     /**
-     * If true, aggregate existing AWS Config regions and future regions.
+     * If true, aggregate existing Config regions and future regions.
      */
     AllAwsRegions?: Boolean;
   }
@@ -3168,7 +3168,7 @@ declare namespace ConfigService {
      */
     OrganizationConfigRuleName: OrganizationConfigRuleName;
     /**
-     * Indicates deployment status of an organization config rule. When master account calls PutOrganizationConfigRule action for the first time, config rule status is created in all the member accounts. When master account calls PutOrganizationConfigRule action for the second time, config rule status is updated in all the member accounts. Additionally, config rule status is updated when one or more member accounts join or leave an organization. Config rule status is deleted when the master account deletes OrganizationConfigRule in all the member accounts and disables service access for config-multiaccountsetup.amazonaws.com. AWS Config sets the state of the rule to:    CREATE_SUCCESSFUL when an organization config rule has been successfully created in all the member accounts.     CREATE_IN_PROGRESS when an organization config rule creation is in progress.    CREATE_FAILED when an organization config rule creation failed in one or more member accounts within that organization.    DELETE_FAILED when an organization config rule deletion failed in one or more member accounts within that organization.    DELETE_IN_PROGRESS when an organization config rule deletion is in progress.    DELETE_SUCCESSFUL when an organization config rule has been successfully deleted from all the member accounts.    UPDATE_SUCCESSFUL when an organization config rule has been successfully updated in all the member accounts.    UPDATE_IN_PROGRESS when an organization config rule update is in progress.    UPDATE_FAILED when an organization config rule update failed in one or more member accounts within that organization.  
+     * Indicates deployment status of an organization config rule. When master account calls PutOrganizationConfigRule action for the first time, config rule status is created in all the member accounts. When master account calls PutOrganizationConfigRule action for the second time, config rule status is updated in all the member accounts. Additionally, config rule status is updated when one or more member accounts join or leave an organization. Config rule status is deleted when the master account deletes OrganizationConfigRule in all the member accounts and disables service access for config-multiaccountsetup.amazonaws.com. Config sets the state of the rule to:    CREATE_SUCCESSFUL when an organization config rule has been successfully created in all the member accounts.     CREATE_IN_PROGRESS when an organization config rule creation is in progress.    CREATE_FAILED when an organization config rule creation failed in one or more member accounts within that organization.    DELETE_FAILED when an organization config rule deletion failed in one or more member accounts within that organization.    DELETE_IN_PROGRESS when an organization config rule deletion is in progress.    DELETE_SUCCESSFUL when an organization config rule has been successfully deleted from all the member accounts.    UPDATE_SUCCESSFUL when an organization config rule has been successfully updated in all the member accounts.    UPDATE_IN_PROGRESS when an organization config rule update is in progress.    UPDATE_FAILED when an organization config rule update failed in one or more member accounts within that organization.  
      */
     OrganizationRuleStatus: OrganizationRuleStatus;
     /**
@@ -3198,7 +3198,7 @@ declare namespace ConfigService {
      */
     OrganizationConformancePackArn: StringWithCharLimit256;
     /**
-     * Amazon S3 bucket where AWS Config stores conformance pack templates.   This field is optional. 
+     * The name of the Amazon S3 bucket where Config stores conformance pack templates.   This field is optional. 
      */
     DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
@@ -3228,7 +3228,7 @@ declare namespace ConfigService {
      */
     ConformancePackName: StringWithCharLimit256;
     /**
-     * Indicates deployment status for conformance pack in a member account. When master account calls PutOrganizationConformancePack action for the first time, conformance pack status is created in the member account. When master account calls PutOrganizationConformancePack action for the second time, conformance pack status is updated in the member account. Conformance pack status is deleted when the master account deletes OrganizationConformancePack and disables service access for config-multiaccountsetup.amazonaws.com.   AWS Config sets the state of the conformance pack to:    CREATE_SUCCESSFUL when conformance pack has been created in the member account.     CREATE_IN_PROGRESS when conformance pack is being created in the member account.    CREATE_FAILED when conformance pack creation has failed in the member account.    DELETE_FAILED when conformance pack deletion has failed in the member account.    DELETE_IN_PROGRESS when conformance pack is being deleted in the member account.    DELETE_SUCCESSFUL when conformance pack has been deleted in the member account.     UPDATE_SUCCESSFUL when conformance pack has been updated in the member account.    UPDATE_IN_PROGRESS when conformance pack is being updated in the member account.    UPDATE_FAILED when conformance pack deletion has failed in the member account.  
+     * Indicates deployment status for conformance pack in a member account. When master account calls PutOrganizationConformancePack action for the first time, conformance pack status is created in the member account. When master account calls PutOrganizationConformancePack action for the second time, conformance pack status is updated in the member account. Conformance pack status is deleted when the master account deletes OrganizationConformancePack and disables service access for config-multiaccountsetup.amazonaws.com.   Config sets the state of the conformance pack to:    CREATE_SUCCESSFUL when conformance pack has been created in the member account.     CREATE_IN_PROGRESS when conformance pack is being created in the member account.    CREATE_FAILED when conformance pack creation has failed in the member account.    DELETE_FAILED when conformance pack deletion has failed in the member account.    DELETE_IN_PROGRESS when conformance pack is being deleted in the member account.    DELETE_SUCCESSFUL when conformance pack has been deleted in the member account.     UPDATE_SUCCESSFUL when conformance pack has been updated in the member account.    UPDATE_IN_PROGRESS when conformance pack is being updated in the member account.    UPDATE_FAILED when conformance pack deletion has failed in the member account.  
      */
     Status: OrganizationResourceDetailedStatus;
     /**
@@ -3253,7 +3253,7 @@ declare namespace ConfigService {
      */
     OrganizationConformancePackName: OrganizationConformancePackName;
     /**
-     * Indicates deployment status of an organization conformance pack. When master account calls PutOrganizationConformancePack for the first time, conformance pack status is created in all the member accounts. When master account calls PutOrganizationConformancePack for the second time, conformance pack status is updated in all the member accounts. Additionally, conformance pack status is updated when one or more member accounts join or leave an organization. Conformance pack status is deleted when the master account deletes OrganizationConformancePack in all the member accounts and disables service access for config-multiaccountsetup.amazonaws.com. AWS Config sets the state of the conformance pack to:    CREATE_SUCCESSFUL when an organization conformance pack has been successfully created in all the member accounts.     CREATE_IN_PROGRESS when an organization conformance pack creation is in progress.    CREATE_FAILED when an organization conformance pack creation failed in one or more member accounts within that organization.    DELETE_FAILED when an organization conformance pack deletion failed in one or more member accounts within that organization.    DELETE_IN_PROGRESS when an organization conformance pack deletion is in progress.    DELETE_SUCCESSFUL when an organization conformance pack has been successfully deleted from all the member accounts.    UPDATE_SUCCESSFUL when an organization conformance pack has been successfully updated in all the member accounts.    UPDATE_IN_PROGRESS when an organization conformance pack update is in progress.    UPDATE_FAILED when an organization conformance pack update failed in one or more member accounts within that organization.  
+     * Indicates deployment status of an organization conformance pack. When master account calls PutOrganizationConformancePack for the first time, conformance pack status is created in all the member accounts. When master account calls PutOrganizationConformancePack for the second time, conformance pack status is updated in all the member accounts. Additionally, conformance pack status is updated when one or more member accounts join or leave an organization. Conformance pack status is deleted when the master account deletes OrganizationConformancePack in all the member accounts and disables service access for config-multiaccountsetup.amazonaws.com. Config sets the state of the conformance pack to:    CREATE_SUCCESSFUL when an organization conformance pack has been successfully created in all the member accounts.     CREATE_IN_PROGRESS when an organization conformance pack creation is in progress.    CREATE_FAILED when an organization conformance pack creation failed in one or more member accounts within that organization.    DELETE_FAILED when an organization conformance pack deletion failed in one or more member accounts within that organization.    DELETE_IN_PROGRESS when an organization conformance pack deletion is in progress.    DELETE_SUCCESSFUL when an organization conformance pack has been successfully deleted from all the member accounts.    UPDATE_SUCCESSFUL when an organization conformance pack has been successfully updated in all the member accounts.    UPDATE_IN_PROGRESS when an organization conformance pack update is in progress.    UPDATE_FAILED when an organization conformance pack update failed in one or more member accounts within that organization.  
      */
     Status: OrganizationResourceStatus;
     /**
@@ -3281,7 +3281,7 @@ declare namespace ConfigService {
      */
     LambdaFunctionArn: StringWithCharLimit256;
     /**
-     * The type of notification that triggers AWS Config to run an evaluation for a rule. You can specify the following notification types:    ConfigurationItemChangeNotification - Triggers an evaluation when AWS Config delivers a configuration item as a result of a resource change.    OversizedConfigurationItemChangeNotification - Triggers an evaluation when AWS Config delivers an oversized configuration item. AWS Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.    ScheduledNotification - Triggers a periodic evaluation at the frequency specified for MaximumExecutionFrequency.  
+     * The type of notification that triggers Config to run an evaluation for a rule. You can specify the following notification types:    ConfigurationItemChangeNotification - Triggers an evaluation when Config delivers a configuration item as a result of a resource change.    OversizedConfigurationItemChangeNotification - Triggers an evaluation when Config delivers an oversized configuration item. Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.    ScheduledNotification - Triggers a periodic evaluation at the frequency specified for MaximumExecutionFrequency.  
      */
     OrganizationConfigRuleTriggerTypes: OrganizationConfigRuleTriggerTypes;
     /**
@@ -3289,15 +3289,15 @@ declare namespace ConfigService {
      */
     InputParameters?: StringWithCharLimit2048;
     /**
-     * The maximum frequency with which AWS Config runs evaluations for a rule. Your custom rule is triggered when AWS Config delivers the configuration snapshot. For more information, see ConfigSnapshotDeliveryProperties.  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the MaximumExecutionFrequency parameter. 
+     * The maximum frequency with which Config runs evaluations for a rule. Your custom rule is triggered when Config delivers the configuration snapshot. For more information, see ConfigSnapshotDeliveryProperties.  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the MaximumExecutionFrequency parameter. 
      */
     MaximumExecutionFrequency?: MaximumExecutionFrequency;
     /**
-     * The type of the AWS resource that was evaluated.
+     * The type of the Amazon Web Services resource that was evaluated.
      */
     ResourceTypesScope?: ResourceTypesScope;
     /**
-     * The ID of the AWS resource that was evaluated.
+     * The ID of the Amazon Web Services resource that was evaluated.
      */
     ResourceIdScope?: StringWithCharLimit768;
     /**
@@ -3315,7 +3315,7 @@ declare namespace ConfigService {
      */
     Description?: StringWithCharLimit256Min0;
     /**
-     * For organization config managed rules, a predefined identifier from a list. For example, IAM_PASSWORD_POLICY is a managed rule. To reference a managed rule, see Using AWS Managed Config Rules.
+     * For organization config managed rules, a predefined identifier from a list. For example, IAM_PASSWORD_POLICY is a managed rule. To reference a managed rule, see Using Config managed rules.
      */
     RuleIdentifier: StringWithCharLimit256;
     /**
@@ -3323,15 +3323,15 @@ declare namespace ConfigService {
      */
     InputParameters?: StringWithCharLimit2048;
     /**
-     * The maximum frequency with which AWS Config runs evaluations for a rule. You are using an AWS managed rule that is triggered at a periodic frequency.  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the MaximumExecutionFrequency parameter. 
+     * The maximum frequency with which Config runs evaluations for a rule. You are using an Config managed rule that is triggered at a periodic frequency.  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the MaximumExecutionFrequency parameter. 
      */
     MaximumExecutionFrequency?: MaximumExecutionFrequency;
     /**
-     * The type of the AWS resource that was evaluated.
+     * The type of the Amazon Web Services resource that was evaluated.
      */
     ResourceTypesScope?: ResourceTypesScope;
     /**
-     * The ID of the AWS resource that was evaluated.
+     * The ID of the Amazon Web Services resource that was evaluated.
      */
     ResourceIdScope?: StringWithCharLimit768;
     /**
@@ -3350,7 +3350,7 @@ declare namespace ConfigService {
      */
     AccountId?: AccountId;
     /**
-     * Indicates deployment status for conformance pack in a member account. When master account calls PutOrganizationConformancePack action for the first time, conformance pack status is created in the member account. When master account calls PutOrganizationConformancePack action for the second time, conformance pack status is updated in the member account. Conformance pack status is deleted when the master account deletes OrganizationConformancePack and disables service access for config-multiaccountsetup.amazonaws.com.   AWS Config sets the state of the conformance pack to:    CREATE_SUCCESSFUL when conformance pack has been created in the member account.     CREATE_IN_PROGRESS when conformance pack is being created in the member account.    CREATE_FAILED when conformance pack creation has failed in the member account.    DELETE_FAILED when conformance pack deletion has failed in the member account.    DELETE_IN_PROGRESS when conformance pack is being deleted in the member account.    DELETE_SUCCESSFUL when conformance pack has been deleted in the member account.     UPDATE_SUCCESSFUL when conformance pack has been updated in the member account.    UPDATE_IN_PROGRESS when conformance pack is being updated in the member account.    UPDATE_FAILED when conformance pack deletion has failed in the member account.  
+     * Indicates deployment status for conformance pack in a member account. When master account calls PutOrganizationConformancePack action for the first time, conformance pack status is created in the member account. When master account calls PutOrganizationConformancePack action for the second time, conformance pack status is updated in the member account. Conformance pack status is deleted when the master account deletes OrganizationConformancePack and disables service access for config-multiaccountsetup.amazonaws.com.   Config sets the state of the conformance pack to:    CREATE_SUCCESSFUL when conformance pack has been created in the member account.     CREATE_IN_PROGRESS when conformance pack is being created in the member account.    CREATE_FAILED when conformance pack creation has failed in the member account.    DELETE_FAILED when conformance pack deletion has failed in the member account.    DELETE_IN_PROGRESS when conformance pack is being deleted in the member account.    DELETE_SUCCESSFUL when conformance pack has been deleted in the member account.     UPDATE_SUCCESSFUL when conformance pack has been updated in the member account.    UPDATE_IN_PROGRESS when conformance pack is being updated in the member account.    UPDATE_FAILED when conformance pack deletion has failed in the member account.  
      */
     Status?: OrganizationResourceDetailedStatus;
   }
@@ -3446,7 +3446,7 @@ declare namespace ConfigService {
      */
     TemplateBody?: TemplateBody;
     /**
-     * Amazon S3 bucket where AWS Config stores conformance pack templates.  This field is optional. 
+     * The name of the Amazon S3 bucket where Config stores conformance pack templates.  This field is optional. 
      */
     DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
@@ -3472,15 +3472,15 @@ declare namespace ConfigService {
   }
   export interface PutEvaluationsRequest {
     /**
-     * The assessments that the AWS Lambda function performs. Each evaluation identifies an AWS resource and indicates whether it complies with the AWS Config rule that invokes the AWS Lambda function.
+     * The assessments that the Lambda function performs. Each evaluation identifies an Amazon Web Services resource and indicates whether it complies with the Config rule that invokes the Lambda function.
      */
     Evaluations?: Evaluations;
     /**
-     * An encrypted token that associates an evaluation with an AWS Config rule. Identifies the rule and the event that triggered the evaluation.
+     * An encrypted token that associates an evaluation with an Config rule. Identifies the rule and the event that triggered the evaluation.
      */
     ResultToken: String;
     /**
-     * Use this parameter to specify a test run for PutEvaluations. You can verify whether your AWS Lambda function will deliver evaluation results to AWS Config. No updates occur to your existing evaluations, and evaluation results are not sent to AWS Config.  When TestMode is true, PutEvaluations doesn't require a valid value for the ResultToken parameter, but the value cannot be null. 
+     * Use this parameter to specify a test run for PutEvaluations. You can verify whether your Lambda function will deliver evaluation results to Config. No updates occur to your existing evaluations, and evaluation results are not sent to Config.  When TestMode is true, PutEvaluations doesn't require a valid value for the ResultToken parameter, but the value cannot be null. 
      */
     TestMode?: Boolean;
   }
@@ -3492,7 +3492,7 @@ declare namespace ConfigService {
   }
   export interface PutExternalEvaluationRequest {
     /**
-     * The name of the AWS Config rule.
+     * The name of the Config rule.
      */
     ConfigRuleName: ConfigRuleName;
     /**
@@ -3540,7 +3540,7 @@ declare namespace ConfigService {
      */
     TemplateBody?: TemplateBody;
     /**
-     * Amazon S3 bucket where AWS Config stores conformance pack templates.  This field is optional. If used, it must be prefixed with awsconfigconforms. 
+     * The name of the Amazon S3 bucket where Config stores conformance pack templates.  This field is optional. If used, it must be prefixed with awsconfigconforms. 
      */
     DeliveryS3Bucket?: DeliveryS3Bucket;
     /**
@@ -3552,7 +3552,7 @@ declare namespace ConfigService {
      */
     ConformancePackInputParameters?: ConformancePackInputParameters;
     /**
-     * A list of AWS accounts to be excluded from an organization conformance pack while deploying a conformance pack.
+     * A list of Amazon Web Services accounts to be excluded from an organization conformance pack while deploying a conformance pack.
      */
     ExcludedAccounts?: ExcludedAccounts;
   }
@@ -3576,11 +3576,11 @@ declare namespace ConfigService {
   }
   export interface PutRemediationExceptionsRequest {
     /**
-     * The name of the AWS Config rule for which you want to create remediation exception.
+     * The name of the Config rule for which you want to create remediation exception.
      */
     ConfigRuleName: ConfigRuleName;
     /**
-     * An exception list of resource exception keys to be processed with the current request. AWS Config adds exception for each resource key. For example, AWS Config adds 3 exceptions for 3 resource keys. 
+     * An exception list of resource exception keys to be processed with the current request. Config adds exception for each resource key. For example, Config adds 3 exceptions for 3 resource keys. 
      */
     ResourceKeys: RemediationExceptionResourceKeys;
     /**
@@ -3600,11 +3600,11 @@ declare namespace ConfigService {
   }
   export interface PutResourceConfigRequest {
     /**
-     * The type of the resource. The custom resource type must be registered with AWS CloudFormation.   You cannot use the organization names “aws”, “amzn”, “amazon”, “alexa”, “custom” with custom resource types. It is the first part of the ResourceType up to the first ::. 
+     * The type of the resource. The custom resource type must be registered with CloudFormation.   You cannot use the organization names “amzn”, “amazon”, “alexa”, “custom” with custom resource types. It is the first part of the ResourceType up to the first ::. 
      */
     ResourceType: ResourceTypeString;
     /**
-     * Version of the schema registered for the ResourceType in AWS CloudFormation.
+     * Version of the schema registered for the ResourceType in CloudFormation.
      */
     SchemaVersionId: SchemaVersionId;
     /**
@@ -3616,7 +3616,7 @@ declare namespace ConfigService {
      */
     ResourceName?: ResourceName;
     /**
-     * The configuration object of the resource in valid JSON format. It must match the schema registered with AWS CloudFormation.  The configuration JSON must not exceed 64 KB. 
+     * The configuration object of the resource in valid JSON format. It must match the schema registered with CloudFormation.  The configuration JSON must not exceed 64 KB. 
      */
     Configuration: Configuration;
     /**
@@ -3626,7 +3626,7 @@ declare namespace ConfigService {
   }
   export interface PutRetentionConfigurationRequest {
     /**
-     * Number of days AWS Config stores your historical information.  Currently, only applicable to the configuration item history. 
+     * Number of days Config stores your historical information.  Currently, only applicable to the configuration item history. 
      */
     RetentionPeriodInDays: RetentionPeriodInDays;
   }
@@ -3667,15 +3667,15 @@ declare namespace ConfigService {
   export type RecorderStatus = "Pending"|"Success"|"Failure"|string;
   export interface RecordingGroup {
     /**
-     * Specifies whether AWS Config records configuration changes for every supported type of regional resource. If you set this option to true, when AWS Config adds support for a new type of regional resource, it starts recording resources of that type automatically. If you set this option to true, you cannot enumerate a list of resourceTypes.
+     * Specifies whether Config records configuration changes for every supported type of regional resource. If you set this option to true, when Config adds support for a new type of regional resource, it starts recording resources of that type automatically. If you set this option to true, you cannot enumerate a list of resourceTypes.
      */
     allSupported?: AllSupported;
     /**
-     * Specifies whether AWS Config includes all supported types of global resources (for example, IAM resources) with the resources that it records. Before you can set this option to true, you must set the allSupported option to true. If you set this option to true, when AWS Config adds support for a new type of global resource, it starts recording resources of that type automatically. The configuration details for any global resource are the same in all regions. To prevent duplicate configuration items, you should consider customizing AWS Config in only one region to record global resources.
+     * Specifies whether Config includes all supported types of global resources (for example, IAM resources) with the resources that it records. Before you can set this option to true, you must set the allSupported option to true. If you set this option to true, when Config adds support for a new type of global resource, it starts recording resources of that type automatically. The configuration details for any global resource are the same in all regions. To prevent duplicate configuration items, you should consider customizing Config in only one region to record global resources.
      */
     includeGlobalResourceTypes?: IncludeGlobalResourceTypes;
     /**
-     * A comma-separated list that specifies the types of AWS resources for which AWS Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). To record all configuration changes, you must set the allSupported option to true. If you set this option to false, when AWS Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group. For a list of valid resourceTypes values, see the resourceType Value column in Supported AWS Resource Types.
+     * A comma-separated list that specifies the types of Amazon Web Services resources for which Config records configuration changes (for example, AWS::EC2::Instance or AWS::CloudTrail::Trail). To record all configuration changes, you must set the allSupported option to true. If you set this option to false, when Config adds support for a new type of resource, it will not record resources of that type unless you manually add that type to your recording group. For a list of valid resourceTypes values, see the resourceType Value column in Supported Amazon Web Services resource Types.
      */
     resourceTypes?: ResourceTypeList;
   }
@@ -3704,7 +3704,7 @@ declare namespace ConfigService {
   export type RelationshipName = string;
   export interface RemediationConfiguration {
     /**
-     * The name of the AWS Config rule.
+     * The name of the Config rule.
      */
     ConfigRuleName: ConfigRuleName;
     /**
@@ -3736,11 +3736,11 @@ declare namespace ConfigService {
      */
     ExecutionControls?: ExecutionControls;
     /**
-     * The maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5. For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptSeconds as 50 seconds, AWS Config will put a RemediationException on your behalf for the failing resource after the 5th failed attempt within 50 seconds.
+     * The maximum number of failed attempts for auto-remediation. If you do not select a number, the default is 5. For example, if you specify MaximumAutomaticAttempts as 5 with RetryAttemptSeconds as 50 seconds, Config will put a RemediationException on your behalf for the failing resource after the 5th failed attempt within 50 seconds.
      */
     MaximumAutomaticAttempts?: AutoRemediationAttempts;
     /**
-     * Maximum time in seconds that AWS Config runs auto-remediation. If you do not select a number, the default is 60 seconds.  For example, if you specify RetryAttemptSeconds as 50 seconds and MaximumAutomaticAttempts as 5, AWS Config will run auto-remediations 5 times within 50 seconds before throwing an exception.
+     * Maximum time in seconds that Config runs auto-remediation. If you do not select a number, the default is 60 seconds.  For example, if you specify RetryAttemptSeconds as 50 seconds and MaximumAutomaticAttempts as 5, Config will run auto-remediations 5 times within 50 seconds before throwing an exception.
      */
     RetryAttemptSeconds?: AutoRemediationAttemptSeconds;
     /**
@@ -3755,7 +3755,7 @@ declare namespace ConfigService {
   export type RemediationConfigurations = RemediationConfiguration[];
   export interface RemediationException {
     /**
-     * The name of the AWS Config rule.
+     * The name of the Config rule.
      */
     ConfigRuleName: ConfigRuleName;
     /**
@@ -3856,7 +3856,7 @@ declare namespace ConfigService {
   }
   export interface ResourceCountFilters {
     /**
-     * The type of the AWS resource.
+     * The type of the Amazon Web Services resource.
      */
     ResourceType?: ResourceType;
     /**
@@ -3943,7 +3943,7 @@ declare namespace ConfigService {
      */
     Name: RetentionConfigurationName;
     /**
-     * Number of days AWS Config stores your historical information.  Currently, only applicable to the configuration item history. 
+     * Number of days Config stores your historical information.  Currently, only applicable to the configuration item history. 
      */
     RetentionPeriodInDays: RetentionPeriodInDays;
   }
@@ -3955,19 +3955,19 @@ declare namespace ConfigService {
   export type SchemaVersionId = string;
   export interface Scope {
     /**
-     * The resource types of only those AWS resources that you want to trigger an evaluation for the rule. You can only specify one type if you also specify a resource ID for ComplianceResourceId.
+     * The resource types of only those Amazon Web Services resources that you want to trigger an evaluation for the rule. You can only specify one type if you also specify a resource ID for ComplianceResourceId.
      */
     ComplianceResourceTypes?: ComplianceResourceTypes;
     /**
-     * The tag key that is applied to only those AWS resources that you want to trigger an evaluation for the rule.
+     * The tag key that is applied to only those Amazon Web Services resources that you want to trigger an evaluation for the rule.
      */
     TagKey?: StringWithCharLimit128;
     /**
-     * The tag value applied to only those AWS resources that you want to trigger an evaluation for the rule. If you specify a value for TagValue, you must also specify a value for TagKey.
+     * The tag value applied to only those Amazon Web Services resources that you want to trigger an evaluation for the rule. If you specify a value for TagValue, you must also specify a value for TagKey.
      */
     TagValue?: StringWithCharLimit256;
     /**
-     * The ID of the only AWS resource that you want to trigger an evaluation for the rule. If you specify a resource ID, you must specify one resource type for ComplianceResourceTypes.
+     * The ID of the only Amazon Web Services resource that you want to trigger an evaluation for the rule. If you specify a resource ID, you must specify one resource type for ComplianceResourceTypes.
      */
     ComplianceResourceId?: BaseResourceId;
   }
@@ -3985,7 +3985,7 @@ declare namespace ConfigService {
      */
     Limit?: Limit;
     /**
-     * The maximum number of query results returned on each page. AWS Config also allows the Limit request parameter.
+     * The maximum number of query results returned on each page. Config also allows the Limit request parameter.
      */
     MaxResults?: Limit;
     /**
@@ -4034,29 +4034,29 @@ declare namespace ConfigService {
   }
   export interface Source {
     /**
-     * Indicates whether AWS or the customer owns and manages the AWS Config rule.
+     * Indicates whether Amazon Web Services or the customer owns and manages the Config rule.
      */
     Owner: Owner;
     /**
-     * For AWS Config managed rules, a predefined identifier from a list. For example, IAM_PASSWORD_POLICY is a managed rule. To reference a managed rule, see Using AWS Managed Config Rules. For custom rules, the identifier is the Amazon Resource Name (ARN) of the rule's AWS Lambda function, such as arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name.
+     * For Config managed rules, a predefined identifier from a list. For example, IAM_PASSWORD_POLICY is a managed rule. To reference a managed rule, see Using Config managed rules. For custom rules, the identifier is the Amazon Resource Name (ARN) of the rule's Lambda function, such as arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name.
      */
     SourceIdentifier: StringWithCharLimit256;
     /**
-     * Provides the source and type of the event that causes AWS Config to evaluate your AWS resources.
+     * Provides the source and type of the event that causes Config to evaluate your Amazon Web Services resources.
      */
     SourceDetails?: SourceDetails;
   }
   export interface SourceDetail {
     /**
-     * The source of the event, such as an AWS service, that triggers AWS Config to evaluate your AWS resources.
+     * The source of the event, such as an Amazon Web Services service, that triggers Config to evaluate your Amazon Web Services resources.
      */
     EventSource?: EventSource;
     /**
-     * The type of notification that triggers AWS Config to run an evaluation for a rule. You can specify the following notification types:    ConfigurationItemChangeNotification - Triggers an evaluation when AWS Config delivers a configuration item as a result of a resource change.    OversizedConfigurationItemChangeNotification - Triggers an evaluation when AWS Config delivers an oversized configuration item. AWS Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.    ScheduledNotification - Triggers a periodic evaluation at the frequency specified for MaximumExecutionFrequency.    ConfigurationSnapshotDeliveryCompleted - Triggers a periodic evaluation when AWS Config delivers a configuration snapshot.   If you want your custom rule to be triggered by configuration changes, specify two SourceDetail objects, one for ConfigurationItemChangeNotification and one for OversizedConfigurationItemChangeNotification.
+     * The type of notification that triggers Config to run an evaluation for a rule. You can specify the following notification types:    ConfigurationItemChangeNotification - Triggers an evaluation when Config delivers a configuration item as a result of a resource change.    OversizedConfigurationItemChangeNotification - Triggers an evaluation when Config delivers an oversized configuration item. Config may generate this notification type when a resource changes and the notification exceeds the maximum size allowed by Amazon SNS.    ScheduledNotification - Triggers a periodic evaluation at the frequency specified for MaximumExecutionFrequency.    ConfigurationSnapshotDeliveryCompleted - Triggers a periodic evaluation when Config delivers a configuration snapshot.   If you want your custom rule to be triggered by configuration changes, specify two SourceDetail objects, one for ConfigurationItemChangeNotification and one for OversizedConfigurationItemChangeNotification.
      */
     MessageType?: MessageType;
     /**
-     * The frequency at which you want AWS Config to run evaluations for a custom rule with a periodic trigger. If you specify a value for MaximumExecutionFrequency, then MessageType must use the ScheduledNotification value.  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the MaximumExecutionFrequency parameter. Based on the valid value you choose, AWS Config runs evaluations once for each valid value. For example, if you choose Three_Hours, AWS Config runs evaluations once every three hours. In this case, Three_Hours is the frequency of this rule.  
+     * The frequency at which you want Config to run evaluations for a custom rule with a periodic trigger. If you specify a value for MaximumExecutionFrequency, then MessageType must use the ScheduledNotification value.  By default, rules with a periodic trigger are evaluated every 24 hours. To change the frequency, specify a valid value for the MaximumExecutionFrequency parameter. Based on the valid value you choose, Config runs evaluations once for each valid value. For example, if you choose Three_Hours, Config runs evaluations once every three hours. In this case, Three_Hours is the frequency of this rule.  
      */
     MaximumExecutionFrequency?: MaximumExecutionFrequency;
   }
@@ -4074,7 +4074,7 @@ declare namespace ConfigService {
   export type StackArn = string;
   export interface StartConfigRulesEvaluationRequest {
     /**
-     * The list of names of AWS Config rules that you want to run evaluations for.
+     * The list of names of Config rules that you want to run evaluations for.
      */
     ConfigRuleNames?: ReevaluateConfigRuleNames;
   }
@@ -4088,7 +4088,7 @@ declare namespace ConfigService {
   }
   export interface StartRemediationExecutionRequest {
     /**
-     * The list of names of AWS Config rules that you want to run remediation execution for.
+     * The list of names of Config rules that you want to run remediation execution for.
      */
     ConfigRuleName: ConfigRuleName;
     /**
@@ -4119,7 +4119,7 @@ declare namespace ConfigService {
      */
     AccountId?: AccountId;
     /**
-     * Indicates deployment status for config rule in the member account. When master account calls PutOrganizationConfigRule action for the first time, config rule status is created in the member account. When master account calls PutOrganizationConfigRule action for the second time, config rule status is updated in the member account. Config rule status is deleted when the master account deletes OrganizationConfigRule and disables service access for config-multiaccountsetup.amazonaws.com.  AWS Config sets the state of the rule to:    CREATE_SUCCESSFUL when config rule has been created in the member account.    CREATE_IN_PROGRESS when config rule is being created in the member account.    CREATE_FAILED when config rule creation has failed in the member account.    DELETE_FAILED when config rule deletion has failed in the member account.    DELETE_IN_PROGRESS when config rule is being deleted in the member account.    DELETE_SUCCESSFUL when config rule has been deleted in the member account.    UPDATE_SUCCESSFUL when config rule has been updated in the member account.    UPDATE_IN_PROGRESS when config rule is being updated in the member account.    UPDATE_FAILED when config rule deletion has failed in the member account.  
+     * Indicates deployment status for config rule in the member account. When master account calls PutOrganizationConfigRule action for the first time, config rule status is created in the member account. When master account calls PutOrganizationConfigRule action for the second time, config rule status is updated in the member account. Config rule status is deleted when the master account deletes OrganizationConfigRule and disables service access for config-multiaccountsetup.amazonaws.com.  Config sets the state of the rule to:    CREATE_SUCCESSFUL when config rule has been created in the member account.    CREATE_IN_PROGRESS when config rule is being created in the member account.    CREATE_FAILED when config rule creation has failed in the member account.    DELETE_FAILED when config rule deletion has failed in the member account.    DELETE_IN_PROGRESS when config rule is being deleted in the member account.    DELETE_SUCCESSFUL when config rule has been deleted in the member account.    UPDATE_SUCCESSFUL when config rule has been updated in the member account.    UPDATE_IN_PROGRESS when config rule is being updated in the member account.    UPDATE_FAILED when config rule deletion has failed in the member account.  
      */
     MemberAccountRuleStatus?: MemberAccountRuleStatus;
   }

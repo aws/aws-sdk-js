@@ -374,6 +374,10 @@ declare namespace MediaTailor {
      */
     CreationTime?: __timestampUnix;
     /**
+     * Contains information about the slate used to fill gaps between programs in the schedule. You must configure FillerSlate if your channel uses an LINEAR PlaybackMode.
+     */
+    FillerSlate?: SlateSource;
+    /**
      * The timestamp of when the channel was last modified.
      */
     LastModifiedTime?: __timestampUnix;
@@ -382,7 +386,7 @@ declare namespace MediaTailor {
      */
     Outputs: ResponseOutputs;
     /**
-     * The type of playback mode for this channel. Possible values: ONCE or LOOP.
+     * The type of playback mode for this channel. LINEAR - Programs play back-to-back only once. LOOP - Programs play back-to-back in an endless loop. When the last program in the schedule plays, playback loops back to the first program in the schedule.
      */
     PlaybackMode: __string;
     /**
@@ -399,11 +403,15 @@ declare namespace MediaTailor {
      */
     ChannelName: __string;
     /**
+     * The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses an LINEAR PlaybackMode.
+     */
+    FillerSlate?: SlateSource;
+    /**
      * The channel's output properties.
      */
     Outputs: RequestOutputs;
     /**
-     * The type of playback mode for this channel. The only supported value is LOOP.
+     * The type of playback mode to use for this channel. LINEAR - The programs in the schedule play once back-to-back in the schedule. LOOP - The programs in the schedule play back-to-back in an endless loop. When the last program in the schedule stops playing, playback loops back to the first program in the schedule.
      */
     PlaybackMode: PlaybackMode;
     /**
@@ -429,6 +437,10 @@ declare namespace MediaTailor {
      */
     CreationTime?: __timestampUnix;
     /**
+     * Contains information about the slate used to fill gaps between programs in the schedule.
+     */
+    FillerSlate?: SlateSource;
+    /**
      * The timestamp of when the channel was last modified.
      */
     LastModifiedTime?: __timestampUnix;
@@ -437,7 +449,7 @@ declare namespace MediaTailor {
      */
     Outputs?: ResponseOutputs;
     /**
-     * The type of playback for this channel. The only supported value is LOOP.
+     * The channel's playback mode.
      */
     PlaybackMode?: __string;
     /**
@@ -492,6 +504,10 @@ declare namespace MediaTailor {
      * The name of the program.
      */
     ProgramName?: __string;
+    /**
+     * The date and time that the program is scheduled to start in ISO 8601 format and Coordinated Universal Time (UTC). For example, the value 2021-03-27T17:48:16.751Z represents March 27, 2021 at 17:48:16.751 UTC.
+     */
+    ScheduledStartTime?: __timestampUnix;
     /**
      * The source location name.
      */
@@ -733,6 +749,10 @@ declare namespace MediaTailor {
      */
     CreationTime?: __timestampUnix;
     /**
+     * Contains information about the slate used to fill gaps between programs in the schedule.
+     */
+    FillerSlate?: SlateSource;
+    /**
      * The timestamp of when the channel was last modified.
      */
     LastModifiedTime?: __timestampUnix;
@@ -741,7 +761,7 @@ declare namespace MediaTailor {
      */
     Outputs?: ResponseOutputs;
     /**
-     * The type of playback for this channel. The only supported value is LOOP.
+     * The channel's playback mode.
      */
     PlaybackMode?: __string;
     /**
@@ -780,6 +800,10 @@ declare namespace MediaTailor {
      * The name of the program.
      */
     ProgramName?: __string;
+    /**
+     * The date and time that the program is scheduled to start in ISO 8601 format and Coordinated Universal Time (UTC). For example, the value 2021-03-27T17:48:16.751Z represents March 27, 2021 at 17:48:16.751 UTC.
+     */
+    ScheduledStartTime?: __timestampUnix;
     /**
      * The source location name.
      */
@@ -1236,7 +1260,7 @@ declare namespace MediaTailor {
      */
     VideoContentSourceUrl?: __string;
   }
-  export type PlaybackMode = "LOOP"|string;
+  export type PlaybackMode = "LOOP"|"LINEAR"|string;
   export interface PutChannelPolicyRequest {
     /**
      * The identifier for the channel you are working on.
@@ -1474,6 +1498,10 @@ declare namespace MediaTailor {
      */
     ScheduleAdBreaks?: __listOfScheduleAdBreak;
     /**
+     * The type of schedule entry. Valid values: PROGRAM or FILLER_SLATE.
+     */
+    ScheduleEntryType?: ScheduleEntryType;
+    /**
      * The name of the source location.
      */
     SourceLocationName: __string;
@@ -1482,6 +1510,7 @@ declare namespace MediaTailor {
      */
     VodSourceName: __string;
   }
+  export type ScheduleEntryType = "PROGRAM"|"FILLER_SLATE"|string;
   export interface SecretsManagerAccessTokenConfiguration {
     /**
      * The name of the HTTP header used to supply the access token in requests to the source location.
@@ -1586,7 +1615,7 @@ declare namespace MediaTailor {
   }
   export interface Transition {
     /**
-     * The position where this program will be inserted relative to the RelativeProgram. Possible values are: AFTER_PROGRAM, and BEFORE_PROGRAM.
+     * The position where this program will be inserted relative to the RelativePosition.
      */
     RelativePosition: RelativePosition;
     /**
@@ -1594,7 +1623,11 @@ declare namespace MediaTailor {
      */
     RelativeProgram?: __string;
     /**
-     * When the program should be played. RELATIVE means that programs will be played back-to-back.
+     * The date and time that the program is scheduled to start, in epoch milliseconds.
+     */
+    ScheduledStartTimeMillis?: __long;
+    /**
+     * Defines when the program plays in the schedule. You can set the value to ABSOLUTE or RELATIVE. ABSOLUTE - The program plays at a specific wall clock time. This setting can only be used for channels using the LINEAR PlaybackMode. Note the following considerations when using ABSOLUTE transitions: If the preceding program in the schedule has a duration that extends past the wall clock time, MediaTailor truncates the preceding program on a common segment boundary. If there are gaps in playback, MediaTailor plays the FillerSlate you configured for your linear channel. RELATIVE - The program is inserted into the schedule either before or after a program that you specify via RelativePosition.
      */
     Type: __string;
   }
@@ -1637,6 +1670,10 @@ declare namespace MediaTailor {
      */
     CreationTime?: __timestampUnix;
     /**
+     * Contains information about the slate used to fill gaps between programs in the schedule.
+     */
+    FillerSlate?: SlateSource;
+    /**
      * The timestamp of when the channel was last modified.
      */
     LastModifiedTime?: __timestampUnix;
@@ -1645,7 +1682,7 @@ declare namespace MediaTailor {
      */
     Outputs?: ResponseOutputs;
     /**
-     * The type of playback for this channel. The only supported value is LOOP.
+     * The channel's playback mode.
      */
     PlaybackMode?: __string;
     /**

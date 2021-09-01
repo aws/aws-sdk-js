@@ -84,6 +84,14 @@ declare class ServiceCatalogAppRegistry extends Service {
    */
   getApplication(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.GetApplicationResponse) => void): Request<ServiceCatalogAppRegistry.Types.GetApplicationResponse, AWSError>;
   /**
+   * Gets the resource associated with the application.
+   */
+  getAssociatedResource(params: ServiceCatalogAppRegistry.Types.GetAssociatedResourceRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.GetAssociatedResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.GetAssociatedResourceResponse, AWSError>;
+  /**
+   * Gets the resource associated with the application.
+   */
+  getAssociatedResource(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.GetAssociatedResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.GetAssociatedResourceResponse, AWSError>;
+  /**
    * Retrieves an attribute group, either by its name or its ID. The attribute group can be specified either by its unique ID or by its name.
    */
   getAttributeGroup(params: ServiceCatalogAppRegistry.Types.GetAttributeGroupRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.GetAttributeGroupResponse) => void): Request<ServiceCatalogAppRegistry.Types.GetAttributeGroupResponse, AWSError>;
@@ -132,11 +140,11 @@ declare class ServiceCatalogAppRegistry extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.ListTagsForResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Syncs the resource with what is currently recorded in App registry. Specifically, the resource’s App registry system tags are synced with its associated application. The resource is removed if it is not associated with the application. The caller must have permissions to read and update the resource.
+   * Syncs the resource with current AppRegistry records. Specifically, the resource’s AppRegistry system tags sync with its associated application. We remove the resource's AppRegistry system tags if it does not associate with the application. The caller must have permissions to read and update the resource.
    */
   syncResource(params: ServiceCatalogAppRegistry.Types.SyncResourceRequest, callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.SyncResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.SyncResourceResponse, AWSError>;
   /**
-   * Syncs the resource with what is currently recorded in App registry. Specifically, the resource’s App registry system tags are synced with its associated application. The resource is removed if it is not associated with the application. The caller must have permissions to read and update the resource.
+   * Syncs the resource with current AppRegistry records. Specifically, the resource’s AppRegistry system tags sync with its associated application. We remove the resource's AppRegistry system tags if it does not associate with the application. The caller must have permissions to read and update the resource.
    */
   syncResource(callback?: (err: AWSError, data: ServiceCatalogAppRegistry.Types.SyncResourceResponse) => void): Request<ServiceCatalogAppRegistry.Types.SyncResourceResponse, AWSError>;
   /**
@@ -502,6 +510,30 @@ declare namespace ServiceCatalogAppRegistry {
      * Key-value pairs associated with the application.
      */
     tags?: Tags;
+    /**
+     * The information about the integration of the application with other services, such as Resource Groups.
+     */
+    integrations?: Integrations;
+  }
+  export interface GetAssociatedResourceRequest {
+    /**
+     * The name or ID of the application.
+     */
+    application: ApplicationSpecifier;
+    /**
+     * The type of resource associated with the application.
+     */
+    resourceType: ResourceType;
+    /**
+     * The name or ID of the resource associated with the application.
+     */
+    resource: ResourceSpecifier;
+  }
+  export interface GetAssociatedResourceResponse {
+    /**
+     * The resource associated with the application.
+     */
+    resource?: Resource;
   }
   export interface GetAttributeGroupRequest {
     /**
@@ -542,6 +574,12 @@ declare namespace ServiceCatalogAppRegistry {
      * Key-value pairs associated with the attribute group.
      */
     tags?: Tags;
+  }
+  export interface Integrations {
+    /**
+     *  The information about the resource group integration.
+     */
+    resourceGroup?: ResourceGroup;
   }
   export interface ListApplicationsRequest {
     /**
@@ -646,6 +684,39 @@ declare namespace ServiceCatalogAppRegistry {
   export type MaxResults = number;
   export type Name = string;
   export type NextToken = string;
+  export interface Resource {
+    /**
+     * The name of the resource.
+     */
+    name?: ResourceSpecifier;
+    /**
+     * The Amazon resource name (ARN) of the resource.
+     */
+    arn?: StackArn;
+    /**
+     * The time the resource was associated with the application.
+     */
+    associationTime?: Timestamp;
+    /**
+     * The service integration information about the resource. 
+     */
+    integrations?: ResourceIntegrations;
+  }
+  export interface ResourceGroup {
+    /**
+     * The state of the propagation process for the resource group. The states includes:  CREATING if the resource group is in the process of being created.  CREATE_COMPLETE if the resource group was created successfully.  CREATE_FAILED if the resource group failed to be created.  UPDATING if the resource group is in the process of being updated.  UPDATE_COMPLETE if the resource group updated successfully.  UPDATE_FAILED if the resource group could not update successfully.
+     */
+    state?: ResourceGroupState;
+    /**
+     * The Amazon resource name (ARN) of the resource group.
+     */
+    arn?: Arn;
+    /**
+     * The error message that generates when the propagation process for the resource group fails.
+     */
+    errorMessage?: String;
+  }
+  export type ResourceGroupState = "CREATING"|"CREATE_COMPLETE"|"CREATE_FAILED"|"UPDATING"|"UPDATE_COMPLETE"|"UPDATE_FAILED"|string;
   export interface ResourceInfo {
     /**
      * The name of the resource.
@@ -656,10 +727,17 @@ declare namespace ServiceCatalogAppRegistry {
      */
     arn?: StackArn;
   }
+  export interface ResourceIntegrations {
+    /**
+     * The information about the integration of Resource Groups.
+     */
+    resourceGroup?: ResourceGroup;
+  }
   export type ResourceSpecifier = string;
   export type ResourceType = "CFN_STACK"|string;
   export type Resources = ResourceInfo[];
   export type StackArn = string;
+  export type String = string;
   export type SyncAction = "START_SYNC"|"NO_ACTION"|string;
   export interface SyncResourceRequest {
     /**
@@ -667,7 +745,7 @@ declare namespace ServiceCatalogAppRegistry {
      */
     resourceType: ResourceType;
     /**
-     * An entity you can work with and specify with a name or ID. Examples include an Amazon EC2 instance, an AWS CloudFormation stack, or an Amazon S3 bucket.
+     * An entity you can work with and specify with a name or ID. Examples include an Amazon EC2 instance, an Amazon Web Services CloudFormation stack, or an Amazon S3 bucket.
      */
     resource: ResourceSpecifier;
   }

@@ -13817,10 +13817,6 @@
         "CidrBlock"
       ],
       "members": {
-        "CidrBlock": {
-          "shape": "String",
-          "documentation": "<p>The IPv4 network range for the VPC, in CIDR notation. For example, <code>10.0.0.0/16</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>"
-        },
         "AmazonProvidedIpv6CidrBlock": {
           "shape": "Boolean",
           "documentation": "<p>Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block.</p>",
@@ -13852,6 +13848,10 @@
           "shape": "TagSpecificationList",
           "documentation": "<p>The tags to assign to the VPC.</p>",
           "locationName": "TagSpecification"
+        },
+        "CidrBlock": {
+          "shape": "String",
+          "documentation": "<p>The IPv4 network range for the VPC, in CIDR notation. For example, <code>10.0.0.0/16</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>"
         }
       }
     },
@@ -30956,6 +30956,11 @@
           "shape": "LaunchTemplateInstanceMetadataEndpointState",
           "documentation": "<p>This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is <code>enabled</code>.</p> <note> <p>If you specify a value of <code>disabled</code>, you will not be able to access your instance metadata. </p> </note>",
           "locationName": "httpEndpoint"
+        },
+        "HttpProtocolIpv6": {
+          "shape": "LaunchTemplateInstanceMetadataProtocolIpv6",
+          "documentation": "<p>Enables or disables the IPv6 endpoint for the instance metadata service.</p> <p>Default: <code>disabled</code> </p>",
+          "locationName": "httpProtocolIpv6"
         }
       },
       "documentation": "<p>The metadata options for the instance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance Metadata and User Data</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
@@ -30974,6 +30979,10 @@
         "HttpEndpoint": {
           "shape": "LaunchTemplateInstanceMetadataEndpointState",
           "documentation": "<p>This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is <code>enabled</code>.</p> <note> <p>If you specify a value of <code>disabled</code>, you will not be able to access your instance metadata. </p> </note>"
+        },
+        "HttpProtocolIpv6": {
+          "shape": "LaunchTemplateInstanceMetadataProtocolIpv6",
+          "documentation": "<p>Enables or disables the IPv6 endpoint for the instance metadata service.</p> <p>Default: <code>disabled</code> </p>"
         }
       },
       "documentation": "<p>The metadata options for the instance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html\">Instance Metadata and User Data</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
@@ -30983,6 +30992,13 @@
       "enum": [
         "pending",
         "applied"
+      ]
+    },
+    "LaunchTemplateInstanceMetadataProtocolIpv6": {
+      "type": "string",
+      "enum": [
+        "disabled",
+        "enabled"
       ]
     },
     "LaunchTemplateInstanceNetworkInterfaceSpecification": {
@@ -31065,22 +31081,22 @@
         },
         "Ipv4Prefixes": {
           "shape": "Ipv4PrefixListResponse",
-          "documentation": "<p>One or more IPv4 delegated prefixes assigned to the network interface.</p>",
+          "documentation": "<p>One or more IPv4 prefixes assigned to the network interface.</p>",
           "locationName": "ipv4PrefixSet"
         },
         "Ipv4PrefixCount": {
           "shape": "Integer",
-          "documentation": "<p>The number of IPv4 delegated prefixes that AWS automatically assigned to the network interface.</p>",
+          "documentation": "<p>The number of IPv4 prefixes that Amazon Web Services automatically assigned to the network interface.</p>",
           "locationName": "ipv4PrefixCount"
         },
         "Ipv6Prefixes": {
           "shape": "Ipv6PrefixListResponse",
-          "documentation": "<p>One or more IPv6 delegated prefixes assigned to the network interface.</p>",
+          "documentation": "<p>One or more IPv6 prefixes assigned to the network interface.</p>",
           "locationName": "ipv6PrefixSet"
         },
         "Ipv6PrefixCount": {
           "shape": "Integer",
-          "documentation": "<p>The number of IPv6 delegated prefixes that AWS automatically assigned to the network interface.</p>",
+          "documentation": "<p>The number of IPv6 prefixes that Amazon Web Services automatically assigned to the network interface.</p>",
           "locationName": "ipv6PrefixCount"
         }
       },
@@ -31159,21 +31175,21 @@
         },
         "Ipv4Prefixes": {
           "shape": "Ipv4PrefixList",
-          "documentation": "<p>One or more IPv4 delegated prefixes to be assigned to the network interface. You cannot use this option if you use the <code>Ipv4PrefixCount</code> option.</p>",
+          "documentation": "<p>One or more IPv4 prefixes to be assigned to the network interface. You cannot use this option if you use the <code>Ipv4PrefixCount</code> option.</p>",
           "locationName": "Ipv4Prefix"
         },
         "Ipv4PrefixCount": {
           "shape": "Integer",
-          "documentation": "<p>The number of IPv4 delegated prefixes to be automatically assigned to the network interface. You cannot use this option if you use the <code>Ipv4Prefix</code> option.</p>"
+          "documentation": "<p>The number of IPv4 prefixes to be automatically assigned to the network interface. You cannot use this option if you use the <code>Ipv4Prefix</code> option.</p>"
         },
         "Ipv6Prefixes": {
           "shape": "Ipv6PrefixList",
-          "documentation": "<p>One or more IPv6 delegated prefixes to be assigned to the network interface. You cannot use this option if you use the <code>Ipv6PrefixCount</code> option.</p>",
+          "documentation": "<p>One or more IPv6 prefixes to be assigned to the network interface. You cannot use this option if you use the <code>Ipv6PrefixCount</code> option.</p>",
           "locationName": "Ipv6Prefix"
         },
         "Ipv6PrefixCount": {
           "shape": "Integer",
-          "documentation": "<p>The number of IPv6 delegated prefixes to be automatically assigned to the network interface. You cannot use this option if you use the <code>Ipv6Prefix</code> option.</p>"
+          "documentation": "<p>The number of IPv6 prefixes to be automatically assigned to the network interface. You cannot use this option if you use the <code>Ipv6Prefix</code> option.</p>"
         }
       },
       "documentation": "<p>The parameters for a network interface.</p>"
@@ -37979,7 +37995,7 @@
         },
         "UserData": {
           "shape": "String",
-          "documentation": "<p>The Base64-encoded user data to make available to the instance. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html\">Running Commands on Your Linux Instance at Launch</a> (Linux) and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data\">Adding User Data</a> (Windows).</p>"
+          "documentation": "<p>The user data to make available to the instance. You must provide base64-encoded text. User data is limited to 16 KB. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html\">Running Commands on Your Linux Instance at Launch</a> (Linux) or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data\">Adding User Data</a> (Windows).</p> <p>If you are creating the launch template for use with Batch, the user data must be provided in the <a href=\"https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive\"> MIME multi-part archive format</a>. For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html\">Amazon EC2 user data in launch templates</a> in the <i>Batch User Guide</i>.</p>"
         },
         "TagSpecifications": {
           "shape": "LaunchTemplateTagSpecificationRequestList",
