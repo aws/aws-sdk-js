@@ -1,6 +1,13 @@
 $(document).ready(function() {
-  $('#node-version-notice').slideDown();
-  $('#node-version-notice .alert-dismiss').click(function() {
-    $(this).parent().slideUp();
-  });
+  var trueValue = 'true';
+  var nodeVersionNoticeKey = 'dismissNodeDeprecationNotice';
+  var dismissNodeDepNotice = localStorage.getItem(nodeVersionNoticeKey);
+
+  if (dismissNodeDepNotice !== trueValue) {
+    $('#node-version-notice').slideDown();
+    $('#node-version-notice .alert-dismiss').click(function() {
+      localStorage.setItem(nodeVersionNoticeKey, trueValue);
+      $(this).parent().slideUp();
+    });
+  }
 });
