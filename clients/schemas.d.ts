@@ -281,6 +281,10 @@ declare namespace Schemas {
      */
     SourceArn: __stringMin20Max1600;
     /**
+     * Support discovery of schemas in events sent to the bus from another account. (default: true).
+     */
+    CrossAccount?: __boolean;
+    /**
      * Tags associated with the resource.
      */
     Tags?: Tags;
@@ -306,6 +310,10 @@ declare namespace Schemas {
      * The state of the discoverer.
      */
     State?: DiscovererState;
+    /**
+     * The Status if the discoverer will discover schemas from events sent from another account.
+     */
+    CrossAccount?: __boolean;
     /**
      * Tags associated with the resource.
      */
@@ -506,6 +514,10 @@ declare namespace Schemas {
      */
     State?: DiscovererState;
     /**
+     * The Status if the discoverer will discover schemas from events sent from another account.
+     */
+    CrossAccount?: __boolean;
+    /**
      * Tags associated with the resource.
      */
     Tags?: Tags;
@@ -604,6 +616,10 @@ declare namespace Schemas {
      * The state of the discoverer.
      */
     State?: DiscovererState;
+    /**
+     * The Status if the discoverer will discover schemas from events sent from another account.
+     */
+    CrossAccount?: __boolean;
     /**
      * Tags associated with the resource.
      */
@@ -1028,6 +1044,10 @@ declare namespace Schemas {
      * The ID of the discoverer.
      */
     DiscovererId: __string;
+    /**
+     * Support discovery of schemas in events sent to the bus from another account. (default: true)
+     */
+    CrossAccount?: __boolean;
   }
   export interface UpdateDiscovererResponse {
     /**
@@ -1050,6 +1070,10 @@ declare namespace Schemas {
      * The state of the discoverer.
      */
     State?: DiscovererState;
+    /**
+     * The Status if the discoverer will discover schemas from events sent from another account.
+     */
+    CrossAccount?: __boolean;
     /**
      * Tags associated with the resource.
      */
@@ -1140,6 +1164,7 @@ declare namespace Schemas {
      */
     VersionCreatedDate?: __timestampIso8601;
   }
+  export type __boolean = boolean;
   export type __integer = number;
   export type __listOfDiscovererSummary = DiscovererSummary[];
   export type __listOfGetDiscoveredSchemaVersionItemInput = GetDiscoveredSchemaVersionItemInput[];

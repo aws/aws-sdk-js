@@ -111,6 +111,28 @@
         "hostPrefix": "{AccountId}."
       }
     },
+    "CreateMultiRegionAccessPoint": {
+      "name": "CreateMultiRegionAccessPoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v20180820/async-requests/mrap/create"
+      },
+      "input": {
+        "shape": "CreateMultiRegionAccessPointRequest",
+        "locationName": "CreateMultiRegionAccessPointRequest",
+        "xmlNamespace": {
+          "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
+        }
+      },
+      "output": {
+        "shape": "CreateMultiRegionAccessPointResult"
+      },
+      "documentation": "<p>Creates a Multi-Region Access Point and associates it with the specified buckets. For more information about creating Multi-Region Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html\">Creating Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>This request is asynchronous, meaning that you might receive a response before the command has completed. When this request provides a response, it provides a token that you can use to monitor the status of the request with <code>DescribeMultiRegionAccessPointOperation</code>.</p> <p>The following actions are related to <code>CreateMultiRegionAccessPoint</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html\">DeleteMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html\">DescribeMultiRegionAccessPointOperation</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html\">GetMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html\">ListMultiRegionAccessPoints</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      },
+      "httpChecksumRequired": true
+    },
     "DeleteAccessPoint": {
       "name": "DeleteAccessPoint",
       "http": {
@@ -204,7 +226,7 @@
       "input": {
         "shape": "DeleteBucketPolicyRequest"
       },
-      "documentation": "<note> <p>This action deletes an Amazon S3 on Outposts bucket policy. To delete an S3 bucket policy, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>This implementation of the DELETE action uses the policy subresource to delete the policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the root user of the account that owns the bucket, the calling identity must have the <code>s3-outposts:DeleteBucketPolicy</code> permissions on the specified Outposts bucket and belong to the bucket owner's account to use this action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon S3 User Guide</i>.</p> <p>If you don't have <code>DeleteBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not Allowed</code> error. </p> <important> <p>As a security precaution, the root user of the account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.</p> </important> <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>. </p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>DeleteBucketPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action deletes an Amazon S3 on Outposts bucket policy. To delete an S3 bucket policy, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>This implementation of the DELETE action uses the policy subresource to delete the policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the root user of the Amazon Web Services account that owns the bucket, the calling identity must have the <code>s3-outposts:DeleteBucketPolicy</code> permissions on the specified Outposts bucket and belong to the bucket owner's account to use this action. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in <i>Amazon S3 User Guide</i>.</p> <p>If you don't have <code>DeleteBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not Allowed</code> error. </p> <important> <p>As a security precaution, the root user of the Amazon Web Services account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.</p> </important> <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>. </p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>DeleteBucketPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -252,6 +274,28 @@
         "hostPrefix": "{AccountId}."
       }
     },
+    "DeleteMultiRegionAccessPoint": {
+      "name": "DeleteMultiRegionAccessPoint",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v20180820/async-requests/mrap/delete"
+      },
+      "input": {
+        "shape": "DeleteMultiRegionAccessPointRequest",
+        "locationName": "DeleteMultiRegionAccessPointRequest",
+        "xmlNamespace": {
+          "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
+        }
+      },
+      "output": {
+        "shape": "DeleteMultiRegionAccessPointResult"
+      },
+      "documentation": "<p>Deletes a Multi-Region Access Point. This action does not delete the buckets associated with the Multi-Region Access Point, only the Multi-Region Access Point itself.</p> <p>This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>This request is asynchronous, meaning that you might receive a response before the command has completed. When this request provides a response, it provides a token that you can use to monitor the status of the request with <code>DescribeMultiRegionAccessPointOperation</code>.</p> <p>The following actions are related to <code>DeleteMultiRegionAccessPoint</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html\">CreateMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html\">DescribeMultiRegionAccessPointOperation</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html\">GetMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html\">ListMultiRegionAccessPoints</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      },
+      "httpChecksumRequired": true
+    },
     "DeletePublicAccessBlock": {
       "name": "DeletePublicAccessBlock",
       "http": {
@@ -261,7 +305,7 @@
       "input": {
         "shape": "DeletePublicAccessBlockRequest"
       },
-      "documentation": "<p>Removes the <code>PublicAccessBlock</code> configuration for an account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html\"> Using Amazon S3 block public access</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html\">GetPublicAccessBlock</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html\">PutPublicAccessBlock</a> </p> </li> </ul>",
+      "documentation": "<p>Removes the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html\"> Using Amazon S3 block public access</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html\">GetPublicAccessBlock</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html\">PutPublicAccessBlock</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -327,6 +371,24 @@
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
+    },
+    "DescribeMultiRegionAccessPointOperation": {
+      "name": "DescribeMultiRegionAccessPointOperation",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20180820/async-requests/mrap/{request_token+}"
+      },
+      "input": {
+        "shape": "DescribeMultiRegionAccessPointOperationRequest"
+      },
+      "output": {
+        "shape": "DescribeMultiRegionAccessPointOperationResult"
+      },
+      "documentation": "<p>Retrieves the status of an asynchronous request to manage a Multi-Region Access Point. For more information about managing Multi-Region Access Points and how asynchronous requests work, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>The following actions are related to <code>GetMultiRegionAccessPoint</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html\">CreateMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html\">DeleteMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html\">GetMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html\">ListMultiRegionAccessPoints</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      },
+      "httpChecksumRequired": true
     },
     "GetAccessPoint": {
       "name": "GetAccessPoint",
@@ -459,7 +521,7 @@
       "output": {
         "shape": "GetBucketResult"
       },
-      "documentation": "<p>Gets an Amazon S3 on Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\"> Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>If you are using an identity other than the root user of the account that owns the Outposts bucket, the calling identity must have the <code>s3-outposts:GetBucket</code> permissions on the specified Outposts bucket and belong to the Outposts bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. </p> <p> If you don't have <code>s3-outposts:GetBucket</code> permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>403 Access Denied</code> error.</p> <p>The following actions are related to <code>GetBucket</code> for Amazon S3 on Outposts:</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html#API_control_GetBucket_Examples\">Examples</a> section.</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html\">CreateBucket</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html\">DeleteBucket</a> </p> </li> </ul>",
+      "documentation": "<p>Gets an Amazon S3 on Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\"> Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>If you are using an identity other than the root user of the Amazon Web Services account that owns the Outposts bucket, the calling identity must have the <code>s3-outposts:GetBucket</code> permissions on the specified Outposts bucket and belong to the Outposts bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. </p> <p> If you don't have <code>s3-outposts:GetBucket</code> permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>403 Access Denied</code> error.</p> <p>The following actions are related to <code>GetBucket</code> for Amazon S3 on Outposts:</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html#API_control_GetBucket_Examples\">Examples</a> section.</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html\">CreateBucket</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html\">DeleteBucket</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -493,7 +555,7 @@
       "output": {
         "shape": "GetBucketPolicyResult"
       },
-      "documentation": "<note> <p>This action gets a bucket policy for an Amazon S3 on Outposts bucket. To get a policy for an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html\">GetBucketPolicy</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>Returns the policy of a specified Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>If you are using an identity other than the root user of the account that owns the bucket, the calling identity must have the <code>GetBucketPolicy</code> permissions on the specified bucket and belong to the bucket owner's account in order to use this action.</p> <p>Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. If you don't have <code>s3-outposts:GetBucketPolicy</code> permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>403 Access Denied</code> error.</p> <important> <p>As a security precaution, the root user of the account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.</p> </important> <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>GetBucketPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action gets a bucket policy for an Amazon S3 on Outposts bucket. To get a policy for an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html\">GetBucketPolicy</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>Returns the policy of a specified Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>If you are using an identity other than the root user of the Amazon Web Services account that owns the bucket, the calling identity must have the <code>GetBucketPolicy</code> permissions on the specified bucket and belong to the bucket owner's account in order to use this action.</p> <p>Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. If you don't have <code>s3-outposts:GetBucketPolicy</code> permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>403 Access Denied</code> error.</p> <important> <p>As a security precaution, the root user of the Amazon Web Services account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.</p> </important> <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>GetBucketPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -543,6 +605,60 @@
         "hostPrefix": "{AccountId}."
       }
     },
+    "GetMultiRegionAccessPoint": {
+      "name": "GetMultiRegionAccessPoint",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20180820/mrap/instances/{name}"
+      },
+      "input": {
+        "shape": "GetMultiRegionAccessPointRequest"
+      },
+      "output": {
+        "shape": "GetMultiRegionAccessPointResult"
+      },
+      "documentation": "<p>Returns configuration information about the specified Multi-Region Access Point.</p> <p>This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>The following actions are related to <code>GetMultiRegionAccessPoint</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html\">CreateMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html\">DeleteMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html\">DescribeMultiRegionAccessPointOperation</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html\">ListMultiRegionAccessPoints</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      },
+      "httpChecksumRequired": true
+    },
+    "GetMultiRegionAccessPointPolicy": {
+      "name": "GetMultiRegionAccessPointPolicy",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20180820/mrap/instances/{name}/policy"
+      },
+      "input": {
+        "shape": "GetMultiRegionAccessPointPolicyRequest"
+      },
+      "output": {
+        "shape": "GetMultiRegionAccessPointPolicyResult"
+      },
+      "documentation": "<p>Returns the access control policy of the specified Multi-Region Access Point.</p> <p>This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>The following actions are related to <code>GetMultiRegionAccessPointPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html\">GetMultiRegionAccessPointPolicyStatus</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html\">PutMultiRegionAccessPointPolicy</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      },
+      "httpChecksumRequired": true
+    },
+    "GetMultiRegionAccessPointPolicyStatus": {
+      "name": "GetMultiRegionAccessPointPolicyStatus",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20180820/mrap/instances/{name}/policystatus"
+      },
+      "input": {
+        "shape": "GetMultiRegionAccessPointPolicyStatusRequest"
+      },
+      "output": {
+        "shape": "GetMultiRegionAccessPointPolicyStatusResult"
+      },
+      "documentation": "<p>Indicates whether the specified Multi-Region Access Point has an access control policy that allows public access.</p> <p>This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>The following actions are related to <code>GetMultiRegionAccessPointPolicyStatus</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html\">GetMultiRegionAccessPointPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html\">PutMultiRegionAccessPointPolicy</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      },
+      "httpChecksumRequired": true
+    },
     "GetPublicAccessBlock": {
       "name": "GetPublicAccessBlock",
       "http": {
@@ -560,7 +676,7 @@
           "shape": "NoSuchPublicAccessBlockConfiguration"
         }
       ],
-      "documentation": "<p>Retrieves the <code>PublicAccessBlock</code> configuration for an account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html\"> Using Amazon S3 block public access</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html\">DeletePublicAccessBlock</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html\">PutPublicAccessBlock</a> </p> </li> </ul>",
+      "documentation": "<p>Retrieves the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html\"> Using Amazon S3 block public access</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html\">DeletePublicAccessBlock</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html\">PutPublicAccessBlock</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -656,10 +772,28 @@
           "shape": "InvalidNextTokenException"
         }
       ],
-      "documentation": "<p>Lists current S3 Batch Operations jobs and jobs that have ended within the last 30 days for the account making the request. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html\">S3 Batch Operations</a> in the <i>Amazon S3 User Guide</i>.</p> <p>Related actions include:</p> <p/> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html\">CreateJob</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html\">DescribeJob</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html\">UpdateJobPriority</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html\">UpdateJobStatus</a> </p> </li> </ul>",
+      "documentation": "<p>Lists current S3 Batch Operations jobs and jobs that have ended within the last 30 days for the Amazon Web Services account making the request. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html\">S3 Batch Operations</a> in the <i>Amazon S3 User Guide</i>.</p> <p>Related actions include:</p> <p/> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html\">CreateJob</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html\">DescribeJob</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html\">UpdateJobPriority</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html\">UpdateJobStatus</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
+    },
+    "ListMultiRegionAccessPoints": {
+      "name": "ListMultiRegionAccessPoints",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v20180820/mrap/instances"
+      },
+      "input": {
+        "shape": "ListMultiRegionAccessPointsRequest"
+      },
+      "output": {
+        "shape": "ListMultiRegionAccessPointsResult"
+      },
+      "documentation": "<p>Returns a list of the Multi-Region Access Points currently associated with the specified Amazon Web Services account. Each call can return up to 100 Multi-Region Access Points, the maximum number of Multi-Region Access Points that can be associated with a single account.</p> <p>This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>The following actions are related to <code>ListMultiRegionAccessPoint</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html\">CreateMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html\">DeleteMultiRegionAccessPoint</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html\">DescribeMultiRegionAccessPointOperation</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html\">GetMultiRegionAccessPoint</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      },
+      "httpChecksumRequired": true
     },
     "ListRegionalBuckets": {
       "name": "ListRegionalBuckets",
@@ -777,7 +911,7 @@
           "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
         }
       },
-      "documentation": "<note> <p>This action puts a bucket policy to an Amazon S3 on Outposts bucket. To put a policy on an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketPolicy.html\">PutBucketPolicy</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>Applies an Amazon S3 bucket policy to an Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>If you are using an identity other than the root user of the account that owns the Outposts bucket, the calling identity must have the <code>PutBucketPolicy</code> permissions on the specified Outposts bucket and belong to the bucket owner's account in order to use this action.</p> <p>If you don't have <code>PutBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not Allowed</code> error.</p> <important> <p> As a security precaution, the root user of the account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action. </p> </important> <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action puts a bucket policy to an Amazon S3 on Outposts bucket. To put a policy on an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketPolicy.html\">PutBucketPolicy</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>Applies an Amazon S3 bucket policy to an Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>If you are using an identity other than the root user of the Amazon Web Services account that owns the Outposts bucket, the calling identity must have the <code>PutBucketPolicy</code> permissions on the specified Outposts bucket and belong to the bucket owner's account in order to use this action.</p> <p>If you don't have <code>PutBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not Allowed</code> error.</p> <important> <p> As a security precaution, the root user of the Amazon Web Services account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action. </p> </important> <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>.</p> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       },
@@ -792,7 +926,7 @@
       "input": {
         "shape": "PutBucketTaggingRequest"
       },
-      "documentation": "<note> <p>This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html\">PutBucketTagging</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>Sets the tags for an S3 on Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>Use tags to organize your Amazon Web Services bill to reflect your own cost structure. To do this, sign up to get your account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Cost allocation and tagging</a>.</p> <note> <p>Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html\"> Using cost allocation in Amazon S3 bucket tags</a>.</p> </note> <p>To use this action, you must have permissions to perform the <code>s3-outposts:PutBucketTagging</code> action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\"> Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing access permissions to your Amazon S3 resources</a>.</p> <p> <code>PutBucketTagging</code> has the following special errors:</p> <ul> <li> <p>Error code: <code>InvalidTagError</code> </p> <ul> <li> <p>Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\"> User-Defined Tag Restrictions</a> and <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html\"> Amazon Web Services-Generated Cost Allocation Tag Restrictions</a>.</p> </li> </ul> </li> <li> <p>Error code: <code>MalformedXMLError</code> </p> <ul> <li> <p>Description: The XML provided does not match the schema.</p> </li> </ul> </li> <li> <p>Error code: <code>OperationAbortedError </code> </p> <ul> <li> <p>Description: A conflicting conditional action is currently in progress against this resource. Try again.</p> </li> </ul> </li> <li> <p>Error code: <code>InternalError</code> </p> <ul> <li> <p>Description: The service was unable to apply the provided tag to the bucket.</p> </li> </ul> </li> </ul> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html#API_control_PutBucketTagging_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketTagging</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html\">GetBucketTagging</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html\">DeleteBucketTagging</a> </p> </li> </ul>",
+      "documentation": "<note> <p>This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html\">PutBucketTagging</a> in the <i>Amazon S3 API Reference</i>. </p> </note> <p>Sets the tags for an S3 on Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p> <p>Use tags to organize your Amazon Web Services bill to reflect your own cost structure. To do this, sign up to get your Amazon Web Services account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Cost allocation and tagging</a>.</p> <note> <p>Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html\"> Using cost allocation in Amazon S3 bucket tags</a>.</p> </note> <p>To use this action, you must have permissions to perform the <code>s3-outposts:PutBucketTagging</code> action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\"> Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing access permissions to your Amazon S3 resources</a>.</p> <p> <code>PutBucketTagging</code> has the following special errors:</p> <ul> <li> <p>Error code: <code>InvalidTagError</code> </p> <ul> <li> <p>Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\"> User-Defined Tag Restrictions</a> and <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html\"> Amazon Web Services-Generated Cost Allocation Tag Restrictions</a>.</p> </li> </ul> </li> <li> <p>Error code: <code>MalformedXMLError</code> </p> <ul> <li> <p>Description: The XML provided does not match the schema.</p> </li> </ul> </li> <li> <p>Error code: <code>OperationAbortedError </code> </p> <ul> <li> <p>Description: A conflicting conditional action is currently in progress against this resource. Try again.</p> </li> </ul> </li> <li> <p>Error code: <code>InternalError</code> </p> <ul> <li> <p>Description: The service was unable to apply the provided tag to the bucket.</p> </li> </ul> </li> </ul> <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html#API_control_PutBucketTagging_Examples\">Examples</a> section.</p> <p>The following actions are related to <code>PutBucketTagging</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html\">GetBucketTagging</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html\">DeleteBucketTagging</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       },
@@ -833,6 +967,28 @@
         "hostPrefix": "{AccountId}."
       }
     },
+    "PutMultiRegionAccessPointPolicy": {
+      "name": "PutMultiRegionAccessPointPolicy",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v20180820/async-requests/mrap/put-policy"
+      },
+      "input": {
+        "shape": "PutMultiRegionAccessPointPolicyRequest",
+        "locationName": "PutMultiRegionAccessPointPolicyRequest",
+        "xmlNamespace": {
+          "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
+        }
+      },
+      "output": {
+        "shape": "PutMultiRegionAccessPointPolicyResult"
+      },
+      "documentation": "<p>Associates an access control policy with the specified Multi-Region Access Point. Each Multi-Region Access Point can have only one policy, so a request made to this action replaces any existing policy that is associated with the specified Multi-Region Access Point.</p> <p>This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p> <p>The following actions are related to <code>PutMultiRegionAccessPointPolicy</code>:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html\">GetMultiRegionAccessPointPolicy</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html\">GetMultiRegionAccessPointPolicyStatus</a> </p> </li> </ul>",
+      "endpoint": {
+        "hostPrefix": "{AccountId}."
+      },
+      "httpChecksumRequired": true
+    },
     "PutPublicAccessBlock": {
       "name": "PutPublicAccessBlock",
       "http": {
@@ -842,7 +998,7 @@
       "input": {
         "shape": "PutPublicAccessBlockRequest"
       },
-      "documentation": "<p>Creates or modifies the <code>PublicAccessBlock</code> configuration for an account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html\"> Using Amazon S3 block public access</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html\">GetPublicAccessBlock</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html\">DeletePublicAccessBlock</a> </p> </li> </ul>",
+      "documentation": "<p>Creates or modifies the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html\"> Using Amazon S3 block public access</a>.</p> <p>Related actions include:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html\">GetPublicAccessBlock</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html\">DeletePublicAccessBlock</a> </p> </li> </ul>",
       "endpoint": {
         "hostPrefix": "{AccountId}."
       }
@@ -1047,6 +1203,110 @@
       "max": 63,
       "pattern": "^[0-9a-z\\\\-]{63}"
     },
+    "AsyncCreationTimestamp": {
+      "type": "timestamp"
+    },
+    "AsyncErrorDetails": {
+      "type": "structure",
+      "members": {
+        "Code": {
+          "shape": "MaxLength1024String",
+          "documentation": "<p>A string that uniquely identifies the error condition.</p>"
+        },
+        "Message": {
+          "shape": "MaxLength1024String",
+          "documentation": "<p>A generic descritpion of the error condition in English.</p>"
+        },
+        "Resource": {
+          "shape": "MaxLength1024String",
+          "documentation": "<p>The identifier of the resource associated with the error.</p>"
+        },
+        "RequestId": {
+          "shape": "MaxLength1024String",
+          "documentation": "<p>The ID of the request associated with the error.</p>"
+        }
+      },
+      "documentation": "<p>Error details for the failed asynchronous operation.</p>"
+    },
+    "AsyncOperation": {
+      "type": "structure",
+      "members": {
+        "CreationTime": {
+          "shape": "AsyncCreationTimestamp",
+          "documentation": "<p>The time that the request was sent to the service.</p>"
+        },
+        "Operation": {
+          "shape": "AsyncOperationName",
+          "documentation": "<p>The specific operation for the asynchronous request.</p>"
+        },
+        "RequestTokenARN": {
+          "shape": "AsyncRequestTokenARN",
+          "documentation": "<p>The request token associated with the request.</p>"
+        },
+        "RequestParameters": {
+          "shape": "AsyncRequestParameters",
+          "documentation": "<p>The parameters associated with the request.</p>"
+        },
+        "RequestStatus": {
+          "shape": "AsyncRequestStatus",
+          "documentation": "<p>The current status of the request.</p>"
+        },
+        "ResponseDetails": {
+          "shape": "AsyncResponseDetails",
+          "documentation": "<p>The details of the response.</p>"
+        }
+      },
+      "documentation": "<p>A container for the information about an asynchronous operation.</p>"
+    },
+    "AsyncOperationName": {
+      "type": "string",
+      "enum": [
+        "CreateMultiRegionAccessPoint",
+        "DeleteMultiRegionAccessPoint",
+        "PutMultiRegionAccessPointPolicy"
+      ]
+    },
+    "AsyncRequestParameters": {
+      "type": "structure",
+      "members": {
+        "CreateMultiRegionAccessPointRequest": {
+          "shape": "CreateMultiRegionAccessPointInput",
+          "documentation": "<p>A container of the parameters for a <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html\">CreateMultiRegionAccessPoint</a> request.</p>"
+        },
+        "DeleteMultiRegionAccessPointRequest": {
+          "shape": "DeleteMultiRegionAccessPointInput",
+          "documentation": "<p>A container of the parameters for a <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html\">DeleteMultiRegionAccessPoint</a> request.</p>"
+        },
+        "PutMultiRegionAccessPointPolicyRequest": {
+          "shape": "PutMultiRegionAccessPointPolicyInput",
+          "documentation": "<p>A container of the parameters for a <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html\">PutMultiRegionAccessPoint</a> request.</p>"
+        }
+      },
+      "documentation": "<p>A container for the request parameters associated with an asynchronous request.</p>"
+    },
+    "AsyncRequestStatus": {
+      "type": "string"
+    },
+    "AsyncRequestTokenARN": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "arn:.+"
+    },
+    "AsyncResponseDetails": {
+      "type": "structure",
+      "members": {
+        "MultiRegionAccessPointDetails": {
+          "shape": "MultiRegionAccessPointsAsyncResponse",
+          "documentation": "<p>The details for the Multi-Region Access Point.</p>"
+        },
+        "ErrorDetails": {
+          "shape": "AsyncErrorDetails",
+          "documentation": "<p>Error details for an asynchronous request.</p>"
+        }
+      },
+      "documentation": "<p>A container for the response details that are returned when querying about an asynchronous request.</p>"
+    },
     "AwsLambdaTransformation": {
       "type": "structure",
       "required": [
@@ -1152,7 +1412,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID for owner of the specified Object Lambda Access Point.</p>",
+          "documentation": "<p>The Amazon Web Services account ID for owner of the specified Object Lambda Access Point.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -1188,7 +1448,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID for the owner of the bucket for which you want to create an access point.</p>",
+          "documentation": "<p>The Amazon Web Services account ID for the owner of the bucket for which you want to create an access point.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -1336,7 +1596,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID that creates the job.</p>",
+          "documentation": "<p>The Amazon Web Services account ID that creates the job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -1391,7 +1651,66 @@
         }
       }
     },
+    "CreateMultiRegionAccessPointInput": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Regions"
+      ],
+      "members": {
+        "Name": {
+          "shape": "MultiRegionAccessPointName",
+          "documentation": "<p>The name of the Multi-Region Access Point associated with this request.</p>"
+        },
+        "PublicAccessBlock": {
+          "shape": "PublicAccessBlockConfiguration"
+        },
+        "Regions": {
+          "shape": "RegionCreationList",
+          "documentation": "<p>The buckets in different Regions that are associated with the Multi-Region Access Point.</p>"
+        }
+      },
+      "documentation": "<p>A container for the information associated with a <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html\">CreateMultiRegionAccessPoint</a> request. </p>"
+    },
+    "CreateMultiRegionAccessPointRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "ClientToken",
+        "Details"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point. The owner of the Multi-Region Access Point also must own the underlying buckets.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "ClientToken": {
+          "shape": "MultiRegionAccessPointClientToken",
+          "documentation": "<p>An idempotency token used to identify the request and guarantee that requests are unique.</p>",
+          "idempotencyToken": true
+        },
+        "Details": {
+          "shape": "CreateMultiRegionAccessPointInput",
+          "documentation": "<p>A container element containing details about the Multi-Region Access Point.</p>"
+        }
+      }
+    },
+    "CreateMultiRegionAccessPointResult": {
+      "type": "structure",
+      "members": {
+        "RequestTokenARN": {
+          "shape": "AsyncRequestTokenARN",
+          "documentation": "<p>The request token associated with the request. You can use this token with <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html\">DescribeMultiRegionAccessPointOperation</a> to determine the status of asynchronous requests.</p>"
+        }
+      }
+    },
     "CreationDate": {
+      "type": "timestamp"
+    },
+    "CreationTimestamp": {
       "type": "timestamp"
     },
     "Date": {
@@ -1566,7 +1885,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID of the Outposts bucket tag set to be removed.</p>",
+          "documentation": "<p>The Amazon Web Services account ID of the Outposts bucket tag set to be removed.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -1588,7 +1907,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID associated with the S3 Batch Operations job.</p>",
+          "documentation": "<p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -1605,6 +1924,54 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteMultiRegionAccessPointInput": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "MultiRegionAccessPointName",
+          "documentation": "<p>The name of the Multi-Region Access Point associated with this request.</p>"
+        }
+      },
+      "documentation": "<p>A container for the information associated with a <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html\">DeleteMultiRegionAccessPoint</a> request.</p>"
+    },
+    "DeleteMultiRegionAccessPointRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "ClientToken",
+        "Details"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "ClientToken": {
+          "shape": "MultiRegionAccessPointClientToken",
+          "documentation": "<p>An idempotency token used to identify the request and guarantee that requests are unique.</p>",
+          "idempotencyToken": true
+        },
+        "Details": {
+          "shape": "DeleteMultiRegionAccessPointInput",
+          "documentation": "<p>A container element containing details about the Multi-Region Access Point.</p>"
+        }
+      }
+    },
+    "DeleteMultiRegionAccessPointResult": {
+      "type": "structure",
+      "members": {
+        "RequestTokenARN": {
+          "shape": "AsyncRequestTokenARN",
+          "documentation": "<p>The request token associated with the request. You can use this token with <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html\">DescribeMultiRegionAccessPointOperation</a> to determine the status of asynchronous requests.</p>"
+        }
+      }
+    },
     "DeletePublicAccessBlockRequest": {
       "type": "structure",
       "required": [
@@ -1613,7 +1980,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID for the account whose <code>PublicAccessBlock</code> configuration you want to remove.</p>",
+          "documentation": "<p>The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want to remove.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -1677,7 +2044,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID associated with the S3 Batch Operations job.</p>",
+          "documentation": "<p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -1699,6 +2066,37 @@
         }
       }
     },
+    "DescribeMultiRegionAccessPointOperationRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "RequestTokenARN"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "RequestTokenARN": {
+          "shape": "AsyncRequestTokenARN",
+          "documentation": "<p>The request token associated with the request you want to know about. This request token is returned as part of the response when you make an asynchronous request. You provide this token to query about the status of the asynchronous action.</p>",
+          "location": "uri",
+          "locationName": "request_token"
+        }
+      }
+    },
+    "DescribeMultiRegionAccessPointOperationResult": {
+      "type": "structure",
+      "members": {
+        "AsyncOperation": {
+          "shape": "AsyncOperation",
+          "documentation": "<p>A container element containing the details of the asynchronous operation.</p>"
+        }
+      }
+    },
     "Endpoints": {
       "type": "map",
       "key": {
@@ -1707,6 +2105,16 @@
       "value": {
         "shape": "NonEmptyMaxLength1024String"
       }
+    },
+    "EstablishedMultiRegionAccessPointPolicy": {
+      "type": "structure",
+      "members": {
+        "Policy": {
+          "shape": "Policy",
+          "documentation": "<p>The details of the last established policy.</p>"
+        }
+      },
+      "documentation": "<p>The last established access control policy for a Multi-Region Access Point.</p> <p>When you update the policy, the update is first listed as the proposed policy. After the update is finished and all Regions have been updated, the proposed policy is listed as the established policy. If both policies have the same version number, the proposed policy is the established policy.</p>"
     },
     "Exclude": {
       "type": "structure",
@@ -2009,7 +2417,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID of the Outposts bucket.</p>",
+          "documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -2040,7 +2448,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID of the Outposts bucket.</p>",
+          "documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -2071,7 +2479,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID of the Outposts bucket.</p>",
+          "documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -2110,7 +2518,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID of the Outposts bucket.</p>",
+          "documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -2144,7 +2552,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID associated with the S3 Batch Operations job.</p>",
+          "documentation": "<p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -2166,12 +2574,104 @@
         }
       }
     },
+    "GetMultiRegionAccessPointPolicyRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "MultiRegionAccessPointName",
+          "documentation": "<p>Specifies the Multi-Region Access Point. The name of the Multi-Region Access Point is different from the alias. For more information about the distinction between the name and the alias of an Multi-Region Access Point, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming\">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p>",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
+    },
+    "GetMultiRegionAccessPointPolicyResult": {
+      "type": "structure",
+      "members": {
+        "Policy": {
+          "shape": "MultiRegionAccessPointPolicyDocument",
+          "documentation": "<p>The policy associated with the specified Multi-Region Access Point.</p>"
+        }
+      }
+    },
+    "GetMultiRegionAccessPointPolicyStatusRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "MultiRegionAccessPointName",
+          "documentation": "<p>Specifies the Multi-Region Access Point. The name of the Multi-Region Access Point is different from the alias. For more information about the distinction between the name and the alias of an Multi-Region Access Point, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming\">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p>",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
+    },
+    "GetMultiRegionAccessPointPolicyStatusResult": {
+      "type": "structure",
+      "members": {
+        "Established": {
+          "shape": "PolicyStatus"
+        }
+      }
+    },
+    "GetMultiRegionAccessPointRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "Name"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "Name": {
+          "shape": "MultiRegionAccessPointName",
+          "documentation": "<p>The name of the Multi-Region Access Point whose configuration information you want to receive. The name of the Multi-Region Access Point is different from the alias. For more information about the distinction between the name and the alias of an Multi-Region Access Point, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming\">Managing Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p>",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
+    },
+    "GetMultiRegionAccessPointResult": {
+      "type": "structure",
+      "members": {
+        "AccessPoint": {
+          "shape": "MultiRegionAccessPointReport",
+          "documentation": "<p>A container element containing the details of the requested Multi-Region Access Point.</p>"
+        }
+      }
+    },
     "GetPublicAccessBlockOutput": {
       "type": "structure",
       "members": {
         "PublicAccessBlockConfiguration": {
           "shape": "PublicAccessBlockConfiguration",
-          "documentation": "<p>The <code>PublicAccessBlock</code> configuration currently in effect for this account.</p>"
+          "documentation": "<p>The <code>PublicAccessBlock</code> configuration currently in effect for this Amazon Web Services account.</p>"
         }
       },
       "payload": "PublicAccessBlockConfiguration"
@@ -2184,7 +2684,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID for the account whose <code>PublicAccessBlock</code> configuration you want to retrieve.</p>",
+          "documentation": "<p>The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want to retrieve.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -2885,7 +3385,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID for owner of the bucket whose access points you want to list.</p>",
+          "documentation": "<p>The Amazon Web Services account ID for owner of the bucket whose access points you want to list.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -2931,7 +3431,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID associated with the S3 Batch Operations job.</p>",
+          "documentation": "<p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -2970,6 +3470,46 @@
         }
       }
     },
+    "ListMultiRegionAccessPointsRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "NextToken": {
+          "shape": "NonEmptyMaxLength1024String",
+          "documentation": "<p>Not currently used. Do not use this parameter.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>Not currently used. Do not use this parameter.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      }
+    },
+    "ListMultiRegionAccessPointsResult": {
+      "type": "structure",
+      "members": {
+        "AccessPoints": {
+          "shape": "MultiRegionAccessPointReportList",
+          "documentation": "<p>The list of Multi-Region Access Points associated with the user.</p>"
+        },
+        "NextToken": {
+          "shape": "NonEmptyMaxLength1024String",
+          "documentation": "<p>If the specified bucket has more Multi-Region Access Points than can be returned in one call to this action, this field contains a continuation token. You can use this token tin subsequent calls to this action to retrieve additional Multi-Region Access Points.</p>"
+        }
+      }
+    },
     "ListRegionalBucketsRequest": {
       "type": "structure",
       "required": [
@@ -2978,7 +3518,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID of the Outposts bucket.</p>",
+          "documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -3093,6 +3633,113 @@
       "type": "double",
       "max": 100,
       "min": 0.1
+    },
+    "MultiRegionAccessPointAlias": {
+      "type": "string",
+      "max": 63,
+      "pattern": "^[a-z][a-z0-9]*[.]mrap$"
+    },
+    "MultiRegionAccessPointClientToken": {
+      "type": "string",
+      "max": 64,
+      "pattern": "\\S+"
+    },
+    "MultiRegionAccessPointName": {
+      "type": "string",
+      "max": 50,
+      "pattern": "^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$"
+    },
+    "MultiRegionAccessPointPolicyDocument": {
+      "type": "structure",
+      "members": {
+        "Established": {
+          "shape": "EstablishedMultiRegionAccessPointPolicy",
+          "documentation": "<p>The last established policy for the Multi-Region Access Point.</p>"
+        },
+        "Proposed": {
+          "shape": "ProposedMultiRegionAccessPointPolicy",
+          "documentation": "<p>The proposed policy for the Multi-Region Access Point.</p>"
+        }
+      },
+      "documentation": "<p>The Multi-Region Access Point access control policy.</p> <p>When you update the policy, the update is first listed as the proposed policy. After the update is finished and all Regions have been updated, the proposed policy is listed as the established policy. If both policies have the same version number, the proposed policy is the established policy.</p>"
+    },
+    "MultiRegionAccessPointRegionalResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "RegionName",
+          "documentation": "<p>The name of the Region in the Multi-Region Access Point.</p>"
+        },
+        "RequestStatus": {
+          "shape": "AsyncRequestStatus",
+          "documentation": "<p>The current status of the Multi-Region Access Point in this Region.</p>"
+        }
+      },
+      "documentation": "<p>Status information for a single Multi-Region Access Point Region.</p>"
+    },
+    "MultiRegionAccessPointRegionalResponseList": {
+      "type": "list",
+      "member": {
+        "shape": "MultiRegionAccessPointRegionalResponse",
+        "locationName": "Region"
+      }
+    },
+    "MultiRegionAccessPointReport": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "MultiRegionAccessPointName",
+          "documentation": "<p>The name of the Multi-Region Access Point.</p>"
+        },
+        "Alias": {
+          "shape": "MultiRegionAccessPointAlias",
+          "documentation": "<p>The alias for the Multi-Region Access Point. For more information about the distinction between the name and the alias of an Multi-Region Access Point, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming\">Managing Multi-Region Access Points</a>.</p>"
+        },
+        "CreatedAt": {
+          "shape": "CreationTimestamp",
+          "documentation": "<p>When the Multi-Region Access Point create request was received.</p>"
+        },
+        "PublicAccessBlock": {
+          "shape": "PublicAccessBlockConfiguration"
+        },
+        "Status": {
+          "shape": "MultiRegionAccessPointStatus",
+          "documentation": "<p>The current status of the Multi-Region Access Point.</p> <p> <code>CREATING</code> and <code>DELETING</code> are temporary states that exist while the request is propogating and being completed. If a Multi-Region Access Point has a status of <code>PARTIALLY_CREATED</code>, you can retry creation or send a request to delete the Multi-Region Access Point. If a Multi-Region Access Point has a status of <code>PARTIALLY_DELETED</code>, you can retry a delete request to finish the deletion of the Multi-Region Access Point.</p>"
+        },
+        "Regions": {
+          "shape": "RegionReportList",
+          "documentation": "<p>A collection of the Regions and buckets associated with the Multi-Region Access Point.</p>"
+        }
+      },
+      "documentation": "<p>A collection of statuses for a Multi-Region Access Point in the various Regions it supports.</p>"
+    },
+    "MultiRegionAccessPointReportList": {
+      "type": "list",
+      "member": {
+        "shape": "MultiRegionAccessPointReport",
+        "locationName": "AccessPoint"
+      }
+    },
+    "MultiRegionAccessPointStatus": {
+      "type": "string",
+      "enum": [
+        "READY",
+        "INCONSISTENT_ACROSS_REGIONS",
+        "CREATING",
+        "PARTIALLY_CREATED",
+        "PARTIALLY_DELETED",
+        "DELETING"
+      ]
+    },
+    "MultiRegionAccessPointsAsyncResponse": {
+      "type": "structure",
+      "members": {
+        "Regions": {
+          "shape": "MultiRegionAccessPointRegionalResponseList",
+          "documentation": "<p>A collection of status information for the different Regions that a Multi-Region Access Point supports.</p>"
+        }
+      },
+      "documentation": "<p>The Multi-Region Access Point details that are returned when querying about an asynchronous request.</p>"
     },
     "NetworkOrigin": {
       "type": "string",
@@ -3351,6 +3998,16 @@
       },
       "documentation": "<p>A container for the prefix-level storage metrics for S3 Storage Lens.</p>"
     },
+    "ProposedMultiRegionAccessPointPolicy": {
+      "type": "structure",
+      "members": {
+        "Policy": {
+          "shape": "Policy",
+          "documentation": "<p>The details of the proposed policy.</p>"
+        }
+      },
+      "documentation": "<p>The proposed access control policy for the Multi-Region Access Point.</p> <p>When you update the policy, the update is first listed as the proposed policy. After the update is finished and all Regions have been updated, the proposed policy is listed as the established policy. If both policies have the same version number, the proposed policy is the established policy.</p>"
+    },
     "PublicAccessBlockConfiguration": {
       "type": "structure",
       "members": {
@@ -3444,7 +4101,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID for owner of the bucket associated with the specified access point.</p>",
+          "documentation": "<p>The Amazon Web Services account ID for owner of the bucket associated with the specified access point.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -3470,7 +4127,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID of the Outposts bucket.</p>",
+          "documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -3502,7 +4159,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID of the Outposts bucket.</p>",
+          "documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -3535,7 +4192,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID of the Outposts bucket.</p>",
+          "documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -3567,7 +4224,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID associated with the S3 Batch Operations job.</p>",
+          "documentation": "<p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -3588,6 +4245,59 @@
       "type": "structure",
       "members": {}
     },
+    "PutMultiRegionAccessPointPolicyInput": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "Policy"
+      ],
+      "members": {
+        "Name": {
+          "shape": "MultiRegionAccessPointName",
+          "documentation": "<p>The name of the Multi-Region Access Point associated with the request.</p>"
+        },
+        "Policy": {
+          "shape": "Policy",
+          "documentation": "<p>The policy details for the <code>PutMultiRegionAccessPoint</code> request.</p>"
+        }
+      },
+      "documentation": "<p>A container for the information associated with a <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html\">PutMultiRegionAccessPoint</a> request.</p>"
+    },
+    "PutMultiRegionAccessPointPolicyRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "ClientToken",
+        "Details"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId",
+          "documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+          "hostLabel": true,
+          "location": "header",
+          "locationName": "x-amz-account-id"
+        },
+        "ClientToken": {
+          "shape": "MultiRegionAccessPointClientToken",
+          "documentation": "<p>An idempotency token used to identify the request and guarantee that requests are unique.</p>",
+          "idempotencyToken": true
+        },
+        "Details": {
+          "shape": "PutMultiRegionAccessPointPolicyInput",
+          "documentation": "<p>A container element containing the details of the policy for the Multi-Region Access Point.</p>"
+        }
+      }
+    },
+    "PutMultiRegionAccessPointPolicyResult": {
+      "type": "structure",
+      "members": {
+        "RequestTokenARN": {
+          "shape": "AsyncRequestTokenARN",
+          "documentation": "<p>The request token associated with the request. You can use this token with <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html\">DescribeMultiRegionAccessPointOperation</a> to determine the status of asynchronous requests.</p>"
+        }
+      }
+    },
     "PutPublicAccessBlockRequest": {
       "type": "structure",
       "required": [
@@ -3597,7 +4307,7 @@
       "members": {
         "PublicAccessBlockConfiguration": {
           "shape": "PublicAccessBlockConfiguration",
-          "documentation": "<p>The <code>PublicAccessBlock</code> configuration that you want to apply to the specified account.</p>",
+          "documentation": "<p>The <code>PublicAccessBlock</code> configuration that you want to apply to the specified Amazon Web Services account.</p>",
           "locationName": "PublicAccessBlockConfiguration",
           "xmlNamespace": {
             "uri": "http://awss3control.amazonaws.com/doc/2018-08-20/"
@@ -3605,7 +4315,7 @@
         },
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID for the account whose <code>PublicAccessBlock</code> configuration you want to set.</p>",
+          "documentation": "<p>The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want to set.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -3674,6 +4384,52 @@
     "PutStorageLensConfigurationTaggingResult": {
       "type": "structure",
       "members": {}
+    },
+    "Region": {
+      "type": "structure",
+      "required": [
+        "Bucket"
+      ],
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the associated bucket for the Region.</p>"
+        }
+      },
+      "documentation": "<p>A Region that supports a Multi-Region Access Point as well as the associated bucket for the Region.</p>"
+    },
+    "RegionCreationList": {
+      "type": "list",
+      "member": {
+        "shape": "Region",
+        "locationName": "Region"
+      }
+    },
+    "RegionName": {
+      "type": "string",
+      "max": 64,
+      "min": 1
+    },
+    "RegionReport": {
+      "type": "structure",
+      "members": {
+        "Bucket": {
+          "shape": "BucketName",
+          "documentation": "<p>The name of the bucket.</p>"
+        },
+        "Region": {
+          "shape": "RegionName",
+          "documentation": "<p>The name of the Region.</p>"
+        }
+      },
+      "documentation": "<p>A combination of a bucket and Region that's part of a Multi-Region Access Point.</p>"
+    },
+    "RegionReportList": {
+      "type": "list",
+      "member": {
+        "shape": "RegionReport",
+        "locationName": "Region"
+      }
     },
     "RegionalBucket": {
       "type": "structure",
@@ -4500,7 +5256,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID associated with the S3 Batch Operations job.</p>",
+          "documentation": "<p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"
@@ -4546,7 +5302,7 @@
       "members": {
         "AccountId": {
           "shape": "AccountId",
-          "documentation": "<p>The account ID associated with the S3 Batch Operations job.</p>",
+          "documentation": "<p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>",
           "hostLabel": true,
           "location": "header",
           "locationName": "x-amz-account-id"

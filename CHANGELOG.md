@@ -1,6 +1,17 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.981.0-->
+<!--LATEST=2.982.0-->
 <!--ENTRYINSERT-->
+
+## 2.982.0
+* feature: ACMPCA: Private Certificate Authority Service now allows customers to enable an online certificate status protocol (OCSP) responder service on their private certificate authorities. Customers can also optionally configure a custom CNAME for their OCSP responder.
+* feature: EFS: Adds support for EFS Intelligent-Tiering, which uses EFS Lifecycle Management to monitor file access patterns and is designed to automatically transition files to and from your corresponding Infrequent Access (IA) storage classes.
+* feature: FSx: Announcing Amazon FSx for NetApp ONTAP, a new service that provides fully managed shared storage in the AWS Cloud with the data access and management capabilities of ONTAP.
+* feature: LexModelBuildingService: Lex now supports Korean (ko-KR) locale.
+* feature: QuickSight: This release adds support for referencing parent datasets as sources in a child dataset.
+* feature: S3Control: S3 Multi-Region Access Points provide a single global endpoint to access a data set that spans multiple S3 buckets in different AWS Regions.
+* feature: Schemas: This update include the support for Schema Discoverer to discover the events sent to the bus from another account. The feature will be enabled by default when discoverer is created or updated but can also be opt-in or opt-out  by specifying the value for crossAccount.
+* feature: SecurityHub: New ASFF Resources: AwsAutoScalingLaunchConfiguration, AwsEc2VpnConnection, AwsEcrContainerImage. Added KeyRotationStatus to AwsKmsKey. Added AccessControlList, BucketLoggingConfiguration,BucketNotificationConfiguration and BucketNotificationConfiguration to AwsS3Bucket.
+* feature: Transfer: AWS Transfer Family introduces Managed Workflows for creating, executing, monitoring, and standardizing post file transfer processing
 
 ## 2.981.0
 * feature: EC2: Added LaunchTemplate support for the IMDS IPv6 endpoint

@@ -28,13 +28,21 @@ declare class Transfer extends Service {
    */
   createServer(callback?: (err: AWSError, data: Transfer.Types.CreateServerResponse) => void): Request<Transfer.Types.CreateServerResponse, AWSError>;
   /**
-   * Creates a user and associates them with an existing file transfer protocol-enabled server. You can only create and associate users with servers that have the IdentityProviderType set to SERVICE_MANAGED. Using parameters for CreateUser, you can specify the user name, set the home directory, store the user's public key, and assign the user's Amazon Web Services Identity and Access Management (IAM) role. You can also optionally add a scope-down policy, and assign metadata with tags that can be used to group and search for users.
+   * Creates a user and associates them with an existing file transfer protocol-enabled server. You can only create and associate users with servers that have the IdentityProviderType set to SERVICE_MANAGED. Using parameters for CreateUser, you can specify the user name, set the home directory, store the user's public key, and assign the user's Amazon Web Services Identity and Access Management (IAM) role. You can also optionally add a session policy, and assign metadata with tags that can be used to group and search for users.
    */
   createUser(params: Transfer.Types.CreateUserRequest, callback?: (err: AWSError, data: Transfer.Types.CreateUserResponse) => void): Request<Transfer.Types.CreateUserResponse, AWSError>;
   /**
-   * Creates a user and associates them with an existing file transfer protocol-enabled server. You can only create and associate users with servers that have the IdentityProviderType set to SERVICE_MANAGED. Using parameters for CreateUser, you can specify the user name, set the home directory, store the user's public key, and assign the user's Amazon Web Services Identity and Access Management (IAM) role. You can also optionally add a scope-down policy, and assign metadata with tags that can be used to group and search for users.
+   * Creates a user and associates them with an existing file transfer protocol-enabled server. You can only create and associate users with servers that have the IdentityProviderType set to SERVICE_MANAGED. Using parameters for CreateUser, you can specify the user name, set the home directory, store the user's public key, and assign the user's Amazon Web Services Identity and Access Management (IAM) role. You can also optionally add a session policy, and assign metadata with tags that can be used to group and search for users.
    */
   createUser(callback?: (err: AWSError, data: Transfer.Types.CreateUserResponse) => void): Request<Transfer.Types.CreateUserResponse, AWSError>;
+  /**
+   *  Allows you to create a workflow with specified steps and step details the workflow invokes after file transfer completes. After creating a workflow, you can associate the workflow created with any transfer servers by specifying the workflow-details field in CreateServer and UpdateServer operations. 
+   */
+  createWorkflow(params: Transfer.Types.CreateWorkflowRequest, callback?: (err: AWSError, data: Transfer.Types.CreateWorkflowResponse) => void): Request<Transfer.Types.CreateWorkflowResponse, AWSError>;
+  /**
+   *  Allows you to create a workflow with specified steps and step details the workflow invokes after file transfer completes. After creating a workflow, you can associate the workflow created with any transfer servers by specifying the workflow-details field in CreateServer and UpdateServer operations. 
+   */
+  createWorkflow(callback?: (err: AWSError, data: Transfer.Types.CreateWorkflowResponse) => void): Request<Transfer.Types.CreateWorkflowResponse, AWSError>;
   /**
    * Allows you to delete the access specified in the ServerID and ExternalID parameters.
    */
@@ -52,11 +60,11 @@ declare class Transfer extends Service {
    */
   deleteServer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a user's Secure Shell (SSH) public key. No response is returned from this operation.
+   * Deletes a user's Secure Shell (SSH) public key.
    */
   deleteSshPublicKey(params: Transfer.Types.DeleteSshPublicKeyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a user's Secure Shell (SSH) public key. No response is returned from this operation.
+   * Deletes a user's Secure Shell (SSH) public key.
    */
   deleteSshPublicKey(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -68,6 +76,14 @@ declare class Transfer extends Service {
    */
   deleteUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes the specified workflow.
+   */
+  deleteWorkflow(params: Transfer.Types.DeleteWorkflowRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified workflow.
+   */
+  deleteWorkflow(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Describes the access that is assigned to the specific file transfer protocol-enabled server, as identified by its ServerId property and its ExternalID. The response from this call returns the properties of the access that is associated with the ServerId value that was specified.
    */
   describeAccess(params: Transfer.Types.DescribeAccessRequest, callback?: (err: AWSError, data: Transfer.Types.DescribeAccessResponse) => void): Request<Transfer.Types.DescribeAccessResponse, AWSError>;
@@ -75,6 +91,14 @@ declare class Transfer extends Service {
    * Describes the access that is assigned to the specific file transfer protocol-enabled server, as identified by its ServerId property and its ExternalID. The response from this call returns the properties of the access that is associated with the ServerId value that was specified.
    */
   describeAccess(callback?: (err: AWSError, data: Transfer.Types.DescribeAccessResponse) => void): Request<Transfer.Types.DescribeAccessResponse, AWSError>;
+  /**
+   * You can use DescribeExecution to check the details of the execution of the specified workflow.
+   */
+  describeExecution(params: Transfer.Types.DescribeExecutionRequest, callback?: (err: AWSError, data: Transfer.Types.DescribeExecutionResponse) => void): Request<Transfer.Types.DescribeExecutionResponse, AWSError>;
+  /**
+   * You can use DescribeExecution to check the details of the execution of the specified workflow.
+   */
+  describeExecution(callback?: (err: AWSError, data: Transfer.Types.DescribeExecutionResponse) => void): Request<Transfer.Types.DescribeExecutionResponse, AWSError>;
   /**
    * Describes the security policy that is attached to your file transfer protocol-enabled server. The response contains a description of the security policy's properties. For more information about security policies, see Working with security policies.
    */
@@ -100,6 +124,14 @@ declare class Transfer extends Service {
    */
   describeUser(callback?: (err: AWSError, data: Transfer.Types.DescribeUserResponse) => void): Request<Transfer.Types.DescribeUserResponse, AWSError>;
   /**
+   * Describes the specified workflow.
+   */
+  describeWorkflow(params: Transfer.Types.DescribeWorkflowRequest, callback?: (err: AWSError, data: Transfer.Types.DescribeWorkflowResponse) => void): Request<Transfer.Types.DescribeWorkflowResponse, AWSError>;
+  /**
+   * Describes the specified workflow.
+   */
+  describeWorkflow(callback?: (err: AWSError, data: Transfer.Types.DescribeWorkflowResponse) => void): Request<Transfer.Types.DescribeWorkflowResponse, AWSError>;
+  /**
    * Adds a Secure Shell (SSH) public key to a user account identified by a UserName value assigned to the specific file transfer protocol-enabled server, identified by ServerId. The response returns the UserName value, the ServerId value, and the name of the SshPublicKeyId.
    */
   importSshPublicKey(params: Transfer.Types.ImportSshPublicKeyRequest, callback?: (err: AWSError, data: Transfer.Types.ImportSshPublicKeyResponse) => void): Request<Transfer.Types.ImportSshPublicKeyResponse, AWSError>;
@@ -115,6 +147,14 @@ declare class Transfer extends Service {
    * Lists the details for all the accesses you have on your server.
    */
   listAccesses(callback?: (err: AWSError, data: Transfer.Types.ListAccessesResponse) => void): Request<Transfer.Types.ListAccessesResponse, AWSError>;
+  /**
+   * Lists all executions for the specified workflow.
+   */
+  listExecutions(params: Transfer.Types.ListExecutionsRequest, callback?: (err: AWSError, data: Transfer.Types.ListExecutionsResponse) => void): Request<Transfer.Types.ListExecutionsResponse, AWSError>;
+  /**
+   * Lists all executions for the specified workflow.
+   */
+  listExecutions(callback?: (err: AWSError, data: Transfer.Types.ListExecutionsResponse) => void): Request<Transfer.Types.ListExecutionsResponse, AWSError>;
   /**
    * Lists the security policies that are attached to your file transfer protocol-enabled servers.
    */
@@ -148,6 +188,22 @@ declare class Transfer extends Service {
    */
   listUsers(callback?: (err: AWSError, data: Transfer.Types.ListUsersResponse) => void): Request<Transfer.Types.ListUsersResponse, AWSError>;
   /**
+   * Lists all of your workflows.
+   */
+  listWorkflows(params: Transfer.Types.ListWorkflowsRequest, callback?: (err: AWSError, data: Transfer.Types.ListWorkflowsResponse) => void): Request<Transfer.Types.ListWorkflowsResponse, AWSError>;
+  /**
+   * Lists all of your workflows.
+   */
+  listWorkflows(callback?: (err: AWSError, data: Transfer.Types.ListWorkflowsResponse) => void): Request<Transfer.Types.ListWorkflowsResponse, AWSError>;
+  /**
+   * Sends a callback for asynchronous custom steps.  The ExecutionId, WorkflowId, and Token are passed to the target resource during execution of a custom step of a workflow. You must include those with their callback as well as providing a status. 
+   */
+  sendWorkflowStepState(params: Transfer.Types.SendWorkflowStepStateRequest, callback?: (err: AWSError, data: Transfer.Types.SendWorkflowStepStateResponse) => void): Request<Transfer.Types.SendWorkflowStepStateResponse, AWSError>;
+  /**
+   * Sends a callback for asynchronous custom steps.  The ExecutionId, WorkflowId, and Token are passed to the target resource during execution of a custom step of a workflow. You must include those with their callback as well as providing a status. 
+   */
+  sendWorkflowStepState(callback?: (err: AWSError, data: Transfer.Types.SendWorkflowStepStateResponse) => void): Request<Transfer.Types.SendWorkflowStepStateResponse, AWSError>;
+  /**
    * Changes the state of a file transfer protocol-enabled server from OFFLINE to ONLINE. It has no impact on a server that is already ONLINE. An ONLINE server can accept and process file transfer jobs. The state of STARTING indicates that the server is in an intermediate state, either not fully able to respond, or not fully online. The values of START_FAILED can indicate an error condition. No response is returned from this call.
    */
   startServer(params: Transfer.Types.StartServerRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -172,11 +228,11 @@ declare class Transfer extends Service {
    */
   tagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * If the IdentityProviderType of a file transfer protocol-enabled server is AWS_DIRECTORY_SERVICE or API_Gateway, tests whether your identity provider is set up successfully. We highly recommend that you call this operation to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the identity provider integration to ensure that your users can successfully use the service.
+   * If the IdentityProviderType of a file transfer protocol-enabled server is AWS_DIRECTORY_SERVICE or API_Gateway, tests whether your identity provider is set up successfully. We highly recommend that you call this operation to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the identity provider integration to ensure that your users can successfully use the service.  The ServerId and UserName parameters are required. The ServerProtocol, SourceIp, and UserPassword are all optional.    You cannot use TestIdentityProvider if the IdentityProviderType of your server is SERVICE_MANAGED.      If you provide any incorrect values for any parameters, the Response field is empty.     If you provide a server ID for a server that uses service-managed users, you get an error:    An error occurred (InvalidRequestException) when calling the TestIdentityProvider operation: s-server-ID not configured for external auth      If you enter a Server ID for the --server-id parameter that does not identify an actual Transfer server, you receive the following error:   An error occurred (ResourceNotFoundException) when calling the TestIdentityProvider operation: Unknown server   
    */
   testIdentityProvider(params: Transfer.Types.TestIdentityProviderRequest, callback?: (err: AWSError, data: Transfer.Types.TestIdentityProviderResponse) => void): Request<Transfer.Types.TestIdentityProviderResponse, AWSError>;
   /**
-   * If the IdentityProviderType of a file transfer protocol-enabled server is AWS_DIRECTORY_SERVICE or API_Gateway, tests whether your identity provider is set up successfully. We highly recommend that you call this operation to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the identity provider integration to ensure that your users can successfully use the service.
+   * If the IdentityProviderType of a file transfer protocol-enabled server is AWS_DIRECTORY_SERVICE or API_Gateway, tests whether your identity provider is set up successfully. We highly recommend that you call this operation to test your authentication method as soon as you create your server. By doing so, you can troubleshoot issues with the identity provider integration to ensure that your users can successfully use the service.  The ServerId and UserName parameters are required. The ServerProtocol, SourceIp, and UserPassword are all optional.    You cannot use TestIdentityProvider if the IdentityProviderType of your server is SERVICE_MANAGED.      If you provide any incorrect values for any parameters, the Response field is empty.     If you provide a server ID for a server that uses service-managed users, you get an error:    An error occurred (InvalidRequestException) when calling the TestIdentityProvider operation: s-server-ID not configured for external auth      If you enter a Server ID for the --server-id parameter that does not identify an actual Transfer server, you receive the following error:   An error occurred (ResourceNotFoundException) when calling the TestIdentityProvider operation: Unknown server   
    */
   testIdentityProvider(callback?: (err: AWSError, data: Transfer.Types.TestIdentityProviderResponse) => void): Request<Transfer.Types.TestIdentityProviderResponse, AWSError>;
   /**
@@ -216,22 +272,34 @@ declare namespace Transfer {
   export type AddressAllocationId = string;
   export type AddressAllocationIds = AddressAllocationId[];
   export type Arn = string;
+  export type CallbackToken = string;
   export type Certificate = string;
+  export interface CopyStepDetails {
+    /**
+     * The name of the step, used as an identifier.
+     */
+    Name?: WorkflowStepName;
+    DestinationFileLocation?: InputFileLocation;
+    /**
+     * A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.
+     */
+    OverwriteExisting?: OverwriteExisting;
+  }
   export interface CreateAccessRequest {
     /**
      * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.
      */
     HomeDirectory?: HomeDirectory;
     /**
-     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
+     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]  In most cases, you can use this value instead of the scope-down policy to lock down your user to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ]   If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api or efsapi call instead of s3 or efs so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder. 
+     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]  In most cases, you can use this value instead of the session policy to lock down your user to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ]   If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api or efsapi call instead of s3 or efs so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder. 
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
-     * A scope-down policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  This only applies when domain of ServerId is S3. Amazon EFS does not use scope-down policies. For scope-down policies, Amazon Web Services Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the Policy argument. For an example of a scope-down policy, see Example scope-down policy. For more information, see AssumeRole in the Amazon Web Services Security Token Service API Reference. 
+     * A session policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  This only applies when the domain of ServerId is S3. EFS does not use session policies. For session policies, Amazon Web Services Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the Policy argument. For an example of a session policy, see Example session policy. For more information, see AssumeRole in the Amazon Web Services Security Token Service API Reference. 
      */
     Policy?: Policy;
     PosixProfile?: PosixProfile;
@@ -303,6 +371,10 @@ declare namespace Transfer {
      * Key-value pairs that can be used to group and search for servers.
      */
     Tags?: Tags;
+    /**
+     * Specifies the workflow ID for the workflow to assign and the execution role used for executing the workflow.
+     */
+    WorkflowDetails?: WorkflowDetails;
   }
   export interface CreateServerResponse {
     /**
@@ -316,15 +388,15 @@ declare namespace Transfer {
      */
     HomeDirectory?: HomeDirectory;
     /**
-     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
+     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]  In most cases, you can use this value instead of the scope-down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ]   If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api or efsapi call instead of s3 or efs so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder. 
+     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]  In most cases, you can use this value instead of the session policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ]   If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api or efsapi call instead of s3 or efs so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder. 
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
-     * A scope-down policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  This only applies when domain of ServerId is S3. EFS does not use scope down policy. For scope-down policies, Amazon Web Services Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the Policy argument. For an example of a scope-down policy, see Example scope-down policy. For more information, see AssumeRole in the Amazon Web Services Security Token Service API Reference. 
+     * A session policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  This only applies when the domain of ServerId is S3. EFS does not use session policies. For session policies, Amazon Web Services Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the Policy argument. For an example of a session policy, see Example session policy. For more information, see AssumeRole in the Amazon Web Services Security Token Service API Reference. 
      */
     Policy?: Policy;
     /**
@@ -348,7 +420,7 @@ declare namespace Transfer {
      */
     Tags?: Tags;
     /**
-     * A unique string that identifies a user and is associated with a as specified by the ServerId. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore '_', hyphen '-', period '.', and at sign '@'. The user name can't start with a hyphen, period, or at sign.
+     * A unique string that identifies a user and is associated with a ServerId. This user name must be a minimum of 3 and a maximum of 100 characters long. The following are valid characters: a-z, A-Z, 0-9, underscore '_', hyphen '-', period '.', and at sign '@'. The user name can't start with a hyphen, period, or at sign.
      */
     UserName: UserName;
   }
@@ -362,6 +434,47 @@ declare namespace Transfer {
      */
     UserName: UserName;
   }
+  export interface CreateWorkflowRequest {
+    /**
+     * A textual description for the workflow.
+     */
+    Description?: WorkflowDescription;
+    /**
+     * Specifies the details for the steps that are in the specified workflow.  The TYPE specifies which of the following actions is being taken for this step.     Copy: copy the file to another location    Custom: custom step with a lambda target    Delete: delete the file    Tag: add a tag to the file    For file location, you specify either the S3 bucket and key, or the EFS filesystem ID and path. 
+     */
+    Steps: WorkflowSteps;
+    /**
+     * Specifies the steps (actions) to take if any errors are encountered during execution of the workflow.
+     */
+    OnExceptionSteps?: WorkflowSteps;
+    /**
+     * Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.
+     */
+    Tags?: Tags;
+  }
+  export interface CreateWorkflowResponse {
+    /**
+     * A unique identifier for the workflow.
+     */
+    WorkflowId: WorkflowId;
+  }
+  export interface CustomStepDetails {
+    /**
+     * The name of the step, used as an identifier.
+     */
+    Name?: WorkflowStepName;
+    /**
+     * The ARN for the lambda function that is being called.
+     */
+    Target?: CustomStepTarget;
+    /**
+     * Timeout, in seconds, for the step.
+     */
+    TimeoutSeconds?: CustomStepTimeoutSeconds;
+  }
+  export type CustomStepStatus = "SUCCESS"|"FAILURE"|string;
+  export type CustomStepTarget = string;
+  export type CustomStepTimeoutSeconds = number;
   export type DateImported = Date;
   export interface DeleteAccessRequest {
     /**
@@ -393,6 +506,12 @@ declare namespace Transfer {
      */
     UserName: UserName;
   }
+  export interface DeleteStepDetails {
+    /**
+     * The name of the step, used as an identifier.
+     */
+    Name?: WorkflowStepName;
+  }
   export interface DeleteUserRequest {
     /**
      * A system-assigned unique identifier for a server instance that has the user assigned to it.
@@ -402,6 +521,12 @@ declare namespace Transfer {
      * A unique string that identifies a user that is being deleted from a server.
      */
     UserName: UserName;
+  }
+  export interface DeleteWorkflowRequest {
+    /**
+     * A unique identifier for the workflow.
+     */
+    WorkflowId: WorkflowId;
   }
   export interface DescribeAccessRequest {
     /**
@@ -422,6 +547,26 @@ declare namespace Transfer {
      * The external ID of the server that the access is attached to.
      */
     Access: DescribedAccess;
+  }
+  export interface DescribeExecutionRequest {
+    /**
+     * A unique identifier for the execution of a workflow.
+     */
+    ExecutionId: ExecutionId;
+    /**
+     * A unique identifier for the workflow.
+     */
+    WorkflowId: WorkflowId;
+  }
+  export interface DescribeExecutionResponse {
+    /**
+     * A unique identifier for the workflow.
+     */
+    WorkflowId: WorkflowId;
+    /**
+     * The structure that contains the details of the workflow' execution.
+     */
+    Execution: DescribedExecution;
   }
   export interface DescribeSecurityPolicyRequest {
     /**
@@ -467,21 +612,33 @@ declare namespace Transfer {
      */
     User: DescribedUser;
   }
+  export interface DescribeWorkflowRequest {
+    /**
+     * A unique identifier for the workflow.
+     */
+    WorkflowId: WorkflowId;
+  }
+  export interface DescribeWorkflowResponse {
+    /**
+     * The structure that contains the details of the workflow.
+     */
+    Workflow: DescribedWorkflow;
+  }
   export interface DescribedAccess {
     /**
      * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.
      */
     HomeDirectory?: HomeDirectory;
     /**
-     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. In most cases, you can use this value instead of the scope-down policy to lock down the associated access to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.
+     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. In most cases, you can use this value instead of the session policy to lock down the associated access to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
-     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
+     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * A scope-down policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.
+     * A session policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.
      */
     Policy?: Policy;
     PosixProfile?: PosixProfile;
@@ -493,6 +650,37 @@ declare namespace Transfer {
      * A unique identifier that is required to identify specific groups within your directory. The users of the group that you associate have access to your Amazon S3 or Amazon EFS resources over the enabled protocols using Amazon Web Services Transfer Family. If you know the group name, you can view the SID values by running the following command using Windows PowerShell.  Get-ADGroup -Filter {samAccountName -like "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSid  In that command, replace YourGroupName with the name of your Active Directory group. The regex used to validate this parameter is a string of characters consisting of uppercase and lowercase alphanumeric characters with no spaces. You can also include underscores or any of the following characters: =,.@:/-
      */
     ExternalId?: ExternalId;
+  }
+  export interface DescribedExecution {
+    /**
+     * A unique identifier for the execution of a workflow.
+     */
+    ExecutionId?: ExecutionId;
+    /**
+     * A structure that describes the Amazon S3 or EFS file location. This is the file location when the execution begins: if the file is being copied, this is the initial (as opposed to destination) file location.
+     */
+    InitialFileLocation?: FileLocation;
+    /**
+     * A container object for the session details associated with a workflow.
+     */
+    ServiceMetadata?: ServiceMetadata;
+    /**
+     * The IAM role associated with the execution.
+     */
+    ExecutionRole?: Role;
+    /**
+     * The IAM logging role associated with the execution.
+     */
+    LoggingConfiguration?: LoggingConfiguration;
+    PosixProfile?: PosixProfile;
+    /**
+     * The status is one of the execution. Can be in progress, completed, exception encountered, or handling the exception. 
+     */
+    Status?: ExecutionStatus;
+    /**
+     * A structure that describes the execution results. This includes a list of the steps along with the details of each step, error type and message (if any), and the OnExceptionSteps structure.
+     */
+    Results?: ExecutionResults;
   }
   export interface DescribedSecurityPolicy {
     /**
@@ -585,6 +773,10 @@ declare namespace Transfer {
      * Specifies the number of users that are assigned to a server you specified with the ServerId.
      */
     UserCount?: UserCount;
+    /**
+     * Specifies the workflow ID for the workflow to assign and the execution role used for executing the workflow.
+     */
+    WorkflowDetails?: WorkflowDetails;
   }
   export interface DescribedUser {
     /**
@@ -596,15 +788,15 @@ declare namespace Transfer {
      */
     HomeDirectory?: HomeDirectory;
     /**
-     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. In most cases, you can use this value instead of the scope-down policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.
+     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. In most cases, you can use this value instead of the session policy to lock your user down to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value.
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
-     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
+     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * A scope-down policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.
+     * A session policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.
      */
     Policy?: Policy;
     /**
@@ -628,8 +820,46 @@ declare namespace Transfer {
      */
     UserName?: UserName;
   }
+  export interface DescribedWorkflow {
+    /**
+     * Specifies the unique Amazon Resource Name (ARN) for the workflow.
+     */
+    Arn: Arn;
+    /**
+     * Specifies the text description for the workflow.
+     */
+    Description?: WorkflowDescription;
+    /**
+     * Specifies the details for the steps that are in the specified workflow.
+     */
+    Steps?: WorkflowSteps;
+    /**
+     * Specifies the steps (actions) to take if any errors are encountered during execution of the workflow.
+     */
+    OnExceptionSteps?: WorkflowSteps;
+    /**
+     * A unique identifier for the workflow.
+     */
+    WorkflowId?: WorkflowId;
+    /**
+     * Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.
+     */
+    Tags?: Tags;
+  }
   export type DirectoryId = string;
   export type Domain = "S3"|"EFS"|string;
+  export interface EfsFileLocation {
+    /**
+     * The ID of the file system, assigned by Amazon EFS.
+     */
+    FileSystemId?: EfsFileSystemId;
+    /**
+     * The pathname for the folder being used by a workflow.
+     */
+    Path?: EfsPath;
+  }
+  export type EfsFileSystemId = string;
+  export type EfsPath = string;
   export interface EndpointDetails {
     /**
      * A list of address allocation IDs that are required to attach an Elastic IP address to your server's endpoint.  This property can only be set when EndpointType is set to VPC and it is only valid in the UpdateServer API. 
@@ -653,7 +883,56 @@ declare namespace Transfer {
     SecurityGroupIds?: SecurityGroupIds;
   }
   export type EndpointType = "PUBLIC"|"VPC"|"VPC_ENDPOINT"|string;
+  export interface ExecutionError {
+    /**
+     * Specifies the error type: currently, the only valid value is PERMISSION_DENIED, which occurs if your policy does not contain the correct permissions to complete one or more of the steps in the workflow.
+     */
+    Type: ExecutionErrorType;
+    /**
+     * Specifies the descriptive message that corresponds to the ErrorType.
+     */
+    Message: ExecutionErrorMessage;
+  }
+  export type ExecutionErrorMessage = string;
+  export type ExecutionErrorType = "PERMISSION_DENIED"|string;
+  export type ExecutionId = string;
+  export interface ExecutionResults {
+    /**
+     * Specifies the details for the steps that are in the specified workflow.
+     */
+    Steps?: ExecutionStepResults;
+    /**
+     * Specifies the steps (actions) to take if any errors are encountered during execution of the workflow.
+     */
+    OnExceptionSteps?: ExecutionStepResults;
+  }
+  export type ExecutionStatus = "IN_PROGRESS"|"COMPLETED"|"EXCEPTION"|"HANDLING_EXCEPTION"|string;
+  export interface ExecutionStepResult {
+    /**
+     * One of the available step types.    Copy: copy the file to another location    Custom: custom step with a lambda target    Delete: delete the file    Tag: add a tag to the file  
+     */
+    StepType?: WorkflowStepType;
+    /**
+     * The values for the key/value pair applied as a tag to the file. Only applicable if the step type is TAG.
+     */
+    Outputs?: StepResultOutputsJson;
+    /**
+     * Specifies the details for an error, if it occurred during execution of the specified workfow step.
+     */
+    Error?: ExecutionError;
+  }
+  export type ExecutionStepResults = ExecutionStepResult[];
   export type ExternalId = string;
+  export interface FileLocation {
+    /**
+     * Specifies the S3 details for the file being used, such as bucket, Etag, and so forth.
+     */
+    S3FileLocation?: S3FileLocation;
+    /**
+     * Specifies the Amazon EFS ID and the path for the file being used.
+     */
+    EfsFileLocation?: EfsFileLocation;
+  }
   export type Fips = boolean;
   export type HomeDirectory = string;
   export interface HomeDirectoryMapEntry {
@@ -713,6 +992,16 @@ declare namespace Transfer {
      */
     UserName: UserName;
   }
+  export interface InputFileLocation {
+    /**
+     * Specifies the details for the S3 file being copied.
+     */
+    S3FileLocation?: S3InputFileLocation;
+    /**
+     * Specifies the details for the Amazon EFS file being copied.
+     */
+    EfsFileLocation?: EfsFileLocation;
+  }
   export interface ListAccessesRequest {
     /**
      * Specifies the maximum number of access SIDs to return.
@@ -740,6 +1029,34 @@ declare namespace Transfer {
      * Returns the accesses and their properties for the ServerId value that you specify.
      */
     Accesses: ListedAccesses;
+  }
+  export interface ListExecutionsRequest {
+    /**
+     * Specifies the aximum number of executions to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     *  ListExecutions returns the NextToken parameter in the output. You can then pass the NextToken parameter in a subsequent command to continue listing additional executions.  This is useful for pagination, for instance. If you have 100 executions for a workflow, you might only want to list first 10. If so, callthe API by specifing the max-results:   aws transfer list-executions --max-results 10   This returns details for the first 10 executions, as well as the pointer (NextToken) to the eleventh execution. You can now call the API again, suppling the NextToken value you received:   aws transfer list-executions --max-results 10 --next-token $somePointerReturnedFromPreviousListResult   This call returns the next 10 executions, the 11th through the 20th. You can then repeat the call until the details for all 100 executions have been returned. 
+     */
+    NextToken?: NextToken;
+    /**
+     * A unique identifier for the workflow.
+     */
+    WorkflowId: WorkflowId;
+  }
+  export interface ListExecutionsResponse {
+    /**
+     *  ListExecutions returns the NextToken parameter in the output. You can then pass the NextToken parameter in a subsequent command to continue listing additional executions.
+     */
+    NextToken?: NextToken;
+    /**
+     * A unique identifier for the workflow.
+     */
+    WorkflowId: WorkflowId;
+    /**
+     * Returns the details for each execution.    NextToken: returned from a call to several APIs, you can use pass it to a subsequent command to continue listing additional executions.    StartTime: timestamp indicating when the execution began.    Executions: details of the execution, including the execution ID, initial file location, and Service metadata.    Status: one of the following values: IN_PROGRESS, COMPLETED, EXCEPTION, HANDLING_EXEPTION.   
+     */
+    Executions: ListedExecutions;
   }
   export interface ListSecurityPoliciesRequest {
     /**
@@ -837,13 +1154,33 @@ declare namespace Transfer {
      */
     Users: ListedUsers;
   }
+  export interface ListWorkflowsRequest {
+    /**
+     * Specifies the maximum number of workflows to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     *  ListWorkflows returns the NextToken parameter in the output. You can then pass the NextToken parameter in a subsequent command to continue listing additional workflows.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListWorkflowsResponse {
+    /**
+     *  ListWorkflows returns the NextToken parameter in the output. You can then pass the NextToken parameter in a subsequent command to continue listing additional workflows.
+     */
+    NextToken?: NextToken;
+    /**
+     * Returns the Arn, WorkflowId, and Description for each workflow.
+     */
+    Workflows: ListedWorkflows;
+  }
   export interface ListedAccess {
     /**
      * The landing directory (folder) for a user when they log in to the server using the client. A HomeDirectory example is /bucket_name/home/mydirectory.
      */
     HomeDirectory?: HomeDirectory;
     /**
-     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
+     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
@@ -856,6 +1193,25 @@ declare namespace Transfer {
     ExternalId?: ExternalId;
   }
   export type ListedAccesses = ListedAccess[];
+  export interface ListedExecution {
+    /**
+     * A unique identifier for the execution of a workflow.
+     */
+    ExecutionId?: ExecutionId;
+    /**
+     * A structure that describes the Amazon S3 or EFS file location. This is the file location when the execution begins: if the file is being copied, this is the initial (as opposed to destination) file location.
+     */
+    InitialFileLocation?: FileLocation;
+    /**
+     * A container object for the session details associated with a workflow.
+     */
+    ServiceMetadata?: ServiceMetadata;
+    /**
+     * The status is one of the execution. Can be in progress, completed, exception encountered, or handling the exception.
+     */
+    Status?: ExecutionStatus;
+  }
+  export type ListedExecutions = ListedExecution[];
   export interface ListedServer {
     /**
      * Specifies the unique Amazon Resource Name (ARN) for a server to be listed.
@@ -901,7 +1257,7 @@ declare namespace Transfer {
      */
     HomeDirectory?: HomeDirectory;
     /**
-     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
+     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
@@ -918,12 +1274,40 @@ declare namespace Transfer {
     UserName?: UserName;
   }
   export type ListedUsers = ListedUser[];
+  export interface ListedWorkflow {
+    /**
+     * A unique identifier for the workflow.
+     */
+    WorkflowId?: WorkflowId;
+    /**
+     * Specifies the text description for the workflow.
+     */
+    Description?: WorkflowDescription;
+    /**
+     * Specifies the unique Amazon Resource Name (ARN) for the workflow.
+     */
+    Arn?: Arn;
+  }
+  export type ListedWorkflows = ListedWorkflow[];
+  export type LogGroupName = string;
+  export interface LoggingConfiguration {
+    /**
+     * Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that allows a server to turn on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, user activity can be viewed in your CloudWatch logs.
+     */
+    LoggingRole?: Role;
+    /**
+     * The name of the CloudWatch logging group for the Amazon Web Services Transfer server to which this workflow belongs.
+     */
+    LogGroupName?: LogGroupName;
+  }
   export type MapEntry = string;
   export type MapTarget = string;
   export type MaxResults = number;
   export type Message = string;
   export type NextToken = string;
   export type NullableRole = string;
+  export type OnUploadWorkflowDetails = WorkflowDetail[];
+  export type OverwriteExisting = "TRUE"|"FALSE"|string;
   export type PassiveIp = string;
   export type Policy = string;
   export type PosixId = number;
@@ -944,13 +1328,58 @@ declare namespace Transfer {
   export type Protocol = "SFTP"|"FTP"|"FTPS"|string;
   export interface ProtocolDetails {
     /**
-     *  Indicates passive mode, for FTP and FTPS protocols. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. For example:    aws transfer update-server --protocol-details PassiveIp=0.0.0.0   Replace  0.0.0.0  in the example above with the actual IP address you want to use.
+     *  Indicates passive mode, for FTP and FTPS protocols. Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer. For example:    aws transfer update-server --protocol-details PassiveIp=0.0.0.0   Replace  0.0.0.0  in the example above with the actual IP address you want to use.   If you change the PassiveIp value, you must stop and then restart your Transfer server for the change to take effect. For details on using Passive IP (PASV) in a NAT environment, see Configuring your FTPS server behind a firewall or NAT with Amazon Web Services Transfer Family.  
      */
     PassiveIp?: PassiveIp;
   }
   export type Protocols = Protocol[];
   export type Response = string;
   export type Role = string;
+  export type S3Bucket = string;
+  export type S3Etag = string;
+  export interface S3FileLocation {
+    /**
+     * Specifies the S3 bucket that contains the file being used.
+     */
+    Bucket?: S3Bucket;
+    /**
+     * The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+     */
+    Key?: S3Key;
+    /**
+     * Specifies the file version.
+     */
+    VersionId?: S3VersionId;
+    /**
+     * The entity tag is a hash of the object. The ETag reflects changes only to the contents of an object, not its metadata.
+     */
+    Etag?: S3Etag;
+  }
+  export interface S3InputFileLocation {
+    /**
+     * Specifies the S3 bucket that contains the file being copied.
+     */
+    Bucket?: S3Bucket;
+    /**
+     * The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+     */
+    Key?: S3Key;
+  }
+  export type S3Key = string;
+  export interface S3Tag {
+    /**
+     * The name assigned to the tag that you create.
+     */
+    Key: S3TagKey;
+    /**
+     * The value that corresponds to the key.
+     */
+    Value: S3TagValue;
+  }
+  export type S3TagKey = string;
+  export type S3TagValue = string;
+  export type S3Tags = S3Tag[];
+  export type S3VersionId = string;
   export type SecondaryGids = PosixId[];
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
@@ -958,7 +1387,34 @@ declare namespace Transfer {
   export type SecurityPolicyNames = SecurityPolicyName[];
   export type SecurityPolicyOption = string;
   export type SecurityPolicyOptions = SecurityPolicyOption[];
+  export interface SendWorkflowStepStateRequest {
+    /**
+     * A unique identifier for the workflow.
+     */
+    WorkflowId: WorkflowId;
+    /**
+     * A unique identifier for the execution of a workflow.
+     */
+    ExecutionId: ExecutionId;
+    /**
+     * Used to distinguish between multiple callbacks for multiple Lambda steps within the same execution.
+     */
+    Token: CallbackToken;
+    /**
+     * Indicates whether the specified step succeeded or failed.
+     */
+    Status: CustomStepStatus;
+  }
+  export interface SendWorkflowStepStateResponse {
+  }
   export type ServerId = string;
+  export interface ServiceMetadata {
+    /**
+     * The Server ID (ServerId), Session ID (SessionId) and user (UserName) make up the UserDetails.
+     */
+    UserDetails: UserDetails;
+  }
+  export type SessionId = string;
   export type SourceIp = string;
   export interface SshPublicKey {
     /**
@@ -986,6 +1442,7 @@ declare namespace Transfer {
   }
   export type State = "OFFLINE"|"ONLINE"|"STARTING"|"STOPPING"|"START_FAILED"|"STOP_FAILED"|string;
   export type StatusCode = number;
+  export type StepResultOutputsJson = string;
   export interface StopServerRequest {
     /**
      * A system-assigned unique identifier for a server that you stopped.
@@ -1015,6 +1472,16 @@ declare namespace Transfer {
      * Key-value pairs assigned to ARNs that you can use to group and search for resources by type. You can attach this metadata to user accounts for any purpose.
      */
     Tags: Tags;
+  }
+  export interface TagStepDetails {
+    /**
+     * The name of the step, used as an identifier.
+     */
+    Name?: WorkflowStepName;
+    /**
+     * Array that contains from 1 to 10 key/value pairs.
+     */
+    Tags?: S3Tags;
   }
   export type TagValue = string;
   export type Tags = Tag[];
@@ -1074,15 +1541,15 @@ declare namespace Transfer {
      */
     HomeDirectory?: HomeDirectory;
     /**
-     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
+     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]  In most cases, you can use this value instead of the scope-down policy to lock down your user to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ]   If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api or efsapi call instead of s3 or efs so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder. 
+     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]  In most cases, you can use this value instead of the session policy to lock down your user to the designated home directory ("chroot"). To do this, you can set Entry to / and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ]   If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api or efsapi call instead of s3 or efs so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder. 
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
-     * A scope-down policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  This only applies when domain of ServerId is S3. Amazon EFS does not use scope down policy. For scope-down policies, Amazon Web ServicesTransfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the Policy argument. For an example of a scope-down policy, see Example scope-down policy. For more information, see AssumeRole in the Amazon Web ServicesSecurity Token Service API Reference. 
+     * A session policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  This only applies when the domain of ServerId is S3. EFS does not use session policies. For session policies, Amazon Web Services Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the Policy argument. For an example of a session policy, see Example session policy. For more information, see AssumeRole in the Amazon Web ServicesSecurity Token Service API Reference. 
      */
     Policy?: Policy;
     PosixProfile?: PosixProfile;
@@ -1150,6 +1617,10 @@ declare namespace Transfer {
      * A system-assigned unique identifier for a server instance that the user account is assigned to.
      */
     ServerId: ServerId;
+    /**
+     * Specifies the workflow ID for the workflow to assign and the execution role used for executing the workflow.
+     */
+    WorkflowDetails?: WorkflowDetails;
   }
   export interface UpdateServerResponse {
     /**
@@ -1163,15 +1634,15 @@ declare namespace Transfer {
      */
     HomeDirectory?: HomeDirectory;
     /**
-     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you will need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
+     * The type of landing directory (folder) you want your users' home directory to be when they log into the server. If you set it to PATH, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients. If you set it LOGICAL, you need to provide mappings in the HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to your users.
      */
     HomeDirectoryType?: HomeDirectoryType;
     /**
-     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]  In most cases, you can use this value instead of the scope-down policy to lock down your user to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ]   If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api or efsapi call instead of s3 or efs so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder. 
+     * Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should be visible to your user and how you want to make them visible. You must specify the Entry and Target pair, where Entry shows how the path is made visible and Target is the actual Amazon S3 or Amazon EFS path. If you only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity and Access Management (IAM) role provides access to paths in Target. This value can only be set when HomeDirectoryType is set to LOGICAL. The following is an Entry and Target pair example.  [ { "Entry": "your-personal-report.pdf", "Target": "/bucket3/customized-reports/${transfer:UserName}.pdf" } ]  In most cases, you can use this value instead of the session policy to lock down your user to the designated home directory ("chroot"). To do this, you can set Entry to '/' and set Target to the HomeDirectory parameter value. The following is an Entry and Target pair example for chroot.  [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ]   If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place holders for your directory. If using the CLI, use the s3api or efsapi call instead of s3 or efs so you can use the put-object operation. For example, you use the following: aws s3api put-object --bucket bucketname --key path/to/folder/. Make sure that the end of the key name ends in a / for it to be considered a folder. 
      */
     HomeDirectoryMappings?: HomeDirectoryMappings;
     /**
-     * A scope-down policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  This only applies when domain of ServerId is S3. Amazon EFS does not use scope-down policies. For scope-down policies, Amazon Web ServicesTransfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the Policy argument. For an example of a scope-down policy, see Creating a scope-down policy. For more information, see AssumeRole in the Amazon Web Services Security Token Service API Reference. 
+     * A session policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.  This only applies when the domain of ServerId is S3. EFS does not use session policies. For session policies, Amazon Web Services Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the Policy argument. For an example of a session policy, see Creating a session policy. For more information, see AssumeRole in the Amazon Web Services Security Token Service API Reference. 
      */
     Policy?: Policy;
     /**
@@ -1203,10 +1674,67 @@ declare namespace Transfer {
   }
   export type Url = string;
   export type UserCount = number;
+  export interface UserDetails {
+    /**
+     * A unique string that identifies a user account associated with a server.
+     */
+    UserName: UserName;
+    /**
+     * The system-assigned unique identifier for a Transfer server instance. 
+     */
+    ServerId: ServerId;
+    /**
+     * The system-assigned unique identifier for a session that corresponds to the workflow.
+     */
+    SessionId?: SessionId;
+  }
   export type UserName = string;
   export type UserPassword = string;
   export type VpcEndpointId = string;
   export type VpcId = string;
+  export type WorkflowDescription = string;
+  export interface WorkflowDetail {
+    /**
+     * A unique identifier for the workflow.
+     */
+    WorkflowId: WorkflowId;
+    /**
+     * Includes the necessary permissions for S3, EFS, and Lambda operations that Transfer can assume, so that all workflow steps can operate on the required resources
+     */
+    ExecutionRole: Role;
+  }
+  export interface WorkflowDetails {
+    /**
+     * A trigger that starts a workflow: the workflow begins to execute after a file is uploaded.
+     */
+    OnUpload: OnUploadWorkflowDetails;
+  }
+  export type WorkflowId = string;
+  export interface WorkflowStep {
+    /**
+     *  Currently, the following step types are supported.     Copy: copy the file to another location    Custom: custom step with a lambda target    Delete: delete the file    Tag: add a tag to the file  
+     */
+    Type?: WorkflowStepType;
+    /**
+     * Details for a step that performs a file copy.  Consists of the following values:    A description   An S3 or EFS location for the destination of the file copy.   A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.  
+     */
+    CopyStepDetails?: CopyStepDetails;
+    /**
+     * Details for a step that invokes a lambda function.  Consists of the lambda function name, target, and timeout (in seconds). 
+     */
+    CustomStepDetails?: CustomStepDetails;
+    /**
+     * You need to specify the name of the file to be deleted.
+     */
+    DeleteStepDetails?: DeleteStepDetails;
+    /**
+     * Details for a step that creates one or more tags. You specify one or more tags: each tag contains a key/value pair.
+     */
+    TagStepDetails?: TagStepDetails;
+  }
+  export type WorkflowStepName = string;
+  export type WorkflowStepType = "COPY"|"CUSTOM"|"TAG"|"DELETE"|string;
+  export type WorkflowSteps = WorkflowStep[];
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

@@ -13,11 +13,11 @@ declare class ACMPCA extends Service {
   constructor(options?: ACMPCA.Types.ClientConfiguration)
   config: Config & ACMPCA.Types.ClientConfiguration;
   /**
-   * Creates a root or subordinate private certificate authority (CA). You must specify the CA configuration, the certificate revocation list (CRL) configuration, the CA type, and an optional idempotency token to avoid accidental creation of multiple CAs. The CA configuration specifies the name of the algorithm and key size to be used to create the CA private key, the type of signing algorithm that the CA uses, and X.500 subject information. The CRL configuration specifies the CRL expiration period in days (the validity period of the CRL), the Amazon S3 bucket that will contain the CRL, and a CNAME alias for the S3 bucket that is included in certificates issued by the CA. If successful, this action returns the Amazon Resource Name (ARN) of the CA. ACM Private CA assets that are stored in Amazon S3 can be protected with encryption. For more information, see Encrypting Your CRLs.  Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see Configure Access to ACM Private CA. 
+   * Creates a root or subordinate private certificate authority (CA). You must specify the CA configuration, an optional configuration for Online Certificate Status Protocol (OCSP) and/or a certificate revocation list (CRL), the CA type, and an optional idempotency token to avoid accidental creation of multiple CAs. The CA configuration specifies the name of the algorithm and key size to be used to create the CA private key, the type of signing algorithm that the CA uses, and X.500 subject information. The OCSP configuration can optionally specify a custom URL for the OCSP responder. The CRL configuration specifies the CRL expiration period in days (the validity period of the CRL), the Amazon S3 bucket that will contain the CRL, and a CNAME alias for the S3 bucket that is included in certificates issued by the CA. If successful, this action returns the Amazon Resource Name (ARN) of the CA. ACM Private CA assets that are stored in Amazon S3 can be protected with encryption. For more information, see Encrypting Your CRLs.  Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see Configure Access to ACM Private CA. 
    */
   createCertificateAuthority(params: ACMPCA.Types.CreateCertificateAuthorityRequest, callback?: (err: AWSError, data: ACMPCA.Types.CreateCertificateAuthorityResponse) => void): Request<ACMPCA.Types.CreateCertificateAuthorityResponse, AWSError>;
   /**
-   * Creates a root or subordinate private certificate authority (CA). You must specify the CA configuration, the certificate revocation list (CRL) configuration, the CA type, and an optional idempotency token to avoid accidental creation of multiple CAs. The CA configuration specifies the name of the algorithm and key size to be used to create the CA private key, the type of signing algorithm that the CA uses, and X.500 subject information. The CRL configuration specifies the CRL expiration period in days (the validity period of the CRL), the Amazon S3 bucket that will contain the CRL, and a CNAME alias for the S3 bucket that is included in certificates issued by the CA. If successful, this action returns the Amazon Resource Name (ARN) of the CA. ACM Private CA assets that are stored in Amazon S3 can be protected with encryption. For more information, see Encrypting Your CRLs.  Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see Configure Access to ACM Private CA. 
+   * Creates a root or subordinate private certificate authority (CA). You must specify the CA configuration, an optional configuration for Online Certificate Status Protocol (OCSP) and/or a certificate revocation list (CRL), the CA type, and an optional idempotency token to avoid accidental creation of multiple CAs. The CA configuration specifies the name of the algorithm and key size to be used to create the CA private key, the type of signing algorithm that the CA uses, and X.500 subject information. The OCSP configuration can optionally specify a custom URL for the OCSP responder. The CRL configuration specifies the CRL expiration period in days (the validity period of the CRL), the Amazon S3 bucket that will contain the CRL, and a CNAME alias for the S3 bucket that is included in certificates issued by the CA. If successful, this action returns the Amazon Resource Name (ARN) of the CA. ACM Private CA assets that are stored in Amazon S3 can be protected with encryption. For more information, see Encrypting Your CRLs.  Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see Configure Access to ACM Private CA. 
    */
   createCertificateAuthority(callback?: (err: AWSError, data: ACMPCA.Types.CreateCertificateAuthorityResponse) => void): Request<ACMPCA.Types.CreateCertificateAuthorityResponse, AWSError>;
   /**
@@ -366,7 +366,7 @@ declare namespace ACMPCA {
      */
     CertificateAuthorityConfiguration?: CertificateAuthorityConfiguration;
     /**
-     * Information about the certificate revocation list (CRL) created and maintained by your private CA. 
+     * Information about the Online Certificate Status Protocol (OCSP) configuration or certificate revocation list (CRL) created and maintained by your private CA. 
      */
     RevocationConfiguration?: RevocationConfiguration;
     /**
@@ -434,7 +434,7 @@ declare namespace ACMPCA {
      */
     CertificateAuthorityConfiguration: CertificateAuthorityConfiguration;
     /**
-     * Contains a Boolean value that you can use to enable a certification revocation list (CRL) for the CA, the name of the S3 bucket to which ACM Private CA will write the CRL, and an optional CNAME alias that you can use to hide the name of your bucket in the CRL Distribution Points extension of your CA certificate. For more information, see the CrlConfiguration structure. 
+     * Contains information to enable Online Certificate Status Protocol (OCSP) support, to enable a certificate revocation list (CRL), to enable both, or to enable neither. The default is for both certificate validation mechanisms to be disabled. For more information, see the OcspConfiguration and CrlConfiguration types.
      */
     RevocationConfiguration?: RevocationConfiguration;
     /**
@@ -492,7 +492,7 @@ declare namespace ACMPCA {
      */
     CustomCname?: String253;
     /**
-     * Name of the S3 bucket that contains the CRL. If you do not provide a value for the CustomCname argument, the name of your S3 bucket is placed into the CRL Distribution Points extension of the issued certificate. You can change the name of your bucket by calling the UpdateCertificateAuthority action. You must specify a bucket policy that allows ACM Private CA to write the CRL to your bucket.
+     * Name of the S3 bucket that contains the CRL. If you do not provide a value for the CustomCname argument, the name of your S3 bucket is placed into the CRL Distribution Points extension of the issued certificate. You can change the name of your bucket by calling the UpdateCertificateAuthority operation. You must specify a bucket policy that allows ACM Private CA to write the CRL to your bucket.
      */
     S3BucketName?: String3To255;
     /**
@@ -883,6 +883,16 @@ declare namespace ACMPCA {
   }
   export type MaxResults = number;
   export type NextToken = string;
+  export interface OcspConfiguration {
+    /**
+     * Flag enabling use of the Online Certificate Status Protocol (OCSP) for validating certificate revocation status.
+     */
+    Enabled: Boolean;
+    /**
+     * By default, ACM Private CA injects an AWS domain into certificates being validated by the Online Certificate Status Protocol (OCSP). A customer can alternatively use this object to define a CNAME specifying a customized OCSP domain. Note: The value of the CNAME must not include a protocol prefix such as "http://" or "https://". For more information, see Customizing Online Certificate Status Protocol (OCSP)  in the AWS Certificate Manager Private Certificate Authority (PCA) User Guide.
+     */
+    OcspCustomCname?: String253;
+  }
   export interface OtherName {
     /**
      * Specifies an OID. 
@@ -970,9 +980,13 @@ declare namespace ACMPCA {
   }
   export interface RevocationConfiguration {
     /**
-     * Configuration of the certificate revocation list (CRL), if any, maintained by your private CA.
+     * Configuration of the certificate revocation list (CRL), if any, maintained by your private CA. A CRL is typically updated approximately 30 minutes after a certificate is revoked. If for any reason a CRL update fails, ACM Private CA makes further attempts every 15 minutes.
      */
     CrlConfiguration?: CrlConfiguration;
+    /**
+     * Configuration of Online Certificate Status Protocol (OCSP) support, if any, maintained by your private CA. When you revoke a certificate, OCSP responses may take up to 60 minutes to reflect the new status.
+     */
+    OcspConfiguration?: OcspConfiguration;
   }
   export type RevocationReason = "UNSPECIFIED"|"KEY_COMPROMISE"|"CERTIFICATE_AUTHORITY_COMPROMISE"|"AFFILIATION_CHANGED"|"SUPERSEDED"|"CESSATION_OF_OPERATION"|"PRIVILEGE_WITHDRAWN"|"A_A_COMPROMISE"|string;
   export interface RevokeCertificateRequest {
@@ -1044,7 +1058,7 @@ declare namespace ACMPCA {
      */
     CertificateAuthorityArn: Arn;
     /**
-     * Revocation information for your private CA.
+     * Contains information to enable Online Certificate Status Protocol (OCSP) support, to enable a certificate revocation list (CRL), to enable both, or to enable neither. If this parameter is not supplied, existing capibilites remain unchanged. For more information, see the OcspConfiguration and CrlConfiguration types.
      */
     RevocationConfiguration?: RevocationConfiguration;
     /**

@@ -543,6 +543,17 @@ declare namespace SecurityHub {
     Description: NonEmptyString;
   }
   export type ActionTargetList = ActionTarget[];
+  export interface Adjustment {
+    /**
+     * The metric to adjust.
+     */
+    Metric?: NonEmptyString;
+    /**
+     * The reason for the adjustment.
+     */
+    Reason?: NonEmptyString;
+  }
+  export type AdjustmentList = Adjustment[];
   export interface AdminAccount {
     /**
      * The Amazon Web Services account identifier of the Security Hub administrator account.
@@ -937,6 +948,131 @@ declare namespace SecurityHub {
      */
     CreatedTime?: NonEmptyString;
   }
+  export interface AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails {
+    /**
+     * The device name that is exposed to the EC2 instance. For example, /dev/sdh or xvdh.
+     */
+    DeviceName?: NonEmptyString;
+    /**
+     * Parameters that are used to automatically set up Amazon EBS volumes when an instance is launched.
+     */
+    Ebs?: AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails;
+    /**
+     * Whether to suppress the device that is included in the block device mapping of the Amazon Machine Image (AMI). If NoDevice is true, then you cannot specify Ebs.&gt;
+     */
+    NoDevice?: Boolean;
+    /**
+     * The name of the virtual device (for example, ephemeral0). You can provide either VirtualName or Ebs, but not both.
+     */
+    VirtualName?: NonEmptyString;
+  }
+  export interface AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails {
+    /**
+     * Whether to delete the volume when the instance is terminated.
+     */
+    DeleteOnTermination?: Boolean;
+    /**
+     * Whether to encrypt the volume.
+     */
+    Encrypted?: Boolean;
+    /**
+     * The number of input/output (I/O) operations per second (IOPS) to provision for the volume. Only supported for gp3 or io1 volumes. Required for io1 volumes. Not used with standard, gp2, st1, or sc1 volumes.
+     */
+    Iops?: Integer;
+    /**
+     * The snapshot ID of the volume to use. You must specify either VolumeSize or SnapshotId.
+     */
+    SnapshotId?: NonEmptyString;
+    /**
+     * The volume size, in GiBs. The following are the supported volumes sizes for each volume type:   gp2 and gp3: 1-16,384   io1: 4-16,384   st1 and sc1: 125-16,384   standard: 1-1,024   You must specify either SnapshotId or VolumeSize. If you specify both SnapshotId and VolumeSize, the volume size must be equal or greater than the size of the snapshot.
+     */
+    VolumeSize?: Integer;
+    /**
+     * The volume type.
+     */
+    VolumeType?: NonEmptyString;
+  }
+  export type AwsAutoScalingLaunchConfigurationBlockDeviceMappingsList = AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails[];
+  export interface AwsAutoScalingLaunchConfigurationDetails {
+    /**
+     * For Auto Scaling groups that run in a VPC, specifies whether to assign a public IP address to the group's instances.
+     */
+    AssociatePublicIpAddress?: Boolean;
+    /**
+     * Specifies the block devices for the instance.
+     */
+    BlockDeviceMappings?: AwsAutoScalingLaunchConfigurationBlockDeviceMappingsList;
+    /**
+     * The identifier of a ClassicLink-enabled VPC that EC2-Classic instances are linked to.
+     */
+    ClassicLinkVpcId?: NonEmptyString;
+    /**
+     * The identifiers of one or more security groups for the VPC that is specified in ClassicLinkVPCId.
+     */
+    ClassicLinkVpcSecurityGroups?: NonEmptyStringList;
+    /**
+     * The creation date and time for the launch configuration. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    CreatedTime?: NonEmptyString;
+    /**
+     * Whether the launch configuration is optimized for Amazon EBS I/O.
+     */
+    EbsOptimized?: Boolean;
+    /**
+     * The name or the ARN of the instance profile associated with the IAM role for the instance. The instance profile contains the IAM role.
+     */
+    IamInstanceProfile?: NonEmptyString;
+    /**
+     * The identifier of the Amazon Machine Image (AMI) that is used to launch EC2 instances.
+     */
+    ImageId?: NonEmptyString;
+    /**
+     * Indicates the type of monitoring for instances in the group.
+     */
+    InstanceMonitoring?: AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails;
+    /**
+     * The instance type for the instances.
+     */
+    InstanceType?: NonEmptyString;
+    /**
+     * The identifier of the kernel associated with the AMI.
+     */
+    KernelId?: NonEmptyString;
+    /**
+     * The name of the key pair.
+     */
+    KeyName?: NonEmptyString;
+    /**
+     * The name of the launch configuration.
+     */
+    LaunchConfigurationName?: NonEmptyString;
+    /**
+     * The tenancy of the instance. An instance with dedicated tenancy runs on isolated, single-tenant hardware and can only be launched into a VPC.
+     */
+    PlacementTenancy?: NonEmptyString;
+    /**
+     * The identifier of the RAM disk associated with the AMI.
+     */
+    RamdiskId?: NonEmptyString;
+    /**
+     * The security groups to assign to the instances in the Auto Scaling group.
+     */
+    SecurityGroups?: NonEmptyStringList;
+    /**
+     * The maximum hourly price to be paid for any Spot Instance that is launched to fulfill the request.
+     */
+    SpotPrice?: NonEmptyString;
+    /**
+     * The user data to make available to the launched EC2 instances. Must be base64-encoded text.
+     */
+    UserData?: NonEmptyString;
+  }
+  export interface AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails {
+    /**
+     * If set to true, then instances in the group launch with detailed monitoring. If set to false, then instances in the group launch with basic monitoring.
+     */
+    Enabled?: Boolean;
+  }
   export interface AwsCertificateManagerCertificateDetails {
     /**
      * The ARN of the private certificate authority (CA) that will be used to issue the certificate.
@@ -1322,7 +1458,7 @@ declare namespace SecurityHub {
   }
   export interface AwsCodeBuildProjectDetails {
     /**
-     * The KMS customer master key (CMK) used to encrypt the build output artifacts. You can specify either the ARN of the CMK or, if available, the CMK alias (using the format alias/alias-name). 
+     * The KMS key used to encrypt the build output artifacts. You can specify either the ARN of the KMS key or, if available, the KMS key alias (using the format alias/alias-name). 
      */
     EncryptionKey?: NonEmptyString;
     /**
@@ -1644,7 +1780,7 @@ declare namespace SecurityHub {
      */
     GlobalSecondaryIndexes?: AwsDynamoDbTableReplicaGlobalSecondaryIndexList;
     /**
-     * The identifier of the KMS customer master key (CMK) that will be used for KMS encryption for the replica.
+     * The identifier of the KMS key that will be used for KMS encryption for the replica.
      */
     KmsMasterKeyId?: NonEmptyString;
     /**
@@ -1708,7 +1844,7 @@ declare namespace SecurityHub {
      */
     SseType?: NonEmptyString;
     /**
-     * The ARN of the KMS customer master key (CMK) that is used for the KMS encryption.
+     * The ARN of the KMS key that is used for the KMS encryption.
      */
     KmsMasterKeyArn?: NonEmptyString;
   }
@@ -2182,7 +2318,7 @@ declare namespace SecurityHub {
      */
     Status?: NonEmptyString;
     /**
-     * The ARN of the KMS customer master key (CMK) that was used to protect the volume encryption key for the volume.
+     * The ARN of the KMS key that was used to protect the volume encryption key for the volume.
      */
     KmsKeyId?: NonEmptyString;
     /**
@@ -2207,6 +2343,193 @@ declare namespace SecurityHub {
      * The current state of the VPC.
      */
     State?: NonEmptyString;
+  }
+  export interface AwsEc2VpnConnectionDetails {
+    /**
+     * The identifier of the VPN connection.
+     */
+    VpnConnectionId?: NonEmptyString;
+    /**
+     * The current state of the VPN connection.
+     */
+    State?: NonEmptyString;
+    /**
+     * The identifier of the customer gateway that is at your end of the VPN connection.
+     */
+    CustomerGatewayId?: NonEmptyString;
+    /**
+     * The configuration information for the VPN connection's customer gateway, in the native XML format.
+     */
+    CustomerGatewayConfiguration?: NonEmptyString;
+    /**
+     * The type of VPN connection.
+     */
+    Type?: NonEmptyString;
+    /**
+     * The identifier of the virtual private gateway that is at the Amazon Web Services side of the VPN connection.
+     */
+    VpnGatewayId?: NonEmptyString;
+    /**
+     * The category of the VPN connection. VPN indicates an Amazon Web Services VPN connection. VPN-Classic indicates an Amazon Web Services Classic VPN connection.
+     */
+    Category?: NonEmptyString;
+    /**
+     * Information about the VPN tunnel.
+     */
+    VgwTelemetry?: AwsEc2VpnConnectionVgwTelemetryList;
+    /**
+     * The VPN connection options.
+     */
+    Options?: AwsEc2VpnConnectionOptionsDetails;
+    /**
+     * The static routes that are associated with the VPN connection.
+     */
+    Routes?: AwsEc2VpnConnectionRoutesList;
+    /**
+     * The identifier of the transit gateway that is associated with the VPN connection.
+     */
+    TransitGatewayId?: NonEmptyString;
+  }
+  export interface AwsEc2VpnConnectionOptionsDetails {
+    /**
+     * Whether the VPN connection uses static routes only.
+     */
+    StaticRoutesOnly?: Boolean;
+    /**
+     * The VPN tunnel options.
+     */
+    TunnelOptions?: AwsEc2VpnConnectionOptionsTunnelOptionsList;
+  }
+  export interface AwsEc2VpnConnectionOptionsTunnelOptionsDetails {
+    /**
+     * The number of seconds after which a Dead Peer Detection (DPD) timeout occurs.
+     */
+    DpdTimeoutSeconds?: Integer;
+    /**
+     * The Internet Key Exchange (IKE) versions that are permitted for the VPN tunnel.
+     */
+    IkeVersions?: NonEmptyStringList;
+    /**
+     * The external IP address of the VPN tunnel.
+     */
+    OutsideIpAddress?: NonEmptyString;
+    /**
+     * The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 1 IKE negotiations.
+     */
+    Phase1DhGroupNumbers?: IntegerList;
+    /**
+     * The permitted encryption algorithms for the VPN tunnel for phase 1 IKE negotiations.
+     */
+    Phase1EncryptionAlgorithms?: NonEmptyStringList;
+    /**
+     * The permitted integrity algorithms for the VPN tunnel for phase 1 IKE negotiations.
+     */
+    Phase1IntegrityAlgorithms?: NonEmptyStringList;
+    /**
+     * The lifetime for phase 1 of the IKE negotiation, in seconds.
+     */
+    Phase1LifetimeSeconds?: Integer;
+    /**
+     * The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 2 IKE negotiations.
+     */
+    Phase2DhGroupNumbers?: IntegerList;
+    /**
+     * The permitted encryption algorithms for the VPN tunnel for phase 2 IKE negotiations.
+     */
+    Phase2EncryptionAlgorithms?: NonEmptyStringList;
+    /**
+     * The permitted integrity algorithms for the VPN tunnel for phase 2 IKE negotiations.
+     */
+    Phase2IntegrityAlgorithms?: NonEmptyStringList;
+    /**
+     * The lifetime for phase 2 of the IKE negotiation, in seconds.
+     */
+    Phase2LifetimeSeconds?: Integer;
+    /**
+     * The preshared key to establish initial authentication between the virtual private gateway and the customer gateway.
+     */
+    PreSharedKey?: NonEmptyString;
+    /**
+     * The percentage of the rekey window, which is determined by RekeyMarginTimeSeconds during which the rekey time is randomly selected.
+     */
+    RekeyFuzzPercentage?: Integer;
+    /**
+     * The margin time, in seconds, before the phase 2 lifetime expires, during which the Amazon Web Services side of the VPN connection performs an IKE rekey.
+     */
+    RekeyMarginTimeSeconds?: Integer;
+    /**
+     * The number of packets in an IKE replay window.
+     */
+    ReplayWindowSize?: Integer;
+    /**
+     * The range of inside IPv4 addresses for the tunnel.
+     */
+    TunnelInsideCidr?: NonEmptyString;
+  }
+  export type AwsEc2VpnConnectionOptionsTunnelOptionsList = AwsEc2VpnConnectionOptionsTunnelOptionsDetails[];
+  export interface AwsEc2VpnConnectionRoutesDetails {
+    /**
+     * The CIDR block associated with the local subnet of the customer data center.
+     */
+    DestinationCidrBlock?: NonEmptyString;
+    /**
+     * The current state of the static route.
+     */
+    State?: NonEmptyString;
+  }
+  export type AwsEc2VpnConnectionRoutesList = AwsEc2VpnConnectionRoutesDetails[];
+  export interface AwsEc2VpnConnectionVgwTelemetryDetails {
+    /**
+     * The number of accepted routes.
+     */
+    AcceptedRouteCount?: Integer;
+    /**
+     * The ARN of the VPN tunnel endpoint certificate.
+     */
+    CertificateArn?: NonEmptyString;
+    /**
+     * The date and time of the last change in status. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    LastStatusChange?: NonEmptyString;
+    /**
+     * The Internet-routable IP address of the virtual private gateway's outside interface.
+     */
+    OutsideIpAddress?: NonEmptyString;
+    /**
+     * The status of the VPN tunnel.
+     */
+    Status?: NonEmptyString;
+    /**
+     * If an error occurs, a description of the error.
+     */
+    StatusMessage?: NonEmptyString;
+  }
+  export type AwsEc2VpnConnectionVgwTelemetryList = AwsEc2VpnConnectionVgwTelemetryDetails[];
+  export interface AwsEcrContainerImageDetails {
+    /**
+     * The Amazon Web Services account identifier that is associated with the registry that the image belongs to.
+     */
+    RegistryId?: NonEmptyString;
+    /**
+     * The name of the repository that the image belongs to.
+     */
+    RepositoryName?: NonEmptyString;
+    /**
+     * The architecture of the image.
+     */
+    Architecture?: NonEmptyString;
+    /**
+     * The sha256 digest of the image manifest.
+     */
+    ImageDigest?: NonEmptyString;
+    /**
+     * The list of tags that are associated with the image.
+     */
+    ImageTags?: NonEmptyStringList;
+    /**
+     * The date and time when the image was pushed to the repository. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     */
+    ImagePublishedAt?: NonEmptyString;
   }
   export interface AwsEcsClusterClusterSettingsDetails {
     /**
@@ -4042,33 +4365,37 @@ declare namespace SecurityHub {
   export type AwsIamUserPolicyList = AwsIamUserPolicy[];
   export interface AwsKmsKeyDetails {
     /**
-     * The twelve-digit account ID of the Amazon Web Services account that owns the CMK.
+     * The twelve-digit account ID of the Amazon Web Services account that owns the KMS key.
      */
     AWSAccountId?: NonEmptyString;
     /**
-     * Indicates when the CMK was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
+     * Indicates when the KMS key was created. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
      */
     CreationDate?: Double;
     /**
-     * The globally unique identifier for the CMK.
+     * The globally unique identifier for the KMS key.
      */
     KeyId?: NonEmptyString;
     /**
-     * The manager of the CMK. CMKs in your Amazon Web Services account are either customer managed or Amazon Web Services managed.
+     * The manager of the KMS key. KMS keys in your Amazon Web Services account are either customer managed or Amazon Web Services managed.
      */
     KeyManager?: NonEmptyString;
     /**
-     * The state of the CMK.
+     * The state of the KMS key.
      */
     KeyState?: NonEmptyString;
     /**
-     * The source of the CMK's key material. When this value is AWS_KMS, KMS created the key material. When this value is EXTERNAL, the key material was imported from your existing key management infrastructure or the CMK lacks key material. When this value is AWS_CLOUDHSM, the key material was created in the CloudHSM cluster associated with a custom key store.
+     * The source of the KMS key material. When this value is AWS_KMS, KMS created the key material. When this value is EXTERNAL, the key material was imported from your existing key management infrastructure or the KMS key lacks key material. When this value is AWS_CLOUDHSM, the key material was created in the CloudHSM cluster associated with a custom key store.
      */
     Origin?: NonEmptyString;
     /**
      * A description of the key.
      */
     Description?: NonEmptyString;
+    /**
+     * Whether the key has key rotation enabled.
+     */
+    KeyRotationStatus?: Boolean;
   }
   export interface AwsLambdaFunctionCode {
     /**
@@ -4120,7 +4447,7 @@ declare namespace SecurityHub {
      */
     Handler?: NonEmptyString;
     /**
-     * The KMS key that is used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed CMK.
+     * The KMS key that is used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed customer managed key.
      */
     KmsKeyArn?: NonEmptyString;
     /**
@@ -5696,14 +6023,90 @@ declare namespace SecurityHub {
      * Provides information about the Amazon S3 Public Access Block configuration for the S3 bucket.
      */
     PublicAccessBlockConfiguration?: AwsS3AccountPublicAccessBlockDetails;
+    /**
+     * The access control list for the S3 bucket.
+     */
+    AccessControlList?: NonEmptyString;
+    /**
+     * The logging configuration for the S3 bucket.
+     */
+    BucketLoggingConfiguration?: AwsS3BucketLoggingConfiguration;
+    /**
+     * The website configuration parameters for the S3 bucket.
+     */
+    BucketWebsiteConfiguration?: AwsS3BucketWebsiteConfiguration;
+    /**
+     * The notification configuration for the S3 bucket.
+     */
+    BucketNotificationConfiguration?: AwsS3BucketNotificationConfiguration;
   }
+  export interface AwsS3BucketLoggingConfiguration {
+    /**
+     * The name of the S3 bucket where log files for the S3 bucket are stored.
+     */
+    DestinationBucketName?: NonEmptyString;
+    /**
+     * The prefix added to log files for the S3 bucket.
+     */
+    LogFilePrefix?: NonEmptyString;
+  }
+  export interface AwsS3BucketNotificationConfiguration {
+    /**
+     * Configurations for S3 bucket notifications.
+     */
+    Configurations?: AwsS3BucketNotificationConfigurationDetails;
+  }
+  export interface AwsS3BucketNotificationConfigurationDetail {
+    /**
+     * The list of events that trigger a notification.
+     */
+    Events?: AwsS3BucketNotificationConfigurationEvents;
+    /**
+     * The filters that determine which S3 buckets generate notifications.
+     */
+    Filter?: AwsS3BucketNotificationConfigurationFilter;
+    /**
+     * The ARN of the Lambda function, Amazon SQS queue, or Amazon SNS topic that generates the notification.
+     */
+    Destination?: NonEmptyString;
+    /**
+     * Indicates the type of notification. Notifications can be generated using Lambda functions, Amazon SQS queues or Amazon SNS topics.
+     */
+    Type?: NonEmptyString;
+  }
+  export type AwsS3BucketNotificationConfigurationDetails = AwsS3BucketNotificationConfigurationDetail[];
+  export type AwsS3BucketNotificationConfigurationEvents = NonEmptyString[];
+  export interface AwsS3BucketNotificationConfigurationFilter {
+    /**
+     * Details for an Amazon S3 filter.
+     */
+    S3KeyFilter?: AwsS3BucketNotificationConfigurationS3KeyFilter;
+  }
+  export interface AwsS3BucketNotificationConfigurationS3KeyFilter {
+    /**
+     * The filter rules for the filter.
+     */
+    FilterRules?: AwsS3BucketNotificationConfigurationS3KeyFilterRules;
+  }
+  export interface AwsS3BucketNotificationConfigurationS3KeyFilterRule {
+    /**
+     * Indicates whether the filter is based on the prefix or suffix of the Amazon S3 key.
+     */
+    Name?: AwsS3BucketNotificationConfigurationS3KeyFilterRuleName;
+    /**
+     * The filter value.
+     */
+    Value?: NonEmptyString;
+  }
+  export type AwsS3BucketNotificationConfigurationS3KeyFilterRuleName = "Prefix"|"Suffix"|string;
+  export type AwsS3BucketNotificationConfigurationS3KeyFilterRules = AwsS3BucketNotificationConfigurationS3KeyFilterRule[];
   export interface AwsS3BucketServerSideEncryptionByDefault {
     /**
      * Server-side encryption algorithm to use for the default encryption.
      */
     SSEAlgorithm?: NonEmptyString;
     /**
-     * KMS customer master key (CMK) ID to use for the default encryption.
+     * KMS key ID to use for the default encryption.
      */
     KMSMasterKeyID?: NonEmptyString;
   }
@@ -5720,6 +6123,77 @@ declare namespace SecurityHub {
     ApplyServerSideEncryptionByDefault?: AwsS3BucketServerSideEncryptionByDefault;
   }
   export type AwsS3BucketServerSideEncryptionRules = AwsS3BucketServerSideEncryptionRule[];
+  export interface AwsS3BucketWebsiteConfiguration {
+    /**
+     * The name of the error document for the website.
+     */
+    ErrorDocument?: NonEmptyString;
+    /**
+     * The name of the index document for the website.
+     */
+    IndexDocumentSuffix?: NonEmptyString;
+    /**
+     * The redirect behavior for requests to the website.
+     */
+    RedirectAllRequestsTo?: AwsS3BucketWebsiteConfigurationRedirectTo;
+    /**
+     * The rules for applying redirects for requests to the website.
+     */
+    RoutingRules?: AwsS3BucketWebsiteConfigurationRoutingRules;
+  }
+  export interface AwsS3BucketWebsiteConfigurationRedirectTo {
+    /**
+     * The name of the host to redirect requests to.
+     */
+    Hostname?: NonEmptyString;
+    /**
+     * The protocol to use when redirecting requests. By default, uses the same protocol as the original request.
+     */
+    Protocol?: NonEmptyString;
+  }
+  export interface AwsS3BucketWebsiteConfigurationRoutingRule {
+    /**
+     * Provides the condition that must be met in order to apply the routing rule.
+     */
+    Condition?: AwsS3BucketWebsiteConfigurationRoutingRuleCondition;
+    /**
+     * Provides the rules to redirect the request if the condition in Condition is met.
+     */
+    Redirect?: AwsS3BucketWebsiteConfigurationRoutingRuleRedirect;
+  }
+  export interface AwsS3BucketWebsiteConfigurationRoutingRuleCondition {
+    /**
+     * Indicates to redirect the request if the HTTP error code matches this value.
+     */
+    HttpErrorCodeReturnedEquals?: NonEmptyString;
+    /**
+     * Indicates to redirect the request if the key prefix matches this value.
+     */
+    KeyPrefixEquals?: NonEmptyString;
+  }
+  export interface AwsS3BucketWebsiteConfigurationRoutingRuleRedirect {
+    /**
+     * The host name to use in the redirect request.
+     */
+    Hostname?: NonEmptyString;
+    /**
+     * The HTTP redirect code to use in the response.
+     */
+    HttpRedirectCode?: NonEmptyString;
+    /**
+     * The protocol to use to redirect the request. By default, uses the protocol from the original request.
+     */
+    Protocol?: NonEmptyString;
+    /**
+     * The object key prefix to use in the redirect request. Cannot be provided if ReplaceKeyWith is present.
+     */
+    ReplaceKeyPrefixWith?: NonEmptyString;
+    /**
+     * The specific object key to use in the redirect request. Cannot be provided if ReplaceKeyPrefixWith is present.
+     */
+    ReplaceKeyWith?: NonEmptyString;
+  }
+  export type AwsS3BucketWebsiteConfigurationRoutingRules = AwsS3BucketWebsiteConfigurationRoutingRule[];
   export interface AwsS3ObjectDetails {
     /**
      * Indicates when the object was last modified. Uses the date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format. The value cannot contain spaces. For example, 2020-03-22T13:22:13.933Z.
@@ -5742,7 +6216,7 @@ declare namespace SecurityHub {
      */
     ServerSideEncryption?: NonEmptyString;
     /**
-     * The identifier of the KMS symmetric customer managed customer master key (CMK) that was used for the object.
+     * The identifier of the KMS symmetric customer managed key that was used for the object.
      */
     SSEKMSKeyId?: NonEmptyString;
   }
@@ -5756,7 +6230,7 @@ declare namespace SecurityHub {
      */
     RotationOccurredWithinFrequency?: Boolean;
     /**
-     * The ARN, Key ID, or alias of the KMS customer master key (CMK) used to encrypt the SecretString or SecretBinary values for versions of this secret.
+     * The ARN, Key ID, or alias of the KMS key used to encrypt the SecretString or SecretBinary values for versions of this secret.
      */
     KmsKeyId?: NonEmptyString;
     /**
@@ -5800,7 +6274,7 @@ declare namespace SecurityHub {
      */
     ProductArn: NonEmptyString;
     /**
-     * The name of the product that generated the finding. Security Hub populates this attribute automatically for each finding. You cannot update it using BatchImportFindings or BatchUpdateFindings. The exception to this is when you use a custom integration. When you use the Security Hub console to filter findings by product name, you use this attribute. When you use the Security Hub API to filter findings by product name, you use the aws/securityhub/ProductyName attribute under ProductFields. Security Hub does not synchronize those two attributes.
+     * The name of the product that generated the finding. Security Hub populates this attribute automatically for each finding. You cannot update it using BatchImportFindings or BatchUpdateFindings. The exception to this is when you use a custom integration. When you use the Security Hub console to filter findings by product name, you use this attribute. When you use the Security Hub API to filter findings by product name, you use the aws/securityhub/ProductName attribute under ProductFields. Security Hub does not synchronize those two attributes.
      */
     ProductName?: NonEmptyString;
     /**
@@ -6336,7 +6810,7 @@ declare namespace SecurityHub {
   export type AwsSecurityFindingList = AwsSecurityFinding[];
   export interface AwsSnsTopicDetails {
     /**
-     * The ID of an Amazon Web Services managed customer master key (CMK) for Amazon SNS or a custom CMK.
+     * The ID of an Amazon Web Services managed key for Amazon SNS or a customer managed key.
      */
     KmsMasterKeyId?: NonEmptyString;
     /**
@@ -6369,7 +6843,7 @@ declare namespace SecurityHub {
      */
     KmsDataKeyReusePeriodSeconds?: Integer;
     /**
-     * The ID of an Amazon Web Services managed customer master key (CMK) for Amazon SQS or a custom CMK.
+     * The ID of an Amazon Web Services managed key for Amazon SQS or a custom KMS key.
      */
     KmsMasterKeyId?: NonEmptyString;
     /**
@@ -6838,6 +7312,14 @@ declare namespace SecurityHub {
      * The base scoring vector for the CVSS score.
      */
     BaseVector?: NonEmptyString;
+    /**
+     * The origin of the original CVSS score and vector.
+     */
+    Source?: NonEmptyString;
+    /**
+     * Adjustments to the CVSS metrics.
+     */
+    Adjustments?: AdjustmentList;
   }
   export type CvssList = Cvss[];
   export interface DataClassificationDetails {
@@ -7381,6 +7863,7 @@ declare namespace SecurityHub {
     ResultValues: InsightResultValueList;
   }
   export type Integer = number;
+  export type IntegerList = Integer[];
   export type IntegrationType = "SEND_FINDINGS_TO_SECURITY_HUB"|"RECEIVE_FINDINGS_FROM_SECURITY_HUB"|"UPDATE_FINDINGS_IN_SECURITY_HUB"|string;
   export type IntegrationTypeList = IntegrationType[];
   export interface Invitation {
@@ -7981,7 +8464,7 @@ declare namespace SecurityHub {
      */
     IntegrationTypes?: IntegrationTypeList;
     /**
-     * For integrations with Amazon Web Services services, the Amazon Web Services Console URL from which to activate the service. For integrations with third-party products, the Marketplace URL from which to subscribe to or purchase the product.
+     * For integrations with Amazon Web Services services, the Amazon Web Services Console URL from which to activate the service. For integrations with third-party products, the Amazon Web Services Marketplace URL from which to subscribe to or purchase the product.
      */
     MarketplaceUrl?: NonEmptyString;
     /**
@@ -8208,7 +8691,7 @@ declare namespace SecurityHub {
      */
     AwsRedshiftCluster?: AwsRedshiftClusterDetails;
     /**
-     * contains details about a Classic Load Balancer.
+     * Contains details about a Classic Load Balancer.
      */
     AwsElbLoadBalancer?: AwsElbLoadBalancerDetails;
     /**
@@ -8283,6 +8766,18 @@ declare namespace SecurityHub {
      * Details about a service within an ECS cluster.
      */
     AwsEcsService?: AwsEcsServiceDetails;
+    /**
+     * Provides details about a launch configuration.
+     */
+    AwsAutoScalingLaunchConfiguration?: AwsAutoScalingLaunchConfigurationDetails;
+    /**
+     * Details about an EC2 VPN connection.
+     */
+    AwsEc2VpnConnection?: AwsEc2VpnConnectionDetails;
+    /**
+     * information about an Amazon ECR image.
+     */
+    AwsEcrContainerImage?: AwsEcrContainerImageDetails;
   }
   export type ResourceList = Resource[];
   export interface Result {
@@ -8383,6 +8878,14 @@ declare namespace SecurityHub {
      * The architecture used for the software package.
      */
     Architecture?: NonEmptyString;
+    /**
+     * The source of the package.
+     */
+    PackageManager?: NonEmptyString;
+    /**
+     * The file system path to the package manager inventory file.
+     */
+    FilePath?: NonEmptyString;
   }
   export type SoftwarePackageList = SoftwarePackage[];
   export type SortCriteria = SortCriterion[];
@@ -8730,7 +9233,7 @@ declare namespace SecurityHub {
   }
   export interface Workflow {
     /**
-     * The status of the investigation into the finding. The allowed values are the following.    NEW - The initial state of a finding, before it is reviewed. Security Hub also resets the workflow status from NOTIFIED or RESOLVED to NEW in the following cases:    RecordState changes from ARCHIVED to ACTIVE.    ComplianceStatus changes from PASSED to either WARNING, FAILED, or NOT_AVAILABLE.      NOTIFIED - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.    SUPPRESSED - The finding will not be reviewed again and will not be acted upon.    RESOLVED - The finding was reviewed and remediated and is now considered resolved.   
+     * The status of the investigation into the finding. The workflow status is specific to an individual finding. It does not affect the generation of new findings. For example, setting the workflow status to SUPPRESSED or RESOLVED does not prevent a new finding for the same issue. The allowed values are the following.    NEW - The initial state of a finding, before it is reviewed. Security Hub also resets the workflow status from NOTIFIED or RESOLVED to NEW in the following cases:    RecordState changes from ARCHIVED to ACTIVE.    ComplianceStatus changes from PASSED to either WARNING, FAILED, or NOT_AVAILABLE.      NOTIFIED - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.    SUPPRESSED - Indicates that you reviewed the finding and do not believe that any action is needed. The finding is no longer updated.    RESOLVED - The finding was reviewed and remediated and is now considered resolved.   
      */
     Status?: WorkflowStatus;
   }
@@ -8738,7 +9241,7 @@ declare namespace SecurityHub {
   export type WorkflowStatus = "NEW"|"NOTIFIED"|"RESOLVED"|"SUPPRESSED"|string;
   export interface WorkflowUpdate {
     /**
-     * The status of the investigation into the finding. The allowed values are the following.    NEW - The initial state of a finding, before it is reviewed. Security Hub also resets WorkFlowStatus from NOTIFIED or RESOLVED to NEW in the following cases:   The record state changes from ARCHIVED to ACTIVE.   The compliance status changes from PASSED to either WARNING, FAILED, or NOT_AVAILABLE.      NOTIFIED - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.    RESOLVED - The finding was reviewed and remediated and is now considered resolved.    SUPPRESSED - The finding will not be reviewed again and will not be acted upon.  
+     * The status of the investigation into the finding. The workflow status is specific to an individual finding. It does not affect the generation of new findings. For example, setting the workflow status to SUPPRESSED or RESOLVED does not prevent a new finding for the same issue. The allowed values are the following.    NEW - The initial state of a finding, before it is reviewed. Security Hub also resets WorkFlowStatus from NOTIFIED or RESOLVED to NEW in the following cases:   The record state changes from ARCHIVED to ACTIVE.   The compliance status changes from PASSED to either WARNING, FAILED, or NOT_AVAILABLE.      NOTIFIED - Indicates that you notified the resource owner about the security issue. Used when the initial reviewer is not the resource owner, and needs intervention from the resource owner.    RESOLVED - The finding was reviewed and remediated and is now considered resolved.    SUPPRESSED - Indicates that you reviewed the finding and do not believe that any action is needed. The finding is no longer updated.  
      */
     Status?: WorkflowStatus;
   }

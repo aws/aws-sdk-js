@@ -45,6 +45,14 @@ declare class S3Control extends Service {
    */
   createJob(callback?: (err: AWSError, data: S3Control.Types.CreateJobResult) => void): Request<S3Control.Types.CreateJobResult, AWSError>;
   /**
+   * Creates a Multi-Region Access Point and associates it with the specified buckets. For more information about creating Multi-Region Access Points, see Creating Multi-Region Access Points in the Amazon S3 User Guide. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. This request is asynchronous, meaning that you might receive a response before the command has completed. When this request provides a response, it provides a token that you can use to monitor the status of the request with DescribeMultiRegionAccessPointOperation. The following actions are related to CreateMultiRegionAccessPoint:    DeleteMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     GetMultiRegionAccessPoint     ListMultiRegionAccessPoints   
+   */
+  createMultiRegionAccessPoint(params: S3Control.Types.CreateMultiRegionAccessPointRequest, callback?: (err: AWSError, data: S3Control.Types.CreateMultiRegionAccessPointResult) => void): Request<S3Control.Types.CreateMultiRegionAccessPointResult, AWSError>;
+  /**
+   * Creates a Multi-Region Access Point and associates it with the specified buckets. For more information about creating Multi-Region Access Points, see Creating Multi-Region Access Points in the Amazon S3 User Guide. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. This request is asynchronous, meaning that you might receive a response before the command has completed. When this request provides a response, it provides a token that you can use to monitor the status of the request with DescribeMultiRegionAccessPointOperation. The following actions are related to CreateMultiRegionAccessPoint:    DeleteMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     GetMultiRegionAccessPoint     ListMultiRegionAccessPoints   
+   */
+  createMultiRegionAccessPoint(callback?: (err: AWSError, data: S3Control.Types.CreateMultiRegionAccessPointResult) => void): Request<S3Control.Types.CreateMultiRegionAccessPointResult, AWSError>;
+  /**
    * Deletes the specified access point. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to DeleteAccessPoint:    CreateAccessPoint     GetAccessPoint     ListAccessPoints   
    */
   deleteAccessPoint(params: S3Control.Types.DeleteAccessPointRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -93,11 +101,11 @@ declare class S3Control extends Service {
    */
   deleteBucketLifecycleConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This action deletes an Amazon S3 on Outposts bucket policy. To delete an S3 bucket policy, see DeleteBucketPolicy in the Amazon S3 API Reference.   This implementation of the DELETE action uses the policy subresource to delete the policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the root user of the account that owns the bucket, the calling identity must have the s3-outposts:DeleteBucketPolicy permissions on the specified Outposts bucket and belong to the bucket owner's account to use this action. For more information, see Using Amazon S3 on Outposts in Amazon S3 User Guide. If you don't have DeleteBucketPolicy permissions, Amazon S3 returns a 403 Access Denied error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 405 Method Not Allowed error.   As a security precaution, the root user of the account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.  For more information about bucket policies, see Using Bucket Policies and User Policies.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to DeleteBucketPolicy:    GetBucketPolicy     PutBucketPolicy   
+   *  This action deletes an Amazon S3 on Outposts bucket policy. To delete an S3 bucket policy, see DeleteBucketPolicy in the Amazon S3 API Reference.   This implementation of the DELETE action uses the policy subresource to delete the policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the root user of the Amazon Web Services account that owns the bucket, the calling identity must have the s3-outposts:DeleteBucketPolicy permissions on the specified Outposts bucket and belong to the bucket owner's account to use this action. For more information, see Using Amazon S3 on Outposts in Amazon S3 User Guide. If you don't have DeleteBucketPolicy permissions, Amazon S3 returns a 403 Access Denied error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 405 Method Not Allowed error.   As a security precaution, the root user of the Amazon Web Services account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.  For more information about bucket policies, see Using Bucket Policies and User Policies.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to DeleteBucketPolicy:    GetBucketPolicy     PutBucketPolicy   
    */
   deleteBucketPolicy(params: S3Control.Types.DeleteBucketPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This action deletes an Amazon S3 on Outposts bucket policy. To delete an S3 bucket policy, see DeleteBucketPolicy in the Amazon S3 API Reference.   This implementation of the DELETE action uses the policy subresource to delete the policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the root user of the account that owns the bucket, the calling identity must have the s3-outposts:DeleteBucketPolicy permissions on the specified Outposts bucket and belong to the bucket owner's account to use this action. For more information, see Using Amazon S3 on Outposts in Amazon S3 User Guide. If you don't have DeleteBucketPolicy permissions, Amazon S3 returns a 403 Access Denied error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 405 Method Not Allowed error.   As a security precaution, the root user of the account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.  For more information about bucket policies, see Using Bucket Policies and User Policies.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to DeleteBucketPolicy:    GetBucketPolicy     PutBucketPolicy   
+   *  This action deletes an Amazon S3 on Outposts bucket policy. To delete an S3 bucket policy, see DeleteBucketPolicy in the Amazon S3 API Reference.   This implementation of the DELETE action uses the policy subresource to delete the policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the root user of the Amazon Web Services account that owns the bucket, the calling identity must have the s3-outposts:DeleteBucketPolicy permissions on the specified Outposts bucket and belong to the bucket owner's account to use this action. For more information, see Using Amazon S3 on Outposts in Amazon S3 User Guide. If you don't have DeleteBucketPolicy permissions, Amazon S3 returns a 403 Access Denied error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 405 Method Not Allowed error.   As a security precaution, the root user of the Amazon Web Services account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.  For more information about bucket policies, see Using Bucket Policies and User Policies.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to DeleteBucketPolicy:    GetBucketPolicy     PutBucketPolicy   
    */
   deleteBucketPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -117,11 +125,19 @@ declare class S3Control extends Service {
    */
   deleteJobTagging(callback?: (err: AWSError, data: S3Control.Types.DeleteJobTaggingResult) => void): Request<S3Control.Types.DeleteJobTaggingResult, AWSError>;
   /**
-   * Removes the PublicAccessBlock configuration for an account. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     PutPublicAccessBlock   
+   * Deletes a Multi-Region Access Point. This action does not delete the buckets associated with the Multi-Region Access Point, only the Multi-Region Access Point itself. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. This request is asynchronous, meaning that you might receive a response before the command has completed. When this request provides a response, it provides a token that you can use to monitor the status of the request with DescribeMultiRegionAccessPointOperation. The following actions are related to DeleteMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     GetMultiRegionAccessPoint     ListMultiRegionAccessPoints   
+   */
+  deleteMultiRegionAccessPoint(params: S3Control.Types.DeleteMultiRegionAccessPointRequest, callback?: (err: AWSError, data: S3Control.Types.DeleteMultiRegionAccessPointResult) => void): Request<S3Control.Types.DeleteMultiRegionAccessPointResult, AWSError>;
+  /**
+   * Deletes a Multi-Region Access Point. This action does not delete the buckets associated with the Multi-Region Access Point, only the Multi-Region Access Point itself. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. This request is asynchronous, meaning that you might receive a response before the command has completed. When this request provides a response, it provides a token that you can use to monitor the status of the request with DescribeMultiRegionAccessPointOperation. The following actions are related to DeleteMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     GetMultiRegionAccessPoint     ListMultiRegionAccessPoints   
+   */
+  deleteMultiRegionAccessPoint(callback?: (err: AWSError, data: S3Control.Types.DeleteMultiRegionAccessPointResult) => void): Request<S3Control.Types.DeleteMultiRegionAccessPointResult, AWSError>;
+  /**
+   * Removes the PublicAccessBlock configuration for an Amazon Web Services account. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     PutPublicAccessBlock   
    */
   deletePublicAccessBlock(params: S3Control.Types.DeletePublicAccessBlockRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the PublicAccessBlock configuration for an account. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     PutPublicAccessBlock   
+   * Removes the PublicAccessBlock configuration for an Amazon Web Services account. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     PutPublicAccessBlock   
    */
   deletePublicAccessBlock(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -148,6 +164,14 @@ declare class S3Control extends Service {
    * Retrieves the configuration parameters and status for a Batch Operations job. For more information, see S3 Batch Operations in the Amazon S3 User Guide.  Related actions include:    CreateJob     ListJobs     UpdateJobPriority     UpdateJobStatus   
    */
   describeJob(callback?: (err: AWSError, data: S3Control.Types.DescribeJobResult) => void): Request<S3Control.Types.DescribeJobResult, AWSError>;
+  /**
+   * Retrieves the status of an asynchronous request to manage a Multi-Region Access Point. For more information about managing Multi-Region Access Points and how asynchronous requests work, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DeleteMultiRegionAccessPoint     GetMultiRegionAccessPoint     ListMultiRegionAccessPoints   
+   */
+  describeMultiRegionAccessPointOperation(params: S3Control.Types.DescribeMultiRegionAccessPointOperationRequest, callback?: (err: AWSError, data: S3Control.Types.DescribeMultiRegionAccessPointOperationResult) => void): Request<S3Control.Types.DescribeMultiRegionAccessPointOperationResult, AWSError>;
+  /**
+   * Retrieves the status of an asynchronous request to manage a Multi-Region Access Point. For more information about managing Multi-Region Access Points and how asynchronous requests work, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DeleteMultiRegionAccessPoint     GetMultiRegionAccessPoint     ListMultiRegionAccessPoints   
+   */
+  describeMultiRegionAccessPointOperation(callback?: (err: AWSError, data: S3Control.Types.DescribeMultiRegionAccessPointOperationResult) => void): Request<S3Control.Types.DescribeMultiRegionAccessPointOperationResult, AWSError>;
   /**
    * Returns configuration information about the specified access point.  All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to GetAccessPoint:    CreateAccessPoint     DeleteAccessPoint     ListAccessPoints   
    */
@@ -205,11 +229,11 @@ declare class S3Control extends Service {
    */
   getAccessPointPolicyStatusForObjectLambda(callback?: (err: AWSError, data: S3Control.Types.GetAccessPointPolicyStatusForObjectLambdaResult) => void): Request<S3Control.Types.GetAccessPointPolicyStatusForObjectLambdaResult, AWSError>;
   /**
-   * Gets an Amazon S3 on Outposts bucket. For more information, see  Using Amazon S3 on Outposts in the Amazon S3 User Guide. If you are using an identity other than the root user of the account that owns the Outposts bucket, the calling identity must have the s3-outposts:GetBucket permissions on the specified Outposts bucket and belong to the Outposts bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket.   If you don't have s3-outposts:GetBucket permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 403 Access Denied error. The following actions are related to GetBucket for Amazon S3 on Outposts: All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section.    PutObject     CreateBucket     DeleteBucket   
+   * Gets an Amazon S3 on Outposts bucket. For more information, see  Using Amazon S3 on Outposts in the Amazon S3 User Guide. If you are using an identity other than the root user of the Amazon Web Services account that owns the Outposts bucket, the calling identity must have the s3-outposts:GetBucket permissions on the specified Outposts bucket and belong to the Outposts bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket.   If you don't have s3-outposts:GetBucket permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 403 Access Denied error. The following actions are related to GetBucket for Amazon S3 on Outposts: All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section.    PutObject     CreateBucket     DeleteBucket   
    */
   getBucket(params: S3Control.Types.GetBucketRequest, callback?: (err: AWSError, data: S3Control.Types.GetBucketResult) => void): Request<S3Control.Types.GetBucketResult, AWSError>;
   /**
-   * Gets an Amazon S3 on Outposts bucket. For more information, see  Using Amazon S3 on Outposts in the Amazon S3 User Guide. If you are using an identity other than the root user of the account that owns the Outposts bucket, the calling identity must have the s3-outposts:GetBucket permissions on the specified Outposts bucket and belong to the Outposts bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket.   If you don't have s3-outposts:GetBucket permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 403 Access Denied error. The following actions are related to GetBucket for Amazon S3 on Outposts: All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section.    PutObject     CreateBucket     DeleteBucket   
+   * Gets an Amazon S3 on Outposts bucket. For more information, see  Using Amazon S3 on Outposts in the Amazon S3 User Guide. If you are using an identity other than the root user of the Amazon Web Services account that owns the Outposts bucket, the calling identity must have the s3-outposts:GetBucket permissions on the specified Outposts bucket and belong to the Outposts bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket.   If you don't have s3-outposts:GetBucket permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 403 Access Denied error. The following actions are related to GetBucket for Amazon S3 on Outposts: All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section.    PutObject     CreateBucket     DeleteBucket   
    */
   getBucket(callback?: (err: AWSError, data: S3Control.Types.GetBucketResult) => void): Request<S3Control.Types.GetBucketResult, AWSError>;
   /**
@@ -221,11 +245,11 @@ declare class S3Control extends Service {
    */
   getBucketLifecycleConfiguration(callback?: (err: AWSError, data: S3Control.Types.GetBucketLifecycleConfigurationResult) => void): Request<S3Control.Types.GetBucketLifecycleConfigurationResult, AWSError>;
   /**
-   *  This action gets a bucket policy for an Amazon S3 on Outposts bucket. To get a policy for an S3 bucket, see GetBucketPolicy in the Amazon S3 API Reference.   Returns the policy of a specified Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. If you are using an identity other than the root user of the account that owns the bucket, the calling identity must have the GetBucketPolicy permissions on the specified bucket and belong to the bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. If you don't have s3-outposts:GetBucketPolicy permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 403 Access Denied error.  As a security precaution, the root user of the account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.  For more information about bucket policies, see Using Bucket Policies and User Policies. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to GetBucketPolicy:    GetObject     PutBucketPolicy     DeleteBucketPolicy   
+   *  This action gets a bucket policy for an Amazon S3 on Outposts bucket. To get a policy for an S3 bucket, see GetBucketPolicy in the Amazon S3 API Reference.   Returns the policy of a specified Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. If you are using an identity other than the root user of the Amazon Web Services account that owns the bucket, the calling identity must have the GetBucketPolicy permissions on the specified bucket and belong to the bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. If you don't have s3-outposts:GetBucketPolicy permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 403 Access Denied error.  As a security precaution, the root user of the Amazon Web Services account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.  For more information about bucket policies, see Using Bucket Policies and User Policies. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to GetBucketPolicy:    GetObject     PutBucketPolicy     DeleteBucketPolicy   
    */
   getBucketPolicy(params: S3Control.Types.GetBucketPolicyRequest, callback?: (err: AWSError, data: S3Control.Types.GetBucketPolicyResult) => void): Request<S3Control.Types.GetBucketPolicyResult, AWSError>;
   /**
-   *  This action gets a bucket policy for an Amazon S3 on Outposts bucket. To get a policy for an S3 bucket, see GetBucketPolicy in the Amazon S3 API Reference.   Returns the policy of a specified Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. If you are using an identity other than the root user of the account that owns the bucket, the calling identity must have the GetBucketPolicy permissions on the specified bucket and belong to the bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. If you don't have s3-outposts:GetBucketPolicy permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 403 Access Denied error.  As a security precaution, the root user of the account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.  For more information about bucket policies, see Using Bucket Policies and User Policies. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to GetBucketPolicy:    GetObject     PutBucketPolicy     DeleteBucketPolicy   
+   *  This action gets a bucket policy for an Amazon S3 on Outposts bucket. To get a policy for an S3 bucket, see GetBucketPolicy in the Amazon S3 API Reference.   Returns the policy of a specified Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. If you are using an identity other than the root user of the Amazon Web Services account that owns the bucket, the calling identity must have the GetBucketPolicy permissions on the specified bucket and belong to the bucket owner's account in order to use this action. Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. If you don't have s3-outposts:GetBucketPolicy permissions or you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 403 Access Denied error.  As a security precaution, the root user of the Amazon Web Services account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.  For more information about bucket policies, see Using Bucket Policies and User Policies. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to GetBucketPolicy:    GetObject     PutBucketPolicy     DeleteBucketPolicy   
    */
   getBucketPolicy(callback?: (err: AWSError, data: S3Control.Types.GetBucketPolicyResult) => void): Request<S3Control.Types.GetBucketPolicyResult, AWSError>;
   /**
@@ -245,11 +269,35 @@ declare class S3Control extends Service {
    */
   getJobTagging(callback?: (err: AWSError, data: S3Control.Types.GetJobTaggingResult) => void): Request<S3Control.Types.GetJobTaggingResult, AWSError>;
   /**
-   * Retrieves the PublicAccessBlock configuration for an account. For more information, see  Using Amazon S3 block public access. Related actions include:    DeletePublicAccessBlock     PutPublicAccessBlock   
+   * Returns configuration information about the specified Multi-Region Access Point. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DeleteMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     ListMultiRegionAccessPoints   
+   */
+  getMultiRegionAccessPoint(params: S3Control.Types.GetMultiRegionAccessPointRequest, callback?: (err: AWSError, data: S3Control.Types.GetMultiRegionAccessPointResult) => void): Request<S3Control.Types.GetMultiRegionAccessPointResult, AWSError>;
+  /**
+   * Returns configuration information about the specified Multi-Region Access Point. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DeleteMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     ListMultiRegionAccessPoints   
+   */
+  getMultiRegionAccessPoint(callback?: (err: AWSError, data: S3Control.Types.GetMultiRegionAccessPointResult) => void): Request<S3Control.Types.GetMultiRegionAccessPointResult, AWSError>;
+  /**
+   * Returns the access control policy of the specified Multi-Region Access Point. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPointPolicy:    GetMultiRegionAccessPointPolicyStatus     PutMultiRegionAccessPointPolicy   
+   */
+  getMultiRegionAccessPointPolicy(params: S3Control.Types.GetMultiRegionAccessPointPolicyRequest, callback?: (err: AWSError, data: S3Control.Types.GetMultiRegionAccessPointPolicyResult) => void): Request<S3Control.Types.GetMultiRegionAccessPointPolicyResult, AWSError>;
+  /**
+   * Returns the access control policy of the specified Multi-Region Access Point. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPointPolicy:    GetMultiRegionAccessPointPolicyStatus     PutMultiRegionAccessPointPolicy   
+   */
+  getMultiRegionAccessPointPolicy(callback?: (err: AWSError, data: S3Control.Types.GetMultiRegionAccessPointPolicyResult) => void): Request<S3Control.Types.GetMultiRegionAccessPointPolicyResult, AWSError>;
+  /**
+   * Indicates whether the specified Multi-Region Access Point has an access control policy that allows public access. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPointPolicyStatus:    GetMultiRegionAccessPointPolicy     PutMultiRegionAccessPointPolicy   
+   */
+  getMultiRegionAccessPointPolicyStatus(params: S3Control.Types.GetMultiRegionAccessPointPolicyStatusRequest, callback?: (err: AWSError, data: S3Control.Types.GetMultiRegionAccessPointPolicyStatusResult) => void): Request<S3Control.Types.GetMultiRegionAccessPointPolicyStatusResult, AWSError>;
+  /**
+   * Indicates whether the specified Multi-Region Access Point has an access control policy that allows public access. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to GetMultiRegionAccessPointPolicyStatus:    GetMultiRegionAccessPointPolicy     PutMultiRegionAccessPointPolicy   
+   */
+  getMultiRegionAccessPointPolicyStatus(callback?: (err: AWSError, data: S3Control.Types.GetMultiRegionAccessPointPolicyStatusResult) => void): Request<S3Control.Types.GetMultiRegionAccessPointPolicyStatusResult, AWSError>;
+  /**
+   * Retrieves the PublicAccessBlock configuration for an Amazon Web Services account. For more information, see  Using Amazon S3 block public access. Related actions include:    DeletePublicAccessBlock     PutPublicAccessBlock   
    */
   getPublicAccessBlock(params: S3Control.Types.GetPublicAccessBlockRequest, callback?: (err: AWSError, data: S3Control.Types.GetPublicAccessBlockOutput) => void): Request<S3Control.Types.GetPublicAccessBlockOutput, AWSError>;
   /**
-   * Retrieves the PublicAccessBlock configuration for an account. For more information, see  Using Amazon S3 block public access. Related actions include:    DeletePublicAccessBlock     PutPublicAccessBlock   
+   * Retrieves the PublicAccessBlock configuration for an Amazon Web Services account. For more information, see  Using Amazon S3 block public access. Related actions include:    DeletePublicAccessBlock     PutPublicAccessBlock   
    */
   getPublicAccessBlock(callback?: (err: AWSError, data: S3Control.Types.GetPublicAccessBlockOutput) => void): Request<S3Control.Types.GetPublicAccessBlockOutput, AWSError>;
   /**
@@ -285,13 +333,21 @@ declare class S3Control extends Service {
    */
   listAccessPointsForObjectLambda(callback?: (err: AWSError, data: S3Control.Types.ListAccessPointsForObjectLambdaResult) => void): Request<S3Control.Types.ListAccessPointsForObjectLambdaResult, AWSError>;
   /**
-   * Lists current S3 Batch Operations jobs and jobs that have ended within the last 30 days for the account making the request. For more information, see S3 Batch Operations in the Amazon S3 User Guide. Related actions include:     CreateJob     DescribeJob     UpdateJobPriority     UpdateJobStatus   
+   * Lists current S3 Batch Operations jobs and jobs that have ended within the last 30 days for the Amazon Web Services account making the request. For more information, see S3 Batch Operations in the Amazon S3 User Guide. Related actions include:     CreateJob     DescribeJob     UpdateJobPriority     UpdateJobStatus   
    */
   listJobs(params: S3Control.Types.ListJobsRequest, callback?: (err: AWSError, data: S3Control.Types.ListJobsResult) => void): Request<S3Control.Types.ListJobsResult, AWSError>;
   /**
-   * Lists current S3 Batch Operations jobs and jobs that have ended within the last 30 days for the account making the request. For more information, see S3 Batch Operations in the Amazon S3 User Guide. Related actions include:     CreateJob     DescribeJob     UpdateJobPriority     UpdateJobStatus   
+   * Lists current S3 Batch Operations jobs and jobs that have ended within the last 30 days for the Amazon Web Services account making the request. For more information, see S3 Batch Operations in the Amazon S3 User Guide. Related actions include:     CreateJob     DescribeJob     UpdateJobPriority     UpdateJobStatus   
    */
   listJobs(callback?: (err: AWSError, data: S3Control.Types.ListJobsResult) => void): Request<S3Control.Types.ListJobsResult, AWSError>;
+  /**
+   * Returns a list of the Multi-Region Access Points currently associated with the specified Amazon Web Services account. Each call can return up to 100 Multi-Region Access Points, the maximum number of Multi-Region Access Points that can be associated with a single account. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to ListMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DeleteMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     GetMultiRegionAccessPoint   
+   */
+  listMultiRegionAccessPoints(params: S3Control.Types.ListMultiRegionAccessPointsRequest, callback?: (err: AWSError, data: S3Control.Types.ListMultiRegionAccessPointsResult) => void): Request<S3Control.Types.ListMultiRegionAccessPointsResult, AWSError>;
+  /**
+   * Returns a list of the Multi-Region Access Points currently associated with the specified Amazon Web Services account. Each call can return up to 100 Multi-Region Access Points, the maximum number of Multi-Region Access Points that can be associated with a single account. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to ListMultiRegionAccessPoint:    CreateMultiRegionAccessPoint     DeleteMultiRegionAccessPoint     DescribeMultiRegionAccessPointOperation     GetMultiRegionAccessPoint   
+   */
+  listMultiRegionAccessPoints(callback?: (err: AWSError, data: S3Control.Types.ListMultiRegionAccessPointsResult) => void): Request<S3Control.Types.ListMultiRegionAccessPointsResult, AWSError>;
   /**
    * Returns a list of all Outposts buckets in an Outpost that are owned by the authenticated sender of the request. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and x-amz-outpost-id in your request, see the Examples section.
    */
@@ -341,19 +397,19 @@ declare class S3Control extends Service {
    */
   putBucketLifecycleConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This action puts a bucket policy to an Amazon S3 on Outposts bucket. To put a policy on an S3 bucket, see PutBucketPolicy in the Amazon S3 API Reference.   Applies an Amazon S3 bucket policy to an Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. If you are using an identity other than the root user of the account that owns the Outposts bucket, the calling identity must have the PutBucketPolicy permissions on the specified Outposts bucket and belong to the bucket owner's account in order to use this action. If you don't have PutBucketPolicy permissions, Amazon S3 returns a 403 Access Denied error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 405 Method Not Allowed error.   As a security precaution, the root user of the account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.   For more information about bucket policies, see Using Bucket Policies and User Policies. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketPolicy:    GetBucketPolicy     DeleteBucketPolicy   
+   *  This action puts a bucket policy to an Amazon S3 on Outposts bucket. To put a policy on an S3 bucket, see PutBucketPolicy in the Amazon S3 API Reference.   Applies an Amazon S3 bucket policy to an Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. If you are using an identity other than the root user of the Amazon Web Services account that owns the Outposts bucket, the calling identity must have the PutBucketPolicy permissions on the specified Outposts bucket and belong to the bucket owner's account in order to use this action. If you don't have PutBucketPolicy permissions, Amazon S3 returns a 403 Access Denied error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 405 Method Not Allowed error.   As a security precaution, the root user of the Amazon Web Services account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.   For more information about bucket policies, see Using Bucket Policies and User Policies. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketPolicy:    GetBucketPolicy     DeleteBucketPolicy   
    */
   putBucketPolicy(params: S3Control.Types.PutBucketPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This action puts a bucket policy to an Amazon S3 on Outposts bucket. To put a policy on an S3 bucket, see PutBucketPolicy in the Amazon S3 API Reference.   Applies an Amazon S3 bucket policy to an Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. If you are using an identity other than the root user of the account that owns the Outposts bucket, the calling identity must have the PutBucketPolicy permissions on the specified Outposts bucket and belong to the bucket owner's account in order to use this action. If you don't have PutBucketPolicy permissions, Amazon S3 returns a 403 Access Denied error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 405 Method Not Allowed error.   As a security precaution, the root user of the account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.   For more information about bucket policies, see Using Bucket Policies and User Policies. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketPolicy:    GetBucketPolicy     DeleteBucketPolicy   
+   *  This action puts a bucket policy to an Amazon S3 on Outposts bucket. To put a policy on an S3 bucket, see PutBucketPolicy in the Amazon S3 API Reference.   Applies an Amazon S3 bucket policy to an Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. If you are using an identity other than the root user of the Amazon Web Services account that owns the Outposts bucket, the calling identity must have the PutBucketPolicy permissions on the specified Outposts bucket and belong to the bucket owner's account in order to use this action. If you don't have PutBucketPolicy permissions, Amazon S3 returns a 403 Access Denied error. If you have the correct permissions, but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a 405 Method Not Allowed error.   As a security precaution, the root user of the Amazon Web Services account that owns a bucket can always use this action, even if the policy explicitly denies the root user the ability to perform this action.   For more information about bucket policies, see Using Bucket Policies and User Policies. All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketPolicy:    GetBucketPolicy     DeleteBucketPolicy   
    */
   putBucketPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see PutBucketTagging in the Amazon S3 API Reference.   Sets the tags for an S3 on Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. Use tags to organize your Amazon Web Services bill to reflect your own cost structure. To do this, sign up to get your account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see Cost allocation and tagging.  Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see  Using cost allocation in Amazon S3 bucket tags.  To use this action, you must have permissions to perform the s3-outposts:PutBucketTagging action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see  Permissions Related to Bucket Subresource Operations and Managing access permissions to your Amazon S3 resources.  PutBucketTagging has the following special errors:   Error code: InvalidTagError    Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see  User-Defined Tag Restrictions and  Amazon Web Services-Generated Cost Allocation Tag Restrictions.     Error code: MalformedXMLError    Description: The XML provided does not match the schema.     Error code: OperationAbortedError     Description: A conflicting conditional action is currently in progress against this resource. Try again.     Error code: InternalError    Description: The service was unable to apply the provided tag to the bucket.     All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketTagging:    GetBucketTagging     DeleteBucketTagging   
+   *  This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see PutBucketTagging in the Amazon S3 API Reference.   Sets the tags for an S3 on Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. Use tags to organize your Amazon Web Services bill to reflect your own cost structure. To do this, sign up to get your Amazon Web Services account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see Cost allocation and tagging.  Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see  Using cost allocation in Amazon S3 bucket tags.  To use this action, you must have permissions to perform the s3-outposts:PutBucketTagging action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see  Permissions Related to Bucket Subresource Operations and Managing access permissions to your Amazon S3 resources.  PutBucketTagging has the following special errors:   Error code: InvalidTagError    Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see  User-Defined Tag Restrictions and  Amazon Web Services-Generated Cost Allocation Tag Restrictions.     Error code: MalformedXMLError    Description: The XML provided does not match the schema.     Error code: OperationAbortedError     Description: A conflicting conditional action is currently in progress against this resource. Try again.     Error code: InternalError    Description: The service was unable to apply the provided tag to the bucket.     All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketTagging:    GetBucketTagging     DeleteBucketTagging   
    */
   putBucketTagging(params: S3Control.Types.PutBucketTaggingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   *  This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see PutBucketTagging in the Amazon S3 API Reference.   Sets the tags for an S3 on Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. Use tags to organize your Amazon Web Services bill to reflect your own cost structure. To do this, sign up to get your account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see Cost allocation and tagging.  Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see  Using cost allocation in Amazon S3 bucket tags.  To use this action, you must have permissions to perform the s3-outposts:PutBucketTagging action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see  Permissions Related to Bucket Subresource Operations and Managing access permissions to your Amazon S3 resources.  PutBucketTagging has the following special errors:   Error code: InvalidTagError    Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see  User-Defined Tag Restrictions and  Amazon Web Services-Generated Cost Allocation Tag Restrictions.     Error code: MalformedXMLError    Description: The XML provided does not match the schema.     Error code: OperationAbortedError     Description: A conflicting conditional action is currently in progress against this resource. Try again.     Error code: InternalError    Description: The service was unable to apply the provided tag to the bucket.     All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketTagging:    GetBucketTagging     DeleteBucketTagging   
+   *  This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see PutBucketTagging in the Amazon S3 API Reference.   Sets the tags for an S3 on Outposts bucket. For more information, see Using Amazon S3 on Outposts in the Amazon S3 User Guide. Use tags to organize your Amazon Web Services bill to reflect your own cost structure. To do this, sign up to get your Amazon Web Services account bill with tag key values included. Then, to see the cost of combined resources, organize your billing information according to resources with the same tag key values. For example, you can tag several resources with a specific application name, and then organize your billing information to see the total cost of that application across several services. For more information, see Cost allocation and tagging.  Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites the old value. For more information, see  Using cost allocation in Amazon S3 bucket tags.  To use this action, you must have permissions to perform the s3-outposts:PutBucketTagging action. The Outposts bucket owner has this permission by default and can grant this permission to others. For more information about permissions, see  Permissions Related to Bucket Subresource Operations and Managing access permissions to your Amazon S3 resources.  PutBucketTagging has the following special errors:   Error code: InvalidTagError    Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. For information about tag restrictions, see  User-Defined Tag Restrictions and  Amazon Web Services-Generated Cost Allocation Tag Restrictions.     Error code: MalformedXMLError    Description: The XML provided does not match the schema.     Error code: OperationAbortedError     Description: A conflicting conditional action is currently in progress against this resource. Try again.     Error code: InternalError    Description: The service was unable to apply the provided tag to the bucket.     All Amazon S3 on Outposts REST API requests for this action require an additional parameter of x-amz-outpost-id to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of s3-control. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id derived using the access point ARN, see the Examples section. The following actions are related to PutBucketTagging:    GetBucketTagging     DeleteBucketTagging   
    */
   putBucketTagging(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -365,11 +421,19 @@ declare class S3Control extends Service {
    */
   putJobTagging(callback?: (err: AWSError, data: S3Control.Types.PutJobTaggingResult) => void): Request<S3Control.Types.PutJobTaggingResult, AWSError>;
   /**
-   * Creates or modifies the PublicAccessBlock configuration for an account. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     DeletePublicAccessBlock   
+   * Associates an access control policy with the specified Multi-Region Access Point. Each Multi-Region Access Point can have only one policy, so a request made to this action replaces any existing policy that is associated with the specified Multi-Region Access Point. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to PutMultiRegionAccessPointPolicy:    GetMultiRegionAccessPointPolicy     GetMultiRegionAccessPointPolicyStatus   
+   */
+  putMultiRegionAccessPointPolicy(params: S3Control.Types.PutMultiRegionAccessPointPolicyRequest, callback?: (err: AWSError, data: S3Control.Types.PutMultiRegionAccessPointPolicyResult) => void): Request<S3Control.Types.PutMultiRegionAccessPointPolicyResult, AWSError>;
+  /**
+   * Associates an access control policy with the specified Multi-Region Access Point. Each Multi-Region Access Point can have only one policy, so a request made to this action replaces any existing policy that is associated with the specified Multi-Region Access Point. This action will always be routed to the US West (Oregon) Region. For more information about the restrictions around managing Multi-Region Access Points, see Managing Multi-Region Access Points in the Amazon S3 User Guide. The following actions are related to PutMultiRegionAccessPointPolicy:    GetMultiRegionAccessPointPolicy     GetMultiRegionAccessPointPolicyStatus   
+   */
+  putMultiRegionAccessPointPolicy(callback?: (err: AWSError, data: S3Control.Types.PutMultiRegionAccessPointPolicyResult) => void): Request<S3Control.Types.PutMultiRegionAccessPointPolicyResult, AWSError>;
+  /**
+   * Creates or modifies the PublicAccessBlock configuration for an Amazon Web Services account. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     DeletePublicAccessBlock   
    */
   putPublicAccessBlock(params: S3Control.Types.PutPublicAccessBlockRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates or modifies the PublicAccessBlock configuration for an account. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     DeletePublicAccessBlock   
+   * Creates or modifies the PublicAccessBlock configuration for an Amazon Web Services account. For more information, see  Using Amazon S3 block public access. Related actions include:    GetPublicAccessBlock     DeletePublicAccessBlock   
    */
   putPublicAccessBlock(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -458,6 +522,78 @@ declare namespace S3Control {
     IsEnabled?: IsEnabled;
   }
   export type Alias = string;
+  export type AsyncCreationTimestamp = Date;
+  export interface AsyncErrorDetails {
+    /**
+     * A string that uniquely identifies the error condition.
+     */
+    Code?: MaxLength1024String;
+    /**
+     * A generic descritpion of the error condition in English.
+     */
+    Message?: MaxLength1024String;
+    /**
+     * The identifier of the resource associated with the error.
+     */
+    Resource?: MaxLength1024String;
+    /**
+     * The ID of the request associated with the error.
+     */
+    RequestId?: MaxLength1024String;
+  }
+  export interface AsyncOperation {
+    /**
+     * The time that the request was sent to the service.
+     */
+    CreationTime?: AsyncCreationTimestamp;
+    /**
+     * The specific operation for the asynchronous request.
+     */
+    Operation?: AsyncOperationName;
+    /**
+     * The request token associated with the request.
+     */
+    RequestTokenARN?: AsyncRequestTokenARN;
+    /**
+     * The parameters associated with the request.
+     */
+    RequestParameters?: AsyncRequestParameters;
+    /**
+     * The current status of the request.
+     */
+    RequestStatus?: AsyncRequestStatus;
+    /**
+     * The details of the response.
+     */
+    ResponseDetails?: AsyncResponseDetails;
+  }
+  export type AsyncOperationName = "CreateMultiRegionAccessPoint"|"DeleteMultiRegionAccessPoint"|"PutMultiRegionAccessPointPolicy"|string;
+  export interface AsyncRequestParameters {
+    /**
+     * A container of the parameters for a CreateMultiRegionAccessPoint request.
+     */
+    CreateMultiRegionAccessPointRequest?: CreateMultiRegionAccessPointInput;
+    /**
+     * A container of the parameters for a DeleteMultiRegionAccessPoint request.
+     */
+    DeleteMultiRegionAccessPointRequest?: DeleteMultiRegionAccessPointInput;
+    /**
+     * A container of the parameters for a PutMultiRegionAccessPoint request.
+     */
+    PutMultiRegionAccessPointPolicyRequest?: PutMultiRegionAccessPointPolicyInput;
+  }
+  export type AsyncRequestStatus = string;
+  export type AsyncRequestTokenARN = string;
+  export interface AsyncResponseDetails {
+    /**
+     * The details for the Multi-Region Access Point.
+     */
+    MultiRegionAccessPointDetails?: MultiRegionAccessPointsAsyncResponse;
+    /**
+     * Error details for an asynchronous request.
+     */
+    ErrorDetails?: AsyncErrorDetails;
+  }
   export interface AwsLambdaTransformation {
     /**
      * The Amazon Resource Name (ARN) of the Lambda function.
@@ -491,7 +627,7 @@ declare namespace S3Control {
   export type ContinuationToken = string;
   export interface CreateAccessPointForObjectLambdaRequest {
     /**
-     * The account ID for owner of the specified Object Lambda Access Point.
+     * The Amazon Web Services account ID for owner of the specified Object Lambda Access Point.
      */
     AccountId: AccountId;
     /**
@@ -511,7 +647,7 @@ declare namespace S3Control {
   }
   export interface CreateAccessPointRequest {
     /**
-     * The account ID for the owner of the bucket for which you want to create an access point.
+     * The Amazon Web Services account ID for the owner of the bucket for which you want to create an access point.
      */
     AccountId: AccountId;
     /**
@@ -601,7 +737,7 @@ declare namespace S3Control {
   }
   export interface CreateJobRequest {
     /**
-     * The account ID that creates the job.
+     * The Amazon Web Services account ID that creates the job.
      */
     AccountId: AccountId;
     /**
@@ -647,7 +783,39 @@ declare namespace S3Control {
      */
     JobId?: JobId;
   }
+  export interface CreateMultiRegionAccessPointInput {
+    /**
+     * The name of the Multi-Region Access Point associated with this request.
+     */
+    Name: MultiRegionAccessPointName;
+    PublicAccessBlock?: PublicAccessBlockConfiguration;
+    /**
+     * The buckets in different Regions that are associated with the Multi-Region Access Point.
+     */
+    Regions: RegionCreationList;
+  }
+  export interface CreateMultiRegionAccessPointRequest {
+    /**
+     * The Amazon Web Services account ID for the owner of the Multi-Region Access Point. The owner of the Multi-Region Access Point also must own the underlying buckets.
+     */
+    AccountId: AccountId;
+    /**
+     * An idempotency token used to identify the request and guarantee that requests are unique.
+     */
+    ClientToken: MultiRegionAccessPointClientToken;
+    /**
+     * A container element containing details about the Multi-Region Access Point.
+     */
+    Details: CreateMultiRegionAccessPointInput;
+  }
+  export interface CreateMultiRegionAccessPointResult {
+    /**
+     * The request token associated with the request. You can use this token with DescribeMultiRegionAccessPointOperation to determine the status of asynchronous requests.
+     */
+    RequestTokenARN?: AsyncRequestTokenARN;
+  }
   export type CreationDate = Date;
+  export type CreationTimestamp = Date;
   export type _Date = Date;
   export type Days = number;
   export type DaysAfterInitiation = number;
@@ -723,7 +891,7 @@ declare namespace S3Control {
   }
   export interface DeleteBucketTaggingRequest {
     /**
-     * The account ID of the Outposts bucket tag set to be removed.
+     * The Amazon Web Services account ID of the Outposts bucket tag set to be removed.
      */
     AccountId: AccountId;
     /**
@@ -733,7 +901,7 @@ declare namespace S3Control {
   }
   export interface DeleteJobTaggingRequest {
     /**
-     * The account ID associated with the S3 Batch Operations job.
+     * The Amazon Web Services account ID associated with the S3 Batch Operations job.
      */
     AccountId: AccountId;
     /**
@@ -743,9 +911,35 @@ declare namespace S3Control {
   }
   export interface DeleteJobTaggingResult {
   }
+  export interface DeleteMultiRegionAccessPointInput {
+    /**
+     * The name of the Multi-Region Access Point associated with this request.
+     */
+    Name: MultiRegionAccessPointName;
+  }
+  export interface DeleteMultiRegionAccessPointRequest {
+    /**
+     * The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * An idempotency token used to identify the request and guarantee that requests are unique.
+     */
+    ClientToken: MultiRegionAccessPointClientToken;
+    /**
+     * A container element containing details about the Multi-Region Access Point.
+     */
+    Details: DeleteMultiRegionAccessPointInput;
+  }
+  export interface DeleteMultiRegionAccessPointResult {
+    /**
+     * The request token associated with the request. You can use this token with DescribeMultiRegionAccessPointOperation to determine the status of asynchronous requests.
+     */
+    RequestTokenARN?: AsyncRequestTokenARN;
+  }
   export interface DeletePublicAccessBlockRequest {
     /**
-     * The account ID for the account whose PublicAccessBlock configuration you want to remove.
+     * The account ID for the Amazon Web Services account whose PublicAccessBlock configuration you want to remove.
      */
     AccountId: AccountId;
   }
@@ -773,7 +967,7 @@ declare namespace S3Control {
   }
   export interface DescribeJobRequest {
     /**
-     * The account ID associated with the S3 Batch Operations job.
+     * The Amazon Web Services account ID associated with the S3 Batch Operations job.
      */
     AccountId: AccountId;
     /**
@@ -787,7 +981,29 @@ declare namespace S3Control {
      */
     Job?: JobDescriptor;
   }
+  export interface DescribeMultiRegionAccessPointOperationRequest {
+    /**
+     * The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * The request token associated with the request you want to know about. This request token is returned as part of the response when you make an asynchronous request. You provide this token to query about the status of the asynchronous action.
+     */
+    RequestTokenARN: AsyncRequestTokenARN;
+  }
+  export interface DescribeMultiRegionAccessPointOperationResult {
+    /**
+     * A container element containing the details of the asynchronous operation.
+     */
+    AsyncOperation?: AsyncOperation;
+  }
   export type Endpoints = {[key: string]: NonEmptyMaxLength1024String};
+  export interface EstablishedMultiRegionAccessPointPolicy {
+    /**
+     * The details of the last established policy.
+     */
+    Policy?: Policy;
+  }
   export interface Exclude {
     /**
      * A container for the S3 Storage Lens bucket excludes.
@@ -950,7 +1166,7 @@ declare namespace S3Control {
   }
   export interface GetBucketLifecycleConfigurationRequest {
     /**
-     * The account ID of the Outposts bucket.
+     * The Amazon Web Services account ID of the Outposts bucket.
      */
     AccountId: AccountId;
     /**
@@ -966,7 +1182,7 @@ declare namespace S3Control {
   }
   export interface GetBucketPolicyRequest {
     /**
-     * The account ID of the Outposts bucket.
+     * The Amazon Web Services account ID of the Outposts bucket.
      */
     AccountId: AccountId;
     /**
@@ -982,7 +1198,7 @@ declare namespace S3Control {
   }
   export interface GetBucketRequest {
     /**
-     * The account ID of the Outposts bucket.
+     * The Amazon Web Services account ID of the Outposts bucket.
      */
     AccountId: AccountId;
     /**
@@ -1006,7 +1222,7 @@ declare namespace S3Control {
   }
   export interface GetBucketTaggingRequest {
     /**
-     * The account ID of the Outposts bucket.
+     * The Amazon Web Services account ID of the Outposts bucket.
      */
     AccountId: AccountId;
     /**
@@ -1022,7 +1238,7 @@ declare namespace S3Control {
   }
   export interface GetJobTaggingRequest {
     /**
-     * The account ID associated with the S3 Batch Operations job.
+     * The Amazon Web Services account ID associated with the S3 Batch Operations job.
      */
     AccountId: AccountId;
     /**
@@ -1036,15 +1252,60 @@ declare namespace S3Control {
      */
     Tags?: S3TagSet;
   }
+  export interface GetMultiRegionAccessPointPolicyRequest {
+    /**
+     * The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * Specifies the Multi-Region Access Point. The name of the Multi-Region Access Point is different from the alias. For more information about the distinction between the name and the alias of an Multi-Region Access Point, see Managing Multi-Region Access Points in the Amazon S3 User Guide.
+     */
+    Name: MultiRegionAccessPointName;
+  }
+  export interface GetMultiRegionAccessPointPolicyResult {
+    /**
+     * The policy associated with the specified Multi-Region Access Point.
+     */
+    Policy?: MultiRegionAccessPointPolicyDocument;
+  }
+  export interface GetMultiRegionAccessPointPolicyStatusRequest {
+    /**
+     * The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * Specifies the Multi-Region Access Point. The name of the Multi-Region Access Point is different from the alias. For more information about the distinction between the name and the alias of an Multi-Region Access Point, see Managing Multi-Region Access Points in the Amazon S3 User Guide.
+     */
+    Name: MultiRegionAccessPointName;
+  }
+  export interface GetMultiRegionAccessPointPolicyStatusResult {
+    Established?: PolicyStatus;
+  }
+  export interface GetMultiRegionAccessPointRequest {
+    /**
+     * The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * The name of the Multi-Region Access Point whose configuration information you want to receive. The name of the Multi-Region Access Point is different from the alias. For more information about the distinction between the name and the alias of an Multi-Region Access Point, see Managing Multi-Region Access Points in the Amazon S3 User Guide.
+     */
+    Name: MultiRegionAccessPointName;
+  }
+  export interface GetMultiRegionAccessPointResult {
+    /**
+     * A container element containing the details of the requested Multi-Region Access Point.
+     */
+    AccessPoint?: MultiRegionAccessPointReport;
+  }
   export interface GetPublicAccessBlockOutput {
     /**
-     * The PublicAccessBlock configuration currently in effect for this account.
+     * The PublicAccessBlock configuration currently in effect for this Amazon Web Services account.
      */
     PublicAccessBlockConfiguration?: PublicAccessBlockConfiguration;
   }
   export interface GetPublicAccessBlockRequest {
     /**
-     * The account ID for the account whose PublicAccessBlock configuration you want to retrieve.
+     * The account ID for the Amazon Web Services account whose PublicAccessBlock configuration you want to retrieve.
      */
     AccountId: AccountId;
   }
@@ -1440,7 +1701,7 @@ declare namespace S3Control {
   }
   export interface ListAccessPointsRequest {
     /**
-     * The account ID for owner of the bucket whose access points you want to list.
+     * The Amazon Web Services account ID for owner of the bucket whose access points you want to list.
      */
     AccountId: AccountId;
     /**
@@ -1468,7 +1729,7 @@ declare namespace S3Control {
   }
   export interface ListJobsRequest {
     /**
-     * The account ID associated with the S3 Batch Operations job.
+     * The Amazon Web Services account ID associated with the S3 Batch Operations job.
      */
     AccountId: AccountId;
     /**
@@ -1494,9 +1755,33 @@ declare namespace S3Control {
      */
     Jobs?: JobListDescriptorList;
   }
+  export interface ListMultiRegionAccessPointsRequest {
+    /**
+     * The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * Not currently used. Do not use this parameter.
+     */
+    NextToken?: NonEmptyMaxLength1024String;
+    /**
+     * Not currently used. Do not use this parameter.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListMultiRegionAccessPointsResult {
+    /**
+     * The list of Multi-Region Access Points associated with the user.
+     */
+    AccessPoints?: MultiRegionAccessPointReportList;
+    /**
+     * If the specified bucket has more Multi-Region Access Points than can be returned in one call to this action, this field contains a continuation token. You can use this token tin subsequent calls to this action to retrieve additional Multi-Region Access Points.
+     */
+    NextToken?: NonEmptyMaxLength1024String;
+  }
   export interface ListRegionalBucketsRequest {
     /**
-     * The account ID of the Outposts bucket.
+     * The Amazon Web Services account ID of the Outposts bucket.
      */
     AccountId: AccountId;
     /**
@@ -1564,6 +1849,61 @@ declare namespace S3Control {
   export type MaxLength1024String = string;
   export type MaxResults = number;
   export type MinStorageBytesPercentage = number;
+  export type MultiRegionAccessPointAlias = string;
+  export type MultiRegionAccessPointClientToken = string;
+  export type MultiRegionAccessPointName = string;
+  export interface MultiRegionAccessPointPolicyDocument {
+    /**
+     * The last established policy for the Multi-Region Access Point.
+     */
+    Established?: EstablishedMultiRegionAccessPointPolicy;
+    /**
+     * The proposed policy for the Multi-Region Access Point.
+     */
+    Proposed?: ProposedMultiRegionAccessPointPolicy;
+  }
+  export interface MultiRegionAccessPointRegionalResponse {
+    /**
+     * The name of the Region in the Multi-Region Access Point.
+     */
+    Name?: RegionName;
+    /**
+     * The current status of the Multi-Region Access Point in this Region.
+     */
+    RequestStatus?: AsyncRequestStatus;
+  }
+  export type MultiRegionAccessPointRegionalResponseList = MultiRegionAccessPointRegionalResponse[];
+  export interface MultiRegionAccessPointReport {
+    /**
+     * The name of the Multi-Region Access Point.
+     */
+    Name?: MultiRegionAccessPointName;
+    /**
+     * The alias for the Multi-Region Access Point. For more information about the distinction between the name and the alias of an Multi-Region Access Point, see Managing Multi-Region Access Points.
+     */
+    Alias?: MultiRegionAccessPointAlias;
+    /**
+     * When the Multi-Region Access Point create request was received.
+     */
+    CreatedAt?: CreationTimestamp;
+    PublicAccessBlock?: PublicAccessBlockConfiguration;
+    /**
+     * The current status of the Multi-Region Access Point.  CREATING and DELETING are temporary states that exist while the request is propogating and being completed. If a Multi-Region Access Point has a status of PARTIALLY_CREATED, you can retry creation or send a request to delete the Multi-Region Access Point. If a Multi-Region Access Point has a status of PARTIALLY_DELETED, you can retry a delete request to finish the deletion of the Multi-Region Access Point.
+     */
+    Status?: MultiRegionAccessPointStatus;
+    /**
+     * A collection of the Regions and buckets associated with the Multi-Region Access Point.
+     */
+    Regions?: RegionReportList;
+  }
+  export type MultiRegionAccessPointReportList = MultiRegionAccessPointReport[];
+  export type MultiRegionAccessPointStatus = "READY"|"INCONSISTENT_ACROSS_REGIONS"|"CREATING"|"PARTIALLY_CREATED"|"PARTIALLY_DELETED"|"DELETING"|string;
+  export interface MultiRegionAccessPointsAsyncResponse {
+    /**
+     * A collection of status information for the different Regions that a Multi-Region Access Point supports.
+     */
+    Regions?: MultiRegionAccessPointRegionalResponseList;
+  }
   export type NetworkOrigin = "Internet"|"VPC"|string;
   export type NonEmptyMaxLength1024String = string;
   export type NonEmptyMaxLength2048String = string;
@@ -1664,6 +2004,12 @@ declare namespace S3Control {
     IsEnabled?: IsEnabled;
     SelectionCriteria?: SelectionCriteria;
   }
+  export interface ProposedMultiRegionAccessPointPolicy {
+    /**
+     * The details of the proposed policy.
+     */
+    Policy?: Policy;
+  }
   export interface PublicAccessBlockConfiguration {
     /**
      * Specifies whether Amazon S3 should block public access control lists (ACLs) for buckets in this account. Setting this element to TRUE causes the following behavior:   PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.   PUT Object calls fail if the request includes a public ACL.   PUT Bucket calls fail if the request includes a public ACL.   Enabling this setting doesn't affect existing policies or ACLs. This is not supported for Amazon S3 on Outposts.
@@ -1713,7 +2059,7 @@ declare namespace S3Control {
   }
   export interface PutAccessPointPolicyRequest {
     /**
-     * The account ID for owner of the bucket associated with the specified access point.
+     * The Amazon Web Services account ID for owner of the bucket associated with the specified access point.
      */
     AccountId: AccountId;
     /**
@@ -1727,7 +2073,7 @@ declare namespace S3Control {
   }
   export interface PutBucketLifecycleConfigurationRequest {
     /**
-     * The account ID of the Outposts bucket.
+     * The Amazon Web Services account ID of the Outposts bucket.
      */
     AccountId: AccountId;
     /**
@@ -1741,7 +2087,7 @@ declare namespace S3Control {
   }
   export interface PutBucketPolicyRequest {
     /**
-     * The account ID of the Outposts bucket.
+     * The Amazon Web Services account ID of the Outposts bucket.
      */
     AccountId: AccountId;
     /**
@@ -1759,7 +2105,7 @@ declare namespace S3Control {
   }
   export interface PutBucketTaggingRequest {
     /**
-     * The account ID of the Outposts bucket.
+     * The Amazon Web Services account ID of the Outposts bucket.
      */
     AccountId: AccountId;
     /**
@@ -1773,7 +2119,7 @@ declare namespace S3Control {
   }
   export interface PutJobTaggingRequest {
     /**
-     * The account ID associated with the S3 Batch Operations job.
+     * The Amazon Web Services account ID associated with the S3 Batch Operations job.
      */
     AccountId: AccountId;
     /**
@@ -1787,13 +2133,43 @@ declare namespace S3Control {
   }
   export interface PutJobTaggingResult {
   }
+  export interface PutMultiRegionAccessPointPolicyInput {
+    /**
+     * The name of the Multi-Region Access Point associated with the request.
+     */
+    Name: MultiRegionAccessPointName;
+    /**
+     * The policy details for the PutMultiRegionAccessPoint request.
+     */
+    Policy: Policy;
+  }
+  export interface PutMultiRegionAccessPointPolicyRequest {
+    /**
+     * The Amazon Web Services account ID for the owner of the Multi-Region Access Point.
+     */
+    AccountId: AccountId;
+    /**
+     * An idempotency token used to identify the request and guarantee that requests are unique.
+     */
+    ClientToken: MultiRegionAccessPointClientToken;
+    /**
+     * A container element containing the details of the policy for the Multi-Region Access Point.
+     */
+    Details: PutMultiRegionAccessPointPolicyInput;
+  }
+  export interface PutMultiRegionAccessPointPolicyResult {
+    /**
+     * The request token associated with the request. You can use this token with DescribeMultiRegionAccessPointOperation to determine the status of asynchronous requests.
+     */
+    RequestTokenARN?: AsyncRequestTokenARN;
+  }
   export interface PutPublicAccessBlockRequest {
     /**
-     * The PublicAccessBlock configuration that you want to apply to the specified account.
+     * The PublicAccessBlock configuration that you want to apply to the specified Amazon Web Services account.
      */
     PublicAccessBlockConfiguration: PublicAccessBlockConfiguration;
     /**
-     * The account ID for the account whose PublicAccessBlock configuration you want to set.
+     * The account ID for the Amazon Web Services account whose PublicAccessBlock configuration you want to set.
      */
     AccountId: AccountId;
   }
@@ -1831,6 +2207,25 @@ declare namespace S3Control {
   }
   export interface PutStorageLensConfigurationTaggingResult {
   }
+  export interface Region {
+    /**
+     * The name of the associated bucket for the Region.
+     */
+    Bucket: BucketName;
+  }
+  export type RegionCreationList = Region[];
+  export type RegionName = string;
+  export interface RegionReport {
+    /**
+     * The name of the bucket.
+     */
+    Bucket?: BucketName;
+    /**
+     * The name of the Region.
+     */
+    Region?: RegionName;
+  }
+  export type RegionReportList = RegionReport[];
   export interface RegionalBucket {
     /**
      * 
@@ -2265,7 +2660,7 @@ declare namespace S3Control {
   export type TransitionStorageClass = "GLACIER"|"STANDARD_IA"|"ONEZONE_IA"|"INTELLIGENT_TIERING"|"DEEP_ARCHIVE"|string;
   export interface UpdateJobPriorityRequest {
     /**
-     * The account ID associated with the S3 Batch Operations job.
+     * The Amazon Web Services account ID associated with the S3 Batch Operations job.
      */
     AccountId: AccountId;
     /**
@@ -2289,7 +2684,7 @@ declare namespace S3Control {
   }
   export interface UpdateJobStatusRequest {
     /**
-     * The account ID associated with the S3 Batch Operations job.
+     * The Amazon Web Services account ID associated with the S3 Batch Operations job.
      */
     AccountId: AccountId;
     /**

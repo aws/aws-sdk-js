@@ -292,7 +292,7 @@ declare namespace EBS {
   export type SnapshotId = string;
   export interface StartSnapshotRequest {
     /**
-     * The size of the volume, in GiB. The maximum size is 16384 GiB (16 TiB).
+     * The size of the volume, in GiB. The maximum size is 65536 GiB (64 TiB).
      */
     VolumeSize: VolumeSize;
     /**
