@@ -12,10 +12,8 @@ namespace :docs do
     sh "bundle exec yard #{args.join(' ')}"
     cp "tasks/fixtures/jquery.js", "doc/latest/js/jquery.js"
   end
-
-  desc "Builds API documentation"
-  task :all => [:api]
 end
 
-desc "Builds all documentation"
-task :docs => ['docs:all']
+# TODO: move code for docs:api under docs once it's updated in internal release code
+desc "Builds API documentation"
+task :docs => ['docs:api']
