@@ -36,6 +36,10 @@
   padding-bottom: 5px;
 }
 
+.alert .alert-dismiss {
+  cursor: pointer;
+}
+
 .alert .alert-dismiss:after {
   content: "✕";
   padding-left: 10px;
