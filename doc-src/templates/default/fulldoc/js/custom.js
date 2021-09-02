@@ -1,6 +1,6 @@
 $(document).ready(function() {
   var trueValue = 'true';
-  var nodeVersionNoticeKey = 'dismissNodeDeprecationNotice';
+  var nodeVersionNoticeKey = 'nodeVersionNoticeDismissed';
   var dismissNodeDepNotice = localStorage.getItem(nodeVersionNoticeKey);
 
   if (dismissNodeDepNotice !== trueValue) {
