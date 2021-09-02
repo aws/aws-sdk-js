@@ -35,3 +35,8 @@
   font-weight: bold;
   padding-bottom: 5px;
 }
+
+.alert .alert-dismiss:after {
+  content: "✕";
+  padding-left: 10px;
+}
