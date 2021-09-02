@@ -38,6 +38,7 @@
 
 .alert .alert-dismiss {
   cursor: pointer;
+  margin-left: auto;
 }
 
 .alert .alert-dismiss:after {
