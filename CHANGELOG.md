@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.982.0-->
+<!--LATEST=2.983.0-->
 <!--ENTRYINSERT-->
+
+## 2.983.0
+* feature: CodeGuruReviewer: Added support for CodeInconsistencies detectors
+* feature: FraudDetector: Enhanced GetEventPrediction API response to include risk scores from imported SageMaker models
+* feature: Outposts: This release adds a new API CreateOrder.
 
 ## 2.982.0
 * feature: ACMPCA: Private Certificate Authority Service now allows customers to enable an online certificate status protocol (OCSP) responder service on their private certificate authorities. Customers can also optionally configure a custom CNAME for their OCSP responder.

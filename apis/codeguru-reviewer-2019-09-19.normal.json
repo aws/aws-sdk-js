@@ -1341,7 +1341,8 @@
         "PythonBestPractices",
         "JavaBestPractices",
         "ResourceLeaks",
-        "SecurityIssues"
+        "SecurityIssues",
+        "CodeInconsistencies"
       ]
     },
     "RecommendationFeedback": {

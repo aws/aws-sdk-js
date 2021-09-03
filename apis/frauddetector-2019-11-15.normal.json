@@ -2868,6 +2868,43 @@
         "shape": "ExternalModel"
       }
     },
+    "ExternalModelOutputs": {
+      "type": "structure",
+      "members": {
+        "externalModel": {
+          "shape": "ExternalModelSummary",
+          "documentation": "<p>The Amazon SageMaker model.</p>"
+        },
+        "outputs": {
+          "shape": "ExternalModelPredictionMap",
+          "documentation": "<p>The fraud prediction scores from Amazon SageMaker model.</p>"
+        }
+      },
+      "documentation": "<p>The fraud prediction scores from Amazon SageMaker model.</p>"
+    },
+    "ExternalModelPredictionMap": {
+      "type": "map",
+      "key": {
+        "shape": "string"
+      },
+      "value": {
+        "shape": "string"
+      }
+    },
+    "ExternalModelSummary": {
+      "type": "structure",
+      "members": {
+        "modelEndpoint": {
+          "shape": "string",
+          "documentation": "<p>The endpoint of the Amazon SageMaker model.</p>"
+        },
+        "modelSource": {
+          "shape": "ModelSource",
+          "documentation": "<p>The source of the model.</p>"
+        }
+      },
+      "documentation": "<p>The Amazon SageMaker model.</p>"
+    },
     "ExternalModelsMaxResults": {
       "type": "integer",
       "box": true,
@@ -3129,6 +3166,10 @@
         "ruleResults": {
           "shape": "ListOfRuleResults",
           "documentation": "<p>The results from the rules.</p>"
+        },
+        "externalModelOutputs": {
+          "shape": "ListOfExternalModelOutputs",
+          "documentation": "<p>The model scores for Amazon SageMaker models.</p>"
         }
       }
     },
@@ -3497,6 +3538,12 @@
       "enum": [
         "DETECTORPL"
       ]
+    },
+    "ListOfExternalModelOutputs": {
+      "type": "list",
+      "member": {
+        "shape": "ExternalModelOutputs"
+      }
     },
     "ListOfLogOddsMetrics": {
       "type": "list",

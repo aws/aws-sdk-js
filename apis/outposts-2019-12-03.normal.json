@@ -13,6 +13,40 @@
     "uid": "outposts-2019-12-03"
   },
   "operations": {
+    "CreateOrder": {
+      "name": "CreateOrder",
+      "http": {
+        "method": "POST",
+        "requestUri": "/orders"
+      },
+      "input": {
+        "shape": "CreateOrderInput"
+      },
+      "output": {
+        "shape": "CreateOrderOutput"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        }
+      ],
+      "documentation": "<p>Creates an order for an Outpost.</p>"
+    },
     "CreateOutpost": {
       "name": "CreateOutpost",
       "http": {
@@ -334,6 +368,41 @@
       "max": 5,
       "min": 1
     },
+    "CreateOrderInput": {
+      "type": "structure",
+      "required": [
+        "OutpostIdentifier",
+        "LineItems",
+        "PaymentOption"
+      ],
+      "members": {
+        "OutpostIdentifier": {
+          "shape": "OutpostIdentifier",
+          "documentation": "<p> The ID or the Amazon Resource Name (ARN) of the Outpost. </p>"
+        },
+        "LineItems": {
+          "shape": "LineItemRequestListDefinition",
+          "documentation": "<p>The line items that make up the order.</p>"
+        },
+        "PaymentOption": {
+          "shape": "PaymentOption",
+          "documentation": "<p>The payment option for the order.</p>"
+        },
+        "PaymentTerm": {
+          "shape": "PaymentTerm",
+          "documentation": "<p>The payment terms for the order.</p>"
+        }
+      }
+    },
+    "CreateOrderOutput": {
+      "type": "structure",
+      "members": {
+        "Order": {
+          "shape": "Order",
+          "documentation": "<p>Information about this order.</p>"
+        }
+      }
+    },
     "CreateOutpostInput": {
       "type": "structure",
       "required": [
@@ -378,6 +447,7 @@
       "members": {
         "OutpostId": {
           "shape": "OutpostId",
+          "documentation": "<p> The ID of the Outpost. </p>",
           "location": "uri",
           "locationName": "OutpostId"
         }
@@ -412,6 +482,7 @@
       "members": {
         "OutpostId": {
           "shape": "OutpostId",
+          "documentation": "<p> The ID of the Outpost. </p>",
           "location": "uri",
           "locationName": "OutpostId"
         }
@@ -425,6 +496,7 @@
       "members": {
         "OutpostId": {
           "shape": "OutpostId",
+          "documentation": "<p> The ID of the Outpost. </p>",
           "location": "uri",
           "locationName": "OutpostId"
         },
@@ -450,7 +522,8 @@
           "shape": "Token"
         },
         "OutpostId": {
-          "shape": "OutpostId"
+          "shape": "OutpostId",
+          "documentation": "<p> The ID of the Outpost. </p>"
         },
         "OutpostArn": {
           "shape": "OutpostArn"
@@ -464,6 +537,9 @@
           "shape": "Outpost"
         }
       }
+    },
+    "ISO8601Timestamp": {
+      "type": "timestamp"
     },
     "InstanceType": {
       "type": "string",
@@ -498,6 +574,65 @@
         "shape": "LifeCycleStatus"
       },
       "max": 5,
+      "min": 1
+    },
+    "LineItem": {
+      "type": "structure",
+      "members": {
+        "CatalogItemId": {
+          "shape": "SkuCode",
+          "documentation": "<p> The ID of the catalog item. </p>"
+        },
+        "LineItemId": {
+          "shape": "LineItemId",
+          "documentation": "<p>The ID of the line item.</p>"
+        },
+        "Quantity": {
+          "shape": "LineItemQuantity",
+          "documentation": "<p>The quantity of the line item.</p>"
+        },
+        "Status": {
+          "shape": "Status",
+          "documentation": "<p>The status of the line item.</p>"
+        }
+      },
+      "documentation": "<p>Information about a line item.</p>"
+    },
+    "LineItemId": {
+      "type": "string",
+      "pattern": "ooi-[a-f0-9]{17}"
+    },
+    "LineItemListDefinition": {
+      "type": "list",
+      "member": {
+        "shape": "LineItem"
+      }
+    },
+    "LineItemQuantity": {
+      "type": "integer",
+      "max": 20,
+      "min": 1
+    },
+    "LineItemRequest": {
+      "type": "structure",
+      "members": {
+        "CatalogItemId": {
+          "shape": "SkuCode",
+          "documentation": "<p>The ID of the catalog item.</p>"
+        },
+        "Quantity": {
+          "shape": "LineItemQuantity",
+          "documentation": "<p>The quantity of a line item request.</p>"
+        }
+      },
+      "documentation": "<p>Information about a line item request.</p>"
+    },
+    "LineItemRequestListDefinition": {
+      "type": "list",
+      "member": {
+        "shape": "LineItemRequest"
+      },
+      "max": 20,
       "min": 1
     },
     "ListOutpostsInput": {
@@ -600,11 +735,63 @@
       "max": 1000,
       "min": 1
     },
+    "Order": {
+      "type": "structure",
+      "members": {
+        "OutpostId": {
+          "shape": "OutpostIdOnly",
+          "documentation": "<p> The ID of the Outpost. </p>"
+        },
+        "OrderId": {
+          "shape": "OrderId",
+          "documentation": "<p>The ID of the order.</p>"
+        },
+        "Status": {
+          "shape": "OrderStatus",
+          "documentation": "<p>The status of the order</p>"
+        },
+        "LineItems": {
+          "shape": "LineItemListDefinition",
+          "documentation": "<p>The line items for the order</p>"
+        },
+        "PaymentOption": {
+          "shape": "PaymentOption",
+          "documentation": "<p>The payment option for the order.</p>"
+        },
+        "OrderSubmissionDate": {
+          "shape": "ISO8601Timestamp",
+          "documentation": "<p>The submission date for the order.</p>"
+        },
+        "OrderFulfilledDate": {
+          "shape": "ISO8601Timestamp",
+          "documentation": "<p>The fulfillment date of the order.</p>"
+        }
+      },
+      "documentation": "<p>Information about an order.</p>"
+    },
+    "OrderId": {
+      "type": "string",
+      "max": 20,
+      "min": 1,
+      "pattern": "oo-[a-f0-9]{17}$"
+    },
+    "OrderStatus": {
+      "type": "string",
+      "enum": [
+        "RECEIVED",
+        "PENDING",
+        "PROCESSING",
+        "INSTALLING",
+        "FULFILLED",
+        "CANCELLED"
+      ]
+    },
     "Outpost": {
       "type": "structure",
       "members": {
         "OutpostId": {
-          "shape": "OutpostId"
+          "shape": "OutpostId",
+          "documentation": "<p> The ID of the Outpost. </p>"
         },
         "OwnerId": {
           "shape": "OwnerId"
@@ -656,7 +843,18 @@
     },
     "OutpostId": {
       "type": "string",
-      "documentation": "<p>The ID of the Outpost.</p>",
+      "max": 180,
+      "min": 1,
+      "pattern": "^(arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:outpost/)?op-[a-f0-9]{17}$"
+    },
+    "OutpostIdOnly": {
+      "type": "string",
+      "max": 20,
+      "min": 1,
+      "pattern": "^op-[a-f0-9]{17}$"
+    },
+    "OutpostIdentifier": {
+      "type": "string",
       "max": 180,
       "min": 1,
       "pattern": "^(arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:outpost/)?op-[a-f0-9]{17}$"
@@ -674,6 +872,20 @@
       "max": 12,
       "min": 12,
       "pattern": "\\d{12}"
+    },
+    "PaymentOption": {
+      "type": "string",
+      "enum": [
+        "ALL_UPFRONT",
+        "NO_UPFRONT",
+        "PARTIAL_UPFRONT"
+      ]
+    },
+    "PaymentTerm": {
+      "type": "string",
+      "enum": [
+        "THREE_YEARS"
+      ]
     },
     "Site": {
       "type": "structure",
@@ -724,6 +936,18 @@
     "SiteName": {
       "type": "string",
       "documentation": "<p>The name of the site.</p>",
+      "max": 1000,
+      "min": 1,
+      "pattern": "^[\\S ]+$"
+    },
+    "SkuCode": {
+      "type": "string",
+      "max": 10,
+      "min": 1,
+      "pattern": "OR-[A-Z0-9]{7}"
+    },
+    "Status": {
+      "type": "string",
       "max": 1000,
       "min": 1,
       "pattern": "^[\\S ]+$"

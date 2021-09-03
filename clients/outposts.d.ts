@@ -12,6 +12,14 @@ declare class Outposts extends Service {
   constructor(options?: Outposts.Types.ClientConfiguration)
   config: Config & Outposts.Types.ClientConfiguration;
   /**
+   * Creates an order for an Outpost.
+   */
+  createOrder(params: Outposts.Types.CreateOrderInput, callback?: (err: AWSError, data: Outposts.Types.CreateOrderOutput) => void): Request<Outposts.Types.CreateOrderOutput, AWSError>;
+  /**
+   * Creates an order for an Outpost.
+   */
+  createOrder(callback?: (err: AWSError, data: Outposts.Types.CreateOrderOutput) => void): Request<Outposts.Types.CreateOrderOutput, AWSError>;
+  /**
    * Creates an Outpost. You can specify AvailabilityZone or AvailabilityZoneId.
    */
   createOutpost(params: Outposts.Types.CreateOutpostInput, callback?: (err: AWSError, data: Outposts.Types.CreateOutpostOutput) => void): Request<Outposts.Types.CreateOutpostOutput, AWSError>;
@@ -99,6 +107,30 @@ declare namespace Outposts {
   export type AvailabilityZoneId = string;
   export type AvailabilityZoneIdList = AvailabilityZoneId[];
   export type AvailabilityZoneList = AvailabilityZone[];
+  export interface CreateOrderInput {
+    /**
+     *  The ID or the Amazon Resource Name (ARN) of the Outpost. 
+     */
+    OutpostIdentifier: OutpostIdentifier;
+    /**
+     * The line items that make up the order.
+     */
+    LineItems: LineItemRequestListDefinition;
+    /**
+     * The payment option for the order.
+     */
+    PaymentOption: PaymentOption;
+    /**
+     * The payment terms for the order.
+     */
+    PaymentTerm?: PaymentTerm;
+  }
+  export interface CreateOrderOutput {
+    /**
+     * Information about this order.
+     */
+    Order?: Order;
+  }
   export interface CreateOutpostInput {
     Name: OutpostName;
     Description?: OutpostDescription;
@@ -114,6 +146,9 @@ declare namespace Outposts {
     Outpost?: Outpost;
   }
   export interface DeleteOutpostInput {
+    /**
+     *  The ID of the Outpost. 
+     */
     OutpostId: OutpostId;
   }
   export interface DeleteOutpostOutput {
@@ -124,9 +159,15 @@ declare namespace Outposts {
   export interface DeleteSiteOutput {
   }
   export interface GetOutpostInput {
+    /**
+     *  The ID of the Outpost. 
+     */
     OutpostId: OutpostId;
   }
   export interface GetOutpostInstanceTypesInput {
+    /**
+     *  The ID of the Outpost. 
+     */
     OutpostId: OutpostId;
     NextToken?: Token;
     MaxResults?: MaxResults1000;
@@ -134,12 +175,16 @@ declare namespace Outposts {
   export interface GetOutpostInstanceTypesOutput {
     InstanceTypes?: InstanceTypeListDefinition;
     NextToken?: Token;
+    /**
+     *  The ID of the Outpost. 
+     */
     OutpostId?: OutpostId;
     OutpostArn?: OutpostArn;
   }
   export interface GetOutpostOutput {
     Outpost?: Outpost;
   }
+  export type ISO8601Timestamp = Date;
   export type InstanceType = string;
   export interface InstanceTypeItem {
     InstanceType?: InstanceType;
@@ -147,6 +192,38 @@ declare namespace Outposts {
   export type InstanceTypeListDefinition = InstanceTypeItem[];
   export type LifeCycleStatus = string;
   export type LifeCycleStatusList = LifeCycleStatus[];
+  export interface LineItem {
+    /**
+     *  The ID of the catalog item. 
+     */
+    CatalogItemId?: SkuCode;
+    /**
+     * The ID of the line item.
+     */
+    LineItemId?: LineItemId;
+    /**
+     * The quantity of the line item.
+     */
+    Quantity?: LineItemQuantity;
+    /**
+     * The status of the line item.
+     */
+    Status?: Status;
+  }
+  export type LineItemId = string;
+  export type LineItemListDefinition = LineItem[];
+  export type LineItemQuantity = number;
+  export interface LineItemRequest {
+    /**
+     * The ID of the catalog item.
+     */
+    CatalogItemId?: SkuCode;
+    /**
+     * The quantity of a line item request.
+     */
+    Quantity?: LineItemQuantity;
+  }
+  export type LineItemRequestListDefinition = LineItemRequest[];
   export interface ListOutpostsInput {
     NextToken?: Token;
     MaxResults?: MaxResults1000;
@@ -188,7 +265,42 @@ declare namespace Outposts {
     Tags?: TagMap;
   }
   export type MaxResults1000 = number;
+  export interface Order {
+    /**
+     *  The ID of the Outpost. 
+     */
+    OutpostId?: OutpostIdOnly;
+    /**
+     * The ID of the order.
+     */
+    OrderId?: OrderId;
+    /**
+     * The status of the order
+     */
+    Status?: OrderStatus;
+    /**
+     * The line items for the order
+     */
+    LineItems?: LineItemListDefinition;
+    /**
+     * The payment option for the order.
+     */
+    PaymentOption?: PaymentOption;
+    /**
+     * The submission date for the order.
+     */
+    OrderSubmissionDate?: ISO8601Timestamp;
+    /**
+     * The fulfillment date of the order.
+     */
+    OrderFulfilledDate?: ISO8601Timestamp;
+  }
+  export type OrderId = string;
+  export type OrderStatus = "RECEIVED"|"PENDING"|"PROCESSING"|"INSTALLING"|"FULFILLED"|"CANCELLED"|string;
   export interface Outpost {
+    /**
+     *  The ID of the Outpost. 
+     */
     OutpostId?: OutpostId;
     OwnerId?: OwnerId;
     OutpostArn?: OutpostArn;
@@ -207,8 +319,12 @@ declare namespace Outposts {
   export type OutpostArn = string;
   export type OutpostDescription = string;
   export type OutpostId = string;
+  export type OutpostIdOnly = string;
+  export type OutpostIdentifier = string;
   export type OutpostName = string;
   export type OwnerId = string;
+  export type PaymentOption = "ALL_UPFRONT"|"NO_UPFRONT"|"PARTIAL_UPFRONT"|string;
+  export type PaymentTerm = "THREE_YEARS"|string;
   export interface Site {
     SiteId?: SiteId;
     AccountId?: AccountId;
@@ -224,6 +340,8 @@ declare namespace Outposts {
   export type SiteDescription = string;
   export type SiteId = string;
   export type SiteName = string;
+  export type SkuCode = string;
+  export type Status = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};

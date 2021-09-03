@@ -1179,6 +1179,27 @@ declare namespace FraudDetector {
   }
   export type ExternalModelEndpointDataBlobMap = {[key: string]: ModelEndpointDataBlob};
   export type ExternalModelList = ExternalModel[];
+  export interface ExternalModelOutputs {
+    /**
+     * The Amazon SageMaker model.
+     */
+    externalModel?: ExternalModelSummary;
+    /**
+     * The fraud prediction scores from Amazon SageMaker model.
+     */
+    outputs?: ExternalModelPredictionMap;
+  }
+  export type ExternalModelPredictionMap = {[key: string]: string};
+  export interface ExternalModelSummary {
+    /**
+     * The endpoint of the Amazon SageMaker model.
+     */
+    modelEndpoint?: string;
+    /**
+     * The source of the model.
+     */
+    modelSource?: ModelSource;
+  }
   export type ExternalModelsMaxResults = number;
   export interface FieldValidationMessage {
     /**
@@ -1387,6 +1408,10 @@ declare namespace FraudDetector {
      * The results from the rules.
      */
     ruleResults?: ListOfRuleResults;
+    /**
+     * The model scores for Amazon SageMaker models.
+     */
+    externalModelOutputs?: ListOfExternalModelOutputs;
   }
   export interface GetEventTypesRequest {
     /**
@@ -1660,6 +1685,7 @@ declare namespace FraudDetector {
     labelMapper: labelMapper;
   }
   export type Language = "DETECTORPL"|string;
+  export type ListOfExternalModelOutputs = ExternalModelOutputs[];
   export type ListOfLogOddsMetrics = LogOddsMetric[];
   export type ListOfModelScores = ModelScores[];
   export type ListOfModelVersions = ModelVersion[];

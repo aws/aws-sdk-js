@@ -644,7 +644,7 @@ declare namespace CodeGuruReviewer {
   }
   export type Reaction = "ThumbsUp"|"ThumbsDown"|string;
   export type Reactions = Reaction[];
-  export type RecommendationCategory = "AWSBestPractices"|"AWSCloudFormationIssues"|"DuplicateCode"|"CodeMaintenanceIssues"|"ConcurrencyIssues"|"InputValidations"|"PythonBestPractices"|"JavaBestPractices"|"ResourceLeaks"|"SecurityIssues"|string;
+  export type RecommendationCategory = "AWSBestPractices"|"AWSCloudFormationIssues"|"DuplicateCode"|"CodeMaintenanceIssues"|"ConcurrencyIssues"|"InputValidations"|"PythonBestPractices"|"JavaBestPractices"|"ResourceLeaks"|"SecurityIssues"|"CodeInconsistencies"|string;
   export interface RecommendationFeedback {
     /**
      * The Amazon Resource Name (ARN) of the  CodeReview  object. 
