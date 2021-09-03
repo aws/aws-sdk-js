@@ -69,9 +69,9 @@ export class Service {
 export interface ServiceConfigurationOptions extends ConfigurationOptions {
     /**
      * The endpoint URI to send requests to. The default endpoint is built from the configured region. 
-     * The endpoint should be a string like 'https://{service}.{region}.amazonaws.com'.
+     * The endpoint should be a string like 'https://{service}.{region}.amazonaws.com' or an Endpoint object.
      */
-    endpoint?: string;
+    endpoint?: string | Endpoint;
     /**
      * An optional map of parameters to bind to every request sent by this service object. 
      * For more information on bound parameters, see "Working with Services" in the Getting Started Guide.

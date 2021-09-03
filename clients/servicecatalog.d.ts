@@ -100,19 +100,19 @@ declare class ServiceCatalog extends Service {
    */
   createPortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioOutput, AWSError>;
   /**
-   * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account. Note that if a delegated admin is de-registered, they can no longer create portfolio shares.  AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node. You can't share a shared resource. This includes portfolios that contain a shared product.
+   * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the management account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account. Note that if a delegated admin is de-registered, they can no longer create portfolio shares.  AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node. You can't share a shared resource, including portfolios that contain a shared product. If the portfolio share with the specified account or organization node already exists, this action will have no effect and will not return an error. To update an existing share, you must use the  UpdatePortfolioShare API instead.
    */
   createPortfolioShare(params: ServiceCatalog.Types.CreatePortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioShareOutput, AWSError>;
   /**
-   * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the master account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account. Note that if a delegated admin is de-registered, they can no longer create portfolio shares.  AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node. You can't share a shared resource. This includes portfolios that contain a shared product.
+   * Shares the specified portfolio with the specified account or organization node. Shares to an organization node can only be created by the management account of an organization or by a delegated administrator. You can share portfolios to an organization, an organizational unit, or a specific account. Note that if a delegated admin is de-registered, they can no longer create portfolio shares.  AWSOrganizationsAccess must be enabled in order to create a portfolio share to an organization node. You can't share a shared resource, including portfolios that contain a shared product. If the portfolio share with the specified account or organization node already exists, this action will have no effect and will not return an error. To update an existing share, you must use the  UpdatePortfolioShare API instead.
    */
   createPortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.CreatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.CreatePortfolioShareOutput, AWSError>;
   /**
-   * Creates a product. A delegated admin is authorized to invoke this command.
+   * Creates a product. A delegated admin is authorized to invoke this command. The user or role that performs this operation must have the cloudformation:GetTemplate IAM policy permission. This policy permission is required when using the ImportFromPhysicalId template source in the information data section.
    */
   createProduct(params: ServiceCatalog.Types.CreateProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProductOutput) => void): Request<ServiceCatalog.Types.CreateProductOutput, AWSError>;
   /**
-   * Creates a product. A delegated admin is authorized to invoke this command.
+   * Creates a product. A delegated admin is authorized to invoke this command. The user or role that performs this operation must have the cloudformation:GetTemplate IAM policy permission. This policy permission is required when using the ImportFromPhysicalId template source in the information data section.
    */
   createProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProductOutput) => void): Request<ServiceCatalog.Types.CreateProductOutput, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class ServiceCatalog extends Service {
    */
   createProvisionedProductPlan(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisionedProductPlanOutput) => void): Request<ServiceCatalog.Types.CreateProvisionedProductPlanOutput, AWSError>;
   /**
-   * Creates a provisioning artifact (also known as a version) for the specified product. You cannot create a provisioning artifact for a product that was shared with you.
+   * Creates a provisioning artifact (also known as a version) for the specified product. You cannot create a provisioning artifact for a product that was shared with you. The user or role that performs this operation must have the cloudformation:GetTemplate IAM policy permission. This policy permission is required when using the ImportFromPhysicalId template source in the information data section.
    */
   createProvisioningArtifact(params: ServiceCatalog.Types.CreateProvisioningArtifactInput, callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.CreateProvisioningArtifactOutput, AWSError>;
   /**
-   * Creates a provisioning artifact (also known as a version) for the specified product. You cannot create a provisioning artifact for a product that was shared with you.
+   * Creates a provisioning artifact (also known as a version) for the specified product. You cannot create a provisioning artifact for a product that was shared with you. The user or role that performs this operation must have the cloudformation:GetTemplate IAM policy permission. This policy permission is required when using the ImportFromPhysicalId template source in the information data section.
    */
   createProvisioningArtifact(callback?: (err: AWSError, data: ServiceCatalog.Types.CreateProvisioningArtifactOutput) => void): Request<ServiceCatalog.Types.CreateProvisioningArtifactOutput, AWSError>;
   /**
@@ -164,11 +164,11 @@ declare class ServiceCatalog extends Service {
    */
   deletePortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioOutput, AWSError>;
   /**
-   * Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the master account of an organization or by a delegated administrator. Note that if a delegated admin is de-registered, portfolio shares created from that account are removed.
+   * Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the management account of an organization or by a delegated administrator. Note that if a delegated admin is de-registered, portfolio shares created from that account are removed.
    */
   deletePortfolioShare(params: ServiceCatalog.Types.DeletePortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioShareOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioShareOutput, AWSError>;
   /**
-   * Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the master account of an organization or by a delegated administrator. Note that if a delegated admin is de-registered, portfolio shares created from that account are removed.
+   * Stops sharing the specified portfolio with the specified account or organization node. Shares to an organization node can only be deleted by the management account of an organization or by a delegated administrator. Note that if a delegated admin is de-registered, portfolio shares created from that account are removed.
    */
   deletePortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.DeletePortfolioShareOutput) => void): Request<ServiceCatalog.Types.DeletePortfolioShareOutput, AWSError>;
   /**
@@ -236,13 +236,21 @@ declare class ServiceCatalog extends Service {
    */
   describePortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribePortfolioOutput) => void): Request<ServiceCatalog.Types.DescribePortfolioOutput, AWSError>;
   /**
-   * Gets the status of the specified portfolio share operation. This API can only be called by the master account in the organization or by a delegated admin.
+   * Gets the status of the specified portfolio share operation. This API can only be called by the management account in the organization or by a delegated admin.
    */
   describePortfolioShareStatus(params: ServiceCatalog.Types.DescribePortfolioShareStatusInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribePortfolioShareStatusOutput) => void): Request<ServiceCatalog.Types.DescribePortfolioShareStatusOutput, AWSError>;
   /**
-   * Gets the status of the specified portfolio share operation. This API can only be called by the master account in the organization or by a delegated admin.
+   * Gets the status of the specified portfolio share operation. This API can only be called by the management account in the organization or by a delegated admin.
    */
   describePortfolioShareStatus(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribePortfolioShareStatusOutput) => void): Request<ServiceCatalog.Types.DescribePortfolioShareStatusOutput, AWSError>;
+  /**
+   * Returns a summary of each of the portfolio shares that were created for the specified portfolio. You can use this API to determine which accounts or organizational nodes this portfolio have been shared, whether the recipient entity has imported the share, and whether TagOptions are included with the share. The PortfolioId and Type parameters are both required.
+   */
+  describePortfolioShares(params: ServiceCatalog.Types.DescribePortfolioSharesInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DescribePortfolioSharesOutput) => void): Request<ServiceCatalog.Types.DescribePortfolioSharesOutput, AWSError>;
+  /**
+   * Returns a summary of each of the portfolio shares that were created for the specified portfolio. You can use this API to determine which accounts or organizational nodes this portfolio have been shared, whether the recipient entity has imported the share, and whether TagOptions are included with the share. The PortfolioId and Type parameters are both required.
+   */
+  describePortfolioShares(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribePortfolioSharesOutput) => void): Request<ServiceCatalog.Types.DescribePortfolioSharesOutput, AWSError>;
   /**
    * Gets information about the specified product.
    */
@@ -332,11 +340,11 @@ declare class ServiceCatalog extends Service {
    */
   describeTagOption(callback?: (err: AWSError, data: ServiceCatalog.Types.DescribeTagOptionOutput) => void): Request<ServiceCatalog.Types.DescribeTagOptionOutput, AWSError>;
   /**
-   * Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the master account in the organization. This API can't be invoked if there are active delegated administrators in the organization. Note that a delegated administrator is not authorized to invoke DisableAWSOrganizationsAccess.
+   * Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the management account in the organization. This API can't be invoked if there are active delegated administrators in the organization. Note that a delegated administrator is not authorized to invoke DisableAWSOrganizationsAccess.
    */
   disableAWSOrganizationsAccess(params: ServiceCatalog.Types.DisableAWSOrganizationsAccessInput, callback?: (err: AWSError, data: ServiceCatalog.Types.DisableAWSOrganizationsAccessOutput) => void): Request<ServiceCatalog.Types.DisableAWSOrganizationsAccessOutput, AWSError>;
   /**
-   * Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the master account in the organization. This API can't be invoked if there are active delegated administrators in the organization. Note that a delegated administrator is not authorized to invoke DisableAWSOrganizationsAccess.
+   * Disable portfolio sharing through AWS Organizations feature. This feature will not delete your current shares but it will prevent you from creating new shares throughout your organization. Current shares will not be in sync with your organization structure if it changes after calling this API. This API can only be called by the management account in the organization. This API can't be invoked if there are active delegated administrators in the organization. Note that a delegated administrator is not authorized to invoke DisableAWSOrganizationsAccess.
    */
   disableAWSOrganizationsAccess(callback?: (err: AWSError, data: ServiceCatalog.Types.DisableAWSOrganizationsAccessOutput) => void): Request<ServiceCatalog.Types.DisableAWSOrganizationsAccessOutput, AWSError>;
   /**
@@ -380,11 +388,11 @@ declare class ServiceCatalog extends Service {
    */
   disassociateTagOptionFromResource(callback?: (err: AWSError, data: ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput) => void): Request<ServiceCatalog.Types.DisassociateTagOptionFromResourceOutput, AWSError>;
   /**
-   * Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization. By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure. Note that a delegated administrator is not authorized to invoke EnableAWSOrganizationsAccess.
+   * Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the management account in the organization. By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure. Note that a delegated administrator is not authorized to invoke EnableAWSOrganizationsAccess.
    */
   enableAWSOrganizationsAccess(params: ServiceCatalog.Types.EnableAWSOrganizationsAccessInput, callback?: (err: AWSError, data: ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput) => void): Request<ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput, AWSError>;
   /**
-   * Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the master account in the organization. By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure. Note that a delegated administrator is not authorized to invoke EnableAWSOrganizationsAccess.
+   * Enable portfolio sharing feature through AWS Organizations. This API will allow Service Catalog to receive updates on your organization in order to sync your shares with the current structure. This API can only be called by the management account in the organization. By calling this API Service Catalog will make a call to organizations:EnableAWSServiceAccess on your behalf so that your shares can be in sync with any changes in your AWS Organizations structure. Note that a delegated administrator is not authorized to invoke EnableAWSOrganizationsAccess.
    */
   enableAWSOrganizationsAccess(callback?: (err: AWSError, data: ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput) => void): Request<ServiceCatalog.Types.EnableAWSOrganizationsAccessOutput, AWSError>;
   /**
@@ -404,13 +412,29 @@ declare class ServiceCatalog extends Service {
    */
   executeProvisionedProductServiceAction(callback?: (err: AWSError, data: ServiceCatalog.Types.ExecuteProvisionedProductServiceActionOutput) => void): Request<ServiceCatalog.Types.ExecuteProvisionedProductServiceActionOutput, AWSError>;
   /**
-   * Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the master account in the organization or by a delegated admin.
+   * Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the management account in the organization or by a delegated admin.
    */
   getAWSOrganizationsAccessStatus(params: ServiceCatalog.Types.GetAWSOrganizationsAccessStatusInput, callback?: (err: AWSError, data: ServiceCatalog.Types.GetAWSOrganizationsAccessStatusOutput) => void): Request<ServiceCatalog.Types.GetAWSOrganizationsAccessStatusOutput, AWSError>;
   /**
-   * Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the master account in the organization or by a delegated admin.
+   * Get the Access Status for AWS Organization portfolio share feature. This API can only be called by the management account in the organization or by a delegated admin.
    */
   getAWSOrganizationsAccessStatus(callback?: (err: AWSError, data: ServiceCatalog.Types.GetAWSOrganizationsAccessStatusOutput) => void): Request<ServiceCatalog.Types.GetAWSOrganizationsAccessStatusOutput, AWSError>;
+  /**
+   * This API takes either a ProvisonedProductId or a ProvisionedProductName, along with a list of one or more output keys, and responds with the key/value pairs of those outputs.
+   */
+  getProvisionedProductOutputs(params: ServiceCatalog.Types.GetProvisionedProductOutputsInput, callback?: (err: AWSError, data: ServiceCatalog.Types.GetProvisionedProductOutputsOutput) => void): Request<ServiceCatalog.Types.GetProvisionedProductOutputsOutput, AWSError>;
+  /**
+   * This API takes either a ProvisonedProductId or a ProvisionedProductName, along with a list of one or more output keys, and responds with the key/value pairs of those outputs.
+   */
+  getProvisionedProductOutputs(callback?: (err: AWSError, data: ServiceCatalog.Types.GetProvisionedProductOutputsOutput) => void): Request<ServiceCatalog.Types.GetProvisionedProductOutputsOutput, AWSError>;
+  /**
+   * Requests the import of a resource as a Service Catalog provisioned product that is associated to a Service Catalog product and provisioning artifact. Once imported, all supported Service Catalog governance actions are supported on the provisioned product. Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets and non-root nested stacks are not supported. The CloudFormation stack must have one of the following statuses to be imported: CREATE_COMPLETE, UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, IMPORT_ROLLBACK_COMPLETE. Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact.  The user or role that performs this operation must have the cloudformation:GetTemplate and cloudformation:DescribeStacks IAM policy permissions. 
+   */
+  importAsProvisionedProduct(params: ServiceCatalog.Types.ImportAsProvisionedProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ImportAsProvisionedProductOutput) => void): Request<ServiceCatalog.Types.ImportAsProvisionedProductOutput, AWSError>;
+  /**
+   * Requests the import of a resource as a Service Catalog provisioned product that is associated to a Service Catalog product and provisioning artifact. Once imported, all supported Service Catalog governance actions are supported on the provisioned product. Resource import only supports CloudFormation stack ARNs. CloudFormation StackSets and non-root nested stacks are not supported. The CloudFormation stack must have one of the following statuses to be imported: CREATE_COMPLETE, UPDATE_COMPLETE, UPDATE_ROLLBACK_COMPLETE, IMPORT_COMPLETE, IMPORT_ROLLBACK_COMPLETE. Import of the resource requires that the CloudFormation stack template matches the associated Service Catalog product provisioning artifact.  The user or role that performs this operation must have the cloudformation:GetTemplate and cloudformation:DescribeStacks IAM policy permissions. 
+   */
+  importAsProvisionedProduct(callback?: (err: AWSError, data: ServiceCatalog.Types.ImportAsProvisionedProductOutput) => void): Request<ServiceCatalog.Types.ImportAsProvisionedProductOutput, AWSError>;
   /**
    * Lists all portfolios for which sharing was accepted by this account.
    */
@@ -444,11 +468,11 @@ declare class ServiceCatalog extends Service {
    */
   listLaunchPaths(callback?: (err: AWSError, data: ServiceCatalog.Types.ListLaunchPathsOutput) => void): Request<ServiceCatalog.Types.ListLaunchPathsOutput, AWSError>;
   /**
-   * Lists the organization nodes that have access to the specified portfolio. This API can only be called by the master account in the organization or by a delegated admin. If a delegated admin is de-registered, they can no longer perform this operation.
+   * Lists the organization nodes that have access to the specified portfolio. This API can only be called by the management account in the organization or by a delegated admin. If a delegated admin is de-registered, they can no longer perform this operation.
    */
   listOrganizationPortfolioAccess(params: ServiceCatalog.Types.ListOrganizationPortfolioAccessInput, callback?: (err: AWSError, data: ServiceCatalog.Types.ListOrganizationPortfolioAccessOutput) => void): Request<ServiceCatalog.Types.ListOrganizationPortfolioAccessOutput, AWSError>;
   /**
-   * Lists the organization nodes that have access to the specified portfolio. This API can only be called by the master account in the organization or by a delegated admin. If a delegated admin is de-registered, they can no longer perform this operation.
+   * Lists the organization nodes that have access to the specified portfolio. This API can only be called by the management account in the organization or by a delegated admin. If a delegated admin is de-registered, they can no longer perform this operation.
    */
   listOrganizationPortfolioAccess(callback?: (err: AWSError, data: ServiceCatalog.Types.ListOrganizationPortfolioAccessOutput) => void): Request<ServiceCatalog.Types.ListOrganizationPortfolioAccessOutput, AWSError>;
   /**
@@ -628,6 +652,14 @@ declare class ServiceCatalog extends Service {
    */
   updatePortfolio(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdatePortfolioOutput) => void): Request<ServiceCatalog.Types.UpdatePortfolioOutput, AWSError>;
   /**
+   * Updates the specified portfolio share. You can use this API to enable or disable TagOptions sharing for an existing portfolio share.  The portfolio share cannot be updated if the  CreatePortfolioShare operation is IN_PROGRESS, as the share is not available to recipient entities. In this case, you must wait for the portfolio share to be COMPLETED. You must provide the accountId or organization node in the input, but not both. If the portfolio is shared to both an external account and an organization node, and both shares need to be updated, you must invoke UpdatePortfolioShare separately for each share type.  This API cannot be used for removing the portfolio share. You must use DeletePortfolioShare API for that action. 
+   */
+  updatePortfolioShare(params: ServiceCatalog.Types.UpdatePortfolioShareInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.UpdatePortfolioShareOutput, AWSError>;
+  /**
+   * Updates the specified portfolio share. You can use this API to enable or disable TagOptions sharing for an existing portfolio share.  The portfolio share cannot be updated if the  CreatePortfolioShare operation is IN_PROGRESS, as the share is not available to recipient entities. In this case, you must wait for the portfolio share to be COMPLETED. You must provide the accountId or organization node in the input, but not both. If the portfolio is shared to both an external account and an organization node, and both shares need to be updated, you must invoke UpdatePortfolioShare separately for each share type.  This API cannot be used for removing the portfolio share. You must use DeletePortfolioShare API for that action. 
+   */
+  updatePortfolioShare(callback?: (err: AWSError, data: ServiceCatalog.Types.UpdatePortfolioShareOutput) => void): Request<ServiceCatalog.Types.UpdatePortfolioShareOutput, AWSError>;
+  /**
    * Updates the specified product.
    */
   updateProduct(params: ServiceCatalog.Types.UpdateProductInput, callback?: (err: AWSError, data: ServiceCatalog.Types.UpdateProductOutput) => void): Request<ServiceCatalog.Types.UpdateProductOutput, AWSError>;
@@ -688,7 +720,7 @@ declare namespace ServiceCatalog {
      */
     PortfolioId: Id;
     /**
-     * The type of shared portfolios to accept. The default is to accept imported portfolios.    AWS_ORGANIZATIONS - Accept portfolios shared by the master account of your organization.    IMPORTED - Accept imported portfolios.    AWS_SERVICECATALOG - Not supported. (Throws ResourceNotFoundException.)   For example, aws servicecatalog accept-portfolio-share --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS 
+     * The type of shared portfolios to accept. The default is to accept imported portfolios.    AWS_ORGANIZATIONS - Accept portfolios shared by the management account of your organization.    IMPORTED - Accept imported portfolios.    AWS_SERVICECATALOG - Not supported. (Throws ResourceNotFoundException.)   For example, aws servicecatalog accept-portfolio-share --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS 
      */
     PortfolioShareType?: PortfolioShareType;
   }
@@ -710,8 +742,7 @@ declare namespace ServiceCatalog {
   export type AccountId = string;
   export type AccountIds = AccountId[];
   export type AddTags = Tag[];
-  export type AllowedValue = string;
-  export type AllowedValues = AllowedValue[];
+  export type AllowedValues = String[];
   export type ApproximateCount = number;
   export interface AssociateBudgetWithResourceInput {
     /**
@@ -830,6 +861,7 @@ declare namespace ServiceCatalog {
      */
     FailedServiceActionAssociations?: FailedServiceActionAssociations;
   }
+  export type Boolean = boolean;
   export interface BudgetDetail {
     /**
      * Name of the associated budget.
@@ -1022,13 +1054,17 @@ declare namespace ServiceCatalog {
      */
     AccountId?: AccountId;
     /**
-     * The organization node to whom you are going to share. If OrganizationNode is passed in, PortfolioShare will be created for the node and its children (when applies), and a PortfolioShareToken will be returned in the output in order for the administrator to monitor the status of the PortfolioShare creation process.
+     * The organization node to whom you are going to share. If OrganizationNode is passed in, PortfolioShare will be created for the node an ListOrganizationPortfolioAccessd its children (when applies), and a PortfolioShareToken will be returned in the output in order for the administrator to monitor the status of the PortfolioShare creation process.
      */
     OrganizationNode?: OrganizationNode;
+    /**
+     * Enables or disables TagOptions  sharing when creating the portfolio share. If this flag is not provided, TagOptions sharing is disabled.
+     */
+    ShareTagOptions?: Boolean;
   }
   export interface CreatePortfolioShareOutput {
     /**
-     * The portfolio share unique identifier. This will only be returned if portfolio is shared to an organization node.
+     * The portfolio shares a unique identifier that only returns if the portfolio is shared to an organization node.
      */
     PortfolioShareToken?: Id;
   }
@@ -1062,7 +1098,7 @@ declare namespace ServiceCatalog {
      */
     SupportEmail?: SupportEmail;
     /**
-     * The contact URL for product support.
+     * The contact URL for product support.  ^https?:\/\// / is the pattern used to validate SupportUrl.
      */
     SupportUrl?: SupportUrl;
     /**
@@ -1074,7 +1110,7 @@ declare namespace ServiceCatalog {
      */
     Tags?: AddTags;
     /**
-     * The configuration of the provisioning artifact.
+     * The configuration of the provisioning artifact. 
      */
     ProvisioningArtifactParameters: ProvisioningArtifactProperties;
     /**
@@ -1088,7 +1124,7 @@ declare namespace ServiceCatalog {
      */
     ProductViewDetail?: ProductViewDetail;
     /**
-     * Information about the provisioning artifact.
+     * Information about the provisioning artifact. 
      */
     ProvisioningArtifactDetail?: ProvisioningArtifactDetail;
     /**
@@ -1188,7 +1224,7 @@ declare namespace ServiceCatalog {
      */
     ProvisioningArtifactDetail?: ProvisioningArtifactDetail;
     /**
-     * The URL of the CloudFormation template in Amazon S3, in JSON format.
+     * Specify the template source with one of the following options, but not both. Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ]. The URL of the CloudFormation template in Amazon S3, in JSON format.   LoadTemplateFromURL  Use the URL of the CloudFormation template in Amazon S3 in JSON format.  ImportFromPhysicalId  Use the physical id of the resource that contains the template; currently supports CloudFormation stack ARN.
      */
     Info?: ProvisioningArtifactInfo;
     /**
@@ -1463,6 +1499,35 @@ declare namespace ServiceCatalog {
      */
     ShareDetails?: ShareDetails;
   }
+  export type DescribePortfolioShareType = "ACCOUNT"|"ORGANIZATION"|"ORGANIZATIONAL_UNIT"|"ORGANIZATION_MEMBER_ACCOUNT"|string;
+  export interface DescribePortfolioSharesInput {
+    /**
+     * The unique identifier of the portfolio for which shares will be retrieved.
+     */
+    PortfolioId: Id;
+    /**
+     * The type of portfolio share to summarize. This field acts as a filter on the type of portfolio share, which can be one of the following: 1. ACCOUNT - Represents an external account to account share. 2. ORGANIZATION - Represents a share to an organization. This share is available to every account in the organization. 3. ORGANIZATIONAL_UNIT - Represents a share to an organizational unit. 4. ORGANIZATION_MEMBER_ACCOUNT - Represents a share to an account in the organization.
+     */
+    Type: DescribePortfolioShareType;
+    /**
+     * The page token for the next set of results. To retrieve the first set of results, use null.
+     */
+    PageToken?: PageToken;
+    /**
+     * The maximum number of items to return with this call.
+     */
+    PageSize?: PageSizeMax100;
+  }
+  export interface DescribePortfolioSharesOutput {
+    /**
+     * The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
+     */
+    NextPageToken?: PageToken;
+    /**
+     * Summaries about each of the portfolio shares.
+     */
+    PortfolioShareDetails?: PortfolioShareDetails;
+  }
   export interface DescribeProductAsAdminInput {
     /**
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
@@ -1476,6 +1541,10 @@ declare namespace ServiceCatalog {
      * The product name.
      */
     Name?: ProductViewName;
+    /**
+     * The unique identifier of the shared portfolio that the specified product is associated with. You can provide this parameter to retrieve the shared TagOptions associated with the product. If this parameter is provided and if TagOptions sharing is enabled in the portfolio share, the API returns both local and shared TagOptions associated with the product. Otherwise only local TagOptions will be returned. 
+     */
+    SourcePortfolioId?: Id;
   }
   export interface DescribeProductAsAdminOutput {
     /**
@@ -1557,9 +1626,13 @@ declare namespace ServiceCatalog {
      */
     AcceptLanguage?: AcceptLanguage;
     /**
-     * The provisioned product identifier.
+     * The provisioned product identifier. You must provide the name or ID, but not both. If you do not provide a name or ID, or you provide both name and ID, an InvalidParametersException will occur.
      */
-    Id: Id;
+    Id?: Id;
+    /**
+     * The name of the provisioned product. You must provide the name or ID, but not both. If you do not provide a name or ID, or you provide both name and ID, an InvalidParametersException will occur.
+     */
+    Name?: ProvisionedProductName;
   }
   export interface DescribeProvisionedProductOutput {
     /**
@@ -1968,10 +2041,75 @@ declare namespace ServiceCatalog {
      */
     AccessStatus?: AccessStatus;
   }
+  export interface GetProvisionedProductOutputsInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The identifier of the provisioned product that you want the outputs from.
+     */
+    ProvisionedProductId?: Id;
+    /**
+     * The name of the provisioned product that you want the outputs from.
+     */
+    ProvisionedProductName?: ProvisionedProductName;
+    /**
+     * The list of keys that the API should return with their values. If none are provided, the API will return all outputs of the provisioned product.
+     */
+    OutputKeys?: OutputKeys;
+    /**
+     * The maximum number of items to return with this call.
+     */
+    PageSize?: PageSize;
+    /**
+     * The page token for the next set of results. To retrieve the first set of results, use null.
+     */
+    PageToken?: PageToken;
+  }
+  export interface GetProvisionedProductOutputsOutput {
+    /**
+     * Information about the product created as the result of a request. For example, the output for a CloudFormation-backed product that creates an S3 bucket would include the S3 bucket URL. 
+     */
+    Outputs?: RecordOutputs;
+    /**
+     * The page token to use to retrieve the next set of results. If there are no additional results, this value is null.
+     */
+    NextPageToken?: PageToken;
+  }
   export type HasDefaultPath = boolean;
   export type Id = string;
   export type IdempotencyToken = string;
   export type IgnoreErrors = boolean;
+  export interface ImportAsProvisionedProductInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The product identifier.
+     */
+    ProductId: Id;
+    /**
+     * The identifier of the provisioning artifact.
+     */
+    ProvisioningArtifactId: Id;
+    /**
+     * The user-friendly name of the provisioned product. The value must be unique for the AWS account. The name cannot be updated after the product is provisioned. 
+     */
+    ProvisionedProductName: ProvisionedProductName;
+    /**
+     * The unique identifier of the resource to be imported. It only currently supports CloudFormation stack IDs.
+     */
+    PhysicalId: PhysicalId;
+    /**
+     * A unique identifier that you provide to ensure idempotency. If multiple requests differ only by the idempotency token, the same response is returned for each repeated request.
+     */
+    IdempotencyToken: IdempotencyToken;
+  }
+  export interface ImportAsProvisionedProductOutput {
+    RecordDetail?: RecordDetail;
+  }
   export type InstructionType = string;
   export type InstructionValue = string;
   export type LastRequestId = string;
@@ -2017,9 +2155,9 @@ declare namespace ServiceCatalog {
     /**
      * The maximum number of items to return with this call.
      */
-    PageSize?: PageSize;
+    PageSize?: PageSizeMax100;
     /**
-     * The type of shared portfolios to list. The default is to list imported portfolios.    AWS_ORGANIZATIONS - List portfolios shared by the master account of your organization    AWS_SERVICECATALOG - List default portfolios    IMPORTED - List imported portfolios  
+     * The type of shared portfolios to list. The default is to list imported portfolios.    AWS_ORGANIZATIONS - List portfolios shared by the management account of your organization    AWS_SERVICECATALOG - List default portfolios    IMPORTED - List imported portfolios  
      */
     PortfolioShareType?: PortfolioShareType;
   }
@@ -2173,7 +2311,7 @@ declare namespace ServiceCatalog {
     /**
      * The maximum number of items to return with this call.
      */
-    PageSize?: PageSize;
+    PageSize?: PageSizeMax100;
   }
   export interface ListPortfolioAccessOutput {
     /**
@@ -2201,7 +2339,7 @@ declare namespace ServiceCatalog {
     /**
      * The maximum number of items to return with this call.
      */
-    PageSize?: PageSize;
+    PageSize?: PageSizeMax100;
   }
   export interface ListPortfoliosForProductOutput {
     /**
@@ -2225,7 +2363,7 @@ declare namespace ServiceCatalog {
     /**
      * The maximum number of items to return with this call.
      */
-    PageSize?: PageSize;
+    PageSize?: PageSizeMax100;
   }
   export interface ListPortfoliosOutput {
     /**
@@ -2543,6 +2681,7 @@ declare namespace ServiceCatalog {
   export type NoEcho = boolean;
   export type NotificationArn = string;
   export type NotificationArns = NotificationArn[];
+  export type NullableBoolean = boolean;
   export interface OrganizationNode {
     /**
      * The organization node type.
@@ -2558,14 +2697,41 @@ declare namespace ServiceCatalog {
   export type OrganizationNodes = OrganizationNode[];
   export type OutputDescription = string;
   export type OutputKey = string;
+  export type OutputKeys = OutputKey[];
   export type OutputValue = string;
+  export type Owner = string;
   export type PageSize = number;
+  export type PageSizeMax100 = number;
   export type PageToken = string;
   export interface ParameterConstraints {
     /**
      * The values that the administrator has allowed for the parameter.
      */
     AllowedValues?: AllowedValues;
+    /**
+     * A regular expression that represents the patterns that allow for String types. The pattern must match the entire parameter value provided.
+     */
+    AllowedPattern?: String;
+    /**
+     * A string that explains a constraint when the constraint is violated. For example, without a constraint description, a parameter that has an allowed pattern of [A-Za-z0-9]+ displays the following error message when the user specifies an invalid value:  Malformed input-Parameter MyParameter must match pattern [A-Za-z0-9]+  By adding a constraint description, such as must only contain letters (uppercase and lowercase) and numbers, you can display the following customized error message:  Malformed input-Parameter MyParameter must only contain uppercase and lowercase letters and numbers. 
+     */
+    ConstraintDescription?: String;
+    /**
+     * An integer value that determines the largest number of characters you want to allow for String types. 
+     */
+    MaxLength?: String;
+    /**
+     * An integer value that determines the smallest number of characters you want to allow for String types.
+     */
+    MinLength?: String;
+    /**
+     * A numeric value that determines the largest numeric value you want to allow for Number types.
+     */
+    MaxValue?: String;
+    /**
+     * A numeric value that determines the smallest numeric value you want to allow for Number types. 
+     */
+    MinValue?: String;
   }
   export type ParameterKey = string;
   export type ParameterType = string;
@@ -2603,6 +2769,25 @@ declare namespace ServiceCatalog {
   export type PortfolioDetails = PortfolioDetail[];
   export type PortfolioDisplayName = string;
   export type PortfolioName = string;
+  export interface PortfolioShareDetail {
+    /**
+     * The identifier of the recipient entity that received the portfolio share. The recipient entities can be one of the following:  1. An external account. 2. An organziation member account. 3. An organzational unit (OU). 4. The organization itself. (This shares with every account in the organization).
+     */
+    PrincipalId?: Id;
+    /**
+     * The type of the portfolio share.
+     */
+    Type?: DescribePortfolioShareType;
+    /**
+     * Indicates whether the shared portfolio is imported by the recipient account. If the recipient is in an organization node, the share is automatically imported, and the field is always set to true.
+     */
+    Accepted?: Boolean;
+    /**
+     * Indicates whether TagOptions sharing is enabled or disabled for the portfolio share.
+     */
+    ShareTagOptions?: Boolean;
+  }
+  export type PortfolioShareDetails = PortfolioShareDetail[];
   export type PortfolioShareType = "IMPORTED"|"AWS_SERVICECATALOG"|"AWS_ORGANIZATIONS"|string;
   export interface Principal {
     /**
@@ -2708,7 +2893,7 @@ declare namespace ServiceCatalog {
      */
     SupportUrl?: SupportUrl;
   }
-  export type PropertyKey = "OWNER"|string;
+  export type PropertyKey = "OWNER"|"LAUNCH_ROLE"|string;
   export type PropertyName = string;
   export type PropertyValue = string;
   export type ProviderName = string;
@@ -2904,6 +3089,10 @@ declare namespace ServiceCatalog {
      * The identifier of the provisioning artifact. For example, pa-4abcdjnxjj6ne.
      */
     ProvisioningArtifactId?: Id;
+    /**
+     * The ARN of the launch role associated with the provisioned product.
+     */
+    LaunchRoleArn?: RoleArn;
   }
   export type ProvisionedProductDetails = ProvisionedProductDetail[];
   export type ProvisionedProductFilters = {[key: string]: ProvisionedProductViewFilterValues};
@@ -3129,7 +3318,7 @@ declare namespace ServiceCatalog {
      */
     Description?: ProvisioningArtifactDescription;
     /**
-     * The URL of the CloudFormation template in Amazon S3. Specify the URL in JSON format as follows:  "LoadTemplateFromURL": "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..." 
+     * Specify the template source with one of the following options, but not both. Keys accepted: [ LoadTemplateFromURL, ImportFromPhysicalId ] The URL of the CloudFormation template in Amazon S3. Specify the URL in JSON format as follows:  "LoadTemplateFromURL": "https://s3.amazonaws.com/cf-templates-ozkq9d3hgiq2-us-east-1/..."   ImportFromPhysicalId: The physical id of the resource that contains the template. Currently only supports CloudFormation stack arn. Specify the physical id in JSON format as follows: ImportFromPhysicalId: “arn:aws:cloudformation:[us-east-1]:[accountId]:stack/[StackName]/[resourceId] 
      */
     Info: ProvisioningArtifactInfo;
     /**
@@ -3192,7 +3381,7 @@ declare namespace ServiceCatalog {
   export type ProvisioningParameters = ProvisioningParameter[];
   export interface ProvisioningPreferences {
     /**
-     * One or more AWS accounts that will have access to the provisioned product. Applicable only to a CFN_STACKSET provisioned product type. The AWS accounts specified should be within the list of accounts in the STACKSET constraint. To get the list of accounts in the STACKSET constraint, use the DescribeProvisioningParameters operation. If no values are specified, the default value is all accounts from the STACKSET constraint.
+     * One or more AWS accounts where the provisioned product will be available. Applicable only to a CFN_STACKSET provisioned product type. The specified accounts should be within the list of accounts from the STACKSET constraint. To get the list of accounts in the STACKSET constraint, use the DescribeProvisioningParameters operation. If no values are specified, the default value is all acounts from the STACKSET constraint.
      */
     StackSetAccounts?: StackSetAccounts;
     /**
@@ -3269,6 +3458,10 @@ declare namespace ServiceCatalog {
      * One or more tags.
      */
     RecordTags?: RecordTags;
+    /**
+     * The ARN of the launch role associated with the provisioned product.
+     */
+    LaunchRoleArn?: RoleArn;
   }
   export type RecordDetails = RecordDetail[];
   export interface RecordError {
@@ -3323,7 +3516,7 @@ declare namespace ServiceCatalog {
      */
     PortfolioId: Id;
     /**
-     * The type of shared portfolios to reject. The default is to reject imported portfolios.    AWS_ORGANIZATIONS - Reject portfolios shared by the master account of your organization.    IMPORTED - Reject imported portfolios.    AWS_SERVICECATALOG - Not supported. (Throws ResourceNotFoundException.)   For example, aws servicecatalog reject-portfolio-share --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS 
+     * The type of shared portfolios to reject. The default is to reject imported portfolios.    AWS_ORGANIZATIONS - Reject portfolios shared by the management account of your organization.    IMPORTED - Reject imported portfolios.    AWS_SERVICECATALOG - Not supported. (Throws ResourceNotFoundException.)   For example, aws servicecatalog reject-portfolio-share --portfolio-id "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS 
      */
     PortfolioShareType?: PortfolioShareType;
   }
@@ -3423,6 +3616,8 @@ declare namespace ServiceCatalog {
     RequiresRecreation?: RequiresRecreation;
   }
   export type ResourceType = string;
+  export type RetainPhysicalResources = boolean;
+  export type RoleArn = string;
   export interface ScanProvisionedProductsInput {
     /**
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
@@ -3510,7 +3705,7 @@ declare namespace ServiceCatalog {
     /**
      * The maximum number of items to return with this call.
      */
-    PageSize?: PageSize;
+    PageSize?: PageSizeMax100;
     /**
      * The sort field. If no value is specified, the results are not sorted.
      */
@@ -3691,6 +3886,7 @@ declare namespace ServiceCatalog {
   export type Status = "AVAILABLE"|"CREATING"|"FAILED"|string;
   export type StatusDetail = string;
   export type StatusMessage = string;
+  export type String = string;
   export type SuccessfulShares = AccountId[];
   export type SupportDescription = string;
   export type SupportEmail = string;
@@ -3725,6 +3921,10 @@ declare namespace ServiceCatalog {
      * The TagOption identifier.
      */
     Id?: TagOptionId;
+    /**
+     * The AWS account Id of the owner account that created the TagOption.
+     */
+    Owner?: Owner;
   }
   export type TagOptionDetails = TagOptionDetail[];
   export type TagOptionId = string;
@@ -3765,6 +3965,10 @@ declare namespace ServiceCatalog {
      * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
      */
     AcceptLanguage?: AcceptLanguage;
+    /**
+     * When this boolean parameter is set to true, the TerminateProvisionedProduct API deletes the Service Catalog provisioned product. However, it does not remove the CloudFormation stack, stack set, or the underlying resources of the deleted provisioned product. The default value is false.
+     */
+    RetainPhysicalResources?: RetainPhysicalResources;
   }
   export interface TerminateProvisionedProductOutput {
     /**
@@ -3844,6 +4048,35 @@ declare namespace ServiceCatalog {
      * Information about the tags associated with the portfolio.
      */
     Tags?: Tags;
+  }
+  export interface UpdatePortfolioShareInput {
+    /**
+     * The language code.    en - English (default)    jp - Japanese    zh - Chinese  
+     */
+    AcceptLanguage?: AcceptLanguage;
+    /**
+     * The unique identifier of the portfolio for which the share will be updated.
+     */
+    PortfolioId: Id;
+    /**
+     * The AWS Account Id of the recipient account. This field is required when updating an external account to account type share.
+     */
+    AccountId?: AccountId;
+    OrganizationNode?: OrganizationNode;
+    /**
+     * A flag to enable or disable TagOptions sharing for the portfolio share. If this field is not provided, the current state of TagOptions sharing on the portfolio share will not be modified.
+     */
+    ShareTagOptions?: NullableBoolean;
+  }
+  export interface UpdatePortfolioShareOutput {
+    /**
+     * The token that tracks the status of the UpdatePortfolioShare operation for external account to account or organizational type sharing.
+     */
+    PortfolioShareToken?: Id;
+    /**
+     * The status of UpdatePortfolioShare operation. You can also obtain the operation status using DescribePortfolioShareStatus API. 
+     */
+    Status?: ShareStatus;
   }
   export interface UpdateProductInput {
     /**
@@ -3971,7 +4204,7 @@ declare namespace ServiceCatalog {
      */
     ProvisionedProductId: Id;
     /**
-     * A map that contains the provisioned product properties to be updated. The OWNER key accepts user ARNs and role ARNs. The owner is the user that is allowed to see, update, terminate, and execute service actions in the provisioned product. The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the ListRecordHistory API. The new owner can describe all past records for the provisioned product using the DescribeRecord API. The previous owner can no longer use DescribeRecord, but can still see the product's history from when he was an owner using ListRecordHistory. If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.
+     * A map that contains the provisioned product properties to be updated. The LAUNCH_ROLE key accepts role ARNs. This key allows an administrator to call UpdateProvisionedProductProperties to update the launch role that is associated with a provisioned product. This role is used when an end user calls a provisioning operation such as UpdateProvisionedProduct, TerminateProvisionedProduct, or ExecuteProvisionedProductServiceAction. Only a role ARN is valid. A user ARN is invalid.  The OWNER key accepts user ARNs and role ARNs. The owner is the user that has permission to see, update, terminate, and execute service actions in the provisioned product. The administrator can change the owner of a provisioned product to another IAM user within the same account. Both end user owners and administrators can see ownership history of the provisioned product using the ListRecordHistory API. The new owner can describe all past records for the provisioned product using the DescribeRecord API. The previous owner can no longer use DescribeRecord, but can still see the product's history from when he was an owner using ListRecordHistory. If a provisioned product ownership is assigned to an end user, they can see and perform any action through the API or Service Catalog console such as update, terminate, and execute service actions. If an end user provisions a product and the owner is updated to someone else, they will no longer be able to see or perform any actions through API or the Service Catalog console on that provisioned product.
      */
     ProvisionedProductProperties: ProvisionedProductProperties;
     /**

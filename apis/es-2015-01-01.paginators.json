@@ -1,5 +1,10 @@
 {
   "pagination": {
+    "DescribeDomainAutoTunes": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults"
+    },
     "DescribeInboundCrossClusterSearchConnections": {
       "input_token": "NextToken",
       "output_token": "NextToken",
@@ -21,6 +26,11 @@
       "limit_key": "MaxResults"
     },
     "DescribeReservedElasticsearchInstances": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "limit_key": "MaxResults"
+    },
+    "GetPackageVersionHistory": {
       "input_token": "NextToken",
       "output_token": "NextToken",
       "limit_key": "MaxResults"

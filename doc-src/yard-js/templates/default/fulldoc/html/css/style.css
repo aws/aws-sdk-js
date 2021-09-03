@@ -1,0 +1,27 @@
+{{{__super__}}}
+
+.tags .callback .callback_item { list-style: none; margin-bottom: 25px; }
+.tags .callback .callback_item .signature {
+  padding: 6px 12px;
+  margin-bottom: 7px;
+  background: #fcfcfc; border: 1px solid #eee; border-radius: 3px;
+  margin-left: -15px; font-family: monospace; display: block; font-size: 1em;
+}
+.summary .note.title.event { font-size: 1.1em; font-family: monospace; }
+
+.alert {
+  border: 1px solid #0073bb;
+  border-radius: 2px;
+  background-color: #f1faff;
+  padding: 12px 20px;
+  display: flex;
+}
+.alert .alert-icon:before {
+  content: "ⓘ";
+  font-size: 2em;
+  padding-right: 15px;
+}
+.alert .alert-title {
+  font-weight: bold;
+  padding-bottom: 5px;
+}

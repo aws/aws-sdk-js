@@ -12,6 +12,22 @@ declare class CostExplorer extends Service {
   constructor(options?: CostExplorer.Types.ClientConfiguration)
   config: Config & CostExplorer.Types.ClientConfiguration;
   /**
+   * Creates a new cost anomaly detection monitor with the requested type and monitor specification. 
+   */
+  createAnomalyMonitor(params: CostExplorer.Types.CreateAnomalyMonitorRequest, callback?: (err: AWSError, data: CostExplorer.Types.CreateAnomalyMonitorResponse) => void): Request<CostExplorer.Types.CreateAnomalyMonitorResponse, AWSError>;
+  /**
+   * Creates a new cost anomaly detection monitor with the requested type and monitor specification. 
+   */
+  createAnomalyMonitor(callback?: (err: AWSError, data: CostExplorer.Types.CreateAnomalyMonitorResponse) => void): Request<CostExplorer.Types.CreateAnomalyMonitorResponse, AWSError>;
+  /**
+   * Adds a subscription to a cost anomaly detection monitor. You can use each subscription to define subscribers with email or SNS notifications. Email subscribers can set a dollar threshold and a time frequency for receiving notifications. 
+   */
+  createAnomalySubscription(params: CostExplorer.Types.CreateAnomalySubscriptionRequest, callback?: (err: AWSError, data: CostExplorer.Types.CreateAnomalySubscriptionResponse) => void): Request<CostExplorer.Types.CreateAnomalySubscriptionResponse, AWSError>;
+  /**
+   * Adds a subscription to a cost anomaly detection monitor. You can use each subscription to define subscribers with email or SNS notifications. Email subscribers can set a dollar threshold and a time frequency for receiving notifications. 
+   */
+  createAnomalySubscription(callback?: (err: AWSError, data: CostExplorer.Types.CreateAnomalySubscriptionResponse) => void): Request<CostExplorer.Types.CreateAnomalySubscriptionResponse, AWSError>;
+  /**
    * Creates a new Cost Category with the requested name and rules.
    */
   createCostCategoryDefinition(params: CostExplorer.Types.CreateCostCategoryDefinitionRequest, callback?: (err: AWSError, data: CostExplorer.Types.CreateCostCategoryDefinitionResponse) => void): Request<CostExplorer.Types.CreateCostCategoryDefinitionResponse, AWSError>;
@@ -19,6 +35,22 @@ declare class CostExplorer extends Service {
    * Creates a new Cost Category with the requested name and rules.
    */
   createCostCategoryDefinition(callback?: (err: AWSError, data: CostExplorer.Types.CreateCostCategoryDefinitionResponse) => void): Request<CostExplorer.Types.CreateCostCategoryDefinitionResponse, AWSError>;
+  /**
+   * Deletes a cost anomaly monitor. 
+   */
+  deleteAnomalyMonitor(params: CostExplorer.Types.DeleteAnomalyMonitorRequest, callback?: (err: AWSError, data: CostExplorer.Types.DeleteAnomalyMonitorResponse) => void): Request<CostExplorer.Types.DeleteAnomalyMonitorResponse, AWSError>;
+  /**
+   * Deletes a cost anomaly monitor. 
+   */
+  deleteAnomalyMonitor(callback?: (err: AWSError, data: CostExplorer.Types.DeleteAnomalyMonitorResponse) => void): Request<CostExplorer.Types.DeleteAnomalyMonitorResponse, AWSError>;
+  /**
+   * Deletes a cost anomaly subscription. 
+   */
+  deleteAnomalySubscription(params: CostExplorer.Types.DeleteAnomalySubscriptionRequest, callback?: (err: AWSError, data: CostExplorer.Types.DeleteAnomalySubscriptionResponse) => void): Request<CostExplorer.Types.DeleteAnomalySubscriptionResponse, AWSError>;
+  /**
+   * Deletes a cost anomaly subscription. 
+   */
+  deleteAnomalySubscription(callback?: (err: AWSError, data: CostExplorer.Types.DeleteAnomalySubscriptionResponse) => void): Request<CostExplorer.Types.DeleteAnomalySubscriptionResponse, AWSError>;
   /**
    * Deletes a Cost Category. Expenses from this month going forward will no longer be categorized with this Cost Category.
    */
@@ -36,21 +68,53 @@ declare class CostExplorer extends Service {
    */
   describeCostCategoryDefinition(callback?: (err: AWSError, data: CostExplorer.Types.DescribeCostCategoryDefinitionResponse) => void): Request<CostExplorer.Types.DescribeCostCategoryDefinitionResponse, AWSError>;
   /**
-   * Retrieves cost and usage metrics for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Master accounts in an organization in AWS Organizations have access to all member accounts.
+   * Retrieves all of the cost anomalies detected on your account during the time period that's specified by the DateInterval object. 
+   */
+  getAnomalies(params: CostExplorer.Types.GetAnomaliesRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetAnomaliesResponse) => void): Request<CostExplorer.Types.GetAnomaliesResponse, AWSError>;
+  /**
+   * Retrieves all of the cost anomalies detected on your account during the time period that's specified by the DateInterval object. 
+   */
+  getAnomalies(callback?: (err: AWSError, data: CostExplorer.Types.GetAnomaliesResponse) => void): Request<CostExplorer.Types.GetAnomaliesResponse, AWSError>;
+  /**
+   * Retrieves the cost anomaly monitor definitions for your account. You can filter using a list of cost anomaly monitor Amazon Resource Names (ARNs). 
+   */
+  getAnomalyMonitors(params: CostExplorer.Types.GetAnomalyMonitorsRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetAnomalyMonitorsResponse) => void): Request<CostExplorer.Types.GetAnomalyMonitorsResponse, AWSError>;
+  /**
+   * Retrieves the cost anomaly monitor definitions for your account. You can filter using a list of cost anomaly monitor Amazon Resource Names (ARNs). 
+   */
+  getAnomalyMonitors(callback?: (err: AWSError, data: CostExplorer.Types.GetAnomalyMonitorsResponse) => void): Request<CostExplorer.Types.GetAnomalyMonitorsResponse, AWSError>;
+  /**
+   * Retrieves the cost anomaly subscription objects for your account. You can filter using a list of cost anomaly monitor Amazon Resource Names (ARNs). 
+   */
+  getAnomalySubscriptions(params: CostExplorer.Types.GetAnomalySubscriptionsRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetAnomalySubscriptionsResponse) => void): Request<CostExplorer.Types.GetAnomalySubscriptionsResponse, AWSError>;
+  /**
+   * Retrieves the cost anomaly subscription objects for your account. You can filter using a list of cost anomaly monitor Amazon Resource Names (ARNs). 
+   */
+  getAnomalySubscriptions(callback?: (err: AWSError, data: CostExplorer.Types.GetAnomalySubscriptionsResponse) => void): Request<CostExplorer.Types.GetAnomalySubscriptionsResponse, AWSError>;
+  /**
+   * Retrieves cost and usage metrics for your account. You can specify which cost and usage-related metric that you want the request to return. For example, you can specify BlendedCosts or UsageQuantity. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Management account in an organization in Organizations have access to all member accounts. For information about filter limitations, see Quotas and restrictions in the Billing and Cost Management User Guide.
    */
   getCostAndUsage(params: CostExplorer.Types.GetCostAndUsageRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetCostAndUsageResponse) => void): Request<CostExplorer.Types.GetCostAndUsageResponse, AWSError>;
   /**
-   * Retrieves cost and usage metrics for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Master accounts in an organization in AWS Organizations have access to all member accounts.
+   * Retrieves cost and usage metrics for your account. You can specify which cost and usage-related metric that you want the request to return. For example, you can specify BlendedCosts or UsageQuantity. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Management account in an organization in Organizations have access to all member accounts. For information about filter limitations, see Quotas and restrictions in the Billing and Cost Management User Guide.
    */
   getCostAndUsage(callback?: (err: AWSError, data: CostExplorer.Types.GetCostAndUsageResponse) => void): Request<CostExplorer.Types.GetCostAndUsageResponse, AWSError>;
   /**
-   * Retrieves cost and usage metrics with resources for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Master accounts in an organization in AWS Organizations have access to all member accounts. This API is currently available for the Amazon Elastic Compute Cloud – Compute service only.  This is an opt-in only feature. You can enable this feature from the Cost Explorer Settings page. For information on how to access the Settings page, see Controlling Access for Cost Explorer in the AWS Billing and Cost Management User Guide. 
+   * Retrieves cost and usage metrics with resources for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Management account in an organization in Organizations have access to all member accounts. This API is currently available for the Amazon Elastic Compute Cloud – Compute service only.  This is an opt-in only feature. You can enable this feature from the Cost Explorer Settings page. For information on how to access the Settings page, see Controlling Access for Cost Explorer in the Billing and Cost Management User Guide. 
    */
   getCostAndUsageWithResources(params: CostExplorer.Types.GetCostAndUsageWithResourcesRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetCostAndUsageWithResourcesResponse) => void): Request<CostExplorer.Types.GetCostAndUsageWithResourcesResponse, AWSError>;
   /**
-   * Retrieves cost and usage metrics with resources for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Master accounts in an organization in AWS Organizations have access to all member accounts. This API is currently available for the Amazon Elastic Compute Cloud – Compute service only.  This is an opt-in only feature. You can enable this feature from the Cost Explorer Settings page. For information on how to access the Settings page, see Controlling Access for Cost Explorer in the AWS Billing and Cost Management User Guide. 
+   * Retrieves cost and usage metrics with resources for your account. You can specify which cost and usage-related metric, such as BlendedCosts or UsageQuantity, that you want the request to return. You can also filter and group your data by various dimensions, such as SERVICE or AZ, in a specific time range. For a complete list of valid dimensions, see the GetDimensionValues operation. Management account in an organization in Organizations have access to all member accounts. This API is currently available for the Amazon Elastic Compute Cloud – Compute service only.  This is an opt-in only feature. You can enable this feature from the Cost Explorer Settings page. For information on how to access the Settings page, see Controlling Access for Cost Explorer in the Billing and Cost Management User Guide. 
    */
   getCostAndUsageWithResources(callback?: (err: AWSError, data: CostExplorer.Types.GetCostAndUsageWithResourcesResponse) => void): Request<CostExplorer.Types.GetCostAndUsageWithResourcesResponse, AWSError>;
+  /**
+   * Retrieves an array of Cost Category names and values incurred cost.  If some Cost Category names and values are not associated with any cost, they will not be returned by this API. 
+   */
+  getCostCategories(params: CostExplorer.Types.GetCostCategoriesRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetCostCategoriesResponse) => void): Request<CostExplorer.Types.GetCostCategoriesResponse, AWSError>;
+  /**
+   * Retrieves an array of Cost Category names and values incurred cost.  If some Cost Category names and values are not associated with any cost, they will not be returned by this API. 
+   */
+  getCostCategories(callback?: (err: AWSError, data: CostExplorer.Types.GetCostCategoriesResponse) => void): Request<CostExplorer.Types.GetCostCategoriesResponse, AWSError>;
   /**
    * Retrieves a forecast for how much Amazon Web Services predicts that you will spend over the forecast time period that you select, based on your past costs. 
    */
@@ -68,43 +132,43 @@ declare class CostExplorer extends Service {
    */
   getDimensionValues(callback?: (err: AWSError, data: CostExplorer.Types.GetDimensionValuesResponse) => void): Request<CostExplorer.Types.GetDimensionValuesResponse, AWSError>;
   /**
-   * Retrieves the reservation coverage for your account. This enables you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization's master account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data about reservation usage by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   TAG   TENANCY   To determine valid values for a dimension, use the GetDimensionValues operation. 
+   * Retrieves the reservation coverage for your account. This enables you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization's management account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data about reservation usage by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   TAG   TENANCY   To determine valid values for a dimension, use the GetDimensionValues operation. 
    */
   getReservationCoverage(params: CostExplorer.Types.GetReservationCoverageRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetReservationCoverageResponse) => void): Request<CostExplorer.Types.GetReservationCoverageResponse, AWSError>;
   /**
-   * Retrieves the reservation coverage for your account. This enables you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization's master account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data about reservation usage by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   TAG   TENANCY   To determine valid values for a dimension, use the GetDimensionValues operation. 
+   * Retrieves the reservation coverage for your account. This enables you to see how much of your Amazon Elastic Compute Cloud, Amazon ElastiCache, Amazon Relational Database Service, or Amazon Redshift usage is covered by a reservation. An organization's management account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data about reservation usage by the following dimensions:   AZ   CACHE_ENGINE   DATABASE_ENGINE   DEPLOYMENT_OPTION   INSTANCE_TYPE   LINKED_ACCOUNT   OPERATING_SYSTEM   PLATFORM   REGION   SERVICE   TAG   TENANCY   To determine valid values for a dimension, use the GetDimensionValues operation. 
    */
   getReservationCoverage(callback?: (err: AWSError, data: CostExplorer.Types.GetReservationCoverageResponse) => void): Request<CostExplorer.Types.GetReservationCoverageResponse, AWSError>;
   /**
-   * Gets recommendations for which reservations to purchase. These recommendations could help you reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to On-Demand pricing. AWS generates your recommendations by identifying your On-Demand usage during a specific time period and collecting your usage into categories that are eligible for a reservation. After AWS has these categories, it simulates every combination of reservations in each category of usage to identify the best number of each type of RI to purchase to maximize your estimated savings.  For example, AWS automatically aggregates your Amazon EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy size-flexible regional reservations to apply to the c4 family usage. AWS recommends the smallest size instance in an instance family. This makes it easier to purchase a size-flexible RI. AWS also shows the equal number of normalized units so that you can purchase any instance size that you want. For this example, your RI recommendation would be for c4.large because that is the smallest size instance in the c4 instance family.
+   * Gets recommendations for which reservations to purchase. These recommendations could help you reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to On-Demand pricing. Amazon Web Services generates your recommendations by identifying your On-Demand usage during a specific time period and collecting your usage into categories that are eligible for a reservation. After Amazon Web Services has these categories, it simulates every combination of reservations in each category of usage to identify the best number of each type of RI to purchase to maximize your estimated savings.  For example, Amazon Web Services automatically aggregates your Amazon EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy size-flexible regional reservations to apply to the c4 family usage. Amazon Web Services recommends the smallest size instance in an instance family. This makes it easier to purchase a size-flexible RI. Amazon Web Services also shows the equal number of normalized units so that you can purchase any instance size that you want. For this example, your RI recommendation would be for c4.large because that is the smallest size instance in the c4 instance family.
    */
   getReservationPurchaseRecommendation(params: CostExplorer.Types.GetReservationPurchaseRecommendationRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetReservationPurchaseRecommendationResponse) => void): Request<CostExplorer.Types.GetReservationPurchaseRecommendationResponse, AWSError>;
   /**
-   * Gets recommendations for which reservations to purchase. These recommendations could help you reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to On-Demand pricing. AWS generates your recommendations by identifying your On-Demand usage during a specific time period and collecting your usage into categories that are eligible for a reservation. After AWS has these categories, it simulates every combination of reservations in each category of usage to identify the best number of each type of RI to purchase to maximize your estimated savings.  For example, AWS automatically aggregates your Amazon EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy size-flexible regional reservations to apply to the c4 family usage. AWS recommends the smallest size instance in an instance family. This makes it easier to purchase a size-flexible RI. AWS also shows the equal number of normalized units so that you can purchase any instance size that you want. For this example, your RI recommendation would be for c4.large because that is the smallest size instance in the c4 instance family.
+   * Gets recommendations for which reservations to purchase. These recommendations could help you reduce your costs. Reservations provide a discounted hourly rate (up to 75%) compared to On-Demand pricing. Amazon Web Services generates your recommendations by identifying your On-Demand usage during a specific time period and collecting your usage into categories that are eligible for a reservation. After Amazon Web Services has these categories, it simulates every combination of reservations in each category of usage to identify the best number of each type of RI to purchase to maximize your estimated savings.  For example, Amazon Web Services automatically aggregates your Amazon EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon) Region and recommends that you buy size-flexible regional reservations to apply to the c4 family usage. Amazon Web Services recommends the smallest size instance in an instance family. This makes it easier to purchase a size-flexible RI. Amazon Web Services also shows the equal number of normalized units so that you can purchase any instance size that you want. For this example, your RI recommendation would be for c4.large because that is the smallest size instance in the c4 instance family.
    */
   getReservationPurchaseRecommendation(callback?: (err: AWSError, data: CostExplorer.Types.GetReservationPurchaseRecommendationResponse) => void): Request<CostExplorer.Types.GetReservationPurchaseRecommendationResponse, AWSError>;
   /**
-   * Retrieves the reservation utilization for your account. Master accounts in an organization have access to member accounts. You can filter data by dimensions in a time period. You can use GetDimensionValues to determine the possible dimension values. Currently, you can group only by SUBSCRIPTION_ID. 
+   * Retrieves the reservation utilization for your account. Management account in an organization have access to member accounts. You can filter data by dimensions in a time period. You can use GetDimensionValues to determine the possible dimension values. Currently, you can group only by SUBSCRIPTION_ID. 
    */
   getReservationUtilization(params: CostExplorer.Types.GetReservationUtilizationRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetReservationUtilizationResponse) => void): Request<CostExplorer.Types.GetReservationUtilizationResponse, AWSError>;
   /**
-   * Retrieves the reservation utilization for your account. Master accounts in an organization have access to member accounts. You can filter data by dimensions in a time period. You can use GetDimensionValues to determine the possible dimension values. Currently, you can group only by SUBSCRIPTION_ID. 
+   * Retrieves the reservation utilization for your account. Management account in an organization have access to member accounts. You can filter data by dimensions in a time period. You can use GetDimensionValues to determine the possible dimension values. Currently, you can group only by SUBSCRIPTION_ID. 
    */
   getReservationUtilization(callback?: (err: AWSError, data: CostExplorer.Types.GetReservationUtilizationResponse) => void): Request<CostExplorer.Types.GetReservationUtilizationResponse, AWSError>;
   /**
-   * Creates recommendations that help you save cost by identifying idle and underutilized Amazon EC2 instances. Recommendations are generated to either downsize or terminate instances, along with providing savings detail and metrics. For details on calculation and function, see Optimizing Your Cost with Rightsizing Recommendations in the AWS Billing and Cost Management User Guide.
+   * Creates recommendations that help you save cost by identifying idle and underutilized Amazon EC2 instances. Recommendations are generated to either downsize or terminate instances, along with providing savings detail and metrics. For details on calculation and function, see Optimizing Your Cost with Rightsizing Recommendations in the Billing and Cost Management User Guide.
    */
   getRightsizingRecommendation(params: CostExplorer.Types.GetRightsizingRecommendationRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetRightsizingRecommendationResponse) => void): Request<CostExplorer.Types.GetRightsizingRecommendationResponse, AWSError>;
   /**
-   * Creates recommendations that help you save cost by identifying idle and underutilized Amazon EC2 instances. Recommendations are generated to either downsize or terminate instances, along with providing savings detail and metrics. For details on calculation and function, see Optimizing Your Cost with Rightsizing Recommendations in the AWS Billing and Cost Management User Guide.
+   * Creates recommendations that help you save cost by identifying idle and underutilized Amazon EC2 instances. Recommendations are generated to either downsize or terminate instances, along with providing savings detail and metrics. For details on calculation and function, see Optimizing Your Cost with Rightsizing Recommendations in the Billing and Cost Management User Guide.
    */
   getRightsizingRecommendation(callback?: (err: AWSError, data: CostExplorer.Types.GetRightsizingRecommendationResponse) => void): Request<CostExplorer.Types.GetRightsizingRecommendationResponse, AWSError>;
   /**
-   * Retrieves the Savings Plans covered for your account. This enables you to see how much of your cost is covered by a Savings Plan. An organization’s master account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data for Savings Plans usage with the following dimensions:    LINKED_ACCOUNT     REGION     SERVICE     INSTANCE_FAMILY    To determine valid values for a dimension, use the GetDimensionValues operation.
+   * Retrieves the Savings Plans covered for your account. This enables you to see how much of your cost is covered by a Savings Plan. An organization’s management account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data for Savings Plans usage with the following dimensions:    LINKED_ACCOUNT     REGION     SERVICE     INSTANCE_FAMILY    To determine valid values for a dimension, use the GetDimensionValues operation.
    */
   getSavingsPlansCoverage(params: CostExplorer.Types.GetSavingsPlansCoverageRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansCoverageResponse) => void): Request<CostExplorer.Types.GetSavingsPlansCoverageResponse, AWSError>;
   /**
-   * Retrieves the Savings Plans covered for your account. This enables you to see how much of your cost is covered by a Savings Plan. An organization’s master account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data for Savings Plans usage with the following dimensions:    LINKED_ACCOUNT     REGION     SERVICE     INSTANCE_FAMILY    To determine valid values for a dimension, use the GetDimensionValues operation.
+   * Retrieves the Savings Plans covered for your account. This enables you to see how much of your cost is covered by a Savings Plan. An organization’s management account can see the coverage of the associated member accounts. This supports dimensions, Cost Categories, and nested expressions. For any time period, you can filter data for Savings Plans usage with the following dimensions:    LINKED_ACCOUNT     REGION     SERVICE     INSTANCE_FAMILY    To determine valid values for a dimension, use the GetDimensionValues operation.
    */
   getSavingsPlansCoverage(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansCoverageResponse) => void): Request<CostExplorer.Types.GetSavingsPlansCoverageResponse, AWSError>;
   /**
@@ -116,11 +180,11 @@ declare class CostExplorer extends Service {
    */
   getSavingsPlansPurchaseRecommendation(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse) => void): Request<CostExplorer.Types.GetSavingsPlansPurchaseRecommendationResponse, AWSError>;
   /**
-   * Retrieves the Savings Plans utilization for your account across date ranges with daily or monthly granularity. Master accounts in an organization have access to member accounts. You can use GetDimensionValues in SAVINGS_PLANS to determine the possible dimension values.  You cannot group by any dimension values for GetSavingsPlansUtilization. 
+   * Retrieves the Savings Plans utilization for your account across date ranges with daily or monthly granularity. Management account in an organization have access to member accounts. You can use GetDimensionValues in SAVINGS_PLANS to determine the possible dimension values.  You cannot group by any dimension values for GetSavingsPlansUtilization. 
    */
   getSavingsPlansUtilization(params: CostExplorer.Types.GetSavingsPlansUtilizationRequest, callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansUtilizationResponse) => void): Request<CostExplorer.Types.GetSavingsPlansUtilizationResponse, AWSError>;
   /**
-   * Retrieves the Savings Plans utilization for your account across date ranges with daily or monthly granularity. Master accounts in an organization have access to member accounts. You can use GetDimensionValues in SAVINGS_PLANS to determine the possible dimension values.  You cannot group by any dimension values for GetSavingsPlansUtilization. 
+   * Retrieves the Savings Plans utilization for your account across date ranges with daily or monthly granularity. Management account in an organization have access to member accounts. You can use GetDimensionValues in SAVINGS_PLANS to determine the possible dimension values.  You cannot group by any dimension values for GetSavingsPlansUtilization. 
    */
   getSavingsPlansUtilization(callback?: (err: AWSError, data: CostExplorer.Types.GetSavingsPlansUtilizationResponse) => void): Request<CostExplorer.Types.GetSavingsPlansUtilizationResponse, AWSError>;
   /**
@@ -156,6 +220,30 @@ declare class CostExplorer extends Service {
    */
   listCostCategoryDefinitions(callback?: (err: AWSError, data: CostExplorer.Types.ListCostCategoryDefinitionsResponse) => void): Request<CostExplorer.Types.ListCostCategoryDefinitionsResponse, AWSError>;
   /**
+   * Modifies the feedback property of a given cost anomaly. 
+   */
+  provideAnomalyFeedback(params: CostExplorer.Types.ProvideAnomalyFeedbackRequest, callback?: (err: AWSError, data: CostExplorer.Types.ProvideAnomalyFeedbackResponse) => void): Request<CostExplorer.Types.ProvideAnomalyFeedbackResponse, AWSError>;
+  /**
+   * Modifies the feedback property of a given cost anomaly. 
+   */
+  provideAnomalyFeedback(callback?: (err: AWSError, data: CostExplorer.Types.ProvideAnomalyFeedbackResponse) => void): Request<CostExplorer.Types.ProvideAnomalyFeedbackResponse, AWSError>;
+  /**
+   * Updates an existing cost anomaly monitor. The changes made are applied going forward, and doesn'tt change anomalies detected in the past. 
+   */
+  updateAnomalyMonitor(params: CostExplorer.Types.UpdateAnomalyMonitorRequest, callback?: (err: AWSError, data: CostExplorer.Types.UpdateAnomalyMonitorResponse) => void): Request<CostExplorer.Types.UpdateAnomalyMonitorResponse, AWSError>;
+  /**
+   * Updates an existing cost anomaly monitor. The changes made are applied going forward, and doesn'tt change anomalies detected in the past. 
+   */
+  updateAnomalyMonitor(callback?: (err: AWSError, data: CostExplorer.Types.UpdateAnomalyMonitorResponse) => void): Request<CostExplorer.Types.UpdateAnomalyMonitorResponse, AWSError>;
+  /**
+   * Updates an existing cost anomaly monitor subscription. 
+   */
+  updateAnomalySubscription(params: CostExplorer.Types.UpdateAnomalySubscriptionRequest, callback?: (err: AWSError, data: CostExplorer.Types.UpdateAnomalySubscriptionResponse) => void): Request<CostExplorer.Types.UpdateAnomalySubscriptionResponse, AWSError>;
+  /**
+   * Updates an existing cost anomaly monitor subscription. 
+   */
+  updateAnomalySubscription(callback?: (err: AWSError, data: CostExplorer.Types.UpdateAnomalySubscriptionResponse) => void): Request<CostExplorer.Types.UpdateAnomalySubscriptionResponse, AWSError>;
+  /**
    * Updates an existing Cost Category. Changes made to the Cost Category rules will be used to categorize the current month’s expenses and future expenses. This won’t change categorization for the previous months.
    */
   updateCostCategoryDefinition(params: CostExplorer.Types.UpdateCostCategoryDefinitionRequest, callback?: (err: AWSError, data: CostExplorer.Types.UpdateCostCategoryDefinitionResponse) => void): Request<CostExplorer.Types.UpdateCostCategoryDefinitionResponse, AWSError>;
@@ -168,6 +256,134 @@ declare namespace CostExplorer {
   export type AccountScope = "PAYER"|"LINKED"|string;
   export type AmortizedRecurringFee = string;
   export type AmortizedUpfrontFee = string;
+  export type Anomalies = Anomaly[];
+  export interface Anomaly {
+    /**
+     * The unique identifier for the anomaly. 
+     */
+    AnomalyId: GenericString;
+    /**
+     * The first day the anomaly is detected. 
+     */
+    AnomalyStartDate?: YearMonthDay;
+    /**
+     * The last day the anomaly is detected. 
+     */
+    AnomalyEndDate?: YearMonthDay;
+    /**
+     * The dimension for the anomaly (for example, an Amazon Web Services service in a service monitor). 
+     */
+    DimensionValue?: GenericString;
+    /**
+     * The list of identified root causes for the anomaly. 
+     */
+    RootCauses?: RootCauses;
+    /**
+     * The latest and maximum score for the anomaly. 
+     */
+    AnomalyScore: AnomalyScore;
+    /**
+     * The dollar impact for the anomaly. 
+     */
+    Impact: Impact;
+    /**
+     * The Amazon Resource Name (ARN) for the cost monitor that generated this anomaly. 
+     */
+    MonitorArn: GenericString;
+    /**
+     * The feedback value. 
+     */
+    Feedback?: AnomalyFeedbackType;
+  }
+  export interface AnomalyDateInterval {
+    /**
+     * The first date an anomaly was observed. 
+     */
+    StartDate: YearMonthDay;
+    /**
+     * The last date an anomaly was observed. 
+     */
+    EndDate?: YearMonthDay;
+  }
+  export type AnomalyFeedbackType = "YES"|"NO"|"PLANNED_ACTIVITY"|string;
+  export interface AnomalyMonitor {
+    /**
+     * The Amazon Resource Name (ARN) value. 
+     */
+    MonitorArn?: GenericString;
+    /**
+     * The name of the monitor. 
+     */
+    MonitorName: GenericString;
+    /**
+     * The date when the monitor was created. 
+     */
+    CreationDate?: YearMonthDay;
+    /**
+     * The date when the monitor was last updated. 
+     */
+    LastUpdatedDate?: YearMonthDay;
+    /**
+     * The date when the monitor last evaluated for anomalies. 
+     */
+    LastEvaluatedDate?: YearMonthDay;
+    /**
+     * The possible type values. 
+     */
+    MonitorType: MonitorType;
+    /**
+     * The dimensions to evaluate. 
+     */
+    MonitorDimension?: MonitorDimension;
+    MonitorSpecification?: Expression;
+    /**
+     * The value for evaluated dimensions. 
+     */
+    DimensionalValueCount?: NonNegativeInteger;
+  }
+  export type AnomalyMonitors = AnomalyMonitor[];
+  export interface AnomalyScore {
+    /**
+     * The maximum score that's observed during the AnomalyDateInterval. 
+     */
+    MaxScore: GenericDouble;
+    /**
+     * The last observed score. 
+     */
+    CurrentScore: GenericDouble;
+  }
+  export interface AnomalySubscription {
+    /**
+     * The AnomalySubscription Amazon Resource Name (ARN). 
+     */
+    SubscriptionArn?: GenericString;
+    /**
+     * Your unique account identifier. 
+     */
+    AccountId?: GenericString;
+    /**
+     * A list of cost anomaly monitors. 
+     */
+    MonitorArnList: MonitorArnList;
+    /**
+     * A list of subscribers to notify. 
+     */
+    Subscribers: Subscribers;
+    /**
+     * The dollar value that triggers a notification if the threshold is exceeded. 
+     */
+    Threshold: NullableNonNegativeDouble;
+    /**
+     * The frequency that anomaly reports are sent over email. 
+     */
+    Frequency: AnomalySubscriptionFrequency;
+    /**
+     * The name for the subscription. 
+     */
+    SubscriptionName: GenericString;
+  }
+  export type AnomalySubscriptionFrequency = "DAILY"|"IMMEDIATE"|"WEEKLY"|string;
+  export type AnomalySubscriptions = AnomalySubscription[];
   export type Arn = string;
   export type AttributeType = string;
   export type AttributeValue = string;
@@ -175,55 +391,141 @@ declare namespace CostExplorer {
   export type Context = "COST_AND_USAGE"|"RESERVATIONS"|"SAVINGS_PLANS"|string;
   export interface CostCategory {
     /**
-     *  The unique identifier for your Cost Category. 
+     * The unique identifier for your Cost Category. 
      */
     CostCategoryArn: Arn;
     /**
-     *  The Cost Category's effective start date.
+     * The effective state data of your Cost Category.
      */
     EffectiveStart: ZonedDateTime;
     /**
-     *  The Cost Category's effective end date.
+     *  The effective end data of your Cost Category.
      */
     EffectiveEnd?: ZonedDateTime;
     Name: CostCategoryName;
     RuleVersion: CostCategoryRuleVersion;
     /**
-     *  Rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value. 
+     * The rules are processed in order. If there are multiple rules that match the line item, then the first rule to match is used to determine that Cost Category value. 
      */
     Rules: CostCategoryRulesList;
+    /**
+     *  The split charge rules that are used to allocate your charges between your Cost Category values. 
+     */
+    SplitChargeRules?: CostCategorySplitChargeRulesList;
+    /**
+     * The list of processing statuses for Cost Management products for a specific cost category. 
+     */
+    ProcessingStatus?: CostCategoryProcessingStatusList;
+    DefaultValue?: CostCategoryValue;
   }
+  export interface CostCategoryInheritedValueDimension {
+    /**
+     * The name of the dimension that's used to group costs. If you specify LINKED_ACCOUNT_NAME, the cost category value is based on account name. If you specify TAG, the cost category value will be based on the value of the specified tag key.
+     */
+    DimensionName?: CostCategoryInheritedValueDimensionName;
+    /**
+     * The key to extract cost category values.
+     */
+    DimensionKey?: GenericString;
+  }
+  export type CostCategoryInheritedValueDimensionName = "LINKED_ACCOUNT_NAME"|"TAG"|string;
   export type CostCategoryMaxResults = number;
   export type CostCategoryName = string;
+  export type CostCategoryNamesList = CostCategoryName[];
+  export interface CostCategoryProcessingStatus {
+    /**
+     * The Cost Management product name of the applied status. 
+     */
+    Component?: CostCategoryStatusComponent;
+    /**
+     * The process status for a specific cost category. 
+     */
+    Status?: CostCategoryStatus;
+  }
+  export type CostCategoryProcessingStatusList = CostCategoryProcessingStatus[];
   export interface CostCategoryReference {
     /**
-     *  The unique identifier for your Cost Category. 
+     * The unique identifier for your Cost Category. 
      */
     CostCategoryArn?: Arn;
     Name?: CostCategoryName;
     /**
-     *  The Cost Category's effective start date.
+     * The Cost Category's effective start date.
      */
     EffectiveStart?: ZonedDateTime;
     /**
-     *  The Cost Category's effective end date.
+     * The Cost Category's effective end date.
      */
     EffectiveEnd?: ZonedDateTime;
     /**
-     *  The number of rules associated with a specific Cost Category. 
+     * The number of rules that are associated with a specific Cost Category. 
      */
     NumberOfRules?: NonNegativeInteger;
+    /**
+     * The list of processing statuses for Cost Management products for a specific cost category. 
+     */
+    ProcessingStatus?: CostCategoryProcessingStatusList;
+    /**
+     * A list of unique cost category values in a specific cost category. 
+     */
+    Values?: CostCategoryValuesList;
+    DefaultValue?: CostCategoryValue;
   }
   export type CostCategoryReferencesList = CostCategoryReference[];
   export interface CostCategoryRule {
-    Value: CostCategoryValue;
+    Value?: CostCategoryValue;
     /**
-     * An Expression object used to categorize costs. This supports dimensions, Tags, and nested expressions. Currently the only dimensions supported are LINKED_ACCOUNT, SERVICE_CODE, RECORD_TYPE, and LINKED_ACCOUNT_NAME. Root level OR is not supported. We recommend that you create a separate rule instead.  RECORD_TYPE is a dimension used for Cost Explorer APIs, and is also supported for Cost Category expressions. This dimension uses different terms, depending on whether you're using the console or API/JSON editor. For a detailed comparison, see Term Comparisons in the AWS Billing and Cost Management User Guide.
+     * An Expression object used to categorize costs. This supports dimensions, tags, and nested expressions. Currently the only dimensions supported are LINKED_ACCOUNT, SERVICE_CODE, RECORD_TYPE, and LINKED_ACCOUNT_NAME. Root level OR isn't supported. We recommend that you create a separate rule instead.  RECORD_TYPE is a dimension used for Cost Explorer APIs, and is also supported for Cost Category expressions. This dimension uses different terms, depending on whether you're using the console or API/JSON editor. For a detailed comparison, see Term Comparisons in the Billing and Cost Management User Guide.
      */
-    Rule: Expression;
+    Rule?: Expression;
+    /**
+     * The value the line item is categorized as if the line item contains the matched dimension.
+     */
+    InheritedValue?: CostCategoryInheritedValueDimension;
+    /**
+     * You can define the CostCategoryRule rule type as either REGULAR or INHERITED_VALUE. The INHERITED_VALUE rule type adds the flexibility of defining a rule that dynamically inherits the cost category value from the dimension value defined by CostCategoryInheritedValueDimension. For example, if you want to dynamically group costs based on the value of a specific tag key, first choose an inherited value rule type, then choose the tag dimension and specify the tag key to use.
+     */
+    Type?: CostCategoryRuleType;
   }
+  export type CostCategoryRuleType = "REGULAR"|"INHERITED_VALUE"|string;
   export type CostCategoryRuleVersion = "CostCategoryExpression.v1"|string;
   export type CostCategoryRulesList = CostCategoryRule[];
+  export type CostCategorySplitChargeMethod = "FIXED"|"PROPORTIONAL"|"EVEN"|string;
+  export interface CostCategorySplitChargeRule {
+    /**
+     * The Cost Category value that you want to split. That value can't be used as a source or a target in other split charge rules. To indicate uncategorized costs, you can use an empty string as the source.
+     */
+    Source: GenericString;
+    /**
+     * The Cost Category values that you want to split costs across. These values can't be used as a source in other split charge rules. 
+     */
+    Targets: CostCategorySplitChargeRuleTargetsList;
+    /**
+     * The method that's used to define how to split your source costs across your targets.   Proportional - Allocates charges across your targets based on the proportional weighted cost of each target.  Fixed - Allocates charges across your targets based on your defined allocation percentage. &gt;Even - Allocates costs evenly across all targets.
+     */
+    Method: CostCategorySplitChargeMethod;
+    /**
+     * The parameters for a split charge method. This is only required for the FIXED method. 
+     */
+    Parameters?: CostCategorySplitChargeRuleParametersList;
+  }
+  export interface CostCategorySplitChargeRuleParameter {
+    /**
+     * The parameter type. 
+     */
+    Type: CostCategorySplitChargeRuleParameterType;
+    /**
+     * The parameter values. 
+     */
+    Values: CostCategorySplitChargeRuleParameterValuesList;
+  }
+  export type CostCategorySplitChargeRuleParameterType = "ALLOCATION_PERCENTAGES"|string;
+  export type CostCategorySplitChargeRuleParameterValuesList = GenericString[];
+  export type CostCategorySplitChargeRuleParametersList = CostCategorySplitChargeRuleParameter[];
+  export type CostCategorySplitChargeRuleTargetsList = GenericString[];
+  export type CostCategorySplitChargeRulesList = CostCategorySplitChargeRule[];
+  export type CostCategoryStatus = "PROCESSING"|"APPLIED"|string;
+  export type CostCategoryStatusComponent = "COST_EXPLORER"|string;
   export type CostCategoryValue = string;
   export interface CostCategoryValues {
     Key?: CostCategoryName;
@@ -231,7 +533,12 @@ declare namespace CostExplorer {
      * The specific value of the Cost Category.
      */
     Values?: Values;
+    /**
+     * The match options that you can use to filter your results. MatchOptions is only applicable for actions related to cost category. The default values for MatchOptions is EQUALS and CASE_SENSITIVE. 
+     */
+    MatchOptions?: MatchOptions;
   }
+  export type CostCategoryValuesList = CostCategoryValue[];
   export interface Coverage {
     /**
      * The amount of instance usage that the reservation covered, in hours.
@@ -305,6 +612,30 @@ declare namespace CostExplorer {
   }
   export type CoverageNormalizedUnitsPercentage = string;
   export type CoveragesByTime = CoverageByTime[];
+  export interface CreateAnomalyMonitorRequest {
+    /**
+     * The cost anomaly detection monitor object that you want to create.
+     */
+    AnomalyMonitor: AnomalyMonitor;
+  }
+  export interface CreateAnomalyMonitorResponse {
+    /**
+     * The unique identifier of your newly created cost anomaly detection monitor.
+     */
+    MonitorArn: GenericString;
+  }
+  export interface CreateAnomalySubscriptionRequest {
+    /**
+     * The cost anomaly subscription object that you want to create. 
+     */
+    AnomalySubscription: AnomalySubscription;
+  }
+  export interface CreateAnomalySubscriptionResponse {
+    /**
+     * The unique identifier of your newly created cost anomaly subscription. 
+     */
+    SubscriptionArn: GenericString;
+  }
   export interface CreateCostCategoryDefinitionRequest {
     Name: CostCategoryName;
     RuleVersion: CostCategoryRuleVersion;
@@ -312,6 +643,11 @@ declare namespace CostExplorer {
      * The Cost Category rules used to categorize costs. For more information, see CostCategoryRule.
      */
     Rules: CostCategoryRulesList;
+    DefaultValue?: CostCategoryValue;
+    /**
+     *  The split charge rules used to allocate your charges between your Cost Category values. 
+     */
+    SplitChargeRules?: CostCategorySplitChargeRulesList;
   }
   export interface CreateCostCategoryDefinitionResponse {
     /**
@@ -329,39 +665,39 @@ declare namespace CostExplorer {
      */
     ResourceId?: GenericString;
     /**
-     * The name you've given an instance. This field will show as blank if you haven't given the instance a name.
+     * The name that you given an instance. This field shows as blank if you haven't given the instance a name.
      */
     InstanceName?: GenericString;
     /**
-     * Cost allocation resource tags applied to the instance.
+     * Cost allocation resource tags that are applied to the instance.
      */
     Tags?: TagValuesList;
     /**
-     *  Details about the resource and utilization.
+     * Details about the resource and utilization.
      */
     ResourceDetails?: ResourceDetails;
     /**
-     *  Utilization information of the current instance during the lookback period.
+     * Utilization information of the current instance during the lookback period.
      */
     ResourceUtilization?: ResourceUtilization;
     /**
-     *  Number of hours during the lookback period covered by reservations.
+     *  The number of hours during the lookback period that's covered by reservations.
      */
     ReservationCoveredHoursInLookbackPeriod?: GenericString;
     /**
-     * Number of hours during the lookback period covered by Savings Plans.
+     * The number of hours during the lookback period that's covered by Savings Plans.
      */
     SavingsPlansCoveredHoursInLookbackPeriod?: GenericString;
     /**
-     *  Number of hours during the lookback period billed at On Demand rates.
+     *  The number of hours during the lookback period that's billed at On-Demand rates.
      */
     OnDemandHoursInLookbackPeriod?: GenericString;
     /**
-     *  The total number of hours the instance ran during the lookback period.
+     * The total number of hours that the instance ran during the lookback period.
      */
     TotalRunningHoursInLookbackPeriod?: GenericString;
     /**
-     *  Current On Demand cost of operating this instance on a monthly basis.
+     * The current On-Demand cost of operating this instance on a monthly basis.
      */
     MonthlyCost?: GenericString;
     /**
@@ -371,13 +707,29 @@ declare namespace CostExplorer {
   }
   export interface DateInterval {
     /**
-     * The beginning of the time period that you want the usage and costs for. The start date is inclusive. For example, if start is 2017-01-01, AWS retrieves cost and usage data starting at 2017-01-01 up to the end date.
+     * The beginning of the time period. The start date is inclusive. For example, if start is 2017-01-01, Amazon Web Services retrieves cost and usage data starting at 2017-01-01 up to the end date. The start date must be equal to or no later than the current date to avoid a validation error.
      */
     Start: YearMonthDay;
     /**
-     * The end of the time period that you want the usage and costs for. The end date is exclusive. For example, if end is 2017-05-01, AWS retrieves cost and usage data from the start date up to, but not including, 2017-05-01.
+     * The end of the time period. The end date is exclusive. For example, if end is 2017-05-01, Amazon Web Services retrieves cost and usage data from the start date up to, but not including, 2017-05-01.
      */
     End: YearMonthDay;
+  }
+  export interface DeleteAnomalyMonitorRequest {
+    /**
+     * The unique identifier of the cost anomaly monitor that you want to delete. 
+     */
+    MonitorArn: GenericString;
+  }
+  export interface DeleteAnomalyMonitorResponse {
+  }
+  export interface DeleteAnomalySubscriptionRequest {
+    /**
+     * The unique identifier of the cost anomaly subscription that you want to delete. 
+     */
+    SubscriptionArn: GenericString;
+  }
+  export interface DeleteAnomalySubscriptionResponse {
   }
   export interface DeleteCostCategoryDefinitionRequest {
     /**
@@ -408,7 +760,7 @@ declare namespace CostExplorer {
   export interface DescribeCostCategoryDefinitionResponse {
     CostCategory?: CostCategory;
   }
-  export type Dimension = "AZ"|"INSTANCE_TYPE"|"LINKED_ACCOUNT"|"LINKED_ACCOUNT_NAME"|"OPERATION"|"PURCHASE_TYPE"|"REGION"|"SERVICE"|"SERVICE_CODE"|"USAGE_TYPE"|"USAGE_TYPE_GROUP"|"RECORD_TYPE"|"OPERATING_SYSTEM"|"TENANCY"|"SCOPE"|"PLATFORM"|"SUBSCRIPTION_ID"|"LEGAL_ENTITY_NAME"|"DEPLOYMENT_OPTION"|"DATABASE_ENGINE"|"CACHE_ENGINE"|"INSTANCE_TYPE_FAMILY"|"BILLING_ENTITY"|"RESERVATION_ID"|"RESOURCE_ID"|"RIGHTSIZING_TYPE"|"SAVINGS_PLANS_TYPE"|"SAVINGS_PLAN_ARN"|"PAYMENT_OPTION"|string;
+  export type Dimension = "AZ"|"INSTANCE_TYPE"|"LINKED_ACCOUNT"|"LINKED_ACCOUNT_NAME"|"OPERATION"|"PURCHASE_TYPE"|"REGION"|"SERVICE"|"SERVICE_CODE"|"USAGE_TYPE"|"USAGE_TYPE_GROUP"|"RECORD_TYPE"|"OPERATING_SYSTEM"|"TENANCY"|"SCOPE"|"PLATFORM"|"SUBSCRIPTION_ID"|"LEGAL_ENTITY_NAME"|"DEPLOYMENT_OPTION"|"DATABASE_ENGINE"|"CACHE_ENGINE"|"INSTANCE_TYPE_FAMILY"|"BILLING_ENTITY"|"RESERVATION_ID"|"RESOURCE_ID"|"RIGHTSIZING_TYPE"|"SAVINGS_PLANS_TYPE"|"SAVINGS_PLAN_ARN"|"PAYMENT_OPTION"|"AGREEMENT_END_DATE_TIME_AFTER"|"AGREEMENT_END_DATE_TIME_BEFORE"|string;
   export interface DimensionValues {
     /**
      * The names of the metadata types that you can use to filter and group your results. For example, AZ returns a list of Availability Zones.
@@ -419,7 +771,7 @@ declare namespace CostExplorer {
      */
     Values?: Values;
     /**
-     * The match options that you can use to filter your results. MatchOptions is only applicable for actions related to Cost Category. The default values for MatchOptions is EQUALS and CASE_SENSITIVE.
+     * The match options that you can use to filter your results. MatchOptions is only applicable for actions related to Cost Category. The default values for MatchOptions are EQUALS and CASE_SENSITIVE.
      */
     MatchOptions?: MatchOptions;
   }
@@ -434,17 +786,53 @@ declare namespace CostExplorer {
     Attributes?: Attributes;
   }
   export type DimensionValuesWithAttributesList = DimensionValuesWithAttributes[];
+  export interface DiskResourceUtilization {
+    /**
+     *  The maximum number of read operations per second. 
+     */
+    DiskReadOpsPerSecond?: GenericString;
+    /**
+     *  The maximum number of write operations per second. 
+     */
+    DiskWriteOpsPerSecond?: GenericString;
+    /**
+     *  The maximum read throughput operations per second. 
+     */
+    DiskReadBytesPerSecond?: GenericString;
+    /**
+     *  The maximum write throughput operations per second. 
+     */
+    DiskWriteBytesPerSecond?: GenericString;
+  }
+  export interface EBSResourceUtilization {
+    /**
+     * The maximum number of read operations per second. 
+     */
+    EbsReadOpsPerSecond?: GenericString;
+    /**
+     * The maximum number of write operations per second. 
+     */
+    EbsWriteOpsPerSecond?: GenericString;
+    /**
+     * The maximum size of read operations per second 
+     */
+    EbsReadBytesPerSecond?: GenericString;
+    /**
+     * The maximum size of write operations per second. 
+     */
+    EbsWriteBytesPerSecond?: GenericString;
+  }
   export interface EC2InstanceDetails {
     /**
      * The instance family of the recommended reservation.
      */
     Family?: GenericString;
     /**
-     * The type of instance that AWS recommends.
+     * The type of instance that Amazon Web Services recommends.
      */
     InstanceType?: GenericString;
     /**
-     * The AWS Region of the recommended reservation.
+     * The Amazon Web Services Region of the recommended reservation.
      */
     Region?: GenericString;
     /**
@@ -456,95 +844,107 @@ declare namespace CostExplorer {
      */
     Platform?: GenericString;
     /**
-     * Whether the recommended reservation is dedicated or shared.
+     * Determines whether the recommended reservation is dedicated or shared.
      */
     Tenancy?: GenericString;
     /**
-     * Whether the recommendation is for a current-generation instance. 
+     * Determines whether the recommendation is for a current-generation instance. 
      */
     CurrentGeneration?: GenericBoolean;
     /**
-     * Whether the recommended reservation is size flexible.
+     * Determines whether the recommended reservation is size flexible.
      */
     SizeFlexEligible?: GenericBoolean;
   }
   export interface EC2ResourceDetails {
     /**
-     *  Hourly public On Demand rate for the instance type.
+     * The hourly public On-Demand rate for the instance type.
      */
     HourlyOnDemandRate?: GenericString;
     /**
-     *  The type of Amazon Web Services instance.
+     * The type of Amazon Web Services instance.
      */
     InstanceType?: GenericString;
     /**
-     *  The platform of the Amazon Web Services instance. The platform is the specific combination of operating system, license model, and software on an instance.
+     * The platform of the Amazon Web Services instance. The platform is the specific combination of operating system, license model, and software on an instance.
      */
     Platform?: GenericString;
     /**
-     *  The Amazon Web Services Region of the instance.
+     * The Amazon Web Services Region of the instance.
      */
     Region?: GenericString;
     /**
-     *  The SKU of the product.
+     * The SKU of the product.
      */
     Sku?: GenericString;
     /**
-     *  Memory capacity of Amazon Web Services instance.
+     * The memory capacity of the Amazon Web Services instance.
      */
     Memory?: GenericString;
     /**
-     *  Network performance capacity of the Amazon Web Services instance.
+     * The network performance capacity of the Amazon Web Services instance.
      */
     NetworkPerformance?: GenericString;
     /**
-     *  The disk storage of the Amazon Web Services instance (Not EBS storage).
+     * The disk storage of the Amazon Web Services instance. This doesn't include EBS storage.
      */
     Storage?: GenericString;
     /**
-     *  Number of VCPU cores in the Amazon Web Services instance type.
+     *  The number of VCPU cores in the Amazon Web Services instance type.
      */
     Vcpu?: GenericString;
   }
   export interface EC2ResourceUtilization {
     /**
-     *  Maximum observed or expected CPU utilization of the instance.
+     *  The maximum observed or expected CPU utilization of the instance.
      */
     MaxCpuUtilizationPercentage?: GenericString;
     /**
-     *  Maximum observed or expected memory utilization of the instance.
+     *  The maximum observed or expected memory utilization of the instance.
      */
     MaxMemoryUtilizationPercentage?: GenericString;
     /**
-     *  Maximum observed or expected storage utilization of the instance (does not measure EBS storage).
+     *  The maximum observed or expected storage utilization of the instance. This doesn't include EBS storage.
      */
     MaxStorageUtilizationPercentage?: GenericString;
+    /**
+     * The EBS field that contains a list of EBS metrics that are associated with the current instance. 
+     */
+    EBSResourceUtilization?: EBSResourceUtilization;
+    /**
+     *  The field that contains a list of disk (local storage) metrics that are associated with the current instance. 
+     */
+    DiskResourceUtilization?: DiskResourceUtilization;
+    /**
+     *  The network field that contains a list of network metrics that are associated with the current instance. 
+     */
+    NetworkResourceUtilization?: NetworkResourceUtilization;
   }
   export interface EC2Specification {
     /**
-     * Whether you want a recommendation for standard or convertible reservations.
+     * Indicates whether you want a recommendation for standard or convertible reservations.
      */
     OfferingClass?: OfferingClass;
   }
   export interface ESInstanceDetails {
     /**
-     * The class of instance that AWS recommends.
+     * The class of instance that Amazon Web Services recommends.
      */
     InstanceClass?: GenericString;
     /**
-     * The size of instance that AWS recommends.
+     * The size of instance that Amazon Web Services recommends.
      */
     InstanceSize?: GenericString;
     /**
-     * The AWS Region of the recommended reservation.
+     * The Amazon Web Services Region of the recommended reservation.
      */
     Region?: GenericString;
     /**
-     * Whether the recommendation is for a current-generation instance.
+     * Determines whether the recommendation is for a current-generation instance.
      */
     CurrentGeneration?: GenericBoolean;
     /**
-     * Whether the recommended reservation is size flexible.
+     * Determines whether the recommended reservation is size flexible.
      */
     SizeFlexEligible?: GenericBoolean;
   }
@@ -554,11 +954,11 @@ declare namespace CostExplorer {
      */
     Family?: GenericString;
     /**
-     * The type of node that AWS recommends.
+     * The type of node that Amazon Web Services recommends.
      */
     NodeType?: GenericString;
     /**
-     * The AWS Region of the recommended reservation.
+     * The Amazon Web Services Region of the recommended reservation.
      */
     Region?: GenericString;
     /**
@@ -566,11 +966,11 @@ declare namespace CostExplorer {
      */
     ProductDescription?: GenericString;
     /**
-     * Whether the recommendation is for a current generation instance.
+     * Determines whether the recommendation is for a current generation instance.
      */
     CurrentGeneration?: GenericBoolean;
     /**
-     * Whether the recommended reservation is size flexible.
+     * Determines whether the recommended reservation is size flexible.
      */
     SizeFlexEligible?: GenericBoolean;
   }
@@ -598,11 +998,13 @@ declare namespace CostExplorer {
      */
     Tags?: TagValues;
     /**
-     * The filter based on CostCategory values.
+     * The filter that's based on CostCategory values.
      */
     CostCategories?: CostCategoryValues;
   }
   export type Expressions = Expression[];
+  export type FindingReasonCode = "CPU_OVER_PROVISIONED"|"CPU_UNDER_PROVISIONED"|"MEMORY_OVER_PROVISIONED"|"MEMORY_UNDER_PROVISIONED"|"EBS_THROUGHPUT_OVER_PROVISIONED"|"EBS_THROUGHPUT_UNDER_PROVISIONED"|"EBS_IOPS_OVER_PROVISIONED"|"EBS_IOPS_UNDER_PROVISIONED"|"NETWORK_BANDWIDTH_OVER_PROVISIONED"|"NETWORK_BANDWIDTH_UNDER_PROVISIONED"|"NETWORK_PPS_OVER_PROVISIONED"|"NETWORK_PPS_UNDER_PROVISIONED"|"DISK_IOPS_OVER_PROVISIONED"|"DISK_IOPS_UNDER_PROVISIONED"|"DISK_THROUGHPUT_OVER_PROVISIONED"|"DISK_THROUGHPUT_UNDER_PROVISIONED"|string;
+  export type FindingReasonCodes = FindingReasonCode[];
   export interface ForecastResult {
     /**
      * The period of time that the forecast covers.
@@ -623,36 +1025,125 @@ declare namespace CostExplorer {
   }
   export type ForecastResultsByTime = ForecastResult[];
   export type GenericBoolean = boolean;
+  export type GenericDouble = number;
   export type GenericString = string;
+  export interface GetAnomaliesRequest {
+    /**
+     * Retrieves all of the cost anomalies detected for a specific cost anomaly monitor Amazon Resource Name (ARN). 
+     */
+    MonitorArn?: GenericString;
+    /**
+     * Assigns the start and end dates for retrieving cost anomalies. The returned anomaly object will have an AnomalyEndDate in the specified time range. 
+     */
+    DateInterval: AnomalyDateInterval;
+    /**
+     * Filters anomaly results by the feedback field on the anomaly object. 
+     */
+    Feedback?: AnomalyFeedbackType;
+    /**
+     * Filters anomaly results by the total impact field on the anomaly object. For example, you can filter anomalies GREATER_THAN 200.00 to retrieve anomalies, with an estimated dollar impact greater than 200. 
+     */
+    TotalImpact?: TotalImpactFilter;
+    /**
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. 
+     */
+    NextPageToken?: NextPageToken;
+    /**
+     * The number of entries a paginated response contains. 
+     */
+    MaxResults?: PageSize;
+  }
+  export interface GetAnomaliesResponse {
+    /**
+     * A list of cost anomalies. 
+     */
+    Anomalies: Anomalies;
+    /**
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. 
+     */
+    NextPageToken?: NextPageToken;
+  }
+  export interface GetAnomalyMonitorsRequest {
+    /**
+     * A list of cost anomaly monitor ARNs. 
+     */
+    MonitorArnList?: Values;
+    /**
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. 
+     */
+    NextPageToken?: NextPageToken;
+    /**
+     * The number of entries that a paginated response contains. 
+     */
+    MaxResults?: PageSize;
+  }
+  export interface GetAnomalyMonitorsResponse {
+    /**
+     * A list of cost anomaly monitors that includes the detailed metadata for each monitor. 
+     */
+    AnomalyMonitors: AnomalyMonitors;
+    /**
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. 
+     */
+    NextPageToken?: NextPageToken;
+  }
+  export interface GetAnomalySubscriptionsRequest {
+    /**
+     * A list of cost anomaly subscription ARNs. 
+     */
+    SubscriptionArnList?: Values;
+    /**
+     * Cost anomaly monitor ARNs. 
+     */
+    MonitorArn?: GenericString;
+    /**
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. 
+     */
+    NextPageToken?: NextPageToken;
+    /**
+     * The number of entries a paginated response contains. 
+     */
+    MaxResults?: PageSize;
+  }
+  export interface GetAnomalySubscriptionsResponse {
+    /**
+     * A list of cost anomaly subscriptions that includes the detailed metadata for each one. 
+     */
+    AnomalySubscriptions: AnomalySubscriptions;
+    /**
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size. 
+     */
+    NextPageToken?: NextPageToken;
+  }
   export interface GetCostAndUsageRequest {
     /**
-     * Sets the start and end dates for retrieving AWS costs. The start date is inclusive, but the end date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01 up to and including 2017-04-30 but not including 2017-05-01.
+     * Sets the start date and end date for retrieving Amazon Web Services costs. The start date is inclusive, but the end date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01 up to and including 2017-04-30 but not including 2017-05-01.
      */
     TimePeriod: DateInterval;
     /**
-     * Sets the AWS cost granularity to MONTHLY or DAILY, or HOURLY. If Granularity isn't set, the response object doesn't include the Granularity, either MONTHLY or DAILY, or HOURLY. 
+     * Sets the Amazon Web Services cost granularity to MONTHLY or DAILY, or HOURLY. If Granularity isn't set, the response object doesn't include the Granularity, either MONTHLY or DAILY, or HOURLY. 
      */
-    Granularity?: Granularity;
+    Granularity: Granularity;
     /**
-     * Filters AWS costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression. 
+     * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression. 
      */
     Filter?: Expression;
     /**
-     * Which metrics are returned in the query. For more information about blended and unblended rates, see Why does the "blended" annotation appear on some line items in my bill?.  Valid values are AmortizedCost, BlendedCost, NetAmortizedCost, NetUnblendedCost, NormalizedUsageAmount, UnblendedCost, and UsageQuantity.   If you return the UsageQuantity metric, the service aggregates all usage numbers without taking into account the units. For example, if you aggregate usageQuantity across all of Amazon EC2, the results aren't meaningful because Amazon EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful UsageQuantity metrics, filter by UsageType or UsageTypeGroups.    Metrics is required for GetCostAndUsage requests.
+     * Which metrics are returned in the query. For more information about blended and unblended rates, see Why does the "blended" annotation appear on some line items in my bill?.  Valid values are AmortizedCost, BlendedCost, NetAmortizedCost, NetUnblendedCost, NormalizedUsageAmount, UnblendedCost, and UsageQuantity.   If you return the UsageQuantity metric, the service aggregates all usage numbers without taking into account the units. For example, if you aggregate usageQuantity across all of Amazon EC2, the results aren't meaningful because Amazon EC2 compute hours and data transfer are measured in different units (for example, hours and GB). To get more meaningful UsageQuantity metrics, filter by UsageType or UsageTypeGroups.    Metrics is required for GetCostAndUsage requests.
      */
-    Metrics?: MetricNames;
+    Metrics: MetricNames;
     /**
-     * You can group AWS costs using up to two different groups, either dimensions, tag keys, or both. When you group by tag key, you get all tag values, including empty strings. Valid values are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME, LINKED_ACCOUNT, OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE, TAGS, TENANCY, RECORD_TYPE, and USAGE_TYPE.
+     * You can group Amazon Web Services costs using up to two different groups, either dimensions, tag keys, cost categories, or any two group by types. Valid values for the DIMENSION type are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME, LINKED_ACCOUNT, OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE, TENANCY, RECORD_TYPE, and USAGE_TYPE. When you group by the TAG type and include a valid tag key, you get all tag values, including empty strings.
      */
     GroupBy?: GroupDefinitions;
     /**
-     * The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
   }
   export interface GetCostAndUsageResponse {
     /**
-     * The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+     * The token for the next set of retrievable results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
     /**
@@ -660,9 +1151,13 @@ declare namespace CostExplorer {
      */
     GroupDefinitions?: GroupDefinitions;
     /**
-     * The time period that is covered by the results in the response.
+     * The time period that's covered by the results in the response.
      */
     ResultsByTime?: ResultsByTime;
+    /**
+     * The attributes that apply to a specific dimension value. For example, if the value is a linked account, the attribute is that account name.
+     */
+    DimensionValueAttributes?: DimensionValuesWithAttributesList;
   }
   export interface GetCostAndUsageWithResourcesRequest {
     /**
@@ -670,29 +1165,29 @@ declare namespace CostExplorer {
      */
     TimePeriod: DateInterval;
     /**
-     * Sets the AWS cost granularity to MONTHLY, DAILY, or HOURLY. If Granularity isn't set, the response object doesn't include the Granularity, MONTHLY, DAILY, or HOURLY. 
+     * Sets the Amazon Web Services cost granularity to MONTHLY, DAILY, or HOURLY. If Granularity isn't set, the response object doesn't include the Granularity, MONTHLY, DAILY, or HOURLY. 
      */
-    Granularity?: Granularity;
+    Granularity: Granularity;
     /**
-     * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression.  The GetCostAndUsageWithResources operation requires that you either group by or filter by a ResourceId.
+     * Filters Amazon Web Services costs by different dimensions. For example, you can specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with that account's usage of that service. You can nest Expression objects to define any combination of dimension filters. For more information, see Expression.  The GetCostAndUsageWithResources operation requires that you either group by or filter by a ResourceId. It requires the Expression "SERVICE = Amazon Elastic Compute Cloud - Compute" in the filter.
      */
-    Filter?: Expression;
+    Filter: Expression;
     /**
      * Which metrics are returned in the query. For more information about blended and unblended rates, see Why does the "blended" annotation appear on some line items in my bill?.  Valid values are AmortizedCost, BlendedCost, NetAmortizedCost, NetUnblendedCost, NormalizedUsageAmount, UnblendedCost, and UsageQuantity.   If you return the UsageQuantity metric, the service aggregates all usage numbers without taking the units into account. For example, if you aggregate usageQuantity across all of Amazon EC2, the results aren't meaningful because Amazon EC2 compute hours and data transfer are measured in different units (for example, hours vs. GB). To get more meaningful UsageQuantity metrics, filter by UsageType or UsageTypeGroups.    Metrics is required for GetCostAndUsageWithResources requests.
      */
     Metrics?: MetricNames;
     /**
-     * You can group Amazon Web Services costs using up to two different groups: either dimensions, tag keys, or both.
+     * You can group Amazon Web Services costs using up to two different groups: DIMENSION, TAG, COST_CATEGORY.
      */
     GroupBy?: GroupDefinitions;
     /**
-     * The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
   }
   export interface GetCostAndUsageWithResourcesResponse {
     /**
-     * The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+     * The token for the next set of retrievable results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
     /**
@@ -703,10 +1198,57 @@ declare namespace CostExplorer {
      * The time period that is covered by the results in the response.
      */
     ResultsByTime?: ResultsByTime;
+    /**
+     * The attributes that apply to a specific dimension value. For example, if the value is a linked account, the attribute is that account name.
+     */
+    DimensionValueAttributes?: DimensionValuesWithAttributesList;
+  }
+  export interface GetCostCategoriesRequest {
+    /**
+     * The value that you want to search the filter values for. If you do not specify a CostCategoryName, SearchString will be used to filter Cost Category names that match the SearchString pattern. If you do specifiy a CostCategoryName, SearchString will be used to filter Cost Category values that match the SearchString pattern.
+     */
+    SearchString?: SearchString;
+    TimePeriod: DateInterval;
+    CostCategoryName?: CostCategoryName;
+    Filter?: Expression;
+    /**
+     * The value by which you want to sort the data. The key represents cost and usage metrics. The following values are supported:    BlendedCost     UnblendedCost     AmortizedCost     NetAmortizedCost     NetUnblendedCost     UsageQuantity     NormalizedUsageAmount    Supported values for SortOrder are ASCENDING or DESCENDING. When using SortBy, NextPageToken and SearchString are not supported.
+     */
+    SortBy?: SortDefinitions;
+    /**
+     * This field is only used when SortBy is provided in the request. The maximum number of objects that to be returned for this request. If MaxResults is not specified with SortBy, the request will return 1000 results as the default value for this parameter. For GetCostCategories, MaxResults has an upper limit of 1000.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the number of objects that are still available for retrieval exceeds the limit, Amazon Web Services returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the NextPageToken from the prior call in your next request.
+     */
+    NextPageToken?: NextPageToken;
+  }
+  export interface GetCostCategoriesResponse {
+    /**
+     * If the number of objects that are still available for retrieval exceeds the limit, Amazon Web Services returns a NextPageToken value in the response. To retrieve the next batch of objects, provide the marker from the prior call in your next request.
+     */
+    NextPageToken?: NextPageToken;
+    /**
+     * The names of the Cost Categories.
+     */
+    CostCategoryNames?: CostCategoryNamesList;
+    /**
+     * The Cost Category values.  CostCategoryValues are not returned if CostCategoryName is not specified in the request. 
+     */
+    CostCategoryValues?: CostCategoryValuesList;
+    /**
+     * The number of objects returned.
+     */
+    ReturnSize: PageSize;
+    /**
+     * The total number of objects.
+     */
+    TotalSize: PageSize;
   }
   export interface GetCostForecastRequest {
     /**
-     * The period of time that you want the forecast to cover.
+     * The period of time that you want the forecast to cover. The start date must be equal to or no later than the current date to avoid a validation error.
      */
     TimePeriod: DateInterval;
     /**
@@ -718,7 +1260,7 @@ declare namespace CostExplorer {
      */
     Granularity: Granularity;
     /**
-     * The filters that you want to use to filter your forecast. Cost Explorer API supports all of the Cost Explorer filters.
+     * The filters that you want to use to filter your forecast. The GetCostForecast API supports filtering by the following dimensions:    AZ     INSTANCE_TYPE     LINKED_ACCOUNT     LINKED_ACCOUNT_NAME     OPERATION     PURCHASE_TYPE     REGION     SERVICE     USAGE_TYPE     USAGE_TYPE_GROUP     RECORD_TYPE     OPERATING_SYSTEM     TENANCY     SCOPE     PLATFORM     SUBSCRIPTION_ID     LEGAL_ENTITY_NAME     DEPLOYMENT_OPTION     DATABASE_ENGINE     INSTANCE_TYPE_FAMILY     BILLING_ENTITY     RESERVATION_ID     SAVINGS_PLAN_ARN   
      */
     Filter?: Expression;
     /**
@@ -742,7 +1284,7 @@ declare namespace CostExplorer {
      */
     SearchString?: SearchString;
     /**
-     * The start and end dates for retrieving the dimension values. The start date is inclusive, but the end date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01 up to and including 2017-04-30 but not including 2017-05-01.
+     * The start date and end date for retrieving the dimension values. The start date is inclusive, but the end date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01 up to and including 2017-04-30 but not including 2017-05-01.
      */
     TimePeriod: DateInterval;
     /**
@@ -750,21 +1292,30 @@ declare namespace CostExplorer {
      */
     Dimension: Dimension;
     /**
-     * The context for the call to GetDimensionValues. This can be RESERVATIONS or COST_AND_USAGE. The default value is COST_AND_USAGE. If the context is set to RESERVATIONS, the resulting dimension values can be used in the GetReservationUtilization operation. If the context is set to COST_AND_USAGE, the resulting dimension values can be used in the GetCostAndUsage operation. If you set the context to COST_AND_USAGE, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The AWS service such as Amazon DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute. Examples include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   REGION - The AWS Region.   SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).   TENANCY - The tenancy of a resource. Examples are shared or dedicated.   If you set the context to SAVINGS_PLANS, you can use the following dimensions for searching:   SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)   PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)   REGION - The AWS Region.   INSTANCE_TYPE_FAMILY - The family of instances (For example, m5)   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan  
+     * The context for the call to GetDimensionValues. This can be RESERVATIONS or COST_AND_USAGE. The default value is COST_AND_USAGE. If the context is set to RESERVATIONS, the resulting dimension values can be used in the GetReservationUtilization operation. If the context is set to COST_AND_USAGE, the resulting dimension values can be used in the GetCostAndUsage operation. If you set the context to COST_AND_USAGE, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services services, such as Amazon Web Services.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.   OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The Amazon Web Services service such as Amazon DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute. Examples include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   REGION - The Amazon Web Services Region.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   REGION - The Amazon Web Services Region.   SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).   TENANCY - The tenancy of a resource. Examples are shared or dedicated.   If you set the context to SAVINGS_PLANS, you can use the following dimensions for searching:   SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)   PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)   REGION - The Amazon Web Services Region.   INSTANCE_TYPE_FAMILY - The family of instances (For example, m5)   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.   SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan  
      */
     Context?: Context;
+    Filter?: Expression;
     /**
-     * The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+     * The value by which you want to sort the data. The key represents cost and usage metrics. The following values are supported:    BlendedCost     UnblendedCost     AmortizedCost     NetAmortizedCost     NetUnblendedCost     UsageQuantity     NormalizedUsageAmount    Supported values for SortOrder are ASCENDING or DESCENDING. When you specify a SortBy paramater, the context must be COST_AND_USAGE. Further, when using SortBy, NextPageToken and SearchString are not supported.
+     */
+    SortBy?: SortDefinitions;
+    /**
+     * This field is only used when SortBy is provided in the request. The maximum number of objects that to be returned for this request. If MaxResults is not specified with SortBy, the request will return 1000 results as the default value for this parameter. For GetDimensionValues, MaxResults has an upper limit of 1000.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
   }
   export interface GetDimensionValuesResponse {
     /**
-     * The filters that you used to filter your request. Some dimensions are available only for a specific context. If you set the context to COST_AND_USAGE, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LEGAL_ENTITY_NAME - The name of the organization that sells you AWS services, such as Amazon Web Services.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The AWS service such as Amazon DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute. Examples include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   REGION - The AWS Region.   SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).   TENANCY - The tenancy of a resource. Examples are shared or dedicated.   If you set the context to SAVINGS_PLANS, you can use the following dimensions for searching:   SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)   PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)   REGION - The AWS Region.   INSTANCE_TYPE_FAMILY - The family of instances (For example, m5)   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the AWS ID of the member account.   SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan  
+     * The filters that you used to filter your request. Some dimensions are available only for a specific context. If you set the context to COST_AND_USAGE, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   DATABASE_ENGINE - The Amazon Relational Database Service database. Examples are Aurora or MySQL.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LEGAL_ENTITY_NAME - The name of the organization that sells you Amazon Web Services services, such as Amazon Web Services.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.   OPERATING_SYSTEM - The operating system. Examples are Windows or Linux.   OPERATION - The action performed. Examples include RunInstance and CreateBucket.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   PURCHASE_TYPE - The reservation type of the purchase to which this usage is related. Examples include On-Demand Instances and Standard Reserved Instances.   SERVICE - The Amazon Web Services service such as Amazon DynamoDB.   USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The response for the GetDimensionValues operation includes a unit attribute. Examples include GB and Hrs.   USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2: CloudWatch – Alarms. The response for this operation includes a unit attribute.   RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax refunds, and credits.   RESOURCE_ID - The unique identifier of the resource. ResourceId is an opt-in feature only available for last 14 days for EC2-Compute Service.   If you set the context to RESERVATIONS, you can use the following dimensions for searching:   AZ - The Availability Zone. An example is us-east-1a.   CACHE_ENGINE - The Amazon ElastiCache operating system. Examples are Windows or Linux.   DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments. Valid values are SingleAZ and MultiAZ.   INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.   PLATFORM - The Amazon EC2 operating system. Examples are Windows or Linux.   REGION - The Amazon Web Services Region.   SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are regional or a single Availability Zone.   TAG (Coverage only) - The tags that are associated with a Reserved Instance (RI).   TENANCY - The tenancy of a resource. Examples are shared or dedicated.   If you set the context to SAVINGS_PLANS, you can use the following dimensions for searching:   SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)   PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All Upfront)   REGION - The Amazon Web Services Region.   INSTANCE_TYPE_FAMILY - The family of instances (For example, m5)   LINKED_ACCOUNT - The description in the attribute map that includes the full name of the member account. The value field contains the Amazon Web Services ID of the member account.   SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan  
      */
     DimensionValues: DimensionValuesWithAttributesList;
     /**
-     * The number of results that AWS returned at one time.
+     * The number of results that Amazon Web Services returned at one time.
      */
     ReturnSize: PageSize;
     /**
@@ -772,7 +1323,7 @@ declare namespace CostExplorer {
      */
     TotalSize: PageSize;
     /**
-     * The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+     * The token for the next set of retrievable results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
   }
@@ -786,7 +1337,7 @@ declare namespace CostExplorer {
      */
     GroupBy?: GroupDefinitions;
     /**
-     * The granularity of the AWS cost data for the reservation. Valid values are MONTHLY and DAILY. If GroupBy is set, Granularity can't be set. If Granularity isn't set, the response object doesn't include Granularity, either MONTHLY or DAILY. The GetReservationCoverage operation supports only DAILY and MONTHLY granularities.
+     * The granularity of the Amazon Web Services cost data for the reservation. Valid values are MONTHLY and DAILY. If GroupBy is set, Granularity can't be set. If Granularity isn't set, the response object doesn't include Granularity, either MONTHLY or DAILY. The GetReservationCoverage operation supports only DAILY and MONTHLY granularities.
      */
     Granularity?: Granularity;
     /**
@@ -798,9 +1349,17 @@ declare namespace CostExplorer {
      */
     Metrics?: MetricNames;
     /**
-     * The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
+    /**
+     * The value by which you want to sort the data. The following values are supported for Key:    OnDemandCost     CoverageHoursPercentage     OnDemandHours     ReservedHours     TotalRunningHours     CoverageNormalizedUnitsPercentage     OnDemandNormalizedUnits     ReservedNormalizedUnits     TotalRunningNormalizedUnits     Time    Supported values for SortOrder are ASCENDING or DESCENDING.
+     */
+    SortBy?: SortDefinition;
+    /**
+     * The maximum number of objects that you returned for this request. If more objects are available, in the response, Amazon Web Services provides a NextPageToken value that you can use in a subsequent call to get the next batch of objects.
+     */
+    MaxResults?: MaxResults;
   }
   export interface GetReservationCoverageResponse {
     /**
@@ -812,7 +1371,7 @@ declare namespace CostExplorer {
      */
     Total?: Coverage;
     /**
-     * The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+     * The token for the next set of retrievable results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
   }
@@ -825,12 +1384,13 @@ declare namespace CostExplorer {
      * The specific service that you want recommendations for.
      */
     Service: GenericString;
+    Filter?: Expression;
     /**
-     * The account scope that you want your recommendations for. Amazon Web Services calculates recommendations including the payer account and linked accounts if the value is set to PAYER. If the value is LINKED, recommendations are calculated for individual linked accounts only.
+     * The account scope that you want your recommendations for. Amazon Web Services calculates recommendations including the management account and member accounts if the value is set to PAYER. If the value is LINKED, recommendations are calculated for individual member accounts only.
      */
     AccountScope?: AccountScope;
     /**
-     * The number of previous days that you want AWS to consider when it calculates your recommendations.
+     * The number of previous days that you want Amazon Web Services to consider when it calculates your recommendations.
      */
     LookbackPeriodInDays?: LookbackPeriodInDays;
     /**
@@ -886,9 +1446,17 @@ declare namespace CostExplorer {
      */
     Filter?: Expression;
     /**
-     * The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+     * The value by which you want to sort the data. The following values are supported for Key:    UtilizationPercentage     UtilizationPercentageInUnits     PurchasedHours     PurchasedUnits     TotalActualHours     TotalActualUnits     UnusedHours     UnusedUnits     OnDemandCostOfRIHoursUsed     NetRISavings     TotalPotentialRISavings     AmortizedUpfrontFee     AmortizedRecurringFee     TotalAmortizedFee     RICostForUnusedHours     RealizedSavings     UnrealizedSavings    Supported values for SortOrder are ASCENDING or DESCENDING.
+     */
+    SortBy?: SortDefinition;
+    /**
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
+    /**
+     * The maximum number of objects that you returned for this request. If more objects are available, in the response, Amazon Web Services provides a NextPageToken value that you can use in a subsequent call to get the next batch of objects.
+     */
+    MaxResults?: MaxResults;
   }
   export interface GetReservationUtilizationResponse {
     /**
@@ -900,7 +1468,7 @@ declare namespace CostExplorer {
      */
     Total?: ReservationAggregates;
     /**
-     * The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+     * The token for the next set of retrievable results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
   }
@@ -974,6 +1542,10 @@ declare namespace CostExplorer {
      * The number of items to be returned in a response. The default is 20, with a minimum value of 1.
      */
     MaxResults?: MaxResults;
+    /**
+     * The value by which you want to sort the data. The following values are supported for Key:    SpendCoveredBySavingsPlan     OnDemandCost     CoveragePercentage     TotalCost     InstanceFamily     Region     Service    Supported values for SortOrder are ASCENDING or DESCENDING.
+     */
+    SortBy?: SortDefinition;
   }
   export interface GetSavingsPlansCoverageResponse {
     /**
@@ -999,7 +1571,7 @@ declare namespace CostExplorer {
      */
     PaymentOption: PaymentOption;
     /**
-     * The account scope that you want your recommendations for. Amazon Web Services calculates recommendations including the payer account and linked accounts if the value is set to PAYER. If the value is LINKED, recommendations are calculated for individual linked accounts only.
+     * The account scope that you want your recommendations for. Amazon Web Services calculates recommendations including the management account and member accounts if the value is set to PAYER. If the value is LINKED, recommendations are calculated for individual member accounts only.
      */
     AccountScope?: AccountScope;
     /**
@@ -1029,7 +1601,7 @@ declare namespace CostExplorer {
      */
     SavingsPlansPurchaseRecommendation?: SavingsPlansPurchaseRecommendation;
     /**
-     * The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+     * The token for the next set of retrievable results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
   }
@@ -1043,6 +1615,10 @@ declare namespace CostExplorer {
      */
     Filter?: Expression;
     /**
+     * The data type.
+     */
+    DataType?: SavingsPlansDataTypes;
+    /**
      * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextToken?: NextPageToken;
@@ -1050,6 +1626,10 @@ declare namespace CostExplorer {
      * The number of items to be returned in a response. The default is 20, with a minimum value of 1.
      */
     MaxResults?: MaxResults;
+    /**
+     * The value by which you want to sort the data. The following values are supported for Key:    UtilizationPercentage     TotalCommitment     UsedCommitment     UnusedCommitment     NetSavings     AmortizedRecurringCommitment     AmortizedUpfrontCommitment    Supported values for SortOrder are ASCENDING or DESCENDING.
+     */
+    SortBy?: SortDefinition;
   }
   export interface GetSavingsPlansUtilizationDetailsResponse {
     /**
@@ -1079,6 +1659,10 @@ declare namespace CostExplorer {
      * Filters Savings Plans utilization coverage data for active Savings Plans dimensions. You can filter data with the following dimensions:    LINKED_ACCOUNT     SAVINGS_PLAN_ARN     SAVINGS_PLANS_TYPE     REGION     PAYMENT_OPTION     INSTANCE_TYPE_FAMILY     GetSavingsPlansUtilization uses the same Expression object as the other operations, but only AND is supported among each dimension.
      */
     Filter?: Expression;
+    /**
+     * The value by which you want to sort the data. The following values are supported for Key:    UtilizationPercentage     TotalCommitment     UsedCommitment     UnusedCommitment     NetSavings    Supported values for SortOrder are ASCENDING or DESCENDING.
+     */
+    SortBy?: SortDefinition;
   }
   export interface GetSavingsPlansUtilizationResponse {
     /**
@@ -1103,14 +1687,23 @@ declare namespace CostExplorer {
      * The key of the tag that you want to return values for.
      */
     TagKey?: TagKey;
+    Filter?: Expression;
     /**
-     * The token to retrieve the next set of results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+     * The value by which you want to sort the data. The key represents cost and usage metrics. The following values are supported:    BlendedCost     UnblendedCost     AmortizedCost     NetAmortizedCost     NetUnblendedCost     UsageQuantity     NormalizedUsageAmount    Supported values for SortOrder are ASCENDING or DESCENDING. When using SortBy, NextPageToken and SearchString are not supported.
+     */
+    SortBy?: SortDefinitions;
+    /**
+     * This field is only used when SortBy is provided in the request. The maximum number of objects that to be returned for this request. If MaxResults is not specified with SortBy, the request will return 1000 results as the default value for this parameter. For GetTags, MaxResults has an upper limit of 1000.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
   }
   export interface GetTagsResponse {
     /**
-     * The token for the next set of retrievable results. AWS provides the token when the response from a previous call has more results than the maximum page size.
+     * The token for the next set of retrievable results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.
      */
     NextPageToken?: NextPageToken;
     /**
@@ -1118,7 +1711,7 @@ declare namespace CostExplorer {
      */
     Tags: TagList;
     /**
-     * The number of query results that AWS returns at a time.
+     * The number of query results that Amazon Web Services returns at a time.
      */
     ReturnSize: PageSize;
     /**
@@ -1128,7 +1721,7 @@ declare namespace CostExplorer {
   }
   export interface GetUsageForecastRequest {
     /**
-     * The start and end dates of the period that you want to retrieve usage forecast for. The start date is inclusive, but the end date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01 up to and including 2017-04-30 but not including 2017-05-01.
+     * The start and end dates of the period that you want to retrieve usage forecast for. The start date is inclusive, but the end date is exclusive. For example, if start is 2017-01-01 and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01 up to and including 2017-04-30 but not including 2017-05-01. The start date must be equal to or later than the current date to avoid a validation error.
      */
     TimePeriod: DateInterval;
     /**
@@ -1140,7 +1733,7 @@ declare namespace CostExplorer {
      */
     Granularity: Granularity;
     /**
-     * The filters that you want to use to filter your forecast. Cost Explorer API supports all of the Cost Explorer filters.
+     * The filters that you want to use to filter your forecast. The GetUsageForecast API supports filtering by the following dimensions:    AZ     INSTANCE_TYPE     LINKED_ACCOUNT     LINKED_ACCOUNT_NAME     OPERATION     PURCHASE_TYPE     REGION     SERVICE     USAGE_TYPE     USAGE_TYPE_GROUP     RECORD_TYPE     OPERATING_SYSTEM     TENANCY     SCOPE     PLATFORM     SUBSCRIPTION_ID     LEGAL_ENTITY_NAME     DEPLOYMENT_OPTION     DATABASE_ENGINE     INSTANCE_TYPE_FAMILY     BILLING_ENTITY     RESERVATION_ID     SAVINGS_PLAN_ARN   
      */
     Filter?: Expression;
     /**
@@ -1183,25 +1776,35 @@ declare namespace CostExplorer {
   export type GroupDefinitionType = "DIMENSION"|"TAG"|"COST_CATEGORY"|string;
   export type GroupDefinitions = GroupDefinition[];
   export type Groups = Group[];
+  export interface Impact {
+    /**
+     * The maximum dollar value that's observed for an anomaly. 
+     */
+    MaxImpact: GenericDouble;
+    /**
+     * The cumulative dollar value that's observed for an anomaly. 
+     */
+    TotalImpact?: GenericDouble;
+  }
   export interface InstanceDetails {
     /**
-     * The Amazon EC2 instances that AWS recommends that you purchase.
+     * The Amazon EC2 instances that Amazon Web Services recommends that you purchase.
      */
     EC2InstanceDetails?: EC2InstanceDetails;
     /**
-     * The Amazon RDS instances that AWS recommends that you purchase.
+     * The Amazon RDS instances that Amazon Web Services recommends that you purchase.
      */
     RDSInstanceDetails?: RDSInstanceDetails;
     /**
-     * The Amazon Redshift instances that AWS recommends that you purchase.
+     * The Amazon Redshift instances that Amazon Web Services recommends that you purchase.
      */
     RedshiftInstanceDetails?: RedshiftInstanceDetails;
     /**
-     * The ElastiCache instances that AWS recommends that you purchase.
+     * The ElastiCache instances that Amazon Web Services recommends that you purchase.
      */
     ElastiCacheInstanceDetails?: ElastiCacheInstanceDetails;
     /**
-     * The Amazon ES instances that AWS recommends that you purchase.
+     * The Amazon ES instances that Amazon Web Services recommends that you purchase.
      */
     ESInstanceDetails?: ESInstanceDetails;
   }
@@ -1232,7 +1835,7 @@ declare namespace CostExplorer {
     NextToken?: NextPageToken;
   }
   export type LookbackPeriodInDays = "SEVEN_DAYS"|"THIRTY_DAYS"|"SIXTY_DAYS"|string;
-  export type MatchOption = "EQUALS"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CASE_SENSITIVE"|"CASE_INSENSITIVE"|string;
+  export type MatchOption = "EQUALS"|"ABSENT"|"STARTS_WITH"|"ENDS_WITH"|"CONTAINS"|"CASE_SENSITIVE"|"CASE_INSENSITIVE"|string;
   export type MatchOptions = MatchOption[];
   export type MaxResults = number;
   export type Metric = "BLENDED_COST"|"UNBLENDED_COST"|"AMORTIZED_COST"|"NET_UNBLENDED_COST"|"NET_AMORTIZED_COST"|"USAGE_QUANTITY"|"NORMALIZED_USAGE_AMOUNT"|string;
@@ -1253,13 +1856,36 @@ declare namespace CostExplorer {
   export type Metrics = {[key: string]: MetricValue};
   export interface ModifyRecommendationDetail {
     /**
-     * Identifies whether this instance type is the Amazon Web Services default recommendation.
+     * Determines whether this instance type is the Amazon Web Services default recommendation.
      */
     TargetInstances?: TargetInstancesList;
   }
+  export type MonitorArnList = Arn[];
+  export type MonitorDimension = "SERVICE"|string;
+  export type MonitorType = "DIMENSIONAL"|"CUSTOM"|string;
   export type NetRISavings = string;
+  export interface NetworkResourceUtilization {
+    /**
+     *  The network inbound throughput utilization measured in Bytes per second. 
+     */
+    NetworkInBytesPerSecond?: GenericString;
+    /**
+     *  The network outbound throughput utilization measured in Bytes per second. 
+     */
+    NetworkOutBytesPerSecond?: GenericString;
+    /**
+     *  The network ingress packets that are measured in packets per second. 
+     */
+    NetworkPacketsInPerSecond?: GenericString;
+    /**
+     *  The network outgress packets that are measured in packets per second. 
+     */
+    NetworkPacketsOutPerSecond?: GenericString;
+  }
   export type NextPageToken = string;
   export type NonNegativeInteger = number;
+  export type NullableNonNegativeDouble = number;
+  export type NumericOperator = "EQUAL"|"GREATER_THAN_OR_EQUAL"|"LESS_THAN_OR_EQUAL"|"GREATER_THAN"|"LESS_THAN"|"BETWEEN"|string;
   export type OfferingClass = "STANDARD"|"CONVERTIBLE"|string;
   export type OnDemandCost = string;
   export type OnDemandCostOfRIHoursUsed = string;
@@ -1267,7 +1893,25 @@ declare namespace CostExplorer {
   export type OnDemandNormalizedUnits = string;
   export type PageSize = number;
   export type PaymentOption = "NO_UPFRONT"|"PARTIAL_UPFRONT"|"ALL_UPFRONT"|"LIGHT_UTILIZATION"|"MEDIUM_UTILIZATION"|"HEAVY_UTILIZATION"|string;
+  export type PlatformDifference = "HYPERVISOR"|"NETWORK_INTERFACE"|"STORAGE_INTERFACE"|"INSTANCE_STORE_AVAILABILITY"|"VIRTUALIZATION_TYPE"|string;
+  export type PlatformDifferences = PlatformDifference[];
   export type PredictionIntervalLevel = number;
+  export interface ProvideAnomalyFeedbackRequest {
+    /**
+     * A cost anomaly ID. 
+     */
+    AnomalyId: GenericString;
+    /**
+     * Describes whether the cost anomaly was a planned activity or you considered it an anomaly. 
+     */
+    Feedback: AnomalyFeedbackType;
+  }
+  export interface ProvideAnomalyFeedbackResponse {
+    /**
+     * The ID of the modified cost anomaly. 
+     */
+    AnomalyId: GenericString;
+  }
   export type PurchasedHours = string;
   export type PurchasedUnits = string;
   export interface RDSInstanceDetails {
@@ -1276,11 +1920,11 @@ declare namespace CostExplorer {
      */
     Family?: GenericString;
     /**
-     * The type of instance that AWS recommends.
+     * The type of instance that Amazon Web Services recommends.
      */
     InstanceType?: GenericString;
     /**
-     * The AWS Region of the recommended reservation.
+     * The Amazon Web Services Region of the recommended reservation.
      */
     Region?: GenericString;
     /**
@@ -1292,7 +1936,7 @@ declare namespace CostExplorer {
      */
     DatabaseEdition?: GenericString;
     /**
-     * Whether the recommendation is for a reservation in a single Availability Zone or a reservation with a backup in a second Availability Zone.
+     * Determines whether the recommendation is for a reservation in a single Availability Zone or a reservation with a backup in a second Availability Zone.
      */
     DeploymentOption?: GenericString;
     /**
@@ -1300,14 +1944,16 @@ declare namespace CostExplorer {
      */
     LicenseModel?: GenericString;
     /**
-     * Whether the recommendation is for a current-generation instance. 
+     * Determines whether the recommendation is for a current-generation instance. 
      */
     CurrentGeneration?: GenericBoolean;
     /**
-     * Whether the recommended reservation is size flexible.
+     * Determines whether the recommended reservation is size flexible.
      */
     SizeFlexEligible?: GenericBoolean;
   }
+  export type RICostForUnusedHours = string;
+  export type RealizedSavings = string;
   export type RecommendationTarget = "SAME_INSTANCE_FAMILY"|"CROSS_INSTANCE_FAMILY"|string;
   export interface RedshiftInstanceDetails {
     /**
@@ -1315,19 +1961,19 @@ declare namespace CostExplorer {
      */
     Family?: GenericString;
     /**
-     * The type of node that AWS recommends.
+     * The type of node that Amazon Web Services recommends.
      */
     NodeType?: GenericString;
     /**
-     * The AWS Region of the recommended reservation.
+     * The Amazon Web Services Region of the recommended reservation.
      */
     Region?: GenericString;
     /**
-     * Whether the recommendation is for a current-generation instance.
+     * Determines whether the recommendation is for a current-generation instance.
      */
     CurrentGeneration?: GenericBoolean;
     /**
-     * Whether the recommended reservation is size flexible.
+     * Determines whether the recommended reservation is size flexible.
      */
     SizeFlexEligible?: GenericBoolean;
   }
@@ -1337,7 +1983,7 @@ declare namespace CostExplorer {
      */
     UtilizationPercentage?: UtilizationPercentage;
     /**
-     * The percentage of Amazon EC2 reservation time that you used, converted to normalized units. Normalized units are available only for Amazon EC2 usage after November 11, 2017.
+     * The percentage of Amazon EC2 reservation time that you used. It's converted to normalized units. Normalized units are available only for Amazon EC2 usage after November 11, 2017.
      */
     UtilizationPercentageInUnits?: UtilizationPercentageInUnits;
     /**
@@ -1345,7 +1991,7 @@ declare namespace CostExplorer {
      */
     PurchasedHours?: PurchasedHours;
     /**
-     * How many Amazon EC2 reservation hours that you purchased, converted to normalized units. Normalized units are available only for Amazon EC2 usage after November 11, 2017.
+     * The number of Amazon EC2 reservation hours that you purchased. It's converted to normalized units. Normalized units are available only for Amazon EC2 usage after November 11, 2017.
      */
     PurchasedUnits?: PurchasedUnits;
     /**
@@ -1353,7 +1999,7 @@ declare namespace CostExplorer {
      */
     TotalActualHours?: TotalActualHours;
     /**
-     * The total number of Amazon EC2 reservation hours that you used, converted to normalized units. Normalized units are available only for Amazon EC2 usage after November 11, 2017.
+     * The total number of Amazon EC2 reservation hours that you used. It's converted to normalized units. Normalized units are available only for Amazon EC2 usage after November 11, 2017.
      */
     TotalActualUnits?: TotalActualUnits;
     /**
@@ -1361,33 +2007,45 @@ declare namespace CostExplorer {
      */
     UnusedHours?: UnusedHours;
     /**
-     * The number of Amazon EC2 reservation hours that you didn't use, converted to normalized units. Normalized units are available only for Amazon EC2 usage after November 11, 2017.
+     * The number of Amazon EC2 reservation hours that you didn't use. It's converted to normalized units. Normalized units are available only for Amazon EC2 usage after November 11, 2017.
      */
     UnusedUnits?: UnusedUnits;
     /**
-     * How much your reservation would cost if charged On-Demand rates.
+     * How much your reservation costs if charged On-Demand rates.
      */
     OnDemandCostOfRIHoursUsed?: OnDemandCostOfRIHoursUsed;
     /**
-     * How much you saved due to purchasing and utilizing reservation. AWS calculates this by subtracting TotalAmortizedFee from OnDemandCostOfRIHoursUsed.
+     * How much you saved due to purchasing and utilizing reservation. Amazon Web Services calculates this by subtracting TotalAmortizedFee from OnDemandCostOfRIHoursUsed.
      */
     NetRISavings?: NetRISavings;
     /**
-     * How much you could save if you use your entire reservation.
+     * How much you might save if you use your entire reservation.
      */
     TotalPotentialRISavings?: TotalPotentialRISavings;
     /**
-     * The upfront cost of your reservation, amortized over the reservation period.
+     * The upfront cost of your reservation. It's amortized over the reservation period.
      */
     AmortizedUpfrontFee?: AmortizedUpfrontFee;
     /**
-     * The monthly cost of your reservation, amortized over the reservation period.
+     * The monthly cost of your reservation. It's amortized over the reservation period.
      */
     AmortizedRecurringFee?: AmortizedRecurringFee;
     /**
-     * The total cost of your reservation, amortized over the reservation period.
+     * The total cost of your reservation. It's amortized over the reservation period.
      */
     TotalAmortizedFee?: TotalAmortizedFee;
+    /**
+     * The cost of unused hours for your reservation.
+     */
+    RICostForUnusedHours?: RICostForUnusedHours;
+    /**
+     * The realized savings because of purchasing and using a reservation.
+     */
+    RealizedSavings?: RealizedSavings;
+    /**
+     * The unrealized savings because of purchasing and using a reservation.
+     */
+    UnrealizedSavings?: UnrealizedSavings;
   }
   export interface ReservationCoverageGroup {
     /**
@@ -1404,11 +2062,11 @@ declare namespace CostExplorer {
   export type ReservationGroupValue = string;
   export interface ReservationPurchaseRecommendation {
     /**
-     * The account scope that AWS recommends that you purchase this instance for. For example, you can purchase this reservation for an entire organization in AWS Organizations.
+     * The account scope that Amazon Web Services recommends that you purchase this instance for. For example, you can purchase this reservation for an entire organization in Amazon Web Services Organizations.
      */
     AccountScope?: AccountScope;
     /**
-     * How many days of previous usage that AWS considers when making this recommendation.
+     * How many days of previous usage that Amazon Web Services considers when making this recommendation.
      */
     LookbackPeriodInDays?: LookbackPeriodInDays;
     /**
@@ -1416,7 +2074,7 @@ declare namespace CostExplorer {
      */
     TermInYears?: TermInYears;
     /**
-     * The payment option for the reservation. For example, AllUpfront or NoUpfront.
+     * The payment option for the reservation (for example, AllUpfront or NoUpfront).
      */
     PaymentOption?: PaymentOption;
     /**
@@ -1438,67 +2096,67 @@ declare namespace CostExplorer {
      */
     AccountId?: GenericString;
     /**
-     * Details about the instances that AWS recommends that you purchase.
+     * Details about the instances that Amazon Web Services recommends that you purchase.
      */
     InstanceDetails?: InstanceDetails;
     /**
-     * The number of instances that AWS recommends that you purchase.
+     * The number of instances that Amazon Web Services recommends that you purchase.
      */
     RecommendedNumberOfInstancesToPurchase?: GenericString;
     /**
-     * The number of normalized units that AWS recommends that you purchase.
+     * The number of normalized units that Amazon Web Services recommends that you purchase.
      */
     RecommendedNormalizedUnitsToPurchase?: GenericString;
     /**
-     * The minimum number of instances that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+     * The minimum number of instances that you used in an hour during the historical period. Amazon Web Services uses this to calculate your recommended reservation purchases.
      */
     MinimumNumberOfInstancesUsedPerHour?: GenericString;
     /**
-     * The minimum number of normalized units that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+     * The minimum number of normalized units that you used in an hour during the historical period. Amazon Web Services uses this to calculate your recommended reservation purchases.
      */
     MinimumNormalizedUnitsUsedPerHour?: GenericString;
     /**
-     * The maximum number of instances that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+     * The maximum number of instances that you used in an hour during the historical period. Amazon Web Services uses this to calculate your recommended reservation purchases.
      */
     MaximumNumberOfInstancesUsedPerHour?: GenericString;
     /**
-     * The maximum number of normalized units that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+     * The maximum number of normalized units that you used in an hour during the historical period. Amazon Web Services uses this to calculate your recommended reservation purchases.
      */
     MaximumNormalizedUnitsUsedPerHour?: GenericString;
     /**
-     * The average number of instances that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+     * The average number of instances that you used in an hour during the historical period. Amazon Web Services uses this to calculate your recommended reservation purchases.
      */
     AverageNumberOfInstancesUsedPerHour?: GenericString;
     /**
-     * The average number of normalized units that you used in an hour during the historical period. AWS uses this to calculate your recommended reservation purchases.
+     * The average number of normalized units that you used in an hour during the historical period. Amazon Web Services uses this to calculate your recommended reservation purchases.
      */
     AverageNormalizedUnitsUsedPerHour?: GenericString;
     /**
-     * The average utilization of your instances. AWS uses this to calculate your recommended reservation purchases.
+     * The average utilization of your instances. Amazon Web Services uses this to calculate your recommended reservation purchases.
      */
     AverageUtilization?: GenericString;
     /**
-     * How long AWS estimates that it takes for this instance to start saving you money, in months.
+     * How long Amazon Web Services estimates that it takes for this instance to start saving you money, in months.
      */
     EstimatedBreakEvenInMonths?: GenericString;
     /**
-     * The currency code that AWS used to calculate the costs for this instance.
+     * The currency code that Amazon Web Services used to calculate the costs for this instance.
      */
     CurrencyCode?: GenericString;
     /**
-     * How much AWS estimates that this specific recommendation could save you in a month.
+     * How much Amazon Web Services estimates that this specific recommendation could save you in a month.
      */
     EstimatedMonthlySavingsAmount?: GenericString;
     /**
-     * How much AWS estimates that this specific recommendation could save you in a month, as a percentage of your overall costs.
+     * How much Amazon Web Services estimates that this specific recommendation could save you in a month, as a percentage of your overall costs.
      */
     EstimatedMonthlySavingsPercentage?: GenericString;
     /**
-     * How much AWS estimates that you spend on On-Demand Instances in a month.
+     * How much Amazon Web Services estimates that you spend on On-Demand Instances in a month.
      */
     EstimatedMonthlyOnDemandCost?: GenericString;
     /**
-     * How much AWS estimates that you would have spent for all usage during the specified historical period if you had a reservation.
+     * How much Amazon Web Services estimates that you would have spent for all usage during the specified historical period if you had a reservation.
      */
     EstimatedReservationCostForLookbackPeriod?: GenericString;
     /**
@@ -1517,17 +2175,17 @@ declare namespace CostExplorer {
      */
     RecommendationId?: GenericString;
     /**
-     * The timestamp for when AWS made this recommendation.
+     * The timestamp for when Amazon Web Services made this recommendation.
      */
     GenerationTimestamp?: GenericString;
   }
   export interface ReservationPurchaseRecommendationSummary {
     /**
-     * The total amount that AWS estimates that this recommendation could save you in a month.
+     * The total amount that Amazon Web Services estimates that this recommendation could save you in a month.
      */
     TotalEstimatedMonthlySavingsAmount?: GenericString;
     /**
-     * The total amount that AWS estimates that this recommendation could save you in a month, as a percentage of your costs.
+     * The total amount that Amazon Web Services estimates that this recommendation could save you in a month, as a percentage of your costs.
      */
     TotalEstimatedMonthlySavingsPercentage?: GenericString;
     /**
@@ -1565,7 +2223,7 @@ declare namespace CostExplorer {
   }
   export interface ResourceUtilization {
     /**
-     * Utilization of current Amazon EC2 Instance 
+     * The utilization of current Amazon EC2 instance. 
      */
     EC2ResourceUtilization?: EC2ResourceUtilization;
   }
@@ -1583,7 +2241,7 @@ declare namespace CostExplorer {
      */
     Groups?: Groups;
     /**
-     * Whether the result is estimated.
+     * Determines whether the result is estimated.
      */
     Estimated?: Estimated;
   }
@@ -1594,66 +2252,93 @@ declare namespace CostExplorer {
      */
     AccountId?: GenericString;
     /**
-     *  Context regarding the current instance.
+     * Context regarding the current instance.
      */
     CurrentInstance?: CurrentInstance;
     /**
-     * Recommendation to either terminate or modify the resource.
+     * A recommendation to either terminate or modify the resource.
      */
     RightsizingType?: RightsizingType;
     /**
-     *  Details for modification recommendations. 
+     * The details for the modification recommendations. 
      */
     ModifyRecommendationDetail?: ModifyRecommendationDetail;
     /**
-     * Details for termination recommendations.
+     * The details for termination recommendations.
      */
     TerminateRecommendationDetail?: TerminateRecommendationDetail;
+    /**
+     *  The list of possible reasons why the recommendation is generated such as under or over utilization of specific metrics (for example, CPU, Memory, Network). 
+     */
+    FindingReasonCodes?: FindingReasonCodes;
   }
   export interface RightsizingRecommendationConfiguration {
     /**
-     *  The option to see recommendations within the same instance family, or recommendations for instances across other families. The default value is SAME_INSTANCE_FAMILY. 
+     * The option to see recommendations within the same instance family or recommendations for instances across other families. The default value is SAME_INSTANCE_FAMILY. 
      */
     RecommendationTarget: RecommendationTarget;
     /**
-     *  The option to consider RI or Savings Plans discount benefits in your savings calculation. The default value is TRUE. 
+     * The option to consider RI or Savings Plans discount benefits in your savings calculation. The default value is TRUE. 
      */
     BenefitsConsidered: GenericBoolean;
   }
   export type RightsizingRecommendationList = RightsizingRecommendation[];
   export interface RightsizingRecommendationMetadata {
     /**
-     *  The ID for this specific recommendation.
+     * The ID for this specific recommendation.
      */
     RecommendationId?: GenericString;
     /**
-     *  The timestamp for when Amazon Web Services made this recommendation.
+     * The timestamp for when Amazon Web Services made this recommendation.
      */
     GenerationTimestamp?: GenericString;
     /**
-     *  How many days of previous usage that Amazon Web Services considers when making this recommendation.
+     * The number of days of previous usage that Amazon Web Services considers when making this recommendation.
      */
     LookbackPeriodInDays?: LookbackPeriodInDays;
+    /**
+     * Additional metadata that might be applicable to the recommendation.
+     */
+    AdditionalMetadata?: GenericString;
   }
   export interface RightsizingRecommendationSummary {
     /**
-     *  Total number of instance recommendations.
+     * The total number of instance recommendations.
      */
     TotalRecommendationCount?: GenericString;
     /**
-     *  Estimated total savings resulting from modifications, on a monthly basis.
+     * The estimated total savings resulting from modifications, on a monthly basis.
      */
     EstimatedTotalMonthlySavingsAmount?: GenericString;
     /**
-     *  The currency code that Amazon Web Services used to calculate the savings.
+     * The currency code that Amazon Web Services used to calculate the savings.
      */
     SavingsCurrencyCode?: GenericString;
     /**
-     *  Savings percentage based on the recommended modifications, relative to the total On-Demand costs associated with these instances.
+     *  The savings percentage based on the recommended modifications. It's relative to the total On-Demand costs that are associated with these instances.
      */
     SavingsPercentage?: GenericString;
   }
   export type RightsizingType = "TERMINATE"|"MODIFY"|string;
+  export interface RootCause {
+    /**
+     * The Amazon Web Services service name that's associated with the cost anomaly. 
+     */
+    Service?: GenericString;
+    /**
+     * The Amazon Web Services Region that's associated with the cost anomaly. 
+     */
+    Region?: GenericString;
+    /**
+     * The member account value that's associated with the cost anomaly. 
+     */
+    LinkedAccount?: GenericString;
+    /**
+     * The UsageType value that's associated with the cost anomaly. 
+     */
+    UsageType?: GenericString;
+  }
+  export type RootCauses = RootCause[];
   export type SavingsPlanArn = string;
   export interface SavingsPlansAmortizedCommitment {
     /**
@@ -1694,14 +2379,16 @@ declare namespace CostExplorer {
      */
     TotalCost?: GenericString;
     /**
-     * The percentage of your existing Savings Plans covered usage, divided by all of your eligible Savings Plans usage in an account(or set of accounts).
+     * The percentage of your existing Savings Plans covered usage, divided by all of your eligible Savings Plans usage in an account (or set of accounts).
      */
     CoveragePercentage?: GenericString;
   }
   export type SavingsPlansCoverages = SavingsPlansCoverage[];
+  export type SavingsPlansDataType = "ATTRIBUTES"|"UTILIZATION"|"AMORTIZED_COMMITMENT"|"SAVINGS"|string;
+  export type SavingsPlansDataTypes = SavingsPlansDataType[];
   export interface SavingsPlansDetails {
     /**
-     * A collection of AWS resources in a geographic area. Each AWS Region is isolated and independent of the other Regions.
+     * A collection of Amazon Web Services resources in a geographic area. Each Amazon Web Services Region is isolated and independent of the other Regions.
      */
     Region?: GenericString;
     /**
@@ -1709,13 +2396,13 @@ declare namespace CostExplorer {
      */
     InstanceFamily?: GenericString;
     /**
-     * The unique ID used to distinguish Savings Plans from one another.
+     * The unique ID that's used to distinguish Savings Plans from one another.
      */
     OfferingId?: GenericString;
   }
   export interface SavingsPlansPurchaseRecommendation {
     /**
-     * The account scope that you want your recommendations for. Amazon Web Services calculates recommendations including the payer account and linked accounts if the value is set to PAYER. If the value is LINKED, recommendations are calculated for individual linked accounts only.
+     * The account scope that you want your recommendations for. Amazon Web Services calculates recommendations that include the management account and member accounts if the value is set to PAYER. If the value is LINKED, recommendations are calculated for individual member accounts only.
      */
     AccountScope?: AccountScope;
     /**
@@ -1723,7 +2410,7 @@ declare namespace CostExplorer {
      */
     SavingsPlansType?: SupportedSavingsPlansType;
     /**
-     * The Savings Plans recommendation term in years, used to generate the recommendation.
+     * The Savings Plans recommendation term in years. It's used to generate the recommendation.
      */
     TermInYears?: TermInYears;
     /**
@@ -1757,11 +2444,11 @@ declare namespace CostExplorer {
      */
     UpfrontCost?: GenericString;
     /**
-     * The estimated return on investment based on the recommended Savings Plans purchased. This is calculated as estimatedSavingsAmount/ estimatedSPCost*100.
+     * The estimated return on investment that's based on the recommended Savings Plans that you purchased. This is calculated as estimatedSavingsAmount/ estimatedSPCost*100.
      */
     EstimatedROI?: GenericString;
     /**
-     * The currency code Amazon Web Services used to generate the recommendations and present potential savings.
+     * The currency code that Amazon Web Services used to generate the recommendations and present potential savings.
      */
     CurrencyCode?: GenericString;
     /**
@@ -1777,7 +2464,7 @@ declare namespace CostExplorer {
      */
     EstimatedOnDemandCostWithCurrentCommitment?: GenericString;
     /**
-     * The estimated savings amount based on the recommended Savings Plans over the length of the lookback period.
+     * The estimated savings amount that's based on the recommended Savings Plans over the length of the lookback period.
      */
     EstimatedSavingsAmount?: GenericString;
     /**
@@ -1785,7 +2472,7 @@ declare namespace CostExplorer {
      */
     EstimatedSavingsPercentage?: GenericString;
     /**
-     * The recommended hourly commitment level for the Savings Plans type, and configuration based on the usage during the lookback period.
+     * The recommended hourly commitment level for the Savings Plans type and the configuration that's based on the usage during the lookback period.
      */
     HourlyCommitmentToPurchase?: GenericString;
     /**
@@ -1793,7 +2480,7 @@ declare namespace CostExplorer {
      */
     EstimatedAverageUtilization?: GenericString;
     /**
-     * The estimated monthly savings amount, based on the recommended Savings Plans.
+     * The estimated monthly savings amount based on the recommended Savings Plans.
      */
     EstimatedMonthlySavingsAmount?: GenericString;
     /**
@@ -1819,14 +2506,18 @@ declare namespace CostExplorer {
      * The timestamp showing when the recommendations were generated.
      */
     GenerationTimestamp?: GenericString;
+    /**
+     * Additional metadata that might be applicable to the recommendation.
+     */
+    AdditionalMetadata?: GenericString;
   }
   export interface SavingsPlansPurchaseRecommendationSummary {
     /**
-     * The estimated return on investment based on the recommended Savings Plans and estimated savings.
+     * The estimated return on investment that's based on the recommended Savings Plans and estimated savings.
      */
     EstimatedROI?: GenericString;
     /**
-     * The currency code Amazon Web Services used to generate the recommendations and present potential savings.
+     * The currency code that Amazon Web Services used to generate the recommendations and present potential savings.
      */
     CurrencyCode?: GenericString;
     /**
@@ -1850,7 +2541,7 @@ declare namespace CostExplorer {
      */
     DailyCommitmentToPurchase?: GenericString;
     /**
-     * The recommended hourly commitment based on the recommendation parameters.
+     * The recommended hourly commitment that's based on the recommendation parameters.
      */
     HourlyCommitmentToPurchase?: GenericString;
     /**
@@ -1858,17 +2549,17 @@ declare namespace CostExplorer {
      */
     EstimatedSavingsPercentage?: GenericString;
     /**
-     * The estimated monthly savings amount, based on the recommended Savings Plans purchase.
+     * The estimated monthly savings amount that's based on the recommended Savings Plans purchase.
      */
     EstimatedMonthlySavingsAmount?: GenericString;
     /**
-     *  The estimated On-Demand costs you would expect with no additional commitment, based on your usage of the selected time period and the Savings Plans you own. 
+     *  The estimated On-Demand costs you would expect with no additional commitment. It's based on your usage of the selected time period and the Savings Plans you own. 
      */
     EstimatedOnDemandCostWithCurrentCommitment?: GenericString;
   }
   export interface SavingsPlansSavings {
     /**
-     * The savings amount that you are accumulating for the usage that is covered by a Savings Plans, when compared to the On-Demand equivalent of the same usage.
+     * The savings amount that you're accumulating for the usage that's covered by a Savings Plans, when compared to the On-Demand equivalent of the same usage.
      */
     NetSavings?: GenericString;
     /**
@@ -1886,7 +2577,7 @@ declare namespace CostExplorer {
      */
     UsedCommitment?: GenericString;
     /**
-     * The amount of your Savings Plans commitment that was not consumed from Savings Plans eligible usage in a specific period.
+     * The amount of your Savings Plans commitment that wasn't consumed from Savings Plans eligible usage in a specific period.
      */
     UnusedCommitment?: GenericString;
     /**
@@ -1950,11 +2641,42 @@ declare namespace CostExplorer {
   export type SearchString = string;
   export interface ServiceSpecification {
     /**
-     * The Amazon EC2 hardware specifications that you want AWS to provide recommendations for.
+     * The Amazon EC2 hardware specifications that you want Amazon Web Services to provide recommendations for.
      */
     EC2Specification?: EC2Specification;
   }
-  export type SupportedSavingsPlansType = "COMPUTE_SP"|"EC2_INSTANCE_SP"|string;
+  export interface SortDefinition {
+    /**
+     * The key that's used to sort the data.
+     */
+    Key: SortDefinitionKey;
+    /**
+     * The order that's used to sort the data.
+     */
+    SortOrder?: SortOrder;
+  }
+  export type SortDefinitionKey = string;
+  export type SortDefinitions = SortDefinition[];
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export interface Subscriber {
+    /**
+     * The email address or SNS Amazon Resource Name (ARN). This depends on the Type. 
+     */
+    Address?: SubscriberAddress;
+    /**
+     * The notification delivery channel. 
+     */
+    Type?: SubscriberType;
+    /**
+     * Indicates if the subscriber accepts the notifications. 
+     */
+    Status?: SubscriberStatus;
+  }
+  export type SubscriberAddress = string;
+  export type SubscriberStatus = "CONFIRMED"|"DECLINED"|string;
+  export type SubscriberType = "EMAIL"|"SNS"|string;
+  export type Subscribers = Subscriber[];
+  export type SupportedSavingsPlansType = "COMPUTE_SP"|"EC2_INSTANCE_SP"|"SAGEMAKER_SP"|string;
   export type TagKey = string;
   export type TagList = Entity[];
   export interface TagValues {
@@ -1967,57 +2689,124 @@ declare namespace CostExplorer {
      */
     Values?: Values;
     /**
-     * The match options that you can use to filter your results. MatchOptions is only applicable for only applicable for actions related to Cost Category. The default values for MatchOptions is EQUALS and CASE_SENSITIVE.
+     * The match options that you can use to filter your results. MatchOptions is only applicable for actions related to Cost Category. The default values for MatchOptions are EQUALS and CASE_SENSITIVE.
      */
     MatchOptions?: MatchOptions;
   }
   export type TagValuesList = TagValues[];
   export interface TargetInstance {
     /**
-     *  Expected cost to operate this instance type on a monthly basis.
+     * The expected cost to operate this instance type on a monthly basis.
      */
     EstimatedMonthlyCost?: GenericString;
     /**
-     *  Estimated savings resulting from modification, on a monthly basis.
+     * The estimated savings that result from modification, on a monthly basis.
      */
     EstimatedMonthlySavings?: GenericString;
     /**
-     *  The currency code that Amazon Web Services used to calculate the costs for this instance.
+     * The currency code that Amazon Web Services used to calculate the costs for this instance.
      */
     CurrencyCode?: GenericString;
     /**
-     *  Indicates whether or not this recommendation is the defaulted Amazon Web Services recommendation.
+     * Determines whether this recommendation is the defaulted Amazon Web Services recommendation.
      */
     DefaultTargetInstance?: GenericBoolean;
     /**
-     *  Details on the target instance type. 
+     * Details on the target instance type. 
      */
     ResourceDetails?: ResourceDetails;
     /**
-     *  Expected utilization metrics for target instance type.
+     * The expected utilization metrics for target instance type.
      */
     ExpectedResourceUtilization?: ResourceUtilization;
+    /**
+     *  Explains the actions you might need to take in order to successfully migrate your workloads from the current instance type to the recommended instance type. 
+     */
+    PlatformDifferences?: PlatformDifferences;
   }
   export type TargetInstancesList = TargetInstance[];
   export type TermInYears = "ONE_YEAR"|"THREE_YEARS"|string;
   export interface TerminateRecommendationDetail {
     /**
-     *  Estimated savings resulting from modification, on a monthly basis.
+     * The estimated savings that result from modification, on a monthly basis.
      */
     EstimatedMonthlySavings?: GenericString;
     /**
-     *  The currency code that Amazon Web Services used to calculate the costs for this instance.
+     * The currency code that Amazon Web Services used to calculate the costs for this instance.
      */
     CurrencyCode?: GenericString;
   }
   export type TotalActualHours = string;
   export type TotalActualUnits = string;
   export type TotalAmortizedFee = string;
+  export interface TotalImpactFilter {
+    /**
+     * The comparing value that's used in the filter. 
+     */
+    NumericOperator: NumericOperator;
+    /**
+     * The lower bound dollar value that's used in the filter. 
+     */
+    StartValue: GenericDouble;
+    /**
+     * The upper bound dollar value that's used in the filter. 
+     */
+    EndValue?: GenericDouble;
+  }
   export type TotalPotentialRISavings = string;
   export type TotalRunningHours = string;
   export type TotalRunningNormalizedUnits = string;
+  export type UnrealizedSavings = string;
   export type UnusedHours = string;
   export type UnusedUnits = string;
+  export interface UpdateAnomalyMonitorRequest {
+    /**
+     * Cost anomaly monitor Amazon Resource Names (ARNs). 
+     */
+    MonitorArn: GenericString;
+    /**
+     * The new name for the cost anomaly monitor. 
+     */
+    MonitorName?: GenericString;
+  }
+  export interface UpdateAnomalyMonitorResponse {
+    /**
+     * A cost anomaly monitor ARN. 
+     */
+    MonitorArn: GenericString;
+  }
+  export interface UpdateAnomalySubscriptionRequest {
+    /**
+     * A cost anomaly subscription Amazon Resource Name (ARN). 
+     */
+    SubscriptionArn: GenericString;
+    /**
+     * The update to the threshold value for receiving notifications. 
+     */
+    Threshold?: NullableNonNegativeDouble;
+    /**
+     * The update to the frequency value that subscribers receive notifications. 
+     */
+    Frequency?: AnomalySubscriptionFrequency;
+    /**
+     * A list of cost anomaly monitor ARNs. 
+     */
+    MonitorArnList?: MonitorArnList;
+    /**
+     * The update to the subscriber list. 
+     */
+    Subscribers?: Subscribers;
+    /**
+     * The new name of the subscription. 
+     */
+    SubscriptionName?: GenericString;
+  }
+  export interface UpdateAnomalySubscriptionResponse {
+    /**
+     * A cost anomaly subscription ARN. 
+     */
+    SubscriptionArn: GenericString;
+  }
   export interface UpdateCostCategoryDefinitionRequest {
     /**
      * The unique identifier for your Cost Category.
@@ -2028,6 +2817,11 @@ declare namespace CostExplorer {
      * The Expression object used to categorize costs. For more information, see CostCategoryRule . 
      */
     Rules: CostCategoryRulesList;
+    DefaultValue?: CostCategoryValue;
+    /**
+     *  The split charge rules used to allocate your charges between your Cost Category values. 
+     */
+    SplitChargeRules?: CostCategorySplitChargeRulesList;
   }
   export interface UpdateCostCategoryDefinitionResponse {
     /**

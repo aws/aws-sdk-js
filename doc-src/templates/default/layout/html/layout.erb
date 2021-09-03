@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="guide-name" content="API Reference">
+    <meta name="service-name" content="AWS SDK for JavaScript">
+    <script type="text/javascript" src="/assets/js/awsdocs-boot.js"></script>
     <%= erb(:headers) %>
   </head>
   <body>
@@ -16,9 +19,8 @@
         <div class="clear"></div>
       </div>
 
-      <iframe id="search_frame"></iframe>
-
       <div id="content">
+        <%= erb(:v3note) %>
         <!--REGION_DISCLAIMER_DO_NOT_REMOVE-->
         <%= yieldall %>
       </div>

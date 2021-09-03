@@ -44,51 +44,59 @@ declare class Chime extends Service {
    */
   associateSigninDelegateGroupsWithAccount(callback?: (err: AWSError, data: Chime.Types.AssociateSigninDelegateGroupsWithAccountResponse) => void): Request<Chime.Types.AssociateSigninDelegateGroupsWithAccountResponse, AWSError>;
   /**
-   * Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide. 
+   *  Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide. 
    */
   batchCreateAttendee(params: Chime.Types.BatchCreateAttendeeRequest, callback?: (err: AWSError, data: Chime.Types.BatchCreateAttendeeResponse) => void): Request<Chime.Types.BatchCreateAttendeeResponse, AWSError>;
   /**
-   * Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide. 
+   *  Creates up to 100 new attendees for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide. 
    */
   batchCreateAttendee(callback?: (err: AWSError, data: Chime.Types.BatchCreateAttendeeResponse) => void): Request<Chime.Types.BatchCreateAttendeeResponse, AWSError>;
   /**
-   * Adds up to 50 members to a chat room in an Amazon Chime Enterprise account. Members can be either users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
+   * Adds a specified number of users to a channel.
+   */
+  batchCreateChannelMembership(params: Chime.Types.BatchCreateChannelMembershipRequest, callback?: (err: AWSError, data: Chime.Types.BatchCreateChannelMembershipResponse) => void): Request<Chime.Types.BatchCreateChannelMembershipResponse, AWSError>;
+  /**
+   * Adds a specified number of users to a channel.
+   */
+  batchCreateChannelMembership(callback?: (err: AWSError, data: Chime.Types.BatchCreateChannelMembershipResponse) => void): Request<Chime.Types.BatchCreateChannelMembershipResponse, AWSError>;
+  /**
+   * Adds up to 50 members to a chat room in an Amazon Chime Enterprise account. Members can be users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
    */
   batchCreateRoomMembership(params: Chime.Types.BatchCreateRoomMembershipRequest, callback?: (err: AWSError, data: Chime.Types.BatchCreateRoomMembershipResponse) => void): Request<Chime.Types.BatchCreateRoomMembershipResponse, AWSError>;
   /**
-   * Adds up to 50 members to a chat room in an Amazon Chime Enterprise account. Members can be either users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
+   * Adds up to 50 members to a chat room in an Amazon Chime Enterprise account. Members can be users or bots. The member role designates whether the member is a chat room administrator or a general chat room member.
    */
   batchCreateRoomMembership(callback?: (err: AWSError, data: Chime.Types.BatchCreateRoomMembershipResponse) => void): Request<Chime.Types.BatchCreateRoomMembershipResponse, AWSError>;
   /**
-   * Moves phone numbers into the Deletion queue. Phone numbers must be disassociated from any users or Amazon Chime Voice Connectors before they can be deleted. Phone numbers remain in the Deletion queue for 7 days before they are deleted permanently.
+   *  Moves phone numbers into the Deletion queue. Phone numbers must be disassociated from any users or Amazon Chime Voice Connectors before they can be deleted.   Phone numbers remain in the Deletion queue for 7 days before they are deleted permanently. 
    */
   batchDeletePhoneNumber(params: Chime.Types.BatchDeletePhoneNumberRequest, callback?: (err: AWSError, data: Chime.Types.BatchDeletePhoneNumberResponse) => void): Request<Chime.Types.BatchDeletePhoneNumberResponse, AWSError>;
   /**
-   * Moves phone numbers into the Deletion queue. Phone numbers must be disassociated from any users or Amazon Chime Voice Connectors before they can be deleted. Phone numbers remain in the Deletion queue for 7 days before they are deleted permanently.
+   *  Moves phone numbers into the Deletion queue. Phone numbers must be disassociated from any users or Amazon Chime Voice Connectors before they can be deleted.   Phone numbers remain in the Deletion queue for 7 days before they are deleted permanently. 
    */
   batchDeletePhoneNumber(callback?: (err: AWSError, data: Chime.Types.BatchDeletePhoneNumberResponse) => void): Request<Chime.Types.BatchDeletePhoneNumberResponse, AWSError>;
   /**
-   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are disassociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action.
+   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are disassociated from the account,but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action. 
    */
   batchSuspendUser(params: Chime.Types.BatchSuspendUserRequest, callback?: (err: AWSError, data: Chime.Types.BatchSuspendUserResponse) => void): Request<Chime.Types.BatchSuspendUserResponse, AWSError>;
   /**
-   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are disassociated from the account, but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action.
+   * Suspends up to 50 users from a Team or EnterpriseLWA Amazon Chime account. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Users suspended from a Team account are disassociated from the account,but they can continue to use Amazon Chime as free users. To remove the suspension from suspended Team account users, invite them to the Team account again. You can use the InviteUsers action to do so. Users suspended from an EnterpriseLWA account are immediately signed out of Amazon Chime and can no longer sign in. To remove the suspension from suspended EnterpriseLWA account users, use the BatchUnsuspendUser action.  To sign out users without suspending them, use the LogoutUser action. 
    */
   batchSuspendUser(callback?: (err: AWSError, data: Chime.Types.BatchSuspendUserResponse) => void): Request<Chime.Types.BatchSuspendUserResponse, AWSError>;
   /**
-   * Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime EnterpriseLWA account. Only users on EnterpriseLWA accounts can be unsuspended using this action. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Previously suspended users who are unsuspended using this action are returned to Registered status. Users who are not previously suspended are ignored.
+   * Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime EnterpriseLWA account. Only users on EnterpriseLWA accounts can be unsuspended using this action. For more information about different account types, see  Managing Your Amazon Chime Accounts  in the account types, in the Amazon Chime Administration Guide.   Previously suspended users who are unsuspended using this action are returned to Registered status. Users who are not previously suspended are ignored. 
    */
   batchUnsuspendUser(params: Chime.Types.BatchUnsuspendUserRequest, callback?: (err: AWSError, data: Chime.Types.BatchUnsuspendUserResponse) => void): Request<Chime.Types.BatchUnsuspendUserResponse, AWSError>;
   /**
-   * Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime EnterpriseLWA account. Only users on EnterpriseLWA accounts can be unsuspended using this action. For more information about different account types, see Managing Your Amazon Chime Accounts in the Amazon Chime Administration Guide. Previously suspended users who are unsuspended using this action are returned to Registered status. Users who are not previously suspended are ignored.
+   * Removes the suspension from up to 50 previously suspended users for the specified Amazon Chime EnterpriseLWA account. Only users on EnterpriseLWA accounts can be unsuspended using this action. For more information about different account types, see  Managing Your Amazon Chime Accounts  in the account types, in the Amazon Chime Administration Guide.   Previously suspended users who are unsuspended using this action are returned to Registered status. Users who are not previously suspended are ignored. 
    */
   batchUnsuspendUser(callback?: (err: AWSError, data: Chime.Types.BatchUnsuspendUserResponse) => void): Request<Chime.Types.BatchUnsuspendUserResponse, AWSError>;
   /**
-   * Updates phone number product types or calling names. You can update one attribute at a time for each UpdatePhoneNumberRequestItem. For example, you can update either the product type or the calling name. For product types, choose from Amazon Chime Business Calling and Amazon Chime Voice Connector. For toll-free numbers, you must use the Amazon Chime Voice Connector product type. Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
+   * Updates phone number product types or calling names. You can update one attribute at a time for each UpdatePhoneNumberRequestItem. For example, you can update the product type or the calling name. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type. Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
    */
   batchUpdatePhoneNumber(params: Chime.Types.BatchUpdatePhoneNumberRequest, callback?: (err: AWSError, data: Chime.Types.BatchUpdatePhoneNumberResponse) => void): Request<Chime.Types.BatchUpdatePhoneNumberResponse, AWSError>;
   /**
-   * Updates phone number product types or calling names. You can update one attribute at a time for each UpdatePhoneNumberRequestItem. For example, you can update either the product type or the calling name. For product types, choose from Amazon Chime Business Calling and Amazon Chime Voice Connector. For toll-free numbers, you must use the Amazon Chime Voice Connector product type. Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
+   * Updates phone number product types or calling names. You can update one attribute at a time for each UpdatePhoneNumberRequestItem. For example, you can update the product type or the calling name. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type. Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
    */
   batchUpdatePhoneNumber(callback?: (err: AWSError, data: Chime.Types.BatchUpdatePhoneNumberResponse) => void): Request<Chime.Types.BatchUpdatePhoneNumberResponse, AWSError>;
   /**
@@ -108,11 +116,35 @@ declare class Chime extends Service {
    */
   createAccount(callback?: (err: AWSError, data: Chime.Types.CreateAccountResponse) => void): Request<Chime.Types.CreateAccountResponse, AWSError>;
   /**
-   * Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   * Creates an Amazon Chime SDK messaging AppInstance under an AWS account. Only SDK messaging customers use this API. CreateAppInstance supports idempotency behavior as described in the AWS API Standard.
+   */
+  createAppInstance(params: Chime.Types.CreateAppInstanceRequest, callback?: (err: AWSError, data: Chime.Types.CreateAppInstanceResponse) => void): Request<Chime.Types.CreateAppInstanceResponse, AWSError>;
+  /**
+   * Creates an Amazon Chime SDK messaging AppInstance under an AWS account. Only SDK messaging customers use this API. CreateAppInstance supports idempotency behavior as described in the AWS API Standard.
+   */
+  createAppInstance(callback?: (err: AWSError, data: Chime.Types.CreateAppInstanceResponse) => void): Request<Chime.Types.CreateAppInstanceResponse, AWSError>;
+  /**
+   * Promotes an AppInstanceUser to an AppInstanceAdmin. The promoted user can perform the following actions.     ChannelModerator actions across all channels in the AppInstance.    DeleteChannelMessage actions.   Only an AppInstanceUser can be promoted to an AppInstanceAdmin role.
+   */
+  createAppInstanceAdmin(params: Chime.Types.CreateAppInstanceAdminRequest, callback?: (err: AWSError, data: Chime.Types.CreateAppInstanceAdminResponse) => void): Request<Chime.Types.CreateAppInstanceAdminResponse, AWSError>;
+  /**
+   * Promotes an AppInstanceUser to an AppInstanceAdmin. The promoted user can perform the following actions.     ChannelModerator actions across all channels in the AppInstance.    DeleteChannelMessage actions.   Only an AppInstanceUser can be promoted to an AppInstanceAdmin role.
+   */
+  createAppInstanceAdmin(callback?: (err: AWSError, data: Chime.Types.CreateAppInstanceAdminResponse) => void): Request<Chime.Types.CreateAppInstanceAdminResponse, AWSError>;
+  /**
+   * Creates a user under an Amazon Chime AppInstance. The request consists of a unique appInstanceUserId and Name for that user.
+   */
+  createAppInstanceUser(params: Chime.Types.CreateAppInstanceUserRequest, callback?: (err: AWSError, data: Chime.Types.CreateAppInstanceUserResponse) => void): Request<Chime.Types.CreateAppInstanceUserResponse, AWSError>;
+  /**
+   * Creates a user under an Amazon Chime AppInstance. The request consists of a unique appInstanceUserId and Name for that user.
+   */
+  createAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.CreateAppInstanceUserResponse) => void): Request<Chime.Types.CreateAppInstanceUserResponse, AWSError>;
+  /**
+   *  Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide. 
    */
   createAttendee(params: Chime.Types.CreateAttendeeRequest, callback?: (err: AWSError, data: Chime.Types.CreateAttendeeResponse) => void): Request<Chime.Types.CreateAttendeeResponse, AWSError>;
   /**
-   * Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   *  Creates a new attendee for an active Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide. 
    */
   createAttendee(callback?: (err: AWSError, data: Chime.Types.CreateAttendeeResponse) => void): Request<Chime.Types.CreateAttendeeResponse, AWSError>;
   /**
@@ -124,27 +156,75 @@ declare class Chime extends Service {
    */
   createBot(callback?: (err: AWSError, data: Chime.Types.CreateBotResponse) => void): Request<Chime.Types.CreateBotResponse, AWSError>;
   /**
-   * Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime Developer Guide. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   * Creates a channel to which you can add users and send messages.  Restriction: You can't change a channel's privacy.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  createChannel(params: Chime.Types.CreateChannelRequest, callback?: (err: AWSError, data: Chime.Types.CreateChannelResponse) => void): Request<Chime.Types.CreateChannelResponse, AWSError>;
+  /**
+   * Creates a channel to which you can add users and send messages.  Restriction: You can't change a channel's privacy.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  createChannel(callback?: (err: AWSError, data: Chime.Types.CreateChannelResponse) => void): Request<Chime.Types.CreateChannelResponse, AWSError>;
+  /**
+   * Permanently bans a member from a channel. Moderators can't add banned members to a channel. To undo a ban, you first have to DeleteChannelBan, and then CreateChannelMembership. Bans are cleaned up when you delete users or channels. If you ban a user who is already part of a channel, that user is automatically kicked from the channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  createChannelBan(params: Chime.Types.CreateChannelBanRequest, callback?: (err: AWSError, data: Chime.Types.CreateChannelBanResponse) => void): Request<Chime.Types.CreateChannelBanResponse, AWSError>;
+  /**
+   * Permanently bans a member from a channel. Moderators can't add banned members to a channel. To undo a ban, you first have to DeleteChannelBan, and then CreateChannelMembership. Bans are cleaned up when you delete users or channels. If you ban a user who is already part of a channel, that user is automatically kicked from the channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  createChannelBan(callback?: (err: AWSError, data: Chime.Types.CreateChannelBanResponse) => void): Request<Chime.Types.CreateChannelBanResponse, AWSError>;
+  /**
+   * Adds a user to a channel. The InvitedBy response field is derived from the request header. A channel member can:   List messages   Send messages   Receive messages   Edit their own messages   Leave the channel   Privacy settings impact this action as follows:   Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.   Private Channels: You must be a member to list or send messages.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  createChannelMembership(params: Chime.Types.CreateChannelMembershipRequest, callback?: (err: AWSError, data: Chime.Types.CreateChannelMembershipResponse) => void): Request<Chime.Types.CreateChannelMembershipResponse, AWSError>;
+  /**
+   * Adds a user to a channel. The InvitedBy response field is derived from the request header. A channel member can:   List messages   Send messages   Receive messages   Edit their own messages   Leave the channel   Privacy settings impact this action as follows:   Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.   Private Channels: You must be a member to list or send messages.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  createChannelMembership(callback?: (err: AWSError, data: Chime.Types.CreateChannelMembershipResponse) => void): Request<Chime.Types.CreateChannelMembershipResponse, AWSError>;
+  /**
+   * Creates a new ChannelModerator. A channel moderator can:   Add and remove other members of the channel.   Add and remove other moderators of the channel.   Add and remove user bans for the channel.   Redact messages in the channel.   List messages in the channel.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  createChannelModerator(params: Chime.Types.CreateChannelModeratorRequest, callback?: (err: AWSError, data: Chime.Types.CreateChannelModeratorResponse) => void): Request<Chime.Types.CreateChannelModeratorResponse, AWSError>;
+  /**
+   * Creates a new ChannelModerator. A channel moderator can:   Add and remove other members of the channel.   Add and remove other moderators of the channel.   Add and remove user bans for the channel.   Redact messages in the channel.   List messages in the channel.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  createChannelModerator(callback?: (err: AWSError, data: Chime.Types.CreateChannelModeratorResponse) => void): Request<Chime.Types.CreateChannelModeratorResponse, AWSError>;
+  /**
+   * Creates a media capture pipeline.
+   */
+  createMediaCapturePipeline(params: Chime.Types.CreateMediaCapturePipelineRequest, callback?: (err: AWSError, data: Chime.Types.CreateMediaCapturePipelineResponse) => void): Request<Chime.Types.CreateMediaCapturePipelineResponse, AWSError>;
+  /**
+   * Creates a media capture pipeline.
+   */
+  createMediaCapturePipeline(callback?: (err: AWSError, data: Chime.Types.CreateMediaCapturePipelineResponse) => void): Request<Chime.Types.CreateMediaCapturePipelineResponse, AWSError>;
+  /**
+   *  Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime Developer Guide . For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide . 
    */
   createMeeting(params: Chime.Types.CreateMeetingRequest, callback?: (err: AWSError, data: Chime.Types.CreateMeetingResponse) => void): Request<Chime.Types.CreateMeetingResponse, AWSError>;
   /**
-   * Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime Developer Guide. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   *  Creates a new Amazon Chime SDK meeting in the specified media Region with no initial attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime Developer Guide . For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide . 
    */
   createMeeting(callback?: (err: AWSError, data: Chime.Types.CreateMeetingResponse) => void): Request<Chime.Types.CreateMeetingResponse, AWSError>;
   /**
-   * Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime Developer Guide. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   * Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and join them into a Chime meeting. Also ensures that the From number belongs to the customer. To play welcome audio or implement an interactive voice response (IVR), use the CreateSipMediaApplicationCall action with the corresponding SIP media application ID.
+   */
+  createMeetingDialOut(params: Chime.Types.CreateMeetingDialOutRequest, callback?: (err: AWSError, data: Chime.Types.CreateMeetingDialOutResponse) => void): Request<Chime.Types.CreateMeetingDialOutResponse, AWSError>;
+  /**
+   * Uses the join token and call metadata in a meeting request (From number, To number, and so forth) to initiate an outbound call to a public switched telephone network (PSTN) and join them into a Chime meeting. Also ensures that the From number belongs to the customer. To play welcome audio or implement an interactive voice response (IVR), use the CreateSipMediaApplicationCall action with the corresponding SIP media application ID.
+   */
+  createMeetingDialOut(callback?: (err: AWSError, data: Chime.Types.CreateMeetingDialOutResponse) => void): Request<Chime.Types.CreateMeetingDialOutResponse, AWSError>;
+  /**
+   *  Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime Developer Guide . For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide . 
    */
   createMeetingWithAttendees(params: Chime.Types.CreateMeetingWithAttendeesRequest, callback?: (err: AWSError, data: Chime.Types.CreateMeetingWithAttendeesResponse) => void): Request<Chime.Types.CreateMeetingWithAttendeesResponse, AWSError>;
   /**
-   * Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime Developer Guide. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   *  Creates a new Amazon Chime SDK meeting in the specified media Region, with attendees. For more information about specifying media Regions, see Amazon Chime SDK Media Regions in the Amazon Chime Developer Guide . For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide . 
    */
   createMeetingWithAttendees(callback?: (err: AWSError, data: Chime.Types.CreateMeetingWithAttendeesResponse) => void): Request<Chime.Types.CreateMeetingWithAttendeesResponse, AWSError>;
   /**
-   * Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.
+   * Creates an order for phone numbers to be provisioned. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type.
    */
   createPhoneNumberOrder(params: Chime.Types.CreatePhoneNumberOrderRequest, callback?: (err: AWSError, data: Chime.Types.CreatePhoneNumberOrderResponse) => void): Request<Chime.Types.CreatePhoneNumberOrderResponse, AWSError>;
   /**
-   * Creates an order for phone numbers to be provisioned. Choose from Amazon Chime Business Calling and Amazon Chime Voice Connector product types. For toll-free numbers, you must use the Amazon Chime Voice Connector product type.
+   * Creates an order for phone numbers to be provisioned. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type.
    */
   createPhoneNumberOrder(callback?: (err: AWSError, data: Chime.Types.CreatePhoneNumberOrderResponse) => void): Request<Chime.Types.CreatePhoneNumberOrderResponse, AWSError>;
   /**
@@ -172,6 +252,30 @@ declare class Chime extends Service {
    */
   createRoomMembership(callback?: (err: AWSError, data: Chime.Types.CreateRoomMembershipResponse) => void): Request<Chime.Types.CreateRoomMembershipResponse, AWSError>;
   /**
+   * Creates a SIP media application.
+   */
+  createSipMediaApplication(params: Chime.Types.CreateSipMediaApplicationRequest, callback?: (err: AWSError, data: Chime.Types.CreateSipMediaApplicationResponse) => void): Request<Chime.Types.CreateSipMediaApplicationResponse, AWSError>;
+  /**
+   * Creates a SIP media application.
+   */
+  createSipMediaApplication(callback?: (err: AWSError, data: Chime.Types.CreateSipMediaApplicationResponse) => void): Request<Chime.Types.CreateSipMediaApplicationResponse, AWSError>;
+  /**
+   * Creates an outbound call to a phone number from the phone number specified in the request, and it invokes the endpoint of the specified sipMediaApplicationId.
+   */
+  createSipMediaApplicationCall(params: Chime.Types.CreateSipMediaApplicationCallRequest, callback?: (err: AWSError, data: Chime.Types.CreateSipMediaApplicationCallResponse) => void): Request<Chime.Types.CreateSipMediaApplicationCallResponse, AWSError>;
+  /**
+   * Creates an outbound call to a phone number from the phone number specified in the request, and it invokes the endpoint of the specified sipMediaApplicationId.
+   */
+  createSipMediaApplicationCall(callback?: (err: AWSError, data: Chime.Types.CreateSipMediaApplicationCallResponse) => void): Request<Chime.Types.CreateSipMediaApplicationCallResponse, AWSError>;
+  /**
+   * Creates a SIP rule which can be used to run a SIP media application as a target for a specific trigger type.
+   */
+  createSipRule(params: Chime.Types.CreateSipRuleRequest, callback?: (err: AWSError, data: Chime.Types.CreateSipRuleResponse) => void): Request<Chime.Types.CreateSipRuleResponse, AWSError>;
+  /**
+   * Creates a SIP rule which can be used to run a SIP media application as a target for a specific trigger type.
+   */
+  createSipRule(callback?: (err: AWSError, data: Chime.Types.CreateSipRuleResponse) => void): Request<Chime.Types.CreateSipRuleResponse, AWSError>;
+  /**
    * Creates a user under the specified Amazon Chime account.
    */
   createUser(params: Chime.Types.CreateUserRequest, callback?: (err: AWSError, data: Chime.Types.CreateUserResponse) => void): Request<Chime.Types.CreateUserResponse, AWSError>;
@@ -180,11 +284,11 @@ declare class Chime extends Service {
    */
   createUser(callback?: (err: AWSError, data: Chime.Types.CreateUserResponse) => void): Request<Chime.Types.CreateUserResponse, AWSError>;
   /**
-   * Creates an Amazon Chime Voice Connector under the administrator's AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region. Enabling CreateVoiceConnectorRequest$RequireEncryption configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked.
+   * Creates an Amazon Chime Voice Connector under the administrator's AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region.  Enabling CreateVoiceConnectorRequest$RequireEncryption configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked. 
    */
   createVoiceConnector(params: Chime.Types.CreateVoiceConnectorRequest, callback?: (err: AWSError, data: Chime.Types.CreateVoiceConnectorResponse) => void): Request<Chime.Types.CreateVoiceConnectorResponse, AWSError>;
   /**
-   * Creates an Amazon Chime Voice Connector under the administrator's AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region. Enabling CreateVoiceConnectorRequest$RequireEncryption configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked.
+   * Creates an Amazon Chime Voice Connector under the administrator's AWS account. You can choose to create an Amazon Chime Voice Connector in a specific AWS Region.  Enabling CreateVoiceConnectorRequest$RequireEncryption configures your Amazon Chime Voice Connector to use TLS transport for SIP signaling and Secure RTP (SRTP) for media. Inbound calls use TLS transport, and unencrypted outbound calls are blocked. 
    */
   createVoiceConnector(callback?: (err: AWSError, data: Chime.Types.CreateVoiceConnectorResponse) => void): Request<Chime.Types.CreateVoiceConnectorResponse, AWSError>;
   /**
@@ -196,13 +300,45 @@ declare class Chime extends Service {
    */
   createVoiceConnectorGroup(callback?: (err: AWSError, data: Chime.Types.CreateVoiceConnectorGroupResponse) => void): Request<Chime.Types.CreateVoiceConnectorGroupResponse, AWSError>;
   /**
-   * Deletes the specified Amazon Chime account. You must suspend all users before deleting a Team account. You can use the BatchSuspendUser action to do so. For EnterpriseLWA and EnterpriseAD accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended. Deleted accounts appear in your Disabled accounts list for 90 days. To restore a deleted account from your Disabled accounts list, you must contact AWS Support. After 90 days, deleted accounts are permanently removed from your Disabled accounts list.
+   * Deletes the specified Amazon Chime account. You must suspend all users before deleting Team account. You can use the BatchSuspendUser action to dodo. For EnterpriseLWA and EnterpriseAD accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended. Deleted accounts appear in your Disabled accounts list for 90 days. To restore deleted account from your Disabled accounts list, you must contact AWS Support. After 90 days, deleted accounts are permanently removed from your Disabled accounts list.
    */
   deleteAccount(params: Chime.Types.DeleteAccountRequest, callback?: (err: AWSError, data: Chime.Types.DeleteAccountResponse) => void): Request<Chime.Types.DeleteAccountResponse, AWSError>;
   /**
-   * Deletes the specified Amazon Chime account. You must suspend all users before deleting a Team account. You can use the BatchSuspendUser action to do so. For EnterpriseLWA and EnterpriseAD accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended. Deleted accounts appear in your Disabled accounts list for 90 days. To restore a deleted account from your Disabled accounts list, you must contact AWS Support. After 90 days, deleted accounts are permanently removed from your Disabled accounts list.
+   * Deletes the specified Amazon Chime account. You must suspend all users before deleting Team account. You can use the BatchSuspendUser action to dodo. For EnterpriseLWA and EnterpriseAD accounts, you must release the claimed domains for your Amazon Chime account before deletion. As soon as you release the domain, all users under that account are suspended. Deleted accounts appear in your Disabled accounts list for 90 days. To restore deleted account from your Disabled accounts list, you must contact AWS Support. After 90 days, deleted accounts are permanently removed from your Disabled accounts list.
    */
   deleteAccount(callback?: (err: AWSError, data: Chime.Types.DeleteAccountResponse) => void): Request<Chime.Types.DeleteAccountResponse, AWSError>;
+  /**
+   * Deletes an AppInstance and all associated data asynchronously.
+   */
+  deleteAppInstance(params: Chime.Types.DeleteAppInstanceRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an AppInstance and all associated data asynchronously.
+   */
+  deleteAppInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Demotes an AppInstanceAdmin to an AppInstanceUser. This action does not delete the user.
+   */
+  deleteAppInstanceAdmin(params: Chime.Types.DeleteAppInstanceAdminRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Demotes an AppInstanceAdmin to an AppInstanceUser. This action does not delete the user.
+   */
+  deleteAppInstanceAdmin(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the streaming configurations of an AppInstance.
+   */
+  deleteAppInstanceStreamingConfigurations(params: Chime.Types.DeleteAppInstanceStreamingConfigurationsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the streaming configurations of an AppInstance.
+   */
+  deleteAppInstanceStreamingConfigurations(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an AppInstanceUser.
+   */
+  deleteAppInstanceUser(params: Chime.Types.DeleteAppInstanceUserRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes an AppInstanceUser.
+   */
+  deleteAppInstanceUser(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes an attendee from the specified Amazon Chime SDK meeting and deletes their JoinToken. Attendees are automatically deleted when a Amazon Chime SDK meeting is deleted. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
    */
@@ -212,6 +348,46 @@ declare class Chime extends Service {
    */
   deleteAttendee(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  deleteChannel(params: Chime.Types.DeleteChannelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  deleteChannel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes a user from a channel's ban list.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  deleteChannelBan(params: Chime.Types.DeleteChannelBanRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes a user from a channel's ban list.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  deleteChannelBan(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes a member from a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  deleteChannelMembership(params: Chime.Types.DeleteChannelMembershipRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Removes a member from a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  deleteChannelMembership(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by UpdateChannelMessage.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  deleteChannelMessage(params: Chime.Types.DeleteChannelMessageRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a channel message. Only admins can perform this action. Deletion makes messages inaccessible immediately. A background process deletes any revisions created by UpdateChannelMessage.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  deleteChannelMessage(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a channel moderator.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  deleteChannelModerator(params: Chime.Types.DeleteChannelModeratorRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a channel moderator.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  deleteChannelModerator(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Deletes the events configuration that allows a bot to receive outgoing events.
    */
   deleteEventsConfiguration(params: Chime.Types.DeleteEventsConfigurationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -220,11 +396,19 @@ declare class Chime extends Service {
    */
   deleteEventsConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified Amazon Chime SDK meeting. When a meeting is deleted, its attendees are also deleted and clients can no longer join it. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   * Deletes the media capture pipeline.
+   */
+  deleteMediaCapturePipeline(params: Chime.Types.DeleteMediaCapturePipelineRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the media capture pipeline.
+   */
+  deleteMediaCapturePipeline(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
    */
   deleteMeeting(params: Chime.Types.DeleteMeetingRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified Amazon Chime SDK meeting. When a meeting is deleted, its attendees are also deleted and clients can no longer join it. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   * Deletes the specified Amazon Chime SDK meeting. The operation deletes all attendees, disconnects all clients, and prevents new clients from joining the meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
    */
   deleteMeeting(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -259,6 +443,22 @@ declare class Chime extends Service {
    * Removes a member from a chat room in an Amazon Chime Enterprise account.
    */
   deleteRoomMembership(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a SIP media application.
+   */
+  deleteSipMediaApplication(params: Chime.Types.DeleteSipMediaApplicationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a SIP media application.
+   */
+  deleteSipMediaApplication(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a SIP rule. You must disable a SIP rule before you can delete it.
+   */
+  deleteSipRule(params: Chime.Types.DeleteSipRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a SIP rule. You must disable a SIP rule before you can delete it.
+   */
+  deleteSipRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified Amazon Chime Voice Connector. Any phone numbers associated with the Amazon Chime Voice Connector must be disassociated from it before it can be deleted.
    */
@@ -324,6 +524,78 @@ declare class Chime extends Service {
    */
   deleteVoiceConnectorTerminationCredentials(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Returns the full details of an AppInstance.
+   */
+  describeAppInstance(params: Chime.Types.DescribeAppInstanceRequest, callback?: (err: AWSError, data: Chime.Types.DescribeAppInstanceResponse) => void): Request<Chime.Types.DescribeAppInstanceResponse, AWSError>;
+  /**
+   * Returns the full details of an AppInstance.
+   */
+  describeAppInstance(callback?: (err: AWSError, data: Chime.Types.DescribeAppInstanceResponse) => void): Request<Chime.Types.DescribeAppInstanceResponse, AWSError>;
+  /**
+   * Returns the full details of an AppInstanceAdmin.
+   */
+  describeAppInstanceAdmin(params: Chime.Types.DescribeAppInstanceAdminRequest, callback?: (err: AWSError, data: Chime.Types.DescribeAppInstanceAdminResponse) => void): Request<Chime.Types.DescribeAppInstanceAdminResponse, AWSError>;
+  /**
+   * Returns the full details of an AppInstanceAdmin.
+   */
+  describeAppInstanceAdmin(callback?: (err: AWSError, data: Chime.Types.DescribeAppInstanceAdminResponse) => void): Request<Chime.Types.DescribeAppInstanceAdminResponse, AWSError>;
+  /**
+   * Returns the full details of an AppInstanceUser.
+   */
+  describeAppInstanceUser(params: Chime.Types.DescribeAppInstanceUserRequest, callback?: (err: AWSError, data: Chime.Types.DescribeAppInstanceUserResponse) => void): Request<Chime.Types.DescribeAppInstanceUserResponse, AWSError>;
+  /**
+   * Returns the full details of an AppInstanceUser.
+   */
+  describeAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.DescribeAppInstanceUserResponse) => void): Request<Chime.Types.DescribeAppInstanceUserResponse, AWSError>;
+  /**
+   * Returns the full details of a channel in an Amazon Chime AppInstance.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  describeChannel(params: Chime.Types.DescribeChannelRequest, callback?: (err: AWSError, data: Chime.Types.DescribeChannelResponse) => void): Request<Chime.Types.DescribeChannelResponse, AWSError>;
+  /**
+   * Returns the full details of a channel in an Amazon Chime AppInstance.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  describeChannel(callback?: (err: AWSError, data: Chime.Types.DescribeChannelResponse) => void): Request<Chime.Types.DescribeChannelResponse, AWSError>;
+  /**
+   * Returns the full details of a channel ban.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  describeChannelBan(params: Chime.Types.DescribeChannelBanRequest, callback?: (err: AWSError, data: Chime.Types.DescribeChannelBanResponse) => void): Request<Chime.Types.DescribeChannelBanResponse, AWSError>;
+  /**
+   * Returns the full details of a channel ban.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  describeChannelBan(callback?: (err: AWSError, data: Chime.Types.DescribeChannelBanResponse) => void): Request<Chime.Types.DescribeChannelBanResponse, AWSError>;
+  /**
+   * Returns the full details of a user's channel membership.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  describeChannelMembership(params: Chime.Types.DescribeChannelMembershipRequest, callback?: (err: AWSError, data: Chime.Types.DescribeChannelMembershipResponse) => void): Request<Chime.Types.DescribeChannelMembershipResponse, AWSError>;
+  /**
+   * Returns the full details of a user's channel membership.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  describeChannelMembership(callback?: (err: AWSError, data: Chime.Types.DescribeChannelMembershipResponse) => void): Request<Chime.Types.DescribeChannelMembershipResponse, AWSError>;
+  /**
+   *  Returns the details of a channel based on the membership of the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  describeChannelMembershipForAppInstanceUser(params: Chime.Types.DescribeChannelMembershipForAppInstanceUserRequest, callback?: (err: AWSError, data: Chime.Types.DescribeChannelMembershipForAppInstanceUserResponse) => void): Request<Chime.Types.DescribeChannelMembershipForAppInstanceUserResponse, AWSError>;
+  /**
+   *  Returns the details of a channel based on the membership of the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  describeChannelMembershipForAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.DescribeChannelMembershipForAppInstanceUserResponse) => void): Request<Chime.Types.DescribeChannelMembershipForAppInstanceUserResponse, AWSError>;
+  /**
+   * Returns the full details of a channel moderated by the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  describeChannelModeratedByAppInstanceUser(params: Chime.Types.DescribeChannelModeratedByAppInstanceUserRequest, callback?: (err: AWSError, data: Chime.Types.DescribeChannelModeratedByAppInstanceUserResponse) => void): Request<Chime.Types.DescribeChannelModeratedByAppInstanceUserResponse, AWSError>;
+  /**
+   * Returns the full details of a channel moderated by the specified AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  describeChannelModeratedByAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.DescribeChannelModeratedByAppInstanceUserResponse) => void): Request<Chime.Types.DescribeChannelModeratedByAppInstanceUserResponse, AWSError>;
+  /**
+   * Returns the full details of a single ChannelModerator.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  describeChannelModerator(params: Chime.Types.DescribeChannelModeratorRequest, callback?: (err: AWSError, data: Chime.Types.DescribeChannelModeratorResponse) => void): Request<Chime.Types.DescribeChannelModeratorResponse, AWSError>;
+  /**
+   * Returns the full details of a single ChannelModerator.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  describeChannelModerator(callback?: (err: AWSError, data: Chime.Types.DescribeChannelModeratorResponse) => void): Request<Chime.Types.DescribeChannelModeratorResponse, AWSError>;
+  /**
    * Disassociates the primary provisioned phone number from the specified Amazon Chime user.
    */
   disassociatePhoneNumberFromUser(params: Chime.Types.DisassociatePhoneNumberFromUserRequest, callback?: (err: AWSError, data: Chime.Types.DisassociatePhoneNumberFromUserResponse) => void): Request<Chime.Types.DisassociatePhoneNumberFromUserResponse, AWSError>;
@@ -364,19 +636,35 @@ declare class Chime extends Service {
    */
   getAccount(callback?: (err: AWSError, data: Chime.Types.GetAccountResponse) => void): Request<Chime.Types.GetAccountResponse, AWSError>;
   /**
-   * Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dial out settings. For more information about these settings, see Use the Policies Page in the Amazon Chime Administration Guide.
+   * Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dialout settings. For more information about these settings, see Use the Policies Page in the Amazon Chime Administration Guide. 
    */
   getAccountSettings(params: Chime.Types.GetAccountSettingsRequest, callback?: (err: AWSError, data: Chime.Types.GetAccountSettingsResponse) => void): Request<Chime.Types.GetAccountSettingsResponse, AWSError>;
   /**
-   * Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dial out settings. For more information about these settings, see Use the Policies Page in the Amazon Chime Administration Guide.
+   * Retrieves account settings for the specified Amazon Chime account ID, such as remote control and dialout settings. For more information about these settings, see Use the Policies Page in the Amazon Chime Administration Guide. 
    */
   getAccountSettings(callback?: (err: AWSError, data: Chime.Types.GetAccountSettingsResponse) => void): Request<Chime.Types.GetAccountSettingsResponse, AWSError>;
   /**
-   * Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   * Gets the retention settings for an AppInstance.
+   */
+  getAppInstanceRetentionSettings(params: Chime.Types.GetAppInstanceRetentionSettingsRequest, callback?: (err: AWSError, data: Chime.Types.GetAppInstanceRetentionSettingsResponse) => void): Request<Chime.Types.GetAppInstanceRetentionSettingsResponse, AWSError>;
+  /**
+   * Gets the retention settings for an AppInstance.
+   */
+  getAppInstanceRetentionSettings(callback?: (err: AWSError, data: Chime.Types.GetAppInstanceRetentionSettingsResponse) => void): Request<Chime.Types.GetAppInstanceRetentionSettingsResponse, AWSError>;
+  /**
+   * Gets the streaming settings for an AppInstance.
+   */
+  getAppInstanceStreamingConfigurations(params: Chime.Types.GetAppInstanceStreamingConfigurationsRequest, callback?: (err: AWSError, data: Chime.Types.GetAppInstanceStreamingConfigurationsResponse) => void): Request<Chime.Types.GetAppInstanceStreamingConfigurationsResponse, AWSError>;
+  /**
+   * Gets the streaming settings for an AppInstance.
+   */
+  getAppInstanceStreamingConfigurations(callback?: (err: AWSError, data: Chime.Types.GetAppInstanceStreamingConfigurationsResponse) => void): Request<Chime.Types.GetAppInstanceStreamingConfigurationsResponse, AWSError>;
+  /**
+   *  Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide . 
    */
   getAttendee(params: Chime.Types.GetAttendeeRequest, callback?: (err: AWSError, data: Chime.Types.GetAttendeeResponse) => void): Request<Chime.Types.GetAttendeeResponse, AWSError>;
   /**
-   * Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   *  Gets the Amazon Chime SDK attendee details for a specified meeting ID and attendee ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide . 
    */
   getAttendee(callback?: (err: AWSError, data: Chime.Types.GetAttendeeResponse) => void): Request<Chime.Types.GetAttendeeResponse, AWSError>;
   /**
@@ -388,11 +676,19 @@ declare class Chime extends Service {
    */
   getBot(callback?: (err: AWSError, data: Chime.Types.GetBotResponse) => void): Request<Chime.Types.GetBotResponse, AWSError>;
   /**
-   * Gets details for an events configuration that allows a bot to receive outgoing events, such as an HTTPS endpoint or Lambda function ARN. 
+   * Gets the full details of a channel message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  getChannelMessage(params: Chime.Types.GetChannelMessageRequest, callback?: (err: AWSError, data: Chime.Types.GetChannelMessageResponse) => void): Request<Chime.Types.GetChannelMessageResponse, AWSError>;
+  /**
+   * Gets the full details of a channel message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  getChannelMessage(callback?: (err: AWSError, data: Chime.Types.GetChannelMessageResponse) => void): Request<Chime.Types.GetChannelMessageResponse, AWSError>;
+  /**
+   * Gets details for an events configuration that allows a bot to receive outgoing events, such as an HTTPS endpoint or Lambda function ARN.
    */
   getEventsConfiguration(params: Chime.Types.GetEventsConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.GetEventsConfigurationResponse) => void): Request<Chime.Types.GetEventsConfigurationResponse, AWSError>;
   /**
-   * Gets details for an events configuration that allows a bot to receive outgoing events, such as an HTTPS endpoint or Lambda function ARN. 
+   * Gets details for an events configuration that allows a bot to receive outgoing events, such as an HTTPS endpoint or Lambda function ARN.
    */
   getEventsConfiguration(callback?: (err: AWSError, data: Chime.Types.GetEventsConfigurationResponse) => void): Request<Chime.Types.GetEventsConfigurationResponse, AWSError>;
   /**
@@ -400,13 +696,29 @@ declare class Chime extends Service {
    */
   getGlobalSettings(callback?: (err: AWSError, data: Chime.Types.GetGlobalSettingsResponse) => void): Request<Chime.Types.GetGlobalSettingsResponse, AWSError>;
   /**
-   * Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   * Gets an existing media capture pipeline.
+   */
+  getMediaCapturePipeline(params: Chime.Types.GetMediaCapturePipelineRequest, callback?: (err: AWSError, data: Chime.Types.GetMediaCapturePipelineResponse) => void): Request<Chime.Types.GetMediaCapturePipelineResponse, AWSError>;
+  /**
+   * Gets an existing media capture pipeline.
+   */
+  getMediaCapturePipeline(callback?: (err: AWSError, data: Chime.Types.GetMediaCapturePipelineResponse) => void): Request<Chime.Types.GetMediaCapturePipelineResponse, AWSError>;
+  /**
+   *  Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide . 
    */
   getMeeting(params: Chime.Types.GetMeetingRequest, callback?: (err: AWSError, data: Chime.Types.GetMeetingResponse) => void): Request<Chime.Types.GetMeetingResponse, AWSError>;
   /**
-   * Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   *  Gets the Amazon Chime SDK meeting details for the specified meeting ID. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide . 
    */
   getMeeting(callback?: (err: AWSError, data: Chime.Types.GetMeetingResponse) => void): Request<Chime.Types.GetMeetingResponse, AWSError>;
+  /**
+   * The details of the endpoint for the messaging session.
+   */
+  getMessagingSessionEndpoint(params: Chime.Types.GetMessagingSessionEndpointRequest, callback?: (err: AWSError, data: Chime.Types.GetMessagingSessionEndpointResponse) => void): Request<Chime.Types.GetMessagingSessionEndpointResponse, AWSError>;
+  /**
+   * The details of the endpoint for the messaging session.
+   */
+  getMessagingSessionEndpoint(callback?: (err: AWSError, data: Chime.Types.GetMessagingSessionEndpointResponse) => void): Request<Chime.Types.GetMessagingSessionEndpointResponse, AWSError>;
   /**
    * Retrieves details for the specified phone number ID, such as associations, capabilities, and product type.
    */
@@ -416,11 +728,11 @@ declare class Chime extends Service {
    */
   getPhoneNumber(callback?: (err: AWSError, data: Chime.Types.GetPhoneNumberResponse) => void): Request<Chime.Types.GetPhoneNumberResponse, AWSError>;
   /**
-   * Retrieves details for the specified phone number order, such as order creation timestamp, phone numbers in E.164 format, product type, and order status.
+   * Retrieves details for the specified phone number order, such as the order creation timestamp, phone numbers in E.164 format, product type, and order status.
    */
   getPhoneNumberOrder(params: Chime.Types.GetPhoneNumberOrderRequest, callback?: (err: AWSError, data: Chime.Types.GetPhoneNumberOrderResponse) => void): Request<Chime.Types.GetPhoneNumberOrderResponse, AWSError>;
   /**
-   * Retrieves details for the specified phone number order, such as order creation timestamp, phone numbers in E.164 format, product type, and order status.
+   * Retrieves details for the specified phone number order, such as the order creation timestamp, phone numbers in E.164 format, product type, and order status.
    */
   getPhoneNumberOrder(callback?: (err: AWSError, data: Chime.Types.GetPhoneNumberOrderResponse) => void): Request<Chime.Types.GetPhoneNumberOrderResponse, AWSError>;
   /**
@@ -436,11 +748,11 @@ declare class Chime extends Service {
    */
   getProxySession(callback?: (err: AWSError, data: Chime.Types.GetProxySessionResponse) => void): Request<Chime.Types.GetProxySessionResponse, AWSError>;
   /**
-   * Gets the retention settings for the specified Amazon Chime Enterprise account. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide.
+   *  Gets the retention settings for the specified Amazon Chime Enterprise account. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide. 
    */
   getRetentionSettings(params: Chime.Types.GetRetentionSettingsRequest, callback?: (err: AWSError, data: Chime.Types.GetRetentionSettingsResponse) => void): Request<Chime.Types.GetRetentionSettingsResponse, AWSError>;
   /**
-   * Gets the retention settings for the specified Amazon Chime Enterprise account. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide.
+   *  Gets the retention settings for the specified Amazon Chime Enterprise account. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide. 
    */
   getRetentionSettings(callback?: (err: AWSError, data: Chime.Types.GetRetentionSettingsResponse) => void): Request<Chime.Types.GetRetentionSettingsResponse, AWSError>;
   /**
@@ -452,11 +764,35 @@ declare class Chime extends Service {
    */
   getRoom(callback?: (err: AWSError, data: Chime.Types.GetRoomResponse) => void): Request<Chime.Types.GetRoomResponse, AWSError>;
   /**
-   * Retrieves details for the specified user ID, such as primary email address, license type, and personal meeting PIN. To retrieve user details with an email address instead of a user ID, use the ListUsers action, and then filter by email address.
+   * Retrieves the information for a SIP media application, including name, AWS Region, and endpoints.
+   */
+  getSipMediaApplication(params: Chime.Types.GetSipMediaApplicationRequest, callback?: (err: AWSError, data: Chime.Types.GetSipMediaApplicationResponse) => void): Request<Chime.Types.GetSipMediaApplicationResponse, AWSError>;
+  /**
+   * Retrieves the information for a SIP media application, including name, AWS Region, and endpoints.
+   */
+  getSipMediaApplication(callback?: (err: AWSError, data: Chime.Types.GetSipMediaApplicationResponse) => void): Request<Chime.Types.GetSipMediaApplicationResponse, AWSError>;
+  /**
+   * Returns the logging configuration for the specified SIP media application.
+   */
+  getSipMediaApplicationLoggingConfiguration(params: Chime.Types.GetSipMediaApplicationLoggingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.GetSipMediaApplicationLoggingConfigurationResponse) => void): Request<Chime.Types.GetSipMediaApplicationLoggingConfigurationResponse, AWSError>;
+  /**
+   * Returns the logging configuration for the specified SIP media application.
+   */
+  getSipMediaApplicationLoggingConfiguration(callback?: (err: AWSError, data: Chime.Types.GetSipMediaApplicationLoggingConfigurationResponse) => void): Request<Chime.Types.GetSipMediaApplicationLoggingConfigurationResponse, AWSError>;
+  /**
+   * Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and target endpoints.
+   */
+  getSipRule(params: Chime.Types.GetSipRuleRequest, callback?: (err: AWSError, data: Chime.Types.GetSipRuleResponse) => void): Request<Chime.Types.GetSipRuleResponse, AWSError>;
+  /**
+   * Retrieves the details of a SIP rule, such as the rule ID, name, triggers, and target endpoints.
+   */
+  getSipRule(callback?: (err: AWSError, data: Chime.Types.GetSipRuleResponse) => void): Request<Chime.Types.GetSipRuleResponse, AWSError>;
+  /**
+   * Retrieves details for the specified user ID, such as primary email address, license type,and personal meeting PIN.  To retrieve user details with an email address instead of a user ID, use the ListUsers action, and then filter by email address. 
    */
   getUser(params: Chime.Types.GetUserRequest, callback?: (err: AWSError, data: Chime.Types.GetUserResponse) => void): Request<Chime.Types.GetUserResponse, AWSError>;
   /**
-   * Retrieves details for the specified user ID, such as primary email address, license type, and personal meeting PIN. To retrieve user details with an email address instead of a user ID, use the ListUsers action, and then filter by email address.
+   * Retrieves details for the specified user ID, such as primary email address, license type,and personal meeting PIN.  To retrieve user details with an email address instead of a user ID, use the ListUsers action, and then filter by email address. 
    */
   getUser(callback?: (err: AWSError, data: Chime.Types.GetUserResponse) => void): Request<Chime.Types.GetUserResponse, AWSError>;
   /**
@@ -468,11 +804,11 @@ declare class Chime extends Service {
    */
   getUserSettings(callback?: (err: AWSError, data: Chime.Types.GetUserSettingsResponse) => void): Request<Chime.Types.GetUserSettingsResponse, AWSError>;
   /**
-   * Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps, name, outbound host, and encryption requirements.
+   * Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps,name, outbound host, and encryption requirements.
    */
   getVoiceConnector(params: Chime.Types.GetVoiceConnectorRequest, callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorResponse) => void): Request<Chime.Types.GetVoiceConnectorResponse, AWSError>;
   /**
-   * Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps, name, outbound host, and encryption requirements.
+   * Retrieves details for the specified Amazon Chime Voice Connector, such as timestamps,name, outbound host, and encryption requirements.
    */
   getVoiceConnector(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorResponse) => void): Request<Chime.Types.GetVoiceConnectorResponse, AWSError>;
   /**
@@ -484,11 +820,11 @@ declare class Chime extends Service {
    */
   getVoiceConnectorEmergencyCallingConfiguration(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorEmergencyCallingConfigurationResponse) => void): Request<Chime.Types.GetVoiceConnectorEmergencyCallingConfigurationResponse, AWSError>;
   /**
-   * Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps, name, and associated VoiceConnectorItems.
+   *  Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps,name, and associated VoiceConnectorItems.
    */
   getVoiceConnectorGroup(params: Chime.Types.GetVoiceConnectorGroupRequest, callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorGroupResponse) => void): Request<Chime.Types.GetVoiceConnectorGroupResponse, AWSError>;
   /**
-   * Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps, name, and associated VoiceConnectorItems.
+   *  Retrieves details for the specified Amazon Chime Voice Connector group, such as timestamps,name, and associated VoiceConnectorItems.
    */
   getVoiceConnectorGroup(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorGroupResponse) => void): Request<Chime.Types.GetVoiceConnectorGroupResponse, AWSError>;
   /**
@@ -540,11 +876,11 @@ declare class Chime extends Service {
    */
   getVoiceConnectorTerminationHealth(callback?: (err: AWSError, data: Chime.Types.GetVoiceConnectorTerminationHealthResponse) => void): Request<Chime.Types.GetVoiceConnectorTerminationHealthResponse, AWSError>;
   /**
-   * Sends email to a maximum of 50 users, inviting them to the specified Amazon Chime Team account. Only Team account types are currently supported for this action. 
+   * Sends email to a maximum of 50 users, inviting them to the specified Amazon Chime Team account. Only Team account types are currently supported for this action.
    */
   inviteUsers(params: Chime.Types.InviteUsersRequest, callback?: (err: AWSError, data: Chime.Types.InviteUsersResponse) => void): Request<Chime.Types.InviteUsersResponse, AWSError>;
   /**
-   * Sends email to a maximum of 50 users, inviting them to the specified Amazon Chime Team account. Only Team account types are currently supported for this action. 
+   * Sends email to a maximum of 50 users, inviting them to the specified Amazon Chime Team account. Only Team account types are currently supported for this action.
    */
   inviteUsers(callback?: (err: AWSError, data: Chime.Types.InviteUsersResponse) => void): Request<Chime.Types.InviteUsersResponse, AWSError>;
   /**
@@ -556,6 +892,30 @@ declare class Chime extends Service {
    */
   listAccounts(callback?: (err: AWSError, data: Chime.Types.ListAccountsResponse) => void): Request<Chime.Types.ListAccountsResponse, AWSError>;
   /**
+   * Returns a list of the administrators in the AppInstance.
+   */
+  listAppInstanceAdmins(params: Chime.Types.ListAppInstanceAdminsRequest, callback?: (err: AWSError, data: Chime.Types.ListAppInstanceAdminsResponse) => void): Request<Chime.Types.ListAppInstanceAdminsResponse, AWSError>;
+  /**
+   * Returns a list of the administrators in the AppInstance.
+   */
+  listAppInstanceAdmins(callback?: (err: AWSError, data: Chime.Types.ListAppInstanceAdminsResponse) => void): Request<Chime.Types.ListAppInstanceAdminsResponse, AWSError>;
+  /**
+   * List all AppInstanceUsers created under a single AppInstance. 
+   */
+  listAppInstanceUsers(params: Chime.Types.ListAppInstanceUsersRequest, callback?: (err: AWSError, data: Chime.Types.ListAppInstanceUsersResponse) => void): Request<Chime.Types.ListAppInstanceUsersResponse, AWSError>;
+  /**
+   * List all AppInstanceUsers created under a single AppInstance. 
+   */
+  listAppInstanceUsers(callback?: (err: AWSError, data: Chime.Types.ListAppInstanceUsersResponse) => void): Request<Chime.Types.ListAppInstanceUsersResponse, AWSError>;
+  /**
+   * Lists all Amazon Chime AppInstances created under a single AWS account.
+   */
+  listAppInstances(params: Chime.Types.ListAppInstancesRequest, callback?: (err: AWSError, data: Chime.Types.ListAppInstancesResponse) => void): Request<Chime.Types.ListAppInstancesResponse, AWSError>;
+  /**
+   * Lists all Amazon Chime AppInstances created under a single AWS account.
+   */
+  listAppInstances(callback?: (err: AWSError, data: Chime.Types.ListAppInstancesResponse) => void): Request<Chime.Types.ListAppInstancesResponse, AWSError>;
+  /**
    * Lists the tags applied to an Amazon Chime SDK attendee resource.
    */
   listAttendeeTags(params: Chime.Types.ListAttendeeTagsRequest, callback?: (err: AWSError, data: Chime.Types.ListAttendeeTagsResponse) => void): Request<Chime.Types.ListAttendeeTagsResponse, AWSError>;
@@ -564,11 +924,11 @@ declare class Chime extends Service {
    */
   listAttendeeTags(callback?: (err: AWSError, data: Chime.Types.ListAttendeeTagsResponse) => void): Request<Chime.Types.ListAttendeeTagsResponse, AWSError>;
   /**
-   * Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   *  Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide. 
    */
   listAttendees(params: Chime.Types.ListAttendeesRequest, callback?: (err: AWSError, data: Chime.Types.ListAttendeesResponse) => void): Request<Chime.Types.ListAttendeesResponse, AWSError>;
   /**
-   * Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   *  Lists the attendees for the specified Amazon Chime SDK meeting. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide. 
    */
   listAttendees(callback?: (err: AWSError, data: Chime.Types.ListAttendeesResponse) => void): Request<Chime.Types.ListAttendeesResponse, AWSError>;
   /**
@@ -580,6 +940,70 @@ declare class Chime extends Service {
    */
   listBots(callback?: (err: AWSError, data: Chime.Types.ListBotsResponse) => void): Request<Chime.Types.ListBotsResponse, AWSError>;
   /**
+   * Lists all the users banned from a particular channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  listChannelBans(params: Chime.Types.ListChannelBansRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelBansResponse) => void): Request<Chime.Types.ListChannelBansResponse, AWSError>;
+  /**
+   * Lists all the users banned from a particular channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  listChannelBans(callback?: (err: AWSError, data: Chime.Types.ListChannelBansResponse) => void): Request<Chime.Types.ListChannelBansResponse, AWSError>;
+  /**
+   * Lists all channel memberships in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  listChannelMemberships(params: Chime.Types.ListChannelMembershipsRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelMembershipsResponse) => void): Request<Chime.Types.ListChannelMembershipsResponse, AWSError>;
+  /**
+   * Lists all channel memberships in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  listChannelMemberships(callback?: (err: AWSError, data: Chime.Types.ListChannelMembershipsResponse) => void): Request<Chime.Types.ListChannelMembershipsResponse, AWSError>;
+  /**
+   *  Lists all channels that a particular AppInstanceUser is a part of. Only an AppInstanceAdmin can call the API with a user ARN that is not their own.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  listChannelMembershipsForAppInstanceUser(params: Chime.Types.ListChannelMembershipsForAppInstanceUserRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelMembershipsForAppInstanceUserResponse) => void): Request<Chime.Types.ListChannelMembershipsForAppInstanceUserResponse, AWSError>;
+  /**
+   *  Lists all channels that a particular AppInstanceUser is a part of. Only an AppInstanceAdmin can call the API with a user ARN that is not their own.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  listChannelMembershipsForAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.ListChannelMembershipsForAppInstanceUserResponse) => void): Request<Chime.Types.ListChannelMembershipsForAppInstanceUserResponse, AWSError>;
+  /**
+   * List all the messages in a channel. Returns a paginated list of ChannelMessages. By default, sorted by creation timestamp in descending order.  Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message. Also, the x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  listChannelMessages(params: Chime.Types.ListChannelMessagesRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelMessagesResponse) => void): Request<Chime.Types.ListChannelMessagesResponse, AWSError>;
+  /**
+   * List all the messages in a channel. Returns a paginated list of ChannelMessages. By default, sorted by creation timestamp in descending order.  Redacted messages appear in the results as empty, since they are only redacted, not deleted. Deleted messages do not appear in the results. This action always returns the latest version of an edited message. Also, the x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  listChannelMessages(callback?: (err: AWSError, data: Chime.Types.ListChannelMessagesResponse) => void): Request<Chime.Types.ListChannelMessagesResponse, AWSError>;
+  /**
+   * Lists all the moderators for a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  listChannelModerators(params: Chime.Types.ListChannelModeratorsRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelModeratorsResponse) => void): Request<Chime.Types.ListChannelModeratorsResponse, AWSError>;
+  /**
+   * Lists all the moderators for a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  listChannelModerators(callback?: (err: AWSError, data: Chime.Types.ListChannelModeratorsResponse) => void): Request<Chime.Types.ListChannelModeratorsResponse, AWSError>;
+  /**
+   * Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.  Functionality &amp; restrictions    Use privacy = PUBLIC to retrieve all public channels in the account.   Only an AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an account.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  listChannels(params: Chime.Types.ListChannelsRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelsResponse) => void): Request<Chime.Types.ListChannelsResponse, AWSError>;
+  /**
+   * Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.  Functionality &amp; restrictions    Use privacy = PUBLIC to retrieve all public channels in the account.   Only an AppInstanceAdmin can set privacy = PRIVATE to list the private channels in an account.    The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  listChannels(callback?: (err: AWSError, data: Chime.Types.ListChannelsResponse) => void): Request<Chime.Types.ListChannelsResponse, AWSError>;
+  /**
+   * A list of the channels moderated by an AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  listChannelsModeratedByAppInstanceUser(params: Chime.Types.ListChannelsModeratedByAppInstanceUserRequest, callback?: (err: AWSError, data: Chime.Types.ListChannelsModeratedByAppInstanceUserResponse) => void): Request<Chime.Types.ListChannelsModeratedByAppInstanceUserResponse, AWSError>;
+  /**
+   * A list of the channels moderated by an AppInstanceUser.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  listChannelsModeratedByAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.ListChannelsModeratedByAppInstanceUserResponse) => void): Request<Chime.Types.ListChannelsModeratedByAppInstanceUserResponse, AWSError>;
+  /**
+   * Returns a list of media capture pipelines.
+   */
+  listMediaCapturePipelines(params: Chime.Types.ListMediaCapturePipelinesRequest, callback?: (err: AWSError, data: Chime.Types.ListMediaCapturePipelinesResponse) => void): Request<Chime.Types.ListMediaCapturePipelinesResponse, AWSError>;
+  /**
+   * Returns a list of media capture pipelines.
+   */
+  listMediaCapturePipelines(callback?: (err: AWSError, data: Chime.Types.ListMediaCapturePipelinesResponse) => void): Request<Chime.Types.ListMediaCapturePipelinesResponse, AWSError>;
+  /**
    * Lists the tags applied to an Amazon Chime SDK meeting resource.
    */
   listMeetingTags(params: Chime.Types.ListMeetingTagsRequest, callback?: (err: AWSError, data: Chime.Types.ListMeetingTagsResponse) => void): Request<Chime.Types.ListMeetingTagsResponse, AWSError>;
@@ -588,11 +1012,11 @@ declare class Chime extends Service {
    */
   listMeetingTags(callback?: (err: AWSError, data: Chime.Types.ListMeetingTagsResponse) => void): Request<Chime.Types.ListMeetingTagsResponse, AWSError>;
   /**
-   * Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   *  Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
    */
   listMeetings(params: Chime.Types.ListMeetingsRequest, callback?: (err: AWSError, data: Chime.Types.ListMeetingsResponse) => void): Request<Chime.Types.ListMeetingsResponse, AWSError>;
   /**
-   * Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
+   *  Lists up to 100 active Amazon Chime SDK meetings. For more information about the Amazon Chime SDK, see Using the Amazon Chime SDK in the Amazon Chime Developer Guide.
    */
   listMeetings(callback?: (err: AWSError, data: Chime.Types.ListMeetingsResponse) => void): Request<Chime.Types.ListMeetingsResponse, AWSError>;
   /**
@@ -635,6 +1059,30 @@ declare class Chime extends Service {
    * Lists the room details for the specified Amazon Chime Enterprise account. Optionally, filter the results by a member ID (user ID or bot ID) to see a list of rooms that the member belongs to.
    */
   listRooms(callback?: (err: AWSError, data: Chime.Types.ListRoomsResponse) => void): Request<Chime.Types.ListRoomsResponse, AWSError>;
+  /**
+   * Lists the SIP media applications under the administrator's AWS account.
+   */
+  listSipMediaApplications(params: Chime.Types.ListSipMediaApplicationsRequest, callback?: (err: AWSError, data: Chime.Types.ListSipMediaApplicationsResponse) => void): Request<Chime.Types.ListSipMediaApplicationsResponse, AWSError>;
+  /**
+   * Lists the SIP media applications under the administrator's AWS account.
+   */
+  listSipMediaApplications(callback?: (err: AWSError, data: Chime.Types.ListSipMediaApplicationsResponse) => void): Request<Chime.Types.ListSipMediaApplicationsResponse, AWSError>;
+  /**
+   * Lists the SIP rules under the administrator's AWS account.
+   */
+  listSipRules(params: Chime.Types.ListSipRulesRequest, callback?: (err: AWSError, data: Chime.Types.ListSipRulesResponse) => void): Request<Chime.Types.ListSipRulesResponse, AWSError>;
+  /**
+   * Lists the SIP rules under the administrator's AWS account.
+   */
+  listSipRules(callback?: (err: AWSError, data: Chime.Types.ListSipRulesResponse) => void): Request<Chime.Types.ListSipRulesResponse, AWSError>;
+  /**
+   * Lists supported phone number countries.
+   */
+  listSupportedPhoneNumberCountries(params: Chime.Types.ListSupportedPhoneNumberCountriesRequest, callback?: (err: AWSError, data: Chime.Types.ListSupportedPhoneNumberCountriesResponse) => void): Request<Chime.Types.ListSupportedPhoneNumberCountriesResponse, AWSError>;
+  /**
+   * Lists supported phone number countries.
+   */
+  listSupportedPhoneNumberCountries(callback?: (err: AWSError, data: Chime.Types.ListSupportedPhoneNumberCountriesResponse) => void): Request<Chime.Types.ListSupportedPhoneNumberCountriesResponse, AWSError>;
   /**
    * Lists the tags applied to an Amazon Chime SDK meeting resource.
    */
@@ -684,6 +1132,22 @@ declare class Chime extends Service {
    */
   logoutUser(callback?: (err: AWSError, data: Chime.Types.LogoutUserResponse) => void): Request<Chime.Types.LogoutUserResponse, AWSError>;
   /**
+   * Sets the amount of time in days that a given AppInstance retains data.
+   */
+  putAppInstanceRetentionSettings(params: Chime.Types.PutAppInstanceRetentionSettingsRequest, callback?: (err: AWSError, data: Chime.Types.PutAppInstanceRetentionSettingsResponse) => void): Request<Chime.Types.PutAppInstanceRetentionSettingsResponse, AWSError>;
+  /**
+   * Sets the amount of time in days that a given AppInstance retains data.
+   */
+  putAppInstanceRetentionSettings(callback?: (err: AWSError, data: Chime.Types.PutAppInstanceRetentionSettingsResponse) => void): Request<Chime.Types.PutAppInstanceRetentionSettingsResponse, AWSError>;
+  /**
+   * The data streaming configurations of an AppInstance.
+   */
+  putAppInstanceStreamingConfigurations(params: Chime.Types.PutAppInstanceStreamingConfigurationsRequest, callback?: (err: AWSError, data: Chime.Types.PutAppInstanceStreamingConfigurationsResponse) => void): Request<Chime.Types.PutAppInstanceStreamingConfigurationsResponse, AWSError>;
+  /**
+   * The data streaming configurations of an AppInstance.
+   */
+  putAppInstanceStreamingConfigurations(callback?: (err: AWSError, data: Chime.Types.PutAppInstanceStreamingConfigurationsResponse) => void): Request<Chime.Types.PutAppInstanceStreamingConfigurationsResponse, AWSError>;
+  /**
    * Creates an events configuration that allows a bot to receive outgoing events sent by Amazon Chime. Choose either an HTTPS endpoint or a Lambda function ARN. For more information, see Bot.
    */
   putEventsConfiguration(params: Chime.Types.PutEventsConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.PutEventsConfigurationResponse) => void): Request<Chime.Types.PutEventsConfigurationResponse, AWSError>;
@@ -692,13 +1156,21 @@ declare class Chime extends Service {
    */
   putEventsConfiguration(callback?: (err: AWSError, data: Chime.Types.PutEventsConfigurationResponse) => void): Request<Chime.Types.PutEventsConfigurationResponse, AWSError>;
   /**
-   * Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see Logging Amazon Chime API Calls with AWS CloudTrail in the Amazon Chime Administration Guide. To turn off existing retention settings, remove the number of days from the corresponding RetentionDays field in the RetentionSettings object. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide.
+   *  Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see Logging Amazon Chime API Calls with AWS CloudTrail in the Amazon Chime Administration Guide.  To turn off existing retention settings, remove the number of days from the corresponding RetentionDays field in the RetentionSettings object. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide.
    */
   putRetentionSettings(params: Chime.Types.PutRetentionSettingsRequest, callback?: (err: AWSError, data: Chime.Types.PutRetentionSettingsResponse) => void): Request<Chime.Types.PutRetentionSettingsResponse, AWSError>;
   /**
-   * Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see Logging Amazon Chime API Calls with AWS CloudTrail in the Amazon Chime Administration Guide. To turn off existing retention settings, remove the number of days from the corresponding RetentionDays field in the RetentionSettings object. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide.
+   *  Puts retention settings for the specified Amazon Chime Enterprise account. We recommend using AWS CloudTrail to monitor usage of this API for your account. For more information, see Logging Amazon Chime API Calls with AWS CloudTrail in the Amazon Chime Administration Guide.  To turn off existing retention settings, remove the number of days from the corresponding RetentionDays field in the RetentionSettings object. For more information about retention settings, see Managing Chat Retention Policies in the Amazon Chime Administration Guide.
    */
   putRetentionSettings(callback?: (err: AWSError, data: Chime.Types.PutRetentionSettingsResponse) => void): Request<Chime.Types.PutRetentionSettingsResponse, AWSError>;
+  /**
+   * Updates the logging configuration for the specified SIP media application.
+   */
+  putSipMediaApplicationLoggingConfiguration(params: Chime.Types.PutSipMediaApplicationLoggingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.PutSipMediaApplicationLoggingConfigurationResponse) => void): Request<Chime.Types.PutSipMediaApplicationLoggingConfigurationResponse, AWSError>;
+  /**
+   * Updates the logging configuration for the specified SIP media application.
+   */
+  putSipMediaApplicationLoggingConfiguration(callback?: (err: AWSError, data: Chime.Types.PutSipMediaApplicationLoggingConfigurationResponse) => void): Request<Chime.Types.PutSipMediaApplicationLoggingConfigurationResponse, AWSError>;
   /**
    * Puts emergency calling configuration details to the specified Amazon Chime Voice Connector, such as emergency phone numbers and calling countries. Origination and termination settings must be enabled for the Amazon Chime Voice Connector before emergency calling can be configured.
    */
@@ -732,11 +1204,11 @@ declare class Chime extends Service {
    */
   putVoiceConnectorProxy(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorProxyResponse) => void): Request<Chime.Types.PutVoiceConnectorProxyResponse, AWSError>;
   /**
-   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Amazon Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.
+   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Indonesians. It also sets the retention period, in hours, for the Amazon Kinesis data.
    */
   putVoiceConnectorStreamingConfiguration(params: Chime.Types.PutVoiceConnectorStreamingConfigurationRequest, callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorStreamingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorStreamingConfigurationResponse, AWSError>;
   /**
-   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Amazon Kinesis. It also sets the retention period, in hours, for the Amazon Kinesis data.
+   * Adds a streaming configuration for the specified Amazon Chime Voice Connector. The streaming configuration specifies whether media streaming is enabled for sending to Indonesians. It also sets the retention period, in hours, for the Amazon Kinesis data.
    */
   putVoiceConnectorStreamingConfiguration(callback?: (err: AWSError, data: Chime.Types.PutVoiceConnectorStreamingConfigurationResponse) => void): Request<Chime.Types.PutVoiceConnectorStreamingConfigurationResponse, AWSError>;
   /**
@@ -756,6 +1228,14 @@ declare class Chime extends Service {
    */
   putVoiceConnectorTerminationCredentials(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  redactChannelMessage(params: Chime.Types.RedactChannelMessageRequest, callback?: (err: AWSError, data: Chime.Types.RedactChannelMessageResponse) => void): Request<Chime.Types.RedactChannelMessageResponse, AWSError>;
+  /**
+   * Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  redactChannelMessage(callback?: (err: AWSError, data: Chime.Types.RedactChannelMessageResponse) => void): Request<Chime.Types.RedactChannelMessageResponse, AWSError>;
+  /**
    * Redacts the specified message from the specified Amazon Chime conversation.
    */
   redactConversationMessage(params: Chime.Types.RedactConversationMessageRequest, callback?: (err: AWSError, data: Chime.Types.RedactConversationMessageResponse) => void): Request<Chime.Types.RedactConversationMessageResponse, AWSError>;
@@ -764,11 +1244,11 @@ declare class Chime extends Service {
    */
   redactConversationMessage(callback?: (err: AWSError, data: Chime.Types.RedactConversationMessageResponse) => void): Request<Chime.Types.RedactConversationMessageResponse, AWSError>;
   /**
-   * Redacts the specified message from the specified Amazon Chime chat room.
+   * Redacts the specified message from the specified Amazon Chime channel.
    */
   redactRoomMessage(params: Chime.Types.RedactRoomMessageRequest, callback?: (err: AWSError, data: Chime.Types.RedactRoomMessageResponse) => void): Request<Chime.Types.RedactRoomMessageResponse, AWSError>;
   /**
-   * Redacts the specified message from the specified Amazon Chime chat room.
+   * Redacts the specified message from the specified Amazon Chime channel.
    */
   redactRoomMessage(callback?: (err: AWSError, data: Chime.Types.RedactRoomMessageResponse) => void): Request<Chime.Types.RedactRoomMessageResponse, AWSError>;
   /**
@@ -796,13 +1276,37 @@ declare class Chime extends Service {
    */
   restorePhoneNumber(callback?: (err: AWSError, data: Chime.Types.RestorePhoneNumberResponse) => void): Request<Chime.Types.RestorePhoneNumberResponse, AWSError>;
   /**
-   * Searches phone numbers that can be ordered.
+   * Searches for phone numbers that can be ordered. For US numbers, provide at least one of the following search filters: AreaCode, City, State, or TollFreePrefix. If you provide City, you must also provide State. Numbers outside the US only support the PhoneNumberType filter, which you must use.
    */
   searchAvailablePhoneNumbers(params: Chime.Types.SearchAvailablePhoneNumbersRequest, callback?: (err: AWSError, data: Chime.Types.SearchAvailablePhoneNumbersResponse) => void): Request<Chime.Types.SearchAvailablePhoneNumbersResponse, AWSError>;
   /**
-   * Searches phone numbers that can be ordered.
+   * Searches for phone numbers that can be ordered. For US numbers, provide at least one of the following search filters: AreaCode, City, State, or TollFreePrefix. If you provide City, you must also provide State. Numbers outside the US only support the PhoneNumberType filter, which you must use.
    */
   searchAvailablePhoneNumbers(callback?: (err: AWSError, data: Chime.Types.SearchAvailablePhoneNumbersResponse) => void): Request<Chime.Types.SearchAvailablePhoneNumbersResponse, AWSError>;
+  /**
+   * Sends a message to a particular channel that the member is a part of.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. Also, STANDARD messages can contain 4KB of data and the 1KB of metadata. CONTROL messages can contain 30 bytes of data and no metadata. 
+   */
+  sendChannelMessage(params: Chime.Types.SendChannelMessageRequest, callback?: (err: AWSError, data: Chime.Types.SendChannelMessageResponse) => void): Request<Chime.Types.SendChannelMessageResponse, AWSError>;
+  /**
+   * Sends a message to a particular channel that the member is a part of.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. Also, STANDARD messages can contain 4KB of data and the 1KB of metadata. CONTROL messages can contain 30 bytes of data and no metadata. 
+   */
+  sendChannelMessage(callback?: (err: AWSError, data: Chime.Types.SendChannelMessageResponse) => void): Request<Chime.Types.SendChannelMessageResponse, AWSError>;
+  /**
+   * Start transcription for the specified meetingId. 
+   */
+  startMeetingTranscription(params: Chime.Types.StartMeetingTranscriptionRequest, callback?: (err: AWSError, data: Chime.Types.StartMeetingTranscriptionResponse) => void): Request<Chime.Types.StartMeetingTranscriptionResponse, AWSError>;
+  /**
+   * Start transcription for the specified meetingId. 
+   */
+  startMeetingTranscription(callback?: (err: AWSError, data: Chime.Types.StartMeetingTranscriptionResponse) => void): Request<Chime.Types.StartMeetingTranscriptionResponse, AWSError>;
+  /**
+   * Stops transcription for the specified meetingId.
+   */
+  stopMeetingTranscription(params: Chime.Types.StopMeetingTranscriptionRequest, callback?: (err: AWSError, data: Chime.Types.StopMeetingTranscriptionResponse) => void): Request<Chime.Types.StopMeetingTranscriptionResponse, AWSError>;
+  /**
+   * Stops transcription for the specified meetingId.
+   */
+  stopMeetingTranscription(callback?: (err: AWSError, data: Chime.Types.StopMeetingTranscriptionResponse) => void): Request<Chime.Types.StopMeetingTranscriptionResponse, AWSError>;
   /**
    * Applies the specified tags to the specified Amazon Chime SDK attendee.
    */
@@ -852,11 +1356,11 @@ declare class Chime extends Service {
    */
   untagResource(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates account details for the specified Amazon Chime account. Currently, only account name updates are supported for this action.
+   * Updates account details for the specified Amazon Chime account. Currently, only account name and default license updates are supported for this action.
    */
   updateAccount(params: Chime.Types.UpdateAccountRequest, callback?: (err: AWSError, data: Chime.Types.UpdateAccountResponse) => void): Request<Chime.Types.UpdateAccountResponse, AWSError>;
   /**
-   * Updates account details for the specified Amazon Chime account. Currently, only account name updates are supported for this action.
+   * Updates account details for the specified Amazon Chime account. Currently, only account name and default license updates are supported for this action.
    */
   updateAccount(callback?: (err: AWSError, data: Chime.Types.UpdateAccountResponse) => void): Request<Chime.Types.UpdateAccountResponse, AWSError>;
   /**
@@ -868,6 +1372,22 @@ declare class Chime extends Service {
    */
   updateAccountSettings(callback?: (err: AWSError, data: Chime.Types.UpdateAccountSettingsResponse) => void): Request<Chime.Types.UpdateAccountSettingsResponse, AWSError>;
   /**
+   * Updates AppInstance metadata.
+   */
+  updateAppInstance(params: Chime.Types.UpdateAppInstanceRequest, callback?: (err: AWSError, data: Chime.Types.UpdateAppInstanceResponse) => void): Request<Chime.Types.UpdateAppInstanceResponse, AWSError>;
+  /**
+   * Updates AppInstance metadata.
+   */
+  updateAppInstance(callback?: (err: AWSError, data: Chime.Types.UpdateAppInstanceResponse) => void): Request<Chime.Types.UpdateAppInstanceResponse, AWSError>;
+  /**
+   * Updates the details of an AppInstanceUser. You can update names and metadata.
+   */
+  updateAppInstanceUser(params: Chime.Types.UpdateAppInstanceUserRequest, callback?: (err: AWSError, data: Chime.Types.UpdateAppInstanceUserResponse) => void): Request<Chime.Types.UpdateAppInstanceUserResponse, AWSError>;
+  /**
+   * Updates the details of an AppInstanceUser. You can update names and metadata.
+   */
+  updateAppInstanceUser(callback?: (err: AWSError, data: Chime.Types.UpdateAppInstanceUserResponse) => void): Request<Chime.Types.UpdateAppInstanceUserResponse, AWSError>;
+  /**
    * Updates the status of the specified bot, such as starting or stopping the bot from running in your Amazon Chime Enterprise account.
    */
   updateBot(params: Chime.Types.UpdateBotRequest, callback?: (err: AWSError, data: Chime.Types.UpdateBotResponse) => void): Request<Chime.Types.UpdateBotResponse, AWSError>;
@@ -875,6 +1395,30 @@ declare class Chime extends Service {
    * Updates the status of the specified bot, such as starting or stopping the bot from running in your Amazon Chime Enterprise account.
    */
   updateBot(callback?: (err: AWSError, data: Chime.Types.UpdateBotResponse) => void): Request<Chime.Types.UpdateBotResponse, AWSError>;
+  /**
+   * Update a channel's attributes.  Restriction: You can't change a channel's privacy.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  updateChannel(params: Chime.Types.UpdateChannelRequest, callback?: (err: AWSError, data: Chime.Types.UpdateChannelResponse) => void): Request<Chime.Types.UpdateChannelResponse, AWSError>;
+  /**
+   * Update a channel's attributes.  Restriction: You can't change a channel's privacy.   The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  updateChannel(callback?: (err: AWSError, data: Chime.Types.UpdateChannelResponse) => void): Request<Chime.Types.UpdateChannelResponse, AWSError>;
+  /**
+   * Updates the content of a message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  updateChannelMessage(params: Chime.Types.UpdateChannelMessageRequest, callback?: (err: AWSError, data: Chime.Types.UpdateChannelMessageResponse) => void): Request<Chime.Types.UpdateChannelMessageResponse, AWSError>;
+  /**
+   * Updates the content of a message.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  updateChannelMessage(callback?: (err: AWSError, data: Chime.Types.UpdateChannelMessageResponse) => void): Request<Chime.Types.UpdateChannelMessageResponse, AWSError>;
+  /**
+   * The details of the time when a user last read messages in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  updateChannelReadMarker(params: Chime.Types.UpdateChannelReadMarkerRequest, callback?: (err: AWSError, data: Chime.Types.UpdateChannelReadMarkerResponse) => void): Request<Chime.Types.UpdateChannelReadMarkerResponse, AWSError>;
+  /**
+   * The details of the time when a user last read messages in a channel.  The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn of the user that makes the API call as the value in the header. 
+   */
+  updateChannelReadMarker(callback?: (err: AWSError, data: Chime.Types.UpdateChannelReadMarkerResponse) => void): Request<Chime.Types.UpdateChannelReadMarkerResponse, AWSError>;
   /**
    * Updates global settings for the administrator's AWS account, such as Amazon Chime Business Calling and Amazon Chime Voice Connector settings.
    */
@@ -884,11 +1428,11 @@ declare class Chime extends Service {
    */
   updateGlobalSettings(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action. For toll-free numbers, you must use the Amazon Chime Voice Connector product type. Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
+   * Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type. Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
    */
   updatePhoneNumber(params: Chime.Types.UpdatePhoneNumberRequest, callback?: (err: AWSError, data: Chime.Types.UpdatePhoneNumberResponse) => void): Request<Chime.Types.UpdatePhoneNumberResponse, AWSError>;
   /**
-   * Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action. For toll-free numbers, you must use the Amazon Chime Voice Connector product type. Updates to outbound calling names can take up to 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
+   * Updates phone number details, such as product type or calling name, for the specified phone number ID. You can update one phone number detail at a time. For example, you can update either the product type or the calling name in one action. For toll-free numbers, you cannot use the Amazon Chime Business Calling product type. For numbers outside the U.S., you must use the Amazon Chime SIP Media Application Dial-In product type. Updates to outbound calling names can take 72 hours to complete. Pending updates to outbound calling names must be complete before you can request another update.
    */
   updatePhoneNumber(callback?: (err: AWSError, data: Chime.Types.UpdatePhoneNumberResponse) => void): Request<Chime.Types.UpdatePhoneNumberResponse, AWSError>;
   /**
@@ -924,6 +1468,30 @@ declare class Chime extends Service {
    */
   updateRoomMembership(callback?: (err: AWSError, data: Chime.Types.UpdateRoomMembershipResponse) => void): Request<Chime.Types.UpdateRoomMembershipResponse, AWSError>;
   /**
+   * Updates the details of the specified SIP media application.
+   */
+  updateSipMediaApplication(params: Chime.Types.UpdateSipMediaApplicationRequest, callback?: (err: AWSError, data: Chime.Types.UpdateSipMediaApplicationResponse) => void): Request<Chime.Types.UpdateSipMediaApplicationResponse, AWSError>;
+  /**
+   * Updates the details of the specified SIP media application.
+   */
+  updateSipMediaApplication(callback?: (err: AWSError, data: Chime.Types.UpdateSipMediaApplicationResponse) => void): Request<Chime.Types.UpdateSipMediaApplicationResponse, AWSError>;
+  /**
+   * Allows you to trigger a Lambda function at any time while a call is active, and replace the current actions with new actions returned by the invocation.
+   */
+  updateSipMediaApplicationCall(params: Chime.Types.UpdateSipMediaApplicationCallRequest, callback?: (err: AWSError, data: Chime.Types.UpdateSipMediaApplicationCallResponse) => void): Request<Chime.Types.UpdateSipMediaApplicationCallResponse, AWSError>;
+  /**
+   * Allows you to trigger a Lambda function at any time while a call is active, and replace the current actions with new actions returned by the invocation.
+   */
+  updateSipMediaApplicationCall(callback?: (err: AWSError, data: Chime.Types.UpdateSipMediaApplicationCallResponse) => void): Request<Chime.Types.UpdateSipMediaApplicationCallResponse, AWSError>;
+  /**
+   * Updates the details of the specified SIP rule.
+   */
+  updateSipRule(params: Chime.Types.UpdateSipRuleRequest, callback?: (err: AWSError, data: Chime.Types.UpdateSipRuleResponse) => void): Request<Chime.Types.UpdateSipRuleResponse, AWSError>;
+  /**
+   * Updates the details of the specified SIP rule.
+   */
+  updateSipRule(callback?: (err: AWSError, data: Chime.Types.UpdateSipRuleResponse) => void): Request<Chime.Types.UpdateSipRuleResponse, AWSError>;
+  /**
    * Updates user details for a specified user ID. Currently, only LicenseType updates are supported for this action.
    */
   updateUser(params: Chime.Types.UpdateUserRequest, callback?: (err: AWSError, data: Chime.Types.UpdateUserResponse) => void): Request<Chime.Types.UpdateUserResponse, AWSError>;
@@ -948,11 +1516,11 @@ declare class Chime extends Service {
    */
   updateVoiceConnector(callback?: (err: AWSError, data: Chime.Types.UpdateVoiceConnectorResponse) => void): Request<Chime.Types.UpdateVoiceConnectorResponse, AWSError>;
   /**
-   * Updates details for the specified Amazon Chime Voice Connector group, such as the name and Amazon Chime Voice Connector priority ranking.
+   * Updates details of the specified Amazon Chime Voice Connector group, such as the name and Amazon Chime Voice Connector priority ranking.
    */
   updateVoiceConnectorGroup(params: Chime.Types.UpdateVoiceConnectorGroupRequest, callback?: (err: AWSError, data: Chime.Types.UpdateVoiceConnectorGroupResponse) => void): Request<Chime.Types.UpdateVoiceConnectorGroupResponse, AWSError>;
   /**
-   * Updates details for the specified Amazon Chime Voice Connector group, such as the name and Amazon Chime Voice Connector priority ranking.
+   * Updates details of the specified Amazon Chime Voice Connector group, such as the name and Amazon Chime Voice Connector priority ranking.
    */
   updateVoiceConnectorGroup(callback?: (err: AWSError, data: Chime.Types.UpdateVoiceConnectorGroupResponse) => void): Request<Chime.Types.UpdateVoiceConnectorGroupResponse, AWSError>;
 }
@@ -987,6 +1555,10 @@ declare namespace Chime {
      */
     SupportedLicenses?: LicenseList;
     /**
+     * The status of the account.
+     */
+    AccountStatus?: AccountStatus;
+    /**
      * The sign-in delegate groups associated with the account.
      */
     SigninDelegateGroups?: SigninDelegateGroupList;
@@ -1003,6 +1575,7 @@ declare namespace Chime {
      */
     EnableDialOut?: Boolean;
   }
+  export type AccountStatus = "Suspended"|"Active"|string;
   export type AccountType = "Team"|"EnterpriseDirectory"|"EnterpriseLWA"|"EnterpriseOIDC"|string;
   export interface AlexaForBusinessMetadata {
     /**
@@ -1015,6 +1588,129 @@ declare namespace Chime {
     AlexaForBusinessRoomArn?: SensitiveString;
   }
   export type Alpha2CountryCode = string;
+  export interface AppInstance {
+    /**
+     * The ARN of the messaging instance.
+     */
+    AppInstanceArn?: ChimeArn;
+    /**
+     * The name of an AppInstance.
+     */
+    Name?: NonEmptyResourceName;
+    /**
+     * The metadata of an AppInstance.
+     */
+    Metadata?: Metadata;
+    /**
+     * The time at which an AppInstance was created. In epoch milliseconds.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The time an AppInstance was last updated. In epoch milliseconds.
+     */
+    LastUpdatedTimestamp?: Timestamp;
+  }
+  export interface AppInstanceAdmin {
+    /**
+     * The AppInstanceAdmin data.
+     */
+    Admin?: Identity;
+    /**
+     * The ARN of the AppInstance for which the user is an administrator.
+     */
+    AppInstanceArn?: ChimeArn;
+    /**
+     * The time at which an administrator was created.
+     */
+    CreatedTimestamp?: Timestamp;
+  }
+  export type AppInstanceAdminList = AppInstanceAdminSummary[];
+  export interface AppInstanceAdminSummary {
+    /**
+     * The details of the AppInstanceAdmin.
+     */
+    Admin?: Identity;
+  }
+  export type AppInstanceDataType = "Channel"|"ChannelMessage"|string;
+  export type AppInstanceList = AppInstanceSummary[];
+  export interface AppInstanceRetentionSettings {
+    /**
+     * The length of time in days to retain the messages in a channel.
+     */
+    ChannelRetentionSettings?: ChannelRetentionSettings;
+  }
+  export interface AppInstanceStreamingConfiguration {
+    /**
+     * The type of data to be streamed.
+     */
+    AppInstanceDataType: AppInstanceDataType;
+    /**
+     * The resource ARN.
+     */
+    ResourceArn: Arn;
+  }
+  export type AppInstanceStreamingConfigurationList = AppInstanceStreamingConfiguration[];
+  export interface AppInstanceSummary {
+    /**
+     * The AppInstance ARN.
+     */
+    AppInstanceArn?: ChimeArn;
+    /**
+     * The name of the AppInstance.
+     */
+    Name?: NonEmptyResourceName;
+    /**
+     * The metadata of the AppInstance.
+     */
+    Metadata?: Metadata;
+  }
+  export interface AppInstanceUser {
+    /**
+     * The ARN of the AppInstanceUser.
+     */
+    AppInstanceUserArn?: ChimeArn;
+    /**
+     * The name of the AppInstanceUser.
+     */
+    Name?: UserName;
+    /**
+     * The time at which the AppInstanceUser was created.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The metadata of the AppInstanceUser.
+     */
+    Metadata?: Metadata;
+    /**
+     * The time at which the AppInstanceUser was last updated.
+     */
+    LastUpdatedTimestamp?: Timestamp;
+  }
+  export type AppInstanceUserList = AppInstanceUserSummary[];
+  export interface AppInstanceUserMembershipSummary {
+    /**
+     * The type of ChannelMembership.
+     */
+    Type?: ChannelMembershipType;
+    /**
+     * The time at which a message was last read.
+     */
+    ReadMarkerTimestamp?: Timestamp;
+  }
+  export interface AppInstanceUserSummary {
+    /**
+     * The ARN of the AppInstanceUser.
+     */
+    AppInstanceUserArn?: ChimeArn;
+    /**
+     * The name of an AppInstanceUser.
+     */
+    Name?: UserName;
+    /**
+     * The metadata of the AppInstanceUser.
+     */
+    Metadata?: Metadata;
+  }
   export type AreaCode = string;
   export type Arn = string;
   export interface AssociatePhoneNumberWithUserRequest {
@@ -1087,7 +1783,7 @@ declare namespace Chime {
   }
   export interface Attendee {
     /**
-     * The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
      */
     ExternalUserId?: ExternalUserIdType;
     /**
@@ -1102,6 +1798,24 @@ declare namespace Chime {
   export type AttendeeList = Attendee[];
   export type AttendeeTagKeyList = TagKey[];
   export type AttendeeTagList = Tag[];
+  export interface BatchChannelMemberships {
+    /**
+     * The identifier of the member who invited another member.
+     */
+    InvitedBy?: Identity;
+    /**
+     * The membership types set for the channel users.
+     */
+    Type?: ChannelMembershipType;
+    /**
+     * The users successfully added to the request.
+     */
+    Members?: Members;
+    /**
+     * The ARN of the channel to which you're adding users.
+     */
+    ChannelArn?: ChimeArn;
+  }
   export type BatchCreateAttendeeErrorList = CreateAttendeeError[];
   export interface BatchCreateAttendeeRequest {
     /**
@@ -1122,6 +1836,49 @@ declare namespace Chime {
      * If the action fails for one or more of the attendees in the request, a list of the attendees is returned, along with error codes and error messages.
      */
     Errors?: BatchCreateAttendeeErrorList;
+  }
+  export interface BatchCreateChannelMembershipError {
+    /**
+     * The ARN of the member that the service couldn't add.
+     */
+    MemberArn?: ChimeArn;
+    /**
+     * The error code.
+     */
+    ErrorCode?: ErrorCode;
+    /**
+     * The error message.
+     */
+    ErrorMessage?: String;
+  }
+  export type BatchCreateChannelMembershipErrors = BatchCreateChannelMembershipError[];
+  export interface BatchCreateChannelMembershipRequest {
+    /**
+     * The ARN of the channel to which you're adding users.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The membership type of a user, DEFAULT or HIDDEN. Default members are always returned as part of ListChannelMemberships. Hidden members are only returned if the type filter in ListChannelMemberships equals HIDDEN. Otherwise hidden members are not returned. This is only supported by moderators.
+     */
+    Type?: ChannelMembershipType;
+    /**
+     * The ARNs of the members you want to add to the channel.
+     */
+    MemberArns: MemberArns;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface BatchCreateChannelMembershipResponse {
+    /**
+     * The list of channel memberships in the response.
+     */
+    BatchChannelMemberships?: BatchChannelMemberships;
+    /**
+     * If the action fails for one or more of the memberships in the request, a list of the memberships is returned, along with error codes and error messages.
+     */
+    Errors?: BatchCreateChannelMembershipErrors;
   }
   export interface BatchCreateRoomMembershipRequest {
     /**
@@ -1268,10 +2025,268 @@ declare namespace Chime {
   export type CallingRegionList = CallingRegion[];
   export type Capability = "Voice"|"SMS"|string;
   export type CapabilityList = Capability[];
+  export interface Channel {
+    /**
+     * The name of the channel.
+     */
+    Name?: NonEmptyResourceName;
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The mode of the channel.
+     */
+    Mode?: ChannelMode;
+    /**
+     * The channel's privacy setting.
+     */
+    Privacy?: ChannelPrivacy;
+    /**
+     * The channel's metadata.
+     */
+    Metadata?: Metadata;
+    /**
+     * The AppInstanceUser who created the channel.
+     */
+    CreatedBy?: Identity;
+    /**
+     * The time at which the AppInstanceUser created the channel.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The time at which a member sent the last message in the channel.
+     */
+    LastMessageTimestamp?: Timestamp;
+    /**
+     * The time at which a channel was last updated.
+     */
+    LastUpdatedTimestamp?: Timestamp;
+  }
+  export interface ChannelBan {
+    /**
+     * The member being banned from the channel.
+     */
+    Member?: Identity;
+    /**
+     * The ARN of the channel from which a member is being banned.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The time at which the ban was created.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The AppInstanceUser who created the ban.
+     */
+    CreatedBy?: Identity;
+  }
+  export interface ChannelBanSummary {
+    /**
+     * The member being banned from a channel.
+     */
+    Member?: Identity;
+  }
+  export type ChannelBanSummaryList = ChannelBanSummary[];
+  export interface ChannelMembership {
+    /**
+     * The identifier of the member who invited another member.
+     */
+    InvitedBy?: Identity;
+    /**
+     * The membership type set for the channel member.
+     */
+    Type?: ChannelMembershipType;
+    /**
+     * The data of the channel member.
+     */
+    Member?: Identity;
+    /**
+     * The ARN of the member's channel.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The time at which the channel membership was created.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The time at which a channel membership was last updated.
+     */
+    LastUpdatedTimestamp?: Timestamp;
+  }
+  export interface ChannelMembershipForAppInstanceUserSummary {
+    ChannelSummary?: ChannelSummary;
+    AppInstanceUserMembershipSummary?: AppInstanceUserMembershipSummary;
+  }
+  export type ChannelMembershipForAppInstanceUserSummaryList = ChannelMembershipForAppInstanceUserSummary[];
+  export interface ChannelMembershipSummary {
+    /**
+     * A member's summary data.
+     */
+    Member?: Identity;
+  }
+  export type ChannelMembershipSummaryList = ChannelMembershipSummary[];
+  export type ChannelMembershipType = "DEFAULT"|"HIDDEN"|string;
+  export interface ChannelMessage {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The ID of a message.
+     */
+    MessageId?: MessageId;
+    /**
+     * The message content.
+     */
+    Content?: Content;
+    /**
+     * The message metadata.
+     */
+    Metadata?: Metadata;
+    /**
+     * The message type.
+     */
+    Type?: ChannelMessageType;
+    /**
+     * The time at which the message was created.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The time at which a message was edited.
+     */
+    LastEditedTimestamp?: Timestamp;
+    /**
+     * The time at which a message was updated.
+     */
+    LastUpdatedTimestamp?: Timestamp;
+    /**
+     * The message sender.
+     */
+    Sender?: Identity;
+    /**
+     * Hides the content of a message.
+     */
+    Redacted?: NonNullableBoolean;
+    /**
+     * The persistence setting for a channel message.
+     */
+    Persistence?: ChannelMessagePersistenceType;
+  }
+  export type ChannelMessagePersistenceType = "PERSISTENT"|"NON_PERSISTENT"|string;
+  export interface ChannelMessageSummary {
+    /**
+     * The ID of the message.
+     */
+    MessageId?: MessageId;
+    /**
+     * The content of the message.
+     */
+    Content?: Content;
+    /**
+     * The metadata of the message.
+     */
+    Metadata?: Metadata;
+    /**
+     * The type of message.
+     */
+    Type?: ChannelMessageType;
+    /**
+     * The time at which the message summary was created.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The time at which a message was last updated.
+     */
+    LastUpdatedTimestamp?: Timestamp;
+    /**
+     * The time at which a message was last edited.
+     */
+    LastEditedTimestamp?: Timestamp;
+    /**
+     * The message sender.
+     */
+    Sender?: Identity;
+    /**
+     * Indicates whether a message was redacted.
+     */
+    Redacted?: NonNullableBoolean;
+  }
+  export type ChannelMessageSummaryList = ChannelMessageSummary[];
+  export type ChannelMessageType = "STANDARD"|"CONTROL"|string;
+  export type ChannelMode = "UNRESTRICTED"|"RESTRICTED"|string;
+  export interface ChannelModeratedByAppInstanceUserSummary {
+    /**
+     * Summary of the details of a Channel.
+     */
+    ChannelSummary?: ChannelSummary;
+  }
+  export type ChannelModeratedByAppInstanceUserSummaryList = ChannelModeratedByAppInstanceUserSummary[];
+  export interface ChannelModerator {
+    /**
+     * The moderator's data.
+     */
+    Moderator?: Identity;
+    /**
+     * The ARN of the moderator's channel.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The time at which the moderator was created.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * The AppInstanceUser who created the moderator.
+     */
+    CreatedBy?: Identity;
+  }
+  export interface ChannelModeratorSummary {
+    /**
+     * The data for a moderator.
+     */
+    Moderator?: Identity;
+  }
+  export type ChannelModeratorSummaryList = ChannelModeratorSummary[];
+  export type ChannelPrivacy = "PUBLIC"|"PRIVATE"|string;
+  export interface ChannelRetentionSettings {
+    /**
+     * The time in days to retain the messages in a channel.
+     */
+    RetentionDays?: RetentionDays;
+  }
+  export interface ChannelSummary {
+    /**
+     * The name of the channel.
+     */
+    Name?: NonEmptyResourceName;
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The mode of the channel.
+     */
+    Mode?: ChannelMode;
+    /**
+     * The privacy setting of the channel.
+     */
+    Privacy?: ChannelPrivacy;
+    /**
+     * The metadata of the channel.
+     */
+    Metadata?: Metadata;
+    /**
+     * The time at which the last message in a channel was sent.
+     */
+    LastMessageTimestamp?: Timestamp;
+  }
+  export type ChannelSummaryList = ChannelSummary[];
+  export type ChimeArn = string;
   export type ClientRequestToken = string;
+  export type Content = string;
   export interface ConversationRetentionSettings {
     /**
-     * The number of days for which to retain chat conversation messages.
+     * The number of days for which to retain conversation messages.
      */
     RetentionDays?: RetentionDays;
   }
@@ -1290,9 +2305,85 @@ declare namespace Chime {
      */
     Account?: Account;
   }
+  export interface CreateAppInstanceAdminRequest {
+    /**
+     * The ARN of the administrator of the current AppInstance.
+     */
+    AppInstanceAdminArn: ChimeArn;
+    /**
+     * The ARN of the AppInstance.
+     */
+    AppInstanceArn: ChimeArn;
+  }
+  export interface CreateAppInstanceAdminResponse {
+    /**
+     * The name and ARN of the admin for the AppInstance.
+     */
+    AppInstanceAdmin?: Identity;
+    /**
+     * The ARN of the of the admin for the AppInstance.
+     */
+    AppInstanceArn?: ChimeArn;
+  }
+  export interface CreateAppInstanceRequest {
+    /**
+     * The name of the AppInstance.
+     */
+    Name: NonEmptyResourceName;
+    /**
+     * The metadata of the AppInstance. Limited to a 1KB string in UTF-8.
+     */
+    Metadata?: Metadata;
+    /**
+     * The ClientRequestToken of the AppInstance.
+     */
+    ClientRequestToken: ClientRequestToken;
+    /**
+     * Tags assigned to the AppInstanceUser.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateAppInstanceResponse {
+    /**
+     * The Amazon Resource Number (ARN) of the AppInstance.
+     */
+    AppInstanceArn?: ChimeArn;
+  }
+  export interface CreateAppInstanceUserRequest {
+    /**
+     * The ARN of the AppInstance request.
+     */
+    AppInstanceArn: ChimeArn;
+    /**
+     * The user ID of the AppInstance.
+     */
+    AppInstanceUserId: UserId;
+    /**
+     * The user's name.
+     */
+    Name: UserName;
+    /**
+     * The request's metadata. Limited to a 1KB string in UTF-8.
+     */
+    Metadata?: Metadata;
+    /**
+     * The token assigned to the user requesting an AppInstance.
+     */
+    ClientRequestToken: ClientRequestToken;
+    /**
+     * Tags assigned to the AppInstanceUser.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateAppInstanceUserResponse {
+    /**
+     * The user's ARN.
+     */
+    AppInstanceUserArn?: ChimeArn;
+  }
   export interface CreateAttendeeError {
     /**
-     * The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
      */
     ExternalUserId?: ExternalUserIdType;
     /**
@@ -1310,7 +2401,7 @@ declare namespace Chime {
      */
     MeetingId: GuidString;
     /**
-     * The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
      */
     ExternalUserId: ExternalUserIdType;
     /**
@@ -1320,7 +2411,7 @@ declare namespace Chime {
   }
   export interface CreateAttendeeRequestItem {
     /**
-     * The Amazon Chime SDK external user ID. Links the attendee to an identity managed by a builder application.
+     * The Amazon Chime SDK external user ID. An idempotency token. Links the attendee to an identity managed by a builder application.
      */
     ExternalUserId: ExternalUserIdType;
     /**
@@ -1355,6 +2446,174 @@ declare namespace Chime {
      */
     Bot?: Bot;
   }
+  export interface CreateChannelBanRequest {
+    /**
+     * The ARN of the ban request.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ARN of the member being banned.
+     */
+    MemberArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface CreateChannelBanResponse {
+    /**
+     * The ARN of the response to the ban request.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The ChannelArn and BannedIdentity of the member in the ban response.
+     */
+    Member?: Identity;
+  }
+  export interface CreateChannelMembershipRequest {
+    /**
+     * The ARN of the channel to which you're adding users.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ARN of the member you want to add to the channel.
+     */
+    MemberArn: ChimeArn;
+    /**
+     * The membership type of a user, DEFAULT or HIDDEN. Default members are always returned as part of ListChannelMemberships. Hidden members are only returned if the type filter in ListChannelMemberships equals HIDDEN. Otherwise hidden members are not returned. This is only supported by moderators.
+     */
+    Type: ChannelMembershipType;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface CreateChannelMembershipResponse {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The ARN and metadata of the member being added.
+     */
+    Member?: Identity;
+  }
+  export interface CreateChannelModeratorRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ARN of the moderator.
+     */
+    ChannelModeratorArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface CreateChannelModeratorResponse {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The ARNs of the channel and the moderator.
+     */
+    ChannelModerator?: Identity;
+  }
+  export interface CreateChannelRequest {
+    /**
+     * The ARN of the channel request.
+     */
+    AppInstanceArn: ChimeArn;
+    /**
+     * The name of the channel.
+     */
+    Name: NonEmptyResourceName;
+    /**
+     * The channel mode: UNRESTRICTED or RESTRICTED. Administrators, moderators, and channel members can add themselves and other members to unrestricted channels. Only administrators and moderators can add members to restricted channels.
+     */
+    Mode?: ChannelMode;
+    /**
+     * The channel's privacy level: PUBLIC or PRIVATE. Private channels aren't discoverable by users outside the channel. Public channels are discoverable by anyone in the AppInstance.
+     */
+    Privacy?: ChannelPrivacy;
+    /**
+     * The metadata of the creation request. Limited to 1KB and UTF-8.
+     */
+    Metadata?: Metadata;
+    /**
+     * The client token for the request. An Idempotency token.
+     */
+    ClientRequestToken: ClientRequestToken;
+    /**
+     * The tags for the creation request.
+     */
+    Tags?: TagList;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface CreateChannelResponse {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+  }
+  export interface CreateMediaCapturePipelineRequest {
+    /**
+     * Source type from which the media artifacts will be captured. A Chime SDK Meeting is the only supported source.
+     */
+    SourceType: MediaPipelineSourceType;
+    /**
+     * ARN of the source from which the media artifacts are captured.
+     */
+    SourceArn: Arn;
+    /**
+     * Destination type to which the media artifacts are saved. You must use an S3 bucket. 
+     */
+    SinkType: MediaPipelineSinkType;
+    /**
+     * The ARN of the sink type.
+     */
+    SinkArn: Arn;
+    /**
+     * The token assigned to the client making the pipeline request.
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface CreateMediaCapturePipelineResponse {
+    /**
+     * A media capture pipeline object, the ID, source type, source ARN, sink type, and sink ARN of a media capture pipeline object.
+     */
+    MediaCapturePipeline?: MediaCapturePipeline;
+  }
+  export interface CreateMeetingDialOutRequest {
+    /**
+     * The Amazon Chime SDK meeting ID.
+     */
+    MeetingId: GuidString;
+    /**
+     * Phone number used as the caller ID when the remote party receives a call.
+     */
+    FromPhoneNumber: E164PhoneNumber;
+    /**
+     * Phone number called when inviting someone to a meeting.
+     */
+    ToPhoneNumber: E164PhoneNumber;
+    /**
+     * Token used by the Amazon Chime SDK attendee. Call the CreateAttendee action to get a join token.
+     */
+    JoinToken: JoinTokenString;
+  }
+  export interface CreateMeetingDialOutResponse {
+    /**
+     * Unique ID that tracks API calls.
+     */
+    TransactionId?: GuidString;
+  }
   export interface CreateMeetingRequest {
     /**
      * The unique identifier for the client request. Use a different token for different meetings.
@@ -1369,7 +2628,7 @@ declare namespace Chime {
      */
     MeetingHostId?: ExternalUserIdType;
     /**
-     * The Region in which to create the meeting. Default: us-east-1. Available values: af-south-1, ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
+     *  The Region in which to create the meeting. Default: us-east-1.   Available values: af-south-1 , ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2 , ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2 , eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 . 
      */
     MediaRegion?: String;
     /**
@@ -1383,7 +2642,7 @@ declare namespace Chime {
   }
   export interface CreateMeetingResponse {
     /**
-     * The meeting information, including the meeting ID and MediaPlacement.
+     *  The meeting information, including the meeting ID and MediaPlacement . 
      */
     Meeting?: Meeting;
   }
@@ -1401,7 +2660,7 @@ declare namespace Chime {
      */
     MeetingHostId?: ExternalUserIdType;
     /**
-     * The Region in which to create the meeting. Default: us-east-1. Available values: af-south-1, ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
+     *  The Region in which to create the meeting. Default: us-east-1 .   Available values: af-south-1 , ap-northeast-1 , ap-northeast-2 , ap-south-1 , ap-southeast-1 , ap-southeast-2 , ca-central-1 , eu-central-1 , eu-north-1 , eu-south-1 , eu-west-1 , eu-west-2 , eu-west-3 , sa-east-1 , us-east-1 , us-east-2 , us-west-1 , us-west-2 . 
      */
     MediaRegion?: String;
     /**
@@ -1526,6 +2785,74 @@ declare namespace Chime {
      */
     Room?: Room;
   }
+  export interface CreateSipMediaApplicationCallRequest {
+    /**
+     * The phone number that a user calls from. This is a phone number in your Amazon Chime phone number inventory.
+     */
+    FromPhoneNumber: E164PhoneNumber;
+    /**
+     * The phone number that the service should call.
+     */
+    ToPhoneNumber: E164PhoneNumber;
+    /**
+     * The ID of the SIP media application.
+     */
+    SipMediaApplicationId: NonEmptyString;
+  }
+  export interface CreateSipMediaApplicationCallResponse {
+    /**
+     * The actual call.
+     */
+    SipMediaApplicationCall?: SipMediaApplicationCall;
+  }
+  export interface CreateSipMediaApplicationRequest {
+    /**
+     * The AWS Region assigned to the SIP media application.
+     */
+    AwsRegion: String;
+    /**
+     * The SIP media application name.
+     */
+    Name: SipMediaApplicationName;
+    /**
+     * List of endpoints (Lambda Amazon Resource Names) specified for the SIP media application. Currently, only one endpoint is supported.
+     */
+    Endpoints: SipMediaApplicationEndpointList;
+  }
+  export interface CreateSipMediaApplicationResponse {
+    /**
+     * The SIP media application details.
+     */
+    SipMediaApplication?: SipMediaApplication;
+  }
+  export interface CreateSipRuleRequest {
+    /**
+     * The name of the SIP rule.
+     */
+    Name: SipRuleName;
+    /**
+     * The type of trigger assigned to the SIP rule in TriggerValue, currently RequestUriHostname or ToPhoneNumber.
+     */
+    TriggerType: SipRuleTriggerType;
+    /**
+     * If TriggerType is RequestUriHostname, the value can be the outbound host name of an Amazon Chime Voice Connector. If TriggerType is ToPhoneNumber, the value can be a customer-owned phone number in the E164 format. The SipMediaApplication specified in the SipRule is triggered if the request URI in an incoming SIP request matches the RequestUriHostname, or if the To header in the incoming SIP request matches the ToPhoneNumber value.
+     */
+    TriggerValue: NonEmptyString;
+    /**
+     * Enables or disables a rule. You must disable rules before you can delete them.
+     */
+    Disabled?: NullableBoolean;
+    /**
+     * List of SIP media applications with priority and AWS Region. Only one SIP application per AWS Region can be used.
+     */
+    TargetApplications: SipRuleTargetApplicationList;
+  }
+  export interface CreateSipRuleResponse {
+    /**
+     * Returns the SIP rule information, including the rule ID, triggers, and target applications.
+     */
+    SipRule?: SipRule;
+  }
   export interface CreateUserRequest {
     /**
      * The Amazon Chime account ID.
@@ -1569,7 +2896,7 @@ declare namespace Chime {
      */
     Name: VoiceConnectorName;
     /**
-     * The AWS Region in which the Amazon Chime Voice Connector is created. Default value: us-east-1.
+     *  The AWS Region in which the Amazon Chime Voice Connector is created. Default value: us-east-1 . 
      */
     AwsRegion?: VoiceConnectorAwsRegion;
     /**
@@ -1618,6 +2945,34 @@ declare namespace Chime {
   }
   export interface DeleteAccountResponse {
   }
+  export interface DeleteAppInstanceAdminRequest {
+    /**
+     * The ARN of the AppInstance's administrator.
+     */
+    AppInstanceAdminArn: ChimeArn;
+    /**
+     * The ARN of the AppInstance.
+     */
+    AppInstanceArn: ChimeArn;
+  }
+  export interface DeleteAppInstanceRequest {
+    /**
+     * The ARN of the AppInstance.
+     */
+    AppInstanceArn: ChimeArn;
+  }
+  export interface DeleteAppInstanceStreamingConfigurationsRequest {
+    /**
+     * The ARN of the streaming configurations being deleted.
+     */
+    AppInstanceArn: ChimeArn;
+  }
+  export interface DeleteAppInstanceUserRequest {
+    /**
+     * The ARN of the user request being deleted.
+     */
+    AppInstanceUserArn: ChimeArn;
+  }
   export interface DeleteAttendeeRequest {
     /**
      * The Amazon Chime SDK meeting ID.
@@ -1628,6 +2983,72 @@ declare namespace Chime {
      */
     AttendeeId: GuidString;
   }
+  export interface DeleteChannelBanRequest {
+    /**
+     * The ARN of the channel from which the AppInstanceUser was banned.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ARN of the AppInstanceUser that you want to reinstate.
+     */
+    MemberArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface DeleteChannelMembershipRequest {
+    /**
+     * The ARN of the channel from which you want to remove the user.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ARN of the member that you're removing from the channel.
+     */
+    MemberArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface DeleteChannelMessageRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ID of the message being deleted.
+     */
+    MessageId: MessageId;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface DeleteChannelModeratorRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ARN of the moderator being deleted.
+     */
+    ChannelModeratorArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface DeleteChannelRequest {
+    /**
+     * The ARN of the channel being deleted.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
   export interface DeleteEventsConfigurationRequest {
     /**
      * The Amazon Chime account ID.
@@ -1637,6 +3058,12 @@ declare namespace Chime {
      * The bot ID.
      */
     BotId: NonEmptyString;
+  }
+  export interface DeleteMediaCapturePipelineRequest {
+    /**
+     * The ID of the media capture pipeline being deleted. 
+     */
+    MediaPipelineId: GuidString;
   }
   export interface DeleteMeetingRequest {
     /**
@@ -1683,6 +3110,18 @@ declare namespace Chime {
      * The chat room ID.
      */
     RoomId: NonEmptyString;
+  }
+  export interface DeleteSipMediaApplicationRequest {
+    /**
+     * The SIP media application ID.
+     */
+    SipMediaApplicationId: NonEmptyString;
+  }
+  export interface DeleteSipRuleRequest {
+    /**
+     * The SIP rule ID.
+     */
+    SipRuleId: NonEmptyString;
   }
   export interface DeleteVoiceConnectorEmergencyCallingConfigurationRequest {
     /**
@@ -1735,6 +3174,162 @@ declare namespace Chime {
      * The Amazon Chime Voice Connector ID.
      */
     VoiceConnectorId: NonEmptyString;
+  }
+  export interface DescribeAppInstanceAdminRequest {
+    /**
+     * The ARN of the AppInstanceAdmin.
+     */
+    AppInstanceAdminArn: ChimeArn;
+    /**
+     * The ARN of the AppInstance.
+     */
+    AppInstanceArn: ChimeArn;
+  }
+  export interface DescribeAppInstanceAdminResponse {
+    /**
+     * The ARN and name of the AppInstanceUser, the ARN of the AppInstance, and the created and last-updated timestamps. All timestamps use epoch milliseconds.
+     */
+    AppInstanceAdmin?: AppInstanceAdmin;
+  }
+  export interface DescribeAppInstanceRequest {
+    /**
+     * The ARN of the AppInstance.
+     */
+    AppInstanceArn: ChimeArn;
+  }
+  export interface DescribeAppInstanceResponse {
+    /**
+     * The ARN, metadata, created and last-updated timestamps, and the name of the AppInstance. All timestamps use epoch milliseconds.
+     */
+    AppInstance?: AppInstance;
+  }
+  export interface DescribeAppInstanceUserRequest {
+    /**
+     * The ARN of the AppInstanceUser.
+     */
+    AppInstanceUserArn: ChimeArn;
+  }
+  export interface DescribeAppInstanceUserResponse {
+    /**
+     * The name of the AppInstanceUser.
+     */
+    AppInstanceUser?: AppInstanceUser;
+  }
+  export interface DescribeChannelBanRequest {
+    /**
+     * The ARN of the channel from which the user is banned.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ARN of the member being banned.
+     */
+    MemberArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface DescribeChannelBanResponse {
+    /**
+     * The details of the ban.
+     */
+    ChannelBan?: ChannelBan;
+  }
+  export interface DescribeChannelMembershipForAppInstanceUserRequest {
+    /**
+     * The ARN of the channel to which the user belongs.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ARN of the user in a channel.
+     */
+    AppInstanceUserArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface DescribeChannelMembershipForAppInstanceUserResponse {
+    /**
+     * The channel to which a user belongs.
+     */
+    ChannelMembership?: ChannelMembershipForAppInstanceUserSummary;
+  }
+  export interface DescribeChannelMembershipRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ARN of the member.
+     */
+    MemberArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface DescribeChannelMembershipResponse {
+    /**
+     * The details of the membership.
+     */
+    ChannelMembership?: ChannelMembership;
+  }
+  export interface DescribeChannelModeratedByAppInstanceUserRequest {
+    /**
+     * The ARN of the moderated channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ARN of the AppInstanceUser in the moderated channel.
+     */
+    AppInstanceUserArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface DescribeChannelModeratedByAppInstanceUserResponse {
+    /**
+     * The moderated channel.
+     */
+    Channel?: ChannelModeratedByAppInstanceUserSummary;
+  }
+  export interface DescribeChannelModeratorRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ARN of the channel moderator.
+     */
+    ChannelModeratorArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface DescribeChannelModeratorResponse {
+    /**
+     * The details of the channel moderator.
+     */
+    ChannelModerator?: ChannelModerator;
+  }
+  export interface DescribeChannelRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface DescribeChannelResponse {
+    /**
+     * The channel details.
+     */
+    Channel?: Channel;
   }
   export interface DisassociatePhoneNumberFromUserRequest {
     /**
@@ -1802,6 +3397,50 @@ declare namespace Chime {
      */
     DNIS?: DNISEmergencyCallingConfigurationList;
   }
+  export interface EngineTranscribeMedicalSettings {
+    /**
+     * The language code specified for the Amazon Transcribe Medical engine.
+     */
+    LanguageCode: TranscribeMedicalLanguageCode;
+    /**
+     * The specialty specified for the Amazon Transcribe Medical engine.
+     */
+    Specialty: TranscribeMedicalSpecialty;
+    /**
+     * The type of transcription.
+     */
+    Type: TranscribeMedicalType;
+    /**
+     * The name of the vocabulary passed to Amazon Transcribe Medical.
+     */
+    VocabularyName?: String;
+    /**
+     * The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the meeting's Region.
+     */
+    Region?: TranscribeMedicalRegion;
+  }
+  export interface EngineTranscribeSettings {
+    /**
+     * The language code specified for the Amazon Transcribe engine.
+     */
+    LanguageCode: TranscribeLanguageCode;
+    /**
+     * The filtering method passed to Amazon Transcribe.
+     */
+    VocabularyFilterMethod?: TranscribeVocabularyFilterMethod;
+    /**
+     * The name of the vocabulary filter passed to Amazon Transcribe.
+     */
+    VocabularyFilterName?: String;
+    /**
+     * The name of the vocabulary passed to Amazon Transcribe.
+     */
+    VocabularyName?: String;
+    /**
+     * The AWS Region passed to Amazon Transcribe. If you don't specify a Region, Amazon Chime uses the meeting's Region.
+     */
+    Region?: TranscribeRegion;
+  }
   export type ErrorCode = "BadRequest"|"Conflict"|"Forbidden"|"NotFound"|"PreconditionFailed"|"ResourceLimitExceeded"|"ServiceFailure"|"AccessDenied"|"ServiceUnavailable"|"Throttled"|"Throttling"|"Unauthorized"|"Unprocessable"|"VoiceConnectorGroupAssociationsExist"|"PhoneNumberAssociationsExist"|string;
   export interface EventsConfiguration {
     /**
@@ -1819,6 +3458,7 @@ declare namespace Chime {
   }
   export type ExternalMeetingIdType = string;
   export type ExternalUserIdType = string;
+  export type FunctionArn = string;
   export type GeoMatchLevel = "Country"|"AreaCode"|string;
   export interface GeoMatchParams {
     /**
@@ -1854,6 +3494,34 @@ declare namespace Chime {
      */
     AccountSettings?: AccountSettings;
   }
+  export interface GetAppInstanceRetentionSettingsRequest {
+    /**
+     * The ARN of the AppInstance.
+     */
+    AppInstanceArn: ChimeArn;
+  }
+  export interface GetAppInstanceRetentionSettingsResponse {
+    /**
+     * The retention settings for the AppInstance.
+     */
+    AppInstanceRetentionSettings?: AppInstanceRetentionSettings;
+    /**
+     * The timestamp representing the time at which the specified items are retained, in Epoch Seconds.
+     */
+    InitiateDeletionTimestamp?: Timestamp;
+  }
+  export interface GetAppInstanceStreamingConfigurationsRequest {
+    /**
+     * The ARN of the AppInstance.
+     */
+    AppInstanceArn: ChimeArn;
+  }
+  export interface GetAppInstanceStreamingConfigurationsResponse {
+    /**
+     * The streaming settings.
+     */
+    AppInstanceStreamingConfigurations?: AppInstanceStreamingConfigurationList;
+  }
   export interface GetAttendeeRequest {
     /**
      * The Amazon Chime SDK meeting ID.
@@ -1886,6 +3554,26 @@ declare namespace Chime {
      */
     Bot?: Bot;
   }
+  export interface GetChannelMessageRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ID of the message.
+     */
+    MessageId: MessageId;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface GetChannelMessageResponse {
+    /**
+     * The details of and content in the message.
+     */
+    ChannelMessage?: ChannelMessage;
+  }
   export interface GetEventsConfigurationRequest {
     /**
      * The Amazon Chime account ID.
@@ -1912,6 +3600,18 @@ declare namespace Chime {
      */
     VoiceConnector?: VoiceConnectorSettings;
   }
+  export interface GetMediaCapturePipelineRequest {
+    /**
+     * The ID of the pipeline that you want to get.
+     */
+    MediaPipelineId: GuidString;
+  }
+  export interface GetMediaCapturePipelineResponse {
+    /**
+     * The media capture pipeline object.
+     */
+    MediaCapturePipeline?: MediaCapturePipeline;
+  }
   export interface GetMeetingRequest {
     /**
      * The Amazon Chime SDK meeting ID.
@@ -1923,6 +3623,14 @@ declare namespace Chime {
      * The Amazon Chime SDK meeting information.
      */
     Meeting?: Meeting;
+  }
+  export interface GetMessagingSessionEndpointRequest {
+  }
+  export interface GetMessagingSessionEndpointResponse {
+    /**
+     * The endpoint returned in the response.
+     */
+    Endpoint?: MessagingSessionEndpoint;
   }
   export interface GetPhoneNumberOrderRequest {
     /**
@@ -2005,6 +3713,42 @@ declare namespace Chime {
      * The room details.
      */
     Room?: Room;
+  }
+  export interface GetSipMediaApplicationLoggingConfigurationRequest {
+    /**
+     * The SIP media application ID.
+     */
+    SipMediaApplicationId: NonEmptyString;
+  }
+  export interface GetSipMediaApplicationLoggingConfigurationResponse {
+    /**
+     * The actual logging configuration.
+     */
+    SipMediaApplicationLoggingConfiguration?: SipMediaApplicationLoggingConfiguration;
+  }
+  export interface GetSipMediaApplicationRequest {
+    /**
+     * The SIP media application ID.
+     */
+    SipMediaApplicationId: NonEmptyString;
+  }
+  export interface GetSipMediaApplicationResponse {
+    /**
+     * The SIP media application details.
+     */
+    SipMediaApplication?: SipMediaApplication;
+  }
+  export interface GetSipRuleRequest {
+    /**
+     * The SIP rule ID.
+     */
+    SipRuleId: NonEmptyString;
+  }
+  export interface GetSipRuleResponse {
+    /**
+     * The SIP rule details.
+     */
+    SipRule?: SipRule;
   }
   export interface GetUserRequest {
     /**
@@ -2147,6 +3891,16 @@ declare namespace Chime {
     Termination?: Termination;
   }
   export type GuidString = string;
+  export interface Identity {
+    /**
+     * The ARN in an Identity.
+     */
+    Arn?: ChimeArn;
+    /**
+     * The name in an Identity.
+     */
+    Name?: ResourceName;
+  }
   export type Integer = number;
   export interface Invite {
     /**
@@ -2220,6 +3974,82 @@ declare namespace Chime {
      */
     NextToken?: String;
   }
+  export interface ListAppInstanceAdminsRequest {
+    /**
+     * The ARN of the AppInstance.
+     */
+    AppInstanceArn: ChimeArn;
+    /**
+     * The maximum number of administrators that you want to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token returned from previous API requests until the number of administrators is reached.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAppInstanceAdminsResponse {
+    /**
+     * The ARN of the AppInstance.
+     */
+    AppInstanceArn?: ChimeArn;
+    /**
+     * The information for each administrator.
+     */
+    AppInstanceAdmins?: AppInstanceAdminList;
+    /**
+     * The token returned from previous API requests until the number of administrators is reached.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAppInstanceUsersRequest {
+    /**
+     * The ARN of the AppInstance.
+     */
+    AppInstanceArn: ChimeArn;
+    /**
+     * The maximum number of requests that you want returned.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token passed by previous API calls until all requested users are returned.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAppInstanceUsersResponse {
+    /**
+     * The ARN of the AppInstance.
+     */
+    AppInstanceArn?: ChimeArn;
+    /**
+     * The information for each requested AppInstanceUser.
+     */
+    AppInstanceUsers?: AppInstanceUserList;
+    /**
+     * The token passed by previous API calls until all requested users are returned.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAppInstancesRequest {
+    /**
+     * The maximum number of AppInstances that you want to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token passed by previous API requests until you reach the maximum number of AppInstances.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListAppInstancesResponse {
+    /**
+     * The information for each AppInstance.
+     */
+    AppInstances?: AppInstanceList;
+    /**
+     * The token passed by previous API requests until the maximum number of AppInstances is reached.
+     */
+    NextToken?: NextToken;
+  }
   export interface ListAttendeeTagsRequest {
     /**
      * The Amazon Chime SDK meeting ID.
@@ -2281,6 +4111,258 @@ declare namespace Chime {
     Bots?: BotList;
     /**
      * The token to use to retrieve the next page of results.
+     */
+    NextToken?: String;
+  }
+  export interface ListChannelBansRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The maximum number of bans that you want returned.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token passed by previous API calls until all requested bans are returned.
+     */
+    NextToken?: NextToken;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface ListChannelBansResponse {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The token passed by previous API calls until all requested bans are returned.
+     */
+    NextToken?: NextToken;
+    /**
+     * The information for each requested ban.
+     */
+    ChannelBans?: ChannelBanSummaryList;
+  }
+  export interface ListChannelMembershipsForAppInstanceUserRequest {
+    /**
+     * The ARN of the AppInstanceUsers
+     */
+    AppInstanceUserArn?: ChimeArn;
+    /**
+     * The maximum number of users that you want returned.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token returned from previous API requests until the number of channel memberships is reached.
+     */
+    NextToken?: NextToken;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface ListChannelMembershipsForAppInstanceUserResponse {
+    /**
+     * The token passed by previous API calls until all requested users are returned.
+     */
+    ChannelMemberships?: ChannelMembershipForAppInstanceUserSummaryList;
+    /**
+     * The token passed by previous API calls until all requested users are returned.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListChannelMembershipsRequest {
+    /**
+     * The maximum number of channel memberships that you want returned.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The membership type of a user, DEFAULT or HIDDEN. Default members are always returned as part of ListChannelMemberships. Hidden members are only returned if the type filter in ListChannelMemberships equals HIDDEN. Otherwise hidden members are not returned.
+     */
+    Type?: ChannelMembershipType;
+    /**
+     * The maximum number of channel memberships that you want returned.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token passed by previous API calls until all requested channel memberships are returned.
+     */
+    NextToken?: NextToken;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface ListChannelMembershipsResponse {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The information for the requested channel memberships.
+     */
+    ChannelMemberships?: ChannelMembershipSummaryList;
+    /**
+     * The token passed by previous API calls until all requested channel memberships are returned.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListChannelMessagesRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The order in which you want messages sorted. Default is Descending, based on time created.
+     */
+    SortOrder?: SortOrder;
+    /**
+     * The initial or starting time stamp for your requested messages.
+     */
+    NotBefore?: Timestamp;
+    /**
+     * The final or ending time stamp for your requested messages.
+     */
+    NotAfter?: Timestamp;
+    /**
+     * The maximum number of messages that you want returned.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token passed by previous API calls until all requested messages are returned.
+     */
+    NextToken?: NextToken;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface ListChannelMessagesResponse {
+    /**
+     * The ARN of the channel containing the requested messages.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The token passed by previous API calls until all requested messages are returned.
+     */
+    NextToken?: NextToken;
+    /**
+     * The information about, and content of, each requested message.
+     */
+    ChannelMessages?: ChannelMessageSummaryList;
+  }
+  export interface ListChannelModeratorsRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The maximum number of moderators that you want returned.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token passed by previous API calls until all requested moderators are returned.
+     */
+    NextToken?: NextToken;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface ListChannelModeratorsResponse {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The token passed by previous API calls until all requested moderators are returned.
+     */
+    NextToken?: NextToken;
+    /**
+     * The information about and names of each moderator.
+     */
+    ChannelModerators?: ChannelModeratorSummaryList;
+  }
+  export interface ListChannelsModeratedByAppInstanceUserRequest {
+    /**
+     * The ARN of the user in the moderated channel.
+     */
+    AppInstanceUserArn?: ChimeArn;
+    /**
+     * The maximum number of channels in the request.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token returned from previous API requests until the number of channels moderated by the user is reached.
+     */
+    NextToken?: NextToken;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface ListChannelsModeratedByAppInstanceUserResponse {
+    /**
+     * The moderated channels in the request.
+     */
+    Channels?: ChannelModeratedByAppInstanceUserSummaryList;
+    /**
+     * The token returned from previous API requests until the number of channels moderated by the user is reached.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListChannelsRequest {
+    /**
+     * The ARN of the AppInstance.
+     */
+    AppInstanceArn: ChimeArn;
+    /**
+     * The privacy setting. PUBLIC retrieves all the public channels. PRIVATE retrieves private channels. Only an AppInstanceAdmin can retrieve private channels. 
+     */
+    Privacy?: ChannelPrivacy;
+    /**
+     * The maximum number of channels that you want to return.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token passed by previous API calls until all requested channels are returned.
+     */
+    NextToken?: NextToken;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface ListChannelsResponse {
+    /**
+     * The information about each channel.
+     */
+    Channels?: ChannelSummaryList;
+    /**
+     * The token returned from previous API requests until the number of channels is reached.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListMediaCapturePipelinesRequest {
+    /**
+     * The token used to retrieve the next page of results.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in a single call. Valid Range: 1 - 99.
+     */
+    MaxResults?: ResultMax;
+  }
+  export interface ListMediaCapturePipelinesResponse {
+    /**
+     * The media capture pipeline objects in the list.
+     */
+    MediaCapturePipelines?: MediaCapturePipelineList;
+    /**
+     * The token used to retrieve the next page of results. 
      */
     NextToken?: String;
   }
@@ -2456,6 +4538,62 @@ declare namespace Chime {
      */
     NextToken?: String;
   }
+  export interface ListSipMediaApplicationsRequest {
+    /**
+     * The maximum number of results to return in a single call. Defaults to 100.
+     */
+    MaxResults?: ResultMax;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: NextTokenString;
+  }
+  export interface ListSipMediaApplicationsResponse {
+    /**
+     * List of SIP media applications and application details.
+     */
+    SipMediaApplications?: SipMediaApplicationList;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: NextTokenString;
+  }
+  export interface ListSipRulesRequest {
+    /**
+     * The SIP media application ID.
+     */
+    SipMediaApplicationId?: NonEmptyString;
+    /**
+     * The maximum number of results to return in a single call. Defaults to 100.
+     */
+    MaxResults?: ResultMax;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: NextTokenString;
+  }
+  export interface ListSipRulesResponse {
+    /**
+     * List of SIP rules and rule details.
+     */
+    SipRules?: SipRuleList;
+    /**
+     * The token to use to retrieve the next page of results.
+     */
+    NextToken?: NextTokenString;
+  }
+  export interface ListSupportedPhoneNumberCountriesRequest {
+    /**
+     * The phone number product type.
+     */
+    ProductType: PhoneNumberProductType;
+  }
+  export interface ListSupportedPhoneNumberCountriesResponse {
+    /**
+     * The supported phone number countries.
+     */
+    PhoneNumberCountries?: PhoneNumberCountriesList;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * The resource ARN.
@@ -2570,6 +4708,45 @@ declare namespace Chime {
   }
   export interface LogoutUserResponse {
   }
+  export type MaxResults = number;
+  export interface MediaCapturePipeline {
+    /**
+     * The ID of a media capture pipeline.
+     */
+    MediaPipelineId?: GuidString;
+    /**
+     * Source type from which media artifacts are saved. You must use ChimeMeeting.
+     */
+    SourceType?: MediaPipelineSourceType;
+    /**
+     * ARN of the source from which the media artifacts will be saved.
+     */
+    SourceArn?: Arn;
+    /**
+     * The status of the media capture pipeline.
+     */
+    Status?: MediaPipelineStatus;
+    /**
+     * Destination type to which the media artifacts are saved. You must use an S3 Bucket.
+     */
+    SinkType?: MediaPipelineSinkType;
+    /**
+     * ARN of the destination to which the media artifacts are saved.
+     */
+    SinkArn?: Arn;
+    /**
+     * The time at which the capture pipeline was created, in ISO 8601 format.
+     */
+    CreatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The time at which the capture pipeline was updated, in ISO 8601 format.
+     */
+    UpdatedTimestamp?: Iso8601Timestamp;
+  }
+  export type MediaCapturePipelineList = MediaCapturePipeline[];
+  export type MediaPipelineSinkType = "S3Bucket"|string;
+  export type MediaPipelineSourceType = "ChimeSdkMeeting"|string;
+  export type MediaPipelineStatus = "Initializing"|"InProgress"|"Failed"|"Stopping"|"Stopped"|string;
   export interface MediaPlacement {
     /**
      * The audio host URL.
@@ -2599,6 +4776,10 @@ declare namespace Chime {
      * The turn control URL.
      */
     TurnControlUrl?: UriType;
+    /**
+     * The URL of the S3 bucket used to store the captured media.
+     */
+    EventIngestionUrl?: UriType;
   }
   export interface Meeting {
     /**
@@ -2614,7 +4795,7 @@ declare namespace Chime {
      */
     MediaPlacement?: MediaPlacement;
     /**
-     * The Region in which to create the meeting. Available values: af-south-1, ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
+     * The Region in which you create the meeting. Available values: af-south-1, ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2, ca-central-1, eu-central-1, eu-north-1, eu-south-1, eu-west-1, eu-west-2, eu-west-3, sa-east-1, us-east-1, us-east-2, us-west-1, us-west-2.
      */
     MediaRegion?: String;
   }
@@ -2653,6 +4834,7 @@ declare namespace Chime {
      */
     AccountId?: NonEmptyString;
   }
+  export type MemberArns = ChimeArn[];
   export interface MemberError {
     /**
      * The member ID.
@@ -2669,6 +4851,7 @@ declare namespace Chime {
   }
   export type MemberErrorList = MemberError[];
   export type MemberType = "User"|"Bot"|"Webhook"|string;
+  export type Members = Identity[];
   export interface MembershipItem {
     /**
      * The member ID.
@@ -2680,10 +4863,22 @@ declare namespace Chime {
     Role?: RoomMembershipRole;
   }
   export type MembershipItemList = MembershipItem[];
+  export type MessageId = string;
+  export interface MessagingSessionEndpoint {
+    /**
+     * The endpoint to which you establish a websocket connection.
+     */
+    Url?: UrlType;
+  }
+  export type Metadata = string;
+  export type NextToken = string;
   export type NextTokenString = string;
+  export type NonEmptyContent = string;
+  export type NonEmptyResourceName = string;
   export type NonEmptyString = string;
   export type NonEmptyString128 = string;
   export type NonEmptyStringList = String[];
+  export type NonNullableBoolean = boolean;
   export type NotificationTarget = "EventBridge"|"SNS"|"SQS"|string;
   export type NullableBoolean = boolean;
   export type NumberSelectionBehavior = "PreferSticky"|"AvoidSticky"|string;
@@ -2727,7 +4922,7 @@ declare namespace Chime {
      */
     Priority?: OriginationRoutePriority;
     /**
-     * The weight associated with the host. If hosts are equal in priority, calls are distributed among them based on their relative weight.
+     * The weight associated with the host. If hosts are equal in priority, calls are redistributed among them based on their relative weight.
      */
     Weight?: OriginationRouteWeight;
   }
@@ -2756,6 +4951,10 @@ declare namespace Chime {
      * The phone number, in E.164 format.
      */
     E164PhoneNumber?: E164PhoneNumber;
+    /**
+     * The phone number country. Format: ISO 3166-1 alpha-2.
+     */
+    Country?: Alpha2CountryCode;
     /**
      * The phone number type.
      */
@@ -2812,7 +5011,7 @@ declare namespace Chime {
     AssociatedTimestamp?: Iso8601Timestamp;
   }
   export type PhoneNumberAssociationList = PhoneNumberAssociation[];
-  export type PhoneNumberAssociationName = "AccountId"|"UserId"|"VoiceConnectorId"|"VoiceConnectorGroupId"|string;
+  export type PhoneNumberAssociationName = "AccountId"|"UserId"|"VoiceConnectorId"|"VoiceConnectorGroupId"|"SipRuleId"|string;
   export interface PhoneNumberCapabilities {
     /**
      * Allows or denies inbound calling for the specified phone number.
@@ -2838,6 +5037,17 @@ declare namespace Chime {
      * Allows or denies outbound MMS messaging for the specified phone number.
      */
     OutboundMMS?: NullableBoolean;
+  }
+  export type PhoneNumberCountriesList = PhoneNumberCountry[];
+  export interface PhoneNumberCountry {
+    /**
+     * The phone number country code. Format: ISO 3166-1 alpha-2.
+     */
+    CountryCode?: Alpha2CountryCode;
+    /**
+     * The supported phone number types. 
+     */
+    SupportedPhoneNumberTypes?: PhoneNumberTypeList;
   }
   export interface PhoneNumberError {
     /**
@@ -2874,19 +5084,20 @@ declare namespace Chime {
      */
     OrderedPhoneNumbers?: OrderedPhoneNumberList;
     /**
-     * The phone number order creation timestamp, in ISO 8601 format.
+     * The phone number order creation time stamp, in ISO 8601 format.
      */
     CreatedTimestamp?: Iso8601Timestamp;
     /**
-     * The updated phone number order timestamp, in ISO 8601 format.
+     * The updated phone number order time stamp, in ISO 8601 format.
      */
     UpdatedTimestamp?: Iso8601Timestamp;
   }
   export type PhoneNumberOrderList = PhoneNumberOrder[];
   export type PhoneNumberOrderStatus = "Processing"|"Successful"|"Failed"|"Partial"|string;
-  export type PhoneNumberProductType = "BusinessCalling"|"VoiceConnector"|string;
+  export type PhoneNumberProductType = "BusinessCalling"|"VoiceConnector"|"SipMediaApplicationDialIn"|string;
   export type PhoneNumberStatus = "AcquireInProgress"|"AcquireFailed"|"Unassigned"|"Assigned"|"ReleaseInProgress"|"DeleteInProgress"|"ReleaseFailed"|"DeleteFailed"|string;
   export type PhoneNumberType = "Local"|"TollFree"|string;
+  export type PhoneNumberTypeList = PhoneNumberType[];
   export type Port = number;
   export type PositiveInteger = number;
   export type ProfileServiceMaxResults = number;
@@ -2934,15 +5145,15 @@ declare namespace Chime {
      */
     Capabilities?: CapabilityList;
     /**
-     * The created timestamp, in ISO 8601 format.
+     * The created time stamp, in ISO 8601 format.
      */
     CreatedTimestamp?: Iso8601Timestamp;
     /**
-     * The updated timestamp, in ISO 8601 format.
+     * The updated time stamp, in ISO 8601 format.
      */
     UpdatedTimestamp?: Iso8601Timestamp;
     /**
-     * The ended timestamp, in ISO 8601 format.
+     * The ended time stamp, in ISO 8601 format.
      */
     EndedTimestamp?: Iso8601Timestamp;
     /**
@@ -2965,6 +5176,42 @@ declare namespace Chime {
   export type ProxySessionNameString = string;
   export type ProxySessionStatus = "Open"|"InProgress"|"Closed"|string;
   export type ProxySessions = ProxySession[];
+  export interface PutAppInstanceRetentionSettingsRequest {
+    /**
+     * The ARN of the AppInstance.
+     */
+    AppInstanceArn: ChimeArn;
+    /**
+     * The time in days to retain data. Data type: number.
+     */
+    AppInstanceRetentionSettings: AppInstanceRetentionSettings;
+  }
+  export interface PutAppInstanceRetentionSettingsResponse {
+    /**
+     * The time in days to retain data. Data type: number.
+     */
+    AppInstanceRetentionSettings?: AppInstanceRetentionSettings;
+    /**
+     * The time at which the API deletes data.
+     */
+    InitiateDeletionTimestamp?: Timestamp;
+  }
+  export interface PutAppInstanceStreamingConfigurationsRequest {
+    /**
+     * The ARN of the AppInstance.
+     */
+    AppInstanceArn: ChimeArn;
+    /**
+     * The streaming configurations set for an AppInstance.
+     */
+    AppInstanceStreamingConfigurations: AppInstanceStreamingConfigurationList;
+  }
+  export interface PutAppInstanceStreamingConfigurationsResponse {
+    /**
+     * The streaming configurations of an AppInstance.
+     */
+    AppInstanceStreamingConfigurations?: AppInstanceStreamingConfigurationList;
+  }
   export interface PutEventsConfigurationRequest {
     /**
      * The Amazon Chime account ID.
@@ -3005,6 +5252,19 @@ declare namespace Chime {
      * The timestamp representing the time at which the specified items are permanently deleted, in ISO 8601 format.
      */
     InitiateDeletionTimestamp?: Iso8601Timestamp;
+  }
+  export interface PutSipMediaApplicationLoggingConfigurationRequest {
+    /**
+     * The SIP media application ID.
+     */
+    SipMediaApplicationId: NonEmptyString;
+    /**
+     * The actual logging configuration.
+     */
+    SipMediaApplicationLoggingConfiguration?: SipMediaApplicationLoggingConfiguration;
+  }
+  export interface PutSipMediaApplicationLoggingConfigurationResponse {
+    SipMediaApplicationLoggingConfiguration?: SipMediaApplicationLoggingConfiguration;
   }
   export interface PutVoiceConnectorEmergencyCallingConfigurationRequest {
     /**
@@ -3124,6 +5384,30 @@ declare namespace Chime {
      */
     Termination?: Termination;
   }
+  export interface RedactChannelMessageRequest {
+    /**
+     * The ARN of the channel containing the messages that you want to redact.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ID of the message being redacted.
+     */
+    MessageId: MessageId;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface RedactChannelMessageResponse {
+    /**
+     * The ARN of the channel containing the messages that you want to redact.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The ID of the message being redacted.
+     */
+    MessageId?: MessageId;
+  }
   export interface RedactConversationMessageRequest {
     /**
      * The Amazon Chime account ID.
@@ -3186,6 +5470,7 @@ declare namespace Chime {
      */
     User?: User;
   }
+  export type ResourceName = string;
   export interface RestorePhoneNumberRequest {
     /**
      * The phone number.
@@ -3260,37 +5545,42 @@ declare namespace Chime {
   export type RoomMembershipRole = "Administrator"|"Member"|string;
   export interface RoomRetentionSettings {
     /**
-     * The number of days for which to retain chat room messages.
+     * The number of days for which to retain chat-room messages.
      */
     RetentionDays?: RetentionDays;
   }
+  export type SMAUpdateCallArgumentsMap = {[key: string]: SensitiveString};
   export interface SearchAvailablePhoneNumbersRequest {
     /**
-     * The area code used to filter results.
+     * The area code used to filter results. Only applies to the US.
      */
     AreaCode?: String;
     /**
-     * The city used to filter results.
+     * The city used to filter results. Only applies to the US.
      */
     City?: String;
     /**
-     * The country used to filter results.
+     * The country used to filter results. Defaults to the US Format: ISO 3166-1 alpha-2.
      */
-    Country?: String;
+    Country?: Alpha2CountryCode;
     /**
-     * The state used to filter results.
+     * The state used to filter results. Required only if you provide City. Only applies to the US.
      */
     State?: String;
     /**
-     * The toll-free prefix that you use to filter results.
+     * The toll-free prefix that you use to filter results. Only applies to the US.
      */
     TollFreePrefix?: TollFreePrefix;
+    /**
+     * The phone number type used to filter results. Required for non-US numbers.
+     */
+    PhoneNumberType?: PhoneNumberType;
     /**
      * The maximum number of results to return in a single call.
      */
     MaxResults?: PhoneNumberMaxResults;
     /**
-     * The token to use to retrieve the next page of results.
+     * The token used to retrieve the next page of results.
      */
     NextToken?: String;
   }
@@ -3299,6 +5589,50 @@ declare namespace Chime {
      * List of phone numbers, in E.164 format.
      */
     E164PhoneNumbers?: E164PhoneNumberList;
+    /**
+     * The token used to retrieve the next page of search results.
+     */
+    NextToken?: String;
+  }
+  export interface SendChannelMessageRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The content of the message.
+     */
+    Content: NonEmptyContent;
+    /**
+     * The type of message, STANDARD or CONTROL.
+     */
+    Type: ChannelMessageType;
+    /**
+     * Boolean that controls whether the message is persisted on the back end. Required.
+     */
+    Persistence: ChannelMessagePersistenceType;
+    /**
+     * The optional metadata for each message.
+     */
+    Metadata?: Metadata;
+    /**
+     * The Idempotency token for each client request.
+     */
+    ClientRequestToken: ClientRequestToken;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface SendChannelMessageResponse {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The ID string assigned to each message.
+     */
+    MessageId?: MessageId;
   }
   export type SensitiveString = string;
   export type SensitiveStringList = SensitiveString[];
@@ -3309,6 +5643,127 @@ declare namespace Chime {
     GroupName?: NonEmptyString;
   }
   export type SigninDelegateGroupList = SigninDelegateGroup[];
+  export type SipApplicationPriority = number;
+  export interface SipMediaApplication {
+    /**
+     * The SIP media application ID.
+     */
+    SipMediaApplicationId?: NonEmptyString;
+    /**
+     * The AWS Region in which the SIP media application is created.
+     */
+    AwsRegion?: String;
+    /**
+     * The name of the SIP media application.
+     */
+    Name?: SipMediaApplicationName;
+    /**
+     * List of endpoints for SIP media application. Currently, only one endpoint per SIP media application is permitted.
+     */
+    Endpoints?: SipMediaApplicationEndpointList;
+    /**
+     * The SIP media application creation timestamp, in ISO 8601 format.
+     */
+    CreatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The SIP media application updated timestamp, in ISO 8601 format.
+     */
+    UpdatedTimestamp?: Iso8601Timestamp;
+  }
+  export interface SipMediaApplicationCall {
+    /**
+     * The transaction ID of a call.
+     */
+    TransactionId?: GuidString;
+  }
+  export interface SipMediaApplicationEndpoint {
+    /**
+     * Valid Amazon Resource Name (ARN) of the Lambda function. The function must be created in the same AWS Region as the SIP media application.
+     */
+    LambdaArn?: FunctionArn;
+  }
+  export type SipMediaApplicationEndpointList = SipMediaApplicationEndpoint[];
+  export type SipMediaApplicationList = SipMediaApplication[];
+  export interface SipMediaApplicationLoggingConfiguration {
+    /**
+     * Enables application message logs for the SIP media application.
+     */
+    EnableSipMediaApplicationMessageLogs?: Boolean;
+  }
+  export type SipMediaApplicationName = string;
+  export interface SipRule {
+    /**
+     * The SIP rule ID.
+     */
+    SipRuleId?: NonEmptyString;
+    /**
+     * The name of the SIP rule.
+     */
+    Name?: SipRuleName;
+    /**
+     * Indicates whether the SIP rule is enabled or disabled. You must disable a rule before you can delete it.
+     */
+    Disabled?: Boolean;
+    /**
+     * The type of trigger assigned to the SIP rule in TriggerValue, currently RequestUriHostname or ToPhoneNumber.
+     */
+    TriggerType?: SipRuleTriggerType;
+    /**
+     * If TriggerType is RequestUriHostname, then the value can be the outbound host name of the Amazon Chime Voice Connector. If TriggerType is ToPhoneNumber, then the value can be a customer-owned phone number in E164 format. SipRule is triggered when a SIP rule requests host name or ToPhoneNumber matches in the incoming SIP request.
+     */
+    TriggerValue?: NonEmptyString;
+    /**
+     * Target SIP media application and other details, such as priority and AWS Region, to be specified in the SIP rule. Only one SIP rule per AWS Region can be provided.
+     */
+    TargetApplications?: SipRuleTargetApplicationList;
+    /**
+     * The time at which the SIP rule was created, in ISO 8601 format.
+     */
+    CreatedTimestamp?: Iso8601Timestamp;
+    /**
+     * The time at which the SIP rule was last updated, in ISO 8601 format.
+     */
+    UpdatedTimestamp?: Iso8601Timestamp;
+  }
+  export type SipRuleList = SipRule[];
+  export type SipRuleName = string;
+  export interface SipRuleTargetApplication {
+    /**
+     * The SIP media application ID.
+     */
+    SipMediaApplicationId?: NonEmptyString;
+    /**
+     * Priority of the SIP media application in the target list.
+     */
+    Priority?: SipApplicationPriority;
+    /**
+     * The AWS Region of the target application.
+     */
+    AwsRegion?: String;
+  }
+  export type SipRuleTargetApplicationList = SipRuleTargetApplication[];
+  export type SipRuleTriggerType = "ToPhoneNumber"|"RequestUriHostname"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
+  export interface StartMeetingTranscriptionRequest {
+    /**
+     * The unique ID of the meeting being transcribed.
+     */
+    MeetingId: GuidString;
+    /**
+     * The configuration for the current transcription operation. Must contain EngineTranscribeSettings or EngineTranscribeMedicalSettings.
+     */
+    TranscriptionConfiguration: TranscriptionConfiguration;
+  }
+  export interface StartMeetingTranscriptionResponse {
+  }
+  export interface StopMeetingTranscriptionRequest {
+    /**
+     * The unique ID of the meeting for which you stop transcription.
+     */
+    MeetingId: GuidString;
+  }
+  export interface StopMeetingTranscriptionResponse {
+  }
   export interface StreamingConfiguration {
     /**
      * The retention period, in hours, for the Amazon Kinesis data.
@@ -3427,7 +5882,25 @@ declare namespace Chime {
      */
     Source?: String;
   }
+  export type Timestamp = Date;
   export type TollFreePrefix = string;
+  export type TranscribeLanguageCode = "en-US"|"en-GB"|"es-US"|"fr-CA"|"fr-FR"|"en-AU"|"it-IT"|"de-DE"|"pt-BR"|"ja-JP"|"ko-KR"|"zh-CN"|string;
+  export type TranscribeMedicalLanguageCode = "en-US"|string;
+  export type TranscribeMedicalRegion = "us-east-1"|"us-east-2"|"us-west-2"|"ap-southeast-2"|"ca-central-1"|"eu-west-1"|"auto"|string;
+  export type TranscribeMedicalSpecialty = "PRIMARYCARE"|"CARDIOLOGY"|"NEUROLOGY"|"ONCOLOGY"|"RADIOLOGY"|"UROLOGY"|string;
+  export type TranscribeMedicalType = "CONVERSATION"|"DICTATION"|string;
+  export type TranscribeRegion = "us-east-2"|"us-east-1"|"us-west-2"|"ap-northeast-2"|"ap-southeast-2"|"ap-northeast-1"|"ca-central-1"|"eu-central-1"|"eu-west-1"|"eu-west-2"|"sa-east-1"|"auto"|string;
+  export type TranscribeVocabularyFilterMethod = "remove"|"mask"|"tag"|string;
+  export interface TranscriptionConfiguration {
+    /**
+     * The transcription configuration settings passed to Amazon Transcribe.
+     */
+    EngineTranscribeSettings?: EngineTranscribeSettings;
+    /**
+     * The transcription configuration settings passed to Amazon Transcribe.
+     */
+    EngineTranscribeMedicalSettings?: EngineTranscribeMedicalSettings;
+  }
   export interface UntagAttendeeRequest {
     /**
      * The Amazon Chime SDK meeting ID.
@@ -3471,6 +5944,10 @@ declare namespace Chime {
      * The new name for the specified Amazon Chime account.
      */
     Name?: AccountName;
+    /**
+     * The default license applied when you add users to an Amazon Chime account.
+     */
+    DefaultLicense?: License;
   }
   export interface UpdateAccountResponse {
     /**
@@ -3489,6 +5966,46 @@ declare namespace Chime {
     AccountSettings: AccountSettings;
   }
   export interface UpdateAccountSettingsResponse {
+  }
+  export interface UpdateAppInstanceRequest {
+    /**
+     * The ARN of the AppInstance.
+     */
+    AppInstanceArn: ChimeArn;
+    /**
+     * The name that you want to change.
+     */
+    Name: NonEmptyResourceName;
+    /**
+     * The metadata that you want to change.
+     */
+    Metadata?: Metadata;
+  }
+  export interface UpdateAppInstanceResponse {
+    /**
+     * The ARN of the AppInstance. 
+     */
+    AppInstanceArn?: ChimeArn;
+  }
+  export interface UpdateAppInstanceUserRequest {
+    /**
+     * The ARN of the AppInstanceUser.
+     */
+    AppInstanceUserArn: ChimeArn;
+    /**
+     * The name of the AppInstanceUser.
+     */
+    Name: UserName;
+    /**
+     * The metadata of the AppInstanceUser.
+     */
+    Metadata?: Metadata;
+  }
+  export interface UpdateAppInstanceUserResponse {
+    /**
+     * The ARN of the AppInstanceUser.
+     */
+    AppInstanceUserArn?: ChimeArn;
   }
   export interface UpdateBotRequest {
     /**
@@ -3509,6 +6026,82 @@ declare namespace Chime {
      * The updated bot details.
      */
     Bot?: Bot;
+  }
+  export interface UpdateChannelMessageRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The ID string of the message being updated.
+     */
+    MessageId: MessageId;
+    /**
+     * The content of the message being updated.
+     */
+    Content?: Content;
+    /**
+     * The metadata of the message being updated.
+     */
+    Metadata?: Metadata;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface UpdateChannelMessageResponse {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+    /**
+     * The ID string of the message being updated.
+     */
+    MessageId?: MessageId;
+  }
+  export interface UpdateChannelReadMarkerRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface UpdateChannelReadMarkerResponse {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
+  }
+  export interface UpdateChannelRequest {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn: ChimeArn;
+    /**
+     * The name of the channel.
+     */
+    Name: NonEmptyResourceName;
+    /**
+     * The mode of the update request.
+     */
+    Mode: ChannelMode;
+    /**
+     * The metadata for the update request.
+     */
+    Metadata?: Metadata;
+    /**
+     * The AppInstanceUserArn of the user that makes the API call.
+     */
+    ChimeBearer?: ChimeArn;
+  }
+  export interface UpdateChannelResponse {
+    /**
+     * The ARN of the channel.
+     */
+    ChannelArn?: ChimeArn;
   }
   export interface UpdateGlobalSettingsRequest {
     /**
@@ -3629,6 +6222,67 @@ declare namespace Chime {
      */
     Room?: Room;
   }
+  export interface UpdateSipMediaApplicationCallRequest {
+    /**
+     * The ID of the SIP media application handling the call.
+     */
+    SipMediaApplicationId: NonEmptyString;
+    /**
+     * The ID of the call transaction.
+     */
+    TransactionId: NonEmptyString;
+    /**
+     * Arguments made available to the Lambda function as part of the CALL_UPDATE_REQUESTED event. Can contain 0-20 key-value pairs.
+     */
+    Arguments: SMAUpdateCallArgumentsMap;
+  }
+  export interface UpdateSipMediaApplicationCallResponse {
+    SipMediaApplicationCall?: SipMediaApplicationCall;
+  }
+  export interface UpdateSipMediaApplicationRequest {
+    /**
+     * The SIP media application ID.
+     */
+    SipMediaApplicationId: NonEmptyString;
+    /**
+     * The new name for the specified SIP media application.
+     */
+    Name?: SipMediaApplicationName;
+    /**
+     * The new set of endpoints for the specified SIP media application.
+     */
+    Endpoints?: SipMediaApplicationEndpointList;
+  }
+  export interface UpdateSipMediaApplicationResponse {
+    /**
+     * The updated SIP media application details.
+     */
+    SipMediaApplication?: SipMediaApplication;
+  }
+  export interface UpdateSipRuleRequest {
+    /**
+     * The SIP rule ID.
+     */
+    SipRuleId: NonEmptyString;
+    /**
+     * The new name for the specified SIP rule.
+     */
+    Name: SipRuleName;
+    /**
+     * The new value specified to indicate whether the rule is disabled.
+     */
+    Disabled?: NullableBoolean;
+    /**
+     * The new value of the list of target applications.
+     */
+    TargetApplications?: SipRuleTargetApplicationList;
+  }
+  export interface UpdateSipRuleResponse {
+    /**
+     * Updated SIP rule details.
+     */
+    SipRule?: SipRule;
+  }
   export interface UpdateUserRequest {
     /**
      * The Amazon Chime account ID.
@@ -3731,6 +6385,7 @@ declare namespace Chime {
     VoiceConnector?: VoiceConnector;
   }
   export type UriType = string;
+  export type UrlType = string;
   export interface User {
     /**
      * The user ID.
@@ -3801,8 +6456,10 @@ declare namespace Chime {
     ErrorMessage?: String;
   }
   export type UserErrorList = UserError[];
+  export type UserId = string;
   export type UserIdList = NonEmptyString[];
   export type UserList = User[];
+  export type UserName = string;
   export interface UserSettings {
     /**
      * The telephony settings associated with the user.
@@ -3816,7 +6473,7 @@ declare namespace Chime {
      */
     VoiceConnectorId?: NonEmptyString;
     /**
-     * The AWS Region in which the Amazon Chime Voice Connector is created. Default: us-east-1.
+     *  The AWS Region in which the Amazon Chime Voice Connector is created. Default: us-east-1. 
      */
     AwsRegion?: VoiceConnectorAwsRegion;
     /**
@@ -3855,11 +6512,11 @@ declare namespace Chime {
      */
     VoiceConnectorItems?: VoiceConnectorItemList;
     /**
-     * The Amazon Chime Voice Connector group creation timestamp, in ISO 8601 format.
+     * The Amazon Chime Voice Connector group creation time stamp, in ISO 8601 format.
      */
     CreatedTimestamp?: Iso8601Timestamp;
     /**
-     * The updated Amazon Chime Voice Connector group timestamp, in ISO 8601 format.
+     * The updated Amazon Chime Voice Connector group time stamp, in ISO 8601 format.
      */
     UpdatedTimestamp?: Iso8601Timestamp;
   }
@@ -3871,7 +6528,7 @@ declare namespace Chime {
      */
     VoiceConnectorId: NonEmptyString;
     /**
-     * The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first. 
+     * The priority associated with the Amazon Chime Voice Connector, with 1 being the highest priority. Higher priority Amazon Chime Voice Connectors are attempted first.
      */
     Priority: VoiceConnectorItemPriority;
   }

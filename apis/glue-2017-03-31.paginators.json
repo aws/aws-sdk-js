@@ -1,5 +1,10 @@
 {
   "pagination": {
+    "GetBlueprintRuns": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken"
+    },
     "GetClassifiers": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -50,10 +55,21 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken"
     },
+    "GetPartitionIndexes": {
+      "input_token": "NextToken",
+      "output_token": "NextToken",
+      "result_key": "PartitionIndexDescriptorList"
+    },
     "GetPartitions": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
       "output_token": "NextToken"
+    },
+    "GetResourcePolicies": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "GetResourcePoliciesResponseList"
     },
     "GetSecurityConfigurations": {
       "input_token": "NextToken",
@@ -86,6 +102,11 @@
       "limit_key": "MaxResults",
       "output_token": "NextToken"
     },
+    "ListBlueprints": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken"
+    },
     "ListCrawlers": {
       "input_token": "NextToken",
       "limit_key": "MaxResults",
@@ -105,6 +126,24 @@
       "input_token": "NextToken",
       "limit_key": "MaxResults",
       "output_token": "NextToken"
+    },
+    "ListRegistries": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "Registries"
+    },
+    "ListSchemaVersions": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "Schemas"
+    },
+    "ListSchemas": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken",
+      "result_key": "Schemas"
     },
     "ListTriggers": {
       "input_token": "NextToken",

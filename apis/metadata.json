@@ -448,7 +448,8 @@
     "name": "MarketplaceEntitlementService"
   },
   "athena": {
-    "name": "Athena"
+    "name": "Athena",
+    "cors": true
   },
   "greengrass": {
     "name": "Greengrass"
@@ -461,7 +462,8 @@
     "name": "MigrationHub"
   },
   "cloudhsmv2": {
-    "name": "CloudHSMV2"
+    "name": "CloudHSMV2",
+    "cors": true
   },
   "glue": {
     "name": "Glue"
@@ -893,5 +895,178 @@
   },
   "appflow": {
     "name": "Appflow"
+  },
+  "redshiftdata": {
+    "prefix": "redshift-data",
+    "name": "RedshiftData"
+  },
+  "ssoadmin": {
+    "prefix": "sso-admin",
+    "name": "SSOAdmin"
+  },
+  "timestreamquery": {
+    "prefix": "timestream-query",
+    "name": "TimestreamQuery"
+  },
+  "timestreamwrite": {
+    "prefix": "timestream-write",
+    "name": "TimestreamWrite"
+  },
+  "s3outposts": {
+    "name": "S3Outposts"
+  },
+  "databrew": {
+    "name": "DataBrew"
+  },
+  "servicecatalogappregistry": {
+    "prefix": "servicecatalog-appregistry",
+    "name": "ServiceCatalogAppRegistry"
+  },
+  "networkfirewall": {
+    "prefix": "network-firewall",
+    "name": "NetworkFirewall"
+  },
+  "mwaa": {
+    "name": "MWAA"
+  },
+  "amplifybackend": {
+    "name": "AmplifyBackend"
+  },
+  "appintegrations": {
+    "name": "AppIntegrations"
+  },
+  "connectcontactlens": {
+    "prefix": "connect-contact-lens",
+    "name": "ConnectContactLens"
+  },
+  "devopsguru": {
+    "prefix": "devops-guru",
+    "name": "DevOpsGuru"
+  },
+  "ecrpublic": {
+    "prefix": "ecr-public",
+    "name": "ECRPUBLIC"
+  },
+  "lookoutvision": {
+    "name": "LookoutVision"
+  },
+  "sagemakerfeaturestoreruntime": {
+    "prefix": "sagemaker-featurestore-runtime",
+    "name": "SageMakerFeatureStoreRuntime"
+  },
+  "customerprofiles": {
+    "prefix": "customer-profiles",
+    "name": "CustomerProfiles"
+  },
+  "auditmanager": {
+    "name": "AuditManager"
+  },
+  "emrcontainers": {
+    "prefix": "emr-containers",
+    "name": "EMRcontainers"
+  },
+  "healthlake": {
+    "name": "HealthLake"
+  },
+  "sagemakeredge": {
+    "prefix": "sagemaker-edge",
+    "name": "SagemakerEdge"
+  },
+  "amp": {
+    "name": "Amp"
+  },
+  "greengrassv2": {
+    "name": "GreengrassV2"
+  },
+  "iotdeviceadvisor": {
+    "name": "IotDeviceAdvisor"
+  },
+  "iotfleethub": {
+    "name": "IoTFleetHub"
+  },
+  "iotwireless": {
+    "name": "IoTWireless"
+  },
+  "location": {
+    "name": "Location",
+    "cors": true
+  },
+  "wellarchitected": {
+    "name": "WellArchitected"
+  },
+  "lexmodelsv2": {
+    "prefix": "models.lex.v2",
+    "name": "LexModelsV2"
+  },
+  "lexruntimev2": {
+    "prefix": "runtime.lex.v2",
+    "name": "LexRuntimeV2",
+    "cors": true
+  },
+  "fis": {
+    "name": "Fis"
+  },
+  "lookoutmetrics": {
+    "name": "LookoutMetrics"
+  },
+  "mgn": {
+    "name": "Mgn"
+  },
+  "lookoutequipment": {
+    "name": "LookoutEquipment"
+  },
+  "nimble": {
+    "name": "Nimble"
+  },
+  "finspace": {
+    "name": "Finspace"
+  },
+  "finspacedata": {
+    "prefix": "finspace-data",
+    "name": "Finspacedata"
+  },
+  "ssmcontacts": {
+    "prefix": "ssm-contacts",
+    "name": "SSMContacts"
+  },
+  "ssmincidents": {
+    "prefix": "ssm-incidents",
+    "name": "SSMIncidents"
+  },
+  "applicationcostprofiler": {
+    "name": "ApplicationCostProfiler"
+  },
+  "apprunner": {
+    "name": "AppRunner"
+  },
+  "proton": {
+    "name": "Proton"
+  },
+  "route53recoverycluster": {
+    "prefix": "route53-recovery-cluster",
+    "name": "Route53RecoveryCluster"
+  },
+  "route53recoverycontrolconfig": {
+    "prefix": "route53-recovery-control-config",
+    "name": "Route53RecoveryControlConfig"
+  },
+  "route53recoveryreadiness": {
+    "prefix": "route53-recovery-readiness",
+    "name": "Route53RecoveryReadiness"
+  },
+  "chimesdkidentity": {
+    "prefix": "chime-sdk-identity",
+    "name": "ChimeSDKIdentity"
+  },
+  "chimesdkmessaging": {
+    "prefix": "chime-sdk-messaging",
+    "name": "ChimeSDKMessaging"
+  },
+  "snowdevicemanagement": {
+    "prefix": "snow-device-management",
+    "name": "SnowDeviceManagement"
+  },
+  "memorydb": {
+    "name": "MemoryDB"
   }
 }

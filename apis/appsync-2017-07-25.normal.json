@@ -734,7 +734,7 @@
           "shape": "InternalFailureException"
         }
       ],
-      "documentation": "<p>Lists the API keys for a given API.</p> <note> <p>API keys are deleted automatically sometime after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call <code>DeleteApiKey</code> to manually delete a key before it's automatically deleted.</p> </note>"
+      "documentation": "<p>Lists the API keys for a given API.</p> <note> <p>API keys are deleted automatically 60 days after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call <code>DeleteApiKey</code> to manually delete a key before it's automatically deleted.</p> </note>"
     },
     "ListDataSources": {
       "name": "ListDataSources",
@@ -1100,7 +1100,7 @@
           "shape": "ApiKeyValidityOutOfBoundsException"
         }
       ],
-      "documentation": "<p>Updates an API key.</p>"
+      "documentation": "<p>Updates an API key. The key can be updated while it is not deleted.</p>"
     },
     "UpdateDataSource": {
       "name": "UpdateDataSource",
@@ -1261,7 +1261,7 @@
       "members": {
         "authenticationType": {
           "shape": "AuthenticationType",
-          "documentation": "<p>The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.</p>"
+          "documentation": "<p>The authentication type: API key, Identity and Access Management, OIDC, or Amazon Cognito user pools.</p>"
         },
         "openIDConnectConfig": {
           "shape": "OpenIDConnectConfig",
@@ -1270,6 +1270,10 @@
         "userPoolConfig": {
           "shape": "CognitoUserPoolConfig",
           "documentation": "<p>The Amazon Cognito user pool configuration.</p>"
+        },
+        "lambdaAuthorizerConfig": {
+          "shape": "LambdaAuthorizerConfig",
+          "documentation": "<p>Configuration for AWS Lambda function authorization.</p>"
         }
       },
       "documentation": "<p>Describes an additional authentication provider.</p>"
@@ -1289,7 +1293,7 @@
         },
         "apiCachingBehavior": {
           "shape": "ApiCachingBehavior",
-          "documentation": "<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resovlers that you specify are cached.</p> </li> </ul>"
+          "documentation": "<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resolvers that you specify are cached.</p> </li> </ul>"
         },
         "transitEncryptionEnabled": {
           "shape": "Boolean",
@@ -1301,7 +1305,7 @@
         },
         "type": {
           "shape": "ApiCacheType",
-          "documentation": "<p>The cache instance type. Valid values are </p> <ul> <li> <p> <code>SMALL</code> </p> </li> <li> <p> <code>MEDIUM</code> </p> </li> <li> <p> <code>LARGE</code> </p> </li> <li> <p> <code>XLARGE</code> </p> </li> <li> <p> <code>LARGE_2X</code> </p> </li> <li> <p> <code>LARGE_4X</code> </p> </li> <li> <p> <code>LARGE_8X</code> (not available in all regions)</p> </li> <li> <p> <code>LARGE_12X</code> </p> </li> </ul> <p>Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used.</p> <p>The following legacy instance types are avaible, but their use is discouraged:</p> <ul> <li> <p> <b>T2_SMALL</b>: A t2.small instance type.</p> </li> <li> <p> <b>T2_MEDIUM</b>: A t2.medium instance type.</p> </li> <li> <p> <b>R4_LARGE</b>: A r4.large instance type.</p> </li> <li> <p> <b>R4_XLARGE</b>: A r4.xlarge instance type.</p> </li> <li> <p> <b>R4_2XLARGE</b>: A r4.2xlarge instance type.</p> </li> <li> <p> <b>R4_4XLARGE</b>: A r4.4xlarge instance type.</p> </li> <li> <p> <b>R4_8XLARGE</b>: A r4.8xlarge instance type.</p> </li> </ul>"
+          "documentation": "<p>The cache instance type. Valid values are </p> <ul> <li> <p> <code>SMALL</code> </p> </li> <li> <p> <code>MEDIUM</code> </p> </li> <li> <p> <code>LARGE</code> </p> </li> <li> <p> <code>XLARGE</code> </p> </li> <li> <p> <code>LARGE_2X</code> </p> </li> <li> <p> <code>LARGE_4X</code> </p> </li> <li> <p> <code>LARGE_8X</code> (not available in all regions)</p> </li> <li> <p> <code>LARGE_12X</code> </p> </li> </ul> <p>Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used.</p> <p>The following legacy instance types are available, but their use is discouraged:</p> <ul> <li> <p> <b>T2_SMALL</b>: A t2.small instance type.</p> </li> <li> <p> <b>T2_MEDIUM</b>: A t2.medium instance type.</p> </li> <li> <p> <b>R4_LARGE</b>: A r4.large instance type.</p> </li> <li> <p> <b>R4_XLARGE</b>: A r4.xlarge instance type.</p> </li> <li> <p> <b>R4_2XLARGE</b>: A r4.2xlarge instance type.</p> </li> <li> <p> <b>R4_4XLARGE</b>: A r4.4xlarge instance type.</p> </li> <li> <p> <b>R4_8XLARGE</b>: A r4.8xlarge instance type.</p> </li> </ul>"
         },
         "status": {
           "shape": "ApiCacheStatus",
@@ -1361,9 +1365,13 @@
         "expires": {
           "shape": "Long",
           "documentation": "<p>The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour.</p>"
+        },
+        "deletes": {
+          "shape": "Long",
+          "documentation": "<p>The time after which the API key is deleted. The date is represented as seconds since the epoch, rounded down to the nearest hour.</p>"
         }
       },
-      "documentation": "<p>Describes an API key.</p> <p>Customers invoke AWS AppSync GraphQL API operations with API keys as an identity mechanism. There are two key versions:</p> <p> <b>da1</b>: This version was introduced at launch in November 2017. These keys always expire after 7 days. Key expiration is managed by Amazon DynamoDB TTL. The keys ceased to be valid after February 21, 2018 and should not be used after that date.</p> <ul> <li> <p> <code>ListApiKeys</code> returns the expiration time in milliseconds.</p> </li> <li> <p> <code>CreateApiKey</code> returns the expiration time in milliseconds.</p> </li> <li> <p> <code>UpdateApiKey</code> is not available for this key version.</p> </li> <li> <p> <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li> <p>Expiration is stored in Amazon DynamoDB as milliseconds. This results in a bug where keys are not automatically deleted because DynamoDB expects the TTL to be stored in seconds. As a one-time action, we will delete these keys from the table after February 21, 2018.</p> </li> </ul> <p> <b>da2</b>: This version was introduced in February 2018 when AppSync added support to extend key expiration.</p> <ul> <li> <p> <code>ListApiKeys</code> returns the expiration time in seconds.</p> </li> <li> <p> <code>CreateApiKey</code> returns the expiration time in seconds and accepts a user-provided expiration time in seconds.</p> </li> <li> <p> <code>UpdateApiKey</code> returns the expiration time in seconds and accepts a user-provided expiration time in seconds. Key expiration can only be updated while the key has not expired.</p> </li> <li> <p> <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li> <p>Expiration is stored in Amazon DynamoDB as seconds.</p> </li> </ul>"
+      "documentation": "<p>Describes an API key.</p> <p>Customers invoke AppSync GraphQL API operations with API keys as an identity mechanism. There are two key versions:</p> <p> <b>da1</b>: This version was introduced at launch in November 2017. These keys always expire after 7 days. Key expiration is managed by Amazon DynamoDB TTL. The keys ceased to be valid after February 21, 2018 and should not be used after that date.</p> <ul> <li> <p> <code>ListApiKeys</code> returns the expiration time in milliseconds.</p> </li> <li> <p> <code>CreateApiKey</code> returns the expiration time in milliseconds.</p> </li> <li> <p> <code>UpdateApiKey</code> is not available for this key version.</p> </li> <li> <p> <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li> <p>Expiration is stored in Amazon DynamoDB as milliseconds. This results in a bug where keys are not automatically deleted because DynamoDB expects the TTL to be stored in seconds. As a one-time action, we will delete these keys from the table after February 21, 2018.</p> </li> </ul> <p> <b>da2</b>: This version was introduced in February 2018 when AppSync added support to extend key expiration.</p> <ul> <li> <p> <code>ListApiKeys</code> returns the expiration time and deletion time in seconds.</p> </li> <li> <p> <code>CreateApiKey</code> returns the expiration time and deletion time in seconds and accepts a user-provided expiration time in seconds.</p> </li> <li> <p> <code>UpdateApiKey</code> returns the expiration time and and deletion time in seconds and accepts a user-provided expiration time in seconds. Expired API keys are kept for 60 days after the expiration time. Key expiration time can be updated while the key is not deleted. </p> </li> <li> <p> <code>DeleteApiKey</code> deletes the item from the table.</p> </li> <li> <p>Expiration is stored in Amazon DynamoDB as seconds. After the expiration time, using the key to authenticate will fail. But the key can be reinstated before deletion.</p> </li> <li> <p>Deletion is stored in Amazon DynamoDB as seconds. The key will be deleted after deletion time. </p> </li> </ul>"
     },
     "ApiKeys": {
       "type": "list",
@@ -1377,7 +1385,8 @@
         "API_KEY",
         "AWS_IAM",
         "AMAZON_COGNITO_USER_POOLS",
-        "OPENID_CONNECT"
+        "OPENID_CONNECT",
+        "AWS_LAMBDA"
       ]
     },
     "AuthorizationConfig": {
@@ -1392,7 +1401,7 @@
         },
         "awsIamConfig": {
           "shape": "AwsIamConfig",
-          "documentation": "<p>The AWS IAM settings.</p>"
+          "documentation": "<p>The Identity and Access Management settings.</p>"
         }
       },
       "documentation": "<p>The authorization config in case the HTTP endpoint requires authorization.</p>"
@@ -1408,14 +1417,14 @@
       "members": {
         "signingRegion": {
           "shape": "String",
-          "documentation": "<p>The signing region for AWS IAM authorization.</p>"
+          "documentation": "<p>The signing region for Identity and Access Management authorization.</p>"
         },
         "signingServiceName": {
           "shape": "String",
-          "documentation": "<p>The signing service name for AWS IAM authorization.</p>"
+          "documentation": "<p>The signing service name for Identity and Access Management authorization.</p>"
         }
       },
-      "documentation": "<p>The AWS IAM configuration.</p>"
+      "documentation": "<p>The Identity and Access Management configuration.</p>"
     },
     "Blob": {
       "type": "blob"
@@ -1459,7 +1468,7 @@
         },
         "awsRegion": {
           "shape": "String",
-          "documentation": "<p>The AWS Region in which the user pool was created.</p>"
+          "documentation": "<p>The Amazon Web Services Region in which the user pool was created.</p>"
         },
         "appIdClientRegex": {
           "shape": "String",
@@ -1513,11 +1522,11 @@
         },
         "apiCachingBehavior": {
           "shape": "ApiCachingBehavior",
-          "documentation": "<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resovlers that you specify are cached.</p> </li> </ul>"
+          "documentation": "<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resolvers that you specify are cached.</p> </li> </ul>"
         },
         "type": {
           "shape": "ApiCacheType",
-          "documentation": "<p>The cache instance type. Valid values are </p> <ul> <li> <p> <code>SMALL</code> </p> </li> <li> <p> <code>MEDIUM</code> </p> </li> <li> <p> <code>LARGE</code> </p> </li> <li> <p> <code>XLARGE</code> </p> </li> <li> <p> <code>LARGE_2X</code> </p> </li> <li> <p> <code>LARGE_4X</code> </p> </li> <li> <p> <code>LARGE_8X</code> (not available in all regions)</p> </li> <li> <p> <code>LARGE_12X</code> </p> </li> </ul> <p>Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used.</p> <p>The following legacy instance types are avaible, but their use is discouraged:</p> <ul> <li> <p> <b>T2_SMALL</b>: A t2.small instance type.</p> </li> <li> <p> <b>T2_MEDIUM</b>: A t2.medium instance type.</p> </li> <li> <p> <b>R4_LARGE</b>: A r4.large instance type.</p> </li> <li> <p> <b>R4_XLARGE</b>: A r4.xlarge instance type.</p> </li> <li> <p> <b>R4_2XLARGE</b>: A r4.2xlarge instance type.</p> </li> <li> <p> <b>R4_4XLARGE</b>: A r4.4xlarge instance type.</p> </li> <li> <p> <b>R4_8XLARGE</b>: A r4.8xlarge instance type.</p> </li> </ul>"
+          "documentation": "<p>The cache instance type. Valid values are </p> <ul> <li> <p> <code>SMALL</code> </p> </li> <li> <p> <code>MEDIUM</code> </p> </li> <li> <p> <code>LARGE</code> </p> </li> <li> <p> <code>XLARGE</code> </p> </li> <li> <p> <code>LARGE_2X</code> </p> </li> <li> <p> <code>LARGE_4X</code> </p> </li> <li> <p> <code>LARGE_8X</code> (not available in all regions)</p> </li> <li> <p> <code>LARGE_12X</code> </p> </li> </ul> <p>Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used.</p> <p>The following legacy instance types are available, but their use is discouraged:</p> <ul> <li> <p> <b>T2_SMALL</b>: A t2.small instance type.</p> </li> <li> <p> <b>T2_MEDIUM</b>: A t2.medium instance type.</p> </li> <li> <p> <b>R4_LARGE</b>: A r4.large instance type.</p> </li> <li> <p> <b>R4_XLARGE</b>: A r4.xlarge instance type.</p> </li> <li> <p> <b>R4_2XLARGE</b>: A r4.2xlarge instance type.</p> </li> <li> <p> <b>R4_4XLARGE</b>: A r4.4xlarge instance type.</p> </li> <li> <p> <b>R4_8XLARGE</b>: A r4.8xlarge instance type.</p> </li> </ul>"
         }
       },
       "documentation": "<p>Represents the input of a <code>CreateApiCache</code> operation.</p>"
@@ -1591,7 +1600,7 @@
         },
         "serviceRoleArn": {
           "shape": "String",
-          "documentation": "<p>The AWS IAM service role ARN for the data source. The system assumes this role when accessing the data source.</p>"
+          "documentation": "<p>The Identity and Access Management service role ARN for the data source. The system assumes this role when accessing the data source.</p>"
         },
         "dynamodbConfig": {
           "shape": "DynamodbDataSourceConfig",
@@ -1599,7 +1608,7 @@
         },
         "lambdaConfig": {
           "shape": "LambdaDataSourceConfig",
-          "documentation": "<p>AWS Lambda settings.</p>"
+          "documentation": "<p>Amazon Web Services Lambda settings.</p>"
         },
         "elasticsearchConfig": {
           "shape": "ElasticsearchDataSourceConfig",
@@ -1662,6 +1671,9 @@
         "functionVersion": {
           "shape": "String",
           "documentation": "<p>The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. </p>"
+        },
+        "syncConfig": {
+          "shape": "SyncConfig"
         }
       }
     },
@@ -1691,7 +1703,7 @@
         },
         "authenticationType": {
           "shape": "AuthenticationType",
-          "documentation": "<p>The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.</p>"
+          "documentation": "<p>The authentication type: API key, Identity and Access Management, OIDC, or Amazon Cognito user pools.</p>"
         },
         "userPoolConfig": {
           "shape": "UserPoolConfig",
@@ -1712,6 +1724,10 @@
         "xrayEnabled": {
           "shape": "Boolean",
           "documentation": "<p>A flag indicating whether to enable X-Ray tracing for the <code>GraphqlApi</code>.</p>"
+        },
+        "lambdaAuthorizerConfig": {
+          "shape": "LambdaAuthorizerConfig",
+          "documentation": "<p>Configuration for AWS Lambda function authorization.</p>"
         }
       }
     },
@@ -1837,11 +1853,11 @@
         },
         "type": {
           "shape": "DataSourceType",
-          "documentation": "<p>The type of the data source.</p> <ul> <li> <p> <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p> </li> <li> <p> <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon Elasticsearch Service domain.</p> </li> <li> <p> <b>AWS_LAMBDA</b>: The data source is an AWS Lambda function.</p> </li> <li> <p> <b>NONE</b>: There is no data source. This type is used when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.</p> </li> <li> <p> <b>HTTP</b>: The data source is an HTTP endpoint.</p> </li> <li> <p> <b>RELATIONAL_DATABASE</b>: The data source is a relational database.</p> </li> </ul>"
+          "documentation": "<p>The type of the data source.</p> <ul> <li> <p> <b>AMAZON_DYNAMODB</b>: The data source is an Amazon DynamoDB table.</p> </li> <li> <p> <b>AMAZON_ELASTICSEARCH</b>: The data source is an Amazon Elasticsearch Service domain.</p> </li> <li> <p> <b>AWS_LAMBDA</b>: The data source is an Amazon Web Services Lambda function.</p> </li> <li> <p> <b>NONE</b>: There is no data source. This type is used when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.</p> </li> <li> <p> <b>HTTP</b>: The data source is an HTTP endpoint.</p> </li> <li> <p> <b>RELATIONAL_DATABASE</b>: The data source is a relational database.</p> </li> </ul>"
         },
         "serviceRoleArn": {
           "shape": "String",
-          "documentation": "<p>The AWS IAM service role ARN for the data source. The system assumes this role when accessing the data source.</p>"
+          "documentation": "<p>The Identity and Access Management service role ARN for the data source. The system assumes this role when accessing the data source.</p>"
         },
         "dynamodbConfig": {
           "shape": "DynamodbDataSourceConfig",
@@ -1849,7 +1865,7 @@
         },
         "lambdaConfig": {
           "shape": "LambdaDataSourceConfig",
-          "documentation": "<p>AWS Lambda settings.</p>"
+          "documentation": "<p>Amazon Web Services Lambda settings.</p>"
         },
         "elasticsearchConfig": {
           "shape": "ElasticsearchDataSourceConfig",
@@ -2091,7 +2107,7 @@
         },
         "awsRegion": {
           "shape": "String",
-          "documentation": "<p>The AWS Region.</p>"
+          "documentation": "<p>The Amazon Web Services Region.</p>"
         },
         "useCallerCredentials": {
           "shape": "Boolean",
@@ -2121,7 +2137,7 @@
         },
         "awsRegion": {
           "shape": "String",
-          "documentation": "<p>The AWS Region.</p>"
+          "documentation": "<p>The Amazon Web Services Region.</p>"
         }
       },
       "documentation": "<p>Describes an Elasticsearch data source configuration.</p>"
@@ -2188,6 +2204,9 @@
         "functionVersion": {
           "shape": "String",
           "documentation": "<p>The version of the request mapping template. Currently only the 2018-05-29 version of the template is supported.</p>"
+        },
+        "syncConfig": {
+          "shape": "SyncConfig"
         }
       },
       "documentation": "<p>A function is a reusable entity. Multiple functions can be used to compose the resolver logic.</p>"
@@ -2496,6 +2515,14 @@
         "xrayEnabled": {
           "shape": "Boolean",
           "documentation": "<p>A flag representing whether X-Ray tracing is enabled for this <code>GraphqlApi</code>.</p>"
+        },
+        "wafWebAclArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the WAF ACL associated with this <code>GraphqlApi</code>, if one exists.</p>"
+        },
+        "lambdaAuthorizerConfig": {
+          "shape": "LambdaAuthorizerConfig",
+          "documentation": "<p/> <p>Configuration for AWS Lambda function authorization.</p>"
         }
       },
       "documentation": "<p>Describes a GraphQL API.</p>"
@@ -2511,7 +2538,7 @@
       "members": {
         "endpoint": {
           "shape": "String",
-          "documentation": "<p>The HTTP URL endpoint. You can either specify the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AWS AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.</p>"
+          "documentation": "<p>The HTTP URL endpoint. You can either specify the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.</p>"
         },
         "authorizationConfig": {
           "shape": "AuthorizationConfig",
@@ -2519,6 +2546,27 @@
         }
       },
       "documentation": "<p>Describes an HTTP data source configuration.</p>"
+    },
+    "LambdaAuthorizerConfig": {
+      "type": "structure",
+      "required": [
+        "authorizerUri"
+      ],
+      "members": {
+        "authorizerResultTtlInSeconds": {
+          "shape": "TTL",
+          "documentation": "<p>The number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a <code>ttlOverride</code> key in its response. A value of 0 disables caching of responses.</p>"
+        },
+        "authorizerUri": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the lambda function to be called for authorization. This may be a standard Lambda ARN, a version ARN (<code>.../v3</code>) or alias ARN. </p> <p> <i>Note</i>: This Lambda function must have the following resource-based policy assigned to it. When configuring Lambda authorizers in the Console, this is done for you. To do so with the AWS CLI, run the following:</p> <p> <code>aws lambda add-permission --function-name \"arn:aws:lambda:us-east-2:111122223333:function:my-function\" --statement-id \"appsync\" --principal appsync.amazonaws.com --action lambda:InvokeFunction</code> </p>"
+        },
+        "identityValidationExpression": {
+          "shape": "String",
+          "documentation": "<p>A regular expression for validation of tokens before the Lambda Function is called.</p>"
+        }
+      },
+      "documentation": "<p>A <code>LambdaAuthorizerConfig</code> holds configuration on how to authorize AppSync API access when using the <code>AWS_LAMBDA</code> authorizer mode. Be aware that an AppSync API may have only one Lambda authorizer configured at a time.</p>"
     },
     "LambdaConflictHandlerConfig": {
       "type": "structure",
@@ -2541,7 +2589,7 @@
           "documentation": "<p>The ARN for the Lambda function.</p>"
         }
       },
-      "documentation": "<p>Describes an AWS Lambda data source configuration.</p>"
+      "documentation": "<p>Describes an Amazon Web Services Lambda data source configuration.</p>"
     },
     "ListApiKeysRequest": {
       "type": "structure",
@@ -2864,7 +2912,7 @@
         },
         "cloudWatchLogsRoleArn": {
           "shape": "String",
-          "documentation": "<p>The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. </p>"
+          "documentation": "<p>The service role that AppSync will assume to publish to Amazon CloudWatch logs in your account. </p>"
         },
         "excludeVerboseContent": {
           "shape": "Boolean",
@@ -2907,7 +2955,7 @@
         },
         "clientId": {
           "shape": "String",
-          "documentation": "<p>The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.</p>"
+          "documentation": "<p>The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AppSync can validate against multiple client identifiers at a time.</p>"
         },
         "iatTTL": {
           "shape": "Long",
@@ -2948,7 +2996,7 @@
       "members": {
         "awsRegion": {
           "shape": "String",
-          "documentation": "<p>AWS Region for RDS HTTP endpoint.</p>"
+          "documentation": "<p>Amazon Web Services Region for RDS HTTP endpoint.</p>"
         },
         "dbClusterIdentifier": {
           "shape": "String",
@@ -2964,7 +3012,7 @@
         },
         "awsSecretStoreArn": {
           "shape": "String",
-          "documentation": "<p>AWS secret store ARN for database credentials.</p>"
+          "documentation": "<p>Amazon Web Services secret store ARN for database credentials.</p>"
         }
       },
       "documentation": "<p>The Amazon RDS HTTP endpoint configuration.</p>"
@@ -3120,12 +3168,17 @@
       },
       "documentation": "<p>Describes a Sync configuration for a resolver.</p> <p>Contains information on which Conflict Detection as well as Resolution strategy should be performed when the resolver is invoked.</p>"
     },
+    "TTL": {
+      "type": "integer",
+      "max": 3600,
+      "min": 0
+    },
     "TagKey": {
       "type": "string",
       "documentation": "<p>The key for the tag.</p>",
       "max": 128,
       "min": 1,
-      "pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+      "pattern": "^(?!aws:)[ a-zA-Z+-=._:/]+$"
     },
     "TagKeyList": {
       "type": "list",
@@ -3260,11 +3313,11 @@
         },
         "apiCachingBehavior": {
           "shape": "ApiCachingBehavior",
-          "documentation": "<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resovlers that you specify are cached.</p> </li> </ul>"
+          "documentation": "<p>Caching behavior.</p> <ul> <li> <p> <b>FULL_REQUEST_CACHING</b>: All requests are fully cached.</p> </li> <li> <p> <b>PER_RESOLVER_CACHING</b>: Individual resolvers that you specify are cached.</p> </li> </ul>"
         },
         "type": {
           "shape": "ApiCacheType",
-          "documentation": "<p>The cache instance type. Valid values are </p> <ul> <li> <p> <code>SMALL</code> </p> </li> <li> <p> <code>MEDIUM</code> </p> </li> <li> <p> <code>LARGE</code> </p> </li> <li> <p> <code>XLARGE</code> </p> </li> <li> <p> <code>LARGE_2X</code> </p> </li> <li> <p> <code>LARGE_4X</code> </p> </li> <li> <p> <code>LARGE_8X</code> (not available in all regions)</p> </li> <li> <p> <code>LARGE_12X</code> </p> </li> </ul> <p>Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used.</p> <p>The following legacy instance types are avaible, but their use is discouraged:</p> <ul> <li> <p> <b>T2_SMALL</b>: A t2.small instance type.</p> </li> <li> <p> <b>T2_MEDIUM</b>: A t2.medium instance type.</p> </li> <li> <p> <b>R4_LARGE</b>: A r4.large instance type.</p> </li> <li> <p> <b>R4_XLARGE</b>: A r4.xlarge instance type.</p> </li> <li> <p> <b>R4_2XLARGE</b>: A r4.2xlarge instance type.</p> </li> <li> <p> <b>R4_4XLARGE</b>: A r4.4xlarge instance type.</p> </li> <li> <p> <b>R4_8XLARGE</b>: A r4.8xlarge instance type.</p> </li> </ul>"
+          "documentation": "<p>The cache instance type. Valid values are </p> <ul> <li> <p> <code>SMALL</code> </p> </li> <li> <p> <code>MEDIUM</code> </p> </li> <li> <p> <code>LARGE</code> </p> </li> <li> <p> <code>XLARGE</code> </p> </li> <li> <p> <code>LARGE_2X</code> </p> </li> <li> <p> <code>LARGE_4X</code> </p> </li> <li> <p> <code>LARGE_8X</code> (not available in all regions)</p> </li> <li> <p> <code>LARGE_12X</code> </p> </li> </ul> <p>Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used.</p> <p>The following legacy instance types are available, but their use is discouraged:</p> <ul> <li> <p> <b>T2_SMALL</b>: A t2.small instance type.</p> </li> <li> <p> <b>T2_MEDIUM</b>: A t2.medium instance type.</p> </li> <li> <p> <b>R4_LARGE</b>: A r4.large instance type.</p> </li> <li> <p> <b>R4_XLARGE</b>: A r4.xlarge instance type.</p> </li> <li> <p> <b>R4_2XLARGE</b>: A r4.2xlarge instance type.</p> </li> <li> <p> <b>R4_4XLARGE</b>: A r4.4xlarge instance type.</p> </li> <li> <p> <b>R4_8XLARGE</b>: A r4.8xlarge instance type.</p> </li> </ul>"
         }
       },
       "documentation": "<p>Represents the input of a <code>UpdateApiCache</code> operation.</p>"
@@ -3355,7 +3408,7 @@
         },
         "lambdaConfig": {
           "shape": "LambdaDataSourceConfig",
-          "documentation": "<p>The new AWS Lambda configuration.</p>"
+          "documentation": "<p>The new Amazon Web Services Lambda configuration.</p>"
         },
         "elasticsearchConfig": {
           "shape": "ElasticsearchDataSourceConfig",
@@ -3425,6 +3478,9 @@
         "functionVersion": {
           "shape": "String",
           "documentation": "<p>The <code>version</code> of the request mapping template. Currently the supported value is 2018-05-29. </p>"
+        },
+        "syncConfig": {
+          "shape": "SyncConfig"
         }
       }
     },
@@ -3477,6 +3533,10 @@
         "xrayEnabled": {
           "shape": "Boolean",
           "documentation": "<p>A flag indicating whether to enable X-Ray tracing for the <code>GraphqlApi</code>.</p>"
+        },
+        "lambdaAuthorizerConfig": {
+          "shape": "LambdaAuthorizerConfig",
+          "documentation": "<p>Configuration for AWS Lambda function authorization.</p>"
         }
       }
     },
@@ -3607,7 +3667,7 @@
         },
         "awsRegion": {
           "shape": "String",
-          "documentation": "<p>The AWS Region in which the user pool was created.</p>"
+          "documentation": "<p>The Amazon Web Services Region in which the user pool was created.</p>"
         },
         "defaultAction": {
           "shape": "DefaultAction",
@@ -3621,5 +3681,5 @@
       "documentation": "<p>Describes an Amazon Cognito user pool configuration.</p>"
     }
   },
-  "documentation": "<p>AWS AppSync provides API actions for creating and interacting with data sources using GraphQL from your application.</p>"
+  "documentation": "<p>AppSync provides API actions for creating and interacting with data sources using GraphQL from your application.</p>"
 }

@@ -20,11 +20,11 @@ declare class StepFunctions extends Service {
    */
   createActivity(callback?: (err: AWSError, data: StepFunctions.Types.CreateActivityOutput) => void): Request<StepFunctions.Types.CreateActivityOutput, AWSError>;
   /**
-   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the AWS Step Functions User Guide.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, and LoggingConfiguration. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
+   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the AWS Step Functions User Guide.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, LoggingConfiguration and TracingConfiguration. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
    */
   createStateMachine(params: StepFunctions.Types.CreateStateMachineInput, callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineOutput) => void): Request<StepFunctions.Types.CreateStateMachineOutput, AWSError>;
   /**
-   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the AWS Step Functions User Guide.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, and LoggingConfiguration. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
+   * Creates a state machine. A state machine consists of a collection of states that can do work (Task states), determine to which states to transition next (Choice states), stop an execution with an error (Fail states), and so on. State machines are specified using a JSON-based, structured language. For more information, see Amazon States Language in the AWS Step Functions User Guide.  This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.    CreateStateMachine is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. CreateStateMachine's idempotency check is based on the state machine name, definition, type, LoggingConfiguration and TracingConfiguration. If a following request has a different roleArn or tags, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, roleArn and tags will not be updated, even if they are different. 
    */
   createStateMachine(callback?: (err: AWSError, data: StepFunctions.Types.CreateStateMachineOutput) => void): Request<StepFunctions.Types.CreateStateMachineOutput, AWSError>;
   /**
@@ -156,6 +156,14 @@ declare class StepFunctions extends Service {
    */
   startExecution(callback?: (err: AWSError, data: StepFunctions.Types.StartExecutionOutput) => void): Request<StepFunctions.Types.StartExecutionOutput, AWSError>;
   /**
+   * Starts a Synchronous Express state machine execution.
+   */
+  startSyncExecution(params: StepFunctions.Types.StartSyncExecutionInput, callback?: (err: AWSError, data: StepFunctions.Types.StartSyncExecutionOutput) => void): Request<StepFunctions.Types.StartSyncExecutionOutput, AWSError>;
+  /**
+   * Starts a Synchronous Express state machine execution.
+   */
+  startSyncExecution(callback?: (err: AWSError, data: StepFunctions.Types.StartSyncExecutionOutput) => void): Request<StepFunctions.Types.StartSyncExecutionOutput, AWSError>;
+  /**
    * Stops an execution. This API action is not supported by EXPRESS state machines.
    */
   stopExecution(params: StepFunctions.Types.StopExecutionInput, callback?: (err: AWSError, data: StepFunctions.Types.StopExecutionOutput) => void): Request<StepFunctions.Types.StopExecutionOutput, AWSError>;
@@ -230,9 +238,13 @@ declare namespace StepFunctions {
      */
     resource: Arn;
     /**
-     * The JSON data input to the activity task.
+     * The JSON data input to the activity task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     input?: SensitiveData;
+    /**
+     * Contains details about the input for an execution history event.
+     */
+    inputDetails?: HistoryEventExecutionDataDetails;
     /**
      * The maximum allowed duration of the activity task.
      */
@@ -250,9 +262,13 @@ declare namespace StepFunctions {
   }
   export interface ActivitySucceededEventDetails {
     /**
-     * The JSON data output by the activity task.
+     * The JSON data output by the activity task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     output?: SensitiveData;
+    /**
+     * Contains details about the output of an execution history event.
+     */
+    outputDetails?: HistoryEventExecutionDataDetails;
   }
   export interface ActivityTimedOutEventDetails {
     /**
@@ -265,6 +281,24 @@ declare namespace StepFunctions {
     cause?: SensitiveCause;
   }
   export type Arn = string;
+  export type BilledDuration = number;
+  export type BilledMemoryUsed = number;
+  export interface BillingDetails {
+    /**
+     * Billed memory consumption of your workflow, in MB.
+     */
+    billedMemoryUsedInMB?: BilledMemoryUsed;
+    /**
+     * Billed duration of your workflow, in milliseconds.
+     */
+    billedDurationInMilliseconds?: BilledDuration;
+  }
+  export interface CloudWatchEventsExecutionDataDetails {
+    /**
+     * Indicates whether input or output was included in the response. Always true for API calls. 
+     */
+    included?: includedDetails;
+  }
   export interface CloudWatchLogsLogGroup {
     /**
      * The ARN of the the CloudWatch log group to which you want your logs emitted to. The ARN must end with :* 
@@ -317,6 +351,10 @@ declare namespace StepFunctions {
      * Tags to be added when creating a state machine. An array of key-value pairs. For more information, see Using Cost Allocation Tags in the AWS Billing and Cost Management User Guide, and Controlling Access Using IAM Tags. Tags may only contain Unicode letters, digits, white space, or these symbols: _ . : / = + - @.
      */
     tags?: TagList;
+    /**
+     * Selects whether AWS X-Ray tracing is enabled.
+     */
+    tracingConfiguration?: TracingConfiguration;
   }
   export interface CreateStateMachineOutput {
     /**
@@ -373,7 +411,7 @@ declare namespace StepFunctions {
   }
   export interface DescribeExecutionOutput {
     /**
-     * The Amazon Resource Name (ARN) that id entifies the execution.
+     * The Amazon Resource Name (ARN) that identifies the execution.
      */
     executionArn: Arn;
     /**
@@ -397,13 +435,19 @@ declare namespace StepFunctions {
      */
     stopDate?: Timestamp;
     /**
-     * The string that contains the JSON input data of the execution.
+     * The string that contains the JSON input data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
-    input: SensitiveData;
+    input?: SensitiveData;
+    inputDetails?: CloudWatchEventsExecutionDataDetails;
     /**
-     * The JSON output data of the execution.  This field is set only if the execution succeeds. If the execution fails, this field is null. 
+     * The JSON output data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.  This field is set only if the execution succeeds. If the execution fails, this field is null. 
      */
     output?: SensitiveData;
+    outputDetails?: CloudWatchEventsExecutionDataDetails;
+    /**
+     * The AWS X-Ray trace header that was passed to the execution.
+     */
+    traceHeader?: TraceHeader;
   }
   export interface DescribeStateMachineForExecutionInput {
     /**
@@ -433,6 +477,10 @@ declare namespace StepFunctions {
      */
     updateDate: Timestamp;
     loggingConfiguration?: LoggingConfiguration;
+    /**
+     * Selects whether AWS X-Ray tracing is enabled.
+     */
+    tracingConfiguration?: TracingConfiguration;
   }
   export interface DescribeStateMachineInput {
     /**
@@ -470,7 +518,12 @@ declare namespace StepFunctions {
      */
     creationDate: Timestamp;
     loggingConfiguration?: LoggingConfiguration;
+    /**
+     * Selects whether AWS X-Ray tracing is enabled.
+     */
+    tracingConfiguration?: TracingConfiguration;
   }
+  export type Enabled = boolean;
   export type EventId = number;
   export interface ExecutionAbortedEventDetails {
     /**
@@ -495,7 +548,7 @@ declare namespace StepFunctions {
   export type ExecutionList = ExecutionListItem[];
   export interface ExecutionListItem {
     /**
-     * The Amazon Resource Name (ARN) that id entifies the execution.
+     * The Amazon Resource Name (ARN) that identifies the execution.
      */
     executionArn: Arn;
     /**
@@ -521,9 +574,13 @@ declare namespace StepFunctions {
   }
   export interface ExecutionStartedEventDetails {
     /**
-     * The JSON data input to the execution.
+     * The JSON data input to the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     input?: SensitiveData;
+    /**
+     * Contains details about the input for an execution history event.
+     */
+    inputDetails?: HistoryEventExecutionDataDetails;
     /**
      * The Amazon Resource Name (ARN) of the IAM role used for executing AWS Lambda tasks.
      */
@@ -532,9 +589,13 @@ declare namespace StepFunctions {
   export type ExecutionStatus = "RUNNING"|"SUCCEEDED"|"FAILED"|"TIMED_OUT"|"ABORTED"|string;
   export interface ExecutionSucceededEventDetails {
     /**
-     * The JSON data output by the execution.
+     * The JSON data output by the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     output?: SensitiveData;
+    /**
+     * Contains details about the output of an execution history event.
+     */
+    outputDetails?: HistoryEventExecutionDataDetails;
   }
   export interface ExecutionTimedOutEventDetails {
     /**
@@ -562,7 +623,7 @@ declare namespace StepFunctions {
      */
     taskToken?: TaskToken;
     /**
-     * The string that contains the JSON input data for the task.
+     * The string that contains the JSON input data for the task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     input?: SensitiveDataJobInput;
   }
@@ -583,6 +644,10 @@ declare namespace StepFunctions {
      * If nextToken is returned, there are more results available. The value of nextToken is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an HTTP 400 InvalidToken error.
      */
     nextToken?: PageToken;
+    /**
+     * You can select whether execution data (input or output of a history event) is returned. The default is true.
+     */
+    includeExecutionData?: IncludeExecutionDataGetExecutionHistory;
   }
   export interface GetExecutionHistoryOutput {
     /**
@@ -692,10 +757,17 @@ declare namespace StepFunctions {
     stateEnteredEventDetails?: StateEnteredEventDetails;
     stateExitedEventDetails?: StateExitedEventDetails;
   }
+  export interface HistoryEventExecutionDataDetails {
+    /**
+     * Indicates whether input or output was truncated in the response. Always false for API calls.
+     */
+    truncated?: truncated;
+  }
   export type HistoryEventList = HistoryEvent[];
   export type HistoryEventType = "ActivityFailed"|"ActivityScheduled"|"ActivityScheduleFailed"|"ActivityStarted"|"ActivitySucceeded"|"ActivityTimedOut"|"ChoiceStateEntered"|"ChoiceStateExited"|"ExecutionAborted"|"ExecutionFailed"|"ExecutionStarted"|"ExecutionSucceeded"|"ExecutionTimedOut"|"FailStateEntered"|"LambdaFunctionFailed"|"LambdaFunctionScheduled"|"LambdaFunctionScheduleFailed"|"LambdaFunctionStarted"|"LambdaFunctionStartFailed"|"LambdaFunctionSucceeded"|"LambdaFunctionTimedOut"|"MapIterationAborted"|"MapIterationFailed"|"MapIterationStarted"|"MapIterationSucceeded"|"MapStateAborted"|"MapStateEntered"|"MapStateExited"|"MapStateFailed"|"MapStateStarted"|"MapStateSucceeded"|"ParallelStateAborted"|"ParallelStateEntered"|"ParallelStateExited"|"ParallelStateFailed"|"ParallelStateStarted"|"ParallelStateSucceeded"|"PassStateEntered"|"PassStateExited"|"SucceedStateEntered"|"SucceedStateExited"|"TaskFailed"|"TaskScheduled"|"TaskStarted"|"TaskStartFailed"|"TaskStateAborted"|"TaskStateEntered"|"TaskStateExited"|"TaskSubmitFailed"|"TaskSubmitted"|"TaskSucceeded"|"TaskTimedOut"|"WaitStateAborted"|"WaitStateEntered"|"WaitStateExited"|string;
   export type Identity = string;
   export type IncludeExecutionData = boolean;
+  export type IncludeExecutionDataGetExecutionHistory = boolean;
   export interface LambdaFunctionFailedEventDetails {
     /**
      * The error code of the failure.
@@ -722,9 +794,13 @@ declare namespace StepFunctions {
      */
     resource: Arn;
     /**
-     * The JSON data input to the lambda function.
+     * The JSON data input to the lambda function. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     input?: SensitiveData;
+    /**
+     * Contains details about input for an execution history event.
+     */
+    inputDetails?: HistoryEventExecutionDataDetails;
     /**
      * The maximum allowed duration of the lambda function.
      */
@@ -742,9 +818,13 @@ declare namespace StepFunctions {
   }
   export interface LambdaFunctionSucceededEventDetails {
     /**
-     * The JSON data output by the lambda function.
+     * The JSON data output by the lambda function. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     output?: SensitiveData;
+    /**
+     * Contains details about the output of an execution history event.
+     */
+    outputDetails?: HistoryEventExecutionDataDetails;
   }
   export interface LambdaFunctionTimedOutEventDetails {
     /**
@@ -848,7 +928,7 @@ declare namespace StepFunctions {
      */
     level?: LogLevel;
     /**
-     * Determines whether execution data is included in your log. When set to FALSE, data is excluded.
+     * Determines whether execution data is included in your log. When set to false, data is excluded.
      */
     includeExecutionData?: IncludeExecutionData;
     /**
@@ -906,7 +986,7 @@ declare namespace StepFunctions {
      */
     taskToken: TaskToken;
     /**
-     * The JSON output of the task.
+     * The JSON output of the task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     output: SensitiveData;
   }
@@ -926,13 +1006,17 @@ declare namespace StepFunctions {
      */
     name?: Name;
     /**
-     * The string that contains the JSON input data for the execution, for example:  "input": "{\"first_name\" : \"test\"}"   If you don't include any JSON input data, you still must include the two braces, for example: "input": "{}"  
+     * The string that contains the JSON input data for the execution, for example:  "input": "{\"first_name\" : \"test\"}"   If you don't include any JSON input data, you still must include the two braces, for example: "input": "{}"   Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     input?: SensitiveData;
+    /**
+     * Passes the AWS X-Ray trace header. The trace header can also be passed in the request payload.
+     */
+    traceHeader?: TraceHeader;
   }
   export interface StartExecutionOutput {
     /**
-     * The Amazon Resource Name (ARN) that id entifies the execution.
+     * The Amazon Resource Name (ARN) that identifies the execution.
      */
     executionArn: Arn;
     /**
@@ -940,15 +1024,89 @@ declare namespace StepFunctions {
      */
     startDate: Timestamp;
   }
+  export interface StartSyncExecutionInput {
+    /**
+     * The Amazon Resource Name (ARN) of the state machine to execute.
+     */
+    stateMachineArn: Arn;
+    /**
+     * The name of the execution.
+     */
+    name?: Name;
+    /**
+     * The string that contains the JSON input data for the execution, for example:  "input": "{\"first_name\" : \"test\"}"   If you don't include any JSON input data, you still must include the two braces, for example: "input": "{}"   Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
+     */
+    input?: SensitiveData;
+    /**
+     * Passes the AWS X-Ray trace header. The trace header can also be passed in the request payload.
+     */
+    traceHeader?: TraceHeader;
+  }
+  export interface StartSyncExecutionOutput {
+    /**
+     * The Amazon Resource Name (ARN) that identifies the execution.
+     */
+    executionArn: Arn;
+    /**
+     * The Amazon Resource Name (ARN) that identifies the state machine.
+     */
+    stateMachineArn?: Arn;
+    /**
+     * The name of the execution.
+     */
+    name?: Name;
+    /**
+     * The date the execution is started.
+     */
+    startDate: Timestamp;
+    /**
+     * If the execution has already ended, the date the execution stopped.
+     */
+    stopDate: Timestamp;
+    /**
+     * The current status of the execution.
+     */
+    status: SyncExecutionStatus;
+    /**
+     * The error code of the failure.
+     */
+    error?: SensitiveError;
+    /**
+     * A more detailed explanation of the cause of the failure.
+     */
+    cause?: SensitiveCause;
+    /**
+     * The string that contains the JSON input data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
+     */
+    input?: SensitiveData;
+    inputDetails?: CloudWatchEventsExecutionDataDetails;
+    /**
+     * The JSON output data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.  This field is set only if the execution succeeds. If the execution fails, this field is null. 
+     */
+    output?: SensitiveData;
+    outputDetails?: CloudWatchEventsExecutionDataDetails;
+    /**
+     * The AWS X-Ray trace header that was passed to the execution.
+     */
+    traceHeader?: TraceHeader;
+    /**
+     * An object that describes workflow billing details, including billed duration and memory use.
+     */
+    billingDetails?: BillingDetails;
+  }
   export interface StateEnteredEventDetails {
     /**
      * The name of the state.
      */
     name: Name;
     /**
-     * The string that contains the JSON input data for the state.
+     * The string that contains the JSON input data for the state. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     input?: SensitiveData;
+    /**
+     * Contains details about the input for an execution history event.
+     */
+    inputDetails?: HistoryEventExecutionDataDetails;
   }
   export interface StateExitedEventDetails {
     /**
@@ -956,9 +1114,13 @@ declare namespace StepFunctions {
      */
     name: Name;
     /**
-     * The JSON output data of the state.
+     * The JSON output data of the state. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     output?: SensitiveData;
+    /**
+     * Contains details about the output of an execution history event.
+     */
+    outputDetails?: HistoryEventExecutionDataDetails;
   }
   export type StateMachineList = StateMachineListItem[];
   export interface StateMachineListItem {
@@ -1001,6 +1163,7 @@ declare namespace StepFunctions {
      */
     stopDate: Timestamp;
   }
+  export type SyncExecutionStatus = "SUCCEEDED"|"FAILED"|"TIMED_OUT"|string;
   export interface Tag {
     /**
      * The key of a tag.
@@ -1059,13 +1222,17 @@ declare namespace StepFunctions {
      */
     region: Name;
     /**
-     * The JSON data passed to the resource referenced in a task state.
+     * The JSON data passed to the resource referenced in a task state. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     parameters: ConnectorParameters;
     /**
      * The maximum allowed duration of the task.
      */
     timeoutInSeconds?: TimeoutInSeconds;
+    /**
+     * The maximum allowed duration between two heartbeats for the task.
+     */
+    heartbeatInSeconds?: TimeoutInSeconds;
   }
   export interface TaskStartFailedEventDetails {
     /**
@@ -1123,9 +1290,13 @@ declare namespace StepFunctions {
      */
     resource: Name;
     /**
-     * The response from a resource when a task has started.
+     * The response from a resource when a task has started. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     output?: SensitiveData;
+    /**
+     * Contains details about the output of an execution history event.
+     */
+    outputDetails?: HistoryEventExecutionDataDetails;
   }
   export interface TaskSucceededEventDetails {
     /**
@@ -1137,9 +1308,13 @@ declare namespace StepFunctions {
      */
     resource: Name;
     /**
-     * The full JSON response from a resource when a task has succeeded. This response becomes the output of the related task.
+     * The full JSON response from a resource when a task has succeeded. This response becomes the output of the related task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.
      */
     output?: SensitiveData;
+    /**
+     * Contains details about the output of an execution history event.
+     */
+    outputDetails?: HistoryEventExecutionDataDetails;
   }
   export interface TaskTimedOutEventDetails {
     /**
@@ -1162,6 +1337,13 @@ declare namespace StepFunctions {
   export type TaskToken = string;
   export type TimeoutInSeconds = number;
   export type Timestamp = Date;
+  export type TraceHeader = string;
+  export interface TracingConfiguration {
+    /**
+     * When set to true, AWS X-Ray tracing is enabled.
+     */
+    enabled?: Enabled;
+  }
   export type UnsignedInteger = number;
   export interface UntagResourceInput {
     /**
@@ -1192,6 +1374,10 @@ declare namespace StepFunctions {
      * The LoggingConfiguration data type is used to set CloudWatch Logs options.
      */
     loggingConfiguration?: LoggingConfiguration;
+    /**
+     * Selects whether AWS X-Ray tracing is enabled.
+     */
+    tracingConfiguration?: TracingConfiguration;
   }
   export interface UpdateStateMachineOutput {
     /**
@@ -1199,6 +1385,8 @@ declare namespace StepFunctions {
      */
     updateDate: Timestamp;
   }
+  export type includedDetails = boolean;
+  export type truncated = boolean;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

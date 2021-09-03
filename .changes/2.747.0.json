@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "WorkSpaces",
+        "description": "Adding support for Microsoft Office 2016 and Microsoft Office 2019 in BYOL Images"
+    },
+    {
+        "type": "feature",
+        "category": "XRay",
+        "description": "Enhancing CreateGroup, UpdateGroup, GetGroup and GetGroups APIs to support configuring X-Ray Insights"
+    }
+]

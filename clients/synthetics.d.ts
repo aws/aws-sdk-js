@@ -92,11 +92,11 @@ declare class Synthetics extends Service {
    */
   stopCanary(callback?: (err: AWSError, data: Synthetics.Types.StopCanaryResponse) => void): Request<Synthetics.Types.StopCanaryResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified canary.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary.
+   * Assigns one or more tags (key-value pairs) to the specified canary.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary.
    */
   tagResource(params: Synthetics.Types.TagResourceRequest, callback?: (err: AWSError, data: Synthetics.Types.TagResourceResponse) => void): Request<Synthetics.Types.TagResourceResponse, AWSError>;
   /**
-   * Assigns one or more tags (key-value pairs) to the specified canary.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters. You can use the TagResource action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary.
+   * Assigns one or more tags (key-value pairs) to the specified canary.  Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with certain tag values. Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters. You can use the TagResource action with a canary that already has tags. If you specify a new tag key for the alarm, this tag is appended to the list of tags associated with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces the previous value for that tag. You can associate as many as 50 tags with a canary.
    */
   tagResource(callback?: (err: AWSError, data: Synthetics.Types.TagResourceResponse) => void): Request<Synthetics.Types.TagResourceResponse, AWSError>;
   /**
@@ -117,7 +117,19 @@ declare class Synthetics extends Service {
   updateCanary(callback?: (err: AWSError, data: Synthetics.Types.UpdateCanaryResponse) => void): Request<Synthetics.Types.UpdateCanaryResponse, AWSError>;
 }
 declare namespace Synthetics {
-  export type Arn = string;
+  export interface BaseScreenshot {
+    /**
+     * The name of the screenshot. This is generated the first time the canary is run after the UpdateCanary operation that specified for this canary to perform visual monitoring.
+     */
+    ScreenshotName: String;
+    /**
+     * Coordinates that define the part of a screen to ignore during screenshot comparisons. To obtain the coordinates to use here, use the CloudWatch Logs console to draw the boundaries on the screen. For more information, see {LINK}
+     */
+    IgnoreCoordinates?: BaseScreenshotIgnoreCoordinates;
+  }
+  export type BaseScreenshotConfigIgnoreCoordinate = string;
+  export type BaseScreenshotIgnoreCoordinates = BaseScreenshotConfigIgnoreCoordinate[];
+  export type BaseScreenshots = BaseScreenshot[];
   export type _Blob = Buffer|Uint8Array|Blob|string;
   export type Canaries = Canary[];
   export type CanariesLastRun = CanaryLastRun[];
@@ -134,7 +146,7 @@ declare namespace Synthetics {
     /**
      * The ARN of the IAM role used to run the canary. This role must include lambda.amazonaws.com as a principal in the trust policy.
      */
-    ExecutionRoleArn?: Arn;
+    ExecutionRoleArn?: RoleArn;
     /**
      * A structure that contains information about how often the canary is to run, and when these runs are to stop.
      */
@@ -163,20 +175,25 @@ declare namespace Synthetics {
     /**
      * The ARN of the Lambda function that is used as your canary's engine. For more information about Lambda ARN format, see Resources and Conditions for Lambda Actions.
      */
-    EngineArn?: Arn;
+    EngineArn?: FunctionArn;
     /**
-     * Specifies the runtime version to use for the canary. Currently, the only valid value is syn-1.0. For more information about runtime versions, see  Canary Runtime Versions.
+     * Specifies the runtime version to use for the canary. For more information about runtime versions, see  Canary Runtime Versions.
      */
     RuntimeVersion?: String;
     VpcConfig?: VpcConfigOutput;
+    /**
+     * If this canary performs visual monitoring by comparing screenshots, this structure contains the ID of the canary run to use as the baseline for screenshots, and the coordinates of any parts of the screen to ignore during the visual monitoring comparison.
+     */
+    VisualReference?: VisualReferenceOutput;
     /**
      * The list of key-value pairs that are associated with the canary.
      */
     Tags?: TagMap;
   }
+  export type CanaryArn = string;
   export interface CanaryCodeInput {
     /**
-     * If your canary script is located in S3, specify the full bucket name here. The bucket must already exist. Specify the full bucket name, including s3:// as the start of the bucket name.
+     * If your canary script is located in S3, specify the bucket name here. Do not include s3:// as the start of the bucket name.
      */
     S3Bucket?: String;
     /**
@@ -188,11 +205,11 @@ declare namespace Synthetics {
      */
     S3Version?: String;
     /**
-     * If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the .zip file that contains the script. It can be up to 5 MB.
+     * If you input your canary script directly into the canary instead of referring to an S3 location, the value of this parameter is the base64-encoded contents of the .zip file that contains the script. It must be smaller than 256 Kb.
      */
     ZipFile?: _Blob;
     /**
-     * The entry point to use for the source code when running the canary. This value must end with the string .handler.
+     * The entry point to use for the source code when running the canary. This value must end with the string .handler. The string is limited to 29 characters or fewer.
      */
     Handler: String;
   }
@@ -219,6 +236,10 @@ declare namespace Synthetics {
   export type CanaryName = string;
   export interface CanaryRun {
     /**
+     * A unique ID that identifies this canary run.
+     */
+    Id?: UUID;
+    /**
      * The name of the canary.
      */
     Name?: CanaryName;
@@ -237,13 +258,21 @@ declare namespace Synthetics {
   }
   export interface CanaryRunConfigInput {
     /**
-     * How long the canary is allowed to run before it must stop. If you omit this field, the frequency of the canary is used as this value, up to a maximum of 14 minutes.
+     * How long the canary is allowed to run before it must stop. You can't set this time to be longer than the frequency of the runs of this canary. If you omit this field, the frequency of the canary is used as this value, up to a maximum of 14 minutes.
      */
-    TimeoutInSeconds: MaxFifteenMinutesInSeconds;
+    TimeoutInSeconds?: MaxFifteenMinutesInSeconds;
     /**
-     * The maximum amount of memory available to the canary while it is running, in MB. The value you specify must be a multiple of 64.
+     * The maximum amount of memory available to the canary while it is running, in MB. This value must be a multiple of 64.
      */
     MemoryInMB?: MaxSize3008;
+    /**
+     * Specifies whether this canary is to use active X-Ray tracing when it runs. Active tracing enables this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does not hit an endpoint that has X-Ray tracing enabled. Using X-Ray tracing incurs charges. For more information, see  Canaries and X-Ray tracing. You can enable active tracing only for canaries that use version syn-nodejs-2.0 or later for their canary runtime.
+     */
+    ActiveTracing?: NullableBoolean;
+    /**
+     * Specifies the keys and values to use for any environment variables used in the canary script. Use the following format: { "key1" : "value1", "key2" : "value2", ...} Keys must start with a letter and be at least two characters. The total size of your environment variables cannot exceed 4 KB. You can't specify any Lambda reserved environment variables as the keys for your environment variables. For more information about reserved keys, see  Runtime environment variables.
+     */
+    EnvironmentVariables?: EnvironmentVariablesMap;
   }
   export interface CanaryRunConfigOutput {
     /**
@@ -251,9 +280,13 @@ declare namespace Synthetics {
      */
     TimeoutInSeconds?: MaxFifteenMinutesInSeconds;
     /**
-     * The maximum amount of memory available to the canary while it is running, in MB. The value you must be a multiple of 64.
+     * The maximum amount of memory available to the canary while it is running, in MB. This value must be a multiple of 64.
      */
     MemoryInMB?: MaxSize3008;
+    /**
+     * Displays whether this canary run used active X-Ray tracing. 
+     */
+    ActiveTracing?: NullableBoolean;
   }
   export type CanaryRunState = "RUNNING"|"PASSED"|"FAILED"|string;
   export type CanaryRunStateReasonCode = "CANARY_FAILURE"|"EXECUTION_FAILURE"|string;
@@ -284,7 +317,7 @@ declare namespace Synthetics {
   export type CanaryRuns = CanaryRun[];
   export interface CanaryScheduleInput {
     /**
-     * A rate expression that defines how often the canary is to run. The syntax is rate(number unit). unit can be minute, minutes, or hour.  For example, rate(1 minute) runs the canary once a minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs it once every hour. You can specify a frequency between rate(1 minute) and rate(1 hour). Specifying rate(0 minute) or rate(0 hour) is a special value that causes the canary to run only once when it is started.
+     * A rate expression or a cron expression that defines how often the canary is to run. For a rate expression, The syntax is rate(number unit). unit can be minute, minutes, or hour.  For example, rate(1 minute) runs the canary once a minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs it once every hour. You can specify a frequency between rate(1 minute) and rate(1 hour). Specifying rate(0 minute) or rate(0 hour) is a special value that causes the canary to run only once when it is started. Use cron(expression) to specify a cron expression. You can't schedule a canary to wait for more than a year before running. For information about the syntax for cron expressions, see  Scheduling canary runs using cron.
      */
     Expression: String;
     /**
@@ -294,7 +327,7 @@ declare namespace Synthetics {
   }
   export interface CanaryScheduleOutput {
     /**
-     * A rate expression that defines how often the canary is to run. The syntax is rate(number unit). unit can be minute, minutes, or hour.  For example, rate(1 minute) runs the canary once a minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs it once every hour. Specifying rate(0 minute) or rate(0 hour) is a special value that causes the canary to run only once when it is started.
+     * A rate expression or a cron expression that defines how often the canary is to run. For a rate expression, The syntax is rate(number unit). unit can be minute, minutes, or hour.  For example, rate(1 minute) runs the canary once a minute, rate(10 minutes) runs it once every 10 minutes, and rate(1 hour) runs it once every hour. You can specify a frequency between rate(1 minute) and rate(1 hour). Specifying rate(0 minute) or rate(0 hour) is a special value that causes the canary to run only once when it is started. Use cron(expression) to specify a cron expression. For information about the syntax for cron expressions, see  Scheduling canary runs using cron.
      */
     Expression?: String;
     /**
@@ -346,13 +379,13 @@ declare namespace Synthetics {
      */
     Code: CanaryCodeInput;
     /**
-     * The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files.
+     * The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files. The name of the S3 bucket can't include a period (.).
      */
     ArtifactS3Location: String;
     /**
-     * The ARN of the IAM role to be used to run the canary. This role must already exist, and must include lambda.amazonaws.com as a principal in the trust policy. The role must also have the following permissions:    s3:PutObject     s3:GetBucketLocation     s3:ListAllMyBuckets     cloudwatch:PutMetricData     logs:CreateLogGroup     logs:CreateLogStream     logs:CreateLogStream   
+     * The ARN of the IAM role to be used to run the canary. This role must already exist, and must include lambda.amazonaws.com as a principal in the trust policy. The role must also have the following permissions:    s3:PutObject     s3:GetBucketLocation     s3:ListAllMyBuckets     cloudwatch:PutMetricData     logs:CreateLogGroup     logs:CreateLogStream     logs:PutLogEvents   
      */
-    ExecutionRoleArn: Arn;
+    ExecutionRoleArn: RoleArn;
     /**
      * A structure that contains information about how often the canary is to run and when these test runs are to stop.
      */
@@ -370,7 +403,7 @@ declare namespace Synthetics {
      */
     FailureRetentionPeriodInDays?: MaxSize1024;
     /**
-     * Specifies the runtime version to use for the canary. Currently, the only valid value is syn-1.0. For more information about runtime versions, see  Canary Runtime Versions.
+     * Specifies the runtime version to use for the canary. For a list of valid runtime versions and more information about runtime versions, see  Canary Runtime Versions.
      */
     RuntimeVersion: String;
     /**
@@ -456,6 +489,10 @@ declare namespace Synthetics {
      */
     NextToken?: Token;
   }
+  export type EnvironmentVariableName = string;
+  export type EnvironmentVariableValue = string;
+  export type EnvironmentVariablesMap = {[key: string]: EnvironmentVariableValue};
+  export type FunctionArn = string;
   export interface GetCanaryRequest {
     /**
      * The name of the canary that you want details for.
@@ -496,7 +533,7 @@ declare namespace Synthetics {
     /**
      * The ARN of the canary that you want to view tags for. The ARN format of a canary is arn:aws:synthetics:Region:account-id:canary:canary-name .
      */
-    ResourceArn: Arn;
+    ResourceArn: CanaryArn;
   }
   export interface ListTagsForResourceResponse {
     /**
@@ -510,9 +547,11 @@ declare namespace Synthetics {
   export type MaxSize100 = number;
   export type MaxSize1024 = number;
   export type MaxSize3008 = number;
+  export type NullableBoolean = boolean;
+  export type RoleArn = string;
   export interface RuntimeVersion {
     /**
-     * The name of the runtime version. Currently, the only valid value is syn-1.0.  Specifies the runtime version to use for the canary. Currently, the only valid value is syn-1.0.
+     * The name of the runtime version. For a list of valid runtime versions, see  Canary Runtime Versions.
      */
     VersionName?: String;
     /**
@@ -557,7 +596,7 @@ declare namespace Synthetics {
     /**
      * The ARN of the canary that you're adding tags to. The ARN format of a canary is arn:aws:synthetics:Region:account-id:canary:canary-name .
      */
-    ResourceArn: Arn;
+    ResourceArn: CanaryArn;
     /**
      * The list of key-value pairs to associate with the canary.
      */
@@ -573,7 +612,7 @@ declare namespace Synthetics {
     /**
      * The ARN of the canary that you're removing tags from. The ARN format of a canary is arn:aws:synthetics:Region:account-id:canary:canary-name .
      */
-    ResourceArn: Arn;
+    ResourceArn: CanaryArn;
     /**
      * The list of tag keys to remove from the resource.
      */
@@ -593,9 +632,9 @@ declare namespace Synthetics {
     /**
      * The ARN of the IAM role to be used to run the canary. This role must already exist, and must include lambda.amazonaws.com as a principal in the trust policy. The role must also have the following permissions:    s3:PutObject     s3:GetBucketLocation     s3:ListAllMyBuckets     cloudwatch:PutMetricData     logs:CreateLogGroup     logs:CreateLogStream     logs:CreateLogStream   
      */
-    ExecutionRoleArn?: Arn;
+    ExecutionRoleArn?: RoleArn;
     /**
-     * Specifies the runtime version to use for the canary. Currently, the only valid value is syn-1.0. For more information about runtime versions, see  Canary Runtime Versions.
+     * Specifies the runtime version to use for the canary. For a list of valid runtime versions and for more information about runtime versions, see  Canary Runtime Versions.
      */
     RuntimeVersion?: String;
     /**
@@ -618,8 +657,32 @@ declare namespace Synthetics {
      * If this canary is to test an endpoint in a VPC, this structure contains information about the subnet and security groups of the VPC endpoint. For more information, see  Running a Canary in a VPC.
      */
     VpcConfig?: VpcConfigInput;
+    /**
+     * Defines the screenshots to use as the baseline for comparisons during visual monitoring comparisons during future runs of this canary. If you omit this parameter, no changes are made to any baseline screenshots that the canary might be using already. Visual monitoring is supported only on canaries running the syn-puppeteer-node-3.2 runtime or later. For more information, see  Visual monitoring and  Visual monitoring blueprint 
+     */
+    VisualReference?: VisualReferenceInput;
   }
   export interface UpdateCanaryResponse {
+  }
+  export interface VisualReferenceInput {
+    /**
+     * An array of screenshots that will be used as the baseline for visual monitoring in future runs of this canary. If there is a screenshot that you don't want to be used for visual monitoring, remove it from this array.
+     */
+    BaseScreenshots?: BaseScreenshots;
+    /**
+     * Specifies which canary run to use the screenshots from as the baseline for future visual monitoring with this canary. Valid values are nextrun to use the screenshots from the next run after this update is made, lastrun to use the screenshots from the most recent run before this update was made, or the value of Id in the  CanaryRun from any past run of this canary.
+     */
+    BaseCanaryRunId: String;
+  }
+  export interface VisualReferenceOutput {
+    /**
+     * An array of screenshots that are used as the baseline for comparisons during visual monitoring.
+     */
+    BaseScreenshots?: BaseScreenshots;
+    /**
+     * The ID of the canary run that produced the screenshots that are used as the baseline for visual monitoring comparisons during future runs of this canary.
+     */
+    BaseCanaryRunId?: String;
   }
   export interface VpcConfigInput {
     /**

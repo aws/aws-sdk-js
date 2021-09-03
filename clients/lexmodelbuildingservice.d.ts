@@ -228,6 +228,22 @@ declare class LexModelBuildingService extends Service {
    */
   getIntents(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetIntentsResponse) => void): Request<LexModelBuildingService.Types.GetIntentsResponse, AWSError>;
   /**
+   * Provides details about an ongoing or complete migration from an Amazon Lex V1 bot to an Amazon Lex V2 bot. Use this operation to view the migration alerts and warnings related to the migration.
+   */
+  getMigration(params: LexModelBuildingService.Types.GetMigrationRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetMigrationResponse) => void): Request<LexModelBuildingService.Types.GetMigrationResponse, AWSError>;
+  /**
+   * Provides details about an ongoing or complete migration from an Amazon Lex V1 bot to an Amazon Lex V2 bot. Use this operation to view the migration alerts and warnings related to the migration.
+   */
+  getMigration(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetMigrationResponse) => void): Request<LexModelBuildingService.Types.GetMigrationResponse, AWSError>;
+  /**
+   * Gets a list of migrations between Amazon Lex V1 and Amazon Lex V2.
+   */
+  getMigrations(params: LexModelBuildingService.Types.GetMigrationsRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetMigrationsResponse) => void): Request<LexModelBuildingService.Types.GetMigrationsResponse, AWSError>;
+  /**
+   * Gets a list of migrations between Amazon Lex V1 and Amazon Lex V2.
+   */
+  getMigrations(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetMigrationsResponse) => void): Request<LexModelBuildingService.Types.GetMigrationsResponse, AWSError>;
+  /**
    * Returns information about a specific version of a slot type. In addition to specifying the slot type name, you must specify the slot type version. This operation requires permissions for the lex:GetSlotType action.
    */
   getSlotType(params: LexModelBuildingService.Types.GetSlotTypeRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetSlotTypeResponse) => void): Request<LexModelBuildingService.Types.GetSlotTypeResponse, AWSError>;
@@ -252,11 +268,11 @@ declare class LexModelBuildingService extends Service {
    */
   getSlotTypes(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetSlotTypesResponse) => void): Request<LexModelBuildingService.Types.GetSlotTypesResponse, AWSError>;
   /**
-   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  Utterance statistics are generated once a day. Data is available for the last 15 days. You can request information for up to 5 versions of your bot in each request. Amazon Lex returns the most frequent utterances received by the bot in the last 15 days. The response contains information about a maximum of 100 utterances for each version. If you set childDirected field to true when you created your bot, or if you opted out of participating in improving Amazon Lex, utterances are not available. This operation requires permissions for the lex:GetUtterancesView action.
+   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  Utterance statistics are generated once a day. Data is available for the last 15 days. You can request information for up to 5 versions of your bot in each request. Amazon Lex returns the most frequent utterances received by the bot in the last 15 days. The response contains information about a maximum of 100 utterances for each version. If you set childDirected field to true when you created your bot, if you are using slot obfuscation with one or more slots, or if you opted out of participating in improving Amazon Lex, utterances are not available. This operation requires permissions for the lex:GetUtterancesView action.
    */
   getUtterancesView(params: LexModelBuildingService.Types.GetUtterancesViewRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.GetUtterancesViewResponse) => void): Request<LexModelBuildingService.Types.GetUtterancesViewResponse, AWSError>;
   /**
-   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  Utterance statistics are generated once a day. Data is available for the last 15 days. You can request information for up to 5 versions of your bot in each request. Amazon Lex returns the most frequent utterances received by the bot in the last 15 days. The response contains information about a maximum of 100 utterances for each version. If you set childDirected field to true when you created your bot, or if you opted out of participating in improving Amazon Lex, utterances are not available. This operation requires permissions for the lex:GetUtterancesView action.
+   * Use the GetUtterancesView operation to get information about the utterances that your users have made to your bot. You can use this list to tune the utterances that your bot responds to. For example, say that you have created a bot to order flowers. After your users have used your bot for a while, use the GetUtterancesView operation to see the requests that they have made and whether they have been successful. You might find that the utterance "I want flowers" is not being recognized. You could add this utterance to the OrderFlowers intent so that your bot recognizes that utterance. After you publish a new version of a bot, you can get information about the old version and the new so that you can compare the performance across the two versions.  Utterance statistics are generated once a day. Data is available for the last 15 days. You can request information for up to 5 versions of your bot in each request. Amazon Lex returns the most frequent utterances received by the bot in the last 15 days. The response contains information about a maximum of 100 utterances for each version. If you set childDirected field to true when you created your bot, if you are using slot obfuscation with one or more slots, or if you opted out of participating in improving Amazon Lex, utterances are not available. This operation requires permissions for the lex:GetUtterancesView action.
    */
   getUtterancesView(callback?: (err: AWSError, data: LexModelBuildingService.Types.GetUtterancesViewResponse) => void): Request<LexModelBuildingService.Types.GetUtterancesViewResponse, AWSError>;
   /**
@@ -307,6 +323,14 @@ declare class LexModelBuildingService extends Service {
    * Starts a job to import a resource to Amazon Lex.
    */
   startImport(callback?: (err: AWSError, data: LexModelBuildingService.Types.StartImportResponse) => void): Request<LexModelBuildingService.Types.StartImportResponse, AWSError>;
+  /**
+   * Starts migrating a bot from Amazon Lex V1 to Amazon Lex V2. Migrate your bot when you want to take advantage of the new features of Amazon Lex V2. For more information, see Migrating a bot in the Amazon Lex developer guide.
+   */
+  startMigration(params: LexModelBuildingService.Types.StartMigrationRequest, callback?: (err: AWSError, data: LexModelBuildingService.Types.StartMigrationResponse) => void): Request<LexModelBuildingService.Types.StartMigrationResponse, AWSError>;
+  /**
+   * Starts migrating a bot from Amazon Lex V1 to Amazon Lex V2. Migrate your bot when you want to take advantage of the new features of Amazon Lex V2. For more information, see Migrating a bot in the Amazon Lex developer guide.
+   */
+  startMigration(callback?: (err: AWSError, data: LexModelBuildingService.Types.StartMigrationResponse) => void): Request<LexModelBuildingService.Types.StartMigrationResponse, AWSError>;
   /**
    * Adds the specified tags to the specified resource. If a tag key already exists, the existing value is replaced with the new value.
    */
@@ -481,6 +505,8 @@ declare namespace LexModelBuildingService {
   export type ConfidenceThreshold = number;
   export type ContentString = string;
   export type ContentType = "PlainText"|"SSML"|"CustomPayload"|string;
+  export type ContextTimeToLiveInSeconds = number;
+  export type ContextTurnsToLive = number;
   export interface ConversationLogsRequest {
     /**
      * The settings for your conversation logs. You can log the conversation text, conversation audio, or both.
@@ -530,7 +556,7 @@ declare namespace LexModelBuildingService {
      */
     clarificationPrompt?: Prompt;
     /**
-     * The message that Amazon Lex uses to abort a conversation. For more information, see PutBot.
+     * The message that Amazon Lex uses to cancel a conversation. For more information, see PutBot.
      */
     abortStatement?: Statement;
     /**
@@ -574,7 +600,7 @@ declare namespace LexModelBuildingService {
      */
     childDirected?: Boolean;
     /**
-     * Indicates whether the bot uses the new natural language understanding (NLU) model or the original NLU. True indicates that the bot is using the new model, otherwise, false.
+     * Indicates whether the bot uses accuracy improvements. true indicates that the bot is using the improvements, otherwise, false.
      */
     enableModelImprovements?: Boolean;
     /**
@@ -654,9 +680,17 @@ declare namespace LexModelBuildingService {
      */
     checksum?: String;
     /**
-     * Configuration information, if any, for connectin an Amazon Kendra index with the AMAZON.KendraSearchIntent intent.
+     * Configuration information, if any, for connecting an Amazon Kendra index with the AMAZON.KendraSearchIntent intent.
      */
     kendraConfiguration?: KendraConfiguration;
+    /**
+     * An array of InputContext objects that lists the contexts that must be active for Amazon Lex to choose the intent in a conversation with the user.
+     */
+    inputContexts?: InputContextList;
+    /**
+     * An array of OutputContext objects that lists the contexts that the intent activates when the intent is fulfilled.
+     */
+    outputContexts?: OutputContextList;
   }
   export interface CreateSlotTypeVersionRequest {
     /**
@@ -1009,11 +1043,11 @@ declare namespace LexModelBuildingService {
      */
     intents?: IntentList;
     /**
-     * Indicates whether the bot uses the new natural language understanding (NLU) model or the original NLU. True indicates that the bot is using the new model, otherwise, false.
+     * Indicates whether the bot uses accuracy improvements. true indicates that the bot is using the improvements, otherwise, false.
      */
     enableModelImprovements?: Boolean;
     /**
-     * The score that determines where Amazon Lex inserts the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot.
+     * The score that determines where Amazon Lex inserts the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent is inserted if the confidence score for all intents is below this value. AMAZON.KendraSearchIntent is only inserted if it is configured for the bot.
      */
     nluIntentConfidenceThreshold?: ConfidenceThreshold;
     /**
@@ -1352,6 +1386,14 @@ declare namespace LexModelBuildingService {
      * Configuration information, if any, to connect to an Amazon Kendra index with the AMAZON.KendraSearchIntent intent.
      */
     kendraConfiguration?: KendraConfiguration;
+    /**
+     * An array of InputContext objects that lists the contexts that must be active for Amazon Lex to choose the intent in a conversation with the user.
+     */
+    inputContexts?: InputContextList;
+    /**
+     * An array of OutputContext objects that lists the contexts that the intent activates when the intent is fulfilled.
+     */
+    outputContexts?: OutputContextList;
   }
   export interface GetIntentVersionsRequest {
     /**
@@ -1398,6 +1440,90 @@ declare namespace LexModelBuildingService {
     intents?: IntentMetadataList;
     /**
      * If the response is truncated, the response includes a pagination token that you can specify in your next request to fetch the next page of intents. 
+     */
+    nextToken?: NextToken;
+  }
+  export interface GetMigrationRequest {
+    /**
+     * The unique identifier of the migration to view. The migrationID is returned by the operation.
+     */
+    migrationId: MigrationId;
+  }
+  export interface GetMigrationResponse {
+    /**
+     * The unique identifier of the migration. This is the same as the identifier used when calling the GetMigration operation.
+     */
+    migrationId?: MigrationId;
+    /**
+     * The name of the Amazon Lex V1 bot migrated to Amazon Lex V2.
+     */
+    v1BotName?: BotName;
+    /**
+     * The version of the Amazon Lex V1 bot migrated to Amazon Lex V2.
+     */
+    v1BotVersion?: Version;
+    /**
+     * The locale of the Amazon Lex V1 bot migrated to Amazon Lex V2.
+     */
+    v1BotLocale?: Locale;
+    /**
+     * The unique identifier of the Amazon Lex V2 bot that the Amazon Lex V1 is being migrated to.
+     */
+    v2BotId?: V2BotId;
+    /**
+     * The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
+     */
+    v2BotRole?: IamRoleArn;
+    /**
+     * Indicates the status of the migration. When the status is COMPLETE the migration is finished and the bot is available in Amazon Lex V2. There may be alerts and warnings that need to be resolved to complete the migration.
+     */
+    migrationStatus?: MigrationStatus;
+    /**
+     * The strategy used to conduct the migration.    CREATE_NEW - Creates a new Amazon Lex V2 bot and migrates the Amazon Lex V1 bot to the new bot.    UPDATE_EXISTING - Overwrites the existing Amazon Lex V2 bot metadata and the locale being migrated. It doesn't change any other locales in the Amazon Lex V2 bot. If the locale doesn't exist, a new locale is created in the Amazon Lex V2 bot.  
+     */
+    migrationStrategy?: MigrationStrategy;
+    /**
+     * The date and time that the migration started.
+     */
+    migrationTimestamp?: Timestamp;
+    /**
+     * A list of alerts and warnings that indicate issues with the migration for the Amazon Lex V1 bot to Amazon Lex V2. You receive a warning when an Amazon Lex V1 feature has a different implementation if Amazon Lex V2. For more information, see Migrating a bot in the Amazon Lex V2 developer guide.
+     */
+    alerts?: MigrationAlerts;
+  }
+  export interface GetMigrationsRequest {
+    /**
+     * The field to sort the list of migrations by. You can sort by the Amazon Lex V1 bot name or the date and time that the migration was started.
+     */
+    sortByAttribute?: MigrationSortAttribute;
+    /**
+     * The order so sort the list.
+     */
+    sortByOrder?: SortOrder;
+    /**
+     * Filters the list to contain only bots whose name contains the specified string. The string is matched anywhere in bot name.
+     */
+    v1BotNameContains?: BotName;
+    /**
+     * Filters the list to contain only migrations in the specified state.
+     */
+    migrationStatusEquals?: MigrationStatus;
+    /**
+     * The maximum number of migrations to return in the response. The default is 10.
+     */
+    maxResults?: MaxResults;
+    /**
+     * A pagination token that fetches the next page of migrations. If the response to this operation is truncated, Amazon Lex returns a pagination token in the response. To fetch the next page of migrations, specify the pagination token in the request.
+     */
+    nextToken?: NextToken;
+  }
+  export interface GetMigrationsResponse {
+    /**
+     * An array of summaries for migrations from Amazon Lex V1 to Amazon Lex V2. To see details of the migration, use the migrationId from the summary in a call to the operation.
+     */
+    migrationSummaries?: MigrationSummaryList;
+    /**
+     * If the response is truncated, it includes a pagination token that you can specify in your next request to fetch the next page of migrations.
      */
     nextToken?: NextToken;
   }
@@ -1528,6 +1654,14 @@ declare namespace LexModelBuildingService {
   export type GroupNumber = number;
   export type IamRoleArn = string;
   export type ImportStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|string;
+  export interface InputContext {
+    /**
+     * The name of the context.
+     */
+    name: InputContextName;
+  }
+  export type InputContextList = InputContext[];
+  export type InputContextName = string;
   export interface Intent {
     /**
      * The name of the intent.
@@ -1595,7 +1729,7 @@ declare namespace LexModelBuildingService {
     tags?: TagList;
   }
   export type ListsOfUtterances = UtteranceList[];
-  export type Locale = "en-US"|"en-GB"|"de-DE"|string;
+  export type Locale = "de-DE"|"en-AU"|"en-GB"|"en-IN"|"en-US"|"es-419"|"es-ES"|"es-US"|"fr-FR"|"fr-CA"|"it-IT"|"ja-JP"|"ko-KR"|string;
   export type LocaleList = Locale[];
   export interface LogSettingsRequest {
     /**
@@ -1658,10 +1792,94 @@ declare namespace LexModelBuildingService {
   }
   export type MessageList = Message[];
   export type MessageVersion = string;
+  export interface MigrationAlert {
+    /**
+     * The type of alert. There are two kinds of alerts:    ERROR - There was an issue with the migration that can't be resolved. The migration stops.    WARN - There was an issue with the migration that requires manual changes to the new Amazon Lex V2 bot. The migration continues.  
+     */
+    type?: MigrationAlertType;
+    /**
+     * A message that describes why the alert was issued.
+     */
+    message?: MigrationAlertMessage;
+    /**
+     * Additional details about the alert.
+     */
+    details?: MigrationAlertDetails;
+    /**
+     * A link to the Amazon Lex documentation that describes how to resolve the alert.
+     */
+    referenceURLs?: MigrationAlertReferenceURLs;
+  }
+  export type MigrationAlertDetail = string;
+  export type MigrationAlertDetails = MigrationAlertDetail[];
+  export type MigrationAlertMessage = string;
+  export type MigrationAlertReferenceURL = string;
+  export type MigrationAlertReferenceURLs = MigrationAlertReferenceURL[];
+  export type MigrationAlertType = "ERROR"|"WARN"|string;
+  export type MigrationAlerts = MigrationAlert[];
+  export type MigrationId = string;
+  export type MigrationSortAttribute = "V1_BOT_NAME"|"MIGRATION_DATE_TIME"|string;
+  export type MigrationStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type MigrationStrategy = "CREATE_NEW"|"UPDATE_EXISTING"|string;
+  export interface MigrationSummary {
+    /**
+     * The unique identifier that Amazon Lex assigned to the migration.
+     */
+    migrationId?: MigrationId;
+    /**
+     * The name of the Amazon Lex V1 bot that is the source of the migration.
+     */
+    v1BotName?: BotName;
+    /**
+     * The version of the Amazon Lex V1 bot that is the source of the migration.
+     */
+    v1BotVersion?: Version;
+    /**
+     * The locale of the Amazon Lex V1 bot that is the source of the migration.
+     */
+    v1BotLocale?: Locale;
+    /**
+     * The unique identifier of the Amazon Lex V2 that is the destination of the migration.
+     */
+    v2BotId?: V2BotId;
+    /**
+     * The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
+     */
+    v2BotRole?: IamRoleArn;
+    /**
+     * The status of the operation. When the status is COMPLETE the bot is available in Amazon Lex V2. There may be alerts and warnings that need to be resolved to complete the migration.
+     */
+    migrationStatus?: MigrationStatus;
+    /**
+     * The strategy used to conduct the migration.
+     */
+    migrationStrategy?: MigrationStrategy;
+    /**
+     * The date and time that the migration started.
+     */
+    migrationTimestamp?: Timestamp;
+  }
+  export type MigrationSummaryList = MigrationSummary[];
   export type Name = string;
   export type NextToken = string;
   export type NumericalVersion = string;
   export type ObfuscationSetting = "NONE"|"DEFAULT_OBFUSCATION"|string;
+  export interface OutputContext {
+    /**
+     * The name of the context.
+     */
+    name: OutputContextName;
+    /**
+     * The number of seconds that the context should be active after it is first sent in a PostContent or PostText response. You can set the value between 5 and 86,400 seconds (24 hours).
+     */
+    timeToLiveInSeconds: ContextTimeToLiveInSeconds;
+    /**
+     * The number of conversation turns that the context should be active. A conversation turn is one PostContent or PostText request and the corresponding response from Amazon Lex.
+     */
+    turnsToLive: ContextTurnsToLive;
+  }
+  export type OutputContextList = OutputContext[];
+  export type OutputContextName = string;
   export type Priority = number;
   export type ProcessBehavior = "SAVE"|"BUILD"|string;
   export interface Prompt {
@@ -1761,11 +1979,11 @@ declare namespace LexModelBuildingService {
      */
     intents?: IntentList;
     /**
-     * Set to true to enable the use of a new natural language understanding (NLU) model. Using the new NLU may improve the performance of your bot.  When you set the enableModelImprovements parameter to true you can use the nluIntentConfidenceThreshold parameter to configure confidence scores. For more information, see Confidence Scores. You can only set the enableModelImprovements parameter in certain Regions. If you set the parameter to true, your bot will use the new NLU. If you set the parameter to false, your bot will continue to use the original NLU. If you set the parameter to false after setting it to true, your bot will return to the original NLU. The Regions where you can set the enableModelImprovements parameter to true are:   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Asia Pacific (Sydney) (ap-southeast-2)   EU (Ireland) (eu-west-1)   In other Regions, the enableModelImprovements parameter is set to true by default. In these Regions setting the parameter to false throws a ValidationException exception.   Asia Pacific (Singapore) (ap-southeast-1)   Asia Pacific (Tokyo) (ap-northeast-1)   EU (Frankfurt) (eu-central-1)   EU (London) (eu-west-2)  
+     * Set to true to enable access to natural language understanding improvements.  When you set the enableModelImprovements parameter to true you can use the nluIntentConfidenceThreshold parameter to configure confidence scores. For more information, see Confidence Scores. You can only set the enableModelImprovements parameter in certain Regions. If you set the parameter to true, your bot has access to accuracy improvements. The Regions where you can set the enableModelImprovements parameter to true are:   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Asia Pacific (Sydney) (ap-southeast-2)   EU (Ireland) (eu-west-1)   In other Regions, the enableModelImprovements parameter is set to true by default. In these Regions setting the parameter to false throws a ValidationException exception.
      */
     enableModelImprovements?: Boolean;
     /**
-     * Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot. You must set the enableModelImprovements parameter to true to use confidence scores. For example, suppose a bot is configured with the confidence threshold of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns three alternative intents with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the PostText operation would be:   AMAZON.FallbackIntent   IntentA   IntentB   IntentC  
+     * Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot. You must set the enableModelImprovements parameter to true to use confidence scores in the following regions.   US East (N. Virginia) (us-east-1)   US West (Oregon) (us-west-2)   Asia Pacific (Sydney) (ap-southeast-2)   EU (Ireland) (eu-west-1)   In other Regions, the enableModelImprovements parameter is set to true by default. For example, suppose a bot is configured with the confidence threshold of 0.80 and the AMAZON.FallbackIntent. Amazon Lex returns three alternative intents with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC (0.50). The response from the PostText operation would be:   AMAZON.FallbackIntent   IntentA   IntentB   IntentC  
      */
     nluIntentConfidenceThreshold?: ConfidenceThreshold;
     /**
@@ -1773,7 +1991,7 @@ declare namespace LexModelBuildingService {
      */
     clarificationPrompt?: Prompt;
     /**
-     * When Amazon Lex can't understand the user's input in context, it tries to elicit the information a few times. After that, Amazon Lex sends the message defined in abortStatement to the user, and then aborts the conversation. To set the number of retries, use the valueElicitationPrompt field for the slot type.  For example, in a pizza ordering bot, Amazon Lex might ask a user "What type of crust would you like?" If the user's response is not one of the expected responses (for example, "thin crust, "deep dish," etc.), Amazon Lex tries to elicit a correct response a few more times.  For example, in a pizza ordering application, OrderPizza might be one of the intents. This intent might require the CrustType slot. You specify the valueElicitationPrompt field when you create the CrustType slot. If you have defined a fallback intent the abort statement will not be sent to the user, the fallback intent is used instead. For more information, see  AMAZON.FallbackIntent.
+     * When Amazon Lex can't understand the user's input in context, it tries to elicit the information a few times. After that, Amazon Lex sends the message defined in abortStatement to the user, and then cancels the conversation. To set the number of retries, use the valueElicitationPrompt field for the slot type.  For example, in a pizza ordering bot, Amazon Lex might ask a user "What type of crust would you like?" If the user's response is not one of the expected responses (for example, "thin crust, "deep dish," etc.), Amazon Lex tries to elicit a correct response a few more times.  For example, in a pizza ordering application, OrderPizza might be one of the intents. This intent might require the CrustType slot. You specify the valueElicitationPrompt field when you create the CrustType slot. If you have defined a fallback intent the cancel statement will not be sent to the user, the fallback intent is used instead. For more information, see  AMAZON.FallbackIntent.
      */
     abortStatement?: Statement;
     /**
@@ -1827,11 +2045,11 @@ declare namespace LexModelBuildingService {
      */
     intents?: IntentList;
     /**
-     * Indicates whether the bot uses the new natural language understanding (NLU) model or the original NLU. True indicates that the bot is using the new model, otherwise, false.
+     * Indicates whether the bot uses accuracy improvements. true indicates that the bot is using the improvements, otherwise, false.
      */
     enableModelImprovements?: Boolean;
     /**
-     * The score that determines where Amazon Lex inserts the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they are configured for the bot.
+     * The score that determines where Amazon Lex inserts the AMAZON.FallbackIntent, AMAZON.KendraSearchIntent, or both when returning alternative intents in a PostContent or PostText response. AMAZON.FallbackIntent is inserted if the confidence score for all intents is below this value. AMAZON.KendraSearchIntent is only inserted if it is configured for the bot.
      */
     nluIntentConfidenceThreshold?: ConfidenceThreshold;
     /**
@@ -1839,7 +2057,7 @@ declare namespace LexModelBuildingService {
      */
     clarificationPrompt?: Prompt;
     /**
-     * The message that Amazon Lex uses to abort a conversation. For more information, see PutBot.
+     * The message that Amazon Lex uses to cancel a conversation. For more information, see PutBot.
      */
     abortStatement?: Statement;
     /**
@@ -1952,6 +2170,14 @@ declare namespace LexModelBuildingService {
      * Configuration information required to use the AMAZON.KendraSearchIntent intent to connect to an Amazon Kendra index. For more information, see  AMAZON.KendraSearchIntent.
      */
     kendraConfiguration?: KendraConfiguration;
+    /**
+     * An array of InputContext objects that lists the contexts that must be active for Amazon Lex to choose the intent in a conversation with the user.
+     */
+    inputContexts?: InputContextList;
+    /**
+     * An array of OutputContext objects that lists the contexts that the intent activates when the intent is fulfilled.
+     */
+    outputContexts?: OutputContextList;
   }
   export interface PutIntentResponse {
     /**
@@ -2022,6 +2248,14 @@ declare namespace LexModelBuildingService {
      * Configuration information, if any, required to connect to an Amazon Kendra index and use the AMAZON.KendraSearchIntent intent.
      */
     kendraConfiguration?: KendraConfiguration;
+    /**
+     * An array of InputContext objects that lists the contexts that must be active for Amazon Lex to choose the intent in a conversation with the user.
+     */
+    inputContexts?: InputContextList;
+    /**
+     * An array of OutputContext objects that lists the contexts that the intent activates when the intent is fulfilled.
+     */
+    outputContexts?: OutputContextList;
   }
   export interface PutSlotTypeRequest {
     /**
@@ -2033,7 +2267,7 @@ declare namespace LexModelBuildingService {
      */
     description?: Description;
     /**
-     * A list of EnumerationValue objects that defines the values that the slot type can take. Each value can have a list of synonyms, which are additional values that help train the machine learning model about the values that it resolves for a slot.  When Amazon Lex resolves a slot value, it generates a resolution list that contains up to five possible values for the slot. If you are using a Lambda function, this resolution list is passed to the function. If you are not using a Lambda function you can choose to return the value that the user entered or the first value in the resolution list as the slot value. The valueSelectionStrategy field indicates the option to use. 
+     * A list of EnumerationValue objects that defines the values that the slot type can take. Each value can have a list of synonyms, which are additional values that help train the machine learning model about the values that it resolves for a slot.  A regular expression slot type doesn't require enumeration values. All other slot types require a list of enumeration values. When Amazon Lex resolves a slot value, it generates a resolution list that contains up to five possible values for the slot. If you are using a Lambda function, this resolution list is passed to the function. If you are not using a Lambda function you can choose to return the value that the user entered or the first value in the resolution list as the slot value. The valueSelectionStrategy field indicates the option to use. 
      */
     enumerationValues?: EnumerationValues;
     /**
@@ -2151,8 +2385,26 @@ declare namespace LexModelBuildingService {
      * Determines whether a slot is obfuscated in conversation logs and stored utterances. When you obfuscate a slot, the value is replaced by the slot name in curly braces ({}). For example, if the slot name is "full_name", obfuscated values are replaced with "{full_name}". For more information, see  Slot Obfuscation . 
      */
     obfuscationSetting?: ObfuscationSetting;
+    /**
+     * A list of default values for the slot. Default values are used when Amazon Lex hasn't determined a value for a slot. You can specify default values from context variables, session attributes, and defined values.
+     */
+    defaultValueSpec?: SlotDefaultValueSpec;
   }
   export type SlotConstraint = "Required"|"Optional"|string;
+  export interface SlotDefaultValue {
+    /**
+     * The default value for the slot. You can specify one of the following:    #context-name.slot-name - The slot value "slot-name" in the context "context-name."    {attribute} - The slot value of the session attribute "attribute."    'value' - The discrete value "value."  
+     */
+    defaultValue: SlotDefaultValueString;
+  }
+  export type SlotDefaultValueList = SlotDefaultValue[];
+  export interface SlotDefaultValueSpec {
+    /**
+     * The default values for a slot. You can specify more than one default. For example, you can specify a default value to use from a matching context variable, a session attribute, or a fixed value. The default value chosen is selected based on the order that you specify them in the list. For example, if you specify a context variable and a fixed value in that order, Amazon Lex uses the context variable if it is available, else it uses the fixed value.
+     */
+    defaultValueList: SlotDefaultValueList;
+  }
+  export type SlotDefaultValueString = string;
   export type SlotList = Slot[];
   export type SlotName = string;
   export interface SlotTypeConfiguration {
@@ -2194,6 +2446,7 @@ declare namespace LexModelBuildingService {
   }
   export type SlotUtteranceList = Utterance[];
   export type SlotValueSelectionStrategy = "ORIGINAL_VALUE"|"TOP_RESOLUTION"|string;
+  export type SortOrder = "ASCENDING"|"DESCENDING"|string;
   export interface StartImportRequest {
     /**
      * A zip archive in binary format. The archive should contain one file, a JSON file containing the resource to import. The resource should match the type specified in the resourceType field.
@@ -2241,6 +2494,62 @@ declare namespace LexModelBuildingService {
      * A timestamp for the date and time that the import job was requested.
      */
     createdDate?: Timestamp;
+  }
+  export interface StartMigrationRequest {
+    /**
+     * The name of the Amazon Lex V1 bot that you are migrating to Amazon Lex V2.
+     */
+    v1BotName: BotName;
+    /**
+     * The version of the bot to migrate to Amazon Lex V2. You can migrate the $LATEST version as well as any numbered version.
+     */
+    v1BotVersion: Version;
+    /**
+     * The name of the Amazon Lex V2 bot that you are migrating the Amazon Lex V1 bot to.    If the Amazon Lex V2 bot doesn't exist, you must use the CREATE_NEW migration strategy.   If the Amazon Lex V2 bot exists, you must use the UPDATE_EXISTING migration strategy to change the contents of the Amazon Lex V2 bot.  
+     */
+    v2BotName: V2BotName;
+    /**
+     * The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
+     */
+    v2BotRole: IamRoleArn;
+    /**
+     * The strategy used to conduct the migration.    CREATE_NEW - Creates a new Amazon Lex V2 bot and migrates the Amazon Lex V1 bot to the new bot.    UPDATE_EXISTING - Overwrites the existing Amazon Lex V2 bot metadata and the locale being migrated. It doesn't change any other locales in the Amazon Lex V2 bot. If the locale doesn't exist, a new locale is created in the Amazon Lex V2 bot.  
+     */
+    migrationStrategy: MigrationStrategy;
+  }
+  export interface StartMigrationResponse {
+    /**
+     * The name of the Amazon Lex V1 bot that you are migrating to Amazon Lex V2.
+     */
+    v1BotName?: BotName;
+    /**
+     * The version of the bot to migrate to Amazon Lex V2. 
+     */
+    v1BotVersion?: Version;
+    /**
+     * The locale used for the Amazon Lex V1 bot. 
+     */
+    v1BotLocale?: Locale;
+    /**
+     * The unique identifier for the Amazon Lex V2 bot. 
+     */
+    v2BotId?: V2BotId;
+    /**
+     * The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
+     */
+    v2BotRole?: IamRoleArn;
+    /**
+     * The unique identifier that Amazon Lex assigned to the migration.
+     */
+    migrationId?: MigrationId;
+    /**
+     * The strategy used to conduct the migration.
+     */
+    migrationStrategy?: MigrationStrategy;
+    /**
+     * The date and time that the migration started.
+     */
+    migrationTimestamp?: Timestamp;
   }
   export interface Statement {
     /**
@@ -2331,6 +2640,8 @@ declare namespace LexModelBuildingService {
     utterances?: ListOfUtterance;
   }
   export type UtteranceString = string;
+  export type V2BotId = string;
+  export type V2BotName = string;
   export type Value = string;
   export type Version = string;
   export type roleArn = string;

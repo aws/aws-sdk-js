@@ -12,6 +12,14 @@ declare class MediaPackageVod extends Service {
   constructor(options?: MediaPackageVod.Types.ClientConfiguration)
   config: Config & MediaPackageVod.Types.ClientConfiguration;
   /**
+   * Changes the packaging group's properities to configure log subscription
+   */
+  configureLogs(params: MediaPackageVod.Types.ConfigureLogsRequest, callback?: (err: AWSError, data: MediaPackageVod.Types.ConfigureLogsResponse) => void): Request<MediaPackageVod.Types.ConfigureLogsResponse, AWSError>;
+  /**
+   * Changes the packaging group's properities to configure log subscription
+   */
+  configureLogs(callback?: (err: AWSError, data: MediaPackageVod.Types.ConfigureLogsResponse) => void): Request<MediaPackageVod.Types.ConfigureLogsResponse, AWSError>;
+  /**
    * Creates a new MediaPackage VOD Asset resource.
    */
   createAsset(params: MediaPackageVod.Types.CreateAssetRequest, callback?: (err: AWSError, data: MediaPackageVod.Types.CreateAssetResponse) => void): Request<MediaPackageVod.Types.CreateAssetResponse, AWSError>;
@@ -184,6 +192,10 @@ declare namespace MediaPackageVod {
     SecretsRoleArn: __string;
   }
   export interface CmafEncryption {
+    /**
+     * An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).
+     */
+    ConstantInitializationVector?: __string;
     SpekeKeyProvider: SpekeKeyProvider;
   }
   export interface CmafPackage {
@@ -193,11 +205,40 @@ declare namespace MediaPackageVod {
      */
     HlsManifests: __listOfHlsManifest;
     /**
+     * When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.
+
+     */
+    IncludeEncoderConfigurationInSegments?: __boolean;
+    /**
      * Duration (in seconds) of each fragment. Actual fragments will be
 rounded to the nearest multiple of the source fragment duration.
 
      */
     SegmentDurationSeconds?: __integer;
+  }
+  export interface ConfigureLogsRequest {
+    EgressAccessLogs?: EgressAccessLogs;
+    /**
+     * The ID of a MediaPackage VOD PackagingGroup resource.
+     */
+    Id: __string;
+  }
+  export interface ConfigureLogsResponse {
+    /**
+     * The ARN of the PackagingGroup.
+     */
+    Arn?: __string;
+    Authorization?: Authorization;
+    /**
+     * The fully qualified domain name for Assets in the PackagingGroup.
+     */
+    DomainName?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
+    /**
+     * The ID of the PackagingGroup.
+     */
+    Id?: __string;
+    Tags?: Tags;
   }
   export interface CreateAssetRequest {
     /**
@@ -293,6 +334,7 @@ rounded to the nearest multiple of the source fragment duration.
   }
   export interface CreatePackagingGroupRequest {
     Authorization?: Authorization;
+    EgressAccessLogs?: EgressAccessLogs;
     /**
      * The ID of the PackagingGroup.
      */
@@ -309,6 +351,7 @@ rounded to the nearest multiple of the source fragment duration.
      * The fully qualified domain name for Assets in the PackagingGroup.
      */
     DomainName?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
     /**
      * The ID of the PackagingGroup.
      */
@@ -343,6 +386,11 @@ rounded to the nearest multiple of the source fragment duration.
      */
     DashManifests: __listOfDashManifest;
     Encryption?: DashEncryption;
+    /**
+     * When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.
+
+     */
+    IncludeEncoderConfigurationInSegments?: __boolean;
     /**
      * A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH)
 Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not
@@ -468,11 +516,18 @@ rounded to the nearest multiple of the source segment duration.
      * The fully qualified domain name for Assets in the PackagingGroup.
      */
     DomainName?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
     /**
      * The ID of the PackagingGroup.
      */
     Id?: __string;
     Tags?: Tags;
+  }
+  export interface EgressAccessLogs {
+    /**
+     * Customize the log group name.
+     */
+    LogGroupName?: __string;
   }
   export interface EgressEndpoint {
     /**
@@ -685,6 +740,7 @@ rounded to the nearest multiple of the source fragment duration.
      * The fully qualified domain name for Assets in the PackagingGroup.
      */
     DomainName?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
     /**
      * The ID of the PackagingGroup.
      */
@@ -762,6 +818,7 @@ MediaPackage will assume when accessing the key provider service.
      * The fully qualified domain name for Assets in the PackagingGroup.
      */
     DomainName?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
     /**
      * The ID of the PackagingGroup.
      */

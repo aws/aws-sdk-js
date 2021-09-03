@@ -94,6 +94,22 @@ var model = {
         },
       },
     },
+    'PutWithChecksum': {
+      'http': {
+        'method': 'PUT',
+        'requestUri': '/'
+      },
+      'input': {
+        'type': 'structure',
+        'members': {
+          'Body': {
+            'shape': 'StringShape'
+          }
+        },
+      },
+      'httpChecksumRequired': true,
+      'payload': 'Body'
+    },
   },
   'shapes': {
     'StreamingBody': {

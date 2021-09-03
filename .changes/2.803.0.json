@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "This release adds support for customer to run Batch Jobs on ECS Fargate, the serverless compute engine built for containers on AWS. Customer can also propagate Job and Job Definition Tags to ECS Task."
+    },
+    {
+        "type": "feature",
+        "category": "ComputeOptimizer",
+        "description": "This release enables AWS Compute Optimizer to analyze and generate optimization recommendations for EBS volumes that are attached to instances."
+    },
+    {
+        "type": "feature",
+        "category": "LicenseManager",
+        "description": "AWS License Manager enables managed entitlements for AWS customers and Software Vendors (ISV). You can track and distribute license entitlements from AWS Marketplace and supported ISVs."
+    }
+]

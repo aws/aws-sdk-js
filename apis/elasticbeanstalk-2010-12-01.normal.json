@@ -2229,7 +2229,7 @@
           "documentation": "<p>The pagination token returned by a previous request.</p>"
         },
         "MaxItems": {
-          "shape": "Integer",
+          "shape": "ManagedActionHistoryMaxItems",
           "documentation": "<p>The maximum number of items to return for a single request.</p>"
         }
       },
@@ -2755,8 +2755,11 @@
     "EnvironmentStatus": {
       "type": "string",
       "enum": [
+        "Aborting",
         "Launching",
         "Updating",
+        "LinkingFrom",
+        "LinkingTo",
         "Ready",
         "Terminating",
         "Terminated"
@@ -3277,6 +3280,11 @@
       "member": {
         "shape": "ManagedActionHistoryItem"
       },
+      "max": 100,
+      "min": 1
+    },
+    "ManagedActionHistoryMaxItems": {
+      "type": "integer",
       "max": 100,
       "min": 1
     },

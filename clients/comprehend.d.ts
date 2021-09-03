@@ -60,6 +60,14 @@ declare class Comprehend extends Service {
    */
   classifyDocument(callback?: (err: AWSError, data: Comprehend.Types.ClassifyDocumentResponse) => void): Request<Comprehend.Types.ClassifyDocumentResponse, AWSError>;
   /**
+   * Analyzes input text for the presence of personally identifiable information (PII) and returns the labels of identified PII entity types such as name, address, bank account number, or phone number.
+   */
+  containsPiiEntities(params: Comprehend.Types.ContainsPiiEntitiesRequest, callback?: (err: AWSError, data: Comprehend.Types.ContainsPiiEntitiesResponse) => void): Request<Comprehend.Types.ContainsPiiEntitiesResponse, AWSError>;
+  /**
+   * Analyzes input text for the presence of personally identifiable information (PII) and returns the labels of identified PII entity types such as name, address, bank account number, or phone number.
+   */
+  containsPiiEntities(callback?: (err: AWSError, data: Comprehend.Types.ContainsPiiEntitiesResponse) => void): Request<Comprehend.Types.ContainsPiiEntitiesResponse, AWSError>;
+  /**
    * Creates a new document classifier that you can use to categorize documents. To create a classifier, you provide a set of training documents that labeled with the categories that you want to use. After the classifier is trained you can use it to categorize a set of labeled documents into the categories. For more information, see how-document-classification.
    */
   createDocumentClassifier(params: Comprehend.Types.CreateDocumentClassifierRequest, callback?: (err: AWSError, data: Comprehend.Types.CreateDocumentClassifierResponse) => void): Request<Comprehend.Types.CreateDocumentClassifierResponse, AWSError>;
@@ -156,6 +164,14 @@ declare class Comprehend extends Service {
    */
   describeEntityRecognizer(callback?: (err: AWSError, data: Comprehend.Types.DescribeEntityRecognizerResponse) => void): Request<Comprehend.Types.DescribeEntityRecognizerResponse, AWSError>;
   /**
+   * Gets the status and details of an events detection job.
+   */
+  describeEventsDetectionJob(params: Comprehend.Types.DescribeEventsDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeEventsDetectionJobResponse) => void): Request<Comprehend.Types.DescribeEventsDetectionJobResponse, AWSError>;
+  /**
+   * Gets the status and details of an events detection job.
+   */
+  describeEventsDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeEventsDetectionJobResponse) => void): Request<Comprehend.Types.DescribeEventsDetectionJobResponse, AWSError>;
+  /**
    * Gets the properties associated with a key phrases detection job. Use this operation to get the status of a detection job.
    */
   describeKeyPhrasesDetectionJob(params: Comprehend.Types.DescribeKeyPhrasesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse, AWSError>;
@@ -163,6 +179,14 @@ declare class Comprehend extends Service {
    * Gets the properties associated with a key phrases detection job. Use this operation to get the status of a detection job.
    */
   describeKeyPhrasesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.DescribeKeyPhrasesDetectionJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with a PII entities detection job. For example, you can use this operation to get the job status.
+   */
+  describePiiEntitiesDetectionJob(params: Comprehend.Types.DescribePiiEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.DescribePiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.DescribePiiEntitiesDetectionJobResponse, AWSError>;
+  /**
+   * Gets the properties associated with a PII entities detection job. For example, you can use this operation to get the job status.
+   */
+  describePiiEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.DescribePiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.DescribePiiEntitiesDetectionJobResponse, AWSError>;
   /**
    * Gets the properties associated with a sentiment detection job. Use this operation to get the status of a detection job.
    */
@@ -203,6 +227,14 @@ declare class Comprehend extends Service {
    * Detects the key noun phrases found in the text. 
    */
   detectKeyPhrases(callback?: (err: AWSError, data: Comprehend.Types.DetectKeyPhrasesResponse) => void): Request<Comprehend.Types.DetectKeyPhrasesResponse, AWSError>;
+  /**
+   * Inspects the input text for entities that contain personally identifiable information (PII) and returns information about them.
+   */
+  detectPiiEntities(params: Comprehend.Types.DetectPiiEntitiesRequest, callback?: (err: AWSError, data: Comprehend.Types.DetectPiiEntitiesResponse) => void): Request<Comprehend.Types.DetectPiiEntitiesResponse, AWSError>;
+  /**
+   * Inspects the input text for entities that contain personally identifiable information (PII) and returns information about them.
+   */
+  detectPiiEntities(callback?: (err: AWSError, data: Comprehend.Types.DetectPiiEntitiesResponse) => void): Request<Comprehend.Types.DetectPiiEntitiesResponse, AWSError>;
   /**
    * Inspects text and returns an inference of the prevailing sentiment (POSITIVE, NEUTRAL, MIXED, or NEGATIVE). 
    */
@@ -268,6 +300,14 @@ declare class Comprehend extends Service {
    */
   listEntityRecognizers(callback?: (err: AWSError, data: Comprehend.Types.ListEntityRecognizersResponse) => void): Request<Comprehend.Types.ListEntityRecognizersResponse, AWSError>;
   /**
+   * Gets a list of the events detection jobs that you have submitted.
+   */
+  listEventsDetectionJobs(params: Comprehend.Types.ListEventsDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListEventsDetectionJobsResponse) => void): Request<Comprehend.Types.ListEventsDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of the events detection jobs that you have submitted.
+   */
+  listEventsDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListEventsDetectionJobsResponse) => void): Request<Comprehend.Types.ListEventsDetectionJobsResponse, AWSError>;
+  /**
    * Get a list of key phrase detection jobs that you have submitted.
    */
   listKeyPhrasesDetectionJobs(params: Comprehend.Types.ListKeyPhrasesDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListKeyPhrasesDetectionJobsResponse) => void): Request<Comprehend.Types.ListKeyPhrasesDetectionJobsResponse, AWSError>;
@@ -275,6 +315,14 @@ declare class Comprehend extends Service {
    * Get a list of key phrase detection jobs that you have submitted.
    */
   listKeyPhrasesDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListKeyPhrasesDetectionJobsResponse) => void): Request<Comprehend.Types.ListKeyPhrasesDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of the PII entity detection jobs that you have submitted.
+   */
+  listPiiEntitiesDetectionJobs(params: Comprehend.Types.ListPiiEntitiesDetectionJobsRequest, callback?: (err: AWSError, data: Comprehend.Types.ListPiiEntitiesDetectionJobsResponse) => void): Request<Comprehend.Types.ListPiiEntitiesDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of the PII entity detection jobs that you have submitted.
+   */
+  listPiiEntitiesDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListPiiEntitiesDetectionJobsResponse) => void): Request<Comprehend.Types.ListPiiEntitiesDetectionJobsResponse, AWSError>;
   /**
    * Gets a list of sentiment detection jobs that you have submitted.
    */
@@ -324,6 +372,14 @@ declare class Comprehend extends Service {
    */
   startEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StartEntitiesDetectionJobResponse, AWSError>;
   /**
+   * Starts an asynchronous event detection job for a collection of documents.
+   */
+  startEventsDetectionJob(params: Comprehend.Types.StartEventsDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartEventsDetectionJobResponse) => void): Request<Comprehend.Types.StartEventsDetectionJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous event detection job for a collection of documents.
+   */
+  startEventsDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartEventsDetectionJobResponse) => void): Request<Comprehend.Types.StartEventsDetectionJobResponse, AWSError>;
+  /**
    * Starts an asynchronous key phrase detection job for a collection of documents. Use the operation to track the status of a job.
    */
   startKeyPhrasesDetectionJob(params: Comprehend.Types.StartKeyPhrasesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StartKeyPhrasesDetectionJobResponse, AWSError>;
@@ -331,6 +387,14 @@ declare class Comprehend extends Service {
    * Starts an asynchronous key phrase detection job for a collection of documents. Use the operation to track the status of a job.
    */
   startKeyPhrasesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StartKeyPhrasesDetectionJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous PII entity detection job for a collection of documents.
+   */
+  startPiiEntitiesDetectionJob(params: Comprehend.Types.StartPiiEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StartPiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StartPiiEntitiesDetectionJobResponse, AWSError>;
+  /**
+   * Starts an asynchronous PII entity detection job for a collection of documents.
+   */
+  startPiiEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StartPiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StartPiiEntitiesDetectionJobResponse, AWSError>;
   /**
    * Starts an asynchronous sentiment detection job for a collection of documents. use the operation to track the status of a job.
    */
@@ -364,6 +428,14 @@ declare class Comprehend extends Service {
    */
   stopEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StopEntitiesDetectionJobResponse, AWSError>;
   /**
+   * Stops an events detection job in progress.
+   */
+  stopEventsDetectionJob(params: Comprehend.Types.StopEventsDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopEventsDetectionJobResponse) => void): Request<Comprehend.Types.StopEventsDetectionJobResponse, AWSError>;
+  /**
+   * Stops an events detection job in progress.
+   */
+  stopEventsDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopEventsDetectionJobResponse) => void): Request<Comprehend.Types.StopEventsDetectionJobResponse, AWSError>;
+  /**
    * Stops a key phrases detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopKeyPhrasesDetectionJob(params: Comprehend.Types.StopKeyPhrasesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StopKeyPhrasesDetectionJobResponse, AWSError>;
@@ -371,6 +443,14 @@ declare class Comprehend extends Service {
    * Stops a key phrases detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
   stopKeyPhrasesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopKeyPhrasesDetectionJobResponse) => void): Request<Comprehend.Types.StopKeyPhrasesDetectionJobResponse, AWSError>;
+  /**
+   * Stops a PII entities detection job in progress.
+   */
+  stopPiiEntitiesDetectionJob(params: Comprehend.Types.StopPiiEntitiesDetectionJobRequest, callback?: (err: AWSError, data: Comprehend.Types.StopPiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StopPiiEntitiesDetectionJobResponse, AWSError>;
+  /**
+   * Stops a PII entities detection job in progress.
+   */
+  stopPiiEntitiesDetectionJob(callback?: (err: AWSError, data: Comprehend.Types.StopPiiEntitiesDetectionJobResponse) => void): Request<Comprehend.Types.StopPiiEntitiesDetectionJobResponse, AWSError>;
   /**
    * Stops a sentiment detection job in progress. If the job state is IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED state. If the job completes before it can be stopped, it is put into the COMPLETED state; otherwise the job is be stopped and put into the STOPPED state. If the job is in the COMPLETED or FAILED state when you call the StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal Request Exception.  When a job is stopped, any documents already processed are written to the output location.
    */
@@ -422,6 +502,18 @@ declare class Comprehend extends Service {
 }
 declare namespace Comprehend {
   export type AnyLengthString = string;
+  export type AttributeNamesList = AttributeNamesListItem[];
+  export type AttributeNamesListItem = string;
+  export interface AugmentedManifestsListItem {
+    /**
+     * The Amazon S3 location of the augmented manifest file.
+     */
+    S3Uri: S3Uri;
+    /**
+     * The JSON attribute that contains the annotations for your training documents. The number of attribute names that you specify depends on whether your augmented manifest file is the output of a single labeling job or a chained labeling job. If your file is the output of a single labeling job, specify the LabelAttributeName key that was used when the job was created in Ground Truth. If your file is the output of a chained labeling job, specify the LabelAttributeName key for one or more jobs in the chain. Each LabelAttributeName key provides the annotations from an individual job.
+     */
+    AttributeNames: AttributeNamesList;
+  }
   export interface BatchDetectDominantLanguageItemResult {
     /**
      * The zero-based index of the document in the input list.
@@ -655,7 +747,7 @@ declare namespace Comprehend {
      */
     Classes?: ListOfClasses;
     /**
-     * The labels used the document being analyzed. These are used for multi-label trained models. Individual labels represent different categories that are related in some manner and are not multually exclusive. For example, a movie can be just an action movie, or it can be an action movie, a science fiction movie, and a comedy, all at the same time. 
+     * The labels used the document being analyzed. These are used for multi-label trained models. Individual labels represent different categories that are related in some manner and are not mutually exclusive. For example, a movie can be just an action movie, or it can be an action movie, a science fiction movie, and a comedy, all at the same time. 
      */
     Labels?: ListOfLabels;
   }
@@ -665,6 +757,22 @@ declare namespace Comprehend {
   export type ComprehendEndpointArn = string;
   export type ComprehendEndpointName = string;
   export type ComprehendModelArn = string;
+  export interface ContainsPiiEntitiesRequest {
+    /**
+     * Creates a new document classification request to analyze a single document in real-time, returning personally identifiable information (PII) entity labels.
+     */
+    Text: String;
+    /**
+     * The language of the input documents.
+     */
+    LanguageCode: LanguageCode;
+  }
+  export interface ContainsPiiEntitiesResponse {
+    /**
+     * The labels used in the document being analyzed. Individual labels represent personally identifiable information (PII) entity types.
+     */
+    Labels?: ListOfEntityLabels;
+  }
   export interface CreateDocumentClassifierRequest {
     /**
      * The name of the document classifier.
@@ -706,6 +814,10 @@ declare namespace Comprehend {
      * Indicates the mode in which the classifier will be trained. The classifier can be trained in multi-class mode, which identifies one and only one class for each document, or multi-label mode, which identifies one or more labels for each document. In multi-label mode, multiple labels for an individual document are separated by a delimiter. The default delimiter between labels is a pipe (|).
      */
     Mode?: DocumentClassifierMode;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    ModelKmsKeyId?: KmsKeyId;
   }
   export interface CreateDocumentClassifierResponse {
     /**
@@ -734,6 +846,10 @@ declare namespace Comprehend {
      * Tags associated with the endpoint being created. A tag is a key-value pair that adds metadata to the endpoint. For example, a tag with "Sales" as the key might be added to an endpoint to indicate its use by the sales department. 
      */
     Tags?: TagList;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
+     */
+    DataAccessRoleArn?: IamRoleArn;
   }
   export interface CreateEndpointResponse {
     /**
@@ -774,6 +890,10 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your custom entity recognizer. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    ModelKmsKeyId?: KmsKeyId;
   }
   export interface CreateEntityRecognizerResponse {
     /**
@@ -879,6 +999,18 @@ declare namespace Comprehend {
      */
     EntityRecognizerProperties?: EntityRecognizerProperties;
   }
+  export interface DescribeEventsDetectionJobRequest {
+    /**
+     * The identifier of the events detection job.
+     */
+    JobId: JobId;
+  }
+  export interface DescribeEventsDetectionJobResponse {
+    /**
+     * An object that contains the properties associated with an event detection job.
+     */
+    EventsDetectionJobProperties?: EventsDetectionJobProperties;
+  }
   export interface DescribeKeyPhrasesDetectionJobRequest {
     /**
      * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
@@ -890,6 +1022,15 @@ declare namespace Comprehend {
      * An object that contains the properties associated with a key phrases detection job. 
      */
     KeyPhrasesDetectionJobProperties?: KeyPhrasesDetectionJobProperties;
+  }
+  export interface DescribePiiEntitiesDetectionJobRequest {
+    /**
+     * The identifier that Amazon Comprehend generated for the job. The operation returns this identifier in its response.
+     */
+    JobId: JobId;
+  }
+  export interface DescribePiiEntitiesDetectionJobResponse {
+    PiiEntitiesDetectionJobProperties?: PiiEntitiesDetectionJobProperties;
   }
   export interface DescribeSentimentDetectionJobRequest {
     /**
@@ -963,6 +1104,22 @@ declare namespace Comprehend {
      */
     KeyPhrases?: ListOfKeyPhrases;
   }
+  export interface DetectPiiEntitiesRequest {
+    /**
+     * A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.
+     */
+    Text: String;
+    /**
+     * The language of the input documents.
+     */
+    LanguageCode: LanguageCode;
+  }
+  export interface DetectPiiEntitiesResponse {
+    /**
+     * A collection of PII entities identified in the input text. For each entity, the response provides the entity type, where the entity text begins and ends, and the level of confidence that Amazon Comprehend has in the detection.
+     */
+    Entities?: ListOfPiiEntities;
+  }
   export interface DetectSentimentRequest {
     /**
      * A UTF-8 text string. Each string must contain fewer that 5,000 bytes of UTF-8 encoded characters.
@@ -1033,6 +1190,10 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
+     * The Amazon Resource Name (ARN) of the document classification job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:document-classification-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
      * The name that you assigned to the document classification job.
      */
     JobName?: JobName;
@@ -1079,10 +1240,12 @@ declare namespace Comprehend {
   }
   export type DocumentClassificationJobPropertiesList = DocumentClassificationJobProperties[];
   export type DocumentClassifierArn = string;
+  export type DocumentClassifierAugmentedManifestsList = AugmentedManifestsListItem[];
+  export type DocumentClassifierDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST"|string;
   export type DocumentClassifierEndpointArn = string;
   export interface DocumentClassifierFilter {
     /**
-     * Filters the list of classifiers based on status. 
+     * Filters the list of classifiers based on status.
      */
     Status?: ModelStatus;
     /**
@@ -1096,13 +1259,21 @@ declare namespace Comprehend {
   }
   export interface DocumentClassifierInputDataConfig {
     /**
-     * The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files. For example, if you use the URI S3://bucketName/prefix, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input.
+     * The format of your training data:    COMPREHEND_CSV: A two-column CSV file, where labels are provided in the first column, and documents are provided in the second. If you use this value, you must provide the S3Uri parameter in your request.    AUGMENTED_MANIFEST: A labeled dataset that is produced by Amazon SageMaker Ground Truth. This file is in JSON lines format. Each line is a complete JSON object that contains a training document and its associated labels.  If you use this value, you must provide the AugmentedManifests parameter in your request.   If you don't specify a value, Amazon Comprehend uses COMPREHEND_CSV as the default.
      */
-    S3Uri: S3Uri;
+    DataFormat?: DocumentClassifierDataFormat;
+    /**
+     * The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files. For example, if you use the URI S3://bucketName/prefix, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input. This parameter is required if you set DataFormat to COMPREHEND_CSV.
+     */
+    S3Uri?: S3Uri;
     /**
      * Indicates the delimiter used to separate each label for training a multi-label classifier. The default delimiter between labels is a pipe (|). You can use a different character as a delimiter (if it's an allowed character) by specifying it under Delimiter for labels. If the training documents use a delimiter other than the default or the delimiter you specify, the labels on that line will be combined to make a single unique label, such as LABELLABELLABEL.
      */
     LabelDelimiter?: LabelDelimiter;
+    /**
+     * A list of augmented manifest files that provide training data for your custom model. An augmented manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth. This parameter is required if you set DataFormat to AUGMENTED_MANIFEST.
+     */
+    AugmentedManifests?: DocumentClassifierAugmentedManifestsList;
   }
   export type DocumentClassifierMode = "MULTI_CLASS"|"MULTI_LABEL"|string;
   export interface DocumentClassifierOutputDataConfig {
@@ -1176,6 +1347,10 @@ declare namespace Comprehend {
      * Indicates the mode in which the specific classifier was trained. This also indicates the format of input documents and the format of the confusion matrix. Each classifier can only be trained in one mode and this cannot be changed once the classifier is trained.
      */
     Mode?: DocumentClassifierMode;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    ModelKmsKeyId?: KmsKeyId;
   }
   export type DocumentClassifierPropertiesList = DocumentClassifierProperties[];
   export interface DocumentLabel {
@@ -1221,6 +1396,10 @@ declare namespace Comprehend {
      * The identifier assigned to the dominant language detection job.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the dominant language detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:dominant-language-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:dominant-language-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The name that you assigned to the dominant language detection job.
      */
@@ -1315,6 +1494,10 @@ declare namespace Comprehend {
      * The date and time that the endpoint was last modified.
      */
     LastModifiedTime?: Timestamp;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
+     */
+    DataAccessRoleArn?: IamRoleArn;
   }
   export type EndpointPropertiesList = EndpointProperties[];
   export type EndpointStatus = "CREATING"|"DELETING"|"FAILED"|"IN_SERVICE"|"UPDATING"|string;
@@ -1341,6 +1524,10 @@ declare namespace Comprehend {
      * The identifier assigned to the entities detection job.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the entities detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:entities-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:entities-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The name that you assigned the entities detection job.
      */
@@ -1413,6 +1600,16 @@ declare namespace Comprehend {
      */
     EndOffset?: Integer;
   }
+  export interface EntityLabel {
+    /**
+     * The name of the label.
+     */
+    Name?: PiiEntityType;
+    /**
+     * The level of confidence that Amazon Comprehend has in the accuracy of the detection.
+     */
+    Score?: Float;
+  }
   export interface EntityRecognizerAnnotations {
     /**
      *  Specifies the Amazon S3 location where the annotations for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.
@@ -1420,6 +1617,8 @@ declare namespace Comprehend {
     S3Uri: S3Uri;
   }
   export type EntityRecognizerArn = string;
+  export type EntityRecognizerAugmentedManifestsList = AugmentedManifestsListItem[];
+  export type EntityRecognizerDataFormat = "COMPREHEND_CSV"|"AUGMENTED_MANIFEST"|string;
   export interface EntityRecognizerDocuments {
     /**
      *  Specifies the Amazon S3 location where the training documents for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.
@@ -1463,21 +1662,29 @@ declare namespace Comprehend {
   }
   export interface EntityRecognizerInputDataConfig {
     /**
-     * The entity types in the input data for an entity recognizer. A maximum of 25 entity types can be used at one time to train an entity recognizer.
+     * The format of your training data:    COMPREHEND_CSV: A CSV file that supplements your training documents. The CSV file contains information about the custom entities that your trained model will detect. The required format of the file depends on whether you are providing annotations or an entity list. If you use this value, you must provide your CSV file by using either the Annotations or EntityList parameters. You must provide your training documents by using the Documents parameter.    AUGMENTED_MANIFEST: A labeled dataset that is produced by Amazon SageMaker Ground Truth. This file is in JSON lines format. Each line is a complete JSON object that contains a training document and its labels. Each label annotates a named entity in the training document.  If you use this value, you must provide the AugmentedManifests parameter in your request.   If you don't specify a value, Amazon Comprehend uses COMPREHEND_CSV as the default.
+     */
+    DataFormat?: EntityRecognizerDataFormat;
+    /**
+     * The entity types in the labeled training data that Amazon Comprehend uses to train the custom entity recognizer. Any entity types that you don't specify are ignored. A maximum of 25 entity types can be used at one time to train an entity recognizer. Entity types must not contain the following invalid characters: \n (line break), \\n (escaped line break), \r (carriage return), \\r (escaped carriage return), \t (tab), \\t (escaped tab), space, and , (comma). 
      */
     EntityTypes: EntityTypesList;
     /**
-     * S3 location of the documents folder for an entity recognizer
+     * The S3 location of the folder that contains the training documents for your custom entity recognizer. This parameter is required if you set DataFormat to COMPREHEND_CSV.
      */
-    Documents: EntityRecognizerDocuments;
+    Documents?: EntityRecognizerDocuments;
     /**
-     * S3 location of the annotations file for an entity recognizer.
+     * The S3 location of the CSV file that annotates your training documents.
      */
     Annotations?: EntityRecognizerAnnotations;
     /**
-     * S3 location of the entity list for an entity recognizer.
+     * The S3 location of the CSV file that has the entity list for your custom entity recognizer.
      */
     EntityList?: EntityRecognizerEntityList;
+    /**
+     * A list of augmented manifest files that provide training data for your custom model. An augmented manifest file is a labeled dataset that is produced by Amazon SageMaker Ground Truth. This parameter is required if you set DataFormat to AUGMENTED_MANIFEST.
+     */
+    AugmentedManifests?: EntityRecognizerAugmentedManifestsList;
   }
   export interface EntityRecognizerMetadata {
     /**
@@ -1565,6 +1772,10 @@ declare namespace Comprehend {
      *  Configuration parameters for a private Virtual Private Cloud (VPC) containing the resources you are using for your custom entity recognizer. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:    KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
+     */
+    ModelKmsKeyId?: KmsKeyId;
   }
   export type EntityRecognizerPropertiesList = EntityRecognizerProperties[];
   export type EntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"COMMERCIAL_ITEM"|"EVENT"|"DATE"|"QUANTITY"|"TITLE"|"OTHER"|string;
@@ -1579,17 +1790,87 @@ declare namespace Comprehend {
      */
     Recall?: Double;
     /**
-     * A measure of how accurate the recognizer results are for for a specific entity type in the test data. It is derived from the Precision and Recall values. The F1Score is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. 
+     * A measure of how accurate the recognizer results are for a specific entity type in the test data. It is derived from the Precision and Recall values. The F1Score is the harmonic average of the two scores. The highest score is 1, and the worst score is 0. 
      */
     F1Score?: Double;
   }
   export type EntityTypesList = EntityTypesListItem[];
   export interface EntityTypesListItem {
     /**
-     * Entity type of an item on an entity type list.
+     * An entity type within a labeled training dataset that Amazon Comprehend uses to train a custom entity recognizer. Entity types must not contain the following invalid characters: \n (line break), \\n (escaped line break, \r (carriage return), \\r (escaped carriage return), \t (tab), \\t (escaped tab), space, and , (comma).
      */
     Type: EntityTypeName;
   }
+  export type EventTypeString = string;
+  export interface EventsDetectionJobFilter {
+    /**
+     * Filters on the name of the events detection job.
+     */
+    JobName?: JobName;
+    /**
+     * Filters the list of jobs based on job status. Returns only jobs with the specified status.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.
+     */
+    SubmitTimeBefore?: Timestamp;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.
+     */
+    SubmitTimeAfter?: Timestamp;
+  }
+  export interface EventsDetectionJobProperties {
+    /**
+     * The identifier assigned to the events detection job.
+     */
+    JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the events detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:events-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
+     * The name you assigned the events detection job.
+     */
+    JobName?: JobName;
+    /**
+     * The current status of the events detection job.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * A description of the status of the events detection job.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The time that the events detection job was submitted for processing.
+     */
+    SubmitTime?: Timestamp;
+    /**
+     * The time that the events detection job completed.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The input data configuration that you supplied when you created the events detection job.
+     */
+    InputDataConfig?: InputDataConfig;
+    /**
+     * The output data configuration that you supplied when you created the events detection job.
+     */
+    OutputDataConfig?: OutputDataConfig;
+    /**
+     * The language code of the input documents.
+     */
+    LanguageCode?: LanguageCode;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identify and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+    /**
+     * The types of events that are detected by the job.
+     */
+    TargetEventTypes?: TargetEventTypes;
+  }
+  export type EventsDetectionJobPropertiesList = EventsDetectionJobProperties[];
   export type Float = number;
   export type IamRoleArn = string;
   export type InferenceUnitsInteger = number;
@@ -1649,6 +1930,10 @@ declare namespace Comprehend {
      * The identifier assigned to the key phrases detection job.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the key phrases detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:key-phrases-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The name that you assigned the key phrases detection job.
      */
@@ -1842,6 +2127,30 @@ declare namespace Comprehend {
      */
     NextToken?: String;
   }
+  export interface ListEventsDetectionJobsRequest {
+    /**
+     * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
+     */
+    Filter?: EventsDetectionJobFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListEventsDetectionJobsResponse {
+    /**
+     * A list containing the properties of each job that is returned.
+     */
+    EventsDetectionJobPropertiesList?: EventsDetectionJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
   export interface ListKeyPhrasesDetectionJobsRequest {
     /**
      * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -1874,9 +2183,36 @@ declare namespace Comprehend {
   export type ListOfDetectSyntaxResult = BatchDetectSyntaxItemResult[];
   export type ListOfDominantLanguages = DominantLanguage[];
   export type ListOfEntities = Entity[];
+  export type ListOfEntityLabels = EntityLabel[];
   export type ListOfKeyPhrases = KeyPhrase[];
   export type ListOfLabels = DocumentLabel[];
+  export type ListOfPiiEntities = PiiEntity[];
+  export type ListOfPiiEntityTypes = PiiEntityType[];
   export type ListOfSyntaxTokens = SyntaxToken[];
+  export interface ListPiiEntitiesDetectionJobsRequest {
+    /**
+     * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
+     */
+    Filter?: PiiEntitiesDetectionJobFilter;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return in each page.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListPiiEntitiesDetectionJobsResponse {
+    /**
+     * A list containing the properties of each job that is returned.
+     */
+    PiiEntitiesDetectionJobPropertiesList?: PiiEntitiesDetectionJobPropertiesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
   export interface ListSentimentDetectionJobsRequest {
     /**
      * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -1941,6 +2277,7 @@ declare namespace Comprehend {
      */
     NextToken?: String;
   }
+  export type MaskCharacter = string;
   export type MaxResultsInteger = number;
   export type ModelStatus = "SUBMITTED"|"TRAINING"|"DELETING"|"STOP_REQUESTED"|"STOPPED"|"IN_ERROR"|"TRAINED"|string;
   export type NumberOfTopicsInteger = number;
@@ -1965,6 +2302,124 @@ declare namespace Comprehend {
     Score?: Float;
   }
   export type PartOfSpeechTagType = "ADJ"|"ADP"|"ADV"|"AUX"|"CONJ"|"CCONJ"|"DET"|"INTJ"|"NOUN"|"NUM"|"O"|"PART"|"PRON"|"PROPN"|"PUNCT"|"SCONJ"|"SYM"|"VERB"|string;
+  export interface PiiEntitiesDetectionJobFilter {
+    /**
+     * Filters on the name of the job.
+     */
+    JobName?: JobName;
+    /**
+     * Filters the list of jobs based on job status. Returns only jobs with the specified status.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in ascending order, oldest to newest.
+     */
+    SubmitTimeBefore?: Timestamp;
+    /**
+     * Filters the list of jobs based on the time that the job was submitted for processing. Returns only jobs submitted after the specified time. Jobs are returned in descending order, newest to oldest.
+     */
+    SubmitTimeAfter?: Timestamp;
+  }
+  export interface PiiEntitiesDetectionJobProperties {
+    /**
+     * The identifier assigned to the PII entities detection job.
+     */
+    JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the PII entities detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:pii-entities-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
+     * The name that you assigned the PII entities detection job.
+     */
+    JobName?: JobName;
+    /**
+     * The current status of the PII entities detection job. If the status is FAILED, the Message field shows the reason for the failure.
+     */
+    JobStatus?: JobStatus;
+    /**
+     * A description of the status of a job.
+     */
+    Message?: AnyLengthString;
+    /**
+     * The time that the PII entities detection job was submitted for processing.
+     */
+    SubmitTime?: Timestamp;
+    /**
+     * The time that the PII entities detection job completed.
+     */
+    EndTime?: Timestamp;
+    /**
+     * The input properties for a PII entities detection job.
+     */
+    InputDataConfig?: InputDataConfig;
+    /**
+     * The output data configuration that you supplied when you created the PII entities detection job.
+     */
+    OutputDataConfig?: PiiOutputDataConfig;
+    /**
+     * Provides configuration parameters for PII entity redaction. This parameter is required if you set the Mode parameter to ONLY_REDACTION. In that case, you must provide a RedactionConfig definition that includes the PiiEntityTypes parameter.
+     */
+    RedactionConfig?: RedactionConfig;
+    /**
+     * The language code of the input documents
+     */
+    LanguageCode?: LanguageCode;
+    /**
+     * The Amazon Resource Name (ARN) that gives Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn?: IamRoleArn;
+    /**
+     * Specifies whether the output provides the locations (offsets) of PII entities or a file in which PII entities are redacted.
+     */
+    Mode?: PiiEntitiesDetectionMode;
+  }
+  export type PiiEntitiesDetectionJobPropertiesList = PiiEntitiesDetectionJobProperties[];
+  export type PiiEntitiesDetectionMaskMode = "MASK"|"REPLACE_WITH_PII_ENTITY_TYPE"|string;
+  export type PiiEntitiesDetectionMode = "ONLY_REDACTION"|"ONLY_OFFSETS"|string;
+  export interface PiiEntity {
+    /**
+     * The level of confidence that Amazon Comprehend has in the accuracy of the detection.
+     */
+    Score?: Float;
+    /**
+     * The entity's type.
+     */
+    Type?: PiiEntityType;
+    /**
+     * A character offset in the input text that shows where the PII entity begins (the first character is at position 0). The offset returns the position of each UTF-8 code point in the string. A code point is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point.
+     */
+    BeginOffset?: Integer;
+    /**
+     * A character offset in the input text that shows where the PII entity ends. The offset returns the position of each UTF-8 code point in the string. A code point is the abstract character from a particular graphical representation. For example, a multi-byte UTF-8 character maps to a single code point.
+     */
+    EndOffset?: Integer;
+  }
+  export type PiiEntityType = "BANK_ACCOUNT_NUMBER"|"BANK_ROUTING"|"CREDIT_DEBIT_NUMBER"|"CREDIT_DEBIT_CVV"|"CREDIT_DEBIT_EXPIRY"|"PIN"|"EMAIL"|"ADDRESS"|"NAME"|"PHONE"|"SSN"|"DATE_TIME"|"PASSPORT_NUMBER"|"DRIVER_ID"|"URL"|"AGE"|"USERNAME"|"PASSWORD"|"AWS_ACCESS_KEY"|"AWS_SECRET_KEY"|"IP_ADDRESS"|"MAC_ADDRESS"|"ALL"|string;
+  export interface PiiOutputDataConfig {
+    /**
+     * When you use the PiiOutputDataConfig object with asynchronous operations, you specify the Amazon S3 location where you want to write the output data. 
+     */
+    S3Uri: S3Uri;
+    /**
+     * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt the output results from an analysis job.
+     */
+    KmsKeyId?: KmsKeyId;
+  }
+  export interface RedactionConfig {
+    /**
+     * An array of the types of PII entities that Amazon Comprehend detects in the input text for your request.
+     */
+    PiiEntityTypes?: ListOfPiiEntityTypes;
+    /**
+     * Specifies whether the PII entity is redacted with the mask character or the entity type.
+     */
+    MaskMode?: PiiEntitiesDetectionMaskMode;
+    /**
+     * A character that replaces each character in the redacted PII entity.
+     */
+    MaskCharacter?: MaskCharacter;
+  }
   export type S3Uri = string;
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
@@ -1991,6 +2446,10 @@ declare namespace Comprehend {
      * The identifier assigned to the sentiment detection job.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the sentiment detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:sentiment-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The name that you assigned to the sentiment detection job
      */
@@ -2089,12 +2548,20 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your document classification job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the document classification job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartDocumentClassificationJobResponse {
     /**
      * The identifier generated for the job. To get the status of the job, use this identifier with the operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the document classification job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:document-classification-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job:   SUBMITTED - The job has been received and queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. For details, use the operation.   STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.   STOPPED - The job was successfully stopped without completing.  
      */
@@ -2129,12 +2596,20 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your dominant language detection job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the dominant language detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartDominantLanguageDetectionJobResponse {
     /**
      * The identifier generated for the job. To get the status of a job, use this identifier with the operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the dominant language detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:dominant-language-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:dominant-language-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
      */
@@ -2177,6 +2652,10 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your entity detection job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartEntitiesDetectionJobResponse {
     /**
@@ -2184,7 +2663,59 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
+     * The Amazon Resource Name (ARN) of the entities detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:entities-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:entities-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
      * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.   STOP_REQUESTED - Amazon Comprehend has received a stop request for the job and is processing the request.   STOPPED - The job was successfully stopped without completing.  
+     */
+    JobStatus?: JobStatus;
+  }
+  export interface StartEventsDetectionJobRequest {
+    /**
+     * Specifies the format and location of the input data for the job.
+     */
+    InputDataConfig: InputDataConfig;
+    /**
+     * Specifies where to send the output files.
+     */
+    OutputDataConfig: OutputDataConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * The identifier of the events detection job.
+     */
+    JobName?: JobName;
+    /**
+     * The language code of the input documents.
+     */
+    LanguageCode: LanguageCode;
+    /**
+     * An unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * The types of events to detect in the input documents.
+     */
+    TargetEventTypes: TargetEventTypes;
+    /**
+     * Tags to be associated with the events detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
+  }
+  export interface StartEventsDetectionJobResponse {
+    /**
+     * An unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the events detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:events-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
+     * The status of the events detection job.
      */
     JobStatus?: JobStatus;
   }
@@ -2221,6 +2752,10 @@ declare namespace Comprehend {
      *  Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your key phrases detection job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the key phrases detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartKeyPhrasesDetectionJobResponse {
     /**
@@ -2228,7 +2763,63 @@ declare namespace Comprehend {
      */
     JobId?: JobId;
     /**
+     * The Amazon Resource Name (ARN) of the key phrase detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:key-phrases-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
      * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
+     */
+    JobStatus?: JobStatus;
+  }
+  export interface StartPiiEntitiesDetectionJobRequest {
+    /**
+     * The input properties for a PII entities detection job.
+     */
+    InputDataConfig: InputDataConfig;
+    /**
+     * Provides conﬁguration parameters for the output of PII entity detection jobs.
+     */
+    OutputDataConfig: OutputDataConfig;
+    /**
+     * Specifies whether the output provides the locations (offsets) of PII entities or a file in which PII entities are redacted.
+     */
+    Mode: PiiEntitiesDetectionMode;
+    /**
+     * Provides configuration parameters for PII entity redaction. This parameter is required if you set the Mode parameter to ONLY_REDACTION. In that case, you must provide a RedactionConfig definition that includes the PiiEntityTypes parameter.
+     */
+    RedactionConfig?: RedactionConfig;
+    /**
+     * The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that grants Amazon Comprehend read access to your input data.
+     */
+    DataAccessRoleArn: IamRoleArn;
+    /**
+     * The identifier of the job.
+     */
+    JobName?: JobName;
+    /**
+     * The language of the input documents.
+     */
+    LanguageCode: LanguageCode;
+    /**
+     * A unique identifier for the request. If you don't set the client request token, Amazon Comprehend generates one.
+     */
+    ClientRequestToken?: ClientRequestTokenString;
+    /**
+     * Tags to be associated with the PII entities detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
+  }
+  export interface StartPiiEntitiesDetectionJobResponse {
+    /**
+     * The identifier generated for the job.
+     */
+    JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the PII entity detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:pii-entities-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
+    /**
+     * The status of the job.
      */
     JobStatus?: JobStatus;
   }
@@ -2265,12 +2856,20 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your sentiment detection job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the sentiment detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartSentimentDetectionJobResponse {
     /**
      * The identifier generated for the job. To get the status of a job, use this identifier with the operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the sentiment detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:sentiment-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job.    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the operation.  
      */
@@ -2309,12 +2908,20 @@ declare namespace Comprehend {
      * Configuration parameters for an optional private Virtual Private Cloud (VPC) containing the resources you are using for your topic detection job. For more information, see Amazon VPC. 
      */
     VpcConfig?: VpcConfig;
+    /**
+     * Tags to be associated with the topics detection job. A tag is a key-value pair that adds metadata to a resource used by Amazon Comprehend. For example, a tag with "Sales" as the key might be added to a resource to indicate its use by the sales department.
+     */
+    Tags?: TagList;
   }
   export interface StartTopicsDetectionJobResponse {
     /**
      * The identifier generated for the job. To get the status of the job, use this identifier with the DescribeTopicDetectionJob operation.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the topics detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:topics-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The status of the job:    SUBMITTED - The job has been received and is queued for processing.   IN_PROGRESS - Amazon Comprehend is processing the job.   COMPLETED - The job was successfully completed and the output is available.   FAILED - The job did not complete. To get details, use the DescribeTopicDetectionJob operation.  
      */
@@ -2352,6 +2959,22 @@ declare namespace Comprehend {
      */
     JobStatus?: JobStatus;
   }
+  export interface StopEventsDetectionJobRequest {
+    /**
+     * The identifier of the events detection job to stop.
+     */
+    JobId: JobId;
+  }
+  export interface StopEventsDetectionJobResponse {
+    /**
+     * The identifier of the events detection job to stop.
+     */
+    JobId?: JobId;
+    /**
+     * The status of the events detection job.
+     */
+    JobStatus?: JobStatus;
+  }
   export interface StopKeyPhrasesDetectionJobRequest {
     /**
      * The identifier of the key phrases detection job to stop.
@@ -2365,6 +2988,22 @@ declare namespace Comprehend {
     JobId?: JobId;
     /**
      * Either STOP_REQUESTED if the job is currently running, or STOPPED if the job was previously stopped with the StopKeyPhrasesDetectionJob operation.
+     */
+    JobStatus?: JobStatus;
+  }
+  export interface StopPiiEntitiesDetectionJobRequest {
+    /**
+     * The identifier of the PII entities detection job to stop.
+     */
+    JobId: JobId;
+  }
+  export interface StopPiiEntitiesDetectionJobResponse {
+    /**
+     * The identifier of the PII entities detection job to stop.
+     */
+    JobId?: JobId;
+    /**
+     * The status of the PII entities detection job.
      */
     JobStatus?: JobStatus;
   }
@@ -2452,6 +3091,7 @@ declare namespace Comprehend {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type TargetEventTypes = EventTypeString[];
   export type Timestamp = Date;
   export interface TopicsDetectionJobFilter {
     /**
@@ -2476,6 +3116,10 @@ declare namespace Comprehend {
      * The identifier assigned to the topic detection job.
      */
     JobId?: JobId;
+    /**
+     * The Amazon Resource Name (ARN) of the topics detection job. It is a unique, fully qualified identifier for the job. It includes the AWS account, Region, and the job ID. The format of the ARN is as follows:  arn:&lt;partition&gt;:comprehend:&lt;region&gt;:&lt;account-id&gt;:topics-detection-job/&lt;job-id&gt;  The following is an example job ARN:  arn:aws:comprehend:us-west-2:111122223333:topics-detection-job/1234abcd12ab34cd56ef1234567890ab 
+     */
+    JobArn?: ComprehendArn;
     /**
      * The name of the topic detection job.
      */

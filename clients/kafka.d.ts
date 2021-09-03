@@ -13,6 +13,18 @@ declare class Kafka extends Service {
   config: Config & Kafka.Types.ClientConfiguration;
   /**
    * 
+            Associates one or more Scram Secrets with an Amazon MSK cluster.
+         
+   */
+  batchAssociateScramSecret(params: Kafka.Types.BatchAssociateScramSecretRequest, callback?: (err: AWSError, data: Kafka.Types.BatchAssociateScramSecretResponse) => void): Request<Kafka.Types.BatchAssociateScramSecretResponse, AWSError>;
+  /**
+   * 
+            Associates one or more Scram Secrets with an Amazon MSK cluster.
+         
+   */
+  batchAssociateScramSecret(callback?: (err: AWSError, data: Kafka.Types.BatchAssociateScramSecretResponse) => void): Request<Kafka.Types.BatchAssociateScramSecretResponse, AWSError>;
+  /**
+   * 
             Creates a new MSK cluster.
          
    */
@@ -107,6 +119,18 @@ declare class Kafka extends Service {
          
    */
   describeConfigurationRevision(callback?: (err: AWSError, data: Kafka.Types.DescribeConfigurationRevisionResponse) => void): Request<Kafka.Types.DescribeConfigurationRevisionResponse, AWSError>;
+  /**
+   * 
+            Disassociates one or more Scram Secrets from an Amazon MSK cluster.
+         
+   */
+  batchDisassociateScramSecret(params: Kafka.Types.BatchDisassociateScramSecretRequest, callback?: (err: AWSError, data: Kafka.Types.BatchDisassociateScramSecretResponse) => void): Request<Kafka.Types.BatchDisassociateScramSecretResponse, AWSError>;
+  /**
+   * 
+            Disassociates one or more Scram Secrets from an Amazon MSK cluster.
+         
+   */
+  batchDisassociateScramSecret(callback?: (err: AWSError, data: Kafka.Types.BatchDisassociateScramSecretResponse) => void): Request<Kafka.Types.BatchDisassociateScramSecretResponse, AWSError>;
   /**
    * 
             A list of brokers that a client application can use to bootstrap.
@@ -205,6 +229,18 @@ declare class Kafka extends Service {
   listNodes(callback?: (err: AWSError, data: Kafka.Types.ListNodesResponse) => void): Request<Kafka.Types.ListNodesResponse, AWSError>;
   /**
    * 
+            Returns a list of the Scram Secrets associated with an Amazon MSK cluster.
+         
+   */
+  listScramSecrets(params: Kafka.Types.ListScramSecretsRequest, callback?: (err: AWSError, data: Kafka.Types.ListScramSecretsResponse) => void): Request<Kafka.Types.ListScramSecretsResponse, AWSError>;
+  /**
+   * 
+            Returns a list of the Scram Secrets associated with an Amazon MSK cluster.
+         
+   */
+  listScramSecrets(callback?: (err: AWSError, data: Kafka.Types.ListScramSecretsResponse) => void): Request<Kafka.Types.ListScramSecretsResponse, AWSError>;
+  /**
+   * 
             Returns a list of the tags associated with the specified resource.
          
    */
@@ -259,6 +295,18 @@ declare class Kafka extends Service {
          
    */
   updateBrokerCount(callback?: (err: AWSError, data: Kafka.Types.UpdateBrokerCountResponse) => void): Request<Kafka.Types.UpdateBrokerCountResponse, AWSError>;
+  /**
+   * 
+            Updates EC2 instance type.
+         
+   */
+  updateBrokerType(params: Kafka.Types.UpdateBrokerTypeRequest, callback?: (err: AWSError, data: Kafka.Types.UpdateBrokerTypeResponse) => void): Request<Kafka.Types.UpdateBrokerTypeResponse, AWSError>;
+  /**
+   * 
+            Updates EC2 instance type.
+         
+   */
+  updateBrokerType(callback?: (err: AWSError, data: Kafka.Types.UpdateBrokerTypeResponse) => void): Request<Kafka.Types.UpdateBrokerTypeResponse, AWSError>;
   /**
    * 
             Updates the EBS storage associated with MSK brokers.
@@ -321,6 +369,34 @@ declare class Kafka extends Service {
   updateMonitoring(callback?: (err: AWSError, data: Kafka.Types.UpdateMonitoringResponse) => void): Request<Kafka.Types.UpdateMonitoringResponse, AWSError>;
 }
 declare namespace Kafka {
+  export interface BatchAssociateScramSecretRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster to be updated.
+         
+     */
+    ClusterArn: __string;
+    /**
+     * 
+            List of AWS Secrets Manager secret ARNs.
+         
+     */
+    SecretArnList: __listOf__string;
+  }
+  export interface BatchAssociateScramSecretResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            List of errors when associating secrets to cluster.
+         
+     */
+    UnprocessedScramSecrets?: __listOfUnprocessedScramSecret;
+  }
   export type BrokerAZDistribution = "DEFAULT"|string;
   export interface BrokerEBSVolumeInfo {
     /**
@@ -436,6 +512,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export interface ClientAuthentication {
     /**
      * 
+            Details for ClientAuthentication using SASL.
+         
+     */
+    Sasl?: Sasl;
+    /**
+     * 
             Details for ClientAuthentication using TLS.
          
      */
@@ -503,7 +585,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     EncryptionInfo?: EncryptionInfo;
     /**
      * 
-            Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see Monitoring.
+            Specifies which metrics are gathered for the MSK cluster. This property has the following possible values: DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION. For a list of the metrics associated with each of these levels of monitoring, see Monitoring.
          
      */
     EnhancedMonitoring?: EnhancedMonitoring;
@@ -522,7 +604,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     NumberOfBrokerNodes?: __integer;
     /**
      * 
-            The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
+            The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
          
      */
     State?: ClusterState;
@@ -539,6 +621,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     ZookeeperConnectString?: __string;
+    /**
+     * 
+            The connection string to use to connect to zookeeper cluster on Tls port.
+         
+     */
+    ZookeeperConnectStringTls?: __string;
   }
   export interface ClusterOperationInfo {
     /**
@@ -630,7 +718,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     StepStatus?: __string;
   }
-  export type ClusterState = "ACTIVE"|"CREATING"|"UPDATING"|"DELETING"|"FAILED"|string;
+  export type ClusterState = "ACTIVE"|"CREATING"|"DELETING"|"FAILED"|"HEALING"|"MAINTENANCE"|"REBOOTING_BROKER"|"UPDATING"|string;
   export interface CompatibleKafkaVersion {
     /**
      * 
@@ -757,7 +845,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     EncryptionInfo?: EncryptionInfo;
     /**
      * 
-            Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.
+            Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION.
          
      */
     EnhancedMonitoring?: EnhancedMonitoring;
@@ -802,7 +890,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     ClusterName?: __string;
     /**
      * 
-            The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
+            The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
          
      */
     State?: ClusterState;
@@ -889,7 +977,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     ClusterArn?: __string;
     /**
      * 
-            The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.
+            The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.
          
      */
     State?: ClusterState;
@@ -1047,6 +1135,34 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     ServerProperties?: __blob;
   }
+  export interface BatchDisassociateScramSecretRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster to be updated.
+         
+     */
+    ClusterArn: __string;
+    /**
+     * 
+            List of AWS Secrets Manager secret ARNs.
+         
+     */
+    SecretArnList: __listOf__string;
+  }
+  export interface BatchDisassociateScramSecretResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            List of errors when disassociating secrets to cluster.
+         
+     */
+    UnprocessedScramSecrets?: __listOfUnprocessedScramSecret;
+  }
   export interface EBSStorageInfo {
     /**
      * 
@@ -1099,7 +1215,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     EncryptionInTransit?: EncryptionInTransit;
   }
-  export type EnhancedMonitoring = "DEFAULT"|"PER_BROKER"|"PER_TOPIC_PER_BROKER"|string;
+  export type EnhancedMonitoring = "DEFAULT"|"PER_BROKER"|"PER_TOPIC_PER_BROKER"|"PER_TOPIC_PER_PARTITION"|string;
   export interface ErrorInfo {
     /**
      * 
@@ -1139,6 +1255,18 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     BootstrapBrokerStringTls?: __string;
+    /**
+     * 
+            A string containing one or more DNS names (or IP) and Sasl Scram port pairs.
+         
+     */
+    BootstrapBrokerStringSaslScram?: __string;
+    /**
+     * 
+            A string that contains one or more DNS names (or IP addresses) and SASL IAM port pairs.
+         
+     */
+    BootstrapBrokerStringSaslIam?: __string;
   }
   export interface GetCompatibleKafkaVersionsRequest {
     /**
@@ -1349,6 +1477,40 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     NodeInfoList?: __listOfNodeInfo;
   }
+  export interface ListScramSecretsRequest {
+    /**
+     * 
+            The arn of the cluster.
+         
+     */
+    ClusterArn: __string;
+    /**
+     * 
+            The maxResults of the query.
+         
+     */
+    MaxResults?: MaxResults;
+    /**
+     * 
+            The nextToken of the query.
+         
+     */
+    NextToken?: __string;
+  }
+  export interface ListScramSecretsResponse {
+    /**
+     * 
+            Paginated results marker.
+         
+     */
+    NextToken?: __string;
+    /**
+     * 
+            The list of scram secrets associated with the cluster.
+         
+     */
+    SecretArnList?: __listOf__string;
+  }
   export interface ListTagsForResourceRequest {
     /**
      * 
@@ -1407,6 +1569,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     KafkaVersion?: __string;
     LoggingInfo?: LoggingInfo;
+    /**
+     * 
+            Information about the Amazon MSK broker type.
+            
+     */
+    InstanceType?: __stringMin5Max32;
   }
   export interface NodeExporter {
     /**
@@ -1487,7 +1655,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export interface RebootBrokerRequest {
     /**
      * 
-            The list of broker IDs to be rebooted.
+            The list of broker IDs to be rebooted. The reboot-broker operation supports rebooting one broker at a time.
          
      */
     BrokerIds: __listOf__string;
@@ -1516,6 +1684,36 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     Bucket?: __string;
     Enabled: __boolean;
     Prefix?: __string;
+  }
+  export interface Sasl {
+    /**
+     * 
+            Details for SASL/SCRAM client authentication.
+         
+     */
+    Scram?: Scram;
+    /**
+     * 
+            Indicates whether IAM access control is enabled.
+         
+     */
+    Iam?: Iam;
+  }
+  export interface Scram {
+    /**
+     * 
+            SASL/SCRAM authentication is enabled or not.
+         
+     */
+    Enabled?: __boolean;
+  }
+  export interface Iam {
+    /**
+     * 
+            Indicates whether IAM access control is enabled.
+         
+     */
+    Enabled?: __boolean;
   }
   export interface NodeInfo {
     /**
@@ -1590,6 +1788,26 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
      */
     CertificateAuthorityArnList?: __listOf__string;
   }
+  export interface UnprocessedScramSecret {
+    /**
+     * 
+            Error code for associate/disassociate failure.
+         
+     */
+    ErrorCode?: __string;
+    /**
+     * 
+            Error message for associate/disassociate failure.
+         
+     */
+    ErrorMessage?: __string;
+    /**
+     * 
+            AWS Secrets Manager secret ARN.
+         
+     */
+    SecretArn?: __string;
+  }
   export interface UntagResourceRequest {
     /**
      * 
@@ -1644,6 +1862,40 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     TargetNumberOfBrokerNodes: __integerMin1Max15;
   }
   export interface UpdateBrokerCountResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster operation.
+         
+     */
+    ClusterOperationArn?: __string;
+  }
+  export interface UpdateBrokerTypeRequest {
+    /**
+     * 
+            The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+         
+     */
+    ClusterArn: __string;
+    /**
+     * 
+            The cluster version that you want to change. After this operation completes successfully, the cluster will have a new version.
+         
+     */
+    CurrentVersion: __string;
+    /**
+     * 
+            The Amazon MSK broker type that you want all of the brokers in this cluster to be.
+         
+     */
+    TargetInstanceType: __string;
+  }
+  export interface UpdateBrokerTypeResponse {
     /**
      * 
             The Amazon Resource Name (ARN) of the cluster.
@@ -1888,6 +2140,7 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
   export type __listOfConfigurationRevision = ConfigurationRevision[];
   export type __listOfKafkaVersion = KafkaVersion[];
   export type __listOfNodeInfo = NodeInfo[];
+  export type __listOfUnprocessedScramSecret = UnprocessedScramSecret[];
   export type __listOf__string = __string[];
   export type __long = number;
   export type __mapOf__string = {[key: string]: __string};

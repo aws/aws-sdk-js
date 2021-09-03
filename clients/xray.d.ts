@@ -76,6 +76,38 @@ declare class XRay extends Service {
    */
   getGroups(callback?: (err: AWSError, data: XRay.Types.GetGroupsResult) => void): Request<XRay.Types.GetGroupsResult, AWSError>;
   /**
+   * Retrieves the summary information of an insight. This includes impact to clients and root cause services, the top anomalous services, the category, the state of the insight, and the start and end time of the insight.
+   */
+  getInsight(params: XRay.Types.GetInsightRequest, callback?: (err: AWSError, data: XRay.Types.GetInsightResult) => void): Request<XRay.Types.GetInsightResult, AWSError>;
+  /**
+   * Retrieves the summary information of an insight. This includes impact to clients and root cause services, the top anomalous services, the category, the state of the insight, and the start and end time of the insight.
+   */
+  getInsight(callback?: (err: AWSError, data: XRay.Types.GetInsightResult) => void): Request<XRay.Types.GetInsightResult, AWSError>;
+  /**
+   * X-Ray reevaluates insights periodically until they're resolved, and records each intermediate state as an event. You can review an insight's events in the Impact Timeline on the Inspect page in the X-Ray console.
+   */
+  getInsightEvents(params: XRay.Types.GetInsightEventsRequest, callback?: (err: AWSError, data: XRay.Types.GetInsightEventsResult) => void): Request<XRay.Types.GetInsightEventsResult, AWSError>;
+  /**
+   * X-Ray reevaluates insights periodically until they're resolved, and records each intermediate state as an event. You can review an insight's events in the Impact Timeline on the Inspect page in the X-Ray console.
+   */
+  getInsightEvents(callback?: (err: AWSError, data: XRay.Types.GetInsightEventsResult) => void): Request<XRay.Types.GetInsightEventsResult, AWSError>;
+  /**
+   * Retrieves a service graph structure filtered by the specified insight. The service graph is limited to only structural information. For a complete service graph, use this API with the GetServiceGraph API.
+   */
+  getInsightImpactGraph(params: XRay.Types.GetInsightImpactGraphRequest, callback?: (err: AWSError, data: XRay.Types.GetInsightImpactGraphResult) => void): Request<XRay.Types.GetInsightImpactGraphResult, AWSError>;
+  /**
+   * Retrieves a service graph structure filtered by the specified insight. The service graph is limited to only structural information. For a complete service graph, use this API with the GetServiceGraph API.
+   */
+  getInsightImpactGraph(callback?: (err: AWSError, data: XRay.Types.GetInsightImpactGraphResult) => void): Request<XRay.Types.GetInsightImpactGraphResult, AWSError>;
+  /**
+   * Retrieves the summaries of all insights in the specified group matching the provided filter values.
+   */
+  getInsightSummaries(params: XRay.Types.GetInsightSummariesRequest, callback?: (err: AWSError, data: XRay.Types.GetInsightSummariesResult) => void): Request<XRay.Types.GetInsightSummariesResult, AWSError>;
+  /**
+   * Retrieves the summaries of all insights in the specified group matching the provided filter values.
+   */
+  getInsightSummaries(callback?: (err: AWSError, data: XRay.Types.GetInsightSummariesResult) => void): Request<XRay.Types.GetInsightSummariesResult, AWSError>;
+  /**
    * Retrieves all sampling rules.
    */
   getSamplingRules(params: XRay.Types.GetSamplingRulesRequest, callback?: (err: AWSError, data: XRay.Types.GetSamplingRulesResult) => void): Request<XRay.Types.GetSamplingRulesResult, AWSError>;
@@ -132,11 +164,11 @@ declare class XRay extends Service {
    */
   getTraceSummaries(callback?: (err: AWSError, data: XRay.Types.GetTraceSummariesResult) => void): Request<XRay.Types.GetTraceSummariesResult, AWSError>;
   /**
-   * 
+   * Returns a list of tags that are applied to the specified AWS X-Ray group or sampling rule.
    */
   listTagsForResource(params: XRay.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: XRay.Types.ListTagsForResourceResponse) => void): Request<XRay.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * 
+   * Returns a list of tags that are applied to the specified AWS X-Ray group or sampling rule.
    */
   listTagsForResource(callback?: (err: AWSError, data: XRay.Types.ListTagsForResourceResponse) => void): Request<XRay.Types.ListTagsForResourceResponse, AWSError>;
   /**
@@ -156,27 +188,27 @@ declare class XRay extends Service {
    */
   putTelemetryRecords(callback?: (err: AWSError, data: XRay.Types.PutTelemetryRecordsResult) => void): Request<XRay.Types.PutTelemetryRecordsResult, AWSError>;
   /**
-   * Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments. Segments must include the following fields. For the full segment document schema, see AWS X-Ray Segment Documents in the AWS X-Ray Developer Guide.  Required Segment Document Fields     name - The name of the service that handled the request.    id - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.    trace_id - A unique identifier that connects all segments and subsegments originating from a single client request.    start_time - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, 1480615200.010 or 1.480615200010E9.    end_time - Time the segment or subsegment was closed. For example, 1480615200.090 or 1.480615200090E9. Specify either an end_time or in_progress.    in_progress - Set to true instead of specifying an end_time to record that a segment has been started, but is not complete. Send an in progress segment when your application receives a request that will take a long time to serve, to trace the fact that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.   A trace_id consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:  Trace ID Format    The version number, i.e. 1.   The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is 1480615200 seconds, or 58406520 in hexadecimal.   A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.  
+   * Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments. Segments must include the following fields. For the full segment document schema, see AWS X-Ray Segment Documents in the AWS X-Ray Developer Guide.  Required segment document fields     name - The name of the service that handled the request.    id - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.    trace_id - A unique identifier that connects all segments and subsegments originating from a single client request.    start_time - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, 1480615200.010 or 1.480615200010E9.    end_time - Time the segment or subsegment was closed. For example, 1480615200.090 or 1.480615200090E9. Specify either an end_time or in_progress.    in_progress - Set to true instead of specifying an end_time to record that a segment has been started, but is not complete. Send an in-progress segment when your application receives a request that will take a long time to serve, to trace that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.   A trace_id consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:  Trace ID Format    The version number, for instance, 1.   The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is 1480615200 seconds, or 58406520 in hexadecimal.   A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.  
    */
   putTraceSegments(params: XRay.Types.PutTraceSegmentsRequest, callback?: (err: AWSError, data: XRay.Types.PutTraceSegmentsResult) => void): Request<XRay.Types.PutTraceSegmentsResult, AWSError>;
   /**
-   * Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments. Segments must include the following fields. For the full segment document schema, see AWS X-Ray Segment Documents in the AWS X-Ray Developer Guide.  Required Segment Document Fields     name - The name of the service that handled the request.    id - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.    trace_id - A unique identifier that connects all segments and subsegments originating from a single client request.    start_time - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, 1480615200.010 or 1.480615200010E9.    end_time - Time the segment or subsegment was closed. For example, 1480615200.090 or 1.480615200090E9. Specify either an end_time or in_progress.    in_progress - Set to true instead of specifying an end_time to record that a segment has been started, but is not complete. Send an in progress segment when your application receives a request that will take a long time to serve, to trace the fact that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.   A trace_id consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:  Trace ID Format    The version number, i.e. 1.   The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is 1480615200 seconds, or 58406520 in hexadecimal.   A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.  
+   * Uploads segment documents to AWS X-Ray. The X-Ray SDK generates segment documents and sends them to the X-Ray daemon, which uploads them in batches. A segment document can be a completed segment, an in-progress segment, or an array of subsegments. Segments must include the following fields. For the full segment document schema, see AWS X-Ray Segment Documents in the AWS X-Ray Developer Guide.  Required segment document fields     name - The name of the service that handled the request.    id - A 64-bit identifier for the segment, unique among segments in the same trace, in 16 hexadecimal digits.    trace_id - A unique identifier that connects all segments and subsegments originating from a single client request.    start_time - Time the segment or subsegment was created, in floating point seconds in epoch time, accurate to milliseconds. For example, 1480615200.010 or 1.480615200010E9.    end_time - Time the segment or subsegment was closed. For example, 1480615200.090 or 1.480615200090E9. Specify either an end_time or in_progress.    in_progress - Set to true instead of specifying an end_time to record that a segment has been started, but is not complete. Send an in-progress segment when your application receives a request that will take a long time to serve, to trace that the request was received. When the response is sent, send the complete segment to overwrite the in-progress segment.   A trace_id consists of three numbers separated by hyphens. For example, 1-58406520-a006649127e371903a2de979. This includes:  Trace ID Format    The version number, for instance, 1.   The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For example, 10:00AM December 2nd, 2016 PST in epoch time is 1480615200 seconds, or 58406520 in hexadecimal.   A 96-bit identifier for the trace, globally unique, in 24 hexadecimal digits.  
    */
   putTraceSegments(callback?: (err: AWSError, data: XRay.Types.PutTraceSegmentsResult) => void): Request<XRay.Types.PutTraceSegmentsResult, AWSError>;
   /**
-   * 
+   * Applies tags to an existing AWS X-Ray group or sampling rule.
    */
   tagResource(params: XRay.Types.TagResourceRequest, callback?: (err: AWSError, data: XRay.Types.TagResourceResponse) => void): Request<XRay.Types.TagResourceResponse, AWSError>;
   /**
-   * 
+   * Applies tags to an existing AWS X-Ray group or sampling rule.
    */
   tagResource(callback?: (err: AWSError, data: XRay.Types.TagResourceResponse) => void): Request<XRay.Types.TagResourceResponse, AWSError>;
   /**
-   * 
+   * Removes tags from an AWS X-Ray group or sampling rule. You cannot edit or delete system tags (those with an aws: prefix).
    */
   untagResource(params: XRay.Types.UntagResourceRequest, callback?: (err: AWSError, data: XRay.Types.UntagResourceResponse) => void): Request<XRay.Types.UntagResourceResponse, AWSError>;
   /**
-   * 
+   * Removes tags from an AWS X-Ray group or sampling rule. You cannot edit or delete system tags (those with an aws: prefix).
    */
   untagResource(callback?: (err: AWSError, data: XRay.Types.UntagResourceResponse) => void): Request<XRay.Types.UntagResourceResponse, AWSError>;
   /**
@@ -230,12 +262,16 @@ declare namespace XRay {
     StringValue?: String;
   }
   export type Annotations = {[key: string]: ValuesWithServiceIds};
+  export interface AnomalousService {
+    ServiceId?: ServiceId;
+  }
+  export type AnomalousServiceList = AnomalousService[];
   export type AttributeKey = string;
   export type AttributeMap = {[key: string]: AttributeValue};
   export type AttributeValue = string;
   export interface AvailabilityZoneDetail {
     /**
-     * The name of a corresponding availability zone.
+     * The name of a corresponding Availability Zone.
      */
     Name?: String;
   }
@@ -301,11 +337,18 @@ declare namespace XRay {
      * The filter expression defining criteria by which to group traces.
      */
     FilterExpression?: FilterExpression;
+    /**
+     * The structure containing configurations related to insights.   The InsightsEnabled boolean can be set to true to enable insights for the new group or false to disable insights for the new group.   The NotifcationsEnabled boolean can be set to true to enable insights notifications for the new group. Notifications may only be enabled on a group with InsightsEnabled set to true.  
+     */
+    InsightsConfiguration?: InsightsConfiguration;
+    /**
+     * A map that contains one or more tag keys and tag values to attach to an X-Ray group. For more information about ways to use tags, see Tagging AWS resources in the AWS General Reference. The following restrictions apply to tags:   Maximum number of user-applied tags per resource: 50   Maximum tag key length: 128 Unicode characters   Maximum tag value length: 256 Unicode characters   Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @   Tag keys and values are case sensitive.   Don't use aws: as a prefix for keys; it's reserved for AWS use.  
+     */
     Tags?: TagList;
   }
   export interface CreateGroupResult {
     /**
-     * The group that was created. Contains the name of the group that was created, the ARN of the group that was generated based on the group name, and the filter expression that was assigned to the group.
+     * The group that was created. Contains the name of the group that was created, the Amazon Resource Name (ARN) of the group that was generated based on the group name, the filter expression, and the insight configuration that was assigned to the group.
      */
     Group?: Group;
   }
@@ -314,6 +357,9 @@ declare namespace XRay {
      * The rule definition.
      */
     SamplingRule: SamplingRule;
+    /**
+     * A map that contains one or more tag keys and tag values to attach to an X-Ray sampling rule. For more information about ways to use tags, see Tagging AWS resources in the AWS General Reference. The following restrictions apply to tags:   Maximum number of user-applied tags per resource: 50   Maximum tag key length: 128 Unicode characters   Maximum tag value length: 256 Unicode characters   Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @   Tag keys and values are case sensitive.   Don't use aws: as a prefix for keys; it's reserved for AWS use.  
+     */
     Tags?: TagList;
   }
   export interface CreateSamplingRuleResult {
@@ -486,6 +532,7 @@ declare namespace XRay {
      */
     TotalCount?: NullableLong;
   }
+  export type EventSummaryText = string;
   export interface FaultRootCause {
     /**
      * A list of corresponding services. A service identifies a segment and it contains a name, account ID, type, and inferred flag.
@@ -551,6 +598,16 @@ declare namespace XRay {
   }
   export type FilterExpression = string;
   export type FixedRate = number;
+  export interface ForecastStatistics {
+    /**
+     * The upper limit of fault counts for a service.
+     */
+    FaultCountHigh?: NullableLong;
+    /**
+     * The lower limit of fault counts for a service.
+     */
+    FaultCountLow?: NullableLong;
+  }
   export interface GetEncryptionConfigRequest {
   }
   export interface GetEncryptionConfigResult {
@@ -571,7 +628,7 @@ declare namespace XRay {
   }
   export interface GetGroupResult {
     /**
-     * The group that was requested. Contains the name of the group, the ARN of the group, and the filter expression that assigned to the group.
+     * The group that was requested. Contains the name of the group, the ARN of the group, the filter expression, and the insight configuration assigned to the group.
      */
     Group?: Group;
   }
@@ -591,6 +648,132 @@ declare namespace XRay {
      * Pagination token.
      */
     NextToken?: String;
+  }
+  export type GetInsightEventsMaxResults = number;
+  export interface GetInsightEventsRequest {
+    /**
+     * The insight's unique identifier. Use the GetInsightSummaries action to retrieve an InsightId.
+     */
+    InsightId: InsightId;
+    /**
+     * Used to retrieve at most the specified value of events.
+     */
+    MaxResults?: GetInsightEventsMaxResults;
+    /**
+     * Specify the pagination token returned by a previous request to retrieve the next page of events. 
+     */
+    NextToken?: Token;
+  }
+  export interface GetInsightEventsResult {
+    /**
+     * A detailed description of the event. This includes the time of the event, client and root cause impact statistics, and the top anomalous service at the time of the event.
+     */
+    InsightEvents?: InsightEventList;
+    /**
+     * Use this token to retrieve the next page of insight events.
+     */
+    NextToken?: Token;
+  }
+  export interface GetInsightImpactGraphRequest {
+    /**
+     * The insight's unique identifier. Use the GetInsightSummaries action to retrieve an InsightId.
+     */
+    InsightId: InsightId;
+    /**
+     * The estimated start time of the insight, in Unix time seconds. The StartTime is inclusive of the value provided and can't be more than 30 days old.
+     */
+    StartTime: Timestamp;
+    /**
+     * The estimated end time of the insight, in Unix time seconds. The EndTime is exclusive of the value provided. The time range between the start time and end time can't be more than six hours. 
+     */
+    EndTime: Timestamp;
+    /**
+     * Specify the pagination token returned by a previous request to retrieve the next page of results. 
+     */
+    NextToken?: Token;
+  }
+  export interface GetInsightImpactGraphResult {
+    /**
+     * The insight's unique identifier.
+     */
+    InsightId?: InsightId;
+    /**
+     * The provided start time.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The provided end time. 
+     */
+    EndTime?: Timestamp;
+    /**
+     * The time, in Unix seconds, at which the service graph started.
+     */
+    ServiceGraphStartTime?: Timestamp;
+    /**
+     * The time, in Unix seconds, at which the service graph ended.
+     */
+    ServiceGraphEndTime?: Timestamp;
+    /**
+     * The AWS instrumented services related to the insight.
+     */
+    Services?: InsightImpactGraphServiceList;
+    /**
+     * Pagination token.
+     */
+    NextToken?: Token;
+  }
+  export interface GetInsightRequest {
+    /**
+     * The insight's unique identifier. Use the GetInsightSummaries action to retrieve an InsightId.
+     */
+    InsightId: InsightId;
+  }
+  export interface GetInsightResult {
+    /**
+     * The summary information of an insight.
+     */
+    Insight?: Insight;
+  }
+  export type GetInsightSummariesMaxResults = number;
+  export interface GetInsightSummariesRequest {
+    /**
+     * The list of insight states. 
+     */
+    States?: InsightStateList;
+    /**
+     * The Amazon Resource Name (ARN) of the group. Required if the GroupName isn't provided.
+     */
+    GroupARN?: GroupARN;
+    /**
+     * The name of the group. Required if the GroupARN isn't provided.
+     */
+    GroupName?: GroupName;
+    /**
+     * The beginning of the time frame in which the insights started. The start time can't be more than 30 days old.
+     */
+    StartTime: Timestamp;
+    /**
+     * The end of the time frame in which the insights ended. The end time can't be more than 30 days old.
+     */
+    EndTime: Timestamp;
+    /**
+     * The maximum number of results to display.
+     */
+    MaxResults?: GetInsightSummariesMaxResults;
+    /**
+     * Pagination token.
+     */
+    NextToken?: Token;
+  }
+  export interface GetInsightSummariesResult {
+    /**
+     * The summary of each insight within the group matching the provided filters. The summary contains the InsightID, start and end time, the root cause service, the root cause and client impact statistics, the top anomalous services, and the status of the insight.
+     */
+    InsightSummaries?: InsightSummaryList;
+    /**
+     * Pagination token.
+     */
+    NextToken?: Token;
   }
   export interface GetSamplingRulesRequest {
     /**
@@ -654,11 +837,11 @@ declare namespace XRay {
      */
     EndTime: Timestamp;
     /**
-     * The name of a group to generate a graph based on.
+     * The name of a group based on which you want to generate a graph.
      */
     GroupName?: GroupName;
     /**
-     * The ARN of a group to generate a graph based on.
+     * The Amazon Resource Name (ARN) of a group based on which you want to generate a graph.
      */
     GroupARN?: GroupARN;
     /**
@@ -702,7 +885,7 @@ declare namespace XRay {
      */
     GroupName?: GroupName;
     /**
-     * The ARN of the group for which to pull statistics from.
+     * The Amazon Resource Name (ARN) of the group for which to pull statistics from.
      */
     GroupARN?: GroupARN;
     /**
@@ -714,6 +897,10 @@ declare namespace XRay {
      */
     Period?: NullableInteger;
     /**
+     * The forecasted high and low fault count values. Forecast enabled requests require the EntitySelectorExpression ID be provided.
+     */
+    ForecastStatistics?: NullableBoolean;
+    /**
      * Pagination token.
      */
     NextToken?: String;
@@ -724,7 +911,7 @@ declare namespace XRay {
      */
     TimeSeriesServiceStatistics?: TimeSeriesServiceStatisticsList;
     /**
-     * A flag indicating whether or not a group's filter expression has been consistent, or if a returned aggregation may show statistics from an older version of the group's filter expression.
+     * A flag indicating whether or not a group's filter expression has been consistent, or if a returned aggregation might show statistics from an older version of the group's filter expression.
      */
     ContainsOldGroupVersions?: Boolean;
     /**
@@ -770,7 +957,7 @@ declare namespace XRay {
      */
     Sampling?: NullableBoolean;
     /**
-     * A paramater to indicate whether to enable sampling on trace summaries. Input parameters are Name and Value.
+     * A parameter to indicate whether to enable sampling on trace summaries. Input parameters are Name and Value.
      */
     SamplingStrategy?: SamplingStrategy;
     /**
@@ -796,7 +983,7 @@ declare namespace XRay {
      */
     TracesProcessedCount?: NullableLong;
     /**
-     * If the requested time frame contained more than one page of results, you can use this token to retrieve the next page. The first page contains the most most recent results, closest to the end of the time frame.
+     * If the requested time frame contained more than one page of results, you can use this token to retrieve the next page. The first page contains the most recent results, closest to the end of the time frame.
      */
     NextToken?: String;
   }
@@ -806,13 +993,17 @@ declare namespace XRay {
      */
     GroupName?: String;
     /**
-     * The ARN of the group generated based on the GroupName.
+     * The Amazon Resource Name (ARN) of the group generated based on the GroupName.
      */
     GroupARN?: String;
     /**
      * The filter expression defining the parameters to include traces.
      */
     FilterExpression?: String;
+    /**
+     * The structure containing configurations related to insights.   The InsightsEnabled boolean can be set to true to enable insights for the group or false to disable insights for the group.   The NotifcationsEnabled boolean can be set to true to enable insights notifications through Amazon EventBridge for the group.  
+     */
+    InsightsConfiguration?: InsightsConfiguration;
   }
   export type GroupARN = string;
   export type GroupName = string;
@@ -829,6 +1020,10 @@ declare namespace XRay {
      * The filter expression defining the parameters to include traces.
      */
     FilterExpression?: String;
+    /**
+     * The structure containing configurations related to insights.   The InsightsEnabled boolean can be set to true to enable insights for the group or false to disable insights for the group.   The NotificationsEnabled boolean can be set to true to enable insights notifications. Notifications can only be enabled on a group with InsightsEnabled set to true.  
+     */
+    InsightsConfiguration?: InsightsConfiguration;
   }
   export type GroupSummaryList = GroupSummary[];
   export type HTTPMethod = string;
@@ -867,6 +1062,178 @@ declare namespace XRay {
      */
     ClientIp?: String;
   }
+  export interface Insight {
+    /**
+     * The insights unique identifier. 
+     */
+    InsightId?: InsightId;
+    /**
+     * The Amazon Resource Name (ARN) of the group that the insight belongs to.
+     */
+    GroupARN?: GroupARN;
+    /**
+     * The name of the group that the insight belongs to.
+     */
+    GroupName?: GroupName;
+    RootCauseServiceId?: ServiceId;
+    /**
+     * The categories that label and describe the type of insight.
+     */
+    Categories?: InsightCategoryList;
+    /**
+     * The current state of the insight.
+     */
+    State?: InsightState;
+    /**
+     * The time, in Unix seconds, at which the insight began.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The time, in Unix seconds, at which the insight ended.
+     */
+    EndTime?: Timestamp;
+    /**
+     * A brief description of the insight.
+     */
+    Summary?: InsightSummaryText;
+    /**
+     * The impact statistics of the client side service. This includes the number of requests to the client service and whether the requests were faults or okay.
+     */
+    ClientRequestImpactStatistics?: RequestImpactStatistics;
+    /**
+     * The impact statistics of the root cause service. This includes the number of requests to the client service and whether the requests were faults or okay.
+     */
+    RootCauseServiceRequestImpactStatistics?: RequestImpactStatistics;
+    /**
+     * The service within the insight that is most impacted by the incident.
+     */
+    TopAnomalousServices?: AnomalousServiceList;
+  }
+  export type InsightCategory = "FAULT"|string;
+  export type InsightCategoryList = InsightCategory[];
+  export interface InsightEvent {
+    /**
+     * A brief description of the event.
+     */
+    Summary?: EventSummaryText;
+    /**
+     * The time, in Unix seconds, at which the event was recorded.
+     */
+    EventTime?: Timestamp;
+    /**
+     * The impact statistics of the client side service. This includes the number of requests to the client service and whether the requests were faults or okay.
+     */
+    ClientRequestImpactStatistics?: RequestImpactStatistics;
+    /**
+     * The impact statistics of the root cause service. This includes the number of requests to the client service and whether the requests were faults or okay.
+     */
+    RootCauseServiceRequestImpactStatistics?: RequestImpactStatistics;
+    /**
+     * The service during the event that is most impacted by the incident.
+     */
+    TopAnomalousServices?: AnomalousServiceList;
+  }
+  export type InsightEventList = InsightEvent[];
+  export type InsightId = string;
+  export interface InsightImpactGraphEdge {
+    /**
+     * Identifier of the edge. Unique within a service map.
+     */
+    ReferenceId?: NullableInteger;
+  }
+  export type InsightImpactGraphEdgeList = InsightImpactGraphEdge[];
+  export interface InsightImpactGraphService {
+    /**
+     * Identifier for the service. Unique within the service map.
+     */
+    ReferenceId?: NullableInteger;
+    /**
+     * Identifier for the service. Unique within the service map.   AWS Resource - The type of an AWS resource. For example, AWS::EC2::Instance for an application running on Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used.    AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a specific table.    AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a specific table.    remote - A downstream service of indeterminate type.  
+     */
+    Type?: String;
+    /**
+     * The canonical name of the service.
+     */
+    Name?: String;
+    /**
+     * A list of names for the service, including the canonical name.
+     */
+    Names?: ServiceNames;
+    /**
+     * Identifier of the AWS account in which the service runs.
+     */
+    AccountId?: String;
+    /**
+     * Connections to downstream services.
+     */
+    Edges?: InsightImpactGraphEdgeList;
+  }
+  export type InsightImpactGraphServiceList = InsightImpactGraphService[];
+  export type InsightState = "ACTIVE"|"CLOSED"|string;
+  export type InsightStateList = InsightState[];
+  export interface InsightSummary {
+    /**
+     * The insights unique identifier. 
+     */
+    InsightId?: InsightId;
+    /**
+     * The Amazon Resource Name (ARN) of the group that the insight belongs to.
+     */
+    GroupARN?: GroupARN;
+    /**
+     * The name of the group that the insight belongs to.
+     */
+    GroupName?: GroupName;
+    RootCauseServiceId?: ServiceId;
+    /**
+     *  Categories The categories that label and describe the type of insight.
+     */
+    Categories?: InsightCategoryList;
+    /**
+     * The current state of the insight.
+     */
+    State?: InsightState;
+    /**
+     * The time, in Unix seconds, at which the insight began.
+     */
+    StartTime?: Timestamp;
+    /**
+     * The time, in Unix seconds, at which the insight ended.
+     */
+    EndTime?: Timestamp;
+    /**
+     * A brief description of the insight.
+     */
+    Summary?: InsightSummaryText;
+    /**
+     * The impact statistics of the client side service. This includes the number of requests to the client service and whether the requests were faults or okay. 
+     */
+    ClientRequestImpactStatistics?: RequestImpactStatistics;
+    /**
+     * The impact statistics of the root cause service. This includes the number of requests to the client service and whether the requests were faults or okay. 
+     */
+    RootCauseServiceRequestImpactStatistics?: RequestImpactStatistics;
+    /**
+     * The service within the insight that is most impacted by the incident.
+     */
+    TopAnomalousServices?: AnomalousServiceList;
+    /**
+     * The time, in Unix seconds, that the insight was last updated.
+     */
+    LastUpdateTime?: Timestamp;
+  }
+  export type InsightSummaryList = InsightSummary[];
+  export type InsightSummaryText = string;
+  export interface InsightsConfiguration {
+    /**
+     * Set the InsightsEnabled value to true to enable insights or false to disable insights.
+     */
+    InsightsEnabled?: NullableBoolean;
+    /**
+     * Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be enabled on a group with InsightsEnabled set to true.
+     */
+    NotificationsEnabled?: NullableBoolean;
+  }
   export interface InstanceIdDetail {
     /**
      * The ID of a corresponding EC2 instance.
@@ -875,11 +1242,23 @@ declare namespace XRay {
   }
   export type Integer = number;
   export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
+     */
     ResourceARN: AmazonResourceName;
+    /**
+     * A pagination token. If multiple pages of results are returned, use the NextToken value returned with the current page of results as the value of this parameter to get the next page of results.
+     */
     NextToken?: String;
   }
   export interface ListTagsForResourceResponse {
+    /**
+     * A list of tags, as key and value pairs, that is associated with the specified X-Ray group or sampling rule.
+     */
     Tags?: TagList;
+    /**
+     * A pagination token. If multiple pages of results are returned, use the NextToken value returned with the current page of results to get the next page of results.
+     */
     NextToken?: String;
   }
   export type NullableBoolean = boolean;
@@ -936,6 +1315,20 @@ declare namespace XRay {
     UnprocessedTraceSegments?: UnprocessedTraceSegmentList;
   }
   export type RequestCount = number;
+  export interface RequestImpactStatistics {
+    /**
+     * The number of requests that have resulted in a fault,
+     */
+    FaultCount?: NullableLong;
+    /**
+     * The number of successful requests.
+     */
+    OkCount?: NullableLong;
+    /**
+     * The total number of requests to the service.
+     */
+    TotalCount?: NullableLong;
+  }
   export type ReservoirSize = number;
   export type ResourceARN = string;
   export interface ResourceARNDetail {
@@ -960,7 +1353,7 @@ declare namespace XRay {
      */
     Name?: String;
     /**
-     * The types and messages of the exceptions.
+     * The type and messages of the exceptions.
      */
     Coverage?: NullableDouble;
     /**
@@ -1200,7 +1593,7 @@ declare namespace XRay {
      */
     FixedRate?: Double;
     /**
-     * The number of requests per second that X-Ray allocated this service.
+     * The number of requests per second that X-Ray allocated for this service.
      */
     ReservoirQuota?: NullableInteger;
     /**
@@ -1248,7 +1641,7 @@ declare namespace XRay {
      */
     AccountId?: String;
     /**
-     * The type of service.   AWS Resource - The type of an AWS resource. For example, AWS::EC2::Instance for a application running on Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used.   AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a specific table.    client - Represents the clients that sent requests to a root service.    remote - A downstream service of indeterminate type.  
+     * The type of service.   AWS Resource - The type of an AWS resource. For example, AWS::EC2::Instance for an application running on Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used.   AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon DynamoDB that didn't target a specific table.    client - Represents the clients that sent requests to a root service.    remote - A downstream service of indeterminate type.  
      */
     Type?: String;
     /**
@@ -1327,14 +1720,26 @@ declare namespace XRay {
   export type ServiceType = string;
   export type String = string;
   export interface Tag {
+    /**
+     * A tag key, such as Stage or Name. A tag key cannot be empty. The key can be a maximum of 128 characters, and can contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : / 
+     */
     Key: TagKey;
+    /**
+     * An optional tag value, such as Production or test-only. The value can be a maximum of 255 characters, and contain only Unicode letters, numbers, or separators, or the following special characters: + - = . _ : / 
+     */
     Value: TagValue;
   }
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagList = Tag[];
   export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
+     */
     ResourceARN: AmazonResourceName;
+    /**
+     * A map that contains one or more tag keys and tag values to attach to an X-Ray group or sampling rule. For more information about ways to use tags, see Tagging AWS resources in the AWS General Reference. The following restrictions apply to tags:   Maximum number of user-applied tags per resource: 50   Maximum tag key length: 128 Unicode characters   Maximum tag value length: 256 Unicode characters   Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . : / = + - and @   Tag keys and values are case sensitive.   Don't use aws: as a prefix for keys; it's reserved for AWS use. You cannot edit or delete system tags.  
+     */
     Tags: TagList;
   }
   export interface TagResourceResponse {
@@ -1376,12 +1781,17 @@ declare namespace XRay {
     EdgeSummaryStatistics?: EdgeStatistics;
     ServiceSummaryStatistics?: ServiceStatistics;
     /**
+     * The forecasted high and low fault count values.
+     */
+    ServiceForecastStatistics?: ForecastStatistics;
+    /**
      * The response time histogram for the selected entities.
      */
     ResponseTimeHistogram?: Histogram;
   }
   export type TimeSeriesServiceStatisticsList = TimeSeriesServiceStatistics[];
   export type Timestamp = Date;
+  export type Token = string;
   export interface Trace {
     /**
      * The unique identifier for the request that generated the trace's segments and subsegments.
@@ -1391,6 +1801,10 @@ declare namespace XRay {
      * The length of time in seconds between the start time of the root segment and the end time of the last segment that completed.
      */
     Duration?: NullableDouble;
+    /**
+     * LimitExceeded is set to true when the trace has exceeded one of the defined quotas. For more information about quotas, see AWS X-Ray endpoints and quotas.
+     */
+    LimitExceeded?: NullableBoolean;
     /**
      * Segment documents for the segments and subsegments that comprise the trace.
      */
@@ -1458,7 +1872,7 @@ declare namespace XRay {
      */
     InstanceIds?: TraceInstanceIds;
     /**
-     * A list of availability zones for any zone corresponding to the trace segments.
+     * A list of Availability Zones for any zone corresponding to the trace segments.
      */
     AvailabilityZones?: TraceAvailabilityZones;
     /**
@@ -1466,7 +1880,7 @@ declare namespace XRay {
      */
     EntryPoint?: ServiceId;
     /**
-     * A collection of FaultRootCause structures corresponding to the the trace segments.
+     * A collection of FaultRootCause structures corresponding to the trace segments.
      */
     FaultRootCauses?: FaultRootCauses;
     /**
@@ -1531,7 +1945,13 @@ declare namespace XRay {
   }
   export type UnprocessedTraceSegmentList = UnprocessedTraceSegment[];
   export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Number (ARN) of an X-Ray group or sampling rule.
+     */
     ResourceARN: AmazonResourceName;
+    /**
+     * Keys for one or more tags that you want to remove from an X-Ray group or sampling rule.
+     */
     TagKeys: TagKeyList;
   }
   export interface UntagResourceResponse {
@@ -1549,10 +1969,14 @@ declare namespace XRay {
      * The updated filter expression defining criteria by which to group traces.
      */
     FilterExpression?: FilterExpression;
+    /**
+     * The structure containing configurations related to insights.   The InsightsEnabled boolean can be set to true to enable insights for the group or false to disable insights for the group.   The NotifcationsEnabled boolean can be set to true to enable insights notifications for the group. Notifications can only be enabled on a group with InsightsEnabled set to true.  
+     */
+    InsightsConfiguration?: InsightsConfiguration;
   }
   export interface UpdateGroupResult {
     /**
-     * The group that was updated. Contains the name of the group that was updated, the ARN of the group that was updated, and the updated filter expression assigned to the group.
+     * The group that was updated. Contains the name of the group that was updated, the ARN of the group that was updated, the updated filter expression, and the updated insight configuration assigned to the group.
      */
     Group?: Group;
   }

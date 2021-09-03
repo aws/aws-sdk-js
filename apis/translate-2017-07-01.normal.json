@@ -13,6 +13,68 @@
     "uid": "translate-2017-07-01"
   },
   "operations": {
+    "CreateParallelData": {
+      "name": "CreateParallelData",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateParallelDataRequest"
+      },
+      "output": {
+        "shape": "CreateParallelDataResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Creates a parallel data resource in Amazon Translate by importing an input file from Amazon S3. Parallel data files contain examples of source phrases and their translations from your translation memory. By adding parallel data, you can influence the style, tone, and word choice in your translation output.</p>"
+    },
+    "DeleteParallelData": {
+      "name": "DeleteParallelData",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteParallelDataRequest"
+      },
+      "output": {
+        "shape": "DeleteParallelDataResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Deletes a parallel data resource in Amazon Translate.</p>"
+    },
     "DeleteTerminology": {
       "name": "DeleteTerminology",
       "http": {
@@ -28,6 +90,9 @@
         },
         {
           "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
         },
         {
           "shape": "InternalServerException"
@@ -59,6 +124,34 @@
         }
       ],
       "documentation": "<p>Gets the properties associated with an asycnhronous batch translation job including name, ID, status, source and target languages, input/output S3 buckets, and so on.</p>"
+    },
+    "GetParallelData": {
+      "name": "GetParallelData",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetParallelDataRequest"
+      },
+      "output": {
+        "shape": "GetParallelDataResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Provides information about a parallel data resource.</p>"
     },
     "GetTerminology": {
       "name": "GetTerminology",
@@ -115,6 +208,31 @@
         }
       ],
       "documentation": "<p>Creates or updates a custom terminology, depending on whether or not one already exists for the given terminology name. Importing a terminology with the same name as an existing one will merge the terminologies based on the chosen merge strategy. Currently, the only supported merge strategy is OVERWRITE, and so the imported terminology will overwrite an existing terminology of the same name.</p> <p>If you import a terminology that overwrites an existing one, the new terminology take up to 10 minutes to fully propagate and be available for use in a translation due to cache policies with the DataPlane service that performs the translations.</p>"
+    },
+    "ListParallelData": {
+      "name": "ListParallelData",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListParallelDataRequest"
+      },
+      "output": {
+        "shape": "ListParallelDataResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Provides a list of your parallel data resources in Amazon Translate.</p>"
     },
     "ListTerminologies": {
       "name": "ListTerminologies",
@@ -264,6 +382,46 @@
         }
       ],
       "documentation": "<p>Translates input text from the source language to the target language. For a list of available languages and language codes, see <a>what-is-languages</a>.</p>"
+    },
+    "UpdateParallelData": {
+      "name": "UpdateParallelData",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateParallelDataRequest"
+      },
+      "output": {
+        "shape": "UpdateParallelDataResponse"
+      },
+      "errors": [
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "InvalidParameterValueException"
+        },
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "TooManyRequestsException"
+        },
+        {
+          "shape": "ConflictException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Updates a previously created parallel data resource by importing a new input file from Amazon S3.</p>"
     }
   },
   "shapes": {
@@ -303,6 +461,74 @@
       "type": "string",
       "max": 256,
       "pattern": "^[-\\w.]+\\/[-\\w.+]+$"
+    },
+    "CreateParallelDataRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "ParallelDataConfig",
+        "ClientToken"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ResourceName",
+          "documentation": "<p>A custom name for the parallel data resource in Amazon Translate. You must assign a name that is unique in the account and region.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>A custom description for the parallel data resource in Amazon Translate.</p>"
+        },
+        "ParallelDataConfig": {
+          "shape": "ParallelDataConfig",
+          "documentation": "<p>Specifies the format and S3 location of the parallel data input file.</p>"
+        },
+        "EncryptionKey": {
+          "shape": "EncryptionKey"
+        },
+        "ClientToken": {
+          "shape": "ClientTokenString",
+          "documentation": "<p>A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "CreateParallelDataResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "ResourceName",
+          "documentation": "<p>The custom name that you assigned to the parallel data resource.</p>"
+        },
+        "Status": {
+          "shape": "ParallelDataStatus",
+          "documentation": "<p>The status of the parallel data resource. When the resource is ready for you to use, the status is <code>ACTIVE</code>.</p>"
+        }
+      }
+    },
+    "DeleteParallelDataRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the parallel data resource that is being deleted.</p>"
+        }
+      }
+    },
+    "DeleteParallelDataResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the parallel data resource that is being deleted.</p>"
+        },
+        "Status": {
+          "shape": "ParallelDataStatus",
+          "documentation": "<p>The status of the parallel data deletion.</p>"
+        }
+      }
     },
     "DeleteTerminologyRequest": {
       "type": "structure",
@@ -358,7 +584,7 @@
           "documentation": "<p>The Amazon Resource Name (ARN) of the encryption key being used to encrypt the custom terminology.</p>"
         }
       },
-      "documentation": "<p>The encryption key used to encrypt the custom terminologies used by Amazon Translate.</p>"
+      "documentation": "<p>The encryption key used to encrypt this object.</p>"
     },
     "EncryptionKeyID": {
       "type": "string",
@@ -371,6 +597,39 @@
       "enum": [
         "KMS"
       ]
+    },
+    "GetParallelDataRequest": {
+      "type": "structure",
+      "required": [
+        "Name"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the parallel data resource that is being retrieved.</p>"
+        }
+      }
+    },
+    "GetParallelDataResponse": {
+      "type": "structure",
+      "members": {
+        "ParallelDataProperties": {
+          "shape": "ParallelDataProperties",
+          "documentation": "<p>The properties of the parallel data resource that is being retrieved.</p>"
+        },
+        "DataLocation": {
+          "shape": "ParallelDataDataLocation",
+          "documentation": "<p>The location of the most recent parallel data input file that was successfully imported into Amazon Translate. The location is returned as a presigned URL that has a 30 minute expiration.</p>"
+        },
+        "AuxiliaryDataLocation": {
+          "shape": "ParallelDataDataLocation",
+          "documentation": "<p>The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to create a parallel data resource. The location is returned as a presigned URL to that has a 30 minute expiration.</p>"
+        },
+        "LatestUpdateAttemptAuxiliaryDataLocation": {
+          "shape": "ParallelDataDataLocation",
+          "documentation": "<p>The Amazon S3 location of a file that provides any errors or warnings that were produced by your input file. This file was created when Amazon Translate attempted to update a parallel data resource. The location is returned as a presigned URL to that has a 30 minute expiration.</p>"
+        }
+      }
     },
     "GetTerminologyRequest": {
       "type": "structure",
@@ -460,7 +719,7 @@
         },
         "ContentType": {
           "shape": "ContentType",
-          "documentation": "<p>The multipurpose internet mail extension (MIME) type of the input files. Valid values are <code>text/plain</code> for plaintext files and <code>text/html</code> for HTML files.</p>"
+          "documentation": "<p>Describes the format of the data that you submit to Amazon Translate as input. You can specify one of the following multipurpose internet mail extension (MIME) types:</p> <ul> <li> <p> <code>text/html</code>: The input data consists of one or more HTML files. Amazon Translate translates only the text that resides in the <code>html</code> element in each file.</p> </li> <li> <p> <code>text/plain</code>: The input data consists of one or more unformatted text files. Amazon Translate translates every character in this type of input.</p> </li> <li> <p> <code>application/vnd.openxmlformats-officedocument.wordprocessingml.document</code>: The input data consists of one or more Word documents (.docx).</p> </li> <li> <p> <code>application/vnd.openxmlformats-officedocument.presentationml.presentation</code>: The input data consists of one or more PowerPoint Presentation files (.pptx).</p> </li> <li> <p> <code>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</code>: The input data consists of one or more Excel Workbook files (.xlsx).</p> </li> </ul> <important> <p>If you structure your input data as HTML, ensure that you set this parameter to <code>text/html</code>. By doing so, you cut costs by limiting the translation to the contents of the <code>html</code> element in each file. Otherwise, if you set this parameter to <code>text/plain</code>, your costs will cover the translation of every character.</p> </important>"
         }
       },
       "documentation": "<p>The input configuration properties for requesting a batch translation job.</p>"
@@ -521,6 +780,32 @@
         "shape": "LanguageCodeString"
       }
     },
+    "ListParallelDataRequest": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A string that specifies the next page of results to return in a paginated response.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResultsInteger",
+          "documentation": "<p>The maximum number of parallel data resources returned for each request.</p>"
+        }
+      }
+    },
+    "ListParallelDataResponse": {
+      "type": "structure",
+      "members": {
+        "ParallelDataPropertiesList": {
+          "shape": "ParallelDataPropertiesList",
+          "documentation": "<p>The properties of the parallel data resources returned by this request.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.</p>"
+        }
+      }
+    },
     "ListTerminologiesRequest": {
       "type": "structure",
       "members": {
@@ -577,6 +862,9 @@
         }
       }
     },
+    "Long": {
+      "type": "long"
+    },
     "MaxResultsInteger": {
       "type": "integer",
       "max": 500,
@@ -605,6 +893,144 @@
         }
       },
       "documentation": "<p>The output configuration properties for a batch translation job.</p>"
+    },
+    "ParallelDataArn": {
+      "type": "string",
+      "max": 512,
+      "min": 1
+    },
+    "ParallelDataConfig": {
+      "type": "structure",
+      "required": [
+        "S3Uri",
+        "Format"
+      ],
+      "members": {
+        "S3Uri": {
+          "shape": "S3Uri",
+          "documentation": "<p>The URI of the Amazon S3 folder that contains the parallel data input file. The folder must be in the same Region as the API endpoint you are calling.</p>"
+        },
+        "Format": {
+          "shape": "ParallelDataFormat",
+          "documentation": "<p>The format of the parallel data input file.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the format and S3 location of the parallel data input file.</p>"
+    },
+    "ParallelDataDataLocation": {
+      "type": "structure",
+      "required": [
+        "RepositoryType",
+        "Location"
+      ],
+      "members": {
+        "RepositoryType": {
+          "shape": "String",
+          "documentation": "<p>Describes the repository that contains the parallel data input file.</p>"
+        },
+        "Location": {
+          "shape": "String",
+          "documentation": "<p>The Amazon S3 location of the parallel data input file. The location is returned as a presigned URL to that has a 30 minute expiration.</p>"
+        }
+      },
+      "documentation": "<p>The location of the most recent parallel data input file that was successfully imported into Amazon Translate.</p>"
+    },
+    "ParallelDataFormat": {
+      "type": "string",
+      "enum": [
+        "TSV",
+        "CSV",
+        "TMX"
+      ]
+    },
+    "ParallelDataProperties": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "ResourceName",
+          "documentation": "<p>The custom name assigned to the parallel data resource.</p>"
+        },
+        "Arn": {
+          "shape": "ParallelDataArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the parallel data resource.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The description assigned to the parallel data resource.</p>"
+        },
+        "Status": {
+          "shape": "ParallelDataStatus",
+          "documentation": "<p>The status of the parallel data resource. When the parallel data is ready for you to use, the status is <code>ACTIVE</code>.</p>"
+        },
+        "SourceLanguageCode": {
+          "shape": "LanguageCodeString",
+          "documentation": "<p>The source language of the translations in the parallel data file.</p>"
+        },
+        "TargetLanguageCodes": {
+          "shape": "LanguageCodeStringList",
+          "documentation": "<p>The language codes for the target languages available in the parallel data file. All possible target languages are returned as an array.</p>"
+        },
+        "ParallelDataConfig": {
+          "shape": "ParallelDataConfig",
+          "documentation": "<p>Specifies the format and S3 location of the parallel data input file.</p>"
+        },
+        "Message": {
+          "shape": "UnboundedLengthString",
+          "documentation": "<p>Additional information from Amazon Translate about the parallel data resource. </p>"
+        },
+        "ImportedDataSize": {
+          "shape": "Long",
+          "documentation": "<p>The number of UTF-8 characters that Amazon Translate imported from the parallel data input file. This number includes only the characters in your translation examples. It does not include characters that are used to format your file. For example, if you provided a Translation Memory Exchange (.tmx) file, this number does not include the tags.</p>"
+        },
+        "ImportedRecordCount": {
+          "shape": "Long",
+          "documentation": "<p>The number of records successfully imported from the parallel data input file.</p>"
+        },
+        "FailedRecordCount": {
+          "shape": "Long",
+          "documentation": "<p>The number of records unsuccessfully imported from the parallel data input file.</p>"
+        },
+        "SkippedRecordCount": {
+          "shape": "Long",
+          "documentation": "<p>The number of items in the input file that Amazon Translate skipped when you created or updated the parallel data resource. For example, Amazon Translate skips empty records, empty target texts, and empty lines.</p>"
+        },
+        "EncryptionKey": {
+          "shape": "EncryptionKey"
+        },
+        "CreatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the parallel data resource was created.</p>"
+        },
+        "LastUpdatedAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time at which the parallel data resource was last updated.</p>"
+        },
+        "LatestUpdateAttemptStatus": {
+          "shape": "ParallelDataStatus",
+          "documentation": "<p>The status of the most recent update attempt for the parallel data resource.</p>"
+        },
+        "LatestUpdateAttemptAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the most recent update was attempted.</p>"
+        }
+      },
+      "documentation": "<p>The properties of a parallel data resource.</p>"
+    },
+    "ParallelDataPropertiesList": {
+      "type": "list",
+      "member": {
+        "shape": "ParallelDataProperties"
+      }
+    },
+    "ParallelDataStatus": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "UPDATING",
+        "ACTIVE",
+        "DELETING",
+        "FAILED"
+      ]
     },
     "ResourceName": {
       "type": "string",
@@ -662,9 +1088,13 @@
           "shape": "ResourceNameList",
           "documentation": "<p>The name of the terminology to use in the batch translation job. For a list of available terminologies, use the <a>ListTerminologies</a> operation.</p>"
         },
+        "ParallelDataNames": {
+          "shape": "ResourceNameList",
+          "documentation": "<p>The names of the parallel data resources to use in the batch translation job. For a list of available parallel data resources, use the <a>ListParallelData</a> operation.</p>"
+        },
         "ClientToken": {
           "shape": "ClientTokenString",
-          "documentation": "<p>The client token of the EC2 instance calling the request. This token is auto-generated when using the Amazon Translate SDK. Otherwise, use the <a href=\"docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInstances.html\">DescribeInstances</a> EC2 operation to retreive an instance's client token. For more information, see <a href=\"docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html#client-tokens\">Client Tokens</a> in the EC2 User Guide.</p>",
+          "documentation": "<p>A unique identifier for the request. This token is auto-generated when using the Amazon Translate SDK.</p>",
           "idempotencyToken": true
         }
       }
@@ -678,7 +1108,7 @@
         },
         "JobStatus": {
           "shape": "JobStatus",
-          "documentation": "<p>The status of the job. Possible values include:</p> <ul> <li> <p> <code>SUBMITTED</code> - The job has been received and is queued for processing.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Amazon Translate is processing the job.</p> </li> <li> <p> <code>COMPLETED</code> - The job was successfully completed and the output is available.</p> </li> <li> <p> <code>COMPLETED_WITH_ERRORS</code> - The job was completed with errors. The errors can be analyzed in the job's output.</p> </li> <li> <p> <code>FAILED</code> - The job did not complete. To get details, use the <a>DescribeTextTranslationJob</a> operation.</p> </li> <li> <p> <code>STOP_REQUESTED</code> - The user who started the job has requested that it be stopped.</p> </li> <li> <p> <code>STOPPED</code> - The job has been stopped.</p> </li> </ul>"
+          "documentation": "<p>The status of the job. Possible values include:</p> <ul> <li> <p> <code>SUBMITTED</code> - The job has been received and is queued for processing.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Amazon Translate is processing the job.</p> </li> <li> <p> <code>COMPLETED</code> - The job was successfully completed and the output is available.</p> </li> <li> <p> <code>COMPLETED_WITH_ERROR</code> - The job was completed with errors. The errors can be analyzed in the job's output.</p> </li> <li> <p> <code>FAILED</code> - The job did not complete. To get details, use the <a>DescribeTextTranslationJob</a> operation.</p> </li> <li> <p> <code>STOP_REQUESTED</code> - The user who started the job has requested that it be stopped.</p> </li> <li> <p> <code>STOPPED</code> - The job has been stopped.</p> </li> </ul>"
         }
       }
     },
@@ -742,7 +1172,8 @@
     },
     "TerminologyArn": {
       "type": "string",
-      "pattern": "^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:translate:[a-zA-Z0-9-]+:[0-9]{12}:terminology/.+?/.+?$"
+      "max": 512,
+      "min": 1
     },
     "TerminologyData": {
       "type": "structure",
@@ -897,6 +1328,10 @@
           "shape": "ResourceNameList",
           "documentation": "<p>A list containing the names of the terminologies applied to a translation job. Only one terminology can be applied per <a>StartTextTranslationJob</a> request at this time.</p>"
         },
+        "ParallelDataNames": {
+          "shape": "ResourceNameList",
+          "documentation": "<p>A list containing the names of the parallel data resources applied to the translation job.</p>"
+        },
         "Message": {
           "shape": "UnboundedLengthString",
           "documentation": "<p>An explanation of any errors that may have occured during the translation job.</p>"
@@ -987,6 +1422,54 @@
     },
     "UnboundedLengthString": {
       "type": "string"
+    },
+    "UpdateParallelDataRequest": {
+      "type": "structure",
+      "required": [
+        "Name",
+        "ParallelDataConfig",
+        "ClientToken"
+      ],
+      "members": {
+        "Name": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the parallel data resource being updated.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>A custom description for the parallel data resource in Amazon Translate.</p>"
+        },
+        "ParallelDataConfig": {
+          "shape": "ParallelDataConfig",
+          "documentation": "<p>Specifies the format and S3 location of the parallel data input file.</p>"
+        },
+        "ClientToken": {
+          "shape": "ClientTokenString",
+          "documentation": "<p>A unique identifier for the request. This token is automatically generated when you use Amazon Translate through an AWS SDK.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "UpdateParallelDataResponse": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "ResourceName",
+          "documentation": "<p>The name of the parallel data resource being updated.</p>"
+        },
+        "Status": {
+          "shape": "ParallelDataStatus",
+          "documentation": "<p>The status of the parallel data resource that you are attempting to update. Your update request is accepted only if this status is either <code>ACTIVE</code> or <code>FAILED</code>.</p>"
+        },
+        "LatestUpdateAttemptStatus": {
+          "shape": "ParallelDataStatus",
+          "documentation": "<p>The status of the parallel data update attempt. When the updated parallel data resource is ready for you to use, the status is <code>ACTIVE</code>.</p>"
+        },
+        "LatestUpdateAttemptAt": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time that the most recent update was attempted.</p>"
+        }
+      }
     }
   },
   "documentation": "<p>Provides translation between one source language and another of the same set of languages.</p>"

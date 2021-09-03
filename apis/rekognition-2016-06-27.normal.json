@@ -50,7 +50,7 @@
           "shape": "InvalidImageFormatException"
         }
       ],
-      "documentation": "<p>Compares a face in the <i>source</i> input image with each of the 100 largest faces detected in the <i>target</i> input image. </p> <note> <p> If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image. </p> </note> <p>You pass the input and target images either as base64-encoded image bytes or as references to images in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file. </p> <p>In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match. </p> <note> <p>By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the <code>SimilarityThreshold</code> parameter.</p> </note> <p> <code>CompareFaces</code> also returns an array of faces that don't match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use <code>QualityFilter</code> to set the quality bar by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. The default value is <code>NONE</code>. </p> <note> <p>To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call <a>DescribeCollection</a>. </p> </note> <p>If the image doesn't contain Exif metadata, <code>CompareFaces</code> returns orientation information for the source and target images. Use these values to display the images with the correct image orientation.</p> <p>If no faces are detected in the source or target images, <code>CompareFaces</code> returns an <code>InvalidParameterException</code> error. </p> <note> <p> This is a stateless API operation. That is, data returned by this operation doesn't persist.</p> </note> <p>For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code> action.</p>"
+      "documentation": "<p>Compares a face in the <i>source</i> input image with each of the 100 largest faces detected in the <i>target</i> input image. </p> <p> If the source image contains multiple faces, the service detects the largest face and compares it with each face detected in the target image. </p> <note> <p>CompareFaces uses machine learning algorithms, which are probabilistic. A false negative is an incorrect prediction that a face in the target image has a low similarity confidence score when compared to the face in the source image. To reduce the probability of false negatives, we recommend that you compare the target image against multiple source images. If you plan to use <code>CompareFaces</code> to make a decision that impacts an individual's rights, privacy, or access to services, we recommend that you pass the result to a human for review and further validation before taking action.</p> </note> <p>You pass the input and target images either as base64-encoded image bytes or as references to images in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file. </p> <p>In response, the operation returns an array of face matches ordered by similarity score in descending order. For each face match, the response provides a bounding box of the face, facial landmarks, pose details (pitch, role, and yaw), quality (brightness and sharpness), and confidence value (indicating the level of confidence that the bounding box contains a face). The response also provides a similarity score, which indicates how closely the faces match. </p> <note> <p>By default, only faces with a similarity score of greater than or equal to 80% are returned in the response. You can change this value by specifying the <code>SimilarityThreshold</code> parameter.</p> </note> <p> <code>CompareFaces</code> also returns an array of faces that don't match the source image. For each face, it returns a bounding box, confidence value, landmarks, pose details, and quality. The response also returns information about the face in the source image, including the bounding box of the face and confidence value.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use <code>QualityFilter</code> to set the quality bar by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. The default value is <code>NONE</code>. </p> <p>If the image doesn't contain Exif metadata, <code>CompareFaces</code> returns orientation information for the source and target images. Use these values to display the images with the correct image orientation.</p> <p>If no faces are detected in the source or target images, <code>CompareFaces</code> returns an <code>InvalidParameterException</code> error. </p> <note> <p> This is a stateless API operation. That is, data returned by this operation doesn't persist.</p> </note> <p>For an example, see Comparing Faces in Images in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:CompareFaces</code> action.</p>"
     },
     "CreateCollection": {
       "name": "CreateCollection",
@@ -82,9 +82,12 @@
         },
         {
           "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
         }
       ],
-      "documentation": "<p>Creates a collection in an AWS Region. You can add faces to the collection using the <a>IndexFaces</a> operation. </p> <p>For example, you might create collections, one for each of your application users. A user can then index faces using the <code>IndexFaces</code> operation and persist results in a specific collection. Then, a user can search the collection for faces in the user-specific container. </p> <p>When you create a collection, it is associated with the latest version of the face model version.</p> <note> <p>Collection names are case-sensitive.</p> </note> <p>This operation requires permissions to perform the <code>rekognition:CreateCollection</code> action.</p>"
+      "documentation": "<p>Creates a collection in an AWS Region. You can add faces to the collection using the <a>IndexFaces</a> operation. </p> <p>For example, you might create collections, one for each of your application users. A user can then index faces using the <code>IndexFaces</code> operation and persist results in a specific collection. Then, a user can search the collection for faces in the user-specific container. </p> <p>When you create a collection, it is associated with the latest version of the face model version.</p> <note> <p>Collection names are case-sensitive.</p> </note> <p>This operation requires permissions to perform the <code>rekognition:CreateCollection</code> action. If you want to tag your collection, you also require permission to perform the <code>rekognition:TagResource</code> operation.</p>"
     },
     "CreateProject": {
       "name": "CreateProject",
@@ -159,6 +162,9 @@
         },
         {
           "shape": "ProvisionedThroughputExceededException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
         }
       ],
       "documentation": "<p>Creates a new version of a model and begins training. Models are managed as part of an Amazon Rekognition Custom Labels project. You can specify one training dataset and one testing dataset. The response from <code>CreateProjectVersion</code> is an Amazon Resource Name (ARN) for the version of the model. </p> <p>Training takes a while to complete. You can get the current status by calling <a>DescribeProjectVersions</a>.</p> <p>Once training has successfully completed, call <a>DescribeProjectVersions</a> to get the training results and evaluate the model. </p> <p>After evaluating the model, you start the model by calling <a>StartProjectVersion</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:CreateProjectVersion</code> action.</p>"
@@ -196,9 +202,12 @@
         },
         {
           "shape": "ProvisionedThroughputExceededException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
         }
       ],
-      "documentation": "<p>Creates an Amazon Rekognition stream processor that you can use to detect and recognize faces in a streaming video.</p> <p>Amazon Rekognition Video is a consumer of live video from Amazon Kinesis Video Streams. Amazon Rekognition Video sends analysis results to Amazon Kinesis Data Streams.</p> <p>You provide as input a Kinesis video stream (<code>Input</code>) and a Kinesis data stream (<code>Output</code>) stream. You also specify the face recognition criteria in <code>Settings</code>. For example, the collection containing faces that you want to recognize. Use <code>Name</code> to assign an identifier for the stream processor. You use <code>Name</code> to manage the stream processor. For example, you can start processing the source video by calling <a>StartStreamProcessor</a> with the <code>Name</code> field. </p> <p>After you have finished analyzing a streaming video, use <a>StopStreamProcessor</a> to stop processing. You can delete the stream processor by calling <a>DeleteStreamProcessor</a>.</p>"
+      "documentation": "<p>Creates an Amazon Rekognition stream processor that you can use to detect and recognize faces in a streaming video.</p> <p>Amazon Rekognition Video is a consumer of live video from Amazon Kinesis Video Streams. Amazon Rekognition Video sends analysis results to Amazon Kinesis Data Streams.</p> <p>You provide as input a Kinesis video stream (<code>Input</code>) and a Kinesis data stream (<code>Output</code>) stream. You also specify the face recognition criteria in <code>Settings</code>. For example, the collection containing faces that you want to recognize. Use <code>Name</code> to assign an identifier for the stream processor. You use <code>Name</code> to manage the stream processor. For example, you can start processing the source video by calling <a>StartStreamProcessor</a> with the <code>Name</code> field. </p> <p>After you have finished analyzing a streaming video, use <a>StopStreamProcessor</a> to stop processing. You can delete the stream processor by calling <a>DeleteStreamProcessor</a>.</p> <p>This operation requires permissions to perform the <code>rekognition:CreateStreamProcessor</code> action. If you want to tag your stream processor, you also require permission to perform the <code>rekognition:TagResource</code> operation.</p>"
     },
     "DeleteCollection": {
       "name": "DeleteCollection",
@@ -565,7 +574,7 @@
           "shape": "InvalidImageFormatException"
         }
       ],
-      "documentation": "<p>Detects custom labels in a supplied image by using an Amazon Rekognition Custom Labels model. </p> <p>You specify which version of a model version to use by using the <code>ProjectVersionArn</code> input parameter. </p> <p>You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p> For each object that the model version detects on an image, the API returns a (<code>CustomLabel</code>) object in an array (<code>CustomLabels</code>). Each <code>CustomLabel</code> object provides the label name (<code>Name</code>), the level of confidence that the image contains the object (<code>Confidence</code>), and object location information, if it exists, for the label on the image (<code>Geometry</code>). </p> <p>During training model calculates a threshold value that determines if a prediction for a label is true. By default, <code>DetectCustomLabels</code> doesn't return labels whose confidence value is below the model's calculated threshold value. To filter labels that are returned, specify a value for <code>MinConfidence</code> that is higher than the model's calculated threshold. You can get the model's calculated threshold from the model's training results shown in the Amazon Rekognition Custom Labels console. To get all labels, regardless of confidence, specify a <code>MinConfidence</code> value of 0. </p> <p>You can also add the <code>MaxResults</code> parameter to limit the number of labels returned. </p> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectCustomLabels</code> action. </p>"
+      "documentation": "<p>Detects custom labels in a supplied image by using an Amazon Rekognition Custom Labels model. </p> <p>You specify which version of a model version to use by using the <code>ProjectVersionArn</code> input parameter. </p> <p>You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p> For each object that the model version detects on an image, the API returns a (<code>CustomLabel</code>) object in an array (<code>CustomLabels</code>). Each <code>CustomLabel</code> object provides the label name (<code>Name</code>), the level of confidence that the image contains the object (<code>Confidence</code>), and object location information, if it exists, for the label on the image (<code>Geometry</code>). </p> <p>To filter labels that are returned, specify a value for <code>MinConfidence</code>. <code>DetectCustomLabelsLabels</code> only returns labels with a confidence that's higher than the specified value. The value of <code>MinConfidence</code> maps to the assumed threshold values created during training. For more information, see <i>Assumed threshold</i> in the Amazon Rekognition Custom Labels Developer Guide. Amazon Rekognition Custom Labels metrics expresses an assumed threshold as a floating point value between 0-1. The range of <code>MinConfidence</code> normalizes the threshold value to a percentage value (0-100). Confidence responses from <code>DetectCustomLabels</code> are also returned as a percentage. You can use <code>MinConfidence</code> to change the precision and recall or your model. For more information, see <i>Analyzing an image</i> in the Amazon Rekognition Custom Labels Developer Guide. </p> <p>If you don't specify a value for <code>MinConfidence</code>, <code>DetectCustomLabels</code> returns labels based on the assumed threshold of each label.</p> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectCustomLabels</code> action. </p> <p>For more information, see <i>Analyzing an image</i> in the Amazon Rekognition Custom Labels Developer Guide. </p>"
     },
     "DetectFaces": {
       "name": "DetectFaces",
@@ -690,6 +699,46 @@
       ],
       "documentation": "<p>Detects unsafe content in a specified JPEG or PNG format image. Use <code>DetectModerationLabels</code> to moderate images depending on your requirements. For example, you might want to filter images that contain nudity, but not images containing suggestive content.</p> <p>To filter images, use the labels returned by <code>DetectModerationLabels</code> to determine which types of content are appropriate.</p> <p>For information about moderation labels, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.</p> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p>"
     },
+    "DetectProtectiveEquipment": {
+      "name": "DetectProtectiveEquipment",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DetectProtectiveEquipmentRequest"
+      },
+      "output": {
+        "shape": "DetectProtectiveEquipmentResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidS3ObjectException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ImageTooLargeException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ProvisionedThroughputExceededException"
+        },
+        {
+          "shape": "InvalidImageFormatException"
+        }
+      ],
+      "documentation": "<p>Detects Personal Protective Equipment (PPE) worn by people detected in an image. Amazon Rekognition can detect the following types of PPE.</p> <ul> <li> <p>Face cover</p> </li> <li> <p>Hand cover</p> </li> <li> <p>Head cover</p> </li> </ul> <p>You pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. The image must be either a PNG or JPG formatted file. </p> <p> <code>DetectProtectiveEquipment</code> detects PPE worn by up to 15 persons detected in an image.</p> <p>For each person detected in the image the API returns an array of body parts (face, head, left-hand, right-hand). For each body part, an array of detected items of PPE is returned, including an indicator of whether or not the PPE covers the body part. The API returns the confidence it has in each detection (person, PPE, body part and body part coverage). It also returns a bounding box (<a>BoundingBox</a>) for each detected person and each detected item of PPE. </p> <p>You can optionally request a summary of detected PPE items with the <code>SummarizationAttributes</code> input parameter. The summary provides the following information. </p> <ul> <li> <p>The persons detected as wearing all of the types of PPE that you specify.</p> </li> <li> <p>The persons detected as not wearing all of the types PPE that you specify.</p> </li> <li> <p>The persons detected where PPE adornment could not be determined. </p> </li> </ul> <p>This is a stateless API operation. That is, the operation does not persist any data.</p> <p>This operation requires permissions to perform the <code>rekognition:DetectProtectiveEquipment</code> action. </p>"
+    },
     "DetectText": {
       "name": "DetectText",
       "http": {
@@ -728,7 +777,7 @@
           "shape": "InvalidImageFormatException"
         }
       ],
-      "documentation": "<p>Detects text in the input image and converts it into machine-readable text.</p> <p>Pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not supported. The image must be either a .png or .jpeg formatted file. </p> <p>The <code>DetectText</code> operation returns text in an array of <a>TextDetection</a> elements, <code>TextDetections</code>. Each <code>TextDetection</code> element provides information about a single word or line of text that was detected in the image. </p> <p>A word is one or more ISO basic latin script characters that are not separated by spaces. <code>DetectText</code> can detect up to 50 words in an image.</p> <p>A line is a string of equally spaced words. A line isn't necessarily a complete sentence. For example, a driver's license number is detected as a line. A line ends when there is no aligned text after it. Also, a line ends when there is a large gap between words, relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition may detect multiple lines in text aligned in the same direction. Periods don't represent the end of a line. If a sentence spans multiple lines, the <code>DetectText</code> operation returns multiple lines.</p> <p>To determine whether a <code>TextDetection</code> element is a line of text or a word, use the <code>TextDetection</code> object <code>Type</code> field. </p> <p>To be detected, text must be within +/- 90 degrees orientation of the horizontal axis.</p> <p>For more information, see DetectText in the Amazon Rekognition Developer Guide.</p>"
+      "documentation": "<p>Detects text in the input image and converts it into machine-readable text.</p> <p>Pass the input image as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not supported. The image must be either a .png or .jpeg formatted file. </p> <p>The <code>DetectText</code> operation returns text in an array of <a>TextDetection</a> elements, <code>TextDetections</code>. Each <code>TextDetection</code> element provides information about a single word or line of text that was detected in the image. </p> <p>A word is one or more ISO basic latin script characters that are not separated by spaces. <code>DetectText</code> can detect up to 100 words in an image.</p> <p>A line is a string of equally spaced words. A line isn't necessarily a complete sentence. For example, a driver's license number is detected as a line. A line ends when there is no aligned text after it. Also, a line ends when there is a large gap between words, relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition may detect multiple lines in text aligned in the same direction. Periods don't represent the end of a line. If a sentence spans multiple lines, the <code>DetectText</code> operation returns multiple lines.</p> <p>To determine whether a <code>TextDetection</code> element is a line of text or a word, use the <code>TextDetection</code> object <code>Type</code> field. </p> <p>To be detected, text must be within +/- 90 degrees orientation of the horizontal axis.</p> <p>For more information, see DetectText in the Amazon Rekognition Developer Guide.</p>"
     },
     "GetCelebrityInfo": {
       "name": "GetCelebrityInfo",
@@ -762,7 +811,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Gets the name and additional information about a celebrity based on his or her Amazon Rekognition ID. The additional information is returned as an array of URLs. If there is no additional information about the celebrity, this list is empty.</p> <p>For more information, see Recognizing Celebrities in an Image in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:GetCelebrityInfo</code> action. </p>"
+      "documentation": "<p>Gets the name and additional information about a celebrity based on their Amazon Rekognition ID. The additional information is returned as an array of URLs. If there is no additional information about the celebrity, this list is empty.</p> <p>For more information, see Recognizing Celebrities in an Image in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:GetCelebrityInfo</code> action. </p>"
     },
     "GetCelebrityRecognition": {
       "name": "GetCelebrityRecognition",
@@ -836,7 +885,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Gets the unsafe content analysis results for a Amazon Rekognition Video analysis started by <a>StartContentModeration</a>.</p> <p>Unsafe content analysis of a video is an asynchronous operation. You start analysis by calling <a>StartContentModeration</a> which returns a job identifier (<code>JobId</code>). When analysis finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to <code>StartContentModeration</code>. To get the results of the unsafe content analysis, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. If so, call <code>GetContentModeration</code> and pass the job identifier (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p> <p>For more information, see Working with Stored Videos in the Amazon Rekognition Devlopers Guide.</p> <p> <code>GetContentModeration</code> returns detected unsafe content labels, and the time they are detected, in an array, <code>ModerationLabels</code>, of <a>ContentModerationDetection</a> objects. </p> <p>By default, the moderated labels are returned sorted by time, in milliseconds from the start of the video. You can also sort them by moderated label by specifying <code>NAME</code> for the <code>SortBy</code> input parameter. </p> <p>Since video analysis can return a large number of results, use the <code>MaxResults</code> parameter to limit the number of labels returned in a single call to <code>GetContentModeration</code>. If there are more results than specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call <code>GetContentModeration</code> and populate the <code>NextToken</code> request parameter with the value of <code>NextToken</code> returned from the previous call to <code>GetContentModeration</code>.</p> <p>For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.</p>"
+      "documentation": "<p>Gets the inappropriate, unwanted, or offensive content analysis results for a Amazon Rekognition Video analysis started by <a>StartContentModeration</a>. For a list of moderation labels in Amazon Rekognition, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/moderation.html#moderation-api\">Using the image and video moderation APIs</a>.</p> <p>Amazon Rekognition Video inappropriate or offensive content detection in a stored video is an asynchronous operation. You start analysis by calling <a>StartContentModeration</a> which returns a job identifier (<code>JobId</code>). When analysis finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic registered in the initial call to <code>StartContentModeration</code>. To get the results of the content analysis, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. If so, call <code>GetContentModeration</code> and pass the job identifier (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p> <p>For more information, see Working with Stored Videos in the Amazon Rekognition Devlopers Guide.</p> <p> <code>GetContentModeration</code> returns detected inappropriate, unwanted, or offensive content moderation labels, and the time they are detected, in an array, <code>ModerationLabels</code>, of <a>ContentModerationDetection</a> objects. </p> <p>By default, the moderated labels are returned sorted by time, in milliseconds from the start of the video. You can also sort them by moderated label by specifying <code>NAME</code> for the <code>SortBy</code> input parameter. </p> <p>Since video analysis can return a large number of results, use the <code>MaxResults</code> parameter to limit the number of labels returned in a single call to <code>GetContentModeration</code>. If there are more results than specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a pagination token for getting the next set of results. To get the next page of results, call <code>GetContentModeration</code> and populate the <code>NextToken</code> request parameter with the value of <code>NextToken</code> returned from the previous call to <code>GetContentModeration</code>.</p> <p>For more information, see Content moderation in the Amazon Rekognition Developer Guide.</p>"
     },
     "GetFaceDetection": {
       "name": "GetFaceDetection",
@@ -1099,6 +1148,9 @@
         },
         {
           "shape": "InvalidImageFormatException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
         }
       ],
       "documentation": "<p>Detects faces in the input image and adds them to the specified collection. </p> <p>Amazon Rekognition doesn't save the actual faces that are detected. Instead, the underlying detection algorithm first detects the faces in the input image. For each face, the algorithm extracts facial features into a feature vector, and stores it in the backend database. Amazon Rekognition uses feature vectors when it performs face match and search operations using the <a>SearchFaces</a> and <a>SearchFacesByImage</a> operations.</p> <p>For more information, see Adding Faces to a Collection in the Amazon Rekognition Developer Guide.</p> <p>To get the number of faces in a collection, call <a>DescribeCollection</a>. </p> <p>If you're using version 1.0 of the face detection model, <code>IndexFaces</code> indexes the 15 largest faces in the input image. Later versions of the face detection model index the 100 largest faces in the input image. </p> <p>If you're using version 4 or later of the face model, image orientation information is not returned in the <code>OrientationCorrection</code> field. </p> <p>To determine which version of the model you're using, call <a>DescribeCollection</a> and supply the collection ID. You can also get the model version from the value of <code>FaceModelVersion</code> in the response from <code>IndexFaces</code> </p> <p>For more information, see Model Versioning in the Amazon Rekognition Developer Guide.</p> <p>If you provide the optional <code>ExternalImageId</code> for the input image you provided, Amazon Rekognition associates this ID with all faces that it detects. When you call the <a>ListFaces</a> operation, the response returns the external ID. You can use this external image ID to create a client-side index to associate the faces with each image. You can then use the index to find all faces in an image.</p> <p>You can specify the maximum number of faces to index with the <code>MaxFaces</code> input parameter. This is useful when you want to index the largest faces in an image and don't want to index smaller faces, such as those belonging to people standing in the background.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. By default, <code>IndexFaces</code> chooses the quality bar that's used to filter faces. You can also explicitly choose the quality bar. Use <code>QualityFilter</code>, to set the quality bar by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. </p> <note> <p>To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call <a>DescribeCollection</a>. </p> </note> <p>Information about faces detected in an image, but not indexed, is returned in an array of <a>UnindexedFace</a> objects, <code>UnindexedFaces</code>. Faces aren't indexed for reasons such as:</p> <ul> <li> <p>The number of faces detected exceeds the value of the <code>MaxFaces</code> request parameter.</p> </li> <li> <p>The face is too small compared to the image dimensions.</p> </li> <li> <p>The face is too blurry.</p> </li> <li> <p>The image is too dark.</p> </li> <li> <p>The face has an extreme pose.</p> </li> <li> <p>The face doesn’t have enough detail to be suitable for face search.</p> </li> </ul> <p>In response, the <code>IndexFaces</code> operation returns an array of metadata for all detected faces, <code>FaceRecords</code>. This includes: </p> <ul> <li> <p>The bounding box, <code>BoundingBox</code>, of the detected face. </p> </li> <li> <p>A confidence value, <code>Confidence</code>, which indicates the confidence that the bounding box contains a face.</p> </li> <li> <p>A face ID, <code>FaceId</code>, assigned by the service for each face that's detected and stored.</p> </li> <li> <p>An image ID, <code>ImageId</code>, assigned by the service for the input image.</p> </li> </ul> <p>If you request all facial attributes (by using the <code>detectionAttributes</code> parameter), Amazon Rekognition returns detailed facial attributes, such as facial landmarks (for example, location of eye and mouth) and other facial attributes. If you provide the same image, specify the same collection, and use the same external ID in the <code>IndexFaces</code> operation, Amazon Rekognition doesn't save duplicate face metadata.</p> <p/> <p>The input image is passed either as base64-encoded image bytes, or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes isn't supported. The image must be formatted as a PNG or JPEG file. </p> <p>This operation requires permissions to perform the <code>rekognition:IndexFaces</code> action.</p>"
@@ -1211,6 +1263,40 @@
       ],
       "documentation": "<p>Gets a list of stream processors that you have created with <a>CreateStreamProcessor</a>. </p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ProvisionedThroughputExceededException"
+        }
+      ],
+      "documentation": "<p> Returns a list of tags in an Amazon Rekognition collection, stream processor, or Custom Labels model. </p> <p>This operation requires permissions to perform the <code>rekognition:ListTagsForResource</code> action. </p>"
+    },
     "RecognizeCelebrities": {
       "name": "RecognizeCelebrities",
       "http": {
@@ -1252,7 +1338,7 @@
           "shape": "InvalidImageFormatException"
         }
       ],
-      "documentation": "<p>Returns an array of celebrities recognized in the input image. For more information, see Recognizing Celebrities in the Amazon Rekognition Developer Guide. </p> <p> <code>RecognizeCelebrities</code> returns the 100 largest faces in the image. It lists recognized celebrities in the <code>CelebrityFaces</code> array and unrecognized faces in the <code>UnrecognizedFaces</code> array. <code>RecognizeCelebrities</code> doesn't return celebrities whose faces aren't among the largest 100 faces in the image.</p> <p>For each celebrity recognized, <code>RecognizeCelebrities</code> returns a <code>Celebrity</code> object. The <code>Celebrity</code> object contains the celebrity name, ID, URL links to additional information, match confidence, and a <code>ComparedFace</code> object that you can use to locate the celebrity's face on the image.</p> <p>Amazon Rekognition doesn't retain information about which images a celebrity has been recognized in. Your application must store this information and use the <code>Celebrity</code> ID property as a unique identifier for the celebrity. If you don't store the celebrity name or additional information URLs returned by <code>RecognizeCelebrities</code>, you will need the ID to identify the celebrity in a call to the <a>GetCelebrityInfo</a> operation.</p> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p>For an example, see Recognizing Celebrities in an Image in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:RecognizeCelebrities</code> operation.</p>"
+      "documentation": "<p>Returns an array of celebrities recognized in the input image. For more information, see Recognizing Celebrities in the Amazon Rekognition Developer Guide. </p> <p> <code>RecognizeCelebrities</code> returns the 64 largest faces in the image. It lists recognized celebrities in the <code>CelebrityFaces</code> array and unrecognized faces in the <code>UnrecognizedFaces</code> array. <code>RecognizeCelebrities</code> doesn't return celebrities whose faces aren't among the largest 64 faces in the image.</p> <p>For each celebrity recognized, <code>RecognizeCelebrities</code> returns a <code>Celebrity</code> object. The <code>Celebrity</code> object contains the celebrity name, ID, URL links to additional information, match confidence, and a <code>ComparedFace</code> object that you can use to locate the celebrity's face on the image.</p> <p>Amazon Rekognition doesn't retain information about which images a celebrity has been recognized in. Your application must store this information and use the <code>Celebrity</code> ID property as a unique identifier for the celebrity. If you don't store the celebrity name or additional information URLs returned by <code>RecognizeCelebrities</code>, you will need the ID to identify the celebrity in a call to the <a>GetCelebrityInfo</a> operation.</p> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p>For an example, see Recognizing Celebrities in an Image in the Amazon Rekognition Developer Guide.</p> <p>This operation requires permissions to perform the <code>rekognition:RecognizeCelebrities</code> operation.</p>"
     },
     "SearchFaces": {
       "name": "SearchFaces",
@@ -1329,7 +1415,7 @@
           "shape": "InvalidImageFormatException"
         }
       ],
-      "documentation": "<p>For a given input image, first detects the largest face in the image, and then searches the specified collection for matching faces. The operation compares the features of the input face with faces in the specified collection. </p> <note> <p>To search for all faces in an input image, you might first call the <a>IndexFaces</a> operation, and then use the face IDs returned in subsequent calls to the <a>SearchFaces</a> operation. </p> <p> You can also call the <code>DetectFaces</code> operation and use the bounding boxes in the response to make face crops, which then you can pass in to the <code>SearchFacesByImage</code> operation. </p> </note> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p> The response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match found. Along with the metadata, the response also includes a <code>similarity</code> indicating how similar the face is to the input face. In the response, the operation also returns the bounding box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition used for the input image. </p> <p>For an example, Searching for a Face Using an Image in the Amazon Rekognition Developer Guide.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use <code>QualityFilter</code> to set the quality bar for filtering by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. The default value is <code>NONE</code>.</p> <note> <p>To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call <a>DescribeCollection</a>. </p> </note> <p>This operation requires permissions to perform the <code>rekognition:SearchFacesByImage</code> action.</p>"
+      "documentation": "<p>For a given input image, first detects the largest face in the image, and then searches the specified collection for matching faces. The operation compares the features of the input face with faces in the specified collection. </p> <note> <p>To search for all faces in an input image, you might first call the <a>IndexFaces</a> operation, and then use the face IDs returned in subsequent calls to the <a>SearchFaces</a> operation. </p> <p> You can also call the <code>DetectFaces</code> operation and use the bounding boxes in the response to make face crops, which then you can pass in to the <code>SearchFacesByImage</code> operation. </p> </note> <p>You pass the input image either as base64-encoded image bytes or as a reference to an image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, passing image bytes is not supported. The image must be either a PNG or JPEG formatted file. </p> <p> The response returns an array of faces that match, ordered by similarity score with the highest similarity first. More specifically, it is an array of metadata for each face match found. Along with the metadata, the response also includes a <code>similarity</code> indicating how similar the face is to the input face. In the response, the operation also returns the bounding box (and a confidence level that the bounding box contains a face) of the face that Amazon Rekognition used for the input image. </p> <p>If no faces are detected in the input image, <code>SearchFacesByImage</code> returns an <code>InvalidParameterException</code> error. </p> <p>For an example, Searching for a Face Using an Image in the Amazon Rekognition Developer Guide.</p> <p>The <code>QualityFilter</code> input parameter allows you to filter out detected faces that don’t meet a required quality bar. The quality bar is based on a variety of common use cases. Use <code>QualityFilter</code> to set the quality bar for filtering by specifying <code>LOW</code>, <code>MEDIUM</code>, or <code>HIGH</code>. If you do not want to filter detected faces, specify <code>NONE</code>. The default value is <code>NONE</code>.</p> <note> <p>To use quality filtering, you need a collection associated with version 3 of the face model or higher. To get the version of the face model associated with a collection, call <a>DescribeCollection</a>. </p> </note> <p>This operation requires permissions to perform the <code>rekognition:SearchFacesByImage</code> action.</p>"
     },
     "StartCelebrityRecognition": {
       "name": "StartCelebrityRecognition",
@@ -1416,7 +1502,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p> Starts asynchronous detection of unsafe content in a stored video.</p> <p>Amazon Rekognition Video can moderate content in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name and the filename of the video. <code>StartContentModeration</code> returns a job identifier (<code>JobId</code>) which you use to get the results of the analysis. When unsafe content analysis is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.</p> <p>To get the results of the unsafe content analysis, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. If so, call <a>GetContentModeration</a> and pass the job identifier (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p> <p>For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.</p>",
+      "documentation": "<p> Starts asynchronous detection of inappropriate, unwanted, or offensive content in a stored video. For a list of moderation labels in Amazon Rekognition, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/moderation.html#moderation-api\">Using the image and video moderation APIs</a>.</p> <p>Amazon Rekognition Video can moderate content in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name and the filename of the video. <code>StartContentModeration</code> returns a job identifier (<code>JobId</code>) which you use to get the results of the analysis. When content analysis is finished, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.</p> <p>To get the results of the content analysis, first check that the status value published to the Amazon SNS topic is <code>SUCCEEDED</code>. If so, call <a>GetContentModeration</a> and pass the job identifier (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p> <p>For more information, see Content moderation in the Amazon Rekognition Developer Guide.</p>",
       "idempotent": true
     },
     "StartFaceDetection": {
@@ -1836,6 +1922,77 @@
         }
       ],
       "documentation": "<p>Stops a running stream processor that was created by <a>CreateStreamProcessor</a>.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ProvisionedThroughputExceededException"
+        }
+      ],
+      "documentation": "<p> Adds one or more key-value tags to an Amazon Rekognition collection, stream processor, or Custom Labels model. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS Resources</a>. </p> <p>This operation requires permissions to perform the <code>rekognition:TagResource</code> action. </p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ProvisionedThroughputExceededException"
+        }
+      ],
+      "documentation": "<p> Removes one or more tags from an Amazon Rekognition collection, stream processor, or Custom Labels model. </p> <p>This operation requires permissions to perform the <code>rekognition:UntagResource</code> action. </p>"
     }
   },
   "shapes": {
@@ -1860,7 +2017,7 @@
           "shape": "GroundTruthManifest"
         }
       },
-      "documentation": "<p>Assets are the images that you use to train and evaluate a model version. Assets are referenced by Sagemaker GroundTruth manifest files. </p>"
+      "documentation": "<p>Assets are the images that you use to train and evaluate a model version. Assets can also contain validation information that you use to debug a failed model training. </p>"
     },
     "Assets": {
       "type": "list",
@@ -1898,7 +2055,7 @@
         },
         "NumberOfChannels": {
           "shape": "ULong",
-          "documentation": "<p>The number of audio channels in the segement.</p>"
+          "documentation": "<p>The number of audio channels in the segment.</p>"
         }
       },
       "documentation": "<p>Metadata information about an audio stream. An array of <code>AudioMetadata</code> objects for the audio streams found in a stored video is returned by <a>GetSegmentDetection</a>. </p>"
@@ -1923,6 +2080,35 @@
       },
       "documentation": "<p>Indicates whether or not the face has a beard, and the confidence level in the determination.</p>"
     },
+    "BlackFrame": {
+      "type": "structure",
+      "members": {
+        "MaxPixelThreshold": {
+          "shape": "MaxPixelThreshold",
+          "documentation": "<p> A threshold used to determine the maximum luminance value for a pixel to be considered black. In a full color range video, luminance values range from 0-255. A pixel value of 0 is pure black, and the most strict filter. The maximum black pixel value is computed as follows: max_black_pixel_value = minimum_luminance + MaxPixelThreshold *luminance_range. </p> <p>For example, for a full range video with BlackPixelThreshold = 0.1, max_black_pixel_value is 0 + 0.1 * (255-0) = 25.5.</p> <p>The default value of MaxPixelThreshold is 0.2, which maps to a max_black_pixel_value of 51 for a full range video. You can lower this threshold to be more strict on black levels.</p>"
+        },
+        "MinCoveragePercentage": {
+          "shape": "MinCoveragePercentage",
+          "documentation": "<p> The minimum percentage of pixels in a frame that need to have a luminance below the max_black_pixel_value for a frame to be considered a black frame. Luminance is calculated using the BT.709 matrix. </p> <p>The default value is 99, which means at least 99% of all pixels in the frame are black pixels as per the <code>MaxPixelThreshold</code> set. You can reduce this value to allow more noise on the black frame.</p>"
+        }
+      },
+      "documentation": "<p> A filter that allows you to control the black frame detection by specifying the black levels and pixel coverage of black pixels in a frame. As videos can come from multiple sources, formats, and time periods, they may contain different standards and varying noise levels for black frames that need to be accounted for. For more information, see <a>StartSegmentDetection</a>. </p>"
+    },
+    "BodyPart": {
+      "type": "string",
+      "enum": [
+        "FACE",
+        "HEAD",
+        "LEFT_HAND",
+        "RIGHT_HAND"
+      ]
+    },
+    "BodyParts": {
+      "type": "list",
+      "member": {
+        "shape": "ProtectiveEquipmentBodyPart"
+      }
+    },
     "Boolean": {
       "type": "boolean"
     },
@@ -1946,7 +2132,7 @@
           "documentation": "<p>Top coordinate of the bounding box as a ratio of overall image height.</p>"
         }
       },
-      "documentation": "<p>Identifies the bounding box around the label, face, or text. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and left sides of the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p> <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p> <p>The <code>width</code> and <code>height</code> values represent the dimensions of the bounding box as a ratio of the overall image dimension. For example, if the input image is 700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p> <note> <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is able to detect a face that is at the image edge and is only partially visible, the service can return coordinates that are outside the image bounds and, depending on the image edge, you might get negative values or values greater than 1 for the <code>left</code> or <code>top</code> values. </p> </note>"
+      "documentation": "<p>Identifies the bounding box around the label, face, text or personal protective equipment. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are coordinates representing the top and left sides of the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p> <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall image size. For example, if the input image is 700x200 pixels, and the top-left coordinate of the bounding box is 350x50 pixels, the API returns a <code>left</code> value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p> <p>The <code>width</code> and <code>height</code> values represent the dimensions of the bounding box as a ratio of the overall image dimension. For example, if the input image is 700x200 pixels, and the bounding box width is 70 pixels, the width returned is 0.1. </p> <note> <p> The bounding box coordinates can have negative values. For example, if Amazon Rekognition is able to detect a face that is at the image edge and is only partially visible, the service can return coordinates that are outside the image bounds and, depending on the image edge, you might get negative values or values greater than 1 for the <code>left</code> or <code>top</code> values. </p> </note>"
     },
     "BoundingBoxHeight": {
       "type": "float",
@@ -1980,6 +2166,9 @@
         "MatchConfidence": {
           "shape": "Percent",
           "documentation": "<p>The confidence, in percentage, that Amazon Rekognition has that the recognized face is the celebrity.</p>"
+        },
+        "KnownGender": {
+          "shape": "KnownGender"
         }
       },
       "documentation": "<p>Provides information about a celebrity recognized by the <a>RecognizeCelebrities</a> operation.</p>"
@@ -2163,6 +2352,14 @@
         "Quality": {
           "shape": "ImageQuality",
           "documentation": "<p>Identifies face image brightness and sharpness. </p>"
+        },
+        "Emotions": {
+          "shape": "Emotions",
+          "documentation": "<p> The emotions that appear to be expressed on the face, and the confidence level in the determination. Valid values include \"Happy\", \"Sad\", \"Angry\", \"Confused\", \"Disgusted\", \"Surprised\", \"Calm\", \"Unknown\", and \"Fear\". </p>"
+        },
+        "Smile": {
+          "shape": "Smile",
+          "documentation": "<p> Indicates whether or not the face is smiling, and the confidence level in the determination. </p>"
         }
       },
       "documentation": "<p>Provides face metadata for target image faces that are analyzed by <code>CompareFaces</code> and <code>RecognizeCelebrities</code>.</p>"
@@ -2206,14 +2403,14 @@
       "members": {
         "Timestamp": {
           "shape": "Timestamp",
-          "documentation": "<p>Time, in milliseconds from the beginning of the video, that the unsafe content label was detected.</p>"
+          "documentation": "<p>Time, in milliseconds from the beginning of the video, that the content moderation label was detected.</p>"
         },
         "ModerationLabel": {
           "shape": "ModerationLabel",
-          "documentation": "<p>The unsafe content label detected by in the stored video.</p>"
+          "documentation": "<p>The content moderation label detected by in the stored video.</p>"
         }
       },
-      "documentation": "<p>Information about an unsafe content label detection in a stored video.</p>"
+      "documentation": "<p>Information about an inappropriate, unwanted, or offensive content label detection in a stored video.</p>"
     },
     "ContentModerationDetections": {
       "type": "list",
@@ -2228,6 +2425,20 @@
         "TIMESTAMP"
       ]
     },
+    "CoversBodyPart": {
+      "type": "structure",
+      "members": {
+        "Confidence": {
+          "shape": "Percent",
+          "documentation": "<p>The confidence that Amazon Rekognition has in the value of <code>Value</code>.</p>"
+        },
+        "Value": {
+          "shape": "Boolean",
+          "documentation": "<p>True if the PPE covers the corresponding body part, otherwise false.</p>"
+        }
+      },
+      "documentation": "<p>Information about an item of Personal Protective Equipment covering a corresponding body part. For more information, see <a>DetectProtectiveEquipment</a>.</p>"
+    },
     "CreateCollectionRequest": {
       "type": "structure",
       "required": [
@@ -2237,6 +2448,10 @@
         "CollectionId": {
           "shape": "CollectionId",
           "documentation": "<p>ID for the collection that you are creating.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p> A set of tags (key-value pairs) that you want to attach to the collection. </p>"
         }
       }
     },
@@ -2298,7 +2513,7 @@
         },
         "OutputConfig": {
           "shape": "OutputConfig",
-          "documentation": "<p>The Amazon S3 location to store the results of training.</p>"
+          "documentation": "<p>The Amazon S3 bucket location to store the results of training. The S3 bucket can be in any AWS account as long as the caller has <code>s3:PutObject</code> permissions on the S3 bucket.</p>"
         },
         "TrainingData": {
           "shape": "TrainingData",
@@ -2307,6 +2522,14 @@
         "TestingData": {
           "shape": "TestingData",
           "documentation": "<p>The dataset to use for testing.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p> A set of tags (key-value pairs) that you want to attach to the model. </p>"
+        },
+        "KmsKeyId": {
+          "shape": "KmsKeyId",
+          "documentation": "<p>The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK). You can supply the Amazon Resource Name (ARN) of your CMK, the ID of your CMK, an alias for your CMK, or an alias ARN. The key is used to encrypt training and test images copied into the service for model training. Your source images are unaffected. The key is also used to encrypt training results and manifest files written to the output Amazon S3 bucket (<code>OutputConfig</code>).</p> <p>If you choose to use your own CMK, you need the following permissions on the CMK.</p> <ul> <li> <p>kms:CreateGrant</p> </li> <li> <p>kms:DescribeKey</p> </li> <li> <p>kms:GenerateDataKey</p> </li> <li> <p>kms:Decrypt</p> </li> </ul> <p>If you don't specify a value for <code>KmsKeyId</code>, images copied into the service are encrypted using a key that AWS owns and manages.</p>"
         }
       }
     },
@@ -2348,6 +2571,10 @@
         "RoleArn": {
           "shape": "RoleArn",
           "documentation": "<p>ARN of the IAM role that allows access to the stream processor.</p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p> A set of tags (key-value pairs) that you want to attach to the stream processor. </p>"
         }
       }
     },
@@ -2670,7 +2897,7 @@
         },
         "MinConfidence": {
           "shape": "Percent",
-          "documentation": "<p>Specifies the minimum confidence level for the labels to return. Amazon Rekognition doesn't return any labels with a confidence lower than this specified value. If you specify a value of 0, all labels are return, regardless of the default thresholds that the model version applies.</p>"
+          "documentation": "<p>Specifies the minimum confidence level for the labels to return. <code>DetectCustomLabels</code> doesn't return any labels with a confidence value that's lower than this specified value. If you specify a value of 0, <code>DetectCustomLabels</code> returns all labels, regardless of the assumed threshold applied to each label. If you don't specify a value for <code>MinConfidence</code>, <code>DetectCustomLabels</code> returns labels based on the assumed threshold of each label.</p>"
         }
       }
     },
@@ -2786,6 +3013,39 @@
         }
       }
     },
+    "DetectProtectiveEquipmentRequest": {
+      "type": "structure",
+      "required": [
+        "Image"
+      ],
+      "members": {
+        "Image": {
+          "shape": "Image",
+          "documentation": "<p>The image in which you want to detect PPE on detected persons. The image can be passed as image bytes or you can reference an image stored in an Amazon S3 bucket. </p>"
+        },
+        "SummarizationAttributes": {
+          "shape": "ProtectiveEquipmentSummarizationAttributes",
+          "documentation": "<p>An array of PPE types that you want to summarize.</p>"
+        }
+      }
+    },
+    "DetectProtectiveEquipmentResponse": {
+      "type": "structure",
+      "members": {
+        "ProtectiveEquipmentModelVersion": {
+          "shape": "String",
+          "documentation": "<p>The version number of the PPE detection model used to detect PPE in the image.</p>"
+        },
+        "Persons": {
+          "shape": "ProtectiveEquipmentPersons",
+          "documentation": "<p>An array of persons detected in the image (including persons not wearing PPE).</p>"
+        },
+        "Summary": {
+          "shape": "ProtectiveEquipmentSummary",
+          "documentation": "<p>Summary information for the types of PPE specified in the <code>SummarizationAttributes</code> input parameter.</p>"
+        }
+      }
+    },
     "DetectTextFilters": {
       "type": "structure",
       "members": {
@@ -2833,7 +3093,7 @@
       "members": {
         "MinConfidence": {
           "shape": "Percent",
-          "documentation": "<p>Sets confidence of word detection. Words with detection confidence below this will be excluded from the result. Values should be between 0.5 and 1 as Text in Video will not return any result below 0.5.</p>"
+          "documentation": "<p>Sets the confidence of word detection. Words with detection confidence below this will be excluded from the result. Values should be between 50 and 100 as Text in Video will not return any result below 50.</p>"
         },
         "MinBoundingBoxHeight": {
           "shape": "BoundingBoxHeight",
@@ -2878,6 +3138,34 @@
       "type": "list",
       "member": {
         "shape": "Emotion"
+      }
+    },
+    "EquipmentDetection": {
+      "type": "structure",
+      "members": {
+        "BoundingBox": {
+          "shape": "BoundingBox",
+          "documentation": "<p>A bounding box surrounding the item of detected PPE.</p>"
+        },
+        "Confidence": {
+          "shape": "Percent",
+          "documentation": "<p>The confidence that Amazon Rekognition has that the bounding box (<code>BoundingBox</code>) contains an item of PPE.</p>"
+        },
+        "Type": {
+          "shape": "ProtectiveEquipmentType",
+          "documentation": "<p>The type of detected PPE.</p>"
+        },
+        "CoversBodyPart": {
+          "shape": "CoversBodyPart",
+          "documentation": "<p>Information about the body part covered by the detected PPE.</p>"
+        }
+      },
+      "documentation": "<p>Information about an item of Personal Protective Equipment (PPE) detected by <a>DetectProtectiveEquipment</a>. For more information, see <a>DetectProtectiveEquipment</a>.</p>"
+    },
+    "EquipmentDetections": {
+      "type": "list",
+      "member": {
+        "shape": "EquipmentDetection"
       }
     },
     "EvaluationResult": {
@@ -3206,6 +3494,10 @@
         "Name": {
           "shape": "String",
           "documentation": "<p>The name of the celebrity.</p>"
+        },
+        "KnownGender": {
+          "shape": "KnownGender",
+          "documentation": "<p>Retrieves the known gender for the celebrity.</p>"
         }
       }
     },
@@ -3266,7 +3558,7 @@
       "members": {
         "JobId": {
           "shape": "JobId",
-          "documentation": "<p>The identifier for the unsafe content job. Use <code>JobId</code> to identify the job in a subsequent call to <code>GetContentModeration</code>.</p>"
+          "documentation": "<p>The identifier for the inappropriate, unwanted, or offensive content moderation job. Use <code>JobId</code> to identify the job in a subsequent call to <code>GetContentModeration</code>.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -3274,7 +3566,7 @@
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>If the previous response was incomplete (because there is more data to retrieve), Amazon Rekognition returns a pagination token in the response. You can use this pagination token to retrieve the next set of unsafe content labels.</p>"
+          "documentation": "<p>If the previous response was incomplete (because there is more data to retrieve), Amazon Rekognition returns a pagination token in the response. You can use this pagination token to retrieve the next set of content moderation labels.</p>"
         },
         "SortBy": {
           "shape": "ContentModerationSortBy",
@@ -3287,7 +3579,7 @@
       "members": {
         "JobStatus": {
           "shape": "VideoJobStatus",
-          "documentation": "<p>The current status of the unsafe content analysis job.</p>"
+          "documentation": "<p>The current status of the content moderation analysis job.</p>"
         },
         "StatusMessage": {
           "shape": "StatusMessage",
@@ -3299,15 +3591,15 @@
         },
         "ModerationLabels": {
           "shape": "ContentModerationDetections",
-          "documentation": "<p>The detected unsafe content labels and the time(s) they were detected.</p>"
+          "documentation": "<p>The detected inappropriate, unwanted, or offensive content moderation labels and the time(s) they were detected.</p>"
         },
         "NextToken": {
           "shape": "PaginationToken",
-          "documentation": "<p>If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent request to retrieve the next set of unsafe content labels. </p>"
+          "documentation": "<p>If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent request to retrieve the next set of content moderation labels. </p>"
         },
         "ModerationModelVersion": {
           "shape": "String",
-          "documentation": "<p>Version number of the moderation detection model that was used to detect unsafe content.</p>"
+          "documentation": "<p>Version number of the moderation detection model that was used to detect inappropriate, unwanted, or offensive content.</p>"
         }
       }
     },
@@ -3552,7 +3844,7 @@
         },
         "Segments": {
           "shape": "SegmentDetections",
-          "documentation": "<p>An array of segments detected in a video.</p>"
+          "documentation": "<p>An array of segments detected in a video. The array is sorted by the segment types (TECHNICAL_CUE or SHOT) specified in the <code>SegmentTypes</code> input parameter of <code>StartSegmentDetection</code>. Within each segment type the array is sorted by timestamp values.</p>"
         },
         "SelectedSegmentTypes": {
           "shape": "SegmentTypesInfo",
@@ -3615,7 +3907,7 @@
           "shape": "S3Object"
         }
       },
-      "documentation": "<p>The S3 bucket that contains the Ground Truth manifest file.</p>"
+      "documentation": "<p>The S3 bucket that contains an Amazon Sagemaker Ground Truth format manifest file. </p>"
     },
     "HumanLoopActivationConditionsEvaluationResults": {
       "type": "string",
@@ -3847,6 +4139,30 @@
       },
       "documentation": "<p>Kinesis video stream stream that provides the source streaming video for a Amazon Rekognition Video stream processor. For more information, see CreateStreamProcessor in the Amazon Rekognition Developer Guide.</p>"
     },
+    "KmsKeyId": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,2048}$"
+    },
+    "KnownGender": {
+      "type": "structure",
+      "members": {
+        "Type": {
+          "shape": "KnownGenderType",
+          "documentation": "<p>A string value of the KnownGender info about the Celebrity.</p>"
+        }
+      },
+      "documentation": "<p>The known gender identity for the celebrity that matches the provided ID.</p>"
+    },
+    "KnownGenderType": {
+      "type": "string",
+      "documentation": "<p>A list of enum string of possible gender values that Celebrity returns.</p>",
+      "enum": [
+        "Male",
+        "Female"
+      ]
+    },
     "Label": {
       "type": "structure",
       "members": {
@@ -3911,11 +4227,11 @@
         },
         "X": {
           "shape": "Float",
-          "documentation": "<p>The x-coordinate from the top left of the landmark expressed as the ratio of the width of the image. For example, if the image is 700 x 200 and the x-coordinate of the landmark is at 350 pixels, this value is 0.5. </p>"
+          "documentation": "<p>The x-coordinate of the landmark expressed as a ratio of the width of the image. The x-coordinate is measured from the left-side of the image. For example, if the image is 700 pixels wide and the x-coordinate of the landmark is at 350 pixels, this value is 0.5. </p>"
         },
         "Y": {
           "shape": "Float",
-          "documentation": "<p>The y-coordinate from the top left of the landmark expressed as the ratio of the height of the image. For example, if the image is 700 x 200 and the y-coordinate of the landmark is at 100 pixels, this value is 0.5.</p>"
+          "documentation": "<p>The y-coordinate of the landmark expressed as a ratio of the height of the image. The y-coordinate is measured from the top of the image. For example, if the image height is 200 pixels and the y-coordinate of the landmark is at 50 pixels, this value is 0.25.</p>"
         }
       },
       "documentation": "<p>Indicates the location of the landmark on the face.</p>"
@@ -4054,6 +4370,27 @@
         }
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p> Amazon Resource Name (ARN) of the model, collection, or stream processor that contains the tags that you want a list of. </p>"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p> A list of key-value tags assigned to the resource. </p>"
+        }
+      }
+    },
     "MaxFaces": {
       "type": "integer",
       "max": 4096,
@@ -4063,9 +4400,19 @@
       "type": "integer",
       "min": 1
     },
+    "MaxPixelThreshold": {
+      "type": "float",
+      "max": 1,
+      "min": 0
+    },
     "MaxResults": {
       "type": "integer",
       "min": 1
+    },
+    "MinCoveragePercentage": {
+      "type": "float",
+      "max": 100,
+      "min": 0
     },
     "ModerationLabel": {
       "type": "structure",
@@ -4083,7 +4430,7 @@
           "documentation": "<p>The name for the parent label. Labels at the top level of the hierarchy have the parent label <code>\"\"</code>.</p>"
         }
       },
-      "documentation": "<p>Provides information about a single type of unsafe content found in an image or video. Each type of moderated content has a label within a hierarchical taxonomy. For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.</p>"
+      "documentation": "<p>Provides information about a single type of inappropriate, unwanted, or offensive content found in an image or video. Each type of moderated content has a label within a hierarchical taxonomy. For more information, see Content moderation in the Amazon Rekognition Developer Guide.</p>"
     },
     "ModerationLabels": {
       "type": "list",
@@ -4135,7 +4482,7 @@
           "documentation": "<p>The ARN of an IAM role that gives Amazon Rekognition publishing permissions to the Amazon SNS topic. </p>"
         }
       },
-      "documentation": "<p>The Amazon Simple Notification Service topic to which Amazon Rekognition publishes the completion status of a video analysis operation. For more information, see <a>api-video</a>.</p>"
+      "documentation": "<p>The Amazon Simple Notification Service topic to which Amazon Rekognition publishes the completion status of a video analysis operation. For more information, see <a>api-video</a>. Note that the Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy to access the topic. For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics\">Giving access to multiple Amazon SNS topics</a>.</p>"
     },
     "OrientationCorrection": {
       "type": "string",
@@ -4387,15 +4734,23 @@
         },
         "TrainingDataResult": {
           "shape": "TrainingDataResult",
-          "documentation": "<p>The manifest file that represents the training results.</p>"
+          "documentation": "<p>Contains information about the training results.</p>"
         },
         "TestingDataResult": {
           "shape": "TestingDataResult",
-          "documentation": "<p>The manifest file that represents the testing results.</p>"
+          "documentation": "<p>Contains information about the testing results.</p>"
         },
         "EvaluationResult": {
           "shape": "EvaluationResult",
           "documentation": "<p>The training results. <code>EvaluationResult</code> is only returned if training is successful.</p>"
+        },
+        "ManifestSummary": {
+          "shape": "GroundTruthManifest",
+          "documentation": "<p>The location of the summary manifest. The summary manifest provides aggregate data validation results for the training and test datasets.</p>"
+        },
+        "KmsKeyId": {
+          "shape": "KmsKeyId",
+          "documentation": "<p>The identifer for the AWS Key Management Service (AWS KMS) customer master key that was used to encrypt the model during training. </p>"
         }
       },
       "documentation": "<p>The description of a version of a model.</p>"
@@ -4429,6 +4784,108 @@
       "type": "integer",
       "max": 100,
       "min": 1
+    },
+    "ProtectiveEquipmentBodyPart": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "BodyPart",
+          "documentation": "<p>The detected body part.</p>"
+        },
+        "Confidence": {
+          "shape": "Percent",
+          "documentation": "<p>The confidence that Amazon Rekognition has in the detection accuracy of the detected body part. </p>"
+        },
+        "EquipmentDetections": {
+          "shape": "EquipmentDetections",
+          "documentation": "<p>An array of Personal Protective Equipment items detected around a body part.</p>"
+        }
+      },
+      "documentation": "<p>Information about a body part detected by <a>DetectProtectiveEquipment</a> that contains PPE. An array of <code>ProtectiveEquipmentBodyPart</code> objects is returned for each person detected by <code>DetectProtectiveEquipment</code>. </p>"
+    },
+    "ProtectiveEquipmentPerson": {
+      "type": "structure",
+      "members": {
+        "BodyParts": {
+          "shape": "BodyParts",
+          "documentation": "<p>An array of body parts detected on a person's body (including body parts without PPE). </p>"
+        },
+        "BoundingBox": {
+          "shape": "BoundingBox",
+          "documentation": "<p>A bounding box around the detected person.</p>"
+        },
+        "Confidence": {
+          "shape": "Percent",
+          "documentation": "<p>The confidence that Amazon Rekognition has that the bounding box contains a person.</p>"
+        },
+        "Id": {
+          "shape": "UInteger",
+          "documentation": "<p>The identifier for the detected person. The identifier is only unique for a single call to <code>DetectProtectiveEquipment</code>.</p>"
+        }
+      },
+      "documentation": "<p>A person detected by a call to <a>DetectProtectiveEquipment</a>. The API returns all persons detected in the input image in an array of <code>ProtectiveEquipmentPerson</code> objects.</p>"
+    },
+    "ProtectiveEquipmentPersonIds": {
+      "type": "list",
+      "member": {
+        "shape": "UInteger"
+      }
+    },
+    "ProtectiveEquipmentPersons": {
+      "type": "list",
+      "member": {
+        "shape": "ProtectiveEquipmentPerson"
+      }
+    },
+    "ProtectiveEquipmentSummarizationAttributes": {
+      "type": "structure",
+      "required": [
+        "MinConfidence",
+        "RequiredEquipmentTypes"
+      ],
+      "members": {
+        "MinConfidence": {
+          "shape": "Percent",
+          "documentation": "<p>The minimum confidence level for which you want summary information. The confidence level applies to person detection, body part detection, equipment detection, and body part coverage. Amazon Rekognition doesn't return summary information with a confidence than this specified value. There isn't a default value.</p> <p>Specify a <code>MinConfidence</code> value that is between 50-100% as <code>DetectProtectiveEquipment</code> returns predictions only where the detection confidence is between 50% - 100%. If you specify a value that is less than 50%, the results are the same specifying a value of 50%.</p> <p> </p>"
+        },
+        "RequiredEquipmentTypes": {
+          "shape": "ProtectiveEquipmentTypes",
+          "documentation": "<p>An array of personal protective equipment types for which you want summary information. If a person is detected wearing a required requipment type, the person's ID is added to the <code>PersonsWithRequiredEquipment</code> array field returned in <a>ProtectiveEquipmentSummary</a> by <code>DetectProtectiveEquipment</code>. </p>"
+        }
+      },
+      "documentation": "<p>Specifies summary attributes to return from a call to <a>DetectProtectiveEquipment</a>. You can specify which types of PPE to summarize. You can also specify a minimum confidence value for detections. Summary information is returned in the <code>Summary</code> (<a>ProtectiveEquipmentSummary</a>) field of the response from <code>DetectProtectiveEquipment</code>. The summary includes which persons in an image were detected wearing the requested types of person protective equipment (PPE), which persons were detected as not wearing PPE, and the persons in which a determination could not be made. For more information, see <a>ProtectiveEquipmentSummary</a>.</p>"
+    },
+    "ProtectiveEquipmentSummary": {
+      "type": "structure",
+      "members": {
+        "PersonsWithRequiredEquipment": {
+          "shape": "ProtectiveEquipmentPersonIds",
+          "documentation": "<p>An array of IDs for persons who are wearing detected personal protective equipment. </p>"
+        },
+        "PersonsWithoutRequiredEquipment": {
+          "shape": "ProtectiveEquipmentPersonIds",
+          "documentation": "<p>An array of IDs for persons who are not wearing all of the types of PPE specified in the <code>RequiredEquipmentTypes</code> field of the detected personal protective equipment. </p>"
+        },
+        "PersonsIndeterminate": {
+          "shape": "ProtectiveEquipmentPersonIds",
+          "documentation": "<p>An array of IDs for persons where it was not possible to determine if they are wearing personal protective equipment. </p>"
+        }
+      },
+      "documentation": "<p>Summary information for required items of personal protective equipment (PPE) detected on persons by a call to <a>DetectProtectiveEquipment</a>. You specify the required type of PPE in the <code>SummarizationAttributes</code> (<a>ProtectiveEquipmentSummarizationAttributes</a>) input parameter. The summary includes which persons were detected wearing the required personal protective equipment (<code>PersonsWithRequiredEquipment</code>), which persons were detected as not wearing the required PPE (<code>PersonsWithoutRequiredEquipment</code>), and the persons in which a determination could not be made (<code>PersonsIndeterminate</code>).</p> <p>To get a total for each category, use the size of the field array. For example, to find out how many people were detected as wearing the specified PPE, use the size of the <code>PersonsWithRequiredEquipment</code> array. If you want to find out more about a person, such as the location (<a>BoundingBox</a>) of the person on the image, use the person ID in each array element. Each person ID matches the ID field of a <a>ProtectiveEquipmentPerson</a> object returned in the <code>Persons</code> array by <code>DetectProtectiveEquipment</code>.</p>"
+    },
+    "ProtectiveEquipmentType": {
+      "type": "string",
+      "enum": [
+        "FACE_COVER",
+        "HAND_COVER",
+        "HEAD_COVER"
+      ]
+    },
+    "ProtectiveEquipmentTypes": {
+      "type": "list",
+      "member": {
+        "shape": "ProtectiveEquipmentType"
+      }
     },
     "QualityFilter": {
       "type": "string",
@@ -4475,7 +4932,7 @@
       "members": {
         "CelebrityFaces": {
           "shape": "CelebrityList",
-          "documentation": "<p>Details about each celebrity found in the image. Amazon Rekognition can detect a maximum of 15 celebrities in an image.</p>"
+          "documentation": "<p>Details about each celebrity found in the image. Amazon Rekognition can detect a maximum of 64 celebrities in an image. Each celebrity object includes the following attributes: <code>Face</code>, <code>Confidence</code>, <code>Emotions</code>, <code>Landmarks</code>, <code>Pose</code>, <code>Quality</code>, <code>Smile</code>, <code>Id</code>, <code>KnownGender</code>, <code>MatchConfidence</code>, <code>Name</code>, <code>Urls</code>.</p>"
         },
         "UnrecognizedFaces": {
           "shape": "ComparedFaceList",
@@ -4483,7 +4940,7 @@
         },
         "OrientationCorrection": {
           "shape": "OrientationCorrection",
-          "documentation": "<p>The orientation of the input image (counterclockwise direction). If your application displays the image, you can use this value to correct the orientation. The bounding box coordinates returned in <code>CelebrityFaces</code> and <code>UnrecognizedFaces</code> represent face locations before the image orientation is corrected. </p> <note> <p>If the input image is in .jpeg format, it might contain exchangeable image (Exif) metadata that includes the image's orientation. If so, and the Exif metadata for the input image populates the orientation field, the value of <code>OrientationCorrection</code> is null. The <code>CelebrityFaces</code> and <code>UnrecognizedFaces</code> bounding box coordinates represent face locations after Exif metadata is used to correct the image orientation. Images in .png format don't contain Exif metadata. </p> </note>"
+          "documentation": "<note> <p>Support for estimating image orientation using the the OrientationCorrection field has ceased as of August 2021. Any returned values for this field included in an API response will always be NULL.</p> </note> <p>The orientation of the input image (counterclockwise direction). If your application displays the image, you can use this value to correct the orientation. The bounding box coordinates returned in <code>CelebrityFaces</code> and <code>UnrecognizedFaces</code> represent face locations before the image orientation is corrected. </p> <note> <p>If the input image is in .jpeg format, it might contain exchangeable image (Exif) metadata that includes the image's orientation. If so, and the Exif metadata for the input image populates the orientation field, the value of <code>OrientationCorrection</code> is null. The <code>CelebrityFaces</code> and <code>UnrecognizedFaces</code> bounding box coordinates represent face locations after Exif metadata is used to correct the image orientation. Images in .png format don't contain Exif metadata. </p> </note>"
         }
       }
     },
@@ -4508,6 +4965,11 @@
     "RekognitionUniqueId": {
       "type": "string",
       "pattern": "[0-9A-Za-z]*"
+    },
+    "ResourceArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20
     },
     "RoleArn": {
       "type": "string",
@@ -4661,11 +5123,11 @@
         },
         "StartTimestampMillis": {
           "shape": "Timestamp",
-          "documentation": "<p>The start time of the detected segment in milliseconds from the start of the video.</p>"
+          "documentation": "<p>The start time of the detected segment in milliseconds from the start of the video. This value is rounded down. For example, if the actual timestamp is 100.6667 milliseconds, Amazon Rekognition Video returns a value of 100 millis.</p>"
         },
         "EndTimestampMillis": {
           "shape": "Timestamp",
-          "documentation": "<p>The end time of the detected segment, in milliseconds, from the start of the video.</p>"
+          "documentation": "<p>The end time of the detected segment, in milliseconds, from the start of the video. This value is rounded down.</p>"
         },
         "DurationMillis": {
           "shape": "ULong",
@@ -4690,6 +5152,18 @@
         "ShotSegment": {
           "shape": "ShotSegment",
           "documentation": "<p>If the segment is a shot detection, contains information about the shot detection.</p>"
+        },
+        "StartFrameNumber": {
+          "shape": "ULong",
+          "documentation": "<p> The frame number of the start of a video segment, using a frame index that starts with 0. </p>"
+        },
+        "EndFrameNumber": {
+          "shape": "ULong",
+          "documentation": "<p> The frame number at the end of a video segment, using a frame index that starts with 0. </p>"
+        },
+        "DurationFrames": {
+          "shape": "ULong",
+          "documentation": "<p> The duration of a video segment, expressed in frames. </p>"
         }
       },
       "documentation": "<p>A technical cue or shot detection segment detected in a video. An array of <code>SegmentDetection</code> objects containing all segments detected in a stored video is returned by <a>GetSegmentDetection</a>. </p>"
@@ -4739,7 +5213,7 @@
       "members": {
         "Index": {
           "shape": "ULong",
-          "documentation": "<p>An Identifier for a shot detection segment detected in a video </p>"
+          "documentation": "<p>An Identifier for a shot detection segment detected in a video. </p>"
         },
         "Confidence": {
           "shape": "SegmentConfidence",
@@ -4778,7 +5252,7 @@
         },
         "NotificationChannel": {
           "shape": "NotificationChannel",
-          "documentation": "<p>The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the celebrity recognition analysis to.</p>"
+          "documentation": "<p>The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the celebrity recognition analysis to. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy.</p>"
         },
         "JobTag": {
           "shape": "JobTag",
@@ -4803,7 +5277,7 @@
       "members": {
         "Video": {
           "shape": "Video",
-          "documentation": "<p>The video in which you want to detect unsafe content. The video must be stored in an Amazon S3 bucket.</p>"
+          "documentation": "<p>The video in which you want to detect inappropriate, unwanted, or offensive content. The video must be stored in an Amazon S3 bucket.</p>"
         },
         "MinConfidence": {
           "shape": "Percent",
@@ -4815,7 +5289,7 @@
         },
         "NotificationChannel": {
           "shape": "NotificationChannel",
-          "documentation": "<p>The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the unsafe content analysis to.</p>"
+          "documentation": "<p>The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the content analysis to. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.</p>"
         },
         "JobTag": {
           "shape": "JobTag",
@@ -4828,7 +5302,7 @@
       "members": {
         "JobId": {
           "shape": "JobId",
-          "documentation": "<p>The identifier for the unsafe content analysis job. Use <code>JobId</code> to identify the job in a subsequent call to <code>GetContentModeration</code>.</p>"
+          "documentation": "<p>The identifier for the content analysis job. Use <code>JobId</code> to identify the job in a subsequent call to <code>GetContentModeration</code>.</p>"
         }
       }
     },
@@ -4848,7 +5322,7 @@
         },
         "NotificationChannel": {
           "shape": "NotificationChannel",
-          "documentation": "<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the face detection operation.</p>"
+          "documentation": "<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the face detection operation. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy.</p>"
         },
         "FaceAttributes": {
           "shape": "FaceAttributes",
@@ -4894,7 +5368,7 @@
         },
         "NotificationChannel": {
           "shape": "NotificationChannel",
-          "documentation": "<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the search. </p>"
+          "documentation": "<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the search. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.</p>"
         },
         "JobTag": {
           "shape": "JobTag",
@@ -4931,7 +5405,7 @@
         },
         "NotificationChannel": {
           "shape": "NotificationChannel",
-          "documentation": "<p>The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the label detection operation to. </p>"
+          "documentation": "<p>The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the label detection operation to. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy.</p>"
         },
         "JobTag": {
           "shape": "JobTag",
@@ -4964,7 +5438,7 @@
         },
         "NotificationChannel": {
           "shape": "NotificationChannel",
-          "documentation": "<p>The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the people detection operation to.</p>"
+          "documentation": "<p>The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the people detection operation to. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy.</p>"
         },
         "JobTag": {
           "shape": "JobTag",
@@ -5037,7 +5511,7 @@
         },
         "NotificationChannel": {
           "shape": "NotificationChannel",
-          "documentation": "<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the segment detection operation.</p>"
+          "documentation": "<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the segment detection operation. Note that the Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.</p>"
         },
         "JobTag": {
           "shape": "JobTag",
@@ -5094,6 +5568,10 @@
         "MinSegmentConfidence": {
           "shape": "SegmentConfidence",
           "documentation": "<p>Specifies the minimum confidence that Amazon Rekognition Video must have in order to return a detected segment. Confidence represents how certain Amazon Rekognition is that a segment is correctly identified. 0 is the lowest confidence. 100 is the highest confidence. Amazon Rekognition Video doesn't return any segments with a confidence level lower than this specified value.</p> <p>If you don't specify <code>MinSegmentConfidence</code>, <code>GetSegmentDetection</code> returns segments with confidence values greater than or equal to 50 percent.</p>"
+        },
+        "BlackFrame": {
+          "shape": "BlackFrame",
+          "documentation": "<p> A filter that allows you to control the black frame detection by specifying the black levels and pixel coverage of black pixels in a frame. Videos can come from multiple sources, formats, and time periods, with different standards and varying noise levels for black frames that need to be accounted for. </p>"
         }
       },
       "documentation": "<p>Filters for the technical segments returned by <a>GetSegmentDetection</a>. For more information, see <a>StartSegmentDetectionFilters</a>.</p>"
@@ -5283,6 +5761,58 @@
       },
       "documentation": "<p>Indicates whether or not the face is wearing sunglasses, and the confidence level in the determination.</p>"
     },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^(?!aws:)[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 200,
+      "min": 0
+    },
+    "TagMap": {
+      "type": "map",
+      "key": {
+        "shape": "TagKey"
+      },
+      "value": {
+        "shape": "TagValue"
+      },
+      "max": 200,
+      "min": 0
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "Tags"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p> Amazon Resource Name (ARN) of the model, collection, or stream processor that you want to assign the tags to. </p>"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p> The key-value tags to assign to the resource. </p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
     "TechnicalCueSegment": {
       "type": "structure",
       "members": {
@@ -5302,7 +5832,11 @@
       "enum": [
         "ColorBars",
         "EndCredits",
-        "BlackFrames"
+        "BlackFrames",
+        "OpeningCredits",
+        "StudioLogo",
+        "Slate",
+        "Content"
       ]
     },
     "TestingData": {
@@ -5329,9 +5863,13 @@
         "Output": {
           "shape": "TestingData",
           "documentation": "<p>The subset of the dataset that was actually tested. Some images (assets) might not be tested due to file formatting and other issues. </p>"
+        },
+        "Validation": {
+          "shape": "ValidationData",
+          "documentation": "<p>The location of the data validation manifest. The data validation manifest is created for the test dataset during model training.</p>"
         }
       },
-      "documentation": "<p>A Sagemaker Groundtruth format manifest file representing the dataset used for testing.</p>"
+      "documentation": "<p>Sagemaker Groundtruth format manifest files for the input, output and validation datasets that are used and created during testing.</p>"
     },
     "TextDetection": {
       "type": "structure",
@@ -5422,9 +5960,13 @@
         "Output": {
           "shape": "TrainingData",
           "documentation": "<p>The images (assets) that were actually trained by Amazon Rekognition Custom Labels. </p>"
+        },
+        "Validation": {
+          "shape": "ValidationData",
+          "documentation": "<p>The location of the data validation manifest. The data validation manifest is created for the training dataset during model training.</p>"
         }
       },
-      "documentation": "<p>A Sagemaker Groundtruth format manifest file that represents the dataset used for training.</p>"
+      "documentation": "<p>Sagemaker Groundtruth format manifest files for the input, output and validation datasets that are used and created during testing.</p>"
     },
     "UInteger": {
       "type": "integer",
@@ -5454,6 +5996,27 @@
         "shape": "UnindexedFace"
       }
     },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "ResourceArn",
+          "documentation": "<p> Amazon Resource Name (ARN) of the model, collection, or stream processor that you want to remove the tags from. </p>"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p> A list of the tags that you want to remove. </p>"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "Url": {
       "type": "string"
     },
@@ -5461,7 +6024,19 @@
       "type": "list",
       "member": {
         "shape": "Url"
-      }
+      },
+      "max": 255,
+      "min": 0
+    },
+    "ValidationData": {
+      "type": "structure",
+      "members": {
+        "Assets": {
+          "shape": "Assets",
+          "documentation": "<p>The assets that comprise the validation data. </p>"
+        }
+      },
+      "documentation": "<p>Contains the Amazon S3 bucket location of the validation data for a model training job. </p> <p>The validation data includes error information for individual JSON lines in the dataset. For more information, see Debugging a Failed Model Training in the Amazon Rekognition Custom Labels Developer Guide. </p> <p>You get the <code>ValidationData</code> object for the training dataset (<a>TrainingDataResult</a>) and the test dataset (<a>TestingDataResult</a>) by calling <a>DescribeProjectVersions</a>. </p> <p>The assets array contains a single <a>Asset</a> object. The <a>GroundTruthManifest</a> field of the Asset object contains the S3 bucket location of the validation data. </p>"
     },
     "VersionName": {
       "type": "string",
@@ -5486,6 +6061,13 @@
         }
       },
       "documentation": "<p>Video file stored in an Amazon S3 bucket. Amazon Rekognition video start operations such as <a>StartLabelDetection</a> use <code>Video</code> to specify a video for analysis. The supported file formats are .mp4, .mov and .avi.</p>"
+    },
+    "VideoColorRange": {
+      "type": "string",
+      "enum": [
+        "FULL",
+        "LIMITED"
+      ]
     },
     "VideoJobStatus": {
       "type": "string",
@@ -5521,6 +6103,10 @@
         "FrameWidth": {
           "shape": "ULong",
           "documentation": "<p>Horizontal pixel dimension of the video.</p>"
+        },
+        "ColorRange": {
+          "shape": "VideoColorRange",
+          "documentation": "<p> A description of the range of luminance values in a video, either LIMITED (16 to 235) or FULL (0 to 255). </p>"
         }
       },
       "documentation": "<p>Information about a video that Amazon Rekognition analyzed. <code>Videometadata</code> is returned in every page of paginated responses from a Amazon Rekognition video operation.</p>"

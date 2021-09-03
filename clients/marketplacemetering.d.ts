@@ -12,19 +12,19 @@ declare class MarketplaceMetering extends Service {
   constructor(options?: MarketplaceMetering.Types.ClientConfiguration)
   config: Config & MarketplaceMetering.Types.ClientConfiguration;
   /**
-   * BatchMeterUsage is called from a SaaS application listed on the AWS Marketplace to post metering records for a set of customers. For identical requests, the API is idempotent; requests can be retried with the same records or a subset of the input records. Every request to BatchMeterUsage is for one product. If you need to meter usage for multiple products, you must make multiple calls to BatchMeterUsage. BatchMeterUsage can process up to 25 UsageRecords at a time.
+   * BatchMeterUsage is called from a SaaS application listed on the AWS Marketplace to post metering records for a set of customers. For identical requests, the API is idempotent; requests can be retried with the same records or a subset of the input records. Every request to BatchMeterUsage is for one product. If you need to meter usage for multiple products, you must make multiple calls to BatchMeterUsage. BatchMeterUsage can process up to 25 UsageRecords at a time. A UsageRecord can optionally include multiple usage allocations, to provide customers with usagedata split into buckets by tags that you define (or allow the customer to define). BatchMeterUsage requests must be less than 1MB in size.
    */
   batchMeterUsage(params: MarketplaceMetering.Types.BatchMeterUsageRequest, callback?: (err: AWSError, data: MarketplaceMetering.Types.BatchMeterUsageResult) => void): Request<MarketplaceMetering.Types.BatchMeterUsageResult, AWSError>;
   /**
-   * BatchMeterUsage is called from a SaaS application listed on the AWS Marketplace to post metering records for a set of customers. For identical requests, the API is idempotent; requests can be retried with the same records or a subset of the input records. Every request to BatchMeterUsage is for one product. If you need to meter usage for multiple products, you must make multiple calls to BatchMeterUsage. BatchMeterUsage can process up to 25 UsageRecords at a time.
+   * BatchMeterUsage is called from a SaaS application listed on the AWS Marketplace to post metering records for a set of customers. For identical requests, the API is idempotent; requests can be retried with the same records or a subset of the input records. Every request to BatchMeterUsage is for one product. If you need to meter usage for multiple products, you must make multiple calls to BatchMeterUsage. BatchMeterUsage can process up to 25 UsageRecords at a time. A UsageRecord can optionally include multiple usage allocations, to provide customers with usagedata split into buckets by tags that you define (or allow the customer to define). BatchMeterUsage requests must be less than 1MB in size.
    */
   batchMeterUsage(callback?: (err: AWSError, data: MarketplaceMetering.Types.BatchMeterUsageResult) => void): Request<MarketplaceMetering.Types.BatchMeterUsageResult, AWSError>;
   /**
-   * API to emit metering records. For identical requests, the API is idempotent. It simply returns the metering record ID. MeterUsage is authenticated on the buyer's AWS account using credentials from the EC2 instance, ECS task, or EKS pod.
+   * API to emit metering records. For identical requests, the API is idempotent. It simply returns the metering record ID. MeterUsage is authenticated on the buyer's AWS account using credentials from the EC2 instance, ECS task, or EKS pod. MeterUsage can optionally include multiple usage allocations, to provide customers with usage data split into buckets by tags that you define (or allow the customer to define).
    */
   meterUsage(params: MarketplaceMetering.Types.MeterUsageRequest, callback?: (err: AWSError, data: MarketplaceMetering.Types.MeterUsageResult) => void): Request<MarketplaceMetering.Types.MeterUsageResult, AWSError>;
   /**
-   * API to emit metering records. For identical requests, the API is idempotent. It simply returns the metering record ID. MeterUsage is authenticated on the buyer's AWS account using credentials from the EC2 instance, ECS task, or EKS pod.
+   * API to emit metering records. For identical requests, the API is idempotent. It simply returns the metering record ID. MeterUsage is authenticated on the buyer's AWS account using credentials from the EC2 instance, ECS task, or EKS pod. MeterUsage can optionally include multiple usage allocations, to provide customers with usage data split into buckets by tags that you define (or allow the customer to define).
    */
   meterUsage(callback?: (err: AWSError, data: MarketplaceMetering.Types.MeterUsageResult) => void): Request<MarketplaceMetering.Types.MeterUsageResult, AWSError>;
   /**
@@ -45,6 +45,7 @@ declare class MarketplaceMetering extends Service {
   resolveCustomer(callback?: (err: AWSError, data: MarketplaceMetering.Types.ResolveCustomerResult) => void): Request<MarketplaceMetering.Types.ResolveCustomerResult, AWSError>;
 }
 declare namespace MarketplaceMetering {
+  export type AllocatedUsageQuantity = number;
   export interface BatchMeterUsageRequest {
     /**
      * The set of UsageRecords to submit. BatchMeterUsage accepts up to 25 UsageRecords at a time.
@@ -88,6 +89,10 @@ declare namespace MarketplaceMetering {
      * Checks whether you have the permissions required for the action, but does not make the request. If you have the permissions, the request returns DryRunOperation; otherwise, it returns UnauthorizedException. Defaults to false if not specified.
      */
     DryRun?: Boolean;
+    /**
+     * The set of UsageAllocations to submit. The sum of all UsageAllocation quantities must equal the UsageQuantity of the MeterUsage request, and each UsageAllocation must have a unique set of tags (include no tags).
+     */
+    UsageAllocations?: UsageAllocations;
   }
   export interface MeterUsageResult {
     /**
@@ -139,7 +144,31 @@ declare namespace MarketplaceMetering {
     ProductCode?: ProductCode;
   }
   export type String = string;
+  export interface Tag {
+    /**
+     * One part of a key-value pair that makes up a tag. A key is a label that acts like a category for the specific tag values.
+     */
+    Key: TagKey;
+    /**
+     * One part of a key-value pair that makes up a tag. A value acts as a descriptor within a tag category (key). The value can be empty or null.
+     */
+    Value: TagValue;
+  }
+  export type TagKey = string;
+  export type TagList = Tag[];
+  export type TagValue = string;
   export type Timestamp = Date;
+  export interface UsageAllocation {
+    /**
+     * The total quantity allocated to this bucket of usage.
+     */
+    AllocatedUsageQuantity: AllocatedUsageQuantity;
+    /**
+     * The set of tags that define the bucket of usage. For the bucket of items with no tags, this parameter can be left out.
+     */
+    Tags?: TagList;
+  }
+  export type UsageAllocations = UsageAllocation[];
   export type UsageDimension = string;
   export type UsageQuantity = number;
   export interface UsageRecord {
@@ -159,6 +188,10 @@ declare namespace MarketplaceMetering {
      * The quantity of usage consumed by the customer for the given dimension and time. Defaults to 0 if not specified.
      */
     Quantity?: UsageQuantity;
+    /**
+     * The set of UsageAllocations to submit. The sum of all UsageAllocation quantities must equal the Quantity of the UsageRecord.
+     */
+    UsageAllocations?: UsageAllocations;
   }
   export type UsageRecordList = UsageRecord[];
   export interface UsageRecordResult {

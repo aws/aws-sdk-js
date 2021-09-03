@@ -5,6 +5,7 @@ var apiLoader = AWS.apiLoader;
 
 apiLoader.services['neptune'] = {};
 AWS.Neptune = Service.defineService('neptune', ['2014-10-31']);
+require('../lib/services/neptune');
 Object.defineProperty(apiLoader.services['neptune'], '2014-10-31', {
   get: function get() {
     var model = require('../apis/neptune-2014-10-31.min.json');

@@ -41,7 +41,7 @@
           "shape": "InternalServerException"
         }
       ],
-      "documentation": "<p> Creates a new connector profile associated with your AWS account. There is a soft quota of 100 connector profiles per AWS account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. </p>"
+      "documentation": "<p> Creates a new connector profile associated with your Amazon Web Services account. There is a soft quota of 100 connector profiles per Amazon Web Services account. If you need more connector profiles than this quota allows, you can submit a request to the Amazon AppFlow team through the Amazon AppFlow support channel. </p>"
     },
     "CreateFlow": {
       "name": "CreateFlow",
@@ -608,7 +608,17 @@
       "max": 256,
       "pattern": "\\S+"
     },
+    "ApplicationHostUrl": {
+      "type": "string",
+      "max": 256,
+      "pattern": "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"
+    },
     "ApplicationKey": {
+      "type": "string",
+      "max": 512,
+      "pattern": "\\S+"
+    },
+    "ApplicationServicePath": {
       "type": "string",
       "max": 512,
       "pattern": "\\S+"
@@ -617,6 +627,29 @@
       "type": "string",
       "max": 512,
       "pattern": "\\S+"
+    },
+    "AuthCodeUrl": {
+      "type": "string",
+      "max": 256,
+      "pattern": "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"
+    },
+    "BasicAuthCredentials": {
+      "type": "structure",
+      "required": [
+        "username",
+        "password"
+      ],
+      "members": {
+        "username": {
+          "shape": "Username",
+          "documentation": "<p> The username to use to connect to a resource. </p>"
+        },
+        "password": {
+          "shape": "Password",
+          "documentation": "<p> The password to use to connect to a resource.</p>"
+        }
+      },
+      "documentation": "<p> The basic auth credentials required for basic authentication. </p>"
     },
     "Boolean": {
       "type": "boolean"
@@ -632,10 +665,23 @@
       "max": 512,
       "pattern": ".*"
     },
+    "ClientCredentialsArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "arn:aws:secretsmanager:.*:[0-9]+:.*",
+      "sensitive": true
+    },
     "ClientId": {
       "type": "string",
       "max": 512,
       "pattern": "\\S+"
+    },
+    "ClientNumber": {
+      "type": "string",
+      "max": 3,
+      "min": 3,
+      "pattern": "^\\d{3}$"
     },
     "ClientSecret": {
       "type": "string",
@@ -842,6 +888,21 @@
         "EventBridge": {
           "shape": "EventBridgeMetadata",
           "documentation": "<p> The connector metadata specific to Amazon EventBridge. </p>"
+        },
+        "Upsolver": {
+          "shape": "UpsolverMetadata",
+          "documentation": "<p> The connector metadata specific to Upsolver. </p>"
+        },
+        "CustomerProfiles": {
+          "shape": "CustomerProfilesMetadata",
+          "documentation": "<p> The connector metadata specific to Amazon Connect Customer Profiles. </p>"
+        },
+        "Honeycode": {
+          "shape": "HoneycodeMetadata",
+          "documentation": "<p> The connector metadata specific to Amazon Honeycode. </p>"
+        },
+        "SAPOData": {
+          "shape": "SAPODataMetadata"
         }
       },
       "documentation": "<p> A structure to specify connector-specific metadata such as <code>oAuthScopes</code>, <code>supportedRegions</code>, <code>privateLinkServiceUrl</code>, and so on. </p>"
@@ -918,6 +979,10 @@
         "Zendesk": {
           "shape": "ZendeskConnectorOperator",
           "documentation": "<p> The operation to be performed on the provided Zendesk source fields. </p>"
+        },
+        "SAPOData": {
+          "shape": "SAPODataConnectorOperator",
+          "documentation": "<p> The operation to be performed on the provided SAPOData source fields. </p>"
         }
       },
       "documentation": "<p> The operation to be performed on the provided source fields. </p>"
@@ -931,7 +996,7 @@
         },
         "connectorProfileName": {
           "shape": "ConnectorProfileName",
-          "documentation": "<p> The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. </p>"
+          "documentation": "<p> The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account. </p>"
         },
         "connectorType": {
           "shape": "ConnectorType",
@@ -956,6 +1021,10 @@
         "lastUpdatedAt": {
           "shape": "Date",
           "documentation": "<p> Specifies when the connector profile was last updated. </p>"
+        },
+        "privateConnectionProvisioningState": {
+          "shape": "PrivateConnectionProvisioningState",
+          "documentation": "<p> Specifies the private connection provisioning state. </p>"
         }
       },
       "documentation": "<p> Describes an instance of a connector. This includes the provided name, credentials ARN, connection-mode, and so on. To keep the API intuitive and extensible, the fields that are common to all types of connector profiles are explicitly specified at the top level. The rest of the connector-specific properties are available via the <code>connectorProfileProperties</code> field. </p>"
@@ -1002,6 +1071,10 @@
           "shape": "GoogleAnalyticsConnectorProfileCredentials",
           "documentation": "<p> The connector-specific credentials required when using Google Analytics. </p>"
         },
+        "Honeycode": {
+          "shape": "HoneycodeConnectorProfileCredentials",
+          "documentation": "<p> The connector-specific credentials required when using Amazon Honeycode. </p>"
+        },
         "InforNexus": {
           "shape": "InforNexusConnectorProfileCredentials",
           "documentation": "<p> The connector-specific credentials required when using Infor Nexus. </p>"
@@ -1045,6 +1118,9 @@
         "Zendesk": {
           "shape": "ZendeskConnectorProfileCredentials",
           "documentation": "<p> The connector-specific credentials required when using Zendesk. </p>"
+        },
+        "SAPOData": {
+          "shape": "SAPODataConnectorProfileCredentials"
         }
       },
       "documentation": "<p> The connector-specific credentials required by a connector. </p>"
@@ -1086,6 +1162,10 @@
         "GoogleAnalytics": {
           "shape": "GoogleAnalyticsConnectorProfileProperties",
           "documentation": "<p> The connector-specific properties required Google Analytics. </p>"
+        },
+        "Honeycode": {
+          "shape": "HoneycodeConnectorProfileProperties",
+          "documentation": "<p> The connector-specific properties required by Amazon Honeycode. </p>"
         },
         "InforNexus": {
           "shape": "InforNexusConnectorProfileProperties",
@@ -1130,6 +1210,9 @@
         "Zendesk": {
           "shape": "ZendeskConnectorProfileProperties",
           "documentation": "<p> The connector-specific properties required by Zendesk. </p>"
+        },
+        "SAPOData": {
+          "shape": "SAPODataConnectorProfileProperties"
         }
       },
       "documentation": "<p> The connector-specific profile properties required by each connector. </p>"
@@ -1153,7 +1236,12 @@
         "Infornexus",
         "Amplitude",
         "Veeva",
-        "EventBridge"
+        "EventBridge",
+        "LookoutMetrics",
+        "Upsolver",
+        "Honeycode",
+        "CustomerProfiles",
+        "SAPOData"
       ]
     },
     "ConnectorTypeList": {
@@ -1175,7 +1263,7 @@
       "members": {
         "connectorProfileName": {
           "shape": "ConnectorProfileName",
-          "documentation": "<p> The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in your AWS account. </p>"
+          "documentation": "<p> The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in your Amazon Web Services account. </p>"
         },
         "kmsArn": {
           "shape": "KMSArn",
@@ -1187,7 +1275,7 @@
         },
         "connectionMode": {
           "shape": "ConnectionMode",
-          "documentation": "<p> Indicates the connection mode and specifies whether it is public or private. Private flows use AWS PrivateLink to route data over AWS infrastructure without exposing it to the public internet. </p>"
+          "documentation": "<p> Indicates the connection mode and specifies whether it is public or private. Private flows use Amazon Web Services PrivateLink to route data over Amazon Web Services infrastructure without exposing it to the public internet. </p>"
         },
         "connectorProfileConfig": {
           "shape": "ConnectorProfileConfig",
@@ -1265,6 +1353,28 @@
       "type": "string",
       "max": 256,
       "pattern": "\\S+"
+    },
+    "CustomerProfilesDestinationProperties": {
+      "type": "structure",
+      "required": [
+        "domainName"
+      ],
+      "members": {
+        "domainName": {
+          "shape": "DomainName",
+          "documentation": "<p> The unique name of the Amazon Connect Customer Profiles domain. </p>"
+        },
+        "objectTypeName": {
+          "shape": "ObjectTypeName",
+          "documentation": "<p> The object specified in the Amazon Connect Customer Profiles flow destination. </p>"
+        }
+      },
+      "documentation": "<p> The properties that are applied when Amazon Connect Customer Profiles is used as a destination. </p>"
+    },
+    "CustomerProfilesMetadata": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p> The connector metadata specific to Amazon Connect Customer Profiles. </p>"
     },
     "DataPullMode": {
       "type": "string",
@@ -1350,6 +1460,11 @@
     "Date": {
       "type": "timestamp"
     },
+    "DatetimeTypeFieldName": {
+      "type": "string",
+      "max": 256,
+      "pattern": ".*"
+    },
     "DeleteConnectorProfileRequest": {
       "type": "structure",
       "required": [
@@ -1406,7 +1521,7 @@
         },
         "connectorProfileName": {
           "shape": "ConnectorProfileName",
-          "documentation": "<p> The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. </p>"
+          "documentation": "<p> The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account. </p>"
         }
       }
     },
@@ -1427,7 +1542,7 @@
       "members": {
         "connectorProfileNames": {
           "shape": "ConnectorProfileNameList",
-          "documentation": "<p> The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account. </p>"
+          "documentation": "<p> The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account. </p>"
         },
         "connectorType": {
           "shape": "ConnectorType",
@@ -1623,6 +1738,26 @@
         "EventBridge": {
           "shape": "EventBridgeDestinationProperties",
           "documentation": "<p> The properties required to query Amazon EventBridge. </p>"
+        },
+        "LookoutMetrics": {
+          "shape": "LookoutMetricsDestinationProperties",
+          "documentation": "<p> The properties required to query Amazon Lookout for Metrics. </p>"
+        },
+        "Upsolver": {
+          "shape": "UpsolverDestinationProperties",
+          "documentation": "<p> The properties required to query Upsolver. </p>"
+        },
+        "Honeycode": {
+          "shape": "HoneycodeDestinationProperties",
+          "documentation": "<p> The properties required to query Amazon Honeycode. </p>"
+        },
+        "CustomerProfiles": {
+          "shape": "CustomerProfilesDestinationProperties",
+          "documentation": "<p> The properties required to query Amazon Connect Customer Profiles. </p>"
+        },
+        "Zendesk": {
+          "shape": "ZendeskDestinationProperties",
+          "documentation": "<p>The properties required to query Zendesk.</p>"
         }
       },
       "documentation": "<p> This stores the information that is required to query a particular connector. </p>"
@@ -1646,6 +1781,14 @@
         "isUpsertable": {
           "shape": "Boolean",
           "documentation": "<p> Specifies if the flow run can either insert new rows in the destination field if they do not already exist, or update them if they do. </p>"
+        },
+        "isUpdatable": {
+          "shape": "Boolean",
+          "documentation": "<p> Specifies whether the field can be updated during an <code>UPDATE</code> or <code>UPSERT</code> write operation. </p>"
+        },
+        "supportedWriteOperations": {
+          "shape": "SupportedWriteOperationList",
+          "documentation": "<p> A list of supported write operations. For each write operation listed, this field can be used in <code>idFieldNames</code> when that write operation is present as a destination option. </p>"
         }
       },
       "documentation": "<p> The properties that can be applied to a field when connector is being used as a destination. </p>"
@@ -1663,7 +1806,7 @@
         },
         "connectorProfileName": {
           "shape": "ConnectorProfileName",
-          "documentation": "<p> The name of the connector profile. This name must be unique for each connector profile in the AWS account. </p>"
+          "documentation": "<p> The name of the connector profile. This name must be unique for each connector profile in the Amazon Web Services account. </p>"
         },
         "destinationConnectorProperties": {
           "shape": "DestinationConnectorProperties",
@@ -1677,6 +1820,16 @@
       "member": {
         "shape": "DestinationFlowConfig"
       }
+    },
+    "DocumentType": {
+      "type": "string",
+      "max": 512,
+      "pattern": "[\\s\\w_-]+"
+    },
+    "DomainName": {
+      "type": "string",
+      "max": 64,
+      "pattern": "\\S+"
     },
     "DynatraceConnectorOperator": {
       "type": "string",
@@ -1850,6 +2003,14 @@
         "lastUpdatedAt": {
           "shape": "Date",
           "documentation": "<p> Specifies the time of the most recent update. </p>"
+        },
+        "dataPullStartTime": {
+          "shape": "Date",
+          "documentation": "<p> The timestamp that determines the first new or updated record to be transferred in the flow run. </p>"
+        },
+        "dataPullEndTime": {
+          "shape": "Date",
+          "documentation": "<p> The timestamp that indicates the last new or updated record to be transferred in the flow run. </p>"
         }
       },
       "documentation": "<p> Specifies information about the past flow run instances for a given flow. </p>"
@@ -2044,7 +2205,7 @@
         },
         "clientSecret": {
           "shape": "ClientSecret",
-          "documentation": "<p> The client secret used by the oauth client to authenticate to the authorization server. </p>"
+          "documentation": "<p> The client secret used by the OAuth client to authenticate to the authorization server. </p>"
         },
         "accessToken": {
           "shape": "AccessToken",
@@ -2056,7 +2217,7 @@
         },
         "oAuthRequest": {
           "shape": "ConnectorOAuthRequest",
-          "documentation": "<p> The oauth requirement needed to request security tokens from the connector endpoint. </p>"
+          "documentation": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>"
         }
       },
       "documentation": "<p> The connector-specific profile credentials required by Google Analytics. </p>"
@@ -2094,10 +2255,77 @@
       "max": 128,
       "pattern": "\\S+"
     },
+    "HoneycodeConnectorProfileCredentials": {
+      "type": "structure",
+      "members": {
+        "accessToken": {
+          "shape": "AccessToken",
+          "documentation": "<p> The credentials used to access protected Amazon Honeycode resources. </p>"
+        },
+        "refreshToken": {
+          "shape": "RefreshToken",
+          "documentation": "<p> The credentials used to acquire new access tokens. </p>"
+        },
+        "oAuthRequest": {
+          "shape": "ConnectorOAuthRequest"
+        }
+      },
+      "documentation": "<p> The connector-specific credentials required when using Amazon Honeycode. </p>"
+    },
+    "HoneycodeConnectorProfileProperties": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p> The connector-specific properties required when using Amazon Honeycode. </p>"
+    },
+    "HoneycodeDestinationProperties": {
+      "type": "structure",
+      "required": [
+        "object"
+      ],
+      "members": {
+        "object": {
+          "shape": "Object",
+          "documentation": "<p> The object specified in the Amazon Honeycode flow destination. </p>"
+        },
+        "errorHandlingConfig": {
+          "shape": "ErrorHandlingConfig"
+        }
+      },
+      "documentation": "<p> The properties that are applied when Amazon Honeycode is used as a destination. </p>"
+    },
+    "HoneycodeMetadata": {
+      "type": "structure",
+      "members": {
+        "oAuthScopes": {
+          "shape": "OAuthScopeList",
+          "documentation": "<p> The desired authorization scope for the Amazon Honeycode account. </p>"
+        }
+      },
+      "documentation": "<p> The connector metadata specific to Amazon Honeycode. </p>"
+    },
+    "IdFieldNameList": {
+      "type": "list",
+      "member": {
+        "shape": "Name"
+      },
+      "documentation": "<p> A list of field names that can be used as an ID field when performing a write operation. </p>",
+      "max": 1,
+      "min": 0
+    },
     "Identifier": {
       "type": "string",
       "max": 128,
       "pattern": "\\S+"
+    },
+    "IncrementalPullConfig": {
+      "type": "structure",
+      "members": {
+        "datetimeTypeFieldName": {
+          "shape": "DatetimeTypeFieldName",
+          "documentation": "<p> A field that specifies the date time or timestamp field as the criteria to use when importing incremental records from the source. </p>"
+        }
+      },
+      "documentation": "<p> Specifies the configuration used when importing incremental records from the source. </p>"
     },
     "InforNexusConnectorOperator": {
       "type": "string",
@@ -2204,7 +2432,7 @@
       "members": {
         "connectorProfileName": {
           "shape": "ConnectorProfileName",
-          "documentation": "<p> The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the AWS account, and is used to query the downstream connector. </p>"
+          "documentation": "<p> The name of the connector profile. The name is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account, and is used to query the downstream connector. </p>"
         },
         "connectorType": {
           "shape": "ConnectorType",
@@ -2277,8 +2505,18 @@
         }
       }
     },
+    "LogonLanguage": {
+      "type": "string",
+      "max": 2,
+      "pattern": "^[a-zA-Z0-9_]*$"
+    },
     "Long": {
       "type": "long"
+    },
+    "LookoutMetricsDestinationProperties": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p> The properties that are applied when Amazon Lookout for Metrics is used as a destination. </p>"
     },
     "MarketoConnectorOperator": {
       "type": "string",
@@ -2314,7 +2552,7 @@
         },
         "clientSecret": {
           "shape": "ClientSecret",
-          "documentation": "<p> The client secret used by the oauth client to authenticate to the authorization server. </p>"
+          "documentation": "<p> The client secret used by the OAuth client to authenticate to the authorization server. </p>"
         },
         "accessToken": {
           "shape": "AccessToken",
@@ -2322,7 +2560,7 @@
         },
         "oAuthRequest": {
           "shape": "ConnectorOAuthRequest",
-          "documentation": "<p> The oauth requirement needed to request security tokens from the connector endpoint. </p>"
+          "documentation": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>"
         }
       },
       "documentation": "<p> The connector-specific profile credentials required by Marketo. </p>"
@@ -2378,10 +2616,63 @@
       "max": 2048,
       "pattern": "\\S+"
     },
+    "OAuthCredentials": {
+      "type": "structure",
+      "required": [
+        "clientId",
+        "clientSecret"
+      ],
+      "members": {
+        "clientId": {
+          "shape": "ClientId",
+          "documentation": "<p> The identifier for the desired client. </p>"
+        },
+        "clientSecret": {
+          "shape": "ClientSecret",
+          "documentation": "<p> The client secret used by the OAuth client to authenticate to the authorization server. </p>"
+        },
+        "accessToken": {
+          "shape": "AccessToken",
+          "documentation": "<p> The access token used to access protected SAPOData resources. </p>"
+        },
+        "refreshToken": {
+          "shape": "RefreshToken",
+          "documentation": "<p> The refresh token used to refresh expired access token. </p>"
+        },
+        "oAuthRequest": {
+          "shape": "ConnectorOAuthRequest",
+          "documentation": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>"
+        }
+      },
+      "documentation": "<p> The OAuth credentials required for OAuth type authentication. </p>"
+    },
+    "OAuthProperties": {
+      "type": "structure",
+      "required": [
+        "tokenUrl",
+        "authCodeUrl",
+        "oAuthScopes"
+      ],
+      "members": {
+        "tokenUrl": {
+          "shape": "TokenUrl",
+          "documentation": "<p> The token url required to fetch access/refresh tokens using authorization code and also to refresh expired access token using refresh token.</p>"
+        },
+        "authCodeUrl": {
+          "shape": "AuthCodeUrl",
+          "documentation": "<p> The authorization code url required to redirect to SAP Login Page to fetch authorization code for OAuth type authentication. </p>"
+        },
+        "oAuthScopes": {
+          "shape": "OAuthScopeList",
+          "documentation": "<p> The OAuth scopes required for OAuth type authentication. </p>"
+        }
+      },
+      "documentation": "<p> The OAuth properties required for OAuth type authentication. </p>"
+    },
     "OAuthScope": {
       "type": "string",
       "max": 128,
-      "pattern": "[\\w]*"
+      "pattern": "[/\\w]*"
     },
     "OAuthScopeList": {
       "type": "list",
@@ -2392,6 +2683,11 @@
     "Object": {
       "type": "string",
       "max": 512,
+      "pattern": "\\S+"
+    },
+    "ObjectTypeName": {
+      "type": "string",
+      "max": 255,
       "pattern": "\\S+"
     },
     "Operator": {
@@ -2436,7 +2732,8 @@
         "TRUNCATE_LENGTH",
         "MATH_OPERATION_FIELDS_ORDER",
         "CONCAT_FORMAT",
-        "SUBFIELD_CATEGORY_MAP"
+        "SUBFIELD_CATEGORY_MAP",
+        "EXCLUDE_SOURCE_FIELDS_LIST"
       ]
     },
     "Password": {
@@ -2445,16 +2742,21 @@
       "pattern": ".*",
       "sensitive": true
     },
+    "PortNumber": {
+      "type": "integer",
+      "max": 65535,
+      "min": 1
+    },
     "PrefixConfig": {
       "type": "structure",
       "members": {
         "prefixType": {
           "shape": "PrefixType",
-          "documentation": "<p> Determines the level of granularity that's included in the prefix. </p>"
+          "documentation": "<p> Determines the format of the prefix, and whether it applies to the file name, file path, or both. </p>"
         },
         "prefixFormat": {
           "shape": "PrefixFormat",
-          "documentation": "<p> Determines the format of the prefix, and whether it applies to the file name, file path, or both. </p>"
+          "documentation": "<p> Determines the level of granularity that's included in the prefix. </p>"
         }
       },
       "documentation": "<p> Determines the prefix that Amazon AppFlow applies to the destination folder name. You can name your destination folders according to the flow frequency and date. </p>"
@@ -2477,10 +2779,51 @@
         "PATH_AND_FILENAME"
       ]
     },
+    "PrivateConnectionProvisioningFailureCause": {
+      "type": "string",
+      "enum": [
+        "CONNECTOR_AUTHENTICATION",
+        "CONNECTOR_SERVER",
+        "INTERNAL_SERVER",
+        "ACCESS_DENIED",
+        "VALIDATION"
+      ]
+    },
+    "PrivateConnectionProvisioningFailureMessage": {
+      "type": "string",
+      "max": 2048,
+      "pattern": "[\\s\\w/!@#+=.-]*"
+    },
+    "PrivateConnectionProvisioningState": {
+      "type": "structure",
+      "members": {
+        "status": {
+          "shape": "PrivateConnectionProvisioningStatus",
+          "documentation": "<p> Specifies the private connection provisioning status. </p>"
+        },
+        "failureMessage": {
+          "shape": "PrivateConnectionProvisioningFailureMessage",
+          "documentation": "<p> Specifies the private connection provisioning failure reason. </p>"
+        },
+        "failureCause": {
+          "shape": "PrivateConnectionProvisioningFailureCause",
+          "documentation": "<p> Specifies the private connection provisioning failure cause. </p>"
+        }
+      },
+      "documentation": "<p> Specifies the private connection provisioning state. </p>"
+    },
+    "PrivateConnectionProvisioningStatus": {
+      "type": "string",
+      "enum": [
+        "FAILED",
+        "PENDING",
+        "CREATED"
+      ]
+    },
     "PrivateLinkServiceName": {
       "type": "string",
       "max": 512,
-      "pattern": "\\S+"
+      "pattern": "^$|com.amazonaws.vpce.[\\w/!:@#.\\-]+"
     },
     "Property": {
       "type": "string",
@@ -2673,6 +3016,102 @@
       },
       "documentation": "<p> The properties that are applied when Amazon S3 is being used as the flow source. </p>"
     },
+    "SAPODataConnectorOperator": {
+      "type": "string",
+      "enum": [
+        "PROJECTION",
+        "LESS_THAN",
+        "CONTAINS",
+        "GREATER_THAN",
+        "BETWEEN",
+        "LESS_THAN_OR_EQUAL_TO",
+        "GREATER_THAN_OR_EQUAL_TO",
+        "EQUAL_TO",
+        "NOT_EQUAL_TO",
+        "ADDITION",
+        "MULTIPLICATION",
+        "DIVISION",
+        "SUBTRACTION",
+        "MASK_ALL",
+        "MASK_FIRST_N",
+        "MASK_LAST_N",
+        "VALIDATE_NON_NULL",
+        "VALIDATE_NON_ZERO",
+        "VALIDATE_NON_NEGATIVE",
+        "VALIDATE_NUMERIC",
+        "NO_OP"
+      ]
+    },
+    "SAPODataConnectorProfileCredentials": {
+      "type": "structure",
+      "members": {
+        "basicAuthCredentials": {
+          "shape": "BasicAuthCredentials",
+          "documentation": "<p> The SAPOData basic authentication credentials. </p>"
+        },
+        "oAuthCredentials": {
+          "shape": "OAuthCredentials",
+          "documentation": "<p> The SAPOData OAuth type authentication credentials. </p>"
+        }
+      },
+      "documentation": "<p> The connector-specific profile credentials required when using SAPOData. </p>"
+    },
+    "SAPODataConnectorProfileProperties": {
+      "type": "structure",
+      "required": [
+        "applicationHostUrl",
+        "applicationServicePath",
+        "portNumber",
+        "clientNumber"
+      ],
+      "members": {
+        "applicationHostUrl": {
+          "shape": "ApplicationHostUrl",
+          "documentation": "<p> The location of the SAPOData resource. </p>"
+        },
+        "applicationServicePath": {
+          "shape": "ApplicationServicePath",
+          "documentation": "<p> The application path to catalog service. </p>"
+        },
+        "portNumber": {
+          "shape": "PortNumber",
+          "documentation": "<p> The port number of the SAPOData instance. </p>",
+          "box": true
+        },
+        "clientNumber": {
+          "shape": "ClientNumber",
+          "documentation": "<p> The client number for the client creating the connection. </p>"
+        },
+        "logonLanguage": {
+          "shape": "LogonLanguage",
+          "documentation": "<p> The logon language of SAPOData instance. </p>"
+        },
+        "privateLinkServiceName": {
+          "shape": "PrivateLinkServiceName",
+          "documentation": "<p> The SAPOData Private Link service name to be used for private data transfers. </p>"
+        },
+        "oAuthProperties": {
+          "shape": "OAuthProperties",
+          "documentation": "<p> The SAPOData OAuth properties required for OAuth type authentication. </p>"
+        }
+      },
+      "documentation": "<p> The connector-specific profile properties required when using SAPOData. </p>"
+    },
+    "SAPODataMetadata": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p> The connector metadata specific to SAPOData. </p>"
+    },
+    "SAPODataSourceProperties": {
+      "type": "structure",
+      "members": {
+        "objectPath": {
+          "shape": "Object",
+          "documentation": "<p> The object path specified in the SAPOData flow source. </p>"
+        }
+      },
+      "documentation": "<p> The properties that are applied when using SAPOData as a flow source. </p>"
+    },
     "SalesforceConnectorOperator": {
       "type": "string",
       "enum": [
@@ -2712,7 +3151,11 @@
         },
         "oAuthRequest": {
           "shape": "ConnectorOAuthRequest",
-          "documentation": "<p> The oauth requirement needed to request security tokens from the connector endpoint. </p>"
+          "documentation": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>"
+        },
+        "clientCredentialsArn": {
+          "shape": "ClientCredentialsArn",
+          "documentation": "<p> The secret manager ARN, which contains the client ID and client secret of the connected app. </p>"
         }
       },
       "documentation": "<p> The connector-specific profile credentials required when using Salesforce. </p>"
@@ -2741,9 +3184,17 @@
           "shape": "Object",
           "documentation": "<p> The object specified in the Salesforce flow destination. </p>"
         },
+        "idFieldNames": {
+          "shape": "IdFieldNameList",
+          "documentation": "<p> The name of the field that Amazon AppFlow uses as an ID when performing a write operation such as update or delete. </p>"
+        },
         "errorHandlingConfig": {
           "shape": "ErrorHandlingConfig",
           "documentation": "<p> The settings that determine how Amazon AppFlow handles an error when placing data in the Salesforce destination. For example, this setting would determine if the flow should fail after one insertion error, or continue and attempt to insert every record regardless of the initial failure. <code>ErrorHandlingConfig</code> is a part of the destination connector details. </p>"
+        },
+        "writeOperationType": {
+          "shape": "WriteOperationType",
+          "documentation": "<p> This specifies the type of write operation to be performed in Salesforce. When the value is <code>UPSERT</code>, then <code>idFieldNames</code> is required. </p>"
         }
       },
       "documentation": "<p> The properties that are applied when Salesforce is being used as a destination. </p>"
@@ -2795,6 +3246,11 @@
         "ONCE"
       ]
     },
+    "ScheduleOffset": {
+      "type": "long",
+      "max": 36000,
+      "min": 0
+    },
     "ScheduledTriggerProperties": {
       "type": "structure",
       "required": [
@@ -2803,7 +3259,7 @@
       "members": {
         "scheduleExpression": {
           "shape": "ScheduleExpression",
-          "documentation": "<p> The scheduling expression that determines when and how often the rule runs. </p>"
+          "documentation": "<p> The scheduling expression that determines the rate at which the schedule will run, for example <code>rate(5minutes)</code>. </p>"
         },
         "dataPullMode": {
           "shape": "DataPullMode",
@@ -2819,7 +3275,16 @@
         },
         "timezone": {
           "shape": "Timezone",
-          "documentation": "<p> Specifies the time zone used when referring to the date and time of a scheduled-triggered flow. </p>"
+          "documentation": "<p> Specifies the time zone used when referring to the date and time of a scheduled-triggered flow, such as <code>America/New_York</code>. </p>"
+        },
+        "scheduleOffset": {
+          "shape": "ScheduleOffset",
+          "documentation": "<p> Specifies the optional offset that is added to the time interval for a schedule-triggered flow. </p>",
+          "box": true
+        },
+        "firstExecutionFrom": {
+          "shape": "Date",
+          "documentation": "<p> Specifies the date range for the records to import from the connector in the first flow run. </p>"
         }
       },
       "documentation": "<p> Specifies the configuration details of a schedule-triggered flow as defined by the user. Currently, these settings only apply to the <code>Scheduled</code> trigger type. </p>"
@@ -3003,7 +3468,7 @@
         },
         "clientSecret": {
           "shape": "ClientSecret",
-          "documentation": "<p> The client secret used by the oauth client to authenticate to the authorization server. </p>"
+          "documentation": "<p> The client secret used by the OAuth client to authenticate to the authorization server. </p>"
         },
         "accessToken": {
           "shape": "AccessToken",
@@ -3011,7 +3476,7 @@
         },
         "oAuthRequest": {
           "shape": "ConnectorOAuthRequest",
-          "documentation": "<p> The oauth requirement needed to request security tokens from the connector endpoint. </p>"
+          "documentation": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>"
         }
       },
       "documentation": "<p> The connector-specific profile credentials required when using Slack. </p>"
@@ -3104,7 +3569,7 @@
         },
         "region": {
           "shape": "Region",
-          "documentation": "<p> The AWS Region of the Snowflake account. </p>"
+          "documentation": "<p> The Amazon Web Services Region of the Snowflake account. </p>"
         }
       },
       "documentation": "<p> The connector-specific profile properties required when using Snowflake. </p>"
@@ -3140,7 +3605,7 @@
       "members": {
         "supportedRegions": {
           "shape": "RegionList",
-          "documentation": "<p> Specifies the supported AWS Regions when using Snowflake. </p>"
+          "documentation": "<p> Specifies the supported Amazon Web Services Regions when using Snowflake. </p>"
         }
       },
       "documentation": "<p> The connector metadata specific to Snowflake. </p>"
@@ -3203,6 +3668,9 @@
         "Zendesk": {
           "shape": "ZendeskSourceProperties",
           "documentation": "<p> Specifies the information that is required for querying Zendesk. </p>"
+        },
+        "SAPOData": {
+          "shape": "SAPODataSourceProperties"
         }
       },
       "documentation": "<p> Specifies the information that is required to query a particular connector. </p>"
@@ -3240,11 +3708,15 @@
         },
         "connectorProfileName": {
           "shape": "ConnectorProfileName",
-          "documentation": "<p> The name of the connector profile. This name must be unique for each connector profile in the AWS account. </p>"
+          "documentation": "<p> The name of the connector profile. This name must be unique for each connector profile in the Amazon Web Services account. </p>"
         },
         "sourceConnectorProperties": {
           "shape": "SourceConnectorProperties",
           "documentation": "<p> Specifies the information that is required to query a particular source connector. </p>"
+        },
+        "incrementalPullConfig": {
+          "shape": "IncrementalPullConfig",
+          "documentation": "<p> Defines the configuration for a scheduled incremental data pull. If a valid configuration is provided, the fields specified in the configuration are used when querying for the incremental data pull. </p>"
         }
       },
       "documentation": "<p> Contains information about the configuration of the source connector used in the flow. </p>"
@@ -3276,6 +3748,10 @@
         "flowStatus": {
           "shape": "FlowStatus",
           "documentation": "<p> Indicates the current status of the flow. </p>"
+        },
+        "executionId": {
+          "shape": "ExecutionId",
+          "documentation": "<p> Returns the internal execution ID of an on-demand flow when the flow is started. For scheduled or event-triggered flows, this value is null. </p>"
         }
       }
     },
@@ -3326,6 +3802,12 @@
       "type": "list",
       "member": {
         "shape": "Value"
+      }
+    },
+    "SupportedWriteOperationList": {
+      "type": "list",
+      "member": {
+        "shape": "WriteOperationType"
       }
     },
     "TagKey": {
@@ -3426,6 +3908,7 @@
         "Arithmetic",
         "Filter",
         "Map",
+        "Map_all",
         "Mask",
         "Merge",
         "Truncate",
@@ -3440,7 +3923,13 @@
     },
     "Timezone": {
       "type": "string",
-      "max": 256
+      "max": 256,
+      "pattern": ".*"
+    },
+    "TokenUrl": {
+      "type": "string",
+      "max": 256,
+      "pattern": "^(https?)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"
     },
     "TrendmicroConnectorOperator": {
       "type": "string",
@@ -3573,7 +4062,7 @@
       "members": {
         "connectorProfileName": {
           "shape": "ConnectorProfileName",
-          "documentation": "<p> The name of the connector profile and is unique for each <code>ConnectorProfile</code> in the AWS Account. </p>"
+          "documentation": "<p> The name of the connector profile and is unique for each <code>ConnectorProfile</code> in the Amazon Web Services account. </p>"
         },
         "connectionMode": {
           "shape": "ConnectionMode",
@@ -3599,6 +4088,7 @@
       "required": [
         "flowName",
         "triggerConfig",
+        "sourceFlowConfig",
         "destinationFlowConfigList",
         "tasks"
       ],
@@ -3641,6 +4131,58 @@
       "type": "string",
       "max": 256,
       "pattern": "\\S+"
+    },
+    "UpsolverBucketName": {
+      "type": "string",
+      "max": 63,
+      "min": 16,
+      "pattern": "^(upsolver-appflow)\\S*"
+    },
+    "UpsolverDestinationProperties": {
+      "type": "structure",
+      "required": [
+        "bucketName",
+        "s3OutputFormatConfig"
+      ],
+      "members": {
+        "bucketName": {
+          "shape": "UpsolverBucketName",
+          "documentation": "<p> The Upsolver Amazon S3 bucket name in which Amazon AppFlow places the transferred data. </p>"
+        },
+        "bucketPrefix": {
+          "shape": "BucketPrefix",
+          "documentation": "<p> The object key for the destination Upsolver Amazon S3 bucket in which Amazon AppFlow places the files. </p>"
+        },
+        "s3OutputFormatConfig": {
+          "shape": "UpsolverS3OutputFormatConfig",
+          "documentation": "<p> The configuration that determines how data is formatted when Upsolver is used as the flow destination. </p>"
+        }
+      },
+      "documentation": "<p> The properties that are applied when Upsolver is used as a destination. </p>"
+    },
+    "UpsolverMetadata": {
+      "type": "structure",
+      "members": {},
+      "documentation": "<p> The connector metadata specific to Upsolver. </p>"
+    },
+    "UpsolverS3OutputFormatConfig": {
+      "type": "structure",
+      "required": [
+        "prefixConfig"
+      ],
+      "members": {
+        "fileType": {
+          "shape": "FileType",
+          "documentation": "<p> Indicates the file type that Amazon AppFlow places in the Upsolver Amazon S3 bucket. </p>"
+        },
+        "prefixConfig": {
+          "shape": "PrefixConfig"
+        },
+        "aggregationConfig": {
+          "shape": "AggregationConfig"
+        }
+      },
+      "documentation": "<p> The configuration that determines how Amazon AppFlow formats the flow output data when Upsolver is used as the destination. </p>"
     },
     "Username": {
       "type": "string",
@@ -3723,6 +4265,22 @@
         "object": {
           "shape": "Object",
           "documentation": "<p> The object specified in the Veeva flow source. </p>"
+        },
+        "documentType": {
+          "shape": "DocumentType",
+          "documentation": "<p>The document type specified in the Veeva document extract flow.</p>"
+        },
+        "includeSourceFiles": {
+          "shape": "Boolean",
+          "documentation": "<p>Boolean value to include source files in Veeva document extract flow.</p>"
+        },
+        "includeRenditions": {
+          "shape": "Boolean",
+          "documentation": "<p>Boolean value to include file renditions in Veeva document extract flow.</p>"
+        },
+        "includeAllVersions": {
+          "shape": "Boolean",
+          "documentation": "<p>Boolean value to include All Versions of files in Veeva document extract flow.</p>"
         }
       },
       "documentation": "<p> The properties that are applied when using Veeva as a flow source. </p>"
@@ -3731,6 +4289,15 @@
       "type": "string",
       "max": 512,
       "pattern": "[\\s\\w/!@#+=.-]*"
+    },
+    "WriteOperationType": {
+      "type": "string",
+      "documentation": "<p> The possible write operations in the destination connector. When this value is not provided, this defaults to the <code>INSERT</code> operation. </p>",
+      "enum": [
+        "INSERT",
+        "UPSERT",
+        "UPDATE"
+      ]
     },
     "ZendeskConnectorOperator": {
       "type": "string",
@@ -3764,7 +4331,7 @@
         },
         "clientSecret": {
           "shape": "ClientSecret",
-          "documentation": "<p> The client secret used by the oauth client to authenticate to the authorization server. </p>"
+          "documentation": "<p> The client secret used by the OAuth client to authenticate to the authorization server. </p>"
         },
         "accessToken": {
           "shape": "AccessToken",
@@ -3772,7 +4339,7 @@
         },
         "oAuthRequest": {
           "shape": "ConnectorOAuthRequest",
-          "documentation": "<p> The oauth requirement needed to request security tokens from the connector endpoint. </p>"
+          "documentation": "<p> The OAuth requirement needed to request security tokens from the connector endpoint. </p>"
         }
       },
       "documentation": "<p> The connector-specific profile credentials required when using Zendesk. </p>"
@@ -3789,6 +4356,28 @@
         }
       },
       "documentation": "<p> The connector-specific profile properties required when using Zendesk. </p>"
+    },
+    "ZendeskDestinationProperties": {
+      "type": "structure",
+      "required": [
+        "object"
+      ],
+      "members": {
+        "object": {
+          "shape": "Object",
+          "documentation": "<p>The object specified in the Zendesk flow destination.</p>"
+        },
+        "idFieldNames": {
+          "shape": "IdFieldNameList"
+        },
+        "errorHandlingConfig": {
+          "shape": "ErrorHandlingConfig"
+        },
+        "writeOperationType": {
+          "shape": "WriteOperationType"
+        }
+      },
+      "documentation": "<p>The properties that are applied when Zendesk is used as a destination.</p>"
     },
     "ZendeskMetadata": {
       "type": "structure",
@@ -3814,5 +4403,5 @@
       "documentation": "<p> The properties that are applied when using Zendesk as a flow source. </p>"
     }
   },
-  "documentation": "<p>Welcome to the Amazon AppFlow API reference. This guide is for developers who need detailed information about the Amazon AppFlow API operations, data types, and errors. </p> <p>Amazon AppFlow is a fully managed integration service that enables you to securely transfer data between software as a service (SaaS) applications like Salesforce, Marketo, Slack, and ServiceNow, and AWS services like Amazon S3 and Amazon Redshift. </p> <p>Use the following links to get started on the Amazon AppFlow API:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all Amazon AppFlow API operations.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Types.html\">Data types</a>: An alphabetical list of all Amazon AppFlow data types.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonParameters.html\">Common parameters</a>: Parameters that all Query operations can use.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonErrors.html\">Common errors</a>: Client and server errors that all operations can return.</p> </li> </ul> <p>If you're new to Amazon AppFlow, we recommend that you review the <a href=\"https://docs.aws.amazon.com/appflow/latest/userguide/what-is-appflow.html\">Amazon AppFlow User Guide</a>.</p> <p>Amazon AppFlow API users can use vendor-specific mechanisms for OAuth, and include applicable OAuth attributes (such as <code>auth-code</code> and <code>redirecturi</code>) with the connector-specific <code>ConnectorProfileProperties</code> when creating a new connector profile using Amazon AppFlow API operations. For example, Salesforce users can refer to the <a href=\"https://help.salesforce.com/articleView?id=remoteaccess_authenticate.htm\"> <i>Authorize Apps with OAuth</i> </a> documentation.</p>"
+  "documentation": "<p>Welcome to the Amazon AppFlow API reference. This guide is for developers who need detailed information about the Amazon AppFlow API operations, data types, and errors. </p> <p>Amazon AppFlow is a fully managed integration service that enables you to securely transfer data between software as a service (SaaS) applications like Salesforce, Marketo, Slack, and ServiceNow, and Amazon Web Services like Amazon S3 and Amazon Redshift. </p> <p>Use the following links to get started on the Amazon AppFlow API:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Operations.html\">Actions</a>: An alphabetical list of all Amazon AppFlow API operations.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Types.html\">Data types</a>: An alphabetical list of all Amazon AppFlow data types.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonParameters.html\">Common parameters</a>: Parameters that all Query operations can use.</p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/appflow/1.0/APIReference/CommonErrors.html\">Common errors</a>: Client and server errors that all operations can return.</p> </li> </ul> <p>If you're new to Amazon AppFlow, we recommend that you review the <a href=\"https://docs.aws.amazon.com/appflow/latest/userguide/what-is-appflow.html\">Amazon AppFlow User Guide</a>.</p> <p>Amazon AppFlow API users can use vendor-specific mechanisms for OAuth, and include applicable OAuth attributes (such as <code>auth-code</code> and <code>redirecturi</code>) with the connector-specific <code>ConnectorProfileProperties</code> when creating a new connector profile using Amazon AppFlow API operations. For example, Salesforce users can refer to the <a href=\"https://help.salesforce.com/articleView?id=remoteaccess_authenticate.htm\"> <i>Authorize Apps with OAuth</i> </a> documentation.</p>"
 }

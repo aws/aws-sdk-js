@@ -9,7 +9,7 @@ export class ConfigBase extends ConfigurationOptions{
     /**
      * Loads credentials from the configuration object.
      */
-    getCredentials(callback: (err: AWSError) => void): void;
+    getCredentials(callback: (err: AWSError|null, credentials: Credentials|CredentialsOptions|null) => void): void;
     /**
      * Loads configuration data from a JSON file into this config object.
      * Loading configuration will reset all existing configuration on the object.
@@ -62,7 +62,7 @@ export interface HTTPOptions {
      */
     connectTimeout?: number;
     /**
-     * The number of milliseconds to wait before giving up on a connection attempt.
+     * The number of milliseconds a request can take before automatically being terminated.
      * Defaults to two minutes (120000).
      */
     timeout?: number;
@@ -116,6 +116,9 @@ export interface RetryDelayOptions {
     customBackoff?: (retryCount: number, err?: Error) => number
 }
 
+/**
+ * Common configuration entries to construct a service client.
+ */
 export abstract class ConfigurationOptions {
 
     /**

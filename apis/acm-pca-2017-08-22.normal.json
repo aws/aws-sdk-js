@@ -39,7 +39,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a root or subordinate private certificate authority (CA). You must specify the CA configuration, the certificate revocation list (CRL) configuration, the CA type, and an optional idempotency token to avoid accidental creation of multiple CAs. The CA configuration specifies the name of the algorithm and key size to be used to create the CA private key, the type of signing algorithm that the CA uses, and X.500 subject information. The CRL configuration specifies the CRL expiration period in days (the validity period of the CRL), the Amazon S3 bucket that will contain the CRL, and a CNAME alias for the S3 bucket that is included in certificates issued by the CA. If successful, this action returns the Amazon Resource Name (ARN) of the CA.</p> <p>ACM Private CAA assets that are stored in Amazon S3 can be protected with encryption. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption\">Encrypting Your CRLs</a>.</p> <note> <p>Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html\">Configure Access to ACM Private CA</a>.</p> </note>",
+      "documentation": "<p>Creates a root or subordinate private certificate authority (CA). You must specify the CA configuration, an optional configuration for Online Certificate Status Protocol (OCSP) and/or a certificate revocation list (CRL), the CA type, and an optional idempotency token to avoid accidental creation of multiple CAs. The CA configuration specifies the name of the algorithm and key size to be used to create the CA private key, the type of signing algorithm that the CA uses, and X.500 subject information. The OCSP configuration can optionally specify a custom URL for the OCSP responder. The CRL configuration specifies the CRL expiration period in days (the validity period of the CRL), the Amazon S3 bucket that will contain the CRL, and a CNAME alias for the S3 bucket that is included in certificates issued by the CA. If successful, this action returns the Amazon Resource Name (ARN) of the CA.</p> <p>ACM Private CA assets that are stored in Amazon S3 can be protected with encryption. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption\">Encrypting Your CRLs</a>.</p> <note> <p>Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html\">Configure Access to ACM Private CA</a>.</p> </note>",
       "idempotent": true
     },
     "CreateCertificateAuthorityAuditReport": {
@@ -74,7 +74,7 @@
           "shape": "InvalidStateException"
         }
       ],
-      "documentation": "<p>Creates an audit report that lists every time that your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html\">IssueCertificate</a> and <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html\">RevokeCertificate</a> actions use the private key. </p> <note> <p>Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html\">Configure Access to ACM Private CA</a>.</p> </note> <p>ACM Private CAA assets that are stored in Amazon S3 can be protected with encryption. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuditReport.html#audit-report-encryption\">Encrypting Your Audit Reports</a>.</p>",
+      "documentation": "<p>Creates an audit report that lists every time that your CA private key is used. The report is saved in the Amazon S3 bucket that you specify on input. The <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html\">IssueCertificate</a> and <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html\">RevokeCertificate</a> actions use the private key. </p> <note> <p>Both PCA and the IAM principal must have permission to write to the S3 bucket that you specify. If the IAM principal making the call does not have permission to write to the bucket, then an exception is thrown. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuthAccess.html\">Configure Access to ACM Private CA</a>.</p> </note> <p>ACM Private CA assets that are stored in Amazon S3 can be protected with encryption. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaAuditReport.html#audit-report-encryption\">Encrypting Your Audit Reports</a>.</p>",
       "idempotent": true
     },
     "CreatePermission": {
@@ -106,7 +106,7 @@
           "shape": "RequestFailedException"
         }
       ],
-      "documentation": "<p>Grants one or more permissions on a private CA to the AWS Certificate Manager (ACM) service principal (<code>acm.amazonaws.com</code>). These permissions allow ACM to issue and renew ACM certificates that reside in the same AWS account as the CA.</p> <p>You can list current permissions with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html\">ListPermissions</a> action and revoke them with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html\">DeletePermission</a> action.</p> <p class=\"title\"> <b>About Permissions</b> </p> <ul> <li> <p>If the private CA and the certificates it issues reside in the same account, you can use <code>CreatePermission</code> to grant permissions for ACM to carry out automatic certificate renewals.</p> </li> <li> <p>For automatic certificate renewal to succeed, the ACM service principal needs permissions to create, retrieve, and list certificates.</p> </li> <li> <p>If the private CA and the ACM certificates reside in different accounts, then permissions cannot be used to enable automatic renewals. Instead, the ACM certificate owner must set up a resource-based policy to enable cross-account issuance and renewals. For more information, see <a href=\"acm-pca/latest/userguide/pca-rbp.html\">Using a Resource Based Policy with ACM Private CA</a>.</p> </li> </ul>"
+      "documentation": "<p>Grants one or more permissions on a private CA to the AWS Certificate Manager (ACM) service principal (<code>acm.amazonaws.com</code>). These permissions allow ACM to issue and renew ACM certificates that reside in the same AWS account as the CA.</p> <p>You can list current permissions with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html\">ListPermissions</a> action and revoke them with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html\">DeletePermission</a> action.</p> <p class=\"title\"> <b>About Permissions</b> </p> <ul> <li> <p>If the private CA and the certificates it issues reside in the same account, you can use <code>CreatePermission</code> to grant permissions for ACM to carry out automatic certificate renewals.</p> </li> <li> <p>For automatic certificate renewal to succeed, the ACM service principal needs permissions to create, retrieve, and list certificates.</p> </li> <li> <p>If the private CA and the ACM certificates reside in different accounts, then permissions cannot be used to enable automatic renewals. Instead, the ACM certificate owner must set up a resource-based policy to enable cross-account issuance and renewals. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html\">Using a Resource Based Policy with ACM Private CA</a>.</p> </li> </ul>"
     },
     "DeleteCertificateAuthority": {
       "name": "DeleteCertificateAuthority",
@@ -156,7 +156,7 @@
           "shape": "RequestFailedException"
         }
       ],
-      "documentation": "<p>Revokes permissions on a private CA granted to the AWS Certificate Manager (ACM) service principal (acm.amazonaws.com). </p> <p>These permissions allow ACM to issue and renew ACM certificates that reside in the same AWS account as the CA. If you revoke these permissions, ACM will no longer renew the affected certificates automatically.</p> <p>Permissions can be granted with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html\">CreatePermission</a> action and listed with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html\">ListPermissions</a> action. </p> <p class=\"title\"> <b>About Permissions</b> </p> <ul> <li> <p>If the private CA and the certificates it issues reside in the same account, you can use <code>CreatePermission</code> to grant permissions for ACM to carry out automatic certificate renewals.</p> </li> <li> <p>For automatic certificate renewal to succeed, the ACM service principal needs permissions to create, retrieve, and list certificates.</p> </li> <li> <p>If the private CA and the ACM certificates reside in different accounts, then permissions cannot be used to enable automatic renewals. Instead, the ACM certificate owner must set up a resource-based policy to enable cross-account issuance and renewals. For more information, see <a href=\"acm-pca/latest/userguide/pca-rbp.html\">Using a Resource Based Policy with ACM Private CA</a>.</p> </li> </ul>"
+      "documentation": "<p>Revokes permissions on a private CA granted to the AWS Certificate Manager (ACM) service principal (acm.amazonaws.com). </p> <p>These permissions allow ACM to issue and renew ACM certificates that reside in the same AWS account as the CA. If you revoke these permissions, ACM will no longer renew the affected certificates automatically.</p> <p>Permissions can be granted with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html\">CreatePermission</a> action and listed with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ListPermissions.html\">ListPermissions</a> action. </p> <p class=\"title\"> <b>About Permissions</b> </p> <ul> <li> <p>If the private CA and the certificates it issues reside in the same account, you can use <code>CreatePermission</code> to grant permissions for ACM to carry out automatic certificate renewals.</p> </li> <li> <p>For automatic certificate renewal to succeed, the ACM service principal needs permissions to create, retrieve, and list certificates.</p> </li> <li> <p>If the private CA and the ACM certificates reside in different accounts, then permissions cannot be used to enable automatic renewals. Instead, the ACM certificate owner must set up a resource-based policy to enable cross-account issuance and renewals. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html\">Using a Resource Based Policy with ACM Private CA</a>.</p> </li> </ul>"
     },
     "DeletePolicy": {
       "name": "DeletePolicy",
@@ -187,7 +187,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Deletes the resource-based policy attached to a private CA. Deletion will remove any access that the policy has granted. If there is no policy attached to the private CA, this action will return successful.</p> <p>If you delete a policy that was applied through AWS Resource Access Manager (RAM), the CA will be removed from all shares in which it was included. </p> <p>The AWS Certificate Manager Service Linked Role that the policy supports is not affected when you delete the policy. </p> <p>The current policy can be shown with <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetPolicy.html\">GetPolicy</a> and updated with <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_PutPolicy.html\">PutPolicy</a>.</p> <p class=\"title\"> <b>About Policies</b> </p> <ul> <li> <p>A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see <a href=\"acm-pca/latest/userguide/pca-rbp.html\">Using a Resource Based Policy with ACM Private CA</a>.</p> </li> <li> <p>A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.</p> </li> <li> <p>For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html\">Using a Service Linked Role with ACM</a>.</p> </li> <li> <p>Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see <a href=\"acm-pca/latest/userguide/pca-ram.html\">Using AWS Resource Access Manager (RAM) with ACM Private CA</a>.</p> </li> </ul>"
+      "documentation": "<p>Deletes the resource-based policy attached to a private CA. Deletion will remove any access that the policy has granted. If there is no policy attached to the private CA, this action will return successful.</p> <p>If you delete a policy that was applied through AWS Resource Access Manager (RAM), the CA will be removed from all shares in which it was included. </p> <p>The AWS Certificate Manager Service Linked Role that the policy supports is not affected when you delete the policy. </p> <p>The current policy can be shown with <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetPolicy.html\">GetPolicy</a> and updated with <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_PutPolicy.html\">PutPolicy</a>.</p> <p class=\"title\"> <b>About Policies</b> </p> <ul> <li> <p>A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html\">Using a Resource Based Policy with ACM Private CA</a>.</p> </li> <li> <p>A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.</p> </li> <li> <p>For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html\">Using a Service Linked Role with ACM</a>.</p> </li> <li> <p>Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-ram.html\">Attach a Policy for Cross-Account Access</a>.</p> </li> </ul>"
     },
     "DescribeCertificateAuthority": {
       "name": "DescribeCertificateAuthority",
@@ -209,7 +209,7 @@
           "shape": "InvalidArnException"
         }
       ],
-      "documentation": "<p>Lists information about your private certificate authority (CA) or one that has been shared with you. You specify the private CA on input by its ARN (Amazon Resource Name). The output contains the status of your CA. This can be any of the following: </p> <ul> <li> <p> <code>CREATING</code> - ACM Private CA is creating your private certificate authority.</p> </li> <li> <p> <code>PENDING_CERTIFICATE</code> - The certificate is pending. You must use your ACM Private CA-hosted or on-premises root or subordinate CA to sign your private CA CSR and then import it into PCA. </p> </li> <li> <p> <code>ACTIVE</code> - Your private CA is active.</p> </li> <li> <p> <code>DISABLED</code> - Your private CA has been disabled.</p> </li> <li> <p> <code>EXPIRED</code> - Your private CA certificate has expired.</p> </li> <li> <p> <code>FAILED</code> - Your private CA has failed. Your CA can fail because of problems such a network outage or backend AWS failure or other errors. A failed CA can never return to the pending state. You must create a new CA. </p> </li> <li> <p> <code>DELETED</code> - Your private CA is within the restoration period, after which it is permanently deleted. The length of time remaining in the CA's restoration period is also included in this action's output.</p> </li> </ul>"
+      "documentation": "<p>Lists information about your private certificate authority (CA) or one that has been shared with you. You specify the private CA on input by its ARN (Amazon Resource Name). The output contains the status of your CA. This can be any of the following: </p> <ul> <li> <p> <code>CREATING</code> - ACM Private CA is creating your private certificate authority.</p> </li> <li> <p> <code>PENDING_CERTIFICATE</code> - The certificate is pending. You must use your ACM Private CA-hosted or on-premises root or subordinate CA to sign your private CA CSR and then import it into PCA. </p> </li> <li> <p> <code>ACTIVE</code> - Your private CA is active.</p> </li> <li> <p> <code>DISABLED</code> - Your private CA has been disabled.</p> </li> <li> <p> <code>EXPIRED</code> - Your private CA certificate has expired.</p> </li> <li> <p> <code>FAILED</code> - Your private CA has failed. Your CA can fail because of problems such a network outage or back-end AWS failure or other errors. A failed CA can never return to the pending state. You must create a new CA. </p> </li> <li> <p> <code>DELETED</code> - Your private CA is within the restoration period, after which it is permanently deleted. The length of time remaining in the CA's restoration period is also included in this action's output.</p> </li> </ul>"
     },
     "DescribeCertificateAuthorityAuditReport": {
       "name": "DescribeCertificateAuthorityAuditReport",
@@ -349,7 +349,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Retrieves the resource-based policy attached to a private CA. If either the private CA resource or the policy cannot be found, this action returns a <code>ResourceNotFoundException</code>. </p> <p>The policy can be attached or updated with <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_PutPolicy.html\">PutPolicy</a> and removed with <a href=\"acm-pca/latest/APIReference/API_DeletePolicy.html\">DeletePolicy</a>.</p> <p class=\"title\"> <b>About Policies</b> </p> <ul> <li> <p>A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see <a href=\"acm-pca/latest/userguide/pca-rbp.html\">Using a Resource Based Policy with ACM Private CA</a>.</p> </li> <li> <p>A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.</p> </li> <li> <p>For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html\">Using a Service Linked Role with ACM</a>.</p> </li> <li> <p>Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see <a href=\"acm-pca/latest/userguide/pca-ram.html\">Using AWS Resource Access Manager (RAM) with ACM Private CA</a>.</p> </li> </ul>"
+      "documentation": "<p>Retrieves the resource-based policy attached to a private CA. If either the private CA resource or the policy cannot be found, this action returns a <code>ResourceNotFoundException</code>. </p> <p>The policy can be attached or updated with <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_PutPolicy.html\">PutPolicy</a> and removed with <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePolicy.html\">DeletePolicy</a>.</p> <p class=\"title\"> <b>About Policies</b> </p> <ul> <li> <p>A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html\">Using a Resource Based Policy with ACM Private CA</a>.</p> </li> <li> <p>A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.</p> </li> <li> <p>For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html\">Using a Service Linked Role with ACM</a>.</p> </li> <li> <p>Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-ram.html\">Attach a Policy for Cross-Account Access</a>.</p> </li> </ul>"
     },
     "ImportCertificateAuthorityCertificate": {
       "name": "ImportCertificateAuthorityCertificate",
@@ -389,7 +389,7 @@
           "shape": "CertificateMismatchException"
         }
       ],
-      "documentation": "<p>Imports a signed private CA certificate into ACM Private CA. This action is used when you are using a chain of trust whose root is located outside ACM Private CA. Before you can call this action, the following preparations must in place:</p> <ol> <li> <p>In ACM Private CA, call the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html\">CreateCertificateAuthority</a> action to create the private CA that that you plan to back with the imported certificate.</p> </li> <li> <p>Call the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCsr.html\">GetCertificateAuthorityCsr</a> action to generate a certificate signing request (CSR).</p> </li> <li> <p>Sign the CSR using a root or intermediate CA hosted by either an on-premises PKI hierarchy or by a commercial CA.</p> </li> <li> <p>Create a certificate chain and copy the signed certificate and the certificate chain to your working directory.</p> </li> </ol> <p>The following requirements apply when you import a CA certificate.</p> <ul> <li> <p>You cannot import a non-self-signed certificate for use as a root CA.</p> </li> <li> <p>You cannot import a self-signed certificate for use as a subordinate CA.</p> </li> <li> <p>Your certificate chain must not include the private CA certificate that you are importing.</p> </li> <li> <p>Your ACM Private CA-hosted or on-premises CA certificate must be the last certificate in your chain. The subordinate certificate, if any, that your root CA signed must be next to last. The subordinate certificate signed by the preceding subordinate CA must come next, and so on until your chain is built. </p> </li> <li> <p>The chain must be PEM-encoded.</p> </li> <li> <p>The maximum allowed size of a certificate is 32 KB.</p> </li> <li> <p>The maximum allowed size of a certificate chain is 2 MB.</p> </li> </ul> <p> <i>Enforcement of Critical Constraints</i> </p> <p>ACM Private CA allows the following extensions to be marked critical in the imported CA certificate or chain.</p> <ul> <li> <p>Basic constraints (<i>must</i> be marked critical)</p> </li> <li> <p>Subject alternative names</p> </li> <li> <p>Key usage</p> </li> <li> <p>Extended key usage</p> </li> <li> <p>Authority key identifier</p> </li> <li> <p>Subject key identifier</p> </li> <li> <p>Issuer alternative name</p> </li> <li> <p>Subject directory attributes</p> </li> <li> <p>Subject information access</p> </li> <li> <p>Certificate policies</p> </li> <li> <p>Policy mappings</p> </li> <li> <p>Inhibit anyPolicy</p> </li> </ul> <p>ACM Private CA rejects the following extensions when they are marked critical in an imported CA certificate or chain.</p> <ul> <li> <p>Name constraints</p> </li> <li> <p>Policy constraints</p> </li> <li> <p>CRL distribution points</p> </li> <li> <p>Authority information access</p> </li> <li> <p>Freshest CRL</p> </li> <li> <p>Any other extension</p> </li> </ul>"
+      "documentation": "<p>Imports a signed private CA certificate into ACM Private CA. This action is used when you are using a chain of trust whose root is located outside ACM Private CA. Before you can call this action, the following preparations must in place:</p> <ol> <li> <p>In ACM Private CA, call the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html\">CreateCertificateAuthority</a> action to create the private CA that you plan to back with the imported certificate.</p> </li> <li> <p>Call the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCsr.html\">GetCertificateAuthorityCsr</a> action to generate a certificate signing request (CSR).</p> </li> <li> <p>Sign the CSR using a root or intermediate CA hosted by either an on-premises PKI hierarchy or by a commercial CA.</p> </li> <li> <p>Create a certificate chain and copy the signed certificate and the certificate chain to your working directory.</p> </li> </ol> <p>ACM Private CA supports three scenarios for installing a CA certificate:</p> <ul> <li> <p>Installing a certificate for a root CA hosted by ACM Private CA.</p> </li> <li> <p>Installing a subordinate CA certificate whose parent authority is hosted by ACM Private CA.</p> </li> <li> <p>Installing a subordinate CA certificate whose parent authority is externally hosted.</p> </li> </ul> <p>The following additional requirements apply when you import a CA certificate.</p> <ul> <li> <p>Only a self-signed certificate can be imported as a root CA.</p> </li> <li> <p>A self-signed certificate cannot be imported as a subordinate CA.</p> </li> <li> <p>Your certificate chain must not include the private CA certificate that you are importing.</p> </li> <li> <p>Your root CA must be the last certificate in your chain. The subordinate certificate, if any, that your root CA signed must be next to last. The subordinate certificate signed by the preceding subordinate CA must come next, and so on until your chain is built. </p> </li> <li> <p>The chain must be PEM-encoded.</p> </li> <li> <p>The maximum allowed size of a certificate is 32 KB.</p> </li> <li> <p>The maximum allowed size of a certificate chain is 2 MB.</p> </li> </ul> <p> <i>Enforcement of Critical Constraints</i> </p> <p>ACM Private CA allows the following extensions to be marked critical in the imported CA certificate or chain.</p> <ul> <li> <p>Basic constraints (<i>must</i> be marked critical)</p> </li> <li> <p>Subject alternative names</p> </li> <li> <p>Key usage</p> </li> <li> <p>Extended key usage</p> </li> <li> <p>Authority key identifier</p> </li> <li> <p>Subject key identifier</p> </li> <li> <p>Issuer alternative name</p> </li> <li> <p>Subject directory attributes</p> </li> <li> <p>Subject information access</p> </li> <li> <p>Certificate policies</p> </li> <li> <p>Policy mappings</p> </li> <li> <p>Inhibit anyPolicy</p> </li> </ul> <p>ACM Private CA rejects the following extensions when they are marked critical in an imported CA certificate or chain.</p> <ul> <li> <p>Name constraints</p> </li> <li> <p>Policy constraints</p> </li> <li> <p>CRL distribution points</p> </li> <li> <p>Authority information access</p> </li> <li> <p>Freshest CRL</p> </li> <li> <p>Any other extension</p> </li> </ul>"
     },
     "IssueCertificate": {
       "name": "IssueCertificate",
@@ -474,7 +474,7 @@
           "shape": "RequestFailedException"
         }
       ],
-      "documentation": "<p>List all permissions on a private CA, if any, granted to the AWS Certificate Manager (ACM) service principal (acm.amazonaws.com). </p> <p>These permissions allow ACM to issue and renew ACM certificates that reside in the same AWS account as the CA. </p> <p>Permissions can be granted with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html\">CreatePermission</a> action and revoked with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html\">DeletePermission</a> action.</p> <p class=\"title\"> <b>About Permissions</b> </p> <ul> <li> <p>If the private CA and the certificates it issues reside in the same account, you can use <code>CreatePermission</code> to grant permissions for ACM to carry out automatic certificate renewals.</p> </li> <li> <p>For automatic certificate renewal to succeed, the ACM service principal needs permissions to create, retrieve, and list certificates.</p> </li> <li> <p>If the private CA and the ACM certificates reside in different accounts, then permissions cannot be used to enable automatic renewals. Instead, the ACM certificate owner must set up a resource-based policy to enable cross-account issuance and renewals. For more information, see <a href=\"acm-pca/latest/userguide/pca-rbp.html\">Using a Resource Based Policy with ACM Private CA</a>.</p> </li> </ul>"
+      "documentation": "<p>List all permissions on a private CA, if any, granted to the AWS Certificate Manager (ACM) service principal (acm.amazonaws.com). </p> <p>These permissions allow ACM to issue and renew ACM certificates that reside in the same AWS account as the CA. </p> <p>Permissions can be granted with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreatePermission.html\">CreatePermission</a> action and revoked with the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePermission.html\">DeletePermission</a> action.</p> <p class=\"title\"> <b>About Permissions</b> </p> <ul> <li> <p>If the private CA and the certificates it issues reside in the same account, you can use <code>CreatePermission</code> to grant permissions for ACM to carry out automatic certificate renewals.</p> </li> <li> <p>For automatic certificate renewal to succeed, the ACM service principal needs permissions to create, retrieve, and list certificates.</p> </li> <li> <p>If the private CA and the ACM certificates reside in different accounts, then permissions cannot be used to enable automatic renewals. Instead, the ACM certificate owner must set up a resource-based policy to enable cross-account issuance and renewals. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html\">Using a Resource Based Policy with ACM Private CA</a>.</p> </li> </ul>"
     },
     "ListTags": {
       "name": "ListTags",
@@ -533,7 +533,7 @@
           "shape": "ResourceNotFoundException"
         }
       ],
-      "documentation": "<p>Attaches a resource-based policy to a private CA. </p> <p>A policy can also be applied by <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-ram.html\">sharing</a> a private CA through AWS Resource Access Manager (RAM).</p> <p>The policy can be displayed with <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetPolicy.html\">GetPolicy</a> and removed with <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePolicy.html\">DeletePolicy</a>.</p> <p class=\"title\"> <b>About Policies</b> </p> <ul> <li> <p>A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see <a href=\"acm-pca/latest/userguide/pca-rbp.html\">Using a Resource Based Policy with ACM Private CA</a>.</p> </li> <li> <p>A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.</p> </li> <li> <p>For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html\">Using a Service Linked Role with ACM</a>.</p> </li> <li> <p>Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see <a href=\"acm-pca/latest/userguide/pca-ram.html\">Using AWS Resource Access Manager (RAM) with ACM Private CA</a>.</p> </li> </ul>"
+      "documentation": "<p>Attaches a resource-based policy to a private CA. </p> <p>A policy can also be applied by sharing a private CA through AWS Resource Access Manager (RAM). For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-ram.html\">Attach a Policy for Cross-Account Access</a>.</p> <p>The policy can be displayed with <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetPolicy.html\">GetPolicy</a> and removed with <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeletePolicy.html\">DeletePolicy</a>.</p> <p class=\"title\"> <b>About Policies</b> </p> <ul> <li> <p>A policy grants access on a private CA to an AWS customer account, to AWS Organizations, or to an AWS Organizations unit. Policies are under the control of a CA administrator. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-rbp.html\">Using a Resource Based Policy with ACM Private CA</a>.</p> </li> <li> <p>A policy permits a user of AWS Certificate Manager (ACM) to issue ACM certificates signed by a CA in another account.</p> </li> <li> <p>For ACM to manage automatic renewal of these certificates, the ACM user must configure a Service Linked Role (SLR). The SLR allows the ACM service to assume the identity of the user, subject to confirmation against the ACM Private CA policy. For more information, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html\">Using a Service Linked Role with ACM</a>.</p> </li> <li> <p>Updates made in AWS Resource Manager (RAM) are reflected in policies. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/pca-ram.html\">Attach a Policy for Cross-Account Access</a>.</p> </li> </ul>"
     },
     "RestoreCertificateAuthority": {
       "name": "RestoreCertificateAuthority",
@@ -714,7 +714,7 @@
         },
         "CommonName": {
           "shape": "String64",
-          "documentation": "<p>Fully qualified domain name (FQDN) associated with the certificate subject.</p>"
+          "documentation": "<p>For CA and end-entity certificates in a private PKI, the common name (CN) can be any string within the length limit. </p> <p>Note: In publicly trusted certificates, the common name must be a fully qualified domain name (FQDN) associated with the certificate subject.</p>"
         },
         "SerialNumber": {
           "shape": "ASN1PrintableString64",
@@ -738,7 +738,7 @@
         },
         "Initials": {
           "shape": "String5",
-          "documentation": "<p>Concatenation that typically contains the first letter of the <b>GivenName</b>, the first letter of the middle name if one exists, and the first letter of the <b>SurName</b>.</p>"
+          "documentation": "<p>Concatenation that typically contains the first letter of the <b>GivenName</b>, the first letter of the middle name if one exists, and the first letter of the <b>Surname</b>.</p>"
         },
         "Pseudonym": {
           "shape": "String128",
@@ -749,13 +749,60 @@
           "documentation": "<p>Typically a qualifier appended to the name of an individual. Examples include Jr. for junior, Sr. for senior, and III for third.</p>"
         }
       },
-      "documentation": "<p>Contains information about the certificate subject. The certificate can be one issued by your private certificate authority (CA) or it can be your private CA certificate. The <b>Subject</b> field in the certificate identifies the entity that owns or controls the public key in the certificate. The entity can be a user, computer, device, or service. The <b>Subject</b> must contain an X.500 distinguished name (DN). A DN is a sequence of relative distinguished names (RDNs). The RDNs are separated by commas in the certificate. The DN must be unique for each entity, but your private CA can issue more than one certificate with the same DN to the same entity. </p>"
+      "documentation": "<p>Contains information about the certificate subject. The <code>Subject</code> field in the certificate identifies the entity that owns or controls the public key in the certificate. The entity can be a user, computer, device, or service. The <code>Subject </code>must contain an X.500 distinguished name (DN). A DN is a sequence of relative distinguished names (RDNs). The RDNs are separated by commas in the certificate.</p>"
     },
     "AWSPolicy": {
       "type": "string",
       "max": 20480,
       "min": 1,
       "pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+    },
+    "AccessDescription": {
+      "type": "structure",
+      "required": [
+        "AccessMethod",
+        "AccessLocation"
+      ],
+      "members": {
+        "AccessMethod": {
+          "shape": "AccessMethod",
+          "documentation": "<p>The type and format of <code>AccessDescription</code> information.</p>"
+        },
+        "AccessLocation": {
+          "shape": "GeneralName",
+          "documentation": "<p>The location of <code>AccessDescription</code> information.</p>"
+        }
+      },
+      "documentation": "<p>Provides access information used by the <code>authorityInfoAccess</code> and <code>subjectInfoAccess</code> extensions described in <a href=\"https://tools.ietf.org/html/rfc5280\">RFC 5280</a>.</p>",
+      "box": true
+    },
+    "AccessDescriptionList": {
+      "type": "list",
+      "member": {
+        "shape": "AccessDescription"
+      }
+    },
+    "AccessMethod": {
+      "type": "structure",
+      "members": {
+        "CustomObjectIdentifier": {
+          "shape": "CustomObjectIdentifier",
+          "documentation": "<p>An object identifier (OID) specifying the <code>AccessMethod</code>. The OID must satisfy the regular expression shown below. For more information, see NIST's definition of <a href=\"https://csrc.nist.gov/glossary/term/Object_Identifier\">Object Identifier (OID)</a>.</p>"
+        },
+        "AccessMethodType": {
+          "shape": "AccessMethodType",
+          "documentation": "<p>Specifies the <code>AccessMethod</code>.</p>"
+        }
+      },
+      "documentation": "<p>Describes the type and format of extension access. Only one of <code>CustomObjectIdentifier</code> or <code>AccessMethodType</code> may be provided. Providing both results in <code>InvalidArgsException</code>.</p>"
+    },
+    "AccessMethodType": {
+      "type": "string",
+      "enum": [
+        "CA_REPOSITORY",
+        "RESOURCE_PKI_MANIFEST",
+        "RESOURCE_PKI_NOTIFY"
+      ]
     },
     "AccountId": {
       "type": "string",
@@ -778,6 +825,19 @@
         "GetCertificate",
         "ListPermissions"
       ]
+    },
+    "ApiPassthrough": {
+      "type": "structure",
+      "members": {
+        "Extensions": {
+          "shape": "Extensions",
+          "documentation": "<p>Specifies X.509 extension information for a certificate.</p>"
+        },
+        "Subject": {
+          "shape": "ASN1Subject"
+        }
+      },
+      "documentation": "<p>Contains X.509 certificate information to be placed in an issued certificate. An <code>APIPassthrough</code> or <code>APICSRPassthrough</code> template variant must be selected, or else this parameter is ignored. </p> <p>If conflicting or duplicate certificate information is supplied from other sources, ACM Private CA applies <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations\">order of operation rules</a> to determine what information is used.</p>"
     },
     "Arn": {
       "type": "string",
@@ -864,11 +924,15 @@
         },
         "RevocationConfiguration": {
           "shape": "RevocationConfiguration",
-          "documentation": "<p>Information about the certificate revocation list (CRL) created and maintained by your private CA. </p>"
+          "documentation": "<p>Information about the Online Certificate Status Protocol (OCSP) configuration or certificate revocation list (CRL) created and maintained by your private CA. </p>"
         },
         "RestorableUntil": {
           "shape": "TStamp",
           "documentation": "<p>The period during which a deleted CA can be restored. For more information, see the <code>PermanentDeletionTimeInDays</code> parameter of the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_DeleteCertificateAuthorityRequest.html\">DeleteCertificateAuthorityRequest</a> action. </p>"
+        },
+        "KeyStorageSecurityStandard": {
+          "shape": "KeyStorageSecurityStandard",
+          "documentation": "<p>Defines a cryptographic key management compliance standard used for handling CA keys. </p> <p>Default: FIPS_140_2_LEVEL_3_OR_HIGHER</p> <p>Note: AWS Region ap-northeast-3 supports only FIPS_140_2_LEVEL_2_OR_HIGHER. You must explicitly specify this parameter and value when creating a CA in that Region. Specifying a different value (or no value) results in an <code>InvalidArgsException</code> with the message \"A certificate authority cannot be created in this region with the specified security standard.\"</p>"
         }
       },
       "documentation": "<p>Contains information about your private certificate authority (CA). Your private CA can issue and revoke X.509 digital certificates. Digital certificates verify that the entity named in the certificate <b>Subject</b> field owns or controls the public key contained in the <b>Subject Public Key Info</b> field. Call the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html\">CreateCertificateAuthority</a> action to create your private CA. You must then call the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_GetCertificateAuthorityCertificate.html\">GetCertificateAuthorityCertificate</a> action to retrieve a private CA certificate signing request (CSR). Sign the CSR with your ACM Private CA-hosted or on-premises root or subordinate CA certificate. Call the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html\">ImportCertificateAuthorityCertificate</a> action to import the signed certificate into AWS Certificate Manager (ACM). </p>"
@@ -892,6 +956,10 @@
         "Subject": {
           "shape": "ASN1Subject",
           "documentation": "<p>Structure that contains X.500 distinguished name information for your private CA.</p>"
+        },
+        "CsrExtensions": {
+          "shape": "CsrExtensions",
+          "documentation": "<p>Specifies information to be added to the extension section of the certificate signing request (CSR).</p>"
         }
       },
       "documentation": "<p>Contains configuration information for your private certificate authority (CA). This includes information about the class of public key algorithm and the key pair that your private CA creates when it issues a certificate. It also includes the signature algorithm that it uses when issuing certificates, and its X.500 distinguished name. You must specify this information when you call the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html\">CreateCertificateAuthority</a> action. </p>"
@@ -930,6 +998,14 @@
       "type": "blob",
       "max": 2097152,
       "min": 0
+    },
+    "CertificatePolicyList": {
+      "type": "list",
+      "member": {
+        "shape": "PolicyInformation"
+      },
+      "max": 20,
+      "min": 1
     },
     "CountryCodeString": {
       "type": "string",
@@ -985,7 +1061,7 @@
         },
         "RevocationConfiguration": {
           "shape": "RevocationConfiguration",
-          "documentation": "<p>Contains a Boolean value that you can use to enable a certification revocation list (CRL) for the CA, the name of the S3 bucket to which ACM Private CA will write the CRL, and an optional CNAME alias that you can use to hide the name of your bucket in the <b>CRL Distribution Points</b> extension of your CA certificate. For more information, see the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html\">CrlConfiguration</a> structure. </p>"
+          "documentation": "<p>Contains information to enable Online Certificate Status Protocol (OCSP) support, to enable a certificate revocation list (CRL), to enable both, or to enable neither. The default is for both certificate validation mechanisms to be disabled. For more information, see the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_OcspConfiguration.html\">OcspConfiguration</a> and <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html\">CrlConfiguration</a> types.</p>"
         },
         "CertificateAuthorityType": {
           "shape": "CertificateAuthorityType",
@@ -993,7 +1069,11 @@
         },
         "IdempotencyToken": {
           "shape": "IdempotencyToken",
-          "documentation": "<p>Alphanumeric string that can be used to distinguish between calls to <b>CreateCertificateAuthority</b>. For a given token, ACM Private CA creates exactly one CA. If you issue a subsequent call using the same token, ACM Private CA returns the ARN of the existing CA and takes no further action. If you change the idempotency token across multiple calls, ACM Private CA creates a unique CA for each unique token.</p>"
+          "documentation": "<p>Custom string that can be used to distinguish between calls to the <b>CreateCertificateAuthority</b> action. Idempotency tokens for <b>CreateCertificateAuthority</b> time out after five minutes. Therefore, if you call <b>CreateCertificateAuthority</b> multiple times with the same idempotency token within five minutes, ACM Private CA recognizes that you are requesting only certificate authority and will issue only one. If you change the idempotency token for each call, PCA recognizes that you are requesting multiple certificate authorities.</p>"
+        },
+        "KeyStorageSecurityStandard": {
+          "shape": "KeyStorageSecurityStandard",
+          "documentation": "<p>Specifies a cryptographic key management compliance standard used for handling CA keys.</p> <p>Default: FIPS_140_2_LEVEL_3_OR_HIGHER</p> <p>Note: <code>FIPS_140_2_LEVEL_3_OR_HIGHER</code> is not supported in Region ap-northeast-3. When creating a CA in the ap-northeast-3, you must provide <code>FIPS_140_2_LEVEL_2_OR_HIGHER</code> as the argument for <code>KeyStorageSecurityStandard</code>. Failure to do this results in an <code>InvalidArgsException</code> with the message, \"A certificate authority cannot be created in this region with the specified security standard.\"</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -1049,7 +1129,7 @@
         },
         "ExpirationInDays": {
           "shape": "Integer1To5000",
-          "documentation": "<p>Number of days until a certificate expires.</p>",
+          "documentation": "<p>Validity period of the CRL in days.</p>",
           "box": true
         },
         "CustomCname": {
@@ -1058,10 +1138,14 @@
         },
         "S3BucketName": {
           "shape": "String3To255",
-          "documentation": "<p>Name of the S3 bucket that contains the CRL. If you do not provide a value for the <b>CustomCname</b> argument, the name of your S3 bucket is placed into the <b>CRL Distribution Points</b> extension of the issued certificate. You can change the name of your bucket by calling the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html\">UpdateCertificateAuthority</a> action. You must specify a bucket policy that allows ACM Private CA to write the CRL to your bucket.</p>"
+          "documentation": "<p>Name of the S3 bucket that contains the CRL. If you do not provide a value for the <b>CustomCname</b> argument, the name of your S3 bucket is placed into the <b>CRL Distribution Points</b> extension of the issued certificate. You can change the name of your bucket by calling the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html\">UpdateCertificateAuthority</a> operation. You must specify a <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-policies\">bucket policy</a> that allows ACM Private CA to write the CRL to your bucket.</p>"
+        },
+        "S3ObjectAcl": {
+          "shape": "S3ObjectAcl",
+          "documentation": "<p>Determines whether the CRL will be publicly readable or privately held in the CRL Amazon S3 bucket. If you choose PUBLIC_READ, the CRL will be accessible over the public internet. If you choose BUCKET_OWNER_FULL_CONTROL, only the owner of the CRL S3 bucket can access the CRL, and your PKI clients may need an alternative method of access. </p> <p>If no value is specified, the default is <code>PUBLIC_READ</code>.</p> <p> <i>Note:</i> This default can cause CA creation to fail in some circumstances. If you have have enabled the Block Public Access (BPA) feature in your S3 account, then you must specify the value of this parameter as <code>BUCKET_OWNER_FULL_CONTROL</code>, and not doing so results in an error. If you have disabled BPA in S3, then you can specify either <code>BUCKET_OWNER_FULL_CONTROL</code> or <code>PUBLIC_READ</code> as the value.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-bpa\">Blocking public access to the S3 bucket</a>.</p>"
         }
       },
-      "documentation": "<p>Contains configuration information for a certificate revocation list (CRL). Your private certificate authority (CA) creates base CRLs. Delta CRLs are not supported. You can enable CRLs for your new or an existing private CA by setting the <b>Enabled</b> parameter to <code>true</code>. Your private CA writes CRLs to an S3 bucket that you specify in the <b>S3BucketName</b> parameter. You can hide the name of your bucket by specifying a value for the <b>CustomCname</b> parameter. Your private CA copies the CNAME or the S3 bucket name to the <b>CRL Distribution Points</b> extension of each certificate it issues. Your S3 bucket policy must give write permission to ACM Private CA. </p> <p>ACM Private CAA assets that are stored in Amazon S3 can be protected with encryption. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption\">Encrypting Your CRLs</a>.</p> <p>Your private CA uses the value in the <b>ExpirationInDays</b> parameter to calculate the <b>nextUpdate</b> field in the CRL. The CRL is refreshed at 1/2 the age of next update or when a certificate is revoked. When a certificate is revoked, it is recorded in the next CRL that is generated and in the next audit report. Only time valid certificates are listed in the CRL. Expired certificates are not included. </p> <p>CRLs contain the following fields:</p> <ul> <li> <p> <b>Version</b>: The current version number defined in RFC 5280 is V2. The integer value is 0x1. </p> </li> <li> <p> <b>Signature Algorithm</b>: The name of the algorithm used to sign the CRL.</p> </li> <li> <p> <b>Issuer</b>: The X.500 distinguished name of your private CA that issued the CRL.</p> </li> <li> <p> <b>Last Update</b>: The issue date and time of this CRL.</p> </li> <li> <p> <b>Next Update</b>: The day and time by which the next CRL will be issued.</p> </li> <li> <p> <b>Revoked Certificates</b>: List of revoked certificates. Each list item contains the following information.</p> <ul> <li> <p> <b>Serial Number</b>: The serial number, in hexadecimal format, of the revoked certificate.</p> </li> <li> <p> <b>Revocation Date</b>: Date and time the certificate was revoked.</p> </li> <li> <p> <b>CRL Entry Extensions</b>: Optional extensions for the CRL entry.</p> <ul> <li> <p> <b>X509v3 CRL Reason Code</b>: Reason the certificate was revoked.</p> </li> </ul> </li> </ul> </li> <li> <p> <b>CRL Extensions</b>: Optional extensions for the CRL.</p> <ul> <li> <p> <b>X509v3 Authority Key Identifier</b>: Identifies the public key associated with the private key used to sign the certificate.</p> </li> <li> <p> <b>X509v3 CRL Number:</b>: Decimal sequence number for the CRL.</p> </li> </ul> </li> <li> <p> <b>Signature Algorithm</b>: Algorithm used by your private CA to sign the CRL.</p> </li> <li> <p> <b>Signature Value</b>: Signature computed over the CRL.</p> </li> </ul> <p>Certificate revocation lists created by ACM Private CA are DER-encoded. You can use the following OpenSSL command to list a CRL.</p> <p> <code>openssl crl -inform DER -text -in <i>crl_path</i> -noout</code> </p>"
+      "documentation": "<p>Contains configuration information for a certificate revocation list (CRL). Your private certificate authority (CA) creates base CRLs. Delta CRLs are not supported. You can enable CRLs for your new or an existing private CA by setting the <b>Enabled</b> parameter to <code>true</code>. Your private CA writes CRLs to an S3 bucket that you specify in the <b>S3BucketName</b> parameter. You can hide the name of your bucket by specifying a value for the <b>CustomCname</b> parameter. Your private CA copies the CNAME or the S3 bucket name to the <b>CRL Distribution Points</b> extension of each certificate it issues. Your S3 bucket policy must give write permission to ACM Private CA. </p> <p>ACM Private CA assets that are stored in Amazon S3 can be protected with encryption. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#crl-encryption\">Encrypting Your CRLs</a>.</p> <p>Your private CA uses the value in the <b>ExpirationInDays</b> parameter to calculate the <b>nextUpdate</b> field in the CRL. The CRL is refreshed at 1/2 the age of next update or when a certificate is revoked. When a certificate is revoked, it is recorded in the next CRL that is generated and in the next audit report. Only time valid certificates are listed in the CRL. Expired certificates are not included.</p> <p>A CRL is typically updated approximately 30 minutes after a certificate is revoked. If for any reason a CRL update fails, ACM Private CA makes further attempts every 15 minutes.</p> <p>CRLs contain the following fields:</p> <ul> <li> <p> <b>Version</b>: The current version number defined in RFC 5280 is V2. The integer value is 0x1. </p> </li> <li> <p> <b>Signature Algorithm</b>: The name of the algorithm used to sign the CRL.</p> </li> <li> <p> <b>Issuer</b>: The X.500 distinguished name of your private CA that issued the CRL.</p> </li> <li> <p> <b>Last Update</b>: The issue date and time of this CRL.</p> </li> <li> <p> <b>Next Update</b>: The day and time by which the next CRL will be issued.</p> </li> <li> <p> <b>Revoked Certificates</b>: List of revoked certificates. Each list item contains the following information.</p> <ul> <li> <p> <b>Serial Number</b>: The serial number, in hexadecimal format, of the revoked certificate.</p> </li> <li> <p> <b>Revocation Date</b>: Date and time the certificate was revoked.</p> </li> <li> <p> <b>CRL Entry Extensions</b>: Optional extensions for the CRL entry.</p> <ul> <li> <p> <b>X509v3 CRL Reason Code</b>: Reason the certificate was revoked.</p> </li> </ul> </li> </ul> </li> <li> <p> <b>CRL Extensions</b>: Optional extensions for the CRL.</p> <ul> <li> <p> <b>X509v3 Authority Key Identifier</b>: Identifies the public key associated with the private key used to sign the certificate.</p> </li> <li> <p> <b>X509v3 CRL Number:</b>: Decimal sequence number for the CRL.</p> </li> </ul> </li> <li> <p> <b>Signature Algorithm</b>: Algorithm used by your private CA to sign the CRL.</p> </li> <li> <p> <b>Signature Value</b>: Signature computed over the CRL.</p> </li> </ul> <p>Certificate revocation lists created by ACM Private CA are DER-encoded. You can use the following OpenSSL command to list a CRL.</p> <p> <code>openssl crl -inform DER -text -in <i>crl_path</i> -noout</code> </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html\">Planning a certificate revocation list (CRL)</a> in the <i>AWS Certificate Manager Private Certificate Authority (PCA) User Guide</i> </p>"
     },
     "CsrBlob": {
       "type": "blob",
@@ -1070,6 +1154,26 @@
     },
     "CsrBody": {
       "type": "string"
+    },
+    "CsrExtensions": {
+      "type": "structure",
+      "members": {
+        "KeyUsage": {
+          "shape": "KeyUsage",
+          "documentation": "<p>Indicates the purpose of the certificate and of the key contained in the certificate.</p>"
+        },
+        "SubjectInformationAccess": {
+          "shape": "AccessDescriptionList",
+          "documentation": "<p>For CA certificates, provides a path to additional information pertaining to the CA, such as revocation and policy. For more information, see <a href=\"https://tools.ietf.org/html/rfc5280#section-4.2.2.2\">Subject Information Access</a> in RFC 5280.</p>"
+        }
+      },
+      "documentation": "<p>Describes the certificate extensions to be added to the certificate signing request (CSR).</p>"
+    },
+    "CustomObjectIdentifier": {
+      "type": "string",
+      "max": 64,
+      "min": 0,
+      "pattern": "^([0-2])\\.([0-9]|([0-3][0-9]))((\\.([0-9]+)){0,126})$"
     },
     "DeleteCertificateAuthorityRequest": {
       "type": "structure",
@@ -1179,6 +1283,80 @@
         }
       }
     },
+    "EdiPartyName": {
+      "type": "structure",
+      "required": [
+        "PartyName"
+      ],
+      "members": {
+        "PartyName": {
+          "shape": "String256",
+          "documentation": "<p>Specifies the party name.</p>"
+        },
+        "NameAssigner": {
+          "shape": "String256",
+          "documentation": "<p>Specifies the name assigner.</p>"
+        }
+      },
+      "documentation": "<p>Describes an Electronic Data Interchange (EDI) entity as described in as defined in <a href=\"https://tools.ietf.org/html/rfc5280\">Subject Alternative Name</a> in RFC 5280.</p>"
+    },
+    "ExtendedKeyUsage": {
+      "type": "structure",
+      "members": {
+        "ExtendedKeyUsageType": {
+          "shape": "ExtendedKeyUsageType",
+          "documentation": "<p>Specifies a standard <code>ExtendedKeyUsage</code> as defined as in <a href=\"https://tools.ietf.org/html/rfc5280#section-4.2.1.12\">RFC 5280</a>.</p>"
+        },
+        "ExtendedKeyUsageObjectIdentifier": {
+          "shape": "CustomObjectIdentifier",
+          "documentation": "<p>Specifies a custom <code>ExtendedKeyUsage</code> with an object identifier (OID).</p>"
+        }
+      },
+      "documentation": "<p>Specifies additional purposes for which the certified public key may be used other than basic purposes indicated in the <code>KeyUsage</code> extension.</p>"
+    },
+    "ExtendedKeyUsageList": {
+      "type": "list",
+      "member": {
+        "shape": "ExtendedKeyUsage"
+      },
+      "max": 20,
+      "min": 1
+    },
+    "ExtendedKeyUsageType": {
+      "type": "string",
+      "enum": [
+        "SERVER_AUTH",
+        "CLIENT_AUTH",
+        "CODE_SIGNING",
+        "EMAIL_PROTECTION",
+        "TIME_STAMPING",
+        "OCSP_SIGNING",
+        "SMART_CARD_LOGIN",
+        "DOCUMENT_SIGNING",
+        "CERTIFICATE_TRANSPARENCY"
+      ]
+    },
+    "Extensions": {
+      "type": "structure",
+      "members": {
+        "CertificatePolicies": {
+          "shape": "CertificatePolicyList",
+          "documentation": "<p>Contains a sequence of one or more policy information terms, each of which consists of an object identifier (OID) and optional qualifiers. For more information, see NIST's definition of <a href=\"https://csrc.nist.gov/glossary/term/Object_Identifier\">Object Identifier (OID)</a>.</p> <p>In an end-entity certificate, these terms indicate the policy under which the certificate was issued and the purposes for which it may be used. In a CA certificate, these terms limit the set of policies for certification paths that include this certificate.</p>"
+        },
+        "ExtendedKeyUsage": {
+          "shape": "ExtendedKeyUsageList",
+          "documentation": "<p>Specifies additional purposes for which the certified public key may be used other than basic purposes indicated in the <code>KeyUsage</code> extension.</p>"
+        },
+        "KeyUsage": {
+          "shape": "KeyUsage"
+        },
+        "SubjectAlternativeNames": {
+          "shape": "GeneralNameList",
+          "documentation": "<p>The subject alternative name extension allows identities to be bound to the subject of the certificate. These identities may be included in addition to or in place of the identity in the subject field of the certificate.</p>"
+        }
+      },
+      "documentation": "<p>Contains X.509 extension information for a certificate.</p>"
+    },
     "FailureReason": {
       "type": "string",
       "enum": [
@@ -1186,6 +1364,51 @@
         "UNSUPPORTED_ALGORITHM",
         "OTHER"
       ]
+    },
+    "GeneralName": {
+      "type": "structure",
+      "members": {
+        "OtherName": {
+          "shape": "OtherName",
+          "documentation": "<p>Represents <code>GeneralName</code> using an <code>OtherName</code> object.</p>"
+        },
+        "Rfc822Name": {
+          "shape": "String256",
+          "documentation": "<p>Represents <code>GeneralName</code> as an <a href=\"https://tools.ietf.org/html/rfc822\">RFC 822</a> email address.</p>"
+        },
+        "DnsName": {
+          "shape": "String253",
+          "documentation": "<p>Represents <code>GeneralName</code> as a DNS name.</p>"
+        },
+        "DirectoryName": {
+          "shape": "ASN1Subject"
+        },
+        "EdiPartyName": {
+          "shape": "EdiPartyName",
+          "documentation": "<p>Represents <code>GeneralName</code> as an <code>EdiPartyName</code> object.</p>"
+        },
+        "UniformResourceIdentifier": {
+          "shape": "String253",
+          "documentation": "<p>Represents <code>GeneralName</code> as a URI.</p>"
+        },
+        "IpAddress": {
+          "shape": "String39",
+          "documentation": "<p>Represents <code>GeneralName</code> as an IPv4 or IPv6 address.</p>"
+        },
+        "RegisteredId": {
+          "shape": "CustomObjectIdentifier",
+          "documentation": "<p> Represents <code>GeneralName</code> as an object identifier (OID).</p>"
+        }
+      },
+      "documentation": "<p>Describes an ASN.1 X.400 <code>GeneralName</code> as defined in <a href=\"https://tools.ietf.org/html/rfc5280\">RFC 5280</a>. Only one of the following naming options should be provided. Providing more than one option results in an <code>InvalidArgsException</code> error.</p>"
+    },
+    "GeneralNameList": {
+      "type": "list",
+      "member": {
+        "shape": "GeneralName"
+      },
+      "max": 20,
+      "min": 1
     },
     "GetCertificateAuthorityCertificateRequest": {
       "type": "structure",
@@ -1208,7 +1431,7 @@
         },
         "CertificateChain": {
           "shape": "CertificateChain",
-          "documentation": "<p>Base64-encoded certificate chain that includes any intermediate certificates and chains up to root on-premises certificate that you used to sign your private CA certificate. The chain does not include your private CA certificate. If this is a root CA, the value will be null.</p>"
+          "documentation": "<p>Base64-encoded certificate chain that includes any intermediate certificates and chains up to root certificate that you used to sign your private CA certificate. The chain does not include your private CA certificate. If this is a root CA, the value will be null.</p>"
         }
       }
     },
@@ -1259,7 +1482,7 @@
         },
         "CertificateChain": {
           "shape": "CertificateChain",
-          "documentation": "<p>The base64 PEM-encoded certificate chain that chains up to the on-premises root CA certificate that you used to sign your private CA certificate. </p>"
+          "documentation": "<p>The base64 PEM-encoded certificate chain that chains up to the root CA certificate that you used to sign your private CA certificate. </p>"
         }
       }
     },
@@ -1325,29 +1548,37 @@
         "Validity"
       ],
       "members": {
+        "ApiPassthrough": {
+          "shape": "ApiPassthrough",
+          "documentation": "<p>Specifies X.509 certificate information to be included in the issued certificate. An <code>APIPassthrough</code> or <code>APICSRPassthrough</code> template variant must be selected, or else this parameter is ignored. For more information about using these templates, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html\">Understanding Certificate Templates</a>.</p> <p>If conflicting or duplicate certificate information is supplied during certificate issuance, ACM Private CA applies <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html#template-order-of-operations\">order of operation rules</a> to determine what information is used.</p>"
+        },
         "CertificateAuthorityArn": {
           "shape": "Arn",
           "documentation": "<p>The Amazon Resource Name (ARN) that was returned when you called <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html\">CreateCertificateAuthority</a>. This must be of the form:</p> <p> <code>arn:aws:acm-pca:<i>region</i>:<i>account</i>:certificate-authority/<i>12345678-1234-1234-1234-123456789012</i> </code> </p>"
         },
         "Csr": {
           "shape": "CsrBlob",
-          "documentation": "<p>The certificate signing request (CSR) for the certificate you want to issue. You can use the following OpenSSL command to create the CSR and a 2048 bit RSA private key. </p> <p> <code>openssl req -new -newkey rsa:2048 -days 365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr</code> </p> <p>If you have a configuration file, you can use the following OpenSSL command. The <code>usr_cert</code> block in the configuration file contains your X509 version 3 extensions. </p> <p> <code>openssl req -new -config openssl_rsa.cnf -extensions usr_cert -newkey rsa:2048 -days -365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr</code> </p> <p>Note: A CSR must provide either a <i>subject name</i> or a <i>subject alternative name</i> or the request will be rejected. </p>"
+          "documentation": "<p>The certificate signing request (CSR) for the certificate you want to issue. As an example, you can use the following OpenSSL command to create the CSR and a 2048 bit RSA private key. </p> <p> <code>openssl req -new -newkey rsa:2048 -days 365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr</code> </p> <p>If you have a configuration file, you can then use the following OpenSSL command. The <code>usr_cert</code> block in the configuration file contains your X509 version 3 extensions. </p> <p> <code>openssl req -new -config openssl_rsa.cnf -extensions usr_cert -newkey rsa:2048 -days -365 -keyout private/test_cert_priv_key.pem -out csr/test_cert_.csr</code> </p> <p>Note: A CSR must provide either a <i>subject name</i> or a <i>subject alternative name</i> or the request will be rejected. </p>"
         },
         "SigningAlgorithm": {
           "shape": "SigningAlgorithm",
-          "documentation": "<p>The name of the algorithm that will be used to sign the certificate to be issued. </p> <p>This parameter should not be confused with the <code>SigningAlgorithm</code> parameter used to sign a CSR.</p>"
+          "documentation": "<p>The name of the algorithm that will be used to sign the certificate to be issued. </p> <p>This parameter should not be confused with the <code>SigningAlgorithm</code> parameter used to sign a CSR in the <code>CreateCertificateAuthority</code> action.</p>"
         },
         "TemplateArn": {
           "shape": "Arn",
-          "documentation": "<p>Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the <code>EndEntityCertificate/V1</code> template. For CA certificates, you should choose the shortest path length that meets your needs. The path length is indicated by the PathLen<i>N</i> portion of the ARN, where <i>N</i> is the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaTerms.html#terms-cadepth\">CA depth</a>.</p> <p>Note: The CA depth configured on a subordinate CA certificate must not exceed the limit set by its parents in the CA hierarchy.</p> <p>The following service-owned <code>TemplateArn</code> values are supported by ACM Private CA: </p> <ul> <li> <p>arn:aws:acm-pca:::template/CodeSigningCertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/CodeSigningCertificate_CSRPassthrough/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityCertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityCertificate_CSRPassthrough/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityClientAuthCertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityClientAuthCertificate_CSRPassthrough/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityServerAuthCertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/EndEntityServerAuthCertificate_CSRPassthrough/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/OCSPSigningCertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/OCSPSigningCertificate_CSRPassthrough/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/RootCACertificate/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen0/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen1/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen2/V1</p> </li> <li> <p>arn:aws:acm-pca:::template/SubordinateCACertificate_PathLen3/V1</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html\">Using Templates</a>.</p>"
+          "documentation": "<p>Specifies a custom configuration template to use when issuing a certificate. If this parameter is not provided, ACM Private CA defaults to the <code>EndEntityCertificate/V1</code> template. For CA certificates, you should choose the shortest path length that meets your needs. The path length is indicated by the PathLen<i>N</i> portion of the ARN, where <i>N</i> is the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaTerms.html#terms-cadepth\">CA depth</a>.</p> <p>Note: The CA depth configured on a subordinate CA certificate must not exceed the limit set by its parents in the CA hierarchy.</p> <p>For a list of <code>TemplateArn</code> values supported by ACM Private CA, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/UsingTemplates.html\">Understanding Certificate Templates</a>.</p>"
         },
         "Validity": {
           "shape": "Validity",
-          "documentation": "<p>Information describing the validity period of the certificate.</p> <p>When issuing a certificate, ACM Private CA sets the \"Not Before\" date in the validity field to date and time minus 60 minutes. This is intended to compensate for time inconsistencies across systems of 60 minutes or less. </p> <p>The validity period configured on a certificate must not exceed the limit set by its parents in the CA hierarchy.</p>"
+          "documentation": "<p>Information describing the end of the validity period of the certificate. This parameter sets the “Not After” date for the certificate.</p> <p>Certificate validity is the period of time during which a certificate is valid. Validity can be expressed as an explicit date and time when the certificate expires, or as a span of time after issuance, stated in days, months, or years. For more information, see <a href=\"https://tools.ietf.org/html/rfc5280#section-4.1.2.5\">Validity</a> in RFC 5280. </p> <p>This value is unaffected when <code>ValidityNotBefore</code> is also specified. For example, if <code>Validity</code> is set to 20 days in the future, the certificate will expire 20 days from issuance time regardless of the <code>ValidityNotBefore</code> value.</p> <p>The end of the validity period configured on a certificate must not exceed the limit set on its parents in the CA hierarchy.</p>"
+        },
+        "ValidityNotBefore": {
+          "shape": "Validity",
+          "documentation": "<p>Information describing the start of the validity period of the certificate. This parameter sets the “Not Before\" date for the certificate.</p> <p>By default, when issuing a certificate, ACM Private CA sets the \"Not Before\" date to the issuance time minus 60 minutes. This compensates for clock inconsistencies across computer systems. The <code>ValidityNotBefore</code> parameter can be used to customize the “Not Before” value. </p> <p>Unlike the <code>Validity</code> parameter, the <code>ValidityNotBefore</code> parameter is optional.</p> <p>The <code>ValidityNotBefore</code> value is expressed as an explicit date and time, using the <code>Validity</code> type value <code>ABSOLUTE</code>. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_Validity.html\">Validity</a> in this API reference and <a href=\"https://tools.ietf.org/html/rfc5280#section-4.1.2.5\">Validity</a> in RFC 5280.</p>"
         },
         "IdempotencyToken": {
           "shape": "IdempotencyToken",
-          "documentation": "<p>Custom string that can be used to distinguish between calls to the <b>IssueCertificate</b> action. Idempotency tokens time out after one hour. Therefore, if you call <b>IssueCertificate</b> multiple times with the same idempotency token within 5 minutes, ACM Private CA recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, PCA recognizes that you are requesting multiple certificates.</p>"
+          "documentation": "<p>Alphanumeric string that can be used to distinguish between calls to the <b>IssueCertificate</b> action. Idempotency tokens for <b>IssueCertificate</b> time out after one minute. Therefore, if you call <b>IssueCertificate</b> multiple times with the same idempotency token within one minute, ACM Private CA recognizes that you are requesting only one certificate and will issue only one. If you change the idempotency token for each call, PCA recognizes that you are requesting multiple certificates.</p>"
         }
       }
     },
@@ -1368,6 +1599,55 @@
         "EC_prime256v1",
         "EC_secp384r1"
       ]
+    },
+    "KeyStorageSecurityStandard": {
+      "type": "string",
+      "enum": [
+        "FIPS_140_2_LEVEL_2_OR_HIGHER",
+        "FIPS_140_2_LEVEL_3_OR_HIGHER"
+      ]
+    },
+    "KeyUsage": {
+      "type": "structure",
+      "members": {
+        "DigitalSignature": {
+          "shape": "Boolean",
+          "documentation": "<p> Key can be used for digital signing.</p>"
+        },
+        "NonRepudiation": {
+          "shape": "Boolean",
+          "documentation": "<p>Key can be used for non-repudiation.</p>"
+        },
+        "KeyEncipherment": {
+          "shape": "Boolean",
+          "documentation": "<p>Key can be used to encipher data.</p>"
+        },
+        "DataEncipherment": {
+          "shape": "Boolean",
+          "documentation": "<p>Key can be used to decipher data.</p>"
+        },
+        "KeyAgreement": {
+          "shape": "Boolean",
+          "documentation": "<p>Key can be used in a key-agreement protocol.</p>"
+        },
+        "KeyCertSign": {
+          "shape": "Boolean",
+          "documentation": "<p>Key can be used to sign certificates.</p>"
+        },
+        "CRLSign": {
+          "shape": "Boolean",
+          "documentation": "<p>Key can be used to sign CRLs.</p>"
+        },
+        "EncipherOnly": {
+          "shape": "Boolean",
+          "documentation": "<p>Key can be used only to encipher data.</p>"
+        },
+        "DecipherOnly": {
+          "shape": "Boolean",
+          "documentation": "<p>Key can be used only to decipher data.</p>"
+        }
+      },
+      "documentation": "<p>Defines one or more purposes for which the key contained in the certificate can be used. Default value for each option is false.</p>"
     },
     "ListCertificateAuthoritiesRequest": {
       "type": "structure",
@@ -1475,6 +1755,42 @@
       "max": 500,
       "min": 1
     },
+    "OcspConfiguration": {
+      "type": "structure",
+      "required": [
+        "Enabled"
+      ],
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Flag enabling use of the Online Certificate Status Protocol (OCSP) for validating certificate revocation status.</p>",
+          "box": true
+        },
+        "OcspCustomCname": {
+          "shape": "String253",
+          "documentation": "<p>By default, ACM Private CA injects an AWS domain into certificates being validated by the Online Certificate Status Protocol (OCSP). A customer can alternatively use this object to define a CNAME specifying a customized OCSP domain.</p> <p>Note: The value of the CNAME must not include a protocol prefix such as \"http://\" or \"https://\".</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/ocsp-customize.html\">Customizing Online Certificate Status Protocol (OCSP) </a> in the <i>AWS Certificate Manager Private Certificate Authority (PCA) User Guide</i>.</p>"
+        }
+      },
+      "documentation": "<p>Contains information to enable and configure Online Certificate Status Protocol (OCSP) for validating certificate revocation status.</p> <p>When you revoke a certificate, OCSP responses may take up to 60 minutes to reflect the new status.</p>"
+    },
+    "OtherName": {
+      "type": "structure",
+      "required": [
+        "TypeId",
+        "Value"
+      ],
+      "members": {
+        "TypeId": {
+          "shape": "CustomObjectIdentifier",
+          "documentation": "<p>Specifies an OID. </p>"
+        },
+        "Value": {
+          "shape": "String256",
+          "documentation": "<p>Specifies an OID value.</p>"
+        }
+      },
+      "documentation": "<p>Defines a custom ASN.1 X.400 <code>GeneralName</code> using an object identifier (OID) and value. The OID must satisfy the regular expression shown below. For more information, see NIST's definition of <a href=\"https://csrc.nist.gov/glossary/term/Object_Identifier\">Object Identifier (OID)</a>.</p>"
+    },
     "PermanentDeletionTimeInDays": {
       "type": "integer",
       "max": 30,
@@ -1517,6 +1833,55 @@
       },
       "min": 0
     },
+    "PolicyInformation": {
+      "type": "structure",
+      "required": [
+        "CertPolicyId"
+      ],
+      "members": {
+        "CertPolicyId": {
+          "shape": "CustomObjectIdentifier",
+          "documentation": "<p>Specifies the object identifier (OID) of the certificate policy under which the certificate was issued. For more information, see NIST's definition of <a href=\"https://csrc.nist.gov/glossary/term/Object_Identifier\">Object Identifier (OID)</a>.</p>"
+        },
+        "PolicyQualifiers": {
+          "shape": "PolicyQualifierInfoList",
+          "documentation": "<p>Modifies the given <code>CertPolicyId</code> with a qualifier. ACM Private CA supports the certification practice statement (CPS) qualifier.</p>"
+        }
+      },
+      "documentation": "<p>Defines the X.509 <code>CertificatePolicies</code> extension.</p>"
+    },
+    "PolicyQualifierId": {
+      "type": "string",
+      "enum": [
+        "CPS"
+      ]
+    },
+    "PolicyQualifierInfo": {
+      "type": "structure",
+      "required": [
+        "PolicyQualifierId",
+        "Qualifier"
+      ],
+      "members": {
+        "PolicyQualifierId": {
+          "shape": "PolicyQualifierId",
+          "documentation": "<p>Identifies the qualifier modifying a <code>CertPolicyId</code>.</p>"
+        },
+        "Qualifier": {
+          "shape": "Qualifier",
+          "documentation": "<p>Defines the qualifier type. ACM Private CA supports the use of a URI for a CPS qualifier in this field.</p>"
+        }
+      },
+      "documentation": "<p>Modifies the <code>CertPolicyId</code> of a <code>PolicyInformation</code> object with a qualifier. ACM Private CA supports the certification practice statement (CPS) qualifier.</p>"
+    },
+    "PolicyQualifierInfoList": {
+      "type": "list",
+      "member": {
+        "shape": "PolicyQualifierInfo"
+      },
+      "max": 20,
+      "min": 1
+    },
     "PositiveLong": {
       "type": "long",
       "min": 1
@@ -1540,9 +1905,22 @@
         },
         "Policy": {
           "shape": "AWSPolicy",
-          "documentation": "<p>The path and filename of a JSON-formatted IAM policy to attach to the specified private CA resource. If this policy does not contain all required statements or if it includes any statement that is not allowed, the <code>PutPolicy</code> action returns an <code>InvalidPolicyException</code>. For information about IAM policy and statement structure, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json\">Overview of JSON Policies</a>.</p>"
+          "documentation": "<p>The path and file name of a JSON-formatted IAM policy to attach to the specified private CA resource. If this policy does not contain all required statements or if it includes any statement that is not allowed, the <code>PutPolicy</code> action returns an <code>InvalidPolicyException</code>. For information about IAM policy and statement structure, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json\">Overview of JSON Policies</a>.</p>"
         }
       }
+    },
+    "Qualifier": {
+      "type": "structure",
+      "required": [
+        "CpsUri"
+      ],
+      "members": {
+        "CpsUri": {
+          "shape": "String256",
+          "documentation": "<p>Contains a pointer to a certification practice statement (CPS) published by the CA.</p>"
+        }
+      },
+      "documentation": "<p>Defines a <code>PolicyInformation</code> qualifier. ACM Private CA supports the <a href=\"https://tools.ietf.org/html/rfc5280#section-4.2.1.4\">certification practice statement (CPS) qualifier</a> defined in RFC 5280. </p>"
     },
     "ResourceOwner": {
       "type": "string",
@@ -1568,10 +1946,14 @@
       "members": {
         "CrlConfiguration": {
           "shape": "CrlConfiguration",
-          "documentation": "<p>Configuration of the certificate revocation list (CRL), if any, maintained by your private CA.</p>"
+          "documentation": "<p>Configuration of the certificate revocation list (CRL), if any, maintained by your private CA. A CRL is typically updated approximately 30 minutes after a certificate is revoked. If for any reason a CRL update fails, ACM Private CA makes further attempts every 15 minutes.</p>"
+        },
+        "OcspConfiguration": {
+          "shape": "OcspConfiguration",
+          "documentation": "<p>Configuration of Online Certificate Status Protocol (OCSP) support, if any, maintained by your private CA. When you revoke a certificate, OCSP responses may take up to 60 minutes to reflect the new status.</p>"
         }
       },
-      "documentation": "<p>Certificate revocation information used by the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html\">CreateCertificateAuthority</a> and <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html\">UpdateCertificateAuthority</a> actions. Your private certificate authority (CA) can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates revoked by your CA. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html\">RevokeCertificate</a>.</p>"
+      "documentation": "<p>Certificate revocation information used by the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html\">CreateCertificateAuthority</a> and <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html\">UpdateCertificateAuthority</a> actions. Your private certificate authority (CA) can configure Online Certificate Status Protocol (OCSP) support and/or maintain a certificate revocation list (CRL). OCSP returns validation information about certificates as requested by clients, and a CRL contains an updated list of certificates revoked by your CA. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html\">RevokeCertificate</a> and <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/revocation-setup.html\">Setting up a certificate revocation method</a> in the <i>AWS Certificate Manager Private Certificate Authority (PCA) User Guide</i>.</p>"
     },
     "RevocationReason": {
       "type": "string",
@@ -1617,6 +1999,13 @@
       "type": "string",
       "max": 1024
     },
+    "S3ObjectAcl": {
+      "type": "string",
+      "enum": [
+        "PUBLIC_READ",
+        "BUCKET_OWNER_FULL_CONTROL"
+      ]
+    },
     "SigningAlgorithm": {
       "type": "string",
       "enum": [
@@ -1646,9 +2035,19 @@
       "max": 253,
       "min": 0
     },
+    "String256": {
+      "type": "string",
+      "max": 256,
+      "min": 0
+    },
     "String3": {
       "type": "string",
       "max": 3,
+      "min": 0
+    },
+    "String39": {
+      "type": "string",
+      "max": 39,
       "min": 0
     },
     "String3To255": {
@@ -1757,7 +2156,7 @@
         },
         "RevocationConfiguration": {
           "shape": "RevocationConfiguration",
-          "documentation": "<p>Revocation information for your private CA.</p>"
+          "documentation": "<p>Contains information to enable Online Certificate Status Protocol (OCSP) support, to enable a certificate revocation list (CRL), to enable both, or to enable neither. If this parameter is not supplied, existing capibilites remain unchanged. For more information, see the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_OcspConfiguration.html\">OcspConfiguration</a> and <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html\">CrlConfiguration</a> types.</p>"
         },
         "Status": {
           "shape": "CertificateAuthorityStatus",
@@ -1779,10 +2178,10 @@
         },
         "Type": {
           "shape": "ValidityPeriodType",
-          "documentation": "<p>Determines how <i>ACM Private CA</i> interprets the <code>Value</code> parameter, an integer. Supported validity types include those listed below. Type definitions with values include a sample input value and the resulting output. </p> <p> <code>END_DATE</code>: The specific date and time when the certificate will expire, expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format. When UTCTime is used, if the year field (YY) is greater than or equal to 50, the year is interpreted as 19YY. If the year field is less than 50, the year is interpreted as 20YY.</p> <ul> <li> <p>Sample input value: 491231235959 (UTCTime format)</p> </li> <li> <p>Output expiration date/time: 12/31/2049 23:59:59</p> </li> </ul> <p> <code>ABSOLUTE</code>: The specific date and time when the certificate will expire, expressed in seconds since the Unix Epoch. </p> <ul> <li> <p>Sample input value: 2524608000</p> </li> <li> <p>Output expiration date/time: 01/01/2050 00:00:00</p> </li> </ul> <p> <code>DAYS</code>, <code>MONTHS</code>, <code>YEARS</code>: The relative time from the moment of issuance until the certificate will expire, expressed in days, months, or years. </p> <p>Example if <code>DAYS</code>, issued on 10/12/2020 at 12:34:54 UTC:</p> <ul> <li> <p>Sample input value: 90</p> </li> <li> <p>Output expiration date: 01/10/2020 12:34:54 UTC</p> </li> </ul>"
+          "documentation": "<p>Determines how <i>ACM Private CA</i> interprets the <code>Value</code> parameter, an integer. Supported validity types include those listed below. Type definitions with values include a sample input value and the resulting output. </p> <p> <code>END_DATE</code>: The specific date and time when the certificate will expire, expressed using UTCTime (YYMMDDHHMMSS) or GeneralizedTime (YYYYMMDDHHMMSS) format. When UTCTime is used, if the year field (YY) is greater than or equal to 50, the year is interpreted as 19YY. If the year field is less than 50, the year is interpreted as 20YY.</p> <ul> <li> <p>Sample input value: 491231235959 (UTCTime format)</p> </li> <li> <p>Output expiration date/time: 12/31/2049 23:59:59</p> </li> </ul> <p> <code>ABSOLUTE</code>: The specific date and time when the validity of a certificate will start or expire, expressed in seconds since the Unix Epoch. </p> <ul> <li> <p>Sample input value: 2524608000</p> </li> <li> <p>Output expiration date/time: 01/01/2050 00:00:00</p> </li> </ul> <p> <code>DAYS</code>, <code>MONTHS</code>, <code>YEARS</code>: The relative time from the moment of issuance until the certificate will expire, expressed in days, months, or years. </p> <p>Example if <code>DAYS</code>, issued on 10/12/2020 at 12:34:54 UTC:</p> <ul> <li> <p>Sample input value: 90</p> </li> <li> <p>Output expiration date: 01/10/2020 12:34:54 UTC</p> </li> </ul> <p>The minimum validity duration for a certificate using relative time (<code>DAYS</code>) is one day. The minimum validity for a certificate using absolute time (<code>ABSOLUTE</code> or <code>END_DATE</code>) is one second.</p>"
         }
       },
-      "documentation": "<p>Validity specifies the period of time during which a certificate is valid. Validity can be expressed as an explicit date and time when the certificate expires, or as a span of time after issuance, stated in days, months, or years. For more information, see <a href=\"https://tools.ietf.org/html/rfc5280#section-4.1.2.5\">Validity</a> in RFC 5280.</p> <p>You can issue a certificate by calling the <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_IssueCertificate.html\">IssueCertificate</a> action.</p>"
+      "documentation": "<p>Validity specifies the period of time during which a certificate is valid. Validity can be expressed as an explicit date and time when the validity of a certificate starts or expires, or as a span of time after issuance, stated in days, months, or years. For more information, see <a href=\"https://tools.ietf.org/html/rfc5280#section-4.1.2.5\">Validity</a> in RFC 5280.</p> <p>ACM Private CA API consumes the <code>Validity</code> data type differently in two distinct parameters of the <code>IssueCertificate</code> action. The required parameter <code>IssueCertificate</code>:<code>Validity</code> specifies the end of a certificate's validity period. The optional parameter <code>IssueCertificate</code>:<code>ValidityNotBefore</code> specifies a customized starting time for the validity period.</p>"
     },
     "ValidityPeriodType": {
       "type": "string",
@@ -1795,5 +2194,5 @@
       ]
     }
   },
-  "documentation": "<note> <p/> </note> <p>This is the <i>ACM Private CA API Reference</i>. It provides descriptions, syntax, and usage examples for each of the actions and data types involved in creating and managing private certificate authorities (CA) for your organization.</p> <p>The documentation for each action shows the Query API request parameters and the XML response. Alternatively, you can use one of the AWS SDKs to access an API that's tailored to the programming language or platform that you're using. For more information, see <a href=\"https://aws.amazon.com/tools/#SDKs\">AWS SDKs</a>.</p> <note> <p>Each ACM Private CA API action has a quota that determines the number of times the action can be called per second. For more information, see <a href=\"https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaLimits.html#PcaLimits-api\">API Rate Quotas in ACM Private CA</a> in the ACM Private CA user guide.</p> </note>"
+  "documentation": "<p>This is the <i>ACM Private CA API Reference</i>. It provides descriptions, syntax, and usage examples for each of the actions and data types involved in creating and managing private certificate authorities (CA) for your organization.</p> <p>The documentation for each action shows the Query API request parameters and the XML response. Alternatively, you can use one of the AWS SDKs to access an API that's tailored to the programming language or platform that you're using. For more information, see <a href=\"https://aws.amazon.com/tools/#SDKs\">AWS SDKs</a>.</p> <p>Each ACM Private CA API operation has a quota that determines the number of times the operation can be called per second. ACM Private CA throttles API requests at different rates depending on the operation. Throttling means that ACM Private CA rejects an otherwise valid request because the request exceeds the operation's quota for the number of requests per second. When a request is throttled, ACM Private CA returns a <a href=\"https://docs.aws.amazon.com/acm-pca/latest/APIReference/CommonErrors.html\">ThrottlingException</a> error. ACM Private CA does not guarantee a minimum request rate for APIs. </p> <p>To see an up-to-date list of your ACM Private CA quotas, or to request a quota increase, log into your AWS account and visit the <a href=\"https://console.aws.amazon.com/servicequotas/\">Service Quotas</a> console.</p>"
 }

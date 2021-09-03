@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "The AWS Elemental MediaLive APIs and SDKs now support the ability to transfer the ownership of MediaLive Link devices across AWS accounts."
+    }
+]

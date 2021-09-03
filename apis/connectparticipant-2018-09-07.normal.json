@@ -13,6 +13,40 @@
     "uid": "connectparticipant-2018-09-07"
   },
   "operations": {
+    "CompleteAttachmentUpload": {
+      "name": "CompleteAttachmentUpload",
+      "http": {
+        "method": "POST",
+        "requestUri": "/participant/complete-attachment-upload"
+      },
+      "input": {
+        "shape": "CompleteAttachmentUploadRequest"
+      },
+      "output": {
+        "shape": "CompleteAttachmentUploadResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Allows you to confirm that the attachment has been uploaded using the pre-signed URL provided in StartAttachmentUpload API. </p>"
+    },
     "CreateParticipantConnection": {
       "name": "CreateParticipantConnection",
       "http": {
@@ -39,7 +73,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Creates the participant's connection. Note that ParticipantToken is used for invoking this API instead of ConnectionToken.</p> <p>The participant token is valid for the lifetime of the participant – until the they are part of a contact.</p> <p>The response URL for <code>WEBSOCKET</code> Type has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic. </p> <p>For chat, you need to publish the following on the established websocket connection:</p> <p> <code>{\"topic\":\"aws/subscribe\",\"content\":{\"topics\":[\"aws/chat\"]}}</code> </p> <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.</p>"
+      "documentation": "<p>Creates the participant's connection. Note that ParticipantToken is used for invoking this API instead of ConnectionToken.</p> <p>The participant token is valid for the lifetime of the participant – until they are part of a contact.</p> <p>The response URL for <code>WEBSOCKET</code> Type has a connect expiry timeout of 100s. Clients must manually connect to the returned websocket URL and subscribe to the desired topic. </p> <p>For chat, you need to publish the following on the established websocket connection:</p> <p> <code>{\"topic\":\"aws/subscribe\",\"content\":{\"topics\":[\"aws/chat\"]}}</code> </p> <p>Upon websocket URL expiry, as specified in the response ConnectionExpiry parameter, clients need to call this API again to obtain a new websocket URL and perform the same steps as before.</p> <note> <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 authentication</a>.</p> </note>"
     },
     "DisconnectParticipant": {
       "name": "DisconnectParticipant",
@@ -67,7 +101,35 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Disconnects a participant. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.</p>"
+      "documentation": "<p>Disconnects a participant. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.</p> <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 authentication</a>.</p>"
+    },
+    "GetAttachment": {
+      "name": "GetAttachment",
+      "http": {
+        "method": "POST",
+        "requestUri": "/participant/attachment"
+      },
+      "input": {
+        "shape": "GetAttachmentRequest"
+      },
+      "output": {
+        "shape": "GetAttachmentResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Provides a pre-signed URL for download of a completed attachment. This is an asynchronous API for use with active contacts.</p>"
     },
     "GetTranscript": {
       "name": "GetTranscript",
@@ -95,7 +157,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Retrieves a transcript of the session. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.</p>"
+      "documentation": "<p>Retrieves a transcript of the session, including details about any attachments. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.</p> <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 authentication</a>.</p>"
     },
     "SendEvent": {
       "name": "SendEvent",
@@ -123,7 +185,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Sends an event. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.</p>"
+      "documentation": "<p>Sends an event. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.</p> <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 authentication</a>.</p>"
     },
     "SendMessage": {
       "name": "SendMessage",
@@ -151,10 +213,99 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Sends a message. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.</p>"
+      "documentation": "<p>Sends a message. Note that ConnectionToken is used for invoking this API instead of ParticipantToken.</p> <note> <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4 authentication</a>.</p> </note>"
+    },
+    "StartAttachmentUpload": {
+      "name": "StartAttachmentUpload",
+      "http": {
+        "method": "POST",
+        "requestUri": "/participant/start-attachment-upload"
+      },
+      "input": {
+        "shape": "StartAttachmentUploadRequest"
+      },
+      "output": {
+        "shape": "StartAttachmentUploadResponse"
+      },
+      "errors": [
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        }
+      ],
+      "documentation": "<p>Provides a pre-signed Amazon S3 URL in response for uploading the file directly to S3.</p>"
     }
   },
   "shapes": {
+    "ArtifactId": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
+    "ArtifactStatus": {
+      "type": "string",
+      "enum": [
+        "APPROVED",
+        "REJECTED",
+        "IN_PROGRESS"
+      ]
+    },
+    "AttachmentIdList": {
+      "type": "list",
+      "member": {
+        "shape": "ArtifactId"
+      },
+      "max": 1,
+      "min": 1
+    },
+    "AttachmentItem": {
+      "type": "structure",
+      "members": {
+        "ContentType": {
+          "shape": "ContentType",
+          "documentation": "<p>Describes the MIME file type of the attachment. For a list of supported file types, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits\">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+        },
+        "AttachmentId": {
+          "shape": "ArtifactId",
+          "documentation": "<p>A unique identifier for the attachment.</p>"
+        },
+        "AttachmentName": {
+          "shape": "AttachmentName",
+          "documentation": "<p>A case-sensitive name of the attachment being uploaded.</p>"
+        },
+        "Status": {
+          "shape": "ArtifactStatus",
+          "documentation": "<p>Status of the attachment.</p>"
+        }
+      },
+      "documentation": "<p>The case-insensitive input to indicate standard MIME type that describes the format of the file that will be uploaded.</p>"
+    },
+    "AttachmentName": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
+    "AttachmentSizeInBytes": {
+      "type": "long",
+      "min": 1
+    },
+    "Attachments": {
+      "type": "list",
+      "member": {
+        "shape": "AttachmentItem"
+      }
+    },
     "ChatContent": {
       "type": "string",
       "max": 1024,
@@ -173,14 +324,50 @@
     "ChatItemType": {
       "type": "string",
       "enum": [
+        "TYPING",
+        "PARTICIPANT_JOINED",
+        "PARTICIPANT_LEFT",
+        "CHAT_ENDED",
+        "TRANSFER_SUCCEEDED",
+        "TRANSFER_FAILED",
         "MESSAGE",
         "EVENT",
+        "ATTACHMENT",
         "CONNECTION_ACK"
       ]
     },
     "ClientToken": {
       "type": "string",
       "max": 500
+    },
+    "CompleteAttachmentUploadRequest": {
+      "type": "structure",
+      "required": [
+        "AttachmentIds",
+        "ClientToken",
+        "ConnectionToken"
+      ],
+      "members": {
+        "AttachmentIds": {
+          "shape": "AttachmentIdList",
+          "documentation": "<p>A list of unique identifiers for the attachments.</p>"
+        },
+        "ClientToken": {
+          "shape": "NonEmptyClientToken",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "idempotencyToken": true
+        },
+        "ConnectionToken": {
+          "shape": "ParticipantToken",
+          "documentation": "<p>The authentication token associated with the participant's connection.</p>",
+          "location": "header",
+          "locationName": "X-Amz-Bearer"
+        }
+      }
+    },
+    "CompleteAttachmentUploadResponse": {
+      "type": "structure",
+      "members": {}
     },
     "ConnectionCredentials": {
       "type": "structure",
@@ -215,6 +402,11 @@
       "max": 256,
       "min": 1
     },
+    "ContentType": {
+      "type": "string",
+      "max": 255,
+      "min": 1
+    },
     "CreateParticipantConnectionRequest": {
       "type": "structure",
       "required": [
@@ -228,7 +420,7 @@
         },
         "ParticipantToken": {
           "shape": "ParticipantToken",
-          "documentation": "<p>Participant Token as obtained from <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContactResponse.html\">StartChatContact</a> API response.</p>",
+          "documentation": "<p>This is a header parameter.</p> <p>The Participant Token as obtained from <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_StartChatContact.html\">StartChatContact</a> API response.</p>",
           "location": "header",
           "locationName": "X-Amz-Bearer"
         }
@@ -274,6 +466,38 @@
       "type": "string",
       "max": 256,
       "min": 1
+    },
+    "GetAttachmentRequest": {
+      "type": "structure",
+      "required": [
+        "AttachmentId",
+        "ConnectionToken"
+      ],
+      "members": {
+        "AttachmentId": {
+          "shape": "ArtifactId",
+          "documentation": "<p>A unique identifier for the attachment.</p>"
+        },
+        "ConnectionToken": {
+          "shape": "ParticipantToken",
+          "documentation": "<p>The authentication token associated with the participant's connection.</p>",
+          "location": "header",
+          "locationName": "X-Amz-Bearer"
+        }
+      }
+    },
+    "GetAttachmentResponse": {
+      "type": "structure",
+      "members": {
+        "Url": {
+          "shape": "PreSignedAttachmentUrl",
+          "documentation": "<p>The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.</p>"
+        },
+        "UrlExpiry": {
+          "shape": "ISO8601Datetime",
+          "documentation": "<p>The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>"
+        }
+      }
     },
     "GetTranscriptRequest": {
       "type": "structure",
@@ -373,6 +597,10 @@
         "ParticipantRole": {
           "shape": "ParticipantRole",
           "documentation": "<p>The role of the sender. For example, is it a customer, agent, or system.</p>"
+        },
+        "Attachments": {
+          "shape": "Attachments",
+          "documentation": "<p>Provides information about the attachments.</p>"
         }
       },
       "documentation": "<p>An item - message or event - that has been sent. </p>"
@@ -392,6 +620,11 @@
       "max": 1000,
       "min": 1
     },
+    "NonEmptyClientToken": {
+      "type": "string",
+      "max": 500,
+      "min": 1
+    },
     "ParticipantId": {
       "type": "string",
       "max": 256,
@@ -408,6 +641,11 @@
     "ParticipantToken": {
       "type": "string",
       "max": 1000,
+      "min": 1
+    },
+    "PreSignedAttachmentUrl": {
+      "type": "string",
+      "max": 2000,
       "min": 1
     },
     "PreSignedConnectionUrl": {
@@ -512,6 +750,54 @@
         "ASCENDING"
       ]
     },
+    "StartAttachmentUploadRequest": {
+      "type": "structure",
+      "required": [
+        "ContentType",
+        "AttachmentSizeInBytes",
+        "AttachmentName",
+        "ClientToken",
+        "ConnectionToken"
+      ],
+      "members": {
+        "ContentType": {
+          "shape": "ContentType",
+          "documentation": "<p>Describes the MIME file type of the attachment. For a list of supported file types, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#feature-limits\">Feature specifications</a> in the <i>Amazon Connect Administrator Guide</i>.</p>"
+        },
+        "AttachmentSizeInBytes": {
+          "shape": "AttachmentSizeInBytes",
+          "documentation": "<p>The size of the attachment in bytes.</p>"
+        },
+        "AttachmentName": {
+          "shape": "AttachmentName",
+          "documentation": "<p>A case-sensitive name of the attachment being uploaded.</p>"
+        },
+        "ClientToken": {
+          "shape": "NonEmptyClientToken",
+          "documentation": "<p>A unique case sensitive identifier to support idempotency of request.</p>",
+          "idempotencyToken": true
+        },
+        "ConnectionToken": {
+          "shape": "ParticipantToken",
+          "documentation": "<p>The authentication token associated with the participant's connection.</p>",
+          "location": "header",
+          "locationName": "X-Amz-Bearer"
+        }
+      }
+    },
+    "StartAttachmentUploadResponse": {
+      "type": "structure",
+      "members": {
+        "AttachmentId": {
+          "shape": "ArtifactId",
+          "documentation": "<p>A unique identifier for the attachment.</p>"
+        },
+        "UploadMetadata": {
+          "shape": "UploadMetadata",
+          "documentation": "<p>Fields to be used while uploading the attachment.</p>"
+        }
+      }
+    },
     "StartPosition": {
       "type": "structure",
       "members": {
@@ -535,6 +821,48 @@
       "member": {
         "shape": "Item"
       }
+    },
+    "UploadMetadata": {
+      "type": "structure",
+      "members": {
+        "Url": {
+          "shape": "UploadMetadataUrl",
+          "documentation": "<p>The pre-signed URL using which file would be downloaded from Amazon S3 by the API caller.</p>"
+        },
+        "UrlExpiry": {
+          "shape": "ISO8601Datetime",
+          "documentation": "<p>The expiration time of the URL in ISO timestamp. It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.</p>"
+        },
+        "HeadersToInclude": {
+          "shape": "UploadMetadataSignedHeaders",
+          "documentation": "<p>The headers to be provided while uploading the file to the URL.</p>"
+        }
+      },
+      "documentation": "<p>Fields to be used while uploading the attachment.</p>"
+    },
+    "UploadMetadataSignedHeaders": {
+      "type": "map",
+      "key": {
+        "shape": "UploadMetadataSignedHeadersKey"
+      },
+      "value": {
+        "shape": "UploadMetadataSignedHeadersValue"
+      }
+    },
+    "UploadMetadataSignedHeadersKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "UploadMetadataSignedHeadersValue": {
+      "type": "string",
+      "max": 256,
+      "min": 1
+    },
+    "UploadMetadataUrl": {
+      "type": "string",
+      "max": 2000,
+      "min": 1
     },
     "Websocket": {
       "type": "structure",

@@ -1700,11 +1700,11 @@ declare namespace Pinpoint {
      */
     LastModifiedDate?: __string;
     /**
-     * The default sending limits for campaigns and journeys in the application.
+     * The default sending limits for campaigns in the application.
      */
     Limits?: CampaignLimits;
     /**
-     * The default quiet time for campaigns and journeys in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met: The EndpointDemographic.Timezone property of the endpoint is set to a valid value. The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings). The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings). If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.
+     * The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met: The EndpointDemographic.Timezone property of the endpoint is set to a valid value. The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings). The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings). If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled.
      */
     QuietTime?: QuietTime;
   }
@@ -1720,7 +1720,7 @@ declare namespace Pinpoint {
   }
   export interface AttributeDimension {
     /**
-     * The type of segment dimension to use. Valid values are: INCLUSIVE, endpoints that match the criteria are included in the segment; and, EXCLUSIVE, endpoints that match the criteria are excluded from the segment.
+     * The type of segment dimension to use. Valid values are: INCLUSIVE - endpoints that have attributes matching the values are included in the segment.EXCLUSIVE - endpoints that have attributes matching the values are excluded in the segment.CONTAINS - endpoints that have attributes' substrings match the values are included in the segment.BEFORE - endpoints with attributes read as ISO_INSTANT datetimes before the value are included in the segment.AFTER - endpoints with attributes read as ISO_INSTANT datetimes after the value are included in the segment.ON - endpoints with attributes read as ISO_INSTANT dates on the value are included in the segment. Time is ignored in this comparison.BETWEEN - endpoints with attributes read as ISO_INSTANT datetimes between the values are included in the segment.
      */
     AttributeType?: AttributeType;
     /**
@@ -1728,7 +1728,7 @@ declare namespace Pinpoint {
      */
     Values: ListOf__string;
   }
-  export type AttributeType = "INCLUSIVE"|"EXCLUSIVE"|string;
+  export type AttributeType = "INCLUSIVE"|"EXCLUSIVE"|"CONTAINS"|"BEFORE"|"AFTER"|"ON"|"BETWEEN"|string;
   export interface AttributesResource {
     /**
      * The unique identifier for the application.
@@ -1955,7 +1955,7 @@ declare namespace Pinpoint {
      */
     MaximumDuration?: __integer;
     /**
-     * The maximum number of messages that a campaign can send each second. For an application, this value specifies the default limit for the number of messages that campaigns and journeys can send each second. The minimum value is 50. The maximum value is 20,000.
+     * The maximum number of messages that a campaign can send each second. For an application, this value specifies the default limit for the number of messages that campaigns can send each second. The minimum value is 50. The maximum value is 20,000.
      */
     MessagesPerSecond?: __integer;
     /**
@@ -2071,9 +2071,21 @@ declare namespace Pinpoint {
      */
     MessageType?: MessageType;
     /**
+     * The long code to send the SMS message from. This value should be one of the dedicated long codes that's assigned to your AWS account. Although it isn't required, we recommend that you specify the long code using an E.164 format to ensure prompt and accurate delivery of the message. For example, +12065550100.
+     */
+    OriginationNumber?: __string;
+    /**
      * The sender ID to display on recipients' devices when they receive the SMS message.
      */
     SenderId?: __string;
+    /**
+     * The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.
+     */
+    EntityId?: __string;
+    /**
+     * The template ID received from the regulatory body for sending SMS in your country.
+     */
+    TemplateId?: __string;
   }
   export interface CampaignState {
     /**
@@ -2081,7 +2093,7 @@ declare namespace Pinpoint {
      */
     CampaignStatus?: CampaignStatus;
   }
-  export type CampaignStatus = "SCHEDULED"|"EXECUTING"|"PENDING_NEXT_RUN"|"COMPLETED"|"PAUSED"|"DELETED"|string;
+  export type CampaignStatus = "SCHEDULED"|"EXECUTING"|"PENDING_NEXT_RUN"|"COMPLETED"|"PAUSED"|"DELETED"|"INVALID"|string;
   export interface CampaignsResponse {
     /**
      * An array of responses, one for each campaign that's associated with the application.
@@ -2341,7 +2353,7 @@ declare namespace Pinpoint {
   }
   export interface CustomMessageActivity {
     /**
-     * The destination to send the custom message to. This value can be one of the following: The name or Amazon Resource Name (ARN) of an AWS Lambda function to invoke to handle delivery of the custom message. The URL for a web application or service that supports HTTPS and can receive the message. The URL has to be a full URL, including the HTTPS protocol.
+     * The destination to send the campaign or treatment to. This value can be one of the following: The name or Amazon Resource Name (ARN) of an AWS Lambda function to invoke to handle delivery of the campaign or treatment. The URL for a web application or service that supports HTTPS and can receive the message. The URL has to be a full URL, including the HTTPS protocol.
      */
     DeliveryUri?: __string;
     /**
@@ -3282,6 +3294,16 @@ declare namespace Pinpoint {
      */
     Metrics?: MapOfMetricDimension;
   }
+  export interface EventFilter {
+    /**
+     * The dimensions for the event filter to use for the campaign or the journey activity.
+     */
+    Dimensions: EventDimensions;
+    /**
+     * The type of event that causes the campaign to be sent or the journey activity to be performed. Valid values are: SYSTEM, sends the campaign or performs the activity when a system event occurs; and, ENDPOINT, sends the campaign or performs the activity when an endpoint event (Events resource) occurs.
+     */
+    FilterType: FilterType;
+  }
   export interface EventItemResponse {
     /**
      * A custom message that's returned in the response as a result of processing the event.
@@ -3291,6 +3313,10 @@ declare namespace Pinpoint {
      * The status code that's returned in the response as a result of processing the event. Possible values are: 202, for events that were accepted; and, 400, for events that weren't valid.
      */
     StatusCode?: __integer;
+  }
+  export interface EventStartCondition {
+    EventFilter?: EventFilter;
+    SegmentId?: __string;
   }
   export interface EventStream {
     /**
@@ -4496,6 +4522,10 @@ declare namespace Pinpoint {
      * The maximum number of messages that the journey can send each second.
      */
     MessagesPerSecond?: __integer;
+    /**
+     * Minimum time that must pass before an endpoint can re-enter a given journey. The duration should use an ISO 8601 format, such as PT1H. 
+     */
+    EndpointReentryInterval?: __string;
   }
   export interface JourneyPushMessage {
     /**
@@ -4564,6 +4594,14 @@ declare namespace Pinpoint {
      * This object is not used or supported.
      */
     tags?: MapOf__string;
+    /**
+     * Specifies whether endpoints in quiet hours should enter a wait till the end of their quiet hours.
+     */
+    WaitForQuietTime?: __boolean;
+    /**
+     * Specifies whether a journey should be refreshed on segment update.
+     */
+    RefreshOnSegmentUpdate?: __boolean;
   }
   export interface JourneySMSMessage {
     /**
@@ -4571,9 +4609,21 @@ declare namespace Pinpoint {
      */
     MessageType?: MessageType;
     /**
+     * The long code to send the SMS message from. This value should be one of the dedicated long codes that's assigned to your AWS account. Although it isn't required, we recommend that you specify the long code using an E.164 format to ensure prompt and accurate delivery of the message. For example, +12065550100.
+     */
+    OriginationNumber?: __string;
+    /**
      * The sender ID to display as the sender of the message on a recipient's device. Support for sender IDs varies by country or region. For more information, see Supported Countries and Regions in the Amazon Pinpoint User Guide.
      */
     SenderId?: __string;
+    /**
+     * The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.
+     */
+    EntityId?: __string;
+    /**
+     * The template ID received from the regulatory body for sending SMS in your country.
+     */
+    TemplateId?: __string;
   }
   export interface JourneySchedule {
     /**
@@ -4596,7 +4646,7 @@ declare namespace Pinpoint {
   }
   export interface JourneyStateRequest {
     /**
-     * The status of the journey. Currently, the only supported value is CANCELLED. If you cancel a journey, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Amazon Pinpoint also continues to collect and aggregate analytics data for those activities, until they are complete, and any activities that were complete when you cancelled the journey. After you cancel a journey, you can't add, change, or remove any activities from the journey. In addition, Amazon Pinpoint stops evaluating the journey and doesn't perform any activities that haven't started.
+     * The status of the journey. Currently, Supported values are ACTIVE, PAUSED, and CANCELLED If you cancel a journey, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Amazon Pinpoint also continues to collect and aggregate analytics data for those activities, until they are complete, and any activities that were complete when you cancelled the journey. After you cancel a journey, you can't add, change, or remove any activities from the journey. In addition, Amazon Pinpoint stops evaluating the journey and doesn't perform any activities that haven't started. When the journey is paused, Amazon Pinpoint continues to perform activities that are currently in progress, until those activities are complete. Endpoints will stop entering journeys when the journey is paused and will resume entering the journey after the journey is resumed. For wait activities, wait time is paused when the journey is paused. Currently, PAUSED only supports journeys with a segment refresh interval.
      */
     State?: State;
   }
@@ -5358,7 +5408,7 @@ declare namespace Pinpoint {
      */
     Keyword?: __string;
     /**
-     * The URL of an image or video to display in the SMS message.
+     * This field is reserved for future use.
      */
     MediaUrl?: __string;
     /**
@@ -5377,6 +5427,14 @@ declare namespace Pinpoint {
      * The message variables to use in the SMS message. You can override the default variables with individual address variables.
      */
     Substitutions?: MapOfListOf__string;
+    /**
+     * The entity ID or Principal Entity (PE) id received from the regulatory body for sending SMS in your country.
+     */
+    EntityId?: __string;
+    /**
+     * The template ID received from the regulatory body for sending SMS in your country.
+     */
+    TemplateId?: __string;
   }
   export interface SMSMessageActivity {
     /**
@@ -5824,12 +5882,13 @@ declare namespace Pinpoint {
      * The custom description of the condition.
      */
     Description?: __string;
+    EventStartCondition?: EventStartCondition;
     /**
      * The segment that's associated with the first activity in the journey. This segment determines which users are participants in the journey.
      */
     SegmentStartCondition?: SegmentCondition;
   }
-  export type State = "DRAFT"|"ACTIVE"|"COMPLETED"|"CANCELLED"|"CLOSED"|string;
+  export type State = "DRAFT"|"ACTIVE"|"COMPLETED"|"CANCELLED"|"CLOSED"|"PAUSED"|string;
   export interface TagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource.
@@ -6528,12 +6587,13 @@ declare namespace Pinpoint {
      * Specifies whether to enable application-related alarms in Amazon CloudWatch.
      */
     CloudWatchMetricsEnabled?: __boolean;
+    EventTaggingEnabled?: __boolean;
     /**
-     * The default sending limits for campaigns and journeys in the application. To override these limits and define custom limits for a specific campaign or journey, use the Campaign resource or the Journey resource, respectively.
+     * The default sending limits for campaigns in the application. To override these limits and define custom limits for a specific campaign or journey, use the Campaign resource or the Journey resource, respectively.
      */
     Limits?: CampaignLimits;
     /**
-     * The default quiet time for campaigns and journeys in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met: The EndpointDemographic.Timezone property of the endpoint is set to a valid value. The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings). The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings). If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled. To override the default quiet time settings for a specific campaign or journey, use the Campaign resource or the Journey resource to define a custom quiet time for the campaign or journey.
+     * The default quiet time for campaigns in the application. Quiet time is a specific time range when messages aren't sent to endpoints, if all the following conditions are met: The EndpointDemographic.Timezone property of the endpoint is set to a valid value. The current time in the endpoint's time zone is later than or equal to the time specified by the QuietTime.Start property for the application (or a campaign or journey that has custom quiet time settings). The current time in the endpoint's time zone is earlier than or equal to the time specified by the QuietTime.End property for the application (or a campaign or journey that has custom quiet time settings). If any of the preceding conditions isn't met, the endpoint will receive messages from a campaign or journey, even if quiet time is enabled. To override the default quiet time settings for a specific campaign or journey, use the Campaign resource or the Journey resource to define a custom quiet time for the campaign or journey.
      */
     QuietTime?: QuietTime;
   }
@@ -6661,9 +6721,17 @@ declare namespace Pinpoint {
      */
     StartCondition?: StartCondition;
     /**
-     * The status of the journey. Valid values are: DRAFT - Saves the journey and doesn't publish it. ACTIVE - Saves and publishes the journey. Depending on the journey's schedule, the journey starts running immediately or at the scheduled start time. If a journey's status is ACTIVE, you can't add, change, or remove activities from it. The CANCELLED, COMPLETED, and CLOSED values are not supported in requests to create or update a journey. To cancel a journey, use the Journey State resource.
+     * The status of the journey. Valid values are: DRAFT - Saves the journey and doesn't publish it. ACTIVE - Saves and publishes the journey. Depending on the journey's schedule, the journey starts running immediately or at the scheduled start time. If a journey's status is ACTIVE, you can't add, change, or remove activities from it. PAUSED, CANCELLED, COMPLETED, and CLOSED states are not supported in requests to create or update a journey. To cancel, pause, or resume a journey, use the Journey State resource.
      */
     State?: State;
+    /**
+     * Specifies whether endpoints in quiet hours should enter a wait till the end of their quiet hours.
+     */
+    WaitForQuietTime?: __boolean;
+    /**
+     * Specifies whether a journey should be refreshed on segment update.
+     */
+    RefreshOnSegmentUpdate?: __boolean;
   }
   export interface WriteSegmentRequest {
     /**

@@ -13,6 +13,29 @@
     "xmlNamespace": "http://rds.amazonaws.com/doc/2014-10-31/"
   },
   "operations": {
+    "AddSourceIdentifierToSubscription": {
+      "name": "AddSourceIdentifierToSubscription",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AddSourceIdentifierToSubscriptionMessage"
+      },
+      "output": {
+        "shape": "AddSourceIdentifierToSubscriptionResult",
+        "resultWrapper": "AddSourceIdentifierToSubscriptionResult"
+      },
+      "errors": [
+        {
+          "shape": "SubscriptionNotFoundFault"
+        },
+        {
+          "shape": "SourceNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Adds a source identifier to an existing event notification subscription.</p>"
+    },
     "AddTagsToResource": {
       "name": "AddTagsToResource",
       "http": {
@@ -33,7 +56,7 @@
           "shape": "DBClusterNotFoundFault"
         }
       ],
-      "documentation": "<p>Adds metadata tags to an Amazon DocumentDB resource. You can use these tags with cost allocation reporting to track costs that are associated with Amazon DocumentDB resources. or in a <code>Condition</code> statement in an AWS Identity and Access Management (IAM) policy for Amazon DocumentDB.</p>"
+      "documentation": "<p>Adds metadata tags to an Amazon DocumentDB resource. You can use these tags with cost allocation reporting to track costs that are associated with Amazon DocumentDB resources or in a <code>Condition</code> statement in an Identity and Access Management (IAM) policy for Amazon DocumentDB.</p>"
     },
     "ApplyPendingMaintenanceAction": {
       "name": "ApplyPendingMaintenanceAction",
@@ -59,7 +82,7 @@
           "shape": "InvalidDBInstanceStateFault"
         }
       ],
-      "documentation": "<p>Applies a pending maintenance action to a resource (for example, to a DB instance).</p>"
+      "documentation": "<p>Applies a pending maintenance action to a resource (for example, to an Amazon DocumentDB instance).</p>"
     },
     "CopyDBClusterParameterGroup": {
       "name": "CopyDBClusterParameterGroup",
@@ -120,7 +143,7 @@
           "shape": "KMSKeyNotAccessibleFault"
         }
       ],
-      "documentation": "<p>Copies a snapshot of a cluster.</p> <p>To copy a cluster snapshot from a shared manual cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared cluster snapshot.</p> <p>To cancel the copy operation after it is in progress, delete the target cluster snapshot identified by <code>TargetDBClusterSnapshotIdentifier</code> while that DB cluster snapshot is in the <i>copying</i> status.</p>"
+      "documentation": "<p>Copies a snapshot of a cluster.</p> <p>To copy a cluster snapshot from a shared manual cluster snapshot, <code>SourceDBClusterSnapshotIdentifier</code> must be the Amazon Resource Name (ARN) of the shared cluster snapshot. You can only copy a shared DB cluster snapshot, whether encrypted or not, in the same Region.</p> <p>To cancel the copy operation after it is in progress, delete the target cluster snapshot identified by <code>TargetDBClusterSnapshotIdentifier</code> while that cluster snapshot is in the <i>copying</i> status.</p>"
     },
     "CreateDBCluster": {
       "name": "CreateDBCluster",
@@ -180,6 +203,12 @@
         },
         {
           "shape": "DBSubnetGroupDoesNotCoverEnoughAZs"
+        },
+        {
+          "shape": "GlobalClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidGlobalClusterStateFault"
         }
       ],
       "documentation": "<p>Creates a new Amazon DocumentDB cluster.</p>"
@@ -205,7 +234,7 @@
           "shape": "DBParameterGroupAlreadyExistsFault"
         }
       ],
-      "documentation": "<p>Creates a new cluster parameter group.</p> <p>Parameters in a cluster parameter group apply to all of the instances in a DB cluster.</p> <p>A cluster parameter group is initially created with the default parameters for the database engine used by instances in the cluster. To provide custom values for any of the parameters, you must modify the group after you create it. After you create a DB cluster parameter group, you must associate it with your cluster. For the new DB cluster parameter group and associated settings to take effect, you must then reboot the instances in the cluster without failover.</p> <important> <p>After you create a cluster parameter group, you should wait at least 5 minutes before creating your first cluster that uses that cluster parameter group as the default parameter group. This allows Amazon DocumentDB to fully complete the create action before the cluster parameter group is used as the default for a new cluster. This step is especially important for parameters that are critical when creating the default database for a cluster, such as the character set for the default database defined by the <code>character_set_database</code> parameter.</p> </important>"
+      "documentation": "<p>Creates a new cluster parameter group.</p> <p>Parameters in a cluster parameter group apply to all of the instances in a cluster.</p> <p>A cluster parameter group is initially created with the default parameters for the database engine used by instances in the cluster. In Amazon DocumentDB, you cannot make modifications directly to the <code>default.docdb3.6</code> cluster parameter group. If your Amazon DocumentDB cluster is using the default cluster parameter group and you want to modify a value in it, you must first <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-create.html\"> create a new parameter group</a> or <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-copy.html\"> copy an existing parameter group</a>, modify it, and then apply the modified parameter group to your cluster. For the new cluster parameter group and associated settings to take effect, you must then reboot the instances in the cluster without failover. For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/cluster_parameter_group-modify.html\"> Modifying Amazon DocumentDB Cluster Parameter Groups</a>. </p>"
     },
     "CreateDBClusterSnapshot": {
       "name": "CreateDBClusterSnapshot",
@@ -331,7 +360,74 @@
           "shape": "InvalidSubnet"
         }
       ],
-      "documentation": "<p>Creates a new subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.</p>"
+      "documentation": "<p>Creates a new subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the Region.</p>"
+    },
+    "CreateEventSubscription": {
+      "name": "CreateEventSubscription",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateEventSubscriptionMessage"
+      },
+      "output": {
+        "shape": "CreateEventSubscriptionResult",
+        "resultWrapper": "CreateEventSubscriptionResult"
+      },
+      "errors": [
+        {
+          "shape": "EventSubscriptionQuotaExceededFault"
+        },
+        {
+          "shape": "SubscriptionAlreadyExistFault"
+        },
+        {
+          "shape": "SNSInvalidTopicFault"
+        },
+        {
+          "shape": "SNSNoAuthorizationFault"
+        },
+        {
+          "shape": "SNSTopicArnNotFoundFault"
+        },
+        {
+          "shape": "SubscriptionCategoryNotFoundFault"
+        },
+        {
+          "shape": "SourceNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Creates an Amazon DocumentDB event notification subscription. This action requires a topic Amazon Resource Name (ARN) created by using the Amazon DocumentDB console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the Amazon SNS console.</p> <p>You can specify the type of source (<code>SourceType</code>) that you want to be notified of. You can also provide a list of Amazon DocumentDB sources (<code>SourceIds</code>) that trigger the events, and you can provide a list of event categories (<code>EventCategories</code>) for events that you want to be notified of. For example, you can specify <code>SourceType = db-instance</code>, <code>SourceIds = mydbinstance1, mydbinstance2</code> and <code>EventCategories = Availability, Backup</code>.</p> <p>If you specify both the <code>SourceType</code> and <code>SourceIds</code> (such as <code>SourceType = db-instance</code> and <code>SourceIdentifier = myDBInstance1</code>), you are notified of all the <code>db-instance</code> events for the specified source. If you specify a <code>SourceType</code> but do not specify a <code>SourceIdentifier</code>, you receive notice of the events for that source type for all your Amazon DocumentDB sources. If you do not specify either the <code>SourceType</code> or the <code>SourceIdentifier</code>, you are notified of events generated from all Amazon DocumentDB sources belonging to your customer account.</p>"
+    },
+    "CreateGlobalCluster": {
+      "name": "CreateGlobalCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateGlobalClusterMessage"
+      },
+      "output": {
+        "shape": "CreateGlobalClusterResult",
+        "resultWrapper": "CreateGlobalClusterResult"
+      },
+      "errors": [
+        {
+          "shape": "GlobalClusterAlreadyExistsFault"
+        },
+        {
+          "shape": "GlobalClusterQuotaExceededFault"
+        },
+        {
+          "shape": "InvalidDBClusterStateFault"
+        },
+        {
+          "shape": "DBClusterNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Creates an Amazon DocumentDB global cluster that can span multiple multiple Regions. The global cluster contains one primary cluster with read-write capability, and up-to give read-only secondary clusters. Global clusters uses storage-based fast replication across regions with latencies less than one second, using dedicated infrastructure with no impact to your workload’s performance.</p> <p/> <p>You can create a global cluster that is initially empty, and then add a primary and a secondary to it. Or you can specify an existing cluster during the create operation, and this cluster becomes the primary of the global cluster. </p> <note> <p>This action only applies to Amazon DocumentDB clusters.</p> </note>"
     },
     "DeleteDBCluster": {
       "name": "DeleteDBCluster",
@@ -437,7 +533,7 @@
           "shape": "InvalidDBClusterStateFault"
         }
       ],
-      "documentation": "<p>Deletes a previously provisioned instance. </p>"
+      "documentation": "<p>Deletes a previously provisioned instance.</p>"
     },
     "DeleteDBSubnetGroup": {
       "name": "DeleteDBSubnetGroup",
@@ -461,6 +557,52 @@
       ],
       "documentation": "<p>Deletes a subnet group.</p> <note> <p>The specified database subnet group must not be associated with any DB instances.</p> </note>"
     },
+    "DeleteEventSubscription": {
+      "name": "DeleteEventSubscription",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteEventSubscriptionMessage"
+      },
+      "output": {
+        "shape": "DeleteEventSubscriptionResult",
+        "resultWrapper": "DeleteEventSubscriptionResult"
+      },
+      "errors": [
+        {
+          "shape": "SubscriptionNotFoundFault"
+        },
+        {
+          "shape": "InvalidEventSubscriptionStateFault"
+        }
+      ],
+      "documentation": "<p>Deletes an Amazon DocumentDB event notification subscription.</p>"
+    },
+    "DeleteGlobalCluster": {
+      "name": "DeleteGlobalCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteGlobalClusterMessage"
+      },
+      "output": {
+        "shape": "DeleteGlobalClusterResult",
+        "resultWrapper": "DeleteGlobalClusterResult"
+      },
+      "errors": [
+        {
+          "shape": "GlobalClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidGlobalClusterStateFault"
+        }
+      ],
+      "documentation": "<p>Deletes a global cluster. The primary and secondary clusters must already be detached or deleted before attempting to delete a global cluster.</p> <note> <p>This action only applies to Amazon DocumentDB clusters.</p> </note>"
+    },
     "DescribeCertificates": {
       "name": "DescribeCertificates",
       "http": {
@@ -479,7 +621,7 @@
           "shape": "CertificateNotFoundFault"
         }
       ],
-      "documentation": "<p>Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this AWS account.</p>"
+      "documentation": "<p>Returns a list of certificate authority (CA) certificates provided by Amazon DocumentDB for this account.</p>"
     },
     "DescribeDBClusterParameterGroups": {
       "name": "DescribeDBClusterParameterGroups",
@@ -539,7 +681,7 @@
           "shape": "DBClusterSnapshotNotFoundFault"
         }
       ],
-      "documentation": "<p>Returns a list of cluster snapshot attribute names and values for a manual DB cluster snapshot.</p> <p>When you share snapshots with other AWS accounts, <code>DescribeDBClusterSnapshotAttributes</code> returns the <code>restore</code> attribute and a list of IDs for the AWS accounts that are authorized to copy or restore the manual cluster snapshot. If <code>all</code> is included in the list of values for the <code>restore</code> attribute, then the manual cluster snapshot is public and can be copied or restored by all AWS accounts.</p>"
+      "documentation": "<p>Returns a list of cluster snapshot attribute names and values for a manual DB cluster snapshot.</p> <p>When you share snapshots with other accounts, <code>DescribeDBClusterSnapshotAttributes</code> returns the <code>restore</code> attribute and a list of IDs for the accounts that are authorized to copy or restore the manual cluster snapshot. If <code>all</code> is included in the list of values for the <code>restore</code> attribute, then the manual cluster snapshot is public and can be copied or restored by all accounts.</p>"
     },
     "DescribeDBClusterSnapshots": {
       "name": "DescribeDBClusterSnapshots",
@@ -666,6 +808,26 @@
       },
       "documentation": "<p>Displays a list of categories for all event source types, or, if specified, for a specified source type. </p>"
     },
+    "DescribeEventSubscriptions": {
+      "name": "DescribeEventSubscriptions",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeEventSubscriptionsMessage"
+      },
+      "output": {
+        "shape": "EventSubscriptionsMessage",
+        "resultWrapper": "DescribeEventSubscriptionsResult"
+      },
+      "errors": [
+        {
+          "shape": "SubscriptionNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Lists all the subscription descriptions for a customer account. The description for a subscription includes <code>SubscriptionName</code>, <code>SNSTopicARN</code>, <code>CustomerID</code>, <code>SourceType</code>, <code>SourceID</code>, <code>CreationTime</code>, and <code>Status</code>.</p> <p>If you specify a <code>SubscriptionName</code>, lists the description for that subscription.</p>"
+    },
     "DescribeEvents": {
       "name": "DescribeEvents",
       "http": {
@@ -680,6 +842,26 @@
         "resultWrapper": "DescribeEventsResult"
       },
       "documentation": "<p>Returns events related to instances, security groups, snapshots, and DB parameter groups for the past 14 days. You can obtain events specific to a particular DB instance, security group, snapshot, or parameter group by providing the name as a parameter. By default, the events of the past hour are returned.</p>"
+    },
+    "DescribeGlobalClusters": {
+      "name": "DescribeGlobalClusters",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeGlobalClustersMessage"
+      },
+      "output": {
+        "shape": "GlobalClustersMessage",
+        "resultWrapper": "DescribeGlobalClustersResult"
+      },
+      "errors": [
+        {
+          "shape": "GlobalClusterNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Returns information about Amazon DocumentDB global clusters. This API supports pagination.</p> <note> <p>This action only applies to Amazon DocumentDB clusters.</p> </note>"
     },
     "DescribeOrderableDBInstanceOptions": {
       "name": "DescribeOrderableDBInstanceOptions",
@@ -865,7 +1047,7 @@
           "shape": "SharedSnapshotQuotaExceededFault"
         }
       ],
-      "documentation": "<p>Adds an attribute and values to, or removes an attribute and values from, a manual DB cluster snapshot.</p> <p>To share a manual cluster snapshot with other AWS accounts, specify <code>restore</code> as the <code>AttributeName</code>, and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the AWS accounts that are authorized to restore the manual cluster snapshot. Use the value <code>all</code> to make the manual cluster snapshot public, which means that it can be copied or restored by all AWS accounts. Do not add the <code>all</code> value for any manual DB cluster snapshots that contain private information that you don't want available to all AWS accounts. If a manual cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized AWS account IDs for the <code>ValuesToAdd</code> parameter. You can't use <code>all</code> as a value for that parameter in this case.</p>"
+      "documentation": "<p>Adds an attribute and values to, or removes an attribute and values from, a manual cluster snapshot.</p> <p>To share a manual cluster snapshot with other accounts, specify <code>restore</code> as the <code>AttributeName</code>, and use the <code>ValuesToAdd</code> parameter to add a list of IDs of the accounts that are authorized to restore the manual cluster snapshot. Use the value <code>all</code> to make the manual cluster snapshot public, which means that it can be copied or restored by all accounts. Do not add the <code>all</code> value for any manual cluster snapshots that contain private information that you don't want available to all accounts. If a manual cluster snapshot is encrypted, it can be shared, but only by specifying a list of authorized account IDs for the <code>ValuesToAdd</code> parameter. You can't use <code>all</code> as a value for that parameter in this case.</p>"
     },
     "ModifyDBInstance": {
       "name": "ModifyDBInstance",
@@ -953,7 +1135,65 @@
           "shape": "InvalidSubnet"
         }
       ],
-      "documentation": "<p>Modifies an existing subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the AWS Region.</p>"
+      "documentation": "<p>Modifies an existing subnet group. subnet groups must contain at least one subnet in at least two Availability Zones in the Region.</p>"
+    },
+    "ModifyEventSubscription": {
+      "name": "ModifyEventSubscription",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyEventSubscriptionMessage"
+      },
+      "output": {
+        "shape": "ModifyEventSubscriptionResult",
+        "resultWrapper": "ModifyEventSubscriptionResult"
+      },
+      "errors": [
+        {
+          "shape": "EventSubscriptionQuotaExceededFault"
+        },
+        {
+          "shape": "SubscriptionNotFoundFault"
+        },
+        {
+          "shape": "SNSInvalidTopicFault"
+        },
+        {
+          "shape": "SNSNoAuthorizationFault"
+        },
+        {
+          "shape": "SNSTopicArnNotFoundFault"
+        },
+        {
+          "shape": "SubscriptionCategoryNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Modifies an existing Amazon DocumentDB event notification subscription.</p>"
+    },
+    "ModifyGlobalCluster": {
+      "name": "ModifyGlobalCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ModifyGlobalClusterMessage"
+      },
+      "output": {
+        "shape": "ModifyGlobalClusterResult",
+        "resultWrapper": "ModifyGlobalClusterResult"
+      },
+      "errors": [
+        {
+          "shape": "GlobalClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidGlobalClusterStateFault"
+        }
+      ],
+      "documentation": "<p>Modify a setting for an Amazon DocumentDB global cluster. You can change one or more configuration parameters (for example: deletion protection), or the global cluster identifier by specifying these parameters and the new values in the request.</p> <note> <p>This action only applies to Amazon DocumentDB clusters.</p> </note>"
     },
     "RebootDBInstance": {
       "name": "RebootDBInstance",
@@ -977,6 +1217,55 @@
         }
       ],
       "documentation": "<p>You might need to reboot your instance, usually for maintenance reasons. For example, if you make certain changes, or if you change the cluster parameter group that is associated with the instance, you must reboot the instance for the changes to take effect. </p> <p>Rebooting an instance restarts the database engine service. Rebooting an instance results in a momentary outage, during which the instance status is set to <i>rebooting</i>. </p>"
+    },
+    "RemoveFromGlobalCluster": {
+      "name": "RemoveFromGlobalCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RemoveFromGlobalClusterMessage"
+      },
+      "output": {
+        "shape": "RemoveFromGlobalClusterResult",
+        "resultWrapper": "RemoveFromGlobalClusterResult"
+      },
+      "errors": [
+        {
+          "shape": "GlobalClusterNotFoundFault"
+        },
+        {
+          "shape": "InvalidGlobalClusterStateFault"
+        },
+        {
+          "shape": "DBClusterNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Detaches an Amazon DocumentDB secondary cluster from a global cluster. The cluster becomes a standalone cluster with read-write capability instead of being read-only and receiving data from a primary in a different region. </p> <note> <p>This action only applies to Amazon DocumentDB clusters.</p> </note>"
+    },
+    "RemoveSourceIdentifierFromSubscription": {
+      "name": "RemoveSourceIdentifierFromSubscription",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RemoveSourceIdentifierFromSubscriptionMessage"
+      },
+      "output": {
+        "shape": "RemoveSourceIdentifierFromSubscriptionResult",
+        "resultWrapper": "RemoveSourceIdentifierFromSubscriptionResult"
+      },
+      "errors": [
+        {
+          "shape": "SubscriptionNotFoundFault"
+        },
+        {
+          "shape": "SourceNotFoundFault"
+        }
+      ],
+      "documentation": "<p>Removes a source identifier from an existing Amazon DocumentDB event notification subscription.</p>"
     },
     "RemoveTagsFromResource": {
       "name": "RemoveTagsFromResource",
@@ -1204,6 +1493,32 @@
     }
   },
   "shapes": {
+    "AddSourceIdentifierToSubscriptionMessage": {
+      "type": "structure",
+      "required": [
+        "SubscriptionName",
+        "SourceIdentifier"
+      ],
+      "members": {
+        "SubscriptionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon DocumentDB event notification subscription that you want to add a source identifier to.</p>"
+        },
+        "SourceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The identifier of the event source to be added:</p> <ul> <li> <p>If the source type is an instance, a <code>DBInstanceIdentifier</code> must be provided.</p> </li> <li> <p>If the source type is a security group, a <code>DBSecurityGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a parameter group, a <code>DBParameterGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a snapshot, a <code>DBSnapshotIdentifier</code> must be provided.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>AddSourceIdentifierToSubscription</a>. </p>"
+    },
+    "AddSourceIdentifierToSubscriptionResult": {
+      "type": "structure",
+      "members": {
+        "EventSubscription": {
+          "shape": "EventSubscription"
+        }
+      }
+    },
     "AddTagsToResourceMessage": {
       "type": "structure",
       "required": [
@@ -1213,14 +1528,14 @@
       "members": {
         "ResourceName": {
           "shape": "String",
-          "documentation": "<p>The Amazon DocumentDB resource that the tags are added to. This value is an Amazon Resource Name (ARN).</p>"
+          "documentation": "<p>The Amazon DocumentDB resource that the tags are added to. This value is an Amazon Resource Name .</p>"
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>The tags to be assigned to the Amazon DocumentDB resource. </p>"
+          "documentation": "<p>The tags to be assigned to the Amazon DocumentDB resource.</p>"
         }
       },
-      "documentation": "<p>Represents the input to <a>AddTagsToResource</a>.</p>"
+      "documentation": "<p>Represents the input to <a>AddTagsToResource</a>. </p>"
     },
     "ApplyMethod": {
       "type": "string",
@@ -1247,10 +1562,10 @@
         },
         "OptInType": {
           "shape": "String",
-          "documentation": "<p>A value that specifies the type of opt-in request or undoes an opt-in request. An opt-in request of type <code>immediate</code> can't be undone.</p> <p>Valid values:</p> <ul> <li> <p> <code>immediate</code> - Apply the maintenance action immediately.</p> </li> <li> <p> <code>next-maintenance</code> - Apply the maintenance action during the next maintenance window for the resource.</p> </li> <li> <p> <code>undo-opt-in</code> - Cancel any existing <code>next-maintenance</code> opt-in requests.</p> </li> </ul>"
+          "documentation": "<p>A value that specifies the type of opt-in request or undoes an opt-in request. An opt-in request of type <code>immediate</code> can't be undone.</p> <p>Valid values:</p> <ul> <li> <p> <code>immediate</code> - Apply the maintenance action immediately.</p> </li> <li> <p> <code>next-maintenance</code> - Apply the maintenance action during the next maintenance window for the resource. </p> </li> <li> <p> <code>undo-opt-in</code> - Cancel any existing <code>next-maintenance</code> opt-in requests.</p> </li> </ul>"
         }
       },
-      "documentation": "<p>Represents the input to <a>ApplyPendingMaintenanceAction</a>.</p>"
+      "documentation": "<p>Represents the input to <a>ApplyPendingMaintenanceAction</a>. </p>"
     },
     "ApplyPendingMaintenanceActionResult": {
       "type": "structure",
@@ -1326,7 +1641,7 @@
           "documentation": "<p>The Amazon Resource Name (ARN) for the certificate.</p> <p>Example: <code>arn:aws:rds:us-east-1::cert:rds-ca-2019</code> </p>"
         }
       },
-      "documentation": "<p>A certificate authority (CA) certificate for an AWS account.</p>",
+      "documentation": "<p>A certificate authority (CA) certificate for an account.</p>",
       "wrapper": true
     },
     "CertificateList": {
@@ -1341,7 +1656,7 @@
       "members": {
         "Certificates": {
           "shape": "CertificateList",
-          "documentation": "<p>A list of certificates for this AWS account.</p>"
+          "documentation": "<p>A list of certificates for this account.</p>"
         },
         "Marker": {
           "shape": "String",
@@ -1373,11 +1688,11 @@
       "members": {
         "SourceDBClusterParameterGroupIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier or Amazon Resource Name (ARN) for the source cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid cluster parameter group.</p> </li> <li> <p>If the source cluster parameter group is in the same AWS Region as the copy, specify a valid parameter group identifier; for example, <code>my-db-cluster-param-group</code>, or a valid ARN.</p> </li> <li> <p>If the source parameter group is in a different AWS Region than the copy, specify a valid cluster parameter group ARN; for example, <code>arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1</code>.</p> </li> </ul>"
+          "documentation": "<p>The identifier or Amazon Resource Name (ARN) for the source cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid cluster parameter group.</p> </li> <li> <p>If the source cluster parameter group is in the same Region as the copy, specify a valid parameter group identifier; for example, <code>my-db-cluster-param-group</code>, or a valid ARN.</p> </li> <li> <p>If the source parameter group is in a different Region than the copy, specify a valid cluster parameter group ARN; for example, <code>arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group</code>.</p> </li> </ul>"
         },
         "TargetDBClusterParameterGroupIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier for the copied cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank.</p> </li> <li> <p>Must contain from 1 to 255 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster-param-group1</code> </p>"
+          "documentation": "<p>The identifier for the copied cluster parameter group.</p> <p>Constraints:</p> <ul> <li> <p>Cannot be null, empty, or blank.</p> </li> <li> <p>Must contain from 1 to 255 letters, numbers, or hyphens. </p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens. </p> </li> </ul> <p>Example: <code>my-cluster-param-group1</code> </p>"
         },
         "TargetDBClusterParameterGroupDescription": {
           "shape": "String",
@@ -1388,7 +1703,7 @@
           "documentation": "<p>The tags that are to be assigned to the parameter group.</p>"
         }
       },
-      "documentation": "<p>Represents the input to <a>CopyDBClusterParameterGroup</a>.</p>"
+      "documentation": "<p>Represents the input to <a>CopyDBClusterParameterGroup</a>. </p>"
     },
     "CopyDBClusterParameterGroupResult": {
       "type": "structure",
@@ -1407,19 +1722,19 @@
       "members": {
         "SourceDBClusterSnapshotIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier of the cluster snapshot to copy. This parameter is not case sensitive.</p> <p>You can't copy an encrypted, shared cluster snapshot from one AWS Region to another.</p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid system snapshot in the \"available\" state.</p> </li> <li> <p>If the source snapshot is in the same AWS Region as the copy, specify a valid snapshot identifier.</p> </li> <li> <p>If the source snapshot is in a different AWS Region than the copy, specify a valid cluster snapshot ARN.</p> </li> </ul> <p>Example: <code>my-cluster-snapshot1</code> </p>"
+          "documentation": "<p>The identifier of the cluster snapshot to copy. This parameter is not case sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must specify a valid system snapshot in the <i>available</i> state.</p> </li> <li> <p>If the source snapshot is in the same Region as the copy, specify a valid snapshot identifier.</p> </li> <li> <p>If the source snapshot is in a different Region than the copy, specify a valid cluster snapshot ARN.</p> </li> </ul> <p>Example: <code>my-cluster-snapshot1</code> </p>"
         },
         "TargetDBClusterSnapshotIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier of the new cluster snapshot to create from the source cluster snapshot. This parameter is not case sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster-snapshot2</code> </p>"
+          "documentation": "<p>The identifier of the new cluster snapshot to create from the source cluster snapshot. This parameter is not case sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens. </p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens. </p> </li> </ul> <p>Example: <code>my-cluster-snapshot2</code> </p>"
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The AWS KMS key ID for an encrypted cluster snapshot. The AWS KMS key ID is the Amazon Resource Name (ARN), AWS KMS key identifier, or the AWS KMS key alias for the AWS KMS encryption key. </p> <p>If you copy an encrypted cluster snapshot from your AWS account, you can specify a value for <code>KmsKeyId</code> to encrypt the copy with a new AWS KMS encryption key. If you don't specify a value for <code>KmsKeyId</code>, then the copy of the cluster snapshot is encrypted with the same AWS KMS key as the source cluster snapshot. </p> <p>If you copy an encrypted cluster snapshot that is shared from another AWS account, then you must specify a value for <code>KmsKeyId</code>. </p> <p>To copy an encrypted cluster snapshot to another AWS Region, set <code>KmsKeyId</code> to the AWS KMS key ID that you want to use to encrypt the copy of the cluster snapshot in the destination Region. AWS KMS encryption keys are specific to the AWS Region that they are created in, and you can't use encryption keys from one Region in another Region.</p> <p>If you copy an unencrypted cluster snapshot and specify a value for the <code>KmsKeyId</code> parameter, an error is returned.</p>"
+          "documentation": "<p>The KMS key ID for an encrypted cluster snapshot. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key. </p> <p>If you copy an encrypted cluster snapshot from your account, you can specify a value for <code>KmsKeyId</code> to encrypt the copy with a new KMS encryption key. If you don't specify a value for <code>KmsKeyId</code>, then the copy of the cluster snapshot is encrypted with the same KMS key as the source cluster snapshot.</p> <p>If you copy an encrypted cluster snapshot that is shared from another account, then you must specify a value for <code>KmsKeyId</code>.</p> <p>To copy an encrypted cluster snapshot to another Region, set <code>KmsKeyId</code> to the KMS key ID that you want to use to encrypt the copy of the cluster snapshot in the destination Region. KMS encryption keys are specific to the Region that they are created in, and you can't use encryption keys from one Region in another Region.</p> <p>If you copy an unencrypted cluster snapshot and specify a value for the <code>KmsKeyId</code> parameter, an error is returned.</p>"
         },
         "PreSignedUrl": {
           "shape": "String",
-          "documentation": "<p>The URL that contains a Signature Version 4 signed request for the <code>CopyDBClusterSnapshot</code> API action in the AWS Region that contains the source cluster snapshot to copy. You must use the <code>PreSignedUrl</code> parameter when copying an encrypted cluster snapshot from another AWS Region.</p> <p>The presigned URL must be a valid request for the <code>CopyDBSClusterSnapshot</code> API action that can be executed in the source AWS Region that contains the encrypted DB cluster snapshot to be copied. The presigned URL request must contain the following parameter values:</p> <ul> <li> <p> <code>KmsKeyId</code> - The AWS KMS key identifier for the key to use to encrypt the copy of the cluster snapshot in the destination AWS Region. This is the same identifier for both the <code>CopyDBClusterSnapshot</code> action that is called in the destination AWS Region, and the action contained in the presigned URL.</p> </li> <li> <p> <code>DestinationRegion</code> - The name of the AWS Region that the DB cluster snapshot will be created in.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The cluster snapshot identifier for the encrypted cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source AWS Region. For example, if you are copying an encrypted cluster snapshot from the us-west-2 AWS Region, then your <code>SourceDBClusterSnapshotIdentifier</code> looks like the following example: <code>arn:aws:rds:us-west-2:123456789012:cluster-snapshot:my-cluster-snapshot-20161115</code>.</p> </li> </ul>"
+          "documentation": "<p>The URL that contains a Signature Version 4 signed request for the<code>CopyDBClusterSnapshot</code> API action in the Region that contains the source cluster snapshot to copy. You must use the <code>PreSignedUrl</code> parameter when copying a cluster snapshot from another Region.</p> <p>If you are using an Amazon Web Services SDK tool or the CLI, you can specify <code>SourceRegion</code> (or <code>--source-region</code> for the CLI) instead of specifying <code>PreSignedUrl</code> manually. Specifying <code>SourceRegion</code> autogenerates a pre-signed URL that is a valid request for the operation that can be executed in the source Region.</p> <p>The presigned URL must be a valid request for the <code>CopyDBClusterSnapshot</code> API action that can be executed in the source Region that contains the cluster snapshot to be copied. The presigned URL request must contain the following parameter values:</p> <ul> <li> <p> <code>SourceRegion</code> - The ID of the region that contains the snapshot to be copied.</p> </li> <li> <p> <code>SourceDBClusterSnapshotIdentifier</code> - The identifier for the the encrypted cluster snapshot to be copied. This identifier must be in the Amazon Resource Name (ARN) format for the source Region. For example, if you are copying an encrypted cluster snapshot from the us-east-1 Region, then your <code>SourceDBClusterSnapshotIdentifier</code> looks something like the following: <code>arn:aws:rds:us-east-1:12345678012:sample-cluster:sample-cluster-snapshot</code>.</p> </li> <li> <p> <code>TargetDBClusterSnapshotIdentifier</code> - The identifier for the new cluster snapshot to be created. This parameter isn't case sensitive.</p> </li> </ul>"
         },
         "CopyTags": {
           "shape": "BooleanOptional",
@@ -1430,7 +1745,7 @@
           "documentation": "<p>The tags to be assigned to the cluster snapshot.</p>"
         }
       },
-      "documentation": "<p>Represents the input to <a>CopyDBClusterSnapshot</a>.</p>"
+      "documentation": "<p>Represents the input to <a>CopyDBClusterSnapshot</a>. </p>"
     },
     "CopyDBClusterSnapshotResult": {
       "type": "structure",
@@ -1444,9 +1759,7 @@
       "type": "structure",
       "required": [
         "DBClusterIdentifier",
-        "Engine",
-        "MasterUsername",
-        "MasterUserPassword"
+        "Engine"
       ],
       "members": {
         "AvailabilityZones": {
@@ -1459,15 +1772,15 @@
         },
         "DBClusterIdentifier": {
           "shape": "String",
-          "documentation": "<p>The cluster identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster</code> </p>"
+          "documentation": "<p>The cluster identifier. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens. </p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens. </p> </li> </ul> <p>Example: <code>my-cluster</code> </p>"
         },
         "DBClusterParameterGroupName": {
           "shape": "String",
-          "documentation": "<p> The name of the cluster parameter group to associate with this cluster.</p>"
+          "documentation": "<p>The name of the cluster parameter group to associate with this cluster.</p>"
         },
         "VpcSecurityGroupIds": {
           "shape": "VpcSecurityGroupIdList",
-          "documentation": "<p>A list of EC2 VPC security groups to associate with this cluster.</p>"
+          "documentation": "<p>A list of EC2 VPC security groups to associate with this cluster. </p>"
         },
         "DBSubnetGroupName": {
           "shape": "String",
@@ -1479,7 +1792,7 @@
         },
         "EngineVersion": {
           "shape": "String",
-          "documentation": "<p>The version number of the database engine to use.</p>"
+          "documentation": "<p>The version number of the database engine to use. The <code>--engine-version</code> will default to the latest major engine version. For production workloads, we recommend explicitly declaring this parameter with the intended major engine version.</p>"
         },
         "Port": {
           "shape": "IntegerOptional",
@@ -1487,7 +1800,7 @@
         },
         "MasterUsername": {
           "shape": "String",
-          "documentation": "<p>The name of the master user for the cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 63 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the chosen database engine.</p> </li> </ul>"
+          "documentation": "<p>The name of the master user for the cluster.</p> <p>Constraints:</p> <ul> <li> <p>Must be from 1 to 63 letters or numbers.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot be a reserved word for the chosen database engine. </p> </li> </ul>"
         },
         "MasterUserPassword": {
           "shape": "String",
@@ -1495,11 +1808,11 @@
         },
         "PreferredBackupWindow": {
           "shape": "String",
-          "documentation": "<p>The daily time range during which automated backups are created if automated backups are enabled using the <code>BackupRetentionPeriod</code> parameter. </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. </p> <p>Constraints:</p> <ul> <li> <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p> </li> <li> <p>Must be in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>"
+          "documentation": "<p>The daily time range during which automated backups are created if automated backups are enabled using the <code>BackupRetentionPeriod</code> parameter. </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each Region. </p> <p>Constraints:</p> <ul> <li> <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p> </li> <li> <p>Must be in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window. </p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>"
         },
         "PreferredMaintenanceWindow": {
           "shape": "String",
-          "documentation": "<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p>Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week.</p> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>"
+          "documentation": "<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p>Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each Region, occurring on a random day of the week.</p> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -1511,18 +1824,26 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The AWS KMS key identifier for an encrypted cluster.</p> <p>The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS KMS encryption key. If you are creating a cluster using the same AWS account that owns the AWS KMS encryption key that is used to encrypt the new cluster, you can use the AWS KMS key alias instead of the ARN for the AWS KMS encryption key.</p> <p>If an encryption key is not specified in <code>KmsKeyId</code>:</p> <ul> <li> <p>If <code>ReplicationSourceIdentifier</code> identifies an encrypted source, then Amazon DocumentDB uses the encryption key that is used to encrypt the source. Otherwise, Amazon DocumentDB uses your default encryption key. </p> </li> <li> <p>If the <code>StorageEncrypted</code> parameter is <code>true</code> and <code>ReplicationSourceIdentifier</code> is not specified, Amazon DocumentDB uses your default encryption key.</p> </li> </ul> <p>AWS KMS creates the default encryption key for your AWS account. Your AWS account has a different default encryption key for each AWS Region.</p> <p>If you create a replica of an encrypted cluster in another AWS Region, you must set <code>KmsKeyId</code> to a KMS key ID that is valid in the destination AWS Region. This key is used to encrypt the replica in that AWS Region.</p>"
+          "documentation": "<p>The KMS key identifier for an encrypted cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are creating a cluster using the same account that owns the KMS encryption key that is used to encrypt the new cluster, you can use the KMS key alias instead of the ARN for the KMS encryption key.</p> <p>If an encryption key is not specified in <code>KmsKeyId</code>: </p> <ul> <li> <p>If the <code>StorageEncrypted</code> parameter is <code>true</code>, Amazon DocumentDB uses your default encryption key. </p> </li> </ul> <p>KMS creates the default encryption key for your account. Your account has a different default encryption key for each Regions.</p>"
+        },
+        "PreSignedUrl": {
+          "shape": "String",
+          "documentation": "<p>Not currently supported. </p>"
         },
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
-          "documentation": "<p>A list of log types that need to be enabled for exporting to Amazon CloudWatch Logs.</p>"
+          "documentation": "<p>A list of log types that need to be enabled for exporting to Amazon CloudWatch Logs. You can enable audit logs or profiler logs. For more information, see <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/event-auditing.html\"> Auditing Amazon DocumentDB Events</a> and <a href=\"https://docs.aws.amazon.com/documentdb/latest/developerguide/profiling.html\"> Profiling Amazon DocumentDB Operations</a>. </p>"
         },
         "DeletionProtection": {
           "shape": "BooleanOptional",
           "documentation": "<p>Specifies whether this cluster can be deleted. If <code>DeletionProtection</code> is enabled, the cluster cannot be deleted unless it is modified and <code>DeletionProtection</code> is disabled. <code>DeletionProtection</code> protects clusters from being accidentally deleted.</p>"
+        },
+        "GlobalClusterIdentifier": {
+          "shape": "GlobalClusterIdentifier",
+          "documentation": "<p>The cluster identifier of the new global cluster.</p>"
         }
       },
-      "documentation": "<p>Represents the input to <a>CreateDBCluster</a>.</p>"
+      "documentation": "<p>Represents the input to <a>CreateDBCluster</a>. </p>"
     },
     "CreateDBClusterParameterGroupMessage": {
       "type": "structure",
@@ -1576,7 +1897,7 @@
       "members": {
         "DBClusterSnapshotIdentifier": {
           "shape": "String",
-          "documentation": "<p>The identifier of the cluster snapshot. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens.</p> </li> </ul> <p>Example: <code>my-cluster-snapshot1</code> </p>"
+          "documentation": "<p>The identifier of the cluster snapshot. This parameter is stored as a lowercase string.</p> <p>Constraints:</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p> </li> <li> <p>The first character must be a letter.</p> </li> <li> <p>Cannot end with a hyphen or contain two consecutive hyphens. </p> </li> </ul> <p>Example: <code>my-cluster-snapshot1</code> </p>"
         },
         "DBClusterIdentifier": {
           "shape": "String",
@@ -1620,15 +1941,15 @@
         },
         "AvailabilityZone": {
           "shape": "String",
-          "documentation": "<p> The Amazon EC2 Availability Zone that the instance is created in.</p> <p>Default: A random, system-chosen Availability Zone in the endpoint's AWS Region.</p> <p> Example: <code>us-east-1d</code> </p> <p> Constraint: The <code>AvailabilityZone</code> parameter can't be specified if the <code>MultiAZ</code> parameter is set to <code>true</code>. The specified Availability Zone must be in the same AWS Region as the current endpoint. </p>"
+          "documentation": "<p>The Amazon EC2 Availability Zone that the instance is created in. </p> <p>Default: A random, system-chosen Availability Zone in the endpoint's Region.</p> <p>Example: <code>us-east-1d</code> </p>"
         },
         "PreferredMaintenanceWindow": {
           "shape": "String",
-          "documentation": "<p>The time range each week during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. </p> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>"
+          "documentation": "<p>The time range each week during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each Region, occurring on a random day of the week. </p> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>"
         },
         "AutoMinorVersionUpgrade": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Indicates that minor engine upgrades are applied automatically to the instance during the maintenance window.</p> <p>Default: <code>true</code> </p>"
+          "documentation": "<p>This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not perform minor version upgrades regardless of the value set.</p> <p>Default: <code>false</code> </p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -1685,6 +2006,97 @@
       "members": {
         "DBSubnetGroup": {
           "shape": "DBSubnetGroup"
+        }
+      }
+    },
+    "CreateEventSubscriptionMessage": {
+      "type": "structure",
+      "required": [
+        "SubscriptionName",
+        "SnsTopicArn"
+      ],
+      "members": {
+        "SubscriptionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the subscription.</p> <p>Constraints: The name must be fewer than 255 characters.</p>"
+        },
+        "SnsTopicArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the SNS topic created for event notification. Amazon SNS creates the ARN when you create a topic and subscribe to it.</p>"
+        },
+        "SourceType": {
+          "shape": "String",
+          "documentation": "<p>The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, you would set this parameter to <code>db-instance</code>. If this value is not specified, all events are returned.</p> <p>Valid values: <code>db-instance</code>, <code>db-cluster</code>, <code>db-parameter-group</code>, <code>db-security-group</code>, <code>db-cluster-snapshot</code> </p>"
+        },
+        "EventCategories": {
+          "shape": "EventCategoriesList",
+          "documentation": "<p> A list of event categories for a <code>SourceType</code> that you want to subscribe to. </p>"
+        },
+        "SourceIds": {
+          "shape": "SourceIdsList",
+          "documentation": "<p>The list of identifiers of the event sources for which events are returned. If not specified, then all sources are included in the response. An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens; it can't end with a hyphen or contain two consecutive hyphens.</p> <p>Constraints:</p> <ul> <li> <p>If <code>SourceIds</code> are provided, <code>SourceType</code> must also be provided.</p> </li> <li> <p>If the source type is an instance, a <code>DBInstanceIdentifier</code> must be provided.</p> </li> <li> <p>If the source type is a security group, a <code>DBSecurityGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a parameter group, a <code>DBParameterGroupName</code> must be provided.</p> </li> <li> <p>If the source type is a snapshot, a <code>DBSnapshotIdentifier</code> must be provided.</p> </li> </ul>"
+        },
+        "Enabled": {
+          "shape": "BooleanOptional",
+          "documentation": "<p> A Boolean value; set to <code>true</code> to activate the subscription, set to <code>false</code> to create the subscription but not active it. </p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>The tags to be assigned to the event subscription.</p>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>CreateEventSubscription</a>.</p>"
+    },
+    "CreateEventSubscriptionResult": {
+      "type": "structure",
+      "members": {
+        "EventSubscription": {
+          "shape": "EventSubscription"
+        }
+      }
+    },
+    "CreateGlobalClusterMessage": {
+      "type": "structure",
+      "required": [
+        "GlobalClusterIdentifier"
+      ],
+      "members": {
+        "GlobalClusterIdentifier": {
+          "shape": "GlobalClusterIdentifier",
+          "documentation": "<p>The cluster identifier of the new global cluster.</p>"
+        },
+        "SourceDBClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) to use as the primary cluster of the global cluster. This parameter is optional.</p>"
+        },
+        "Engine": {
+          "shape": "String",
+          "documentation": "<p>The name of the database engine to be used for this cluster.</p>"
+        },
+        "EngineVersion": {
+          "shape": "String",
+          "documentation": "<p>The engine version of the global cluster.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>The deletion protection setting for the new global cluster. The global cluster can't be deleted when deletion protection is enabled. </p>"
+        },
+        "DatabaseName": {
+          "shape": "String",
+          "documentation": "<p>The name for your database of up to 64 alpha-numeric characters. If you do not provide a name, Amazon DocumentDB will not create a database in the global cluster you are creating.</p>"
+        },
+        "StorageEncrypted": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>The storage encryption setting for the new global cluster. </p>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>CreateGlobalCluster</a>.</p>"
+    },
+    "CreateGlobalClusterResult": {
+      "type": "structure",
+      "members": {
+        "GlobalCluster": {
+          "shape": "GlobalCluster"
         }
       }
     },
@@ -1763,6 +2175,14 @@
           "shape": "String",
           "documentation": "<p>Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p>"
         },
+        "ReplicationSourceIdentifier": {
+          "shape": "String",
+          "documentation": "<p>Contains the identifier of the source cluster if this cluster is a secondary cluster.</p>"
+        },
+        "ReadReplicaIdentifiers": {
+          "shape": "ReadReplicaIdentifierList",
+          "documentation": "<p>Contains one or more identifiers of the secondary clusters that are associated with this cluster.</p>"
+        },
         "DBClusterMembers": {
           "shape": "DBClusterMemberList",
           "documentation": "<p>Provides the list of instances that make up the cluster.</p>"
@@ -1781,11 +2201,11 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>If <code>StorageEncrypted</code> is <code>true</code>, the AWS KMS key identifier for the encrypted cluster.</p>"
+          "documentation": "<p>If <code>StorageEncrypted</code> is <code>true</code>, the KMS key identifier for the encrypted cluster.</p>"
         },
         "DbClusterResourceId": {
           "shape": "String",
-          "documentation": "<p>The AWS Region-unique, immutable identifier for the cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the cluster is accessed.</p>"
+          "documentation": "<p>The Region-unique, immutable identifier for the cluster. This identifier is found in CloudTrail log entries whenever the KMS key for the cluster is accessed.</p>"
         },
         "DBClusterArn": {
           "shape": "String",
@@ -1793,7 +2213,7 @@
         },
         "AssociatedRoles": {
           "shape": "DBClusterRoles",
-          "documentation": "<p>Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the cluster. IAM roles that are associated with a cluster grant permission for the cluster to access other AWS services on your behalf.</p>"
+          "documentation": "<p>Provides a list of the Identity and Access Management (IAM) roles that are associated with the cluster. (IAM) roles that are associated with a cluster grant permission for the cluster to access other Amazon Web Services services on your behalf.</p>"
         },
         "ClusterCreateTime": {
           "shape": "TStamp",
@@ -1935,14 +2355,14 @@
       "members": {
         "RoleArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAMrole that is associated with the DB cluster.</p>"
         },
         "Status": {
           "shape": "String",
-          "documentation": "<p>Describes the state of association between the IAM role and the cluster. The <code>Status</code> property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The IAM role ARN is associated with the cluster and can be used to access other AWS services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - The IAM role ARN is being associated with the DB cluster.</p> </li> <li> <p> <code>INVALID</code> - The IAM role ARN is associated with the cluster, but the cluster cannot assume the IAM role to access other AWS services on your behalf.</p> </li> </ul>"
+          "documentation": "<p>Describes the state of association between the IAMrole and the cluster. The <code>Status</code> property returns one of the following values:</p> <ul> <li> <p> <code>ACTIVE</code> - The IAMrole ARN is associated with the cluster and can be used to access other Amazon Web Services services on your behalf.</p> </li> <li> <p> <code>PENDING</code> - The IAMrole ARN is being associated with the cluster.</p> </li> <li> <p> <code>INVALID</code> - The IAMrole ARN is associated with the cluster, but the cluster cannot assume the IAMrole to access other Amazon Web Services services on your behalf.</p> </li> </ul>"
         }
       },
-      "documentation": "<p>Describes an AWS Identity and Access Management (IAM) role that is associated with a cluster.</p>"
+      "documentation": "<p>Describes an Identity and Access Management (IAM) role that is associated with a cluster.</p>"
     },
     "DBClusterRoles": {
       "type": "list",
@@ -2012,7 +2432,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>If <code>StorageEncrypted</code> is <code>true</code>, the AWS KMS key identifier for the encrypted cluster snapshot.</p>"
+          "documentation": "<p>If <code>StorageEncrypted</code> is <code>true</code>, the KMS key identifier for the encrypted cluster snapshot.</p>"
         },
         "DBClusterSnapshotArn": {
           "shape": "String",
@@ -2031,14 +2451,14 @@
       "members": {
         "AttributeName": {
           "shape": "String",
-          "documentation": "<p>The name of the manual cluster snapshot attribute.</p> <p>The attribute named <code>restore</code> refers to the list of AWS accounts that have permission to copy or restore the manual cluster snapshot.</p>"
+          "documentation": "<p>The name of the manual cluster snapshot attribute.</p> <p>The attribute named <code>restore</code> refers to the list of accounts that have permission to copy or restore the manual cluster snapshot.</p>"
         },
         "AttributeValues": {
           "shape": "AttributeValueList",
-          "documentation": "<p>The values for the manual cluster snapshot attribute.</p> <p>If the <code>AttributeName</code> field is set to <code>restore</code>, then this element returns a list of IDs of the AWS accounts that are authorized to copy or restore the manual cluster snapshot. If a value of <code>all</code> is in the list, then the manual cluster snapshot is public and available for any AWS account to copy or restore.</p>"
+          "documentation": "<p>The values for the manual cluster snapshot attribute.</p> <p>If the <code>AttributeName</code> field is set to <code>restore</code>, then this element returns a list of IDs of the accounts that are authorized to copy or restore the manual cluster snapshot. If a value of <code>all</code> is in the list, then the manual cluster snapshot is public and available for any account to copy or restore.</p>"
         }
       },
-      "documentation": "<p>Contains the name and values of a manual cluster snapshot attribute.</p> <p>Manual cluster snapshot attributes are used to authorize other AWS accounts to restore a manual cluster snapshot.</p>"
+      "documentation": "<p>Contains the name and values of a manual cluster snapshot attribute.</p> <p>Manual cluster snapshot attributes are used to authorize other accounts to restore a manual cluster snapshot.</p>"
     },
     "DBClusterSnapshotAttributeList": {
       "type": "list",
@@ -2207,7 +2627,7 @@
         },
         "AutoMinorVersionUpgrade": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates that minor version patches are applied automatically.</p>"
+          "documentation": "<p>Does not apply. This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not perform minor version upgrades regardless of the value set.</p>"
         },
         "PubliclyAccessible": {
           "shape": "Boolean",
@@ -2227,11 +2647,11 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p> If <code>StorageEncrypted</code> is <code>true</code>, the AWS KMS key identifier for the encrypted instance. </p>"
+          "documentation": "<p> If <code>StorageEncrypted</code> is <code>true</code>, the KMS key identifier for the encrypted instance. </p>"
         },
         "DbiResourceId": {
           "shape": "String",
-          "documentation": "<p>The AWS Region-unique, immutable identifier for the instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the instance is accessed.</p>"
+          "documentation": "<p>The Region-unique, immutable identifier for the instance. This identifier is found in CloudTrail log entries whenever the KMS key for the instance is accessed.</p>"
         },
         "CACertificateIdentifier": {
           "shape": "String",
@@ -2247,7 +2667,7 @@
         },
         "EnabledCloudwatchLogsExports": {
           "shape": "LogTypeList",
-          "documentation": "<p>A list of log types that this instance is configured to export to Amazon CloudWatch Logs.</p>"
+          "documentation": "<p>A list of log types that this instance is configured to export to CloudWatch Logs.</p>"
         }
       },
       "documentation": "<p>Detailed information about an instance. </p>",
@@ -2452,6 +2872,48 @@
       },
       "documentation": "<p>Represents the input to <a>DeleteDBSubnetGroup</a>.</p>"
     },
+    "DeleteEventSubscriptionMessage": {
+      "type": "structure",
+      "required": [
+        "SubscriptionName"
+      ],
+      "members": {
+        "SubscriptionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon DocumentDB event notification subscription that you want to delete.</p>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>DeleteEventSubscription</a>.</p>"
+    },
+    "DeleteEventSubscriptionResult": {
+      "type": "structure",
+      "members": {
+        "EventSubscription": {
+          "shape": "EventSubscription"
+        }
+      }
+    },
+    "DeleteGlobalClusterMessage": {
+      "type": "structure",
+      "required": [
+        "GlobalClusterIdentifier"
+      ],
+      "members": {
+        "GlobalClusterIdentifier": {
+          "shape": "GlobalClusterIdentifier",
+          "documentation": "<p>The cluster identifier of the global cluster being deleted.</p>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>DeleteGlobalCluster</a>.</p>"
+    },
+    "DeleteGlobalClusterResult": {
+      "type": "structure",
+      "members": {
+        "GlobalCluster": {
+          "shape": "GlobalCluster"
+        }
+      }
+    },
     "DescribeCertificatesMessage": {
       "type": "structure",
       "members": {
@@ -2558,7 +3020,7 @@
         },
         "SnapshotType": {
           "shape": "String",
-          "documentation": "<p>The type of cluster snapshots to be returned. You can specify one of the following values:</p> <ul> <li> <p> <code>automated</code> - Return all cluster snapshots that Amazon DocumentDB has automatically created for your AWS account.</p> </li> <li> <p> <code>manual</code> - Return all cluster snapshots that you have manually created for your AWS account.</p> </li> <li> <p> <code>shared</code> - Return all manual cluster snapshots that have been shared to your AWS account.</p> </li> <li> <p> <code>public</code> - Return all cluster snapshots that have been marked as public.</p> </li> </ul> <p>If you don't specify a <code>SnapshotType</code> value, then both automated and manual cluster snapshots are returned. You can include shared cluster snapshots with these results by setting the <code>IncludeShared</code> parameter to <code>true</code>. You can include public cluster snapshots with these results by setting the <code>IncludePublic</code> parameter to <code>true</code>.</p> <p>The <code>IncludeShared</code> and <code>IncludePublic</code> parameters don't apply for <code>SnapshotType</code> values of <code>manual</code> or <code>automated</code>. The <code>IncludePublic</code> parameter doesn't apply when <code>SnapshotType</code> is set to <code>shared</code>. The <code>IncludeShared</code> parameter doesn't apply when <code>SnapshotType</code> is set to <code>public</code>.</p>"
+          "documentation": "<p>The type of cluster snapshots to be returned. You can specify one of the following values:</p> <ul> <li> <p> <code>automated</code> - Return all cluster snapshots that Amazon DocumentDB has automatically created for your account.</p> </li> <li> <p> <code>manual</code> - Return all cluster snapshots that you have manually created for your account.</p> </li> <li> <p> <code>shared</code> - Return all manual cluster snapshots that have been shared to your account.</p> </li> <li> <p> <code>public</code> - Return all cluster snapshots that have been marked as public.</p> </li> </ul> <p>If you don't specify a <code>SnapshotType</code> value, then both automated and manual cluster snapshots are returned. You can include shared cluster snapshots with these results by setting the <code>IncludeShared</code> parameter to <code>true</code>. You can include public cluster snapshots with these results by setting the<code>IncludePublic</code> parameter to <code>true</code>.</p> <p>The <code>IncludeShared</code> and <code>IncludePublic</code> parameters don't apply for <code>SnapshotType</code> values of <code>manual</code> or <code>automated</code>. The <code>IncludePublic</code> parameter doesn't apply when <code>SnapshotType</code> is set to <code>shared</code>. The <code>IncludeShared</code> parameter doesn't apply when <code>SnapshotType</code> is set to <code>public</code>.</p>"
         },
         "Filters": {
           "shape": "FilterList",
@@ -2574,11 +3036,11 @@
         },
         "IncludeShared": {
           "shape": "Boolean",
-          "documentation": "<p>Set to <code>true</code> to include shared manual cluster snapshots from other AWS accounts that this AWS account has been given permission to copy or restore, and otherwise <code>false</code>. The default is <code>false</code>.</p>"
+          "documentation": "<p>Set to <code>true</code> to include shared manual cluster snapshots from other accounts that this account has been given permission to copy or restore, and otherwise <code>false</code>. The default is <code>false</code>.</p>"
         },
         "IncludePublic": {
           "shape": "Boolean",
-          "documentation": "<p>Set to <code>true</code> to include manual cluster snapshots that are public and can be copied or restored by any AWS account, and otherwise <code>false</code>. The default is <code>false</code>.</p>"
+          "documentation": "<p>Set to <code>true</code> to include manual cluster snapshots that are public and can be copied or restored by any account, and otherwise <code>false</code>. The default is <code>false</code>.</p>"
         }
       },
       "documentation": "<p>Represents the input to <a>DescribeDBClusterSnapshots</a>.</p>"
@@ -2614,7 +3076,7 @@
         },
         "EngineVersion": {
           "shape": "String",
-          "documentation": "<p>The database engine version to return.</p> <p>Example: <code>5.1.49</code> </p>"
+          "documentation": "<p>The database engine version to return.</p> <p>Example: <code>3.6.0</code> </p>"
         },
         "DBParameterGroupFamily": {
           "shape": "String",
@@ -2729,7 +3191,7 @@
       "members": {
         "SourceType": {
           "shape": "String",
-          "documentation": "<p>The type of source that is generating the events.</p> <p>Valid values: <code>db-instance</code>, <code>db-parameter-group</code>, <code>db-security-group</code>, <code>db-snapshot</code> </p>"
+          "documentation": "<p>The type of source that is generating the events.</p> <p>Valid values: <code>db-instance</code>, <code>db-parameter-group</code>, <code>db-security-group</code> </p>"
         },
         "Filters": {
           "shape": "FilterList",
@@ -2737,6 +3199,28 @@
         }
       },
       "documentation": "<p>Represents the input to <a>DescribeEventCategories</a>.</p>"
+    },
+    "DescribeEventSubscriptionsMessage": {
+      "type": "structure",
+      "members": {
+        "SubscriptionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon DocumentDB event notification subscription that you want to describe.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>This parameter is not currently supported.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p> The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token (marker) is included in the response so that the remaining results can be retrieved.</p> <p>Default: 100</p> <p>Constraints: Minimum 20, maximum 100.</p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>DescribeEventSubscriptions</a>.</p>"
     },
     "DescribeEventsMessage": {
       "type": "structure",
@@ -2779,6 +3263,27 @@
         }
       },
       "documentation": "<p>Represents the input to <a>DescribeEvents</a>.</p>"
+    },
+    "DescribeGlobalClustersMessage": {
+      "type": "structure",
+      "members": {
+        "GlobalClusterIdentifier": {
+          "shape": "GlobalClusterIdentifier",
+          "documentation": "<p>The user-supplied cluster identifier. If this parameter is specified, information from only the specific cluster is returned. This parameter isn't case-sensitive.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>A filter that specifies one or more global DB clusters to describe.</p> <p>Supported filters: <code>db-cluster-id</code> accepts cluster identifiers and cluster Amazon Resource Names (ARNs). The results list will only include information about the clusters identified by these ARNs.</p>"
+        },
+        "MaxRecords": {
+          "shape": "IntegerOptional",
+          "documentation": "<p>The maximum number of records to include in the response. If more records exist than the specified <code>MaxRecords</code> value, a pagination token called a marker is included in the response so that you can retrieve the remaining results. </p>"
+        },
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous <code>DescribeGlobalClusters</code> request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        }
+      }
     },
     "DescribeOrderableDBInstanceOptionsMessage": {
       "type": "structure",
@@ -2956,6 +3461,74 @@
         "locationName": "Event"
       }
     },
+    "EventSubscription": {
+      "type": "structure",
+      "members": {
+        "CustomerAwsId": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Web Services customer account that is associated with the Amazon DocumentDB event notification subscription.</p>"
+        },
+        "CustSubscriptionId": {
+          "shape": "String",
+          "documentation": "<p>The Amazon DocumentDB event notification subscription ID.</p>"
+        },
+        "SnsTopicArn": {
+          "shape": "String",
+          "documentation": "<p>The topic ARN of the Amazon DocumentDB event notification subscription.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>The status of the Amazon DocumentDB event notification subscription.</p> <p>Constraints:</p> <p>Can be one of the following: <code>creating</code>, <code>modifying</code>, <code>deleting</code>, <code>active</code>, <code>no-permission</code>, <code>topic-not-exist</code> </p> <p>The <code>no-permission</code> status indicates that Amazon DocumentDB no longer has permission to post to the SNS topic. The <code>topic-not-exist</code> status indicates that the topic was deleted after the subscription was created.</p>"
+        },
+        "SubscriptionCreationTime": {
+          "shape": "String",
+          "documentation": "<p>The time at which the Amazon DocumentDB event notification subscription was created.</p>"
+        },
+        "SourceType": {
+          "shape": "String",
+          "documentation": "<p>The source type for the Amazon DocumentDB event notification subscription.</p>"
+        },
+        "SourceIdsList": {
+          "shape": "SourceIdsList",
+          "documentation": "<p>A list of source IDs for the Amazon DocumentDB event notification subscription.</p>"
+        },
+        "EventCategoriesList": {
+          "shape": "EventCategoriesList",
+          "documentation": "<p>A list of event categories for the Amazon DocumentDB event notification subscription.</p>"
+        },
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>A Boolean value indicating whether the subscription is enabled. A value of <code>true</code> indicates that the subscription is enabled.</p>"
+        },
+        "EventSubscriptionArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the event subscription.</p>"
+        }
+      },
+      "documentation": "<p>Detailed information about an event to which you have subscribed.</p>",
+      "wrapper": true
+    },
+    "EventSubscriptionsList": {
+      "type": "list",
+      "member": {
+        "shape": "EventSubscription",
+        "locationName": "EventSubscription"
+      }
+    },
+    "EventSubscriptionsMessage": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p>An optional pagination token provided by a previous request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by <code>MaxRecords</code>.</p>"
+        },
+        "EventSubscriptionsList": {
+          "shape": "EventSubscriptionsList",
+          "documentation": "<p>A list of event subscriptions.</p>"
+        }
+      },
+      "documentation": "<p>Represents the output of <a>DescribeEventSubscriptions</a>.</p>"
+    },
     "EventsMessage": {
       "type": "structure",
       "members": {
@@ -3022,6 +3595,105 @@
       "member": {
         "shape": "String",
         "locationName": "Value"
+      }
+    },
+    "GlobalCluster": {
+      "type": "structure",
+      "members": {
+        "GlobalClusterIdentifier": {
+          "shape": "GlobalClusterIdentifier",
+          "documentation": "<p>Contains a user-supplied global cluster identifier. This identifier is the unique key that identifies a global cluster. </p>"
+        },
+        "GlobalClusterResourceId": {
+          "shape": "String",
+          "documentation": "<p>The Region-unique, immutable identifier for the global database cluster. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS customer master key (CMK) for the cluster is accessed. </p>"
+        },
+        "GlobalClusterArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the global cluster.</p>"
+        },
+        "Status": {
+          "shape": "String",
+          "documentation": "<p>Specifies the current state of this global cluster.</p>"
+        },
+        "Engine": {
+          "shape": "String",
+          "documentation": "<p>The Amazon DocumentDB database engine used by the global cluster. </p>"
+        },
+        "EngineVersion": {
+          "shape": "String",
+          "documentation": "<p>Indicates the database engine version.</p>"
+        },
+        "DatabaseName": {
+          "shape": "String",
+          "documentation": "<p>The default database name within the new global cluster.</p>"
+        },
+        "StorageEncrypted": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>The storage encryption setting for the global cluster.</p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>The deletion protection setting for the new global cluster.</p>"
+        },
+        "GlobalClusterMembers": {
+          "shape": "GlobalClusterMemberList",
+          "documentation": "<p>The list of cluster IDs for secondary clusters within the global cluster. Currently limited to one item. </p>"
+        }
+      },
+      "documentation": "<p>A data type representing an Amazon DocumentDB global cluster.</p>",
+      "wrapper": true
+    },
+    "GlobalClusterIdentifier": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "[A-Za-z][0-9A-Za-z-:._]*"
+    },
+    "GlobalClusterList": {
+      "type": "list",
+      "member": {
+        "shape": "GlobalCluster",
+        "locationName": "GlobalClusterMember"
+      }
+    },
+    "GlobalClusterMember": {
+      "type": "structure",
+      "members": {
+        "DBClusterArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) for each Amazon DocumentDB cluster.</p>"
+        },
+        "Readers": {
+          "shape": "ReadersArnList",
+          "documentation": "<p>The Amazon Resource Name (ARN) for each read-only secondary cluster associated with the Aurora global cluster.</p>"
+        },
+        "IsWriter": {
+          "shape": "Boolean",
+          "documentation": "<p> Specifies whether the Amazon DocumentDB cluster is the primary cluster (that is, has read-write capability) for the Amazon DocumentDB global cluster with which it is associated. </p>"
+        }
+      },
+      "documentation": "<p>A data structure with information about any primary and secondary clusters associated with an Amazon DocumentDB global clusters. </p>",
+      "wrapper": true
+    },
+    "GlobalClusterMemberList": {
+      "type": "list",
+      "member": {
+        "shape": "GlobalClusterMember",
+        "locationName": "GlobalClusterMember"
+      }
+    },
+    "GlobalClustersMessage": {
+      "type": "structure",
+      "members": {
+        "Marker": {
+          "shape": "String",
+          "documentation": "<p/>"
+        },
+        "GlobalClusters": {
+          "shape": "GlobalClusterList",
+          "documentation": "<p/>"
+        }
       }
     },
     "Integer": {
@@ -3099,11 +3771,11 @@
         },
         "PreferredBackupWindow": {
           "shape": "String",
-          "documentation": "<p>The daily time range during which automated backups are created if automated backups are enabled, using the <code>BackupRetentionPeriod</code> parameter. </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. </p> <p>Constraints:</p> <ul> <li> <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p> </li> <li> <p>Must be in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>"
+          "documentation": "<p>The daily time range during which automated backups are created if automated backups are enabled, using the <code>BackupRetentionPeriod</code> parameter. </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each Region. </p> <p>Constraints:</p> <ul> <li> <p>Must be in the format <code>hh24:mi-hh24:mi</code>.</p> </li> <li> <p>Must be in Universal Coordinated Time (UTC).</p> </li> <li> <p>Must not conflict with the preferred maintenance window.</p> </li> <li> <p>Must be at least 30 minutes.</p> </li> </ul>"
         },
         "PreferredMaintenanceWindow": {
           "shape": "String",
-          "documentation": "<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p>Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. </p> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>"
+          "documentation": "<p>The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).</p> <p>Format: <code>ddd:hh24:mi-ddd:hh24:mi</code> </p> <p>The default is a 30-minute window selected at random from an 8-hour block of time for each Region, occurring on a random day of the week. </p> <p>Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p> <p>Constraints: Minimum 30-minute window.</p>"
         },
         "CloudwatchLogsExportConfiguration": {
           "shape": "CloudwatchLogsExportConfiguration",
@@ -3111,7 +3783,7 @@
         },
         "EngineVersion": {
           "shape": "String",
-          "documentation": "<p>The version number of the database engine to which you want to upgrade. Changing this parameter results in an outage. The change is applied during the next maintenance window unless the <code>ApplyImmediately</code> parameter is set to <code>true</code>.</p>"
+          "documentation": "<p>The version number of the database engine to which you want to upgrade. Modifying engine version is not supported on Amazon DocumentDB.</p>"
         },
         "DeletionProtection": {
           "shape": "BooleanOptional",
@@ -3159,15 +3831,15 @@
         },
         "AttributeName": {
           "shape": "String",
-          "documentation": "<p>The name of the cluster snapshot attribute to modify.</p> <p>To manage authorization for other AWS accounts to copy or restore a manual cluster snapshot, set this value to <code>restore</code>.</p>"
+          "documentation": "<p>The name of the cluster snapshot attribute to modify.</p> <p>To manage authorization for other accounts to copy or restore a manual cluster snapshot, set this value to <code>restore</code>.</p>"
         },
         "ValuesToAdd": {
           "shape": "AttributeValueList",
-          "documentation": "<p>A list of cluster snapshot attributes to add to the attribute specified by <code>AttributeName</code>.</p> <p>To authorize other AWS accounts to copy or restore a manual cluster snapshot, set this list to include one or more AWS account IDs. To make the manual cluster snapshot restorable by any AWS account, set it to <code>all</code>. Do not add the <code>all</code> value for any manual cluster snapshots that contain private information that you don't want to be available to all AWS accounts.</p>"
+          "documentation": "<p>A list of cluster snapshot attributes to add to the attribute specified by <code>AttributeName</code>.</p> <p>To authorize other accounts to copy or restore a manual cluster snapshot, set this list to include one or more account IDs. To make the manual cluster snapshot restorable by any account, set it to <code>all</code>. Do not add the <code>all</code> value for any manual cluster snapshots that contain private information that you don't want to be available to all accounts.</p>"
         },
         "ValuesToRemove": {
           "shape": "AttributeValueList",
-          "documentation": "<p>A list of cluster snapshot attributes to remove from the attribute specified by <code>AttributeName</code>.</p> <p>To remove authorization for other AWS accounts to copy or restore a manual cluster snapshot, set this list to include one or more AWS account identifiers. To remove authorization for any AWS account to copy or restore the cluster snapshot, set it to <code>all</code> . If you specify <code>all</code>, an AWS account whose account ID is explicitly added to the <code>restore</code> attribute can still copy or restore a manual cluster snapshot.</p>"
+          "documentation": "<p>A list of cluster snapshot attributes to remove from the attribute specified by <code>AttributeName</code>.</p> <p>To remove authorization for other accounts to copy or restore a manual cluster snapshot, set this list to include one or more account identifiers. To remove authorization for any account to copy or restore the cluster snapshot, set it to <code>all</code> . If you specify <code>all</code>, an account whose account ID is explicitly added to the <code>restore</code> attribute can still copy or restore a manual cluster snapshot.</p>"
         }
       },
       "documentation": "<p>Represents the input to <a>ModifyDBClusterSnapshotAttribute</a>.</p>"
@@ -3192,7 +3864,7 @@
         },
         "DBInstanceClass": {
           "shape": "String",
-          "documentation": "<p>The new compute and memory capacity of the instance; for example, <code>db.r5.large</code>. Not all instance classes are available in all AWS Regions. </p> <p>If you modify the instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting.</p>"
+          "documentation": "<p>The new compute and memory capacity of the instance; for example, <code>db.r5.large</code>. Not all instance classes are available in all Regions. </p> <p>If you modify the instance class, an outage occurs during the change. The change is applied during the next maintenance window, unless <code>ApplyImmediately</code> is specified as <code>true</code> for this request. </p> <p>Default: Uses existing setting.</p>"
         },
         "ApplyImmediately": {
           "shape": "Boolean",
@@ -3204,7 +3876,7 @@
         },
         "AutoMinorVersionUpgrade": {
           "shape": "BooleanOptional",
-          "documentation": "<p>Indicates that minor version upgrades are applied automatically to the instance during the maintenance window. Changing this parameter doesn't result in an outage except in the following case, and the change is asynchronously applied as soon as possible. An outage results if this parameter is set to <code>true</code> during the maintenance window, and a newer minor version is available, and Amazon DocumentDB has enabled automatic patching for that engine version. </p>"
+          "documentation": "<p>This parameter does not apply to Amazon DocumentDB. Amazon DocumentDB does not perform minor version upgrades regardless of the value set.</p>"
         },
         "NewDBInstanceIdentifier": {
           "shape": "String",
@@ -3256,6 +3928,72 @@
       "members": {
         "DBSubnetGroup": {
           "shape": "DBSubnetGroup"
+        }
+      }
+    },
+    "ModifyEventSubscriptionMessage": {
+      "type": "structure",
+      "required": [
+        "SubscriptionName"
+      ],
+      "members": {
+        "SubscriptionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon DocumentDB event notification subscription.</p>"
+        },
+        "SnsTopicArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the SNS topic created for event notification. The ARN is created by Amazon SNS when you create a topic and subscribe to it.</p>"
+        },
+        "SourceType": {
+          "shape": "String",
+          "documentation": "<p>The type of source that is generating the events. For example, if you want to be notified of events generated by an instance, set this parameter to <code>db-instance</code>. If this value is not specified, all events are returned.</p> <p>Valid values: <code>db-instance</code>, <code>db-parameter-group</code>, <code>db-security-group</code> </p>"
+        },
+        "EventCategories": {
+          "shape": "EventCategoriesList",
+          "documentation": "<p> A list of event categories for a <code>SourceType</code> that you want to subscribe to.</p>"
+        },
+        "Enabled": {
+          "shape": "BooleanOptional",
+          "documentation": "<p> A Boolean value; set to <code>true</code> to activate the subscription. </p>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>ModifyEventSubscription</a>.</p>"
+    },
+    "ModifyEventSubscriptionResult": {
+      "type": "structure",
+      "members": {
+        "EventSubscription": {
+          "shape": "EventSubscription"
+        }
+      }
+    },
+    "ModifyGlobalClusterMessage": {
+      "type": "structure",
+      "required": [
+        "GlobalClusterIdentifier"
+      ],
+      "members": {
+        "GlobalClusterIdentifier": {
+          "shape": "GlobalClusterIdentifier",
+          "documentation": "<p>The identifier for the global cluster being modified. This parameter isn't case-sensitive.</p> <p>Constraints:</p> <ul> <li> <p>Must match the identifier of an existing global cluster.</p> </li> </ul>"
+        },
+        "NewGlobalClusterIdentifier": {
+          "shape": "GlobalClusterIdentifier",
+          "documentation": "<p>The new identifier for a global cluster when you modify a global cluster. This value is stored as a lowercase string.</p> <ul> <li> <p>Must contain from 1 to 63 letters, numbers, or hyphens</p> <p>The first character must be a letter</p> <p>Can't end with a hyphen or contain two consecutive hyphens</p> </li> </ul> <p>Example: <code>my-cluster2</code> </p>"
+        },
+        "DeletionProtection": {
+          "shape": "BooleanOptional",
+          "documentation": "<p>Indicates if the global cluster has deletion protection enabled. The global cluster can't be deleted when deletion protection is enabled. </p>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>ModifyGlobalCluster</a>.</p>"
+    },
+    "ModifyGlobalClusterResult": {
+      "type": "structure",
+      "members": {
+        "GlobalCluster": {
+          "shape": "GlobalCluster"
         }
       }
     },
@@ -3498,6 +4236,19 @@
       },
       "documentation": "<p> One or more modified settings for an instance. These modified settings have been requested, but haven't been applied yet.</p>"
     },
+    "ReadReplicaIdentifierList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "ReadReplicaIdentifier"
+      }
+    },
+    "ReadersArnList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
     "RebootDBInstanceMessage": {
       "type": "structure",
       "required": [
@@ -3520,6 +4271,58 @@
       "members": {
         "DBInstance": {
           "shape": "DBInstance"
+        }
+      }
+    },
+    "RemoveFromGlobalClusterMessage": {
+      "type": "structure",
+      "required": [
+        "GlobalClusterIdentifier",
+        "DbClusterIdentifier"
+      ],
+      "members": {
+        "GlobalClusterIdentifier": {
+          "shape": "GlobalClusterIdentifier",
+          "documentation": "<p>The cluster identifier to detach from the Amazon DocumentDB global cluster. </p>"
+        },
+        "DbClusterIdentifier": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) identifying the cluster that was detached from the Amazon DocumentDB global cluster. </p>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>RemoveFromGlobalCluster</a>.</p>"
+    },
+    "RemoveFromGlobalClusterResult": {
+      "type": "structure",
+      "members": {
+        "GlobalCluster": {
+          "shape": "GlobalCluster"
+        }
+      }
+    },
+    "RemoveSourceIdentifierFromSubscriptionMessage": {
+      "type": "structure",
+      "required": [
+        "SubscriptionName",
+        "SourceIdentifier"
+      ],
+      "members": {
+        "SubscriptionName": {
+          "shape": "String",
+          "documentation": "<p>The name of the Amazon DocumentDB event notification subscription that you want to remove a source identifier from.</p>"
+        },
+        "SourceIdentifier": {
+          "shape": "String",
+          "documentation": "<p> The source identifier to be removed from the subscription, such as the instance identifier for an instance, or the name of a security group. </p>"
+        }
+      },
+      "documentation": "<p>Represents the input to <a>RemoveSourceIdentifierFromSubscription</a>.</p>"
+    },
+    "RemoveSourceIdentifierFromSubscriptionResult": {
+      "type": "structure",
+      "members": {
+        "EventSubscription": {
+          "shape": "EventSubscription"
         }
       }
     },
@@ -3574,7 +4377,7 @@
           "documentation": "<p>A list that provides details about the pending maintenance actions for the resource.</p>"
         }
       },
-      "documentation": "<p>Represents the output of <a>ApplyPendingMaintenanceAction</a>.</p>",
+      "documentation": "<p>Represents the output of <a>ApplyPendingMaintenanceAction</a>. </p>",
       "wrapper": true
     },
     "RestoreDBClusterFromSnapshotMessage": {
@@ -3623,7 +4426,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The AWS KMS key identifier to use when restoring an encrypted cluster from a DB snapshot or cluster snapshot.</p> <p>The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS KMS encryption key. If you are restoring a cluster with the same AWS account that owns the AWS KMS encryption key used to encrypt the new cluster, then you can use the AWS KMS key alias instead of the ARN for the AWS KMS encryption key.</p> <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p> <ul> <li> <p>If the snapshot or cluster snapshot in <code>SnapshotIdentifier</code> is encrypted, then the restored cluster is encrypted using the AWS KMS key that was used to encrypt the snapshot or the cluster snapshot.</p> </li> <li> <p>If the snapshot or the cluster snapshot in <code>SnapshotIdentifier</code> is not encrypted, then the restored DB cluster is not encrypted.</p> </li> </ul>"
+          "documentation": "<p>The KMS key identifier to use when restoring an encrypted cluster from a DB snapshot or cluster snapshot.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a cluster with the same account that owns the KMS encryption key used to encrypt the new cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p> <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p> <ul> <li> <p>If the snapshot or cluster snapshot in <code>SnapshotIdentifier</code> is encrypted, then the restored cluster is encrypted using the KMS key that was used to encrypt the snapshot or the cluster snapshot.</p> </li> <li> <p>If the snapshot or the cluster snapshot in <code>SnapshotIdentifier</code> is not encrypted, then the restored DB cluster is not encrypted.</p> </li> </ul>"
         },
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
@@ -3685,7 +4488,7 @@
         },
         "KmsKeyId": {
           "shape": "String",
-          "documentation": "<p>The AWS KMS key identifier to use when restoring an encrypted cluster from an encrypted cluster.</p> <p>The AWS KMS key identifier is the Amazon Resource Name (ARN) for the AWS KMS encryption key. If you are restoring a cluster with the same AWS account that owns the AWS KMS encryption key used to encrypt the new cluster, then you can use the AWS KMS key alias instead of the ARN for the AWS KMS encryption key.</p> <p>You can restore to a new cluster and encrypt the new cluster with an AWS KMS key that is different from the AWS KMS key used to encrypt the source cluster. The new DB cluster is encrypted with the AWS KMS key identified by the <code>KmsKeyId</code> parameter.</p> <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p> <ul> <li> <p>If the cluster is encrypted, then the restored cluster is encrypted using the AWS KMS key that was used to encrypt the source cluster.</p> </li> <li> <p>If the cluster is not encrypted, then the restored cluster is not encrypted.</p> </li> </ul> <p>If <code>DBClusterIdentifier</code> refers to a cluster that is not encrypted, then the restore request is rejected.</p>"
+          "documentation": "<p>The KMS key identifier to use when restoring an encrypted cluster from an encrypted cluster.</p> <p>The KMS key identifier is the Amazon Resource Name (ARN) for the KMS encryption key. If you are restoring a cluster with the same account that owns the KMS encryption key used to encrypt the new cluster, then you can use the KMS key alias instead of the ARN for the KMS encryption key.</p> <p>You can restore to a new cluster and encrypt the new cluster with an KMS key that is different from the KMS key used to encrypt the source cluster. The new DB cluster is encrypted with the KMS key identified by the <code>KmsKeyId</code> parameter.</p> <p>If you do not specify a value for the <code>KmsKeyId</code> parameter, then the following occurs:</p> <ul> <li> <p>If the cluster is encrypted, then the restored cluster is encrypted using the KMS key that was used to encrypt the source cluster.</p> </li> <li> <p>If the cluster is not encrypted, then the restored cluster is not encrypted.</p> </li> </ul> <p>If <code>DBClusterIdentifier</code> refers to a cluster that is not encrypted, then the restore request is rejected.</p>"
         },
         "EnableCloudwatchLogsExports": {
           "shape": "LogTypeList",
@@ -3704,6 +4507,13 @@
         "DBCluster": {
           "shape": "DBCluster"
         }
+      }
+    },
+    "SourceIdsList": {
+      "type": "list",
+      "member": {
+        "shape": "String",
+        "locationName": "SourceId"
       }
     },
     "SourceType": {
@@ -3800,11 +4610,11 @@
       "members": {
         "Key": {
           "shape": "String",
-          "documentation": "<p>The required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with \"aws:\" or \"rds:\". The string can contain only the set of Unicode letters, digits, white space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
+          "documentation": "<p>The required name of the tag. The string value can be from 1 to 128 Unicode characters in length and can't be prefixed with \"<code>aws:</code>\" or \"<code>rds:</code>\". The string can contain only the set of Unicode letters, digits, white space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
         },
         "Value": {
           "shape": "String",
-          "documentation": "<p>The optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with \"aws:\" or \"rds:\". The string can contain only the set of Unicode letters, digits, white space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
+          "documentation": "<p>The optional value of the tag. The string value can be from 1 to 256 Unicode characters in length and can't be prefixed with \"<code>aws:</code>\" or \"<code>rds:</code>\". The string can contain only the set of Unicode letters, digits, white space, '_', '.', '/', '=', '+', '-' (Java regex: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
         }
       },
       "documentation": "<p>Metadata assigned to an Amazon DocumentDB resource consisting of a key-value pair.</p>"

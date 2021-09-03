@@ -487,6 +487,51 @@
       ],
       "documentation": "<p>Retrieve the schema definition.</p>"
     },
+    "ExportSchema": {
+      "name": "ExportSchema",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/registries/name/{registryName}/schemas/name/{schemaName}/export",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ExportSchemaRequest"
+      },
+      "output": {
+        "shape": "ExportSchemaResponse",
+        "documentation": "<p>200 response</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>400 response</p>"
+        },
+        {
+          "shape": "UnauthorizedException",
+          "documentation": "<p>401 response</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>500 response</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>403 response</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>404 response</p>"
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "<p>503 response</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>429 response</p>"
+        }
+      ]
+    },
     "GetCodeBindingSource": {
       "name": "GetCodeBindingSource",
       "http": {
@@ -1216,6 +1261,10 @@
           "shape": "__stringMin20Max1600",
           "documentation": "<p>The ARN of the event bus.</p>"
         },
+        "CrossAccount": {
+          "shape": "__boolean",
+          "documentation": "<p>Support discovery of schemas in events sent to the bus from another account. (default: true).</p>"
+        },
         "Tags": {
           "shape": "Tags",
           "locationName": "tags",
@@ -1249,6 +1298,10 @@
         "State": {
           "shape": "DiscovererState",
           "documentation": "<p>The state of the discoverer.</p>"
+        },
+        "CrossAccount": {
+          "shape": "__boolean",
+          "documentation": "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -1559,6 +1612,10 @@
           "shape": "DiscovererState",
           "documentation": "<p>The state of the discoverer.</p>"
         },
+        "CrossAccount": {
+          "shape": "__boolean",
+          "documentation": "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
+        },
         "Tags": {
           "shape": "Tags",
           "locationName": "tags",
@@ -1697,10 +1754,67 @@
           "shape": "DiscovererState",
           "documentation": "<p>The state of the discoverer.</p>"
         },
+        "CrossAccount": {
+          "shape": "__boolean",
+          "documentation": "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
+        },
         "Tags": {
           "shape": "Tags",
           "locationName": "tags",
           "documentation": "<p>Tags associated with the resource.</p>"
+        }
+      }
+    },
+    "ExportSchemaRequest": {
+      "type": "structure",
+      "members": {
+        "RegistryName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "registryName",
+          "documentation": "<p>The name of the registry.</p>"
+        },
+        "SchemaName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "schemaName",
+          "documentation": "<p>The name of the schema.</p>"
+        },
+        "SchemaVersion": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "schemaVersion",
+          "documentation": "<p>Specifying this limits the results to only this schema version.</p>"
+        },
+        "Type": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "type"
+        }
+      },
+      "required": [
+        "RegistryName",
+        "SchemaName",
+        "Type"
+      ]
+    },
+    "ExportSchemaResponse": {
+      "type": "structure",
+      "members": {
+        "Content": {
+          "shape": "__string"
+        },
+        "SchemaArn": {
+          "shape": "__string"
+        },
+        "SchemaName": {
+          "shape": "__string"
+        },
+        "SchemaVersion": {
+          "shape": "__string"
+        },
+        "Type": {
+          "shape": "__string"
         }
       }
     },
@@ -2149,6 +2263,10 @@
         "SchemaVersion": {
           "shape": "__string",
           "documentation": "<p>The version number of the schema.</p>"
+        },
+        "Type": {
+          "shape": "Type",
+          "documentation": "<p>The type of schema.</p>"
         }
       }
     },
@@ -2183,6 +2301,10 @@
         "SchemaVersion": {
           "shape": "__string",
           "documentation": "<p>The version number of the schema</p>"
+        },
+        "Type": {
+          "shape": "Type",
+          "documentation": "<p>The type of schema.</p>"
         }
       }
     },
@@ -2319,7 +2441,8 @@
     "Type": {
       "type": "string",
       "enum": [
-        "OpenApi3"
+        "OpenApi3",
+        "JSONSchemaDraft4"
       ]
     },
     "UntagResourceRequest": {
@@ -2355,6 +2478,10 @@
           "location": "uri",
           "locationName": "discovererId",
           "documentation": "<p>The ID of the discoverer.</p>"
+        },
+        "CrossAccount": {
+          "shape": "__boolean",
+          "documentation": "<p>Support discovery of schemas in events sent to the bus from another account. (default: true)</p>"
         }
       },
       "required": [
@@ -2383,6 +2510,10 @@
         "State": {
           "shape": "DiscovererState",
           "documentation": "<p>The state of the discoverer.</p>"
+        },
+        "CrossAccount": {
+          "shape": "__boolean",
+          "documentation": "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
         },
         "Tags": {
           "shape": "Tags",
@@ -2506,6 +2637,9 @@
           "documentation": "<p>The date the schema version was created.</p>"
         }
       }
+    },
+    "__boolean": {
+      "type": "boolean"
     },
     "__integer": {
       "type": "integer"

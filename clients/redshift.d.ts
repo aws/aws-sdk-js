@@ -21,19 +21,51 @@ declare class Redshift extends Service {
    */
   acceptReservedNodeExchange(callback?: (err: AWSError, data: Redshift.Types.AcceptReservedNodeExchangeOutputMessage) => void): Request<Redshift.Types.AcceptReservedNodeExchangeOutputMessage, AWSError>;
   /**
-   * Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. If you authorize access to an Amazon EC2 security group, specify EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS Region.  If you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing.  You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to Working with Security Groups in the Amazon Redshift Cluster Management Guide.
+   * Adds a partner integration to a cluster. This operation authorizes a partner to push status updates for the specified database. To complete the integration, you also set up the integration on the partner website.
+   */
+  addPartner(params: Redshift.Types.PartnerIntegrationInputMessage, callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
+  /**
+   * Adds a partner integration to a cluster. This operation authorizes a partner to push status updates for the specified database. To complete the integration, you also set up the integration on the partner website.
+   */
+  addPartner(callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
+  /**
+   * From a datashare consumer account, associates a datashare with the account (AssociateEntireAccount) or the specified namespace (ConsumerArn). If you make this association, the consumer can consume the datashare.
+   */
+  associateDataShareConsumer(params: Redshift.Types.AssociateDataShareConsumerMessage, callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
+  /**
+   * From a datashare consumer account, associates a datashare with the account (AssociateEntireAccount) or the specified namespace (ConsumerArn). If you make this association, the consumer can consume the datashare.
+   */
+  associateDataShareConsumer(callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
+  /**
+   * Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. If you authorize access to an Amazon EC2 security group, specify EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group and Amazon Redshift cluster must be in the same Amazon Web Services Region.  If you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing.  You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to Working with Security Groups in the Amazon Redshift Cluster Management Guide.
    */
   authorizeClusterSecurityGroupIngress(params: Redshift.Types.AuthorizeClusterSecurityGroupIngressMessage, callback?: (err: AWSError, data: Redshift.Types.AuthorizeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.AuthorizeClusterSecurityGroupIngressResult, AWSError>;
   /**
-   * Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. If you authorize access to an Amazon EC2 security group, specify EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group and Amazon Redshift cluster must be in the same AWS Region.  If you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing.  You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to Working with Security Groups in the Amazon Redshift Cluster Management Guide.
+   * Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether the application accessing your cluster is running on the Internet or an Amazon EC2 instance, you can authorize inbound access to either a Classless Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as many as 20 ingress rules to an Amazon Redshift security group. If you authorize access to an Amazon EC2 security group, specify EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group and Amazon Redshift cluster must be in the same Amazon Web Services Region.  If you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing.  You must also associate the security group with a cluster so that clients running on these IP addresses or the EC2 instance are authorized to connect to the cluster. For information about managing security groups, go to Working with Security Groups in the Amazon Redshift Cluster Management Guide.
    */
   authorizeClusterSecurityGroupIngress(callback?: (err: AWSError, data: Redshift.Types.AuthorizeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.AuthorizeClusterSecurityGroupIngressResult, AWSError>;
   /**
-   * Authorizes the specified AWS customer account to restore the specified snapshot.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
+   * From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts. To authorize a datashare for a data consumer, the producer account must have the correct access privileges.
+   */
+  authorizeDataShare(params: Redshift.Types.AuthorizeDataShareMessage, callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
+  /**
+   * From a data producer account, authorizes the sharing of a datashare with one or more consumer accounts. To authorize a datashare for a data consumer, the producer account must have the correct access privileges.
+   */
+  authorizeDataShare(callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
+  /**
+   * Grants access to a cluster.
+   */
+  authorizeEndpointAccess(params: Redshift.Types.AuthorizeEndpointAccessMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAuthorization) => void): Request<Redshift.Types.EndpointAuthorization, AWSError>;
+  /**
+   * Grants access to a cluster.
+   */
+  authorizeEndpointAccess(callback?: (err: AWSError, data: Redshift.Types.EndpointAuthorization) => void): Request<Redshift.Types.EndpointAuthorization, AWSError>;
+  /**
+   * Authorizes the specified Amazon Web Services account to restore the specified snapshot.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
   authorizeSnapshotAccess(params: Redshift.Types.AuthorizeSnapshotAccessMessage, callback?: (err: AWSError, data: Redshift.Types.AuthorizeSnapshotAccessResult) => void): Request<Redshift.Types.AuthorizeSnapshotAccessResult, AWSError>;
   /**
-   * Authorizes the specified AWS customer account to restore the specified snapshot.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
+   * Authorizes the specified Amazon Web Services account to restore the specified snapshot.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
   authorizeSnapshotAccess(callback?: (err: AWSError, data: Redshift.Types.AuthorizeSnapshotAccessResult) => void): Request<Redshift.Types.AuthorizeSnapshotAccessResult, AWSError>;
   /**
@@ -68,6 +100,14 @@ declare class Redshift extends Service {
    * Copies the specified automated cluster snapshot to a new manual cluster snapshot. The source must be an automated snapshot and it must be in the available state. When you delete a cluster, Amazon Redshift deletes any automated snapshots of the cluster. Also, when the retention period of the snapshot expires, Amazon Redshift automatically deletes it. If you want to keep an automated snapshot for a longer period, you can make a manual copy of the snapshot. Manual snapshots are retained until you delete them.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
   copyClusterSnapshot(callback?: (err: AWSError, data: Redshift.Types.CopyClusterSnapshotResult) => void): Request<Redshift.Types.CopyClusterSnapshotResult, AWSError>;
+  /**
+   * Creates an authentication profile with the specified parameters.
+   */
+  createAuthenticationProfile(params: Redshift.Types.CreateAuthenticationProfileMessage, callback?: (err: AWSError, data: Redshift.Types.CreateAuthenticationProfileResult) => void): Request<Redshift.Types.CreateAuthenticationProfileResult, AWSError>;
+  /**
+   * Creates an authentication profile with the specified parameters.
+   */
+  createAuthenticationProfile(callback?: (err: AWSError, data: Redshift.Types.CreateAuthenticationProfileResult) => void): Request<Redshift.Types.CreateAuthenticationProfileResult, AWSError>;
   /**
    * Creates a new cluster with the specified parameters. To create a cluster in Virtual Private Cloud (VPC), you must provide a cluster subnet group name. The cluster subnet group identifies the subnets of your VPC that Amazon Redshift uses when creating the cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
@@ -109,11 +149,19 @@ declare class Redshift extends Service {
    */
   createClusterSubnetGroup(callback?: (err: AWSError, data: Redshift.Types.CreateClusterSubnetGroupResult) => void): Request<Redshift.Types.CreateClusterSubnetGroupResult, AWSError>;
   /**
-   * Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console. You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities. Notifications will be sent for all events you want that match those criteria. For example, you can specify source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and Backup categories for the specified clusters. If you specify both the source type and source IDs, such as source type = cluster and source identifier = my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type but do not specify a source identifier, you will receive notice of the events for the objects of that type in your AWS account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all Amazon Redshift sources belonging to your AWS account. You must specify a source type if you specify a source ID.
+   * Creates a Redshift-managed VPC endpoint.
+   */
+  createEndpointAccess(params: Redshift.Types.CreateEndpointAccessMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAccess) => void): Request<Redshift.Types.EndpointAccess, AWSError>;
+  /**
+   * Creates a Redshift-managed VPC endpoint.
+   */
+  createEndpointAccess(callback?: (err: AWSError, data: Redshift.Types.EndpointAccess) => void): Request<Redshift.Types.EndpointAccess, AWSError>;
+  /**
+   * Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console. You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities. Notifications will be sent for all events you want that match those criteria. For example, you can specify source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and Backup categories for the specified clusters. If you specify both the source type and source IDs, such as source type = cluster and source identifier = my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type but do not specify a source identifier, you will receive notice of the events for the objects of that type in your Amazon Web Services account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all Amazon Redshift sources belonging to your Amazon Web Services account. You must specify a source type if you specify a source ID.
    */
   createEventSubscription(params: Redshift.Types.CreateEventSubscriptionMessage, callback?: (err: AWSError, data: Redshift.Types.CreateEventSubscriptionResult) => void): Request<Redshift.Types.CreateEventSubscriptionResult, AWSError>;
   /**
-   * Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console. You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities. Notifications will be sent for all events you want that match those criteria. For example, you can specify source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and Backup categories for the specified clusters. If you specify both the source type and source IDs, such as source type = cluster and source identifier = my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type but do not specify a source identifier, you will receive notice of the events for the objects of that type in your AWS account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all Amazon Redshift sources belonging to your AWS account. You must specify a source type if you specify a source ID.
+   * Creates an Amazon Redshift event notification subscription. This action requires an ARN (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console, the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in the SNS console. You can specify the source type, and lists of Amazon Redshift source IDs, event categories, and event severities. Notifications will be sent for all events you want that match those criteria. For example, you can specify source type = cluster, source ID = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity = ERROR. The subscription will only send notifications for those ERROR events in the Availability and Backup categories for the specified clusters. If you specify both the source type and source IDs, such as source type = cluster and source identifier = my-cluster-1, notifications will be sent for all the cluster events for my-cluster-1. If you specify a source type but do not specify a source identifier, you will receive notice of the events for the objects of that type in your Amazon Web Services account. If you do not specify either the SourceType nor the SourceIdentifier, you will be notified of events generated from all Amazon Redshift sources belonging to your Amazon Web Services account. You must specify a source type if you specify a source ID.
    */
   createEventSubscription(callback?: (err: AWSError, data: Redshift.Types.CreateEventSubscriptionResult) => void): Request<Redshift.Types.CreateEventSubscriptionResult, AWSError>;
   /**
@@ -141,11 +189,11 @@ declare class Redshift extends Service {
    */
   createScheduledAction(callback?: (err: AWSError, data: Redshift.Types.ScheduledAction) => void): Request<Redshift.Types.ScheduledAction, AWSError>;
   /**
-   * Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from AWS Key Management Service (AWS KMS) to encrypt copied snapshots in a destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
+   * Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from Key Management Service (KMS) to encrypt copied snapshots in a destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
    */
   createSnapshotCopyGrant(params: Redshift.Types.CreateSnapshotCopyGrantMessage, callback?: (err: AWSError, data: Redshift.Types.CreateSnapshotCopyGrantResult) => void): Request<Redshift.Types.CreateSnapshotCopyGrantResult, AWSError>;
   /**
-   * Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from AWS Key Management Service (AWS KMS) to encrypt copied snapshots in a destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
+   * Creates a snapshot copy grant that permits Amazon Redshift to use a customer master key (CMK) from Key Management Service (KMS) to encrypt copied snapshots in a destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
    */
   createSnapshotCopyGrant(callback?: (err: AWSError, data: Redshift.Types.CreateSnapshotCopyGrantResult) => void): Request<Redshift.Types.CreateSnapshotCopyGrantResult, AWSError>;
   /**
@@ -172,6 +220,22 @@ declare class Redshift extends Service {
    * Creates a usage limit for a specified Amazon Redshift feature on a cluster. The usage limit is identified by the returned usage limit identifier.
    */
   createUsageLimit(callback?: (err: AWSError, data: Redshift.Types.UsageLimit) => void): Request<Redshift.Types.UsageLimit, AWSError>;
+  /**
+   * From the producer account, removes authorization from the specified datashare. 
+   */
+  deauthorizeDataShare(params: Redshift.Types.DeauthorizeDataShareMessage, callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
+  /**
+   * From the producer account, removes authorization from the specified datashare. 
+   */
+  deauthorizeDataShare(callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
+  /**
+   * Deletes an authentication profile.
+   */
+  deleteAuthenticationProfile(params: Redshift.Types.DeleteAuthenticationProfileMessage, callback?: (err: AWSError, data: Redshift.Types.DeleteAuthenticationProfileResult) => void): Request<Redshift.Types.DeleteAuthenticationProfileResult, AWSError>;
+  /**
+   * Deletes an authentication profile.
+   */
+  deleteAuthenticationProfile(callback?: (err: AWSError, data: Redshift.Types.DeleteAuthenticationProfileResult) => void): Request<Redshift.Types.DeleteAuthenticationProfileResult, AWSError>;
   /**
    * Deletes a previously provisioned cluster without its final snapshot being created. A successful response from the web service indicates that the request was received correctly. Use DescribeClusters to monitor the status of the deletion. The delete operation cannot be canceled or reverted once submitted. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide. If you want to shut down the cluster and retain it for future use, set SkipFinalClusterSnapshot to false and specify a name for FinalClusterSnapshotIdentifier. You can later restore this snapshot to resume using the cluster. If a final cluster snapshot is requested, the status of the cluster will be "final-snapshot" while the snapshot is being taken, then it's "deleting" once Amazon Redshift begins deleting the cluster.   For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
@@ -213,6 +277,14 @@ declare class Redshift extends Service {
    */
   deleteClusterSubnetGroup(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes a Redshift-managed VPC endpoint.
+   */
+  deleteEndpointAccess(params: Redshift.Types.DeleteEndpointAccessMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAccess) => void): Request<Redshift.Types.EndpointAccess, AWSError>;
+  /**
+   * Deletes a Redshift-managed VPC endpoint.
+   */
+  deleteEndpointAccess(callback?: (err: AWSError, data: Redshift.Types.EndpointAccess) => void): Request<Redshift.Types.EndpointAccess, AWSError>;
+  /**
    * Deletes an Amazon Redshift event notification subscription.
    */
   deleteEventSubscription(params: Redshift.Types.DeleteEventSubscriptionMessage, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -236,6 +308,14 @@ declare class Redshift extends Service {
    * Deletes the specified Amazon Redshift HSM configuration.
    */
   deleteHsmConfiguration(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a partner integration from a cluster. Data can still flow to the cluster until the integration is deleted at the partner's website.
+   */
+  deletePartner(params: Redshift.Types.PartnerIntegrationInputMessage, callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
+  /**
+   * Deletes a partner integration from a cluster. Data can still flow to the cluster until the integration is deleted at the partner's website.
+   */
+  deletePartner(callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
   /**
    * Deletes a scheduled action. 
    */
@@ -285,6 +365,14 @@ declare class Redshift extends Service {
    */
   describeAccountAttributes(callback?: (err: AWSError, data: Redshift.Types.AccountAttributeList) => void): Request<Redshift.Types.AccountAttributeList, AWSError>;
   /**
+   * Describes an authentication profile.
+   */
+  describeAuthenticationProfiles(params: Redshift.Types.DescribeAuthenticationProfilesMessage, callback?: (err: AWSError, data: Redshift.Types.DescribeAuthenticationProfilesResult) => void): Request<Redshift.Types.DescribeAuthenticationProfilesResult, AWSError>;
+  /**
+   * Describes an authentication profile.
+   */
+  describeAuthenticationProfiles(callback?: (err: AWSError, data: Redshift.Types.DescribeAuthenticationProfilesResult) => void): Request<Redshift.Types.DescribeAuthenticationProfilesResult, AWSError>;
+  /**
    * Returns an array of ClusterDbRevision objects.
    */
   describeClusterDbRevisions(params: Redshift.Types.DescribeClusterDbRevisionsMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterDbRevisionsMessage) => void): Request<Redshift.Types.ClusterDbRevisionsMessage, AWSError>;
@@ -317,19 +405,19 @@ declare class Redshift extends Service {
    */
   describeClusterSecurityGroups(callback?: (err: AWSError, data: Redshift.Types.ClusterSecurityGroupMessage) => void): Request<Redshift.Types.ClusterSecurityGroupMessage, AWSError>;
   /**
-   * Returns one or more snapshot objects, which contain metadata about your cluster snapshots. By default, this operation returns information about all snapshots of all clusters that are owned by you AWS customer account. No information is returned for snapshots owned by inactive AWS customer accounts. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all snapshots that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all snapshots that have any combination of those values are returned. Only snapshots that you own are returned in the response; shared snapshots are not returned with the tag key and tag value request parameters. If both tag keys and values are omitted from the request, snapshots are returned regardless of whether they have tag keys or values associated with them.
+   * Returns one or more snapshot objects, which contain metadata about your cluster snapshots. By default, this operation returns information about all snapshots of all clusters that are owned by your Amazon Web Services account. No information is returned for snapshots owned by inactive Amazon Web Services accounts. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all snapshots that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all snapshots that have any combination of those values are returned. Only snapshots that you own are returned in the response; shared snapshots are not returned with the tag key and tag value request parameters. If both tag keys and values are omitted from the request, snapshots are returned regardless of whether they have tag keys or values associated with them.
    */
   describeClusterSnapshots(params: Redshift.Types.DescribeClusterSnapshotsMessage, callback?: (err: AWSError, data: Redshift.Types.SnapshotMessage) => void): Request<Redshift.Types.SnapshotMessage, AWSError>;
   /**
-   * Returns one or more snapshot objects, which contain metadata about your cluster snapshots. By default, this operation returns information about all snapshots of all clusters that are owned by you AWS customer account. No information is returned for snapshots owned by inactive AWS customer accounts. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all snapshots that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all snapshots that have any combination of those values are returned. Only snapshots that you own are returned in the response; shared snapshots are not returned with the tag key and tag value request parameters. If both tag keys and values are omitted from the request, snapshots are returned regardless of whether they have tag keys or values associated with them.
+   * Returns one or more snapshot objects, which contain metadata about your cluster snapshots. By default, this operation returns information about all snapshots of all clusters that are owned by your Amazon Web Services account. No information is returned for snapshots owned by inactive Amazon Web Services accounts. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all snapshots that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all snapshots that have any combination of those values are returned. Only snapshots that you own are returned in the response; shared snapshots are not returned with the tag key and tag value request parameters. If both tag keys and values are omitted from the request, snapshots are returned regardless of whether they have tag keys or values associated with them.
    */
   describeClusterSnapshots(callback?: (err: AWSError, data: Redshift.Types.SnapshotMessage) => void): Request<Redshift.Types.SnapshotMessage, AWSError>;
   /**
-   * Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in you AWS account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all subnet groups that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all subnet groups that have any combination of those values are returned. If both tag keys and values are omitted from the request, subnet groups are returned regardless of whether they have tag keys or values associated with them.
+   * Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in your Amazon Web Services account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all subnet groups that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all subnet groups that have any combination of those values are returned. If both tag keys and values are omitted from the request, subnet groups are returned regardless of whether they have tag keys or values associated with them.
    */
   describeClusterSubnetGroups(params: Redshift.Types.DescribeClusterSubnetGroupsMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterSubnetGroupMessage) => void): Request<Redshift.Types.ClusterSubnetGroupMessage, AWSError>;
   /**
-   * Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in you AWS account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all subnet groups that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all subnet groups that have any combination of those values are returned. If both tag keys and values are omitted from the request, subnet groups are returned regardless of whether they have tag keys or values associated with them.
+   * Returns one or more cluster subnet group objects, which contain metadata about your cluster subnet groups. By default, this operation returns information about all cluster subnet groups that are defined in your Amazon Web Services account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all subnet groups that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all subnet groups that have any combination of those values are returned. If both tag keys and values are omitted from the request, subnet groups are returned regardless of whether they have tag keys or values associated with them.
    */
   describeClusterSubnetGroups(callback?: (err: AWSError, data: Redshift.Types.ClusterSubnetGroupMessage) => void): Request<Redshift.Types.ClusterSubnetGroupMessage, AWSError>;
   /**
@@ -357,6 +445,30 @@ declare class Redshift extends Service {
    */
   describeClusters(callback?: (err: AWSError, data: Redshift.Types.ClustersMessage) => void): Request<Redshift.Types.ClustersMessage, AWSError>;
   /**
+   * Shows the status of any inbound or outbound datashares available in the specified account.
+   */
+  describeDataShares(params: Redshift.Types.DescribeDataSharesMessage, callback?: (err: AWSError, data: Redshift.Types.DescribeDataSharesResult) => void): Request<Redshift.Types.DescribeDataSharesResult, AWSError>;
+  /**
+   * Shows the status of any inbound or outbound datashares available in the specified account.
+   */
+  describeDataShares(callback?: (err: AWSError, data: Redshift.Types.DescribeDataSharesResult) => void): Request<Redshift.Types.DescribeDataSharesResult, AWSError>;
+  /**
+   * Returns a list of datashares where the account identifier being called is a consumer account identifier.
+   */
+  describeDataSharesForConsumer(params: Redshift.Types.DescribeDataSharesForConsumerMessage, callback?: (err: AWSError, data: Redshift.Types.DescribeDataSharesForConsumerResult) => void): Request<Redshift.Types.DescribeDataSharesForConsumerResult, AWSError>;
+  /**
+   * Returns a list of datashares where the account identifier being called is a consumer account identifier.
+   */
+  describeDataSharesForConsumer(callback?: (err: AWSError, data: Redshift.Types.DescribeDataSharesForConsumerResult) => void): Request<Redshift.Types.DescribeDataSharesForConsumerResult, AWSError>;
+  /**
+   * Returns a list of datashares when the account identifier being called is a producer account identifier.
+   */
+  describeDataSharesForProducer(params: Redshift.Types.DescribeDataSharesForProducerMessage, callback?: (err: AWSError, data: Redshift.Types.DescribeDataSharesForProducerResult) => void): Request<Redshift.Types.DescribeDataSharesForProducerResult, AWSError>;
+  /**
+   * Returns a list of datashares when the account identifier being called is a producer account identifier.
+   */
+  describeDataSharesForProducer(callback?: (err: AWSError, data: Redshift.Types.DescribeDataSharesForProducerResult) => void): Request<Redshift.Types.DescribeDataSharesForProducerResult, AWSError>;
+  /**
    * Returns a list of parameter settings for the specified parameter group family.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
    */
   describeDefaultClusterParameters(params: Redshift.Types.DescribeDefaultClusterParametersMessage, callback?: (err: AWSError, data: Redshift.Types.DescribeDefaultClusterParametersResult) => void): Request<Redshift.Types.DescribeDefaultClusterParametersResult, AWSError>;
@@ -364,6 +476,22 @@ declare class Redshift extends Service {
    * Returns a list of parameter settings for the specified parameter group family.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
    */
   describeDefaultClusterParameters(callback?: (err: AWSError, data: Redshift.Types.DescribeDefaultClusterParametersResult) => void): Request<Redshift.Types.DescribeDefaultClusterParametersResult, AWSError>;
+  /**
+   * Describes a Redshift-managed VPC endpoint.
+   */
+  describeEndpointAccess(params: Redshift.Types.DescribeEndpointAccessMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAccessList) => void): Request<Redshift.Types.EndpointAccessList, AWSError>;
+  /**
+   * Describes a Redshift-managed VPC endpoint.
+   */
+  describeEndpointAccess(callback?: (err: AWSError, data: Redshift.Types.EndpointAccessList) => void): Request<Redshift.Types.EndpointAccessList, AWSError>;
+  /**
+   * Describes an endpoint authorization.
+   */
+  describeEndpointAuthorization(params: Redshift.Types.DescribeEndpointAuthorizationMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAuthorizationList) => void): Request<Redshift.Types.EndpointAuthorizationList, AWSError>;
+  /**
+   * Describes an endpoint authorization.
+   */
+  describeEndpointAuthorization(callback?: (err: AWSError, data: Redshift.Types.EndpointAuthorizationList) => void): Request<Redshift.Types.EndpointAuthorizationList, AWSError>;
   /**
    * Displays a list of event categories for all event source types, or for a specified source type. For a list of the event categories and source types, go to Amazon Redshift Event Notifications.
    */
@@ -389,19 +517,19 @@ declare class Redshift extends Service {
    */
   describeEvents(callback?: (err: AWSError, data: Redshift.Types.EventsMessage) => void): Request<Redshift.Types.EventsMessage, AWSError>;
   /**
-   * Returns information about the specified HSM client certificate. If no certificate ID is specified, returns information about all the HSM certificates owned by your AWS customer account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM client certificates that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all HSM client certificates that have any combination of those values are returned. If both tag keys and values are omitted from the request, HSM client certificates are returned regardless of whether they have tag keys or values associated with them.
+   * Returns information about the specified HSM client certificate. If no certificate ID is specified, returns information about all the HSM certificates owned by your Amazon Web Services account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM client certificates that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all HSM client certificates that have any combination of those values are returned. If both tag keys and values are omitted from the request, HSM client certificates are returned regardless of whether they have tag keys or values associated with them.
    */
   describeHsmClientCertificates(params: Redshift.Types.DescribeHsmClientCertificatesMessage, callback?: (err: AWSError, data: Redshift.Types.HsmClientCertificateMessage) => void): Request<Redshift.Types.HsmClientCertificateMessage, AWSError>;
   /**
-   * Returns information about the specified HSM client certificate. If no certificate ID is specified, returns information about all the HSM certificates owned by your AWS customer account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM client certificates that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all HSM client certificates that have any combination of those values are returned. If both tag keys and values are omitted from the request, HSM client certificates are returned regardless of whether they have tag keys or values associated with them.
+   * Returns information about the specified HSM client certificate. If no certificate ID is specified, returns information about all the HSM certificates owned by your Amazon Web Services account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM client certificates that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all HSM client certificates that have any combination of those values are returned. If both tag keys and values are omitted from the request, HSM client certificates are returned regardless of whether they have tag keys or values associated with them.
    */
   describeHsmClientCertificates(callback?: (err: AWSError, data: Redshift.Types.HsmClientCertificateMessage) => void): Request<Redshift.Types.HsmClientCertificateMessage, AWSError>;
   /**
-   * Returns information about the specified Amazon Redshift HSM configuration. If no configuration ID is specified, returns information about all the HSM configurations owned by your AWS customer account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM connections that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all HSM connections that have any combination of those values are returned. If both tag keys and values are omitted from the request, HSM connections are returned regardless of whether they have tag keys or values associated with them.
+   * Returns information about the specified Amazon Redshift HSM configuration. If no configuration ID is specified, returns information about all the HSM configurations owned by your Amazon Web Services account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM connections that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all HSM connections that have any combination of those values are returned. If both tag keys and values are omitted from the request, HSM connections are returned regardless of whether they have tag keys or values associated with them.
    */
   describeHsmConfigurations(params: Redshift.Types.DescribeHsmConfigurationsMessage, callback?: (err: AWSError, data: Redshift.Types.HsmConfigurationMessage) => void): Request<Redshift.Types.HsmConfigurationMessage, AWSError>;
   /**
-   * Returns information about the specified Amazon Redshift HSM configuration. If no configuration ID is specified, returns information about all the HSM configurations owned by your AWS customer account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM connections that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all HSM connections that have any combination of those values are returned. If both tag keys and values are omitted from the request, HSM connections are returned regardless of whether they have tag keys or values associated with them.
+   * Returns information about the specified Amazon Redshift HSM configuration. If no configuration ID is specified, returns information about all the HSM configurations owned by your Amazon Web Services account. If you specify both tag keys and tag values in the same request, Amazon Redshift returns all HSM connections that match any combination of the specified keys and values. For example, if you have owner and environment for tag keys, and admin and test for tag values, all HSM connections that have any combination of those values are returned. If both tag keys and values are omitted from the request, HSM connections are returned regardless of whether they have tag keys or values associated with them.
    */
   describeHsmConfigurations(callback?: (err: AWSError, data: Redshift.Types.HsmConfigurationMessage) => void): Request<Redshift.Types.HsmConfigurationMessage, AWSError>;
   /**
@@ -421,13 +549,21 @@ declare class Redshift extends Service {
    */
   describeNodeConfigurationOptions(callback?: (err: AWSError, data: Redshift.Types.NodeConfigurationOptionsMessage) => void): Request<Redshift.Types.NodeConfigurationOptionsMessage, AWSError>;
   /**
-   * Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
+   * Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific Amazon Web Services Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   describeOrderableClusterOptions(params: Redshift.Types.DescribeOrderableClusterOptionsMessage, callback?: (err: AWSError, data: Redshift.Types.OrderableClusterOptionsMessage) => void): Request<Redshift.Types.OrderableClusterOptionsMessage, AWSError>;
   /**
-   * Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific AWS Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
+   * Returns a list of orderable cluster options. Before you create a new cluster you can use this operation to find what options are available, such as the EC2 Availability Zones (AZ) in the specific Amazon Web Services Region that you can specify, and the node types you can request. The node types differ by available storage, memory, CPU and price. With the cost involved you might want to obtain a list of cluster options in the specific region and specify values when creating a cluster. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   describeOrderableClusterOptions(callback?: (err: AWSError, data: Redshift.Types.OrderableClusterOptionsMessage) => void): Request<Redshift.Types.OrderableClusterOptionsMessage, AWSError>;
+  /**
+   * Returns information about the partner integrations defined for a cluster.
+   */
+  describePartners(params: Redshift.Types.DescribePartnersInputMessage, callback?: (err: AWSError, data: Redshift.Types.DescribePartnersOutputMessage) => void): Request<Redshift.Types.DescribePartnersOutputMessage, AWSError>;
+  /**
+   * Returns information about the partner integrations defined for a cluster.
+   */
+  describePartners(callback?: (err: AWSError, data: Redshift.Types.DescribePartnersOutputMessage) => void): Request<Redshift.Types.DescribePartnersOutputMessage, AWSError>;
   /**
    * Returns a list of the available reserved node offerings by Amazon Redshift with their descriptions including the node type, the fixed and recurring costs of reserving the node and duration the node will be reserved for you. These descriptions help you determine which reserve node offering you want to purchase. You then use the unique offering ID in you call to PurchaseReservedNodeOffering to reserve one or more nodes for your Amazon Redshift cluster.   For more information about reserved node offerings, go to Purchasing Reserved Nodes in the Amazon Redshift Cluster Management Guide.
    */
@@ -461,11 +597,11 @@ declare class Redshift extends Service {
    */
   describeScheduledActions(callback?: (err: AWSError, data: Redshift.Types.ScheduledActionsMessage) => void): Request<Redshift.Types.ScheduledActionsMessage, AWSError>;
   /**
-   * Returns a list of snapshot copy grants owned by the AWS account in the destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
+   * Returns a list of snapshot copy grants owned by the Amazon Web Services account in the destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
    */
   describeSnapshotCopyGrants(params: Redshift.Types.DescribeSnapshotCopyGrantsMessage, callback?: (err: AWSError, data: Redshift.Types.SnapshotCopyGrantMessage) => void): Request<Redshift.Types.SnapshotCopyGrantMessage, AWSError>;
   /**
-   * Returns a list of snapshot copy grants owned by the AWS account in the destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
+   * Returns a list of snapshot copy grants owned by the Amazon Web Services account in the destination region.  For more information about managing snapshot copy grants, go to Amazon Redshift Database Encryption in the Amazon Redshift Cluster Management Guide. 
    */
   describeSnapshotCopyGrants(callback?: (err: AWSError, data: Redshift.Types.SnapshotCopyGrantMessage) => void): Request<Redshift.Types.SnapshotCopyGrantMessage, AWSError>;
   /**
@@ -513,13 +649,21 @@ declare class Redshift extends Service {
    */
   disableLogging(callback?: (err: AWSError, data: Redshift.Types.LoggingStatus) => void): Request<Redshift.Types.LoggingStatus, AWSError>;
   /**
-   * Disables the automatic copying of snapshots from one region to another region for a specified cluster. If your cluster and its snapshots are encrypted using a customer master key (CMK) from AWS KMS, use DeleteSnapshotCopyGrant to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. 
+   * Disables the automatic copying of snapshots from one region to another region for a specified cluster. If your cluster and its snapshots are encrypted using a customer master key (CMK) from Key Management Service, use DeleteSnapshotCopyGrant to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. 
    */
   disableSnapshotCopy(params: Redshift.Types.DisableSnapshotCopyMessage, callback?: (err: AWSError, data: Redshift.Types.DisableSnapshotCopyResult) => void): Request<Redshift.Types.DisableSnapshotCopyResult, AWSError>;
   /**
-   * Disables the automatic copying of snapshots from one region to another region for a specified cluster. If your cluster and its snapshots are encrypted using a customer master key (CMK) from AWS KMS, use DeleteSnapshotCopyGrant to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. 
+   * Disables the automatic copying of snapshots from one region to another region for a specified cluster. If your cluster and its snapshots are encrypted using a customer master key (CMK) from Key Management Service, use DeleteSnapshotCopyGrant to delete the grant that grants Amazon Redshift permission to the CMK in the destination region. 
    */
   disableSnapshotCopy(callback?: (err: AWSError, data: Redshift.Types.DisableSnapshotCopyResult) => void): Request<Redshift.Types.DisableSnapshotCopyResult, AWSError>;
+  /**
+   * From a consumer account, remove association for the specified datashare. 
+   */
+  disassociateDataShareConsumer(params: Redshift.Types.DisassociateDataShareConsumerMessage, callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
+  /**
+   * From a consumer account, remove association for the specified datashare. 
+   */
+  disassociateDataShareConsumer(callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
   /**
    * Starts logging information, such as queries and connection attempts, for the specified Amazon Redshift cluster.
    */
@@ -537,11 +681,11 @@ declare class Redshift extends Service {
    */
   enableSnapshotCopy(callback?: (err: AWSError, data: Redshift.Types.EnableSnapshotCopyResult) => void): Request<Redshift.Types.EnableSnapshotCopyResult, AWSError>;
   /**
-   * Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with IAM: if AutoCreate is False or IAMA: if AutoCreate is True. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Using IAM Authentication to Generate Database User Credentials in the Amazon Redshift Cluster Management Guide. The AWS Identity and Access Management (IAM)user or role that executes GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Resource Policies for GetClusterCredentials in the Amazon Redshift Cluster Management Guide. If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup action with access to the listed dbgroups.  In addition, if the AutoCreate parameter is set to True, then the policy must include the redshift:CreateClusterUser privilege. If the DbName parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name. 
+   * Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with IAM: if AutoCreate is False or IAMA: if AutoCreate is True. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Using IAM Authentication to Generate Database User Credentials in the Amazon Redshift Cluster Management Guide. The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Resource Policies for GetClusterCredentials in the Amazon Redshift Cluster Management Guide. If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup action with access to the listed dbgroups.  In addition, if the AutoCreate parameter is set to True, then the policy must include the redshift:CreateClusterUser privilege. If the DbName parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name. 
    */
   getClusterCredentials(params: Redshift.Types.GetClusterCredentialsMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterCredentials) => void): Request<Redshift.Types.ClusterCredentials, AWSError>;
   /**
-   * Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with IAM: if AutoCreate is False or IAMA: if AutoCreate is True. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Using IAM Authentication to Generate Database User Credentials in the Amazon Redshift Cluster Management Guide. The AWS Identity and Access Management (IAM)user or role that executes GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Resource Policies for GetClusterCredentials in the Amazon Redshift Cluster Management Guide. If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup action with access to the listed dbgroups.  In addition, if the AutoCreate parameter is set to True, then the policy must include the redshift:CreateClusterUser privilege. If the DbName parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name. 
+   * Returns a database user name and temporary password with temporary authorization to log on to an Amazon Redshift database. The action returns the database user name prefixed with IAM: if AutoCreate is False or IAMA: if AutoCreate is True. You can optionally specify one or more database user groups that the user will join at log on. By default, the temporary credentials expire in 900 seconds. You can optionally specify a duration between 900 seconds (15 minutes) and 3600 seconds (60 minutes). For more information, see Using IAM Authentication to Generate Database User Credentials in the Amazon Redshift Cluster Management Guide. The Identity and Access Management (IAM) user or role that runs GetClusterCredentials must have an IAM policy attached that allows access to all necessary actions and resources. For more information about permissions, see Resource Policies for GetClusterCredentials in the Amazon Redshift Cluster Management Guide. If the DbGroups parameter is specified, the IAM policy must allow the redshift:JoinGroup action with access to the listed dbgroups.  In addition, if the AutoCreate parameter is set to True, then the policy must include the redshift:CreateClusterUser privilege. If the DbName parameter is specified, the IAM policy must allow access to the resource dbname for the specified database name. 
    */
   getClusterCredentials(callback?: (err: AWSError, data: Redshift.Types.ClusterCredentials) => void): Request<Redshift.Types.ClusterCredentials, AWSError>;
   /**
@@ -553,11 +697,27 @@ declare class Redshift extends Service {
    */
   getReservedNodeExchangeOfferings(callback?: (err: AWSError, data: Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage) => void): Request<Redshift.Types.GetReservedNodeExchangeOfferingsOutputMessage, AWSError>;
   /**
-   * Modifies the settings for a cluster. You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change. You can add another security or parameter group, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
+   * Modifies whether a cluster can use AQUA (Advanced Query Accelerator). 
+   */
+  modifyAquaConfiguration(params: Redshift.Types.ModifyAquaInputMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyAquaOutputMessage) => void): Request<Redshift.Types.ModifyAquaOutputMessage, AWSError>;
+  /**
+   * Modifies whether a cluster can use AQUA (Advanced Query Accelerator). 
+   */
+  modifyAquaConfiguration(callback?: (err: AWSError, data: Redshift.Types.ModifyAquaOutputMessage) => void): Request<Redshift.Types.ModifyAquaOutputMessage, AWSError>;
+  /**
+   * Modifies an authentication profile.
+   */
+  modifyAuthenticationProfile(params: Redshift.Types.ModifyAuthenticationProfileMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyAuthenticationProfileResult) => void): Request<Redshift.Types.ModifyAuthenticationProfileResult, AWSError>;
+  /**
+   * Modifies an authentication profile.
+   */
+  modifyAuthenticationProfile(callback?: (err: AWSError, data: Redshift.Types.ModifyAuthenticationProfileResult) => void): Request<Redshift.Types.ModifyAuthenticationProfileResult, AWSError>;
+  /**
+   * Modifies the settings for a cluster. You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change. You can add another security or parameter group, or change the admin user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   modifyCluster(params: Redshift.Types.ModifyClusterMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterResult) => void): Request<Redshift.Types.ModifyClusterResult, AWSError>;
   /**
-   * Modifies the settings for a cluster. You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change. You can add another security or parameter group, or change the master user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
+   * Modifies the settings for a cluster. You can also change node type and the number of nodes to scale up or down the cluster. When resizing a cluster, you must specify both the number of nodes and the node type even if one of the parameters does not change. You can add another security or parameter group, or change the admin user password. Resetting a cluster password or modifying the security groups associated with a cluster do not need a reboot. However, modifying a parameter group requires a reboot for parameters to take effect. For more information about managing clusters, go to Amazon Redshift Clusters in the Amazon Redshift Cluster Management Guide.
    */
   modifyCluster(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterResult) => void): Request<Redshift.Types.ModifyClusterResult, AWSError>;
   /**
@@ -569,11 +729,11 @@ declare class Redshift extends Service {
    */
   modifyClusterDbRevision(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterDbRevisionResult) => void): Request<Redshift.Types.ModifyClusterDbRevisionResult, AWSError>;
   /**
-   * Modifies the list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. A cluster can have up to 10 IAM roles associated at any time.
+   * Modifies the list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. A cluster can have up to 10 IAM roles associated at any time.
    */
   modifyClusterIamRoles(params: Redshift.Types.ModifyClusterIamRolesMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyClusterIamRolesResult) => void): Request<Redshift.Types.ModifyClusterIamRolesResult, AWSError>;
   /**
-   * Modifies the list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. A cluster can have up to 10 IAM roles associated at any time.
+   * Modifies the list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. A cluster can have up to 10 IAM roles associated at any time.
    */
   modifyClusterIamRoles(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterIamRolesResult) => void): Request<Redshift.Types.ModifyClusterIamRolesResult, AWSError>;
   /**
@@ -585,11 +745,11 @@ declare class Redshift extends Service {
    */
   modifyClusterMaintenance(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterMaintenanceResult) => void): Request<Redshift.Types.ModifyClusterMaintenanceResult, AWSError>;
   /**
-   * Modifies the parameters of a parameter group.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
+   * Modifies the parameters of a parameter group. For the parameters parameter, it can't contain ASCII characters.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
    */
   modifyClusterParameterGroup(params: Redshift.Types.ModifyClusterParameterGroupMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
   /**
-   * Modifies the parameters of a parameter group.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
+   * Modifies the parameters of a parameter group. For the parameters parameter, it can't contain ASCII characters.  For more information about parameters and parameter groups, go to Amazon Redshift Parameter Groups in the Amazon Redshift Cluster Management Guide.
    */
   modifyClusterParameterGroup(callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
   /**
@@ -617,6 +777,14 @@ declare class Redshift extends Service {
    */
   modifyClusterSubnetGroup(callback?: (err: AWSError, data: Redshift.Types.ModifyClusterSubnetGroupResult) => void): Request<Redshift.Types.ModifyClusterSubnetGroupResult, AWSError>;
   /**
+   * Modifies a Redshift-managed VPC endpoint.
+   */
+  modifyEndpointAccess(params: Redshift.Types.ModifyEndpointAccessMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAccess) => void): Request<Redshift.Types.EndpointAccess, AWSError>;
+  /**
+   * Modifies a Redshift-managed VPC endpoint.
+   */
+  modifyEndpointAccess(callback?: (err: AWSError, data: Redshift.Types.EndpointAccess) => void): Request<Redshift.Types.EndpointAccess, AWSError>;
+  /**
    * Modifies an existing Amazon Redshift event notification subscription.
    */
   modifyEventSubscription(params: Redshift.Types.ModifyEventSubscriptionMessage, callback?: (err: AWSError, data: Redshift.Types.ModifyEventSubscriptionResult) => void): Request<Redshift.Types.ModifyEventSubscriptionResult, AWSError>;
@@ -633,11 +801,11 @@ declare class Redshift extends Service {
    */
   modifyScheduledAction(callback?: (err: AWSError, data: Redshift.Types.ScheduledAction) => void): Request<Redshift.Types.ScheduledAction, AWSError>;
   /**
-   * Modifies the number of days to retain snapshots in the destination AWS Region after they are copied from the source AWS Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. 
+   * Modifies the number of days to retain snapshots in the destination Amazon Web Services Region after they are copied from the source Amazon Web Services Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. 
    */
   modifySnapshotCopyRetentionPeriod(params: Redshift.Types.ModifySnapshotCopyRetentionPeriodMessage, callback?: (err: AWSError, data: Redshift.Types.ModifySnapshotCopyRetentionPeriodResult) => void): Request<Redshift.Types.ModifySnapshotCopyRetentionPeriodResult, AWSError>;
   /**
-   * Modifies the number of days to retain snapshots in the destination AWS Region after they are copied from the source AWS Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. 
+   * Modifies the number of days to retain snapshots in the destination Amazon Web Services Region after they are copied from the source Amazon Web Services Region. By default, this operation only changes the retention period of copied automated snapshots. The retention periods for both new and existing copied automated snapshots are updated with the new retention period. You can set the manual option to change only the retention periods of copied manual snapshots. If you set this option, only newly copied manual snapshots have the new retention period. 
    */
   modifySnapshotCopyRetentionPeriod(callback?: (err: AWSError, data: Redshift.Types.ModifySnapshotCopyRetentionPeriodResult) => void): Request<Redshift.Types.ModifySnapshotCopyRetentionPeriodResult, AWSError>;
   /**
@@ -681,6 +849,14 @@ declare class Redshift extends Service {
    */
   rebootCluster(callback?: (err: AWSError, data: Redshift.Types.RebootClusterResult) => void): Request<Redshift.Types.RebootClusterResult, AWSError>;
   /**
+   * From the consumer account, rejects the specified datashare.
+   */
+  rejectDataShare(params: Redshift.Types.RejectDataShareMessage, callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
+  /**
+   * From the consumer account, rejects the specified datashare.
+   */
+  rejectDataShare(callback?: (err: AWSError, data: Redshift.Types.DataShare) => void): Request<Redshift.Types.DataShare, AWSError>;
+  /**
    * Sets one or more parameters of the specified parameter group to their default values and sets the source values of the parameters to "engine-default". To reset the entire parameter group specify the ResetAllParameters parameter. For parameter changes to take effect you must reboot any associated clusters. 
    */
   resetClusterParameterGroup(params: Redshift.Types.ResetClusterParameterGroupMessage, callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
@@ -689,11 +865,11 @@ declare class Redshift extends Service {
    */
   resetClusterParameterGroup(callback?: (err: AWSError, data: Redshift.Types.ClusterParameterGroupNameMessage) => void): Request<Redshift.Types.ClusterParameterGroupNameMessage, AWSError>;
   /**
-   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc1.large (if your cluster is in a VPC)   dc1.8xlarge (if your cluster is in a VPC)   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
+   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc1.large (if your cluster is in a VPC)   dc1.8xlarge (if your cluster is in a VPC)   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.xlplus   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
    */
   resizeCluster(params: Redshift.Types.ResizeClusterMessage, callback?: (err: AWSError, data: Redshift.Types.ResizeClusterResult) => void): Request<Redshift.Types.ResizeClusterResult, AWSError>;
   /**
-   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc1.large (if your cluster is in a VPC)   dc1.8xlarge (if your cluster is in a VPC)   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
+   * Changes the size of the cluster. You can change the cluster's type, or change the number or type of nodes. The default behavior is to use the elastic resize method. With an elastic resize, your cluster is available for read and write operations more quickly than with the classic resize method.  Elastic resize operations have the following restrictions:   You can only resize clusters of the following types:   dc1.large (if your cluster is in a VPC)   dc1.8xlarge (if your cluster is in a VPC)   dc2.large   dc2.8xlarge   ds2.xlarge   ds2.8xlarge   ra3.xlplus   ra3.4xlarge   ra3.16xlarge     The type of nodes that you add must match the node type for the cluster.  
    */
   resizeCluster(callback?: (err: AWSError, data: Redshift.Types.ResizeClusterResult) => void): Request<Redshift.Types.ResizeClusterResult, AWSError>;
   /**
@@ -729,11 +905,19 @@ declare class Redshift extends Service {
    */
   revokeClusterSecurityGroupIngress(callback?: (err: AWSError, data: Redshift.Types.RevokeClusterSecurityGroupIngressResult) => void): Request<Redshift.Types.RevokeClusterSecurityGroupIngressResult, AWSError>;
   /**
-   * Removes the ability of the specified AWS customer account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
+   * Revokes access to a cluster.
+   */
+  revokeEndpointAccess(params: Redshift.Types.RevokeEndpointAccessMessage, callback?: (err: AWSError, data: Redshift.Types.EndpointAuthorization) => void): Request<Redshift.Types.EndpointAuthorization, AWSError>;
+  /**
+   * Revokes access to a cluster.
+   */
+  revokeEndpointAccess(callback?: (err: AWSError, data: Redshift.Types.EndpointAuthorization) => void): Request<Redshift.Types.EndpointAuthorization, AWSError>;
+  /**
+   * Removes the ability of the specified Amazon Web Services account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
   revokeSnapshotAccess(params: Redshift.Types.RevokeSnapshotAccessMessage, callback?: (err: AWSError, data: Redshift.Types.RevokeSnapshotAccessResult) => void): Request<Redshift.Types.RevokeSnapshotAccessResult, AWSError>;
   /**
-   * Removes the ability of the specified AWS customer account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
+   * Removes the ability of the specified Amazon Web Services account to restore the specified snapshot. If the account is currently restoring the snapshot, the restore will run to completion.  For more information about working with snapshots, go to Amazon Redshift Snapshots in the Amazon Redshift Cluster Management Guide.
    */
   revokeSnapshotAccess(callback?: (err: AWSError, data: Redshift.Types.RevokeSnapshotAccessResult) => void): Request<Redshift.Types.RevokeSnapshotAccessResult, AWSError>;
   /**
@@ -744,6 +928,14 @@ declare class Redshift extends Service {
    * Rotates the encryption keys for a cluster.
    */
   rotateEncryptionKey(callback?: (err: AWSError, data: Redshift.Types.RotateEncryptionKeyResult) => void): Request<Redshift.Types.RotateEncryptionKeyResult, AWSError>;
+  /**
+   * Updates the status of a partner integration.
+   */
+  updatePartnerStatus(params: Redshift.Types.UpdatePartnerStatusInputMessage, callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
+  /**
+   * Updates the status of a partner integration.
+   */
+  updatePartnerStatus(callback?: (err: AWSError, data: Redshift.Types.PartnerIntegrationOutputMessage) => void): Request<Redshift.Types.PartnerIntegrationOutputMessage, AWSError>;
   /**
    * Waits for the clusterAvailable state by periodically calling the underlying Redshift.describeClustersoperation every 60 seconds (at most 30 times).
    */
@@ -812,16 +1004,42 @@ declare namespace Redshift {
   }
   export interface AccountWithRestoreAccess {
     /**
-     * The identifier of an AWS customer account authorized to restore a snapshot.
+     * The identifier of an Amazon Web Services account authorized to restore a snapshot.
      */
     AccountId?: String;
     /**
-     * The identifier of an AWS support account authorized to restore a snapshot. For AWS support, the identifier is amazon-redshift-support. 
+     * The identifier of an Amazon Web Services support account authorized to restore a snapshot. For Amazon Web Services Support, the identifier is amazon-redshift-support. 
      */
     AccountAlias?: String;
   }
   export type AccountsWithRestoreAccessList = AccountWithRestoreAccess[];
   export type ActionType = "restore-cluster"|"recommend-node-config"|"resize-cluster"|string;
+  export interface AquaConfiguration {
+    /**
+     * The value indicates the status of AQUA on the cluster. Possible values include the following.   enabled - AQUA is enabled.   disabled - AQUA is not enabled.    applying - AQUA status is being applied.   
+     */
+    AquaStatus?: AquaStatus;
+    /**
+     * The value represents how the cluster is configured to use AQUA. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     */
+    AquaConfigurationStatus?: AquaConfigurationStatus;
+  }
+  export type AquaConfigurationStatus = "enabled"|"disabled"|"auto"|string;
+  export type AquaStatus = "enabled"|"disabled"|"applying"|string;
+  export interface AssociateDataShareConsumerMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the datashare that the consumer is to use with the account or the namespace.
+     */
+    DataShareArn: String;
+    /**
+     * A value that specifies whether the datashare is associated with the entire account.
+     */
+    AssociateEntireAccount?: BooleanOptional;
+    /**
+     * The Amazon Resource Name (ARN) of the consumer that is associated with the datashare.
+     */
+    ConsumerArn?: String;
+  }
   export type AssociatedClusterList = ClusterAssociatedToSchedule[];
   export type AttributeList = AccountAttribute[];
   export type AttributeNameList = String[];
@@ -832,6 +1050,19 @@ declare namespace Redshift {
      */
     AttributeValue?: String;
   }
+  export interface AuthenticationProfile {
+    /**
+     * The name of the authentication profile.
+     */
+    AuthenticationProfileName?: AuthenticationProfileNameString;
+    /**
+     * The content of the authentication profile in JSON format. The maximum length of the JSON string is determined by a quota for your account.
+     */
+    AuthenticationProfileContent?: String;
+  }
+  export type AuthenticationProfileList = AuthenticationProfile[];
+  export type AuthenticationProfileNameString = string;
+  export type AuthorizationStatus = "Authorized"|"Revoking"|string;
   export interface AuthorizeClusterSecurityGroupIngressMessage {
     /**
      * The name of the security group to which the ingress rule is added.
@@ -846,12 +1077,36 @@ declare namespace Redshift {
      */
     EC2SecurityGroupName?: String;
     /**
-     * The AWS account number of the owner of the security group specified by the EC2SecurityGroupName parameter. The AWS Access Key ID is not an acceptable value.  Example: 111122223333 
+     * The Amazon Web Services account number of the owner of the security group specified by the EC2SecurityGroupName parameter. The Amazon Web Services Access Key ID is not an acceptable value.  Example: 111122223333 
      */
     EC2SecurityGroupOwnerId?: String;
   }
   export interface AuthorizeClusterSecurityGroupIngressResult {
     ClusterSecurityGroup?: ClusterSecurityGroup;
+  }
+  export interface AuthorizeDataShareMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the datashare that producers are to authorize sharing for.
+     */
+    DataShareArn: String;
+    /**
+     * The identifier of the data consumer that is authorized to access the datashare. This identifier is an AWS account ID.
+     */
+    ConsumerIdentifier: String;
+  }
+  export interface AuthorizeEndpointAccessMessage {
+    /**
+     * The cluster identifier of the cluster to grant access to.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The Amazon Web Services account ID to grant access to.
+     */
+    Account: String;
+    /**
+     * The virtual private cloud (VPC) identifiers to grant access to.
+     */
+    VpcIds?: VpcIdentifierList;
   }
   export interface AuthorizeSnapshotAccessMessage {
     /**
@@ -863,7 +1118,7 @@ declare namespace Redshift {
      */
     SnapshotClusterIdentifier?: String;
     /**
-     * The identifier of the AWS customer account authorized to restore the specified snapshot. To share a snapshot with AWS support, specify amazon-redshift-support.
+     * The identifier of the Amazon Web Services account authorized to restore the specified snapshot. To share a snapshot with Amazon Web Services Support, specify amazon-redshift-support.
      */
     AccountWithRestoreAccess: String;
   }
@@ -953,7 +1208,7 @@ declare namespace Redshift {
      */
     ModifyStatus?: String;
     /**
-     * The master user name for the cluster. This name is used to connect to the database that is specified in the DBName parameter. 
+     * The admin user name for the cluster. This name is used to connect to the database that is specified in the DBName parameter. 
      */
     MasterUsername?: String;
     /**
@@ -1065,7 +1320,7 @@ declare namespace Redshift {
      */
     Tags?: TagList;
     /**
-     * The AWS Key Management Service (AWS KMS) key ID of the encryption key used to encrypt data in the cluster.
+     * The Key Management Service (KMS) key ID of the encryption key used to encrypt data in the cluster.
      */
     KmsKeyId?: String;
     /**
@@ -1073,7 +1328,7 @@ declare namespace Redshift {
      */
     EnhancedVpcRouting?: Boolean;
     /**
-     * A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services.
+     * A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services.
      */
     IamRoles?: ClusterIamRoleList;
     /**
@@ -1116,6 +1371,22 @@ declare namespace Redshift {
      * Returns the following:   AllowCancelResize: a boolean value indicating if the resize operation can be cancelled.   ResizeType: Returns ClassicResize  
      */
     ResizeInfo?: ResizeInfo;
+    /**
+     * Describes the status of the Availability Zone relocation operation.
+     */
+    AvailabilityZoneRelocationStatus?: String;
+    /**
+     * The namespace Amazon Resource Name (ARN) of the cluster.
+     */
+    ClusterNamespaceArn?: String;
+    /**
+     * The total storage capacity of the cluster in megabytes. 
+     */
+    TotalStorageCapacityInMegaBytes?: LongOptional;
+    /**
+     * The AQUA (Advanced Query Accelerator) configuration of the cluster.
+     */
+    AquaConfiguration?: AquaConfiguration;
   }
   export interface ClusterAssociatedToSchedule {
     /**
@@ -1420,7 +1691,7 @@ declare namespace Redshift {
      */
     SourceSnapshotClusterIdentifier?: String;
     /**
-     * The identifier given to the new manual snapshot. Constraints:   Cannot be null, empty, or blank.   Must contain from 1 to 255 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Must be unique for the AWS account that is making the request.  
+     * The identifier given to the new manual snapshot. Constraints:   Cannot be null, empty, or blank.   Must contain from 1 to 255 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Must be unique for the Amazon Web Services account that is making the request.  
      */
     TargetSnapshotIdentifier: String;
     /**
@@ -1431,13 +1702,33 @@ declare namespace Redshift {
   export interface CopyClusterSnapshotResult {
     Snapshot?: Snapshot;
   }
+  export interface CreateAuthenticationProfileMessage {
+    /**
+     * The name of the authentication profile to be created.
+     */
+    AuthenticationProfileName: AuthenticationProfileNameString;
+    /**
+     * The content of the authentication profile in JSON format. The maximum length of the JSON string is determined by a quota for your account.
+     */
+    AuthenticationProfileContent: String;
+  }
+  export interface CreateAuthenticationProfileResult {
+    /**
+     * The name of the authentication profile that was created.
+     */
+    AuthenticationProfileName?: AuthenticationProfileNameString;
+    /**
+     * The content of the authentication profile in JSON format.
+     */
+    AuthenticationProfileContent?: String;
+  }
   export interface CreateClusterMessage {
     /**
      * The name of the first database to be created when the cluster is created. To create additional databases after the cluster is created, connect to the cluster with a SQL client and use SQL commands to create a database. For more information, go to Create a Database in the Amazon Redshift Database Developer Guide.  Default: dev  Constraints:   Must contain 1 to 64 alphanumeric characters.   Must contain only lowercase letters.   Cannot be a word that is reserved by the service. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.   
      */
     DBName?: String;
     /**
-     * A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. The identifier also appears in the Amazon Redshift console. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   Alphabetic characters must be lowercase.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Must be unique for all clusters within an AWS account.   Example: myexamplecluster 
+     * A unique identifier for the cluster. You use this identifier to refer to the cluster for any subsequent cluster operations such as deleting or modifying. The identifier also appears in the Amazon Redshift console. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   Alphabetic characters must be lowercase.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Must be unique for all clusters within an Amazon Web Services account.   Example: myexamplecluster 
      */
     ClusterIdentifier: String;
     /**
@@ -1445,15 +1736,15 @@ declare namespace Redshift {
      */
     ClusterType?: String;
     /**
-     * The node type to be provisioned for the cluster. For information about node types, go to  Working with Clusters in the Amazon Redshift Cluster Management Guide.  Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.4xlarge | ra3.16xlarge 
+     * The node type to be provisioned for the cluster. For information about node types, go to  Working with Clusters in the Amazon Redshift Cluster Management Guide.  Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.xlplus | ra3.4xlarge | ra3.16xlarge 
      */
     NodeType: String;
     /**
-     * The user name associated with the master user account for the cluster that is being created. Constraints:   Must be 1 - 128 alphanumeric characters. The user name can't be PUBLIC.   First character must be a letter.   Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.   
+     * The user name associated with the admin user account for the cluster that is being created. Constraints:   Must be 1 - 128 alphanumeric characters. The user name can't be PUBLIC.   First character must be a letter.   Cannot be a reserved word. A list of reserved words can be found in Reserved Words in the Amazon Redshift Database Developer Guide.   
      */
     MasterUsername: String;
     /**
-     * The password associated with the master user account for the cluster that is being created. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), " (double quote), \, /, @, or space.  
+     * The password associated with the admin user account for the cluster that is being created. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), " (double quote), \, /, @, or space.  
      */
     MasterUserPassword: String;
     /**
@@ -1481,7 +1772,7 @@ declare namespace Redshift {
      */
     ClusterParameterGroupName?: String;
     /**
-     * The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with CreateClusterSnapshot.  Default: 1  Constraints: Must be a value from 0 to 35.
+     * The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with CreateClusterSnapshot.  You can't disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days. Default: 1  Constraints: Must be a value from 0 to 35.
      */
     AutomatedSnapshotRetentionPeriod?: IntegerOptional;
     /**
@@ -1529,7 +1820,7 @@ declare namespace Redshift {
      */
     Tags?: TagList;
     /**
-     * The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.
+     * The Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.
      */
     KmsKeyId?: String;
     /**
@@ -1541,7 +1832,7 @@ declare namespace Redshift {
      */
     AdditionalInfo?: String;
     /**
-     * A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request. A cluster can have up to 10 IAM roles associated with it at any time.
+     * A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request. A cluster can have up to 10 IAM roles associated with it at any time.
      */
     IamRoles?: IamRoleArnList;
     /**
@@ -1552,14 +1843,22 @@ declare namespace Redshift {
      * A unique identifier for the snapshot schedule.
      */
     SnapshotScheduleIdentifier?: String;
+    /**
+     * The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is created.
+     */
+    AvailabilityZoneRelocation?: BooleanOptional;
+    /**
+     * The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     */
+    AquaConfigurationStatus?: AquaConfigurationStatus;
   }
   export interface CreateClusterParameterGroupMessage {
     /**
-     * The name of the cluster parameter group. Constraints:   Must be 1 to 255 alphanumeric characters or hyphens   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Must be unique withing your AWS account.    This value is stored as a lower-case string. 
+     * The name of the cluster parameter group. Constraints:   Must be 1 to 255 alphanumeric characters or hyphens   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Must be unique withing your Amazon Web Services account.    This value is stored as a lower-case string. 
      */
     ParameterGroupName: String;
     /**
-     * The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters. To get a list of valid parameter group family names, you can call DescribeClusterParameterGroups. By default, Amazon Redshift returns a list of all the parameter groups that are owned by your AWS account, including the default parameter groups for each Amazon Redshift engine version. The parameter group family names associated with the default parameter groups provide you the valid values. For example, a valid family name is "redshift-1.0". 
+     * The Amazon Redshift engine version to which the cluster parameter group applies. The cluster engine version determines the set of parameters. To get a list of valid parameter group family names, you can call DescribeClusterParameterGroups. By default, Amazon Redshift returns a list of all the parameter groups that are owned by your Amazon Web Services account, including the default parameter groups for each Amazon Redshift engine version. The parameter group family names associated with the default parameter groups provide you the valid values. For example, a valid family name is "redshift-1.0". 
      */
     ParameterGroupFamily: String;
     /**
@@ -1579,7 +1878,7 @@ declare namespace Redshift {
   }
   export interface CreateClusterSecurityGroupMessage {
     /**
-     * The name for the security group. Amazon Redshift stores the value as a lowercase string. Constraints:   Must contain no more than 255 alphanumeric characters or hyphens.   Must not be "Default".   Must be unique for all security groups that are created by your AWS account.   Example: examplesecuritygroup 
+     * The name for the security group. Amazon Redshift stores the value as a lowercase string. Constraints:   Must contain no more than 255 alphanumeric characters or hyphens.   Must not be "Default".   Must be unique for all security groups that are created by your Amazon Web Services account.   Example: examplesecuritygroup 
      */
     ClusterSecurityGroupName: String;
     /**
@@ -1596,7 +1895,7 @@ declare namespace Redshift {
   }
   export interface CreateClusterSnapshotMessage {
     /**
-     * A unique identifier for the snapshot that you are requesting. This identifier must be unique for all snapshots within the AWS account. Constraints:   Cannot be null, empty, or blank   Must contain from 1 to 255 alphanumeric characters or hyphens   First character must be a letter   Cannot end with a hyphen or contain two consecutive hyphens   Example: my-snapshot-id 
+     * A unique identifier for the snapshot that you are requesting. This identifier must be unique for all snapshots within the Amazon Web Services account. Constraints:   Cannot be null, empty, or blank   Must contain from 1 to 255 alphanumeric characters or hyphens   First character must be a letter   Cannot end with a hyphen or contain two consecutive hyphens   Example: my-snapshot-id 
      */
     SnapshotIdentifier: String;
     /**
@@ -1617,7 +1916,7 @@ declare namespace Redshift {
   }
   export interface CreateClusterSubnetGroupMessage {
     /**
-     * The name for the subnet group. Amazon Redshift stores the value as a lowercase string. Constraints:   Must contain no more than 255 alphanumeric characters or hyphens.   Must not be "Default".   Must be unique for all subnet groups that are created by your AWS account.   Example: examplesubnetgroup 
+     * The name for the subnet group. Amazon Redshift stores the value as a lowercase string. Constraints:   Must contain no more than 255 alphanumeric characters or hyphens.   Must not be "Default".   Must be unique for all subnet groups that are created by your Amazon Web Services account.   Example: examplesubnetgroup 
      */
     ClusterSubnetGroupName: String;
     /**
@@ -1636,6 +1935,28 @@ declare namespace Redshift {
   export interface CreateClusterSubnetGroupResult {
     ClusterSubnetGroup?: ClusterSubnetGroup;
   }
+  export interface CreateEndpointAccessMessage {
+    /**
+     * The cluster identifier of the cluster to access.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The Amazon Web Services account ID of the owner of the cluster. This is only required if the cluster is in another Amazon Web Services account.
+     */
+    ResourceOwner?: String;
+    /**
+     * The Redshift-managed VPC endpoint name. An endpoint name must contain 1-30 characters. Valid characters are A-Z, a-z, 0-9, and hyphen(-). The first character must be a letter. The name can't contain two consecutive hyphens or end with a hyphen.
+     */
+    EndpointName: String;
+    /**
+     * The subnet group from which Amazon Redshift chooses the subnet to deploy the endpoint.
+     */
+    SubnetGroupName: String;
+    /**
+     * The security group that defines the ports, protocols, and sources for inbound traffic that you are authorizing into your endpoint.
+     */
+    VpcSecurityGroupIds?: VpcSecurityGroupIdList;
+  }
   export interface CreateEventSubscriptionMessage {
     /**
      * The name of the event subscription to be created. Constraints:   Cannot be null, empty, or blank.   Must contain from 1 to 255 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
@@ -1646,7 +1967,7 @@ declare namespace Redshift {
      */
     SnsTopicArn: String;
     /**
-     * The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs. Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.
+     * The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your Amazon Web Services account. You must specify a source type in order to specify source IDs. Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.
      */
     SourceType?: String;
     /**
@@ -1654,7 +1975,7 @@ declare namespace Redshift {
      */
     SourceIds?: SourceIdsList;
     /**
-     * Specifies the Amazon Redshift event categories to be published by the event notification subscription. Values: configuration, management, monitoring, security
+     * Specifies the Amazon Redshift event categories to be published by the event notification subscription. Values: configuration, management, monitoring, security, pending
      */
     EventCategories?: EventCategoriesList;
     /**
@@ -1755,7 +2076,7 @@ declare namespace Redshift {
   }
   export interface CreateSnapshotCopyGrantMessage {
     /**
-     * The name of the snapshot copy grant. This name must be unique in the region for the AWS account. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   Alphabetic characters must be lowercase.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Must be unique for all clusters within an AWS account.  
+     * The name of the snapshot copy grant. This name must be unique in the region for the Amazon Web Services account. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   Alphabetic characters must be lowercase.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Must be unique for all clusters within an Amazon Web Services account.  
      */
     SnapshotCopyGrantName: String;
     /**
@@ -1846,6 +2167,47 @@ declare namespace Redshift {
      */
     TotalProvisionedStorageInMegaBytes?: Double;
   }
+  export interface DataShare {
+    /**
+     * An Amazon Resource Name (ARN) that references the datashare that is owned by a specific namespace of the producer cluster. A datashare ARN is in the arn:aws:redshift:{region}:{account-id}:{datashare}:{namespace-guid}/{datashare-name} format.
+     */
+    DataShareArn?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the producer.
+     */
+    ProducerArn?: String;
+    /**
+     * A value that specifies whether the datashare can be shared to a publicly accessible cluster.
+     */
+    AllowPubliclyAccessibleConsumers?: Boolean;
+    /**
+     * A value that specifies when the datashare has an association between a producer and data consumers.
+     */
+    DataShareAssociations?: DataShareAssociationList;
+  }
+  export interface DataShareAssociation {
+    /**
+     * The name of the consumer accounts that have an association with a producer datashare.
+     */
+    ConsumerIdentifier?: String;
+    /**
+     * The status of the datashare that is associated.
+     */
+    Status?: DataShareStatus;
+    /**
+     * The creation date of the datashare that is associated.
+     */
+    CreatedDate?: TStamp;
+    /**
+     * The status change data of the datashare that is associated.
+     */
+    StatusChangeDate?: TStamp;
+  }
+  export type DataShareAssociationList = DataShareAssociation[];
+  export type DataShareList = DataShare[];
+  export type DataShareStatus = "ACTIVE"|"PENDING_AUTHORIZATION"|"AUTHORIZED"|"DEAUTHORIZED"|"REJECTED"|"AVAILABLE"|string;
+  export type DataShareStatusForConsumer = "ACTIVE"|"AVAILABLE"|string;
+  export type DataShareStatusForProducer = "ACTIVE"|"AUTHORIZED"|"PENDING_AUTHORIZATION"|"DEAUTHORIZED"|"REJECTED"|string;
   export interface DataTransferProgress {
     /**
      * Describes the status of the cluster. While the transfer is in progress the status is transferringdata.
@@ -1873,6 +2235,16 @@ declare namespace Redshift {
     ElapsedTimeInSeconds?: LongOptional;
   }
   export type DbGroupList = String[];
+  export interface DeauthorizeDataShareMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the datashare to remove authorization from.
+     */
+    DataShareArn: String;
+    /**
+     * The identifier of the data consumer that is to have authorization removed from the datashare. This identifier is an AWS account ID.
+     */
+    ConsumerIdentifier: String;
+  }
   export interface DefaultClusterParameters {
     /**
      * The name of the cluster parameter group family to which the engine default parameters apply.
@@ -1902,6 +2274,18 @@ declare namespace Redshift {
     DeferMaintenanceEndTime?: TStamp;
   }
   export type DeferredMaintenanceWindowsList = DeferredMaintenanceWindow[];
+  export interface DeleteAuthenticationProfileMessage {
+    /**
+     * The name of the authentication profile to delete.
+     */
+    AuthenticationProfileName: AuthenticationProfileNameString;
+  }
+  export interface DeleteAuthenticationProfileResult {
+    /**
+     * The name of the authentication profile that was deleted.
+     */
+    AuthenticationProfileName?: AuthenticationProfileNameString;
+  }
   export interface DeleteClusterMessage {
     /**
      * The identifier of the cluster to be deleted. Constraints:   Must contain lowercase characters.   Must contain from 1 to 63 alphanumeric characters or hyphens.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.  
@@ -1954,6 +2338,12 @@ declare namespace Redshift {
      * The name of the cluster subnet group name to be deleted.
      */
     ClusterSubnetGroupName: String;
+  }
+  export interface DeleteEndpointAccessMessage {
+    /**
+     * The Redshift-managed VPC endpoint to delete.
+     */
+    EndpointName: String;
   }
   export interface DeleteEventSubscriptionMessage {
     /**
@@ -2013,6 +2403,18 @@ declare namespace Redshift {
      */
     AttributeNames?: AttributeNameList;
   }
+  export interface DescribeAuthenticationProfilesMessage {
+    /**
+     * The name of the authentication profile to describe. If not specified then all authentication profiles owned by the account are listed.
+     */
+    AuthenticationProfileName?: AuthenticationProfileNameString;
+  }
+  export interface DescribeAuthenticationProfilesResult {
+    /**
+     * The list of authentication profiles.
+     */
+    AuthenticationProfiles?: AuthenticationProfileList;
+  }
   export interface DescribeClusterDbRevisionsMessage {
     /**
      * A unique identifier for a cluster whose ClusterDbRevisions you are requesting. This parameter is case sensitive. All clusters defined for an account are returned by default.
@@ -2037,7 +2439,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeClusterParameterGroups request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeClusterParameterGroups request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
     /**
@@ -2063,7 +2465,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeClusterParameters request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeClusterParameters request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
@@ -2077,7 +2479,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeClusterSecurityGroups request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request.  Constraints: You can specify either the ClusterSecurityGroupName parameter or the Marker parameter, but not both. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeClusterSecurityGroups request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request.  Constraints: You can specify either the ClusterSecurityGroupName parameter or the Marker parameter, but not both. 
      */
     Marker?: String;
     /**
@@ -2115,11 +2517,11 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeClusterSnapshots request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeClusterSnapshots request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
     /**
-     * The AWS customer account used to create or copy the snapshot. Use this field to filter the results to snapshots owned by a particular account. To describe snapshots you own, either specify your AWS customer account, or do not specify the parameter.
+     * The Amazon Web Services account used to create or copy the snapshot. Use this field to filter the results to snapshots owned by a particular account. To describe snapshots you own, either specify your Amazon Web Services account, or do not specify the parameter.
      */
     OwnerAccount?: String;
     /**
@@ -2149,7 +2551,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeClusterSubnetGroups request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeClusterSubnetGroups request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
     /**
@@ -2189,7 +2591,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeClusterVersions request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeClusterVersions request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
@@ -2203,7 +2605,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeClusters request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request.  Constraints: You can specify either the ClusterIdentifier parameter or the Marker parameter, but not both. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeClusters request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request.  Constraints: You can specify either the ClusterIdentifier parameter or the Marker parameter, but not both. 
      */
     Marker?: String;
     /**
@@ -2215,6 +2617,86 @@ declare namespace Redshift {
      */
     TagValues?: TagValueList;
   }
+  export interface DescribeDataSharesForConsumerMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the consumer that returns in the list of datashares.
+     */
+    ConsumerArn?: String;
+    /**
+     * An identifier giving the status of a datashare in the consumer cluster. If this field is specified, Amazon Redshift returns the list of datashares that have the specified status.
+     */
+    Status?: DataShareStatusForConsumer;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. 
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForConsumer request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeDataSharesForConsumerResult {
+    /**
+     * Shows the results of datashares available for consumers.
+     */
+    DataShares?: DataShareList;
+    /**
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForConsumer request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeDataSharesForProducerMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the producer that returns in the list of datashares.
+     */
+    ProducerArn?: String;
+    /**
+     * An identifier giving the status of a datashare in the producer. If this field is specified, Amazon Redshift returns the list of datashares that have the specified status.
+     */
+    Status?: DataShareStatusForProducer;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. 
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForProducer request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeDataSharesForProducerResult {
+    /**
+     * Shows the results of datashares available for producers.
+     */
+    DataShares?: DataShareList;
+    /**
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataSharesForProducer request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeDataSharesMessage {
+    /**
+     * The identifier of the datashare to describe details of.
+     */
+    DataShareArn?: String;
+    /**
+     * The maximum number of response records to return in each call. If the number of remaining response records exceeds the specified MaxRecords value, a value is returned in a marker field of the response. You can retrieve the next set of records by retrying the command with the returned marker value. 
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataShares request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     */
+    Marker?: String;
+  }
+  export interface DescribeDataSharesResult {
+    /**
+     * The results returned from describing datashares.
+     */
+    DataShares?: DataShareList;
+    /**
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDataShares request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     */
+    Marker?: String;
+  }
   export interface DescribeDefaultClusterParametersMessage {
     /**
      * The name of the cluster parameter group family.
@@ -2225,12 +2707,60 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDefaultClusterParameters request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeDefaultClusterParameters request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
   export interface DescribeDefaultClusterParametersResult {
     DefaultClusterParameters?: DefaultClusterParameters;
+  }
+  export interface DescribeEndpointAccessMessage {
+    /**
+     * The cluster identifier associated with the described endpoint.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The Amazon Web Services account ID of the owner of the cluster.
+     */
+    ResourceOwner?: String;
+    /**
+     * The name of the endpoint to be described.
+     */
+    EndpointName?: String;
+    /**
+     * The virtual private cloud (VPC) identifier with access to the cluster.
+     */
+    VpcId?: String;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a Marker is included in the response so that the remaining results can be retrieved.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous DescribeEndpointAccess request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter.
+     */
+    Marker?: String;
+  }
+  export interface DescribeEndpointAuthorizationMessage {
+    /**
+     * The cluster identifier of the cluster to access.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The AAmazon Web Services account ID of either the cluster owner (grantor) or grantee. If Grantee parameter is true, then the Account value is of the grantor.
+     */
+    Account?: String;
+    /**
+     * Indicates whether to check authorization from a grantor or grantee point of view. If true, Amazon Redshift returns endpoint authorizations that you've been granted. If false (default), checks authorization from a grantor point of view.
+     */
+    Grantee?: BooleanOptional;
+    /**
+     * The maximum number of records to include in the response. If more records exist than the specified MaxRecords value, a pagination token called a Marker is included in the response so that the remaining results can be retrieved.
+     */
+    MaxRecords?: IntegerOptional;
+    /**
+     * An optional pagination token provided by a previous DescribeEndpointAuthorization request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter.
+     */
+    Marker?: String;
   }
   export interface DescribeEventCategoriesMessage {
     /**
@@ -2248,7 +2778,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeEventSubscriptions request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeEventSubscriptions request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
     /**
@@ -2286,13 +2816,13 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeEvents request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeEvents request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
   export interface DescribeHsmClientCertificatesMessage {
     /**
-     * The identifier of a specific HSM client certificate for which you want information. If no identifier is specified, information is returned for all HSM client certificates owned by your AWS customer account.
+     * The identifier of a specific HSM client certificate for which you want information. If no identifier is specified, information is returned for all HSM client certificates owned by your Amazon Web Services account.
      */
     HsmClientCertificateIdentifier?: String;
     /**
@@ -2300,7 +2830,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeHsmClientCertificates request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeHsmClientCertificates request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
     /**
@@ -2314,7 +2844,7 @@ declare namespace Redshift {
   }
   export interface DescribeHsmConfigurationsMessage {
     /**
-     * The identifier of a specific Amazon Redshift HSM configuration to be described. If no identifier is specified, information is returned for all HSM configurations owned by your AWS customer account.
+     * The identifier of a specific Amazon Redshift HSM configuration to be described. If no identifier is specified, information is returned for all HSM configurations owned by your Amazon Web Services account.
      */
     HsmConfigurationIdentifier?: String;
     /**
@@ -2322,7 +2852,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeHsmConfigurations request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeHsmConfigurations request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
     /**
@@ -2354,7 +2884,7 @@ declare namespace Redshift {
      */
     SnapshotIdentifier?: String;
     /**
-     * The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.
+     * The Amazon Web Services account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.
      */
     OwnerAccount?: String;
     /**
@@ -2362,7 +2892,7 @@ declare namespace Redshift {
      */
     Filters?: NodeConfigurationOptionsFilterList;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeNodeConfigurationOptions request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeNodeConfigurationOptions request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
     /**
@@ -2384,9 +2914,33 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeOrderableClusterOptions request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeOrderableClusterOptions request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
+  }
+  export interface DescribePartnersInputMessage {
+    /**
+     * The Amazon Web Services account ID that owns the cluster.
+     */
+    AccountId: PartnerIntegrationAccountId;
+    /**
+     * The cluster identifier of the cluster whose partner integration is being described.
+     */
+    ClusterIdentifier: PartnerIntegrationClusterIdentifier;
+    /**
+     * The name of the database whose partner integration is being described. If database name is not specified, then all databases in the cluster are described.
+     */
+    DatabaseName?: PartnerIntegrationDatabaseName;
+    /**
+     * The name of the partner that is being described. If partner name is not specified, then all partner integrations are described.
+     */
+    PartnerName?: PartnerIntegrationPartnerName;
+  }
+  export interface DescribePartnersOutputMessage {
+    /**
+     * A list of partner integrations.
+     */
+    PartnerIntegrationInfoList?: PartnerIntegrationInfoList;
   }
   export interface DescribeReservedNodeOfferingsMessage {
     /**
@@ -2398,7 +2952,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeReservedNodeOfferings request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeReservedNodeOfferings request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
@@ -2412,13 +2966,13 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeReservedNodes request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeReservedNodes request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
   }
   export interface DescribeResizeMessage {
     /**
-     * The unique identifier of a cluster whose resize progress you are requesting. This parameter is case-sensitive. By default, resize operations for all clusters defined for an AWS account are returned.
+     * The unique identifier of a cluster whose resize progress you are requesting. This parameter is case-sensitive. By default, resize operations for all clusters defined for an Amazon Web Services account are returned.
      */
     ClusterIdentifier: String;
   }
@@ -2448,7 +3002,7 @@ declare namespace Redshift {
      */
     Filters?: ScheduledActionFilterList;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeScheduledActions request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeScheduledActions request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
     /**
@@ -2466,7 +3020,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeSnapshotCopyGrant request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request.  Constraints: You can specify either the SnapshotCopyGrantName parameter or the Marker parameter, but not both. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeSnapshotCopyGrant request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request.  Constraints: You can specify either the SnapshotCopyGrantName parameter or the Marker parameter, but not both. 
      */
     Marker?: String;
     /**
@@ -2576,7 +3130,7 @@ declare namespace Redshift {
      */
     MaxRecords?: IntegerOptional;
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeUsageLimits request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeUsageLimits request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
     /**
@@ -2603,6 +3157,20 @@ declare namespace Redshift {
   export interface DisableSnapshotCopyResult {
     Cluster?: Cluster;
   }
+  export interface DisassociateDataShareConsumerMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the datashare to remove association for. 
+     */
+    DataShareArn: String;
+    /**
+     * A value that specifies whether association for the datashare is removed from the entire account.
+     */
+    DisassociateEntireAccount?: BooleanOptional;
+    /**
+     * The Amazon Resource Name (ARN) of the consumer that association for the datashare is removed from.
+     */
+    ConsumerArn?: String;
+  }
   export type Double = number;
   export type DoubleOptional = number;
   export interface EC2SecurityGroup {
@@ -2615,7 +3183,7 @@ declare namespace Redshift {
      */
     EC2SecurityGroupName?: String;
     /**
-     * The AWS ID of the owner of the EC2 security group specified in the EC2SecurityGroupName field. 
+     * The Amazon Web Services account ID of the owner of the EC2 security group specified in the EC2SecurityGroupName field. 
      */
     EC2SecurityGroupOwnerId?: String;
     /**
@@ -2655,7 +3223,7 @@ declare namespace Redshift {
      */
     ClusterIdentifier: String;
     /**
-     * The destination AWS Region that you want to copy snapshots to. Constraints: Must be the name of a valid AWS Region. For more information, see Regions and Endpoints in the Amazon Web Services General Reference. 
+     * The destination Amazon Web Services Region that you want to copy snapshots to. Constraints: Must be the name of a valid Amazon Web Services Region. For more information, see Regions and Endpoints in the Amazon Web Services General Reference. 
      */
     DestinationRegion: String;
     /**
@@ -2663,11 +3231,11 @@ declare namespace Redshift {
      */
     RetentionPeriod?: IntegerOptional;
     /**
-     * The name of the snapshot copy grant to use when snapshots of an AWS KMS-encrypted cluster are copied to the destination region.
+     * The name of the snapshot copy grant to use when snapshots of an Amazon Web Services KMS-encrypted cluster are copied to the destination region.
      */
     SnapshotCopyGrantName?: String;
     /**
-     * The number of days to retain newly copied snapshots in the destination AWS Region after they are copied from the source AWS Region. If the value is -1, the manual snapshot is retained indefinitely.  The value must be either -1 or an integer between 1 and 3,653.
+     * The number of days to retain newly copied snapshots in the destination Amazon Web Services Region after they are copied from the source Amazon Web Services Region. If the value is -1, the manual snapshot is retained indefinitely.  The value must be either -1 or an integer between 1 and 3,653.
      */
     ManualSnapshotRetentionPeriod?: IntegerOptional;
   }
@@ -2683,7 +3251,110 @@ declare namespace Redshift {
      * The port that the database engine is listening on.
      */
     Port?: Integer;
+    /**
+     * Describes a connection endpoint.
+     */
+    VpcEndpoints?: VpcEndpointsList;
   }
+  export interface EndpointAccess {
+    /**
+     * The cluster identifier of the cluster associated with the endpoint.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The Amazon Web Services account ID of the owner of the cluster.
+     */
+    ResourceOwner?: String;
+    /**
+     * The subnet group name where Amazon Redshift chooses to deploy the endpoint.
+     */
+    SubnetGroupName?: String;
+    /**
+     * The status of the endpoint.
+     */
+    EndpointStatus?: String;
+    /**
+     * The name of the endpoint.
+     */
+    EndpointName?: String;
+    /**
+     * The time (UTC) that the endpoint was created.
+     */
+    EndpointCreateTime?: TStamp;
+    /**
+     * The port number on which the cluster accepts incoming connections.
+     */
+    Port?: Integer;
+    /**
+     * The DNS address of the endpoint.
+     */
+    Address?: String;
+    /**
+     * The security groups associated with the endpoint.
+     */
+    VpcSecurityGroups?: VpcSecurityGroupMembershipList;
+    VpcEndpoint?: VpcEndpoint;
+  }
+  export interface EndpointAccessList {
+    /**
+     * The list of endpoints with access to the cluster.
+     */
+    EndpointAccessList?: EndpointAccesses;
+    /**
+     * An optional pagination token provided by a previous DescribeEndpointAccess request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter.
+     */
+    Marker?: String;
+  }
+  export type EndpointAccesses = EndpointAccess[];
+  export interface EndpointAuthorization {
+    /**
+     * The Amazon Web Services account ID of the cluster owner.
+     */
+    Grantor?: String;
+    /**
+     * The Amazon Web Services account ID of the grantee of the cluster.
+     */
+    Grantee?: String;
+    /**
+     * The cluster identifier.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The time (UTC) when the authorization was created.
+     */
+    AuthorizeTime?: TStamp;
+    /**
+     * The status of the cluster.
+     */
+    ClusterStatus?: String;
+    /**
+     * The status of the authorization action.
+     */
+    Status?: AuthorizationStatus;
+    /**
+     * Indicates whether all VPCs in the grantee account are allowed access to the cluster.
+     */
+    AllowedAllVPCs?: Boolean;
+    /**
+     * The VPCs allowed access to the cluster.
+     */
+    AllowedVPCs?: VpcIdentifierList;
+    /**
+     * The number of Redshift-managed VPC endpoints created for the authorization.
+     */
+    EndpointCount?: Integer;
+  }
+  export interface EndpointAuthorizationList {
+    /**
+     * The authorizations to an endpoint.
+     */
+    EndpointAuthorizationList?: EndpointAuthorizations;
+    /**
+     * An optional pagination token provided by a previous DescribeEndpointAuthorization request. If this parameter is specified, the response includes only records beyond the marker, up to the value specified by the MaxRecords parameter.
+     */
+    Marker?: String;
+  }
+  export type EndpointAuthorizations = EndpointAuthorization[];
   export interface Event {
     /**
      * The identifier for the source of the event.
@@ -2698,7 +3369,7 @@ declare namespace Redshift {
      */
     Message?: String;
     /**
-     * A list of the event categories. Values: Configuration, Management, Monitoring, Security
+     * A list of the event categories. Values: Configuration, Management, Monitoring, Security, Pending
      */
     EventCategories?: EventCategoriesList;
     /**
@@ -2754,7 +3425,7 @@ declare namespace Redshift {
   export type EventList = Event[];
   export interface EventSubscription {
     /**
-     * The AWS customer account associated with the Amazon Redshift event notification subscription.
+     * The Amazon Web Services account associated with the Amazon Redshift event notification subscription.
      */
     CustomerAwsId?: String;
     /**
@@ -2782,7 +3453,7 @@ declare namespace Redshift {
      */
     SourceIdsList?: SourceIdsList;
     /**
-     * The list of Amazon Redshift event categories specified in the event notification subscription. Values: Configuration, Management, Monitoring, Security
+     * The list of Amazon Redshift event categories specified in the event notification subscription. Values: Configuration, Management, Monitoring, Security, Pending
      */
     EventCategoriesList?: EventCategoriesList;
     /**
@@ -3005,6 +3676,42 @@ declare namespace Redshift {
     UpdateTargets?: EligibleTracksToUpdateList;
   }
   export type Mode = "standard"|"high-performance"|string;
+  export interface ModifyAquaInputMessage {
+    /**
+     * The identifier of the cluster to be modified.
+     */
+    ClusterIdentifier: String;
+    /**
+     * The new value of AQUA configuration status. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     */
+    AquaConfigurationStatus?: AquaConfigurationStatus;
+  }
+  export interface ModifyAquaOutputMessage {
+    /**
+     * The updated AQUA configuration of the cluster. 
+     */
+    AquaConfiguration?: AquaConfiguration;
+  }
+  export interface ModifyAuthenticationProfileMessage {
+    /**
+     * The name of the authentication profile to replace.
+     */
+    AuthenticationProfileName: AuthenticationProfileNameString;
+    /**
+     * The new content of the authentication profile in JSON format. The maximum length of the JSON string is determined by a quota for your account.
+     */
+    AuthenticationProfileContent: String;
+  }
+  export interface ModifyAuthenticationProfileResult {
+    /**
+     * The name of the authentication profile that was replaced.
+     */
+    AuthenticationProfileName?: AuthenticationProfileNameString;
+    /**
+     * The updated content of the authentication profile in JSON format.
+     */
+    AuthenticationProfileContent?: String;
+  }
   export interface ModifyClusterDbRevisionMessage {
     /**
      * The unique identifier of a cluster whose database revision you want to modify.  Example: examplecluster 
@@ -3074,7 +3781,7 @@ declare namespace Redshift {
      */
     ClusterType?: String;
     /**
-     * The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.  For more information about resizing clusters, go to Resizing Clusters in Amazon Redshift in the Amazon Redshift Cluster Management Guide. Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.4xlarge | ra3.16xlarge 
+     * The new node type of the cluster. If you specify a new node type, you must also specify the number of nodes parameter.  For more information about resizing clusters, go to Resizing Clusters in Amazon Redshift in the Amazon Redshift Cluster Management Guide. Valid Values: ds2.xlarge | ds2.8xlarge | dc1.large | dc1.8xlarge | dc2.large | dc2.8xlarge | ra3.xlplus | ra3.4xlarge | ra3.16xlarge 
      */
     NodeType?: String;
     /**
@@ -3090,7 +3797,7 @@ declare namespace Redshift {
      */
     VpcSecurityGroupIds?: VpcSecurityGroupIdList;
     /**
-     * The new password for the cluster master user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the MasterUserPassword element exists in the PendingModifiedValues element of the operation response.   Operations never return the password, so this operation provides a way to regain access to the master user account for a cluster if the password is lost.  Default: Uses existing setting. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), " (double quote), \, /, @, or space.  
+     * The new password for the cluster admin user. This change is asynchronously applied as soon as possible. Between the time of the request and the completion of the request, the MasterUserPassword element exists in the PendingModifiedValues element of the operation response.   Operations never return the password, so this operation provides a way to regain access to the admin user account for a cluster if the password is lost.  Default: Uses existing setting. Constraints:   Must be between 8 and 64 characters in length.   Must contain at least one uppercase letter.   Must contain at least one lowercase letter.   Must contain one number.   Can be any printable ASCII character (ASCII code 33 to 126) except ' (single quote), " (double quote), \, /, @, or space.  
      */
     MasterUserPassword?: String;
     /**
@@ -3098,7 +3805,7 @@ declare namespace Redshift {
      */
     ClusterParameterGroupName?: String;
     /**
-     * The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with CreateClusterSnapshot.  If you decrease the automated snapshot retention period from its current value, existing automated snapshots that fall outside of the new retention period will be immediately deleted. Default: Uses existing setting. Constraints: Must be a value from 0 to 35.
+     * The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with CreateClusterSnapshot.  If you decrease the automated snapshot retention period from its current value, existing automated snapshots that fall outside of the new retention period will be immediately deleted. You can't disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days. Default: Uses existing setting. Constraints: Must be a value from 0 to 35.
      */
     AutomatedSnapshotRetentionPeriod?: IntegerOptional;
     /**
@@ -3126,7 +3833,7 @@ declare namespace Redshift {
      */
     HsmConfigurationIdentifier?: String;
     /**
-     * The new identifier for the cluster. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   Alphabetic characters must be lowercase.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Must be unique for all clusters within an AWS account.   Example: examplecluster 
+     * The new identifier for the cluster. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   Alphabetic characters must be lowercase.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Must be unique for all clusters within an Amazon Web Services account.   Example: examplecluster 
      */
     NewClusterIdentifier?: String;
     /**
@@ -3150,9 +3857,21 @@ declare namespace Redshift {
      */
     Encrypted?: BooleanOptional;
     /**
-     * The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.
+     * The Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster.
      */
     KmsKeyId?: String;
+    /**
+     * The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster modification is complete.
+     */
+    AvailabilityZoneRelocation?: BooleanOptional;
+    /**
+     * The option to initiate relocation for an Amazon Redshift cluster to the target Availability Zone.
+     */
+    AvailabilityZone?: String;
+    /**
+     * The option to change the port of an Amazon Redshift cluster.
+     */
+    Port?: IntegerOptional;
   }
   export interface ModifyClusterParameterGroupMessage {
     /**
@@ -3215,6 +3934,16 @@ declare namespace Redshift {
   export interface ModifyClusterSubnetGroupResult {
     ClusterSubnetGroup?: ClusterSubnetGroup;
   }
+  export interface ModifyEndpointAccessMessage {
+    /**
+     * The endpoint to be modified.
+     */
+    EndpointName: String;
+    /**
+     * The complete list of VPC security groups associated with the endpoint after the endpoint is modified.
+     */
+    VpcSecurityGroupIds?: VpcSecurityGroupIdList;
+  }
   export interface ModifyEventSubscriptionMessage {
     /**
      * The name of the modified Amazon Redshift event notification subscription.
@@ -3225,7 +3954,7 @@ declare namespace Redshift {
      */
     SnsTopicArn?: String;
     /**
-     * The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your AWS account. You must specify a source type in order to specify source IDs. Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.
+     * The type of source that will be generating the events. For example, if you want to be notified of events generated by a cluster, you would set this parameter to cluster. If this value is not specified, events are returned for all Amazon Redshift objects in your Amazon Web Services account. You must specify a source type in order to specify source IDs. Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.
      */
     SourceType?: String;
     /**
@@ -3233,7 +3962,7 @@ declare namespace Redshift {
      */
     SourceIds?: SourceIdsList;
     /**
-     * Specifies the Amazon Redshift event categories to be published by the event notification subscription. Values: configuration, management, monitoring, security
+     * Specifies the Amazon Redshift event categories to be published by the event notification subscription. Values: configuration, management, monitoring, security, pending
      */
     EventCategories?: EventCategoriesList;
     /**
@@ -3284,11 +4013,11 @@ declare namespace Redshift {
   }
   export interface ModifySnapshotCopyRetentionPeriodMessage {
     /**
-     * The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination AWS Region. Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.
+     * The unique identifier of the cluster for which you want to change the retention period for either automated or manual snapshots that are copied to a destination Amazon Web Services Region. Constraints: Must be the valid name of an existing cluster that has cross-region snapshot copy enabled.
      */
     ClusterIdentifier: String;
     /**
-     * The number of days to retain automated snapshots in the destination AWS Region after they are copied from the source AWS Region. By default, this only changes the retention period of copied automated snapshots.  If you decrease the retention period for automated snapshots that are copied to a destination AWS Region, Amazon Redshift deletes any existing automated snapshots that were copied to the destination AWS Region and that fall outside of the new retention period. Constraints: Must be at least 1 and no more than 35 for automated snapshots.  If you specify the manual option, only newly copied manual snapshots will have the new retention period.  If you specify the value of -1 newly copied manual snapshots are retained indefinitely. Constraints: The number of days must be either -1 or an integer between 1 and 3,653 for manual snapshots.
+     * The number of days to retain automated snapshots in the destination Amazon Web Services Region after they are copied from the source Amazon Web Services Region. By default, this only changes the retention period of copied automated snapshots.  If you decrease the retention period for automated snapshots that are copied to a destination Amazon Web Services Region, Amazon Redshift deletes any existing automated snapshots that were copied to the destination Amazon Web Services Region and that fall outside of the new retention period. Constraints: Must be at least 1 and no more than 35 for automated snapshots.  If you specify the manual option, only newly copied manual snapshots will have the new retention period.  If you specify the value of -1 newly copied manual snapshots are retained indefinitely. Constraints: The number of days must be either -1 or an integer between 1 and 3,653 for manual snapshots.
      */
     RetentionPeriod: Integer;
     /**
@@ -3323,6 +4052,25 @@ declare namespace Redshift {
      */
     BreachAction?: UsageLimitBreachAction;
   }
+  export interface NetworkInterface {
+    /**
+     * The network interface identifier. 
+     */
+    NetworkInterfaceId?: String;
+    /**
+     * The subnet identifier. 
+     */
+    SubnetId?: String;
+    /**
+     * The IPv4 address of the network interface within the subnet. 
+     */
+    PrivateIpAddress?: String;
+    /**
+     * The Availability Zone. 
+     */
+    AvailabilityZone?: String;
+  }
+  export type NetworkInterfaceList = NetworkInterface[];
   export interface NodeConfigurationOption {
     /**
      * The node type, such as, "ds2.8xlarge".
@@ -3404,7 +4152,7 @@ declare namespace Redshift {
      */
     ParameterName?: String;
     /**
-     * The value of the parameter.
+     * The value of the parameter. If ParameterName is wlm_json_configuration, then the maximum size of ParameterValue is 8000 characters.
      */
     ParameterValue?: String;
     /**
@@ -3439,6 +4187,67 @@ declare namespace Redshift {
   export type ParameterApplyType = "static"|"dynamic"|string;
   export type ParameterGroupList = ClusterParameterGroup[];
   export type ParametersList = Parameter[];
+  export type PartnerIntegrationAccountId = string;
+  export type PartnerIntegrationClusterIdentifier = string;
+  export type PartnerIntegrationDatabaseName = string;
+  export interface PartnerIntegrationInfo {
+    /**
+     * The name of the database that receives data from a partner.
+     */
+    DatabaseName?: PartnerIntegrationDatabaseName;
+    /**
+     * The name of the partner.
+     */
+    PartnerName?: PartnerIntegrationPartnerName;
+    /**
+     * The partner integration status.
+     */
+    Status?: PartnerIntegrationStatus;
+    /**
+     * The status message provided by the partner.
+     */
+    StatusMessage?: PartnerIntegrationStatusMessage;
+    /**
+     * The date (UTC) that the partner integration was created.
+     */
+    CreatedAt?: TStamp;
+    /**
+     * The date (UTC) that the partner integration status was last updated by the partner.
+     */
+    UpdatedAt?: TStamp;
+  }
+  export type PartnerIntegrationInfoList = PartnerIntegrationInfo[];
+  export interface PartnerIntegrationInputMessage {
+    /**
+     * The Amazon Web Services account ID that owns the cluster.
+     */
+    AccountId: PartnerIntegrationAccountId;
+    /**
+     * The cluster identifier of the cluster that receives data from the partner.
+     */
+    ClusterIdentifier: PartnerIntegrationClusterIdentifier;
+    /**
+     * The name of the database that receives data from the partner.
+     */
+    DatabaseName: PartnerIntegrationDatabaseName;
+    /**
+     * The name of the partner that is authorized to send data.
+     */
+    PartnerName: PartnerIntegrationPartnerName;
+  }
+  export interface PartnerIntegrationOutputMessage {
+    /**
+     * The name of the database that receives data from the partner.
+     */
+    DatabaseName?: PartnerIntegrationDatabaseName;
+    /**
+     * The name of the partner that is authorized to send data.
+     */
+    PartnerName?: PartnerIntegrationPartnerName;
+  }
+  export type PartnerIntegrationPartnerName = string;
+  export type PartnerIntegrationStatus = "Active"|"Inactive"|"RuntimeFailure"|"ConnectionFailure"|string;
+  export type PartnerIntegrationStatusMessage = string;
   export interface PauseClusterMessage {
     /**
      * The identifier of the cluster to be paused.
@@ -3451,7 +4260,7 @@ declare namespace Redshift {
   export type PendingActionsList = String[];
   export interface PendingModifiedValues {
     /**
-     * The pending or in-progress change of the master user password for the cluster.
+     * The pending or in-progress change of the admin user password for the cluster.
      */
     MasterUserPassword?: String;
     /**
@@ -3528,6 +4337,12 @@ declare namespace Redshift {
     RecurringChargeFrequency?: String;
   }
   export type RecurringChargeList = RecurringCharge[];
+  export interface RejectDataShareMessage {
+    /**
+     * The Amazon Resource Name (ARN) of the datashare to reject.
+     */
+    DataShareArn: String;
+  }
   export interface ReservedNode {
     /**
      * The unique identifier for the reservation.
@@ -3673,7 +4488,7 @@ declare namespace Redshift {
     /**
      * The new number of nodes for the cluster. If not specified, the cluster's current number of nodes is used.
      */
-    NumberOfNodes?: Integer;
+    NumberOfNodes?: IntegerOptional;
     /**
      * A boolean value indicating whether the resize operation is using the classic resize process. If you don't provide this parameter or set the value to false, the resize type is elastic. 
      */
@@ -3761,7 +4576,7 @@ declare namespace Redshift {
   export type RestorableNodeTypeList = String[];
   export interface RestoreFromClusterSnapshotMessage {
     /**
-     * The identifier of the cluster that will be created from restoring the snapshot. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   Alphabetic characters must be lowercase.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Must be unique for all clusters within an AWS account.  
+     * The identifier of the cluster that will be created from restoring the snapshot. Constraints:   Must contain from 1 to 63 alphanumeric characters or hyphens.   Alphabetic characters must be lowercase.   First character must be a letter.   Cannot end with a hyphen or contain two consecutive hyphens.   Must be unique for all clusters within an Amazon Web Services account.  
      */
     ClusterIdentifier: String;
     /**
@@ -3793,7 +4608,7 @@ declare namespace Redshift {
      */
     PubliclyAccessible?: BooleanOptional;
     /**
-     * The AWS customer account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.
+     * The Amazon Web Services account used to create or copy the snapshot. Required if you are restoring a snapshot you do not own, optional if you own the snapshot.
      */
     OwnerAccount?: String;
     /**
@@ -3825,7 +4640,7 @@ declare namespace Redshift {
      */
     PreferredMaintenanceWindow?: String;
     /**
-     * The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with CreateClusterSnapshot.  Default: The value selected for the cluster from which the snapshot was taken. Constraints: Must be a value from 0 to 35.
+     * The number of days that automated snapshots are retained. If the value is 0, automated snapshots are disabled. Even if automated snapshots are disabled, you can still create manual snapshots when you want with CreateClusterSnapshot.  You can't disable automated snapshots for RA3 node types. Set the automated retention period from 1-35 days. Default: The value selected for the cluster from which the snapshot was taken. Constraints: Must be a value from 0 to 35.
      */
     AutomatedSnapshotRetentionPeriod?: IntegerOptional;
     /**
@@ -3833,7 +4648,7 @@ declare namespace Redshift {
      */
     ManualSnapshotRetentionPeriod?: IntegerOptional;
     /**
-     * The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster that you restore from a shared snapshot.
+     * The Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the cluster that you restore from a shared snapshot.
      */
     KmsKeyId?: String;
     /**
@@ -3849,7 +4664,7 @@ declare namespace Redshift {
      */
     AdditionalInfo?: String;
     /**
-     * A list of AWS Identity and Access Management (IAM) roles that can be used by the cluster to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request. A cluster can have up to 10 IAM roles associated at any time.
+     * A list of Identity and Access Management (IAM) roles that can be used by the cluster to access other Amazon Web Services services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. You can supply up to 10 IAM roles in a single request. A cluster can have up to 10 IAM roles associated at any time.
      */
     IamRoles?: IamRoleArnList;
     /**
@@ -3864,6 +4679,14 @@ declare namespace Redshift {
      * The number of nodes specified when provisioning the restored cluster.
      */
     NumberOfNodes?: IntegerOptional;
+    /**
+     * The option to enable relocation for an Amazon Redshift cluster between Availability Zones after the cluster is restored.
+     */
+    AvailabilityZoneRelocation?: BooleanOptional;
+    /**
+     * The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.   enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.   disabled - Don't use AQUA.    auto - Amazon Redshift determines whether to use AQUA.  
+     */
+    AquaConfigurationStatus?: AquaConfigurationStatus;
   }
   export interface RestoreFromClusterSnapshotResult {
     Cluster?: Cluster;
@@ -3927,6 +4750,10 @@ declare namespace Redshift {
      * The name of the table to create as a result of the current request.
      */
     NewTableName: String;
+    /**
+     * Indicates whether name identifiers for database, schema, and table are case sensitive. If true, the names are case sensitive. If false (default), the names are not case sensitive.
+     */
+    EnableCaseSensitiveIdentifier?: BooleanOptional;
   }
   export interface RestoreTableFromClusterSnapshotResult {
     TableRestoreStatus?: TableRestoreStatus;
@@ -3969,12 +4796,30 @@ declare namespace Redshift {
      */
     EC2SecurityGroupName?: String;
     /**
-     * The AWS account number of the owner of the security group specified in the EC2SecurityGroupName parameter. The AWS access key ID is not an acceptable value. If EC2SecurityGroupOwnerId is specified, EC2SecurityGroupName must also be provided. and CIDRIP cannot be provided.  Example: 111122223333 
+     * The Amazon Web Services account number of the owner of the security group specified in the EC2SecurityGroupName parameter. The Amazon Web Services access key ID is not an acceptable value. If EC2SecurityGroupOwnerId is specified, EC2SecurityGroupName must also be provided. and CIDRIP cannot be provided.  Example: 111122223333 
      */
     EC2SecurityGroupOwnerId?: String;
   }
   export interface RevokeClusterSecurityGroupIngressResult {
     ClusterSecurityGroup?: ClusterSecurityGroup;
+  }
+  export interface RevokeEndpointAccessMessage {
+    /**
+     * The cluster to revoke access from.
+     */
+    ClusterIdentifier?: String;
+    /**
+     * The Amazon Web Services account ID whose access is to be revoked.
+     */
+    Account?: String;
+    /**
+     * The virtual private cloud (VPC) identifiers for which access is to be revoked.
+     */
+    VpcIds?: VpcIdentifierList;
+    /**
+     * Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.
+     */
+    Force?: Boolean;
   }
   export interface RevokeSnapshotAccessMessage {
     /**
@@ -3986,7 +4831,7 @@ declare namespace Redshift {
      */
     SnapshotClusterIdentifier?: String;
     /**
-     * The identifier of the AWS customer account that can no longer restore the specified snapshot.
+     * The identifier of the Amazon Web Services account that can no longer restore the specified snapshot.
      */
     AccountWithRestoreAccess: String;
   }
@@ -4074,7 +4919,7 @@ declare namespace Redshift {
   export type ScheduledActionTypeValues = "ResizeCluster"|"PauseCluster"|"ResumeCluster"|string;
   export interface ScheduledActionsMessage {
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeScheduledActions request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeScheduledActions request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request. 
      */
     Marker?: String;
     /**
@@ -4114,13 +4959,17 @@ declare namespace Redshift {
      */
     ClusterCreateTime?: TStamp;
     /**
-     * The master user name for the cluster.
+     * The admin user name for the cluster.
      */
     MasterUsername?: String;
     /**
      * The version ID of the Amazon Redshift engine that is running on the cluster.
      */
     ClusterVersion?: String;
+    /**
+     * The cluster version of the cluster used to create the snapshot. For example, 1.0.15503. 
+     */
+    EngineFullVersion?: String;
     /**
      * The snapshot type. Snapshots created using CreateClusterSnapshot and CopyClusterSnapshot are of type "manual". 
      */
@@ -4146,7 +4995,7 @@ declare namespace Redshift {
      */
     Encrypted?: Boolean;
     /**
-     * The AWS Key Management Service (KMS) key ID of the encryption key that was used to encrypt data in the cluster from which the snapshot was taken.
+     * The Key Management Service (KMS) key ID of the encryption key that was used to encrypt data in the cluster from which the snapshot was taken.
      */
     KmsKeyId?: String;
     /**
@@ -4154,11 +5003,11 @@ declare namespace Redshift {
      */
     EncryptedWithHSM?: Boolean;
     /**
-     * A list of the AWS customer accounts authorized to restore the snapshot. Returns null if no accounts are authorized. Visible only to the snapshot owner. 
+     * A list of the Amazon Web Services accounts authorized to restore the snapshot. Returns null if no accounts are authorized. Visible only to the snapshot owner. 
      */
     AccountsWithRestoreAccess?: AccountsWithRestoreAccessList;
     /**
-     * For manual snapshots, the AWS customer account used to create or copy the snapshot. For automatic snapshots, the owner of the cluster. The owner can perform all snapshot actions, such as sharing a manual snapshot.
+     * For manual snapshots, the Amazon Web Services account used to create or copy the snapshot. For automatic snapshots, the owner of the cluster. The owner can perform all snapshot actions, such as sharing a manual snapshot.
      */
     OwnerAccount?: String;
     /**
@@ -4225,7 +5074,7 @@ declare namespace Redshift {
      */
     SnapshotCopyGrantName?: String;
     /**
-     * The unique identifier of the customer master key (CMK) in AWS KMS to which Amazon Redshift is granted permission.
+     * The unique identifier of the customer master key (CMK) in Amazon Web Services KMS to which Amazon Redshift is granted permission.
      */
     KmsKeyId?: String;
     /**
@@ -4236,7 +5085,7 @@ declare namespace Redshift {
   export type SnapshotCopyGrantList = SnapshotCopyGrant[];
   export interface SnapshotCopyGrantMessage {
     /**
-     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeSnapshotCopyGrant request exceed the value specified in MaxRecords, AWS returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request.  Constraints: You can specify either the SnapshotCopyGrantName parameter or the Marker parameter, but not both. 
+     * An optional parameter that specifies the starting point to return a set of response records. When the results of a DescribeSnapshotCopyGrant request exceed the value specified in MaxRecords, Amazon Web Services returns a value in the Marker field of the response. You can retrieve the next set of response records by providing the returned marker value in the Marker parameter and retrying the request.  Constraints: You can specify either the SnapshotCopyGrantName parameter or the Marker parameter, but not both. 
      */
     Marker?: String;
     /**
@@ -4470,6 +5319,32 @@ declare namespace Redshift {
      */
     Marker?: String;
   }
+  export interface UpdatePartnerStatusInputMessage {
+    /**
+     * The Amazon Web Services account ID that owns the cluster.
+     */
+    AccountId: PartnerIntegrationAccountId;
+    /**
+     * The cluster identifier of the cluster whose partner integration status is being updated.
+     */
+    ClusterIdentifier: PartnerIntegrationClusterIdentifier;
+    /**
+     * The name of the database whose partner integration status is being updated.
+     */
+    DatabaseName: PartnerIntegrationDatabaseName;
+    /**
+     * The name of the partner whose integration status is being updated.
+     */
+    PartnerName: PartnerIntegrationPartnerName;
+    /**
+     * The value of the updated status.
+     */
+    Status: PartnerIntegrationStatus;
+    /**
+     * The status message provided by the partner.
+     */
+    StatusMessage?: PartnerIntegrationStatusMessage;
+  }
   export interface UpdateTarget {
     /**
      * The name of the new maintenance track.
@@ -4534,6 +5409,22 @@ declare namespace Redshift {
   export type UsageLimitPeriod = "daily"|"weekly"|"monthly"|string;
   export type UsageLimits = UsageLimit[];
   export type ValueStringList = String[];
+  export interface VpcEndpoint {
+    /**
+     * The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.
+     */
+    VpcEndpointId?: String;
+    /**
+     * The VPC identifier that the endpoint is associated. 
+     */
+    VpcId?: String;
+    /**
+     * One or more network interfaces of the endpoint. Also known as an interface endpoint. 
+     */
+    NetworkInterfaces?: NetworkInterfaceList;
+  }
+  export type VpcEndpointsList = VpcEndpoint[];
+  export type VpcIdentifierList = String[];
   export type VpcSecurityGroupIdList = String[];
   export interface VpcSecurityGroupMembership {
     /**

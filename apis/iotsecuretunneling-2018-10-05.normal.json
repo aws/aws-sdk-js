@@ -101,7 +101,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a new tunnel, and returns two client access tokens for clients to use to connect to the AWS IoT Secure Tunneling proxy server. .</p>"
+      "documentation": "<p>Creates a new tunnel, and returns two client access tokens for clients to use to connect to the AWS IoT Secure Tunneling proxy server.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -228,7 +228,6 @@
     "DestinationConfig": {
       "type": "structure",
       "required": [
-        "thingName",
         "services"
       ],
       "members": {
@@ -238,7 +237,7 @@
         },
         "services": {
           "shape": "ServiceList",
-          "documentation": "<p>A list of service names that identity the target application. Currently, you can only specify a single name. The AWS IoT client running on the destination device reads this value and uses it to look up a port or an IP address and a port. The AWS IoT client instantiates the local proxy which uses this information to connect to the destination application.</p>"
+          "documentation": "<p>A list of service names that identity the target application. The AWS IoT client running on the destination device reads this value and uses it to look up a port or an IP address and a port. The AWS IoT client instantiates the local proxy which uses this information to connect to the destination application.</p>"
         }
       },
       "documentation": "<p>The destination configuration.</p>"
@@ -348,7 +347,7 @@
     },
     "Service": {
       "type": "string",
-      "max": 8,
+      "max": 128,
       "min": 1,
       "pattern": "[a-zA-Z0-9:_-]+"
     },
@@ -357,7 +356,6 @@
       "member": {
         "shape": "Service"
       },
-      "max": 1,
       "min": 1
     },
     "Tag": {
@@ -573,5 +571,5 @@
       "members": {}
     }
   },
-  "documentation": "<fullname>AWS IoT Secure Tunneling</fullname> <p>AWS IoT Secure Tunnling enables you to create remote connections to devices deployed in the field.</p> <p>For more information about how AWS IoT Secure Tunneling works, see the <a href=\"https://docs.aws.amazon.com/secure-tunneling/latest/ug/what-is-secure-tunneling.html\">User Guide</a>.</p>"
+  "documentation": "<fullname>AWS IoT Secure Tunneling</fullname> <p>AWS IoT Secure Tunnling enables you to create remote connections to devices deployed in the field.</p> <p>For more information about how AWS IoT Secure Tunneling works, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/secure-tunneling.html\">AWS IoT Secure Tunneling</a>.</p>"
 }

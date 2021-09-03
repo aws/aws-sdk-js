@@ -8,7 +8,7 @@ export class Credentials {
     constructor(options: CredentialsOptions);
     /**
      * Creates a Credentials object with a given set of credential information as positional arguments.
-     *          *
+     *
      * @param {string} accessKeyId - The AWS access key ID.
      * @param {string} secretAccessKey - The AWS secret access key.
      * @param {string} sessionToken - The optional AWS session token.
@@ -70,7 +70,7 @@ export class Credentials {
     sessionToken: string;
 }
 
-interface CredentialsOptions {
+export interface CredentialsOptions {
     /**
      * AWS access key ID.
      */

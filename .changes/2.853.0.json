@@ -1,0 +1,27 @@
+[
+    {
+        "type": "bugfix",
+        "category": "s3",
+        "description": "Bugfixing the s3 arn endpoint parser"
+    },
+    {
+        "type": "feature",
+        "category": "EKS",
+        "description": "Amazon EKS now supports adding KMS envelope encryption to existing clusters to enhance security for secrets"
+    },
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "Added UpdateStudio API that allows updating a few attributes of an EMR Studio."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Add RequestPayer to GetObjectTagging and PutObjectTagging."
+    },
+    {
+        "type": "feature",
+        "category": "SSOAdmin",
+        "description": "Relax constraint on List* API pagination tokens to include underscore character"
+    }
+]

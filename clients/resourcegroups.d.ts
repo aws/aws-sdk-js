@@ -12,123 +12,131 @@ declare class ResourceGroups extends Service {
   constructor(options?: ResourceGroups.Types.ClientConfiguration)
   config: Config & ResourceGroups.Types.ClientConfiguration;
   /**
-   * Creates a resource group with the specified name and description. You can optionally include a resource query, or a service configuration.
+   * Creates a resource group with the specified name and description. You can optionally include a resource query, or a service configuration. For more information about constructing a resource query, see Create a tag-based group in Resource Groups. For more information about service configurations, see Service configurations for resource groups.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:CreateGroup   
    */
   createGroup(params: ResourceGroups.Types.CreateGroupInput, callback?: (err: AWSError, data: ResourceGroups.Types.CreateGroupOutput) => void): Request<ResourceGroups.Types.CreateGroupOutput, AWSError>;
   /**
-   * Creates a resource group with the specified name and description. You can optionally include a resource query, or a service configuration.
+   * Creates a resource group with the specified name and description. You can optionally include a resource query, or a service configuration. For more information about constructing a resource query, see Create a tag-based group in Resource Groups. For more information about service configurations, see Service configurations for resource groups.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:CreateGroup   
    */
   createGroup(callback?: (err: AWSError, data: ResourceGroups.Types.CreateGroupOutput) => void): Request<ResourceGroups.Types.CreateGroupOutput, AWSError>;
   /**
-   * Deletes the specified resource group. Deleting a resource group does not delete any resources that are members of the group; it only deletes the group structure.
+   * Deletes the specified resource group. Deleting a resource group does not delete any resources that are members of the group; it only deletes the group structure.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:DeleteGroup   
    */
   deleteGroup(params: ResourceGroups.Types.DeleteGroupInput, callback?: (err: AWSError, data: ResourceGroups.Types.DeleteGroupOutput) => void): Request<ResourceGroups.Types.DeleteGroupOutput, AWSError>;
   /**
-   * Deletes the specified resource group. Deleting a resource group does not delete any resources that are members of the group; it only deletes the group structure.
+   * Deletes the specified resource group. Deleting a resource group does not delete any resources that are members of the group; it only deletes the group structure.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:DeleteGroup   
    */
   deleteGroup(callback?: (err: AWSError, data: ResourceGroups.Types.DeleteGroupOutput) => void): Request<ResourceGroups.Types.DeleteGroupOutput, AWSError>;
   /**
-   * Returns information about a specified resource group.
+   * Returns information about a specified resource group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:GetGroup   
    */
   getGroup(params: ResourceGroups.Types.GetGroupInput, callback?: (err: AWSError, data: ResourceGroups.Types.GetGroupOutput) => void): Request<ResourceGroups.Types.GetGroupOutput, AWSError>;
   /**
-   * Returns information about a specified resource group.
+   * Returns information about a specified resource group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:GetGroup   
    */
   getGroup(callback?: (err: AWSError, data: ResourceGroups.Types.GetGroupOutput) => void): Request<ResourceGroups.Types.GetGroupOutput, AWSError>;
   /**
-   * Returns the service configuration associated with the specified resource group. AWS Resource Groups supports configurations for the following resource group types:    AWS::EC2::CapacityReservationPool - Amazon EC2 capacity reservation pools. For more information, see Working with capacity reservation groups in the EC2 Users Guide.  
+   * Returns the service configuration associated with the specified resource group. For details about the service configuration syntax, see Service configurations for resource groups.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:GetGroupConfiguration   
    */
   getGroupConfiguration(params: ResourceGroups.Types.GetGroupConfigurationInput, callback?: (err: AWSError, data: ResourceGroups.Types.GetGroupConfigurationOutput) => void): Request<ResourceGroups.Types.GetGroupConfigurationOutput, AWSError>;
   /**
-   * Returns the service configuration associated with the specified resource group. AWS Resource Groups supports configurations for the following resource group types:    AWS::EC2::CapacityReservationPool - Amazon EC2 capacity reservation pools. For more information, see Working with capacity reservation groups in the EC2 Users Guide.  
+   * Returns the service configuration associated with the specified resource group. For details about the service configuration syntax, see Service configurations for resource groups.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:GetGroupConfiguration   
    */
   getGroupConfiguration(callback?: (err: AWSError, data: ResourceGroups.Types.GetGroupConfigurationOutput) => void): Request<ResourceGroups.Types.GetGroupConfigurationOutput, AWSError>;
   /**
-   * Retrieves the resource query associated with the specified resource group.
+   * Retrieves the resource query associated with the specified resource group. For more information about resource queries, see Create a tag-based group in Resource Groups.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:GetGroupQuery   
    */
   getGroupQuery(params: ResourceGroups.Types.GetGroupQueryInput, callback?: (err: AWSError, data: ResourceGroups.Types.GetGroupQueryOutput) => void): Request<ResourceGroups.Types.GetGroupQueryOutput, AWSError>;
   /**
-   * Retrieves the resource query associated with the specified resource group.
+   * Retrieves the resource query associated with the specified resource group. For more information about resource queries, see Create a tag-based group in Resource Groups.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:GetGroupQuery   
    */
   getGroupQuery(callback?: (err: AWSError, data: ResourceGroups.Types.GetGroupQueryOutput) => void): Request<ResourceGroups.Types.GetGroupQueryOutput, AWSError>;
   /**
-   * Returns a list of tags that are associated with a resource group, specified by an ARN.
+   * Returns a list of tags that are associated with a resource group, specified by an ARN.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:GetTags   
    */
   getTags(params: ResourceGroups.Types.GetTagsInput, callback?: (err: AWSError, data: ResourceGroups.Types.GetTagsOutput) => void): Request<ResourceGroups.Types.GetTagsOutput, AWSError>;
   /**
-   * Returns a list of tags that are associated with a resource group, specified by an ARN.
+   * Returns a list of tags that are associated with a resource group, specified by an ARN.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:GetTags   
    */
   getTags(callback?: (err: AWSError, data: ResourceGroups.Types.GetTagsOutput) => void): Request<ResourceGroups.Types.GetTagsOutput, AWSError>;
   /**
-   * Adds the specified resources to the specified group.
+   * Adds the specified resources to the specified group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:GroupResources   
    */
   groupResources(params: ResourceGroups.Types.GroupResourcesInput, callback?: (err: AWSError, data: ResourceGroups.Types.GroupResourcesOutput) => void): Request<ResourceGroups.Types.GroupResourcesOutput, AWSError>;
   /**
-   * Adds the specified resources to the specified group.
+   * Adds the specified resources to the specified group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:GroupResources   
    */
   groupResources(callback?: (err: AWSError, data: ResourceGroups.Types.GroupResourcesOutput) => void): Request<ResourceGroups.Types.GroupResourcesOutput, AWSError>;
   /**
-   * Returns a list of ARNs of the resources that are members of a specified resource group.
+   * Returns a list of ARNs of the resources that are members of a specified resource group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:ListGroupResources     cloudformation:DescribeStacks     cloudformation:ListStackResources     tag:GetResources   
    */
   listGroupResources(params: ResourceGroups.Types.ListGroupResourcesInput, callback?: (err: AWSError, data: ResourceGroups.Types.ListGroupResourcesOutput) => void): Request<ResourceGroups.Types.ListGroupResourcesOutput, AWSError>;
   /**
-   * Returns a list of ARNs of the resources that are members of a specified resource group.
+   * Returns a list of ARNs of the resources that are members of a specified resource group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:ListGroupResources     cloudformation:DescribeStacks     cloudformation:ListStackResources     tag:GetResources   
    */
   listGroupResources(callback?: (err: AWSError, data: ResourceGroups.Types.ListGroupResourcesOutput) => void): Request<ResourceGroups.Types.ListGroupResourcesOutput, AWSError>;
   /**
-   * Returns a list of existing resource groups in your account.
+   * Returns a list of existing resource groups in your account.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:ListGroups   
    */
   listGroups(params: ResourceGroups.Types.ListGroupsInput, callback?: (err: AWSError, data: ResourceGroups.Types.ListGroupsOutput) => void): Request<ResourceGroups.Types.ListGroupsOutput, AWSError>;
   /**
-   * Returns a list of existing resource groups in your account.
+   * Returns a list of existing resource groups in your account.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:ListGroups   
    */
   listGroups(callback?: (err: AWSError, data: ResourceGroups.Types.ListGroupsOutput) => void): Request<ResourceGroups.Types.ListGroupsOutput, AWSError>;
   /**
-   * Returns a list of AWS resource identifiers that matches tne specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.
+   * Attaches a service configuration to the specified group. This occurs asynchronously, and can take time to complete. You can use GetGroupConfiguration to check the status of the update.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:PutGroupConfiguration   
+   */
+  putGroupConfiguration(params: ResourceGroups.Types.PutGroupConfigurationInput, callback?: (err: AWSError, data: ResourceGroups.Types.PutGroupConfigurationOutput) => void): Request<ResourceGroups.Types.PutGroupConfigurationOutput, AWSError>;
+  /**
+   * Attaches a service configuration to the specified group. This occurs asynchronously, and can take time to complete. You can use GetGroupConfiguration to check the status of the update.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:PutGroupConfiguration   
+   */
+  putGroupConfiguration(callback?: (err: AWSError, data: ResourceGroups.Types.PutGroupConfigurationOutput) => void): Request<ResourceGroups.Types.PutGroupConfigurationOutput, AWSError>;
+  /**
+   * Returns a list of AWS resource identifiers that matches the specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:SearchResources     cloudformation:DescribeStacks     cloudformation:ListStackResources     tag:GetResources   
    */
   searchResources(params: ResourceGroups.Types.SearchResourcesInput, callback?: (err: AWSError, data: ResourceGroups.Types.SearchResourcesOutput) => void): Request<ResourceGroups.Types.SearchResourcesOutput, AWSError>;
   /**
-   * Returns a list of AWS resource identifiers that matches tne specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.
+   * Returns a list of AWS resource identifiers that matches the specified query. The query uses the same format as a resource query in a CreateGroup or UpdateGroupQuery operation.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:SearchResources     cloudformation:DescribeStacks     cloudformation:ListStackResources     tag:GetResources   
    */
   searchResources(callback?: (err: AWSError, data: ResourceGroups.Types.SearchResourcesOutput) => void): Request<ResourceGroups.Types.SearchResourcesOutput, AWSError>;
   /**
-   * Adds tags to a resource group with the specified ARN. Existing tags on a resource group are not changed if they are not specified in the request parameters.  Do not store personally identifiable information (PII) or other confidential or sensitive information in tags. We use tags to provide you with billing and administration services. Tags are not intended to be used for private or sensitive data. 
+   * Adds tags to a resource group with the specified ARN. Existing tags on a resource group are not changed if they are not specified in the request parameters.  Do not store personally identifiable information (PII) or other confidential or sensitive information in tags. We use tags to provide you with billing and administration services. Tags are not intended to be used for private or sensitive data.   Minimum permissions  To run this command, you must have the following permissions:    resource-groups:Tag   
    */
   tag(params: ResourceGroups.Types.TagInput, callback?: (err: AWSError, data: ResourceGroups.Types.TagOutput) => void): Request<ResourceGroups.Types.TagOutput, AWSError>;
   /**
-   * Adds tags to a resource group with the specified ARN. Existing tags on a resource group are not changed if they are not specified in the request parameters.  Do not store personally identifiable information (PII) or other confidential or sensitive information in tags. We use tags to provide you with billing and administration services. Tags are not intended to be used for private or sensitive data. 
+   * Adds tags to a resource group with the specified ARN. Existing tags on a resource group are not changed if they are not specified in the request parameters.  Do not store personally identifiable information (PII) or other confidential or sensitive information in tags. We use tags to provide you with billing and administration services. Tags are not intended to be used for private or sensitive data.   Minimum permissions  To run this command, you must have the following permissions:    resource-groups:Tag   
    */
   tag(callback?: (err: AWSError, data: ResourceGroups.Types.TagOutput) => void): Request<ResourceGroups.Types.TagOutput, AWSError>;
   /**
-   * Removes the specified resources from the specified group.
+   * Removes the specified resources from the specified group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:UngroupResources   
    */
   ungroupResources(params: ResourceGroups.Types.UngroupResourcesInput, callback?: (err: AWSError, data: ResourceGroups.Types.UngroupResourcesOutput) => void): Request<ResourceGroups.Types.UngroupResourcesOutput, AWSError>;
   /**
-   * Removes the specified resources from the specified group.
+   * Removes the specified resources from the specified group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:UngroupResources   
    */
   ungroupResources(callback?: (err: AWSError, data: ResourceGroups.Types.UngroupResourcesOutput) => void): Request<ResourceGroups.Types.UngroupResourcesOutput, AWSError>;
   /**
-   * Deletes tags from a specified resource group.
+   * Deletes tags from a specified resource group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:Untag   
    */
   untag(params: ResourceGroups.Types.UntagInput, callback?: (err: AWSError, data: ResourceGroups.Types.UntagOutput) => void): Request<ResourceGroups.Types.UntagOutput, AWSError>;
   /**
-   * Deletes tags from a specified resource group.
+   * Deletes tags from a specified resource group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:Untag   
    */
   untag(callback?: (err: AWSError, data: ResourceGroups.Types.UntagOutput) => void): Request<ResourceGroups.Types.UntagOutput, AWSError>;
   /**
-   * Updates the description for an existing group. You cannot update the name of a resource group.
+   * Updates the description for an existing group. You cannot update the name of a resource group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:UpdateGroup   
    */
   updateGroup(params: ResourceGroups.Types.UpdateGroupInput, callback?: (err: AWSError, data: ResourceGroups.Types.UpdateGroupOutput) => void): Request<ResourceGroups.Types.UpdateGroupOutput, AWSError>;
   /**
-   * Updates the description for an existing group. You cannot update the name of a resource group.
+   * Updates the description for an existing group. You cannot update the name of a resource group.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:UpdateGroup   
    */
   updateGroup(callback?: (err: AWSError, data: ResourceGroups.Types.UpdateGroupOutput) => void): Request<ResourceGroups.Types.UpdateGroupOutput, AWSError>;
   /**
-   * Updates the resource query of a group.
+   * Updates the resource query of a group. For more information about resource queries, see Create a tag-based group in Resource Groups.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:UpdateGroupQuery   
    */
   updateGroupQuery(params: ResourceGroups.Types.UpdateGroupQueryInput, callback?: (err: AWSError, data: ResourceGroups.Types.UpdateGroupQueryOutput) => void): Request<ResourceGroups.Types.UpdateGroupQueryOutput, AWSError>;
   /**
-   * Updates the resource query of a group.
+   * Updates the resource query of a group. For more information about resource queries, see Create a tag-based group in Resource Groups.  Minimum permissions  To run this command, you must have the following permissions:    resource-groups:UpdateGroupQuery   
    */
   updateGroupQuery(callback?: (err: AWSError, data: ResourceGroups.Types.UpdateGroupQueryOutput) => void): Request<ResourceGroups.Types.UpdateGroupQueryOutput, AWSError>;
 }
@@ -143,7 +151,7 @@ declare namespace ResourceGroups {
      */
     Description?: Description;
     /**
-     * The resource query that determines which AWS resources are members of this group.  You can specify either a ResourceQuery or a Configuration, but not both. 
+     * The resource query that determines which AWS resources are members of this group. For more information about resource queries, see Create a tag-based group in Resource Groups.   A resource group can contain either a ResourceQuery or a Configuration, but not both. 
      */
     ResourceQuery?: ResourceQuery;
     /**
@@ -151,7 +159,7 @@ declare namespace ResourceGroups {
      */
     Tags?: Tags;
     /**
-     * A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of GroupConfigurationItem elements.  You can specify either a Configuration or a ResourceQuery in a group, but not both. 
+     * A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of GroupConfigurationItem elements. For details about the syntax of service configurations, see Service configurations for resource groups.  A resource group can contain either a Configuration or a ResourceQuery, but not both. 
      */
     Configuration?: GroupConfigurationList;
   }
@@ -161,7 +169,7 @@ declare namespace ResourceGroups {
      */
     Group?: Group;
     /**
-     * The resource query associated with the group.
+     * The resource query associated with the group. For more information about resource queries, see Create a tag-based group in Resource Groups. 
      */
     ResourceQuery?: ResourceQuery;
     /**
@@ -169,13 +177,13 @@ declare namespace ResourceGroups {
      */
     Tags?: Tags;
     /**
-     * The service configuration associated with the resource group. AWS Resource Groups supports adding service configurations for the following resource group types:    AWS::EC2::CapacityReservationPool - Amazon EC2 capacity reservation pools. For more information, see Working with capacity reservation groups in the EC2 Users Guide.  
+     * The service configuration associated with the resource group. For details about the syntax of a service configuration, see Service configurations for resource groups.
      */
     GroupConfiguration?: GroupConfiguration;
   }
   export interface DeleteGroupInput {
     /**
-     * Don't use this parameter. Use Group instead.
+     * Deprecated - don't use this parameter. Use Group instead.
      */
     GroupName?: GroupName;
     /**
@@ -215,13 +223,13 @@ declare namespace ResourceGroups {
   }
   export interface GetGroupConfigurationOutput {
     /**
-     * The configuration associated with the specified group.
+     * The service configuration associated with the specified group. For details about the service configuration syntax, see Service configurations for resource groups.
      */
     GroupConfiguration?: GroupConfiguration;
   }
   export interface GetGroupInput {
     /**
-     * Don't use this parameter. Use Group instead.
+     * Deprecated - don't use this parameter. Use Group instead.
      */
     GroupName?: GroupName;
     /**
@@ -247,7 +255,7 @@ declare namespace ResourceGroups {
   }
   export interface GetGroupQueryOutput {
     /**
-     * The resource query associated with the specified group.
+     * The resource query associated with the specified group. For more information about resource queries, see Create a tag-based group in Resource Groups.
      */
     GroupQuery?: GroupQuery;
   }
@@ -303,22 +311,22 @@ declare namespace ResourceGroups {
   export type GroupConfigurationFailureReason = string;
   export interface GroupConfigurationItem {
     /**
-     * Specifies the type of group configuration item. Each item must have a unique value for type. You can specify the following string values:    AWS::EC2::CapacityReservationPool  For more information about EC2 capacity reservation groups, see Working with capacity reservation groups in the EC2 Users Guide.    AWS::ResourceGroups::Generic - Supports parameters that configure the behavior of resource groups of any type.  
+     * Specifies the type of group configuration item. Each item must have a unique value for type. For the list of types that you can specify for a configuration item, see Supported resource types and parameters.
      */
     Type: GroupConfigurationType;
     /**
-     * A collection of parameters for this group configuration item.
+     * A collection of parameters for this group configuration item. For the list of parameters that you can use with each configuration item type, see Supported resource types and parameters.
      */
     Parameters?: GroupParameterList;
   }
   export type GroupConfigurationList = GroupConfigurationItem[];
   export interface GroupConfigurationParameter {
     /**
-     * The name of the group configuration parameter. You can specify the following string values:   For configuration item type AWS::ResourceGroups::Generic:    allowed-resource-types  Specifies the types of resources that you can add to this group by using the GroupResources operation.     For configuration item type AWS::EC2::CapacityReservationPool:   None - This configuration item type doesn't support any parameters.   For more information about EC2 capacity reservation groups, see Working with capacity reservation groups in the EC2 Users Guide.  
+     * The name of the group configuration parameter. For the list of parameters that you can use with each configuration item type, see Supported resource types and parameters.
      */
     Name: GroupConfigurationParameterName;
     /**
-     * The values of for this parameter. You can specify the following string value:   For item type allowed-resource-types: the only supported parameter value is AWS::EC2::CapacityReservation.  
+     * The value or values to be used for the specified parameter. For the list of values you can use with each parameter, see Supported resource types and parameters.
      */
     Values?: GroupConfigurationParameterValueList;
   }
@@ -377,18 +385,22 @@ declare namespace ResourceGroups {
   }
   export interface GroupResourcesOutput {
     /**
-     * The ARNs of the resources that were successfully added to the group by this operation.
+     * A list of ARNs of resources that were successfully added to the group by this operation.
      */
     Succeeded?: ResourceArnList;
     /**
-     * The ARNs of the resources that failed to be added to the group by this operation.
+     * A list of ARNs of any resources that failed to be added to the group by this operation.
      */
     Failed?: FailedResourceList;
+    /**
+     * A list of ARNs of any resources that are still in the process of being added to the group by this operation. These pending additions continue asynchronously. You can check the status of pending additions by using the  ListGroupResources  operation, and checking the Resources array in the response and the Status field of each object in that array. 
+     */
+    Pending?: PendingResourceList;
   }
   export type GroupString = string;
   export interface ListGroupResourcesInput {
     /**
-     * Don't use this parameter. Use Group instead.
+     *    Deprecated - don't use this parameter. Use the Group request field instead.   
      */
     GroupName?: GroupName;
     /**
@@ -408,9 +420,21 @@ declare namespace ResourceGroups {
      */
     NextToken?: NextToken;
   }
+  export interface ListGroupResourcesItem {
+    Identifier?: ResourceIdentifier;
+    /**
+     * A structure that contains the status of this resource's membership in the group.  This field is present in the response only if the group is of type AWS::EC2::HostManagement. 
+     */
+    Status?: ResourceStatus;
+  }
+  export type ListGroupResourcesItemList = ListGroupResourcesItem[];
   export interface ListGroupResourcesOutput {
     /**
-     * The ARNs and resource types of resources that are members of the group that you specified.
+     * An array of resources from which you can determine each resource's identity, type, and group membership status.
+     */
+    Resources?: ListGroupResourcesItemList;
+    /**
+     *    Deprecated - don't use this parameter. Use the Resources response field instead.   
      */
     ResourceIdentifiers?: ResourceIdentifierList;
     /**
@@ -424,7 +448,7 @@ declare namespace ResourceGroups {
   }
   export interface ListGroupsInput {
     /**
-     * Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups operation.    resource-type - Filter the results to include only those of the specified resource types. Specify up to five resource types in the format AWS::ServiceCode::ResourceType . For example, AWS::EC2::Instance, or AWS::S3::Bucket.    configuration-type - Filter the results to include only those groups that have the specified configuration types attached. The current supported values are:   AWS:EC2::CapacityReservationPool    
+     * Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups operation.    resource-type - Filter the results to include only those of the specified resource types. Specify up to five resource types in the format AWS::ServiceCode::ResourceType . For example, AWS::EC2::Instance, or AWS::S3::Bucket.    configuration-type - Filter the results to include only those groups that have the specified configuration types attached. The current supported values are:    AWS:EC2::CapacityReservationPool     AWS:EC2::HostManagement     
      */
     Filters?: GroupFilterList;
     /**
@@ -442,7 +466,7 @@ declare namespace ResourceGroups {
      */
     GroupIdentifiers?: GroupIdentifierList;
     /**
-     * This output element is deprecated and shouldn't be used. Refer to GroupIdentifiers instead.
+     *    Deprecated - don't use this field. Use the GroupIdentifiers response field instead.   
      */
     Groups?: GroupList;
     /**
@@ -452,6 +476,25 @@ declare namespace ResourceGroups {
   }
   export type MaxResults = number;
   export type NextToken = string;
+  export interface PendingResource {
+    /**
+     * The Amazon resource name (ARN) of the resource that's in a pending state.
+     */
+    ResourceArn?: ResourceArn;
+  }
+  export type PendingResourceList = PendingResource[];
+  export interface PutGroupConfigurationInput {
+    /**
+     * The name or ARN of the resource group with the configuration that you want to update.
+     */
+    Group?: GroupString;
+    /**
+     * The new configuration to associate with the specified group. A configuration associates the resource group with an AWS service and specifies how the service can interact with the resources in the group. A configuration is an array of GroupConfigurationItem elements. For information about the syntax of a service configuration, see Service configurations for resource groups.  A resource group can contain either a Configuration or a ResourceQuery, but not both. 
+     */
+    Configuration?: GroupConfigurationList;
+  }
+  export interface PutGroupConfigurationOutput {
+  }
   export type Query = string;
   export interface QueryError {
     /**
@@ -496,7 +539,7 @@ declare namespace ResourceGroups {
   export type ResourceIdentifierList = ResourceIdentifier[];
   export interface ResourceQuery {
     /**
-     * The type of the query. You can use the following values:     CLOUDFORMATION_STACK_1_0:  A JSON syntax that lets you specify a CloudFormation stack ARN.     TAG_FILTERS_1_0:  A JSON syntax that lets you specify a collection of simple tag filters for resource types and tags, as supported by the AWS Tagging API  ResourceTypeFilters parameter of the tagging:GetResources  operation. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches any of the specified values. For example, consider the following sample query for resources that have two tags, Stage and Version, with two values each:  [{"Key":"Stage","Values":["Test","Deploy"]},{"Key":"Version","Values":["1","2"]}]  The results of this query could include the following.   An EC2 instance that has the following two tags: {"Key":"Stage","Value":"Deploy"}, and {"Key":"Version","Value":"2"}    An S3 bucket that has the following two tags: {"Key":"Stage","Value":"Test"}, and {"Key":"Version","Value":"1"}    The query would not include the following items in the results, however.    An EC2 instance that has only the following tag: {"Key":"Stage","Value":"Deploy"}. The instance does not have all of the tag keys specified in the filter, so it is excluded from the results.   An RDS database that has the following two tags: {"Key":"Stage","Value":"Archived"}, and {"Key":"Version","Value":"4"}  The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter.    
+     * The type of the query. You can use the following values:     CLOUDFORMATION_STACK_1_0: Specifies that the Query contains an ARN for a CloudFormation stack.     TAG_FILTERS_1_0: Specifies that the Query parameter contains a JSON string that represents a collection of simple tag filters for resource types and tags. The JSON string uses a syntax similar to the  GetResources  operation, but uses only the   ResourceTypeFilters  and  TagFilters  fields. If you specify more than one tag key, only resources that match all tag keys, and at least one value of each specified tag key, are returned in your query. If you specify more than one value for a tag key, a resource matches the filter if it has a tag key value that matches any of the specified values. For example, consider the following sample query for resources that have two tags, Stage and Version, with two values each:  [{"Stage":["Test","Deploy"]},{"Version":["1","2"]}]  The results of this query could include the following.   An EC2 instance that has the following two tags: {"Stage":"Deploy"}, and {"Version":"2"}    An S3 bucket that has the following two tags: {"Stage":"Test"}, and {"Version":"1"}    The query would not include the following items in the results, however.    An EC2 instance that has only the following tag: {"Stage":"Deploy"}. The instance does not have all of the tag keys specified in the filter, so it is excluded from the results.   An RDS database that has the following two tags: {"Stage":"Archived"} and {"Version":"4"}  The database has all of the tag keys, but none of those keys has an associated value that matches at least one of the specified values in the filter.    
      */
     Type: QueryType;
     /**
@@ -504,6 +547,13 @@ declare namespace ResourceGroups {
      */
     Query: Query;
   }
+  export interface ResourceStatus {
+    /**
+     * The current status.
+     */
+    Name?: ResourceStatusValue;
+  }
+  export type ResourceStatusValue = "PENDING"|string;
   export type ResourceType = string;
   export interface SearchResourcesInput {
     /**
@@ -569,13 +619,17 @@ declare namespace ResourceGroups {
   }
   export interface UngroupResourcesOutput {
     /**
-     * The ARNs of the resources that were successfully removed from the group.
+     * A list of resources that were successfully removed from the group by this operation.
      */
     Succeeded?: ResourceArnList;
     /**
-     * The resources that failed to be removed from the group.
+     * A list of any resources that failed to be removed from the group by this operation.
      */
     Failed?: FailedResourceList;
+    /**
+     * A list of any resources that are still in the process of being removed from the group by this operation. These pending removals continue asynchronously. You can check the status of pending removals by using the  ListGroupResources  operation. After the resource is successfully removed, it no longer appears in the response.
+     */
+    Pending?: PendingResourceList;
   }
   export interface UntagInput {
     /**
@@ -627,7 +681,7 @@ declare namespace ResourceGroups {
      */
     Group?: GroupString;
     /**
-     * The resource query to determine which AWS resources are members of this resource group.
+     * The resource query to determine which AWS resources are members of this resource group.  A resource group can contain either a Configuration or a ResourceQuery, but not both. 
      */
     ResourceQuery: ResourceQuery;
   }

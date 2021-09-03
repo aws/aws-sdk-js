@@ -61,7 +61,7 @@ export class DocumentClient {
     transactGet(params: DocumentClient.TransactGetItemsInput, callback?: (err: AWSError, data: DocumentClient.TransactGetItemsOutput) => void): Request<DocumentClient.TransactGetItemsOutput, AWSError>;
 
     /**
-     * Synchronous write operation that groups up to 10 action requests
+     * Synchronous write operation that groups up to 25 action requests.
      */
     transactWrite(params: DocumentClient.TransactWriteItemsInput, callback?: (err: AWSError, data: DocumentClient.TransactWriteItemsOutput) => void): Request<DocumentClient.TransactWriteItemsOutput, AWSError>;
 }
@@ -368,6 +368,18 @@ export namespace DocumentClient {
   export type BackupType = "USER"|"SYSTEM"|"AWS_BACKUP"|string;
   export type BackupTypeFilter = "USER"|"SYSTEM"|"AWS_BACKUP"|"ALL"|string;
   export type BackupsInputLimit = number;
+  export interface BatchExecuteStatementInput {
+    /**
+     *  The list of PartiQL statements representing the batch to run. 
+     */
+    Statements: PartiQLBatchRequest;
+  }
+  export interface BatchExecuteStatementOutput {
+    /**
+     *  The response to each PartiQL statement in the batch. 
+     */
+    Responses?: PartiQLBatchResponse;
+  }
   export interface BatchGetItemInput {
     /**
      * A map of one or more table names and, for each table, a map that describes one or more items to retrieve from that table. Each table name can be used only once per BatchGetItem request. Each element in the map of items to retrieve consists of the following:    ConsistentRead - If true, a strongly consistent read is used; if false (the default), an eventually consistent read is used.    ExpressionAttributeNames - One or more substitution tokens for attribute names in the ProjectionExpression parameter. The following are some use cases for using ExpressionAttributeNames:   To access an attribute whose name conflicts with a DynamoDB reserved word.   To create a placeholder for repeating occurrences of an attribute name in an expression.   To prevent special characters in an attribute name from being misinterpreted in an expression.   Use the # character in an expression to dereference an attribute name. For example, consider the following attribute name:    Percentile    The name of this attribute conflicts with a reserved word, so it cannot be used directly in an expression. (For the complete list of reserved words, see Reserved Words in the Amazon DynamoDB Developer Guide). To work around this, you could specify the following for ExpressionAttributeNames:    {"#P":"Percentile"}    You could then use this substitution in an expression, as in this example:    #P = :val     Tokens that begin with the : character are expression attribute values, which are placeholders for the actual value at runtime.  For more information about expression attribute names, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    Keys - An array of primary key attribute values that define specific items in the table. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide the partition key value. For a composite key, you must provide both the partition key value and the sort key value.    ProjectionExpression - A string that identifies one or more attributes to retrieve from the table. These attributes can include scalars, sets, or elements of a JSON document. The attributes in the expression must be separated by commas. If no attribute names are specified, then all attributes are returned. If any of the requested attributes are not found, they do not appear in the result. For more information, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    AttributesToGet - This is a legacy parameter. Use ProjectionExpression instead. For more information, see AttributesToGet in the Amazon DynamoDB Developer Guide.   
@@ -391,6 +403,45 @@ export namespace DocumentClient {
   }
   export type BatchGetRequestMap = {[key: string]: KeysAndAttributes};
   export type BatchGetResponseMap = {[key: string]: ItemList};
+  export interface BatchStatementError {
+    /**
+     *  The error code associated with the failed PartiQL batch statement. 
+     */
+    Code?: BatchStatementErrorCodeEnum;
+    /**
+     *  The error message associated with the PartiQL batch resposne. 
+     */
+    Message?: String;
+  }
+  export type BatchStatementErrorCodeEnum = "ConditionalCheckFailed"|"ItemCollectionSizeLimitExceeded"|"RequestLimitExceeded"|"ValidationError"|"ProvisionedThroughputExceeded"|"TransactionConflict"|"ThrottlingError"|"InternalServerError"|"ResourceNotFound"|"AccessDenied"|"DuplicateItem"|string;
+  export interface BatchStatementRequest {
+    /**
+     *  A valid PartiQL statement. 
+     */
+    Statement: PartiQLStatement;
+    /**
+     *  The parameters associated with a PartiQL statement in the batch request. 
+     */
+    Parameters?: PreparedStatementParameters;
+    /**
+     *  The read consistency of the PartiQL batch request. 
+     */
+    ConsistentRead?: ConsistentRead;
+  }
+  export interface BatchStatementResponse {
+    /**
+     *  The error associated with a failed PartiQL batch statement. 
+     */
+    Error?: BatchStatementError;
+    /**
+     *  The table name associated with a failed PartiQL batch statement. 
+     */
+    TableName?: TableName;
+    /**
+     *  A DynamoDB item associated with a BatchStatementResponse 
+     */
+    Item?: AttributeMap;
+  }
   export interface BatchWriteItemInput {
     /**
      * A map of one or more table names and, for each table, a list of operations to be performed (DeleteRequest or PutRequest). Each element in the map consists of the following:    DeleteRequest - Perform a DeleteItem operation on the specified item. The item to be deleted is identified by a Key subelement:    Key - A map of primary key attribute values that uniquely identify the item. Each entry in this map consists of an attribute name and an attribute value. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide values for both the partition key and the sort key.      PutRequest - Perform a PutItem operation on the specified item. The item to be put is identified by an Item subelement:    Item - A map of attributes and their values. Each entry in this map consists of an attribute name and an attribute value. Attribute values must not be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests that contain empty values are rejected with a ValidationException exception. If you specify any attributes that are part of an index key, then the data types for those attributes must match those of the schema in the table's attribute definition.    
@@ -417,6 +468,7 @@ export namespace DocumentClient {
     ConsumedCapacity?: ConsumedCapacityMultiple;
   }
   export type BatchWriteItemRequestMap = {[key: string]: WriteRequests};
+  export type BilledSizeBytes = number;
   export type BillingMode = "PROVISIONED"|"PAY_PER_REQUEST"|string;
   export interface BillingModeSummary {
     /**
@@ -447,6 +499,7 @@ export namespace DocumentClient {
     CapacityUnits?: ConsumedCapacityUnits;
   }
   export type ClientRequestToken = string;
+  export type ClientToken = string;
   export type ComparisonOperator = "EQ"|"NE"|"IN"|"LE"|"LT"|"GE"|"GT"|"BETWEEN"|"NOT_NULL"|"NULL"|"CONTAINS"|"NOT_CONTAINS"|"BEGINS_WITH"|string;
   export interface Condition {
     /**
@@ -579,7 +632,7 @@ export namespace DocumentClient {
      */
     Projection: Projection;
     /**
-     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
+     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput?: ProvisionedThroughput;
   }
@@ -649,7 +702,7 @@ export namespace DocumentClient {
      */
     BillingMode?: BillingMode;
     /**
-     * Represents the provisioned throughput settings for a specified table or index. The settings can be modified using the UpdateTable operation.  If you set BillingMode as PROVISIONED, you must specify this property. If you set BillingMode as PAY_PER_REQUEST, you cannot specify this property.  For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
+     * Represents the provisioned throughput settings for a specified table or index. The settings can be modified using the UpdateTable operation.  If you set BillingMode as PROVISIONED, you must specify this property. If you set BillingMode as PAY_PER_REQUEST, you cannot specify this property. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput?: ProvisionedThroughput;
     /**
@@ -867,6 +920,18 @@ export namespace DocumentClient {
      */
     Endpoints: Endpoints;
   }
+  export interface DescribeExportInput {
+    /**
+     * The Amazon Resource Name (ARN) associated with the export.
+     */
+    ExportArn: ExportArn;
+  }
+  export interface DescribeExportOutput {
+    /**
+     * Represents the properties of the export.
+     */
+    ExportDescription?: ExportDescription;
+  }
   export interface DescribeGlobalTableInput {
     /**
      * The name of the global table.
@@ -894,6 +959,22 @@ export namespace DocumentClient {
      * The Region-specific settings for the global table.
      */
     ReplicaSettings?: ReplicaSettingsDescriptionList;
+  }
+  export interface DescribeKinesisStreamingDestinationInput {
+    /**
+     * The name of the table being described.
+     */
+    TableName: TableName;
+  }
+  export interface DescribeKinesisStreamingDestinationOutput {
+    /**
+     * The name of the table being described.
+     */
+    TableName?: TableName;
+    /**
+     * The list of replica structures for the table being described.
+     */
+    KinesisDataStreamDestinations?: KinesisDataStreamDestinations;
   }
   export interface DescribeLimitsInput {
   }
@@ -951,6 +1032,7 @@ export namespace DocumentClient {
      */
     TimeToLiveDescription?: TimeToLiveDescription;
   }
+  export type DestinationStatus = "ENABLING"|"ACTIVE"|"DISABLING"|"DISABLED"|"ENABLE_FAILED"|string;
   export type Double = number;
   export interface Endpoint {
     /**
@@ -965,6 +1047,50 @@ export namespace DocumentClient {
   export type Endpoints = Endpoint[];
   export type ExceptionDescription = string;
   export type ExceptionName = string;
+  export interface ExecuteStatementInput {
+    /**
+     *  The PartiQL statement representing the operation to run. 
+     */
+    Statement: PartiQLStatement;
+    /**
+     *  The parameters for the PartiQL statement, if any. 
+     */
+    Parameters?: PreparedStatementParameters;
+    /**
+     *  The consistency of a read operation. If set to true, then a strongly consistent read is used; otherwise, an eventually consistent read is used. 
+     */
+    ConsistentRead?: ConsistentRead;
+    /**
+     *  Set this value to get remaining results, if NextToken was returned in the statement response. 
+     */
+    NextToken?: PartiQLNextToken;
+  }
+  export interface ExecuteStatementOutput {
+    /**
+     *  If a read operation was used, this property will contain the result of the reade operation; a map of attribute names and their values. For the write operations this value will be empty. 
+     */
+    Items?: ItemList;
+    /**
+     *  If the response of a read request exceeds the response payload limit DynamoDB will set this value in the response. If set, you can use that this value in the subsequent request to get the remaining results. 
+     */
+    NextToken?: PartiQLNextToken;
+  }
+  export interface ExecuteTransactionInput {
+    /**
+     *  The list of PartiQL statements representing the transaction to run. 
+     */
+    TransactStatements: ParameterizedStatements;
+    /**
+     *  Set this value to get remaining results, if NextToken was returned in the statement response. 
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface ExecuteTransactionOutput {
+    /**
+     *  The response to a PartiQL transaction. 
+     */
+    Responses?: ItemResponseList;
+  }
   export type ExpectedAttributeMap = {[key: string]: ExpectedAttributeValue};
   export interface ExpectedAttributeValue {
     /**
@@ -984,10 +1110,152 @@ export namespace DocumentClient {
      */
     AttributeValueList?: AttributeValueList;
   }
+  export type ExportArn = string;
+  export interface ExportDescription {
+    /**
+     * The Amazon Resource Name (ARN) of the table export.
+     */
+    ExportArn?: ExportArn;
+    /**
+     * Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.
+     */
+    ExportStatus?: ExportStatus;
+    /**
+     * The time at which the export task began.
+     */
+    StartTime?: ExportStartTime;
+    /**
+     * The time at which the export task completed.
+     */
+    EndTime?: ExportEndTime;
+    /**
+     * The name of the manifest file for the export task.
+     */
+    ExportManifest?: ExportManifest;
+    /**
+     * The Amazon Resource Name (ARN) of the table that was exported.
+     */
+    TableArn?: TableArn;
+    /**
+     * Unique ID of the table that was exported.
+     */
+    TableId?: TableId;
+    /**
+     * Point in time from which table data was exported.
+     */
+    ExportTime?: ExportTime;
+    /**
+     * The client token that was provided for the export task. A client token makes calls to ExportTableToPointInTimeInput idempotent, meaning that multiple identical calls have the same effect as one single call.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * The name of the Amazon S3 bucket containing the export.
+     */
+    S3Bucket?: S3Bucket;
+    /**
+     * The ID of the AWS account that owns the bucket containing the export.
+     */
+    S3BucketOwner?: S3BucketOwner;
+    /**
+     * The Amazon S3 bucket prefix used as the file name and path of the exported snapshot.
+     */
+    S3Prefix?: S3Prefix;
+    /**
+     * Type of encryption used on the bucket where export data is stored. Valid values for S3SseAlgorithm are:    AES256 - server-side encryption with Amazon S3 managed keys    KMS - server-side encryption with AWS KMS managed keys  
+     */
+    S3SseAlgorithm?: S3SseAlgorithm;
+    /**
+     * The ID of the AWS KMS managed key used to encrypt the S3 bucket where export data is stored (if applicable).
+     */
+    S3SseKmsKeyId?: S3SseKmsKeyId;
+    /**
+     * Status code for the result of the failed export.
+     */
+    FailureCode?: FailureCode;
+    /**
+     * Export failure reason description.
+     */
+    FailureMessage?: FailureMessage;
+    /**
+     * The format of the exported data. Valid values for ExportFormat are DYNAMODB_JSON or ION.
+     */
+    ExportFormat?: ExportFormat;
+    /**
+     * The billable size of the table export.
+     */
+    BilledSizeBytes?: BilledSizeBytes;
+    /**
+     * The number of items exported.
+     */
+    ItemCount?: ItemCount;
+  }
+  export type ExportEndTime = Date;
+  export type ExportFormat = "DYNAMODB_JSON"|"ION"|string;
+  export type ExportManifest = string;
+  export type ExportNextToken = string;
+  export type ExportStartTime = Date;
+  export type ExportStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type ExportSummaries = ExportSummary[];
+  export interface ExportSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the export.
+     */
+    ExportArn?: ExportArn;
+    /**
+     * Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.
+     */
+    ExportStatus?: ExportStatus;
+  }
+  export interface ExportTableToPointInTimeInput {
+    /**
+     * The Amazon Resource Name (ARN) associated with the table to export.
+     */
+    TableArn: TableArn;
+    /**
+     * Time in the past from which to export table data. The table export will be a snapshot of the table's state at this point in time.
+     */
+    ExportTime?: ExportTime;
+    /**
+     * Providing a ClientToken makes the call to ExportTableToPointInTimeInput idempotent, meaning that multiple identical calls have the same effect as one single call. A client token is valid for 8 hours after the first request that uses it is completed. After 8 hours, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 8 hours, or the result might not be idempotent. If you submit a request with the same client token but a change in other parameters within the 8-hour idempotency window, DynamoDB returns an IdempotentParameterMismatch exception.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * The name of the Amazon S3 bucket to export the snapshot to.
+     */
+    S3Bucket: S3Bucket;
+    /**
+     * The ID of the AWS account that owns the bucket the export will be stored in.
+     */
+    S3BucketOwner?: S3BucketOwner;
+    /**
+     * The Amazon S3 bucket prefix to use as the file name and path of the exported snapshot.
+     */
+    S3Prefix?: S3Prefix;
+    /**
+     * Type of encryption used on the bucket where export data will be stored. Valid values for S3SseAlgorithm are:    AES256 - server-side encryption with Amazon S3 managed keys    KMS - server-side encryption with AWS KMS managed keys  
+     */
+    S3SseAlgorithm?: S3SseAlgorithm;
+    /**
+     * The ID of the AWS KMS managed key used to encrypt the S3 bucket where export data will be stored (if applicable).
+     */
+    S3SseKmsKeyId?: S3SseKmsKeyId;
+    /**
+     * The format for the exported data. Valid values for ExportFormat are DYNAMODB_JSON or ION.
+     */
+    ExportFormat?: ExportFormat;
+  }
+  export interface ExportTableToPointInTimeOutput {
+    /**
+     * Contains a description of the table export.
+     */
+    ExportDescription?: ExportDescription;
+  }
+  export type ExportTime = Date;
   export type ExpressionAttributeNameMap = {[key: string]: AttributeName};
   export type ExpressionAttributeNameVariable = string;
   export type ExpressionAttributeValueMap = {[key: string]: AttributeValue};
   export type ExpressionAttributeValueVariable = string;
+  export type FailureCode = string;
   export interface FailureException {
     /**
      * Exception name.
@@ -998,6 +1266,7 @@ export namespace DocumentClient {
      */
     ExceptionDescription?: ExceptionDescription;
   }
+  export type FailureMessage = string;
   export type FilterConditionMap = {[key: string]: Condition};
   export interface Get {
     /**
@@ -1068,7 +1337,7 @@ export namespace DocumentClient {
      */
     Projection: Projection;
     /**
-     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
+     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput?: ProvisionedThroughput;
   }
@@ -1102,7 +1371,7 @@ export namespace DocumentClient {
      */
     Backfilling?: Backfilling;
     /**
-     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
+     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput?: ProvisionedThroughputDescription;
     /**
@@ -1273,6 +1542,45 @@ export namespace DocumentClient {
      */
     ExpressionAttributeNames?: ExpressionAttributeNameMap;
   }
+  export interface KinesisDataStreamDestination {
+    /**
+     * The ARN for a specific Kinesis data stream.
+     */
+    StreamArn?: StreamArn;
+    /**
+     * The current status of replication.
+     */
+    DestinationStatus?: DestinationStatus;
+    /**
+     * The human-readable string that corresponds to the replica status.
+     */
+    DestinationStatusDescription?: String;
+  }
+  export type KinesisDataStreamDestinations = KinesisDataStreamDestination[];
+  export interface KinesisStreamingDestinationInput {
+    /**
+     * The name of the DynamoDB table.
+     */
+    TableName: TableName;
+    /**
+     * The ARN for a Kinesis data stream.
+     */
+    StreamArn: StreamArn;
+  }
+  export interface KinesisStreamingDestinationOutput {
+    /**
+     * The name of the table being modified.
+     */
+    TableName?: TableName;
+    /**
+     * The ARN for the specific Kinesis data stream.
+     */
+    StreamArn?: StreamArn;
+    /**
+     * The current status of the replication.
+     */
+    DestinationStatus?: DestinationStatus;
+  }
   export type LastUpdateDateTime = Date;
   export type ListAttributeValue = AttributeValue[];
   export interface ListBackupsInput {
@@ -1335,6 +1643,31 @@ export namespace DocumentClient {
      * A token to go to the next page if there is one.
      */
     NextToken?: NextTokenString;
+  }
+  export interface ListExportsInput {
+    /**
+     * The Amazon Resource Name (ARN) associated with the exported table.
+     */
+    TableArn?: TableArn;
+    /**
+     * Maximum number of results to return per page.
+     */
+    MaxResults?: ListExportsMaxLimit;
+    /**
+     * An optional string that, if supplied, must be copied from the output of a previous call to ListExports. When provided in this manner, the API fetches the next page of results.
+     */
+    NextToken?: ExportNextToken;
+  }
+  export type ListExportsMaxLimit = number;
+  export interface ListExportsOutput {
+    /**
+     * A list of ExportSummary objects.
+     */
+    ExportSummaries?: ExportSummaries;
+    /**
+     * If this value is returned, there are additional results to be displayed. To retrieve them, call ListExports again, with NextToken set to this value.
+     */
+    NextToken?: ExportNextToken;
   }
   export interface ListGlobalTablesInput {
     /**
@@ -1467,6 +1800,21 @@ export namespace DocumentClient {
   export type NullAttributeValue = boolean;
   export type NumberAttributeValue = string;
   export type NumberSetAttributeValue = NumberAttributeValue[];
+  export interface ParameterizedStatement {
+    /**
+     *  A PartiQL statment that uses parameters. 
+     */
+    Statement: PartiQLStatement;
+    /**
+     *  The parameter values. 
+     */
+    Parameters?: PreparedStatementParameters;
+  }
+  export type ParameterizedStatements = ParameterizedStatement[];
+  export type PartiQLBatchRequest = BatchStatementRequest[];
+  export type PartiQLBatchResponse = BatchStatementResponse[];
+  export type PartiQLNextToken = string;
+  export type PartiQLStatement = string;
   export interface PointInTimeRecoveryDescription {
     /**
      * The current state of point in time recovery:    ENABLING - Point in time recovery is being enabled.    ENABLED - Point in time recovery is enabled.    DISABLED - Point in time recovery is disabled.  
@@ -1490,9 +1838,10 @@ export namespace DocumentClient {
   export type PointInTimeRecoveryStatus = "ENABLED"|"DISABLED"|string;
   export type PositiveIntegerObject = number;
   export type PositiveLongObject = number;
+  export type PreparedStatementParameters = AttributeValue[];
   export interface Projection {
     /**
-     * The set of attributes that are projected into the index:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - Only the specified table attributes are projected into the index. The list of projected attributes is in NonKeyAttributes.    ALL - All of the table attributes are projected into the index.  
+     * The set of attributes that are projected into the index:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - In addition to the attributes described in KEYS_ONLY, the secondary index will include other non-key attributes that you specify.    ALL - All of the table attributes are projected into the index.  
      */
     ProjectionType?: ProjectionType;
     /**
@@ -1522,7 +1871,7 @@ export namespace DocumentClient {
      */
     LastDecreaseDateTime?: _Date;
     /**
-     * The number of provisioned throughput decreases for this table during this UTC calendar day. For current maximums on provisioned throughput decreases, see Limits in the Amazon DynamoDB Developer Guide.
+     * The number of provisioned throughput decreases for this table during this UTC calendar day. For current maximums on provisioned throughput decreases, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     NumberOfDecreasesToday?: PositiveLongObject;
     /**
@@ -1757,7 +2106,7 @@ export namespace DocumentClient {
      */
     RegionName?: RegionName;
     /**
-     * The current state of the replica:    CREATING - The replica is being created.    UPDATING - The replica is being updated.    DELETING - The replica is being deleted.    ACTIVE - The replica is ready for use.  
+     * The current state of the replica:    CREATING - The replica is being created.    UPDATING - The replica is being updated.    DELETING - The replica is being deleted.    ACTIVE - The replica is ready for use.    REGION_DISABLED - The replica is inaccessible because the AWS Region has been disabled.  If the AWS Region remains inaccessible for more than 20 hours, DynamoDB will remove this replica from the replication group. The replica will not be deleted and replication will stop from and to this region.     INACCESSIBLE_ENCRYPTION_CREDENTIALS  - The AWS KMS key used to encrypt the table is inaccessible.  If the AWS KMS key remains inaccessible for more than 20 hours, DynamoDB will remove this replica from the replication group. The replica will not be deleted and replication will stop from and to this region.   
      */
     ReplicaStatus?: ReplicaStatus;
     /**
@@ -1780,6 +2129,10 @@ export namespace DocumentClient {
      * Replica-specific global secondary index settings.
      */
     GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexDescriptionList;
+    /**
+     * The time at which the replica was first detected as inaccessible. To determine cause of inaccessibility check the ReplicaStatus property.
+     */
+    ReplicaInaccessibleDateTime?: _Date;
   }
   export type ReplicaDescriptionList = ReplicaDescription[];
   export interface ReplicaGlobalSecondaryIndex {
@@ -1922,7 +2275,7 @@ export namespace DocumentClient {
     ReplicaGlobalSecondaryIndexSettingsUpdate?: ReplicaGlobalSecondaryIndexSettingsUpdateList;
   }
   export type ReplicaSettingsUpdateList = ReplicaSettingsUpdate[];
-  export type ReplicaStatus = "CREATING"|"CREATION_FAILED"|"UPDATING"|"DELETING"|"ACTIVE"|string;
+  export type ReplicaStatus = "CREATING"|"CREATION_FAILED"|"UPDATING"|"DELETING"|"ACTIVE"|"REGION_DISABLED"|"INACCESSIBLE_ENCRYPTION_CREDENTIALS"|string;
   export type ReplicaStatusDescription = string;
   export type ReplicaStatusPercentProgress = string;
   export interface ReplicaUpdate {
@@ -2059,6 +2412,11 @@ export namespace DocumentClient {
   export type ReturnItemCollectionMetrics = "SIZE"|"NONE"|string;
   export type ReturnValue = "NONE"|"ALL_OLD"|"UPDATED_OLD"|"ALL_NEW"|"UPDATED_NEW"|string;
   export type ReturnValuesOnConditionCheckFailure = "ALL_OLD"|"NONE"|string;
+  export type S3Bucket = string;
+  export type S3BucketOwner = string;
+  export type S3Prefix = string;
+  export type S3SseAlgorithm = "AES256"|"KMS"|string;
+  export type S3SseKmsKeyId = string;
   export interface SSEDescription {
     /**
      * Represents the current state of server-side encryption. The only supported values are:    ENABLED - Server-side encryption is enabled.    UPDATING - Server-side encryption is being updated.  
@@ -2326,7 +2684,7 @@ export namespace DocumentClient {
      */
     LocalSecondaryIndexes?: LocalSecondaryIndexDescriptionList;
     /**
-     * The global secondary indexes, if any, on the table. Each index is scoped to a given partition key value. Each element is composed of:    Backfilling - If true, then the index is currently in the backfilling phase. Backfilling occurs only when a new global secondary index is added to the table. It is the process by which DynamoDB populates the new index with data from the table. (This attribute does not appear for indexes that were created during a CreateTable operation.)   You can delete an index that is being created during the Backfilling phase when IndexStatus is set to CREATING and Backfilling is true. You can't delete the index that is being created when IndexStatus is set to CREATING and Backfilling is false. (This attribute does not appear for indexes that were created during a CreateTable operation.)    IndexName - The name of the global secondary index.    IndexSizeBytes - The total size of the global secondary index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     IndexStatus - The current status of the global secondary index:    CREATING - The index is being created.    UPDATING - The index is being updated.    DELETING - The index is being deleted.    ACTIVE - The index is ready for use.      ItemCount - The number of items in the global secondary index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     KeySchema - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.    Projection - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:    ProjectionType - One of the following:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - Only the specified table attributes are projected into the index. The list of projected attributes is in NonKeyAttributes.    ALL - All of the table attributes are projected into the index.      NonKeyAttributes - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in NonKeyAttributes, summed across all of the secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.      ProvisionedThroughput - The provisioned throughput settings for the global secondary index, consisting of read and write capacity units, along with data about increases and decreases.    If the table is in the DELETING state, no information about indexes will be returned.
+     * The global secondary indexes, if any, on the table. Each index is scoped to a given partition key value. Each element is composed of:    Backfilling - If true, then the index is currently in the backfilling phase. Backfilling occurs only when a new global secondary index is added to the table. It is the process by which DynamoDB populates the new index with data from the table. (This attribute does not appear for indexes that were created during a CreateTable operation.)   You can delete an index that is being created during the Backfilling phase when IndexStatus is set to CREATING and Backfilling is true. You can't delete the index that is being created when IndexStatus is set to CREATING and Backfilling is false. (This attribute does not appear for indexes that were created during a CreateTable operation.)    IndexName - The name of the global secondary index.    IndexSizeBytes - The total size of the global secondary index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     IndexStatus - The current status of the global secondary index:    CREATING - The index is being created.    UPDATING - The index is being updated.    DELETING - The index is being deleted.    ACTIVE - The index is ready for use.      ItemCount - The number of items in the global secondary index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     KeySchema - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.    Projection - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:    ProjectionType - One of the following:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - In addition to the attributes described in KEYS_ONLY, the secondary index will include other non-key attributes that you specify.    ALL - All of the table attributes are projected into the index.      NonKeyAttributes - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in NonKeyAttributes, summed across all of the secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.      ProvisionedThroughput - The provisioned throughput settings for the global secondary index, consisting of read and write capacity units, along with data about increases and decreases.    If the table is in the DELETING state, no information about indexes will be returned.
      */
     GlobalSecondaryIndexes?: GlobalSecondaryIndexDescriptionList;
     /**
@@ -2577,7 +2935,7 @@ export namespace DocumentClient {
      */
     IndexName: IndexName;
     /**
-     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
+     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput: ProvisionedThroughput;
   }

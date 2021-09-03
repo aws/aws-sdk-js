@@ -35,8 +35,8 @@
       });
     });
     return describe('copyDBSnapshot cross-region copying', function() {
-      var cb, err, rds, ref, spy;
-      ref = [], rds = ref[0], spy = ref[1], err = ref[2];
+      var cb, err, rds, ref;
+      ref = [], rds = ref[0], err = ref[2];
       cb = function(e) {
         return err = e;
       };
@@ -49,7 +49,6 @@
           },
           paramValidation: true
         });
-        spy = helpers.spyOn(rds, 'buildCrossRegionPresignedUrl').andCallThrough();
         helpers.spyOn(AWS.RDS.prototype, 'getSkewCorrectedDate').andReturn(new Date(0));
         return helpers.spyOn(rds, 'getSkewCorrectedDate').andReturn(new Date(0));
       });
@@ -61,7 +60,6 @@
         });
         req.build();
         expect(req.response.error).to.equal(null);
-        expect(spy.calls.length).to.equal(1);
         expect(req.params).to.eql({
           SourceDBSnapshotIdentifier: 'source_id',
           TargetDBSnapshotIdentifier: 'target_id',
@@ -78,7 +76,6 @@
         });
         req.build();
         expect(req.response.error).to.equal(null);
-        expect(spy.calls.length).to.equal(1);
         expect(req.params).to.eql({
           SourceDBSnapshotIdentifier: 'source_id',
           TargetDBSnapshotIdentifier: 'target_id',
@@ -91,7 +88,6 @@
         req = rds.describeDBSnapshots();
         req.build();
         expect(req.response.error).to.equal(null);
-        expect(spy.calls.length).to.equal(0);
         return expect(req.params).to.eql({});
       });
       it('does not build presigned url when SourceRegion is not passed as an input', function() {
@@ -103,7 +99,6 @@
         });
         req.build();
         expect(req.response.error).to.equal(null);
-        expect(spy.calls.length).to.equal(0);
         return expect(req.params).to.eql({
           SourceDBSnapshotIdentifier: 'source_id',
           TargetDBSnapshotIdentifier: 'target_id'
@@ -119,7 +114,6 @@
         });
         req.build();
         expect(req.response.error).to.equal(null);
-        expect(spy.calls.length).to.equal(0);
         return expect(req.params).to.eql({
           SourceDBSnapshotIdentifier: 'source_id',
           TargetDBSnapshotIdentifier: 'target_id',
@@ -135,7 +129,6 @@
         });
         req.build();
         expect(req.response.error).to.equal(null);
-        expect(spy.calls.length).to.equal(0);
         return expect(req.params).to.eql({
           SourceDBSnapshotIdentifier: 'source_id',
           TargetDBSnapshotIdentifier: 'target_id'
@@ -155,7 +148,6 @@
           req = rds.copyDBSnapshot(params);
           req.build();
           expect(req.response.error).to.equal(null);
-          expect(spy.calls.length).to.equal(1);
           expect(req.params).to.eql({
             SourceDBSnapshotIdentifier: 'source_id',
             TargetDBSnapshotIdentifier: 'target_id',
@@ -178,7 +170,6 @@
           req = rds.copyDBSnapshot(params);
           req.build();
           expect(req.response.error).to.equal(null);
-          expect(spy.calls.length).to.equal(0);
           expect(req.params).to.eql({
             SourceDBSnapshotIdentifier: 'source_id',
             TargetDBSnapshotIdentifier: 'target_id',
@@ -201,7 +192,6 @@
           req = rds.copyDBSnapshot(params);
           req.build();
           expect(req.response.error).to.equal(null);
-          expect(spy.calls.length).to.equal(0);
           expect(req.params).to.eql({
             SourceDBSnapshotIdentifier: 'source_id',
             TargetDBSnapshotIdentifier: 'target_id'

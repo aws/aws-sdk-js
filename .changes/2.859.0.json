@@ -1,0 +1,17 @@
+[
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "Amazon EMR customers can now specify how EC2 On-Demand Capacity Reservations are used in their EMR clusters with instance fleets using allocation strategy."
+    },
+    {
+        "type": "feature",
+        "category": "KinesisVideoArchivedMedia",
+        "description": "Increase the maximum HLS and MPEG-DASH manifest size from 1,000 to 5,000 fragments."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "Documentation updates for Lambda. Constraint updates to AddLayerVersionPermission's Action and OrganizationId parameters, and AddPermission's Principal and SourceAccount parameters."
+    }
+]

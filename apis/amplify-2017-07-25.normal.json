@@ -1202,6 +1202,10 @@
           "shape": "BuildSpec",
           "documentation": "<p> Describes the content of the build specification (build spec) for the Amplify app. </p>"
         },
+        "customHeaders": {
+          "shape": "CustomHeaders",
+          "documentation": "<p>Describes the custom HTTP headers for the Amplify app.</p>"
+        },
         "enableAutoBranchCreation": {
           "shape": "EnableAutoBranchCreation",
           "documentation": "<p> Enables automated branch creation for the Amplify app. </p>"
@@ -1223,8 +1227,9 @@
     },
     "AppId": {
       "type": "string",
-      "max": 255,
-      "min": 1
+      "max": 20,
+      "min": 1,
+      "pattern": "d[a-z0-9]+"
     },
     "Apps": {
       "type": "list",
@@ -1310,13 +1315,17 @@
           "shape": "EnableBasicAuth",
           "documentation": "<p> Enables basic authorization for the autocreated branch. </p>"
         },
+        "enablePerformanceMode": {
+          "shape": "EnablePerformanceMode",
+          "documentation": "<p>Enables performance mode for the branch.</p> <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>"
+        },
         "buildSpec": {
           "shape": "BuildSpec",
           "documentation": "<p> The build specification (build spec) for the autocreated branch. </p>"
         },
         "enablePullRequestPreview": {
           "shape": "EnablePullRequestPreview",
-          "documentation": "<p> Enables pull request preview for the autocreated branch. </p>"
+          "documentation": "<p> Enables pull request previews for the autocreated branch. </p>"
         },
         "pullRequestEnvironmentName": {
           "shape": "PullRequestEnvironmentName",
@@ -1490,6 +1499,10 @@
           "shape": "EnableBasicAuth",
           "documentation": "<p> Enables basic authorization for a branch of an Amplify app. </p>"
         },
+        "enablePerformanceMode": {
+          "shape": "EnablePerformanceMode",
+          "documentation": "<p>Enables performance mode for the branch.</p> <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>"
+        },
         "thumbnailUrl": {
           "shape": "ThumbnailUrl",
           "documentation": "<p> The thumbnail URL for the branch of an Amplify app. </p>"
@@ -1512,7 +1525,7 @@
         },
         "enablePullRequestPreview": {
           "shape": "EnablePullRequestPreview",
-          "documentation": "<p> Enables pull request preview for the branch. </p>"
+          "documentation": "<p> Enables pull request previews for the branch. </p>"
         },
         "pullRequestEnvironmentName": {
           "shape": "PullRequestEnvironmentName",
@@ -1586,7 +1599,7 @@
       "members": {
         "name": {
           "shape": "Name",
-          "documentation": "<p> The name for the Amplify app. </p>"
+          "documentation": "<p> The name for an Amplify app. </p>"
         },
         "description": {
           "shape": "Description",
@@ -1644,17 +1657,21 @@
           "shape": "BuildSpec",
           "documentation": "<p> The build specification (build spec) for an Amplify app. </p>"
         },
+        "customHeaders": {
+          "shape": "CustomHeaders",
+          "documentation": "<p>The custom HTTP headers for an Amplify app.</p>"
+        },
         "enableAutoBranchCreation": {
           "shape": "EnableAutoBranchCreation",
-          "documentation": "<p> Enables automated branch creation for the Amplify app. </p>"
+          "documentation": "<p> Enables automated branch creation for an Amplify app. </p>"
         },
         "autoBranchCreationPatterns": {
           "shape": "AutoBranchCreationPatterns",
-          "documentation": "<p> The automated branch creation glob patterns for the Amplify app. </p>"
+          "documentation": "<p> The automated branch creation glob patterns for an Amplify app. </p>"
         },
         "autoBranchCreationConfig": {
           "shape": "AutoBranchCreationConfig",
-          "documentation": "<p> The automated branch creation configuration for the Amplify app. </p>"
+          "documentation": "<p> The automated branch creation configuration for an Amplify app. </p>"
         }
       },
       "documentation": "<p> The request structure used to create apps in Amplify. </p>"
@@ -1760,6 +1777,10 @@
           "shape": "EnableBasicAuth",
           "documentation": "<p> Enables basic authorization for the branch. </p>"
         },
+        "enablePerformanceMode": {
+          "shape": "EnablePerformanceMode",
+          "documentation": "<p>Enables performance mode for the branch.</p> <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>"
+        },
         "tags": {
           "shape": "TagMap",
           "documentation": "<p> The tag for the branch. </p>"
@@ -1778,7 +1799,7 @@
         },
         "enablePullRequestPreview": {
           "shape": "EnablePullRequestPreview",
-          "documentation": "<p> Enables pull request preview for this branch. </p>"
+          "documentation": "<p> Enables pull request previews for this branch. </p>"
         },
         "pullRequestEnvironmentName": {
           "shape": "PullRequestEnvironmentName",
@@ -1953,6 +1974,11 @@
       },
       "max": 255
     },
+    "CustomHeaders": {
+      "type": "string",
+      "max": 25000,
+      "min": 1
+    },
     "CustomRule": {
       "type": "structure",
       "required": [
@@ -1970,7 +1996,7 @@
         },
         "status": {
           "shape": "Status",
-          "documentation": "<p> The status code for a URL rewrite or redirect rule. </p>"
+          "documentation": "<p> The status code for a URL rewrite or redirect rule. </p> <dl> <dt>200</dt> <dd> <p>Represents a 200 rewrite rule.</p> </dd> <dt>301</dt> <dd> <p>Represents a 301 (moved pemanently) redirect rule. This and all future requests should be directed to the target URL. </p> </dd> <dt>302</dt> <dd> <p>Represents a 302 temporary redirect rule.</p> </dd> <dt>404</dt> <dd> <p>Represents a 404 redirect rule.</p> </dd> <dt>404-200</dt> <dd> <p>Represents a 404 rewrite rule.</p> </dd> </dl>"
         },
         "condition": {
           "shape": "Condition",
@@ -2307,6 +2333,9 @@
       "type": "boolean"
     },
     "EnableNotification": {
+      "type": "boolean"
+    },
+    "EnablePerformanceMode": {
       "type": "boolean"
     },
     "EnablePullRequestPreview": {
@@ -3106,7 +3135,7 @@
     "MaxResults": {
       "type": "integer",
       "max": 100,
-      "min": 1
+      "min": 0
     },
     "Name": {
       "type": "string",
@@ -3119,7 +3148,7 @@
     },
     "OauthToken": {
       "type": "string",
-      "max": 100,
+      "max": 1000,
       "sensitive": true
     },
     "Platform": {
@@ -3645,17 +3674,21 @@
           "shape": "BuildSpec",
           "documentation": "<p> The build specification (build spec) for an Amplify app. </p>"
         },
+        "customHeaders": {
+          "shape": "CustomHeaders",
+          "documentation": "<p>The custom HTTP headers for an Amplify app.</p>"
+        },
         "enableAutoBranchCreation": {
           "shape": "EnableAutoBranchCreation",
-          "documentation": "<p> Enables automated branch creation for the Amplify app. </p>"
+          "documentation": "<p> Enables automated branch creation for an Amplify app. </p>"
         },
         "autoBranchCreationPatterns": {
           "shape": "AutoBranchCreationPatterns",
-          "documentation": "<p> Describes the automated branch creation glob patterns for the Amplify app. </p>"
+          "documentation": "<p> Describes the automated branch creation glob patterns for an Amplify app. </p>"
         },
         "autoBranchCreationConfig": {
           "shape": "AutoBranchCreationConfig",
-          "documentation": "<p> The automated branch creation configuration for the Amplify app. </p>"
+          "documentation": "<p> The automated branch creation configuration for an Amplify app. </p>"
         },
         "repository": {
           "shape": "Repository",
@@ -3736,6 +3769,10 @@
           "shape": "EnableBasicAuth",
           "documentation": "<p> Enables basic authorization for the branch. </p>"
         },
+        "enablePerformanceMode": {
+          "shape": "EnablePerformanceMode",
+          "documentation": "<p>Enables performance mode for the branch.</p> <p>Performance mode optimizes for faster hosting performance by keeping content cached at the edge for a longer interval. When performance mode is enabled, hosting configuration or code changes can take up to 10 minutes to roll out. </p>"
+        },
         "buildSpec": {
           "shape": "BuildSpec",
           "documentation": "<p> The build specification (build spec) for the branch. </p>"
@@ -3750,7 +3787,7 @@
         },
         "enablePullRequestPreview": {
           "shape": "EnablePullRequestPreview",
-          "documentation": "<p> Enables pull request preview for this branch. </p>"
+          "documentation": "<p> Enables pull request previews for this branch. </p>"
         },
         "pullRequestEnvironmentName": {
           "shape": "PullRequestEnvironmentName",

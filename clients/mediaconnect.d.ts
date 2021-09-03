@@ -2,6 +2,7 @@ import {Request} from '../lib/request';
 import {Response} from '../lib/response';
 import {AWSError} from '../lib/error';
 import {Service} from '../lib/service';
+import {WaiterConfiguration} from '../lib/service';
 import {ServiceConfigurationOptions} from '../lib/service';
 import {ConfigBase as Config} from '../lib/config-base';
 interface Blob {}
@@ -11,6 +12,14 @@ declare class MediaConnect extends Service {
    */
   constructor(options?: MediaConnect.Types.ClientConfiguration)
   config: Config & MediaConnect.Types.ClientConfiguration;
+  /**
+   * Adds media streams to an existing flow. After you add a media stream to a flow, you can associate it with a source and/or an output that uses the ST 2110 JPEG XS or CDI protocol.
+   */
+  addFlowMediaStreams(params: MediaConnect.Types.AddFlowMediaStreamsRequest, callback?: (err: AWSError, data: MediaConnect.Types.AddFlowMediaStreamsResponse) => void): Request<MediaConnect.Types.AddFlowMediaStreamsResponse, AWSError>;
+  /**
+   * Adds media streams to an existing flow. After you add a media stream to a flow, you can associate it with a source and/or an output that uses the ST 2110 JPEG XS or CDI protocol.
+   */
+  addFlowMediaStreams(callback?: (err: AWSError, data: MediaConnect.Types.AddFlowMediaStreamsResponse) => void): Request<MediaConnect.Types.AddFlowMediaStreamsResponse, AWSError>;
   /**
    * Adds outputs to an existing flow. You can create up to 50 outputs per flow.
    */
@@ -60,6 +69,22 @@ declare class MediaConnect extends Service {
    */
   describeFlow(callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
   /**
+   * Displays the details of an offering. The response includes the offering description, duration, outbound bandwidth, price, and Amazon Resource Name (ARN).
+   */
+  describeOffering(params: MediaConnect.Types.DescribeOfferingRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeOfferingResponse) => void): Request<MediaConnect.Types.DescribeOfferingResponse, AWSError>;
+  /**
+   * Displays the details of an offering. The response includes the offering description, duration, outbound bandwidth, price, and Amazon Resource Name (ARN).
+   */
+  describeOffering(callback?: (err: AWSError, data: MediaConnect.Types.DescribeOfferingResponse) => void): Request<MediaConnect.Types.DescribeOfferingResponse, AWSError>;
+  /**
+   * Displays the details of a reservation. The response includes the reservation name, state, start date and time, and the details of the offering that make up the rest of the reservation (such as price, duration, and outbound bandwidth).
+   */
+  describeReservation(params: MediaConnect.Types.DescribeReservationRequest, callback?: (err: AWSError, data: MediaConnect.Types.DescribeReservationResponse) => void): Request<MediaConnect.Types.DescribeReservationResponse, AWSError>;
+  /**
+   * Displays the details of a reservation. The response includes the reservation name, state, start date and time, and the details of the offering that make up the rest of the reservation (such as price, duration, and outbound bandwidth).
+   */
+  describeReservation(callback?: (err: AWSError, data: MediaConnect.Types.DescribeReservationResponse) => void): Request<MediaConnect.Types.DescribeReservationResponse, AWSError>;
+  /**
    * Grants entitlements to an existing flow.
    */
   grantFlowEntitlements(params: MediaConnect.Types.GrantFlowEntitlementsRequest, callback?: (err: AWSError, data: MediaConnect.Types.GrantFlowEntitlementsResponse) => void): Request<MediaConnect.Types.GrantFlowEntitlementsResponse, AWSError>;
@@ -84,6 +109,22 @@ declare class MediaConnect extends Service {
    */
   listFlows(callback?: (err: AWSError, data: MediaConnect.Types.ListFlowsResponse) => void): Request<MediaConnect.Types.ListFlowsResponse, AWSError>;
   /**
+   * Displays a list of all offerings that are available to this account in the current AWS Region. If you have an active reservation (which means you've purchased an offering that has already started and hasn't expired yet), your account isn't eligible for other offerings.
+   */
+  listOfferings(params: MediaConnect.Types.ListOfferingsRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListOfferingsResponse) => void): Request<MediaConnect.Types.ListOfferingsResponse, AWSError>;
+  /**
+   * Displays a list of all offerings that are available to this account in the current AWS Region. If you have an active reservation (which means you've purchased an offering that has already started and hasn't expired yet), your account isn't eligible for other offerings.
+   */
+  listOfferings(callback?: (err: AWSError, data: MediaConnect.Types.ListOfferingsResponse) => void): Request<MediaConnect.Types.ListOfferingsResponse, AWSError>;
+  /**
+   * Displays a list of all reservations that have been purchased by this account in the current AWS Region. This list includes all reservations in all states (such as active and expired).
+   */
+  listReservations(params: MediaConnect.Types.ListReservationsRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListReservationsResponse) => void): Request<MediaConnect.Types.ListReservationsResponse, AWSError>;
+  /**
+   * Displays a list of all reservations that have been purchased by this account in the current AWS Region. This list includes all reservations in all states (such as active and expired).
+   */
+  listReservations(callback?: (err: AWSError, data: MediaConnect.Types.ListReservationsResponse) => void): Request<MediaConnect.Types.ListReservationsResponse, AWSError>;
+  /**
    * List all tags on an AWS Elemental MediaConnect resource
    */
   listTagsForResource(params: MediaConnect.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: MediaConnect.Types.ListTagsForResourceResponse) => void): Request<MediaConnect.Types.ListTagsForResourceResponse, AWSError>;
@@ -91,6 +132,22 @@ declare class MediaConnect extends Service {
    * List all tags on an AWS Elemental MediaConnect resource
    */
   listTagsForResource(callback?: (err: AWSError, data: MediaConnect.Types.ListTagsForResourceResponse) => void): Request<MediaConnect.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Submits a request to purchase an offering. If you already have an active reservation, you can't purchase another offering.
+   */
+  purchaseOffering(params: MediaConnect.Types.PurchaseOfferingRequest, callback?: (err: AWSError, data: MediaConnect.Types.PurchaseOfferingResponse) => void): Request<MediaConnect.Types.PurchaseOfferingResponse, AWSError>;
+  /**
+   * Submits a request to purchase an offering. If you already have an active reservation, you can't purchase another offering.
+   */
+  purchaseOffering(callback?: (err: AWSError, data: MediaConnect.Types.PurchaseOfferingResponse) => void): Request<MediaConnect.Types.PurchaseOfferingResponse, AWSError>;
+  /**
+   * Removes a media stream from a flow. This action is only available if the media stream is not associated with a source or output.
+   */
+  removeFlowMediaStream(params: MediaConnect.Types.RemoveFlowMediaStreamRequest, callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowMediaStreamResponse) => void): Request<MediaConnect.Types.RemoveFlowMediaStreamResponse, AWSError>;
+  /**
+   * Removes a media stream from a flow. This action is only available if the media stream is not associated with a source or output.
+   */
+  removeFlowMediaStream(callback?: (err: AWSError, data: MediaConnect.Types.RemoveFlowMediaStreamResponse) => void): Request<MediaConnect.Types.RemoveFlowMediaStreamResponse, AWSError>;
   /**
    * Removes an output from an existing flow. This request can be made only on an output that does not have an entitlement associated with it. If the output has an entitlement, you must revoke the entitlement instead. When an entitlement is revoked from a flow, the service automatically removes the associated output.
    */
@@ -172,6 +229,14 @@ declare class MediaConnect extends Service {
    */
   updateFlowEntitlement(callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowEntitlementResponse) => void): Request<MediaConnect.Types.UpdateFlowEntitlementResponse, AWSError>;
   /**
+   * Updates an existing media stream.
+   */
+  updateFlowMediaStream(params: MediaConnect.Types.UpdateFlowMediaStreamRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowMediaStreamResponse) => void): Request<MediaConnect.Types.UpdateFlowMediaStreamResponse, AWSError>;
+  /**
+   * Updates an existing media stream.
+   */
+  updateFlowMediaStream(callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowMediaStreamResponse) => void): Request<MediaConnect.Types.UpdateFlowMediaStreamResponse, AWSError>;
+  /**
    * Updates an existing flow output.
    */
   updateFlowOutput(params: MediaConnect.Types.UpdateFlowOutputRequest, callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowOutputResponse) => void): Request<MediaConnect.Types.UpdateFlowOutputResponse, AWSError>;
@@ -187,8 +252,52 @@ declare class MediaConnect extends Service {
    * Updates the source of a flow.
    */
   updateFlowSource(callback?: (err: AWSError, data: MediaConnect.Types.UpdateFlowSourceResponse) => void): Request<MediaConnect.Types.UpdateFlowSourceResponse, AWSError>;
+  /**
+   * Waits for the flowActive state by periodically calling the underlying MediaConnect.describeFlowoperation every 3 seconds (at most 40 times). Wait until a flow is active
+   */
+  waitFor(state: "flowActive", params: MediaConnect.Types.DescribeFlowRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
+  /**
+   * Waits for the flowActive state by periodically calling the underlying MediaConnect.describeFlowoperation every 3 seconds (at most 40 times). Wait until a flow is active
+   */
+  waitFor(state: "flowActive", callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
+  /**
+   * Waits for the flowStandby state by periodically calling the underlying MediaConnect.describeFlowoperation every 3 seconds (at most 40 times). Wait until a flow is in standby mode
+   */
+  waitFor(state: "flowStandby", params: MediaConnect.Types.DescribeFlowRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
+  /**
+   * Waits for the flowStandby state by periodically calling the underlying MediaConnect.describeFlowoperation every 3 seconds (at most 40 times). Wait until a flow is in standby mode
+   */
+  waitFor(state: "flowStandby", callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
+  /**
+   * Waits for the flowDeleted state by periodically calling the underlying MediaConnect.describeFlowoperation every 3 seconds (at most 40 times). Wait until a flow is deleted
+   */
+  waitFor(state: "flowDeleted", params: MediaConnect.Types.DescribeFlowRequest & {$waiter?: WaiterConfiguration}, callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
+  /**
+   * Waits for the flowDeleted state by periodically calling the underlying MediaConnect.describeFlowoperation every 3 seconds (at most 40 times). Wait until a flow is deleted
+   */
+  waitFor(state: "flowDeleted", callback?: (err: AWSError, data: MediaConnect.Types.DescribeFlowResponse) => void): Request<MediaConnect.Types.DescribeFlowResponse, AWSError>;
 }
 declare namespace MediaConnect {
+  export interface AddFlowMediaStreamsRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    FlowArn: __string;
+    /**
+     * The media streams that you want to add to the flow.
+     */
+    MediaStreams: __listOfAddMediaStreamRequest;
+  }
+  export interface AddFlowMediaStreamsResponse {
+    /**
+     * The ARN of the flow that you added media streams to.
+     */
+    FlowArn?: __string;
+    /**
+     * The media streams that you added to the flow.
+     */
+    MediaStreams?: __listOfMediaStream;
+  }
   export interface AddFlowOutputsRequest {
     /**
      * The flow that you want to add outputs to.
@@ -249,6 +358,36 @@ declare namespace MediaConnect {
      */
     VpcInterfaces?: __listOfVpcInterface;
   }
+  export interface AddMediaStreamRequest {
+    /**
+     * The attributes that you want to assign to the new media stream.
+     */
+    Attributes?: MediaStreamAttributesRequest;
+    /**
+     * The sample rate (in Hz) for the stream. If the media stream type is video or ancillary data, set this value to 90000. If the media stream type is audio, set this value to either 48000 or 96000.
+     */
+    ClockRate?: __integer;
+    /**
+     * A description that can help you quickly identify what your media stream is used for.
+     */
+    Description?: __string;
+    /**
+     * A unique identifier for the media stream.
+     */
+    MediaStreamId: __integer;
+    /**
+     * A name that helps you distinguish one media stream from another.
+     */
+    MediaStreamName: __string;
+    /**
+     * The type of media stream.
+     */
+    MediaStreamType: MediaStreamType;
+    /**
+     * The resolution of the video.
+     */
+    VideoFormat?: __string;
+  }
   export interface AddOutputRequest {
     /**
      * The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
@@ -270,6 +409,14 @@ declare namespace MediaConnect {
      * The maximum latency in milliseconds for Zixi-based streams.
      */
     MaxLatency?: __integer;
+    /**
+     * The media streams that are associated with the output, and the parameters for those associations.
+     */
+    MediaStreamOutputConfigurations?: __listOfMediaStreamOutputConfigurationRequest;
+    /**
+     * The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.
+     */
+    MinLatency?: __integer;
     /**
      * The name of the output. This value must be unique within the current flow.
      */
@@ -300,6 +447,7 @@ declare namespace MediaConnect {
     VpcInterfaceAttachment?: VpcInterfaceAttachment;
   }
   export type Algorithm = "aes128"|"aes192"|"aes256"|string;
+  export type Colorimetry = "BT601"|"BT709"|"BT2020"|"BT2100"|"ST2065-1"|"ST2065-3"|"XYZ"|string;
   export interface CreateFlowRequest {
     /**
      * The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS Region.
@@ -309,6 +457,10 @@ declare namespace MediaConnect {
      * The entitlements that you want to grant on a flow.
      */
     Entitlements?: __listOfGrantEntitlementRequest;
+    /**
+     * The media streams that you want to add to the flow. You can associate these media streams with sources and outputs on the flow.
+     */
+    MediaStreams?: __listOfAddMediaStreamRequest;
     /**
      * The name of the flow.
      */
@@ -354,11 +506,84 @@ declare namespace MediaConnect {
     Flow?: Flow;
     Messages?: Messages;
   }
+  export interface DescribeOfferingRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the offering.
+     */
+    OfferingArn: __string;
+  }
+  export interface DescribeOfferingResponse {
+    Offering?: Offering;
+  }
+  export interface DescribeReservationRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the reservation.
+     */
+    ReservationArn: __string;
+  }
+  export interface DescribeReservationResponse {
+    Reservation?: Reservation;
+  }
+  export interface DestinationConfiguration {
+    /**
+     * The IP address where contents of the media stream will be sent.
+     */
+    DestinationIp: __string;
+    /**
+     * The port to use when the content of the media stream is distributed to the output.
+     */
+    DestinationPort: __integer;
+    /**
+     * The VPC interface that is used for the media stream associated with the output.
+     */
+    Interface: Interface;
+    /**
+     * The IP address that the receiver requires in order to establish a connection with the flow. This value is represented by the elastic network interface IP address of the VPC. This field applies only to outputs that use the CDI or ST 2110 JPEG XS protocol.
+     */
+    OutboundIp: __string;
+  }
+  export interface DestinationConfigurationRequest {
+    /**
+     * The IP address where you want MediaConnect to send contents of the media stream.
+     */
+    DestinationIp: __string;
+    /**
+     * The port that you want MediaConnect to use when it distributes the media stream to the output.
+     */
+    DestinationPort: __integer;
+    /**
+     * The VPC interface that you want to use for the media stream associated with the output.
+     */
+    Interface: InterfaceRequest;
+  }
+  export type DurationUnits = "MONTHS"|string;
+  export type EncoderProfile = "main"|"high"|string;
+  export type EncodingName = "jxsv"|"raw"|"smpte291"|"pcm"|string;
+  export interface EncodingParameters {
+    /**
+     * A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are floating point numbers in the range of 3.0 to 10.0, inclusive.
+     */
+    CompressionFactor: __double;
+    /**
+     * A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol.
+     */
+    EncoderProfile: EncoderProfile;
+  }
+  export interface EncodingParametersRequest {
+    /**
+     * A value that is used to calculate compression for an output. The bitrate of the output is calculated as follows: Output bitrate = (1 / compressionFactor) * (source bitrate) This property only applies to outputs that use the ST 2110 JPEG XS protocol, with a flow source that uses the CDI protocol. Valid values are floating point numbers in the range of 3.0 to 10.0, inclusive.
+     */
+    CompressionFactor: __double;
+    /**
+     * A setting on the encoder that drives compression settings. This property only applies to video media streams associated with outputs that use the ST 2110 JPEG XS protocol, if at least one source on the flow uses the CDI protocol.
+     */
+    EncoderProfile: EncoderProfile;
+  }
   export interface Encryption {
     /**
      * The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).
      */
-    Algorithm: Algorithm;
+    Algorithm?: Algorithm;
     /**
      * A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.
      */
@@ -425,11 +650,20 @@ declare namespace MediaConnect {
   export type EntitlementStatus = "ENABLED"|"DISABLED"|string;
   export interface FailoverConfig {
     /**
+     * The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.
+     */
+    FailoverMode?: FailoverMode;
+    /**
      * Search window time to look for dash-7 packets
      */
     RecoveryWindow?: __integer;
+    /**
+     * The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
+     */
+    SourcePriority?: SourcePriority;
     State?: State;
   }
+  export type FailoverMode = "MERGE"|"FAILOVER"|string;
   export interface Flow {
     /**
      * The Availability Zone that you want to create the flow in. These options are limited to the Availability Zones within the current AWS.
@@ -452,6 +686,10 @@ declare namespace MediaConnect {
      */
     FlowArn: __string;
     /**
+     * The media streams that are associated with the flow. After you associate a media stream with a source, you can also associate it with outputs on the flow.
+     */
+    MediaStreams?: __listOfMediaStream;
+    /**
      * The name of the flow.
      */
     Name: __string;
@@ -470,6 +708,66 @@ declare namespace MediaConnect {
      * The VPC Interfaces for this flow.
      */
     VpcInterfaces?: __listOfVpcInterface;
+  }
+  export interface Fmtp {
+    /**
+     * The format of the audio channel.
+     */
+    ChannelOrder?: __string;
+    /**
+     * The format that is used for the representation of color.
+     */
+    Colorimetry?: Colorimetry;
+    /**
+     * The frame rate for the video stream, in frames/second. For example: 60000/1001. If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if you specify 60, MediaConnect uses 60/1 as the exactFramerate.
+     */
+    ExactFramerate?: __string;
+    /**
+     * The pixel aspect ratio (PAR) of the video.
+     */
+    Par?: __string;
+    /**
+     * The encoding range of the video.
+     */
+    Range?: Range;
+    /**
+     * The type of compression that was used to smooth the video’s appearance
+     */
+    ScanMode?: ScanMode;
+    /**
+     * The transfer characteristic system (TCS) that is used in the video.
+     */
+    Tcs?: Tcs;
+  }
+  export interface FmtpRequest {
+    /**
+     * The format of the audio channel.
+     */
+    ChannelOrder?: __string;
+    /**
+     * The format that is used for the representation of color.
+     */
+    Colorimetry?: Colorimetry;
+    /**
+     * The frame rate for the video stream, in frames/second. For example: 60000/1001. If you specify a whole number, MediaConnect uses a ratio of N/1. For example, if you specify 60, MediaConnect uses 60/1 as the exactFramerate.
+     */
+    ExactFramerate?: __string;
+    /**
+     * The pixel aspect ratio (PAR) of the video.
+     */
+    Par?: __string;
+    /**
+     * The encoding range of the video.
+     */
+    Range?: Range;
+    /**
+     * The type of compression that was used to smooth the video’s appearance.
+     */
+    ScanMode?: ScanMode;
+    /**
+     * The transfer characteristic system (TCS) that is used in the video.
+     */
+    Tcs?: Tcs;
   }
   export interface GrantEntitlementRequest {
     /**
@@ -517,7 +815,43 @@ declare namespace MediaConnect {
      */
     FlowArn?: __string;
   }
-  export type KeyType = "speke"|"static-key"|string;
+  export interface InputConfiguration {
+    /**
+     * The IP address that the flow listens on for incoming content for a media stream.
+     */
+    InputIp: __string;
+    /**
+     * The port that the flow listens on for an incoming media stream.
+     */
+    InputPort: __integer;
+    /**
+     * The VPC interface where the media stream comes in from.
+     */
+    Interface: Interface;
+  }
+  export interface InputConfigurationRequest {
+    /**
+     * The port that you want the flow to listen on for an incoming media stream.
+     */
+    InputPort: __integer;
+    /**
+     * The VPC interface that you want to use for the incoming media stream.
+     */
+    Interface: InterfaceRequest;
+  }
+  export interface Interface {
+    /**
+     * The name of the VPC interface.
+     */
+    Name: __string;
+  }
+  export interface InterfaceRequest {
+    /**
+     * The name of the VPC interface.
+     */
+    Name: __string;
+  }
+  export type KeyType = "speke"|"static-key"|"srt-password"|string;
   export interface ListEntitlementsRequest {
     /**
      * The maximum number of results to return per API request. For example, you submit a ListEntitlements request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 20 results per page.
@@ -557,6 +891,46 @@ declare namespace MediaConnect {
      * The token that identifies which batch of results that you want to see. For example, you submit a ListFlows request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListFlows request a second time and specify the NextToken value.
      */
     NextToken?: __string;
+  }
+  export interface ListOfferingsRequest {
+    /**
+     * The maximum number of results to return per API request. For example, you submit a ListOfferings request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token that identifies which batch of results that you want to see. For example, you submit a ListOfferings request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListOfferings request a second time and specify the NextToken value.
+     */
+    NextToken?: __string;
+  }
+  export interface ListOfferingsResponse {
+    /**
+     * The token that identifies which batch of results that you want to see. For example, you submit a ListOfferings request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListOfferings request a second time and specify the NextToken value.
+     */
+    NextToken?: __string;
+    /**
+     * A list of offerings that are available to this account in the current AWS Region.
+     */
+    Offerings?: __listOfOffering;
+  }
+  export interface ListReservationsRequest {
+    /**
+     * The maximum number of results to return per API request. For example, you submit a ListReservations request with MaxResults set at 5. Although 20 items match your request, the service returns no more than the first 5 items. (The service also returns a NextToken value that you can use to fetch the next batch of results.) The service might return fewer results than the MaxResults value. If MaxResults is not included in the request, the service defaults to pagination with a maximum of 10 results per page.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token that identifies which batch of results that you want to see. For example, you submit a ListReservations request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListOfferings request a second time and specify the NextToken value.
+     */
+    NextToken?: __string;
+  }
+  export interface ListReservationsResponse {
+    /**
+     * The token that identifies which batch of results that you want to see. For example, you submit a ListReservations request with MaxResults set at 5. The service returns the first batch of results (up to 5) and a NextToken value. To see the next batch of results, you can submit the ListReservations request a second time and specify the NextToken value.
+     */
+    NextToken?: __string;
+    /**
+     * A list of all reservations that have been purchased by this account in the current AWS Region.
+     */
+    Reservations?: __listOfReservation;
   }
   export interface ListTagsForResourceRequest {
     /**
@@ -611,11 +985,165 @@ declare namespace MediaConnect {
     Status: Status;
   }
   export type MaxResults = number;
+  export interface MediaStream {
+    /**
+     * Attributes that are related to the media stream.
+     */
+    Attributes?: MediaStreamAttributes;
+    /**
+     * The sample rate for the stream. This value is measured in Hz.
+     */
+    ClockRate?: __integer;
+    /**
+     * A description that can help you quickly identify what your media stream is used for.
+     */
+    Description?: __string;
+    /**
+     * The format type number (sometimes referred to as RTP payload type) of the media stream. MediaConnect assigns this value to the media stream. For ST 2110 JPEG XS outputs, you need to provide this value to the receiver.
+     */
+    Fmt: __integer;
+    /**
+     * A unique identifier for the media stream.
+     */
+    MediaStreamId: __integer;
+    /**
+     * A name that helps you distinguish one media stream from another.
+     */
+    MediaStreamName: __string;
+    /**
+     * The type of media stream.
+     */
+    MediaStreamType: MediaStreamType;
+    /**
+     * The resolution of the video.
+     */
+    VideoFormat?: __string;
+  }
+  export interface MediaStreamAttributes {
+    /**
+     * A set of parameters that define the media stream.
+     */
+    Fmtp: Fmtp;
+    /**
+     * The audio language, in a format that is recognized by the receiver.
+     */
+    Lang?: __string;
+  }
+  export interface MediaStreamAttributesRequest {
+    /**
+     * The settings that you want to use to define the media stream.
+     */
+    Fmtp?: FmtpRequest;
+    /**
+     * The audio language, in a format that is recognized by the receiver.
+     */
+    Lang?: __string;
+  }
+  export interface MediaStreamOutputConfiguration {
+    /**
+     * The transport parameters that are associated with each outbound media stream.
+     */
+    DestinationConfigurations?: __listOfDestinationConfiguration;
+    /**
+     * The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.
+     */
+    EncodingName: EncodingName;
+    /**
+     * Encoding parameters
+     */
+    EncodingParameters?: EncodingParameters;
+    /**
+     * The name of the media stream.
+     */
+    MediaStreamName: __string;
+  }
+  export interface MediaStreamOutputConfigurationRequest {
+    /**
+     * The transport parameters that you want to associate with the media stream.
+     */
+    DestinationConfigurations?: __listOfDestinationConfigurationRequest;
+    /**
+     * The format that will be used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.
+     */
+    EncodingName: EncodingName;
+    /**
+     * A collection of parameters that determine how MediaConnect will convert the content. These fields only apply to outputs on flows that have a CDI source.
+     */
+    EncodingParameters?: EncodingParametersRequest;
+    /**
+     * The name of the media stream that is associated with the output.
+     */
+    MediaStreamName: __string;
+  }
+  export interface MediaStreamSourceConfiguration {
+    /**
+     * The format that was used to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.
+     */
+    EncodingName: EncodingName;
+    /**
+     * The transport parameters that are associated with an incoming media stream.
+     */
+    InputConfigurations?: __listOfInputConfiguration;
+    /**
+     * The name of the media stream.
+     */
+    MediaStreamName: __string;
+  }
+  export interface MediaStreamSourceConfigurationRequest {
+    /**
+     * The format you want to use to encode the data. For ancillary data streams, set the encoding name to smpte291. For audio streams, set the encoding name to pcm. For video, 2110 streams, set the encoding name to raw. For video, JPEG XS streams, set the encoding name to jxsv.
+     */
+    EncodingName: EncodingName;
+    /**
+     * The transport parameters that you want to associate with the media stream.
+     */
+    InputConfigurations?: __listOfInputConfigurationRequest;
+    /**
+     * The name of the media stream.
+     */
+    MediaStreamName: __string;
+  }
+  export type MediaStreamType = "video"|"audio"|"ancillary-data"|string;
   export interface Messages {
     /**
      * A list of errors that might have been generated from processes on this flow.
      */
     Errors: __listOf__string;
+  }
+  export type NetworkInterfaceType = "ena"|"efa"|string;
+  export interface Offering {
+    /**
+     * The type of currency that is used for billing. The currencyCode used for all reservations is US dollars.
+     */
+    CurrencyCode: __string;
+    /**
+     * The length of time that your reservation would be active.
+     */
+    Duration: __integer;
+    /**
+     * The unit of measurement for the duration of the offering.
+     */
+    DurationUnits: DurationUnits;
+    /**
+     * The Amazon Resource Name (ARN) that MediaConnect assigns to the offering.
+     */
+    OfferingArn: __string;
+    /**
+     * A description of the offering.
+     */
+    OfferingDescription: __string;
+    /**
+     * The cost of a single unit. This value, in combination with priceUnits, makes up the rate.
+     */
+    PricePerUnit: __string;
+    /**
+     * The unit of measurement that is used for billing. This value, in combination with pricePerUnit, makes up the rate.
+     */
+    PriceUnits: PriceUnits;
+    /**
+     * A definition of the amount of outbound bandwidth that you would be reserving if you purchase the offering.
+     */
+    ResourceSpecification: ResourceSpecification;
   }
   export interface Output {
     /**
@@ -639,9 +1167,17 @@ declare namespace MediaConnect {
      */
     EntitlementArn?: __string;
     /**
+     * The IP address that the receiver requires in order to establish a connection with the flow. For public networking, the ListenerAddress is represented by the elastic IP address of the flow. For private networking, the ListenerAddress is represented by the elastic network interface IP address of the VPC. This field applies only to outputs that use the Zixi pull or SRT listener protocol.
+     */
+    ListenerAddress?: __string;
+    /**
      * The input ARN of the AWS Elemental MediaLive channel. This parameter is relevant only for outputs that were added by creating a MediaLive input.
      */
     MediaLiveInputArn?: __string;
+    /**
+     * The configuration for each media stream that is associated with the output.
+     */
+    MediaStreamOutputConfigurations?: __listOfMediaStreamOutputConfiguration;
     /**
      * The name of the output. This value must be unique within the current flow.
      */
@@ -663,7 +1199,46 @@ declare namespace MediaConnect {
      */
     VpcInterfaceAttachment?: VpcInterfaceAttachment;
   }
-  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|string;
+  export type PriceUnits = "HOURLY"|string;
+  export type Protocol = "zixi-push"|"rtp-fec"|"rtp"|"zixi-pull"|"rist"|"st2110-jpegxs"|"cdi"|"srt-listener"|string;
+  export interface PurchaseOfferingRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the offering.
+     */
+    OfferingArn: __string;
+    /**
+     * The name that you want to use for the reservation.
+     */
+    ReservationName: __string;
+    /**
+     * The date and time that you want the reservation to begin, in Coordinated Universal Time (UTC). You can specify any date and time between 12:00am on the first day of the current month to the current time on today's date, inclusive. Specify the start in a 24-hour notation. Use the following format: YYYY-MM-DDTHH:mm:SSZ, where T and Z are literal characters. For example, to specify 11:30pm on March 5, 2020, enter 2020-03-05T23:30:00Z.
+     */
+    Start: __string;
+  }
+  export interface PurchaseOfferingResponse {
+    Reservation?: Reservation;
+  }
+  export type Range = "NARROW"|"FULL"|"FULLPROTECT"|string;
+  export interface RemoveFlowMediaStreamRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    FlowArn: __string;
+    /**
+     * The name of the media stream that you want to remove.
+     */
+    MediaStreamName: __string;
+  }
+  export interface RemoveFlowMediaStreamResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    FlowArn?: __string;
+    /**
+     * The name of the media stream that was removed.
+     */
+    MediaStreamName?: __string;
+  }
   export interface RemoveFlowOutputRequest {
     /**
      * The flow that you want to remove an output from.
@@ -728,6 +1303,72 @@ declare namespace MediaConnect {
      */
     VpcInterfaceName?: __string;
   }
+  export interface Reservation {
+    /**
+     * The type of currency that is used for billing. The currencyCode used for your reservation is US dollars.
+     */
+    CurrencyCode: __string;
+    /**
+     * The length of time that this reservation is active. MediaConnect defines this value in the offering.
+     */
+    Duration: __integer;
+    /**
+     * The unit of measurement for the duration of the reservation. MediaConnect defines this value in the offering.
+     */
+    DurationUnits: DurationUnits;
+    /**
+     * The day and time that this reservation expires. This value is calculated based on the start date and time that you set and the offering's duration.
+     */
+    End: __string;
+    /**
+     * The Amazon Resource Name (ARN) that MediaConnect assigns to the offering.
+     */
+    OfferingArn: __string;
+    /**
+     * A description of the offering. MediaConnect defines this value in the offering.
+     */
+    OfferingDescription: __string;
+    /**
+     * The cost of a single unit. This value, in combination with priceUnits, makes up the rate. MediaConnect defines this value in the offering.
+     */
+    PricePerUnit: __string;
+    /**
+     * The unit of measurement that is used for billing. This value, in combination with pricePerUnit, makes up the rate. MediaConnect defines this value in the offering.
+     */
+    PriceUnits: PriceUnits;
+    /**
+     * The Amazon Resource Name (ARN) that MediaConnect assigns to the reservation when you purchase an offering.
+     */
+    ReservationArn: __string;
+    /**
+     * The name that you assigned to the reservation when you purchased the offering.
+     */
+    ReservationName: __string;
+    /**
+     * The status of your reservation.
+     */
+    ReservationState: ReservationState;
+    /**
+     * A definition of the amount of outbound bandwidth that you would be reserving if you purchase the offering. MediaConnect defines the values that make up the resourceSpecification in the offering.
+     */
+    ResourceSpecification: ResourceSpecification;
+    /**
+     * The day and time that the reservation becomes active. You set this value when you purchase the offering.
+     */
+    Start: __string;
+  }
+  export type ReservationState = "ACTIVE"|"EXPIRED"|"PROCESSING"|"CANCELED"|string;
+  export interface ResourceSpecification {
+    /**
+     * The amount of outbound bandwidth that is discounted in the offering.
+     */
+    ReservedBitrate?: __integer;
+    /**
+     * The type of resource and the unit that is being billed for.
+     */
+    ResourceType: ResourceType;
+  }
+  export type ResourceType = "Mbps_Outbound_Bandwidth"|string;
   export interface RevokeFlowEntitlementRequest {
     /**
      * The ARN of the entitlement that you want to revoke.
@@ -748,6 +1389,7 @@ declare namespace MediaConnect {
      */
     FlowArn?: __string;
   }
+  export type ScanMode = "progressive"|"interlace"|"progressive-segmented-frame"|string;
   export interface SetSourceRequest {
     /**
      * The type of encryption that is used on the content ingested from this source.
@@ -773,6 +1415,18 @@ declare namespace MediaConnect {
      * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
      */
     MaxLatency?: __integer;
+    /**
+     * The size of the buffer (in milliseconds) to use to sync incoming source data.
+     */
+    MaxSyncBuffer?: __integer;
+    /**
+     * The media streams that are associated with the source, and the parameters for those associations.
+     */
+    MediaStreamSourceConfigurations?: __listOfMediaStreamSourceConfigurationRequest;
+    /**
+     * The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.
+     */
+    MinLatency?: __integer;
     /**
      * The name of the source.
      */
@@ -820,6 +1474,10 @@ declare namespace MediaConnect {
      */
     IngestPort?: __integer;
     /**
+     * The media streams that are associated with the source, and the parameters for those associations.
+     */
+    MediaStreamSourceConfigurations?: __listOfMediaStreamSourceConfiguration;
+    /**
      * The name of the source.
      */
     Name: __string;
@@ -832,13 +1490,19 @@ declare namespace MediaConnect {
      */
     Transport?: Transport;
     /**
-     * The name of the VPC Interface this Source is configured with.
+     * The name of the VPC interface that is used for this source.
      */
     VpcInterfaceName?: __string;
     /**
      * The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
      */
     WhitelistCidr?: __string;
+  }
+  export interface SourcePriority {
+    /**
+     * The name of the source you choose as the primary source for this flow.
+     */
+    PrimarySource?: __string;
   }
   export type SourceType = "OWNED"|"ENTITLED"|string;
   export interface StartFlowRequest {
@@ -885,6 +1549,7 @@ declare namespace MediaConnect {
      */
     Tags: __mapOf__string;
   }
+  export type Tcs = "SDR"|"PQ"|"HLG"|"LINEAR"|"BT2100LINPQ"|"BT2100LINHLG"|"ST2065-1"|"ST428-1"|"DENSITY"|string;
   export interface Transport {
     /**
      * The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.
@@ -898,6 +1563,14 @@ declare namespace MediaConnect {
      * The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
      */
     MaxLatency?: __integer;
+    /**
+     * The size of the buffer (in milliseconds) to use to sync incoming source data.
+     */
+    MaxSyncBuffer?: __integer;
+    /**
+     * The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.
+     */
+    MinLatency?: __integer;
     /**
      * The protocol that is used by the source or output.
      */
@@ -965,9 +1638,17 @@ declare namespace MediaConnect {
   }
   export interface UpdateFailoverConfig {
     /**
+     * The type of failover you choose for this flow. MERGE combines the source streams into a single stream, allowing graceful recovery from any single-source loss. FAILOVER allows switching between different streams.
+     */
+    FailoverMode?: FailoverMode;
+    /**
      * Recovery window time to look for dash-7 packets
      */
     RecoveryWindow?: __integer;
+    /**
+     * The priority you want to assign to a source. You can have a primary stream and a backup stream or two equally prioritized streams.
+     */
+    SourcePriority?: SourcePriority;
     State?: State;
   }
   export interface UpdateFlowEntitlementRequest {
@@ -997,11 +1678,54 @@ declare namespace MediaConnect {
     Subscribers?: __listOf__string;
   }
   export interface UpdateFlowEntitlementResponse {
+    /**
+     * The new configuration of the entitlement that you updated.
+     */
     Entitlement?: Entitlement;
     /**
      * The ARN of the flow that this entitlement was granted on.
      */
     FlowArn?: __string;
+  }
+  export interface UpdateFlowMediaStreamRequest {
+    /**
+     * The attributes that you want to assign to the media stream.
+     */
+    Attributes?: MediaStreamAttributesRequest;
+    /**
+     * The sample rate (in Hz) for the stream. If the media stream type is video or ancillary data, set this value to 90000. If the media stream type is audio, set this value to either 48000 or 96000.
+     */
+    ClockRate?: __integer;
+    /**
+     * Description
+     */
+    Description?: __string;
+    /**
+     * The Amazon Resource Name (ARN) of the flow.
+     */
+    FlowArn: __string;
+    /**
+     * The name of the media stream that you want to update.
+     */
+    MediaStreamName: __string;
+    /**
+     * The type of media stream.
+     */
+    MediaStreamType?: MediaStreamType;
+    /**
+     * The resolution of the video.
+     */
+    VideoFormat?: __string;
+  }
+  export interface UpdateFlowMediaStreamResponse {
+    /**
+     * The ARN of the flow that is associated with the media stream that you updated.
+     */
+    FlowArn?: __string;
+    /**
+     * The media stream that you updated.
+     */
+    MediaStream?: MediaStream;
   }
   export interface UpdateFlowOutputRequest {
     /**
@@ -1028,6 +1752,14 @@ declare namespace MediaConnect {
      * The maximum latency in milliseconds for Zixi-based streams.
      */
     MaxLatency?: __integer;
+    /**
+     * The media streams that are associated with the output, and the parameters for those associations.
+     */
+    MediaStreamOutputConfigurations?: __listOfMediaStreamOutputConfigurationRequest;
+    /**
+     * The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.
+     */
+    MinLatency?: __integer;
     /**
      * The ARN of the output that you want to update.
      */
@@ -1062,6 +1794,9 @@ declare namespace MediaConnect {
      * The ARN of the flow that is associated with the updated output.
      */
     FlowArn?: __string;
+    /**
+     * The new settings of the output that you updated.
+     */
     Output?: Output;
   }
   export interface UpdateFlowRequest {
@@ -1104,6 +1839,18 @@ declare namespace MediaConnect {
      */
     MaxLatency?: __integer;
     /**
+     * The size of the buffer (in milliseconds) to use to sync incoming source data.
+     */
+    MaxSyncBuffer?: __integer;
+    /**
+     * The media streams that are associated with the source, and the parameters for those associations.
+     */
+    MediaStreamSourceConfigurations?: __listOfMediaStreamSourceConfigurationRequest;
+    /**
+     * The minimum latency in milliseconds for SRT-based streams. In streams that use the SRT protocol, this value that you set on your MediaConnect source or output represents the minimal potential latency of that connection. The latency of the stream is set to the highest number between the sender’s minimum latency and the receiver’s minimum latency.
+     */
+    MinLatency?: __integer;
+    /**
      * The protocol that is used by the source.
      */
     Protocol?: Protocol;
@@ -1116,7 +1863,7 @@ declare namespace MediaConnect {
      */
     StreamId?: __string;
     /**
-     * The name of the VPC Interface to configure this Source with.
+     * The name of the VPC interface to use for this source.
      */
     VpcInterfaceName?: __string;
     /**
@@ -1144,6 +1891,10 @@ declare namespace MediaConnect {
      */
     NetworkInterfaceIds: __listOf__string;
     /**
+     * The type of network interface.
+     */
+    NetworkInterfaceType: NetworkInterfaceType;
+    /**
      * Role Arn MediaConnect can assumes to create ENIs in customer's account
      */
     RoleArn: __string;
@@ -1168,6 +1919,10 @@ declare namespace MediaConnect {
      */
     Name: __string;
     /**
+     * The type of network interface. If this value is not included in the request, MediaConnect uses ENA as the networkInterfaceType.
+     */
+    NetworkInterfaceType?: NetworkInterfaceType;
+    /**
      * Role Arn MediaConnect can assumes to create ENIs in customer's account
      */
     RoleArn: __string;
@@ -1180,13 +1935,26 @@ declare namespace MediaConnect {
      */
     SubnetId: __string;
   }
+  export type __double = number;
   export type __integer = number;
+  export type __listOfAddMediaStreamRequest = AddMediaStreamRequest[];
   export type __listOfAddOutputRequest = AddOutputRequest[];
+  export type __listOfDestinationConfiguration = DestinationConfiguration[];
+  export type __listOfDestinationConfigurationRequest = DestinationConfigurationRequest[];
   export type __listOfEntitlement = Entitlement[];
   export type __listOfGrantEntitlementRequest = GrantEntitlementRequest[];
+  export type __listOfInputConfiguration = InputConfiguration[];
+  export type __listOfInputConfigurationRequest = InputConfigurationRequest[];
   export type __listOfListedEntitlement = ListedEntitlement[];
   export type __listOfListedFlow = ListedFlow[];
+  export type __listOfMediaStream = MediaStream[];
+  export type __listOfMediaStreamOutputConfiguration = MediaStreamOutputConfiguration[];
+  export type __listOfMediaStreamOutputConfigurationRequest = MediaStreamOutputConfigurationRequest[];
+  export type __listOfMediaStreamSourceConfiguration = MediaStreamSourceConfiguration[];
+  export type __listOfMediaStreamSourceConfigurationRequest = MediaStreamSourceConfigurationRequest[];
+  export type __listOfOffering = Offering[];
   export type __listOfOutput = Output[];
+  export type __listOfReservation = Reservation[];
   export type __listOfSetSourceRequest = SetSourceRequest[];
   export type __listOfSource = Source[];
   export type __listOfVpcInterface = VpcInterface[];

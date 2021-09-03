@@ -147,7 +147,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Writes a single data record into an Amazon Kinesis Data Firehose delivery stream. To write multiple data records into a delivery stream, use <a>PutRecordBatch</a>. Applications using these operations are referred to as producers.</p> <p>By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. If you use <a>PutRecord</a> and <a>PutRecordBatch</a>, the limits are an aggregate across these two operations for each delivery stream. For more information about limits and how to request an increase, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/limits.html\">Amazon Kinesis Data Firehose Limits</a>. </p> <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data. For example, it can be a segment from a log file, geographic location data, website clickstream data, and so on.</p> <p>Kinesis Data Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (<code>\\n</code>) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination.</p> <p>The <code>PutRecord</code> operation returns a <code>RecordId</code>, which is a unique string assigned to each record. Producer applications can use this ID for purposes such as auditability and investigation.</p> <p>If the <code>PutRecord</code> operation throws a <code>ServiceUnavailableException</code>, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream. </p> <p>Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they are added to a delivery stream as it tries to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.</p> <important> <p>Don't concatenate two or more base64 strings to form the data fields of your records. Instead, concatenate the raw data, then perform base64 encoding.</p> </important>"
+      "documentation": "<p>Writes a single data record into an Amazon Kinesis Data Firehose delivery stream. To write multiple data records into a delivery stream, use <a>PutRecordBatch</a>. Applications using these operations are referred to as producers.</p> <p>By default, each delivery stream can take in up to 2,000 transactions per second, 5,000 records per second, or 5 MB per second. If you use <a>PutRecord</a> and <a>PutRecordBatch</a>, the limits are an aggregate across these two operations for each delivery stream. For more information about limits and how to request an increase, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/limits.html\">Amazon Kinesis Data Firehose Limits</a>. </p> <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000 KiB in size, and any kind of data. For example, it can be a segment from a log file, geographic location data, website clickstream data, and so on.</p> <p>Kinesis Data Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (<code>\\n</code>) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination.</p> <p>The <code>PutRecord</code> operation returns a <code>RecordId</code>, which is a unique string assigned to each record. Producer applications can use this ID for purposes such as auditability and investigation.</p> <p>If the <code>PutRecord</code> operation throws a <code>ServiceUnavailableException</code>, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream. </p> <p>Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they are added to a delivery stream as it tries to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.</p> <important> <p>Don't concatenate two or more base64 strings to form the data fields of your records. Instead, concatenate the raw data, then perform base64 encoding.</p> </important>"
     },
     "PutRecordBatch": {
       "name": "PutRecordBatch",
@@ -175,7 +175,7 @@
           "shape": "ServiceUnavailableException"
         }
       ],
-      "documentation": "<p>Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use <a>PutRecord</a>. Applications using these operations are referred to as producers.</p> <p>For information about service quota, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/limits.html\">Amazon Kinesis Data Firehose Quota</a>.</p> <p>Each <a>PutRecordBatch</a> request supports up to 500 records. Each record in the request can be as large as 1,000 KB (before 64-bit encoding), up to a limit of 4 MB for the entire request. These limits cannot be changed.</p> <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data. For example, it could be a segment from a log file, geographic location data, website clickstream data, and so on.</p> <p>Kinesis Data Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (<code>\\n</code>) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination.</p> <p>The <a>PutRecordBatch</a> response includes a count of failed records, <code>FailedPutCount</code>, and an array of responses, <code>RequestResponses</code>. Even if the <a>PutRecordBatch</a> call succeeds, the value of <code>FailedPutCount</code> may be greater than 0, indicating that there are records for which the operation didn't succeed. Each entry in the <code>RequestResponses</code> array provides additional information about the processed record. It directly correlates with a record in the request array using the same ordering, from the top to the bottom. The response array always includes the same number of records as the request array. <code>RequestResponses</code> includes both successfully and unsuccessfully processed records. Kinesis Data Firehose tries to process all records in each <a>PutRecordBatch</a> request. A single record failure does not stop the processing of subsequent records. </p> <p>A successfully processed record includes a <code>RecordId</code> value, which is unique for the record. An unsuccessfully processed record includes <code>ErrorCode</code> and <code>ErrorMessage</code> values. <code>ErrorCode</code> reflects the type of error, and is one of the following values: <code>ServiceUnavailableException</code> or <code>InternalFailure</code>. <code>ErrorMessage</code> provides more detailed information about the error.</p> <p>If there is an internal server error or a timeout, the write might have completed or it might have failed. If <code>FailedPutCount</code> is greater than 0, retry the request, resending only those records that might have failed processing. This minimizes the possible duplicate records and also reduces the total bytes sent (and corresponding charges). We recommend that you handle any duplicates at the destination.</p> <p>If <a>PutRecordBatch</a> throws <code>ServiceUnavailableException</code>, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream.</p> <p>Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.</p> <important> <p>Don't concatenate two or more base64 strings to form the data fields of your records. Instead, concatenate the raw data, then perform base64 encoding.</p> </important>"
+      "documentation": "<p>Writes multiple data records into a delivery stream in a single call, which can achieve higher throughput per producer than when writing single records. To write single data records into a delivery stream, use <a>PutRecord</a>. Applications using these operations are referred to as producers.</p> <p>For information about service quota, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/limits.html\">Amazon Kinesis Data Firehose Quota</a>.</p> <p>Each <a>PutRecordBatch</a> request supports up to 500 records. Each record in the request can be as large as 1,000 KB (before base64 encoding), up to a limit of 4 MB for the entire request. These limits cannot be changed.</p> <p>You must specify the name of the delivery stream and the data record when using <a>PutRecord</a>. The data record consists of a data blob that can be up to 1,000 KB in size, and any kind of data. For example, it could be a segment from a log file, geographic location data, website clickstream data, and so on.</p> <p>Kinesis Data Firehose buffers records before delivering them to the destination. To disambiguate the data blobs at the destination, a common solution is to use delimiters in the data, such as a newline (<code>\\n</code>) or some other character unique within the data. This allows the consumer application to parse individual data items when reading the data from the destination.</p> <p>The <a>PutRecordBatch</a> response includes a count of failed records, <code>FailedPutCount</code>, and an array of responses, <code>RequestResponses</code>. Even if the <a>PutRecordBatch</a> call succeeds, the value of <code>FailedPutCount</code> may be greater than 0, indicating that there are records for which the operation didn't succeed. Each entry in the <code>RequestResponses</code> array provides additional information about the processed record. It directly correlates with a record in the request array using the same ordering, from the top to the bottom. The response array always includes the same number of records as the request array. <code>RequestResponses</code> includes both successfully and unsuccessfully processed records. Kinesis Data Firehose tries to process all records in each <a>PutRecordBatch</a> request. A single record failure does not stop the processing of subsequent records. </p> <p>A successfully processed record includes a <code>RecordId</code> value, which is unique for the record. An unsuccessfully processed record includes <code>ErrorCode</code> and <code>ErrorMessage</code> values. <code>ErrorCode</code> reflects the type of error, and is one of the following values: <code>ServiceUnavailableException</code> or <code>InternalFailure</code>. <code>ErrorMessage</code> provides more detailed information about the error.</p> <p>If there is an internal server error or a timeout, the write might have completed or it might have failed. If <code>FailedPutCount</code> is greater than 0, retry the request, resending only those records that might have failed processing. This minimizes the possible duplicate records and also reduces the total bytes sent (and corresponding charges). We recommend that you handle any duplicates at the destination.</p> <p>If <a>PutRecordBatch</a> throws <code>ServiceUnavailableException</code>, back off and retry. If the exception persists, it is possible that the throughput limits have been exceeded for the delivery stream.</p> <p>Data records sent to Kinesis Data Firehose are stored for 24 hours from the time they are added to a delivery stream as it attempts to send the records to the destination. If the destination is unreachable for more than 24 hours, the data is no longer available.</p> <important> <p>Don't concatenate two or more base64 strings to form the data fields of your records. Instead, concatenate the raw data, then perform base64 encoding.</p> </important>"
     },
     "StartDeliveryStreamEncryption": {
       "name": "StartDeliveryStreamEncryption",
@@ -377,7 +377,7 @@
       "type": "string",
       "max": 512,
       "min": 1,
-      "pattern": "jdbc:(redshift|postgresql)://((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+redshift\\.([a-zA-Z0-9\\.]+):\\d{1,5}/[a-zA-Z0-9_$]+"
+      "pattern": "jdbc:(redshift|postgresql)://((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+redshift\\.([a-zA-Z0-9\\.]+):\\d{1,5}/[a-zA-Z0-9_$-]+"
     },
     "ColumnToJsonKeyMappings": {
       "type": "map",
@@ -830,6 +830,20 @@
       "min": 1,
       "pattern": "[a-zA-Z0-9-]+"
     },
+    "DynamicPartitioningConfiguration": {
+      "type": "structure",
+      "members": {
+        "RetryOptions": {
+          "shape": "RetryOptions",
+          "documentation": "<p>The retry behavior in case Kinesis Data Firehose is unable to deliver data to an Amazon S3 prefix.</p>"
+        },
+        "Enabled": {
+          "shape": "BooleanObject",
+          "documentation": "<p>Specifies that the dynamic partitioning is enabled for this Kinesis Data Firehose delivery stream.</p>"
+        }
+      },
+      "documentation": "<p>The configuration of the dynamic partitioning mechanism that creates smaller data sets from the streaming data by partitioning it based on partition keys. Currently, dynamic partitioning is only supported for Amazon S3 destinations. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html\">https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html</a> </p>"
+    },
     "ElasticsearchBufferingHints": {
       "type": "structure",
       "members": {
@@ -1161,6 +1175,10 @@
         "DataFormatConversionConfiguration": {
           "shape": "DataFormatConversionConfiguration",
           "documentation": "<p>The serializer, deserializer, and schema for converting data from the JSON format to the Parquet or ORC format before writing it to Amazon S3.</p>"
+        },
+        "DynamicPartitioningConfiguration": {
+          "shape": "DynamicPartitioningConfiguration",
+          "documentation": "<p>The configuration of the dynamic partitioning mechanism that creates smaller data sets from the streaming data by partitioning it based on partition keys. Currently, dynamic partitioning is only supported for Amazon S3 destinations. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html\">https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html</a> </p>"
         }
       },
       "documentation": "<p>Describes the configuration of a destination in Amazon S3.</p>"
@@ -1222,6 +1240,10 @@
         "DataFormatConversionConfiguration": {
           "shape": "DataFormatConversionConfiguration",
           "documentation": "<p>The serializer, deserializer, and schema for converting data from the JSON format to the Parquet or ORC format before writing it to Amazon S3.</p>"
+        },
+        "DynamicPartitioningConfiguration": {
+          "shape": "DynamicPartitioningConfiguration",
+          "documentation": "<p>The configuration of the dynamic partitioning mechanism that creates smaller data sets from the streaming data by partitioning it based on partition keys. Currently, dynamic partitioning is only supported for Amazon S3 destinations. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html\">https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html</a> </p>"
         }
       },
       "documentation": "<p>Describes a destination in Amazon S3.</p>"
@@ -1276,6 +1298,10 @@
         "DataFormatConversionConfiguration": {
           "shape": "DataFormatConversionConfiguration",
           "documentation": "<p>The serializer, deserializer, and schema for converting data from the JSON format to the Parquet or ORC format before writing it to Amazon S3.</p>"
+        },
+        "DynamicPartitioningConfiguration": {
+          "shape": "DynamicPartitioningConfiguration",
+          "documentation": "<p>The configuration of the dynamic partitioning mechanism that creates smaller data sets from the streaming data by partitioning it based on partition keys. Currently, dynamic partitioning is only supported for Amazon S3 destinations. For more information, see <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html\">https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html</a> </p>"
         }
       },
       "documentation": "<p>Describes an update for a destination in Amazon S3.</p>"
@@ -1411,7 +1437,7 @@
       "members": {
         "Url": {
           "shape": "HttpEndpointUrl",
-          "documentation": "<p>The URL of the HTTP endpoint selected as the destination.</p>"
+          "documentation": "<p>The URL of the HTTP endpoint selected as the destination.</p> <important> <p>If you choose an HTTP endpoint as your destination, review and follow the instructions in the <a href=\"https://docs.aws.amazon.com/firehose/latest/dev/httpdeliveryrequestresponse.html\">Appendix - HTTP Endpoint Delivery Request and Response Specifications</a>.</p> </important>"
         },
         "Name": {
           "shape": "HttpEndpointName",
@@ -2045,21 +2071,28 @@
       "enum": [
         "LambdaArn",
         "NumberOfRetries",
+        "MetadataExtractionQuery",
+        "JsonParsingEngine",
         "RoleArn",
         "BufferSizeInMBs",
-        "BufferIntervalInSeconds"
+        "BufferIntervalInSeconds",
+        "SubRecordType",
+        "Delimiter"
       ]
     },
     "ProcessorParameterValue": {
       "type": "string",
-      "max": 512,
+      "max": 5120,
       "min": 1,
       "pattern": "^(?!\\s*$).+"
     },
     "ProcessorType": {
       "type": "string",
       "enum": [
-        "Lambda"
+        "RecordDeAggregation",
+        "Lambda",
+        "MetadataExtraction",
+        "AppendDelimiterToRecord"
       ]
     },
     "Proportion": {
@@ -2372,6 +2405,21 @@
         "Enabled"
       ]
     },
+    "RetryDurationInSeconds": {
+      "type": "integer",
+      "max": 7200,
+      "min": 0
+    },
+    "RetryOptions": {
+      "type": "structure",
+      "members": {
+        "DurationInSeconds": {
+          "shape": "RetryDurationInSeconds",
+          "documentation": "<p>The period of time during which Kinesis Data Firehose retries to deliver data to the specified Amazon S3 prefix.</p>"
+        }
+      },
+      "documentation": "<p> The retry behavior in case Kinesis Data Firehose is unable to deliver data to an Amazon S3 prefix.</p>"
+    },
     "RoleARN": {
       "type": "string",
       "max": 512,
@@ -2515,7 +2563,7 @@
       "members": {
         "RoleARN": {
           "shape": "NonEmptyStringWithoutWhitespace",
-          "documentation": "<p>The role that Kinesis Data Firehose can use to access AWS Glue. This role must be in the same account you use for Kinesis Data Firehose. Cross-account roles aren't allowed.</p>"
+          "documentation": "<p>The role that Kinesis Data Firehose can use to access AWS Glue. This role must be in the same account you use for Kinesis Data Firehose. Cross-account roles aren't allowed.</p> <important> <p>If the <code>SchemaConfiguration</code> request parameter is used as part of invoking the <code>CreateDeliveryStream</code> API, then the <code>RoleARN</code> property is required and its value must be specified.</p> </important>"
         },
         "CatalogId": {
           "shape": "NonEmptyStringWithoutWhitespace",
@@ -2523,11 +2571,11 @@
         },
         "DatabaseName": {
           "shape": "NonEmptyStringWithoutWhitespace",
-          "documentation": "<p>Specifies the name of the AWS Glue database that contains the schema for the output data.</p>"
+          "documentation": "<p>Specifies the name of the AWS Glue database that contains the schema for the output data.</p> <important> <p>If the <code>SchemaConfiguration</code> request parameter is used as part of invoking the <code>CreateDeliveryStream</code> API, then the <code>DatabaseName</code> property is required and its value must be specified.</p> </important>"
         },
         "TableName": {
           "shape": "NonEmptyStringWithoutWhitespace",
-          "documentation": "<p>Specifies the AWS Glue table that contains the column information that constitutes your data schema.</p>"
+          "documentation": "<p>Specifies the AWS Glue table that contains the column information that constitutes your data schema.</p> <important> <p>If the <code>SchemaConfiguration</code> request parameter is used as part of invoking the <code>CreateDeliveryStream</code> API, then the <code>TableName</code> property is required and its value must be specified.</p> </important>"
         },
         "Region": {
           "shape": "NonEmptyStringWithoutWhitespace",

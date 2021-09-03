@@ -2296,7 +2296,7 @@
         },
         "failureBehavior": {
           "shape": "FailureBehavior",
-          "documentation": "<p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>"
+          "documentation": "<p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Leaves the instance running for its maximum timeout duration after a <code>4XX</code> error code.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>"
         },
         "robotApplications": {
           "shape": "RobotApplicationConfigs",
@@ -2456,7 +2456,7 @@
         },
         "failureCode": {
           "shape": "WorldExportJobErrorCode",
-          "documentation": "<p>The failure code of the world export job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> </dl>"
+          "documentation": "<p>The failure code of the world export job if it failed:</p> <dl> <dt>InternalServiceError</dt> <dd> <p>Internal service error.</p> </dd> <dt>LimitExceeded</dt> <dd> <p>The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed. </p> </dd> <dt>ResourceNotFound</dt> <dd> <p>The specified resource could not be found. </p> </dd> <dt>RequestThrottled</dt> <dd> <p>The request was throttled.</p> </dd> <dt>InvalidInput</dt> <dd> <p>An input parameter in the request is not valid.</p> </dd> <dt>AllWorldGenerationFailed</dt> <dd> <p>All of the worlds in the world generation job failed. This can happen if your <code>worldCount</code> is greater than 50 or less than 1. </p> </dd> </dl> <p>For more information about troubleshooting WorldForge, see <a href=\"https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting-worldforge.html\">Troubleshooting Simulation WorldForge</a>. </p>"
         },
         "clientRequestToken": {
           "shape": "ClientRequestToken",
@@ -2498,6 +2498,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the world generator job.</p>"
+        },
+        "worldTags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the generated worlds.</p>"
         }
       }
     },
@@ -2535,6 +2539,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the world generator job.</p>"
+        },
+        "worldTags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the generated worlds.</p>"
         }
       }
     },
@@ -2853,7 +2861,11 @@
         "PostLaunchFileFailure",
         "BadPermissionError",
         "DownloadConditionFailed",
-        "InternalServerError"
+        "BadLambdaAssociated",
+        "InternalServerError",
+        "RobotApplicationDoesNotExist",
+        "DeploymentFleetDoesNotExist",
+        "FleetDeploymentTimeout"
       ]
     },
     "DeploymentJobs": {
@@ -3497,6 +3509,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the world generation job.</p>"
+        },
+        "worldTags": {
+          "shape": "TagMap",
+          "documentation": "<p>A map that contains tag keys and tag values that are attached to the generated worlds.</p>"
         }
       }
     },
@@ -3534,6 +3550,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the world.</p>"
+        },
+        "worldDescriptionBody": {
+          "shape": "Json",
+          "documentation": "<p>Returns the JSON formatted string that describes the contents of your world.</p>"
         }
       }
     },
@@ -3575,6 +3595,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the world template.</p>"
+        },
+        "version": {
+          "shape": "GenericString",
+          "documentation": "<p>The version of the world template that you're using.</p>"
         }
       }
     },
@@ -3600,6 +3624,13 @@
       "max": 1024,
       "min": 1,
       "pattern": ".*"
+    },
+    "ExitBehavior": {
+      "type": "string",
+      "enum": [
+        "FAIL",
+        "RESTART"
+      ]
     },
     "FailedAt": {
       "type": "timestamp"
@@ -3831,7 +3862,7 @@
         },
         "streamUI": {
           "shape": "Boolean",
-          "documentation": "<p>Boolean indicating whether a streaming session will be configured for the application. If <code>True</code>, AWS RoboMaker will configure a connection so you can interact with your application as it is running in the simulation. You must configure and luanch the component. It must have a graphical user interface. </p>"
+          "documentation": "<p>Boolean indicating whether a streaming session will be configured for the application. If <code>True</code>, AWS RoboMaker will configure a connection so you can interact with your application as it is running in the simulation. You must configure and launch the component. It must have a graphical user interface. </p>"
         }
       },
       "documentation": "<p>Information about a launch configuration.</p>"
@@ -4497,6 +4528,22 @@
         "launchConfig": {
           "shape": "LaunchConfig",
           "documentation": "<p>The launch configuration for the robot application.</p>"
+        },
+        "uploadConfigurations": {
+          "shape": "UploadConfigurations",
+          "documentation": "<p>The upload configurations for the robot application.</p>"
+        },
+        "useDefaultUploadConfigurations": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>A Boolean indicating whether to use default upload configurations. By default, <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application terminates and all ROS topics will be recorded.</p> <p>If you set this value, you must specify an <code>outputLocation</code>. </p>"
+        },
+        "tools": {
+          "shape": "Tools",
+          "documentation": "<p>Information about tools configured for the robot application.</p>"
+        },
+        "useDefaultTools": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>A Boolean indicating whether to use default robot application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>. </p>"
         }
       },
       "documentation": "<p>Application configuration information for a robot.</p>"
@@ -4627,7 +4674,8 @@
       "enum": [
         "Kinetic",
         "Melodic",
-        "Dashing"
+        "Dashing",
+        "Foxy"
       ]
     },
     "RobotStatus": {
@@ -4742,9 +4790,25 @@
           "shape": "LaunchConfig",
           "documentation": "<p>The launch configuration for the simulation application.</p>"
         },
+        "uploadConfigurations": {
+          "shape": "UploadConfigurations",
+          "documentation": "<p>Information about upload configurations for the simulation application.</p>"
+        },
         "worldConfigs": {
           "shape": "WorldConfigs",
           "documentation": "<p>A list of world configurations.</p>"
+        },
+        "useDefaultUploadConfigurations": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>A Boolean indicating whether to use default upload configurations. By default, <code>.ros</code> and <code>.gazebo</code> files are uploaded when the application terminates and all ROS topics will be recorded.</p> <p>If you set this value, you must specify an <code>outputLocation</code>. </p>"
+        },
+        "tools": {
+          "shape": "Tools",
+          "documentation": "<p>Information about tools configured for the simulation application.</p>"
+        },
+        "useDefaultTools": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>A Boolean indicating whether to use default simulation application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is <code>False</code>. </p>"
         }
       },
       "documentation": "<p>Information about a simulation application configuration.</p>"
@@ -4826,7 +4890,7 @@
         },
         "failureBehavior": {
           "shape": "FailureBehavior",
-          "documentation": "<p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>"
+          "documentation": "<p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Leaves the host running for its maximum timeout duration after a <code>4XX</code> error code.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>"
         },
         "failureCode": {
           "shape": "SimulationJobErrorCode",
@@ -4957,6 +5021,8 @@
         "InternalServiceError",
         "RobotApplicationCrash",
         "SimulationApplicationCrash",
+        "RobotApplicationHealthCheckFailure",
+        "SimulationApplicationHealthCheckFailure",
         "BadPermissionsRobotApplication",
         "BadPermissionsSimulationApplication",
         "BadPermissionsS3Object",
@@ -4968,6 +5034,7 @@
         "InvalidBundleRobotApplication",
         "InvalidBundleSimulationApplication",
         "InvalidS3Resource",
+        "ThrottlingError",
         "LimitExceeded",
         "MismatchedEtag",
         "RobotApplicationVersionMismatchedEtag",
@@ -4980,7 +5047,8 @@
         "WrongRegionS3Bucket",
         "WrongRegionS3Output",
         "WrongRegionRobotApplication",
-        "WrongRegionSimulationApplication"
+        "WrongRegionSimulationApplication",
+        "UploadContentMismatchError"
       ]
     },
     "SimulationJobRequest": {
@@ -5005,11 +5073,11 @@
         },
         "failureBehavior": {
           "shape": "FailureBehavior",
-          "documentation": "<p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Restart the simulation job in the same host instance.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>"
+          "documentation": "<p>The failure behavior the simulation job.</p> <dl> <dt>Continue</dt> <dd> <p>Leaves the host running for its maximum timeout duration after a <code>4XX</code> error code.</p> </dd> <dt>Fail</dt> <dd> <p>Stop the simulation job and terminate the instance.</p> </dd> </dl>"
         },
         "useDefaultApplications": {
           "shape": "BoxedBoolean",
-          "documentation": "<p>Boolean indicating whether to use default simulation tool applications.</p>"
+          "documentation": "<p>A Boolean indicating whether to use default applications in the simulation job. Default applications include Gazebo, rqt, rviz and terminal access. </p>"
         },
         "robotApplications": {
           "shape": "RobotApplicationConfigs",
@@ -5125,7 +5193,7 @@
       "type": "string",
       "max": 1024,
       "min": 0,
-      "pattern": "7|9|Kinetic|Melodic|Dashing"
+      "pattern": "7|9|11|Kinetic|Melodic|Dashing|Foxy"
     },
     "SimulationTimeMillis": {
       "type": "long"
@@ -5424,9 +5492,57 @@
         "name": {
           "shape": "TemplateName",
           "documentation": "<p>The name of the template.</p>"
+        },
+        "version": {
+          "shape": "GenericString",
+          "documentation": "<p>The version of the template that you're using.</p>"
         }
       },
       "documentation": "<p>Summary information for a template.</p>"
+    },
+    "Tool": {
+      "type": "structure",
+      "required": [
+        "name",
+        "command"
+      ],
+      "members": {
+        "streamUI": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Boolean indicating whether a streaming session will be configured for the tool. If <code>True</code>, AWS RoboMaker will configure a connection so you can interact with the tool as it is running in the simulation. It must have a graphical user interface. The default is <code>False</code>. </p>"
+        },
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the tool.</p>"
+        },
+        "command": {
+          "shape": "UnrestrictedCommand",
+          "documentation": "<p>Command-line arguments for the tool. It must include the tool executable name.</p>"
+        },
+        "streamOutputToCloudWatch": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Boolean indicating whether logs will be recorded in CloudWatch for the tool. The default is <code>False</code>. </p>"
+        },
+        "exitBehavior": {
+          "shape": "ExitBehavior",
+          "documentation": "<p>Exit behavior determines what happens when your tool quits running. <code>RESTART</code> will cause your tool to be restarted. <code>FAIL</code> will cause your job to exit. The default is <code>RESTART</code>. </p>"
+        }
+      },
+      "documentation": "<p>Information about a tool. Tools are used in a simulation job.</p>"
+    },
+    "Tools": {
+      "type": "list",
+      "member": {
+        "shape": "Tool"
+      },
+      "max": 10,
+      "min": 0
+    },
+    "UnrestrictedCommand": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": ".*"
     },
     "UntagResourceRequest": {
       "type": "structure",
@@ -5632,6 +5748,44 @@
           "documentation": "<p>The time, in milliseconds since the epoch, when the world template was last updated.</p>"
         }
       }
+    },
+    "UploadBehavior": {
+      "type": "string",
+      "enum": [
+        "UPLOAD_ON_TERMINATE",
+        "UPLOAD_ROLLING_AUTO_REMOVE"
+      ]
+    },
+    "UploadConfiguration": {
+      "type": "structure",
+      "required": [
+        "name",
+        "path",
+        "uploadBehavior"
+      ],
+      "members": {
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>A prefix that specifies where files will be uploaded in Amazon S3. It is appended to the simulation output location to determine the final path. </p> <p> For example, if your simulation output location is <code>s3://my-bucket</code> and your upload configuration name is <code>robot-test</code>, your files will be uploaded to <code>s3://my-bucket/&lt;simid&gt;/&lt;runid&gt;/robot-test</code>. </p>"
+        },
+        "path": {
+          "shape": "Path",
+          "documentation": "<p> Specifies the path of the file(s) to upload. Standard Unix glob matching rules are accepted, with the addition of <code>**</code> as a <i>super asterisk</i>. For example, specifying <code>/var/log/**.log</code> causes all .log files in the <code>/var/log</code> directory tree to be collected. For more examples, see <a href=\"https://github.com/gobwas/glob\">Glob Library</a>. </p>"
+        },
+        "uploadBehavior": {
+          "shape": "UploadBehavior",
+          "documentation": "<p>Specifies when to upload the files:</p> <dl> <dt>UPLOAD_ON_TERMINATE</dt> <dd> <p>Matching files are uploaded once the simulation enters the <code>TERMINATING</code> state. Matching files are not uploaded until all of your code (including tools) have stopped. </p> <p>If there is a problem uploading a file, the upload is retried. If problems persist, no further upload attempts will be made.</p> </dd> <dt>UPLOAD_ROLLING_AUTO_REMOVE</dt> <dd> <p>Matching files are uploaded as they are created. They are deleted after they are uploaded. The specified path is checked every 5 seconds. A final check is made when all of your code (including tools) have stopped. </p> </dd> </dl>"
+        }
+      },
+      "documentation": "<p>Provides upload configuration information. Files are uploaded from the simulation job to a location you specify. </p>"
+    },
+    "UploadConfigurations": {
+      "type": "list",
+      "member": {
+        "shape": "UploadConfiguration"
+      },
+      "max": 10,
+      "min": 0
     },
     "VPCConfig": {
       "type": "structure",

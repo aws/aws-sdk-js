@@ -1,5 +1,5 @@
 export {Config} from './config';
-export {HTTPOptions} from './config-base';
+export {HTTPOptions, ConfigurationOptions} from './config-base';
 export {Credentials} from './credentials';
 export {CognitoIdentityCredentials} from './credentials/cognito_identity_credentials';
 export {CredentialProviderChain} from './credentials/credential_provider_chain';
@@ -25,3 +25,4 @@ export {Response} from './response';
 export {Service} from './service';
 export {AWSError} from './error';
 export {IniLoader} from './shared-ini/ini-loader';
+export {DocumentType} from './model';

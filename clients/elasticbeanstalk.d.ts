@@ -1292,7 +1292,7 @@ declare namespace ElasticBeanstalk {
     /**
      * The maximum number of items to return for a single request.
      */
-    MaxItems?: Integer;
+    MaxItems?: ManagedActionHistoryMaxItems;
   }
   export interface DescribeEnvironmentManagedActionHistoryResult {
     /**
@@ -1654,7 +1654,7 @@ declare namespace ElasticBeanstalk {
      */
     LoadBalancer?: LoadBalancerDescription;
   }
-  export type EnvironmentStatus = "Launching"|"Updating"|"Ready"|"Terminating"|"Terminated"|string;
+  export type EnvironmentStatus = "Aborting"|"Launching"|"Updating"|"LinkingFrom"|"LinkingTo"|"Ready"|"Terminating"|"Terminated"|string;
   export interface EnvironmentTier {
     /**
      * The name of this environment tier. Valid values:   For Web server tier – WebServer    For Worker tier – Worker   
@@ -1979,6 +1979,7 @@ declare namespace ElasticBeanstalk {
     FinishedTime?: Timestamp;
   }
   export type ManagedActionHistoryItems = ManagedActionHistoryItem[];
+  export type ManagedActionHistoryMaxItems = number;
   export type ManagedActions = ManagedAction[];
   export interface MaxAgeRule {
     /**

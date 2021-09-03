@@ -945,6 +945,10 @@ declare namespace DeviceFarm {
      * Human-readable description of the project.
      */
     description?: ResourceDescription;
+    /**
+     * The VPC security groups and subnets that are attached to a project.
+     */
+    vpcConfig?: TestGridVpcConfig;
   }
   export interface CreateTestGridProjectResult {
     /**
@@ -966,7 +970,7 @@ declare namespace DeviceFarm {
     /**
      * A signed URL, expiring in CreateTestGridUrlRequest$expiresInSeconds seconds, to be passed to a RemoteWebDriver. 
      */
-    url?: String;
+    url?: SensitiveString;
     /**
      * The number of seconds the URL from CreateTestGridUrlResult$url stays active.
      */
@@ -1201,15 +1205,15 @@ declare namespace DeviceFarm {
     /**
      * The aspect of a device such as platform or model used as the selection criteria in a device filter. The supported operators for each attribute are provided in the following list.  ARN  The Amazon Resource Name (ARN) of the device (for example, arn:aws:devicefarm:us-west-2::device:12345Example). Supported operators: EQUALS, IN, NOT_IN   PLATFORM  The device platform. Valid values are ANDROID or IOS. Supported operators: EQUALS   OS_VERSION  The operating system version (for example, 10.3.2). Supported operators: EQUALS, GREATER_THAN, GREATER_THAN_OR_EQUALS, IN, LESS_THAN, LESS_THAN_OR_EQUALS, NOT_IN   MODEL  The device model (for example, iPad 5th Gen). Supported operators: CONTAINS, EQUALS, IN, NOT_IN   AVAILABILITY  The current availability of the device. Valid values are AVAILABLE, HIGHLY_AVAILABLE, BUSY, or TEMPORARY_NOT_AVAILABLE. Supported operators: EQUALS   FORM_FACTOR  The device form factor. Valid values are PHONE or TABLET. Supported operators: EQUALS   MANUFACTURER  The device manufacturer (for example, Apple). Supported operators: EQUALS, IN, NOT_IN   REMOTE_ACCESS_ENABLED  Whether the device is enabled for remote access. Valid values are TRUE or FALSE. Supported operators: EQUALS   REMOTE_DEBUG_ENABLED  Whether the device is enabled for remote debugging. Valid values are TRUE or FALSE. Supported operators: EQUALS  Because remote debugging is no longer supported, this filter is ignored.  INSTANCE_ARN  The Amazon Resource Name (ARN) of the device instance. Supported operators: EQUALS, IN, NOT_IN   INSTANCE_LABELS  The label of the device instance. Supported operators: CONTAINS   FLEET_TYPE  The fleet type. Valid values are PUBLIC or PRIVATE. Supported operators: EQUALS   
      */
-    attribute?: DeviceFilterAttribute;
+    attribute: DeviceFilterAttribute;
     /**
      * Specifies how Device Farm compares the filter's attribute to the value. See the attribute descriptions.
      */
-    operator?: RuleOperator;
+    operator: RuleOperator;
     /**
      * An array of one or more filter values used in a device filter.  Operator Values    The IN and NOT_IN operators can take a values array that has more than one element.   The other operators require an array with a single element.    Attribute Values    The PLATFORM attribute can be set to ANDROID or IOS.   The AVAILABILITY attribute can be set to AVAILABLE, HIGHLY_AVAILABLE, BUSY, or TEMPORARY_NOT_AVAILABLE.   The FORM_FACTOR attribute can be set to PHONE or TABLET.   The FLEET_TYPE attribute can be set to PUBLIC or PRIVATE.  
      */
-    values?: DeviceFilterValues;
+    values: DeviceFilterValues;
   }
   export type DeviceFilterAttribute = "ARN"|"PLATFORM"|"OS_VERSION"|"MODEL"|"AVAILABILITY"|"FORM_FACTOR"|"MANUFACTURER"|"REMOTE_ACCESS_ENABLED"|"REMOTE_DEBUG_ENABLED"|"INSTANCE_ARN"|"INSTANCE_LABELS"|"FLEET_TYPE"|string;
   export type DeviceFilterValues = String[];
@@ -2319,6 +2323,7 @@ declare namespace DeviceFarm {
   }
   export type NetworkProfileType = "CURATED"|"PRIVATE"|string;
   export type NetworkProfiles = NetworkProfile[];
+  export type NonEmptyString = string;
   export interface Offering {
     /**
      * The ID that corresponds to a device offering.
@@ -2466,11 +2471,11 @@ declare namespace DeviceFarm {
     /**
      * The ID of the offering.
      */
-    offeringId?: OfferingIdentifier;
+    offeringId: OfferingIdentifier;
     /**
      * The number of device slots to purchase in an offering request.
      */
-    quantity?: Integer;
+    quantity: Integer;
     /**
      * The ID of the offering promotion to be applied to the purchase.
      */
@@ -2604,11 +2609,11 @@ declare namespace DeviceFarm {
     /**
      * The ID of a request to renew an offering.
      */
-    offeringId?: OfferingIdentifier;
+    offeringId: OfferingIdentifier;
     /**
      * The quantity requested in an offering renewal.
      */
-    quantity?: Integer;
+    quantity: Integer;
   }
   export interface RenewOfferingResult {
     /**
@@ -2888,6 +2893,9 @@ declare namespace DeviceFarm {
      */
     parameters?: TestParameters;
   }
+  export type SecurityGroupIds = NonEmptyString[];
+  export type SensitiveString = string;
+  export type SensitiveURL = string;
   export type ServiceDnsName = string;
   export type SkipAppResign = boolean;
   export type SshPublicKey = string;
@@ -2928,6 +2936,7 @@ declare namespace DeviceFarm {
     run?: Run;
   }
   export type String = string;
+  export type SubnetIds = NonEmptyString[];
   export interface Suite {
     /**
      * The suite's ARN.
@@ -3061,6 +3070,10 @@ declare namespace DeviceFarm {
      */
     description?: String;
     /**
+     * The VPC security groups and subnets that are attached to a project.
+     */
+    vpcConfig?: TestGridVpcConfig;
+    /**
      * When the project was created.
      */
     created?: DateTime;
@@ -3127,7 +3140,7 @@ declare namespace DeviceFarm {
     /**
      * A semi-stable URL to the content of the object.
      */
-    url?: String;
+    url?: SensitiveString;
   }
   export type TestGridSessionArtifactCategory = "VIDEO"|"LOG"|string;
   export type TestGridSessionArtifactType = "UNKNOWN"|"VIDEO"|"SELENIUM_LOG"|string;
@@ -3135,6 +3148,20 @@ declare namespace DeviceFarm {
   export type TestGridSessionStatus = "ACTIVE"|"CLOSED"|"ERRORED"|string;
   export type TestGridSessions = TestGridSession[];
   export type TestGridUrlExpiresInSecondsInput = number;
+  export interface TestGridVpcConfig {
+    /**
+     * A list of VPC security group IDs in your Amazon VPC.
+     */
+    securityGroupIds: SecurityGroupIds;
+    /**
+     * A list of VPC subnet IDs in your Amazon VPC.
+     */
+    subnetIds: SubnetIds;
+    /**
+     * The ID of the Amazon VPC.
+     */
+    vpcId: NonEmptyString;
+  }
   export type TestParameters = {[key: string]: String};
   export type TestType = "BUILTIN_FUZZ"|"BUILTIN_EXPLORER"|"WEB_PERFORMANCE_PROFILE"|"APPIUM_JAVA_JUNIT"|"APPIUM_JAVA_TESTNG"|"APPIUM_PYTHON"|"APPIUM_NODE"|"APPIUM_RUBY"|"APPIUM_WEB_JAVA_JUNIT"|"APPIUM_WEB_JAVA_TESTNG"|"APPIUM_WEB_PYTHON"|"APPIUM_WEB_NODE"|"APPIUM_WEB_RUBY"|"CALABASH"|"INSTRUMENTATION"|"UIAUTOMATION"|"UIAUTOMATOR"|"XCTEST"|"XCTEST_UI"|"REMOTE_ACCESS_RECORD"|"REMOTE_ACCESS_REPLAY"|string;
   export type Tests = Test[];
@@ -3347,6 +3374,10 @@ declare namespace DeviceFarm {
      * Human-readable description for the project.
      */
     description?: ResourceDescription;
+    /**
+     * The VPC security groups and subnets that are attached to a project.
+     */
+    vpcConfig?: TestGridVpcConfig;
   }
   export interface UpdateTestGridProjectResult {
     /**
@@ -3430,7 +3461,7 @@ declare namespace DeviceFarm {
     /**
      * The presigned Amazon S3 URL that was used to store a file using a PUT request.
      */
-    url?: URL;
+    url?: SensitiveURL;
     /**
      * The upload's metadata. For example, for Android, this contains information that is parsed from the manifest and is displayed in the AWS Device Farm console after the associated app is uploaded.
      */

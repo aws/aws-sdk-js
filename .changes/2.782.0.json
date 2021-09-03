@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "APIGateway",
+        "description": "Support disabling the default execute-api endpoint for REST APIs."
+    },
+    {
+        "type": "feature",
+        "category": "CodeArtifact",
+        "description": "Add support for tagging of CodeArtifact domain and repository resources."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Support for Appliance mode on Transit Gateway that simplifies deployment of stateful network appliances. Added support for AWS Client VPN Self-Service Portal."
+    },
+    {
+        "type": "feature",
+        "category": "ELBv2",
+        "description": "Application Load Balancer (ALB) now supports the gRPC protocol-version. With this release, customers can use ALB to route and load balance gRPC traffic between gRPC enabled clients and microservices."
+    },
+    {
+        "type": "feature",
+        "category": "SESV2",
+        "description": "This release enables customers to manage their own contact lists and end-user subscription preferences."
+    },
+    {
+        "type": "feature",
+        "category": "StorageGateway",
+        "description": "Adding support for access based enumeration on SMB file shares, file share visibility on SMB file shares, and file upload notifications for all file shares"
+    },
+    {
+        "type": "feature",
+        "category": "TypeScript",
+        "description": "Add AWS.Endpoint to ServiceConfigurationOptions.endpoint type."
+    }
+]

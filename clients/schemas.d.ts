@@ -109,6 +109,14 @@ declare class Schemas extends Service {
    */
   describeSchema(callback?: (err: AWSError, data: Schemas.Types.DescribeSchemaResponse) => void): Request<Schemas.Types.DescribeSchemaResponse, AWSError>;
   /**
+   * 
+   */
+  exportSchema(params: Schemas.Types.ExportSchemaRequest, callback?: (err: AWSError, data: Schemas.Types.ExportSchemaResponse) => void): Request<Schemas.Types.ExportSchemaResponse, AWSError>;
+  /**
+   * 
+   */
+  exportSchema(callback?: (err: AWSError, data: Schemas.Types.ExportSchemaResponse) => void): Request<Schemas.Types.ExportSchemaResponse, AWSError>;
+  /**
    * Get the code binding source URI.
    */
   getCodeBindingSource(params: Schemas.Types.GetCodeBindingSourceRequest, callback?: (err: AWSError, data: Schemas.Types.GetCodeBindingSourceResponse) => void): Request<Schemas.Types.GetCodeBindingSourceResponse, AWSError>;
@@ -273,6 +281,10 @@ declare namespace Schemas {
      */
     SourceArn: __stringMin20Max1600;
     /**
+     * Support discovery of schemas in events sent to the bus from another account. (default: true).
+     */
+    CrossAccount?: __boolean;
+    /**
      * Tags associated with the resource.
      */
     Tags?: Tags;
@@ -298,6 +310,10 @@ declare namespace Schemas {
      * The state of the discoverer.
      */
     State?: DiscovererState;
+    /**
+     * The Status if the discoverer will discover schemas from events sent from another account.
+     */
+    CrossAccount?: __boolean;
     /**
      * Tags associated with the resource.
      */
@@ -498,6 +514,10 @@ declare namespace Schemas {
      */
     State?: DiscovererState;
     /**
+     * The Status if the discoverer will discover schemas from events sent from another account.
+     */
+    CrossAccount?: __boolean;
+    /**
      * Tags associated with the resource.
      */
     Tags?: Tags;
@@ -597,9 +617,35 @@ declare namespace Schemas {
      */
     State?: DiscovererState;
     /**
+     * The Status if the discoverer will discover schemas from events sent from another account.
+     */
+    CrossAccount?: __boolean;
+    /**
      * Tags associated with the resource.
      */
     Tags?: Tags;
+  }
+  export interface ExportSchemaRequest {
+    /**
+     * The name of the registry.
+     */
+    RegistryName: __string;
+    /**
+     * The name of the schema.
+     */
+    SchemaName: __string;
+    /**
+     * Specifying this limits the results to only this schema version.
+     */
+    SchemaVersion?: __string;
+    Type: __string;
+  }
+  export interface ExportSchemaResponse {
+    Content?: __string;
+    SchemaArn?: __string;
+    SchemaName?: __string;
+    SchemaVersion?: __string;
+    Type?: __string;
   }
   export interface GetCodeBindingSourceRequest {
     /**
@@ -873,6 +919,10 @@ declare namespace Schemas {
      * The version number of the schema.
      */
     SchemaVersion?: __string;
+    /**
+     * The type of schema.
+     */
+    Type?: Type;
   }
   export interface SearchSchemaSummary {
     /**
@@ -901,6 +951,10 @@ declare namespace Schemas {
      * The version number of the schema
      */
     SchemaVersion?: __string;
+    /**
+     * The type of schema.
+     */
+    Type?: Type;
   }
   export interface SearchSchemasRequest {
     /**
@@ -970,7 +1024,7 @@ declare namespace Schemas {
     Tags: Tags;
   }
   export type Tags = {[key: string]: __string};
-  export type Type = "OpenApi3"|string;
+  export type Type = "OpenApi3"|"JSONSchemaDraft4"|string;
   export interface UntagResourceRequest {
     /**
      * The ARN of the resource.
@@ -990,6 +1044,10 @@ declare namespace Schemas {
      * The ID of the discoverer.
      */
     DiscovererId: __string;
+    /**
+     * Support discovery of schemas in events sent to the bus from another account. (default: true)
+     */
+    CrossAccount?: __boolean;
   }
   export interface UpdateDiscovererResponse {
     /**
@@ -1012,6 +1070,10 @@ declare namespace Schemas {
      * The state of the discoverer.
      */
     State?: DiscovererState;
+    /**
+     * The Status if the discoverer will discover schemas from events sent from another account.
+     */
+    CrossAccount?: __boolean;
     /**
      * Tags associated with the resource.
      */
@@ -1102,6 +1164,7 @@ declare namespace Schemas {
      */
     VersionCreatedDate?: __timestampIso8601;
   }
+  export type __boolean = boolean;
   export type __integer = number;
   export type __listOfDiscovererSummary = DiscovererSummary[];
   export type __listOfGetDiscoveredSchemaVersionItemInput = GetDiscoveredSchemaVersionItemInput[];

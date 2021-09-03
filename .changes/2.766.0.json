@@ -1,0 +1,42 @@
+[
+    {
+        "type": "bugfix",
+        "category": "lib",
+        "description": "call customBackoff() only upon retryable errors"
+    },
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "Support tagging for Batch resources (compute environment, job queue, job definition and job) and tag based access control on Batch APIs"
+    },
+    {
+        "type": "feature",
+        "category": "ELBv2",
+        "description": "This release adds support for tagging listeners, rules, and target groups on creation. This release also supported tagging operations through tagging api's for listeners and rules."
+    },
+    {
+        "type": "feature",
+        "category": "PersonalizeEvents",
+        "description": "Adds new APIs to write item and user records to Datasets."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Adds the NCHAR Character Set ID parameter to the CreateDbInstance API for RDS Oracle."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Amazon S3 Object Ownership is a new S3 feature that enables bucket owners to automatically assume ownership of objects that are uploaded to their buckets by other AWS Accounts."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceDiscovery",
+        "description": "Added support for optional parameters for DiscoverInstances API in AWS Cloud Map"
+    },
+    {
+        "type": "feature",
+        "category": "docs",
+        "description": "Update s_code Script Handling"
+    }
+]

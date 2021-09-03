@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "AutoScaling",
+        "description": "EC2 Auto Scaling now supports setting a local time zone for cron expressions in scheduled actions, removing the need to adjust for Daylight Saving Time (DST)"
+    },
+    {
+        "type": "feature",
+        "category": "CodeGuruProfiler",
+        "description": "Update documentation to include Python. Add ConflictException for DeleteProfilingGroup. Add FrameMetricValue."
+    },
+    {
+        "type": "feature",
+        "category": "EFS",
+        "description": "AWS EFS is introducing one-zone file systems."
+    },
+    {
+        "type": "feature",
+        "category": "IoTWireless",
+        "description": "Add max value to Seq in SendDataToWirelessDevice API\""
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release adds support for Amazon RDS Proxy endpoints."
+    }
+]

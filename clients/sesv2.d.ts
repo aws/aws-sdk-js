@@ -28,6 +28,22 @@ declare class SESV2 extends Service {
    */
   createConfigurationSetEventDestination(callback?: (err: AWSError, data: SESV2.Types.CreateConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.CreateConfigurationSetEventDestinationResponse, AWSError>;
   /**
+   * Creates a contact, which is an end-user who is receiving the email, and adds them to a contact list.
+   */
+  createContact(params: SESV2.Types.CreateContactRequest, callback?: (err: AWSError, data: SESV2.Types.CreateContactResponse) => void): Request<SESV2.Types.CreateContactResponse, AWSError>;
+  /**
+   * Creates a contact, which is an end-user who is receiving the email, and adds them to a contact list.
+   */
+  createContact(callback?: (err: AWSError, data: SESV2.Types.CreateContactResponse) => void): Request<SESV2.Types.CreateContactResponse, AWSError>;
+  /**
+   * Creates a contact list.
+   */
+  createContactList(params: SESV2.Types.CreateContactListRequest, callback?: (err: AWSError, data: SESV2.Types.CreateContactListResponse) => void): Request<SESV2.Types.CreateContactListResponse, AWSError>;
+  /**
+   * Creates a contact list.
+   */
+  createContactList(callback?: (err: AWSError, data: SESV2.Types.CreateContactListResponse) => void): Request<SESV2.Types.CreateContactListResponse, AWSError>;
+  /**
    * Creates a new custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   createCustomVerificationEmailTemplate(params: SESV2.Types.CreateCustomVerificationEmailTemplateRequest, callback?: (err: AWSError, data: SESV2.Types.CreateCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.CreateCustomVerificationEmailTemplateResponse, AWSError>;
@@ -52,11 +68,11 @@ declare class SESV2 extends Service {
    */
   createDeliverabilityTestReport(callback?: (err: AWSError, data: SESV2.Types.CreateDeliverabilityTestReportResponse) => void): Request<SESV2.Types.CreateDeliverabilityTestReportResponse, AWSError>;
   /**
-   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain without specifying the DkimSigningAttributes object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as Easy DKIM. Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation has to include the DkimSigningAttributes object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key.
+   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain without specifying the DkimSigningAttributes object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as Easy DKIM. Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation has to include the DkimSigningAttributes object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key. When you verify a domain, this operation provides a set of DKIM tokens, which you can convert into CNAME tokens. You add these CNAME tokens to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. For some DNS providers, it can take 72 hours or more to complete the domain verification process. Additionally, you can associate an existing configuration set with the email identity that you're verifying.
    */
   createEmailIdentity(params: SESV2.Types.CreateEmailIdentityRequest, callback?: (err: AWSError, data: SESV2.Types.CreateEmailIdentityResponse) => void): Request<SESV2.Types.CreateEmailIdentityResponse, AWSError>;
   /**
-   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain without specifying the DkimSigningAttributes object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as Easy DKIM. Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation has to include the DkimSigningAttributes object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key.
+   * Starts the process of verifying an email identity. An identity is an email address or domain that you use when you send email. Before you can use an identity to send email, you first have to verify it. By verifying an identity, you demonstrate that you're the owner of the identity, and that you've given Amazon SES API v2 permission to send email from the identity. When you verify an email address, Amazon SES sends an email to the address. Your email address is verified as soon as you follow the link in the verification email.  When you verify a domain without specifying the DkimSigningAttributes object, this operation provides a set of DKIM tokens. You can convert these tokens into CNAME records, which you then add to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. This verification method is known as Easy DKIM. Alternatively, you can perform the verification process by providing your own public-private key pair. This verification method is known as Bring Your Own DKIM (BYODKIM). To use BYODKIM, your call to the CreateEmailIdentity operation has to include the DkimSigningAttributes object. When you specify this object, you provide a selector (a component of the DNS record name that identifies the public key that you want to use for DKIM authentication) and a private key. When you verify a domain, this operation provides a set of DKIM tokens, which you can convert into CNAME tokens. You add these CNAME tokens to the DNS configuration for your domain. Your domain is verified when Amazon SES detects these records in the DNS configuration for your domain. For some DNS providers, it can take 72 hours or more to complete the domain verification process. Additionally, you can associate an existing configuration set with the email identity that you're verifying.
    */
   createEmailIdentity(callback?: (err: AWSError, data: SESV2.Types.CreateEmailIdentityResponse) => void): Request<SESV2.Types.CreateEmailIdentityResponse, AWSError>;
   /**
@@ -99,6 +115,22 @@ declare class SESV2 extends Service {
    * Delete an event destination.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
    */
   deleteConfigurationSetEventDestination(callback?: (err: AWSError, data: SESV2.Types.DeleteConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.DeleteConfigurationSetEventDestinationResponse, AWSError>;
+  /**
+   * Removes a contact from a contact list.
+   */
+  deleteContact(params: SESV2.Types.DeleteContactRequest, callback?: (err: AWSError, data: SESV2.Types.DeleteContactResponse) => void): Request<SESV2.Types.DeleteContactResponse, AWSError>;
+  /**
+   * Removes a contact from a contact list.
+   */
+  deleteContact(callback?: (err: AWSError, data: SESV2.Types.DeleteContactResponse) => void): Request<SESV2.Types.DeleteContactResponse, AWSError>;
+  /**
+   * Deletes a contact list and all of the contacts on that list.
+   */
+  deleteContactList(params: SESV2.Types.DeleteContactListRequest, callback?: (err: AWSError, data: SESV2.Types.DeleteContactListResponse) => void): Request<SESV2.Types.DeleteContactListResponse, AWSError>;
+  /**
+   * Deletes a contact list and all of the contacts on that list.
+   */
+  deleteContactList(callback?: (err: AWSError, data: SESV2.Types.DeleteContactListResponse) => void): Request<SESV2.Types.DeleteContactListResponse, AWSError>;
   /**
    * Deletes an existing custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
@@ -179,6 +211,22 @@ declare class SESV2 extends Service {
    * Retrieve a list of event destinations that are associated with a configuration set.  Events include message sends, deliveries, opens, clicks, bounces, and complaints. Event destinations are places that you can send information about these events to. For example, you can send event data to Amazon SNS to receive notifications when you receive bounces or complaints, or you can use Amazon Kinesis Data Firehose to stream data to Amazon S3 for long-term storage.
    */
   getConfigurationSetEventDestinations(callback?: (err: AWSError, data: SESV2.Types.GetConfigurationSetEventDestinationsResponse) => void): Request<SESV2.Types.GetConfigurationSetEventDestinationsResponse, AWSError>;
+  /**
+   * Returns a contact from a contact list.
+   */
+  getContact(params: SESV2.Types.GetContactRequest, callback?: (err: AWSError, data: SESV2.Types.GetContactResponse) => void): Request<SESV2.Types.GetContactResponse, AWSError>;
+  /**
+   * Returns a contact from a contact list.
+   */
+  getContact(callback?: (err: AWSError, data: SESV2.Types.GetContactResponse) => void): Request<SESV2.Types.GetContactResponse, AWSError>;
+  /**
+   * Returns contact list metadata. It does not return any information about the contacts present in the list.
+   */
+  getContactList(params: SESV2.Types.GetContactListRequest, callback?: (err: AWSError, data: SESV2.Types.GetContactListResponse) => void): Request<SESV2.Types.GetContactListResponse, AWSError>;
+  /**
+   * Returns contact list metadata. It does not return any information about the contacts present in the list.
+   */
+  getContactList(callback?: (err: AWSError, data: SESV2.Types.GetContactListResponse) => void): Request<SESV2.Types.GetContactListResponse, AWSError>;
   /**
    * Returns the custom email verification template for the template name you specify. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
@@ -283,6 +331,22 @@ declare class SESV2 extends Service {
    * List all of the configuration sets associated with your account in the current region.  Configuration sets are groups of rules that you can apply to the emails you send. You apply a configuration set to an email by including a reference to the configuration set in the headers of the email. When you apply a configuration set to an email, all of the rules in that configuration set are applied to the email.
    */
   listConfigurationSets(callback?: (err: AWSError, data: SESV2.Types.ListConfigurationSetsResponse) => void): Request<SESV2.Types.ListConfigurationSetsResponse, AWSError>;
+  /**
+   * Lists all of the contact lists available.
+   */
+  listContactLists(params: SESV2.Types.ListContactListsRequest, callback?: (err: AWSError, data: SESV2.Types.ListContactListsResponse) => void): Request<SESV2.Types.ListContactListsResponse, AWSError>;
+  /**
+   * Lists all of the contact lists available.
+   */
+  listContactLists(callback?: (err: AWSError, data: SESV2.Types.ListContactListsResponse) => void): Request<SESV2.Types.ListContactListsResponse, AWSError>;
+  /**
+   * Lists the contacts present in a specific contact list.
+   */
+  listContacts(params: SESV2.Types.ListContactsRequest, callback?: (err: AWSError, data: SESV2.Types.ListContactsResponse) => void): Request<SESV2.Types.ListContactsResponse, AWSError>;
+  /**
+   * Lists the contacts present in a specific contact list.
+   */
+  listContacts(callback?: (err: AWSError, data: SESV2.Types.ListContactsResponse) => void): Request<SESV2.Types.ListContactsResponse, AWSError>;
   /**
    * Lists the existing custom verification email templates for your account in the current AWS Region. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
@@ -452,6 +516,14 @@ declare class SESV2 extends Service {
    */
   putDeliverabilityDashboardOption(callback?: (err: AWSError, data: SESV2.Types.PutDeliverabilityDashboardOptionResponse) => void): Request<SESV2.Types.PutDeliverabilityDashboardOptionResponse, AWSError>;
   /**
+   * Used to associate a configuration set with an email identity.
+   */
+  putEmailIdentityConfigurationSetAttributes(params: SESV2.Types.PutEmailIdentityConfigurationSetAttributesRequest, callback?: (err: AWSError, data: SESV2.Types.PutEmailIdentityConfigurationSetAttributesResponse) => void): Request<SESV2.Types.PutEmailIdentityConfigurationSetAttributesResponse, AWSError>;
+  /**
+   * Used to associate a configuration set with an email identity.
+   */
+  putEmailIdentityConfigurationSetAttributes(callback?: (err: AWSError, data: SESV2.Types.PutEmailIdentityConfigurationSetAttributesResponse) => void): Request<SESV2.Types.PutEmailIdentityConfigurationSetAttributesResponse, AWSError>;
+  /**
    * Used to enable or disable DKIM authentication for an email identity.
    */
   putEmailIdentityDkimAttributes(params: SESV2.Types.PutEmailIdentityDkimAttributesRequest, callback?: (err: AWSError, data: SESV2.Types.PutEmailIdentityDkimAttributesResponse) => void): Request<SESV2.Types.PutEmailIdentityDkimAttributesResponse, AWSError>;
@@ -548,6 +620,22 @@ declare class SESV2 extends Service {
    */
   updateConfigurationSetEventDestination(callback?: (err: AWSError, data: SESV2.Types.UpdateConfigurationSetEventDestinationResponse) => void): Request<SESV2.Types.UpdateConfigurationSetEventDestinationResponse, AWSError>;
   /**
+   * Updates a contact's preferences for a list. It is not necessary to specify all existing topic preferences in the TopicPreferences object, just the ones that need updating.
+   */
+  updateContact(params: SESV2.Types.UpdateContactRequest, callback?: (err: AWSError, data: SESV2.Types.UpdateContactResponse) => void): Request<SESV2.Types.UpdateContactResponse, AWSError>;
+  /**
+   * Updates a contact's preferences for a list. It is not necessary to specify all existing topic preferences in the TopicPreferences object, just the ones that need updating.
+   */
+  updateContact(callback?: (err: AWSError, data: SESV2.Types.UpdateContactResponse) => void): Request<SESV2.Types.UpdateContactResponse, AWSError>;
+  /**
+   * Updates contact list metadata. This operation does a complete replacement.
+   */
+  updateContactList(params: SESV2.Types.UpdateContactListRequest, callback?: (err: AWSError, data: SESV2.Types.UpdateContactListResponse) => void): Request<SESV2.Types.UpdateContactListResponse, AWSError>;
+  /**
+   * Updates contact list metadata. This operation does a complete replacement.
+   */
+  updateContactList(callback?: (err: AWSError, data: SESV2.Types.UpdateContactListResponse) => void): Request<SESV2.Types.UpdateContactListResponse, AWSError>;
+  /**
    * Updates an existing custom verification email template. For more information about custom verification email templates, see Using Custom Verification Email Templates in the Amazon SES Developer Guide. You can execute this operation no more than once per second.
    */
   updateCustomVerificationEmailTemplate(params: SESV2.Types.UpdateCustomVerificationEmailTemplateRequest, callback?: (err: AWSError, data: SESV2.Types.UpdateCustomVerificationEmailTemplateResponse) => void): Request<SESV2.Types.UpdateCustomVerificationEmailTemplateResponse, AWSError>;
@@ -602,6 +690,7 @@ declare namespace SESV2 {
   export type AdditionalContactEmailAddress = string;
   export type AdditionalContactEmailAddresses = AdditionalContactEmailAddress[];
   export type AmazonResourceName = string;
+  export type AttributesData = string;
   export type BehaviorOnMxFailure = "USE_DEFAULT_VALUE"|"REJECT_MESSAGE"|string;
   export type BlacklistEntries = BlacklistEntry[];
   export interface BlacklistEntry {
@@ -695,7 +784,51 @@ declare namespace SESV2 {
   export type CloudWatchDimensionConfigurations = CloudWatchDimensionConfiguration[];
   export type ConfigurationSetName = string;
   export type ConfigurationSetNameList = ConfigurationSetName[];
+  export interface Contact {
+    /**
+     * The contact's email address.
+     */
+    EmailAddress?: EmailAddress;
+    /**
+     * The contact's preference for being opted-in to or opted-out of a topic.
+     */
+    TopicPreferences?: TopicPreferenceList;
+    /**
+     * The default topic preferences applied to the contact.
+     */
+    TopicDefaultPreferences?: TopicPreferenceList;
+    /**
+     * A boolean value status noting if the contact is unsubscribed from all contact list topics.
+     */
+    UnsubscribeAll?: UnsubscribeAll;
+    /**
+     * A timestamp noting the last time the contact's information was updated.
+     */
+    LastUpdatedTimestamp?: Timestamp;
+  }
   export type ContactLanguage = "EN"|"JA"|string;
+  export interface ContactList {
+    /**
+     * The name of the contact list.
+     */
+    ContactListName?: ContactListName;
+    /**
+     * A timestamp noting the last time the contact list was updated.
+     */
+    LastUpdatedTimestamp?: Timestamp;
+  }
+  export interface ContactListDestination {
+    /**
+     * The name of the contact list.
+     */
+    ContactListName: ContactListName;
+    /**
+     * &gt;The type of action that you want to perform on the addresses. Acceptable values:   PUT: add the addresses to the contact list. If the record already exists, it will override it with the new value.   DELETE: remove the addresses from the contact list.  
+     */
+    ContactListImportAction: ContactListImportAction;
+  }
+  export type ContactListImportAction = "DELETE"|"PUT"|string;
+  export type ContactListName = string;
   export interface Content {
     /**
      * The content of the message itself.
@@ -750,6 +883,50 @@ declare namespace SESV2 {
     SuppressionOptions?: SuppressionOptions;
   }
   export interface CreateConfigurationSetResponse {
+  }
+  export interface CreateContactListRequest {
+    /**
+     * The name of the contact list.
+     */
+    ContactListName: ContactListName;
+    /**
+     * An interest group, theme, or label within a list. A contact list can have multiple topics.
+     */
+    Topics?: Topics;
+    /**
+     * A description of what the contact list is about.
+     */
+    Description?: Description;
+    /**
+     * The tags associated with a contact list.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateContactListResponse {
+  }
+  export interface CreateContactRequest {
+    /**
+     * The name of the contact list to which the contact should be added.
+     */
+    ContactListName: ContactListName;
+    /**
+     * The contact's email address.
+     */
+    EmailAddress: EmailAddress;
+    /**
+     * The contact's preferences for being opted-in to or opted-out of topics.
+     */
+    TopicPreferences?: TopicPreferenceList;
+    /**
+     * A boolean value status noting if the contact is unsubscribed from all contact list topics.
+     */
+    UnsubscribeAll?: UnsubscribeAll;
+    /**
+     * The attribute data attached to a contact.
+     */
+    AttributesData?: AttributesData;
+  }
+  export interface CreateContactResponse {
   }
   export interface CreateCustomVerificationEmailTemplateRequest {
     /**
@@ -848,6 +1025,10 @@ declare namespace SESV2 {
      * If your request includes this object, Amazon SES configures the identity to use Bring Your Own DKIM (BYODKIM) for DKIM authentication purposes, as opposed to the default method, Easy DKIM. You can only specify this object if the email identity is a domain, as opposed to an address.
      */
     DkimSigningAttributes?: DkimSigningAttributes;
+    /**
+     * The configuration set to use by default when sending from this identity. Note that any configuration set defined in the email sending request takes precedence. 
+     */
+    ConfigurationSetName?: ConfigurationSetName;
   }
   export interface CreateEmailIdentityResponse {
     /**
@@ -971,6 +1152,26 @@ declare namespace SESV2 {
   }
   export interface DeleteConfigurationSetResponse {
   }
+  export interface DeleteContactListRequest {
+    /**
+     * The name of the contact list.
+     */
+    ContactListName: ContactListName;
+  }
+  export interface DeleteContactListResponse {
+  }
+  export interface DeleteContactRequest {
+    /**
+     * The name of the contact list from which the contact should be removed.
+     */
+    ContactListName: ContactListName;
+    /**
+     * The contact's email address.
+     */
+    EmailAddress: EmailAddress;
+  }
+  export interface DeleteContactResponse {
+  }
   export interface DeleteCustomVerificationEmailTemplateRequest {
     /**
      * The name of the custom verification email template that you want to delete.
@@ -1063,6 +1264,7 @@ declare namespace SESV2 {
      */
     SendingPoolName?: PoolName;
   }
+  export type Description = string;
   export interface Destination {
     /**
      * An array that contains the email addresses of the "To" recipients for the email.
@@ -1079,6 +1281,7 @@ declare namespace SESV2 {
   }
   export type DimensionName = string;
   export type DimensionValueSource = "MESSAGE_TAG"|"EMAIL_HEADER"|"LINK_TAG"|string;
+  export type DisplayName = string;
   export interface DkimAttributes {
     /**
      * If the value is true, then the messages that you send from the identity are signed using DKIM. If the value is false, then the messages that you send from the identity aren't DKIM-signed.
@@ -1318,7 +1521,7 @@ declare namespace SESV2 {
   }
   export type EventDestinationName = string;
   export type EventDestinations = EventDestination[];
-  export type EventType = "SEND"|"REJECT"|"BOUNCE"|"COMPLAINT"|"DELIVERY"|"OPEN"|"CLICK"|"RENDERING_FAILURE"|"DELIVERY_DELAY"|string;
+  export type EventType = "SEND"|"REJECT"|"BOUNCE"|"COMPLAINT"|"DELIVERY"|"OPEN"|"CLICK"|"RENDERING_FAILURE"|"DELIVERY_DELAY"|"SUBSCRIPTION"|string;
   export type EventTypes = EventType[];
   export type FailedRecordsCount = number;
   export type FailedRecordsS3Url = string;
@@ -1426,6 +1629,82 @@ declare namespace SESV2 {
      * An object that contains information about the suppression list preferences for your account.
      */
     SuppressionOptions?: SuppressionOptions;
+  }
+  export interface GetContactListRequest {
+    /**
+     * The name of the contact list.
+     */
+    ContactListName: ContactListName;
+  }
+  export interface GetContactListResponse {
+    /**
+     * The name of the contact list.
+     */
+    ContactListName?: ContactListName;
+    /**
+     * An interest group, theme, or label within a list. A contact list can have multiple topics.
+     */
+    Topics?: Topics;
+    /**
+     * A description of what the contact list is about.
+     */
+    Description?: Description;
+    /**
+     * A timestamp noting when the contact list was created.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * A timestamp noting the last time the contact list was updated.
+     */
+    LastUpdatedTimestamp?: Timestamp;
+    /**
+     * The tags associated with a contact list.
+     */
+    Tags?: TagList;
+  }
+  export interface GetContactRequest {
+    /**
+     * The name of the contact list to which the contact belongs.
+     */
+    ContactListName: ContactListName;
+    /**
+     * The contact's email addres.
+     */
+    EmailAddress: EmailAddress;
+  }
+  export interface GetContactResponse {
+    /**
+     * The name of the contact list to which the contact belongs.
+     */
+    ContactListName?: ContactListName;
+    /**
+     * The contact's email addres.
+     */
+    EmailAddress?: EmailAddress;
+    /**
+     * The contact's preference for being opted-in to or opted-out of a topic.&gt;
+     */
+    TopicPreferences?: TopicPreferenceList;
+    /**
+     * The default topic preferences applied to the contact.
+     */
+    TopicDefaultPreferences?: TopicPreferenceList;
+    /**
+     * A boolean value status noting if the contact is unsubscribed from all contact list topics.
+     */
+    UnsubscribeAll?: UnsubscribeAll;
+    /**
+     * The attribute data attached to a contact.
+     */
+    AttributesData?: AttributesData;
+    /**
+     * A timestamp noting when the contact was created.
+     */
+    CreatedTimestamp?: Timestamp;
+    /**
+     * A timestamp noting the last time the contact's information was updated.
+     */
+    LastUpdatedTimestamp?: Timestamp;
   }
   export interface GetCustomVerificationEmailTemplateRequest {
     /**
@@ -1630,6 +1909,10 @@ declare namespace SESV2 {
      * An array of objects that define the tags (keys and values) that are associated with the email identity.
      */
     Tags?: TagList;
+    /**
+     * The configuration set used by default when sending from this identity.
+     */
+    ConfigurationSetName?: ConfigurationSetName;
   }
   export interface GetEmailTemplateRequest {
     /**
@@ -1735,13 +2018,20 @@ declare namespace SESV2 {
     /**
      * An object that contains the action of the import job towards suppression list.
      */
-    SuppressionListDestination: SuppressionListDestination;
+    SuppressionListDestination?: SuppressionListDestination;
+    /**
+     * An object that contains the action of the import job towards a contact list.
+     */
+    ContactListDestination?: ContactListDestination;
   }
-  export type ImportDestinationType = "SUPPRESSION_LIST"|string;
+  export type ImportDestinationType = "SUPPRESSION_LIST"|"CONTACT_LIST"|string;
   export interface ImportJobSummary {
     JobId?: JobId;
     ImportDestination?: ImportDestination;
     JobStatus?: JobStatus;
+    /**
+     * The date and time when the import job was created.
+     */
     CreatedTimestamp?: Timestamp;
   }
   export type ImportJobSummaryList = ImportJobSummary[];
@@ -1800,6 +2090,64 @@ declare namespace SESV2 {
     ConfigurationSets?: ConfigurationSetNameList;
     /**
      * A token that indicates that there are additional configuration sets to list. To view additional configuration sets, issue another request to ListConfigurationSets, and pass this token in the NextToken parameter.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListContactListsRequest {
+    /**
+     * Maximum number of contact lists to return at once. Use this parameter to paginate results. If additional contact lists exist beyond the specified limit, the NextToken element is sent in the response. Use the NextToken value in subsequent requests to retrieve additional lists.
+     */
+    PageSize?: MaxItems;
+    /**
+     * A string token indicating that there might be additional contact lists available to be listed. Use the token provided in the Response to use in the subsequent call to ListContactLists with the same parameters to retrieve the next page of contact lists.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListContactListsResponse {
+    /**
+     * The available contact lists.
+     */
+    ContactLists?: ListOfContactLists;
+    /**
+     * A string token indicating that there might be additional contact lists available to be listed. Copy this token to a subsequent call to ListContactLists with the same parameters to retrieve the next page of contact lists.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListContactsFilter {
+    /**
+     * The status by which you are filtering: OPT_IN or OPT_OUT.
+     */
+    FilteredStatus?: SubscriptionStatus;
+    /**
+     * Used for filtering by a specific topic preference.
+     */
+    TopicFilter?: TopicFilter;
+  }
+  export interface ListContactsRequest {
+    /**
+     * The name of the contact list.
+     */
+    ContactListName: ContactListName;
+    /**
+     * A filter that can be applied to a list of contacts.
+     */
+    Filter?: ListContactsFilter;
+    /**
+     * The number of contacts that may be returned at once, which is dependent on if there are more or less contacts than the value of the PageSize. Use this parameter to paginate results. If additional contacts exist beyond the specified limit, the NextToken element is sent in the response. Use the NextToken value in subsequent requests to retrieve additional contacts.
+     */
+    PageSize?: MaxItems;
+    /**
+     * A string token indicating that there might be additional contacts available to be listed. Use the token provided in the Response to use in the subsequent call to ListContacts with the same parameters to retrieve the next page of contacts.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListContactsResponse {
+    /**
+     * The contacts present in a specific contact list.
+     */
+    Contacts?: ListOfContacts;
+    /**
+     * A string token indicating that there might be additional contacts available to be listed. Copy this token to a subsequent call to ListContacts with the same parameters to retrieve the next page of contacts.
      */
     NextToken?: NextToken;
   }
@@ -1959,6 +2307,18 @@ declare namespace SESV2 {
      */
     NextToken?: NextToken;
   }
+  export interface ListManagementOptions {
+    /**
+     * The name of the contact list.
+     */
+    ContactListName: ContactListName;
+    /**
+     * The name of the topic.
+     */
+    TopicName?: TopicName;
+  }
+  export type ListOfContactLists = ContactList[];
+  export type ListOfContacts = Contact[];
   export type ListOfDedicatedIpPools = PoolName[];
   export interface ListSuppressedDestinationsRequest {
     /**
@@ -2253,6 +2613,18 @@ declare namespace SESV2 {
   }
   export interface PutDeliverabilityDashboardOptionResponse {
   }
+  export interface PutEmailIdentityConfigurationSetAttributesRequest {
+    /**
+     * The email address or domain that you want to associate with a configuration set.
+     */
+    EmailIdentity: Identity;
+    /**
+     * The configuration set that you want to associate with an email identity.
+     */
+    ConfigurationSetName?: ConfigurationSetName;
+  }
+  export interface PutEmailIdentityConfigurationSetAttributesResponse {
+  }
   export interface PutEmailIdentityDkimAttributesRequest {
     /**
      * The email identity that you want to change the DKIM settings for.
@@ -2473,6 +2845,10 @@ declare namespace SESV2 {
      * The name of the configuration set that you want to use when sending the email.
      */
     ConfigurationSetName?: ConfigurationSetName;
+    /**
+     * An object used to specify a list or topic to which an email belongs, which will be used when a contact chooses to unsubscribe.
+     */
+    ListManagementOptions?: ListManagementOptions;
   }
   export interface SendEmailResponse {
     /**
@@ -2509,6 +2885,7 @@ declare namespace SESV2 {
     TopicArn: AmazonResourceName;
   }
   export type Subject = string;
+  export type SubscriptionStatus = "OPT_IN"|"OPT_OUT"|string;
   export type SuccessRedirectionURL = string;
   export interface SuppressedDestination {
     /**
@@ -2633,12 +3010,54 @@ declare namespace SESV2 {
   }
   export type Timestamp = Date;
   export type TlsPolicy = "REQUIRE"|"OPTIONAL"|string;
+  export interface Topic {
+    /**
+     * The name of the topic.
+     */
+    TopicName: TopicName;
+    /**
+     * The name of the topic the contact will see.
+     */
+    DisplayName: DisplayName;
+    /**
+     * A description of what the topic is about, which the contact will see.
+     */
+    Description?: Description;
+    /**
+     * The default subscription status to be applied to a contact if the contact has not noted their preference for subscribing to a topic.
+     */
+    DefaultSubscriptionStatus: SubscriptionStatus;
+  }
+  export interface TopicFilter {
+    /**
+     * The name of a topic on which you wish to apply the filter.
+     */
+    TopicName?: TopicName;
+    /**
+     * Notes that the default subscription status should be applied to a contact because the contact has not noted their preference for subscribing to a topic.
+     */
+    UseDefaultIfPreferenceUnavailable?: UseDefaultIfPreferenceUnavailable;
+  }
+  export type TopicName = string;
+  export interface TopicPreference {
+    /**
+     * The name of the topic.
+     */
+    TopicName: TopicName;
+    /**
+     * The contact's subscription status to a topic which is either OPT_IN or OPT_OUT.
+     */
+    SubscriptionStatus: SubscriptionStatus;
+  }
+  export type TopicPreferenceList = TopicPreference[];
+  export type Topics = Topic[];
   export interface TrackingOptions {
     /**
      * The domain that you want to use for tracking open and click events.
      */
     CustomRedirectDomain: CustomRedirectDomain;
   }
+  export type UnsubscribeAll = boolean;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the resource that you want to remove one or more tags from.
@@ -2666,6 +3085,46 @@ declare namespace SESV2 {
     EventDestination: EventDestinationDefinition;
   }
   export interface UpdateConfigurationSetEventDestinationResponse {
+  }
+  export interface UpdateContactListRequest {
+    /**
+     * The name of the contact list.
+     */
+    ContactListName: ContactListName;
+    /**
+     * An interest group, theme, or label within a list. A contact list can have multiple topics.
+     */
+    Topics?: Topics;
+    /**
+     * A description of what the contact list is about.
+     */
+    Description?: Description;
+  }
+  export interface UpdateContactListResponse {
+  }
+  export interface UpdateContactRequest {
+    /**
+     * The name of the contact list.
+     */
+    ContactListName: ContactListName;
+    /**
+     * The contact's email addres.
+     */
+    EmailAddress: EmailAddress;
+    /**
+     * The contact's preference for being opted-in to or opted-out of a topic.
+     */
+    TopicPreferences?: TopicPreferenceList;
+    /**
+     * A boolean value status noting if the contact is unsubscribed from all contact list topics.
+     */
+    UnsubscribeAll?: UnsubscribeAll;
+    /**
+     * The attribute data attached to a contact.
+     */
+    AttributesData?: AttributesData;
+  }
+  export interface UpdateContactResponse {
   }
   export interface UpdateCustomVerificationEmailTemplateRequest {
     /**
@@ -2724,6 +3183,7 @@ declare namespace SESV2 {
   export interface UpdateEmailTemplateResponse {
   }
   export type UseCaseDescription = string;
+  export type UseDefaultIfPreferenceUnavailable = boolean;
   export type Volume = number;
   export interface VolumeStatistics {
     /**

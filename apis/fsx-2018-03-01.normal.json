@@ -13,6 +13,31 @@
     "uid": "fsx-2018-03-01"
   },
   "operations": {
+    "AssociateFileSystemAliases": {
+      "name": "AssociateFileSystemAliases",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AssociateFileSystemAliasesRequest"
+      },
+      "output": {
+        "shape": "AssociateFileSystemAliasesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "FileSystemNotFound"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Use this action to associate one or more Domain Name Server (DNS) aliases with an existing Amazon FSx for Windows File Server file system. A file system can have a maximum of 50 DNS aliases associated with it at any one time. If you try to associate a DNS alias that is already associated with the file system, FSx takes no action on that alias in the request. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html\">Working with DNS Aliases</a> and <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html\">Walkthrough 5: Using DNS aliases to access your file system</a>, including additional steps you must take to be able to access your file system using a DNS alias.</p> <p>The system response shows the DNS aliases that Amazon FSx is attempting to associate with the file system. Use the API operation to monitor the status of the aliases Amazon FSx is associating with the file system.</p>"
+    },
     "CancelDataRepositoryTask": {
       "name": "CancelDataRepositoryTask",
       "http": {
@@ -45,6 +70,56 @@
       "documentation": "<p>Cancels an existing Amazon FSx for Lustre data repository task if that task is in either the <code>PENDING</code> or <code>EXECUTING</code> state. When you cancel a task, Amazon FSx does the following.</p> <ul> <li> <p>Any files that FSx has already exported are not reverted.</p> </li> <li> <p>FSx continues to export any files that are \"in-flight\" when the cancel operation is received.</p> </li> <li> <p>FSx does not export any files that have not yet been exported.</p> </li> </ul>",
       "idempotent": true
     },
+    "CopyBackup": {
+      "name": "CopyBackup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CopyBackupRequest"
+      },
+      "output": {
+        "shape": "CopyBackupResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "BackupNotFound"
+        },
+        {
+          "shape": "ServiceLimitExceeded"
+        },
+        {
+          "shape": "UnsupportedOperation"
+        },
+        {
+          "shape": "IncompatibleParameterError"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "InvalidSourceKmsKey"
+        },
+        {
+          "shape": "InvalidDestinationKmsKey"
+        },
+        {
+          "shape": "InvalidRegion"
+        },
+        {
+          "shape": "SourceBackupUnavailable"
+        },
+        {
+          "shape": "IncompatibleRegionForMultiAZ"
+        }
+      ],
+      "documentation": "<p>Copies an existing backup within the same Amazon Web Services account to another Amazon Web Services Region (cross-Region copy) or within the same Amazon Web Services Region (in-Region copy). You can have up to five backup copy requests in progress to a single destination Region per account.</p> <p>You can use cross-Region backup copies for cross-region disaster recovery. You periodically take backups and copy them to another Region so that in the event of a disaster in the primary Region, you can restore from backup and recover availability quickly in the other Region. You can make cross-Region copies only within your Amazon Web Services partition.</p> <p> You can also use backup copies to clone your file data set to another Region or within the same Region.</p> <p>You can use the <code>SourceRegion</code> parameter to specify the Amazon Web Services Region from which the backup will be copied. For example, if you make the call from the <code>us-west-1</code> Region and want to copy a backup from the <code>us-east-2</code> Region, you specify <code>us-east-2</code> in the <code>SourceRegion</code> parameter to make a cross-Region copy. If you don't specify a Region, the backup copy is created in the same Region where the request is sent from (in-Region copy).</p> <p>For more information on creating backup copies, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html#copy-backups\"> Copying backups</a> in the <i>Amazon FSx for Windows User Guide</i> and <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html#copy-backups\">Copying backups</a> in the <i>Amazon FSx for Lustre User Guide</i>.</p>",
+      "idempotent": true
+    },
     "CreateBackup": {
       "name": "CreateBackup",
       "http": {
@@ -68,6 +143,9 @@
           "shape": "FileSystemNotFound"
         },
         {
+          "shape": "VolumeNotFound"
+        },
+        {
           "shape": "BackupInProgress"
         },
         {
@@ -80,7 +158,7 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Creates a backup of an existing Amazon FSx file system. Creating regular backups for your file system is a best practice, enabling you to restore a file system from a backup if an issue arises with the original file system.</p> <p>For Amazon FSx for Lustre file systems, you can create a backup only for file systems with the following configuration:</p> <ul> <li> <p>a Persistent deployment type</p> </li> <li> <p>is <i>not</i> linked to a data respository.</p> </li> </ul> <p>For more information about backing up Amazon FSx for Lustre file systems, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html\">Working with FSx for Lustre backups</a>.</p> <p>For more information about backing up Amazon FSx for Lustre file systems, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html\">Working with FSx for Windows backups</a>.</p> <p>If a backup with the specified client request token exists, and the parameters match, this operation returns the description of the existing backup. If a backup specified client request token exists, and the parameters don't match, this operation returns <code>IncompatibleParameterError</code>. If a backup with the specified client request token doesn't exist, <code>CreateBackup</code> does the following: </p> <ul> <li> <p>Creates a new Amazon FSx backup with an assigned ID, and an initial lifecycle state of <code>CREATING</code>.</p> </li> <li> <p>Returns the description of the backup.</p> </li> </ul> <p>By using the idempotent operation, you can retry a <code>CreateBackup</code> operation without the risk of creating an extra backup. This approach can be useful when an initial call fails in a way that makes it unclear whether a backup was created. If you use the same client request token and the initial call created a backup, the operation returns a successful result because all the parameters are the same.</p> <p>The <code>CreateBackup</code> operation returns while the backup's lifecycle state is still <code>CREATING</code>. You can check the backup creation status by calling the <a>DescribeBackups</a> operation, which returns the backup state along with other information.</p>",
+      "documentation": "<p>Creates a backup of an existing Amazon FSx for Windows File Server or Amazon FSx for Lustre file system, or of an Amazon FSx for NetApp ONTAP volume. Creating regular backups is a best practice, enabling you to restore a file system or volume from a backup if an issue arises with the original file system or volume.</p> <p>For Amazon FSx for Lustre file systems, you can create a backup only for file systems with the following configuration:</p> <ul> <li> <p>a Persistent deployment type</p> </li> <li> <p>is <i>not</i> linked to a data repository.</p> </li> </ul> <p>For more information about backups, see the following:</p> <ul> <li> <p>For Amazon FSx for Lustre, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html\">Working with FSx for Lustre backups</a>.</p> </li> <li> <p>For Amazon FSx for Windows, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html\">Working with FSx for Windows backups</a>.</p> </li> <li> <p>For Amazon FSx for NetApp ONTAP, see <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/using-backups.html\">Working with FSx for NetApp ONTAP backups</a>.</p> </li> </ul> <p>If a backup with the specified client request token exists, and the parameters match, this operation returns the description of the existing backup. If a backup specified client request token exists, and the parameters don't match, this operation returns <code>IncompatibleParameterError</code>. If a backup with the specified client request token doesn't exist, <code>CreateBackup</code> does the following: </p> <ul> <li> <p>Creates a new Amazon FSx backup with an assigned ID, and an initial lifecycle state of <code>CREATING</code>.</p> </li> <li> <p>Returns the description of the backup.</p> </li> </ul> <p>By using the idempotent operation, you can retry a <code>CreateBackup</code> operation without the risk of creating an extra backup. This approach can be useful when an initial call fails in a way that makes it unclear whether a backup was created. If you use the same client request token and the initial call created a backup, the operation returns a successful result because all the parameters are the same.</p> <p>The <code>CreateBackup</code> operation returns while the backup's lifecycle state is still <code>CREATING</code>. You can check the backup creation status by calling the <a>DescribeBackups</a> operation, which returns the backup state along with other information.</p>",
       "idempotent": true
     },
     "CreateDataRepositoryTask": {
@@ -118,7 +196,7 @@
           "shape": "DataRepositoryTaskExecuting"
         }
       ],
-      "documentation": "<p>Creates an Amazon FSx for Lustre data repository task. You use data repository tasks to perform bulk operations between your Amazon FSx file system and its linked data repository. An example of a data repository task is exporting any data and metadata changes, including POSIX metadata, to files, directories, and symbolic links (symlinks) from your FSx file system to its linked data repository. A <code>CreateDataRepositoryTask</code> operation will fail if a data repository is not linked to the FSx file system. To learn more about data repository tasks, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html\">Using Data Repository Tasks</a>. To learn more about linking a data repository to your file system, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/export-data-repository.html#export-prefix\">Setting the Export Prefix</a>.</p>",
+      "documentation": "<p>Creates an Amazon FSx for Lustre data repository task. You use data repository tasks to perform bulk operations between your Amazon FSx file system and its linked data repository. An example of a data repository task is exporting any data and metadata changes, including POSIX metadata, to files, directories, and symbolic links (symlinks) from your FSx file system to its linked data repository. A <code>CreateDataRepositoryTask</code> operation will fail if a data repository is not linked to the FSx file system. To learn more about data repository tasks, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-repository-tasks.html\">Data Repository Tasks</a>. To learn more about linking a data repository to your file system, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/create-fs-linked-data-repo.html\">Linking your file system to an S3 bucket</a>.</p>",
       "idempotent": true
     },
     "CreateFileSystem": {
@@ -208,7 +286,124 @@
           "shape": "MissingFileSystemConfiguration"
         }
       ],
-      "documentation": "<p>Creates a new Amazon FSx file system from an existing Amazon FSx backup.</p> <p>If a file system with the specified client request token exists and the parameters match, this operation returns the description of the file system. If a client request token specified by the file system exists and the parameters don't match, this call returns <code>IncompatibleParameterError</code>. If a file system with the specified client request token doesn't exist, this operation does the following:</p> <ul> <li> <p>Creates a new Amazon FSx file system from backup with an assigned ID, and an initial lifecycle state of <code>CREATING</code>.</p> </li> <li> <p>Returns the description of the file system.</p> </li> </ul> <p>Parameters like Active Directory, default share name, automatic backup, and backup settings default to the parameters of the file system that was backed up, unless overridden. You can explicitly supply other settings.</p> <p>By using the idempotent operation, you can retry a <code>CreateFileSystemFromBackup</code> call without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives success as long as the parameters are the same.</p> <note> <p>The <code>CreateFileSystemFromBackup</code> call returns while the file system's lifecycle state is still <code>CREATING</code>. You can check the file-system creation status by calling the <a>DescribeFileSystems</a> operation, which returns the file system state along with other information.</p> </note>"
+      "documentation": "<p>Creates a new Amazon FSx for Lustre or Amazon FSx for Windows File Server file system from an existing Amazon FSx backup.</p> <p>If a file system with the specified client request token exists and the parameters match, this operation returns the description of the file system. If a client request token specified by the file system exists and the parameters don't match, this call returns <code>IncompatibleParameterError</code>. If a file system with the specified client request token doesn't exist, this operation does the following:</p> <ul> <li> <p>Creates a new Amazon FSx file system from backup with an assigned ID, and an initial lifecycle state of <code>CREATING</code>.</p> </li> <li> <p>Returns the description of the file system.</p> </li> </ul> <p>Parameters like Active Directory, default share name, automatic backup, and backup settings default to the parameters of the file system that was backed up, unless overridden. You can explicitly supply other settings.</p> <p>By using the idempotent operation, you can retry a <code>CreateFileSystemFromBackup</code> call without the risk of creating an extra file system. This approach can be useful when an initial call fails in a way that makes it unclear whether a file system was created. Examples are if a transport level timeout occurred, or your connection was reset. If you use the same client request token and the initial call created a file system, the client receives success as long as the parameters are the same.</p> <note> <p>The <code>CreateFileSystemFromBackup</code> call returns while the file system's lifecycle state is still <code>CREATING</code>. You can check the file-system creation status by calling the <a>DescribeFileSystems</a> operation, which returns the file system state along with other information.</p> </note>"
+    },
+    "CreateStorageVirtualMachine": {
+      "name": "CreateStorageVirtualMachine",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateStorageVirtualMachineRequest"
+      },
+      "output": {
+        "shape": "CreateStorageVirtualMachineResponse"
+      },
+      "errors": [
+        {
+          "shape": "ActiveDirectoryError"
+        },
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "FileSystemNotFound"
+        },
+        {
+          "shape": "IncompatibleParameterError"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "ServiceLimitExceeded"
+        },
+        {
+          "shape": "UnsupportedOperation"
+        }
+      ],
+      "documentation": "<p>Creates a storage virtual machine (SVM) for an Amazon FSx for ONTAP file system.</p>"
+    },
+    "CreateVolume": {
+      "name": "CreateVolume",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateVolumeRequest"
+      },
+      "output": {
+        "shape": "CreateVolumeResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "FileSystemNotFound"
+        },
+        {
+          "shape": "IncompatibleParameterError"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "MissingVolumeConfiguration"
+        },
+        {
+          "shape": "ServiceLimitExceeded"
+        },
+        {
+          "shape": "StorageVirtualMachineNotFound"
+        },
+        {
+          "shape": "UnsupportedOperation"
+        }
+      ],
+      "documentation": "<p>Creates an Amazon FSx for NetApp ONTAP storage volume.</p>"
+    },
+    "CreateVolumeFromBackup": {
+      "name": "CreateVolumeFromBackup",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateVolumeFromBackupRequest"
+      },
+      "output": {
+        "shape": "CreateVolumeFromBackupResponse"
+      },
+      "errors": [
+        {
+          "shape": "BackupNotFound"
+        },
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "FileSystemNotFound"
+        },
+        {
+          "shape": "IncompatibleParameterError"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "MissingVolumeConfiguration"
+        },
+        {
+          "shape": "ServiceLimitExceeded"
+        },
+        {
+          "shape": "StorageVirtualMachineNotFound"
+        }
+      ],
+      "documentation": "<p>Creates a new Amazon FSx for NetApp ONTAP volume from an existing Amazon FSx volume backup.</p>"
     },
     "DeleteBackup": {
       "name": "DeleteBackup",
@@ -240,6 +435,9 @@
         },
         {
           "shape": "InternalServerError"
+        },
+        {
+          "shape": "BackupBeingCopied"
         }
       ],
       "documentation": "<p>Deletes an Amazon FSx backup, deleting its contents. After deletion, the backup no longer exists, and its data is gone.</p> <p>The <code>DeleteBackup</code> call returns instantly. The backup will not show up in later <code>DescribeBackups</code> calls.</p> <important> <p>The data in a deleted backup is also deleted and can't be recovered by any means.</p> </important>",
@@ -274,8 +472,64 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Deletes a file system, deleting its contents. After deletion, the file system no longer exists, and its data is gone. Any existing automatic backups will also be deleted.</p> <p>By default, when you delete an Amazon FSx for Windows File Server file system, a final backup is created upon deletion. This final backup is not subject to the file system's retention policy, and must be manually deleted.</p> <p>The <code>DeleteFileSystem</code> action returns while the file system has the <code>DELETING</code> status. You can check the file system deletion status by calling the <a>DescribeFileSystems</a> action, which returns a list of file systems in your account. If you pass the file system ID for a deleted file system, the <a>DescribeFileSystems</a> returns a <code>FileSystemNotFound</code> error.</p> <note> <p>Deleting an Amazon FSx for Lustre file system will fail with a 400 BadRequest if a data repository task is in a <code>PENDING</code> or <code>EXECUTING</code> state.</p> </note> <important> <p>The data in a deleted file system is also deleted and can't be recovered by any means.</p> </important>",
+      "documentation": "<p>Deletes a file system, deleting its contents. After deletion, the file system no longer exists, and its data is gone. Any existing automatic backups will also be deleted.</p> <p>To delete an Amazon FSx for NetApp ONTAP file system, first delete all the volumes and SVMs on the file system. Then provide a <code>FileSystemId</code> value to the <code>DeleFileSystem</code> operation.</p> <p>By default, when you delete an Amazon FSx for Windows File Server file system, a final backup is created upon deletion. This final backup is not subject to the file system's retention policy, and must be manually deleted.</p> <p>The <code>DeleteFileSystem</code> action returns while the file system has the <code>DELETING</code> status. You can check the file system deletion status by calling the <a>DescribeFileSystems</a> action, which returns a list of file systems in your account. If you pass the file system ID for a deleted file system, the <a>DescribeFileSystems</a> returns a <code>FileSystemNotFound</code> error.</p> <note> <p>Deleting an Amazon FSx for Lustre file system will fail with a 400 BadRequest if a data repository task is in a <code>PENDING</code> or <code>EXECUTING</code> state.</p> </note> <important> <p>The data in a deleted file system is also deleted and can't be recovered by any means.</p> </important>",
       "idempotent": true
+    },
+    "DeleteStorageVirtualMachine": {
+      "name": "DeleteStorageVirtualMachine",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteStorageVirtualMachineRequest"
+      },
+      "output": {
+        "shape": "DeleteStorageVirtualMachineResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "IncompatibleParameterError"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "StorageVirtualMachineNotFound"
+        }
+      ],
+      "documentation": "<p>Deletes an existing Amazon FSx for ONTAP storage virtual machine (SVM). Prior to deleting an SVM, you must delete all non-root volumes in the SVM, otherwise the operation will fail.</p>"
+    },
+    "DeleteVolume": {
+      "name": "DeleteVolume",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteVolumeRequest"
+      },
+      "output": {
+        "shape": "DeleteVolumeResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "IncompatibleParameterError"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "VolumeNotFound"
+        }
+      ],
+      "documentation": "<p>Deletes an Amazon FSx for NetApp ONTAP volume. When deleting a volume, you have the option of creating a final backup. If you create a final backup, you have the option to apply Tags to the backup. You need to have <code>fsx:TagResource</code> permission in order to apply tags to the backup.</p>"
     },
     "DescribeBackups": {
       "name": "DescribeBackups",
@@ -297,13 +551,16 @@
           "shape": "FileSystemNotFound"
         },
         {
+          "shape": "VolumeNotFound"
+        },
+        {
           "shape": "BackupNotFound"
         },
         {
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Returns the description of specific Amazon FSx backups, if a <code>BackupIds</code> value is provided for that backup. Otherwise, it returns all backups owned by your AWS account in the AWS Region of the endpoint that you're calling.</p> <p>When retrieving all backups, you can optionally specify the <code>MaxResults</code> parameter to limit the number of backups in a response. If more backups remain, Amazon FSx returns a <code>NextToken</code> value in the response. In this case, send a later request with the <code>NextToken</code> request parameter set to the value of <code>NextToken</code> from the last response.</p> <p>This action is used in an iterative process to retrieve a list of your backups. <code>DescribeBackups</code> is called first without a <code>NextToken</code>value. Then the action continues to be called with the <code>NextToken</code> parameter set to the value of the last <code>NextToken</code> value until a response has no <code>NextToken</code>.</p> <p>When using this action, keep the following in mind:</p> <ul> <li> <p>The implementation might return fewer than <code>MaxResults</code> file system descriptions while still including a <code>NextToken</code> value.</p> </li> <li> <p>The order of backups returned in the response of one <code>DescribeBackups</code> call and the order of backups returned across the responses of a multi-call iteration is unspecified.</p> </li> </ul>"
+      "documentation": "<p>Returns the description of specific Amazon FSx backups, if a <code>BackupIds</code> value is provided for that backup. Otherwise, it returns all backups owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling.</p> <p>When retrieving all backups, you can optionally specify the <code>MaxResults</code> parameter to limit the number of backups in a response. If more backups remain, Amazon FSx returns a <code>NextToken</code> value in the response. In this case, send a later request with the <code>NextToken</code> request parameter set to the value of <code>NextToken</code> from the last response.</p> <p>This action is used in an iterative process to retrieve a list of your backups. <code>DescribeBackups</code> is called first without a <code>NextToken</code>value. Then the action continues to be called with the <code>NextToken</code> parameter set to the value of the last <code>NextToken</code> value until a response has no <code>NextToken</code>.</p> <p>When using this action, keep the following in mind:</p> <ul> <li> <p>The implementation might return fewer than <code>MaxResults</code> backup descriptions while still including a <code>NextToken</code> value.</p> </li> <li> <p>The order of backups returned in the response of one <code>DescribeBackups</code> call and the order of backups returned across the responses of a multi-call iteration is unspecified.</p> </li> </ul>"
     },
     "DescribeDataRepositoryTasks": {
       "name": "DescribeDataRepositoryTasks",
@@ -331,7 +588,32 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Returns the description of specific Amazon FSx for Lustre data repository tasks, if one or more <code>TaskIds</code> values are provided in the request, or if filters are used in the request. You can use filters to narrow the response to include just tasks for specific file systems, or tasks in a specific lifecycle state. Otherwise, it returns all data repository tasks owned by your AWS account in the AWS Region of the endpoint that you're calling.</p> <p>When retrieving all tasks, you can paginate the response by using the optional <code>MaxResults</code> parameter to limit the number of tasks returned in a response. If more tasks remain, Amazon FSx returns a <code>NextToken</code> value in the response. In this case, send a later request with the <code>NextToken</code> request parameter set to the value of <code>NextToken</code> from the last response.</p>"
+      "documentation": "<p>Returns the description of specific Amazon FSx for Lustre data repository tasks, if one or more <code>TaskIds</code> values are provided in the request, or if filters are used in the request. You can use filters to narrow the response to include just tasks for specific file systems, or tasks in a specific lifecycle state. Otherwise, it returns all data repository tasks owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling.</p> <p>When retrieving all tasks, you can paginate the response by using the optional <code>MaxResults</code> parameter to limit the number of tasks returned in a response. If more tasks remain, Amazon FSx returns a <code>NextToken</code> value in the response. In this case, send a later request with the <code>NextToken</code> request parameter set to the value of <code>NextToken</code> from the last response.</p>"
+    },
+    "DescribeFileSystemAliases": {
+      "name": "DescribeFileSystemAliases",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeFileSystemAliasesRequest"
+      },
+      "output": {
+        "shape": "DescribeFileSystemAliasesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "FileSystemNotFound"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Returns the DNS aliases that are associated with the specified Amazon FSx for Windows File Server file system. A history of all DNS aliases that have been associated with and disassociated from the file system is available in the list of <a>AdministrativeAction</a> provided in the <a>DescribeFileSystems</a> operation response.</p>"
     },
     "DescribeFileSystems": {
       "name": "DescribeFileSystems",
@@ -356,7 +638,82 @@
           "shape": "InternalServerError"
         }
       ],
-      "documentation": "<p>Returns the description of specific Amazon FSx file systems, if a <code>FileSystemIds</code> value is provided for that file system. Otherwise, it returns descriptions of all file systems owned by your AWS account in the AWS Region of the endpoint that you're calling.</p> <p>When retrieving all file system descriptions, you can optionally specify the <code>MaxResults</code> parameter to limit the number of descriptions in a response. If more file system descriptions remain, Amazon FSx returns a <code>NextToken</code> value in the response. In this case, send a later request with the <code>NextToken</code> request parameter set to the value of <code>NextToken</code> from the last response.</p> <p>This action is used in an iterative process to retrieve a list of your file system descriptions. <code>DescribeFileSystems</code> is called first without a <code>NextToken</code>value. Then the action continues to be called with the <code>NextToken</code> parameter set to the value of the last <code>NextToken</code> value until a response has no <code>NextToken</code>.</p> <p>When using this action, keep the following in mind:</p> <ul> <li> <p>The implementation might return fewer than <code>MaxResults</code> file system descriptions while still including a <code>NextToken</code> value.</p> </li> <li> <p>The order of file systems returned in the response of one <code>DescribeFileSystems</code> call and the order of file systems returned across the responses of a multicall iteration is unspecified.</p> </li> </ul>"
+      "documentation": "<p>Returns the description of specific Amazon FSx file systems, if a <code>FileSystemIds</code> value is provided for that file system. Otherwise, it returns descriptions of all file systems owned by your Amazon Web Services account in the Amazon Web Services Region of the endpoint that you're calling.</p> <p>When retrieving all file system descriptions, you can optionally specify the <code>MaxResults</code> parameter to limit the number of descriptions in a response. If more file system descriptions remain, Amazon FSx returns a <code>NextToken</code> value in the response. In this case, send a later request with the <code>NextToken</code> request parameter set to the value of <code>NextToken</code> from the last response.</p> <p>This action is used in an iterative process to retrieve a list of your file system descriptions. <code>DescribeFileSystems</code> is called first without a <code>NextToken</code>value. Then the action continues to be called with the <code>NextToken</code> parameter set to the value of the last <code>NextToken</code> value until a response has no <code>NextToken</code>.</p> <p>When using this action, keep the following in mind:</p> <ul> <li> <p>The implementation might return fewer than <code>MaxResults</code> file system descriptions while still including a <code>NextToken</code> value.</p> </li> <li> <p>The order of file systems returned in the response of one <code>DescribeFileSystems</code> call and the order of file systems returned across the responses of a multicall iteration is unspecified.</p> </li> </ul>"
+    },
+    "DescribeStorageVirtualMachines": {
+      "name": "DescribeStorageVirtualMachines",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeStorageVirtualMachinesRequest"
+      },
+      "output": {
+        "shape": "DescribeStorageVirtualMachinesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "StorageVirtualMachineNotFound"
+        }
+      ],
+      "documentation": "<p>Describes one or more Amazon FSx for NetApp ONTAP storage virtual machines (SVMs).</p>"
+    },
+    "DescribeVolumes": {
+      "name": "DescribeVolumes",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeVolumesRequest"
+      },
+      "output": {
+        "shape": "DescribeVolumesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "VolumeNotFound"
+        }
+      ],
+      "documentation": "<p>Describes one or more Amazon FSx for NetApp ONTAP volumes.</p>"
+    },
+    "DisassociateFileSystemAliases": {
+      "name": "DisassociateFileSystemAliases",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DisassociateFileSystemAliasesRequest"
+      },
+      "output": {
+        "shape": "DisassociateFileSystemAliasesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "FileSystemNotFound"
+        },
+        {
+          "shape": "InternalServerError"
+        }
+      ],
+      "documentation": "<p>Use this action to disassociate, or remove, one or more Domain Name Service (DNS) aliases from an Amazon FSx for Windows File Server file system. If you attempt to disassociate a DNS alias that is not associated with the file system, Amazon FSx responds with a 400 Bad Request. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html\">Working with DNS Aliases</a>.</p> <p>The system generated response showing the DNS aliases that Amazon FSx is attempting to disassociate from the file system. Use the API operation to monitor the status of the aliases Amazon FSx is disassociating with the file system.</p>"
     },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
@@ -488,13 +845,75 @@
           "shape": "ServiceLimitExceeded"
         }
       ],
-      "documentation": "<p>Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request.</p> <p>For Amazon FSx for Windows File Server file systems, you can update the following properties:</p> <ul> <li> <p>AutomaticBackupRetentionDays</p> </li> <li> <p>DailyAutomaticBackupStartTime</p> </li> <li> <p>SelfManagedActiveDirectoryConfiguration</p> </li> <li> <p>StorageCapacity</p> </li> <li> <p>ThroughputCapacity</p> </li> <li> <p>WeeklyMaintenanceStartTime</p> </li> </ul> <p>For Amazon FSx for Lustre file systems, you can update the following properties:</p> <ul> <li> <p>AutoImportPolicy</p> </li> <li> <p>AutomaticBackupRetentionDays</p> </li> <li> <p>DailyAutomaticBackupStartTime</p> </li> <li> <p>WeeklyMaintenanceStartTime</p> </li> </ul>"
+      "documentation": "<p>Use this operation to update the configuration of an existing Amazon FSx file system. You can update multiple properties in a single request.</p> <p>For Amazon FSx for Windows File Server file systems, you can update the following properties:</p> <ul> <li> <p>AuditLogConfiguration</p> </li> <li> <p>AutomaticBackupRetentionDays</p> </li> <li> <p>DailyAutomaticBackupStartTime</p> </li> <li> <p>SelfManagedActiveDirectoryConfiguration</p> </li> <li> <p>StorageCapacity</p> </li> <li> <p>ThroughputCapacity</p> </li> <li> <p>WeeklyMaintenanceStartTime</p> </li> </ul> <p>For Amazon FSx for Lustre file systems, you can update the following properties:</p> <ul> <li> <p>AutoImportPolicy</p> </li> <li> <p>AutomaticBackupRetentionDays</p> </li> <li> <p>DailyAutomaticBackupStartTime</p> </li> <li> <p>DataCompressionType</p> </li> <li> <p>StorageCapacity</p> </li> <li> <p>WeeklyMaintenanceStartTime</p> </li> </ul> <p>For Amazon FSx for NetApp ONTAP file systems, you can update the following properties:</p> <ul> <li> <p>AutomaticBackupRetentionDays</p> </li> <li> <p>DailyAutomaticBackupStartTime</p> </li> <li> <p>FsxAdminPassword</p> </li> <li> <p>WeeklyMaintenanceStartTime</p> </li> </ul>"
+    },
+    "UpdateStorageVirtualMachine": {
+      "name": "UpdateStorageVirtualMachine",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateStorageVirtualMachineRequest"
+      },
+      "output": {
+        "shape": "UpdateStorageVirtualMachineResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "IncompatibleParameterError"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "StorageVirtualMachineNotFound"
+        },
+        {
+          "shape": "UnsupportedOperation"
+        }
+      ],
+      "documentation": "<p>Updates an Amazon FSx for ONTAP storage virtual machine (SVM).</p>"
+    },
+    "UpdateVolume": {
+      "name": "UpdateVolume",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateVolumeRequest"
+      },
+      "output": {
+        "shape": "UpdateVolumeResponse"
+      },
+      "errors": [
+        {
+          "shape": "BadRequest"
+        },
+        {
+          "shape": "IncompatibleParameterError"
+        },
+        {
+          "shape": "InternalServerError"
+        },
+        {
+          "shape": "MissingVolumeConfiguration"
+        },
+        {
+          "shape": "VolumeNotFound"
+        }
+      ],
+      "documentation": "<p>Updates an Amazon FSx for NetApp ONTAP volume's configuration.</p>"
     }
   },
   "shapes": {
     "AWSAccountId": {
       "type": "string",
-      "documentation": "<p>An AWS account ID. This ID is a 12-digit number that you use to construct Amazon Resource Names (ARNs) for resources.</p>",
+      "documentation": "<p>An Amazon Web Services account ID. This ID is a 12-digit number that you use to construct Amazon Resource Names (ARNs) for resources.</p>",
       "max": 12,
       "min": 12,
       "pattern": "^\\d{12}$"
@@ -508,7 +927,10 @@
         },
         "ActiveDirectoryId": {
           "shape": "DirectoryId",
-          "documentation": "<p>The ID of the AWS Managed Microsoft Active Directory instance to which the file system is joined.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services Managed Microsoft Active Directory instance to which the file system is joined.</p>"
+        },
+        "ResourceARN": {
+          "shape": "ResourceARN"
         }
       },
       "documentation": "<p>The Microsoft AD attributes of the Amazon FSx for Windows File Server file system.</p>"
@@ -519,6 +941,13 @@
       "min": 1,
       "pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,255}$"
     },
+    "AdminPassword": {
+      "type": "string",
+      "max": 50,
+      "min": 8,
+      "pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{8,50}$",
+      "sensitive": true
+    },
     "AdministrativeAction": {
       "type": "structure",
       "members": {
@@ -527,7 +956,7 @@
         },
         "ProgressPercent": {
           "shape": "ProgressPercent",
-          "documentation": "<p>Provides the percent complete of a <code>STORAGE_OPTIMIZATION</code> administrative action.</p>"
+          "documentation": "<p>Provides the percent complete of a <code>STORAGE_OPTIMIZATION</code> administrative action. Does not apply to any other administrative action type.</p>"
         },
         "RequestTime": {
           "shape": "RequestTime",
@@ -535,34 +964,39 @@
         },
         "Status": {
           "shape": "Status",
-          "documentation": "<p>Describes the status of the administrative action, as follows:</p> <ul> <li> <p> <code>FAILED</code> - Amazon FSx failed to process the administrative action successfully.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Amazon FSx is processing the administrative action.</p> </li> <li> <p> <code>PENDING</code> - Amazon FSx is waiting to process the administrative action.</p> </li> <li> <p> <code>COMPLETED</code> - Amazon FSx has finished processing the administrative task.</p> </li> <li> <p> <code>UPDATED_OPTIMIZING</code> - For a storage capacity increase update, Amazon FSx has updated the file system with the new storage capacity, and is now performing the storage optimization process. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing Storage Capacity</a>.</p> </li> </ul>"
+          "documentation": "<p>Describes the status of the administrative action, as follows:</p> <ul> <li> <p> <code>FAILED</code> - Amazon FSx failed to process the administrative action successfully.</p> </li> <li> <p> <code>IN_PROGRESS</code> - Amazon FSx is processing the administrative action.</p> </li> <li> <p> <code>PENDING</code> - Amazon FSx is waiting to process the administrative action.</p> </li> <li> <p> <code>COMPLETED</code> - Amazon FSx has finished processing the administrative task.</p> </li> <li> <p> <code>UPDATED_OPTIMIZING</code> - For a storage capacity increase update, Amazon FSx has updated the file system with the new storage capacity, and is now performing the storage optimization process. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing storage capacity</a> in the <i>Amazon FSx for Windows File Server User Guide</i> and <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html\">Managing storage and throughput capacity</a> in the <i>Amazon FSx for Lustre User Guide</i>.</p> </li> </ul>"
         },
         "TargetFileSystemValues": {
           "shape": "FileSystem",
-          "documentation": "<p>Describes the target <code>StorageCapacity</code> or <code>ThroughputCapacity</code> value provided in the <code>UpdateFileSystem</code> operation. Returned for <code>FILE_SYSTEM_UPDATE</code> administrative actions. </p>"
+          "documentation": "<p>Describes the target value for the administration action, provided in the <code>UpdateFileSystem</code> operation. Returned for <code>FILE_SYSTEM_UPDATE</code> administrative actions. </p>"
         },
         "FailureDetails": {
           "shape": "AdministrativeActionFailureDetails"
+        },
+        "TargetVolumeValues": {
+          "shape": "Volume"
         }
       },
-      "documentation": "<p>Describes a specific Amazon FSx Administrative Action for the current Windows file system.</p>"
+      "documentation": "<p>Describes a specific Amazon FSx administrative action for the current Windows or Lustre file system.</p>"
     },
     "AdministrativeActionFailureDetails": {
       "type": "structure",
       "members": {
         "Message": {
           "shape": "ErrorMessage",
-          "documentation": "<p>Error message providing details about the failure.</p>"
+          "documentation": "<p>Error message providing details about the failed administrative action.</p>"
         }
       },
       "documentation": "<p>Provides information about a failed administrative action.</p>"
     },
     "AdministrativeActionType": {
       "type": "string",
-      "documentation": "<p>Describes the type of administrative action, as follows:</p> <ul> <li> <p> <code>FILE_SYSTEM_UPDATE</code> - A file system update administrative action initiated by the user from the Amazon FSx console, API (UpdateFileSystem), or CLI (update-file-system). A</p> </li> <li> <p> <code>STORAGE_OPTIMIZATION</code> - Once the <code>FILE_SYSTEM_UPDATE</code> task to increase a file system's storage capacity completes successfully, a <code>STORAGE_OPTIMIZATION</code> task starts. Storage optimization is the process of migrating the file system data to the new, larger disks. You can track the storage migration progress using the <code>ProgressPercent</code> property. When <code>STORAGE_OPTIMIZATION</code> completes successfully, the parent <code>FILE_SYSTEM_UPDATE</code> action status changes to <code>COMPLETED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing Storage Capacity</a>. </p> </li> </ul>",
+      "documentation": "<p>Describes the type of administrative action, as follows:</p> <ul> <li> <p> <code>FILE_SYSTEM_UPDATE</code> - A file system update administrative action initiated by the user from the Amazon FSx console, API (UpdateFileSystem), or CLI (update-file-system).</p> </li> <li> <p> <code>STORAGE_OPTIMIZATION</code> - Once the <code>FILE_SYSTEM_UPDATE</code> task to increase a file system's storage capacity completes successfully, a <code>STORAGE_OPTIMIZATION</code> task starts. </p> <ul> <li> <p>For Windows, storage optimization is the process of migrating the file system data to the new, larger disks.</p> </li> <li> <p>For Lustre, storage optimization consists of rebalancing the data across the existing and newly added file servers.</p> </li> </ul> <p>You can track the storage optimization progress using the <code>ProgressPercent</code> property. When <code>STORAGE_OPTIMIZATION</code> completes successfully, the parent <code>FILE_SYSTEM_UPDATE</code> action status changes to <code>COMPLETED</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing storage capacity</a> in the <i>Amazon FSx for Windows File Server User Guide</i> and <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html\">Managing storage and throughput capacity</a> in the <i>Amazon FSx for Lustre User Guide</i>. </p> </li> <li> <p> <code>FILE_SYSTEM_ALIAS_ASSOCIATION</code> - A file system update to associate a new DNS alias with the file system. For more information, see .</p> </li> <li> <p> <code>FILE_SYSTEM_ALIAS_DISASSOCIATION</code> - A file system update to disassociate a DNS alias from the file system. For more information, see .</p> </li> </ul>",
       "enum": [
         "FILE_SYSTEM_UPDATE",
-        "STORAGE_OPTIMIZATION"
+        "STORAGE_OPTIMIZATION",
+        "FILE_SYSTEM_ALIAS_ASSOCIATION",
+        "FILE_SYSTEM_ALIAS_DISASSOCIATION"
       ]
     },
     "AdministrativeActions": {
@@ -572,11 +1006,88 @@
       },
       "max": 50
     },
+    "Alias": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "AlternateDNSName",
+          "documentation": "<p>The name of the DNS alias. The alias name has to meet the following requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters, the underscore (_), and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>"
+        },
+        "Lifecycle": {
+          "shape": "AliasLifecycle",
+          "documentation": "<p>Describes the state of the DNS alias.</p> <ul> <li> <p>AVAILABLE - The DNS alias is associated with an Amazon FSx file system.</p> </li> <li> <p>CREATING - Amazon FSx is creating the DNS alias and associating it with the file system.</p> </li> <li> <p>CREATE_FAILED - Amazon FSx was unable to associate the DNS alias with the file system.</p> </li> <li> <p>DELETING - Amazon FSx is disassociating the DNS alias from the file system and deleting it.</p> </li> <li> <p>DELETE_FAILED - Amazon FSx was unable to disassociate the DNS alias from the file system.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>A DNS alias that is associated with the file system. You can use a DNS alias to access a file system using user-defined DNS names, in addition to the default DNS name that Amazon FSx assigns to the file system. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html\">DNS aliases</a> in the <i>FSx for Windows File Server User Guide</i>.</p>"
+    },
+    "AliasLifecycle": {
+      "type": "string",
+      "enum": [
+        "AVAILABLE",
+        "CREATING",
+        "DELETING",
+        "CREATE_FAILED",
+        "DELETE_FAILED"
+      ]
+    },
+    "Aliases": {
+      "type": "list",
+      "member": {
+        "shape": "Alias"
+      },
+      "documentation": "<p>An array of one or more DNS aliases that are currently associated with the Amazon FSx file system. Aliases allow you to use existing DNS names to access the data in your Amazon FSx file system. You can associate up to 50 aliases with a file system at any time. You can associate additional DNS aliases after you create the file system using the AssociateFileSystemAliases operation. You can remove DNS aliases from the file system after it is created using the DisassociateFileSystemAliases operation. You only need to specify the alias name in the request payload. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html\">DNS aliases</a>.</p>",
+      "max": 50
+    },
+    "AlternateDNSName": {
+      "type": "string",
+      "max": 253,
+      "min": 4,
+      "pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{4,253}$"
+    },
+    "AlternateDNSNames": {
+      "type": "list",
+      "member": {
+        "shape": "AlternateDNSName"
+      },
+      "max": 50
+    },
     "ArchivePath": {
       "type": "string",
-      "max": 900,
+      "max": 4357,
       "min": 3,
       "pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{3,4357}$"
+    },
+    "AssociateFileSystemAliasesRequest": {
+      "type": "structure",
+      "required": [
+        "FileSystemId",
+        "Aliases"
+      ],
+      "members": {
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        },
+        "FileSystemId": {
+          "shape": "FileSystemId",
+          "documentation": "<p>Specifies the file system with which you want to associate one or more DNS aliases.</p>"
+        },
+        "Aliases": {
+          "shape": "AlternateDNSNames",
+          "documentation": "<p>An array of one or more DNS alias names to associate with the file system. The alias name has to comply with the following formatting requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <i> <code>hostname.domain</code> </i>, for example, <code>accounting.corp.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>"
+        }
+      },
+      "documentation": "<p>The request object specifying one or more DNS alias names to associate with an Amazon FSx for Windows File Server file system.</p>"
+    },
+    "AssociateFileSystemAliasesResponse": {
+      "type": "structure",
+      "members": {
+        "Aliases": {
+          "shape": "Aliases",
+          "documentation": "<p>An array of the DNS aliases that Amazon FSx is associating with the file system.</p>"
+        }
+      },
+      "documentation": "<p>The system generated response showing the DNS aliases that Amazon FSx is attempting to associate with the file system. Use the API operation to monitor the status of the aliases Amazon FSx is associating with the file system. It can take up to 2.5 minutes for the alias status to change from <code>CREATING</code> to <code>AVAILABLE</code>. </p>"
     },
     "AutoImportPolicyType": {
       "type": "string",
@@ -608,7 +1119,7 @@
         },
         "Lifecycle": {
           "shape": "BackupLifecycle",
-          "documentation": "<p>The lifecycle status of the backup.</p> <ul> <li> <p> <code>AVAILABLE</code> - The backup is fully available.</p> </li> <li> <p> <code>CREATING</code> - FSx is creating the backup.</p> </li> <li> <p> <code>TRANSFERRING</code> - For Lustre file systems only; FSx is transferring the backup to S3.</p> </li> <li> <p> <code>DELETED</code> - The backup was deleted is no longer available.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx could not complete the backup.</p> </li> </ul>"
+          "documentation": "<p>The lifecycle status of the backup.</p> <ul> <li> <p> <code>AVAILABLE</code> - The backup is fully available.</p> </li> <li> <p> <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the backup.</p> </li> <li> <p> <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is transferring the backup to S3.</p> </li> <li> <p> <code>COPYING</code> - Amazon FSx is copying the backup.</p> </li> <li> <p> <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx could not complete the backup.</p> </li> </ul>"
         },
         "FailureDetails": {
           "shape": "BackupFailureDetails",
@@ -627,7 +1138,7 @@
         },
         "KmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the backup of the Amazon FSx file system's data at rest. </p>"
+          "documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt the backup of the Amazon FSx file system's data at rest. </p>"
         },
         "ResourceARN": {
           "shape": "ResourceARN",
@@ -644,9 +1155,26 @@
         "DirectoryInformation": {
           "shape": "ActiveDirectoryBackupAttributes",
           "documentation": "<p>The configuration of the self-managed Microsoft Active Directory (AD) to which the Windows File Server instance is joined.</p>"
+        },
+        "OwnerId": {
+          "shape": "AWSAccountId"
+        },
+        "SourceBackupId": {
+          "shape": "BackupId"
+        },
+        "SourceBackupRegion": {
+          "shape": "Region",
+          "documentation": "<p>The source Region of the backup. Specifies the Region from where this backup is copied.</p>"
+        },
+        "ResourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>Specifies the resource type that is backed up.</p>"
+        },
+        "Volume": {
+          "shape": "Volume"
         }
       },
-      "documentation": "<p>A backup of an Amazon FSx for file system.</p>"
+      "documentation": "<p>A backup of an Amazon FSx for Windows File Server or Amazon FSx for Lustre file system, or of an Amazon FSx for NetApp ONTAP volume.</p>"
     },
     "BackupFailureDetails": {
       "type": "structure",
@@ -660,7 +1188,7 @@
     },
     "BackupId": {
       "type": "string",
-      "documentation": "<p>The ID of the backup. Specifies the backup to use if you're creating a file system from an existing backup.</p>",
+      "documentation": "<p>The ID of the source backup. Specifies the backup you are copying.</p>",
       "max": 128,
       "min": 12,
       "pattern": "^(backup-[0-9a-f]{8,})$"
@@ -675,13 +1203,15 @@
     },
     "BackupLifecycle": {
       "type": "string",
-      "documentation": "<p>The lifecycle status of the backup.</p> <ul> <li> <p> <code>AVAILABLE</code> - The backup is fully available.</p> </li> <li> <p> <code>CREATING</code> - FSx is creating the new user-intiated backup</p> </li> <li> <p> <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; FSx is backing up the file system.</p> </li> <li> <p> <code>DELETED</code> - The backup was deleted is no longer available.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx could not complete the backup.</p> </li> </ul>",
+      "documentation": "<p>The lifecycle status of the backup.</p> <ul> <li> <p> <code>AVAILABLE</code> - The backup is fully available.</p> </li> <li> <p> <code>PENDING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx has not started creating the backup.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the new user-intiated backup</p> </li> <li> <p> <code>TRANSFERRING</code> - For user-initiated backups on Lustre file systems only; Amazon FSx is backing up the file system.</p> </li> <li> <p> <code>COPYING</code> - Amazon FSx is copying the backup.</p> </li> <li> <p> <code>DELETED</code> - Amazon FSx deleted the backup and it is no longer available.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx could not complete the backup.</p> </li> </ul>",
       "enum": [
         "AVAILABLE",
         "CREATING",
         "TRANSFERRING",
         "DELETED",
-        "FAILED"
+        "FAILED",
+        "PENDING",
+        "COPYING"
       ]
     },
     "BackupType": {
@@ -689,7 +1219,8 @@
       "documentation": "<p>The type of the backup.</p>",
       "enum": [
         "AUTOMATIC",
-        "USER_INITIATED"
+        "USER_INITIATED",
+        "AWS_BACKUP"
       ]
     },
     "Backups": {
@@ -728,7 +1259,7 @@
     },
     "ClientRequestToken": {
       "type": "string",
-      "documentation": "<p>(Optional) An idempotency token for resource creation, in a string of up to 64 ASCII characters. This token is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.</p>",
+      "documentation": "<p>(Optional) An idempotency token for resource creation, in a string of up to 64 ASCII characters. This token is automatically filled on your behalf when you use the Command Line Interface (CLI) or an Amazon Web Services SDK.</p>",
       "max": 63,
       "min": 1,
       "pattern": "[A-za-z0-9_.-]{0,63}$"
@@ -758,11 +1289,51 @@
       },
       "documentation": "<p>Provides a report detailing the data repository task results of the files processed that match the criteria specified in the report <code>Scope</code> parameter. FSx delivers the report to the file system's linked data repository in Amazon S3, using the path specified in the report <code>Path</code> parameter. You can specify whether or not a report gets generated for a task using the <code>Enabled</code> parameter.</p>"
     },
-    "CreateBackupRequest": {
+    "CoolingPeriod": {
+      "type": "integer",
+      "max": 183,
+      "min": 2
+    },
+    "CopyBackupRequest": {
       "type": "structure",
       "required": [
-        "FileSystemId"
+        "SourceBackupId"
       ],
+      "members": {
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        },
+        "SourceBackupId": {
+          "shape": "SourceBackupId",
+          "documentation": "<p>The ID of the source backup. Specifies the ID of the backup that is being copied.</p>"
+        },
+        "SourceRegion": {
+          "shape": "Region",
+          "documentation": "<p>The source Amazon Web Services Region of the backup. Specifies the Amazon Web Services Region from which the backup is being copied. The source and destination Regions must be in the same Amazon Web Services partition. If you don't specify a Region, it defaults to the Region where the request is sent from (in-Region copy).</p>"
+        },
+        "KmsKeyId": {
+          "shape": "KmsKeyId"
+        },
+        "CopyTags": {
+          "shape": "Flag",
+          "documentation": "<p>A boolean flag indicating whether tags from the source backup should be copied to the backup copy. This value defaults to false.</p> <p>If you set <code>CopyTags</code> to true and the source backup has existing tags, you can use the <code>Tags</code> parameter to create new tags, provided that the sum of the source backup tags and the new tags doesn't exceed 50. Both sets of tags are merged. If there are tag conflicts (for example, two tags with the same key but different values), the tags created with the <code>Tags</code> parameter take precedence.</p>"
+        },
+        "Tags": {
+          "shape": "Tags"
+        }
+      }
+    },
+    "CopyBackupResponse": {
+      "type": "structure",
+      "members": {
+        "Backup": {
+          "shape": "Backup"
+        }
+      }
+    },
+    "CreateBackupRequest": {
+      "type": "structure",
       "members": {
         "FileSystemId": {
           "shape": "FileSystemId",
@@ -770,12 +1341,16 @@
         },
         "ClientRequestToken": {
           "shape": "ClientRequestToken",
-          "documentation": "<p>(Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.</p>",
+          "documentation": "<p>(Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the Command Line Interface (CLI) or an Amazon Web Services SDK.</p>",
           "idempotencyToken": true
         },
         "Tags": {
           "shape": "Tags",
           "documentation": "<p>(Optional) The tags to apply to the backup at backup creation. The key value of the <code>Name</code> tag appears in the console as the backup name. If you have set <code>CopyTagsToBackups</code> to true, and you specify one or more tags using the <code>CreateBackup</code> action, no existing file system tags are copied from the file system to the backup.</p>"
+        },
+        "VolumeId": {
+          "shape": "VolumeId",
+          "documentation": "<p>The ID of he FSx for NetApp ONTAP volume to back up.</p>"
         }
       },
       "documentation": "<p>The request object for the <code>CreateBackup</code> operation.</p>"
@@ -843,7 +1418,7 @@
         },
         "ClientRequestToken": {
           "shape": "ClientRequestToken",
-          "documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.</p>",
+          "documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the Command Line Interface (CLI) or an Amazon Web Services SDK.</p>",
           "idempotencyToken": true
         },
         "SubnetIds": {
@@ -868,6 +1443,9 @@
         "StorageType": {
           "shape": "StorageType",
           "documentation": "<p>Sets the storage type for the Windows file system you're creating from a backup. Valid values are <code>SSD</code> and <code>HDD</code>.</p> <ul> <li> <p>Set to <code>SSD</code> to use solid state drive storage. Supported on all Windows deployment types.</p> </li> <li> <p>Set to <code>HDD</code> to use hard disk drive storage. Supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types. </p> </li> </ul> <p> Default value is <code>SSD</code>. </p> <note> <p>HDD and SSD storage types have different minimum storage capacity requirements. A restored file system's storage capacity is tied to the file system that was backed up. You can create a file system that uses HDD storage from a backup of a file system that used SSD storage only if the original SSD file system had a storage capacity of at least 2000 GiB. </p> </note>"
+        },
+        "KmsKeyId": {
+          "shape": "KmsKeyId"
         }
       },
       "documentation": "<p>The request object for the <code>CreateFileSystemFromBackup</code> operation.</p>"
@@ -903,7 +1481,7 @@
         },
         "DeploymentType": {
           "shape": "LustreDeploymentType",
-          "documentation": "<p> Choose <code>SCRATCH_1</code> and <code>SCRATCH_2</code> deployment types when you need temporary storage and shorter-term processing of data. The <code>SCRATCH_2</code> deployment type provides in-transit encryption of data and higher burst throughput capacity than <code>SCRATCH_1</code>.</p> <p>Choose <code>PERSISTENT_1</code> deployment type for longer-term storage and workloads and encryption of data in transit. To learn more about deployment types, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html\"> FSx for Lustre Deployment Options</a>.</p> <p>Encryption of data in-transit is automatically enabled when you access a <code>SCRATCH_2</code> or <code>PERSISTENT_1</code> file system from Amazon EC2 instances that <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data- protection.html\">support this feature</a>. (Default = <code>SCRATCH_1</code>) </p> <p>Encryption of data in-transit for <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> deployment types is supported when accessed from supported instance types in supported AWS Regions. To learn more, <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html\">Encrypting Data in Transit</a>.</p>"
+          "documentation": "<p> Choose <code>SCRATCH_1</code> and <code>SCRATCH_2</code> deployment types when you need temporary storage and shorter-term processing of data. The <code>SCRATCH_2</code> deployment type provides in-transit encryption of data and higher burst throughput capacity than <code>SCRATCH_1</code>.</p> <p>Choose <code>PERSISTENT_1</code> deployment type for longer-term storage and workloads and encryption of data in transit. To learn more about deployment types, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/lustre-deployment-types.html\"> FSx for Lustre Deployment Options</a>.</p> <p>Encryption of data in-transit is automatically enabled when you access a <code>SCRATCH_2</code> or <code>PERSISTENT_1</code> file system from Amazon EC2 instances that <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data- protection.html\">support this feature</a>. (Default = <code>SCRATCH_1</code>) </p> <p>Encryption of data in-transit for <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> deployment types is supported when accessed from supported instance types in supported Amazon Web Services Regions. To learn more, <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html\">Encrypting Data in Transit</a>.</p>"
         },
         "AutoImportPolicy": {
           "shape": "AutoImportPolicyType",
@@ -926,9 +1504,58 @@
         "DriveCacheType": {
           "shape": "DriveCacheType",
           "documentation": "<p>The type of drive cache used by PERSISTENT_1 file systems that are provisioned with HDD storage devices. This parameter is required when storage type is HDD. Set to <code>READ</code>, improve the performance for frequently accessed files and allows 20% of the total storage capacity of the file system to be cached. </p> <p>This parameter is required when <code>StorageType</code> is set to HDD.</p>"
+        },
+        "DataCompressionType": {
+          "shape": "DataCompressionType",
+          "documentation": "<p>Sets the data compression configuration for the file system. <code>DataCompressionType</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - (Default) Data compression is turned off when the file system is created.</p> </li> <li> <p> <code>LZ4</code> - Data compression is turned on with the LZ4 algorithm.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html\">Lustre data compression</a>.</p>"
         }
       },
       "documentation": "<p>The Lustre configuration for the file system being created. </p>"
+    },
+    "CreateFileSystemOntapConfiguration": {
+      "type": "structure",
+      "required": [
+        "DeploymentType",
+        "ThroughputCapacity"
+      ],
+      "members": {
+        "AutomaticBackupRetentionDays": {
+          "shape": "AutomaticBackupRetentionDays"
+        },
+        "DailyAutomaticBackupStartTime": {
+          "shape": "DailyTime"
+        },
+        "DeploymentType": {
+          "shape": "OntapDeploymentType",
+          "documentation": "<p>Specifies the ONTAP file system deployment type to use in creating the file system.</p>"
+        },
+        "EndpointIpAddressRange": {
+          "shape": "IpAddressRange",
+          "documentation": "<p>Specifies the IP address range in which the endpoints to access your file system will be created. By default, Amazon FSx selects an unused IP address range for you from the 198.19.* range.</p>"
+        },
+        "FsxAdminPassword": {
+          "shape": "AdminPassword",
+          "documentation": "<p>The ONTAP administrative password for the <code>fsxadmin</code> user that you can use to administer your file system using the ONTAP CLI and REST API.</p>"
+        },
+        "DiskIopsConfiguration": {
+          "shape": "DiskIopsConfiguration",
+          "documentation": "<p>The SSD IOPS configuration for the Amazon FSx for NetApp ONTAP file system.</p>"
+        },
+        "PreferredSubnetId": {
+          "shape": "SubnetId"
+        },
+        "RouteTableIds": {
+          "shape": "RouteTableIds",
+          "documentation": "<p>Specifies the VPC route tables in which your file system's endpoints will be created. You should specify all VPC route tables associated with the subnets in which your clients are located. By default, Amazon FSx selects your VPC's default route table.</p>"
+        },
+        "ThroughputCapacity": {
+          "shape": "MegabytesPerSecond"
+        },
+        "WeeklyMaintenanceStartTime": {
+          "shape": "WeeklyTime"
+        }
+      },
+      "documentation": "<p>The ONTAP configuration properties of the FSx for NetApp ONTAP file system that you are creating.</p>"
     },
     "CreateFileSystemRequest": {
       "type": "structure",
@@ -940,24 +1567,24 @@
       "members": {
         "ClientRequestToken": {
           "shape": "ClientRequestToken",
-          "documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.</p>",
+          "documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent creation. This string is automatically filled on your behalf when you use the Command Line Interface (CLI) or an Amazon Web Services SDK.</p>",
           "idempotencyToken": true
         },
         "FileSystemType": {
           "shape": "FileSystemType",
-          "documentation": "<p>The type of Amazon FSx file system to create, either <code>WINDOWS</code> or <code>LUSTRE</code>.</p>"
+          "documentation": "<p>The type of Amazon FSx file system to create. Valid values are <code>WINDOWS</code>, <code>LUSTRE</code>, and <code>ONTAP</code>.</p>"
         },
         "StorageCapacity": {
           "shape": "StorageCapacity",
-          "documentation": "<p>Sets the storage capacity of the file system that you're creating.</p> <p>For Lustre file systems:</p> <ul> <li> <p>For <code>SCRATCH_2</code> and <code>PERSISTENT_1 SSD</code> deployment types, valid values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.</p> </li> <li> <p>For <code>PERSISTENT HDD</code> file systems, valid values are increments of 6000 GiB for 12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file systems.</p> </li> <li> <p>For <code>SCRATCH_1</code> deployment type, valid values are 1200 GiB, 2400 GiB, and increments of 3600 GiB.</p> </li> </ul> <p>For Windows file systems:</p> <ul> <li> <p>If <code>StorageType=SSD</code>, valid values are 32 GiB - 65,536 GiB (64 TiB).</p> </li> <li> <p>If <code>StorageType=HDD</code>, valid values are 2000 GiB - 65,536 GiB (64 TiB).</p> </li> </ul>"
+          "documentation": "<p>Sets the storage capacity of the file system that you're creating.</p> <p>For Lustre file systems:</p> <ul> <li> <p>For <code>SCRATCH_2</code> and <code>PERSISTENT_1 SSD</code> deployment types, valid values are 1200 GiB, 2400 GiB, and increments of 2400 GiB.</p> </li> <li> <p>For <code>PERSISTENT HDD</code> file systems, valid values are increments of 6000 GiB for 12 MB/s/TiB file systems and increments of 1800 GiB for 40 MB/s/TiB file systems.</p> </li> <li> <p>For <code>SCRATCH_1</code> deployment type, valid values are 1200 GiB, 2400 GiB, and increments of 3600 GiB.</p> </li> </ul> <p>For Windows file systems:</p> <ul> <li> <p>If <code>StorageType=SSD</code>, valid values are 32 GiB - 65,536 GiB (64 TiB).</p> </li> <li> <p>If <code>StorageType=HDD</code>, valid values are 2000 GiB - 65,536 GiB (64 TiB).</p> </li> </ul> <p>For ONTAP file systems:</p> <ul> <li> <p>Valid values are 1024 GiB - 196,608 GiB (192 TiB).</p> </li> </ul>"
         },
         "StorageType": {
           "shape": "StorageType",
-          "documentation": "<p>Sets the storage type for the file system you're creating. Valid values are <code>SSD</code> and <code>HDD</code>.</p> <ul> <li> <p>Set to <code>SSD</code> to use solid state drive storage. SSD is supported on all Windows and Lustre deployment types.</p> </li> <li> <p>Set to <code>HDD</code> to use hard disk drive storage. HDD is supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types, and on <code>PERSISTENT</code> Lustre file system deployment types. </p> </li> </ul> <p> Default value is <code>SSD</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options\"> Storage Type Options</a> in the <i>Amazon FSx for Windows User Guide</i> and <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html#storage-options\">Multiple Storage Options</a> in the <i>Amazon FSx for Lustre User Guide</i>. </p>"
+          "documentation": "<p>Sets the storage type for the file system you're creating. Valid values are <code>SSD</code> and <code>HDD</code>.</p> <ul> <li> <p>Set to <code>SSD</code> to use solid state drive storage. SSD is supported on all Windows, Lustre, and ONTAP deployment types.</p> </li> <li> <p>Set to <code>HDD</code> to use hard disk drive storage. HDD is supported on <code>SINGLE_AZ_2</code> and <code>MULTI_AZ_1</code> Windows file system deployment types, and on <code>PERSISTENT</code> Lustre file system deployment types. </p> </li> </ul> <p> Default value is <code>SSD</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/optimize-fsx-costs.html#storage-type-options\"> Storage Type Options</a> in the <i>Amazon FSx for Windows User Guide</i> and <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/what-is.html#storage-options\">Multiple Storage Options</a> in the <i>Amazon FSx for Lustre User Guide</i>. </p>"
         },
         "SubnetIds": {
           "shape": "SubnetIds",
-          "documentation": "<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> property.</p> <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet's Availability Zone.</p>"
+          "documentation": "<p>Specifies the IDs of the subnets that the file system will be accessible from. For Windows and ONTAP <code>MULTI_AZ_1</code> file system deployment types, provide exactly two subnet IDs, one for the preferred file server and one for the standby file server. You specify one of these subnets as the preferred subnet using the <code>WindowsConfiguration &gt; PreferredSubnetID</code> or <code>OntapConfiguration &gt; PreferredSubnetID</code> properties. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html\"> Availability and durability: Single-AZ and Multi-AZ file systems</a> in the <i>Amazon FSx for Windows User Guide</i> and <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html\"> Availability and durability</a> in the <i>Amazon FSx for ONTAP User Guide</i>.</p> <p>For Windows <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> file system deployment types and Lustre file systems, provide exactly one subnet ID. The file server is launched in that subnet's Availability Zone.</p>"
         },
         "SecurityGroupIds": {
           "shape": "SecurityGroupIds",
@@ -976,6 +1603,9 @@
         },
         "LustreConfiguration": {
           "shape": "CreateFileSystemLustreConfiguration"
+        },
+        "OntapConfiguration": {
+          "shape": "CreateFileSystemOntapConfiguration"
         }
       },
       "documentation": "<p>The request object used to create a new Amazon FSx file system.</p>"
@@ -998,18 +1628,18 @@
       "members": {
         "ActiveDirectoryId": {
           "shape": "DirectoryId",
-          "documentation": "<p>The ID for an existing AWS Managed Microsoft Active Directory (AD) instance that the file system should join when it's created.</p>"
+          "documentation": "<p>The ID for an existing Amazon Web Services Managed Microsoft Active Directory (AD) instance that the file system should join when it's created.</p>"
         },
         "SelfManagedActiveDirectoryConfiguration": {
           "shape": "SelfManagedActiveDirectoryConfiguration"
         },
         "DeploymentType": {
           "shape": "WindowsDeploymentType",
-          "documentation": "<p>Specifies the file system deployment type, valid values are the following:</p> <ul> <li> <p> <code>MULTI_AZ_1</code> - Deploys a high availability file system that is configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability. You can only deploy a Multi-AZ file system in AWS Regions that have a minimum of three Availability Zones. Also supports HDD storage type</p> </li> <li> <p> <code>SINGLE_AZ_1</code> - (Default) Choose to deploy a file system that is configured for single AZ redundancy.</p> </li> <li> <p> <code>SINGLE_AZ_2</code> - The latest generation Single AZ file system. Specifies a file system that is configured for single AZ redundancy and supports HDD storage type.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html\"> Availability and Durability: Single-AZ and Multi-AZ File Systems</a>.</p>"
+          "documentation": "<p>Specifies the file system deployment type, valid values are the following:</p> <ul> <li> <p> <code>MULTI_AZ_1</code> - Deploys a high availability file system that is configured for Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability. You can only deploy a Multi-AZ file system in Amazon Web Services Regions that have a minimum of three Availability Zones. Also supports HDD storage type</p> </li> <li> <p> <code>SINGLE_AZ_1</code> - (Default) Choose to deploy a file system that is configured for single AZ redundancy.</p> </li> <li> <p> <code>SINGLE_AZ_2</code> - The latest generation Single AZ file system. Specifies a file system that is configured for single AZ redundancy and supports HDD storage type.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html\"> Availability and Durability: Single-AZ and Multi-AZ File Systems</a>.</p>"
         },
         "PreferredSubnetId": {
           "shape": "SubnetId",
-          "documentation": "<p>Required when <code>DeploymentType</code> is set to <code>MULTI_AZ_1</code>. This specifies the subnet in which you want the preferred file server to be located. For in-AWS applications, we recommend that you launch your clients in the same Availability Zone (AZ) as your preferred file server to reduce cross-AZ data transfer costs and minimize latency. </p>"
+          "documentation": "<p>Required when <code>DeploymentType</code> is set to <code>MULTI_AZ_1</code>. This specifies the subnet in which you want the preferred file server to be located. For in-Amazon Web Services applications, we recommend that you launch your clients in the same Availability Zone (AZ) as your preferred file server to reduce cross-AZ data transfer costs and minimize latency. </p>"
         },
         "ThroughputCapacity": {
           "shape": "MegabytesPerSecond",
@@ -1030,9 +1660,185 @@
         "CopyTagsToBackups": {
           "shape": "Flag",
           "documentation": "<p>A boolean flag indicating whether tags for the file system should be copied to backups. This value defaults to false. If it's set to true, all tags for the file system are copied to all automatic and user-initiated backups where the user doesn't specify tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value.</p>"
+        },
+        "Aliases": {
+          "shape": "AlternateDNSNames",
+          "documentation": "<p>An array of one or more DNS alias names that you want to associate with the Amazon FSx file system. Aliases allow you to use existing DNS names to access the data in your Amazon FSx file system. You can associate up to 50 aliases with a file system at any time. You can associate additional DNS aliases after you create the file system using the AssociateFileSystemAliases operation. You can remove DNS aliases from the file system after it is created using the DisassociateFileSystemAliases operation. You only need to specify the alias name in the request payload.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html\">Working with DNS Aliases</a> and <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html\">Walkthrough 5: Using DNS aliases to access your file system</a>, including additional steps you must take to be able to access your file system using a DNS alias.</p> <p>An alias name has to meet the following requirements:</p> <ul> <li> <p>Formatted as a fully-qualified domain name (FQDN), <code>hostname.domain</code>, for example, <code>accounting.example.com</code>.</p> </li> <li> <p>Can contain alphanumeric characters, the underscore (_), and the hyphen (-).</p> </li> <li> <p>Cannot start or end with a hyphen.</p> </li> <li> <p>Can start with a numeric.</p> </li> </ul> <p>For DNS alias names, Amazon FSx stores alphabetic characters as lowercase letters (a-z), regardless of how you specify them: as uppercase letters, lowercase letters, or the corresponding letters in escape codes.</p>"
+        },
+        "AuditLogConfiguration": {
+          "shape": "WindowsAuditLogCreateConfiguration",
+          "documentation": "<p>The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system.</p>"
         }
       },
       "documentation": "<p>The configuration object for the Microsoft Windows file system used in <code>CreateFileSystem</code> and <code>CreateFileSystemFromBackup</code> operations.</p>"
+    },
+    "CreateOntapVolumeConfiguration": {
+      "type": "structure",
+      "required": [
+        "JunctionPath",
+        "SizeInMegabytes",
+        "StorageEfficiencyEnabled",
+        "StorageVirtualMachineId"
+      ],
+      "members": {
+        "JunctionPath": {
+          "shape": "JunctionPath",
+          "documentation": "<p>Specifies the location in the SVM's namespace where the volume is mounted. The <code>JunctionPath</code> must have a leading forward slash, such as <code>/vol3</code>.</p>"
+        },
+        "SecurityStyle": {
+          "shape": "SecurityStyle",
+          "documentation": "<p>The security style for the volume. Specify one of the following values:</p> <ul> <li> <p> <code>UNIX</code> if the file system is managed by a UNIX administrator, the majority of users are NFS clients, and an application accessing the data uses a UNIX user as the service account. <code>UNIX</code> is the default.</p> </li> <li> <p> <code>NTFS</code> if the file system is managed by a Windows administrator, the majority of users are SMB clients, and an application accessing the data uses a Windows user as the service account.</p> </li> <li> <p> <code>MIXED</code> if the file system is managed by both UNIX and Windows administrators and users consist of both NFS and SMB clients.</p> </li> </ul>"
+        },
+        "SizeInMegabytes": {
+          "shape": "VolumeCapacity",
+          "documentation": "<p>Specifies the size of the volume, in megabytes (MB), that you are creating.</p>"
+        },
+        "StorageEfficiencyEnabled": {
+          "shape": "Flag",
+          "documentation": "<p>Set to true to enable deduplication, compression, and compaction storage efficiency features on the volume.</p>"
+        },
+        "StorageVirtualMachineId": {
+          "shape": "StorageVirtualMachineId",
+          "documentation": "<p>Specifies the ONTAP SVM in which to create the volume.</p>"
+        },
+        "TieringPolicy": {
+          "shape": "TieringPolicy"
+        }
+      },
+      "documentation": "<p>Specifies the configuration of the ONTAP volume that you are creating.</p>"
+    },
+    "CreateStorageVirtualMachineRequest": {
+      "type": "structure",
+      "required": [
+        "FileSystemId",
+        "Name"
+      ],
+      "members": {
+        "ActiveDirectoryConfiguration": {
+          "shape": "CreateSvmActiveDirectoryConfiguration",
+          "documentation": "<p>Describes the self-managed Microsoft Active Directory to which you want to join the SVM. Joining an Active Directory provides user authentication and access control for SMB clients, including Microsoft Windows and macOS client accessing the file system.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        },
+        "FileSystemId": {
+          "shape": "FileSystemId"
+        },
+        "Name": {
+          "shape": "StorageVirtualMachineName",
+          "documentation": "<p>The name of the SVM.</p>"
+        },
+        "SvmAdminPassword": {
+          "shape": "AdminPassword",
+          "documentation": "<p>The password to use when managing the SVM using the NetApp ONTAP CLI or REST API. If you do not specify a password, you can still use the file system's <code>fsxadmin</code> user to manage the SVM.</p>"
+        },
+        "Tags": {
+          "shape": "Tags"
+        },
+        "RootVolumeSecurityStyle": {
+          "shape": "StorageVirtualMachineRootVolumeSecurityStyle",
+          "documentation": "<p>The security style of the root volume of the SVM. Specify one of the following values:</p> <ul> <li> <p> <code>UNIX</code> if the file system is managed by a UNIX administrator, the majority of users are NFS clients, and an application accessing the data uses a UNIX user as the service account.</p> </li> <li> <p> <code>NTFS</code> if the file system is managed by a Windows administrator, the majority of users are SMB clients, and an application accessing the data uses a Windows user as the service account.</p> </li> <li> <p> <code>MIXED</code> if the file system is managed by both UNIX and Windows administrators and users consist of both NFS and SMB clients.</p> </li> </ul>"
+        }
+      }
+    },
+    "CreateStorageVirtualMachineResponse": {
+      "type": "structure",
+      "members": {
+        "StorageVirtualMachine": {
+          "shape": "StorageVirtualMachine",
+          "documentation": "<p>Returned after a successful <code>CreateStorageVirtualMachine</code> operation; describes the SVM just created.</p>"
+        }
+      }
+    },
+    "CreateSvmActiveDirectoryConfiguration": {
+      "type": "structure",
+      "required": [
+        "NetBiosName"
+      ],
+      "members": {
+        "NetBiosName": {
+          "shape": "NetBiosAlias",
+          "documentation": "<p>The NetBIOS name of the Active Directory computer object that will be created for your SVM.</p>"
+        },
+        "SelfManagedActiveDirectoryConfiguration": {
+          "shape": "SelfManagedActiveDirectoryConfiguration"
+        }
+      },
+      "documentation": "<p>The configuration that Amazon FSx uses to join the ONTAP storage virtual machine (SVM) to your self-managed (including on-premises) Microsoft Active Directory (AD) directory.</p>"
+    },
+    "CreateVolumeFromBackupRequest": {
+      "type": "structure",
+      "required": [
+        "BackupId",
+        "Name"
+      ],
+      "members": {
+        "BackupId": {
+          "shape": "BackupId"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        },
+        "Name": {
+          "shape": "VolumeName",
+          "documentation": "<p>The name of the new volume you're creating.</p>"
+        },
+        "OntapConfiguration": {
+          "shape": "CreateOntapVolumeConfiguration",
+          "documentation": "<p>Specifies the configuration of the ONTAP volume that you are creating.</p>"
+        },
+        "Tags": {
+          "shape": "Tags"
+        }
+      }
+    },
+    "CreateVolumeFromBackupResponse": {
+      "type": "structure",
+      "members": {
+        "Volume": {
+          "shape": "Volume",
+          "documentation": "<p>Returned after a successful <code>CreateVolumeFromBackup</code> API operation, describing the volume just created.</p>"
+        }
+      }
+    },
+    "CreateVolumeRequest": {
+      "type": "structure",
+      "required": [
+        "VolumeType",
+        "Name"
+      ],
+      "members": {
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        },
+        "VolumeType": {
+          "shape": "VolumeType",
+          "documentation": "<p>Specifies the type of volume to create; <code>ONTAP</code> is the only valid volume type.</p>"
+        },
+        "Name": {
+          "shape": "VolumeName",
+          "documentation": "<p>Specifies the name of the volume you're creating.</p>"
+        },
+        "OntapConfiguration": {
+          "shape": "CreateOntapVolumeConfiguration",
+          "documentation": "<p>Specifies the <code>ONTAP</code> configuration to use in creating the volume.</p>"
+        },
+        "Tags": {
+          "shape": "Tags"
+        }
+      }
+    },
+    "CreateVolumeResponse": {
+      "type": "structure",
+      "members": {
+        "Volume": {
+          "shape": "Volume",
+          "documentation": "<p>Returned after a successful <code>CreateVolume</code> API operation, describing the volume just created.</p>"
+        }
+      }
     },
     "CreationTime": {
       "type": "timestamp",
@@ -1051,6 +1857,13 @@
       "max": 5,
       "min": 5,
       "pattern": "^([01]\\d|2[0-3]):?([0-5]\\d)$"
+    },
+    "DataCompressionType": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "LZ4"
+      ]
     },
     "DataRepositoryConfiguration": {
       "type": "structure",
@@ -1281,7 +2094,7 @@
         },
         "ClientRequestToken": {
           "shape": "ClientRequestToken",
-          "documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent deletion. This is automatically filled on your behalf when using the AWS CLI or SDK.</p>",
+          "documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent deletion. This is automatically filled on your behalf when using the CLI or SDK.</p>",
           "idempotencyToken": true
         }
       },
@@ -1341,7 +2154,7 @@
         },
         "ClientRequestToken": {
           "shape": "ClientRequestToken",
-          "documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent deletion. This is automatically filled on your behalf when using the AWS CLI or SDK.</p>",
+          "documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent deletion. This is automatically filled on your behalf when using the Command Line Interface (CLI) or an Amazon Web Services SDK.</p>",
           "idempotencyToken": true
         },
         "WindowsConfiguration": {
@@ -1401,6 +2214,97 @@
       },
       "documentation": "<p>The response object for the Microsoft Windows file system used in the <code>DeleteFileSystem</code> operation.</p>"
     },
+    "DeleteStorageVirtualMachineRequest": {
+      "type": "structure",
+      "required": [
+        "StorageVirtualMachineId"
+      ],
+      "members": {
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        },
+        "StorageVirtualMachineId": {
+          "shape": "StorageVirtualMachineId",
+          "documentation": "<p>The ID of the SVM that you want to delete.</p>"
+        }
+      }
+    },
+    "DeleteStorageVirtualMachineResponse": {
+      "type": "structure",
+      "members": {
+        "StorageVirtualMachineId": {
+          "shape": "StorageVirtualMachineId",
+          "documentation": "<p>The ID of the SVM Amazon FSx is deleting.</p>"
+        },
+        "Lifecycle": {
+          "shape": "StorageVirtualMachineLifecycle",
+          "documentation": "<p>Describes the lifecycle state of the SVM being deleted.</p>"
+        }
+      }
+    },
+    "DeleteVolumeOntapConfiguration": {
+      "type": "structure",
+      "members": {
+        "SkipFinalBackup": {
+          "shape": "Flag",
+          "documentation": "<p>Set to true if you want to skip taking a final backup of the volume you are deleting.</p>"
+        },
+        "FinalBackupTags": {
+          "shape": "Tags"
+        }
+      },
+      "documentation": "<p>Use to specify skipping a final backup, or to add tags to a final backup.</p>"
+    },
+    "DeleteVolumeOntapResponse": {
+      "type": "structure",
+      "members": {
+        "FinalBackupId": {
+          "shape": "BackupId"
+        },
+        "FinalBackupTags": {
+          "shape": "Tags"
+        }
+      },
+      "documentation": "<p>The response object for the Amazon FSx for NetApp ONTAP volume being deleted in the <code>DeleteVolume</code> operation.</p>"
+    },
+    "DeleteVolumeRequest": {
+      "type": "structure",
+      "required": [
+        "VolumeId"
+      ],
+      "members": {
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        },
+        "VolumeId": {
+          "shape": "VolumeId",
+          "documentation": "<p>The ID of the volume you are deleting.</p>"
+        },
+        "OntapConfiguration": {
+          "shape": "DeleteVolumeOntapConfiguration",
+          "documentation": "<p>For Amazon FSx for ONTAP volumes, specify whether to take a final backup of the volume, and apply tags to the backup.</p>"
+        }
+      }
+    },
+    "DeleteVolumeResponse": {
+      "type": "structure",
+      "members": {
+        "VolumeId": {
+          "shape": "VolumeId",
+          "documentation": "<p>The ID of the volume being deleted.</p>"
+        },
+        "Lifecycle": {
+          "shape": "VolumeLifecycle",
+          "documentation": "<p>Describes the lifecycle state of the volume being deleted.</p>"
+        },
+        "OntapResponse": {
+          "shape": "DeleteVolumeOntapResponse",
+          "documentation": "<p>Returned after a <code>DeleteVolume request, showing the status of the delete request.</code> </p>"
+        }
+      }
+    },
     "DescribeBackupsRequest": {
       "type": "structure",
       "members": {
@@ -1410,7 +2314,7 @@
         },
         "Filters": {
           "shape": "Filters",
-          "documentation": "<p>Filters structure. Supported names are file-system-id and backup-type.</p>"
+          "documentation": "<p>Filters structure. Supported names are <code>file-system-id</code>, <code>backup-type</code>, <code>file-system-type</code>, and <code>volume-id</code>.</p>"
         },
         "MaxResults": {
           "shape": "MaxResults",
@@ -1428,7 +2332,7 @@
       "members": {
         "Backups": {
           "shape": "Backups",
-          "documentation": "<p>Any array of backups.</p>"
+          "documentation": "<p>An array of backups.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -1468,6 +2372,45 @@
         }
       }
     },
+    "DescribeFileSystemAliasesRequest": {
+      "type": "structure",
+      "required": [
+        "FileSystemId"
+      ],
+      "members": {
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        },
+        "FileSystemId": {
+          "shape": "FileSystemId",
+          "documentation": "<p>The ID of the file system to return the associated DNS aliases for (String).</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>Maximum number of DNS aliases to return in the response (integer). This parameter value must be greater than 0. The number of items that Amazon FSx returns is the minimum of the <code>MaxResults</code> parameter specified in the request and the service's internal maximum number of items per page.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Opaque pagination token returned from a previous <code>DescribeFileSystemAliases</code> operation (String). If a token is included in the request, the action continues the list from where the previous returning call left off.</p>"
+        }
+      },
+      "documentation": "<p>The request object for <code>DescribeFileSystemAliases</code> operation.</p>"
+    },
+    "DescribeFileSystemAliasesResponse": {
+      "type": "structure",
+      "members": {
+        "Aliases": {
+          "shape": "Aliases",
+          "documentation": "<p>An array of one or more DNS aliases currently associated with the specified file system.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Present if there are more DNS aliases than returned in the response (String). You can use the <code>NextToken</code> value in a later request to fetch additional descriptions. </p>"
+        }
+      },
+      "documentation": "<p>The response object for <code>DescribeFileSystemAliases</code> operation.</p>"
+    },
     "DescribeFileSystemsRequest": {
       "type": "structure",
       "members": {
@@ -1500,6 +2443,68 @@
       },
       "documentation": "<p>The response object for <code>DescribeFileSystems</code> operation.</p>"
     },
+    "DescribeStorageVirtualMachinesRequest": {
+      "type": "structure",
+      "members": {
+        "StorageVirtualMachineIds": {
+          "shape": "StorageVirtualMachineIds",
+          "documentation": "<p>Enter the ID of one or more SVMs that you want to view.</p>"
+        },
+        "Filters": {
+          "shape": "StorageVirtualMachineFilters",
+          "documentation": "<p>Enter a filter name:value pair to view a select set of SVMs.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults"
+        },
+        "NextToken": {
+          "shape": "NextToken"
+        }
+      }
+    },
+    "DescribeStorageVirtualMachinesResponse": {
+      "type": "structure",
+      "members": {
+        "StorageVirtualMachines": {
+          "shape": "StorageVirtualMachines",
+          "documentation": "<p>Returned after a successful <code>DescribeStorageVirtualMachines</code> operation, describing each SVM.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken"
+        }
+      }
+    },
+    "DescribeVolumesRequest": {
+      "type": "structure",
+      "members": {
+        "VolumeIds": {
+          "shape": "VolumeIds",
+          "documentation": "<p>IDs of the volumes whose descriptions you want to retrieve.</p>"
+        },
+        "Filters": {
+          "shape": "VolumeFilters",
+          "documentation": "<p>Enter a filter name:value pair to view a select set of volumes.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults"
+        },
+        "NextToken": {
+          "shape": "NextToken"
+        }
+      }
+    },
+    "DescribeVolumesResponse": {
+      "type": "structure",
+      "members": {
+        "Volumes": {
+          "shape": "Volumes",
+          "documentation": "<p>Returned after a successful <code>DescribeVolumes</code> operation, describing each volume.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken"
+        }
+      }
+    },
     "DirectoryId": {
       "type": "string",
       "max": 12,
@@ -1519,12 +2524,65 @@
       "min": 1,
       "pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,256}$"
     },
+    "DisassociateFileSystemAliasesRequest": {
+      "type": "structure",
+      "required": [
+        "FileSystemId",
+        "Aliases"
+      ],
+      "members": {
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        },
+        "FileSystemId": {
+          "shape": "FileSystemId",
+          "documentation": "<p>Specifies the file system from which to disassociate the DNS aliases.</p>"
+        },
+        "Aliases": {
+          "shape": "AlternateDNSNames",
+          "documentation": "<p>An array of one or more DNS alias names to disassociate, or remove, from the file system.</p>"
+        }
+      },
+      "documentation": "<p>The request object of DNS aliases to disassociate from an Amazon FSx for Windows File Server file system.</p>"
+    },
+    "DisassociateFileSystemAliasesResponse": {
+      "type": "structure",
+      "members": {
+        "Aliases": {
+          "shape": "Aliases",
+          "documentation": "<p>An array of one or more DNS aliases that Amazon FSx is attempting to disassociate from the file system.</p>"
+        }
+      },
+      "documentation": "<p>The system generated response showing the DNS aliases that Amazon FSx is attempting to disassociate from the file system. Use the API operation to monitor the status of the aliases Amazon FSx is removing from the file system.</p>"
+    },
+    "DiskIopsConfiguration": {
+      "type": "structure",
+      "members": {
+        "Mode": {
+          "shape": "DiskIopsConfigurationMode",
+          "documentation": "<p>Specifies whether the number of IOPS for the file system is using the system default (<code>AUTOMATIC</code>) or was provisioned by the customer (<code>USER_PROVISIONED</code>).</p>"
+        },
+        "Iops": {
+          "shape": "Iops",
+          "documentation": "<p>The total number of SSD IOPS provisioned for the file system.</p>"
+        }
+      },
+      "documentation": "<p>The SSD IOPS (input/output operations per second) configuration for an Amazon FSx for NetApp ONTAP file system. The default is 3 IOPS per GB of storage capacity, but you can provision additional IOPS per GB of storage. The configuration consists of the total number of provisioned SSD IOPS and how the amount was provisioned (by the customer or by the system).</p>"
+    },
+    "DiskIopsConfigurationMode": {
+      "type": "string",
+      "enum": [
+        "AUTOMATIC",
+        "USER_PROVISIONED"
+      ]
+    },
     "DnsIps": {
       "type": "list",
       "member": {
         "shape": "IpAddress"
       },
-      "max": 2,
+      "max": 3,
       "min": 1
     },
     "DriveCacheType": {
@@ -1551,7 +2609,7 @@
       "members": {
         "OwnerId": {
           "shape": "AWSAccountId",
-          "documentation": "<p>The AWS account that created the file system. If the file system was created by an AWS Identity and Access Management (IAM) user, the AWS account to which the IAM user belongs is the owner.</p>"
+          "documentation": "<p>The Amazon Web Services account that created the file system. If the file system was created by an Identity and Access Management (IAM) user, the Amazon Web Services account to which the IAM user belongs is the owner.</p>"
         },
         "CreationTime": {
           "shape": "CreationTime",
@@ -1563,7 +2621,7 @@
         },
         "FileSystemType": {
           "shape": "FileSystemType",
-          "documentation": "<p>The type of Amazon FSx file system, either <code>LUSTRE</code> or <code>WINDOWS</code>.</p>"
+          "documentation": "<p>The type of Amazon FSx file system, which can be <code>LUSTRE</code>, <code>WINDOWS</code>, or <code>ONTAP</code>.</p>"
         },
         "Lifecycle": {
           "shape": "FileSystemLifecycle",
@@ -1574,7 +2632,7 @@
         },
         "StorageCapacity": {
           "shape": "StorageCapacity",
-          "documentation": "<p>The storage capacity of the file system in gigabytes (GB).</p>"
+          "documentation": "<p>The storage capacity of the file system in gibibytes (GiB).</p>"
         },
         "StorageType": {
           "shape": "StorageType",
@@ -1586,7 +2644,7 @@
         },
         "SubnetIds": {
           "shape": "SubnetIds",
-          "documentation": "<p>Specifies the IDs of the subnets that the file system is accessible from. For Windows <code>MULTI_AZ_1</code> file system deployment type, there are two subnet IDs, one for the preferred file server and one for the standby file server. The preferred file server subnet identified in the <code>PreferredSubnetID</code> property. All other file systems have only one subnet ID.</p> <p>For Lustre file systems, and Single-AZ Windows file systems, this is the ID of the subnet that contains the endpoint for the file system. For <code>MULTI_AZ_1</code> Windows file systems, the endpoint for the file system is available in the <code>PreferredSubnetID</code>.</p>"
+          "documentation": "<p>Specifies the IDs of the subnets that the file system is accessible from. For Windows and ONTAP <code>MULTI_AZ_1</code> file system deployment type, there are two subnet IDs, one for the preferred file server and one for the standby file server. The preferred file server subnet identified in the <code>PreferredSubnetID</code> property. All other file systems have only one subnet ID.</p> <p>For Lustre file systems, and Single-AZ Windows file systems, this is the ID of the subnet that contains the endpoint for the file system. For <code>MULTI_AZ_1</code> Windows and ONTAP file systems, the endpoint for the file system is available in the <code>PreferredSubnetID</code>.</p>"
         },
         "NetworkInterfaceIds": {
           "shape": "NetworkInterfaceIds",
@@ -1598,7 +2656,7 @@
         },
         "KmsKeyId": {
           "shape": "KmsKeyId",
-          "documentation": "<p>The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system's data for Amazon FSx for Windows File Server file systems and persistent Amazon FSx for Lustre file systems at rest. In either case, if not specified, the Amazon FSx managed key is used. The scratch Amazon FSx for Lustre file systems are always encrypted at rest using Amazon FSx managed keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html\">Encrypt</a> in the <i>AWS Key Management Service API Reference</i>.</p>"
+          "documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt the file system's data for Amazon FSx for Windows File Server file systems, Amazon FSx for NetApp ONTAP file systems, and persistent Amazon FSx for Lustre file systems at rest. If not specified, the Amazon FSx managed key is used. The scratch Amazon FSx for Lustre file systems are always encrypted at rest using Amazon FSx managed keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html\">Encrypt</a> in the <i>Key Management Service API Reference</i>.</p>"
         },
         "ResourceARN": {
           "shape": "ResourceARN",
@@ -1617,7 +2675,11 @@
         },
         "AdministrativeActions": {
           "shape": "AdministrativeActions",
-          "documentation": "<p>A list of administrative actions for the file system that are in process or waiting to be processed. Administrative actions describe changes to the Windows file system that you have initiated using the <code>UpdateFileSystem</code> action. </p>"
+          "documentation": "<p>A list of administrative actions for the file system that are in process or waiting to be processed. Administrative actions describe changes to the Amazon FSx file system that you have initiated using the <code>UpdateFileSystem</code> action.</p>"
+        },
+        "OntapConfiguration": {
+          "shape": "OntapFileSystemConfiguration",
+          "documentation": "<p>The configuration for this FSx for NetApp ONTAP file system.</p>"
         }
       },
       "documentation": "<p>A description of a specific Amazon FSx file system.</p>"
@@ -1627,6 +2689,33 @@
       "max": 256,
       "min": 1,
       "pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,256}$"
+    },
+    "FileSystemEndpoint": {
+      "type": "structure",
+      "members": {
+        "DNSName": {
+          "shape": "DNSName"
+        },
+        "IpAddresses": {
+          "shape": "OntapEndpointIpAddresses",
+          "documentation": "<p>IP addresses of the file system endpoint.</p>"
+        }
+      },
+      "documentation": "<p>An Amazon FSx for NetApp ONTAP file system has two endpoints that are used to access data or to manage the file system using the NetApp ONTAP CLI, REST API, or NetApp SnapMirror. They are the <code>Management</code> and <code>Intercluster</code> endpoints.</p>"
+    },
+    "FileSystemEndpoints": {
+      "type": "structure",
+      "members": {
+        "Intercluster": {
+          "shape": "FileSystemEndpoint",
+          "documentation": "<p>An endpoint for managing your file system by setting up NetApp SnapMirror with other ONTAP systems.</p>"
+        },
+        "Management": {
+          "shape": "FileSystemEndpoint",
+          "documentation": "<p>An endpoint for managing your file system using the NetApp ONTAP CLI and NetApp ONTAP API.</p>"
+        }
+      },
+      "documentation": "<p>An Amazon FSx for NetApp ONTAP file system has the following endpoints that are used to access data or to manage the file system using the NetApp ONTAP CLI, REST API, or NetApp SnapMirror.</p>"
     },
     "FileSystemFailureDetails": {
       "type": "structure",
@@ -1686,7 +2775,8 @@
       "documentation": "<p>The type of file system.</p>",
       "enum": [
         "WINDOWS",
-        "LUSTRE"
+        "LUSTRE",
+        "ONTAP"
       ]
     },
     "FileSystems": {
@@ -1717,7 +2807,8 @@
       "enum": [
         "file-system-id",
         "backup-type",
-        "file-system-type"
+        "file-system-type",
+        "volume-id"
       ]
     },
     "FilterValue": {
@@ -1746,21 +2837,61 @@
     "Flag": {
       "type": "boolean"
     },
+    "FlexCacheEndpointType": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "ORIGIN",
+        "CACHE"
+      ]
+    },
+    "GeneralARN": {
+      "type": "string",
+      "max": 1024,
+      "min": 8,
+      "pattern": "^arn:[^:]{1,63}:[^:]{0,63}:[^:]{0,63}:(?:|\\d{12}):[^/].{0,1023}$"
+    },
+    "Iops": {
+      "type": "long",
+      "max": 80000,
+      "min": 0
+    },
     "IpAddress": {
       "type": "string",
       "max": 15,
       "min": 7,
       "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
     },
+    "IpAddressRange": {
+      "type": "string",
+      "max": 17,
+      "min": 9,
+      "pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{9,17}$"
+    },
+    "JunctionPath": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,255}$"
+    },
     "KmsKeyId": {
       "type": "string",
-      "documentation": "<p>The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file system's data for Amazon FSx for Windows File Server file systems and Amazon FSx for Lustre <code>PERSISTENT_1</code> file systems at rest. In either case, if not specified, the Amazon FSx managed key is used. The Amazon FSx for Lustre <code>SCRATCH_1</code> and <code>SCRATCH_2</code> file systems are always encrypted at rest using Amazon FSx managed keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html\">Encrypt</a> in the <i>AWS Key Management Service API Reference</i>.</p>",
+      "documentation": "<p>The ID of the Key Management Service (KMS) key used to encrypt the file system's data for Amazon FSx for Windows File Server file systems, Amazon FSx for NetApp ONTAP file systems, and Amazon FSx for Lustre <code>PERSISTENT_1</code> file systems at rest. If not specified, the Amazon FSx managed key is used. The Amazon FSx for Lustre <code>SCRATCH_1</code> and <code>SCRATCH_2</code> file systems are always encrypted at rest using Amazon FSx managed keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html\">Encrypt</a> in the <i>Key Management Service API Reference</i>.</p>",
       "max": 2048,
       "min": 1,
       "pattern": "^.{1,2048}$"
     },
     "LastUpdatedTime": {
       "type": "timestamp"
+    },
+    "LifecycleTransitionReason": {
+      "type": "structure",
+      "members": {
+        "Message": {
+          "shape": "ErrorMessage"
+        }
+      },
+      "documentation": "<p>Describes why a resource lifecycle state changed.</p>"
     },
     "ListTagsForResourceRequest": {
       "type": "structure",
@@ -1825,7 +2956,7 @@
         },
         "MountName": {
           "shape": "LustreFileSystemMountName",
-          "documentation": "<p>You use the <code>MountName</code> value when mounting the file system.</p> <p>For the <code>SCRATCH_1</code> deployment type, this value is always \"<code>fsx</code>\". For <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> deployment types, this value is a string that is unique within an AWS Region. </p>"
+          "documentation": "<p>You use the <code>MountName</code> value when mounting the file system.</p> <p>For the <code>SCRATCH_1</code> deployment type, this value is always \"<code>fsx</code>\". For <code>SCRATCH_2</code> and <code>PERSISTENT_1</code> deployment types, this value is a string that is unique within an Amazon Web Services Region. </p>"
         },
         "DailyAutomaticBackupStartTime": {
           "shape": "DailyTime"
@@ -1840,6 +2971,10 @@
         "DriveCacheType": {
           "shape": "DriveCacheType",
           "documentation": "<p>The type of drive cache used by PERSISTENT_1 file systems that are provisioned with HDD storage devices. This parameter is required when storage type is HDD. Set to <code>READ</code>, improve the performance for frequently accessed files and allows 20% of the total storage capacity of the file system to be cached. </p> <p>This parameter is required when <code>StorageType</code> is set to HDD.</p>"
+        },
+        "DataCompressionType": {
+          "shape": "DataCompressionType",
+          "documentation": "<p>The data compression configuration for the file system. <code>DataCompressionType</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - Data compression is turned off for the file system.</p> </li> <li> <p> <code>LZ4</code> - Data compression is turned on with the LZ4 algorithm.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html\">Lustre data compression</a>.</p>"
         }
       },
       "documentation": "<p>The configuration for the Amazon FSx for Lustre file system.</p>"
@@ -1867,6 +3002,12 @@
       "max": 2048,
       "min": 8
     },
+    "NetBiosAlias": {
+      "type": "string",
+      "max": 15,
+      "min": 1,
+      "pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,255}$"
+    },
     "NetworkInterfaceId": {
       "type": "string",
       "documentation": "<p>An elastic network interface ID. An elastic network interface is a logical networking component in a virtual private cloud (VPC) that represents a virtual network card. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html\">Elastic Network Interfaces</a> in the <i>Amazon EC2 User Guide for Linux Instances</i>.</p>",
@@ -1889,6 +3030,115 @@
       "min": 1,
       "pattern": "^(?:[A-Za-z0-9+\\/]{4})*(?:[A-Za-z0-9+\\/]{2}==|[A-Za-z0-9+\\/]{3}=)?$"
     },
+    "OntapDeploymentType": {
+      "type": "string",
+      "enum": [
+        "MULTI_AZ_1"
+      ]
+    },
+    "OntapEndpointIpAddresses": {
+      "type": "list",
+      "member": {
+        "shape": "IpAddress"
+      },
+      "max": 2,
+      "min": 1
+    },
+    "OntapFileSystemConfiguration": {
+      "type": "structure",
+      "members": {
+        "AutomaticBackupRetentionDays": {
+          "shape": "AutomaticBackupRetentionDays"
+        },
+        "DailyAutomaticBackupStartTime": {
+          "shape": "DailyTime"
+        },
+        "DeploymentType": {
+          "shape": "OntapDeploymentType",
+          "documentation": "<p>The ONTAP file system deployment type.</p>"
+        },
+        "EndpointIpAddressRange": {
+          "shape": "IpAddressRange",
+          "documentation": "<p>The IP address range in which the endpoints to access your file system are created.</p>"
+        },
+        "Endpoints": {
+          "shape": "FileSystemEndpoints",
+          "documentation": "<p>The <code>Management</code> and <code>Intercluster</code> endpoints that are used to access data or to manage the file system using the NetApp ONTAP CLI, REST API, or NetApp SnapMirror.</p>"
+        },
+        "DiskIopsConfiguration": {
+          "shape": "DiskIopsConfiguration",
+          "documentation": "<p>The SSD IOPS configuration for the ONTAP file system, specifying the number of provisioned IOPS and the provision mode.</p>"
+        },
+        "PreferredSubnetId": {
+          "shape": "SubnetId"
+        },
+        "RouteTableIds": {
+          "shape": "RouteTableIds",
+          "documentation": "<p>The VPC route tables in which your file system's endpoints are created.</p>"
+        },
+        "ThroughputCapacity": {
+          "shape": "MegabytesPerSecond"
+        },
+        "WeeklyMaintenanceStartTime": {
+          "shape": "WeeklyTime"
+        }
+      },
+      "documentation": "<p>Configuration for the FSx for NetApp ONTAP file system.</p>"
+    },
+    "OntapVolumeConfiguration": {
+      "type": "structure",
+      "members": {
+        "FlexCacheEndpointType": {
+          "shape": "FlexCacheEndpointType",
+          "documentation": "<p>Specifies the FlexCache endpoint type of the volume. Valid values are the following:</p> <ul> <li> <p> <code>NONE</code> specifies that the volume doesn't have a FlexCache configuration. <code>NONE</code> is the default.</p> </li> <li> <p> <code>ORIGIN</code> specifies that the volume is the origin volume for a FlexCache volume.</p> </li> <li> <p> <code>CACHE</code> specifies that the volume is a FlexCache volume.</p> </li> </ul>"
+        },
+        "JunctionPath": {
+          "shape": "JunctionPath",
+          "documentation": "<p>Specifies the directory that NAS clients use to mount the volume, along with the SVM DNS name or IP address. You can create a <code>JunctionPath</code> directly below a parent volume junction or on a directory within a volume. A <code>JunctionPath</code> for a volume named vol3 might be /vol1/vol2/vol3, or /vol1/dir2/vol3, or even /dir1/dir2/vol3..</p>"
+        },
+        "SecurityStyle": {
+          "shape": "SecurityStyle",
+          "documentation": "<p>The security style for the volume, which can be <code>UNIX</code>, <code>NTFS</code>, or <code>MIXED</code>.</p>"
+        },
+        "SizeInMegabytes": {
+          "shape": "VolumeCapacity",
+          "documentation": "<p>The configured size of the volume, in megabytes (MBs).</p>"
+        },
+        "StorageEfficiencyEnabled": {
+          "shape": "Flag",
+          "documentation": "<p>The volume's storage efficiency setting.</p>"
+        },
+        "StorageVirtualMachineId": {
+          "shape": "StorageVirtualMachineId",
+          "documentation": "<p>The ID of the volume's storage virtual machine.</p>"
+        },
+        "StorageVirtualMachineRoot": {
+          "shape": "Flag",
+          "documentation": "<p>A boolean flag indicating whether this volume is the root volume for its storage virtual machine (SVM). Only one volume on an SVM can be the root volume. This value defaults to false. If this value is true, then this is the SVM root volume.</p> <p>This flag is useful when you're deleting an SVM, because you must first delete all non-root volumes. This flag, when set to false, helps you identify which volumes to delete before you can delete the SVM.</p>"
+        },
+        "TieringPolicy": {
+          "shape": "TieringPolicy",
+          "documentation": "<p>The volume's <code>TieringPolicy</code> setting.</p>"
+        },
+        "UUID": {
+          "shape": "UUID",
+          "documentation": "<p>The volume's UUID (universally unique identifier).</p>"
+        },
+        "OntapVolumeType": {
+          "shape": "OntapVolumeType",
+          "documentation": "<p>Specifies the type of volume. Valid values are the following:</p> <ul> <li> <p> <code>RW</code> specifies a read-write volume. <code>RW</code> is the default.</p> </li> <li> <p> <code>DP</code> specifies a data protection volume. You can protect data by replicating it to data protection mirror copies and use data protection mirror copies to recover data when a disaster occurs.</p> </li> <li> <p> <code>LS</code> specifies a load-sharing mirror volume. A load-sharing mirror reduces the network traffic to a FlexVol volume by providing additional read-only access to clients.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>The configuration of an Amazon FSx for NetApp ONTAP volume</p>"
+    },
+    "OntapVolumeType": {
+      "type": "string",
+      "enum": [
+        "RW",
+        "DP",
+        "LS"
+      ]
+    },
     "OrganizationalUnitDistinguishedName": {
       "type": "string",
       "max": 2000,
@@ -1905,6 +3155,12 @@
       "documentation": "<p>The current percent of progress of an asynchronous task.</p>",
       "max": 100,
       "min": 0
+    },
+    "Region": {
+      "type": "string",
+      "max": 20,
+      "min": 1,
+      "pattern": "^[a-z0-9-]{1,20}$"
     },
     "ReportFormat": {
       "type": "string",
@@ -1923,10 +3179,30 @@
     },
     "ResourceARN": {
       "type": "string",
-      "documentation": "<p>The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify AWS resources. We require an ARN when you need to specify a resource unambiguously across all of AWS. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a> in the <i>AWS General Reference</i>.</p>",
+      "documentation": "<p>The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify Amazon Web Services resources. We require an ARN when you need to specify a resource unambiguously across all of Amazon Web Services. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs)</a> in the <i>Amazon Web Services General Reference</i>.</p>",
       "max": 512,
       "min": 8,
       "pattern": "^arn:(?=[^:]+:fsx:[^:]+:\\d{12}:)((|(?=[a-z0-9-.]{1,63})(?!\\d{1,3}(\\.\\d{1,3}){3})(?![^:]*-{2})(?![^:]*-\\.)(?![^:]*\\.-)[a-z0-9].*(?<!-)):){4}(?!/).{0,1024}$"
+    },
+    "ResourceType": {
+      "type": "string",
+      "enum": [
+        "FILE_SYSTEM",
+        "VOLUME"
+      ]
+    },
+    "RouteTableId": {
+      "type": "string",
+      "max": 21,
+      "min": 12,
+      "pattern": "^(rtb-[0-9a-f]{8,})$"
+    },
+    "RouteTableIds": {
+      "type": "list",
+      "member": {
+        "shape": "RouteTableId"
+      },
+      "max": 50
     },
     "SecurityGroupId": {
       "type": "string",
@@ -1943,6 +3219,14 @@
       "documentation": "<p>A list of security group IDs.</p>",
       "max": 50
     },
+    "SecurityStyle": {
+      "type": "string",
+      "enum": [
+        "UNIX",
+        "NTFS",
+        "MIXED"
+      ]
+    },
     "SelfManagedActiveDirectoryAttributes": {
       "type": "structure",
       "members": {
@@ -1952,7 +3236,7 @@
         },
         "OrganizationalUnitDistinguishedName": {
           "shape": "OrganizationalUnitDistinguishedName",
-          "documentation": "<p>The fully qualified distinguished name of the organizational unit within the self-managed AD directory to which the Windows File Server instance is joined.</p>"
+          "documentation": "<p>The fully qualified distinguished name of the organizational unit within the self-managed AD directory to which the Windows File Server or ONTAP storage virtual machine (SVM) instance is joined.</p>"
         },
         "FileSystemAdministratorsGroup": {
           "shape": "FileSystemAdministratorsGroupName",
@@ -1967,7 +3251,7 @@
           "documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory.</p>"
         }
       },
-      "documentation": "<p>The configuration of the self-managed Microsoft Active Directory (AD) directory to which the Windows File Server instance is joined.</p>"
+      "documentation": "<p>The configuration of the self-managed Microsoft Active Directory (AD) directory to which the Windows File Server or ONTAP storage virtual machine (SVM) instance is joined.</p>"
     },
     "SelfManagedActiveDirectoryConfiguration": {
       "type": "structure",
@@ -1984,7 +3268,7 @@
         },
         "OrganizationalUnitDistinguishedName": {
           "shape": "OrganizationalUnitDistinguishedName",
-          "documentation": "<p>(Optional) The fully qualified distinguished name of the organizational unit within your self-managed AD directory that the Windows File Server instance will join. Amazon FSx only accepts OU as the direct parent of the file system. An example is <code>OU=FSx,DC=yourdomain,DC=corp,DC=com</code>. To learn more, see <a href=\"https://tools.ietf.org/html/rfc2253\">RFC 2253</a>. If none is provided, the FSx file system is created in the default location of your self-managed AD directory. </p> <important> <p>Only Organizational Unit (OU) objects can be the direct parent of the file system that you're creating.</p> </important>"
+          "documentation": "<p>(Optional) The fully qualified distinguished name of the organizational unit within your self-managed AD directory. Amazon FSx only accepts OU as the direct parent of the file system. An example is <code>OU=FSx,DC=yourdomain,DC=corp,DC=com</code>. To learn more, see <a href=\"https://tools.ietf.org/html/rfc2253\">RFC 2253</a>. If none is provided, the FSx file system is created in the default location of your self-managed AD directory. </p> <important> <p>Only Organizational Unit (OU) objects can be the direct parent of the file system that you're creating.</p> </important>"
         },
         "FileSystemAdministratorsGroup": {
           "shape": "FileSystemAdministratorsGroupName",
@@ -2000,10 +3284,10 @@
         },
         "DnsIps": {
           "shape": "DnsIps",
-          "documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. The IP addresses need to be either in the same VPC CIDR range as the one in which your Amazon FSx file system is being created, or in the private IP version 4 (IPv4) address ranges, as specified in <a href=\"http://www.faqs.org/rfcs/rfc1918.html\">RFC 1918</a>:</p> <ul> <li> <p>10.0.0.0 - 10.255.255.255 (10/8 prefix)</p> </li> <li> <p>172.16.0.0 - 172.31.255.255 (172.16/12 prefix)</p> </li> <li> <p>192.168.0.0 - 192.168.255.255 (192.168/16 prefix)</p> </li> </ul>"
+          "documentation": "<p>A list of up to two IP addresses of DNS servers or domain controllers in the self-managed AD directory. </p>"
         }
       },
-      "documentation": "<p>The configuration that Amazon FSx uses to join the Windows File Server instance to your self-managed (including on-premises) Microsoft Active Directory (AD) directory.</p>"
+      "documentation": "<p>The configuration that Amazon FSx uses to join a Amazon FSx for Windows File Server file system or an ONTAP storage virtual machine (SVM) to a self-managed (including on-premises) Microsoft Active Directory (AD) directory. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html\"> Using Amazon FSx with your self-managed Microsoft Active Directory</a> or <a href=\"https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html\">Managing SVMs</a>.</p>"
     },
     "SelfManagedActiveDirectoryConfigurationUpdates": {
       "type": "structure",
@@ -2022,6 +3306,12 @@
         }
       },
       "documentation": "<p>The configuration that Amazon FSx uses to join the Windows File Server instance to a self-managed Microsoft Active Directory (AD) directory.</p>"
+    },
+    "SourceBackupId": {
+      "type": "string",
+      "max": 128,
+      "min": 12,
+      "pattern": "^(backup-[0-9a-f]{8,})$"
     },
     "StartTime": {
       "type": "timestamp"
@@ -2050,6 +3340,154 @@
         "HDD"
       ]
     },
+    "StorageVirtualMachine": {
+      "type": "structure",
+      "members": {
+        "ActiveDirectoryConfiguration": {
+          "shape": "SvmActiveDirectoryConfiguration",
+          "documentation": "<p>Describes the Microsoft Active Directory configuration to which the SVM is joined, if applicable.</p>"
+        },
+        "CreationTime": {
+          "shape": "CreationTime"
+        },
+        "Endpoints": {
+          "shape": "SvmEndpoints",
+          "documentation": "<p>The endpoints that are used to access data or to manage the SVM using the NetApp ONTAP CLI, REST API, or NetApp CloudManager. They are the <code>Iscsi</code>, <code>Management</code>, <code>Nfs</code>, and <code>Smb</code> endpoints.</p>"
+        },
+        "FileSystemId": {
+          "shape": "FileSystemId"
+        },
+        "Lifecycle": {
+          "shape": "StorageVirtualMachineLifecycle",
+          "documentation": "<p>Describes the SVM's lifecycle status.</p> <ul> <li> <p> <code>CREATED</code> - The SVM is fully available for use.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the new SVM.</p> </li> <li> <p> <code>DELETING</code> - Amazon FSx is deleting an existing SVM.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx was unable to create the SVM.</p> </li> <li> <p> <code>MISCONFIGURED</code> - The SVM is in a failed but recoverable state.</p> </li> <li> <p> <code>PENDING</code> - Amazon FSx has not started creating the SVM.</p> </li> </ul>"
+        },
+        "Name": {
+          "shape": "StorageVirtualMachineName",
+          "documentation": "<p>The name of the SVM, if provisioned.</p>"
+        },
+        "ResourceARN": {
+          "shape": "ResourceARN"
+        },
+        "StorageVirtualMachineId": {
+          "shape": "StorageVirtualMachineId",
+          "documentation": "<p>The SVM's system generated unique ID.</p>"
+        },
+        "Subtype": {
+          "shape": "StorageVirtualMachineSubtype",
+          "documentation": "<p>Describes the SVM's subtype.</p>"
+        },
+        "UUID": {
+          "shape": "UUID",
+          "documentation": "<p>The SVM's UUID (universally unique identifier).</p>"
+        },
+        "Tags": {
+          "shape": "Tags"
+        },
+        "LifecycleTransitionReason": {
+          "shape": "LifecycleTransitionReason",
+          "documentation": "<p>Describes why the SVM lifecycle state changed.</p>"
+        },
+        "RootVolumeSecurityStyle": {
+          "shape": "StorageVirtualMachineRootVolumeSecurityStyle",
+          "documentation": "<p>The security style of the root volume of the SVM.</p>"
+        }
+      },
+      "documentation": "<p>Describes the Amazon FSx for NetApp ONTAP storage virtual machine (SVM) configuraton.</p>"
+    },
+    "StorageVirtualMachineFilter": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "StorageVirtualMachineFilterName",
+          "documentation": "<p>The name for this filter.</p>"
+        },
+        "Values": {
+          "shape": "StorageVirtualMachineFilterValues",
+          "documentation": "<p>The values of the filter. These are all the values for any of the applied filters.</p>"
+        }
+      },
+      "documentation": "<p>A filter used to restrict the results of describe calls for Amazon FSx for NetApp ONTAP storage virtual machines (SVMs). You can use multiple filters to return results that meet all applied filter requirements.</p>"
+    },
+    "StorageVirtualMachineFilterName": {
+      "type": "string",
+      "enum": [
+        "file-system-id"
+      ]
+    },
+    "StorageVirtualMachineFilterValue": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^[0-9a-zA-Z\\*\\.\\\\/\\?\\-\\_]*$"
+    },
+    "StorageVirtualMachineFilterValues": {
+      "type": "list",
+      "member": {
+        "shape": "StorageVirtualMachineFilterValue"
+      },
+      "max": 20
+    },
+    "StorageVirtualMachineFilters": {
+      "type": "list",
+      "member": {
+        "shape": "StorageVirtualMachineFilter"
+      },
+      "max": 1
+    },
+    "StorageVirtualMachineId": {
+      "type": "string",
+      "max": 21,
+      "min": 21,
+      "pattern": "^(svm-[0-9a-f]{17,})$"
+    },
+    "StorageVirtualMachineIds": {
+      "type": "list",
+      "member": {
+        "shape": "StorageVirtualMachineId"
+      },
+      "max": 50
+    },
+    "StorageVirtualMachineLifecycle": {
+      "type": "string",
+      "enum": [
+        "CREATED",
+        "CREATING",
+        "DELETING",
+        "FAILED",
+        "MISCONFIGURED",
+        "PENDING"
+      ]
+    },
+    "StorageVirtualMachineName": {
+      "type": "string",
+      "max": 47,
+      "min": 1,
+      "pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,47}$"
+    },
+    "StorageVirtualMachineRootVolumeSecurityStyle": {
+      "type": "string",
+      "enum": [
+        "UNIX",
+        "NTFS",
+        "MIXED"
+      ]
+    },
+    "StorageVirtualMachineSubtype": {
+      "type": "string",
+      "enum": [
+        "DEFAULT",
+        "DP_DESTINATION",
+        "SYNC_DESTINATION",
+        "SYNC_SOURCE"
+      ]
+    },
+    "StorageVirtualMachines": {
+      "type": "list",
+      "member": {
+        "shape": "StorageVirtualMachine"
+      },
+      "max": 50
+    },
     "SubnetId": {
       "type": "string",
       "documentation": "<p>The ID for a subnet. A <i>subnet</i> is a range of IP addresses in your virtual private cloud (VPC). For more information, see <a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html\">VPC and Subnets</a> in the <i>Amazon VPC User Guide.</i> </p>",
@@ -2067,6 +3505,54 @@
     },
     "SucceededCount": {
       "type": "long"
+    },
+    "SvmActiveDirectoryConfiguration": {
+      "type": "structure",
+      "members": {
+        "NetBiosName": {
+          "shape": "NetBiosAlias",
+          "documentation": "<p>The NetBIOS name of the Active Directory computer object that is joined to your SVM.</p>"
+        },
+        "SelfManagedActiveDirectoryConfiguration": {
+          "shape": "SelfManagedActiveDirectoryAttributes"
+        }
+      },
+      "documentation": "<p>Describes the configuration of the Microsoft Active Directory (AD) directory to which the Amazon FSx for ONTAP storage virtual machine (SVM) is joined. Pleae note, account credentials are not returned in the response payload.</p>"
+    },
+    "SvmEndpoint": {
+      "type": "structure",
+      "members": {
+        "DNSName": {
+          "shape": "DNSName"
+        },
+        "IpAddresses": {
+          "shape": "OntapEndpointIpAddresses",
+          "documentation": "<p>The SVM endpoint's IP addresses.</p>"
+        }
+      },
+      "documentation": "<p>An Amazon FSx for NetApp ONTAP storage virtual machine (SVM) has four endpoints that are used to access data or to manage the SVM using the NetApp ONTAP CLI, REST API, or NetApp CloudManager. They are the <code>Iscsi</code>, <code>Management</code>, <code>Nfs</code>, and <code>Smb</code> endpoints.</p>"
+    },
+    "SvmEndpoints": {
+      "type": "structure",
+      "members": {
+        "Iscsi": {
+          "shape": "SvmEndpoint",
+          "documentation": "<p>An endpoint for connecting using the Internet Small Computer Systems Interface (iSCSI) protocol.</p>"
+        },
+        "Management": {
+          "shape": "SvmEndpoint",
+          "documentation": "<p>An endpoint for managing SVMs using the NetApp ONTAP CLI, NetApp ONTAP API, or NetApp CloudManager.</p>"
+        },
+        "Nfs": {
+          "shape": "SvmEndpoint",
+          "documentation": "<p>An endpoint for connecting using the Network File System (NFS) protocol.</p>"
+        },
+        "Smb": {
+          "shape": "SvmEndpoint",
+          "documentation": "<p>An endpoint for connecting using the Server Message Block (SMB) protocol.</p>"
+        }
+      },
+      "documentation": "<p>An Amazon FSx for NetApp ONTAP storage virtual machine (SVM) has the following endpoints that are used to access data or to manage the SVM using the NetApp ONTAP CLI, REST API, or NetApp CloudManager.</p>"
     },
     "Tag": {
       "type": "structure",
@@ -2154,8 +3640,36 @@
       },
       "max": 50
     },
+    "TieringPolicy": {
+      "type": "structure",
+      "members": {
+        "CoolingPeriod": {
+          "shape": "CoolingPeriod",
+          "documentation": "<p>Specifies the number of days that user data in a volume must remain inactive before it is considered \"cold\" and moved to the capacity pool. Used with the <code>AUTO</code> and <code>SNAPSHOT_ONLY</code> tiering policies. Enter a whole number between 2 and 183. Default values are 31 days for <code>AUTO</code> and 2 days for <code>SNAPSHOT_ONLY</code>.</p>"
+        },
+        "Name": {
+          "shape": "TieringPolicyName",
+          "documentation": "<p>Specifies the tiering policy used to transition data. Default value is <code>SNAPSHOT_ONLY</code>.</p> <ul> <li> <p> <code>SNAPSHOT_ONLY</code> - moves cold snapshots to the capacity pool storage tier.</p> </li> <li> <p> <code>AUTO</code> - moves cold user data and snapshots to the capacity pool storage tier based on your access patterns.</p> </li> <li> <p> <code>ALL</code> - moves all user data blocks in both the active file system and Snapshot copies to the storage pool tier.</p> </li> <li> <p> <code>NONE</code> - keeps a volume's data in the primary storage tier, preventing it from being moved to the capacity pool tier.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Describes the data tiering policy for an ONTAP volume. When enabled, Amazon FSx for ONTAP's intelligent tiering automatically transitions a volume's data between the file system's primary storage and capacity pool storage based on your access patterns.</p>"
+    },
+    "TieringPolicyName": {
+      "type": "string",
+      "enum": [
+        "SNAPSHOT_ONLY",
+        "AUTO",
+        "ALL",
+        "NONE"
+      ]
+    },
     "TotalCount": {
       "type": "long"
+    },
+    "UUID": {
+      "type": "string",
+      "max": 36,
+      "pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,36}$"
     },
     "UntagResourceRequest": {
       "type": "structure",
@@ -2196,9 +3710,32 @@
         "AutoImportPolicy": {
           "shape": "AutoImportPolicyType",
           "documentation": "<p> (Optional) When you create your file system, your existing S3 objects appear as file and directory listings. Use this property to choose how Amazon FSx keeps your file and directory listing up to date as you add or modify objects in your linked S3 bucket. <code>AutoImportPolicy</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - (Default) AutoImport is off. Amazon FSx only updates file and directory listings from the linked S3 bucket when the file system is created. FSx does not update the file and directory listing for any new or changed objects after choosing this option.</p> </li> <li> <p> <code>NEW</code> - AutoImport is on. Amazon FSx automatically imports directory listings of any new objects added to the linked S3 bucket that do not currently exist in the FSx file system. </p> </li> <li> <p> <code>NEW_CHANGED</code> - AutoImport is on. Amazon FSx automatically imports file and directory listings of any new objects added to the S3 bucket and any existing objects that are changed in the S3 bucket after you choose this option. </p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/autoimport-data-repo.html\">Automatically import updates from your S3 bucket</a>.</p>"
+        },
+        "DataCompressionType": {
+          "shape": "DataCompressionType",
+          "documentation": "<p>Sets the data compression configuration for the file system. <code>DataCompressionType</code> can have the following values:</p> <ul> <li> <p> <code>NONE</code> - Data compression is turned off for the file system.</p> </li> <li> <p> <code>LZ4</code> - Data compression is turned on with the LZ4 algorithm.</p> </li> </ul> <p>If you don't use <code>DataCompressionType</code>, the file system retains its current data compression configuration.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/data-compression.html\">Lustre data compression</a>.</p>"
         }
       },
       "documentation": "<p>The configuration object for Amazon FSx for Lustre file systems used in the <code>UpdateFileSystem</code> operation.</p>"
+    },
+    "UpdateFileSystemOntapConfiguration": {
+      "type": "structure",
+      "members": {
+        "AutomaticBackupRetentionDays": {
+          "shape": "AutomaticBackupRetentionDays"
+        },
+        "DailyAutomaticBackupStartTime": {
+          "shape": "DailyTime"
+        },
+        "FsxAdminPassword": {
+          "shape": "AdminPassword",
+          "documentation": "<p>The ONTAP administrative password for the <code>fsxadmin</code> user.</p>"
+        },
+        "WeeklyMaintenanceStartTime": {
+          "shape": "WeeklyTime"
+        }
+      },
+      "documentation": "<p>The configuration updates for an Amazon FSx for NetApp ONTAP file system.</p>"
     },
     "UpdateFileSystemRequest": {
       "type": "structure",
@@ -2212,12 +3749,12 @@
         },
         "ClientRequestToken": {
           "shape": "ClientRequestToken",
-          "documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent updates. This string is automatically filled on your behalf when you use the AWS Command Line Interface (AWS CLI) or an AWS SDK.</p>",
+          "documentation": "<p>A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent updates. This string is automatically filled on your behalf when you use the Command Line Interface (CLI) or an Amazon Web Services SDK.</p>",
           "idempotencyToken": true
         },
         "StorageCapacity": {
           "shape": "StorageCapacity",
-          "documentation": "<p>Use this parameter to increase the storage capacity of an Amazon FSx for Windows File Server file system. Specifies the storage capacity target value, GiB, for the file system you're updating. The storage capacity target value must be at least 10 percent (%) greater than the current storage capacity value. In order to increase storage capacity, the file system needs to have at least 16 MB/s of throughput capacity. You cannot make a storage capacity increase request if there is an existing storage capacity increase request in progress. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing Storage Capacity</a>.</p>"
+          "documentation": "<p>Use this parameter to increase the storage capacity of an Amazon FSx for Windows File Server or Amazon FSx for Lustre file system. Specifies the storage capacity target value, GiB, to increase the storage capacity for the file system that you're updating. You cannot make a storage capacity increase request if there is an existing storage capacity increase request in progress.</p> <p>For Windows file systems, the storage capacity target value must be at least 10 percent (%) greater than the current storage capacity value. In order to increase storage capacity, the file system must have at least 16 MB/s of throughput capacity.</p> <p>For Lustre file systems, the storage capacity target value can be the following:</p> <ul> <li> <p>For <code>SCRATCH_2</code> and <code>PERSISTENT_1 SSD</code> deployment types, valid values are in multiples of 2400 GiB. The value must be greater than the current storage capacity.</p> </li> <li> <p>For <code>PERSISTENT HDD</code> file systems, valid values are multiples of 6000 GiB for 12 MB/s/TiB file systems and multiples of 1800 GiB for 40 MB/s/TiB file systems. The values must be greater than the current storage capacity.</p> </li> <li> <p>For <code>SCRATCH_1</code> file systems, you cannot increase the storage capacity.</p> </li> </ul> <p>For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html\">Managing storage capacity</a> in the <i>Amazon FSx for Windows File Server User Guide</i> and <a href=\"https://docs.aws.amazon.com/fsx/latest/LustreGuide/managing-storage-capacity.html\">Managing storage and throughput capacity</a> in the <i>Amazon FSx for Lustre User Guide</i>.</p>"
         },
         "WindowsConfiguration": {
           "shape": "UpdateFileSystemWindowsConfiguration",
@@ -2225,6 +3762,9 @@
         },
         "LustreConfiguration": {
           "shape": "UpdateFileSystemLustreConfiguration"
+        },
+        "OntapConfiguration": {
+          "shape": "UpdateFileSystemOntapConfiguration"
         }
       },
       "documentation": "<p>The request object for the <code>UpdateFileSystem</code> operation.</p>"
@@ -2261,9 +3801,239 @@
         "SelfManagedActiveDirectoryConfiguration": {
           "shape": "SelfManagedActiveDirectoryConfigurationUpdates",
           "documentation": "<p>The configuration Amazon FSx uses to join the Windows File Server instance to the self-managed Microsoft AD directory. You cannot make a self-managed Microsoft AD update request if there is an existing self-managed Microsoft AD update request in progress.</p>"
+        },
+        "AuditLogConfiguration": {
+          "shape": "WindowsAuditLogCreateConfiguration",
+          "documentation": "<p>The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system..</p>"
         }
       },
       "documentation": "<p>Updates the configuration for an existing Amazon FSx for Windows File Server file system. Amazon FSx only overwrites existing properties with non-null values provided in the request.</p>"
+    },
+    "UpdateOntapVolumeConfiguration": {
+      "type": "structure",
+      "members": {
+        "JunctionPath": {
+          "shape": "JunctionPath",
+          "documentation": "<p>Specifies the location in the SVM's namespace where the volume is mounted. The <code>JunctionPath</code> must have a leading forward slash, such as <code>/vol3</code>.</p>"
+        },
+        "SecurityStyle": {
+          "shape": "SecurityStyle",
+          "documentation": "<p>The security style for the volume, which can be <code>UNIX</code>. <code>NTFS</code>, or <code>MIXED</code>.</p>"
+        },
+        "SizeInMegabytes": {
+          "shape": "VolumeCapacity",
+          "documentation": "<p>Specifies the size of the volume in megabytes.</p>"
+        },
+        "StorageEfficiencyEnabled": {
+          "shape": "Flag",
+          "documentation": "<p>Default is <code>false</code>. Set to true to enable the deduplication, compression, and compaction storage efficiency features on the volume.</p>"
+        },
+        "TieringPolicy": {
+          "shape": "TieringPolicy",
+          "documentation": "<p>Update the volume's data tiering policy.</p>"
+        }
+      },
+      "documentation": "<p>Used to specify changes to the ONTAP configuration for the volume you are updating.</p>"
+    },
+    "UpdateStorageVirtualMachineRequest": {
+      "type": "structure",
+      "required": [
+        "StorageVirtualMachineId"
+      ],
+      "members": {
+        "ActiveDirectoryConfiguration": {
+          "shape": "UpdateSvmActiveDirectoryConfiguration",
+          "documentation": "<p>Updates the Microsoft Active Directory (AD) configuration for an SVM that is joined to an AD.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        },
+        "StorageVirtualMachineId": {
+          "shape": "StorageVirtualMachineId",
+          "documentation": "<p>The ID of the SVM that you want to update, in the format <code>svm-0123456789abcdef0</code>.</p>"
+        },
+        "SvmAdminPassword": {
+          "shape": "AdminPassword",
+          "documentation": "<p>Enter a new SvmAdminPassword if you are updating it.</p>"
+        }
+      }
+    },
+    "UpdateStorageVirtualMachineResponse": {
+      "type": "structure",
+      "members": {
+        "StorageVirtualMachine": {
+          "shape": "StorageVirtualMachine"
+        }
+      }
+    },
+    "UpdateSvmActiveDirectoryConfiguration": {
+      "type": "structure",
+      "members": {
+        "SelfManagedActiveDirectoryConfiguration": {
+          "shape": "SelfManagedActiveDirectoryConfigurationUpdates"
+        }
+      },
+      "documentation": "<p>Updates the Microsoft Active Directory (AD) configuration of an SVM joined to an AD. Pleae note, account credentials are not returned in the response payload.</p>"
+    },
+    "UpdateVolumeRequest": {
+      "type": "structure",
+      "required": [
+        "VolumeId"
+      ],
+      "members": {
+        "ClientRequestToken": {
+          "shape": "ClientRequestToken",
+          "idempotencyToken": true
+        },
+        "VolumeId": {
+          "shape": "VolumeId",
+          "documentation": "<p>Specifies the volume that you want to update, formatted <code>fsvol-0123456789abcdef0</code>.</p>"
+        },
+        "OntapConfiguration": {
+          "shape": "UpdateOntapVolumeConfiguration",
+          "documentation": "<p>The <code>ONTAP</code> configuration of the volume you are updating.</p>"
+        }
+      }
+    },
+    "UpdateVolumeResponse": {
+      "type": "structure",
+      "members": {
+        "Volume": {
+          "shape": "Volume",
+          "documentation": "<p>Returned after a successful <code>UpdateVolume</code> API operation, describing the volume just updated.</p>"
+        }
+      }
+    },
+    "Volume": {
+      "type": "structure",
+      "members": {
+        "CreationTime": {
+          "shape": "CreationTime"
+        },
+        "FileSystemId": {
+          "shape": "FileSystemId"
+        },
+        "Lifecycle": {
+          "shape": "VolumeLifecycle",
+          "documentation": "<p>The lifecycle status of the volume.</p> <ul> <li> <p> <code>CREATED</code> - The volume is fully available for use.</p> </li> <li> <p> <code>CREATING</code> - Amazon FSx is creating the new volume.</p> </li> <li> <p> <code>DELETING</code> - Amazon FSx is deleting an existing volume.</p> </li> <li> <p> <code>FAILED</code> - Amazon FSx was unable to create the volume.</p> </li> <li> <p> <code>MISCONFIGURED</code> - The volume is in a failed but recoverable state.</p> </li> <li> <p> <code>PENDING</code> - Amazon FSx has not started creating the volume.</p> </li> </ul>"
+        },
+        "Name": {
+          "shape": "VolumeName",
+          "documentation": "<p>The name of the volume.</p>"
+        },
+        "OntapConfiguration": {
+          "shape": "OntapVolumeConfiguration"
+        },
+        "ResourceARN": {
+          "shape": "ResourceARN"
+        },
+        "Tags": {
+          "shape": "Tags"
+        },
+        "VolumeId": {
+          "shape": "VolumeId",
+          "documentation": "<p>The system-generated, unique ID of the volume.</p>"
+        },
+        "VolumeType": {
+          "shape": "VolumeType",
+          "documentation": "<p>The type of volume; <code>ONTAP</code> is the only valid volume type.</p>"
+        },
+        "LifecycleTransitionReason": {
+          "shape": "LifecycleTransitionReason",
+          "documentation": "<p>Describes why the volume lifecycle state changed.</p>"
+        }
+      },
+      "documentation": "<p>Describes an Amazon FSx for NetApp ONTAP volume.</p>"
+    },
+    "VolumeCapacity": {
+      "type": "integer",
+      "max": 2147483647,
+      "min": 0
+    },
+    "VolumeFilter": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "VolumeFilterName",
+          "documentation": "<p>The name for this filter.</p>"
+        },
+        "Values": {
+          "shape": "VolumeFilterValues",
+          "documentation": "<p>The values of the filter. These are all the values for any of the applied filters.</p>"
+        }
+      },
+      "documentation": "<p>A filter used to restrict the results of describe calls for Amazon FSx for NetApp ONTAP volumes. You can use multiple filters to return results that meet all applied filter requirements.</p>"
+    },
+    "VolumeFilterName": {
+      "type": "string",
+      "enum": [
+        "file-system-id",
+        "storage-virtual-machine-id"
+      ]
+    },
+    "VolumeFilterValue": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^[0-9a-zA-Z\\*\\.\\\\/\\?\\-\\_]*$"
+    },
+    "VolumeFilterValues": {
+      "type": "list",
+      "member": {
+        "shape": "VolumeFilterValue"
+      },
+      "max": 20
+    },
+    "VolumeFilters": {
+      "type": "list",
+      "member": {
+        "shape": "VolumeFilter"
+      },
+      "max": 2
+    },
+    "VolumeId": {
+      "type": "string",
+      "max": 23,
+      "min": 23,
+      "pattern": "^(fsvol-[0-9a-f]{17,})$"
+    },
+    "VolumeIds": {
+      "type": "list",
+      "member": {
+        "shape": "VolumeId"
+      },
+      "max": 50
+    },
+    "VolumeLifecycle": {
+      "type": "string",
+      "enum": [
+        "CREATING",
+        "CREATED",
+        "DELETING",
+        "FAILED",
+        "MISCONFIGURED",
+        "PENDING"
+      ]
+    },
+    "VolumeName": {
+      "type": "string",
+      "max": 203,
+      "min": 1,
+      "pattern": "^[^\\u0000\\u0085\\u2028\\u2029\\r\\n]{1,203}$"
+    },
+    "VolumeType": {
+      "type": "string",
+      "enum": [
+        "ONTAP"
+      ]
+    },
+    "Volumes": {
+      "type": "list",
+      "member": {
+        "shape": "Volume"
+      },
+      "max": 50
     },
     "VpcId": {
       "type": "string",
@@ -2279,6 +4049,59 @@
       "min": 7,
       "pattern": "^[1-7]:([01]\\d|2[0-3]):?([0-5]\\d)$"
     },
+    "WindowsAccessAuditLogLevel": {
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "SUCCESS_ONLY",
+        "FAILURE_ONLY",
+        "SUCCESS_AND_FAILURE"
+      ]
+    },
+    "WindowsAuditLogConfiguration": {
+      "type": "structure",
+      "required": [
+        "FileAccessAuditLogLevel",
+        "FileShareAccessAuditLogLevel"
+      ],
+      "members": {
+        "FileAccessAuditLogLevel": {
+          "shape": "WindowsAccessAuditLogLevel",
+          "documentation": "<p>Sets which attempt type is logged by Amazon FSx for file and folder accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access files or folders are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of files and folders is turned off.</p> </li> </ul>"
+        },
+        "FileShareAccessAuditLogLevel": {
+          "shape": "WindowsAccessAuditLogLevel",
+          "documentation": "<p>Sets which attempt type is logged by Amazon FSx for file share accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access file shares are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access file shares are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access file shares are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of file shares is turned off.</p> </li> </ul>"
+        },
+        "AuditLogDestination": {
+          "shape": "GeneralARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) for the destination of the audit logs. The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN.</p> <p>The name of the Amazon CloudWatch Logs log group must begin with the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the <code>aws-fsx</code> prefix.</p> <p>The destination ARN (either CloudWatch Logs log group or Kinesis Data Firehose delivery stream) must be in the same Amazon Web Services partition, Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.</p>"
+        }
+      },
+      "documentation": "<p>The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/file-access-auditing.html\"> File access auditing</a>.</p>"
+    },
+    "WindowsAuditLogCreateConfiguration": {
+      "type": "structure",
+      "required": [
+        "FileAccessAuditLogLevel",
+        "FileShareAccessAuditLogLevel"
+      ],
+      "members": {
+        "FileAccessAuditLogLevel": {
+          "shape": "WindowsAccessAuditLogLevel",
+          "documentation": "<p>Sets which attempt type is logged by Amazon FSx for file and folder accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access files or folders are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access files or folders are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of files and folders is turned off.</p> </li> </ul>"
+        },
+        "FileShareAccessAuditLogLevel": {
+          "shape": "WindowsAccessAuditLogLevel",
+          "documentation": "<p>Sets which attempt type is logged by Amazon FSx for file share accesses.</p> <ul> <li> <p> <code>SUCCESS_ONLY</code> - only successful attempts to access file shares are logged.</p> </li> <li> <p> <code>FAILURE_ONLY</code> - only failed attempts to access file shares are logged.</p> </li> <li> <p> <code>SUCCESS_AND_FAILURE</code> - both successful attempts and failed attempts to access file shares are logged.</p> </li> <li> <p> <code>DISABLED</code> - access auditing of file shares is turned off.</p> </li> </ul>"
+        },
+        "AuditLogDestination": {
+          "shape": "GeneralARN",
+          "documentation": "<p>The Amazon Resource Name (ARN) that specifies the destination of the audit logs.</p> <p>The destination can be any Amazon CloudWatch Logs log group ARN or Amazon Kinesis Data Firehose delivery stream ARN, with the following requirements:</p> <ul> <li> <p>The destination ARN that you provide (either CloudWatch Logs log group or Kinesis Data Firehose delivery stream) must be in the same Amazon Web Services partition, Amazon Web Services Region, and Amazon Web Services account as your Amazon FSx file system.</p> </li> <li> <p>The name of the Amazon CloudWatch Logs log group must begin with the <code>/aws/fsx</code> prefix. The name of the Amazon Kinesis Data Firehouse delivery stream must begin with the <code>aws-fsx</code> prefix.</p> </li> <li> <p>If you do not provide a destination in <code>AuditLogDestination</code>, Amazon FSx will create and use a log stream in the CloudWatch Logs <code>/aws/fsx/windows</code> log group.</p> </li> <li> <p>If <code>AuditLogDestination</code> is provided and the resource does not exist, the request will fail with a <code>BadRequest</code> error.</p> </li> <li> <p>If <code>FileAccessAuditLogLevel</code> and <code>FileShareAccessAuditLogLevel</code> are both set to <code>DISABLED</code>, you cannot specify a destination in <code>AuditLogDestination</code>.</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>The Windows file access auditing configuration used when creating or updating an Amazon FSx for Windows File Server file system.</p>"
+    },
     "WindowsDeploymentType": {
       "type": "string",
       "enum": [
@@ -2292,7 +4115,7 @@
       "members": {
         "ActiveDirectoryId": {
           "shape": "DirectoryId",
-          "documentation": "<p>The ID for an existing Microsoft Active Directory instance that the file system should join when it's created.</p>"
+          "documentation": "<p>The ID for an existing Amazon Web Services Managed Microsoft Active Directory instance that the file system is joined to.</p>"
         },
         "SelfManagedActiveDirectoryConfiguration": {
           "shape": "SelfManagedActiveDirectoryAttributes"
@@ -2307,7 +4130,7 @@
         },
         "PreferredSubnetId": {
           "shape": "SubnetId",
-          "documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, it specifies the ID of the subnet where the preferred file server is located. Must be one of the two subnet IDs specified in <code>SubnetIds</code> property. Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server.</p> <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this value is the same as that for <code>SubnetIDs</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources\">Availability and Durability: Single-AZ and Multi-AZ File Systems</a> </p>"
+          "documentation": "<p>For <code>MULTI_AZ_1</code> deployment types, it specifies the ID of the subnet where the preferred file server is located. Must be one of the two subnet IDs specified in <code>SubnetIds</code> property. Amazon FSx serves traffic from this subnet except in the event of a failover to the secondary file server.</p> <p>For <code>SINGLE_AZ_1</code> and <code>SINGLE_AZ_2</code> deployment types, this value is the same as that for <code>SubnetIDs</code>. For more information, see <a href=\"https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html#single-multi-az-resources\">Availability and durability: Single-AZ and Multi-AZ file systems</a>.</p>"
         },
         "PreferredFileServerIp": {
           "shape": "IpAddress",
@@ -2315,7 +4138,7 @@
         },
         "ThroughputCapacity": {
           "shape": "MegabytesPerSecond",
-          "documentation": "<p>The throughput of an Amazon FSx file system, measured in megabytes per second.</p>"
+          "documentation": "<p>The throughput of the Amazon FSx file system, measured in megabytes per second.</p>"
         },
         "MaintenanceOperationsInProgress": {
           "shape": "FileSystemMaintenanceOperations",
@@ -2336,6 +4159,13 @@
         "CopyTagsToBackups": {
           "shape": "Flag",
           "documentation": "<p>A boolean flag indicating whether tags on the file system should be copied to backups. This value defaults to false. If it's set to true, all tags on the file system are copied to all automatic backups and any user-initiated backups where the user doesn't specify any tags. If this value is true, and you specify one or more tags, only the specified tags are copied to backups. If you specify one or more tags when creating a user-initiated backup, no tags are copied from the file system, regardless of this value.</p>"
+        },
+        "Aliases": {
+          "shape": "Aliases"
+        },
+        "AuditLogConfiguration": {
+          "shape": "WindowsAuditLogConfiguration",
+          "documentation": "<p>The configuration that Amazon FSx for Windows File Server uses to audit and log user accesses of files, folders, and file shares on the Amazon FSx for Windows File Server file system.</p>"
         }
       },
       "documentation": "<p>The configuration for this Microsoft Windows file system.</p>"

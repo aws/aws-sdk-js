@@ -1,0 +1,97 @@
+[
+    {
+        "type": "feature",
+        "category": "ApplicationInsights",
+        "description": "Add Detected Workload to ApplicationComponent which shows the workloads that installed in the component"
+    },
+    {
+        "type": "feature",
+        "category": "CodeArtifact",
+        "description": "Add support for the NuGet package format."
+    },
+    {
+        "type": "feature",
+        "category": "CodeStarconnections",
+        "description": "Added support for the UpdateHost API."
+    },
+    {
+        "type": "feature",
+        "category": "DynamoDB",
+        "description": "With this release, you can capture data changes in any Amazon DynamoDB table as an Amazon Kinesis data stream. You also can use PartiQL (SQL-compatible language) to manipulate data in DynamoDB tables."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release adds support for Multiple Private DNS names to DescribeVpcEndpointServices response."
+    },
+    {
+        "type": "feature",
+        "category": "ECS",
+        "description": "This release adds support for updating capacity providers, specifying custom instance warmup periods for capacity providers, and using deployment circuit breaker for your ECS Services."
+    },
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "Add API support for EMR Studio, a new notebook-first IDE for data scientists and data engineers with single sign-on, Jupyter notebooks, automated infrastructure provisioning, and job diagnosis."
+    },
+    {
+        "type": "feature",
+        "category": "ForecastService",
+        "description": "Releasing the set of PredictorBacktestExportJob APIs which allow customers to export backtest values and item-level metrics data from Predictor training."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Feature1 - Glue crawler adds data lineage configuration option. Feature2 - AWS Glue Data Catalog adds APIs for PartitionIndex creation and deletion as part of Enhancement Partition Management feature."
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "This release enables users to identify different file types in the over-the-air update (OTA) functionality using fileType parameter for CreateOTAUpdate API"
+    },
+    {
+        "type": "feature",
+        "category": "Kafka",
+        "description": "Adding MAINTENANCE and REBOOTING_BROKER to Cluster states."
+    },
+    {
+        "type": "feature",
+        "category": "Lambda",
+        "description": "This release includes support for new feature: Code Signing for AWS Lambda. This adds new resources and APIs to configure Lambda functions to accept and verify signed code artifacts at deployment."
+    },
+    {
+        "type": "feature",
+        "category": "LicenseManager",
+        "description": "AWS License Manager now provides the ability for license administrators to be able to associate license configurations to AMIs shared with their AWS account"
+    },
+    {
+        "type": "feature",
+        "category": "Outposts",
+        "description": "Support specifying tags during the creation of the Outpost resource. Tags are now returned in the response body of Outpost APIs."
+    },
+    {
+        "type": "feature",
+        "category": "SSOAdmin",
+        "description": "AWS Single Sign-On now enables attribute-based access control for workforce identities to simplify permissions in AWS"
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "Updated the account management API to support the integration with AWS Organizations. Added new methods to allow users to view and manage the delegated administrator account for Security Hub."
+    },
+    {
+        "type": "feature",
+        "category": "Signer",
+        "description": "AWS Signer is launching code-signing for AWS Lambda. Now customers can cryptographically sign Lambda code to ensure trust, integrity, and functionality."
+    },
+    {
+        "type": "feature",
+        "category": "TimestreamQuery",
+        "description": "Amazon Timestream now supports \"QueryStatus\" in Query API which has information about cumulative bytes scanned, metered, as well as progress percentage for the query."
+    },
+    {
+        "type": "feature",
+        "category": "Translate",
+        "description": "This update adds new operations to create and manage parallel data in Amazon Translate. Parallel data is a resource that you can use to run Active Custom Translation jobs."
+    }
+]

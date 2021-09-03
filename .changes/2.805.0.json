@@ -1,0 +1,17 @@
+[
+    {
+        "type": "bugfix",
+        "category": "S3",
+        "description": "fixed a bug where createPresignedPost could result in a process crash."
+    },
+    {
+        "type": "feature",
+        "category": "DMS",
+        "description": "Added PreserveTransaction setting to preserve order of CDC for S3 as target. Added CsvNoSupValue setting to replace empty value for columns not included in the supplemental log for S3 as target."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalogAppRegistry",
+        "description": "AWS Service Catalog AppRegistry now supports adding, removing, and listing tags on resources after they are created."
+    }
+]

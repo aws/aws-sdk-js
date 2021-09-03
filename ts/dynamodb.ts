@@ -48,7 +48,7 @@ const record: DynamoDB.AttributeMap = DynamoDB.Converter.marshall(
     options
 );
 
-const jsType: any = DynamoDB.Converter.output('string');
+const jsType: any = DynamoDB.Converter.output({ S: 'string' });
 const jsObject: {[key: string]: any} = DynamoDB.Converter.unmarshall({
     string: {S: 'foo'},
     list: {L: [{S: 'fizz'}, {S: 'buzz'}, {S: 'pop'}]},

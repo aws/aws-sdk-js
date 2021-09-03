@@ -985,7 +985,7 @@ declare namespace APIGateway {
   }
   export interface Account {
     /**
-     * The ARN of an Amazon CloudWatch role for the current Account. 
+     * The ARN of an Amazon CloudWatch role for the current Account.
      */
     cloudwatchRoleArn?: String;
     /**
@@ -1094,7 +1094,7 @@ declare namespace APIGateway {
      */
     type?: AuthorizerType;
     /**
-     * A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN or REQUEST authorizer, this is not defined. 
+     * A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN or REQUEST authorizer, this is not defined.
      */
     providerARNs?: ListOfARNs;
     /**
@@ -1256,7 +1256,7 @@ declare namespace APIGateway {
      */
     type: AuthorizerType;
     /**
-     * A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN or REQUEST authorizer, this is not defined. 
+     * A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer. Each element is of this format: arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN or REQUEST authorizer, this is not defined.
      */
     providerARNs?: ListOfARNs;
     /**
@@ -1406,7 +1406,7 @@ declare namespace APIGateway {
      */
     regionalCertificateArn?: String;
     /**
-     * The endpoint configuration of this DomainName showing the endpoint types of the domain name. 
+     * The endpoint configuration of this DomainName showing the endpoint types of the domain name.
      */
     endpointConfiguration?: EndpointConfiguration;
     /**
@@ -1417,6 +1417,11 @@ declare namespace APIGateway {
      * The Transport Layer Security (TLS) version + cipher suite for this DomainName. The valid values are TLS_1_0 and TLS_1_2.
      */
     securityPolicy?: SecurityPolicy;
+    mutualTlsAuthentication?: MutualTlsAuthenticationInput;
+    /**
+     * The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn.
+     */
+    ownershipVerificationCertificateArn?: String;
   }
   export interface CreateModelRequest {
     /**
@@ -1498,11 +1503,11 @@ declare namespace APIGateway {
      */
     minimumCompressionSize?: NullableInteger;
     /**
-     * The source of the API key for metering requests according to a usage plan. Valid values are: HEADER to read the API key from the X-API-Key header of a request. AUTHORIZER to read the API key from the UsageIdentifierKey from a custom authorizer. 
+     * The source of the API key for metering requests according to a usage plan. Valid values are: HEADER to read the API key from the X-API-Key header of a request. AUTHORIZER to read the API key from the UsageIdentifierKey from a custom authorizer.
      */
     apiKeySource?: ApiKeySourceType;
     /**
-     * The endpoint configuration of this RestApi showing the endpoint types of the API. 
+     * The endpoint configuration of this RestApi showing the endpoint types of the API.
      */
     endpointConfiguration?: EndpointConfiguration;
     /**
@@ -1513,6 +1518,10 @@ declare namespace APIGateway {
      * The key-value map of strings. The valid character set is [a-zA-Z+-=._:/]. The tag key can be up to 128 characters and must not start with aws:. The tag value can be up to 256 characters.
      */
     tags?: MapOfStringToString;
+    /**
+     * Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.
+     */
+    disableExecuteApiEndpoint?: Boolean;
   }
   export interface CreateStageRequest {
     /**
@@ -1692,7 +1701,7 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * [Required] The response type of the associated GatewayResponse. Valid values are ACCESS_DENIEDAPI_CONFIGURATION_ERRORAUTHORIZER_FAILURE AUTHORIZER_CONFIGURATION_ERRORBAD_REQUEST_PARAMETERSBAD_REQUEST_BODYDEFAULT_4XXDEFAULT_5XXEXPIRED_TOKENINVALID_SIGNATUREINTEGRATION_FAILUREINTEGRATION_TIMEOUTINVALID_API_KEYMISSING_AUTHENTICATION_TOKEN QUOTA_EXCEEDEDREQUEST_TOO_LARGERESOURCE_NOT_FOUNDTHROTTLEDUNAUTHORIZEDUNSUPPORTED_MEDIA_TYPE 
+     * [Required] The response type of the associated GatewayResponse.
      */
     responseType: GatewayResponseType;
   }
@@ -1965,7 +1974,7 @@ declare namespace APIGateway {
      */
     regionalDomainName?: String;
     /**
-     * The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For more information, see Set up a Regional Custom Domain Name and AWS Regions and Endpoints for API Gateway. 
+     * The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For more information, see Set up a Regional Custom Domain Name and AWS Regions and Endpoints for API Gateway.
      */
     regionalHostedZoneId?: String;
     /**
@@ -1981,15 +1990,15 @@ declare namespace APIGateway {
      */
     distributionDomainName?: String;
     /**
-     * The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized endpoint. The valid value is Z2FDTNDATAQYW2 for all the regions. For more information, see Set up a Regional Custom Domain Name and AWS Regions and Endpoints for API Gateway. 
+     * The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized endpoint. The valid value is Z2FDTNDATAQYW2 for all the regions. For more information, see Set up a Regional Custom Domain Name and AWS Regions and Endpoints for API Gateway.
      */
     distributionHostedZoneId?: String;
     /**
-     * The endpoint configuration of this DomainName showing the endpoint types of the domain name. 
+     * The endpoint configuration of this DomainName showing the endpoint types of the domain name.
      */
     endpointConfiguration?: EndpointConfiguration;
     /**
-     * The status of the DomainName migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.
+     * The status of the DomainName migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.
      */
     domainNameStatus?: DomainNameStatus;
     /**
@@ -2004,8 +2013,16 @@ declare namespace APIGateway {
      * The collection of tags. Each tag element is associated with a given resource.
      */
     tags?: MapOfStringToString;
+    /**
+     * The mutual TLS authentication configuration for a custom domain name. If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your API.
+     */
+    mutualTlsAuthentication?: MutualTlsAuthentication;
+    /**
+     * The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn.
+     */
+    ownershipVerificationCertificateArn?: String;
   }
-  export type DomainNameStatus = "AVAILABLE"|"UPDATING"|"PENDING"|string;
+  export type DomainNameStatus = "AVAILABLE"|"UPDATING"|"PENDING"|"PENDING_CERTIFICATE_REIMPORT"|"PENDING_OWNERSHIP_VERIFICATION"|string;
   export interface DomainNames {
     position?: String;
     /**
@@ -2061,7 +2078,7 @@ declare namespace APIGateway {
   }
   export interface GatewayResponse {
     /**
-     * The response type of the associated GatewayResponse. Valid values are ACCESS_DENIEDAPI_CONFIGURATION_ERRORAUTHORIZER_FAILURE AUTHORIZER_CONFIGURATION_ERRORBAD_REQUEST_PARAMETERSBAD_REQUEST_BODYDEFAULT_4XXDEFAULT_5XXEXPIRED_TOKENINVALID_SIGNATUREINTEGRATION_FAILUREINTEGRATION_TIMEOUTINVALID_API_KEYMISSING_AUTHENTICATION_TOKEN QUOTA_EXCEEDEDREQUEST_TOO_LARGERESOURCE_NOT_FOUNDTHROTTLEDUNAUTHORIZEDUNSUPPORTED_MEDIA_TYPE 
+     * The response type of the associated GatewayResponse.
      */
     responseType?: GatewayResponseType;
     /**
@@ -2081,7 +2098,7 @@ declare namespace APIGateway {
      */
     defaultResponse?: Boolean;
   }
-  export type GatewayResponseType = "DEFAULT_4XX"|"DEFAULT_5XX"|"RESOURCE_NOT_FOUND"|"UNAUTHORIZED"|"INVALID_API_KEY"|"ACCESS_DENIED"|"AUTHORIZER_FAILURE"|"AUTHORIZER_CONFIGURATION_ERROR"|"INVALID_SIGNATURE"|"EXPIRED_TOKEN"|"MISSING_AUTHENTICATION_TOKEN"|"INTEGRATION_FAILURE"|"INTEGRATION_TIMEOUT"|"API_CONFIGURATION_ERROR"|"UNSUPPORTED_MEDIA_TYPE"|"BAD_REQUEST_PARAMETERS"|"BAD_REQUEST_BODY"|"REQUEST_TOO_LARGE"|"THROTTLED"|"QUOTA_EXCEEDED"|string;
+  export type GatewayResponseType = "DEFAULT_4XX"|"DEFAULT_5XX"|"RESOURCE_NOT_FOUND"|"UNAUTHORIZED"|"INVALID_API_KEY"|"ACCESS_DENIED"|"AUTHORIZER_FAILURE"|"AUTHORIZER_CONFIGURATION_ERROR"|"INVALID_SIGNATURE"|"EXPIRED_TOKEN"|"MISSING_AUTHENTICATION_TOKEN"|"INTEGRATION_FAILURE"|"INTEGRATION_TIMEOUT"|"API_CONFIGURATION_ERROR"|"UNSUPPORTED_MEDIA_TYPE"|"BAD_REQUEST_PARAMETERS"|"BAD_REQUEST_BODY"|"REQUEST_TOO_LARGE"|"THROTTLED"|"QUOTA_EXCEEDED"|"WAF_FILTERED"|string;
   export interface GatewayResponses {
     position?: String;
     /**
@@ -2333,7 +2350,7 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * [Required] The response type of the associated GatewayResponse. Valid values are ACCESS_DENIEDAPI_CONFIGURATION_ERRORAUTHORIZER_FAILURE AUTHORIZER_CONFIGURATION_ERRORBAD_REQUEST_PARAMETERSBAD_REQUEST_BODYDEFAULT_4XXDEFAULT_5XXEXPIRED_TOKENINVALID_SIGNATUREINTEGRATION_FAILUREINTEGRATION_TIMEOUTINVALID_API_KEYMISSING_AUTHENTICATION_TOKEN QUOTA_EXCEEDEDREQUEST_TOO_LARGERESOURCE_NOT_FOUNDTHROTTLEDUNAUTHORIZEDUNSUPPORTED_MEDIA_TYPE 
+     * [Required] The response type of the associated GatewayResponse.
      */
     responseType: GatewayResponseType;
   }
@@ -2995,6 +3012,30 @@ declare namespace APIGateway {
      */
     items?: ListOfModel;
   }
+  export interface MutualTlsAuthentication {
+    /**
+     * An Amazon S3 URL that specifies the truststore for mutual TLS authentication, for example s3://bucket-name/key-name. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.
+     */
+    truststoreUri?: String;
+    /**
+     * The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.
+     */
+    truststoreVersion?: String;
+    /**
+     * A list of warnings that API Gateway returns while processing your truststore. Invalid certificates produce warnings. Mutual TLS is still enabled, but some clients might not be able to access your API. To resolve warnings, upload a new truststore to S3, and then update you domain name to use the new version.
+     */
+    truststoreWarnings?: ListOfString;
+  }
+  export interface MutualTlsAuthenticationInput {
+    /**
+     * An Amazon S3 resource ARN that specifies the truststore for mutual TLS authentication, for example, s3://bucket-name/key-name. The truststore can contain certificates from public or private certificate authorities. To update the truststore, upload a new version to S3, and then update your custom domain name to use the new version. To update the truststore, you must have permissions to access the S3 object.
+     */
+    truststoreUri?: String;
+    /**
+     * The version of the S3 object that contains your truststore. To specify a version, you must have versioning enabled for the S3 bucket.
+     */
+    truststoreVersion?: String;
+  }
   export type NullableBoolean = boolean;
   export type NullableInteger = number;
   export type Op = "add"|"remove"|"replace"|"move"|"copy"|"test"|string;
@@ -3024,7 +3065,7 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * [Required] The response type of the associated GatewayResponse. Valid values are ACCESS_DENIEDAPI_CONFIGURATION_ERRORAUTHORIZER_FAILURE AUTHORIZER_CONFIGURATION_ERRORBAD_REQUEST_PARAMETERSBAD_REQUEST_BODYDEFAULT_4XXDEFAULT_5XXEXPIRED_TOKENINVALID_SIGNATUREINTEGRATION_FAILUREINTEGRATION_TIMEOUTINVALID_API_KEYMISSING_AUTHENTICATION_TOKEN QUOTA_EXCEEDEDREQUEST_TOO_LARGERESOURCE_NOT_FOUNDTHROTTLEDUNAUTHORIZEDUNSUPPORTED_MEDIA_TYPE 
+     * [Required] The response type of the associated GatewayResponse.
      */
     responseType: GatewayResponseType;
     /**
@@ -3243,7 +3284,7 @@ declare namespace APIGateway {
      */
     limit?: Integer;
     /**
-     * The number of requests subtracted from the given limit in the initial time period.
+     * The day that a time period starts. For example, with a time period of WEEK, an offset of 0 starts on Sunday, and an offset of 1 starts on Monday.
      */
     offset?: Integer;
     /**
@@ -3339,11 +3380,11 @@ declare namespace APIGateway {
      */
     minimumCompressionSize?: NullableInteger;
     /**
-     * The source of the API key for metering requests according to a usage plan. Valid values are: HEADER to read the API key from the X-API-Key header of a request. AUTHORIZER to read the API key from the UsageIdentifierKey from a custom authorizer. 
+     * The source of the API key for metering requests according to a usage plan. Valid values are: HEADER to read the API key from the X-API-Key header of a request. AUTHORIZER to read the API key from the UsageIdentifierKey from a custom authorizer.
      */
     apiKeySource?: ApiKeySourceType;
     /**
-     * The endpoint configuration of this RestApi showing the endpoint types of the API. 
+     * The endpoint configuration of this RestApi showing the endpoint types of the API.
      */
     endpointConfiguration?: EndpointConfiguration;
     /**
@@ -3354,6 +3395,10 @@ declare namespace APIGateway {
      * The collection of tags. Each tag element is associated with a given resource.
      */
     tags?: MapOfStringToString;
+    /**
+     * Specifies whether clients can invoke your API by using the default execute-api endpoint. By default, clients can invoke your API with the default https://{api_id}.execute-api.{region}.amazonaws.com endpoint. To require that clients use a custom domain name to invoke your API, disable the default endpoint.
+     */
+    disableExecuteApiEndpoint?: Boolean;
   }
   export interface RestApis {
     position?: String;
@@ -3799,7 +3844,7 @@ declare namespace APIGateway {
      */
     restApiId: String;
     /**
-     * [Required] The response type of the associated GatewayResponse. Valid values are ACCESS_DENIEDAPI_CONFIGURATION_ERRORAUTHORIZER_FAILURE AUTHORIZER_CONFIGURATION_ERRORBAD_REQUEST_PARAMETERSBAD_REQUEST_BODYDEFAULT_4XXDEFAULT_5XXEXPIRED_TOKENINVALID_SIGNATUREINTEGRATION_FAILUREINTEGRATION_TIMEOUTINVALID_API_KEYMISSING_AUTHENTICATION_TOKEN QUOTA_EXCEEDEDREQUEST_TOO_LARGERESOURCE_NOT_FOUNDTHROTTLEDUNAUTHORIZEDUNSUPPORTED_MEDIA_TYPE 
+     * [Required] The response type of the associated GatewayResponse.
      */
     responseType: GatewayResponseType;
     /**
@@ -4090,7 +4135,7 @@ declare namespace APIGateway {
      */
     targetArns?: ListOfString;
     /**
-     * The status of the VPC link. The valid values are AVAILABLE, PENDING, DELETING, or FAILED. Deploying an API will wait if the status is PENDING and will fail if the status is DELETING. 
+     * The status of the VPC link. The valid values are AVAILABLE, PENDING, DELETING, or FAILED. Deploying an API will wait if the status is PENDING and will fail if the status is DELETING.
      */
     status?: VpcLinkStatus;
     /**

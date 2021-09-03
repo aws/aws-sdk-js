@@ -1,0 +1,25 @@
+name: git-sync-with-mirror
+
+on:
+  push:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+  git-sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: git-sync
+        env:
+          git_sync_source_repo: ${{ secrets.GIT_SYNC_SOURCE_REPO }}
+          git_sync_destination_repo: ${{ secrets.GIT_SYNC_DESTINATION_REPO }}
+        if: env.git_sync_source_repo && env.git_sync_destination_repo
+        uses: wei/git-sync@v3
+        with:
+          source_repo: ${{ secrets.GIT_SYNC_SOURCE_REPO }}
+          source_branch: "master"
+          destination_repo: ${{ secrets.GIT_SYNC_DESTINATION_REPO }} 
+          destination_branch: "master"
+          source_ssh_private_key: ${{ secrets.GIT_SYNC_SOURCE_SSH_PRIVATE_KEY }}
+          destination_ssh_private_key:  ${{ secrets.GIT_SYNC_DESTINATION_SSH_PRIVATE_KEY }}

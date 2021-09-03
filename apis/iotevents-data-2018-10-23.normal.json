@@ -11,6 +11,93 @@
     "uid": "iotevents-data-2018-10-23"
   },
   "operations": {
+    "BatchAcknowledgeAlarm": {
+      "name": "BatchAcknowledgeAlarm",
+      "http": {
+        "method": "POST",
+        "requestUri": "/alarms/acknowledge",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "BatchAcknowledgeAlarmRequest"
+      },
+      "output": {
+        "shape": "BatchAcknowledgeAlarmResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Acknowledges one or more alarms. The alarms change to the <code>ACKNOWLEDGED</code> state after you acknowledge them.</p>"
+    },
+    "BatchDisableAlarm": {
+      "name": "BatchDisableAlarm",
+      "http": {
+        "method": "POST",
+        "requestUri": "/alarms/disable",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "BatchDisableAlarmRequest"
+      },
+      "output": {
+        "shape": "BatchDisableAlarmResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Disables one or more alarms. The alarms change to the <code>DISABLED</code> state after you disable them.</p>"
+    },
+    "BatchEnableAlarm": {
+      "name": "BatchEnableAlarm",
+      "http": {
+        "method": "POST",
+        "requestUri": "/alarms/enable",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "BatchEnableAlarmRequest"
+      },
+      "output": {
+        "shape": "BatchEnableAlarmResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Enables one or more alarms. The alarms change to the <code>NORMAL</code> state after you enable them.</p>"
+    },
     "BatchPutMessage": {
       "name": "BatchPutMessage",
       "http": {
@@ -40,6 +127,64 @@
       ],
       "documentation": "<p>Sends a set of messages to the AWS IoT Events system. Each message payload is transformed into the input you specify (<code>\"inputName\"</code>) and ingested into any detectors that monitor that input. If multiple messages are sent, the order in which the messages are processed isn't guaranteed. To guarantee ordering, you must send messages one at a time and wait for a successful response.</p>"
     },
+    "BatchResetAlarm": {
+      "name": "BatchResetAlarm",
+      "http": {
+        "method": "POST",
+        "requestUri": "/alarms/reset",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "BatchResetAlarmRequest"
+      },
+      "output": {
+        "shape": "BatchResetAlarmResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Resets one or more alarms. The alarms return to the <code>NORMAL</code> state after you reset them.</p>"
+    },
+    "BatchSnoozeAlarm": {
+      "name": "BatchSnoozeAlarm",
+      "http": {
+        "method": "POST",
+        "requestUri": "/alarms/snooze",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "BatchSnoozeAlarmRequest"
+      },
+      "output": {
+        "shape": "BatchSnoozeAlarmResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        },
+        {
+          "shape": "ThrottlingException"
+        }
+      ],
+      "documentation": "<p>Changes one or more alarms to the snooze mode. The alarms change to the <code>SNOOZE_DISABLED</code> state after you set them to the snooze mode.</p>"
+    },
     "BatchUpdateDetector": {
       "name": "BatchUpdateDetector",
       "http": {
@@ -68,6 +213,37 @@
         }
       ],
       "documentation": "<p>Updates the state, variable values, and timer settings of one or more detectors (instances) of a specified detector model.</p>"
+    },
+    "DescribeAlarm": {
+      "name": "DescribeAlarm",
+      "http": {
+        "method": "GET",
+        "requestUri": "/alarms/{alarmModelName}/keyValues/"
+      },
+      "input": {
+        "shape": "DescribeAlarmRequest"
+      },
+      "output": {
+        "shape": "DescribeAlarmResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Retrieves information about an alarm.</p>"
     },
     "DescribeDetector": {
       "name": "DescribeDetector",
@@ -99,6 +275,37 @@
         }
       ],
       "documentation": "<p>Returns information about the specified detector (instance).</p>"
+    },
+    "ListAlarms": {
+      "name": "ListAlarms",
+      "http": {
+        "method": "GET",
+        "requestUri": "/alarms/{alarmModelName}"
+      },
+      "input": {
+        "shape": "ListAlarmsRequest"
+      },
+      "output": {
+        "shape": "ListAlarmsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Lists one or more alarms. The operation returns only the metadata associated with each alarm.</p>"
     },
     "ListDetectors": {
       "name": "ListDetectors",
@@ -133,6 +340,250 @@
     }
   },
   "shapes": {
+    "AcknowledgeActionConfiguration": {
+      "type": "structure",
+      "members": {
+        "note": {
+          "shape": "Note",
+          "documentation": "<p>The note that you can leave when you acknowledge the alarm.</p>"
+        }
+      },
+      "documentation": "<p>Contains the configuration information of an acknowledge action.</p>"
+    },
+    "AcknowledgeAlarmActionRequest": {
+      "type": "structure",
+      "required": [
+        "requestId",
+        "alarmModelName"
+      ],
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>The request ID. Each ID must be unique within each batch.</p>"
+        },
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>"
+        },
+        "keyValue": {
+          "shape": "KeyValue",
+          "documentation": "<p>The value of the key used as a filter to select only the alarms associated with the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key\">key</a>.</p>"
+        },
+        "note": {
+          "shape": "Note",
+          "documentation": "<p>The note that you can leave when you acknowledge the alarm.</p>"
+        }
+      },
+      "documentation": "<p>Information needed to acknowledge the alarm.</p>"
+    },
+    "AcknowledgeAlarmActionRequests": {
+      "type": "list",
+      "member": {
+        "shape": "AcknowledgeAlarmActionRequest"
+      },
+      "min": 1
+    },
+    "Alarm": {
+      "type": "structure",
+      "members": {
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>"
+        },
+        "alarmModelVersion": {
+          "shape": "AlarmModelVersion",
+          "documentation": "<p>The version of the alarm model.</p>"
+        },
+        "keyValue": {
+          "shape": "KeyValue",
+          "documentation": "<p>The value of the key used as a filter to select only the alarms associated with the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key\">key</a>.</p>"
+        },
+        "alarmState": {
+          "shape": "AlarmState",
+          "documentation": "<p>Contains information about the current state of the alarm.</p>"
+        },
+        "severity": {
+          "shape": "Severity",
+          "documentation": "<p>A non-negative integer that reflects the severity level of the alarm.</p>"
+        },
+        "creationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the alarm was created, in the Unix epoch format.</p>"
+        },
+        "lastUpdateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the alarm was last updated, in the Unix epoch format.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about an alarm.</p>"
+    },
+    "AlarmModelName": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "AlarmModelVersion": {
+      "type": "string",
+      "max": 128,
+      "min": 1
+    },
+    "AlarmState": {
+      "type": "structure",
+      "members": {
+        "stateName": {
+          "shape": "AlarmStateName",
+          "documentation": "<p>The name of the alarm state. The state name can be one of the following values:</p> <ul> <li> <p> <code>DISABLED</code> - When the alarm is in the <code>DISABLED</code> state, it isn't ready to evaluate data. To enable the alarm, you must change the alarm to the <code>NORMAL</code> state.</p> </li> <li> <p> <code>NORMAL</code> - When the alarm is in the <code>NORMAL</code> state, it's ready to evaluate data.</p> </li> <li> <p> <code>ACTIVE</code> - If the alarm is in the <code>ACTIVE</code> state, the alarm is invoked.</p> </li> <li> <p> <code>ACKNOWLEDGED</code> - When the alarm is in the <code>ACKNOWLEDGED</code> state, the alarm was invoked and you acknowledged the alarm.</p> </li> <li> <p> <code>SNOOZE_DISABLED</code> - When the alarm is in the <code>SNOOZE_DISABLED</code> state, the alarm is disabled for a specified period of time. After the snooze time, the alarm automatically changes to the <code>NORMAL</code> state. </p> </li> <li> <p> <code>LATCHED</code> - When the alarm is in the <code>LATCHED</code> state, the alarm was invoked. However, the data that the alarm is currently evaluating is within the specified range. To change the alarm to the <code>NORMAL</code> state, you must acknowledge the alarm.</p> </li> </ul>"
+        },
+        "ruleEvaluation": {
+          "shape": "RuleEvaluation",
+          "documentation": "<p>Information needed to evaluate data.</p>"
+        },
+        "customerAction": {
+          "shape": "CustomerAction",
+          "documentation": "<p>Contains information about the action that you can take to respond to the alarm.</p>"
+        },
+        "systemEvent": {
+          "shape": "SystemEvent",
+          "documentation": "<p>Contains information about alarm state changes.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the current state of the alarm.</p>"
+    },
+    "AlarmStateName": {
+      "type": "string",
+      "enum": [
+        "DISABLED",
+        "NORMAL",
+        "ACTIVE",
+        "ACKNOWLEDGED",
+        "SNOOZE_DISABLED",
+        "LATCHED"
+      ]
+    },
+    "AlarmSummaries": {
+      "type": "list",
+      "member": {
+        "shape": "AlarmSummary"
+      }
+    },
+    "AlarmSummary": {
+      "type": "structure",
+      "members": {
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>"
+        },
+        "alarmModelVersion": {
+          "shape": "AlarmModelVersion",
+          "documentation": "<p>The version of the alarm model.</p>"
+        },
+        "keyValue": {
+          "shape": "KeyValue",
+          "documentation": "<p>The value of the key used as a filter to select only the alarms associated with the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key\">key</a>.</p>"
+        },
+        "stateName": {
+          "shape": "AlarmStateName",
+          "documentation": "<p>The name of the alarm state. The state name can be one of the following values:</p> <ul> <li> <p> <code>DISABLED</code> - When the alarm is in the <code>DISABLED</code> state, it isn't ready to evaluate data. To enable the alarm, you must change the alarm to the <code>NORMAL</code> state.</p> </li> <li> <p> <code>NORMAL</code> - When the alarm is in the <code>NORMAL</code> state, it's ready to evaluate data.</p> </li> <li> <p> <code>ACTIVE</code> - If the alarm is in the <code>ACTIVE</code> state, the alarm is invoked.</p> </li> <li> <p> <code>ACKNOWLEDGED</code> - When the alarm is in the <code>ACKNOWLEDGED</code> state, the alarm was invoked and you acknowledged the alarm.</p> </li> <li> <p> <code>SNOOZE_DISABLED</code> - When the alarm is in the <code>SNOOZE_DISABLED</code> state, the alarm is disabled for a specified period of time. After the snooze time, the alarm automatically changes to the <code>NORMAL</code> state. </p> </li> <li> <p> <code>LATCHED</code> - When the alarm is in the <code>LATCHED</code> state, the alarm was invoked. However, the data that the alarm is currently evaluating is within the specified range. To change the alarm to the <code>NORMAL</code> state, you must acknowledge the alarm.</p> </li> </ul>"
+        },
+        "creationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the alarm was created, in the Unix epoch format.</p>"
+        },
+        "lastUpdateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The time the alarm was last updated, in the Unix epoch format.</p>"
+        }
+      },
+      "documentation": "<p>Contains a summary of an alarm.</p>"
+    },
+    "BatchAcknowledgeAlarmRequest": {
+      "type": "structure",
+      "required": [
+        "acknowledgeActionRequests"
+      ],
+      "members": {
+        "acknowledgeActionRequests": {
+          "shape": "AcknowledgeAlarmActionRequests",
+          "documentation": "<p>The list of acknowledge action requests. You can specify up to 10 requests per operation.</p>"
+        }
+      }
+    },
+    "BatchAcknowledgeAlarmResponse": {
+      "type": "structure",
+      "members": {
+        "errorEntries": {
+          "shape": "BatchAlarmActionErrorEntries",
+          "documentation": "<p>A list of errors associated with the request, or <code>null</code> if there are no errors. Each error entry contains an entry ID that helps you identify the entry that failed.</p>"
+        }
+      }
+    },
+    "BatchAlarmActionErrorEntries": {
+      "type": "list",
+      "member": {
+        "shape": "BatchAlarmActionErrorEntry"
+      }
+    },
+    "BatchAlarmActionErrorEntry": {
+      "type": "structure",
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>The request ID. Each ID must be unique within each batch.</p>"
+        },
+        "errorCode": {
+          "shape": "ErrorCode",
+          "documentation": "<p>The error code.</p>"
+        },
+        "errorMessage": {
+          "shape": "ErrorMessage",
+          "documentation": "<p>A message that describes the error.</p>"
+        }
+      },
+      "documentation": "<p>Contains error messages associated with one of the following requests:</p> <ul> <li> <p> <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchAcknowledgeAlarm.html\">BatchAcknowledgeAlarm</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchDisableAlarm.html\">BatchDisableAlarm</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchEnableAlarm.html\">BatchEnableAlarm</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchResetAlarm.html\">BatchResetAlarm</a> </p> </li> <li> <p> <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchSnoozeAlarm.html\">BatchSnoozeAlarm</a> </p> </li> </ul>"
+    },
+    "BatchDisableAlarmRequest": {
+      "type": "structure",
+      "required": [
+        "disableActionRequests"
+      ],
+      "members": {
+        "disableActionRequests": {
+          "shape": "DisableAlarmActionRequests",
+          "documentation": "<p>The list of disable action requests. You can specify up to 10 requests per operation.</p>"
+        }
+      }
+    },
+    "BatchDisableAlarmResponse": {
+      "type": "structure",
+      "members": {
+        "errorEntries": {
+          "shape": "BatchAlarmActionErrorEntries",
+          "documentation": "<p>A list of errors associated with the request, or <code>null</code> if there are no errors. Each error entry contains an entry ID that helps you identify the entry that failed.</p>"
+        }
+      }
+    },
+    "BatchEnableAlarmRequest": {
+      "type": "structure",
+      "required": [
+        "enableActionRequests"
+      ],
+      "members": {
+        "enableActionRequests": {
+          "shape": "EnableAlarmActionRequests",
+          "documentation": "<p>The list of enable action requests. You can specify up to 10 requests per operation.</p>"
+        }
+      }
+    },
+    "BatchEnableAlarmResponse": {
+      "type": "structure",
+      "members": {
+        "errorEntries": {
+          "shape": "BatchAlarmActionErrorEntries",
+          "documentation": "<p>A list of errors associated with the request, or <code>null</code> if there are no errors. Each error entry contains an entry ID that helps you identify the entry that failed.</p>"
+        }
+      }
+    },
     "BatchPutMessageErrorEntries": {
       "type": "list",
       "member": {
@@ -148,11 +599,11 @@
         },
         "errorCode": {
           "shape": "ErrorCode",
-          "documentation": "<p>The code associated with the error.</p>"
+          "documentation": "<p>The error code.</p>"
         },
         "errorMessage": {
           "shape": "ErrorMessage",
-          "documentation": "<p>More information about the error.</p>"
+          "documentation": "<p>A message that describes the error.</p>"
         }
       },
       "documentation": "<p>Contains information about the errors encountered.</p>"
@@ -178,6 +629,48 @@
         }
       }
     },
+    "BatchResetAlarmRequest": {
+      "type": "structure",
+      "required": [
+        "resetActionRequests"
+      ],
+      "members": {
+        "resetActionRequests": {
+          "shape": "ResetAlarmActionRequests",
+          "documentation": "<p>The list of reset action requests. You can specify up to 10 requests per operation.</p>"
+        }
+      }
+    },
+    "BatchResetAlarmResponse": {
+      "type": "structure",
+      "members": {
+        "errorEntries": {
+          "shape": "BatchAlarmActionErrorEntries",
+          "documentation": "<p>A list of errors associated with the request, or <code>null</code> if there are no errors. Each error entry contains an entry ID that helps you identify the entry that failed.</p>"
+        }
+      }
+    },
+    "BatchSnoozeAlarmRequest": {
+      "type": "structure",
+      "required": [
+        "snoozeActionRequests"
+      ],
+      "members": {
+        "snoozeActionRequests": {
+          "shape": "SnoozeAlarmActionRequests",
+          "documentation": "<p>The list of snooze action requests. You can specify up to 10 requests per operation.</p>"
+        }
+      }
+    },
+    "BatchSnoozeAlarmResponse": {
+      "type": "structure",
+      "members": {
+        "errorEntries": {
+          "shape": "BatchAlarmActionErrorEntries",
+          "documentation": "<p>A list of errors associated with the request, or <code>null</code> if there are no errors. Each error entry contains an entry ID that helps you identify the entry that failed.</p>"
+        }
+      }
+    },
     "BatchUpdateDetectorErrorEntries": {
       "type": "list",
       "member": {
@@ -193,14 +686,14 @@
         },
         "errorCode": {
           "shape": "ErrorCode",
-          "documentation": "<p>The code of the error.</p>"
+          "documentation": "<p>The error code.</p>"
         },
         "errorMessage": {
           "shape": "ErrorMessage",
-          "documentation": "<p>A message describing the error.</p>"
+          "documentation": "<p>A message that describes the error.</p>"
         }
       },
-      "documentation": "<p>Information about the error that occured when attempting to update a detector.</p>"
+      "documentation": "<p>Information about the error that occurred when attempting to update a detector.</p>"
     },
     "BatchUpdateDetectorRequest": {
       "type": "structure",
@@ -220,6 +713,86 @@
         "batchUpdateDetectorErrorEntries": {
           "shape": "BatchUpdateDetectorErrorEntries",
           "documentation": "<p>A list of those detector updates that resulted in errors. (If an error is listed here, the specific update did not occur.)</p>"
+        }
+      }
+    },
+    "ComparisonOperator": {
+      "type": "string",
+      "enum": [
+        "GREATER",
+        "GREATER_OR_EQUAL",
+        "LESS",
+        "LESS_OR_EQUAL",
+        "EQUAL",
+        "NOT_EQUAL"
+      ]
+    },
+    "CustomerAction": {
+      "type": "structure",
+      "members": {
+        "actionName": {
+          "shape": "CustomerActionName",
+          "documentation": "<p>The name of the action. The action name can be one of the following values:</p> <ul> <li> <p> <code>SNOOZE</code> - When you snooze the alarm, the alarm state changes to <code>SNOOZE_DISABLED</code>.</p> </li> <li> <p> <code>ENABLE</code> - When you enable the alarm, the alarm state changes to <code>NORMAL</code>.</p> </li> <li> <p> <code>DISABLE</code> - When you disable the alarm, the alarm state changes to <code>DISABLED</code>.</p> </li> <li> <p> <code>ACKNOWLEDGE</code> - When you acknowledge the alarm, the alarm state changes to <code>ACKNOWLEDGED</code>.</p> </li> <li> <p> <code>RESET</code> - When you reset the alarm, the alarm state changes to <code>NORMAL</code>.</p> </li> </ul> <p>For more information, see the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_AlarmState.html\">AlarmState</a> API.</p>"
+        },
+        "snoozeActionConfiguration": {
+          "shape": "SnoozeActionConfiguration",
+          "documentation": "<p>Contains the configuration information of a snooze action.</p>"
+        },
+        "enableActionConfiguration": {
+          "shape": "EnableActionConfiguration",
+          "documentation": "<p>Contains the configuration information of an enable action.</p>"
+        },
+        "disableActionConfiguration": {
+          "shape": "DisableActionConfiguration",
+          "documentation": "<p>Contains the configuration information of a disable action.</p>"
+        },
+        "acknowledgeActionConfiguration": {
+          "shape": "AcknowledgeActionConfiguration",
+          "documentation": "<p>Contains the configuration information of an acknowledge action.</p>"
+        },
+        "resetActionConfiguration": {
+          "shape": "ResetActionConfiguration",
+          "documentation": "<p>Contains the configuration information of a reset action.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about the action that you can take to respond to the alarm.</p>"
+    },
+    "CustomerActionName": {
+      "type": "string",
+      "enum": [
+        "SNOOZE",
+        "ENABLE",
+        "DISABLE",
+        "ACKNOWLEDGE",
+        "RESET"
+      ]
+    },
+    "DescribeAlarmRequest": {
+      "type": "structure",
+      "required": [
+        "alarmModelName"
+      ],
+      "members": {
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>",
+          "location": "uri",
+          "locationName": "alarmModelName"
+        },
+        "keyValue": {
+          "shape": "KeyValue",
+          "documentation": "<p>The value of the key used as a filter to select only the alarms associated with the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key\">key</a>.</p>",
+          "location": "querystring",
+          "locationName": "keyValue"
+        }
+      }
+    },
+    "DescribeAlarmResponse": {
+      "type": "structure",
+      "members": {
+        "alarm": {
+          "shape": "Alarm",
+          "documentation": "<p>Contains information about an alarm.</p>"
         }
       }
     },
@@ -385,6 +958,103 @@
       },
       "documentation": "<p>Information about the detector (instance).</p>"
     },
+    "DisableActionConfiguration": {
+      "type": "structure",
+      "members": {
+        "note": {
+          "shape": "Note",
+          "documentation": "<p>The note that you can leave when you disable the alarm.</p>"
+        }
+      },
+      "documentation": "<p>Contains the configuration information of a disable action.</p>"
+    },
+    "DisableAlarmActionRequest": {
+      "type": "structure",
+      "required": [
+        "requestId",
+        "alarmModelName"
+      ],
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>The request ID. Each ID must be unique within each batch.</p>"
+        },
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>"
+        },
+        "keyValue": {
+          "shape": "KeyValue",
+          "documentation": "<p>The value of the key used as a filter to select only the alarms associated with the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key\">key</a>.</p>"
+        },
+        "note": {
+          "shape": "Note",
+          "documentation": "<p>The note that you can leave when you disable the alarm.</p>"
+        }
+      },
+      "documentation": "<p>Information used to disable the alarm.</p>"
+    },
+    "DisableAlarmActionRequests": {
+      "type": "list",
+      "member": {
+        "shape": "DisableAlarmActionRequest"
+      },
+      "min": 1
+    },
+    "EnableActionConfiguration": {
+      "type": "structure",
+      "members": {
+        "note": {
+          "shape": "Note",
+          "documentation": "<p>The note that you can leave when you enable the alarm.</p>"
+        }
+      },
+      "documentation": "<p>Contains the configuration information of an enable action.</p>"
+    },
+    "EnableAlarmActionRequest": {
+      "type": "structure",
+      "required": [
+        "requestId",
+        "alarmModelName"
+      ],
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>The request ID. Each ID must be unique within each batch.</p>"
+        },
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>"
+        },
+        "keyValue": {
+          "shape": "KeyValue",
+          "documentation": "<p>The value of the key used as a filter to select only the alarms associated with the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key\">key</a>.</p>"
+        },
+        "note": {
+          "shape": "Note",
+          "documentation": "<p>The note that you can leave when you enable the alarm.</p>"
+        }
+      },
+      "documentation": "<p>Information needed to enable the alarm.</p>"
+    },
+    "EnableAlarmActionRequests": {
+      "type": "list",
+      "member": {
+        "shape": "EnableAlarmActionRequest"
+      },
+      "min": 1
+    },
+    "EphemeralInputName": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+    },
+    "EpochMilliTimestamp": {
+      "type": "long",
+      "max": 9223372036854776000,
+      "min": 1
+    },
     "ErrorCode": {
       "type": "string",
       "enum": [
@@ -398,17 +1068,59 @@
     "ErrorMessage": {
       "type": "string"
     },
-    "InputName": {
+    "EventType": {
       "type": "string",
-      "max": 128,
-      "min": 1,
-      "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$"
+      "enum": [
+        "STATE_CHANGE"
+      ]
+    },
+    "InputPropertyValue": {
+      "type": "string"
     },
     "KeyValue": {
       "type": "string",
       "max": 128,
       "min": 1,
       "pattern": "^[a-zA-Z0-9\\-_:]+$"
+    },
+    "ListAlarmsRequest": {
+      "type": "structure",
+      "required": [
+        "alarmModelName"
+      ],
+      "members": {
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>",
+          "location": "uri",
+          "locationName": "alarmModelName"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token that you can use to return the next set of results.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to be returned per request.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        }
+      }
+    },
+    "ListAlarmsResponse": {
+      "type": "structure",
+      "members": {
+        "alarmSummaries": {
+          "shape": "AlarmSummaries",
+          "documentation": "<p>A list that summarizes each alarm.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token that you can use to return the next set of results, or <code>null</code> if there are no more results.</p>"
+        }
+      }
     },
     "ListDetectorsRequest": {
       "type": "structure",
@@ -430,13 +1142,13 @@
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token for the next set of results.</p>",
+          "documentation": "<p>The token that you can use to return the next set of results.</p>",
           "location": "querystring",
           "locationName": "nextToken"
         },
         "maxResults": {
           "shape": "MaxResults",
-          "documentation": "<p>The maximum number of results to return at one time.</p>",
+          "documentation": "<p>The maximum number of results to be returned per request.</p>",
           "location": "querystring",
           "locationName": "maxResults"
         }
@@ -451,7 +1163,7 @@
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>A token to retrieve the next set of results, or <code>null</code> if there are no additional results.</p>"
+          "documentation": "<p>The token that you can use to return the next set of results, or <code>null</code> if there are no more results.</p>"
         }
       }
     },
@@ -473,12 +1185,16 @@
           "documentation": "<p>The ID to assign to the message. Within each batch sent, each <code>\"messageId\"</code> must be unique.</p>"
         },
         "inputName": {
-          "shape": "InputName",
+          "shape": "EphemeralInputName",
           "documentation": "<p>The name of the input into which the message payload is transformed.</p>"
         },
         "payload": {
           "shape": "Payload",
           "documentation": "<p>The payload of the message. This can be a JSON string or a Base-64-encoded string representing binary data (in which case you must decode it).</p>"
+        },
+        "timestamp": {
+          "shape": "TimestampValue",
+          "documentation": "<p>The timestamp associated with the message.</p>"
         }
       },
       "documentation": "<p>Information about a message.</p>"
@@ -499,16 +1215,185 @@
     "NextToken": {
       "type": "string"
     },
+    "Note": {
+      "type": "string",
+      "max": 256
+    },
     "Payload": {
       "type": "blob"
     },
+    "RequestId": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "ResetActionConfiguration": {
+      "type": "structure",
+      "members": {
+        "note": {
+          "shape": "Note",
+          "documentation": "<p>The note that you can leave when you reset the alarm.</p>"
+        }
+      },
+      "documentation": "<p>Contains the configuration information of a reset action.</p>"
+    },
+    "ResetAlarmActionRequest": {
+      "type": "structure",
+      "required": [
+        "requestId",
+        "alarmModelName"
+      ],
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>The request ID. Each ID must be unique within each batch.</p>"
+        },
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>"
+        },
+        "keyValue": {
+          "shape": "KeyValue",
+          "documentation": "<p>The value of the key used as a filter to select only the alarms associated with the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key\">key</a>.</p>"
+        },
+        "note": {
+          "shape": "Note",
+          "documentation": "<p>The note that you can leave when you reset the alarm.</p>"
+        }
+      },
+      "documentation": "<p>Information needed to reset the alarm.</p>"
+    },
+    "ResetAlarmActionRequests": {
+      "type": "list",
+      "member": {
+        "shape": "ResetAlarmActionRequest"
+      },
+      "min": 1
+    },
+    "RuleEvaluation": {
+      "type": "structure",
+      "members": {
+        "simpleRuleEvaluation": {
+          "shape": "SimpleRuleEvaluation",
+          "documentation": "<p>Information needed to compare two values with a comparison operator.</p>"
+        }
+      },
+      "documentation": "<p>Information needed to evaluate data.</p>"
+    },
     "Seconds": {
       "type": "integer"
+    },
+    "Severity": {
+      "type": "integer",
+      "box": true,
+      "max": 2147483647,
+      "min": 0
+    },
+    "SimpleRuleEvaluation": {
+      "type": "structure",
+      "members": {
+        "inputPropertyValue": {
+          "shape": "InputPropertyValue",
+          "documentation": "<p>The value of the input property, on the left side of the comparison operator.</p>"
+        },
+        "operator": {
+          "shape": "ComparisonOperator",
+          "documentation": "<p>The comparison operator.</p>"
+        },
+        "thresholdValue": {
+          "shape": "ThresholdValue",
+          "documentation": "<p>The threshold value, on the right side of the comparison operator.</p>"
+        }
+      },
+      "documentation": "<p>Information needed to compare two values with a comparison operator.</p>"
+    },
+    "SnoozeActionConfiguration": {
+      "type": "structure",
+      "members": {
+        "snoozeDuration": {
+          "shape": "SnoozeDuration",
+          "documentation": "<p>The snooze time in seconds. The alarm automatically changes to the <code>NORMAL</code> state after this duration.</p>"
+        },
+        "note": {
+          "shape": "Note",
+          "documentation": "<p>The note that you can leave when you snooze the alarm.</p>"
+        }
+      },
+      "documentation": "<p>Contains the configuration information of a snooze action.</p>"
+    },
+    "SnoozeAlarmActionRequest": {
+      "type": "structure",
+      "required": [
+        "requestId",
+        "alarmModelName",
+        "snoozeDuration"
+      ],
+      "members": {
+        "requestId": {
+          "shape": "RequestId",
+          "documentation": "<p>The request ID. Each ID must be unique within each batch.</p>"
+        },
+        "alarmModelName": {
+          "shape": "AlarmModelName",
+          "documentation": "<p>The name of the alarm model.</p>"
+        },
+        "keyValue": {
+          "shape": "KeyValue",
+          "documentation": "<p>The value of the key used as a filter to select only the alarms associated with the <a href=\"https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key\">key</a>.</p>"
+        },
+        "note": {
+          "shape": "Note",
+          "documentation": "<p>The note that you can leave when you snooze the alarm.</p>"
+        },
+        "snoozeDuration": {
+          "shape": "SnoozeDuration",
+          "documentation": "<p>The snooze time in seconds. The alarm automatically changes to the <code>NORMAL</code> state after this duration.</p>"
+        }
+      },
+      "documentation": "<p>Information needed to snooze the alarm.</p>"
+    },
+    "SnoozeAlarmActionRequests": {
+      "type": "list",
+      "member": {
+        "shape": "SnoozeAlarmActionRequest"
+      },
+      "min": 1
+    },
+    "SnoozeDuration": {
+      "type": "integer"
+    },
+    "StateChangeConfiguration": {
+      "type": "structure",
+      "members": {
+        "triggerType": {
+          "shape": "TriggerType",
+          "documentation": "<p>The trigger type. If the value is <code>SNOOZE_TIMEOUT</code>, the snooze duration ends and the alarm automatically changes to the <code>NORMAL</code> state.</p>"
+        }
+      },
+      "documentation": "<p>Contains the configuration information of alarm state changes.</p>"
     },
     "StateName": {
       "type": "string",
       "max": 128,
       "min": 1
+    },
+    "SystemEvent": {
+      "type": "structure",
+      "members": {
+        "eventType": {
+          "shape": "EventType",
+          "documentation": "<p>The event type. If the value is <code>STATE_CHANGE</code>, the event contains information about alarm state changes.</p>"
+        },
+        "stateChangeConfiguration": {
+          "shape": "StateChangeConfiguration",
+          "documentation": "<p>Contains the configuration information of alarm state changes.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about alarm state changes.</p>"
+    },
+    "ThresholdValue": {
+      "type": "string"
     },
     "Timer": {
       "type": "structure",
@@ -565,6 +1450,22 @@
     },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "TimestampValue": {
+      "type": "structure",
+      "members": {
+        "timeInMillis": {
+          "shape": "EpochMilliTimestamp",
+          "documentation": "<p>The value of the timestamp, in the Unix epoch format.</p>"
+        }
+      },
+      "documentation": "<p>Contains information about a timestamp.</p>"
+    },
+    "TriggerType": {
+      "type": "string",
+      "enum": [
+        "SNOOZE_TIMEOUT"
+      ]
     },
     "UpdateDetectorRequest": {
       "type": "structure",
@@ -660,5 +1561,5 @@
       }
     }
   },
-  "documentation": "<p>AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. AWS IoT Events Data API commands enable you to send inputs to detectors, list detectors, and view or update a detector's status.</p>"
+  "documentation": "<p>AWS IoT Events monitors your equipment or device fleets for failures or changes in operation, and triggers actions when such events occur. You can use AWS IoT Events Data API commands to send inputs to detectors, list detectors, and view or update a detector's status.</p> <p> For more information, see <a href=\"https://docs.aws.amazon.com/iotevents/latest/developerguide/what-is-iotevents.html\">What is AWS IoT Events?</a> in the <i>AWS IoT Events Developer Guide</i>.</p>"
 }

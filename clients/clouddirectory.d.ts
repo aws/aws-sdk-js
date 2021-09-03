@@ -1132,11 +1132,23 @@ declare namespace CloudDirectory {
   }
   export interface BatchListObjectParents {
     ObjectReference: ObjectReference;
+    /**
+     * The pagination token.
+     */
     NextToken?: NextToken;
+    /**
+     * The maximum number of items to be retrieved in a single call. This is an approximate number.
+     */
     MaxResults?: NumberResults;
   }
   export interface BatchListObjectParentsResponse {
+    /**
+     * Returns a list of parent reference and LinkName Tuples.
+     */
     ParentLinks?: ObjectIdentifierAndLinkNameList;
+    /**
+     * The pagination token.
+     */
     NextToken?: NextToken;
   }
   export interface BatchListObjectPolicies {
@@ -1279,6 +1291,9 @@ declare namespace CloudDirectory {
      * Retrieves attributes within a facet that are associated with an object.
      */
     GetObjectAttributes?: BatchGetObjectAttributes;
+    /**
+     * Lists parent objects that are associated with a given object in pagination fashion.
+     */
     ListObjectParents?: BatchListObjectParents;
     /**
      * Returns policies attached to an object in pagination fashion.
@@ -1394,6 +1409,9 @@ declare namespace CloudDirectory {
      * The list of attributes to retrieve from the typed link.
      */
     GetLinkAttributes?: BatchGetLinkAttributesResponse;
+    /**
+     * The list of parent objects to retrieve.
+     */
     ListObjectParents?: BatchListObjectParentsResponse;
   }
   export type BatchReferenceName = string;
@@ -2823,7 +2841,7 @@ declare namespace CloudDirectory {
   export type ObjectIdentifierToLinkNameMap = {[key: string]: LinkName};
   export interface ObjectReference {
     /**
-     * A path selector supports easy selection of an object by the parent/child links leading to it from the directory root. Use the link names from each parent/child link to construct the path. Path selectors start with a slash (/) and link names are separated by slashes. For more information about paths, see Access Objects. You can identify an object in one of the following ways:    $ObjectIdentifier - An object identifier is an opaque string provided by Amazon Cloud Directory. When creating objects, the system will provide you with the identifier of the created object. An object’s identifier is immutable and no two objects will ever share the same object identifier    /some/path - Identifies the object based on path    #SomeBatchReference - Identifies the object in a batch call  
+     * A path selector supports easy selection of an object by the parent/child links leading to it from the directory root. Use the link names from each parent/child link to construct the path. Path selectors start with a slash (/) and link names are separated by slashes. For more information about paths, see Access Objects. You can identify an object in one of the following ways:    $ObjectIdentifier - An object identifier is an opaque string provided by Amazon Cloud Directory. When creating objects, the system will provide you with the identifier of the created object. An object’s identifier is immutable and no two objects will ever share the same object identifier. To identify an object with ObjectIdentifier, the ObjectIdentifier must be wrapped in double quotes.     /some/path - Identifies the object based on path    #SomeBatchReference - Identifies the object in a batch call  
      */
     Selector?: SelectorObjectReference;
   }
@@ -2943,11 +2961,11 @@ declare namespace CloudDirectory {
   export type RuleType = "BINARY_LENGTH"|"NUMBER_COMPARISON"|"STRING_FROM_SET"|"STRING_LENGTH"|string;
   export interface SchemaFacet {
     /**
-     * The ARN of the schema that contains the facet with no minor component. See arns and In-Place Schema Upgrade for a description of when to provide minor versions.
+     * The ARN of the schema that contains the facet with no minor component. See arns and In-Place Schema Upgrade for a description of when to provide minor versions. If this value is set, FacetName must also be set.
      */
     SchemaArn?: Arn;
     /**
-     * The name of the facet.
+     * The name of the facet. If this value is set, SchemaArn must also be set.
      */
     FacetName?: FacetName;
   }

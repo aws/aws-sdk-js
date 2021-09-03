@@ -13,6 +13,14 @@ declare class Signer extends Service {
   constructor(options?: Signer.Types.ClientConfiguration)
   config: Config & Signer.Types.ClientConfiguration;
   /**
+   * Adds cross-account permissions to a signing profile.
+   */
+  addProfilePermission(params: Signer.Types.AddProfilePermissionRequest, callback?: (err: AWSError, data: Signer.Types.AddProfilePermissionResponse) => void): Request<Signer.Types.AddProfilePermissionResponse, AWSError>;
+  /**
+   * Adds cross-account permissions to a signing profile.
+   */
+  addProfilePermission(callback?: (err: AWSError, data: Signer.Types.AddProfilePermissionResponse) => void): Request<Signer.Types.AddProfilePermissionResponse, AWSError>;
+  /**
    * Changes the state of an ACTIVE signing profile to CANCELED. A canceled profile is still viewable with the ListSigningProfiles operation, but it cannot perform new signing jobs, and is deleted two years after cancelation.
    */
   cancelSigningProfile(params: Signer.Types.CancelSigningProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -44,6 +52,14 @@ declare class Signer extends Service {
    * Returns information on a specific signing profile.
    */
   getSigningProfile(callback?: (err: AWSError, data: Signer.Types.GetSigningProfileResponse) => void): Request<Signer.Types.GetSigningProfileResponse, AWSError>;
+  /**
+   * Lists the cross-account permissions associated with a signing profile.
+   */
+  listProfilePermissions(params: Signer.Types.ListProfilePermissionsRequest, callback?: (err: AWSError, data: Signer.Types.ListProfilePermissionsResponse) => void): Request<Signer.Types.ListProfilePermissionsResponse, AWSError>;
+  /**
+   * Lists the cross-account permissions associated with a signing profile.
+   */
+  listProfilePermissions(callback?: (err: AWSError, data: Signer.Types.ListProfilePermissionsResponse) => void): Request<Signer.Types.ListProfilePermissionsResponse, AWSError>;
   /**
    * Lists all your signing jobs. You can use the maxResults parameter to limit the number of signing jobs that are returned in the response. If additional jobs remain to be listed, code signing returns a nextToken value. Use this value in subsequent calls to ListSigningJobs to fetch the remaining values. You can continue calling ListSigningJobs with your maxResults parameter and with new values that code signing returns in the nextToken parameter until all of your signing jobs have been returned. 
    */
@@ -85,6 +101,30 @@ declare class Signer extends Service {
    */
   putSigningProfile(callback?: (err: AWSError, data: Signer.Types.PutSigningProfileResponse) => void): Request<Signer.Types.PutSigningProfileResponse, AWSError>;
   /**
+   * Removes cross-account permissions from a signing profile.
+   */
+  removeProfilePermission(params: Signer.Types.RemoveProfilePermissionRequest, callback?: (err: AWSError, data: Signer.Types.RemoveProfilePermissionResponse) => void): Request<Signer.Types.RemoveProfilePermissionResponse, AWSError>;
+  /**
+   * Removes cross-account permissions from a signing profile.
+   */
+  removeProfilePermission(callback?: (err: AWSError, data: Signer.Types.RemoveProfilePermissionResponse) => void): Request<Signer.Types.RemoveProfilePermissionResponse, AWSError>;
+  /**
+   * Changes the state of a signing job to REVOKED. This indicates that the signature is no longer valid.
+   */
+  revokeSignature(params: Signer.Types.RevokeSignatureRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Changes the state of a signing job to REVOKED. This indicates that the signature is no longer valid.
+   */
+  revokeSignature(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Changes the state of a signing profile to REVOKED. This indicates that signatures generated using the signing profile after an effective start date are no longer valid.
+   */
+  revokeSigningProfile(params: Signer.Types.RevokeSigningProfileRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Changes the state of a signing profile to REVOKED. This indicates that signatures generated using the signing profile after an effective start date are no longer valid.
+   */
+  revokeSigningProfile(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * Initiates a signing job to be performed on the code provided. Signing jobs are viewable by the ListSigningJobs operation for two years after they are performed. Note the following requirements:     You must create an Amazon S3 source bucket. For more information, see Create a Bucket in the Amazon S3 Getting Started Guide.    Your S3 source bucket must be version enabled.   You must create an S3 destination bucket. Code signing uses your S3 destination bucket to write your signed code.   You specify the name of the source and destination buckets when calling the StartSigningJob operation.   You must also specify a request token that identifies your request to code signing.   You can call the DescribeSigningJob and the ListSigningJobs actions after you call StartSigningJob. For a Java example that shows how to use this action, see http://docs.aws.amazon.com/acm/latest/userguide/ 
    */
   startSigningJob(params: Signer.Types.StartSigningJobRequest, callback?: (err: AWSError, data: Signer.Types.StartSigningJobResponse) => void): Request<Signer.Types.StartSigningJobResponse, AWSError>;
@@ -118,7 +158,40 @@ declare class Signer extends Service {
   waitFor(state: "successfulSigningJob", callback?: (err: AWSError, data: Signer.Types.DescribeSigningJobResponse) => void): Request<Signer.Types.DescribeSigningJobResponse, AWSError>;
 }
 declare namespace Signer {
-  export type key = string;
+  export type AccountId = string;
+  export interface AddProfilePermissionRequest {
+    /**
+     * The human-readable name of the signing profile.
+     */
+    profileName: ProfileName;
+    /**
+     * The version of the signing profile.
+     */
+    profileVersion?: ProfileVersion;
+    /**
+     * The AWS Signer action permitted as part of cross-account permissions.
+     */
+    action: String;
+    /**
+     * The AWS principal receiving cross-account permissions. This may be an IAM role or another AWS account ID.
+     */
+    principal: String;
+    /**
+     * A unique identifier for the current profile revision.
+     */
+    revisionId?: String;
+    /**
+     * A unique identifier for the cross-account permission statement.
+     */
+    statementId: String;
+  }
+  export interface AddProfilePermissionResponse {
+    /**
+     * A unique identifier for the current profile revision.
+     */
+    revisionId?: String;
+  }
+  export type Arn = string;
   export type BucketName = string;
   export interface CancelSigningProfileRequest {
     /**
@@ -129,8 +202,6 @@ declare namespace Signer {
   export type Category = "AWSIoT"|string;
   export type CertificateArn = string;
   export type ClientRequestToken = string;
-  export type CompletedAt = Date;
-  export type CreatedAt = Date;
   export interface DescribeSigningJobRequest {
     /**
      * The ID of the signing job on input.
@@ -155,9 +226,17 @@ declare namespace Signer {
      */
     platformId?: PlatformId;
     /**
+     * A human-readable name for the signing platform associated with the signing job.
+     */
+    platformDisplayName?: DisplayName;
+    /**
      * The name of the profile that initiated the signing operation.
      */
     profileName?: ProfileName;
+    /**
+     * The version of the signing profile used to initiate the signing job.
+     */
+    profileVersion?: ProfileVersion;
     /**
      * A list of any overrides that were applied to the signing operation.
      */
@@ -169,11 +248,15 @@ declare namespace Signer {
     /**
      * Date and time that the signing job was created.
      */
-    createdAt?: CreatedAt;
+    createdAt?: Timestamp;
     /**
      * Date and time that the signing job was completed.
      */
-    completedAt?: CompletedAt;
+    completedAt?: Timestamp;
+    /**
+     * Thr expiration timestamp for the signature generated by the signing job.
+     */
+    signatureExpiresAt?: Timestamp;
     /**
      * The IAM principal that requested the signing job.
      */
@@ -187,9 +270,21 @@ declare namespace Signer {
      */
     statusReason?: StatusReason;
     /**
+     * A revocation record if the signature generated by the signing job has been revoked. Contains a timestamp and the ID of the IAM entity that revoked the signature.
+     */
+    revocationRecord?: SigningJobRevocationRecord;
+    /**
      * Name of the S3 bucket where the signed code image is saved by code signing.
      */
     signedObject?: SignedObject;
+    /**
+     * The AWS account ID of the job owner.
+     */
+    jobOwner?: AccountId;
+    /**
+     * The IAM entity that initiated the signing job.
+     */
+    jobInvoker?: AccountId;
   }
   export interface Destination {
     /**
@@ -249,18 +344,35 @@ declare namespace Signer {
      * The maximum size (in MB) of the payload that can be signed by the target platform.
      */
     maxSizeInMB?: MaxSizeInMB;
+    /**
+     * A flag indicating whether signatures generated for the signing platform can be revoked.
+     */
+    revocationSupported?: bool;
   }
   export interface GetSigningProfileRequest {
     /**
      * The name of the target signing profile.
      */
     profileName: ProfileName;
+    /**
+     * The AWS account ID of the profile owner.
+     */
+    profileOwner?: AccountId;
   }
   export interface GetSigningProfileResponse {
     /**
      * The name of the target signing profile.
      */
     profileName?: ProfileName;
+    /**
+     * The current version of the signing profile.
+     */
+    profileVersion?: ProfileVersion;
+    /**
+     * The signing profile ARN, including the profile version.
+     */
+    profileVersionArn?: Arn;
+    revocationRecord?: SigningProfileRevocationRecord;
     /**
      * The ARN of the certificate that the target profile uses for signing operations.
      */
@@ -269,6 +381,11 @@ declare namespace Signer {
      * The ID of the platform that is used by the target signing profile.
      */
     platformId?: PlatformId;
+    /**
+     * A human-readable name for the signing platform associated with the signing profile.
+     */
+    platformDisplayName?: DisplayName;
+    signatureValidityPeriod?: SignatureValidityPeriod;
     /**
      * A list of overrides applied by the target signing profile for signing operations.
      */
@@ -281,6 +398,10 @@ declare namespace Signer {
      * The status of the target signing profile.
      */
     status?: SigningProfileStatus;
+    /**
+     * Reason for the status of the target signing profile.
+     */
+    statusReason?: String;
     /**
      * The Amazon Resource Name (ARN) for the signing profile.
      */
@@ -304,8 +425,37 @@ declare namespace Signer {
   export type HashAlgorithms = HashAlgorithm[];
   export type ImageFormat = "JSON"|"JSONEmbedded"|"JSONDetached"|string;
   export type ImageFormats = ImageFormat[];
+  export type Integer = number;
   export type JobId = string;
   export type Key = string;
+  export interface ListProfilePermissionsRequest {
+    /**
+     * Name of the signing profile containing the cross-account permissions.
+     */
+    profileName: ProfileName;
+    /**
+     * String for specifying the next set of paginated results.
+     */
+    nextToken?: String;
+  }
+  export interface ListProfilePermissionsResponse {
+    /**
+     * The identifier for the current revision of profile permissions.
+     */
+    revisionId?: String;
+    /**
+     * Total size of the policy associated with the Signing Profile in bytes.
+     */
+    policySizeBytes?: PolicySizeBytes;
+    /**
+     * List of permissions associated with the Signing Profile.
+     */
+    permissions?: Permissions;
+    /**
+     * String for specifying the next set of paginated results.
+     */
+    nextToken?: String;
+  }
   export interface ListSigningJobsRequest {
     /**
      * A status value with which to filter your results.
@@ -327,6 +477,22 @@ declare namespace Signer {
      * String for specifying the next set of paginated results to return. After you receive a response with truncated results, use this parameter in a subsequent request. Set it to the value of nextToken from the response that you just received.
      */
     nextToken?: NextToken;
+    /**
+     * Filters results to return only signing jobs with revoked signatures.
+     */
+    isRevoked?: bool;
+    /**
+     * Filters results to return only signing jobs with signatures expiring before a specified timestamp.
+     */
+    signatureExpiresBefore?: Timestamp;
+    /**
+     * Filters results to return only signing jobs with signatures expiring after a specified timestamp.
+     */
+    signatureExpiresAfter?: Timestamp;
+    /**
+     * Filters results to return only signing jobs initiated by a specified IAM entity.
+     */
+    jobInvoker?: AccountId;
   }
   export interface ListSigningJobsResponse {
     /**
@@ -383,6 +549,14 @@ declare namespace Signer {
      * Value for specifying the next set of paginated results to return. After you receive a response with truncated results, use this parameter in a subsequent request. Set it to the value of nextToken from the response that you just received.
      */
     nextToken?: NextToken;
+    /**
+     * Filters results to return only signing jobs initiated for a specified signing platform.
+     */
+    platformId?: PlatformId;
+    /**
+     * Filters results to return only signing jobs with statuses in the specified list.
+     */
+    statuses?: Statuses;
   }
   export interface ListSigningProfilesResponse {
     /**
@@ -409,9 +583,30 @@ declare namespace Signer {
   export type MaxResults = number;
   export type MaxSizeInMB = number;
   export type NextToken = string;
+  export interface Permission {
+    /**
+     * An AWS Signer action permitted as part of cross-account permissions.
+     */
+    action?: String;
+    /**
+     * The AWS principal that has been granted a cross-account permission.
+     */
+    principal?: String;
+    /**
+     * A unique identifier for a cross-account permission statement.
+     */
+    statementId?: String;
+    /**
+     * The signing profile version that a permission applies to.
+     */
+    profileVersion?: ProfileVersion;
+  }
+  export type Permissions = Permission[];
   export type PlatformId = string;
+  export type PolicySizeBytes = number;
   export type Prefix = string;
   export type ProfileName = string;
+  export type ProfileVersion = string;
   export interface PutSigningProfileRequest {
     /**
      * The name of the signing profile to be created.
@@ -420,7 +615,11 @@ declare namespace Signer {
     /**
      * The AWS Certificate Manager certificate that will be used to sign code with the new signing profile.
      */
-    signingMaterial: SigningMaterial;
+    signingMaterial?: SigningMaterial;
+    /**
+     * The default validity period override for any signature generated using this signing profile. If unspecified, the default is 135 months.
+     */
+    signatureValidityPeriod?: SignatureValidityPeriod;
     /**
      * The ID of the signing platform to be created.
      */
@@ -443,8 +642,69 @@ declare namespace Signer {
      * The Amazon Resource Name (ARN) of the signing profile created.
      */
     arn?: string;
+    /**
+     * The version of the signing profile being created.
+     */
+    profileVersion?: ProfileVersion;
+    /**
+     * The signing profile ARN, including the profile version.
+     */
+    profileVersionArn?: Arn;
+  }
+  export interface RemoveProfilePermissionRequest {
+    /**
+     * A human-readable name for the signing profile with permissions to be removed.
+     */
+    profileName: ProfileName;
+    /**
+     * An identifier for the current revision of the signing profile permissions.
+     */
+    revisionId: String;
+    /**
+     * A unique identifier for the cross-account permissions statement.
+     */
+    statementId: String;
+  }
+  export interface RemoveProfilePermissionResponse {
+    /**
+     * An identifier for the current revision of the profile permissions.
+     */
+    revisionId?: String;
   }
   export type RequestedBy = string;
+  export type RevocationReasonString = string;
+  export interface RevokeSignatureRequest {
+    /**
+     * ID of the signing job to be revoked.
+     */
+    jobId: JobId;
+    /**
+     * AWS account ID of the job owner.
+     */
+    jobOwner?: AccountId;
+    /**
+     * The reason for revoking the signing job.
+     */
+    reason: RevocationReasonString;
+  }
+  export interface RevokeSigningProfileRequest {
+    /**
+     * The name of the signing profile to be revoked.
+     */
+    profileName: ProfileName;
+    /**
+     * The version of the signing profile to be revoked.
+     */
+    profileVersion: ProfileVersion;
+    /**
+     * The reason for revoking a signing profile.
+     */
+    reason: RevocationReasonString;
+    /**
+     * A timestamp for when revocation of a Signing Profile should become effective. Signatures generated using the signing profile after this timestamp are not trusted.
+     */
+    effectiveTime: Timestamp;
+  }
   export interface S3Destination {
     /**
      * Name of the S3 bucket.
@@ -463,7 +723,7 @@ declare namespace Signer {
     /**
      * Key name that uniquely identifies a signed code image in your bucket.
      */
-    key?: key;
+    key?: Key;
   }
   export interface S3Source {
     /**
@@ -478,6 +738,16 @@ declare namespace Signer {
      * Version of your source image in your version enabled S3 bucket.
      */
     version: Version;
+  }
+  export interface SignatureValidityPeriod {
+    /**
+     * The numerical value of the time unit for signature validity.
+     */
+    value?: Integer;
+    /**
+     * The time unit for signature validity.
+     */
+    type?: ValidityType;
   }
   export interface SignedObject {
     /**
@@ -535,11 +805,57 @@ declare namespace Signer {
     /**
      * The date and time that the signing job was created.
      */
-    createdAt?: CreatedAt;
+    createdAt?: Timestamp;
     /**
      * The status of the signing job.
      */
     status?: SigningStatus;
+    /**
+     * Indicates whether the signing job is revoked.
+     */
+    isRevoked?: bool;
+    /**
+     * The name of the signing profile that created a signing job.
+     */
+    profileName?: ProfileName;
+    /**
+     * The version of the signing profile that created a signing job.
+     */
+    profileVersion?: ProfileVersion;
+    /**
+     * The unique identifier for a signing platform.
+     */
+    platformId?: PlatformId;
+    /**
+     * The name of a signing platform.
+     */
+    platformDisplayName?: DisplayName;
+    /**
+     * The time when the signature of a signing job expires.
+     */
+    signatureExpiresAt?: Timestamp;
+    /**
+     * The AWS account ID of the job owner.
+     */
+    jobOwner?: AccountId;
+    /**
+     * The AWS account ID of the job invoker.
+     */
+    jobInvoker?: AccountId;
+  }
+  export interface SigningJobRevocationRecord {
+    /**
+     * A caller-supplied reason for revocation.
+     */
+    reason?: String;
+    /**
+     * The time of revocation.
+     */
+    revokedAt?: Timestamp;
+    /**
+     * The identity of the revoker.
+     */
+    revokedBy?: String;
   }
   export type SigningJobs = SigningJob[];
   export interface SigningMaterial {
@@ -581,6 +897,10 @@ declare namespace Signer {
      * The maximum size (in MB) of code that can be signed by a code signing platform.
      */
     maxSizeInMB?: MaxSizeInMB;
+    /**
+     * Indicates whether revocation is supported for the platform.
+     */
+    revocationSupported?: bool;
   }
   export interface SigningPlatformOverrides {
     /**
@@ -599,13 +919,29 @@ declare namespace Signer {
      */
     profileName?: ProfileName;
     /**
+     * The version of a signing profile.
+     */
+    profileVersion?: ProfileVersion;
+    /**
+     * The ARN of a signing profile, including the profile version.
+     */
+    profileVersionArn?: Arn;
+    /**
      * The ACM certificate that is available for use by a signing profile.
      */
     signingMaterial?: SigningMaterial;
     /**
+     * The validity period for a signing job created using this signing profile.
+     */
+    signatureValidityPeriod?: SignatureValidityPeriod;
+    /**
      * The ID of a platform that is available for use by a signing profile.
      */
     platformId?: PlatformId;
+    /**
+     * The name of the signing platform.
+     */
+    platformDisplayName?: DisplayName;
     /**
      * The parameters that are available for use by a code signing user.
      */
@@ -623,7 +959,21 @@ declare namespace Signer {
      */
     tags?: TagMap;
   }
-  export type SigningProfileStatus = "Active"|"Canceled"|string;
+  export interface SigningProfileRevocationRecord {
+    /**
+     * The time when revocation becomes effective.
+     */
+    revocationEffectiveFrom?: Timestamp;
+    /**
+     * The time when the signing profile was revoked.
+     */
+    revokedAt?: Timestamp;
+    /**
+     * The identity of the revoker.
+     */
+    revokedBy?: String;
+  }
+  export type SigningProfileStatus = "Active"|"Canceled"|"Revoked"|string;
   export type SigningProfiles = SigningProfile[];
   export type SigningStatus = "InProgress"|"Failed"|"Succeeded"|string;
   export interface Source {
@@ -644,19 +994,28 @@ declare namespace Signer {
     /**
      * The name of the signing profile.
      */
-    profileName?: ProfileName;
+    profileName: ProfileName;
     /**
      * String that identifies the signing request. All calls after the first that use this token return the same response as the first call.
      */
     clientRequestToken: ClientRequestToken;
+    /**
+     * The AWS account ID of the signing profile owner.
+     */
+    profileOwner?: AccountId;
   }
   export interface StartSigningJobResponse {
     /**
      * The ID of your signing job.
      */
     jobId?: JobId;
+    /**
+     * The AWS account ID of the signing job owner.
+     */
+    jobOwner?: AccountId;
   }
   export type StatusReason = string;
+  export type Statuses = SigningProfileStatus[];
   export type String = string;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
@@ -674,6 +1033,7 @@ declare namespace Signer {
   export interface TagResourceResponse {
   }
   export type TagValue = string;
+  export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) for the signing profile.
@@ -686,6 +1046,7 @@ declare namespace Signer {
   }
   export interface UntagResourceResponse {
   }
+  export type ValidityType = "DAYS"|"MONTHS"|"YEARS"|string;
   export type Version = string;
   export type bool = boolean;
   /**

@@ -12,107 +12,107 @@ declare class Cloud9 extends Service {
   constructor(options?: Cloud9.Types.ClientConfiguration)
   config: Config & Cloud9.Types.ClientConfiguration;
   /**
-   * Creates an AWS Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then connects from the instance to the environment.
+   * Creates an Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then connects from the instance to the environment.
    */
   createEnvironmentEC2(params: Cloud9.Types.CreateEnvironmentEC2Request, callback?: (err: AWSError, data: Cloud9.Types.CreateEnvironmentEC2Result) => void): Request<Cloud9.Types.CreateEnvironmentEC2Result, AWSError>;
   /**
-   * Creates an AWS Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then connects from the instance to the environment.
+   * Creates an Cloud9 development environment, launches an Amazon Elastic Compute Cloud (Amazon EC2) instance, and then connects from the instance to the environment.
    */
   createEnvironmentEC2(callback?: (err: AWSError, data: Cloud9.Types.CreateEnvironmentEC2Result) => void): Request<Cloud9.Types.CreateEnvironmentEC2Result, AWSError>;
   /**
-   * Adds an environment member to an AWS Cloud9 development environment.
+   * Adds an environment member to an Cloud9 development environment.
    */
   createEnvironmentMembership(params: Cloud9.Types.CreateEnvironmentMembershipRequest, callback?: (err: AWSError, data: Cloud9.Types.CreateEnvironmentMembershipResult) => void): Request<Cloud9.Types.CreateEnvironmentMembershipResult, AWSError>;
   /**
-   * Adds an environment member to an AWS Cloud9 development environment.
+   * Adds an environment member to an Cloud9 development environment.
    */
   createEnvironmentMembership(callback?: (err: AWSError, data: Cloud9.Types.CreateEnvironmentMembershipResult) => void): Request<Cloud9.Types.CreateEnvironmentMembershipResult, AWSError>;
   /**
-   * Deletes an AWS Cloud9 development environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.
+   * Deletes an Cloud9 development environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.
    */
   deleteEnvironment(params: Cloud9.Types.DeleteEnvironmentRequest, callback?: (err: AWSError, data: Cloud9.Types.DeleteEnvironmentResult) => void): Request<Cloud9.Types.DeleteEnvironmentResult, AWSError>;
   /**
-   * Deletes an AWS Cloud9 development environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.
+   * Deletes an Cloud9 development environment. If an Amazon EC2 instance is connected to the environment, also terminates the instance.
    */
   deleteEnvironment(callback?: (err: AWSError, data: Cloud9.Types.DeleteEnvironmentResult) => void): Request<Cloud9.Types.DeleteEnvironmentResult, AWSError>;
   /**
-   * Deletes an environment member from an AWS Cloud9 development environment.
+   * Deletes an environment member from an Cloud9 development environment.
    */
   deleteEnvironmentMembership(params: Cloud9.Types.DeleteEnvironmentMembershipRequest, callback?: (err: AWSError, data: Cloud9.Types.DeleteEnvironmentMembershipResult) => void): Request<Cloud9.Types.DeleteEnvironmentMembershipResult, AWSError>;
   /**
-   * Deletes an environment member from an AWS Cloud9 development environment.
+   * Deletes an environment member from an Cloud9 development environment.
    */
   deleteEnvironmentMembership(callback?: (err: AWSError, data: Cloud9.Types.DeleteEnvironmentMembershipResult) => void): Request<Cloud9.Types.DeleteEnvironmentMembershipResult, AWSError>;
   /**
-   * Gets information about environment members for an AWS Cloud9 development environment.
+   * Gets information about environment members for an Cloud9 development environment.
    */
   describeEnvironmentMemberships(params: Cloud9.Types.DescribeEnvironmentMembershipsRequest, callback?: (err: AWSError, data: Cloud9.Types.DescribeEnvironmentMembershipsResult) => void): Request<Cloud9.Types.DescribeEnvironmentMembershipsResult, AWSError>;
   /**
-   * Gets information about environment members for an AWS Cloud9 development environment.
+   * Gets information about environment members for an Cloud9 development environment.
    */
   describeEnvironmentMemberships(callback?: (err: AWSError, data: Cloud9.Types.DescribeEnvironmentMembershipsResult) => void): Request<Cloud9.Types.DescribeEnvironmentMembershipsResult, AWSError>;
   /**
-   * Gets status information for an AWS Cloud9 development environment.
+   * Gets status information for an Cloud9 development environment.
    */
   describeEnvironmentStatus(params: Cloud9.Types.DescribeEnvironmentStatusRequest, callback?: (err: AWSError, data: Cloud9.Types.DescribeEnvironmentStatusResult) => void): Request<Cloud9.Types.DescribeEnvironmentStatusResult, AWSError>;
   /**
-   * Gets status information for an AWS Cloud9 development environment.
+   * Gets status information for an Cloud9 development environment.
    */
   describeEnvironmentStatus(callback?: (err: AWSError, data: Cloud9.Types.DescribeEnvironmentStatusResult) => void): Request<Cloud9.Types.DescribeEnvironmentStatusResult, AWSError>;
   /**
-   * Gets information about AWS Cloud9 development environments.
+   * Gets information about Cloud9 development environments.
    */
   describeEnvironments(params: Cloud9.Types.DescribeEnvironmentsRequest, callback?: (err: AWSError, data: Cloud9.Types.DescribeEnvironmentsResult) => void): Request<Cloud9.Types.DescribeEnvironmentsResult, AWSError>;
   /**
-   * Gets information about AWS Cloud9 development environments.
+   * Gets information about Cloud9 development environments.
    */
   describeEnvironments(callback?: (err: AWSError, data: Cloud9.Types.DescribeEnvironmentsResult) => void): Request<Cloud9.Types.DescribeEnvironmentsResult, AWSError>;
   /**
-   * Gets a list of AWS Cloud9 development environment identifiers.
+   * Gets a list of Cloud9 development environment identifiers.
    */
   listEnvironments(params: Cloud9.Types.ListEnvironmentsRequest, callback?: (err: AWSError, data: Cloud9.Types.ListEnvironmentsResult) => void): Request<Cloud9.Types.ListEnvironmentsResult, AWSError>;
   /**
-   * Gets a list of AWS Cloud9 development environment identifiers.
+   * Gets a list of Cloud9 development environment identifiers.
    */
   listEnvironments(callback?: (err: AWSError, data: Cloud9.Types.ListEnvironmentsResult) => void): Request<Cloud9.Types.ListEnvironmentsResult, AWSError>;
   /**
-   * Gets a list of the tags associated with an AWS Cloud9 development environment.
+   * Gets a list of the tags associated with an Cloud9 development environment.
    */
   listTagsForResource(params: Cloud9.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Cloud9.Types.ListTagsForResourceResponse) => void): Request<Cloud9.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Gets a list of the tags associated with an AWS Cloud9 development environment.
+   * Gets a list of the tags associated with an Cloud9 development environment.
    */
   listTagsForResource(callback?: (err: AWSError, data: Cloud9.Types.ListTagsForResourceResponse) => void): Request<Cloud9.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Adds tags to an AWS Cloud9 development environment.  Tags that you add to an AWS Cloud9 environment by using this method will NOT be automatically propagated to underlying resources. 
+   * Adds tags to an Cloud9 development environment.  Tags that you add to an Cloud9 environment by using this method will NOT be automatically propagated to underlying resources. 
    */
   tagResource(params: Cloud9.Types.TagResourceRequest, callback?: (err: AWSError, data: Cloud9.Types.TagResourceResponse) => void): Request<Cloud9.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds tags to an AWS Cloud9 development environment.  Tags that you add to an AWS Cloud9 environment by using this method will NOT be automatically propagated to underlying resources. 
+   * Adds tags to an Cloud9 development environment.  Tags that you add to an Cloud9 environment by using this method will NOT be automatically propagated to underlying resources. 
    */
   tagResource(callback?: (err: AWSError, data: Cloud9.Types.TagResourceResponse) => void): Request<Cloud9.Types.TagResourceResponse, AWSError>;
   /**
-   * Removes tags from an AWS Cloud9 development environment.
+   * Removes tags from an Cloud9 development environment.
    */
   untagResource(params: Cloud9.Types.UntagResourceRequest, callback?: (err: AWSError, data: Cloud9.Types.UntagResourceResponse) => void): Request<Cloud9.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes tags from an AWS Cloud9 development environment.
+   * Removes tags from an Cloud9 development environment.
    */
   untagResource(callback?: (err: AWSError, data: Cloud9.Types.UntagResourceResponse) => void): Request<Cloud9.Types.UntagResourceResponse, AWSError>;
   /**
-   * Changes the settings of an existing AWS Cloud9 development environment.
+   * Changes the settings of an existing Cloud9 development environment.
    */
   updateEnvironment(params: Cloud9.Types.UpdateEnvironmentRequest, callback?: (err: AWSError, data: Cloud9.Types.UpdateEnvironmentResult) => void): Request<Cloud9.Types.UpdateEnvironmentResult, AWSError>;
   /**
-   * Changes the settings of an existing AWS Cloud9 development environment.
+   * Changes the settings of an existing Cloud9 development environment.
    */
   updateEnvironment(callback?: (err: AWSError, data: Cloud9.Types.UpdateEnvironmentResult) => void): Request<Cloud9.Types.UpdateEnvironmentResult, AWSError>;
   /**
-   * Changes the settings of an existing environment member for an AWS Cloud9 development environment.
+   * Changes the settings of an existing environment member for an Cloud9 development environment.
    */
   updateEnvironmentMembership(params: Cloud9.Types.UpdateEnvironmentMembershipRequest, callback?: (err: AWSError, data: Cloud9.Types.UpdateEnvironmentMembershipResult) => void): Request<Cloud9.Types.UpdateEnvironmentMembershipResult, AWSError>;
   /**
-   * Changes the settings of an existing environment member for an AWS Cloud9 development environment.
+   * Changes the settings of an existing environment member for an Cloud9 development environment.
    */
   updateEnvironmentMembership(callback?: (err: AWSError, data: Cloud9.Types.UpdateEnvironmentMembershipResult) => void): Request<Cloud9.Types.UpdateEnvironmentMembershipResult, AWSError>;
 }
@@ -123,7 +123,7 @@ declare namespace Cloud9 {
   export type ConnectionType = "CONNECT_SSH"|"CONNECT_SSM"|string;
   export interface CreateEnvironmentEC2Request {
     /**
-     * The name of the environment to create. This name is visible to other AWS IAM users in the same AWS account.
+     * The name of the environment to create. This name is visible to other IAM users in the same Amazon Web Services account.
      */
     name: EnvironmentName;
     /**
@@ -131,7 +131,7 @@ declare namespace Cloud9 {
      */
     description?: EnvironmentDescription;
     /**
-     * A unique, case-sensitive string that helps AWS Cloud9 to ensure this operation completes no more than one time. For more information, see Client Tokens in the Amazon EC2 API Reference.
+     * A unique, case-sensitive string that helps Cloud9 to ensure this operation completes no more than one time. For more information, see Client Tokens in the Amazon EC2 API Reference.
      */
     clientRequestToken?: ClientRequestToken;
     /**
@@ -139,25 +139,33 @@ declare namespace Cloud9 {
      */
     instanceType: InstanceType;
     /**
-     * The ID of the subnet in Amazon VPC that AWS Cloud9 will use to communicate with the Amazon EC2 instance.
+     * The ID of the subnet in Amazon VPC that Cloud9 will use to communicate with the Amazon EC2 instance.
      */
     subnetId?: SubnetId;
+    /**
+     * The identifier for the Amazon Machine Image (AMI) that's used to create the EC2 instance. To choose an AMI for the instance, you must specify a valid AMI alias or a valid Amazon EC2 Systems Manager (SSM) path. The default AMI is used if the parameter isn't explicitly assigned a value in the request. Because Amazon Linux AMI has ended standard support as of December 31, 2020, we recommend you choose Amazon Linux 2, which includes long term support through 2023.  AMI aliases      Amazon Linux (default): amazonlinux-1-x86_64     Amazon Linux 2: amazonlinux-2-x86_64    Ubuntu 18.04: ubuntu-18.04-x86_64     SSM paths     Amazon Linux (default): resolve:ssm:/aws/service/cloud9/amis/amazonlinux-1-x86_64     Amazon Linux 2: resolve:ssm:/aws/service/cloud9/amis/amazonlinux-2-x86_64    Ubuntu 18.04: resolve:ssm:/aws/service/cloud9/amis/ubuntu-18.04-x86_64   
+     */
+    imageId?: ImageId;
     /**
      * The number of minutes until the running instance is shut down after the environment has last been used.
      */
     automaticStopTimeMinutes?: AutomaticStopTimeMinutes;
     /**
-     * The Amazon Resource Name (ARN) of the environment owner. This ARN can be the ARN of any AWS IAM principal. If this value is not specified, the ARN defaults to this environment's creator.
+     * The Amazon Resource Name (ARN) of the environment owner. This ARN can be the ARN of any IAM principal. If this value is not specified, the ARN defaults to this environment's creator.
      */
     ownerArn?: UserArn;
     /**
-     * An array of key-value pairs that will be associated with the new AWS Cloud9 development environment.
+     * An array of key-value pairs that will be associated with the new Cloud9 development environment.
      */
     tags?: TagList;
     /**
-     * The connection type used for connecting to an Amazon EC2 environment.
+     * The connection type used for connecting to an Amazon EC2 environment. Valid values are CONNECT_SSH (default) and CONNECT_SSM (connected through Amazon EC2 Systems Manager). For more information, see Accessing no-ingress EC2 instances with Amazon EC2 Systems Manager in the Cloud9 User Guide.
      */
     connectionType?: ConnectionType;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    dryRun?: NullableBoolean;
   }
   export interface CreateEnvironmentEC2Result {
     /**
@@ -183,7 +191,7 @@ declare namespace Cloud9 {
     /**
      * Information about the environment member that was added.
      */
-    membership?: EnvironmentMember;
+    membership: EnvironmentMember;
   }
   export interface DeleteEnvironmentMembershipRequest {
     /**
@@ -247,11 +255,11 @@ declare namespace Cloud9 {
     /**
      * The status of the environment. Available values include:    connecting: The environment is connecting.    creating: The environment is being created.    deleting: The environment is being deleted.    error: The environment is in an error state.    ready: The environment is ready.    stopped: The environment is stopped.    stopping: The environment is stopping.  
      */
-    status?: EnvironmentStatus;
+    status: EnvironmentStatus;
     /**
      * Any informational message about the status of the environment.
      */
-    message?: String;
+    message: String;
   }
   export interface DescribeEnvironmentsRequest {
     /**
@@ -281,23 +289,27 @@ declare namespace Cloud9 {
     /**
      * The type of environment. Valid values include the following:    ec2: An Amazon Elastic Compute Cloud (Amazon EC2) instance connects to the environment.    ssh: Your own server connects to the environment.  
      */
-    type?: EnvironmentType;
+    type: EnvironmentType;
     /**
-     * The connection type used for connecting to an Amazon EC2 environment.
+     * The connection type used for connecting to an Amazon EC2 environment. CONNECT_SSH is selected by default.
      */
     connectionType?: ConnectionType;
     /**
      * The Amazon Resource Name (ARN) of the environment.
      */
-    arn?: String;
+    arn: String;
     /**
      * The Amazon Resource Name (ARN) of the environment owner.
      */
-    ownerArn?: String;
+    ownerArn: String;
     /**
      * The state of the environment in its creation or deletion lifecycle.
      */
     lifecycle?: EnvironmentLifecycle;
+    /**
+     * Describes the status of Amazon Web Services managed temporary credentials for the Cloud9 environment. Available values are:    ENABLED_ON_CREATE     ENABLED_BY_OWNER     DISABLED_BY_DEFAULT     DISABLED_BY_OWNER     DISABLED_BY_COLLABORATOR     PENDING_REMOVAL_BY_COLLABORATOR     PENDING_REMOVAL_BY_OWNER     FAILED_REMOVAL_BY_COLLABORATOR     ENABLED_BY_OWNER     DISABLED_BY_DEFAULT   
+     */
+    managedCredentialsStatus?: ManagedCredentialsStatus;
   }
   export type EnvironmentArn = string;
   export type EnvironmentDescription = string;
@@ -313,7 +325,7 @@ declare namespace Cloud9 {
      */
     reason?: String;
     /**
-     * If the environment failed to delete, the Amazon Resource Name (ARN) of the related AWS resource.
+     * If the environment failed to delete, the Amazon Resource Name (ARN) of the related Amazon Web Services resource.
      */
     failureResource?: String;
   }
@@ -323,19 +335,19 @@ declare namespace Cloud9 {
     /**
      * The type of environment member permissions associated with this environment member. Available values include:    owner: Owns the environment.    read-only: Has read-only access to the environment.    read-write: Has read-write access to the environment.  
      */
-    permissions?: Permissions;
+    permissions: Permissions;
     /**
-     * The user ID in AWS Identity and Access Management (AWS IAM) of the environment member.
+     * The user ID in Identity and Access Management (IAM) of the environment member.
      */
-    userId?: String;
+    userId: String;
     /**
      * The Amazon Resource Name (ARN) of the environment member.
      */
-    userArn?: UserArn;
+    userArn: UserArn;
     /**
      * The ID of the environment for the environment member.
      */
-    environmentId?: EnvironmentId;
+    environmentId: EnvironmentId;
     /**
      * The time, expressed in epoch time format, when the environment member last opened the environment.
      */
@@ -345,6 +357,7 @@ declare namespace Cloud9 {
   export type EnvironmentName = string;
   export type EnvironmentStatus = "error"|"creating"|"connecting"|"ready"|"stopping"|"stopped"|"deleting"|string;
   export type EnvironmentType = "ssh"|"ec2"|string;
+  export type ImageId = string;
   export type InstanceType = string;
   export interface ListEnvironmentsRequest {
     /**
@@ -368,18 +381,21 @@ declare namespace Cloud9 {
   }
   export interface ListTagsForResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the AWS Cloud9 development environment to get the tags for.
+     * The Amazon Resource Name (ARN) of the Cloud9 development environment to get the tags for.
      */
     ResourceARN: EnvironmentArn;
   }
   export interface ListTagsForResourceResponse {
     /**
-     * The list of tags associated with the AWS Cloud9 development environment.
+     * The list of tags associated with the Cloud9 development environment.
      */
     Tags?: TagList;
   }
+  export type ManagedCredentialsAction = "ENABLE"|"DISABLE"|string;
+  export type ManagedCredentialsStatus = "ENABLED_ON_CREATE"|"ENABLED_BY_OWNER"|"DISABLED_BY_DEFAULT"|"DISABLED_BY_OWNER"|"DISABLED_BY_COLLABORATOR"|"PENDING_REMOVAL_BY_COLLABORATOR"|"PENDING_START_REMOVAL_BY_COLLABORATOR"|"PENDING_REMOVAL_BY_OWNER"|"PENDING_START_REMOVAL_BY_OWNER"|"FAILED_REMOVAL_BY_COLLABORATOR"|"FAILED_REMOVAL_BY_OWNER"|string;
   export type MaxResults = number;
   export type MemberPermissions = "read-write"|"read-only"|string;
+  export type NullableBoolean = boolean;
   export type Permissions = "owner"|"read-write"|"read-only"|string;
   export type PermissionsList = Permissions[];
   export type String = string;
@@ -399,11 +415,11 @@ declare namespace Cloud9 {
   export type TagList = Tag[];
   export interface TagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the AWS Cloud9 development environment to add tags to.
+     * The Amazon Resource Name (ARN) of the Cloud9 development environment to add tags to.
      */
     ResourceARN: EnvironmentArn;
     /**
-     * The list of tags to add to the given AWS Cloud9 development environment.
+     * The list of tags to add to the given Cloud9 development environment.
      */
     Tags: TagList;
   }
@@ -413,11 +429,11 @@ declare namespace Cloud9 {
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
-     * The Amazon Resource Name (ARN) of the AWS Cloud9 development environment to remove tags from.
+     * The Amazon Resource Name (ARN) of the Cloud9 development environment to remove tags from.
      */
     ResourceARN: EnvironmentArn;
     /**
-     * The tag names of the tags to remove from the given AWS Cloud9 development environment.
+     * The tag names of the tags to remove from the given Cloud9 development environment.
      */
     TagKeys: TagKeyList;
   }
@@ -456,6 +472,10 @@ declare namespace Cloud9 {
      * Any new or replacement description for the environment.
      */
     description?: EnvironmentDescription;
+    /**
+     * Allows the environment owner to turn on or turn off the Amazon Web Services managed temporary credentials for an Cloud9 environment by using one of the following values:    ENABLE     DISABLE     Only the environment owner can change the status of managed temporary credentials. An AccessDeniedException is thrown if an attempt to turn on or turn off managed temporary credentials is made by an account that's not the environment owner. 
+     */
+    managedCredentialsAction?: ManagedCredentialsAction;
   }
   export interface UpdateEnvironmentResult {
   }

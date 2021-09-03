@@ -28,6 +28,22 @@ declare class FraudDetector extends Service {
    */
   batchGetVariable(callback?: (err: AWSError, data: FraudDetector.Types.BatchGetVariableResult) => void): Request<FraudDetector.Types.BatchGetVariableResult, AWSError>;
   /**
+   * Cancels the specified batch prediction job.
+   */
+  cancelBatchPredictionJob(params: FraudDetector.Types.CancelBatchPredictionJobRequest, callback?: (err: AWSError, data: FraudDetector.Types.CancelBatchPredictionJobResult) => void): Request<FraudDetector.Types.CancelBatchPredictionJobResult, AWSError>;
+  /**
+   * Cancels the specified batch prediction job.
+   */
+  cancelBatchPredictionJob(callback?: (err: AWSError, data: FraudDetector.Types.CancelBatchPredictionJobResult) => void): Request<FraudDetector.Types.CancelBatchPredictionJobResult, AWSError>;
+  /**
+   * Creates a batch prediction job.
+   */
+  createBatchPredictionJob(params: FraudDetector.Types.CreateBatchPredictionJobRequest, callback?: (err: AWSError, data: FraudDetector.Types.CreateBatchPredictionJobResult) => void): Request<FraudDetector.Types.CreateBatchPredictionJobResult, AWSError>;
+  /**
+   * Creates a batch prediction job.
+   */
+  createBatchPredictionJob(callback?: (err: AWSError, data: FraudDetector.Types.CreateBatchPredictionJobResult) => void): Request<FraudDetector.Types.CreateBatchPredictionJobResult, AWSError>;
+  /**
    * Creates a detector version. The detector version starts in a DRAFT status.
    */
   createDetectorVersion(params: FraudDetector.Types.CreateDetectorVersionRequest, callback?: (err: AWSError, data: FraudDetector.Types.CreateDetectorVersionResult) => void): Request<FraudDetector.Types.CreateDetectorVersionResult, AWSError>;
@@ -68,37 +84,109 @@ declare class FraudDetector extends Service {
    */
   createVariable(callback?: (err: AWSError, data: FraudDetector.Types.CreateVariableResult) => void): Request<FraudDetector.Types.CreateVariableResult, AWSError>;
   /**
-   * Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector.
+   * Deletes a batch prediction job.
+   */
+  deleteBatchPredictionJob(params: FraudDetector.Types.DeleteBatchPredictionJobRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteBatchPredictionJobResult) => void): Request<FraudDetector.Types.DeleteBatchPredictionJobResult, AWSError>;
+  /**
+   * Deletes a batch prediction job.
+   */
+  deleteBatchPredictionJob(callback?: (err: AWSError, data: FraudDetector.Types.DeleteBatchPredictionJobResult) => void): Request<FraudDetector.Types.DeleteBatchPredictionJobResult, AWSError>;
+  /**
+   * Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector. When you delete a detector, Amazon Fraud Detector permanently deletes the detector and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteDetector(params: FraudDetector.Types.DeleteDetectorRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteDetectorResult) => void): Request<FraudDetector.Types.DeleteDetectorResult, AWSError>;
   /**
-   * Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector.
+   * Deletes the detector. Before deleting a detector, you must first delete all detector versions and rule versions associated with the detector. When you delete a detector, Amazon Fraud Detector permanently deletes the detector and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteDetector(callback?: (err: AWSError, data: FraudDetector.Types.DeleteDetectorResult) => void): Request<FraudDetector.Types.DeleteDetectorResult, AWSError>;
   /**
-   * Deletes the detector version. You cannot delete detector versions that are in ACTIVE status.
+   * Deletes the detector version. You cannot delete detector versions that are in ACTIVE status. When you delete a detector version, Amazon Fraud Detector permanently deletes the detector and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteDetectorVersion(params: FraudDetector.Types.DeleteDetectorVersionRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteDetectorVersionResult) => void): Request<FraudDetector.Types.DeleteDetectorVersionResult, AWSError>;
   /**
-   * Deletes the detector version. You cannot delete detector versions that are in ACTIVE status.
+   * Deletes the detector version. You cannot delete detector versions that are in ACTIVE status. When you delete a detector version, Amazon Fraud Detector permanently deletes the detector and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteDetectorVersion(callback?: (err: AWSError, data: FraudDetector.Types.DeleteDetectorVersionResult) => void): Request<FraudDetector.Types.DeleteDetectorVersionResult, AWSError>;
   /**
-   * Deletes the specified event.
+   * Deletes an entity type. You cannot delete an entity type that is included in an event type. When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type and the data is no longer stored in Amazon Fraud Detector.
+   */
+  deleteEntityType(params: FraudDetector.Types.DeleteEntityTypeRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteEntityTypeResult) => void): Request<FraudDetector.Types.DeleteEntityTypeResult, AWSError>;
+  /**
+   * Deletes an entity type. You cannot delete an entity type that is included in an event type. When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type and the data is no longer stored in Amazon Fraud Detector.
+   */
+  deleteEntityType(callback?: (err: AWSError, data: FraudDetector.Types.DeleteEntityTypeResult) => void): Request<FraudDetector.Types.DeleteEntityTypeResult, AWSError>;
+  /**
+   * Deletes the specified event. When you delete an event, Amazon Fraud Detector permanently deletes that event and the event data is no longer stored in Amazon Fraud Detector.
    */
   deleteEvent(params: FraudDetector.Types.DeleteEventRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteEventResult) => void): Request<FraudDetector.Types.DeleteEventResult, AWSError>;
   /**
-   * Deletes the specified event.
+   * Deletes the specified event. When you delete an event, Amazon Fraud Detector permanently deletes that event and the event data is no longer stored in Amazon Fraud Detector.
    */
   deleteEvent(callback?: (err: AWSError, data: FraudDetector.Types.DeleteEventResult) => void): Request<FraudDetector.Types.DeleteEventResult, AWSError>;
   /**
-   * Deletes the rule. You cannot delete a rule if it is used by an ACTIVE or INACTIVE detector version.
+   * Deletes an event type. You cannot delete an event type that is used in a detector or a model. When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type and the data is no longer stored in Amazon Fraud Detector.
+   */
+  deleteEventType(params: FraudDetector.Types.DeleteEventTypeRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteEventTypeResult) => void): Request<FraudDetector.Types.DeleteEventTypeResult, AWSError>;
+  /**
+   * Deletes an event type. You cannot delete an event type that is used in a detector or a model. When you delete an entity type, Amazon Fraud Detector permanently deletes that entity type and the data is no longer stored in Amazon Fraud Detector.
+   */
+  deleteEventType(callback?: (err: AWSError, data: FraudDetector.Types.DeleteEventTypeResult) => void): Request<FraudDetector.Types.DeleteEventTypeResult, AWSError>;
+  /**
+   * Removes a SageMaker model from Amazon Fraud Detector. You can remove an Amazon SageMaker model if it is not associated with a detector version. Removing a SageMaker model disconnects it from Amazon Fraud Detector, but the model remains available in SageMaker.
+   */
+  deleteExternalModel(params: FraudDetector.Types.DeleteExternalModelRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteExternalModelResult) => void): Request<FraudDetector.Types.DeleteExternalModelResult, AWSError>;
+  /**
+   * Removes a SageMaker model from Amazon Fraud Detector. You can remove an Amazon SageMaker model if it is not associated with a detector version. Removing a SageMaker model disconnects it from Amazon Fraud Detector, but the model remains available in SageMaker.
+   */
+  deleteExternalModel(callback?: (err: AWSError, data: FraudDetector.Types.DeleteExternalModelResult) => void): Request<FraudDetector.Types.DeleteExternalModelResult, AWSError>;
+  /**
+   * Deletes a label. You cannot delete labels that are included in an event type in Amazon Fraud Detector. You cannot delete a label assigned to an event ID. You must first delete the relevant event ID. When you delete a label, Amazon Fraud Detector permanently deletes that label and the data is no longer stored in Amazon Fraud Detector.
+   */
+  deleteLabel(params: FraudDetector.Types.DeleteLabelRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteLabelResult) => void): Request<FraudDetector.Types.DeleteLabelResult, AWSError>;
+  /**
+   * Deletes a label. You cannot delete labels that are included in an event type in Amazon Fraud Detector. You cannot delete a label assigned to an event ID. You must first delete the relevant event ID. When you delete a label, Amazon Fraud Detector permanently deletes that label and the data is no longer stored in Amazon Fraud Detector.
+   */
+  deleteLabel(callback?: (err: AWSError, data: FraudDetector.Types.DeleteLabelResult) => void): Request<FraudDetector.Types.DeleteLabelResult, AWSError>;
+  /**
+   * Deletes a model. You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.  When you delete a model, Amazon Fraud Detector permanently deletes that model and the data is no longer stored in Amazon Fraud Detector.
+   */
+  deleteModel(params: FraudDetector.Types.DeleteModelRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteModelResult) => void): Request<FraudDetector.Types.DeleteModelResult, AWSError>;
+  /**
+   * Deletes a model. You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.  When you delete a model, Amazon Fraud Detector permanently deletes that model and the data is no longer stored in Amazon Fraud Detector.
+   */
+  deleteModel(callback?: (err: AWSError, data: FraudDetector.Types.DeleteModelResult) => void): Request<FraudDetector.Types.DeleteModelResult, AWSError>;
+  /**
+   * Deletes a model version. You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.  When you delete a model version, Amazon Fraud Detector permanently deletes that model version and the data is no longer stored in Amazon Fraud Detector.
+   */
+  deleteModelVersion(params: FraudDetector.Types.DeleteModelVersionRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteModelVersionResult) => void): Request<FraudDetector.Types.DeleteModelVersionResult, AWSError>;
+  /**
+   * Deletes a model version. You can delete models and model versions in Amazon Fraud Detector, provided that they are not associated with a detector version.  When you delete a model version, Amazon Fraud Detector permanently deletes that model version and the data is no longer stored in Amazon Fraud Detector.
+   */
+  deleteModelVersion(callback?: (err: AWSError, data: FraudDetector.Types.DeleteModelVersionResult) => void): Request<FraudDetector.Types.DeleteModelVersionResult, AWSError>;
+  /**
+   * Deletes an outcome. You cannot delete an outcome that is used in a rule version. When you delete an outcome, Amazon Fraud Detector permanently deletes that outcome and the data is no longer stored in Amazon Fraud Detector.
+   */
+  deleteOutcome(params: FraudDetector.Types.DeleteOutcomeRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteOutcomeResult) => void): Request<FraudDetector.Types.DeleteOutcomeResult, AWSError>;
+  /**
+   * Deletes an outcome. You cannot delete an outcome that is used in a rule version. When you delete an outcome, Amazon Fraud Detector permanently deletes that outcome and the data is no longer stored in Amazon Fraud Detector.
+   */
+  deleteOutcome(callback?: (err: AWSError, data: FraudDetector.Types.DeleteOutcomeResult) => void): Request<FraudDetector.Types.DeleteOutcomeResult, AWSError>;
+  /**
+   * Deletes the rule. You cannot delete a rule if it is used by an ACTIVE or INACTIVE detector version. When you delete a rule, Amazon Fraud Detector permanently deletes that rule and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteRule(params: FraudDetector.Types.DeleteRuleRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteRuleResult) => void): Request<FraudDetector.Types.DeleteRuleResult, AWSError>;
   /**
-   * Deletes the rule. You cannot delete a rule if it is used by an ACTIVE or INACTIVE detector version.
+   * Deletes the rule. You cannot delete a rule if it is used by an ACTIVE or INACTIVE detector version. When you delete a rule, Amazon Fraud Detector permanently deletes that rule and the data is no longer stored in Amazon Fraud Detector.
    */
   deleteRule(callback?: (err: AWSError, data: FraudDetector.Types.DeleteRuleResult) => void): Request<FraudDetector.Types.DeleteRuleResult, AWSError>;
+  /**
+   * Deletes a variable. You can't delete variables that are included in an event type in Amazon Fraud Detector. Amazon Fraud Detector automatically deletes model output variables and SageMaker model output variables when you delete the model. You can't delete these variables manually. When you delete a variable, Amazon Fraud Detector permanently deletes that variable and the data is no longer stored in Amazon Fraud Detector.
+   */
+  deleteVariable(params: FraudDetector.Types.DeleteVariableRequest, callback?: (err: AWSError, data: FraudDetector.Types.DeleteVariableResult) => void): Request<FraudDetector.Types.DeleteVariableResult, AWSError>;
+  /**
+   * Deletes a variable. You can't delete variables that are included in an event type in Amazon Fraud Detector. Amazon Fraud Detector automatically deletes model output variables and SageMaker model output variables when you delete the model. You can't delete these variables manually. When you delete a variable, Amazon Fraud Detector permanently deletes that variable and the data is no longer stored in Amazon Fraud Detector.
+   */
+  deleteVariable(callback?: (err: AWSError, data: FraudDetector.Types.DeleteVariableResult) => void): Request<FraudDetector.Types.DeleteVariableResult, AWSError>;
   /**
    * Gets all versions for a specified detector.
    */
@@ -115,6 +203,14 @@ declare class FraudDetector extends Service {
    * Gets all of the model versions for the specified model type or for the specified model type and model ID. You can also get details for a single, specified model version. 
    */
   describeModelVersions(callback?: (err: AWSError, data: FraudDetector.Types.DescribeModelVersionsResult) => void): Request<FraudDetector.Types.DescribeModelVersionsResult, AWSError>;
+  /**
+   * Gets all batch prediction jobs or a specific job if you specify a job ID. This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 50 records per page. If you provide a maxResults, the value must be between 1 and 50. To get the next page results, provide the pagination token from the GetBatchPredictionJobsResponse as part of your request. A null pagination token fetches the records from the beginning.
+   */
+  getBatchPredictionJobs(params: FraudDetector.Types.GetBatchPredictionJobsRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetBatchPredictionJobsResult) => void): Request<FraudDetector.Types.GetBatchPredictionJobsResult, AWSError>;
+  /**
+   * Gets all batch prediction jobs or a specific job if you specify a job ID. This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 50 records per page. If you provide a maxResults, the value must be between 1 and 50. To get the next page results, provide the pagination token from the GetBatchPredictionJobsResponse as part of your request. A null pagination token fetches the records from the beginning.
+   */
+  getBatchPredictionJobs(callback?: (err: AWSError, data: FraudDetector.Types.GetBatchPredictionJobsResult) => void): Request<FraudDetector.Types.GetBatchPredictionJobsResult, AWSError>;
   /**
    * Gets a particular detector version. 
    */
@@ -184,11 +280,11 @@ declare class FraudDetector extends Service {
    */
   getModelVersion(callback?: (err: AWSError, data: FraudDetector.Types.GetModelVersionResult) => void): Request<FraudDetector.Types.GetModelVersionResult, AWSError>;
   /**
-   * Gets one or more models. Gets all models for the AWS account if no model type and no model id provided. Gets all models for the AWS account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified.  This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 10 records per page. If you provide a maxResults, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.
+   * Gets one or more models. Gets all models for the Amazon Web Services account if no model type and no model id provided. Gets all models for the Amazon Web Services account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified.  This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 10 records per page. If you provide a maxResults, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.
    */
   getModels(params: FraudDetector.Types.GetModelsRequest, callback?: (err: AWSError, data: FraudDetector.Types.GetModelsResult) => void): Request<FraudDetector.Types.GetModelsResult, AWSError>;
   /**
-   * Gets one or more models. Gets all models for the AWS account if no model type and no model id provided. Gets all models for the AWS account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified.  This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 10 records per page. If you provide a maxResults, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.
+   * Gets one or more models. Gets all models for the Amazon Web Services account if no model type and no model id provided. Gets all models for the Amazon Web Services account and model type, if the model type is specified but model id is not provided. Gets a specific model if (model type, model id) tuple is specified.  This is a paginated API. If you provide a null maxResults, this action retrieves a maximum of 10 records per page. If you provide a maxResults, the value must be between 1 and 10. To get the next page results, provide the pagination token from the response as part of your request. A null pagination token fetches the records from the beginning.
    */
   getModels(callback?: (err: AWSError, data: FraudDetector.Types.GetModelsResult) => void): Request<FraudDetector.Types.GetModelsResult, AWSError>;
   /**
@@ -369,6 +465,7 @@ declare class FraudDetector extends Service {
   updateVariable(callback?: (err: AWSError, data: FraudDetector.Types.UpdateVariableResult) => void): Request<FraudDetector.Types.UpdateVariableResult, AWSError>;
 }
 declare namespace FraudDetector {
+  export type AsyncJobStatus = "IN_PROGRESS_INITIALIZING"|"IN_PROGRESS"|"CANCEL_IN_PROGRESS"|"CANCELED"|"COMPLETE"|"FAILED"|string;
   export interface BatchCreateVariableError {
     /**
      * The name.
@@ -430,6 +527,113 @@ declare namespace FraudDetector {
      * The errors from the request.
      */
     errors?: BatchGetVariableErrorList;
+  }
+  export interface BatchPrediction {
+    /**
+     * The job ID for the batch prediction.
+     */
+    jobId?: identifier;
+    /**
+     * The batch prediction status.
+     */
+    status?: AsyncJobStatus;
+    /**
+     * The reason a batch prediction job failed.
+     */
+    failureReason?: string;
+    /**
+     * Timestamp of when the batch prediction job started.
+     */
+    startTime?: time;
+    /**
+     * Timestamp of when the batch prediction job comleted.
+     */
+    completionTime?: time;
+    /**
+     * Timestamp of most recent heartbeat indicating the batch prediction job was making progress.
+     */
+    lastHeartbeatTime?: time;
+    /**
+     * The Amazon S3 location of your training file.
+     */
+    inputPath?: s3BucketLocation;
+    /**
+     * The Amazon S3 location of your output file.
+     */
+    outputPath?: s3BucketLocation;
+    /**
+     * The name of the event type.
+     */
+    eventTypeName?: identifier;
+    /**
+     * The name of the detector.
+     */
+    detectorName?: identifier;
+    /**
+     * The detector version. 
+     */
+    detectorVersion?: floatVersionString;
+    /**
+     * The ARN of the IAM role to use for this job request.
+     */
+    iamRoleArn?: iamRoleArn;
+    /**
+     * The ARN of batch prediction job.
+     */
+    arn?: fraudDetectorArn;
+    /**
+     * The number of records processed by the batch prediction job.
+     */
+    processedRecordsCount?: Integer;
+    /**
+     * The total number of records in the batch prediction job.
+     */
+    totalRecordsCount?: Integer;
+  }
+  export type BatchPredictionList = BatchPrediction[];
+  export interface CancelBatchPredictionJobRequest {
+    /**
+     * The ID of the batch prediction job to cancel.
+     */
+    jobId: identifier;
+  }
+  export interface CancelBatchPredictionJobResult {
+  }
+  export interface CreateBatchPredictionJobRequest {
+    /**
+     * The ID of the batch prediction job.
+     */
+    jobId: identifier;
+    /**
+     * The Amazon S3 location of your training file.
+     */
+    inputPath: s3BucketLocation;
+    /**
+     * The Amazon S3 location of your output file.
+     */
+    outputPath: s3BucketLocation;
+    /**
+     * The name of the event type.
+     */
+    eventTypeName: identifier;
+    /**
+     * The name of the detector.
+     */
+    detectorName: identifier;
+    /**
+     * The detector version.
+     */
+    detectorVersion?: wholeNumberVersionString;
+    /**
+     * The ARN of the IAM role to use for this job request.
+     */
+    iamRoleArn: iamRoleArn;
+    /**
+     * A collection of key and value pairs.
+     */
+    tags?: tagList;
+  }
+  export interface CreateBatchPredictionJobResult {
   }
   export interface CreateDetectorVersionRequest {
     /**
@@ -601,7 +805,7 @@ declare namespace FraudDetector {
      */
     description?: string;
     /**
-     * The variable type. For more information see Variable types.  Valid Values: AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT 
+     * The variable type. For more information see Variable types.  Valid Values: AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT 
      */
     variableType?: string;
     /**
@@ -624,6 +828,14 @@ declare namespace FraudDetector {
      */
     fieldLevelMessages?: fieldValidationMessageList;
   }
+  export interface DeleteBatchPredictionJobRequest {
+    /**
+     * The ID of the batch prediction job to delete.
+     */
+    jobId: identifier;
+  }
+  export interface DeleteBatchPredictionJobResult {
+  }
   export interface DeleteDetectorRequest {
     /**
      * The ID of the detector to delete.
@@ -644,22 +856,98 @@ declare namespace FraudDetector {
   }
   export interface DeleteDetectorVersionResult {
   }
+  export interface DeleteEntityTypeRequest {
+    /**
+     * The name of the entity type to delete.
+     */
+    name: identifier;
+  }
+  export interface DeleteEntityTypeResult {
+  }
   export interface DeleteEventRequest {
     /**
      * The ID of the event to delete.
      */
-    eventId: string;
+    eventId: identifier;
     /**
      * The name of the event type.
      */
-    eventTypeName: string;
+    eventTypeName: identifier;
   }
   export interface DeleteEventResult {
+  }
+  export interface DeleteEventTypeRequest {
+    /**
+     * The name of the event type to delete.
+     */
+    name: identifier;
+  }
+  export interface DeleteEventTypeResult {
+  }
+  export interface DeleteExternalModelRequest {
+    /**
+     * The endpoint of the Amazon Sagemaker model to delete.
+     */
+    modelEndpoint: sageMakerEndpointIdentifier;
+  }
+  export interface DeleteExternalModelResult {
+  }
+  export interface DeleteLabelRequest {
+    /**
+     * The name of the label to delete.
+     */
+    name: identifier;
+  }
+  export interface DeleteLabelResult {
+  }
+  export interface DeleteModelRequest {
+    /**
+     * The model ID of the model to delete.
+     */
+    modelId: modelIdentifier;
+    /**
+     * The model type of the model to delete.
+     */
+    modelType: ModelTypeEnum;
+  }
+  export interface DeleteModelResult {
+  }
+  export interface DeleteModelVersionRequest {
+    /**
+     * The model ID of the model version to delete.
+     */
+    modelId: modelIdentifier;
+    /**
+     * The model type of the model version to delete.
+     */
+    modelType: ModelTypeEnum;
+    /**
+     * The model version number of the model version to delete.
+     */
+    modelVersionNumber: floatVersionString;
+  }
+  export interface DeleteModelVersionResult {
+  }
+  export interface DeleteOutcomeRequest {
+    /**
+     * The name of the outcome to delete.
+     */
+    name: identifier;
+  }
+  export interface DeleteOutcomeResult {
   }
   export interface DeleteRuleRequest {
     rule: Rule;
   }
   export interface DeleteRuleResult {
+  }
+  export interface DeleteVariableRequest {
+    /**
+     * The name of the variable to delete.
+     */
+    name: string;
+  }
+  export interface DeleteVariableResult {
   }
   export interface DescribeDetectorRequest {
     /**
@@ -928,6 +1216,30 @@ declare namespace FraudDetector {
      */
     type?: string;
   }
+  export interface GetBatchPredictionJobsRequest {
+    /**
+     * The batch prediction job for which to get the details.
+     */
+    jobId?: identifier;
+    /**
+     * The maximum number of objects to return for the request.
+     */
+    maxResults?: batchPredictionsMaxPageSize;
+    /**
+     * The next token from the previous request.
+     */
+    nextToken?: string;
+  }
+  export interface GetBatchPredictionJobsResult {
+    /**
+     * An array containing the details of each batch prediction job.
+     */
+    batchPredictions?: BatchPredictionList;
+    /**
+     * The next token for the subsequent request.
+     */
+    nextToken?: string;
+  }
   export interface GetDetectorVersionRequest {
     /**
      * The detector ID.
@@ -1056,9 +1368,9 @@ declare namespace FraudDetector {
     /**
      * Timestamp that defines when the event under evaluation occurred.
      */
-    eventTimestamp: string;
+    eventTimestamp: utcTimestampISO8601;
     /**
-     * Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.
+     * Names of the event type's variables you defined in Amazon Fraud Detector to represent data elements and their corresponding values for the event you are sending for evaluation.    You must provide at least one eventVariable   If detectorVersion is associated with a modelVersion, you must provide at least one associated eventVariable    To ensure highest possible fraud prediction and to simplify your data preparation, Amazon Fraud Detector will replace all missing variables or values as follows:  For Amazon Fraud Detector trained models:  If a null value is provided explicitly for a variable or if a variable is missing, model will replace the null value or the missing variable (no variable name in the eventVariables map) with calculated default mean/medians for numeric variables and with special values for categorical variables.  For External models ( for example, imported SageMaker):  If a null value is provided explicitly for a variable, the model and rules will use “null” as the value. If a variable is not provided (no variable name in the eventVariables map), model and rules will use the default value that is provided for the variable. 
      */
     eventVariables: EventVariableMap;
     /**
@@ -1072,7 +1384,7 @@ declare namespace FraudDetector {
      */
     modelScores?: ListOfModelScores;
     /**
-     * The results.
+     * The results from the rules.
      */
     ruleResults?: ListOfRuleResults;
   }
@@ -1194,7 +1506,7 @@ declare namespace FraudDetector {
      */
     externalEventsDetail?: ExternalEventsDetail;
     /**
-     * The model version status.
+     * The model version status. Possible values are:    TRAINING_IN_PROGRESS     TRAINING_COMPLETE     ACTIVATE_REQUESTED     ACTIVATE_IN_PROGRESS     ACTIVE     INACTIVATE_REQUESTED     INACTIVATE_IN_PROGRESS     INACTIVE     ERROR   
      */
     status?: string;
     /**
@@ -1310,6 +1622,7 @@ declare namespace FraudDetector {
      */
     nextToken?: string;
   }
+  export type Integer = number;
   export type JsonKeyToVariableMap = {[key: string]: string};
   export interface KMSKey {
     /**
@@ -1347,6 +1660,7 @@ declare namespace FraudDetector {
     labelMapper: labelMapper;
   }
   export type Language = "DETECTORPL"|string;
+  export type ListOfLogOddsMetrics = LogOddsMetric[];
   export type ListOfModelScores = ModelScores[];
   export type ListOfModelVersions = ModelVersion[];
   export type ListOfRuleResults = RuleResult[];
@@ -1374,6 +1688,20 @@ declare namespace FraudDetector {
      * The next token for subsequent requests. 
      */
     nextToken?: string;
+  }
+  export interface LogOddsMetric {
+    /**
+     * The name of the variable.
+     */
+    variableName: string;
+    /**
+     * The type of variable.
+     */
+    variableType: string;
+    /**
+     * The relative importance of the variable. For more information, see Model variable importance.
+     */
+    variableImportance: float;
   }
   export interface MetricDataPoint {
     /**
@@ -1549,7 +1877,7 @@ declare namespace FraudDetector {
      */
     arn?: fraudDetectorArn;
   }
-  export type ModelVersionStatus = "ACTIVE"|"INACTIVE"|string;
+  export type ModelVersionStatus = "ACTIVE"|"INACTIVE"|"TRAINING_CANCELLED"|string;
   export type NameList = string[];
   export type NonEmptyListOfStrings = string[];
   export interface Outcome {
@@ -1832,6 +2160,10 @@ declare namespace FraudDetector {
      * The training metric details.
      */
     trainingMetrics?: TrainingMetrics;
+    /**
+     * The variable importance metrics.
+     */
+    variableImportanceMetrics?: VariableImportanceMetrics;
   }
   export interface UntagResourceRequest {
     /**
@@ -2072,7 +2404,7 @@ declare namespace FraudDetector {
      */
     description?: string;
     /**
-     * The variable type of the variable. Valid Values: AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT 
+     * The variable type of the variable. Valid Values: AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT  
      */
     variableType?: string;
     /**
@@ -2110,13 +2442,20 @@ declare namespace FraudDetector {
      */
     description?: string;
     /**
-     * The type of the variable. For more information see Variable types. Valid Values: AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT | SHIPPING_ZIP | USERAGENT 
+     * The type of the variable. For more information see Variable types. Valid Values: AUTH_CODE | AVS | BILLING_ADDRESS_L1 | BILLING_ADDRESS_L2 | BILLING_CITY | BILLING_COUNTRY | BILLING_NAME | BILLING_PHONE | BILLING_STATE | BILLING_ZIP | CARD_BIN | CATEGORICAL | CURRENCY_CODE | EMAIL_ADDRESS | FINGERPRINT | FRAUD_LABEL | FREE_FORM_TEXT | IP_ADDRESS | NUMERIC | ORDER_ID | PAYMENT_TYPE | PHONE_NUMBER | PRICE | PRODUCT_CATEGORY | SHIPPING_ADDRESS_L1 | SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT  
      */
     variableType?: string;
   }
   export type VariableEntryList = VariableEntry[];
+  export interface VariableImportanceMetrics {
+    /**
+     * List of variable metrics.
+     */
+    logOddsMetrics?: ListOfLogOddsMetrics;
+  }
   export type VariableList = Variable[];
   export type VariablesMaxResults = number;
+  export type batchPredictionsMaxPageSize = number;
   export type blob = Buffer|Uint8Array|Blob|string;
   export type contentType = string;
   export type description = string;
@@ -2133,7 +2472,7 @@ declare namespace FraudDetector {
   export type identifier = string;
   export type integer = number;
   export type labelList = Label[];
-  export type labelMapper = {[key: string]: ListOfStrings};
+  export type labelMapper = {[key: string]: NonEmptyListOfStrings};
   export type labelsMaxResults = number;
   export type listOfEntities = Entity[];
   export type metricDataPointsList = MetricDataPoint[];
@@ -2150,6 +2489,7 @@ declare namespace FraudDetector {
   export type tagList = Tag[];
   export type tagValue = string;
   export type time = string;
+  export type utcTimestampISO8601 = string;
   export type variableName = string;
   export type variableValue = string;
   export type wholeNumberVersionString = string;

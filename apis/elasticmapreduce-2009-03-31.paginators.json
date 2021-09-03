@@ -33,6 +33,11 @@
       "output_token": "Marker",
       "result_key": "NotebookExecutions"
     },
+    "ListReleaseLabels": {
+      "input_token": "NextToken",
+      "limit_key": "MaxResults",
+      "output_token": "NextToken"
+    },
     "ListSecurityConfigurations": {
       "input_token": "Marker",
       "output_token": "Marker",
@@ -42,6 +47,16 @@
       "input_token": "Marker",
       "output_token": "Marker",
       "result_key": "Steps"
+    },
+    "ListStudioSessionMappings": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "result_key": "SessionMappings"
+    },
+    "ListStudios": {
+      "input_token": "Marker",
+      "output_token": "Marker",
+      "result_key": "Studios"
     }
   }
 }

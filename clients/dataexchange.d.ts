@@ -577,6 +577,34 @@ declare namespace DataExchange {
      */
     RevisionId: Id;
   }
+  export interface ExportRevisionsToS3RequestDetails {
+    /**
+     * The unique identifier for the data set associated with this export job.
+     */
+    DataSetId: Id;
+    /**
+     * Encryption configuration for the export job.
+     */
+    Encryption?: ExportServerSideEncryption;
+    /**
+     * The destination for the revision.
+     */
+    RevisionDestinations: ListOfRevisionDestinationEntry;
+  }
+  export interface ExportRevisionsToS3ResponseDetails {
+    /**
+     * The unique identifier for the data set associated with this export job.
+     */
+    DataSetId: Id;
+    /**
+     * Encryption configuration of the export job.
+     */
+    Encryption?: ExportServerSideEncryption;
+    /**
+     * The destination in Amazon S3 where the revision is exported.
+     */
+    RevisionDestinations: ListOfRevisionDestinationEntry;
+  }
   export interface ExportServerSideEncryption {
     /**
      * The Amazon Resource Name (ARN) of the the AWS KMS key you want to use to encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms as an encryption type.
@@ -1000,6 +1028,7 @@ declare namespace DataExchange {
   }
   export type ListOfAssetDestinationEntry = AssetDestinationEntry[];
   export type ListOfAssetSourceEntry = AssetSourceEntry[];
+  export type ListOfRevisionDestinationEntry = RevisionDestinationEntry[];
   export interface ListRevisionAssetsRequest {
     /**
      * The unique identifier for a data set.
@@ -1057,6 +1086,10 @@ declare namespace DataExchange {
      */
     ExportAssetsToS3?: ExportAssetsToS3RequestDetails;
     /**
+     * Details about the export to Amazon S3 request.
+     */
+    ExportRevisionsToS3?: ExportRevisionsToS3RequestDetails;
+    /**
      * Details about the import from signed URL request.
      */
     ImportAssetFromSignedUrl?: ImportAssetFromSignedUrlRequestDetails;
@@ -1075,6 +1108,10 @@ declare namespace DataExchange {
      */
     ExportAssetsToS3?: ExportAssetsToS3ResponseDetails;
     /**
+     * Details for the export revisions to Amazon S3 response.
+     */
+    ExportRevisionsToS3?: ExportRevisionsToS3ResponseDetails;
+    /**
      * Details for the import from signed URL response.
      */
     ImportAssetFromSignedUrl?: ImportAssetFromSignedUrlResponseDetails;
@@ -1082,6 +1119,20 @@ declare namespace DataExchange {
      * Details for the import from Amazon S3 response.
      */
     ImportAssetsFromS3?: ImportAssetsFromS3ResponseDetails;
+  }
+  export interface RevisionDestinationEntry {
+    /**
+     * The S3 bucket that is the destination for the assets in the revision.
+     */
+    Bucket: __string;
+    /**
+     * A string representing the pattern for generated names of the individual assets in the revision. For more information about key patterns, see Key patterns when exporting revisions.
+     */
+    KeyPattern?: __string;
+    /**
+     * The unique identifier for the revision.
+     */
+    RevisionId: Id;
   }
   export interface RevisionEntry {
     /**
@@ -1144,7 +1195,7 @@ declare namespace DataExchange {
     Tags: MapOf__string;
   }
   export type Timestamp = Date;
-  export type Type = "IMPORT_ASSETS_FROM_S3"|"IMPORT_ASSET_FROM_SIGNED_URL"|"EXPORT_ASSETS_TO_S3"|"EXPORT_ASSET_TO_SIGNED_URL"|string;
+  export type Type = "IMPORT_ASSETS_FROM_S3"|"IMPORT_ASSET_FROM_SIGNED_URL"|"EXPORT_ASSETS_TO_S3"|"EXPORT_ASSET_TO_SIGNED_URL"|"EXPORT_REVISIONS_TO_S3"|string;
   export interface UntagResourceRequest {
     /**
      * An Amazon Resource Name (ARN) that uniquely identifies an AWS resource.

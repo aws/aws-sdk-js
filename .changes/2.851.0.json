@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "Appflow",
+        "description": "# Adding 'Amazon Honeycode' , 'Amazon Lookout for Metrics' and  'Amazon Connect Customer Profiles' as Destinations."
+    },
+    {
+        "type": "feature",
+        "category": "ECRPUBLIC",
+        "description": "This release adds support for AWS tags on Amazon ECR Public repositories."
+    },
+    {
+        "type": "feature",
+        "category": "ES",
+        "description": "Amazon Elasticsearch Service now supports Auto-Tune, which monitors performance metrics and automatically optimizes domains"
+    },
+    {
+        "type": "feature",
+        "category": "MediaPackageVod",
+        "description": "AWS Elemental MediaPackage provides access logs that capture detailed information about requests sent to a customer's MediaPackage VOD packaging group."
+    }
+]

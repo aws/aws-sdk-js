@@ -9,7 +9,7 @@
           "description": "This is my demonstration environment.",
           "instanceType": "t2.micro",
           "ownerArn": "arn:aws:iam::123456789012:user/MyDemoUser",
-          "subnetId": "subnet-1fab8aEX"
+          "subnetId": "subnet-6300cd1b"
         },
         "output": {
           "environmentId": "8d9967e2f0624182b74e7690ad69ebEX"
@@ -115,7 +115,7 @@
           "output": {
           }
         },
-        "description": "The following example gets information about all of the environment members for the specified AWS Cloud9 development environment.",
+        "description": "The following example gets information about all of the environment members for the specified development environment.",
         "id": "describeenvironmentmemberships1-1516823070453",
         "title": "DescribeEnvironmentMemberships1"
       },
@@ -142,7 +142,7 @@
           "output": {
           }
         },
-        "description": "The following example gets information about the owner of the specified AWS Cloud9 development environment.",
+        "description": "The following example gets information about the owner of the specified development environment.",
         "id": "describeenvironmentmemberships2-1516823191355",
         "title": "DescribeEnvironmentMemberships2"
       },
@@ -174,7 +174,7 @@
           "output": {
           }
         },
-        "description": "The following example gets AWS Cloud9 development environment membership information for the specified user.",
+        "description": "The following example gets development environment membership information for the specified user.",
         "id": "describeenvironmentmemberships3-1516823268793",
         "title": "DescribeEnvironmentMemberships3"
       }

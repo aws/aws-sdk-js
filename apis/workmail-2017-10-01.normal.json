@@ -85,6 +85,35 @@
       "documentation": "<p>Adds a member (user or group) to the group's set.</p>",
       "idempotent": true
     },
+    "CancelMailboxExportJob": {
+      "name": "CancelMailboxExportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CancelMailboxExportJobRequest"
+      },
+      "output": {
+        "shape": "CancelMailboxExportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        }
+      ],
+      "documentation": "<p>Cancels a mailbox export job.</p> <note> <p>If the mailbox export job is near completion, it might not be possible to cancel it.</p> </note>",
+      "idempotent": true
+    },
     "CreateAlias": {
       "name": "CreateAlias",
       "http": {
@@ -168,6 +197,66 @@
         }
       ],
       "documentation": "<p>Creates a group that can be used in Amazon WorkMail by calling the <a>RegisterToWorkMail</a> operation.</p>",
+      "idempotent": true
+    },
+    "CreateMobileDeviceAccessRule": {
+      "name": "CreateMobileDeviceAccessRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateMobileDeviceAccessRuleRequest"
+      },
+      "output": {
+        "shape": "CreateMobileDeviceAccessRuleResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Creates a new mobile device access rule for the specified Amazon WorkMail organization.</p>"
+    },
+    "CreateOrganization": {
+      "name": "CreateOrganization",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateOrganizationRequest"
+      },
+      "output": {
+        "shape": "CreateOrganizationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "DirectoryInUseException"
+        },
+        {
+          "shape": "DirectoryUnavailableException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "NameAvailabilityException"
+        }
+      ],
+      "documentation": "<p>Creates a new Amazon WorkMail organization. Optionally, you can choose to associate an existing AWS Directory Service directory with your organization. If an AWS Directory Service directory ID is specified, the organization alias must match the directory alias. If you choose not to associate an existing directory with your organization, then we create a new Amazon WorkMail directory for you. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/add_new_organization.html\">Adding an organization</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p> <p>You can associate multiple email domains with an organization, then set your default email domain from the Amazon WorkMail console. You can also associate a domain that is managed in an Amazon Route 53 public hosted zone. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html\">Adding a domain</a> and <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/default_domain.html\">Choosing the default domain</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p> <p>Optionally, you can use a customer managed master key from AWS Key Management Service (AWS KMS) to encrypt email for your organization. If you don't associate an AWS KMS key, Amazon WorkMail creates a default AWS managed master key for you.</p>",
       "idempotent": true
     },
     "CreateResource": {
@@ -376,6 +465,57 @@
       "documentation": "<p>Deletes permissions granted to a member (user or group).</p>",
       "idempotent": true
     },
+    "DeleteMobileDeviceAccessRule": {
+      "name": "DeleteMobileDeviceAccessRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteMobileDeviceAccessRuleRequest"
+      },
+      "output": {
+        "shape": "DeleteMobileDeviceAccessRuleResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Deletes a mobile device access rule for the specified Amazon WorkMail organization.</p>"
+    },
+    "DeleteOrganization": {
+      "name": "DeleteOrganization",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteOrganizationRequest"
+      },
+      "output": {
+        "shape": "DeleteOrganizationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Deletes an Amazon WorkMail organization and all underlying AWS resources managed by Amazon WorkMail as part of the organization. You can choose whether to delete the associated directory. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/remove_organization.html\">Removing an organization</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p>",
+      "idempotent": true
+    },
     "DeleteResource": {
       "name": "DeleteResource",
       "http": {
@@ -528,6 +668,35 @@
         }
       ],
       "documentation": "<p>Returns the data available for the group.</p>",
+      "idempotent": true
+    },
+    "DescribeMailboxExportJob": {
+      "name": "DescribeMailboxExportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeMailboxExportJobRequest"
+      },
+      "output": {
+        "shape": "DescribeMailboxExportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        }
+      ],
+      "documentation": "<p>Describes the current status of a mailbox export job.</p>",
       "idempotent": true
     },
     "DescribeOrganization": {
@@ -767,6 +936,31 @@
       "documentation": "<p>Requests a user's mailbox details for a specified organization and user.</p>",
       "idempotent": true
     },
+    "GetMobileDeviceAccessEffect": {
+      "name": "GetMobileDeviceAccessEffect",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMobileDeviceAccessEffectRequest"
+      },
+      "output": {
+        "shape": "GetMobileDeviceAccessEffectResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access rules for the Amazon WorkMail organization for a particular user's attributes.</p>"
+    },
     "ListAccessControlRules": {
       "name": "ListAccessControlRules",
       "http": {
@@ -882,6 +1076,32 @@
       "documentation": "<p>Returns summaries of the organization's groups.</p>",
       "idempotent": true
     },
+    "ListMailboxExportJobs": {
+      "name": "ListMailboxExportJobs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListMailboxExportJobsRequest"
+      },
+      "output": {
+        "shape": "ListMailboxExportJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Lists the mailbox export jobs started for the specified organization within the last seven days.</p>",
+      "idempotent": true
+    },
     "ListMailboxPermissions": {
       "name": "ListMailboxPermissions",
       "http": {
@@ -910,6 +1130,31 @@
       ],
       "documentation": "<p>Lists the mailbox permissions associated with a user, group, or resource mailbox.</p>",
       "idempotent": true
+    },
+    "ListMobileDeviceAccessRules": {
+      "name": "ListMobileDeviceAccessRules",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListMobileDeviceAccessRulesRequest"
+      },
+      "output": {
+        "shape": "ListMobileDeviceAccessRulesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Lists the mobile device access rules for the specified Amazon WorkMail organization.</p>"
     },
     "ListOrganizations": {
       "name": "ListOrganizations",
@@ -1220,6 +1465,38 @@
       "documentation": "<p>Allows the administrator to reset the password for a user.</p>",
       "idempotent": true
     },
+    "StartMailboxExportJob": {
+      "name": "StartMailboxExportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartMailboxExportJobRequest"
+      },
+      "output": {
+        "shape": "StartMailboxExportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "LimitExceededException"
+        }
+      ],
+      "documentation": "<p>Starts a mailbox export job to export MIME-format email messages and calendar items from the specified mailbox to the specified Amazon Simple Storage Service (Amazon S3) bucket. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html\">Exporting mailbox content</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p>",
+      "idempotent": true
+    },
     "TagResource": {
       "name": "TagResource",
       "http": {
@@ -1295,6 +1572,34 @@
       ],
       "documentation": "<p>Updates a user's current mailbox quota for a specified organization and user.</p>",
       "idempotent": true
+    },
+    "UpdateMobileDeviceAccessRule": {
+      "name": "UpdateMobileDeviceAccessRule",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateMobileDeviceAccessRuleRequest"
+      },
+      "output": {
+        "shape": "UpdateMobileDeviceAccessRuleResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        }
+      ],
+      "documentation": "<p>Updates a mobile device access rule for the specified Amazon WorkMail organization.</p>"
     },
     "UpdatePrimaryEmailAddress": {
       "name": "UpdatePrimaryEmailAddress",
@@ -1581,6 +1886,33 @@
     "Boolean": {
       "type": "boolean"
     },
+    "CancelMailboxExportJobRequest": {
+      "type": "structure",
+      "required": [
+        "ClientToken",
+        "JobId",
+        "OrganizationId"
+      ],
+      "members": {
+        "ClientToken": {
+          "shape": "IdempotencyClientToken",
+          "documentation": "<p>The idempotency token for the client request.</p>",
+          "idempotencyToken": true
+        },
+        "JobId": {
+          "shape": "MailboxExportJobId",
+          "documentation": "<p>The job ID.</p>"
+        },
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The organization ID.</p>"
+        }
+      }
+    },
+    "CancelMailboxExportJobResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "CreateAliasRequest": {
       "type": "structure",
       "required": [
@@ -1633,6 +1965,120 @@
         }
       }
     },
+    "CreateMobileDeviceAccessRuleRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "Name",
+        "Effect"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization under which the rule will be created.</p>"
+        },
+        "ClientToken": {
+          "shape": "IdempotencyClientToken",
+          "documentation": "<p>The idempotency token for the client request.</p>",
+          "idempotencyToken": true
+        },
+        "Name": {
+          "shape": "MobileDeviceAccessRuleName",
+          "documentation": "<p>The rule name.</p>"
+        },
+        "Description": {
+          "shape": "MobileDeviceAccessRuleDescription",
+          "documentation": "<p>The rule description.</p>"
+        },
+        "Effect": {
+          "shape": "MobileDeviceAccessRuleEffect",
+          "documentation": "<p>The effect of the rule when it matches. Allowed values are <code>ALLOW</code> or <code>DENY</code>.</p>"
+        },
+        "DeviceTypes": {
+          "shape": "DeviceTypeList",
+          "documentation": "<p>Device types that the rule will match.</p>"
+        },
+        "NotDeviceTypes": {
+          "shape": "DeviceTypeList",
+          "documentation": "<p>Device types that the rule <b>will not</b> match. All other device types will match.</p>"
+        },
+        "DeviceModels": {
+          "shape": "DeviceModelList",
+          "documentation": "<p>Device models that the rule will match.</p>"
+        },
+        "NotDeviceModels": {
+          "shape": "DeviceModelList",
+          "documentation": "<p>Device models that the rule <b>will not</b> match. All other device models will match.</p>"
+        },
+        "DeviceOperatingSystems": {
+          "shape": "DeviceOperatingSystemList",
+          "documentation": "<p>Device operating systems that the rule will match.</p>"
+        },
+        "NotDeviceOperatingSystems": {
+          "shape": "DeviceOperatingSystemList",
+          "documentation": "<p>Device operating systems that the rule <b>will not</b> match. All other device operating systems will match.</p>"
+        },
+        "DeviceUserAgents": {
+          "shape": "DeviceUserAgentList",
+          "documentation": "<p>Device user agents that the rule will match.</p>"
+        },
+        "NotDeviceUserAgents": {
+          "shape": "DeviceUserAgentList",
+          "documentation": "<p>Device user agents that the rule <b>will not</b> match. All other device user agents will match.</p>"
+        }
+      }
+    },
+    "CreateMobileDeviceAccessRuleResponse": {
+      "type": "structure",
+      "members": {
+        "MobileDeviceAccessRuleId": {
+          "shape": "MobileDeviceAccessRuleId",
+          "documentation": "<p>The identifier for the newly created mobile device access rule.</p>"
+        }
+      }
+    },
+    "CreateOrganizationRequest": {
+      "type": "structure",
+      "required": [
+        "Alias"
+      ],
+      "members": {
+        "DirectoryId": {
+          "shape": "DirectoryId",
+          "documentation": "<p>The AWS Directory Service directory ID.</p>"
+        },
+        "Alias": {
+          "shape": "OrganizationName",
+          "documentation": "<p>The organization alias.</p>"
+        },
+        "ClientToken": {
+          "shape": "IdempotencyClientToken",
+          "documentation": "<p>The idempotency token associated with the request.</p>",
+          "idempotencyToken": true
+        },
+        "Domains": {
+          "shape": "Domains",
+          "documentation": "<p>The email domains to associate with the organization.</p>"
+        },
+        "KmsKeyArn": {
+          "shape": "KmsKeyArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of a customer managed master key from AWS KMS.</p>"
+        },
+        "EnableInteroperability": {
+          "shape": "Boolean",
+          "documentation": "<p>When <code>true</code>, allows organization interoperability between Amazon WorkMail and Microsoft Exchange. Can only be set to <code>true</code> if an AD Connector directory ID is included in the request.</p>"
+        }
+      }
+    },
+    "CreateOrganizationResponse": {
+      "type": "structure",
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The organization ID.</p>"
+        }
+      }
+    },
     "CreateResourceRequest": {
       "type": "structure",
       "required": [
@@ -1679,7 +2125,7 @@
         },
         "Name": {
           "shape": "UserName",
-          "documentation": "<p>The name for the new user. Simple AD or AD Connector user names have a maximum length of 20. All others have a maximum length of 64.</p>"
+          "documentation": "<p>The name for the new user. WorkMail directory user names have a maximum length of 64. All others have a maximum length of 20.</p>"
         },
         "DisplayName": {
           "shape": "String",
@@ -1800,7 +2246,7 @@
         },
         "EntityId": {
           "shape": "WorkMailIdentifier",
-          "documentation": "<p>The identifier of the member (user or group)that owns the mailbox.</p>"
+          "documentation": "<p>The identifier of the member (user or group) that owns the mailbox.</p>"
         },
         "GranteeId": {
           "shape": "WorkMailIdentifier",
@@ -1811,6 +2257,62 @@
     "DeleteMailboxPermissionsResponse": {
       "type": "structure",
       "members": {}
+    },
+    "DeleteMobileDeviceAccessRuleRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "MobileDeviceAccessRuleId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization under which the rule will be deleted.</p>"
+        },
+        "MobileDeviceAccessRuleId": {
+          "shape": "MobileDeviceAccessRuleId",
+          "documentation": "<p>The identifier of the rule to be deleted.</p>"
+        }
+      }
+    },
+    "DeleteMobileDeviceAccessRuleResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "DeleteOrganizationRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "DeleteDirectory"
+      ],
+      "members": {
+        "ClientToken": {
+          "shape": "IdempotencyClientToken",
+          "documentation": "<p>The idempotency token associated with the request.</p>",
+          "idempotencyToken": true
+        },
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The organization ID.</p>"
+        },
+        "DeleteDirectory": {
+          "shape": "Boolean",
+          "documentation": "<p>If true, deletes the AWS Directory Service directory associated with the organization.</p>"
+        }
+      }
+    },
+    "DeleteOrganizationResponse": {
+      "type": "structure",
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The organization ID.</p>"
+        },
+        "State": {
+          "shape": "String",
+          "documentation": "<p>The state of the organization.</p>"
+        }
+      }
     },
     "DeleteResourceRequest": {
       "type": "structure",
@@ -1939,6 +2441,76 @@
         "DisabledDate": {
           "shape": "Timestamp",
           "documentation": "<p>The date and time when a user was deregistered from WorkMail, in UNIX epoch time format.</p>"
+        }
+      }
+    },
+    "DescribeMailboxExportJobRequest": {
+      "type": "structure",
+      "required": [
+        "JobId",
+        "OrganizationId"
+      ],
+      "members": {
+        "JobId": {
+          "shape": "MailboxExportJobId",
+          "documentation": "<p>The mailbox export job ID.</p>"
+        },
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The organization ID.</p>"
+        }
+      }
+    },
+    "DescribeMailboxExportJobResponse": {
+      "type": "structure",
+      "members": {
+        "EntityId": {
+          "shape": "WorkMailIdentifier",
+          "documentation": "<p>The identifier of the user or resource associated with the mailbox.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The mailbox export job description.</p>"
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the Amazon Simple Storage Service (Amazon S3) bucket.</p>"
+        },
+        "KmsKeyArn": {
+          "shape": "KmsKeyArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.</p>"
+        },
+        "S3BucketName": {
+          "shape": "S3BucketName",
+          "documentation": "<p>The name of the S3 bucket.</p>"
+        },
+        "S3Prefix": {
+          "shape": "S3ObjectKey",
+          "documentation": "<p>The S3 bucket prefix.</p>"
+        },
+        "S3Path": {
+          "shape": "S3ObjectKey",
+          "documentation": "<p>The path to the S3 bucket and file that the mailbox export job is exporting to.</p>"
+        },
+        "EstimatedProgress": {
+          "shape": "Percentage",
+          "documentation": "<p>The estimated progress of the mailbox export job, in percentage points.</p>"
+        },
+        "State": {
+          "shape": "MailboxExportJobState",
+          "documentation": "<p>The state of the mailbox export job.</p>"
+        },
+        "ErrorInfo": {
+          "shape": "MailboxExportErrorInfo",
+          "documentation": "<p>Error information for failed mailbox export jobs.</p>"
+        },
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The mailbox export job start timestamp.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The mailbox export job end timestamp.</p>"
         }
       }
     },
@@ -2103,6 +2675,74 @@
         }
       }
     },
+    "Description": {
+      "type": "string",
+      "max": 1023,
+      "min": 0,
+      "pattern": "[\\S\\s]*"
+    },
+    "DeviceModel": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[\\u0020-\\u00FF]+"
+    },
+    "DeviceModelList": {
+      "type": "list",
+      "member": {
+        "shape": "DeviceModel"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "DeviceOperatingSystem": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[\\u0020-\\u00FF]+"
+    },
+    "DeviceOperatingSystemList": {
+      "type": "list",
+      "member": {
+        "shape": "DeviceOperatingSystem"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "DeviceType": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[\\u0020-\\u00FF]+"
+    },
+    "DeviceTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "DeviceType"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "DeviceUserAgent": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[\\u0020-\\u00FF]+"
+    },
+    "DeviceUserAgentList": {
+      "type": "list",
+      "member": {
+        "shape": "DeviceUserAgent"
+      },
+      "max": 10,
+      "min": 1
+    },
+    "DirectoryId": {
+      "type": "string",
+      "max": 12,
+      "min": 12,
+      "pattern": "^d-[0-9a-f]{10}$"
+    },
     "DisassociateDelegateFromResourceRequest": {
       "type": "structure",
       "required": [
@@ -2155,11 +2795,39 @@
       "type": "structure",
       "members": {}
     },
+    "Domain": {
+      "type": "structure",
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>The fully qualified domain name.</p>"
+        },
+        "HostedZoneId": {
+          "shape": "HostedZoneId",
+          "documentation": "<p>The hosted zone ID for a domain hosted in Route 53. Required when configuring a domain hosted in Route 53.</p>"
+        }
+      },
+      "documentation": "<p>The domain to associate with an Amazon WorkMail organization.</p> <p>When you configure a domain hosted in Amazon Route 53 (Route 53), all recommended DNS records are added to the organization when you create it. For more information, see <a href=\"https://docs.aws.amazon.com/workmail/latest/adminguide/add_domain.html\">Adding a domain</a> in the <i>Amazon WorkMail Administrator Guide</i>.</p>"
+    },
+    "DomainName": {
+      "type": "string",
+      "max": 255,
+      "min": 3,
+      "pattern": "[a-zA-Z0-9.-]+\\.[a-zA-Z-]{2,}"
+    },
+    "Domains": {
+      "type": "list",
+      "member": {
+        "shape": "Domain"
+      },
+      "max": 5,
+      "min": 0
+    },
     "EmailAddress": {
       "type": "string",
       "max": 254,
       "min": 1,
-      "pattern": "[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}"
+      "pattern": "[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]+\\.[a-zA-Z-]{2,}"
     },
     "EntityState": {
       "type": "string",
@@ -2310,6 +2978,47 @@
         }
       }
     },
+    "GetMobileDeviceAccessEffectRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization to simulate the access effect for.</p>"
+        },
+        "DeviceType": {
+          "shape": "DeviceType",
+          "documentation": "<p>Device type the simulated user will report.</p>"
+        },
+        "DeviceModel": {
+          "shape": "DeviceModel",
+          "documentation": "<p>Device model the simulated user will report.</p>"
+        },
+        "DeviceOperatingSystem": {
+          "shape": "DeviceOperatingSystem",
+          "documentation": "<p>Device operating system the simulated user will report.</p>"
+        },
+        "DeviceUserAgent": {
+          "shape": "DeviceUserAgent",
+          "documentation": "<p>Device user agent the simulated user will report.</p>"
+        }
+      }
+    },
+    "GetMobileDeviceAccessEffectResponse": {
+      "type": "structure",
+      "members": {
+        "Effect": {
+          "shape": "MobileDeviceAccessRuleEffect",
+          "documentation": "<p>The effect of the simulated access, <code>ALLOW</code> or <code>DENY</code>, after evaluating mobile device access rules in the Amazon WorkMail organization for the simulated user parameters.</p>"
+        },
+        "MatchedRules": {
+          "shape": "MobileDeviceAccessMatchedRuleList",
+          "documentation": "<p>A list of the rules which matched the simulated user input and produced the effect.</p>"
+        }
+      }
+    },
     "Group": {
       "type": "structure",
       "members": {
@@ -2352,6 +3061,18 @@
         "shape": "Group"
       }
     },
+    "HostedZoneId": {
+      "type": "string",
+      "max": 32,
+      "min": 1,
+      "pattern": "[\\S\\s]*"
+    },
+    "IdempotencyClientToken": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "[\\x21-\\x7e]+"
+    },
     "IpAddress": {
       "type": "string",
       "max": 15,
@@ -2369,8 +3090,20 @@
       "member": {
         "shape": "IpRange"
       },
-      "max": 10,
+      "max": 1024,
       "min": 0
+    },
+    "Jobs": {
+      "type": "list",
+      "member": {
+        "shape": "MailboxExportJob"
+      }
+    },
+    "KmsKeyArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20,
+      "pattern": "arn:aws:kms:[a-z0-9-]*:[a-z0-9-]+:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}"
     },
     "ListAccessControlRulesRequest": {
       "type": "structure",
@@ -2502,6 +3235,39 @@
         }
       }
     },
+    "ListMailboxExportJobsRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The organization ID.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return in a single call.</p>"
+        }
+      }
+    },
+    "ListMailboxExportJobsResponse": {
+      "type": "structure",
+      "members": {
+        "Jobs": {
+          "shape": "Jobs",
+          "documentation": "<p>The mailbox export job details.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results.</p>"
+        }
+      }
+    },
     "ListMailboxPermissionsRequest": {
       "type": "structure",
       "required": [
@@ -2537,6 +3303,27 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token to use to retrieve the next page of results. The value is \"null\" when there are no more results to return.</p>"
+        }
+      }
+    },
+    "ListMobileDeviceAccessRulesRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization for which to list the rules.</p>"
+        }
+      }
+    },
+    "ListMobileDeviceAccessRulesResponse": {
+      "type": "structure",
+      "members": {
+        "Rules": {
+          "shape": "MobileDeviceAccessRulesList",
+          "documentation": "<p>The list of mobile device access rules that exist under the specified Amazon WorkMail organization.</p>"
         }
       }
     },
@@ -2691,6 +3478,69 @@
         }
       }
     },
+    "MailboxExportErrorInfo": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": "[\\S\\s]*"
+    },
+    "MailboxExportJob": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "MailboxExportJobId",
+          "documentation": "<p>The identifier of the mailbox export job.</p>"
+        },
+        "EntityId": {
+          "shape": "WorkMailIdentifier",
+          "documentation": "<p>The identifier of the user or resource associated with the mailbox.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The mailbox export job description.</p>"
+        },
+        "S3BucketName": {
+          "shape": "S3BucketName",
+          "documentation": "<p>The name of the S3 bucket.</p>"
+        },
+        "S3Path": {
+          "shape": "S3ObjectKey",
+          "documentation": "<p>The path to the S3 bucket and file that the mailbox export job exports to.</p>"
+        },
+        "EstimatedProgress": {
+          "shape": "Percentage",
+          "documentation": "<p>The estimated progress of the mailbox export job, in percentage points.</p>"
+        },
+        "State": {
+          "shape": "MailboxExportJobState",
+          "documentation": "<p>The state of the mailbox export job.</p>"
+        },
+        "StartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The mailbox export job start timestamp.</p>"
+        },
+        "EndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The mailbox export job end timestamp.</p>"
+        }
+      },
+      "documentation": "<p>The details of a mailbox export job, including the user or resource ID associated with the mailbox and the S3 bucket that the mailbox contents are exported to.</p>"
+    },
+    "MailboxExportJobId": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "[A-Za-z0-9-]+"
+    },
+    "MailboxExportJobState": {
+      "type": "string",
+      "enum": [
+        "RUNNING",
+        "COMPLETED",
+        "FAILED",
+        "CANCELLED"
+      ]
+    },
     "MailboxQuota": {
       "type": "integer",
       "box": true,
@@ -2749,20 +3599,140 @@
         "shape": "Member"
       }
     },
+    "MobileDeviceAccessMatchedRule": {
+      "type": "structure",
+      "members": {
+        "MobileDeviceAccessRuleId": {
+          "shape": "MobileDeviceAccessRuleId",
+          "documentation": "<p>Identifier of the rule that a simulated user matches.</p>"
+        },
+        "Name": {
+          "shape": "MobileDeviceAccessRuleName",
+          "documentation": "<p>Name of a rule that a simulated user matches.</p>"
+        }
+      },
+      "documentation": "<p>The rule that a simulated user matches.</p>"
+    },
+    "MobileDeviceAccessMatchedRuleList": {
+      "type": "list",
+      "member": {
+        "shape": "MobileDeviceAccessMatchedRule"
+      },
+      "max": 10,
+      "min": 0
+    },
+    "MobileDeviceAccessRule": {
+      "type": "structure",
+      "members": {
+        "MobileDeviceAccessRuleId": {
+          "shape": "MobileDeviceAccessRuleId",
+          "documentation": "<p>The ID assigned to a mobile access rule. </p>"
+        },
+        "Name": {
+          "shape": "MobileDeviceAccessRuleName",
+          "documentation": "<p>The name of a mobile access rule.</p>"
+        },
+        "Description": {
+          "shape": "MobileDeviceAccessRuleDescription",
+          "documentation": "<p>The description of a mobile access rule.</p>"
+        },
+        "Effect": {
+          "shape": "MobileDeviceAccessRuleEffect",
+          "documentation": "<p>The effect of the rule when it matches. Allowed values are <code>ALLOW</code> or <code>DENY</code>.</p>"
+        },
+        "DeviceTypes": {
+          "shape": "DeviceTypeList",
+          "documentation": "<p>Device types that a rule will match. </p>"
+        },
+        "NotDeviceTypes": {
+          "shape": "DeviceTypeList",
+          "documentation": "<p>Device types that a rule <b>will not</b> match. All other device types will match.</p>"
+        },
+        "DeviceModels": {
+          "shape": "DeviceModelList",
+          "documentation": "<p>Device models that a rule will match.</p>"
+        },
+        "NotDeviceModels": {
+          "shape": "DeviceModelList",
+          "documentation": "<p>Device models that a rule <b>will not</b> match. All other device models will match.</p>"
+        },
+        "DeviceOperatingSystems": {
+          "shape": "DeviceOperatingSystemList",
+          "documentation": "<p>Device operating systems that a rule will match.</p>"
+        },
+        "NotDeviceOperatingSystems": {
+          "shape": "DeviceOperatingSystemList",
+          "documentation": "<p>Device operating systems that a rule <b>will not</b> match. All other device types will match.</p>"
+        },
+        "DeviceUserAgents": {
+          "shape": "DeviceUserAgentList",
+          "documentation": "<p>Device user agents that a rule will match.</p>"
+        },
+        "NotDeviceUserAgents": {
+          "shape": "DeviceUserAgentList",
+          "documentation": "<p>Device user agents that a rule <b>will not</b> match. All other device user agents will match.</p>"
+        },
+        "DateCreated": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time at which an access rule was created.</p>"
+        },
+        "DateModified": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time at which an access rule was modified.</p>"
+        }
+      },
+      "documentation": "<p>A rule that controls access to mobile devices for an Amazon WorkMail group.</p>"
+    },
+    "MobileDeviceAccessRuleDescription": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[\\S\\s]+"
+    },
+    "MobileDeviceAccessRuleEffect": {
+      "type": "string",
+      "enum": [
+        "ALLOW",
+        "DENY"
+      ]
+    },
+    "MobileDeviceAccessRuleId": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9_-]+"
+    },
+    "MobileDeviceAccessRuleName": {
+      "type": "string",
+      "max": 64,
+      "min": 1,
+      "pattern": "[\\S\\s]+"
+    },
+    "MobileDeviceAccessRulesList": {
+      "type": "list",
+      "member": {
+        "shape": "MobileDeviceAccessRule"
+      },
+      "max": 10,
+      "min": 0
+    },
     "NextToken": {
       "type": "string",
       "max": 1024,
-      "min": 1
+      "min": 1,
+      "pattern": "[\\S\\s]*|[a-zA-Z0-9/+=]{1,1024}"
     },
     "OrganizationId": {
       "type": "string",
+      "max": 34,
+      "min": 34,
       "pattern": "^m-[0-9a-f]{32}$"
     },
     "OrganizationName": {
       "type": "string",
       "max": 62,
       "min": 1,
-      "pattern": "^(?!d-)([\\da-zA-Z]+)([-]*[\\da-zA-Z])*"
+      "pattern": "^(?!d-)([\\da-zA-Z]+)([-][\\da-zA-Z]+)*"
     },
     "OrganizationSummaries": {
       "type": "list",
@@ -2781,6 +3751,10 @@
           "shape": "OrganizationName",
           "documentation": "<p>The alias associated with the organization.</p>"
         },
+        "DefaultMailDomain": {
+          "shape": "DomainName",
+          "documentation": "<p>The default email domain associated with the organization.</p>"
+        },
         "ErrorMessage": {
           "shape": "String",
           "documentation": "<p>The error message associated with the organization. It is only present if unexpected behavior has occurred with regards to the organization. It provides insight or solutions regarding unexpected behavior.</p>"
@@ -2797,6 +3771,11 @@
       "max": 256,
       "pattern": "[\\u0020-\\u00FF]+",
       "sensitive": true
+    },
+    "Percentage": {
+      "type": "integer",
+      "max": 100,
+      "min": 0
     },
     "Permission": {
       "type": "structure",
@@ -2844,7 +3823,8 @@
     "PolicyDescription": {
       "type": "string",
       "max": 256,
-      "pattern": "[\\w\\d\\s\\S\\-!?=,.;:'_]+"
+      "pattern": "[\\w\\d\\s\\S\\-!?=,.;:'_]+",
+      "sensitive": true
     },
     "PutAccessControlRuleRequest": {
       "type": "structure",
@@ -3060,13 +4040,15 @@
     },
     "ResourceId": {
       "type": "string",
+      "max": 34,
+      "min": 34,
       "pattern": "^r-[0-9a-f]{32}$"
     },
     "ResourceName": {
       "type": "string",
       "max": 20,
       "min": 1,
-      "pattern": "[\\w\\-.]+(@[a-zA-Z0-9.\\-]+\\.[a-zA-Z0-9]{2,})?"
+      "pattern": "[\\w\\-.]+(@[a-zA-Z0-9.\\-]+\\.[a-zA-Z0-9-]{2,})?"
     },
     "ResourceType": {
       "type": "string",
@@ -3095,11 +4077,84 @@
       "max": 730,
       "min": 1
     },
+    "RoleArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 20
+    },
+    "S3BucketName": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "[A-Za-z0-9.-]+"
+    },
+    "S3ObjectKey": {
+      "type": "string",
+      "max": 1023,
+      "min": 1,
+      "pattern": "[A-Za-z0-9!_.*'()/-]+"
+    },
     "ShortString": {
       "type": "string",
       "max": 64,
       "min": 1,
       "pattern": "[a-zA-Z0-9_-]+"
+    },
+    "StartMailboxExportJobRequest": {
+      "type": "structure",
+      "required": [
+        "ClientToken",
+        "OrganizationId",
+        "EntityId",
+        "RoleArn",
+        "KmsKeyArn",
+        "S3BucketName",
+        "S3Prefix"
+      ],
+      "members": {
+        "ClientToken": {
+          "shape": "IdempotencyClientToken",
+          "documentation": "<p>The idempotency token for the client request.</p>",
+          "idempotencyToken": true
+        },
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The identifier associated with the organization.</p>"
+        },
+        "EntityId": {
+          "shape": "WorkMailIdentifier",
+          "documentation": "<p>The identifier of the user or resource associated with the mailbox.</p>"
+        },
+        "Description": {
+          "shape": "Description",
+          "documentation": "<p>The mailbox export job description.</p>"
+        },
+        "RoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role that grants write permission to the S3 bucket.</p>"
+        },
+        "KmsKeyArn": {
+          "shape": "KmsKeyArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the symmetric AWS Key Management Service (AWS KMS) key that encrypts the exported mailbox content.</p>"
+        },
+        "S3BucketName": {
+          "shape": "S3BucketName",
+          "documentation": "<p>The name of the S3 bucket.</p>"
+        },
+        "S3Prefix": {
+          "shape": "S3ObjectKey",
+          "documentation": "<p>The S3 bucket prefix.</p>"
+        }
+      }
+    },
+    "StartMailboxExportJobResponse": {
+      "type": "structure",
+      "members": {
+        "JobId": {
+          "shape": "MailboxExportJobId",
+          "documentation": "<p>The job ID.</p>"
+        }
+      }
     },
     "String": {
       "type": "string",
@@ -3220,6 +4275,73 @@
       "type": "structure",
       "members": {}
     },
+    "UpdateMobileDeviceAccessRuleRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "MobileDeviceAccessRuleId",
+        "Name",
+        "Effect"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization under which the rule will be updated.</p>"
+        },
+        "MobileDeviceAccessRuleId": {
+          "shape": "MobileDeviceAccessRuleId",
+          "documentation": "<p>The identifier of the rule to be updated.</p>"
+        },
+        "Name": {
+          "shape": "MobileDeviceAccessRuleName",
+          "documentation": "<p>The updated rule name.</p>"
+        },
+        "Description": {
+          "shape": "MobileDeviceAccessRuleDescription",
+          "documentation": "<p>The updated rule description.</p>"
+        },
+        "Effect": {
+          "shape": "MobileDeviceAccessRuleEffect",
+          "documentation": "<p>The effect of the rule when it matches. Allowed values are <code>ALLOW</code> or <code>DENY</code>.</p>"
+        },
+        "DeviceTypes": {
+          "shape": "DeviceTypeList",
+          "documentation": "<p>Device types that the updated rule will match.</p>"
+        },
+        "NotDeviceTypes": {
+          "shape": "DeviceTypeList",
+          "documentation": "<p>Device types that the updated rule <b>will not</b> match. All other device types will match.</p>"
+        },
+        "DeviceModels": {
+          "shape": "DeviceModelList",
+          "documentation": "<p>Device models that the updated rule will match.</p>"
+        },
+        "NotDeviceModels": {
+          "shape": "DeviceModelList",
+          "documentation": "<p>Device models that the updated rule <b>will not</b> match. All other device models will match.</p>"
+        },
+        "DeviceOperatingSystems": {
+          "shape": "DeviceOperatingSystemList",
+          "documentation": "<p>Device operating systems that the updated rule will match.</p>"
+        },
+        "NotDeviceOperatingSystems": {
+          "shape": "DeviceOperatingSystemList",
+          "documentation": "<p>Device operating systems that the updated rule <b>will not</b> match. All other device operating systems will match.</p>"
+        },
+        "DeviceUserAgents": {
+          "shape": "DeviceUserAgentList",
+          "documentation": "<p>User agents that the updated rule will match.</p>"
+        },
+        "NotDeviceUserAgents": {
+          "shape": "DeviceUserAgentList",
+          "documentation": "<p>User agents that the updated rule <b>will not</b> match. All other user agents will match.</p>"
+        }
+      }
+    },
+    "UpdateMobileDeviceAccessRuleResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "UpdatePrimaryEmailAddressRequest": {
       "type": "structure",
       "required": [
@@ -3325,7 +4447,7 @@
       "type": "string",
       "max": 64,
       "min": 1,
-      "pattern": "[\\w\\-.]+(@[a-zA-Z0-9.\\-]+\\.[a-zA-Z0-9]{2,})?"
+      "pattern": "[\\w\\-.]+(@[a-zA-Z0-9.\\-]+\\.[a-zA-Z0-9-]{2,})?"
     },
     "UserRole": {
       "type": "string",

@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "AutoScaling",
+        "description": "EC2 Auto Scaling adds configuration checks and Launch Template validation to Instance Refresh."
+    },
+    {
+        "type": "feature",
+        "category": "LexModelsV2",
+        "description": "Customers can now toggle the active field on prompts and responses."
+    }
+]

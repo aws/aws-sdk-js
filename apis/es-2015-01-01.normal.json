@@ -349,6 +349,34 @@
       ],
       "documentation": "<p>Delete the package.</p>"
     },
+    "DescribeDomainAutoTunes": {
+      "name": "DescribeDomainAutoTunes",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2015-01-01/es/domain/{DomainName}/autoTunes"
+      },
+      "input": {
+        "shape": "DescribeDomainAutoTunesRequest"
+      },
+      "output": {
+        "shape": "DescribeDomainAutoTunesResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Provides scheduled Auto-Tune action details for the Elasticsearch domain, such as Auto-Tune action type, description, severity, and scheduled date.</p>"
+    },
     "DescribeElasticsearchDomain": {
       "name": "DescribeElasticsearchDomain",
       "http": {
@@ -659,6 +687,37 @@
         }
       ],
       "documentation": "<p> Returns a list of upgrade compatible Elastisearch versions. You can optionally pass a <code> <a>DomainName</a> </code> to get all upgrade compatible Elasticsearch versions for that specific domain. </p>"
+    },
+    "GetPackageVersionHistory": {
+      "name": "GetPackageVersionHistory",
+      "http": {
+        "method": "GET",
+        "requestUri": "/2015-01-01/packages/{PackageID}/history"
+      },
+      "input": {
+        "shape": "GetPackageVersionHistoryRequest"
+      },
+      "output": {
+        "shape": "GetPackageVersionHistoryResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Returns a list of versions of the package, along with their creation time and commit message.</p>"
     },
     "GetUpgradeHistory": {
       "name": "GetUpgradeHistory",
@@ -1027,6 +1086,40 @@
       ],
       "documentation": "<p>Modifies the cluster configuration of the specified Elasticsearch domain, setting as setting the instance type and the number of instances. </p>"
     },
+    "UpdatePackage": {
+      "name": "UpdatePackage",
+      "http": {
+        "method": "POST",
+        "requestUri": "/2015-01-01/packages/update"
+      },
+      "input": {
+        "shape": "UpdatePackageRequest"
+      },
+      "output": {
+        "shape": "UpdatePackageResponse"
+      },
+      "errors": [
+        {
+          "shape": "BaseException"
+        },
+        {
+          "shape": "InternalException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Updates a package for use with Amazon ES domains.</p>"
+    },
     "UpgradeElasticsearchDomain": {
       "name": "UpgradeElasticsearchDomain",
       "http": {
@@ -1186,6 +1279,10 @@
         "InternalUserDatabaseEnabled": {
           "shape": "Boolean",
           "documentation": "<p>True if the internal user database is enabled.</p>"
+        },
+        "SAMLOptions": {
+          "shape": "SAMLOptionsOutput",
+          "documentation": "<p>Describes the SAML application configured for a domain.</p>"
         }
       },
       "documentation": "<p>Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled.</p>"
@@ -1204,6 +1301,10 @@
         "MasterUserOptions": {
           "shape": "MasterUserOptions",
           "documentation": "<p>Credentials for the master user: username and password, ARN, or both.</p>"
+        },
+        "SAMLOptions": {
+          "shape": "SAMLOptionsInput",
+          "documentation": "<p>Specifies the SAML application configuration for the domain.</p>"
         }
       },
       "documentation": "<p>Specifies the advanced security configuration: whether advanced security is enabled, whether the internal database option is enabled, master username and password (if internal database is enabled), and master user ARN (if IAM is enabled).</p>"
@@ -1257,6 +1358,194 @@
         }
       },
       "documentation": "<p> Container for response returned by <code> <a>AssociatePackage</a> </code> operation. </p>"
+    },
+    "AutoTune": {
+      "type": "structure",
+      "members": {
+        "AutoTuneType": {
+          "shape": "AutoTuneType",
+          "documentation": "<p>Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION. </p>"
+        },
+        "AutoTuneDetails": {
+          "shape": "AutoTuneDetails",
+          "documentation": "<p>Specifies details of the Auto-Tune action. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
+        }
+      },
+      "documentation": "<p>Specifies Auto-Tune type and Auto-Tune action details. </p>"
+    },
+    "AutoTuneDate": {
+      "type": "timestamp",
+      "documentation": "<p>Specifies timestamp for the Auto-Tune action scheduled for the domain. </p>"
+    },
+    "AutoTuneDesiredState": {
+      "type": "string",
+      "documentation": "<p>Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED.</p>",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "AutoTuneDetails": {
+      "type": "structure",
+      "members": {
+        "ScheduledAutoTuneDetails": {
+          "shape": "ScheduledAutoTuneDetails"
+        }
+      },
+      "documentation": "<p>Specifies details of the Auto-Tune action. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
+    },
+    "AutoTuneList": {
+      "type": "list",
+      "member": {
+        "shape": "AutoTune"
+      }
+    },
+    "AutoTuneMaintenanceSchedule": {
+      "type": "structure",
+      "members": {
+        "StartAt": {
+          "shape": "StartAt",
+          "documentation": "<p>Specifies timestamp at which Auto-Tune maintenance schedule start. </p>"
+        },
+        "Duration": {
+          "shape": "Duration",
+          "documentation": "<p>Specifies maintenance schedule duration: duration value and duration unit. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        },
+        "CronExpressionForRecurrence": {
+          "shape": "String",
+          "documentation": "<p>Specifies cron expression for a recurring maintenance schedule. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        }
+      },
+      "documentation": "<p>Specifies Auto-Tune maitenance schedule. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+    },
+    "AutoTuneMaintenanceScheduleList": {
+      "type": "list",
+      "member": {
+        "shape": "AutoTuneMaintenanceSchedule"
+      },
+      "max": 100
+    },
+    "AutoTuneOptions": {
+      "type": "structure",
+      "members": {
+        "DesiredState": {
+          "shape": "AutoTuneDesiredState",
+          "documentation": "<p>Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. </p>"
+        },
+        "RollbackOnDisable": {
+          "shape": "RollbackOnDisable",
+          "documentation": "<p>Specifies the rollback state while disabling Auto-Tune for the domain. Valid values are NO_ROLLBACK, DEFAULT_ROLLBACK. </p>"
+        },
+        "MaintenanceSchedules": {
+          "shape": "AutoTuneMaintenanceScheduleList",
+          "documentation": "<p>Specifies list of maitenance schedules. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain, rollback state when disabling Auto-Tune options and list of maintenance schedules.</p>"
+    },
+    "AutoTuneOptionsInput": {
+      "type": "structure",
+      "members": {
+        "DesiredState": {
+          "shape": "AutoTuneDesiredState",
+          "documentation": "<p>Specifies the Auto-Tune desired state. Valid values are ENABLED, DISABLED. </p>"
+        },
+        "MaintenanceSchedules": {
+          "shape": "AutoTuneMaintenanceScheduleList",
+          "documentation": "<p>Specifies list of maitenance schedules. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and list of maintenance schedules.</p>"
+    },
+    "AutoTuneOptionsOutput": {
+      "type": "structure",
+      "members": {
+        "State": {
+          "shape": "AutoTuneState",
+          "documentation": "<p>Specifies the <code>AutoTuneState</code> for the Elasticsearch domain.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>Specifies the error message while enabling or disabling the Auto-Tune.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and list of maintenance schedules.</p>"
+    },
+    "AutoTuneOptionsStatus": {
+      "type": "structure",
+      "members": {
+        "Options": {
+          "shape": "AutoTuneOptions",
+          "documentation": "<p> Specifies Auto-Tune options for the specified Elasticsearch domain.</p>"
+        },
+        "Status": {
+          "shape": "AutoTuneStatus",
+          "documentation": "<p> Specifies Status of the Auto-Tune options for the specified Elasticsearch domain.</p>"
+        }
+      },
+      "documentation": "<p> Specifies the status of Auto-Tune options for the specified Elasticsearch domain.</p>"
+    },
+    "AutoTuneState": {
+      "type": "string",
+      "documentation": "<p>Specifies the Auto-Tune state for the Elasticsearch domain. For valid states see the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a>.</p>",
+      "enum": [
+        "ENABLED",
+        "DISABLED",
+        "ENABLE_IN_PROGRESS",
+        "DISABLE_IN_PROGRESS",
+        "DISABLED_AND_ROLLBACK_SCHEDULED",
+        "DISABLED_AND_ROLLBACK_IN_PROGRESS",
+        "DISABLED_AND_ROLLBACK_COMPLETE",
+        "DISABLED_AND_ROLLBACK_ERROR",
+        "ERROR"
+      ]
+    },
+    "AutoTuneStatus": {
+      "type": "structure",
+      "required": [
+        "CreationDate",
+        "UpdateDate",
+        "State"
+      ],
+      "members": {
+        "CreationDate": {
+          "shape": "UpdateTimestamp",
+          "documentation": "<p>Timestamp which tells Auto-Tune options creation date .</p>"
+        },
+        "UpdateDate": {
+          "shape": "UpdateTimestamp",
+          "documentation": "<p>Timestamp which tells Auto-Tune options last updated time.</p>"
+        },
+        "UpdateVersion": {
+          "shape": "UIntValue",
+          "documentation": "<p>Specifies the Auto-Tune options latest version.</p>"
+        },
+        "State": {
+          "shape": "AutoTuneState",
+          "documentation": "<p>Specifies the <code>AutoTuneState</code> for the Elasticsearch domain.</p>"
+        },
+        "ErrorMessage": {
+          "shape": "String",
+          "documentation": "<p>Specifies the error message while enabling or disabling the Auto-Tune options.</p>"
+        },
+        "PendingDeletion": {
+          "shape": "Boolean",
+          "documentation": "<p>Indicates whether the Elasticsearch domain is being deleted.</p>"
+        }
+      },
+      "documentation": "<p>Provides the current status of the Auto-Tune options. </p>"
+    },
+    "AutoTuneType": {
+      "type": "string",
+      "documentation": "<p>Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION. </p>",
+      "enum": [
+        "SCHEDULED_ACTION"
+      ]
+    },
+    "BackendRole": {
+      "type": "string",
+      "max": 256,
+      "min": 1
     },
     "Boolean": {
       "type": "boolean"
@@ -1327,6 +1616,23 @@
         }
       },
       "documentation": "<p>Status of the Cognito options for the specified Elasticsearch domain.</p>"
+    },
+    "ColdStorageOptions": {
+      "type": "structure",
+      "required": [
+        "Enabled"
+      ],
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>True to enable cold storage for an Elasticsearch domain.</p>"
+        }
+      },
+      "documentation": "<p>Specifies settings for cold storage.</p>"
+    },
+    "CommitMessage": {
+      "type": "string",
+      "max": 160
     },
     "CompatibleElasticsearchVersionsList": {
       "type": "list",
@@ -1412,6 +1718,14 @@
         "AdvancedSecurityOptions": {
           "shape": "AdvancedSecurityOptionsInput",
           "documentation": "<p>Specifies advanced security options.</p>"
+        },
+        "AutoTuneOptions": {
+          "shape": "AutoTuneOptionsInput",
+          "documentation": "<p>Specifies Auto-Tune options.</p>"
+        },
+        "TagList": {
+          "shape": "TagList",
+          "documentation": "<p>A list of <code>Tag</code> added during domain creation.</p>"
         }
       }
     },
@@ -1632,6 +1946,43 @@
         "NOT_ELIGIBLE",
         "ELIGIBLE"
       ]
+    },
+    "DescribeDomainAutoTunesRequest": {
+      "type": "structure",
+      "required": [
+        "DomainName"
+      ],
+      "members": {
+        "DomainName": {
+          "shape": "DomainName",
+          "documentation": "<p>Specifies the domain name for which you want Auto-Tune action details.</p>",
+          "location": "uri",
+          "locationName": "DomainName"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>Set this value to limit the number of results returned. If not specified, defaults to 100.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>NextToken is sent in case the earlier API call results contain the NextToken. It is used for pagination.</p>"
+        }
+      },
+      "documentation": "<p>Container for the parameters to the <code>DescribeDomainAutoTunes</code> operation.</p>"
+    },
+    "DescribeDomainAutoTunesResponse": {
+      "type": "structure",
+      "members": {
+        "AutoTunes": {
+          "shape": "AutoTuneList",
+          "documentation": "<p>Specifies the list of setting adjustments that Auto-Tune has made to the domain. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Specifies an identifier to allow retrieval of paginated results.</p>"
+        }
+      },
+      "documentation": "<p>The result of <code>DescribeDomainAutoTunes</code> request. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
     },
     "DescribeElasticsearchDomainConfigRequest": {
       "type": "structure",
@@ -2004,6 +2355,18 @@
         "TLSSecurityPolicy": {
           "shape": "TLSSecurityPolicy",
           "documentation": "<p>Specify the TLS security policy that needs to be applied to the HTTPS endpoint of Elasticsearch domain. <br/> It can be one of the following values: <ul> <li><b>Policy-Min-TLS-1-0-2019-07: </b> TLS security policy which supports TLSv1.0 and higher.</li> <li><b>Policy-Min-TLS-1-2-2019-07: </b> TLS security policy which supports only TLSv1.2</li> </ul> </p>"
+        },
+        "CustomEndpointEnabled": {
+          "shape": "Boolean",
+          "documentation": "<p>Specify if custom endpoint should be enabled for the Elasticsearch domain.</p>"
+        },
+        "CustomEndpoint": {
+          "shape": "DomainNameFqdn",
+          "documentation": "<p>Specify the fully qualified domain for your custom endpoint.</p>"
+        },
+        "CustomEndpointCertificateArn": {
+          "shape": "ARN",
+          "documentation": "<p>Specify ACM certificate ARN for your custom endpoint.</p>"
         }
       },
       "documentation": "<p>Options to configure endpoint for the Elasticsearch domain.</p>"
@@ -2072,6 +2435,12 @@
       "min": 3,
       "pattern": "[a-z][a-z0-9\\-]+"
     },
+    "DomainNameFqdn": {
+      "type": "string",
+      "max": 255,
+      "min": 1,
+      "pattern": "^(((?!-)[A-Za-z0-9-]{0,62}[A-Za-z0-9])\\.)+((?!-)[A-Za-z0-9-]{1,62}[A-Za-z0-9])$"
+    },
     "DomainNameList": {
       "type": "list",
       "member": {
@@ -2106,6 +2475,9 @@
           "shape": "DomainPackageStatus",
           "documentation": "<p>State of the association. Values are ASSOCIATING/ASSOCIATION_FAILED/ACTIVE/DISSOCIATING/DISSOCIATION_FAILED.</p>"
         },
+        "PackageVersion": {
+          "shape": "PackageVersion"
+        },
         "ReferencePath": {
           "shape": "ReferencePath",
           "documentation": "<p>The relative path on Amazon ES nodes, which can be used as synonym_path when the package is synonym file.</p>"
@@ -2135,6 +2507,26 @@
     },
     "Double": {
       "type": "double"
+    },
+    "Duration": {
+      "type": "structure",
+      "members": {
+        "Value": {
+          "shape": "DurationValue",
+          "documentation": "<p> Integer to specify the value of a maintenance schedule duration. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        },
+        "Unit": {
+          "shape": "TimeUnit",
+          "documentation": "<p>Specifies the unit of a maintenance schedule duration. Valid value is HOURS. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+        }
+      },
+      "documentation": "<p>Specifies maintenance schedule duration: duration value and duration unit. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>"
+    },
+    "DurationValue": {
+      "type": "long",
+      "documentation": "<p> Integer to specify the value of a maintenance schedule duration. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>",
+      "max": 24,
+      "min": 1
     },
     "EBSOptions": {
       "type": "structure",
@@ -2288,6 +2680,10 @@
         "WarmCount": {
           "shape": "IntegerClass",
           "documentation": "<p>The number of warm nodes in the cluster.</p>"
+        },
+        "ColdStorageOptions": {
+          "shape": "ColdStorageOptions",
+          "documentation": "<p>Specifies the <code>ColdStorageOptions</code> configuration for an Elasticsearch domain.</p>"
         }
       },
       "documentation": "<p>Specifies the configuration for the domain cluster, such as the type and number of instances.</p>"
@@ -2364,6 +2760,10 @@
         "AdvancedSecurityOptions": {
           "shape": "AdvancedSecurityOptionsStatus",
           "documentation": "<p>Specifies <code>AdvancedSecurityOptions</code> for the domain. </p>"
+        },
+        "AutoTuneOptions": {
+          "shape": "AutoTuneOptionsStatus",
+          "documentation": "<p>Specifies <code>AutoTuneOptions</code> for the domain. </p>"
         }
       },
       "documentation": "<p>The configuration of an Elasticsearch domain.</p>"
@@ -2467,6 +2867,10 @@
         "AdvancedSecurityOptions": {
           "shape": "AdvancedSecurityOptions",
           "documentation": "<p>The current status of the Elasticsearch domain's advanced security options.</p>"
+        },
+        "AutoTuneOptions": {
+          "shape": "AutoTuneOptionsOutput",
+          "documentation": "<p>The current status of the Elasticsearch domain's Auto-Tune options.</p>"
         }
       },
       "documentation": "<p>The current status of an Elasticsearch domain.</p>"
@@ -2615,6 +3019,49 @@
         }
       },
       "documentation": "<p> Container for response returned by <code> <a>GetCompatibleElasticsearchVersions</a> </code> operation. </p>"
+    },
+    "GetPackageVersionHistoryRequest": {
+      "type": "structure",
+      "required": [
+        "PackageID"
+      ],
+      "members": {
+        "PackageID": {
+          "shape": "PackageID",
+          "documentation": "<p>Returns an audit history of versions of the package.</p>",
+          "location": "uri",
+          "locationName": "PackageID"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>Limits results to a maximum number of versions.</p>",
+          "location": "querystring",
+          "locationName": "maxResults"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>Used for pagination. Only necessary if a previous API call includes a non-null NextToken value. If provided, returns results for the next page.</p>",
+          "location": "querystring",
+          "locationName": "nextToken"
+        }
+      },
+      "documentation": "<p> Container for request parameters to <code> <a>GetPackageVersionHistory</a> </code> operation. </p>"
+    },
+    "GetPackageVersionHistoryResponse": {
+      "type": "structure",
+      "members": {
+        "PackageID": {
+          "shape": "PackageID"
+        },
+        "PackageVersionHistoryList": {
+          "shape": "PackageVersionHistoryList",
+          "documentation": "<p>List of <code>PackageVersionHistory</code> objects.</p>"
+        },
+        "NextToken": {
+          "shape": "String"
+        }
+      },
+      "documentation": "<p> Container for response returned by <code> <a>GetPackageVersionHistory</a> </code> operation. </p>"
     },
     "GetUpgradeHistoryRequest": {
       "type": "structure",
@@ -3066,11 +3513,12 @@
     },
     "LogType": {
       "type": "string",
-      "documentation": "<p>Type of Log File, it can be one of the following: <ul> <li>INDEX_SLOW_LOGS: Index slow logs contain insert requests that took more time than configured index query log threshold to execute.</li> <li>SEARCH_SLOW_LOGS: Search slow logs contain search queries that took more time than configured search query log threshold to execute.</li> <li>ES_APPLICATION_LOGS: Elasticsearch application logs contain information about errors and warnings raised during the operation of the service and can be useful for troubleshooting.</li> </ul> </p>",
+      "documentation": "<p>Type of Log File, it can be one of the following: <ul> <li>INDEX_SLOW_LOGS: Index slow logs contain insert requests that took more time than configured index query log threshold to execute.</li> <li>SEARCH_SLOW_LOGS: Search slow logs contain search queries that took more time than configured search query log threshold to execute.</li> <li>ES_APPLICATION_LOGS: Elasticsearch application logs contain information about errors and warnings raised during the operation of the service and can be useful for troubleshooting.</li> <li>AUDIT_LOGS: Audit logs contain records of user requests for access from the domain.</li> </ul> </p>",
       "enum": [
         "INDEX_SLOW_LOGS",
         "SEARCH_SLOW_LOGS",
-        "ES_APPLICATION_LOGS"
+        "ES_APPLICATION_LOGS",
+        "AUDIT_LOGS"
       ]
     },
     "MasterUserOptions": {
@@ -3275,6 +3723,12 @@
           "shape": "CreatedAt",
           "documentation": "<p>Timestamp which tells creation date of the package.</p>"
         },
+        "LastUpdatedAt": {
+          "shape": "LastUpdated"
+        },
+        "AvailablePackageVersion": {
+          "shape": "PackageVersion"
+        },
         "ErrorDetails": {
           "shape": "ErrorDetails",
           "documentation": "<p>Additional information if the package is in an error state. Null otherwise.</p>"
@@ -3329,6 +3783,33 @@
       "enum": [
         "TXT-DICTIONARY"
       ]
+    },
+    "PackageVersion": {
+      "type": "string"
+    },
+    "PackageVersionHistory": {
+      "type": "structure",
+      "members": {
+        "PackageVersion": {
+          "shape": "PackageVersion",
+          "documentation": "<p>Version of the package.</p>"
+        },
+        "CommitMessage": {
+          "shape": "CommitMessage",
+          "documentation": "<p>A message associated with the version.</p>"
+        },
+        "CreatedAt": {
+          "shape": "CreatedAt",
+          "documentation": "<p>Timestamp which tells creation time of the package version.</p>"
+        }
+      },
+      "documentation": "<p>Details of a package version.</p>"
+    },
+    "PackageVersionHistoryList": {
+      "type": "list",
+      "member": {
+        "shape": "PackageVersionHistory"
+      }
     },
     "Password": {
       "type": "string",
@@ -3570,6 +4051,14 @@
       "max": 2048,
       "min": 20
     },
+    "RollbackOnDisable": {
+      "type": "string",
+      "documentation": "<p>Specifies the rollback state while disabling Auto-Tune for the domain. Valid values are NO_ROLLBACK, DEFAULT_ROLLBACK.</p>",
+      "enum": [
+        "NO_ROLLBACK",
+        "DEFAULT_ROLLBACK"
+      ]
+    },
     "S3BucketName": {
       "type": "string",
       "max": 63,
@@ -3577,6 +4066,137 @@
     },
     "S3Key": {
       "type": "string"
+    },
+    "SAMLEntityId": {
+      "type": "string",
+      "max": 512,
+      "min": 8
+    },
+    "SAMLIdp": {
+      "type": "structure",
+      "required": [
+        "MetadataContent",
+        "EntityId"
+      ],
+      "members": {
+        "MetadataContent": {
+          "shape": "SAMLMetadata",
+          "documentation": "<p>The Metadata of the SAML application in xml format.</p>"
+        },
+        "EntityId": {
+          "shape": "SAMLEntityId",
+          "documentation": "<p>The unique Entity ID of the application in SAML Identity Provider.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the SAML Identity Provider's information.</p>"
+    },
+    "SAMLMetadata": {
+      "type": "string",
+      "max": 1048576,
+      "min": 1
+    },
+    "SAMLOptionsInput": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>True if SAML is enabled.</p>"
+        },
+        "Idp": {
+          "shape": "SAMLIdp",
+          "documentation": "<p>Specifies the SAML Identity Provider's information.</p>"
+        },
+        "MasterUserName": {
+          "shape": "Username",
+          "documentation": "<p>The SAML master username, which is stored in the Amazon Elasticsearch Service domain's internal database.</p>"
+        },
+        "MasterBackendRole": {
+          "shape": "BackendRole",
+          "documentation": "<p>The backend role to which the SAML master user is mapped to.</p>"
+        },
+        "SubjectKey": {
+          "shape": "String",
+          "documentation": "<p>The key to use for matching the SAML Subject attribute.</p>"
+        },
+        "RolesKey": {
+          "shape": "String",
+          "documentation": "<p>The key to use for matching the SAML Roles attribute.</p>"
+        },
+        "SessionTimeoutMinutes": {
+          "shape": "IntegerClass",
+          "documentation": "<p>The duration, in minutes, after which a user session becomes inactive. Acceptable values are between 1 and 1440, and the default value is 60.</p>"
+        }
+      },
+      "documentation": "<p>Specifies the SAML application configuration for the domain.</p>"
+    },
+    "SAMLOptionsOutput": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "Boolean",
+          "documentation": "<p>True if SAML is enabled.</p>"
+        },
+        "Idp": {
+          "shape": "SAMLIdp",
+          "documentation": "<p>Describes the SAML Identity Provider's information.</p>"
+        },
+        "SubjectKey": {
+          "shape": "String",
+          "documentation": "<p>The key used for matching the SAML Subject attribute.</p>"
+        },
+        "RolesKey": {
+          "shape": "String",
+          "documentation": "<p>The key used for matching the SAML Roles attribute.</p>"
+        },
+        "SessionTimeoutMinutes": {
+          "shape": "IntegerClass",
+          "documentation": "<p>The duration, in minutes, after which a user session becomes inactive.</p>"
+        }
+      },
+      "documentation": "<p>Describes the SAML application configured for the domain.</p>"
+    },
+    "ScheduledAutoTuneActionType": {
+      "type": "string",
+      "documentation": "<p>Specifies Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and JVM_YOUNG_GEN_TUNING. </p>",
+      "enum": [
+        "JVM_HEAP_SIZE_TUNING",
+        "JVM_YOUNG_GEN_TUNING"
+      ]
+    },
+    "ScheduledAutoTuneDescription": {
+      "type": "string",
+      "documentation": "<p>Specifies Auto-Tune action description. </p>"
+    },
+    "ScheduledAutoTuneDetails": {
+      "type": "structure",
+      "members": {
+        "Date": {
+          "shape": "AutoTuneDate",
+          "documentation": "<p>Specifies timestamp for the Auto-Tune action scheduled for the domain. </p>"
+        },
+        "ActionType": {
+          "shape": "ScheduledAutoTuneActionType",
+          "documentation": "<p>Specifies Auto-Tune action type. Valid values are JVM_HEAP_SIZE_TUNING and JVM_YOUNG_GEN_TUNING. </p>"
+        },
+        "Action": {
+          "shape": "ScheduledAutoTuneDescription",
+          "documentation": "<p>Specifies Auto-Tune action description. </p>"
+        },
+        "Severity": {
+          "shape": "ScheduledAutoTuneSeverityType",
+          "documentation": "<p>Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH. </p>"
+        }
+      },
+      "documentation": "<p>Specifies details of the scheduled Auto-Tune action. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information. </p>"
+    },
+    "ScheduledAutoTuneSeverityType": {
+      "type": "string",
+      "documentation": "<p>Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH. </p>",
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH"
+      ]
     },
     "ServiceSoftwareOptions": {
       "type": "structure",
@@ -3647,6 +4267,9 @@
         }
       },
       "documentation": "<p>Status of a daily automated snapshot.</p>"
+    },
+    "StartAt": {
+      "type": "timestamp"
     },
     "StartElasticsearchServiceSoftwareUpdateRequest": {
       "type": "structure",
@@ -3777,6 +4400,13 @@
       "max": 256,
       "min": 0
     },
+    "TimeUnit": {
+      "type": "string",
+      "documentation": "<p>Specifies the unit of a maintenance schedule duration. Valid value is HOUR. See the <a href=\"https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html\" target=\"_blank\">Developer Guide</a> for more information.</p>",
+      "enum": [
+        "HOURS"
+      ]
+    },
     "UIntValue": {
       "type": "integer",
       "min": 0
@@ -3832,6 +4462,18 @@
         "AdvancedSecurityOptions": {
           "shape": "AdvancedSecurityOptionsInput",
           "documentation": "<p>Specifies advanced security options.</p>"
+        },
+        "NodeToNodeEncryptionOptions": {
+          "shape": "NodeToNodeEncryptionOptions",
+          "documentation": "<p>Specifies the NodeToNodeEncryptionOptions.</p>"
+        },
+        "EncryptionAtRestOptions": {
+          "shape": "EncryptionAtRestOptions",
+          "documentation": "<p>Specifies the Encryption At Rest Options.</p>"
+        },
+        "AutoTuneOptions": {
+          "shape": "AutoTuneOptions",
+          "documentation": "<p>Specifies Auto-Tune options.</p>"
         }
       },
       "documentation": "<p>Container for the parameters to the <code><a>UpdateElasticsearchDomain</a></code> operation. Specifies the type and number of instances in the domain cluster.</p>"
@@ -3848,6 +4490,41 @@
         }
       },
       "documentation": "<p>The result of an <code>UpdateElasticsearchDomain</code> request. Contains the status of the Elasticsearch domain being updated.</p>"
+    },
+    "UpdatePackageRequest": {
+      "type": "structure",
+      "required": [
+        "PackageID",
+        "PackageSource"
+      ],
+      "members": {
+        "PackageID": {
+          "shape": "PackageID",
+          "documentation": "<p>Unique identifier for the package.</p>"
+        },
+        "PackageSource": {
+          "shape": "PackageSource"
+        },
+        "PackageDescription": {
+          "shape": "PackageDescription",
+          "documentation": "<p>New description of the package.</p>"
+        },
+        "CommitMessage": {
+          "shape": "CommitMessage",
+          "documentation": "<p>An info message for the new version which will be shown as part of <code>GetPackageVersionHistoryResponse</code>.</p>"
+        }
+      },
+      "documentation": "<p> Container for request parameters to <code> <a>UpdatePackage</a> </code> operation. </p>"
+    },
+    "UpdatePackageResponse": {
+      "type": "structure",
+      "members": {
+        "PackageDetails": {
+          "shape": "PackageDetails",
+          "documentation": "<p>Information about the package <code>PackageDetails</code>.</p>"
+        }
+      },
+      "documentation": "<p> Container for response returned by <code> <a>UpdatePackage</a> </code> operation. </p>"
     },
     "UpdateTimestamp": {
       "type": "timestamp"

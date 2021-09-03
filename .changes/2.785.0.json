@@ -1,0 +1,42 @@
+[
+    {
+        "type": "feature",
+        "category": "AutoScaling",
+        "description": "Capacity Rebalance helps you manage and maintain workload availability during Spot interruptions by proactively augmenting your Auto Scaling group with a new instance before interrupting an old one."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "Added support for Client Connect Handler for AWS Client VPN. Fleet supports launching replacement instances in response to Capacity Rebalance recommendation."
+    },
+    {
+        "type": "feature",
+        "category": "ES",
+        "description": "Amazon Elasticsearch Service now supports native SAML authentication that seamlessly integrates with the customers' existing SAML 2.0 Identity Provider (IdP)."
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "Updated API documentation and added paginator for AWS Iot Registry ListThingPrincipals API."
+    },
+    {
+        "type": "feature",
+        "category": "MQ",
+        "description": "Amazon MQ introduces support for RabbitMQ, a popular message-broker with native support for AMQP 0.9.1. You can now create fully-managed RabbitMQ brokers in the cloud."
+    },
+    {
+        "type": "feature",
+        "category": "MarketplaceMetering",
+        "description": "Adding Vendor Tagging Support in MeterUsage and BatchMeterUsage API."
+    },
+    {
+        "type": "feature",
+        "category": "ServiceCatalog",
+        "description": "Service Catalog API ListPortfolioAccess can now support a maximum PageSize of 100."
+    },
+    {
+        "type": "feature",
+        "category": "XRay",
+        "description": "Releasing new APIs GetInsightSummaries, GetInsightEvents, GetInsight, GetInsightImpactGraph and updating GetTimeSeriesServiceStatistics API for AWS X-Ray Insights feature"
+    }
+]

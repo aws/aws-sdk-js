@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "AppStream",
+        "description": "Adds support for the Smart Card Redirection feature"
+    },
+    {
+        "type": "feature",
+        "category": "AuditManager",
+        "description": "This release introduces tag support for assessment frameworks. You can now add, remove, and get tags from existing frameworks, and specify the tags to apply when creating a custom framework."
+    },
+    {
+        "type": "feature",
+        "category": "Lightsail",
+        "description": "This release adds IPv6 support for Amazon Lightsail instances, container services, CDN distributions, and load balancers."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "AWS Systems Manager adds pagination support for DescribeDocumentPermission API"
+    }
+]

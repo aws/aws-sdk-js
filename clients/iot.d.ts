@@ -12,571 +12,627 @@ declare class Iot extends Service {
   constructor(options?: Iot.Types.ClientConfiguration)
   config: Config & Iot.Types.ClientConfiguration;
   /**
-   * Accepts a pending certificate transfer. The default state of the certificate is INACTIVE. To check for pending certificate transfers, call ListCertificates to enumerate your certificates.
+   * Accepts a pending certificate transfer. The default state of the certificate is INACTIVE. To check for pending certificate transfers, call ListCertificates to enumerate your certificates. Requires permission to access the AcceptCertificateTransfer action.
    */
   acceptCertificateTransfer(params: Iot.Types.AcceptCertificateTransferRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Accepts a pending certificate transfer. The default state of the certificate is INACTIVE. To check for pending certificate transfers, call ListCertificates to enumerate your certificates.
+   * Accepts a pending certificate transfer. The default state of the certificate is INACTIVE. To check for pending certificate transfers, call ListCertificates to enumerate your certificates. Requires permission to access the AcceptCertificateTransfer action.
    */
   acceptCertificateTransfer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Adds a thing to a billing group.
+   * Adds a thing to a billing group. Requires permission to access the AddThingToBillingGroup action.
    */
   addThingToBillingGroup(params: Iot.Types.AddThingToBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.AddThingToBillingGroupResponse) => void): Request<Iot.Types.AddThingToBillingGroupResponse, AWSError>;
   /**
-   * Adds a thing to a billing group.
+   * Adds a thing to a billing group. Requires permission to access the AddThingToBillingGroup action.
    */
   addThingToBillingGroup(callback?: (err: AWSError, data: Iot.Types.AddThingToBillingGroupResponse) => void): Request<Iot.Types.AddThingToBillingGroupResponse, AWSError>;
   /**
-   * Adds a thing to a thing group.
+   * Adds a thing to a thing group. Requires permission to access the AddThingToThingGroup action.
    */
   addThingToThingGroup(params: Iot.Types.AddThingToThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.AddThingToThingGroupResponse) => void): Request<Iot.Types.AddThingToThingGroupResponse, AWSError>;
   /**
-   * Adds a thing to a thing group.
+   * Adds a thing to a thing group. Requires permission to access the AddThingToThingGroup action.
    */
   addThingToThingGroup(callback?: (err: AWSError, data: Iot.Types.AddThingToThingGroupResponse) => void): Request<Iot.Types.AddThingToThingGroupResponse, AWSError>;
   /**
-   * Associates a group with a continuous job. The following criteria must be met:    The job must have been created with the targetSelection field set to "CONTINUOUS".   The job status must currently be "IN_PROGRESS".   The total number of targets associated with a job must not exceed 100.  
+   * Associates a group with a continuous job. The following criteria must be met:    The job must have been created with the targetSelection field set to "CONTINUOUS".   The job status must currently be "IN_PROGRESS".   The total number of targets associated with a job must not exceed 100.   Requires permission to access the AssociateTargetsWithJob action.
    */
   associateTargetsWithJob(params: Iot.Types.AssociateTargetsWithJobRequest, callback?: (err: AWSError, data: Iot.Types.AssociateTargetsWithJobResponse) => void): Request<Iot.Types.AssociateTargetsWithJobResponse, AWSError>;
   /**
-   * Associates a group with a continuous job. The following criteria must be met:    The job must have been created with the targetSelection field set to "CONTINUOUS".   The job status must currently be "IN_PROGRESS".   The total number of targets associated with a job must not exceed 100.  
+   * Associates a group with a continuous job. The following criteria must be met:    The job must have been created with the targetSelection field set to "CONTINUOUS".   The job status must currently be "IN_PROGRESS".   The total number of targets associated with a job must not exceed 100.   Requires permission to access the AssociateTargetsWithJob action.
    */
   associateTargetsWithJob(callback?: (err: AWSError, data: Iot.Types.AssociateTargetsWithJobResponse) => void): Request<Iot.Types.AssociateTargetsWithJobResponse, AWSError>;
   /**
-   * Attaches a policy to the specified target.
+   * Attaches the specified policy to the specified principal (certificate or other credential). Requires permission to access the AttachPolicy action.
    */
   attachPolicy(params: Iot.Types.AttachPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attaches a policy to the specified target.
+   * Attaches the specified policy to the specified principal (certificate or other credential). Requires permission to access the AttachPolicy action.
    */
   attachPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attaches the specified policy to the specified principal (certificate or other credential).  Note: This API is deprecated. Please use AttachPolicy instead.
+   * Attaches the specified policy to the specified principal (certificate or other credential).  Note: This action is deprecated. Please use AttachPolicy instead. Requires permission to access the AttachPrincipalPolicy action.
    */
   attachPrincipalPolicy(params: Iot.Types.AttachPrincipalPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Attaches the specified policy to the specified principal (certificate or other credential).  Note: This API is deprecated. Please use AttachPolicy instead.
+   * Attaches the specified policy to the specified principal (certificate or other credential).  Note: This action is deprecated. Please use AttachPolicy instead. Requires permission to access the AttachPrincipalPolicy action.
    */
   attachPrincipalPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Associates a Device Defender security profile with a thing group or this account. Each thing group or account can have up to five security profiles associated with it.
+   * Associates a Device Defender security profile with a thing group or this account. Each thing group or account can have up to five security profiles associated with it. Requires permission to access the AttachSecurityProfile action.
    */
   attachSecurityProfile(params: Iot.Types.AttachSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.AttachSecurityProfileResponse) => void): Request<Iot.Types.AttachSecurityProfileResponse, AWSError>;
   /**
-   * Associates a Device Defender security profile with a thing group or this account. Each thing group or account can have up to five security profiles associated with it.
+   * Associates a Device Defender security profile with a thing group or this account. Each thing group or account can have up to five security profiles associated with it. Requires permission to access the AttachSecurityProfile action.
    */
   attachSecurityProfile(callback?: (err: AWSError, data: Iot.Types.AttachSecurityProfileResponse) => void): Request<Iot.Types.AttachSecurityProfileResponse, AWSError>;
   /**
-   * Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.
+   * Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. Requires permission to access the AttachThingPrincipal action.
    */
   attachThingPrincipal(params: Iot.Types.AttachThingPrincipalRequest, callback?: (err: AWSError, data: Iot.Types.AttachThingPrincipalResponse) => void): Request<Iot.Types.AttachThingPrincipalResponse, AWSError>;
   /**
-   * Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.
+   * Attaches the specified principal to the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. Requires permission to access the AttachThingPrincipal action.
    */
   attachThingPrincipal(callback?: (err: AWSError, data: Iot.Types.AttachThingPrincipalResponse) => void): Request<Iot.Types.AttachThingPrincipalResponse, AWSError>;
   /**
-   * Cancels a mitigation action task that is in progress. If the task is not in progress, an InvalidRequestException occurs.
+   * Cancels a mitigation action task that is in progress. If the task is not in progress, an InvalidRequestException occurs. Requires permission to access the CancelAuditMitigationActionsTask action.
    */
   cancelAuditMitigationActionsTask(params: Iot.Types.CancelAuditMitigationActionsTaskRequest, callback?: (err: AWSError, data: Iot.Types.CancelAuditMitigationActionsTaskResponse) => void): Request<Iot.Types.CancelAuditMitigationActionsTaskResponse, AWSError>;
   /**
-   * Cancels a mitigation action task that is in progress. If the task is not in progress, an InvalidRequestException occurs.
+   * Cancels a mitigation action task that is in progress. If the task is not in progress, an InvalidRequestException occurs. Requires permission to access the CancelAuditMitigationActionsTask action.
    */
   cancelAuditMitigationActionsTask(callback?: (err: AWSError, data: Iot.Types.CancelAuditMitigationActionsTaskResponse) => void): Request<Iot.Types.CancelAuditMitigationActionsTaskResponse, AWSError>;
   /**
-   * Cancels an audit that is in progress. The audit can be either scheduled or on-demand. If the audit is not in progress, an "InvalidRequestException" occurs.
+   * Cancels an audit that is in progress. The audit can be either scheduled or on demand. If the audit isn't in progress, an "InvalidRequestException" occurs. Requires permission to access the CancelAuditTask action.
    */
   cancelAuditTask(params: Iot.Types.CancelAuditTaskRequest, callback?: (err: AWSError, data: Iot.Types.CancelAuditTaskResponse) => void): Request<Iot.Types.CancelAuditTaskResponse, AWSError>;
   /**
-   * Cancels an audit that is in progress. The audit can be either scheduled or on-demand. If the audit is not in progress, an "InvalidRequestException" occurs.
+   * Cancels an audit that is in progress. The audit can be either scheduled or on demand. If the audit isn't in progress, an "InvalidRequestException" occurs. Requires permission to access the CancelAuditTask action.
    */
   cancelAuditTask(callback?: (err: AWSError, data: Iot.Types.CancelAuditTaskResponse) => void): Request<Iot.Types.CancelAuditTaskResponse, AWSError>;
   /**
-   * Cancels a pending transfer for the specified certificate.  Note Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use RejectCertificateTransfer instead.) After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled. After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.
+   * Cancels a pending transfer for the specified certificate.  Note Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use RejectCertificateTransfer instead.) After transfer, IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled. After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE. Requires permission to access the CancelCertificateTransfer action.
    */
   cancelCertificateTransfer(params: Iot.Types.CancelCertificateTransferRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Cancels a pending transfer for the specified certificate.  Note Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use RejectCertificateTransfer instead.) After transfer, AWS IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled. After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE.
+   * Cancels a pending transfer for the specified certificate.  Note Only the transfer source account can use this operation to cancel a transfer. (Transfer destinations can use RejectCertificateTransfer instead.) After transfer, IoT returns the certificate to the source account in the INACTIVE state. After the destination account has accepted the transfer, the transfer cannot be cancelled. After a certificate transfer is cancelled, the status of the certificate changes from PENDING_TRANSFER to INACTIVE. Requires permission to access the CancelCertificateTransfer action.
    */
   cancelCertificateTransfer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Cancels a job.
+   *  Cancels a Device Defender ML Detect mitigation action.  Requires permission to access the CancelDetectMitigationActionsTask action.
+   */
+  cancelDetectMitigationActionsTask(params: Iot.Types.CancelDetectMitigationActionsTaskRequest, callback?: (err: AWSError, data: Iot.Types.CancelDetectMitigationActionsTaskResponse) => void): Request<Iot.Types.CancelDetectMitigationActionsTaskResponse, AWSError>;
+  /**
+   *  Cancels a Device Defender ML Detect mitigation action.  Requires permission to access the CancelDetectMitigationActionsTask action.
+   */
+  cancelDetectMitigationActionsTask(callback?: (err: AWSError, data: Iot.Types.CancelDetectMitigationActionsTaskResponse) => void): Request<Iot.Types.CancelDetectMitigationActionsTaskResponse, AWSError>;
+  /**
+   * Cancels a job. Requires permission to access the CancelJob action.
    */
   cancelJob(params: Iot.Types.CancelJobRequest, callback?: (err: AWSError, data: Iot.Types.CancelJobResponse) => void): Request<Iot.Types.CancelJobResponse, AWSError>;
   /**
-   * Cancels a job.
+   * Cancels a job. Requires permission to access the CancelJob action.
    */
   cancelJob(callback?: (err: AWSError, data: Iot.Types.CancelJobResponse) => void): Request<Iot.Types.CancelJobResponse, AWSError>;
   /**
-   * Cancels the execution of a job for a given thing.
+   * Cancels the execution of a job for a given thing. Requires permission to access the CancelJobExecution action.
    */
   cancelJobExecution(params: Iot.Types.CancelJobExecutionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Cancels the execution of a job for a given thing.
+   * Cancels the execution of a job for a given thing. Requires permission to access the CancelJobExecution action.
    */
   cancelJobExecution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Clears the default authorizer.
+   * Clears the default authorizer. Requires permission to access the ClearDefaultAuthorizer action.
    */
   clearDefaultAuthorizer(params: Iot.Types.ClearDefaultAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.ClearDefaultAuthorizerResponse) => void): Request<Iot.Types.ClearDefaultAuthorizerResponse, AWSError>;
   /**
-   * Clears the default authorizer.
+   * Clears the default authorizer. Requires permission to access the ClearDefaultAuthorizer action.
    */
   clearDefaultAuthorizer(callback?: (err: AWSError, data: Iot.Types.ClearDefaultAuthorizerResponse) => void): Request<Iot.Types.ClearDefaultAuthorizerResponse, AWSError>;
   /**
-   * Confirms a topic rule destination. When you create a rule requiring a destination, AWS IoT sends a confirmation message to the endpoint or base address you specify. The message includes a token which you pass back when calling ConfirmTopicRuleDestination to confirm that you own or have access to the endpoint.
+   * Confirms a topic rule destination. When you create a rule requiring a destination, IoT sends a confirmation message to the endpoint or base address you specify. The message includes a token which you pass back when calling ConfirmTopicRuleDestination to confirm that you own or have access to the endpoint. Requires permission to access the ConfirmTopicRuleDestination action.
    */
   confirmTopicRuleDestination(params: Iot.Types.ConfirmTopicRuleDestinationRequest, callback?: (err: AWSError, data: Iot.Types.ConfirmTopicRuleDestinationResponse) => void): Request<Iot.Types.ConfirmTopicRuleDestinationResponse, AWSError>;
   /**
-   * Confirms a topic rule destination. When you create a rule requiring a destination, AWS IoT sends a confirmation message to the endpoint or base address you specify. The message includes a token which you pass back when calling ConfirmTopicRuleDestination to confirm that you own or have access to the endpoint.
+   * Confirms a topic rule destination. When you create a rule requiring a destination, IoT sends a confirmation message to the endpoint or base address you specify. The message includes a token which you pass back when calling ConfirmTopicRuleDestination to confirm that you own or have access to the endpoint. Requires permission to access the ConfirmTopicRuleDestination action.
    */
   confirmTopicRuleDestination(callback?: (err: AWSError, data: Iot.Types.ConfirmTopicRuleDestinationResponse) => void): Request<Iot.Types.ConfirmTopicRuleDestinationResponse, AWSError>;
   /**
-   *  Creates a Device Defender audit suppression. 
+   *  Creates a Device Defender audit suppression.  Requires permission to access the CreateAuditSuppression action.
    */
   createAuditSuppression(params: Iot.Types.CreateAuditSuppressionRequest, callback?: (err: AWSError, data: Iot.Types.CreateAuditSuppressionResponse) => void): Request<Iot.Types.CreateAuditSuppressionResponse, AWSError>;
   /**
-   *  Creates a Device Defender audit suppression. 
+   *  Creates a Device Defender audit suppression.  Requires permission to access the CreateAuditSuppression action.
    */
   createAuditSuppression(callback?: (err: AWSError, data: Iot.Types.CreateAuditSuppressionResponse) => void): Request<Iot.Types.CreateAuditSuppressionResponse, AWSError>;
   /**
-   * Creates an authorizer.
+   * Creates an authorizer. Requires permission to access the CreateAuthorizer action.
    */
   createAuthorizer(params: Iot.Types.CreateAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.CreateAuthorizerResponse) => void): Request<Iot.Types.CreateAuthorizerResponse, AWSError>;
   /**
-   * Creates an authorizer.
+   * Creates an authorizer. Requires permission to access the CreateAuthorizer action.
    */
   createAuthorizer(callback?: (err: AWSError, data: Iot.Types.CreateAuthorizerResponse) => void): Request<Iot.Types.CreateAuthorizerResponse, AWSError>;
   /**
-   * Creates a billing group.
+   * Creates a billing group. Requires permission to access the CreateBillingGroup action.
    */
   createBillingGroup(params: Iot.Types.CreateBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.CreateBillingGroupResponse) => void): Request<Iot.Types.CreateBillingGroupResponse, AWSError>;
   /**
-   * Creates a billing group.
+   * Creates a billing group. Requires permission to access the CreateBillingGroup action.
    */
   createBillingGroup(callback?: (err: AWSError, data: Iot.Types.CreateBillingGroupResponse) => void): Request<Iot.Types.CreateBillingGroupResponse, AWSError>;
   /**
-   * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.   Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
+   * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.   Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. Requires permission to access the CreateCertificateFromCsr action. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
    */
   createCertificateFromCsr(params: Iot.Types.CreateCertificateFromCsrRequest, callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
-   * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.   Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr AWS CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
+   * Creates an X.509 certificate using the specified certificate signing request.  Note: The CSR must include a public key that is either an RSA key with a length of at least 2048 bits or an ECC key from NIST P-256 or NIST P-384 curves.   Note: Reusing the same certificate signing request (CSR) results in a distinct certificate. Requires permission to access the CreateCertificateFromCsr action. You can create multiple certificates in a batch by creating a directory, copying multiple .csr files into that directory, and then specifying that directory on the command line. The following commands show how to create a batch of certificates given a batch of CSRs. Assuming a set of CSRs are located inside of the directory my-csr-directory: On Linux and OS X, the command is: $ ls my-csr-directory/ | xargs -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} This command lists all of the CSRs in my-csr-directory and pipes each CSR file name to the aws iot create-certificate-from-csr Amazon Web Services CLI command to create a certificate for the corresponding CSR. The aws iot create-certificate-from-csr part of the command can also be run in parallel to speed up the certificate creation process: $ ls my-csr-directory/ | xargs -P 10 -I {} aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/{} On Windows PowerShell, the command to create certificates for all CSRs in my-csr-directory is: &gt; ls -Name my-csr-directory | %{aws iot create-certificate-from-csr --certificate-signing-request file://my-csr-directory/$_} On a Windows command prompt, the command to create certificates for all CSRs in my-csr-directory is: &gt; forfiles /p my-csr-directory /c "cmd /c aws iot create-certificate-from-csr --certificate-signing-request file://@path"
    */
   createCertificateFromCsr(callback?: (err: AWSError, data: Iot.Types.CreateCertificateFromCsrResponse) => void): Request<Iot.Types.CreateCertificateFromCsrResponse, AWSError>;
   /**
-   * Create a dimension that you can use to limit the scope of a metric used in a security profile for AWS IoT Device Defender. For example, using a TOPIC_FILTER dimension, you can narrow down the scope of the metric only to MQTT topics whose name match the pattern specified in the dimension.
+   *  Use this API to define a Custom Metric published by your devices to Device Defender.  Requires permission to access the CreateCustomMetric action.
+   */
+  createCustomMetric(params: Iot.Types.CreateCustomMetricRequest, callback?: (err: AWSError, data: Iot.Types.CreateCustomMetricResponse) => void): Request<Iot.Types.CreateCustomMetricResponse, AWSError>;
+  /**
+   *  Use this API to define a Custom Metric published by your devices to Device Defender.  Requires permission to access the CreateCustomMetric action.
+   */
+  createCustomMetric(callback?: (err: AWSError, data: Iot.Types.CreateCustomMetricResponse) => void): Request<Iot.Types.CreateCustomMetricResponse, AWSError>;
+  /**
+   * Create a dimension that you can use to limit the scope of a metric used in a security profile for IoT Device Defender. For example, using a TOPIC_FILTER dimension, you can narrow down the scope of the metric only to MQTT topics whose name match the pattern specified in the dimension. Requires permission to access the CreateDimension action.
    */
   createDimension(params: Iot.Types.CreateDimensionRequest, callback?: (err: AWSError, data: Iot.Types.CreateDimensionResponse) => void): Request<Iot.Types.CreateDimensionResponse, AWSError>;
   /**
-   * Create a dimension that you can use to limit the scope of a metric used in a security profile for AWS IoT Device Defender. For example, using a TOPIC_FILTER dimension, you can narrow down the scope of the metric only to MQTT topics whose name match the pattern specified in the dimension.
+   * Create a dimension that you can use to limit the scope of a metric used in a security profile for IoT Device Defender. For example, using a TOPIC_FILTER dimension, you can narrow down the scope of the metric only to MQTT topics whose name match the pattern specified in the dimension. Requires permission to access the CreateDimension action.
    */
   createDimension(callback?: (err: AWSError, data: Iot.Types.CreateDimensionResponse) => void): Request<Iot.Types.CreateDimensionResponse, AWSError>;
   /**
-   * Creates a domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   * Creates a domain configuration. Requires permission to access the CreateDomainConfiguration action.
    */
   createDomainConfiguration(params: Iot.Types.CreateDomainConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.CreateDomainConfigurationResponse) => void): Request<Iot.Types.CreateDomainConfigurationResponse, AWSError>;
   /**
-   * Creates a domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   * Creates a domain configuration. Requires permission to access the CreateDomainConfiguration action.
    */
   createDomainConfiguration(callback?: (err: AWSError, data: Iot.Types.CreateDomainConfigurationResponse) => void): Request<Iot.Types.CreateDomainConfigurationResponse, AWSError>;
   /**
-   * Creates a dynamic thing group.
+   * Creates a dynamic thing group. Requires permission to access the CreateDynamicThingGroup action.
    */
   createDynamicThingGroup(params: Iot.Types.CreateDynamicThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.CreateDynamicThingGroupResponse) => void): Request<Iot.Types.CreateDynamicThingGroupResponse, AWSError>;
   /**
-   * Creates a dynamic thing group.
+   * Creates a dynamic thing group. Requires permission to access the CreateDynamicThingGroup action.
    */
   createDynamicThingGroup(callback?: (err: AWSError, data: Iot.Types.CreateDynamicThingGroupResponse) => void): Request<Iot.Types.CreateDynamicThingGroupResponse, AWSError>;
   /**
-   * Creates a job.
+   * Creates a fleet metric. Requires permission to access the CreateFleetMetric action.
+   */
+  createFleetMetric(params: Iot.Types.CreateFleetMetricRequest, callback?: (err: AWSError, data: Iot.Types.CreateFleetMetricResponse) => void): Request<Iot.Types.CreateFleetMetricResponse, AWSError>;
+  /**
+   * Creates a fleet metric. Requires permission to access the CreateFleetMetric action.
+   */
+  createFleetMetric(callback?: (err: AWSError, data: Iot.Types.CreateFleetMetricResponse) => void): Request<Iot.Types.CreateFleetMetricResponse, AWSError>;
+  /**
+   * Creates a job. Requires permission to access the CreateJob action.
    */
   createJob(params: Iot.Types.CreateJobRequest, callback?: (err: AWSError, data: Iot.Types.CreateJobResponse) => void): Request<Iot.Types.CreateJobResponse, AWSError>;
   /**
-   * Creates a job.
+   * Creates a job. Requires permission to access the CreateJob action.
    */
   createJob(callback?: (err: AWSError, data: Iot.Types.CreateJobResponse) => void): Request<Iot.Types.CreateJobResponse, AWSError>;
   /**
-   * Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key. You can also call CreateKeysAndCertificate over MQTT from a device, for more information, see Provisioning MQTT API.  Note This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.
+   * Creates a job template. Requires permission to access the CreateJobTemplate action.
+   */
+  createJobTemplate(params: Iot.Types.CreateJobTemplateRequest, callback?: (err: AWSError, data: Iot.Types.CreateJobTemplateResponse) => void): Request<Iot.Types.CreateJobTemplateResponse, AWSError>;
+  /**
+   * Creates a job template. Requires permission to access the CreateJobTemplate action.
+   */
+  createJobTemplate(callback?: (err: AWSError, data: Iot.Types.CreateJobTemplateResponse) => void): Request<Iot.Types.CreateJobTemplateResponse, AWSError>;
+  /**
+   * Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key. You can also call CreateKeysAndCertificate over MQTT from a device, for more information, see Provisioning MQTT API.  Note This is the only time IoT issues the private key for this certificate, so it is important to keep it in a secure location. Requires permission to access the CreateKeysAndCertificate action.
    */
   createKeysAndCertificate(params: Iot.Types.CreateKeysAndCertificateRequest, callback?: (err: AWSError, data: Iot.Types.CreateKeysAndCertificateResponse) => void): Request<Iot.Types.CreateKeysAndCertificateResponse, AWSError>;
   /**
-   * Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key. You can also call CreateKeysAndCertificate over MQTT from a device, for more information, see Provisioning MQTT API.  Note This is the only time AWS IoT issues the private key for this certificate, so it is important to keep it in a secure location.
+   * Creates a 2048-bit RSA key pair and issues an X.509 certificate using the issued public key. You can also call CreateKeysAndCertificate over MQTT from a device, for more information, see Provisioning MQTT API.  Note This is the only time IoT issues the private key for this certificate, so it is important to keep it in a secure location. Requires permission to access the CreateKeysAndCertificate action.
    */
   createKeysAndCertificate(callback?: (err: AWSError, data: Iot.Types.CreateKeysAndCertificateResponse) => void): Request<Iot.Types.CreateKeysAndCertificateResponse, AWSError>;
   /**
-   * Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Only certain types of mitigation actions can be applied to specific check names. For more information, see Mitigation actions. Each mitigation action can apply only one type of change.
+   * Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Only certain types of mitigation actions can be applied to specific check names. For more information, see Mitigation actions. Each mitigation action can apply only one type of change. Requires permission to access the CreateMitigationAction action.
    */
   createMitigationAction(params: Iot.Types.CreateMitigationActionRequest, callback?: (err: AWSError, data: Iot.Types.CreateMitigationActionResponse) => void): Request<Iot.Types.CreateMitigationActionResponse, AWSError>;
   /**
-   * Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Only certain types of mitigation actions can be applied to specific check names. For more information, see Mitigation actions. Each mitigation action can apply only one type of change.
+   * Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Only certain types of mitigation actions can be applied to specific check names. For more information, see Mitigation actions. Each mitigation action can apply only one type of change. Requires permission to access the CreateMitigationAction action.
    */
   createMitigationAction(callback?: (err: AWSError, data: Iot.Types.CreateMitigationActionResponse) => void): Request<Iot.Types.CreateMitigationActionResponse, AWSError>;
   /**
-   * Creates an AWS IoT OTAUpdate on a target group of things or groups.
+   * Creates an IoT OTA update on a target group of things or groups. Requires permission to access the CreateOTAUpdate action.
    */
   createOTAUpdate(params: Iot.Types.CreateOTAUpdateRequest, callback?: (err: AWSError, data: Iot.Types.CreateOTAUpdateResponse) => void): Request<Iot.Types.CreateOTAUpdateResponse, AWSError>;
   /**
-   * Creates an AWS IoT OTAUpdate on a target group of things or groups.
+   * Creates an IoT OTA update on a target group of things or groups. Requires permission to access the CreateOTAUpdate action.
    */
   createOTAUpdate(callback?: (err: AWSError, data: Iot.Types.CreateOTAUpdateResponse) => void): Request<Iot.Types.CreateOTAUpdateResponse, AWSError>;
   /**
-   * Creates an AWS IoT policy. The created policy is the default version for the policy. This operation creates a policy version with a version identifier of 1 and sets 1 as the policy's default version.
+   * Creates an IoT policy. The created policy is the default version for the policy. This operation creates a policy version with a version identifier of 1 and sets 1 as the policy's default version. Requires permission to access the CreatePolicy action.
    */
   createPolicy(params: Iot.Types.CreatePolicyRequest, callback?: (err: AWSError, data: Iot.Types.CreatePolicyResponse) => void): Request<Iot.Types.CreatePolicyResponse, AWSError>;
   /**
-   * Creates an AWS IoT policy. The created policy is the default version for the policy. This operation creates a policy version with a version identifier of 1 and sets 1 as the policy's default version.
+   * Creates an IoT policy. The created policy is the default version for the policy. This operation creates a policy version with a version identifier of 1 and sets 1 as the policy's default version. Requires permission to access the CreatePolicy action.
    */
   createPolicy(callback?: (err: AWSError, data: Iot.Types.CreatePolicyResponse) => void): Request<Iot.Types.CreatePolicyResponse, AWSError>;
   /**
-   * Creates a new version of the specified AWS IoT policy. To update a policy, create a new policy version. A managed policy can have up to five versions. If the policy has five versions, you must use DeletePolicyVersion to delete an existing version before you create a new one. Optionally, you can set the new version as the policy's default version. The default version is the operative version (that is, the version that is in effect for the certificates to which the policy is attached).
+   * Creates a new version of the specified IoT policy. To update a policy, create a new policy version. A managed policy can have up to five versions. If the policy has five versions, you must use DeletePolicyVersion to delete an existing version before you create a new one. Optionally, you can set the new version as the policy's default version. The default version is the operative version (that is, the version that is in effect for the certificates to which the policy is attached). Requires permission to access the CreatePolicyVersion action.
    */
   createPolicyVersion(params: Iot.Types.CreatePolicyVersionRequest, callback?: (err: AWSError, data: Iot.Types.CreatePolicyVersionResponse) => void): Request<Iot.Types.CreatePolicyVersionResponse, AWSError>;
   /**
-   * Creates a new version of the specified AWS IoT policy. To update a policy, create a new policy version. A managed policy can have up to five versions. If the policy has five versions, you must use DeletePolicyVersion to delete an existing version before you create a new one. Optionally, you can set the new version as the policy's default version. The default version is the operative version (that is, the version that is in effect for the certificates to which the policy is attached).
+   * Creates a new version of the specified IoT policy. To update a policy, create a new policy version. A managed policy can have up to five versions. If the policy has five versions, you must use DeletePolicyVersion to delete an existing version before you create a new one. Optionally, you can set the new version as the policy's default version. The default version is the operative version (that is, the version that is in effect for the certificates to which the policy is attached). Requires permission to access the CreatePolicyVersion action.
    */
   createPolicyVersion(callback?: (err: AWSError, data: Iot.Types.CreatePolicyVersionResponse) => void): Request<Iot.Types.CreatePolicyVersionResponse, AWSError>;
   /**
-   * Creates a provisioning claim.
+   * Creates a provisioning claim. Requires permission to access the CreateProvisioningClaim action.
    */
   createProvisioningClaim(params: Iot.Types.CreateProvisioningClaimRequest, callback?: (err: AWSError, data: Iot.Types.CreateProvisioningClaimResponse) => void): Request<Iot.Types.CreateProvisioningClaimResponse, AWSError>;
   /**
-   * Creates a provisioning claim.
+   * Creates a provisioning claim. Requires permission to access the CreateProvisioningClaim action.
    */
   createProvisioningClaim(callback?: (err: AWSError, data: Iot.Types.CreateProvisioningClaimResponse) => void): Request<Iot.Types.CreateProvisioningClaimResponse, AWSError>;
   /**
-   * Creates a fleet provisioning template.
+   * Creates a fleet provisioning template. Requires permission to access the CreateProvisioningTemplate action.
    */
   createProvisioningTemplate(params: Iot.Types.CreateProvisioningTemplateRequest, callback?: (err: AWSError, data: Iot.Types.CreateProvisioningTemplateResponse) => void): Request<Iot.Types.CreateProvisioningTemplateResponse, AWSError>;
   /**
-   * Creates a fleet provisioning template.
+   * Creates a fleet provisioning template. Requires permission to access the CreateProvisioningTemplate action.
    */
   createProvisioningTemplate(callback?: (err: AWSError, data: Iot.Types.CreateProvisioningTemplateResponse) => void): Request<Iot.Types.CreateProvisioningTemplateResponse, AWSError>;
   /**
-   * Creates a new version of a fleet provisioning template.
+   * Creates a new version of a fleet provisioning template. Requires permission to access the CreateProvisioningTemplateVersion action.
    */
   createProvisioningTemplateVersion(params: Iot.Types.CreateProvisioningTemplateVersionRequest, callback?: (err: AWSError, data: Iot.Types.CreateProvisioningTemplateVersionResponse) => void): Request<Iot.Types.CreateProvisioningTemplateVersionResponse, AWSError>;
   /**
-   * Creates a new version of a fleet provisioning template.
+   * Creates a new version of a fleet provisioning template. Requires permission to access the CreateProvisioningTemplateVersion action.
    */
   createProvisioningTemplateVersion(callback?: (err: AWSError, data: Iot.Types.CreateProvisioningTemplateVersionResponse) => void): Request<Iot.Types.CreateProvisioningTemplateVersionResponse, AWSError>;
   /**
-   * Creates a role alias.
+   * Creates a role alias. Requires permission to access the CreateRoleAlias action.
    */
   createRoleAlias(params: Iot.Types.CreateRoleAliasRequest, callback?: (err: AWSError, data: Iot.Types.CreateRoleAliasResponse) => void): Request<Iot.Types.CreateRoleAliasResponse, AWSError>;
   /**
-   * Creates a role alias.
+   * Creates a role alias. Requires permission to access the CreateRoleAlias action.
    */
   createRoleAlias(callback?: (err: AWSError, data: Iot.Types.CreateRoleAliasResponse) => void): Request<Iot.Types.CreateRoleAliasResponse, AWSError>;
   /**
-   * Creates a scheduled audit that is run at a specified time interval.
+   * Creates a scheduled audit that is run at a specified time interval. Requires permission to access the CreateScheduledAudit action.
    */
   createScheduledAudit(params: Iot.Types.CreateScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.CreateScheduledAuditResponse) => void): Request<Iot.Types.CreateScheduledAuditResponse, AWSError>;
   /**
-   * Creates a scheduled audit that is run at a specified time interval.
+   * Creates a scheduled audit that is run at a specified time interval. Requires permission to access the CreateScheduledAudit action.
    */
   createScheduledAudit(callback?: (err: AWSError, data: Iot.Types.CreateScheduledAuditResponse) => void): Request<Iot.Types.CreateScheduledAuditResponse, AWSError>;
   /**
-   * Creates a Device Defender security profile.
+   * Creates a Device Defender security profile. Requires permission to access the CreateSecurityProfile action.
    */
   createSecurityProfile(params: Iot.Types.CreateSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.CreateSecurityProfileResponse) => void): Request<Iot.Types.CreateSecurityProfileResponse, AWSError>;
   /**
-   * Creates a Device Defender security profile.
+   * Creates a Device Defender security profile. Requires permission to access the CreateSecurityProfile action.
    */
   createSecurityProfile(callback?: (err: AWSError, data: Iot.Types.CreateSecurityProfileResponse) => void): Request<Iot.Types.CreateSecurityProfileResponse, AWSError>;
   /**
-   * Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream.
+   * Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream. Requires permission to access the CreateStream action.
    */
   createStream(params: Iot.Types.CreateStreamRequest, callback?: (err: AWSError, data: Iot.Types.CreateStreamResponse) => void): Request<Iot.Types.CreateStreamResponse, AWSError>;
   /**
-   * Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream.
+   * Creates a stream for delivering one or more large files in chunks over MQTT. A stream transports data bytes in chunks or blocks packaged as MQTT messages from a source like S3. You can have one or more files associated with a stream. Requires permission to access the CreateStream action.
    */
   createStream(callback?: (err: AWSError, data: Iot.Types.CreateStreamResponse) => void): Request<Iot.Types.CreateStreamResponse, AWSError>;
   /**
-   * Creates a thing record in the registry. If this call is made multiple times using the same thing name and configuration, the call will succeed. If this call is made with the same thing name but different configuration a ResourceAlreadyExistsException is thrown.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
+   * Creates a thing record in the registry. If this call is made multiple times using the same thing name and configuration, the call will succeed. If this call is made with the same thing name but different configuration a ResourceAlreadyExistsException is thrown.  This is a control plane operation. See Authorization for information about authorizing control plane actions.  Requires permission to access the CreateThing action.
    */
   createThing(params: Iot.Types.CreateThingRequest, callback?: (err: AWSError, data: Iot.Types.CreateThingResponse) => void): Request<Iot.Types.CreateThingResponse, AWSError>;
   /**
-   * Creates a thing record in the registry. If this call is made multiple times using the same thing name and configuration, the call will succeed. If this call is made with the same thing name but different configuration a ResourceAlreadyExistsException is thrown.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
+   * Creates a thing record in the registry. If this call is made multiple times using the same thing name and configuration, the call will succeed. If this call is made with the same thing name but different configuration a ResourceAlreadyExistsException is thrown.  This is a control plane operation. See Authorization for information about authorizing control plane actions.  Requires permission to access the CreateThing action.
    */
   createThing(callback?: (err: AWSError, data: Iot.Types.CreateThingResponse) => void): Request<Iot.Types.CreateThingResponse, AWSError>;
   /**
-   * Create a thing group.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
+   * Create a thing group.  This is a control plane operation. See Authorization for information about authorizing control plane actions.  Requires permission to access the CreateThingGroup action.
    */
   createThingGroup(params: Iot.Types.CreateThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.CreateThingGroupResponse) => void): Request<Iot.Types.CreateThingGroupResponse, AWSError>;
   /**
-   * Create a thing group.  This is a control plane operation. See Authorization for information about authorizing control plane actions. 
+   * Create a thing group.  This is a control plane operation. See Authorization for information about authorizing control plane actions.  Requires permission to access the CreateThingGroup action.
    */
   createThingGroup(callback?: (err: AWSError, data: Iot.Types.CreateThingGroupResponse) => void): Request<Iot.Types.CreateThingGroupResponse, AWSError>;
   /**
-   * Creates a new thing type.
+   * Creates a new thing type. Requires permission to access the CreateThingType action.
    */
   createThingType(params: Iot.Types.CreateThingTypeRequest, callback?: (err: AWSError, data: Iot.Types.CreateThingTypeResponse) => void): Request<Iot.Types.CreateThingTypeResponse, AWSError>;
   /**
-   * Creates a new thing type.
+   * Creates a new thing type. Requires permission to access the CreateThingType action.
    */
   createThingType(callback?: (err: AWSError, data: Iot.Types.CreateThingTypeResponse) => void): Request<Iot.Types.CreateThingTypeResponse, AWSError>;
   /**
-   * Creates a rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.
+   * Creates a rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule. Requires permission to access the CreateTopicRule action.
    */
   createTopicRule(params: Iot.Types.CreateTopicRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.
+   * Creates a rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule. Requires permission to access the CreateTopicRule action.
    */
   createTopicRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a topic rule destination. The destination must be confirmed prior to use.
+   * Creates a topic rule destination. The destination must be confirmed prior to use. Requires permission to access the CreateTopicRuleDestination action.
    */
   createTopicRuleDestination(params: Iot.Types.CreateTopicRuleDestinationRequest, callback?: (err: AWSError, data: Iot.Types.CreateTopicRuleDestinationResponse) => void): Request<Iot.Types.CreateTopicRuleDestinationResponse, AWSError>;
   /**
-   * Creates a topic rule destination. The destination must be confirmed prior to use.
+   * Creates a topic rule destination. The destination must be confirmed prior to use. Requires permission to access the CreateTopicRuleDestination action.
    */
   createTopicRuleDestination(callback?: (err: AWSError, data: Iot.Types.CreateTopicRuleDestinationResponse) => void): Request<Iot.Types.CreateTopicRuleDestinationResponse, AWSError>;
   /**
-   * Restores the default settings for Device Defender audits for this account. Any configuration data you entered is deleted and all audit checks are reset to disabled. 
+   * Restores the default settings for Device Defender audits for this account. Any configuration data you entered is deleted and all audit checks are reset to disabled.  Requires permission to access the DeleteAccountAuditConfiguration action.
    */
   deleteAccountAuditConfiguration(params: Iot.Types.DeleteAccountAuditConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.DeleteAccountAuditConfigurationResponse) => void): Request<Iot.Types.DeleteAccountAuditConfigurationResponse, AWSError>;
   /**
-   * Restores the default settings for Device Defender audits for this account. Any configuration data you entered is deleted and all audit checks are reset to disabled. 
+   * Restores the default settings for Device Defender audits for this account. Any configuration data you entered is deleted and all audit checks are reset to disabled.  Requires permission to access the DeleteAccountAuditConfiguration action.
    */
   deleteAccountAuditConfiguration(callback?: (err: AWSError, data: Iot.Types.DeleteAccountAuditConfigurationResponse) => void): Request<Iot.Types.DeleteAccountAuditConfigurationResponse, AWSError>;
   /**
-   *  Deletes a Device Defender audit suppression. 
+   *  Deletes a Device Defender audit suppression.  Requires permission to access the DeleteAuditSuppression action.
    */
   deleteAuditSuppression(params: Iot.Types.DeleteAuditSuppressionRequest, callback?: (err: AWSError, data: Iot.Types.DeleteAuditSuppressionResponse) => void): Request<Iot.Types.DeleteAuditSuppressionResponse, AWSError>;
   /**
-   *  Deletes a Device Defender audit suppression. 
+   *  Deletes a Device Defender audit suppression.  Requires permission to access the DeleteAuditSuppression action.
    */
   deleteAuditSuppression(callback?: (err: AWSError, data: Iot.Types.DeleteAuditSuppressionResponse) => void): Request<Iot.Types.DeleteAuditSuppressionResponse, AWSError>;
   /**
-   * Deletes an authorizer.
+   * Deletes an authorizer. Requires permission to access the DeleteAuthorizer action.
    */
   deleteAuthorizer(params: Iot.Types.DeleteAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.DeleteAuthorizerResponse) => void): Request<Iot.Types.DeleteAuthorizerResponse, AWSError>;
   /**
-   * Deletes an authorizer.
+   * Deletes an authorizer. Requires permission to access the DeleteAuthorizer action.
    */
   deleteAuthorizer(callback?: (err: AWSError, data: Iot.Types.DeleteAuthorizerResponse) => void): Request<Iot.Types.DeleteAuthorizerResponse, AWSError>;
   /**
-   * Deletes the billing group.
+   * Deletes the billing group. Requires permission to access the DeleteBillingGroup action.
    */
   deleteBillingGroup(params: Iot.Types.DeleteBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DeleteBillingGroupResponse) => void): Request<Iot.Types.DeleteBillingGroupResponse, AWSError>;
   /**
-   * Deletes the billing group.
+   * Deletes the billing group. Requires permission to access the DeleteBillingGroup action.
    */
   deleteBillingGroup(callback?: (err: AWSError, data: Iot.Types.DeleteBillingGroupResponse) => void): Request<Iot.Types.DeleteBillingGroupResponse, AWSError>;
   /**
-   * Deletes a registered CA certificate.
+   * Deletes a registered CA certificate. Requires permission to access the DeleteCACertificate action.
    */
   deleteCACertificate(params: Iot.Types.DeleteCACertificateRequest, callback?: (err: AWSError, data: Iot.Types.DeleteCACertificateResponse) => void): Request<Iot.Types.DeleteCACertificateResponse, AWSError>;
   /**
-   * Deletes a registered CA certificate.
+   * Deletes a registered CA certificate. Requires permission to access the DeleteCACertificate action.
    */
   deleteCACertificate(callback?: (err: AWSError, data: Iot.Types.DeleteCACertificateResponse) => void): Request<Iot.Types.DeleteCACertificateResponse, AWSError>;
   /**
-   * Deletes the specified certificate. A certificate cannot be deleted if it has a policy or IoT thing attached to it or if its status is set to ACTIVE. To delete a certificate, first use the DetachPrincipalPolicy API to detach all policies. Next, use the UpdateCertificate API to set the certificate to the INACTIVE status.
+   * Deletes the specified certificate. A certificate cannot be deleted if it has a policy or IoT thing attached to it or if its status is set to ACTIVE. To delete a certificate, first use the DetachPolicy action to detach all policies. Next, use the UpdateCertificate action to set the certificate to the INACTIVE status. Requires permission to access the DeleteCertificate action.
    */
   deleteCertificate(params: Iot.Types.DeleteCertificateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified certificate. A certificate cannot be deleted if it has a policy or IoT thing attached to it or if its status is set to ACTIVE. To delete a certificate, first use the DetachPrincipalPolicy API to detach all policies. Next, use the UpdateCertificate API to set the certificate to the INACTIVE status.
+   * Deletes the specified certificate. A certificate cannot be deleted if it has a policy or IoT thing attached to it or if its status is set to ACTIVE. To delete a certificate, first use the DetachPolicy action to detach all policies. Next, use the UpdateCertificate action to set the certificate to the INACTIVE status. Requires permission to access the DeleteCertificate action.
    */
   deleteCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the specified dimension from your AWS account.
+   *  Deletes a Device Defender detect custom metric.  Requires permission to access the DeleteCustomMetric action.  Before you can delete a custom metric, you must first remove the custom metric from all security profiles it's a part of. The security profile associated with the custom metric can be found using the ListSecurityProfiles API with metricName set to your custom metric name. 
+   */
+  deleteCustomMetric(params: Iot.Types.DeleteCustomMetricRequest, callback?: (err: AWSError, data: Iot.Types.DeleteCustomMetricResponse) => void): Request<Iot.Types.DeleteCustomMetricResponse, AWSError>;
+  /**
+   *  Deletes a Device Defender detect custom metric.  Requires permission to access the DeleteCustomMetric action.  Before you can delete a custom metric, you must first remove the custom metric from all security profiles it's a part of. The security profile associated with the custom metric can be found using the ListSecurityProfiles API with metricName set to your custom metric name. 
+   */
+  deleteCustomMetric(callback?: (err: AWSError, data: Iot.Types.DeleteCustomMetricResponse) => void): Request<Iot.Types.DeleteCustomMetricResponse, AWSError>;
+  /**
+   * Removes the specified dimension from your Amazon Web Services accounts. Requires permission to access the DeleteDimension action.
    */
   deleteDimension(params: Iot.Types.DeleteDimensionRequest, callback?: (err: AWSError, data: Iot.Types.DeleteDimensionResponse) => void): Request<Iot.Types.DeleteDimensionResponse, AWSError>;
   /**
-   * Removes the specified dimension from your AWS account.
+   * Removes the specified dimension from your Amazon Web Services accounts. Requires permission to access the DeleteDimension action.
    */
   deleteDimension(callback?: (err: AWSError, data: Iot.Types.DeleteDimensionResponse) => void): Request<Iot.Types.DeleteDimensionResponse, AWSError>;
   /**
-   * Deletes the specified domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   * Deletes the specified domain configuration. Requires permission to access the DeleteDomainConfiguration action.
    */
   deleteDomainConfiguration(params: Iot.Types.DeleteDomainConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.DeleteDomainConfigurationResponse) => void): Request<Iot.Types.DeleteDomainConfigurationResponse, AWSError>;
   /**
-   * Deletes the specified domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   * Deletes the specified domain configuration. Requires permission to access the DeleteDomainConfiguration action.
    */
   deleteDomainConfiguration(callback?: (err: AWSError, data: Iot.Types.DeleteDomainConfigurationResponse) => void): Request<Iot.Types.DeleteDomainConfigurationResponse, AWSError>;
   /**
-   * Deletes a dynamic thing group.
+   * Deletes a dynamic thing group. Requires permission to access the DeleteDynamicThingGroup action.
    */
   deleteDynamicThingGroup(params: Iot.Types.DeleteDynamicThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DeleteDynamicThingGroupResponse) => void): Request<Iot.Types.DeleteDynamicThingGroupResponse, AWSError>;
   /**
-   * Deletes a dynamic thing group.
+   * Deletes a dynamic thing group. Requires permission to access the DeleteDynamicThingGroup action.
    */
   deleteDynamicThingGroup(callback?: (err: AWSError, data: Iot.Types.DeleteDynamicThingGroupResponse) => void): Request<Iot.Types.DeleteDynamicThingGroupResponse, AWSError>;
   /**
-   * Deletes a job and its related job executions. Deleting a job may take time, depending on the number of job executions created for the job and various other factors. While the job is being deleted, the status of the job will be shown as "DELETION_IN_PROGRESS". Attempting to delete or cancel a job whose status is already "DELETION_IN_PROGRESS" will result in an error. Only 10 jobs may have status "DELETION_IN_PROGRESS" at the same time, or a LimitExceededException will occur.
+   * Deletes the specified fleet metric. Returns successfully with no error if the deletion is successful or you specify a fleet metric that doesn't exist. Requires permission to access the DeleteFleetMetric action.
+   */
+  deleteFleetMetric(params: Iot.Types.DeleteFleetMetricRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified fleet metric. Returns successfully with no error if the deletion is successful or you specify a fleet metric that doesn't exist. Requires permission to access the DeleteFleetMetric action.
+   */
+  deleteFleetMetric(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a job and its related job executions. Deleting a job may take time, depending on the number of job executions created for the job and various other factors. While the job is being deleted, the status of the job will be shown as "DELETION_IN_PROGRESS". Attempting to delete or cancel a job whose status is already "DELETION_IN_PROGRESS" will result in an error. Only 10 jobs may have status "DELETION_IN_PROGRESS" at the same time, or a LimitExceededException will occur. Requires permission to access the DeleteJob action.
    */
   deleteJob(params: Iot.Types.DeleteJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a job and its related job executions. Deleting a job may take time, depending on the number of job executions created for the job and various other factors. While the job is being deleted, the status of the job will be shown as "DELETION_IN_PROGRESS". Attempting to delete or cancel a job whose status is already "DELETION_IN_PROGRESS" will result in an error. Only 10 jobs may have status "DELETION_IN_PROGRESS" at the same time, or a LimitExceededException will occur.
+   * Deletes a job and its related job executions. Deleting a job may take time, depending on the number of job executions created for the job and various other factors. While the job is being deleted, the status of the job will be shown as "DELETION_IN_PROGRESS". Attempting to delete or cancel a job whose status is already "DELETION_IN_PROGRESS" will result in an error. Only 10 jobs may have status "DELETION_IN_PROGRESS" at the same time, or a LimitExceededException will occur. Requires permission to access the DeleteJob action.
    */
   deleteJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a job execution.
+   * Deletes a job execution. Requires permission to access the DeleteJobExecution action.
    */
   deleteJobExecution(params: Iot.Types.DeleteJobExecutionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a job execution.
+   * Deletes a job execution. Requires permission to access the DeleteJobExecution action.
    */
   deleteJobExecution(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a defined mitigation action from your AWS account.
+   * Deletes the specified job template.
+   */
+  deleteJobTemplate(params: Iot.Types.DeleteJobTemplateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the specified job template.
+   */
+  deleteJobTemplate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes a defined mitigation action from your Amazon Web Services accounts. Requires permission to access the DeleteMitigationAction action.
    */
   deleteMitigationAction(params: Iot.Types.DeleteMitigationActionRequest, callback?: (err: AWSError, data: Iot.Types.DeleteMitigationActionResponse) => void): Request<Iot.Types.DeleteMitigationActionResponse, AWSError>;
   /**
-   * Deletes a defined mitigation action from your AWS account.
+   * Deletes a defined mitigation action from your Amazon Web Services accounts. Requires permission to access the DeleteMitigationAction action.
    */
   deleteMitigationAction(callback?: (err: AWSError, data: Iot.Types.DeleteMitigationActionResponse) => void): Request<Iot.Types.DeleteMitigationActionResponse, AWSError>;
   /**
-   * Delete an OTA update.
+   * Delete an OTA update. Requires permission to access the DeleteOTAUpdate action.
    */
   deleteOTAUpdate(params: Iot.Types.DeleteOTAUpdateRequest, callback?: (err: AWSError, data: Iot.Types.DeleteOTAUpdateResponse) => void): Request<Iot.Types.DeleteOTAUpdateResponse, AWSError>;
   /**
-   * Delete an OTA update.
+   * Delete an OTA update. Requires permission to access the DeleteOTAUpdate action.
    */
   deleteOTAUpdate(callback?: (err: AWSError, data: Iot.Types.DeleteOTAUpdateResponse) => void): Request<Iot.Types.DeleteOTAUpdateResponse, AWSError>;
   /**
-   * Deletes the specified policy. A policy cannot be deleted if it has non-default versions or it is attached to any certificate. To delete a policy, use the DeletePolicyVersion API to delete all non-default versions of the policy; use the DetachPrincipalPolicy API to detach the policy from any certificate; and then use the DeletePolicy API to delete the policy. When a policy is deleted using DeletePolicy, its default version is deleted with it.
+   * Deletes the specified policy. A policy cannot be deleted if it has non-default versions or it is attached to any certificate. To delete a policy, use the DeletePolicyVersion action to delete all non-default versions of the policy; use the DetachPolicy action to detach the policy from any certificate; and then use the DeletePolicy action to delete the policy. When a policy is deleted using DeletePolicy, its default version is deleted with it.  Because of the distributed nature of Amazon Web Services, it can take up to five minutes after a policy is detached before it's ready to be deleted.  Requires permission to access the DeletePolicy action.
    */
   deletePolicy(params: Iot.Types.DeletePolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified policy. A policy cannot be deleted if it has non-default versions or it is attached to any certificate. To delete a policy, use the DeletePolicyVersion API to delete all non-default versions of the policy; use the DetachPrincipalPolicy API to detach the policy from any certificate; and then use the DeletePolicy API to delete the policy. When a policy is deleted using DeletePolicy, its default version is deleted with it.
+   * Deletes the specified policy. A policy cannot be deleted if it has non-default versions or it is attached to any certificate. To delete a policy, use the DeletePolicyVersion action to delete all non-default versions of the policy; use the DetachPolicy action to detach the policy from any certificate; and then use the DeletePolicy action to delete the policy. When a policy is deleted using DeletePolicy, its default version is deleted with it.  Because of the distributed nature of Amazon Web Services, it can take up to five minutes after a policy is detached before it's ready to be deleted.  Requires permission to access the DeletePolicy action.
    */
   deletePolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified version of the specified policy. You cannot delete the default version of a policy using this API. To delete the default version of a policy, use DeletePolicy. To find out which version of a policy is marked as the default version, use ListPolicyVersions.
+   * Deletes the specified version of the specified policy. You cannot delete the default version of a policy using this action. To delete the default version of a policy, use DeletePolicy. To find out which version of a policy is marked as the default version, use ListPolicyVersions. Requires permission to access the DeletePolicyVersion action.
    */
   deletePolicyVersion(params: Iot.Types.DeletePolicyVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified version of the specified policy. You cannot delete the default version of a policy using this API. To delete the default version of a policy, use DeletePolicy. To find out which version of a policy is marked as the default version, use ListPolicyVersions.
+   * Deletes the specified version of the specified policy. You cannot delete the default version of a policy using this action. To delete the default version of a policy, use DeletePolicy. To find out which version of a policy is marked as the default version, use ListPolicyVersions. Requires permission to access the DeletePolicyVersion action.
    */
   deletePolicyVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a fleet provisioning template.
+   * Deletes a fleet provisioning template. Requires permission to access the DeleteProvisioningTemplate action.
    */
   deleteProvisioningTemplate(params: Iot.Types.DeleteProvisioningTemplateRequest, callback?: (err: AWSError, data: Iot.Types.DeleteProvisioningTemplateResponse) => void): Request<Iot.Types.DeleteProvisioningTemplateResponse, AWSError>;
   /**
-   * Deletes a fleet provisioning template.
+   * Deletes a fleet provisioning template. Requires permission to access the DeleteProvisioningTemplate action.
    */
   deleteProvisioningTemplate(callback?: (err: AWSError, data: Iot.Types.DeleteProvisioningTemplateResponse) => void): Request<Iot.Types.DeleteProvisioningTemplateResponse, AWSError>;
   /**
-   * Deletes a fleet provisioning template version.
+   * Deletes a fleet provisioning template version. Requires permission to access the DeleteProvisioningTemplateVersion action.
    */
   deleteProvisioningTemplateVersion(params: Iot.Types.DeleteProvisioningTemplateVersionRequest, callback?: (err: AWSError, data: Iot.Types.DeleteProvisioningTemplateVersionResponse) => void): Request<Iot.Types.DeleteProvisioningTemplateVersionResponse, AWSError>;
   /**
-   * Deletes a fleet provisioning template version.
+   * Deletes a fleet provisioning template version. Requires permission to access the DeleteProvisioningTemplateVersion action.
    */
   deleteProvisioningTemplateVersion(callback?: (err: AWSError, data: Iot.Types.DeleteProvisioningTemplateVersionResponse) => void): Request<Iot.Types.DeleteProvisioningTemplateVersionResponse, AWSError>;
   /**
-   * Deletes a CA certificate registration code.
+   * Deletes a CA certificate registration code. Requires permission to access the DeleteRegistrationCode action.
    */
   deleteRegistrationCode(params: Iot.Types.DeleteRegistrationCodeRequest, callback?: (err: AWSError, data: Iot.Types.DeleteRegistrationCodeResponse) => void): Request<Iot.Types.DeleteRegistrationCodeResponse, AWSError>;
   /**
-   * Deletes a CA certificate registration code.
+   * Deletes a CA certificate registration code. Requires permission to access the DeleteRegistrationCode action.
    */
   deleteRegistrationCode(callback?: (err: AWSError, data: Iot.Types.DeleteRegistrationCodeResponse) => void): Request<Iot.Types.DeleteRegistrationCodeResponse, AWSError>;
   /**
-   * Deletes a role alias
+   * Deletes a role alias Requires permission to access the DeleteRoleAlias action.
    */
   deleteRoleAlias(params: Iot.Types.DeleteRoleAliasRequest, callback?: (err: AWSError, data: Iot.Types.DeleteRoleAliasResponse) => void): Request<Iot.Types.DeleteRoleAliasResponse, AWSError>;
   /**
-   * Deletes a role alias
+   * Deletes a role alias Requires permission to access the DeleteRoleAlias action.
    */
   deleteRoleAlias(callback?: (err: AWSError, data: Iot.Types.DeleteRoleAliasResponse) => void): Request<Iot.Types.DeleteRoleAliasResponse, AWSError>;
   /**
-   * Deletes a scheduled audit.
+   * Deletes a scheduled audit. Requires permission to access the DeleteScheduledAudit action.
    */
   deleteScheduledAudit(params: Iot.Types.DeleteScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.DeleteScheduledAuditResponse) => void): Request<Iot.Types.DeleteScheduledAuditResponse, AWSError>;
   /**
-   * Deletes a scheduled audit.
+   * Deletes a scheduled audit. Requires permission to access the DeleteScheduledAudit action.
    */
   deleteScheduledAudit(callback?: (err: AWSError, data: Iot.Types.DeleteScheduledAuditResponse) => void): Request<Iot.Types.DeleteScheduledAuditResponse, AWSError>;
   /**
-   * Deletes a Device Defender security profile.
+   * Deletes a Device Defender security profile. Requires permission to access the DeleteSecurityProfile action.
    */
   deleteSecurityProfile(params: Iot.Types.DeleteSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.DeleteSecurityProfileResponse) => void): Request<Iot.Types.DeleteSecurityProfileResponse, AWSError>;
   /**
-   * Deletes a Device Defender security profile.
+   * Deletes a Device Defender security profile. Requires permission to access the DeleteSecurityProfile action.
    */
   deleteSecurityProfile(callback?: (err: AWSError, data: Iot.Types.DeleteSecurityProfileResponse) => void): Request<Iot.Types.DeleteSecurityProfileResponse, AWSError>;
   /**
-   * Deletes a stream.
+   * Deletes a stream. Requires permission to access the DeleteStream action.
    */
   deleteStream(params: Iot.Types.DeleteStreamRequest, callback?: (err: AWSError, data: Iot.Types.DeleteStreamResponse) => void): Request<Iot.Types.DeleteStreamResponse, AWSError>;
   /**
-   * Deletes a stream.
+   * Deletes a stream. Requires permission to access the DeleteStream action.
    */
   deleteStream(callback?: (err: AWSError, data: Iot.Types.DeleteStreamResponse) => void): Request<Iot.Types.DeleteStreamResponse, AWSError>;
   /**
-   * Deletes the specified thing. Returns successfully with no error if the deletion is successful or you specify a thing that doesn't exist.
+   * Deletes the specified thing. Returns successfully with no error if the deletion is successful or you specify a thing that doesn't exist. Requires permission to access the DeleteThing action.
    */
   deleteThing(params: Iot.Types.DeleteThingRequest, callback?: (err: AWSError, data: Iot.Types.DeleteThingResponse) => void): Request<Iot.Types.DeleteThingResponse, AWSError>;
   /**
-   * Deletes the specified thing. Returns successfully with no error if the deletion is successful or you specify a thing that doesn't exist.
+   * Deletes the specified thing. Returns successfully with no error if the deletion is successful or you specify a thing that doesn't exist. Requires permission to access the DeleteThing action.
    */
   deleteThing(callback?: (err: AWSError, data: Iot.Types.DeleteThingResponse) => void): Request<Iot.Types.DeleteThingResponse, AWSError>;
   /**
-   * Deletes a thing group.
+   * Deletes a thing group. Requires permission to access the DeleteThingGroup action.
    */
   deleteThingGroup(params: Iot.Types.DeleteThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DeleteThingGroupResponse) => void): Request<Iot.Types.DeleteThingGroupResponse, AWSError>;
   /**
-   * Deletes a thing group.
+   * Deletes a thing group. Requires permission to access the DeleteThingGroup action.
    */
   deleteThingGroup(callback?: (err: AWSError, data: Iot.Types.DeleteThingGroupResponse) => void): Request<Iot.Types.DeleteThingGroupResponse, AWSError>;
   /**
-   * Deletes the specified thing type. You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling DeprecateThingType, then remove any associated things by calling UpdateThing to change the thing type on any associated thing, and finally use DeleteThingType to delete the thing type.
+   * Deletes the specified thing type. You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling DeprecateThingType, then remove any associated things by calling UpdateThing to change the thing type on any associated thing, and finally use DeleteThingType to delete the thing type. Requires permission to access the DeleteThingType action.
    */
   deleteThingType(params: Iot.Types.DeleteThingTypeRequest, callback?: (err: AWSError, data: Iot.Types.DeleteThingTypeResponse) => void): Request<Iot.Types.DeleteThingTypeResponse, AWSError>;
   /**
-   * Deletes the specified thing type. You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling DeprecateThingType, then remove any associated things by calling UpdateThing to change the thing type on any associated thing, and finally use DeleteThingType to delete the thing type.
+   * Deletes the specified thing type. You cannot delete a thing type if it has things associated with it. To delete a thing type, first mark it as deprecated by calling DeprecateThingType, then remove any associated things by calling UpdateThing to change the thing type on any associated thing, and finally use DeleteThingType to delete the thing type. Requires permission to access the DeleteThingType action.
    */
   deleteThingType(callback?: (err: AWSError, data: Iot.Types.DeleteThingTypeResponse) => void): Request<Iot.Types.DeleteThingTypeResponse, AWSError>;
   /**
-   * Deletes the rule.
+   * Deletes the rule. Requires permission to access the DeleteTopicRule action.
    */
   deleteTopicRule(params: Iot.Types.DeleteTopicRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the rule.
+   * Deletes the rule. Requires permission to access the DeleteTopicRule action.
    */
   deleteTopicRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a topic rule destination.
+   * Deletes a topic rule destination. Requires permission to access the DeleteTopicRuleDestination action.
    */
   deleteTopicRuleDestination(params: Iot.Types.DeleteTopicRuleDestinationRequest, callback?: (err: AWSError, data: Iot.Types.DeleteTopicRuleDestinationResponse) => void): Request<Iot.Types.DeleteTopicRuleDestinationResponse, AWSError>;
   /**
-   * Deletes a topic rule destination.
+   * Deletes a topic rule destination. Requires permission to access the DeleteTopicRuleDestination action.
    */
   deleteTopicRuleDestination(callback?: (err: AWSError, data: Iot.Types.DeleteTopicRuleDestinationResponse) => void): Request<Iot.Types.DeleteTopicRuleDestinationResponse, AWSError>;
   /**
-   * Deletes a logging level.
+   * Deletes a logging level. Requires permission to access the DeleteV2LoggingLevel action.
    */
   deleteV2LoggingLevel(params: Iot.Types.DeleteV2LoggingLevelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a logging level.
+   * Deletes a logging level. Requires permission to access the DeleteV2LoggingLevel action.
    */
   deleteV2LoggingLevel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deprecates a thing type. You can not associate new things with deprecated thing type.
+   * Deprecates a thing type. You can not associate new things with deprecated thing type. Requires permission to access the DeprecateThingType action.
    */
   deprecateThingType(params: Iot.Types.DeprecateThingTypeRequest, callback?: (err: AWSError, data: Iot.Types.DeprecateThingTypeResponse) => void): Request<Iot.Types.DeprecateThingTypeResponse, AWSError>;
   /**
-   * Deprecates a thing type. You can not associate new things with deprecated thing type.
+   * Deprecates a thing type. You can not associate new things with deprecated thing type. Requires permission to access the DeprecateThingType action.
    */
   deprecateThingType(callback?: (err: AWSError, data: Iot.Types.DeprecateThingTypeResponse) => void): Request<Iot.Types.DeprecateThingTypeResponse, AWSError>;
   /**
-   * Gets information about the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
+   * Gets information about the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled. Requires permission to access the DescribeAccountAuditConfiguration action.
    */
   describeAccountAuditConfiguration(params: Iot.Types.DescribeAccountAuditConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAccountAuditConfigurationResponse) => void): Request<Iot.Types.DescribeAccountAuditConfigurationResponse, AWSError>;
   /**
-   * Gets information about the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
+   * Gets information about the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled. Requires permission to access the DescribeAccountAuditConfiguration action.
    */
   describeAccountAuditConfiguration(callback?: (err: AWSError, data: Iot.Types.DescribeAccountAuditConfigurationResponse) => void): Request<Iot.Types.DescribeAccountAuditConfigurationResponse, AWSError>;
   /**
-   * Gets information about a single audit finding. Properties include the reason for noncompliance, the severity of the issue, and when the audit that returned the finding was started.
+   * Gets information about a single audit finding. Properties include the reason for noncompliance, the severity of the issue, and the start time when the audit that returned the finding. Requires permission to access the DescribeAuditFinding action.
    */
   describeAuditFinding(params: Iot.Types.DescribeAuditFindingRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAuditFindingResponse) => void): Request<Iot.Types.DescribeAuditFindingResponse, AWSError>;
   /**
-   * Gets information about a single audit finding. Properties include the reason for noncompliance, the severity of the issue, and when the audit that returned the finding was started.
+   * Gets information about a single audit finding. Properties include the reason for noncompliance, the severity of the issue, and the start time when the audit that returned the finding. Requires permission to access the DescribeAuditFinding action.
    */
   describeAuditFinding(callback?: (err: AWSError, data: Iot.Types.DescribeAuditFindingResponse) => void): Request<Iot.Types.DescribeAuditFindingResponse, AWSError>;
   /**
@@ -596,667 +652,755 @@ declare class Iot extends Service {
    */
   describeAuditSuppression(callback?: (err: AWSError, data: Iot.Types.DescribeAuditSuppressionResponse) => void): Request<Iot.Types.DescribeAuditSuppressionResponse, AWSError>;
   /**
-   * Gets information about a Device Defender audit.
+   * Gets information about a Device Defender audit. Requires permission to access the DescribeAuditTask action.
    */
   describeAuditTask(params: Iot.Types.DescribeAuditTaskRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAuditTaskResponse) => void): Request<Iot.Types.DescribeAuditTaskResponse, AWSError>;
   /**
-   * Gets information about a Device Defender audit.
+   * Gets information about a Device Defender audit. Requires permission to access the DescribeAuditTask action.
    */
   describeAuditTask(callback?: (err: AWSError, data: Iot.Types.DescribeAuditTaskResponse) => void): Request<Iot.Types.DescribeAuditTaskResponse, AWSError>;
   /**
-   * Describes an authorizer.
+   * Describes an authorizer. Requires permission to access the DescribeAuthorizer action.
    */
   describeAuthorizer(params: Iot.Types.DescribeAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.DescribeAuthorizerResponse) => void): Request<Iot.Types.DescribeAuthorizerResponse, AWSError>;
   /**
-   * Describes an authorizer.
+   * Describes an authorizer. Requires permission to access the DescribeAuthorizer action.
    */
   describeAuthorizer(callback?: (err: AWSError, data: Iot.Types.DescribeAuthorizerResponse) => void): Request<Iot.Types.DescribeAuthorizerResponse, AWSError>;
   /**
-   * Returns information about a billing group.
+   * Returns information about a billing group. Requires permission to access the DescribeBillingGroup action.
    */
   describeBillingGroup(params: Iot.Types.DescribeBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DescribeBillingGroupResponse) => void): Request<Iot.Types.DescribeBillingGroupResponse, AWSError>;
   /**
-   * Returns information about a billing group.
+   * Returns information about a billing group. Requires permission to access the DescribeBillingGroup action.
    */
   describeBillingGroup(callback?: (err: AWSError, data: Iot.Types.DescribeBillingGroupResponse) => void): Request<Iot.Types.DescribeBillingGroupResponse, AWSError>;
   /**
-   * Describes a registered CA certificate.
+   * Describes a registered CA certificate. Requires permission to access the DescribeCACertificate action.
    */
   describeCACertificate(params: Iot.Types.DescribeCACertificateRequest, callback?: (err: AWSError, data: Iot.Types.DescribeCACertificateResponse) => void): Request<Iot.Types.DescribeCACertificateResponse, AWSError>;
   /**
-   * Describes a registered CA certificate.
+   * Describes a registered CA certificate. Requires permission to access the DescribeCACertificate action.
    */
   describeCACertificate(callback?: (err: AWSError, data: Iot.Types.DescribeCACertificateResponse) => void): Request<Iot.Types.DescribeCACertificateResponse, AWSError>;
   /**
-   * Gets information about the specified certificate.
+   * Gets information about the specified certificate. Requires permission to access the DescribeCertificate action.
    */
   describeCertificate(params: Iot.Types.DescribeCertificateRequest, callback?: (err: AWSError, data: Iot.Types.DescribeCertificateResponse) => void): Request<Iot.Types.DescribeCertificateResponse, AWSError>;
   /**
-   * Gets information about the specified certificate.
+   * Gets information about the specified certificate. Requires permission to access the DescribeCertificate action.
    */
   describeCertificate(callback?: (err: AWSError, data: Iot.Types.DescribeCertificateResponse) => void): Request<Iot.Types.DescribeCertificateResponse, AWSError>;
   /**
-   * Describes the default authorizer.
+   *  Gets information about a Device Defender detect custom metric.  Requires permission to access the DescribeCustomMetric action.
+   */
+  describeCustomMetric(params: Iot.Types.DescribeCustomMetricRequest, callback?: (err: AWSError, data: Iot.Types.DescribeCustomMetricResponse) => void): Request<Iot.Types.DescribeCustomMetricResponse, AWSError>;
+  /**
+   *  Gets information about a Device Defender detect custom metric.  Requires permission to access the DescribeCustomMetric action.
+   */
+  describeCustomMetric(callback?: (err: AWSError, data: Iot.Types.DescribeCustomMetricResponse) => void): Request<Iot.Types.DescribeCustomMetricResponse, AWSError>;
+  /**
+   * Describes the default authorizer. Requires permission to access the DescribeDefaultAuthorizer action.
    */
   describeDefaultAuthorizer(params: Iot.Types.DescribeDefaultAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.DescribeDefaultAuthorizerResponse) => void): Request<Iot.Types.DescribeDefaultAuthorizerResponse, AWSError>;
   /**
-   * Describes the default authorizer.
+   * Describes the default authorizer. Requires permission to access the DescribeDefaultAuthorizer action.
    */
   describeDefaultAuthorizer(callback?: (err: AWSError, data: Iot.Types.DescribeDefaultAuthorizerResponse) => void): Request<Iot.Types.DescribeDefaultAuthorizerResponse, AWSError>;
   /**
-   * Provides details about a dimension that is defined in your AWS account.
+   *  Gets information about a Device Defender ML Detect mitigation action.  Requires permission to access the DescribeDetectMitigationActionsTask action.
+   */
+  describeDetectMitigationActionsTask(params: Iot.Types.DescribeDetectMitigationActionsTaskRequest, callback?: (err: AWSError, data: Iot.Types.DescribeDetectMitigationActionsTaskResponse) => void): Request<Iot.Types.DescribeDetectMitigationActionsTaskResponse, AWSError>;
+  /**
+   *  Gets information about a Device Defender ML Detect mitigation action.  Requires permission to access the DescribeDetectMitigationActionsTask action.
+   */
+  describeDetectMitigationActionsTask(callback?: (err: AWSError, data: Iot.Types.DescribeDetectMitigationActionsTaskResponse) => void): Request<Iot.Types.DescribeDetectMitigationActionsTaskResponse, AWSError>;
+  /**
+   * Provides details about a dimension that is defined in your Amazon Web Services accounts. Requires permission to access the DescribeDimension action.
    */
   describeDimension(params: Iot.Types.DescribeDimensionRequest, callback?: (err: AWSError, data: Iot.Types.DescribeDimensionResponse) => void): Request<Iot.Types.DescribeDimensionResponse, AWSError>;
   /**
-   * Provides details about a dimension that is defined in your AWS account.
+   * Provides details about a dimension that is defined in your Amazon Web Services accounts. Requires permission to access the DescribeDimension action.
    */
   describeDimension(callback?: (err: AWSError, data: Iot.Types.DescribeDimensionResponse) => void): Request<Iot.Types.DescribeDimensionResponse, AWSError>;
   /**
-   * Gets summary information about a domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   * Gets summary information about a domain configuration. Requires permission to access the DescribeDomainConfiguration action.
    */
   describeDomainConfiguration(params: Iot.Types.DescribeDomainConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.DescribeDomainConfigurationResponse) => void): Request<Iot.Types.DescribeDomainConfigurationResponse, AWSError>;
   /**
-   * Gets summary information about a domain configuration.  The domain configuration feature is in public preview and is subject to change. 
+   * Gets summary information about a domain configuration. Requires permission to access the DescribeDomainConfiguration action.
    */
   describeDomainConfiguration(callback?: (err: AWSError, data: Iot.Types.DescribeDomainConfigurationResponse) => void): Request<Iot.Types.DescribeDomainConfigurationResponse, AWSError>;
   /**
-   * Returns a unique endpoint specific to the AWS account making the call.
+   * Returns a unique endpoint specific to the Amazon Web Services account making the call. Requires permission to access the DescribeEndpoint action.
    */
   describeEndpoint(params: Iot.Types.DescribeEndpointRequest, callback?: (err: AWSError, data: Iot.Types.DescribeEndpointResponse) => void): Request<Iot.Types.DescribeEndpointResponse, AWSError>;
   /**
-   * Returns a unique endpoint specific to the AWS account making the call.
+   * Returns a unique endpoint specific to the Amazon Web Services account making the call. Requires permission to access the DescribeEndpoint action.
    */
   describeEndpoint(callback?: (err: AWSError, data: Iot.Types.DescribeEndpointResponse) => void): Request<Iot.Types.DescribeEndpointResponse, AWSError>;
   /**
-   * Describes event configurations.
+   * Describes event configurations. Requires permission to access the DescribeEventConfigurations action.
    */
   describeEventConfigurations(params: Iot.Types.DescribeEventConfigurationsRequest, callback?: (err: AWSError, data: Iot.Types.DescribeEventConfigurationsResponse) => void): Request<Iot.Types.DescribeEventConfigurationsResponse, AWSError>;
   /**
-   * Describes event configurations.
+   * Describes event configurations. Requires permission to access the DescribeEventConfigurations action.
    */
   describeEventConfigurations(callback?: (err: AWSError, data: Iot.Types.DescribeEventConfigurationsResponse) => void): Request<Iot.Types.DescribeEventConfigurationsResponse, AWSError>;
   /**
-   * Describes a search index.
+   * Gets information about the specified fleet metric. Requires permission to access the DescribeFleetMetric action.
+   */
+  describeFleetMetric(params: Iot.Types.DescribeFleetMetricRequest, callback?: (err: AWSError, data: Iot.Types.DescribeFleetMetricResponse) => void): Request<Iot.Types.DescribeFleetMetricResponse, AWSError>;
+  /**
+   * Gets information about the specified fleet metric. Requires permission to access the DescribeFleetMetric action.
+   */
+  describeFleetMetric(callback?: (err: AWSError, data: Iot.Types.DescribeFleetMetricResponse) => void): Request<Iot.Types.DescribeFleetMetricResponse, AWSError>;
+  /**
+   * Describes a search index. Requires permission to access the DescribeIndex action.
    */
   describeIndex(params: Iot.Types.DescribeIndexRequest, callback?: (err: AWSError, data: Iot.Types.DescribeIndexResponse) => void): Request<Iot.Types.DescribeIndexResponse, AWSError>;
   /**
-   * Describes a search index.
+   * Describes a search index. Requires permission to access the DescribeIndex action.
    */
   describeIndex(callback?: (err: AWSError, data: Iot.Types.DescribeIndexResponse) => void): Request<Iot.Types.DescribeIndexResponse, AWSError>;
   /**
-   * Describes a job.
+   * Describes a job. Requires permission to access the DescribeJob action.
    */
   describeJob(params: Iot.Types.DescribeJobRequest, callback?: (err: AWSError, data: Iot.Types.DescribeJobResponse) => void): Request<Iot.Types.DescribeJobResponse, AWSError>;
   /**
-   * Describes a job.
+   * Describes a job. Requires permission to access the DescribeJob action.
    */
   describeJob(callback?: (err: AWSError, data: Iot.Types.DescribeJobResponse) => void): Request<Iot.Types.DescribeJobResponse, AWSError>;
   /**
-   * Describes a job execution.
+   * Describes a job execution. Requires permission to access the DescribeJobExecution action.
    */
   describeJobExecution(params: Iot.Types.DescribeJobExecutionRequest, callback?: (err: AWSError, data: Iot.Types.DescribeJobExecutionResponse) => void): Request<Iot.Types.DescribeJobExecutionResponse, AWSError>;
   /**
-   * Describes a job execution.
+   * Describes a job execution. Requires permission to access the DescribeJobExecution action.
    */
   describeJobExecution(callback?: (err: AWSError, data: Iot.Types.DescribeJobExecutionResponse) => void): Request<Iot.Types.DescribeJobExecutionResponse, AWSError>;
   /**
-   * Gets information about a mitigation action.
+   * Returns information about a job template.
+   */
+  describeJobTemplate(params: Iot.Types.DescribeJobTemplateRequest, callback?: (err: AWSError, data: Iot.Types.DescribeJobTemplateResponse) => void): Request<Iot.Types.DescribeJobTemplateResponse, AWSError>;
+  /**
+   * Returns information about a job template.
+   */
+  describeJobTemplate(callback?: (err: AWSError, data: Iot.Types.DescribeJobTemplateResponse) => void): Request<Iot.Types.DescribeJobTemplateResponse, AWSError>;
+  /**
+   * Gets information about a mitigation action. Requires permission to access the DescribeMitigationAction action.
    */
   describeMitigationAction(params: Iot.Types.DescribeMitigationActionRequest, callback?: (err: AWSError, data: Iot.Types.DescribeMitigationActionResponse) => void): Request<Iot.Types.DescribeMitigationActionResponse, AWSError>;
   /**
-   * Gets information about a mitigation action.
+   * Gets information about a mitigation action. Requires permission to access the DescribeMitigationAction action.
    */
   describeMitigationAction(callback?: (err: AWSError, data: Iot.Types.DescribeMitigationActionResponse) => void): Request<Iot.Types.DescribeMitigationActionResponse, AWSError>;
   /**
-   * Returns information about a fleet provisioning template.
+   * Returns information about a fleet provisioning template. Requires permission to access the DescribeProvisioningTemplate action.
    */
   describeProvisioningTemplate(params: Iot.Types.DescribeProvisioningTemplateRequest, callback?: (err: AWSError, data: Iot.Types.DescribeProvisioningTemplateResponse) => void): Request<Iot.Types.DescribeProvisioningTemplateResponse, AWSError>;
   /**
-   * Returns information about a fleet provisioning template.
+   * Returns information about a fleet provisioning template. Requires permission to access the DescribeProvisioningTemplate action.
    */
   describeProvisioningTemplate(callback?: (err: AWSError, data: Iot.Types.DescribeProvisioningTemplateResponse) => void): Request<Iot.Types.DescribeProvisioningTemplateResponse, AWSError>;
   /**
-   * Returns information about a fleet provisioning template version.
+   * Returns information about a fleet provisioning template version. Requires permission to access the DescribeProvisioningTemplateVersion action.
    */
   describeProvisioningTemplateVersion(params: Iot.Types.DescribeProvisioningTemplateVersionRequest, callback?: (err: AWSError, data: Iot.Types.DescribeProvisioningTemplateVersionResponse) => void): Request<Iot.Types.DescribeProvisioningTemplateVersionResponse, AWSError>;
   /**
-   * Returns information about a fleet provisioning template version.
+   * Returns information about a fleet provisioning template version. Requires permission to access the DescribeProvisioningTemplateVersion action.
    */
   describeProvisioningTemplateVersion(callback?: (err: AWSError, data: Iot.Types.DescribeProvisioningTemplateVersionResponse) => void): Request<Iot.Types.DescribeProvisioningTemplateVersionResponse, AWSError>;
   /**
-   * Describes a role alias.
+   * Describes a role alias. Requires permission to access the DescribeRoleAlias action.
    */
   describeRoleAlias(params: Iot.Types.DescribeRoleAliasRequest, callback?: (err: AWSError, data: Iot.Types.DescribeRoleAliasResponse) => void): Request<Iot.Types.DescribeRoleAliasResponse, AWSError>;
   /**
-   * Describes a role alias.
+   * Describes a role alias. Requires permission to access the DescribeRoleAlias action.
    */
   describeRoleAlias(callback?: (err: AWSError, data: Iot.Types.DescribeRoleAliasResponse) => void): Request<Iot.Types.DescribeRoleAliasResponse, AWSError>;
   /**
-   * Gets information about a scheduled audit.
+   * Gets information about a scheduled audit. Requires permission to access the DescribeScheduledAudit action.
    */
   describeScheduledAudit(params: Iot.Types.DescribeScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.DescribeScheduledAuditResponse) => void): Request<Iot.Types.DescribeScheduledAuditResponse, AWSError>;
   /**
-   * Gets information about a scheduled audit.
+   * Gets information about a scheduled audit. Requires permission to access the DescribeScheduledAudit action.
    */
   describeScheduledAudit(callback?: (err: AWSError, data: Iot.Types.DescribeScheduledAuditResponse) => void): Request<Iot.Types.DescribeScheduledAuditResponse, AWSError>;
   /**
-   * Gets information about a Device Defender security profile.
+   * Gets information about a Device Defender security profile. Requires permission to access the DescribeSecurityProfile action.
    */
   describeSecurityProfile(params: Iot.Types.DescribeSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.DescribeSecurityProfileResponse) => void): Request<Iot.Types.DescribeSecurityProfileResponse, AWSError>;
   /**
-   * Gets information about a Device Defender security profile.
+   * Gets information about a Device Defender security profile. Requires permission to access the DescribeSecurityProfile action.
    */
   describeSecurityProfile(callback?: (err: AWSError, data: Iot.Types.DescribeSecurityProfileResponse) => void): Request<Iot.Types.DescribeSecurityProfileResponse, AWSError>;
   /**
-   * Gets information about a stream.
+   * Gets information about a stream. Requires permission to access the DescribeStream action.
    */
   describeStream(params: Iot.Types.DescribeStreamRequest, callback?: (err: AWSError, data: Iot.Types.DescribeStreamResponse) => void): Request<Iot.Types.DescribeStreamResponse, AWSError>;
   /**
-   * Gets information about a stream.
+   * Gets information about a stream. Requires permission to access the DescribeStream action.
    */
   describeStream(callback?: (err: AWSError, data: Iot.Types.DescribeStreamResponse) => void): Request<Iot.Types.DescribeStreamResponse, AWSError>;
   /**
-   * Gets information about the specified thing.
+   * Gets information about the specified thing. Requires permission to access the DescribeThing action.
    */
   describeThing(params: Iot.Types.DescribeThingRequest, callback?: (err: AWSError, data: Iot.Types.DescribeThingResponse) => void): Request<Iot.Types.DescribeThingResponse, AWSError>;
   /**
-   * Gets information about the specified thing.
+   * Gets information about the specified thing. Requires permission to access the DescribeThing action.
    */
   describeThing(callback?: (err: AWSError, data: Iot.Types.DescribeThingResponse) => void): Request<Iot.Types.DescribeThingResponse, AWSError>;
   /**
-   * Describe a thing group.
+   * Describe a thing group. Requires permission to access the DescribeThingGroup action.
    */
   describeThingGroup(params: Iot.Types.DescribeThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.DescribeThingGroupResponse) => void): Request<Iot.Types.DescribeThingGroupResponse, AWSError>;
   /**
-   * Describe a thing group.
+   * Describe a thing group. Requires permission to access the DescribeThingGroup action.
    */
   describeThingGroup(callback?: (err: AWSError, data: Iot.Types.DescribeThingGroupResponse) => void): Request<Iot.Types.DescribeThingGroupResponse, AWSError>;
   /**
-   * Describes a bulk thing provisioning task.
+   * Describes a bulk thing provisioning task. Requires permission to access the DescribeThingRegistrationTask action.
    */
   describeThingRegistrationTask(params: Iot.Types.DescribeThingRegistrationTaskRequest, callback?: (err: AWSError, data: Iot.Types.DescribeThingRegistrationTaskResponse) => void): Request<Iot.Types.DescribeThingRegistrationTaskResponse, AWSError>;
   /**
-   * Describes a bulk thing provisioning task.
+   * Describes a bulk thing provisioning task. Requires permission to access the DescribeThingRegistrationTask action.
    */
   describeThingRegistrationTask(callback?: (err: AWSError, data: Iot.Types.DescribeThingRegistrationTaskResponse) => void): Request<Iot.Types.DescribeThingRegistrationTaskResponse, AWSError>;
   /**
-   * Gets information about the specified thing type.
+   * Gets information about the specified thing type. Requires permission to access the DescribeThingType action.
    */
   describeThingType(params: Iot.Types.DescribeThingTypeRequest, callback?: (err: AWSError, data: Iot.Types.DescribeThingTypeResponse) => void): Request<Iot.Types.DescribeThingTypeResponse, AWSError>;
   /**
-   * Gets information about the specified thing type.
+   * Gets information about the specified thing type. Requires permission to access the DescribeThingType action.
    */
   describeThingType(callback?: (err: AWSError, data: Iot.Types.DescribeThingTypeResponse) => void): Request<Iot.Types.DescribeThingTypeResponse, AWSError>;
   /**
-   * Detaches a policy from the specified target.
+   * Detaches a policy from the specified target.  Because of the distributed nature of Amazon Web Services, it can take up to five minutes after a policy is detached before it's ready to be deleted.  Requires permission to access the DetachPolicy action.
    */
   detachPolicy(params: Iot.Types.DetachPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Detaches a policy from the specified target.
+   * Detaches a policy from the specified target.  Because of the distributed nature of Amazon Web Services, it can take up to five minutes after a policy is detached before it's ready to be deleted.  Requires permission to access the DetachPolicy action.
    */
   detachPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the specified policy from the specified certificate.  Note: This API is deprecated. Please use DetachPolicy instead.
+   * Removes the specified policy from the specified certificate.  This action is deprecated. Please use DetachPolicy instead.  Requires permission to access the DetachPrincipalPolicy action.
    */
   detachPrincipalPolicy(params: Iot.Types.DetachPrincipalPolicyRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the specified policy from the specified certificate.  Note: This API is deprecated. Please use DetachPolicy instead.
+   * Removes the specified policy from the specified certificate.  This action is deprecated. Please use DetachPolicy instead.  Requires permission to access the DetachPrincipalPolicy action.
    */
   detachPrincipalPolicy(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Disassociates a Device Defender security profile from a thing group or from this account.
+   * Disassociates a Device Defender security profile from a thing group or from this account. Requires permission to access the DetachSecurityProfile action.
    */
   detachSecurityProfile(params: Iot.Types.DetachSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.DetachSecurityProfileResponse) => void): Request<Iot.Types.DetachSecurityProfileResponse, AWSError>;
   /**
-   * Disassociates a Device Defender security profile from a thing group or from this account.
+   * Disassociates a Device Defender security profile from a thing group or from this account. Requires permission to access the DetachSecurityProfile action.
    */
   detachSecurityProfile(callback?: (err: AWSError, data: Iot.Types.DetachSecurityProfileResponse) => void): Request<Iot.Types.DetachSecurityProfileResponse, AWSError>;
   /**
-   * Detaches the specified principal from the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
+   * Detaches the specified principal from the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.  This call is asynchronous. It might take several seconds for the detachment to propagate.  Requires permission to access the DetachThingPrincipal action.
    */
   detachThingPrincipal(params: Iot.Types.DetachThingPrincipalRequest, callback?: (err: AWSError, data: Iot.Types.DetachThingPrincipalResponse) => void): Request<Iot.Types.DetachThingPrincipalResponse, AWSError>;
   /**
-   * Detaches the specified principal from the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.  This call is asynchronous. It might take several seconds for the detachment to propagate. 
+   * Detaches the specified principal from the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.  This call is asynchronous. It might take several seconds for the detachment to propagate.  Requires permission to access the DetachThingPrincipal action.
    */
   detachThingPrincipal(callback?: (err: AWSError, data: Iot.Types.DetachThingPrincipalResponse) => void): Request<Iot.Types.DetachThingPrincipalResponse, AWSError>;
   /**
-   * Disables the rule.
+   * Disables the rule. Requires permission to access the DisableTopicRule action.
    */
   disableTopicRule(params: Iot.Types.DisableTopicRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Disables the rule.
+   * Disables the rule. Requires permission to access the DisableTopicRule action.
    */
   disableTopicRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Enables the rule.
+   * Enables the rule. Requires permission to access the EnableTopicRule action.
    */
   enableTopicRule(params: Iot.Types.EnableTopicRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Enables the rule.
+   * Enables the rule. Requires permission to access the EnableTopicRule action.
    */
   enableTopicRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Returns the approximate count of unique values that match the query.
+   *  Returns a Device Defender's ML Detect Security Profile training model's status.  Requires permission to access the GetBehaviorModelTrainingSummaries action.
+   */
+  getBehaviorModelTrainingSummaries(params: Iot.Types.GetBehaviorModelTrainingSummariesRequest, callback?: (err: AWSError, data: Iot.Types.GetBehaviorModelTrainingSummariesResponse) => void): Request<Iot.Types.GetBehaviorModelTrainingSummariesResponse, AWSError>;
+  /**
+   *  Returns a Device Defender's ML Detect Security Profile training model's status.  Requires permission to access the GetBehaviorModelTrainingSummaries action.
+   */
+  getBehaviorModelTrainingSummaries(callback?: (err: AWSError, data: Iot.Types.GetBehaviorModelTrainingSummariesResponse) => void): Request<Iot.Types.GetBehaviorModelTrainingSummariesResponse, AWSError>;
+  /**
+   * Aggregates on indexed data with search queries pertaining to particular fields.  Requires permission to access the GetBucketsAggregation action.
+   */
+  getBucketsAggregation(params: Iot.Types.GetBucketsAggregationRequest, callback?: (err: AWSError, data: Iot.Types.GetBucketsAggregationResponse) => void): Request<Iot.Types.GetBucketsAggregationResponse, AWSError>;
+  /**
+   * Aggregates on indexed data with search queries pertaining to particular fields.  Requires permission to access the GetBucketsAggregation action.
+   */
+  getBucketsAggregation(callback?: (err: AWSError, data: Iot.Types.GetBucketsAggregationResponse) => void): Request<Iot.Types.GetBucketsAggregationResponse, AWSError>;
+  /**
+   * Returns the approximate count of unique values that match the query. Requires permission to access the GetCardinality action.
    */
   getCardinality(params: Iot.Types.GetCardinalityRequest, callback?: (err: AWSError, data: Iot.Types.GetCardinalityResponse) => void): Request<Iot.Types.GetCardinalityResponse, AWSError>;
   /**
-   * Returns the approximate count of unique values that match the query.
+   * Returns the approximate count of unique values that match the query. Requires permission to access the GetCardinality action.
    */
   getCardinality(callback?: (err: AWSError, data: Iot.Types.GetCardinalityResponse) => void): Request<Iot.Types.GetCardinalityResponse, AWSError>;
   /**
-   * Gets a list of the policies that have an effect on the authorization behavior of the specified device when it connects to the AWS IoT device gateway.
+   * Gets a list of the policies that have an effect on the authorization behavior of the specified device when it connects to the IoT device gateway. Requires permission to access the GetEffectivePolicies action.
    */
   getEffectivePolicies(params: Iot.Types.GetEffectivePoliciesRequest, callback?: (err: AWSError, data: Iot.Types.GetEffectivePoliciesResponse) => void): Request<Iot.Types.GetEffectivePoliciesResponse, AWSError>;
   /**
-   * Gets a list of the policies that have an effect on the authorization behavior of the specified device when it connects to the AWS IoT device gateway.
+   * Gets a list of the policies that have an effect on the authorization behavior of the specified device when it connects to the IoT device gateway. Requires permission to access the GetEffectivePolicies action.
    */
   getEffectivePolicies(callback?: (err: AWSError, data: Iot.Types.GetEffectivePoliciesResponse) => void): Request<Iot.Types.GetEffectivePoliciesResponse, AWSError>;
   /**
-   * Gets the indexing configuration.
+   * Gets the indexing configuration. Requires permission to access the GetIndexingConfiguration action.
    */
   getIndexingConfiguration(params: Iot.Types.GetIndexingConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.GetIndexingConfigurationResponse) => void): Request<Iot.Types.GetIndexingConfigurationResponse, AWSError>;
   /**
-   * Gets the indexing configuration.
+   * Gets the indexing configuration. Requires permission to access the GetIndexingConfiguration action.
    */
   getIndexingConfiguration(callback?: (err: AWSError, data: Iot.Types.GetIndexingConfigurationResponse) => void): Request<Iot.Types.GetIndexingConfigurationResponse, AWSError>;
   /**
-   * Gets a job document.
+   * Gets a job document. Requires permission to access the GetJobDocument action.
    */
   getJobDocument(params: Iot.Types.GetJobDocumentRequest, callback?: (err: AWSError, data: Iot.Types.GetJobDocumentResponse) => void): Request<Iot.Types.GetJobDocumentResponse, AWSError>;
   /**
-   * Gets a job document.
+   * Gets a job document. Requires permission to access the GetJobDocument action.
    */
   getJobDocument(callback?: (err: AWSError, data: Iot.Types.GetJobDocumentResponse) => void): Request<Iot.Types.GetJobDocumentResponse, AWSError>;
   /**
-   * Gets the logging options. NOTE: use of this command is not recommended. Use GetV2LoggingOptions instead.
+   * Gets the logging options. NOTE: use of this command is not recommended. Use GetV2LoggingOptions instead. Requires permission to access the GetLoggingOptions action.
    */
   getLoggingOptions(params: Iot.Types.GetLoggingOptionsRequest, callback?: (err: AWSError, data: Iot.Types.GetLoggingOptionsResponse) => void): Request<Iot.Types.GetLoggingOptionsResponse, AWSError>;
   /**
-   * Gets the logging options. NOTE: use of this command is not recommended. Use GetV2LoggingOptions instead.
+   * Gets the logging options. NOTE: use of this command is not recommended. Use GetV2LoggingOptions instead. Requires permission to access the GetLoggingOptions action.
    */
   getLoggingOptions(callback?: (err: AWSError, data: Iot.Types.GetLoggingOptionsResponse) => void): Request<Iot.Types.GetLoggingOptionsResponse, AWSError>;
   /**
-   * Gets an OTA update.
+   * Gets an OTA update. Requires permission to access the GetOTAUpdate action.
    */
   getOTAUpdate(params: Iot.Types.GetOTAUpdateRequest, callback?: (err: AWSError, data: Iot.Types.GetOTAUpdateResponse) => void): Request<Iot.Types.GetOTAUpdateResponse, AWSError>;
   /**
-   * Gets an OTA update.
+   * Gets an OTA update. Requires permission to access the GetOTAUpdate action.
    */
   getOTAUpdate(callback?: (err: AWSError, data: Iot.Types.GetOTAUpdateResponse) => void): Request<Iot.Types.GetOTAUpdateResponse, AWSError>;
   /**
-   * Groups the aggregated values that match the query into percentile groupings. The default percentile groupings are: 1,5,25,50,75,95,99, although you can specify your own when you call GetPercentiles. This function returns a value for each percentile group specified (or the default percentile groupings). The percentile group "1" contains the aggregated field value that occurs in approximately one percent of the values that match the query. The percentile group "5" contains the aggregated field value that occurs in approximately five percent of the values that match the query, and so on. The result is an approximation, the more values that match the query, the more accurate the percentile values.
+   * Groups the aggregated values that match the query into percentile groupings. The default percentile groupings are: 1,5,25,50,75,95,99, although you can specify your own when you call GetPercentiles. This function returns a value for each percentile group specified (or the default percentile groupings). The percentile group "1" contains the aggregated field value that occurs in approximately one percent of the values that match the query. The percentile group "5" contains the aggregated field value that occurs in approximately five percent of the values that match the query, and so on. The result is an approximation, the more values that match the query, the more accurate the percentile values. Requires permission to access the GetPercentiles action.
    */
   getPercentiles(params: Iot.Types.GetPercentilesRequest, callback?: (err: AWSError, data: Iot.Types.GetPercentilesResponse) => void): Request<Iot.Types.GetPercentilesResponse, AWSError>;
   /**
-   * Groups the aggregated values that match the query into percentile groupings. The default percentile groupings are: 1,5,25,50,75,95,99, although you can specify your own when you call GetPercentiles. This function returns a value for each percentile group specified (or the default percentile groupings). The percentile group "1" contains the aggregated field value that occurs in approximately one percent of the values that match the query. The percentile group "5" contains the aggregated field value that occurs in approximately five percent of the values that match the query, and so on. The result is an approximation, the more values that match the query, the more accurate the percentile values.
+   * Groups the aggregated values that match the query into percentile groupings. The default percentile groupings are: 1,5,25,50,75,95,99, although you can specify your own when you call GetPercentiles. This function returns a value for each percentile group specified (or the default percentile groupings). The percentile group "1" contains the aggregated field value that occurs in approximately one percent of the values that match the query. The percentile group "5" contains the aggregated field value that occurs in approximately five percent of the values that match the query, and so on. The result is an approximation, the more values that match the query, the more accurate the percentile values. Requires permission to access the GetPercentiles action.
    */
   getPercentiles(callback?: (err: AWSError, data: Iot.Types.GetPercentilesResponse) => void): Request<Iot.Types.GetPercentilesResponse, AWSError>;
   /**
-   * Gets information about the specified policy with the policy document of the default version.
+   * Gets information about the specified policy with the policy document of the default version. Requires permission to access the GetPolicy action.
    */
   getPolicy(params: Iot.Types.GetPolicyRequest, callback?: (err: AWSError, data: Iot.Types.GetPolicyResponse) => void): Request<Iot.Types.GetPolicyResponse, AWSError>;
   /**
-   * Gets information about the specified policy with the policy document of the default version.
+   * Gets information about the specified policy with the policy document of the default version. Requires permission to access the GetPolicy action.
    */
   getPolicy(callback?: (err: AWSError, data: Iot.Types.GetPolicyResponse) => void): Request<Iot.Types.GetPolicyResponse, AWSError>;
   /**
-   * Gets information about the specified policy version.
+   * Gets information about the specified policy version. Requires permission to access the GetPolicyVersion action.
    */
   getPolicyVersion(params: Iot.Types.GetPolicyVersionRequest, callback?: (err: AWSError, data: Iot.Types.GetPolicyVersionResponse) => void): Request<Iot.Types.GetPolicyVersionResponse, AWSError>;
   /**
-   * Gets information about the specified policy version.
+   * Gets information about the specified policy version. Requires permission to access the GetPolicyVersion action.
    */
   getPolicyVersion(callback?: (err: AWSError, data: Iot.Types.GetPolicyVersionResponse) => void): Request<Iot.Types.GetPolicyVersionResponse, AWSError>;
   /**
-   * Gets a registration code used to register a CA certificate with AWS IoT.
+   * Gets a registration code used to register a CA certificate with IoT. Requires permission to access the GetRegistrationCode action.
    */
   getRegistrationCode(params: Iot.Types.GetRegistrationCodeRequest, callback?: (err: AWSError, data: Iot.Types.GetRegistrationCodeResponse) => void): Request<Iot.Types.GetRegistrationCodeResponse, AWSError>;
   /**
-   * Gets a registration code used to register a CA certificate with AWS IoT.
+   * Gets a registration code used to register a CA certificate with IoT. Requires permission to access the GetRegistrationCode action.
    */
   getRegistrationCode(callback?: (err: AWSError, data: Iot.Types.GetRegistrationCodeResponse) => void): Request<Iot.Types.GetRegistrationCodeResponse, AWSError>;
   /**
-   * Returns the count, average, sum, minimum, maximum, sum of squares, variance, and standard deviation for the specified aggregated field. If the aggregation field is of type String, only the count statistic is returned.
+   * Returns the count, average, sum, minimum, maximum, sum of squares, variance, and standard deviation for the specified aggregated field. If the aggregation field is of type String, only the count statistic is returned. Requires permission to access the GetStatistics action.
    */
   getStatistics(params: Iot.Types.GetStatisticsRequest, callback?: (err: AWSError, data: Iot.Types.GetStatisticsResponse) => void): Request<Iot.Types.GetStatisticsResponse, AWSError>;
   /**
-   * Returns the count, average, sum, minimum, maximum, sum of squares, variance, and standard deviation for the specified aggregated field. If the aggregation field is of type String, only the count statistic is returned.
+   * Returns the count, average, sum, minimum, maximum, sum of squares, variance, and standard deviation for the specified aggregated field. If the aggregation field is of type String, only the count statistic is returned. Requires permission to access the GetStatistics action.
    */
   getStatistics(callback?: (err: AWSError, data: Iot.Types.GetStatisticsResponse) => void): Request<Iot.Types.GetStatisticsResponse, AWSError>;
   /**
-   * Gets information about the rule.
+   * Gets information about the rule. Requires permission to access the GetTopicRule action.
    */
   getTopicRule(params: Iot.Types.GetTopicRuleRequest, callback?: (err: AWSError, data: Iot.Types.GetTopicRuleResponse) => void): Request<Iot.Types.GetTopicRuleResponse, AWSError>;
   /**
-   * Gets information about the rule.
+   * Gets information about the rule. Requires permission to access the GetTopicRule action.
    */
   getTopicRule(callback?: (err: AWSError, data: Iot.Types.GetTopicRuleResponse) => void): Request<Iot.Types.GetTopicRuleResponse, AWSError>;
   /**
-   * Gets information about a topic rule destination.
+   * Gets information about a topic rule destination. Requires permission to access the GetTopicRuleDestination action.
    */
   getTopicRuleDestination(params: Iot.Types.GetTopicRuleDestinationRequest, callback?: (err: AWSError, data: Iot.Types.GetTopicRuleDestinationResponse) => void): Request<Iot.Types.GetTopicRuleDestinationResponse, AWSError>;
   /**
-   * Gets information about a topic rule destination.
+   * Gets information about a topic rule destination. Requires permission to access the GetTopicRuleDestination action.
    */
   getTopicRuleDestination(callback?: (err: AWSError, data: Iot.Types.GetTopicRuleDestinationResponse) => void): Request<Iot.Types.GetTopicRuleDestinationResponse, AWSError>;
   /**
-   * Gets the fine grained logging options.
+   * Gets the fine grained logging options. Requires permission to access the GetV2LoggingOptions action.
    */
   getV2LoggingOptions(params: Iot.Types.GetV2LoggingOptionsRequest, callback?: (err: AWSError, data: Iot.Types.GetV2LoggingOptionsResponse) => void): Request<Iot.Types.GetV2LoggingOptionsResponse, AWSError>;
   /**
-   * Gets the fine grained logging options.
+   * Gets the fine grained logging options. Requires permission to access the GetV2LoggingOptions action.
    */
   getV2LoggingOptions(callback?: (err: AWSError, data: Iot.Types.GetV2LoggingOptionsResponse) => void): Request<Iot.Types.GetV2LoggingOptionsResponse, AWSError>;
   /**
-   * Lists the active violations for a given Device Defender security profile.
+   * Lists the active violations for a given Device Defender security profile. Requires permission to access the ListActiveViolations action.
    */
   listActiveViolations(params: Iot.Types.ListActiveViolationsRequest, callback?: (err: AWSError, data: Iot.Types.ListActiveViolationsResponse) => void): Request<Iot.Types.ListActiveViolationsResponse, AWSError>;
   /**
-   * Lists the active violations for a given Device Defender security profile.
+   * Lists the active violations for a given Device Defender security profile. Requires permission to access the ListActiveViolations action.
    */
   listActiveViolations(callback?: (err: AWSError, data: Iot.Types.ListActiveViolationsResponse) => void): Request<Iot.Types.ListActiveViolationsResponse, AWSError>;
   /**
-   * Lists the policies attached to the specified thing group.
+   * Lists the policies attached to the specified thing group. Requires permission to access the ListAttachedPolicies action.
    */
   listAttachedPolicies(params: Iot.Types.ListAttachedPoliciesRequest, callback?: (err: AWSError, data: Iot.Types.ListAttachedPoliciesResponse) => void): Request<Iot.Types.ListAttachedPoliciesResponse, AWSError>;
   /**
-   * Lists the policies attached to the specified thing group.
+   * Lists the policies attached to the specified thing group. Requires permission to access the ListAttachedPolicies action.
    */
   listAttachedPolicies(callback?: (err: AWSError, data: Iot.Types.ListAttachedPoliciesResponse) => void): Request<Iot.Types.ListAttachedPoliciesResponse, AWSError>;
   /**
-   * Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 180 days.)
+   * Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 90 days.) Requires permission to access the ListAuditFindings action.
    */
   listAuditFindings(params: Iot.Types.ListAuditFindingsRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditFindingsResponse) => void): Request<Iot.Types.ListAuditFindingsResponse, AWSError>;
   /**
-   * Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 180 days.)
+   * Lists the findings (results) of a Device Defender audit or of the audits performed during a specified time period. (Findings are retained for 90 days.) Requires permission to access the ListAuditFindings action.
    */
   listAuditFindings(callback?: (err: AWSError, data: Iot.Types.ListAuditFindingsResponse) => void): Request<Iot.Types.ListAuditFindingsResponse, AWSError>;
   /**
-   * Gets the status of audit mitigation action tasks that were executed.
+   * Gets the status of audit mitigation action tasks that were executed. Requires permission to access the ListAuditMitigationActionsExecutions action.
    */
   listAuditMitigationActionsExecutions(params: Iot.Types.ListAuditMitigationActionsExecutionsRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditMitigationActionsExecutionsResponse) => void): Request<Iot.Types.ListAuditMitigationActionsExecutionsResponse, AWSError>;
   /**
-   * Gets the status of audit mitigation action tasks that were executed.
+   * Gets the status of audit mitigation action tasks that were executed. Requires permission to access the ListAuditMitigationActionsExecutions action.
    */
   listAuditMitigationActionsExecutions(callback?: (err: AWSError, data: Iot.Types.ListAuditMitigationActionsExecutionsResponse) => void): Request<Iot.Types.ListAuditMitigationActionsExecutionsResponse, AWSError>;
   /**
-   * Gets a list of audit mitigation action tasks that match the specified filters.
+   * Gets a list of audit mitigation action tasks that match the specified filters. Requires permission to access the ListAuditMitigationActionsTasks action.
    */
   listAuditMitigationActionsTasks(params: Iot.Types.ListAuditMitigationActionsTasksRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditMitigationActionsTasksResponse) => void): Request<Iot.Types.ListAuditMitigationActionsTasksResponse, AWSError>;
   /**
-   * Gets a list of audit mitigation action tasks that match the specified filters.
+   * Gets a list of audit mitigation action tasks that match the specified filters. Requires permission to access the ListAuditMitigationActionsTasks action.
    */
   listAuditMitigationActionsTasks(callback?: (err: AWSError, data: Iot.Types.ListAuditMitigationActionsTasksResponse) => void): Request<Iot.Types.ListAuditMitigationActionsTasksResponse, AWSError>;
   /**
-   *  Lists your Device Defender audit listings. 
+   *  Lists your Device Defender audit listings.  Requires permission to access the ListAuditSuppressions action.
    */
   listAuditSuppressions(params: Iot.Types.ListAuditSuppressionsRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditSuppressionsResponse) => void): Request<Iot.Types.ListAuditSuppressionsResponse, AWSError>;
   /**
-   *  Lists your Device Defender audit listings. 
+   *  Lists your Device Defender audit listings.  Requires permission to access the ListAuditSuppressions action.
    */
   listAuditSuppressions(callback?: (err: AWSError, data: Iot.Types.ListAuditSuppressionsResponse) => void): Request<Iot.Types.ListAuditSuppressionsResponse, AWSError>;
   /**
-   * Lists the Device Defender audits that have been performed during a given time period.
+   * Lists the Device Defender audits that have been performed during a given time period. Requires permission to access the ListAuditTasks action.
    */
   listAuditTasks(params: Iot.Types.ListAuditTasksRequest, callback?: (err: AWSError, data: Iot.Types.ListAuditTasksResponse) => void): Request<Iot.Types.ListAuditTasksResponse, AWSError>;
   /**
-   * Lists the Device Defender audits that have been performed during a given time period.
+   * Lists the Device Defender audits that have been performed during a given time period. Requires permission to access the ListAuditTasks action.
    */
   listAuditTasks(callback?: (err: AWSError, data: Iot.Types.ListAuditTasksResponse) => void): Request<Iot.Types.ListAuditTasksResponse, AWSError>;
   /**
-   * Lists the authorizers registered in your account.
+   * Lists the authorizers registered in your account. Requires permission to access the ListAuthorizers action.
    */
   listAuthorizers(params: Iot.Types.ListAuthorizersRequest, callback?: (err: AWSError, data: Iot.Types.ListAuthorizersResponse) => void): Request<Iot.Types.ListAuthorizersResponse, AWSError>;
   /**
-   * Lists the authorizers registered in your account.
+   * Lists the authorizers registered in your account. Requires permission to access the ListAuthorizers action.
    */
   listAuthorizers(callback?: (err: AWSError, data: Iot.Types.ListAuthorizersResponse) => void): Request<Iot.Types.ListAuthorizersResponse, AWSError>;
   /**
-   * Lists the billing groups you have created.
+   * Lists the billing groups you have created. Requires permission to access the ListBillingGroups action.
    */
   listBillingGroups(params: Iot.Types.ListBillingGroupsRequest, callback?: (err: AWSError, data: Iot.Types.ListBillingGroupsResponse) => void): Request<Iot.Types.ListBillingGroupsResponse, AWSError>;
   /**
-   * Lists the billing groups you have created.
+   * Lists the billing groups you have created. Requires permission to access the ListBillingGroups action.
    */
   listBillingGroups(callback?: (err: AWSError, data: Iot.Types.ListBillingGroupsResponse) => void): Request<Iot.Types.ListBillingGroupsResponse, AWSError>;
   /**
-   * Lists the CA certificates registered for your AWS account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.
+   * Lists the CA certificates registered for your Amazon Web Services account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results. Requires permission to access the ListCACertificates action.
    */
   listCACertificates(params: Iot.Types.ListCACertificatesRequest, callback?: (err: AWSError, data: Iot.Types.ListCACertificatesResponse) => void): Request<Iot.Types.ListCACertificatesResponse, AWSError>;
   /**
-   * Lists the CA certificates registered for your AWS account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.
+   * Lists the CA certificates registered for your Amazon Web Services account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results. Requires permission to access the ListCACertificates action.
    */
   listCACertificates(callback?: (err: AWSError, data: Iot.Types.ListCACertificatesResponse) => void): Request<Iot.Types.ListCACertificatesResponse, AWSError>;
   /**
-   * Lists the certificates registered in your AWS account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.
+   * Lists the certificates registered in your Amazon Web Services account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results. Requires permission to access the ListCertificates action.
    */
   listCertificates(params: Iot.Types.ListCertificatesRequest, callback?: (err: AWSError, data: Iot.Types.ListCertificatesResponse) => void): Request<Iot.Types.ListCertificatesResponse, AWSError>;
   /**
-   * Lists the certificates registered in your AWS account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results.
+   * Lists the certificates registered in your Amazon Web Services account. The results are paginated with a default page size of 25. You can use the returned marker to retrieve additional results. Requires permission to access the ListCertificates action.
    */
   listCertificates(callback?: (err: AWSError, data: Iot.Types.ListCertificatesResponse) => void): Request<Iot.Types.ListCertificatesResponse, AWSError>;
   /**
-   * List the device certificates signed by the specified CA certificate.
+   * List the device certificates signed by the specified CA certificate. Requires permission to access the ListCertificatesByCA action.
    */
   listCertificatesByCA(params: Iot.Types.ListCertificatesByCARequest, callback?: (err: AWSError, data: Iot.Types.ListCertificatesByCAResponse) => void): Request<Iot.Types.ListCertificatesByCAResponse, AWSError>;
   /**
-   * List the device certificates signed by the specified CA certificate.
+   * List the device certificates signed by the specified CA certificate. Requires permission to access the ListCertificatesByCA action.
    */
   listCertificatesByCA(callback?: (err: AWSError, data: Iot.Types.ListCertificatesByCAResponse) => void): Request<Iot.Types.ListCertificatesByCAResponse, AWSError>;
   /**
-   * List the set of dimensions that are defined for your AWS account.
+   *  Lists your Device Defender detect custom metrics.  Requires permission to access the ListCustomMetrics action.
+   */
+  listCustomMetrics(params: Iot.Types.ListCustomMetricsRequest, callback?: (err: AWSError, data: Iot.Types.ListCustomMetricsResponse) => void): Request<Iot.Types.ListCustomMetricsResponse, AWSError>;
+  /**
+   *  Lists your Device Defender detect custom metrics.  Requires permission to access the ListCustomMetrics action.
+   */
+  listCustomMetrics(callback?: (err: AWSError, data: Iot.Types.ListCustomMetricsResponse) => void): Request<Iot.Types.ListCustomMetricsResponse, AWSError>;
+  /**
+   *  Lists mitigation actions executions for a Device Defender ML Detect Security Profile.  Requires permission to access the ListDetectMitigationActionsExecutions action.
+   */
+  listDetectMitigationActionsExecutions(params: Iot.Types.ListDetectMitigationActionsExecutionsRequest, callback?: (err: AWSError, data: Iot.Types.ListDetectMitigationActionsExecutionsResponse) => void): Request<Iot.Types.ListDetectMitigationActionsExecutionsResponse, AWSError>;
+  /**
+   *  Lists mitigation actions executions for a Device Defender ML Detect Security Profile.  Requires permission to access the ListDetectMitigationActionsExecutions action.
+   */
+  listDetectMitigationActionsExecutions(callback?: (err: AWSError, data: Iot.Types.ListDetectMitigationActionsExecutionsResponse) => void): Request<Iot.Types.ListDetectMitigationActionsExecutionsResponse, AWSError>;
+  /**
+   *  List of Device Defender ML Detect mitigation actions tasks.  Requires permission to access the ListDetectMitigationActionsTasks action.
+   */
+  listDetectMitigationActionsTasks(params: Iot.Types.ListDetectMitigationActionsTasksRequest, callback?: (err: AWSError, data: Iot.Types.ListDetectMitigationActionsTasksResponse) => void): Request<Iot.Types.ListDetectMitigationActionsTasksResponse, AWSError>;
+  /**
+   *  List of Device Defender ML Detect mitigation actions tasks.  Requires permission to access the ListDetectMitigationActionsTasks action.
+   */
+  listDetectMitigationActionsTasks(callback?: (err: AWSError, data: Iot.Types.ListDetectMitigationActionsTasksResponse) => void): Request<Iot.Types.ListDetectMitigationActionsTasksResponse, AWSError>;
+  /**
+   * List the set of dimensions that are defined for your Amazon Web Services accounts. Requires permission to access the ListDimensions action.
    */
   listDimensions(params: Iot.Types.ListDimensionsRequest, callback?: (err: AWSError, data: Iot.Types.ListDimensionsResponse) => void): Request<Iot.Types.ListDimensionsResponse, AWSError>;
   /**
-   * List the set of dimensions that are defined for your AWS account.
+   * List the set of dimensions that are defined for your Amazon Web Services accounts. Requires permission to access the ListDimensions action.
    */
   listDimensions(callback?: (err: AWSError, data: Iot.Types.ListDimensionsResponse) => void): Request<Iot.Types.ListDimensionsResponse, AWSError>;
   /**
-   * Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.  The domain configuration feature is in public preview and is subject to change. 
+   * Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name. Requires permission to access the ListDomainConfigurations action.
    */
   listDomainConfigurations(params: Iot.Types.ListDomainConfigurationsRequest, callback?: (err: AWSError, data: Iot.Types.ListDomainConfigurationsResponse) => void): Request<Iot.Types.ListDomainConfigurationsResponse, AWSError>;
   /**
-   * Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name.  The domain configuration feature is in public preview and is subject to change. 
+   * Gets a list of domain configurations for the user. This list is sorted alphabetically by domain configuration name. Requires permission to access the ListDomainConfigurations action.
    */
   listDomainConfigurations(callback?: (err: AWSError, data: Iot.Types.ListDomainConfigurationsResponse) => void): Request<Iot.Types.ListDomainConfigurationsResponse, AWSError>;
   /**
-   * Lists the search indices.
+   * Lists all your fleet metrics.  Requires permission to access the ListFleetMetrics action.
+   */
+  listFleetMetrics(params: Iot.Types.ListFleetMetricsRequest, callback?: (err: AWSError, data: Iot.Types.ListFleetMetricsResponse) => void): Request<Iot.Types.ListFleetMetricsResponse, AWSError>;
+  /**
+   * Lists all your fleet metrics.  Requires permission to access the ListFleetMetrics action.
+   */
+  listFleetMetrics(callback?: (err: AWSError, data: Iot.Types.ListFleetMetricsResponse) => void): Request<Iot.Types.ListFleetMetricsResponse, AWSError>;
+  /**
+   * Lists the search indices. Requires permission to access the ListIndices action.
    */
   listIndices(params: Iot.Types.ListIndicesRequest, callback?: (err: AWSError, data: Iot.Types.ListIndicesResponse) => void): Request<Iot.Types.ListIndicesResponse, AWSError>;
   /**
-   * Lists the search indices.
+   * Lists the search indices. Requires permission to access the ListIndices action.
    */
   listIndices(callback?: (err: AWSError, data: Iot.Types.ListIndicesResponse) => void): Request<Iot.Types.ListIndicesResponse, AWSError>;
   /**
-   * Lists the job executions for a job.
+   * Lists the job executions for a job. Requires permission to access the ListJobExecutionsForJob action.
    */
   listJobExecutionsForJob(params: Iot.Types.ListJobExecutionsForJobRequest, callback?: (err: AWSError, data: Iot.Types.ListJobExecutionsForJobResponse) => void): Request<Iot.Types.ListJobExecutionsForJobResponse, AWSError>;
   /**
-   * Lists the job executions for a job.
+   * Lists the job executions for a job. Requires permission to access the ListJobExecutionsForJob action.
    */
   listJobExecutionsForJob(callback?: (err: AWSError, data: Iot.Types.ListJobExecutionsForJobResponse) => void): Request<Iot.Types.ListJobExecutionsForJobResponse, AWSError>;
   /**
-   * Lists the job executions for the specified thing.
+   * Lists the job executions for the specified thing. Requires permission to access the ListJobExecutionsForThing action.
    */
   listJobExecutionsForThing(params: Iot.Types.ListJobExecutionsForThingRequest, callback?: (err: AWSError, data: Iot.Types.ListJobExecutionsForThingResponse) => void): Request<Iot.Types.ListJobExecutionsForThingResponse, AWSError>;
   /**
-   * Lists the job executions for the specified thing.
+   * Lists the job executions for the specified thing. Requires permission to access the ListJobExecutionsForThing action.
    */
   listJobExecutionsForThing(callback?: (err: AWSError, data: Iot.Types.ListJobExecutionsForThingResponse) => void): Request<Iot.Types.ListJobExecutionsForThingResponse, AWSError>;
   /**
-   * Lists jobs.
+   * Returns a list of job templates. Requires permission to access the ListJobTemplates action.
+   */
+  listJobTemplates(params: Iot.Types.ListJobTemplatesRequest, callback?: (err: AWSError, data: Iot.Types.ListJobTemplatesResponse) => void): Request<Iot.Types.ListJobTemplatesResponse, AWSError>;
+  /**
+   * Returns a list of job templates. Requires permission to access the ListJobTemplates action.
+   */
+  listJobTemplates(callback?: (err: AWSError, data: Iot.Types.ListJobTemplatesResponse) => void): Request<Iot.Types.ListJobTemplatesResponse, AWSError>;
+  /**
+   * Lists jobs. Requires permission to access the ListJobs action.
    */
   listJobs(params: Iot.Types.ListJobsRequest, callback?: (err: AWSError, data: Iot.Types.ListJobsResponse) => void): Request<Iot.Types.ListJobsResponse, AWSError>;
   /**
-   * Lists jobs.
+   * Lists jobs. Requires permission to access the ListJobs action.
    */
   listJobs(callback?: (err: AWSError, data: Iot.Types.ListJobsResponse) => void): Request<Iot.Types.ListJobsResponse, AWSError>;
   /**
-   * Gets a list of all mitigation actions that match the specified filter criteria.
+   * Gets a list of all mitigation actions that match the specified filter criteria. Requires permission to access the ListMitigationActions action.
    */
   listMitigationActions(params: Iot.Types.ListMitigationActionsRequest, callback?: (err: AWSError, data: Iot.Types.ListMitigationActionsResponse) => void): Request<Iot.Types.ListMitigationActionsResponse, AWSError>;
   /**
-   * Gets a list of all mitigation actions that match the specified filter criteria.
+   * Gets a list of all mitigation actions that match the specified filter criteria. Requires permission to access the ListMitigationActions action.
    */
   listMitigationActions(callback?: (err: AWSError, data: Iot.Types.ListMitigationActionsResponse) => void): Request<Iot.Types.ListMitigationActionsResponse, AWSError>;
   /**
-   * Lists OTA updates.
+   * Lists OTA updates. Requires permission to access the ListOTAUpdates action.
    */
   listOTAUpdates(params: Iot.Types.ListOTAUpdatesRequest, callback?: (err: AWSError, data: Iot.Types.ListOTAUpdatesResponse) => void): Request<Iot.Types.ListOTAUpdatesResponse, AWSError>;
   /**
-   * Lists OTA updates.
+   * Lists OTA updates. Requires permission to access the ListOTAUpdates action.
    */
   listOTAUpdates(callback?: (err: AWSError, data: Iot.Types.ListOTAUpdatesResponse) => void): Request<Iot.Types.ListOTAUpdatesResponse, AWSError>;
   /**
-   * Lists certificates that are being transferred but not yet accepted.
+   * Lists certificates that are being transferred but not yet accepted. Requires permission to access the ListOutgoingCertificates action.
    */
   listOutgoingCertificates(params: Iot.Types.ListOutgoingCertificatesRequest, callback?: (err: AWSError, data: Iot.Types.ListOutgoingCertificatesResponse) => void): Request<Iot.Types.ListOutgoingCertificatesResponse, AWSError>;
   /**
-   * Lists certificates that are being transferred but not yet accepted.
+   * Lists certificates that are being transferred but not yet accepted. Requires permission to access the ListOutgoingCertificates action.
    */
   listOutgoingCertificates(callback?: (err: AWSError, data: Iot.Types.ListOutgoingCertificatesResponse) => void): Request<Iot.Types.ListOutgoingCertificatesResponse, AWSError>;
   /**
-   * Lists your policies.
+   * Lists your policies. Requires permission to access the ListPolicies action.
    */
   listPolicies(params: Iot.Types.ListPoliciesRequest, callback?: (err: AWSError, data: Iot.Types.ListPoliciesResponse) => void): Request<Iot.Types.ListPoliciesResponse, AWSError>;
   /**
-   * Lists your policies.
+   * Lists your policies. Requires permission to access the ListPolicies action.
    */
   listPolicies(callback?: (err: AWSError, data: Iot.Types.ListPoliciesResponse) => void): Request<Iot.Types.ListPoliciesResponse, AWSError>;
   /**
-   * Lists the principals associated with the specified policy.  Note: This API is deprecated. Please use ListTargetsForPolicy instead.
+   * Lists the principals associated with the specified policy.  Note: This action is deprecated. Please use ListTargetsForPolicy instead. Requires permission to access the ListPolicyPrincipals action.
    */
   listPolicyPrincipals(params: Iot.Types.ListPolicyPrincipalsRequest, callback?: (err: AWSError, data: Iot.Types.ListPolicyPrincipalsResponse) => void): Request<Iot.Types.ListPolicyPrincipalsResponse, AWSError>;
   /**
-   * Lists the principals associated with the specified policy.  Note: This API is deprecated. Please use ListTargetsForPolicy instead.
+   * Lists the principals associated with the specified policy.  Note: This action is deprecated. Please use ListTargetsForPolicy instead. Requires permission to access the ListPolicyPrincipals action.
    */
   listPolicyPrincipals(callback?: (err: AWSError, data: Iot.Types.ListPolicyPrincipalsResponse) => void): Request<Iot.Types.ListPolicyPrincipalsResponse, AWSError>;
   /**
-   * Lists the versions of the specified policy and identifies the default version.
+   * Lists the versions of the specified policy and identifies the default version. Requires permission to access the ListPolicyVersions action.
    */
   listPolicyVersions(params: Iot.Types.ListPolicyVersionsRequest, callback?: (err: AWSError, data: Iot.Types.ListPolicyVersionsResponse) => void): Request<Iot.Types.ListPolicyVersionsResponse, AWSError>;
   /**
-   * Lists the versions of the specified policy and identifies the default version.
+   * Lists the versions of the specified policy and identifies the default version. Requires permission to access the ListPolicyVersions action.
    */
   listPolicyVersions(callback?: (err: AWSError, data: Iot.Types.ListPolicyVersionsResponse) => void): Request<Iot.Types.ListPolicyVersionsResponse, AWSError>;
   /**
-   * Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in AmazonCognito Identity format.  Note: This API is deprecated. Please use ListAttachedPolicies instead.
+   * Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in AmazonCognito Identity format.  Note: This action is deprecated. Please use ListAttachedPolicies instead. Requires permission to access the ListPrincipalPolicies action.
    */
   listPrincipalPolicies(params: Iot.Types.ListPrincipalPoliciesRequest, callback?: (err: AWSError, data: Iot.Types.ListPrincipalPoliciesResponse) => void): Request<Iot.Types.ListPrincipalPoliciesResponse, AWSError>;
   /**
-   * Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in AmazonCognito Identity format.  Note: This API is deprecated. Please use ListAttachedPolicies instead.
+   * Lists the policies attached to the specified principal. If you use an Cognito identity, the ID must be in AmazonCognito Identity format.  Note: This action is deprecated. Please use ListAttachedPolicies instead. Requires permission to access the ListPrincipalPolicies action.
    */
   listPrincipalPolicies(callback?: (err: AWSError, data: Iot.Types.ListPrincipalPoliciesResponse) => void): Request<Iot.Types.ListPrincipalPoliciesResponse, AWSError>;
   /**
-   * Lists the things associated with the specified principal. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. 
+   * Lists the things associated with the specified principal. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.  Requires permission to access the ListPrincipalThings action.
    */
   listPrincipalThings(params: Iot.Types.ListPrincipalThingsRequest, callback?: (err: AWSError, data: Iot.Types.ListPrincipalThingsResponse) => void): Request<Iot.Types.ListPrincipalThingsResponse, AWSError>;
   /**
-   * Lists the things associated with the specified principal. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. 
+   * Lists the things associated with the specified principal. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.  Requires permission to access the ListPrincipalThings action.
    */
   listPrincipalThings(callback?: (err: AWSError, data: Iot.Types.ListPrincipalThingsResponse) => void): Request<Iot.Types.ListPrincipalThingsResponse, AWSError>;
   /**
-   * A list of fleet provisioning template versions.
+   * A list of fleet provisioning template versions. Requires permission to access the ListProvisioningTemplateVersions action.
    */
   listProvisioningTemplateVersions(params: Iot.Types.ListProvisioningTemplateVersionsRequest, callback?: (err: AWSError, data: Iot.Types.ListProvisioningTemplateVersionsResponse) => void): Request<Iot.Types.ListProvisioningTemplateVersionsResponse, AWSError>;
   /**
-   * A list of fleet provisioning template versions.
+   * A list of fleet provisioning template versions. Requires permission to access the ListProvisioningTemplateVersions action.
    */
   listProvisioningTemplateVersions(callback?: (err: AWSError, data: Iot.Types.ListProvisioningTemplateVersionsResponse) => void): Request<Iot.Types.ListProvisioningTemplateVersionsResponse, AWSError>;
   /**
-   * Lists the fleet provisioning templates in your AWS account.
+   * Lists the fleet provisioning templates in your Amazon Web Services account. Requires permission to access the ListProvisioningTemplates action.
    */
   listProvisioningTemplates(params: Iot.Types.ListProvisioningTemplatesRequest, callback?: (err: AWSError, data: Iot.Types.ListProvisioningTemplatesResponse) => void): Request<Iot.Types.ListProvisioningTemplatesResponse, AWSError>;
   /**
-   * Lists the fleet provisioning templates in your AWS account.
+   * Lists the fleet provisioning templates in your Amazon Web Services account. Requires permission to access the ListProvisioningTemplates action.
    */
   listProvisioningTemplates(callback?: (err: AWSError, data: Iot.Types.ListProvisioningTemplatesResponse) => void): Request<Iot.Types.ListProvisioningTemplatesResponse, AWSError>;
   /**
-   * Lists the role aliases registered in your account.
+   * Lists the role aliases registered in your account. Requires permission to access the ListRoleAliases action.
    */
   listRoleAliases(params: Iot.Types.ListRoleAliasesRequest, callback?: (err: AWSError, data: Iot.Types.ListRoleAliasesResponse) => void): Request<Iot.Types.ListRoleAliasesResponse, AWSError>;
   /**
-   * Lists the role aliases registered in your account.
+   * Lists the role aliases registered in your account. Requires permission to access the ListRoleAliases action.
    */
   listRoleAliases(callback?: (err: AWSError, data: Iot.Types.ListRoleAliasesResponse) => void): Request<Iot.Types.ListRoleAliasesResponse, AWSError>;
   /**
-   * Lists all of your scheduled audits.
+   * Lists all of your scheduled audits. Requires permission to access the ListScheduledAudits action.
    */
   listScheduledAudits(params: Iot.Types.ListScheduledAuditsRequest, callback?: (err: AWSError, data: Iot.Types.ListScheduledAuditsResponse) => void): Request<Iot.Types.ListScheduledAuditsResponse, AWSError>;
   /**
-   * Lists all of your scheduled audits.
+   * Lists all of your scheduled audits. Requires permission to access the ListScheduledAudits action.
    */
   listScheduledAudits(callback?: (err: AWSError, data: Iot.Types.ListScheduledAuditsResponse) => void): Request<Iot.Types.ListScheduledAuditsResponse, AWSError>;
   /**
-   * Lists the Device Defender security profiles you have created. You can use filters to list only those security profiles associated with a thing group or only those associated with your account.
+   * Lists the Device Defender security profiles you've created. You can filter security profiles by dimension or custom metric. Requires permission to access the ListSecurityProfiles action.   dimensionName and metricName cannot be used in the same request. 
    */
   listSecurityProfiles(params: Iot.Types.ListSecurityProfilesRequest, callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesResponse) => void): Request<Iot.Types.ListSecurityProfilesResponse, AWSError>;
   /**
-   * Lists the Device Defender security profiles you have created. You can use filters to list only those security profiles associated with a thing group or only those associated with your account.
+   * Lists the Device Defender security profiles you've created. You can filter security profiles by dimension or custom metric. Requires permission to access the ListSecurityProfiles action.   dimensionName and metricName cannot be used in the same request. 
    */
   listSecurityProfiles(callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesResponse) => void): Request<Iot.Types.ListSecurityProfilesResponse, AWSError>;
   /**
-   * Lists the Device Defender security profiles attached to a target (thing group).
+   * Lists the Device Defender security profiles attached to a target (thing group). Requires permission to access the ListSecurityProfilesForTarget action.
    */
   listSecurityProfilesForTarget(params: Iot.Types.ListSecurityProfilesForTargetRequest, callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesForTargetResponse) => void): Request<Iot.Types.ListSecurityProfilesForTargetResponse, AWSError>;
   /**
-   * Lists the Device Defender security profiles attached to a target (thing group).
+   * Lists the Device Defender security profiles attached to a target (thing group). Requires permission to access the ListSecurityProfilesForTarget action.
    */
   listSecurityProfilesForTarget(callback?: (err: AWSError, data: Iot.Types.ListSecurityProfilesForTargetResponse) => void): Request<Iot.Types.ListSecurityProfilesForTargetResponse, AWSError>;
   /**
-   * Lists all of the streams in your AWS account.
+   * Lists all of the streams in your Amazon Web Services account. Requires permission to access the ListStreams action.
    */
   listStreams(params: Iot.Types.ListStreamsRequest, callback?: (err: AWSError, data: Iot.Types.ListStreamsResponse) => void): Request<Iot.Types.ListStreamsResponse, AWSError>;
   /**
-   * Lists all of the streams in your AWS account.
+   * Lists all of the streams in your Amazon Web Services account. Requires permission to access the ListStreams action.
    */
   listStreams(callback?: (err: AWSError, data: Iot.Types.ListStreamsResponse) => void): Request<Iot.Types.ListStreamsResponse, AWSError>;
   /**
-   * Lists the tags (metadata) you have assigned to the resource.
+   * Lists the tags (metadata) you have assigned to the resource. Requires permission to access the ListTagsForResource action.
    */
   listTagsForResource(params: Iot.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Iot.Types.ListTagsForResourceResponse) => void): Request<Iot.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists the tags (metadata) you have assigned to the resource.
+   * Lists the tags (metadata) you have assigned to the resource. Requires permission to access the ListTagsForResource action.
    */
   listTagsForResource(callback?: (err: AWSError, data: Iot.Types.ListTagsForResourceResponse) => void): Request<Iot.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * List targets for the specified policy.
+   * List targets for the specified policy. Requires permission to access the ListTargetsForPolicy action.
    */
   listTargetsForPolicy(params: Iot.Types.ListTargetsForPolicyRequest, callback?: (err: AWSError, data: Iot.Types.ListTargetsForPolicyResponse) => void): Request<Iot.Types.ListTargetsForPolicyResponse, AWSError>;
   /**
-   * List targets for the specified policy.
+   * List targets for the specified policy. Requires permission to access the ListTargetsForPolicy action.
    */
   listTargetsForPolicy(callback?: (err: AWSError, data: Iot.Types.ListTargetsForPolicyResponse) => void): Request<Iot.Types.ListTargetsForPolicyResponse, AWSError>;
   /**
-   * Lists the targets (thing groups) associated with a given Device Defender security profile.
+   * Lists the targets (thing groups) associated with a given Device Defender security profile. Requires permission to access the ListTargetsForSecurityProfile action.
    */
   listTargetsForSecurityProfile(params: Iot.Types.ListTargetsForSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.ListTargetsForSecurityProfileResponse) => void): Request<Iot.Types.ListTargetsForSecurityProfileResponse, AWSError>;
   /**
-   * Lists the targets (thing groups) associated with a given Device Defender security profile.
+   * Lists the targets (thing groups) associated with a given Device Defender security profile. Requires permission to access the ListTargetsForSecurityProfile action.
    */
   listTargetsForSecurityProfile(callback?: (err: AWSError, data: Iot.Types.ListTargetsForSecurityProfileResponse) => void): Request<Iot.Types.ListTargetsForSecurityProfileResponse, AWSError>;
   /**
-   * List the thing groups in your account.
+   * List the thing groups in your account. Requires permission to access the ListThingGroups action.
    */
   listThingGroups(params: Iot.Types.ListThingGroupsRequest, callback?: (err: AWSError, data: Iot.Types.ListThingGroupsResponse) => void): Request<Iot.Types.ListThingGroupsResponse, AWSError>;
   /**
-   * List the thing groups in your account.
+   * List the thing groups in your account. Requires permission to access the ListThingGroups action.
    */
   listThingGroups(callback?: (err: AWSError, data: Iot.Types.ListThingGroupsResponse) => void): Request<Iot.Types.ListThingGroupsResponse, AWSError>;
   /**
-   * List the thing groups to which the specified thing belongs.
+   * List the thing groups to which the specified thing belongs. Requires permission to access the ListThingGroupsForThing action.
    */
   listThingGroupsForThing(params: Iot.Types.ListThingGroupsForThingRequest, callback?: (err: AWSError, data: Iot.Types.ListThingGroupsForThingResponse) => void): Request<Iot.Types.ListThingGroupsForThingResponse, AWSError>;
   /**
-   * List the thing groups to which the specified thing belongs.
+   * List the thing groups to which the specified thing belongs. Requires permission to access the ListThingGroupsForThing action.
    */
   listThingGroupsForThing(callback?: (err: AWSError, data: Iot.Types.ListThingGroupsForThingResponse) => void): Request<Iot.Types.ListThingGroupsForThingResponse, AWSError>;
   /**
-   * Lists the principals associated with the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.
+   * Lists the principals associated with the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. Requires permission to access the ListThingPrincipals action.
    */
   listThingPrincipals(params: Iot.Types.ListThingPrincipalsRequest, callback?: (err: AWSError, data: Iot.Types.ListThingPrincipalsResponse) => void): Request<Iot.Types.ListThingPrincipalsResponse, AWSError>;
   /**
-   * Lists the principals associated with the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities.
+   * Lists the principals associated with the specified thing. A principal can be X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or federated identities. Requires permission to access the ListThingPrincipals action.
    */
   listThingPrincipals(callback?: (err: AWSError, data: Iot.Types.ListThingPrincipalsResponse) => void): Request<Iot.Types.ListThingPrincipalsResponse, AWSError>;
   /**
@@ -1268,91 +1412,91 @@ declare class Iot extends Service {
    */
   listThingRegistrationTaskReports(callback?: (err: AWSError, data: Iot.Types.ListThingRegistrationTaskReportsResponse) => void): Request<Iot.Types.ListThingRegistrationTaskReportsResponse, AWSError>;
   /**
-   * List bulk thing provisioning tasks.
+   * List bulk thing provisioning tasks. Requires permission to access the ListThingRegistrationTasks action.
    */
   listThingRegistrationTasks(params: Iot.Types.ListThingRegistrationTasksRequest, callback?: (err: AWSError, data: Iot.Types.ListThingRegistrationTasksResponse) => void): Request<Iot.Types.ListThingRegistrationTasksResponse, AWSError>;
   /**
-   * List bulk thing provisioning tasks.
+   * List bulk thing provisioning tasks. Requires permission to access the ListThingRegistrationTasks action.
    */
   listThingRegistrationTasks(callback?: (err: AWSError, data: Iot.Types.ListThingRegistrationTasksResponse) => void): Request<Iot.Types.ListThingRegistrationTasksResponse, AWSError>;
   /**
-   * Lists the existing thing types.
+   * Lists the existing thing types. Requires permission to access the ListThingTypes action.
    */
   listThingTypes(params: Iot.Types.ListThingTypesRequest, callback?: (err: AWSError, data: Iot.Types.ListThingTypesResponse) => void): Request<Iot.Types.ListThingTypesResponse, AWSError>;
   /**
-   * Lists the existing thing types.
+   * Lists the existing thing types. Requires permission to access the ListThingTypes action.
    */
   listThingTypes(callback?: (err: AWSError, data: Iot.Types.ListThingTypesResponse) => void): Request<Iot.Types.ListThingTypesResponse, AWSError>;
   /**
-   * Lists your things. Use the attributeName and attributeValue parameters to filter your things. For example, calling ListThings with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute Color with the value Red.   You will not be charged for calling this API if an Access denied error is returned. You will also not be charged if no attributes or pagination token was provided in request and no pagination token and no results were returned. 
+   * Lists your things. Use the attributeName and attributeValue parameters to filter your things. For example, calling ListThings with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute Color with the value Red.  Requires permission to access the ListThings action.  You will not be charged for calling this API if an Access denied error is returned. You will also not be charged if no attributes or pagination token was provided in request and no pagination token and no results were returned. 
    */
   listThings(params: Iot.Types.ListThingsRequest, callback?: (err: AWSError, data: Iot.Types.ListThingsResponse) => void): Request<Iot.Types.ListThingsResponse, AWSError>;
   /**
-   * Lists your things. Use the attributeName and attributeValue parameters to filter your things. For example, calling ListThings with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute Color with the value Red.   You will not be charged for calling this API if an Access denied error is returned. You will also not be charged if no attributes or pagination token was provided in request and no pagination token and no results were returned. 
+   * Lists your things. Use the attributeName and attributeValue parameters to filter your things. For example, calling ListThings with attributeName=Color and attributeValue=Red retrieves all things in the registry that contain an attribute Color with the value Red.  Requires permission to access the ListThings action.  You will not be charged for calling this API if an Access denied error is returned. You will also not be charged if no attributes or pagination token was provided in request and no pagination token and no results were returned. 
    */
   listThings(callback?: (err: AWSError, data: Iot.Types.ListThingsResponse) => void): Request<Iot.Types.ListThingsResponse, AWSError>;
   /**
-   * Lists the things you have added to the given billing group.
+   * Lists the things you have added to the given billing group. Requires permission to access the ListThingsInBillingGroup action.
    */
   listThingsInBillingGroup(params: Iot.Types.ListThingsInBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.ListThingsInBillingGroupResponse) => void): Request<Iot.Types.ListThingsInBillingGroupResponse, AWSError>;
   /**
-   * Lists the things you have added to the given billing group.
+   * Lists the things you have added to the given billing group. Requires permission to access the ListThingsInBillingGroup action.
    */
   listThingsInBillingGroup(callback?: (err: AWSError, data: Iot.Types.ListThingsInBillingGroupResponse) => void): Request<Iot.Types.ListThingsInBillingGroupResponse, AWSError>;
   /**
-   * Lists the things in the specified group.
+   * Lists the things in the specified group. Requires permission to access the ListThingsInThingGroup action.
    */
   listThingsInThingGroup(params: Iot.Types.ListThingsInThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.ListThingsInThingGroupResponse) => void): Request<Iot.Types.ListThingsInThingGroupResponse, AWSError>;
   /**
-   * Lists the things in the specified group.
+   * Lists the things in the specified group. Requires permission to access the ListThingsInThingGroup action.
    */
   listThingsInThingGroup(callback?: (err: AWSError, data: Iot.Types.ListThingsInThingGroupResponse) => void): Request<Iot.Types.ListThingsInThingGroupResponse, AWSError>;
   /**
-   * Lists all the topic rule destinations in your AWS account.
+   * Lists all the topic rule destinations in your Amazon Web Services account. Requires permission to access the ListTopicRuleDestinations action.
    */
   listTopicRuleDestinations(params: Iot.Types.ListTopicRuleDestinationsRequest, callback?: (err: AWSError, data: Iot.Types.ListTopicRuleDestinationsResponse) => void): Request<Iot.Types.ListTopicRuleDestinationsResponse, AWSError>;
   /**
-   * Lists all the topic rule destinations in your AWS account.
+   * Lists all the topic rule destinations in your Amazon Web Services account. Requires permission to access the ListTopicRuleDestinations action.
    */
   listTopicRuleDestinations(callback?: (err: AWSError, data: Iot.Types.ListTopicRuleDestinationsResponse) => void): Request<Iot.Types.ListTopicRuleDestinationsResponse, AWSError>;
   /**
-   * Lists the rules for the specific topic.
+   * Lists the rules for the specific topic. Requires permission to access the ListTopicRules action.
    */
   listTopicRules(params: Iot.Types.ListTopicRulesRequest, callback?: (err: AWSError, data: Iot.Types.ListTopicRulesResponse) => void): Request<Iot.Types.ListTopicRulesResponse, AWSError>;
   /**
-   * Lists the rules for the specific topic.
+   * Lists the rules for the specific topic. Requires permission to access the ListTopicRules action.
    */
   listTopicRules(callback?: (err: AWSError, data: Iot.Types.ListTopicRulesResponse) => void): Request<Iot.Types.ListTopicRulesResponse, AWSError>;
   /**
-   * Lists logging levels.
+   * Lists logging levels. Requires permission to access the ListV2LoggingLevels action.
    */
   listV2LoggingLevels(params: Iot.Types.ListV2LoggingLevelsRequest, callback?: (err: AWSError, data: Iot.Types.ListV2LoggingLevelsResponse) => void): Request<Iot.Types.ListV2LoggingLevelsResponse, AWSError>;
   /**
-   * Lists logging levels.
+   * Lists logging levels. Requires permission to access the ListV2LoggingLevels action.
    */
   listV2LoggingLevels(callback?: (err: AWSError, data: Iot.Types.ListV2LoggingLevelsResponse) => void): Request<Iot.Types.ListV2LoggingLevelsResponse, AWSError>;
   /**
-   * Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior, or thing (device).
+   * Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior, or thing (device). Requires permission to access the ListViolationEvents action.
    */
   listViolationEvents(params: Iot.Types.ListViolationEventsRequest, callback?: (err: AWSError, data: Iot.Types.ListViolationEventsResponse) => void): Request<Iot.Types.ListViolationEventsResponse, AWSError>;
   /**
-   * Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior, or thing (device).
+   * Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior, or thing (device). Requires permission to access the ListViolationEvents action.
    */
   listViolationEvents(callback?: (err: AWSError, data: Iot.Types.ListViolationEventsResponse) => void): Request<Iot.Types.ListViolationEventsResponse, AWSError>;
   /**
-   * Registers a CA certificate with AWS IoT. This CA certificate can then be used to sign device certificates, which can be then registered with AWS IoT. You can register up to 10 CA certificates per AWS account that have the same subject field. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the RegisterCertificate API.
+   * Registers a CA certificate with IoT. This CA certificate can then be used to sign device certificates, which can be then registered with IoT. You can register up to 10 CA certificates per Amazon Web Services account that have the same subject field. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the RegisterCertificate action. Requires permission to access the RegisterCACertificate action.
    */
   registerCACertificate(params: Iot.Types.RegisterCACertificateRequest, callback?: (err: AWSError, data: Iot.Types.RegisterCACertificateResponse) => void): Request<Iot.Types.RegisterCACertificateResponse, AWSError>;
   /**
-   * Registers a CA certificate with AWS IoT. This CA certificate can then be used to sign device certificates, which can be then registered with AWS IoT. You can register up to 10 CA certificates per AWS account that have the same subject field. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the RegisterCertificate API.
+   * Registers a CA certificate with IoT. This CA certificate can then be used to sign device certificates, which can be then registered with IoT. You can register up to 10 CA certificates per Amazon Web Services account that have the same subject field. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the RegisterCertificate action. Requires permission to access the RegisterCACertificate action.
    */
   registerCACertificate(callback?: (err: AWSError, data: Iot.Types.RegisterCACertificateResponse) => void): Request<Iot.Types.RegisterCACertificateResponse, AWSError>;
   /**
-   * Registers a device certificate with AWS IoT. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered.
+   * Registers a device certificate with IoT. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered. Requires permission to access the RegisterCertificate action.
    */
   registerCertificate(params: Iot.Types.RegisterCertificateRequest, callback?: (err: AWSError, data: Iot.Types.RegisterCertificateResponse) => void): Request<Iot.Types.RegisterCertificateResponse, AWSError>;
   /**
-   * Registers a device certificate with AWS IoT. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered.
+   * Registers a device certificate with IoT. If you have more than one CA certificate that has the same subject field, you must specify the CA certificate that was used to sign the device certificate being registered. Requires permission to access the RegisterCertificate action.
    */
   registerCertificate(callback?: (err: AWSError, data: Iot.Types.RegisterCertificateResponse) => void): Request<Iot.Types.RegisterCertificateResponse, AWSError>;
   /**
@@ -1364,171 +1508,179 @@ declare class Iot extends Service {
    */
   registerCertificateWithoutCA(callback?: (err: AWSError, data: Iot.Types.RegisterCertificateWithoutCAResponse) => void): Request<Iot.Types.RegisterCertificateWithoutCAResponse, AWSError>;
   /**
-   * Provisions a thing in the device registry. RegisterThing calls other AWS IoT control plane APIs. These calls might exceed your account level  AWS IoT Throttling Limits and cause throttle errors. Please contact AWS Customer Support to raise your throttling limits if necessary.
+   * Provisions a thing in the device registry. RegisterThing calls other IoT control plane APIs. These calls might exceed your account level  IoT Throttling Limits and cause throttle errors. Please contact Amazon Web Services Customer Support to raise your throttling limits if necessary. Requires permission to access the RegisterThing action.
    */
   registerThing(params: Iot.Types.RegisterThingRequest, callback?: (err: AWSError, data: Iot.Types.RegisterThingResponse) => void): Request<Iot.Types.RegisterThingResponse, AWSError>;
   /**
-   * Provisions a thing in the device registry. RegisterThing calls other AWS IoT control plane APIs. These calls might exceed your account level  AWS IoT Throttling Limits and cause throttle errors. Please contact AWS Customer Support to raise your throttling limits if necessary.
+   * Provisions a thing in the device registry. RegisterThing calls other IoT control plane APIs. These calls might exceed your account level  IoT Throttling Limits and cause throttle errors. Please contact Amazon Web Services Customer Support to raise your throttling limits if necessary. Requires permission to access the RegisterThing action.
    */
   registerThing(callback?: (err: AWSError, data: Iot.Types.RegisterThingResponse) => void): Request<Iot.Types.RegisterThingResponse, AWSError>;
   /**
-   * Rejects a pending certificate transfer. After AWS IoT rejects a certificate transfer, the certificate status changes from PENDING_TRANSFER to INACTIVE. To check for pending certificate transfers, call ListCertificates to enumerate your certificates. This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source's account in the INACTIVE state.
+   * Rejects a pending certificate transfer. After IoT rejects a certificate transfer, the certificate status changes from PENDING_TRANSFER to INACTIVE. To check for pending certificate transfers, call ListCertificates to enumerate your certificates. This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source's account in the INACTIVE state. Requires permission to access the RejectCertificateTransfer action.
    */
   rejectCertificateTransfer(params: Iot.Types.RejectCertificateTransferRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Rejects a pending certificate transfer. After AWS IoT rejects a certificate transfer, the certificate status changes from PENDING_TRANSFER to INACTIVE. To check for pending certificate transfers, call ListCertificates to enumerate your certificates. This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source's account in the INACTIVE state.
+   * Rejects a pending certificate transfer. After IoT rejects a certificate transfer, the certificate status changes from PENDING_TRANSFER to INACTIVE. To check for pending certificate transfers, call ListCertificates to enumerate your certificates. This operation can only be called by the transfer destination. After it is called, the certificate will be returned to the source's account in the INACTIVE state. Requires permission to access the RejectCertificateTransfer action.
    */
   rejectCertificateTransfer(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Removes the given thing from the billing group.
+   * Removes the given thing from the billing group. Requires permission to access the RemoveThingFromBillingGroup action.
    */
   removeThingFromBillingGroup(params: Iot.Types.RemoveThingFromBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.RemoveThingFromBillingGroupResponse) => void): Request<Iot.Types.RemoveThingFromBillingGroupResponse, AWSError>;
   /**
-   * Removes the given thing from the billing group.
+   * Removes the given thing from the billing group. Requires permission to access the RemoveThingFromBillingGroup action.
    */
   removeThingFromBillingGroup(callback?: (err: AWSError, data: Iot.Types.RemoveThingFromBillingGroupResponse) => void): Request<Iot.Types.RemoveThingFromBillingGroupResponse, AWSError>;
   /**
-   * Remove the specified thing from the specified group. You must specify either a thingGroupArn or a thingGroupName to identify the thing group and either a thingArn or a thingName to identify the thing to remove from the thing group. 
+   * Remove the specified thing from the specified group. You must specify either a thingGroupArn or a thingGroupName to identify the thing group and either a thingArn or a thingName to identify the thing to remove from the thing group.  Requires permission to access the RemoveThingFromThingGroup action.
    */
   removeThingFromThingGroup(params: Iot.Types.RemoveThingFromThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.RemoveThingFromThingGroupResponse) => void): Request<Iot.Types.RemoveThingFromThingGroupResponse, AWSError>;
   /**
-   * Remove the specified thing from the specified group. You must specify either a thingGroupArn or a thingGroupName to identify the thing group and either a thingArn or a thingName to identify the thing to remove from the thing group. 
+   * Remove the specified thing from the specified group. You must specify either a thingGroupArn or a thingGroupName to identify the thing group and either a thingArn or a thingName to identify the thing to remove from the thing group.  Requires permission to access the RemoveThingFromThingGroup action.
    */
   removeThingFromThingGroup(callback?: (err: AWSError, data: Iot.Types.RemoveThingFromThingGroupResponse) => void): Request<Iot.Types.RemoveThingFromThingGroupResponse, AWSError>;
   /**
-   * Replaces the rule. You must specify all parameters for the new rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.
+   * Replaces the rule. You must specify all parameters for the new rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule. Requires permission to access the ReplaceTopicRule action.
    */
   replaceTopicRule(params: Iot.Types.ReplaceTopicRuleRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Replaces the rule. You must specify all parameters for the new rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule.
+   * Replaces the rule. You must specify all parameters for the new rule. Creating rules is an administrator-level action. Any user who has permission to create rules will be able to access data processed by the rule. Requires permission to access the ReplaceTopicRule action.
    */
   replaceTopicRule(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * The query search index.
+   * The query search index. Requires permission to access the SearchIndex action.
    */
   searchIndex(params: Iot.Types.SearchIndexRequest, callback?: (err: AWSError, data: Iot.Types.SearchIndexResponse) => void): Request<Iot.Types.SearchIndexResponse, AWSError>;
   /**
-   * The query search index.
+   * The query search index. Requires permission to access the SearchIndex action.
    */
   searchIndex(callback?: (err: AWSError, data: Iot.Types.SearchIndexResponse) => void): Request<Iot.Types.SearchIndexResponse, AWSError>;
   /**
-   * Sets the default authorizer. This will be used if a websocket connection is made without specifying an authorizer.
+   * Sets the default authorizer. This will be used if a websocket connection is made without specifying an authorizer. Requires permission to access the SetDefaultAuthorizer action.
    */
   setDefaultAuthorizer(params: Iot.Types.SetDefaultAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.SetDefaultAuthorizerResponse) => void): Request<Iot.Types.SetDefaultAuthorizerResponse, AWSError>;
   /**
-   * Sets the default authorizer. This will be used if a websocket connection is made without specifying an authorizer.
+   * Sets the default authorizer. This will be used if a websocket connection is made without specifying an authorizer. Requires permission to access the SetDefaultAuthorizer action.
    */
   setDefaultAuthorizer(callback?: (err: AWSError, data: Iot.Types.SetDefaultAuthorizerResponse) => void): Request<Iot.Types.SetDefaultAuthorizerResponse, AWSError>;
   /**
-   * Sets the specified version of the specified policy as the policy's default (operative) version. This action affects all certificates to which the policy is attached. To list the principals the policy is attached to, use the ListPrincipalPolicy API.
+   * Sets the specified version of the specified policy as the policy's default (operative) version. This action affects all certificates to which the policy is attached. To list the principals the policy is attached to, use the ListPrincipalPolicies action. Requires permission to access the SetDefaultPolicyVersion action.
    */
   setDefaultPolicyVersion(params: Iot.Types.SetDefaultPolicyVersionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the specified version of the specified policy as the policy's default (operative) version. This action affects all certificates to which the policy is attached. To list the principals the policy is attached to, use the ListPrincipalPolicy API.
+   * Sets the specified version of the specified policy as the policy's default (operative) version. This action affects all certificates to which the policy is attached. To list the principals the policy is attached to, use the ListPrincipalPolicies action. Requires permission to access the SetDefaultPolicyVersion action.
    */
   setDefaultPolicyVersion(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the logging options. NOTE: use of this command is not recommended. Use SetV2LoggingOptions instead.
+   * Sets the logging options. NOTE: use of this command is not recommended. Use SetV2LoggingOptions instead. Requires permission to access the SetLoggingOptions action.
    */
   setLoggingOptions(params: Iot.Types.SetLoggingOptionsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the logging options. NOTE: use of this command is not recommended. Use SetV2LoggingOptions instead.
+   * Sets the logging options. NOTE: use of this command is not recommended. Use SetV2LoggingOptions instead. Requires permission to access the SetLoggingOptions action.
    */
   setLoggingOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the logging level.
+   * Sets the logging level. Requires permission to access the SetV2LoggingLevel action.
    */
   setV2LoggingLevel(params: Iot.Types.SetV2LoggingLevelRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the logging level.
+   * Sets the logging level. Requires permission to access the SetV2LoggingLevel action.
    */
   setV2LoggingLevel(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the logging options for the V2 logging service.
+   * Sets the logging options for the V2 logging service. Requires permission to access the SetV2LoggingOptions action.
    */
   setV2LoggingOptions(params: Iot.Types.SetV2LoggingOptionsRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Sets the logging options for the V2 logging service.
+   * Sets the logging options for the V2 logging service. Requires permission to access the SetV2LoggingOptions action.
    */
   setV2LoggingOptions(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Starts a task that applies a set of mitigation actions to the specified target.
+   * Starts a task that applies a set of mitigation actions to the specified target. Requires permission to access the StartAuditMitigationActionsTask action.
    */
   startAuditMitigationActionsTask(params: Iot.Types.StartAuditMitigationActionsTaskRequest, callback?: (err: AWSError, data: Iot.Types.StartAuditMitigationActionsTaskResponse) => void): Request<Iot.Types.StartAuditMitigationActionsTaskResponse, AWSError>;
   /**
-   * Starts a task that applies a set of mitigation actions to the specified target.
+   * Starts a task that applies a set of mitigation actions to the specified target. Requires permission to access the StartAuditMitigationActionsTask action.
    */
   startAuditMitigationActionsTask(callback?: (err: AWSError, data: Iot.Types.StartAuditMitigationActionsTaskResponse) => void): Request<Iot.Types.StartAuditMitigationActionsTaskResponse, AWSError>;
   /**
-   * Starts an on-demand Device Defender audit.
+   *  Starts a Device Defender ML Detect mitigation actions task.  Requires permission to access the StartDetectMitigationActionsTask action.
+   */
+  startDetectMitigationActionsTask(params: Iot.Types.StartDetectMitigationActionsTaskRequest, callback?: (err: AWSError, data: Iot.Types.StartDetectMitigationActionsTaskResponse) => void): Request<Iot.Types.StartDetectMitigationActionsTaskResponse, AWSError>;
+  /**
+   *  Starts a Device Defender ML Detect mitigation actions task.  Requires permission to access the StartDetectMitigationActionsTask action.
+   */
+  startDetectMitigationActionsTask(callback?: (err: AWSError, data: Iot.Types.StartDetectMitigationActionsTaskResponse) => void): Request<Iot.Types.StartDetectMitigationActionsTaskResponse, AWSError>;
+  /**
+   * Starts an on-demand Device Defender audit. Requires permission to access the StartOnDemandAuditTask action.
    */
   startOnDemandAuditTask(params: Iot.Types.StartOnDemandAuditTaskRequest, callback?: (err: AWSError, data: Iot.Types.StartOnDemandAuditTaskResponse) => void): Request<Iot.Types.StartOnDemandAuditTaskResponse, AWSError>;
   /**
-   * Starts an on-demand Device Defender audit.
+   * Starts an on-demand Device Defender audit. Requires permission to access the StartOnDemandAuditTask action.
    */
   startOnDemandAuditTask(callback?: (err: AWSError, data: Iot.Types.StartOnDemandAuditTaskResponse) => void): Request<Iot.Types.StartOnDemandAuditTaskResponse, AWSError>;
   /**
-   * Creates a bulk thing provisioning task.
+   * Creates a bulk thing provisioning task. Requires permission to access the StartThingRegistrationTask action.
    */
   startThingRegistrationTask(params: Iot.Types.StartThingRegistrationTaskRequest, callback?: (err: AWSError, data: Iot.Types.StartThingRegistrationTaskResponse) => void): Request<Iot.Types.StartThingRegistrationTaskResponse, AWSError>;
   /**
-   * Creates a bulk thing provisioning task.
+   * Creates a bulk thing provisioning task. Requires permission to access the StartThingRegistrationTask action.
    */
   startThingRegistrationTask(callback?: (err: AWSError, data: Iot.Types.StartThingRegistrationTaskResponse) => void): Request<Iot.Types.StartThingRegistrationTaskResponse, AWSError>;
   /**
-   * Cancels a bulk thing provisioning task.
+   * Cancels a bulk thing provisioning task. Requires permission to access the StopThingRegistrationTask action.
    */
   stopThingRegistrationTask(params: Iot.Types.StopThingRegistrationTaskRequest, callback?: (err: AWSError, data: Iot.Types.StopThingRegistrationTaskResponse) => void): Request<Iot.Types.StopThingRegistrationTaskResponse, AWSError>;
   /**
-   * Cancels a bulk thing provisioning task.
+   * Cancels a bulk thing provisioning task. Requires permission to access the StopThingRegistrationTask action.
    */
   stopThingRegistrationTask(callback?: (err: AWSError, data: Iot.Types.StopThingRegistrationTaskResponse) => void): Request<Iot.Types.StopThingRegistrationTaskResponse, AWSError>;
   /**
-   * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
+   * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource. Requires permission to access the TagResource action.
    */
   tagResource(params: Iot.Types.TagResourceRequest, callback?: (err: AWSError, data: Iot.Types.TagResourceResponse) => void): Request<Iot.Types.TagResourceResponse, AWSError>;
   /**
-   * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource.
+   * Adds to or modifies the tags of the given resource. Tags are metadata which can be used to manage a resource. Requires permission to access the TagResource action.
    */
   tagResource(callback?: (err: AWSError, data: Iot.Types.TagResourceResponse) => void): Request<Iot.Types.TagResourceResponse, AWSError>;
   /**
-   * Tests if a specified principal is authorized to perform an AWS IoT action on a specified resource. Use this to test and debug the authorization behavior of devices that connect to the AWS IoT device gateway.
+   * Tests if a specified principal is authorized to perform an IoT action on a specified resource. Use this to test and debug the authorization behavior of devices that connect to the IoT device gateway. Requires permission to access the TestAuthorization action.
    */
   testAuthorization(params: Iot.Types.TestAuthorizationRequest, callback?: (err: AWSError, data: Iot.Types.TestAuthorizationResponse) => void): Request<Iot.Types.TestAuthorizationResponse, AWSError>;
   /**
-   * Tests if a specified principal is authorized to perform an AWS IoT action on a specified resource. Use this to test and debug the authorization behavior of devices that connect to the AWS IoT device gateway.
+   * Tests if a specified principal is authorized to perform an IoT action on a specified resource. Use this to test and debug the authorization behavior of devices that connect to the IoT device gateway. Requires permission to access the TestAuthorization action.
    */
   testAuthorization(callback?: (err: AWSError, data: Iot.Types.TestAuthorizationResponse) => void): Request<Iot.Types.TestAuthorizationResponse, AWSError>;
   /**
-   * Tests a custom authorization behavior by invoking a specified custom authorizer. Use this to test and debug the custom authorization behavior of devices that connect to the AWS IoT device gateway.
+   * Tests a custom authorization behavior by invoking a specified custom authorizer. Use this to test and debug the custom authorization behavior of devices that connect to the IoT device gateway. Requires permission to access the TestInvokeAuthorizer action.
    */
   testInvokeAuthorizer(params: Iot.Types.TestInvokeAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.TestInvokeAuthorizerResponse) => void): Request<Iot.Types.TestInvokeAuthorizerResponse, AWSError>;
   /**
-   * Tests a custom authorization behavior by invoking a specified custom authorizer. Use this to test and debug the custom authorization behavior of devices that connect to the AWS IoT device gateway.
+   * Tests a custom authorization behavior by invoking a specified custom authorizer. Use this to test and debug the custom authorization behavior of devices that connect to the IoT device gateway. Requires permission to access the TestInvokeAuthorizer action.
    */
   testInvokeAuthorizer(callback?: (err: AWSError, data: Iot.Types.TestInvokeAuthorizerResponse) => void): Request<Iot.Types.TestInvokeAuthorizerResponse, AWSError>;
   /**
-   * Transfers the specified certificate to the specified AWS account. You can cancel the transfer until it is acknowledged by the recipient. No notification is sent to the transfer destination's account. It is up to the caller to notify the transfer target. The certificate being transferred must not be in the ACTIVE state. You can use the UpdateCertificate API to deactivate it. The certificate must not have any policies attached to it. You can use the DetachPrincipalPolicy API to detach them.
+   * Transfers the specified certificate to the specified Amazon Web Services account. Requires permission to access the TransferCertificate action. You can cancel the transfer until it is acknowledged by the recipient. No notification is sent to the transfer destination's account. It is up to the caller to notify the transfer target. The certificate being transferred must not be in the ACTIVE state. You can use the UpdateCertificate action to deactivate it. The certificate must not have any policies attached to it. You can use the DetachPolicy action to detach them.
    */
   transferCertificate(params: Iot.Types.TransferCertificateRequest, callback?: (err: AWSError, data: Iot.Types.TransferCertificateResponse) => void): Request<Iot.Types.TransferCertificateResponse, AWSError>;
   /**
-   * Transfers the specified certificate to the specified AWS account. You can cancel the transfer until it is acknowledged by the recipient. No notification is sent to the transfer destination's account. It is up to the caller to notify the transfer target. The certificate being transferred must not be in the ACTIVE state. You can use the UpdateCertificate API to deactivate it. The certificate must not have any policies attached to it. You can use the DetachPrincipalPolicy API to detach them.
+   * Transfers the specified certificate to the specified Amazon Web Services account. Requires permission to access the TransferCertificate action. You can cancel the transfer until it is acknowledged by the recipient. No notification is sent to the transfer destination's account. It is up to the caller to notify the transfer target. The certificate being transferred must not be in the ACTIVE state. You can use the UpdateCertificate action to deactivate it. The certificate must not have any policies attached to it. You can use the DetachPolicy action to detach them.
    */
   transferCertificate(callback?: (err: AWSError, data: Iot.Types.TransferCertificateResponse) => void): Request<Iot.Types.TransferCertificateResponse, AWSError>;
   /**
-   * Removes the given tags (metadata) from the resource.
+   * Removes the given tags (metadata) from the resource. Requires permission to access the UntagResource action.
    */
   untagResource(params: Iot.Types.UntagResourceRequest, callback?: (err: AWSError, data: Iot.Types.UntagResourceResponse) => void): Request<Iot.Types.UntagResourceResponse, AWSError>;
   /**
-   * Removes the given tags (metadata) from the resource.
+   * Removes the given tags (metadata) from the resource. Requires permission to access the UntagResource action.
    */
   untagResource(callback?: (err: AWSError, data: Iot.Types.UntagResourceResponse) => void): Request<Iot.Types.UntagResourceResponse, AWSError>;
   /**
-   * Configures or reconfigures the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
+   * Configures or reconfigures the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled. Requires permission to access the UpdateAccountAuditConfiguration action.
    */
   updateAccountAuditConfiguration(params: Iot.Types.UpdateAccountAuditConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.UpdateAccountAuditConfigurationResponse) => void): Request<Iot.Types.UpdateAccountAuditConfigurationResponse, AWSError>;
   /**
-   * Configures or reconfigures the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled.
+   * Configures or reconfigures the Device Defender audit settings for this account. Settings include how audit notifications are sent and which audit checks are enabled or disabled. Requires permission to access the UpdateAccountAuditConfiguration action.
    */
   updateAccountAuditConfiguration(callback?: (err: AWSError, data: Iot.Types.UpdateAccountAuditConfigurationResponse) => void): Request<Iot.Types.UpdateAccountAuditConfigurationResponse, AWSError>;
   /**
@@ -1540,171 +1692,187 @@ declare class Iot extends Service {
    */
   updateAuditSuppression(callback?: (err: AWSError, data: Iot.Types.UpdateAuditSuppressionResponse) => void): Request<Iot.Types.UpdateAuditSuppressionResponse, AWSError>;
   /**
-   * Updates an authorizer.
+   * Updates an authorizer. Requires permission to access the UpdateAuthorizer action.
    */
   updateAuthorizer(params: Iot.Types.UpdateAuthorizerRequest, callback?: (err: AWSError, data: Iot.Types.UpdateAuthorizerResponse) => void): Request<Iot.Types.UpdateAuthorizerResponse, AWSError>;
   /**
-   * Updates an authorizer.
+   * Updates an authorizer. Requires permission to access the UpdateAuthorizer action.
    */
   updateAuthorizer(callback?: (err: AWSError, data: Iot.Types.UpdateAuthorizerResponse) => void): Request<Iot.Types.UpdateAuthorizerResponse, AWSError>;
   /**
-   * Updates information about the billing group.
+   * Updates information about the billing group. Requires permission to access the UpdateBillingGroup action.
    */
   updateBillingGroup(params: Iot.Types.UpdateBillingGroupRequest, callback?: (err: AWSError, data: Iot.Types.UpdateBillingGroupResponse) => void): Request<Iot.Types.UpdateBillingGroupResponse, AWSError>;
   /**
-   * Updates information about the billing group.
+   * Updates information about the billing group. Requires permission to access the UpdateBillingGroup action.
    */
   updateBillingGroup(callback?: (err: AWSError, data: Iot.Types.UpdateBillingGroupResponse) => void): Request<Iot.Types.UpdateBillingGroupResponse, AWSError>;
   /**
-   * Updates a registered CA certificate.
+   * Updates a registered CA certificate. Requires permission to access the UpdateCACertificate action.
    */
   updateCACertificate(params: Iot.Types.UpdateCACertificateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates a registered CA certificate.
+   * Updates a registered CA certificate. Requires permission to access the UpdateCACertificate action.
    */
   updateCACertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the status of the specified certificate. This operation is idempotent. Certificates must be in the ACTIVE state to authenticate devices that use a certificate to connect to AWS IoT. Within a few minutes of updating a certificate from the ACTIVE state to any other state, AWS IoT disconnects all devices that used that certificate to connect. Devices cannot use a certificate that is not in the ACTIVE state to reconnect.
+   * Updates the status of the specified certificate. This operation is idempotent. Requires permission to access the UpdateCertificate action. Certificates must be in the ACTIVE state to authenticate devices that use a certificate to connect to IoT. Within a few minutes of updating a certificate from the ACTIVE state to any other state, IoT disconnects all devices that used that certificate to connect. Devices cannot use a certificate that is not in the ACTIVE state to reconnect.
    */
   updateCertificate(params: Iot.Types.UpdateCertificateRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the status of the specified certificate. This operation is idempotent. Certificates must be in the ACTIVE state to authenticate devices that use a certificate to connect to AWS IoT. Within a few minutes of updating a certificate from the ACTIVE state to any other state, AWS IoT disconnects all devices that used that certificate to connect. Devices cannot use a certificate that is not in the ACTIVE state to reconnect.
+   * Updates the status of the specified certificate. This operation is idempotent. Requires permission to access the UpdateCertificate action. Certificates must be in the ACTIVE state to authenticate devices that use a certificate to connect to IoT. Within a few minutes of updating a certificate from the ACTIVE state to any other state, IoT disconnects all devices that used that certificate to connect. Devices cannot use a certificate that is not in the ACTIVE state to reconnect.
    */
   updateCertificate(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the definition for a dimension. You cannot change the type of a dimension after it is created (you can delete it and re-create it).
+   * Updates a Device Defender detect custom metric.  Requires permission to access the UpdateCustomMetric action.
+   */
+  updateCustomMetric(params: Iot.Types.UpdateCustomMetricRequest, callback?: (err: AWSError, data: Iot.Types.UpdateCustomMetricResponse) => void): Request<Iot.Types.UpdateCustomMetricResponse, AWSError>;
+  /**
+   * Updates a Device Defender detect custom metric.  Requires permission to access the UpdateCustomMetric action.
+   */
+  updateCustomMetric(callback?: (err: AWSError, data: Iot.Types.UpdateCustomMetricResponse) => void): Request<Iot.Types.UpdateCustomMetricResponse, AWSError>;
+  /**
+   * Updates the definition for a dimension. You cannot change the type of a dimension after it is created (you can delete it and recreate it). Requires permission to access the UpdateDimension action.
    */
   updateDimension(params: Iot.Types.UpdateDimensionRequest, callback?: (err: AWSError, data: Iot.Types.UpdateDimensionResponse) => void): Request<Iot.Types.UpdateDimensionResponse, AWSError>;
   /**
-   * Updates the definition for a dimension. You cannot change the type of a dimension after it is created (you can delete it and re-create it).
+   * Updates the definition for a dimension. You cannot change the type of a dimension after it is created (you can delete it and recreate it). Requires permission to access the UpdateDimension action.
    */
   updateDimension(callback?: (err: AWSError, data: Iot.Types.UpdateDimensionResponse) => void): Request<Iot.Types.UpdateDimensionResponse, AWSError>;
   /**
-   * Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.  The domain configuration feature is in public preview and is subject to change. 
+   * Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated. Requires permission to access the UpdateDomainConfiguration action.
    */
   updateDomainConfiguration(params: Iot.Types.UpdateDomainConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.UpdateDomainConfigurationResponse) => void): Request<Iot.Types.UpdateDomainConfigurationResponse, AWSError>;
   /**
-   * Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated.  The domain configuration feature is in public preview and is subject to change. 
+   * Updates values stored in the domain configuration. Domain configurations for default endpoints can't be updated. Requires permission to access the UpdateDomainConfiguration action.
    */
   updateDomainConfiguration(callback?: (err: AWSError, data: Iot.Types.UpdateDomainConfigurationResponse) => void): Request<Iot.Types.UpdateDomainConfigurationResponse, AWSError>;
   /**
-   * Updates a dynamic thing group.
+   * Updates a dynamic thing group. Requires permission to access the UpdateDynamicThingGroup action.
    */
   updateDynamicThingGroup(params: Iot.Types.UpdateDynamicThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.UpdateDynamicThingGroupResponse) => void): Request<Iot.Types.UpdateDynamicThingGroupResponse, AWSError>;
   /**
-   * Updates a dynamic thing group.
+   * Updates a dynamic thing group. Requires permission to access the UpdateDynamicThingGroup action.
    */
   updateDynamicThingGroup(callback?: (err: AWSError, data: Iot.Types.UpdateDynamicThingGroupResponse) => void): Request<Iot.Types.UpdateDynamicThingGroupResponse, AWSError>;
   /**
-   * Updates the event configurations.
+   * Updates the event configurations. Requires permission to access the UpdateEventConfigurations action.
    */
   updateEventConfigurations(params: Iot.Types.UpdateEventConfigurationsRequest, callback?: (err: AWSError, data: Iot.Types.UpdateEventConfigurationsResponse) => void): Request<Iot.Types.UpdateEventConfigurationsResponse, AWSError>;
   /**
-   * Updates the event configurations.
+   * Updates the event configurations. Requires permission to access the UpdateEventConfigurations action.
    */
   updateEventConfigurations(callback?: (err: AWSError, data: Iot.Types.UpdateEventConfigurationsResponse) => void): Request<Iot.Types.UpdateEventConfigurationsResponse, AWSError>;
   /**
-   * Updates the search configuration.
+   * Updates the data for a fleet metric. Requires permission to access the UpdateFleetMetric action.
+   */
+  updateFleetMetric(params: Iot.Types.UpdateFleetMetricRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the data for a fleet metric. Requires permission to access the UpdateFleetMetric action.
+   */
+  updateFleetMetric(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Updates the search configuration. Requires permission to access the UpdateIndexingConfiguration action.
    */
   updateIndexingConfiguration(params: Iot.Types.UpdateIndexingConfigurationRequest, callback?: (err: AWSError, data: Iot.Types.UpdateIndexingConfigurationResponse) => void): Request<Iot.Types.UpdateIndexingConfigurationResponse, AWSError>;
   /**
-   * Updates the search configuration.
+   * Updates the search configuration. Requires permission to access the UpdateIndexingConfiguration action.
    */
   updateIndexingConfiguration(callback?: (err: AWSError, data: Iot.Types.UpdateIndexingConfigurationResponse) => void): Request<Iot.Types.UpdateIndexingConfigurationResponse, AWSError>;
   /**
-   * Updates supported fields of the specified job.
+   * Updates supported fields of the specified job. Requires permission to access the UpdateJob action.
    */
   updateJob(params: Iot.Types.UpdateJobRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates supported fields of the specified job.
+   * Updates supported fields of the specified job. Requires permission to access the UpdateJob action.
    */
   updateJob(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Updates the definition for the specified mitigation action.
+   * Updates the definition for the specified mitigation action. Requires permission to access the UpdateMitigationAction action.
    */
   updateMitigationAction(params: Iot.Types.UpdateMitigationActionRequest, callback?: (err: AWSError, data: Iot.Types.UpdateMitigationActionResponse) => void): Request<Iot.Types.UpdateMitigationActionResponse, AWSError>;
   /**
-   * Updates the definition for the specified mitigation action.
+   * Updates the definition for the specified mitigation action. Requires permission to access the UpdateMitigationAction action.
    */
   updateMitigationAction(callback?: (err: AWSError, data: Iot.Types.UpdateMitigationActionResponse) => void): Request<Iot.Types.UpdateMitigationActionResponse, AWSError>;
   /**
-   * Updates a fleet provisioning template.
+   * Updates a fleet provisioning template. Requires permission to access the UpdateProvisioningTemplate action.
    */
   updateProvisioningTemplate(params: Iot.Types.UpdateProvisioningTemplateRequest, callback?: (err: AWSError, data: Iot.Types.UpdateProvisioningTemplateResponse) => void): Request<Iot.Types.UpdateProvisioningTemplateResponse, AWSError>;
   /**
-   * Updates a fleet provisioning template.
+   * Updates a fleet provisioning template. Requires permission to access the UpdateProvisioningTemplate action.
    */
   updateProvisioningTemplate(callback?: (err: AWSError, data: Iot.Types.UpdateProvisioningTemplateResponse) => void): Request<Iot.Types.UpdateProvisioningTemplateResponse, AWSError>;
   /**
-   * Updates a role alias.
+   * Updates a role alias. Requires permission to access the UpdateRoleAlias action.
    */
   updateRoleAlias(params: Iot.Types.UpdateRoleAliasRequest, callback?: (err: AWSError, data: Iot.Types.UpdateRoleAliasResponse) => void): Request<Iot.Types.UpdateRoleAliasResponse, AWSError>;
   /**
-   * Updates a role alias.
+   * Updates a role alias. Requires permission to access the UpdateRoleAlias action.
    */
   updateRoleAlias(callback?: (err: AWSError, data: Iot.Types.UpdateRoleAliasResponse) => void): Request<Iot.Types.UpdateRoleAliasResponse, AWSError>;
   /**
-   * Updates a scheduled audit, including which checks are performed and how often the audit takes place.
+   * Updates a scheduled audit, including which checks are performed and how often the audit takes place. Requires permission to access the UpdateScheduledAudit action.
    */
   updateScheduledAudit(params: Iot.Types.UpdateScheduledAuditRequest, callback?: (err: AWSError, data: Iot.Types.UpdateScheduledAuditResponse) => void): Request<Iot.Types.UpdateScheduledAuditResponse, AWSError>;
   /**
-   * Updates a scheduled audit, including which checks are performed and how often the audit takes place.
+   * Updates a scheduled audit, including which checks are performed and how often the audit takes place. Requires permission to access the UpdateScheduledAudit action.
    */
   updateScheduledAudit(callback?: (err: AWSError, data: Iot.Types.UpdateScheduledAuditResponse) => void): Request<Iot.Types.UpdateScheduledAuditResponse, AWSError>;
   /**
-   * Updates a Device Defender security profile.
+   * Updates a Device Defender security profile. Requires permission to access the UpdateSecurityProfile action.
    */
   updateSecurityProfile(params: Iot.Types.UpdateSecurityProfileRequest, callback?: (err: AWSError, data: Iot.Types.UpdateSecurityProfileResponse) => void): Request<Iot.Types.UpdateSecurityProfileResponse, AWSError>;
   /**
-   * Updates a Device Defender security profile.
+   * Updates a Device Defender security profile. Requires permission to access the UpdateSecurityProfile action.
    */
   updateSecurityProfile(callback?: (err: AWSError, data: Iot.Types.UpdateSecurityProfileResponse) => void): Request<Iot.Types.UpdateSecurityProfileResponse, AWSError>;
   /**
-   * Updates an existing stream. The stream version will be incremented by one.
+   * Updates an existing stream. The stream version will be incremented by one. Requires permission to access the UpdateStream action.
    */
   updateStream(params: Iot.Types.UpdateStreamRequest, callback?: (err: AWSError, data: Iot.Types.UpdateStreamResponse) => void): Request<Iot.Types.UpdateStreamResponse, AWSError>;
   /**
-   * Updates an existing stream. The stream version will be incremented by one.
+   * Updates an existing stream. The stream version will be incremented by one. Requires permission to access the UpdateStream action.
    */
   updateStream(callback?: (err: AWSError, data: Iot.Types.UpdateStreamResponse) => void): Request<Iot.Types.UpdateStreamResponse, AWSError>;
   /**
-   * Updates the data for a thing.
+   * Updates the data for a thing. Requires permission to access the UpdateThing action.
    */
   updateThing(params: Iot.Types.UpdateThingRequest, callback?: (err: AWSError, data: Iot.Types.UpdateThingResponse) => void): Request<Iot.Types.UpdateThingResponse, AWSError>;
   /**
-   * Updates the data for a thing.
+   * Updates the data for a thing. Requires permission to access the UpdateThing action.
    */
   updateThing(callback?: (err: AWSError, data: Iot.Types.UpdateThingResponse) => void): Request<Iot.Types.UpdateThingResponse, AWSError>;
   /**
-   * Update a thing group.
+   * Update a thing group. Requires permission to access the UpdateThingGroup action.
    */
   updateThingGroup(params: Iot.Types.UpdateThingGroupRequest, callback?: (err: AWSError, data: Iot.Types.UpdateThingGroupResponse) => void): Request<Iot.Types.UpdateThingGroupResponse, AWSError>;
   /**
-   * Update a thing group.
+   * Update a thing group. Requires permission to access the UpdateThingGroup action.
    */
   updateThingGroup(callback?: (err: AWSError, data: Iot.Types.UpdateThingGroupResponse) => void): Request<Iot.Types.UpdateThingGroupResponse, AWSError>;
   /**
-   * Updates the groups to which the thing belongs.
+   * Updates the groups to which the thing belongs. Requires permission to access the UpdateThingGroupsForThing action.
    */
   updateThingGroupsForThing(params: Iot.Types.UpdateThingGroupsForThingRequest, callback?: (err: AWSError, data: Iot.Types.UpdateThingGroupsForThingResponse) => void): Request<Iot.Types.UpdateThingGroupsForThingResponse, AWSError>;
   /**
-   * Updates the groups to which the thing belongs.
+   * Updates the groups to which the thing belongs. Requires permission to access the UpdateThingGroupsForThing action.
    */
   updateThingGroupsForThing(callback?: (err: AWSError, data: Iot.Types.UpdateThingGroupsForThingResponse) => void): Request<Iot.Types.UpdateThingGroupsForThingResponse, AWSError>;
   /**
-   * Updates a topic rule destination. You use this to change the status, endpoint URL, or confirmation URL of the destination.
+   * Updates a topic rule destination. You use this to change the status, endpoint URL, or confirmation URL of the destination. Requires permission to access the UpdateTopicRuleDestination action.
    */
   updateTopicRuleDestination(params: Iot.Types.UpdateTopicRuleDestinationRequest, callback?: (err: AWSError, data: Iot.Types.UpdateTopicRuleDestinationResponse) => void): Request<Iot.Types.UpdateTopicRuleDestinationResponse, AWSError>;
   /**
-   * Updates a topic rule destination. You use this to change the status, endpoint URL, or confirmation URL of the destination.
+   * Updates a topic rule destination. You use this to change the status, endpoint URL, or confirmation URL of the destination. Requires permission to access the UpdateTopicRuleDestination action.
    */
   updateTopicRuleDestination(callback?: (err: AWSError, data: Iot.Types.UpdateTopicRuleDestinationResponse) => void): Request<Iot.Types.UpdateTopicRuleDestinationResponse, AWSError>;
   /**
-   * Validates a Device Defender security profile behaviors specification.
+   * Validates a Device Defender security profile behaviors specification. Requires permission to access the ValidateSecurityProfileBehaviors action.
    */
   validateSecurityProfileBehaviors(params: Iot.Types.ValidateSecurityProfileBehaviorsRequest, callback?: (err: AWSError, data: Iot.Types.ValidateSecurityProfileBehaviorsResponse) => void): Request<Iot.Types.ValidateSecurityProfileBehaviorsResponse, AWSError>;
   /**
-   * Validates a Device Defender security profile behaviors specification.
+   * Validates a Device Defender security profile behaviors specification. Requires permission to access the ValidateSecurityProfileBehaviors action.
    */
   validateSecurityProfileBehaviors(callback?: (err: AWSError, data: Iot.Types.ValidateSecurityProfileBehaviorsResponse) => void): Request<Iot.Types.ValidateSecurityProfileBehaviorsResponse, AWSError>;
 }
@@ -1726,7 +1894,7 @@ declare namespace Iot {
      */
     action: AbortAction;
     /**
-     * The minimum percentage of job execution failures that must occur to initiate the job abort. AWS IoT supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).
+     * The minimum percentage of job execution failures that must occur to initiate the job abort. Amazon Web Services IoT Core supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).
      */
     thresholdPercentage: AbortThresholdPercentage;
     /**
@@ -1805,15 +1973,15 @@ declare namespace Iot {
      */
     salesforce?: SalesforceAction;
     /**
-     * Sends message data to an AWS IoT Analytics channel.
+     * Sends message data to an IoT Analytics channel.
      */
     iotAnalytics?: IotAnalyticsAction;
     /**
-     * Sends an input to an AWS IoT Events detector.
+     * Sends an input to an IoT Events detector.
      */
     iotEvents?: IotEventsAction;
     /**
-     * Sends data from the MQTT message that triggered the rule to AWS IoT SiteWise asset properties.
+     * Sends data from the MQTT message that triggered the rule to IoT SiteWise asset properties.
      */
     iotSiteWise?: IotSiteWiseAction;
     /**
@@ -1821,9 +1989,17 @@ declare namespace Iot {
      */
     stepFunctions?: StepFunctionsAction;
     /**
+     * The Timestream rule action writes attributes (measures) from an MQTT message into an Amazon Timestream table. For more information, see the Timestream topic rule action documentation.
+     */
+    timestream?: TimestreamAction;
+    /**
      * Send data to an HTTPS endpoint.
      */
     http?: HttpAction;
+    /**
+     * Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.
+     */
+    kafka?: KafkaAction;
   }
   export type ActionList = Action[];
   export type ActionType = "PUBLISH"|"SUBSCRIBE"|"RECEIVE"|"CONNECT"|string;
@@ -1837,17 +2013,21 @@ declare namespace Iot {
      */
     thingName?: DeviceDefenderThingName;
     /**
-     * The security profile whose behavior is in violation.
+     * The security profile with the behavior is in violation.
      */
     securityProfileName?: SecurityProfileName;
     /**
-     * The behavior which is being violated.
+     * The behavior that is being violated.
      */
     behavior?: Behavior;
     /**
-     * The value of the metric (the measurement) which caused the most recent violation.
+     * The value of the metric (the measurement) that caused the most recent violation.
      */
     lastViolationValue?: MetricValue;
+    /**
+     *  The details of a violation event. 
+     */
+    violationEventAdditionalInfo?: ViolationEventAdditionalInfo;
     /**
      * The time the most recent violation occurred.
      */
@@ -1904,11 +2084,11 @@ declare namespace Iot {
   }
   export interface AddThingsToThingGroupParams {
     /**
-     * The list of groups to which you want to add the things that triggered the mitigation action. You can add a thing to a maximum of 10 groups, but you cannot add a thing to more than one group in the same hierarchy.
+     * The list of groups to which you want to add the things that triggered the mitigation action. You can add a thing to a maximum of 10 groups, but you can't add a thing to more than one group in the same hierarchy.
      */
     thingGroupNames: ThingGroupNames;
     /**
-     * Specifies if this mitigation action can move the things that triggered the mitigation action even if they are part of one or more dynamic things groups.
+     * Specifies if this mitigation action can move the things that triggered the mitigation action even if they are part of one or more dynamic thing groups.
      */
     overrideDynamicGroups?: OverrideDynamicGroups;
   }
@@ -1916,10 +2096,23 @@ declare namespace Iot {
   export type AdditionalMetricsToRetainV2List = MetricToRetain[];
   export type AdditionalParameterMap = {[key: string]: Value};
   export type AggregationField = string;
+  export interface AggregationType {
+    /**
+     * The name of the aggregation type.
+     */
+    name: AggregationTypeName;
+    /**
+     * A list of the values of aggregation types.
+     */
+    values?: AggregationTypeValues;
+  }
+  export type AggregationTypeName = "Statistics"|"Percentiles"|"Cardinality"|string;
+  export type AggregationTypeValue = string;
+  export type AggregationTypeValues = AggregationTypeValue[];
   export type AlarmName = string;
   export interface AlertTarget {
     /**
-     * The ARN of the notification target to which alerts are sent.
+     * The Amazon Resource Name (ARN) of the notification target to which alerts are sent.
      */
     alertTargetArn: AlertTargetArn;
     /**
@@ -2007,6 +2200,10 @@ declare namespace Iot {
      * An optional comment string describing why the job was associated with the targets.
      */
     comment?: Comment;
+    /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
   }
   export interface AssociateTargetsWithJobResponse {
     /**
@@ -2028,7 +2225,7 @@ declare namespace Iot {
      */
     policyName: PolicyName;
     /**
-     * The identity to which the policy is attached.
+     * The identity to which the policy is attached. For example, a thing group or a certificate.
      */
     target: PolicyTarget;
   }
@@ -2177,7 +2374,7 @@ declare namespace Iot {
     /**
      * The unique identifier for the task that applies the mitigation action.
      */
-    taskId?: AuditMitigationActionsTaskId;
+    taskId?: MitigationActionsTaskId;
     /**
      * The unique identifier for the findings to which the task and associated mitigation action are applied.
      */
@@ -2213,12 +2410,11 @@ declare namespace Iot {
   }
   export type AuditMitigationActionExecutionMetadataList = AuditMitigationActionExecutionMetadata[];
   export type AuditMitigationActionsExecutionStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|"CANCELED"|"SKIPPED"|"PENDING"|string;
-  export type AuditMitigationActionsTaskId = string;
   export interface AuditMitigationActionsTaskMetadata {
     /**
      * The unique identifier for the task.
      */
-    taskId?: AuditMitigationActionsTaskId;
+    taskId?: MitigationActionsTaskId;
     /**
      * The time at which the audit mitigation actions task was started.
      */
@@ -2376,7 +2572,7 @@ declare namespace Iot {
      */
     lastModifiedDate?: DateType;
     /**
-     * Specifies whether AWS IoT validates the token signature in an authorization request.
+     * Specifies whether IoT validates the token signature in an authorization request.
      */
     signingDisabled?: BooleanKey;
   }
@@ -2417,7 +2613,7 @@ declare namespace Iot {
      */
     action: AwsJobAbortCriteriaAbortAction;
     /**
-     * The minimum percentage of job execution failures that must occur to initiate the job abort. AWS IoT supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).
+     * The minimum percentage of job execution failures that must occur to initiate the job abort. Amazon Web Services IoT Core supports up to two digits after the decimal (for example, 10.9 and 10.99, but not 10.999).
      */
     thresholdPercentage: AwsJobAbortCriteriaAbortThresholdPercentage;
     /**
@@ -2450,7 +2646,7 @@ declare namespace Iot {
      */
     incrementFactor: AwsJobRolloutIncrementFactor;
     /**
-     * The criteria to initiate the increase in rate of rollout for a job. AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).
+     * The criteria to initiate the increase in rate of rollout for a job. Amazon Web Services IoT Core supports up to one digit after the decimal (for example, 1.5, but not 1.55).
      */
     rateIncreaseCriteria: AwsJobRateIncreaseCriteria;
   }
@@ -2480,9 +2676,10 @@ declare namespace Iot {
     inProgressTimeoutInMinutes?: AwsJobTimeoutInProgressTimeoutInMinutes;
   }
   export type AwsJobTimeoutInProgressTimeoutInMinutes = number;
+  export type BatchMode = boolean;
   export interface Behavior {
     /**
-     * The name you have given to the behavior.
+     * The name you've given to the behavior.
      */
     name: BehaviorName;
     /**
@@ -2490,17 +2687,21 @@ declare namespace Iot {
      */
     metric?: BehaviorMetric;
     /**
-     * The dimension for a metric in your behavior. For example, using a TOPIC_FILTER dimension, you can narrow down the scope of the metric only to MQTT topics whose name match the pattern specified in the dimension.
+     * The dimension for a metric in your behavior. For example, using a TOPIC_FILTER dimension, you can narrow down the scope of the metric to only MQTT topics where the name matches the pattern specified in the dimension. This can't be used with custom metrics.
      */
     metricDimension?: MetricDimension;
     /**
      * The criteria that determine if a device is behaving normally in regard to the metric.
      */
     criteria?: BehaviorCriteria;
+    /**
+     *  Suppresses alerts. 
+     */
+    suppressAlerts?: SuppressAlerts;
   }
   export interface BehaviorCriteria {
     /**
-     * The operator that relates the thing measured (metric) to the criteria (containing a value or statisticalThreshold).
+     * The operator that relates the thing measured (metric) to the criteria (containing a value or statisticalThreshold). Valid operators include:    string-list: in-set and not-in-set     number-list: in-set and not-in-set     ip-address-list: in-cidr-set and not-in-cidr-set     number: less-than, less-than-equals, greater-than, and greater-than-equals   
      */
     comparisonOperator?: ComparisonOperator;
     /**
@@ -2508,7 +2709,7 @@ declare namespace Iot {
      */
     value?: MetricValue;
     /**
-     * Use this to specify the time duration over which the behavior is evaluated, for those criteria which have a time dimension (for example, NUM_MESSAGES_SENT). For a statisticalThreshhold metric comparison, measurements from all devices are accumulated over this time duration before being used to calculate percentiles, and later, measurements from an individual device are also accumulated over this time duration before being given a percentile rank.
+     * Use this to specify the time duration over which the behavior is evaluated, for those criteria that have a time dimension (for example, NUM_MESSAGES_SENT). For a statisticalThreshhold metric comparison, measurements from all devices are accumulated over this time duration before being used to calculate percentiles, and later, measurements from an individual device are also accumulated over this time duration before being given a percentile rank. Cannot be used with list-based metric datatypes.
      */
     durationSeconds?: DurationSeconds;
     /**
@@ -2520,11 +2721,43 @@ declare namespace Iot {
      */
     consecutiveDatapointsToClear?: ConsecutiveDatapointsToClear;
     /**
-     * A statistical ranking (percentile) which indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.
+     * A statistical ranking (percentile)that indicates a threshold value by which a behavior is determined to be in compliance or in violation of the behavior.
      */
     statisticalThreshold?: StatisticalThreshold;
+    /**
+     *  The configuration of an ML Detect 
+     */
+    mlDetectionConfig?: MachineLearningDetectionConfig;
   }
+  export type BehaviorCriteriaType = "STATIC"|"STATISTICAL"|"MACHINE_LEARNING"|string;
   export type BehaviorMetric = string;
+  export type BehaviorModelTrainingSummaries = BehaviorModelTrainingSummary[];
+  export interface BehaviorModelTrainingSummary {
+    /**
+     *  The name of the security profile. 
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     *  The name of the behavior. 
+     */
+    behaviorName?: BehaviorName;
+    /**
+     *  The date a training model started collecting data. 
+     */
+    trainingDataCollectionStartDate?: Timestamp;
+    /**
+     *  The status of the behavior model. 
+     */
+    modelStatus?: ModelStatus;
+    /**
+     *  The percentage of datapoints collected. 
+     */
+    datapointsCollectionPercentage?: DataCollectionPercentage;
+    /**
+     *  The date the model was last refreshed. 
+     */
+    lastModelRefreshDate?: Timestamp;
+  }
   export type BehaviorName = string;
   export type Behaviors = Behavior[];
   export type BillingGroupArn = string;
@@ -2546,7 +2779,25 @@ declare namespace Iot {
   }
   export type Boolean = boolean;
   export type BooleanKey = boolean;
+  export interface Bucket {
+    /**
+     * The value counted for the particular bucket.
+     */
+    keyValue?: BucketKeyValue;
+    /**
+     * The number of documents that have the value counted for the particular bucket.
+     */
+    count?: Count;
+  }
+  export type BucketKeyValue = string;
   export type BucketName = string;
+  export type Buckets = Bucket[];
+  export interface BucketsAggregationType {
+    /**
+     * Performs an aggregation that will return a list of buckets. The list of buckets is a ranked list of the number of occurrences of an aggregation field value.
+     */
+    termsAggregation?: TermsAggregation;
+  }
   export interface CACertificate {
     /**
      * The ARN of the CA certificate.
@@ -2618,7 +2869,7 @@ declare namespace Iot {
     /**
      * The unique identifier for the task that you want to cancel. 
      */
-    taskId: AuditMitigationActionsTaskId;
+    taskId: MitigationActionsTaskId;
   }
   export interface CancelAuditMitigationActionsTaskResponse {
   }
@@ -2635,6 +2886,14 @@ declare namespace Iot {
      * The ID of the certificate. (The last part of the certificate ARN contains the certificate ID.)
      */
     certificateId: CertificateId;
+  }
+  export interface CancelDetectMitigationActionsTaskRequest {
+    /**
+     *  The unique identifier of the task. 
+     */
+    taskId: MitigationActionsTaskId;
+  }
+  export interface CancelDetectMitigationActionsTaskResponse {
   }
   export interface CancelJobExecutionRequest {
     /**
@@ -2739,11 +2998,11 @@ declare namespace Iot {
      */
     certificatePem?: CertificatePem;
     /**
-     * The ID of the AWS account that owns the certificate.
+     * The ID of the Amazon Web Services account that owns the certificate.
      */
     ownedBy?: AwsAccountId;
     /**
-     * The ID of the AWS account of the previous owner of the certificate.
+     * The ID of the Amazon Web Services account of the previous owner of the certificate.
      */
     previousOwnedBy?: AwsAccountId;
     /**
@@ -2802,6 +3061,7 @@ declare namespace Iot {
   export interface ClearDefaultAuthorizerResponse {
   }
   export type ClientId = string;
+  export type ClientProperties = {[key: string]: String};
   export type ClientRequestToken = string;
   export interface CloudwatchAlarmAction {
     /**
@@ -2890,8 +3150,9 @@ declare namespace Iot {
   }
   export type CognitoIdentityPoolId = string;
   export type Comment = string;
-  export type ComparisonOperator = "less-than"|"less-than-equals"|"greater-than"|"greater-than-equals"|"in-cidr-set"|"not-in-cidr-set"|"in-port-set"|"not-in-port-set"|string;
+  export type ComparisonOperator = "less-than"|"less-than-equals"|"greater-than"|"greater-than-equals"|"in-cidr-set"|"not-in-cidr-set"|"in-port-set"|"not-in-port-set"|"in-set"|"not-in-set"|string;
   export type CompliantChecksCount = number;
+  export type ConfidenceLevel = "LOW"|"MEDIUM"|"HIGH"|string;
   export interface Configuration {
     /**
      * True to enable the configuration.
@@ -2959,7 +3220,7 @@ declare namespace Iot {
      */
     tags?: TagList;
     /**
-     * Specifies whether AWS IoT validates the token signature in an authorization request.
+     * Specifies whether IoT validates the token signature in an authorization request.
      */
     signingDisabled?: BooleanKey;
   }
@@ -3025,6 +3286,38 @@ declare namespace Iot {
      */
     certificatePem?: CertificatePem;
   }
+  export interface CreateCustomMetricRequest {
+    /**
+     *  The name of the custom metric. This will be used in the metric report submitted from the device/thing. Shouldn't begin with aws:. Cannot be updated once defined.
+     */
+    metricName: MetricName;
+    /**
+     *  Field represents a friendly name in the console for the custom metric; it doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated once defined.
+     */
+    displayName?: CustomMetricDisplayName;
+    /**
+     *  The type of the custom metric. Types include string-list, ip-address-list, number-list, and number. 
+     */
+    metricType: CustomMetricType;
+    /**
+     *  Metadata that can be used to manage the custom metric. 
+     */
+    tags?: TagList;
+    /**
+     * Each custom metric must have a unique client request token. If you try to create a new custom metric that already exists with a different token, an exception occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request. 
+     */
+    clientRequestToken: ClientRequestToken;
+  }
+  export interface CreateCustomMetricResponse {
+    /**
+     *  The name of the custom metric to be used in the metric report. 
+     */
+    metricName?: MetricName;
+    /**
+     *  The Amazon Resource Number (ARN) of the custom metric, e.g. arn:aws-partition:iot:region:accountId:custommetric/metricName  
+     */
+    metricArn?: CustomMetricArn;
+  }
   export interface CreateDimensionRequest {
     /**
      * A unique identifier for the dimension. Choose something that describes the type and value to make it easy to remember what it does.
@@ -3043,7 +3336,7 @@ declare namespace Iot {
      */
     tags?: TagList;
     /**
-     * Each dimension must have a unique client request token. If you try to create a new dimension with the same token as a dimension that already exists, an exception occurs. If you omit this value, AWS SDKs will automatically generate a unique client request.
+     * Each dimension must have a unique client request token. If you try to create a new dimension with the same token as a dimension that already exists, an exception occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request.
      */
     clientRequestToken: ClientRequestToken;
   }
@@ -3053,7 +3346,7 @@ declare namespace Iot {
      */
     name?: DimensionName;
     /**
-     * The ARN (Amazon resource name) of the created dimension.
+     * The Amazon Resource Name (ARN) of the created dimension.
      */
     arn?: DimensionArn;
   }
@@ -3067,11 +3360,11 @@ declare namespace Iot {
      */
     domainName?: DomainName;
     /**
-     * The ARNs of the certificates that AWS IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN. This value is not required for AWS-managed domains.
+     * The ARNs of the certificates that IoT passes to the device during the TLS handshake. Currently you can specify only one certificate ARN. This value is not required for Amazon Web Services-managed domains.
      */
     serverCertificateArns?: ServerCertificateArns;
     /**
-     * The certificate used to validate the server certificate and prove domain name ownership. This certificate must be signed by a public certificate authority. This value is not required for AWS-managed domains.
+     * The certificate used to validate the server certificate and prove domain name ownership. This certificate must be signed by a public certificate authority. This value is not required for Amazon Web Services-managed domains.
      */
     validationCertificateArn?: AcmCertificateArn;
     /**
@@ -3079,7 +3372,7 @@ declare namespace Iot {
      */
     authorizerConfig?: AuthorizerConfig;
     /**
-     * The type of service delivered by the endpoint.  AWS IoT Core currently supports only the DATA service type. 
+     * The type of service delivered by the endpoint.  Amazon Web Services IoT Core currently supports only the DATA service type. 
      */
     serviceType?: ServiceType;
     /**
@@ -3107,7 +3400,7 @@ declare namespace Iot {
      */
     thingGroupProperties?: ThingGroupProperties;
     /**
-     * The dynamic thing group index name.  Currently one index is supported: "AWS_Things". 
+     * The dynamic thing group index name.  Currently one index is supported: AWS_Things. 
      */
     indexName?: IndexName;
     /**
@@ -3149,9 +3442,61 @@ declare namespace Iot {
      */
     queryVersion?: QueryVersion;
   }
+  export interface CreateFleetMetricRequest {
+    /**
+     * The name of the fleet metric to create.
+     */
+    metricName: FleetMetricName;
+    /**
+     * The search query string.
+     */
+    queryString: QueryString;
+    /**
+     * The type of the aggregation query.
+     */
+    aggregationType: AggregationType;
+    /**
+     * The time in seconds between fleet metric emissions. Range [60(1 min), 86400(1 day)] and must be multiple of 60.
+     */
+    period: FleetMetricPeriod;
+    /**
+     * The field to aggregate.
+     */
+    aggregationField: AggregationField;
+    /**
+     * The fleet metric description.
+     */
+    description?: FleetMetricDescription;
+    /**
+     * The query version.
+     */
+    queryVersion?: QueryVersion;
+    /**
+     * The name of the index to search.
+     */
+    indexName?: IndexName;
+    /**
+     * Used to support unit transformation such as milliseconds to seconds. The unit must be supported by CW metric. Default to null.
+     */
+    unit?: FleetMetricUnit;
+    /**
+     * Metadata, which can be used to manage the fleet metric.
+     */
+    tags?: TagList;
+  }
+  export interface CreateFleetMetricResponse {
+    /**
+     * The name of the fleet metric to create.
+     */
+    metricName?: FleetMetricName;
+    /**
+     * The Amazon Resource Name (ARN) of the new fleet metric.
+     */
+    metricArn?: FleetMetricArn;
+  }
   export interface CreateJobRequest {
     /**
-     * A job identifier which must be unique for your AWS account. We recommend using a UUID. Alpha-numeric characters, "-" and "_" are valid for use here.
+     * A job identifier which must be unique for your Amazon Web Services account. We recommend using a UUID. Alpha-numeric characters, "-" and "_" are valid for use here.
      */
     jobId: JobId;
     /**
@@ -3159,11 +3504,11 @@ declare namespace Iot {
      */
     targets: JobTargets;
     /**
-     * An S3 link to the job document.
+     * An S3 link to the job document. Required if you don't specify a value for document.  If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document. The placeholder link is of the following form:  ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}  where bucket is your bucket name and key is the object in the bucket to which you are linking. 
      */
     documentSource?: JobDocumentSource;
     /**
-     * The job document.  If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document. The placeholder link is of the following form:  ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}  where bucket is your bucket name and key is the object in the bucket to which you are linking. 
+     * The job document. Required if you don't specify a value for documentSource.
      */
     document?: JobDocument;
     /**
@@ -3194,6 +3539,14 @@ declare namespace Iot {
      * Metadata which can be used to manage the job.
      */
     tags?: TagList;
+    /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
+    /**
+     * The ARN of the job template used to create the job.
+     */
+    jobTemplateArn?: JobTemplateArn;
   }
   export interface CreateJobResponse {
     /**
@@ -3209,6 +3562,46 @@ declare namespace Iot {
      */
     description?: JobDescription;
   }
+  export interface CreateJobTemplateRequest {
+    /**
+     * A unique identifier for the job template. We recommend using a UUID. Alpha-numeric characters, "-", and "_" are valid for use here.
+     */
+    jobTemplateId: JobTemplateId;
+    /**
+     * The ARN of the job to use as the basis for the job template.
+     */
+    jobArn?: JobArn;
+    /**
+     * An S3 link to the job document to use in the template. Required if you don't specify a value for document.  If the job document resides in an S3 bucket, you must use a placeholder link when specifying the document. The placeholder link is of the following form:  ${aws:iot:s3-presigned-url:https://s3.amazonaws.com/bucket/key}  where bucket is your bucket name and key is the object in the bucket to which you are linking. 
+     */
+    documentSource?: JobDocumentSource;
+    /**
+     * The job document. Required if you don't specify a value for documentSource.
+     */
+    document?: JobDocument;
+    /**
+     * A description of the job document.
+     */
+    description: JobDescription;
+    presignedUrlConfig?: PresignedUrlConfig;
+    jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
+    abortConfig?: AbortConfig;
+    timeoutConfig?: TimeoutConfig;
+    /**
+     * Metadata that can be used to manage the job template.
+     */
+    tags?: TagList;
+  }
+  export interface CreateJobTemplateResponse {
+    /**
+     * The ARN of the job template.
+     */
+    jobTemplateArn?: JobTemplateArn;
+    /**
+     * The unique identifier of the job template.
+     */
+    jobTemplateId?: JobTemplateId;
+  }
   export interface CreateKeysAndCertificateRequest {
     /**
      * Specifies whether the certificate is active.
@@ -3221,7 +3614,7 @@ declare namespace Iot {
      */
     certificateArn?: CertificateArn;
     /**
-     * The ID of the certificate. AWS IoT issues a default subject name for the certificate (for example, AWS IoT Certificate).
+     * The ID of the certificate. IoT issues a default subject name for the certificate (for example, IoT Certificate).
      */
     certificateId?: CertificateId;
     /**
@@ -3303,7 +3696,7 @@ declare namespace Iot {
      */
     files: OTAUpdateFiles;
     /**
-     * The IAM role that grants AWS IoT access to the Amazon S3, AWS IoT jobs and AWS Code Signing resources to create an OTA update job.
+     * The IAM role that grants Amazon Web Services IoT Core access to the Amazon S3, IoT jobs and Amazon Web Services Code Signing resources to create an OTA update job.
      */
     roleArn: RoleArn;
     /**
@@ -3321,7 +3714,7 @@ declare namespace Iot {
      */
     otaUpdateId?: OTAUpdateId;
     /**
-     * The AWS IoT job ID associated with the OTA update.
+     * The IoT job ID associated with the OTA update.
      */
     awsIotJobId?: AwsIotJobId;
     /**
@@ -3329,7 +3722,7 @@ declare namespace Iot {
      */
     otaUpdateArn?: OTAUpdateArn;
     /**
-     * The AWS IoT job ARN associated with the OTA update.
+     * The IoT job ARN associated with the OTA update.
      */
     awsIotJobArn?: AwsIotJobArn;
     /**
@@ -3511,7 +3904,7 @@ declare namespace Iot {
      */
     roleArn: RoleArn;
     /**
-     * How long (in seconds) the credentials will be valid.
+     * How long (in seconds) the credentials will be valid. The default value is 3,600 seconds.
      */
     credentialDurationSeconds?: CredentialDurationSeconds;
     /**
@@ -3531,15 +3924,15 @@ declare namespace Iot {
   }
   export interface CreateScheduledAuditRequest {
     /**
-     * How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY" or "MONTHLY". The start time of each audit is determined by the system.
+     * How often the scheduled audit takes place, either DAILY, WEEKLY, BIWEEKLY or MONTHLY. The start time of each audit is determined by the system.
      */
     frequency: AuditFrequency;
     /**
-     * The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
+     * The day of the month on which the scheduled audit takes place. This can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to MONTHLY. If days 29 to 31 are specified, and the month doesn't have that many days, the audit takes place on the LAST day of the month.
      */
     dayOfMonth?: DayOfMonth;
     /**
-     * The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".
+     * The day of the week on which the scheduled audit takes place, either SUN, MON, TUE, WED, THU, FRI, or SAT. This field is required if the frequency parameter is set to WEEKLY or BIWEEKLY.
      */
     dayOfWeek?: DayOfWeek;
     /**
@@ -3579,11 +3972,11 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.  Note: This API field is deprecated. Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
+     *  Please use CreateSecurityProfileRequest$additionalMetricsToRetainV2 instead.  A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.
      */
     additionalMetricsToRetainV2?: AdditionalMetricsToRetainV2List;
     /**
@@ -3780,7 +4173,11 @@ declare namespace Iot {
      */
     signatureAlgorithm?: SignatureAlgorithm;
   }
+  export type CustomMetricArn = string;
+  export type CustomMetricDisplayName = string;
+  export type CustomMetricType = "string-list"|"ip-address-list"|"number-list"|"number"|string;
   export type CustomerVersion = number;
+  export type DataCollectionPercentage = number;
   export type DateType = Date;
   export type DayOfMonth = string;
   export type DayOfWeek = "SUN"|"MON"|"TUE"|"WED"|"THU"|"FRI"|"SAT"|string;
@@ -3839,6 +4236,14 @@ declare namespace Iot {
      */
     forceDelete?: ForceDelete;
   }
+  export interface DeleteCustomMetricRequest {
+    /**
+     *  The name of the custom metric. 
+     */
+    metricName: MetricName;
+  }
+  export interface DeleteCustomMetricResponse {
+  }
   export interface DeleteDimensionRequest {
     /**
      * The unique identifier for the dimension that you want to delete.
@@ -3867,6 +4272,16 @@ declare namespace Iot {
   }
   export interface DeleteDynamicThingGroupResponse {
   }
+  export interface DeleteFleetMetricRequest {
+    /**
+     * The name of the fleet metric to delete.
+     */
+    metricName: FleetMetricName;
+    /**
+     * The expected version of the fleet metric to delete.
+     */
+    expectedVersion?: OptionalVersion;
+  }
   export interface DeleteJobExecutionRequest {
     /**
      * The ID of the job whose execution on a particular device will be deleted.
@@ -3884,6 +4299,10 @@ declare namespace Iot {
      * (Optional) When true, you can delete a job execution which is "IN_PROGRESS". Otherwise, you can only delete a job execution which is in a terminal state ("SUCCEEDED", "FAILED", "REJECTED", "REMOVED" or "CANCELED") or an exception will occur. The default is false.  Deleting a job execution which is "IN_PROGRESS", will cause the device to be unable to access job information or update the job execution status. Use caution and ensure that the device is able to recover to a valid state. 
      */
     force?: ForceFlag;
+    /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
   }
   export interface DeleteJobRequest {
     /**
@@ -3894,6 +4313,16 @@ declare namespace Iot {
      * (Optional) When true, you can delete a job which is "IN_PROGRESS". Otherwise, you can only delete a job which is in a terminal state ("COMPLETED" or "CANCELED") or an exception will occur. The default is false.  Deleting a job which is "IN_PROGRESS", will cause a device which is executing the job to be unable to access job information or update the job execution status. Use caution and ensure that each device executing a job which is deleted is able to recover to a valid state. 
      */
     force?: ForceFlag;
+    /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
+  }
+  export interface DeleteJobTemplateRequest {
+    /**
+     * The unique identifier of the job template to delete.
+     */
+    jobTemplateId: JobTemplateId;
   }
   export interface DeleteMitigationActionRequest {
     /**
@@ -3909,11 +4338,11 @@ declare namespace Iot {
      */
     otaUpdateId: OTAUpdateId;
     /**
-     * Specifies if the stream associated with an OTA update should be deleted when the OTA update is deleted.
+     * When true, the stream created by the OTAUpdate process is deleted when the OTA update is deleted. Ignored if the stream specified in the OTAUpdate is supplied by the user.
      */
     deleteStream?: DeleteStream;
     /**
-     * Specifies if the AWS Job associated with the OTA update should be deleted when the OTA update is deleted.
+     * When true, deletes the IoT job created by the OTAUpdate process even if it is "IN_PROGRESS". Otherwise, if the job is not in a terminal state ("COMPLETED" or "CANCELED") an exception will occur. The default is false.
      */
     forceDeleteAWSJob?: ForceDeleteAWSJob;
   }
@@ -4081,7 +4510,7 @@ declare namespace Iot {
   }
   export interface DescribeAccountAuditConfigurationResponse {
     /**
-     * The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates, and other items as required when performing an audit. On the first call to UpdateAccountAuditConfiguration, this parameter is required.
+     * The ARN of the role that grants permission to IoT to access information about your devices, policies, certificates, and other items as required when performing an audit. On the first call to UpdateAccountAuditConfiguration, this parameter is required.
      */
     roleArn?: RoleArn;
     /**
@@ -4106,7 +4535,7 @@ declare namespace Iot {
     /**
      * The unique identifier for the audit mitigation task.
      */
-    taskId: AuditMitigationActionsTaskId;
+    taskId: MitigationActionsTaskId;
   }
   export interface DescribeAuditMitigationActionsTaskResponse {
     /**
@@ -4262,6 +4691,38 @@ declare namespace Iot {
      */
     certificateDescription?: CertificateDescription;
   }
+  export interface DescribeCustomMetricRequest {
+    /**
+     *  The name of the custom metric. 
+     */
+    metricName: MetricName;
+  }
+  export interface DescribeCustomMetricResponse {
+    /**
+     *  The name of the custom metric. 
+     */
+    metricName?: MetricName;
+    /**
+     *  The Amazon Resource Number (ARN) of the custom metric. 
+     */
+    metricArn?: CustomMetricArn;
+    /**
+     *  The type of the custom metric. Types include string-list, ip-address-list, number-list, and number. 
+     */
+    metricType?: CustomMetricType;
+    /**
+     *  Field represents a friendly name in the console for the custom metric; doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated. 
+     */
+    displayName?: CustomMetricDisplayName;
+    /**
+     *  The creation date of the custom metric in milliseconds since epoch. 
+     */
+    creationDate?: Timestamp;
+    /**
+     *  The time the custom metric was last modified in milliseconds since epoch. 
+     */
+    lastModifiedDate?: Timestamp;
+  }
   export interface DescribeDefaultAuthorizerRequest {
   }
   export interface DescribeDefaultAuthorizerResponse {
@@ -4269,6 +4730,18 @@ declare namespace Iot {
      * The default authorizer's description.
      */
     authorizerDescription?: AuthorizerDescription;
+  }
+  export interface DescribeDetectMitigationActionsTaskRequest {
+    /**
+     *  The unique identifier of the task. 
+     */
+    taskId: MitigationActionsTaskId;
+  }
+  export interface DescribeDetectMitigationActionsTaskResponse {
+    /**
+     *  The description of a task. 
+     */
+    taskSummary?: DetectMitigationActionsTaskSummary;
   }
   export interface DescribeDimensionRequest {
     /**
@@ -4282,7 +4755,7 @@ declare namespace Iot {
      */
     name?: DimensionName;
     /**
-     * The ARN (Amazon resource name) for the dimension.
+     * The Amazon Resource Name (ARN) for the dimension.
      */
     arn?: DimensionArn;
     /**
@@ -4341,10 +4814,14 @@ declare namespace Iot {
      * The type of the domain.
      */
     domainType?: DomainType;
+    /**
+     * The date and time the domain configuration's status was last changed.
+     */
+    lastStatusChangeDate?: DateType;
   }
   export interface DescribeEndpointRequest {
     /**
-     * The endpoint type. Valid endpoint types include:    iot:Data - Returns a VeriSign signed data endpoint.      iot:Data-ATS - Returns an ATS signed data endpoint.      iot:CredentialProvider - Returns an AWS IoT credentials provider API endpoint.      iot:Jobs - Returns an AWS IoT device management Jobs API endpoint.   We strongly recommend that customers use the newer iot:Data-ATS endpoint type to avoid issues related to the widespread distrust of Symantec certificate authorities.
+     * The endpoint type. Valid endpoint types include:    iot:Data - Returns a VeriSign signed data endpoint.      iot:Data-ATS - Returns an ATS signed data endpoint.      iot:CredentialProvider - Returns an IoT credentials provider API endpoint.      iot:Jobs - Returns an IoT device management Jobs API endpoint.   We strongly recommend that customers use the newer iot:Data-ATS endpoint type to avoid issues related to the widespread distrust of Symantec certificate authorities.
      */
     endpointType?: EndpointType;
   }
@@ -4369,6 +4846,66 @@ declare namespace Iot {
      * The date the event configurations were last modified.
      */
     lastModifiedDate?: LastModifiedDate;
+  }
+  export interface DescribeFleetMetricRequest {
+    /**
+     * The name of the fleet metric to describe.
+     */
+    metricName: FleetMetricName;
+  }
+  export interface DescribeFleetMetricResponse {
+    /**
+     * The name of the fleet metric to describe.
+     */
+    metricName?: FleetMetricName;
+    /**
+     * The search query string.
+     */
+    queryString?: QueryString;
+    /**
+     * The type of the aggregation query.
+     */
+    aggregationType?: AggregationType;
+    /**
+     * The time in seconds between fleet metric emissions. Range [60(1 min), 86400(1 day)] and must be multiple of 60.
+     */
+    period?: FleetMetricPeriod;
+    /**
+     * The field to aggregate.
+     */
+    aggregationField?: AggregationField;
+    /**
+     * The fleet metric description.
+     */
+    description?: FleetMetricDescription;
+    /**
+     * The query version.
+     */
+    queryVersion?: QueryVersion;
+    /**
+     * The name of the index to search.
+     */
+    indexName?: IndexName;
+    /**
+     * The date when the fleet metric is created.
+     */
+    creationDate?: CreationDate;
+    /**
+     * The date when the fleet metric is last modified.
+     */
+    lastModifiedDate?: LastModifiedDate;
+    /**
+     * Used to support unit transformation such as milliseconds to seconds. The unit must be supported by CW metric.
+     */
+    unit?: FleetMetricUnit;
+    /**
+     * The version of the fleet metric.
+     */
+    version?: Version;
+    /**
+     * The ARN of the fleet metric to describe.
+     */
+    metricArn?: FleetMetricArn;
   }
   export interface DescribeIndexRequest {
     /**
@@ -4426,6 +4963,42 @@ declare namespace Iot {
      */
     job?: Job;
   }
+  export interface DescribeJobTemplateRequest {
+    /**
+     * The unique identifier of the job template.
+     */
+    jobTemplateId: JobTemplateId;
+  }
+  export interface DescribeJobTemplateResponse {
+    /**
+     * The ARN of the job template.
+     */
+    jobTemplateArn?: JobTemplateArn;
+    /**
+     * The unique identifier of the job template.
+     */
+    jobTemplateId?: JobTemplateId;
+    /**
+     * A description of the job template.
+     */
+    description?: JobDescription;
+    /**
+     * An S3 link to the job document.
+     */
+    documentSource?: JobDocumentSource;
+    /**
+     * The job document.
+     */
+    document?: JobDocument;
+    /**
+     * The time, in seconds since the epoch, when the job template was created.
+     */
+    createdAt?: DateType;
+    presignedUrlConfig?: PresignedUrlConfig;
+    jobExecutionsRolloutConfig?: JobExecutionsRolloutConfig;
+    abortConfig?: AbortConfig;
+    timeoutConfig?: TimeoutConfig;
+  }
   export interface DescribeMitigationActionRequest {
     /**
      * The friendly name that uniquely identifies the mitigation action.
@@ -4458,7 +5031,7 @@ declare namespace Iot {
      */
     actionParams?: MitigationActionParams;
     /**
-     * The date and time when the mitigation action was added to your AWS account.
+     * The date and time when the mitigation action was added to your Amazon Web Services accounts.
      */
     creationDate?: Timestamp;
     /**
@@ -4562,15 +5135,15 @@ declare namespace Iot {
   }
   export interface DescribeScheduledAuditResponse {
     /**
-     * How often the scheduled audit takes place. One of "DAILY", "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each audit is determined by the system.
+     * How often the scheduled audit takes place, either one of DAILY, WEEKLY, BIWEEKLY, or MONTHLY. The start time of each audit is determined by the system.
      */
     frequency?: AuditFrequency;
     /**
-     * The day of the month on which the scheduled audit takes place. Will be "1" through "31" or "LAST". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
+     * The day of the month on which the scheduled audit takes place. This is will be 1 through 31 or LAST. If days 29-31 are specified, and the month does not have that many days, the audit takes place on the LAST day of the month.
      */
     dayOfMonth?: DayOfMonth;
     /**
-     * The day of the week on which the scheduled audit takes place. One of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT".
+     * The day of the week on which the scheduled audit takes place, either one of SUN, MON, TUE, WED, THU, FRI, or SAT.
      */
     dayOfWeek?: DayOfWeek;
     /**
@@ -4614,7 +5187,7 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.  Note: This API field is deprecated. Please use DescribeSecurityProfileResponse$additionalMetricsToRetainV2 instead.
+     *  Please use DescribeSecurityProfileResponse$additionalMetricsToRetainV2 instead.  A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
@@ -4758,7 +5331,7 @@ declare namespace Iot {
   }
   export interface DescribeThingResponse {
     /**
-     * The default MQTT client ID. For a typical device, the thing name is also used as the default MQTT client ID. Although we don’t require a mapping between a thing's registry name and its use of MQTT client IDs, certificates, or shadow state, we recommend that you choose a thing name and use it as the MQTT client ID for the registry and the Device Shadow service. This lets you better organize your AWS IoT fleet without removing the flexibility of the underlying device certificate model or shadows.
+     * The default MQTT client ID. For a typical device, the thing name is also used as the default MQTT client ID. Although we don’t require a mapping between a thing's registry name and its use of MQTT client IDs, certificates, or shadow state, we recommend that you choose a thing name and use it as the MQTT client ID for the registry and the Device Shadow service. This lets you better organize your IoT fleet without removing the flexibility of the underlying device certificate model or shadows.
      */
     defaultClientId?: ClientId;
     /**
@@ -4872,6 +5445,120 @@ declare namespace Iot {
   export type DetailsKey = string;
   export type DetailsMap = {[key: string]: DetailsValue};
   export type DetailsValue = string;
+  export interface DetectMitigationActionExecution {
+    /**
+     *  The unique identifier of the task. 
+     */
+    taskId?: MitigationActionsTaskId;
+    /**
+     *  The unique identifier of the violation. 
+     */
+    violationId?: ViolationId;
+    /**
+     *  The friendly name that uniquely identifies the mitigation action. 
+     */
+    actionName?: MitigationActionName;
+    /**
+     *  The name of the thing. 
+     */
+    thingName?: DeviceDefenderThingName;
+    /**
+     *  The date a mitigation action was started. 
+     */
+    executionStartDate?: Timestamp;
+    /**
+     *  The date a mitigation action ended. 
+     */
+    executionEndDate?: Timestamp;
+    /**
+     *  The status of a mitigation action. 
+     */
+    status?: DetectMitigationActionExecutionStatus;
+    /**
+     *  The error code of a mitigation action. 
+     */
+    errorCode?: DetectMitigationActionExecutionErrorCode;
+    /**
+     *  The message of a mitigation action. 
+     */
+    message?: ErrorMessage;
+  }
+  export type DetectMitigationActionExecutionErrorCode = string;
+  export type DetectMitigationActionExecutionList = DetectMitigationActionExecution[];
+  export type DetectMitigationActionExecutionStatus = "IN_PROGRESS"|"SUCCESSFUL"|"FAILED"|"SKIPPED"|string;
+  export interface DetectMitigationActionsTaskStatistics {
+    /**
+     *  The actions that were performed. 
+     */
+    actionsExecuted?: GenericLongValue;
+    /**
+     *  The actions that were skipped. 
+     */
+    actionsSkipped?: GenericLongValue;
+    /**
+     *  The actions that failed. 
+     */
+    actionsFailed?: GenericLongValue;
+  }
+  export type DetectMitigationActionsTaskStatus = "IN_PROGRESS"|"SUCCESSFUL"|"FAILED"|"CANCELED"|string;
+  export interface DetectMitigationActionsTaskSummary {
+    /**
+     *  The unique identifier of the task. 
+     */
+    taskId?: MitigationActionsTaskId;
+    /**
+     *  The status of the task. 
+     */
+    taskStatus?: DetectMitigationActionsTaskStatus;
+    /**
+     *  The date the task started. 
+     */
+    taskStartTime?: Timestamp;
+    /**
+     *  The date the task ended. 
+     */
+    taskEndTime?: Timestamp;
+    /**
+     *  Specifies the ML Detect findings to which the mitigation actions are applied. 
+     */
+    target?: DetectMitigationActionsTaskTarget;
+    /**
+     *  Specifies the time period of which violation events occurred between. 
+     */
+    violationEventOccurrenceRange?: ViolationEventOccurrenceRange;
+    /**
+     *  Includes only active violations. 
+     */
+    onlyActiveViolationsIncluded?: PrimitiveBoolean;
+    /**
+     *  Includes suppressed alerts. 
+     */
+    suppressedAlertsIncluded?: PrimitiveBoolean;
+    /**
+     *  The definition of the actions. 
+     */
+    actionsDefinition?: MitigationActionList;
+    /**
+     *  The statistics of a mitigation action task. 
+     */
+    taskStatistics?: DetectMitigationActionsTaskStatistics;
+  }
+  export type DetectMitigationActionsTaskSummaryList = DetectMitigationActionsTaskSummary[];
+  export interface DetectMitigationActionsTaskTarget {
+    /**
+     *  The unique identifiers of the violations. 
+     */
+    violationIds?: TargetViolationIdsForDetectMitigationActions;
+    /**
+     *  The name of the security profile. 
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     *  The name of the behavior. 
+     */
+    behaviorName?: BehaviorName;
+  }
+  export type DetectMitigationActionsToExecuteList = MitigationActionName[];
   export type DeviceCertificateUpdateAction = "DEACTIVATE"|string;
   export type DeviceDefenderThingName = string;
   export type DimensionArn = string;
@@ -4888,6 +5575,7 @@ declare namespace Iot {
      */
     ruleName: RuleName;
   }
+  export type DisconnectReason = string;
   export type DomainConfigurationArn = string;
   export type DomainConfigurationName = string;
   export type DomainConfigurationStatus = "ENABLED"|"DISABLED"|string;
@@ -5007,11 +5695,11 @@ declare namespace Iot {
   export type ElasticsearchType = string;
   export interface EnableIoTLoggingParams {
     /**
-     * The ARN of the IAM role used for logging.
+     * The Amazon Resource Name (ARN) of the IAM role used for logging.
      */
     roleArnForLogging: RoleArn;
     /**
-     * Specifies the types of information to be logged.
+     * Specifies the type of information to be logged.
      */
     logLevel: LogLevel;
   }
@@ -5056,11 +5744,11 @@ declare namespace Iot {
      */
     baseRatePerMinute: RolloutRatePerMinute;
     /**
-     * The exponential factor to increase the rate of rollout for a job.
+     * The exponential factor to increase the rate of rollout for a job. Amazon Web Services IoT Core supports up to one digit after the decimal (for example, 1.5, but not 1.55).
      */
     incrementFactor: IncrementFactor;
     /**
-     * The criteria to initiate the increase in rate of rollout for a job. AWS IoT supports up to one digit after the decimal (for example, 1.5, but not 1.55).
+     * The criteria to initiate the increase in rate of rollout for a job.
      */
     rateIncreaseCriteria: RateIncreaseCriteria;
   }
@@ -5073,7 +5761,7 @@ declare namespace Iot {
      */
     name?: FieldName;
     /**
-     * The datatype of the field.
+     * The data type of the field.
      */
     type?: FieldType;
   }
@@ -5092,6 +5780,7 @@ declare namespace Iot {
     s3Location?: S3Location;
   }
   export type FileName = string;
+  export type FileType = number;
   export type FindingId = string;
   export type FindingIds = FindingId[];
   export interface FirehoseAction {
@@ -5107,22 +5796,99 @@ declare namespace Iot {
      * A character separator that will be used to separate records written to the Firehose stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows newline), ',' (comma).
      */
     separator?: FirehoseSeparator;
+    /**
+     * Whether to deliver the Kinesis Data Firehose stream as a batch by using  PutRecordBatch . The default value is false. When batchMode is true and the rule's SQL statement evaluates to an Array, each Array element forms one record in the  PutRecordBatch  request. The resulting array can't have more than 500 records.
+     */
+    batchMode?: BatchMode;
   }
   export type FirehoseSeparator = string;
   export type Flag = boolean;
+  export type FleetMetricArn = string;
+  export type FleetMetricDescription = string;
+  export type FleetMetricName = string;
+  export interface FleetMetricNameAndArn {
+    /**
+     * The fleet metric name.
+     */
+    metricName?: FleetMetricName;
+    /**
+     * The fleet metric ARN.
+     */
+    metricArn?: FleetMetricArn;
+  }
+  export type FleetMetricNameAndArnList = FleetMetricNameAndArn[];
+  export type FleetMetricPeriod = number;
+  export type FleetMetricUnit = "Seconds"|"Microseconds"|"Milliseconds"|"Bytes"|"Kilobytes"|"Megabytes"|"Gigabytes"|"Terabytes"|"Bits"|"Kilobits"|"Megabits"|"Gigabits"|"Terabits"|"Percent"|"Count"|"Bytes/Second"|"Kilobytes/Second"|"Megabytes/Second"|"Gigabytes/Second"|"Terabytes/Second"|"Bits/Second"|"Kilobits/Second"|"Megabits/Second"|"Gigabits/Second"|"Terabits/Second"|"Count/Second"|"None"|string;
   export type ForceDelete = boolean;
   export type ForceDeleteAWSJob = boolean;
   export type ForceFlag = boolean;
   export type Forced = boolean;
   export type FunctionArn = string;
   export type GenerationId = string;
+  export type GenericLongValue = number;
+  export interface GetBehaviorModelTrainingSummariesRequest {
+    /**
+     *  The name of the security profile. 
+     */
+    securityProfileName?: SecurityProfileName;
+    /**
+     *  The maximum number of results to return at one time. The default is 25. 
+     */
+    maxResults?: TinyMaxResults;
+    /**
+     *  The token for the next set of results. 
+     */
+    nextToken?: NextToken;
+  }
+  export interface GetBehaviorModelTrainingSummariesResponse {
+    /**
+     *  A list of all ML Detect behaviors and their model status for a given Security Profile. 
+     */
+    summaries?: BehaviorModelTrainingSummaries;
+    /**
+     *  A token that can be used to retrieve the next set of results, or null if there are no additional results. 
+     */
+    nextToken?: NextToken;
+  }
+  export interface GetBucketsAggregationRequest {
+    /**
+     * The name of the index to search.
+     */
+    indexName?: IndexName;
+    /**
+     * The search query string.
+     */
+    queryString: QueryString;
+    /**
+     * The aggregation field.
+     */
+    aggregationField: AggregationField;
+    /**
+     * The version of the query.
+     */
+    queryVersion?: QueryVersion;
+    /**
+     * The basic control of the response shape and the bucket aggregation type to perform. 
+     */
+    bucketsAggregationType: BucketsAggregationType;
+  }
+  export interface GetBucketsAggregationResponse {
+    /**
+     * The total number of documents that fit the query string criteria and contain a value for the Aggregation field targeted in the request.
+     */
+    totalCount?: Count;
+    /**
+     * The main part of the response with a list of buckets. Each bucket contains a keyValue and a count.  keyValue: The aggregation field value counted for the particular bucket.  count: The number of documents that have that value.
+     */
+    buckets?: Buckets;
+  }
   export interface GetCardinalityRequest {
     /**
      * The name of the index to search.
      */
     indexName?: IndexName;
     /**
-     * The search query.
+     * The search query string.
      */
     queryString: QueryString;
     /**
@@ -5214,7 +5980,7 @@ declare namespace Iot {
      */
     indexName?: IndexName;
     /**
-     * The query string.
+     * The search query string.
      */
     queryString: QueryString;
     /**
@@ -5330,7 +6096,7 @@ declare namespace Iot {
      */
     indexName?: IndexName;
     /**
-     * The query used to search. You can specify "*" for the query string to get the count of all indexed things in your AWS account.
+     * The query used to search. You can specify "*" for the query string to get the count of all indexed things in your Amazon Web Services account.
      */
     queryString: QueryString;
     /**
@@ -5380,7 +6146,7 @@ declare namespace Iot {
   }
   export interface GetV2LoggingOptionsResponse {
     /**
-     * The IAM role ARN AWS IoT uses to write to your CloudWatch logs.
+     * The IAM role ARN IoT uses to write to your CloudWatch logs.
      */
     roleArn?: AwsArn;
     /**
@@ -5414,7 +6180,7 @@ declare namespace Iot {
      */
     url: Url;
     /**
-     * The URL to which AWS IoT sends a confirmation message. The value of the confirmation URL must be a prefix of the endpoint URL. If you do not specify a confirmation URL AWS IoT uses the endpoint URL as the confirmation URL. If you use substitution templates in the confirmationUrl, you must create and enable topic rule destinations that match each possible value of the substitution template before traffic is allowed to your endpoint URL.
+     * The URL to which IoT sends a confirmation message. The value of the confirmation URL must be a prefix of the endpoint URL. If you do not specify a confirmation URL IoT uses the endpoint URL as the confirmation URL. If you use substitution templates in the confirmationUrl, you must create and enable topic rule destinations that match each possible value of the substitution template before traffic is allowed to your endpoint URL.
      */
     confirmationUrl?: Url;
     /**
@@ -5458,7 +6224,7 @@ declare namespace Iot {
   export type HttpQueryString = string;
   export interface HttpUrlDestinationConfiguration {
     /**
-     * The URL AWS IoT uses to confirm ownership of or access to the topic rule destination URL.
+     * The URL IoT uses to confirm ownership of or access to the topic rule destination URL.
      */
     confirmationUrl: Url;
   }
@@ -5500,21 +6266,29 @@ declare namespace Iot {
      */
     channelName?: ChannelName;
     /**
+     * Whether to process the action as a batch. The default value is false. When batchMode is true and the rule SQL statement evaluates to an Array, each Array element is delivered as a separate message when passed by  BatchPutMessage  to the IoT Analytics channel. The resulting array can't have more than 100 messages.
+     */
+    batchMode?: BatchMode;
+    /**
      * The ARN of the role which has a policy that grants IoT Analytics permission to send message data via IoT Analytics (iotanalytics:BatchPutMessage).
      */
     roleArn?: AwsArn;
   }
   export interface IotEventsAction {
     /**
-     * The name of the AWS IoT Events input.
+     * The name of the IoT Events input.
      */
     inputName: InputName;
     /**
-     * [Optional] Use this to ensure that only one input (message) with a given messageId will be processed by an AWS IoT Events detector.
+     * The ID of the message. The default messageId is a new UUID value. When batchMode is true, you can't specify a messageId--a new UUID value will be assigned. Assign a value to this property to ensure that only one input (message) with a given messageId will be processed by an IoT Events detector.
      */
     messageId?: MessageId;
     /**
-     * The ARN of the role that grants AWS IoT permission to send an input to an AWS IoT Events detector. ("Action":"iotevents:BatchPutMessage").
+     * Whether to process the event actions as a batch. The default value is false. When batchMode is true, you can't specify a messageId.  When batchMode is true and the rule SQL statement evaluates to an Array, each Array element is treated as a separate message when it's sent to IoT Events by calling  BatchPutMessage . The resulting array can't have more than 10 messages.
+     */
+    batchMode?: BatchMode;
+    /**
+     * The ARN of the role that grants IoT permission to send an input to an IoT Events detector. ("Action":"iotevents:BatchPutMessage").
      */
     roleArn: AwsArn;
   }
@@ -5524,7 +6298,7 @@ declare namespace Iot {
      */
     putAssetPropertyValueEntries: PutAssetPropertyValueEntryList;
     /**
-     * The ARN of the role that grants AWS IoT permission to send an asset property value to AWS IoTSiteWise. ("Action": "iotsitewise:BatchPutAssetPropertyValue"). The trust policy can restrict access to specific asset hierarchy paths.
+     * The ARN of the role that grants IoT permission to send an asset property value to IoT SiteWise. ("Action": "iotsitewise:BatchPutAssetPropertyValue"). The trust policy can restrict access to specific asset hierarchy paths.
      */
     roleArn: AwsArn;
   }
@@ -5601,6 +6375,14 @@ declare namespace Iot {
      * Specifies the amount of time each device has to finish its execution of the job. A timer is started when the job execution status is set to IN_PROGRESS. If the job execution status is not set to another terminal state before the timer expires, it will be automatically set to TIMED_OUT.
      */
     timeoutConfig?: TimeoutConfig;
+    /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
+    /**
+     * The ARN of the job template used to create the job.
+     */
+    jobTemplateArn?: JobTemplateArn;
   }
   export type JobArn = string;
   export type JobDescription = string;
@@ -5790,7 +6572,50 @@ declare namespace Iot {
   }
   export type JobSummaryList = JobSummary[];
   export type JobTargets = TargetArn[];
+  export type JobTemplateArn = string;
+  export type JobTemplateId = string;
+  export interface JobTemplateSummary {
+    /**
+     * The ARN of the job template.
+     */
+    jobTemplateArn?: JobTemplateArn;
+    /**
+     * The unique identifier of the job template.
+     */
+    jobTemplateId?: JobTemplateId;
+    /**
+     * A description of the job template.
+     */
+    description?: JobDescription;
+    /**
+     * The time, in seconds since the epoch, when the job template was created.
+     */
+    createdAt?: DateType;
+  }
+  export type JobTemplateSummaryList = JobTemplateSummary[];
   export type JsonDocument = string;
+  export interface KafkaAction {
+    /**
+     * The ARN of Kafka action's VPC TopicRuleDestination.
+     */
+    destinationArn: AwsArn;
+    /**
+     * The Kafka topic for messages to be sent to the Kafka broker.
+     */
+    topic: String;
+    /**
+     * The Kafka message key.
+     */
+    key?: String;
+    /**
+     * The Kafka message partition.
+     */
+    partition?: String;
+    /**
+     * Properties of the Apache Kafka producer client.
+     */
+    clientProperties: ClientProperties;
+  }
   export type Key = string;
   export type KeyName = string;
   export interface KeyPair {
@@ -5826,6 +6651,7 @@ declare namespace Iot {
   }
   export type LaserMaxResults = number;
   export type LastModifiedDate = Date;
+  export type LastUpdatedAtDate = Date;
   export interface ListActiveViolationsRequest {
     /**
      * The name of the thing whose active violations are listed.
@@ -5835,6 +6661,14 @@ declare namespace Iot {
      * The name of the Device Defender security profile for which violations are listed.
      */
     securityProfileName?: SecurityProfileName;
+    /**
+     *  The criteria for a behavior. 
+     */
+    behaviorCriteriaType?: BehaviorCriteriaType;
+    /**
+     *  A list of all suppressed alerts. 
+     */
+    listSuppressedAlerts?: ListSuppressedAlerts;
     /**
      * The token for the next set of results.
      */
@@ -5930,7 +6764,7 @@ declare namespace Iot {
     /**
      * Specify this filter to limit results to actions for a specific audit mitigation actions task.
      */
-    taskId: AuditMitigationActionsTaskId;
+    taskId: MitigationActionsTaskId;
     /**
      * Specify this filter to limit results to those with a specific status.
      */
@@ -6026,7 +6860,7 @@ declare namespace Iot {
   }
   export interface ListAuditTasksRequest {
     /**
-     * The beginning of the time period. Audit information is retained for a limited time (180 days). Requesting a start time prior to what is retained results in an "InvalidRequestException".
+     * The beginning of the time period. Audit information is retained for a limited time (90 days). Requesting a start time prior to what is retained results in an "InvalidRequestException".
      */
     startTime: Timestamp;
     /**
@@ -6090,7 +6924,7 @@ declare namespace Iot {
   }
   export interface ListBillingGroupsRequest {
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6108,7 +6942,7 @@ declare namespace Iot {
      */
     billingGroups?: BillingGroupNameAndArnList;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
@@ -6128,7 +6962,7 @@ declare namespace Iot {
   }
   export interface ListCACertificatesResponse {
     /**
-     * The CA certificates registered in your AWS account.
+     * The CA certificates registered in your Amazon Web Services account.
      */
     certificates?: CACertificates;
     /**
@@ -6188,6 +7022,94 @@ declare namespace Iot {
      */
     nextMarker?: Marker;
   }
+  export interface ListCustomMetricsRequest {
+    /**
+     *  The token for the next set of results. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  The maximum number of results to return at one time. The default is 25. 
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListCustomMetricsResponse {
+    /**
+     *  The name of the custom metric. 
+     */
+    metricNames?: MetricNames;
+    /**
+     *  A token that can be used to retrieve the next set of results, or null if there are no additional results. 
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListDetectMitigationActionsExecutionsRequest {
+    /**
+     *  The unique identifier of the task. 
+     */
+    taskId?: MitigationActionsTaskId;
+    /**
+     *  The unique identifier of the violation. 
+     */
+    violationId?: ViolationId;
+    /**
+     *  The name of the thing whose mitigation actions are listed. 
+     */
+    thingName?: DeviceDefenderThingName;
+    /**
+     *  A filter to limit results to those found after the specified time. You must specify either the startTime and endTime or the taskId, but not both. 
+     */
+    startTime?: Timestamp;
+    /**
+     *  The end of the time period for which ML Detect mitigation actions executions are returned. 
+     */
+    endTime?: Timestamp;
+    /**
+     *  The maximum number of results to return at one time. The default is 25. 
+     */
+    maxResults?: MaxResults;
+    /**
+     *  The token for the next set of results. 
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListDetectMitigationActionsExecutionsResponse {
+    /**
+     *  List of actions executions. 
+     */
+    actionsExecutions?: DetectMitigationActionExecutionList;
+    /**
+     *  A token that can be used to retrieve the next set of results, or null if there are no additional results. 
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListDetectMitigationActionsTasksRequest {
+    /**
+     * The maximum number of results to return at one time. The default is 25.
+     */
+    maxResults?: MaxResults;
+    /**
+     *  The token for the next set of results. 
+     */
+    nextToken?: NextToken;
+    /**
+     *  A filter to limit results to those found after the specified time. You must specify either the startTime and endTime or the taskId, but not both. 
+     */
+    startTime: Timestamp;
+    /**
+     *  The end of the time period for which ML Detect mitigation actions tasks are returned. 
+     */
+    endTime: Timestamp;
+  }
+  export interface ListDetectMitigationActionsTasksResponse {
+    /**
+     *  The collection of ML Detect mitigation tasks that matched the filter criteria. 
+     */
+    tasks?: DetectMitigationActionsTaskSummaryList;
+    /**
+     *  A token that can be used to retrieve the next set of results, or null if there are no additional results. 
+     */
+    nextToken?: NextToken;
+  }
   export interface ListDimensionsRequest {
     /**
      * The token for the next set of results.
@@ -6231,6 +7153,26 @@ declare namespace Iot {
      * The marker for the next set of results.
      */
     nextMarker?: Marker;
+  }
+  export interface ListFleetMetricsRequest {
+    /**
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return in this operation.
+     */
+    maxResults?: MaxResults;
+  }
+  export interface ListFleetMetricsResponse {
+    /**
+     * The list of fleet metrics objects.
+     */
+    fleetMetrics?: FleetMetricNameAndArnList;
+    /**
+     * The token for the next set of results. Will not be returned if the operation has returned all results.
+     */
+    nextToken?: NextToken;
   }
   export interface ListIndicesRequest {
     /**
@@ -6290,6 +7232,10 @@ declare namespace Iot {
      */
     status?: JobExecutionStatus;
     /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
+    /**
      * The maximum number of results to be returned per request.
      */
     maxResults?: LaserMaxResults;
@@ -6303,6 +7249,26 @@ declare namespace Iot {
      * A list of job execution summaries.
      */
     executionSummaries?: JobExecutionSummaryForThingList;
+    /**
+     * The token for the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListJobTemplatesRequest {
+    /**
+     * The maximum number of results to return in the list.
+     */
+    maxResults?: LaserMaxResults;
+    /**
+     * The token to use to return the next set of results in the list.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListJobTemplatesResponse {
+    /**
+     * A list of objects that contain information about the job templates.
+     */
+    jobTemplates?: JobTemplateSummaryList;
     /**
      * The token for the next set of results, or null if there are no additional results.
      */
@@ -6333,6 +7299,10 @@ declare namespace Iot {
      * A filter that limits the returned jobs to those for the specified group.
      */
     thingGroupId?: ThingGroupId;
+    /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
   }
   export interface ListJobsResponse {
     /**
@@ -6510,7 +7480,7 @@ declare namespace Iot {
   }
   export interface ListPrincipalThingsRequest {
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6528,7 +7498,7 @@ declare namespace Iot {
      */
     things?: ThingNameList;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
@@ -6658,9 +7628,13 @@ declare namespace Iot {
      */
     maxResults?: MaxResults;
     /**
-     * A filter to limit results to the security profiles that use the defined dimension.
+     * A filter to limit results to the security profiles that use the defined dimension. Cannot be used with metricName 
      */
     dimensionName?: DimensionName;
+    /**
+     *  The name of the custom metric. Cannot be used with dimensionName. 
+     */
+    metricName?: MetricName;
   }
   export interface ListSecurityProfilesResponse {
     /**
@@ -6696,6 +7670,7 @@ declare namespace Iot {
      */
     nextToken?: NextToken;
   }
+  export type ListSuppressedAlerts = boolean;
   export type ListSuppressedFindings = boolean;
   export interface ListTagsForResourceRequest {
     /**
@@ -6703,7 +7678,7 @@ declare namespace Iot {
      */
     resourceArn: ResourceArn;
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
   }
@@ -6713,7 +7688,7 @@ declare namespace Iot {
      */
     tags?: TagList;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
@@ -6771,7 +7746,7 @@ declare namespace Iot {
      */
     thingName: ThingName;
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6785,13 +7760,13 @@ declare namespace Iot {
      */
     thingGroups?: ThingGroupNameAndArnList;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
   export interface ListThingGroupsRequest {
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6817,11 +7792,19 @@ declare namespace Iot {
      */
     thingGroups?: ThingGroupNameAndArnList;
     /**
-     * The token used to get the next set of results. Will not be returned if operation has returned all results.
+     * The token to use to get the next set of results. Will not be returned if operation has returned all results.
      */
     nextToken?: NextToken;
   }
   export interface ListThingPrincipalsRequest {
+    /**
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
+     */
+    nextToken?: NextToken;
+    /**
+     * The maximum number of results to return in this operation.
+     */
+    maxResults?: RegistryMaxResults;
     /**
      * The name of the thing.
      */
@@ -6832,6 +7815,10 @@ declare namespace Iot {
      * The principals associated with the thing.
      */
     principals?: Principals;
+    /**
+     * The token to use to get the next set of results, or null if there are no additional results.
+     */
+    nextToken?: NextToken;
   }
   export interface ListThingRegistrationTaskReportsRequest {
     /**
@@ -6843,7 +7830,7 @@ declare namespace Iot {
      */
     reportType: ReportType;
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6861,13 +7848,13 @@ declare namespace Iot {
      */
     reportType?: ReportType;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
   export interface ListThingRegistrationTasksRequest {
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6885,13 +7872,13 @@ declare namespace Iot {
      */
     taskIds?: TaskIdList;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
   export interface ListThingTypesRequest {
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6919,7 +7906,7 @@ declare namespace Iot {
      */
     billingGroupName: BillingGroupName;
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6933,7 +7920,7 @@ declare namespace Iot {
      */
     things?: ThingNameList;
     /**
-     * The token used to get the next set of results. Will not be returned if operation has returned all results.
+     * The token to use to get the next set of results. Will not be returned if operation has returned all results.
      */
     nextToken?: NextToken;
   }
@@ -6947,7 +7934,7 @@ declare namespace Iot {
      */
     recursive?: Recursive;
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6961,13 +7948,13 @@ declare namespace Iot {
      */
     things?: ThingNameList;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
   export interface ListThingsRequest {
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -6986,6 +7973,10 @@ declare namespace Iot {
      * The name of the thing type used to search for things.
      */
     thingTypeName?: ThingTypeName;
+    /**
+     * When true, the action returns the thing resources with attribute values that start with the attributeValue provided. When false, or not present, the action returns only the thing resources with attribute values that match the entire attributeValue provided. 
+     */
+    usePrefixAttributeValue?: usePrefixAttributeValue;
   }
   export interface ListThingsResponse {
     /**
@@ -6993,7 +7984,7 @@ declare namespace Iot {
      */
     things?: ThingAttributeList;
     /**
-     * The token used to get the next set of results. Will not be returned if operation has returned all results.
+     * The token to use to get the next set of results. Will not be returned if operation has returned all results.
      */
     nextToken?: NextToken;
   }
@@ -7003,7 +7994,7 @@ declare namespace Iot {
      */
     maxResults?: TopicRuleDestinationMaxResults;
     /**
-     * The token to retrieve the next set of results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
   }
@@ -7013,7 +8004,7 @@ declare namespace Iot {
      */
     destinationSummaries?: TopicRuleDestinationSummaries;
     /**
-     * The token to retrieve the next set of results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
@@ -7027,7 +8018,7 @@ declare namespace Iot {
      */
     maxResults?: TopicRuleMaxResults;
     /**
-     * A token used to retrieve the next value.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -7041,7 +8032,7 @@ declare namespace Iot {
      */
     rules?: TopicRuleList;
     /**
-     * A token used to retrieve the next value.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
@@ -7051,7 +8042,7 @@ declare namespace Iot {
      */
     targetType?: LogTargetType;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * To retrieve the next set of results, the nextToken value from a previous response; otherwise null to receive the first set of results.
      */
     nextToken?: NextToken;
     /**
@@ -7065,7 +8056,7 @@ declare namespace Iot {
      */
     logTargetConfigurations?: LogTargetConfigurations;
     /**
-     * The token used to get the next set of results, or null if there are no additional results.
+     * The token to use to get the next set of results, or null if there are no additional results.
      */
     nextToken?: NextToken;
   }
@@ -7086,6 +8077,14 @@ declare namespace Iot {
      * A filter to limit results to those alerts generated by the specified security profile.
      */
     securityProfileName?: SecurityProfileName;
+    /**
+     *  The criteria for a behavior. 
+     */
+    behaviorCriteriaType?: BehaviorCriteriaType;
+    /**
+     *  A list of all suppressed alerts. 
+     */
+    listSuppressedAlerts?: ListSuppressedAlerts;
     /**
      * The token for the next set of results.
      */
@@ -7140,7 +8139,14 @@ declare namespace Iot {
      */
     logLevel?: LogLevel;
   }
+  export interface MachineLearningDetectionConfig {
+    /**
+     *  The sensitivity of anomalous behavior evaluation. Can be Low, Medium, or High. 
+     */
+    confidenceLevel: ConfidenceLevel;
+  }
   export type Marker = string;
+  export type MaxBuckets = number;
   export type MaxJobExecutionsPerMin = number;
   export type MaxResults = number;
   export type Maximum = number;
@@ -7158,13 +8164,15 @@ declare namespace Iot {
      */
     operator?: DimensionValueOperator;
   }
+  export type MetricName = string;
+  export type MetricNames = MetricName[];
   export interface MetricToRetain {
     /**
      * What is measured by the behavior.
      */
     metric: BehaviorMetric;
     /**
-     * The dimension of a metric.
+     * The dimension of a metric. This can't be used with custom metrics.
      */
     metricDimension?: MetricDimension;
   }
@@ -7181,6 +8189,18 @@ declare namespace Iot {
      * If the comparisonOperator calls for a set of ports, use this to specify that set to be compared with the metric.
      */
     ports?: Ports;
+    /**
+     *  The numeral value of a metric. 
+     */
+    number?: Number;
+    /**
+     *  The numeral values of a metric. 
+     */
+    numbers?: NumberList;
+    /**
+     *  The string values of a metric. 
+     */
+    strings?: StringList;
   }
   export type Minimum = number;
   export type MinimumNumberOfExecutedThings = number;
@@ -7242,15 +8262,17 @@ declare namespace Iot {
      */
     replaceDefaultPolicyVersionParams?: ReplaceDefaultPolicyVersionParams;
     /**
-     * Parameters to define a mitigation action that enables AWS IoT logging at a specified level of detail.
+     * Parameters to define a mitigation action that enables Amazon Web Services IoT Core logging at a specified level of detail.
      */
     enableIoTLoggingParams?: EnableIoTLoggingParams;
     /**
-     * Parameters to define a mitigation action that publishes findings to Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
+     * Parameters to define a mitigation action that publishes findings to Amazon Simple Notification Service (Amazon SNS. You can implement your own custom actions in response to the Amazon SNS messages.
      */
     publishFindingToSnsParams?: PublishFindingToSnsParams;
   }
   export type MitigationActionType = "UPDATE_DEVICE_CERTIFICATE"|"UPDATE_CA_CERTIFICATE"|"ADD_THINGS_TO_THING_GROUP"|"REPLACE_DEFAULT_POLICY_VERSION"|"ENABLE_IOT_LOGGING"|"PUBLISH_FINDING_TO_SNS"|string;
+  export type MitigationActionsTaskId = string;
+  export type ModelStatus = "PENDING_BUILD"|"ACTIVE"|"EXPIRED"|string;
   export type MqttClientId = string;
   export interface MqttContext {
     /**
@@ -7268,6 +8290,7 @@ declare namespace Iot {
   }
   export type MqttPassword = Buffer|Uint8Array|Blob|string;
   export type MqttUsername = string;
+  export type NamespaceId = string;
   export type NextToken = string;
   export type NonCompliantChecksCount = number;
   export interface NonCompliantResource {
@@ -7285,6 +8308,9 @@ declare namespace Iot {
     additionalInfo?: StringMap;
   }
   export type NonCompliantResourcesCount = number;
+  export type NullableBoolean = boolean;
+  export type Number = number;
+  export type NumberList = Number[];
   export type NumberOfThings = number;
   export type OTAUpdateArn = string;
   export type OTAUpdateDescription = string;
@@ -7294,6 +8320,10 @@ declare namespace Iot {
      * The name of the file.
      */
     fileName?: FileName;
+    /**
+     * An integer value you can include in the job document to allow your devices to identify the type of file received from the cloud.
+     */
+    fileType?: FileType;
     /**
      * The file version.
      */
@@ -7364,11 +8394,11 @@ declare namespace Iot {
      */
     otaUpdateStatus?: OTAUpdateStatus;
     /**
-     * The AWS IoT job ID associated with the OTA update.
+     * The IoT job ID associated with the OTA update.
      */
     awsIotJobId?: AwsIotJobId;
     /**
-     * The AWS IoT job ARN associated with the OTA update.
+     * The IoT job ARN associated with the OTA update.
      */
     awsIotJobArn?: AwsIotJobArn;
     /**
@@ -7407,7 +8437,7 @@ declare namespace Iot {
      */
     certificateId?: CertificateId;
     /**
-     * The AWS account to which the transfer was made.
+     * The Amazon Web Services account to which the transfer was made.
      */
     transferredTo?: AwsAccountId;
     /**
@@ -7505,6 +8535,7 @@ declare namespace Iot {
      */
     expiresInSec?: ExpiresInSec;
   }
+  export type PrimitiveBoolean = boolean;
   export type Principal = string;
   export type PrincipalArn = string;
   export type PrincipalId = string;
@@ -7580,7 +8611,7 @@ declare namespace Iot {
      */
     entryId?: AssetPropertyEntryId;
     /**
-     * The ID of the AWS IoT SiteWise asset. You must specify either a propertyAlias or both an aliasId and a propertyId. Accepts substitution templates.
+     * The ID of the IoT SiteWise asset. You must specify either a propertyAlias or both an aliasId and a propertyId. Accepts substitution templates.
      */
     assetId?: AssetId;
     /**
@@ -7935,7 +8966,7 @@ declare namespace Iot {
      */
     bucketName: BucketName;
     /**
-     * The object key.
+     * The object key. For more information, see Actions, resources, and condition keys for Amazon S3.
      */
     key: Key;
     /**
@@ -8048,11 +9079,13 @@ declare namespace Iot {
   }
   export type SearchableAttributes = AttributeName[];
   export type Seconds = number;
+  export type SecurityGroupId = string;
+  export type SecurityGroupList = SecurityGroupId[];
   export type SecurityProfileArn = string;
   export type SecurityProfileDescription = string;
   export interface SecurityProfileIdentifier {
     /**
-     * The name you have given to the security profile.
+     * The name you've given to the security profile.
      */
     name: SecurityProfileName;
     /**
@@ -8229,13 +9262,13 @@ declare namespace Iot {
     /**
      * A unique identifier for the task. You can use this identifier to check the status of the task or to cancel it.
      */
-    taskId: AuditMitigationActionsTaskId;
+    taskId: MitigationActionsTaskId;
     /**
-     * Specifies the audit findings to which the mitigation actions are applied. You can apply them to a type of audit check, to all findings from an audit, or to a speecific set of findings.
+     * Specifies the audit findings to which the mitigation actions are applied. You can apply them to a type of audit check, to all findings from an audit, or to a specific set of findings.
      */
     target: AuditMitigationActionsTaskTarget;
     /**
-     * For an audit check, specifies which mitigation actions to apply. Those actions must be defined in your AWS account.
+     * For an audit check, specifies which mitigation actions to apply. Those actions must be defined in your Amazon Web Services accounts.
      */
     auditCheckToActionsMapping: AuditCheckToActionsMapping;
     /**
@@ -8247,7 +9280,43 @@ declare namespace Iot {
     /**
      * The unique identifier for the audit mitigation task. This matches the taskId that you specified in the request.
      */
-    taskId?: AuditMitigationActionsTaskId;
+    taskId?: MitigationActionsTaskId;
+  }
+  export interface StartDetectMitigationActionsTaskRequest {
+    /**
+     *  The unique identifier of the task. 
+     */
+    taskId: MitigationActionsTaskId;
+    /**
+     *  Specifies the ML Detect findings to which the mitigation actions are applied. 
+     */
+    target: DetectMitigationActionsTaskTarget;
+    /**
+     *  The actions to be performed when a device has unexpected behavior. 
+     */
+    actions: DetectMitigationActionsToExecuteList;
+    /**
+     *  Specifies the time period of which violation events occurred between. 
+     */
+    violationEventOccurrenceRange?: ViolationEventOccurrenceRange;
+    /**
+     *  Specifies to list only active violations. 
+     */
+    includeOnlyActiveViolations?: NullableBoolean;
+    /**
+     *  Specifies to include suppressed alerts. 
+     */
+    includeSuppressedAlerts?: NullableBoolean;
+    /**
+     *  Each mitigation action task must have a unique client request token. If you try to create a new task with the same token as a task that already exists, an exception occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request. 
+     */
+    clientRequestToken: ClientRequestToken;
+  }
+  export interface StartDetectMitigationActionsTaskResponse {
+    /**
+     *  The unique identifier of the task. 
+     */
+    taskId?: MitigationActionsTaskId;
   }
   export interface StartOnDemandAuditTaskRequest {
     /**
@@ -8304,7 +9373,7 @@ declare namespace Iot {
   export type StateValue = string;
   export interface StatisticalThreshold {
     /**
-     * The percentile which resolves to a threshold value by which compliance with a behavior is determined. Metrics are collected over the specified period (durationSeconds) from all reporting devices in your account and statistical ranks are calculated. Then, the measurements from a device are collected over the same period. If the accumulated measurements from the device fall above or below (comparisonOperator) the value associated with the percentile specified, then the device is considered to be in compliance with the behavior, otherwise a violation occurs.
+     * The percentile that resolves to a threshold value by which compliance with a behavior is determined. Metrics are collected over the specified period (durationSeconds) from all reporting devices in your account and statistical ranks are calculated. Then, the measurements from a device are collected over the same period. If the accumulated measurements from the device fall above or below (comparisonOperator) the value associated with the percentile specified, then the device is considered to be in compliance with the behavior, otherwise a violation occurs.
      */
     statistic?: EvaluationStatistic;
   }
@@ -8420,7 +9489,7 @@ declare namespace Iot {
      */
     lastUpdatedAt?: DateType;
     /**
-     * An IAM role AWS IoT assumes to access your S3 files.
+     * An IAM role IoT assumes to access your S3 files.
      */
     roleArn?: RoleArn;
   }
@@ -8446,11 +9515,15 @@ declare namespace Iot {
   export type StreamVersion = number;
   export type StreamsSummary = StreamSummary[];
   export type String = string;
+  export type StringList = stringValue[];
   export type StringMap = {[key: string]: String};
+  export type SubnetId = string;
+  export type SubnetIdList = SubnetId[];
   export type SucceededFindingsCount = number;
   export type SucceededThings = number;
   export type Sum = number;
   export type SumOfSquares = number;
+  export type SuppressAlerts = boolean;
   export type SuppressIndefinitely = boolean;
   export type SuppressedNonCompliantResourcesCount = number;
   export type TableName = string;
@@ -8484,6 +9557,7 @@ declare namespace Iot {
   export type TargetArn = string;
   export type TargetAuditCheckNames = AuditCheckName[];
   export type TargetSelection = "CONTINUOUS"|"SNAPSHOT"|string;
+  export type TargetViolationIdsForDetectMitigationActions = ViolationId[];
   export type Targets = Target[];
   export type TaskId = string;
   export type TaskIdList = TaskId[];
@@ -8544,6 +9618,12 @@ declare namespace Iot {
   export type TemplateDescription = string;
   export type TemplateName = string;
   export type TemplateVersionId = number;
+  export interface TermsAggregation {
+    /**
+     * The number of buckets to return in the response. Default to 10.
+     */
+    maxBuckets?: MaxBuckets;
+  }
   export interface TestAuthorizationRequest {
     /**
      * The principal. Valid principals are CertificateArn (arn:aws:iot:region:accountId:cert/certificateId), thingGroupArn (arn:aws:iot:region:accountId:thinggroup/groupName) and CognitoId (region:id).
@@ -8650,13 +9730,17 @@ declare namespace Iot {
   export type ThingAttributeList = ThingAttribute[];
   export interface ThingConnectivity {
     /**
-     * True if the thing is connected to the AWS IoT service; false if it is not connected.
+     * True if the thing is connected to the Amazon Web Services IoT Core service; false if it is not connected.
      */
     connected?: Boolean;
     /**
-     * The epoch time (in milliseconds) when the thing last connected or disconnected. If the thing has been disconnected for more than a few weeks, the time value might be missing.
+     * The epoch time (in milliseconds) when the thing last connected or disconnected. If the thing has been disconnected for approximately an hour, the time value might be missing.
      */
     timestamp?: ConnectivityTimestamp;
+    /**
+     * The reason why the client is disconnected.
+     */
+    disconnectReason?: DisconnectReason;
   }
   export type ThingConnectivityIndexingMode = "OFF"|"STATUS"|string;
   export interface ThingDocument {
@@ -8685,7 +9769,7 @@ declare namespace Iot {
      */
     shadow?: JsonDocument;
     /**
-     * Indicates whether the thing is connected to the AWS IoT service.
+     * Indicates whether the thing is connected to the Amazon Web Services IoT Core service.
      */
     connectivity?: ThingConnectivity;
   }
@@ -8837,6 +9921,56 @@ declare namespace Iot {
     inProgressTimeoutInMinutes?: InProgressTimeoutInMinutes;
   }
   export type Timestamp = Date;
+  export interface TimestreamAction {
+    /**
+     * The ARN of the role that grants permission to write to the Amazon Timestream database table.
+     */
+    roleArn: AwsArn;
+    /**
+     * The name of an Amazon Timestream database.
+     */
+    databaseName: TimestreamDatabaseName;
+    /**
+     * The name of the database table into which to write the measure records.
+     */
+    tableName: TimestreamTableName;
+    /**
+     * Metadata attributes of the time series that are written in each measure record.
+     */
+    dimensions: TimestreamDimensionList;
+    /**
+     * Specifies an application-defined value to replace the default value assigned to the Timestream record's timestamp in the time column. You can use this property to specify the value and the precision of the Timestream record's timestamp. You can specify a value from the message payload or a value computed by a substitution template. If omitted, the topic rule action assigns the timestamp, in milliseconds, at the time it processed the rule. 
+     */
+    timestamp?: TimestreamTimestamp;
+  }
+  export type TimestreamDatabaseName = string;
+  export interface TimestreamDimension {
+    /**
+     * The metadata dimension name. This is the name of the column in the Amazon Timestream database table record. Dimensions cannot be named: measure_name, measure_value, or time. These names are reserved. Dimension names cannot start with ts_ or measure_value and they cannot contain the colon (:) character.
+     */
+    name: TimestreamDimensionName;
+    /**
+     * The value to write in this column of the database record.
+     */
+    value: TimestreamDimensionValue;
+  }
+  export type TimestreamDimensionList = TimestreamDimension[];
+  export type TimestreamDimensionName = string;
+  export type TimestreamDimensionValue = string;
+  export type TimestreamTableName = string;
+  export interface TimestreamTimestamp {
+    /**
+     * An expression that returns a long epoch time value.
+     */
+    value: TimestreamTimestampValue;
+    /**
+     * The precision of the timestamp value that results from the expression described in value. Valid values: SECONDS | MILLISECONDS | MICROSECONDS | NANOSECONDS. The default is MILLISECONDS.
+     */
+    unit: TimestreamTimestampUnit;
+  }
+  export type TimestreamTimestampUnit = string;
+  export type TimestreamTimestampValue = string;
+  export type TinyMaxResults = number;
   export interface TlsContext {
     /**
      * The value of the serverName key in a TLS authorization request.
@@ -8892,6 +10026,14 @@ declare namespace Iot {
      */
     status?: TopicRuleDestinationStatus;
     /**
+     * The date and time when the topic rule destination was created.
+     */
+    createdAt?: CreatedAtDate;
+    /**
+     * The date and time when the topic rule destination was last updated.
+     */
+    lastUpdatedAt?: LastUpdatedAtDate;
+    /**
      * Additional details or reason why the topic rule destination is in the current status.
      */
     statusReason?: String;
@@ -8899,15 +10041,23 @@ declare namespace Iot {
      * Properties of the HTTP URL.
      */
     httpUrlProperties?: HttpUrlDestinationProperties;
+    /**
+     * Properties of the virtual private cloud (VPC) connection.
+     */
+    vpcProperties?: VpcDestinationProperties;
   }
   export interface TopicRuleDestinationConfiguration {
     /**
      * Configuration of the HTTP URL.
      */
     httpUrlConfiguration?: HttpUrlDestinationConfiguration;
+    /**
+     * Configuration of the virtual private cloud (VPC) connection.
+     */
+    vpcConfiguration?: VpcDestinationConfiguration;
   }
   export type TopicRuleDestinationMaxResults = number;
-  export type TopicRuleDestinationStatus = "ENABLED"|"IN_PROGRESS"|"DISABLED"|"ERROR"|string;
+  export type TopicRuleDestinationStatus = "ENABLED"|"IN_PROGRESS"|"DISABLED"|"ERROR"|"DELETING"|string;
   export type TopicRuleDestinationSummaries = TopicRuleDestinationSummary[];
   export interface TopicRuleDestinationSummary {
     /**
@@ -8919,6 +10069,14 @@ declare namespace Iot {
      */
     status?: TopicRuleDestinationStatus;
     /**
+     * The date and time when the topic rule destination was created.
+     */
+    createdAt?: CreatedAtDate;
+    /**
+     * The date and time when the topic rule destination was last updated.
+     */
+    lastUpdatedAt?: LastUpdatedAtDate;
+    /**
      * The reason the topic rule destination is in the current status.
      */
     statusReason?: String;
@@ -8926,6 +10084,10 @@ declare namespace Iot {
      * Information about the HTTP URL.
      */
     httpUrlSummary?: HttpUrlDestinationSummary;
+    /**
+     * Information about the virtual private cloud (VPC) connection.
+     */
+    vpcDestinationSummary?: VpcDestinationSummary;
   }
   export type TopicRuleList = TopicRuleListItem[];
   export interface TopicRuleListItem {
@@ -8953,7 +10115,7 @@ declare namespace Iot {
   export type TopicRuleMaxResults = number;
   export interface TopicRulePayload {
     /**
-     * The SQL statement used to query the topic. For more information, see AWS IoT SQL Reference in the AWS IoT Developer Guide.
+     * The SQL statement used to query the topic. For more information, see IoT SQL Reference in the IoT Developer Guide.
      */
     sql: SQL;
     /**
@@ -8986,7 +10148,7 @@ declare namespace Iot {
      */
     certificateId: CertificateId;
     /**
-     * The AWS account.
+     * The Amazon Web Services account.
      */
     targetAwsAccount: AwsAccountId;
     /**
@@ -9038,7 +10200,7 @@ declare namespace Iot {
   }
   export interface UpdateAccountAuditConfigurationRequest {
     /**
-     * The ARN of the role that grants permission to AWS IoT to access information about your devices, policies, certificates and other items as required when performing an audit.
+     * The Amazon Resource Name (ARN) of the role that grants permission to IoT to access information about your devices, policies, certificates, and other items as required when performing an audit.
      */
     roleArn?: RoleArn;
     /**
@@ -9046,7 +10208,7 @@ declare namespace Iot {
      */
     auditNotificationTargetConfigurations?: AuditNotificationTargetConfigurations;
     /**
-     * Specifies which audit checks are enabled and disabled for this account. Use DescribeAccountAuditConfiguration to see the list of all checks, including those that are currently enabled. Some data collection might start immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted. You cannot disable a check if it is used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself. On the first call to UpdateAccountAuditConfiguration, this parameter is required and must specify at least one enabled check.
+     * Specifies which audit checks are enabled and disabled for this account. Use DescribeAccountAuditConfiguration to see the list of all checks, including those that are currently enabled. Some data collection might start immediately when certain checks are enabled. When a check is disabled, any data collected so far in relation to the check is deleted. You cannot disable a check if it's used by any scheduled audit. You must first delete the check from the scheduled audit or delete the scheduled audit itself. On the first call to UpdateAccountAuditConfiguration, this parameter is required and must specify at least one enabled check.
      */
     auditCheckConfigurations?: AuditCheckConfigurations;
   }
@@ -9124,7 +10286,7 @@ declare namespace Iot {
   }
   export interface UpdateCACertificateParams {
     /**
-     * The action that you want to apply to the CA cerrtificate. The only supported value is DEACTIVATE.
+     * The action that you want to apply to the CA certificate. The only supported value is DEACTIVATE.
      */
     action: CACertificateUpdateAction;
   }
@@ -9156,13 +10318,49 @@ declare namespace Iot {
      */
     certificateId: CertificateId;
     /**
-     * The new status.  Note: Setting the status to PENDING_TRANSFER or PENDING_ACTIVATION will result in an exception being thrown. PENDING_TRANSFER and PENDING_ACTIVATION are statuses used internally by AWS IoT. They are not intended for developer use.  Note: The status value REGISTER_INACTIVE is deprecated and should not be used.
+     * The new status.  Note: Setting the status to PENDING_TRANSFER or PENDING_ACTIVATION will result in an exception being thrown. PENDING_TRANSFER and PENDING_ACTIVATION are statuses used internally by IoT. They are not intended for developer use.  Note: The status value REGISTER_INACTIVE is deprecated and should not be used.
      */
     newStatus: CertificateStatus;
   }
+  export interface UpdateCustomMetricRequest {
+    /**
+     *  The name of the custom metric. Cannot be updated. 
+     */
+    metricName: MetricName;
+    /**
+     *  Field represents a friendly name in the console for the custom metric, it doesn't have to be unique. Don't use this name as the metric identifier in the device metric report. Can be updated. 
+     */
+    displayName: CustomMetricDisplayName;
+  }
+  export interface UpdateCustomMetricResponse {
+    /**
+     *  The name of the custom metric. 
+     */
+    metricName?: MetricName;
+    /**
+     *  The Amazon Resource Number (ARN) of the custom metric. 
+     */
+    metricArn?: CustomMetricArn;
+    /**
+     *  The type of the custom metric. Types include string-list, ip-address-list, number-list, and number. 
+     */
+    metricType?: CustomMetricType;
+    /**
+     *  A friendly name in the console for the custom metric 
+     */
+    displayName?: CustomMetricDisplayName;
+    /**
+     *  The creation date of the custom metric in milliseconds since epoch. 
+     */
+    creationDate?: Timestamp;
+    /**
+     *  The time the custom metric was last modified in milliseconds since epoch. 
+     */
+    lastModifiedDate?: Timestamp;
+  }
   export interface UpdateDeviceCertificateParams {
     /**
-     * The action that you want to apply to the device cerrtificate. The only supported value is DEACTIVATE.
+     * The action that you want to apply to the device certificate. The only supported value is DEACTIVATE.
      */
     action: DeviceCertificateUpdateAction;
   }
@@ -9182,7 +10380,7 @@ declare namespace Iot {
      */
     name?: DimensionName;
     /**
-     * The ARN (Amazon resource name) of the created dimension.
+     * The Amazon Resource Name (ARN)of the created dimension.
      */
     arn?: DimensionArn;
     /**
@@ -9244,7 +10442,7 @@ declare namespace Iot {
      */
     expectedVersion?: OptionalVersion;
     /**
-     * The dynamic thing group index to update.  Currently one index is supported: 'AWS_Things'. 
+     * The dynamic thing group index to update.  Currently one index is supported: AWS_Things. 
      */
     indexName?: IndexName;
     /**
@@ -9269,6 +10467,48 @@ declare namespace Iot {
     eventConfigurations?: EventConfigurations;
   }
   export interface UpdateEventConfigurationsResponse {
+  }
+  export interface UpdateFleetMetricRequest {
+    /**
+     * The name of the fleet metric to update.
+     */
+    metricName: FleetMetricName;
+    /**
+     * The search query string.
+     */
+    queryString?: QueryString;
+    /**
+     * The type of the aggregation query.
+     */
+    aggregationType?: AggregationType;
+    /**
+     * The time in seconds between fleet metric emissions. Range [60(1 min), 86400(1 day)] and must be multiple of 60.
+     */
+    period?: FleetMetricPeriod;
+    /**
+     * The field to aggregate.
+     */
+    aggregationField?: AggregationField;
+    /**
+     * The description of the fleet metric.
+     */
+    description?: FleetMetricDescription;
+    /**
+     * The version of the query.
+     */
+    queryVersion?: QueryVersion;
+    /**
+     * The name of the index to search.
+     */
+    indexName: IndexName;
+    /**
+     * Used to support unit transformation such as milliseconds to seconds. The unit must be supported by CW metric.
+     */
+    unit?: FleetMetricUnit;
+    /**
+     * The expected version of the fleet metric record in the registry.
+     */
+    expectedVersion?: OptionalVersion;
   }
   export interface UpdateIndexingConfigurationRequest {
     /**
@@ -9307,10 +10547,14 @@ declare namespace Iot {
      * Specifies the amount of time each device has to finish its execution of the job. The timer is started when the job execution status is set to IN_PROGRESS. If the job execution status is not set to another terminal state before the time expires, it will be automatically set to TIMED_OUT. 
      */
     timeoutConfig?: TimeoutConfig;
+    /**
+     * The namespace used to indicate that a job is a customer-managed job. When you specify a value for this parameter, Amazon Web Services IoT Core sends jobs notifications to MQTT topics that contain the value in the following format.  $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/   The namespaceId feature is in public preview. 
+     */
+    namespaceId?: NamespaceId;
   }
   export interface UpdateMitigationActionRequest {
     /**
-     * The friendly name for the mitigation action. You can't change the name by using UpdateMitigationAction. Instead, you must delete and re-create the mitigation action with the new name.
+     * The friendly name for the mitigation action. You cannot change the name by using UpdateMitigationAction. Instead, you must delete and recreate the mitigation action with the new name.
      */
     actionName: MitigationActionName;
     /**
@@ -9390,15 +10634,15 @@ declare namespace Iot {
   }
   export interface UpdateScheduledAuditRequest {
     /**
-     * How often the scheduled audit takes place. Can be one of "DAILY", "WEEKLY", "BIWEEKLY", or "MONTHLY". The start time of each audit is determined by the system.
+     * How often the scheduled audit takes place, either DAILY, WEEKLY, BIWEEKLY, or MONTHLY. The start time of each audit is determined by the system.
      */
     frequency?: AuditFrequency;
     /**
-     * The day of the month on which the scheduled audit takes place. Can be "1" through "31" or "LAST". This field is required if the "frequency" parameter is set to "MONTHLY". If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
+     * The day of the month on which the scheduled audit takes place. This can be 1 through 31 or LAST. This field is required if the frequency parameter is set to MONTHLY. If days 29-31 are specified, and the month does not have that many days, the audit takes place on the "LAST" day of the month.
      */
     dayOfMonth?: DayOfMonth;
     /**
-     * The day of the week on which the scheduled audit takes place. Can be one of "SUN", "MON", "TUE", "WED", "THU", "FRI", or "SAT". This field is required if the "frequency" parameter is set to "WEEKLY" or "BIWEEKLY".
+     * The day of the week on which the scheduled audit takes place. This can be one of SUN, MON, TUE, WED, THU, FRI, or SAT. This field is required if the "frequency" parameter is set to WEEKLY or BIWEEKLY.
      */
     dayOfWeek?: DayOfWeek;
     /**
@@ -9434,11 +10678,11 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.  Note: This API field is deprecated. Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
+     *  Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.  A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.
      */
     additionalMetricsToRetainV2?: AdditionalMetricsToRetainV2List;
     /**
@@ -9480,11 +10724,11 @@ declare namespace Iot {
      */
     alertTargets?: AlertTargets;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile's behaviors, but it is also retained for any metric specified here.  Note: This API field is deprecated. Please use UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead.
+     *  Please use UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead.  A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the security profile's behaviors, but it is also retained for any metric specified here.
      */
     additionalMetricsToRetain?: AdditionalMetricsToRetainList;
     /**
-     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here.
+     * A list of metrics whose data is retained (stored). By default, data is retained for any metric used in the profile's behaviors, but it is also retained for any metric specified here. Can be used with custom metrics; cannot be used with dimensions.
      */
     additionalMetricsToRetainV2?: AdditionalMetricsToRetainV2List;
     /**
@@ -9656,13 +10900,17 @@ declare namespace Iot {
      */
     securityProfileName?: SecurityProfileName;
     /**
-     * The behavior which was violated.
+     * The behavior that was violated.
      */
     behavior?: Behavior;
     /**
      * The value of the metric (the measurement).
      */
     metricValue?: MetricValue;
+    /**
+     *  The details of a violation event. 
+     */
+    violationEventAdditionalInfo?: ViolationEventAdditionalInfo;
     /**
      * The type of violation event.
      */
@@ -9672,10 +10920,83 @@ declare namespace Iot {
      */
     violationEventTime?: Timestamp;
   }
+  export interface ViolationEventAdditionalInfo {
+    /**
+     *  The sensitivity of anomalous behavior evaluation. Can be Low, Medium, or High. 
+     */
+    confidenceLevel?: ConfidenceLevel;
+  }
+  export interface ViolationEventOccurrenceRange {
+    /**
+     *  The start date and time of a time period in which violation events occurred. 
+     */
+    startTime: Timestamp;
+    /**
+     *  The end date and time of a time period in which violation events occurred. 
+     */
+    endTime: Timestamp;
+  }
   export type ViolationEventType = "in-alarm"|"alarm-cleared"|"alarm-invalidated"|string;
   export type ViolationEvents = ViolationEvent[];
   export type ViolationId = string;
+  export interface VpcDestinationConfiguration {
+    /**
+     * The subnet IDs of the VPC destination.
+     */
+    subnetIds: SubnetIdList;
+    /**
+     * The security groups of the VPC destination.
+     */
+    securityGroups?: SecurityGroupList;
+    /**
+     * The ID of the VPC.
+     */
+    vpcId: VpcId;
+    /**
+     * The ARN of a role that has permission to create and attach to elastic network interfaces (ENIs).
+     */
+    roleArn: AwsArn;
+  }
+  export interface VpcDestinationProperties {
+    /**
+     * The subnet IDs of the VPC destination.
+     */
+    subnetIds?: SubnetIdList;
+    /**
+     * The security groups of the VPC destination.
+     */
+    securityGroups?: SecurityGroupList;
+    /**
+     * The ID of the VPC.
+     */
+    vpcId?: VpcId;
+    /**
+     * The ARN of a role that has permission to create and attach to elastic network interfaces (ENIs).
+     */
+    roleArn?: AwsArn;
+  }
+  export interface VpcDestinationSummary {
+    /**
+     * The subnet IDs of the VPC destination.
+     */
+    subnetIds?: SubnetIdList;
+    /**
+     * The security groups of the VPC destination.
+     */
+    securityGroups?: SecurityGroupList;
+    /**
+     * The ID of the VPC.
+     */
+    vpcId?: VpcId;
+    /**
+     * The ARN of a role that has permission to create and attach to elastic network interfaces (ENIs).
+     */
+    roleArn?: AwsArn;
+  }
+  export type VpcId = string;
   export type WaitingForDataCollectionChecksCount = number;
+  export type stringValue = string;
+  export type usePrefixAttributeValue = boolean;
   /**
    * A string in YYYY-MM-DD format that represents the latest possible API version that can be used in this service. Specify 'latest' to use the latest possible version.
    */

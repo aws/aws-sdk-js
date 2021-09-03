@@ -12,6 +12,14 @@ declare class LakeFormation extends Service {
   constructor(options?: LakeFormation.Types.ClientConfiguration)
   config: Config & LakeFormation.Types.ClientConfiguration;
   /**
+   * Attaches one or more tags to an existing resource.
+   */
+  addLFTagsToResource(params: LakeFormation.Types.AddLFTagsToResourceRequest, callback?: (err: AWSError, data: LakeFormation.Types.AddLFTagsToResourceResponse) => void): Request<LakeFormation.Types.AddLFTagsToResourceResponse, AWSError>;
+  /**
+   * Attaches one or more tags to an existing resource.
+   */
+  addLFTagsToResource(callback?: (err: AWSError, data: LakeFormation.Types.AddLFTagsToResourceResponse) => void): Request<LakeFormation.Types.AddLFTagsToResourceResponse, AWSError>;
+  /**
    * Batch operation to grant permissions to the principal.
    */
   batchGrantPermissions(params: LakeFormation.Types.BatchGrantPermissionsRequest, callback?: (err: AWSError, data: LakeFormation.Types.BatchGrantPermissionsResponse) => void): Request<LakeFormation.Types.BatchGrantPermissionsResponse, AWSError>;
@@ -27,6 +35,22 @@ declare class LakeFormation extends Service {
    * Batch operation to revoke permissions from the principal.
    */
   batchRevokePermissions(callback?: (err: AWSError, data: LakeFormation.Types.BatchRevokePermissionsResponse) => void): Request<LakeFormation.Types.BatchRevokePermissionsResponse, AWSError>;
+  /**
+   * Creates a tag with the specified name and values.
+   */
+  createLFTag(params: LakeFormation.Types.CreateLFTagRequest, callback?: (err: AWSError, data: LakeFormation.Types.CreateLFTagResponse) => void): Request<LakeFormation.Types.CreateLFTagResponse, AWSError>;
+  /**
+   * Creates a tag with the specified name and values.
+   */
+  createLFTag(callback?: (err: AWSError, data: LakeFormation.Types.CreateLFTagResponse) => void): Request<LakeFormation.Types.CreateLFTagResponse, AWSError>;
+  /**
+   * Deletes the specified tag key name. If the attribute key does not exist or the tag does not exist, then the operation will not do anything. If the attribute key exists, then the operation checks if any resources are tagged with this attribute key, if yes, the API throws a 400 Exception with the message "Delete not allowed" as the tag key is still attached with resources. You can consider untagging resources with this tag key.
+   */
+  deleteLFTag(params: LakeFormation.Types.DeleteLFTagRequest, callback?: (err: AWSError, data: LakeFormation.Types.DeleteLFTagResponse) => void): Request<LakeFormation.Types.DeleteLFTagResponse, AWSError>;
+  /**
+   * Deletes the specified tag key name. If the attribute key does not exist or the tag does not exist, then the operation will not do anything. If the attribute key exists, then the operation checks if any resources are tagged with this attribute key, if yes, the API throws a 400 Exception with the message "Delete not allowed" as the tag key is still attached with resources. You can consider untagging resources with this tag key.
+   */
+  deleteLFTag(callback?: (err: AWSError, data: LakeFormation.Types.DeleteLFTagResponse) => void): Request<LakeFormation.Types.DeleteLFTagResponse, AWSError>;
   /**
    * Deregisters the resource as managed by the Data Catalog. When you deregister a path, Lake Formation removes the path from the inline policy attached to your service-linked role.
    */
@@ -60,6 +84,22 @@ declare class LakeFormation extends Service {
    */
   getEffectivePermissionsForPath(callback?: (err: AWSError, data: LakeFormation.Types.GetEffectivePermissionsForPathResponse) => void): Request<LakeFormation.Types.GetEffectivePermissionsForPathResponse, AWSError>;
   /**
+   * Returns a tag definition.
+   */
+  getLFTag(params: LakeFormation.Types.GetLFTagRequest, callback?: (err: AWSError, data: LakeFormation.Types.GetLFTagResponse) => void): Request<LakeFormation.Types.GetLFTagResponse, AWSError>;
+  /**
+   * Returns a tag definition.
+   */
+  getLFTag(callback?: (err: AWSError, data: LakeFormation.Types.GetLFTagResponse) => void): Request<LakeFormation.Types.GetLFTagResponse, AWSError>;
+  /**
+   * Returns the tags applied to a resource.
+   */
+  getResourceLFTags(params: LakeFormation.Types.GetResourceLFTagsRequest, callback?: (err: AWSError, data: LakeFormation.Types.GetResourceLFTagsResponse) => void): Request<LakeFormation.Types.GetResourceLFTagsResponse, AWSError>;
+  /**
+   * Returns the tags applied to a resource.
+   */
+  getResourceLFTags(callback?: (err: AWSError, data: LakeFormation.Types.GetResourceLFTagsResponse) => void): Request<LakeFormation.Types.GetResourceLFTagsResponse, AWSError>;
+  /**
    * Grants permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3. For information about permissions, see Security and Access Control to Metadata and Data.
    */
   grantPermissions(params: LakeFormation.Types.GrantPermissionsRequest, callback?: (err: AWSError, data: LakeFormation.Types.GrantPermissionsResponse) => void): Request<LakeFormation.Types.GrantPermissionsResponse, AWSError>;
@@ -67,6 +107,14 @@ declare class LakeFormation extends Service {
    * Grants permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3. For information about permissions, see Security and Access Control to Metadata and Data.
    */
   grantPermissions(callback?: (err: AWSError, data: LakeFormation.Types.GrantPermissionsResponse) => void): Request<LakeFormation.Types.GrantPermissionsResponse, AWSError>;
+  /**
+   * Lists tags that the requester has permission to view. 
+   */
+  listLFTags(params: LakeFormation.Types.ListLFTagsRequest, callback?: (err: AWSError, data: LakeFormation.Types.ListLFTagsResponse) => void): Request<LakeFormation.Types.ListLFTagsResponse, AWSError>;
+  /**
+   * Lists tags that the requester has permission to view. 
+   */
+  listLFTags(callback?: (err: AWSError, data: LakeFormation.Types.ListLFTagsResponse) => void): Request<LakeFormation.Types.ListLFTagsResponse, AWSError>;
   /**
    * Returns a list of the principal permissions on the resource, filtered by the permissions of the caller. For example, if you are granted an ALTER permission, you are able to see only the principal permissions for ALTER. This operation returns only those permissions that have been explicitly granted. For information about permissions, see Security and Access Control to Metadata and Data.
    */
@@ -100,6 +148,14 @@ declare class LakeFormation extends Service {
    */
   registerResource(callback?: (err: AWSError, data: LakeFormation.Types.RegisterResourceResponse) => void): Request<LakeFormation.Types.RegisterResourceResponse, AWSError>;
   /**
+   * Removes a tag from the resource. Only database, table, or tableWithColumns resource are allowed. To tag columns, use the column inclusion list in tableWithColumns to specify column input.
+   */
+  removeLFTagsFromResource(params: LakeFormation.Types.RemoveLFTagsFromResourceRequest, callback?: (err: AWSError, data: LakeFormation.Types.RemoveLFTagsFromResourceResponse) => void): Request<LakeFormation.Types.RemoveLFTagsFromResourceResponse, AWSError>;
+  /**
+   * Removes a tag from the resource. Only database, table, or tableWithColumns resource are allowed. To tag columns, use the column inclusion list in tableWithColumns to specify column input.
+   */
+  removeLFTagsFromResource(callback?: (err: AWSError, data: LakeFormation.Types.RemoveLFTagsFromResourceResponse) => void): Request<LakeFormation.Types.RemoveLFTagsFromResourceResponse, AWSError>;
+  /**
    * Revokes permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.
    */
   revokePermissions(params: LakeFormation.Types.RevokePermissionsRequest, callback?: (err: AWSError, data: LakeFormation.Types.RevokePermissionsResponse) => void): Request<LakeFormation.Types.RevokePermissionsResponse, AWSError>;
@@ -107,6 +163,30 @@ declare class LakeFormation extends Service {
    * Revokes permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.
    */
   revokePermissions(callback?: (err: AWSError, data: LakeFormation.Types.RevokePermissionsResponse) => void): Request<LakeFormation.Types.RevokePermissionsResponse, AWSError>;
+  /**
+   * This operation allows a search on DATABASE resources by TagCondition. This operation is used by admins who want to grant user permissions on certain TagConditions. Before making a grant, the admin can use SearchDatabasesByTags to find all resources where the given TagConditions are valid to verify whether the returned resources can be shared.
+   */
+  searchDatabasesByLFTags(params: LakeFormation.Types.SearchDatabasesByLFTagsRequest, callback?: (err: AWSError, data: LakeFormation.Types.SearchDatabasesByLFTagsResponse) => void): Request<LakeFormation.Types.SearchDatabasesByLFTagsResponse, AWSError>;
+  /**
+   * This operation allows a search on DATABASE resources by TagCondition. This operation is used by admins who want to grant user permissions on certain TagConditions. Before making a grant, the admin can use SearchDatabasesByTags to find all resources where the given TagConditions are valid to verify whether the returned resources can be shared.
+   */
+  searchDatabasesByLFTags(callback?: (err: AWSError, data: LakeFormation.Types.SearchDatabasesByLFTagsResponse) => void): Request<LakeFormation.Types.SearchDatabasesByLFTagsResponse, AWSError>;
+  /**
+   * This operation allows a search on TABLE resources by LFTags. This will be used by admins who want to grant user permissions on certain LFTags. Before making a grant, the admin can use SearchTablesByLFTags to find all resources where the given LFTags are valid to verify whether the returned resources can be shared.
+   */
+  searchTablesByLFTags(params: LakeFormation.Types.SearchTablesByLFTagsRequest, callback?: (err: AWSError, data: LakeFormation.Types.SearchTablesByLFTagsResponse) => void): Request<LakeFormation.Types.SearchTablesByLFTagsResponse, AWSError>;
+  /**
+   * This operation allows a search on TABLE resources by LFTags. This will be used by admins who want to grant user permissions on certain LFTags. Before making a grant, the admin can use SearchTablesByLFTags to find all resources where the given LFTags are valid to verify whether the returned resources can be shared.
+   */
+  searchTablesByLFTags(callback?: (err: AWSError, data: LakeFormation.Types.SearchTablesByLFTagsResponse) => void): Request<LakeFormation.Types.SearchTablesByLFTagsResponse, AWSError>;
+  /**
+   * Updates the list of possible values for the specified tag key. If the tag does not exist, the operation throws an EntityNotFoundException. The values in the delete key values will be deleted from list of possible values. If any value in the delete key values is attached to a resource, then API errors out with a 400 Exception - "Update not allowed". Untag the attribute before deleting the tag key's value. 
+   */
+  updateLFTag(params: LakeFormation.Types.UpdateLFTagRequest, callback?: (err: AWSError, data: LakeFormation.Types.UpdateLFTagResponse) => void): Request<LakeFormation.Types.UpdateLFTagResponse, AWSError>;
+  /**
+   * Updates the list of possible values for the specified tag key. If the tag does not exist, the operation throws an EntityNotFoundException. The values in the delete key values will be deleted from list of possible values. If any value in the delete key values is attached to a resource, then API errors out with a 400 Exception - "Update not allowed". Untag the attribute before deleting the tag key's value. 
+   */
+  updateLFTag(callback?: (err: AWSError, data: LakeFormation.Types.UpdateLFTagResponse) => void): Request<LakeFormation.Types.UpdateLFTagResponse, AWSError>;
   /**
    * Updates the data access role used for vending access to the given (registered) resource in AWS Lake Formation. 
    */
@@ -117,6 +197,26 @@ declare class LakeFormation extends Service {
   updateResource(callback?: (err: AWSError, data: LakeFormation.Types.UpdateResourceResponse) => void): Request<LakeFormation.Types.UpdateResourceResponse, AWSError>;
 }
 declare namespace LakeFormation {
+  export interface AddLFTagsToResourceRequest {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The resource to which to attach a tag.
+     */
+    Resource: Resource;
+    /**
+     * The tags to attach to the resource.
+     */
+    LFTags: LFTagsList;
+  }
+  export interface AddLFTagsToResourceResponse {
+    /**
+     * A list of failures to tag the resource.
+     */
+    Failures?: LFTagErrors;
+  }
   export interface BatchGrantPermissionsRequest {
     /**
      * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
@@ -183,9 +283,21 @@ declare namespace LakeFormation {
      */
     Failures?: BatchPermissionsFailureList;
   }
+  export type BooleanNullable = boolean;
   export type CatalogIdString = string;
   export interface CatalogResource {
   }
+  export interface ColumnLFTag {
+    /**
+     * The name of a column resource.
+     */
+    Name?: NameString;
+    /**
+     * The tags attached to a column resource.
+     */
+    LFTags?: LFTagsList;
+  }
+  export type ColumnLFTagsList = ColumnLFTag[];
   export type ColumnNames = NameString[];
   export interface ColumnWildcard {
     /**
@@ -194,6 +306,22 @@ declare namespace LakeFormation {
     ExcludedColumnNames?: ColumnNames;
   }
   export type ComparisonOperator = "EQ"|"NE"|"LE"|"LT"|"GE"|"GT"|"CONTAINS"|"NOT_CONTAINS"|"BEGINS_WITH"|"IN"|"BETWEEN"|string;
+  export interface CreateLFTagRequest {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The key-name for the tag.
+     */
+    TagKey: LFTagKey;
+    /**
+     * A list of possible values an attribute can take.
+     */
+    TagValues: TagValueList;
+  }
+  export interface CreateLFTagResponse {
+  }
   export interface DataLakePrincipal {
     /**
      * An identifier for the AWS Lake Formation principal.
@@ -202,7 +330,7 @@ declare namespace LakeFormation {
   }
   export type DataLakePrincipalList = DataLakePrincipal[];
   export type DataLakePrincipalString = string;
-  export type DataLakeResourceType = "CATALOG"|"DATABASE"|"TABLE"|"DATA_LOCATION"|string;
+  export type DataLakeResourceType = "CATALOG"|"DATABASE"|"TABLE"|"DATA_LOCATION"|"LF_TAG"|"LF_TAG_POLICY"|"LF_TAG_POLICY_DATABASE"|"LF_TAG_POLICY_TABLE"|string;
   export interface DataLakeSettings {
     /**
      * A list of AWS Lake Formation principals. Supported principals are IAM users or IAM roles.
@@ -231,6 +359,7 @@ declare namespace LakeFormation {
      */
     ResourceArn: ResourceArnString;
   }
+  export type DatabaseLFTagsList = TaggedDatabase[];
   export interface DatabaseResource {
     /**
      * The identifier for the Data Catalog. By default, it is the account ID of the caller.
@@ -240,6 +369,18 @@ declare namespace LakeFormation {
      * The name of the database resource. Unique to the Data Catalog.
      */
     Name: NameString;
+  }
+  export interface DeleteLFTagRequest {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The key-name for the tag to delete.
+     */
+    TagKey: LFTagKey;
+  }
+  export interface DeleteLFTagResponse {
   }
   export interface DeregisterResourceRequest {
     /**
@@ -264,7 +405,7 @@ declare namespace LakeFormation {
   export type DescriptionString = string;
   export interface DetailsMap {
     /**
-     * A share resource ARN for a catalog resource shared through AWS Resource Access Manager (AWS RAM).
+     * A resource share ARN for a catalog resource shared through AWS Resource Access Manager (AWS RAM).
      */
     ResourceShare?: ResourceShareList;
   }
@@ -278,6 +419,7 @@ declare namespace LakeFormation {
      */
     ErrorMessage?: DescriptionString;
   }
+  export type Expression = LFTag[];
   export type FieldNameString = "RESOURCE_ARN"|"ROLE_ARN"|"LAST_MODIFIED"|string;
   export interface FilterCondition {
     /**
@@ -334,6 +476,58 @@ declare namespace LakeFormation {
      */
     NextToken?: Token;
   }
+  export interface GetLFTagRequest {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The key-name for the tag.
+     */
+    TagKey: LFTagKey;
+  }
+  export interface GetLFTagResponse {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The key-name for the tag.
+     */
+    TagKey?: LFTagKey;
+    /**
+     * A list of possible values an attribute can take.
+     */
+    TagValues?: TagValueList;
+  }
+  export interface GetResourceLFTagsRequest {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The resource for which you want to return tags.
+     */
+    Resource: Resource;
+    /**
+     * Indicates whether to show the assigned tags.
+     */
+    ShowAssignedLFTags?: BooleanNullable;
+  }
+  export interface GetResourceLFTagsResponse {
+    /**
+     * A list of tags applied to a database resource.
+     */
+    LFTagOnDatabase?: LFTagsList;
+    /**
+     * A list of tags applied to a table resource.
+     */
+    LFTagsOnTable?: LFTagsList;
+    /**
+     * A list of tags applied to a column resource.
+     */
+    LFTagsOnColumns?: ColumnLFTagsList;
+  }
   export interface GrantPermissionsRequest {
     /**
      * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
@@ -360,7 +554,101 @@ declare namespace LakeFormation {
   }
   export type IAMRoleArn = string;
   export type Identifier = string;
+  export interface LFTag {
+    /**
+     * The key-name for the tag.
+     */
+    TagKey: LFTagKey;
+    /**
+     * A list of possible values an attribute can take.
+     */
+    TagValues: TagValueList;
+  }
+  export interface LFTagError {
+    /**
+     * The key-name of the tag.
+     */
+    LFTag?: LFTagPair;
+    /**
+     * An error that occurred with the attachment or detachment of the tag.
+     */
+    Error?: ErrorDetail;
+  }
+  export type LFTagErrors = LFTagError[];
+  export type LFTagKey = string;
+  export interface LFTagKeyResource {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The key-name for the tag.
+     */
+    TagKey: NameString;
+    /**
+     * A list of possible values an attribute can take.
+     */
+    TagValues: TagValueList;
+  }
+  export interface LFTagPair {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The key-name for the tag.
+     */
+    TagKey: LFTagKey;
+    /**
+     * A list of possible values an attribute can take.
+     */
+    TagValues: TagValueList;
+  }
+  export interface LFTagPolicyResource {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The resource type for which the tag policy applies.
+     */
+    ResourceType: ResourceType;
+    /**
+     * A list of tag conditions that apply to the resource's tag policy.
+     */
+    Expression: Expression;
+  }
+  export type LFTagValue = string;
+  export type LFTagsList = LFTagPair[];
   export type LastModifiedTimestamp = Date;
+  export interface ListLFTagsRequest {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * If resource share type is ALL, returns both in-account tags and shared tags that the requester has permission to view. If resource share type is FOREIGN, returns all share tags that the requester can view. If no resource share type is passed, lists tags in the given catalog ID that the requester has permission to view.
+     */
+    ResourceShareType?: ResourceShareType;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * A continuation token, if this is not the first call to retrieve this list.
+     */
+    NextToken?: Token;
+  }
+  export interface ListLFTagsResponse {
+    /**
+     * A list of tags that the requested has permission to view.
+     */
+    LFTags?: LFTagsList;
+    /**
+     * A continuation token, present if the current list segment is not the last.
+     */
+    NextToken?: Token;
+  }
   export interface ListPermissionsRequest {
     /**
      * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
@@ -424,7 +712,7 @@ declare namespace LakeFormation {
   export type NameString = string;
   export type NullableBoolean = boolean;
   export type PageSize = number;
-  export type Permission = "ALL"|"SELECT"|"ALTER"|"DROP"|"DELETE"|"INSERT"|"DESCRIBE"|"CREATE_DATABASE"|"CREATE_TABLE"|"DATA_LOCATION_ACCESS"|string;
+  export type Permission = "ALL"|"SELECT"|"ALTER"|"DROP"|"DELETE"|"INSERT"|"DESCRIBE"|"CREATE_DATABASE"|"CREATE_TABLE"|"DATA_LOCATION_ACCESS"|"CREATE_TAG"|"ALTER_TAG"|"DELETE_TAG"|"DESCRIBE_TAG"|"ASSOCIATE_TAG"|string;
   export type PermissionList = Permission[];
   export interface PrincipalPermissions {
     /**
@@ -455,7 +743,7 @@ declare namespace LakeFormation {
      */
     PermissionsWithGrantOption?: PermissionList;
     /**
-     * This attribute can be used to return any additional details of PrincipalResourcePermissions. Currently returns only as a RAM share resource ARN.
+     * This attribute can be used to return any additional details of PrincipalResourcePermissions. Currently returns only as a RAM resource share ARN.
      */
     AdditionalDetails?: DetailsMap;
   }
@@ -489,6 +777,26 @@ declare namespace LakeFormation {
   }
   export interface RegisterResourceResponse {
   }
+  export interface RemoveLFTagsFromResourceRequest {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The resource where you want to remove a tag.
+     */
+    Resource: Resource;
+    /**
+     * The tags to be removed from the resource.
+     */
+    LFTags: LFTagsList;
+  }
+  export interface RemoveLFTagsFromResourceResponse {
+    /**
+     * A list of failures to untag a resource.
+     */
+    Failures?: LFTagErrors;
+  }
   export interface Resource {
     /**
      * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
@@ -510,6 +818,14 @@ declare namespace LakeFormation {
      * The location of an Amazon S3 path where permissions are granted or revoked. 
      */
     DataLocation?: DataLocationResource;
+    /**
+     * The tag key and values attached to a resource.
+     */
+    LFTag?: LFTagKeyResource;
+    /**
+     * A list of tag conditions that define a resource's tag policy.
+     */
+    LFTagPolicy?: LFTagPolicyResource;
   }
   export type ResourceArnString = string;
   export interface ResourceInfo {
@@ -528,6 +844,8 @@ declare namespace LakeFormation {
   }
   export type ResourceInfoList = ResourceInfo[];
   export type ResourceShareList = RAMResourceShareArn[];
+  export type ResourceShareType = "FOREIGN"|"ALL"|string;
+  export type ResourceType = "DATABASE"|"TABLE"|string;
   export interface RevokePermissionsRequest {
     /**
      * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
@@ -552,8 +870,65 @@ declare namespace LakeFormation {
   }
   export interface RevokePermissionsResponse {
   }
+  export interface SearchDatabasesByLFTagsRequest {
+    /**
+     * A continuation token, if this is not the first call to retrieve this list.
+     */
+    NextToken?: Token;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * A list of conditions (LFTag structures) to search for in database resources.
+     */
+    Expression: Expression;
+  }
+  export interface SearchDatabasesByLFTagsResponse {
+    /**
+     * A continuation token, present if the current list segment is not the last.
+     */
+    NextToken?: Token;
+    /**
+     * A list of databases that meet the tag conditions.
+     */
+    DatabaseList?: DatabaseLFTagsList;
+  }
+  export interface SearchTablesByLFTagsRequest {
+    /**
+     * A continuation token, if this is not the first call to retrieve this list.
+     */
+    NextToken?: Token;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: PageSize;
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * A list of conditions (LFTag structures) to search for in table resources.
+     */
+    Expression: Expression;
+  }
+  export interface SearchTablesByLFTagsResponse {
+    /**
+     * A continuation token, present if the current list segment is not the last.
+     */
+    NextToken?: Token;
+    /**
+     * A list of tables that meet the tag conditions.
+     */
+    TableList?: TableLFTagsList;
+  }
   export type StringValue = string;
   export type StringValueList = StringValue[];
+  export type TableLFTagsList = TaggedTable[];
   export interface TableResource {
     /**
      * The identifier for the Data Catalog. By default, it is the account ID of the caller.
@@ -596,8 +971,57 @@ declare namespace LakeFormation {
      */
     ColumnWildcard?: ColumnWildcard;
   }
+  export type TagValueList = LFTagValue[];
+  export interface TaggedDatabase {
+    /**
+     * A database that has tags attached to it.
+     */
+    Database?: DatabaseResource;
+    /**
+     * A list of tags attached to the database.
+     */
+    LFTags?: LFTagsList;
+  }
+  export interface TaggedTable {
+    /**
+     * A table that has tags attached to it.
+     */
+    Table?: TableResource;
+    /**
+     * A list of tags attached to the database where the table resides.
+     */
+    LFTagOnDatabase?: LFTagsList;
+    /**
+     * A list of tags attached to the table.
+     */
+    LFTagsOnTable?: LFTagsList;
+    /**
+     * A list of tags attached to columns in the table.
+     */
+    LFTagsOnColumns?: ColumnLFTagsList;
+  }
   export type Token = string;
   export type TrustedResourceOwners = CatalogIdString[];
+  export interface UpdateLFTagRequest {
+    /**
+     * The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. 
+     */
+    CatalogId?: CatalogIdString;
+    /**
+     * The key-name for the tag for which to add or delete values.
+     */
+    TagKey: LFTagKey;
+    /**
+     * A list of tag values to delete from the tag.
+     */
+    TagValuesToDelete?: TagValueList;
+    /**
+     * A list of tag values to add from the tag.
+     */
+    TagValuesToAdd?: TagValueList;
+  }
+  export interface UpdateLFTagResponse {
+  }
   export interface UpdateResourceRequest {
     /**
      * The new role to use for the given resource registered in AWS Lake Formation.

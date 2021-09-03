@@ -1,0 +1,12 @@
+[
+    {
+        "type": "feature",
+        "category": "MediaTailor",
+        "description": "MediaTailor now supports ad marker passthrough for HLS. Use AdMarkerPassthrough to pass EXT-X-CUE-IN, EXT-X-CUE-OUT, and EXT-X-SPLICEPOINT-SCTE35 from origin manifests into personalized manifests."
+    },
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Support description on columns."
+    }
+]

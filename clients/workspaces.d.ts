@@ -12,6 +12,14 @@ declare class WorkSpaces extends Service {
   constructor(options?: WorkSpaces.Types.ClientConfiguration)
   config: Config & WorkSpaces.Types.ClientConfiguration;
   /**
+   * Associates the specified connection alias with the specified directory to enable cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.  Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED. 
+   */
+  associateConnectionAlias(params: WorkSpaces.Types.AssociateConnectionAliasRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AssociateConnectionAliasResult) => void): Request<WorkSpaces.Types.AssociateConnectionAliasResult, AWSError>;
+  /**
+   * Associates the specified connection alias with the specified directory to enable cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.  Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED. 
+   */
+  associateConnectionAlias(callback?: (err: AWSError, data: WorkSpaces.Types.AssociateConnectionAliasResult) => void): Request<WorkSpaces.Types.AssociateConnectionAliasResult, AWSError>;
+  /**
    * Associates the specified IP access control group with the specified directory.
    */
   associateIpGroups(params: WorkSpaces.Types.AssociateIpGroupsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.AssociateIpGroupsResult) => void): Request<WorkSpaces.Types.AssociateIpGroupsResult, AWSError>;
@@ -28,13 +36,21 @@ declare class WorkSpaces extends Service {
    */
   authorizeIpRules(callback?: (err: AWSError, data: WorkSpaces.Types.AuthorizeIpRulesResult) => void): Request<WorkSpaces.Types.AuthorizeIpRulesResult, AWSError>;
   /**
-   * Copies the specified image from the specified Region to the current Region.
+   * Copies the specified image from the specified Region to the current Region. For more information about copying images, see  Copy a Custom WorkSpaces Image.  In the China (Ningxia) Region, you can copy images only within the same Region. In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, contact AWS Support.   Before copying a shared image, be sure to verify that it has been shared from the correct AWS account. To determine if an image has been shared and to see the AWS account ID that owns an image, use the DescribeWorkSpaceImages and DescribeWorkspaceImagePermissions API operations.  
    */
   copyWorkspaceImage(params: WorkSpaces.Types.CopyWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CopyWorkspaceImageResult) => void): Request<WorkSpaces.Types.CopyWorkspaceImageResult, AWSError>;
   /**
-   * Copies the specified image from the specified Region to the current Region.
+   * Copies the specified image from the specified Region to the current Region. For more information about copying images, see  Copy a Custom WorkSpaces Image.  In the China (Ningxia) Region, you can copy images only within the same Region. In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, contact AWS Support.   Before copying a shared image, be sure to verify that it has been shared from the correct AWS account. To determine if an image has been shared and to see the AWS account ID that owns an image, use the DescribeWorkSpaceImages and DescribeWorkspaceImagePermissions API operations.  
    */
   copyWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.CopyWorkspaceImageResult) => void): Request<WorkSpaces.Types.CopyWorkspaceImageResult, AWSError>;
+  /**
+   * Creates the specified connection alias for use with cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
+   */
+  createConnectionAlias(params: WorkSpaces.Types.CreateConnectionAliasRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateConnectionAliasResult) => void): Request<WorkSpaces.Types.CreateConnectionAliasResult, AWSError>;
+  /**
+   * Creates the specified connection alias for use with cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
+   */
+  createConnectionAlias(callback?: (err: AWSError, data: WorkSpaces.Types.CreateConnectionAliasResult) => void): Request<WorkSpaces.Types.CreateConnectionAliasResult, AWSError>;
   /**
    * Creates an IP access control group. An IP access control group provides you with the ability to control the IP addresses from which users are allowed to access their WorkSpaces. To specify the CIDR address ranges, add rules to your IP access control group and then associate the group with your directory. You can add rules when you create the group or at any time using AuthorizeIpRules. There is a default IP access control group associated with your directory. If you don't associate an IP access control group with your directory, the default group is used. The default group includes a default rule that allows users to access their WorkSpaces from anywhere. You cannot modify the default IP access control group for your directory.
    */
@@ -52,6 +68,14 @@ declare class WorkSpaces extends Service {
    */
   createTags(callback?: (err: AWSError, data: WorkSpaces.Types.CreateTagsResult) => void): Request<WorkSpaces.Types.CreateTagsResult, AWSError>;
   /**
+   * Creates the specified WorkSpace bundle. For more information about creating WorkSpace bundles, see  Create a Custom WorkSpaces Image and Bundle.
+   */
+  createWorkspaceBundle(params: WorkSpaces.Types.CreateWorkspaceBundleRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceBundleResult) => void): Request<WorkSpaces.Types.CreateWorkspaceBundleResult, AWSError>;
+  /**
+   * Creates the specified WorkSpace bundle. For more information about creating WorkSpace bundles, see  Create a Custom WorkSpaces Image and Bundle.
+   */
+  createWorkspaceBundle(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspaceBundleResult) => void): Request<WorkSpaces.Types.CreateWorkspaceBundleResult, AWSError>;
+  /**
    * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.
    */
   createWorkspaces(params: WorkSpaces.Types.CreateWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
@@ -59,6 +83,14 @@ declare class WorkSpaces extends Service {
    * Creates one or more WorkSpaces. This operation is asynchronous and returns before the WorkSpaces are created.
    */
   createWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.CreateWorkspacesResult) => void): Request<WorkSpaces.Types.CreateWorkspacesResult, AWSError>;
+  /**
+   * Deletes the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.   If you will no longer be using a fully qualified domain name (FQDN) as the registration code for your WorkSpaces users, you must take certain precautions to prevent potential security issues. For more information, see  Security Considerations if You Stop Using Cross-Region Redirection.   To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories. 
+   */
+  deleteConnectionAlias(params: WorkSpaces.Types.DeleteConnectionAliasRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteConnectionAliasResult) => void): Request<WorkSpaces.Types.DeleteConnectionAliasResult, AWSError>;
+  /**
+   * Deletes the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.   If you will no longer be using a fully qualified domain name (FQDN) as the registration code for your WorkSpaces users, you must take certain precautions to prevent potential security issues. For more information, see  Security Considerations if You Stop Using Cross-Region Redirection.   To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories. 
+   */
+  deleteConnectionAlias(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteConnectionAliasResult) => void): Request<WorkSpaces.Types.DeleteConnectionAliasResult, AWSError>;
   /**
    * Deletes the specified IP access control group. You cannot delete an IP access control group that is associated with a directory.
    */
@@ -76,6 +108,14 @@ declare class WorkSpaces extends Service {
    */
   deleteTags(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteTagsResult) => void): Request<WorkSpaces.Types.DeleteTagsResult, AWSError>;
   /**
+   * Deletes the specified WorkSpace bundle. For more information about deleting WorkSpace bundles, see  Delete a Custom WorkSpaces Bundle or Image.
+   */
+  deleteWorkspaceBundle(params: WorkSpaces.Types.DeleteWorkspaceBundleRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceBundleResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceBundleResult, AWSError>;
+  /**
+   * Deletes the specified WorkSpace bundle. For more information about deleting WorkSpace bundles, see  Delete a Custom WorkSpaces Bundle or Image.
+   */
+  deleteWorkspaceBundle(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceBundleResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceBundleResult, AWSError>;
+  /**
    * Deletes the specified image from your account. To delete an image, you must first delete any bundles that are associated with the image and unshare the image if it is shared with other accounts. 
    */
   deleteWorkspaceImage(params: WorkSpaces.Types.DeleteWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceImageResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceImageResult, AWSError>;
@@ -84,11 +124,11 @@ declare class WorkSpaces extends Service {
    */
   deleteWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.DeleteWorkspaceImageResult) => void): Request<WorkSpaces.Types.DeleteWorkspaceImageResult, AWSError>;
   /**
-   * Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.
+   * Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the AWS Directory Services pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again. 
    */
   deregisterWorkspaceDirectory(params: WorkSpaces.Types.DeregisterWorkspaceDirectoryRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DeregisterWorkspaceDirectoryResult) => void): Request<WorkSpaces.Types.DeregisterWorkspaceDirectoryResult, AWSError>;
   /**
-   * Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.
+   * Deregisters the specified directory. This operation is asynchronous and returns before the WorkSpace directory is deregistered. If any WorkSpaces are registered to this directory, you must remove them before you can deregister the directory.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the AWS Directory Services pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again. 
    */
   deregisterWorkspaceDirectory(callback?: (err: AWSError, data: WorkSpaces.Types.DeregisterWorkspaceDirectoryResult) => void): Request<WorkSpaces.Types.DeregisterWorkspaceDirectoryResult, AWSError>;
   /**
@@ -115,6 +155,22 @@ declare class WorkSpaces extends Service {
    * Retrieves a list that describes one or more specified Amazon WorkSpaces clients.
    */
   describeClientProperties(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeClientPropertiesResult) => void): Request<WorkSpaces.Types.DescribeClientPropertiesResult, AWSError>;
+  /**
+   * Describes the permissions that the owner of a connection alias has granted to another AWS account for the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
+   */
+  describeConnectionAliasPermissions(params: WorkSpaces.Types.DescribeConnectionAliasPermissionsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectionAliasPermissionsResult) => void): Request<WorkSpaces.Types.DescribeConnectionAliasPermissionsResult, AWSError>;
+  /**
+   * Describes the permissions that the owner of a connection alias has granted to another AWS account for the specified connection alias. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
+   */
+  describeConnectionAliasPermissions(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectionAliasPermissionsResult) => void): Request<WorkSpaces.Types.DescribeConnectionAliasPermissionsResult, AWSError>;
+  /**
+   * Retrieves a list that describes the connection aliases used for cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
+   */
+  describeConnectionAliases(params: WorkSpaces.Types.DescribeConnectionAliasesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectionAliasesResult) => void): Request<WorkSpaces.Types.DescribeConnectionAliasesResult, AWSError>;
+  /**
+   * Retrieves a list that describes the connection aliases used for cross-Region redirection. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.
+   */
+  describeConnectionAliases(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeConnectionAliasesResult) => void): Request<WorkSpaces.Types.DescribeConnectionAliasesResult, AWSError>;
   /**
    * Describes one or more of your IP access control groups.
    */
@@ -188,6 +244,14 @@ declare class WorkSpaces extends Service {
    */
   describeWorkspacesConnectionStatus(callback?: (err: AWSError, data: WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult) => void): Request<WorkSpaces.Types.DescribeWorkspacesConnectionStatusResult, AWSError>;
   /**
+   * Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region redirection between two directories in different AWS Regions. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.  Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED. 
+   */
+  disassociateConnectionAlias(params: WorkSpaces.Types.DisassociateConnectionAliasRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateConnectionAliasResult) => void): Request<WorkSpaces.Types.DisassociateConnectionAliasResult, AWSError>;
+  /**
+   * Disassociates a connection alias from a directory. Disassociating a connection alias disables cross-Region redirection between two directories in different AWS Regions. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.  Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED. 
+   */
+  disassociateConnectionAlias(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateConnectionAliasResult) => void): Request<WorkSpaces.Types.DisassociateConnectionAliasResult, AWSError>;
+  /**
    * Disassociates the specified IP access control group from the specified directory.
    */
   disassociateIpGroups(params: WorkSpaces.Types.DisassociateIpGroupsRequest, callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateIpGroupsResult) => void): Request<WorkSpaces.Types.DisassociateIpGroupsResult, AWSError>;
@@ -196,19 +260,19 @@ declare class WorkSpaces extends Service {
    */
   disassociateIpGroups(callback?: (err: AWSError, data: WorkSpaces.Types.DisassociateIpGroupsResult) => void): Request<WorkSpaces.Types.DisassociateIpGroupsResult, AWSError>;
   /**
-   * Imports the specified Windows 7 or Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. 
+   * Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
    */
   importWorkspaceImage(params: WorkSpaces.Types.ImportWorkspaceImageRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
   /**
-   * Imports the specified Windows 7 or Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed EC2 image that is in your AWS account, and you must own the image. 
+   * Imports the specified Windows 10 Bring Your Own License (BYOL) image into Amazon WorkSpaces. The image must be an already licensed Amazon EC2 image that is in your AWS account, and you must own the image. For more information about creating BYOL images, see  Bring Your Own Windows Desktop Licenses.
    */
   importWorkspaceImage(callback?: (err: AWSError, data: WorkSpaces.Types.ImportWorkspaceImageResult) => void): Request<WorkSpaces.Types.ImportWorkspaceImageResult, AWSError>;
   /**
-   * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL).  The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
+   * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL).  This operation can be run only by AWS accounts that are enabled for BYOL. If your account isn't enabled for BYOL, you'll receive an AccessDeniedException error. The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
    */
   listAvailableManagementCidrRanges(params: WorkSpaces.Types.ListAvailableManagementCidrRangesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.ListAvailableManagementCidrRangesResult) => void): Request<WorkSpaces.Types.ListAvailableManagementCidrRangesResult, AWSError>;
   /**
-   * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL).  The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
+   * Retrieves a list of IP address ranges, specified as IPv4 CIDR blocks, that you can use for the network management interface when you enable Bring Your Own License (BYOL).  This operation can be run only by AWS accounts that are enabled for BYOL. If your account isn't enabled for BYOL, you'll receive an AccessDeniedException error. The management network interface is connected to a secure Amazon WorkSpaces management network. It is used for interactive streaming of the WorkSpace desktop to Amazon WorkSpaces clients, and to allow Amazon WorkSpaces to manage the WorkSpace.
    */
   listAvailableManagementCidrRanges(callback?: (err: AWSError, data: WorkSpaces.Types.ListAvailableManagementCidrRangesResult) => void): Request<WorkSpaces.Types.ListAvailableManagementCidrRangesResult, AWSError>;
   /**
@@ -332,13 +396,21 @@ declare class WorkSpaces extends Service {
    */
   stopWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.StopWorkspacesResult) => void): Request<WorkSpaces.Types.StopWorkspacesResult, AWSError>;
   /**
-   * Terminates the specified WorkSpaces. Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact Amazon Web Services before terminating the WorkSpace. You can terminate a WorkSpace that is in any state except SUSPENDED. This operation is asynchronous and returns before the WorkSpaces have been completely terminated.
+   * Terminates the specified WorkSpaces.  Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact AWS Support before terminating the WorkSpace.  You can terminate a WorkSpace that is in any state except SUSPENDED. This operation is asynchronous and returns before the WorkSpaces have been completely terminated. After a WorkSpace is terminated, the TERMINATED state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using  DescribeWorkSpaces. If the WorkSpace ID isn't returned, then the WorkSpace has been successfully terminated.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the AWS Directory Services pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again. 
    */
   terminateWorkspaces(params: WorkSpaces.Types.TerminateWorkspacesRequest, callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
   /**
-   * Terminates the specified WorkSpaces. Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact Amazon Web Services before terminating the WorkSpace. You can terminate a WorkSpace that is in any state except SUSPENDED. This operation is asynchronous and returns before the WorkSpaces have been completely terminated.
+   * Terminates the specified WorkSpaces.  Terminating a WorkSpace is a permanent action and cannot be undone. The user's data is destroyed. If you need to archive any user data, contact AWS Support before terminating the WorkSpace.  You can terminate a WorkSpace that is in any state except SUSPENDED. This operation is asynchronous and returns before the WorkSpaces have been completely terminated. After a WorkSpace is terminated, the TERMINATED state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using  DescribeWorkSpaces. If the WorkSpace ID isn't returned, then the WorkSpace has been successfully terminated.  Simple AD and AD Connector are made available to you free of charge to use with WorkSpaces. If there are no WorkSpaces being used with your Simple AD or AD Connector directory for 30 consecutive days, this directory will be automatically deregistered for use with Amazon WorkSpaces, and you will be charged for this directory as per the AWS Directory Services pricing terms. To delete empty directories, see  Delete the Directory for Your WorkSpaces. If you delete your Simple AD or AD Connector directory, you can always create a new one when you want to start using WorkSpaces again. 
    */
   terminateWorkspaces(callback?: (err: AWSError, data: WorkSpaces.Types.TerminateWorkspacesResult) => void): Request<WorkSpaces.Types.TerminateWorkspacesResult, AWSError>;
+  /**
+   * Shares or unshares a connection alias with one account by specifying whether that account has permission to associate the connection alias with a directory. If the association permission is granted, the connection alias is shared with that account. If the association permission is revoked, the connection alias is unshared with the account. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.    Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED.   To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories.   
+   */
+  updateConnectionAliasPermission(params: WorkSpaces.Types.UpdateConnectionAliasPermissionRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateConnectionAliasPermissionResult) => void): Request<WorkSpaces.Types.UpdateConnectionAliasPermissionResult, AWSError>;
+  /**
+   * Shares or unshares a connection alias with one account by specifying whether that account has permission to associate the connection alias with a directory. If the association permission is granted, the connection alias is shared with that account. If the association permission is revoked, the connection alias is unshared with the account. For more information, see  Cross-Region Redirection for Amazon WorkSpaces.    Before performing this operation, call  DescribeConnectionAliases to make sure that the current state of the connection alias is CREATED.   To delete a connection alias that has been shared, the shared account must first disassociate the connection alias from any directories it has been associated with. Then you must unshare the connection alias from the account it has been shared with. You can delete a connection alias only after it is no longer shared with any accounts or associated with any directories.   
+   */
+  updateConnectionAliasPermission(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateConnectionAliasPermissionResult) => void): Request<WorkSpaces.Types.UpdateConnectionAliasPermissionResult, AWSError>;
   /**
    * Replaces the current rules of the specified IP access control group with the specified rules.
    */
@@ -348,11 +420,19 @@ declare class WorkSpaces extends Service {
    */
   updateRulesOfIpGroup(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateRulesOfIpGroupResult) => void): Request<WorkSpaces.Types.UpdateRulesOfIpGroupResult, AWSError>;
   /**
-   * Shares or unshares an image with one account by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account.    To delete an image that has been shared, you must unshare the image before you delete it.   Sharing Bring Your Own License (BYOL) images across AWS accounts isn't supported at this time in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact AWS Support.   
+   * Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see  Update a Custom WorkSpaces Bundle.  Existing WorkSpaces aren't automatically updated when you update the bundle that they're based on. To update existing WorkSpaces that are based on a bundle that you've updated, you must either rebuild the WorkSpaces or delete and recreate them. 
+   */
+  updateWorkspaceBundle(params: WorkSpaces.Types.UpdateWorkspaceBundleRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspaceBundleResult) => void): Request<WorkSpaces.Types.UpdateWorkspaceBundleResult, AWSError>;
+  /**
+   * Updates a WorkSpace bundle with a new image. For more information about updating WorkSpace bundles, see  Update a Custom WorkSpaces Bundle.  Existing WorkSpaces aren't automatically updated when you update the bundle that they're based on. To update existing WorkSpaces that are based on a bundle that you've updated, you must either rebuild the WorkSpaces or delete and recreate them. 
+   */
+  updateWorkspaceBundle(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspaceBundleResult) => void): Request<WorkSpaces.Types.UpdateWorkspaceBundleResult, AWSError>;
+  /**
+   * Shares or unshares an image with one account in the same AWS Region by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account. After an image has been shared, the recipient account can copy the image to other AWS Regions as needed.  In the China (Ningxia) Region, you can copy images only within the same Region. In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, contact AWS Support.  For more information about sharing images, see  Share or Unshare a Custom WorkSpaces Image.    To delete an image that has been shared, you must unshare the image before you delete it.   Sharing Bring Your Own License (BYOL) images across AWS accounts isn't supported at this time in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact AWS Support.   
    */
   updateWorkspaceImagePermission(params: WorkSpaces.Types.UpdateWorkspaceImagePermissionRequest, callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspaceImagePermissionResult) => void): Request<WorkSpaces.Types.UpdateWorkspaceImagePermissionResult, AWSError>;
   /**
-   * Shares or unshares an image with one account by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account.    To delete an image that has been shared, you must unshare the image before you delete it.   Sharing Bring Your Own License (BYOL) images across AWS accounts isn't supported at this time in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact AWS Support.   
+   * Shares or unshares an image with one account in the same AWS Region by specifying whether that account has permission to copy the image. If the copy image permission is granted, the image is shared with that account. If the copy image permission is revoked, the image is unshared with the account. After an image has been shared, the recipient account can copy the image to other AWS Regions as needed.  In the China (Ningxia) Region, you can copy images only within the same Region. In the AWS GovCloud (US-West) Region, to copy images to and from other AWS Regions, contact AWS Support.  For more information about sharing images, see  Share or Unshare a Custom WorkSpaces Image.    To delete an image that has been shared, you must unshare the image before you delete it.   Sharing Bring Your Own License (BYOL) images across AWS accounts isn't supported at this time in the AWS GovCloud (US-West) Region. To share BYOL images across accounts in the AWS GovCloud (US-West) Region, contact AWS Support.   
    */
   updateWorkspaceImagePermission(callback?: (err: AWSError, data: WorkSpaces.Types.UpdateWorkspaceImagePermissionResult) => void): Request<WorkSpaces.Types.UpdateWorkspaceImagePermissionResult, AWSError>;
 }
@@ -387,6 +467,24 @@ declare namespace WorkSpaces {
   }
   export type AccountModificationList = AccountModification[];
   export type Alias = string;
+  export type Application = "Microsoft_Office_2016"|"Microsoft_Office_2019"|string;
+  export type ApplicationList = Application[];
+  export interface AssociateConnectionAliasRequest {
+    /**
+     * The identifier of the connection alias.
+     */
+    AliasId: ConnectionAliasId;
+    /**
+     * The identifier of the directory to associate the connection alias with.
+     */
+    ResourceId: NonEmptyString;
+  }
+  export interface AssociateConnectionAliasResult {
+    /**
+     * The identifier of the connection alias association. You use the connection identifier in the DNS TXT record when you're configuring your DNS routing policies. 
+     */
+    ConnectionIdentifier?: ConnectionIdentifier;
+  }
   export interface AssociateIpGroupsRequest {
     /**
      * The identifier of the directory.
@@ -399,6 +497,7 @@ declare namespace WorkSpaces {
   }
   export interface AssociateIpGroupsResult {
   }
+  export type AssociationStatus = "NOT_ASSOCIATED"|"ASSOCIATED_WITH_OWNER_ACCOUNT"|"ASSOCIATED_WITH_SHARED_ACCOUNT"|"PENDING_ASSOCIATION"|"PENDING_DISASSOCIATION"|string;
   export interface AuthorizeIpRulesRequest {
     /**
      * The identifier of the group.
@@ -442,7 +541,65 @@ declare namespace WorkSpaces {
     Name?: Compute;
   }
   export type ComputerName = string;
+  export interface ConnectionAlias {
+    /**
+     * The connection string specified for the connection alias. The connection string must be in the form of a fully qualified domain name (FQDN), such as www.example.com.
+     */
+    ConnectionString?: ConnectionString;
+    /**
+     * The identifier of the connection alias.
+     */
+    AliasId?: ConnectionAliasId;
+    /**
+     * The current state of the connection alias.
+     */
+    State?: ConnectionAliasState;
+    /**
+     * The identifier of the AWS account that owns the connection alias.
+     */
+    OwnerAccountId?: AwsAccount;
+    /**
+     * The association status of the connection alias.
+     */
+    Associations?: ConnectionAliasAssociationList;
+  }
+  export interface ConnectionAliasAssociation {
+    /**
+     * The association status of the connection alias.
+     */
+    AssociationStatus?: AssociationStatus;
+    /**
+     * The identifier of the AWS account that associated the connection alias with a directory.
+     */
+    AssociatedAccountId?: AwsAccount;
+    /**
+     * The identifier of the directory associated with a connection alias.
+     */
+    ResourceId?: NonEmptyString;
+    /**
+     * The identifier of the connection alias association. You use the connection identifier in the DNS TXT record when you're configuring your DNS routing policies.
+     */
+    ConnectionIdentifier?: ConnectionIdentifier;
+  }
+  export type ConnectionAliasAssociationList = ConnectionAliasAssociation[];
+  export type ConnectionAliasId = string;
+  export type ConnectionAliasIdList = ConnectionAliasId[];
+  export type ConnectionAliasList = ConnectionAlias[];
+  export interface ConnectionAliasPermission {
+    /**
+     * The identifier of the AWS account that the connection alias is shared with.
+     */
+    SharedAccountId: AwsAccount;
+    /**
+     * Indicates whether the specified AWS account is allowed to associate the connection alias with a directory.
+     */
+    AllowAssociation: BooleanObject;
+  }
+  export type ConnectionAliasPermissions = ConnectionAliasPermission[];
+  export type ConnectionAliasState = "CREATING"|"CREATED"|"DELETING"|string;
+  export type ConnectionIdentifier = string;
   export type ConnectionState = "CONNECTED"|"DISCONNECTED"|"UNKNOWN"|string;
+  export type ConnectionString = string;
   export interface CopyWorkspaceImageRequest {
     /**
      * The name of the image.
@@ -471,6 +628,22 @@ declare namespace WorkSpaces {
      */
     ImageId?: WorkspaceImageId;
   }
+  export interface CreateConnectionAliasRequest {
+    /**
+     * A connection string in the form of a fully qualified domain name (FQDN), such as www.example.com.  After you create a connection string, it is always associated to your AWS account. You cannot recreate the same connection string with a different account, even if you delete all instances of it from the original account. The connection string is globally reserved for your account. 
+     */
+    ConnectionString: ConnectionString;
+    /**
+     * The tags to associate with the connection alias.
+     */
+    Tags?: TagList;
+  }
+  export interface CreateConnectionAliasResult {
+    /**
+     * The identifier of the connection alias.
+     */
+    AliasId?: ConnectionAliasId;
+  }
   export interface CreateIpGroupRequest {
     /**
      * The name of the group.
@@ -497,15 +670,39 @@ declare namespace WorkSpaces {
   }
   export interface CreateTagsRequest {
     /**
-     * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.
+     * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, IP access control groups, and connection aliases.
      */
     ResourceId: NonEmptyString;
     /**
-     * The tags. Each WorkSpaces resource can have a maximum of 50 tags. If you want to add new tags to a set of existing tags, you must submit all of the existing tags along with the new ones.
+     * The tags. Each WorkSpaces resource can have a maximum of 50 tags.
      */
     Tags: TagList;
   }
   export interface CreateTagsResult {
+  }
+  export interface CreateWorkspaceBundleRequest {
+    /**
+     * The name of the bundle.
+     */
+    BundleName: WorkspaceBundleName;
+    /**
+     * The description of the bundle.
+     */
+    BundleDescription: WorkspaceBundleDescription;
+    /**
+     * The identifier of the image that is used to create the bundle.
+     */
+    ImageId: WorkspaceImageId;
+    ComputeType: ComputeType;
+    UserStorage: UserStorage;
+    RootStorage?: RootStorage;
+    /**
+     * The tags associated with the bundle.  To add tags at the same time when you're creating the bundle, you must create an IAM policy that grants your IAM user permissions to use workspaces:CreateTags.  
+     */
+    Tags?: TagList;
+  }
+  export interface CreateWorkspaceBundleResult {
+    WorkspaceBundle?: WorkspaceBundle;
   }
   export interface CreateWorkspacesRequest {
     /**
@@ -555,6 +752,14 @@ declare namespace WorkSpaces {
      */
     EnableMaintenanceMode?: BooleanObject;
   }
+  export interface DeleteConnectionAliasRequest {
+    /**
+     * The identifier of the connection alias to delete.
+     */
+    AliasId: ConnectionAliasId;
+  }
+  export interface DeleteConnectionAliasResult {
+  }
   export interface DeleteIpGroupRequest {
     /**
      * The identifier of the IP access control group.
@@ -565,7 +770,7 @@ declare namespace WorkSpaces {
   }
   export interface DeleteTagsRequest {
     /**
-     * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.
+     * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, IP access control groups, and connection aliases.
      */
     ResourceId: NonEmptyString;
     /**
@@ -574,6 +779,14 @@ declare namespace WorkSpaces {
     TagKeys: TagKeyList;
   }
   export interface DeleteTagsResult {
+  }
+  export interface DeleteWorkspaceBundleRequest {
+    /**
+     * The identifier of the bundle.
+     */
+    BundleId?: BundleId;
+  }
+  export interface DeleteWorkspaceBundleResult {
   }
   export interface DeleteWorkspaceImageRequest {
     /**
@@ -603,7 +816,7 @@ declare namespace WorkSpaces {
      */
     AccountModifications?: AccountModificationList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -631,6 +844,62 @@ declare namespace WorkSpaces {
      */
     ClientPropertiesList?: ClientPropertiesList;
   }
+  export interface DescribeConnectionAliasPermissionsRequest {
+    /**
+     * The identifier of the connection alias.
+     */
+    AliasId: ConnectionAliasId;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results. 
+     */
+    NextToken?: PaginationToken;
+    /**
+     * The maximum number of results to return.
+     */
+    MaxResults?: Limit;
+  }
+  export interface DescribeConnectionAliasPermissionsResult {
+    /**
+     * The identifier of the connection alias.
+     */
+    AliasId?: ConnectionAliasId;
+    /**
+     * The permissions associated with a connection alias.
+     */
+    ConnectionAliasPermissions?: ConnectionAliasPermissions;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeConnectionAliasesRequest {
+    /**
+     * The identifiers of the connection aliases to describe.
+     */
+    AliasIds?: ConnectionAliasIdList;
+    /**
+     * The identifier of the directory associated with the connection alias.
+     */
+    ResourceId?: NonEmptyString;
+    /**
+     * The maximum number of connection aliases to return.
+     */
+    Limit?: Limit;
+    /**
+     * If you received a NextToken from a previous call that was paginated, provide this token to receive the next set of results. 
+     */
+    NextToken?: PaginationToken;
+  }
+  export interface DescribeConnectionAliasesResult {
+    /**
+     * Information about the specified connection aliases.
+     */
+    ConnectionAliases?: ConnectionAliasList;
+    /**
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
+     */
+    NextToken?: PaginationToken;
+  }
   export interface DescribeIpGroupsRequest {
     /**
      * The identifiers of one or more IP access control groups.
@@ -651,13 +920,13 @@ declare namespace WorkSpaces {
      */
     Result?: WorkspacesIpGroupsList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
   export interface DescribeTagsRequest {
     /**
-     * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, and IP access control groups.
+     * The identifier of the WorkSpaces resource. The supported resource types are WorkSpaces, registered directories, images, custom bundles, IP access control groups, and connection aliases.
      */
     ResourceId: NonEmptyString;
   }
@@ -673,7 +942,7 @@ declare namespace WorkSpaces {
      */
     BundleIds?: BundleIdList;
     /**
-     * The owner of the bundles. You cannot combine this parameter with any other filter. Specify AMAZON to describe the bundles provided by AWS or null to describe the bundles that belong to your account.
+     * The owner of the bundles. You cannot combine this parameter with any other filter. To describe the bundles provided by AWS, specify AMAZON. To describe the bundles that belong to your account, don't specify a value.
      */
     Owner?: BundleOwner;
     /**
@@ -687,7 +956,7 @@ declare namespace WorkSpaces {
      */
     Bundles?: BundleList;
     /**
-     * The token to use to retrieve the next set of results, or null if there are no more results available. This token is valid for one day and must be used within that time frame.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. This token is valid for one day and must be used within that time frame.
      */
     NextToken?: PaginationToken;
   }
@@ -711,7 +980,7 @@ declare namespace WorkSpaces {
      */
     Directories?: DirectoryList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -739,7 +1008,7 @@ declare namespace WorkSpaces {
      */
     ImagePermissions?: ImagePermissions;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -767,7 +1036,7 @@ declare namespace WorkSpaces {
      */
     Images?: WorkspaceImageList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -803,7 +1072,7 @@ declare namespace WorkSpaces {
      */
     WorkspacesConnectionStatus?: WorkspaceConnectionStatusList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -839,7 +1108,7 @@ declare namespace WorkSpaces {
      */
     Workspaces?: WorkspaceList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -848,6 +1117,14 @@ declare namespace WorkSpaces {
   export type DirectoryIdList = DirectoryId[];
   export type DirectoryList = WorkspaceDirectory[];
   export type DirectoryName = string;
+  export interface DisassociateConnectionAliasRequest {
+    /**
+     * The identifier of the connection alias to disassociate.
+     */
+    AliasId: ConnectionAliasId;
+  }
+  export interface DisassociateConnectionAliasResult {
+  }
   export interface DisassociateIpGroupsRequest {
     /**
      * The identifier of the directory.
@@ -911,7 +1188,7 @@ declare namespace WorkSpaces {
      */
     Ec2ImageId: Ec2ImageId;
     /**
-     * The ingestion process to be used when importing the image.
+     * The ingestion process to be used when importing the image, depending on which protocol you want to use for your BYOL Workspace image, either PCoIP or WorkSpaces Streaming Protocol (WSP). To use WSP, specify a value that ends in _WSP. To use PCoIP, specify a value that does not end in _WSP.  For non-GPU-enabled bundles (bundles other than Graphics or GraphicsPro), specify BYOL_REGULAR or BYOL_REGULAR_WSP, depending on the protocol.
      */
     IngestionProcess: WorkspaceImageIngestionProcess;
     /**
@@ -926,6 +1203,10 @@ declare namespace WorkSpaces {
      * The tags. Each WorkSpaces resource can have a maximum of 50 tags.
      */
     Tags?: TagList;
+    /**
+     * If specified, the version of Microsoft Office to subscribe to. Valid only for Windows 10 BYOL images. For more information about subscribing to Office for BYOL images, see  Bring Your Own Windows Desktop Licenses.  Although this parameter is an array, only one item is allowed at this time. 
+     */
+    Applications?: ApplicationList;
   }
   export interface ImportWorkspaceImageResult {
     /**
@@ -973,7 +1254,7 @@ declare namespace WorkSpaces {
      */
     ManagementCidrRanges?: DedicatedTenancyCidrRangeList;
     /**
-     * The token to use to retrieve the next set of results, or null if no more results are available.
+     * The token to use to retrieve the next page of results. This value is null when there are no more results to return. 
      */
     NextToken?: PaginationToken;
   }
@@ -1310,6 +1591,18 @@ declare namespace WorkSpaces {
     FailedRequests?: FailedTerminateWorkspaceRequests;
   }
   export type Timestamp = Date;
+  export interface UpdateConnectionAliasPermissionRequest {
+    /**
+     * The identifier of the connection alias that you want to update permissions for.
+     */
+    AliasId: ConnectionAliasId;
+    /**
+     * Indicates whether to share or unshare the connection alias with the specified AWS account.
+     */
+    ConnectionAliasPermission: ConnectionAliasPermission;
+  }
+  export interface UpdateConnectionAliasPermissionResult {
+  }
   export interface UpdateRulesOfIpGroupRequest {
     /**
      * The identifier of the group.
@@ -1322,6 +1615,18 @@ declare namespace WorkSpaces {
   }
   export interface UpdateRulesOfIpGroupResult {
   }
+  export interface UpdateWorkspaceBundleRequest {
+    /**
+     * The identifier of the bundle.
+     */
+    BundleId?: BundleId;
+    /**
+     * The identifier of the image.
+     */
+    ImageId?: WorkspaceImageId;
+  }
+  export interface UpdateWorkspaceBundleResult {
+  }
   export interface UpdateWorkspaceImagePermissionRequest {
     /**
      * The identifier of the image.
@@ -1332,7 +1637,7 @@ declare namespace WorkSpaces {
      */
     AllowCopyImage: BooleanObject;
     /**
-     * The identifier of the AWS account to share or unshare the image with.
+     * The identifier of the AWS account to share or unshare the image with.  Before sharing the image, confirm that you are sharing to the correct AWS account ID. 
      */
     SharedAccountId: AwsAccount;
   }
@@ -1341,7 +1646,7 @@ declare namespace WorkSpaces {
   export type UserName = string;
   export interface UserStorage {
     /**
-     * The size of the user storage.
+     * The size of the user volume.
      */
     Capacity?: NonEmptyString;
   }
@@ -1365,7 +1670,7 @@ declare namespace WorkSpaces {
      */
     IpAddress?: IpAddress;
     /**
-     * The operational state of the WorkSpace.
+     * The operational state of the WorkSpace.  After a WorkSpace is terminated, the TERMINATED state is returned only briefly before the WorkSpace directory metadata is cleaned up, so this state is rarely returned. To confirm that a WorkSpace is terminated, check for the WorkSpace ID by using  DescribeWorkSpaces. If the WorkSpace ID isn't returned, then the WorkSpace has been successfully terminated. 
      */
     State?: WorkspaceState;
     /**
@@ -1438,10 +1743,14 @@ declare namespace WorkSpaces {
      * Indicates whether users can use zero client devices to access their WorkSpaces.
      */
     DeviceTypeZeroClient?: AccessPropertyValue;
+    /**
+     * Indicates whether users can use Linux clients to access their WorkSpaces.
+     */
+    DeviceTypeLinux?: AccessPropertyValue;
   }
   export interface WorkspaceBundle {
     /**
-     * The bundle identifier.
+     * The identifier of the bundle.
      */
     BundleId?: BundleId;
     /**
@@ -1453,11 +1762,11 @@ declare namespace WorkSpaces {
      */
     Owner?: BundleOwner;
     /**
-     * A description.
+     * The description of the bundle.
      */
     Description?: Description;
     /**
-     * The image identifier of the bundle.
+     * The identifier of the image that was used to create the bundle.
      */
     ImageId?: WorkspaceImageId;
     /**
@@ -1465,18 +1774,24 @@ declare namespace WorkSpaces {
      */
     RootStorage?: RootStorage;
     /**
-     * The size of the user storage.
+     * The size of the user volume.
      */
     UserStorage?: UserStorage;
     /**
-     * The compute type. For more information, see Amazon WorkSpaces Bundles.
+     * The compute type of the bundle. For more information, see Amazon WorkSpaces Bundles.
      */
     ComputeType?: ComputeType;
     /**
      * The last time that the bundle was updated.
      */
     LastUpdatedTime?: Timestamp;
+    /**
+     * The time when the bundle was created.
+     */
+    CreationTime?: Timestamp;
   }
+  export type WorkspaceBundleDescription = string;
+  export type WorkspaceBundleName = string;
   export interface WorkspaceConnectionStatus {
     /**
      * The identifier of the WorkSpace.
@@ -1506,7 +1821,7 @@ declare namespace WorkSpaces {
      */
     EnableInternetAccess?: BooleanObject;
     /**
-     * The default organizational unit (OU) for your WorkSpace directories.
+     * The default organizational unit (OU) for your WorkSpaces directories. This string must be the full Lightweight Directory Access Protocol (LDAP) distinguished name for the target domain and OU. It must be in the form "OU=value,DC=value,DC=value", where value is any string of characters, and the number of domain components (DCs) is two or more. For example, OU=WorkSpaces_machines,DC=machines,DC=example,DC=com.     To avoid errors, certain characters in the distinguished name must be escaped. For more information, see  Distinguished Names in the Microsoft documentation.   The API doesn't validate whether the OU exists.   
      */
     DefaultOu?: DefaultOu;
     /**
@@ -1564,7 +1879,7 @@ declare namespace WorkSpaces {
      */
     WorkspaceSecurityGroupId?: SecurityGroupId;
     /**
-     * The state of the directory's registration with Amazon WorkSpaces.
+     * The state of the directory's registration with Amazon WorkSpaces. After a directory is deregistered, the DEREGISTERED state is returned very briefly before the directory metadata is cleaned up, so this state is rarely returned. To confirm that a directory is deregistered, check for the directory ID by using  DescribeWorkspaceDirectories. If the directory ID isn't returned, then the directory has been successfully deregistered.
      */
     State?: WorkspaceDirectoryState;
     /**
@@ -1639,7 +1954,7 @@ declare namespace WorkSpaces {
   export type WorkspaceImageErrorCode = string;
   export type WorkspaceImageId = string;
   export type WorkspaceImageIdList = WorkspaceImageId[];
-  export type WorkspaceImageIngestionProcess = "BYOL_REGULAR"|"BYOL_GRAPHICS"|"BYOL_GRAPHICSPRO"|string;
+  export type WorkspaceImageIngestionProcess = "BYOL_REGULAR"|"BYOL_GRAPHICS"|"BYOL_GRAPHICSPRO"|"BYOL_REGULAR_WSP"|string;
   export type WorkspaceImageList = WorkspaceImage[];
   export type WorkspaceImageName = string;
   export type WorkspaceImageRequiredTenancy = "DEFAULT"|"DEDICATED"|string;

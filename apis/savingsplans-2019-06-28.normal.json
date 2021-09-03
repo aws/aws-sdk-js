@@ -41,6 +41,34 @@
       ],
       "documentation": "<p>Creates a Savings Plan.</p>"
     },
+    "DeleteQueuedSavingsPlan": {
+      "name": "DeleteQueuedSavingsPlan",
+      "http": {
+        "method": "POST",
+        "requestUri": "/DeleteQueuedSavingsPlan"
+      },
+      "input": {
+        "shape": "DeleteQueuedSavingsPlanRequest"
+      },
+      "output": {
+        "shape": "DeleteQueuedSavingsPlanResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ServiceQuotaExceededException"
+        }
+      ],
+      "documentation": "<p>Deletes the queued purchase for the specified Savings Plan.</p>"
+    },
     "DescribeSavingsPlanRates": {
       "name": "DescribeSavingsPlanRates",
       "http": {
@@ -234,6 +262,10 @@
           "shape": "Amount",
           "documentation": "<p>The up-front payment amount. This is a whole number between 50 and 99 percent of the total value of the Savings Plan. This parameter is supported only if the payment option is <code>Partial Upfront</code>.</p>"
         },
+        "purchaseTime": {
+          "shape": "DateTime",
+          "documentation": "<p>The time at which to purchase the Savings Plan, in UTC format (YYYY-MM-DDTHH:MM:SSZ).</p>"
+        },
         "clientToken": {
           "shape": "ClientToken",
           "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
@@ -266,6 +298,25 @@
       "member": {
         "shape": "CurrencyCode"
       }
+    },
+    "DateTime": {
+      "type": "timestamp"
+    },
+    "DeleteQueuedSavingsPlanRequest": {
+      "type": "structure",
+      "required": [
+        "savingsPlanId"
+      ],
+      "members": {
+        "savingsPlanId": {
+          "shape": "SavingsPlanId",
+          "documentation": "<p>The ID of the Savings Plan.</p>"
+        }
+      }
+    },
+    "DeleteQueuedSavingsPlanResponse": {
+      "type": "structure",
+      "members": {}
     },
     "DescribeSavingsPlanRatesRequest": {
       "type": "structure",
@@ -933,7 +984,8 @@
       "enum": [
         "EC2",
         "Fargate",
-        "Lambda"
+        "Lambda",
+        "SageMaker"
       ]
     },
     "SavingsPlanProductTypeList": {
@@ -1080,7 +1132,8 @@
         "AmazonEC2",
         "AmazonECS",
         "AmazonEKS",
-        "AWSLambda"
+        "AWSLambda",
+        "AmazonSageMaker"
       ]
     },
     "SavingsPlanRateServiceCodeList": {
@@ -1125,7 +1178,9 @@
         "payment-pending",
         "payment-failed",
         "active",
-        "retired"
+        "retired",
+        "queued",
+        "queued-deleted"
       ]
     },
     "SavingsPlanStateList": {
@@ -1138,7 +1193,8 @@
       "type": "string",
       "enum": [
         "Compute",
-        "EC2Instance"
+        "EC2Instance",
+        "SageMaker"
       ]
     },
     "SavingsPlanTypeList": {
@@ -1226,7 +1282,7 @@
     },
     "UUID": {
       "type": "string",
-      "pattern": "^(([0-9a-f]+)(-?))+$"
+      "pattern": "[a-f0-9]+(-[a-f0-9]+)*"
     },
     "UUIDs": {
       "type": "list",

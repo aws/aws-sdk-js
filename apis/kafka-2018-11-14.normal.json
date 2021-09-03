@@ -12,6 +12,52 @@
     "signatureVersion": "v4"
   },
   "operations": {
+    "BatchAssociateScramSecret": {
+      "name": "BatchAssociateScramSecret",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/clusters/{clusterArn}/scram-secrets",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "BatchAssociateScramSecretRequest"
+      },
+      "output": {
+        "shape": "BatchAssociateScramSecretResponse",
+        "documentation": "\n            <p>200 response</p>\n         "
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "\n            <p>The request isn't valid because the input is incorrect. Correct your input and then submit it again.</p>\n         "
+        },
+        {
+          "shape": "UnauthorizedException",
+          "documentation": "\n            <p>The request is not authorized. The provided credentials couldn't be validated.</p>\n         "
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "\n            <p>There was an unexpected internal server error. Retrying your request might resolve the issue.</p>\n         "
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "\n            <p>Access forbidden. Check your credentials and then retry your request.</p>\n         "
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "\n            <p>The resource could not be found due to incorrect input. Correct the input, then retry the request.</p>\n         "
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "\n            <p>503 response</p>\n         "
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "\n            <p>429 response</p>\n         "
+        }
+      ],
+      "documentation": "\n            <p>Associates one or more Scram Secrets with an Amazon MSK cluster.</p>\n         "
+    },
     "CreateCluster": {
       "name": "CreateCluster",
       "http": {
@@ -331,6 +377,52 @@
       ],
       "documentation": "\n            <p>Returns a description of this revision of the configuration.</p>\n         "
     },
+    "BatchDisassociateScramSecret": {
+      "name": "BatchDisassociateScramSecret",
+      "http": {
+        "method": "PATCH",
+        "requestUri": "/v1/clusters/{clusterArn}/scram-secrets",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "BatchDisassociateScramSecretRequest"
+      },
+      "output": {
+        "shape": "BatchDisassociateScramSecretResponse",
+        "documentation": "\n            <p>200 response</p>\n         "
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "\n            <p>The request isn't valid because the input is incorrect. Correct your input and then submit it again.</p>\n         "
+        },
+        {
+          "shape": "UnauthorizedException",
+          "documentation": "\n            <p>The request is not authorized. The provided credentials couldn't be validated.</p>\n         "
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "\n            <p>There was an unexpected internal server error. Retrying your request might resolve the issue.</p>\n         "
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "\n            <p>Access forbidden. Check your credentials and then retry your request.</p>\n         "
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "\n            <p>The resource could not be found due to incorrect input. Correct the input, then retry the request.</p>\n         "
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "\n            <p>503 response</p>\n         "
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "\n            <p>429 response</p>\n         "
+        }
+      ],
+      "documentation": "\n            <p>Disassociates one or more Scram Secrets from an Amazon MSK cluster.</p>\n         "
+    },
     "GetBootstrapBrokers": {
       "name": "GetBootstrapBrokers",
       "http": {
@@ -630,6 +722,52 @@
       ],
       "documentation": "\n            <p>Returns a list of the broker nodes in the cluster.</p>\n         "
     },
+    "ListScramSecrets": {
+      "name": "ListScramSecrets",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/clusters/{clusterArn}/scram-secrets",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListScramSecretsRequest"
+      },
+      "output": {
+        "shape": "ListScramSecretsResponse",
+        "documentation": "\n            <p>200 response</p>\n         "
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "\n            <p>The request isn't valid because the input is incorrect. Correct your input and then submit it again.</p>\n         "
+        },
+        {
+          "shape": "UnauthorizedException",
+          "documentation": "\n            <p>The request is not authorized. The provided credentials couldn't be validated.</p>\n         "
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "\n            <p>There was an unexpected internal server error. Retrying your request might resolve the issue.</p>\n         "
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "\n            <p>Access forbidden. Check your credentials and then retry your request.</p>\n         "
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "\n            <p>The resource could not be found due to incorrect input. Correct the input, then retry the request.</p>\n         "
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "\n            <p>503 response</p>\n         "
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "\n            <p>429 response</p>\n         "
+        }
+      ],
+      "documentation": "\n            <p>Returns a list of the Scram Secrets associated with an Amazon MSK cluster.</p>\n         "
+    },
     "ListTagsForResource": {
       "name": "ListTagsForResource",
       "http": {
@@ -795,6 +933,52 @@
         }
       ],
       "documentation": "\n            <p>Updates the number of broker nodes in the cluster.</p>\n         "
+    },
+    "UpdateBrokerType": {
+      "name": "UpdateBrokerType",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/clusters/{clusterArn}/nodes/type",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UpdateBrokerTypeRequest"
+      },
+      "output": {
+        "shape": "UpdateBrokerTypeResponse",
+        "documentation": "\n            <p>Successful response.</p>\n         "
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "\n            <p>The request isn't valid because the input is incorrect. Correct your input and then submit it again.</p>\n            "
+        },
+        {
+          "shape": "UnauthorizedException",
+          "documentation": "\n            <p>The request is not authorized. The provided credentials couldn't be validated.</p>\n            "
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "\n            <p>There was an unexpected internal server error. Retrying your request might resolve the issue.</p>\n            "
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "\n            <p>Access forbidden. Check your credentials and then retry your request.</p>\n            "
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "\n            <p>The resource could not be found due to incorrect input. Correct the input, then retry the request.</p>\n            "
+        },
+        {
+          "shape": "ServiceUnavailableException",
+          "documentation": "\n            <p>503 response</p>\n            "
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "\n            <p>429 response</p>\n            "
+        }
+      ],
+      "documentation": "\n            <p>Updates EC2 instance type.</p>\n         "
     },
     "UpdateBrokerStorage": {
       "name": "UpdateBrokerStorage",
@@ -981,29 +1165,65 @@
       "errors": [
         {
           "shape": "ServiceUnavailableException",
-          "documentation": "\n            <p>HTTP Status Code 503: Service Unavailable. Retrying your request in some time might resolve the issue.</p>\n         "
+          "documentation": "\n            <p>503 response</p>\n         "
         },
         {
           "shape": "BadRequestException",
-          "documentation": "\n            <p>HTTP Status Code 400: Bad request due to incorrect input. Correct your request and then retry it.</p>\n         "
+          "documentation": "\n            <p>The request isn't valid because the input is incorrect. Correct your input and then submit it again.</p>\n         "
         },
         {
           "shape": "UnauthorizedException",
-          "documentation": "\n            <p>HTTP Status Code 401: Unauthorized request. The provided credentials couldn't be validated.</p>\n         "
+          "documentation": "\n            <p>The request is not authorized. The provided credentials couldn't be validated.</p>\n         "
         },
         {
           "shape": "InternalServerErrorException",
-          "documentation": "\n            <p>HTTP Status Code 500: Unexpected internal server error. Retrying your request might resolve the issue.</p>\n         "
+          "documentation": "\n            <p>There was an unexpected internal server error. Retrying your request might resolve the issue.</p>\n         "
         },
         {
           "shape": "ForbiddenException",
-          "documentation": "\n            <p>HTTP Status Code 403: Access forbidden. Correct your credentials and then retry your request.</p>\n         "
+          "documentation": "\n            <p>Access forbidden. Check your credentials and then retry your request.</p>\n         "
         }
       ],
       "documentation": "\n            <p>Updates the monitoring settings for the cluster. You can use this operation to specify which Apache Kafka metrics you want Amazon MSK to send to Amazon CloudWatch. You can also specify settings for open monitoring with Prometheus.</p>\n         "
     }
   },
   "shapes": {
+    "BatchAssociateScramSecretRequest": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster to be updated.</p>\n         "
+        },
+        "SecretArnList": {
+          "shape": "__listOf__string",
+          "locationName": "secretArnList",
+          "documentation": "\n            <p>List of AWS Secrets Manager secret ARNs.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>Associates sasl scram secrets to cluster.</p>\n         ",
+      "required": [
+        "ClusterArn",
+        "SecretArnList"
+      ]
+    },
+    "BatchAssociateScramSecretResponse": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster.</p>\n         "
+        },
+        "UnprocessedScramSecrets": {
+          "shape": "__listOfUnprocessedScramSecret",
+          "locationName": "unprocessedScramSecrets",
+          "documentation": "\n            <p>List of errors when associating secrets to cluster.</p>\n         "
+        }
+      }
+    },
     "BrokerAZDistribution": {
       "type": "string",
       "documentation": "\n            <p>The distribution of broker nodes across Availability Zones. This is an optional parameter. If you don't specify it, Amazon MSK gives it the value DEFAULT. You can also explicitly set this parameter to the value DEFAULT. No other values are currently allowed.</p>\n         <p>Amazon MSK distributes the broker nodes evenly across the Availability Zones that correspond to the subnets you provide when you create the cluster.</p>\n         ",
@@ -1143,6 +1363,11 @@
     "ClientAuthentication": {
       "type": "structure",
       "members": {
+        "Sasl": {
+          "shape": "Sasl",
+          "locationName": "sasl",
+          "documentation": "\n            <p>Details for ClientAuthentication using SASL.</p>\n         "
+        },
         "Tls": {
           "shape": "Tls",
           "locationName": "tls",
@@ -1227,7 +1452,7 @@
         "EnhancedMonitoring": {
           "shape": "EnhancedMonitoring",
           "locationName": "enhancedMonitoring",
-          "documentation": "\n            <p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href=\"https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html\">Monitoring</a>.</p>\n         "
+          "documentation": "\n            <p>Specifies which metrics are gathered for the MSK cluster. This property has the following possible values: DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION. For a list of the metrics associated with each of these levels of monitoring, see <a href=\"https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html\">Monitoring</a>.</p>\n         "
         },
         "OpenMonitoring": {
           "shape": "OpenMonitoring",
@@ -1246,7 +1471,7 @@
         "State": {
           "shape": "ClusterState",
           "locationName": "state",
-          "documentation": "\n            <p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>\n         "
+          "documentation": "\n            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>\n         "
         },
         "StateInfo": {
           "shape": "StateInfo",
@@ -1261,6 +1486,11 @@
           "shape": "__string",
           "locationName": "zookeeperConnectString",
           "documentation": "\n            <p>The connection string to use to connect to the Apache ZooKeeper cluster.</p>\n         "
+        },
+        "ZookeeperConnectStringTls": {
+          "shape": "__string",
+          "locationName": "zookeeperConnectStringTls",
+          "documentation": "\n            <p>The connection string to use to connect to zookeeper cluster on Tls port.</p>\n         "
         }
       },
       "documentation": "\n            <p>Returns information about a cluster.</p>\n         "
@@ -1359,9 +1589,12 @@
       "enum": [
         "ACTIVE",
         "CREATING",
-        "UPDATING",
         "DELETING",
-        "FAILED"
+        "FAILED",
+        "HEALING",
+        "MAINTENANCE",
+        "REBOOTING_BROKER",
+        "UPDATING"
       ]
     },
     "CompatibleKafkaVersion": {
@@ -1515,7 +1748,7 @@
         "EnhancedMonitoring": {
           "shape": "EnhancedMonitoring",
           "locationName": "enhancedMonitoring",
-          "documentation": "\n            <p>Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER.</p>\n         "
+          "documentation": "\n            <p>Specifies the level of monitoring for the MSK cluster. The possible values are DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION.</p>\n         "
         },
         "OpenMonitoring": {
           "shape": "OpenMonitoringInfo",
@@ -1565,7 +1798,7 @@
         "State": {
           "shape": "ClusterState",
           "locationName": "state",
-          "documentation": "\n            <p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>\n         "
+          "documentation": "\n            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>\n         "
         }
       }
     },
@@ -1659,7 +1892,7 @@
         "State": {
           "shape": "ClusterState",
           "locationName": "state",
-          "documentation": "\n            <p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>\n         "
+          "documentation": "\n            <p>The state of the cluster. The possible states are ACTIVE, CREATING, DELETING, FAILED, HEALING, MAINTENANCE, REBOOTING_BROKER, and UPDATING.</p>\n         "
         }
       }
     },
@@ -1845,6 +2078,42 @@
         }
       }
     },
+    "BatchDisassociateScramSecretRequest": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster to be updated.</p>\n         "
+        },
+        "SecretArnList": {
+          "shape": "__listOf__string",
+          "locationName": "secretArnList",
+          "documentation": "\n            <p>List of AWS Secrets Manager secret ARNs.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>Disassociates sasl scram secrets to cluster.</p>\n         ",
+      "required": [
+        "ClusterArn",
+        "SecretArnList"
+      ]
+    },
+    "BatchDisassociateScramSecretResponse": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster.</p>\n         "
+        },
+        "UnprocessedScramSecrets": {
+          "shape": "__listOfUnprocessedScramSecret",
+          "locationName": "unprocessedScramSecrets",
+          "documentation": "\n            <p>List of errors when disassociating secrets to cluster.</p>\n         "
+        }
+      }
+    },
     "EBSStorageInfo": {
       "type": "structure",
       "members": {
@@ -1904,11 +2173,12 @@
     },
     "EnhancedMonitoring": {
       "type": "string",
-      "documentation": "\n            <p>Specifies which metrics are gathered for the MSK cluster. This property has three possible values: DEFAULT, PER_BROKER, and PER_TOPIC_PER_BROKER. For a list of the metrics associated with each of these three levels of monitoring, see <a href=\"https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html\">Monitoring</a>.</p>\n         ",
+      "documentation": "\n            <p>Specifies which metrics are gathered for the MSK cluster. This property has the following possible values: DEFAULT, PER_BROKER, PER_TOPIC_PER_BROKER, and PER_TOPIC_PER_PARTITION. For a list of the metrics associated with each of these levels of monitoring, see <a href=\"https://docs.aws.amazon.com/msk/latest/developerguide/monitoring.html\">Monitoring</a>.</p>\n         ",
       "enum": [
         "DEFAULT",
         "PER_BROKER",
-        "PER_TOPIC_PER_BROKER"
+        "PER_TOPIC_PER_BROKER",
+        "PER_TOPIC_PER_PARTITION"
       ]
     },
     "ErrorInfo": {
@@ -1969,6 +2239,16 @@
           "shape": "__string",
           "locationName": "bootstrapBrokerStringTls",
           "documentation": "\n            <p>A string containing one or more DNS names (or IP) and TLS port pairs.</p>\n         "
+        },
+        "BootstrapBrokerStringSaslScram": {
+          "shape": "__string",
+          "locationName": "bootstrapBrokerStringSaslScram",
+          "documentation": "\n            <p>A string containing one or more DNS names (or IP) and Sasl Scram port pairs.</p>\n         "
+        },
+        "BootstrapBrokerStringSaslIam": {
+          "shape": "__string",
+          "locationName": "bootstrapBrokerStringSaslIam",
+          "documentation": "\n            <p>A string that contains one or more DNS names (or IP addresses) and SASL IAM port pairs.</p>\n         "
         }
       }
     },
@@ -2236,6 +2516,47 @@
         }
       }
     },
+    "ListScramSecretsRequest": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The arn of the cluster.</p>\n         "
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "location": "querystring",
+          "locationName": "maxResults",
+          "documentation": "\n            <p>The maxResults of the query.</p>\n         "
+        },
+        "NextToken": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "nextToken",
+          "documentation": "\n            <p>The nextToken of the query.</p>\n         "
+        }
+      },
+      "required": [
+        "ClusterArn"
+      ]
+    },
+    "ListScramSecretsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "__string",
+          "locationName": "nextToken",
+          "documentation": "\n            <p>Paginated results marker.</p>\n         "
+        },
+        "SecretArnList": {
+          "shape": "__listOf__string",
+          "locationName": "secretArnList",
+          "documentation": "\n            <p>The list of scram secrets associated with the cluster.</p>\n         "
+        }
+      }
+    },
     "ListTagsForResourceRequest": {
       "type": "structure",
       "members": {
@@ -2313,6 +2634,11 @@
         "LoggingInfo": {
           "shape": "LoggingInfo",
           "locationName": "loggingInfo"
+        },
+        "InstanceType": {
+          "shape": "__stringMin5Max32",
+          "locationName": "instanceType",
+          "documentation": "\n            <p>Information about the Amazon MSK broker type.</p>\n            "
         }
       },
       "documentation": "\n            <p>Information about cluster attributes that can be updated via update APIs.</p>\n         "
@@ -2439,7 +2765,7 @@
         "BrokerIds": {
           "shape": "__listOf__string",
           "locationName": "brokerIds",
-          "documentation": "\n            <p>The list of broker IDs to be rebooted.</p>\n         "
+          "documentation": "\n            <p>The list of broker IDs to be rebooted. The reboot-broker operation supports rebooting one broker at a time.</p>\n         "
         },
         "ClusterArn": {
           "shape": "__string",
@@ -2488,6 +2814,44 @@
       "required": [
         "Enabled"
       ]
+    },
+    "Sasl": {
+      "type": "structure",
+      "members": {
+        "Scram": {
+          "shape": "Scram",
+          "locationName": "scram",
+          "documentation": "\n            <p>Details for SASL/SCRAM client authentication.</p>\n         "
+        },
+        "Iam": {
+          "shape": "Iam",
+          "locationName": "iam",
+          "documentation": "\n            <p>Indicates whether IAM access control is enabled.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>Details for client authentication using SASL.</p>\n         "
+    },
+    "Scram": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "__boolean",
+          "locationName": "enabled",
+          "documentation": "\n            <p>SASL/SCRAM authentication is enabled or not.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>Details for SASL/SCRAM client authentication.</p>\n         "
+    },
+    "Iam": {
+      "type": "structure",
+      "members": {
+        "Enabled": {
+          "shape": "__boolean",
+          "locationName": "enabled",
+          "documentation": "\n            <p>Indicates whether IAM access control is enabled.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>Details for IAM access control.</p>\n         "
     },
     "NodeInfo": {
       "type": "structure",
@@ -2587,6 +2951,27 @@
       },
       "documentation": "\n            <p>Details for client authentication using TLS.</p>\n         "
     },
+    "UnprocessedScramSecret": {
+      "type": "structure",
+      "members": {
+        "ErrorCode": {
+          "shape": "__string",
+          "locationName": "errorCode",
+          "documentation": "\n            <p>Error code for associate/disassociate failure.</p>\n         "
+        },
+        "ErrorMessage": {
+          "shape": "__string",
+          "locationName": "errorMessage",
+          "documentation": "\n            <p>Error message for associate/disassociate failure.</p>\n         "
+        },
+        "SecretArn": {
+          "shape": "__string",
+          "locationName": "secretArn",
+          "documentation": "\n            <p>AWS Secrets Manager secret ARN.</p>\n         "
+        }
+      },
+      "documentation": "\n            <p>Error info for scram secret associate/disassociate failure.</p>\n         "
+    },
     "UntagResourceRequest": {
       "type": "structure",
       "members": {
@@ -2635,6 +3020,47 @@
       ]
     },
     "UpdateBrokerCountResponse": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster.</p>\n         "
+        },
+        "ClusterOperationArn": {
+          "shape": "__string",
+          "locationName": "clusterOperationArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) of the cluster operation.</p>\n         "
+        }
+      }
+    },
+    "UpdateBrokerTypeRequest": {
+      "type": "structure",
+      "members": {
+        "ClusterArn": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "clusterArn",
+          "documentation": "\n            <p>The Amazon Resource Name (ARN) that uniquely identifies the cluster.</p>\n         "
+        },
+        "CurrentVersion": {
+          "shape": "__string",
+          "locationName": "currentVersion",
+          "documentation": "\n            <p>The cluster version that you want to change. After this operation completes successfully, the cluster will have a new version.</p>\n         "
+        },
+        "TargetInstanceType": {
+          "shape": "__string",
+          "locationName": "targetInstanceType",
+          "documentation": "\n            <p>The Amazon MSK broker type that you want all of the brokers in this cluster to be.</p>\n         "
+        }
+      },
+      "required": [
+        "ClusterArn",
+        "CurrentVersion",
+        "TargetInstanceType"
+      ]
+    },
+    "UpdateBrokerTypeResponse": {
       "type": "structure",
       "members": {
         "ClusterArn": {
@@ -2972,6 +3398,12 @@
       "type": "list",
       "member": {
         "shape": "NodeInfo"
+      }
+    },
+    "__listOfUnprocessedScramSecret": {
+      "type": "list",
+      "member": {
+        "shape": "UnprocessedScramSecret"
       }
     },
     "__listOf__string": {

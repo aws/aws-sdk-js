@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "Chime",
+        "description": "This release adds a new API UpdateSipMediaApplicationCall, to update an in-progress call for SipMediaApplication."
+    },
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "Amazon Kendra now supports the indexing of web documents for search through the web crawler."
+    },
+    {
+        "type": "feature",
+        "category": "Location",
+        "description": "Enable CORS"
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release enables Database Activity Streams for RDS Oracle"
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "Enable ml.g4dn instance types for SageMaker Batch Transform and SageMaker Processing"
+    }
+]

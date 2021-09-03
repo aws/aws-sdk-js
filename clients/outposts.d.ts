@@ -12,11 +12,11 @@ declare class Outposts extends Service {
   constructor(options?: Outposts.Types.ClientConfiguration)
   config: Config & Outposts.Types.ClientConfiguration;
   /**
-   * Creates an Outpost.
+   * Creates an Outpost. You can specify AvailabilityZone or AvailabilityZoneId.
    */
   createOutpost(params: Outposts.Types.CreateOutpostInput, callback?: (err: AWSError, data: Outposts.Types.CreateOutpostOutput) => void): Request<Outposts.Types.CreateOutpostOutput, AWSError>;
   /**
-   * Creates an Outpost.
+   * Creates an Outpost. You can specify AvailabilityZone or AvailabilityZoneId.
    */
   createOutpost(callback?: (err: AWSError, data: Outposts.Types.CreateOutpostOutput) => void): Request<Outposts.Types.CreateOutpostOutput, AWSError>;
   /**
@@ -52,11 +52,11 @@ declare class Outposts extends Service {
    */
   getOutpostInstanceTypes(callback?: (err: AWSError, data: Outposts.Types.GetOutpostInstanceTypesOutput) => void): Request<Outposts.Types.GetOutpostInstanceTypesOutput, AWSError>;
   /**
-   * List the Outposts for your AWS account.
+   * Create a list of the Outposts for your AWS account. Add filters to your request to return a more specific list of results. Use filters to match an Outpost lifecycle status, Availibility Zone (us-east-1a), and AZ ID (use1-az1).  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
    */
   listOutposts(params: Outposts.Types.ListOutpostsInput, callback?: (err: AWSError, data: Outposts.Types.ListOutpostsOutput) => void): Request<Outposts.Types.ListOutpostsOutput, AWSError>;
   /**
-   * List the Outposts for your AWS account.
+   * Create a list of the Outposts for your AWS account. Add filters to your request to return a more specific list of results. Use filters to match an Outpost lifecycle status, Availibility Zone (us-east-1a), and AZ ID (use1-az1).  If you specify multiple filters, the filters are joined with an AND, and the request returns only results that match all of the specified filters.
    */
   listOutposts(callback?: (err: AWSError, data: Outposts.Types.ListOutpostsOutput) => void): Request<Outposts.Types.ListOutpostsOutput, AWSError>;
   /**
@@ -67,17 +67,48 @@ declare class Outposts extends Service {
    * Lists the sites for the specified AWS account.
    */
   listSites(callback?: (err: AWSError, data: Outposts.Types.ListSitesOutput) => void): Request<Outposts.Types.ListSitesOutput, AWSError>;
+  /**
+   * Lists the tags for the specified resource.
+   */
+  listTagsForResource(params: Outposts.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Outposts.Types.ListTagsForResourceResponse) => void): Request<Outposts.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags for the specified resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Outposts.Types.ListTagsForResourceResponse) => void): Request<Outposts.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Adds tags to the specified resource.
+   */
+  tagResource(params: Outposts.Types.TagResourceRequest, callback?: (err: AWSError, data: Outposts.Types.TagResourceResponse) => void): Request<Outposts.Types.TagResourceResponse, AWSError>;
+  /**
+   * Adds tags to the specified resource.
+   */
+  tagResource(callback?: (err: AWSError, data: Outposts.Types.TagResourceResponse) => void): Request<Outposts.Types.TagResourceResponse, AWSError>;
+  /**
+   * Removes tags from the specified resource.
+   */
+  untagResource(params: Outposts.Types.UntagResourceRequest, callback?: (err: AWSError, data: Outposts.Types.UntagResourceResponse) => void): Request<Outposts.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Removes tags from the specified resource.
+   */
+  untagResource(callback?: (err: AWSError, data: Outposts.Types.UntagResourceResponse) => void): Request<Outposts.Types.UntagResourceResponse, AWSError>;
 }
 declare namespace Outposts {
   export type AccountId = string;
+  export type Arn = string;
   export type AvailabilityZone = string;
   export type AvailabilityZoneId = string;
+  export type AvailabilityZoneIdList = AvailabilityZoneId[];
+  export type AvailabilityZoneList = AvailabilityZone[];
   export interface CreateOutpostInput {
-    Name?: OutpostName;
+    Name: OutpostName;
     Description?: OutpostDescription;
     SiteId: SiteId;
     AvailabilityZone?: AvailabilityZone;
     AvailabilityZoneId?: AvailabilityZoneId;
+    /**
+     * The tags to apply to the Outpost.
+     */
+    Tags?: TagMap;
   }
   export interface CreateOutpostOutput {
     Outpost?: Outpost;
@@ -115,9 +146,22 @@ declare namespace Outposts {
   }
   export type InstanceTypeListDefinition = InstanceTypeItem[];
   export type LifeCycleStatus = string;
+  export type LifeCycleStatusList = LifeCycleStatus[];
   export interface ListOutpostsInput {
     NextToken?: Token;
     MaxResults?: MaxResults1000;
+    /**
+     *  A filter for the lifecycle status of the Outpost.   Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values. 
+     */
+    LifeCycleStatusFilter?: LifeCycleStatusList;
+    /**
+     *  A filter for the Availibility Zone (us-east-1a) of the Outpost.   Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values. 
+     */
+    AvailabilityZoneFilter?: AvailabilityZoneList;
+    /**
+     *  A filter for the AZ IDs (use1-az1) of the Outpost.   Filter values are case sensitive. If you specify multiple values for a filter, the values are joined with an OR, and the request returns all results that match any of the specified values. 
+     */
+    AvailabilityZoneIdFilter?: AvailabilityZoneIdList;
   }
   export interface ListOutpostsOutput {
     Outposts?: outpostListDefinition;
@@ -131,6 +175,18 @@ declare namespace Outposts {
     Sites?: siteListDefinition;
     NextToken?: Token;
   }
+  export interface ListTagsForResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: Arn;
+  }
+  export interface ListTagsForResourceResponse {
+    /**
+     * The resource tags.
+     */
+    Tags?: TagMap;
+  }
   export type MaxResults1000 = number;
   export interface Outpost {
     OutpostId?: OutpostId;
@@ -142,6 +198,11 @@ declare namespace Outposts {
     LifeCycleStatus?: LifeCycleStatus;
     AvailabilityZone?: AvailabilityZone;
     AvailabilityZoneId?: AvailabilityZoneId;
+    /**
+     * The Outpost tags.
+     */
+    Tags?: TagMap;
+    SiteArn?: SiteArn;
   }
   export type OutpostArn = string;
   export type OutpostDescription = string;
@@ -153,11 +214,45 @@ declare namespace Outposts {
     AccountId?: AccountId;
     Name?: SiteName;
     Description?: SiteDescription;
+    /**
+     * The site tags.
+     */
+    Tags?: TagMap;
+    SiteArn?: SiteArn;
   }
+  export type SiteArn = string;
   export type SiteDescription = string;
   export type SiteId = string;
   export type SiteName = string;
+  export type TagKey = string;
+  export type TagKeyList = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: Arn;
+    /**
+     * The tags to add to the resource.
+     */
+    Tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Token = string;
+  export interface UntagResourceRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the resource.
+     */
+    ResourceArn: Arn;
+    /**
+     * The tag keys.
+     */
+    TagKeys: TagKeyList;
+  }
+  export interface UntagResourceResponse {
+  }
   export type outpostListDefinition = Outpost[];
   export type siteListDefinition = Site[];
   /**

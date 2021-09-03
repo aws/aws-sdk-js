@@ -1,0 +1,67 @@
+[
+    {
+        "type": "feature",
+        "category": "AccessAnalyzer",
+        "description": "This release adds support for the ApplyArchiveRule api in IAM Access Analyzer.  The ApplyArchiveRule api allows users to apply an archive rule retroactively to existing findings in an analyzer."
+    },
+    {
+        "type": "feature",
+        "category": "Budgets",
+        "description": "This release introduces AWS Budgets Actions, allowing you to define an explicit response(or set of responses)  to take when your budget exceeds it's action threshold."
+    },
+    {
+        "type": "feature",
+        "category": "CostExplorer",
+        "description": "This release improves email validation for subscriptions on the SDK endpoints."
+    },
+    {
+        "type": "feature",
+        "category": "DMS",
+        "description": "When creating Endpoints, Replication Instances, and Replication Tasks, the feature provides you the option to specify friendly name to the resources."
+    },
+    {
+        "type": "feature",
+        "category": "GroundStation",
+        "description": "Adds error message attribute to DescribeContact DataflowDetails"
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "Add new variable, lastStatusChangeDate, to DescribeDomainConfiguration  API"
+    },
+    {
+        "type": "feature",
+        "category": "Macie2",
+        "description": "This release of the Amazon Macie API adds support for pausing and resuming classification jobs. Also, sensitive data findings now include location data for up to 15 occurrences of sensitive data."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "Return tags for all resources in the output of DescribeDBInstances, DescribeDBSnapshots, DescribeDBClusters, and DescribeDBClusterSnapshots API operations."
+    },
+    {
+        "type": "feature",
+        "category": "Rekognition",
+        "description": "This SDK Release introduces new API (DetectProtectiveEquipment) for Amazon Rekognition. This release also adds ServiceQuotaExceeded exception to Amazon Rekognition IndexFaces API."
+    },
+    {
+        "type": "feature",
+        "category": "SSM",
+        "description": "This Patch Manager release now supports searching for available packages from Amazon Linux and Amazon Linux 2 via the DescribeAvailablePatches API."
+    },
+    {
+        "type": "feature",
+        "category": "Transfer",
+        "description": "Add support to associate VPC Security Groups at server creation."
+    },
+    {
+        "type": "feature",
+        "category": "WorkMail",
+        "description": "Add CreateOrganization and DeleteOrganization API operations."
+    },
+    {
+        "type": "feature",
+        "category": "XRay",
+        "description": "Enhancing CreateGroup, UpdateGroup, GetGroup and GetGroups APIs to support configuring X-Ray Insights Notifications. Adding TraceLimit information into X-Ray BatchGetTraces API response."
+    }
+]

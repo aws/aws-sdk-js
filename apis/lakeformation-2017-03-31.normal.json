@@ -13,6 +13,40 @@
     "uid": "lakeformation-2017-03-31"
   },
   "operations": {
+    "AddLFTagsToResource": {
+      "name": "AddLFTagsToResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "AddLFTagsToResourceRequest"
+      },
+      "output": {
+        "shape": "AddLFTagsToResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Attaches one or more tags to an existing resource.</p>"
+    },
     "BatchGrantPermissions": {
       "name": "BatchGrantPermissions",
       "http": {
@@ -56,6 +90,71 @@
         }
       ],
       "documentation": "<p>Batch operation to revoke permissions from the principal.</p>"
+    },
+    "CreateLFTag": {
+      "name": "CreateLFTag",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateLFTagRequest"
+      },
+      "output": {
+        "shape": "CreateLFTagResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ResourceNumberLimitExceededException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Creates a tag with the specified name and values.</p>"
+    },
+    "DeleteLFTag": {
+      "name": "DeleteLFTag",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteLFTagRequest"
+      },
+      "output": {
+        "shape": "DeleteLFTagResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Deletes the specified tag key name. If the attribute key does not exist or the tag does not exist, then the operation will not do anything. If the attribute key exists, then the operation checks if any resources are tagged with this attribute key, if yes, the API throws a 400 Exception with the message \"Delete not allowed\" as the tag key is still attached with resources. You can consider untagging resources with this tag key.</p>"
     },
     "DeregisterResource": {
       "name": "DeregisterResource",
@@ -166,6 +265,71 @@
       ],
       "documentation": "<p>Returns the Lake Formation permissions for a specified table or database resource located at a path in Amazon S3. <code>GetEffectivePermissionsForPath</code> will not return databases and tables if the catalog is encrypted.</p>"
     },
+    "GetLFTag": {
+      "name": "GetLFTag",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetLFTagRequest"
+      },
+      "output": {
+        "shape": "GetLFTagResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Returns a tag definition.</p>"
+    },
+    "GetResourceLFTags": {
+      "name": "GetResourceLFTags",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetResourceLFTagsRequest"
+      },
+      "output": {
+        "shape": "GetResourceLFTagsResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "GlueEncryptionException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Returns the tags applied to a resource.</p>"
+    },
     "GrantPermissions": {
       "name": "GrantPermissions",
       "http": {
@@ -190,6 +354,34 @@
         }
       ],
       "documentation": "<p>Grants permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.</p> <p>For information about permissions, see <a href=\"https://docs-aws.amazon.com/lake-formation/latest/dg/security-data-access.html\">Security and Access Control to Metadata and Data</a>.</p>"
+    },
+    "ListLFTags": {
+      "name": "ListLFTags",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListLFTagsRequest"
+      },
+      "output": {
+        "shape": "ListLFTagsResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        }
+      ],
+      "documentation": "<p>Lists tags that the requester has permission to view. </p>"
     },
     "ListPermissions": {
       "name": "ListPermissions",
@@ -291,6 +483,43 @@
       ],
       "documentation": "<p>Registers the resource as managed by the Data Catalog.</p> <p>To add or update data, Lake Formation needs read/write access to the chosen Amazon S3 path. Choose a role that you know has permission to do this, or choose the AWSServiceRoleForLakeFormationDataAccess service-linked role. When you register the first Amazon S3 path, the service-linked role and a new inline policy are created on your behalf. Lake Formation adds the first path to the inline policy and attaches it to the service-linked role. When you register subsequent paths, Lake Formation adds the path to the existing policy.</p> <p>The following request registers a new location and gives AWS Lake Formation permission to use the service-linked role to access that location.</p> <p> <code>ResourceArn = arn:aws:s3:::my-bucket UseServiceLinkedRole = true</code> </p> <p>If <code>UseServiceLinkedRole</code> is not set to true, you must provide or set the <code>RoleArn</code>:</p> <p> <code>arn:aws:iam::12345:role/my-data-access-role</code> </p>"
     },
+    "RemoveLFTagsFromResource": {
+      "name": "RemoveLFTagsFromResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RemoveLFTagsFromResourceRequest"
+      },
+      "output": {
+        "shape": "RemoveLFTagsFromResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "GlueEncryptionException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        }
+      ],
+      "documentation": "<p>Removes a tag from the resource. Only database, table, or tableWithColumns resource are allowed. To tag columns, use the column inclusion list in <code>tableWithColumns</code> to specify column input.</p>"
+    },
     "RevokePermissions": {
       "name": "RevokePermissions",
       "http": {
@@ -315,6 +544,108 @@
         }
       ],
       "documentation": "<p>Revokes permissions to the principal to access metadata in the Data Catalog and data organized in underlying data storage such as Amazon S3.</p>"
+    },
+    "SearchDatabasesByLFTags": {
+      "name": "SearchDatabasesByLFTags",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "SearchDatabasesByLFTagsRequest"
+      },
+      "output": {
+        "shape": "SearchDatabasesByLFTagsResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "GlueEncryptionException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>This operation allows a search on <code>DATABASE</code> resources by <code>TagCondition</code>. This operation is used by admins who want to grant user permissions on certain <code>TagConditions</code>. Before making a grant, the admin can use <code>SearchDatabasesByTags</code> to find all resources where the given <code>TagConditions</code> are valid to verify whether the returned resources can be shared.</p>"
+    },
+    "SearchTablesByLFTags": {
+      "name": "SearchTablesByLFTags",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "SearchTablesByLFTagsRequest"
+      },
+      "output": {
+        "shape": "SearchTablesByLFTagsResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "GlueEncryptionException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>This operation allows a search on <code>TABLE</code> resources by <code>LFTag</code>s. This will be used by admins who want to grant user permissions on certain LFTags. Before making a grant, the admin can use <code>SearchTablesByLFTags</code> to find all resources where the given <code>LFTag</code>s are valid to verify whether the returned resources can be shared.</p>"
+    },
+    "UpdateLFTag": {
+      "name": "UpdateLFTag",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateLFTagRequest"
+      },
+      "output": {
+        "shape": "UpdateLFTagResponse"
+      },
+      "errors": [
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "OperationTimeoutException"
+        },
+        {
+          "shape": "ConcurrentModificationException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p>Updates the list of possible values for the specified tag key. If the tag does not exist, the operation throws an EntityNotFoundException. The values in the delete key values will be deleted from list of possible values. If any value in the delete key values is attached to a resource, then API errors out with a 400 Exception - \"Update not allowed\". Untag the attribute before deleting the tag key's value. </p>"
     },
     "UpdateResource": {
       "name": "UpdateResource",
@@ -346,6 +677,36 @@
     }
   },
   "shapes": {
+    "AddLFTagsToResourceRequest": {
+      "type": "structure",
+      "required": [
+        "Resource",
+        "LFTags"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+        },
+        "Resource": {
+          "shape": "Resource",
+          "documentation": "<p>The resource to which to attach a tag.</p>"
+        },
+        "LFTags": {
+          "shape": "LFTagsList",
+          "documentation": "<p>The tags to attach to the resource.</p>"
+        }
+      }
+    },
+    "AddLFTagsToResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Failures": {
+          "shape": "LFTagErrors",
+          "documentation": "<p>A list of failures to tag the resource.</p>"
+        }
+      }
+    },
     "BatchGrantPermissionsRequest": {
       "type": "structure",
       "required": [
@@ -451,6 +812,9 @@
         }
       }
     },
+    "BooleanNullable": {
+      "type": "boolean"
+    },
     "CatalogIdString": {
       "type": "string",
       "max": 255,
@@ -461,6 +825,26 @@
       "type": "structure",
       "members": {},
       "documentation": "<p>A structure for the catalog object.</p>"
+    },
+    "ColumnLFTag": {
+      "type": "structure",
+      "members": {
+        "Name": {
+          "shape": "NameString",
+          "documentation": "<p>The name of a column resource.</p>"
+        },
+        "LFTags": {
+          "shape": "LFTagsList",
+          "documentation": "<p>The tags attached to a column resource.</p>"
+        }
+      },
+      "documentation": "<p>A structure containing the name of a column resource and the tags attached to it.</p>"
+    },
+    "ColumnLFTagsList": {
+      "type": "list",
+      "member": {
+        "shape": "ColumnLFTag"
+      }
     },
     "ColumnNames": {
       "type": "list",
@@ -494,6 +878,31 @@
         "BETWEEN"
       ]
     },
+    "CreateLFTagRequest": {
+      "type": "structure",
+      "required": [
+        "TagKey",
+        "TagValues"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+        },
+        "TagKey": {
+          "shape": "LFTagKey",
+          "documentation": "<p>The key-name for the tag.</p>"
+        },
+        "TagValues": {
+          "shape": "TagValueList",
+          "documentation": "<p>A list of possible values an attribute can take.</p>"
+        }
+      }
+    },
+    "CreateLFTagResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DataLakePrincipal": {
       "type": "structure",
       "members": {
@@ -523,7 +932,11 @@
         "CATALOG",
         "DATABASE",
         "TABLE",
-        "DATA_LOCATION"
+        "DATA_LOCATION",
+        "LF_TAG",
+        "LF_TAG_POLICY",
+        "LF_TAG_POLICY_DATABASE",
+        "LF_TAG_POLICY_TABLE"
       ]
     },
     "DataLakeSettings": {
@@ -565,6 +978,12 @@
       },
       "documentation": "<p>A structure for a data location object where permissions are granted or revoked. </p>"
     },
+    "DatabaseLFTagsList": {
+      "type": "list",
+      "member": {
+        "shape": "TaggedDatabase"
+      }
+    },
     "DatabaseResource": {
       "type": "structure",
       "required": [
@@ -581,6 +1000,26 @@
         }
       },
       "documentation": "<p>A structure for the database object.</p>"
+    },
+    "DeleteLFTagRequest": {
+      "type": "structure",
+      "required": [
+        "TagKey"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+        },
+        "TagKey": {
+          "shape": "LFTagKey",
+          "documentation": "<p>The key-name for the tag to delete.</p>"
+        }
+      }
+    },
+    "DeleteLFTagResponse": {
+      "type": "structure",
+      "members": {}
     },
     "DeregisterResourceRequest": {
       "type": "structure",
@@ -630,10 +1069,10 @@
       "members": {
         "ResourceShare": {
           "shape": "ResourceShareList",
-          "documentation": "<p>A share resource ARN for a catalog resource shared through AWS Resource Access Manager (AWS RAM).</p>"
+          "documentation": "<p>A resource share ARN for a catalog resource shared through AWS Resource Access Manager (AWS RAM).</p>"
         }
       },
-      "documentation": "<p>A structure containing the additional details to be returned in the <code>AdditionalDetails</code> attribute of <code>PrincipalResourcePermissions</code>.</p> <p>If a catalog resource is shared through AWS Resource Access Manager (AWS RAM), then there will exist a corresponding RAM share resource ARN.</p>"
+      "documentation": "<p>A structure containing the additional details to be returned in the <code>AdditionalDetails</code> attribute of <code>PrincipalResourcePermissions</code>.</p> <p>If a catalog resource is shared through AWS Resource Access Manager (AWS RAM), then there will exist a corresponding RAM resource share ARN.</p>"
     },
     "ErrorDetail": {
       "type": "structure",
@@ -648,6 +1087,14 @@
         }
       },
       "documentation": "<p>Contains details about an error.</p>"
+    },
+    "Expression": {
+      "type": "list",
+      "member": {
+        "shape": "LFTag"
+      },
+      "max": 5,
+      "min": 1
     },
     "FieldNameString": {
       "type": "string",
@@ -738,6 +1185,76 @@
         }
       }
     },
+    "GetLFTagRequest": {
+      "type": "structure",
+      "required": [
+        "TagKey"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+        },
+        "TagKey": {
+          "shape": "LFTagKey",
+          "documentation": "<p>The key-name for the tag.</p>"
+        }
+      }
+    },
+    "GetLFTagResponse": {
+      "type": "structure",
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+        },
+        "TagKey": {
+          "shape": "LFTagKey",
+          "documentation": "<p>The key-name for the tag.</p>"
+        },
+        "TagValues": {
+          "shape": "TagValueList",
+          "documentation": "<p>A list of possible values an attribute can take.</p>"
+        }
+      }
+    },
+    "GetResourceLFTagsRequest": {
+      "type": "structure",
+      "required": [
+        "Resource"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+        },
+        "Resource": {
+          "shape": "Resource",
+          "documentation": "<p>The resource for which you want to return tags.</p>"
+        },
+        "ShowAssignedLFTags": {
+          "shape": "BooleanNullable",
+          "documentation": "<p>Indicates whether to show the assigned tags.</p>"
+        }
+      }
+    },
+    "GetResourceLFTagsResponse": {
+      "type": "structure",
+      "members": {
+        "LFTagOnDatabase": {
+          "shape": "LFTagsList",
+          "documentation": "<p>A list of tags applied to a database resource.</p>"
+        },
+        "LFTagsOnTable": {
+          "shape": "LFTagsList",
+          "documentation": "<p>A list of tags applied to a table resource.</p>"
+        },
+        "LFTagsOnColumns": {
+          "shape": "ColumnLFTagsList",
+          "documentation": "<p>A list of tags applied to a column resource.</p>"
+        }
+      }
+    },
     "GrantPermissionsRequest": {
       "type": "structure",
       "required": [
@@ -781,8 +1298,166 @@
       "max": 255,
       "min": 1
     },
+    "LFTag": {
+      "type": "structure",
+      "required": [
+        "TagKey",
+        "TagValues"
+      ],
+      "members": {
+        "TagKey": {
+          "shape": "LFTagKey",
+          "documentation": "<p>The key-name for the tag.</p>"
+        },
+        "TagValues": {
+          "shape": "TagValueList",
+          "documentation": "<p>A list of possible values an attribute can take.</p>"
+        }
+      },
+      "documentation": "<p>A structure that allows an admin to grant user permissions on certain conditions. For example, granting a role access to all columns not tagged 'PII' of tables tagged 'Prod'.</p>"
+    },
+    "LFTagError": {
+      "type": "structure",
+      "members": {
+        "LFTag": {
+          "shape": "LFTagPair",
+          "documentation": "<p>The key-name of the tag.</p>"
+        },
+        "Error": {
+          "shape": "ErrorDetail",
+          "documentation": "<p>An error that occurred with the attachment or detachment of the tag.</p>"
+        }
+      },
+      "documentation": "<p>A structure containing an error related to a <code>TagResource</code> or <code>UnTagResource</code> operation.</p>"
+    },
+    "LFTagErrors": {
+      "type": "list",
+      "member": {
+        "shape": "LFTagError"
+      }
+    },
+    "LFTagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@%]*)$"
+    },
+    "LFTagKeyResource": {
+      "type": "structure",
+      "required": [
+        "TagKey",
+        "TagValues"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+        },
+        "TagKey": {
+          "shape": "NameString",
+          "documentation": "<p>The key-name for the tag.</p>"
+        },
+        "TagValues": {
+          "shape": "TagValueList",
+          "documentation": "<p>A list of possible values an attribute can take.</p>"
+        }
+      },
+      "documentation": "<p>A structure containing a tag key and values for a resource.</p>"
+    },
+    "LFTagPair": {
+      "type": "structure",
+      "required": [
+        "TagKey",
+        "TagValues"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+        },
+        "TagKey": {
+          "shape": "LFTagKey",
+          "documentation": "<p>The key-name for the tag.</p>"
+        },
+        "TagValues": {
+          "shape": "TagValueList",
+          "documentation": "<p>A list of possible values an attribute can take.</p>"
+        }
+      },
+      "documentation": "<p>A structure containing a tag key-value pair.</p>"
+    },
+    "LFTagPolicyResource": {
+      "type": "structure",
+      "required": [
+        "ResourceType",
+        "Expression"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+        },
+        "ResourceType": {
+          "shape": "ResourceType",
+          "documentation": "<p>The resource type for which the tag policy applies.</p>"
+        },
+        "Expression": {
+          "shape": "Expression",
+          "documentation": "<p>A list of tag conditions that apply to the resource's tag policy.</p>"
+        }
+      },
+      "documentation": "<p>A structure containing a list of tag conditions that apply to a resource's tag policy.</p>"
+    },
+    "LFTagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:\\*\\/=+\\-@%]*)$"
+    },
+    "LFTagsList": {
+      "type": "list",
+      "member": {
+        "shape": "LFTagPair"
+      },
+      "max": 50,
+      "min": 1
+    },
     "LastModifiedTimestamp": {
       "type": "timestamp"
+    },
+    "ListLFTagsRequest": {
+      "type": "structure",
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+        },
+        "ResourceShareType": {
+          "shape": "ResourceShareType",
+          "documentation": "<p>If resource share type is <code>ALL</code>, returns both in-account tags and shared tags that the requester has permission to view. If resource share type is <code>FOREIGN</code>, returns all share tags that the requester can view. If no resource share type is passed, lists tags in the given catalog ID that the requester has permission to view.</p>"
+        },
+        "MaxResults": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum number of results to return.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A continuation token, if this is not the first call to retrieve this list.</p>"
+        }
+      }
+    },
+    "ListLFTagsResponse": {
+      "type": "structure",
+      "members": {
+        "LFTags": {
+          "shape": "LFTagsList",
+          "documentation": "<p>A list of tags that the requested has permission to view.</p>"
+        },
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A continuation token, present if the current list segment is not the last.</p>"
+        }
+      }
     },
     "ListPermissionsRequest": {
       "type": "structure",
@@ -884,7 +1559,12 @@
         "DESCRIBE",
         "CREATE_DATABASE",
         "CREATE_TABLE",
-        "DATA_LOCATION_ACCESS"
+        "DATA_LOCATION_ACCESS",
+        "CREATE_TAG",
+        "ALTER_TAG",
+        "DELETE_TAG",
+        "DESCRIBE_TAG",
+        "ASSOCIATE_TAG"
       ]
     },
     "PermissionList": {
@@ -934,7 +1614,7 @@
         },
         "AdditionalDetails": {
           "shape": "DetailsMap",
-          "documentation": "<p>This attribute can be used to return any additional details of <code>PrincipalResourcePermissions</code>. Currently returns only as a RAM share resource ARN.</p>"
+          "documentation": "<p>This attribute can be used to return any additional details of <code>PrincipalResourcePermissions</code>. Currently returns only as a RAM resource share ARN.</p>"
         }
       },
       "documentation": "<p>The permissions granted or revoked on a resource.</p>"
@@ -992,6 +1672,36 @@
       "type": "structure",
       "members": {}
     },
+    "RemoveLFTagsFromResourceRequest": {
+      "type": "structure",
+      "required": [
+        "Resource",
+        "LFTags"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+        },
+        "Resource": {
+          "shape": "Resource",
+          "documentation": "<p>The resource where you want to remove a tag.</p>"
+        },
+        "LFTags": {
+          "shape": "LFTagsList",
+          "documentation": "<p>The tags to be removed from the resource.</p>"
+        }
+      }
+    },
+    "RemoveLFTagsFromResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Failures": {
+          "shape": "LFTagErrors",
+          "documentation": "<p>A list of failures to untag a resource.</p>"
+        }
+      }
+    },
     "Resource": {
       "type": "structure",
       "members": {
@@ -1014,6 +1724,14 @@
         "DataLocation": {
           "shape": "DataLocationResource",
           "documentation": "<p>The location of an Amazon S3 path where permissions are granted or revoked. </p>"
+        },
+        "LFTag": {
+          "shape": "LFTagKeyResource",
+          "documentation": "<p>The tag key and values attached to a resource.</p>"
+        },
+        "LFTagPolicy": {
+          "shape": "LFTagPolicyResource",
+          "documentation": "<p>A list of tag conditions that define a resource's tag policy.</p>"
         }
       },
       "documentation": "<p>A structure for the resource.</p>"
@@ -1051,6 +1769,20 @@
         "shape": "RAMResourceShareArn"
       }
     },
+    "ResourceShareType": {
+      "type": "string",
+      "enum": [
+        "FOREIGN",
+        "ALL"
+      ]
+    },
+    "ResourceType": {
+      "type": "string",
+      "enum": [
+        "DATABASE",
+        "TABLE"
+      ]
+    },
     "RevokePermissionsRequest": {
       "type": "structure",
       "required": [
@@ -1085,6 +1817,80 @@
       "type": "structure",
       "members": {}
     },
+    "SearchDatabasesByLFTagsRequest": {
+      "type": "structure",
+      "required": [
+        "Expression"
+      ],
+      "members": {
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A continuation token, if this is not the first call to retrieve this list.</p>"
+        },
+        "MaxResults": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum number of results to return.</p>"
+        },
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+        },
+        "Expression": {
+          "shape": "Expression",
+          "documentation": "<p>A list of conditions (<code>LFTag</code> structures) to search for in database resources.</p>"
+        }
+      }
+    },
+    "SearchDatabasesByLFTagsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A continuation token, present if the current list segment is not the last.</p>"
+        },
+        "DatabaseList": {
+          "shape": "DatabaseLFTagsList",
+          "documentation": "<p>A list of databases that meet the tag conditions.</p>"
+        }
+      }
+    },
+    "SearchTablesByLFTagsRequest": {
+      "type": "structure",
+      "required": [
+        "Expression"
+      ],
+      "members": {
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A continuation token, if this is not the first call to retrieve this list.</p>"
+        },
+        "MaxResults": {
+          "shape": "PageSize",
+          "documentation": "<p>The maximum number of results to return.</p>"
+        },
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+        },
+        "Expression": {
+          "shape": "Expression",
+          "documentation": "<p>A list of conditions (<code>LFTag</code> structures) to search for in table resources.</p>"
+        }
+      }
+    },
+    "SearchTablesByLFTagsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "Token",
+          "documentation": "<p>A continuation token, present if the current list segment is not the last.</p>"
+        },
+        "TableList": {
+          "shape": "TableLFTagsList",
+          "documentation": "<p>A list of tables that meet the tag conditions.</p>"
+        }
+      }
+    },
     "StringValue": {
       "type": "string"
     },
@@ -1092,6 +1898,12 @@
       "type": "list",
       "member": {
         "shape": "StringValue"
+      }
+    },
+    "TableLFTagsList": {
+      "type": "list",
+      "member": {
+        "shape": "TaggedTable"
       }
     },
     "TableResource": {
@@ -1154,6 +1966,50 @@
       },
       "documentation": "<p>A structure for a table with columns object. This object is only used when granting a SELECT permission.</p> <p>This object must take a value for at least one of <code>ColumnsNames</code>, <code>ColumnsIndexes</code>, or <code>ColumnsWildcard</code>.</p>"
     },
+    "TagValueList": {
+      "type": "list",
+      "member": {
+        "shape": "LFTagValue"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "TaggedDatabase": {
+      "type": "structure",
+      "members": {
+        "Database": {
+          "shape": "DatabaseResource",
+          "documentation": "<p>A database that has tags attached to it.</p>"
+        },
+        "LFTags": {
+          "shape": "LFTagsList",
+          "documentation": "<p>A list of tags attached to the database.</p>"
+        }
+      },
+      "documentation": "<p>A structure describing a database resource with tags.</p>"
+    },
+    "TaggedTable": {
+      "type": "structure",
+      "members": {
+        "Table": {
+          "shape": "TableResource",
+          "documentation": "<p>A table that has tags attached to it.</p>"
+        },
+        "LFTagOnDatabase": {
+          "shape": "LFTagsList",
+          "documentation": "<p>A list of tags attached to the database where the table resides.</p>"
+        },
+        "LFTagsOnTable": {
+          "shape": "LFTagsList",
+          "documentation": "<p>A list of tags attached to the table.</p>"
+        },
+        "LFTagsOnColumns": {
+          "shape": "ColumnLFTagsList",
+          "documentation": "<p>A list of tags attached to columns in the table.</p>"
+        }
+      },
+      "documentation": "<p>A structure describing a table resource with tags.</p>"
+    },
     "Token": {
       "type": "string"
     },
@@ -1162,6 +2018,34 @@
       "member": {
         "shape": "CatalogIdString"
       }
+    },
+    "UpdateLFTagRequest": {
+      "type": "structure",
+      "required": [
+        "TagKey"
+      ],
+      "members": {
+        "CatalogId": {
+          "shape": "CatalogIdString",
+          "documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the persistent metadata store. It contains database definitions, table definitions, and other control information to manage your AWS Lake Formation environment. </p>"
+        },
+        "TagKey": {
+          "shape": "LFTagKey",
+          "documentation": "<p>The key-name for the tag for which to add or delete values.</p>"
+        },
+        "TagValuesToDelete": {
+          "shape": "TagValueList",
+          "documentation": "<p>A list of tag values to delete from the tag.</p>"
+        },
+        "TagValuesToAdd": {
+          "shape": "TagValueList",
+          "documentation": "<p>A list of tag values to add from the tag.</p>"
+        }
+      }
+    },
+    "UpdateLFTagResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateResourceRequest": {
       "type": "structure",

@@ -240,7 +240,7 @@
         };
 
         describe('when using unsigned authtype', function() {
-          it('when paylaod is a buffer', function() {
+          it('when payload is a buffer', function() {
             var service = new FooService();
             var req = service.putStream({
               Body: AWS.util.buffer.toBuffer('test')
@@ -252,7 +252,7 @@
             });
           });
 
-          it('when paylaod is a string', function() {
+          it('when payload is a string', function() {
             var service = new FooService();
             var req = service.putStream({
               Body: 'test'
@@ -265,7 +265,7 @@
           });
 
           if (AWS.util.isNode()) {
-            it('when paylaod is a file stream', function() {
+            it('when payload is a file stream', function() {
               var service = new FooService();
               var req = service.putStream({
                 Body: require('fs').createReadStream(__filename)
@@ -377,6 +377,51 @@
           });
         }
       });
+
+      describe('adds Content-MD5 header', function() {
+        it('when payload is a string', function() {
+          var service = new FooService();
+          var req = service.putWithChecksum({
+            Body: 'test'
+          });
+
+          req.runTo('sign', function(err) {
+            expect(req.httpRequest.headers['Content-MD5']).to.equal('mi9mZPtVgELD8CntO010Rw==');
+            expect(!err).to.equal(true);
+          });
+        });
+
+        it('should be disabled if computeChecksums set to false', function() {
+          var service = new FooService({
+            computeChecksums: false
+          });
+          var req = service.putWithChecksum({
+            Body: 'test'
+          });
+
+          req.runTo('sign', function(err) {
+            expect(req.httpRequest.headers['Content-MD5']).to.equal(undefined);
+            expect(!err).to.equal(true);
+          });
+        });
+
+        it('should not calculate checksum if provided', function() {
+          var service = new FooService({
+            computeChecksums: false
+          });
+          var req = service.putWithChecksum({
+            Body: 'test'
+          });
+          req.on('build', function(req) {
+            req.httpRequest.headers['Content-MD5'] = '000';
+          });
+
+          req.runTo('sign', function(err) {
+            expect(req.httpRequest.headers['Content-MD5']).to.equal('000');
+            expect(!err).to.equal(true);
+          });
+        });
+      });
     });
 
     describe('restart', function() {
@@ -412,10 +457,10 @@
         response = request.send(function() {});
         return expect(response.error.message).to.equal('ERROR');
       });
-      it('uses the api.signingName if provided', function() {
+      return it('uses the signingName from service', function() {
         var request, response;
         helpers.mockHttpResponse(200, {}, '');
-        service.api.signingName = 'SIGNING_NAME';
+        service.getSigningName = function() { return 'SIGNING_NAME';};
         helpers.spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake(function() {
           return function(req, signingName) {
             throw signingName;
@@ -425,18 +470,6 @@
         response = request.send(function() {});
         expect(response.error).to.equal('SIGNING_NAME');
         return delete service.api.signingName;
-      });
-      return it('uses the api.endpointPrefix if signingName not provided', function() {
-        var request, response;
-        helpers.mockHttpResponse(200, {}, '');
-        helpers.spyOn(AWS.Signers.RequestSigner, 'getVersion').andCallFake(function() {
-          return function(req, signingName) {
-            throw signingName;
-          };
-        });
-        request = makeRequest();
-        response = request.send(function() {});
-        return expect(response.error).to.equal('mockservice');
       });
     });
 

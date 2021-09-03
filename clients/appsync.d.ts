@@ -196,11 +196,11 @@ declare class AppSync extends Service {
    */
   getType(callback?: (err: AWSError, data: AppSync.Types.GetTypeResponse) => void): Request<AppSync.Types.GetTypeResponse, AWSError>;
   /**
-   * Lists the API keys for a given API.  API keys are deleted automatically sometime after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call DeleteApiKey to manually delete a key before it's automatically deleted. 
+   * Lists the API keys for a given API.  API keys are deleted automatically 60 days after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call DeleteApiKey to manually delete a key before it's automatically deleted. 
    */
   listApiKeys(params: AppSync.Types.ListApiKeysRequest, callback?: (err: AWSError, data: AppSync.Types.ListApiKeysResponse) => void): Request<AppSync.Types.ListApiKeysResponse, AWSError>;
   /**
-   * Lists the API keys for a given API.  API keys are deleted automatically sometime after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call DeleteApiKey to manually delete a key before it's automatically deleted. 
+   * Lists the API keys for a given API.  API keys are deleted automatically 60 days after they expire. However, they may still be included in the response until they have actually been deleted. You can safely call DeleteApiKey to manually delete a key before it's automatically deleted. 
    */
   listApiKeys(callback?: (err: AWSError, data: AppSync.Types.ListApiKeysResponse) => void): Request<AppSync.Types.ListApiKeysResponse, AWSError>;
   /**
@@ -292,11 +292,11 @@ declare class AppSync extends Service {
    */
   updateApiCache(callback?: (err: AWSError, data: AppSync.Types.UpdateApiCacheResponse) => void): Request<AppSync.Types.UpdateApiCacheResponse, AWSError>;
   /**
-   * Updates an API key.
+   * Updates an API key. The key can be updated while it is not deleted.
    */
   updateApiKey(params: AppSync.Types.UpdateApiKeyRequest, callback?: (err: AWSError, data: AppSync.Types.UpdateApiKeyResponse) => void): Request<AppSync.Types.UpdateApiKeyResponse, AWSError>;
   /**
-   * Updates an API key.
+   * Updates an API key. The key can be updated while it is not deleted.
    */
   updateApiKey(callback?: (err: AWSError, data: AppSync.Types.UpdateApiKeyResponse) => void): Request<AppSync.Types.UpdateApiKeyResponse, AWSError>;
   /**
@@ -343,7 +343,7 @@ declare class AppSync extends Service {
 declare namespace AppSync {
   export interface AdditionalAuthenticationProvider {
     /**
-     * The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.
+     * The authentication type: API key, Identity and Access Management, OIDC, or Amazon Cognito user pools.
      */
     authenticationType?: AuthenticationType;
     /**
@@ -354,6 +354,10 @@ declare namespace AppSync {
      * The Amazon Cognito user pool configuration.
      */
     userPoolConfig?: CognitoUserPoolConfig;
+    /**
+     * Configuration for AWS Lambda function authorization.
+     */
+    lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
   }
   export type AdditionalAuthenticationProviders = AdditionalAuthenticationProvider[];
   export interface ApiCache {
@@ -362,7 +366,7 @@ declare namespace AppSync {
      */
     ttl?: Long;
     /**
-     * Caching behavior.    FULL_REQUEST_CACHING: All requests are fully cached.    PER_RESOLVER_CACHING: Individual resovlers that you specify are cached.  
+     * Caching behavior.    FULL_REQUEST_CACHING: All requests are fully cached.    PER_RESOLVER_CACHING: Individual resolvers that you specify are cached.  
      */
     apiCachingBehavior?: ApiCachingBehavior;
     /**
@@ -374,7 +378,7 @@ declare namespace AppSync {
      */
     atRestEncryptionEnabled?: Boolean;
     /**
-     * The cache instance type. Valid values are     SMALL     MEDIUM     LARGE     XLARGE     LARGE_2X     LARGE_4X     LARGE_8X (not available in all regions)    LARGE_12X    Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used. The following legacy instance types are avaible, but their use is discouraged:    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
+     * The cache instance type. Valid values are     SMALL     MEDIUM     LARGE     XLARGE     LARGE_2X     LARGE_4X     LARGE_8X (not available in all regions)    LARGE_12X    Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used. The following legacy instance types are available, but their use is discouraged:    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
      */
     type?: ApiCacheType;
     /**
@@ -398,27 +402,31 @@ declare namespace AppSync {
      * The time after which the API key expires. The date is represented as seconds since the epoch, rounded down to the nearest hour.
      */
     expires?: Long;
+    /**
+     * The time after which the API key is deleted. The date is represented as seconds since the epoch, rounded down to the nearest hour.
+     */
+    deletes?: Long;
   }
   export type ApiKeys = ApiKey[];
-  export type AuthenticationType = "API_KEY"|"AWS_IAM"|"AMAZON_COGNITO_USER_POOLS"|"OPENID_CONNECT"|string;
+  export type AuthenticationType = "API_KEY"|"AWS_IAM"|"AMAZON_COGNITO_USER_POOLS"|"OPENID_CONNECT"|"AWS_LAMBDA"|string;
   export interface AuthorizationConfig {
     /**
      * The authorization type required by the HTTP endpoint.    AWS_IAM: The authorization type is Sigv4.  
      */
     authorizationType: AuthorizationType;
     /**
-     * The AWS IAM settings.
+     * The Identity and Access Management settings.
      */
     awsIamConfig?: AwsIamConfig;
   }
   export type AuthorizationType = "AWS_IAM"|string;
   export interface AwsIamConfig {
     /**
-     * The signing region for AWS IAM authorization.
+     * The signing region for Identity and Access Management authorization.
      */
     signingRegion?: String;
     /**
-     * The signing service name for AWS IAM authorization.
+     * The signing service name for Identity and Access Management authorization.
      */
     signingServiceName?: String;
   }
@@ -442,7 +450,7 @@ declare namespace AppSync {
      */
     userPoolId: String;
     /**
-     * The AWS Region in which the user pool was created.
+     * The Amazon Web Services Region in which the user pool was created.
      */
     awsRegion: String;
     /**
@@ -470,11 +478,11 @@ declare namespace AppSync {
      */
     atRestEncryptionEnabled?: Boolean;
     /**
-     * Caching behavior.    FULL_REQUEST_CACHING: All requests are fully cached.    PER_RESOLVER_CACHING: Individual resovlers that you specify are cached.  
+     * Caching behavior.    FULL_REQUEST_CACHING: All requests are fully cached.    PER_RESOLVER_CACHING: Individual resolvers that you specify are cached.  
      */
     apiCachingBehavior: ApiCachingBehavior;
     /**
-     * The cache instance type. Valid values are     SMALL     MEDIUM     LARGE     XLARGE     LARGE_2X     LARGE_4X     LARGE_8X (not available in all regions)    LARGE_12X    Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used. The following legacy instance types are avaible, but their use is discouraged:    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
+     * The cache instance type. Valid values are     SMALL     MEDIUM     LARGE     XLARGE     LARGE_2X     LARGE_4X     LARGE_8X (not available in all regions)    LARGE_12X    Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used. The following legacy instance types are available, but their use is discouraged:    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
      */
     type: ApiCacheType;
   }
@@ -522,7 +530,7 @@ declare namespace AppSync {
      */
     type: DataSourceType;
     /**
-     * The AWS IAM service role ARN for the data source. The system assumes this role when accessing the data source.
+     * The Identity and Access Management service role ARN for the data source. The system assumes this role when accessing the data source.
      */
     serviceRoleArn?: String;
     /**
@@ -530,7 +538,7 @@ declare namespace AppSync {
      */
     dynamodbConfig?: DynamodbDataSourceConfig;
     /**
-     * AWS Lambda settings.
+     * Amazon Web Services Lambda settings.
      */
     lambdaConfig?: LambdaDataSourceConfig;
     /**
@@ -581,6 +589,7 @@ declare namespace AppSync {
      * The version of the request mapping template. Currently the supported value is 2018-05-29. 
      */
     functionVersion: String;
+    syncConfig?: SyncConfig;
   }
   export interface CreateFunctionResponse {
     /**
@@ -598,7 +607,7 @@ declare namespace AppSync {
      */
     logConfig?: LogConfig;
     /**
-     * The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.
+     * The authentication type: API key, Identity and Access Management, OIDC, or Amazon Cognito user pools.
      */
     authenticationType: AuthenticationType;
     /**
@@ -621,6 +630,10 @@ declare namespace AppSync {
      * A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
      */
     xrayEnabled?: Boolean;
+    /**
+     * Configuration for AWS Lambda function authorization.
+     */
+    lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
   }
   export interface CreateGraphqlApiResponse {
     /**
@@ -710,11 +723,11 @@ declare namespace AppSync {
      */
     description?: String;
     /**
-     * The type of the data source.    AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.    AMAZON_ELASTICSEARCH: The data source is an Amazon Elasticsearch Service domain.    AWS_LAMBDA: The data source is an AWS Lambda function.    NONE: There is no data source. This type is used when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.    HTTP: The data source is an HTTP endpoint.    RELATIONAL_DATABASE: The data source is a relational database.  
+     * The type of the data source.    AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.    AMAZON_ELASTICSEARCH: The data source is an Amazon Elasticsearch Service domain.    AWS_LAMBDA: The data source is an Amazon Web Services Lambda function.    NONE: There is no data source. This type is used when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.    HTTP: The data source is an HTTP endpoint.    RELATIONAL_DATABASE: The data source is a relational database.  
      */
     type?: DataSourceType;
     /**
-     * The AWS IAM service role ARN for the data source. The system assumes this role when accessing the data source.
+     * The Identity and Access Management service role ARN for the data source. The system assumes this role when accessing the data source.
      */
     serviceRoleArn?: String;
     /**
@@ -722,7 +735,7 @@ declare namespace AppSync {
      */
     dynamodbConfig?: DynamodbDataSourceConfig;
     /**
-     * AWS Lambda settings.
+     * Amazon Web Services Lambda settings.
      */
     lambdaConfig?: LambdaDataSourceConfig;
     /**
@@ -841,7 +854,7 @@ declare namespace AppSync {
      */
     tableName: String;
     /**
-     * The AWS Region.
+     * The Amazon Web Services Region.
      */
     awsRegion: String;
     /**
@@ -863,7 +876,7 @@ declare namespace AppSync {
      */
     endpoint: String;
     /**
-     * The AWS Region.
+     * The Amazon Web Services Region.
      */
     awsRegion: String;
   }
@@ -909,6 +922,7 @@ declare namespace AppSync {
      * The version of the request mapping template. Currently only the 2018-05-29 version of the template is supported.
      */
     functionVersion?: String;
+    syncConfig?: SyncConfig;
   }
   export type Functions = FunctionConfiguration[];
   export type FunctionsIds = String[];
@@ -1089,17 +1103,39 @@ declare namespace AppSync {
      * A flag representing whether X-Ray tracing is enabled for this GraphqlApi.
      */
     xrayEnabled?: Boolean;
+    /**
+     * The ARN of the WAF ACL associated with this GraphqlApi, if one exists.
+     */
+    wafWebAclArn?: String;
+    /**
+     *  Configuration for AWS Lambda function authorization.
+     */
+    lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
   }
   export type GraphqlApis = GraphqlApi[];
   export interface HttpDataSourceConfig {
     /**
-     * The HTTP URL endpoint. You can either specify the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AWS AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.
+     * The HTTP URL endpoint. You can either specify the domain name or IP, and port combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS endpoints.
      */
     endpoint?: String;
     /**
      * The authorization config in case the HTTP endpoint requires authorization.
      */
     authorizationConfig?: AuthorizationConfig;
+  }
+  export interface LambdaAuthorizerConfig {
+    /**
+     * The number of seconds a response should be cached for. The default is 5 minutes (300 seconds). The Lambda function can override this by returning a ttlOverride key in its response. A value of 0 disables caching of responses.
+     */
+    authorizerResultTtlInSeconds?: TTL;
+    /**
+     * The ARN of the lambda function to be called for authorization. This may be a standard Lambda ARN, a version ARN (.../v3) or alias ARN.   Note: This Lambda function must have the following resource-based policy assigned to it. When configuring Lambda authorizers in the Console, this is done for you. To do so with the AWS CLI, run the following:  aws lambda add-permission --function-name "arn:aws:lambda:us-east-2:111122223333:function:my-function" --statement-id "appsync" --principal appsync.amazonaws.com --action lambda:InvokeFunction 
+     */
+    authorizerUri: String;
+    /**
+     * A regular expression for validation of tokens before the Lambda Function is called.
+     */
+    identityValidationExpression?: String;
   }
   export interface LambdaConflictHandlerConfig {
     /**
@@ -1307,7 +1343,7 @@ declare namespace AppSync {
      */
     fieldLogLevel: FieldLogLevel;
     /**
-     * The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in your account. 
+     * The service role that AppSync will assume to publish to Amazon CloudWatch logs in your account. 
      */
     cloudWatchLogsRoleArn: String;
     /**
@@ -1325,7 +1361,7 @@ declare namespace AppSync {
      */
     issuer: String;
     /**
-     * The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AWS AppSync can validate against multiple client identifiers at a time.
+     * The client identifier of the Relying party at the OpenID identity provider. This identifier is typically obtained when the Relying party is registered with the OpenID identity provider. You can specify a regular expression so the AppSync can validate against multiple client identifiers at a time.
      */
     clientId?: String;
     /**
@@ -1347,7 +1383,7 @@ declare namespace AppSync {
   }
   export interface RdsHttpEndpointConfig {
     /**
-     * AWS Region for RDS HTTP endpoint.
+     * Amazon Web Services Region for RDS HTTP endpoint.
      */
     awsRegion?: String;
     /**
@@ -1363,7 +1399,7 @@ declare namespace AppSync {
      */
     schema?: String;
     /**
-     * AWS secret store ARN for database credentials.
+     * Amazon Web Services secret store ARN for database credentials.
      */
     awsSecretStoreArn?: String;
   }
@@ -1456,6 +1492,7 @@ declare namespace AppSync {
      */
     lambdaConflictHandlerConfig?: LambdaConflictHandlerConfig;
   }
+  export type TTL = number;
   export type TagKey = string;
   export type TagKeyList = TagKey[];
   export type TagMap = {[key: string]: TagValue};
@@ -1518,11 +1555,11 @@ declare namespace AppSync {
      */
     ttl: Long;
     /**
-     * Caching behavior.    FULL_REQUEST_CACHING: All requests are fully cached.    PER_RESOLVER_CACHING: Individual resovlers that you specify are cached.  
+     * Caching behavior.    FULL_REQUEST_CACHING: All requests are fully cached.    PER_RESOLVER_CACHING: Individual resolvers that you specify are cached.  
      */
     apiCachingBehavior: ApiCachingBehavior;
     /**
-     * The cache instance type. Valid values are     SMALL     MEDIUM     LARGE     XLARGE     LARGE_2X     LARGE_4X     LARGE_8X (not available in all regions)    LARGE_12X    Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used. The following legacy instance types are avaible, but their use is discouraged:    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
+     * The cache instance type. Valid values are     SMALL     MEDIUM     LARGE     XLARGE     LARGE_2X     LARGE_4X     LARGE_8X (not available in all regions)    LARGE_12X    Historically, instance types were identified by an EC2-style value. As of July 2020, this is deprecated, and the generic identifiers above should be used. The following legacy instance types are available, but their use is discouraged:    T2_SMALL: A t2.small instance type.    T2_MEDIUM: A t2.medium instance type.    R4_LARGE: A r4.large instance type.    R4_XLARGE: A r4.xlarge instance type.    R4_2XLARGE: A r4.2xlarge instance type.    R4_4XLARGE: A r4.4xlarge instance type.    R4_8XLARGE: A r4.8xlarge instance type.  
      */
     type: ApiCacheType;
   }
@@ -1582,7 +1619,7 @@ declare namespace AppSync {
      */
     dynamodbConfig?: DynamodbDataSourceConfig;
     /**
-     * The new AWS Lambda configuration.
+     * The new Amazon Web Services Lambda configuration.
      */
     lambdaConfig?: LambdaDataSourceConfig;
     /**
@@ -1637,6 +1674,7 @@ declare namespace AppSync {
      * The version of the request mapping template. Currently the supported value is 2018-05-29. 
      */
     functionVersion: String;
+    syncConfig?: SyncConfig;
   }
   export interface UpdateFunctionResponse {
     /**
@@ -1677,6 +1715,10 @@ declare namespace AppSync {
      * A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
      */
     xrayEnabled?: Boolean;
+    /**
+     * Configuration for AWS Lambda function authorization.
+     */
+    lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
   }
   export interface UpdateGraphqlApiResponse {
     /**
@@ -1762,7 +1804,7 @@ declare namespace AppSync {
      */
     userPoolId: String;
     /**
-     * The AWS Region in which the user pool was created.
+     * The Amazon Web Services Region in which the user pool was created.
      */
     awsRegion: String;
     /**

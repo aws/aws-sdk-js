@@ -65,6 +65,9 @@
           "shape": "InvalidLoggingConfiguration"
         },
         {
+          "shape": "InvalidTracingConfiguration"
+        },
+        {
           "shape": "StateMachineAlreadyExists"
         },
         {
@@ -80,7 +83,7 @@
           "shape": "TooManyTags"
         }
       ],
-      "documentation": "<p>Creates a state machine. A state machine consists of a collection of states that can do work (<code>Task</code> states), determine to which states to transition next (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states), and so on. State machines are specified using a JSON-based, structured language. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a> in the AWS Step Functions User Guide.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <note> <p> <code>CreateStateMachine</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. <code>CreateStateMachine</code>'s idempotency check is based on the state machine <code>name</code>, <code>definition</code>, <code>type</code>, and <code>LoggingConfiguration</code>. If a following request has a different <code>roleArn</code> or <code>tags</code>, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>roleArn</code> and <code>tags</code> will not be updated, even if they are different.</p> </note>",
+      "documentation": "<p>Creates a state machine. A state machine consists of a collection of states that can do work (<code>Task</code> states), determine to which states to transition next (<code>Choice</code> states), stop an execution with an error (<code>Fail</code> states), and so on. State machines are specified using a JSON-based, structured language. For more information, see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a> in the AWS Step Functions User Guide.</p> <note> <p>This operation is eventually consistent. The results are best effort and may not reflect very recent updates and changes.</p> </note> <note> <p> <code>CreateStateMachine</code> is an idempotent API. Subsequent requests won’t create a duplicate resource if it was already created. <code>CreateStateMachine</code>'s idempotency check is based on the state machine <code>name</code>, <code>definition</code>, <code>type</code>, <code>LoggingConfiguration</code> and <code>TracingConfiguration</code>. If a following request has a different <code>roleArn</code> or <code>tags</code>, Step Functions will ignore these differences and treat it as an idempotent request of the previous. In this case, <code>roleArn</code> and <code>tags</code> will not be updated, even if they are different.</p> </note>",
       "idempotent": true
     },
     "DeleteActivity": {
@@ -463,6 +466,43 @@
       "documentation": "<p>Starts a state machine execution.</p> <note> <p> <code>StartExecution</code> is idempotent. If <code>StartExecution</code> is called with the same name and input as a running execution, the call will succeed and return the same response as the original request. If the execution is closed or if the input is different, it will return a 400 <code>ExecutionAlreadyExists</code> error. Names can be reused after 90 days. </p> </note>",
       "idempotent": true
     },
+    "StartSyncExecution": {
+      "name": "StartSyncExecution",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StartSyncExecutionInput"
+      },
+      "output": {
+        "shape": "StartSyncExecutionOutput"
+      },
+      "errors": [
+        {
+          "shape": "InvalidArn"
+        },
+        {
+          "shape": "InvalidExecutionInput"
+        },
+        {
+          "shape": "InvalidName"
+        },
+        {
+          "shape": "StateMachineDoesNotExist"
+        },
+        {
+          "shape": "StateMachineDeleting"
+        },
+        {
+          "shape": "StateMachineTypeNotSupported"
+        }
+      ],
+      "documentation": "<p>Starts a Synchronous Express state machine execution.</p>",
+      "endpoint": {
+        "hostPrefix": "sync-"
+      }
+    },
     "StopExecution": {
       "name": "StopExecution",
       "http": {
@@ -555,6 +595,9 @@
           "shape": "InvalidLoggingConfiguration"
         },
         {
+          "shape": "InvalidTracingConfiguration"
+        },
+        {
           "shape": "MissingRequiredParameter"
         },
         {
@@ -638,7 +681,11 @@
         },
         "input": {
           "shape": "SensitiveData",
-          "documentation": "<p>The JSON data input to the activity task.</p>"
+          "documentation": "<p>The JSON data input to the activity task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "inputDetails": {
+          "shape": "HistoryEventExecutionDataDetails",
+          "documentation": "<p>Contains details about the input for an execution history event.</p>"
         },
         "timeoutInSeconds": {
           "shape": "TimeoutInSeconds",
@@ -668,7 +715,11 @@
       "members": {
         "output": {
           "shape": "SensitiveData",
-          "documentation": "<p>The JSON data output by the activity task.</p>"
+          "documentation": "<p>The JSON data output by the activity task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "outputDetails": {
+          "shape": "HistoryEventExecutionDataDetails",
+          "documentation": "<p>Contains details about the output of an execution history event.</p>"
         }
       },
       "documentation": "<p>Contains details about an activity that successfully terminated during an execution.</p>"
@@ -692,6 +743,38 @@
       "max": 256,
       "min": 1
     },
+    "BilledDuration": {
+      "type": "long",
+      "min": 0
+    },
+    "BilledMemoryUsed": {
+      "type": "long",
+      "min": 0
+    },
+    "BillingDetails": {
+      "type": "structure",
+      "members": {
+        "billedMemoryUsedInMB": {
+          "shape": "BilledMemoryUsed",
+          "documentation": "<p>Billed memory consumption of your workflow, in MB.</p>"
+        },
+        "billedDurationInMilliseconds": {
+          "shape": "BilledDuration",
+          "documentation": "<p>Billed duration of your workflow, in milliseconds.</p>"
+        }
+      },
+      "documentation": "<p>An object that describes workflow billing details.</p>"
+    },
+    "CloudWatchEventsExecutionDataDetails": {
+      "type": "structure",
+      "members": {
+        "included": {
+          "shape": "includedDetails",
+          "documentation": "<p>Indicates whether input or output was included in the response. Always <code>true</code> for API calls. </p>"
+        }
+      },
+      "documentation": "<p>Provides details about execution input or output.</p>"
+    },
     "CloudWatchLogsLogGroup": {
       "type": "structure",
       "members": {
@@ -704,7 +787,7 @@
     },
     "ConnectorParameters": {
       "type": "string",
-      "max": 32768,
+      "max": 262144,
       "min": 0,
       "sensitive": true
     },
@@ -772,6 +855,10 @@
         "tags": {
           "shape": "TagList",
           "documentation": "<p>Tags to be added when creating a state machine.</p> <p>An array of key-value pairs. For more information, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Using Cost Allocation Tags</a> in the <i>AWS Billing and Cost Management User Guide</i>, and <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html\">Controlling Access Using IAM Tags</a>.</p> <p>Tags may only contain Unicode letters, digits, white space, or these symbols: <code>_ . : / = + - @</code>.</p>"
+        },
+        "tracingConfiguration": {
+          "shape": "TracingConfiguration",
+          "documentation": "<p>Selects whether AWS X-Ray tracing is enabled.</p>"
         }
       }
     },
@@ -882,13 +969,12 @@
         "executionArn",
         "stateMachineArn",
         "status",
-        "startDate",
-        "input"
+        "startDate"
       ],
       "members": {
         "executionArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) that id entifies the execution.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the execution.</p>"
         },
         "stateMachineArn": {
           "shape": "Arn",
@@ -912,11 +998,21 @@
         },
         "input": {
           "shape": "SensitiveData",
-          "documentation": "<p>The string that contains the JSON input data of the execution.</p>"
+          "documentation": "<p>The string that contains the JSON input data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "inputDetails": {
+          "shape": "CloudWatchEventsExecutionDataDetails"
         },
         "output": {
           "shape": "SensitiveData",
-          "documentation": "<p>The JSON output data of the execution.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>"
+          "documentation": "<p>The JSON output data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>"
+        },
+        "outputDetails": {
+          "shape": "CloudWatchEventsExecutionDataDetails"
+        },
+        "traceHeader": {
+          "shape": "TraceHeader",
+          "documentation": "<p>The AWS X-Ray trace header that was passed to the execution.</p>"
         }
       }
     },
@@ -964,6 +1060,10 @@
         },
         "loggingConfiguration": {
           "shape": "LoggingConfiguration"
+        },
+        "tracingConfiguration": {
+          "shape": "TracingConfiguration",
+          "documentation": "<p>Selects whether AWS X-Ray tracing is enabled.</p>"
         }
       }
     },
@@ -1020,8 +1120,15 @@
         },
         "loggingConfiguration": {
           "shape": "LoggingConfiguration"
+        },
+        "tracingConfiguration": {
+          "shape": "TracingConfiguration",
+          "documentation": "<p>Selects whether AWS X-Ray tracing is enabled.</p>"
         }
       }
+    },
+    "Enabled": {
+      "type": "boolean"
     },
     "EventId": {
       "type": "long"
@@ -1072,7 +1179,7 @@
       "members": {
         "executionArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) that id entifies the execution.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the execution.</p>"
         },
         "stateMachineArn": {
           "shape": "Arn",
@@ -1102,7 +1209,11 @@
       "members": {
         "input": {
           "shape": "SensitiveData",
-          "documentation": "<p>The JSON data input to the execution.</p>"
+          "documentation": "<p>The JSON data input to the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "inputDetails": {
+          "shape": "HistoryEventExecutionDataDetails",
+          "documentation": "<p>Contains details about the input for an execution history event.</p>"
         },
         "roleArn": {
           "shape": "Arn",
@@ -1126,7 +1237,11 @@
       "members": {
         "output": {
           "shape": "SensitiveData",
-          "documentation": "<p>The JSON data output by the execution.</p>"
+          "documentation": "<p>The JSON data output by the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "outputDetails": {
+          "shape": "HistoryEventExecutionDataDetails",
+          "documentation": "<p>Contains details about the output of an execution history event.</p>"
         }
       },
       "documentation": "<p>Contains details about the successful termination of the execution.</p>"
@@ -1170,7 +1285,7 @@
         },
         "input": {
           "shape": "SensitiveDataJobInput",
-          "documentation": "<p>The string that contains the JSON input data for the task.</p>"
+          "documentation": "<p>The string that contains the JSON input data for the task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
         }
       }
     },
@@ -1195,6 +1310,10 @@
         "nextToken": {
           "shape": "PageToken",
           "documentation": "<p>If <code>nextToken</code> is returned, there are more results available. The value of <code>nextToken</code> is a unique pagination token for each page. Make the call again using the returned token to retrieve the next page. Keep all other arguments unchanged. Each pagination token expires after 24 hours. Using an expired pagination token will return an <i>HTTP 400 InvalidToken</i> error.</p>"
+        },
+        "includeExecutionData": {
+          "shape": "IncludeExecutionDataGetExecutionHistory",
+          "documentation": "<p>You can select whether execution data (input or output of a history event) is returned. The default is <code>true</code>.</p>"
         }
       }
     },
@@ -1353,6 +1472,16 @@
       },
       "documentation": "<p>Contains details about the events of an execution.</p>"
     },
+    "HistoryEventExecutionDataDetails": {
+      "type": "structure",
+      "members": {
+        "truncated": {
+          "shape": "truncated",
+          "documentation": "<p>Indicates whether input or output was truncated in the response. Always <code>false</code> for API calls.</p>"
+        }
+      },
+      "documentation": "<p>Provides details about input or output in an execution history event.</p>"
+    },
     "HistoryEventList": {
       "type": "list",
       "member": {
@@ -1427,6 +1556,10 @@
     "IncludeExecutionData": {
       "type": "boolean"
     },
+    "IncludeExecutionDataGetExecutionHistory": {
+      "type": "boolean",
+      "box": true
+    },
     "LambdaFunctionFailedEventDetails": {
       "type": "structure",
       "members": {
@@ -1467,7 +1600,11 @@
         },
         "input": {
           "shape": "SensitiveData",
-          "documentation": "<p>The JSON data input to the lambda function.</p>"
+          "documentation": "<p>The JSON data input to the lambda function. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "inputDetails": {
+          "shape": "HistoryEventExecutionDataDetails",
+          "documentation": "<p>Contains details about input for an execution history event.</p>"
         },
         "timeoutInSeconds": {
           "shape": "TimeoutInSeconds",
@@ -1496,7 +1633,11 @@
       "members": {
         "output": {
           "shape": "SensitiveData",
-          "documentation": "<p>The JSON data output by the lambda function.</p>"
+          "documentation": "<p>The JSON data output by the lambda function. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "outputDetails": {
+          "shape": "HistoryEventExecutionDataDetails",
+          "documentation": "<p>Contains details about the output of an execution history event.</p>"
         }
       },
       "documentation": "<p>Contains details about a lambda function that successfully terminated during an execution.</p>"
@@ -1672,7 +1813,7 @@
         },
         "includeExecutionData": {
           "shape": "IncludeExecutionData",
-          "documentation": "<p>Determines whether execution data is included in your log. When set to <code>FALSE</code>, data is excluded.</p>"
+          "documentation": "<p>Determines whether execution data is included in your log. When set to <code>false</code>, data is excluded.</p>"
         },
         "destinations": {
           "shape": "LogDestinationList",
@@ -1776,7 +1917,7 @@
         },
         "output": {
           "shape": "SensitiveData",
-          "documentation": "<p>The JSON output of the task.</p>"
+          "documentation": "<p>The JSON output of the task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
         }
       }
     },
@@ -1792,12 +1933,12 @@
     },
     "SensitiveData": {
       "type": "string",
-      "max": 32768,
+      "max": 262144,
       "sensitive": true
     },
     "SensitiveDataJobInput": {
       "type": "string",
-      "max": 65536,
+      "max": 262144,
       "sensitive": true
     },
     "SensitiveError": {
@@ -1822,7 +1963,11 @@
         },
         "input": {
           "shape": "SensitiveData",
-          "documentation": "<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>\"input\": \"{\\\"first_name\\\" : \\\"test\\\"}\"</code> </p> <note> <p>If you don't include any JSON input data, you still must include the two braces, for example: <code>\"input\": \"{}\"</code> </p> </note>"
+          "documentation": "<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>\"input\": \"{\\\"first_name\\\" : \\\"test\\\"}\"</code> </p> <note> <p>If you don't include any JSON input data, you still must include the two braces, for example: <code>\"input\": \"{}\"</code> </p> </note> <p>Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "traceHeader": {
+          "shape": "TraceHeader",
+          "documentation": "<p>Passes the AWS X-Ray trace header. The trace header can also be passed in the request payload.</p>"
         }
       }
     },
@@ -1835,11 +1980,100 @@
       "members": {
         "executionArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) that id entifies the execution.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the execution.</p>"
         },
         "startDate": {
           "shape": "Timestamp",
           "documentation": "<p>The date the execution is started.</p>"
+        }
+      }
+    },
+    "StartSyncExecutionInput": {
+      "type": "structure",
+      "required": [
+        "stateMachineArn"
+      ],
+      "members": {
+        "stateMachineArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the state machine to execute.</p>"
+        },
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the execution.</p>"
+        },
+        "input": {
+          "shape": "SensitiveData",
+          "documentation": "<p>The string that contains the JSON input data for the execution, for example:</p> <p> <code>\"input\": \"{\\\"first_name\\\" : \\\"test\\\"}\"</code> </p> <note> <p>If you don't include any JSON input data, you still must include the two braces, for example: <code>\"input\": \"{}\"</code> </p> </note> <p>Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "traceHeader": {
+          "shape": "TraceHeader",
+          "documentation": "<p>Passes the AWS X-Ray trace header. The trace header can also be passed in the request payload.</p>"
+        }
+      }
+    },
+    "StartSyncExecutionOutput": {
+      "type": "structure",
+      "required": [
+        "executionArn",
+        "startDate",
+        "stopDate",
+        "status"
+      ],
+      "members": {
+        "executionArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the execution.</p>"
+        },
+        "stateMachineArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the state machine.</p>"
+        },
+        "name": {
+          "shape": "Name",
+          "documentation": "<p>The name of the execution.</p>"
+        },
+        "startDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date the execution is started.</p>"
+        },
+        "stopDate": {
+          "shape": "Timestamp",
+          "documentation": "<p>If the execution has already ended, the date the execution stopped.</p>"
+        },
+        "status": {
+          "shape": "SyncExecutionStatus",
+          "documentation": "<p>The current status of the execution.</p>"
+        },
+        "error": {
+          "shape": "SensitiveError",
+          "documentation": "<p>The error code of the failure.</p>"
+        },
+        "cause": {
+          "shape": "SensitiveCause",
+          "documentation": "<p>A more detailed explanation of the cause of the failure.</p>"
+        },
+        "input": {
+          "shape": "SensitiveData",
+          "documentation": "<p>The string that contains the JSON input data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "inputDetails": {
+          "shape": "CloudWatchEventsExecutionDataDetails"
+        },
+        "output": {
+          "shape": "SensitiveData",
+          "documentation": "<p>The JSON output data of the execution. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p> <note> <p>This field is set only if the execution succeeds. If the execution fails, this field is null.</p> </note>"
+        },
+        "outputDetails": {
+          "shape": "CloudWatchEventsExecutionDataDetails"
+        },
+        "traceHeader": {
+          "shape": "TraceHeader",
+          "documentation": "<p>The AWS X-Ray trace header that was passed to the execution.</p>"
+        },
+        "billingDetails": {
+          "shape": "BillingDetails",
+          "documentation": "<p>An object that describes workflow billing details, including billed duration and memory use.</p>"
         }
       }
     },
@@ -1855,7 +2089,11 @@
         },
         "input": {
           "shape": "SensitiveData",
-          "documentation": "<p>The string that contains the JSON input data for the state.</p>"
+          "documentation": "<p>The string that contains the JSON input data for the state. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "inputDetails": {
+          "shape": "HistoryEventExecutionDataDetails",
+          "documentation": "<p>Contains details about the input for an execution history event.</p>"
         }
       },
       "documentation": "<p>Contains details about a state entered during an execution.</p>"
@@ -1872,7 +2110,11 @@
         },
         "output": {
           "shape": "SensitiveData",
-          "documentation": "<p>The JSON output data of the state.</p>"
+          "documentation": "<p>The JSON output data of the state. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "outputDetails": {
+          "shape": "HistoryEventExecutionDataDetails",
+          "documentation": "<p>Contains details about the output of an execution history event.</p>"
         }
       },
       "documentation": "<p>Contains details about an exit from a state during an execution.</p>"
@@ -1956,6 +2198,14 @@
           "documentation": "<p>The date the execution is stopped.</p>"
         }
       }
+    },
+    "SyncExecutionStatus": {
+      "type": "string",
+      "enum": [
+        "SUCCEEDED",
+        "FAILED",
+        "TIMED_OUT"
+      ]
     },
     "Tag": {
       "type": "structure",
@@ -2063,11 +2313,16 @@
         },
         "parameters": {
           "shape": "ConnectorParameters",
-          "documentation": "<p>The JSON data passed to the resource referenced in a task state.</p>"
+          "documentation": "<p>The JSON data passed to the resource referenced in a task state. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
         },
         "timeoutInSeconds": {
           "shape": "TimeoutInSeconds",
           "documentation": "<p>The maximum allowed duration of the task.</p>",
+          "box": true
+        },
+        "heartbeatInSeconds": {
+          "shape": "TimeoutInSeconds",
+          "documentation": "<p>The maximum allowed duration between two heartbeats for the task.</p>",
           "box": true
         }
       },
@@ -2160,7 +2415,11 @@
         },
         "output": {
           "shape": "SensitiveData",
-          "documentation": "<p>The response from a resource when a task has started.</p>"
+          "documentation": "<p>The response from a resource when a task has started. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "outputDetails": {
+          "shape": "HistoryEventExecutionDataDetails",
+          "documentation": "<p>Contains details about the output of an execution history event.</p>"
         }
       },
       "documentation": "<p>Contains details about a task submitted to a resource .</p>"
@@ -2182,7 +2441,11 @@
         },
         "output": {
           "shape": "SensitiveData",
-          "documentation": "<p>The full JSON response from a resource when a task has succeeded. This response becomes the output of the related task.</p>"
+          "documentation": "<p>The full JSON response from a resource when a task has succeeded. This response becomes the output of the related task. Length constraints apply to the payload size, and are expressed as bytes in UTF-8 encoding.</p>"
+        },
+        "outputDetails": {
+          "shape": "HistoryEventExecutionDataDetails",
+          "documentation": "<p>Contains details about the output of an execution history event.</p>"
         }
       },
       "documentation": "<p>Contains details about the successful completion of a task state.</p>"
@@ -2223,6 +2486,22 @@
     },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "TraceHeader": {
+      "type": "string",
+      "max": 256,
+      "min": 0,
+      "pattern": "\\p{ASCII}*"
+    },
+    "TracingConfiguration": {
+      "type": "structure",
+      "members": {
+        "enabled": {
+          "shape": "Enabled",
+          "documentation": "<p>When set to <code>true</code>, AWS X-Ray tracing is enabled.</p>"
+        }
+      },
+      "documentation": "<p>Selects whether or not the state machine's AWS X-Ray tracing is enabled. Default is <code>false</code> </p>"
     },
     "UnsignedInteger": {
       "type": "integer",
@@ -2270,6 +2549,10 @@
         "loggingConfiguration": {
           "shape": "LoggingConfiguration",
           "documentation": "<p>The <code>LoggingConfiguration</code> data type is used to set CloudWatch Logs options.</p>"
+        },
+        "tracingConfiguration": {
+          "shape": "TracingConfiguration",
+          "documentation": "<p>Selects whether AWS X-Ray tracing is enabled.</p>"
         }
       }
     },
@@ -2284,6 +2567,12 @@
           "documentation": "<p>The date and time the state machine was updated.</p>"
         }
       }
+    },
+    "includedDetails": {
+      "type": "boolean"
+    },
+    "truncated": {
+      "type": "boolean"
     }
   },
   "documentation": "<fullname>AWS Step Functions</fullname> <p>AWS Step Functions is a service that lets you coordinate the components of distributed applications and microservices using visual workflows.</p> <p>You can use Step Functions to build applications from individual components, each of which performs a discrete function, or <i>task</i>, allowing you to scale and change applications quickly. Step Functions provides a console that helps visualize the components of your application as a series of steps. Step Functions automatically triggers and tracks each step, and retries steps when there are errors, so your application executes predictably and in the right order every time. Step Functions logs the state of each step, so you can quickly diagnose and debug any issues.</p> <p>Step Functions manages operations and underlying infrastructure to ensure your application is available at any scale. You can run tasks on AWS, your own servers, or any system that has access to AWS. You can access and use Step Functions using the console, the AWS SDKs, or an HTTP API. For more information about Step Functions, see the <i> <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/welcome.html\">AWS Step Functions Developer Guide</a> </i>.</p>"

@@ -4,10 +4,17 @@ gem 'rake'
 
 group :documentation do
   gem 'rdiscount'
-  gem 'yard', github: 'lsegal/yard'
   gem 'yard-sitemap', '~> 1.0'
-  gem 'yard-js', github: 'lsegal/yard-js'
-	gem 'parsejs', path: './doc-src/parsejs'
+  
+  # Switch to yard-js gem when fix is published 
+  # Fix PR: https://github.com/lsegal/yard-js/pull/4
+  gem 'yard-js', path: './doc-src/yard-js'
+  
+  # Switch to yard gem when fix is published 
+  # Fix PR: https://github.com/lsegal/yard/pull/1399
+  gem 'yard', path: './doc-src/yard'
+
+  gem 'parsejs', path: './doc-src/parsejs'
 end
 
 group :release do

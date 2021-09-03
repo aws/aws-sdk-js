@@ -43,6 +43,9 @@
         "method": "POST",
         "requestUri": "/graph"
       },
+      "input": {
+        "shape": "CreateGraphRequest"
+      },
       "output": {
         "shape": "CreateGraphResponse"
       },
@@ -57,7 +60,7 @@
           "shape": "ServiceQuotaExceededException"
         }
       ],
-      "documentation": "<p>Creates a new behavior graph for the calling account, and sets that account as the master account. This operation is called by the account that is enabling Detective.</p> <p>Before you try to enable Detective, make sure that your account has been enrolled in Amazon GuardDuty for at least 48 hours. If you do not meet this requirement, you cannot enable Detective. If you do meet the GuardDuty prerequisite, then when you make the request to enable Detective, it checks whether your data volume is within the Detective quota. If it exceeds the quota, then you cannot enable Detective. </p> <p>The operation also enables Detective for the calling account in the currently selected Region. It returns the ARN of the new behavior graph.</p> <p> <code>CreateGraph</code> triggers a process to create the corresponding data tables for the new behavior graph.</p> <p>An account can only be the master account for one behavior graph within a Region. If the same account calls <code>CreateGraph</code> with the same master account, it always returns the same behavior graph ARN. It does not create a new behavior graph.</p>"
+      "documentation": "<p>Creates a new behavior graph for the calling account, and sets that account as the administrator account. This operation is called by the account that is enabling Detective.</p> <p>Before you try to enable Detective, make sure that your account has been enrolled in Amazon GuardDuty for at least 48 hours. If you do not meet this requirement, you cannot enable Detective. If you do meet the GuardDuty prerequisite, then when you make the request to enable Detective, it checks whether your data volume is within the Detective quota. If it exceeds the quota, then you cannot enable Detective. </p> <p>The operation also enables Detective for the calling account in the currently selected Region. It returns the ARN of the new behavior graph.</p> <p> <code>CreateGraph</code> triggers a process to create the corresponding data tables for the new behavior graph.</p> <p>An account can only be the administrator account for one behavior graph within a Region. If the same account calls <code>CreateGraph</code> with the same administrator account, it always returns the same behavior graph ARN. It does not create a new behavior graph.</p>"
     },
     "CreateMembers": {
       "name": "CreateMembers",
@@ -85,7 +88,7 @@
           "shape": "ServiceQuotaExceededException"
         }
       ],
-      "documentation": "<p>Sends a request to invite the specified AWS accounts to be member accounts in the behavior graph. This operation can only be called by the master account for a behavior graph. </p> <p> <code>CreateMembers</code> verifies the accounts and then sends invitations to the verified accounts.</p> <p>The request provides the behavior graph ARN and the list of accounts to invite.</p> <p>The response separates the requested accounts into two lists:</p> <ul> <li> <p>The accounts that <code>CreateMembers</code> was able to start the verification for. This list includes member accounts that are being verified, that have passed verification and are being sent an invitation, and that have failed verification.</p> </li> <li> <p>The accounts that <code>CreateMembers</code> was unable to process. This list includes accounts that were already invited to be member accounts in the behavior graph.</p> </li> </ul>"
+      "documentation": "<p>Sends a request to invite the specified AWS accounts to be member accounts in the behavior graph. This operation can only be called by the administrator account for a behavior graph. </p> <p> <code>CreateMembers</code> verifies the accounts and then invites the verified accounts. The administrator can optionally specify to not send invitation emails to the member accounts. This would be used when the administrator manages their member accounts centrally.</p> <p>The request provides the behavior graph ARN and the list of accounts to invite.</p> <p>The response separates the requested accounts into two lists:</p> <ul> <li> <p>The accounts that <code>CreateMembers</code> was able to start the verification for. This list includes member accounts that are being verified, that have passed verification and are to be invited, and that have failed verification.</p> </li> <li> <p>The accounts that <code>CreateMembers</code> was unable to process. This list includes accounts that were already invited to be member accounts in the behavior graph.</p> </li> </ul>"
     },
     "DeleteGraph": {
       "name": "DeleteGraph",
@@ -107,7 +110,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Disables the specified behavior graph and queues it to be deleted. This operation removes the graph from each member account's list of behavior graphs.</p> <p> <code>DeleteGraph</code> can only be called by the master account for a behavior graph.</p>"
+      "documentation": "<p>Disables the specified behavior graph and queues it to be deleted. This operation removes the graph from each member account's list of behavior graphs.</p> <p> <code>DeleteGraph</code> can only be called by the administrator account for a behavior graph.</p>"
     },
     "DeleteMembers": {
       "name": "DeleteMembers",
@@ -135,7 +138,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Deletes one or more member accounts from the master account behavior graph. This operation can only be called by a Detective master account. That account cannot use <code>DeleteMembers</code> to delete their own account from the behavior graph. To disable a behavior graph, the master account uses the <code>DeleteGraph</code> API method.</p>"
+      "documentation": "<p>Deletes one or more member accounts from the administrator account's behavior graph. This operation can only be called by a Detective administrator account. That account cannot use <code>DeleteMembers</code> to delete their own account from the behavior graph. To disable a behavior graph, the administrator account uses the <code>DeleteGraph</code> API method.</p>"
     },
     "DisassociateMembership": {
       "name": "DisassociateMembership",
@@ -207,7 +210,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Returns the list of behavior graphs that the calling account is a master of. This operation can only be called by a master account.</p> <p>Because an account can currently only be the master of one behavior graph within a Region, the results always contain a single graph.</p>"
+      "documentation": "<p>Returns the list of behavior graphs that the calling account is an administrator account of. This operation can only be called by an administrator account.</p> <p>Because an account can currently only be the administrator of one behavior graph within a Region, the results always contain a single behavior graph.</p>"
     },
     "ListInvitations": {
       "name": "ListInvitations",
@@ -255,6 +258,32 @@
         }
       ],
       "documentation": "<p>Retrieves the list of member accounts for a behavior graph. Does not return member accounts that were removed from the behavior graph.</p>"
+    },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{ResourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Returns the tag values that are assigned to a behavior graph.</p>"
     },
     "RejectInvitation": {
       "name": "RejectInvitation",
@@ -308,6 +337,58 @@
         }
       ],
       "documentation": "<p>Sends a request to enable data ingest for a member account that has a status of <code>ACCEPTED_BUT_DISABLED</code>.</p> <p>For valid member accounts, the status is updated as follows.</p> <ul> <li> <p>If Detective enabled the member account, then the new status is <code>ENABLED</code>.</p> </li> <li> <p>If Detective cannot enable the member account, the status remains <code>ACCEPTED_BUT_DISABLED</code>. </p> </li> </ul>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{ResourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Applies tag values to a behavior graph.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{ResourceArn}",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalServerException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Removes tags from a behavior graph.</p>"
     }
   },
   "shapes": {
@@ -339,7 +420,7 @@
           "documentation": "<p>The AWS account root user email address for the AWS account.</p>"
         }
       },
-      "documentation": "<p>An AWS account that is the master of or a member of a behavior graph.</p>"
+      "documentation": "<p>An AWS account that is the administrator account of or a member of a behavior graph.</p>"
     },
     "AccountId": {
       "type": "string",
@@ -362,6 +443,21 @@
       },
       "max": 50,
       "min": 1
+    },
+    "Boolean": {
+      "type": "boolean"
+    },
+    "ByteValue": {
+      "type": "long"
+    },
+    "CreateGraphRequest": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags to assign to the new behavior graph. You can add up to 50 tags. For each tag, you provide the tag key and the tag value. Each tag key can contain up to 128 characters. Each tag value can contain up to 256 characters.</p>"
+        }
+      }
     },
     "CreateGraphResponse": {
       "type": "structure",
@@ -387,9 +483,13 @@
           "shape": "EmailMessage",
           "documentation": "<p>Customized message text to include in the invitation email message to the invited member accounts.</p>"
         },
+        "DisableEmailNotification": {
+          "shape": "Boolean",
+          "documentation": "<p>if set to <code>true</code>, then the member accounts do not receive email notifications. By default, this is set to <code>false</code>, and the member accounts receive email notifications.</p>"
+        },
         "Accounts": {
           "shape": "AccountList",
-          "documentation": "<p>The list of AWS accounts to invite to become member accounts in the behavior graph. For each invited account, the account list contains the account identifier and the AWS account root user email address.</p>"
+          "documentation": "<p>The list of AWS accounts to invite to become member accounts in the behavior graph. You can invite up to 50 accounts at a time. For each invited account, the account list contains the account identifier and the AWS account root user email address.</p>"
         }
       }
     },
@@ -431,7 +531,7 @@
         },
         "AccountIds": {
           "shape": "AccountIdList",
-          "documentation": "<p>The list of AWS account identifiers for the member accounts to delete from the behavior graph.</p>"
+          "documentation": "<p>The list of AWS account identifiers for the member accounts to delete from the behavior graph. You can delete up to 50 member accounts at a time.</p>"
         }
       }
     },
@@ -484,7 +584,7 @@
         },
         "AccountIds": {
           "shape": "AccountIdList",
-          "documentation": "<p>The list of AWS account identifiers for the member account for which to return member details.</p> <p>You cannot use <code>GetMembers</code> to retrieve information about member accounts that were removed from the behavior graph.</p>"
+          "documentation": "<p>The list of AWS account identifiers for the member account for which to return member details. You can request details for up to 50 member accounts at a time.</p> <p>You cannot use <code>GetMembers</code> to retrieve information about member accounts that were removed from the behavior graph.</p>"
         }
       }
     },
@@ -543,7 +643,7 @@
       "members": {
         "GraphList": {
           "shape": "GraphList",
-          "documentation": "<p>A list of behavior graphs that the account is a master for.</p>"
+          "documentation": "<p>A list of behavior graphs that the account is an administrator account for.</p>"
         },
         "NextToken": {
           "shape": "PaginationToken",
@@ -610,6 +710,29 @@
         }
       }
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "GraphArn",
+          "documentation": "<p>The ARN of the behavior graph for which to retrieve the tag values.</p>",
+          "location": "uri",
+          "locationName": "ResourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tag values that are assigned to the behavior graph. The request returns up to 50 tag values.</p>"
+        }
+      }
+    },
     "MemberDetail": {
       "type": "structure",
       "members": {
@@ -627,7 +750,13 @@
         },
         "MasterId": {
           "shape": "AccountId",
-          "documentation": "<p>The AWS account identifier of the master account for the behavior graph.</p>"
+          "documentation": "<p>The AWS account identifier of the administrator account for the behavior graph.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This property is deprecated. Use AdministratorId instead."
+        },
+        "AdministratorId": {
+          "shape": "AccountId",
+          "documentation": "<p>The AWS account identifier of the administrator account for the behavior graph.</p>"
         },
         "Status": {
           "shape": "MemberStatus",
@@ -645,13 +774,25 @@
           "shape": "Timestamp",
           "documentation": "<p>The date and time that the member account was last updated. The value is in milliseconds since the epoch.</p>"
         },
+        "VolumeUsageInBytes": {
+          "shape": "ByteValue",
+          "documentation": "<p>The data volume in bytes per day for the member account.</p>"
+        },
+        "VolumeUsageUpdatedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The data and time when the member account data volume was last updated.</p>"
+        },
         "PercentOfGraphUtilization": {
           "shape": "Percentage",
-          "documentation": "<p>The member account data volume as a percentage of the maximum allowed data volume. 0 indicates 0 percent, and 100 indicates 100 percent.</p> <p>Note that this is not the percentage of the behavior graph data volume.</p> <p>For example, the data volume for the behavior graph is 80 GB per day. The maximum data volume is 160 GB per day. If the data volume for the member account is 40 GB per day, then <code>PercentOfGraphUtilization</code> is 25. It represents 25% of the maximum allowed data volume. </p>"
+          "documentation": "<p>The member account data volume as a percentage of the maximum allowed data volume. 0 indicates 0 percent, and 100 indicates 100 percent.</p> <p>Note that this is not the percentage of the behavior graph data volume.</p> <p>For example, the data volume for the behavior graph is 80 GB per day. The maximum data volume is 160 GB per day. If the data volume for the member account is 40 GB per day, then <code>PercentOfGraphUtilization</code> is 25. It represents 25% of the maximum allowed data volume. </p>",
+          "deprecated": true,
+          "deprecatedMessage": "This property is deprecated. Use VolumeUsageInBytes instead."
         },
         "PercentOfGraphUtilizationUpdatedTime": {
           "shape": "Timestamp",
-          "documentation": "<p>The date and time when the graph utilization percentage was last updated.</p>"
+          "documentation": "<p>The date and time when the graph utilization percentage was last updated.</p>",
+          "deprecated": true,
+          "deprecatedMessage": "This property is deprecated. Use VolumeUsageUpdatedTime instead."
         }
       },
       "documentation": "<p>Details about a member account that was invited to contribute to a behavior graph.</p>"
@@ -722,8 +863,61 @@
         }
       }
     },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+    },
+    "TagKeyList": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "TagMap": {
+      "type": "map",
+      "key": {
+        "shape": "TagKey"
+      },
+      "value": {
+        "shape": "TagValue"
+      },
+      "max": 50,
+      "min": 1
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "Tags"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "GraphArn",
+          "documentation": "<p>The ARN of the behavior graph to assign the tags to.</p>",
+          "location": "uri",
+          "locationName": "ResourceArn"
+        },
+        "Tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags to assign to the behavior graph. You can add up to 50 tags. For each tag, you provide the tag key and the tag value. Each tag key can contain up to 128 characters. Each tag value can contain up to 256 characters.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256
+    },
     "Timestamp": {
-      "type": "timestamp"
+      "type": "timestamp",
+      "timestampFormat": "iso8601"
     },
     "UnprocessedAccount": {
       "type": "structure",
@@ -747,7 +941,32 @@
     },
     "UnprocessedReason": {
       "type": "string"
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "ResourceArn",
+        "TagKeys"
+      ],
+      "members": {
+        "ResourceArn": {
+          "shape": "GraphArn",
+          "documentation": "<p>The ARN of the behavior graph to remove the tags from.</p>",
+          "location": "uri",
+          "locationName": "ResourceArn"
+        },
+        "TagKeys": {
+          "shape": "TagKeyList",
+          "documentation": "<p>The tag keys of the tags to remove from the behavior graph. You can remove up to 50 tags at a time.</p>",
+          "location": "querystring",
+          "locationName": "tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     }
   },
-  "documentation": "<p>Detective uses machine learning and purpose-built visualizations to help you analyze and investigate security issues across your Amazon Web Services (AWS) workloads. Detective automatically extracts time-based events such as login attempts, API calls, and network traffic from AWS CloudTrail and Amazon Virtual Private Cloud (Amazon VPC) flow logs. It also extracts findings detected by Amazon GuardDuty.</p> <p>The Detective API primarily supports the creation and management of behavior graphs. A behavior graph contains the extracted data from a set of member accounts, and is created and managed by a master account.</p> <p>Every behavior graph is specific to a Region. You can only use the API to manage graphs that belong to the Region that is associated with the currently selected endpoint.</p> <p>A Detective master account can use the Detective API to do the following:</p> <ul> <li> <p>Enable and disable Detective. Enabling Detective creates a new behavior graph.</p> </li> <li> <p>View the list of member accounts in a behavior graph.</p> </li> <li> <p>Add member accounts to a behavior graph.</p> </li> <li> <p>Remove member accounts from a behavior graph.</p> </li> </ul> <p>A member account can use the Detective API to do the following:</p> <ul> <li> <p>View the list of behavior graphs that they are invited to.</p> </li> <li> <p>Accept an invitation to contribute to a behavior graph.</p> </li> <li> <p>Decline an invitation to contribute to a behavior graph.</p> </li> <li> <p>Remove their account from a behavior graph.</p> </li> </ul> <p>All API actions are logged as CloudTrail events. See <a href=\"https://docs.aws.amazon.com/detective/latest/adminguide/logging-using-cloudtrail.html\">Logging Detective API Calls with CloudTrail</a>.</p>"
+  "documentation": "<p>Detective uses machine learning and purpose-built visualizations to help you analyze and investigate security issues across your Amazon Web Services (AWS) workloads. Detective automatically extracts time-based events such as login attempts, API calls, and network traffic from AWS CloudTrail and Amazon Virtual Private Cloud (Amazon VPC) flow logs. It also extracts findings detected by Amazon GuardDuty.</p> <p>The Detective API primarily supports the creation and management of behavior graphs. A behavior graph contains the extracted data from a set of member accounts, and is created and managed by an administrator account.</p> <p>Every behavior graph is specific to a Region. You can only use the API to manage graphs that belong to the Region that is associated with the currently selected endpoint.</p> <p>A Detective administrator account can use the Detective API to do the following:</p> <ul> <li> <p>Enable and disable Detective. Enabling Detective creates a new behavior graph.</p> </li> <li> <p>View the list of member accounts in a behavior graph.</p> </li> <li> <p>Add member accounts to a behavior graph.</p> </li> <li> <p>Remove member accounts from a behavior graph.</p> </li> </ul> <p>A member account can use the Detective API to do the following:</p> <ul> <li> <p>View the list of behavior graphs that they are invited to.</p> </li> <li> <p>Accept an invitation to contribute to a behavior graph.</p> </li> <li> <p>Decline an invitation to contribute to a behavior graph.</p> </li> <li> <p>Remove their account from a behavior graph.</p> </li> </ul> <p>All API actions are logged as CloudTrail events. See <a href=\"https://docs.aws.amazon.com/detective/latest/adminguide/logging-using-cloudtrail.html\">Logging Detective API Calls with CloudTrail</a>.</p> <note> <p>We replaced the term \"master account\" with the term \"administrator account.\" An administrator account is used to centrally manage multiple accounts. In the case of Detective, the administrator account manages the accounts in their behavior graph.</p> </note>"
 }

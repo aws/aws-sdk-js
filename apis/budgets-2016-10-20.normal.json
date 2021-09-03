@@ -44,6 +44,40 @@
       ],
       "documentation": "<p>Creates a budget and, if included, notifications and subscribers. </p> <important> <p>Only one of <code>BudgetLimit</code> or <code>PlannedBudgetLimits</code> can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_CreateBudget.html#API_CreateBudget_Examples\">Examples</a> section. </p> </important>"
     },
+    "CreateBudgetAction": {
+      "name": "CreateBudgetAction",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateBudgetActionRequest"
+      },
+      "output": {
+        "shape": "CreateBudgetActionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "CreationLimitExceededException"
+        },
+        {
+          "shape": "DuplicateRecordException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p> Creates a budget action. </p>"
+    },
     "CreateNotification": {
       "name": "CreateNotification",
       "http": {
@@ -140,6 +174,37 @@
       ],
       "documentation": "<p>Deletes a budget. You can delete your budget at any time.</p> <important> <p>Deleting a budget also deletes the notifications and subscribers that are associated with that budget.</p> </important>"
     },
+    "DeleteBudgetAction": {
+      "name": "DeleteBudgetAction",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteBudgetActionRequest"
+      },
+      "output": {
+        "shape": "DeleteBudgetActionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceLockedException"
+        }
+      ],
+      "documentation": "<p> Deletes a budget action. </p>"
+    },
     "DeleteNotification": {
       "name": "DeleteNotification",
       "http": {
@@ -223,6 +288,124 @@
         }
       ],
       "documentation": "<p>Describes a budget.</p> <important> <p>The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_DescribeBudget.html#API_DescribeBudget_Examples\">Examples</a> section. </p> </important>"
+    },
+    "DescribeBudgetAction": {
+      "name": "DescribeBudgetAction",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeBudgetActionRequest"
+      },
+      "output": {
+        "shape": "DescribeBudgetActionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        }
+      ],
+      "documentation": "<p> Describes a budget action detail. </p>"
+    },
+    "DescribeBudgetActionHistories": {
+      "name": "DescribeBudgetActionHistories",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeBudgetActionHistoriesRequest"
+      },
+      "output": {
+        "shape": "DescribeBudgetActionHistoriesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        }
+      ],
+      "documentation": "<p> Describes a budget action history detail. </p>"
+    },
+    "DescribeBudgetActionsForAccount": {
+      "name": "DescribeBudgetActionsForAccount",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeBudgetActionsForAccountRequest"
+      },
+      "output": {
+        "shape": "DescribeBudgetActionsForAccountResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        }
+      ],
+      "documentation": "<p> Describes all of the budget actions for an account. </p>"
+    },
+    "DescribeBudgetActionsForBudget": {
+      "name": "DescribeBudgetActionsForBudget",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeBudgetActionsForBudgetRequest"
+      },
+      "output": {
+        "shape": "DescribeBudgetActionsForBudgetResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        }
+      ],
+      "documentation": "<p> Describes all of the budget actions for a budget. </p>"
     },
     "DescribeBudgetPerformanceHistory": {
       "name": "DescribeBudgetPerformanceHistory",
@@ -360,6 +543,37 @@
       ],
       "documentation": "<p>Lists the subscribers that are associated with a notification.</p>"
     },
+    "ExecuteBudgetAction": {
+      "name": "ExecuteBudgetAction",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ExecuteBudgetActionRequest"
+      },
+      "output": {
+        "shape": "ExecuteBudgetActionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceLockedException"
+        }
+      ],
+      "documentation": "<p> Executes a budget action. </p>"
+    },
     "UpdateBudget": {
       "name": "UpdateBudget",
       "http": {
@@ -387,6 +601,37 @@
         }
       ],
       "documentation": "<p>Updates a budget. You can change every part of a budget except for the <code>budgetName</code> and the <code>calculatedSpend</code>. When you modify a budget, the <code>calculatedSpend</code> drops to zero until AWS has new usage data to use for forecasting.</p> <important> <p>Only one of <code>BudgetLimit</code> or <code>PlannedBudgetLimits</code> can be present in the syntax at one time. Use the syntax that matches your case. The Request Syntax section shows the <code>BudgetLimit</code> syntax. For <code>PlannedBudgetLimits</code>, see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_budgets_UpdateBudget.html#API_UpdateBudget_Examples\">Examples</a> section. </p> </important>"
+    },
+    "UpdateBudgetAction": {
+      "name": "UpdateBudgetAction",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "UpdateBudgetActionRequest"
+      },
+      "output": {
+        "shape": "UpdateBudgetActionResponse"
+      },
+      "errors": [
+        {
+          "shape": "InternalErrorException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "NotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "ResourceLockedException"
+        }
+      ],
+      "documentation": "<p> Updates a budget action. </p>"
     },
     "UpdateNotification": {
       "name": "UpdateNotification",
@@ -459,6 +704,180 @@
       "min": 12,
       "pattern": "\\d{12}"
     },
+    "Action": {
+      "type": "structure",
+      "required": [
+        "ActionId",
+        "BudgetName",
+        "NotificationType",
+        "ActionType",
+        "ActionThreshold",
+        "Definition",
+        "ExecutionRoleArn",
+        "ApprovalModel",
+        "Status",
+        "Subscribers"
+      ],
+      "members": {
+        "ActionId": {
+          "shape": "ActionId",
+          "documentation": "<p> A system-generated universally unique identifier (UUID) for the action. </p>"
+        },
+        "BudgetName": {
+          "shape": "BudgetName"
+        },
+        "NotificationType": {
+          "shape": "NotificationType"
+        },
+        "ActionType": {
+          "shape": "ActionType",
+          "documentation": "<p> The type of action. This defines the type of tasks that can be carried out by this action. This field also determines the format for definition. </p>"
+        },
+        "ActionThreshold": {
+          "shape": "ActionThreshold",
+          "documentation": "<p> The trigger threshold of the action. </p>"
+        },
+        "Definition": {
+          "shape": "Definition",
+          "documentation": "<p> Where you specify all of the type-specific parameters. </p>"
+        },
+        "ExecutionRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p> The role passed for action execution and reversion. Roles and actions must be in the same account. </p>"
+        },
+        "ApprovalModel": {
+          "shape": "ApprovalModel",
+          "documentation": "<p> This specifies if the action needs manual or automatic approval. </p>"
+        },
+        "Status": {
+          "shape": "ActionStatus",
+          "documentation": "<p> The status of action. </p>"
+        },
+        "Subscribers": {
+          "shape": "Subscribers"
+        }
+      },
+      "documentation": "<p> A budget action resource. </p>"
+    },
+    "ActionHistories": {
+      "type": "list",
+      "member": {
+        "shape": "ActionHistory"
+      },
+      "max": 100,
+      "min": 0
+    },
+    "ActionHistory": {
+      "type": "structure",
+      "required": [
+        "Timestamp",
+        "Status",
+        "EventType",
+        "ActionHistoryDetails"
+      ],
+      "members": {
+        "Timestamp": {
+          "shape": "GenericTimestamp"
+        },
+        "Status": {
+          "shape": "ActionStatus",
+          "documentation": "<p> The status of action at the time of the event. </p>"
+        },
+        "EventType": {
+          "shape": "EventType",
+          "documentation": "<p> This distinguishes between whether the events are triggered by the user or generated by the system. </p>"
+        },
+        "ActionHistoryDetails": {
+          "shape": "ActionHistoryDetails",
+          "documentation": "<p> The description of details of the event. </p>"
+        }
+      },
+      "documentation": "<p> The historical records for a budget action. </p>"
+    },
+    "ActionHistoryDetails": {
+      "type": "structure",
+      "required": [
+        "Message",
+        "Action"
+      ],
+      "members": {
+        "Message": {
+          "shape": "GenericString"
+        },
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p> The budget action resource. </p>"
+        }
+      },
+      "documentation": "<p> The description of details of the event. </p>"
+    },
+    "ActionId": {
+      "type": "string",
+      "max": 36,
+      "min": 36,
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$"
+    },
+    "ActionStatus": {
+      "type": "string",
+      "enum": [
+        "STANDBY",
+        "PENDING",
+        "EXECUTION_IN_PROGRESS",
+        "EXECUTION_SUCCESS",
+        "EXECUTION_FAILURE",
+        "REVERSE_IN_PROGRESS",
+        "REVERSE_SUCCESS",
+        "REVERSE_FAILURE",
+        "RESET_IN_PROGRESS",
+        "RESET_FAILURE"
+      ]
+    },
+    "ActionSubType": {
+      "type": "string",
+      "enum": [
+        "STOP_EC2_INSTANCES",
+        "STOP_RDS_INSTANCES"
+      ]
+    },
+    "ActionThreshold": {
+      "type": "structure",
+      "required": [
+        "ActionThresholdValue",
+        "ActionThresholdType"
+      ],
+      "members": {
+        "ActionThresholdValue": {
+          "shape": "NotificationThreshold"
+        },
+        "ActionThresholdType": {
+          "shape": "ThresholdType"
+        }
+      },
+      "documentation": "<p> The trigger threshold of the action. </p>"
+    },
+    "ActionType": {
+      "type": "string",
+      "enum": [
+        "APPLY_IAM_POLICY",
+        "APPLY_SCP_POLICY",
+        "RUN_SSM_DOCUMENTS"
+      ]
+    },
+    "Actions": {
+      "type": "list",
+      "member": {
+        "shape": "Action"
+      },
+      "max": 100,
+      "min": 0
+    },
+    "ApprovalModel": {
+      "type": "string",
+      "enum": [
+        "AUTOMATIC",
+        "MANUAL"
+      ]
+    },
     "Budget": {
       "type": "structure",
       "required": [
@@ -485,11 +904,11 @@
         },
         "CostTypes": {
           "shape": "CostTypes",
-          "documentation": "<p>The types of costs that are included in this <code>COST</code> budget.</p> <p> <code>USAGE</code>, <code>RI_UTILIZATION</code>, <code>RI_COVERAGE</code>, <code>Savings_Plans_Utilization</code>, and <code>Savings_Plans_Coverage</code> budgets do not have <code>CostTypes</code>.</p>"
+          "documentation": "<p>The types of costs that are included in this <code>COST</code> budget.</p> <p> <code>USAGE</code>, <code>RI_UTILIZATION</code>, <code>RI_COVERAGE</code>, <code>SAVINGS_PLANS_UTILIZATION</code>, and <code>SAVINGS_PLANS_COVERAGE</code> budgets do not have <code>CostTypes</code>.</p>"
         },
         "TimeUnit": {
           "shape": "TimeUnit",
-          "documentation": "<p>The length of time until a budget resets the actual and forecasted spend. <code>DAILY</code> is available only for <code>RI_UTILIZATION</code>, <code>RI_COVERAGE</code>, <code>Savings_Plans_Utilization</code>, and <code>Savings_Plans_Coverage</code> budgets.</p>"
+          "documentation": "<p>The length of time until a budget resets the actual and forecasted spend.</p>"
         },
         "TimePeriod": {
           "shape": "TimePeriod",
@@ -508,7 +927,7 @@
           "documentation": "<p>The last time that you updated this budget.</p>"
         }
       },
-      "documentation": "<p>Represents the output of the <code>CreateBudget</code> operation. The content consists of the detailed metadata and data file information, and the current status of the <code>budget</code> object.</p> <p>This is the ARN pattern for a budget: </p> <p> <code>arn:aws:budgetservice::AccountId:budget/budgetName</code> </p>"
+      "documentation": "<p>Represents the output of the <code>CreateBudget</code> operation. The content consists of the detailed metadata and data file information, and the current status of the <code>budget</code> object.</p> <p>This is the ARN pattern for a budget: </p> <p> <code>arn:aws:budgets::AccountId:budget/budgetName</code> </p>"
     },
     "BudgetName": {
       "type": "string",
@@ -546,7 +965,7 @@
     },
     "BudgetType": {
       "type": "string",
-      "documentation": "<p> The type of a budget. It must be one of the following types: </p> <p> <code>COST</code>, <code>USAGE</code>, <code>RI_UTILIZATION</code>, or <code>RI_COVERAGE</code>.</p>",
+      "documentation": "<p> The type of a budget. It must be one of the following types: </p> <p> <code>COST</code>, <code>USAGE</code>, <code>RI_UTILIZATION</code>, <code>RI_COVERAGE</code>, <code>SAVINGS_PLANS_UTILIZATION</code>, or <code>SAVINGS_PLANS_COVERAGE</code>.</p>",
       "enum": [
         "USAGE",
         "COST",
@@ -595,14 +1014,14 @@
       "members": {
         "ActualSpend": {
           "shape": "Spend",
-          "documentation": "<p>The amount of cost, usage, or RI units that you have used.</p>"
+          "documentation": "<p>The amount of cost, usage, RI units, or Savings Plans units that you have used.</p>"
         },
         "ForecastedSpend": {
           "shape": "Spend",
-          "documentation": "<p>The amount of cost, usage, or RI units that you are forecasted to use.</p>"
+          "documentation": "<p>The amount of cost, usage, RI units, or Savings Plans units that you are forecasted to use.</p>"
         }
       },
-      "documentation": "<p>The spend objects that are associated with this budget. The <code>actualSpend</code> tracks how much you've used, cost, usage, or RI units, and the <code>forecastedSpend</code> tracks how much you are predicted to spend if your current usage remains steady.</p> <p>For example, if it is the 20th of the month and you have spent <code>50</code> dollars on Amazon EC2, your <code>actualSpend</code> is <code>50 USD</code>, and your <code>forecastedSpend</code> is <code>75 USD</code>.</p>"
+      "documentation": "<p>The spend objects that are associated with this budget. The <code>actualSpend</code> tracks how much you've used, cost, usage, RI units, or Savings Plans units and the <code>forecastedSpend</code> tracks how much you are predicted to spend based on your historical usage profile.</p> <p>For example, if it is the 20th of the month and you have spent <code>50</code> dollars on Amazon EC2, your <code>actualSpend</code> is <code>50 USD</code>, and your <code>forecastedSpend</code> is <code>75 USD</code>.</p>"
     },
     "ComparisonOperator": {
       "type": "string",
@@ -671,7 +1090,73 @@
           "documentation": "<p>Specifies whether a budget uses the amortized rate.</p> <p>The default value is <code>false</code>.</p>"
         }
       },
-      "documentation": "<p>The types of cost that are included in a <code>COST</code> budget, such as tax and subscriptions.</p> <p> <code>USAGE</code>, <code>RI_UTILIZATION</code>, and <code>RI_COVERAGE</code> budgets do not have <code>CostTypes</code>.</p>"
+      "documentation": "<p>The types of cost that are included in a <code>COST</code> budget, such as tax and subscriptions.</p> <p> <code>USAGE</code>, <code>RI_UTILIZATION</code>, <code>RI_COVERAGE</code>, <code>SAVINGS_PLANS_UTILIZATION</code>, and <code>SAVINGS_PLANS_COVERAGE</code> budgets do not have <code>CostTypes</code>.</p>"
+    },
+    "CreateBudgetActionRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "BudgetName",
+        "NotificationType",
+        "ActionType",
+        "ActionThreshold",
+        "Definition",
+        "ExecutionRoleArn",
+        "ApprovalModel",
+        "Subscribers"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "BudgetName": {
+          "shape": "BudgetName"
+        },
+        "NotificationType": {
+          "shape": "NotificationType"
+        },
+        "ActionType": {
+          "shape": "ActionType",
+          "documentation": "<p> The type of action. This defines the type of tasks that can be carried out by this action. This field also determines the format for definition. </p>"
+        },
+        "ActionThreshold": {
+          "shape": "ActionThreshold"
+        },
+        "Definition": {
+          "shape": "Definition"
+        },
+        "ExecutionRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p> The role passed for action execution and reversion. Roles and actions must be in the same account. </p>"
+        },
+        "ApprovalModel": {
+          "shape": "ApprovalModel",
+          "documentation": "<p> This specifies if the action needs manual or automatic approval. </p>"
+        },
+        "Subscribers": {
+          "shape": "Subscribers"
+        }
+      }
+    },
+    "CreateBudgetActionResponse": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "BudgetName",
+        "ActionId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "BudgetName": {
+          "shape": "BudgetName"
+        },
+        "ActionId": {
+          "shape": "ActionId",
+          "documentation": "<p> A system-generated universally unique identifier (UUID) for the action. </p>"
+        }
+      }
     },
     "CreateBudgetRequest": {
       "type": "structure",
@@ -766,6 +1251,63 @@
       "members": {},
       "documentation": "<p> Response of CreateSubscriber </p>"
     },
+    "Definition": {
+      "type": "structure",
+      "members": {
+        "IamActionDefinition": {
+          "shape": "IamActionDefinition",
+          "documentation": "<p> The AWS Identity and Access Management (IAM) action definition details. </p>"
+        },
+        "ScpActionDefinition": {
+          "shape": "ScpActionDefinition",
+          "documentation": "<p> The service control policies (SCPs) action definition details. </p>"
+        },
+        "SsmActionDefinition": {
+          "shape": "SsmActionDefinition",
+          "documentation": "<p> The AWS Systems Manager (SSM) action definition details. </p>"
+        }
+      },
+      "documentation": "<p> Specifies all of the type-specific parameters. </p>"
+    },
+    "DeleteBudgetActionRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "BudgetName",
+        "ActionId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "BudgetName": {
+          "shape": "BudgetName"
+        },
+        "ActionId": {
+          "shape": "ActionId",
+          "documentation": "<p> A system-generated universally unique identifier (UUID) for the action. </p>"
+        }
+      }
+    },
+    "DeleteBudgetActionResponse": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "BudgetName",
+        "Action"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "BudgetName": {
+          "shape": "BudgetName"
+        },
+        "Action": {
+          "shape": "Action"
+        }
+      }
+    },
     "DeleteBudgetRequest": {
       "type": "structure",
       "required": [
@@ -849,6 +1391,158 @@
       "type": "structure",
       "members": {},
       "documentation": "<p> Response of DeleteSubscriber </p>"
+    },
+    "DescribeBudgetActionHistoriesRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "BudgetName",
+        "ActionId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "BudgetName": {
+          "shape": "BudgetName"
+        },
+        "ActionId": {
+          "shape": "ActionId",
+          "documentation": "<p> A system-generated universally unique identifier (UUID) for the action. </p>"
+        },
+        "TimePeriod": {
+          "shape": "TimePeriod"
+        },
+        "MaxResults": {
+          "shape": "MaxResults"
+        },
+        "NextToken": {
+          "shape": "GenericString"
+        }
+      }
+    },
+    "DescribeBudgetActionHistoriesResponse": {
+      "type": "structure",
+      "required": [
+        "ActionHistories"
+      ],
+      "members": {
+        "ActionHistories": {
+          "shape": "ActionHistories",
+          "documentation": "<p> The historical record of the budget action resource. </p>"
+        },
+        "NextToken": {
+          "shape": "GenericString"
+        }
+      }
+    },
+    "DescribeBudgetActionRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "BudgetName",
+        "ActionId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "BudgetName": {
+          "shape": "BudgetName"
+        },
+        "ActionId": {
+          "shape": "ActionId",
+          "documentation": "<p> A system-generated universally unique identifier (UUID) for the action. </p>"
+        }
+      }
+    },
+    "DescribeBudgetActionResponse": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "BudgetName",
+        "Action"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "BudgetName": {
+          "shape": "BudgetName"
+        },
+        "Action": {
+          "shape": "Action",
+          "documentation": "<p> A budget action resource. </p>"
+        }
+      }
+    },
+    "DescribeBudgetActionsForAccountRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "MaxResults": {
+          "shape": "MaxResults"
+        },
+        "NextToken": {
+          "shape": "GenericString"
+        }
+      }
+    },
+    "DescribeBudgetActionsForAccountResponse": {
+      "type": "structure",
+      "required": [
+        "Actions"
+      ],
+      "members": {
+        "Actions": {
+          "shape": "Actions",
+          "documentation": "<p> A list of the budget action resources information. </p>"
+        },
+        "NextToken": {
+          "shape": "GenericString"
+        }
+      }
+    },
+    "DescribeBudgetActionsForBudgetRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "BudgetName"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "BudgetName": {
+          "shape": "BudgetName"
+        },
+        "MaxResults": {
+          "shape": "MaxResults"
+        },
+        "NextToken": {
+          "shape": "GenericString"
+        }
+      }
+    },
+    "DescribeBudgetActionsForBudgetResponse": {
+      "type": "structure",
+      "required": [
+        "Actions"
+      ],
+      "members": {
+        "Actions": {
+          "shape": "Actions",
+          "documentation": "<p> A list of the budget action resources information. </p>"
+        },
+        "NextToken": {
+          "shape": "GenericString"
+        }
+      }
     },
     "DescribeBudgetPerformanceHistoryRequest": {
       "type": "structure",
@@ -1041,6 +1735,75 @@
         "shape": "GenericString"
       }
     },
+    "EventType": {
+      "type": "string",
+      "enum": [
+        "SYSTEM",
+        "CREATE_ACTION",
+        "DELETE_ACTION",
+        "UPDATE_ACTION",
+        "EXECUTE_ACTION"
+      ]
+    },
+    "ExecuteBudgetActionRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "BudgetName",
+        "ActionId",
+        "ExecutionType"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "BudgetName": {
+          "shape": "BudgetName"
+        },
+        "ActionId": {
+          "shape": "ActionId",
+          "documentation": "<p> A system-generated universally unique identifier (UUID) for the action. </p>"
+        },
+        "ExecutionType": {
+          "shape": "ExecutionType",
+          "documentation": "<p> The type of execution. </p>"
+        }
+      }
+    },
+    "ExecuteBudgetActionResponse": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "BudgetName",
+        "ActionId",
+        "ExecutionType"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "BudgetName": {
+          "shape": "BudgetName"
+        },
+        "ActionId": {
+          "shape": "ActionId",
+          "documentation": "<p> A system-generated universally unique identifier (UUID) for the action. </p>"
+        },
+        "ExecutionType": {
+          "shape": "ExecutionType",
+          "documentation": "<p> The type of execution. </p>"
+        }
+      }
+    },
+    "ExecutionType": {
+      "type": "string",
+      "enum": [
+        "APPROVE_BUDGET_ACTION",
+        "RETRY_BUDGET_ACTION",
+        "REVERSE_BUDGET_ACTION",
+        "RESET_BUDGET_ACTION"
+      ]
+    },
     "GenericString": {
       "type": "string",
       "documentation": "<p> A generic string.</p>",
@@ -1051,6 +1814,59 @@
     "GenericTimestamp": {
       "type": "timestamp",
       "documentation": "<p> A generic time stamp. In Java, it is transformed to a <code>Date</code> object.</p>"
+    },
+    "Group": {
+      "type": "string",
+      "max": 640,
+      "min": 1,
+      "pattern": "^([\\u0021-\\u007F]+\\u002F)?[\\w+=,.@-]+$"
+    },
+    "Groups": {
+      "type": "list",
+      "member": {
+        "shape": "Group"
+      },
+      "max": 100,
+      "min": 1
+    },
+    "IamActionDefinition": {
+      "type": "structure",
+      "required": [
+        "PolicyArn"
+      ],
+      "members": {
+        "PolicyArn": {
+          "shape": "PolicyArn",
+          "documentation": "<p> The Amazon Resource Name (ARN) of the policy to be attached. </p>"
+        },
+        "Roles": {
+          "shape": "Roles",
+          "documentation": "<p> A list of roles to be attached. There must be at least one role. </p>"
+        },
+        "Groups": {
+          "shape": "Groups",
+          "documentation": "<p> A list of groups to be attached. There must be at least one group. </p>"
+        },
+        "Users": {
+          "shape": "Users",
+          "documentation": "<p> A list of users to be attached. There must be at least one user. </p>"
+        }
+      },
+      "documentation": "<p> The AWS Identity and Access Management (IAM) action definition details. </p>"
+    },
+    "InstanceId": {
+      "type": "string",
+      "max": 63,
+      "min": 1,
+      "pattern": "^i-(\\w{8}|\\w{17})$|^[a-zA-Z]([\\w-]{0,61}\\w)?$"
+    },
+    "InstanceIds": {
+      "type": "list",
+      "member": {
+        "shape": "InstanceId"
+      },
+      "max": 100,
+      "min": 1
     },
     "MaxResults": {
       "type": "integer",
@@ -1077,7 +1893,7 @@
         },
         "Threshold": {
           "shape": "NotificationThreshold",
-          "documentation": "<p>The threshold that is associated with a notification. Thresholds are always a percentage.</p>"
+          "documentation": "<p>The threshold that is associated with a notification. Thresholds are always a percentage, and many customers find value being alerted between 50% - 200% of the budgeted amount. The maximum limit for your threshold is 1,000,000% above the budgeted amount.</p>"
         },
         "ThresholdType": {
           "shape": "ThresholdType",
@@ -1088,7 +1904,7 @@
           "documentation": "<p>Whether this notification is in alarm. If a budget notification is in the <code>ALARM</code> state, you have passed the set threshold for the budget.</p>"
         }
       },
-      "documentation": "<p>A notification that is associated with a budget. A budget can have up to five notifications. </p> <p>Each notification must have at least one subscriber. A notification can have one SNS subscriber and up to 10 email subscribers, for a total of 11 subscribers.</p> <p>For example, if you have a budget for 200 dollars and you want to be notified when you go over 160 dollars, create a notification with the following parameters:</p> <ul> <li> <p>A notificationType of <code>ACTUAL</code> </p> </li> <li> <p>A <code>thresholdType</code> of <code>PERCENTAGE</code> </p> </li> <li> <p>A <code>comparisonOperator</code> of <code>GREATER_THAN</code> </p> </li> <li> <p>A notification <code>threshold</code> of <code>80</code> </p> </li> </ul>"
+      "documentation": "<p>A notification that is associated with a budget. A budget can have up to ten notifications. </p> <p>Each notification must have at least one subscriber. A notification can have one SNS subscriber and up to 10 email subscribers, for a total of 11 subscribers.</p> <p>For example, if you have a budget for 200 dollars and you want to be notified when you go over 160 dollars, create a notification with the following parameters:</p> <ul> <li> <p>A notificationType of <code>ACTUAL</code> </p> </li> <li> <p>A <code>thresholdType</code> of <code>PERCENTAGE</code> </p> </li> <li> <p>A <code>comparisonOperator</code> of <code>GREATER_THAN</code> </p> </li> <li> <p>A notification <code>threshold</code> of <code>80</code> </p> </li> </ul>"
     },
     "NotificationState": {
       "type": "string",
@@ -1099,8 +1915,8 @@
     },
     "NotificationThreshold": {
       "type": "double",
-      "documentation": "<p> The threshold of a notification. It must be a number between 0 and 1,000,000,000.</p>",
-      "max": 1000000000,
+      "documentation": "<p> The threshold of a notification.</p>",
+      "max": 40000000000,
       "min": 0
     },
     "NotificationType": {
@@ -1135,7 +1951,7 @@
         "shape": "NotificationWithSubscribers"
       },
       "documentation": "<p> A list of notifications, each with a list of subscribers.</p>",
-      "max": 5
+      "max": 10
     },
     "Notifications": {
       "type": "list",
@@ -1164,6 +1980,62 @@
         "shape": "Spend"
       }
     },
+    "PolicyArn": {
+      "type": "string",
+      "max": 684,
+      "min": 25,
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|us-iso-east-1|us-isob-east-1):iam::(\\d{12}|aws):policy(\\u002F[\\u0021-\\u007F]+\\u002F|\\u002F)[\\w+=,.@-]+$"
+    },
+    "PolicyId": {
+      "type": "string",
+      "max": 130,
+      "min": 10,
+      "pattern": "^p-[0-9a-zA-Z_]{8,128}$"
+    },
+    "Region": {
+      "type": "string",
+      "max": 20,
+      "min": 9,
+      "pattern": "^\\w{2}-\\w+(-\\w+)?-\\d$"
+    },
+    "Role": {
+      "type": "string",
+      "max": 576,
+      "min": 1,
+      "pattern": "^([\\u0021-\\u007F]+\\u002F)?[\\w+=,.@-]+$"
+    },
+    "RoleArn": {
+      "type": "string",
+      "max": 618,
+      "min": 32,
+      "pattern": "^arn:(aws|aws-cn|aws-us-gov|us-iso-east-1|us-isob-east-1):iam::\\d{12}:role(\\u002F[\\u0021-\\u007F]+\\u002F|\\u002F)[\\w+=,.@-]+$"
+    },
+    "Roles": {
+      "type": "list",
+      "member": {
+        "shape": "Role"
+      },
+      "max": 100,
+      "min": 1
+    },
+    "ScpActionDefinition": {
+      "type": "structure",
+      "required": [
+        "PolicyId",
+        "TargetIds"
+      ],
+      "members": {
+        "PolicyId": {
+          "shape": "PolicyId",
+          "documentation": "<p> The policy ID attached. </p>"
+        },
+        "TargetIds": {
+          "shape": "TargetIds",
+          "documentation": "<p> A list of target IDs. </p>"
+        }
+      },
+      "documentation": "<p> The service control policies (SCP) action definition details. </p>"
+    },
     "Spend": {
       "type": "structure",
       "required": [
@@ -1181,6 +2053,29 @@
         }
       },
       "documentation": "<p>The amount of cost or usage that is measured for a budget.</p> <p>For example, a <code>Spend</code> for <code>3 GB</code> of S3 usage would have the following parameters:</p> <ul> <li> <p>An <code>Amount</code> of <code>3</code> </p> </li> <li> <p>A <code>unit</code> of <code>GB</code> </p> </li> </ul>"
+    },
+    "SsmActionDefinition": {
+      "type": "structure",
+      "required": [
+        "ActionSubType",
+        "Region",
+        "InstanceIds"
+      ],
+      "members": {
+        "ActionSubType": {
+          "shape": "ActionSubType",
+          "documentation": "<p> The action subType. </p>"
+        },
+        "Region": {
+          "shape": "Region",
+          "documentation": "<p> The Region to run the SSM document. </p>"
+        },
+        "InstanceIds": {
+          "shape": "InstanceIds",
+          "documentation": "<p> The EC2 and RDS instance IDs. </p>"
+        }
+      },
+      "documentation": "<p> The AWS Systems Manager (SSM) action definition details. </p>"
     },
     "Subscriber": {
       "type": "structure",
@@ -1225,9 +2120,23 @@
         "EMAIL"
       ]
     },
+    "TargetId": {
+      "type": "string",
+      "max": 68,
+      "min": 12,
+      "pattern": "^(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32}$)|(\\d{12})"
+    },
+    "TargetIds": {
+      "type": "list",
+      "member": {
+        "shape": "TargetId"
+      },
+      "max": 100,
+      "min": 1
+    },
     "ThresholdType": {
       "type": "string",
-      "documentation": "<p> The type of threshold for a notification. It can be PERCENTAGE or ABSOLUTE_VALUE.</p>",
+      "documentation": "<p> The type of threshold for a notification.</p>",
       "enum": [
         "PERCENTAGE",
         "ABSOLUTE_VALUE"
@@ -1263,6 +2172,71 @@
       "max": 2147483647,
       "min": 1,
       "pattern": ".*"
+    },
+    "UpdateBudgetActionRequest": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "BudgetName",
+        "ActionId"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "BudgetName": {
+          "shape": "BudgetName"
+        },
+        "ActionId": {
+          "shape": "ActionId",
+          "documentation": "<p> A system-generated universally unique identifier (UUID) for the action. </p>"
+        },
+        "NotificationType": {
+          "shape": "NotificationType"
+        },
+        "ActionThreshold": {
+          "shape": "ActionThreshold"
+        },
+        "Definition": {
+          "shape": "Definition"
+        },
+        "ExecutionRoleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p> The role passed for action execution and reversion. Roles and actions must be in the same account. </p>"
+        },
+        "ApprovalModel": {
+          "shape": "ApprovalModel",
+          "documentation": "<p> This specifies if the action needs manual or automatic approval. </p>"
+        },
+        "Subscribers": {
+          "shape": "Subscribers"
+        }
+      }
+    },
+    "UpdateBudgetActionResponse": {
+      "type": "structure",
+      "required": [
+        "AccountId",
+        "BudgetName",
+        "OldAction",
+        "NewAction"
+      ],
+      "members": {
+        "AccountId": {
+          "shape": "AccountId"
+        },
+        "BudgetName": {
+          "shape": "BudgetName"
+        },
+        "OldAction": {
+          "shape": "Action",
+          "documentation": "<p> The previous action resource information. </p>"
+        },
+        "NewAction": {
+          "shape": "Action",
+          "documentation": "<p> The updated action resource information. </p>"
+        }
+      }
     },
     "UpdateBudgetRequest": {
       "type": "structure",
@@ -1357,6 +2331,20 @@
       "type": "structure",
       "members": {},
       "documentation": "<p> Response of UpdateSubscriber </p>"
+    },
+    "User": {
+      "type": "string",
+      "max": 576,
+      "min": 1,
+      "pattern": "^([\\u0021-\\u007F]+\\u002F)?[\\w+=,.@-]+$"
+    },
+    "Users": {
+      "type": "list",
+      "member": {
+        "shape": "User"
+      },
+      "max": 100,
+      "min": 1
     }
   },
   "documentation": "<p>The AWS Budgets API enables you to use AWS Budgets to plan your service usage, service costs, and instance reservations. The API reference provides descriptions, syntax, and usage examples for each of the actions and data types for AWS Budgets. </p> <p>Budgets provide you with a way to see the following information:</p> <ul> <li> <p>How close your plan is to your budgeted amount or to the free tier limits</p> </li> <li> <p>Your usage-to-date, including how much you've used of your Reserved Instances (RIs)</p> </li> <li> <p>Your current estimated charges from AWS, and how much your predicted usage will accrue in charges by the end of the month</p> </li> <li> <p>How much of your budget has been used</p> </li> </ul> <p>AWS updates your budget status several times a day. Budgets track your unblended costs, subscriptions, refunds, and RIs. You can create the following types of budgets:</p> <ul> <li> <p> <b>Cost budgets</b> - Plan how much you want to spend on a service.</p> </li> <li> <p> <b>Usage budgets</b> - Plan how much you want to use one or more services.</p> </li> <li> <p> <b>RI utilization budgets</b> - Define a utilization threshold, and receive alerts when your RI usage falls below that threshold. This lets you see if your RIs are unused or under-utilized.</p> </li> <li> <p> <b>RI coverage budgets</b> - Define a coverage threshold, and receive alerts when the number of your instance hours that are covered by RIs fall below that threshold. This lets you see how much of your instance usage is covered by a reservation.</p> </li> </ul> <p>Service Endpoint</p> <p>The AWS Budgets API provides the following endpoint:</p> <ul> <li> <p>https://budgets.amazonaws.com</p> </li> </ul> <p>For information about costs that are associated with the AWS Budgets API, see <a href=\"https://aws.amazon.com/aws-cost-management/pricing/\">AWS Cost Management Pricing</a>.</p>"

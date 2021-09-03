@@ -929,7 +929,7 @@ declare namespace RoboMaker {
      */
     iamRole: IamRole;
     /**
-     * The failure behavior the simulation job.  Continue  Restart the simulation job in the same host instance.  Fail  Stop the simulation job and terminate the instance.  
+     * The failure behavior the simulation job.  Continue  Leaves the instance running for its maximum timeout duration after a 4XX error code.  Fail  Stop the simulation job and terminate the instance.  
      */
     failureBehavior?: FailureBehavior;
     /**
@@ -1065,7 +1065,7 @@ declare namespace RoboMaker {
      */
     createdAt?: CreatedAt;
     /**
-     * The failure code of the world export job if it failed:  InternalServiceError  Internal service error.  LimitExceeded  The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed.   ResourceNotFound  The specified resource could not be found.   RequestThrottled  The request was throttled.  InvalidInput  An input parameter in the request is not valid.  
+     * The failure code of the world export job if it failed:  InternalServiceError  Internal service error.  LimitExceeded  The requested resource exceeds the maximum number allowed, or the number of concurrent stream requests exceeds the maximum number allowed.   ResourceNotFound  The specified resource could not be found.   RequestThrottled  The request was throttled.  InvalidInput  An input parameter in the request is not valid.  AllWorldGenerationFailed  All of the worlds in the world generation job failed. This can happen if your worldCount is greater than 50 or less than 1.    For more information about troubleshooting WorldForge, see Troubleshooting Simulation WorldForge. 
      */
     failureCode?: WorldExportJobErrorCode;
     /**
@@ -1099,6 +1099,10 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the world generator job.
      */
     tags?: TagMap;
+    /**
+     * A map that contains tag keys and tag values that are attached to the generated worlds.
+     */
+    worldTags?: TagMap;
   }
   export interface CreateWorldGenerationJobResponse {
     /**
@@ -1133,6 +1137,10 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the world generator job.
      */
     tags?: TagMap;
+    /**
+     * A map that contains tag keys and tag values that are attached to the generated worlds.
+     */
+    worldTags?: TagMap;
   }
   export interface CreateWorldTemplateRequest {
     /**
@@ -1325,7 +1333,7 @@ declare namespace RoboMaker {
      */
     createdAt?: CreatedAt;
   }
-  export type DeploymentJobErrorCode = "ResourceNotFound"|"EnvironmentSetupError"|"EtagMismatch"|"FailureThresholdBreached"|"RobotDeploymentAborted"|"RobotDeploymentNoResponse"|"RobotAgentConnectionTimeout"|"GreengrassDeploymentFailed"|"InvalidGreengrassGroup"|"MissingRobotArchitecture"|"MissingRobotApplicationArchitecture"|"MissingRobotDeploymentResource"|"GreengrassGroupVersionDoesNotExist"|"LambdaDeleted"|"ExtractingBundleFailure"|"PreLaunchFileFailure"|"PostLaunchFileFailure"|"BadPermissionError"|"DownloadConditionFailed"|"InternalServerError"|string;
+  export type DeploymentJobErrorCode = "ResourceNotFound"|"EnvironmentSetupError"|"EtagMismatch"|"FailureThresholdBreached"|"RobotDeploymentAborted"|"RobotDeploymentNoResponse"|"RobotAgentConnectionTimeout"|"GreengrassDeploymentFailed"|"InvalidGreengrassGroup"|"MissingRobotArchitecture"|"MissingRobotApplicationArchitecture"|"MissingRobotDeploymentResource"|"GreengrassGroupVersionDoesNotExist"|"LambdaDeleted"|"ExtractingBundleFailure"|"PreLaunchFileFailure"|"PostLaunchFileFailure"|"BadPermissionError"|"DownloadConditionFailed"|"BadLambdaAssociated"|"InternalServerError"|"RobotApplicationDoesNotExist"|"DeploymentFleetDoesNotExist"|"FleetDeploymentTimeout"|string;
   export type DeploymentJobs = DeploymentJob[];
   export interface DeploymentLaunchConfig {
     /**
@@ -1844,6 +1852,10 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the world generation job.
      */
     tags?: TagMap;
+    /**
+     * A map that contains tag keys and tag values that are attached to the generated worlds.
+     */
+    worldTags?: TagMap;
   }
   export interface DescribeWorldRequest {
     /**
@@ -1872,6 +1884,10 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the world.
      */
     tags?: TagMap;
+    /**
+     * Returns the JSON formatted string that describes the contents of your world.
+     */
+    worldDescriptionBody?: Json;
   }
   export interface DescribeWorldTemplateRequest {
     /**
@@ -1904,10 +1920,15 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the world template.
      */
     tags?: TagMap;
+    /**
+     * The version of the world template that you're using.
+     */
+    version?: GenericString;
   }
   export type EnvironmentVariableKey = string;
   export type EnvironmentVariableMap = {[key: string]: EnvironmentVariableValue};
   export type EnvironmentVariableValue = string;
+  export type ExitBehavior = "FAIL"|"RESTART"|string;
   export type FailedAt = Date;
   export interface FailedCreateSimulationJobRequest {
     /**
@@ -2037,7 +2058,7 @@ declare namespace RoboMaker {
      */
     portForwardingConfig?: PortForwardingConfig;
     /**
-     * Boolean indicating whether a streaming session will be configured for the application. If True, AWS RoboMaker will configure a connection so you can interact with your application as it is running in the simulation. You must configure and luanch the component. It must have a graphical user interface. 
+     * Boolean indicating whether a streaming session will be configured for the application. If True, AWS RoboMaker will configure a connection so you can interact with your application as it is running in the simulation. You must configure and launch the component. It must have a graphical user interface. 
      */
     streamUI?: Boolean;
   }
@@ -2492,6 +2513,22 @@ declare namespace RoboMaker {
      * The launch configuration for the robot application.
      */
     launchConfig: LaunchConfig;
+    /**
+     * The upload configurations for the robot application.
+     */
+    uploadConfigurations?: UploadConfigurations;
+    /**
+     * A Boolean indicating whether to use default upload configurations. By default, .ros and .gazebo files are uploaded when the application terminates and all ROS topics will be recorded. If you set this value, you must specify an outputLocation. 
+     */
+    useDefaultUploadConfigurations?: BoxedBoolean;
+    /**
+     * Information about tools configured for the robot application.
+     */
+    tools?: Tools;
+    /**
+     * A Boolean indicating whether to use default robot application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is False. 
+     */
+    useDefaultTools?: BoxedBoolean;
   }
   export type RobotApplicationConfigs = RobotApplicationConfig[];
   export type RobotApplicationNames = Name[];
@@ -2561,7 +2598,7 @@ declare namespace RoboMaker {
     version?: RobotSoftwareSuiteVersionType;
   }
   export type RobotSoftwareSuiteType = "ROS"|"ROS2"|string;
-  export type RobotSoftwareSuiteVersionType = "Kinetic"|"Melodic"|"Dashing"|string;
+  export type RobotSoftwareSuiteVersionType = "Kinetic"|"Melodic"|"Dashing"|"Foxy"|string;
   export type RobotStatus = "Available"|"Registered"|"PendingNewDeployment"|"Deploying"|"Failed"|"InSync"|"NoResponse"|string;
   export type Robots = Robot[];
   export type S3Bucket = string;
@@ -2608,9 +2645,25 @@ declare namespace RoboMaker {
      */
     launchConfig: LaunchConfig;
     /**
+     * Information about upload configurations for the simulation application.
+     */
+    uploadConfigurations?: UploadConfigurations;
+    /**
      * A list of world configurations.
      */
     worldConfigs?: WorldConfigs;
+    /**
+     * A Boolean indicating whether to use default upload configurations. By default, .ros and .gazebo files are uploaded when the application terminates and all ROS topics will be recorded. If you set this value, you must specify an outputLocation. 
+     */
+    useDefaultUploadConfigurations?: BoxedBoolean;
+    /**
+     * Information about tools configured for the simulation application.
+     */
+    tools?: Tools;
+    /**
+     * A Boolean indicating whether to use default simulation application tools. The default tools are rviz, rqt, terminal and rosbag record. The default is False. 
+     */
+    useDefaultTools?: BoxedBoolean;
   }
   export type SimulationApplicationConfigs = SimulationApplicationConfig[];
   export type SimulationApplicationNames = Name[];
@@ -2663,7 +2716,7 @@ declare namespace RoboMaker {
      */
     lastUpdatedAt?: LastUpdatedAt;
     /**
-     * The failure behavior the simulation job.  Continue  Restart the simulation job in the same host instance.  Fail  Stop the simulation job and terminate the instance.  
+     * The failure behavior the simulation job.  Continue  Leaves the host running for its maximum timeout duration after a 4XX error code.  Fail  Stop the simulation job and terminate the instance.  
      */
     failureBehavior?: FailureBehavior;
     /**
@@ -2760,7 +2813,7 @@ declare namespace RoboMaker {
      */
     createdRequestCount?: Integer;
   }
-  export type SimulationJobErrorCode = "InternalServiceError"|"RobotApplicationCrash"|"SimulationApplicationCrash"|"BadPermissionsRobotApplication"|"BadPermissionsSimulationApplication"|"BadPermissionsS3Object"|"BadPermissionsS3Output"|"BadPermissionsCloudwatchLogs"|"SubnetIpLimitExceeded"|"ENILimitExceeded"|"BadPermissionsUserCredentials"|"InvalidBundleRobotApplication"|"InvalidBundleSimulationApplication"|"InvalidS3Resource"|"LimitExceeded"|"MismatchedEtag"|"RobotApplicationVersionMismatchedEtag"|"SimulationApplicationVersionMismatchedEtag"|"ResourceNotFound"|"RequestThrottled"|"BatchTimedOut"|"BatchCanceled"|"InvalidInput"|"WrongRegionS3Bucket"|"WrongRegionS3Output"|"WrongRegionRobotApplication"|"WrongRegionSimulationApplication"|string;
+  export type SimulationJobErrorCode = "InternalServiceError"|"RobotApplicationCrash"|"SimulationApplicationCrash"|"RobotApplicationHealthCheckFailure"|"SimulationApplicationHealthCheckFailure"|"BadPermissionsRobotApplication"|"BadPermissionsSimulationApplication"|"BadPermissionsS3Object"|"BadPermissionsS3Output"|"BadPermissionsCloudwatchLogs"|"SubnetIpLimitExceeded"|"ENILimitExceeded"|"BadPermissionsUserCredentials"|"InvalidBundleRobotApplication"|"InvalidBundleSimulationApplication"|"InvalidS3Resource"|"ThrottlingError"|"LimitExceeded"|"MismatchedEtag"|"RobotApplicationVersionMismatchedEtag"|"SimulationApplicationVersionMismatchedEtag"|"ResourceNotFound"|"RequestThrottled"|"BatchTimedOut"|"BatchCanceled"|"InvalidInput"|"WrongRegionS3Bucket"|"WrongRegionS3Output"|"WrongRegionRobotApplication"|"WrongRegionSimulationApplication"|"UploadContentMismatchError"|string;
   export interface SimulationJobRequest {
     outputLocation?: OutputLocation;
     loggingConfig?: LoggingConfig;
@@ -2773,11 +2826,11 @@ declare namespace RoboMaker {
      */
     iamRole?: IamRole;
     /**
-     * The failure behavior the simulation job.  Continue  Restart the simulation job in the same host instance.  Fail  Stop the simulation job and terminate the instance.  
+     * The failure behavior the simulation job.  Continue  Leaves the host running for its maximum timeout duration after a 4XX error code.  Fail  Stop the simulation job and terminate the instance.  
      */
     failureBehavior?: FailureBehavior;
     /**
-     * Boolean indicating whether to use default simulation tool applications.
+     * A Boolean indicating whether to use default applications in the simulation job. Default applications include Gazebo, rqt, rviz and terminal access. 
      */
     useDefaultApplications?: BoxedBoolean;
     /**
@@ -3037,7 +3090,35 @@ declare namespace RoboMaker {
      * The name of the template.
      */
     name?: TemplateName;
+    /**
+     * The version of the template that you're using.
+     */
+    version?: GenericString;
   }
+  export interface Tool {
+    /**
+     * Boolean indicating whether a streaming session will be configured for the tool. If True, AWS RoboMaker will configure a connection so you can interact with the tool as it is running in the simulation. It must have a graphical user interface. The default is False. 
+     */
+    streamUI?: BoxedBoolean;
+    /**
+     * The name of the tool.
+     */
+    name: Name;
+    /**
+     * Command-line arguments for the tool. It must include the tool executable name.
+     */
+    command: UnrestrictedCommand;
+    /**
+     * Boolean indicating whether logs will be recorded in CloudWatch for the tool. The default is False. 
+     */
+    streamOutputToCloudWatch?: BoxedBoolean;
+    /**
+     * Exit behavior determines what happens when your tool quits running. RESTART will cause your tool to be restarted. FAIL will cause your job to exit. The default is RESTART. 
+     */
+    exitBehavior?: ExitBehavior;
+  }
+  export type Tools = Tool[];
+  export type UnrestrictedCommand = string;
   export interface UntagResourceRequest {
     /**
      * The Amazon Resource Name (ARN) of the AWS RoboMaker resource you are removing tags.
@@ -3198,6 +3279,22 @@ declare namespace RoboMaker {
      */
     lastUpdatedAt?: LastUpdatedAt;
   }
+  export type UploadBehavior = "UPLOAD_ON_TERMINATE"|"UPLOAD_ROLLING_AUTO_REMOVE"|string;
+  export interface UploadConfiguration {
+    /**
+     * A prefix that specifies where files will be uploaded in Amazon S3. It is appended to the simulation output location to determine the final path.   For example, if your simulation output location is s3://my-bucket and your upload configuration name is robot-test, your files will be uploaded to s3://my-bucket/&lt;simid&gt;/&lt;runid&gt;/robot-test. 
+     */
+    name: Name;
+    /**
+     *  Specifies the path of the file(s) to upload. Standard Unix glob matching rules are accepted, with the addition of ** as a super asterisk. For example, specifying /var/log/**.log causes all .log files in the /var/log directory tree to be collected. For more examples, see Glob Library. 
+     */
+    path: Path;
+    /**
+     * Specifies when to upload the files:  UPLOAD_ON_TERMINATE  Matching files are uploaded once the simulation enters the TERMINATING state. Matching files are not uploaded until all of your code (including tools) have stopped.  If there is a problem uploading a file, the upload is retried. If problems persist, no further upload attempts will be made.  UPLOAD_ROLLING_AUTO_REMOVE  Matching files are uploaded as they are created. They are deleted after they are uploaded. The specified path is checked every 5 seconds. A final check is made when all of your code (including tools) have stopped.   
+     */
+    uploadBehavior: UploadBehavior;
+  }
+  export type UploadConfigurations = UploadConfiguration[];
   export interface VPCConfig {
     /**
      * A list of one or more subnet IDs in your VPC.

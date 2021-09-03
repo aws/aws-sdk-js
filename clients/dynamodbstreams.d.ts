@@ -49,43 +49,43 @@ declare namespace DynamoDBStreams {
   export type AttributeName = string;
   export interface AttributeValue {
     /**
-     * A String data type.
+     * An attribute of type String. For example:  "S": "Hello" 
      */
     S?: StringAttributeValue;
     /**
-     * A Number data type.
+     * An attribute of type Number. For example:  "N": "123.45"  Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
      */
     N?: NumberAttributeValue;
     /**
-     * A Binary data type.
+     * An attribute of type Binary. For example:  "B": "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk" 
      */
     B?: BinaryAttributeValue;
     /**
-     * A String Set data type.
+     * An attribute of type String Set. For example:  "SS": ["Giraffe", "Hippo" ,"Zebra"] 
      */
     SS?: StringSetAttributeValue;
     /**
-     * A Number Set data type.
+     * An attribute of type Number Set. For example:  "NS": ["42.2", "-19", "7.5", "3.14"]  Numbers are sent across the network to DynamoDB as strings, to maximize compatibility across languages and libraries. However, DynamoDB treats them as number type attributes for mathematical operations.
      */
     NS?: NumberSetAttributeValue;
     /**
-     * A Binary Set data type.
+     * An attribute of type Binary Set. For example:  "BS": ["U3Vubnk=", "UmFpbnk=", "U25vd3k="] 
      */
     BS?: BinarySetAttributeValue;
     /**
-     * A Map data type.
+     * An attribute of type Map. For example:  "M": {"Name": {"S": "Joe"}, "Age": {"N": "35"}} 
      */
     M?: MapAttributeValue;
     /**
-     * A List data type.
+     * An attribute of type List. For example:  "L": [ {"S": "Cookies"} , {"S": "Coffee"}, {"N", "3.14159"}] 
      */
     L?: ListAttributeValue;
     /**
-     * A Null data type.
+     * An attribute of type Null. For example:  "NULL": true 
      */
     NULL?: NullAttributeValue;
     /**
-     * A Boolean data type.
+     * An attribute of type Boolean. For example:  "BOOL": true 
      */
     BOOL?: BooleanAttributeValue;
   }
@@ -175,7 +175,7 @@ declare namespace DynamoDBStreams {
      */
     AttributeName: KeySchemaAttributeName;
     /**
-     * The attribute data, consisting of the data type and the attribute value itself.
+     * The role that this key attribute will assume:    HASH - partition key    RANGE - sort key    The partition key of an item is also known as its hash attribute. The term "hash attribute" derives from DynamoDB's usage of an internal hash function to evenly distribute data items across partitions, based on their partition key values. The sort key of an item is also known as its range attribute. The term "range attribute" derives from the way DynamoDB stores items with the same partition key physically close together, in sorted order by the sort key value. 
      */
     KeyType: KeyType;
   }
@@ -246,11 +246,11 @@ declare namespace DynamoDBStreams {
   export type SequenceNumber = string;
   export interface SequenceNumberRange {
     /**
-     * The first sequence number.
+     * The first sequence number for the stream records contained within a shard. String contains numeric characters only.
      */
     StartingSequenceNumber?: SequenceNumber;
     /**
-     * The last sequence number.
+     * The last sequence number for the stream records contained within a shard. String contains numeric characters only.
      */
     EndingSequenceNumber?: SequenceNumber;
   }

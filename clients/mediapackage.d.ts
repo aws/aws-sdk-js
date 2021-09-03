@@ -12,6 +12,14 @@ declare class MediaPackage extends Service {
   constructor(options?: MediaPackage.Types.ClientConfiguration)
   config: Config & MediaPackage.Types.ClientConfiguration;
   /**
+   * Changes the Channel's properities to configure log subscription
+   */
+  configureLogs(params: MediaPackage.Types.ConfigureLogsRequest, callback?: (err: AWSError, data: MediaPackage.Types.ConfigureLogsResponse) => void): Request<MediaPackage.Types.ConfigureLogsResponse, AWSError>;
+  /**
+   * Changes the Channel's properities to configure log subscription
+   */
+  configureLogs(callback?: (err: AWSError, data: MediaPackage.Types.ConfigureLogsResponse) => void): Request<MediaPackage.Types.ConfigureLogsResponse, AWSError>;
+  /**
    * Creates a new Channel.
    */
   createChannel(params: MediaPackage.Types.CreateChannelRequest, callback?: (err: AWSError, data: MediaPackage.Types.CreateChannelResponse) => void): Request<MediaPackage.Types.CreateChannelResponse, AWSError>;
@@ -181,14 +189,20 @@ declare namespace MediaPackage {
      * A short text description of the Channel.
      */
     Description?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
     HlsIngest?: HlsIngest;
     /**
      * The ID of the Channel.
      */
     Id?: __string;
+    IngressAccessLogs?: IngressAccessLogs;
     Tags?: Tags;
   }
   export interface CmafEncryption {
+    /**
+     * An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).
+     */
+    ConstantInitializationVector?: __string;
     /**
      * Time (in seconds) between each encryption key rotation.
      */
@@ -231,6 +245,32 @@ rounded to the nearest multiple of the source segment duration.
     SegmentPrefix?: __string;
     StreamSelection?: StreamSelection;
   }
+  export interface ConfigureLogsRequest {
+    EgressAccessLogs?: EgressAccessLogs;
+    /**
+     * The ID of the channel to log subscription.
+     */
+    Id: __string;
+    IngressAccessLogs?: IngressAccessLogs;
+  }
+  export interface ConfigureLogsResponse {
+    /**
+     * The Amazon Resource Name (ARN) assigned to the Channel.
+     */
+    Arn?: __string;
+    /**
+     * A short text description of the Channel.
+     */
+    Description?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
+    HlsIngest?: HlsIngest;
+    /**
+     * The ID of the Channel.
+     */
+    Id?: __string;
+    IngressAccessLogs?: IngressAccessLogs;
+    Tags?: Tags;
+  }
   export interface CreateChannelRequest {
     /**
      * A short text description of the Channel.
@@ -253,11 +293,13 @@ cannot be changed after a Channel is created.
      * A short text description of the Channel.
      */
     Description?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
     HlsIngest?: HlsIngest;
     /**
      * The ID of the Channel.
      */
     Id?: __string;
+    IngressAccessLogs?: IngressAccessLogs;
     Tags?: Tags;
   }
   export interface CreateHarvestJobRequest {
@@ -492,6 +534,14 @@ rounded to the nearest multiple of the source segment duration.
      * Duration (in seconds) to delay live content before presentation.
      */
     SuggestedPresentationDelaySeconds?: __integer;
+    /**
+     * Determines the type of UTCTiming included in the Media Presentation Description (MPD)
+     */
+    UtcTiming?: UtcTiming;
+    /**
+     * Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO or HTTP-HEAD
+     */
+    UtcTimingUri?: __string;
   }
   export interface DeleteChannelRequest {
     /**
@@ -524,11 +574,13 @@ rounded to the nearest multiple of the source segment duration.
      * A short text description of the Channel.
      */
     Description?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
     HlsIngest?: HlsIngest;
     /**
      * The ID of the Channel.
      */
     Id?: __string;
+    IngressAccessLogs?: IngressAccessLogs;
     Tags?: Tags;
   }
   export interface DescribeHarvestJobRequest {
@@ -644,6 +696,22 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      * A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.
      */
     Whitelist?: __listOf__string;
+  }
+  export interface EgressAccessLogs {
+    /**
+     * Customize the log group name.
+     */
+    LogGroupName?: __string;
+  }
+  export interface EncryptionContractConfiguration {
+    /**
+     * A collection of audio encryption presets.
+     */
+    PresetSpeke20Audio: PresetSpeke20Audio;
+    /**
+     * A collection of video encryption presets.
+     */
+    PresetSpeke20Video: PresetSpeke20Video;
   }
   export type EncryptionMethod = "AES_128"|"SAMPLE_AES"|string;
   export interface HarvestJob {
@@ -903,6 +971,12 @@ rounded to the nearest multiple of the source fragment duration.
      */
     Username?: __string;
   }
+  export interface IngressAccessLogs {
+    /**
+     * Customize the log group name.
+     */
+    LogGroupName?: __string;
+  }
   export interface ListChannelsRequest {
     /**
      * Upper bound on number of records to return.
@@ -1055,6 +1129,8 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
   }
   export type Origination = "ALLOW"|"DENY"|string;
   export type PlaylistType = "NONE"|"EVENT"|"VOD"|string;
+  export type PresetSpeke20Audio = "PRESET-AUDIO-1"|string;
+  export type PresetSpeke20Video = "PRESET-VIDEO-1"|string;
   export type Profile = "NONE"|"HBBTV_1_5"|string;
   export interface RotateChannelCredentialsRequest {
     /**
@@ -1071,11 +1147,13 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      * A short text description of the Channel.
      */
     Description?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
     HlsIngest?: HlsIngest;
     /**
      * The ID of the Channel.
      */
     Id?: __string;
+    IngressAccessLogs?: IngressAccessLogs;
     Tags?: Tags;
   }
   export interface RotateIngestEndpointCredentialsRequest {
@@ -1097,11 +1175,13 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      * A short text description of the Channel.
      */
     Description?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
     HlsIngest?: HlsIngest;
     /**
      * The ID of the Channel.
      */
     Id?: __string;
+    IngressAccessLogs?: IngressAccessLogs;
     Tags?: Tags;
   }
   export interface S3Destination {
@@ -1130,6 +1210,7 @@ transfer with the key provider service.
 
      */
     CertificateArn?: __string;
+    EncryptionContractConfiguration?: EncryptionContractConfiguration;
     /**
      * The resource ID to include in key requests.
      */
@@ -1196,11 +1277,13 @@ MediaPackage will assume when accessing the key provider service.
      * A short text description of the Channel.
      */
     Description?: __string;
+    EgressAccessLogs?: EgressAccessLogs;
     HlsIngest?: HlsIngest;
     /**
      * The ID of the Channel.
      */
     Id?: __string;
+    IngressAccessLogs?: IngressAccessLogs;
     Tags?: Tags;
   }
   export interface UpdateOriginEndpointRequest {
@@ -1300,6 +1383,7 @@ If not specified, there will be no time delay in effect for the OriginEndpoint.
      */
     Whitelist?: __listOf__string;
   }
+  export type UtcTiming = "NONE"|"HTTP-HEAD"|"HTTP-ISO"|string;
   export type __AdTriggersElement = "SPLICE_INSERT"|"BREAK"|"PROVIDER_ADVERTISEMENT"|"DISTRIBUTOR_ADVERTISEMENT"|"PROVIDER_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_PLACEMENT_OPPORTUNITY"|"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY"|"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"|string;
   export type __PeriodTriggersElement = "ADS"|string;
   export type __boolean = boolean;

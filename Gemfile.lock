@@ -1,15 +1,3 @@
-GIT
-  remote: git://github.com/lsegal/yard-js.git
-  revision: c76decbd26c9fe82889d72e10ce50c12cdbe51ff
-  specs:
-    yard-js (0.1.3)
-
-GIT
-  remote: git://github.com/lsegal/yard.git
-  revision: 106c5d0987d4414247d246dae3d4c588235c5dde
-  specs:
-    yard (0.8.7.6)
-
 PATH
   remote: doc-src/parsejs
   specs:
@@ -17,14 +5,24 @@ PATH
       kpeg
       yard
 
+PATH
+  remote: doc-src/yard-js
+  specs:
+    yard-js (0.1.3)
+
+PATH
+  remote: doc-src/yard
+  specs:
+    yard (0.9.26)
+
 GEM
   remote: https://rubygems.org/
   specs:
     kpeg (1.1.0)
-    rake (13.0.1)
-    rdiscount (2.1.7)
-    redcarpet (3.2.0)
-    samus (1.4.1)
+    rake (13.0.6)
+    rdiscount (2.2.0.2)
+    redcarpet (3.5.1)
+    samus (3.0.9)
     yard-sitemap (1.0.1)
 
 PLATFORMS
@@ -41,4 +39,4 @@ DEPENDENCIES
   yard-sitemap (~> 1.0)
 
 BUNDLED WITH
-   1.14.6
+   1.17.3

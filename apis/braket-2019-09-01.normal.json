@@ -107,6 +107,12 @@
           "shape": "ThrottlingException"
         },
         {
+          "shape": "DeviceOfflineException"
+        },
+        {
+          "shape": "DeviceRetiredException"
+        },
+        {
           "shape": "InternalServiceException"
         },
         {
@@ -146,6 +152,32 @@
         }
       ],
       "documentation": "<p>Retrieves the specified quantum task.</p>"
+    },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Shows the tags associated with this resource.</p>"
     },
     "SearchDevices": {
       "name": "SearchDevices",
@@ -204,6 +236,59 @@
         }
       ],
       "documentation": "<p>Searches for tasks that match the specified filter values.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Add a tag to the specified resource.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "InternalServiceException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Remove tags from a resource.</p>",
+      "idempotent": true
     }
   },
   "shapes": {
@@ -247,8 +332,8 @@
     "CancellationStatus": {
       "type": "string",
       "enum": [
-        "CANCELLED",
-        "CANCELLING"
+        "CANCELLING",
+        "CANCELLED"
       ]
     },
     "CreateQuantumTaskRequest": {
@@ -277,40 +362,44 @@
           "documentation": "<p>The ARN of the device to run the task on.</p>"
         },
         "deviceParameters": {
-          "shape": "CreateQuantumTaskRequestdeviceParametersJsonValue",
+          "shape": "CreateQuantumTaskRequestDeviceParametersString",
           "documentation": "<p>The parameters for the device to run the task on.</p>",
           "jsonvalue": true
         },
         "outputS3Bucket": {
-          "shape": "CreateQuantumTaskRequestoutputS3BucketString",
+          "shape": "CreateQuantumTaskRequestOutputS3BucketString",
           "documentation": "<p>The S3 bucket to store task result files in.</p>"
         },
         "outputS3KeyPrefix": {
-          "shape": "CreateQuantumTaskRequestoutputS3KeyPrefixString",
+          "shape": "CreateQuantumTaskRequestOutputS3KeyPrefixString",
           "documentation": "<p>The key prefix for the location in the S3 bucket to store task results in.</p>"
         },
         "shots": {
-          "shape": "CreateQuantumTaskRequestshotsLong",
+          "shape": "CreateQuantumTaskRequestShotsLong",
           "documentation": "<p>The number of shots to use for the task.</p>"
+        },
+        "tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>Tags to be added to the quantum task you're creating.</p>"
         }
       }
     },
-    "CreateQuantumTaskRequestdeviceParametersJsonValue": {
+    "CreateQuantumTaskRequestDeviceParametersString": {
       "type": "string",
-      "max": 2048,
+      "max": 48000,
       "min": 1
     },
-    "CreateQuantumTaskRequestoutputS3BucketString": {
+    "CreateQuantumTaskRequestOutputS3BucketString": {
       "type": "string",
       "max": 63,
       "min": 3
     },
-    "CreateQuantumTaskRequestoutputS3KeyPrefixString": {
+    "CreateQuantumTaskRequestOutputS3KeyPrefixString": {
       "type": "string",
       "max": 1024,
       "min": 1
     },
-    "CreateQuantumTaskRequestshotsLong": {
+    "CreateQuantumTaskRequestShotsLong": {
       "type": "long",
       "box": true,
       "min": 0
@@ -335,8 +424,9 @@
     "DeviceStatus": {
       "type": "string",
       "enum": [
+        "ONLINE",
         "OFFLINE",
-        "ONLINE"
+        "RETIRED"
       ]
     },
     "DeviceSummary": {
@@ -504,11 +594,38 @@
         "status": {
           "shape": "QuantumTaskStatus",
           "documentation": "<p>The status of the task.</p>"
+        },
+        "tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>The tags that belong to this task.</p>"
         }
       }
     },
     "JsonValue": {
       "type": "string"
+    },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "String",
+          "documentation": "<p>Specify the <code>resourceArn</code> for the resource whose tags to display.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>Displays the key, value pairs of tags associated with this resource.</p>"
+        }
+      }
     },
     "Long": {
       "type": "long",
@@ -522,13 +639,13 @@
     "QuantumTaskStatus": {
       "type": "string",
       "enum": [
-        "CANCELLED",
-        "CANCELLING",
-        "COMPLETED",
         "CREATED",
-        "FAILED",
         "QUEUED",
-        "RUNNING"
+        "RUNNING",
+        "COMPLETED",
+        "FAILED",
+        "CANCELLING",
+        "CANCELLED"
       ]
     },
     "QuantumTaskSummary": {
@@ -574,6 +691,10 @@
         "status": {
           "shape": "QuantumTaskStatus",
           "documentation": "<p>The status of the task.</p>"
+        },
+        "tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>Displays the key, value pairs of tags associated with this quantum task.</p>"
         }
       },
       "documentation": "<p>Includes information about a quantum task.</p>"
@@ -592,22 +713,22 @@
       ],
       "members": {
         "name": {
-          "shape": "SearchDevicesFilternameString",
+          "shape": "SearchDevicesFilterNameString",
           "documentation": "<p>The name to use to filter results.</p>"
         },
         "values": {
-          "shape": "SearchDevicesFiltervaluesString256List",
+          "shape": "SearchDevicesFilterValuesList",
           "documentation": "<p>The values to use to filter results.</p>"
         }
       },
       "documentation": "<p>The filter to use for searching devices.</p>"
     },
-    "SearchDevicesFilternameString": {
+    "SearchDevicesFilterNameString": {
       "type": "string",
       "max": 64,
       "min": 1
     },
-    "SearchDevicesFiltervaluesString256List": {
+    "SearchDevicesFilterValuesList": {
       "type": "list",
       "member": {
         "shape": "String256"
@@ -622,11 +743,11 @@
       ],
       "members": {
         "filters": {
-          "shape": "SearchDevicesRequestfiltersSearchDevicesFilterList",
+          "shape": "SearchDevicesRequestFiltersList",
           "documentation": "<p>The filter values to use to search for a device.</p>"
         },
         "maxResults": {
-          "shape": "SearchDevicesRequestmaxResultsInteger",
+          "shape": "SearchDevicesRequestMaxResultsInteger",
           "documentation": "<p>The maximum number of results to return in the response.</p>"
         },
         "nextToken": {
@@ -635,7 +756,7 @@
         }
       }
     },
-    "SearchDevicesRequestfiltersSearchDevicesFilterList": {
+    "SearchDevicesRequestFiltersList": {
       "type": "list",
       "member": {
         "shape": "SearchDevicesFilter"
@@ -643,7 +764,7 @@
       "max": 10,
       "min": 0
     },
-    "SearchDevicesRequestmaxResultsInteger": {
+    "SearchDevicesRequestMaxResultsInteger": {
       "type": "integer",
       "box": true,
       "max": 100,
@@ -682,7 +803,7 @@
           "documentation": "<p>An operator to use in the filter.</p>"
         },
         "values": {
-          "shape": "SearchQuantumTasksFiltervaluesString256List",
+          "shape": "SearchQuantumTasksFilterValuesList",
           "documentation": "<p>The values to use for the filter.</p>"
         }
       },
@@ -691,15 +812,15 @@
     "SearchQuantumTasksFilterOperator": {
       "type": "string",
       "enum": [
-        "BETWEEN",
+        "LT",
+        "LTE",
         "EQUAL",
         "GT",
         "GTE",
-        "LT",
-        "LTE"
+        "BETWEEN"
       ]
     },
-    "SearchQuantumTasksFiltervaluesString256List": {
+    "SearchQuantumTasksFilterValuesList": {
       "type": "list",
       "member": {
         "shape": "String256"
@@ -714,11 +835,11 @@
       ],
       "members": {
         "filters": {
-          "shape": "SearchQuantumTasksRequestfiltersSearchQuantumTasksFilterList",
+          "shape": "SearchQuantumTasksRequestFiltersList",
           "documentation": "<p>Array of <code>SearchQuantumTasksFilter</code> objects.</p>"
         },
         "maxResults": {
-          "shape": "SearchQuantumTasksRequestmaxResultsInteger",
+          "shape": "SearchQuantumTasksRequestMaxResultsInteger",
           "documentation": "<p>Maximum number of results to return in the response.</p>"
         },
         "nextToken": {
@@ -727,7 +848,7 @@
         }
       }
     },
-    "SearchQuantumTasksRequestfiltersSearchQuantumTasksFilterList": {
+    "SearchQuantumTasksRequestFiltersList": {
       "type": "list",
       "member": {
         "shape": "SearchQuantumTasksFilter"
@@ -735,7 +856,7 @@
       "max": 10,
       "min": 0
     },
-    "SearchQuantumTasksRequestmaxResultsInteger": {
+    "SearchQuantumTasksRequestMaxResultsInteger": {
       "type": "integer",
       "box": true,
       "max": 100,
@@ -773,6 +894,69 @@
     "SyntheticTimestamp_date_time": {
       "type": "timestamp",
       "timestampFormat": "iso8601"
+    },
+    "TagKeys": {
+      "type": "list",
+      "member": {
+        "shape": "String"
+      }
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tags"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "String",
+          "documentation": "<p>Specify the <code>resourceArn</code> of the resource to which a tag will be added.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tags": {
+          "shape": "TagsMap",
+          "documentation": "<p>Specify the tags to add to the resource.</p>"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagsMap": {
+      "type": "map",
+      "key": {
+        "shape": "String"
+      },
+      "value": {
+        "shape": "String"
+      }
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tagKeys"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "String",
+          "documentation": "<p>Specify the <code>resourceArn</code> for the resource from which to remove the tags.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tagKeys": {
+          "shape": "TagKeys",
+          "documentation": "<p>Specify the keys for the tags to remove from the resource.</p>",
+          "location": "querystring",
+          "locationName": "tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     }
   },
   "documentation": "<p>The Amazon Braket API Reference provides information about the operations and structures supported in Amazon Braket.</p>"

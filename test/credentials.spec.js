@@ -357,6 +357,22 @@
           validateCredentials(creds);
           return expect(AWS.util.readFileSync.calls[0]['arguments'][0]).to.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]config/);
         });
+        it('does not require ~/.aws/credentials if AWS_SDK_LOAD_CONFIG is set', function() {
+          var creds, mock;
+          process.env.AWS_SDK_LOAD_CONFIG = '1';
+          mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\naws_session_token = session';
+          helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function(path) {
+            if (path.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]credentials/)) {
+              throw new Error('ENOENT: no such file or directory');
+            } else {
+              return '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\naws_session_token = session';
+            }
+          });
+          creds = new AWS.SharedIniFileCredentials();
+          creds.get();
+          validateCredentials(creds);
+          return expect(AWS.util.readFileSync.calls[0]['arguments'][0]).to.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]config/);
+        });
         it('prefers credentials from ~/.aws/credentials if AWS_SDK_LOAD_CONFIG is set', function() {
           var creds;
           process.env.AWS_SDK_LOAD_CONFIG = '1';
@@ -559,7 +575,7 @@
           mockConfig = '[default]\ncredential_process=federated_cli_mock';
           helpers.spyOn(AWS.util, 'readFileSync').andReturn(mockConfig);
           mockProcess = '{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": ""}';
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
             cb(undefined, mockProcess, undefined);
           });
         });
@@ -591,7 +607,7 @@
         it('throws error if version is not 1', function(done) {
           var child_process = require('child_process');
           mockProcess = '{"Version": 2,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": ""}';
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
             cb(undefined, mockProcess, undefined);
           });
           var creds = new AWS.ProcessCredentials();
@@ -606,7 +622,7 @@
           var expired;
           expired = AWS.util.date.iso8601(new Date(0));
           mockProcess = '{"Version": 1,"AccessKeyId": "xxx","SecretAccessKey": "yyy","SessionToken": "zzz","Expiration": "' + expired +'"}';
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
             cb(undefined, mockProcess, undefined);
           });
           var creds = new AWS.ProcessCredentials();
@@ -620,7 +636,7 @@
           var child_process = require('child_process');
           var mockErr;
           mockErr = 'foo Error';
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
             cb(mockErr, undefined, undefined);
           });
           var creds = new AWS.ProcessCredentials();
@@ -636,7 +652,7 @@
           futureExpiration = AWS.util.date.unixTimestamp() + 900;
           futureExpiration = AWS.util.date.iso8601(new Date(futureExpiration * 1000));
           mockProcess = '{"Version": 1,"AccessKeyId": "akid","SecretAccessKey": "secret","SessionToken": "session","Expiration": "' + futureExpiration + '"}';
-          helpers.spyOn(child_process, 'exec').andCallFake(function (_, cb) {
+          helpers.spyOn(child_process, 'exec').andCallFake(function (_, _, cb) {
             cb(undefined, mockProcess, undefined);
           });
           creds = new AWS.ProcessCredentials();
@@ -797,7 +813,6 @@
         credsCtorSpy = helpers.spyOn(AWS, 'SharedIniFileCredentials').andCallThrough();
         expect(creds.roleArn).to.equal('arn');
         return creds.refresh(function(err) {
-          var sourceCreds;
           expect(credsCtorSpy.calls.length).to.equal(1);
           parentCredsArg = credsCtorSpy.calls[0]['arguments'][0];
           expect(parentCredsArg.profile).to.equal('foo');
@@ -824,7 +839,6 @@
         credsCtorSpy = helpers.spyOn(AWS, 'SharedIniFileCredentials').andCallThrough();
         expect(creds.roleArn).to.equal('arn');
         return creds.refresh(function(err) {
-          var sourceCreds;
           expect(credsCtorSpy.calls.length).to.equal(1);
           parentCredsArg = credsCtorSpy.calls[0]['arguments'][0];
           expect(parentCredsArg.profile).to.equal('foo');
@@ -836,6 +850,139 @@
           return done();
         });
       });
+
+      it('will assume a role from the config file even if there are unrelated entries in the credentials file', function(done) {
+        // This test is actually a stand-in for a config like:
+        //
+        // credentials:
+        //   [foo]
+        //   role_arn = arn:aws:...
+        //   source_profile = ...
+        //
+        // config
+        //   [profile foo]
+        //   region = us-west-1
+        //
+        // Where the single profile 'foo' is scattered over multiple files.
+        // The test below is an easier way to test the same behavior that doesn't
+        // have to deal with regions (yet).
+
+        var creds, credsCtorSpy;
+        process.env.AWS_SDK_LOAD_CONFIG = '1';
+        helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function(path) {
+          if (path.match(/[\/\\]home[\/\\]user[\/\\].aws[\/\\]config/)) {
+            return [
+              '[default]',
+              'role_arn = arn',
+              'source_profile = foo'
+            ].join('\n');
+          } else {
+            return [
+              '[default]',
+              'something = unrelated',
+              '[foo]',
+              'aws_access_key_id = akid',
+              'aws_secret_access_key = secret'
+            ].join('\n');
+          }
+        });
+        helpers.mockHttpResponse(200, {}, '<AssumeRoleResponse xmlns="https://sts.amazonaws.com/doc/2011-06-15/">\n  <AssumeRoleResult>\n    <Credentials>\n      <AccessKeyId>KEY</AccessKeyId>\n      <SecretAccessKey>SECRET</SecretAccessKey>\n      <SessionToken>TOKEN</SessionToken>\n      <Expiration>1970-01-01T00:00:00.000Z</Expiration>\n    </Credentials>\n  </AssumeRoleResult>\n</AssumeRoleResponse>');
+        creds = new AWS.SharedIniFileCredentials();
+        credsCtorSpy = helpers.spyOn(AWS, 'SharedIniFileCredentials').andCallThrough();
+        expect(creds.roleArn).to.equal('arn');
+        return creds.refresh(function(err) {
+          expect(credsCtorSpy.calls.length).to.equal(1);
+          parentCredsArg = credsCtorSpy.calls[0]['arguments'][0];
+          expect(parentCredsArg.profile).to.equal('foo');
+          delete process.env.AWS_SDK_LOAD_CONFIG;
+          return done();
+        });
+      });
+
+      it('will use the profile\'s region to assume the role', function(done) {
+        var mock = [
+          '[foo]',
+          'role_arn = arn',
+          'source_profile = base',
+          'region = eu-banana-5',
+          '[base]',
+          'aws_access_key_id = akid',
+          'aws_secret_access_key = secret',
+        ].join('\n');
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+
+        var STSPrototype = (new STS()).constructor.prototype;
+        helpers.spyOn(STSPrototype, 'assumeRole').andCallFake(
+          function() {
+            expect(this.config.region).to.equal('eu-banana-5');
+            return done();
+          }
+        );
+
+        new AWS.SharedIniFileCredentials({
+          profile: 'foo',
+          callback: function () {
+            fail('test should not have gotten here');
+          }
+        });
+      });
+
+      it('will use us-east-1 to assume the role if no region is available', function(done) {
+        var mock = [
+          '[foo]',
+          'role_arn = arn',
+          'source_profile = base',
+          '[base]',
+          'aws_access_key_id = akid',
+          'aws_secret_access_key = secret',
+        ].join('\n');
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+
+        var STSPrototype = (new STS()).constructor.prototype;
+        helpers.spyOn(STSPrototype, 'assumeRole').andCallFake(
+          function() {
+            expect(this.config.region).to.equal('us-east-1');
+            return done();
+          }
+        );
+
+        new AWS.SharedIniFileCredentials({
+          profile: 'foo',
+          callback: function () {
+            fail('test should not have gotten here');
+          }
+        });
+      });
+
+      it('will ignore the region in the default profile', function(done) {
+        var mock = [
+          '[default]',
+          'region = eu-banana-5',
+          '[foo]',
+          'role_arn = arn',
+          'source_profile = base',
+          '[base]',
+          'aws_access_key_id = akid',
+          'aws_secret_access_key = secret',
+        ].join('\n');
+        helpers.spyOn(AWS.util, 'readFileSync').andReturn(mock);
+
+        var STSPrototype = (new STS()).constructor.prototype;
+        helpers.spyOn(STSPrototype, 'assumeRole').andCallFake(
+          function() {
+            expect(this.config.region).to.equal('us-east-1');
+            return done();
+          }
+        );
+
+        new AWS.SharedIniFileCredentials({
+          profile: 'foo',
+          callback: function () {
+            fail('test should not have gotten here');
+          }
+        });
+      });
+
       it('should prefer static credentials to role_arn in source profiles', function(done) {
         var creds, mock;
         mock = '[default]\nrole_arn = arn\nsource_profile = foo_first\n[foo_first]\naws_access_key_id=first_key\naws_secret_access_key=first_secret\nrole_arn = arn_foo_first\nsource_profile = foo_base\n[foo_base]\naws_access_key_id = baseKey\naws_secret_access_key = baseSecret\n';
@@ -993,7 +1140,7 @@
       };
       describe('constructor', function() {
         it('allows passing of AWS.MetadataService options', function() {
-          return expect(creds.metadataService.host).to.equal('host');
+          return expect(creds.metadataService.endpoint).to.equal('http://host');
         });
         it('does not modify options object', function() {
           var opts;
@@ -1001,7 +1148,11 @@
           creds = new AWS.EC2MetadataCredentials(opts);
           return expect(opts).to.eql({});
         });
-        return it('allows setting timeout', function() {
+        it('checking default timeout', function() {
+          creds = new AWS.EC2MetadataCredentials({});
+          return expect(creds.metadataService.httpOptions.timeout).to.equal(1000);
+        });
+        it('allows setting timeout', function() {
           var opts;
           opts = {
             httpOptions: {
@@ -1010,6 +1161,20 @@
           };
           creds = new AWS.EC2MetadataCredentials(opts);
           return expect(creds.metadataService.httpOptions.timeout).to.equal(5000);
+        });
+        it('checking default connectTimeout', function() {
+          creds = new AWS.EC2MetadataCredentials({});
+          return expect(creds.metadataService.httpOptions.connectTimeout).to.equal(1000);
+        });
+        return it('allows setting connectTimeout', function() {
+          var opts;
+          opts = {
+            httpOptions: {
+              connectTimeout: 5000
+            }
+          };
+          creds = new AWS.EC2MetadataCredentials(opts);
+          return expect(creds.metadataService.httpOptions.connectTimeout).to.equal(5000);
         });
       });
       describe('needsRefresh', function() {

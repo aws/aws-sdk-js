@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "DMS",
+        "description": "Added new S3 endpoint settings to allow partitioning CDC data by date for S3 as target. Exposed some Extra Connection Attributes as endpoint settings for relational databases as target."
+    },
+    {
+        "type": "feature",
+        "category": "EC2",
+        "description": "This release supports returning additional information about local gateway virtual interfaces, and virtual interface groups."
+    },
+    {
+        "type": "feature",
+        "category": "KinesisAnalyticsV2",
+        "description": "Amazon Kinesis Analytics now supports StopApplication with 'force' option"
+    },
+    {
+        "type": "feature",
+        "category": "MarketplaceCatalog",
+        "description": "AWS Marketplace Catalog now supports FailureCode for change workflows to help differentiate client errors and server faults."
+    }
+]

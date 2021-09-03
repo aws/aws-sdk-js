@@ -1,0 +1,17 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Credentials",
+        "description": "Do not require credentials file when loading from config."
+    },
+    {
+        "type": "feature",
+        "category": "Batch",
+        "description": "Adding evaluateOnExit to job retry strategies."
+    },
+    {
+        "type": "feature",
+        "category": "ElasticBeanstalk",
+        "description": "EnvironmentStatus enum update to include Aborting, LinkingFrom and LinkingTo"
+    }
+]

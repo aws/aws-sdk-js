@@ -20,6 +20,14 @@ declare class Textract extends Service {
    */
   analyzeDocument(callback?: (err: AWSError, data: Textract.Types.AnalyzeDocumentResponse) => void): Request<Textract.Types.AnalyzeDocumentResponse, AWSError>;
   /**
+   * Analyzes an input document for financially related relationships between text. Information is returned as ExpenseDocuments and seperated as follows.    LineItemGroups- A data set containing LineItems which store information about the lines of text, such as an item purchased and its price on a receipt.    SummaryFields- Contains all other information a receipt, such as header information or the vendors name.  
+   */
+  analyzeExpense(params: Textract.Types.AnalyzeExpenseRequest, callback?: (err: AWSError, data: Textract.Types.AnalyzeExpenseResponse) => void): Request<Textract.Types.AnalyzeExpenseResponse, AWSError>;
+  /**
+   * Analyzes an input document for financially related relationships between text. Information is returned as ExpenseDocuments and seperated as follows.    LineItemGroups- A data set containing LineItems which store information about the lines of text, such as an item purchased and its price on a receipt.    SummaryFields- Contains all other information a receipt, such as header information or the vendors name.  
+   */
+  analyzeExpense(callback?: (err: AWSError, data: Textract.Types.AnalyzeExpenseResponse) => void): Request<Textract.Types.AnalyzeExpenseResponse, AWSError>;
+  /**
    * Detects text in the input document. Amazon Textract can detect lines of text and the words that make up a line of text. The input document must be an image in JPEG or PNG format. DetectDocumentText returns the detected text in an array of Block objects.  Each document page has as an associated Block of type PAGE. Each PAGE Block object is the parent of LINE Block objects that represent the lines of detected text on a page. A LINE Block object is a parent for each word that makes up the line. Words are represented by Block objects of type WORD.  DetectDocumentText is a synchronous operation. To analyze documents asynchronously, use StartDocumentTextDetection. For more information, see Document Text Detection.
    */
   detectDocumentText(params: Textract.Types.DetectDocumentTextRequest, callback?: (err: AWSError, data: Textract.Types.DetectDocumentTextResponse) => void): Request<Textract.Types.DetectDocumentTextResponse, AWSError>;
@@ -93,6 +101,16 @@ declare namespace Textract {
      */
     AnalyzeDocumentModelVersion?: String;
   }
+  export interface AnalyzeExpenseRequest {
+    Document: Document;
+  }
+  export interface AnalyzeExpenseResponse {
+    DocumentMetadata?: DocumentMetadata;
+    /**
+     * The expenses detected by Amazon Textract.
+     */
+    ExpenseDocuments?: ExpenseDocumentList;
+  }
   export interface Block {
     /**
      * The type of text item that's recognized. In operations for text detection, the following types are returned:    PAGE - Contains a list of the LINE Block objects that are detected on a document page.    WORD - A word detected on a document page. A word is one or more ISO basic Latin script characters that aren't separated by spaces.    LINE - A string of tab-delimited, contiguous words that are detected on a document page.   In text analysis operations, the following types are returned:    PAGE - Contains a list of child Block objects that are detected on a document page.    KEY_VALUE_SET - Stores the KEY and VALUE Block objects for linked text that's detected on a document page. Use the EntityType field to determine if a KEY_VALUE_SET object is a KEY Block object or a VALUE Block object.     WORD - A word that's detected on a document page. A word is one or more ISO basic Latin script characters that aren't separated by spaces.    LINE - A string of tab-delimited, contiguous words that are detected on a document page.    TABLE - A table that's detected on a document page. A table is grid-based information with two or more rows or columns, with a cell span of one row and one column each.     CELL - A cell within a detected table. The cell is the parent of the block that contains the text in the cell.    SELECTION_ELEMENT - A selection element such as an option button (radio button) or a check box that's detected on a document page. Use the value of SelectionStatus to determine the status of the selection element.  
@@ -106,6 +124,10 @@ declare namespace Textract {
      * The word or line of text that's recognized by Amazon Textract. 
      */
     Text?: String;
+    /**
+     * The kind of text that Amazon Textract has detected. Can check for handwritten text and printed text.
+     */
+    TextType?: TextType;
     /**
      * The row in which a table cell is located. The first row position is 1. RowIndex isn't returned by DetectDocumentText and GetDocumentTextDetection.
      */
@@ -215,6 +237,61 @@ declare namespace Textract {
   export type EntityType = "KEY"|"VALUE"|string;
   export type EntityTypes = EntityType[];
   export type ErrorCode = string;
+  export interface ExpenseDetection {
+    /**
+     * The word or line of text recognized by Amazon Textract
+     */
+    Text?: String;
+    Geometry?: Geometry;
+    /**
+     * The confidence in detection, as a percentage
+     */
+    Confidence?: Percent;
+  }
+  export interface ExpenseDocument {
+    /**
+     * Denotes which invoice or receipt in the document the information is coming from. First document will be 1, the second 2, and so on.
+     */
+    ExpenseIndex?: UInteger;
+    /**
+     * Any information found outside of a table by Amazon Textract.
+     */
+    SummaryFields?: ExpenseFieldList;
+    /**
+     * Information detected on each table of a document, seperated into LineItems.
+     */
+    LineItemGroups?: LineItemGroupList;
+  }
+  export type ExpenseDocumentList = ExpenseDocument[];
+  export interface ExpenseField {
+    /**
+     * The implied label of a detected element. Present alongside LabelDetection for explicit elements.
+     */
+    Type?: ExpenseType;
+    /**
+     * The explicitly stated label of a detected element.
+     */
+    LabelDetection?: ExpenseDetection;
+    /**
+     * The value of a detected element. Present in explicit and implicit elements.
+     */
+    ValueDetection?: ExpenseDetection;
+    /**
+     * The page number the value was detected on.
+     */
+    PageNumber?: UInteger;
+  }
+  export type ExpenseFieldList = ExpenseField[];
+  export interface ExpenseType {
+    /**
+     * The word or line of text detected by Amazon Textract.
+     */
+    Text?: String;
+    /**
+     * The confidence of accuracy, as a percentage.
+     */
+    Confidence?: Percent;
+  }
   export type FeatureType = "TABLES"|"FORMS"|string;
   export type FeatureTypes = FeatureType[];
   export type Float = number;
@@ -265,7 +342,7 @@ declare namespace Textract {
      */
     Warnings?: Warnings;
     /**
-     * The current status of an asynchronous document-analysis operation.
+     * Returns if the detection job could not be completed. Contains explanation for what error occured.
      */
     StatusMessage?: StatusMessage;
     /**
@@ -309,7 +386,7 @@ declare namespace Textract {
      */
     Warnings?: Warnings;
     /**
-     * The current status of an asynchronous text-detection operation for the document. 
+     * Returns if the detection job could not be completed. Contains explanation for what error occured. 
      */
     StatusMessage?: StatusMessage;
     /**
@@ -361,6 +438,25 @@ declare namespace Textract {
   export type JobId = string;
   export type JobStatus = "IN_PROGRESS"|"SUCCEEDED"|"FAILED"|"PARTIAL_SUCCESS"|string;
   export type JobTag = string;
+  export type KMSKeyId = string;
+  export interface LineItemFields {
+    /**
+     * ExpenseFields used to show information from detected lines on a table.
+     */
+    LineItemExpenseFields?: ExpenseFieldList;
+  }
+  export interface LineItemGroup {
+    /**
+     * The number used to identify a specific table in a document. The first table encountered will have a LineItemGroupIndex of 1, the second 2, etc.
+     */
+    LineItemGroupIndex?: UInteger;
+    /**
+     * The breakdown of information on a particular line of a table. 
+     */
+    LineItems?: LineItemList;
+  }
+  export type LineItemGroupList = LineItemGroup[];
+  export type LineItemList = LineItemFields[];
   export type MaxResults = number;
   export type NonEmptyString = string;
   export interface NotificationChannel {
@@ -372,6 +468,16 @@ declare namespace Textract {
      * The Amazon Resource Name (ARN) of an IAM role that gives Amazon Textract publishing permissions to the Amazon SNS topic. 
      */
     RoleArn: RoleArn;
+  }
+  export interface OutputConfig {
+    /**
+     * The name of the bucket your output will go to.
+     */
+    S3Bucket: S3Bucket;
+    /**
+     * The prefix of the object key that the output will be saved to. When not enabled, the prefix will be “textract_output".
+     */
+    S3Prefix?: S3ObjectName;
   }
   export type Pages = UInteger[];
   export type PaginationToken = string;
@@ -389,7 +495,7 @@ declare namespace Textract {
   export type Polygon = Point[];
   export interface Relationship {
     /**
-     * The type of relationship that the blocks in the IDs array have with the current block. The relationship can be VALUE or CHILD. A relationship of type VALUE is a list that contains the ID of the VALUE block that's associated with the KEY of a key-value pair. A relationship of type CHILD is a list of IDs that identify WORD blocks.
+     * The type of relationship that the blocks in the IDs array have with the current block. The relationship can be VALUE or CHILD. A relationship of type VALUE is a list that contains the ID of the VALUE block that's associated with the KEY of a key-value pair. A relationship of type CHILD is a list of IDs that identify WORD blocks in the case of lines Cell blocks in the case of Tables, and WORD blocks in the case of Selection Elements.
      */
     Type?: RelationshipType;
     /**
@@ -398,12 +504,12 @@ declare namespace Textract {
     Ids?: IdList;
   }
   export type RelationshipList = Relationship[];
-  export type RelationshipType = "VALUE"|"CHILD"|string;
+  export type RelationshipType = "VALUE"|"CHILD"|"COMPLEX_FEATURES"|string;
   export type RoleArn = string;
   export type S3Bucket = string;
   export interface S3Object {
     /**
-     * The name of the S3 bucket.
+     * The name of the S3 bucket. Note that the # character is not valid in the file name.
      */
     Bucket?: S3Bucket;
     /**
@@ -440,6 +546,14 @@ declare namespace Textract {
      * The Amazon SNS topic ARN that you want Amazon Textract to publish the completion status of the operation to. 
      */
     NotificationChannel?: NotificationChannel;
+    /**
+     * Sets if the output will go to a customer defined bucket. By default, Amazon Textract will save the results internally to be accessed by the GetDocumentAnalysis operation.
+     */
+    OutputConfig?: OutputConfig;
+    /**
+     * The KMS key used to encrypt the inference results. This can be in either Key ID or Key Alias format. When a KMS key is provided, the KMS key will be used for server-side encryption of the objects in the customer bucket. When this parameter is not enabled, the result will be encrypted server side,using SSE-S3.
+     */
+    KMSKeyId?: KMSKeyId;
   }
   export interface StartDocumentAnalysisResponse {
     /**
@@ -464,6 +578,14 @@ declare namespace Textract {
      * The Amazon SNS topic ARN that you want Amazon Textract to publish the completion status of the operation to. 
      */
     NotificationChannel?: NotificationChannel;
+    /**
+     * Sets if the output will go to a customer defined bucket. By default Amazon Textract will save the results internally to be accessed with the GetDocumentTextDetection operation.
+     */
+    OutputConfig?: OutputConfig;
+    /**
+     * The KMS key used to encrypt the inference results. This can be in either Key ID or Key Alias format. When a KMS key is provided, the KMS key will be used for server-side encryption of the objects in the customer bucket. When this parameter is not enabled, the result will be encrypted server side,using SSE-S3.
+     */
+    KMSKeyId?: KMSKeyId;
   }
   export interface StartDocumentTextDetectionResponse {
     /**
@@ -473,6 +595,7 @@ declare namespace Textract {
   }
   export type StatusMessage = string;
   export type String = string;
+  export type TextType = "HANDWRITING"|"PRINTED"|string;
   export type UInteger = number;
   export interface Warning {
     /**

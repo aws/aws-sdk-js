@@ -1,0 +1,32 @@
+[
+    {
+        "type": "bugfix",
+        "category": "Types",
+        "description": "Update types for fetching credentials from config"
+    },
+    {
+        "type": "feature",
+        "category": "APIGateway",
+        "description": "Adds support for mutual TLS authentication for public regional REST Apis"
+    },
+    {
+        "type": "feature",
+        "category": "ApiGatewayV2",
+        "description": "Adds support for mutual TLS authentication and disableAPIExecuteEndpoint for public regional HTTP Apis"
+    },
+    {
+        "type": "feature",
+        "category": "Comprehend",
+        "description": "Amazon Comprehend now supports detecting Personally Identifiable Information (PII) entities in a document."
+    },
+    {
+        "type": "feature",
+        "category": "ES",
+        "description": "Adds support for data plane audit logging in Amazon Elasticsearch Service."
+    },
+    {
+        "type": "feature",
+        "category": "Kendra",
+        "description": "Amazon Kendra now supports additional file formats and metadata for FAQs."
+    }
+]

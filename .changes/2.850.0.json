@@ -1,0 +1,27 @@
+[
+    {
+        "type": "feature",
+        "category": "AutoScaling",
+        "description": "Adds a new optional IncludeDeletedGroups parameter to the DescribeScalingActivities API."
+    },
+    {
+        "type": "feature",
+        "category": "Glue",
+        "description": "Updating the page size for Glue catalog getter APIs."
+    },
+    {
+        "type": "feature",
+        "category": "IoTEvents",
+        "description": "This release adds an Analyze feature to AWS IoT Events that lets customers analyze their detector models for runtime issues."
+    },
+    {
+        "type": "feature",
+        "category": "Pinpoint",
+        "description": "Enables AWS Pinpoint customers to use Entity Id and Template Id when sending SMS message. These parameters can be obtained from the regulatory body of the country where you are trying to send the SMS."
+    },
+    {
+        "type": "feature",
+        "category": "RedshiftData",
+        "description": "This release adds an additional parameter 'ConnectedDatabase' into ListSchemasRequest, ListTablesRequest and DescribeTableRequest to support the metadata sharing across databases."
+    }
+]

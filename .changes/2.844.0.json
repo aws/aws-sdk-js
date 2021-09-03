@@ -1,0 +1,37 @@
+[
+    {
+        "type": "feature",
+        "category": "ConfigService",
+        "description": "Added option to provide KMS key to AWS Config DeliveryChannel"
+    },
+    {
+        "type": "feature",
+        "category": "KinesisVideoArchivedMedia",
+        "description": "The ListFragments and GetMediaForFragmentList APIs now support StreamName or StreamARN as input parameters."
+    },
+    {
+        "type": "feature",
+        "category": "MediaLive",
+        "description": "AWS MediaLive now supports Automatic-Input-Failover for CDI Inputs."
+    },
+    {
+        "type": "feature",
+        "category": "MediaTailor",
+        "description": "MediaTailor now supports specifying aliases for dynamic variables. This allows use cases such as binding multiple origin domains to a single MediaTailor playback configuration."
+    },
+    {
+        "type": "feature",
+        "category": "Pinpoint",
+        "description": "Lets customers use origination number when specifying SMS message configuration for Campaigns and Journeys."
+    },
+    {
+        "type": "feature",
+        "category": "RedshiftData",
+        "description": "This release enables fine grant access control in ListStatements, GetStatementResult, CancelStatement and DescribeStatement."
+    },
+    {
+        "type": "feature",
+        "category": "WorkMailMessageFlow",
+        "description": "This release allows customers to update email messages as they flow in and out of Amazon WorkMail"
+    }
+]

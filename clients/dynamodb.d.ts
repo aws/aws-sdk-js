@@ -15,6 +15,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
   constructor(options?: DynamoDB.Types.ClientConfiguration)
   config: Config & DynamoDB.Types.ClientConfiguration;
   /**
+   *  This operation allows you to perform batch reads and writes on data stored in DynamoDB, using PartiQL. 
+   */
+  batchExecuteStatement(params: DynamoDB.Types.BatchExecuteStatementInput, callback?: (err: AWSError, data: DynamoDB.Types.BatchExecuteStatementOutput) => void): Request<DynamoDB.Types.BatchExecuteStatementOutput, AWSError>;
+  /**
+   *  This operation allows you to perform batch reads and writes on data stored in DynamoDB, using PartiQL. 
+   */
+  batchExecuteStatement(callback?: (err: AWSError, data: DynamoDB.Types.BatchExecuteStatementOutput) => void): Request<DynamoDB.Types.BatchExecuteStatementOutput, AWSError>;
+  /**
    * The BatchGetItem operation returns the attributes of one or more items from one or more tables. You identify requested items by primary key. A single operation can retrieve up to 16 MB of data, which can contain as many as 100 items. BatchGetItem returns a partial result if the response size limit is exceeded, the table's provisioned throughput is exceeded, or an internal processing failure occurs. If a partial result is returned, the operation returns a value for UnprocessedKeys. You can use this value to retry the operation starting with the next item to get.  If you request more than 100 items, BatchGetItem returns a ValidationException with the message "Too many items requested for the BatchGetItem call."  For example, if you ask to retrieve 100 items, but each individual item is 300 KB in size, the system returns 52 items (so as not to exceed the 16 MB limit). It also returns an appropriate UnprocessedKeys value so you can get the next page of results. If desired, your application can include its own logic to assemble the pages of results into one dataset. If none of the items can be processed due to insufficient provisioned throughput on all of the tables in the request, then BatchGetItem returns a ProvisionedThroughputExceededException. If at least one of the items is successfully processed, then BatchGetItem completes successfully, while returning the keys of the unread items in UnprocessedKeys.  If DynamoDB returns any unprocessed items, you should retry the batch operation on those items. However, we strongly recommend that you use an exponential backoff algorithm. If you retry the batch operation immediately, the underlying read or write requests can still fail due to throttling on the individual tables. If you delay the batch operation using exponential backoff, the individual requests in the batch are much more likely to succeed. For more information, see Batch Operations and Error Handling in the Amazon DynamoDB Developer Guide.  By default, BatchGetItem performs eventually consistent reads on every table in the request. If you want strongly consistent reads instead, you can set ConsistentRead to true for any or all tables. In order to minimize response latency, BatchGetItem retrieves items in parallel. When designing your application, keep in mind that DynamoDB does not return items in any particular order. To help parse the response by item, include the primary key values for the items in your request in the ProjectionExpression parameter. If a requested item does not exist, it is not returned in the result. Requests for nonexistent items consume the minimum read capacity units according to the type of read. For more information, see Working with Tables in the Amazon DynamoDB Developer Guide.
    */
   batchGetItem(params: DynamoDB.Types.BatchGetItemInput, callback?: (err: AWSError, data: DynamoDB.Types.BatchGetItemOutput) => void): Request<DynamoDB.Types.BatchGetItemOutput, AWSError>;
@@ -111,6 +119,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   describeEndpoints(callback?: (err: AWSError, data: DynamoDB.Types.DescribeEndpointsResponse) => void): Request<DynamoDB.Types.DescribeEndpointsResponse, AWSError>;
   /**
+   * Describes an existing table export.
+   */
+  describeExport(params: DynamoDB.Types.DescribeExportInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeExportOutput) => void): Request<DynamoDB.Types.DescribeExportOutput, AWSError>;
+  /**
+   * Describes an existing table export.
+   */
+  describeExport(callback?: (err: AWSError, data: DynamoDB.Types.DescribeExportOutput) => void): Request<DynamoDB.Types.DescribeExportOutput, AWSError>;
+  /**
    * Returns information about the specified global table.  This operation only applies to Version 2017.11.29 of global tables. If you are using global tables Version 2019.11.21 you can use DescribeTable instead. 
    */
   describeGlobalTable(params: DynamoDB.Types.DescribeGlobalTableInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableOutput, AWSError>;
@@ -127,11 +143,19 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   describeGlobalTableSettings(callback?: (err: AWSError, data: DynamoDB.Types.DescribeGlobalTableSettingsOutput) => void): Request<DynamoDB.Types.DescribeGlobalTableSettingsOutput, AWSError>;
   /**
-   * Returns the current provisioned-capacity limits for your AWS account in a Region, both for the Region as a whole and for any one DynamoDB table that you create there. When you establish an AWS account, the account has initial limits on the maximum read capacity units and write capacity units that you can provision across all of your DynamoDB tables in a given Region. Also, there are per-table limits that apply when you create a table there. For more information, see Limits page in the Amazon DynamoDB Developer Guide. Although you can increase these limits by filing a case at AWS Support Center, obtaining the increase is not instantaneous. The DescribeLimits action lets you write code to compare the capacity you are currently using to those limits imposed by your account so that you have enough time to apply for an increase before you hit a limit. For example, you could use one of the AWS SDKs to do the following:   Call DescribeLimits for a particular Region to obtain your current account limits on provisioned capacity there.   Create a variable to hold the aggregate read capacity units provisioned for all your tables in that Region, and one to hold the aggregate write capacity units. Zero them both.   Call ListTables to obtain a list of all your DynamoDB tables.   For each table name listed by ListTables, do the following:   Call DescribeTable with the table name.   Use the data returned by DescribeTable to add the read capacity units and write capacity units provisioned for the table itself to your variables.   If the table has one or more global secondary indexes (GSIs), loop over these GSIs and add their provisioned capacity values to your variables as well.     Report the account limits for that Region returned by DescribeLimits, along with the total current provisioned capacity levels you have calculated.   This will let you see whether you are getting close to your account-level limits. The per-table limits apply only when you are creating a new table. They restrict the sum of the provisioned capacity of the new table itself and all its global secondary indexes. For existing tables and their GSIs, DynamoDB doesn't let you increase provisioned capacity extremely rapidly. But the only upper limit that applies is that the aggregate provisioned capacity over all your tables and GSIs cannot exceed either of the per-account limits.   DescribeLimits should only be called periodically. You can expect throttling errors if you call it more than once in a minute.  The DescribeLimits Request element has no content.
+   * Returns information about the status of Kinesis streaming.
+   */
+  describeKinesisStreamingDestination(params: DynamoDB.Types.DescribeKinesisStreamingDestinationInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeKinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.DescribeKinesisStreamingDestinationOutput, AWSError>;
+  /**
+   * Returns information about the status of Kinesis streaming.
+   */
+  describeKinesisStreamingDestination(callback?: (err: AWSError, data: DynamoDB.Types.DescribeKinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.DescribeKinesisStreamingDestinationOutput, AWSError>;
+  /**
+   * Returns the current provisioned-capacity quotas for your AWS account in a Region, both for the Region as a whole and for any one DynamoDB table that you create there. When you establish an AWS account, the account has initial quotas on the maximum read capacity units and write capacity units that you can provision across all of your DynamoDB tables in a given Region. Also, there are per-table quotas that apply when you create a table there. For more information, see Service, Account, and Table Quotas page in the Amazon DynamoDB Developer Guide. Although you can increase these quotas by filing a case at AWS Support Center, obtaining the increase is not instantaneous. The DescribeLimits action lets you write code to compare the capacity you are currently using to those quotas imposed by your account so that you have enough time to apply for an increase before you hit a quota. For example, you could use one of the AWS SDKs to do the following:   Call DescribeLimits for a particular Region to obtain your current account quotas on provisioned capacity there.   Create a variable to hold the aggregate read capacity units provisioned for all your tables in that Region, and one to hold the aggregate write capacity units. Zero them both.   Call ListTables to obtain a list of all your DynamoDB tables.   For each table name listed by ListTables, do the following:   Call DescribeTable with the table name.   Use the data returned by DescribeTable to add the read capacity units and write capacity units provisioned for the table itself to your variables.   If the table has one or more global secondary indexes (GSIs), loop over these GSIs and add their provisioned capacity values to your variables as well.     Report the account quotas for that Region returned by DescribeLimits, along with the total current provisioned capacity levels you have calculated.   This will let you see whether you are getting close to your account-level quotas. The per-table quotas apply only when you are creating a new table. They restrict the sum of the provisioned capacity of the new table itself and all its global secondary indexes. For existing tables and their GSIs, DynamoDB doesn't let you increase provisioned capacity extremely rapidly, but the only quota that applies is that the aggregate provisioned capacity over all your tables and GSIs cannot exceed either of the per-account quotas.   DescribeLimits should only be called periodically. You can expect throttling errors if you call it more than once in a minute.  The DescribeLimits Request element has no content.
    */
   describeLimits(params: DynamoDB.Types.DescribeLimitsInput, callback?: (err: AWSError, data: DynamoDB.Types.DescribeLimitsOutput) => void): Request<DynamoDB.Types.DescribeLimitsOutput, AWSError>;
   /**
-   * Returns the current provisioned-capacity limits for your AWS account in a Region, both for the Region as a whole and for any one DynamoDB table that you create there. When you establish an AWS account, the account has initial limits on the maximum read capacity units and write capacity units that you can provision across all of your DynamoDB tables in a given Region. Also, there are per-table limits that apply when you create a table there. For more information, see Limits page in the Amazon DynamoDB Developer Guide. Although you can increase these limits by filing a case at AWS Support Center, obtaining the increase is not instantaneous. The DescribeLimits action lets you write code to compare the capacity you are currently using to those limits imposed by your account so that you have enough time to apply for an increase before you hit a limit. For example, you could use one of the AWS SDKs to do the following:   Call DescribeLimits for a particular Region to obtain your current account limits on provisioned capacity there.   Create a variable to hold the aggregate read capacity units provisioned for all your tables in that Region, and one to hold the aggregate write capacity units. Zero them both.   Call ListTables to obtain a list of all your DynamoDB tables.   For each table name listed by ListTables, do the following:   Call DescribeTable with the table name.   Use the data returned by DescribeTable to add the read capacity units and write capacity units provisioned for the table itself to your variables.   If the table has one or more global secondary indexes (GSIs), loop over these GSIs and add their provisioned capacity values to your variables as well.     Report the account limits for that Region returned by DescribeLimits, along with the total current provisioned capacity levels you have calculated.   This will let you see whether you are getting close to your account-level limits. The per-table limits apply only when you are creating a new table. They restrict the sum of the provisioned capacity of the new table itself and all its global secondary indexes. For existing tables and their GSIs, DynamoDB doesn't let you increase provisioned capacity extremely rapidly. But the only upper limit that applies is that the aggregate provisioned capacity over all your tables and GSIs cannot exceed either of the per-account limits.   DescribeLimits should only be called periodically. You can expect throttling errors if you call it more than once in a minute.  The DescribeLimits Request element has no content.
+   * Returns the current provisioned-capacity quotas for your AWS account in a Region, both for the Region as a whole and for any one DynamoDB table that you create there. When you establish an AWS account, the account has initial quotas on the maximum read capacity units and write capacity units that you can provision across all of your DynamoDB tables in a given Region. Also, there are per-table quotas that apply when you create a table there. For more information, see Service, Account, and Table Quotas page in the Amazon DynamoDB Developer Guide. Although you can increase these quotas by filing a case at AWS Support Center, obtaining the increase is not instantaneous. The DescribeLimits action lets you write code to compare the capacity you are currently using to those quotas imposed by your account so that you have enough time to apply for an increase before you hit a quota. For example, you could use one of the AWS SDKs to do the following:   Call DescribeLimits for a particular Region to obtain your current account quotas on provisioned capacity there.   Create a variable to hold the aggregate read capacity units provisioned for all your tables in that Region, and one to hold the aggregate write capacity units. Zero them both.   Call ListTables to obtain a list of all your DynamoDB tables.   For each table name listed by ListTables, do the following:   Call DescribeTable with the table name.   Use the data returned by DescribeTable to add the read capacity units and write capacity units provisioned for the table itself to your variables.   If the table has one or more global secondary indexes (GSIs), loop over these GSIs and add their provisioned capacity values to your variables as well.     Report the account quotas for that Region returned by DescribeLimits, along with the total current provisioned capacity levels you have calculated.   This will let you see whether you are getting close to your account-level quotas. The per-table quotas apply only when you are creating a new table. They restrict the sum of the provisioned capacity of the new table itself and all its global secondary indexes. For existing tables and their GSIs, DynamoDB doesn't let you increase provisioned capacity extremely rapidly, but the only quota that applies is that the aggregate provisioned capacity over all your tables and GSIs cannot exceed either of the per-account quotas.   DescribeLimits should only be called periodically. You can expect throttling errors if you call it more than once in a minute.  The DescribeLimits Request element has no content.
    */
   describeLimits(callback?: (err: AWSError, data: DynamoDB.Types.DescribeLimitsOutput) => void): Request<DynamoDB.Types.DescribeLimitsOutput, AWSError>;
   /**
@@ -159,6 +183,46 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   describeTimeToLive(callback?: (err: AWSError, data: DynamoDB.Types.DescribeTimeToLiveOutput) => void): Request<DynamoDB.Types.DescribeTimeToLiveOutput, AWSError>;
   /**
+   * Stops replication from the DynamoDB table to the Kinesis data stream. This is done without deleting either of the resources.
+   */
+  disableKinesisStreamingDestination(params: DynamoDB.Types.KinesisStreamingDestinationInput, callback?: (err: AWSError, data: DynamoDB.Types.KinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.KinesisStreamingDestinationOutput, AWSError>;
+  /**
+   * Stops replication from the DynamoDB table to the Kinesis data stream. This is done without deleting either of the resources.
+   */
+  disableKinesisStreamingDestination(callback?: (err: AWSError, data: DynamoDB.Types.KinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.KinesisStreamingDestinationOutput, AWSError>;
+  /**
+   * Starts table data replication to the specified Kinesis data stream at a timestamp chosen during the enable workflow. If this operation doesn't return results immediately, use DescribeKinesisStreamingDestination to check if streaming to the Kinesis data stream is ACTIVE.
+   */
+  enableKinesisStreamingDestination(params: DynamoDB.Types.KinesisStreamingDestinationInput, callback?: (err: AWSError, data: DynamoDB.Types.KinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.KinesisStreamingDestinationOutput, AWSError>;
+  /**
+   * Starts table data replication to the specified Kinesis data stream at a timestamp chosen during the enable workflow. If this operation doesn't return results immediately, use DescribeKinesisStreamingDestination to check if streaming to the Kinesis data stream is ACTIVE.
+   */
+  enableKinesisStreamingDestination(callback?: (err: AWSError, data: DynamoDB.Types.KinesisStreamingDestinationOutput) => void): Request<DynamoDB.Types.KinesisStreamingDestinationOutput, AWSError>;
+  /**
+   *  This operation allows you to perform reads and singleton writes on data stored in DynamoDB, using PartiQL. 
+   */
+  executeStatement(params: DynamoDB.Types.ExecuteStatementInput, callback?: (err: AWSError, data: DynamoDB.Types.ExecuteStatementOutput) => void): Request<DynamoDB.Types.ExecuteStatementOutput, AWSError>;
+  /**
+   *  This operation allows you to perform reads and singleton writes on data stored in DynamoDB, using PartiQL. 
+   */
+  executeStatement(callback?: (err: AWSError, data: DynamoDB.Types.ExecuteStatementOutput) => void): Request<DynamoDB.Types.ExecuteStatementOutput, AWSError>;
+  /**
+   *  This operation allows you to perform transactional reads or writes on data stored in DynamoDB, using PartiQL. 
+   */
+  executeTransaction(params: DynamoDB.Types.ExecuteTransactionInput, callback?: (err: AWSError, data: DynamoDB.Types.ExecuteTransactionOutput) => void): Request<DynamoDB.Types.ExecuteTransactionOutput, AWSError>;
+  /**
+   *  This operation allows you to perform transactional reads or writes on data stored in DynamoDB, using PartiQL. 
+   */
+  executeTransaction(callback?: (err: AWSError, data: DynamoDB.Types.ExecuteTransactionOutput) => void): Request<DynamoDB.Types.ExecuteTransactionOutput, AWSError>;
+  /**
+   * Exports table data to an S3 bucket. The table must have point in time recovery enabled, and you can export data from any time within the point in time recovery window.
+   */
+  exportTableToPointInTime(params: DynamoDB.Types.ExportTableToPointInTimeInput, callback?: (err: AWSError, data: DynamoDB.Types.ExportTableToPointInTimeOutput) => void): Request<DynamoDB.Types.ExportTableToPointInTimeOutput, AWSError>;
+  /**
+   * Exports table data to an S3 bucket. The table must have point in time recovery enabled, and you can export data from any time within the point in time recovery window.
+   */
+  exportTableToPointInTime(callback?: (err: AWSError, data: DynamoDB.Types.ExportTableToPointInTimeOutput) => void): Request<DynamoDB.Types.ExportTableToPointInTimeOutput, AWSError>;
+  /**
    * The GetItem operation returns a set of attributes for the item with the given primary key. If there is no matching item, GetItem does not return any data and there will be no Item element in the response.  GetItem provides an eventually consistent read by default. If your application requires a strongly consistent read, set ConsistentRead to true. Although a strongly consistent read might take more time than an eventually consistent read, it always returns the last updated value.
    */
   getItem(params: DynamoDB.Types.GetItemInput, callback?: (err: AWSError, data: DynamoDB.Types.GetItemOutput) => void): Request<DynamoDB.Types.GetItemOutput, AWSError>;
@@ -167,11 +231,11 @@ declare class DynamoDB extends DynamoDBCustomizations {
    */
   getItem(callback?: (err: AWSError, data: DynamoDB.Types.GetItemOutput) => void): Request<DynamoDB.Types.GetItemOutput, AWSError>;
   /**
-   * List backups associated with an AWS account. To list backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a limit for the maximum number of entries to be returned in a page.  In the request, start time is inclusive, but end time is exclusive. Note that these limits are for the time at which the original backup was requested. You can call ListBackups a maximum of five times per second.
+   * List backups associated with an AWS account. To list backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a maximum number of entries to be returned in a page.  In the request, start time is inclusive, but end time is exclusive. Note that these boundaries are for the time at which the original backup was requested. You can call ListBackups a maximum of five times per second.
    */
   listBackups(params: DynamoDB.Types.ListBackupsInput, callback?: (err: AWSError, data: DynamoDB.Types.ListBackupsOutput) => void): Request<DynamoDB.Types.ListBackupsOutput, AWSError>;
   /**
-   * List backups associated with an AWS account. To list backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a limit for the maximum number of entries to be returned in a page.  In the request, start time is inclusive, but end time is exclusive. Note that these limits are for the time at which the original backup was requested. You can call ListBackups a maximum of five times per second.
+   * List backups associated with an AWS account. To list backups for a given table, specify TableName. ListBackups returns a paginated list of results with at most 1 MB worth of items in a page. You can also specify a maximum number of entries to be returned in a page.  In the request, start time is inclusive, but end time is exclusive. Note that these boundaries are for the time at which the original backup was requested. You can call ListBackups a maximum of five times per second.
    */
   listBackups(callback?: (err: AWSError, data: DynamoDB.Types.ListBackupsOutput) => void): Request<DynamoDB.Types.ListBackupsOutput, AWSError>;
   /**
@@ -182,6 +246,14 @@ declare class DynamoDB extends DynamoDBCustomizations {
    * Returns a list of ContributorInsightsSummary for a table and all its global secondary indexes.
    */
   listContributorInsights(callback?: (err: AWSError, data: DynamoDB.Types.ListContributorInsightsOutput) => void): Request<DynamoDB.Types.ListContributorInsightsOutput, AWSError>;
+  /**
+   * Lists completed exports within the past 90 days.
+   */
+  listExports(params: DynamoDB.Types.ListExportsInput, callback?: (err: AWSError, data: DynamoDB.Types.ListExportsOutput) => void): Request<DynamoDB.Types.ListExportsOutput, AWSError>;
+  /**
+   * Lists completed exports within the past 90 days.
+   */
+  listExports(callback?: (err: AWSError, data: DynamoDB.Types.ListExportsOutput) => void): Request<DynamoDB.Types.ListExportsOutput, AWSError>;
   /**
    * Lists all global tables that have a replica in the specified Region.  This operation only applies to Version 2017.11.29 of global tables. 
    */
@@ -647,6 +719,18 @@ declare namespace DynamoDB {
   export type BackupType = "USER"|"SYSTEM"|"AWS_BACKUP"|string;
   export type BackupTypeFilter = "USER"|"SYSTEM"|"AWS_BACKUP"|"ALL"|string;
   export type BackupsInputLimit = number;
+  export interface BatchExecuteStatementInput {
+    /**
+     *  The list of PartiQL statements representing the batch to run. 
+     */
+    Statements: PartiQLBatchRequest;
+  }
+  export interface BatchExecuteStatementOutput {
+    /**
+     *  The response to each PartiQL statement in the batch. 
+     */
+    Responses?: PartiQLBatchResponse;
+  }
   export interface BatchGetItemInput {
     /**
      * A map of one or more table names and, for each table, a map that describes one or more items to retrieve from that table. Each table name can be used only once per BatchGetItem request. Each element in the map of items to retrieve consists of the following:    ConsistentRead - If true, a strongly consistent read is used; if false (the default), an eventually consistent read is used.    ExpressionAttributeNames - One or more substitution tokens for attribute names in the ProjectionExpression parameter. The following are some use cases for using ExpressionAttributeNames:   To access an attribute whose name conflicts with a DynamoDB reserved word.   To create a placeholder for repeating occurrences of an attribute name in an expression.   To prevent special characters in an attribute name from being misinterpreted in an expression.   Use the # character in an expression to dereference an attribute name. For example, consider the following attribute name:    Percentile    The name of this attribute conflicts with a reserved word, so it cannot be used directly in an expression. (For the complete list of reserved words, see Reserved Words in the Amazon DynamoDB Developer Guide). To work around this, you could specify the following for ExpressionAttributeNames:    {"#P":"Percentile"}    You could then use this substitution in an expression, as in this example:    #P = :val     Tokens that begin with the : character are expression attribute values, which are placeholders for the actual value at runtime.  For more information about expression attribute names, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    Keys - An array of primary key attribute values that define specific items in the table. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide the partition key value. For a composite key, you must provide both the partition key value and the sort key value.    ProjectionExpression - A string that identifies one or more attributes to retrieve from the table. These attributes can include scalars, sets, or elements of a JSON document. The attributes in the expression must be separated by commas. If no attribute names are specified, then all attributes are returned. If any of the requested attributes are not found, they do not appear in the result. For more information, see Accessing Item Attributes in the Amazon DynamoDB Developer Guide.    AttributesToGet - This is a legacy parameter. Use ProjectionExpression instead. For more information, see AttributesToGet in the Amazon DynamoDB Developer Guide.   
@@ -670,6 +754,45 @@ declare namespace DynamoDB {
   }
   export type BatchGetRequestMap = {[key: string]: KeysAndAttributes};
   export type BatchGetResponseMap = {[key: string]: ItemList};
+  export interface BatchStatementError {
+    /**
+     *  The error code associated with the failed PartiQL batch statement. 
+     */
+    Code?: BatchStatementErrorCodeEnum;
+    /**
+     *  The error message associated with the PartiQL batch resposne. 
+     */
+    Message?: String;
+  }
+  export type BatchStatementErrorCodeEnum = "ConditionalCheckFailed"|"ItemCollectionSizeLimitExceeded"|"RequestLimitExceeded"|"ValidationError"|"ProvisionedThroughputExceeded"|"TransactionConflict"|"ThrottlingError"|"InternalServerError"|"ResourceNotFound"|"AccessDenied"|"DuplicateItem"|string;
+  export interface BatchStatementRequest {
+    /**
+     *  A valid PartiQL statement. 
+     */
+    Statement: PartiQLStatement;
+    /**
+     *  The parameters associated with a PartiQL statement in the batch request. 
+     */
+    Parameters?: PreparedStatementParameters;
+    /**
+     *  The read consistency of the PartiQL batch request. 
+     */
+    ConsistentRead?: ConsistentRead;
+  }
+  export interface BatchStatementResponse {
+    /**
+     *  The error associated with a failed PartiQL batch statement. 
+     */
+    Error?: BatchStatementError;
+    /**
+     *  The table name associated with a failed PartiQL batch statement. 
+     */
+    TableName?: TableName;
+    /**
+     *  A DynamoDB item associated with a BatchStatementResponse 
+     */
+    Item?: AttributeMap;
+  }
   export interface BatchWriteItemInput {
     /**
      * A map of one or more table names and, for each table, a list of operations to be performed (DeleteRequest or PutRequest). Each element in the map consists of the following:    DeleteRequest - Perform a DeleteItem operation on the specified item. The item to be deleted is identified by a Key subelement:    Key - A map of primary key attribute values that uniquely identify the item. Each entry in this map consists of an attribute name and an attribute value. For each primary key, you must provide all of the key attributes. For example, with a simple primary key, you only need to provide a value for the partition key. For a composite primary key, you must provide values for both the partition key and the sort key.      PutRequest - Perform a PutItem operation on the specified item. The item to be put is identified by an Item subelement:    Item - A map of attributes and their values. Each entry in this map consists of an attribute name and an attribute value. Attribute values must not be null; string and binary type attributes must have lengths greater than zero; and set type attributes must not be empty. Requests that contain empty values are rejected with a ValidationException exception. If you specify any attributes that are part of an index key, then the data types for those attributes must match those of the schema in the table's attribute definition.    
@@ -696,6 +819,7 @@ declare namespace DynamoDB {
     ConsumedCapacity?: ConsumedCapacityMultiple;
   }
   export type BatchWriteItemRequestMap = {[key: string]: WriteRequests};
+  export type BilledSizeBytes = number;
   export type BillingMode = "PROVISIONED"|"PAY_PER_REQUEST"|string;
   export interface BillingModeSummary {
     /**
@@ -726,6 +850,7 @@ declare namespace DynamoDB {
     CapacityUnits?: ConsumedCapacityUnits;
   }
   export type ClientRequestToken = string;
+  export type ClientToken = string;
   export type ComparisonOperator = "EQ"|"NE"|"IN"|"LE"|"LT"|"GE"|"GT"|"BETWEEN"|"NOT_NULL"|"NULL"|"CONTAINS"|"NOT_CONTAINS"|"BEGINS_WITH"|string;
   export interface Condition {
     /**
@@ -858,7 +983,7 @@ declare namespace DynamoDB {
      */
     Projection: Projection;
     /**
-     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
+     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput?: ProvisionedThroughput;
   }
@@ -928,7 +1053,7 @@ declare namespace DynamoDB {
      */
     BillingMode?: BillingMode;
     /**
-     * Represents the provisioned throughput settings for a specified table or index. The settings can be modified using the UpdateTable operation.  If you set BillingMode as PROVISIONED, you must specify this property. If you set BillingMode as PAY_PER_REQUEST, you cannot specify this property.  For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
+     * Represents the provisioned throughput settings for a specified table or index. The settings can be modified using the UpdateTable operation.  If you set BillingMode as PROVISIONED, you must specify this property. If you set BillingMode as PAY_PER_REQUEST, you cannot specify this property. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput?: ProvisionedThroughput;
     /**
@@ -1146,6 +1271,18 @@ declare namespace DynamoDB {
      */
     Endpoints: Endpoints;
   }
+  export interface DescribeExportInput {
+    /**
+     * The Amazon Resource Name (ARN) associated with the export.
+     */
+    ExportArn: ExportArn;
+  }
+  export interface DescribeExportOutput {
+    /**
+     * Represents the properties of the export.
+     */
+    ExportDescription?: ExportDescription;
+  }
   export interface DescribeGlobalTableInput {
     /**
      * The name of the global table.
@@ -1173,6 +1310,22 @@ declare namespace DynamoDB {
      * The Region-specific settings for the global table.
      */
     ReplicaSettings?: ReplicaSettingsDescriptionList;
+  }
+  export interface DescribeKinesisStreamingDestinationInput {
+    /**
+     * The name of the table being described.
+     */
+    TableName: TableName;
+  }
+  export interface DescribeKinesisStreamingDestinationOutput {
+    /**
+     * The name of the table being described.
+     */
+    TableName?: TableName;
+    /**
+     * The list of replica structures for the table being described.
+     */
+    KinesisDataStreamDestinations?: KinesisDataStreamDestinations;
   }
   export interface DescribeLimitsInput {
   }
@@ -1230,6 +1383,7 @@ declare namespace DynamoDB {
      */
     TimeToLiveDescription?: TimeToLiveDescription;
   }
+  export type DestinationStatus = "ENABLING"|"ACTIVE"|"DISABLING"|"DISABLED"|"ENABLE_FAILED"|string;
   export type Double = number;
   export interface Endpoint {
     /**
@@ -1244,6 +1398,50 @@ declare namespace DynamoDB {
   export type Endpoints = Endpoint[];
   export type ExceptionDescription = string;
   export type ExceptionName = string;
+  export interface ExecuteStatementInput {
+    /**
+     *  The PartiQL statement representing the operation to run. 
+     */
+    Statement: PartiQLStatement;
+    /**
+     *  The parameters for the PartiQL statement, if any. 
+     */
+    Parameters?: PreparedStatementParameters;
+    /**
+     *  The consistency of a read operation. If set to true, then a strongly consistent read is used; otherwise, an eventually consistent read is used. 
+     */
+    ConsistentRead?: ConsistentRead;
+    /**
+     *  Set this value to get remaining results, if NextToken was returned in the statement response. 
+     */
+    NextToken?: PartiQLNextToken;
+  }
+  export interface ExecuteStatementOutput {
+    /**
+     *  If a read operation was used, this property will contain the result of the reade operation; a map of attribute names and their values. For the write operations this value will be empty. 
+     */
+    Items?: ItemList;
+    /**
+     *  If the response of a read request exceeds the response payload limit DynamoDB will set this value in the response. If set, you can use that this value in the subsequent request to get the remaining results. 
+     */
+    NextToken?: PartiQLNextToken;
+  }
+  export interface ExecuteTransactionInput {
+    /**
+     *  The list of PartiQL statements representing the transaction to run. 
+     */
+    TransactStatements: ParameterizedStatements;
+    /**
+     *  Set this value to get remaining results, if NextToken was returned in the statement response. 
+     */
+    ClientRequestToken?: ClientRequestToken;
+  }
+  export interface ExecuteTransactionOutput {
+    /**
+     *  The response to a PartiQL transaction. 
+     */
+    Responses?: ItemResponseList;
+  }
   export type ExpectedAttributeMap = {[key: string]: ExpectedAttributeValue};
   export interface ExpectedAttributeValue {
     /**
@@ -1263,10 +1461,152 @@ declare namespace DynamoDB {
      */
     AttributeValueList?: AttributeValueList;
   }
+  export type ExportArn = string;
+  export interface ExportDescription {
+    /**
+     * The Amazon Resource Name (ARN) of the table export.
+     */
+    ExportArn?: ExportArn;
+    /**
+     * Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.
+     */
+    ExportStatus?: ExportStatus;
+    /**
+     * The time at which the export task began.
+     */
+    StartTime?: ExportStartTime;
+    /**
+     * The time at which the export task completed.
+     */
+    EndTime?: ExportEndTime;
+    /**
+     * The name of the manifest file for the export task.
+     */
+    ExportManifest?: ExportManifest;
+    /**
+     * The Amazon Resource Name (ARN) of the table that was exported.
+     */
+    TableArn?: TableArn;
+    /**
+     * Unique ID of the table that was exported.
+     */
+    TableId?: TableId;
+    /**
+     * Point in time from which table data was exported.
+     */
+    ExportTime?: ExportTime;
+    /**
+     * The client token that was provided for the export task. A client token makes calls to ExportTableToPointInTimeInput idempotent, meaning that multiple identical calls have the same effect as one single call.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * The name of the Amazon S3 bucket containing the export.
+     */
+    S3Bucket?: S3Bucket;
+    /**
+     * The ID of the AWS account that owns the bucket containing the export.
+     */
+    S3BucketOwner?: S3BucketOwner;
+    /**
+     * The Amazon S3 bucket prefix used as the file name and path of the exported snapshot.
+     */
+    S3Prefix?: S3Prefix;
+    /**
+     * Type of encryption used on the bucket where export data is stored. Valid values for S3SseAlgorithm are:    AES256 - server-side encryption with Amazon S3 managed keys    KMS - server-side encryption with AWS KMS managed keys  
+     */
+    S3SseAlgorithm?: S3SseAlgorithm;
+    /**
+     * The ID of the AWS KMS managed key used to encrypt the S3 bucket where export data is stored (if applicable).
+     */
+    S3SseKmsKeyId?: S3SseKmsKeyId;
+    /**
+     * Status code for the result of the failed export.
+     */
+    FailureCode?: FailureCode;
+    /**
+     * Export failure reason description.
+     */
+    FailureMessage?: FailureMessage;
+    /**
+     * The format of the exported data. Valid values for ExportFormat are DYNAMODB_JSON or ION.
+     */
+    ExportFormat?: ExportFormat;
+    /**
+     * The billable size of the table export.
+     */
+    BilledSizeBytes?: BilledSizeBytes;
+    /**
+     * The number of items exported.
+     */
+    ItemCount?: ItemCount;
+  }
+  export type ExportEndTime = Date;
+  export type ExportFormat = "DYNAMODB_JSON"|"ION"|string;
+  export type ExportManifest = string;
+  export type ExportNextToken = string;
+  export type ExportStartTime = Date;
+  export type ExportStatus = "IN_PROGRESS"|"COMPLETED"|"FAILED"|string;
+  export type ExportSummaries = ExportSummary[];
+  export interface ExportSummary {
+    /**
+     * The Amazon Resource Name (ARN) of the export.
+     */
+    ExportArn?: ExportArn;
+    /**
+     * Export can be in one of the following states: IN_PROGRESS, COMPLETED, or FAILED.
+     */
+    ExportStatus?: ExportStatus;
+  }
+  export interface ExportTableToPointInTimeInput {
+    /**
+     * The Amazon Resource Name (ARN) associated with the table to export.
+     */
+    TableArn: TableArn;
+    /**
+     * Time in the past from which to export table data. The table export will be a snapshot of the table's state at this point in time.
+     */
+    ExportTime?: ExportTime;
+    /**
+     * Providing a ClientToken makes the call to ExportTableToPointInTimeInput idempotent, meaning that multiple identical calls have the same effect as one single call. A client token is valid for 8 hours after the first request that uses it is completed. After 8 hours, any request with the same client token is treated as a new request. Do not resubmit the same request with the same client token for more than 8 hours, or the result might not be idempotent. If you submit a request with the same client token but a change in other parameters within the 8-hour idempotency window, DynamoDB returns an IdempotentParameterMismatch exception.
+     */
+    ClientToken?: ClientToken;
+    /**
+     * The name of the Amazon S3 bucket to export the snapshot to.
+     */
+    S3Bucket: S3Bucket;
+    /**
+     * The ID of the AWS account that owns the bucket the export will be stored in.
+     */
+    S3BucketOwner?: S3BucketOwner;
+    /**
+     * The Amazon S3 bucket prefix to use as the file name and path of the exported snapshot.
+     */
+    S3Prefix?: S3Prefix;
+    /**
+     * Type of encryption used on the bucket where export data will be stored. Valid values for S3SseAlgorithm are:    AES256 - server-side encryption with Amazon S3 managed keys    KMS - server-side encryption with AWS KMS managed keys  
+     */
+    S3SseAlgorithm?: S3SseAlgorithm;
+    /**
+     * The ID of the AWS KMS managed key used to encrypt the S3 bucket where export data will be stored (if applicable).
+     */
+    S3SseKmsKeyId?: S3SseKmsKeyId;
+    /**
+     * The format for the exported data. Valid values for ExportFormat are DYNAMODB_JSON or ION.
+     */
+    ExportFormat?: ExportFormat;
+  }
+  export interface ExportTableToPointInTimeOutput {
+    /**
+     * Contains a description of the table export.
+     */
+    ExportDescription?: ExportDescription;
+  }
+  export type ExportTime = Date;
   export type ExpressionAttributeNameMap = {[key: string]: AttributeName};
   export type ExpressionAttributeNameVariable = string;
   export type ExpressionAttributeValueMap = {[key: string]: AttributeValue};
   export type ExpressionAttributeValueVariable = string;
+  export type FailureCode = string;
   export interface FailureException {
     /**
      * Exception name.
@@ -1277,6 +1617,7 @@ declare namespace DynamoDB {
      */
     ExceptionDescription?: ExceptionDescription;
   }
+  export type FailureMessage = string;
   export type FilterConditionMap = {[key: string]: Condition};
   export interface Get {
     /**
@@ -1347,7 +1688,7 @@ declare namespace DynamoDB {
      */
     Projection: Projection;
     /**
-     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
+     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput?: ProvisionedThroughput;
   }
@@ -1381,7 +1722,7 @@ declare namespace DynamoDB {
      */
     Backfilling?: Backfilling;
     /**
-     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
+     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput?: ProvisionedThroughputDescription;
     /**
@@ -1552,6 +1893,45 @@ declare namespace DynamoDB {
      */
     ExpressionAttributeNames?: ExpressionAttributeNameMap;
   }
+  export interface KinesisDataStreamDestination {
+    /**
+     * The ARN for a specific Kinesis data stream.
+     */
+    StreamArn?: StreamArn;
+    /**
+     * The current status of replication.
+     */
+    DestinationStatus?: DestinationStatus;
+    /**
+     * The human-readable string that corresponds to the replica status.
+     */
+    DestinationStatusDescription?: String;
+  }
+  export type KinesisDataStreamDestinations = KinesisDataStreamDestination[];
+  export interface KinesisStreamingDestinationInput {
+    /**
+     * The name of the DynamoDB table.
+     */
+    TableName: TableName;
+    /**
+     * The ARN for a Kinesis data stream.
+     */
+    StreamArn: StreamArn;
+  }
+  export interface KinesisStreamingDestinationOutput {
+    /**
+     * The name of the table being modified.
+     */
+    TableName?: TableName;
+    /**
+     * The ARN for the specific Kinesis data stream.
+     */
+    StreamArn?: StreamArn;
+    /**
+     * The current status of the replication.
+     */
+    DestinationStatus?: DestinationStatus;
+  }
   export type LastUpdateDateTime = Date;
   export type ListAttributeValue = AttributeValue[];
   export interface ListBackupsInput {
@@ -1614,6 +1994,31 @@ declare namespace DynamoDB {
      * A token to go to the next page if there is one.
      */
     NextToken?: NextTokenString;
+  }
+  export interface ListExportsInput {
+    /**
+     * The Amazon Resource Name (ARN) associated with the exported table.
+     */
+    TableArn?: TableArn;
+    /**
+     * Maximum number of results to return per page.
+     */
+    MaxResults?: ListExportsMaxLimit;
+    /**
+     * An optional string that, if supplied, must be copied from the output of a previous call to ListExports. When provided in this manner, the API fetches the next page of results.
+     */
+    NextToken?: ExportNextToken;
+  }
+  export type ListExportsMaxLimit = number;
+  export interface ListExportsOutput {
+    /**
+     * A list of ExportSummary objects.
+     */
+    ExportSummaries?: ExportSummaries;
+    /**
+     * If this value is returned, there are additional results to be displayed. To retrieve them, call ListExports again, with NextToken set to this value.
+     */
+    NextToken?: ExportNextToken;
   }
   export interface ListGlobalTablesInput {
     /**
@@ -1746,6 +2151,21 @@ declare namespace DynamoDB {
   export type NullAttributeValue = boolean;
   export type NumberAttributeValue = string;
   export type NumberSetAttributeValue = NumberAttributeValue[];
+  export interface ParameterizedStatement {
+    /**
+     *  A PartiQL statment that uses parameters. 
+     */
+    Statement: PartiQLStatement;
+    /**
+     *  The parameter values. 
+     */
+    Parameters?: PreparedStatementParameters;
+  }
+  export type ParameterizedStatements = ParameterizedStatement[];
+  export type PartiQLBatchRequest = BatchStatementRequest[];
+  export type PartiQLBatchResponse = BatchStatementResponse[];
+  export type PartiQLNextToken = string;
+  export type PartiQLStatement = string;
   export interface PointInTimeRecoveryDescription {
     /**
      * The current state of point in time recovery:    ENABLING - Point in time recovery is being enabled.    ENABLED - Point in time recovery is enabled.    DISABLED - Point in time recovery is disabled.  
@@ -1769,9 +2189,10 @@ declare namespace DynamoDB {
   export type PointInTimeRecoveryStatus = "ENABLED"|"DISABLED"|string;
   export type PositiveIntegerObject = number;
   export type PositiveLongObject = number;
+  export type PreparedStatementParameters = AttributeValue[];
   export interface Projection {
     /**
-     * The set of attributes that are projected into the index:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - Only the specified table attributes are projected into the index. The list of projected attributes is in NonKeyAttributes.    ALL - All of the table attributes are projected into the index.  
+     * The set of attributes that are projected into the index:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - In addition to the attributes described in KEYS_ONLY, the secondary index will include other non-key attributes that you specify.    ALL - All of the table attributes are projected into the index.  
      */
     ProjectionType?: ProjectionType;
     /**
@@ -1801,7 +2222,7 @@ declare namespace DynamoDB {
      */
     LastDecreaseDateTime?: _Date;
     /**
-     * The number of provisioned throughput decreases for this table during this UTC calendar day. For current maximums on provisioned throughput decreases, see Limits in the Amazon DynamoDB Developer Guide.
+     * The number of provisioned throughput decreases for this table during this UTC calendar day. For current maximums on provisioned throughput decreases, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     NumberOfDecreasesToday?: PositiveLongObject;
     /**
@@ -2036,7 +2457,7 @@ declare namespace DynamoDB {
      */
     RegionName?: RegionName;
     /**
-     * The current state of the replica:    CREATING - The replica is being created.    UPDATING - The replica is being updated.    DELETING - The replica is being deleted.    ACTIVE - The replica is ready for use.  
+     * The current state of the replica:    CREATING - The replica is being created.    UPDATING - The replica is being updated.    DELETING - The replica is being deleted.    ACTIVE - The replica is ready for use.    REGION_DISABLED - The replica is inaccessible because the AWS Region has been disabled.  If the AWS Region remains inaccessible for more than 20 hours, DynamoDB will remove this replica from the replication group. The replica will not be deleted and replication will stop from and to this region.     INACCESSIBLE_ENCRYPTION_CREDENTIALS  - The AWS KMS key used to encrypt the table is inaccessible.  If the AWS KMS key remains inaccessible for more than 20 hours, DynamoDB will remove this replica from the replication group. The replica will not be deleted and replication will stop from and to this region.   
      */
     ReplicaStatus?: ReplicaStatus;
     /**
@@ -2059,6 +2480,10 @@ declare namespace DynamoDB {
      * Replica-specific global secondary index settings.
      */
     GlobalSecondaryIndexes?: ReplicaGlobalSecondaryIndexDescriptionList;
+    /**
+     * The time at which the replica was first detected as inaccessible. To determine cause of inaccessibility check the ReplicaStatus property.
+     */
+    ReplicaInaccessibleDateTime?: _Date;
   }
   export type ReplicaDescriptionList = ReplicaDescription[];
   export interface ReplicaGlobalSecondaryIndex {
@@ -2201,7 +2626,7 @@ declare namespace DynamoDB {
     ReplicaGlobalSecondaryIndexSettingsUpdate?: ReplicaGlobalSecondaryIndexSettingsUpdateList;
   }
   export type ReplicaSettingsUpdateList = ReplicaSettingsUpdate[];
-  export type ReplicaStatus = "CREATING"|"CREATION_FAILED"|"UPDATING"|"DELETING"|"ACTIVE"|string;
+  export type ReplicaStatus = "CREATING"|"CREATION_FAILED"|"UPDATING"|"DELETING"|"ACTIVE"|"REGION_DISABLED"|"INACCESSIBLE_ENCRYPTION_CREDENTIALS"|string;
   export type ReplicaStatusDescription = string;
   export type ReplicaStatusPercentProgress = string;
   export interface ReplicaUpdate {
@@ -2338,6 +2763,11 @@ declare namespace DynamoDB {
   export type ReturnItemCollectionMetrics = "SIZE"|"NONE"|string;
   export type ReturnValue = "NONE"|"ALL_OLD"|"UPDATED_OLD"|"ALL_NEW"|"UPDATED_NEW"|string;
   export type ReturnValuesOnConditionCheckFailure = "ALL_OLD"|"NONE"|string;
+  export type S3Bucket = string;
+  export type S3BucketOwner = string;
+  export type S3Prefix = string;
+  export type S3SseAlgorithm = "AES256"|"KMS"|string;
+  export type S3SseKmsKeyId = string;
   export interface SSEDescription {
     /**
      * Represents the current state of server-side encryption. The only supported values are:    ENABLED - Server-side encryption is enabled.    UPDATING - Server-side encryption is being updated.  
@@ -2605,7 +3035,7 @@ declare namespace DynamoDB {
      */
     LocalSecondaryIndexes?: LocalSecondaryIndexDescriptionList;
     /**
-     * The global secondary indexes, if any, on the table. Each index is scoped to a given partition key value. Each element is composed of:    Backfilling - If true, then the index is currently in the backfilling phase. Backfilling occurs only when a new global secondary index is added to the table. It is the process by which DynamoDB populates the new index with data from the table. (This attribute does not appear for indexes that were created during a CreateTable operation.)   You can delete an index that is being created during the Backfilling phase when IndexStatus is set to CREATING and Backfilling is true. You can't delete the index that is being created when IndexStatus is set to CREATING and Backfilling is false. (This attribute does not appear for indexes that were created during a CreateTable operation.)    IndexName - The name of the global secondary index.    IndexSizeBytes - The total size of the global secondary index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     IndexStatus - The current status of the global secondary index:    CREATING - The index is being created.    UPDATING - The index is being updated.    DELETING - The index is being deleted.    ACTIVE - The index is ready for use.      ItemCount - The number of items in the global secondary index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     KeySchema - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.    Projection - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:    ProjectionType - One of the following:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - Only the specified table attributes are projected into the index. The list of projected attributes is in NonKeyAttributes.    ALL - All of the table attributes are projected into the index.      NonKeyAttributes - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in NonKeyAttributes, summed across all of the secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.      ProvisionedThroughput - The provisioned throughput settings for the global secondary index, consisting of read and write capacity units, along with data about increases and decreases.    If the table is in the DELETING state, no information about indexes will be returned.
+     * The global secondary indexes, if any, on the table. Each index is scoped to a given partition key value. Each element is composed of:    Backfilling - If true, then the index is currently in the backfilling phase. Backfilling occurs only when a new global secondary index is added to the table. It is the process by which DynamoDB populates the new index with data from the table. (This attribute does not appear for indexes that were created during a CreateTable operation.)   You can delete an index that is being created during the Backfilling phase when IndexStatus is set to CREATING and Backfilling is true. You can't delete the index that is being created when IndexStatus is set to CREATING and Backfilling is false. (This attribute does not appear for indexes that were created during a CreateTable operation.)    IndexName - The name of the global secondary index.    IndexSizeBytes - The total size of the global secondary index, in bytes. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     IndexStatus - The current status of the global secondary index:    CREATING - The index is being created.    UPDATING - The index is being updated.    DELETING - The index is being deleted.    ACTIVE - The index is ready for use.      ItemCount - The number of items in the global secondary index. DynamoDB updates this value approximately every six hours. Recent changes might not be reflected in this value.     KeySchema - Specifies the complete index key schema. The attribute names in the key schema must be between 1 and 255 characters (inclusive). The key schema must begin with the same partition key as the table.    Projection - Specifies attributes that are copied (projected) from the table into the index. These are in addition to the primary key attributes and index key attributes, which are automatically projected. Each attribute specification is composed of:    ProjectionType - One of the following:    KEYS_ONLY - Only the index and primary keys are projected into the index.    INCLUDE - In addition to the attributes described in KEYS_ONLY, the secondary index will include other non-key attributes that you specify.    ALL - All of the table attributes are projected into the index.      NonKeyAttributes - A list of one or more non-key attribute names that are projected into the secondary index. The total count of attributes provided in NonKeyAttributes, summed across all of the secondary indexes, must not exceed 20. If you project the same attribute into two different indexes, this counts as two distinct attributes when determining the total.      ProvisionedThroughput - The provisioned throughput settings for the global secondary index, consisting of read and write capacity units, along with data about increases and decreases.    If the table is in the DELETING state, no information about indexes will be returned.
      */
     GlobalSecondaryIndexes?: GlobalSecondaryIndexDescriptionList;
     /**
@@ -2856,7 +3286,7 @@ declare namespace DynamoDB {
      */
     IndexName: IndexName;
     /**
-     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Limits in the Amazon DynamoDB Developer Guide.
+     * Represents the provisioned throughput settings for the specified global secondary index. For current minimum and maximum provisioned throughput values, see Service, Account, and Table Quotas in the Amazon DynamoDB Developer Guide.
      */
     ProvisionedThroughput: ProvisionedThroughput;
   }

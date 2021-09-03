@@ -1,0 +1,62 @@
+[
+    {
+        "type": "feature",
+        "category": "ApplicationAutoScaling",
+        "description": "This release extends Auto Scaling support for cluster storage of Managed Streaming for Kafka. Auto Scaling monitors and automatically expands storage capacity when a critical usage threshold is met."
+    },
+    {
+        "type": "feature",
+        "category": "DataSync",
+        "description": "This release enables customers to create s3 location for S3 bucket's located on an AWS Outpost."
+    },
+    {
+        "type": "feature",
+        "category": "EMR",
+        "description": "Amazon EMR customers can now use EC2 placement group to influence the placement of master nodes in a high-availability (HA) cluster across distinct underlying hardware to improve cluster availability."
+    },
+    {
+        "type": "feature",
+        "category": "Imagebuilder",
+        "description": "EC2 Image Builder adds support for copying AMIs created by Image Builder to accounts specific to each Region."
+    },
+    {
+        "type": "feature",
+        "category": "Iot",
+        "description": "AWS IoT Rules Engine adds Timestream action. The Timestream rule action lets you stream time-series data from IoT sensors and applications to Amazon Timestream databases for time series analysis."
+    },
+    {
+        "type": "feature",
+        "category": "MediaConnect",
+        "description": "MediaConnect now supports reservations to provide a discounted rate for a specific outbound bandwidth over a period of time."
+    },
+    {
+        "type": "feature",
+        "category": "Pinpoint",
+        "description": "Amazon Pinpoint - Features - Customers can start a journey based on an event being triggered by an endpoint or user."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Amazon S3 on Outposts expands object storage to on-premises AWS Outposts environments, enabling you to store and retrieve objects using S3 APIs and features."
+    },
+    {
+        "type": "feature",
+        "category": "S3",
+        "description": "Support S3 on Outposts Access Point and Bucket ARNs"
+    },
+    {
+        "type": "feature",
+        "category": "S3Control",
+        "description": "Amazon S3 on Outposts expands object storage to on-premises AWS Outposts environments, enabling you to store and retrieve objects using S3 APIs and features."
+    },
+    {
+        "type": "feature",
+        "category": "S3Outposts",
+        "description": "Amazon S3 on Outposts expands object storage to on-premises AWS Outposts environments, enabling you to store and retrieve objects using S3 APIs and features."
+    },
+    {
+        "type": "feature",
+        "category": "SecurityHub",
+        "description": "Added several new resource details objects. Added additional details for CloudFront distributions, IAM roles, and IAM access keys. Added a new ResourceRole attribute for resources."
+    }
+]

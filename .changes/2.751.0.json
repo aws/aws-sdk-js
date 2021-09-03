@@ -1,0 +1,7 @@
+[
+    {
+        "type": "feature",
+        "category": "WorkSpaces",
+        "description": "Adds API support for WorkSpaces Cross-Region Redirection feature."
+    }
+]

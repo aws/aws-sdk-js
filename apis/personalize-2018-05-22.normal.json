@@ -73,7 +73,7 @@
           "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p>Creates a campaign by deploying a solution version. When a client calls the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a> and <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html\">GetPersonalizedRanking</a> APIs, a campaign is specified in the request.</p> <p> <b>Minimum Provisioned TPS and Auto-Scaling</b> </p> <p>A transaction is a single <code>GetRecommendations</code> or <code>GetPersonalizedRanking</code> call. Transactions per second (TPS) is the throughput and unit of billing for Amazon Personalize. The minimum provisioned TPS (<code>minProvisionedTPS</code>) specifies the baseline throughput provisioned by Amazon Personalize, and thus, the minimum billing charge. If your TPS increases beyond <code>minProvisionedTPS</code>, Amazon Personalize auto-scales the provisioned capacity up and down, but never below <code>minProvisionedTPS</code>, to maintain a 70% utilization. There's a short time delay while the capacity is increased that might cause loss of transactions. It's recommended to start with a low <code>minProvisionedTPS</code>, track your usage using Amazon CloudWatch metrics, and then increase the <code>minProvisionedTPS</code> as necessary.</p> <p> <b>Status</b> </p> <p>A campaign can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul> <p>To get the campaign status, call <a>DescribeCampaign</a>.</p> <note> <p>Wait until the <code>status</code> of the campaign is <code>ACTIVE</code> before asking the campaign for recommendations.</p> </note> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListCampaigns</a> </p> </li> <li> <p> <a>DescribeCampaign</a> </p> </li> <li> <p> <a>UpdateCampaign</a> </p> </li> <li> <p> <a>DeleteCampaign</a> </p> </li> </ul>",
+      "documentation": "<p>Creates a campaign by deploying a solution version. When a client calls the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a> and <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html\">GetPersonalizedRanking</a> APIs, a campaign is specified in the request.</p> <p> <b>Minimum Provisioned TPS and Auto-Scaling</b> </p> <p>A transaction is a single <code>GetRecommendations</code> or <code>GetPersonalizedRanking</code> call. Transactions per second (TPS) is the throughput and unit of billing for Amazon Personalize. The minimum provisioned TPS (<code>minProvisionedTPS</code>) specifies the baseline throughput provisioned by Amazon Personalize, and thus, the minimum billing charge. </p> <p> If your TPS increases beyond <code>minProvisionedTPS</code>, Amazon Personalize auto-scales the provisioned capacity up and down, but never below <code>minProvisionedTPS</code>. There's a short time delay while the capacity is increased that might cause loss of transactions.</p> <p>The actual TPS used is calculated as the average requests/second within a 5-minute window. You pay for maximum of either the minimum provisioned TPS or the actual TPS. We recommend starting with a low <code>minProvisionedTPS</code>, track your usage using Amazon CloudWatch metrics, and then increase the <code>minProvisionedTPS</code> as necessary.</p> <p> <b>Status</b> </p> <p>A campaign can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul> <p>To get the campaign status, call <a>DescribeCampaign</a>.</p> <note> <p>Wait until the <code>status</code> of the campaign is <code>ACTIVE</code> before asking the campaign for recommendations.</p> </note> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListCampaigns</a> </p> </li> <li> <p> <a>DescribeCampaign</a> </p> </li> <li> <p> <a>UpdateCampaign</a> </p> </li> <li> <p> <a>DeleteCampaign</a> </p> </li> </ul>",
       "idempotent": true
     },
     "CreateDataset": {
@@ -108,6 +108,38 @@
       "documentation": "<p>Creates an empty dataset and adds it to the specified dataset group. Use <a>CreateDatasetImportJob</a> to import your training data to a dataset.</p> <p>There are three types of datasets:</p> <ul> <li> <p>Interactions</p> </li> <li> <p>Items</p> </li> <li> <p>Users</p> </li> </ul> <p>Each dataset type has an associated schema with required field types. Only the <code>Interactions</code> dataset is required in order to train a model (also referred to as creating a solution).</p> <p>A dataset can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul> <p>To get the status of the dataset, call <a>DescribeDataset</a>.</p> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>CreateDatasetGroup</a> </p> </li> <li> <p> <a>ListDatasets</a> </p> </li> <li> <p> <a>DescribeDataset</a> </p> </li> <li> <p> <a>DeleteDataset</a> </p> </li> </ul>",
       "idempotent": true
     },
+    "CreateDatasetExportJob": {
+      "name": "CreateDatasetExportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateDatasetExportJobRequest"
+      },
+      "output": {
+        "shape": "CreateDatasetExportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceAlreadyExistsException"
+        },
+        {
+          "shape": "LimitExceededException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        }
+      ],
+      "documentation": "<p> Creates a job that exports data from your dataset to an Amazon S3 bucket. To allow Amazon Personalize to export the training data, you must specify an service-linked IAM role that gives Amazon Personalize <code>PutObject</code> permissions for your Amazon S3 bucket. For information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/export-data.html\">Exporting a dataset</a> in the Amazon Personalize developer guide. </p> <p> <b>Status</b> </p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul> <p> To get the status of the export job, call <a>DescribeDatasetExportJob</a>, and specify the Amazon Resource Name (ARN) of the dataset export job. The dataset export is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the job failed. </p>",
+      "idempotent": true
+    },
     "CreateDatasetGroup": {
       "name": "CreateDatasetGroup",
       "http": {
@@ -131,7 +163,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates an empty dataset group. A dataset group contains related datasets that supply data for training a model. A dataset group can contain at most three datasets, one for each type of dataset:</p> <ul> <li> <p>Interactions</p> </li> <li> <p>Items</p> </li> <li> <p>Users</p> </li> </ul> <p>To train a model (create a solution), a dataset group that contains an <code>Interactions</code> dataset is required. Call <a>CreateDataset</a> to add a dataset to the group.</p> <p>A dataset group can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING</p> </li> </ul> <p>To get the status of the dataset group, call <a>DescribeDatasetGroup</a>. If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the creation failed.</p> <note> <p>You must wait until the <code>status</code> of the dataset group is <code>ACTIVE</code> before adding a dataset to the group.</p> </note> <p>You can specify an AWS Key Management Service (KMS) key to encrypt the datasets in the group. If you specify a KMS key, you must also include an AWS Identity and Access Management (IAM) role that has permission to access the key.</p> <p class=\"title\"> <b>APIs that require a dataset group ARN in the request</b> </p> <ul> <li> <p> <a>CreateDataset</a> </p> </li> <li> <p> <a>CreateEventTracker</a> </p> </li> <li> <p> <a>CreateSolution</a> </p> </li> </ul> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListDatasetGroups</a> </p> </li> <li> <p> <a>DescribeDatasetGroup</a> </p> </li> <li> <p> <a>DeleteDatasetGroup</a> </p> </li> </ul>"
+      "documentation": "<p>Creates an empty dataset group. A dataset group contains related datasets that supply data for training a model. A dataset group can contain at most three datasets, one for each type of dataset:</p> <ul> <li> <p>Interactions</p> </li> <li> <p>Items</p> </li> <li> <p>Users</p> </li> </ul> <p>To train a model (create a solution), a dataset group that contains an <code>Interactions</code> dataset is required. Call <a>CreateDataset</a> to add a dataset to the group.</p> <p>A dataset group can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING</p> </li> </ul> <p>To get the status of the dataset group, call <a>DescribeDatasetGroup</a>. If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the creation failed.</p> <note> <p>You must wait until the <code>status</code> of the dataset group is <code>ACTIVE</code> before adding a dataset to the group.</p> </note> <p>You can specify an Key Management Service (KMS) key to encrypt the datasets in the group. If you specify a KMS key, you must also include an Identity and Access Management (IAM) role that has permission to access the key.</p> <p class=\"title\"> <b>APIs that require a dataset group ARN in the request</b> </p> <ul> <li> <p> <a>CreateDataset</a> </p> </li> <li> <p> <a>CreateEventTracker</a> </p> </li> <li> <p> <a>CreateSolution</a> </p> </li> </ul> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListDatasetGroups</a> </p> </li> <li> <p> <a>DescribeDatasetGroup</a> </p> </li> <li> <p> <a>DeleteDatasetGroup</a> </p> </li> </ul>"
     },
     "CreateDatasetImportJob": {
       "name": "CreateDatasetImportJob",
@@ -162,7 +194,7 @@
           "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p>Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an AWS Identity and Access Management (IAM) role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it in an internal AWS system.</p> <important> <p>The dataset import job replaces any previous data in the dataset.</p> </important> <p> <b>Status</b> </p> <p>A dataset import job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul> <p>To get the status of the import job, call <a>DescribeDatasetImportJob</a>, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the job failed.</p> <note> <p>Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.</p> </note> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListDatasetImportJobs</a> </p> </li> <li> <p> <a>DescribeDatasetImportJob</a> </p> </li> </ul>"
+      "documentation": "<p>Creates a job that imports training data from your data source (an Amazon S3 bucket) to an Amazon Personalize dataset. To allow Amazon Personalize to import the training data, you must specify an IAM service role that has permission to read from the data source, as Amazon Personalize makes a copy of your data and processes it internally. For information on granting access to your Amazon S3 bucket, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html\">Giving Amazon Personalize Access to Amazon S3 Resources</a>. </p> <important> <p>The dataset import job replaces any existing data in the dataset that you imported in bulk.</p> </important> <p> <b>Status</b> </p> <p>A dataset import job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul> <p>To get the status of the import job, call <a>DescribeDatasetImportJob</a>, providing the Amazon Resource Name (ARN) of the dataset import job. The dataset import is complete when the status shows as ACTIVE. If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the job failed.</p> <note> <p>Importing takes time. You must wait until the status shows as ACTIVE before training a model using the dataset.</p> </note> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListDatasetImportJobs</a> </p> </li> <li> <p> <a>DescribeDatasetImportJob</a> </p> </li> </ul>"
     },
     "CreateEventTracker": {
       "name": "CreateEventTracker",
@@ -193,7 +225,7 @@
           "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p>Creates an event tracker that you use when sending event data to the specified dataset group using the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html\">PutEvents</a> API.</p> <p>When Amazon Personalize creates an event tracker, it also creates an <i>event-interactions</i> dataset in the dataset group associated with the event tracker. The event-interactions dataset stores the event data from the <code>PutEvents</code> call. The contents of this dataset are not available to the user.</p> <note> <p>Only one event tracker can be associated with a dataset group. You will get an error if you call <code>CreateEventTracker</code> using the same dataset group as an existing event tracker.</p> </note> <p>When you send event data you include your tracking ID. The tracking ID identifies the customer and authorizes the customer to send the data.</p> <p>The event tracker can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul> <p>To get the status of the event tracker, call <a>DescribeEventTracker</a>.</p> <note> <p>The event tracker must be in the ACTIVE state before using the tracking ID.</p> </note> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListEventTrackers</a> </p> </li> <li> <p> <a>DescribeEventTracker</a> </p> </li> <li> <p> <a>DeleteEventTracker</a> </p> </li> </ul>",
+      "documentation": "<p>Creates an event tracker that you use when adding event data to a specified dataset group using the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html\">PutEvents</a> API.</p> <note> <p>Only one event tracker can be associated with a dataset group. You will get an error if you call <code>CreateEventTracker</code> using the same dataset group as an existing event tracker.</p> </note> <p>When you create an event tracker, the response includes a tracking ID, which you pass as a parameter when you use the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html\">PutEvents</a> operation. Amazon Personalize then appends the event data to the Interactions dataset of the dataset group you specify in your event tracker. </p> <p>The event tracker can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul> <p>To get the status of the event tracker, call <a>DescribeEventTracker</a>.</p> <note> <p>The event tracker must be in the ACTIVE state before using the tracking ID.</p> </note> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListEventTrackers</a> </p> </li> <li> <p> <a>DescribeEventTracker</a> </p> </li> <li> <p> <a>DeleteEventTracker</a> </p> </li> </ul>",
       "idempotent": true
     },
     "CreateFilter": {
@@ -222,7 +254,7 @@
           "shape": "LimitExceededException"
         }
       ],
-      "documentation": "<p>Creates a recommendation filter. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filters.html\">Using Filters with Amazon Personalize</a>.</p>"
+      "documentation": "<p>Creates a recommendation filter. For more information, see <a>filter</a>.</p>"
     },
     "CreateSchema": {
       "name": "CreateSchema",
@@ -279,7 +311,7 @@
           "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p>Creates the configuration for training a model. A trained model is known as a solution. After the configuration is created, you train the model (create a solution) by calling the <a>CreateSolutionVersion</a> operation. Every time you call <code>CreateSolutionVersion</code>, a new version of the solution is created.</p> <p>After creating a solution version, you check its accuracy by calling <a>GetSolutionMetrics</a>. When you are satisfied with the version, you deploy it using <a>CreateCampaign</a>. The campaign provides recommendations to a client through the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a> API.</p> <p>To train a model, Amazon Personalize requires training data and a recipe. The training data comes from the dataset group that you provide in the request. A recipe specifies the training algorithm and a feature transformation. You can specify one of the predefined recipes provided by Amazon Personalize. Alternatively, you can specify <code>performAutoML</code> and Amazon Personalize will analyze your data and select the optimum USER_PERSONALIZATION recipe for you.</p> <p> <b>Status</b> </p> <p>A solution can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul> <p>To get the status of the solution, call <a>DescribeSolution</a>. Wait until the status shows as ACTIVE before calling <code>CreateSolutionVersion</code>.</p> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListSolutions</a> </p> </li> <li> <p> <a>CreateSolutionVersion</a> </p> </li> <li> <p> <a>DescribeSolution</a> </p> </li> <li> <p> <a>DeleteSolution</a> </p> </li> </ul> <ul> <li> <p> <a>ListSolutionVersions</a> </p> </li> <li> <p> <a>DescribeSolutionVersion</a> </p> </li> </ul>"
+      "documentation": "<p>Creates the configuration for training a model. A trained model is known as a solution. After the configuration is created, you train the model (create a solution) by calling the <a>CreateSolutionVersion</a> operation. Every time you call <code>CreateSolutionVersion</code>, a new version of the solution is created.</p> <p>After creating a solution version, you check its accuracy by calling <a>GetSolutionMetrics</a>. When you are satisfied with the version, you deploy it using <a>CreateCampaign</a>. The campaign provides recommendations to a client through the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a> API.</p> <p>To train a model, Amazon Personalize requires training data and a recipe. The training data comes from the dataset group that you provide in the request. A recipe specifies the training algorithm and a feature transformation. You can specify one of the predefined recipes provided by Amazon Personalize. Alternatively, you can specify <code>performAutoML</code> and Amazon Personalize will analyze your data and select the optimum USER_PERSONALIZATION recipe for you.</p> <note> <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> for solution hyperparameter optimization at this time.</p> </note> <p> <b>Status</b> </p> <p>A solution can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> <li> <p>DELETE PENDING &gt; DELETE IN_PROGRESS</p> </li> </ul> <p>To get the status of the solution, call <a>DescribeSolution</a>. Wait until the status shows as ACTIVE before calling <code>CreateSolutionVersion</code>.</p> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListSolutions</a> </p> </li> <li> <p> <a>CreateSolutionVersion</a> </p> </li> <li> <p> <a>DescribeSolution</a> </p> </li> <li> <p> <a>DeleteSolution</a> </p> </li> </ul> <ul> <li> <p> <a>ListSolutionVersions</a> </p> </li> <li> <p> <a>DescribeSolutionVersion</a> </p> </li> </ul>"
     },
     "CreateSolutionVersion": {
       "name": "CreateSolutionVersion",
@@ -307,7 +339,7 @@
           "shape": "ResourceInUseException"
         }
       ],
-      "documentation": "<p>Trains or retrains an active solution. A solution is created using the <a>CreateSolution</a> operation and must be in the ACTIVE state before calling <code>CreateSolutionVersion</code>. A new version of the solution is created every time you call this operation.</p> <p> <b>Status</b> </p> <p>A solution version can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul> <p>To get the status of the version, call <a>DescribeSolutionVersion</a>. Wait until the status shows as ACTIVE before calling <code>CreateCampaign</code>.</p> <p>If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the job failed.</p> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListSolutionVersions</a> </p> </li> <li> <p> <a>DescribeSolutionVersion</a> </p> </li> </ul> <ul> <li> <p> <a>ListSolutions</a> </p> </li> <li> <p> <a>CreateSolution</a> </p> </li> <li> <p> <a>DescribeSolution</a> </p> </li> <li> <p> <a>DeleteSolution</a> </p> </li> </ul>"
+      "documentation": "<p>Trains or retrains an active solution. A solution is created using the <a>CreateSolution</a> operation and must be in the ACTIVE state before calling <code>CreateSolutionVersion</code>. A new version of the solution is created every time you call this operation.</p> <p> <b>Status</b> </p> <p>A solution version can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING</p> </li> <li> <p>CREATE IN_PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> <li> <p>CREATE STOPPING</p> </li> <li> <p>CREATE STOPPED</p> </li> </ul> <p>To get the status of the version, call <a>DescribeSolutionVersion</a>. Wait until the status shows as ACTIVE before calling <code>CreateCampaign</code>.</p> <p>If the status shows as CREATE FAILED, the response includes a <code>failureReason</code> key, which describes why the job failed.</p> <p class=\"title\"> <b>Related APIs</b> </p> <ul> <li> <p> <a>ListSolutionVersions</a> </p> </li> <li> <p> <a>DescribeSolutionVersion</a> </p> </li> </ul> <ul> <li> <p> <a>ListSolutions</a> </p> </li> <li> <p> <a>CreateSolution</a> </p> </li> <li> <p> <a>DescribeSolution</a> </p> </li> <li> <p> <a>DeleteSolution</a> </p> </li> </ul>"
     },
     "DeleteCampaign": {
       "name": "DeleteCampaign",
@@ -559,6 +591,29 @@
         }
       ],
       "documentation": "<p>Describes the given dataset. For more information on datasets, see <a>CreateDataset</a>.</p>",
+      "idempotent": true
+    },
+    "DescribeDatasetExportJob": {
+      "name": "DescribeDatasetExportJob",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeDatasetExportJobRequest"
+      },
+      "output": {
+        "shape": "DescribeDatasetExportJobResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Describes the dataset export job created by <a>CreateDatasetExportJob</a>, including the export job status.</p>",
       "idempotent": true
     },
     "DescribeDatasetGroup": {
@@ -839,6 +894,29 @@
       "documentation": "<p>Returns a list of campaigns that use the given solution. When a solution is not specified, all the campaigns associated with the account are listed. The response provides the properties for each campaign, including the Amazon Resource Name (ARN). For more information on campaigns, see <a>CreateCampaign</a>.</p>",
       "idempotent": true
     },
+    "ListDatasetExportJobs": {
+      "name": "ListDatasetExportJobs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListDatasetExportJobsRequest"
+      },
+      "output": {
+        "shape": "ListDatasetExportJobsResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "InvalidNextTokenException"
+        }
+      ],
+      "documentation": "<p>Returns a list of dataset export jobs that use the given dataset. When a dataset is not specified, all the dataset export jobs associated with the account are listed. The response provides the properties for each dataset export job, including the Amazon Resource Name (ARN). For more information on dataset export jobs, see <a>CreateDatasetExportJob</a>. For more information on datasets, see <a>CreateDataset</a>.</p>",
+      "idempotent": true
+    },
     "ListDatasetGroups": {
       "name": "ListDatasetGroups",
       "http": {
@@ -1040,6 +1118,29 @@
       "documentation": "<p>Returns a list of solutions that use the given dataset group. When a dataset group is not specified, all the solutions associated with the account are listed. The response provides the properties for each solution, including the Amazon Resource Name (ARN). For more information on solutions, see <a>CreateSolution</a>.</p>",
       "idempotent": true
     },
+    "StopSolutionVersionCreation": {
+      "name": "StopSolutionVersionCreation",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "StopSolutionVersionCreationRequest"
+      },
+      "errors": [
+        {
+          "shape": "InvalidInputException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ResourceInUseException"
+        }
+      ],
+      "documentation": "<p>Stops creating a solution version that is in a state of CREATE_PENDING or CREATE IN_PROGRESS. </p> <p>Depending on the current state of the solution version, the solution version state changes as follows:</p> <ul> <li> <p>CREATE_PENDING &gt; CREATE_STOPPED</p> <p>or</p> </li> <li> <p>CREATE_IN_PROGRESS &gt; CREATE_STOPPING &gt; CREATE_STOPPED</p> </li> </ul> <p>You are billed for all of the training completed up until you stop the solution version creation. You cannot resume creating a solution version once it has been stopped.</p>",
+      "idempotent": true
+    },
     "UpdateCampaign": {
       "name": "UpdateCampaign",
       "http": {
@@ -1238,7 +1339,7 @@
       "members": {
         "itemExplorationConfig": {
           "shape": "HyperParameters",
-          "documentation": "<p>A string to string map specifying the inference hyperparameters you wish to use for hyperparameter optimization. See <a>customizing-solution-config-hpo</a>.</p>"
+          "documentation": "<p>A string to string map specifying the exploration configuration hyperparameters, including <code>explorationWeight</code> and <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when recommending items. See <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html\">User-Personalization</a>.</p>"
         }
       },
       "documentation": "<p>The configuration details of a batch inference job.</p>"
@@ -1363,7 +1464,7 @@
       "members": {
         "itemExplorationConfig": {
           "shape": "HyperParameters",
-          "documentation": "<p>A string to string map specifying the inference hyperparameters you wish to use for hyperparameter optimization. See <a>customizing-solution-config-hpo</a>.</p>"
+          "documentation": "<p>A string to string map specifying the exploration configuration hyperparameters, including <code>explorationWeight</code> and <code>explorationItemAgeCutOff</code>, you want to use to configure the amount of item exploration Amazon Personalize uses when recommending items. Provide <code>itemExplorationConfig</code> data only if your solution uses the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html\">User-Personalization</a> recipe.</p>"
         }
       },
       "documentation": "<p>The configuration details of a campaign.</p>"
@@ -1523,7 +1624,7 @@
         },
         "filterArn": {
           "shape": "Arn",
-          "documentation": "<p>The ARN of the filter to apply to the batch inference job. For more information on using filters, see Using Filters with Amazon Personalize.</p>"
+          "documentation": "<p>The ARN of the filter to apply to the batch inference job. For more information on using filters, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html\">Filtering Batch Recommendations</a>..</p>"
         },
         "numResults": {
           "shape": "NumBatchResults",
@@ -1539,7 +1640,7 @@
         },
         "roleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and out Amazon S3 buckets respectively.</p>"
+          "documentation": "<p>The ARN of the Amazon Identity and Access Management role that has permissions to read and write to your input and output Amazon S3 buckets respectively.</p>"
         },
         "batchInferenceJobConfig": {
           "shape": "BatchInferenceJobConfig",
@@ -1560,8 +1661,7 @@
       "type": "structure",
       "required": [
         "name",
-        "solutionVersionArn",
-        "minProvisionedTPS"
+        "solutionVersionArn"
       ],
       "members": {
         "name": {
@@ -1591,6 +1691,46 @@
         }
       }
     },
+    "CreateDatasetExportJobRequest": {
+      "type": "structure",
+      "required": [
+        "jobName",
+        "datasetArn",
+        "roleArn",
+        "jobOutput"
+      ],
+      "members": {
+        "jobName": {
+          "shape": "Name",
+          "documentation": "<p>The name for the dataset export job.</p>"
+        },
+        "datasetArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the dataset that contains the data to export.</p>"
+        },
+        "ingestionMode": {
+          "shape": "IngestionMode",
+          "documentation": "<p>The data to export, based on how you imported the data. You can choose to export only <code>BULK</code> data that you imported using a dataset import job, only <code>PUT</code> data that you imported incrementally (using the console, PutEvents, PutUsers and PutItems operations), or <code>ALL</code> for both types. The default value is <code>PUT</code>. </p>"
+        },
+        "roleArn": {
+          "shape": "RoleArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that has permissions to add data to your output Amazon S3 bucket.</p>"
+        },
+        "jobOutput": {
+          "shape": "DatasetExportJobOutput",
+          "documentation": "<p>The path to the Amazon S3 bucket where the job's output is stored.</p>"
+        }
+      }
+    },
+    "CreateDatasetExportJobResponse": {
+      "type": "structure",
+      "members": {
+        "datasetExportJobArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the dataset export job.</p>"
+        }
+      }
+    },
     "CreateDatasetGroupRequest": {
       "type": "structure",
       "required": [
@@ -1603,11 +1743,11 @@
         },
         "roleArn": {
           "shape": "RoleArn",
-          "documentation": "<p>The ARN of the IAM role that has permissions to access the KMS key. Supplying an IAM role is only valid when also specifying a KMS key.</p>"
+          "documentation": "<p>The ARN of the Identity and Access Management (IAM) role that has permissions to access the Key Management Service (KMS) key. Supplying an IAM role is only valid when also specifying a KMS key.</p>"
         },
         "kmsKeyArn": {
           "shape": "KmsKeyArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of a KMS key used to encrypt the datasets.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of a Key Management Service (KMS) key used to encrypt the datasets.</p>"
         }
       }
     },
@@ -1740,7 +1880,7 @@
         },
         "filterExpression": {
           "shape": "FilterExpression",
-          "documentation": "<p>The filter expression that designates the interaction types that the filter will filter out. A filter expression must follow the following format:</p> <p> <code>EXCLUDE itemId WHERE INTERACTIONS.event_type in (\"EVENT_TYPE\")</code> </p> <p>Where \"EVENT_TYPE\" is the type of event to filter out. To filter out all items with any interactions history, set <code>\"*\"</code> as the EVENT_TYPE. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filters.html\">Using Filters with Amazon Personalize</a>.</p>"
+          "documentation": "<p>The filter expression defines which items are included or excluded from recommendations. Filter expression must follow specific format rules. For information about filter expression structure and syntax, see <a>filter-expressions</a>.</p>"
         }
       }
     },
@@ -1808,11 +1948,11 @@
         },
         "eventType": {
           "shape": "EventType",
-          "documentation": "<p>When your have multiple event types (using an <code>EVENT_TYPE</code> schema field), this parameter specifies which event type (for example, 'click' or 'like') is used for training the model.</p>"
+          "documentation": "<p>When your have multiple event types (using an <code>EVENT_TYPE</code> schema field), this parameter specifies which event type (for example, 'click' or 'like') is used for training the model.</p> <p>If you do not provide an <code>eventType</code>, Amazon Personalize will use all interactions for training with equal weight regardless of type.</p>"
         },
         "solutionConfig": {
           "shape": "SolutionConfig",
-          "documentation": "<p>The configuration to use with the solution. When <code>performAutoML</code> is set to true, Amazon Personalize only evaluates the <code>autoMLConfig</code> section of the solution configuration.</p>"
+          "documentation": "<p>The configuration to use with the solution. When <code>performAutoML</code> is set to true, Amazon Personalize only evaluates the <code>autoMLConfig</code> section of the solution configuration.</p> <note> <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> at this time.</p> </note>"
         }
       }
     },
@@ -1837,7 +1977,7 @@
         },
         "trainingMode": {
           "shape": "TrainingMode",
-          "documentation": "<p>The scope of training to be performed when creating the solution version. The <code>FULL</code> option trains the solution version based on the entirety of the input solution's training data, while the <code>UPDATE</code> option processes only the data that has changed in comparison to the input solution. Choose <code>UPDATE</code> when you want to incrementally update your solution version instead of creating an entirely new one.</p> <important> <p>The <code>UPDATE</code> option can only be used when you already have an active solution version created from the input solution using the <code>FULL</code> option and the input solution was trained with the <a>native-recipe-hrnn-coldstart</a> recipe.</p> </important>"
+          "documentation": "<p>The scope of training to be performed when creating the solution version. The <code>FULL</code> option trains the solution version based on the entirety of the input solution's training data, while the <code>UPDATE</code> option processes only the data that has changed in comparison to the input solution. Choose <code>UPDATE</code> when you want to incrementally update your solution version instead of creating an entirely new one.</p> <important> <p>The <code>UPDATE</code> option can only be used when you already have an active solution version created from the input solution using the <code>FULL</code> option and the input solution was trained with the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html\">User-Personalization</a> recipe or the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html\">HRNN-Coldstart</a> recipe.</p> </important>"
         }
       }
     },
@@ -1855,7 +1995,7 @@
       "members": {
         "dataLocation": {
           "shape": "S3Location",
-          "documentation": "<p>The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored. For example: </p> <p> <code>s3://bucket-name/training-data.csv</code> </p>"
+          "documentation": "<p>The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored. For example: </p> <p> <code>s3://bucket-name/folder-name/</code> </p>"
         }
       },
       "documentation": "<p>Describes the data source that contains the data to upload to a dataset.</p>"
@@ -1898,6 +2038,101 @@
       },
       "documentation": "<p>Provides metadata for a dataset.</p>"
     },
+    "DatasetExportJob": {
+      "type": "structure",
+      "members": {
+        "jobName": {
+          "shape": "Name",
+          "documentation": "<p>The name of the export job.</p>"
+        },
+        "datasetExportJobArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the dataset export job.</p>"
+        },
+        "datasetArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the dataset to export.</p>"
+        },
+        "ingestionMode": {
+          "shape": "IngestionMode",
+          "documentation": "<p>The data to export, based on how you imported the data. You can choose to export <code>BULK</code> data that you imported using a dataset import job, <code>PUT</code> data that you imported incrementally (using the console, PutEvents, PutUsers and PutItems operations), or <code>ALL</code> for both types. The default value is <code>PUT</code>. </p>"
+        },
+        "roleArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the IAM service role that has permissions to add data to your output Amazon S3 bucket.</p>"
+        },
+        "status": {
+          "shape": "Status",
+          "documentation": "<p>The status of the dataset export job.</p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>"
+        },
+        "jobOutput": {
+          "shape": "DatasetExportJobOutput",
+          "documentation": "<p>The path to the Amazon S3 bucket where the job's output is stored. For example:</p> <p> <code>s3://bucket-name/folder-name/</code> </p>"
+        },
+        "creationDateTime": {
+          "shape": "Date",
+          "documentation": "<p>The creation date and time (in Unix time) of the dataset export job.</p>"
+        },
+        "lastUpdatedDateTime": {
+          "shape": "Date",
+          "documentation": "<p>The date and time (in Unix time) the status of the dataset export job was last updated.</p>"
+        },
+        "failureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>If a dataset export job fails, provides the reason why.</p>"
+        }
+      },
+      "documentation": "<p>Describes a job that exports a dataset to an Amazon S3 bucket. For more information, see <a>CreateDatasetExportJob</a>.</p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>"
+    },
+    "DatasetExportJobOutput": {
+      "type": "structure",
+      "required": [
+        "s3DataDestination"
+      ],
+      "members": {
+        "s3DataDestination": {
+          "shape": "S3DataConfig"
+        }
+      },
+      "documentation": "<p>The output configuration parameters of a dataset export job.</p>"
+    },
+    "DatasetExportJobSummary": {
+      "type": "structure",
+      "members": {
+        "datasetExportJobArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the dataset export job.</p>"
+        },
+        "jobName": {
+          "shape": "Name",
+          "documentation": "<p>The name of the dataset export job.</p>"
+        },
+        "status": {
+          "shape": "Status",
+          "documentation": "<p>The status of the dataset export job.</p> <p>A dataset export job can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING &gt; CREATE IN_PROGRESS &gt; ACTIVE -or- CREATE FAILED</p> </li> </ul>"
+        },
+        "creationDateTime": {
+          "shape": "Date",
+          "documentation": "<p>The date and time (in Unix time) that the dataset export job was created.</p>"
+        },
+        "lastUpdatedDateTime": {
+          "shape": "Date",
+          "documentation": "<p>The date and time (in Unix time) that the dataset export job status was last updated.</p>"
+        },
+        "failureReason": {
+          "shape": "FailureReason",
+          "documentation": "<p>If a dataset export job fails, the reason behind the failure.</p>"
+        }
+      },
+      "documentation": "<p>Provides a summary of the properties of a dataset export job. For a complete listing, call the <a>DescribeDatasetExportJob</a> API.</p>"
+    },
+    "DatasetExportJobs": {
+      "type": "list",
+      "member": {
+        "shape": "DatasetExportJobSummary"
+      },
+      "max": 100
+    },
     "DatasetGroup": {
       "type": "structure",
       "members": {
@@ -1919,7 +2154,7 @@
         },
         "kmsKeyArn": {
           "shape": "KmsKeyArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the KMS key used to encrypt the datasets.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the datasets.</p>"
         },
         "creationDateTime": {
           "shape": "Date",
@@ -1934,7 +2169,7 @@
           "documentation": "<p>If creating a dataset group fails, provides the reason why.</p>"
         }
       },
-      "documentation": "<p>A dataset group is a collection of related datasets (Interactions, User, and Item). You create a dataset group by calling <a>CreateDatasetGroup</a>. You then create a dataset and add it to a dataset group by calling <a>CreateDataset</a>. The dataset group is used to create and train a solution by calling <a>CreateSolution</a>. A dataset group can contain only one of each type of dataset.</p> <p>You can specify an AWS Key Management Service (KMS) key to encrypt the datasets in the group.</p>"
+      "documentation": "<p>A dataset group is a collection of related datasets (Interactions, User, and Item). You create a dataset group by calling <a>CreateDatasetGroup</a>. You then create a dataset and add it to a dataset group by calling <a>CreateDataset</a>. The dataset group is used to create and train a solution by calling <a>CreateSolution</a>. A dataset group can contain only one of each type of dataset.</p> <p>You can specify an Key Management Service (KMS) key to encrypt the datasets in the group.</p>"
     },
     "DatasetGroupSummary": {
       "type": "structure",
@@ -1994,7 +2229,7 @@
         },
         "roleArn": {
           "shape": "Arn",
-          "documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role that has permissions to read from the Amazon S3 data source.</p>"
+          "documentation": "<p>The ARN of the IAM role that has permissions to read from the Amazon S3 data source.</p>"
         },
         "status": {
           "shape": "Status",
@@ -2036,7 +2271,7 @@
         },
         "lastUpdatedDateTime": {
           "shape": "Date",
-          "documentation": "<p>The date and time (in Unix time) that the dataset was last updated.</p>"
+          "documentation": "<p>The date and time (in Unix time) that the dataset import job status was last updated.</p>"
         },
         "failureReason": {
           "shape": "FailureReason",
@@ -2392,6 +2627,27 @@
         }
       }
     },
+    "DescribeDatasetExportJobRequest": {
+      "type": "structure",
+      "required": [
+        "datasetExportJobArn"
+      ],
+      "members": {
+        "datasetExportJobArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the dataset export job to describe.</p>"
+        }
+      }
+    },
+    "DescribeDatasetExportJobResponse": {
+      "type": "structure",
+      "members": {
+        "datasetExportJob": {
+          "shape": "DatasetExportJob",
+          "documentation": "<p>Information about the dataset export job, including the status.</p> <p>The status is one of the following values:</p> <ul> <li> <p>CREATE PENDING</p> </li> <li> <p>CREATE IN_PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> </ul>"
+        }
+      }
+    },
     "DescribeDatasetGroupRequest": {
       "type": "structure",
       "required": [
@@ -2622,7 +2878,7 @@
         },
         "accountId": {
           "shape": "AccountId",
-          "documentation": "<p>The Amazon AWS account that owns the event tracker.</p>"
+          "documentation": "<p>The Amazon Web Services account that owns the event tracker.</p>"
         },
         "trackingId": {
           "shape": "TrackingId",
@@ -2770,7 +3026,7 @@
         },
         "filterExpression": {
           "shape": "FilterExpression",
-          "documentation": "<p>Specifies the type of item interactions to filter out of recommendation results. The filter expression must follow the following format:</p> <p> <code>EXCLUDE itemId WHERE INTERACTIONS.event_type in (\"EVENT_TYPE\")</code> </p> <p>Where \"EVENT_TYPE\" is the type of event to filter out. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/filters.html\">Using Filters with Amazon Personalize</a>.</p>"
+          "documentation": "<p>Specifies the type of item interactions to filter out of recommendation results. The filter expression must follow specific format rules. For information about filter expression structure and syntax, see <a>filter-expressions</a>.</p>"
         },
         "status": {
           "shape": "Status",
@@ -2856,7 +3112,7 @@
       "members": {
         "hpoObjective": {
           "shape": "HPOObjective",
-          "documentation": "<p>The metric to optimize during HPO.</p>"
+          "documentation": "<p>The metric to optimize during HPO.</p> <note> <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> at this time.</p> </note>"
         },
         "hpoResourceConfig": {
           "shape": "HPOResourceConfig",
@@ -2867,7 +3123,7 @@
           "documentation": "<p>The hyperparameters and their allowable ranges.</p>"
         }
       },
-      "documentation": "<p>Describes the properties for hyperparameter optimization (HPO). For use with the bring-your-own-recipe feature. Do not use for Amazon Personalize native recipes.</p>"
+      "documentation": "<p>Describes the properties for hyperparameter optimization (HPO).</p>"
     },
     "HPOObjective": {
       "type": "structure",
@@ -2885,7 +3141,7 @@
           "documentation": "<p>A regular expression for finding the metric in the training job logs.</p>"
         }
       },
-      "documentation": "<p>The metric to optimize during hyperparameter optimization (HPO).</p>"
+      "documentation": "<p>The metric to optimize during hyperparameter optimization (HPO).</p> <note> <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> at this time.</p> </note>"
     },
     "HPOObjectiveType": {
       "type": "string",
@@ -2937,6 +3193,14 @@
       },
       "max": 100
     },
+    "IngestionMode": {
+      "type": "string",
+      "enum": [
+        "BULK",
+        "PUT",
+        "ALL"
+      ]
+    },
     "IntegerHyperParameterRange": {
       "type": "structure",
       "members": {
@@ -2970,8 +3234,14 @@
       "type": "integer",
       "min": -1000000
     },
+    "ItemAttribute": {
+      "type": "string",
+      "max": 150,
+      "min": 1
+    },
     "KmsKeyArn": {
-      "type": "string"
+      "type": "string",
+      "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*"
     },
     "ListBatchInferenceJobsRequest": {
       "type": "structure",
@@ -2999,7 +3269,7 @@
         },
         "nextToken": {
           "shape": "NextToken",
-          "documentation": "<p>The token to use to retreive the next page of results. The value is <code>null</code> when there are no more results to return.</p>"
+          "documentation": "<p>The token to use to retrieve the next page of results. The value is <code>null</code> when there are no more results to return.</p>"
         }
       }
     },
@@ -3030,6 +3300,36 @@
         "nextToken": {
           "shape": "NextToken",
           "documentation": "<p>A token for getting the next set of campaigns (if they exist).</p>"
+        }
+      }
+    },
+    "ListDatasetExportJobsRequest": {
+      "type": "structure",
+      "members": {
+        "datasetArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the dataset to list the dataset export jobs for.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token returned from the previous call to <code>ListDatasetExportJobs</code> for getting the next set of dataset export jobs (if they exist).</p>"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of dataset export jobs to return.</p>"
+        }
+      }
+    },
+    "ListDatasetExportJobsResponse": {
+      "type": "structure",
+      "members": {
+        "datasetExportJobs": {
+          "shape": "DatasetExportJobs",
+          "documentation": "<p>The list of dataset export jobs.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token for getting the next set of dataset export jobs (if they exist).</p>"
         }
       }
     },
@@ -3334,6 +3634,29 @@
     "NumBatchResults": {
       "type": "integer"
     },
+    "ObjectiveSensitivity": {
+      "type": "string",
+      "enum": [
+        "LOW",
+        "MEDIUM",
+        "HIGH",
+        "OFF"
+      ]
+    },
+    "OptimizationObjective": {
+      "type": "structure",
+      "members": {
+        "itemAttribute": {
+          "shape": "ItemAttribute",
+          "documentation": "<p>The numerical metadata column in an Items dataset related to the optimization objective. For example, VIDEO_LENGTH (to maximize streaming minutes), or PRICE (to maximize revenue).</p>"
+        },
+        "objectiveSensitivity": {
+          "shape": "ObjectiveSensitivity",
+          "documentation": "<p>Specifies how Amazon Personalize balances the importance of your optimization objective versus relevance.</p>"
+        }
+      },
+      "documentation": "<p>Describes the additional objective for the solution, such as maximizing streaming minutes or increasing revenue. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html\">Optimizing a solution</a>.</p>"
+    },
     "ParameterName": {
       "type": "string",
       "max": 256
@@ -3460,14 +3783,15 @@
         },
         "kmsKeyArn": {
           "shape": "KmsKeyArn",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Key Management Service (KMS) key that Amazon Personalize uses to encrypt or decrypt the input and output files of a batch inference job.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key that Amazon Personalize uses to encrypt or decrypt the input and output files of a batch inference job.</p>"
         }
       },
       "documentation": "<p>The configuration details of an Amazon S3 input or output bucket.</p>"
     },
     "S3Location": {
       "type": "string",
-      "max": 256
+      "max": 256,
+      "pattern": "(s3|http|https)://.+"
     },
     "Schemas": {
       "type": "list",
@@ -3505,7 +3829,7 @@
         },
         "eventType": {
           "shape": "EventType",
-          "documentation": "<p>The event type (for example, 'click' or 'like') that is used for training the model.</p>"
+          "documentation": "<p>The event type (for example, 'click' or 'like') that is used for training the model. If no <code>eventType</code> is provided, Amazon Personalize uses all interactions for training with equal weight regardless of type.</p>"
         },
         "solutionConfig": {
           "shape": "SolutionConfig",
@@ -3556,6 +3880,10 @@
         "autoMLConfig": {
           "shape": "AutoMLConfig",
           "documentation": "<p>The <a>AutoMLConfig</a> object containing a list of recipes to search when AutoML is performed.</p>"
+        },
+        "optimizationObjective": {
+          "shape": "OptimizationObjective",
+          "documentation": "<p>Describes the additional objective for the solution, such as maximizing streaming minutes or increasing revenue. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html\">Optimizing a solution</a>.</p>"
         }
       },
       "documentation": "<p>Describes the configuration properties for the solution.</p>"
@@ -3627,7 +3955,7 @@
         },
         "trainingMode": {
           "shape": "TrainingMode",
-          "documentation": "<p>The scope of training used to create the solution version. The <code>FULL</code> option trains the solution version based on the entirety of the input solution's training data, while the <code>UPDATE</code> option processes only the training data that has changed since the creation of the last solution version. Choose <code>UPDATE</code> when you want to start recommending items added to the dataset without retraining the model.</p> <important> <p>The <code>UPDATE</code> option can only be used after you've created a solution version with the <code>FULL</code> option and the training solution uses the <a>native-recipe-hrnn-coldstart</a>.</p> </important>"
+          "documentation": "<p>The scope of training to be performed when creating the solution version. The <code>FULL</code> option trains the solution version based on the entirety of the input solution's training data, while the <code>UPDATE</code> option processes only the data that has changed in comparison to the input solution. Choose <code>UPDATE</code> when you want to incrementally update your solution version instead of creating an entirely new one.</p> <important> <p>The <code>UPDATE</code> option can only be used when you already have an active solution version created from the input solution using the <code>FULL</code> option and the input solution was trained with the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html\">User-Personalization</a> recipe or the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html\">HRNN-Coldstart</a> recipe.</p> </important>"
         },
         "tunedHPOParams": {
           "shape": "TunedHPOParams",
@@ -3635,7 +3963,7 @@
         },
         "status": {
           "shape": "Status",
-          "documentation": "<p>The status of the solution version.</p> <p>A solution version can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING</p> </li> <li> <p>CREATE IN_PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> </ul>"
+          "documentation": "<p>The status of the solution version.</p> <p>A solution version can be in one of the following states:</p> <ul> <li> <p>CREATE PENDING</p> </li> <li> <p>CREATE IN_PROGRESS</p> </li> <li> <p>ACTIVE</p> </li> <li> <p>CREATE FAILED</p> </li> <li> <p>CREATE STOPPING</p> </li> <li> <p>CREATE STOPPED</p> </li> </ul>"
         },
         "failureReason": {
           "shape": "FailureReason",
@@ -3695,6 +4023,18 @@
     "Status": {
       "type": "string",
       "max": 256
+    },
+    "StopSolutionVersionCreationRequest": {
+      "type": "structure",
+      "required": [
+        "solutionVersionArn"
+      ],
+      "members": {
+        "solutionVersionArn": {
+          "shape": "Arn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the solution version you want to stop creating.</p>"
+        }
+      }
     },
     "TrackingId": {
       "type": "string",

@@ -61,6 +61,14 @@ declare class ECR extends Service {
    */
   deleteLifecyclePolicy(callback?: (err: AWSError, data: ECR.Types.DeleteLifecyclePolicyResponse) => void): Request<ECR.Types.DeleteLifecyclePolicyResponse, AWSError>;
   /**
+   * Deletes the registry permissions policy.
+   */
+  deleteRegistryPolicy(params: ECR.Types.DeleteRegistryPolicyRequest, callback?: (err: AWSError, data: ECR.Types.DeleteRegistryPolicyResponse) => void): Request<ECR.Types.DeleteRegistryPolicyResponse, AWSError>;
+  /**
+   * Deletes the registry permissions policy.
+   */
+  deleteRegistryPolicy(callback?: (err: AWSError, data: ECR.Types.DeleteRegistryPolicyResponse) => void): Request<ECR.Types.DeleteRegistryPolicyResponse, AWSError>;
+  /**
    * Deletes a repository. If the repository contains images, you must either delete all images in the repository or use the force option to delete the repository.
    */
   deleteRepository(params: ECR.Types.DeleteRepositoryRequest, callback?: (err: AWSError, data: ECR.Types.DeleteRepositoryResponse) => void): Request<ECR.Types.DeleteRepositoryResponse, AWSError>;
@@ -92,6 +100,14 @@ declare class ECR extends Service {
    * Returns metadata about the images in a repository.  Beginning with Docker version 1.9, the Docker client compresses image layers before pushing them to a V2 Docker registry. The output of the docker images command shows the uncompressed image size, so it may return a larger image size than the image sizes returned by DescribeImages. 
    */
   describeImages(callback?: (err: AWSError, data: ECR.Types.DescribeImagesResponse) => void): Request<ECR.Types.DescribeImagesResponse, AWSError>;
+  /**
+   * Describes the settings for a registry. The replication configuration for a repository can be created or updated with the PutReplicationConfiguration API action.
+   */
+  describeRegistry(params: ECR.Types.DescribeRegistryRequest, callback?: (err: AWSError, data: ECR.Types.DescribeRegistryResponse) => void): Request<ECR.Types.DescribeRegistryResponse, AWSError>;
+  /**
+   * Describes the settings for a registry. The replication configuration for a repository can be created or updated with the PutReplicationConfiguration API action.
+   */
+  describeRegistry(callback?: (err: AWSError, data: ECR.Types.DescribeRegistryResponse) => void): Request<ECR.Types.DescribeRegistryResponse, AWSError>;
   /**
    * Describes image repositories in a registry.
    */
@@ -132,6 +148,14 @@ declare class ECR extends Service {
    * Retrieves the results of the lifecycle policy preview request for the specified repository.
    */
   getLifecyclePolicyPreview(callback?: (err: AWSError, data: ECR.Types.GetLifecyclePolicyPreviewResponse) => void): Request<ECR.Types.GetLifecyclePolicyPreviewResponse, AWSError>;
+  /**
+   * Retrieves the permissions policy for a registry.
+   */
+  getRegistryPolicy(params: ECR.Types.GetRegistryPolicyRequest, callback?: (err: AWSError, data: ECR.Types.GetRegistryPolicyResponse) => void): Request<ECR.Types.GetRegistryPolicyResponse, AWSError>;
+  /**
+   * Retrieves the permissions policy for a registry.
+   */
+  getRegistryPolicy(callback?: (err: AWSError, data: ECR.Types.GetRegistryPolicyResponse) => void): Request<ECR.Types.GetRegistryPolicyResponse, AWSError>;
   /**
    * Retrieves the repository policy for the specified repository.
    */
@@ -196,6 +220,22 @@ declare class ECR extends Service {
    * Creates or updates the lifecycle policy for the specified repository. For more information, see Lifecycle Policy Template.
    */
   putLifecyclePolicy(callback?: (err: AWSError, data: ECR.Types.PutLifecyclePolicyResponse) => void): Request<ECR.Types.PutLifecyclePolicyResponse, AWSError>;
+  /**
+   * Creates or updates the permissions policy for your registry. A registry policy is used to specify permissions for another AWS account and is used when configuring cross-account replication. For more information, see Registry permissions in the Amazon Elastic Container Registry User Guide.
+   */
+  putRegistryPolicy(params: ECR.Types.PutRegistryPolicyRequest, callback?: (err: AWSError, data: ECR.Types.PutRegistryPolicyResponse) => void): Request<ECR.Types.PutRegistryPolicyResponse, AWSError>;
+  /**
+   * Creates or updates the permissions policy for your registry. A registry policy is used to specify permissions for another AWS account and is used when configuring cross-account replication. For more information, see Registry permissions in the Amazon Elastic Container Registry User Guide.
+   */
+  putRegistryPolicy(callback?: (err: AWSError, data: ECR.Types.PutRegistryPolicyResponse) => void): Request<ECR.Types.PutRegistryPolicyResponse, AWSError>;
+  /**
+   * Creates or updates the replication configuration for a registry. The existing replication configuration for a repository can be retrieved with the DescribeRegistry API action. The first time the PutReplicationConfiguration API is called, a service-linked IAM role is created in your account for the replication process. For more information, see Using Service-Linked Roles for Amazon ECR in the Amazon Elastic Container Registry User Guide.  When configuring cross-account replication, the destination account must grant the source account permission to replicate. This permission is controlled using a registry permissions policy. For more information, see PutRegistryPolicy. 
+   */
+  putReplicationConfiguration(params: ECR.Types.PutReplicationConfigurationRequest, callback?: (err: AWSError, data: ECR.Types.PutReplicationConfigurationResponse) => void): Request<ECR.Types.PutReplicationConfigurationResponse, AWSError>;
+  /**
+   * Creates or updates the replication configuration for a registry. The existing replication configuration for a repository can be retrieved with the DescribeRegistry API action. The first time the PutReplicationConfiguration API is called, a service-linked IAM role is created in your account for the replication process. For more information, see Using Service-Linked Roles for Amazon ECR in the Amazon Elastic Container Registry User Guide.  When configuring cross-account replication, the destination account must grant the source account permission to replicate. This permission is controlled using a registry permissions policy. For more information, see PutRegistryPolicy. 
+   */
+  putReplicationConfiguration(callback?: (err: AWSError, data: ECR.Types.PutReplicationConfigurationResponse) => void): Request<ECR.Types.PutReplicationConfigurationResponse, AWSError>;
   /**
    * Applies a repository policy to the specified repository to control access permissions. For more information, see Amazon ECR Repository Policies in the Amazon Elastic Container Registry User Guide.
    */
@@ -463,6 +503,18 @@ declare namespace ECR {
      */
     lastEvaluatedAt?: EvaluationTimestamp;
   }
+  export interface DeleteRegistryPolicyRequest {
+  }
+  export interface DeleteRegistryPolicyResponse {
+    /**
+     * The registry ID associated with the request.
+     */
+    registryId?: RegistryId;
+    /**
+     * The contents of the registry permissions policy that was deleted.
+     */
+    policyText?: RegistryPolicyText;
+  }
   export interface DeleteRepositoryPolicyRequest {
     /**
      * The AWS account ID associated with the registry that contains the repository policy to delete. If you do not specify a registry, the default registry is assumed.
@@ -590,6 +642,18 @@ declare namespace ECR {
      * The nextToken value to include in a future DescribeImages request. When the results of a DescribeImages request exceed maxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.
      */
     nextToken?: NextToken;
+  }
+  export interface DescribeRegistryRequest {
+  }
+  export interface DescribeRegistryResponse {
+    /**
+     * The ID of the registry.
+     */
+    registryId?: RegistryId;
+    /**
+     * The replication configuration for the registry.
+     */
+    replicationConfiguration?: ReplicationConfiguration;
   }
   export interface DescribeRepositoriesRequest {
     /**
@@ -757,6 +821,18 @@ declare namespace ECR {
      * The time stamp of the last time that the lifecycle policy was run.
      */
     lastEvaluatedAt?: EvaluationTimestamp;
+  }
+  export interface GetRegistryPolicyRequest {
+  }
+  export interface GetRegistryPolicyResponse {
+    /**
+     * The ID of the registry.
+     */
+    registryId?: RegistryId;
+    /**
+     * The JSON text of the permissions policy for a registry.
+     */
+    policyText?: RegistryPolicyText;
   }
   export interface GetRepositoryPolicyRequest {
     /**
@@ -1235,7 +1311,61 @@ declare namespace ECR {
      */
     lifecyclePolicyText?: LifecyclePolicyText;
   }
+  export interface PutRegistryPolicyRequest {
+    /**
+     * The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see Registry permissions in the Amazon Elastic Container Registry User Guide.
+     */
+    policyText: RegistryPolicyText;
+  }
+  export interface PutRegistryPolicyResponse {
+    /**
+     * The registry ID.
+     */
+    registryId?: RegistryId;
+    /**
+     * The JSON policy text for your registry.
+     */
+    policyText?: RegistryPolicyText;
+  }
+  export interface PutReplicationConfigurationRequest {
+    /**
+     * An object representing the replication configuration for a registry.
+     */
+    replicationConfiguration: ReplicationConfiguration;
+  }
+  export interface PutReplicationConfigurationResponse {
+    /**
+     * The contents of the replication configuration for the registry.
+     */
+    replicationConfiguration?: ReplicationConfiguration;
+  }
+  export type Region = string;
   export type RegistryId = string;
+  export type RegistryPolicyText = string;
+  export interface ReplicationConfiguration {
+    /**
+     * An array of objects representing the replication rules for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations.
+     */
+    rules: ReplicationRuleList;
+  }
+  export interface ReplicationDestination {
+    /**
+     * A Region to replicate to.
+     */
+    region: Region;
+    /**
+     * The account ID of the destination registry to replicate to.
+     */
+    registryId: RegistryId;
+  }
+  export type ReplicationDestinationList = ReplicationDestination[];
+  export interface ReplicationRule {
+    /**
+     * An array of objects representing the details of a replication destination.
+     */
+    destinations: ReplicationDestinationList;
+  }
+  export type ReplicationRuleList = ReplicationRule[];
   export interface Repository {
     /**
      * The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the arn:aws:ecr namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, arn:aws:ecr:region:012345678910:repository/test.

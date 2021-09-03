@@ -540,11 +540,11 @@ declare class AlexaForBusiness extends Service {
    */
   rejectSkill(callback?: (err: AWSError, data: AlexaForBusiness.Types.RejectSkillResponse) => void): Request<AlexaForBusiness.Types.RejectSkillResponse, AWSError>;
   /**
-   * Determines the details for the room from which a skill request was invoked. This operation is used by skill developers.
+   * Determines the details for the room from which a skill request was invoked. This operation is used by skill developers. To query ResolveRoom from an Alexa skill, the skill ID needs to be authorized. When the skill is using an AWS Lambda function, the skill is automatically authorized when you publish your skill as a private skill to your AWS account. Skills that are hosted using a custom web service must be manually authorized. To get your skill authorized, contact AWS Support with your AWS account ID that queries the ResolveRoom API and skill ID. 
    */
   resolveRoom(params: AlexaForBusiness.Types.ResolveRoomRequest, callback?: (err: AWSError, data: AlexaForBusiness.Types.ResolveRoomResponse) => void): Request<AlexaForBusiness.Types.ResolveRoomResponse, AWSError>;
   /**
-   * Determines the details for the room from which a skill request was invoked. This operation is used by skill developers.
+   * Determines the details for the room from which a skill request was invoked. This operation is used by skill developers. To query ResolveRoom from an Alexa skill, the skill ID needs to be authorized. When the skill is using an AWS Lambda function, the skill is automatically authorized when you publish your skill as a private skill to your AWS account. Skills that are hosted using a custom web service must be manually authorized. To get your skill authorized, contact AWS Support with your AWS account ID that queries the ResolveRoom API and skill ID. 
    */
   resolveRoom(callback?: (err: AWSError, data: AlexaForBusiness.Types.ResolveRoomResponse) => void): Request<AlexaForBusiness.Types.ResolveRoomResponse, AWSError>;
   /**
@@ -1117,6 +1117,10 @@ declare namespace AlexaForBusiness {
      * A unique, user-specified identifier for the request that ensures idempotency.
      */
     ClientRequestToken?: ClientRequestToken;
+    /**
+     * The tags to be added to the specified resource. Do not provide system tags.
+     */
+    Tags?: TagList;
   }
   export interface CreateAddressBookResponse {
     /**
@@ -1189,6 +1193,10 @@ declare namespace AlexaForBusiness {
      * The request token of the client.
      */
     ClientRequestToken?: ClientRequestToken;
+    /**
+     * The tags to be added to the specified resource. Do not provide system tags.
+     */
+    Tags?: TagList;
   }
   export interface CreateConferenceProviderResponse {
     /**
@@ -1225,6 +1233,10 @@ declare namespace AlexaForBusiness {
      * A unique, user-specified identifier for this request that ensures idempotency.
      */
     ClientRequestToken?: ClientRequestToken;
+    /**
+     * The tags to be added to the specified resource. Do not provide system tags.
+     */
+    Tags?: TagList;
   }
   export interface CreateContactResponse {
     /**
@@ -1259,6 +1271,10 @@ declare namespace AlexaForBusiness {
      *  A unique, user-specified identifier for the request that ensures idempotency.
      */
     ClientRequestToken: ClientRequestToken;
+    /**
+     * The tags to be added to the specified resource. Do not provide system tags.
+     */
+    Tags?: TagList;
   }
   export interface CreateGatewayGroupResponse {
     /**
@@ -1329,6 +1345,10 @@ declare namespace AlexaForBusiness {
      */
     TrustAnchors?: TrustAnchorList;
     ClientRequestToken: ClientRequestToken;
+    /**
+     * The tags to be added to the specified resource. Do not provide system tags. 
+     */
+    Tags?: TagList;
   }
   export interface CreateNetworkProfileResponse {
     /**
@@ -1381,6 +1401,10 @@ declare namespace AlexaForBusiness {
      * Whether PSTN calling is enabled.
      */
     PSTNEnabled?: Boolean;
+    /**
+     * Whether data retention of the profile is enabled.
+     */
+    DataRetentionOptIn?: Boolean;
     /**
      * The meeting room settings of a room profile.
      */
@@ -2610,6 +2634,10 @@ declare namespace AlexaForBusiness {
      */
     PSTNEnabled?: Boolean;
     /**
+     * Whether data retention of the profile is enabled.
+     */
+    DataRetentionOptIn?: Boolean;
+    /**
      * The ARN of the address book.
      */
     AddressBookArn?: Arn;
@@ -2738,9 +2766,13 @@ declare namespace AlexaForBusiness {
      */
     AmazonId: AmazonId;
     /**
-     * The ARN of the room with which to associate your AVS device.
+     * The Amazon Resource Name (ARN) of the room with which to associate your AVS device.
      */
     RoomArn?: Arn;
+    /**
+     * The tags to be added to the specified resource. Do not provide system tags.
+     */
+    Tags?: TagList;
   }
   export interface RegisterAVSDeviceResponse {
     /**
@@ -3702,6 +3734,10 @@ declare namespace AlexaForBusiness {
      * Whether the PSTN setting of the room profile is enabled.
      */
     PSTNEnabled?: Boolean;
+    /**
+     * Whether data retention of the profile is enabled.
+     */
+    DataRetentionOptIn?: Boolean;
     /**
      * The updated meeting room settings of a room profile.
      */
