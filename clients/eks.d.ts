@@ -93,6 +93,14 @@ declare class EKS extends Service {
    */
   deleteNodegroup(callback?: (err: AWSError, data: EKS.Types.DeleteNodegroupResponse) => void): Request<EKS.Types.DeleteNodegroupResponse, AWSError>;
   /**
+   * Deregisters a connected cluster to remove it from the Amazon EKS control plane.
+   */
+  deregisterCluster(params: EKS.Types.DeregisterClusterRequest, callback?: (err: AWSError, data: EKS.Types.DeregisterClusterResponse) => void): Request<EKS.Types.DeregisterClusterResponse, AWSError>;
+  /**
+   * Deregisters a connected cluster to remove it from the Amazon EKS control plane.
+   */
+  deregisterCluster(callback?: (err: AWSError, data: EKS.Types.DeregisterClusterResponse) => void): Request<EKS.Types.DeregisterClusterResponse, AWSError>;
+  /**
    * Describes an Amazon EKS add-on.
    */
   describeAddon(params: EKS.Types.DescribeAddonRequest, callback?: (err: AWSError, data: EKS.Types.DescribeAddonResponse) => void): Request<EKS.Types.DescribeAddonResponse, AWSError>;
@@ -212,6 +220,14 @@ declare class EKS extends Service {
    * Lists the updates associated with an Amazon EKS cluster or managed node group in your Amazon Web Services account, in the specified Region.
    */
   listUpdates(callback?: (err: AWSError, data: EKS.Types.ListUpdatesResponse) => void): Request<EKS.Types.ListUpdatesResponse, AWSError>;
+  /**
+   * Connects a Kubernetes cluster to the Amazon EKS control plane.  Any Kubernetes cluster can be connected to the Amazon EKS control plane to view current information about the cluster and its nodes.  Cluster connection requires two steps. First, send a  RegisterClusterRequest  to add it to the Amazon EKS control plane. Second, a Manifest containing the activationID and activationCode must be applied to the Kubernetes cluster through it's native provider to provide visibility. After the Manifest is updated and applied, then the connected cluster is visible to the Amazon EKS control plane. If the Manifest is not applied within a set amount of time, then the connected cluster will no longer be visible and must be deregistered. See DeregisterCluster.
+   */
+  registerCluster(params: EKS.Types.RegisterClusterRequest, callback?: (err: AWSError, data: EKS.Types.RegisterClusterResponse) => void): Request<EKS.Types.RegisterClusterResponse, AWSError>;
+  /**
+   * Connects a Kubernetes cluster to the Amazon EKS control plane.  Any Kubernetes cluster can be connected to the Amazon EKS control plane to view current information about the cluster and its nodes.  Cluster connection requires two steps. First, send a  RegisterClusterRequest  to add it to the Amazon EKS control plane. Second, a Manifest containing the activationID and activationCode must be applied to the Kubernetes cluster through it's native provider to provide visibility. After the Manifest is updated and applied, then the connected cluster is visible to the Amazon EKS control plane. If the Manifest is not applied within a set amount of time, then the connected cluster will no longer be visible and must be deregistered. See DeregisterCluster.
+   */
+  registerCluster(callback?: (err: AWSError, data: EKS.Types.RegisterClusterResponse) => void): Request<EKS.Types.RegisterClusterResponse, AWSError>;
   /**
    * Associates the specified tags to a resource with the specified resourceArn. If existing tags on a resource are not specified in the request parameters, they are not changed. When a resource is deleted, the tags associated with that resource are deleted as well. Tags that you create for Amazon EKS resources do not propagate to any other resources associated with the cluster. For example, if you tag a cluster with this operation, that tag does not automatically propagate to the subnets and nodes associated with the cluster.
    */
@@ -548,16 +564,20 @@ declare namespace EKS {
      */
     platformVersion?: String;
     /**
-     * The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Cluster tags do not propagate to any other resources associated with the cluster. 
+     * The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Cluster tags do not propagate to any other resources associated with the cluster.
      */
     tags?: TagMap;
     /**
      * The encryption configuration for the cluster.
      */
     encryptionConfig?: EncryptionConfigList;
+    /**
+     * The configuration used to connect to a cluster for registration.
+     */
+    connectorConfig?: ConnectorConfigResponse;
   }
   export type ClusterName = string;
-  export type ClusterStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING"|string;
+  export type ClusterStatus = "CREATING"|"ACTIVE"|"DELETING"|"FAILED"|"UPDATING"|"PENDING"|string;
   export type Compatibilities = Compatibility[];
   export interface Compatibility {
     /**
@@ -572,6 +592,39 @@ declare namespace EKS {
      * The supported default version.
      */
     defaultVersion?: Boolean;
+  }
+  export type ConnectorConfigProvider = "EKS_ANYWHERE"|"ANTHOS"|"GKE"|"AKS"|"OPENSHIFT"|"TANZU"|"RANCHER"|"EC2"|"OTHER"|string;
+  export interface ConnectorConfigRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the role that is authorized to request the connector configuration.
+     */
+    roleArn: String;
+    /**
+     * The cloud provider for the target cluster to connect.
+     */
+    provider: ConnectorConfigProvider;
+  }
+  export interface ConnectorConfigResponse {
+    /**
+     * A unique ID associated with the cluster for registration purposes.
+     */
+    activationId?: String;
+    /**
+     * A unique code associated with the cluster for registration purposes.
+     */
+    activationCode?: String;
+    /**
+     * The expiration time of the connected cluster. The cluster's YAML file must be applied through the native provider.
+     */
+    activationExpiry?: Timestamp;
+    /**
+     * The cluster's cloud service provider.
+     */
+    provider?: String;
+    /**
+     * The Amazon Resource Name (ARN) of the role that is used by the EKS connector to communicate with AWS services from the connected Kubernetes cluster.
+     */
+    roleArn?: String;
   }
   export interface CreateAddonRequest {
     /**
@@ -827,6 +880,15 @@ declare namespace EKS {
      */
     nodegroup?: Nodegroup;
   }
+  export interface DeregisterClusterRequest {
+    /**
+     * The name of the connected cluster to deregister.
+     */
+    name: String;
+  }
+  export interface DeregisterClusterResponse {
+    cluster?: Cluster;
+  }
   export interface DescribeAddonRequest {
     /**
      * The name of the cluster.
@@ -1072,6 +1134,7 @@ declare namespace EKS {
     oidc?: OidcIdentityProviderConfig;
   }
   export type IdentityProviderConfigs = IdentityProviderConfig[];
+  export type IncludeClustersList = String[];
   export interface Issue {
     /**
      * A brief description of the error.    AccessDenied: Amazon EKS or one or more of your managed nodes is failing to authenticate or authorize with your Kubernetes cluster API server.    AsgInstanceLaunchFailures: Your Auto Scaling group is experiencing failures while attempting to launch instances.    AutoScalingGroupNotFound: We couldn't find the Auto Scaling group associated with the managed node group. You may be able to recreate an Auto Scaling group with the same settings to recover.    ClusterUnreachable: Amazon EKS or one or more of your managed nodes is unable to to communicate with your Kubernetes cluster API server. This can happen if there are network disruptions or if API servers are timing out processing requests.     Ec2LaunchTemplateNotFound: We couldn't find the Amazon EC2 launch template for your managed node group. You may be able to recreate a launch template with the same settings to recover.    Ec2LaunchTemplateVersionMismatch: The Amazon EC2 launch template version for your managed node group does not match the version that Amazon EKS created. You may be able to revert to the version that Amazon EKS created to recover.    Ec2SecurityGroupDeletionFailure: We could not delete the remote access security group for your managed node group. Remove any dependencies from the security group.    Ec2SecurityGroupNotFound: We couldn't find the cluster security group for the cluster. You must recreate your cluster.    Ec2SubnetInvalidConfiguration: One or more Amazon EC2 subnets specified for a node group do not automatically assign public IP addresses to instances launched into it. If you want your instances to be assigned a public IP address, then you need to enable the auto-assign public IP address setting for the subnet. See Modifying the public IPv4 addressing attribute for your subnet in the Amazon VPC User Guide.    IamInstanceProfileNotFound: We couldn't find the IAM instance profile for your managed node group. You may be able to recreate an instance profile with the same settings to recover.    IamNodeRoleNotFound: We couldn't find the IAM role for your managed node group. You may be able to recreate an IAM role with the same settings to recover.    InstanceLimitExceeded: Your Amazon Web Services account is unable to launch any more instances of the specified instance type. You may be able to request an Amazon EC2 instance limit increase to recover.    InsufficientFreeAddresses: One or more of the subnets associated with your managed node group does not have enough available IP addresses for new nodes.    InternalFailure: These errors are usually caused by an Amazon EKS server-side issue.    NodeCreationFailure: Your launched instances are unable to register with your Amazon EKS cluster. Common causes of this failure are insufficient node IAM role permissions or lack of outbound internet access for the nodes.   
@@ -1147,6 +1210,10 @@ declare namespace EKS {
      * The nextToken value returned from a previous paginated ListClusters request where maxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the nextToken value.  This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes. 
      */
     nextToken?: String;
+    /**
+     * Indicates whether connected clusters are included in the returned list. Default value is 'ALL'.
+     */
+    include?: IncludeClustersList;
   }
   export type ListClustersRequestMaxResults = number;
   export interface ListClustersResponse {
@@ -1530,6 +1597,23 @@ declare namespace EKS {
      * Amazon Resource Name (ARN) or alias of the KMS key. The KMS key must be symmetric, created in the same region as the cluster, and if the KMS key was created in a different account, the user must have access to the KMS key. For more information, see Allowing Users in Other Accounts to Use a KMS key in the Key Management Service Developer Guide.
      */
     keyArn?: String;
+  }
+  export interface RegisterClusterRequest {
+    /**
+     * Define a unique name for this cluster within your AWS account.
+     */
+    name: ClusterName;
+    /**
+     * The configuration settings required to connect the Kubernetes cluster to the Amazon EKS control plane.
+     */
+    connectorConfig: ConnectorConfigRequest;
+    /**
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.
+     */
+    clientRequestToken?: String;
+  }
+  export interface RegisterClusterResponse {
+    cluster?: Cluster;
   }
   export interface RemoteAccessConfig {
     /**

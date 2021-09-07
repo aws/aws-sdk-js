@@ -36,6 +36,14 @@ declare class Amp extends Service {
    */
   describeWorkspace(callback?: (err: AWSError, data: Amp.Types.DescribeWorkspaceResponse) => void): Request<Amp.Types.DescribeWorkspaceResponse, AWSError>;
   /**
+   * Lists the tags you have assigned to the resource.
+   */
+  listTagsForResource(params: Amp.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: Amp.Types.ListTagsForResourceResponse) => void): Request<Amp.Types.ListTagsForResourceResponse, AWSError>;
+  /**
+   * Lists the tags you have assigned to the resource.
+   */
+  listTagsForResource(callback?: (err: AWSError, data: Amp.Types.ListTagsForResourceResponse) => void): Request<Amp.Types.ListTagsForResourceResponse, AWSError>;
+  /**
    * Lists all AMP workspaces, including workspaces being created or deleted.
    */
   listWorkspaces(params: Amp.Types.ListWorkspacesRequest, callback?: (err: AWSError, data: Amp.Types.ListWorkspacesResponse) => void): Request<Amp.Types.ListWorkspacesResponse, AWSError>;
@@ -43,6 +51,22 @@ declare class Amp extends Service {
    * Lists all AMP workspaces, including workspaces being created or deleted.
    */
   listWorkspaces(callback?: (err: AWSError, data: Amp.Types.ListWorkspacesResponse) => void): Request<Amp.Types.ListWorkspacesResponse, AWSError>;
+  /**
+   * Creates tags for the specified resource.
+   */
+  tagResource(params: Amp.Types.TagResourceRequest, callback?: (err: AWSError, data: Amp.Types.TagResourceResponse) => void): Request<Amp.Types.TagResourceResponse, AWSError>;
+  /**
+   * Creates tags for the specified resource.
+   */
+  tagResource(callback?: (err: AWSError, data: Amp.Types.TagResourceResponse) => void): Request<Amp.Types.TagResourceResponse, AWSError>;
+  /**
+   * Deletes tags from the specified resource.
+   */
+  untagResource(params: Amp.Types.UntagResourceRequest, callback?: (err: AWSError, data: Amp.Types.UntagResourceResponse) => void): Request<Amp.Types.UntagResourceResponse, AWSError>;
+  /**
+   * Deletes tags from the specified resource.
+   */
+  untagResource(callback?: (err: AWSError, data: Amp.Types.UntagResourceResponse) => void): Request<Amp.Types.UntagResourceResponse, AWSError>;
   /**
    * Updates an AMP workspace alias.
    */
@@ -62,6 +86,10 @@ declare namespace Amp {
      * Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.
      */
     clientToken?: IdempotencyToken;
+    /**
+     * Optional, user-provided tags for this workspace.
+     */
+    tags?: TagMap;
   }
   export interface CreateWorkspaceResponse {
     /**
@@ -72,6 +100,10 @@ declare namespace Amp {
      * The status of the workspace that was just created (usually CREATING).
      */
     status: WorkspaceStatus;
+    /**
+     * The tags of this workspace.
+     */
+    tags?: TagMap;
     /**
      * The generated ID of the workspace that was just created.
      */
@@ -100,6 +132,15 @@ declare namespace Amp {
     workspace: WorkspaceDescription;
   }
   export type IdempotencyToken = string;
+  export interface ListTagsForResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    resourceArn: String;
+  }
+  export interface ListTagsForResourceResponse {
+    tags?: TagMap;
+  }
   export interface ListWorkspacesRequest {
     /**
      * Optional filter for workspace alias. Only the workspaces with aliases that begin with this value will be returned.
@@ -126,7 +167,33 @@ declare namespace Amp {
     workspaces: WorkspaceSummaryList;
   }
   export type PaginationToken = string;
+  export type String = string;
+  export type TagKey = string;
+  export type TagKeys = TagKey[];
+  export type TagMap = {[key: string]: TagValue};
+  export interface TagResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    resourceArn: String;
+    tags: TagMap;
+  }
+  export interface TagResourceResponse {
+  }
+  export type TagValue = string;
   export type Timestamp = Date;
+  export interface UntagResourceRequest {
+    /**
+     * The ARN of the resource.
+     */
+    resourceArn: String;
+    /**
+     * One or more tag keys
+     */
+    tagKeys: TagKeys;
+  }
+  export interface UntagResourceResponse {
+  }
   export interface UpdateWorkspaceAliasRequest {
     /**
      * The new alias of the workspace.
@@ -166,6 +233,10 @@ declare namespace Amp {
      */
     status: WorkspaceStatus;
     /**
+     * The tags of this workspace.
+     */
+    tags?: TagMap;
+    /**
      * Unique string identifying this workspace.
      */
     workspaceId: WorkspaceId;
@@ -195,6 +266,10 @@ declare namespace Amp {
      * The status of this workspace.
      */
     status: WorkspaceStatus;
+    /**
+     * The tags of this workspace.
+     */
+    tags?: TagMap;
     /**
      * Unique string identifying this workspace.
      */

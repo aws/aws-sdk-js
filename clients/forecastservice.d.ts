@@ -519,7 +519,7 @@ declare namespace ForecastService {
      */
     PerformAutoML?: Boolean;
     /**
-     * Used to overide the default AutoML strategy, which is to optimize predictor accuracy. To apply an AutoML strategy that minimizes training time, use LatencyOptimized. This parameter is only valid for predictors trained using AutoML.
+     *   The LatencyOptimized AutoML override strategy is only available in private beta. Contact AWS Support or your account manager to learn more about access privileges.   Used to overide the default AutoML strategy, which is to optimize predictor accuracy. To apply an AutoML strategy that minimizes training time, use LatencyOptimized. This parameter is only valid for predictors trained using AutoML.
      */
     AutoMLOverrideStrategy?: AutoMLOverrideStrategy;
     /**
@@ -554,6 +554,10 @@ declare namespace ForecastService {
      * The optional metadata that you apply to the predictor to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define. The following basic restrictions apply to tags:   Maximum number of tags per resource - 50.   For each resource, each tag key must be unique, and each tag key can have only one value.   Maximum key length - 128 Unicode characters in UTF-8.   Maximum value length - 256 Unicode characters in UTF-8.   If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.   Tag keys and values are case sensitive.   Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.  
      */
     Tags?: Tags;
+    /**
+     * The accuracy metric used to optimize the predictor.
+     */
+    OptimizationMetric?: OptimizationMetric;
   }
   export interface CreatePredictorResponse {
     /**
@@ -1008,7 +1012,7 @@ declare namespace ForecastService {
      */
     PerformAutoML?: Boolean;
     /**
-     * The AutoML strategy used to train the predictor. Unless LatencyOptimized is specified, the AutoML strategy optimizes predictor accuracy. This parameter is only valid for predictors trained using AutoML.
+     *   The LatencyOptimized AutoML override strategy is only available in private beta. Contact AWS Support or your account manager to learn more about access privileges.   The AutoML strategy used to train the predictor. Unless LatencyOptimized is specified, the AutoML strategy optimizes predictor accuracy. This parameter is only valid for predictors trained using AutoML.
      */
     AutoMLOverrideStrategy?: AutoMLOverrideStrategy;
     /**
@@ -1071,6 +1075,10 @@ declare namespace ForecastService {
      * The last time the resource was modified. The timestamp depends on the status of the job:    CREATE_PENDING - The CreationTime.    CREATE_IN_PROGRESS - The current timestamp.    CREATE_STOPPING - The current timestamp.    CREATE_STOPPED - When the job stopped.    ACTIVE or CREATE_FAILED - When the job finished or failed.  
      */
     LastModificationTime?: Timestamp;
+    /**
+     * The accuracy metric used to optimize the predictor.
+     */
+    OptimizationMetric?: OptimizationMetric;
   }
   export type Domain = "RETAIL"|"CUSTOM"|"INVENTORY_PLANNING"|"EC2_CAPACITY"|"WORK_FORCE"|"WEB_TRAFFIC"|"METRICS"|string;
   export type Double = number;
@@ -1087,7 +1095,7 @@ declare namespace ForecastService {
   export type ErrorMessage = string;
   export interface ErrorMetric {
     /**
-     *  The Forecast type used to compute WAPE and RMSE. 
+     *  The Forecast type used to compute WAPE, MAPE, MASE, and RMSE. 
      */
     ForecastType?: ForecastType;
     /**
@@ -1098,6 +1106,14 @@ declare namespace ForecastService {
      *  The root-mean-square error (RMSE). 
      */
     RMSE?: Double;
+    /**
+     * The Mean Absolute Scaled Error (MASE)
+     */
+    MASE?: Double;
+    /**
+     * The Mean Absolute Percentage Error (MAPE)
+     */
+    MAPE?: Double;
   }
   export type ErrorMetrics = ErrorMetric[];
   export interface EvaluationParameters {
@@ -1259,9 +1275,13 @@ declare namespace ForecastService {
      */
     PredictorEvaluationResults?: PredictorEvaluationResults;
     /**
-     * The AutoML strategy used to train the predictor. Unless LatencyOptimized is specified, the AutoML strategy optimizes predictor accuracy. This parameter is only valid for predictors trained using AutoML.
+     *   The LatencyOptimized AutoML override strategy is only available in private beta. Contact AWS Support or your account manager to learn more about access privileges.   The AutoML strategy used to train the predictor. Unless LatencyOptimized is specified, the AutoML strategy optimizes predictor accuracy. This parameter is only valid for predictors trained using AutoML.
      */
     AutoMLOverrideStrategy?: AutoMLOverrideStrategy;
+    /**
+     * The accuracy metric used to optimize the predictor.
+     */
+    OptimizationMetric?: OptimizationMetric;
   }
   export interface HyperParameterTuningJobConfig {
     /**
@@ -1485,12 +1505,17 @@ declare namespace ForecastService {
      */
     WeightedQuantileLosses?: WeightedQuantileLosses;
     /**
-     *  Provides detailed error metrics on forecast type, root-mean square-error (RMSE), and weighted average percentage error (WAPE). 
+     *  Provides detailed error metrics for each forecast type. Metrics include root-mean square-error (RMSE), mean absolute percentage error (MAPE), mean absolute scaled error (MASE), and weighted average percentage error (WAPE). 
      */
     ErrorMetrics?: ErrorMetrics;
+    /**
+     * The average value of all weighted quantile losses.
+     */
+    AverageWeightedQuantileLoss?: Double;
   }
   export type Name = string;
   export type NextToken = string;
+  export type OptimizationMetric = "WAPE"|"RMSE"|"AverageWeightedQuantileLoss"|"MASE"|"MAPE"|string;
   export type ParameterKey = string;
   export interface ParameterRanges {
     /**

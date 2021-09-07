@@ -110,6 +110,38 @@
       ],
       "documentation": "<p>Describes an existing AMP workspace.</p>"
     },
+    "ListTagsForResource": {
+      "name": "ListTagsForResource",
+      "http": {
+        "method": "GET",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListTagsForResourceRequest"
+      },
+      "output": {
+        "shape": "ListTagsForResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Lists the tags you have assigned to the resource.</p>"
+    },
     "ListWorkspaces": {
       "name": "ListWorkspaces",
       "http": {
@@ -138,6 +170,71 @@
         }
       ],
       "documentation": "<p>Lists all AMP workspaces, including workspaces being created or deleted.</p>"
+    },
+    "TagResource": {
+      "name": "TagResource",
+      "http": {
+        "method": "POST",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "TagResourceRequest"
+      },
+      "output": {
+        "shape": "TagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Creates tags for the specified resource.</p>"
+    },
+    "UntagResource": {
+      "name": "UntagResource",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/tags/{resourceArn}",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "UntagResourceRequest"
+      },
+      "output": {
+        "shape": "UntagResourceResponse"
+      },
+      "errors": [
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "AccessDeniedException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Deletes tags from the specified resource.</p>",
+      "idempotent": true
     },
     "UpdateWorkspaceAlias": {
       "name": "UpdateWorkspaceAlias",
@@ -188,6 +285,10 @@
           "shape": "IdempotencyToken",
           "documentation": "<p>Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.</p>",
           "idempotencyToken": true
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>Optional, user-provided tags for this workspace.</p>"
         }
       },
       "documentation": "<p>Represents the input of a CreateWorkspace operation.</p>"
@@ -207,6 +308,10 @@
         "status": {
           "shape": "WorkspaceStatus",
           "documentation": "<p>The status of the workspace that was just created (usually CREATING).</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags of this workspace.</p>"
         },
         "workspaceId": {
           "shape": "WorkspaceId",
@@ -272,6 +377,28 @@
       "min": 1,
       "pattern": "[!-~]+"
     },
+    "ListTagsForResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the resource.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        }
+      }
+    },
+    "ListTagsForResourceResponse": {
+      "type": "structure",
+      "members": {
+        "tags": {
+          "shape": "TagMap"
+        }
+      }
+    },
     "ListWorkspacesRequest": {
       "type": "structure",
       "members": {
@@ -323,8 +450,90 @@
       "type": "string",
       "documentation": "<p>A token used to access the next page in a paginated result set.</p>"
     },
+    "String": {
+      "type": "string"
+    },
+    "TagKey": {
+      "type": "string",
+      "max": 128,
+      "min": 1,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
+    "TagKeys": {
+      "type": "list",
+      "member": {
+        "shape": "TagKey"
+      }
+    },
+    "TagMap": {
+      "type": "map",
+      "key": {
+        "shape": "TagKey",
+        "documentation": "<p>The key of the tag.</p> <p>Constraints: Tag keys are case-sensitive and accept a maximum of 128 Unicode characters. Valid characters are Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @ May not begin with <code>aws:</code>.</p>"
+      },
+      "value": {
+        "shape": "TagValue",
+        "documentation": "<p>The value of the tag.</p> <p>Constraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters. Valid characters are Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @</p>"
+      },
+      "documentation": "<p>The list of tags assigned to the resource.</p>",
+      "max": 50,
+      "min": 0
+    },
+    "TagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tags"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the resource.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tags": {
+          "shape": "TagMap"
+        }
+      }
+    },
+    "TagResourceResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "TagValue": {
+      "type": "string",
+      "max": 256,
+      "min": 0,
+      "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+    },
     "Timestamp": {
       "type": "timestamp"
+    },
+    "UntagResourceRequest": {
+      "type": "structure",
+      "required": [
+        "resourceArn",
+        "tagKeys"
+      ],
+      "members": {
+        "resourceArn": {
+          "shape": "String",
+          "documentation": "<p>The ARN of the resource.</p>",
+          "location": "uri",
+          "locationName": "resourceArn"
+        },
+        "tagKeys": {
+          "shape": "TagKeys",
+          "documentation": "<p>One or more tag keys</p>",
+          "location": "querystring",
+          "locationName": "tagKeys"
+        }
+      }
+    },
+    "UntagResourceResponse": {
+      "type": "structure",
+      "members": {}
     },
     "UpdateWorkspaceAliasRequest": {
       "type": "structure",
@@ -394,6 +603,10 @@
           "shape": "WorkspaceStatus",
           "documentation": "<p>The status of this workspace.</p>"
         },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags of this workspace.</p>"
+        },
         "workspaceId": {
           "shape": "WorkspaceId",
           "documentation": "<p>Unique string identifying this workspace.</p>"
@@ -456,6 +669,10 @@
         "status": {
           "shape": "WorkspaceStatus",
           "documentation": "<p>The status of this workspace.</p>"
+        },
+        "tags": {
+          "shape": "TagMap",
+          "documentation": "<p>The tags of this workspace.</p>"
         },
         "workspaceId": {
           "shape": "WorkspaceId",

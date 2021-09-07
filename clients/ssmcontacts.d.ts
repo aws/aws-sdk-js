@@ -172,11 +172,11 @@ declare class SSMContacts extends Service {
    */
   putContactPolicy(callback?: (err: AWSError, data: SSMContacts.Types.PutContactPolicyResult) => void): Request<SSMContacts.Types.PutContactPolicyResult, AWSError>;
   /**
-   * Sends an activation code to a contact channel. The contact can use this code to activate the contact channel in the console or with the ActivateChannel action. Incident Manager can't engage a contact channel until it has been activated.
+   * Sends an activation code to a contact channel. The contact can use this code to activate the contact channel in the console or with the ActivateChannel operation. Incident Manager can't engage a contact channel until it has been activated.
    */
   sendActivationCode(params: SSMContacts.Types.SendActivationCodeRequest, callback?: (err: AWSError, data: SSMContacts.Types.SendActivationCodeResult) => void): Request<SSMContacts.Types.SendActivationCodeResult, AWSError>;
   /**
-   * Sends an activation code to a contact channel. The contact can use this code to activate the contact channel in the console or with the ActivateChannel action. Incident Manager can't engage a contact channel until it has been activated.
+   * Sends an activation code to a contact channel. The contact can use this code to activate the contact channel in the console or with the ActivateChannel operation. Incident Manager can't engage a contact channel until it has been activated.
    */
   sendActivationCode(callback?: (err: AWSError, data: SSMContacts.Types.SendActivationCodeResult) => void): Request<SSMContacts.Types.SendActivationCodeResult, AWSError>;
   /**
@@ -375,13 +375,13 @@ declare namespace SSMContacts {
      */
     DeferActivation?: DeferActivation;
     /**
-     * A token ensuring that the action is called only once with the specified details.
+     * A token ensuring that the operation is called only once with the specified details.
      */
     IdempotencyToken?: IdempotencyToken;
   }
   export interface CreateContactChannelResult {
     /**
-     * The ARN of the contact channel.
+     * The Amazon Resource Name (ARN) of the contact channel.
      */
     ContactChannelArn: SsmContactsArn;
   }
@@ -407,7 +407,7 @@ declare namespace SSMContacts {
      */
     Tags?: TagsList;
     /**
-     * A token ensuring that the action is called only once with the specified details.
+     * A token ensuring that the operation is called only once with the specified details.
      */
     IdempotencyToken?: IdempotencyToken;
   }
@@ -950,7 +950,7 @@ declare namespace SSMContacts {
      */
     IncidentId?: IncidentId;
     /**
-     * A token ensuring that the action is called only once with the specified details.
+     * A token ensuring that the operation is called only once with the specified details.
      */
     IdempotencyToken?: IdempotencyToken;
   }
@@ -1039,7 +1039,7 @@ declare namespace SSMContacts {
      */
     ContactChannelId: SsmContactsArn;
     /**
-     * The name of the contact channel
+     * The name of the contact channel.
      */
     Name?: ChannelName;
     /**

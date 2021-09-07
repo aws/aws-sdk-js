@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.983.0-->
+<!--LATEST=2.984.0-->
 <!--ENTRYINSERT-->
+
+## 2.984.0
+* feature: Amp: This release adds tagging support for Amazon Managed Service for Prometheus workspace.
+* feature: EKS: Adding RegisterCluster and DeregisterCluster operations, to support connecting external clusters to EKS.
+* feature: ForecastService: Predictor creation now supports selecting an accuracy metric to optimize in AutoML and hyperparameter optimization. This release adds additional accuracy metrics for predictors - AverageWeightedQuantileLoss, MAPE and MASE.
+* feature: MediaPackage: SPEKE v2 support for live CMAF packaging type. SPEKE v2 is an upgrade to the existing SPEKE API to support multiple encryption keys, it supports live DASH currently.
 
 ## 2.983.0
 * feature: CodeGuruReviewer: Added support for CodeInconsistencies detectors

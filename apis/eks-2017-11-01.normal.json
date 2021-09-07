@@ -347,6 +347,37 @@
       ],
       "documentation": "<p>Deletes an Amazon EKS node group for a cluster.</p>"
     },
+    "DeregisterCluster": {
+      "name": "DeregisterCluster",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/cluster-registrations/{name}"
+      },
+      "input": {
+        "shape": "DeregisterClusterRequest"
+      },
+      "output": {
+        "shape": "DeregisterClusterResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceInUseException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Deregisters a connected cluster to remove it from the Amazon EKS control plane.</p>"
+    },
     "DescribeAddon": {
       "name": "DescribeAddon",
       "http": {
@@ -781,6 +812,37 @@
         }
       ],
       "documentation": "<p>Lists the updates associated with an Amazon EKS cluster or managed node group in your Amazon Web Services account, in the specified Region.</p>"
+    },
+    "RegisterCluster": {
+      "name": "RegisterCluster",
+      "http": {
+        "method": "POST",
+        "requestUri": "/cluster-registrations"
+      },
+      "input": {
+        "shape": "RegisterClusterRequest"
+      },
+      "output": {
+        "shape": "RegisterClusterResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceLimitExceededException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ClientException"
+        },
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "ServiceUnavailableException"
+        }
+      ],
+      "documentation": "<p>Connects a Kubernetes cluster to the Amazon EKS control plane. </p> <p>Any Kubernetes cluster can be connected to the Amazon EKS control plane to view current information about the cluster and its nodes. </p> <p>Cluster connection requires two steps. First, send a <code> <a>RegisterClusterRequest</a> </code> to add it to the Amazon EKS control plane.</p> <p>Second, a <a href=\"https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml\">Manifest</a> containing the <code>activationID</code> and <code>activationCode</code> must be applied to the Kubernetes cluster through it's native provider to provide visibility.</p> <p>After the Manifest is updated and applied, then the connected cluster is visible to the Amazon EKS control plane. If the Manifest is not applied within a set amount of time, then the connected cluster will no longer be visible and must be deregistered. See <a>DeregisterCluster</a>.</p>"
     },
     "TagResource": {
       "name": "TagResource",
@@ -1342,11 +1404,15 @@
         },
         "tags": {
           "shape": "TagMap",
-          "documentation": "<p>The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Cluster tags do not propagate to any other resources associated with the cluster. </p>"
+          "documentation": "<p>The metadata that you apply to the cluster to assist with categorization and organization. Each tag consists of a key and an optional value, both of which you define. Cluster tags do not propagate to any other resources associated with the cluster.</p>"
         },
         "encryptionConfig": {
           "shape": "EncryptionConfigList",
           "documentation": "<p>The encryption configuration for the cluster.</p>"
+        },
+        "connectorConfig": {
+          "shape": "ConnectorConfigResponse",
+          "documentation": "<p>The configuration used to connect to a cluster for registration.</p>"
         }
       },
       "documentation": "<p>An object representing an Amazon EKS cluster.</p>"
@@ -1364,7 +1430,8 @@
         "ACTIVE",
         "DELETING",
         "FAILED",
-        "UPDATING"
+        "UPDATING",
+        "PENDING"
       ]
     },
     "Compatibilities": {
@@ -1390,6 +1457,64 @@
         }
       },
       "documentation": "<p>Compatibility information.</p>"
+    },
+    "ConnectorConfigProvider": {
+      "type": "string",
+      "enum": [
+        "EKS_ANYWHERE",
+        "ANTHOS",
+        "GKE",
+        "AKS",
+        "OPENSHIFT",
+        "TANZU",
+        "RANCHER",
+        "EC2",
+        "OTHER"
+      ]
+    },
+    "ConnectorConfigRequest": {
+      "type": "structure",
+      "required": [
+        "roleArn",
+        "provider"
+      ],
+      "members": {
+        "roleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the role that is authorized to request the connector configuration.</p>"
+        },
+        "provider": {
+          "shape": "ConnectorConfigProvider",
+          "documentation": "<p>The cloud provider for the target cluster to connect.</p>"
+        }
+      },
+      "documentation": "<p>The configuration sent to a cluster for configuration.</p>"
+    },
+    "ConnectorConfigResponse": {
+      "type": "structure",
+      "members": {
+        "activationId": {
+          "shape": "String",
+          "documentation": "<p>A unique ID associated with the cluster for registration purposes.</p>"
+        },
+        "activationCode": {
+          "shape": "String",
+          "documentation": "<p>A unique code associated with the cluster for registration purposes.</p>"
+        },
+        "activationExpiry": {
+          "shape": "Timestamp",
+          "documentation": "<p>The expiration time of the connected cluster. The cluster's YAML file must be applied through the native provider.</p>"
+        },
+        "provider": {
+          "shape": "String",
+          "documentation": "<p>The cluster's cloud service provider.</p>"
+        },
+        "roleArn": {
+          "shape": "String",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the role that is used by the EKS connector to communicate with AWS services from the connected Kubernetes cluster.</p>"
+        }
+      },
+      "documentation": "<p>The full description of your connected cluster.</p>"
     },
     "CreateAddonRequest": {
       "type": "structure",
@@ -1755,6 +1880,28 @@
         "nodegroup": {
           "shape": "Nodegroup",
           "documentation": "<p>The full description of your deleted node group.</p>"
+        }
+      }
+    },
+    "DeregisterClusterRequest": {
+      "type": "structure",
+      "required": [
+        "name"
+      ],
+      "members": {
+        "name": {
+          "shape": "String",
+          "documentation": "<p>The name of the connected cluster to deregister.</p>",
+          "location": "uri",
+          "locationName": "name"
+        }
+      }
+    },
+    "DeregisterClusterResponse": {
+      "type": "structure",
+      "members": {
+        "cluster": {
+          "shape": "Cluster"
         }
       }
     },
@@ -2210,12 +2357,18 @@
           "documentation": "<p>An object that represents an OpenID Connect (OIDC) identity provider configuration.</p>"
         }
       },
-      "documentation": "<p>An object that represents an identity configuration.</p>"
+      "documentation": "<p>The full description of your identity configuration.</p>"
     },
     "IdentityProviderConfigs": {
       "type": "list",
       "member": {
         "shape": "IdentityProviderConfig"
+      }
+    },
+    "IncludeClustersList": {
+      "type": "list",
+      "member": {
+        "shape": "String"
       }
     },
     "Issue": {
@@ -2339,6 +2492,12 @@
           "documentation": "<p>The <code>nextToken</code> value returned from a previous paginated <code>ListClusters</code> request where <code>maxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>nextToken</code> value.</p> <note> <p>This token should be treated as an opaque identifier that is used only to retrieve the next items in a list and not for other programmatic purposes.</p> </note>",
           "location": "querystring",
           "locationName": "nextToken"
+        },
+        "include": {
+          "shape": "IncludeClustersList",
+          "documentation": "<p>Indicates whether connected clusters are included in the returned list. Default value is 'ALL'.</p>",
+          "location": "querystring",
+          "locationName": "include"
         }
       }
     },
@@ -2932,6 +3091,36 @@
         }
       },
       "documentation": "<p>Identifies the Key Management Service (KMS) key used to encrypt the secrets.</p>"
+    },
+    "RegisterClusterRequest": {
+      "type": "structure",
+      "required": [
+        "name",
+        "connectorConfig"
+      ],
+      "members": {
+        "name": {
+          "shape": "ClusterName",
+          "documentation": "<p>Define a unique name for this cluster within your AWS account.</p>"
+        },
+        "connectorConfig": {
+          "shape": "ConnectorConfigRequest",
+          "documentation": "<p>The configuration settings required to connect the Kubernetes cluster to the Amazon EKS control plane.</p>"
+        },
+        "clientRequestToken": {
+          "shape": "String",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "RegisterClusterResponse": {
+      "type": "structure",
+      "members": {
+        "cluster": {
+          "shape": "Cluster"
+        }
+      }
     },
     "RemoteAccessConfig": {
       "type": "structure",
