@@ -367,6 +367,18 @@ declare class Kafka extends Service {
          
    */
   updateMonitoring(callback?: (err: AWSError, data: Kafka.Types.UpdateMonitoringResponse) => void): Request<Kafka.Types.UpdateMonitoringResponse, AWSError>;
+  /**
+   * 
+            Updates the security settings for the cluster. You can use this operation to specify encryption and authentication on existing clusters.
+         
+   */
+  updateSecurity(params: Kafka.Types.UpdateSecurityRequest, callback?: (err: AWSError, data: Kafka.Types.UpdateSecurityResponse) => void): Request<Kafka.Types.UpdateSecurityResponse, AWSError>;
+  /**
+   * 
+            Updates the security settings for the cluster. You can use this operation to specify encryption and authentication on existing clusters.
+         
+   */
+  updateSecurity(callback?: (err: AWSError, data: Kafka.Types.UpdateSecurityResponse) => void): Request<Kafka.Types.UpdateSecurityResponse, AWSError>;
 }
 declare namespace Kafka {
   export interface BatchAssociateScramSecretRequest {
@@ -522,6 +534,12 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     Tls?: Tls;
+    /**
+     * 
+            Contains information about unauthenticated traffic to the cluster.
+         
+     */
+    Unauthenticated?: Unauthenticated;
   }
   export type ClientBroker = "TLS"|"TLS_PLAINTEXT"|"PLAINTEXT"|string;
   export interface CloudWatchLogs {
@@ -1568,6 +1586,11 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
             
      */
     KafkaVersion?: __string;
+    /**
+     * 
+            You can configure your MSK cluster to send broker logs to different destination types. This is a container for the configuration details related to broker logs.
+            
+     */
     LoggingInfo?: LoggingInfo;
     /**
      * 
@@ -1575,6 +1598,18 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
             
      */
     InstanceType?: __stringMin5Max32;
+    /**
+     * 
+            Includes all client authentication information.
+         
+     */
+    ClientAuthentication?: ClientAuthentication;
+    /**
+     * 
+            Includes all encryption-related information.
+         
+     */
+    EncryptionInfo?: EncryptionInfo;
   }
   export interface NodeExporter {
     /**
@@ -1787,6 +1822,20 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
          
      */
     CertificateAuthorityArnList?: __listOf__string;
+    /**
+     * 
+            Specifies whether you want to enable or disable TLS authentication.
+         
+     */
+    Enabled?: __boolean;
+  }
+  export interface Unauthenticated {
+    /**
+     * 
+            Specifies whether you want to enable or disable unauthenticated traffic to your cluster.
+         
+     */
+    Enabled?: __boolean;
   }
   export interface UnprocessedScramSecret {
     /**
@@ -2045,6 +2094,46 @@ kafka.m5.4xlarge, kafka.m5.12xlarge, and kafka.m5.24xlarge.
     LoggingInfo?: LoggingInfo;
   }
   export interface UpdateMonitoringResponse {
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster.
+         
+     */
+    ClusterArn?: __string;
+    /**
+     * 
+            The Amazon Resource Name (ARN) of the cluster operation.
+         
+     */
+    ClusterOperationArn?: __string;
+  }
+  export interface UpdateSecurityRequest {
+    /**
+     * 
+            Includes all client authentication related information.
+         
+     */
+    ClientAuthentication?: ClientAuthentication;
+    /**
+     * 
+            The Amazon Resource Name (ARN) that uniquely identifies the cluster.
+         
+     */
+    ClusterArn: __string;
+    /**
+     * 
+            The version of the MSK cluster to update. Cluster versions aren't simple numbers. You can describe an MSK cluster to find its version. When this update operation is successful, it generates a new cluster version.
+         
+     */
+    CurrentVersion: __string;
+    /**
+     * 
+            Includes all encryption-related information.
+         
+     */
+    EncryptionInfo?: EncryptionInfo;
+  }
+  export interface UpdateSecurityResponse {
     /**
      * 
             The Amazon Resource Name (ARN) of the cluster.

@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.984.0-->
+<!--LATEST=2.985.0-->
 <!--ENTRYINSERT-->
+
+## 2.985.0
+* feature: Kafka: Amazon MSK has added a new API that allows you to update the encrypting and authentication settings for an existing cluster.
+* feature: OpenSearch: Updated Configuration APIs for Amazon OpenSearch Service (successor to Amazon Elasticsearch Service)
 
 ## 2.984.0
 * feature: Amp: This release adds tagging support for Amazon Managed Service for Prometheus workspace.

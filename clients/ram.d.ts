@@ -12,11 +12,11 @@ declare class RAM extends Service {
   constructor(options?: RAM.Types.ClientConfiguration)
   config: Config & RAM.Types.ClientConfiguration;
   /**
-   * Accepts an invitation to a resource share from another AWS account.
+   * Accepts an invitation to a resource share from another Amazon Web Services account.
    */
   acceptResourceShareInvitation(params: RAM.Types.AcceptResourceShareInvitationRequest, callback?: (err: AWSError, data: RAM.Types.AcceptResourceShareInvitationResponse) => void): Request<RAM.Types.AcceptResourceShareInvitationResponse, AWSError>;
   /**
-   * Accepts an invitation to a resource share from another AWS account.
+   * Accepts an invitation to a resource share from another Amazon Web Services account.
    */
   acceptResourceShareInvitation(callback?: (err: AWSError, data: RAM.Types.AcceptResourceShareInvitationResponse) => void): Request<RAM.Types.AcceptResourceShareInvitationResponse, AWSError>;
   /**
@@ -36,11 +36,11 @@ declare class RAM extends Service {
    */
   associateResourceSharePermission(callback?: (err: AWSError, data: RAM.Types.AssociateResourceSharePermissionResponse) => void): Request<RAM.Types.AssociateResourceSharePermissionResponse, AWSError>;
   /**
-   * Creates a resource share.
+   * Creates a resource share. You must provide a list of the Amazon Resource Names (ARNs) for the resources you want to share. You must also specify who you want to share the resources with, and the permissions that you grant them.  Sharing a resource makes it available for use by principals outside of the Amazon Web Services account that created the resource. Sharing doesn't change any permissions or quotas that apply to the resource in the account that created it. 
    */
   createResourceShare(params: RAM.Types.CreateResourceShareRequest, callback?: (err: AWSError, data: RAM.Types.CreateResourceShareResponse) => void): Request<RAM.Types.CreateResourceShareResponse, AWSError>;
   /**
-   * Creates a resource share.
+   * Creates a resource share. You must provide a list of the Amazon Resource Names (ARNs) for the resources you want to share. You must also specify who you want to share the resources with, and the permissions that you grant them.  Sharing a resource makes it available for use by principals outside of the Amazon Web Services account that created the resource. Sharing doesn't change any permissions or quotas that apply to the resource in the account that created it. 
    */
   createResourceShare(callback?: (err: AWSError, data: RAM.Types.CreateResourceShareResponse) => void): Request<RAM.Types.CreateResourceShareResponse, AWSError>;
   /**
@@ -60,27 +60,27 @@ declare class RAM extends Service {
    */
   disassociateResourceShare(callback?: (err: AWSError, data: RAM.Types.DisassociateResourceShareResponse) => void): Request<RAM.Types.DisassociateResourceShareResponse, AWSError>;
   /**
-   * Disassociates an AWS RAM permission from a resource share.
+   * Disassociates an RAM permission from a resource share.
    */
   disassociateResourceSharePermission(params: RAM.Types.DisassociateResourceSharePermissionRequest, callback?: (err: AWSError, data: RAM.Types.DisassociateResourceSharePermissionResponse) => void): Request<RAM.Types.DisassociateResourceSharePermissionResponse, AWSError>;
   /**
-   * Disassociates an AWS RAM permission from a resource share.
+   * Disassociates an RAM permission from a resource share.
    */
   disassociateResourceSharePermission(callback?: (err: AWSError, data: RAM.Types.DisassociateResourceSharePermissionResponse) => void): Request<RAM.Types.DisassociateResourceSharePermissionResponse, AWSError>;
   /**
-   * Enables resource sharing within your AWS Organization. The caller must be the master account for the AWS Organization.
+   * Enables resource sharing within your organization in Organizations. The caller must be the master account for the organization.
    */
   enableSharingWithAwsOrganization(params: RAM.Types.EnableSharingWithAwsOrganizationRequest, callback?: (err: AWSError, data: RAM.Types.EnableSharingWithAwsOrganizationResponse) => void): Request<RAM.Types.EnableSharingWithAwsOrganizationResponse, AWSError>;
   /**
-   * Enables resource sharing within your AWS Organization. The caller must be the master account for the AWS Organization.
+   * Enables resource sharing within your organization in Organizations. The caller must be the master account for the organization.
    */
   enableSharingWithAwsOrganization(callback?: (err: AWSError, data: RAM.Types.EnableSharingWithAwsOrganizationResponse) => void): Request<RAM.Types.EnableSharingWithAwsOrganizationResponse, AWSError>;
   /**
-   * Gets the contents of an AWS RAM permission in JSON format.
+   * Gets the contents of an RAM permission in JSON format.
    */
   getPermission(params: RAM.Types.GetPermissionRequest, callback?: (err: AWSError, data: RAM.Types.GetPermissionResponse) => void): Request<RAM.Types.GetPermissionResponse, AWSError>;
   /**
-   * Gets the contents of an AWS RAM permission in JSON format.
+   * Gets the contents of an RAM permission in JSON format.
    */
   getPermission(callback?: (err: AWSError, data: RAM.Types.GetPermissionResponse) => void): Request<RAM.Types.GetPermissionResponse, AWSError>;
   /**
@@ -124,11 +124,11 @@ declare class RAM extends Service {
    */
   listPendingInvitationResources(callback?: (err: AWSError, data: RAM.Types.ListPendingInvitationResourcesResponse) => void): Request<RAM.Types.ListPendingInvitationResourcesResponse, AWSError>;
   /**
-   * Lists the AWS RAM permissions.
+   * Lists the RAM permissions.
    */
   listPermissions(params: RAM.Types.ListPermissionsRequest, callback?: (err: AWSError, data: RAM.Types.ListPermissionsResponse) => void): Request<RAM.Types.ListPermissionsResponse, AWSError>;
   /**
-   * Lists the AWS RAM permissions.
+   * Lists the RAM permissions.
    */
   listPermissions(callback?: (err: AWSError, data: RAM.Types.ListPermissionsResponse) => void): Request<RAM.Types.ListPermissionsResponse, AWSError>;
   /**
@@ -140,19 +140,19 @@ declare class RAM extends Service {
    */
   listPrincipals(callback?: (err: AWSError, data: RAM.Types.ListPrincipalsResponse) => void): Request<RAM.Types.ListPrincipalsResponse, AWSError>;
   /**
-   * Lists the AWS RAM permissions that are associated with a resource share.
+   * Lists the RAM permissions that are associated with a resource share.
    */
   listResourceSharePermissions(params: RAM.Types.ListResourceSharePermissionsRequest, callback?: (err: AWSError, data: RAM.Types.ListResourceSharePermissionsResponse) => void): Request<RAM.Types.ListResourceSharePermissionsResponse, AWSError>;
   /**
-   * Lists the AWS RAM permissions that are associated with a resource share.
+   * Lists the RAM permissions that are associated with a resource share.
    */
   listResourceSharePermissions(callback?: (err: AWSError, data: RAM.Types.ListResourceSharePermissionsResponse) => void): Request<RAM.Types.ListResourceSharePermissionsResponse, AWSError>;
   /**
-   * Lists the shareable resource types supported by AWS RAM.
+   * Lists the shareable resource types supported by RAM.
    */
   listResourceTypes(params: RAM.Types.ListResourceTypesRequest, callback?: (err: AWSError, data: RAM.Types.ListResourceTypesResponse) => void): Request<RAM.Types.ListResourceTypesResponse, AWSError>;
   /**
-   * Lists the shareable resource types supported by AWS RAM.
+   * Lists the shareable resource types supported by RAM.
    */
   listResourceTypes(callback?: (err: AWSError, data: RAM.Types.ListResourceTypesResponse) => void): Request<RAM.Types.ListResourceTypesResponse, AWSError>;
   /**
@@ -164,19 +164,19 @@ declare class RAM extends Service {
    */
   listResources(callback?: (err: AWSError, data: RAM.Types.ListResourcesResponse) => void): Request<RAM.Types.ListResourcesResponse, AWSError>;
   /**
-   * Resource shares that were created by attaching a policy to a resource are visible only to the resource share owner, and the resource share cannot be modified in AWS RAM. Use this API action to promote the resource share. When you promote the resource share, it becomes:   Visible to all principals that it is shared with.   Modifiable in AWS RAM.  
+   * Resource shares that were created by attaching a policy to a resource are visible only to the resource share owner, and the resource share cannot be modified in RAM. Use this API action to promote the resource share. When you promote the resource share, it becomes:   Visible to all principals that it is shared with.   Modifiable in RAM.  
    */
   promoteResourceShareCreatedFromPolicy(params: RAM.Types.PromoteResourceShareCreatedFromPolicyRequest, callback?: (err: AWSError, data: RAM.Types.PromoteResourceShareCreatedFromPolicyResponse) => void): Request<RAM.Types.PromoteResourceShareCreatedFromPolicyResponse, AWSError>;
   /**
-   * Resource shares that were created by attaching a policy to a resource are visible only to the resource share owner, and the resource share cannot be modified in AWS RAM. Use this API action to promote the resource share. When you promote the resource share, it becomes:   Visible to all principals that it is shared with.   Modifiable in AWS RAM.  
+   * Resource shares that were created by attaching a policy to a resource are visible only to the resource share owner, and the resource share cannot be modified in RAM. Use this API action to promote the resource share. When you promote the resource share, it becomes:   Visible to all principals that it is shared with.   Modifiable in RAM.  
    */
   promoteResourceShareCreatedFromPolicy(callback?: (err: AWSError, data: RAM.Types.PromoteResourceShareCreatedFromPolicyResponse) => void): Request<RAM.Types.PromoteResourceShareCreatedFromPolicyResponse, AWSError>;
   /**
-   * Rejects an invitation to a resource share from another AWS account.
+   * Rejects an invitation to a resource share from another Amazon Web Services account.
    */
   rejectResourceShareInvitation(params: RAM.Types.RejectResourceShareInvitationRequest, callback?: (err: AWSError, data: RAM.Types.RejectResourceShareInvitationResponse) => void): Request<RAM.Types.RejectResourceShareInvitationResponse, AWSError>;
   /**
-   * Rejects an invitation to a resource share from another AWS account.
+   * Rejects an invitation to a resource share from another Amazon Web Services account.
    */
   rejectResourceShareInvitation(callback?: (err: AWSError, data: RAM.Types.RejectResourceShareInvitationResponse) => void): Request<RAM.Types.RejectResourceShareInvitationResponse, AWSError>;
   /**
@@ -231,7 +231,7 @@ declare namespace RAM {
      */
     resourceShareArn: String;
     /**
-     * The Amazon Resource Name (ARN) of the AWS RAM permissions to associate with the resource share.
+     * The Amazon Resource Name (ARN) of the RAM permission to associate with the resource share.
      */
     permissionArn: String;
     /**
@@ -243,7 +243,7 @@ declare namespace RAM {
      */
     clientToken?: String;
     /**
-     * The version of the AWS RAM permissions to associate with the resource share.
+     * The version of the RAM permissions to associate with the resource share.
      */
     permissionVersion?: Integer;
   }
@@ -263,11 +263,11 @@ declare namespace RAM {
      */
     resourceShareArn: String;
     /**
-     * The Amazon Resource Names (ARN) of the resources.
+     * The Amazon Resource Names (ARNs) of the resources.
      */
     resourceArns?: ResourceArnList;
     /**
-     * The principals to associate with the resource share. The possible values are IDs of AWS accounts, and the ARNs of organizational units (OU) or organizations from AWS Organizations.
+     * The principals to associate with the resource share. The possible values are:   An Amazon Web Services account ID   An Amazon Resource Name (ARN) of an organization in Organizations   An ARN of an organizational unit (OU) in Organizations   An ARN of an IAM role   An ARN of an IAM user    Not all resource types can be shared with IAM roles and IAM users. For more information, see Sharing with IAM roles and IAM users in the Resource Access Manager User Guide. 
      */
     principals?: PrincipalArnOrIdList;
     /**
@@ -292,11 +292,11 @@ declare namespace RAM {
      */
     name: String;
     /**
-     * The Amazon Resource Names (ARN) of the resources to associate with the resource share.
+     * The ARNs of the resources to associate with the resource share.
      */
     resourceArns?: ResourceArnList;
     /**
-     * The principals to associate with the resource share. The possible values are IDs of AWS accounts, the ARN of an OU or organization from AWS Organizations.
+     * The principals to associate with the resource share. The possible values are:   An Amazon Web Services account ID   An Amazon Resource Name (ARN) of an organization in Organizations   An ARN of an organizational unit (OU) in Organizations   An ARN of an IAM role   An ARN of an IAM user    Not all resource types can be shared with IAM roles and IAM users. For more information, see Sharing with IAM roles and IAM users in the Resource Access Manager User Guide. 
      */
     principals?: PrincipalArnOrIdList;
     /**
@@ -304,7 +304,7 @@ declare namespace RAM {
      */
     tags?: TagList;
     /**
-     * Indicates whether principals outside your AWS organization can be associated with a resource share.
+     * Indicates whether principals outside your organization in Organizations can be associated with a resource share.
      */
     allowExternalPrincipals?: Boolean;
     /**
@@ -312,7 +312,7 @@ declare namespace RAM {
      */
     clientToken?: String;
     /**
-     * The ARNs of the permissions to associate with the resource share. If you do not specify an ARN for the permission, AWS RAM automatically attaches the default version of the permission for each resource type.
+     * The Amazon Resource Names (ARNs) of the permissions to associate with the resource share. If you do not specify an ARN for the permission, RAM automatically attaches the default version of the permission for each resource type. Only one permission can be associated with each resource type in a resource share.
      */
     permissionArns?: PermissionArnList;
   }
@@ -353,7 +353,7 @@ declare namespace RAM {
      */
     resourceShareArn: String;
     /**
-     * The ARN of the permission to disassociate from the resource share.
+     * The Amazon Resource Name (ARN) of the permission to disassociate from the resource share.
      */
     permissionArn: String;
     /**
@@ -409,7 +409,7 @@ declare namespace RAM {
   }
   export interface GetPermissionRequest {
     /**
-     * The ARN of the permission.
+     * The Amazon Resource Name (ARN) of the permission.
      */
     permissionArn: String;
     /**
@@ -425,7 +425,7 @@ declare namespace RAM {
   }
   export interface GetResourcePoliciesRequest {
     /**
-     * The Amazon Resource Names (ARN) of the resources.
+     * The Amazon Resource Names (ARNs) of the resources.
      */
     resourceArns: ResourceArnList;
     /**
@@ -521,7 +521,7 @@ declare namespace RAM {
   }
   export interface GetResourceSharesRequest {
     /**
-     * The ARNs of the resource shares.
+     * The Amazon Resource Names (ARNs) of the resource shares.
      */
     resourceShareArns?: ResourceShareArnList;
     /**
@@ -549,7 +549,7 @@ declare namespace RAM {
      */
     maxResults?: MaxResults;
     /**
-     * The Amazon Resource Name (ARN) of the AWS RAM permission that is associated with the resource share.
+     * The Amazon Resource Name (ARN) of the RAM permission that is associated with the resource share.
      */
     permissionArn?: String;
   }
@@ -626,7 +626,7 @@ declare namespace RAM {
      */
     principals?: PrincipalArnOrIdList;
     /**
-     * The resource type. Valid values: acm-pca:CertificateAuthority | appmesh:Mesh | codebuild:Project | codebuild:ReportGroup | ec2:CapacityReservation | ec2:DedicatedHost | ec2:LocalGatewayRouteTable | ec2:PrefixList | ec2:Subnet | ec2:TrafficMirrorTarget | ec2:TransitGateway | imagebuilder:Component | imagebuilder:Image | imagebuilder:ImageRecipe | imagebuilder:ContainerRecipe | glue:Catalog | glue:Database | glue:Table | license-manager:LicenseConfiguration I network-firewall:FirewallPolicy | network-firewall:StatefulRuleGroup | network-firewall:StatelessRuleGroup | outposts:Outpost | resource-groups:Group | rds:Cluster | route53resolver:ResolverQueryLogConfig | route53resolver:ResolverRule 
+     * The resource type. Valid values: acm-pca:CertificateAuthority | appmesh:Mesh | codebuild:Project | codebuild:ReportGroup | ec2:CapacityReservation | ec2:DedicatedHost | ec2:LocalGatewayRouteTable | ec2:PrefixList | ec2:Subnet | ec2:TrafficMirrorTarget | ec2:TransitGateway | imagebuilder:Component | imagebuilder:Image | imagebuilder:ImageRecipe | imagebuilder:ContainerRecipe | glue:Catalog | glue:Database | glue:Table | license-manager:LicenseConfiguration I network-firewall:FirewallPolicy | network-firewall:StatefulRuleGroup | network-firewall:StatelessRuleGroup | outposts:Outpost | resource-groups:Group | rds:Cluster | route53resolver:FirewallRuleGroup |route53resolver:ResolverQueryLogConfig | route53resolver:ResolverRule | s3-outposts:Outpost | ssm-contacts:Contact | ssm-incidents:ResponsePlan 
      */
     resourceType?: String;
     /**
@@ -688,7 +688,7 @@ declare namespace RAM {
   }
   export interface ListResourceTypesResponse {
     /**
-     * The shareable resource types supported by AWS RAM.
+     * The shareable resource types supported by RAM.
      */
     resourceTypes?: ServiceNameAndResourceTypeList;
     /**
@@ -706,11 +706,11 @@ declare namespace RAM {
      */
     principal?: String;
     /**
-     * The resource type. Valid values: acm-pca:CertificateAuthority | appmesh:Mesh | codebuild:Project | codebuild:ReportGroup | ec2:CapacityReservation | ec2:DedicatedHost | ec2:LocalGatewayRouteTable | ec2:PrefixList | ec2:Subnet | ec2:TrafficMirrorTarget | ec2:TransitGateway | imagebuilder:Component | imagebuilder:Image | imagebuilder:ImageRecipe | imagebuilder:ContainerRecipe | glue:Catalog | glue:Database | glue:Table | license-manager:LicenseConfiguration I network-firewall:FirewallPolicy | network-firewall:StatefulRuleGroup | network-firewall:StatelessRuleGroup | outposts:Outpost | resource-groups:Group | rds:Cluster | route53resolver:ResolverQueryLogConfig | route53resolver:ResolverRule 
+     * The resource type. Valid values: acm-pca:CertificateAuthority | appmesh:Mesh | codebuild:Project | codebuild:ReportGroup | ec2:CapacityReservation | ec2:DedicatedHost | ec2:LocalGatewayRouteTable | ec2:PrefixList | ec2:Subnet | ec2:TrafficMirrorTarget | ec2:TransitGateway | imagebuilder:Component | imagebuilder:Image | imagebuilder:ImageRecipe | imagebuilder:ContainerRecipe | glue:Catalog | glue:Database | glue:Table | license-manager:LicenseConfiguration I network-firewall:FirewallPolicy | network-firewall:StatefulRuleGroup | network-firewall:StatelessRuleGroup | outposts:Outpost | resource-groups:Group | rds:Cluster | route53resolver:FirewallRuleGroup |route53resolver:ResolverQueryLogConfig | route53resolver:ResolverRule | s3-outposts:Outpost | ssm-contacts:Contact | ssm-incidents:ResponsePlan 
      */
     resourceType?: String;
     /**
-     * The Amazon Resource Names (ARN) of the resources.
+     * The Amazon Resource Names (ARNs) of the resources.
      */
     resourceArns?: ResourceArnList;
     /**
@@ -758,7 +758,7 @@ declare namespace RAM {
      */
     lastUpdatedTime?: DateTime;
     /**
-     * Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
+     * Indicates whether the principal belongs to the same organization in Organizations as the Amazon Web Services account that owns the resource share.
      */
     external?: Boolean;
   }
@@ -766,7 +766,7 @@ declare namespace RAM {
   export type PrincipalList = Principal[];
   export interface PromoteResourceShareCreatedFromPolicyRequest {
     /**
-     * The ARN of the resource share to promote.
+     * The Amazon Resource Name (ARN) of the resource share to promote.
      */
     resourceShareArn: String;
   }
@@ -810,7 +810,7 @@ declare namespace RAM {
      */
     resourceShareArn?: String;
     /**
-     * The ARN of the resource group. This value is returned only if the resource is a resource group.
+     * The Amazon Resource Name (ARN) of the resource group. This value is returned only if the resource is a resource group.
      */
     resourceGroupArn?: String;
     /**
@@ -843,11 +843,11 @@ declare namespace RAM {
      */
     name?: String;
     /**
-     * The ID of the AWS account that owns the resource share.
+     * The ID of the Amazon Web Services account that owns the resource share.
      */
     owningAccountId?: String;
     /**
-     * Indicates whether principals outside your AWS organization can be associated with a resource share.
+     * Indicates whether principals outside your organization in Organizations can be associated with a resource share.
      */
     allowExternalPrincipals?: Boolean;
     /**
@@ -871,7 +871,7 @@ declare namespace RAM {
      */
     lastUpdatedTime?: DateTime;
     /**
-     * Indicates how the resource share was created. Possible values include:    CREATED_FROM_POLICY - Indicates that the resource share was created from an AWS Identity and Access Management (AWS IAM) policy attached to a resource. These resource shares are visible only to the AWS account that created it. They cannot be modified in AWS RAM.    PROMOTING_TO_STANDARD - The resource share is in the process of being promoted. For more information, see PromoteResourceShareCreatedFromPolicy.    STANDARD - Indicates that the resource share was created in AWS RAM using the console or APIs. These resource shares are visible to all principals. They can be modified in AWS RAM.  
+     * Indicates how the resource share was created. Possible values include:    CREATED_FROM_POLICY - Indicates that the resource share was created from an Amazon Web Services Identity and Access Management (Amazon Web Services IAM) policy attached to a resource. These resource shares are visible only to the Amazon Web Services account that created it. They cannot be modified in RAM.    PROMOTING_TO_STANDARD - The resource share is in the process of being promoted. For more information, see PromoteResourceShareCreatedFromPolicy.    STANDARD - Indicates that the resource share was created in RAM using the console or APIs. These resource shares are visible to all principals. They can be modified in RAM.  
      */
     featureSet?: ResourceShareFeatureSet;
   }
@@ -886,7 +886,7 @@ declare namespace RAM {
      */
     resourceShareName?: String;
     /**
-     * The associated entity. For resource associations, this is the ARN of the resource. For principal associations, this is the ID of an AWS account or the ARN of an OU or organization from AWS Organizations.
+     * The associated entity. For resource associations, this is the Amazon Resource Name (ARN) of the resource. For principal associations, this is one of the following:   An Amazon Web Services account ID   An ARN of an organization in Organizations   An ARN of an organizational unit (OU) in Organizations   An ARN of an IAM role   An ARN of an IAM user  
      */
     associatedEntity?: String;
     /**
@@ -910,7 +910,7 @@ declare namespace RAM {
      */
     lastUpdatedTime?: DateTime;
     /**
-     * Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.
+     * Indicates whether the principal belongs to the same organization in Organizations as the Amazon Web Services account that owns the resource share.
      */
     external?: Boolean;
   }
@@ -932,11 +932,11 @@ declare namespace RAM {
      */
     resourceShareArn?: String;
     /**
-     * The ID of the AWS account that sent the invitation.
+     * The ID of the Amazon Web Services account that sent the invitation.
      */
     senderAccountId?: String;
     /**
-     * The ID of the AWS account that received the invitation.
+     * The ID of the Amazon Web Services account that received the invitation.
      */
     receiverAccountId?: String;
     /**
@@ -962,7 +962,7 @@ declare namespace RAM {
   export type ResourceShareList = ResourceShare[];
   export interface ResourceSharePermissionDetail {
     /**
-     * The ARN of the permission.
+     * The Amazon Resource Name (ARN) of the permission.
      */
     arn?: String;
     /**
@@ -1001,7 +1001,7 @@ declare namespace RAM {
   export type ResourceSharePermissionList = ResourceSharePermissionSummary[];
   export interface ResourceSharePermissionSummary {
     /**
-     * The ARN of the permission.
+     * The Amazon Resource Name (ARN) of the permission.
      */
     arn?: String;
     /**
@@ -1045,7 +1045,7 @@ declare namespace RAM {
      */
     resourceType?: String;
     /**
-     * The name of the AWS services to which the resources belong.
+     * The name of the Amazon Web Services services to which the resources belong.
      */
     serviceName?: String;
   }
@@ -1111,7 +1111,7 @@ declare namespace RAM {
      */
     name?: String;
     /**
-     * Indicates whether principals outside your AWS organization can be associated with a resource share.
+     * Indicates whether principals outside your organization in Organizations can be associated with a resource share.
      */
     allowExternalPrincipals?: Boolean;
     /**

@@ -277,5 +277,6 @@ module.exports = {
   ChimeSDKIdentity: require('./chimesdkidentity'),
   ChimeSDKMessaging: require('./chimesdkmessaging'),
   SnowDeviceManagement: require('./snowdevicemanagement'),
-  MemoryDB: require('./memorydb')
+  MemoryDB: require('./memorydb'),
+  OpenSearch: require('./opensearch')
 };

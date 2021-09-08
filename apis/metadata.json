@@ -1068,5 +1068,8 @@
   },
   "memorydb": {
     "name": "MemoryDB"
+  },
+  "opensearch": {
+    "name": "OpenSearch"
   }
 }
