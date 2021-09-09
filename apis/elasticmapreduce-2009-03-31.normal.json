@@ -93,7 +93,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html\">Tag Clusters</a>. </p>"
+      "documentation": "<p>Adds tags to an Amazon EMR resource, such as a cluster or an Amazon EMR Studio. Tags make it easier to associate resources in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html\">Tag Clusters</a>. </p>"
     },
     "CancelSteps": {
       "name": "CancelSteps",
@@ -178,7 +178,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Maps a user or group to the Amazon EMR Studio specified by <code>StudioId</code>, and applies a session policy to refine Studio permissions for that user or group.</p>"
+      "documentation": "<p>Maps a user or group to the Amazon EMR Studio specified by <code>StudioId</code>, and applies a session policy to refine Studio permissions for that user or group. Use <code>CreateStudioSessionMapping</code> to assign users to a Studio when you use Amazon Web Services SSO authentication. For instructions on how to assign users to a Studio when you use IAM authentication, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-manage-users.html#emr-studio-assign-users-groups\">Assign a user or group to your EMR Studio</a>.</p>"
     },
     "DeleteSecurityConfiguration": {
       "name": "DeleteSecurityConfiguration",
@@ -889,7 +889,7 @@
           "shape": "InvalidRequestException"
         }
       ],
-      "documentation": "<p>Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html\">Tag Clusters</a>. </p> <p>The following example removes the stack tag with value Prod from a cluster:</p>"
+      "documentation": "<p>Removes tags from an Amazon EMR resource, such as a cluster or Amazon EMR Studio. Tags make it easier to associate resources in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html\">Tag Clusters</a>. </p> <p>The following example removes the stack tag with value Prod from a cluster:</p>"
     },
     "RunJobFlow": {
       "name": "RunJobFlow",
@@ -1155,14 +1155,14 @@
       "members": {
         "ResourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The Amazon EMR resource identifier to which tags will be added. This value must be a cluster identifier.</p>"
+          "documentation": "<p>The Amazon EMR resource identifier to which tags will be added. For example, a cluster identifier or an Amazon EMR Studio ID.</p>"
         },
         "Tags": {
           "shape": "TagList",
-          "documentation": "<p>A list of tags to associate with a cluster and propagate to EC2 instances. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.</p>"
+          "documentation": "<p>A list of tags to associate with a resource. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.</p>"
         }
       },
-      "documentation": "<p>This input identifies a cluster and a list of tags to attach.</p>"
+      "documentation": "<p>This input identifies an Amazon EMR resource and a list of tags to attach.</p>"
     },
     "AddTagsOutput": {
       "type": "structure",
@@ -1567,7 +1567,7 @@
         },
         "ServiceRole": {
           "shape": "String",
-          "documentation": "<p>The IAM role that will be assumed by the Amazon EMR service to access Amazon Web Services resources on your behalf.</p>"
+          "documentation": "<p>The IAM role that Amazon EMR assumes in order to access Amazon Web Services resources on your behalf.</p>"
         },
         "NormalizedInstanceHours": {
           "shape": "Integer",
@@ -1886,7 +1886,6 @@
         "VpcId",
         "SubnetIds",
         "ServiceRole",
-        "UserRole",
         "WorkspaceSecurityGroupId",
         "EngineSecurityGroupId",
         "DefaultS3Location"
@@ -1902,7 +1901,7 @@
         },
         "AuthMode": {
           "shape": "AuthMode",
-          "documentation": "<p>Specifies whether the Studio authenticates users using single sign-on (SSO) or IAM. Amazon EMR Studio currently only supports SSO authentication.</p>"
+          "documentation": "<p>Specifies whether the Studio authenticates users using IAM or Amazon Web Services SSO.</p>"
         },
         "VpcId": {
           "shape": "XmlStringMaxLen256",
@@ -1914,11 +1913,11 @@
         },
         "ServiceRole": {
           "shape": "XmlString",
-          "documentation": "<p>The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other Amazon Web Services services.</p>"
+          "documentation": "<p>The IAM role that the Amazon EMR Studio assumes. The service role provides a way for Amazon EMR Studio to interoperate with other Amazon Web Services services.</p>"
         },
         "UserRole": {
           "shape": "XmlString",
-          "documentation": "<p>The IAM user role that will be assumed by users and groups logged in to an Amazon EMR Studio. The permissions attached to this IAM role can be scoped down for each user or group using session policies.</p>"
+          "documentation": "<p>The IAM user role that users and groups assume when logged in to an Amazon EMR Studio. Only specify a <code>UserRole</code> when you use Amazon Web Services SSO authentication. The permissions attached to the <code>UserRole</code> can be scoped down for each user or group using session policies.</p>"
         },
         "WorkspaceSecurityGroupId": {
           "shape": "XmlStringMaxLen256",
@@ -1931,6 +1930,14 @@
         "DefaultS3Location": {
           "shape": "XmlString",
           "documentation": "<p>The Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook files.</p>"
+        },
+        "IdpAuthUrl": {
+          "shape": "XmlString",
+          "documentation": "<p>The authentication endpoint of your identity provider (IdP). Specify this value when you use IAM authentication and want to let federated users log in to a Studio with the Studio URL and credentials from your IdP. Amazon EMR Studio redirects users to this endpoint to enter credentials.</p>"
+        },
+        "IdpRelayStateParameterName": {
+          "shape": "XmlStringMaxLen256",
+          "documentation": "<p>The name that your identity provider (IdP) uses for its <code>RelayState</code> parameter. For example, <code>RelayState</code> or <code>TargetSource</code>. Specify this value when you use IAM authentication and want to let federated users log in to a Studio using the Studio URL. The <code>RelayState</code> parameter differs by IdP.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -4601,19 +4608,19 @@
       "members": {
         "ResourceId": {
           "shape": "ResourceId",
-          "documentation": "<p>The Amazon EMR resource identifier from which tags will be removed. This value must be a cluster identifier.</p>"
+          "documentation": "<p>The Amazon EMR resource identifier from which tags will be removed. For example, a cluster identifier or an Amazon EMR Studio ID.</p>"
         },
         "TagKeys": {
           "shape": "StringList",
-          "documentation": "<p>A list of tag keys to remove from a resource.</p>"
+          "documentation": "<p>A list of tag keys to remove from the resource.</p>"
         }
       },
-      "documentation": "<p>This input identifies a cluster and a list of tags to remove.</p>"
+      "documentation": "<p>This input identifies an Amazon EMR resource and a list of tags to remove.</p>"
     },
     "RemoveTagsOutput": {
       "type": "structure",
       "members": {},
-      "documentation": "<p>This output indicates the result of removing tags from a resource.</p>"
+      "documentation": "<p>This output indicates the result of removing tags from the resource.</p>"
     },
     "RepoUpgradeOnBoot": {
       "type": "string",
@@ -4694,7 +4701,7 @@
         },
         "ServiceRole": {
           "shape": "XmlString",
-          "documentation": "<p>The IAM role that will be assumed by the Amazon EMR service to access Amazon Web Services resources on your behalf.</p>"
+          "documentation": "<p>The IAM role that Amazon EMR assumes in order to access Amazon Web Services resources on your behalf.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -5450,7 +5457,7 @@
         },
         "AuthMode": {
           "shape": "AuthMode",
-          "documentation": "<p>Specifies whether the Amazon EMR Studio authenticates users using single sign-on (SSO) or IAM.</p>"
+          "documentation": "<p>Specifies whether the Amazon EMR Studio authenticates users using IAM or Amazon Web Services SSO.</p>"
         },
         "VpcId": {
           "shape": "XmlStringMaxLen256",
@@ -5466,7 +5473,7 @@
         },
         "UserRole": {
           "shape": "XmlString",
-          "documentation": "<p>The name of the IAM role assumed by users logged in to the Amazon EMR Studio.</p>"
+          "documentation": "<p>The name of the IAM role assumed by users logged in to the Amazon EMR Studio. A Studio only requires a <code>UserRole</code> when you use IAM authentication.</p>"
         },
         "WorkspaceSecurityGroupId": {
           "shape": "XmlStringMaxLen256",
@@ -5487,6 +5494,14 @@
         "DefaultS3Location": {
           "shape": "XmlString",
           "documentation": "<p>The Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook files.</p>"
+        },
+        "IdpAuthUrl": {
+          "shape": "XmlString",
+          "documentation": "<p>Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.</p>"
+        },
+        "IdpRelayStateParameterName": {
+          "shape": "XmlStringMaxLen256",
+          "documentation": "<p>The name of your identity provider's <code>RelayState</code> parameter.</p>"
         },
         "Tags": {
           "shape": "TagList",
@@ -5517,6 +5532,10 @@
         "Url": {
           "shape": "XmlStringMaxLen256",
           "documentation": "<p>The unique access URL of the Amazon EMR Studio.</p>"
+        },
+        "AuthMode": {
+          "shape": "AuthMode",
+          "documentation": "<p>Specifies whether the Studio authenticates users using IAM or Amazon Web Services SSO.</p>"
         },
         "CreationTime": {
           "shape": "Date",

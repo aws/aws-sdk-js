@@ -13,11 +13,11 @@ declare class CodeGuruReviewer extends Service {
   constructor(options?: CodeGuruReviewer.Types.ClientConfiguration)
   config: Config & CodeGuruReviewer.Types.ClientConfiguration;
   /**
-   *  Use to associate an AWS CodeCommit repository or a repostory managed by AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see Recommendations in Amazon CodeGuru Reviewer in the Amazon CodeGuru Reviewer User Guide.  If you associate a CodeCommit or S3 repository, it must be in the same AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured. Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar Connections to connect to CodeGuru Reviewer. For more information, see Associate a repository in the Amazon CodeGuru Reviewer User Guide.    You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see Getting started with CodeGuru Reviewer in the CodeGuru Reviewer User Guide.  
+   *  Use to associate an Amazon Web Services CodeCommit repository or a repostory managed by Amazon Web Services CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see Recommendations in Amazon CodeGuru Reviewer in the Amazon CodeGuru Reviewer User Guide.  If you associate a CodeCommit or S3 repository, it must be in the same Amazon Web Services Region and Amazon Web Services account where its CodeGuru Reviewer code reviews are configured. Bitbucket and GitHub Enterprise Server repositories are managed by Amazon Web Services CodeStar Connections to connect to CodeGuru Reviewer. For more information, see Associate a repository in the Amazon CodeGuru Reviewer User Guide.    You cannot use the CodeGuru Reviewer SDK or the Amazon Web Services CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see Getting started with CodeGuru Reviewer in the CodeGuru Reviewer User Guide.  
    */
   associateRepository(params: CodeGuruReviewer.Types.AssociateRepositoryRequest, callback?: (err: AWSError, data: CodeGuruReviewer.Types.AssociateRepositoryResponse) => void): Request<CodeGuruReviewer.Types.AssociateRepositoryResponse, AWSError>;
   /**
-   *  Use to associate an AWS CodeCommit repository or a repostory managed by AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see Recommendations in Amazon CodeGuru Reviewer in the Amazon CodeGuru Reviewer User Guide.  If you associate a CodeCommit or S3 repository, it must be in the same AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured. Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar Connections to connect to CodeGuru Reviewer. For more information, see Associate a repository in the Amazon CodeGuru Reviewer User Guide.    You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see Getting started with CodeGuru Reviewer in the CodeGuru Reviewer User Guide.  
+   *  Use to associate an Amazon Web Services CodeCommit repository or a repostory managed by Amazon Web Services CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see Recommendations in Amazon CodeGuru Reviewer in the Amazon CodeGuru Reviewer User Guide.  If you associate a CodeCommit or S3 repository, it must be in the same Amazon Web Services Region and Amazon Web Services account where its CodeGuru Reviewer code reviews are configured. Bitbucket and GitHub Enterprise Server repositories are managed by Amazon Web Services CodeStar Connections to connect to CodeGuru Reviewer. For more information, see Associate a repository in the Amazon CodeGuru Reviewer User Guide.    You cannot use the CodeGuru Reviewer SDK or the Amazon Web Services CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate a GitHub repository, use the console. For more information, see Getting started with CodeGuru Reviewer in the CodeGuru Reviewer User Guide.  
    */
   associateRepository(callback?: (err: AWSError, data: CodeGuruReviewer.Types.AssociateRepositoryResponse) => void): Request<CodeGuruReviewer.Types.AssociateRepositoryResponse, AWSError>;
   /**
@@ -159,7 +159,7 @@ declare namespace CodeGuruReviewer {
      */
     Tags?: TagMap;
     /**
-     * A KMSKeyDetails object that contains:   The encryption option for this repository association. It is either owned by AWS Key Management Service (KMS) (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).   The ID of the AWS KMS key that is associated with this respository association.  
+     * A KMSKeyDetails object that contains:   The encryption option for this repository association. It is either owned by Amazon Web Services Key Management Service (KMS) (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).   The ID of the Amazon Web Services KMS key that is associated with this respository association.  
      */
     KMSKeyDetails?: KMSKeyDetails;
   }
@@ -200,7 +200,7 @@ declare namespace CodeGuruReviewer {
   }
   export interface CodeCommitRepository {
     /**
-     * The name of the AWS CodeCommit repository. For more information, see repositoryName in the AWS CodeCommit API Reference.
+     * The name of the Amazon Web Services CodeCommit repository. For more information, see repositoryName in the Amazon Web Services CodeCommit API Reference.
      */
     Name: Name;
   }
@@ -218,7 +218,7 @@ declare namespace CodeGuruReviewer {
      */
     RepositoryName?: Name;
     /**
-     * The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or AWS account ID.
+     * The owner of the repository. For an Amazon Web Services CodeCommit repository, this is the Amazon Web Services account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or Amazon Web Services account ID.
      */
     Owner?: Owner;
     /**
@@ -282,7 +282,7 @@ declare namespace CodeGuruReviewer {
      */
     RepositoryName?: Name;
     /**
-     * The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or AWS account ID.
+     * The owner of the repository. For an Amazon Web Services CodeCommit repository, this is the Amazon Web Services account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or Amazon Web Services account ID.
      */
     Owner?: Owner;
     /**
@@ -343,7 +343,7 @@ declare namespace CodeGuruReviewer {
   export type ConnectionArn = string;
   export interface CreateCodeReviewRequest {
     /**
-     *  The name of the code review. The name of each code review in your AWS account must be unique. 
+     *  The name of the code review. The name of each code review in your Amazon Web Services account must be unique. 
      */
     Name: CodeReviewName;
     /**
@@ -384,7 +384,7 @@ declare namespace CodeGuruReviewer {
      */
     RecommendationId: RecommendationId;
     /**
-     *  Optional parameter to describe the feedback for a given user. If this is not supplied, it defaults to the user making the request.   The UserId is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For more information, see  Specifying a Principal in the AWS Identity and Access Management User Guide. 
+     *  Optional parameter to describe the feedback for a given user. If this is not supplied, it defaults to the user making the request.   The UserId is an IAM principal that can be specified as an Amazon Web Services account ID or an Amazon Resource Name (ARN). For more information, see  Specifying a Principal in the Amazon Web Services Identity and Access Management User Guide. 
      */
     UserId?: UserId;
   }
@@ -445,11 +445,11 @@ declare namespace CodeGuruReviewer {
   export type JobStates = JobState[];
   export interface KMSKeyDetails {
     /**
-     * The ID of the AWS KMS key that is associated with a respository association.
+     * The ID of the Amazon Web Services KMS key that is associated with a respository association.
      */
     KMSKeyId?: KMSKeyId;
     /**
-     * The encryption option for a repository association. It is either owned by AWS Key Management Service (KMS) (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).
+     * The encryption option for a repository association. It is either owned by Amazon Web Services Key Management Service (KMS) (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).
      */
     EncryptionOption?: EncryptionOption;
   }
@@ -506,7 +506,7 @@ declare namespace CodeGuruReviewer {
      */
     CodeReviewArn: Arn;
     /**
-     *  An AWS user's account ID or Amazon Resource Name (ARN). Use this ID to query the recommendation feedback for a code review from that user.   The UserId is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For more information, see  Specifying a Principal in the AWS Identity and Access Management User Guide. 
+     *  An Amazon Web Services user's account ID or Amazon Resource Name (ARN). Use this ID to query the recommendation feedback for a code review from that user.   The UserId is an IAM principal that can be specified as an Amazon Web Services account ID or an Amazon Resource Name (ARN). For more information, see  Specifying a Principal in the Amazon Web Services Identity and Access Management User Guide. 
      */
     UserIds?: UserIds;
     /**
@@ -562,7 +562,7 @@ declare namespace CodeGuruReviewer {
      */
     Names?: Names;
     /**
-     * List of owners to use as a filter. For AWS CodeCommit, it is the name of the CodeCommit account that was used to associate the repository. For other repository source providers, such as Bitbucket and GitHub Enterprise Server, this is name of the account that was used to associate the repository. 
+     * List of owners to use as a filter. For Amazon Web Services CodeCommit, it is the name of the CodeCommit account that was used to associate the repository. For other repository source providers, such as Bitbucket and GitHub Enterprise Server, this is name of the account that was used to associate the repository. 
      */
     Owners?: Owners;
     /**
@@ -596,11 +596,12 @@ declare namespace CodeGuruReviewer {
      */
     Tags?: TagMap;
   }
+  export type LongDescription = string;
   export type MaxResults = number;
   export type MeteredLinesOfCodeCount = number;
   export interface Metrics {
     /**
-     *  Lines of code metered in the code review. For the initial code review pull request and all subsequent revisions, this includes all lines of code in the files added to the pull request. In subsequent revisions, for files that already existed in the pull request, this includes only the changed lines of code. In both cases, this does not include non-code lines such as comments and import statements. For example, if you submit a pull request containing 5 files, each with 500 lines of code, and in a subsequent revision you added a new file with 200 lines of code, and also modified a total of 25 lines across the initial 5 files, MeteredLinesOfCodeCount includes the first 5 files (5 * 500 = 2,500 lines), the new file (200 lines) and the 25 changed lines of code for a total of 2,725 lines of code. 
+     *  MeteredLinesOfCode is the number of lines of code in the repository where the code review happened. This does not include non-code lines such as comments and blank lines. 
      */
     MeteredLinesOfCodeCount?: MeteredLinesOfCodeCount;
     /**
@@ -659,7 +660,7 @@ declare namespace CodeGuruReviewer {
      */
     Reactions?: Reactions;
     /**
-     *  The ID of the user that made the API call.   The UserId is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For more information, see  Specifying a Principal in the AWS Identity and Access Management User Guide. 
+     *  The ID of the user that made the API call.   The UserId is an IAM principal that can be specified as an Amazon Web Services account ID or an Amazon Resource Name (ARN). For more information, see  Specifying a Principal in the Amazon Web Services Identity and Access Management User Guide. 
      */
     UserId?: UserId;
     /**
@@ -682,7 +683,7 @@ declare namespace CodeGuruReviewer {
      */
     Reactions?: Reactions;
     /**
-     *  The ID of the user that gave the feedback.   The UserId is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For more information, see  Specifying a Principal in the AWS Identity and Access Management User Guide. 
+     *  The ID of the user that gave the feedback.   The UserId is an IAM principal that can be specified as an Amazon Web Services account ID or an Amazon Resource Name (ARN). For more information, see  Specifying a Principal in the Amazon Web Services Identity and Access Management User Guide. 
      */
     UserId?: UserId;
   }
@@ -714,10 +715,18 @@ declare namespace CodeGuruReviewer {
      * The type of a recommendation.
      */
     RecommendationCategory?: RecommendationCategory;
+    /**
+     * Metadata about a rule. Rule metadata includes an ID, a name, a list of tags, and a short and long description. CodeGuru Reviewer uses rules to analyze code. A rule's recommendation is included in analysis results if code is detected that violates the rule.
+     */
+    RuleMetadata?: RuleMetadata;
+    /**
+     * The severity of the issue in the code that generated this recommendation.
+     */
+    Severity?: Severity;
   }
   export interface Repository {
     /**
-     * Information about an AWS CodeCommit repository.
+     * Information about an Amazon Web Services CodeCommit repository.
      */
     CodeCommit?: CodeCommitRepository;
     /**
@@ -747,7 +756,7 @@ declare namespace CodeGuruReviewer {
      */
     AssociationArn?: Arn;
     /**
-     *  The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id. For more information, see  Connection  in the AWS CodeStar Connections API Reference. 
+     *  The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar Connections connection. Its format is arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id. For more information, see  Connection  in the Amazon Web Services CodeStar Connections API Reference. 
      */
     ConnectionArn?: ConnectionArn;
     /**
@@ -755,7 +764,7 @@ declare namespace CodeGuruReviewer {
      */
     Name?: Name;
     /**
-     * The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or AWS account ID.
+     * The owner of the repository. For an Amazon Web Services CodeCommit repository, this is the Amazon Web Services account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or Amazon Web Services account ID.
      */
     Owner?: Owner;
     /**
@@ -779,7 +788,7 @@ declare namespace CodeGuruReviewer {
      */
     CreatedTimeStamp?: TimeStamp;
     /**
-     * A KMSKeyDetails object that contains:   The encryption option for this repository association. It is either owned by AWS Key Management Service (KMS) (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).   The ID of the AWS KMS key that is associated with this respository association.  
+     * A KMSKeyDetails object that contains:   The encryption option for this repository association. It is either owned by Amazon Web Services Key Management Service (KMS) (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).   The ID of the Amazon Web Services KMS key that is associated with this respository association.  
      */
     KMSKeyDetails?: KMSKeyDetails;
     S3RepositoryDetails?: S3RepositoryDetails;
@@ -793,7 +802,7 @@ declare namespace CodeGuruReviewer {
      */
     AssociationArn?: Arn;
     /**
-     *  The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id. For more information, see  Connection  in the AWS CodeStar Connections API Reference. 
+     *  The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar Connections connection. Its format is arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id. For more information, see  Connection  in the Amazon Web Services CodeStar Connections API Reference. 
      */
     ConnectionArn?: ConnectionArn;
     /**
@@ -809,7 +818,7 @@ declare namespace CodeGuruReviewer {
      */
     Name?: Name;
     /**
-     * The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or AWS account ID.
+     * The owner of the repository. For an Amazon Web Services CodeCommit repository, this is the Amazon Web Services account ID of the account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, it can be the username or Amazon Web Services account ID.
      */
     Owner?: Owner;
     /**
@@ -848,6 +857,32 @@ declare namespace CodeGuruReviewer {
     VendorName?: VendorName;
   }
   export type Requester = string;
+  export type RuleId = string;
+  export interface RuleMetadata {
+    /**
+     * The ID of the rule.
+     */
+    RuleId?: RuleId;
+    /**
+     * The name of the rule.
+     */
+    RuleName?: RuleName;
+    /**
+     * A short description of the rule.
+     */
+    ShortDescription?: ShortDescription;
+    /**
+     * A long description of the rule.
+     */
+    LongDescription?: LongDescription;
+    /**
+     * Tags that are associated with the rule.
+     */
+    RuleTags?: RuleTags;
+  }
+  export type RuleName = string;
+  export type RuleTag = string;
+  export type RuleTags = RuleTag[];
   export type S3BucketName = string;
   export interface S3BucketRepository {
     /**
@@ -879,6 +914,8 @@ declare namespace CodeGuruReviewer {
      */
     CodeArtifacts?: CodeArtifacts;
   }
+  export type Severity = "Info"|"Low"|"Medium"|"High"|"Critical"|string;
+  export type ShortDescription = string;
   export type SourceCodeArtifactsObjectKey = string;
   export interface SourceCodeType {
     /**
@@ -923,11 +960,11 @@ declare namespace CodeGuruReviewer {
      */
     Name: Name;
     /**
-     *  The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id. For more information, see  Connection  in the AWS CodeStar Connections API Reference. 
+     *  The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar Connections connection. Its format is arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id. For more information, see  Connection  in the Amazon Web Services CodeStar Connections API Reference. 
      */
     ConnectionArn: ConnectionArn;
     /**
-     *  The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, this can be the username or AWS account ID. 
+     *  The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket repository, this is the username for the account that owns the repository. For an S3 repository, this can be the username or Amazon Web Services account ID. 
      */
     Owner: Owner;
   }

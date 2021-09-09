@@ -37,11 +37,11 @@ declare class EMR extends Service {
    */
   addJobFlowSteps(callback?: (err: AWSError, data: EMR.Types.AddJobFlowStepsOutput) => void): Request<EMR.Types.AddJobFlowStepsOutput, AWSError>;
   /**
-   * Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters. 
+   * Adds tags to an Amazon EMR resource, such as a cluster or an Amazon EMR Studio. Tags make it easier to associate resources in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters. 
    */
   addTags(params: EMR.Types.AddTagsInput, callback?: (err: AWSError, data: EMR.Types.AddTagsOutput) => void): Request<EMR.Types.AddTagsOutput, AWSError>;
   /**
-   * Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters. 
+   * Adds tags to an Amazon EMR resource, such as a cluster or an Amazon EMR Studio. Tags make it easier to associate resources in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters. 
    */
   addTags(callback?: (err: AWSError, data: EMR.Types.AddTagsOutput) => void): Request<EMR.Types.AddTagsOutput, AWSError>;
   /**
@@ -69,11 +69,11 @@ declare class EMR extends Service {
    */
   createStudio(callback?: (err: AWSError, data: EMR.Types.CreateStudioOutput) => void): Request<EMR.Types.CreateStudioOutput, AWSError>;
   /**
-   * Maps a user or group to the Amazon EMR Studio specified by StudioId, and applies a session policy to refine Studio permissions for that user or group.
+   * Maps a user or group to the Amazon EMR Studio specified by StudioId, and applies a session policy to refine Studio permissions for that user or group. Use CreateStudioSessionMapping to assign users to a Studio when you use Amazon Web Services SSO authentication. For instructions on how to assign users to a Studio when you use IAM authentication, see Assign a user or group to your EMR Studio.
    */
   createStudioSessionMapping(params: EMR.Types.CreateStudioSessionMappingInput, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Maps a user or group to the Amazon EMR Studio specified by StudioId, and applies a session policy to refine Studio permissions for that user or group.
+   * Maps a user or group to the Amazon EMR Studio specified by StudioId, and applies a session policy to refine Studio permissions for that user or group. Use CreateStudioSessionMapping to assign users to a Studio when you use Amazon Web Services SSO authentication. For instructions on how to assign users to a Studio when you use IAM authentication, see Assign a user or group to your EMR Studio.
    */
   createStudioSessionMapping(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -357,11 +357,11 @@ declare class EMR extends Service {
    */
   removeManagedScalingPolicy(callback?: (err: AWSError, data: EMR.Types.RemoveManagedScalingPolicyOutput) => void): Request<EMR.Types.RemoveManagedScalingPolicyOutput, AWSError>;
   /**
-   * Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters.  The following example removes the stack tag with value Prod from a cluster:
+   * Removes tags from an Amazon EMR resource, such as a cluster or Amazon EMR Studio. Tags make it easier to associate resources in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters.  The following example removes the stack tag with value Prod from a cluster:
    */
   removeTags(params: EMR.Types.RemoveTagsInput, callback?: (err: AWSError, data: EMR.Types.RemoveTagsOutput) => void): Request<EMR.Types.RemoveTagsOutput, AWSError>;
   /**
-   * Removes tags from an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters.  The following example removes the stack tag with value Prod from a cluster:
+   * Removes tags from an Amazon EMR resource, such as a cluster or Amazon EMR Studio. Tags make it easier to associate resources in various ways, such as grouping clusters to track your Amazon EMR resource allocation costs. For more information, see Tag Clusters.  The following example removes the stack tag with value Prod from a cluster:
    */
   removeTags(callback?: (err: AWSError, data: EMR.Types.RemoveTagsOutput) => void): Request<EMR.Types.RemoveTagsOutput, AWSError>;
   /**
@@ -521,11 +521,11 @@ declare namespace EMR {
   }
   export interface AddTagsInput {
     /**
-     * The Amazon EMR resource identifier to which tags will be added. This value must be a cluster identifier.
+     * The Amazon EMR resource identifier to which tags will be added. For example, a cluster identifier or an Amazon EMR Studio ID.
      */
     ResourceId: ResourceId;
     /**
-     * A list of tags to associate with a cluster and propagate to EC2 instances. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.
+     * A list of tags to associate with a resource. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.
      */
     Tags: TagList;
   }
@@ -781,7 +781,7 @@ declare namespace EMR {
      */
     Tags?: TagList;
     /**
-     * The IAM role that will be assumed by the Amazon EMR service to access Amazon Web Services resources on your behalf.
+     * The IAM role that Amazon EMR assumes in order to access Amazon Web Services resources on your behalf.
      */
     ServiceRole?: String;
     /**
@@ -994,7 +994,7 @@ declare namespace EMR {
      */
     Description?: XmlStringMaxLen256;
     /**
-     * Specifies whether the Studio authenticates users using single sign-on (SSO) or IAM. Amazon EMR Studio currently only supports SSO authentication.
+     * Specifies whether the Studio authenticates users using IAM or Amazon Web Services SSO.
      */
     AuthMode: AuthMode;
     /**
@@ -1006,13 +1006,13 @@ declare namespace EMR {
      */
     SubnetIds: SubnetIdList;
     /**
-     * The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a way for Amazon EMR Studio to interoperate with other Amazon Web Services services.
+     * The IAM role that the Amazon EMR Studio assumes. The service role provides a way for Amazon EMR Studio to interoperate with other Amazon Web Services services.
      */
     ServiceRole: XmlString;
     /**
-     * The IAM user role that will be assumed by users and groups logged in to an Amazon EMR Studio. The permissions attached to this IAM role can be scoped down for each user or group using session policies.
+     * The IAM user role that users and groups assume when logged in to an Amazon EMR Studio. Only specify a UserRole when you use Amazon Web Services SSO authentication. The permissions attached to the UserRole can be scoped down for each user or group using session policies.
      */
-    UserRole: XmlString;
+    UserRole?: XmlString;
     /**
      * The ID of the Amazon EMR Studio Workspace security group. The Workspace security group allows outbound network traffic to resources in the Engine security group, and it must be in the same VPC specified by VpcId.
      */
@@ -1025,6 +1025,14 @@ declare namespace EMR {
      * The Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook files.
      */
     DefaultS3Location: XmlString;
+    /**
+     * The authentication endpoint of your identity provider (IdP). Specify this value when you use IAM authentication and want to let federated users log in to a Studio with the Studio URL and credentials from your IdP. Amazon EMR Studio redirects users to this endpoint to enter credentials.
+     */
+    IdpAuthUrl?: XmlString;
+    /**
+     * The name that your identity provider (IdP) uses for its RelayState parameter. For example, RelayState or TargetSource. Specify this value when you use IAM authentication and want to let federated users log in to a Studio using the Studio URL. The RelayState parameter differs by IdP.
+     */
+    IdpRelayStateParameterName?: XmlStringMaxLen256;
     /**
      * A list of tags to associate with the Amazon EMR Studio. Tags are user-defined key-value pairs that consist of a required key string with a maximum of 128 characters, and an optional value string with a maximum of 256 characters.
      */
@@ -2820,11 +2828,11 @@ declare namespace EMR {
   }
   export interface RemoveTagsInput {
     /**
-     * The Amazon EMR resource identifier from which tags will be removed. This value must be a cluster identifier.
+     * The Amazon EMR resource identifier from which tags will be removed. For example, a cluster identifier or an Amazon EMR Studio ID.
      */
     ResourceId: ResourceId;
     /**
-     * A list of tag keys to remove from a resource.
+     * A list of tag keys to remove from the resource.
      */
     TagKeys: StringList;
   }
@@ -2894,7 +2902,7 @@ declare namespace EMR {
      */
     JobFlowRole?: XmlString;
     /**
-     * The IAM role that will be assumed by the Amazon EMR service to access Amazon Web Services resources on your behalf.
+     * The IAM role that Amazon EMR assumes in order to access Amazon Web Services resources on your behalf.
      */
     ServiceRole?: XmlString;
     /**
@@ -3363,7 +3371,7 @@ declare namespace EMR {
      */
     Description?: XmlStringMaxLen256;
     /**
-     * Specifies whether the Amazon EMR Studio authenticates users using single sign-on (SSO) or IAM.
+     * Specifies whether the Amazon EMR Studio authenticates users using IAM or Amazon Web Services SSO.
      */
     AuthMode?: AuthMode;
     /**
@@ -3379,7 +3387,7 @@ declare namespace EMR {
      */
     ServiceRole?: XmlString;
     /**
-     * The name of the IAM role assumed by users logged in to the Amazon EMR Studio.
+     * The name of the IAM role assumed by users logged in to the Amazon EMR Studio. A Studio only requires a UserRole when you use IAM authentication.
      */
     UserRole?: XmlString;
     /**
@@ -3402,6 +3410,14 @@ declare namespace EMR {
      * The Amazon S3 location to back up Amazon EMR Studio Workspaces and notebook files.
      */
     DefaultS3Location?: XmlString;
+    /**
+     * Your identity provider's authentication endpoint. Amazon EMR Studio redirects federated users to this endpoint for authentication when logging in to a Studio with the Studio URL.
+     */
+    IdpAuthUrl?: XmlString;
+    /**
+     * The name of your identity provider's RelayState parameter.
+     */
+    IdpRelayStateParameterName?: XmlStringMaxLen256;
     /**
      * A list of tags associated with the Amazon EMR Studio.
      */
@@ -3428,6 +3444,10 @@ declare namespace EMR {
      * The unique access URL of the Amazon EMR Studio.
      */
     Url?: XmlStringMaxLen256;
+    /**
+     * Specifies whether the Studio authenticates users using IAM or Amazon Web Services SSO.
+     */
+    AuthMode?: AuthMode;
     /**
      * The time when the Amazon EMR Studio was created.
      */

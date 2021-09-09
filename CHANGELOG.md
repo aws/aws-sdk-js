@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.985.0-->
+<!--LATEST=2.986.0-->
 <!--ENTRYINSERT-->
+
+## 2.986.0
+* feature: CodeGuruReviewer: The Amazon CodeGuru Reviewer API now includes the RuleMetadata data object and a Severity attribute on a RecommendationSummary object. A RuleMetadata object contains information about a rule that generates a recommendation. Severity indicates how severe the issue associated with a recommendation is.
+* feature: EMR: This release enables customers to login to EMR Studio using AWS Identity and Access Management (IAM) identities or identities in their Identity Provider (IdP) via IAM.
+* feature: LookoutEquipment: Added OffCondition parameter to CreateModel API
 
 ## 2.985.0
 * feature: Kafka: Amazon MSK has added a new API that allows you to update the encrypting and authentication settings for an existing cluster.
