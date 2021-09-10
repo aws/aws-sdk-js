@@ -922,7 +922,7 @@ declare namespace TranscribeService {
   }
   export interface JobExecutionSettings {
     /**
-     * Indicates whether a job should be queued by Amazon Transcribe when the concurrent execution limit is exceeded. When the AllowDeferredExecution field is true, jobs are queued and executed when the number of executing jobs falls below the concurrent execution limit. If the field is false, Amazon Transcribe returns a LimitExceededException exception. If you specify the AllowDeferredExecution field, you must specify the DataAccessRoleArn field.
+     * Indicates whether a job should be queued by Amazon Transcribe when the concurrent execution limit is exceeded. When the AllowDeferredExecution field is true, jobs are queued and executed when the number of executing jobs falls below the concurrent execution limit. If the field is false, Amazon Transcribe returns a LimitExceededException exception. Note that job queuing is enabled by default for call analytics jobs. If you specify the AllowDeferredExecution field, you must specify the DataAccessRoleArn field.
      */
     AllowDeferredExecution?: Boolean;
     /**
@@ -930,6 +930,7 @@ declare namespace TranscribeService {
      */
     DataAccessRoleArn?: DataAccessRoleArn;
   }
+  export type KMSEncryptionContextMap = {[key: string]: NonEmptyString};
   export type KMSKeyId = string;
   export type LanguageCode = "af-ZA"|"ar-AE"|"ar-SA"|"cy-GB"|"da-DK"|"de-CH"|"de-DE"|"en-AB"|"en-AU"|"en-GB"|"en-IE"|"en-IN"|"en-US"|"en-WL"|"es-ES"|"es-US"|"fa-IR"|"fr-CA"|"fr-FR"|"ga-IE"|"gd-GB"|"he-IL"|"hi-IN"|"id-ID"|"it-IT"|"ja-JP"|"ko-KR"|"ms-MY"|"nl-NL"|"pt-BR"|"pt-PT"|"ru-RU"|"ta-IN"|"te-IN"|"tr-TR"|"zh-CN"|"zh-TW"|"th-TH"|"en-ZA"|"en-NZ"|string;
   export interface LanguageModel {
@@ -1575,6 +1576,10 @@ declare namespace TranscribeService {
      */
     OutputEncryptionKMSKeyId?: KMSKeyId;
     /**
+     * A map of plain text, non-secret key:value pairs, known as encryption context pairs, that provide an added layer of security for your data.
+     */
+    KMSEncryptionContext?: KMSEncryptionContextMap;
+    /**
      * Optional settings for the medical transcription job.
      */
     Settings?: MedicalTranscriptionSetting;
@@ -1634,6 +1639,10 @@ declare namespace TranscribeService {
      * The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS) key used to encrypt the output of the transcription job. The user calling the StartTranscriptionJob operation must have permission to use the specified KMS key. You can use either of the following to identify a KMS key in the current account:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"   KMS Key Alias: "alias/ExampleAlias"   You can use either of the following to identify a KMS key in the current account or another account:   Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"   ARN of a KMS Key Alias: "arn:aws:kms:region:account ID:alias/ExampleAlias"   If you don't specify an encryption key, the output of the transcription job is encrypted with the default Amazon S3 key (SSE-S3). If you specify a KMS key to encrypt your output, you must also specify an output location in the OutputBucketName parameter.
      */
     OutputEncryptionKMSKeyId?: KMSKeyId;
+    /**
+     * A map of plain text, non-secret key:value pairs, known as encryption context pairs, that provide an added layer of security for your data.
+     */
+    KMSEncryptionContext?: KMSEncryptionContextMap;
     /**
      * A Settings object that provides optional settings for a transcription job.
      */

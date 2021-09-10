@@ -4180,6 +4180,17 @@
       },
       "documentation": "<p>The parameters for Elasticsearch.</p>"
     },
+    "AmazonOpenSearchParameters": {
+      "type": "structure",
+      "required": [
+        "Domain"
+      ],
+      "members": {
+        "Domain": {
+          "shape": "Domain"
+        }
+      }
+    },
     "Analysis": {
       "type": "structure",
       "members": {
@@ -6639,6 +6650,9 @@
         "TwitterParameters": {
           "shape": "TwitterParameters",
           "documentation": "<p>The parameters for Twitter.</p>"
+        },
+        "AmazonOpenSearchParameters": {
+          "shape": "AmazonOpenSearchParameters"
         }
       },
       "documentation": "<p>The parameters that Amazon QuickSight uses to connect to your underlying data source. This is a variant type structure. For this structure to be valid, only one of the attributes can be non-null.</p>"
@@ -6676,7 +6690,8 @@
         "SQLSERVER",
         "TERADATA",
         "TWITTER",
-        "TIMESTREAM"
+        "TIMESTREAM",
+        "AMAZON_OPENSEARCH"
       ]
     },
     "Database": {

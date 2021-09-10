@@ -37,11 +37,11 @@ declare class SageMaker extends Service {
    */
   associateTrialComponent(callback?: (err: AWSError, data: SageMaker.Types.AssociateTrialComponentResponse) => void): Request<SageMaker.Types.AssociateTrialComponentResponse, AWSError>;
   /**
-   * Creates an action. An action is a lineage tracking entity that represents an action or activity. For example, a model deployment or an HPO job. Generally, an action involves at least one input or output artifact. For more information, see Amazon SageMaker ML Lineage Tracking.   CreateAction can only be invoked from within an SageMaker managed environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker notebooks. A call to CreateAction from outside one of these environments results in an error. 
+   * Creates an action. An action is a lineage tracking entity that represents an action or activity. For example, a model deployment or an HPO job. Generally, an action involves at least one input or output artifact. For more information, see Amazon SageMaker ML Lineage Tracking.
    */
   createAction(params: SageMaker.Types.CreateActionRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateActionResponse) => void): Request<SageMaker.Types.CreateActionResponse, AWSError>;
   /**
-   * Creates an action. An action is a lineage tracking entity that represents an action or activity. For example, a model deployment or an HPO job. Generally, an action involves at least one input or output artifact. For more information, see Amazon SageMaker ML Lineage Tracking.   CreateAction can only be invoked from within an SageMaker managed environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker notebooks. A call to CreateAction from outside one of these environments results in an error. 
+   * Creates an action. An action is a lineage tracking entity that represents an action or activity. For example, a model deployment or an HPO job. Generally, an action involves at least one input or output artifact. For more information, see Amazon SageMaker ML Lineage Tracking.
    */
   createAction(callback?: (err: AWSError, data: SageMaker.Types.CreateActionResponse) => void): Request<SageMaker.Types.CreateActionResponse, AWSError>;
   /**
@@ -69,11 +69,11 @@ declare class SageMaker extends Service {
    */
   createAppImageConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateAppImageConfigResponse) => void): Request<SageMaker.Types.CreateAppImageConfigResponse, AWSError>;
   /**
-   * Creates an artifact. An artifact is a lineage tracking entity that represents a URI addressable object or data. Some examples are the S3 URI of a dataset and the ECR registry path of an image. For more information, see Amazon SageMaker ML Lineage Tracking.   CreateArtifact can only be invoked from within an SageMaker managed environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker notebooks. A call to CreateArtifact from outside one of these environments results in an error. 
+   * Creates an artifact. An artifact is a lineage tracking entity that represents a URI addressable object or data. Some examples are the S3 URI of a dataset and the ECR registry path of an image. For more information, see Amazon SageMaker ML Lineage Tracking.
    */
   createArtifact(params: SageMaker.Types.CreateArtifactRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateArtifactResponse) => void): Request<SageMaker.Types.CreateArtifactResponse, AWSError>;
   /**
-   * Creates an artifact. An artifact is a lineage tracking entity that represents a URI addressable object or data. Some examples are the S3 URI of a dataset and the ECR registry path of an image. For more information, see Amazon SageMaker ML Lineage Tracking.   CreateArtifact can only be invoked from within an SageMaker managed environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker notebooks. A call to CreateArtifact from outside one of these environments results in an error. 
+   * Creates an artifact. An artifact is a lineage tracking entity that represents a URI addressable object or data. Some examples are the S3 URI of a dataset and the ECR registry path of an image. For more information, see Amazon SageMaker ML Lineage Tracking.
    */
   createArtifact(callback?: (err: AWSError, data: SageMaker.Types.CreateArtifactResponse) => void): Request<SageMaker.Types.CreateArtifactResponse, AWSError>;
   /**
@@ -101,11 +101,11 @@ declare class SageMaker extends Service {
    */
   createCompilationJob(callback?: (err: AWSError, data: SageMaker.Types.CreateCompilationJobResponse) => void): Request<SageMaker.Types.CreateCompilationJobResponse, AWSError>;
   /**
-   * Creates a context. A context is a lineage tracking entity that represents a logical grouping of other tracking or experiment entities. Some examples are an endpoint and a model package. For more information, see Amazon SageMaker ML Lineage Tracking.   CreateContext can only be invoked from within an SageMaker managed environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker notebooks. A call to CreateContext from outside one of these environments results in an error. 
+   * Creates a context. A context is a lineage tracking entity that represents a logical grouping of other tracking or experiment entities. Some examples are an endpoint and a model package. For more information, see Amazon SageMaker ML Lineage Tracking.
    */
   createContext(params: SageMaker.Types.CreateContextRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateContextResponse) => void): Request<SageMaker.Types.CreateContextResponse, AWSError>;
   /**
-   * Creates a context. A context is a lineage tracking entity that represents a logical grouping of other tracking or experiment entities. Some examples are an endpoint and a model package. For more information, see Amazon SageMaker ML Lineage Tracking.   CreateContext can only be invoked from within an SageMaker managed environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker notebooks. A call to CreateContext from outside one of these environments results in an error. 
+   * Creates a context. A context is a lineage tracking entity that represents a logical grouping of other tracking or experiment entities. Some examples are an endpoint and a model package. For more information, see Amazon SageMaker ML Lineage Tracking.
    */
   createContext(callback?: (err: AWSError, data: SageMaker.Types.CreateContextResponse) => void): Request<SageMaker.Types.CreateContextResponse, AWSError>;
   /**
@@ -149,11 +149,11 @@ declare class SageMaker extends Service {
    */
   createEndpoint(callback?: (err: AWSError, data: SageMaker.Types.CreateEndpointOutput) => void): Request<SageMaker.Types.CreateEndpointOutput, AWSError>;
   /**
-   * Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the CreateModel API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the CreateEndpoint API.   Use this API if you want to use Amazon SageMaker hosting services to deploy models into production.   In the request, you define a ProductionVariant, for each model that you want to deploy. Each ProductionVariant parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy.  If you are hosting multiple models, you also assign a VariantWeight to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B.  For an example that calls this method when deploying a model to Amazon SageMaker hosting services, see Deploy the Model to Amazon SageMaker Hosting Services (Amazon Web Services SDK for Python (Boto 3)).   When you call CreateEndpoint, a load call is made to DynamoDB to verify that your endpoint configuration exists. When you read data from a DynamoDB table supporting  Eventually Consistent Reads , the response might not reflect the results of a recently completed write operation. The response might include some stale data. If the dependent entities are not yet in DynamoDB, this causes a validation error. If you repeat your read request after a short time, the response should return the latest data. So retry logic is recommended to handle these possible issues. We also recommend that customers call DescribeEndpointConfig before calling CreateEndpoint to minimize the potential impact of a DynamoDB eventually consistent read. 
+   * Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the CreateModel API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the CreateEndpoint API.   Use this API if you want to use Amazon SageMaker hosting services to deploy models into production.   In the request, you define a ProductionVariant, for each model that you want to deploy. Each ProductionVariant parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy.  If you are hosting multiple models, you also assign a VariantWeight to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B.   When you call CreateEndpoint, a load call is made to DynamoDB to verify that your endpoint configuration exists. When you read data from a DynamoDB table supporting  Eventually Consistent Reads , the response might not reflect the results of a recently completed write operation. The response might include some stale data. If the dependent entities are not yet in DynamoDB, this causes a validation error. If you repeat your read request after a short time, the response should return the latest data. So retry logic is recommended to handle these possible issues. We also recommend that customers call DescribeEndpointConfig before calling CreateEndpoint to minimize the potential impact of a DynamoDB eventually consistent read. 
    */
   createEndpointConfig(params: SageMaker.Types.CreateEndpointConfigInput, callback?: (err: AWSError, data: SageMaker.Types.CreateEndpointConfigOutput) => void): Request<SageMaker.Types.CreateEndpointConfigOutput, AWSError>;
   /**
-   * Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the CreateModel API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the CreateEndpoint API.   Use this API if you want to use Amazon SageMaker hosting services to deploy models into production.   In the request, you define a ProductionVariant, for each model that you want to deploy. Each ProductionVariant parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy.  If you are hosting multiple models, you also assign a VariantWeight to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B.  For an example that calls this method when deploying a model to Amazon SageMaker hosting services, see Deploy the Model to Amazon SageMaker Hosting Services (Amazon Web Services SDK for Python (Boto 3)).   When you call CreateEndpoint, a load call is made to DynamoDB to verify that your endpoint configuration exists. When you read data from a DynamoDB table supporting  Eventually Consistent Reads , the response might not reflect the results of a recently completed write operation. The response might include some stale data. If the dependent entities are not yet in DynamoDB, this causes a validation error. If you repeat your read request after a short time, the response should return the latest data. So retry logic is recommended to handle these possible issues. We also recommend that customers call DescribeEndpointConfig before calling CreateEndpoint to minimize the potential impact of a DynamoDB eventually consistent read. 
+   * Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the CreateModel API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the CreateEndpoint API.   Use this API if you want to use Amazon SageMaker hosting services to deploy models into production.   In the request, you define a ProductionVariant, for each model that you want to deploy. Each ProductionVariant parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy.  If you are hosting multiple models, you also assign a VariantWeight to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B.   When you call CreateEndpoint, a load call is made to DynamoDB to verify that your endpoint configuration exists. When you read data from a DynamoDB table supporting  Eventually Consistent Reads , the response might not reflect the results of a recently completed write operation. The response might include some stale data. If the dependent entities are not yet in DynamoDB, this causes a validation error. If you repeat your read request after a short time, the response should return the latest data. So retry logic is recommended to handle these possible issues. We also recommend that customers call DescribeEndpointConfig before calling CreateEndpoint to minimize the potential impact of a DynamoDB eventually consistent read. 
    */
   createEndpointConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateEndpointConfigOutput) => void): Request<SageMaker.Types.CreateEndpointConfigOutput, AWSError>;
   /**
@@ -332,6 +332,14 @@ declare class SageMaker extends Service {
    * Creates a machine learning (ML) project that can contain one or more templates that set up an ML pipeline from training to deploying an approved model.
    */
   createProject(callback?: (err: AWSError, data: SageMaker.Types.CreateProjectOutput) => void): Request<SageMaker.Types.CreateProjectOutput, AWSError>;
+  /**
+   * Creates a new Studio Lifecycle Configuration.
+   */
+  createStudioLifecycleConfig(params: SageMaker.Types.CreateStudioLifecycleConfigRequest, callback?: (err: AWSError, data: SageMaker.Types.CreateStudioLifecycleConfigResponse) => void): Request<SageMaker.Types.CreateStudioLifecycleConfigResponse, AWSError>;
+  /**
+   * Creates a new Studio Lifecycle Configuration.
+   */
+  createStudioLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.CreateStudioLifecycleConfigResponse) => void): Request<SageMaker.Types.CreateStudioLifecycleConfigResponse, AWSError>;
   /**
    * Starts a model training job. After training completes, Amazon SageMaker saves the resulting model artifacts to an Amazon S3 location that you specify.  If you choose to host your model using Amazon SageMaker hosting services, you can use the resulting model artifacts as part of the model. You can also use the artifacts in a machine learning service other than Amazon SageMaker, provided that you know how to use them for inference.  In the request body, you provide the following:     AlgorithmSpecification - Identifies the training algorithm to use.     HyperParameters - Specify these algorithm-specific parameters to enable the estimation of model parameters during training. Hyperparameters can be tuned to optimize this learning process. For a list of hyperparameters for each training algorithm provided by Amazon SageMaker, see Algorithms.     InputDataConfig - Describes the training dataset and the Amazon S3, EFS, or FSx location where it is stored.    OutputDataConfig - Identifies the Amazon S3 bucket where you want Amazon SageMaker to save the results of model training.     ResourceConfig - Identifies the resources, ML compute instances, and ML storage volumes to deploy for model training. In distributed training, you specify more than one instance.     EnableManagedSpotTraining - Optimize the cost of training machine learning models by up to 80% by using Amazon EC2 Spot instances. For more information, see Managed Spot Training.     RoleArn - The Amazon Resource Name (ARN) that Amazon SageMaker assumes to perform tasks on your behalf during model training. You must grant this role the necessary permissions so that Amazon SageMaker can successfully complete model training.     StoppingCondition - To help cap training costs, use MaxRuntimeInSeconds to set a time limit for training. Use MaxWaitTimeInSeconds to specify how long a managed spot training job has to complete.     Environment - The environment variables to set in the Docker container.    RetryStrategy - The number of times to retry the job when the job fails due to an InternalServerError.    For more information about Amazon SageMaker, see How It Works. 
    */
@@ -636,6 +644,14 @@ declare class SageMaker extends Service {
    * Delete the specified project.
    */
   deleteProject(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the Studio Lifecycle Configuration. In order to delete the Lifecycle Configuration, there must be no running apps using the Lifecycle Configuration. You must also remove the Lifecycle Configuration from UserSettings in all Domains and UserProfiles.
+   */
+  deleteStudioLifecycleConfig(params: SageMaker.Types.DeleteStudioLifecycleConfigRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * Deletes the Studio Lifecycle Configuration. In order to delete the Lifecycle Configuration, there must be no running apps using the Lifecycle Configuration. You must also remove the Lifecycle Configuration from UserSettings in all Domains and UserProfiles.
+   */
+  deleteStudioLifecycleConfig(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
    * Deletes the specified tags from an Amazon SageMaker resource. To list a resource's tags, use the ListTags API.   When you call this API to delete tags from a hyperparameter tuning job, the deleted tags are not removed from training jobs that the hyperparameter tuning job launched before you called this API.   When you call this API to delete tags from a SageMaker Studio Domain or User Profile, the deleted tags are not removed from Apps that the SageMaker Studio Domain or User Profile launched before you called this API. 
    */
@@ -996,6 +1012,14 @@ declare class SageMaker extends Service {
    * Describes the details of a project.
    */
   describeProject(callback?: (err: AWSError, data: SageMaker.Types.DescribeProjectOutput) => void): Request<SageMaker.Types.DescribeProjectOutput, AWSError>;
+  /**
+   * Describes the Studio Lifecycle Configuration.
+   */
+  describeStudioLifecycleConfig(params: SageMaker.Types.DescribeStudioLifecycleConfigRequest, callback?: (err: AWSError, data: SageMaker.Types.DescribeStudioLifecycleConfigResponse) => void): Request<SageMaker.Types.DescribeStudioLifecycleConfigResponse, AWSError>;
+  /**
+   * Describes the Studio Lifecycle Configuration.
+   */
+  describeStudioLifecycleConfig(callback?: (err: AWSError, data: SageMaker.Types.DescribeStudioLifecycleConfigResponse) => void): Request<SageMaker.Types.DescribeStudioLifecycleConfigResponse, AWSError>;
   /**
    * Gets information about a work team provided by a vendor. It returns details about the subscription with a vendor in the Amazon Web Services Marketplace.
    */
@@ -1460,6 +1484,14 @@ declare class SageMaker extends Service {
    * Gets a list of the projects in an Amazon Web Services account.
    */
   listProjects(callback?: (err: AWSError, data: SageMaker.Types.ListProjectsOutput) => void): Request<SageMaker.Types.ListProjectsOutput, AWSError>;
+  /**
+   * Lists the Studio Lifecycle Configurations in your Amazon Web Services Account.
+   */
+  listStudioLifecycleConfigs(params: SageMaker.Types.ListStudioLifecycleConfigsRequest, callback?: (err: AWSError, data: SageMaker.Types.ListStudioLifecycleConfigsResponse) => void): Request<SageMaker.Types.ListStudioLifecycleConfigsResponse, AWSError>;
+  /**
+   * Lists the Studio Lifecycle Configurations in your Amazon Web Services Account.
+   */
+  listStudioLifecycleConfigs(callback?: (err: AWSError, data: SageMaker.Types.ListStudioLifecycleConfigsResponse) => void): Request<SageMaker.Types.ListStudioLifecycleConfigsResponse, AWSError>;
   /**
    * Gets a list of the work teams that you are subscribed to in the Amazon Web Services Marketplace. The list may be empty if no work team satisfies the filter specified in the NameContains parameter.
    */
@@ -4366,6 +4398,30 @@ declare namespace SageMaker {
      */
     ProjectId: ProjectId;
   }
+  export interface CreateStudioLifecycleConfigRequest {
+    /**
+     * The name of the Studio Lifecycle Configuration to create.
+     */
+    StudioLifecycleConfigName: StudioLifecycleConfigName;
+    /**
+     * The content of your Studio Lifecycle Configuration script. This content must be base64 encoded.
+     */
+    StudioLifecycleConfigContent: StudioLifecycleConfigContent;
+    /**
+     * The App type that the Lifecycle Configuration is attached to.
+     */
+    StudioLifecycleConfigAppType: StudioLifecycleConfigAppType;
+    /**
+     * Tags to be associated with the Lifecycle Configuration. Each tag consists of a key and an optional value. Tag keys must be unique per resource. Tags are searchable using the Search API. 
+     */
+    Tags?: TagList;
+  }
+  export interface CreateStudioLifecycleConfigResponse {
+    /**
+     * The ARN of your created Lifecycle Configuration.
+     */
+    StudioLifecycleConfigArn?: StudioLifecycleConfigArn;
+  }
   export interface CreateTrainingJobRequest {
     /**
      * The name of the training job. The name must be unique within an Amazon Web Services Region in an Amazon Web Services account. 
@@ -5166,6 +5222,12 @@ declare namespace SageMaker {
      * The name of the project to delete.
      */
     ProjectName: ProjectEntityName;
+  }
+  export interface DeleteStudioLifecycleConfigRequest {
+    /**
+     * The name of the Studio Lifecycle Configuration to delete.
+     */
+    StudioLifecycleConfigName: StudioLifecycleConfigName;
   }
   export interface DeleteTagsInput {
     /**
@@ -7213,6 +7275,38 @@ declare namespace SageMaker {
      */
     CreationTime: Timestamp;
   }
+  export interface DescribeStudioLifecycleConfigRequest {
+    /**
+     * The name of the Studio Lifecycle Configuration to describe.
+     */
+    StudioLifecycleConfigName: StudioLifecycleConfigName;
+  }
+  export interface DescribeStudioLifecycleConfigResponse {
+    /**
+     * The ARN of the Lifecycle Configuration to describe.
+     */
+    StudioLifecycleConfigArn?: StudioLifecycleConfigArn;
+    /**
+     * The name of the Studio Lifecycle Configuration that is described.
+     */
+    StudioLifecycleConfigName?: StudioLifecycleConfigName;
+    /**
+     * The creation time of the Studio Lifecycle Configuration.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * This value is equivalent to CreationTime because Studio Lifecycle Configurations are immutable.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The content of your Studio Lifecycle Configuration script.
+     */
+    StudioLifecycleConfigContent?: StudioLifecycleConfigContent;
+    /**
+     * The App type that the Lifecycle Configuration is attached to.
+     */
+    StudioLifecycleConfigAppType?: StudioLifecycleConfigAppType;
+  }
   export interface DescribeSubscribedWorkteamRequest {
     /**
      * The Amazon Resource Name (ARN) of the subscribed work team to describe.
@@ -9094,6 +9188,10 @@ declare namespace SageMaker {
      * The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterServer app.
      */
     DefaultResourceSpec?: ResourceSpec;
+    /**
+     *  The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the JupyterServerApp.
+     */
+    LifecycleConfigArns?: LifecycleConfigArns;
   }
   export type KernelDisplayName = string;
   export interface KernelGatewayAppSettings {
@@ -9105,6 +9203,10 @@ declare namespace SageMaker {
      * A list of custom SageMaker images that are configured to run as a KernelGateway app.
      */
     CustomImages?: CustomImages;
+    /**
+     *  The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the KernelGatewayApp.
+     */
+    LifecycleConfigArns?: LifecycleConfigArns;
   }
   export interface KernelGatewayImageConfig {
     /**
@@ -9353,6 +9455,7 @@ declare namespace SageMaker {
     OutputParameters?: OutputParameterList;
   }
   export type LastModifiedTime = Date;
+  export type LifecycleConfigArns = StudioLifecycleConfigArn[];
   export type LineageEntityParameters = {[key: string]: StringParameterValue};
   export interface ListActionsRequest {
     /**
@@ -11283,6 +11386,58 @@ declare namespace SageMaker {
      * If the result of the previous ListCompilationJobs request was truncated, the response includes a NextToken. To retrieve the next set of model compilation jobs, use the token in the next request.
      */
     NextToken?: NextToken;
+  }
+  export interface ListStudioLifecycleConfigsRequest {
+    /**
+     * The maximum number of Studio Lifecycle Configurations to return in the response. The default value is 10.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * If the previous call to ListStudioLifecycleConfigs didn't return the full set of Lifecycle Configurations, the call returns a token for getting the next set of Lifecycle Configurations.
+     */
+    NextToken?: NextToken;
+    /**
+     * A string in the Lifecycle Configuration name. This filter returns only Lifecycle Configurations whose name contains the specified string.
+     */
+    NameContains?: StudioLifecycleConfigName;
+    /**
+     * A parameter to search for the App Type to which the Lifecycle Configuration is attached.
+     */
+    AppTypeEquals?: StudioLifecycleConfigAppType;
+    /**
+     * A filter that returns only Lifecycle Configurations created on or before the specified time.
+     */
+    CreationTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only Lifecycle Configurations created on or after the specified time.
+     */
+    CreationTimeAfter?: Timestamp;
+    /**
+     * A filter that returns only Lifecycle Configurations modified before the specified time.
+     */
+    ModifiedTimeBefore?: Timestamp;
+    /**
+     * A filter that returns only Lifecycle Configurations modified after the specified time.
+     */
+    ModifiedTimeAfter?: Timestamp;
+    /**
+     * The property used to sort results. The default value is CreationTime.
+     */
+    SortBy?: StudioLifecycleConfigSortKey;
+    /**
+     * The sort order. The default value is Descending.
+     */
+    SortOrder?: SortOrder;
+  }
+  export interface ListStudioLifecycleConfigsResponse {
+    /**
+     * A token for getting the next set of actions, if there are any.
+     */
+    NextToken?: NextToken;
+    /**
+     * A list of Lifecycle Configurations and their properties.
+     */
+    StudioLifecycleConfigs?: StudioLifecycleConfigsList;
   }
   export interface ListSubscribedWorkteamsRequest {
     /**
@@ -13808,6 +13963,10 @@ declare namespace SageMaker {
      * The instance type that the image version runs on.
      */
     InstanceType?: AppInstanceType;
+    /**
+     *  The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the Resource.
+     */
+    LifecycleConfigArn?: StudioLifecycleConfigArn;
   }
   export type ResourceType = "TrainingJob"|"Experiment"|"ExperimentTrial"|"ExperimentTrialComponent"|"Endpoint"|"ModelPackage"|"ModelPackageGroup"|"Pipeline"|"PipelineExecution"|"FeatureGroup"|string;
   export type ResponseMIMEType = string;
@@ -14246,6 +14405,34 @@ declare namespace SageMaker {
   export type String256 = string;
   export type String64 = string;
   export type StringParameterValue = string;
+  export type StudioLifecycleConfigAppType = "JupyterServer"|"KernelGateway"|string;
+  export type StudioLifecycleConfigArn = string;
+  export type StudioLifecycleConfigContent = string;
+  export interface StudioLifecycleConfigDetails {
+    /**
+     *  The Amazon Resource Name (ARN) of the Lifecycle Configuration.
+     */
+    StudioLifecycleConfigArn?: StudioLifecycleConfigArn;
+    /**
+     * The name of the Studio Lifecycle Configuration.
+     */
+    StudioLifecycleConfigName?: StudioLifecycleConfigName;
+    /**
+     * The creation time of the Studio Lifecycle Configuration.
+     */
+    CreationTime?: Timestamp;
+    /**
+     * This value is equivalent to CreationTime because Studio Lifecycle Configurations are immutable.
+     */
+    LastModifiedTime?: Timestamp;
+    /**
+     * The App type to which the Lifecycle Configuration is attached.
+     */
+    StudioLifecycleConfigAppType?: StudioLifecycleConfigAppType;
+  }
+  export type StudioLifecycleConfigName = string;
+  export type StudioLifecycleConfigSortKey = "CreationTime"|"LastModifiedTime"|"Name"|string;
+  export type StudioLifecycleConfigsList = StudioLifecycleConfigDetails[];
   export type SubnetId = string;
   export type Subnets = SubnetId[];
   export interface SubscribedWorkteam {
@@ -14294,7 +14481,7 @@ declare namespace SageMaker {
   export type TagList = Tag[];
   export type TagValue = string;
   export type TargetAttributeName = string;
-  export type TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"ml_g4dn"|"ml_inf1"|"ml_eia2"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"jetson_xavier"|"rasp3b"|"imx8qm"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|"sitara_am57x"|"amba_cv22"|"amba_cv25"|"x86_win32"|"x86_win64"|"coreml"|"jacinto_tda4vm"|string;
+  export type TargetDevice = "lambda"|"ml_m4"|"ml_m5"|"ml_c4"|"ml_c5"|"ml_p2"|"ml_p3"|"ml_g4dn"|"ml_inf1"|"ml_eia2"|"jetson_tx1"|"jetson_tx2"|"jetson_nano"|"jetson_xavier"|"rasp3b"|"imx8qm"|"deeplens"|"rk3399"|"rk3288"|"aisage"|"sbe_c"|"qcs605"|"qcs603"|"sitara_am57x"|"amba_cv22"|"amba_cv25"|"x86_win32"|"x86_win64"|"coreml"|"jacinto_tda4vm"|"imx8mplus"|string;
   export type TargetObjectiveMetricValue = number;
   export interface TargetPlatform {
     /**

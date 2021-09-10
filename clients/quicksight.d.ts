@@ -967,6 +967,9 @@ declare namespace QuickSight {
      */
     Domain: Domain;
   }
+  export interface AmazonOpenSearchParameters {
+    Domain: Domain;
+  }
   export interface Analysis {
     /**
      * The ID of the analysis.
@@ -2611,9 +2614,10 @@ declare namespace QuickSight {
      * The parameters for Twitter.
      */
     TwitterParameters?: TwitterParameters;
+    AmazonOpenSearchParameters?: AmazonOpenSearchParameters;
   }
   export type DataSourceParametersList = DataSourceParameters[];
-  export type DataSourceType = "ADOBE_ANALYTICS"|"AMAZON_ELASTICSEARCH"|"ATHENA"|"AURORA"|"AURORA_POSTGRESQL"|"AWS_IOT_ANALYTICS"|"GITHUB"|"JIRA"|"MARIADB"|"MYSQL"|"ORACLE"|"POSTGRESQL"|"PRESTO"|"REDSHIFT"|"S3"|"SALESFORCE"|"SERVICENOW"|"SNOWFLAKE"|"SPARK"|"SQLSERVER"|"TERADATA"|"TWITTER"|"TIMESTREAM"|string;
+  export type DataSourceType = "ADOBE_ANALYTICS"|"AMAZON_ELASTICSEARCH"|"ATHENA"|"AURORA"|"AURORA_POSTGRESQL"|"AWS_IOT_ANALYTICS"|"GITHUB"|"JIRA"|"MARIADB"|"MYSQL"|"ORACLE"|"POSTGRESQL"|"PRESTO"|"REDSHIFT"|"S3"|"SALESFORCE"|"SERVICENOW"|"SNOWFLAKE"|"SPARK"|"SQLSERVER"|"TERADATA"|"TWITTER"|"TIMESTREAM"|"AMAZON_OPENSEARCH"|string;
   export type Database = string;
   export interface DateTimeParameter {
     /**

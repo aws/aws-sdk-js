@@ -167,7 +167,7 @@
           "shape": "KmsException"
         }
       ],
-      "documentation": "<p>Creates a repository. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html\">Amazon ECR Repositories</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+      "documentation": "<p>Creates a repository. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/Repositories.html\">Amazon ECR repositories</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
     },
     "DeleteLifecyclePolicy": {
       "name": "DeleteLifecyclePolicy",
@@ -410,7 +410,7 @@
           "shape": "InvalidParameterException"
         }
       ],
-      "documentation": "<p>Retrieves an authorization token. An authorization token represents your IAM authentication credentials and can be used to access any Amazon ECR registry that your IAM principal has access to. The authorization token is valid for 12 hours.</p> <p>The <code>authorizationToken</code> returned is a base64 encoded string that can be decoded and used in a <code>docker login</code> command to authenticate to a registry. The AWS CLI offers an <code>get-login-password</code> command that simplifies the login process. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html#registry_auth\">Registry Authentication</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+      "documentation": "<p>Retrieves an authorization token. An authorization token represents your IAM authentication credentials and can be used to access any Amazon ECR registry that your IAM principal has access to. The authorization token is valid for 12 hours.</p> <p>The <code>authorizationToken</code> returned is a base64 encoded string that can be decoded and used in a <code>docker login</code> command to authenticate to a registry. The CLI offers an <code>get-login-password</code> command that simplifies the login process. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/Registries.html#registry_auth\">Registry authentication</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
     },
     "GetDownloadUrlForLayer": {
       "name": "GetDownloadUrlForLayer",
@@ -724,7 +724,7 @@
           "shape": "RepositoryNotFoundException"
         }
       ],
-      "documentation": "<p>Updates the image tag mutability settings for the specified repository. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-tag-mutability.html\">Image Tag Mutability</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+      "documentation": "<p>Updates the image tag mutability settings for the specified repository. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-tag-mutability.html\">Image tag mutability</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
     },
     "PutLifecyclePolicy": {
       "name": "PutLifecyclePolicy",
@@ -749,7 +749,7 @@
           "shape": "RepositoryNotFoundException"
         }
       ],
-      "documentation": "<p>Creates or updates the lifecycle policy for the specified repository. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html\">Lifecycle Policy Template</a>.</p>"
+      "documentation": "<p>Creates or updates the lifecycle policy for the specified repository. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/LifecyclePolicies.html\">Lifecycle policy template</a>.</p>"
     },
     "PutRegistryPolicy": {
       "name": "PutRegistryPolicy",
@@ -771,7 +771,7 @@
           "shape": "InvalidParameterException"
         }
       ],
-      "documentation": "<p>Creates or updates the permissions policy for your registry.</p> <p>A registry policy is used to specify permissions for another AWS account and is used when configuring cross-account replication. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html\">Registry permissions</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+      "documentation": "<p>Creates or updates the permissions policy for your registry.</p> <p>A registry policy is used to specify permissions for another Amazon Web Services account and is used when configuring cross-account replication. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html\">Registry permissions</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
     },
     "PutReplicationConfiguration": {
       "name": "PutReplicationConfiguration",
@@ -796,7 +796,7 @@
           "shape": "ValidationException"
         }
       ],
-      "documentation": "<p>Creates or updates the replication configuration for a registry. The existing replication configuration for a repository can be retrieved with the <a>DescribeRegistry</a> API action. The first time the PutReplicationConfiguration API is called, a service-linked IAM role is created in your account for the replication process. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/using-service-linked-roles.html\">Using Service-Linked Roles for Amazon ECR</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p> <note> <p>When configuring cross-account replication, the destination account must grant the source account permission to replicate. This permission is controlled using a registry permissions policy. For more information, see <a>PutRegistryPolicy</a>.</p> </note>"
+      "documentation": "<p>Creates or updates the replication configuration for a registry. The existing replication configuration for a repository can be retrieved with the <a>DescribeRegistry</a> API action. The first time the PutReplicationConfiguration API is called, a service-linked IAM role is created in your account for the replication process. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/using-service-linked-roles.html\">Using service-linked roles for Amazon ECR</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p> <note> <p>When configuring cross-account replication, the destination account must grant the source account permission to replicate. This permission is controlled using a registry permissions policy. For more information, see <a>PutRegistryPolicy</a>.</p> </note>"
     },
     "SetRepositoryPolicy": {
       "name": "SetRepositoryPolicy",
@@ -821,7 +821,7 @@
           "shape": "RepositoryNotFoundException"
         }
       ],
-      "documentation": "<p>Applies a repository policy to the specified repository to control access permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html\">Amazon ECR Repository Policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+      "documentation": "<p>Applies a repository policy to the specified repository to control access permissions. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policies.html\">Amazon ECR Repository policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
     },
     "StartImageScan": {
       "name": "StartImageScan",
@@ -855,7 +855,7 @@
           "shape": "ImageNotFoundException"
         }
       ],
-      "documentation": "<p>Starts an image vulnerability scan. An image scan can only be started once per day on an individual image. This limit includes if an image was scanned on initial push. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html\">Image Scanning</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+      "documentation": "<p>Starts an image vulnerability scan. An image scan can only be started once per 24 hours on an individual image. This limit includes if an image was scanned on initial push. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/image-scanning.html\">Image scanning</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
     },
     "StartLifecyclePolicyPreview": {
       "name": "StartLifecyclePolicyPreview",
@@ -1064,7 +1064,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the image layers to check. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the image layers to check. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -1098,7 +1098,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the image to delete. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the image to delete. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -1133,7 +1133,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the images to describe. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the images to describe. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -1185,7 +1185,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry to which to upload layers. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry to which to upload layers. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -1270,7 +1270,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -1324,7 +1324,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository policy to delete. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository policy to delete. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -1357,7 +1357,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository to delete. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository to delete. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -1387,7 +1387,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository in which to describe the image scan findings for. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository in which to describe the image scan findings for. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -1452,7 +1452,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository in which to describe images. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository in which to describe images. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -1511,7 +1511,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repositories to be described. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repositories to be described. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryNames": {
           "shape": "RepositoryNameList",
@@ -1548,14 +1548,14 @@
       "members": {
         "encryptionType": {
           "shape": "EncryptionType",
-          "documentation": "<p>The encryption type to use.</p> <p>If you use the <code>KMS</code> encryption type, the contents of the repository will be encrypted using server-side encryption with customer master keys (CMKs) stored in AWS KMS. When you use AWS KMS to encrypt your data, you can either use the default AWS managed CMK for Amazon ECR, or specify your own CMK, which you already created. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">Protecting Data Using Server-Side Encryption with CMKs Stored in AWS Key Management Service (SSE-KMS)</a> in the <i>Amazon Simple Storage Service Console Developer Guide.</i>.</p> <p>If you use the <code>AES256</code> encryption type, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts the images in the repository using an AES-256 encryption algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html\">Protecting Data Using Server-Side Encryption with Amazon S3-Managed Encryption Keys (SSE-S3)</a> in the <i>Amazon Simple Storage Service Console Developer Guide.</i>.</p>"
+          "documentation": "<p>The encryption type to use.</p> <p>If you use the <code>KMS</code> encryption type, the contents of the repository will be encrypted using server-side encryption with Key Management Service key stored in KMS. When you use KMS to encrypt your data, you can either use the default Amazon Web Services managed KMS key for Amazon ECR, or specify your own KMS key, which you already created. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html\">Protecting data using server-side encryption with an KMS key stored in Key Management Service (SSE-KMS)</a> in the <i>Amazon Simple Storage Service Console Developer Guide.</i>.</p> <p>If you use the <code>AES256</code> encryption type, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts the images in the repository using an AES-256 encryption algorithm. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html\">Protecting data using server-side encryption with Amazon S3-managed encryption keys (SSE-S3)</a> in the <i>Amazon Simple Storage Service Console Developer Guide.</i>.</p>"
         },
         "kmsKey": {
           "shape": "KmsKey",
-          "documentation": "<p>If you use the <code>KMS</code> encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.</p>"
+          "documentation": "<p>If you use the <code>KMS</code> encryption type, specify the KMS key to use for encryption. The alias, key ID, or full ARN of the KMS key can be specified. The key must exist in the same Region as the repository. If no key is specified, the default Amazon Web Services managed KMS key for Amazon ECR will be used.</p>"
         }
       },
-      "documentation": "<p>The encryption configuration for the repository. This determines how the contents of your repository are encrypted at rest.</p> <p>By default, when no encryption configuration is set or the <code>AES256</code> encryption type is used, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts your data at rest using an AES-256 encryption algorithm. This does not require any action on your part.</p> <p>For more control over the encryption of the contents of your repository, you can use server-side encryption with customer master keys (CMKs) stored in AWS Key Management Service (AWS KMS) to encrypt your images. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html\">Amazon ECR encryption at rest</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+      "documentation": "<p>The encryption configuration for the repository. This determines how the contents of your repository are encrypted at rest.</p> <p>By default, when no encryption configuration is set or the <code>AES256</code> encryption type is used, Amazon ECR uses server-side encryption with Amazon S3-managed encryption keys which encrypts your data at rest using an AES-256 encryption algorithm. This does not require any action on your part.</p> <p>For more control over the encryption of the contents of your repository, you can use server-side encryption with Key Management Service key stored in Key Management Service (KMS) to encrypt your images. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/encryption-at-rest.html\">Amazon ECR encryption at rest</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
     },
     "EncryptionType": {
       "type": "string",
@@ -1612,7 +1612,7 @@
       "members": {
         "registryIds": {
           "shape": "GetAuthorizationTokenRegistryIdList",
-          "documentation": "<p>A list of AWS account IDs that are associated with the registries for which to get AuthorizationData objects. If you do not specify a registry, the default registry is assumed.</p>",
+          "documentation": "<p>A list of Amazon Web Services account IDs that are associated with the registries for which to get AuthorizationData objects. If you do not specify a registry, the default registry is assumed.</p>",
           "deprecated": true,
           "deprecatedMessage": "This field is deprecated. The returned authorization token can be used to access any Amazon ECR registry that the IAM principal has access to, specifying a registry ID doesn't change the permissions scope of the authorization token."
         }
@@ -1636,7 +1636,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the image layer to download. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the image layer to download. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -1669,7 +1669,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -1734,7 +1734,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -1788,7 +1788,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -1818,7 +1818,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry containing the image.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry containing the image.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -1854,7 +1854,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry to which this image belongs.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry to which this image belongs.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -2067,7 +2067,7 @@
       "members": {
         "scanOnPush": {
           "shape": "ScanOnPushFlag",
-          "documentation": "<p>The setting that determines whether images are scanned after being pushed to a repository. If set to <code>true</code>, images will be scanned after being pushed. If this parameter is not specified, it will default to <code>false</code> and images will not be scanned unless a scan is manually started with the <a>StartImageScan</a> API.</p>"
+          "documentation": "<p>The setting that determines whether images are scanned after being pushed to a repository. If set to <code>true</code>, images will be scanned after being pushed. If this parameter is not specified, it will default to <code>false</code> and images will not be scanned unless a scan is manually started with the <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/APIReference/API_StartImageScan.html\">API_StartImageScan</a> API.</p>"
         }
       },
       "documentation": "<p>The image scanning configuration for a repository.</p>"
@@ -2101,7 +2101,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry to which you intend to upload layers. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry to which you intend to upload layers. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -2319,7 +2319,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository in which to list images. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository in which to list images. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -2411,7 +2411,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository in which to put the image. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository in which to put the image. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -2453,7 +2453,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository in which to update the image scanning configuration setting. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository in which to update the image scanning configuration setting. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -2491,7 +2491,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository in which to update the image tag mutability settings. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository in which to update the image tag mutability settings. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -2529,7 +2529,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository. If you do&#x2028; not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository. If you do&#x2028; not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -2684,11 +2684,11 @@
       "members": {
         "repositoryArn": {
           "shape": "Arn",
-          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the repository, AWS account ID of the repository owner, repository namespace, and repository name. For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the <code>arn:aws:ecr</code> namespace, followed by the region of the repository, Amazon Web Services account ID of the repository owner, repository namespace, and repository name. For example, <code>arn:aws:ecr:region:012345678910:repository/test</code>.</p>"
         },
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -2767,7 +2767,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -2775,7 +2775,7 @@
         },
         "policyText": {
           "shape": "RepositoryPolicyText",
-          "documentation": "<p>The JSON repository policy text to apply to the repository. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html\">Amazon ECR Repository Policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
+          "documentation": "<p>The JSON repository policy text to apply to the repository. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-policy-examples.html\">Amazon ECR repository policies</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
         },
         "force": {
           "shape": "ForceFlag",
@@ -2813,7 +2813,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository in which to start an image scan request. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository in which to start an image scan request. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -2852,7 +2852,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry that contains the repository. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -2983,7 +2983,7 @@
       "members": {
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The AWS account ID associated with the registry to which you are uploading layer parts. If you do not specify a registry, the default registry is assumed.</p>"
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry to which you are uploading layer parts. If you do not specify a registry, the default registry is assumed.</p>"
         },
         "repositoryName": {
           "shape": "RepositoryName",
@@ -3035,5 +3035,5 @@
       "type": "timestamp"
     }
   },
-  "documentation": "<fullname>Amazon Elastic Container Registry</fullname> <p>Amazon Elastic Container Registry (Amazon ECR) is a managed container image registry service. Customers can use the familiar Docker CLI, or their preferred client, to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry for your Docker or Open Container Initiative (OCI) images. Amazon ECR supports private repositories with resource-based permissions using IAM so that specific users or Amazon EC2 instances can access repositories and images.</p>"
+  "documentation": "<fullname>Amazon Elastic Container Registry</fullname> <p>Amazon Elastic Container Registry (Amazon ECR) is a managed container image registry service. Customers can use the familiar Docker CLI, or their preferred client, to push, pull, and manage images. Amazon ECR provides a secure, scalable, and reliable registry for your Docker or Open Container Initiative (OCI) images. Amazon ECR supports private repositories with resource-based permissions using IAM so that specific users or Amazon EC2 instances can access repositories and images.</p> <p>Amazon ECR has service endpoints in each supported Region. For more information, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ecr.html\">Amazon ECR endpoints</a> in the <i>Amazon Web Services General Reference</i>.</p>"
 }

@@ -1962,7 +1962,7 @@
       "members": {
         "AllowDeferredExecution": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether a job should be queued by Amazon Transcribe when the concurrent execution limit is exceeded. When the <code>AllowDeferredExecution</code> field is true, jobs are queued and executed when the number of executing jobs falls below the concurrent execution limit. If the field is false, Amazon Transcribe returns a <code>LimitExceededException</code> exception.</p> <p>If you specify the <code>AllowDeferredExecution</code> field, you must specify the <code>DataAccessRoleArn</code> field.</p>"
+          "documentation": "<p>Indicates whether a job should be queued by Amazon Transcribe when the concurrent execution limit is exceeded. When the <code>AllowDeferredExecution</code> field is true, jobs are queued and executed when the number of executing jobs falls below the concurrent execution limit. If the field is false, Amazon Transcribe returns a <code>LimitExceededException</code> exception.</p> <p>Note that job queuing is enabled by default for call analytics jobs.</p> <p>If you specify the <code>AllowDeferredExecution</code> field, you must specify the <code>DataAccessRoleArn</code> field.</p>"
         },
         "DataAccessRoleArn": {
           "shape": "DataAccessRoleArn",
@@ -1970,6 +1970,17 @@
         }
       },
       "documentation": "<p>Provides information about when a transcription job should be executed.</p>"
+    },
+    "KMSEncryptionContextMap": {
+      "type": "map",
+      "key": {
+        "shape": "NonEmptyString"
+      },
+      "value": {
+        "shape": "NonEmptyString"
+      },
+      "max": 10,
+      "min": 1
     },
     "KMSKeyId": {
       "type": "string",
@@ -2941,6 +2952,10 @@
           "shape": "KMSKeyId",
           "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS) key used to encrypt the output of the transcription job. The user calling the <a>StartMedicalTranscriptionJob</a> operation must have permission to use the specified KMS key.</p> <p>You use either of the following to identify a KMS key in the current account:</p> <ul> <li> <p>KMS Key ID: \"1234abcd-12ab-34cd-56ef-1234567890ab\"</p> </li> <li> <p>KMS Key Alias: \"alias/ExampleAlias\"</p> </li> </ul> <p>You can use either of the following to identify a KMS key in the current account or another account:</p> <ul> <li> <p>Amazon Resource Name (ARN) of a KMS key in the current account or another account: \"arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</p> </li> <li> <p>ARN of a KMS Key Alias: \"arn:aws:kms:region:account ID:alias/ExampleAlias\"</p> </li> </ul> <p>If you don't specify an encryption key, the output of the medical transcription job is encrypted with the default Amazon S3 key (SSE-S3).</p> <p>If you specify a KMS key to encrypt your output, you must also specify an output location in the <code>OutputBucketName</code> parameter.</p>"
         },
+        "KMSEncryptionContext": {
+          "shape": "KMSEncryptionContextMap",
+          "documentation": "<p>A map of plain text, non-secret key:value pairs, known as encryption context pairs, that provide an added layer of security for your data.</p>"
+        },
         "Settings": {
           "shape": "MedicalTranscriptionSetting",
           "documentation": "<p>Optional settings for the medical transcription job.</p>"
@@ -3010,6 +3025,10 @@
         "OutputEncryptionKMSKeyId": {
           "shape": "KMSKeyId",
           "documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS) key used to encrypt the output of the transcription job. The user calling the <code>StartTranscriptionJob</code> operation must have permission to use the specified KMS key.</p> <p>You can use either of the following to identify a KMS key in the current account:</p> <ul> <li> <p>KMS Key ID: \"1234abcd-12ab-34cd-56ef-1234567890ab\"</p> </li> <li> <p>KMS Key Alias: \"alias/ExampleAlias\"</p> </li> </ul> <p>You can use either of the following to identify a KMS key in the current account or another account:</p> <ul> <li> <p>Amazon Resource Name (ARN) of a KMS Key: \"arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</p> </li> <li> <p>ARN of a KMS Key Alias: \"arn:aws:kms:region:account ID:alias/ExampleAlias\"</p> </li> </ul> <p>If you don't specify an encryption key, the output of the transcription job is encrypted with the default Amazon S3 key (SSE-S3).</p> <p>If you specify a KMS key to encrypt your output, you must also specify an output location in the <code>OutputBucketName</code> parameter.</p>"
+        },
+        "KMSEncryptionContext": {
+          "shape": "KMSEncryptionContextMap",
+          "documentation": "<p>A map of plain text, non-secret key:value pairs, known as encryption context pairs, that provide an added layer of security for your data.</p>"
         },
         "Settings": {
           "shape": "Settings",

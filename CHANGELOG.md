@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.986.0-->
+<!--LATEST=2.987.0-->
 <!--ENTRYINSERT-->
+
+## 2.987.0
+* feature: QuickSight: Add new data source type for Amazon OpenSearch (successor to Amazon ElasticSearch).
+* feature: RDS: This release adds support for providing a custom timeout value for finding a scaling point during autoscaling in Aurora Serverless v1.
+* feature: SageMaker: This release adds support for "Lifecycle Configurations" to SageMaker Studio
+* feature: TranscribeService: This release adds an API option for startTranscriptionJob and startMedicalTranscriptionJob that allows the user to specify encryption context key value pairs for batch jobs.
 
 ## 2.986.0
 * feature: CodeGuruReviewer: The Amazon CodeGuru Reviewer API now includes the RuleMetadata data object and a Severity attribute on a RecommendationSummary object. A RuleMetadata object contains information about a rule that generates a recommendation. Severity indicates how severe the issue associated with a recommendation is.

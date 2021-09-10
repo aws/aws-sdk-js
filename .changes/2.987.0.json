@@ -1,0 +1,22 @@
+[
+    {
+        "type": "feature",
+        "category": "QuickSight",
+        "description": "Add new data source type for Amazon OpenSearch (successor to Amazon ElasticSearch)."
+    },
+    {
+        "type": "feature",
+        "category": "RDS",
+        "description": "This release adds support for providing a custom timeout value for finding a scaling point during autoscaling in Aurora Serverless v1."
+    },
+    {
+        "type": "feature",
+        "category": "SageMaker",
+        "description": "This release adds support for \"Lifecycle Configurations\" to SageMaker Studio"
+    },
+    {
+        "type": "feature",
+        "category": "TranscribeService",
+        "description": "This release adds an API option for startTranscriptionJob and startMedicalTranscriptionJob that allows the user to specify encryption context key value pairs for batch jobs."
+    }
+]

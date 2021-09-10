@@ -89,7 +89,7 @@
           "shape": "ResourceLimitExceeded"
         }
       ],
-      "documentation": "<p>Creates an <i>action</i>. An action is a lineage tracking entity that represents an action or activity. For example, a model deployment or an HPO job. Generally, an action involves at least one input or output artifact. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html\">Amazon SageMaker ML Lineage Tracking</a>.</p> <note> <p> <code>CreateAction</code> can only be invoked from within an SageMaker managed environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker notebooks. A call to <code>CreateAction</code> from outside one of these environments results in an error.</p> </note>"
+      "documentation": "<p>Creates an <i>action</i>. An action is a lineage tracking entity that represents an action or activity. For example, a model deployment or an HPO job. Generally, an action involves at least one input or output artifact. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html\">Amazon SageMaker ML Lineage Tracking</a>.</p>"
     },
     "CreateAlgorithm": {
       "name": "CreateAlgorithm",
@@ -163,7 +163,7 @@
           "shape": "ResourceLimitExceeded"
         }
       ],
-      "documentation": "<p>Creates an <i>artifact</i>. An artifact is a lineage tracking entity that represents a URI addressable object or data. Some examples are the S3 URI of a dataset and the ECR registry path of an image. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html\">Amazon SageMaker ML Lineage Tracking</a>.</p> <note> <p> <code>CreateArtifact</code> can only be invoked from within an SageMaker managed environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker notebooks. A call to <code>CreateArtifact</code> from outside one of these environments results in an error.</p> </note>"
+      "documentation": "<p>Creates an <i>artifact</i>. An artifact is a lineage tracking entity that represents a URI addressable object or data. Some examples are the S3 URI of a dataset and the ECR registry path of an image. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html\">Amazon SageMaker ML Lineage Tracking</a>.</p>"
     },
     "CreateAutoMLJob": {
       "name": "CreateAutoMLJob",
@@ -240,7 +240,7 @@
           "shape": "ResourceLimitExceeded"
         }
       ],
-      "documentation": "<p>Creates a <i>context</i>. A context is a lineage tracking entity that represents a logical grouping of other tracking or experiment entities. Some examples are an endpoint and a model package. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html\">Amazon SageMaker ML Lineage Tracking</a>.</p> <note> <p> <code>CreateContext</code> can only be invoked from within an SageMaker managed environment. This includes SageMaker training jobs, processing jobs, transform jobs, and SageMaker notebooks. A call to <code>CreateContext</code> from outside one of these environments results in an error.</p> </note>"
+      "documentation": "<p>Creates a <i>context</i>. A context is a lineage tracking entity that represents a logical grouping of other tracking or experiment entities. Some examples are an endpoint and a model package. For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html\">Amazon SageMaker ML Lineage Tracking</a>.</p>"
     },
     "CreateDataQualityJobDefinition": {
       "name": "CreateDataQualityJobDefinition",
@@ -357,7 +357,7 @@
           "shape": "ResourceLimitExceeded"
         }
       ],
-      "documentation": "<p>Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the <code>CreateModel</code> API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the <a>CreateEndpoint</a> API.</p> <note> <p> Use this API if you want to use Amazon SageMaker hosting services to deploy models into production. </p> </note> <p>In the request, you define a <code>ProductionVariant</code>, for each model that you want to deploy. Each <code>ProductionVariant</code> parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy. </p> <p>If you are hosting multiple models, you also assign a <code>VariantWeight</code> to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B. </p> <p>For an example that calls this method when deploying a model to Amazon SageMaker hosting services, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto\">Deploy the Model to Amazon SageMaker Hosting Services (Amazon Web Services SDK for Python (Boto 3)).</a> </p> <note> <p>When you call <a>CreateEndpoint</a>, a load call is made to DynamoDB to verify that your endpoint configuration exists. When you read data from a DynamoDB table supporting <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\"> <code>Eventually Consistent Reads</code> </a>, the response might not reflect the results of a recently completed write operation. The response might include some stale data. If the dependent entities are not yet in DynamoDB, this causes a validation error. If you repeat your read request after a short time, the response should return the latest data. So retry logic is recommended to handle these possible issues. We also recommend that customers call <a>DescribeEndpointConfig</a> before calling <a>CreateEndpoint</a> to minimize the potential impact of a DynamoDB eventually consistent read.</p> </note>"
+      "documentation": "<p>Creates an endpoint configuration that Amazon SageMaker hosting services uses to deploy models. In the configuration, you identify one or more models, created using the <code>CreateModel</code> API, to deploy and the resources that you want Amazon SageMaker to provision. Then you call the <a>CreateEndpoint</a> API.</p> <note> <p> Use this API if you want to use Amazon SageMaker hosting services to deploy models into production. </p> </note> <p>In the request, you define a <code>ProductionVariant</code>, for each model that you want to deploy. Each <code>ProductionVariant</code> parameter also describes the resources that you want Amazon SageMaker to provision. This includes the number and type of ML compute instances to deploy. </p> <p>If you are hosting multiple models, you also assign a <code>VariantWeight</code> to specify how much traffic you want to allocate to each model. For example, suppose that you want to host two models, A and B, and you assign traffic weight 2 for model A and 1 for model B. Amazon SageMaker distributes two-thirds of the traffic to Model A, and one-third to model B. </p> <note> <p>When you call <a>CreateEndpoint</a>, a load call is made to DynamoDB to verify that your endpoint configuration exists. When you read data from a DynamoDB table supporting <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\"> <code>Eventually Consistent Reads</code> </a>, the response might not reflect the results of a recently completed write operation. The response might include some stale data. If the dependent entities are not yet in DynamoDB, this causes a validation error. If you repeat your read request after a short time, the response should return the latest data. So retry logic is recommended to handle these possible issues. We also recommend that customers call <a>DescribeEndpointConfig</a> before calling <a>CreateEndpoint</a> to minimize the potential impact of a DynamoDB eventually consistent read.</p> </note>"
     },
     "CreateExperiment": {
       "name": "CreateExperiment",
@@ -819,6 +819,25 @@
         }
       ],
       "documentation": "<p>Creates a machine learning (ML) project that can contain one or more templates that set up an ML pipeline from training to deploying an approved model.</p>"
+    },
+    "CreateStudioLifecycleConfig": {
+      "name": "CreateStudioLifecycleConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "CreateStudioLifecycleConfigRequest"
+      },
+      "output": {
+        "shape": "CreateStudioLifecycleConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceInUse"
+        }
+      ],
+      "documentation": "<p>Creates a new Studio Lifecycle Configuration.</p>"
     },
     "CreateTrainingJob": {
       "name": "CreateTrainingJob",
@@ -1469,6 +1488,25 @@
         }
       ],
       "documentation": "<p>Delete the specified project.</p>"
+    },
+    "DeleteStudioLifecycleConfig": {
+      "name": "DeleteStudioLifecycleConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteStudioLifecycleConfigRequest"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        },
+        {
+          "shape": "ResourceInUse"
+        }
+      ],
+      "documentation": "<p>Deletes the Studio Lifecycle Configuration. In order to delete the Lifecycle Configuration, there must be no running apps using the Lifecycle Configuration. You must also remove the Lifecycle Configuration from UserSettings in all Domains and UserProfiles.</p>"
     },
     "DeleteTags": {
       "name": "DeleteTags",
@@ -2256,6 +2294,25 @@
         "shape": "DescribeProjectOutput"
       },
       "documentation": "<p>Describes the details of a project.</p>"
+    },
+    "DescribeStudioLifecycleConfig": {
+      "name": "DescribeStudioLifecycleConfig",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeStudioLifecycleConfigRequest"
+      },
+      "output": {
+        "shape": "DescribeStudioLifecycleConfigResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        }
+      ],
+      "documentation": "<p>Describes the Studio Lifecycle Configuration.</p>"
     },
     "DescribeSubscribedWorkteam": {
       "name": "DescribeSubscribedWorkteam",
@@ -3148,6 +3205,25 @@
         "shape": "ListProjectsOutput"
       },
       "documentation": "<p>Gets a list of the projects in an Amazon Web Services account.</p>"
+    },
+    "ListStudioLifecycleConfigs": {
+      "name": "ListStudioLifecycleConfigs",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListStudioLifecycleConfigsRequest"
+      },
+      "output": {
+        "shape": "ListStudioLifecycleConfigsResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceInUse"
+        }
+      ],
+      "documentation": "<p>Lists the Studio Lifecycle Configurations in your Amazon Web Services Account.</p>"
     },
     "ListSubscribedWorkteams": {
       "name": "ListSubscribedWorkteams",
@@ -8236,6 +8312,41 @@
         }
       }
     },
+    "CreateStudioLifecycleConfigRequest": {
+      "type": "structure",
+      "required": [
+        "StudioLifecycleConfigName",
+        "StudioLifecycleConfigContent",
+        "StudioLifecycleConfigAppType"
+      ],
+      "members": {
+        "StudioLifecycleConfigName": {
+          "shape": "StudioLifecycleConfigName",
+          "documentation": "<p>The name of the Studio Lifecycle Configuration to create.</p>"
+        },
+        "StudioLifecycleConfigContent": {
+          "shape": "StudioLifecycleConfigContent",
+          "documentation": "<p>The content of your Studio Lifecycle Configuration script. This content must be base64 encoded.</p>"
+        },
+        "StudioLifecycleConfigAppType": {
+          "shape": "StudioLifecycleConfigAppType",
+          "documentation": "<p>The App type that the Lifecycle Configuration is attached to.</p>"
+        },
+        "Tags": {
+          "shape": "TagList",
+          "documentation": "<p>Tags to be associated with the Lifecycle Configuration. Each tag consists of a key and an optional value. Tag keys must be unique per resource. Tags are searchable using the Search API. </p>"
+        }
+      }
+    },
+    "CreateStudioLifecycleConfigResponse": {
+      "type": "structure",
+      "members": {
+        "StudioLifecycleConfigArn": {
+          "shape": "StudioLifecycleConfigArn",
+          "documentation": "<p>The ARN of your created Lifecycle Configuration.</p>"
+        }
+      }
+    },
     "CreateTrainingJobRequest": {
       "type": "structure",
       "required": [
@@ -9509,6 +9620,18 @@
         "ProjectName": {
           "shape": "ProjectEntityName",
           "documentation": "<p>The name of the project to delete.</p>"
+        }
+      }
+    },
+    "DeleteStudioLifecycleConfigRequest": {
+      "type": "structure",
+      "required": [
+        "StudioLifecycleConfigName"
+      ],
+      "members": {
+        "StudioLifecycleConfigName": {
+          "shape": "StudioLifecycleConfigName",
+          "documentation": "<p>The name of the Studio Lifecycle Configuration to delete.</p>"
         }
       }
     },
@@ -12245,6 +12368,47 @@
         "CreationTime": {
           "shape": "Timestamp",
           "documentation": "<p>The time when the project was created.</p>"
+        }
+      }
+    },
+    "DescribeStudioLifecycleConfigRequest": {
+      "type": "structure",
+      "required": [
+        "StudioLifecycleConfigName"
+      ],
+      "members": {
+        "StudioLifecycleConfigName": {
+          "shape": "StudioLifecycleConfigName",
+          "documentation": "<p>The name of the Studio Lifecycle Configuration to describe.</p>"
+        }
+      }
+    },
+    "DescribeStudioLifecycleConfigResponse": {
+      "type": "structure",
+      "members": {
+        "StudioLifecycleConfigArn": {
+          "shape": "StudioLifecycleConfigArn",
+          "documentation": "<p>The ARN of the Lifecycle Configuration to describe.</p>"
+        },
+        "StudioLifecycleConfigName": {
+          "shape": "StudioLifecycleConfigName",
+          "documentation": "<p>The name of the Studio Lifecycle Configuration that is described.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The creation time of the Studio Lifecycle Configuration.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>This value is equivalent to CreationTime because Studio Lifecycle Configurations are immutable.</p>"
+        },
+        "StudioLifecycleConfigContent": {
+          "shape": "StudioLifecycleConfigContent",
+          "documentation": "<p>The content of your Studio Lifecycle Configuration script.</p>"
+        },
+        "StudioLifecycleConfigAppType": {
+          "shape": "StudioLifecycleConfigAppType",
+          "documentation": "<p>The App type that the Lifecycle Configuration is attached to.</p>"
         }
       }
     },
@@ -15689,6 +15853,10 @@
         "DefaultResourceSpec": {
           "shape": "ResourceSpec",
           "documentation": "<p>The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the JupyterServer app.</p>"
+        },
+        "LifecycleConfigArns": {
+          "shape": "LifecycleConfigArns",
+          "documentation": "<p> The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the JupyterServerApp.</p>"
         }
       },
       "documentation": "<p>The JupyterServer app settings.</p>"
@@ -15707,6 +15875,10 @@
         "CustomImages": {
           "shape": "CustomImages",
           "documentation": "<p>A list of custom SageMaker images that are configured to run as a KernelGateway app.</p>"
+        },
+        "LifecycleConfigArns": {
+          "shape": "LifecycleConfigArns",
+          "documentation": "<p> The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the KernelGatewayApp.</p>"
         }
       },
       "documentation": "<p>The KernelGateway app settings.</p>"
@@ -16125,6 +16297,12 @@
     },
     "LastModifiedTime": {
       "type": "timestamp"
+    },
+    "LifecycleConfigArns": {
+      "type": "list",
+      "member": {
+        "shape": "StudioLifecycleConfigArn"
+      }
     },
     "LineageEntityParameters": {
       "type": "map",
@@ -18461,6 +18639,64 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>If the result of the previous <code>ListCompilationJobs</code> request was truncated, the response includes a <code>NextToken</code>. To retrieve the next set of model compilation jobs, use the token in the next request.</p>"
+        }
+      }
+    },
+    "ListStudioLifecycleConfigsRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of Studio Lifecycle Configurations to return in the response. The default value is 10.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the previous call to ListStudioLifecycleConfigs didn't return the full set of Lifecycle Configurations, the call returns a token for getting the next set of Lifecycle Configurations.</p>"
+        },
+        "NameContains": {
+          "shape": "StudioLifecycleConfigName",
+          "documentation": "<p>A string in the Lifecycle Configuration name. This filter returns only Lifecycle Configurations whose name contains the specified string.</p>"
+        },
+        "AppTypeEquals": {
+          "shape": "StudioLifecycleConfigAppType",
+          "documentation": "<p>A parameter to search for the App Type to which the Lifecycle Configuration is attached.</p>"
+        },
+        "CreationTimeBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only Lifecycle Configurations created on or before the specified time.</p>"
+        },
+        "CreationTimeAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only Lifecycle Configurations created on or after the specified time.</p>"
+        },
+        "ModifiedTimeBefore": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only Lifecycle Configurations modified before the specified time.</p>"
+        },
+        "ModifiedTimeAfter": {
+          "shape": "Timestamp",
+          "documentation": "<p>A filter that returns only Lifecycle Configurations modified after the specified time.</p>"
+        },
+        "SortBy": {
+          "shape": "StudioLifecycleConfigSortKey",
+          "documentation": "<p>The property used to sort results. The default value is CreationTime.</p>"
+        },
+        "SortOrder": {
+          "shape": "SortOrder",
+          "documentation": "<p>The sort order. The default value is Descending.</p>"
+        }
+      }
+    },
+    "ListStudioLifecycleConfigsResponse": {
+      "type": "structure",
+      "members": {
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token for getting the next set of actions, if there are any.</p>"
+        },
+        "StudioLifecycleConfigs": {
+          "shape": "StudioLifecycleConfigsList",
+          "documentation": "<p>A list of Lifecycle Configurations and their properties.</p>"
         }
       }
     },
@@ -23064,6 +23300,10 @@
         "InstanceType": {
           "shape": "AppInstanceType",
           "documentation": "<p>The instance type that the image version runs on.</p>"
+        },
+        "LifecycleConfigArn": {
+          "shape": "StudioLifecycleConfigArn",
+          "documentation": "<p> The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the Resource.</p>"
         }
       },
       "documentation": "<p>Specifies the ARN's of a SageMaker image and SageMaker image version, and the instance type that the version runs on.</p>"
@@ -24052,6 +24292,69 @@
       "max": 256,
       "pattern": ".*"
     },
+    "StudioLifecycleConfigAppType": {
+      "type": "string",
+      "enum": [
+        "JupyterServer",
+        "KernelGateway"
+      ]
+    },
+    "StudioLifecycleConfigArn": {
+      "type": "string",
+      "max": 256,
+      "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"
+    },
+    "StudioLifecycleConfigContent": {
+      "type": "string",
+      "max": 16384,
+      "min": 1,
+      "pattern": "[\\S\\s]+"
+    },
+    "StudioLifecycleConfigDetails": {
+      "type": "structure",
+      "members": {
+        "StudioLifecycleConfigArn": {
+          "shape": "StudioLifecycleConfigArn",
+          "documentation": "<p> The Amazon Resource Name (ARN) of the Lifecycle Configuration.</p>"
+        },
+        "StudioLifecycleConfigName": {
+          "shape": "StudioLifecycleConfigName",
+          "documentation": "<p>The name of the Studio Lifecycle Configuration.</p>"
+        },
+        "CreationTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The creation time of the Studio Lifecycle Configuration.</p>"
+        },
+        "LastModifiedTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>This value is equivalent to CreationTime because Studio Lifecycle Configurations are immutable.</p>"
+        },
+        "StudioLifecycleConfigAppType": {
+          "shape": "StudioLifecycleConfigAppType",
+          "documentation": "<p>The App type to which the Lifecycle Configuration is attached.</p>"
+        }
+      },
+      "documentation": "<p>Details of the Studio Lifecycle Configuration.</p>"
+    },
+    "StudioLifecycleConfigName": {
+      "type": "string",
+      "max": 63,
+      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"
+    },
+    "StudioLifecycleConfigSortKey": {
+      "type": "string",
+      "enum": [
+        "CreationTime",
+        "LastModifiedTime",
+        "Name"
+      ]
+    },
+    "StudioLifecycleConfigsList": {
+      "type": "list",
+      "member": {
+        "shape": "StudioLifecycleConfigDetails"
+      }
+    },
     "SubnetId": {
       "type": "string",
       "max": 32,
@@ -24201,7 +24504,8 @@
         "x86_win32",
         "x86_win64",
         "coreml",
-        "jacinto_tda4vm"
+        "jacinto_tda4vm",
+        "imx8mplus"
       ]
     },
     "TargetObjectiveMetricValue": {
