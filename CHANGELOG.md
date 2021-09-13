@@ -1,6 +1,9 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.987.0-->
+<!--LATEST=2.988.0-->
 <!--ENTRYINSERT-->
+
+## 2.988.0
+* feature: Iot: AWS IoT Rules Engine adds OpenSearch action. The OpenSearch rule action lets you stream data from IoT sensors and applications to Amazon OpenSearch Service which is a successor to Amazon Elasticsearch Service.
 
 ## 2.987.0
 * feature: QuickSight: Add new data source type for Amazon OpenSearch (successor to Amazon ElasticSearch).

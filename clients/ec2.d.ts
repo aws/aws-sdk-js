@@ -357,11 +357,11 @@ declare class EC2 extends Service {
    */
   copyFpgaImage(callback?: (err: AWSError, data: EC2.Types.CopyFpgaImageResult) => void): Request<EC2.Types.CopyFpgaImageResult, AWSError>;
   /**
-   * Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an AWS Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see CreateStoreImageTask. To copy an AMI from one Region to another, specify the source Region using the SourceRegion parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set Encrypted during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot. To copy an AMI from a Region to an Outpost, specify the source Region using the SourceRegion parameter, and specify the ARN of the destination Outpost using DestinationOutpostArn. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using KmsKeyId. Outposts do not support unencrypted snapshots. For more information,  Amazon EBS local snapshots on Outposts in the Amazon Elastic Compute Cloud User Guide. For more information about the prerequisites and limits when copying an AMI, see Copying an AMI in the Amazon Elastic Compute Cloud User Guide.
+   * Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see CreateStoreImageTask. To copy an AMI from one Region to another, specify the source Region using the SourceRegion parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set Encrypted during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot. To copy an AMI from a Region to an Outpost, specify the source Region using the SourceRegion parameter, and specify the ARN of the destination Outpost using DestinationOutpostArn. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using KmsKeyId. Outposts do not support unencrypted snapshots. For more information,  Amazon EBS local snapshots on Outposts in the Amazon Elastic Compute Cloud User Guide. For more information about the prerequisites and limits when copying an AMI, see Copying an AMI in the Amazon Elastic Compute Cloud User Guide.
    */
   copyImage(params: EC2.Types.CopyImageRequest, callback?: (err: AWSError, data: EC2.Types.CopyImageResult) => void): Request<EC2.Types.CopyImageResult, AWSError>;
   /**
-   * Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an AWS Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see CreateStoreImageTask. To copy an AMI from one Region to another, specify the source Region using the SourceRegion parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set Encrypted during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot. To copy an AMI from a Region to an Outpost, specify the source Region using the SourceRegion parameter, and specify the ARN of the destination Outpost using DestinationOutpostArn. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using KmsKeyId. Outposts do not support unencrypted snapshots. For more information,  Amazon EBS local snapshots on Outposts in the Amazon Elastic Compute Cloud User Guide. For more information about the prerequisites and limits when copying an AMI, see Copying an AMI in the Amazon Elastic Compute Cloud User Guide.
+   * Initiates the copy of an AMI. You can copy an AMI from one Region to another, or from a Region to an Outpost. You can't copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. To copy an AMI to another partition, see CreateStoreImageTask. To copy an AMI from one Region to another, specify the source Region using the SourceRegion parameter, and specify the destination Region using its endpoint. Copies of encrypted backing snapshots for the AMI are encrypted. Copies of unencrypted backing snapshots remain unencrypted, unless you set Encrypted during the copy operation. You cannot create an unencrypted copy of an encrypted backing snapshot. To copy an AMI from a Region to an Outpost, specify the source Region using the SourceRegion parameter, and specify the ARN of the destination Outpost using DestinationOutpostArn. Backing snapshots copied to an Outpost are encrypted by default using the default encryption key for the Region, or a different key that you specify in the request using KmsKeyId. Outposts do not support unencrypted snapshots. For more information,  Amazon EBS local snapshots on Outposts in the Amazon Elastic Compute Cloud User Guide. For more information about the prerequisites and limits when copying an AMI, see Copying an AMI in the Amazon Elastic Compute Cloud User Guide.
    */
   copyImage(callback?: (err: AWSError, data: EC2.Types.CopyImageResult) => void): Request<EC2.Types.CopyImageResult, AWSError>;
   /**
@@ -469,11 +469,11 @@ declare class EC2 extends Service {
    */
   createFpgaImage(callback?: (err: AWSError, data: EC2.Types.CreateFpgaImageResult) => void): Request<EC2.Types.CreateFpgaImageResult, AWSError>;
   /**
-   * Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped. If you customized your instance with instance store volumes or EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes. For more information, see Creating Amazon EBS-Backed Linux AMIs in the Amazon Elastic Compute Cloud User Guide.
+   * Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped. If you customized your instance with instance store volumes or Amazon EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes. For more information, see Creating Amazon EBS-Backed Linux AMIs in the Amazon Elastic Compute Cloud User Guide.
    */
   createImage(params: EC2.Types.CreateImageRequest, callback?: (err: AWSError, data: EC2.Types.CreateImageResult) => void): Request<EC2.Types.CreateImageResult, AWSError>;
   /**
-   * Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped. If you customized your instance with instance store volumes or EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes. For more information, see Creating Amazon EBS-Backed Linux AMIs in the Amazon Elastic Compute Cloud User Guide.
+   * Creates an Amazon EBS-backed AMI from an Amazon EBS-backed instance that is either running or stopped. If you customized your instance with instance store volumes or Amazon EBS volumes in addition to the root device volume, the new AMI contains block device mapping information for those volumes. When you launch an instance from this new AMI, the instance automatically launches with those additional volumes. For more information, see Creating Amazon EBS-Backed Linux AMIs in the Amazon Elastic Compute Cloud User Guide.
    */
   createImage(callback?: (err: AWSError, data: EC2.Types.CreateImageResult) => void): Request<EC2.Types.CreateImageResult, AWSError>;
   /**
@@ -541,11 +541,11 @@ declare class EC2 extends Service {
    */
   createLocalGatewayRouteTableVpcAssociation(callback?: (err: AWSError, data: EC2.Types.CreateLocalGatewayRouteTableVpcAssociationResult) => void): Request<EC2.Types.CreateLocalGatewayRouteTableVpcAssociationResult, AWSError>;
   /**
-   * Creates a managed prefix list. You can specify one or more entries for the prefix list. Each entry consists of a CIDR block and an optional description. You must specify the maximum number of entries for the prefix list. The maximum number of entries cannot be changed later.
+   * Creates a managed prefix list. You can specify one or more entries for the prefix list. Each entry consists of a CIDR block and an optional description.
    */
   createManagedPrefixList(params: EC2.Types.CreateManagedPrefixListRequest, callback?: (err: AWSError, data: EC2.Types.CreateManagedPrefixListResult) => void): Request<EC2.Types.CreateManagedPrefixListResult, AWSError>;
   /**
-   * Creates a managed prefix list. You can specify one or more entries for the prefix list. Each entry consists of a CIDR block and an optional description. You must specify the maximum number of entries for the prefix list. The maximum number of entries cannot be changed later.
+   * Creates a managed prefix list. You can specify one or more entries for the prefix list. Each entry consists of a CIDR block and an optional description.
    */
   createManagedPrefixList(callback?: (err: AWSError, data: EC2.Types.CreateManagedPrefixListResult) => void): Request<EC2.Types.CreateManagedPrefixListResult, AWSError>;
   /**
@@ -621,11 +621,11 @@ declare class EC2 extends Service {
    */
   createReservedInstancesListing(callback?: (err: AWSError, data: EC2.Types.CreateReservedInstancesListingResult) => void): Request<EC2.Types.CreateReservedInstancesListingResult, AWSError>;
   /**
-   * Starts a task that restores an AMI from an S3 object that was previously created by using CreateStoreImageTask. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using S3 in the Amazon Elastic Compute Cloud User Guide.
+   * Starts a task that restores an AMI from an Amazon S3 object that was previously created by using CreateStoreImageTask. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon Elastic Compute Cloud User Guide.
    */
   createRestoreImageTask(params: EC2.Types.CreateRestoreImageTaskRequest, callback?: (err: AWSError, data: EC2.Types.CreateRestoreImageTaskResult) => void): Request<EC2.Types.CreateRestoreImageTaskResult, AWSError>;
   /**
-   * Starts a task that restores an AMI from an S3 object that was previously created by using CreateStoreImageTask. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using S3 in the Amazon Elastic Compute Cloud User Guide.
+   * Starts a task that restores an AMI from an Amazon S3 object that was previously created by using CreateStoreImageTask. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon Elastic Compute Cloud User Guide.
    */
   createRestoreImageTask(callback?: (err: AWSError, data: EC2.Types.CreateRestoreImageTaskResult) => void): Request<EC2.Types.CreateRestoreImageTaskResult, AWSError>;
   /**
@@ -677,11 +677,11 @@ declare class EC2 extends Service {
    */
   createSpotDatafeedSubscription(callback?: (err: AWSError, data: EC2.Types.CreateSpotDatafeedSubscriptionResult) => void): Request<EC2.Types.CreateSpotDatafeedSubscriptionResult, AWSError>;
   /**
-   * Stores an AMI as a single object in an S3 bucket. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using S3 in the Amazon Elastic Compute Cloud User Guide.
+   * Stores an AMI as a single object in an Amazon S3 bucket. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon Elastic Compute Cloud User Guide.
    */
   createStoreImageTask(params: EC2.Types.CreateStoreImageTaskRequest, callback?: (err: AWSError, data: EC2.Types.CreateStoreImageTaskResult) => void): Request<EC2.Types.CreateStoreImageTaskResult, AWSError>;
   /**
-   * Stores an AMI as a single object in an S3 bucket. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using S3 in the Amazon Elastic Compute Cloud User Guide.
+   * Stores an AMI as a single object in an Amazon S3 bucket. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon Elastic Compute Cloud User Guide.
    */
   createStoreImageTask(callback?: (err: AWSError, data: EC2.Types.CreateStoreImageTaskResult) => void): Request<EC2.Types.CreateStoreImageTaskResult, AWSError>;
   /**
@@ -1669,11 +1669,11 @@ declare class EC2 extends Service {
    */
   describeImageAttribute(callback?: (err: AWSError, data: EC2.Types.ImageAttribute) => void): Request<EC2.Types.ImageAttribute, AWSError>;
   /**
-   * Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you. The images available to you include public images, private images that you own, and private images owned by other AWS accounts for which you have explicit launch permissions. Recently deregistered images appear in the returned results for a short interval and then return empty results. After all instances that reference a deregistered AMI are terminated, specifying the ID of the image will eventually return an error indicating that the AMI ID cannot be found.
+   * Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you. The images available to you include public images, private images that you own, and private images owned by other Amazon Web Services accounts for which you have explicit launch permissions. Recently deregistered images appear in the returned results for a short interval and then return empty results. After all instances that reference a deregistered AMI are terminated, specifying the ID of the image will eventually return an error indicating that the AMI ID cannot be found.
    */
   describeImages(params: EC2.Types.DescribeImagesRequest, callback?: (err: AWSError, data: EC2.Types.DescribeImagesResult) => void): Request<EC2.Types.DescribeImagesResult, AWSError>;
   /**
-   * Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you. The images available to you include public images, private images that you own, and private images owned by other AWS accounts for which you have explicit launch permissions. Recently deregistered images appear in the returned results for a short interval and then return empty results. After all instances that reference a deregistered AMI are terminated, specifying the ID of the image will eventually return an error indicating that the AMI ID cannot be found.
+   * Describes the specified images (AMIs, AKIs, and ARIs) available to you or all of the images available to you. The images available to you include public images, private images that you own, and private images owned by other Amazon Web Services accounts for which you have explicit launch permissions. Recently deregistered images appear in the returned results for a short interval and then return empty results. After all instances that reference a deregistered AMI are terminated, specifying the ID of the image will eventually return an error indicating that the AMI ID cannot be found.
    */
   describeImages(callback?: (err: AWSError, data: EC2.Types.DescribeImagesResult) => void): Request<EC2.Types.DescribeImagesResult, AWSError>;
   /**
@@ -2117,11 +2117,11 @@ declare class EC2 extends Service {
    */
   describeStaleSecurityGroups(callback?: (err: AWSError, data: EC2.Types.DescribeStaleSecurityGroupsResult) => void): Request<EC2.Types.DescribeStaleSecurityGroupsResult, AWSError>;
   /**
-   * Describes the progress of the AMI store tasks. You can describe the store tasks for specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from the last 31 days. For each AMI task, the response indicates if the task is InProgress, Completed, or Failed. For tasks InProgress, the response shows the estimated progress as a percentage. Tasks are listed in reverse chronological order. Currently, only tasks from the past 31 days can be viewed. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using S3 in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the progress of the AMI store tasks. You can describe the store tasks for specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from the last 31 days. For each AMI task, the response indicates if the task is InProgress, Completed, or Failed. For tasks InProgress, the response shows the estimated progress as a percentage. Tasks are listed in reverse chronological order. Currently, only tasks from the past 31 days can be viewed. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon Elastic Compute Cloud User Guide.
    */
   describeStoreImageTasks(params: EC2.Types.DescribeStoreImageTasksRequest, callback?: (err: AWSError, data: EC2.Types.DescribeStoreImageTasksResult) => void): Request<EC2.Types.DescribeStoreImageTasksResult, AWSError>;
   /**
-   * Describes the progress of the AMI store tasks. You can describe the store tasks for specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from the last 31 days. For each AMI task, the response indicates if the task is InProgress, Completed, or Failed. For tasks InProgress, the response shows the estimated progress as a percentage. Tasks are listed in reverse chronological order. Currently, only tasks from the past 31 days can be viewed. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using S3 in the Amazon Elastic Compute Cloud User Guide.
+   * Describes the progress of the AMI store tasks. You can describe the store tasks for specified AMIs. If you don't specify the AMIs, you get a paginated list of store tasks from the last 31 days. For each AMI task, the response indicates if the task is InProgress, Completed, or Failed. For tasks InProgress, the response shows the estimated progress as a percentage. Tasks are listed in reverse chronological order. Currently, only tasks from the past 31 days can be viewed. To use this API, you must have the required permissions. For more information, see Permissions for storing and restoring AMIs using Amazon S3 in the Amazon Elastic Compute Cloud User Guide. For more information, see Store and restore an AMI using Amazon S3 in the Amazon Elastic Compute Cloud User Guide.
    */
   describeStoreImageTasks(callback?: (err: AWSError, data: EC2.Types.DescribeStoreImageTasksResult) => void): Request<EC2.Types.DescribeStoreImageTasksResult, AWSError>;
   /**
@@ -2997,11 +2997,11 @@ declare class EC2 extends Service {
    */
   modifyIdentityIdFormat(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time. You can use the Attribute parameter to specify the attribute or one of the following parameters: Description, LaunchPermission, or ProductCode. AWS Marketplace product codes cannot be modified. Images with an AWS Marketplace product code cannot be made public. To enable the SriovNetSupport enhanced networking attribute of an image, enable SriovNetSupport on an instance and create an AMI from the instance.
+   * Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time. You can use the Attribute parameter to specify the attribute or one of the following parameters: Description or LaunchPermission. Images with an Amazon Web Services Marketplace product code cannot be made public. To enable the SriovNetSupport enhanced networking attribute of an image, enable SriovNetSupport on an instance and create an AMI from the instance.
    */
   modifyImageAttribute(params: EC2.Types.ModifyImageAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time. You can use the Attribute parameter to specify the attribute or one of the following parameters: Description, LaunchPermission, or ProductCode. AWS Marketplace product codes cannot be modified. Images with an AWS Marketplace product code cannot be made public. To enable the SriovNetSupport enhanced networking attribute of an image, enable SriovNetSupport on an instance and create an AMI from the instance.
+   * Modifies the specified attribute of the specified AMI. You can specify only one attribute at a time. You can use the Attribute parameter to specify the attribute or one of the following parameters: Description or LaunchPermission. Images with an Amazon Web Services Marketplace product code cannot be made public. To enable the SriovNetSupport enhanced networking attribute of an image, enable SriovNetSupport on an instance and create an AMI from the instance.
    */
   modifyImageAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -3333,11 +3333,11 @@ declare class EC2 extends Service {
    */
   rebootInstances(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Creating your own AMIs in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself.  If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.  Register a snapshot of a root device volume  You can use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using a block device mapping. You can't set the encryption state of the volume using the block device mapping. If the snapshot is encrypted, or encryption by default is enabled, the root volume of an instance launched from the AMI is encrypted. For more information, see Create a Linux AMI from a snapshot and Use encryption with EBS-backed AMIs in the Amazon Elastic Compute Cloud User Guide.  AWS Marketplace product codes  If any snapshots have AWS Marketplace product codes, they are copied to the new AMI. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Obtaining billing information in the Amazon Elastic Compute Cloud User Guide.
+   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Creating your own AMIs in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself.  If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.  Register a snapshot of a root device volume  You can use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using a block device mapping. You can't set the encryption state of the volume using the block device mapping. If the snapshot is encrypted, or encryption by default is enabled, the root volume of an instance launched from the AMI is encrypted. For more information, see Create a Linux AMI from a snapshot and Use encryption with Amazon EBS-backed AMIs in the Amazon Elastic Compute Cloud User Guide.  Amazon Web Services Marketplace product codes  If any snapshots have Amazon Web Services Marketplace product codes, they are copied to the new AMI. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the Amazon EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Understanding AMI billing in the Amazon Elastic Compute Cloud User Guide.
    */
   registerImage(params: EC2.Types.RegisterImageRequest, callback?: (err: AWSError, data: EC2.Types.RegisterImageResult) => void): Request<EC2.Types.RegisterImageResult, AWSError>;
   /**
-   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Creating your own AMIs in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself.  If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.  Register a snapshot of a root device volume  You can use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using a block device mapping. You can't set the encryption state of the volume using the block device mapping. If the snapshot is encrypted, or encryption by default is enabled, the root volume of an instance launched from the AMI is encrypted. For more information, see Create a Linux AMI from a snapshot and Use encryption with EBS-backed AMIs in the Amazon Elastic Compute Cloud User Guide.  AWS Marketplace product codes  If any snapshots have AWS Marketplace product codes, they are copied to the new AMI. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Obtaining billing information in the Amazon Elastic Compute Cloud User Guide.
+   * Registers an AMI. When you're creating an AMI, this is the final step you must complete before you can launch an instance from the AMI. For more information about creating AMIs, see Creating your own AMIs in the Amazon Elastic Compute Cloud User Guide.  For Amazon EBS-backed instances, CreateImage creates and registers the AMI in a single request, so you don't have to register the AMI yourself.  If needed, you can deregister an AMI at any time. Any modifications you make to an AMI backed by an instance store volume invalidates its registration. If you make changes to an image, deregister the previous image and register the new image.  Register a snapshot of a root device volume  You can use RegisterImage to create an Amazon EBS-backed Linux AMI from a snapshot of a root device volume. You specify the snapshot using a block device mapping. You can't set the encryption state of the volume using the block device mapping. If the snapshot is encrypted, or encryption by default is enabled, the root volume of an instance launched from the AMI is encrypted. For more information, see Create a Linux AMI from a snapshot and Use encryption with Amazon EBS-backed AMIs in the Amazon Elastic Compute Cloud User Guide.  Amazon Web Services Marketplace product codes  If any snapshots have Amazon Web Services Marketplace product codes, they are copied to the new AMI. Windows and some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and SUSE Linux Enterprise Server (SLES), use the Amazon EC2 billing product code associated with an AMI to verify the subscription status for package updates. To create a new AMI for operating systems that require a billing product code, instead of registering the AMI, do the following to preserve the billing product code association:   Launch an instance from an existing AMI with that billing product code.   Customize the instance.   Create an AMI from the instance using CreateImage.   If you purchase a Reserved Instance to apply to an On-Demand Instance that was launched from an AMI with a billing product code, make sure that the Reserved Instance has the matching billing product code. If you purchase a Reserved Instance without the matching billing product code, the Reserved Instance will not be applied to the On-Demand Instance. For information about how to obtain the platform details and billing information of an AMI, see Understanding AMI billing in the Amazon Elastic Compute Cloud User Guide.
    */
   registerImage(callback?: (err: AWSError, data: EC2.Types.RegisterImageResult) => void): Request<EC2.Types.RegisterImageResult, AWSError>;
   /**
@@ -3517,11 +3517,11 @@ declare class EC2 extends Service {
    */
   resetFpgaImageAttribute(callback?: (err: AWSError, data: EC2.Types.ResetFpgaImageAttributeResult) => void): Request<EC2.Types.ResetFpgaImageAttributeResult, AWSError>;
   /**
-   * Resets an attribute of an AMI to its default value.  The productCodes attribute can't be reset. 
+   * Resets an attribute of an AMI to its default value.
    */
   resetImageAttribute(params: EC2.Types.ResetImageAttributeRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Resets an attribute of an AMI to its default value.  The productCodes attribute can't be reset. 
+   * Resets an attribute of an AMI to its default value.
    */
   resetImageAttribute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -3637,11 +3637,11 @@ declare class EC2 extends Service {
    */
   sendDiagnosticInterrupt(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. For more information, see Stopping instances in the Amazon EC2 User Guide.
+   * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. If you attempt to start a T3 instance with host tenancy and the unlimted CPU credit option, the request fails. The unlimited CPU credit option is not supported on Dedicated Hosts. Before you start the instance, either change its CPU credit option to standard, or change its tenancy to default or dedicated. For more information, see Stopping instances in the Amazon EC2 User Guide.
    */
   startInstances(params: EC2.Types.StartInstancesRequest, callback?: (err: AWSError, data: EC2.Types.StartInstancesResult) => void): Request<EC2.Types.StartInstancesResult, AWSError>;
   /**
-   * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. For more information, see Stopping instances in the Amazon EC2 User Guide.
+   * Starts an Amazon EBS-backed instance that you've previously stopped. Instances that use Amazon EBS volumes as their root devices can be quickly stopped and started. When an instance is stopped, the compute resources are released and you are not billed for instance usage. However, your root partition Amazon EBS volume remains and continues to persist your data, and you are charged for Amazon EBS volume usage. You can restart your instance at any time. Every time you start your instance, Amazon EC2 charges a one-minute minimum for instance usage, and thereafter charges per second for instance usage. Before stopping an instance, make sure it is in a state from which it can be restarted. Stopping an instance does not preserve data stored in RAM. Performing this operation on an instance that uses an instance store as its root device returns an error. If you attempt to start a T3 instance with host tenancy and the unlimted CPU credit option, the request fails. The unlimited CPU credit option is not supported on Dedicated Hosts. Before you start the instance, either change its CPU credit option to standard, or change its tenancy to default or dedicated. For more information, see Stopping instances in the Amazon EC2 User Guide.
    */
   startInstances(callback?: (err: AWSError, data: EC2.Types.StartInstancesResult) => void): Request<EC2.Types.StartInstancesResult, AWSError>;
   /**
@@ -4562,7 +4562,7 @@ declare namespace EC2 {
   }
   export type ArchitectureType = "i386"|"x86_64"|"arm64"|string;
   export type ArchitectureTypeList = ArchitectureType[];
-  export type ArchitectureValues = "i386"|"x86_64"|"arm64"|string;
+  export type ArchitectureValues = "i386"|"x86_64"|"arm64"|"x86_64_mac"|string;
   export type ArnList = ResourceArn[];
   export interface AssignIpv6AddressesRequest {
     /**
@@ -6475,11 +6475,11 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
-     * Specifies whether the destination snapshots of the copied image should be encrypted. You can encrypt a copy of an unencrypted snapshot, but you cannot create an unencrypted copy of an encrypted snapshot. The default CMK for EBS is used unless you specify a non-default AWS Key Management Service (AWS KMS) CMK using KmsKeyId. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
+     * Specifies whether the destination snapshots of the copied image should be encrypted. You can encrypt a copy of an unencrypted snapshot, but you cannot create an unencrypted copy of an encrypted snapshot. The default KMS key for Amazon EBS is used unless you specify a non-default Key Management Service (KMS) KMS key using KmsKeyId. For more information, see Amazon EBS Encryption in the Amazon Elastic Compute Cloud User Guide.
      */
     Encrypted?: Boolean;
     /**
-     * The identifier of the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating encrypted volumes. If this parameter is not specified, your AWS managed CMK for EBS is used. If you specify a CMK, you must also set the encrypted state to true. You can specify a CMK using any of the following:   Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias. For example, alias/ExampleAlias.   Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.   Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   AWS authenticates the CMK asynchronously. Therefore, if you specify an identifier that is not valid, the action can appear to complete, but eventually fails. The specified CMK must exist in the destination Region. Amazon EBS does not support asymmetric CMKs.
+     * The identifier of the symmetric Key Management Service (KMS) KMS key to use when creating encrypted volumes. If this parameter is not specified, your Amazon Web Services managed KMS key for Amazon EBS is used. If you specify a KMS key, you must also set the encrypted state to true. You can specify a KMS key using any of the following:   Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab.   Key alias. For example, alias/ExampleAlias.   Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab.   Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.   Amazon Web Services authenticates the KMS key asynchronously. Therefore, if you specify an identifier that is not valid, the action can appear to complete, but eventually fails. The specified KMS key must exist in the destination Region. Amazon EBS does not support asymmetric KMS keys.
      */
     KmsKeyId?: KmsKeyId;
     /**
@@ -6495,7 +6495,7 @@ declare namespace EC2 {
      */
     SourceRegion: String;
     /**
-     * The Amazon Resource Name (ARN) of the Outpost to which to copy the AMI. Only specify this parameter when copying an AMI from an AWS Region to an Outpost. The AMI must be in the Region of the destination Outpost. You cannot copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. For more information, see  Copying AMIs from an AWS Region to an Outpost in the Amazon Elastic Compute Cloud User Guide.
+     * The Amazon Resource Name (ARN) of the Outpost to which to copy the AMI. Only specify this parameter when copying an AMI from an Amazon Web Services Region to an Outpost. The AMI must be in the Region of the destination Outpost. You cannot copy an AMI from an Outpost to a Region, from one Outpost to another, or within the same Outpost. For more information, see  Copying AMIs from an Amazon Web Services Region to an Outpost in the Amazon Elastic Compute Cloud User Guide.
      */
     DestinationOutpostArn?: String;
     /**
@@ -7140,11 +7140,11 @@ declare namespace EC2 {
      */
     Name: String;
     /**
-     * By default, Amazon EC2 attempts to shut down and reboot the instance before creating the image. If the No Reboot option is set, Amazon EC2 doesn't shut down the instance before creating the image. When this option is used, file system integrity on the created image can't be guaranteed.
+     * By default, Amazon EC2 attempts to shut down and reboot the instance before creating the image. If the No Reboot option is set, Amazon EC2 doesn't shut down the instance before creating the image. Without a reboot, the AMI will be crash consistent (all the volumes are snapshotted at the same time), but not application consistent (all the operating system buffers are not flushed to disk before the snapshots are created).
      */
     NoReboot?: Boolean;
     /**
-     * The tags to apply to the AMI and snapshots on creation. You can tag the AMI, the snapshots, or both.   To tag the AMI, the value for ResourceType must be image.   To tag the snapshots that are created of the root volume and of other EBS volumes that are attached to the instance, the value for ResourceType must be snapshot. The same tag is applied to all of the snapshots that are created.   If you specify other values for ResourceType, the request fails. To tag an AMI or snapshot after it has been created, see CreateTags. 
+     * The tags to apply to the AMI and snapshots on creation. You can tag the AMI, the snapshots, or both.   To tag the AMI, the value for ResourceType must be image.   To tag the snapshots that are created of the root volume and of other Amazon EBS volumes that are attached to the instance, the value for ResourceType must be snapshot. The same tag is applied to all of the snapshots that are created.   If you specify other values for ResourceType, the request fails. To tag an AMI or snapshot after it has been created, see CreateTags. 
      */
     TagSpecifications?: TagSpecificationList;
   }
@@ -7729,7 +7729,7 @@ declare namespace EC2 {
   }
   export interface CreateRestoreImageTaskRequest {
     /**
-     * The name of the S3 bucket that contains the stored AMI object.
+     * The name of the Amazon S3 bucket that contains the stored AMI object.
      */
     Bucket: String;
     /**
@@ -7955,11 +7955,11 @@ declare namespace EC2 {
      */
     ImageId: ImageId;
     /**
-     * The name of the S3 bucket in which the AMI object will be stored. The bucket must be in the Region in which the request is being made. The AMI object appears in the bucket only after the upload task has completed. 
+     * The name of the Amazon S3 bucket in which the AMI object will be stored. The bucket must be in the Region in which the request is being made. The AMI object appears in the bucket only after the upload task has completed. 
      */
     Bucket: String;
     /**
-     * The tags to apply to the AMI object that will be stored in the S3 bucket. 
+     * The tags to apply to the AMI object that will be stored in the Amazon S3 bucket. 
      */
     S3ObjectTags?: S3ObjectTagList;
     /**
@@ -8758,6 +8758,10 @@ declare namespace EC2 {
   }
   export interface CreateVpcRequest {
     /**
+     * The IPv4 network range for the VPC, in CIDR notation. For example, 10.0.0.0/16. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
+     */
+    CidrBlock: String;
+    /**
      * Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length for the VPC. You cannot specify the range of IP addresses, or the size of the CIDR block.
      */
     AmazonProvidedIpv6CidrBlock?: Boolean;
@@ -8785,10 +8789,6 @@ declare namespace EC2 {
      * The tags to assign to the VPC.
      */
     TagSpecifications?: TagSpecificationList;
-    /**
-     * The IPv4 network range for the VPC, in CIDR notation. For example, 10.0.0.0/16. We modify the specified CIDR block to its canonical form; for example, if you specify 100.68.0.18/18, we modify it to 100.68.0.0/18.
-     */
-    CidrBlock: String;
   }
   export interface CreateVpcResult {
     /**
@@ -11114,11 +11114,11 @@ declare namespace EC2 {
   }
   export interface DescribeImagesRequest {
     /**
-     * Scopes the images by users with explicit launch permissions. Specify an AWS account ID, self (the sender of the request), or all (public AMIs).
+     * Scopes the images by users with explicit launch permissions. Specify an Amazon Web Services account ID, self (the sender of the request), or all (public AMIs).
      */
     ExecutableUsers?: ExecutableByStringList;
     /**
-     * The filters.    architecture - The image architecture (i386 | x86_64 | arm64).    block-device-mapping.delete-on-termination - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.snapshot-id - The ID of the snapshot used for the EBS volume.    block-device-mapping.volume-size - The volume size of the EBS volume, in GiB.    block-device-mapping.volume-type - The volume type of the EBS volume (gp2 | io1 | io2 | st1 | sc1 | standard).    block-device-mapping.encrypted - A Boolean that indicates whether the EBS volume is encrypted.    description - The description of the image (provided during image creation).    ena-support - A Boolean that indicates whether enhanced networking with ENA is enabled.    hypervisor - The hypervisor type (ovm | xen).    image-id - The ID of the image.    image-type - The image type (machine | kernel | ramdisk).    is-public - A Boolean that indicates whether the image is public.    kernel-id - The kernel ID.    manifest-location - The location of the image manifest.    name - The name of the AMI (provided during image creation).    owner-alias - The owner alias (amazon | aws-marketplace). The valid aliases are defined in an Amazon-maintained list. This is not the AWS account alias that can be set using the IAM console. We recommend that you use the Owner request parameter instead of this filter.    owner-id - The AWS account ID of the owner. We recommend that you use the Owner request parameter instead of this filter.    platform - The platform. To only list Windows-based AMIs, use windows.    product-code - The product code.    product-code.type - The type of the product code (devpay | marketplace).    ramdisk-id - The RAM disk ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    state - The state of the image (available | pending | failed).    state-reason-code - The reason code for the state change.    state-reason-message - The message for the state change.    sriov-net-support - A value of simple indicates that enhanced networking with the Intel 82599 VF interface is enabled.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    virtualization-type - The virtualization type (paravirtual | hvm).  
+     * The filters.    architecture - The image architecture (i386 | x86_64 | arm64).    block-device-mapping.delete-on-termination - A Boolean value that indicates whether the Amazon EBS volume is deleted on instance termination.    block-device-mapping.device-name - The device name specified in the block device mapping (for example, /dev/sdh or xvdh).    block-device-mapping.snapshot-id - The ID of the snapshot used for the Amazon EBS volume.    block-device-mapping.volume-size - The volume size of the Amazon EBS volume, in GiB.    block-device-mapping.volume-type - The volume type of the Amazon EBS volume (io1 | io2 | gp2 | gp3 | sc1 | st1 | standard).    block-device-mapping.encrypted - A Boolean that indicates whether the Amazon EBS volume is encrypted.    description - The description of the image (provided during image creation).    ena-support - A Boolean that indicates whether enhanced networking with ENA is enabled.    hypervisor - The hypervisor type (ovm | xen).    image-id - The ID of the image.    image-type - The image type (machine | kernel | ramdisk).    is-public - A Boolean that indicates whether the image is public.    kernel-id - The kernel ID.    manifest-location - The location of the image manifest.    name - The name of the AMI (provided during image creation).    owner-alias - The owner alias (amazon | aws-marketplace). The valid aliases are defined in an Amazon-maintained list. This is not the Amazon Web Services account alias that can be set using the IAM console. We recommend that you use the Owner request parameter instead of this filter.    owner-id - The Amazon Web Services account ID of the owner. We recommend that you use the Owner request parameter instead of this filter.    platform - The platform. To only list Windows-based AMIs, use windows.    product-code - The product code.    product-code.type - The type of the product code (marketplace).    ramdisk-id - The RAM disk ID.    root-device-name - The device name of the root device volume (for example, /dev/sda1).    root-device-type - The type of the root device volume (ebs | instance-store).    state - The state of the image (available | pending | failed).    state-reason-code - The reason code for the state change.    state-reason-message - The message for the state change.    sriov-net-support - A value of simple indicates that enhanced networking with the Intel 82599 VF interface is enabled.    tag:&lt;key&gt; - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value. For example, to find all resources that have a tag with the key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for the filter value.    tag-key - The key of a tag assigned to the resource. Use this filter to find all resources assigned a tag with a specific key, regardless of the tag value.    virtualization-type - The virtualization type (paravirtual | hvm).  
      */
     Filters?: FilterList;
     /**
@@ -11126,7 +11126,7 @@ declare namespace EC2 {
      */
     ImageIds?: ImageIdStringList;
     /**
-     * Scopes the results to images with the specified owners. You can specify a combination of AWS account IDs, self, amazon, and aws-marketplace. If you omit this parameter, the results include all images for which you have launch permissions, regardless of ownership.
+     * Scopes the results to images with the specified owners. You can specify a combination of Amazon Web Services account IDs, self, amazon, and aws-marketplace. If you omit this parameter, the results include all images for which you have launch permissions, regardless of ownership.
      */
     Owners?: OwnerStringList;
     /**
@@ -11377,7 +11377,7 @@ declare namespace EC2 {
      */
     InstanceTypes?: RequestInstanceTypeList;
     /**
-     * One or more filters. Filter names and values are case-sensitive.    auto-recovery-supported - Indicates whether auto recovery is supported (true | false).    bare-metal - Indicates whether it is a bare metal instance type (true | false).    burstable-performance-supported - Indicates whether it is a burstable performance instance type (true | false).    current-generation - Indicates whether this instance type is the latest generation instance type of an instance family (true | false).    ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps - The baseline bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.baseline-iops - The baseline input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.baseline-throughput-in-mbps - The baseline throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps - The maximum bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.maximum-iops - The maximum input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.maximum-throughput-in-mbps - The maximum throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-support - Indicates whether the instance type is EBS-optimized (supported | unsupported | default).    ebs-info.encryption-support - Indicates whether EBS encryption is supported (supported | unsupported).    ebs-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for EBS volumes (required | supported | unsupported).    free-tier-eligible - Indicates whether the instance type is eligible to use in the free tier (true | false).    hibernation-supported - Indicates whether On-Demand hibernation is supported (true | false).    hypervisor - The hypervisor (nitro | xen).    instance-storage-info.disk.count - The number of local disks.    instance-storage-info.disk.size-in-gb - The storage size of each instance storage disk, in GB.    instance-storage-info.disk.type - The storage technology for the local instance storage disks (hdd | ssd).    instance-storage-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for instance store (required | supported) | unsupported).    instance-storage-info.total-size-in-gb - The total amount of storage available from all local instance storage, in GB.    instance-storage-supported - Indicates whether the instance type has local instance storage (true | false).    instance-type - The instance type (for example c5.2xlarge or c5*).    memory-info.size-in-mib - The memory size.    network-info.efa-info.maximum-efa-interfaces - The maximum number of Elastic Fabric Adapters (EFAs) per instance.    network-info.efa-supported - Indicates whether the instance type supports Elastic Fabric Adapter (EFA) (true | false).    network-info.ena-support - Indicates whether Elastic Network Adapter (ENA) is supported or required (required | supported | unsupported).    network-info.encryption-in-transit-supported - Indicates whether the instance type automatically encrypts in-transit traffic between instances.    network-info.ipv4-addresses-per-interface - The maximum number of private IPv4 addresses per network interface.    network-info.ipv6-addresses-per-interface - The maximum number of private IPv6 addresses per network interface.    network-info.ipv6-supported - Indicates whether the instance type supports IPv6 (true | false).    network-info.maximum-network-interfaces - The maximum number of network interfaces per instance.    network-info.network-performance - The network performance (for example, "25 Gigabit").    processor-info.supported-architecture - The CPU architecture (arm64 | i386 | x86_64).    processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.    supported-boot-mode - The boot mode (legacy-bios | uefi).    supported-root-device-type - The root device type (ebs | instance-store).    supported-usage-class - The usage class (on-demand | spot).    supported-virtualization-type - The virtualization type (hvm | paravirtual).    vcpu-info.default-cores - The default number of cores for the instance type.    vcpu-info.default-threads-per-core - The default number of threads per core for the instance type.    vcpu-info.default-vcpus - The default number of vCPUs for the instance type.    vcpu-info.valid-cores - The number of cores that can be configured for the instance type.    vcpu-info.valid-threads-per-core - The number of threads per core that can be configured for the instance type. For example, "1" or "1,2".  
+     * One or more filters. Filter names and values are case-sensitive.    auto-recovery-supported - Indicates whether auto recovery is supported (true | false).    bare-metal - Indicates whether it is a bare metal instance type (true | false).    burstable-performance-supported - Indicates whether it is a burstable performance instance type (true | false).    current-generation - Indicates whether this instance type is the latest generation instance type of an instance family (true | false).    ebs-info.ebs-optimized-info.baseline-bandwidth-in-mbps - The baseline bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.baseline-iops - The baseline input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.baseline-throughput-in-mbps - The baseline throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-info.maximum-bandwidth-in-mbps - The maximum bandwidth performance for an EBS-optimized instance type, in Mbps.    ebs-info.ebs-optimized-info.maximum-iops - The maximum input/output storage operations per second for an EBS-optimized instance type.    ebs-info.ebs-optimized-info.maximum-throughput-in-mbps - The maximum throughput performance for an EBS-optimized instance type, in MB/s.    ebs-info.ebs-optimized-support - Indicates whether the instance type is EBS-optimized (supported | unsupported | default).    ebs-info.encryption-support - Indicates whether EBS encryption is supported (supported | unsupported).    ebs-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for EBS volumes (required | supported | unsupported).    free-tier-eligible - Indicates whether the instance type is eligible to use in the free tier (true | false).    hibernation-supported - Indicates whether On-Demand hibernation is supported (true | false).    hypervisor - The hypervisor (nitro | xen).    instance-storage-info.disk.count - The number of local disks.    instance-storage-info.disk.size-in-gb - The storage size of each instance storage disk, in GB.    instance-storage-info.disk.type - The storage technology for the local instance storage disks (hdd | ssd).    instance-storage-info.nvme-support - Indicates whether non-volatile memory express (NVMe) is supported for instance store (required | supported) | unsupported).    instance-storage-info.total-size-in-gb - The total amount of storage available from all local instance storage, in GB.    instance-storage-supported - Indicates whether the instance type has local instance storage (true | false).    instance-type - The instance type (for example c5.2xlarge or c5*).    memory-info.size-in-mib - The memory size.    network-info.efa-info.maximum-efa-interfaces - The maximum number of Elastic Fabric Adapters (EFAs) per instance.    network-info.efa-supported - Indicates whether the instance type supports Elastic Fabric Adapter (EFA) (true | false).    network-info.ena-support - Indicates whether Elastic Network Adapter (ENA) is supported or required (required | supported | unsupported).    network-info.encryption-in-transit-supported - Indicates whether the instance type automatically encrypts in-transit traffic between instances (true | false).    network-info.ipv4-addresses-per-interface - The maximum number of private IPv4 addresses per network interface.    network-info.ipv6-addresses-per-interface - The maximum number of private IPv6 addresses per network interface.    network-info.ipv6-supported - Indicates whether the instance type supports IPv6 (true | false).    network-info.maximum-network-interfaces - The maximum number of network interfaces per instance.    network-info.network-performance - The network performance (for example, "25 Gigabit").    processor-info.supported-architecture - The CPU architecture (arm64 | i386 | x86_64).    processor-info.sustained-clock-speed-in-ghz - The CPU clock speed, in GHz.    supported-boot-mode - The boot mode (legacy-bios | uefi).    supported-root-device-type - The root device type (ebs | instance-store).    supported-usage-class - The usage class (on-demand | spot).    supported-virtualization-type - The virtualization type (hvm | paravirtual).    vcpu-info.default-cores - The default number of cores for the instance type.    vcpu-info.default-threads-per-core - The default number of threads per core for the instance type.    vcpu-info.default-vcpus - The default number of vCPUs for the instance type.    vcpu-info.valid-cores - The number of cores that can be configured for the instance type.    vcpu-info.valid-threads-per-core - The number of threads per core that can be configured for the instance type. For example, "1" or "1,2".  
      */
     Filters?: FilterList;
     /**
@@ -15019,7 +15019,7 @@ declare namespace EC2 {
      */
     EventDescription?: String;
     /**
-     * The event. The following are the error events:    iamFleetRoleInvalid - The EC2 Fleet or Spot Fleet did not have the required permissions either to launch or terminate an instance.    spotFleetRequestConfigurationInvalid - The configuration is not valid. For more information, see the description of the event.    spotInstanceCountLimitExceeded - You've reached the limit on the number of Spot Instances that you can launch.   The following are the fleetRequestChange events:    active - The EC2 Fleet or Spot Fleet request has been validated and Amazon EC2 is attempting to maintain the target number of running Spot Instances.    cancelled - The EC2 Fleet or Spot Fleet request is canceled and has no running Spot Instances. The EC2 Fleet or Spot Fleet will be deleted two days after its instances were terminated.    cancelled_running - The EC2 Fleet or Spot Fleet request is canceled and does not launch additional Spot Instances. Existing Spot Instances continue to run until they are interrupted or terminated.    cancelled_terminating - The EC2 Fleet or Spot Fleet request is canceled and its Spot Instances are terminating.    expired - The EC2 Fleet or Spot Fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with TerminateInstancesWithExpiration set.    modify_in_progress - A request to modify the EC2 Fleet or Spot Fleet request was accepted and is in progress.    modify_succeeded - The EC2 Fleet or Spot Fleet request was modified.    price_update - The price for a launch configuration was adjusted because it was too high. This change is permanent.    submitted - The EC2 Fleet or Spot Fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot Instances.   The following are the instanceChange events:    launched - A request was fulfilled and a new instance was launched.    terminated - An instance was terminated by the user.   The following are the Information events:    launchSpecTemporarilyBlacklisted - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.    launchSpecUnusable - The price in a launch specification is not valid because it is below the Spot price or the Spot price is above the On-Demand price.    fleetProgressHalted - The price in every launch specification is not valid. A launch specification might become valid if the Spot price changes.  
+     * The event. The following are the error events:    iamFleetRoleInvalid - The EC2 Fleet or Spot Fleet did not have the required permissions either to launch or terminate an instance.    spotFleetRequestConfigurationInvalid - The configuration is not valid. For more information, see the description of the event.    spotInstanceCountLimitExceeded - You've reached the limit on the number of Spot Instances that you can launch.   The following are the fleetRequestChange events:    active - The EC2 Fleet or Spot Fleet request has been validated and Amazon EC2 is attempting to maintain the target number of running Spot Instances.    cancelled - The EC2 Fleet or Spot Fleet request is canceled and has no running Spot Instances. The EC2 Fleet or Spot Fleet will be deleted two days after its instances were terminated.    cancelled_running - The EC2 Fleet or Spot Fleet request is canceled and does not launch additional Spot Instances. Existing Spot Instances continue to run until they are interrupted or terminated.    cancelled_terminating - The EC2 Fleet or Spot Fleet request is canceled and its Spot Instances are terminating.    expired - The EC2 Fleet or Spot Fleet request has expired. A subsequent event indicates that the instances were terminated, if the request was created with TerminateInstancesWithExpiration set.    modify_in_progress - A request to modify the EC2 Fleet or Spot Fleet request was accepted and is in progress.    modify_succeeded - The EC2 Fleet or Spot Fleet request was modified.    submitted - The EC2 Fleet or Spot Fleet request is being evaluated and Amazon EC2 is preparing to launch the target number of Spot Instances.   The following are the instanceChange events:    launched - A request was fulfilled and a new instance was launched.    terminated - An instance was terminated by the user.   The following are the Information events:    launchSpecTemporarilyBlacklisted - The configuration is not valid and several attempts to launch instances have failed. For more information, see the description of the event.    launchSpecUnusable - The price in a launch specification is not valid because it is below the Spot price or the Spot price is above the On-Demand price.    fleetProgressHalted - The price in every launch specification is not valid. A launch specification might become valid if the Spot price changes.  
      */
     EventSubType?: String;
     /**
@@ -17039,7 +17039,7 @@ declare namespace EC2 {
      */
     KernelId?: String;
     /**
-     * The AWS account ID of the image owner.
+     * The ID of the Amazon Web Services account that owns the image.
      */
     OwnerId?: String;
     /**
@@ -17047,11 +17047,11 @@ declare namespace EC2 {
      */
     Platform?: PlatformValues;
     /**
-     * The platform details associated with the billing code of the AMI. For more information, see Obtaining Billing Information in the Amazon Elastic Compute Cloud User Guide.
+     * The platform details associated with the billing code of the AMI. For more information, see Understanding AMI billing in the Amazon Elastic Compute Cloud User Guide.
      */
     PlatformDetails?: String;
     /**
-     * The operation of the Amazon EC2 instance and the billing code that is associated with the AMI. usageOperation corresponds to the lineitem/Operation column on your AWS Cost and Usage Report and in the AWS Price List API. For the list of UsageOperation codes, see Platform Details and Usage Operation Billing Codes in the Amazon Elastic Compute Cloud User Guide.
+     * The operation of the Amazon EC2 instance and the billing code that is associated with the AMI. usageOperation corresponds to the lineitem/Operation column on your Amazon Web Services Cost and Usage Report and in the Amazon Web Services Price List API. You can view these fields on the Instances or AMIs pages in the Amazon EC2 console, or in the responses that are returned by the DescribeImages command in the Amazon EC2 API, or the describe-images command in the CLI.
      */
     UsageOperation?: String;
     /**
@@ -17083,7 +17083,7 @@ declare namespace EC2 {
      */
     Hypervisor?: HypervisorType;
     /**
-     * The AWS account alias (for example, amazon, self) or the AWS account ID of the AMI owner.
+     * The Amazon Web Services account alias (for example, amazon, self) or the Amazon Web Services account ID of the AMI owner.
      */
     ImageOwnerAlias?: String;
     /**
@@ -17095,7 +17095,7 @@ declare namespace EC2 {
      */
     RootDeviceName?: String;
     /**
-     * The type of root device used by the AMI. The AMI can use an EBS volume or an instance store volume.
+     * The type of root device used by the AMI. The AMI can use an Amazon EBS volume or an instance store volume.
      */
     RootDeviceType?: DeviceType;
     /**
@@ -18081,7 +18081,7 @@ declare namespace EC2 {
      */
     InstanceId?: InstanceId;
     /**
-     * The credit option for CPU usage of the instance. Valid values are standard and unlimited.
+     * The credit option for CPU usage of the instance. Valid values are standard and unlimited. T3 instances with host tenancy do not support the unlimited CPU credit option.
      */
     CpuCredits?: String;
   }
@@ -19077,18 +19077,18 @@ declare namespace EC2 {
      */
     Group?: PermissionGroup;
     /**
-     * The AWS account ID. Constraints: Up to 10 000 account IDs can be specified in a single request.
+     * The Amazon Web Services account ID. Constraints: Up to 10 000 account IDs can be specified in a single request.
      */
     UserId?: String;
   }
   export type LaunchPermissionList = LaunchPermission[];
   export interface LaunchPermissionModifications {
     /**
-     * The AWS account ID to add to the list of launch permissions for the AMI.
+     * The Amazon Web Services account ID to add to the list of launch permissions for the AMI.
      */
     Add?: LaunchPermissionList;
     /**
-     * The AWS account ID to remove from the list of launch permissions for the AMI.
+     * The Amazon Web Services account ID to remove from the list of launch permissions for the AMI.
      */
     Remove?: LaunchPermissionList;
   }
@@ -20184,7 +20184,7 @@ declare namespace EC2 {
      */
     AddressFamily?: String;
     /**
-     * The state of the prefix list.
+     * The current state of the prefix list.
      */
     State?: PrefixListState;
     /**
@@ -20283,7 +20283,7 @@ declare namespace EC2 {
      */
     CapacityReservationId: CapacityReservationId;
     /**
-     * The number of instances for which to reserve capacity. Valid range: 1 - 1000
+     * The number of instances for which to reserve capacity. The number of instances can't be increased or decreased by more than 1000 in a single request.
      */
     InstanceCount?: Integer;
     /**
@@ -20539,7 +20539,7 @@ declare namespace EC2 {
   }
   export interface ModifyImageAttributeRequest {
     /**
-     * The name of the attribute to modify. The valid values are description, launchPermission, and productCodes.
+     * The name of the attribute to modify. The valid values are description and launchPermission.
      */
     Attribute?: String;
     /**
@@ -20559,7 +20559,7 @@ declare namespace EC2 {
      */
     OperationType?: OperationType;
     /**
-     * The DevPay product codes. After you add a product code to an AMI, it can't be removed.
+     * Not supported.
      */
     ProductCodes?: ProductCodeStringList;
     /**
@@ -20567,11 +20567,11 @@ declare namespace EC2 {
      */
     UserGroups?: UserGroupStringList;
     /**
-     * The AWS account IDs. This parameter can be used only when the Attribute parameter is launchPermission.
+     * The Amazon Web Services account IDs. This parameter can be used only when the Attribute parameter is launchPermission.
      */
     UserIds?: UserIdStringList;
     /**
-     * The value of the attribute being modified. This parameter can be used only when the Attribute parameter is description or productCodes.
+     * The value of the attribute being modified. This parameter can be used only when the Attribute parameter is description.
      */
     Value?: String;
     /**
@@ -20792,7 +20792,7 @@ declare namespace EC2 {
      */
     InstanceId: InstanceId;
     /**
-     * The tenancy for the instance.
+     * The tenancy for the instance. For T3 instances, you can't change the tenancy from dedicated to host, or from host to dedicated. Attempting to make one of these unsupported tenancy changes results in the InvalidTenancy error code.
      */
     Tenancy?: HostTenancy;
     /**
@@ -20864,7 +20864,7 @@ declare namespace EC2 {
      */
     RemoveEntries?: RemovePrefixListEntries;
     /**
-     * The maximum number of entries for the prefix list. You cannot modify the entries of a prefix list and modify the size of a prefix list at the same time.
+     * The maximum number of entries for the prefix list. You cannot modify the entries of a prefix list and modify the size of a prefix list at the same time. If any of the resources that reference the prefix list cannot support the new maximum size, the modify operation fails. Check the state message for the IDs of the first ten resources that do not support the new maximum size.
      */
     MaxEntries?: Integer;
   }
@@ -22617,7 +22617,7 @@ declare namespace EC2 {
      */
     HostId?: String;
     /**
-     * The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the ImportInstance command. This parameter is not supported by CreateFleet.
+     * The tenancy of the instance (if the instance is running in a VPC). An instance with a tenancy of dedicated runs on single-tenant hardware. The host tenancy is not supported for the ImportInstance command. This parameter is not supported by CreateFleet. T3 instances that use the unlimited CPU credit option do not support host tenancy.
      */
     Tenancy?: Tenancy;
     /**
@@ -23220,7 +23220,7 @@ declare namespace EC2 {
      */
     Architecture?: ArchitectureValues;
     /**
-     * The block device mapping entries. If you specify an EBS volume using the ID of an EBS snapshot, you can't specify the encryption state of the volume. If you create an AMI on an Outpost, then all backing snapshots must be on the same Outpost or in the Region of that Outpost. AMIs on an Outpost that include local snapshots can be used to launch instances on the same Outpost only. For more information,  Amazon EBS local snapshots on Outposts in the Amazon Elastic Compute Cloud User Guide.
+     * The block device mapping entries. If you specify an Amazon EBS volume using the ID of an Amazon EBS snapshot, you can't specify the encryption state of the volume. If you create an AMI on an Outpost, then all backing snapshots must be on the same Outpost or in the Region of that Outpost. AMIs on an Outpost that include local snapshots can be used to launch instances on the same Outpost only. For more information,  Amazon EBS local snapshots on Outposts in the Amazon Elastic Compute Cloud User Guide.
      */
     BlockDeviceMappings?: BlockDeviceMappingRequestList;
     /**
@@ -23244,7 +23244,7 @@ declare namespace EC2 {
      */
     Name: String;
     /**
-     * The billing product codes. Your account must be authorized to specify billing product codes. Otherwise, you can use the AWS Marketplace to bill for the use of an AMI.
+     * The billing product codes. Your account must be authorized to specify billing product codes. Otherwise, you can use the Amazon Web Services Marketplace to bill for the use of an AMI.
      */
     BillingProducts?: BillingProductList;
     /**
@@ -24436,7 +24436,7 @@ declare namespace EC2 {
   export type ResourceArn = string;
   export type ResourceIdList = TaggableResourceId[];
   export type ResourceList = String[];
-  export type ResourceType = "client-vpn-endpoint"|"customer-gateway"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"key-pair"|"launch-template"|"local-gateway-route-table-vpc-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"placement-group"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
+  export type ResourceType = "capacity-reservation"|"client-vpn-endpoint"|"customer-gateway"|"carrier-gateway"|"dedicated-host"|"dhcp-options"|"egress-only-internet-gateway"|"elastic-ip"|"elastic-gpu"|"export-image-task"|"export-instance-task"|"fleet"|"fpga-image"|"host-reservation"|"image"|"import-image-task"|"import-snapshot-task"|"instance"|"instance-event-window"|"internet-gateway"|"ipv4pool-ec2"|"ipv6pool-ec2"|"key-pair"|"launch-template"|"local-gateway"|"local-gateway-route-table"|"local-gateway-virtual-interface"|"local-gateway-virtual-interface-group"|"local-gateway-route-table-vpc-association"|"local-gateway-route-table-virtual-interface-group-association"|"natgateway"|"network-acl"|"network-interface"|"network-insights-analysis"|"network-insights-path"|"placement-group"|"prefix-list"|"replace-root-volume-task"|"reserved-instances"|"route-table"|"security-group"|"security-group-rule"|"snapshot"|"spot-fleet-request"|"spot-instances-request"|"subnet"|"traffic-mirror-filter"|"traffic-mirror-session"|"traffic-mirror-target"|"transit-gateway"|"transit-gateway-attachment"|"transit-gateway-connect-peer"|"transit-gateway-multicast-domain"|"transit-gateway-route-table"|"volume"|"vpc"|"vpc-endpoint"|"vpc-endpoint-service"|"vpc-peering-connection"|"vpn-connection"|"vpn-gateway"|"vpc-flow-log"|string;
   export interface ResponseError {
     /**
      * The error code.
@@ -25010,7 +25010,7 @@ declare namespace EC2 {
      */
     InstanceMarketOptions?: InstanceMarketOptionsRequest;
     /**
-     * The credit option for CPU usage of the burstable performance instance. Valid values are standard and unlimited. To change this attribute after launch, use  ModifyInstanceCreditSpecification. For more information, see Burstable performance instances in the Amazon EC2 User Guide. Default: standard (T2 instances) or unlimited (T3/T3a instances)
+     * The credit option for CPU usage of the burstable performance instance. Valid values are standard and unlimited. To change this attribute after launch, use  ModifyInstanceCreditSpecification. For more information, see Burstable performance instances in the Amazon EC2 User Guide. Default: standard (T2 instances) or unlimited (T3/T3a instances) For T3 instances with host tenancy, only standard is supported.
      */
     CreditSpecification?: CreditSpecificationRequest;
     /**
@@ -25079,7 +25079,7 @@ declare namespace EC2 {
   export type S3ObjectTagList = S3ObjectTag[];
   export interface S3Storage {
     /**
-     * The access key ID of the owner of the bucket. Before you specify a value for your access key ID, review and follow the guidance in Best Practices for Managing AWS Access Keys.
+     * The access key ID of the owner of the bucket. Before you specify a value for your access key ID, review and follow the guidance in Best Practices for Managing Amazon Web Services Access Keys.
      */
     AWSAccessKeyId?: String;
     /**
@@ -26778,7 +26778,7 @@ declare namespace EC2 {
      */
     TaskStartTime?: MillisecondDateTime;
     /**
-     * The name of the S3 bucket that contains the stored AMI object.
+     * The name of the Amazon S3 bucket that contains the stored AMI object.
      */
     Bucket?: String;
     /**
@@ -26993,7 +26993,7 @@ declare namespace EC2 {
   export type TagList = Tag[];
   export interface TagSpecification {
     /**
-     * The type of resource to tag. Currently, the resource types that support tagging on creation are: capacity-reservation | carrier-gateway | client-vpn-endpoint | customer-gateway | dedicated-host | dhcp-options | egress-only-internet-gateway | elastic-ip | elastic-gpu | export-image-task | export-instance-task | fleet | fpga-image | host-reservation | image| import-image-task | import-snapshot-task | instance | instance-event-window | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 | key-pair | launch-template | local-gateway-route-table-vpc-association | placement-group | prefix-list | natgateway | network-acl | network-interface | reserved-instances |route-table | security-group| snapshot | spot-fleet-request | spot-instances-request | snapshot | subnet | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-multicast-domain | transit-gateway-route-table | volume |vpc |  vpc-peering-connection | vpc-endpoint (for interface and gateway endpoints) | vpc-endpoint-service (for Amazon Web Services PrivateLink) | vpc-flow-log | vpn-connection | vpn-gateway. To tag a resource after it has been created, see CreateTags.
+     * The type of resource to tag on creation. The possible values are: capacity-reservation | carrier-gateway | client-vpn-endpoint | customer-gateway | dedicated-host | dhcp-options | egress-only-internet-gateway | elastic-gpu | elastic-ip | export-image-task | export-instance-task | fleet | fpga-image | host-reservation | image | import-image-task | import-snapshot-task | instance | instance-event-window | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 | key-pair | launch-template | local-gateway-route-table-vpc-association | natgateway | network-acl | network-insights-analysis | network-insights-path | network-interface | placement-group | prefix-list | reserved-instances | route-table | security-group | security-group-rule | snapshot | spot-fleet-request | spot-instances-request | subnet | traffic-mirror-filter | traffic-mirror-session | traffic-mirror-target | transit-gateway | transit-gateway-attachment | transit-gateway-multicast-domain | transit-gateway-route-table | volume | vpc | vpc-endpoint | vpc-endpoint-service | vpc-flow-log | vpc-peering-connection | vpn-connection | vpn-gateway. To tag a resource after it has been created, see CreateTags.
      */
     ResourceType?: ResourceType;
     /**
@@ -27051,7 +27051,7 @@ declare namespace EC2 {
   }
   export interface TargetConfigurationRequest {
     /**
-     * The number of instances the Covertible Reserved Instance offering can be applied to. This parameter is reserved and cannot be specified in a request
+     * The number of instances the Convertible Reserved Instance offering can be applied to. This parameter is reserved and cannot be specified in a request
      */
     InstanceCount?: Integer;
     /**

@@ -1965,7 +1965,7 @@ declare namespace Iot {
      */
     cloudwatchLogs?: CloudwatchLogsAction;
     /**
-     * Write data to an Amazon Elasticsearch Service domain.
+     * Write data to an Amazon Elasticsearch Service domain.  This action is deprecated. Use the OpenSearch action instead. 
      */
     elasticsearch?: ElasticsearchAction;
     /**
@@ -2000,6 +2000,10 @@ declare namespace Iot {
      * Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.
      */
     kafka?: KafkaAction;
+    /**
+     * Write data to an Amazon OpenSearch Service domain.
+     */
+    openSearch?: OpenSearchAction;
   }
   export type ActionList = Action[];
   export type ActionType = "PUBLISH"|"SUBSCRIBE"|"RECEIVE"|"CONNECT"|string;
@@ -8426,6 +8430,28 @@ declare namespace Iot {
     creationDate?: DateType;
   }
   export type OTAUpdatesSummary = OTAUpdateSummary[];
+  export interface OpenSearchAction {
+    /**
+     * The IAM role ARN that has access to OpenSearch.
+     */
+    roleArn: AwsArn;
+    /**
+     * The endpoint of your OpenSearch domain.
+     */
+    endpoint: ElasticsearchEndpoint;
+    /**
+     * The OpenSearch index where you want to store your data.
+     */
+    index: ElasticsearchIndex;
+    /**
+     * The type of document you are storing.
+     */
+    type: ElasticsearchType;
+    /**
+     * The unique identifier for the document you are storing.
+     */
+    id: ElasticsearchId;
+  }
   export type OptionalVersion = number;
   export interface OutgoingCertificate {
     /**
@@ -9738,7 +9764,7 @@ declare namespace Iot {
      */
     timestamp?: ConnectivityTimestamp;
     /**
-     * The reason why the client is disconnected.
+     * The reason why the client is disconnected. If the thing has been disconnected for approximately an hour, the disconnectReason value might be missing.
      */
     disconnectReason?: DisconnectReason;
   }

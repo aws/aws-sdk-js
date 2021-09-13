@@ -7414,7 +7414,7 @@
         },
         "elasticsearch": {
           "shape": "ElasticsearchAction",
-          "documentation": "<p>Write data to an Amazon Elasticsearch Service domain.</p>"
+          "documentation": "<p>Write data to an Amazon Elasticsearch Service domain.</p> <note> <p>This action is deprecated. Use the <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearch action</a> instead.</p> </note>"
         },
         "salesforce": {
           "shape": "SalesforceAction",
@@ -7447,6 +7447,10 @@
         "kafka": {
           "shape": "KafkaAction",
           "documentation": "<p>Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or self-managed Apache Kafka cluster.</p>"
+        },
+        "openSearch": {
+          "shape": "OpenSearchAction",
+          "documentation": "<p>Write data to an Amazon OpenSearch Service domain.</p>"
         }
       },
       "documentation": "<p>Describes the actions associated with a rule.</p>"
@@ -13562,7 +13566,7 @@
           "documentation": "<p>The unique identifier for the document you are storing.</p>"
         }
       },
-      "documentation": "<p>Describes an action that writes data to an Amazon Elasticsearch Service domain.</p>"
+      "documentation": "<p>Describes an action that writes data to an Amazon Elasticsearch Service domain.</p> <note> <p>This action is deprecated. Use the <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearch action</a> instead.</p> </note>"
     },
     "ElasticsearchEndpoint": {
       "type": "string",
@@ -18083,6 +18087,39 @@
         "shape": "OTAUpdateSummary"
       }
     },
+    "OpenSearchAction": {
+      "type": "structure",
+      "required": [
+        "roleArn",
+        "endpoint",
+        "index",
+        "type",
+        "id"
+      ],
+      "members": {
+        "roleArn": {
+          "shape": "AwsArn",
+          "documentation": "<p>The IAM role ARN that has access to OpenSearch.</p>"
+        },
+        "endpoint": {
+          "shape": "ElasticsearchEndpoint",
+          "documentation": "<p>The endpoint of your OpenSearch domain.</p>"
+        },
+        "index": {
+          "shape": "ElasticsearchIndex",
+          "documentation": "<p>The OpenSearch index where you want to store your data.</p>"
+        },
+        "type": {
+          "shape": "ElasticsearchType",
+          "documentation": "<p>The type of document you are storing.</p>"
+        },
+        "id": {
+          "shape": "ElasticsearchId",
+          "documentation": "<p>The unique identifier for the document you are storing.</p>"
+        }
+      },
+      "documentation": "<p>Describes an action that writes data to an Amazon OpenSearch Service domain.</p>"
+    },
     "OptionalVersion": {
       "type": "long"
     },
@@ -20482,7 +20519,7 @@
         },
         "disconnectReason": {
           "shape": "DisconnectReason",
-          "documentation": "<p>The reason why the client is disconnected.</p>"
+          "documentation": "<p>The reason why the client is disconnected. If the thing has been disconnected for approximately an hour, the <code>disconnectReason</code> value might be missing.</p>"
         }
       },
       "documentation": "<p>The connectivity status of the thing.</p>"
