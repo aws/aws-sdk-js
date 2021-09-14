@@ -504,6 +504,7 @@ declare namespace Comprehend {
   export type AnyLengthString = string;
   export type AttributeNamesList = AttributeNamesListItem[];
   export type AttributeNamesListItem = string;
+  export type AugmentedManifestsDocumentTypeFormat = "PLAIN_TEXT_DOCUMENT"|"SEMI_STRUCTURED_DOCUMENT"|string;
   export interface AugmentedManifestsListItem {
     /**
      * The Amazon S3 location of the augmented manifest file.
@@ -513,6 +514,18 @@ declare namespace Comprehend {
      * The JSON attribute that contains the annotations for your training documents. The number of attribute names that you specify depends on whether your augmented manifest file is the output of a single labeling job or a chained labeling job. If your file is the output of a single labeling job, specify the LabelAttributeName key that was used when the job was created in Ground Truth. If your file is the output of a chained labeling job, specify the LabelAttributeName key for one or more jobs in the chain. Each LabelAttributeName key provides the annotations from an individual job.
      */
     AttributeNames: AttributeNamesList;
+    /**
+     * The S3 prefix to the annotation files that are referred in the augmented manifest file.
+     */
+    AnnotationDataS3Uri?: S3Uri;
+    /**
+     * The S3 prefix to the source files (PDFs) that are referred to in the augmented manifest file.
+     */
+    SourceDocumentsS3Uri?: S3Uri;
+    /**
+     * The type of augmented manifest. PlainTextDocument or SemiStructuredDocument. If you don't specify, the default is PlainTextDocument.     PLAIN_TEXT_DOCUMENT A document type that represents any unicode text that is encoded in UTF-8.    SEMI_STRUCTURED_DOCUMENT A document type with positional and structural context, like a PDF. For training with Amazon Comprehend, only PDFs are supported. For inference, Amazon Comprehend support PDFs, DOCX and TXT.  
+     */
+    DocumentType?: AugmentedManifestsDocumentTypeFormat;
   }
   export interface BatchDetectDominantLanguageItemResult {
     /**
@@ -1363,6 +1376,23 @@ declare namespace Comprehend {
      */
     Score?: Float;
   }
+  export type DocumentReadAction = "TEXTRACT_DETECT_DOCUMENT_TEXT"|"TEXTRACT_ANALYZE_DOCUMENT"|string;
+  export type DocumentReadFeatureTypes = "TABLES"|"FORMS"|string;
+  export type DocumentReadMode = "SERVICE_DEFAULT"|"FORCE_DOCUMENT_READ_ACTION"|string;
+  export interface DocumentReaderConfig {
+    /**
+     * This enum field will start with two values which will apply to PDFs:    TEXTRACT_DETECT_DOCUMENT_TEXT - The service calls DetectDocumentText for PDF documents per page.    TEXTRACT_ANALYZE_DOCUMENT - The service calls AnalyzeDocument for PDF documents per page.  
+     */
+    DocumentReadAction: DocumentReadAction;
+    /**
+     * This enum field provides two values:    SERVICE_DEFAULT - use service defaults for Document reading. For Digital PDF it would mean using an internal parser instead of Textract APIs    FORCE_DOCUMENT_READ_ACTION - Always use specified action for DocumentReadAction, including Digital PDF.   
+     */
+    DocumentReadMode?: DocumentReadMode;
+    /**
+     * Specifies how the text in an input file should be processed:
+     */
+    FeatureTypes?: ListOfDocumentReadFeatureTypes;
+  }
   export interface DominantLanguage {
     /**
      * The RFC 5646 language code for the dominant language. For more information about RFC 5646, see Tags for Identifying Languages on the IETF Tools web site.
@@ -1883,6 +1913,10 @@ declare namespace Comprehend {
      * Specifies how the text in an input file should be processed:    ONE_DOC_PER_FILE - Each file is considered a separate document. Use this option when you are processing large documents, such as newspaper articles or scientific papers.    ONE_DOC_PER_LINE - Each line in a file is considered a separate document. Use this option when you are processing many short documents, such as text messages.  
      */
     InputFormat?: InputFormat;
+    /**
+     * The document reader config field applies only for InputDataConfig of StartEntitiesDetectionJob.  Use DocumentReaderConfig to provide specifications about how you want your inference documents read. Currently it applies for PDF documents in StartEntitiesDetectionJob custom inference.
+     */
+    DocumentReaderConfig?: DocumentReaderConfig;
   }
   export type InputFormat = "ONE_DOC_PER_FILE"|"ONE_DOC_PER_LINE"|string;
   export type Integer = number;
@@ -2181,6 +2215,7 @@ declare namespace Comprehend {
   export type ListOfDetectKeyPhrasesResult = BatchDetectKeyPhrasesItemResult[];
   export type ListOfDetectSentimentResult = BatchDetectSentimentItemResult[];
   export type ListOfDetectSyntaxResult = BatchDetectSyntaxItemResult[];
+  export type ListOfDocumentReadFeatureTypes = DocumentReadFeatureTypes[];
   export type ListOfDominantLanguages = DominantLanguage[];
   export type ListOfEntities = Entity[];
   export type ListOfEntityLabels = EntityLabel[];

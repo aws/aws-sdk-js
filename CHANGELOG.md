@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.988.0-->
+<!--LATEST=2.989.0-->
 <!--ENTRYINSERT-->
+
+## 2.989.0
+* feature: Chime: Adds support for SipHeaders parameter for CreateSipMediaApplicationCall.
+* feature: Comprehend: Amazon Comprehend now allows you to train and run PDF and Word documents for custom entity recognition. With PDF and Word formats, you can extract information from documents containing headers, lists and tables.
+* feature: EC2: This release adds support for vt1 3xlarge, 6xlarge and 24xlarge instances powered by Xilinx Alveo U30 Media Accelerators for video transcoding workloads
+* feature: SageMaker: This release adds support for "Project Search"
+* feature: WAFV2: This release adds support for including rate based rules in a rule group.
 
 ## 2.988.0
 * feature: Iot: AWS IoT Rules Engine adds OpenSearch action. The OpenSearch rule action lets you stream data from IoT sensors and applications to Amazon OpenSearch Service which is a successor to Amazon Elasticsearch Service.

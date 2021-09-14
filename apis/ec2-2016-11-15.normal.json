@@ -22445,7 +22445,7 @@
           "locationName": "iops"
         },
         "SnapshotId": {
-          "shape": "String",
+          "shape": "SnapshotId",
           "documentation": "<p>The ID of the snapshot.</p>",
           "locationName": "snapshotId"
         },
@@ -29586,7 +29586,10 @@
         "x2gd.8xlarge",
         "x2gd.12xlarge",
         "x2gd.16xlarge",
-        "x2gd.metal"
+        "x2gd.metal",
+        "vt1.3xlarge",
+        "vt1.6xlarge",
+        "vt1.24xlarge"
       ]
     },
     "InstanceTypeHypervisor": {
@@ -36038,7 +36041,7 @@
       "type": "structure",
       "members": {
         "GroupName": {
-          "shape": "String",
+          "shape": "PlacementGroupName",
           "documentation": "<p>The name of the placement group that the instance is in.</p>",
           "locationName": "groupName"
         }
@@ -41632,7 +41635,7 @@
           "locationName": "iamInstanceProfile"
         },
         "ImageId": {
-          "shape": "String",
+          "shape": "ImageId",
           "documentation": "<p>The ID of the AMI.</p>",
           "locationName": "imageId"
         },
@@ -41647,7 +41650,7 @@
           "locationName": "kernelId"
         },
         "KeyName": {
-          "shape": "String",
+          "shape": "KeyPairName",
           "documentation": "<p>The name of the key pair.</p>",
           "locationName": "keyName"
         },
@@ -41677,7 +41680,7 @@
           "locationName": "spotPrice"
         },
         "SubnetId": {
-          "shape": "String",
+          "shape": "SubnetId",
           "documentation": "<p>The IDs of the subnets in which to launch the instances. To specify multiple subnets, separate them using commas; for example, \"subnet-1234abcdeexample1, subnet-0987cdef6example2\".</p>",
           "locationName": "subnetId"
         },
@@ -42231,7 +42234,7 @@
           "locationName": "availabilityZone"
         },
         "GroupName": {
-          "shape": "String",
+          "shape": "PlacementGroupName",
           "documentation": "<p>The name of the placement group.</p>",
           "locationName": "groupName"
         },

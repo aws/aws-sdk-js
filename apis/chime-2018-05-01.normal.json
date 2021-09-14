@@ -1296,6 +1296,9 @@
           "shape": "UnauthorizedClientException"
         },
         {
+          "shape": "AccessDeniedException"
+        },
+        {
           "shape": "ServiceUnavailableException"
         },
         {
@@ -6185,7 +6188,7 @@
           "shape": "ServiceFailureException"
         }
       ],
-      "documentation": "<p>Start transcription for the specified <code>meetingId</code>. </p>"
+      "documentation": "<p>Starts transcription for the specified <code>meetingId</code>. </p>"
     },
     "StopMeetingTranscription": {
       "name": "StopMeetingTranscription",
@@ -9300,6 +9303,10 @@
           "documentation": "<p>The ID of the SIP media application.</p>",
           "location": "uri",
           "locationName": "sipMediaApplicationId"
+        },
+        "SipHeaders": {
+          "shape": "SipHeadersMap",
+          "documentation": "<p>The SIP headers added to an outbound call leg.</p>"
         }
       }
     },
@@ -13070,14 +13077,14 @@
       "members": {
         "Routes": {
           "shape": "OriginationRouteList",
-          "documentation": "<p>The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20.</p>"
+          "documentation": "<p>The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20. This parameter is not required, but you must specify this parameter or <code>Disabled</code>.</p>"
         },
         "Disabled": {
           "shape": "Boolean",
-          "documentation": "<p>When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector.</p>"
+          "documentation": "<p>When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector. This parameter is not required, but you must specify this parameter or <code>Routes</code>.</p>"
         }
       },
-      "documentation": "<p>Origination settings enable your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector.</p>"
+      "documentation": "<p>Origination settings enable your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector.</p> <note> <p>The parameters listed below are not required, but you must use at least one. </p> </note>"
     },
     "OriginationRoute": {
       "type": "structure",
@@ -13103,7 +13110,7 @@
           "documentation": "<p>The weight associated with the host. If hosts are equal in priority, calls are redistributed among them based on their relative weight.</p>"
         }
       },
-      "documentation": "<p>Origination routes define call distribution properties for your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector. Limit: Ten origination routes for each Amazon Chime Voice Connector.</p>"
+      "documentation": "<p>Origination routes define call distribution properties for your SIP hosts to receive inbound calls using your Amazon Chime Voice Connector. Limit: Ten origination routes for each Amazon Chime Voice Connector.</p> <note> <p>The parameters listed below are not required, but you must use at least one. </p> </note>"
     },
     "OriginationRouteList": {
       "type": "list",
@@ -14353,6 +14360,17 @@
       "type": "integer",
       "min": 1
     },
+    "SipHeadersMap": {
+      "type": "map",
+      "key": {
+        "shape": "SensitiveString"
+      },
+      "value": {
+        "shape": "SensitiveString"
+      },
+      "max": 20,
+      "min": 0
+    },
     "SipMediaApplication": {
       "type": "structure",
       "members": {
@@ -14884,7 +14902,7 @@
         },
         "EngineTranscribeMedicalSettings": {
           "shape": "EngineTranscribeMedicalSettings",
-          "documentation": "<p>The transcription configuration settings passed to Amazon Transcribe.</p>"
+          "documentation": "<p>The transcription configuration settings passed to Amazon Transcribe Medical.</p>"
         }
       },
       "documentation": "<p>The configuration for the current transcription operation. Must contain <code>EngineTranscribeSettings</code> or <code>EngineTranscribeMedicalSettings</code>.</p>"

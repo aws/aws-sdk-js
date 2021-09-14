@@ -1292,11 +1292,11 @@ declare class Chime extends Service {
    */
   sendChannelMessage(callback?: (err: AWSError, data: Chime.Types.SendChannelMessageResponse) => void): Request<Chime.Types.SendChannelMessageResponse, AWSError>;
   /**
-   * Start transcription for the specified meetingId. 
+   * Starts transcription for the specified meetingId. 
    */
   startMeetingTranscription(params: Chime.Types.StartMeetingTranscriptionRequest, callback?: (err: AWSError, data: Chime.Types.StartMeetingTranscriptionResponse) => void): Request<Chime.Types.StartMeetingTranscriptionResponse, AWSError>;
   /**
-   * Start transcription for the specified meetingId. 
+   * Starts transcription for the specified meetingId. 
    */
   startMeetingTranscription(callback?: (err: AWSError, data: Chime.Types.StartMeetingTranscriptionResponse) => void): Request<Chime.Types.StartMeetingTranscriptionResponse, AWSError>;
   /**
@@ -2798,6 +2798,10 @@ declare namespace Chime {
      * The ID of the SIP media application.
      */
     SipMediaApplicationId: NonEmptyString;
+    /**
+     * The SIP headers added to an outbound call leg.
+     */
+    SipHeaders?: SipHeadersMap;
   }
   export interface CreateSipMediaApplicationCallResponse {
     /**
@@ -4896,11 +4900,11 @@ declare namespace Chime {
   export type OrderedPhoneNumberStatus = "Processing"|"Acquired"|"Failed"|string;
   export interface Origination {
     /**
-     * The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20.
+     * The call distribution properties defined for your SIP hosts. Valid range: Minimum value of 1. Maximum value of 20. This parameter is not required, but you must specify this parameter or Disabled.
      */
     Routes?: OriginationRouteList;
     /**
-     * When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector.
+     * When origination settings are disabled, inbound calls are not enabled for your Amazon Chime Voice Connector. This parameter is not required, but you must specify this parameter or Routes.
      */
     Disabled?: Boolean;
   }
@@ -5644,6 +5648,7 @@ declare namespace Chime {
   }
   export type SigninDelegateGroupList = SigninDelegateGroup[];
   export type SipApplicationPriority = number;
+  export type SipHeadersMap = {[key: string]: SensitiveString};
   export interface SipMediaApplication {
     /**
      * The SIP media application ID.
@@ -5897,7 +5902,7 @@ declare namespace Chime {
      */
     EngineTranscribeSettings?: EngineTranscribeSettings;
     /**
-     * The transcription configuration settings passed to Amazon Transcribe.
+     * The transcription configuration settings passed to Amazon Transcribe Medical.
      */
     EngineTranscribeMedicalSettings?: EngineTranscribeMedicalSettings;
   }
