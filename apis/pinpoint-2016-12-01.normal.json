@@ -234,6 +234,44 @@
       ],
       "documentation": "<p>Creates an import job for an application.</p>"
     },
+    "CreateInAppTemplate": {
+      "name": "CreateInAppTemplate",
+      "http": {
+        "method": "POST",
+        "requestUri": "/v1/templates/{template-name}/inapp",
+        "responseCode": 201
+      },
+      "input": {
+        "shape": "CreateInAppTemplateRequest"
+      },
+      "output": {
+        "shape": "CreateInAppTemplateResponse",
+        "documentation": "<p>The request succeeded and the specified resource was created.</p>"
+      },
+      "errors": [
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        },
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        }
+      ],
+      "documentation": "<p>Creates a new message template for messages using the in-app message channel.</p>"
+    },
     "CreateJourney": {
       "name": "CreateJourney",
       "http": {
@@ -1083,6 +1121,52 @@
         }
       ],
       "documentation": "<p>Disables the GCM channel for an application and deletes any existing settings for the channel.</p>"
+    },
+    "DeleteInAppTemplate": {
+      "name": "DeleteInAppTemplate",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/v1/templates/{template-name}/inapp",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "DeleteInAppTemplateRequest"
+      },
+      "output": {
+        "shape": "DeleteInAppTemplateResponse",
+        "documentation": "<p>The request was accepted for processing. Processing may not be complete.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "PayloadTooLargeException",
+          "documentation": "<p>The request failed because the payload for the body of the request is too large (RequestEntityTooLargeException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Deletes a message template for messages sent using the in-app message channel.</p>"
     },
     "DeleteJourney": {
       "name": "DeleteJourney",
@@ -2693,6 +2777,98 @@
         }
       ],
       "documentation": "<p>Retrieves information about the status and settings of all the import jobs for an application.</p>"
+    },
+    "GetInAppMessages": {
+      "name": "GetInAppMessages",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/apps/{application-id}/endpoints/{endpoint-id}/inappmessages",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetInAppMessagesRequest"
+      },
+      "output": {
+        "shape": "GetInAppMessagesResponse",
+        "documentation": "<p>The request succeeded.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "PayloadTooLargeException",
+          "documentation": "<p>The request failed because the payload for the body of the request is too large (RequestEntityTooLargeException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Retrieves the in-app messages targeted for the provided endpoint ID.</p>"
+    },
+    "GetInAppTemplate": {
+      "name": "GetInAppTemplate",
+      "http": {
+        "method": "GET",
+        "requestUri": "/v1/templates/{template-name}/inapp",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "GetInAppTemplateRequest"
+      },
+      "output": {
+        "shape": "GetInAppTemplateResponse",
+        "documentation": "<p>The request succeeded.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "PayloadTooLargeException",
+          "documentation": "<p>The request failed because the payload for the body of the request is too large (RequestEntityTooLargeException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Retrieves the content and settings of a message template for messages sent through the in-app channel.</p>"
     },
     "GetJourney": {
       "name": "GetJourney",
@@ -4569,6 +4745,52 @@
       ],
       "documentation": "<p>Enables the GCM channel for an application or updates the status and settings of the GCM channel for an application.</p>"
     },
+    "UpdateInAppTemplate": {
+      "name": "UpdateInAppTemplate",
+      "http": {
+        "method": "PUT",
+        "requestUri": "/v1/templates/{template-name}/inapp",
+        "responseCode": 202
+      },
+      "input": {
+        "shape": "UpdateInAppTemplateRequest"
+      },
+      "output": {
+        "shape": "UpdateInAppTemplateResponse",
+        "documentation": "<p>The request was accepted for processing. Processing may not be complete.</p>"
+      },
+      "errors": [
+        {
+          "shape": "BadRequestException",
+          "documentation": "<p>The request contains a syntax error (BadRequestException).</p>"
+        },
+        {
+          "shape": "InternalServerErrorException",
+          "documentation": "<p>The request failed due to an unknown internal server error, exception, or failure (InternalServerErrorException).</p>"
+        },
+        {
+          "shape": "PayloadTooLargeException",
+          "documentation": "<p>The request failed because the payload for the body of the request is too large (RequestEntityTooLargeException).</p>"
+        },
+        {
+          "shape": "ForbiddenException",
+          "documentation": "<p>The request was denied because access to the specified resource is forbidden (ForbiddenException).</p>"
+        },
+        {
+          "shape": "NotFoundException",
+          "documentation": "<p>The request failed because the specified resource was not found (NotFoundException).</p>"
+        },
+        {
+          "shape": "MethodNotAllowedException",
+          "documentation": "<p>The request failed because the method is not allowed for the specified resource (MethodNotAllowedException).</p>"
+        },
+        {
+          "shape": "TooManyRequestsException",
+          "documentation": "<p>The request failed because too many requests were sent during a certain amount of time (TooManyRequestsException).</p>"
+        }
+      ],
+      "documentation": "<p>Updates an existing message template for messages sent through the in-app message channel.</p>"
+    },
     "UpdateJourney": {
       "name": "UpdateJourney",
       "http": {
@@ -5832,6 +6054,14 @@
       },
       "documentation": "<p>Specifies address-based configuration settings for a message that's sent directly to an endpoint.</p>"
     },
+    "Alignment": {
+      "type": "string",
+      "enum": [
+        "LEFT",
+        "CENTER",
+        "RIGHT"
+      ]
+    },
     "AndroidPushNotificationTemplate": {
       "type": "structure",
       "members": {
@@ -6184,6 +6414,14 @@
         "Rows"
       ]
     },
+    "ButtonAction": {
+      "type": "string",
+      "enum": [
+        "LINK",
+        "DEEP_LINK",
+        "CLOSE"
+      ]
+    },
     "CampaignCustomMessage": {
       "type": "structure",
       "members": {
@@ -6294,6 +6532,28 @@
       },
       "documentation": "<p>Specifies settings for invoking an AWS Lambda function that customizes a segment for a campaign.</p>"
     },
+    "CampaignInAppMessage": {
+      "type": "structure",
+      "members": {
+        "Body": {
+          "shape": "__string",
+          "documentation": "<p>The message body of the notification, the email body or the text message.</p>"
+        },
+        "Content": {
+          "shape": "ListOfInAppMessageContent",
+          "documentation": "<p>In-app message content.</p>"
+        },
+        "CustomConfig": {
+          "shape": "MapOf__string",
+          "documentation": "<p>Custom config to be sent to client.</p>"
+        },
+        "Layout": {
+          "shape": "Layout",
+          "documentation": "<p>In-app message layout.</p>"
+        }
+      },
+      "documentation": "<p>In-app message configuration.</p>"
+    },
     "CampaignLimits": {
       "type": "structure",
       "members": {
@@ -6312,6 +6572,10 @@
         "Total": {
           "shape": "__integer",
           "documentation": "<p>The maximum number of messages that a campaign can send to a single endpoint during the course of the campaign. If a campaign recurs, this setting applies to all runs of the campaign. The maximum value is 100.</p>"
+        },
+        "Session": {
+          "shape": "__integer",
+          "documentation": "<p>The maximum total number of messages that the campaign can send per user session.</p>"
         }
       },
       "documentation": "<p>For a campaign, specifies limits on the messages that the campaign can send. For an application, specifies the default limits for messages that campaigns in the application can send.</p>"
@@ -6415,6 +6679,10 @@
         "Version": {
           "shape": "__integer",
           "documentation": "<p>The version number of the campaign.</p>"
+        },
+        "Priority": {
+          "shape": "__integer",
+          "documentation": "<p>Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.</p>"
         }
       },
       "documentation": "<p>Provides information about the status, configuration, and other settings for a campaign.</p>",
@@ -6553,7 +6821,8 @@
         "VOICE",
         "EMAIL",
         "BAIDU",
-        "CUSTOM"
+        "CUSTOM",
+        "IN_APP"
       ]
     },
     "ChannelsResponse": {
@@ -6770,6 +7039,37 @@
         "ImportJobResponse"
       ],
       "payload": "ImportJobResponse"
+    },
+    "CreateInAppTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "InAppTemplateRequest": {
+          "shape": "InAppTemplateRequest"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        }
+      },
+      "required": [
+        "TemplateName",
+        "InAppTemplateRequest"
+      ],
+      "payload": "InAppTemplateRequest"
+    },
+    "CreateInAppTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "TemplateCreateMessageBody": {
+          "shape": "TemplateCreateMessageBody"
+        }
+      },
+      "required": [
+        "TemplateCreateMessageBody"
+      ],
+      "payload": "TemplateCreateMessageBody"
     },
     "CreateJourneyRequest": {
       "type": "structure",
@@ -7060,6 +7360,40 @@
         }
       },
       "documentation": "<p>The settings for a custom message activity. This type of activity calls an AWS Lambda function or web hook that sends messages to participants.</p>"
+    },
+    "DefaultButtonConfiguration": {
+      "type": "structure",
+      "members": {
+        "BackgroundColor": {
+          "shape": "__string",
+          "documentation": "<p>The background color of the button.</p>"
+        },
+        "BorderRadius": {
+          "shape": "__integer",
+          "documentation": "<p>The border radius of the button.</p>"
+        },
+        "ButtonAction": {
+          "shape": "ButtonAction",
+          "documentation": "<p>Action triggered by the button.</p>"
+        },
+        "Link": {
+          "shape": "__string",
+          "documentation": "<p>Button destination.</p>"
+        },
+        "Text": {
+          "shape": "__string",
+          "documentation": "<p>Button text.</p>"
+        },
+        "TextColor": {
+          "shape": "__string",
+          "documentation": "<p>The text color of the button.</p>"
+        }
+      },
+      "documentation": "<p>Default button configuration.</p>",
+      "required": [
+        "ButtonAction",
+        "Text"
+      ]
     },
     "DefaultMessage": {
       "type": "structure",
@@ -7492,6 +7826,38 @@
         "GCMChannelResponse"
       ],
       "payload": "GCMChannelResponse"
+    },
+    "DeleteInAppTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        },
+        "Version": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "version",
+          "documentation": "<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend=\"templates-template-name-template-type-versions\">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>"
+        }
+      },
+      "required": [
+        "TemplateName"
+      ]
+    },
+    "DeleteInAppTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "MessageBody": {
+          "shape": "MessageBody"
+        }
+      },
+      "required": [
+        "MessageBody"
+      ],
+      "payload": "MessageBody"
     },
     "DeleteJourneyRequest": {
       "type": "structure",
@@ -8802,7 +9168,8 @@
         "DAILY",
         "WEEKLY",
         "MONTHLY",
-        "EVENT"
+        "EVENT",
+        "IN_APP_EVENT"
       ]
     },
     "GCMChannelRequest": {
@@ -9855,6 +10222,71 @@
       ],
       "payload": "ImportJobsResponse"
     },
+    "GetInAppMessagesRequest": {
+      "type": "structure",
+      "members": {
+        "ApplicationId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "application-id",
+          "documentation": "<p>The unique identifier for the application. This identifier is displayed as the <b>Project ID</b> on the Amazon Pinpoint console.</p>"
+        },
+        "EndpointId": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "endpoint-id",
+          "documentation": "<p>The unique identifier for the endpoint.</p>"
+        }
+      },
+      "required": [
+        "ApplicationId",
+        "EndpointId"
+      ]
+    },
+    "GetInAppMessagesResponse": {
+      "type": "structure",
+      "members": {
+        "InAppMessagesResponse": {
+          "shape": "InAppMessagesResponse"
+        }
+      },
+      "required": [
+        "InAppMessagesResponse"
+      ],
+      "payload": "InAppMessagesResponse"
+    },
+    "GetInAppTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        },
+        "Version": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "version",
+          "documentation": "<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend=\"templates-template-name-template-type-versions\">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>"
+        }
+      },
+      "required": [
+        "TemplateName"
+      ]
+    },
+    "GetInAppTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "InAppTemplateResponse": {
+          "shape": "InAppTemplateResponse"
+        }
+      },
+      "required": [
+        "InAppTemplateResponse"
+      ],
+      "payload": "InAppTemplateResponse"
+    },
     "GetJourneyDateRangeKpiRequest": {
       "type": "structure",
       "members": {
@@ -10717,6 +11149,272 @@
         "Item"
       ]
     },
+    "InAppCampaignSchedule": {
+      "type": "structure",
+      "members": {
+        "EndDate": {
+          "shape": "__string",
+          "documentation": "<p>The scheduled time after which the in-app message should not be shown. Timestamp is in ISO 8601 format.</p>"
+        },
+        "EventFilter": {
+          "shape": "CampaignEventFilter",
+          "documentation": "<p>The event filter the SDK has to use to show the in-app message in the application.</p>"
+        },
+        "QuietTime": {
+          "shape": "QuietTime",
+          "documentation": "<p>Time during which the in-app message should not be shown to the user.</p>"
+        }
+      },
+      "documentation": "<p>Schedule of the campaign.</p>"
+    },
+    "InAppMessage": {
+      "type": "structure",
+      "members": {
+        "Content": {
+          "shape": "ListOfInAppMessageContent",
+          "documentation": "<p>In-app message content.</p>"
+        },
+        "CustomConfig": {
+          "shape": "MapOf__string",
+          "documentation": "<p>Custom config to be sent to SDK.</p>"
+        },
+        "Layout": {
+          "shape": "Layout",
+          "documentation": "<p>The layout of the message.</p>"
+        }
+      },
+      "documentation": "<p>Provides all fields required for building an in-app message.</p>"
+    },
+    "InAppMessageBodyConfig": {
+      "type": "structure",
+      "members": {
+        "Alignment": {
+          "shape": "Alignment",
+          "documentation": "<p>The alignment of the text. Valid values: LEFT, CENTER, RIGHT.</p>"
+        },
+        "Body": {
+          "shape": "__string",
+          "documentation": "<p>Message Body.</p>"
+        },
+        "TextColor": {
+          "shape": "__string",
+          "documentation": "<p>The text color.</p>"
+        }
+      },
+      "documentation": "<p>Text config for Message Body.</p>",
+      "required": [
+        "Alignment",
+        "TextColor",
+        "Body"
+      ]
+    },
+    "InAppMessageButton": {
+      "type": "structure",
+      "members": {
+        "Android": {
+          "shape": "OverrideButtonConfiguration",
+          "documentation": "<p>Default button content.</p>"
+        },
+        "DefaultConfig": {
+          "shape": "DefaultButtonConfiguration",
+          "documentation": "<p>Default button content.</p>"
+        },
+        "IOS": {
+          "shape": "OverrideButtonConfiguration",
+          "documentation": "<p>Default button content.</p>"
+        },
+        "Web": {
+          "shape": "OverrideButtonConfiguration",
+          "documentation": "<p>Default button content.</p>"
+        }
+      },
+      "documentation": "<p>Button Config for an in-app message.</p>"
+    },
+    "InAppMessageCampaign": {
+      "type": "structure",
+      "members": {
+        "CampaignId": {
+          "shape": "__string",
+          "documentation": "<p>Campaign id of the corresponding campaign.</p>"
+        },
+        "DailyCap": {
+          "shape": "__integer",
+          "documentation": "<p>Daily cap which controls the number of times any in-app messages can be shown to the endpoint during a day.</p>"
+        },
+        "InAppMessage": {
+          "shape": "InAppMessage",
+          "documentation": "<p>In-app message content with all fields required for rendering an in-app message.</p>"
+        },
+        "Priority": {
+          "shape": "__integer",
+          "documentation": "<p>Priority of the in-app message.</p>"
+        },
+        "Schedule": {
+          "shape": "InAppCampaignSchedule",
+          "documentation": "<p>Schedule of the campaign.</p>"
+        },
+        "SessionCap": {
+          "shape": "__integer",
+          "documentation": "<p>Session cap which controls the number of times an in-app message can be shown to the endpoint during an application session.</p>"
+        },
+        "TotalCap": {
+          "shape": "__integer",
+          "documentation": "<p>Total cap which controls the number of times an in-app message can be shown to the endpoint.</p>"
+        },
+        "TreatmentId": {
+          "shape": "__string",
+          "documentation": "<p>Treatment id of the campaign.</p>"
+        }
+      },
+      "documentation": "<p>Targeted in-app message campaign.</p>"
+    },
+    "InAppMessageContent": {
+      "type": "structure",
+      "members": {
+        "BackgroundColor": {
+          "shape": "__string",
+          "documentation": "<p>The background color for the message.</p>"
+        },
+        "BodyConfig": {
+          "shape": "InAppMessageBodyConfig",
+          "documentation": "<p>The configuration for the message body.</p>"
+        },
+        "HeaderConfig": {
+          "shape": "InAppMessageHeaderConfig",
+          "documentation": "<p>The configuration for the message header.</p>"
+        },
+        "ImageUrl": {
+          "shape": "__string",
+          "documentation": "<p>The image url for the background of message.</p>"
+        },
+        "PrimaryBtn": {
+          "shape": "InAppMessageButton",
+          "documentation": "<p>The first button inside the message.</p>"
+        },
+        "SecondaryBtn": {
+          "shape": "InAppMessageButton",
+          "documentation": "<p>The second button inside message.</p>"
+        }
+      },
+      "documentation": "<p>The configuration for the message content.</p>"
+    },
+    "InAppMessageHeaderConfig": {
+      "type": "structure",
+      "members": {
+        "Alignment": {
+          "shape": "Alignment",
+          "documentation": "<p>The alignment of the text. Valid values: LEFT, CENTER, RIGHT.</p>"
+        },
+        "Header": {
+          "shape": "__string",
+          "documentation": "<p>Message Header.</p>"
+        },
+        "TextColor": {
+          "shape": "__string",
+          "documentation": "<p>The text color.</p>"
+        }
+      },
+      "documentation": "<p>Text config for Message Header.</p>",
+      "required": [
+        "Alignment",
+        "Header",
+        "TextColor"
+      ]
+    },
+    "InAppMessagesResponse": {
+      "type": "structure",
+      "members": {
+        "InAppMessageCampaigns": {
+          "shape": "ListOfInAppMessageCampaign",
+          "documentation": "<p>List of targeted in-app message campaigns.</p>"
+        }
+      },
+      "documentation": "<p>Get in-app messages response object.</p>"
+    },
+    "InAppTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "Content": {
+          "shape": "ListOfInAppMessageContent",
+          "documentation": "<p>The content of the message, can include up to 5 modals. Each modal must contain a message, a header, and background color. ImageUrl and buttons are optional.</p>"
+        },
+        "CustomConfig": {
+          "shape": "MapOf__string",
+          "documentation": "<p>Custom config to be sent to client.</p>"
+        },
+        "Layout": {
+          "shape": "Layout",
+          "documentation": "<p>The layout of the message.</p>"
+        },
+        "tags": {
+          "shape": "MapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateDescription": {
+          "shape": "__string",
+          "documentation": "<p>The description of the template.</p>"
+        }
+      },
+      "documentation": "<p>InApp Template Request.</p>"
+    },
+    "InAppTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "documentation": "<p>The resource arn of the template.</p>"
+        },
+        "Content": {
+          "shape": "ListOfInAppMessageContent",
+          "documentation": "<p>The content of the message, can include up to 5 modals. Each modal must contain a message, a header, and background color. ImageUrl and buttons are optional.</p>"
+        },
+        "CreationDate": {
+          "shape": "__string",
+          "documentation": "<p>The creation date of the template.</p>"
+        },
+        "CustomConfig": {
+          "shape": "MapOf__string",
+          "documentation": "<p>Custom config to be sent to client.</p>"
+        },
+        "LastModifiedDate": {
+          "shape": "__string",
+          "documentation": "<p>The last modified date of the template.</p>"
+        },
+        "Layout": {
+          "shape": "Layout",
+          "documentation": "<p>The layout of the message.</p>"
+        },
+        "tags": {
+          "shape": "MapOf__string",
+          "locationName": "tags",
+          "documentation": "<p>A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.</p>"
+        },
+        "TemplateDescription": {
+          "shape": "__string",
+          "documentation": "<p>The description of the template.</p>"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "documentation": "<p>The name of the template.</p>"
+        },
+        "TemplateType": {
+          "shape": "TemplateType",
+          "documentation": "<p>The type of the template.</p>"
+        },
+        "Version": {
+          "shape": "__string",
+          "documentation": "<p>The version id of the template.</p>"
+        }
+      },
+      "documentation": "<p>In-App Template Response.</p>",
+      "required": [
+        "LastModifiedDate",
+        "CreationDate",
+        "TemplateName",
+        "TemplateType"
+      ]
+    },
     "Include": {
       "type": "string",
       "enum": [
@@ -11064,6 +11762,17 @@
         "Item"
       ]
     },
+    "Layout": {
+      "type": "string",
+      "enum": [
+        "BOTTOM_BANNER",
+        "TOP_BANNER",
+        "OVERLAYS",
+        "MOBILE_FEED",
+        "MIDDLE_BANNER",
+        "CAROUSEL"
+      ]
+    },
     "ListJourneysRequest": {
       "type": "structure",
       "members": {
@@ -11333,6 +12042,10 @@
         "SMSMessage": {
           "shape": "CampaignSmsMessage",
           "documentation": "<p>The message that the campaign sends through the SMS channel. If specified, this message overrides the default message.</p>"
+        },
+        "InAppMessage": {
+          "shape": "CampaignInAppMessage",
+          "documentation": "<p>The in-app message configuration.</p>"
         }
       },
       "documentation": "<p>Specifies the message configuration settings for a campaign.</p>"
@@ -11570,6 +12283,23 @@
       "enum": [
         "ALL",
         "ANY"
+      ]
+    },
+    "OverrideButtonConfiguration": {
+      "type": "structure",
+      "members": {
+        "ButtonAction": {
+          "shape": "ButtonAction",
+          "documentation": "<p>Action triggered by the button.</p>"
+        },
+        "Link": {
+          "shape": "__string",
+          "documentation": "<p>Button destination.</p>"
+        }
+      },
+      "documentation": "<p>Override button configuration.</p>",
+      "required": [
+        "ButtonAction"
       ]
     },
     "PhoneNumberValidateRequest": {
@@ -12925,6 +13655,24 @@
       },
       "documentation": "<p>Specifies the message template to use for the message, for each type of channel.</p>"
     },
+    "TemplateCreateMessageBody": {
+      "type": "structure",
+      "members": {
+        "Arn": {
+          "shape": "__string",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the message template that was created.</p>"
+        },
+        "Message": {
+          "shape": "__string",
+          "documentation": "<p>The message that's returned from the API for the request to create the message template.</p>"
+        },
+        "RequestID": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the request to create the message template.</p>"
+        }
+      },
+      "documentation": "<p>Provides information about a request to create a message template.</p>"
+    },
     "TemplateResponse": {
       "type": "structure",
       "members": {
@@ -12980,7 +13728,8 @@
         "EMAIL",
         "SMS",
         "VOICE",
-        "PUSH"
+        "PUSH",
+        "INAPP"
       ]
     },
     "TemplateVersionResponse": {
@@ -13578,6 +14327,49 @@
         "GCMChannelResponse"
       ],
       "payload": "GCMChannelResponse"
+    },
+    "UpdateInAppTemplateRequest": {
+      "type": "structure",
+      "members": {
+        "CreateNewVersion": {
+          "shape": "__boolean",
+          "location": "querystring",
+          "locationName": "create-new-version",
+          "documentation": "<p>Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to (overwrite) the latest existing version of the template.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to (overwrites) the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.</p>"
+        },
+        "InAppTemplateRequest": {
+          "shape": "InAppTemplateRequest"
+        },
+        "TemplateName": {
+          "shape": "__string",
+          "location": "uri",
+          "locationName": "template-name",
+          "documentation": "<p>The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.</p>"
+        },
+        "Version": {
+          "shape": "__string",
+          "location": "querystring",
+          "locationName": "version",
+          "documentation": "<p>The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the <link  linkend=\"templates-template-name-template-type-versions\">Template Versions</link> resource.</p> <p>If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur.</p> <p>If you don't specify a value for this parameter, Amazon Pinpoint does the following:</p> <ul><li><p>For a get operation, retrieves information about the active version of the template.</p></li> <li><p>For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false.</p></li> <li><p>For a delete operation, deletes the template, including all versions of the template.</p></li></ul>"
+        }
+      },
+      "required": [
+        "TemplateName",
+        "InAppTemplateRequest"
+      ],
+      "payload": "InAppTemplateRequest"
+    },
+    "UpdateInAppTemplateResponse": {
+      "type": "structure",
+      "members": {
+        "MessageBody": {
+          "shape": "MessageBody"
+        }
+      },
+      "required": [
+        "MessageBody"
+      ],
+      "payload": "MessageBody"
     },
     "UpdateJourneyRequest": {
       "type": "structure",
@@ -14296,6 +15088,10 @@
         "TreatmentName": {
           "shape": "__string",
           "documentation": "<p>A custom name of the default treatment for the campaign, if the campaign has multiple treatments. A <i>treatment</i> is a variation of a campaign that's used for A/B testing.</p>"
+        },
+        "Priority": {
+          "shape": "__integer",
+          "documentation": "<p>Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.</p>"
         }
       },
       "documentation": "<p>Specifies the configuration and other settings for a campaign.</p>"
@@ -14457,7 +15253,8 @@
         "VOICE",
         "EMAIL",
         "BAIDU",
-        "CUSTOM"
+        "CUSTOM",
+        "IN_APP"
       ]
     },
     "__boolean": {
@@ -14509,6 +15306,18 @@
       "type": "list",
       "member": {
         "shape": "ImportJobResponse"
+      }
+    },
+    "ListOfInAppMessageCampaign": {
+      "type": "list",
+      "member": {
+        "shape": "InAppMessageCampaign"
+      }
+    },
+    "ListOfInAppMessageContent": {
+      "type": "list",
+      "member": {
+        "shape": "InAppMessageContent"
       }
     },
     "ListOfJourneyResponse": {

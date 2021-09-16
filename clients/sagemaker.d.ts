@@ -1597,6 +1597,14 @@ declare class SageMaker extends Service {
    */
   renderUiTemplate(callback?: (err: AWSError, data: SageMaker.Types.RenderUiTemplateResponse) => void): Request<SageMaker.Types.RenderUiTemplateResponse, AWSError>;
   /**
+   * Retry the execution of the pipeline.
+   */
+  retryPipelineExecution(params: SageMaker.Types.RetryPipelineExecutionRequest, callback?: (err: AWSError, data: SageMaker.Types.RetryPipelineExecutionResponse) => void): Request<SageMaker.Types.RetryPipelineExecutionResponse, AWSError>;
+  /**
+   * Retry the execution of the pipeline.
+   */
+  retryPipelineExecution(callback?: (err: AWSError, data: SageMaker.Types.RetryPipelineExecutionResponse) => void): Request<SageMaker.Types.RetryPipelineExecutionResponse, AWSError>;
+  /**
    * Finds Amazon SageMaker resources that match a search query. Matching resources are returned as a list of SearchRecord objects in the response. You can sort the search results by any resource property in a ascending or descending order. You can query against the following value types: numeric, text, Boolean, and timestamp.
    */
   search(params: SageMaker.Types.SearchRequest, callback?: (err: AWSError, data: SageMaker.Types.SearchResponse) => void): Request<SageMaker.Types.SearchResponse, AWSError>;
@@ -7594,7 +7602,7 @@ declare namespace SageMaker {
      */
     CreationTime?: Timestamp;
     /**
-     * Who created the component.
+     * Who created the trial component.
      */
     CreatedBy?: UserContext;
     /**
@@ -8222,6 +8230,9 @@ declare namespace SageMaker {
      * When the experiment was created.
      */
     CreationTime?: Timestamp;
+    /**
+     * Who created the experiment.
+     */
     CreatedBy?: UserContext;
     /**
      * When the experiment was last modified.
@@ -13750,6 +13761,9 @@ declare namespace SageMaker {
      * The status of the project.
      */
     ProjectStatus?: ProjectStatus;
+    /**
+     * Who created the project.
+     */
     CreatedBy?: UserContext;
     /**
      * A timestamp specifying when the project was created.
@@ -14011,6 +14025,22 @@ declare namespace SageMaker {
     HomeEfsFileSystem?: RetentionType;
   }
   export type RetentionType = "Retain"|"Delete"|string;
+  export interface RetryPipelineExecutionRequest {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    PipelineExecutionArn: PipelineExecutionArn;
+    /**
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than once.
+     */
+    ClientRequestToken: IdempotencyToken;
+  }
+  export interface RetryPipelineExecutionResponse {
+    /**
+     * The Amazon Resource Name (ARN) of the pipeline execution.
+     */
+    PipelineExecutionArn?: PipelineExecutionArn;
+  }
   export interface RetryStrategy {
     /**
      * The number of times to retry the job. When the job is retried, it's SecondaryStatus is changed to STARTING.
@@ -14335,7 +14365,7 @@ declare namespace SageMaker {
      */
     PipelineExecutionDescription?: PipelineExecutionDescription;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than once.
      */
     ClientRequestToken: IdempotencyToken;
   }
@@ -14397,7 +14427,7 @@ declare namespace SageMaker {
      */
     PipelineExecutionArn: PipelineExecutionArn;
     /**
-     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.
+     * A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than once.
      */
     ClientRequestToken: IdempotencyToken;
   }
@@ -15082,6 +15112,9 @@ declare namespace SageMaker {
      * When the trial was created.
      */
     CreationTime?: Timestamp;
+    /**
+     * Who created the trial.
+     */
     CreatedBy?: UserContext;
     /**
      * Who last modified the trial.
@@ -15129,6 +15162,9 @@ declare namespace SageMaker {
      * When the component was created.
      */
     CreationTime?: Timestamp;
+    /**
+     * Who created the trial component.
+     */
     CreatedBy?: UserContext;
     /**
      * When the component was last modified.
@@ -15320,7 +15356,7 @@ declare namespace SageMaker {
      */
     CreationTime?: Timestamp;
     /**
-     * Who created the component.
+     * Who created the trial component.
      */
     CreatedBy?: UserContext;
     /**

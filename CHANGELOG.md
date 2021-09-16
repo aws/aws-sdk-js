@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.989.0-->
+<!--LATEST=2.990.0-->
 <!--ENTRYINSERT-->
+
+## 2.990.0
+* feature: KafkaConnect: This is the initial SDK release for Amazon Managed Streaming for Apache Kafka Connect (MSK Connect).
+* feature: Macie2: This release adds support for specifying which managed data identifiers are used by a classification job, and retrieving a list of managed data identifiers that are available.
+* feature: Pinpoint: This SDK release adds a new feature for Pinpoint campaigns, in-app messaging.
+* feature: RoboMaker: Adding support to create container based Robot and Simulation applications by introducing an environment field
+* feature: S3: Add support for access point arn filtering in S3 CW Request Metrics
+* feature: SageMaker: Add API for users to retry a failed pipeline execution or resume a stopped one.
+* feature: TranscribeService: This release adds support for subtitling with Amazon Transcribe batch jobs.
 
 ## 2.989.0
 * feature: Chime: Adds support for SipHeaders parameter for CreateSipMediaApplicationCall.

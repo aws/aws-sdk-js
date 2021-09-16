@@ -1966,7 +1966,6 @@
       "type": "structure",
       "required": [
         "name",
-        "sources",
         "robotSoftwareSuite"
       ],
       "members": {
@@ -1985,6 +1984,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the robot application.</p>"
+        },
+        "environment": {
+          "shape": "Environment",
+          "documentation": "<p>The object that contains that URI of the Docker image that you use for your robot application.</p>"
         }
       }
     },
@@ -2022,6 +2025,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The list of all tags added to the robot application.</p>"
+        },
+        "environment": {
+          "shape": "Environment",
+          "documentation": "<p>An object that contains the Docker image URI used to a create your robot application.</p>"
         }
       }
     },
@@ -2038,6 +2045,14 @@
         "currentRevisionId": {
           "shape": "RevisionId",
           "documentation": "<p>The current revision id for the robot application. If you provide a value and it matches the latest revision ID, a new version will be created.</p>"
+        },
+        "s3Etags": {
+          "shape": "S3Etags",
+          "documentation": "<p>The Amazon S3 identifier for the zip file bundle that you use for your robot application.</p>"
+        },
+        "imageDigest": {
+          "shape": "ImageDigest",
+          "documentation": "<p>A SHA256 identifier for the Docker image that you use for your robot application.</p>"
         }
       }
     },
@@ -2071,6 +2086,10 @@
         "revisionId": {
           "shape": "RevisionId",
           "documentation": "<p>The revision id of the robot application.</p>"
+        },
+        "environment": {
+          "shape": "Environment",
+          "documentation": "<p>The object that contains the Docker image URI used to create your robot application.</p>"
         }
       }
     },
@@ -2133,7 +2152,6 @@
       "type": "structure",
       "required": [
         "name",
-        "sources",
         "simulationSoftwareSuite",
         "robotSoftwareSuite"
       ],
@@ -2161,6 +2179,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>A map that contains tag keys and tag values that are attached to the simulation application.</p>"
+        },
+        "environment": {
+          "shape": "Environment",
+          "documentation": "<p>The object that contains the Docker image URI used to create your simulation application.</p>"
         }
       }
     },
@@ -2206,6 +2228,10 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The list of all tags added to the simulation application.</p>"
+        },
+        "environment": {
+          "shape": "Environment",
+          "documentation": "<p>The object that contains the Docker image URI that you used to create your simulation application.</p>"
         }
       }
     },
@@ -2222,6 +2248,14 @@
         "currentRevisionId": {
           "shape": "RevisionId",
           "documentation": "<p>The current revision id for the simulation application. If you provide a value and it matches the latest revision ID, a new version will be created.</p>"
+        },
+        "s3Etags": {
+          "shape": "S3Etags",
+          "documentation": "<p>The Amazon S3 eTag identifier for the zip file bundle that you use to create the simulation application.</p>"
+        },
+        "imageDigest": {
+          "shape": "ImageDigest",
+          "documentation": "<p>The SHA256 digest used to identify the Docker image URI used to created the simulation application.</p>"
         }
       }
     },
@@ -2263,6 +2297,10 @@
         "revisionId": {
           "shape": "RevisionId",
           "documentation": "<p>The revision ID of the simulation application.</p>"
+        },
+        "environment": {
+          "shape": "Environment",
+          "documentation": "<p>The object that contains the Docker image URI used to create the simulation application.</p>"
         }
       }
     },
@@ -3112,6 +3150,14 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The list of all tags added to the specified robot application.</p>"
+        },
+        "environment": {
+          "shape": "Environment",
+          "documentation": "<p>The object that contains the Docker image URI used to create the robot application.</p>"
+        },
+        "imageDigest": {
+          "shape": "ImageDigest",
+          "documentation": "<p>A SHA256 identifier for the Docker image that you use for your robot application.</p>"
         }
       }
     },
@@ -3230,6 +3276,14 @@
         "tags": {
           "shape": "TagMap",
           "documentation": "<p>The list of all tags added to the specified simulation application.</p>"
+        },
+        "environment": {
+          "shape": "Environment",
+          "documentation": "<p>The object that contains the Docker image URI used to create the simulation application.</p>"
+        },
+        "imageDigest": {
+          "shape": "ImageDigest",
+          "documentation": "<p>A SHA256 identifier for the Docker image that you use for your simulation application.</p>"
         }
       }
     },
@@ -3602,6 +3656,16 @@
         }
       }
     },
+    "Environment": {
+      "type": "structure",
+      "members": {
+        "uri": {
+          "shape": "RepositoryUrl",
+          "documentation": "<p>The Docker image URI for either your robot or simulation applications.</p>"
+        }
+      },
+      "documentation": "<p>The object that contains the Docker image URI for either your robot or simulation applications.</p>"
+    },
     "EnvironmentVariableKey": {
       "type": "string",
       "max": 1024,
@@ -3815,6 +3879,12 @@
       "max": 1224,
       "min": 1,
       "pattern": ".*"
+    },
+    "ImageDigest": {
+      "type": "string",
+      "max": 72,
+      "min": 0,
+      "pattern": "[Ss][Hh][Aa]256:[0-9a-fA-F]{64}"
     },
     "Integer": {
       "type": "integer"
@@ -4446,6 +4516,12 @@
       "min": 1,
       "pattern": "1.x"
     },
+    "RepositoryUrl": {
+      "type": "string",
+      "max": 1024,
+      "min": 1,
+      "pattern": ".+"
+    },
     "RestartSimulationJobRequest": {
       "type": "structure",
       "required": [
@@ -4706,6 +4782,12 @@
     },
     "S3Etag": {
       "type": "string"
+    },
+    "S3Etags": {
+      "type": "list",
+      "member": {
+        "shape": "S3Etag"
+      }
     },
     "S3Key": {
       "type": "string",
@@ -5573,7 +5655,6 @@
       "type": "structure",
       "required": [
         "application",
-        "sources",
         "robotSoftwareSuite"
       ],
       "members": {
@@ -5592,6 +5673,10 @@
         "currentRevisionId": {
           "shape": "RevisionId",
           "documentation": "<p>The revision id for the robot application.</p>"
+        },
+        "environment": {
+          "shape": "Environment",
+          "documentation": "<p>The object that contains the Docker image URI for your robot application.</p>"
         }
       }
     },
@@ -5625,6 +5710,10 @@
         "revisionId": {
           "shape": "RevisionId",
           "documentation": "<p>The revision id of the robot application.</p>"
+        },
+        "environment": {
+          "shape": "Environment",
+          "documentation": "<p>The object that contains the Docker image URI for your robot application.</p>"
         }
       }
     },
@@ -5632,7 +5721,6 @@
       "type": "structure",
       "required": [
         "application",
-        "sources",
         "simulationSoftwareSuite",
         "robotSoftwareSuite"
       ],
@@ -5660,6 +5748,10 @@
         "currentRevisionId": {
           "shape": "RevisionId",
           "documentation": "<p>The revision id for the robot application.</p>"
+        },
+        "environment": {
+          "shape": "Environment",
+          "documentation": "<p>The object that contains the Docker image URI for your simulation application.</p>"
         }
       }
     },
@@ -5701,6 +5793,10 @@
         "revisionId": {
           "shape": "RevisionId",
           "documentation": "<p>The revision id of the simulation application.</p>"
+        },
+        "environment": {
+          "shape": "Environment",
+          "documentation": "<p>The object that contains the Docker image URI used for your simulation application.</p>"
         }
       }
     },

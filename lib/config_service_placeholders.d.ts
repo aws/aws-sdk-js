@@ -279,6 +279,7 @@ export abstract class ConfigurationServicePlaceholders {
   snowdevicemanagement?: AWS.SnowDeviceManagement.Types.ClientConfiguration;
   memorydb?: AWS.MemoryDB.Types.ClientConfiguration;
   opensearch?: AWS.OpenSearch.Types.ClientConfiguration;
+  kafkaconnect?: AWS.KafkaConnect.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -560,4 +561,5 @@ export interface ConfigurationServiceApiVersions {
   snowdevicemanagement?: AWS.SnowDeviceManagement.Types.apiVersion;
   memorydb?: AWS.MemoryDB.Types.apiVersion;
   opensearch?: AWS.OpenSearch.Types.apiVersion;
+  kafkaconnect?: AWS.KafkaConnect.Types.apiVersion;
 }

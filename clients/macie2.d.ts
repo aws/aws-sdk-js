@@ -340,13 +340,21 @@ declare class Macie2 extends Service {
    */
   listFindingsFilters(callback?: (err: AWSError, data: Macie2.Types.ListFindingsFiltersResponse) => void): Request<Macie2.Types.ListFindingsFiltersResponse, AWSError>;
   /**
-   * Retrieves information about all the Amazon Macie membership invitations that were received by an account.
+   * Retrieves information about the Amazon Macie membership invitations that were received by an account.
    */
   listInvitations(params: Macie2.Types.ListInvitationsRequest, callback?: (err: AWSError, data: Macie2.Types.ListInvitationsResponse) => void): Request<Macie2.Types.ListInvitationsResponse, AWSError>;
   /**
-   * Retrieves information about all the Amazon Macie membership invitations that were received by an account.
+   * Retrieves information about the Amazon Macie membership invitations that were received by an account.
    */
   listInvitations(callback?: (err: AWSError, data: Macie2.Types.ListInvitationsResponse) => void): Request<Macie2.Types.ListInvitationsResponse, AWSError>;
+  /**
+   * Retrieves information about all the managed data identifiers that Amazon Macie currently provides.
+   */
+  listManagedDataIdentifiers(params: Macie2.Types.ListManagedDataIdentifiersRequest, callback?: (err: AWSError, data: Macie2.Types.ListManagedDataIdentifiersResponse) => void): Request<Macie2.Types.ListManagedDataIdentifiersResponse, AWSError>;
+  /**
+   * Retrieves information about all the managed data identifiers that Amazon Macie currently provides.
+   */
+  listManagedDataIdentifiers(callback?: (err: AWSError, data: Macie2.Types.ListManagedDataIdentifiersResponse) => void): Request<Macie2.Types.ListManagedDataIdentifiersResponse, AWSError>;
   /**
    * Retrieves information about the accounts that are associated with an Amazon Macie administrator account.
    */
@@ -599,7 +607,7 @@ declare namespace Macie2 {
   }
   export interface BatchGetCustomDataIdentifiersRequest {
     /**
-     * An array of strings that lists the unique identifiers for the custom data identifiers to retrieve information about.
+     * An array of custom data identifier IDs, one for each custom data identifier to retrieve information about.
      */
     ids?: __listOf__string;
   }
@@ -609,7 +617,7 @@ declare namespace Macie2 {
      */
     customDataIdentifiers?: __listOfBatchGetCustomDataIdentifierSummary;
     /**
-     * An array of identifiers, one for each identifier that was specified in the request, but doesn't correlate to an existing custom data identifier.
+     * An array of custom data identifier IDs, one for each custom data identifier that was specified in the request but doesn't correlate to an existing custom data identifier.
      */
     notFoundIdentifierIds?: __listOf__string;
   }
@@ -969,7 +977,7 @@ declare namespace Macie2 {
      */
     clientToken: __string;
     /**
-     * The custom data identifiers to use for data analysis and classification.
+     * An array of unique identifiers, one for each custom data identifier for the job to use when it analyzes data. To use only managed data identifiers, don't specify a value for this property and specify a value other than NONE for the managedDataIdentifierSelector property.
      */
     customDataIdentifierIds?: __listOf__string;
     /**
@@ -977,13 +985,21 @@ declare namespace Macie2 {
      */
     description?: __string;
     /**
-     * Specifies whether to analyze all existing, eligible objects immediately after the job is created.
+     * For a recurring job, specifies whether to analyze all existing, eligible objects immediately after the job is created (true). To analyze only those objects that are created or changed after you create the job and before the job's first scheduled run, set this value to false.If you configure the job to run only once, don't specify a value for this property.
      */
     initialRun?: __boolean;
     /**
      * The schedule for running the job. Valid values are: ONE_TIME - Run the job only once. If you specify this value, don't specify a value for the scheduleFrequency property. SCHEDULED - Run the job on a daily, weekly, or monthly basis. If you specify this value, use the scheduleFrequency property to define the recurrence pattern for the job.
      */
     jobType: JobType;
+    /**
+     * An array of unique identifiers, one for each managed data identifier for the job to include (use) or exclude (not use) when it analyzes data. Inclusion or exclusion depends on the managed data identifier selection type that you specify for the job (managedDataIdentifierSelector).To retrieve a list of valid values for this property, use the ListManagedDataIdentifiers operation.
+     */
+    managedDataIdentifierIds?: __listOf__string;
+    /**
+     * The selection type to apply when determining which managed data identifiers the job uses to analyze data. Valid values are: ALL - Use all the managed data identifiers that Amazon Macie provides. If you specify this value, don't specify any values for the managedDataIdentifierIds property. EXCLUDE - Use all the managed data identifiers that Macie provides except the managed data identifiers specified by the managedDataIdentifierIds property. INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property. NONE - Don't use any managed data identifiers. If you specify this value, specify at least one custom data identifier for the job (customDataIdentifierIds) and don't specify any values for the managedDataIdentifierIds property. If you don't specify a value for this property, the job uses all managed data identifiers. If you don't specify a value for this property or you specify ALL or EXCLUDE for a recurring job, the job also uses new managed data identifiers as they are released.
+     */
+    managedDataIdentifierSelector?: ManagedDataIdentifierSelector;
     /**
      * A custom name for the job. The name can contain as many as 500 characters.
      */
@@ -993,7 +1009,7 @@ declare namespace Macie2 {
      */
     s3JobDefinition: S3JobDefinition;
     /**
-     * The sampling depth, as a percentage, to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.
+     * The sampling depth, as a percentage, for the job to apply when processing objects. This value determines the percentage of eligible objects that the job analyzes. If this value is less than 100, Amazon Macie selects the objects to analyze at random, up to the specified percentage, and analyzes all the data in those objects.
      */
     samplingPercentage?: __integer;
     /**
@@ -1025,15 +1041,15 @@ declare namespace Macie2 {
      */
     description?: __string;
     /**
-     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 characters. Ignore words are case sensitive.
+     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore words are case sensitive.
      */
     ignoreWords?: __listOf__string;
     /**
-     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 characters. Keywords aren't case sensitive.
+     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.
      */
     keywords?: __listOf__string;
     /**
-     * The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.
+     * The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.
      */
     maximumMatchDistance?: __integer;
     /**
@@ -1348,7 +1364,7 @@ declare namespace Macie2 {
      */
     createdAt?: __timestampIso8601;
     /**
-     * The custom data identifiers that the job uses to analyze data.
+     * An array of unique identifiers, one for each custom data identifier that the job uses to analyze data. This value is null if the job uses only managed data identifiers to analyze data.
      */
     customDataIdentifierIds?: __listOf__string;
     /**
@@ -1356,7 +1372,7 @@ declare namespace Macie2 {
      */
     description?: __string;
     /**
-     * Specifies whether the job is configured to analyze all existing, eligible objects immediately after it's created.
+     * For a recurring job, specifies whether you configured the job to analyze all existing, eligible objects immediately after the job was created (true). If you configured the job to analyze only those objects that were created or changed after the job was created and before the job's first scheduled run, this value is false. This value is also false for a one-time job.
      */
     initialRun?: __boolean;
     /**
@@ -1368,7 +1384,7 @@ declare namespace Macie2 {
      */
     jobId?: __string;
     /**
-     * The current status of the job. Possible values are: CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days. COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs. PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for. RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress. USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
+     * The current status of the job. Possible values are: CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days. COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs. PAUSED - Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for. RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress. USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
      */
     jobStatus?: JobStatus;
     /**
@@ -1384,6 +1400,14 @@ declare namespace Macie2 {
      */
     lastRunTime?: __timestampIso8601;
     /**
+     * An array of unique identifiers, one for each managed data identifier that the job is explicitly configured to include (use) or exclude (not use) when it analyzes data. Inclusion or exclusion depends on the managed data identifier selection type specified for the job (managedDataIdentifierSelector). This value is null if the job's managed data identifier selection type is ALL or the job uses only custom data identifiers (customDataIdentifierIds) to analyze data.
+     */
+    managedDataIdentifierIds?: __listOf__string;
+    /**
+     * The selection type that determines which managed data identifiers the job uses to analyze data. Possible values are: ALL - Use all the managed data identifiers that Amazon Macie provides. EXCLUDE - Use all the managed data identifiers that Macie provides except the managed data identifiers specified by the managedDataIdentifierIds property. INCLUDE - Use only the managed data identifiers specified by the managedDataIdentifierIds property. NONE - Don't use any managed data identifiers. If this value is null, the job uses all managed data identifiers. If this value is null, ALL, or EXCLUDE for a recurring job, the job also uses new managed data identifiers as they are released.
+     */
+    managedDataIdentifierSelector?: ManagedDataIdentifierSelector;
+    /**
      * The custom name of the job.
      */
     name?: __string;
@@ -1396,7 +1420,7 @@ declare namespace Macie2 {
      */
     samplingPercentage?: __integer;
     /**
-     * The recurrence pattern for running the job. If the job is configured to run only once, this value is null.
+     * The recurrence pattern for running the job. This value is null if the job is configured to run only once.
      */
     scheduleFrequency?: JobScheduleFrequency;
     /**
@@ -1765,7 +1789,7 @@ declare namespace Macie2 {
      */
     keywords?: __listOf__string;
     /**
-     * The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern.
+     * The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern.
      */
     maximumMatchDistance?: __integer;
     /**
@@ -2184,7 +2208,7 @@ declare namespace Macie2 {
      */
     jobId?: __string;
     /**
-     * The current status of the job. Possible values are: CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days. COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs. PAUSED - Amazon Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for. RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress. USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
+     * The current status of the job. Possible values are: CANCELLED - You cancelled the job or, if it's a one-time job, you paused the job and didn't resume it within 30 days. COMPLETE - For a one-time job, Amazon Macie finished processing the data specified for the job. This value doesn't apply to recurring jobs. IDLE - For a recurring job, the previous scheduled run is complete and the next scheduled run is pending. This value doesn't apply to one-time jobs. PAUSED - Macie started running the job but additional processing would exceed the monthly sensitive data discovery quota for your account or one or more member accounts that the job analyzes data for. RUNNING - For a one-time job, the job is in progress. For a recurring job, a scheduled run is in progress. USER_PAUSED - You paused the job. If you paused the job while it had a status of RUNNING and you don't resume it within 30 days of pausing it, the job or job run will expire and be cancelled, depending on the job's type. To check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
      */
     jobStatus?: JobStatus;
     /**
@@ -2379,6 +2403,22 @@ declare namespace Macie2 {
      */
     orderBy?: OrderBy;
   }
+  export interface ListManagedDataIdentifiersRequest {
+    /**
+     * The nextToken string that specifies which page of results to return in a paginated response.
+     */
+    nextToken?: __string;
+  }
+  export interface ListManagedDataIdentifiersResponse {
+    /**
+     * An array of objects, one for each managed data identifier.
+     */
+    items?: __listOfManagedDataIdentifierSummary;
+    /**
+     * The string to use in a subsequent request to get the next page of results in a paginated response. This value is null if there are no additional pages.
+     */
+    nextToken?: __string;
+  }
   export interface ListMembersRequest {
     /**
      * The maximum number of items to include in each page of a paginated response.
@@ -2436,6 +2476,17 @@ declare namespace Macie2 {
     tags?: TagMap;
   }
   export type MacieStatus = "PAUSED"|"ENABLED"|string;
+  export type ManagedDataIdentifierSelector = "ALL"|"EXCLUDE"|"INCLUDE"|"NONE"|string;
+  export interface ManagedDataIdentifierSummary {
+    /**
+     * The category of sensitive data that the managed data identifier detects: CREDENTIALS, for credentials data such as private keys or Amazon Web Services secret keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as passport numbers.
+     */
+    category?: SensitiveDataItemCategory;
+    /**
+     * The unique identifier for the managed data identifier. This is a string that describes the type of sensitive data that the managed data identifier detects. For example: OPENSSH_PRIVATE_KEY for OpenSSH private keys, CREDIT_CARD_NUMBER for credit card numbers, or USA_PASSPORT_NUMBER for US passport numbers.
+     */
+    id?: __string;
+  }
   export interface MatchingBucket {
     /**
      * The unique identifier for the Amazon Web Services account that owns the bucket.
@@ -2714,7 +2765,7 @@ declare namespace Macie2 {
      */
     name?: __string;
     /**
-     * The display name and Amazon Web Services account ID for the user who owns the bucket.
+     * The display name and canonical user ID for the Amazon Web Services account that owns the bucket.
      */
     owner?: S3BucketOwner;
     /**
@@ -2748,11 +2799,11 @@ declare namespace Macie2 {
   }
   export interface S3BucketOwner {
     /**
-     * The display name of the user who owns the bucket.
+     * The display name of the account that owns the bucket.
      */
     displayName?: __string;
     /**
-     * The Amazon Web Services account ID for the user who owns the bucket.
+     * The canonical user ID for the account that owns the bucket.
      */
     id?: __string;
   }
@@ -2959,7 +3010,7 @@ declare namespace Macie2 {
   export type SensitiveData = SensitiveDataItem[];
   export interface SensitiveDataItem {
     /**
-     * The category of sensitive data that was detected. For example: CREDENTIALS, for credentials data such as private keys or Amazon Web Services secret keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as driver's license identification numbers.
+     * The category of sensitive data that was detected. For example: CREDENTIALS, for credentials data such as private keys or Amazon Web Services secret keys; FINANCIAL_INFORMATION, for financial data such as credit card numbers; or, PERSONAL_INFORMATION, for personal health information, such as health insurance identification numbers, or personally identifiable information, such as passport numbers.
      */
     category?: SensitiveDataItemCategory;
     /**
@@ -3164,15 +3215,15 @@ declare namespace Macie2 {
   }
   export interface TestCustomDataIdentifierRequest {
     /**
-     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 characters. Ignore words are case sensitive.
+     * An array that lists specific character sequences (ignore words) to exclude from the results. If the text matched by the regular expression is the same as any string in this array, Amazon Macie ignores it. The array can contain as many as 10 ignore words. Each ignore word can contain 4-90 UTF-8 characters. Ignore words are case sensitive.
      */
     ignoreWords?: __listOf__string;
     /**
-     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 characters. Keywords aren't case sensitive.
+     * An array that lists specific character sequences (keywords), one of which must be within proximity (maximumMatchDistance) of the regular expression to match. The array can contain as many as 50 keywords. Each keyword can contain 3-90 UTF-8 characters. Keywords aren't case sensitive.
      */
     keywords?: __listOf__string;
     /**
-     * The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.
+     * The maximum number of characters that can exist between text that matches the regex pattern and the character sequences specified by the keywords array. Amazon Macie includes or excludes a result based on the proximity of a keyword to text that matches the regex pattern. The distance can be 1-300 characters. The default value is 50.
      */
     maximumMatchDistance?: __integer;
     /**
@@ -3459,6 +3510,7 @@ declare namespace Macie2 {
   export type __listOfJobSummary = JobSummary[];
   export type __listOfKeyValuePair = KeyValuePair[];
   export type __listOfListJobsFilterTerm = ListJobsFilterTerm[];
+  export type __listOfManagedDataIdentifierSummary = ManagedDataIdentifierSummary[];
   export type __listOfMatchingResource = MatchingResource[];
   export type __listOfMember = Member[];
   export type __listOfS3BucketDefinitionForJob = S3BucketDefinitionForJob[];

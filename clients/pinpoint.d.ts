@@ -52,6 +52,14 @@ declare class Pinpoint extends Service {
    */
   createImportJob(callback?: (err: AWSError, data: Pinpoint.Types.CreateImportJobResponse) => void): Request<Pinpoint.Types.CreateImportJobResponse, AWSError>;
   /**
+   * Creates a new message template for messages using the in-app message channel.
+   */
+  createInAppTemplate(params: Pinpoint.Types.CreateInAppTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateInAppTemplateResponse) => void): Request<Pinpoint.Types.CreateInAppTemplateResponse, AWSError>;
+  /**
+   * Creates a new message template for messages using the in-app message channel.
+   */
+  createInAppTemplate(callback?: (err: AWSError, data: Pinpoint.Types.CreateInAppTemplateResponse) => void): Request<Pinpoint.Types.CreateInAppTemplateResponse, AWSError>;
+  /**
    * Creates a journey for an application.
    */
   createJourney(params: Pinpoint.Types.CreateJourneyRequest, callback?: (err: AWSError, data: Pinpoint.Types.CreateJourneyResponse) => void): Request<Pinpoint.Types.CreateJourneyResponse, AWSError>;
@@ -203,6 +211,14 @@ declare class Pinpoint extends Service {
    * Disables the GCM channel for an application and deletes any existing settings for the channel.
    */
   deleteGcmChannel(callback?: (err: AWSError, data: Pinpoint.Types.DeleteGcmChannelResponse) => void): Request<Pinpoint.Types.DeleteGcmChannelResponse, AWSError>;
+  /**
+   * Deletes a message template for messages sent using the in-app message channel.
+   */
+  deleteInAppTemplate(params: Pinpoint.Types.DeleteInAppTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.DeleteInAppTemplateResponse) => void): Request<Pinpoint.Types.DeleteInAppTemplateResponse, AWSError>;
+  /**
+   * Deletes a message template for messages sent using the in-app message channel.
+   */
+  deleteInAppTemplate(callback?: (err: AWSError, data: Pinpoint.Types.DeleteInAppTemplateResponse) => void): Request<Pinpoint.Types.DeleteInAppTemplateResponse, AWSError>;
   /**
    * Deletes a journey from an application.
    */
@@ -483,6 +499,22 @@ declare class Pinpoint extends Service {
    * Retrieves information about the status and settings of all the import jobs for an application.
    */
   getImportJobs(callback?: (err: AWSError, data: Pinpoint.Types.GetImportJobsResponse) => void): Request<Pinpoint.Types.GetImportJobsResponse, AWSError>;
+  /**
+   * Retrieves the in-app messages targeted for the provided endpoint ID.
+   */
+  getInAppMessages(params: Pinpoint.Types.GetInAppMessagesRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetInAppMessagesResponse) => void): Request<Pinpoint.Types.GetInAppMessagesResponse, AWSError>;
+  /**
+   * Retrieves the in-app messages targeted for the provided endpoint ID.
+   */
+  getInAppMessages(callback?: (err: AWSError, data: Pinpoint.Types.GetInAppMessagesResponse) => void): Request<Pinpoint.Types.GetInAppMessagesResponse, AWSError>;
+  /**
+   * Retrieves the content and settings of a message template for messages sent through the in-app channel.
+   */
+  getInAppTemplate(params: Pinpoint.Types.GetInAppTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.GetInAppTemplateResponse) => void): Request<Pinpoint.Types.GetInAppTemplateResponse, AWSError>;
+  /**
+   * Retrieves the content and settings of a message template for messages sent through the in-app channel.
+   */
+  getInAppTemplate(callback?: (err: AWSError, data: Pinpoint.Types.GetInAppTemplateResponse) => void): Request<Pinpoint.Types.GetInAppTemplateResponse, AWSError>;
   /**
    * Retrieves information about the status, configuration, and other settings for a journey.
    */
@@ -827,6 +859,14 @@ declare class Pinpoint extends Service {
    * Enables the GCM channel for an application or updates the status and settings of the GCM channel for an application.
    */
   updateGcmChannel(callback?: (err: AWSError, data: Pinpoint.Types.UpdateGcmChannelResponse) => void): Request<Pinpoint.Types.UpdateGcmChannelResponse, AWSError>;
+  /**
+   * Updates an existing message template for messages sent through the in-app message channel.
+   */
+  updateInAppTemplate(params: Pinpoint.Types.UpdateInAppTemplateRequest, callback?: (err: AWSError, data: Pinpoint.Types.UpdateInAppTemplateResponse) => void): Request<Pinpoint.Types.UpdateInAppTemplateResponse, AWSError>;
+  /**
+   * Updates an existing message template for messages sent through the in-app message channel.
+   */
+  updateInAppTemplate(callback?: (err: AWSError, data: Pinpoint.Types.UpdateInAppTemplateResponse) => void): Request<Pinpoint.Types.UpdateInAppTemplateResponse, AWSError>;
   /**
    * Updates the configuration and other settings for a journey.
    */
@@ -1604,6 +1644,7 @@ declare namespace Pinpoint {
      */
     TitleOverride?: __string;
   }
+  export type Alignment = "LEFT"|"CENTER"|"RIGHT"|string;
   export interface AndroidPushNotificationTemplate {
     /**
      * The action to occur if a recipient taps a push notification that's based on the message template. Valid values are: OPEN_APP - Your app opens or it becomes the foreground app if it was sent to the background. This is the default action. DEEP_LINK - Your app opens and displays a designated user interface in the app. This action uses the deep-linking features of the Android platform. URL - The default mobile browser on the recipient's device opens and loads the web page at a URL that you specify.
@@ -1867,6 +1908,7 @@ declare namespace Pinpoint {
      */
     Rows: ListOfResultRow;
   }
+  export type ButtonAction = "LINK"|"DEEP_LINK"|"CLOSE"|string;
   export interface CampaignCustomMessage {
     /**
      * The raw, JSON-formatted string to use as the payload for the message. The maximum size is 5 KB.
@@ -1945,6 +1987,24 @@ declare namespace Pinpoint {
      */
     WebUrl?: __string;
   }
+  export interface CampaignInAppMessage {
+    /**
+     * The message body of the notification, the email body or the text message.
+     */
+    Body?: __string;
+    /**
+     * In-app message content.
+     */
+    Content?: ListOfInAppMessageContent;
+    /**
+     * Custom config to be sent to client.
+     */
+    CustomConfig?: MapOf__string;
+    /**
+     * In-app message layout.
+     */
+    Layout?: Layout;
+  }
   export interface CampaignLimits {
     /**
      * The maximum number of messages that a campaign can send to a single endpoint during a 24-hour period. For an application, this value specifies the default limit for the number of messages that campaigns and journeys can send to a single endpoint during a 24-hour period. The maximum value is 100.
@@ -1962,6 +2022,10 @@ declare namespace Pinpoint {
      * The maximum number of messages that a campaign can send to a single endpoint during the course of the campaign. If a campaign recurs, this setting applies to all runs of the campaign. The maximum value is 100.
      */
     Total?: __integer;
+    /**
+     * The maximum total number of messages that the campaign can send per user session.
+     */
+    Session?: __integer;
   }
   export interface CampaignResponse {
     /**
@@ -2060,6 +2124,10 @@ declare namespace Pinpoint {
      * The version number of the campaign.
      */
     Version?: __integer;
+    /**
+     * Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.
+     */
+    Priority?: __integer;
   }
   export interface CampaignSmsMessage {
     /**
@@ -2142,7 +2210,7 @@ declare namespace Pinpoint {
      */
     Version?: __integer;
   }
-  export type ChannelType = "PUSH"|"GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|string;
+  export type ChannelType = "PUSH"|"GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|"IN_APP"|string;
   export interface ChannelsResponse {
     /**
      * A map that contains a multipart response for each channel. For each item in this object, the ChannelType is the key and the Channel is the value.
@@ -2232,6 +2300,16 @@ declare namespace Pinpoint {
   }
   export interface CreateImportJobResponse {
     ImportJobResponse: ImportJobResponse;
+  }
+  export interface CreateInAppTemplateRequest {
+    InAppTemplateRequest: InAppTemplateRequest;
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+  }
+  export interface CreateInAppTemplateResponse {
+    TemplateCreateMessageBody: TemplateCreateMessageBody;
   }
   export interface CreateJourneyRequest {
     /**
@@ -2376,6 +2454,32 @@ declare namespace Pinpoint {
      * The unique identifier for the version of the message template to use for the message. If specified, this value must match the identifier for an existing template version. To retrieve a list of versions and version identifiers for a template, use the Template Versions resource. If you don't specify a value for this property, Amazon Pinpoint uses the active version of the template. The active version is typically the version of a template that's been most recently reviewed and approved for use, depending on your workflow. It isn't necessarily the latest version of a template.
      */
     TemplateVersion?: __string;
+  }
+  export interface DefaultButtonConfiguration {
+    /**
+     * The background color of the button.
+     */
+    BackgroundColor?: __string;
+    /**
+     * The border radius of the button.
+     */
+    BorderRadius?: __integer;
+    /**
+     * Action triggered by the button.
+     */
+    ButtonAction: ButtonAction;
+    /**
+     * Button destination.
+     */
+    Link?: __string;
+    /**
+     * Button text.
+     */
+    Text: __string;
+    /**
+     * The text color of the button.
+     */
+    TextColor?: __string;
   }
   export interface DefaultMessage {
     /**
@@ -2567,6 +2671,19 @@ declare namespace Pinpoint {
   }
   export interface DeleteGcmChannelResponse {
     GCMChannelResponse: GCMChannelResponse;
+  }
+  export interface DeleteInAppTemplateRequest {
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
+  }
+  export interface DeleteInAppTemplateResponse {
+    MessageBody: MessageBody;
   }
   export interface DeleteJourneyRequest {
     /**
@@ -3470,7 +3587,7 @@ declare namespace Pinpoint {
   }
   export type FilterType = "SYSTEM"|"ENDPOINT"|string;
   export type Format = "CSV"|"JSON"|string;
-  export type Frequency = "ONCE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|"EVENT"|string;
+  export type Frequency = "ONCE"|"HOURLY"|"DAILY"|"WEEKLY"|"MONTHLY"|"EVENT"|"IN_APP_EVENT"|string;
   export interface GCMChannelRequest {
     /**
      * The Web API Key, also referred to as an API_KEY or server key, that you received from Google to communicate with Google services.
@@ -3975,6 +4092,32 @@ declare namespace Pinpoint {
   export interface GetImportJobsResponse {
     ImportJobsResponse: ImportJobsResponse;
   }
+  export interface GetInAppMessagesRequest {
+    /**
+     * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
+     */
+    ApplicationId: __string;
+    /**
+     * The unique identifier for the endpoint.
+     */
+    EndpointId: __string;
+  }
+  export interface GetInAppMessagesResponse {
+    InAppMessagesResponse: InAppMessagesResponse;
+  }
+  export interface GetInAppTemplateRequest {
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
+  }
+  export interface GetInAppTemplateResponse {
+    InAppTemplateResponse: InAppTemplateResponse;
+  }
   export interface GetJourneyDateRangeKpiRequest {
     /**
      * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
@@ -4411,6 +4554,214 @@ declare namespace Pinpoint {
      */
     NextToken?: __string;
   }
+  export interface InAppCampaignSchedule {
+    /**
+     * The scheduled time after which the in-app message should not be shown. Timestamp is in ISO 8601 format.
+     */
+    EndDate?: __string;
+    /**
+     * The event filter the SDK has to use to show the in-app message in the application.
+     */
+    EventFilter?: CampaignEventFilter;
+    /**
+     * Time during which the in-app message should not be shown to the user.
+     */
+    QuietTime?: QuietTime;
+  }
+  export interface InAppMessage {
+    /**
+     * In-app message content.
+     */
+    Content?: ListOfInAppMessageContent;
+    /**
+     * Custom config to be sent to SDK.
+     */
+    CustomConfig?: MapOf__string;
+    /**
+     * The layout of the message.
+     */
+    Layout?: Layout;
+  }
+  export interface InAppMessageBodyConfig {
+    /**
+     * The alignment of the text. Valid values: LEFT, CENTER, RIGHT.
+     */
+    Alignment: Alignment;
+    /**
+     * Message Body.
+     */
+    Body: __string;
+    /**
+     * The text color.
+     */
+    TextColor: __string;
+  }
+  export interface InAppMessageButton {
+    /**
+     * Default button content.
+     */
+    Android?: OverrideButtonConfiguration;
+    /**
+     * Default button content.
+     */
+    DefaultConfig?: DefaultButtonConfiguration;
+    /**
+     * Default button content.
+     */
+    IOS?: OverrideButtonConfiguration;
+    /**
+     * Default button content.
+     */
+    Web?: OverrideButtonConfiguration;
+  }
+  export interface InAppMessageCampaign {
+    /**
+     * Campaign id of the corresponding campaign.
+     */
+    CampaignId?: __string;
+    /**
+     * Daily cap which controls the number of times any in-app messages can be shown to the endpoint during a day.
+     */
+    DailyCap?: __integer;
+    /**
+     * In-app message content with all fields required for rendering an in-app message.
+     */
+    InAppMessage?: InAppMessage;
+    /**
+     * Priority of the in-app message.
+     */
+    Priority?: __integer;
+    /**
+     * Schedule of the campaign.
+     */
+    Schedule?: InAppCampaignSchedule;
+    /**
+     * Session cap which controls the number of times an in-app message can be shown to the endpoint during an application session.
+     */
+    SessionCap?: __integer;
+    /**
+     * Total cap which controls the number of times an in-app message can be shown to the endpoint.
+     */
+    TotalCap?: __integer;
+    /**
+     * Treatment id of the campaign.
+     */
+    TreatmentId?: __string;
+  }
+  export interface InAppMessageContent {
+    /**
+     * The background color for the message.
+     */
+    BackgroundColor?: __string;
+    /**
+     * The configuration for the message body.
+     */
+    BodyConfig?: InAppMessageBodyConfig;
+    /**
+     * The configuration for the message header.
+     */
+    HeaderConfig?: InAppMessageHeaderConfig;
+    /**
+     * The image url for the background of message.
+     */
+    ImageUrl?: __string;
+    /**
+     * The first button inside the message.
+     */
+    PrimaryBtn?: InAppMessageButton;
+    /**
+     * The second button inside message.
+     */
+    SecondaryBtn?: InAppMessageButton;
+  }
+  export interface InAppMessageHeaderConfig {
+    /**
+     * The alignment of the text. Valid values: LEFT, CENTER, RIGHT.
+     */
+    Alignment: Alignment;
+    /**
+     * Message Header.
+     */
+    Header: __string;
+    /**
+     * The text color.
+     */
+    TextColor: __string;
+  }
+  export interface InAppMessagesResponse {
+    /**
+     * List of targeted in-app message campaigns.
+     */
+    InAppMessageCampaigns?: ListOfInAppMessageCampaign;
+  }
+  export interface InAppTemplateRequest {
+    /**
+     * The content of the message, can include up to 5 modals. Each modal must contain a message, a header, and background color. ImageUrl and buttons are optional.
+     */
+    Content?: ListOfInAppMessageContent;
+    /**
+     * Custom config to be sent to client.
+     */
+    CustomConfig?: MapOf__string;
+    /**
+     * The layout of the message.
+     */
+    Layout?: Layout;
+    /**
+     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     */
+    tags?: MapOf__string;
+    /**
+     * The description of the template.
+     */
+    TemplateDescription?: __string;
+  }
+  export interface InAppTemplateResponse {
+    /**
+     * The resource arn of the template.
+     */
+    Arn?: __string;
+    /**
+     * The content of the message, can include up to 5 modals. Each modal must contain a message, a header, and background color. ImageUrl and buttons are optional.
+     */
+    Content?: ListOfInAppMessageContent;
+    /**
+     * The creation date of the template.
+     */
+    CreationDate: __string;
+    /**
+     * Custom config to be sent to client.
+     */
+    CustomConfig?: MapOf__string;
+    /**
+     * The last modified date of the template.
+     */
+    LastModifiedDate: __string;
+    /**
+     * The layout of the message.
+     */
+    Layout?: Layout;
+    /**
+     * A string-to-string map of key-value pairs that defines the tags to associate with the message template. Each tag consists of a required tag key and an associated tag value.
+     */
+    tags?: MapOf__string;
+    /**
+     * The description of the template.
+     */
+    TemplateDescription?: __string;
+    /**
+     * The name of the template.
+     */
+    TemplateName: __string;
+    /**
+     * The type of the template.
+     */
+    TemplateType: TemplateType;
+    /**
+     * The version id of the template.
+     */
+    Version?: __string;
+  }
   export type Include = "ALL"|"ANY"|"NONE"|string;
   export interface ItemResponse {
     /**
@@ -4660,6 +5011,7 @@ declare namespace Pinpoint {
      */
     NextToken?: __string;
   }
+  export type Layout = "BOTTOM_BANNER"|"TOP_BANNER"|"OVERLAYS"|"MOBILE_FEED"|"MIDDLE_BANNER"|"CAROUSEL"|string;
   export interface ListJourneysRequest {
     /**
      * The unique identifier for the application. This identifier is displayed as the Project ID on the Amazon Pinpoint console.
@@ -4831,6 +5183,10 @@ declare namespace Pinpoint {
      * The message that the campaign sends through the SMS channel. If specified, this message overrides the default message.
      */
     SMSMessage?: CampaignSmsMessage;
+    /**
+     * The in-app message configuration.
+     */
+    InAppMessage?: CampaignInAppMessage;
   }
   export interface MessageRequest {
     /**
@@ -5004,6 +5360,16 @@ declare namespace Pinpoint {
     ZipCode?: __string;
   }
   export type Operator = "ALL"|"ANY"|string;
+  export interface OverrideButtonConfiguration {
+    /**
+     * Action triggered by the button.
+     */
+    ButtonAction: ButtonAction;
+    /**
+     * Button destination.
+     */
+    Link?: __string;
+  }
   export interface PhoneNumberValidateRequest {
     NumberValidateRequest: NumberValidateRequest;
   }
@@ -5936,6 +6302,20 @@ declare namespace Pinpoint {
      */
     VoiceTemplate?: Template;
   }
+  export interface TemplateCreateMessageBody {
+    /**
+     * The Amazon Resource Name (ARN) of the message template that was created.
+     */
+    Arn?: __string;
+    /**
+     * The message that's returned from the API for the request to create the message template.
+     */
+    Message?: __string;
+    /**
+     * The unique identifier for the request to create the message template.
+     */
+    RequestID?: __string;
+  }
   export interface TemplateResponse {
     /**
      * The Amazon Resource Name (ARN) of the message template. This value isn't included in a TemplateResponse object. To retrieve the ARN of a template, use the GetEmailTemplate, GetPushTemplate, GetSmsTemplate, or GetVoiceTemplate operation, depending on the type of template that you want to retrieve the ARN for.
@@ -5974,7 +6354,7 @@ declare namespace Pinpoint {
      */
     Version?: __string;
   }
-  export type TemplateType = "EMAIL"|"SMS"|"VOICE"|"PUSH"|string;
+  export type TemplateType = "EMAIL"|"SMS"|"VOICE"|"PUSH"|"INAPP"|string;
   export interface TemplateVersionResponse {
     /**
      * The date, in ISO 8601 format, when the version of the message template was created.
@@ -6233,6 +6613,24 @@ declare namespace Pinpoint {
   }
   export interface UpdateGcmChannelResponse {
     GCMChannelResponse: GCMChannelResponse;
+  }
+  export interface UpdateInAppTemplateRequest {
+    /**
+     * Specifies whether to save the updates as a new version of the message template. Valid values are: true, save the updates as a new version; and, false, save the updates to (overwrite) the latest existing version of the template. If you don't specify a value for this parameter, Amazon Pinpoint saves the updates to (overwrites) the latest existing version of the template. If you specify a value of true for this parameter, don't specify a value for the version parameter. Otherwise, an error will occur.
+     */
+    CreateNewVersion?: __boolean;
+    InAppTemplateRequest: InAppTemplateRequest;
+    /**
+     * The name of the message template. A template name must start with an alphanumeric character and can contain a maximum of 128 characters. The characters can be alphanumeric characters, underscores (_), or hyphens (-). Template names are case sensitive.
+     */
+    TemplateName: __string;
+    /**
+     * The unique identifier for the version of the message template to update, retrieve information about, or delete. To retrieve identifiers and other information for all the versions of a template, use the Template Versions resource. If specified, this value must match the identifier for an existing template version. If specified for an update operation, this value must match the identifier for the latest existing version of the template. This restriction helps ensure that race conditions don't occur. If you don't specify a value for this parameter, Amazon Pinpoint does the following: For a get operation, retrieves information about the active version of the template. For an update operation, saves the updates to (overwrites) the latest existing version of the template, if the create-new-version parameter isn't used or is set to false. For a delete operation, deletes the template, including all versions of the template.
+     */
+    Version?: __string;
+  }
+  export interface UpdateInAppTemplateResponse {
+    MessageBody: MessageBody;
   }
   export interface UpdateJourneyRequest {
     /**
@@ -6662,6 +7060,10 @@ declare namespace Pinpoint {
      * A custom name of the default treatment for the campaign, if the campaign has multiple treatments. A treatment is a variation of a campaign that's used for A/B testing.
      */
     TreatmentName?: __string;
+    /**
+     * Defines the priority of the campaign, used to decide the order of messages displayed to user if there are multiple messages scheduled to be displayed at the same moment.
+     */
+    Priority?: __integer;
   }
   export interface WriteEventStream {
     /**
@@ -6781,7 +7183,7 @@ declare namespace Pinpoint {
      */
     TreatmentName?: __string;
   }
-  export type __EndpointTypesElement = "PUSH"|"GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|string;
+  export type __EndpointTypesElement = "PUSH"|"GCM"|"APNS"|"APNS_SANDBOX"|"APNS_VOIP"|"APNS_VOIP_SANDBOX"|"ADM"|"SMS"|"VOICE"|"EMAIL"|"BAIDU"|"CUSTOM"|"IN_APP"|string;
   export type __boolean = boolean;
   export type __double = number;
   export type __integer = number;
@@ -6792,6 +7194,8 @@ declare namespace Pinpoint {
   export type ListOfEndpointResponse = EndpointResponse[];
   export type ListOfExportJobResponse = ExportJobResponse[];
   export type ListOfImportJobResponse = ImportJobResponse[];
+  export type ListOfInAppMessageCampaign = InAppMessageCampaign[];
+  export type ListOfInAppMessageContent = InAppMessageContent[];
   export type ListOfJourneyResponse = JourneyResponse[];
   export type ListOfMultiConditionalBranch = MultiConditionalBranch[];
   export type ListOfRandomSplitEntry = RandomSplitEntry[];

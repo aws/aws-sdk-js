@@ -1071,5 +1071,8 @@
   },
   "opensearch": {
     "name": "OpenSearch"
+  },
+  "kafkaconnect": {
+    "name": "KafkaConnect"
   }
 }

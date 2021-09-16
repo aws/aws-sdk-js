@@ -3429,6 +3429,31 @@
       ],
       "documentation": "<p>Renders the UI template so that you can preview the worker's experience. </p>"
     },
+    "RetryPipelineExecution": {
+      "name": "RetryPipelineExecution",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "RetryPipelineExecutionRequest"
+      },
+      "output": {
+        "shape": "RetryPipelineExecutionResponse"
+      },
+      "errors": [
+        {
+          "shape": "ResourceNotFound"
+        },
+        {
+          "shape": "ResourceLimitExceeded"
+        },
+        {
+          "shape": "ConflictException"
+        }
+      ],
+      "documentation": "<p>Retry the execution of the pipeline.</p>"
+    },
     "Search": {
       "name": "Search",
       "http": {
@@ -12772,7 +12797,7 @@
         },
         "CreatedBy": {
           "shape": "UserContext",
-          "documentation": "<p>Who created the component.</p>"
+          "documentation": "<p>Who created the trial component.</p>"
         },
         "LastModifiedTime": {
           "shape": "Timestamp",
@@ -13895,7 +13920,8 @@
           "documentation": "<p>When the experiment was created.</p>"
         },
         "CreatedBy": {
-          "shape": "UserContext"
+          "shape": "UserContext",
+          "documentation": "<p>Who created the experiment.</p>"
         },
         "LastModifiedTime": {
           "shape": "Timestamp",
@@ -22803,7 +22829,8 @@
           "documentation": "<p>The status of the project.</p>"
         },
         "CreatedBy": {
-          "shape": "UserContext"
+          "shape": "UserContext",
+          "documentation": "<p>Who created the project.</p>"
         },
         "CreationTime": {
           "shape": "Timestamp",
@@ -23395,6 +23422,33 @@
         "Delete"
       ]
     },
+    "RetryPipelineExecutionRequest": {
+      "type": "structure",
+      "required": [
+        "PipelineExecutionArn",
+        "ClientRequestToken"
+      ],
+      "members": {
+        "PipelineExecutionArn": {
+          "shape": "PipelineExecutionArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>"
+        },
+        "ClientRequestToken": {
+          "shape": "IdempotencyToken",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than once.</p>",
+          "idempotencyToken": true
+        }
+      }
+    },
+    "RetryPipelineExecutionResponse": {
+      "type": "structure",
+      "members": {
+        "PipelineExecutionArn": {
+          "shape": "PipelineExecutionArn",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the pipeline execution.</p>"
+        }
+      }
+    },
     "RetryStrategy": {
       "type": "structure",
       "required": [
@@ -23866,7 +23920,7 @@
           "documentation": "<p>A list of key value pairs that you specify when you provision a product.</p>"
         }
       },
-      "documentation": "<p>Details that you specify to provision a service catalog product. For information about service catalog, see .<a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service Catalog</a>.</p>"
+      "documentation": "<p>Details that you specify to provision a service catalog product. For information about service catalog, see <a href=\"https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html\">What is Amazon Web Services Service Catalog</a>.</p>"
     },
     "SessionExpirationDurationInSeconds": {
       "type": "integer",
@@ -24111,7 +24165,7 @@
         },
         "ClientRequestToken": {
           "shape": "IdempotencyToken",
-          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.</p>",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than once.</p>",
           "idempotencyToken": true
         }
       }
@@ -24246,7 +24300,7 @@
         },
         "ClientRequestToken": {
           "shape": "IdempotencyToken",
-          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than one time.</p>",
+          "documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the operation. An idempotent operation completes no more than once.</p>",
           "idempotencyToken": true
         }
       }
@@ -25572,7 +25626,8 @@
           "documentation": "<p>When the trial was created.</p>"
         },
         "CreatedBy": {
-          "shape": "UserContext"
+          "shape": "UserContext",
+          "documentation": "<p>Who created the trial.</p>"
         },
         "LastModifiedTime": {
           "shape": "Timestamp",
@@ -25635,7 +25690,8 @@
           "documentation": "<p>When the component was created.</p>"
         },
         "CreatedBy": {
-          "shape": "UserContext"
+          "shape": "UserContext",
+          "documentation": "<p>Who created the trial component.</p>"
         },
         "LastModifiedTime": {
           "shape": "Timestamp",
@@ -25942,7 +25998,7 @@
         },
         "CreatedBy": {
           "shape": "UserContext",
-          "documentation": "<p>Who created the component.</p>"
+          "documentation": "<p>Who created the trial component.</p>"
         },
         "LastModifiedTime": {
           "shape": "Timestamp",
@@ -26910,7 +26966,7 @@
           "documentation": "<p>The domain associated with the user.</p>"
         }
       },
-      "documentation": "<p>Information about the user who created or modified an experiment, trial, or trial component.</p>"
+      "documentation": "<p>Information about the user who created or modified an experiment, trial, trial component, or project.</p>"
     },
     "UserProfileArn": {
       "type": "string",

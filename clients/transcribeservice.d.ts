@@ -1668,6 +1668,10 @@ declare namespace TranscribeService {
      */
     LanguageOptions?: LanguageOptions;
     /**
+     * Add subtitles to your batch transcription job.
+     */
+    Subtitles?: Subtitles;
+    /**
      * Add tags to an Amazon Transcribe transcription job.
      */
     Tags?: TagList;
@@ -1679,6 +1683,25 @@ declare namespace TranscribeService {
     TranscriptionJob?: TranscriptionJob;
   }
   export type StringTargetList = NonEmptyString[];
+  export type SubtitleFileUris = Uri[];
+  export type SubtitleFormat = "vtt"|"srt"|string;
+  export type SubtitleFormats = SubtitleFormat[];
+  export interface Subtitles {
+    /**
+     * Specify the output format for your subtitle file.
+     */
+    Formats?: SubtitleFormats;
+  }
+  export interface SubtitlesOutput {
+    /**
+     * Specify the output format for your subtitle file; if you select both SRT and VTT formats, two output files are genereated.
+     */
+    Formats?: SubtitleFormats;
+    /**
+     * Choose the output location for your subtitle file. This location must be an S3 bucket.
+     */
+    SubtitleFileUris?: SubtitleFileUris;
+  }
   export interface Tag {
     /**
      * The first part of a key:value pair that forms a tag associated with a given resource. For example, in the tag ‘Department’:’Sales’, the key is 'Department'.
@@ -1821,6 +1844,10 @@ declare namespace TranscribeService {
      * A key:value pair assigned to a given transcription job.
      */
     Tags?: TagList;
+    /**
+     * Generate subtitles for your batch transcription job.
+     */
+    Subtitles?: SubtitlesOutput;
   }
   export type TranscriptionJobName = string;
   export type TranscriptionJobStatus = "QUEUED"|"IN_PROGRESS"|"FAILED"|"COMPLETED"|string;

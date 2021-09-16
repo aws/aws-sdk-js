@@ -277,3 +277,4 @@ export import ChimeSDKMessaging = require('./chimesdkmessaging');
 export import SnowDeviceManagement = require('./snowdevicemanagement');
 export import MemoryDB = require('./memorydb');
 export import OpenSearch = require('./opensearch');
+export import KafkaConnect = require('./kafkaconnect');

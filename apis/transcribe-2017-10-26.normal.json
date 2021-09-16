@@ -3054,6 +3054,10 @@
           "shape": "LanguageOptions",
           "documentation": "<p>An object containing a list of languages that might be present in your collection of audio files. Automatic language identification chooses a language that best matches the source audio from that list.</p> <p>To transcribe speech in Modern Standard Arabic (ar-SA), your audio or video file must be encoded at a sample rate of 16,000 Hz or higher.</p>"
         },
+        "Subtitles": {
+          "shape": "Subtitles",
+          "documentation": "<p>Add subtitles to your batch transcription job.</p>"
+        },
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>Add tags to an Amazon Transcribe transcription job.</p>"
@@ -3075,6 +3079,49 @@
         "shape": "NonEmptyString"
       },
       "min": 1
+    },
+    "SubtitleFileUris": {
+      "type": "list",
+      "member": {
+        "shape": "Uri"
+      }
+    },
+    "SubtitleFormat": {
+      "type": "string",
+      "enum": [
+        "vtt",
+        "srt"
+      ]
+    },
+    "SubtitleFormats": {
+      "type": "list",
+      "member": {
+        "shape": "SubtitleFormat"
+      }
+    },
+    "Subtitles": {
+      "type": "structure",
+      "members": {
+        "Formats": {
+          "shape": "SubtitleFormats",
+          "documentation": "<p>Specify the output format for your subtitle file.</p>"
+        }
+      },
+      "documentation": "<p>Generate subtitles for your batch transcription job.</p>"
+    },
+    "SubtitlesOutput": {
+      "type": "structure",
+      "members": {
+        "Formats": {
+          "shape": "SubtitleFormats",
+          "documentation": "<p>Specify the output format for your subtitle file; if you select both SRT and VTT formats, two output files are genereated.</p>"
+        },
+        "SubtitleFileUris": {
+          "shape": "SubtitleFileUris",
+          "documentation": "<p>Choose the output location for your subtitle file. This location must be an S3 bucket.</p>"
+        }
+      },
+      "documentation": "<p>Specify the output format for your subtitle file.</p>"
     },
     "Tag": {
       "type": "structure",
@@ -3284,6 +3331,10 @@
         "Tags": {
           "shape": "TagList",
           "documentation": "<p>A key:value pair assigned to a given transcription job.</p>"
+        },
+        "Subtitles": {
+          "shape": "SubtitlesOutput",
+          "documentation": "<p>Generate subtitles for your batch transcription job.</p>"
         }
       },
       "documentation": "<p>Describes an asynchronous transcription job that was created with the <code>StartTranscriptionJob</code> operation. </p>"

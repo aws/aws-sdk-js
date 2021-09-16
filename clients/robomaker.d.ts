@@ -663,7 +663,7 @@ declare namespace RoboMaker {
     /**
      * The sources of the robot application.
      */
-    sources: SourceConfigs;
+    sources?: SourceConfigs;
     /**
      * The robot software suite (ROS distribuition) used by the robot application.
      */
@@ -672,6 +672,10 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the robot application.
      */
     tags?: TagMap;
+    /**
+     * The object that contains that URI of the Docker image that you use for your robot application.
+     */
+    environment?: Environment;
   }
   export interface CreateRobotApplicationResponse {
     /**
@@ -706,6 +710,10 @@ declare namespace RoboMaker {
      * The list of all tags added to the robot application.
      */
     tags?: TagMap;
+    /**
+     * An object that contains the Docker image URI used to a create your robot application.
+     */
+    environment?: Environment;
   }
   export interface CreateRobotApplicationVersionRequest {
     /**
@@ -716,6 +724,14 @@ declare namespace RoboMaker {
      * The current revision id for the robot application. If you provide a value and it matches the latest revision ID, a new version will be created.
      */
     currentRevisionId?: RevisionId;
+    /**
+     * The Amazon S3 identifier for the zip file bundle that you use for your robot application.
+     */
+    s3Etags?: S3Etags;
+    /**
+     * A SHA256 identifier for the Docker image that you use for your robot application.
+     */
+    imageDigest?: ImageDigest;
   }
   export interface CreateRobotApplicationVersionResponse {
     /**
@@ -746,6 +762,10 @@ declare namespace RoboMaker {
      * The revision id of the robot application.
      */
     revisionId?: RevisionId;
+    /**
+     * The object that contains the Docker image URI used to create your robot application.
+     */
+    environment?: Environment;
   }
   export interface CreateRobotRequest {
     /**
@@ -799,7 +819,7 @@ declare namespace RoboMaker {
     /**
      * The sources of the simulation application.
      */
-    sources: SourceConfigs;
+    sources?: SourceConfigs;
     /**
      * The simulation software suite used by the simulation application.
      */
@@ -816,6 +836,10 @@ declare namespace RoboMaker {
      * A map that contains tag keys and tag values that are attached to the simulation application.
      */
     tags?: TagMap;
+    /**
+     * The object that contains the Docker image URI used to create your simulation application.
+     */
+    environment?: Environment;
   }
   export interface CreateSimulationApplicationResponse {
     /**
@@ -858,6 +882,10 @@ declare namespace RoboMaker {
      * The list of all tags added to the simulation application.
      */
     tags?: TagMap;
+    /**
+     * The object that contains the Docker image URI that you used to create your simulation application.
+     */
+    environment?: Environment;
   }
   export interface CreateSimulationApplicationVersionRequest {
     /**
@@ -868,6 +896,14 @@ declare namespace RoboMaker {
      * The current revision id for the simulation application. If you provide a value and it matches the latest revision ID, a new version will be created.
      */
     currentRevisionId?: RevisionId;
+    /**
+     * The Amazon S3 eTag identifier for the zip file bundle that you use to create the simulation application.
+     */
+    s3Etags?: S3Etags;
+    /**
+     * The SHA256 digest used to identify the Docker image URI used to created the simulation application.
+     */
+    imageDigest?: ImageDigest;
   }
   export interface CreateSimulationApplicationVersionResponse {
     /**
@@ -906,6 +942,10 @@ declare namespace RoboMaker {
      * The revision ID of the simulation application.
      */
     revisionId?: RevisionId;
+    /**
+     * The object that contains the Docker image URI used to create the simulation application.
+     */
+    environment?: Environment;
   }
   export interface CreateSimulationJobRequest {
     /**
@@ -1511,6 +1551,14 @@ declare namespace RoboMaker {
      * The list of all tags added to the specified robot application.
      */
     tags?: TagMap;
+    /**
+     * The object that contains the Docker image URI used to create the robot application.
+     */
+    environment?: Environment;
+    /**
+     * A SHA256 identifier for the Docker image that you use for your robot application.
+     */
+    imageDigest?: ImageDigest;
   }
   export interface DescribeRobotRequest {
     /**
@@ -1611,6 +1659,14 @@ declare namespace RoboMaker {
      * The list of all tags added to the specified simulation application.
      */
     tags?: TagMap;
+    /**
+     * The object that contains the Docker image URI used to create the simulation application.
+     */
+    environment?: Environment;
+    /**
+     * A SHA256 identifier for the Docker image that you use for your simulation application.
+     */
+    imageDigest?: ImageDigest;
   }
   export interface DescribeSimulationJobBatchRequest {
     /**
@@ -1925,6 +1981,12 @@ declare namespace RoboMaker {
      */
     version?: GenericString;
   }
+  export interface Environment {
+    /**
+     * The Docker image URI for either your robot or simulation applications.
+     */
+    uri?: RepositoryUrl;
+  }
   export type EnvironmentVariableKey = string;
   export type EnvironmentVariableMap = {[key: string]: EnvironmentVariableValue};
   export type EnvironmentVariableValue = string;
@@ -2034,6 +2096,7 @@ declare namespace RoboMaker {
   }
   export type IamRole = string;
   export type Id = string;
+  export type ImageDigest = string;
   export type Integer = number;
   export type InteriorCountPerFloorplan = number;
   export type JobDuration = number;
@@ -2453,6 +2516,7 @@ declare namespace RoboMaker {
   }
   export type RenderingEngineType = "OGRE"|string;
   export type RenderingEngineVersionType = string;
+  export type RepositoryUrl = string;
   export interface RestartSimulationJobRequest {
     /**
      * The Amazon Resource Name (ARN) of the simulation job.
@@ -2603,6 +2667,7 @@ declare namespace RoboMaker {
   export type Robots = Robot[];
   export type S3Bucket = string;
   export type S3Etag = string;
+  export type S3Etags = S3Etag[];
   export type S3Key = string;
   export interface S3KeyOutput {
     /**
@@ -3139,7 +3204,7 @@ declare namespace RoboMaker {
     /**
      * The sources of the robot application.
      */
-    sources: SourceConfigs;
+    sources?: SourceConfigs;
     /**
      * The robot software suite (ROS distribution) used by the robot application.
      */
@@ -3148,6 +3213,10 @@ declare namespace RoboMaker {
      * The revision id for the robot application.
      */
     currentRevisionId?: RevisionId;
+    /**
+     * The object that contains the Docker image URI for your robot application.
+     */
+    environment?: Environment;
   }
   export interface UpdateRobotApplicationResponse {
     /**
@@ -3178,6 +3247,10 @@ declare namespace RoboMaker {
      * The revision id of the robot application.
      */
     revisionId?: RevisionId;
+    /**
+     * The object that contains the Docker image URI for your robot application.
+     */
+    environment?: Environment;
   }
   export interface UpdateSimulationApplicationRequest {
     /**
@@ -3187,7 +3260,7 @@ declare namespace RoboMaker {
     /**
      * The sources of the simulation application.
      */
-    sources: SourceConfigs;
+    sources?: SourceConfigs;
     /**
      * The simulation software suite used by the simulation application.
      */
@@ -3204,6 +3277,10 @@ declare namespace RoboMaker {
      * The revision id for the robot application.
      */
     currentRevisionId?: RevisionId;
+    /**
+     * The object that contains the Docker image URI for your simulation application.
+     */
+    environment?: Environment;
   }
   export interface UpdateSimulationApplicationResponse {
     /**
@@ -3242,6 +3319,10 @@ declare namespace RoboMaker {
      * The revision id of the simulation application.
      */
     revisionId?: RevisionId;
+    /**
+     * The object that contains the Docker image URI used for your simulation application.
+     */
+    environment?: Environment;
   }
   export interface UpdateWorldTemplateRequest {
     /**

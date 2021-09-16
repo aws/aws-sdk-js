@@ -278,5 +278,6 @@ module.exports = {
   ChimeSDKMessaging: require('./chimesdkmessaging'),
   SnowDeviceManagement: require('./snowdevicemanagement'),
   MemoryDB: require('./memorydb'),
-  OpenSearch: require('./opensearch')
+  OpenSearch: require('./opensearch'),
+  KafkaConnect: require('./kafkaconnect')
 };
