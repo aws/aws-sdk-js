@@ -222,6 +222,10 @@ declare class OpenSearch extends Service {
   /**
    * Returns the names of all domains owned by the current user's account.
    */
+  listDomainNames(params: OpenSearch.Types.ListDomainNamesRequest, callback?: (err: AWSError, data: OpenSearch.Types.ListDomainNamesResponse) => void): Request<OpenSearch.Types.ListDomainNamesResponse, AWSError>;
+  /**
+   * Returns the names of all domains owned by the current user's account.
+   */
   listDomainNames(callback?: (err: AWSError, data: OpenSearch.Types.ListDomainNamesResponse) => void): Request<OpenSearch.Types.ListDomainNamesResponse, AWSError>;
   /**
    * Lists all Amazon OpenSearch Service domains associated with the package.
@@ -598,6 +602,9 @@ declare namespace OpenSearch {
      * The number of UltraWarm nodes in the cluster.
      */
     WarmCount?: IntegerClass;
+    /**
+     * Specifies the ColdStorageOptions config for a Domain
+     */
     ColdStorageOptions?: ColdStorageOptions;
   }
   export interface ClusterConfigStatus {
@@ -639,6 +646,9 @@ declare namespace OpenSearch {
     Status: OptionStatus;
   }
   export interface ColdStorageOptions {
+    /**
+     * Enable cold storage option. Accepted values true or false
+     */
     Enabled: Boolean;
   }
   export type CommitMessage = string;
@@ -1156,6 +1166,10 @@ declare namespace OpenSearch {
      * The DomainName. 
      */
     DomainName?: DomainName;
+    /**
+     *  Specifies the EngineType of the domain.
+     */
+    EngineType?: EngineType;
   }
   export type DomainInfoList = DomainInfo[];
   export interface DomainInformationContainer {
@@ -1358,6 +1372,7 @@ declare namespace OpenSearch {
     Status: OptionStatus;
   }
   export type EndpointsMap = {[key: string]: ServiceUrl};
+  export type EngineType = "OpenSearch"|"Elasticsearch"|string;
   export interface ErrorDetails {
     ErrorType?: ErrorType;
     ErrorMessage?: ErrorMessage;
@@ -1511,9 +1526,15 @@ declare namespace OpenSearch {
     AdditionalLimits?: AdditionalLimitList;
   }
   export type LimitsByRole = {[key: string]: Limits};
+  export interface ListDomainNamesRequest {
+    /**
+     *  Optional parameter to filter the output by domain engine type. Acceptable values are 'Elasticsearch' and 'OpenSearch'. 
+     */
+    EngineType?: EngineType;
+  }
   export interface ListDomainNamesResponse {
     /**
-     * List of domain names.
+     * List of domain names and respective engine types.
      */
     DomainNames?: DomainInfoList;
   }

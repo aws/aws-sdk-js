@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.990.0-->
+<!--LATEST=2.991.0-->
 <!--ENTRYINSERT-->
+
+## 2.991.0
+* feature: DMS: Optional flag force-planned-failover added to reboot-replication-instance API call. This flag can be used to test a planned failover scenario used during some maintenance operations.
+* feature: ES: This release adds an optional parameter in the ListDomainNames API to filter domains based on the engine type (OpenSearch/Elasticsearch).
+* feature: OpenSearch: This release adds an optional parameter in the ListDomainNames API to filter domains based on the engine type (OpenSearch/Elasticsearch).
 
 ## 2.990.0
 * feature: KafkaConnect: This is the initial SDK release for Amazon Managed Streaming for Apache Kafka Connect (MSK Connect).

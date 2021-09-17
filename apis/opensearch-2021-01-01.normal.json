@@ -768,6 +768,9 @@
         "method": "GET",
         "requestUri": "/2021-01-01/domain"
       },
+      "input": {
+        "shape": "ListDomainNamesRequest"
+      },
       "output": {
         "shape": "ListDomainNamesResponse"
       },
@@ -1624,7 +1627,8 @@
           "documentation": "<p>The number of UltraWarm nodes in the cluster.</p>"
         },
         "ColdStorageOptions": {
-          "shape": "ColdStorageOptions"
+          "shape": "ColdStorageOptions",
+          "documentation": "<p>Specifies the <code>ColdStorageOptions</code> config for a Domain</p>"
         }
       },
       "documentation": "<p>The configuration for the domain cluster, such as the type and number of instances.</p>"
@@ -1694,9 +1698,11 @@
       ],
       "members": {
         "Enabled": {
-          "shape": "Boolean"
+          "shape": "Boolean",
+          "documentation": "<p>Enable cold storage option. Accepted values true or false</p>"
         }
-      }
+      },
+      "documentation": "<p>Specifies the configuration for cold storage options such as enabled</p>"
     },
     "CommitMessage": {
       "type": "string",
@@ -2536,6 +2542,10 @@
         "DomainName": {
           "shape": "DomainName",
           "documentation": "<p>The <code>DomainName</code>. </p>"
+        },
+        "EngineType": {
+          "shape": "EngineType",
+          "documentation": "<p> Specifies the <code>EngineType</code> of the domain.</p>"
         }
       }
     },
@@ -2848,6 +2858,13 @@
       "value": {
         "shape": "ServiceUrl"
       }
+    },
+    "EngineType": {
+      "type": "string",
+      "enum": [
+        "OpenSearch",
+        "Elasticsearch"
+      ]
     },
     "ErrorDetails": {
       "type": "structure",
@@ -3217,15 +3234,27 @@
       },
       "documentation": "<p> The role of a given instance and all applicable limits. The role performed by a given OpenSearch instance can be one of the following: <ul> <li>data: If the given InstanceType is used as a data node</li> <li>master: If the given InstanceType is used as a master node</li> <li>ultra_warm: If the given InstanceType is used as a warm node</li> </ul> </p>"
     },
+    "ListDomainNamesRequest": {
+      "type": "structure",
+      "members": {
+        "EngineType": {
+          "shape": "EngineType",
+          "documentation": "<p> Optional parameter to filter the output by domain engine type. Acceptable values are 'Elasticsearch' and 'OpenSearch'. </p>",
+          "location": "querystring",
+          "locationName": "engineType"
+        }
+      },
+      "documentation": "<p> Container for the parameters to the <code><a>ListDomainNames</a></code> operation.</p>"
+    },
     "ListDomainNamesResponse": {
       "type": "structure",
       "members": {
         "DomainNames": {
           "shape": "DomainInfoList",
-          "documentation": "<p>List of domain names.</p>"
+          "documentation": "<p>List of domain names and respective engine types.</p>"
         }
       },
-      "documentation": "<p>The result of a <code>ListDomainNames</code> operation. Contains the names of all domains owned by this account. </p>"
+      "documentation": "<p>The result of a <code>ListDomainNames</code> operation. Contains the names of all domains owned by this account and their respective engine types.</p>"
     },
     "ListDomainsForPackageRequest": {
       "type": "structure",

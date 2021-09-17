@@ -61,11 +61,11 @@ declare class DMS extends Service {
    */
   createReplicationInstance(callback?: (err: AWSError, data: DMS.Types.CreateReplicationInstanceResponse) => void): Request<DMS.Types.CreateReplicationInstanceResponse, AWSError>;
   /**
-   * Creates a replication subnet group given a list of the subnet IDs in a VPC.
+   * Creates a replication subnet group given a list of the subnet IDs in a VPC. The VPC needs to have at least one subnet in at least two availability zones in the Amazon Web Services Region, otherwise the service will throw a ReplicationSubnetGroupDoesNotCoverEnoughAZs exception.
    */
   createReplicationSubnetGroup(params: DMS.Types.CreateReplicationSubnetGroupMessage, callback?: (err: AWSError, data: DMS.Types.CreateReplicationSubnetGroupResponse) => void): Request<DMS.Types.CreateReplicationSubnetGroupResponse, AWSError>;
   /**
-   * Creates a replication subnet group given a list of the subnet IDs in a VPC.
+   * Creates a replication subnet group given a list of the subnet IDs in a VPC. The VPC needs to have at least one subnet in at least two availability zones in the Amazon Web Services Region, otherwise the service will throw a ReplicationSubnetGroupDoesNotCoverEnoughAZs exception.
    */
   createReplicationSubnetGroup(callback?: (err: AWSError, data: DMS.Types.CreateReplicationSubnetGroupResponse) => void): Request<DMS.Types.CreateReplicationSubnetGroupResponse, AWSError>;
   /**
@@ -397,11 +397,11 @@ declare class DMS extends Service {
    */
   refreshSchemas(callback?: (err: AWSError, data: DMS.Types.RefreshSchemasResponse) => void): Request<DMS.Types.RefreshSchemasResponse, AWSError>;
   /**
-   * Reloads the target database table with the source data. 
+   * Reloads the target database table with the source data.  You can only use this operation with a task in the RUNNING state, otherwise the service will throw an InvalidResourceStateFault exception.
    */
   reloadTables(params: DMS.Types.ReloadTablesMessage, callback?: (err: AWSError, data: DMS.Types.ReloadTablesResponse) => void): Request<DMS.Types.ReloadTablesResponse, AWSError>;
   /**
-   * Reloads the target database table with the source data. 
+   * Reloads the target database table with the source data.  You can only use this operation with a task in the RUNNING state, otherwise the service will throw an InvalidResourceStateFault exception.
    */
   reloadTables(callback?: (err: AWSError, data: DMS.Types.ReloadTablesResponse) => void): Request<DMS.Types.ReloadTablesResponse, AWSError>;
   /**
@@ -551,7 +551,7 @@ declare namespace DMS {
      */
     ReplicationInstanceArn: String;
     /**
-     * The pending maintenance action to apply to this resource.
+     * The pending maintenance action to apply to this resource. Valid values: os-upgrade, system-update, db-upgrade 
      */
     ApplyAction: String;
     /**
@@ -733,7 +733,7 @@ declare namespace DMS {
      */
     S3Settings?: S3Settings;
     /**
-     * The settings in JSON format for the DMS transfer type of source endpoint.  Possible settings include the following:    ServiceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket. The role must allow the iam:PassRole action.    BucketName - The name of the S3 bucket to use.   Shorthand syntax for these settings is as follows: ServiceAccessRoleArn=string,BucketName=string  JSON syntax for these settings is as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string", }  
+     * The settings in JSON format for the DMS transfer type of source endpoint.  Possible settings include the following:    ServiceAccessRoleArn - The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the iam:PassRole action.    BucketName - The name of the S3 bucket to use.   Shorthand syntax for these settings is as follows: ServiceAccessRoleArn=string,BucketName=string  JSON syntax for these settings is as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string", }  
      */
     DmsTransferSettings?: DmsTransferSettings;
     /**
@@ -1647,7 +1647,7 @@ declare namespace DMS {
   export type DmsSslModeValue = "none"|"require"|"verify-ca"|"verify-full"|string;
   export interface DmsTransferSettings {
     /**
-     *  The IAM role that has permission to access the Amazon S3 bucket. When specified as part of request syntax, such as for the CreateEndpoint and ModifyEndpoint actions, the role must allow the iam:PassRole action.
+     * The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the iam:PassRole action.
      */
     ServiceAccessRoleArn?: String;
     /**
@@ -1805,7 +1805,7 @@ declare namespace DMS {
      */
     S3Settings?: S3Settings;
     /**
-     * The settings in JSON format for the DMS transfer type of source endpoint.  Possible settings include the following:    ServiceAccessRoleArn - The IAM role that has permission to access the Amazon S3 bucket. The role must allow the iam:PassRole action.    BucketName - The name of the S3 bucket to use.   Shorthand syntax for these settings is as follows: ServiceAccessRoleArn=string,BucketName=string,  JSON syntax for these settings is as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string"}  
+     * The settings in JSON format for the DMS transfer type of source endpoint.  Possible settings include the following:    ServiceAccessRoleArn - - The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the iam:PassRole action.    BucketName - The name of the S3 bucket to use.   Shorthand syntax for these settings is as follows: ServiceAccessRoleArn=string,BucketName=string,  JSON syntax for these settings is as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string"}  
      */
     DmsTransferSettings?: DmsTransferSettings;
     /**
@@ -2323,7 +2323,7 @@ declare namespace DMS {
      */
     S3Settings?: S3Settings;
     /**
-     * The settings in JSON format for the DMS transfer type of source endpoint.  Attributes include the following:   serviceAccessRoleArn - The Identity and Access Management (IAM) role that has permission to access the Amazon S3 bucket. The role must allow the iam:PassRole action.   BucketName - The name of the S3 bucket to use.   Shorthand syntax for these settings is as follows: ServiceAccessRoleArn=string ,BucketName=string  JSON syntax for these settings is as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string"}  
+     * The settings in JSON format for the DMS transfer type of source endpoint.  Attributes include the following:   serviceAccessRoleArn - The Amazon Resource Name (ARN) used by the service access IAM role. The role must allow the iam:PassRole action.   BucketName - The name of the S3 bucket to use.   Shorthand syntax for these settings is as follows: ServiceAccessRoleArn=string ,BucketName=string  JSON syntax for these settings is as follows: { "ServiceAccessRoleArn": "string", "BucketName": "string"}  
      */
     DmsTransferSettings?: DmsTransferSettings;
     /**
@@ -3008,9 +3008,13 @@ declare namespace DMS {
      */
     ReplicationInstanceArn: String;
     /**
-     * If this parameter is true, the reboot is conducted through a Multi-AZ failover. (If the instance isn't configured for Multi-AZ, then you can't specify true.)
+     * If this parameter is true, the reboot is conducted through a Multi-AZ failover. If the instance isn't configured for Multi-AZ, then you can't specify true. ( --force-planned-failover and --force-failover can't both be set to true.)
      */
     ForceFailover?: BooleanOptional;
+    /**
+     * If this parameter is true, the reboot is conducted through a planned Multi-AZ failover where resources are released and cleaned up prior to conducting the failover. If the instance isn''t configured for Multi-AZ, then you can't specify true. ( --force-planned-failover and --force-failover can't both be set to true.)
+     */
+    ForcePlannedFailover?: BooleanOptional;
   }
   export interface RebootReplicationInstanceResponse {
     /**

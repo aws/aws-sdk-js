@@ -226,6 +226,10 @@ declare class ES extends Service {
   /**
    * Returns the name of all Elasticsearch domains owned by the current user's account. 
    */
+  listDomainNames(params: ES.Types.ListDomainNamesRequest, callback?: (err: AWSError, data: ES.Types.ListDomainNamesResponse) => void): Request<ES.Types.ListDomainNamesResponse, AWSError>;
+  /**
+   * Returns the name of all Elasticsearch domains owned by the current user's account. 
+   */
   listDomainNames(callback?: (err: AWSError, data: ES.Types.ListDomainNamesResponse) => void): Request<ES.Types.ListDomainNamesResponse, AWSError>;
   /**
    * Lists all Amazon ES domains associated with the package.
@@ -586,7 +590,7 @@ declare namespace ES {
   }
   export interface ColdStorageOptions {
     /**
-     * True to enable cold storage for an Elasticsearch domain.
+     * Enable cold storage option. Accepted values true or false
      */
     Enabled: Boolean;
   }
@@ -1047,6 +1051,10 @@ declare namespace ES {
      *  Specifies the DomainName.
      */
     DomainName?: DomainName;
+    /**
+     *  Specifies the EngineType of the domain.
+     */
+    EngineType?: EngineType;
   }
   export type DomainInfoList = DomainInfo[];
   export interface DomainInformation {
@@ -1178,7 +1186,7 @@ declare namespace ES {
      */
     WarmCount?: IntegerClass;
     /**
-     * Specifies the ColdStorageOptions configuration for an Elasticsearch domain.
+     * Specifies the ColdStorageOptions config for Elasticsearch Domain
      */
     ColdStorageOptions?: ColdStorageOptions;
   }
@@ -1380,6 +1388,7 @@ declare namespace ES {
     Status: OptionStatus;
   }
   export type EndpointsMap = {[key: string]: ServiceUrl};
+  export type EngineType = "OpenSearch"|"Elasticsearch"|string;
   export interface ErrorDetails {
     ErrorType?: ErrorType;
     ErrorMessage?: ErrorMessage;
@@ -1522,9 +1531,15 @@ declare namespace ES {
     AdditionalLimits?: AdditionalLimitList;
   }
   export type LimitsByRole = {[key: string]: Limits};
+  export interface ListDomainNamesRequest {
+    /**
+     *  Optional parameter to filter the output by domain engine type. Acceptable values are 'Elasticsearch' and 'OpenSearch'. 
+     */
+    EngineType?: EngineType;
+  }
   export interface ListDomainNamesResponse {
     /**
-     * List of Elasticsearch domain names.
+     * List of domain names and respective engine types.
      */
     DomainNames?: DomainInfoList;
   }
