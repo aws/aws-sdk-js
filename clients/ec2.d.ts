@@ -237,19 +237,19 @@ declare class EC2 extends Service {
    */
   attachVolume(callback?: (err: AWSError, data: EC2.Types.VolumeAttachment) => void): Request<EC2.Types.VolumeAttachment, AWSError>;
   /**
-   * Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time. For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   attachVpnGateway(params: EC2.Types.AttachVpnGatewayRequest, callback?: (err: AWSError, data: EC2.Types.AttachVpnGatewayResult) => void): Request<EC2.Types.AttachVpnGatewayResult, AWSError>;
   /**
-   * Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time. For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   attachVpnGateway(callback?: (err: AWSError, data: EC2.Types.AttachVpnGatewayResult) => void): Request<EC2.Types.AttachVpnGatewayResult, AWSError>;
   /**
-   * Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as firewall rules that grant access to networks. You must configure ingress authorization rules to enable clients to access resources in AWS or on-premises networks.
+   * Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as firewall rules that grant access to networks. You must configure ingress authorization rules to enable clients to access resources in Amazon Web Services or on-premises networks.
    */
   authorizeClientVpnIngress(params: EC2.Types.AuthorizeClientVpnIngressRequest, callback?: (err: AWSError, data: EC2.Types.AuthorizeClientVpnIngressResult) => void): Request<EC2.Types.AuthorizeClientVpnIngressResult, AWSError>;
   /**
-   * Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as firewall rules that grant access to networks. You must configure ingress authorization rules to enable clients to access resources in AWS or on-premises networks.
+   * Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as firewall rules that grant access to networks. You must configure ingress authorization rules to enable clients to access resources in Amazon Web Services or on-premises networks.
    */
   authorizeClientVpnIngress(callback?: (err: AWSError, data: EC2.Types.AuthorizeClientVpnIngressResult) => void): Request<EC2.Types.AuthorizeClientVpnIngressResult, AWSError>;
   /**
@@ -405,11 +405,11 @@ declare class EC2 extends Service {
    */
   createClientVpnRoute(callback?: (err: AWSError, data: EC2.Types.CreateClientVpnRouteResult) => void): Request<EC2.Types.CreateClientVpnRouteResult, AWSError>;
   /**
-   * Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 4-byte ASN numbers in the range of 1 - 2147483647, with the exception of the following:   7224 - reserved in the us-east-1 Region   9059 - reserved in the eu-west-1 Region   17943 - reserved in the ap-southeast-1 Region   10124 - reserved in the ap-northeast-1 Region    For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.  To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. Identical requests return information about the existing customer gateway and do not create new customer gateways. 
+   * Provides information to Amazon Web Services about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the Amazon Web Services side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 4-byte ASN numbers in the range of 1 - 2147483647, with the exception of the following:   7224 - reserved in the us-east-1 Region   9059 - reserved in the eu-west-1 Region   17943 - reserved in the ap-southeast-1 Region   10124 - reserved in the ap-northeast-1 Region    For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.  To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. Identical requests return information about the existing customer gateway and do not create new customer gateways. 
    */
   createCustomerGateway(params: EC2.Types.CreateCustomerGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateCustomerGatewayResult) => void): Request<EC2.Types.CreateCustomerGatewayResult, AWSError>;
   /**
-   * Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 4-byte ASN numbers in the range of 1 - 2147483647, with the exception of the following:   7224 - reserved in the us-east-1 Region   9059 - reserved in the eu-west-1 Region   17943 - reserved in the ap-southeast-1 Region   10124 - reserved in the ap-northeast-1 Region    For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.  To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. Identical requests return information about the existing customer gateway and do not create new customer gateways. 
+   * Provides information to Amazon Web Services about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the Amazon Web Services side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT). For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).  Amazon EC2 supports all 4-byte ASN numbers in the range of 1 - 2147483647, with the exception of the following:   7224 - reserved in the us-east-1 Region   9059 - reserved in the eu-west-1 Region   17943 - reserved in the ap-southeast-1 Region   10124 - reserved in the ap-northeast-1 Region    For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.  To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. Identical requests return information about the existing customer gateway and do not create new customer gateways. 
    */
   createCustomerGateway(callback?: (err: AWSError, data: EC2.Types.CreateCustomerGatewayResult) => void): Request<EC2.Types.CreateCustomerGatewayResult, AWSError>;
   /**
@@ -861,27 +861,27 @@ declare class EC2 extends Service {
    */
   createVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.CreateVpcPeeringConnectionResult) => void): Request<EC2.Types.CreateVpcPeeringConnectionResult, AWSError>;
   /**
-   * Creates a VPN connection between an existing virtual private gateway or transit gateway and a customer gateway. The supported connection type is ipsec.1. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway device.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Creates a VPN connection between an existing virtual private gateway or transit gateway and a customer gateway. The supported connection type is ipsec.1. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway device.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   createVpnConnection(params: EC2.Types.CreateVpnConnectionRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpnConnectionResult) => void): Request<EC2.Types.CreateVpnConnectionResult, AWSError>;
   /**
-   * Creates a VPN connection between an existing virtual private gateway or transit gateway and a customer gateway. The supported connection type is ipsec.1. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway device.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Creates a VPN connection between an existing virtual private gateway or transit gateway and a customer gateway. The supported connection type is ipsec.1. The response includes information that you need to give to your network administrator to configure your customer gateway.  We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway device.  If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call. This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error. For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   createVpnConnection(callback?: (err: AWSError, data: EC2.Types.CreateVpnConnectionResult) => void): Request<EC2.Types.CreateVpnConnectionResult, AWSError>;
   /**
-   * Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway. For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   createVpnConnectionRoute(params: EC2.Types.CreateVpnConnectionRouteRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway. For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   createVpnConnectionRoute(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself. For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   createVpnGateway(params: EC2.Types.CreateVpnGatewayRequest, callback?: (err: AWSError, data: EC2.Types.CreateVpnGatewayResult) => void): Request<EC2.Types.CreateVpnGatewayResult, AWSError>;
   /**
-   * Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself. For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   createVpnGateway(callback?: (err: AWSError, data: EC2.Types.CreateVpnGatewayResult) => void): Request<EC2.Types.CreateVpnGatewayResult, AWSError>;
   /**
@@ -1309,11 +1309,11 @@ declare class EC2 extends Service {
    */
   deleteVpcPeeringConnection(callback?: (err: AWSError, data: EC2.Types.DeleteVpcPeeringConnectionResult) => void): Request<EC2.Types.DeleteVpcPeeringConnectionResult, AWSError>;
   /**
-   * Deletes the specified VPN connection. If you're deleting the VPC and its associated components, we recommend that you detach the virtual private gateway from the VPC and delete the VPC before deleting the VPN connection. If you believe that the tunnel credentials for your VPN connection have been compromised, you can delete the VPN connection and create a new one that has new keys, without needing to delete the VPC or virtual private gateway. If you create a new VPN connection, you must reconfigure the customer gateway device using the new configuration information returned with the new VPN connection ID. For certificate-based authentication, delete all AWS Certificate Manager (ACM) private certificates used for the AWS-side tunnel endpoints for the VPN connection before deleting the VPN connection.
+   * Deletes the specified VPN connection. If you're deleting the VPC and its associated components, we recommend that you detach the virtual private gateway from the VPC and delete the VPC before deleting the VPN connection. If you believe that the tunnel credentials for your VPN connection have been compromised, you can delete the VPN connection and create a new one that has new keys, without needing to delete the VPC or virtual private gateway. If you create a new VPN connection, you must reconfigure the customer gateway device using the new configuration information returned with the new VPN connection ID. For certificate-based authentication, delete all Certificate Manager (ACM) private certificates used for the Amazon Web Services-side tunnel endpoints for the VPN connection before deleting the VPN connection.
    */
   deleteVpnConnection(params: EC2.Types.DeleteVpnConnectionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes the specified VPN connection. If you're deleting the VPC and its associated components, we recommend that you detach the virtual private gateway from the VPC and delete the VPC before deleting the VPN connection. If you believe that the tunnel credentials for your VPN connection have been compromised, you can delete the VPN connection and create a new one that has new keys, without needing to delete the VPC or virtual private gateway. If you create a new VPN connection, you must reconfigure the customer gateway device using the new configuration information returned with the new VPN connection ID. For certificate-based authentication, delete all AWS Certificate Manager (ACM) private certificates used for the AWS-side tunnel endpoints for the VPN connection before deleting the VPN connection.
+   * Deletes the specified VPN connection. If you're deleting the VPC and its associated components, we recommend that you detach the virtual private gateway from the VPC and delete the VPC before deleting the VPN connection. If you believe that the tunnel credentials for your VPN connection have been compromised, you can delete the VPN connection and create a new one that has new keys, without needing to delete the VPC or virtual private gateway. If you create a new VPN connection, you must reconfigure the customer gateway device using the new configuration information returned with the new VPN connection ID. For certificate-based authentication, delete all Certificate Manager (ACM) private certificates used for the Amazon Web Services-side tunnel endpoints for the VPN connection before deleting the VPN connection.
    */
   deleteVpnConnection(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -1509,11 +1509,11 @@ declare class EC2 extends Service {
    */
   describeConversionTasks(callback?: (err: AWSError, data: EC2.Types.DescribeConversionTasksResult) => void): Request<EC2.Types.DescribeConversionTasksResult, AWSError>;
   /**
-   * Describes one or more of your VPN customer gateways. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Describes one or more of your VPN customer gateways. For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   describeCustomerGateways(params: EC2.Types.DescribeCustomerGatewaysRequest, callback?: (err: AWSError, data: EC2.Types.DescribeCustomerGatewaysResult) => void): Request<EC2.Types.DescribeCustomerGatewaysResult, AWSError>;
   /**
-   * Describes one or more of your VPN customer gateways. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Describes one or more of your VPN customer gateways. For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   describeCustomerGateways(callback?: (err: AWSError, data: EC2.Types.DescribeCustomerGatewaysResult) => void): Request<EC2.Types.DescribeCustomerGatewaysResult, AWSError>;
   /**
@@ -2357,19 +2357,19 @@ declare class EC2 extends Service {
    */
   describeVpcs(callback?: (err: AWSError, data: EC2.Types.DescribeVpcsResult) => void): Request<EC2.Types.DescribeVpcsResult, AWSError>;
   /**
-   * Describes one or more of your VPN connections. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Describes one or more of your VPN connections. For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   describeVpnConnections(params: EC2.Types.DescribeVpnConnectionsRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpnConnectionsResult) => void): Request<EC2.Types.DescribeVpnConnectionsResult, AWSError>;
   /**
-   * Describes one or more of your VPN connections. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Describes one or more of your VPN connections. For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   describeVpnConnections(callback?: (err: AWSError, data: EC2.Types.DescribeVpnConnectionsResult) => void): Request<EC2.Types.DescribeVpnConnectionsResult, AWSError>;
   /**
-   * Describes one or more of your virtual private gateways. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Describes one or more of your virtual private gateways. For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   describeVpnGateways(params: EC2.Types.DescribeVpnGatewaysRequest, callback?: (err: AWSError, data: EC2.Types.DescribeVpnGatewaysResult) => void): Request<EC2.Types.DescribeVpnGatewaysResult, AWSError>;
   /**
-   * Describes one or more of your virtual private gateways. For more information, see AWS Site-to-Site VPN in the AWS Site-to-Site VPN User Guide.
+   * Describes one or more of your virtual private gateways. For more information, see Amazon Web Services Site-to-Site VPN in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   describeVpnGateways(callback?: (err: AWSError, data: EC2.Types.DescribeVpnGatewaysResult) => void): Request<EC2.Types.DescribeVpnGatewaysResult, AWSError>;
   /**
@@ -2861,6 +2861,22 @@ declare class EC2 extends Service {
    */
   getTransitGatewayRouteTablePropagations(callback?: (err: AWSError, data: EC2.Types.GetTransitGatewayRouteTablePropagationsResult) => void): Request<EC2.Types.GetTransitGatewayRouteTablePropagationsResult, AWSError>;
   /**
+   * Download an AWS-provided sample configuration file to be used with the customer gateway device specified for your Site-to-Site VPN connection.
+   */
+  getVpnConnectionDeviceSampleConfiguration(params: EC2.Types.GetVpnConnectionDeviceSampleConfigurationRequest, callback?: (err: AWSError, data: EC2.Types.GetVpnConnectionDeviceSampleConfigurationResult) => void): Request<EC2.Types.GetVpnConnectionDeviceSampleConfigurationResult, AWSError>;
+  /**
+   * Download an AWS-provided sample configuration file to be used with the customer gateway device specified for your Site-to-Site VPN connection.
+   */
+  getVpnConnectionDeviceSampleConfiguration(callback?: (err: AWSError, data: EC2.Types.GetVpnConnectionDeviceSampleConfigurationResult) => void): Request<EC2.Types.GetVpnConnectionDeviceSampleConfigurationResult, AWSError>;
+  /**
+   * Obtain a list of customer gateway devices for which sample configuration files can be provided. The request has no additional parameters. You can also see the list of device types with sample configuration files available under Your customer gateway device in the Amazon Web Services Site-to-Site VPN User Guide.
+   */
+  getVpnConnectionDeviceTypes(params: EC2.Types.GetVpnConnectionDeviceTypesRequest, callback?: (err: AWSError, data: EC2.Types.GetVpnConnectionDeviceTypesResult) => void): Request<EC2.Types.GetVpnConnectionDeviceTypesResult, AWSError>;
+  /**
+   * Obtain a list of customer gateway devices for which sample configuration files can be provided. The request has no additional parameters. You can also see the list of device types with sample configuration files available under Your customer gateway device in the Amazon Web Services Site-to-Site VPN User Guide.
+   */
+  getVpnConnectionDeviceTypes(callback?: (err: AWSError, data: EC2.Types.GetVpnConnectionDeviceTypesResult) => void): Request<EC2.Types.GetVpnConnectionDeviceTypesResult, AWSError>;
+  /**
    * Uploads a client certificate revocation list to the specified Client VPN endpoint. Uploading a client certificate revocation list overwrites the existing client certificate revocation list. Uploading a client certificate revocation list resets existing client connections.
    */
   importClientVpnClientCertificateRevocationList(params: EC2.Types.ImportClientVpnClientCertificateRevocationListRequest, callback?: (err: AWSError, data: EC2.Types.ImportClientVpnClientCertificateRevocationListResult) => void): Request<EC2.Types.ImportClientVpnClientCertificateRevocationListResult, AWSError>;
@@ -3245,19 +3261,19 @@ declare class EC2 extends Service {
    */
   modifyVpcTenancy(callback?: (err: AWSError, data: EC2.Types.ModifyVpcTenancyResult) => void): Request<EC2.Types.ModifyVpcTenancyResult, AWSError>;
   /**
-   * Modifies the customer gateway or the target gateway of an AWS Site-to-Site VPN connection. To modify the target gateway, the following migration options are available:   An existing virtual private gateway to a new virtual private gateway   An existing virtual private gateway to a transit gateway   An existing transit gateway to a new transit gateway   An existing transit gateway to a virtual private gateway   Before you perform the migration to the new gateway, you must configure the new gateway. Use CreateVpnGateway to create a virtual private gateway, or CreateTransitGateway to create a transit gateway. This step is required when you migrate from a virtual private gateway with static routes to a transit gateway.  You must delete the static routes before you migrate to the new gateway. Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete. After you migrate to the new gateway, you might need to modify your VPC route table. Use CreateRoute and DeleteRoute to make the changes described in VPN Gateway Target Modification Required VPC Route Table Updates in the AWS Site-to-Site VPN User Guide.  When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use CreateTransitGatewayRoute to add the routes.  If you deleted VPN static routes, you must add the static routes to the transit gateway route table. After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your AWS Site-to-Site VPN connection will be temporarily unavailable for a brief period while we provision the new endpoints.
+   * Modifies the customer gateway or the target gateway of an Amazon Web Services Site-to-Site VPN connection. To modify the target gateway, the following migration options are available:   An existing virtual private gateway to a new virtual private gateway   An existing virtual private gateway to a transit gateway   An existing transit gateway to a new transit gateway   An existing transit gateway to a virtual private gateway   Before you perform the migration to the new gateway, you must configure the new gateway. Use CreateVpnGateway to create a virtual private gateway, or CreateTransitGateway to create a transit gateway. This step is required when you migrate from a virtual private gateway with static routes to a transit gateway.  You must delete the static routes before you migrate to the new gateway. Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete. After you migrate to the new gateway, you might need to modify your VPC route table. Use CreateRoute and DeleteRoute to make the changes described in Update VPC route tables in the Amazon Web Services Site-to-Site VPN User Guide. When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the Amazon Web Services Site-to-Site VPN connection. Use CreateTransitGatewayRoute to add the routes.  If you deleted VPN static routes, you must add the static routes to the transit gateway route table. After you perform this operation, the VPN endpoint's IP addresses on the Amazon Web Services side and the tunnel options remain intact. Your Amazon Web Services Site-to-Site VPN connection will be temporarily unavailable for a brief period while we provision the new endpoints.
    */
   modifyVpnConnection(params: EC2.Types.ModifyVpnConnectionRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpnConnectionResult) => void): Request<EC2.Types.ModifyVpnConnectionResult, AWSError>;
   /**
-   * Modifies the customer gateway or the target gateway of an AWS Site-to-Site VPN connection. To modify the target gateway, the following migration options are available:   An existing virtual private gateway to a new virtual private gateway   An existing virtual private gateway to a transit gateway   An existing transit gateway to a new transit gateway   An existing transit gateway to a virtual private gateway   Before you perform the migration to the new gateway, you must configure the new gateway. Use CreateVpnGateway to create a virtual private gateway, or CreateTransitGateway to create a transit gateway. This step is required when you migrate from a virtual private gateway with static routes to a transit gateway.  You must delete the static routes before you migrate to the new gateway. Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete. After you migrate to the new gateway, you might need to modify your VPC route table. Use CreateRoute and DeleteRoute to make the changes described in VPN Gateway Target Modification Required VPC Route Table Updates in the AWS Site-to-Site VPN User Guide.  When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use CreateTransitGatewayRoute to add the routes.  If you deleted VPN static routes, you must add the static routes to the transit gateway route table. After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your AWS Site-to-Site VPN connection will be temporarily unavailable for a brief period while we provision the new endpoints.
+   * Modifies the customer gateway or the target gateway of an Amazon Web Services Site-to-Site VPN connection. To modify the target gateway, the following migration options are available:   An existing virtual private gateway to a new virtual private gateway   An existing virtual private gateway to a transit gateway   An existing transit gateway to a new transit gateway   An existing transit gateway to a virtual private gateway   Before you perform the migration to the new gateway, you must configure the new gateway. Use CreateVpnGateway to create a virtual private gateway, or CreateTransitGateway to create a transit gateway. This step is required when you migrate from a virtual private gateway with static routes to a transit gateway.  You must delete the static routes before you migrate to the new gateway. Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete. After you migrate to the new gateway, you might need to modify your VPC route table. Use CreateRoute and DeleteRoute to make the changes described in Update VPC route tables in the Amazon Web Services Site-to-Site VPN User Guide. When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the Amazon Web Services Site-to-Site VPN connection. Use CreateTransitGatewayRoute to add the routes.  If you deleted VPN static routes, you must add the static routes to the transit gateway route table. After you perform this operation, the VPN endpoint's IP addresses on the Amazon Web Services side and the tunnel options remain intact. Your Amazon Web Services Site-to-Site VPN connection will be temporarily unavailable for a brief period while we provision the new endpoints.
    */
   modifyVpnConnection(callback?: (err: AWSError, data: EC2.Types.ModifyVpnConnectionResult) => void): Request<EC2.Types.ModifyVpnConnectionResult, AWSError>;
   /**
-   * Modifies the connection options for your Site-to-Site VPN connection. When you modify the VPN connection options, the VPN endpoint IP addresses on the AWS side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.
+   * Modifies the connection options for your Site-to-Site VPN connection. When you modify the VPN connection options, the VPN endpoint IP addresses on the Amazon Web Services side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.
    */
   modifyVpnConnectionOptions(params: EC2.Types.ModifyVpnConnectionOptionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpnConnectionOptionsResult) => void): Request<EC2.Types.ModifyVpnConnectionOptionsResult, AWSError>;
   /**
-   * Modifies the connection options for your Site-to-Site VPN connection. When you modify the VPN connection options, the VPN endpoint IP addresses on the AWS side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.
+   * Modifies the connection options for your Site-to-Site VPN connection. When you modify the VPN connection options, the VPN endpoint IP addresses on the Amazon Web Services side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.
    */
   modifyVpnConnectionOptions(callback?: (err: AWSError, data: EC2.Types.ModifyVpnConnectionOptionsResult) => void): Request<EC2.Types.ModifyVpnConnectionOptionsResult, AWSError>;
   /**
@@ -3269,11 +3285,11 @@ declare class EC2 extends Service {
    */
   modifyVpnTunnelCertificate(callback?: (err: AWSError, data: EC2.Types.ModifyVpnTunnelCertificateResult) => void): Request<EC2.Types.ModifyVpnTunnelCertificateResult, AWSError>;
   /**
-   * Modifies the options for a VPN tunnel in an AWS Site-to-Site VPN connection. You can modify multiple options for a tunnel in a single request, but you can only modify one tunnel at a time. For more information, see Site-to-Site VPN Tunnel Options for Your Site-to-Site VPN Connection in the AWS Site-to-Site VPN User Guide.
+   * Modifies the options for a VPN tunnel in an Amazon Web Services Site-to-Site VPN connection. You can modify multiple options for a tunnel in a single request, but you can only modify one tunnel at a time. For more information, see Site-to-Site VPN tunnel options for your Site-to-Site VPN connection in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   modifyVpnTunnelOptions(params: EC2.Types.ModifyVpnTunnelOptionsRequest, callback?: (err: AWSError, data: EC2.Types.ModifyVpnTunnelOptionsResult) => void): Request<EC2.Types.ModifyVpnTunnelOptionsResult, AWSError>;
   /**
-   * Modifies the options for a VPN tunnel in an AWS Site-to-Site VPN connection. You can modify multiple options for a tunnel in a single request, but you can only modify one tunnel at a time. For more information, see Site-to-Site VPN Tunnel Options for Your Site-to-Site VPN Connection in the AWS Site-to-Site VPN User Guide.
+   * Modifies the options for a VPN tunnel in an Amazon Web Services Site-to-Site VPN connection. You can modify multiple options for a tunnel in a single request, but you can only modify one tunnel at a time. For more information, see Site-to-Site VPN tunnel options for your Site-to-Site VPN connection in the Amazon Web Services Site-to-Site VPN User Guide.
    */
   modifyVpnTunnelOptions(callback?: (err: AWSError, data: EC2.Types.ModifyVpnTunnelOptionsResult) => void): Request<EC2.Types.ModifyVpnTunnelOptionsResult, AWSError>;
   /**
@@ -4693,7 +4709,7 @@ declare namespace EC2 {
      */
     SubnetId: SubnetId;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
     /**
@@ -5189,7 +5205,7 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
     /**
@@ -5875,7 +5891,7 @@ declare namespace EC2 {
   }
   export interface CertificateAuthenticationRequest {
     /**
-     * The ARN of the client certificate. The certificate must be signed by a certificate authority (CA) and it must be provisioned in AWS Certificate Manager (ACM).
+     * The ARN of the client certificate. The certificate must be signed by a certificate authority (CA) and it must be provisioned in Certificate Manager (ACM).
      */
     ClientRootCertificateChainArn?: String;
   }
@@ -5956,7 +5972,7 @@ declare namespace EC2 {
      */
     Enabled?: Boolean;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Lambda function used for connection authorization.
+     * The Amazon Resource Name (ARN) of the Lambda function used for connection authorization.
      */
     LambdaFunctionArn?: String;
   }
@@ -5966,7 +5982,7 @@ declare namespace EC2 {
      */
     Enabled?: Boolean;
     /**
-     * The Amazon Resource Name (ARN) of the AWS Lambda function used for connection authorization.
+     * The Amazon Resource Name (ARN) of the Lambda function used for connection authorization.
      */
     LambdaFunctionArn?: String;
     /**
@@ -6147,7 +6163,7 @@ declare namespace EC2 {
      */
     DnsServers?: ValueStringList;
     /**
-     * Indicates whether split-tunnel is enabled in the AWS Client VPN endpoint. For information about split-tunnel VPN endpoints, see Split-Tunnel AWS Client VPN Endpoint in the AWS Client VPN Administrator Guide.
+     * Indicates whether split-tunnel is enabled in the Client VPN endpoint. For information about split-tunnel VPN endpoints, see Split-Tunnel Client VPN endpoint in the Client VPN Administrator Guide.
      */
     SplitTunnel?: Boolean;
     /**
@@ -6682,7 +6698,7 @@ declare namespace EC2 {
      */
     ClientCidrBlock: String;
     /**
-     * The ARN of the server certificate. For more information, see the AWS Certificate Manager User Guide.
+     * The ARN of the server certificate. For more information, see the Certificate Manager User Guide.
      */
     ServerCertificateArn: String;
     /**
@@ -6710,7 +6726,7 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
-     * Indicates whether split-tunnel is enabled on the AWS Client VPN endpoint. By default, split-tunnel on a VPN endpoint is disabled. For information about split-tunnel VPN endpoints, see Split-Tunnel AWS Client VPN Endpoint in the AWS Client VPN Administrator Guide.
+     * Indicates whether split-tunnel is enabled on the Client VPN endpoint. By default, split-tunnel on a VPN endpoint is disabled. For information about split-tunnel VPN endpoints, see Split-tunnel Client VPN endpoint in the Client VPN Administrator Guide.
      */
     SplitTunnel?: Boolean;
     /**
@@ -6718,7 +6734,7 @@ declare namespace EC2 {
      */
     DryRun?: Boolean;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
     /**
@@ -6762,7 +6778,7 @@ declare namespace EC2 {
      */
     ClientVpnEndpointId: ClientVpnEndpointId;
     /**
-     * The IPv4 address range, in CIDR notation, of the route destination. For example:   To add a route for Internet access, enter 0.0.0.0/0    To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR range   To add a route for an on-premises network, enter the AWS Site-to-Site VPN connection's IPv4 CIDR range   To add a route for the local network, enter the client CIDR range  
+     * The IPv4 address range, in CIDR notation, of the route destination. For example:   To add a route for Internet access, enter 0.0.0.0/0    To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR range   To add a route for an on-premises network, enter the Amazon Web Services Site-to-Site VPN connection's IPv4 CIDR range   To add a route for the local network, enter the client CIDR range  
      */
     DestinationCidrBlock: String;
     /**
@@ -6774,7 +6790,7 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
-     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to Ensure Idempotency.
+     * Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see How to ensure idempotency.
      */
     ClientToken?: String;
     /**
@@ -15957,6 +15973,7 @@ declare namespace EC2 {
     TotalFpgaMemoryInMiB?: totalFpgaMemory;
   }
   export type FreeTierEligibleFlag = boolean;
+  export type GVCDMaxResults = number;
   export type GatewayType = "ipsec.1"|string;
   export interface GetAssociatedEnclaveCertificateIamRolesRequest {
     /**
@@ -16622,6 +16639,54 @@ declare namespace EC2 {
      */
     NextToken?: String;
   }
+  export interface GetVpnConnectionDeviceSampleConfigurationRequest {
+    /**
+     * The VpnConnectionId specifies the Site-to-Site VPN connection used for the sample configuration.
+     */
+    VpnConnectionId: VpnConnectionId;
+    /**
+     * Device identifier provided by the GetVpnConnectionDeviceTypes API.
+     */
+    VpnConnectionDeviceTypeId: VpnConnectionDeviceTypeId;
+    /**
+     * The IKE version to be used in the sample configuration file for your customer gateway device. You can specify one of the following versions: ikev1 or ikev2.
+     */
+    InternetKeyExchangeVersion?: String;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetVpnConnectionDeviceSampleConfigurationResult {
+    /**
+     * Sample configuration file for the specified customer gateway device.
+     */
+    VpnConnectionDeviceSampleConfiguration?: VpnConnectionDeviceSampleConfiguration;
+  }
+  export interface GetVpnConnectionDeviceTypesRequest {
+    /**
+     * The maximum number of results returned by GetVpnConnectionDeviceTypes in paginated output. When this parameter is used, GetVpnConnectionDeviceTypes only returns MaxResults results in a single page along with a NextToken response element. The remaining results of the initial request can be seen by sending another GetVpnConnectionDeviceTypes request with the returned NextToken value. This value can be between 200 and 1000. If this parameter is not used, then GetVpnConnectionDeviceTypes returns all results.
+     */
+    MaxResults?: GVCDMaxResults;
+    /**
+     * The NextToken value returned from a previous paginated GetVpnConnectionDeviceTypes request where MaxResults was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the NextToken value. This value is null when there are no more results to return. 
+     */
+    NextToken?: NextToken;
+    /**
+     * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
+     */
+    DryRun?: Boolean;
+  }
+  export interface GetVpnConnectionDeviceTypesResult {
+    /**
+     * List of customer gateway devices that have a sample configuration file available for use.
+     */
+    VpnConnectionDeviceTypes?: VpnConnectionDeviceTypeList;
+    /**
+     * The NextToken value to include in a future GetVpnConnectionDeviceTypes request. When the results of a GetVpnConnectionDeviceTypes request exceed MaxResults, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
   export type GpuDeviceCount = number;
   export interface GpuDeviceInfo {
     /**
@@ -16661,7 +16726,7 @@ declare namespace EC2 {
      */
     TotalGpuMemoryInMiB?: totalGpuMemory;
   }
-  export type GroupIdStringList = String[];
+  export type GroupIdStringList = SecurityGroupId[];
   export interface GroupIdentifier {
     /**
      * The name of the security group.
@@ -17198,7 +17263,7 @@ declare namespace EC2 {
      */
     ClientVpnEndpointId: ClientVpnEndpointId;
     /**
-     * The client certificate revocation list file. For more information, see Generate a Client Certificate Revocation List in the AWS Client VPN Administrator Guide.
+     * The client certificate revocation list file. For more information, see Generate a Client Certificate Revocation List in the Client VPN Administrator Guide.
      */
     CertificateRevocationList: String;
     /**
@@ -20315,7 +20380,7 @@ declare namespace EC2 {
      */
     ClientVpnEndpointId: ClientVpnEndpointId;
     /**
-     * The ARN of the server certificate to be used. The server certificate must be provisioned in AWS Certificate Manager (ACM).
+     * The ARN of the server certificate to be used. The server certificate must be provisioned in Certificate Manager (ACM).
      */
     ServerCertificateArn?: String;
     /**
@@ -20335,7 +20400,7 @@ declare namespace EC2 {
      */
     Description?: String;
     /**
-     * Indicates whether the VPN is split-tunnel. For information about split-tunnel VPN endpoints, see Split-Tunnel AWS Client VPN Endpoint in the AWS Client VPN Administrator Guide.
+     * Indicates whether the VPN is split-tunnel. For information about split-tunnel VPN endpoints, see Split-tunnel Client VPN endpoint in the Client VPN Administrator Guide.
      */
     SplitTunnel?: Boolean;
     /**
@@ -21543,7 +21608,7 @@ declare namespace EC2 {
      */
     LocalIpv4NetworkCidr?: String;
     /**
-     * The IPv4 CIDR on the AWS side of the VPN connection. Default: 0.0.0.0/0 
+     * The IPv4 CIDR on the Amazon Web Services side of the VPN connection. Default: 0.0.0.0/0 
      */
     RemoteIpv4NetworkCidr?: String;
     /**
@@ -21551,7 +21616,7 @@ declare namespace EC2 {
      */
     LocalIpv6NetworkCidr?: String;
     /**
-     * The IPv6 CIDR on the AWS side of the VPN connection. Default: ::/0 
+     * The IPv6 CIDR on the Amazon Web Services side of the VPN connection. Default: ::/0 
      */
     RemoteIpv6NetworkCidr?: String;
     /**
@@ -21576,7 +21641,7 @@ declare namespace EC2 {
      */
     CustomerGatewayId?: CustomerGatewayId;
     /**
-     * The ID of the virtual private gateway at the AWS side of the VPN connection.
+     * The ID of the virtual private gateway at the Amazon Web Services side of the VPN connection.
      */
     VpnGatewayId?: VpnGatewayId;
     /**
@@ -21589,7 +21654,7 @@ declare namespace EC2 {
   }
   export interface ModifyVpnTunnelCertificateRequest {
     /**
-     * The ID of the AWS Site-to-Site VPN connection.
+     * The ID of the Amazon Web Services Site-to-Site VPN connection.
      */
     VpnConnectionId: VpnConnectionId;
     /**
@@ -21606,7 +21671,7 @@ declare namespace EC2 {
   }
   export interface ModifyVpnTunnelOptionsRequest {
     /**
-     * The ID of the AWS Site-to-Site VPN connection.
+     * The ID of the Amazon Web Services Site-to-Site VPN connection.
      */
     VpnConnectionId: VpnConnectionId;
     /**
@@ -21647,7 +21712,7 @@ declare namespace EC2 {
      */
     Phase2LifetimeSeconds?: Integer;
     /**
-     * The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for RekeyFuzzPercentage. Constraints: A value between 60 and half of Phase2LifetimeSeconds. Default: 540 
+     * The margin time, in seconds, before the phase 2 lifetime expires, during which the Amazon Web Services side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for RekeyFuzzPercentage. Constraints: A value between 60 and half of Phase2LifetimeSeconds. Default: 540 
      */
     RekeyMarginTimeSeconds?: Integer;
     /**
@@ -21695,7 +21760,7 @@ declare namespace EC2 {
      */
     IKEVersions?: IKEVersionsRequestList;
     /**
-     * The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid Values: add | start  Default: add 
+     * The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for Amazon Web Services to initiate the IKE negotiation. Valid Values: add | start  Default: add 
      */
     StartupAction?: String;
   }
@@ -25467,10 +25532,6 @@ declare namespace EC2 {
      */
     LocalGatewayRouteTableId: LocalGatewayRoutetableId;
     /**
-     * One or more filters.
-     */
-    Filters: FilterList;
-    /**
      * The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned nextToken value.
      */
     MaxResults?: MaxResults;
@@ -25482,6 +25543,10 @@ declare namespace EC2 {
      * Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is DryRunOperation. Otherwise, it is UnauthorizedOperation.
      */
     DryRun?: Boolean;
+    /**
+     * One or more filters.
+     */
+    Filters: FilterList;
   }
   export interface SearchLocalGatewayRoutesResult {
     /**
@@ -28219,7 +28284,7 @@ declare namespace EC2 {
      */
     Phase2LifetimeSeconds?: Integer;
     /**
-     * The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey.
+     * The margin time, in seconds, before the phase 2 lifetime expires, during which the Amazon Web Services side of the VPN connection performs an IKE rekey.
      */
     RekeyMarginTimeSeconds?: Integer;
     /**
@@ -29183,7 +29248,7 @@ declare namespace EC2 {
      */
     CustomerGatewayId?: String;
     /**
-     * The category of the VPN connection. A value of VPN indicates an AWS VPN connection. A value of VPN-Classic indicates an AWS Classic VPN connection.
+     * The category of the VPN connection. A value of VPN indicates an Amazon Web Services VPN connection. A value of VPN-Classic indicates an Amazon Web Services Classic VPN connection.
      */
     Category?: String;
     /**
@@ -29199,7 +29264,7 @@ declare namespace EC2 {
      */
     VpnConnectionId?: String;
     /**
-     * The ID of the virtual private gateway at the AWS side of the VPN connection.
+     * The ID of the virtual private gateway at the Amazon Web Services side of the VPN connection.
      */
     VpnGatewayId?: String;
     /**
@@ -29223,6 +29288,27 @@ declare namespace EC2 {
      */
     VgwTelemetry?: VgwTelemetryList;
   }
+  export type VpnConnectionDeviceSampleConfiguration = string;
+  export interface VpnConnectionDeviceType {
+    /**
+     * Customer gateway device identifier.
+     */
+    VpnConnectionDeviceTypeId?: String;
+    /**
+     * Customer gateway device vendor.
+     */
+    Vendor?: String;
+    /**
+     * Customer gateway device platform.
+     */
+    Platform?: String;
+    /**
+     * Customer gateway device software version.
+     */
+    Software?: String;
+  }
+  export type VpnConnectionDeviceTypeId = string;
+  export type VpnConnectionDeviceTypeList = VpnConnectionDeviceType[];
   export type VpnConnectionId = string;
   export type VpnConnectionIdStringList = VpnConnectionId[];
   export type VpnConnectionList = VpnConnection[];
@@ -29240,7 +29326,7 @@ declare namespace EC2 {
      */
     LocalIpv4NetworkCidr?: String;
     /**
-     * The IPv4 CIDR on the AWS side of the VPN connection.
+     * The IPv4 CIDR on the Amazon Web Services side of the VPN connection.
      */
     RemoteIpv4NetworkCidr?: String;
     /**
@@ -29248,7 +29334,7 @@ declare namespace EC2 {
      */
     LocalIpv6NetworkCidr?: String;
     /**
-     * The IPv6 CIDR on the AWS side of the VPN connection.
+     * The IPv6 CIDR on the Amazon Web Services side of the VPN connection.
      */
     RemoteIpv6NetworkCidr?: String;
     /**
@@ -29282,7 +29368,7 @@ declare namespace EC2 {
      */
     LocalIpv4NetworkCidr?: String;
     /**
-     * The IPv4 CIDR on the AWS side of the VPN connection. Default: 0.0.0.0/0 
+     * The IPv4 CIDR on the Amazon Web Services side of the VPN connection. Default: 0.0.0.0/0 
      */
     RemoteIpv4NetworkCidr?: String;
     /**
@@ -29290,7 +29376,7 @@ declare namespace EC2 {
      */
     LocalIpv6NetworkCidr?: String;
     /**
-     * The IPv6 CIDR on the AWS side of the VPN connection. Default: ::/0 
+     * The IPv6 CIDR on the Amazon Web Services side of the VPN connection. Default: ::/0 
      */
     RemoteIpv6NetworkCidr?: String;
   }
@@ -29368,7 +29454,7 @@ declare namespace EC2 {
      */
     Phase2LifetimeSeconds?: Integer;
     /**
-     * The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for RekeyFuzzPercentage. Constraints: A value between 60 and half of Phase2LifetimeSeconds. Default: 540 
+     * The margin time, in seconds, before the phase 2 lifetime expires, during which the Amazon Web Services side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for RekeyFuzzPercentage. Constraints: A value between 60 and half of Phase2LifetimeSeconds. Default: 540 
      */
     RekeyMarginTimeSeconds?: Integer;
     /**
@@ -29416,7 +29502,7 @@ declare namespace EC2 {
      */
     IKEVersions?: IKEVersionsRequestList;
     /**
-     * The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for AWS to initiate the IKE negotiation. Valid Values: add | start  Default: add 
+     * The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify start for Amazon Web Services to initiate the IKE negotiation. Valid Values: add | start  Default: add 
      */
     StartupAction?: String;
   }

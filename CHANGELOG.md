@@ -1,6 +1,13 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.991.0-->
+<!--LATEST=2.992.0-->
 <!--ENTRYINSERT-->
+
+## 2.992.0
+* feature: Comprehend: Amazon Comprehend now supports versioning of custom models, improved training with ONE_DOC_PER_FILE text documents for custom entity recognition, ability to provide specific test sets during training, and live migration to new model endpoints.
+* feature: EC2: This update adds support for downloading configuration templates using new APIs (GetVpnConnectionDeviceTypes and GetVpnConnectionDeviceSampleConfiguration) and Internet Key Exchange version 2 (IKEv2) parameters for many popular CGW devices.
+* feature: ECR: This release adds additional support for repository replication
+* feature: Iot: This release adds support for verifying, viewing and filtering AWS IoT Device Defender detect violations with four verification states.
+* feature: Kafka: Added StateInfo to ClusterInfo
 
 ## 2.991.0
 * feature: DMS: Optional flag force-planned-failover added to reboot-replication-instance API call. This flag can be used to test a planned failover scenario used during some maintenance operations.

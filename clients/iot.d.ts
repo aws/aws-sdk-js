@@ -1484,6 +1484,14 @@ declare class Iot extends Service {
    */
   listViolationEvents(callback?: (err: AWSError, data: Iot.Types.ListViolationEventsResponse) => void): Request<Iot.Types.ListViolationEventsResponse, AWSError>;
   /**
+   * Set a verification state and provide a description of that verification state on a violation (detect alarm).
+   */
+  putVerificationStateOnViolation(params: Iot.Types.PutVerificationStateOnViolationRequest, callback?: (err: AWSError, data: Iot.Types.PutVerificationStateOnViolationResponse) => void): Request<Iot.Types.PutVerificationStateOnViolationResponse, AWSError>;
+  /**
+   * Set a verification state and provide a description of that verification state on a violation (detect alarm).
+   */
+  putVerificationStateOnViolation(callback?: (err: AWSError, data: Iot.Types.PutVerificationStateOnViolationResponse) => void): Request<Iot.Types.PutVerificationStateOnViolationResponse, AWSError>;
+  /**
    * Registers a CA certificate with IoT. This CA certificate can then be used to sign device certificates, which can be then registered with IoT. You can register up to 10 CA certificates per Amazon Web Services account that have the same subject field. This enables you to have up to 10 certificate authorities sign your device certificates. If you have more than one CA certificate registered, make sure you pass the CA certificate when you register your device certificates with the RegisterCertificate action. Requires permission to access the RegisterCACertificate action.
    */
   registerCACertificate(params: Iot.Types.RegisterCACertificateRequest, callback?: (err: AWSError, data: Iot.Types.RegisterCACertificateResponse) => void): Request<Iot.Types.RegisterCACertificateResponse, AWSError>;
@@ -1965,7 +1973,7 @@ declare namespace Iot {
      */
     cloudwatchLogs?: CloudwatchLogsAction;
     /**
-     * Write data to an Amazon Elasticsearch Service domain.  This action is deprecated. Use the OpenSearch action instead. 
+     * Write data to an Amazon OpenSearch Service domain.  The Elasticsearch action can only be used by existing rule actions. To create a new rule action or to update an existing rule action, use the OpenSearch rule action instead. For more information, see OpenSearchAction. 
      */
     elasticsearch?: ElasticsearchAction;
     /**
@@ -2032,6 +2040,14 @@ declare namespace Iot {
      *  The details of a violation event. 
      */
     violationEventAdditionalInfo?: ViolationEventAdditionalInfo;
+    /**
+     * The verification state of the violation (detect alarm).
+     */
+    verificationState?: VerificationState;
+    /**
+     * The description of the verification state of the violation.
+     */
+    verificationStateDescription?: VerificationStateDescription;
     /**
      * The time the most recent violation occurred.
      */
@@ -3192,7 +3208,7 @@ declare namespace Iot {
      */
     description?: AuditDescription;
     /**
-     *  The epoch timestamp in seconds at which this suppression expires. 
+     *  Each audit supression must have a unique client request token. If you try to create a new audit suppression with the same token as one that already exists, an exception occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request. 
      */
     clientRequestToken: ClientRequestToken;
   }
@@ -5673,15 +5689,15 @@ declare namespace Iot {
   }
   export interface ElasticsearchAction {
     /**
-     * The IAM role ARN that has access to Elasticsearch.
+     * The IAM role ARN that has access to OpenSearch.
      */
     roleArn: AwsArn;
     /**
-     * The endpoint of your Elasticsearch domain.
+     * The endpoint of your OpenSearch domain.
      */
     endpoint: ElasticsearchEndpoint;
     /**
-     * The Elasticsearch index where you want to store your data.
+     * The index where you want to store your data.
      */
     index: ElasticsearchIndex;
     /**
@@ -6673,6 +6689,10 @@ declare namespace Iot {
      *  A list of all suppressed alerts. 
      */
     listSuppressedAlerts?: ListSuppressedAlerts;
+    /**
+     * The verification state of the violation (detect alarm).
+     */
+    verificationState?: VerificationState;
     /**
      * The token for the next set of results.
      */
@@ -8090,6 +8110,10 @@ declare namespace Iot {
      */
     listSuppressedAlerts?: ListSuppressedAlerts;
     /**
+     * The verification state of the violation (detect alarm).
+     */
+    verificationState?: VerificationState;
+    /**
      * The token for the next set of results.
      */
     nextToken?: NextToken;
@@ -8659,6 +8683,22 @@ declare namespace Iot {
      * The table where the message data will be written.
      */
     tableName: TableName;
+  }
+  export interface PutVerificationStateOnViolationRequest {
+    /**
+     * The violation ID.
+     */
+    violationId: ViolationId;
+    /**
+     * The verification state of the violation.
+     */
+    verificationState: VerificationState;
+    /**
+     * The description of the verification state of the violation (detect alarm).
+     */
+    verificationStateDescription?: VerificationStateDescription;
+  }
+  export interface PutVerificationStateOnViolationResponse {
   }
   export type Qos = number;
   export type QueryMaxResults = number;
@@ -10910,6 +10950,8 @@ declare namespace Iot {
   export type ValidationErrors = ValidationError[];
   export type Value = string;
   export type Variance = number;
+  export type VerificationState = "FALSE_POSITIVE"|"BENIGN_POSITIVE"|"TRUE_POSITIVE"|"UNKNOWN"|string;
+  export type VerificationStateDescription = string;
   export type Version = number;
   export type VersionNumber = number;
   export interface ViolationEvent {
@@ -10941,6 +10983,14 @@ declare namespace Iot {
      * The type of violation event.
      */
     violationEventType?: ViolationEventType;
+    /**
+     * The verification state of the violation (detect alarm).
+     */
+    verificationState?: VerificationState;
+    /**
+     * The description of the verification state of the violation.
+     */
+    verificationStateDescription?: VerificationStateDescription;
     /**
      * The time the violation event occurred.
      */

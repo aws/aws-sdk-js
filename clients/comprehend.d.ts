@@ -260,6 +260,14 @@ declare class Comprehend extends Service {
    */
   listDocumentClassificationJobs(callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassificationJobsResponse) => void): Request<Comprehend.Types.ListDocumentClassificationJobsResponse, AWSError>;
   /**
+   * Gets a list of summaries of the document classifiers that you have created
+   */
+  listDocumentClassifierSummaries(params: Comprehend.Types.ListDocumentClassifierSummariesRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassifierSummariesResponse) => void): Request<Comprehend.Types.ListDocumentClassifierSummariesResponse, AWSError>;
+  /**
+   * Gets a list of summaries of the document classifiers that you have created
+   */
+  listDocumentClassifierSummaries(callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassifierSummariesResponse) => void): Request<Comprehend.Types.ListDocumentClassifierSummariesResponse, AWSError>;
+  /**
    * Gets a list of the document classifiers that you have created.
    */
   listDocumentClassifiers(params: Comprehend.Types.ListDocumentClassifiersRequest, callback?: (err: AWSError, data: Comprehend.Types.ListDocumentClassifiersResponse) => void): Request<Comprehend.Types.ListDocumentClassifiersResponse, AWSError>;
@@ -291,6 +299,14 @@ declare class Comprehend extends Service {
    * Gets a list of the entity detection jobs that you have submitted.
    */
   listEntitiesDetectionJobs(callback?: (err: AWSError, data: Comprehend.Types.ListEntitiesDetectionJobsResponse) => void): Request<Comprehend.Types.ListEntitiesDetectionJobsResponse, AWSError>;
+  /**
+   * Gets a list of summaries for the entity recognizers that you have created.
+   */
+  listEntityRecognizerSummaries(params: Comprehend.Types.ListEntityRecognizerSummariesRequest, callback?: (err: AWSError, data: Comprehend.Types.ListEntityRecognizerSummariesResponse) => void): Request<Comprehend.Types.ListEntityRecognizerSummariesResponse, AWSError>;
+  /**
+   * Gets a list of summaries for the entity recognizers that you have created.
+   */
+  listEntityRecognizerSummaries(callback?: (err: AWSError, data: Comprehend.Types.ListEntityRecognizerSummariesResponse) => void): Request<Comprehend.Types.ListEntityRecognizerSummariesResponse, AWSError>;
   /**
    * Gets a list of the properties of all entity recognizers that you created, including recognizers currently in training. Allows you to filter the list of recognizers based on criteria such as status and submission time. This call returns up to 500 entity recognizers in the list, with a default number of 100 recognizers in the list. The results of this list are not in any particular order. Please get the list and sort locally if needed.
    */
@@ -510,6 +526,10 @@ declare namespace Comprehend {
      * The Amazon S3 location of the augmented manifest file.
      */
     S3Uri: S3Uri;
+    /**
+     * The purpose of the data you've provided in the augmented manifest. You can either train or test this data. If you don't specify, the default is train. TRAIN - all of the documents in the manifest will be used for training. If no test documents are provided, Amazon Comprehend will automatically reserve a portion of the training documents for testing.  TEST - all of the documents in the manifest will be used for testing.
+     */
+    Split?: Split;
     /**
      * The JSON attribute that contains the annotations for your training documents. The number of attribute names that you specify depends on whether your augmented manifest file is the output of a single labeling job or a chained labeling job. If your file is the output of a single labeling job, specify the LabelAttributeName key that was used when the job was created in Ground Truth. If your file is the output of a chained labeling job, specify the LabelAttributeName key for one or more jobs in the chain. Each LabelAttributeName key provides the annotations from an individual job.
      */
@@ -792,6 +812,10 @@ declare namespace Comprehend {
      */
     DocumentClassifierName: ComprehendArnName;
     /**
+     * The version name given to the newly created classifier. Version names can have a maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. The version name must be unique among all models with the same classifier name in the account/AWS Region.
+     */
+    VersionName?: VersionName;
+    /**
      * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
     DataAccessRoleArn: IamRoleArn;
@@ -875,6 +899,10 @@ declare namespace Comprehend {
      * The name given to the newly created recognizer. Recognizer names can be a maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. The name must be unique in the account/region.
      */
     RecognizerName: ComprehendArnName;
+    /**
+     * The version name given to the newly created recognizer. Version names can be a maximum of 256 characters. Alphanumeric characters, hyphens (-) and underscores (_) are allowed. The version name must be unique among all models with the same recognizer name in the account/ AWS Region.
+     */
+    VersionName?: VersionName;
     /**
      * The Amazon Resource Name (ARN) of the AWS Identity and Management (IAM) role that grants Amazon Comprehend read access to your input data.
      */
@@ -1262,6 +1290,10 @@ declare namespace Comprehend {
      */
     Status?: ModelStatus;
     /**
+     * The name that you assigned to the document classifier
+     */
+    DocumentClassifierName?: ComprehendArnName;
+    /**
      * Filters the list of classifiers based on the time that the classifier was submitted for processing. Returns only classifiers submitted before the specified time. Classifiers are returned in ascending order, oldest to newest.
      */
     SubmitTimeBefore?: Timestamp;
@@ -1279,6 +1311,10 @@ declare namespace Comprehend {
      * The Amazon S3 URI for the input data. The S3 bucket must be in the same region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files. For example, if you use the URI S3://bucketName/prefix, if the prefix is a single file, Amazon Comprehend uses that file as input. If more than one file begins with the prefix, Amazon Comprehend uses all of them as input. This parameter is required if you set DataFormat to COMPREHEND_CSV.
      */
     S3Uri?: S3Uri;
+    /**
+     * The Amazon S3 URI for the input data. The Amazon S3 bucket must be in the same AWS Region as the API endpoint that you are calling. The URI can point to a single input file or it can provide the prefix for a collection of input files. 
+     */
+    TestS3Uri?: S3Uri;
     /**
      * Indicates the delimiter used to separate each label for training a multi-label classifier. The default delimiter between labels is a pipe (|). You can use a different character as a delimiter (if it's an allowed character) by specifying it under Delimiter for labels. If the training documents use a delimiter other than the default or the delimiter you specify, the labels on that line will be combined to make a single unique label, such as LABELLABELLABEL.
      */
@@ -1364,8 +1400,35 @@ declare namespace Comprehend {
      * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:   KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
      */
     ModelKmsKeyId?: KmsKeyId;
+    /**
+     * The version name that you assigned to the document classifier.
+     */
+    VersionName?: VersionName;
   }
   export type DocumentClassifierPropertiesList = DocumentClassifierProperties[];
+  export type DocumentClassifierSummariesList = DocumentClassifierSummary[];
+  export interface DocumentClassifierSummary {
+    /**
+     * The name that you assigned the document classifier.
+     */
+    DocumentClassifierName?: ComprehendArnName;
+    /**
+     * The number of versions you created.
+     */
+    NumberOfVersions?: Integer;
+    /**
+     * The time that the latest document classifier version was submitted for processing.
+     */
+    LatestVersionCreatedAt?: Timestamp;
+    /**
+     * The version name you assigned to the latest document classifier version.
+     */
+    LatestVersionName?: VersionName;
+    /**
+     * Provides the status of the latest document classifier version.
+     */
+    LatestVersionStatus?: ModelStatus;
+  }
   export interface DocumentLabel {
     /**
      * The name of the label.
@@ -1509,6 +1572,10 @@ declare namespace Comprehend {
      */
     ModelArn?: ComprehendModelArn;
     /**
+     * ARN of the new model to use for updating an existing endpoint. This ARN is going to be different from the model ARN when the update is in progress
+     */
+    DesiredModelArn?: ComprehendModelArn;
+    /**
      * The desired number of inference units to be used by the model using this endpoint. Each inference unit represents of a throughput of 100 characters per second.
      */
     DesiredInferenceUnits?: InferenceUnitsInteger;
@@ -1528,6 +1595,10 @@ declare namespace Comprehend {
      * The Amazon Resource Name (ARN) of the AWS identity and Access Management (IAM) role that grants Amazon Comprehend read access to trained custom models encrypted with a customer managed key (ModelKmsKeyId).
      */
     DataAccessRoleArn?: IamRoleArn;
+    /**
+     * Data access role ARN to use in case the new model is encrypted with a customer KMS key.
+     */
+    DesiredDataAccessRoleArn?: IamRoleArn;
   }
   export type EndpointPropertiesList = EndpointProperties[];
   export type EndpointStatus = "CREATING"|"DELETING"|"FAILED"|"IN_SERVICE"|"UPDATING"|string;
@@ -1645,6 +1716,10 @@ declare namespace Comprehend {
      *  Specifies the Amazon S3 location where the annotations for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.
      */
     S3Uri: S3Uri;
+    /**
+     * This specifies the Amazon S3 location where the test annotations for an entity recognizer are located. The URI must be in the same AWS Region as the API endpoint that you are calling.
+     */
+    TestS3Uri?: S3Uri;
   }
   export type EntityRecognizerArn = string;
   export type EntityRecognizerAugmentedManifestsList = AugmentedManifestsListItem[];
@@ -1654,6 +1729,14 @@ declare namespace Comprehend {
      *  Specifies the Amazon S3 location where the training documents for an entity recognizer are located. The URI must be in the same region as the API endpoint that you are calling.
      */
     S3Uri: S3Uri;
+    /**
+     *  Specifies the Amazon S3 location where the test documents for an entity recognizer are located. The URI must be in the same AWS Region as the API endpoint that you are calling.
+     */
+    TestS3Uri?: S3Uri;
+    /**
+     *  Specifies how the text in an input file should be processed. This is optional, and the default is ONE_DOC_PER_LINE. ONE_DOC_PER_FILE - Each file is considered a separate document. Use this option when you are processing large documents, such as newspaper articles or scientific papers. ONE_DOC_PER_LINE - Each line in a file is considered a separate document. Use this option when you are processing many short documents, such as text messages.
+     */
+    InputFormat?: InputFormat;
   }
   export type EntityRecognizerEndpointArn = string;
   export interface EntityRecognizerEntityList {
@@ -1681,6 +1764,10 @@ declare namespace Comprehend {
      * The status of an entity recognizer.
      */
     Status?: ModelStatus;
+    /**
+     * The name that you assigned the entity recognizer.
+     */
+    RecognizerName?: ComprehendArnName;
     /**
      * Filters the list of entities based on the time that the list was submitted for processing. Returns only jobs submitted before the specified time. Jobs are returned in descending order, newest to oldest.
      */
@@ -1806,8 +1893,35 @@ declare namespace Comprehend {
      * ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to encrypt trained custom models. The ModelKmsKeyId can be either of the following formats:    KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"    Amazon Resource Name (ARN) of a KMS Key: "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"   
      */
     ModelKmsKeyId?: KmsKeyId;
+    /**
+     * The version name you assigned to the entity recognizer.
+     */
+    VersionName?: VersionName;
   }
   export type EntityRecognizerPropertiesList = EntityRecognizerProperties[];
+  export type EntityRecognizerSummariesList = EntityRecognizerSummary[];
+  export interface EntityRecognizerSummary {
+    /**
+     *  The name that you assigned the entity recognizer.
+     */
+    RecognizerName?: ComprehendArnName;
+    /**
+     *  The number of versions you created.
+     */
+    NumberOfVersions?: Integer;
+    /**
+     *  The time that the latest entity recognizer version was submitted for processing.
+     */
+    LatestVersionCreatedAt?: Timestamp;
+    /**
+     *  The version name you assigned to the latest entity recognizer version.
+     */
+    LatestVersionName?: VersionName;
+    /**
+     *  Provides the status of the latest entity recognizer version.
+     */
+    LatestVersionStatus?: ModelStatus;
+  }
   export type EntityType = "PERSON"|"LOCATION"|"ORGANIZATION"|"COMMERCIAL_ITEM"|"EVENT"|"DATE"|"QUANTITY"|"TITLE"|"OTHER"|string;
   export type EntityTypeName = string;
   export interface EntityTypesEvaluationMetrics {
@@ -2041,6 +2155,26 @@ declare namespace Comprehend {
      */
     NextToken?: String;
   }
+  export interface ListDocumentClassifierSummariesRequest {
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return on each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListDocumentClassifierSummariesResponse {
+    /**
+     * The list of summaries of document classifiers.
+     */
+    DocumentClassifierSummariesList?: DocumentClassifierSummariesList;
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
   export interface ListDocumentClassifiersRequest {
     /**
      * Filters the jobs that are returned. You can filter jobs on their name, status, or the date and time that they were submitted. You can only set one filter at a time.
@@ -2134,6 +2268,26 @@ declare namespace Comprehend {
     EntitiesDetectionJobPropertiesList?: EntitiesDetectionJobPropertiesList;
     /**
      * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+  }
+  export interface ListEntityRecognizerSummariesRequest {
+    /**
+     * Identifies the next page of results to return.
+     */
+    NextToken?: String;
+    /**
+     * The maximum number of results to return on each page. The default is 100.
+     */
+    MaxResults?: MaxResultsInteger;
+  }
+  export interface ListEntityRecognizerSummariesResponse {
+    /**
+     * The list entity recognizer summaries.
+     */
+    EntityRecognizerSummariesList?: EntityRecognizerSummariesList;
+    /**
+     * The list entity recognizer summaries.
      */
     NextToken?: String;
   }
@@ -2550,6 +2704,7 @@ declare namespace Comprehend {
     Mixed?: Float;
   }
   export type SentimentType = "POSITIVE"|"NEGATIVE"|"NEUTRAL"|"MIXED"|string;
+  export type Split = "TRAIN"|"TEST"|string;
   export interface StartDocumentClassificationJobRequest {
     /**
      * The identifier of the job.
@@ -3219,12 +3374,21 @@ declare namespace Comprehend {
      */
     EndpointArn: ComprehendEndpointArn;
     /**
+     * The ARN of the new model to use when updating an existing endpoint.
+     */
+    DesiredModelArn?: ComprehendModelArn;
+    /**
      *  The desired number of inference units to be used by the model using this endpoint. Each inference unit represents of a throughput of 100 characters per second.
      */
-    DesiredInferenceUnits: InferenceUnitsInteger;
+    DesiredInferenceUnits?: InferenceUnitsInteger;
+    /**
+     * Data access role ARN to use in case the new model is encrypted with a customer CMK.
+     */
+    DesiredDataAccessRoleArn?: IamRoleArn;
   }
   export interface UpdateEndpointResponse {
   }
+  export type VersionName = string;
   export interface VpcConfig {
     /**
      * The ID number for a security group on an instance of your private VPC. Security groups on your VPC function serve as a virtual firewall to control inbound and outbound traffic and provides security for the resources that you’ll be accessing on the VPC. This ID number is preceded by "sg-", for instance: "sg-03b388029b0a285ea". For more information, see Security Groups for your VPC. 

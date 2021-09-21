@@ -5713,6 +5713,31 @@
       ],
       "documentation": "<p>Lists the Device Defender security profile violations discovered during the given time period. You can use filters to limit the results to those alerts issued for a particular security profile, behavior, or thing (device).</p> <p>Requires permission to access the <a href=\"https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions\">ListViolationEvents</a> action.</p>"
     },
+    "PutVerificationStateOnViolation": {
+      "name": "PutVerificationStateOnViolation",
+      "http": {
+        "method": "POST",
+        "requestUri": "/violations/verification-state/{violationId}"
+      },
+      "input": {
+        "shape": "PutVerificationStateOnViolationRequest"
+      },
+      "output": {
+        "shape": "PutVerificationStateOnViolationResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidRequestException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalFailureException"
+        }
+      ],
+      "documentation": "<p>Set a verification state and provide a description of that verification state on a violation (detect alarm).</p>"
+    },
     "RegisterCACertificate": {
       "name": "RegisterCACertificate",
       "http": {
@@ -7414,7 +7439,7 @@
         },
         "elasticsearch": {
           "shape": "ElasticsearchAction",
-          "documentation": "<p>Write data to an Amazon Elasticsearch Service domain.</p> <note> <p>This action is deprecated. Use the <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearch action</a> instead.</p> </note>"
+          "documentation": "<p>Write data to an Amazon OpenSearch Service domain.</p> <note> <p>The <code>Elasticsearch</code> action can only be used by existing rule actions. To create a new rule action or to update an existing rule action, use the <code>OpenSearch</code> rule action instead. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearchAction</a>.</p> </note>"
         },
         "salesforce": {
           "shape": "SalesforceAction",
@@ -7498,6 +7523,14 @@
         "violationEventAdditionalInfo": {
           "shape": "ViolationEventAdditionalInfo",
           "documentation": "<p> The details of a violation event. </p>"
+        },
+        "verificationState": {
+          "shape": "VerificationState",
+          "documentation": "<p>The verification state of the violation (detect alarm).</p>"
+        },
+        "verificationStateDescription": {
+          "shape": "VerificationStateDescription",
+          "documentation": "<p>The description of the verification state of the violation.</p>"
         },
         "lastViolationTime": {
           "shape": "Timestamp",
@@ -9663,7 +9696,7 @@
         },
         "clientRequestToken": {
           "shape": "ClientRequestToken",
-          "documentation": "<p> The epoch timestamp in seconds at which this suppression expires. </p>",
+          "documentation": "<p> Each audit supression must have a unique client request token. If you try to create a new audit suppression with the same token as one that already exists, an exception occurs. If you omit this value, Amazon Web Services SDKs will automatically generate a unique client request. </p>",
           "idempotencyToken": true
         }
       }
@@ -13547,15 +13580,15 @@
       "members": {
         "roleArn": {
           "shape": "AwsArn",
-          "documentation": "<p>The IAM role ARN that has access to Elasticsearch.</p>"
+          "documentation": "<p>The IAM role ARN that has access to OpenSearch.</p>"
         },
         "endpoint": {
           "shape": "ElasticsearchEndpoint",
-          "documentation": "<p>The endpoint of your Elasticsearch domain.</p>"
+          "documentation": "<p>The endpoint of your OpenSearch domain.</p>"
         },
         "index": {
           "shape": "ElasticsearchIndex",
-          "documentation": "<p>The Elasticsearch index where you want to store your data.</p>"
+          "documentation": "<p>The index where you want to store your data.</p>"
         },
         "type": {
           "shape": "ElasticsearchType",
@@ -13566,7 +13599,7 @@
           "documentation": "<p>The unique identifier for the document you are storing.</p>"
         }
       },
-      "documentation": "<p>Describes an action that writes data to an Amazon Elasticsearch Service domain.</p> <note> <p>This action is deprecated. Use the <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearch action</a> instead.</p> </note>"
+      "documentation": "<p>Describes an action that writes data to an Amazon OpenSearch Service domain.</p> <note> <p>The <code>Elasticsearch</code> action can only be used by existing rule actions. To create a new rule action or to update an existing rule action, use the <code>OpenSearch</code> rule action instead. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/apireference/API_OpenSearchAction.html\">OpenSearchAction</a>.</p> </note>"
     },
     "ElasticsearchEndpoint": {
       "type": "string",
@@ -15257,6 +15290,12 @@
           "documentation": "<p> A list of all suppressed alerts. </p>",
           "location": "querystring",
           "locationName": "listSuppressedAlerts"
+        },
+        "verificationState": {
+          "shape": "VerificationState",
+          "documentation": "<p>The verification state of the violation (detect alarm).</p>",
+          "location": "querystring",
+          "locationName": "verificationState"
         },
         "nextToken": {
           "shape": "NextToken",
@@ -17467,6 +17506,12 @@
           "location": "querystring",
           "locationName": "listSuppressedAlerts"
         },
+        "verificationState": {
+          "shape": "VerificationState",
+          "documentation": "<p>The verification state of the violation (detect alarm).</p>",
+          "location": "querystring",
+          "locationName": "verificationState"
+        },
         "nextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token for the next set of results.</p>",
@@ -18563,6 +18608,33 @@
         }
       },
       "documentation": "<p>The input for the DynamoActionVS action that specifies the DynamoDB table to which the message data will be written.</p>"
+    },
+    "PutVerificationStateOnViolationRequest": {
+      "type": "structure",
+      "required": [
+        "violationId",
+        "verificationState"
+      ],
+      "members": {
+        "violationId": {
+          "shape": "ViolationId",
+          "documentation": "<p>The violation ID.</p>",
+          "location": "uri",
+          "locationName": "violationId"
+        },
+        "verificationState": {
+          "shape": "VerificationState",
+          "documentation": "<p>The verification state of the violation.</p>"
+        },
+        "verificationStateDescription": {
+          "shape": "VerificationStateDescription",
+          "documentation": "<p>The description of the verification state of the violation (detect alarm).</p>"
+        }
+      }
+    },
+    "PutVerificationStateOnViolationResponse": {
+      "type": "structure",
+      "members": {}
     },
     "Qos": {
       "type": "integer",
@@ -22273,6 +22345,20 @@
     "Variance": {
       "type": "double"
     },
+    "VerificationState": {
+      "type": "string",
+      "enum": [
+        "FALSE_POSITIVE",
+        "BENIGN_POSITIVE",
+        "TRUE_POSITIVE",
+        "UNKNOWN"
+      ]
+    },
+    "VerificationStateDescription": {
+      "type": "string",
+      "max": 1000,
+      "pattern": "[\\p{Graph}\\x20]*"
+    },
     "Version": {
       "type": "long"
     },
@@ -22309,6 +22395,14 @@
         "violationEventType": {
           "shape": "ViolationEventType",
           "documentation": "<p>The type of violation event.</p>"
+        },
+        "verificationState": {
+          "shape": "VerificationState",
+          "documentation": "<p>The verification state of the violation (detect alarm).</p>"
+        },
+        "verificationStateDescription": {
+          "shape": "VerificationStateDescription",
+          "documentation": "<p>The description of the verification state of the violation.</p>"
         },
         "violationEventTime": {
           "shape": "Timestamp",

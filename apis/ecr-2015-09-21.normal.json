@@ -218,6 +218,9 @@
         },
         {
           "shape": "RegistryPolicyNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
         }
       ],
       "documentation": "<p>Deletes the registry permissions policy.</p>"
@@ -280,6 +283,37 @@
         }
       ],
       "documentation": "<p>Deletes the repository policy associated with the specified repository.</p>"
+    },
+    "DescribeImageReplicationStatus": {
+      "name": "DescribeImageReplicationStatus",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DescribeImageReplicationStatusRequest"
+      },
+      "output": {
+        "shape": "DescribeImageReplicationStatusResponse"
+      },
+      "errors": [
+        {
+          "shape": "ServerException"
+        },
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ImageNotFoundException"
+        },
+        {
+          "shape": "RepositoryNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
+        }
+      ],
+      "documentation": "<p>Returns the replication status for a specified image.</p>"
     },
     "DescribeImageScanFindings": {
       "name": "DescribeImageScanFindings",
@@ -520,6 +554,9 @@
         },
         {
           "shape": "RegistryPolicyNotFoundException"
+        },
+        {
+          "shape": "ValidationException"
         }
       ],
       "documentation": "<p>Retrieves the permissions policy for a registry.</p>"
@@ -769,6 +806,9 @@
         },
         {
           "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "ValidationException"
         }
       ],
       "documentation": "<p>Creates or updates the permissions policy for your registry.</p> <p>A registry policy is used to specify permissions for another Amazon Web Services account and is used when configuring cross-account replication. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html\">Registry permissions</a> in the <i>Amazon Elastic Container Registry User Guide</i>.</p>"
@@ -1228,6 +1268,10 @@
         "repositoryName"
       ],
       "members": {
+        "registryId": {
+          "shape": "RegistryId",
+          "documentation": "<p>The AWS account ID associated with the registry to create the repository. If you do not specify a registry, the default registry is assumed.</p>"
+        },
         "repositoryName": {
           "shape": "RepositoryName",
           "documentation": "<p>The name to use for the repository. The repository name may be specified on its own (such as <code>nginx-web-app</code>) or it can be prepended with a namespace to group the repository into a category (such as <code>project-a/nginx-web-app</code>).</p>"
@@ -1375,6 +1419,42 @@
         "repository": {
           "shape": "Repository",
           "documentation": "<p>The repository that was deleted.</p>"
+        }
+      }
+    },
+    "DescribeImageReplicationStatusRequest": {
+      "type": "structure",
+      "required": [
+        "repositoryName",
+        "imageId"
+      ],
+      "members": {
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The name of the repository that the image is in.</p>"
+        },
+        "imageId": {
+          "shape": "ImageIdentifier"
+        },
+        "registryId": {
+          "shape": "RegistryId",
+          "documentation": "<p>The Amazon Web Services account ID associated with the registry. If you do not specify a registry, the default registry is assumed.</p>"
+        }
+      }
+    },
+    "DescribeImageReplicationStatusResponse": {
+      "type": "structure",
+      "members": {
+        "repositoryName": {
+          "shape": "RepositoryName",
+          "documentation": "<p>The repository name associated with the request.</p>"
+        },
+        "imageId": {
+          "shape": "ImageIdentifier"
+        },
+        "replicationStatuses": {
+          "shape": "ImageReplicationStatusList",
+          "documentation": "<p>The replication status details for the images in the specified repository.</p>"
         }
       }
     },
@@ -1955,7 +2035,7 @@
           "documentation": "<p>The tag used for the image.</p>"
         }
       },
-      "documentation": "<p>An object with identifying information for an Amazon ECR image.</p>"
+      "documentation": "<p>An object with identifying information for an image in an Amazon ECR repository.</p>"
     },
     "ImageIdentifierList": {
       "type": "list",
@@ -1975,6 +2055,34 @@
       "type": "string",
       "max": 4194304,
       "min": 1
+    },
+    "ImageReplicationStatus": {
+      "type": "structure",
+      "members": {
+        "region": {
+          "shape": "Region",
+          "documentation": "<p>The destination Region for the image replication.</p>"
+        },
+        "registryId": {
+          "shape": "RegistryId",
+          "documentation": "<p>The AWS account ID associated with the registry to which the image belongs.</p>"
+        },
+        "status": {
+          "shape": "ReplicationStatus",
+          "documentation": "<p>The image replication status.</p>"
+        },
+        "failureCode": {
+          "shape": "ReplicationError",
+          "documentation": "<p>The failure code for a replication that has failed.</p>"
+        }
+      },
+      "documentation": "<p>The status of the replication process for an image.</p>"
+    },
+    "ImageReplicationStatusList": {
+      "type": "list",
+      "member": {
+        "shape": "ImageReplicationStatus"
+      }
     },
     "ImageScanFinding": {
       "type": "structure",
@@ -2627,7 +2735,7 @@
       "members": {
         "rules": {
           "shape": "ReplicationRuleList",
-          "documentation": "<p>An array of objects representing the replication rules for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations.</p>"
+          "documentation": "<p>An array of objects representing the replication destinations and repository filters for a replication configuration.</p>"
         }
       },
       "documentation": "<p>The replication configuration for a registry.</p>"
@@ -2641,14 +2749,14 @@
       "members": {
         "region": {
           "shape": "Region",
-          "documentation": "<p>A Region to replicate to.</p>"
+          "documentation": "<p>The Region to replicate to.</p>"
         },
         "registryId": {
           "shape": "RegistryId",
-          "documentation": "<p>The account ID of the destination registry to replicate to.</p>"
+          "documentation": "<p>The Amazon Web Services account ID of the Amazon ECR private registry to replicate to. When configuring cross-Region replication within your own registry, specify your own account ID.</p>"
         }
       },
-      "documentation": "<p>An array of objects representing the details of a replication destination.</p>"
+      "documentation": "<p>An array of objects representing the destination for a replication rule.</p>"
     },
     "ReplicationDestinationList": {
       "type": "list",
@@ -2658,6 +2766,9 @@
       "max": 25,
       "min": 0
     },
+    "ReplicationError": {
+      "type": "string"
+    },
     "ReplicationRule": {
       "type": "structure",
       "required": [
@@ -2666,18 +2777,30 @@
       "members": {
         "destinations": {
           "shape": "ReplicationDestinationList",
-          "documentation": "<p>An array of objects representing the details of a replication destination.</p>"
+          "documentation": "<p>An array of objects representing the destination for a replication rule.</p>"
+        },
+        "repositoryFilters": {
+          "shape": "RepositoryFilterList",
+          "documentation": "<p>An array of objects representing the filters for a replication rule. Specifying a repository filter for a replication rule provides a method for controlling which repositories in a private registry are replicated.</p>"
         }
       },
-      "documentation": "<p>An array of objects representing the replication destinations for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations.</p>"
+      "documentation": "<p>An array of objects representing the replication destinations and repository filters for a replication configuration.</p>"
     },
     "ReplicationRuleList": {
       "type": "list",
       "member": {
         "shape": "ReplicationRule"
       },
-      "max": 1,
+      "max": 10,
       "min": 0
+    },
+    "ReplicationStatus": {
+      "type": "string",
+      "enum": [
+        "IN_PROGRESS",
+        "COMPLETE",
+        "FAILED"
+      ]
     },
     "Repository": {
       "type": "structure",
@@ -2715,6 +2838,44 @@
         }
       },
       "documentation": "<p>An object representing a repository.</p>"
+    },
+    "RepositoryFilter": {
+      "type": "structure",
+      "required": [
+        "filter",
+        "filterType"
+      ],
+      "members": {
+        "filter": {
+          "shape": "RepositoryFilterValue",
+          "documentation": "<p>The repository filter details. When the <code>PREFIX_MATCH</code> filter type is specified, this value is required and should be the repository name prefix to configure replication for.</p>"
+        },
+        "filterType": {
+          "shape": "RepositoryFilterType",
+          "documentation": "<p>The repository filter type. The only supported value is <code>PREFIX_MATCH</code>, which is a repository name prefix specified with the <code>filter</code> parameter.</p>"
+        }
+      },
+      "documentation": "<p>The filter settings used with image replication. Specifying a repository filter to a replication rule provides a method for controlling which repositories in a private registry are replicated. If no repository filter is specified, all images in the repository are replicated.</p>"
+    },
+    "RepositoryFilterList": {
+      "type": "list",
+      "member": {
+        "shape": "RepositoryFilter"
+      },
+      "max": 100,
+      "min": 1
+    },
+    "RepositoryFilterType": {
+      "type": "string",
+      "enum": [
+        "PREFIX_MATCH"
+      ]
+    },
+    "RepositoryFilterValue": {
+      "type": "string",
+      "max": 256,
+      "min": 2,
+      "pattern": "^(?:[a-z0-9]+(?:[._-][a-z0-9]*)*/)*[a-z0-9]*(?:[._-][a-z0-9]*)*$"
     },
     "RepositoryList": {
       "type": "list",

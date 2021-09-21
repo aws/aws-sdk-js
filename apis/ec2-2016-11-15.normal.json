@@ -410,7 +410,7 @@
       "output": {
         "shape": "AttachVpnGatewayResult"
       },
-      "documentation": "<p>Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+      "documentation": "<p>Attaches a virtual private gateway to a VPC. You can attach one virtual private gateway to one VPC at a time.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p>"
     },
     "AuthorizeClientVpnIngress": {
       "name": "AuthorizeClientVpnIngress",
@@ -424,7 +424,7 @@
       "output": {
         "shape": "AuthorizeClientVpnIngressResult"
       },
-      "documentation": "<p>Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as firewall rules that grant access to networks. You must configure ingress authorization rules to enable clients to access resources in AWS or on-premises networks.</p>"
+      "documentation": "<p>Adds an ingress authorization rule to a Client VPN endpoint. Ingress authorization rules act as firewall rules that grant access to networks. You must configure ingress authorization rules to enable clients to access resources in Amazon Web Services or on-premises networks.</p>"
     },
     "AuthorizeSecurityGroupEgress": {
       "name": "AuthorizeSecurityGroupEgress",
@@ -698,7 +698,7 @@
       "output": {
         "shape": "CreateCustomerGatewayResult"
       },
-      "documentation": "<p>Provides information to AWS about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the AWS side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 4-byte ASN numbers in the range of 1 - 2147483647, with the exception of the following:</p> <ul> <li> <p>7224 - reserved in the <code>us-east-1</code> Region</p> </li> <li> <p>9059 - reserved in the <code>eu-west-1</code> Region</p> </li> <li> <p>17943 - reserved in the <code>ap-southeast-1</code> Region</p> </li> <li> <p>10124 - reserved in the <code>ap-northeast-1</code> Region</p> </li> </ul> </note> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <important> <p>To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. Identical requests return information about the existing customer gateway and do not create new customer gateways.</p> </important>"
+      "documentation": "<p>Provides information to Amazon Web Services about your VPN customer gateway device. The customer gateway is the appliance at your end of the VPN connection. (The device on the Amazon Web Services side of the VPN connection is the virtual private gateway.) You must provide the internet-routable IP address of the customer gateway's external interface. The IP address must be static and can be behind a device performing network address translation (NAT).</p> <p>For devices that use Border Gateway Protocol (BGP), you can also provide the device's BGP Autonomous System Number (ASN). You can use an existing ASN assigned to your network. If you don't have an ASN already, you can use a private ASN (in the 64512 - 65534 range).</p> <note> <p>Amazon EC2 supports all 4-byte ASN numbers in the range of 1 - 2147483647, with the exception of the following:</p> <ul> <li> <p>7224 - reserved in the <code>us-east-1</code> Region</p> </li> <li> <p>9059 - reserved in the <code>eu-west-1</code> Region</p> </li> <li> <p>17943 - reserved in the <code>ap-southeast-1</code> Region</p> </li> <li> <p>10124 - reserved in the <code>ap-northeast-1</code> Region</p> </li> </ul> </note> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p> <important> <p>To create more than one customer gateway with the same VPN type, IP address, and BGP ASN, specify a unique device name for each customer gateway. Identical requests return information about the existing customer gateway and do not create new customer gateways.</p> </important>"
     },
     "CreateDefaultSubnet": {
       "name": "CreateDefaultSubnet",
@@ -1490,7 +1490,7 @@
       "output": {
         "shape": "CreateVpnConnectionResult"
       },
-      "documentation": "<p>Creates a VPN connection between an existing virtual private gateway or transit gateway and a customer gateway. The supported connection type is <code>ipsec.1</code>.</p> <p>The response includes information that you need to give to your network administrator to configure your customer gateway.</p> <important> <p>We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway device.</p> </important> <p>If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+      "documentation": "<p>Creates a VPN connection between an existing virtual private gateway or transit gateway and a customer gateway. The supported connection type is <code>ipsec.1</code>.</p> <p>The response includes information that you need to give to your network administrator to configure your customer gateway.</p> <important> <p>We strongly recommend that you use HTTPS when calling this operation because the response contains sensitive cryptographic information for configuring your customer gateway device.</p> </important> <p>If you decide to shut down your VPN connection for any reason and later create a new VPN connection, you must reconfigure your customer gateway with the new information returned from this call.</p> <p>This is an idempotent operation. If you perform the operation more than once, Amazon EC2 doesn't return an error.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p>"
     },
     "CreateVpnConnectionRoute": {
       "name": "CreateVpnConnectionRoute",
@@ -1501,7 +1501,7 @@
       "input": {
         "shape": "CreateVpnConnectionRouteRequest"
       },
-      "documentation": "<p>Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+      "documentation": "<p>Creates a static route associated with a VPN connection between an existing virtual private gateway and a VPN customer gateway. The static route allows traffic to be routed from the virtual private gateway to the VPN customer gateway.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p>"
     },
     "CreateVpnGateway": {
       "name": "CreateVpnGateway",
@@ -1515,7 +1515,7 @@
       "output": {
         "shape": "CreateVpnGatewayResult"
       },
-      "documentation": "<p>Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+      "documentation": "<p>Creates a virtual private gateway. A virtual private gateway is the endpoint on the VPC side of your VPN connection. You can create a virtual private gateway before creating the VPC itself.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p>"
     },
     "DeleteCarrierGateway": {
       "name": "DeleteCarrierGateway",
@@ -2217,7 +2217,7 @@
       "input": {
         "shape": "DeleteVpnConnectionRequest"
       },
-      "documentation": "<p>Deletes the specified VPN connection.</p> <p>If you're deleting the VPC and its associated components, we recommend that you detach the virtual private gateway from the VPC and delete the VPC before deleting the VPN connection. If you believe that the tunnel credentials for your VPN connection have been compromised, you can delete the VPN connection and create a new one that has new keys, without needing to delete the VPC or virtual private gateway. If you create a new VPN connection, you must reconfigure the customer gateway device using the new configuration information returned with the new VPN connection ID.</p> <p>For certificate-based authentication, delete all AWS Certificate Manager (ACM) private certificates used for the AWS-side tunnel endpoints for the VPN connection before deleting the VPN connection.</p>"
+      "documentation": "<p>Deletes the specified VPN connection.</p> <p>If you're deleting the VPC and its associated components, we recommend that you detach the virtual private gateway from the VPC and delete the VPC before deleting the VPN connection. If you believe that the tunnel credentials for your VPN connection have been compromised, you can delete the VPN connection and create a new one that has new keys, without needing to delete the VPC or virtual private gateway. If you create a new VPN connection, you must reconfigure the customer gateway device using the new configuration information returned with the new VPN connection ID.</p> <p>For certificate-based authentication, delete all Certificate Manager (ACM) private certificates used for the Amazon Web Services-side tunnel endpoints for the VPN connection before deleting the VPN connection.</p>"
     },
     "DeleteVpnConnectionRoute": {
       "name": "DeleteVpnConnectionRoute",
@@ -2558,7 +2558,7 @@
       "output": {
         "shape": "DescribeCustomerGatewaysResult"
       },
-      "documentation": "<p>Describes one or more of your VPN customer gateways.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+      "documentation": "<p>Describes one or more of your VPN customer gateways.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p>"
     },
     "DescribeDhcpOptions": {
       "name": "DescribeDhcpOptions",
@@ -4042,7 +4042,7 @@
       "output": {
         "shape": "DescribeVpnConnectionsResult"
       },
-      "documentation": "<p>Describes one or more of your VPN connections.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+      "documentation": "<p>Describes one or more of your VPN connections.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p>"
     },
     "DescribeVpnGateways": {
       "name": "DescribeVpnGateways",
@@ -4056,7 +4056,7 @@
       "output": {
         "shape": "DescribeVpnGatewaysResult"
       },
-      "documentation": "<p>Describes one or more of your virtual private gateways.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">AWS Site-to-Site VPN</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+      "documentation": "<p>Describes one or more of your virtual private gateways.</p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPC_VPN.html\">Amazon Web Services Site-to-Site VPN</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p>"
     },
     "DetachClassicLinkVpc": {
       "name": "DetachClassicLinkVpc",
@@ -4888,6 +4888,34 @@
       },
       "documentation": "<p>Gets information about the route table propagations for the specified transit gateway route table.</p>"
     },
+    "GetVpnConnectionDeviceSampleConfiguration": {
+      "name": "GetVpnConnectionDeviceSampleConfiguration",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetVpnConnectionDeviceSampleConfigurationRequest"
+      },
+      "output": {
+        "shape": "GetVpnConnectionDeviceSampleConfigurationResult"
+      },
+      "documentation": "<p>Download an AWS-provided sample configuration file to be used with the customer gateway device specified for your Site-to-Site VPN connection.</p>"
+    },
+    "GetVpnConnectionDeviceTypes": {
+      "name": "GetVpnConnectionDeviceTypes",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetVpnConnectionDeviceTypesRequest"
+      },
+      "output": {
+        "shape": "GetVpnConnectionDeviceTypesResult"
+      },
+      "documentation": "<p>Obtain a list of customer gateway devices for which sample configuration files can be provided. The request has no additional parameters. You can also see the list of device types with sample configuration files available under <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html\">Your customer gateway device</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p>"
+    },
     "ImportClientVpnClientCertificateRevocationList": {
       "name": "ImportClientVpnClientCertificateRevocationList",
       "http": {
@@ -5545,7 +5573,7 @@
       "output": {
         "shape": "ModifyVpnConnectionResult"
       },
-      "documentation": "<p>Modifies the customer gateway or the target gateway of an AWS Site-to-Site VPN connection. To modify the target gateway, the following migration options are available:</p> <ul> <li> <p>An existing virtual private gateway to a new virtual private gateway</p> </li> <li> <p>An existing virtual private gateway to a transit gateway</p> </li> <li> <p>An existing transit gateway to a new transit gateway</p> </li> <li> <p>An existing transit gateway to a virtual private gateway</p> </li> </ul> <p>Before you perform the migration to the new gateway, you must configure the new gateway. Use <a>CreateVpnGateway</a> to create a virtual private gateway, or <a>CreateTransitGateway</a> to create a transit gateway.</p> <p>This step is required when you migrate from a virtual private gateway with static routes to a transit gateway. </p> <p>You must delete the static routes before you migrate to the new gateway.</p> <p>Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete.</p> <p>After you migrate to the new gateway, you might need to modify your VPC route table. Use <a>CreateRoute</a> and <a>DeleteRoute</a> to make the changes described in <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-target.html#step-update-routing\">VPN Gateway Target Modification Required VPC Route Table Updates</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p> <p> When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the AWS Site-to-Site VPN connection. Use <a>CreateTransitGatewayRoute</a> to add the routes.</p> <p> If you deleted VPN static routes, you must add the static routes to the transit gateway route table.</p> <p>After you perform this operation, the AWS VPN endpoint's IP addresses on the AWS side and the tunnel options remain intact. Your AWS Site-to-Site VPN connection will be temporarily unavailable for a brief period while we provision the new endpoints.</p>"
+      "documentation": "<p>Modifies the customer gateway or the target gateway of an Amazon Web Services Site-to-Site VPN connection. To modify the target gateway, the following migration options are available:</p> <ul> <li> <p>An existing virtual private gateway to a new virtual private gateway</p> </li> <li> <p>An existing virtual private gateway to a transit gateway</p> </li> <li> <p>An existing transit gateway to a new transit gateway</p> </li> <li> <p>An existing transit gateway to a virtual private gateway</p> </li> </ul> <p>Before you perform the migration to the new gateway, you must configure the new gateway. Use <a>CreateVpnGateway</a> to create a virtual private gateway, or <a>CreateTransitGateway</a> to create a transit gateway.</p> <p>This step is required when you migrate from a virtual private gateway with static routes to a transit gateway. </p> <p>You must delete the static routes before you migrate to the new gateway.</p> <p>Keep a copy of the static route before you delete it. You will need to add back these routes to the transit gateway after the VPN connection migration is complete.</p> <p>After you migrate to the new gateway, you might need to modify your VPC route table. Use <a>CreateRoute</a> and <a>DeleteRoute</a> to make the changes described in <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/modify-vpn-target.html#step-update-routing\">Update VPC route tables</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p> <p>When the new gateway is a transit gateway, modify the transit gateway route table to allow traffic between the VPC and the Amazon Web Services Site-to-Site VPN connection. Use <a>CreateTransitGatewayRoute</a> to add the routes.</p> <p> If you deleted VPN static routes, you must add the static routes to the transit gateway route table.</p> <p>After you perform this operation, the VPN endpoint's IP addresses on the Amazon Web Services side and the tunnel options remain intact. Your Amazon Web Services Site-to-Site VPN connection will be temporarily unavailable for a brief period while we provision the new endpoints.</p>"
     },
     "ModifyVpnConnectionOptions": {
       "name": "ModifyVpnConnectionOptions",
@@ -5559,7 +5587,7 @@
       "output": {
         "shape": "ModifyVpnConnectionOptionsResult"
       },
-      "documentation": "<p>Modifies the connection options for your Site-to-Site VPN connection.</p> <p>When you modify the VPN connection options, the VPN endpoint IP addresses on the AWS side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.</p>"
+      "documentation": "<p>Modifies the connection options for your Site-to-Site VPN connection.</p> <p>When you modify the VPN connection options, the VPN endpoint IP addresses on the Amazon Web Services side do not change, and the tunnel options do not change. Your VPN connection will be temporarily unavailable for a brief period while the VPN connection is updated.</p>"
     },
     "ModifyVpnTunnelCertificate": {
       "name": "ModifyVpnTunnelCertificate",
@@ -5587,7 +5615,7 @@
       "output": {
         "shape": "ModifyVpnTunnelOptionsResult"
       },
-      "documentation": "<p>Modifies the options for a VPN tunnel in an AWS Site-to-Site VPN connection. You can modify multiple options for a tunnel in a single request, but you can only modify one tunnel at a time. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPNTunnels.html\">Site-to-Site VPN Tunnel Options for Your Site-to-Site VPN Connection</a> in the <i>AWS Site-to-Site VPN User Guide</i>.</p>"
+      "documentation": "<p>Modifies the options for a VPN tunnel in an Amazon Web Services Site-to-Site VPN connection. You can modify multiple options for a tunnel in a single request, but you can only modify one tunnel at a time. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/VPNTunnels.html\">Site-to-Site VPN tunnel options for your Site-to-Site VPN connection</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p>"
     },
     "MonitorInstances": {
       "name": "MonitorInstances",
@@ -7538,7 +7566,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
           "idempotencyToken": true
         },
         "DryRun": {
@@ -8329,7 +8357,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
           "idempotencyToken": true
         },
         "DryRun": {
@@ -9609,7 +9637,7 @@
       "members": {
         "ClientRootCertificateChainArn": {
           "shape": "String",
-          "documentation": "<p>The ARN of the client certificate. The certificate must be signed by a certificate authority (CA) and it must be provisioned in AWS Certificate Manager (ACM).</p>"
+          "documentation": "<p>The ARN of the client certificate. The certificate must be signed by a certificate authority (CA) and it must be provisioned in Certificate Manager (ACM).</p>"
         }
       },
       "documentation": "<p>Information about the client certificate to be used for authentication.</p>"
@@ -9769,7 +9797,7 @@
         },
         "LambdaFunctionArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Lambda function used for connection authorization.</p>"
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function used for connection authorization.</p>"
         }
       },
       "documentation": "<p>The options for managing connection authorization for new client connections.</p>"
@@ -9784,7 +9812,7 @@
         },
         "LambdaFunctionArn": {
           "shape": "String",
-          "documentation": "<p>The Amazon Resource Name (ARN) of the AWS Lambda function used for connection authorization.</p>",
+          "documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function used for connection authorization.</p>",
           "locationName": "lambdaFunctionArn"
         },
         "Status": {
@@ -9844,7 +9872,7 @@
           "locationName": "federatedAuthentication"
         }
       },
-      "documentation": "<p>Describes the authentication methods used by a Client VPN endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/client-authentication.html\">Authentication</a> in the <i>AWS Client VPN Administrator Guide</i>.</p>"
+      "documentation": "<p>Describes the authentication methods used by a Client VPN endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/client-authentication.html\">Authentication</a> in the <i>Client VPN Administrator Guide</i>.</p>"
     },
     "ClientVpnAuthenticationList": {
       "type": "list",
@@ -9873,7 +9901,7 @@
           "documentation": "<p>Information about the IAM SAML identity provider to be used, if applicable. You must provide this information if <b>Type</b> is <code>federated-authentication</code>.</p>"
         }
       },
-      "documentation": "<p>Describes the authentication method to be used by a Client VPN endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication\">Authentication</a> in the <i>AWS Client VPN Administrator Guide</i>.</p>"
+      "documentation": "<p>Describes the authentication method to be used by a Client VPN endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/authentication-authrization.html#client-authentication\">Authentication</a> in the <i>Client VPN Administrator Guide</i>.</p>"
     },
     "ClientVpnAuthenticationRequestList": {
       "type": "list",
@@ -10067,7 +10095,7 @@
         },
         "SplitTunnel": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether split-tunnel is enabled in the AWS Client VPN endpoint.</p> <p>For information about split-tunnel VPN endpoints, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html\">Split-Tunnel AWS Client VPN Endpoint</a> in the <i>AWS Client VPN Administrator Guide</i>.</p>",
+          "documentation": "<p>Indicates whether split-tunnel is enabled in the Client VPN endpoint.</p> <p>For information about split-tunnel VPN endpoints, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html\">Split-Tunnel Client VPN endpoint</a> in the <i>Client VPN Administrator Guide</i>.</p>",
           "locationName": "splitTunnel"
         },
         "VpnProtocol": {
@@ -10927,7 +10955,7 @@
         },
         "ServerCertificateArn": {
           "shape": "String",
-          "documentation": "<p>The ARN of the server certificate. For more information, see the <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/\">AWS Certificate Manager User Guide</a>.</p>"
+          "documentation": "<p>The ARN of the server certificate. For more information, see the <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/\">Certificate Manager User Guide</a>.</p>"
         },
         "AuthenticationOptions": {
           "shape": "ClientVpnAuthenticationRequestList",
@@ -10956,7 +10984,7 @@
         },
         "SplitTunnel": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether split-tunnel is enabled on the AWS Client VPN endpoint.</p> <p>By default, split-tunnel on a VPN endpoint is disabled.</p> <p>For information about split-tunnel VPN endpoints, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html\">Split-Tunnel AWS Client VPN Endpoint</a> in the <i>AWS Client VPN Administrator Guide</i>.</p>"
+          "documentation": "<p>Indicates whether split-tunnel is enabled on the Client VPN endpoint.</p> <p>By default, split-tunnel on a VPN endpoint is disabled.</p> <p>For information about split-tunnel VPN endpoints, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html\">Split-tunnel Client VPN endpoint</a> in the <i>Client VPN Administrator Guide</i>.</p>"
         },
         "DryRun": {
           "shape": "Boolean",
@@ -10964,7 +10992,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
           "idempotencyToken": true
         },
         "TagSpecifications": {
@@ -11025,7 +11053,7 @@
         },
         "DestinationCidrBlock": {
           "shape": "String",
-          "documentation": "<p>The IPv4 address range, in CIDR notation, of the route destination. For example:</p> <ul> <li> <p>To add a route for Internet access, enter <code>0.0.0.0/0</code> </p> </li> <li> <p>To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR range</p> </li> <li> <p>To add a route for an on-premises network, enter the AWS Site-to-Site VPN connection's IPv4 CIDR range</p> </li> <li> <p>To add a route for the local network, enter the client CIDR range</p> </li> </ul>"
+          "documentation": "<p>The IPv4 address range, in CIDR notation, of the route destination. For example:</p> <ul> <li> <p>To add a route for Internet access, enter <code>0.0.0.0/0</code> </p> </li> <li> <p>To add a route for a peered VPC, enter the peered VPC's IPv4 CIDR range</p> </li> <li> <p>To add a route for an on-premises network, enter the Amazon Web Services Site-to-Site VPN connection's IPv4 CIDR range</p> </li> <li> <p>To add a route for the local network, enter the client CIDR range</p> </li> </ul>"
         },
         "TargetVpcSubnetId": {
           "shape": "SubnetId",
@@ -11037,7 +11065,7 @@
         },
         "ClientToken": {
           "shape": "String",
-          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to Ensure Idempotency</a>.</p>",
+          "documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html\">How to ensure idempotency</a>.</p>",
           "idempotencyToken": true
         },
         "DryRun": {
@@ -24850,6 +24878,11 @@
     "FreeTierEligibleFlag": {
       "type": "boolean"
     },
+    "GVCDMaxResults": {
+      "type": "integer",
+      "max": 1000,
+      "min": 200
+    },
     "GatewayType": {
       "type": "string",
       "enum": [
@@ -25813,6 +25846,73 @@
         }
       }
     },
+    "GetVpnConnectionDeviceSampleConfigurationRequest": {
+      "type": "structure",
+      "required": [
+        "VpnConnectionId",
+        "VpnConnectionDeviceTypeId"
+      ],
+      "members": {
+        "VpnConnectionId": {
+          "shape": "VpnConnectionId",
+          "documentation": "<p>The <code>VpnConnectionId</code> specifies the Site-to-Site VPN connection used for the sample configuration.</p>"
+        },
+        "VpnConnectionDeviceTypeId": {
+          "shape": "VpnConnectionDeviceTypeId",
+          "documentation": "<p>Device identifier provided by the <code>GetVpnConnectionDeviceTypes</code> API.</p>"
+        },
+        "InternetKeyExchangeVersion": {
+          "shape": "String",
+          "documentation": "<p>The IKE version to be used in the sample configuration file for your customer gateway device. You can specify one of the following versions: <code>ikev1</code> or <code>ikev2</code>.</p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "GetVpnConnectionDeviceSampleConfigurationResult": {
+      "type": "structure",
+      "members": {
+        "VpnConnectionDeviceSampleConfiguration": {
+          "shape": "VpnConnectionDeviceSampleConfiguration",
+          "documentation": "<p>Sample configuration file for the specified customer gateway device.</p>",
+          "locationName": "vpnConnectionDeviceSampleConfiguration"
+        }
+      }
+    },
+    "GetVpnConnectionDeviceTypesRequest": {
+      "type": "structure",
+      "members": {
+        "MaxResults": {
+          "shape": "GVCDMaxResults",
+          "documentation": "<p>The maximum number of results returned by <code>GetVpnConnectionDeviceTypes</code> in paginated output. When this parameter is used, <code>GetVpnConnectionDeviceTypes</code> only returns <code>MaxResults</code> results in a single page along with a <code>NextToken</code> response element. The remaining results of the initial request can be seen by sending another <code>GetVpnConnectionDeviceTypes</code> request with the returned <code>NextToken</code> value. This value can be between 200 and 1000. If this parameter is not used, then <code>GetVpnConnectionDeviceTypes</code> returns all results.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The <code>NextToken</code> value returned from a previous paginated <code>GetVpnConnectionDeviceTypes</code> request where <code>MaxResults</code> was used and the results exceeded the value of that parameter. Pagination continues from the end of the previous results that returned the <code>NextToken</code> value. This value is null when there are no more results to return. </p>"
+        },
+        "DryRun": {
+          "shape": "Boolean",
+          "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        }
+      }
+    },
+    "GetVpnConnectionDeviceTypesResult": {
+      "type": "structure",
+      "members": {
+        "VpnConnectionDeviceTypes": {
+          "shape": "VpnConnectionDeviceTypeList",
+          "documentation": "<p>List of customer gateway devices that have a sample configuration file available for use.</p>",
+          "locationName": "vpnConnectionDeviceTypeSet"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The <code>NextToken</code> value to include in a future <code>GetVpnConnectionDeviceTypes</code> request. When the results of a <code>GetVpnConnectionDeviceTypes</code> request exceed <code>MaxResults</code>, this value can be used to retrieve the next page of results. This value is null when there are no more results to return.</p>",
+          "locationName": "nextToken"
+        }
+      }
+    },
     "GpuDeviceCount": {
       "type": "integer"
     },
@@ -25888,7 +25988,7 @@
     "GroupIdStringList": {
       "type": "list",
       "member": {
-        "shape": "String",
+        "shape": "SecurityGroupId",
         "locationName": "groupId"
       }
     },
@@ -26818,7 +26918,7 @@
         },
         "CertificateRevocationList": {
           "shape": "String",
-          "documentation": "<p>The client certificate revocation list file. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate\">Generate a Client Certificate Revocation List</a> in the <i>AWS Client VPN Administrator Guide</i>.</p>"
+          "documentation": "<p>The client certificate revocation list file. For more information, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/cvpn-working-certificates.html#cvpn-working-certificates-generate\">Generate a Client Certificate Revocation List</a> in the <i>Client VPN Administrator Guide</i>.</p>"
         },
         "DryRun": {
           "shape": "Boolean",
@@ -32389,7 +32489,7 @@
         },
         "ServerCertificateArn": {
           "shape": "String",
-          "documentation": "<p>The ARN of the server certificate to be used. The server certificate must be provisioned in AWS Certificate Manager (ACM).</p>"
+          "documentation": "<p>The ARN of the server certificate to be used. The server certificate must be provisioned in Certificate Manager (ACM).</p>"
         },
         "ConnectionLogOptions": {
           "shape": "ConnectionLogOptions",
@@ -32409,7 +32509,7 @@
         },
         "SplitTunnel": {
           "shape": "Boolean",
-          "documentation": "<p>Indicates whether the VPN is split-tunnel.</p> <p>For information about split-tunnel VPN endpoints, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html\">Split-Tunnel AWS Client VPN Endpoint</a> in the <i>AWS Client VPN Administrator Guide</i>.</p>"
+          "documentation": "<p>Indicates whether the VPN is split-tunnel.</p> <p>For information about split-tunnel VPN endpoints, see <a href=\"https://docs.aws.amazon.com/vpn/latest/clientvpn-admin/split-tunnel-vpn.html\">Split-tunnel Client VPN endpoint</a> in the <i>Client VPN Administrator Guide</i>.</p>"
         },
         "DryRun": {
           "shape": "Boolean",
@@ -34074,7 +34174,7 @@
         },
         "RemoteIpv4NetworkCidr": {
           "shape": "String",
-          "documentation": "<p>The IPv4 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>"
+          "documentation": "<p>The IPv4 CIDR on the Amazon Web Services side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>"
         },
         "LocalIpv6NetworkCidr": {
           "shape": "String",
@@ -34082,7 +34182,7 @@
         },
         "RemoteIpv6NetworkCidr": {
           "shape": "String",
-          "documentation": "<p>The IPv6 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>"
+          "documentation": "<p>The IPv6 CIDR on the Amazon Web Services side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>"
         },
         "DryRun": {
           "shape": "Boolean",
@@ -34119,7 +34219,7 @@
         },
         "VpnGatewayId": {
           "shape": "VpnGatewayId",
-          "documentation": "<p>The ID of the virtual private gateway at the AWS side of the VPN connection.</p>"
+          "documentation": "<p>The ID of the virtual private gateway at the Amazon Web Services side of the VPN connection.</p>"
         },
         "DryRun": {
           "shape": "Boolean",
@@ -34145,7 +34245,7 @@
       "members": {
         "VpnConnectionId": {
           "shape": "VpnConnectionId",
-          "documentation": "<p>The ID of the AWS Site-to-Site VPN connection.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services Site-to-Site VPN connection.</p>"
         },
         "VpnTunnelOutsideIpAddress": {
           "shape": "String",
@@ -34176,7 +34276,7 @@
       "members": {
         "VpnConnectionId": {
           "shape": "VpnConnectionId",
-          "documentation": "<p>The ID of the AWS Site-to-Site VPN connection.</p>"
+          "documentation": "<p>The ID of the Amazon Web Services Site-to-Site VPN connection.</p>"
         },
         "VpnTunnelOutsideIpAddress": {
           "shape": "String",
@@ -34226,7 +34326,7 @@
         },
         "RekeyMarginTimeSeconds": {
           "shape": "Integer",
-          "documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for <code>RekeyFuzzPercentage</code>.</p> <p>Constraints: A value between 60 and half of <code>Phase2LifetimeSeconds</code>.</p> <p>Default: <code>540</code> </p>"
+          "documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the Amazon Web Services side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for <code>RekeyFuzzPercentage</code>.</p> <p>Constraints: A value between 60 and half of <code>Phase2LifetimeSeconds</code>.</p> <p>Default: <code>540</code> </p>"
         },
         "RekeyFuzzPercentage": {
           "shape": "Integer",
@@ -34281,10 +34381,10 @@
         },
         "StartupAction": {
           "shape": "String",
-          "documentation": "<p>The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify <code>start</code> for AWS to initiate the IKE negotiation.</p> <p>Valid Values: <code>add</code> | <code>start</code> </p> <p>Default: <code>add</code> </p>"
+          "documentation": "<p>The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify <code>start</code> for Amazon Web Services to initiate the IKE negotiation.</p> <p>Valid Values: <code>add</code> | <code>start</code> </p> <p>Default: <code>add</code> </p>"
         }
       },
-      "documentation": "<p>The AWS Site-to-Site VPN tunnel options to modify.</p>"
+      "documentation": "<p>The Amazon Web Services Site-to-Site VPN tunnel options to modify.</p>"
     },
     "MonitorInstancesRequest": {
       "type": "structure",
@@ -40569,11 +40669,6 @@
           "shape": "LocalGatewayRoutetableId",
           "documentation": "<p>The ID of the local gateway route table.</p>"
         },
-        "Filters": {
-          "shape": "FilterList",
-          "documentation": "<p>One or more filters.</p>",
-          "locationName": "Filter"
-        },
         "MaxResults": {
           "shape": "MaxResults",
           "documentation": "<p>The maximum number of results to return with a single call. To retrieve the remaining results, make another call with the returned <code>nextToken</code> value.</p>"
@@ -40585,6 +40680,11 @@
         "DryRun": {
           "shape": "Boolean",
           "documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
+        },
+        "Filters": {
+          "shape": "FilterList",
+          "documentation": "<p>One or more filters.</p>",
+          "locationName": "Filter"
         }
       }
     },
@@ -45175,7 +45275,7 @@
         },
         "RekeyMarginTimeSeconds": {
           "shape": "Integer",
-          "documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey.</p>",
+          "documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the Amazon Web Services side of the VPN connection performs an IKE rekey.</p>",
           "locationName": "rekeyMarginTimeSeconds"
         },
         "RekeyFuzzPercentage": {
@@ -46893,7 +46993,7 @@
         },
         "Category": {
           "shape": "String",
-          "documentation": "<p>The category of the VPN connection. A value of <code>VPN</code> indicates an AWS VPN connection. A value of <code>VPN-Classic</code> indicates an AWS Classic VPN connection.</p>",
+          "documentation": "<p>The category of the VPN connection. A value of <code>VPN</code> indicates an Amazon Web Services VPN connection. A value of <code>VPN-Classic</code> indicates an Amazon Web Services Classic VPN connection.</p>",
           "locationName": "category"
         },
         "State": {
@@ -46913,7 +47013,7 @@
         },
         "VpnGatewayId": {
           "shape": "String",
-          "documentation": "<p>The ID of the virtual private gateway at the AWS side of the VPN connection.</p>",
+          "documentation": "<p>The ID of the virtual private gateway at the Amazon Web Services side of the VPN connection.</p>",
           "locationName": "vpnGatewayId"
         },
         "TransitGatewayId": {
@@ -46943,6 +47043,46 @@
         }
       },
       "documentation": "<p>Describes a VPN connection.</p>"
+    },
+    "VpnConnectionDeviceSampleConfiguration": {
+      "type": "string",
+      "sensitive": true
+    },
+    "VpnConnectionDeviceType": {
+      "type": "structure",
+      "members": {
+        "VpnConnectionDeviceTypeId": {
+          "shape": "String",
+          "documentation": "<p>Customer gateway device identifier.</p>",
+          "locationName": "vpnConnectionDeviceTypeId"
+        },
+        "Vendor": {
+          "shape": "String",
+          "documentation": "<p>Customer gateway device vendor.</p>",
+          "locationName": "vendor"
+        },
+        "Platform": {
+          "shape": "String",
+          "documentation": "<p>Customer gateway device platform.</p>",
+          "locationName": "platform"
+        },
+        "Software": {
+          "shape": "String",
+          "documentation": "<p>Customer gateway device software version.</p>",
+          "locationName": "software"
+        }
+      },
+      "documentation": "<p>List of customer gateway devices that have a sample configuration file available for use. You can also see the list of device types with sample configuration files available under <a href=\"https://docs.aws.amazon.com/vpn/latest/s2svpn/your-cgw.html\">Your customer gateway device</a> in the <i>Amazon Web Services Site-to-Site VPN User Guide</i>.</p>"
+    },
+    "VpnConnectionDeviceTypeId": {
+      "type": "string"
+    },
+    "VpnConnectionDeviceTypeList": {
+      "type": "list",
+      "member": {
+        "shape": "VpnConnectionDeviceType",
+        "locationName": "item"
+      }
     },
     "VpnConnectionId": {
       "type": "string"
@@ -46981,7 +47121,7 @@
         },
         "RemoteIpv4NetworkCidr": {
           "shape": "String",
-          "documentation": "<p>The IPv4 CIDR on the AWS side of the VPN connection.</p>",
+          "documentation": "<p>The IPv4 CIDR on the Amazon Web Services side of the VPN connection.</p>",
           "locationName": "remoteIpv4NetworkCidr"
         },
         "LocalIpv6NetworkCidr": {
@@ -46991,7 +47131,7 @@
         },
         "RemoteIpv6NetworkCidr": {
           "shape": "String",
-          "documentation": "<p>The IPv6 CIDR on the AWS side of the VPN connection.</p>",
+          "documentation": "<p>The IPv6 CIDR on the Amazon Web Services side of the VPN connection.</p>",
           "locationName": "remoteIpv6NetworkCidr"
         },
         "TunnelInsideIpVersion": {
@@ -47033,7 +47173,7 @@
         },
         "RemoteIpv4NetworkCidr": {
           "shape": "String",
-          "documentation": "<p>The IPv4 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>"
+          "documentation": "<p>The IPv4 CIDR on the Amazon Web Services side of the VPN connection.</p> <p>Default: <code>0.0.0.0/0</code> </p>"
         },
         "LocalIpv6NetworkCidr": {
           "shape": "String",
@@ -47041,7 +47181,7 @@
         },
         "RemoteIpv6NetworkCidr": {
           "shape": "String",
-          "documentation": "<p>The IPv6 CIDR on the AWS side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>"
+          "documentation": "<p>The IPv6 CIDR on the Amazon Web Services side of the VPN connection.</p> <p>Default: <code>::/0</code> </p>"
         }
       },
       "documentation": "<p>Describes VPN connection options.</p>"
@@ -47185,7 +47325,7 @@
         },
         "RekeyMarginTimeSeconds": {
           "shape": "Integer",
-          "documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the AWS side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for <code>RekeyFuzzPercentage</code>.</p> <p>Constraints: A value between 60 and half of <code>Phase2LifetimeSeconds</code>.</p> <p>Default: <code>540</code> </p>"
+          "documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the Amazon Web Services side of the VPN connection performs an IKE rekey. The exact time of the rekey is randomly selected based on the value for <code>RekeyFuzzPercentage</code>.</p> <p>Constraints: A value between 60 and half of <code>Phase2LifetimeSeconds</code>.</p> <p>Default: <code>540</code> </p>"
         },
         "RekeyFuzzPercentage": {
           "shape": "Integer",
@@ -47240,7 +47380,7 @@
         },
         "StartupAction": {
           "shape": "String",
-          "documentation": "<p>The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify <code>start</code> for AWS to initiate the IKE negotiation.</p> <p>Valid Values: <code>add</code> | <code>start</code> </p> <p>Default: <code>add</code> </p>"
+          "documentation": "<p>The action to take when the establishing the tunnel for the VPN connection. By default, your customer gateway device must initiate the IKE negotiation and bring up the tunnel. Specify <code>start</code> for Amazon Web Services to initiate the IKE negotiation.</p> <p>Valid Values: <code>add</code> | <code>start</code> </p> <p>Default: <code>add</code> </p>"
         }
       },
       "documentation": "<p>The tunnel options for a single VPN tunnel.</p>"

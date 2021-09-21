@@ -85,6 +85,14 @@ declare class ECR extends Service {
    */
   deleteRepositoryPolicy(callback?: (err: AWSError, data: ECR.Types.DeleteRepositoryPolicyResponse) => void): Request<ECR.Types.DeleteRepositoryPolicyResponse, AWSError>;
   /**
+   * Returns the replication status for a specified image.
+   */
+  describeImageReplicationStatus(params: ECR.Types.DescribeImageReplicationStatusRequest, callback?: (err: AWSError, data: ECR.Types.DescribeImageReplicationStatusResponse) => void): Request<ECR.Types.DescribeImageReplicationStatusResponse, AWSError>;
+  /**
+   * Returns the replication status for a specified image.
+   */
+  describeImageReplicationStatus(callback?: (err: AWSError, data: ECR.Types.DescribeImageReplicationStatusResponse) => void): Request<ECR.Types.DescribeImageReplicationStatusResponse, AWSError>;
+  /**
    * Returns the scan findings for the specified image.
    */
   describeImageScanFindings(params: ECR.Types.DescribeImageScanFindingsRequest, callback?: (err: AWSError, data: ECR.Types.DescribeImageScanFindingsResponse) => void): Request<ECR.Types.DescribeImageScanFindingsResponse, AWSError>;
@@ -448,6 +456,10 @@ declare namespace ECR {
   }
   export interface CreateRepositoryRequest {
     /**
+     * The AWS account ID associated with the registry to create the repository. If you do not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
+    /**
      * The name to use for the repository. The repository name may be specified on its own (such as nginx-web-app) or it can be prepended with a namespace to group the repository into a category (such as project-a/nginx-web-app).
      */
     repositoryName: RepositoryName;
@@ -558,6 +570,28 @@ declare namespace ECR {
      * The repository that was deleted.
      */
     repository?: Repository;
+  }
+  export interface DescribeImageReplicationStatusRequest {
+    /**
+     * The name of the repository that the image is in.
+     */
+    repositoryName: RepositoryName;
+    imageId: ImageIdentifier;
+    /**
+     * The Amazon Web Services account ID associated with the registry. If you do not specify a registry, the default registry is assumed.
+     */
+    registryId?: RegistryId;
+  }
+  export interface DescribeImageReplicationStatusResponse {
+    /**
+     * The repository name associated with the request.
+     */
+    repositoryName?: RepositoryName;
+    imageId?: ImageIdentifier;
+    /**
+     * The replication status details for the images in the specified repository.
+     */
+    replicationStatuses?: ImageReplicationStatusList;
   }
   export interface DescribeImageScanFindingsRequest {
     /**
@@ -956,6 +990,25 @@ declare namespace ECR {
   export type ImageIdentifierList = ImageIdentifier[];
   export type ImageList = Image[];
   export type ImageManifest = string;
+  export interface ImageReplicationStatus {
+    /**
+     * The destination Region for the image replication.
+     */
+    region?: Region;
+    /**
+     * The AWS account ID associated with the registry to which the image belongs.
+     */
+    registryId?: RegistryId;
+    /**
+     * The image replication status.
+     */
+    status?: ReplicationStatus;
+    /**
+     * The failure code for a replication that has failed.
+     */
+    failureCode?: ReplicationError;
+  }
+  export type ImageReplicationStatusList = ImageReplicationStatus[];
   export interface ImageScanFinding {
     /**
      * The name associated with the finding, usually a CVE number.
@@ -1344,28 +1397,34 @@ declare namespace ECR {
   export type RegistryPolicyText = string;
   export interface ReplicationConfiguration {
     /**
-     * An array of objects representing the replication rules for a replication configuration. A replication configuration may contain only one replication rule but the rule may contain one or more replication destinations.
+     * An array of objects representing the replication destinations and repository filters for a replication configuration.
      */
     rules: ReplicationRuleList;
   }
   export interface ReplicationDestination {
     /**
-     * A Region to replicate to.
+     * The Region to replicate to.
      */
     region: Region;
     /**
-     * The account ID of the destination registry to replicate to.
+     * The Amazon Web Services account ID of the Amazon ECR private registry to replicate to. When configuring cross-Region replication within your own registry, specify your own account ID.
      */
     registryId: RegistryId;
   }
   export type ReplicationDestinationList = ReplicationDestination[];
+  export type ReplicationError = string;
   export interface ReplicationRule {
     /**
-     * An array of objects representing the details of a replication destination.
+     * An array of objects representing the destination for a replication rule.
      */
     destinations: ReplicationDestinationList;
+    /**
+     * An array of objects representing the filters for a replication rule. Specifying a repository filter for a replication rule provides a method for controlling which repositories in a private registry are replicated.
+     */
+    repositoryFilters?: RepositoryFilterList;
   }
   export type ReplicationRuleList = ReplicationRule[];
+  export type ReplicationStatus = "IN_PROGRESS"|"COMPLETE"|"FAILED"|string;
   export interface Repository {
     /**
      * The Amazon Resource Name (ARN) that identifies the repository. The ARN contains the arn:aws:ecr namespace, followed by the region of the repository, Amazon Web Services account ID of the repository owner, repository namespace, and repository name. For example, arn:aws:ecr:region:012345678910:repository/test.
@@ -1397,6 +1456,19 @@ declare namespace ECR {
      */
     encryptionConfiguration?: EncryptionConfiguration;
   }
+  export interface RepositoryFilter {
+    /**
+     * The repository filter details. When the PREFIX_MATCH filter type is specified, this value is required and should be the repository name prefix to configure replication for.
+     */
+    filter: RepositoryFilterValue;
+    /**
+     * The repository filter type. The only supported value is PREFIX_MATCH, which is a repository name prefix specified with the filter parameter.
+     */
+    filterType: RepositoryFilterType;
+  }
+  export type RepositoryFilterList = RepositoryFilter[];
+  export type RepositoryFilterType = "PREFIX_MATCH"|string;
+  export type RepositoryFilterValue = string;
   export type RepositoryList = Repository[];
   export type RepositoryName = string;
   export type RepositoryNameList = RepositoryName[];
