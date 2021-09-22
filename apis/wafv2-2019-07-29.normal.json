@@ -4240,6 +4240,29 @@
       },
       "documentation": "<p>A single regular expression. This is used in a <a>RegexPatternSet</a>.</p>"
     },
+    "RegexMatchStatement": {
+      "type": "structure",
+      "required": [
+        "RegexString",
+        "FieldToMatch",
+        "TextTransformations"
+      ],
+      "members": {
+        "RegexString": {
+          "shape": "RegexPatternString",
+          "documentation": "<p>The string representing the regular expression.</p>"
+        },
+        "FieldToMatch": {
+          "shape": "FieldToMatch",
+          "documentation": "<p>The part of a web request that you want WAF to inspect. For more information, see <a>FieldToMatch</a>. </p>"
+        },
+        "TextTransformations": {
+          "shape": "TextTransformations",
+          "documentation": "<p>Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, WAF performs all transformations on the content of the request component identified by <code>FieldToMatch</code>, starting from the lowest priority setting, before inspecting the content for a match.</p>"
+        }
+      },
+      "documentation": "<p>A rule statement used to search web request components for a match against a single regular expression. </p>"
+    },
     "RegexPatternSet": {
       "type": "structure",
       "members": {
@@ -4763,6 +4786,10 @@
         "LabelMatchStatement": {
           "shape": "LabelMatchStatement",
           "documentation": "<p>A rule statement that defines a string match search against labels that have been added to the web request by rules that have already run in the web ACL. </p> <p>The label match statement provides the label or namespace string to search for. The label string can represent a part or all of the fully qualified label name that had been added to the web request. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. If you do not provide the fully qualified name in your label match string, WAF performs the search for labels that were added in the same context as the label match statement. </p>"
+        },
+        "RegexMatchStatement": {
+          "shape": "RegexMatchStatement",
+          "documentation": "<p>A rule statement used to search web request components for a match against a single regular expression. </p>"
         }
       },
       "documentation": "<p>The processing guidance for a <a>Rule</a>, used by WAF to determine whether a web request matches the rule. </p>"

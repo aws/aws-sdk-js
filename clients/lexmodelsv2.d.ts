@@ -196,6 +196,14 @@ declare class LexModelsV2 extends Service {
    */
   deleteSlotType(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot. Utterances are stored for 15 days for use with the operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input.. Use the DeleteUtterances operation to manually delete utterances for a specific session. When you use the DeleteUtterances operation, utterances stored for improving your bot's ability to respond to user input are deleted immediately. Utterances stored for use with the ListAggregatedUtterances operation are deleted after 15 days.
+   */
+  deleteUtterances(params: LexModelsV2.Types.DeleteUtterancesRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DeleteUtterancesResponse) => void): Request<LexModelsV2.Types.DeleteUtterancesResponse, AWSError>;
+  /**
+   * Deletes stored utterances. Amazon Lex stores the utterances that users send to your bot. Utterances are stored for 15 days for use with the operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input.. Use the DeleteUtterances operation to manually delete utterances for a specific session. When you use the DeleteUtterances operation, utterances stored for improving your bot's ability to respond to user input are deleted immediately. Utterances stored for use with the ListAggregatedUtterances operation are deleted after 15 days.
+   */
+  deleteUtterances(callback?: (err: AWSError, data: LexModelsV2.Types.DeleteUtterancesResponse) => void): Request<LexModelsV2.Types.DeleteUtterancesResponse, AWSError>;
+  /**
    * Provides metadata information about a bot. 
    */
   describeBot(params: LexModelsV2.Types.DescribeBotRequest, callback?: (err: AWSError, data: LexModelsV2.Types.DescribeBotResponse) => void): Request<LexModelsV2.Types.DescribeBotResponse, AWSError>;
@@ -275,6 +283,14 @@ declare class LexModelsV2 extends Service {
    * Gets metadata information about a slot type.
    */
   describeSlotType(callback?: (err: AWSError, data: LexModelsV2.Types.DescribeSlotTypeResponse) => void): Request<LexModelsV2.Types.DescribeSlotTypeResponse, AWSError>;
+  /**
+   * Provides a list of utterances that users have sent to the bot. Utterances are aggregated by the text of the utterance. For example, all instances where customers used the phrase "I want to order pizza" are aggregated into the same line in the response. You can see both detected utterances and missed utterances. A detected utterance is where the bot properly recognized the utterance and activated the associated intent. A missed utterance was not recognized by the bot and didn't activate an intent. Utterances can be aggregated for a bot alias or for a bot version, but not both at the same time. Utterances statistics are not generated under the following conditions:   The childDirected field was set to true when the bot was created.   You are using slot obfuscation with one or more slots.   You opted out of participating in improving Amazon Lex.  
+   */
+  listAggregatedUtterances(params: LexModelsV2.Types.ListAggregatedUtterancesRequest, callback?: (err: AWSError, data: LexModelsV2.Types.ListAggregatedUtterancesResponse) => void): Request<LexModelsV2.Types.ListAggregatedUtterancesResponse, AWSError>;
+  /**
+   * Provides a list of utterances that users have sent to the bot. Utterances are aggregated by the text of the utterance. For example, all instances where customers used the phrase "I want to order pizza" are aggregated into the same line in the response. You can see both detected utterances and missed utterances. A detected utterance is where the bot properly recognized the utterance and activated the associated intent. A missed utterance was not recognized by the bot and didn't activate an intent. Utterances can be aggregated for a bot alias or for a bot version, but not both at the same time. Utterances statistics are not generated under the following conditions:   The childDirected field was set to true when the bot was created.   You are using slot obfuscation with one or more slots.   You opted out of participating in improving Amazon Lex.  
+   */
+  listAggregatedUtterances(callback?: (err: AWSError, data: LexModelsV2.Types.ListAggregatedUtterancesResponse) => void): Request<LexModelsV2.Types.ListAggregatedUtterancesResponse, AWSError>;
   /**
    * Gets a list of aliases for the specified bot.
    */
@@ -461,6 +477,61 @@ declare class LexModelsV2 extends Service {
   updateSlotType(callback?: (err: AWSError, data: LexModelsV2.Types.UpdateSlotTypeResponse) => void): Request<LexModelsV2.Types.UpdateSlotTypeResponse, AWSError>;
 }
 declare namespace LexModelsV2 {
+  export interface AggregatedUtterancesFilter {
+    /**
+     * The name of the field to filter the utterance list.
+     */
+    name: AggregatedUtterancesFilterName;
+    /**
+     * The value to use for filtering the list of bots.
+     */
+    values: FilterValues;
+    /**
+     * The operator to use for the filter. Specify EQ when the ListAggregatedUtterances operation should return only utterances that equal the specified value. Specify CO when the ListAggregatedUtterances operation should return utterances that contain the specified value.
+     */
+    operator: AggregatedUtterancesFilterOperator;
+  }
+  export type AggregatedUtterancesFilterName = "Utterance"|string;
+  export type AggregatedUtterancesFilterOperator = "CO"|"EQ"|string;
+  export type AggregatedUtterancesFilters = AggregatedUtterancesFilter[];
+  export type AggregatedUtterancesSortAttribute = "HitCount"|"MissedCount"|string;
+  export interface AggregatedUtterancesSortBy {
+    /**
+     * The utterance attribute to sort by.
+     */
+    attribute: AggregatedUtterancesSortAttribute;
+    /**
+     * Specifies whether to sort the aggregated utterances in ascending or descending order.
+     */
+    order: SortOrder;
+  }
+  export interface AggregatedUtterancesSummary {
+    /**
+     * The text of the utterance. If the utterance was used with the RecognizeUtterance operation, the text is the transcription of the audio utterance.
+     */
+    utterance?: Utterance;
+    /**
+     * The number of times that the utterance was detected by Amazon Lex during the time period. When an utterance is detected, it activates an intent or a slot.
+     */
+    hitCount?: HitCount;
+    /**
+     * The number of times that the utterance was missed by Amazon Lex An utterance is missed when it doesn't activate an intent or slot.
+     */
+    missedCount?: MissedCount;
+    /**
+     * The date and time that the utterance was first recorded in the time window for aggregation. An utterance may have been sent to Amazon Lex before that time, but only utterances within the time window are counted.
+     */
+    utteranceFirstRecordedInAggregationDuration?: Timestamp;
+    /**
+     * The last date and time that an utterance was recorded in the time window for aggregation. An utterance may be sent to Amazon Lex after that time, but only utterances within the time window are counted.
+     */
+    utteranceLastRecordedInAggregationDuration?: Timestamp;
+    /**
+     * Aggregated utterance data may contain utterances from versions of your bot that have since been deleted. When the aggregated contains this kind of data, this field is set to true.
+     */
+    containsDataFromDeletedResources?: BoxedBoolean;
+  }
+  export type AggregatedUtterancesSummaryList = AggregatedUtterancesSummary[];
   export type AmazonResourceName = string;
   export type AttachmentTitle = string;
   export type AttachmentUrl = string;
@@ -1809,6 +1880,22 @@ declare namespace LexModelsV2 {
      */
     skipResourceInUseCheck?: SkipResourceInUseCheck;
   }
+  export interface DeleteUtterancesRequest {
+    /**
+     * The unique identifier of the bot that contains the utterances.
+     */
+    botId: Id;
+    /**
+     * The identifier of the language and locale where the utterances were collected. The string must match one of the supported locales. For more information, see Supported languages.
+     */
+    localeId?: LocaleId;
+    /**
+     * The unique identifier of the session with the user. The ID is returned in the response from the and operations.
+     */
+    sessionId?: SessionId;
+  }
+  export interface DeleteUtterancesResponse {
+  }
   export interface DescribeBotAliasRequest {
     /**
      * The identifier of the bot alias to describe.
@@ -2459,6 +2546,7 @@ declare namespace LexModelsV2 {
      */
     enabled: Boolean;
   }
+  export type HitCount = number;
   export type Id = string;
   export interface ImageResponseCard {
     /**
@@ -2668,6 +2756,86 @@ declare namespace LexModelsV2 {
      * The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.
      */
     codeHookInterfaceVersion: CodeHookInterfaceVersion;
+  }
+  export interface ListAggregatedUtterancesRequest {
+    /**
+     * The unique identifier of the bot associated with this request.
+     */
+    botId: Id;
+    /**
+     * The identifier of the bot alias associated with this request. If you specify the bot alias, you can't specify the bot version.
+     */
+    botAliasId?: BotAliasId;
+    /**
+     * The identifier of the bot version associated with this request. If you specify the bot version, you can't specify the bot alias.
+     */
+    botVersion?: BotVersion;
+    /**
+     * The identifier of the language and locale where the utterances were collected. For more information, see Supported languages.
+     */
+    localeId: LocaleId;
+    /**
+     * The time window for aggregating the utterance information. You can specify a time between one hour and two weeks.
+     */
+    aggregationDuration: UtteranceAggregationDuration;
+    /**
+     * Specifies sorting parameters for the list of utterances. You can sort by the hit count, the missed count, or the number of distinct sessions the utterance appeared in.
+     */
+    sortBy?: AggregatedUtterancesSortBy;
+    /**
+     * Provides the specification of a filter used to limit the utterances in the response to only those that match the filter specification. You can only specify one filter and one string to filter on.
+     */
+    filters?: AggregatedUtterancesFilters;
+    /**
+     * The maximum number of utterances to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned. If you don't specify the maxResults parameter, 1,000 results are returned.
+     */
+    maxResults?: MaxResults;
+    /**
+     * If the response from the ListAggregatedUtterances operation contains more results that specified in the maxResults parameter, a token is returned in the response. Use that token in the nextToken parameter to return the next page of results.
+     */
+    nextToken?: NextToken;
+  }
+  export interface ListAggregatedUtterancesResponse {
+    /**
+     * The identifier of the bot that contains the utterances.
+     */
+    botId?: Id;
+    /**
+     * The identifier of the bot alias that contains the utterances. If you specified the bot version, the bot alias ID isn't returned.
+     */
+    botAliasId?: BotAliasId;
+    /**
+     * The identifier of the bot version that contains the utterances. If you specified the bot alias, the bot version isn't returned.
+     */
+    botVersion?: BotVersion;
+    /**
+     * The identifier of the language and locale that the utterances are in.
+     */
+    localeId?: LocaleId;
+    /**
+     * The time period used to aggregate the utterance data.
+     */
+    aggregationDuration?: UtteranceAggregationDuration;
+    /**
+     * The date and time that the aggregation window begins. Only data collected after this time is returned in the results.
+     */
+    aggregationWindowStartTime?: Timestamp;
+    /**
+     * The date and time that the aggregation window ends. Only data collected between the start time and the end time are returned in the results. 
+     */
+    aggregationWindowEndTime?: Timestamp;
+    /**
+     * The last date and time that the aggregated data was collected. The time period depends on the length of the aggregation window.    Hours - for 1 hour time window, every half hour; otherwise every hour.    Days - every 6 hours    Weeks - for a one week time window, every 12 hours; otherwise, every day  
+     */
+    aggregationLastRefreshedDateTime?: Timestamp;
+    /**
+     * Summaries of the aggregated utterance data. Each response contains information about the number of times that the utterance was seen during the time period, whether it was detected or missed, and when it was seen during the time period.
+     */
+    aggregatedUtterancesSummaries?: AggregatedUtterancesSummaryList;
+    /**
+     * A token that indicates whether there are more results to return in a response to the ListAggregatedUtterances operation. If the nextToken field is present, you send the contents as the nextToken parameter of a ListAggregatedUtterances operation request to get the next page of results.
+     */
+    nextToken?: NextToken;
   }
   export interface ListBotAliasesRequest {
     /**
@@ -3164,6 +3332,7 @@ declare namespace LexModelsV2 {
   }
   export type MessageGroupsList = MessageGroup[];
   export type MessageVariationsList = Message[];
+  export type MissedCount = number;
   export interface MultipleValuesSetting {
     /**
      * Indicates whether a slot can return multiple values. When true, the slot may return more than one value in a response. When false, the slot returns only a single value. Multi-value slots are only available in the en-US locale. If you set this value to true in any other locale, Amazon Lex throws a ValidationException. If the allowMutlipleValues is not set, the default value is false.
@@ -3236,6 +3405,16 @@ declare namespace LexModelsV2 {
   }
   export type QueryFilterString = string;
   export type RegexPattern = string;
+  export interface RelativeAggregationDuration {
+    /**
+     * The type of time period that the timeValue field represents. 
+     */
+    timeDimension: TimeDimension;
+    /**
+     * The period of the time window to gather statistics for. The valid value depends on the setting of the timeDimension field.    Hours - 1/3/6/12/24    Days - 3    Weeks - 1/2  
+     */
+    timeValue: TimeValue;
+  }
   export type ResourceCount = number;
   export interface ResponseSpecification {
     /**
@@ -3291,6 +3470,7 @@ declare namespace LexModelsV2 {
     detectSentiment: Boolean;
   }
   export type ServicePrincipal = string;
+  export type SessionId = string;
   export type SessionTTL = number;
   export type SkipResourceInUseCheck = boolean;
   export type SlotConstraint = "Required"|"Optional"|string;
@@ -3569,6 +3749,8 @@ declare namespace LexModelsV2 {
     destination: TextLogDestination;
   }
   export type TextLogSettingsList = TextLogSetting[];
+  export type TimeDimension = "Hours"|"Days"|"Weeks"|string;
+  export type TimeValue = number;
   export type Timestamp = Date;
   export interface UntagResourceRequest {
     /**
@@ -4177,6 +4359,12 @@ declare namespace LexModelsV2 {
     lastUpdatedDateTime?: Timestamp;
   }
   export type Utterance = string;
+  export interface UtteranceAggregationDuration {
+    /**
+     * The desired time window for aggregating utterances. 
+     */
+    relativeAggregationDuration: RelativeAggregationDuration;
+  }
   export type Value = string;
   export type VoiceId = string;
   export interface VoiceSettings {

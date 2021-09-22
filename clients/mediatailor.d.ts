@@ -12,6 +12,14 @@ declare class MediaTailor extends Service {
   constructor(options?: MediaTailor.Types.ClientConfiguration)
   config: Config & MediaTailor.Types.ClientConfiguration;
   /**
+   * Configures Amazon CloudWatch log settings for a playback configuration.
+   */
+  configureLogsForPlaybackConfiguration(params: MediaTailor.Types.ConfigureLogsForPlaybackConfigurationRequest, callback?: (err: AWSError, data: MediaTailor.Types.ConfigureLogsForPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.ConfigureLogsForPlaybackConfigurationResponse, AWSError>;
+  /**
+   * Configures Amazon CloudWatch log settings for a playback configuration.
+   */
+  configureLogsForPlaybackConfiguration(callback?: (err: AWSError, data: MediaTailor.Types.ConfigureLogsForPlaybackConfigurationResponse) => void): Request<MediaTailor.Types.ConfigureLogsForPlaybackConfigurationResponse, AWSError>;
+  /**
    * Creates a channel.
    */
   createChannel(params: MediaTailor.Types.CreateChannelRequest, callback?: (err: AWSError, data: MediaTailor.Types.CreateChannelResponse) => void): Request<MediaTailor.Types.CreateChannelResponse, AWSError>;
@@ -397,13 +405,33 @@ declare namespace MediaTailor {
   export type ChannelState = "RUNNING"|"STOPPED"|string;
   export type ConfigurationAliasesRequest = {[key: string]: __mapOf__string};
   export type ConfigurationAliasesResponse = {[key: string]: __mapOf__string};
+  export interface ConfigureLogsForPlaybackConfigurationRequest {
+    /**
+     * The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the debug log mode. Valid values: 0 - 100
+     */
+    PercentEnabled: __integer;
+    /**
+     * The name of the playback configuration.
+     */
+    PlaybackConfigurationName: __string;
+  }
+  export interface ConfigureLogsForPlaybackConfigurationResponse {
+    /**
+     * The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account.
+     */
+    PercentEnabled?: __integer;
+    /**
+     * The name of the playback configuration.
+     */
+    PlaybackConfigurationName?: __string;
+  }
   export interface CreateChannelRequest {
     /**
      * The identifier for the channel you are working on.
      */
     ChannelName: __string;
     /**
-     * The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses an LINEAR PlaybackMode.
+     * The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses a LINEAR PlaybackMode.
      */
     FillerSlate?: SlateSource;
     /**
@@ -973,6 +1001,10 @@ declare namespace MediaTailor {
      */
     LivePreRollConfiguration?: LivePreRollConfiguration;
     /**
+     * The Amazon CloudWatch log settings for a playback configuration.
+     */
+    LogConfiguration?: LogConfiguration;
+    /**
      * The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
      */
     ManifestProcessingRules?: ManifestProcessingRules;
@@ -1176,6 +1208,12 @@ declare namespace MediaTailor {
      */
     MaxDurationSeconds?: __integer;
   }
+  export interface LogConfiguration {
+    /**
+     * The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the debug log mode. Valid values: 0 - 100
+     */
+    PercentEnabled: __integer;
+  }
   export interface ManifestProcessingRules {
     /**
      * For HLS, when set to true, MediaTailor passes through EXT-X-CUE-IN, EXT-X-CUE-OUT, and EXT-X-SPLICEPOINT-SCTE35 ad markers from the origin manifest to the MediaTailor personalized manifest. No logic is applied to these ad markers. For example, if EXT-X-CUE-OUT has a value of 60, but no ads are filled for that ad break, MediaTailor will not set the value to 0.
@@ -1219,6 +1257,10 @@ declare namespace MediaTailor {
      * The configuration for pre-roll ad insertion.
      */
     LivePreRollConfiguration?: LivePreRollConfiguration;
+    /**
+     * The Amazon CloudWatch log settings for a playback configuration.
+     */
+    LogConfiguration?: LogConfiguration;
     /**
      * The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
      */
@@ -1364,6 +1406,10 @@ declare namespace MediaTailor {
      * The configuration for pre-roll ad insertion.
      */
     LivePreRollConfiguration?: LivePreRollConfiguration;
+    /**
+     * The Amazon CloudWatch log settings for a playback configuration.
+     */
+    LogConfiguration?: LogConfiguration;
     /**
      * The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.
      */

@@ -1897,6 +1897,20 @@ declare namespace WAFV2 {
      */
     RegexString?: RegexPatternString;
   }
+  export interface RegexMatchStatement {
+    /**
+     * The string representing the regular expression.
+     */
+    RegexString: RegexPatternString;
+    /**
+     * The part of a web request that you want WAF to inspect. For more information, see FieldToMatch. 
+     */
+    FieldToMatch: FieldToMatch;
+    /**
+     * Text transformations eliminate some of the unusual formatting that attackers use in web requests in an effort to bypass detection. If you specify one or more transformations in a rule statement, WAF performs all transformations on the content of the request component identified by FieldToMatch, starting from the lowest priority setting, before inspecting the content for a match.
+     */
+    TextTransformations: TextTransformations;
+  }
   export interface RegexPatternSet {
     /**
      * The name of the set. You cannot change the name after you create the set.
@@ -2236,6 +2250,10 @@ declare namespace WAFV2 {
      * A rule statement that defines a string match search against labels that have been added to the web request by rules that have already run in the web ACL.  The label match statement provides the label or namespace string to search for. The label string can represent a part or all of the fully qualified label name that had been added to the web request. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. If you do not provide the fully qualified name in your label match string, WAF performs the search for labels that were added in the same context as the label match statement. 
      */
     LabelMatchStatement?: LabelMatchStatement;
+    /**
+     * A rule statement used to search web request components for a match against a single regular expression. 
+     */
+    RegexMatchStatement?: RegexMatchStatement;
   }
   export type Statements = Statement[];
   export interface Tag {

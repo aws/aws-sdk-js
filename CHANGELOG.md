@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.992.0-->
+<!--LATEST=2.993.0-->
 <!--ENTRYINSERT-->
+
+## 2.993.0
+* feature: Imagebuilder: This feature adds support for specifying GP3 volume throughput and configuring instance metadata options for instances launched by EC2 Image Builder.
+* feature: LexModelsV2: This release adds support for utterances statistics for bots built using Lex V2 console and APIs. For details, see: https://docs.aws.amazon.com/lexv2/latest/dg/monitoring-utterances.html
+* feature: LicenseManager: AWS License Manager now allows customers to change their Windows Server or SQL license types from Bring-Your-Own-License (BYOL) to License Included or vice-versa (using the customer's media).
+* feature: MediaPackageVod: MediaPackage VOD will now return the current processing statuses of an asset's endpoints. The status can be QUEUED, PROCESSING, PLAYABLE, or FAILED.
+* feature: MediaTailor: This release adds support to configure logs for playback configuration.
+* feature: WAFV2: Added the regex match rule statement, for matching web requests against a single regular expression.
 
 ## 2.992.0
 * feature: Comprehend: Amazon Comprehend now supports versioning of custom models, improved training with ONE_DOC_PER_FILE text documents for custom entity recognition, ability to provide specific test sets during training, and live migration to new model endpoints.

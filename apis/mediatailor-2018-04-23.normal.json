@@ -13,6 +13,23 @@
     "uid": "mediatailor-2018-04-23"
   },
   "operations": {
+    "ConfigureLogsForPlaybackConfiguration": {
+      "documentation": "<p>Configures Amazon CloudWatch log settings for a playback configuration.</p>",
+      "errors": [],
+      "http": {
+        "method": "PUT",
+        "requestUri": "/configureLogs/playbackConfiguration",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ConfigureLogsForPlaybackConfigurationRequest"
+      },
+      "name": "ConfigureLogsForPlaybackConfiguration",
+      "output": {
+        "documentation": "<p>Success.</p>",
+        "shape": "ConfigureLogsForPlaybackConfigurationResponse"
+      }
+    },
     "CreateChannel": {
       "documentation": "<p>Creates a channel.</p>",
       "errors": [],
@@ -374,7 +391,7 @@
       "documentation": "<p>Returns a list of the tags assigned to the specified playback configuration resource.</p>  ",
       "errors": [
         {
-          "documentation": "<p>Invalid request parameters.</p>",
+          "documentation": "<p>One or more parameters in this request aren't valid.</p>",
           "shape": "BadRequestException"
         }
       ],
@@ -481,7 +498,7 @@
       "documentation": "<p>Adds tags to the specified playback configuration resource. You can specify one or more tags to add.</p>  ",
       "errors": [
         {
-          "documentation": "<p>Invalid request parameters.</p>",
+          "documentation": "<p>One or more parameters in this request aren't valid.</p>",
           "shape": "BadRequestException"
         }
       ],
@@ -499,7 +516,7 @@
       "documentation": "<p>Removes tags from the specified playback configuration resource. You can specify one or more tags to remove.</p>  ",
       "errors": [
         {
-          "documentation": "<p>Invalid request parameters.</p>",
+          "documentation": "<p>One or more parameters in this request aren't valid.</p>",
           "shape": "BadRequestException"
         }
       ],
@@ -775,6 +792,37 @@
         "shape": "__mapOf__string"
       }
     },
+    "ConfigureLogsForPlaybackConfigurationRequest": {
+      "documentation": "<p>Configures Amazon CloudWatch log settings for a playback configuration.</p>",
+      "members": {
+        "PercentEnabled": {
+          "documentation": "<p>The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/debug-log-mode.html\">debug log mode</a>.</p> <p>Valid values: 0 - 100</p>",
+          "shape": "__integer"
+        },
+        "PlaybackConfigurationName": {
+          "documentation": "<p>The name of the playback configuration.</p>",
+          "shape": "__string"
+        }
+      },
+      "required": [
+        "PercentEnabled",
+        "PlaybackConfigurationName"
+      ],
+      "type": "structure"
+    },
+    "ConfigureLogsForPlaybackConfigurationResponse": {
+      "members": {
+        "PercentEnabled": {
+          "documentation": "<p>The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account.</p>",
+          "shape": "__integer"
+        },
+        "PlaybackConfigurationName": {
+          "documentation": "<p>The name of the playback configuration.</p>",
+          "shape": "__string"
+        }
+      },
+      "type": "structure"
+    },
     "CreateChannelRequest": {
       "members": {
         "ChannelName": {
@@ -784,7 +832,7 @@
           "shape": "__string"
         },
         "FillerSlate": {
-          "documentation": "<p>The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses an LINEAR PlaybackMode.</p>",
+          "documentation": "<p>The slate used to fill gaps between programs in the schedule. You must configure filler slate if your channel uses a LINEAR PlaybackMode.</p>",
           "shape": "SlateSource"
         },
         "Outputs": {
@@ -1585,6 +1633,10 @@
           "documentation": "<p>The configuration for pre-roll ad insertion.</p>",
           "shape": "LivePreRollConfiguration"
         },
+        "LogConfiguration": {
+          "documentation": "<p>The Amazon CloudWatch log settings for a playback configuration.</p>",
+          "shape": "LogConfiguration"
+        },
         "ManifestProcessingRules": {
           "documentation": "<p>The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.</p>",
           "shape": "ManifestProcessingRules"
@@ -1898,6 +1950,19 @@
       },
       "type": "structure"
     },
+    "LogConfiguration": {
+      "documentation": "<p>Returns Amazon CloudWatch log settings for a playback configuration.</p>",
+      "members": {
+        "PercentEnabled": {
+          "documentation": "<p>The percentage of session logs that MediaTailor sends to your Cloudwatch Logs account. For example, if your playback configuration has 1000 sessions and percentEnabled is set to 60, MediaTailor sends logs for 600 of the sessions to CloudWatch Logs. MediaTailor decides at random which of the playback configuration sessions to send logs for. If you want to view logs for a specific session, you can use the <a href=\"https://docs.aws.amazon.com/mediatailor/latest/ug/debug-log-mode.html\">debug log mode</a>.</p> <p>Valid values: 0 - 100</p>",
+          "shape": "__integer"
+        }
+      },
+      "required": [
+        "PercentEnabled"
+      ],
+      "type": "structure"
+    },
     "ManifestProcessingRules": {
       "documentation": "<p>The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.</p>",
       "members": {
@@ -1967,6 +2032,10 @@
         "LivePreRollConfiguration": {
           "documentation": "<p>The configuration for pre-roll ad insertion.</p>",
           "shape": "LivePreRollConfiguration"
+        },
+        "LogConfiguration": {
+          "documentation": "<p>The Amazon CloudWatch log settings for a playback configuration.</p>",
+          "shape": "LogConfiguration"
         },
         "ManifestProcessingRules": {
           "documentation": "<p>The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.</p>",
@@ -2137,6 +2206,10 @@
         "LivePreRollConfiguration": {
           "documentation": "<p>The configuration for pre-roll ad insertion.</p>",
           "shape": "LivePreRollConfiguration"
+        },
+        "LogConfiguration": {
+          "documentation": "<p>The Amazon CloudWatch log settings for a playback configuration.</p>",
+          "shape": "LogConfiguration"
         },
         "ManifestProcessingRules": {
           "documentation": "<p>The configuration for manifest processing rules. Manifest processing rules enable customization of the personalized manifests created by MediaTailor.</p>",

@@ -535,6 +535,10 @@ rounded to the nearest multiple of the source segment duration.
      */
     PackagingConfigurationId?: __string;
     /**
+     * The current processing status of the asset used for the packaging configuration. The status can be either QUEUED, PROCESSING, PLAYABLE, or FAILED. Status information won't be available for most assets ingested before 2021-09-30.
+     */
+    Status?: __string;
+    /**
      * The URL of the parent manifest for the repackaged Asset.
      */
     Url?: __string;

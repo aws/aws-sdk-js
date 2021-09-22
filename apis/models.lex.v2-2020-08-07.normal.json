@@ -791,6 +791,32 @@
       ],
       "documentation": "<p>Deletes a slot type from a bot locale.</p> <p>If a slot is using the slot type, Amazon Lex throws a <code>ResourceInUseException</code> exception. To avoid the exception, set the <code>skipResourceInUseCheck</code> parameter to <code>true</code>.</p>"
     },
+    "DeleteUtterances": {
+      "name": "DeleteUtterances",
+      "http": {
+        "method": "DELETE",
+        "requestUri": "/bots/{botId}/utterances/",
+        "responseCode": 204
+      },
+      "input": {
+        "shape": "DeleteUtterancesRequest"
+      },
+      "output": {
+        "shape": "DeleteUtterancesResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Deletes stored utterances.</p> <p>Amazon Lex stores the utterances that users send to your bot. Utterances are stored for 15 days for use with the operation, and then stored indefinitely for use in improving the ability of your bot to respond to user input..</p> <p>Use the <code>DeleteUtterances</code> operation to manually delete utterances for a specific session. When you use the <code>DeleteUtterances</code> operation, utterances stored for improving your bot's ability to respond to user input are deleted immediately. Utterances stored for use with the <code>ListAggregatedUtterances</code> operation are deleted after 15 days.</p>"
+    },
     "DescribeBot": {
       "name": "DescribeBot",
       "http": {
@@ -1098,6 +1124,35 @@
         }
       ],
       "documentation": "<p>Gets metadata information about a slot type.</p>"
+    },
+    "ListAggregatedUtterances": {
+      "name": "ListAggregatedUtterances",
+      "http": {
+        "method": "POST",
+        "requestUri": "/bots/{botId}/aggregatedutterances/",
+        "responseCode": 200
+      },
+      "input": {
+        "shape": "ListAggregatedUtterancesRequest"
+      },
+      "output": {
+        "shape": "ListAggregatedUtterancesResponse"
+      },
+      "errors": [
+        {
+          "shape": "ValidationException"
+        },
+        {
+          "shape": "PreconditionFailedException"
+        },
+        {
+          "shape": "ThrottlingException"
+        },
+        {
+          "shape": "InternalServerException"
+        }
+      ],
+      "documentation": "<p>Provides a list of utterances that users have sent to the bot.</p> <p>Utterances are aggregated by the text of the utterance. For example, all instances where customers used the phrase \"I want to order pizza\" are aggregated into the same line in the response.</p> <p>You can see both detected utterances and missed utterances. A detected utterance is where the bot properly recognized the utterance and activated the associated intent. A missed utterance was not recognized by the bot and didn't activate an intent.</p> <p>Utterances can be aggregated for a bot alias or for a bot version, but not both at the same time.</p> <p>Utterances statistics are not generated under the following conditions:</p> <ul> <li> <p>The <code>childDirected</code> field was set to true when the bot was created.</p> </li> <li> <p>You are using slot obfuscation with one or more slots.</p> </li> <li> <p>You opted out of participating in improving Amazon Lex.</p> </li> </ul>"
     },
     "ListBotAliases": {
       "name": "ListBotAliases",
@@ -1816,6 +1871,111 @@
     }
   },
   "shapes": {
+    "AggregatedUtterancesFilter": {
+      "type": "structure",
+      "required": [
+        "name",
+        "values",
+        "operator"
+      ],
+      "members": {
+        "name": {
+          "shape": "AggregatedUtterancesFilterName",
+          "documentation": "<p>The name of the field to filter the utterance list.</p>"
+        },
+        "values": {
+          "shape": "FilterValues",
+          "documentation": "<p>The value to use for filtering the list of bots.</p>"
+        },
+        "operator": {
+          "shape": "AggregatedUtterancesFilterOperator",
+          "documentation": "<p>The operator to use for the filter. Specify <code>EQ</code> when the <code>ListAggregatedUtterances</code> operation should return only utterances that equal the specified value. Specify <code>CO</code> when the <code>ListAggregatedUtterances</code> operation should return utterances that contain the specified value.</p>"
+        }
+      },
+      "documentation": "<p>Filters responses returned by the <code>ListAggregatedUtterances</code> operation.</p>"
+    },
+    "AggregatedUtterancesFilterName": {
+      "type": "string",
+      "enum": [
+        "Utterance"
+      ]
+    },
+    "AggregatedUtterancesFilterOperator": {
+      "type": "string",
+      "enum": [
+        "CO",
+        "EQ"
+      ]
+    },
+    "AggregatedUtterancesFilters": {
+      "type": "list",
+      "member": {
+        "shape": "AggregatedUtterancesFilter"
+      },
+      "max": 1,
+      "min": 1
+    },
+    "AggregatedUtterancesSortAttribute": {
+      "type": "string",
+      "enum": [
+        "HitCount",
+        "MissedCount"
+      ]
+    },
+    "AggregatedUtterancesSortBy": {
+      "type": "structure",
+      "required": [
+        "attribute",
+        "order"
+      ],
+      "members": {
+        "attribute": {
+          "shape": "AggregatedUtterancesSortAttribute",
+          "documentation": "<p>The utterance attribute to sort by.</p>"
+        },
+        "order": {
+          "shape": "SortOrder",
+          "documentation": "<p>Specifies whether to sort the aggregated utterances in ascending or descending order.</p>"
+        }
+      },
+      "documentation": "<p>Specifies attributes for sorting a list of utterances.</p>"
+    },
+    "AggregatedUtterancesSummary": {
+      "type": "structure",
+      "members": {
+        "utterance": {
+          "shape": "Utterance",
+          "documentation": "<p>The text of the utterance. If the utterance was used with the <code>RecognizeUtterance</code> operation, the text is the transcription of the audio utterance.</p>"
+        },
+        "hitCount": {
+          "shape": "HitCount",
+          "documentation": "<p>The number of times that the utterance was detected by Amazon Lex during the time period. When an utterance is detected, it activates an intent or a slot.</p>"
+        },
+        "missedCount": {
+          "shape": "MissedCount",
+          "documentation": "<p>The number of times that the utterance was missed by Amazon Lex An utterance is missed when it doesn't activate an intent or slot.</p>"
+        },
+        "utteranceFirstRecordedInAggregationDuration": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the utterance was first recorded in the time window for aggregation. An utterance may have been sent to Amazon Lex before that time, but only utterances within the time window are counted.</p>"
+        },
+        "utteranceLastRecordedInAggregationDuration": {
+          "shape": "Timestamp",
+          "documentation": "<p>The last date and time that an utterance was recorded in the time window for aggregation. An utterance may be sent to Amazon Lex after that time, but only utterances within the time window are counted.</p>"
+        },
+        "containsDataFromDeletedResources": {
+          "shape": "BoxedBoolean",
+          "documentation": "<p>Aggregated utterance data may contain utterances from versions of your bot that have since been deleted. When the aggregated contains this kind of data, this field is set to true.</p>"
+        }
+      },
+      "documentation": "<p>Provides summary information for aggregated utterances. The <code>ListAggregatedUtterances</code> operations combines all instances of the same utterance into a single aggregated summary.</p>"
+    },
+    "AggregatedUtterancesSummaryList": {
+      "type": "list",
+      "member": {
+        "shape": "AggregatedUtterancesSummary"
+      }
+    },
     "AmazonResourceName": {
       "type": "string",
       "max": 1011,
@@ -3986,6 +4146,36 @@
         }
       }
     },
+    "DeleteUtterancesRequest": {
+      "type": "structure",
+      "required": [
+        "botId"
+      ],
+      "members": {
+        "botId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier of the bot that contains the utterances.</p>",
+          "location": "uri",
+          "locationName": "botId"
+        },
+        "localeId": {
+          "shape": "LocaleId",
+          "documentation": "<p>The identifier of the language and locale where the utterances were collected. The string must match one of the supported locales. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>",
+          "location": "querystring",
+          "locationName": "localeId"
+        },
+        "sessionId": {
+          "shape": "SessionId",
+          "documentation": "<p>The unique identifier of the session with the user. The ID is returned in the response from the and operations.</p>",
+          "location": "querystring",
+          "locationName": "sessionId"
+        }
+      }
+    },
+    "DeleteUtterancesResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DescribeBotAliasRequest": {
       "type": "structure",
       "required": [
@@ -4899,6 +5089,9 @@
       },
       "documentation": "<p>Determines if a Lambda function should be invoked for a specific intent.</p>"
     },
+    "HitCount": {
+      "type": "integer"
+    },
     "Id": {
       "type": "string",
       "max": 10,
@@ -5307,6 +5500,99 @@
         }
       },
       "documentation": "<p>Specifies a Lambda function that verifies requests to a bot or fulfilles the user's request to a bot.</p>"
+    },
+    "ListAggregatedUtterancesRequest": {
+      "type": "structure",
+      "required": [
+        "botId",
+        "localeId",
+        "aggregationDuration"
+      ],
+      "members": {
+        "botId": {
+          "shape": "Id",
+          "documentation": "<p>The unique identifier of the bot associated with this request.</p>",
+          "location": "uri",
+          "locationName": "botId"
+        },
+        "botAliasId": {
+          "shape": "BotAliasId",
+          "documentation": "<p>The identifier of the bot alias associated with this request. If you specify the bot alias, you can't specify the bot version.</p>"
+        },
+        "botVersion": {
+          "shape": "BotVersion",
+          "documentation": "<p>The identifier of the bot version associated with this request. If you specify the bot version, you can't specify the bot alias.</p>"
+        },
+        "localeId": {
+          "shape": "LocaleId",
+          "documentation": "<p>The identifier of the language and locale where the utterances were collected. For more information, see <a href=\"https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html\">Supported languages</a>.</p>"
+        },
+        "aggregationDuration": {
+          "shape": "UtteranceAggregationDuration",
+          "documentation": "<p>The time window for aggregating the utterance information. You can specify a time between one hour and two weeks.</p>"
+        },
+        "sortBy": {
+          "shape": "AggregatedUtterancesSortBy",
+          "documentation": "<p>Specifies sorting parameters for the list of utterances. You can sort by the hit count, the missed count, or the number of distinct sessions the utterance appeared in.</p>"
+        },
+        "filters": {
+          "shape": "AggregatedUtterancesFilters",
+          "documentation": "<p>Provides the specification of a filter used to limit the utterances in the response to only those that match the filter specification. You can only specify one filter and one string to filter on.</p>"
+        },
+        "maxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of utterances to return in each page of results. If there are fewer results than the maximum page size, only the actual number of results are returned. If you don't specify the <code>maxResults</code> parameter, 1,000 results are returned.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>If the response from the <code>ListAggregatedUtterances</code> operation contains more results that specified in the <code>maxResults</code> parameter, a token is returned in the response. Use that token in the <code>nextToken</code> parameter to return the next page of results.</p>"
+        }
+      }
+    },
+    "ListAggregatedUtterancesResponse": {
+      "type": "structure",
+      "members": {
+        "botId": {
+          "shape": "Id",
+          "documentation": "<p>The identifier of the bot that contains the utterances.</p>"
+        },
+        "botAliasId": {
+          "shape": "BotAliasId",
+          "documentation": "<p>The identifier of the bot alias that contains the utterances. If you specified the bot version, the bot alias ID isn't returned.</p>"
+        },
+        "botVersion": {
+          "shape": "BotVersion",
+          "documentation": "<p>The identifier of the bot version that contains the utterances. If you specified the bot alias, the bot version isn't returned.</p>"
+        },
+        "localeId": {
+          "shape": "LocaleId",
+          "documentation": "<p>The identifier of the language and locale that the utterances are in.</p>"
+        },
+        "aggregationDuration": {
+          "shape": "UtteranceAggregationDuration",
+          "documentation": "<p>The time period used to aggregate the utterance data.</p>"
+        },
+        "aggregationWindowStartTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the aggregation window begins. Only data collected after this time is returned in the results.</p>"
+        },
+        "aggregationWindowEndTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date and time that the aggregation window ends. Only data collected between the start time and the end time are returned in the results. </p>"
+        },
+        "aggregationLastRefreshedDateTime": {
+          "shape": "Timestamp",
+          "documentation": "<p>The last date and time that the aggregated data was collected. The time period depends on the length of the aggregation window.</p> <ul> <li> <p> <b>Hours</b> - for 1 hour time window, every half hour; otherwise every hour.</p> </li> <li> <p> <b>Days</b> - every 6 hours</p> </li> <li> <p> <b>Weeks</b> - for a one week time window, every 12 hours; otherwise, every day</p> </li> </ul>"
+        },
+        "aggregatedUtterancesSummaries": {
+          "shape": "AggregatedUtterancesSummaryList",
+          "documentation": "<p>Summaries of the aggregated utterance data. Each response contains information about the number of times that the utterance was seen during the time period, whether it was detected or missed, and when it was seen during the time period.</p>"
+        },
+        "nextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>A token that indicates whether there are more results to return in a response to the <code>ListAggregatedUtterances</code> operation. If the <code>nextToken</code> field is present, you send the contents as the <code>nextToken</code> parameter of a <code>ListAggregatedUtterances</code> operation request to get the next page of results.</p>"
+        }
+      }
     },
     "ListBotAliasesRequest": {
       "type": "structure",
@@ -5987,6 +6273,9 @@
       "max": 2,
       "min": 0
     },
+    "MissedCount": {
+      "type": "integer"
+    },
     "MultipleValuesSetting": {
       "type": "structure",
       "members": {
@@ -6167,8 +6456,26 @@
     },
     "RegexPattern": {
       "type": "string",
-      "max": 100,
+      "max": 300,
       "min": 1
+    },
+    "RelativeAggregationDuration": {
+      "type": "structure",
+      "required": [
+        "timeDimension",
+        "timeValue"
+      ],
+      "members": {
+        "timeDimension": {
+          "shape": "TimeDimension",
+          "documentation": "<p>The type of time period that the <code>timeValue</code> field represents. </p>"
+        },
+        "timeValue": {
+          "shape": "TimeValue",
+          "documentation": "<p>The period of the time window to gather statistics for. The valid value depends on the setting of the <code>timeDimension</code> field.</p> <ul> <li> <p> <code>Hours</code> - 1/3/6/12/24</p> </li> <li> <p> <code>Days</code> - 3</p> </li> <li> <p> <code>Weeks</code> - 1/2</p> </li> </ul>"
+        }
+      },
+      "documentation": "<p>Specifies the time window that utterance statistics are returned for. The time window is always relative to the last time that the that utterances were aggregated. For example, if the <code>ListAggregatedUtterances</code> operation is called at 1600, the time window is set to 1 hour, and the last refresh time was 1530, only utterances made between 1430 and 1530 are returned.</p> <p>You can choose the time window that statistics should be returned for.</p> <ul> <li> <p> <b>Hours</b> - You can request utterance statistics for 1, 3, 6, 12, or 24 hour time windows. Statistics are refreshed every half hour for 1 hour time windows, and hourly for the other time windows.</p> </li> <li> <p> <b>Days</b> - You can request utterance statistics for 3 days. Statistics are refreshed every 6 hours.</p> </li> <li> <p> <b>Weeks</b> - You can see statistics for one or two weeks. Statistics are refreshed every 12 hours for one week time windows, and once per day for two week time windows.</p> </li> </ul>"
     },
     "ResourceCount": {
       "type": "integer"
@@ -6298,6 +6605,12 @@
       "max": 1024,
       "min": 15,
       "pattern": "^[0-9a-zA-Z_.]+$"
+    },
+    "SessionId": {
+      "type": "string",
+      "max": 100,
+      "min": 2,
+      "pattern": "[0-9a-zA-Z._:-]+"
     },
     "SessionTTL": {
       "type": "integer",
@@ -6868,6 +7181,19 @@
         "shape": "TextLogSetting"
       },
       "max": 1,
+      "min": 1
+    },
+    "TimeDimension": {
+      "type": "string",
+      "enum": [
+        "Hours",
+        "Days",
+        "Weeks"
+      ]
+    },
+    "TimeValue": {
+      "type": "integer",
+      "max": 24,
       "min": 1
     },
     "Timestamp": {
@@ -7640,6 +7966,19 @@
     },
     "Utterance": {
       "type": "string"
+    },
+    "UtteranceAggregationDuration": {
+      "type": "structure",
+      "required": [
+        "relativeAggregationDuration"
+      ],
+      "members": {
+        "relativeAggregationDuration": {
+          "shape": "RelativeAggregationDuration",
+          "documentation": "<p>The desired time window for aggregating utterances. </p>"
+        }
+      },
+      "documentation": "<p>Provides parameters for setting the time window and duration for aggregating utterance data.</p>"
     },
     "Value": {
       "type": "string",
