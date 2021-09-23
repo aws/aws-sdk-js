@@ -343,7 +343,7 @@ declare class AppSync extends Service {
 declare namespace AppSync {
   export interface AdditionalAuthenticationProvider {
     /**
-     * The authentication type: API key, Identity and Access Management, OIDC, or Amazon Cognito user pools.
+     * The authentication type: API key, Identity and Access Management, OIDC, Amazon Cognito user pools, or Amazon Web Services Lambda.
      */
     authenticationType?: AuthenticationType;
     /**
@@ -355,7 +355,7 @@ declare namespace AppSync {
      */
     userPoolConfig?: CognitoUserPoolConfig;
     /**
-     * Configuration for AWS Lambda function authorization.
+     * Configuration for Amazon Web Services Lambda function authorization.
      */
     lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
   }
@@ -542,9 +542,13 @@ declare namespace AppSync {
      */
     lambdaConfig?: LambdaDataSourceConfig;
     /**
-     * Amazon Elasticsearch Service settings.
+     * Amazon OpenSearch Service settings. As of September 2021, Amazon Elasticsearch service is Amazon OpenSearch Service. This configuration is deprecated. For new data sources, use CreateDataSourceRequest$openSearchServiceConfig to create an OpenSearch data source.
      */
     elasticsearchConfig?: ElasticsearchDataSourceConfig;
+    /**
+     * Amazon OpenSearch Service settings.
+     */
+    openSearchServiceConfig?: OpenSearchServiceDataSourceConfig;
     /**
      * HTTP endpoint settings.
      */
@@ -607,7 +611,7 @@ declare namespace AppSync {
      */
     logConfig?: LogConfig;
     /**
-     * The authentication type: API key, Identity and Access Management, OIDC, or Amazon Cognito user pools.
+     * The authentication type: API key, Identity and Access Management, OIDC, Amazon Cognito user pools, or Amazon Web Services Lambda.
      */
     authenticationType: AuthenticationType;
     /**
@@ -631,7 +635,7 @@ declare namespace AppSync {
      */
     xrayEnabled?: Boolean;
     /**
-     * Configuration for AWS Lambda function authorization.
+     * Configuration for Amazon Web Services Lambda function authorization.
      */
     lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
   }
@@ -723,7 +727,7 @@ declare namespace AppSync {
      */
     description?: String;
     /**
-     * The type of the data source.    AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.    AMAZON_ELASTICSEARCH: The data source is an Amazon Elasticsearch Service domain.    AWS_LAMBDA: The data source is an Amazon Web Services Lambda function.    NONE: There is no data source. This type is used when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.    HTTP: The data source is an HTTP endpoint.    RELATIONAL_DATABASE: The data source is a relational database.  
+     * The type of the data source.    AWS_LAMBDA: The data source is an Amazon Web Services Lambda function.    AMAZON_DYNAMODB: The data source is an Amazon DynamoDB table.    AMAZON_ELASTICSEARCH: The data source is an Amazon OpenSearch Service domain.    AMAZON_OPENSEARCH_SERVICE: The data source is an Amazon OpenSearch Service domain.    NONE: There is no data source. This type is used when you wish to invoke a GraphQL operation without connecting to a data source, such as performing data transformation with resolvers or triggering a subscription to be invoked from a mutation.    HTTP: The data source is an HTTP endpoint.    RELATIONAL_DATABASE: The data source is a relational database.  
      */
     type?: DataSourceType;
     /**
@@ -739,9 +743,13 @@ declare namespace AppSync {
      */
     lambdaConfig?: LambdaDataSourceConfig;
     /**
-     * Amazon Elasticsearch Service settings.
+     * Amazon OpenSearch Service settings.
      */
     elasticsearchConfig?: ElasticsearchDataSourceConfig;
+    /**
+     * Amazon OpenSearch Service settings.
+     */
+    openSearchServiceConfig?: OpenSearchServiceDataSourceConfig;
     /**
      * HTTP endpoint settings.
      */
@@ -751,7 +759,7 @@ declare namespace AppSync {
      */
     relationalDatabaseConfig?: RelationalDatabaseDataSourceConfig;
   }
-  export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|"HTTP"|"RELATIONAL_DATABASE"|string;
+  export type DataSourceType = "AWS_LAMBDA"|"AMAZON_DYNAMODB"|"AMAZON_ELASTICSEARCH"|"NONE"|"HTTP"|"RELATIONAL_DATABASE"|"AMAZON_OPENSEARCH_SERVICE"|string;
   export type DataSources = DataSource[];
   export type DefaultAction = "ALLOW"|"DENY"|string;
   export interface DeleteApiCacheRequest {
@@ -1108,7 +1116,7 @@ declare namespace AppSync {
      */
     wafWebAclArn?: String;
     /**
-     *  Configuration for AWS Lambda function authorization.
+     * Configuration for Amazon Web Services Lambda function authorization.
      */
     lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
   }
@@ -1129,11 +1137,11 @@ declare namespace AppSync {
      */
     authorizerResultTtlInSeconds?: TTL;
     /**
-     * The ARN of the lambda function to be called for authorization. This may be a standard Lambda ARN, a version ARN (.../v3) or alias ARN.   Note: This Lambda function must have the following resource-based policy assigned to it. When configuring Lambda authorizers in the Console, this is done for you. To do so with the AWS CLI, run the following:  aws lambda add-permission --function-name "arn:aws:lambda:us-east-2:111122223333:function:my-function" --statement-id "appsync" --principal appsync.amazonaws.com --action lambda:InvokeFunction 
+     * The ARN of the Lambda function to be called for authorization. This may be a standard Lambda ARN, a version ARN (.../v3) or alias ARN.   Note: This Lambda function must have the following resource-based policy assigned to it. When configuring Lambda authorizers in the Console, this is done for you. To do so with the Amazon Web Services CLI, run the following:  aws lambda add-permission --function-name "arn:aws:lambda:us-east-2:111122223333:function:my-function" --statement-id "appsync" --principal appsync.amazonaws.com --action lambda:InvokeFunction 
      */
     authorizerUri: String;
     /**
-     * A regular expression for validation of tokens before the Lambda Function is called.
+     * A regular expression for validation of tokens before the Lambda function is called.
      */
     identityValidationExpression?: String;
   }
@@ -1372,6 +1380,16 @@ declare namespace AppSync {
      * The number of milliseconds a token is valid after being authenticated.
      */
     authTTL?: Long;
+  }
+  export interface OpenSearchServiceDataSourceConfig {
+    /**
+     * The endpoint.
+     */
+    endpoint: String;
+    /**
+     * The Amazon Web Services Region.
+     */
+    awsRegion: String;
   }
   export type OutputType = "SDL"|"JSON"|string;
   export type PaginationToken = string;
@@ -1623,9 +1641,13 @@ declare namespace AppSync {
      */
     lambdaConfig?: LambdaDataSourceConfig;
     /**
-     * The new Elasticsearch Service configuration.
+     * The new OpenSearch configuration. As of September 2021, Amazon Elasticsearch service is Amazon OpenSearch Service. This configuration is deprecated. Instead, use UpdateDataSourceRequest$openSearchServiceConfig to update an OpenSearch data source.
      */
     elasticsearchConfig?: ElasticsearchDataSourceConfig;
+    /**
+     * The new OpenSearch configuration.
+     */
+    openSearchServiceConfig?: OpenSearchServiceDataSourceConfig;
     /**
      * The new HTTP endpoint configuration.
      */
@@ -1716,7 +1738,7 @@ declare namespace AppSync {
      */
     xrayEnabled?: Boolean;
     /**
-     * Configuration for AWS Lambda function authorization.
+     * Configuration for Amazon Web Services Lambda function authorization.
      */
     lambdaAuthorizerConfig?: LambdaAuthorizerConfig;
   }

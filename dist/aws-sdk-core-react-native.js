@@ -83,7 +83,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  /**
 	   * @constant
 	   */
-	  VERSION: '2.993.0',
+	  VERSION: '2.994.0',
 
 	  /**
 	   * @api private
@@ -5246,7 +5246,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 *
 	 * @!attribute computeChecksums
 	 *   @return [Boolean] whether to compute checksums for payload bodies when
-	 *     the service accepts it (currently supported in S3 only).
+	 *     the service accepts it (currently supported in S3 and SQS only).
 	 *
 	 * @!attribute convertResponseTypes
 	 *   @return [Boolean] whether types are converted when parsing response data.
@@ -7021,7 +7021,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	          ['EAI_NONAME', 'EAI_NODATA'].indexOf(AWS.util.getSystemErrorName(err.errno) >= 0);
 	      }
 	      if (err.code === 'NetworkingError' && isDNSError(err)) {
-	        var message = 'Inaccessible host: `' + err.hostname +
+	        var message = 'Inaccessible host: `' + err.hostname + '\' at port `' + err.port +
 	          '\'. This service may not be available in the `' + err.region +
 	          '\' region.';
 	        this.response.error = AWS.util.error(new Error(message), {
@@ -11521,7 +11521,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	  hexEncodedBodyHash: function hexEncodedBodyHash() {
 	    var request = this.request;
-	    if (this.isPresigned() && this.serviceName === 's3' && !request.body) {
+	    if (this.isPresigned() && (['s3', 's3-object-lambda'].indexOf(this.serviceName) > -1) && !request.body) {
 	      return 'UNSIGNED-PAYLOAD';
 	    } else if (request.headers['X-Amz-Content-Sha256']) {
 	      return request.headers['X-Amz-Content-Sha256'];

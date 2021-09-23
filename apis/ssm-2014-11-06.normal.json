@@ -73,7 +73,7 @@
           "shape": "OpsItemRelatedItemAlreadyExistsException"
         }
       ],
-      "documentation": "<p>Associates a related resource to a Systems Manager OpsCenter OpsItem. For example, you can associate an Incident Manager incident or analysis with an OpsItem. Incident Manager is a capability of Amazon Web Services Systems Manager.</p>"
+      "documentation": "<p>Associates a related item to a Systems Manager OpsCenter OpsItem. For example, you can associate an Incident Manager incident or analysis with an OpsItem. Incident Manager and OpsCenter are capabilities of Amazon Web Services Systems Manager.</p>"
     },
     "CancelCommand": {
       "name": "CancelCommand",
@@ -1421,7 +1421,7 @@
           "shape": "InvalidNextToken"
         }
       ],
-      "documentation": "<p>Get information about a parameter.</p> <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of <code>MaxResults</code>. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a <code>NextToken</code>. You can specify the <code>NextToken</code> in a subsequent call to get the next set of results.</p>"
+      "documentation": "<p>Get information about a parameter.</p> <p>Request results are returned on a best-effort basis. If you specify <code>MaxResults</code> in the request, the response includes information up to the limit specified. The number of items returned, however, can be between zero and the value of <code>MaxResults</code>. If the service reaches an internal limit while processing the results, it stops the operation and returns the matching values up to that point and a <code>NextToken</code>. You can specify the <code>NextToken</code> in a subsequent call to get the next set of results.</p> <important> <p>If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must also update the key alias the parameter uses to reference KMS. Otherwise, <code>DescribeParameters</code> retrieves whatever the original key alias was referencing.</p> </important>"
     },
     "DescribePatchBaselines": {
       "name": "DescribePatchBaselines",
@@ -1553,7 +1553,7 @@
           "shape": "OpsItemInvalidParameterException"
         }
       ],
-      "documentation": "<p>Deletes the association between an OpsItem and a related resource. For example, this API operation can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability of Amazon Web Services Systems Manager.</p>"
+      "documentation": "<p>Deletes the association between an OpsItem and a related item. For example, this API operation can delete an Incident Manager incident from an OpsItem. Incident Manager is a capability of Amazon Web Services Systems Manager.</p>"
     },
     "GetAutomationExecution": {
       "name": "GetAutomationExecution",
@@ -2031,7 +2031,7 @@
           "shape": "InvalidKeyId"
         }
       ],
-      "documentation": "<p>Retrieves the history of all changes to a parameter.</p>"
+      "documentation": "<p>Retrieves the history of all changes to a parameter.</p> <important> <p>If you change the KMS key alias for the KMS key used to encrypt a parameter, then you must also update the key alias the parameter uses to reference KMS. Otherwise, <code>GetParameterHistory</code> retrieves whatever the original key alias was referencing.</p> </important>"
     },
     "GetParameters": {
       "name": "GetParameters",
@@ -2508,7 +2508,7 @@
           "shape": "OpsItemInvalidParameterException"
         }
       ],
-      "documentation": "<p>Lists all related-item resources associated with an OpsItem.</p>"
+      "documentation": "<p>Lists all related-item resources associated with a Systems Manager OpsCenter OpsItem. OpsCenter is a capability of Amazon Web Services Systems Manager.</p>"
     },
     "ListOpsMetadata": {
       "name": "ListOpsMetadata",
@@ -3840,7 +3840,7 @@
         },
         "ResourceType": {
           "shape": "OpsItemRelatedItemAssociationResourceType",
-          "documentation": "<p>The type of resource that you want to associate with an OpsItem. OpsCenter supports the following types:</p> <p> <code>AWS::SSMIncidents::IncidentRecord</code>: an Incident Manager incident. Incident Manager is a capability of Amazon Web Services Systems Manager.</p> <p> <code>AWS::SSM::Document</code>: a Systems Manager (SSM) document.</p>"
+          "documentation": "<p>The type of resource that you want to associate with an OpsItem. OpsCenter supports the following types:</p> <p> <code>AWS::SSMIncidents::IncidentRecord</code>: an Incident Manager incident. </p> <p> <code>AWS::SSM::Document</code>: a Systems Manager (SSM) document.</p>"
         },
         "ResourceUri": {
           "shape": "OpsItemRelatedItemAssociationResourceUri",
@@ -5222,7 +5222,7 @@
         },
         "value": {
           "shape": "CommandFilterValue",
-          "documentation": "<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p> <b>InvokedAfter</b>: Specify a timestamp to limit your results. For example, specify <code>2021-07-07T00:00:00Z</code> to see a list of command executions occurring July 7, 2021, and later.</p> </li> <li> <p> <b>InvokedBefore</b>: Specify a timestamp to limit your results. For example, specify <code>2021-07-07T00:00:00Z</code> to see a list of command executions from before July 7, 2021.</p> </li> <li> <p> <b>Status</b>: Specify a valid command status to see a list of all command executions with that status. Status values you can specify include:</p> <ul> <li> <p> <code>Pending</code> </p> </li> <li> <p> <code>InProgress</code> </p> </li> <li> <p> <code>Success</code> </p> </li> <li> <p> <code>Cancelled</code> </p> </li> <li> <p> <code>Failed</code> </p> </li> <li> <p> <code>TimedOut</code> </p> </li> <li> <p> <code>Cancelling</code> </p> </li> </ul> </li> <li> <p> <b>DocumentName</b>: Specify name of the Amazon Web Services Systems Manager document (SSM document) for which you want to see command execution results. For example, specify <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to perform security patching operations on instances. </p> </li> <li> <p> <b>ExecutionStage</b>: Specify one of the following values:</p> <ul> <li> <p> <code>Executing</code>: Returns a list of command executions that are currently still running.</p> </li> <li> <p> <code>Complete</code>: Returns a list of command executions that have already completed. </p> </li> </ul> </li> </ul>"
+          "documentation": "<p>The filter value. Valid values for each filter key are as follows:</p> <ul> <li> <p> <b>InvokedAfter</b>: Specify a timestamp to limit your results. For example, specify <code>2021-07-07T00:00:00Z</code> to see a list of command executions occurring July 7, 2021, and later.</p> </li> <li> <p> <b>InvokedBefore</b>: Specify a timestamp to limit your results. For example, specify <code>2021-07-07T00:00:00Z</code> to see a list of command executions from before July 7, 2021.</p> </li> <li> <p> <b>Status</b>: Specify a valid command status to see a list of all command executions with that status. The status choices depend on the API you call.</p> <p>The status values you can specify for <code>ListCommands</code> are:</p> <ul> <li> <p> <code>Pending</code> </p> </li> <li> <p> <code>InProgress</code> </p> </li> <li> <p> <code>Success</code> </p> </li> <li> <p> <code>Cancelled</code> </p> </li> <li> <p> <code>Failed</code> </p> </li> <li> <p> <code>TimedOut</code> (this includes both Delivery and Execution time outs) </p> </li> <li> <p> <code>AccessDenied</code> </p> </li> <li> <p> <code>DeliveryTimedOut</code> </p> </li> <li> <p> <code>ExecutionTimedOut</code> </p> </li> <li> <p> <code>Incomplete</code> </p> </li> <li> <p> <code>NoInstancesInTag</code> </p> </li> <li> <p> <code>LimitExceeded</code> </p> </li> </ul> <p>The status values you can specify for <code>ListCommandInvocations</code> are:</p> <ul> <li> <p> <code>Pending</code> </p> </li> <li> <p> <code>InProgress</code> </p> </li> <li> <p> <code>Delayed</code> </p> </li> <li> <p> <code>Success</code> </p> </li> <li> <p> <code>Cancelled</code> </p> </li> <li> <p> <code>Failed</code> </p> </li> <li> <p> <code>TimedOut</code> (this includes both Delivery and Execution time outs) </p> </li> <li> <p> <code>AccessDenied</code> </p> </li> <li> <p> <code>DeliveryTimedOut</code> </p> </li> <li> <p> <code>ExecutionTimedOut</code> </p> </li> <li> <p> <code>Undeliverable</code> </p> </li> <li> <p> <code>InvalidPlatform</code> </p> </li> <li> <p> <code>Terminated</code> </p> </li> </ul> </li> <li> <p> <b>DocumentName</b>: Specify name of the Amazon Web Services Systems Manager document (SSM document) for which you want to see command execution results. For example, specify <code>AWS-RunPatchBaseline</code> to see command executions that used this SSM document to perform security patching operations on instances. </p> </li> <li> <p> <b>ExecutionStage</b>: Specify one of the following values:</p> <ul> <li> <p> <code>Executing</code>: Returns a list of command executions that are currently still running.</p> </li> <li> <p> <code>Complete</code>: Returns a list of command executions that have already completed. </p> </li> </ul> </li> </ul>"
         }
       },
       "documentation": "<p>Describes a command filter.</p> <note> <p>An instance ID can't be specified when a command status is <code>Pending</code> because the command hasn't run on the instance yet.</p> </note>"
@@ -5268,7 +5268,7 @@
         },
         "InstanceName": {
           "shape": "InstanceTagName",
-          "documentation": "<p>The name of the invocation target. For EC2 instances this is the value for the <code>aws:Name</code> tag. For on-premises instances, this is the name of the instance.</p>"
+          "documentation": "<p>The fully qualified host name of the managed instance.</p>"
         },
         "Comment": {
           "shape": "Comment",
@@ -7896,11 +7896,11 @@
       "members": {
         "OpsItemId": {
           "shape": "OpsItemId",
-          "documentation": "<p>The ID of the OpsItem for which you want to delete an association between the OpsItem and a related resource.</p>"
+          "documentation": "<p>The ID of the OpsItem for which you want to delete an association between the OpsItem and a related item.</p>"
         },
         "AssociationId": {
           "shape": "OpsItemRelatedItemAssociationId",
-          "documentation": "<p>The ID of the association for which you want to delete an association between the OpsItem and a related resource.</p>"
+          "documentation": "<p>The ID of the association for which you want to delete an association between the OpsItem and a related item.</p>"
         }
       }
     },
@@ -9366,6 +9366,11 @@
         "Description": {
           "shape": "MaintenanceWindowDescription",
           "documentation": "<p>The retrieved task description.</p>"
+        },
+        "CutoffBehavior": {
+          "shape": "MaintenanceWindowTaskCutoffBehavior",
+          "documentation": "<p>The action to take on tasks when the maintenance window cutoff time is reached. <code>CONTINUE_TASK</code> means that tasks continue to run. For Automation, Lambda, Step Functions tasks, <code>CANCEL_TASK</code> means that currently running task invocations continue, but no new task invocations are started. For Run Command tasks, <code>CANCEL_TASK</code> means the system attempts to stop the task by sending a <code>CancelCommand</code> operation.</p>",
+          "box": true
         }
       }
     },
@@ -9563,7 +9568,7 @@
         },
         "ParameterFilters": {
           "shape": "ParameterStringFilterList",
-          "documentation": "<p>Filters to limit the request results.</p> <note> <p>For <code>GetParametersByPath</code>, the following filter <code>Key</code> names are supported: <code>Type</code>, <code>KeyId</code>, <code>Label</code>, and <code>DataType</code>.</p> <p>The following <code>Key</code> values are not supported for <code>GetParametersByPath</code>: <code>tag</code>, <code>Name</code>, <code>Path</code>, and <code>Tier</code>.</p> </note>"
+          "documentation": "<p>Filters to limit the request results.</p> <note> <p>The following <code>Key</code> values are supported for <code>GetParametersByPath</code>: <code>Type</code>, <code>KeyId</code>, and <code>Label</code>.</p> <p>The following <code>Key</code> values aren't supported for <code>GetParametersByPath</code>: <code>tag</code>, <code>DataType</code>, <code>Name</code>, <code>Path</code>, and <code>Tier</code>.</p> </note>"
         },
         "WithDecryption": {
           "shape": "Boolean",
@@ -12012,6 +12017,11 @@
         "Description": {
           "shape": "MaintenanceWindowDescription",
           "documentation": "<p>A description of the task.</p>"
+        },
+        "CutoffBehavior": {
+          "shape": "MaintenanceWindowTaskCutoffBehavior",
+          "documentation": "<p>The specification for whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached. </p>",
+          "box": true
         }
       },
       "documentation": "<p>Information about a task defined for a maintenance window.</p>"
@@ -12020,6 +12030,13 @@
       "type": "string",
       "max": 1600,
       "min": 1
+    },
+    "MaintenanceWindowTaskCutoffBehavior": {
+      "type": "string",
+      "enum": [
+        "CONTINUE_TASK",
+        "CANCEL_TASK"
+      ]
     },
     "MaintenanceWindowTaskId": {
       "type": "string",
@@ -13525,7 +13542,7 @@
       "members": {
         "Key": {
           "shape": "ParameterStringFilterKey",
-          "documentation": "<p>The name of the filter.</p> <p>The <code>ParameterStringFilter</code> object is used by the <a>DescribeParameters</a> and <a>GetParametersByPath</a> API operations. However, not all of the pattern values listed for <code>Key</code> can be used with both operations.</p> <p>For <code>DescribeActions</code>, all of the listed patterns are valid, with the exception of <code>Label</code>.</p> <p>For <code>GetParametersByPath</code>, the following patterns listed for <code>Key</code> aren't valid: <code>tag</code>, <code>Name</code>, <code>Path</code>, and <code>Tier</code>.</p> <p>For examples of Amazon Web Services CLI commands demonstrating valid parameter filter constructions, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html\">Searching for Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>The name of the filter.</p> <p>The <code>ParameterStringFilter</code> object is used by the <a>DescribeParameters</a> and <a>GetParametersByPath</a> API operations. However, not all of the pattern values listed for <code>Key</code> can be used with both operations.</p> <p>For <code>DescribeActions</code>, all of the listed patterns are valid except <code>Label</code>.</p> <p>For <code>GetParametersByPath</code>, the following patterns listed for <code>Key</code> aren't valid: <code>tag</code>, <code>DataType</code>, <code>Name</code>, <code>Path</code>, and <code>Tier</code>.</p> <p>For examples of Amazon Web Services CLI commands demonstrating valid parameter filter constructions, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-search.html\">Searching for Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
         },
         "Option": {
           "shape": "ParameterStringQueryOption",
@@ -14702,6 +14719,11 @@
           "shape": "ClientToken",
           "documentation": "<p>User-provided idempotency token.</p>",
           "idempotencyToken": true
+        },
+        "CutoffBehavior": {
+          "shape": "MaintenanceWindowTaskCutoffBehavior",
+          "documentation": "<p>Indicates whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached. </p> <ul> <li> <p> <code>CONTINUE_TASK</code>: When the cutoff time is reached, any tasks that are running continue. The default value.</p> </li> <li> <p> <code>CANCEL_TASK</code>:</p> <ul> <li> <p>For Automation, Lambda, Step Functions tasks: When the cutoff time is reached, any task invocations that are already running continue, but no new task invocations are started.</p> </li> <li> <p>For Run Command tasks: When the cutoff time is reached, the system sends a <a>CancelCommand</a> operation that attempts to cancel the command associated with the task. However, there is no guarantee that the command will be terminated and the underlying process stopped.</p> </li> </ul> <p>The status for tasks that are not completed is <code>TIMED_OUT</code>.</p> </li> </ul>",
+          "box": true
         }
       }
     },
@@ -15415,7 +15437,7 @@
         },
         "DocumentName": {
           "shape": "DocumentARN",
-          "documentation": "<p>The name of the Amazon Web Services Systems Manager document (SSM document) to run. This can be a public document or a custom document. To run a shared document belonging to another account, specify the document ARN. For more information about how to use shared documents, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html\">Using shared SSM documents</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+          "documentation": "<p>The name of the Amazon Web Services Systems Manager document (SSM document) to run. This can be a public document or a custom document. To run a shared document belonging to another account, specify the document Amazon Resource Name (ARN). For more information about how to use shared documents, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ssm-using-shared.html\">Using shared SSM documents</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p> <note> <p>If you specify a document name or ARN that hasn't been shared with your account, you receive an <code>InvalidDocument</code> error. </p> </note>"
         },
         "DocumentVersion": {
           "shape": "DocumentVersion",
@@ -16875,6 +16897,11 @@
           "shape": "Boolean",
           "documentation": "<p>If True, then all fields that are required by the <a>RegisterTaskWithMaintenanceWindow</a> operation are also required for this API request. Optional fields that aren't specified are set to null.</p>",
           "box": true
+        },
+        "CutoffBehavior": {
+          "shape": "MaintenanceWindowTaskCutoffBehavior",
+          "documentation": "<p>Indicates whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached. </p> <ul> <li> <p> <code>CONTINUE_TASK</code>: When the cutoff time is reached, any tasks that are running continue. The default value.</p> </li> <li> <p> <code>CANCEL_TASK</code>:</p> <ul> <li> <p>For Automation, Lambda, Step Functions tasks: When the cutoff time is reached, any task invocations that are already running continue, but no new task invocations are started.</p> </li> <li> <p>For Run Command tasks: When the cutoff time is reached, the system sends a <a>CancelCommand</a> operation that attempts to cancel the command associated with the task. However, there is no guarantee that the command will be terminated and the underlying process stopped.</p> </li> </ul> <p>The status for tasks that are not completed is <code>TIMED_OUT</code>.</p> </li> </ul>",
+          "box": true
         }
       }
     },
@@ -16932,6 +16959,11 @@
         "Description": {
           "shape": "MaintenanceWindowDescription",
           "documentation": "<p>The updated task description.</p>"
+        },
+        "CutoffBehavior": {
+          "shape": "MaintenanceWindowTaskCutoffBehavior",
+          "documentation": "<p>The specification for whether tasks should continue to run after the cutoff time specified in the maintenance windows is reached. </p>",
+          "box": true
         }
       }
     },
@@ -17216,7 +17248,7 @@
         },
         "SettingValue": {
           "shape": "ServiceSettingValue",
-          "documentation": "<p>The new value to specify for the service setting. For the <code>/ssm/parameter-store/default-parameter-tier</code> setting ID, the setting value can be one of the following.</p> <ul> <li> <p>Standard</p> </li> <li> <p>Advanced</p> </li> <li> <p>Intelligent-Tiering</p> </li> </ul> <p>For the <code>/ssm/parameter-store/high-throughput-enabled</code>, and <code>/ssm/managed-instance/activation-tier</code> setting IDs, the setting value can be true or false.</p> <p>For the <code>/ssm/automation/customer-script-log-destination</code> setting ID, the setting value can be <code>CloudWatch</code>.</p> <p>For the <code>/ssm/automation/customer-script-log-group-name</code> setting ID, the setting value can be the name of an Amazon CloudWatch Logs log group.</p> <p>For the <code>/ssm/documents/console/public-sharing-permission</code> setting ID, the setting value can be <code>Enable</code> or <code>Disable</code>.</p>"
+          "documentation": "<p>The new value to specify for the service setting. The following list specifies the available values for each setting.</p> <ul> <li> <p> <code>/ssm/parameter-store/default-parameter-tier</code>: <code>Standard</code>, <code>Advanced</code>, <code>Intelligent-Tiering</code> </p> </li> <li> <p> <code>/ssm/parameter-store/high-throughput-enabled</code>: <code>true</code> or <code>false</code> </p> </li> <li> <p> <code>/ssm/managed-instance/activation-tier</code>: <code>true</code> or <code>false</code> </p> </li> <li> <p> <code>/ssm/automation/customer-script-log-destination</code>: <code>CloudWatch</code> </p> </li> <li> <p> <code>/ssm/automation/customer-script-log-group-name</code>: the name of an Amazon CloudWatch Logs log group</p> </li> <li> <p> <code>/ssm/documents/console/public-sharing-permission</code>: <code>Enable</code> or <code>Disable</code> </p> </li> <li> <p> <code>/ssm/managed-instance/activation-tier</code>: <code>standard</code> or <code>advanced</code> </p> </li> </ul>"
         }
       },
       "documentation": "<p>The request body of the UpdateServiceSetting API operation.</p>"

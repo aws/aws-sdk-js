@@ -690,11 +690,16 @@ declare namespace MediaConvert {
     QualityTuningLevel?: AvcIntraUhdQualityTuningLevel;
   }
   export type BillingTagsSource = "QUEUE"|"PRESET"|"JOB_TEMPLATE"|"JOB"|string;
+  export type BurnInSubtitleStylePassthrough = "ENABLED"|"DISABLED"|string;
   export interface BurninDestinationSettings {
     /**
      * If no explicit x_position or y_position is provided, setting alignment to centered will place the captions at the bottom center of the output. Similarly, setting a left alignment will align captions to the bottom left of the output. If x and y positions are given in conjunction with the alignment parameter, the font will be justified (either left or centered) relative to those coordinates. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
      */
     Alignment?: BurninSubtitleAlignment;
+    /**
+     * Ignore this setting unless your input captions are STL, any type of 608, teletext, or TTML, and your output captions are burned in. Specify how the service applies the color specified in the setting Font color (BurninSubtitleFontColor). By default, this color is white. When you choose WHITE_TEXT_ONLY, the service uses the specified font color only for text that is white in the input. When you choose ALL_TEXT, the service uses the specified font color for all output captions text. If you leave both settings at their default value, your output font color is the same as your input font color.
+     */
+    ApplyFontColor?: BurninSubtitleApplyFontColor;
     /**
      * Specifies the color of the rectangle behind the captions.
 All burn-in and DVB-Sub font settings must match.
@@ -704,6 +709,10 @@ All burn-in and DVB-Sub font settings must match.
      * Specifies the opacity of the background rectangle. 255 is opaque; 0 is transparent. Leaving this parameter blank is equivalent to setting it to 0 (transparent). All burn-in and DVB-Sub font settings must match.
      */
     BackgroundOpacity?: __integerMin0Max255;
+    /**
+     * Specify the font that you want the service to use for your burn in captions when your input captions specify a font that MediaConvert doesn't support. When you keep the default value, Best match (BEST_MATCH), MediaConvert uses a supported font that most closely matches the font that your input captions specify. When there are multiple unsupported fonts in your input captions, MediaConvert matches each font with the supported font that matches best. When you explicitly choose a replacement font, MediaConvert uses that font to replace all unsupported fonts from your input.
+     */
+    FallbackFont?: BurninSubtitleFallbackFont;
     /**
      * Specifies the color of the burned-in captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
      */
@@ -726,6 +735,10 @@ All burn-in and DVB-Sub font settings must match.
      * A positive integer indicates the exact font size in points. Set to 0 for automatic font size selection. All burn-in and DVB-Sub font settings must match.
      */
     FontSize?: __integerMin0Max96;
+    /**
+     * Ignore this setting unless your BurninSubtitleFontColor setting is HEX. Format is six or eight hexidecimal digits, representing the red, green, and blue components, with the two extra digits used for an optional alpha value. For example a value of 1122AABB is a red value of 0x11, a green value of 0x22, a blue value of 0xAA, and an alpha value of 0xBB.
+     */
+    HexFontColor?: __stringMin6Max8Pattern09aFAF609aFAF2;
     /**
      * Specifies font outline color. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
      */
@@ -752,6 +765,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     ShadowYOffset?: __integerMinNegative2147483648Max2147483647;
     /**
+     * Ignore this setting unless your output captions are burned in. Choose which set of style and position values the service applies to your output captions. When you choose ENABLED, the service uses the input style and position information from your input. When you choose DISABLED, the service uses any style values that you specify in your output settings. If you don't specify values, the service uses default style and position values. When you choose DISABLED, the service ignores all style and position values from your input.
+     */
+    StylePassthrough?: BurnInSubtitleStylePassthrough;
+    /**
      * Only applies to jobs with input captions in Teletext or STL formats. Specify whether the spacing between letters in your captions is set by the captions grid or varies depending on letter width. Choose fixed grid to conform to the spacing specified in the captions file more accurately. Choose proportional to make the text easier to read if the captions are closed caption.
      */
     TeletextSpacing?: BurninSubtitleTeletextSpacing;
@@ -764,12 +781,14 @@ All burn-in and DVB-Sub font settings must match.
      */
     YPosition?: __integerMin0Max2147483647;
   }
-  export type BurninSubtitleAlignment = "CENTERED"|"LEFT"|string;
-  export type BurninSubtitleBackgroundColor = "NONE"|"BLACK"|"WHITE"|string;
-  export type BurninSubtitleFontColor = "WHITE"|"BLACK"|"YELLOW"|"RED"|"GREEN"|"BLUE"|string;
-  export type BurninSubtitleOutlineColor = "BLACK"|"WHITE"|"YELLOW"|"RED"|"GREEN"|"BLUE"|string;
-  export type BurninSubtitleShadowColor = "NONE"|"BLACK"|"WHITE"|string;
-  export type BurninSubtitleTeletextSpacing = "FIXED_GRID"|"PROPORTIONAL"|string;
+  export type BurninSubtitleAlignment = "CENTERED"|"LEFT"|"AUTO"|string;
+  export type BurninSubtitleApplyFontColor = "WHITE_TEXT_ONLY"|"ALL_TEXT"|string;
+  export type BurninSubtitleBackgroundColor = "NONE"|"BLACK"|"WHITE"|"AUTO"|string;
+  export type BurninSubtitleFallbackFont = "BEST_MATCH"|"MONOSPACED_SANSSERIF"|"MONOSPACED_SERIF"|"PROPORTIONAL_SANSSERIF"|"PROPORTIONAL_SERIF"|string;
+  export type BurninSubtitleFontColor = "WHITE"|"BLACK"|"YELLOW"|"RED"|"GREEN"|"BLUE"|"HEX"|"AUTO"|string;
+  export type BurninSubtitleOutlineColor = "BLACK"|"WHITE"|"YELLOW"|"RED"|"GREEN"|"BLUE"|"AUTO"|string;
+  export type BurninSubtitleShadowColor = "NONE"|"BLACK"|"WHITE"|"AUTO"|string;
+  export type BurninSubtitleTeletextSpacing = "FIXED_GRID"|"PROPORTIONAL"|"AUTO"|string;
   export interface CancelJobRequest {
     /**
      * The Job ID of the job to be cancelled.
@@ -1003,6 +1022,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     ImageBasedTrickPlay?: CmafImageBasedTrickPlay;
     /**
+     * Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
+     */
+    ImageBasedTrickPlaySettings?: CmafImageBasedTrickPlaySettings;
+    /**
      * When set to GZIP, compresses HLS playlist.
      */
     ManifestCompression?: CmafManifestCompression;
@@ -1059,8 +1082,35 @@ All burn-in and DVB-Sub font settings must match.
      */
     WriteSegmentTimelineInRepresentation?: CmafWriteSegmentTimelineInRepresentation;
   }
-  export type CmafImageBasedTrickPlay = "NONE"|"THUMBNAIL"|"THUMBNAIL_AND_FULLFRAME"|string;
+  export type CmafImageBasedTrickPlay = "NONE"|"THUMBNAIL"|"THUMBNAIL_AND_FULLFRAME"|"ADVANCED"|string;
+  export interface CmafImageBasedTrickPlaySettings {
+    /**
+     * The cadence MediaConvert follows for generating thumbnails.  If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence).  If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval.
+     */
+    IntervalCadence?: CmafIntervalCadence;
+    /**
+     * Height of each thumbnail within each tile image, in pixels.  Leave blank to maintain aspect ratio with thumbnail width.  If following the aspect ratio would lead to a total tile height greater than 4096, then the job will be rejected.  Must be divisible by 2.
+     */
+    ThumbnailHeight?: __integerMin2Max4096;
+    /**
+     * Enter the interval, in seconds, that MediaConvert uses to generate thumbnails.  If the interval you enter doesn't align with the output frame rate, MediaConvert automatically rounds the interval to align with the output frame rate.  For example, if the output frame rate is 29.97 frames per second and you enter 5, MediaConvert uses a 150 frame interval to generate thumbnails.
+     */
+    ThumbnailInterval?: __doubleMin0Max2147483647;
+    /**
+     * Width of each thumbnail within each tile image, in pixels.  Default is 312.  Must be divisible by 8.
+     */
+    ThumbnailWidth?: __integerMin8Max4096;
+    /**
+     * Number of thumbnails in each column of a tile image. Set a value between 2 and 2048. Must be divisible by 2.
+     */
+    TileHeight?: __integerMin1Max2048;
+    /**
+     * Number of thumbnails in each row of a tile image.  Set a value between 1 and 512.
+     */
+    TileWidth?: __integerMin1Max512;
+  }
   export type CmafInitializationVectorInManifest = "INCLUDE"|"EXCLUDE"|string;
+  export type CmafIntervalCadence = "FOLLOW_IFRAME"|"FOLLOW_CUSTOM"|string;
   export type CmafKeyProviderType = "SPEKE"|"STATIC_KEY"|string;
   export type CmafManifestCompression = "GZIP"|"NONE"|string;
   export type CmafManifestDurationFormat = "FLOATING_POINT"|"INTEGER"|string;
@@ -1415,6 +1465,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     ImageBasedTrickPlay?: DashIsoImageBasedTrickPlay;
     /**
+     * Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
+     */
+    ImageBasedTrickPlaySettings?: DashIsoImageBasedTrickPlaySettings;
+    /**
      * Minimum time of initially buffered media that is needed to ensure smooth playout.
      */
     MinBufferTime?: __integerMin0Max2147483647;
@@ -1448,7 +1502,34 @@ All burn-in and DVB-Sub font settings must match.
     WriteSegmentTimelineInRepresentation?: DashIsoWriteSegmentTimelineInRepresentation;
   }
   export type DashIsoHbbtvCompliance = "HBBTV_1_5"|"NONE"|string;
-  export type DashIsoImageBasedTrickPlay = "NONE"|"THUMBNAIL"|"THUMBNAIL_AND_FULLFRAME"|string;
+  export type DashIsoImageBasedTrickPlay = "NONE"|"THUMBNAIL"|"THUMBNAIL_AND_FULLFRAME"|"ADVANCED"|string;
+  export interface DashIsoImageBasedTrickPlaySettings {
+    /**
+     * The cadence MediaConvert follows for generating thumbnails.  If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence).  If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval.
+     */
+    IntervalCadence?: DashIsoIntervalCadence;
+    /**
+     * Height of each thumbnail within each tile image, in pixels.  Leave blank to maintain aspect ratio with thumbnail width.  If following the aspect ratio would lead to a total tile height greater than 4096, then the job will be rejected.  Must be divisible by 2.
+     */
+    ThumbnailHeight?: __integerMin1Max4096;
+    /**
+     * Enter the interval, in seconds, that MediaConvert uses to generate thumbnails.  If the interval you enter doesn't align with the output frame rate, MediaConvert automatically rounds the interval to align with the output frame rate.  For example, if the output frame rate is 29.97 frames per second and you enter 5, MediaConvert uses a 150 frame interval to generate thumbnails.
+     */
+    ThumbnailInterval?: __doubleMin0Max2147483647;
+    /**
+     * Width of each thumbnail within each tile image, in pixels.  Default is 312.  Must be divisible by 8.
+     */
+    ThumbnailWidth?: __integerMin8Max4096;
+    /**
+     * Number of thumbnails in each column of a tile image. Set a value between 2 and 2048. Must be divisible by 2.
+     */
+    TileHeight?: __integerMin1Max2048;
+    /**
+     * Number of thumbnails in each row of a tile image.  Set a value between 1 and 512.
+     */
+    TileWidth?: __integerMin1Max512;
+  }
+  export type DashIsoIntervalCadence = "FOLLOW_IFRAME"|"FOLLOW_CUSTOM"|string;
   export type DashIsoMpdProfile = "MAIN_PROFILE"|"ON_DEMAND_PROFILE"|string;
   export type DashIsoPlaybackDeviceCompatibility = "CENC_V1"|"UNENCRYPTED_SEI"|string;
   export type DashIsoPtsOffsetHandlingForBFrames = "ZERO_BASED"|"MATCH_INITIAL_PTS"|string;
@@ -1601,6 +1682,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     Alignment?: DvbSubtitleAlignment;
     /**
+     * Ignore this setting unless your input captions are STL, any type of 608, teletext, or TTML, and your output captions are DVB-SUB. Specify how the service applies the color specified in the setting Font color (DvbSubtitleFontColor). By default, this color is white. When you choose WHITE_TEXT_ONLY, the service uses the specified font color only for text that is white in the input. When you choose ALL_TEXT, the service uses the specified font color for all output captions text. If you leave both settings at their default value, your output font color is the same as your input font color.
+     */
+    ApplyFontColor?: DvbSubtitleApplyFontColor;
+    /**
      * Specifies the color of the rectangle behind the captions.
 All burn-in and DVB-Sub font settings must match.
      */
@@ -1621,6 +1706,10 @@ All burn-in and DVB-Sub font settings must match.
      * Use this setting, along with DDS x-coordinate (ddsXCoordinate), to specify the upper left corner of the display definition segment (DDS) display window. With this setting, specify the distance, in pixels, between the top of the frame and the top of the DDS display window. Keep the default value, 0, to have MediaConvert automatically choose this offset. Related setting: When you use this setting, you must set DDS handling (ddsHandling) to a value other than None (NONE). MediaConvert uses these values to determine whether to write page position data to the DDS or to the page composition segment (PCS). All burn-in and DVB-Sub font settings must match.
      */
     DdsYCoordinate?: __integerMin0Max2147483647;
+    /**
+     * Specify the font that you want the service to use for your burn in captions when your input captions specify a font that MediaConvert doesn't support. When you keep the default value, Best match (BEST_MATCH), MediaConvert uses a supported font that most closely matches the font that your input captions specify. When there are multiple unsupported fonts in your input captions, MediaConvert matches each font with the supported font that matches best. When you explicitly choose a replacement font, MediaConvert uses that font to replace all unsupported fonts from your input.
+     */
+    FallbackFont?: DvbSubSubtitleFallbackFont;
     /**
      * Specifies the color of the DVB-SUB captions. This option is not valid for source captions that are STL, 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
      */
@@ -1648,6 +1737,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     Height?: __integerMin1Max2147483647;
     /**
+     * Ignore this setting unless your DvbSubtitleFontColor setting is HEX. Format is six or eight hexidecimal digits, representing the red, green, and blue components, with the two extra digits used for an optional alpha value. For example a value of 1122AABB is a red value of 0x11, a green value of 0x22, a blue value of 0xAA, and an alpha value of 0xBB.
+     */
+    HexFontColor?: __stringMin6Max8Pattern09aFAF609aFAF2;
+    /**
      * Specifies font outline color. This option is not valid for source captions that are either 608/embedded or teletext. These source settings are already pre-defined by the caption stream. All burn-in and DVB-Sub font settings must match.
      */
     OutlineColor?: DvbSubtitleOutlineColor;
@@ -1672,6 +1765,10 @@ All burn-in and DVB-Sub font settings must match.
      * Specifies the vertical offset of the shadow relative to the captions in pixels. A value of -2 would result in a shadow offset 2 pixels above the text. All burn-in and DVB-Sub font settings must match.
      */
     ShadowYOffset?: __integerMinNegative2147483648Max2147483647;
+    /**
+     * Choose which set of style and position values the service applies to your output captions. When you choose ENABLED, the service uses the input style and position information from your input. When you choose DISABLED, the service uses any style values that you specify in your output settings. If you don't specify values, the service uses default style and position values. When you choose DISABLED, the service ignores all style and position values from your input.
+     */
+    StylePassthrough?: DvbSubtitleStylePassthrough;
     /**
      * Specify whether your DVB subtitles are standard or for hearing impaired. Choose hearing impaired if your subtitles include audio descriptions and dialogue. Choose standard if your subtitles include only dialogue.
      */
@@ -1699,12 +1796,15 @@ All burn-in and DVB-Sub font settings must match.
      */
     Pid?: __integerMin1Max2147483647;
   }
-  export type DvbSubtitleAlignment = "CENTERED"|"LEFT"|string;
-  export type DvbSubtitleBackgroundColor = "NONE"|"BLACK"|"WHITE"|string;
-  export type DvbSubtitleFontColor = "WHITE"|"BLACK"|"YELLOW"|"RED"|"GREEN"|"BLUE"|string;
-  export type DvbSubtitleOutlineColor = "BLACK"|"WHITE"|"YELLOW"|"RED"|"GREEN"|"BLUE"|string;
-  export type DvbSubtitleShadowColor = "NONE"|"BLACK"|"WHITE"|string;
-  export type DvbSubtitleTeletextSpacing = "FIXED_GRID"|"PROPORTIONAL"|string;
+  export type DvbSubSubtitleFallbackFont = "BEST_MATCH"|"MONOSPACED_SANSSERIF"|"MONOSPACED_SERIF"|"PROPORTIONAL_SANSSERIF"|"PROPORTIONAL_SERIF"|string;
+  export type DvbSubtitleAlignment = "CENTERED"|"LEFT"|"AUTO"|string;
+  export type DvbSubtitleApplyFontColor = "WHITE_TEXT_ONLY"|"ALL_TEXT"|string;
+  export type DvbSubtitleBackgroundColor = "NONE"|"BLACK"|"WHITE"|"AUTO"|string;
+  export type DvbSubtitleFontColor = "WHITE"|"BLACK"|"YELLOW"|"RED"|"GREEN"|"BLUE"|"HEX"|"AUTO"|string;
+  export type DvbSubtitleOutlineColor = "BLACK"|"WHITE"|"YELLOW"|"RED"|"GREEN"|"BLUE"|"AUTO"|string;
+  export type DvbSubtitleShadowColor = "NONE"|"BLACK"|"WHITE"|"AUTO"|string;
+  export type DvbSubtitleStylePassthrough = "ENABLED"|"DISABLED"|string;
+  export type DvbSubtitleTeletextSpacing = "FIXED_GRID"|"PROPORTIONAL"|"AUTO"|string;
   export type DvbSubtitlingType = "HEARING_IMPAIRED"|"STANDARD"|string;
   export interface DvbTdtSettings {
     /**
@@ -2651,6 +2751,10 @@ All burn-in and DVB-Sub font settings must match.
      */
     ImageBasedTrickPlay?: HlsImageBasedTrickPlay;
     /**
+     * Tile and thumbnail settings applicable when imageBasedTrickPlay is ADVANCED
+     */
+    ImageBasedTrickPlaySettings?: HlsImageBasedTrickPlaySettings;
+    /**
      * When set to GZIP, compresses HLS playlist.
      */
     ManifestCompression?: HlsManifestCompression;
@@ -2716,8 +2820,35 @@ All burn-in and DVB-Sub font settings must match.
     TimestampDeltaMilliseconds?: __integerMinNegative2147483648Max2147483647;
   }
   export type HlsIFrameOnlyManifest = "INCLUDE"|"EXCLUDE"|string;
-  export type HlsImageBasedTrickPlay = "NONE"|"THUMBNAIL"|"THUMBNAIL_AND_FULLFRAME"|string;
+  export type HlsImageBasedTrickPlay = "NONE"|"THUMBNAIL"|"THUMBNAIL_AND_FULLFRAME"|"ADVANCED"|string;
+  export interface HlsImageBasedTrickPlaySettings {
+    /**
+     * The cadence MediaConvert follows for generating thumbnails.  If set to FOLLOW_IFRAME, MediaConvert generates thumbnails for each IDR frame in the output (matching the GOP cadence).  If set to FOLLOW_CUSTOM, MediaConvert generates thumbnails according to the interval you specify in thumbnailInterval.
+     */
+    IntervalCadence?: HlsIntervalCadence;
+    /**
+     * Height of each thumbnail within each tile image, in pixels.  Leave blank to maintain aspect ratio with thumbnail width.  If following the aspect ratio would lead to a total tile height greater than 4096, then the job will be rejected.  Must be divisible by 2.
+     */
+    ThumbnailHeight?: __integerMin2Max4096;
+    /**
+     * Enter the interval, in seconds, that MediaConvert uses to generate thumbnails.  If the interval you enter doesn't align with the output frame rate, MediaConvert automatically rounds the interval to align with the output frame rate.  For example, if the output frame rate is 29.97 frames per second and you enter 5, MediaConvert uses a 150 frame interval to generate thumbnails.
+     */
+    ThumbnailInterval?: __doubleMin0Max2147483647;
+    /**
+     * Width of each thumbnail within each tile image, in pixels.  Default is 312.  Must be divisible by 8.
+     */
+    ThumbnailWidth?: __integerMin8Max4096;
+    /**
+     * Number of thumbnails in each column of a tile image. Set a value between 2 and 2048. Must be divisible by 2.
+     */
+    TileHeight?: __integerMin1Max2048;
+    /**
+     * Number of thumbnails in each row of a tile image.  Set a value between 1 and 512.
+     */
+    TileWidth?: __integerMin1Max512;
+  }
   export type HlsInitializationVectorInManifest = "INCLUDE"|"EXCLUDE"|string;
+  export type HlsIntervalCadence = "FOLLOW_IFRAME"|"FOLLOW_CUSTOM"|string;
   export type HlsKeyProviderType = "SPEKE"|"STATIC_KEY"|string;
   export type HlsManifestCompression = "GZIP"|"NONE"|string;
   export type HlsManifestDurationFormat = "FLOATING_POINT"|"INTEGER"|string;
@@ -3171,7 +3302,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     Esam?: EsamSettings;
     /**
-     * Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory.
+     * If your source content has EIA-608 Line 21 Data Services, enable this feature to specify what MediaConvert does with the Extended Data Services (XDS) packets. You can choose to pass through XDS packets, or remove them from the output. For more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h Content Advisory.
      */
     ExtendedDataServices?: ExtendedDataServices;
     /**
@@ -3277,7 +3408,7 @@ All burn-in and DVB-Sub font settings must match.
      */
     Esam?: EsamSettings;
     /**
-     * Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory.
+     * If your source content has EIA-608 Line 21 Data Services, enable this feature to specify what MediaConvert does with the Extended Data Services (XDS) packets. You can choose to pass through XDS packets, or remove them from the output. For more information about XDS, see EIA-608 Line Data Services, section 9.5.1.5 05h Content Advisory.
      */
     ExtendedDataServices?: ExtendedDataServices;
     /**
@@ -5650,11 +5781,14 @@ All burn-in and DVB-Sub font settings must match.
   export type __integerMin1Max17895697 = number;
   export type __integerMin1Max2 = number;
   export type __integerMin1Max20 = number;
+  export type __integerMin1Max2048 = number;
   export type __integerMin1Max2147483640 = number;
   export type __integerMin1Max2147483647 = number;
   export type __integerMin1Max31 = number;
   export type __integerMin1Max32 = number;
   export type __integerMin1Max4 = number;
+  export type __integerMin1Max4096 = number;
+  export type __integerMin1Max512 = number;
   export type __integerMin1Max6 = number;
   export type __integerMin1Max60000 = number;
   export type __integerMin1Max64 = number;
@@ -5663,6 +5797,7 @@ All burn-in and DVB-Sub font settings must match.
   export type __integerMin25Max10000 = number;
   export type __integerMin25Max2000 = number;
   export type __integerMin2Max2147483647 = number;
+  export type __integerMin2Max4096 = number;
   export type __integerMin32000Max192000 = number;
   export type __integerMin32000Max384000 = number;
   export type __integerMin32000Max48000 = number;
@@ -5677,6 +5812,7 @@ All burn-in and DVB-Sub font settings must match.
   export type __integerMin8000Max192000 = number;
   export type __integerMin8000Max96000 = number;
   export type __integerMin8Max12 = number;
+  export type __integerMin8Max4096 = number;
   export type __integerMin96Max600 = number;
   export type __integerMinNegative1000Max1000 = number;
   export type __integerMinNegative180Max180 = number;
@@ -5748,6 +5884,7 @@ All burn-in and DVB-Sub font settings must match.
   export type __stringMin36Max36Pattern09aFAF809aFAF409aFAF409aFAF409aFAF12 = string;
   export type __stringMin3Max3Pattern1809aFAF09aEAE = string;
   export type __stringMin3Max3PatternAZaZ3 = string;
+  export type __stringMin6Max8Pattern09aFAF609aFAF2 = string;
   export type __stringMin9Max19PatternAZ26EastWestCentralNorthSouthEastWest1912 = string;
   export type __stringPattern = string;
   export type __stringPattern010920405090509092 = string;

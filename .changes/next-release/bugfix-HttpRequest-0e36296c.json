@@ -1,5 +1,0 @@
-{
-  "type": "bugfix",
-  "category": "HttpRequest",
-  "description": "Allows request body to be either a string or a buffer"
-}

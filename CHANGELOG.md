@@ -1,6 +1,12 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.993.0-->
+<!--LATEST=2.994.0-->
 <!--ENTRYINSERT-->
+
+## 2.994.0
+* bugfix: HttpRequest: Allows request body to be either a string or a buffer
+* feature: AppSync: Documented the new OpenSearchServiceDataSourceConfig data type. Added deprecation notes to the ElasticsearchDataSourceConfig data type.
+* feature: MediaConvert: This release adds style and positioning support for caption or subtitle burn-in from rich text sources such as TTML. This release also introduces configurable image-based trick play track generation.
+* feature: SSM: Added cutoff behavior support for preventing new task invocations from starting when the maintenance window cutoff time is reached.
 
 ## 2.993.0
 * feature: Imagebuilder: This feature adds support for specifying GP3 volume throughput and configuring instance metadata options for instances launched by EC2 Image Builder.
