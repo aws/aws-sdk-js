@@ -1986,6 +1986,10 @@
         "Expiration": {
           "shape": "ISO8601DateTime",
           "documentation": "<p>Date and time at which the license checkout expires.</p>"
+        },
+        "LicenseArn": {
+          "shape": "String",
+          "documentation": "<p>Amazon Resource Name (ARN) of the checkout license.</p>"
         }
       }
     },

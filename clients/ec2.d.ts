@@ -3069,11 +3069,11 @@ declare class EC2 extends Service {
    */
   modifyInstanceMetadataOptions(callback?: (err: AWSError, data: EC2.Types.ModifyInstanceMetadataOptionsResult) => void): Request<EC2.Types.ModifyInstanceMetadataOptionsResult, AWSError>;
   /**
-   * Modifies the placement attributes for a specified instance. You can do the following:   Modify the affinity between an instance and a Dedicated Host. When affinity is set to host and the instance is not associated with a specific Dedicated Host, the next time the instance is launched, it is automatically associated with the host on which it lands. If the instance is restarted or rebooted, this relationship persists.   Change the Dedicated Host with which an instance is associated.   Change the instance tenancy of an instance from host to dedicated, or from dedicated to host.   Move an instance to or from a placement group.   At least one attribute for affinity, host ID, tenancy, or placement group name must be specified in the request. Affinity and tenancy can be modified in the same request. To modify the host ID, tenancy, placement group, or partition for an instance, the instance must be in the stopped state.
+   * Modifies the placement attributes for a specified instance. You can do the following:   Modify the affinity between an instance and a Dedicated Host. When affinity is set to host and the instance is not associated with a specific Dedicated Host, the next time the instance is launched, it is automatically associated with the host on which it lands. If the instance is restarted or rebooted, this relationship persists.   Change the Dedicated Host with which an instance is associated.   Change the instance tenancy of an instance.   Move an instance to or from a placement group.   At least one attribute for affinity, host ID, tenancy, or placement group name must be specified in the request. Affinity and tenancy can be modified in the same request. To modify the host ID, tenancy, placement group, or partition for an instance, the instance must be in the stopped state.
    */
   modifyInstancePlacement(params: EC2.Types.ModifyInstancePlacementRequest, callback?: (err: AWSError, data: EC2.Types.ModifyInstancePlacementResult) => void): Request<EC2.Types.ModifyInstancePlacementResult, AWSError>;
   /**
-   * Modifies the placement attributes for a specified instance. You can do the following:   Modify the affinity between an instance and a Dedicated Host. When affinity is set to host and the instance is not associated with a specific Dedicated Host, the next time the instance is launched, it is automatically associated with the host on which it lands. If the instance is restarted or rebooted, this relationship persists.   Change the Dedicated Host with which an instance is associated.   Change the instance tenancy of an instance from host to dedicated, or from dedicated to host.   Move an instance to or from a placement group.   At least one attribute for affinity, host ID, tenancy, or placement group name must be specified in the request. Affinity and tenancy can be modified in the same request. To modify the host ID, tenancy, placement group, or partition for an instance, the instance must be in the stopped state.
+   * Modifies the placement attributes for a specified instance. You can do the following:   Modify the affinity between an instance and a Dedicated Host. When affinity is set to host and the instance is not associated with a specific Dedicated Host, the next time the instance is launched, it is automatically associated with the host on which it lands. If the instance is restarted or rebooted, this relationship persists.   Change the Dedicated Host with which an instance is associated.   Change the instance tenancy of an instance.   Move an instance to or from a placement group.   At least one attribute for affinity, host ID, tenancy, or placement group name must be specified in the request. Affinity and tenancy can be modified in the same request. To modify the host ID, tenancy, placement group, or partition for an instance, the instance must be in the stopped state.
    */
   modifyInstancePlacement(callback?: (err: AWSError, data: EC2.Types.ModifyInstancePlacementResult) => void): Request<EC2.Types.ModifyInstancePlacementResult, AWSError>;
   /**
@@ -17990,7 +17990,7 @@ declare namespace EC2 {
      */
     HibernationOptions?: HibernationOptions;
     /**
-     * The license configurations.
+     * The license configurations for the instance.
      */
     Licenses?: LicenseList;
     /**
@@ -18005,6 +18005,18 @@ declare namespace EC2 {
      * The boot mode of the instance. For more information, see Boot modes in the Amazon EC2 User Guide.
      */
     BootMode?: BootModeValues;
+    /**
+     * The platform details value for the instance. For more information, see AMI billing information fields in the Amazon EC2 User Guide.
+     */
+    PlatformDetails?: String;
+    /**
+     * The usage operation value for the instance. For more information, see AMI billing information fields in the Amazon EC2 User Guide.
+     */
+    UsageOperation?: String;
+    /**
+     * The time that the usage operation was last updated.
+     */
+    UsageOperationUpdateTime?: MillisecondDateTime;
   }
   export interface InstanceAttribute {
     /**
@@ -20857,7 +20869,7 @@ declare namespace EC2 {
      */
     InstanceId: InstanceId;
     /**
-     * The tenancy for the instance. For T3 instances, you can't change the tenancy from dedicated to host, or from host to dedicated. Attempting to make one of these unsupported tenancy changes results in the InvalidTenancy error code.
+     * The tenancy for the instance.  For T3 instances, you can't change the tenancy from dedicated to host, or from host to dedicated. Attempting to make one of these unsupported tenancy changes results in the InvalidTenancy error code. 
      */
     Tenancy?: HostTenancy;
     /**
@@ -22672,7 +22684,7 @@ declare namespace EC2 {
     /**
      * The name of the placement group the instance is in.
      */
-    GroupName?: String;
+    GroupName?: PlacementGroupName;
     /**
      * The number of the partition the instance is in. Valid only if the placement group strategy is set to partition. This parameter is not supported by CreateFleet.
      */

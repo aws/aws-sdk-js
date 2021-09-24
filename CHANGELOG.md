@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.994.0-->
+<!--LATEST=2.995.0-->
 <!--ENTRYINSERT-->
+
+## 2.995.0
+* feature: EC2: DescribeInstances now returns Platform Details, Usage Operation, and Usage Operation Update Time.
+* feature: LicenseManager: AWS License Manager now allows customers to get the LicenseArn in the Checkout API Response.
 
 ## 2.994.0
 * bugfix: HttpRequest: Allows request body to be either a string or a buffer

@@ -572,6 +572,10 @@ declare namespace LicenseManager {
      * Date and time at which the license checkout expires.
      */
     Expiration?: ISO8601DateTime;
+    /**
+     * Amazon Resource Name (ARN) of the checkout license.
+     */
+    LicenseArn?: String;
   }
   export type CheckoutType = "PROVISIONAL"|"PERPETUAL"|string;
   export type ClientRequestToken = string;
