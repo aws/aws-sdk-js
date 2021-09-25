@@ -14,4 +14,5 @@ interface SharedIniFileCredentialsOptions {
     tokenCodeFn?: (mfaSerial: string, callback: (err?: Error, token?: string) => void) => void
     httpOptions?: HTTPOptions
     callback?: (err?: Error) => void
+    useCache?: boolean
 }

@@ -705,6 +705,28 @@
         iniLoader.clearCachedFiles();
         process.env = env;
       });
+      var cachedir;
+      beforeEach(function() {
+        var os = require('os');
+        var fs = require('fs');
+        var path = require('path');
+        helpers.spyOn(os, 'homedir').andReturn('/home/user');
+        cachedir = path.join(os.tmpdir(), 'aws-sdk-js-cache-' + process.pid);
+        process.env.AWS_CREDENTIAL_CACHE_DIRECTORY = cachedir;
+      });
+      afterEach(function() {
+        var path = require('path');
+        var fs = require('fs');
+        // rm -r
+        if (fs.existsSync(cachedir)) {
+          fs.readdirSync(cachedir).forEach(function(file) {
+            fs.unlinkSync(path.join(cachedir, file));
+          });
+          fs.rmdirSync(cachedir);
+        }
+        delete process.env.AWS_CREDENTIAL_CACHE_DIRECTORY;
+      });
+
       it('will fail if assume role is disabled', function(done) {
         var creds, mock;
         mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\nrole_arn = arn';
@@ -761,6 +783,62 @@
           expect(creds.expireTime).to.eql(new Date(0));
           done();
         });
+      });
+      it('will only assume role once when using cache', function() {
+        var mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\nrole_arn = arn\nexternal\nasda\nsource_profile = foo\n[foo]\naws_access_key_id = akid2\naws_secret_access_key = secret2';
+        var readFileSpy = helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function(filename) {
+          if (/credentials$/.test(filename)) {
+            return mock;
+          } else {
+            return readFileSpy.origMethod.call(undefined, filename);
+          }
+        });
+        var STSPrototype = (new STS()).constructor.prototype;
+        var assumeRoleSpy = helpers.spyOn(STSPrototype, 'assumeRole').andCallFake(function(params, callback) {
+          callback(null, {
+            Credentials: {
+              AccessKeyId: 'KEY',
+              SecretAccessKey: 'SECRET',
+              SessionToken: 'TOKEN',
+              Expiration: new Date(new Date().getTime() + 1000000).toISOString()
+            }
+          });
+        });
+        var creds = new AWS.SharedIniFileCredentials({ useCache: true });
+        expect(assumeRoleSpy.calls.length).to.equal(1);
+        new AWS.SharedIniFileCredentials({ useCache: true });
+        expect(assumeRoleSpy.calls.length).to.equal(1);
+      });
+      it('will correctly read credentials from cache', function() {
+        var mock = '[default]\naws_access_key_id = akid\naws_secret_access_key = secret\nrole_arn = arn\nexternal\nasda\nsource_profile = foo\n[foo]\naws_access_key_id = akid2\naws_secret_access_key = secret2';
+        var readFileSpy = helpers.spyOn(AWS.util, 'readFileSync').andCallFake(function(filename) {
+          if (/credentials$/.test(filename)) {
+            return mock;
+          } else {
+            return readFileSpy.origMethod.call(undefined, filename);
+          }
+        });
+        var STSPrototype = (new STS()).constructor.prototype;
+        var assumeRoleSpy = helpers.spyOn(STSPrototype, 'assumeRole').andCallFake(function(params, callback) {
+          callback(null, {
+            Credentials: {
+              AccessKeyId: 'KEY',
+              SecretAccessKey: 'SECRET',
+              SessionToken: 'TOKEN',
+              Expiration: new Date(new Date().getTime() + 1000000).toISOString()
+            }
+          });
+        });
+        var first = new AWS.SharedIniFileCredentials({ useCache: true });
+        expect(first.accessKeyId).to.equal('KEY');
+        expect(first.secretAccessKey).to.equal('SECRET');
+        expect(first.sessionToken).to.equal('TOKEN');
+        var second = new AWS.SharedIniFileCredentials({ useCache: true });
+        expect(second.accessKeyId).to.equal('KEY');
+        expect(second.secretAccessKey).to.equal('SECRET');
+        expect(second.sessionToken).to.equal('TOKEN');
+
+        expect(first.expireTime).to.equal(second.expireTime);
       });
       it('will assume a role from chained source_profile profiles', function(done) {
         var creds, mock;
@@ -922,7 +1000,8 @@
 
         new AWS.SharedIniFileCredentials({
           profile: 'foo',
-          callback: function () {
+          callback: function (err) {
+            console.trace(err);
             fail('test should not have gotten here');
           }
         });
