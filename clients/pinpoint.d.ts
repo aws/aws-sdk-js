@@ -1563,6 +1563,10 @@ declare namespace Pinpoint {
      * The settings for a wait activity. This type of activity waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.
      */
     Wait?: WaitActivity;
+    /**
+     * The settings for a connect activity. This type of activity initiates a contact center call to participants.
+     */
+    ContactCenter?: ContactCenterActivity;
   }
   export interface ActivityResponse {
     /**
@@ -2244,6 +2248,12 @@ declare namespace Pinpoint {
      * The unique identifier for the activity to perform if the conditions are met.
      */
     TrueActivity?: __string;
+  }
+  export interface ContactCenterActivity {
+    /**
+     * The unique identifier for the next activity to perform after the this activity.
+     */
+    NextActivity?: __string;
   }
   export interface CreateAppRequest {
     CreateApplicationRequest: CreateApplicationRequest;
@@ -4884,6 +4894,16 @@ declare namespace Pinpoint {
      */
     TimeToLive?: __string;
   }
+  export interface JourneyChannelSettings {
+    /**
+     * Amazon Resource Name (ARN) of the Connect Campaign.
+     */
+    ConnectCampaignArn?: __string;
+    /**
+     * IAM role ARN to be assumed when invoking Connect campaign execution APIs for dialing.
+     */
+    ConnectCampaignExecutionRoleArn?: __string;
+  }
   export interface JourneyResponse {
     /**
      * A map that contains a set of Activity objects, one object for each activity in the journey. For each Activity object, the key is the unique identifier (string) for an activity and the value is the settings for the activity.
@@ -4953,6 +4973,10 @@ declare namespace Pinpoint {
      * Specifies whether a journey should be refreshed on segment update.
      */
     RefreshOnSegmentUpdate?: __boolean;
+    /**
+     * The channel-specific configurations for the journey.
+     */
+    JourneyChannelSettings?: JourneyChannelSettings;
   }
   export interface JourneySMSMessage {
     /**

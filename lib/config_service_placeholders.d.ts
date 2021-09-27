@@ -280,6 +280,8 @@ export abstract class ConfigurationServicePlaceholders {
   memorydb?: AWS.MemoryDB.Types.ClientConfiguration;
   opensearch?: AWS.OpenSearch.Types.ClientConfiguration;
   kafkaconnect?: AWS.KafkaConnect.Types.ClientConfiguration;
+  voiceid?: AWS.VoiceID.Types.ClientConfiguration;
+  wisdom?: AWS.Wisdom.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -562,4 +564,6 @@ export interface ConfigurationServiceApiVersions {
   memorydb?: AWS.MemoryDB.Types.apiVersion;
   opensearch?: AWS.OpenSearch.Types.apiVersion;
   kafkaconnect?: AWS.KafkaConnect.Types.apiVersion;
+  voiceid?: AWS.VoiceID.Types.apiVersion;
+  wisdom?: AWS.Wisdom.Types.apiVersion;
 }

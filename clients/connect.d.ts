@@ -108,11 +108,11 @@ declare class Connect extends Service {
    */
   createInstance(callback?: (err: AWSError, data: Connect.Types.CreateInstanceResponse) => void): Request<Connect.Types.CreateInstanceResponse, AWSError>;
   /**
-   * Create an AppIntegration association with an Amazon Connect instance.
+   * Creates an AWS resource association with an Amazon Connect instance.
    */
   createIntegrationAssociation(params: Connect.Types.CreateIntegrationAssociationRequest, callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
   /**
-   * Create an AppIntegration association with an Amazon Connect instance.
+   * Creates an AWS resource association with an Amazon Connect instance.
    */
   createIntegrationAssociation(callback?: (err: AWSError, data: Connect.Types.CreateIntegrationAssociationResponse) => void): Request<Connect.Types.CreateIntegrationAssociationResponse, AWSError>;
   /**
@@ -140,11 +140,11 @@ declare class Connect extends Service {
    */
   createRoutingProfile(callback?: (err: AWSError, data: Connect.Types.CreateRoutingProfileResponse) => void): Request<Connect.Types.CreateRoutingProfileResponse, AWSError>;
   /**
-   * Creates a use case for an AppIntegration association.
+   * Creates a use case for an integration association.
    */
   createUseCase(params: Connect.Types.CreateUseCaseRequest, callback?: (err: AWSError, data: Connect.Types.CreateUseCaseResponse) => void): Request<Connect.Types.CreateUseCaseResponse, AWSError>;
   /**
-   * Creates a use case for an AppIntegration association.
+   * Creates a use case for an integration association.
    */
   createUseCase(callback?: (err: AWSError, data: Connect.Types.CreateUseCaseResponse) => void): Request<Connect.Types.CreateUseCaseResponse, AWSError>;
   /**
@@ -180,11 +180,11 @@ declare class Connect extends Service {
    */
   deleteInstance(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an AppIntegration association from an Amazon Connect instance. The association must not have any use cases associated with it.
+   * Deletes an AWS resource association from an Amazon Connect instance. The association must not have any use cases associated with it.
    */
   deleteIntegrationAssociation(params: Connect.Types.DeleteIntegrationAssociationRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes an AppIntegration association from an Amazon Connect instance. The association must not have any use cases associated with it.
+   * Deletes an AWS resource association from an Amazon Connect instance. The association must not have any use cases associated with it.
    */
   deleteIntegrationAssociation(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -196,11 +196,11 @@ declare class Connect extends Service {
    */
   deleteQuickConnect(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a use case from an AppIntegration association.
+   * Deletes a use case from an integration association.
    */
   deleteUseCase(params: Connect.Types.DeleteUseCaseRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
-   * Deletes a use case from an AppIntegration association.
+   * Deletes a use case from an integration association.
    */
   deleteUseCase(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
@@ -476,11 +476,11 @@ declare class Connect extends Service {
    */
   listInstances(callback?: (err: AWSError, data: Connect.Types.ListInstancesResponse) => void): Request<Connect.Types.ListInstancesResponse, AWSError>;
   /**
-   * Provides summary information about the AppIntegration associations for the specified Amazon Connect instance.
+   * Provides summary information about the AWS resource associations for the specified Amazon Connect instance.
    */
   listIntegrationAssociations(params: Connect.Types.ListIntegrationAssociationsRequest, callback?: (err: AWSError, data: Connect.Types.ListIntegrationAssociationsResponse) => void): Request<Connect.Types.ListIntegrationAssociationsResponse, AWSError>;
   /**
-   * Provides summary information about the AppIntegration associations for the specified Amazon Connect instance.
+   * Provides summary information about the AWS resource associations for the specified Amazon Connect instance.
    */
   listIntegrationAssociations(callback?: (err: AWSError, data: Connect.Types.ListIntegrationAssociationsResponse) => void): Request<Connect.Types.ListIntegrationAssociationsResponse, AWSError>;
   /**
@@ -580,11 +580,11 @@ declare class Connect extends Service {
    */
   listTagsForResource(callback?: (err: AWSError, data: Connect.Types.ListTagsForResourceResponse) => void): Request<Connect.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Lists the use cases. 
+   * Lists the use cases for the integration association. 
    */
   listUseCases(params: Connect.Types.ListUseCasesRequest, callback?: (err: AWSError, data: Connect.Types.ListUseCasesResponse) => void): Request<Connect.Types.ListUseCasesResponse, AWSError>;
   /**
-   * Lists the use cases. 
+   * Lists the use cases for the integration association. 
    */
   listUseCases(callback?: (err: AWSError, data: Connect.Types.ListUseCasesResponse) => void): Request<Connect.Types.ListUseCasesResponse, AWSError>;
   /**
@@ -628,11 +628,11 @@ declare class Connect extends Service {
    */
   startContactRecording(callback?: (err: AWSError, data: Connect.Types.StartContactRecordingResponse) => void): Request<Connect.Types.StartContactRecordingResponse, AWSError>;
   /**
-   * Places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents do not initiate the outbound API, which means that they do not dial the contact. If the contact flow places an outbound call to a contact, and then puts the contact in queue, the call is then routed to the agent, like any other inbound case. There is a 60-second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.  
+   * Places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents do not initiate the outbound API, which means that they do not dial the contact. If the contact flow places an outbound call to a contact, and then puts the contact in queue, the call is then routed to the agent, like any other inbound case. There is a 60-second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.    Campaign calls are not allowed by default. Before you can make a call with TrafficType = CAMPAIGN, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.  
    */
   startOutboundVoiceContact(params: Connect.Types.StartOutboundVoiceContactRequest, callback?: (err: AWSError, data: Connect.Types.StartOutboundVoiceContactResponse) => void): Request<Connect.Types.StartOutboundVoiceContactResponse, AWSError>;
   /**
-   * Places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents do not initiate the outbound API, which means that they do not dial the contact. If the contact flow places an outbound call to a contact, and then puts the contact in queue, the call is then routed to the agent, like any other inbound case. There is a 60-second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.  
+   * Places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in ContactFlowId). Agents do not initiate the outbound API, which means that they do not dial the contact. If the contact flow places an outbound call to a contact, and then puts the contact in queue, the call is then routed to the agent, like any other inbound case. There is a 60-second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.  UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.    Campaign calls are not allowed by default. Before you can make a call with TrafficType = CAMPAIGN, you must submit a service quota increase request. For more information, see Amazon Connect Service Quotas in the Amazon Connect Administrator Guide.  
    */
   startOutboundVoiceContact(callback?: (err: AWSError, data: Connect.Types.StartOutboundVoiceContactResponse) => void): Request<Connect.Types.StartOutboundVoiceContactResponse, AWSError>;
   /**
@@ -951,6 +951,16 @@ declare namespace Connect {
   export type AgentStatusTypes = AgentStatusType[];
   export type AgentUsername = string;
   export type AliasArn = string;
+  export interface AnswerMachineDetectionConfig {
+    /**
+     * The flag to indicate if answer machine detection analysis needs to be performed for a voice call. If set to true, TrafficType must be set as CAMPAIGN. 
+     */
+    EnableAnswerMachineDetection?: Boolean;
+    /**
+     * Wait for the answering machine prompt.
+     */
+    AwaitAnswerMachinePrompt?: Boolean;
+  }
   export interface AssociateApprovedOriginRequest {
     /**
      * The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.
@@ -1075,6 +1085,7 @@ declare namespace Connect {
   export type Boolean = boolean;
   export type BotName = string;
   export type BucketName = string;
+  export type CampaignId = string;
   export type Channel = "VOICE"|"CHAT"|"TASK"|string;
   export type Channels = Channel[];
   export type ChatContent = string;
@@ -1308,17 +1319,17 @@ declare namespace Connect {
      */
     IntegrationArn: ARN;
     /**
-     * The URL for the external application.
+     * The URL for the external application. This field is only required for the EVENT integration type.
      */
-    SourceApplicationUrl: URI;
+    SourceApplicationUrl?: URI;
     /**
-     * The name of the external application.
+     * The name of the external application. This field is only required for the EVENT integration type.
      */
-    SourceApplicationName: SourceApplicationName;
+    SourceApplicationName?: SourceApplicationName;
     /**
-     * The type of the data source.
+     * The type of the data source. This field is only required for the EVENT integration type.
      */
-    SourceType: SourceType;
+    SourceType?: SourceType;
     /**
      * One or more tags.
      */
@@ -1326,7 +1337,7 @@ declare namespace Connect {
   }
   export interface CreateIntegrationAssociationResponse {
     /**
-     * The identifier for the association.
+     * The identifier for the integration association.
      */
     IntegrationAssociationId?: IntegrationAssociationId;
     /**
@@ -1456,11 +1467,11 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier for the AppIntegration association.
+     * The identifier for the integration association.
      */
     IntegrationAssociationId: IntegrationAssociationId;
     /**
-     * The type of use case to associate to the AppIntegration association. Each AppIntegration association can have only one of each use case type.
+     * The type of use case to associate to the integration association. Each integration association can have only one of each use case type.
      */
     UseCaseType: UseCaseType;
     /**
@@ -1629,7 +1640,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier for the AppIntegration association.
+     * The identifier for the integration association.
      */
     IntegrationAssociationId: IntegrationAssociationId;
   }
@@ -1649,7 +1660,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The identifier for the AppIntegration association.
+     * The identifier for the integration association.
      */
     IntegrationAssociationId: IntegrationAssociationId;
     /**
@@ -1985,7 +1996,7 @@ declare namespace Connect {
      */
     EncryptionType: EncryptionType;
     /**
-     * The identifier of the encryption key.
+     * The full ARN of the encryption key.   Be sure to provide the full ARN of the encryption key, not just the ID. 
      */
     KeyId: KeyId;
   }
@@ -2032,7 +2043,7 @@ declare namespace Connect {
      */
     Groupings?: Groupings;
     /**
-     * The metrics to retrieve. Specify the name and unit for each metric. The following metrics are available. For a description of all the metrics, see Real-time Metrics Definitions in the Amazon Connect Administrator Guide.  AGENTS_AFTER_CONTACT_WORK  Unit: COUNT Name in real-time metrics report: ACW   AGENTS_AVAILABLE  Unit: COUNT Name in real-time metrics report: Available   AGENTS_ERROR  Unit: COUNT Name in real-time metrics report: Error   AGENTS_NON_PRODUCTIVE  Unit: COUNT Name in real-time metrics report: NPT (Non-Productive Time)   AGENTS_ON_CALL  Unit: COUNT Name in real-time metrics report: On contact   AGENTS_ON_CONTACT  Unit: COUNT Name in real-time metrics report: On contact   AGENTS_ONLINE  Unit: COUNT Name in real-time metrics report: Online   AGENTS_STAFFED  Unit: COUNT Name in real-time metrics report: Staffed   CONTACTS_IN_QUEUE  Unit: COUNT Name in real-time metrics report: In queue   CONTACTS_SCHEDULED  Unit: COUNT Name in real-time metrics report: Scheduled   OLDEST_CONTACT_AGE  Unit: SECONDS When you use groupings, Unit says SECONDS but the Value is returned in MILLISECONDS. For example, if you get a response like this:  { "Metric": { "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS" }, "Value": 24113.0 } The actual OLDEST_CONTACT_AGE is 24 seconds. Name in real-time metrics report: Oldest   SLOTS_ACTIVE  Unit: COUNT Name in real-time metrics report: Active   SLOTS_AVAILABLE  Unit: COUNT Name in real-time metrics report: Availability   
+     * The metrics to retrieve. Specify the name and unit for each metric. The following metrics are available. For a description of all the metrics, see Real-time Metrics Definitions in the Amazon Connect Administrator Guide.  AGENTS_AFTER_CONTACT_WORK  Unit: COUNT Name in real-time metrics report: ACW   AGENTS_AVAILABLE  Unit: COUNT Name in real-time metrics report: Available   AGENTS_ERROR  Unit: COUNT Name in real-time metrics report: Error   AGENTS_NON_PRODUCTIVE  Unit: COUNT Name in real-time metrics report: NPT (Non-Productive Time)   AGENTS_ON_CALL  Unit: COUNT Name in real-time metrics report: On contact   AGENTS_ON_CONTACT  Unit: COUNT Name in real-time metrics report: On contact   AGENTS_ONLINE  Unit: COUNT Name in real-time metrics report: Online   AGENTS_STAFFED  Unit: COUNT Name in real-time metrics report: Staffed   CONTACTS_IN_QUEUE  Unit: COUNT Name in real-time metrics report: In queue   CONTACTS_SCHEDULED  Unit: COUNT Name in real-time metrics report: Scheduled   OLDEST_CONTACT_AGE  Unit: SECONDS When you use groupings, Unit says SECONDS and the Value is returned in SECONDS.  When you do not use groupings, Unit says SECONDS but the Value is returned in MILLISECONDS. For example, if you get a response like this:  { "Metric": { "Name": "OLDEST_CONTACT_AGE", "Unit": "SECONDS" }, "Value": 24113.0 } The actual OLDEST_CONTACT_AGE is 24 seconds. Name in real-time metrics report: Oldest   SLOTS_ACTIVE  Unit: COUNT Name in real-time metrics report: Active   SLOTS_AVAILABLE  Unit: COUNT Name in real-time metrics report: Availability   
      */
     CurrentMetrics: CurrentMetrics;
     /**
@@ -2517,7 +2528,7 @@ declare namespace Connect {
     SourceType?: SourceType;
   }
   export type IntegrationAssociationSummaryList = IntegrationAssociationSummary[];
-  export type IntegrationType = "EVENT"|string;
+  export type IntegrationType = "EVENT"|"VOICE_ID"|"PINPOINT_APP"|"WISDOM_ASSISTANT"|"WISDOM_KNOWLEDGE_BASE"|string;
   export type KeyId = string;
   export interface KinesisFirehoseConfig {
     /**
@@ -2782,6 +2793,10 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
+     * 
+     */
+    IntegrationType?: IntegrationType;
+    /**
      * The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.
      */
     NextToken?: NextToken;
@@ -2792,7 +2807,7 @@ declare namespace Connect {
   }
   export interface ListIntegrationAssociationsResponse {
     /**
-     * The AppIntegration associations.
+     * The associations.
      */
     IntegrationAssociationSummaryList?: IntegrationAssociationSummaryList;
     /**
@@ -3706,6 +3721,18 @@ declare namespace Connect {
      * A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes. There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.
      */
     Attributes?: Attributes;
+    /**
+     * Configuration of the answering machine detection for this outbound call. 
+     */
+    AnswerMachineDetectionConfig?: AnswerMachineDetectionConfig;
+    /**
+     * The campaign identifier of the outbound communication.
+     */
+    CampaignId?: CampaignId;
+    /**
+     * Denotes the class of traffic. Calls with different traffic types are handled differently by Amazon Connect. The default value is GENERAL. Use CAMPAIGN if EnableAnswerMachineDetection is set to true. For all other cases, use GENERAL. 
+     */
+    TrafficType?: TrafficType;
   }
   export interface StartOutboundVoiceContactResponse {
     /**
@@ -3827,6 +3854,7 @@ declare namespace Connect {
   export type ThresholdValue = number;
   export type TimeZone = string;
   export type Timestamp = Date;
+  export type TrafficType = "GENERAL"|"CAMPAIGN"|string;
   export type URI = string;
   export type Unit = "SECONDS"|"COUNT"|"PERCENT"|string;
   export interface UntagResourceRequest {
@@ -3951,7 +3979,7 @@ declare namespace Connect {
      */
     InstanceId: InstanceId;
     /**
-     * The type of attribute.
+     * The type of attribute.  Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature, contact AWS Support for allowlisting. 
      */
     AttributeType: InstanceAttributeType;
     /**
@@ -4245,13 +4273,13 @@ declare namespace Connect {
      */
     UseCaseArn?: ARN;
     /**
-     * The type of use case to associate to the AppIntegration association. Each AppIntegration association can have only one of each use case type.
+     * The type of use case to associate to the integration association. Each integration association can have only one of each use case type.
      */
     UseCaseType?: UseCaseType;
   }
   export type UseCaseId = string;
   export type UseCaseSummaryList = UseCase[];
-  export type UseCaseType = "RULES_EVALUATION"|string;
+  export type UseCaseType = "RULES_EVALUATION"|"CONNECT_CAMPAIGNS"|string;
   export interface User {
     /**
      * The identifier of the user account.

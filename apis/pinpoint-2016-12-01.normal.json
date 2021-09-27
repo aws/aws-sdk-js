@@ -5957,6 +5957,10 @@
         "Wait": {
           "shape": "WaitActivity",
           "documentation": "<p>The settings for a wait activity. This type of activity waits for a certain amount of time or until a specific date and time before moving participants to the next activity in a journey.</p>"
+        },
+        "ContactCenter": {
+          "shape": "ContactCenterActivity",
+          "documentation": "<p>The settings for a connect activity. This type of activity initiates a contact center call to participants.</p>"
         }
       },
       "documentation": "<p>Specifies the configuration and other settings for an activity in a journey.</p>"
@@ -6873,6 +6877,15 @@
         }
       },
       "documentation": "<p>Specifies the settings for a yes/no split activity in a journey. This type of activity sends participants down one of two paths in a journey, based on conditions that you specify.</p> <note><p>To create yes/no split activities that send participants down different paths based on push notification events (such as Open or Received events), your mobile app has to specify the User ID and Endpoint ID values. For more information, see <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/integrate.html\">Integrating Amazon Pinpoint with your application</a> in the <i>Amazon Pinpoint Developer Guide</i>.</p></note>"
+    },
+    "ContactCenterActivity": {
+      "type": "structure",
+      "members": {
+        "NextActivity": {
+          "shape": "__string",
+          "documentation": "<p>The unique identifier for the next activity to perform after the this activity.</p>"
+        }
+      }
     },
     "CreateAppRequest": {
       "type": "structure",
@@ -11611,6 +11624,20 @@
       },
       "documentation": "<p>Specifies the message configuration for a push notification that's sent to participants in a journey.</p>"
     },
+    "JourneyChannelSettings": {
+      "type": "structure",
+      "members": {
+        "ConnectCampaignArn": {
+          "shape": "__string",
+          "documentation": "<p>Amazon Resource Name (ARN) of the Connect Campaign.</p>"
+        },
+        "ConnectCampaignExecutionRoleArn": {
+          "shape": "__string",
+          "documentation": "<p>IAM role ARN to be assumed when invoking Connect campaign execution APIs for dialing.</p>"
+        }
+      },
+      "documentation": "<p>The channel-specific configurations for the journey.</p>"
+    },
     "JourneyResponse": {
       "type": "structure",
       "members": {
@@ -11682,6 +11709,10 @@
         "RefreshOnSegmentUpdate": {
           "shape": "__boolean",
           "documentation": "<p>Specifies whether a journey should be refreshed on segment update.</p>"
+        },
+        "JourneyChannelSettings": {
+          "shape": "JourneyChannelSettings",
+          "documentation": "<p>The channel-specific configurations for the journey.</p>"
         }
       },
       "documentation": "<p>Provides information about the status, configuration, and other settings for a journey.</p>",

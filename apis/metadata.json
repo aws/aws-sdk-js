@@ -1074,5 +1074,12 @@
   },
   "kafkaconnect": {
     "name": "KafkaConnect"
+  },
+  "voiceid": {
+    "prefix": "voice-id",
+    "name": "VoiceID"
+  },
+  "wisdom": {
+    "name": "Wisdom"
   }
 }

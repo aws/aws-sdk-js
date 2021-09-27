@@ -1,6 +1,14 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.995.0-->
+<!--LATEST=2.996.0-->
 <!--ENTRYINSERT-->
+
+## 2.996.0
+* feature: AppIntegrations: The Amazon AppIntegrations service enables you to configure and reuse connections to external applications.
+* feature: Connect: This release updates a set of APIs: CreateIntegrationAssociation, ListIntegrationAssociations, CreateUseCase, and StartOutboundVoiceContact. You can use it to create integrations with Amazon Pinpoint for the Amazon Connect Campaigns use case, Amazon Connect Voice ID, and Amazon Connect Wisdom.
+* feature: ELBv2: Adds new ALB-type target group to facilitate forwarding traffic from NLB to ALB
+* feature: Pinpoint: Added support for journey with contact center activity
+* feature: VoiceID: Released the Amazon Voice ID SDK, for usage with the Amazon Connect Voice ID feature released for Amazon Connect.
+* feature: Wisdom: Released Amazon Connect Wisdom, a feature of Amazon Connect, which provides real-time recommendations and search functionality in general availability (GA).  For more information, see https://docs.aws.amazon.com/wisdom/latest/APIReference/Welcome.html.
 
 ## 2.995.0
 * feature: EC2: DescribeInstances now returns Platform Details, Usage Operation, and Usage Operation Update Time.

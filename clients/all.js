@@ -279,5 +279,7 @@ module.exports = {
   SnowDeviceManagement: require('./snowdevicemanagement'),
   MemoryDB: require('./memorydb'),
   OpenSearch: require('./opensearch'),
-  KafkaConnect: require('./kafkaconnect')
+  KafkaConnect: require('./kafkaconnect'),
+  VoiceID: require('./voiceid'),
+  Wisdom: require('./wisdom')
 };

@@ -278,3 +278,5 @@ export import SnowDeviceManagement = require('./snowdevicemanagement');
 export import MemoryDB = require('./memorydb');
 export import OpenSearch = require('./opensearch');
 export import KafkaConnect = require('./kafkaconnect');
+export import VoiceID = require('./voiceid');
+export import Wisdom = require('./wisdom');

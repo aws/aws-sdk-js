@@ -453,7 +453,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Create an AppIntegration association with an Amazon Connect instance.</p>"
+      "documentation": "<p>Creates an AWS resource association with an Amazon Connect instance.</p>"
     },
     "CreateQueue": {
       "name": "CreateQueue",
@@ -595,7 +595,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Creates a use case for an AppIntegration association.</p>"
+      "documentation": "<p>Creates a use case for an integration association.</p>"
     },
     "CreateUser": {
       "name": "CreateUser",
@@ -744,7 +744,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Deletes an AppIntegration association from an Amazon Connect instance. The association must not have any use cases associated with it.</p>"
+      "documentation": "<p>Deletes an AWS resource association from an Amazon Connect instance. The association must not have any use cases associated with it.</p>"
     },
     "DeleteQuickConnect": {
       "name": "DeleteQuickConnect",
@@ -797,7 +797,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Deletes a use case from an AppIntegration association.</p>"
+      "documentation": "<p>Deletes a use case from an integration association.</p>"
     },
     "DeleteUser": {
       "name": "DeleteUser",
@@ -1831,7 +1831,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Provides summary information about the AppIntegration associations for the specified Amazon Connect instance.</p>"
+      "documentation": "<p>Provides summary information about the AWS resource associations for the specified Amazon Connect instance.</p>"
     },
     "ListLambdaFunctions": {
       "name": "ListLambdaFunctions",
@@ -2231,7 +2231,7 @@
           "shape": "ThrottlingException"
         }
       ],
-      "documentation": "<p>Lists the use cases. </p>"
+      "documentation": "<p>Lists the use cases for the integration association. </p>"
     },
     "ListUserHierarchyGroups": {
       "name": "ListUserHierarchyGroups",
@@ -2414,7 +2414,7 @@
           "shape": "OutboundContactNotPermittedException"
         }
       ],
-      "documentation": "<p>Places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in <code>ContactFlowId</code>).</p> <p>Agents do not initiate the outbound API, which means that they do not dial the contact. If the contact flow places an outbound call to a contact, and then puts the contact in queue, the call is then routed to the agent, like any other inbound case.</p> <p>There is a 60-second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.</p> <note> <p>UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>. </p> </note>"
+      "documentation": "<p>Places an outbound call to a contact, and then initiates the contact flow. It performs the actions in the contact flow that's specified (in <code>ContactFlowId</code>).</p> <p>Agents do not initiate the outbound API, which means that they do not dial the contact. If the contact flow places an outbound call to a contact, and then puts the contact in queue, the call is then routed to the agent, like any other inbound case.</p> <p>There is a 60-second dialing timeout for this operation. If the call is not connected after 60 seconds, it fails.</p> <note> <p>UK numbers with a 447 prefix are not allowed by default. Before you can dial these UK mobile numbers, you must submit a service quota increase request. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>. </p> </note> <note> <p>Campaign calls are not allowed by default. Before you can make a call with <code>TrafficType</code> = <code>CAMPAIGN</code>, you must submit a service quota increase request. For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html\">Amazon Connect Service Quotas</a> in the <i>Amazon Connect Administrator Guide</i>. </p> </note>"
     },
     "StartTaskContact": {
       "name": "StartTaskContact",
@@ -3449,6 +3449,20 @@
       "max": 100,
       "min": 1
     },
+    "AnswerMachineDetectionConfig": {
+      "type": "structure",
+      "members": {
+        "EnableAnswerMachineDetection": {
+          "shape": "Boolean",
+          "documentation": "<p>The flag to indicate if answer machine detection analysis needs to be performed for a voice call. If set to <code>true</code>, <code>TrafficType</code> must be set as <code>CAMPAIGN</code>. </p>"
+        },
+        "AwaitAnswerMachinePrompt": {
+          "shape": "Boolean",
+          "documentation": "<p>Wait for the answering machine prompt.</p>"
+        }
+      },
+      "documentation": "<p>Configuration of the answering machine detection.</p>"
+    },
     "AssociateApprovedOriginRequest": {
       "type": "structure",
       "required": [
@@ -3697,6 +3711,11 @@
     "BucketName": {
       "type": "string",
       "max": 128,
+      "min": 1
+    },
+    "CampaignId": {
+      "type": "string",
+      "max": 100,
       "min": 1
     },
     "Channel": {
@@ -4075,10 +4094,7 @@
       "required": [
         "InstanceId",
         "IntegrationType",
-        "IntegrationArn",
-        "SourceApplicationUrl",
-        "SourceApplicationName",
-        "SourceType"
+        "IntegrationArn"
       ],
       "members": {
         "InstanceId": {
@@ -4097,15 +4113,15 @@
         },
         "SourceApplicationUrl": {
           "shape": "URI",
-          "documentation": "<p>The URL for the external application.</p>"
+          "documentation": "<p>The URL for the external application. This field is only required for the EVENT integration type.</p>"
         },
         "SourceApplicationName": {
           "shape": "SourceApplicationName",
-          "documentation": "<p>The name of the external application.</p>"
+          "documentation": "<p>The name of the external application. This field is only required for the EVENT integration type.</p>"
         },
         "SourceType": {
           "shape": "SourceType",
-          "documentation": "<p>The type of the data source.</p>"
+          "documentation": "<p>The type of the data source. This field is only required for the EVENT integration type.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -4118,7 +4134,7 @@
       "members": {
         "IntegrationAssociationId": {
           "shape": "IntegrationAssociationId",
-          "documentation": "<p>The identifier for the association.</p>"
+          "documentation": "<p>The identifier for the integration association.</p>"
         },
         "IntegrationAssociationArn": {
           "shape": "ARN",
@@ -4300,13 +4316,13 @@
         },
         "IntegrationAssociationId": {
           "shape": "IntegrationAssociationId",
-          "documentation": "<p>The identifier for the AppIntegration association.</p>",
+          "documentation": "<p>The identifier for the integration association.</p>",
           "location": "uri",
           "locationName": "IntegrationAssociationId"
         },
         "UseCaseType": {
           "shape": "UseCaseType",
-          "documentation": "<p>The type of use case to associate to the AppIntegration association. Each AppIntegration association can have only one of each use case type.</p>"
+          "documentation": "<p>The type of use case to associate to the integration association. Each integration association can have only one of each use case type.</p>"
         },
         "Tags": {
           "shape": "TagMap",
@@ -4587,7 +4603,7 @@
         },
         "IntegrationAssociationId": {
           "shape": "IntegrationAssociationId",
-          "documentation": "<p>The identifier for the AppIntegration association.</p>",
+          "documentation": "<p>The identifier for the integration association.</p>",
           "location": "uri",
           "locationName": "IntegrationAssociationId"
         }
@@ -4630,7 +4646,7 @@
         },
         "IntegrationAssociationId": {
           "shape": "IntegrationAssociationId",
-          "documentation": "<p>The identifier for the AppIntegration association.</p>",
+          "documentation": "<p>The identifier for the integration association.</p>",
           "location": "uri",
           "locationName": "IntegrationAssociationId"
         },
@@ -5293,7 +5309,7 @@
         },
         "KeyId": {
           "shape": "KeyId",
-          "documentation": "<p>The identifier of the encryption key.</p>"
+          "documentation": "<p>The full ARN of the encryption key. </p> <note> <p>Be sure to provide the full ARN of the encryption key, not just the ID.</p> </note>"
         }
       },
       "documentation": "<p>The encryption configuration.</p>"
@@ -5383,7 +5399,7 @@
         },
         "CurrentMetrics": {
           "shape": "CurrentMetrics",
-          "documentation": "<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics are available. For a description of all the metrics, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html\">Real-time Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <dl> <dt>AGENTS_AFTER_CONTACT_WORK</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time\">ACW</a> </p> </dd> <dt>AGENTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time\">Available</a> </p> </dd> <dt>AGENTS_ERROR</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time\">Error</a> </p> </dd> <dt>AGENTS_NON_PRODUCTIVE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time\">NPT (Non-Productive Time)</a> </p> </dd> <dt>AGENTS_ON_CALL</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On contact</a> </p> </dd> <dt>AGENTS_ON_CONTACT</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On contact</a> </p> </dd> <dt>AGENTS_ONLINE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time\">Online</a> </p> </dd> <dt>AGENTS_STAFFED</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time\">Staffed</a> </p> </dd> <dt>CONTACTS_IN_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time\">In queue</a> </p> </dd> <dt>CONTACTS_SCHEDULED</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time\">Scheduled</a> </p> </dd> <dt>OLDEST_CONTACT_AGE</dt> <dd> <p>Unit: SECONDS</p> <p>When you use groupings, Unit says SECONDS but the Value is returned in MILLISECONDS. For example, if you get a response like this:</p> <p> <code>{ \"Metric\": { \"Name\": \"OLDEST_CONTACT_AGE\", \"Unit\": \"SECONDS\" }, \"Value\": 24113.0 </code>}</p> <p>The actual OLDEST_CONTACT_AGE is 24 seconds.</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time\">Oldest</a> </p> </dd> <dt>SLOTS_ACTIVE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time\">Active</a> </p> </dd> <dt>SLOTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time\">Availability</a> </p> </dd> </dl>"
+          "documentation": "<p>The metrics to retrieve. Specify the name and unit for each metric. The following metrics are available. For a description of all the metrics, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html\">Real-time Metrics Definitions</a> in the <i>Amazon Connect Administrator Guide</i>.</p> <dl> <dt>AGENTS_AFTER_CONTACT_WORK</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#aftercallwork-real-time\">ACW</a> </p> </dd> <dt>AGENTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#available-real-time\">Available</a> </p> </dd> <dt>AGENTS_ERROR</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#error-real-time\">Error</a> </p> </dd> <dt>AGENTS_NON_PRODUCTIVE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#non-productive-time-real-time\">NPT (Non-Productive Time)</a> </p> </dd> <dt>AGENTS_ON_CALL</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On contact</a> </p> </dd> <dt>AGENTS_ON_CONTACT</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#on-call-real-time\">On contact</a> </p> </dd> <dt>AGENTS_ONLINE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#online-real-time\">Online</a> </p> </dd> <dt>AGENTS_STAFFED</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#staffed-real-time\">Staffed</a> </p> </dd> <dt>CONTACTS_IN_QUEUE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#in-queue-real-time\">In queue</a> </p> </dd> <dt>CONTACTS_SCHEDULED</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#scheduled-real-time\">Scheduled</a> </p> </dd> <dt>OLDEST_CONTACT_AGE</dt> <dd> <p>Unit: SECONDS</p> <p>When you use groupings, Unit says SECONDS and the Value is returned in SECONDS. </p> <p>When you do not use groupings, Unit says SECONDS but the Value is returned in MILLISECONDS. For example, if you get a response like this:</p> <p> <code>{ \"Metric\": { \"Name\": \"OLDEST_CONTACT_AGE\", \"Unit\": \"SECONDS\" }, \"Value\": 24113.0 </code>}</p> <p>The actual OLDEST_CONTACT_AGE is 24 seconds.</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#oldest-real-time\">Oldest</a> </p> </dd> <dt>SLOTS_ACTIVE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#active-real-time\">Active</a> </p> </dd> <dt>SLOTS_AVAILABLE</dt> <dd> <p>Unit: COUNT</p> <p>Name in real-time metrics report: <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/real-time-metrics-definitions.html#availability-real-time\">Availability</a> </p> </dd> </dl>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -6163,7 +6179,11 @@
     "IntegrationType": {
       "type": "string",
       "enum": [
-        "EVENT"
+        "EVENT",
+        "VOICE_ID",
+        "PINPOINT_APP",
+        "WISDOM_ASSISTANT",
+        "WISDOM_KNOWLEDGE_BASE"
       ]
     },
     "KeyId": {
@@ -6627,6 +6647,12 @@
           "location": "uri",
           "locationName": "InstanceId"
         },
+        "IntegrationType": {
+          "shape": "IntegrationType",
+          "documentation": "<p/>",
+          "location": "querystring",
+          "locationName": "integrationType"
+        },
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token for the next set of results. Use the value returned in the previous response in the next request to retrieve the next set of results.</p>",
@@ -6647,7 +6673,7 @@
       "members": {
         "IntegrationAssociationSummaryList": {
           "shape": "IntegrationAssociationSummaryList",
-          "documentation": "<p>The AppIntegration associations.</p>"
+          "documentation": "<p>The associations.</p>"
         },
         "NextToken": {
           "shape": "NextToken",
@@ -7187,7 +7213,7 @@
           "locationName": "maxResults"
         }
       },
-      "documentation": "<p>Provides summary information about the use cases for the specified Amazon Connect AppIntegration association.</p>"
+      "documentation": "<p>Provides summary information about the use cases for the specified integration association.</p>"
     },
     "ListUseCasesResponse": {
       "type": "structure",
@@ -8506,6 +8532,18 @@
         "Attributes": {
           "shape": "Attributes",
           "documentation": "<p>A custom key-value pair using an attribute map. The attributes are standard Amazon Connect attributes, and can be accessed in contact flows just like any other contact attributes.</p> <p>There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact. Attribute keys can include only alphanumeric, dash, and underscore characters.</p>"
+        },
+        "AnswerMachineDetectionConfig": {
+          "shape": "AnswerMachineDetectionConfig",
+          "documentation": "<p>Configuration of the answering machine detection for this outbound call. </p>"
+        },
+        "CampaignId": {
+          "shape": "CampaignId",
+          "documentation": "<p>The campaign identifier of the outbound communication.</p>"
+        },
+        "TrafficType": {
+          "shape": "TrafficType",
+          "documentation": "<p>Denotes the class of traffic. Calls with different traffic types are handled differently by Amazon Connect. The default value is <code>GENERAL</code>. Use <code>CAMPAIGN</code> if <code>EnableAnswerMachineDetection</code> is set to <code>true</code>. For all other cases, use <code>GENERAL</code>. </p>"
         }
       }
     },
@@ -8735,6 +8773,13 @@
     "Timestamp": {
       "type": "timestamp"
     },
+    "TrafficType": {
+      "type": "string",
+      "enum": [
+        "GENERAL",
+        "CAMPAIGN"
+      ]
+    },
     "URI": {
       "type": "string",
       "max": 2000,
@@ -8955,7 +9000,7 @@
         },
         "AttributeType": {
           "shape": "InstanceAttributeType",
-          "documentation": "<p>The type of attribute.</p>",
+          "documentation": "<p>The type of attribute.</p> <note> <p>Only allowlisted customers can consume USE_CUSTOM_TTS_VOICES. To access this feature, contact AWS Support for allowlisting.</p> </note>",
           "location": "uri",
           "locationName": "AttributeType"
         },
@@ -9484,7 +9529,7 @@
         },
         "UseCaseType": {
           "shape": "UseCaseType",
-          "documentation": "<p>The type of use case to associate to the AppIntegration association. Each AppIntegration association can have only one of each use case type.</p>"
+          "documentation": "<p>The type of use case to associate to the integration association. Each integration association can have only one of each use case type.</p>"
         }
       },
       "documentation": "<p>Contains the use case.</p>"
@@ -9503,7 +9548,8 @@
     "UseCaseType": {
       "type": "string",
       "enum": [
-        "RULES_EVALUATION"
+        "RULES_EVALUATION",
+        "CONNECT_CAMPAIGNS"
       ]
     },
     "User": {
