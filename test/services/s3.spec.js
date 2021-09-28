@@ -2973,13 +2973,25 @@ describe('AWS.S3', function() {
     });
 
     it('supports outposts ARN', function(done) {
+      s3 = new AWS.S3({ region: 'us-west-2', signatureVersion: 'v4' });
+      helpers.spyOn(AWS.S3.prototype, 'getSkewCorrectedDate').andReturn(new Date('2021-08-27T00:00:00'));
       s3.getSignedUrl('getObject', {
-        Bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost/op-01234567890123456/accesspoint/myendpoint',
-        Key: 'key'
-      }, function(err, data) {
-        expect(data).to.equal(
-          'https://myendpoint-123456789012.op-01234567890123456.s3-outposts.us-west-2.amazonaws.com/key?AWSAccessKeyId=akid&Expires=900&Signature=R9HjMWdhk69e7%2BwlOpFH1TUkxRY%3D&x-amz-security-token=session'
-        );
+        Bucket: 'arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myendpoint',
+        Key: 'obj'
+      }, function(_, data) {
+        expect(data).to.contain('20210827%2Fus-west-2%2Fs3-outposts%2Faws4_request');
+        done();
+      });
+    });
+
+    it('supports outposts ARN from resolved region', function(done) {
+      s3 = new AWS.S3({ region: 'us-west-2', signatureVersion: 'v4' });
+      helpers.spyOn(AWS.S3.prototype, 'getSkewCorrectedDate').andReturn(new Date('2021-08-27T00:00:00'));
+      s3.getSignedUrl('getObject', {
+        Bucket: 'arn:aws:s3-outposts:us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myendpoint',
+        Key: 'obj'
+      }, function(_, data) {
+        expect(data).to.contain('20210827%2Fus-east-1%2Fs3-outposts%2Faws4_request');
         done();
       });
     });
