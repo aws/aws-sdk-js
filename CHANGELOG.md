@@ -1,6 +1,11 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.996.0-->
+<!--LATEST=2.997.0-->
 <!--ENTRYINSERT-->
+
+## 2.997.0
+* feature: Amp: This release adds alert manager and rule group namespace APIs
+* feature: Lambda: Adds support for Lambda functions powered by AWS Graviton2 processors. Customers can now select the CPU architecture for their functions.
+* feature: SESV2: This release includes the ability to use 2048 bits RSA key pairs for DKIM in SES, either with Easy DKIM or Bring Your Own DKIM.
 
 ## 2.996.0
 * feature: AppIntegrations: The Amazon AppIntegrations service enables you to configure and reuse connections to external applications.
