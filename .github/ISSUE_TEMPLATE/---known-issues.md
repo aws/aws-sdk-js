@@ -20,4 +20,4 @@ assignees: ''
 
 If you still like to open an issue, change [ ] to [x] below:
 - [ ] I've confirmed that I'm using latest version of SDK, and issue is still reproducible
-- [ ] This is an issue with V2 of the SDK
+- [ ] This is an issue with version 2.x of the SDK
