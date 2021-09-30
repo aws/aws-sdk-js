@@ -773,9 +773,17 @@ declare namespace NetworkFirewall {
      */
     StatelessCustomActions?: CustomActions;
     /**
-     * References to the stateless rule groups that are used in the policy. These define the inspection criteria in stateful rules. 
+     * References to the stateful rule groups that are used in the policy. These define the inspection criteria in stateful rules. 
      */
     StatefulRuleGroupReferences?: StatefulRuleGroupReferences;
+    /**
+     * The default actions to take on a packet that doesn't match any stateful rules.
+     */
+    StatefulDefaultActions?: StatefulActions;
+    /**
+     * Additional options governing how Network Firewall handles stateful rules. The stateful rule groups that you use in your policy must have stateful rule options settings that are compatible with these settings.
+     */
+    StatefulEngineOptions?: StatefulEngineOptions;
   }
   export interface FirewallPolicyMetadata {
     /**
@@ -812,6 +820,18 @@ declare namespace NetworkFirewall {
      * The key:value pairs to associate with the resource.
      */
     Tags?: TagList;
+    /**
+     * The number of capacity units currently consumed by the policy's stateless rules.
+     */
+    ConsumedStatelessRuleCapacity?: RuleCapacity;
+    /**
+     * The number of capacity units currently consumed by the policy's stateful rules.
+     */
+    ConsumedStatefulRuleCapacity?: RuleCapacity;
+    /**
+     * The number of firewalls that are associated with this firewall policy.
+     */
+    NumberOfAssociations?: NumberOfAssociations;
   }
   export interface FirewallStatus {
     /**
@@ -843,7 +863,7 @@ declare namespace NetworkFirewall {
      */
     Source: Source;
     /**
-     * The source port to inspect for. You can specify an individual port, for example 1994 and you can specify a port range, for example 1990-1994. To match with any port, specify ANY. 
+     * The source port to inspect for. You can specify an individual port, for example 1994 and you can specify a port range, for example 1990:1994. To match with any port, specify ANY. 
      */
     SourcePort: Port;
     /**
@@ -855,7 +875,7 @@ declare namespace NetworkFirewall {
      */
     Destination: Destination;
     /**
-     * The destination port to inspect for. You can specify an individual port, for example 1994 and you can specify a port range, for example 1990-1994. To match with any port, specify ANY. 
+     * The destination port to inspect for. You can specify an individual port, for example 1994 and you can specify a port range, for example 1990:1994. To match with any port, specify ANY. 
      */
     DestinationPort: Port;
   }
@@ -989,11 +1009,11 @@ declare namespace NetworkFirewall {
      */
     Destinations?: Addresses;
     /**
-     * The source ports to inspect for. If not specified, this matches with any source port. This setting is only used for protocols 6 (TCP) and 17 (UDP).  You can specify individual ports, for example 1994 and you can specify port ranges, for example 1990-1994. 
+     * The source ports to inspect for. If not specified, this matches with any source port. This setting is only used for protocols 6 (TCP) and 17 (UDP).  You can specify individual ports, for example 1994 and you can specify port ranges, for example 1990:1994. 
      */
     SourcePorts?: PortRanges;
     /**
-     * The destination ports to inspect for. If not specified, this matches with any destination port. This setting is only used for protocols 6 (TCP) and 17 (UDP).  You can specify individual ports, for example 1994 and you can specify port ranges, for example 1990-1994. 
+     * The destination ports to inspect for. If not specified, this matches with any destination port. This setting is only used for protocols 6 (TCP) and 17 (UDP).  You can specify individual ports, for example 1994 and you can specify port ranges, for example 1990:1994. 
      */
     DestinationPorts?: PortRanges;
     /**
@@ -1005,6 +1025,7 @@ declare namespace NetworkFirewall {
      */
     TCPFlags?: TCPFlags;
   }
+  export type NumberOfAssociations = number;
   export type PaginationMaxResults = number;
   export type PaginationToken = string;
   export interface PerObjectStatus {
@@ -1084,6 +1105,10 @@ declare namespace NetworkFirewall {
      * The stateful rules or stateless rules for the rule group. 
      */
     RulesSource: RulesSource;
+    /**
+     * Additional options governing how Network Firewall handles stateful rules. The policies where you use your stateful rule group must have stateful rule options settings that are compatible with these settings.
+     */
+    StatefulRuleOptions?: StatefulRuleOptions;
   }
   export interface RuleGroupMetadata {
     /**
@@ -1128,6 +1153,14 @@ declare namespace NetworkFirewall {
      * The key:value pairs to associate with the resource.
      */
     Tags?: TagList;
+    /**
+     * The number of capacity units currently consumed by the rule group rules. 
+     */
+    ConsumedCapacity?: RuleCapacity;
+    /**
+     * The number of firewall policies that use this rule group.
+     */
+    NumberOfAssociations?: NumberOfAssociations;
   }
   export type RuleGroupType = "STATELESS"|"STATEFUL"|string;
   export type RuleGroups = RuleGroupMetadata[];
@@ -1142,6 +1175,7 @@ declare namespace NetworkFirewall {
     Settings?: Settings;
   }
   export type RuleOptions = RuleOption[];
+  export type RuleOrder = "DEFAULT_ACTION_ORDER"|"STRICT_ORDER"|string;
   export type RuleTargets = CollectionMember_String[];
   export type RuleVariableName = string;
   export interface RuleVariables {
@@ -1164,7 +1198,7 @@ declare namespace NetworkFirewall {
      */
     RulesSourceList?: RulesSourceList;
     /**
-     * The 5-tuple stateful inspection criteria. This contains an array of individual 5-tuple stateful rules to be used together in a stateful rule group. 
+     * An array of individual stateful rules inspection criteria to be used together in a stateful rule group. Use this option to specify simple Suricata rules with protocol, source and destination, ports, direction, and rule options. For information about the Suricata Rules format, see Rules Format. 
      */
     StatefulRules?: StatefulRules;
     /**
@@ -1178,7 +1212,7 @@ declare namespace NetworkFirewall {
      */
     Targets: RuleTargets;
     /**
-     * The protocols you want to inspect. Specify TLS_SNI for HTTPS. Specity HTTP_HOST for HTTP. You can specify either or both. 
+     * The protocols you want to inspect. Specify TLS_SNI for HTTPS. Specify HTTP_HOST for HTTP. You can specify either or both. 
      */
     TargetTypes: TargetTypes;
     /**
@@ -1191,17 +1225,24 @@ declare namespace NetworkFirewall {
   export type Settings = Setting[];
   export type Source = string;
   export type StatefulAction = "PASS"|"DROP"|"ALERT"|string;
+  export type StatefulActions = CollectionMember_String[];
+  export interface StatefulEngineOptions {
+    /**
+     * Indicates how to manage the order of stateful rule evaluation for the policy. By default, Network Firewall leaves the rule evaluation order up to the Suricata rule processing engine. If you set this to STRICT_ORDER, your rules are evaluated in the exact order that you provide them in the policy. With strict ordering, the rule groups are evaluated by order of priority, starting from the lowest number, and the rules in each rule group are processed in the order that they're defined. 
+     */
+    RuleOrder?: RuleOrder;
+  }
   export interface StatefulRule {
     /**
      * Defines what Network Firewall should do with the packets in a traffic flow when the flow matches the stateful rule criteria. For all actions, Network Firewall performs the specified action and discontinues stateful inspection of the traffic flow.  The actions for a stateful rule are defined as follows:     PASS - Permits the packets to go to the intended destination.    DROP - Blocks the packets from going to the intended destination and sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.     ALERT - Permits the packets to go to the intended destination and sends an alert log message, if alert logging is configured in the Firewall LoggingConfiguration.  You can use this action to test a rule that you intend to use to drop traffic. You can enable the rule with ALERT action, verify in the logs that the rule is filtering as you want, then change the action to DROP.  
      */
     Action: StatefulAction;
     /**
-     * The stateful 5-tuple inspection criteria for this rule, used to inspect traffic flows. 
+     * The stateful inspection criteria for this rule, used to inspect traffic flows. 
      */
     Header: Header;
     /**
-     * 
+     * Additional options for the rule. These are the Suricata RuleOptions settings.
      */
     RuleOptions: RuleOptions;
   }
@@ -1211,8 +1252,18 @@ declare namespace NetworkFirewall {
      * The Amazon Resource Name (ARN) of the stateful rule group.
      */
     ResourceArn: ResourceArn;
+    /**
+     * An integer setting that indicates the order in which to run the stateful rule groups in a single FirewallPolicy. This setting only applies to firewall policies that specify the STRICT_ORDER rule order in the stateful engine options settings. Network Firewall evalutes each stateful rule group against a packet starting with the group that has the lowest priority setting. You must ensure that the priority settings are unique within each policy. You can change the priority settings of your rule groups at any time. To make it easier to insert rule groups later, number them so there's a wide range in between, for example use 100, 200, and so on. 
+     */
+    Priority?: Priority;
   }
   export type StatefulRuleGroupReferences = StatefulRuleGroupReference[];
+  export interface StatefulRuleOptions {
+    /**
+     * Indicates how to manage the order of the rule evaluation for the rule group. By default, Network Firewall leaves the rule evaluation order up to the Suricata rule processing engine. If you set this to STRICT_ORDER, your rules are evaluated in the exact order that they're listed in your Suricata rules string. 
+     */
+    RuleOrder?: RuleOrder;
+  }
   export type StatefulRuleProtocol = "IP"|"TCP"|"UDP"|"ICMP"|"HTTP"|"FTP"|"TLS"|"SMB"|"DNS"|"DCERPC"|"SSH"|"SMTP"|"IMAP"|"MSN"|"KRB5"|"IKEV2"|"TFTP"|"NTP"|"DHCP"|string;
   export type StatefulRules = StatefulRule[];
   export type StatelessActions = CollectionMember_String[];
@@ -1222,7 +1273,7 @@ declare namespace NetworkFirewall {
      */
     RuleDefinition: RuleDefinition;
     /**
-     * A setting that indicates the order in which to run this rule relative to all of the rules that are defined for a stateless rule group. Network Firewall evaluates the rules in a rule group starting with the lowest priority setting. You must ensure that the priority settings are unique for the rule group.  Each stateless rule group uses exactly one StatelessRulesAndCustomActions object, and each StatelessRulesAndCustomActions contains exactly one StatelessRules object. To ensure unique priority settings for your rule groups, set unique priorities for the stateless rules that you define inside any single StatelessRules object. You can change the priority settings of your rules at any time. To make it easier to insert rules later, number them so there's a wide range in between, for example use 100, 200, and so on. 
+     * Indicates the order in which to run this rule relative to all of the rules that are defined for a stateless rule group. Network Firewall evaluates the rules in a rule group starting with the lowest priority setting. You must ensure that the priority settings are unique for the rule group.  Each stateless rule group uses exactly one StatelessRulesAndCustomActions object, and each StatelessRulesAndCustomActions contains exactly one StatelessRules object. To ensure unique priority settings for your rule groups, set unique priorities for the stateless rules that you define inside any single StatelessRules object. You can change the priority settings of your rules at any time. To make it easier to insert rules later, number them so there's a wide range in between, for example use 100, 200, and so on. 
      */
     Priority: Priority;
   }

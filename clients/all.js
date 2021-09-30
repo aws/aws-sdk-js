@@ -281,5 +281,7 @@ module.exports = {
   OpenSearch: require('./opensearch'),
   KafkaConnect: require('./kafkaconnect'),
   VoiceID: require('./voiceid'),
-  Wisdom: require('./wisdom')
+  Wisdom: require('./wisdom'),
+  Account: require('./account'),
+  CloudControl: require('./cloudcontrol')
 };

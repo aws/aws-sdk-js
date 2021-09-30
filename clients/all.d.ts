@@ -280,3 +280,5 @@ export import OpenSearch = require('./opensearch');
 export import KafkaConnect = require('./kafkaconnect');
 export import VoiceID = require('./voiceid');
 export import Wisdom = require('./wisdom');
+export import Account = require('./account');
+export import CloudControl = require('./cloudcontrol');

@@ -282,6 +282,8 @@ export abstract class ConfigurationServicePlaceholders {
   kafkaconnect?: AWS.KafkaConnect.Types.ClientConfiguration;
   voiceid?: AWS.VoiceID.Types.ClientConfiguration;
   wisdom?: AWS.Wisdom.Types.ClientConfiguration;
+  account?: AWS.Account.Types.ClientConfiguration;
+  cloudcontrol?: AWS.CloudControl.Types.ClientConfiguration;
 }
 export interface ConfigurationServiceApiVersions {
   acm?: AWS.ACM.Types.apiVersion;
@@ -566,4 +568,6 @@ export interface ConfigurationServiceApiVersions {
   kafkaconnect?: AWS.KafkaConnect.Types.apiVersion;
   voiceid?: AWS.VoiceID.Types.apiVersion;
   wisdom?: AWS.Wisdom.Types.apiVersion;
+  account?: AWS.Account.Types.apiVersion;
+  cloudcontrol?: AWS.CloudControl.Types.apiVersion;
 }

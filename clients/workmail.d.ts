@@ -116,6 +116,14 @@ declare class WorkMail extends Service {
    */
   deleteMailboxPermissions(callback?: (err: AWSError, data: WorkMail.Types.DeleteMailboxPermissionsResponse) => void): Request<WorkMail.Types.DeleteMailboxPermissionsResponse, AWSError>;
   /**
+   * Deletes the mobile device access override for the given WorkMail organization, user, and device.
+   */
+  deleteMobileDeviceAccessOverride(params: WorkMail.Types.DeleteMobileDeviceAccessOverrideRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteMobileDeviceAccessOverrideResponse) => void): Request<WorkMail.Types.DeleteMobileDeviceAccessOverrideResponse, AWSError>;
+  /**
+   * Deletes the mobile device access override for the given WorkMail organization, user, and device.
+   */
+  deleteMobileDeviceAccessOverride(callback?: (err: AWSError, data: WorkMail.Types.DeleteMobileDeviceAccessOverrideResponse) => void): Request<WorkMail.Types.DeleteMobileDeviceAccessOverrideResponse, AWSError>;
+  /**
    * Deletes a mobile device access rule for the specified Amazon WorkMail organization.
    */
   deleteMobileDeviceAccessRule(params: WorkMail.Types.DeleteMobileDeviceAccessRuleRequest, callback?: (err: AWSError, data: WorkMail.Types.DeleteMobileDeviceAccessRuleResponse) => void): Request<WorkMail.Types.DeleteMobileDeviceAccessRuleResponse, AWSError>;
@@ -252,6 +260,14 @@ declare class WorkMail extends Service {
    */
   getMobileDeviceAccessEffect(callback?: (err: AWSError, data: WorkMail.Types.GetMobileDeviceAccessEffectResponse) => void): Request<WorkMail.Types.GetMobileDeviceAccessEffectResponse, AWSError>;
   /**
+   * Gets the mobile device access override for the given WorkMail organization, user, and device.
+   */
+  getMobileDeviceAccessOverride(params: WorkMail.Types.GetMobileDeviceAccessOverrideRequest, callback?: (err: AWSError, data: WorkMail.Types.GetMobileDeviceAccessOverrideResponse) => void): Request<WorkMail.Types.GetMobileDeviceAccessOverrideResponse, AWSError>;
+  /**
+   * Gets the mobile device access override for the given WorkMail organization, user, and device.
+   */
+  getMobileDeviceAccessOverride(callback?: (err: AWSError, data: WorkMail.Types.GetMobileDeviceAccessOverrideResponse) => void): Request<WorkMail.Types.GetMobileDeviceAccessOverrideResponse, AWSError>;
+  /**
    * Lists the access control rules for the specified organization.
    */
   listAccessControlRules(params: WorkMail.Types.ListAccessControlRulesRequest, callback?: (err: AWSError, data: WorkMail.Types.ListAccessControlRulesResponse) => void): Request<WorkMail.Types.ListAccessControlRulesResponse, AWSError>;
@@ -299,6 +315,14 @@ declare class WorkMail extends Service {
    * Lists the mailbox permissions associated with a user, group, or resource mailbox.
    */
   listMailboxPermissions(callback?: (err: AWSError, data: WorkMail.Types.ListMailboxPermissionsResponse) => void): Request<WorkMail.Types.ListMailboxPermissionsResponse, AWSError>;
+  /**
+   * Lists all the mobile device access overrides for any given combination of WorkMail organization, user, or device.
+   */
+  listMobileDeviceAccessOverrides(params: WorkMail.Types.ListMobileDeviceAccessOverridesRequest, callback?: (err: AWSError, data: WorkMail.Types.ListMobileDeviceAccessOverridesResponse) => void): Request<WorkMail.Types.ListMobileDeviceAccessOverridesResponse, AWSError>;
+  /**
+   * Lists all the mobile device access overrides for any given combination of WorkMail organization, user, or device.
+   */
+  listMobileDeviceAccessOverrides(callback?: (err: AWSError, data: WorkMail.Types.ListMobileDeviceAccessOverridesResponse) => void): Request<WorkMail.Types.ListMobileDeviceAccessOverridesResponse, AWSError>;
   /**
    * Lists the mobile device access rules for the specified Amazon WorkMail organization.
    */
@@ -363,6 +387,14 @@ declare class WorkMail extends Service {
    * Sets permissions for a user, group, or resource. This replaces any pre-existing permissions.
    */
   putMailboxPermissions(callback?: (err: AWSError, data: WorkMail.Types.PutMailboxPermissionsResponse) => void): Request<WorkMail.Types.PutMailboxPermissionsResponse, AWSError>;
+  /**
+   * Creates or updates a mobile device access override for the given WorkMail organization, user, and device.
+   */
+  putMobileDeviceAccessOverride(params: WorkMail.Types.PutMobileDeviceAccessOverrideRequest, callback?: (err: AWSError, data: WorkMail.Types.PutMobileDeviceAccessOverrideResponse) => void): Request<WorkMail.Types.PutMobileDeviceAccessOverrideResponse, AWSError>;
+  /**
+   * Creates or updates a mobile device access override for the given WorkMail organization, user, and device.
+   */
+  putMobileDeviceAccessOverride(callback?: (err: AWSError, data: WorkMail.Types.PutMobileDeviceAccessOverrideResponse) => void): Request<WorkMail.Types.PutMobileDeviceAccessOverrideResponse, AWSError>;
   /**
    * Puts a retention policy to the specified organization.
    */
@@ -797,6 +829,22 @@ declare namespace WorkMail {
   }
   export interface DeleteMailboxPermissionsResponse {
   }
+  export interface DeleteMobileDeviceAccessOverrideRequest {
+    /**
+     * The Amazon WorkMail organization for which the access override will be deleted.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The WorkMail user for which you want to delete the override. Accepts the following types of user identities:   User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234    Email address: user@domain.tld    User name: user   
+     */
+    UserId: EntityIdentifier;
+    /**
+     * The mobile device for which you delete the override. DeviceId is case insensitive.
+     */
+    DeviceId: DeviceId;
+  }
+  export interface DeleteMobileDeviceAccessOverrideResponse {
+  }
   export interface DeleteMobileDeviceAccessRuleRequest {
     /**
      * The Amazon WorkMail organization under which the rule will be deleted.
@@ -1110,6 +1158,7 @@ declare namespace WorkMail {
     DisabledDate?: Timestamp;
   }
   export type Description = string;
+  export type DeviceId = string;
   export type DeviceModel = string;
   export type DeviceModelList = DeviceModel[];
   export type DeviceOperatingSystem = string;
@@ -1164,6 +1213,7 @@ declare namespace WorkMail {
   export type DomainName = string;
   export type Domains = Domain[];
   export type EmailAddress = string;
+  export type EntityIdentifier = string;
   export type EntityState = "ENABLED"|"DISABLED"|"DELETED"|string;
   export interface FolderConfiguration {
     /**
@@ -1284,6 +1334,46 @@ declare namespace WorkMail {
      * A list of the rules which matched the simulated user input and produced the effect.
      */
     MatchedRules?: MobileDeviceAccessMatchedRuleList;
+  }
+  export interface GetMobileDeviceAccessOverrideRequest {
+    /**
+     * The Amazon WorkMail organization to which you want to apply the override.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * Identifies the WorkMail user for the override. Accepts the following types of user identities:    User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234    Email address: user@domain.tld    User name: user   
+     */
+    UserId: EntityIdentifier;
+    /**
+     * The mobile device to which the override applies. DeviceId is case insensitive.
+     */
+    DeviceId: DeviceId;
+  }
+  export interface GetMobileDeviceAccessOverrideResponse {
+    /**
+     * The WorkMail user to which the access override applies.
+     */
+    UserId?: WorkMailIdentifier;
+    /**
+     * The device to which the access override applies.
+     */
+    DeviceId?: DeviceId;
+    /**
+     * The effect of the override, ALLOW or DENY.
+     */
+    Effect?: MobileDeviceAccessRuleEffect;
+    /**
+     * A description of the override.
+     */
+    Description?: MobileDeviceAccessRuleDescription;
+    /**
+     * The date the override was first created.
+     */
+    DateCreated?: Timestamp;
+    /**
+     * The date the description was last modified.
+     */
+    DateModified?: Timestamp;
   }
   export interface Group {
     /**
@@ -1461,6 +1551,38 @@ declare namespace WorkMail {
     Permissions?: Permissions;
     /**
      * The token to use to retrieve the next page of results. The value is "null" when there are no more results to return.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListMobileDeviceAccessOverridesRequest {
+    /**
+     * The Amazon WorkMail organization under which to list mobile device access overrides.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The WorkMail user under which you list the mobile device access overrides. Accepts the following types of user identities:   User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234    Email address: user@domain.tld    User name: user   
+     */
+    UserId?: EntityIdentifier;
+    /**
+     * The mobile device to which the access override applies.
+     */
+    DeviceId?: DeviceId;
+    /**
+     * The token to use to retrieve the next page of results. The first call does not require a token.
+     */
+    NextToken?: NextToken;
+    /**
+     * The maximum number of results to return in a single call.
+     */
+    MaxResults?: MaxResults;
+  }
+  export interface ListMobileDeviceAccessOverridesResponse {
+    /**
+     * The list of mobile device access overrides that exist for the specified Amazon WorkMail organization and user.
+     */
+    Overrides?: MobileDeviceAccessOverridesList;
+    /**
+     * The token to use to retrieve the next page of results. The value is “null” when there are no more results to return.
      */
     NextToken?: NextToken;
   }
@@ -1667,6 +1789,33 @@ declare namespace WorkMail {
     Name?: MobileDeviceAccessRuleName;
   }
   export type MobileDeviceAccessMatchedRuleList = MobileDeviceAccessMatchedRule[];
+  export interface MobileDeviceAccessOverride {
+    /**
+     * The WorkMail user to which the access override applies.
+     */
+    UserId?: WorkMailIdentifier;
+    /**
+     * The device to which the override applies.
+     */
+    DeviceId?: DeviceId;
+    /**
+     * The effect of the override, ALLOW or DENY.
+     */
+    Effect?: MobileDeviceAccessRuleEffect;
+    /**
+     * A description of the override.
+     */
+    Description?: MobileDeviceAccessRuleDescription;
+    /**
+     * The date the override was first created.
+     */
+    DateCreated?: Timestamp;
+    /**
+     * The date the override was last modified.
+     */
+    DateModified?: Timestamp;
+  }
+  export type MobileDeviceAccessOverridesList = MobileDeviceAccessOverride[];
   export interface MobileDeviceAccessRule {
     /**
      * The ID assigned to a mobile access rule. 
@@ -1839,6 +1988,30 @@ declare namespace WorkMail {
     PermissionValues: PermissionValues;
   }
   export interface PutMailboxPermissionsResponse {
+  }
+  export interface PutMobileDeviceAccessOverrideRequest {
+    /**
+     * Identifies the Amazon WorkMail organization for which you create the override.
+     */
+    OrganizationId: OrganizationId;
+    /**
+     * The WorkMail user for which you create the override. Accepts the following types of user identities:   User ID: 12345678-1234-1234-1234-123456789012 or S-1-1-12-1234567890-123456789-123456789-1234    Email address: user@domain.tld    User name: user   
+     */
+    UserId: EntityIdentifier;
+    /**
+     * The mobile device for which you create the override. DeviceId is case insensitive.
+     */
+    DeviceId: DeviceId;
+    /**
+     * The effect of the override, ALLOW or DENY.
+     */
+    Effect: MobileDeviceAccessRuleEffect;
+    /**
+     * A description of the override.
+     */
+    Description?: MobileDeviceAccessRuleDescription;
+  }
+  export interface PutMobileDeviceAccessOverrideResponse {
   }
   export interface PutRetentionPolicyRequest {
     /**

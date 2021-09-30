@@ -1081,5 +1081,11 @@
   },
   "wisdom": {
     "name": "Wisdom"
+  },
+  "account": {
+    "name": "Account"
+  },
+  "cloudcontrol": {
+    "name": "CloudControl"
   }
 }

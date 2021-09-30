@@ -465,6 +465,34 @@
       "documentation": "<p>Deletes permissions granted to a member (user or group).</p>",
       "idempotent": true
     },
+    "DeleteMobileDeviceAccessOverride": {
+      "name": "DeleteMobileDeviceAccessOverride",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "DeleteMobileDeviceAccessOverrideRequest"
+      },
+      "output": {
+        "shape": "DeleteMobileDeviceAccessOverrideResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        }
+      ],
+      "documentation": "<p>Deletes the mobile device access override for the given WorkMail organization, user, and device.</p>"
+    },
     "DeleteMobileDeviceAccessRule": {
       "name": "DeleteMobileDeviceAccessRule",
       "http": {
@@ -961,6 +989,37 @@
       ],
       "documentation": "<p>Simulates the effect of the mobile device access rules for the given attributes of a sample access event. Use this method to test the effects of the current set of mobile device access rules for the Amazon WorkMail organization for a particular user's attributes.</p>"
     },
+    "GetMobileDeviceAccessOverride": {
+      "name": "GetMobileDeviceAccessOverride",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "GetMobileDeviceAccessOverrideRequest"
+      },
+      "output": {
+        "shape": "GetMobileDeviceAccessOverrideResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "ResourceNotFoundException"
+        }
+      ],
+      "documentation": "<p>Gets the mobile device access override for the given WorkMail organization, user, and device.</p>"
+    },
     "ListAccessControlRules": {
       "name": "ListAccessControlRules",
       "http": {
@@ -1130,6 +1189,34 @@
       ],
       "documentation": "<p>Lists the mailbox permissions associated with a user, group, or resource mailbox.</p>",
       "idempotent": true
+    },
+    "ListMobileDeviceAccessOverrides": {
+      "name": "ListMobileDeviceAccessOverrides",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "ListMobileDeviceAccessOverridesRequest"
+      },
+      "output": {
+        "shape": "ListMobileDeviceAccessOverridesResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        }
+      ],
+      "documentation": "<p>Lists all the mobile device access overrides for any given combination of WorkMail organization, user, or device.</p>"
     },
     "ListMobileDeviceAccessRules": {
       "name": "ListMobileDeviceAccessRules",
@@ -1341,6 +1428,37 @@
       ],
       "documentation": "<p>Sets permissions for a user, group, or resource. This replaces any pre-existing permissions.</p>",
       "idempotent": true
+    },
+    "PutMobileDeviceAccessOverride": {
+      "name": "PutMobileDeviceAccessOverride",
+      "http": {
+        "method": "POST",
+        "requestUri": "/"
+      },
+      "input": {
+        "shape": "PutMobileDeviceAccessOverrideRequest"
+      },
+      "output": {
+        "shape": "PutMobileDeviceAccessOverrideResponse"
+      },
+      "errors": [
+        {
+          "shape": "InvalidParameterException"
+        },
+        {
+          "shape": "OrganizationNotFoundException"
+        },
+        {
+          "shape": "OrganizationStateException"
+        },
+        {
+          "shape": "EntityNotFoundException"
+        },
+        {
+          "shape": "EntityStateException"
+        }
+      ],
+      "documentation": "<p>Creates or updates a mobile device access override for the given WorkMail organization, user, and device.</p>"
     },
     "PutRetentionPolicy": {
       "name": "PutRetentionPolicy",
@@ -2258,6 +2376,32 @@
       "type": "structure",
       "members": {}
     },
+    "DeleteMobileDeviceAccessOverrideRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "UserId",
+        "DeviceId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization for which the access override will be deleted.</p>"
+        },
+        "UserId": {
+          "shape": "EntityIdentifier",
+          "documentation": "<p>The WorkMail user for which you want to delete the override. Accepts the following types of user identities:</p> <ul> <li> <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> </p> </li> <li> <p>Email address: <code>user@domain.tld</code> </p> </li> <li> <p>User name: <code>user</code> </p> </li> </ul>"
+        },
+        "DeviceId": {
+          "shape": "DeviceId",
+          "documentation": "<p>The mobile device for which you delete the override. <code>DeviceId</code> is case insensitive.</p>"
+        }
+      }
+    },
+    "DeleteMobileDeviceAccessOverrideResponse": {
+      "type": "structure",
+      "members": {}
+    },
     "DeleteMobileDeviceAccessRuleRequest": {
       "type": "structure",
       "required": [
@@ -2681,6 +2825,12 @@
       "min": 0,
       "pattern": "[\\S\\s]*"
     },
+    "DeviceId": {
+      "type": "string",
+      "max": 32,
+      "min": 1,
+      "pattern": "[A-Za-z0-9]+"
+    },
     "DeviceModel": {
       "type": "string",
       "max": 256,
@@ -2828,6 +2978,12 @@
       "max": 254,
       "min": 1,
       "pattern": "[a-zA-Z0-9._%+-]{1,64}@[a-zA-Z0-9.-]+\\.[a-zA-Z-]{2,}"
+    },
+    "EntityIdentifier": {
+      "type": "string",
+      "max": 256,
+      "min": 1,
+      "pattern": "[a-zA-Z0-9._%+@-]+"
     },
     "EntityState": {
       "type": "string",
@@ -3016,6 +3172,57 @@
         "MatchedRules": {
           "shape": "MobileDeviceAccessMatchedRuleList",
           "documentation": "<p>A list of the rules which matched the simulated user input and produced the effect.</p>"
+        }
+      }
+    },
+    "GetMobileDeviceAccessOverrideRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "UserId",
+        "DeviceId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization to which you want to apply the override.</p>"
+        },
+        "UserId": {
+          "shape": "EntityIdentifier",
+          "documentation": "<p>Identifies the WorkMail user for the override. Accepts the following types of user identities: </p> <ul> <li> <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> </p> </li> <li> <p>Email address: <code>user@domain.tld</code> </p> </li> <li> <p>User name: <code>user</code> </p> </li> </ul>"
+        },
+        "DeviceId": {
+          "shape": "DeviceId",
+          "documentation": "<p>The mobile device to which the override applies. <code>DeviceId</code> is case insensitive.</p>"
+        }
+      }
+    },
+    "GetMobileDeviceAccessOverrideResponse": {
+      "type": "structure",
+      "members": {
+        "UserId": {
+          "shape": "WorkMailIdentifier",
+          "documentation": "<p>The WorkMail user to which the access override applies.</p>"
+        },
+        "DeviceId": {
+          "shape": "DeviceId",
+          "documentation": "<p>The device to which the access override applies.</p>"
+        },
+        "Effect": {
+          "shape": "MobileDeviceAccessRuleEffect",
+          "documentation": "<p>The effect of the override, <code>ALLOW</code> or <code>DENY</code>.</p>"
+        },
+        "Description": {
+          "shape": "MobileDeviceAccessRuleDescription",
+          "documentation": "<p>A description of the override.</p>"
+        },
+        "DateCreated": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date the override was first created.</p>"
+        },
+        "DateModified": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date the description was last modified.</p>"
         }
       }
     },
@@ -3303,6 +3510,47 @@
         "NextToken": {
           "shape": "NextToken",
           "documentation": "<p>The token to use to retrieve the next page of results. The value is \"null\" when there are no more results to return.</p>"
+        }
+      }
+    },
+    "ListMobileDeviceAccessOverridesRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>The Amazon WorkMail organization under which to list mobile device access overrides.</p>"
+        },
+        "UserId": {
+          "shape": "EntityIdentifier",
+          "documentation": "<p>The WorkMail user under which you list the mobile device access overrides. Accepts the following types of user identities:</p> <ul> <li> <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> </p> </li> <li> <p>Email address: <code>user@domain.tld</code> </p> </li> <li> <p>User name: <code>user</code> </p> </li> </ul>"
+        },
+        "DeviceId": {
+          "shape": "DeviceId",
+          "documentation": "<p>The mobile device to which the access override applies.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. The first call does not require a token.</p>"
+        },
+        "MaxResults": {
+          "shape": "MaxResults",
+          "documentation": "<p>The maximum number of results to return in a single call.</p>"
+        }
+      }
+    },
+    "ListMobileDeviceAccessOverridesResponse": {
+      "type": "structure",
+      "members": {
+        "Overrides": {
+          "shape": "MobileDeviceAccessOverridesList",
+          "documentation": "<p>The list of mobile device access overrides that exist for the specified Amazon WorkMail organization and user.</p>"
+        },
+        "NextToken": {
+          "shape": "NextToken",
+          "documentation": "<p>The token to use to retrieve the next page of results. The value is “null” when there are no more results to return.</p>"
         }
       }
     },
@@ -3621,6 +3869,42 @@
       "max": 10,
       "min": 0
     },
+    "MobileDeviceAccessOverride": {
+      "type": "structure",
+      "members": {
+        "UserId": {
+          "shape": "WorkMailIdentifier",
+          "documentation": "<p>The WorkMail user to which the access override applies.</p>"
+        },
+        "DeviceId": {
+          "shape": "DeviceId",
+          "documentation": "<p>The device to which the override applies.</p>"
+        },
+        "Effect": {
+          "shape": "MobileDeviceAccessRuleEffect",
+          "documentation": "<p>The effect of the override, <code>ALLOW</code> or <code>DENY</code>.</p>"
+        },
+        "Description": {
+          "shape": "MobileDeviceAccessRuleDescription",
+          "documentation": "<p>A description of the override.</p>"
+        },
+        "DateCreated": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date the override was first created.</p>"
+        },
+        "DateModified": {
+          "shape": "Timestamp",
+          "documentation": "<p>The date the override was last modified.</p>"
+        }
+      },
+      "documentation": "<p>The override object.</p>"
+    },
+    "MobileDeviceAccessOverridesList": {
+      "type": "list",
+      "member": {
+        "shape": "MobileDeviceAccessOverride"
+      }
+    },
     "MobileDeviceAccessRule": {
       "type": "structure",
       "members": {
@@ -3909,6 +4193,41 @@
       }
     },
     "PutMailboxPermissionsResponse": {
+      "type": "structure",
+      "members": {}
+    },
+    "PutMobileDeviceAccessOverrideRequest": {
+      "type": "structure",
+      "required": [
+        "OrganizationId",
+        "UserId",
+        "DeviceId",
+        "Effect"
+      ],
+      "members": {
+        "OrganizationId": {
+          "shape": "OrganizationId",
+          "documentation": "<p>Identifies the Amazon WorkMail organization for which you create the override.</p>"
+        },
+        "UserId": {
+          "shape": "EntityIdentifier",
+          "documentation": "<p>The WorkMail user for which you create the override. Accepts the following types of user identities:</p> <ul> <li> <p>User ID: <code>12345678-1234-1234-1234-123456789012</code> or <code>S-1-1-12-1234567890-123456789-123456789-1234</code> </p> </li> <li> <p>Email address: <code>user@domain.tld</code> </p> </li> <li> <p>User name: <code>user</code> </p> </li> </ul>"
+        },
+        "DeviceId": {
+          "shape": "DeviceId",
+          "documentation": "<p>The mobile device for which you create the override. <code>DeviceId</code> is case insensitive.</p>"
+        },
+        "Effect": {
+          "shape": "MobileDeviceAccessRuleEffect",
+          "documentation": "<p>The effect of the override, <code>ALLOW</code> or <code>DENY</code>.</p>"
+        },
+        "Description": {
+          "shape": "MobileDeviceAccessRuleDescription",
+          "documentation": "<p>A description of the override.</p>"
+        }
+      }
+    },
+    "PutMobileDeviceAccessOverrideResponse": {
       "type": "structure",
       "members": {}
     },

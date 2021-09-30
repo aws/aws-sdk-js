@@ -28,6 +28,14 @@ declare class DataExchange extends Service {
    */
   createDataSet(callback?: (err: AWSError, data: DataExchange.Types.CreateDataSetResponse) => void): Request<DataExchange.Types.CreateDataSetResponse, AWSError>;
   /**
+   * This operation creates an event action.
+   */
+  createEventAction(params: DataExchange.Types.CreateEventActionRequest, callback?: (err: AWSError, data: DataExchange.Types.CreateEventActionResponse) => void): Request<DataExchange.Types.CreateEventActionResponse, AWSError>;
+  /**
+   * This operation creates an event action.
+   */
+  createEventAction(callback?: (err: AWSError, data: DataExchange.Types.CreateEventActionResponse) => void): Request<DataExchange.Types.CreateEventActionResponse, AWSError>;
+  /**
    * This operation creates a job.
    */
   createJob(params: DataExchange.Types.CreateJobRequest, callback?: (err: AWSError, data: DataExchange.Types.CreateJobResponse) => void): Request<DataExchange.Types.CreateJobResponse, AWSError>;
@@ -60,6 +68,14 @@ declare class DataExchange extends Service {
    */
   deleteDataSet(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
   /**
+   * This operation deletes the event action.
+   */
+  deleteEventAction(params: DataExchange.Types.DeleteEventActionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
+   * This operation deletes the event action.
+   */
+  deleteEventAction(callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
+  /**
    * This operation deletes a revision.
    */
   deleteRevision(params: DataExchange.Types.DeleteRevisionRequest, callback?: (err: AWSError, data: {}) => void): Request<{}, AWSError>;
@@ -83,6 +99,14 @@ declare class DataExchange extends Service {
    * This operation returns information about a data set.
    */
   getDataSet(callback?: (err: AWSError, data: DataExchange.Types.GetDataSetResponse) => void): Request<DataExchange.Types.GetDataSetResponse, AWSError>;
+  /**
+   * This operation retrieves information about an event action.
+   */
+  getEventAction(params: DataExchange.Types.GetEventActionRequest, callback?: (err: AWSError, data: DataExchange.Types.GetEventActionResponse) => void): Request<DataExchange.Types.GetEventActionResponse, AWSError>;
+  /**
+   * This operation retrieves information about an event action.
+   */
+  getEventAction(callback?: (err: AWSError, data: DataExchange.Types.GetEventActionResponse) => void): Request<DataExchange.Types.GetEventActionResponse, AWSError>;
   /**
    * This operation returns information about a job.
    */
@@ -115,6 +139,14 @@ declare class DataExchange extends Service {
    * This operation lists your data sets. When listing by origin OWNED, results are sorted by CreatedAt in descending order. When listing by origin ENTITLED, there is no order and the maxResults parameter is ignored.
    */
   listDataSets(callback?: (err: AWSError, data: DataExchange.Types.ListDataSetsResponse) => void): Request<DataExchange.Types.ListDataSetsResponse, AWSError>;
+  /**
+   * This operation lists your event actions.
+   */
+  listEventActions(params: DataExchange.Types.ListEventActionsRequest, callback?: (err: AWSError, data: DataExchange.Types.ListEventActionsResponse) => void): Request<DataExchange.Types.ListEventActionsResponse, AWSError>;
+  /**
+   * This operation lists your event actions.
+   */
+  listEventActions(callback?: (err: AWSError, data: DataExchange.Types.ListEventActionsResponse) => void): Request<DataExchange.Types.ListEventActionsResponse, AWSError>;
   /**
    * This operation lists your jobs sorted by CreatedAt in descending order.
    */
@@ -180,6 +212,14 @@ declare class DataExchange extends Service {
    */
   updateDataSet(callback?: (err: AWSError, data: DataExchange.Types.UpdateDataSetResponse) => void): Request<DataExchange.Types.UpdateDataSetResponse, AWSError>;
   /**
+   * This operation updates the event action.
+   */
+  updateEventAction(params: DataExchange.Types.UpdateEventActionRequest, callback?: (err: AWSError, data: DataExchange.Types.UpdateEventActionResponse) => void): Request<DataExchange.Types.UpdateEventActionResponse, AWSError>;
+  /**
+   * This operation updates the event action.
+   */
+  updateEventAction(callback?: (err: AWSError, data: DataExchange.Types.UpdateEventActionResponse) => void): Request<DataExchange.Types.UpdateEventActionResponse, AWSError>;
+  /**
    * This operation updates a revision.
    */
   updateRevision(params: DataExchange.Types.UpdateRevisionRequest, callback?: (err: AWSError, data: DataExchange.Types.UpdateRevisionResponse) => void): Request<DataExchange.Types.UpdateRevisionResponse, AWSError>;
@@ -189,6 +229,9 @@ declare class DataExchange extends Service {
   updateRevision(callback?: (err: AWSError, data: DataExchange.Types.UpdateRevisionResponse) => void): Request<DataExchange.Types.UpdateRevisionResponse, AWSError>;
 }
 declare namespace DataExchange {
+  export interface Action {
+    ExportRevisionToS3?: AutoExportRevisionToS3RequestDetails;
+  }
   export type Arn = string;
   export interface AssetDestinationEntry {
     /**
@@ -261,6 +304,20 @@ declare namespace DataExchange {
     Key: __string;
   }
   export type AssetType = "S3_SNAPSHOT"|string;
+  export interface AutoExportRevisionDestinationEntry {
+    /**
+     * The S3 bucket that is the destination for the event action.
+     */
+    Bucket: __string;
+    /**
+     * A string representing the pattern for generated names of the individual assets in the revision. For more information about key patterns, see Key patterns when exporting revisions.
+     */
+    KeyPattern?: __string;
+  }
+  export interface AutoExportRevisionToS3RequestDetails {
+    Encryption?: ExportServerSideEncryption;
+    RevisionDestination: AutoExportRevisionDestinationEntry;
+  }
   export interface CancelJobRequest {
     /**
      * The unique identifier for a job.
@@ -329,6 +386,42 @@ declare namespace DataExchange {
     Tags?: MapOf__string;
     /**
      * The date and time that the data set was last updated, in ISO 8601 format.
+     */
+    UpdatedAt?: Timestamp;
+  }
+  export interface CreateEventActionRequest {
+    /**
+     * What occurs after a certain event.
+     */
+    Action: Action;
+    /**
+     * What occurs to start an action.
+     */
+    Event: Event;
+  }
+  export interface CreateEventActionResponse {
+    /**
+     * What occurs after a certain event.
+     */
+    Action?: Action;
+    /**
+     * The ARN for the event action.
+     */
+    Arn?: Arn;
+    /**
+     * The date and time that the event action was created, in ISO 8601 format.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * What occurs to start an action.
+     */
+    Event?: Event;
+    /**
+     * The unique identifier for the event action.
+     */
+    Id?: Id;
+    /**
+     * The date and time that the event action was last updated, in ISO 8601 format.
      */
     UpdatedAt?: Timestamp;
   }
@@ -490,6 +583,12 @@ declare namespace DataExchange {
      */
     DataSetId: __string;
   }
+  export interface DeleteEventActionRequest {
+    /**
+     * The unique identifier for the event action.
+     */
+    EventActionId: __string;
+  }
   export interface DeleteRevisionRequest {
     /**
      * The unique identifier for a data set.
@@ -504,6 +603,35 @@ declare namespace DataExchange {
   export interface Details {
     ImportAssetFromSignedUrlJobErrorDetails?: ImportAssetFromSignedUrlJobErrorDetails;
     ImportAssetsFromS3JobErrorDetails?: ListOfAssetSourceEntry;
+  }
+  export interface Event {
+    RevisionPublished?: RevisionPublished;
+  }
+  export interface EventActionEntry {
+    /**
+     * What occurs after a certain event.
+     */
+    Action: Action;
+    /**
+     * The ARN for the event action.
+     */
+    Arn: Arn;
+    /**
+     * The date and time that the event action was created, in ISO 8601 format.
+     */
+    CreatedAt: Timestamp;
+    /**
+     * What occurs to start an action.
+     */
+    Event: Event;
+    /**
+     * The unique identifier for the event action.
+     */
+    Id: Id;
+    /**
+     * The date and time that the event action was last updated, in ISO 8601 format.
+     */
+    UpdatedAt: Timestamp;
   }
   export interface ExportAssetToSignedUrlRequestDetails {
     /**
@@ -607,7 +735,7 @@ declare namespace DataExchange {
   }
   export interface ExportServerSideEncryption {
     /**
-     * The Amazon Resource Name (ARN) of the the AWS KMS key you want to use to encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms as an encryption type.
+     * The Amazon Resource Name (ARN) of the AWS KMS key you want to use to encrypt the Amazon S3 objects. This parameter is required if you choose aws:kms as an encryption type.
      */
     KmsKeyArn?: __string;
     /**
@@ -720,6 +848,38 @@ declare namespace DataExchange {
     Tags?: MapOf__string;
     /**
      * The date and time that the data set was last updated, in ISO 8601 format.
+     */
+    UpdatedAt?: Timestamp;
+  }
+  export interface GetEventActionRequest {
+    /**
+     * The unique identifier for the event action.
+     */
+    EventActionId: __string;
+  }
+  export interface GetEventActionResponse {
+    /**
+     * What occurs after a certain event.
+     */
+    Action?: Action;
+    /**
+     * The ARN for the event action.
+     */
+    Arn?: Arn;
+    /**
+     * The date and time that the event action was created, in ISO 8601 format.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * What occurs to start an action.
+     */
+    Event?: Event;
+    /**
+     * The unique identifier for the event action.
+     */
+    Id?: Id;
+    /**
+     * The date and time that the event action was last updated, in ISO 8601 format.
      */
     UpdatedAt?: Timestamp;
   }
@@ -949,7 +1109,7 @@ declare namespace DataExchange {
     ResourceType?: JobErrorResourceTypes;
   }
   export type JobErrorLimitName = "Assets per revision"|"Asset size in GB"|string;
-  export type JobErrorResourceTypes = "REVISION"|"ASSET"|string;
+  export type JobErrorResourceTypes = "REVISION"|"ASSET"|"DATA_SET"|string;
   export interface ListDataSetRevisionsRequest {
     /**
      * The unique identifier for a data set.
@@ -993,6 +1153,30 @@ declare namespace DataExchange {
      * The data set objects listed by the request.
      */
     DataSets?: ListOfDataSetEntry;
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    NextToken?: NextToken;
+  }
+  export interface ListEventActionsRequest {
+    /**
+     * The unique identifier for the event source.
+     */
+    EventSourceId?: __string;
+    /**
+     * The maximum number of results returned by a single call.
+     */
+    MaxResults?: MaxResults;
+    /**
+     * The token value retrieved from a previous call to access the next page of results.
+     */
+    NextToken?: __string;
+  }
+  export interface ListEventActionsResponse {
+    /**
+     * The event action objects listed by the request.
+     */
+    EventActions?: ListOfEventActionEntry;
     /**
      * The token value retrieved from a previous call to access the next page of results.
      */
@@ -1168,6 +1352,9 @@ declare namespace DataExchange {
      */
     UpdatedAt: Timestamp;
   }
+  export interface RevisionPublished {
+    DataSetId: Id;
+  }
   export interface S3SnapshotAsset {
     /**
      * The size of the S3 object that is the object.
@@ -1322,6 +1509,42 @@ declare namespace DataExchange {
      */
     UpdatedAt?: Timestamp;
   }
+  export interface UpdateEventActionRequest {
+    /**
+     * What occurs after a certain event.
+     */
+    Action?: Action;
+    /**
+     * The unique identifier for the event action.
+     */
+    EventActionId: __string;
+  }
+  export interface UpdateEventActionResponse {
+    /**
+     * What occurs after a certain event.
+     */
+    Action?: Action;
+    /**
+     * The ARN for the event action.
+     */
+    Arn?: Arn;
+    /**
+     * The date and time that the event action was created, in ISO 8601 format.
+     */
+    CreatedAt?: Timestamp;
+    /**
+     * What occurs to start an action.
+     */
+    Event?: Event;
+    /**
+     * The unique identifier for the event action.
+     */
+    Id?: Id;
+    /**
+     * The date and time that the event action was last updated, in ISO 8601 format.
+     */
+    UpdatedAt?: Timestamp;
+  }
   export interface UpdateRevisionRequest {
     /**
      * An optional comment about the revision.
@@ -1379,6 +1602,7 @@ declare namespace DataExchange {
   export type __doubleMin0 = number;
   export type ListOfAssetEntry = AssetEntry[];
   export type ListOfDataSetEntry = DataSetEntry[];
+  export type ListOfEventActionEntry = EventActionEntry[];
   export type ListOfJobEntry = JobEntry[];
   export type ListOfJobError = JobError[];
   export type ListOfRevisionEntry = RevisionEntry[];

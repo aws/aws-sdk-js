@@ -1,6 +1,15 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.997.0-->
+<!--LATEST=2.998.0-->
 <!--ENTRYINSERT-->
+
+## 2.998.0
+* feature: Account: This release of the Account Management API enables customers to manage the alternate contacts for their AWS accounts. For more information, see https://docs.aws.amazon.com/accounts/latest/reference/accounts-welcome.html
+* feature: CloudControl: Initial release of the SDK for AWS Cloud Control API
+* feature: DataExchange: This release enables subscribers to set up automatic exports of newly published revisions using the new EventAction API.
+* feature: Macie2: Amazon S3 bucket metadata now indicates whether an error or a bucket's permissions settings prevented Amazon Macie from retrieving data about the bucket or the bucket's objects.
+* feature: NetworkFirewall: This release adds support for strict ordering for stateful rule groups. Using strict ordering, stateful rules are evaluated in the exact order in which you provide them.
+* feature: WorkMail: This release adds support for mobile device access overrides management in Amazon WorkMail.
+* feature: WorkSpaces: Added CreateUpdatedWorkspaceImage API to update WorkSpace images with latest software and drivers. Updated DescribeWorkspaceImages API to display if there are updates available for WorkSpace images.
 
 ## 2.997.0
 * feature: Amp: This release adds alert manager and rule group namespace APIs
