@@ -1230,7 +1230,7 @@ declare namespace SSM {
      */
     DocumentVersion?: DocumentVersion;
     /**
-     * The instances targeted by the request to create an association. 
+     * The instances targeted by the request to create an association. You can target all instances in an Amazon Web Services account by specifying the InstanceIds key with a value of *.
      */
     Targets?: Targets;
     /**
@@ -2495,7 +2495,7 @@ declare namespace SSM {
      */
     Parameters?: Parameters;
     /**
-     * The targets for the association. You can target instances by using tags, Amazon Web Services resource groups, all instances in an Amazon Web Services account, or individual instance IDs. For more information about choosing targets for an association, see Using targets and rate controls with State Manager associations in the Amazon Web Services Systems Manager User Guide.
+     * The targets for the association. You can target instances by using tags, Amazon Web Services resource groups, all instances in an Amazon Web Services account, or individual instance IDs. You can target all instances in an Amazon Web Services account by specifying the InstanceIds key with a value of *. For more information about choosing targets for an association, see Using targets and rate controls with State Manager associations in the Amazon Web Services Systems Manager User Guide.
      */
     Targets?: Targets;
     /**
@@ -8380,7 +8380,7 @@ declare namespace SSM {
   export type S3KeyPrefix = string;
   export interface S3OutputLocation {
     /**
-     * (Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Amazon Web Services Systems Manager automatically determines the Region of the S3 bucket.
+     * The Amazon Web Services Region of the S3 bucket.
      */
     OutputS3Region?: S3Region;
     /**
@@ -8732,6 +8732,10 @@ declare namespace SSM {
      * The user-provided idempotency token. The token must be unique, is case insensitive, enforces the UUID format, and can't be reused.
      */
     ClientToken?: IdempotencyToken;
+    /**
+     * Indicates whether the change request can be approved automatically without the need for manual approvals. If AutoApprovable is enabled in a change template, then setting AutoApprove to true in StartChangeRequestExecution creates a change request that bypasses approver review.  Change Calendar restrictions are not bypassed in this scenario. If the state of an associated calendar is CLOSED, change freeze approvers must still grant permission for this change request to run. If they don't, the change won't be processed until the calendar state is again OPEN.  
+     */
+    AutoApprove?: Boolean;
     /**
      * Information about the Automation runbooks that are run during the runbook workflow.  The Automation runbooks specified for the runbook workflow can't run until all required approvals for the change request have been received. 
      */

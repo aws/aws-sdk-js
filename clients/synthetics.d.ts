@@ -117,6 +117,18 @@ declare class Synthetics extends Service {
   updateCanary(callback?: (err: AWSError, data: Synthetics.Types.UpdateCanaryResponse) => void): Request<Synthetics.Types.UpdateCanaryResponse, AWSError>;
 }
 declare namespace Synthetics {
+  export interface ArtifactConfigInput {
+    /**
+     * A structure that contains the configuration of the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3. Artifact encryption functionality is available only for canaries that use Synthetics runtime version syn-nodejs-puppeteer-3.3 or later. For more information, see Encrypting canary artifacts 
+     */
+    S3Encryption?: S3EncryptionConfig;
+  }
+  export interface ArtifactConfigOutput {
+    /**
+     * A structure that contains the configuration of encryption settings for canary artifacts that are stored in Amazon S3. 
+     */
+    S3Encryption?: S3EncryptionConfig;
+  }
   export interface BaseScreenshot {
     /**
      * The name of the screenshot. This is generated the first time the canary is run after the UpdateCanary operation that specified for this canary to perform visual monitoring.
@@ -189,6 +201,10 @@ declare namespace Synthetics {
      * The list of key-value pairs that are associated with the canary.
      */
     Tags?: TagMap;
+    /**
+     * A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
+     */
+    ArtifactConfig?: ArtifactConfigOutput;
   }
   export type CanaryArn = string;
   export interface CanaryCodeInput {
@@ -414,6 +430,10 @@ declare namespace Synthetics {
      * A list of key-value pairs to associate with the canary. You can associate as many as 50 tags with a canary. Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only the resources that have certain tag values.
      */
     Tags?: TagMap;
+    /**
+     * A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
+     */
+    ArtifactConfig?: ArtifactConfigInput;
   }
   export interface CreateCanaryResponse {
     /**
@@ -489,6 +509,7 @@ declare namespace Synthetics {
      */
     NextToken?: Token;
   }
+  export type EncryptionMode = "SSE_S3"|"SSE_KMS"|string;
   export type EnvironmentVariableName = string;
   export type EnvironmentVariableValue = string;
   export type EnvironmentVariablesMap = {[key: string]: EnvironmentVariableValue};
@@ -529,6 +550,7 @@ declare namespace Synthetics {
      */
     NextToken?: Token;
   }
+  export type KmsKeyArn = string;
   export interface ListTagsForResourceRequest {
     /**
      * The ARN of the canary that you want to view tags for. The ARN format of a canary is arn:aws:synthetics:Region:account-id:canary:canary-name .
@@ -568,6 +590,16 @@ declare namespace Synthetics {
     DeprecationDate?: Timestamp;
   }
   export type RuntimeVersionList = RuntimeVersion[];
+  export interface S3EncryptionConfig {
+    /**
+     *  The encryption method to use for artifacts created by this canary. Specify SSE_S3 to use server-side encryption (SSE) with an Amazon S3-managed key. Specify SSE-KMS to use server-side encryption with a customer-managed KMS key. If you omit this parameter, an Amazon Web Services-managed KMS key is used. 
+     */
+    EncryptionMode?: EncryptionMode;
+    /**
+     * The ARN of the customer-managed KMS key to use, if you specify SSE-KMS for EncryptionMode 
+     */
+    KmsKeyArn?: KmsKeyArn;
+  }
   export type SecurityGroupId = string;
   export type SecurityGroupIds = SecurityGroupId[];
   export interface StartCanaryRequest {
@@ -661,6 +693,14 @@ declare namespace Synthetics {
      * Defines the screenshots to use as the baseline for comparisons during visual monitoring comparisons during future runs of this canary. If you omit this parameter, no changes are made to any baseline screenshots that the canary might be using already. Visual monitoring is supported only on canaries running the syn-puppeteer-node-3.2 runtime or later. For more information, see  Visual monitoring and  Visual monitoring blueprint 
      */
     VisualReference?: VisualReferenceInput;
+    /**
+     * The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files. The name of the S3 bucket can't include a period (.).
+     */
+    ArtifactS3Location?: String;
+    /**
+     * A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.
+     */
+    ArtifactConfig?: ArtifactConfigInput;
   }
   export interface UpdateCanaryResponse {
   }

@@ -12,155 +12,155 @@ declare class AppRunner extends Service {
   constructor(options?: AppRunner.Types.ClientConfiguration)
   config: Config & AppRunner.Types.ClientConfiguration;
   /**
-   * Associate your own domain name with the AWS App Runner subdomain URL of your App Runner service. After you call AssociateCustomDomain and receive a successful response, use the information in the CustomDomain record that's returned to add CNAME records to your Domain Name System (DNS). For each mapped domain name, add a mapping to the target App Runner subdomain and one or more certificate validation records. App Runner then performs DNS validation to verify that you own or control the domain name that you associated. App Runner tracks domain validity in a certificate stored in AWS Certificate Manager (ACM).
+   * Associate your own domain name with the App Runner subdomain URL of your App Runner service. After you call AssociateCustomDomain and receive a successful response, use the information in the CustomDomain record that's returned to add CNAME records to your Domain Name System (DNS). For each mapped domain name, add a mapping to the target App Runner subdomain and one or more certificate validation records. App Runner then performs DNS validation to verify that you own or control the domain name that you associated. App Runner tracks domain validity in a certificate stored in AWS Certificate Manager (ACM).
    */
   associateCustomDomain(params: AppRunner.Types.AssociateCustomDomainRequest, callback?: (err: AWSError, data: AppRunner.Types.AssociateCustomDomainResponse) => void): Request<AppRunner.Types.AssociateCustomDomainResponse, AWSError>;
   /**
-   * Associate your own domain name with the AWS App Runner subdomain URL of your App Runner service. After you call AssociateCustomDomain and receive a successful response, use the information in the CustomDomain record that's returned to add CNAME records to your Domain Name System (DNS). For each mapped domain name, add a mapping to the target App Runner subdomain and one or more certificate validation records. App Runner then performs DNS validation to verify that you own or control the domain name that you associated. App Runner tracks domain validity in a certificate stored in AWS Certificate Manager (ACM).
+   * Associate your own domain name with the App Runner subdomain URL of your App Runner service. After you call AssociateCustomDomain and receive a successful response, use the information in the CustomDomain record that's returned to add CNAME records to your Domain Name System (DNS). For each mapped domain name, add a mapping to the target App Runner subdomain and one or more certificate validation records. App Runner then performs DNS validation to verify that you own or control the domain name that you associated. App Runner tracks domain validity in a certificate stored in AWS Certificate Manager (ACM).
    */
   associateCustomDomain(callback?: (err: AWSError, data: AppRunner.Types.AssociateCustomDomainResponse) => void): Request<AppRunner.Types.AssociateCustomDomainResponse, AWSError>;
   /**
-   * Create an AWS App Runner automatic scaling configuration resource. App Runner requires this resource when you create App Runner services that require non-default auto scaling settings. You can share an auto scaling configuration across multiple services. Create multiple revisions of a configuration by using the same AutoScalingConfigurationName and different AutoScalingConfigurationRevision values. When you create a service, you can set it to use the latest active revision of an auto scaling configuration or a specific revision. Configure a higher MinSize to increase the spread of your App Runner service over more Availability Zones in the AWS Region. The tradeoff is a higher minimal cost. Configure a lower MaxSize to control your cost. The tradeoff is lower responsiveness during peak demand.
+   * Create an App Runner automatic scaling configuration resource. App Runner requires this resource when you create App Runner services that require non-default auto scaling settings. You can share an auto scaling configuration across multiple services. Create multiple revisions of a configuration by using the same AutoScalingConfigurationName and different AutoScalingConfigurationRevision values. When you create a service, you can set it to use the latest active revision of an auto scaling configuration or a specific revision. Configure a higher MinSize to increase the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is a higher minimal cost. Configure a lower MaxSize to control your cost. The tradeoff is lower responsiveness during peak demand.
    */
   createAutoScalingConfiguration(params: AppRunner.Types.CreateAutoScalingConfigurationRequest, callback?: (err: AWSError, data: AppRunner.Types.CreateAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.CreateAutoScalingConfigurationResponse, AWSError>;
   /**
-   * Create an AWS App Runner automatic scaling configuration resource. App Runner requires this resource when you create App Runner services that require non-default auto scaling settings. You can share an auto scaling configuration across multiple services. Create multiple revisions of a configuration by using the same AutoScalingConfigurationName and different AutoScalingConfigurationRevision values. When you create a service, you can set it to use the latest active revision of an auto scaling configuration or a specific revision. Configure a higher MinSize to increase the spread of your App Runner service over more Availability Zones in the AWS Region. The tradeoff is a higher minimal cost. Configure a lower MaxSize to control your cost. The tradeoff is lower responsiveness during peak demand.
+   * Create an App Runner automatic scaling configuration resource. App Runner requires this resource when you create App Runner services that require non-default auto scaling settings. You can share an auto scaling configuration across multiple services. Create multiple revisions of a configuration by using the same AutoScalingConfigurationName and different AutoScalingConfigurationRevision values. When you create a service, you can set it to use the latest active revision of an auto scaling configuration or a specific revision. Configure a higher MinSize to increase the spread of your App Runner service over more Availability Zones in the Amazon Web Services Region. The tradeoff is a higher minimal cost. Configure a lower MaxSize to control your cost. The tradeoff is lower responsiveness during peak demand.
    */
   createAutoScalingConfiguration(callback?: (err: AWSError, data: AppRunner.Types.CreateAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.CreateAutoScalingConfigurationResponse, AWSError>;
   /**
-   * Create an AWS App Runner connection resource. App Runner requires a connection resource when you create App Runner services that access private repositories from certain third-party providers. You can share a connection across multiple services. A connection resource is needed to access GitHub repositories. GitHub requires a user interface approval process through the App Runner console before you can use the connection.
+   * Create an App Runner connection resource. App Runner requires a connection resource when you create App Runner services that access private repositories from certain third-party providers. You can share a connection across multiple services. A connection resource is needed to access GitHub repositories. GitHub requires a user interface approval process through the App Runner console before you can use the connection.
    */
   createConnection(params: AppRunner.Types.CreateConnectionRequest, callback?: (err: AWSError, data: AppRunner.Types.CreateConnectionResponse) => void): Request<AppRunner.Types.CreateConnectionResponse, AWSError>;
   /**
-   * Create an AWS App Runner connection resource. App Runner requires a connection resource when you create App Runner services that access private repositories from certain third-party providers. You can share a connection across multiple services. A connection resource is needed to access GitHub repositories. GitHub requires a user interface approval process through the App Runner console before you can use the connection.
+   * Create an App Runner connection resource. App Runner requires a connection resource when you create App Runner services that access private repositories from certain third-party providers. You can share a connection across multiple services. A connection resource is needed to access GitHub repositories. GitHub requires a user interface approval process through the App Runner console before you can use the connection.
    */
   createConnection(callback?: (err: AWSError, data: AppRunner.Types.CreateConnectionResponse) => void): Request<AppRunner.Types.CreateConnectionResponse, AWSError>;
   /**
-   * Create an AWS App Runner service. After the service is created, the action also automatically starts a deployment. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
+   * Create an App Runner service. After the service is created, the action also automatically starts a deployment. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
   createService(params: AppRunner.Types.CreateServiceRequest, callback?: (err: AWSError, data: AppRunner.Types.CreateServiceResponse) => void): Request<AppRunner.Types.CreateServiceResponse, AWSError>;
   /**
-   * Create an AWS App Runner service. After the service is created, the action also automatically starts a deployment. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
+   * Create an App Runner service. After the service is created, the action also automatically starts a deployment. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
   createService(callback?: (err: AWSError, data: AppRunner.Types.CreateServiceResponse) => void): Request<AppRunner.Types.CreateServiceResponse, AWSError>;
   /**
-   * Delete an AWS App Runner automatic scaling configuration resource. You can delete a specific revision or the latest active revision. You can't delete a configuration that's used by one or more App Runner services.
+   * Delete an App Runner automatic scaling configuration resource. You can delete a specific revision or the latest active revision. You can't delete a configuration that's used by one or more App Runner services.
    */
   deleteAutoScalingConfiguration(params: AppRunner.Types.DeleteAutoScalingConfigurationRequest, callback?: (err: AWSError, data: AppRunner.Types.DeleteAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.DeleteAutoScalingConfigurationResponse, AWSError>;
   /**
-   * Delete an AWS App Runner automatic scaling configuration resource. You can delete a specific revision or the latest active revision. You can't delete a configuration that's used by one or more App Runner services.
+   * Delete an App Runner automatic scaling configuration resource. You can delete a specific revision or the latest active revision. You can't delete a configuration that's used by one or more App Runner services.
    */
   deleteAutoScalingConfiguration(callback?: (err: AWSError, data: AppRunner.Types.DeleteAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.DeleteAutoScalingConfigurationResponse, AWSError>;
   /**
-   * Delete an AWS App Runner connection. You must first ensure that there are no running App Runner services that use this connection. If there are any, the DeleteConnection action fails.
+   * Delete an App Runner connection. You must first ensure that there are no running App Runner services that use this connection. If there are any, the DeleteConnection action fails.
    */
   deleteConnection(params: AppRunner.Types.DeleteConnectionRequest, callback?: (err: AWSError, data: AppRunner.Types.DeleteConnectionResponse) => void): Request<AppRunner.Types.DeleteConnectionResponse, AWSError>;
   /**
-   * Delete an AWS App Runner connection. You must first ensure that there are no running App Runner services that use this connection. If there are any, the DeleteConnection action fails.
+   * Delete an App Runner connection. You must first ensure that there are no running App Runner services that use this connection. If there are any, the DeleteConnection action fails.
    */
   deleteConnection(callback?: (err: AWSError, data: AppRunner.Types.DeleteConnectionResponse) => void): Request<AppRunner.Types.DeleteConnectionResponse, AWSError>;
   /**
-   * Delete an AWS App Runner service. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
+   * Delete an App Runner service. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
   deleteService(params: AppRunner.Types.DeleteServiceRequest, callback?: (err: AWSError, data: AppRunner.Types.DeleteServiceResponse) => void): Request<AppRunner.Types.DeleteServiceResponse, AWSError>;
   /**
-   * Delete an AWS App Runner service. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
+   * Delete an App Runner service. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
   deleteService(callback?: (err: AWSError, data: AppRunner.Types.DeleteServiceResponse) => void): Request<AppRunner.Types.DeleteServiceResponse, AWSError>;
   /**
-   * Return a full description of an AWS App Runner automatic scaling configuration resource.
+   * Return a full description of an App Runner automatic scaling configuration resource.
    */
   describeAutoScalingConfiguration(params: AppRunner.Types.DescribeAutoScalingConfigurationRequest, callback?: (err: AWSError, data: AppRunner.Types.DescribeAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.DescribeAutoScalingConfigurationResponse, AWSError>;
   /**
-   * Return a full description of an AWS App Runner automatic scaling configuration resource.
+   * Return a full description of an App Runner automatic scaling configuration resource.
    */
   describeAutoScalingConfiguration(callback?: (err: AWSError, data: AppRunner.Types.DescribeAutoScalingConfigurationResponse) => void): Request<AppRunner.Types.DescribeAutoScalingConfigurationResponse, AWSError>;
   /**
-   * Return a description of custom domain names that are associated with an AWS App Runner service.
+   * Return a description of custom domain names that are associated with an App Runner service.
    */
   describeCustomDomains(params: AppRunner.Types.DescribeCustomDomainsRequest, callback?: (err: AWSError, data: AppRunner.Types.DescribeCustomDomainsResponse) => void): Request<AppRunner.Types.DescribeCustomDomainsResponse, AWSError>;
   /**
-   * Return a description of custom domain names that are associated with an AWS App Runner service.
+   * Return a description of custom domain names that are associated with an App Runner service.
    */
   describeCustomDomains(callback?: (err: AWSError, data: AppRunner.Types.DescribeCustomDomainsResponse) => void): Request<AppRunner.Types.DescribeCustomDomainsResponse, AWSError>;
   /**
-   * Return a full description of an AWS App Runner service.
+   * Return a full description of an App Runner service.
    */
   describeService(params: AppRunner.Types.DescribeServiceRequest, callback?: (err: AWSError, data: AppRunner.Types.DescribeServiceResponse) => void): Request<AppRunner.Types.DescribeServiceResponse, AWSError>;
   /**
-   * Return a full description of an AWS App Runner service.
+   * Return a full description of an App Runner service.
    */
   describeService(callback?: (err: AWSError, data: AppRunner.Types.DescribeServiceResponse) => void): Request<AppRunner.Types.DescribeServiceResponse, AWSError>;
   /**
-   * Disassociate a custom domain name from an AWS App Runner service. Certificates tracking domain validity are associated with a custom domain and are stored in AWS Certificate Manager (ACM). These certificates aren't deleted as part of this action. App Runner delays certificate deletion for 30 days after a domain is disassociated from your service.
+   * Disassociate a custom domain name from an App Runner service. Certificates tracking domain validity are associated with a custom domain and are stored in AWS Certificate Manager (ACM). These certificates aren't deleted as part of this action. App Runner delays certificate deletion for 30 days after a domain is disassociated from your service.
    */
   disassociateCustomDomain(params: AppRunner.Types.DisassociateCustomDomainRequest, callback?: (err: AWSError, data: AppRunner.Types.DisassociateCustomDomainResponse) => void): Request<AppRunner.Types.DisassociateCustomDomainResponse, AWSError>;
   /**
-   * Disassociate a custom domain name from an AWS App Runner service. Certificates tracking domain validity are associated with a custom domain and are stored in AWS Certificate Manager (ACM). These certificates aren't deleted as part of this action. App Runner delays certificate deletion for 30 days after a domain is disassociated from your service.
+   * Disassociate a custom domain name from an App Runner service. Certificates tracking domain validity are associated with a custom domain and are stored in AWS Certificate Manager (ACM). These certificates aren't deleted as part of this action. App Runner delays certificate deletion for 30 days after a domain is disassociated from your service.
    */
   disassociateCustomDomain(callback?: (err: AWSError, data: AppRunner.Types.DisassociateCustomDomainResponse) => void): Request<AppRunner.Types.DisassociateCustomDomainResponse, AWSError>;
   /**
-   * Returns a list of AWS App Runner automatic scaling configurations in your AWS account. You can query the revisions for a specific configuration name or the revisions for all configurations in your account. You can optionally query only the latest revision of each requested name.
+   * Returns a list of App Runner automatic scaling configurations in your Amazon Web Services account. You can query the revisions for a specific configuration name or the revisions for all configurations in your account. You can optionally query only the latest revision of each requested name.
    */
   listAutoScalingConfigurations(params: AppRunner.Types.ListAutoScalingConfigurationsRequest, callback?: (err: AWSError, data: AppRunner.Types.ListAutoScalingConfigurationsResponse) => void): Request<AppRunner.Types.ListAutoScalingConfigurationsResponse, AWSError>;
   /**
-   * Returns a list of AWS App Runner automatic scaling configurations in your AWS account. You can query the revisions for a specific configuration name or the revisions for all configurations in your account. You can optionally query only the latest revision of each requested name.
+   * Returns a list of App Runner automatic scaling configurations in your Amazon Web Services account. You can query the revisions for a specific configuration name or the revisions for all configurations in your account. You can optionally query only the latest revision of each requested name.
    */
   listAutoScalingConfigurations(callback?: (err: AWSError, data: AppRunner.Types.ListAutoScalingConfigurationsResponse) => void): Request<AppRunner.Types.ListAutoScalingConfigurationsResponse, AWSError>;
   /**
-   * Returns a list of AWS App Runner connections that are associated with your AWS account.
+   * Returns a list of App Runner connections that are associated with your Amazon Web Services account.
    */
   listConnections(params: AppRunner.Types.ListConnectionsRequest, callback?: (err: AWSError, data: AppRunner.Types.ListConnectionsResponse) => void): Request<AppRunner.Types.ListConnectionsResponse, AWSError>;
   /**
-   * Returns a list of AWS App Runner connections that are associated with your AWS account.
+   * Returns a list of App Runner connections that are associated with your Amazon Web Services account.
    */
   listConnections(callback?: (err: AWSError, data: AppRunner.Types.ListConnectionsResponse) => void): Request<AppRunner.Types.ListConnectionsResponse, AWSError>;
   /**
-   * Return a list of operations that occurred on an AWS App Runner service. The resulting list of OperationSummary objects is sorted in reverse chronological order. The first object on the list represents the last started operation.
+   * Return a list of operations that occurred on an App Runner service. The resulting list of OperationSummary objects is sorted in reverse chronological order. The first object on the list represents the last started operation.
    */
   listOperations(params: AppRunner.Types.ListOperationsRequest, callback?: (err: AWSError, data: AppRunner.Types.ListOperationsResponse) => void): Request<AppRunner.Types.ListOperationsResponse, AWSError>;
   /**
-   * Return a list of operations that occurred on an AWS App Runner service. The resulting list of OperationSummary objects is sorted in reverse chronological order. The first object on the list represents the last started operation.
+   * Return a list of operations that occurred on an App Runner service. The resulting list of OperationSummary objects is sorted in reverse chronological order. The first object on the list represents the last started operation.
    */
   listOperations(callback?: (err: AWSError, data: AppRunner.Types.ListOperationsResponse) => void): Request<AppRunner.Types.ListOperationsResponse, AWSError>;
   /**
-   * Returns a list of running AWS App Runner services in your AWS account.
+   * Returns a list of running App Runner services in your Amazon Web Services account.
    */
   listServices(params: AppRunner.Types.ListServicesRequest, callback?: (err: AWSError, data: AppRunner.Types.ListServicesResponse) => void): Request<AppRunner.Types.ListServicesResponse, AWSError>;
   /**
-   * Returns a list of running AWS App Runner services in your AWS account.
+   * Returns a list of running App Runner services in your Amazon Web Services account.
    */
   listServices(callback?: (err: AWSError, data: AppRunner.Types.ListServicesResponse) => void): Request<AppRunner.Types.ListServicesResponse, AWSError>;
   /**
-   * List tags that are associated with for an AWS App Runner resource. The response contains a list of tag key-value pairs.
+   * List tags that are associated with for an App Runner resource. The response contains a list of tag key-value pairs.
    */
   listTagsForResource(params: AppRunner.Types.ListTagsForResourceRequest, callback?: (err: AWSError, data: AppRunner.Types.ListTagsForResourceResponse) => void): Request<AppRunner.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * List tags that are associated with for an AWS App Runner resource. The response contains a list of tag key-value pairs.
+   * List tags that are associated with for an App Runner resource. The response contains a list of tag key-value pairs.
    */
   listTagsForResource(callback?: (err: AWSError, data: AppRunner.Types.ListTagsForResourceResponse) => void): Request<AppRunner.Types.ListTagsForResourceResponse, AWSError>;
   /**
-   * Pause an active AWS App Runner service. App Runner reduces compute capacity for the service to zero and loses state (for example, ephemeral storage is removed). This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
+   * Pause an active App Runner service. App Runner reduces compute capacity for the service to zero and loses state (for example, ephemeral storage is removed). This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
   pauseService(params: AppRunner.Types.PauseServiceRequest, callback?: (err: AWSError, data: AppRunner.Types.PauseServiceResponse) => void): Request<AppRunner.Types.PauseServiceResponse, AWSError>;
   /**
-   * Pause an active AWS App Runner service. App Runner reduces compute capacity for the service to zero and loses state (for example, ephemeral storage is removed). This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
+   * Pause an active App Runner service. App Runner reduces compute capacity for the service to zero and loses state (for example, ephemeral storage is removed). This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
   pauseService(callback?: (err: AWSError, data: AppRunner.Types.PauseServiceResponse) => void): Request<AppRunner.Types.PauseServiceResponse, AWSError>;
   /**
-   * Resume an active AWS App Runner service. App Runner provisions compute capacity for the service. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
+   * Resume an active App Runner service. App Runner provisions compute capacity for the service. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
   resumeService(params: AppRunner.Types.ResumeServiceRequest, callback?: (err: AWSError, data: AppRunner.Types.ResumeServiceResponse) => void): Request<AppRunner.Types.ResumeServiceResponse, AWSError>;
   /**
-   * Resume an active AWS App Runner service. App Runner provisions compute capacity for the service. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
+   * Resume an active App Runner service. App Runner provisions compute capacity for the service. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
   resumeService(callback?: (err: AWSError, data: AppRunner.Types.ResumeServiceResponse) => void): Request<AppRunner.Types.ResumeServiceResponse, AWSError>;
   /**
-   * Initiate a manual deployment of the latest commit in a source code repository or the latest image in a source image repository to an AWS App Runner service. For a source code repository, App Runner retrieves the commit and builds a Docker image. For a source image repository, App Runner retrieves the latest Docker image. In both cases, App Runner then deploys the new image to your service and starts a new container instance. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
+   * Initiate a manual deployment of the latest commit in a source code repository or the latest image in a source image repository to an App Runner service. For a source code repository, App Runner retrieves the commit and builds a Docker image. For a source image repository, App Runner retrieves the latest Docker image. In both cases, App Runner then deploys the new image to your service and starts a new container instance. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
   startDeployment(params: AppRunner.Types.StartDeploymentRequest, callback?: (err: AWSError, data: AppRunner.Types.StartDeploymentResponse) => void): Request<AppRunner.Types.StartDeploymentResponse, AWSError>;
   /**
-   * Initiate a manual deployment of the latest commit in a source code repository or the latest image in a source image repository to an AWS App Runner service. For a source code repository, App Runner retrieves the commit and builds a Docker image. For a source image repository, App Runner retrieves the latest Docker image. In both cases, App Runner then deploys the new image to your service and starts a new container instance. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
+   * Initiate a manual deployment of the latest commit in a source code repository or the latest image in a source image repository to an App Runner service. For a source code repository, App Runner retrieves the commit and builds a Docker image. For a source image repository, App Runner retrieves the latest Docker image. In both cases, App Runner then deploys the new image to your service and starts a new container instance. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
   startDeployment(callback?: (err: AWSError, data: AppRunner.Types.StartDeploymentResponse) => void): Request<AppRunner.Types.StartDeploymentResponse, AWSError>;
   /**
@@ -180,11 +180,11 @@ declare class AppRunner extends Service {
    */
   untagResource(callback?: (err: AWSError, data: AppRunner.Types.UntagResourceResponse) => void): Request<AppRunner.Types.UntagResourceResponse, AWSError>;
   /**
-   * Update an AWS App Runner service. You can update the source configuration and instance configuration of the service. You can also update the ARN of the auto scaling configuration resource that's associated with the service. However, you can't change the name or the encryption configuration of the service. These can be set only when you create the service. To update the tags applied to your service, use the separate actions TagResource and UntagResource. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
+   * Update an App Runner service. You can update the source configuration and instance configuration of the service. You can also update the ARN of the auto scaling configuration resource that's associated with the service. However, you can't change the name or the encryption configuration of the service. These can be set only when you create the service. To update the tags applied to your service, use the separate actions TagResource and UntagResource. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
   updateService(params: AppRunner.Types.UpdateServiceRequest, callback?: (err: AWSError, data: AppRunner.Types.UpdateServiceResponse) => void): Request<AppRunner.Types.UpdateServiceResponse, AWSError>;
   /**
-   * Update an AWS App Runner service. You can update the source configuration and instance configuration of the service. You can also update the ARN of the auto scaling configuration resource that's associated with the service. However, you can't change the name or the encryption configuration of the service. These can be set only when you create the service. To update the tags applied to your service, use the separate actions TagResource and UntagResource. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
+   * Update an App Runner service. You can update the source configuration and instance configuration of the service. You can also update the ARN of the auto scaling configuration resource that's associated with the service. However, you can't change the name or the encryption configuration of the service. These can be set only when you create the service. To update the tags applied to your service, use the separate actions TagResource and UntagResource. This is an asynchronous operation. On a successful call, you can use the returned OperationId and the ListOperations call to track the operation's progress.
    */
   updateService(callback?: (err: AWSError, data: AppRunner.Types.UpdateServiceResponse) => void): Request<AppRunner.Types.UpdateServiceResponse, AWSError>;
 }
@@ -409,7 +409,7 @@ declare namespace AppRunner {
   export type Cpu = string;
   export interface CreateAutoScalingConfigurationRequest {
     /**
-     * A name for the auto scaling configuration. When you use it for the first time in an AWS Region, App Runner creates revision number 1 of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.
+     * A name for the auto scaling configuration. When you use it for the first time in an Amazon Web Services Region, App Runner creates revision number 1 of this name. When you use the same name in subsequent calls, App Runner creates incremental revisions of the configuration.
      */
     AutoScalingConfigurationName: AutoScalingConfigurationName;
     /**
@@ -437,7 +437,7 @@ declare namespace AppRunner {
   }
   export interface CreateConnectionRequest {
     /**
-     * A name for the new connection. It must be unique across all App Runner connections for the AWS account in the AWS Region.
+     * A name for the new connection. It must be unique across all App Runner connections for the Amazon Web Services account in the Amazon Web Services Region.
      */
     ConnectionName: ConnectionName;
     /**
@@ -457,7 +457,7 @@ declare namespace AppRunner {
   }
   export interface CreateServiceRequest {
     /**
-     * A name for the new service. It must be unique across all the running App Runner services in your AWS account in the AWS Region.
+     * A name for the new service. It must be unique across all the running App Runner services in your Amazon Web Services account in the Amazon Web Services Region.
      */
     ServiceName: ServiceName;
     /**
@@ -473,11 +473,11 @@ declare namespace AppRunner {
      */
     Tags?: TagList;
     /**
-     * An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an AWS managed CMK.
+     * An optional custom encryption key that App Runner uses to encrypt the copy of your source repository that it maintains and your service logs. By default, App Runner uses an Amazon Web Services managed CMK.
      */
     EncryptionConfiguration?: EncryptionConfiguration;
     /**
-     * The settings for the health check that AWS App Runner performs to monitor the health of your service.
+     * The settings for the health check that App Runner performs to monitor the health of your service.
      */
     HealthCheckConfiguration?: HealthCheckConfiguration;
     /**
@@ -651,7 +651,7 @@ declare namespace AppRunner {
     /**
      * The URL that health check requests are sent to.  Path is only applicable when you set Protocol to HTTP. Default: "/" 
      */
-    Path?: String;
+    Path?: HealthCheckPath;
     /**
      * The time interval, in seconds, between health checks. Default: 5 
      */
@@ -661,16 +661,17 @@ declare namespace AppRunner {
      */
     Timeout?: HealthCheckTimeout;
     /**
-     * The number of consecutive checks that must succeed before App Runner decides that the service is healthy. Default: 3 
+     * The number of consecutive checks that must succeed before App Runner decides that the service is healthy. Default: 1 
      */
     HealthyThreshold?: HealthCheckHealthyThreshold;
     /**
-     * The number of consecutive checks that must fail before App Runner decides that the service is unhealthy. Default: 3 
+     * The number of consecutive checks that must fail before App Runner decides that the service is unhealthy. Default: 5 
      */
     UnhealthyThreshold?: HealthCheckUnhealthyThreshold;
   }
   export type HealthCheckHealthyThreshold = number;
   export type HealthCheckInterval = number;
+  export type HealthCheckPath = string;
   export type HealthCheckProtocol = "TCP"|"HTTP"|string;
   export type HealthCheckTimeout = number;
   export type HealthCheckUnhealthyThreshold = number;
@@ -714,7 +715,7 @@ declare namespace AppRunner {
      */
     Memory?: Memory;
     /**
-     * The Amazon Resource Name (ARN) of an IAM role that provides permissions to your App Runner service. These are permissions that your code needs when it calls any AWS APIs.
+     * The Amazon Resource Name (ARN) of an IAM role that provides permissions to your App Runner service. These are permissions that your code needs when it calls any Amazon Web Services APIs.
      */
     InstanceRoleArn?: RoleArn;
   }
@@ -910,7 +911,7 @@ declare namespace AppRunner {
      */
     ServiceName: ServiceName;
     /**
-     * An ID that App Runner generated for this service. It's unique within the AWS Region.
+     * An ID that App Runner generated for this service. It's unique within the Amazon Web Services Region.
      */
     ServiceId: ServiceId;
     /**
@@ -946,7 +947,7 @@ declare namespace AppRunner {
      */
     InstanceConfiguration: InstanceConfiguration;
     /**
-     * The encryption key that App Runner uses to encrypt the service logs and the copy of the source repository that App Runner maintains for the service. It can be either a customer-provided encryption key or an AWS managed CMK.
+     * The encryption key that App Runner uses to encrypt the service logs and the copy of the source repository that App Runner maintains for the service. It can be either a customer-provided encryption key or an Amazon Web Services managed CMK.
      */
     EncryptionConfiguration?: EncryptionConfiguration;
     /**
@@ -968,7 +969,7 @@ declare namespace AppRunner {
      */
     ServiceName?: ServiceName;
     /**
-     * An ID that App Runner generated for this service. It's unique within the AWS Region.
+     * An ID that App Runner generated for this service. It's unique within the Amazon Web Services Region.
      */
     ServiceId?: ServiceId;
     /**
@@ -1014,7 +1015,7 @@ declare namespace AppRunner {
      */
     ImageRepository?: ImageRepository;
     /**
-     * If true, continuous integration from the source repository is enabled for the App Runner service. Each repository change (source code commit or new image version) starts a deployment. Default: true 
+     * If true, continuous integration from the source repository is enabled for the App Runner service. Each repository change (including any source code commit or new image version) starts a deployment. Default: App Runner sets to false for a source image that uses an ECR Public repository or an ECR repository that's in an Amazon Web Services account other than the one that the service is in. App Runner sets to true in all other cases (which currently include a source code repository or a source image using a same-account ECR repository).
      */
     AutoDeploymentsEnabled?: NullableBoolean;
     /**
@@ -1094,7 +1095,7 @@ declare namespace AppRunner {
      */
     AutoScalingConfigurationArn?: AppRunnerResourceArn;
     /**
-     * The settings for the health check that AWS App Runner performs to monitor the health of your service.
+     * The settings for the health check that App Runner performs to monitor the health of your service.
      */
     HealthCheckConfiguration?: HealthCheckConfiguration;
   }

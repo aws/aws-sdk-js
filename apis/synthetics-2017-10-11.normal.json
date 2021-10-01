@@ -337,6 +337,26 @@
     }
   },
   "shapes": {
+    "ArtifactConfigInput": {
+      "type": "structure",
+      "members": {
+        "S3Encryption": {
+          "shape": "S3EncryptionConfig",
+          "documentation": "<p>A structure that contains the configuration of the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3. Artifact encryption functionality is available only for canaries that use Synthetics runtime version syn-nodejs-puppeteer-3.3 or later. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html\">Encrypting canary artifacts</a> </p>"
+        }
+      },
+      "documentation": "<p>A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>"
+    },
+    "ArtifactConfigOutput": {
+      "type": "structure",
+      "members": {
+        "S3Encryption": {
+          "shape": "S3EncryptionConfig",
+          "documentation": "<p>A structure that contains the configuration of encryption settings for canary artifacts that are stored in Amazon S3. </p>"
+        }
+      },
+      "documentation": "<p>A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>"
+    },
     "BaseScreenshot": {
       "type": "structure",
       "required": [
@@ -452,6 +472,10 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>The list of key-value pairs that are associated with the canary.</p>"
+        },
+        "ArtifactConfig": {
+          "shape": "ArtifactConfigOutput",
+          "documentation": "<p>A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>"
         }
       },
       "documentation": "<p>This structure contains all information about one canary in your account.</p>"
@@ -789,6 +813,10 @@
         "Tags": {
           "shape": "TagMap",
           "documentation": "<p>A list of key-value pairs to associate with the canary. You can associate as many as 50 tags with a canary.</p> <p>Tags can help you organize and categorize your resources. You can also use them to scope user permissions, by granting a user permission to access or change only the resources that have certain tag values.</p>"
+        },
+        "ArtifactConfig": {
+          "shape": "ArtifactConfigInput",
+          "documentation": "<p>A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>"
         }
       }
     },
@@ -897,6 +925,13 @@
         }
       }
     },
+    "EncryptionMode": {
+      "type": "string",
+      "enum": [
+        "SSE_S3",
+        "SSE_KMS"
+      ]
+    },
     "EnvironmentVariableName": {
       "type": "string",
       "pattern": "[a-zA-Z]([a-zA-Z0-9_])+"
@@ -976,6 +1011,12 @@
           "documentation": "<p>A token that indicates that there is more data available. You can use this token in a subsequent <code>GetCanaryRuns</code> operation to retrieve the next set of results.</p>"
         }
       }
+    },
+    "KmsKeyArn": {
+      "type": "string",
+      "max": 2048,
+      "min": 1,
+      "pattern": "arn:(aws[a-zA-Z-]*)?:kms:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:key/[\\w\\-\\/]+"
     },
     "ListTagsForResourceRequest": {
       "type": "structure",
@@ -1066,6 +1107,20 @@
       "member": {
         "shape": "RuntimeVersion"
       }
+    },
+    "S3EncryptionConfig": {
+      "type": "structure",
+      "members": {
+        "EncryptionMode": {
+          "shape": "EncryptionMode",
+          "documentation": "<p> The encryption method to use for artifacts created by this canary. Specify <code>SSE_S3</code> to use server-side encryption (SSE) with an Amazon S3-managed key. Specify <code>SSE-KMS</code> to use server-side encryption with a customer-managed KMS key.</p> <p>If you omit this parameter, an Amazon Web Services-managed KMS key is used. </p>"
+        },
+        "KmsKeyArn": {
+          "shape": "KmsKeyArn",
+          "documentation": "<p>The ARN of the customer-managed KMS key to use, if you specify <code>SSE-KMS</code> for <code>EncryptionMode</code> </p>"
+        }
+      },
+      "documentation": "<p>A structure that contains the configuration of encryption-at-rest settings for canary artifacts that the canary uploads to Amazon S3. </p> <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_artifact_encryption.html\">Encrypting canary artifacts</a> </p>"
     },
     "SecurityGroupId": {
       "type": "string"
@@ -1266,6 +1321,14 @@
         "VisualReference": {
           "shape": "VisualReferenceInput",
           "documentation": "<p>Defines the screenshots to use as the baseline for comparisons during visual monitoring comparisons during future runs of this canary. If you omit this parameter, no changes are made to any baseline screenshots that the canary might be using already.</p> <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b> runtime or later. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html\"> Visual monitoring</a> and <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html\"> Visual monitoring blueprint</a> </p>"
+        },
+        "ArtifactS3Location": {
+          "shape": "String",
+          "documentation": "<p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this canary. Artifacts include the log file, screenshots, and HAR files. The name of the S3 bucket can't include a period (.).</p>"
+        },
+        "ArtifactConfig": {
+          "shape": "ArtifactConfigInput",
+          "documentation": "<p>A structure that contains the configuration for canary artifacts, including the encryption-at-rest settings for artifacts that the canary uploads to Amazon S3.</p>"
         }
       }
     },
