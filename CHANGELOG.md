@@ -1,6 +1,10 @@
 # Changelog for AWS SDK for JavaScript
-<!--LATEST=2.999.0-->
+<!--LATEST=2.1000.0-->
 <!--ENTRYINSERT-->
+
+## 2.1000.0
+* feature: CodeBuild: CodeBuild now allows you to select how batch build statuses are sent to the source provider for a project.
+* feature: EFS: EFS adds a new exception for short identifiers to be thrown after its migration to long resource identifiers.
 
 ## 2.999.0
 * feature: AppRunner: This release contains several minor bug fixes.

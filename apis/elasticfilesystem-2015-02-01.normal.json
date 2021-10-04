@@ -612,6 +612,9 @@
       },
       "errors": [
         {
+          "shape": "BadRequest"
+        },
+        {
           "shape": "InternalServerError"
         }
       ],

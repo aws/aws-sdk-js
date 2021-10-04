@@ -473,6 +473,7 @@ declare namespace CodeBuild {
      */
     reportsNotFound?: ReportArns;
   }
+  export type BatchReportModeType = "REPORT_INDIVIDUAL_BUILDS"|"REPORT_AGGREGATED_BATCH"|string;
   export interface BatchRestrictions {
     /**
      * Specifies the maximum number of builds allowed.
@@ -1481,7 +1482,7 @@ declare namespace CodeBuild {
      */
     projectName: NonEmptyString;
     /**
-     * The order to list results in. The results are sorted by build number, not the build identifier. Valid values include:    ASCENDING: List the build IDs in ascending order by build ID.    DESCENDING: List the build IDs in descending order by build ID.   If the project has more than 100 builds, setting the sort order will result in an error. 
+     * The order to sort the results in. The results are sorted by build number, not the build identifier. If this is not specified, the results are sorted in descending order. Valid values include:    ASCENDING: List the build identifiers in ascending order, by build number.    DESCENDING: List the build identifiers in descending order, by build number.   If the project has more than 100 builds, setting the sort order will result in an error. 
      */
     sortOrder?: SortOrderType;
     /**
@@ -1491,7 +1492,7 @@ declare namespace CodeBuild {
   }
   export interface ListBuildsForProjectOutput {
     /**
-     * A list of build IDs for the specified build project, with each build ID representing a single build.
+     * A list of build identifiers for the specified build project, with each build ID representing a single build.
      */
     ids?: BuildIds;
     /**
@@ -1953,6 +1954,10 @@ declare namespace CodeBuild {
      * Specifies the maximum amount of time, in minutes, that the batch build must be completed in.
      */
     timeoutInMins?: WrapperInt;
+    /**
+     * Specifies how build status reports are sent to the source provider for the batch build. This property is only used when the source provider for your project is Bitbucket, GitHub, or GitHub Enterprise, and your project is configured to report build statuses to the source provider.  REPORT_AGGREGATED_BATCH  (Default) Aggregate all of the build statuses into a single status report.  REPORT_INDIVIDUAL_BUILDS  Send a separate status report for each individual build.  
+     */
+    batchReportMode?: BatchReportModeType;
   }
   export interface ProjectCache {
     /**
@@ -2760,7 +2765,7 @@ declare namespace CodeBuild {
      */
     artifacts?: ProjectArtifacts;
     /**
-     *  An array of ProjectSource objects. 
+     *  An array of ProjectArtifact objects. 
      */
     secondaryArtifacts?: ProjectArtifactsList;
     /**
