@@ -57,6 +57,10 @@ export namespace ManagedUpload {
          * Key to which the object was uploaded.
          */
         Key: string;
+        /**
+         * Version which was assigned to the uploaded object by S3 in case the bucket is versioning-enabled.
+         */
+        VersionId? : string;
     }
     export interface ManagedUploadOptions {
         /**
