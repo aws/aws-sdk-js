@@ -392,6 +392,18 @@
           });
         });
 
+        it('when using signature v2', function() {
+          var service = new FooService({ signatureVersion: 's3' });
+          var req = service.putWithChecksum({
+            Body: 'test'
+          });
+
+          req.runTo('sign', function(err) {
+            expect(req.httpRequest.headers['Content-MD5']).to.equal('mi9mZPtVgELD8CntO010Rw==');
+            expect(!err).to.equal(true);
+          });
+        });
+
         it('should be disabled if computeChecksums set to false', function() {
           var service = new FooService({
             computeChecksums: false
